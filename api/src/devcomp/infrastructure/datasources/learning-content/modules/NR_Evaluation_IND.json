@@ -77,7 +77,7 @@
               "element": {
                 "id": "b4e9a6c2-7d1f-4b3e-8a5c-0f9d2e6c1b88",
                 "type": "text",
-                "content": "<p>Pour s’y retrouver, le plus simple est de comprendre d’abord ce que recouvre exactement <strong>«&nbsp;le numérique&nbsp;»</strong>. Découvrons comment il se compose dans notre quotidien.</p>"
+                "content": "<p>Pour s’y retrouver, le plus simple est de comprendre d’abord ce que recouvre exactement <strong>«&nbsp;le numérique&nbsp;»</strong>. Découvrons de quoi il se compose dans notre quotidien.</p>"
               }
             }
           ]
@@ -98,7 +98,7 @@
               "element": {
                 "id": "1e4b7c8a-9f0d-4a3e-b2c5-6d1f9e8a0b99",
                 "type": "text",
-                "content": "<p>Avant de mesurer des impacts, il faut savoir <strong>de quoi on parle</strong>. Le numérique n’est pas seulement des applications&nbsp;: il repose sur des <strong>équipements physiques</strong> organisés en grandes catégories.</p>"
+                "content": "<p>Avant de mesurer des impacts, il faut savoir <strong>de quoi on parle</strong>. Le numérique ne se limite pas aux services ou aux usages visibles&nbsp;: il repose sur des <strong>équipements et des infrastructures physiques</strong>, regroupés en grandes catégories appelées <strong>composantes</strong>.</p>"
               }
             },
             {
@@ -108,7 +108,7 @@
                 "type": "custom-draft",
                 "title": "Draft",
                 "url": "https://1024pix.github.io/atelier-contenus/JBO/POICNR-eval-ind.html",
-                "instruction": "Consigne à écrire",
+                "instruction": "Cliquez sur la catégorie à laquelle appartient chaque equipement.",
                 "height": 500
               }
             }
@@ -127,7 +127,7 @@
                     {
                       "id": "a1400c7a-2e2e-470c-8a5e-8ea34441d423",
                       "type": "text",
-                      "content": "<h5><strong>🤔</strong>Pourquoi faut-il définir précisément le périmètre d’une étude ?</h5><p>Parce qu’une étude doit clairement dire <strong>ce qu’elle inclut</strong>. On ne peut pas tout mesurer. Sans savoir précisément ce qui est étudié, les résultats sont <strong>difficiles à comprendre</strong> ou <strong>à comparer</strong>.</p>"
+                      "content": "Les chiffres sur l’impact du numérique viennent d’études.<br><br><h5><strong>🤔</strong>Pourquoi faut-il définir précisément le périmètre d’une étude ?</h5><p>Parce qu’une étude doit clairement dire <strong>ce qu’elle inclut</strong> <strong>et ce qu’elle exclut</strong>. On ne peut pas tout mesurer. Sans savoir précisément ce qui est étudié, les résultats sont difficiles à comprendre ou à comparer.</p>"
                     }
                   ]
                 },
@@ -136,7 +136,7 @@
                     {
                       "id": "e4841527-8dc3-45de-b59d-84795cb7912b",
                       "type": "text",
-                      "content": "<h5>🤔Un exemple dans le numérique ?</h5><p>Deux études peuvent donner des résultats différents si elles n’incluent pas les mêmes éléments (par exemple&nbsp;: certains réseaux, certaines infrastructures, ou des équipements spécifiques comme des câbles sous-marins).</p><p><strong>Selon le périmètre choisi, les résultats peuvent varier sans se contredire.</strong></p>"
+                      "content": "<h5>🤔 Un exemple dans le numérique ?</h5><p>Deux études peuvent donner des résultats différents si elles ne prennent pas en compte les mêmes éléments. Par exemple, certaines incluent seulement les équipements, d’autres ajoutent les réseaux ou des infrastructures comme les câbles sous-marins.</p><p><strong>Les résultats varient donc selon le périmètre étudié.</strong></p>"
                     }
                   ]
                 }
@@ -154,7 +154,7 @@
               "element": {
                 "id": "67c0f575-419e-4d3f-b872-ebc3aa9ba9ea",
                 "type": "text",
-                "content": "<p>Toutes les composantes n’ont pas le même poids et n’impactent pas les même choses. Pour le découvrir, regardons maintenant <strong>comment on évalue leurs impacts</strong>.</p>"
+                "content": "<p>Les différents éléments qui composent le numérique n’ont pas le même poids et ne produisent pas les mêmes effets sur l’environnement. Pour mieux les comparer, examinons maintenant <strong>la méthode la plus utilisée pour évaluer ces effets</strong>.</p>"
               }
             }
           ]
@@ -184,7 +184,7 @@
                   "slides": [
                     {
                       "title": "Première étape : La fabrication ",
-                      "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très énergivores et souvent réalisées avec une électricité carbonée.",
+                      "description": "La majorité de l’empreinte carbone provient de l’extraction des métaux et de la fabrication des composants, très consommateur d’énergie et souvent réalisées avec une électricité qui émet beaucoup de CO₂.",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
@@ -212,7 +212,7 @@
                     },
                     {
                       "title": "Troisième étape : L’utilisation ",
-                      "description": "Les émissions sont liées à la recharge du téléphone et surtout à l’usage des réseaux et des data centers nécessaires aux services numériques.",
+                      "description": "Les émissions sont liées à la recharge du téléphone et surtout à l’usage des réseaux et des centres de données nécessaires aux services numériques.",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/totem_acv_cycle-de-vie-02-1-600x524.png",
@@ -260,7 +260,7 @@
               "element": {
                 "id": "5523c5df-0559-42e0-a7c2-d8a695962c10",
                 "type": "text",
-                "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées. Elle est appelée l’<strong>Analyse de Cycle de Vie (ACV)</strong>.<br><br></p>\n<h5>🤔 Pourquoi cette méthode est importante ?</h5>\n<p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes les plus impactantes</strong>, et donc où des améliorations sont possibles.</p>"
+                "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transports, fin de vie… même si certaines sont peu documentées. Elle est appelée l’<strong>Analyse du Cycle de Vie (ACV)</strong>.<br><br></p><h5>🤔 Pourquoi cette méthode est importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes qui contribuent le plus à l’impact environnemental</strong>, et donc où des améliorations sont possibles.</p>"
               }
             }
           ]
@@ -296,8 +296,8 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Emission de gaz à effet de serre",
-                      "description": "Dans cette ACV, c’est la phase d’utilisation qui a le plus d’impact sur les émissions de gaz à serre.",
+                      "title": "Émission de gaz à effet de serre",
+                      "description": "Voici l’ACV des émissions de gaz à effet de serre en fonction de la catégorie d’équipement et l’étape du cycle de vie.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -311,7 +311,7 @@
                     },
                     {
                       "title": "Épuisement des ressources minérales et métalliques",
-                      "description": "Dans cette ACV, la c’est la phase de fabrication qui a le plus d’impact sur l’épuisement des ressources minérales et métalliques. ",
+                      "description": "Voici l’ACV de l’épuisement des ressources minérales et métalliques en fonction de la catégorie d’équipement et l’étape du cycle de vie.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-2.png",
@@ -325,7 +325,7 @@
                     },
                     {
                       "title": "Particules fines ",
-                      "description": "Cet indicateur mesure l’émission dans l’air de particules fines responsables ne partie de certaines maladies respiratoires. Dans cette ACV, c’est la phase d’utilisation qui émet le plus de particules fines. ",
+                      "description": "Cet indicateur mesure l’émission dans l’air de particules fines responsables en partie de certaines maladies respiratoires.",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/nr_evaluation_ind/chart-1.png",
@@ -388,27 +388,27 @@
                     {
                       "id": "baa7a3a1-c6cc-4d07-9689-d10b914d2df2",
                       "type": "qcu-discovery",
-                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique et à quoi cela est-il principalement lié ?",
+                      "instruction": "Pour les émissions de particules fines nocives pour la santé, quelle phase du cycle de vie domine sur le graphique ?",
                       "proposals": [
                         {
                           "id": "1",
                           "content": "La fin de vie",
                           "feedback": {
-                            "diagnosis": "Eh non !<br>C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "Eh non !<br>C’est l’utilisation qui prédomine. Cela est dû à la production d’électricité pour alimenter les équipements numériques et les centres de données qui peut être polluante."
                           }
                         },
                         {
                           "id": "2",
                           "content": "L’utilisation",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "Bien vu !&nbsp;<br>C’est l’utilisation qui prédomine. Cela est dû à la production d’électricité pour alimenter les équipements numériques et les centres de données qui peut être polluante."
                           }
                         },
                         {
                           "id": "3",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "C’est l’utilisation qui prédomine. Celà est du à la production d’électricité pour alimenter les équipement numériques et les centres de données qui peut être polluante."
+                            "diagnosis": "C’est l’utilisation qui prédomine. Cela est dû à la production d’électricité pour alimenter les équipements numériques et les centres de données qui peut être polluante."
                           }
                         }
                       ],
@@ -421,38 +421,38 @@
                     {
                       "id": "26a4ad76-5345-406f-8b36-e006afbb5ab8",
                       "type": "qcu-discovery",
-                      "instruction": "En observant les graphiques par grands ensembles du numérique, quelle affirmation est la plus juste ?",
+                      "instruction": "En observant les graphiques par composantes du numérique, quelle conclusion est la plus juste ?",
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "les équipements utilisateurs",
+                          "content": "Les équipements utilisateurs concentrent la plus grande part des impacts.",
                           "feedback": {
-                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
+                            "diagnosis": "Bien vu !<br>Les graphiques montrent que les équipements concentrent l’essentiel des impacts, sans pour autant rendre négligeables les réseaux et les centres de données."
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Les centres de données",
+                          "content": "Les centres de données concentrent à eux seuls la majorité des impacts environnementaux du numérique.",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br><br>"
+                            "diagnosis": "Eh non !<br>Les centres de données ont un rôle important, mais ils ne concentrent pas à eux seuls la majorité des impacts."
                           }
                         },
                         {
                           "id": "3",
-                          "content": "les réseaux",
+                          "content": "Les réseaux ont un impact marginal par rapport aux autres éléments du numérique.",
                           "feedback": {
-                            "diagnosis": "Eh non !&nbsp;<br>Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
+                            "diagnosis": "Eh non !<br>Les réseaux représentent une part non négligeable des impacts, même s’ils sont moins visibles."
                           }
                         },
                         {
                           "id": "4",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "Les graphiques montrent que les équipements concentrent la plus grande part des impacts, mais les réseaux et les centres de données représentent eux aussi une part significative de l’impact.<br>"
+                            "diagnosis": "Les graphiques montrent que les équipements concentrent l’essentiel des impacts, tout en soulignant le rôle significatif des réseaux et des centres de données."
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "1"
                     }
                   ]
                 }
@@ -473,7 +473,7 @@
                     {
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
-                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que l’impact environnemental ne se résume pas au carbone. Voici les impacts environnementaux en fonction de la l’indicateur étudié !&nbsp;<br>"
+                      "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que le numérique a divers impacts sur l'environnement.<br>"
                     }
                   ]
                 },
@@ -482,7 +482,7 @@
                     {
                       "id": "ad88b67b-755d-4a36-b480-e479146811fb",
                       "type": "text",
-                      "content": "<p>Voici un tableau récapitulatif des principaux indicateurs d’impact environnemental.</p><table>    <caption class=\"sr-only\">Résumé des indicateurs d’impact environnemental (simplifié)</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">À quoi cela correspond</th>            <th scope=\"col\">Impact environnemental</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Réchauffement climatique (GWP)</th>            <td>Gaz à effet de serre sur tout le cycle de vie</td>            <td>Changement climatique</td>        </tr>        <tr>            <th scope=\"row\">Ressources minérales &amp; métaux (ADPe)</th>            <td>Extraction de minerais et métaux non renouvelables</td>            <td>Épuisement des ressources minérales</td>        </tr>        <tr>            <th scope=\"row\">Ressources fossiles (ADPf)</th>            <td>Consommation de pétrole, gaz, charbon</td>            <td>Épuisement des ressources fossiles<br></td>        </tr>        <tr>            <th scope=\"row\">Particules fines – santé (PM)</th>            <td>Émissions de particules liées aux activités</td>            <td>Augmentation de la fréquence des maladies cardiaques et respiratoires</td>        </tr>        <tr>            <th scope=\"row\">Acidification (AP)</th>            <td>Substances acidifiantes rejetées dans l’air</td>            <td>Dégradation sols, forêts, eaux douces</td>        </tr>        <tr>            <th scope=\"row\">Eutrophisation eau douce (EPf)</th>            <td>Rejets d’azote et de phosphore dans l’eau</td>            <td>Déséquilibre de la flore et de la faune aquatique</td>        </tr>    </tbody></table>"
+                      "content": "<p>Voici un tableau récapitulatif des principaux indicateurs utilisés pour évaluer les impacts environnementaux du numérique.</p><table>  <caption class=\"sr-only\">Résumé simplifié des indicateurs d’impact environnemental</caption>  <thead>    <tr>      <th scope=\"col\">Indicateur</th>      <th scope=\"col\">Ce qu’il mesure</th>      <th scope=\"col\">Effet environnemental</th>    </tr>  </thead>  <tbody>    <tr>      <th scope=\"row\">Réchauffement climatique</th>      <td>Émissions de gaz à effet de serre sur l’ensemble du cycle de vie</td>      <td>Changement climatique</td>    </tr>    <tr>      <th scope=\"row\">Ressources minérales et métalliques</th>      <td>Extraction de métaux et de minerais non renouvelables</td>      <td>Épuisement des ressources</td>    </tr>    <tr>      <th scope=\"row\">Particules fines – santé</th>      <td>Émissions de particules liées aux activités numériques</td>      <td>Effets sur la santé respiratoire et cardiovasculaire</td>    </tr>  </tbody></table>"
                     }
                   ]
                 },
@@ -515,7 +515,7 @@
               "element": {
                 "id": "ed97ea10-9ed8-4c2d-ad35-35c528d3d08d",
                 "type": "text",
-                "content": "<ul>  <li>Le numérique repose sur <strong>trois composantes</strong>&nbsp;: équipements utilisateurs, réseaux, centres de données. 🧩</li>  <li>Pour mesurer ses impacts, on se sert de <strong>l’analyse du cycle de vie</strong> (ACV), une méthode <strong>normalisée</strong> et <strong>multicritère</strong>. 🔍</li>  <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats via des <strong>indicateurs → impacts</strong> (climat, ressources, santé…). 📏</li>  <li>Les impacts <strong>varient selon l’indicateur, le périmètre et les usages</strong>&nbsp;: les équipements pèsent souvent, mais réseaux et data centers peuvent aussi compter (et sont parfois sous-estimés). 🔄</li></ul>"
+                "content": "<ul>    <li>Le numérique s’appuie sur <strong>trois grandes composantes</strong>&nbsp;: les équipements des utilisateurs, les réseaux et les centres de données. 🧩</li>    <li>Pour mesurer les impacts, on utilise l’<strong>Analyse du Cycle de Vie (ACV)</strong>, qui prend en compte <strong>la fabrication, le transport, l’utilisation et la fin de vie</strong>. 🔍</li>    <li>Pour comparer, il faut définir un <strong>périmètre</strong> clair et lire les résultats en précisant <strong>l’indicateur choisi</strong>, car chaque indicateur renvoie à un <strong>type d’impact</strong> (climat, ressources, santé…). 📏</li>    <li>Les impacts varient selon l’indicateur, le périmètre et les usages&nbsp;: <strong>les équipements concentrent souvent la plus grande part des impacts</strong>, mais <strong>les réseaux et les centres de données</strong> comptent aussi (et peuvent être sous-estimés). 🔄</li>    </ul>"
               }
             }
           ]
@@ -608,7 +608,7 @@
               "element": {
                 "id": "f0ee88fb-f1d9-4c04-afed-01ddc6e76ab2",
                 "type": "text",
-                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote><br>Il est dit que cette étude mesure les émissions de gaz à effet de serre."
+                "content": "On vous présente ci-dessous une affirmation souvent rencontrée dans les médias&nbsp;:<br><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote>"
               }
             },
             {
@@ -616,11 +616,11 @@
               "element": {
                 "id": "e393cd8a-1a83-4533-a809-9b7c6bcd1e41",
                 "type": "qcm",
-                "instruction": "Quels sont les deux autres élements à connaître pour interpréter correctement cette donnée ?&nbsp;",
+                "instruction": "Quels sont les deux autres éléments à connaître pour interpréter correctement cette donnée ?&nbsp;",
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Le périmètre de l’étude (ce qui inclus / exclus)"
+                    "content": "Le périmètre de l’étude "
                   },
                   {
                     "id": "2",
@@ -628,7 +628,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "La méthodes d’évaluation (ACV ou autre)"
+                    "content": "La méthode d’évaluation"
                   },
                   {
                     "id": "5",
@@ -671,7 +671,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Pour évaluer les impacts environnementaux du numérique, on utilise une méthode appelée&nbsp;</span>"
+                    "content": "<span>Pour évaluer les impacts environnementaux du numérique, on utilise généralement une méthode appelée&nbsp;</span>"
                   },
                   {
                     "input": "a",
@@ -685,7 +685,7 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "empreinte carbone"
+                        "content": "recherche de consommation"
                       },
                       {
                         "id": "2",
@@ -780,7 +780,7 @@
                       },
                       {
                         "id": "3",
-                        "content": "type d’appareil"
+                        "content": "appareils"
                       }
                     ],
                     "solutions": [
@@ -824,7 +824,7 @@
                   },
                   "invalid": {
                     "state": "<p>Eh non !</p>",
-                    "diagnosis": "<p>Pour interpréter un impact environnemental du numérique, il faut connaître la méthode (ACV), le périmètre étudié et l’indicateur utilisé.</p>"
+                    "diagnosis": "<p>Pour interpréter un impact environnemental du numérique, il faut connaître la méthode utilisée, le périmètre étudié et l’indicateur utilisé.</p>"
                   }
                 }
               }
@@ -847,15 +847,15 @@
               "element": {
                 "id": "07a84acb-a283-41a5-9c2c-e51a5d64d104",
                 "type": "custom",
-                "instruction": "Lisez attentivement l’article suivant, puis répondez à la question. ",
+                "instruction": "Lisez attentivement l’article suivant, puis répondez aux questions. ",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "🟢 Les data centers et la neutralité carbone",
+                  "title": "🟢 Les centres de données et la neutralité carbone",
                   "author": "Rédaction spécialisée",
                   "date": "2025",
                   "paragraphs": [
-                    "Les data centers sont au cœur du développement du numérique, notamment avec le cloud et l’intelligence artificielle. Face aux enjeux environnementaux, le secteur met en avant son engagement vers la neutralité carbone.",
+                    "Les centre de données sont au cœur du développement du numérique, notamment avec le cloud et l’intelligence artificielle. Face aux enjeux environnementaux, le secteur met en avant son engagement vers la neutralité carbone.",
                     "L’utilisation d’énergies renouvelables, l’amélioration de l’efficacité énergétique et l’optimisation des systèmes de refroidissement permettent de limiter les émissions liées à leur fonctionnement. {{highlightedSentence}}, soutenues par des certifications environnementales et des stratégies ESG."
                   ],
                   "highlightedSentence": "Ces actions contribuent à réduire l’impact environnemental des infrastructures numériques",
@@ -864,47 +864,125 @@
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "eac5211b-c09a-417b-91a1-c134728a2d47",
-                "type": "qcu",
-                "instruction": "D’après l’article, les data centers peuvent être présentés comme neutres en carbone.<br>Cependant, cette affirmation peut être discutée car…",
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "… elle repose uniquement sur des opinions personnelles et non sur des données mesurées.",
-                    "feedback": {
-                      "state": "Eh non !&nbsp;",
-                      "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "de994ec2-bfae-4036-9652-bbc59971b874",
+                      "type": "qcu",
+                      "instruction": "Quelle phase du cycle de vie est abordée dans cet article ?&nbsp;",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "La fabrication.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne parle pas de la fabrication des centres de données ni de la production des équipements nécessaires à leur construction."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Le transport.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne mentionne pas le transport des équipements ou des matériaux liés aux centres de données."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "L'utilisation.",
+                          "feedback": {
+                            "state": "Bien vu !&nbsp;",
+                            "diagnosis": "L’article se concentre uniquement sur le fonctionnement des centres de données, notamment leur consommation d’énergie, leur efficacité énergétique et leurs systèmes de refroidissement."
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "La fin de vie.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne traite pas de la fin de vie des centres de données ou du traitement des équipements en fin d’usage."
+                          }
+                        }
+                      ],
+                      "solution": "3"
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "… elle ne prend en compte que certaines phases, comme le fonctionnement énergétique, sans considérer l’ensemble du cycle de vie des infrastructures.",
-                    "feedback": {
-                      "state": "Bien vu !&nbsp;",
-                      "diagnosis": "Vous avez identifié un point clé&nbsp;:<strong> un chiffre ou une affirmation environnementale dépend du périmètre étudié</strong>. Ici, l’article met l’accent sur la phase d’usage (énergie, émissions), mais <strong>ne traite pas l’ensemble du cycle de vie</strong> (fabrication, construction, fin de vie)."
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "4310a9fb-5cf9-4fca-9e18-81cb8f8a5db1",
+                      "type": "qcu",
+                      "instruction": "Quel est le message clé de cet article ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Les centres de données sont neutres en carbone.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne dit pas que les centres de données sont déjà neutres en carbone. Il évoque des actions et des engagements, mais pas un état atteint."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Les centres de données disent vouloir être neutres en carbone.",
+                          "feedback": {
+                            "state": "Bien vu !&nbsp;",
+                            "diagnosis": "L’article met en avant un engagement vers la neutralité carbone, ainsi que des actions présentées comme allant dans ce sens. Attention, ces engagements ne concernent que la phase \"utilisation\" de l'ACV du centres de données !"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Les centres de données seront neutres en carbone d’ici quelques années.",
+                          "feedback": {
+                            "state": "Eh non !&nbsp;",
+                            "diagnosis": "L’article ne donne pas d’échéance précise et ne permet pas d’affirmer qu’une neutralité carbone sera atteinte à une date donnée."
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
-                  },
-                  {
-                    "id": "3",
-                    "content": "… les data centers n’utilisent pas réellement d’énergies renouvelables.",
-                    "feedback": {
-                      "state": "Eh non !",
-                      "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "59b488cd-00d8-4f36-bc79-72de86e782b8",
+                      "type": "qcu",
+                      "instruction": "Dans cet article, quel indicateur environnemental est principalement abordé ?",
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Le réchauffement climatique.",
+                          "feedback": {
+                            "state": "Bien vu !",
+                            "diagnosis": "L’article parle de neutralité carbone, d’émissions et d’énergie. Il traite donc principalement des émissions de gaz à effet de serre, liées au réchauffement climatique. Uniquement sur la phase de d'utilisation des centres de données."
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "L’épuisement des ressources minérales et métalliques.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne mentionne pas l’extraction de ressources, les métaux ou les matériaux nécessaires à la construction des centres de données."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Les émissions de particules fines nocives pour la santé.",
+                          "feedback": {
+                            "state": "Eh non !",
+                            "diagnosis": "L’article ne parle pas de pollution de l’air ni d’effets sur la santé humaine liés aux particules fines."
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  },
-                  {
-                    "id": "4",
-                    "content": "… les certifications environnementales n’existent pas pour ce type d’infrastructure.",
-                    "feedback": {
-                      "state": "Eh non !",
-                      "diagnosis": "Certaines informations nécessaires pour bien comprendre la portée de l’affirmation ne sont pas précisées. Relisez attentivement ce qui est décrit… et ce qui ne l’est pas."
-                    }
-                  }
-                ],
-                "solution": "2"
-              }
+                  ]
+                }
+              ]
             }
           ]
         }
