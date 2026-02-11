@@ -736,6 +736,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         commonName: 'Islande',
         originalName: 'Islande',
       });
+      const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
 
       const organizationAttributes = {
         externalId: '0446758F',
@@ -758,6 +759,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             credit: organizationAttributes.credit,
             'administration-team-id': administrationTeamId,
             'country-code': country.code,
+            'organization-learner-type-name': newOrganizationLearnerType.name,
           },
         },
       };
@@ -775,6 +777,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data['external-id']).not.to.equal(organization.externalId);
+      const formerOrganizationLearnerType = await knex('organization_learner_types').where({
+        id: organization.organizationLearnerTypeId,
+      });
+      expect(response.result.data['organization-learner-type-name']).to.equal(formerOrganizationLearnerType.name);
     });
   });
 
