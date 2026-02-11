@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.327.0](https://github.com/1024pix/pix/compare/v5.326.0...v5.327.0) (2026-02-11)
+
+### :rocket: Amélioration
+
+- [#15052](https://github.com/1024pix/pix/pull/15052) Ajoute deux colonnes dans la BDD pour la suppression - anonymisation des parcours combinés (PIX-21453) 
+- [#14956](https://github.com/1024pix/pix/pull/14956) MDX-32 retour experts NR_Datacenter_NOV 
+- [#14998](https://github.com/1024pix/pix/pull/14998) MDX-57 modification avant relectures NR_Evaluation_IND 
+
+### :bug: Correction
+
+- [#15067](https://github.com/1024pix/pix/pull/15067) Garder une connexion knex pour sauvegarder l'état de l'import 
+
+### :building_construction: Tech
+
+- [#14911](https://github.com/1024pix/pix/pull/14911) Ajout de la colonne minimumAnswersRequiredToValidateACertification dans la table certification_versions (PIX-21280) 
+- [#14995](https://github.com/1024pix/pix/pull/14995) Ajouter des index sur les tables Passages et PassageEvents (PIX-21364) 
+- [#14734](https://github.com/1024pix/pix/pull/14734) Remplace `prettier` par `oxfmt` pour le formattage des fichiers de l'API. 
+- [#15060](https://github.com/1024pix/pix/pull/15060) Retire un service peu utile dans le scope /quest 
+
+### :arrow_up: Montée de version
+
+- [#15078](https://github.com/1024pix/pix/pull/15078) Lock file maintenance (audit-logger) 
+- [#15070](https://github.com/1024pix/pix/pull/15070) Lock file maintenance (certif) 
+- [#15080](https://github.com/1024pix/pix/pull/15080) Lock file maintenance (junior) 
+- [#15081](https://github.com/1024pix/pix/pull/15081) Lock file maintenance (mon-pix) 
+- [#15082](https://github.com/1024pix/pix/pull/15082) Lock file maintenance (orga)
+
 # [5.326.0](https://github.com/1024pix/pix/compare/v5.325.0...v5.326.0) (2026-02-10)
 
 ### :rocket: Amélioration
