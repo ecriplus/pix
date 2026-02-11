@@ -4,9 +4,9 @@
  */
 
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { Subscription } from '../../domain/models/Subscription.js';
+import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 
-// We voluntarily let the transaction contained in the repository as the usecase initiate a lengthy treatment
+// We voluntarily keep the transaction contained in the repository as the usecase initiate a lengthy treatment
 
 /**
  * @function
@@ -19,32 +19,30 @@ const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertif
   await knex.transaction(async (trx) => {
     const organizationLearnerIds = scoCertificationCandidates.map((candidate) => candidate.organizationLearnerId);
 
-    const alreadyEnrolledCandidate = await trx
+    const alreadyEnrolledCandidates = await trx
       .select(['organizationLearnerId'])
       .from('certification-candidates')
       .whereIn('organizationLearnerId', organizationLearnerIds)
       .where({ sessionId });
 
-    const alreadyEnrolledCandidateOrganizationLearnerIds = alreadyEnrolledCandidate.map(
-      (candidate) => candidate.organizationLearnerId,
+    const alreadyEnrolledCandidateOrganizationLearnerIds = new Set(
+      alreadyEnrolledCandidates.map((c) => c.organizationLearnerId),
     );
 
     const scoCandidateToDTO = _scoCandidateToDTOForSession(sessionId);
-    const candidatesToBeEnrolledDTOs = scoCertificationCandidates
-      .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.includes(candidate.organizationLearnerId))
-      .map((candidate) => scoCandidateToDTO(candidate));
+    const candidateDTOs = scoCertificationCandidates
+      .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.has(candidate.organizationLearnerId))
+      .map(scoCandidateToDTO);
 
-    for (const candidateDTO of candidatesToBeEnrolledDTOs) {
-      const { subscriptions, ...candidateToInsert } = candidateDTO;
+    if (candidateDTOs.length === 0) return;
 
-      const [{ id }] = await trx('certification-candidates').insert(candidateToInsert).returning('id');
+    const insertedCandidateDTOs = await trx('certification-candidates').insert(candidateDTOs).returning(['id']);
 
-      subscriptions[0].certificationCandidateId = id;
-      // eslint-disable-next-line no-unused-vars
-      const { complementaryCertificationKey, ...subscriptionToInsert } = subscriptions[0];
-
-      await trx('certification-subscriptions').insert(subscriptionToInsert);
-    }
+    const subscriptionDTOs = insertedCandidateDTOs.map((insertedCandidateDTO) => ({
+      certificationCandidateId: insertedCandidateDTO.id,
+      type: SUBSCRIPTION_TYPES.CORE,
+    }));
+    await trx('certification-subscriptions').insert(subscriptionDTOs);
   });
 };
 
@@ -61,7 +59,6 @@ export { addNonEnrolledCandidatesToSession };
  * @property {string} birthCity
  * @property {string} birthCountry
  * @property {number} sessionId
- * @property {Array<Subscription>} subscriptions
  */
 
 /**
@@ -70,18 +67,15 @@ export { addNonEnrolledCandidatesToSession };
  * @returns {function(SCOCertificationCandidate): SCOCertificationCandidateDTO}
  */
 function _scoCandidateToDTOForSession(sessionId) {
-  return (scoCandidate) => {
-    return {
-      firstName: scoCandidate.firstName,
-      lastName: scoCandidate.lastName,
-      birthdate: scoCandidate.birthdate,
-      organizationLearnerId: scoCandidate.organizationLearnerId,
-      sex: scoCandidate.sex,
-      birthINSEECode: scoCandidate.birthINSEECode,
-      birthCity: scoCandidate.birthCity,
-      birthCountry: scoCandidate.birthCountry,
-      sessionId,
-      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
-    };
-  };
+  return (scoCandidate) => ({
+    firstName: scoCandidate.firstName,
+    lastName: scoCandidate.lastName,
+    birthdate: scoCandidate.birthdate,
+    organizationLearnerId: scoCandidate.organizationLearnerId,
+    sex: scoCandidate.sex,
+    birthINSEECode: scoCandidate.birthINSEECode,
+    birthCity: scoCandidate.birthCity,
+    birthCountry: scoCandidate.birthCountry,
+    sessionId,
+  });
 }

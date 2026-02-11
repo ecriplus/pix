@@ -9,9 +9,11 @@
 import _ from 'lodash';
 
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
+import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { UnknownCountryForStudentEnrolmentError } from '../errors.js';
 import { SCOCertificationCandidate } from '../models/SCOCertificationCandidate.js';
 import { Subscription } from '../models/Subscription.js';
+
 const INSEE_PREFIX_CODE = '99';
 
 /**
@@ -47,47 +49,45 @@ const enrolStudentsToSession = async function ({
 
   const countries = await countryRepository.findAll();
 
-  const scoCertificationCandidates = await Promise.all(
-    students.map(async (student) => {
-      const studentInseeCountryCode = INSEE_PREFIX_CODE + student.birthCountryCode;
-      const studentCountry = countries.find((country) => country.code === studentInseeCountryCode);
+  const scoCertificationCandidates = await PromiseUtils.mapSeries(students, async (student) => {
+    const studentInseeCountryCode = INSEE_PREFIX_CODE + student.birthCountryCode;
+    const studentCountry = countries.find((country) => country.code === studentInseeCountryCode);
 
-      if (!studentCountry) {
-        throw new UnknownCountryForStudentEnrolmentError({
-          firstName: student.firstName.trim(),
-          lastName: student.lastName.trim(),
-        });
-      }
-
-      let birthCity = student.birthCity;
-
-      if (!student.birthCity && student.birthCityCode) {
-        const birthInformation = await certificationCpfService.getBirthInformation({
-          birthCountry: studentCountry.name,
-          birthINSEECode: student.birthCityCode,
-          birthCity: null,
-          birthPostalCode: null,
-          certificationCpfCountryRepository,
-          certificationCpfCityRepository,
-        });
-
-        birthCity = birthInformation.birthCity;
-      }
-
-      return new SCOCertificationCandidate({
+    if (!studentCountry) {
+      throw new UnknownCountryForStudentEnrolmentError({
         firstName: student.firstName.trim(),
         lastName: student.lastName.trim(),
-        birthdate: student.birthdate,
-        birthINSEECode: student.birthCityCode,
-        birthCity: birthCity,
-        birthCountry: studentCountry.name,
-        sex: student.sex,
-        sessionId,
-        organizationLearnerId: student.id,
-        subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
       });
-    }),
-  );
+    }
+
+    let birthCity = student.birthCity;
+
+    if (!student.birthCity && student.birthCityCode) {
+      const birthInformation = await certificationCpfService.getBirthInformation({
+        birthCountry: studentCountry.name,
+        birthINSEECode: student.birthCityCode,
+        birthCity: null,
+        birthPostalCode: null,
+        certificationCpfCountryRepository,
+        certificationCpfCityRepository,
+      });
+
+      birthCity = birthInformation.birthCity;
+    }
+
+    return new SCOCertificationCandidate({
+      firstName: student.firstName.trim(),
+      lastName: student.lastName.trim(),
+      birthdate: student.birthdate,
+      birthINSEECode: student.birthCityCode,
+      birthCity: birthCity,
+      birthCountry: studentCountry.name,
+      sex: student.sex,
+      sessionId,
+      organizationLearnerId: student.id,
+      subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
+    });
+  });
 
   await scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
     sessionId,
