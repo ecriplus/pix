@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import * as SmartRandom from '../../../../../../src/evaluation/domain/services/algorithm-methods/smart-random.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
@@ -8,17 +6,6 @@ const KNOWLEDGE_ELEMENT_STATUS = {
   VALIDATED: 'validated',
   INVALIDATED: 'invalidated',
 };
-
-const ONE_MINUTE = 60;
-
-function turnIntoTimedChallenge(challenge) {
-  return _.assign(structuredClone(challenge), { timer: ONE_MINUTE });
-}
-
-function duplicateChallengeOfSameDifficulty(challenge) {
-  const challengeId = parseInt(challenge.id[0]) + 1;
-  return _.assign(structuredClone(challenge), { id: 'rec' + challengeId });
-}
 
 describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
   let challenges,
@@ -143,9 +130,13 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
         // given
         lastAnswer = domainBuilder.buildAnswer({ timeout: 50 });
         targetSkills = [url2, web1];
-        const challenge_defaultLevel_Timed = turnIntoTimedChallenge(challengeUrl_2);
-        const challenge_notDefaultLevel_Untimed = _.assign(structuredClone(challengeWeb_1));
-        challenges = [challenge_defaultLevel_Timed, challenge_notDefaultLevel_Untimed];
+        const challenge_defaultLevel_Timed = domainBuilder.buildChallenge({
+          id: 'recurl2',
+          skill: url2,
+          locales: ['fr'],
+          timer: 60,
+        });
+        challenges = [challenge_defaultLevel_Timed, challengeWeb_1];
 
         // when
         const { possibleSkillsForNextChallenge } = SmartRandom.getPossibleSkillsForNextChallenge({
@@ -214,7 +205,12 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
       it('should start with a timed challenge anyway when no untimed challenges were found', function () {
         // given
         targetSkills = [web3];
-        const challenge_AnyLevel_Timed = turnIntoTimedChallenge(challengeWeb_3);
+        const challenge_AnyLevel_Timed = domainBuilder.buildChallenge({
+          id: 'recweb3',
+          skill: web3,
+          locales: ['fr'],
+          timer: 60,
+        });
         challenges = [challenge_AnyLevel_Timed];
 
         // when
@@ -527,7 +523,12 @@ describe('Integration | Domain | Algorithm-methods | SmartRandom', function () {
       it('should end the test if the next challenges wont provide any additional knowledge on the user', function () {
         // given
         targetSkills = [web1, web2];
-        challenges = [challengeWeb_1, challengeWeb_2, duplicateChallengeOfSameDifficulty(challengeWeb_2)];
+        const challengeWeb_2_duplicate = domainBuilder.buildChallenge({
+          id: 'recweb2_duplicate',
+          skill: web2,
+          locales: ['fr'],
+        });
+        challenges = [challengeWeb_1, challengeWeb_2, challengeWeb_2_duplicate];
         lastAnswer = domainBuilder.buildAnswer({ challengeId: challengeWeb_2.id, result: AnswerStatus.OK });
         allAnswers = [lastAnswer];
         knowledgeElements = [
