@@ -198,6 +198,64 @@ describe('Quest | Integration | Repository | combined-course', function () {
     });
   });
 
+  describe('targetProfileIdsPartOfAnyCombinedCourse', function () {
+    it('should return an array containing only targetProfileIds contained in a combinedCourse', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const campaign = databaseBuilder.factory.buildCampaign({
+        organizationId,
+      });
+      const campaignIdNotInQuest = databaseBuilder.factory.buildCampaign({
+        organizationId,
+      });
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId,
+        description: 'Le but de ma quête',
+        illustration: 'images/illustration.svg',
+        combinedCourseContents: [{ campaignId: campaign.id }],
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const targetProfileIdsPartOfAnyCombinedCourse =
+        await combinedCourseRepository.targetProfileIdsPartOfAnyCombinedCourse({
+          targetProfileIds: [campaignIdNotInQuest.targetProfileId, campaign.targetProfileId],
+        });
+
+      // then
+      expect(targetProfileIdsPartOfAnyCombinedCourse).deep.equal([campaign.targetProfileId]);
+    });
+
+    it('should return an empty array when target profiles are part of no combined courses', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const code = 'ABCDE1234';
+      const name = 'Mon parcours Combiné';
+      const description = 'Le but de ma quête';
+      const illustration = 'images/illustration.svg';
+      databaseBuilder.factory.buildCombinedCourse({
+        code,
+        name,
+        organizationId,
+        description,
+        illustration,
+        combinedCourseContents: [],
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const targetProfileIdsPartOfAnyCombinedCourse =
+        await combinedCourseRepository.targetProfileIdsPartOfAnyCombinedCourse({
+          targetProfileIds: [123],
+        });
+
+      // then
+      expect(targetProfileIdsPartOfAnyCombinedCourse).deep.equal([]);
+    });
+  });
+
   describe('#saveInBatch', function () {
     it('should create quests related to given combined courses', async function () {
       // given

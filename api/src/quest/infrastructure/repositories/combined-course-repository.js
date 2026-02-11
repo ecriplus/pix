@@ -71,6 +71,20 @@ const findByCampaignId = async ({ campaignId }) => {
   return combinedCourses.map(_toDomain);
 };
 
+const targetProfileIdsPartOfAnyCombinedCourse = async ({ targetProfileIds }) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('campaigns')
+    .select('campaigns.targetProfileId')
+    .whereIn('campaigns.targetProfileId', targetProfileIds)
+    .whereIn(
+      'campaigns.id',
+      knexConn('quests').select(
+        knexConn.raw('jsonb_path_query("successRequirements", \'$.data.campaignId.data\')::integer'),
+      ),
+    )
+    .pluck('campaigns.targetProfileId');
+};
+
 const saveInBatch = async ({ combinedCourses, questRepository }) => {
   const knexConn = DomainTransaction.getConnection();
   const combinedCoursesToSave = combinedCourses.map(_toDTO);
@@ -154,4 +168,5 @@ export {
   getById,
   save,
   saveInBatch,
+  targetProfileIdsPartOfAnyCombinedCourse,
 };
