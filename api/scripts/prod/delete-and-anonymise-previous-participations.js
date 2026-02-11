@@ -97,8 +97,8 @@ export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Scri
       } catch (error) {
         await knexConn.rollback();
         logger.error(
+          { error },
           `ERROR: anonymise deleted participations... not related to archived organization before  or deleted learner`,
-          error,
         );
         throw error;
       }
