@@ -181,7 +181,7 @@
                     {
                       "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
                       "type": "text",
-                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> On le fait travailler quand on utilise internet.</p><p>Il reçoit <strong>nos demandes</strong>, fait des calculs, <strong>stocke des informations</strong>, puis envoie <strong>la réponse</strong> sur <strong>nos appareils</strong>.</p><p>Voici un exemple de salle de serveurs, à l’intérieur d’un centre de données.</p>"
+                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> Quand vous utilisez internet, vous vous connectez à des serveurs : ils reçoivent vos demandes, traitent les informations et renvoient la réponse sur votre appareil.</p><p>Il reçoit <strong>nos demandes</strong>, fait des calculs, <strong>stocke des informations</strong>, puis envoie <strong>la réponse</strong> sur <strong>nos appareils</strong>.</p><p>Voici un exemple de salle de serveurs, à l’intérieur d’un centre de données.</p>"
                     },
                     {
                       "id": "929770b6-cc52-407e-a324-30b3cc48807b",
@@ -402,7 +402,7 @@
               "element": {
                 "id": "be64a075-5cfa-493d-be0b-6cdb99698cc3",
                 "type": "text",
-                "content": "Maintenant, <strong>comparons différents usages</strong>&nbsp;: lesquels font le plus “travailler” les serveurs, et pourquoi ?"
+                "content": "Maintenant, <strong>comparons différents usages</strong>&nbsp;: lesquels font le plus travailler les serveurs, et pourquoi ?"
               }
             }
           ]
@@ -538,7 +538,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Faire une recherche sur internet.</p>",
+                          "content": "<p>Faire une recherche sur le web.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! <br>Une IA générative doit <strong>faire beaucoup de calculs</strong> pour produire une réponse. Cela entraîne plus de consommation d’électricité pour les serveurs.</p>"
                           }
