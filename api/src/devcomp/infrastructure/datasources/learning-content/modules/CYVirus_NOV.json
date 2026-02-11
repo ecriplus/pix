@@ -665,7 +665,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "Vous avez vu qu’il est important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur son appareil.<br>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils. ?"
+                "content": "Vous avez vu qu’il est important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur son appareil.<br>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils ?"
               }
             },
             {
@@ -673,7 +673,7 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "qcu-declarative",
-                "instruction": "<p>Parmi les actions suivantes, laquelle pourriez-vous mettre en place pour renforcer la protection de vos appareils ?</p>",
+                "instruction": "<p>Parmi les actions suivantes, laquelle pouvez vous mettre en place pour renforcer la protection de vos appareils ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -693,14 +693,14 @@
                     "id": "3",
                     "content": "<p>J’ai déjà mis en place ces deux actions.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est super ! Installer un antivirus et mettre à jour régulièrement ses appareils, logiciels et applications, sont deux actions complémentaires pour renforcer la protection de vos appareils.</p>"
+                      "diagnosis": "<p>C’est super. Installer un antivirus et mettre à jour régulièrement ses appareils, ses logiciels et ses applications, sont deux actions complémentaires pour renforcer la protection de vos appareils.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas trop pour l’instant.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce n’est pas grave. C’est déjà bien d’être prudent au quotidien pour limiter les risques.<br>Accepter les notifications de mises à jour peut être une action simple à mettre en place pour commencer.</p>"
+                      "diagnosis": "<p>Ce n’est pas grave. C’est déjà bien d’être prudent au quotidien pour limiter les risques.<br>Pour commencer, accepter les notifications de mises à jour peut être une action simple à mettre en place.</p>"
                     }
                   }
                 ]
