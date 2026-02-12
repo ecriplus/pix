@@ -31,7 +31,11 @@ async function fetchForCampaigns({
     knowledgeElementRepository,
     improvementService,
   });
-  const [skills, challenges] = await _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale });
+  const [skills, challenges] = await _fetchSkillsAndChallenges({
+    campaignSkills,
+    challengeRepository,
+    locale,
+  });
 
   return {
     allAnswers,
@@ -58,14 +62,16 @@ async function _fetchKnowledgeElements({
       campaignParticipationId: assessment.campaignParticipationId,
     });
   } else {
-    knowledgeElements = await knowledgeElementRepository.findUniqByUserId({ userId: assessment.userId });
+    knowledgeElements = await knowledgeElementRepository.findUniqByUserId({
+      userId: assessment.userId,
+    });
   }
 
   return improvementService.filterKnowledgeElements({
     knowledgeElements,
     isFromCampaign,
     isRetrying,
-    isImproving: isImproving ?? assessment.isImproving,
+    isImproving: isImproving || assessment.isImproving,
     createdAt: assessment.createdAt,
   });
 }
