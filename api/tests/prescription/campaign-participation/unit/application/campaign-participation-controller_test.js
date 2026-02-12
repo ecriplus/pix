@@ -218,46 +218,6 @@ describe('Unit | Application | Controller | Campaign-Participation', function ()
     });
   });
 
-  describe('#getAnalysis', function () {
-    let dependencies;
-    const userId = 456;
-    const campaignParticipationId = 789;
-    const locale = FRENCH_SPOKEN;
-
-    beforeEach(function () {
-      sinon.stub(usecases, 'computeCampaignParticipationAnalysis');
-      const campaignAnalysisSerializer = {
-        serialize: sinon.stub(),
-      };
-      dependencies = {
-        campaignAnalysisSerializer,
-      };
-    });
-
-    it('should call usecase and serializer with expected parameters', async function () {
-      // given
-      const campaignAnalysis = Symbol('campaignAnalysis');
-      const expectedResults = Symbol('results');
-      usecases.computeCampaignParticipationAnalysis
-        .withArgs({ userId, campaignParticipationId, locale })
-        .resolves(campaignAnalysis);
-      dependencies.campaignAnalysisSerializer.serialize.withArgs(campaignAnalysis).returns(expectedResults);
-
-      const request = {
-        auth: { credentials: { userId } },
-        params: { campaignParticipationId },
-        state: { locale },
-      };
-      const h = Symbol('h');
-
-      // when
-      const response = await campaignParticipationController.getAnalysis(request, h, dependencies);
-
-      // then
-      expect(response).to.equal(expectedResults);
-    });
-  });
-
   describe('#getLevelPerTubesAndCompetences', function () {
     let dependencies;
     const userId = 456;
