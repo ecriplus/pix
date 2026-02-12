@@ -52,14 +52,21 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
       campaignRepository.findSkillsByCampaignParticipationId
-        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(skills);
       challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
-        .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          userId: assessment.userId,
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(knowledgeElements);
       campaignParticipationRepository.isRetrying
-        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(isRetrying);
       improvementService.filterKnowledgeElements
         .withArgs({
@@ -108,14 +115,21 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
       campaignRepository.findSkillsByCampaignParticipationId
-        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(skills);
       challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
-        .withArgs({ userId: assessment.userId, campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          userId: assessment.userId,
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(knowledgeElements);
       campaignParticipationRepository.isRetrying
-        .withArgs({ campaignParticipationId: assessment.campaignParticipationId })
+        .withArgs({
+          campaignParticipationId: assessment.campaignParticipationId,
+        })
         .resolves(isRetrying);
       improvementService.filterKnowledgeElements
         .withArgs({
@@ -182,7 +196,9 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       challenges = [domainBuilder.buildChallenge()];
       knowledgeElements = [domainBuilder.buildKnowledgeElement()];
       skills = [domainBuilder.buildSkill()];
-      const assessment = domainBuilder.buildAssessment.ofTypeCompetenceEvaluation();
+      const assessment = domainBuilder.buildAssessment.ofTypeCompetenceEvaluation({
+        isImproving: true,
+      });
       filteredKnowledgeElements = Symbol('filteredKnowledgeElements');
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
