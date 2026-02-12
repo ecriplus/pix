@@ -164,8 +164,7 @@ export default class ModulixPreview extends Component {
           @size="small"
           target="_blank"
         >
-          {{! template-lint-disable "no-bare-strings" }}
-          Modulix Editor
+          {{t "pages.modulix.preview.modulix-editor"}}
         </PixButtonLink>
       </div>
     {{/unless}}

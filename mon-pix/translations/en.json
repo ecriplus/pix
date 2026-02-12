@@ -1722,6 +1722,7 @@
         }
       },
       "preview": {
+        "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",
         "textarea-label": "Module content"
