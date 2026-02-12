@@ -44,6 +44,10 @@ class Form {
   }
 }
 
+const MODULIX_TYPE = 'modulix';
+const MODULIX_EDITOR_LOGO_URL = 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg';
+const MODULIX_EDITOR_NAME = 'Pix';
+
 export default class CreateOrUpdateTrainingForm extends Component {
   @service featureToggles;
   @service store;
@@ -86,6 +90,26 @@ export default class CreateOrUpdateTrainingForm extends Component {
   @action
   updateSelect(key, value) {
     set(this.form, key, value);
+
+    this.fillInputsForModulixTraining(key, value);
+  }
+
+  @action
+  fillInputsForModulixTraining(key, value) {
+    if (this.form.type === MODULIX_TYPE) {
+      if (key === 'link') {
+        const selectedModule = this.modules.find((module) => module.link === value);
+        set(this.form, 'duration.minutes', selectedModule.duration);
+      }
+
+      if (!this.form.editorLogoUrl) {
+        set(this.form, 'editorLogoUrl', MODULIX_EDITOR_LOGO_URL);
+      }
+
+      if (!this.form.editorName) {
+        set(this.form, 'editorName', MODULIX_EDITOR_NAME);
+      }
+    }
   }
 
   @action
@@ -151,7 +175,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
 
           {{#if this.form.type}}
-            {{#if (eq this.form.type "modulix")}}
+            {{#if (eq this.form.type MODULIX_TYPE)}}
               <PixSelect
                 @id="trainingModule"
                 @placeholder="-- Sélectionnez un module --"
@@ -229,7 +253,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
           </PixSelect>
           <PixInput
             @id="trainingEditorLogoUrl"
-            @subLabel="Exemple : https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg"
+            @subLabel="Exemple : {{MODULIX_EDITOR_LOGO_URL}}"
             required={{true}}
             aria-required={{true}}
             @value={{this.form.editorLogoUrl}}
@@ -250,7 +274,6 @@ export default class CreateOrUpdateTrainingForm extends Component {
             @subLabel="Exemple: Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité"
             required={{true}}
             aria-required={{true}}
-            placeholder="Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité."
             @value={{this.form.editorName}}
             {{on "change" (fn this.updateForm "editorName")}}
           >
