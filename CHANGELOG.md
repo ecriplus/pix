@@ -1,5 +1,16 @@
 # Pix Changelog
 
+## [5.329.1](https://github.com/1024pix/pix/compare/v5.329.0...v5.329.1) (2026-02-12)
+
+### :bug: Correction
+
+- [#15010](https://github.com/1024pix/pix/pull/15010) Corriger l’affichage des SSO dans certaines conditions (.org, visible false) (PIX-21414) 
+- [#15107](https://github.com/1024pix/pix/pull/15107) Corriger la possibilité de reprendre une compétence evaluation (PIX-21501). 
+
+### :building_construction: Tech
+
+- [#15103](https://github.com/1024pix/pix/pull/15103) Réparer un flaky sur Pix Admin
+
 # [5.329.0](https://github.com/1024pix/pix/compare/v5.328.0...v5.329.0) (2026-02-12)
 
 ### :rocket: Amélioration
