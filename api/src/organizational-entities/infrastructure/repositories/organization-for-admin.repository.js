@@ -191,16 +191,6 @@ const get = async function ({ organizationId }) {
     return new Tag(tag);
   });
 
-  // TODO: supprimer la condition quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
-  if (organization.organizationLearnerTypeId) {
-    organization.organizationLearnerType = new OrganizationLearnerType({
-      id: organization.organizationLearnerTypeId,
-      name: organization.organizationLearnerTypeName,
-    });
-  } else {
-    organization.organizationLearnerType = null;
-  }
-
   return _toDomain(organization);
 };
 
@@ -489,10 +479,25 @@ function _toDomain(rawOrganization) {
     administrationTeamId: rawOrganization.administrationTeamId,
     administrationTeamName: rawOrganization.administrationTeamName,
     countryCode: rawOrganization.countryCode,
-    organizationLearnerType: rawOrganization.organizationLearnerType,
+    organizationLearnerType: _createOrganizationLearnerType(
+      rawOrganization.organizationLearnerTypeId,
+      rawOrganization.organizationLearnerTypeName,
+    ),
   });
 
   return organization;
+}
+
+function _createOrganizationLearnerType(organizationLearnerTypeId, organizationLearnerTypeName) {
+  // TODO: supprimer la condition quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
+  if (organizationLearnerTypeId) {
+    return new OrganizationLearnerType({
+      id: organizationLearnerTypeId,
+      name: organizationLearnerTypeName,
+    });
+  } else {
+    return null;
+  }
 }
 
 export const organizationForAdminRepository = {
