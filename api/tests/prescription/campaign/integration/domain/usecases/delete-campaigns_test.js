@@ -68,7 +68,36 @@ describe('Integration | UseCases | delete-campaign', function () {
       await expect(usecases.deleteCampaigns({ userId, organizationId, campaignIds: [campaignId] })).fulfilled;
     });
 
-    [PIX_ADMIN.ROLES.METIER, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.SUPER_ADMIN].forEach((role) => {
+    it('should not throw when flag is part of deleting combined course is true', async function () {
+      // given
+      const userId = buildUser().id;
+      const organizationId = buildOrganization().id;
+      buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
+      const campaignId = buildCampaign({ organizationId }).id;
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'ABCDE1234',
+        name: 'Mon parcours Combiné',
+        organizationId,
+        combinedCourseContents: [{ campaignId }],
+      });
+
+      buildCampaignParticipation({ campaignId });
+
+      await databaseBuilder.commit();
+
+      // when & then
+      await expect(
+        usecases.deleteCampaigns({
+          userId,
+          organizationId,
+          campaignIds: [campaignId],
+          isPartOfDeletingCombinedCourse: true,
+        }),
+      ).fulfilled;
+    });
+
+    [(PIX_ADMIN.ROLES.METIER, PIX_ADMIN.ROLES.SUPPORT, PIX_ADMIN.ROLES.SUPER_ADMIN)].forEach((role) => {
       it(`should not throw when user's PixAdmin role is ${role}`, async function () {
         // given
         const adminUserId = buildUser().id;
@@ -490,7 +519,7 @@ describe('Integration | UseCases | delete-campaign', function () {
     });
   });
   describe('error case', function () {
-    it('should throw when one campaign belongs to a combined course', async function () {
+    it('should throw when one campaign belongs to a combined course and when is flag isPartOfDeletingCombinedCourse is false or undefined', async function () {
       // given
       const userId = buildUser().id;
       const organizationId = buildOrganization().id;

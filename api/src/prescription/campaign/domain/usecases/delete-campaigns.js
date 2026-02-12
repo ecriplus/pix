@@ -21,6 +21,7 @@ const deleteCampaigns = withTransaction(
     client,
     userRole,
     keepPreviousDeletion = false,
+    isPartOfDeletingCombinedCourse = false,
   }) => {
     let membership;
     let pixAdminRole = userRole;
@@ -35,7 +36,7 @@ const deleteCampaigns = withTransaction(
 
     for (const campaignId of campaignIds) {
       const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
-      if (combinedCourses.length > 0) {
+      if (combinedCourses.length > 0 && !isPartOfDeletingCombinedCourse) {
         throw new CampaignBelongsToCombinedCourseError();
       }
     }
