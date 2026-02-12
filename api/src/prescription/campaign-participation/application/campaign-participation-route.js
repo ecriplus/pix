@@ -44,25 +44,6 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/campaign-participations/{campaignParticipationId}/analyses',
-      config: {
-        pre: [{ method: securityPreHandlers.checkOrganizationAccess }],
-        validate: {
-          params: Joi.object({
-            campaignParticipationId: identifiersType.campaignParticipationId,
-          }),
-        },
-        handler: campaignParticipationController.getAnalysis,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            '- L‘utilisateur doit avoir les droits d‘accès à l‘organisation liée à la participation à la campagne',
-          "- Récupération de l'analyse d'un participant pour la participation à la campagne",
-        ],
-        tags: ['api', 'campaign-participation'],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/campaign-participations/{campaignParticipationId}/level-per-tubes-and-competences',
       config: {
         pre: [

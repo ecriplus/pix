@@ -77,25 +77,6 @@ describe('Unit | Application | Router | campaign-participation-router ', functio
     });
   });
 
-  describe('GET /api/campaign-participations/{id}/analyses', function () {
-    describe('when pre handler throws', function () {
-      it('should not call controller', async function () {
-        // given
-        const getAnalysisStub = sinon.stub(campaignParticipationController, 'getAnalysis');
-        const organizationAccessStub = sinon.stub(securityPreHandlers, 'checkOrganizationAccess').throws();
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        await httpTestServer.request('GET', '/api/campaign-participations/1/analyses');
-
-        // then
-        expect(organizationAccessStub.called).to.be.true;
-        expect(getAnalysisStub.called).to.be.false;
-      });
-    });
-  });
-
   describe('GET /api/campaign-participations/{campaignParticipationId}/level-per-tubes-and-competences', function () {
     let getLevelPerTubesAndCompetencesStub,
       checkUserCanAccessCampaignParticipationStub,
