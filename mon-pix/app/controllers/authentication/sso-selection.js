@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 
-const SIGNIN_ROUTE = 'authentication';
+const LOGIN_ROUTE_NAME = 'authentication';
 
 export default class SsoSelectionController extends Controller {
   @service router;
@@ -13,10 +13,10 @@ export default class SsoSelectionController extends Controller {
   }
 
   get parentRouteName() {
-    return this.router.currentRoute?.parent?.name ?? SIGNIN_ROUTE;
+    return this.router.currentRoute?.parent?.name ?? LOGIN_ROUTE_NAME;
   }
 
-  get isSigninRoute() {
-    return this.parentRouteName === SIGNIN_ROUTE;
+  get isLoginRoute() {
+    return this.parentRouteName === LOGIN_ROUTE_NAME;
   }
 }

@@ -13,7 +13,7 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
   setupIntl(hooks);
 
   module('When the user logs in', function () {
-    test('it displays the sso selection page for login', async function (assert) {
+    test('it displays the sso selection page for login with an additional signup link', async function (assert) {
       // given
       const screen = await visit('/connexion/sso-selection');
 
@@ -26,13 +26,13 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
       const heading = await screen.findByRole('heading', { name: t('pages.sign-in.first-title') });
       assert.dom(heading).exists();
 
-      const signUpLink = await screen.findByRole('link', {
+      const signupLink = await screen.findByRole('link', {
         name: t('pages.authentication.sso-selection.signup.link'),
       });
-      assert.dom(signUpLink).exists();
+      assert.dom(signupLink).exists();
     });
 
-    test('it can go back to the login page', async function (assert) {
+    test('there is a back button to the login page', async function (assert) {
       // given
       await visit('/connexion/sso-selection');
 
@@ -45,7 +45,7 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
   });
 
   module('When the user signs up', function () {
-    test('it displays the sso selection page for login', async function (assert) {
+    test('it displays the sso selection page for signup with no additional signup link', async function (assert) {
       // given
       const screen = await visit('/inscription/sso-selection');
 
@@ -56,13 +56,13 @@ module('Acceptance | authentication | SSO selection', function (hooks) {
       const heading = await screen.findByRole('heading', { name: t('pages.signup.first-title') });
       assert.dom(heading).exists();
 
-      const signUpLink = await screen.queryByRole('link', {
+      const signupLink = await screen.queryByRole('link', {
         name: t('pages.authentication.sso-selection.signup.link'),
       });
-      assert.dom(signUpLink).doesNotExist();
+      assert.dom(signupLink).doesNotExist();
     });
 
-    test('it can go back to the login page', async function (assert) {
+    test('there is a back button to the signup page', async function (assert) {
       // given
       await visit('/inscription/sso-selection');
 

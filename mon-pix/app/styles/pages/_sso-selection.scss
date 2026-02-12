@@ -6,7 +6,7 @@
   gap: var(--pix-spacing-4x);
   padding-top: var(--pix-spacing-6x);
 
-  &__signup {
+  &__signup-link-section {
     @extend %pix-body-m;
 
     display: flex;
