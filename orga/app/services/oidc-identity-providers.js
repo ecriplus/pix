@@ -14,12 +14,15 @@ export default class OidcIdentityProviders extends Service {
     return this.store.peekAll('oidc-identity-provider');
   }
 
-  get hasIdentityProviders() {
-    return this.list?.length > 0;
+  get visibleIdentityProviders() {
+    return this.list.filter((identityProvider) => identityProvider.isVisible);
+  }
+
+  get hasVisibleIdentityProviders() {
+    return this.visibleIdentityProviders.length > 0;
   }
 
   findBySlug(providerSlug) {
-    if (!this.hasIdentityProviders) return;
     return this.list.find((oidcProvider) => oidcProvider.slug === providerSlug);
   }
 

@@ -550,7 +550,7 @@
         "signup-button": "Regístrate"
       },
       "sso-selection": {
-        "signin": {
+        "login": {
           "button": "Iniciar sesión",
           "message": "{providerName} Será redirigido a la página de acceso \" \" para identificarse en Pix."
         },

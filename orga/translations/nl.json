@@ -1776,7 +1776,7 @@
       "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
     },
     "sso-selection": {
-      "signin": {
+      "login": {
         "button": "Ik log in",
         "message": "{providerName} Je wordt doorgestuurd naar de \" \" inlogpagina om je te identificeren op Pix."
       },

@@ -14,8 +14,27 @@ export default class OidcIdentityProviders extends Service {
 
   @tracked isOidcProviderAuthenticationInProgress = false;
 
+  async load() {
+    const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
+    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
+      this[oidcIdentityProvider.id] = oidcIdentityProvider;
+    });
+  }
+
   get list() {
     return this.store.peekAll('oidc-identity-provider');
+  }
+
+  get visibleIdentityProviders() {
+    return this.list.filter((identityProvider) => identityProvider.isVisible);
+  }
+
+  get hasVisibleIdentityProviders() {
+    return this.visibleIdentityProviders.length > 0;
+  }
+
+  findByCode(identityProviderCode) {
+    return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
   }
 
   getIdentityProviderNamesByAuthenticationMethods(methods) {
@@ -25,17 +44,9 @@ export default class OidcIdentityProviders extends Service {
       .map((provider) => provider.organizationName);
   }
 
-  get hasIdentityProviders() {
-    return this.list.length > 0;
-  }
-
-  findByCode(identityProviderCode) {
-    return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
-  }
-
   // TODO: Manage this through the API
   get featuredIdentityProvider() {
-    return this.list.find((identityProvider) => {
+    return this.visibleIdentityProviders.find((identityProvider) => {
       const featuredIdentityProviderCode = this.currentDomain.isFranceDomain
         ? FR_FEATURED_IDENTITY_PROVIDER_CODE
         : ORG_FEATURED_IDENTITY_PROVIDER_CODE;
@@ -44,20 +55,10 @@ export default class OidcIdentityProviders extends Service {
     });
   }
 
-  // TODO: Manage this through the API
   get hasOtherIdentityProviders() {
-    if (!this.currentDomain.isFranceDomain) {
-      return false;
-    }
-
-    return this.list.some((identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code));
-  }
-
-  async load() {
-    const oidcIdentityProviders = await this.store.findAll('oidc-identity-provider');
-    oidcIdentityProviders.forEach((oidcIdentityProvider) => {
-      this[oidcIdentityProvider.id] = oidcIdentityProvider;
-    });
+    return this.visibleIdentityProviders.some(
+      (identityProvider) => !FEATURED_IDENTITY_PROVIDER_CODES.includes(identityProvider.code),
+    );
   }
 
   shouldDisplayAccountRecoveryBanner(identityProviderCode) {

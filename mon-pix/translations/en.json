@@ -550,7 +550,7 @@
         "signup-button": "Sign up"
       },
       "sso-selection": {
-        "signin": {
+        "login": {
           "button": "Log in",
           "message": "You will be redirected to the “{providerName}” connection page in order to identify yourself on Pix."
         },

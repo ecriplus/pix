@@ -41,7 +41,7 @@ module('Integration | Component | Authentication | SsoSelectionForm', function (
 
     // then
     const button = await screen.findByRole('button', {
-      name: t('pages.authentication.sso-selection.signin.button'),
+      name: t('pages.authentication.sso-selection.login.button'),
     });
     assert.dom(button).hasAttribute('aria-disabled');
   });
@@ -58,12 +58,12 @@ module('Integration | Component | Authentication | SsoSelectionForm', function (
 
     // then
     const button = await screen.findByRole('button', {
-      name: t('pages.authentication.sso-selection.signin.button'),
+      name: t('pages.authentication.sso-selection.login.button'),
     });
     assert.dom(button).exists();
 
     const connexionMessage = await screen.findByText(
-      t('pages.authentication.sso-selection.signin.message', { providerName }),
+      t('pages.authentication.sso-selection.login.message', { providerName }),
     );
     assert.dom(connexionMessage).exists();
 

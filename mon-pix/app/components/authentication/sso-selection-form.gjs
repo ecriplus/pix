@@ -23,7 +23,9 @@ export default class SsoSelectionForm extends Component {
   }
 
   get providers() {
-    return this.oidcIdentityProviders.list.filter((provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code));
+    return this.oidcIdentityProviders.visibleIdentityProviders.filter(
+      (provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code),
+    );
   }
 
   get hasSelectedProvider() {
@@ -31,14 +33,18 @@ export default class SsoSelectionForm extends Component {
   }
 
   get selectedProviderName() {
-    const provider = this.oidcIdentityProviders.list?.find((provider) => provider.id === this.selectedProviderId);
+    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
+      (provider) => provider.id === this.selectedProviderId,
+    );
     if (!provider) return null;
 
     return provider.organizationName;
   }
 
   get shouldDisplayAccountRecoveryBanner() {
-    const provider = this.oidcIdentityProviders.list.find((provider) => provider.id === this.selectedProviderId);
+    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
+      (provider) => provider.id === this.selectedProviderId,
+    );
     if (!provider) return false;
 
     return this.oidcIdentityProviders.shouldDisplayAccountRecoveryBanner(provider.code);
@@ -86,19 +92,19 @@ export default class SsoSelectionForm extends Component {
           {{#if @isForSignup}}
             {{t "pages.authentication.sso-selection.signup.button"}}
           {{else}}
-            {{t "pages.authentication.sso-selection.signin.button"}}
+            {{t "pages.authentication.sso-selection.login.button"}}
           {{/if}}
         </PixButton>
 
         <p id="signin-message" class="sso-selection-form__signin-message" aria-live="polite">
-          {{t "pages.authentication.sso-selection.signin.message" providerName=this.selectedProviderName}}
+          {{t "pages.authentication.sso-selection.login.message" providerName=this.selectedProviderName}}
         </p>
       {{else}}
         <PixButton @type="button" @isDisabled={{true}}>
           {{#if @isForSignup}}
             {{t "pages.authentication.sso-selection.signup.button"}}
           {{else}}
-            {{t "pages.authentication.sso-selection.signin.button"}}
+            {{t "pages.authentication.sso-selection.login.button"}}
           {{/if}}
         </PixButton>
       {{/if}}
