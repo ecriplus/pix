@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
 import { convertJoiToJsonSchema } from '../../../../src/devcomp/infrastructure/datasources/conversion/joi-to-json-schema.js';
-import { moduleSchema } from '../../../../tests/devcomp/unit/infrastructure/datasources/learning-content/validation/module-schema.js';
+import { moduleSchema } from '../../infrastructure/datasources/learning-content/validation/module-schema.js';
 
 /**
  * Cached module JSON Schema, to avoid re-serializing it for every request
