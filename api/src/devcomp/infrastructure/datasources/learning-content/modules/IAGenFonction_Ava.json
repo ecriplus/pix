@@ -131,14 +131,14 @@
                     "id": "1",
                     "content": "L'exemple 1",
                     "feedback": {
-                      "diagnosis": "Eh non !Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, comme par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc."
+                      "diagnosis": "Bien vu&nbsp;!<br>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, comme par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc."
                     }
                   },
                   {
                     "id": "2",
                     "content": "L'exemple 2",
                     "feedback": {
-                      "diagnosis": "Bien vu !Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, comme par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc."
+                      "diagnosis": "Eh non !<br>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, comme par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc."
                     }
                   },
                   {
@@ -1092,8 +1092,7 @@
                     "solutions": [
                       "2"
                     ]
-                  }
-                ,
+                  },
                   {
                     "input": "classementetape3",
                     "type": "select",
@@ -1130,9 +1129,7 @@
                     "solutions": [
                       "3"
                     ]
-                  }
-                ,
-
+                  },
                   {
                     "input": "classementetape4",
                     "type": "select",
@@ -1169,9 +1166,8 @@
                     "solutions": [
                       "4"
                     ]
-                  }
-                ],
-                        {
+                  },
+                  {
                     "input": "classementetape5",
                     "type": "select",
                     "display": "inline",
@@ -1207,9 +1203,8 @@
                     "solutions": [
                       "5"
                     ]
-                  }
-                ,          
-                        {
+                  },
+                  {
                     "input": "classementetape4",
                     "type": "select",
                     "display": "inline",
@@ -1245,9 +1240,8 @@
                     "solutions": [
                       "4"
                     ]
-                  }
-                ,
-                        {
+                  },
+                  {
                     "input": "classementetape6",
                     "type": "select",
                     "display": "inline",
@@ -1284,18 +1278,78 @@
                       "6"
                     ]
                   }
-                ],           
-      
+                ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bonne réponse 🎉",
-                    "diagnosis": "Les étapes sont dans l'ordre."
+                    "state": "Bonne réponse&nbsp;🎉",
+                    "diagnosis": "Les étapes sont dans l’ordre !"
                   },
                   "invalid": {
                     "state": "Mauvaise réponse",
-                    "diagnosis": "Vous pouvez remontez voir le schéma si vous avez un doute."
+                    "diagnosis": "Vous pouvez remontez voir le schéma si vous avez un doute.&nbsp;☝️"
                   }
                 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "719c6a45-d2f9-45e6-8390-bbb7c2af69cd",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "06dff54c-699a-4e5f-8dbf-430ef11ffe42",
+          "type": "challenge",
+          "title": "Appeler plusieurs outils dans un prompt",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9ff41ea1-9020-4bdc-a273-eb43e1f42ffe",
+                "type": "text",
+                "content": "Steven utilise un logiciel d’IA conversationnelle.&nbsp; <br>Il a donné accès à son agenda.&nbsp; <br><br>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l’<strong>agenda</strong>."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fcb21011-e302-45b3-83ba-ffe819f8f4c4",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "ChatPix configuration appel 2 outils",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmljomhkk00024z0167vunpga",
+                "instruction": "À&nbsp;vous de jouer ! Vous avez 5 prompts.",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2dee621b-251b-4ef0-8f5f-ee03fc833c14",
+                "type": "expand",
+                "title": "🔑 Indice : ",
+                "content": "Avez-vous vérifié que votre prompt fait bien appel à l’agenda ?"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c2aa7e53-3496-49a3-9626-24151550d042",
+                "type": "expand",
+                "title": "🔑 Indice : ",
+                "content": "Avez-vous vérifié que votre prompt nécessite bien une recherche sur internet ?"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c136506a-5fa1-4903-9476-d8a1700e964b",
+                "type": "expand",
+                "title": "🙈 Solution : ",
+                "content": "Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l’<strong>agenda</strong>, votre réponse devrait être validée. ✅<br><br> Voici quelques exemples :&nbsp;<br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires où des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul>"
               }
             }
           ]
