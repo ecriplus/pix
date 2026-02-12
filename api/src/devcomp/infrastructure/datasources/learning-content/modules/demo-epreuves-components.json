@@ -1496,6 +1496,88 @@
               }
             }
           ]
+        },
+        {
+          "id": "1eca59cb-c125-4a15-98b7-1980df9dfced",
+          "type": "discovery",
+          "title": "template-mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6554ce8c-d968-4921-9980-19cf8b63db0c",
+                "type": "text",
+                "content": "<p>Template mail</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0fbcbe62-2fbe-4254-ad09-7c3a7c49321b",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "template-mail",
+                "props": {
+                  "subject": "Votre facture #A‑91382",
+                  "mailAddress": "billing@micros0ft.com",
+                  "avatarColor": "#f24645",
+                  "expeditor": "Micr0sofot",
+                  "time": {
+                    "days": -2,
+                    "minutes": -5
+                  },
+                  "content": "salut [monsieur/madame]<br> ceci est un lien <a href='http://www.test.com'>link Fake</a><br> cho'",
+                  "previousMail": {
+                    "time": {
+                      "days": -5,
+                      "minutes": -10
+                    },
+                    "content": "[Madame, / Monsieur,]<br><br>Nous vous remercions sincèrement pour votre message et l’intérêt que vous portez à [Nom de votre entreprise] ainsi qu’à nos services.Nous répondrons à votre message dans les plus brefs délais et restons à votre disposition pour toute demande supplémentaire, y compris une rencontre personnelle si vous le souhaitez. D’ici là, vous pouvez obtenir des informations complémentaires sur nos [Produits/Services] en consultant, par exemple, nos réseaux sociaux sur [Lien vers les réseaux sociaux, par exemple, YouTube] ou en téléchargeant notre [Lien de téléchargement, tel qu’une présentation d’entreprise ou un document technique].<br>Chaleureusement,<br>L’équipe de [Nom de votre entreprise]",
+                    "name": "Alex"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "e50c0a21-55ef-42b8-8f73-0c6994858de1",
+          "type": "discovery",
+          "title": "test-top-mdp",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9f2b4dd1-9120-45cc-847e-37a7d944bbd4",
+                "type": "text",
+                "content": "<p>test top mdp</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a5231820-3946-4deb-9c39-3ac5e0ac9dd3",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "test-top-mdp",
+                "props": {
+                  "passwords": [
+                    "123456",
+                    "123456789",
+                    "azerty",
+                    "1234561",
+                    "qwerty",
+                    "marseille",
+                    "000000",
+                    "1234567891",
+                    "doudou",
+                    "12345"
+                  ],
+                  "expectedPassword": "marseille"
+                }
+              }
+            }
+          ]
         }
       ]
     }
