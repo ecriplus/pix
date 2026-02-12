@@ -1,5 +1,6 @@
 /**
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentEndedError} AssessmentEndedError
+ * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  * @typedef {import ('./models/CertificationAssessmentIdentifier.js').CertificationAssessmentIdentifier} CertificationAssessmentIdentifier
  */
@@ -17,7 +18,7 @@ import * as assessmentRepository from '../../infrastructure/repositories/assessm
  *
  * @returns {Challenge}
  * @throws {AssessmentEndedError} test ended or no next challenge available
- * @throws {RangeError} illegal V3 certification algorithm state
+ * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
 export const selectNextCertificationChallenge = withTransaction(
   async ({

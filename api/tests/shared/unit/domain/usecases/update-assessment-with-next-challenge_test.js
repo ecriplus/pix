@@ -1,4 +1,4 @@
-import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
+import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { updateAssessmentWithNextChallenge } from '../../../../../src/shared/domain/usecases/update-assessment-with-next-challenge.js';
 import { domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
@@ -281,6 +281,21 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
             // when
             const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            // then
+            expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          });
+        });
+
+        context('when the referential is exhausted before reaching maximum assessment length', function () {
+          it('should return an assessment with no nextChallenge', async function () {
+            // given
+            certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(
+              new AssessmentLackOfChallengesError({ numberOfAnswers: 27, maximumAssessmentLength: 32 }),
+            );
+
+            // when
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
           });

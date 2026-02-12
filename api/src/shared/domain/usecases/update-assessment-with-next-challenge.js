@@ -1,5 +1,5 @@
-import { AssessmentEndedError } from '../errors.js';
 import { logger } from '../../infrastructure/utils/logger.js';
+import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../errors.js';
 
 export async function updateAssessmentWithNextChallenge({
   assessment,
@@ -39,7 +39,13 @@ export async function updateAssessmentWithNextChallenge({
       nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
     }
   } catch (error) {
-    if (error instanceof AssessmentEndedError) {
+    if (error instanceof AssessmentLackOfChallengesError) {
+      logger.warn(
+        { assessmentId: assessment.id, numberOfAnswers: error.numberOfAnswers, maximumAssessmentLength: error.maximumAssessmentLength },
+        'Assessment ended prematurely: no challenge remaining before reaching maximum assessment length',
+      );
+      nextChallenge = null;
+    } else if (error instanceof AssessmentEndedError) {
       nextChallenge = null;
     } else {
       logger.error(
