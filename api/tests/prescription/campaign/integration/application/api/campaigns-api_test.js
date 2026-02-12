@@ -10,6 +10,7 @@ import {
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Application | campaign-api', function () {
@@ -499,6 +500,60 @@ describe('Integration | Application | campaign-api', function () {
           expect(error).to.be.instanceof(UserNotAuthorizedToCreateCampaignError);
         });
       });
+    });
+  });
+  describe('#deleteCampaignsInCombinedCourses', function () {
+    it('should delete campaigns and participations linked to given combined course ids', async function () {
+      //given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const { userId } = databaseBuilder.factory.buildMembership({
+        organizationId: organization.id,
+        organizationRole: Membership.roles.ADMIN,
+      });
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+      });
+
+      const campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
+        content: [{ type: 'EVALUATION', value: campaign.targetProfileId }],
+      });
+      databaseBuilder.factory.buildCombinedCourse({
+        combinedCourseContents: [{ campaignId: campaign.id }, { moduleId: 'module-id' }],
+        combinedCourseBlueprintId: combinedCourseBlueprint.id,
+        code: 'RANDOM',
+      });
+
+      const campaign2 = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+      const combinedCourseBlueprint2 = databaseBuilder.factory.buildCombinedCourseBlueprint({
+        content: [{ type: 'EVALUATION', value: campaign2.targetProfileId }],
+      });
+      databaseBuilder.factory.buildCombinedCourse({
+        combinedCourseContents: [{ campaignId: campaign2.id }, { moduleId: 'module-id' }],
+        combinedCourseBlueprintId: combinedCourseBlueprint2.id,
+        code: 'MLKJH',
+      });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        organizationLearnerId: organizationLearner.id,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await campaignApi.deleteCampaignsInCombinedCourses({
+        userId,
+        organizationId: organization.id,
+        campaignIds: [campaign.id],
+      });
+
+      // then
+      const deletedCampaigns = await knex('campaigns').whereNotNull('deletedAt');
+      expect(deletedCampaigns).length(1);
+
+      const deletedParticipations = await knex('campaign-participations').whereNotNull('deletedAt');
+      expect(deletedParticipations).length(1);
     });
   });
 });

@@ -34,6 +34,7 @@ const get = async function (id) {
       targetProfileName: 'target-profiles.name',
       multipleSendings: 'campaigns.multipleSendings',
       areKnowledgeElementsResettable: 'target-profiles.areKnowledgeElementsResettable',
+      organizationId: 'campaigns.organizationId',
     })
     .select(
       knexConn.raw('ARRAY_AGG("badges"."id")  AS "badgeIds"'),

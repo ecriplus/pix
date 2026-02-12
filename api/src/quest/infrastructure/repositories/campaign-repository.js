@@ -11,6 +11,25 @@ export const get = async function ({ id, campaignsApi }) {
   return new Campaign(campaign);
 };
 
+export const deleteCampaignsInCombinedCourses = async function ({
+  userId,
+  organizationId,
+  campaignIds,
+  keepPreviousDeletion,
+  userRole,
+  client,
+  campaignsApi,
+}) {
+  return campaignsApi.deleteCampaignsInCombinedCourses({
+    userId,
+    organizationId,
+    campaignIds,
+    keepPreviousDeletion,
+    userRole,
+    client,
+  });
+};
+
 export const getCampaignIdsByCombinedCourseIds = async function ({ combinedCourseIds }) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -31,7 +50,9 @@ export const getCampaignIdsByCombinedCourseIds = async function ({ combinedCours
 
 export const save = async function ({ campaigns, campaignsApi }) {
   const campaignToCreate = campaigns.map(_toDTO);
-  const createdCampaigns = await campaignsApi.save(campaignToCreate, { allowCreationWithoutTargetProfileShare: true });
+  const createdCampaigns = await campaignsApi.save(campaignToCreate, {
+    allowCreationWithoutTargetProfileShare: true,
+  });
   return createdCampaigns.map((campaign) => new Campaign(campaign));
 };
 

@@ -446,8 +446,8 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
   describe('#deletePassagesByModuleIds', function () {
     it('should delete the exact passage', async function () {
       //given
-      const moduleId = "01151659-77c1-41cc-8724-89091357af3d";
-      const otherModuleId = "f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d";
+      const moduleId = '01151659-77c1-41cc-8724-89091357af3d';
+      const otherModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
 
       const { userId } = await databaseBuilder.factory.buildMembership();
 
@@ -485,5 +485,4 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(remainingPassage[0].deletedBy).to.be.null;
     });
   });
-
 });

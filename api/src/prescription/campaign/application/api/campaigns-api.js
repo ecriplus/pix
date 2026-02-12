@@ -76,7 +76,9 @@ export const save = async (campaigns, options) => {
  */
 export const get = async (campaignId) => {
   const getCampaign = await usecases.getCampaign({ campaignId });
-  return new Campaign(getCampaign);
+  const campaign = new Campaign(getCampaign);
+  campaign.setOrganizationId(getCampaign.organizationId);
+  return campaign;
 };
 
 /**
@@ -241,3 +243,22 @@ export const deleteActiveCampaigns = withTransaction(async ({ userId, organizati
   const campaignIdsToDelete = await usecases.findActiveCampaignIdsByOrganization({ organizationId });
   await usecases.deleteCampaigns({ userId, organizationId, campaignIds: campaignIdsToDelete });
 });
+
+export const deleteCampaignsInCombinedCourses = async ({
+  userId,
+  organizationId,
+  campaignIds,
+  keepPreviousDeletion,
+  userRole,
+  client,
+}) => {
+  await usecases.deleteCampaigns({
+    userId,
+    organizationId,
+    campaignIds,
+    keepPreviousDeletion,
+    userRole,
+    client,
+    isPartOfDeletingCombinedCourse: true,
+  });
+};
