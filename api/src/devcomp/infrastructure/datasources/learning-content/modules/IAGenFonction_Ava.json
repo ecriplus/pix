@@ -918,7 +918,7 @@
                 "id": "ce46c90d-193a-4479-a163-d85f56ff95ff",
                 "type": "expand",
                 "title": "🔑 Indice n°1",
-                "content": "Pour la recherche sur internet : Avez-vous posé à l’IA une question d’actualité ? Vous pouvez demander, par exemple : qui a gagné le dernier match de Hockey à Montréal ?"
+                "content": "Pour la recherche sur internet : avez-vous posé à l’IA une question d’actualité ? <br>Vous pouvez demander, par exemple : qui a gagné le dernier match de Hockey à Montréal ?"
               }
             },
             {
@@ -927,7 +927,7 @@
                 "id": "af33a8d9-20e4-4c66-b9d1-4d1ee8b907f5",
                 "type": "expand",
                 "title": "🔑 Indice n°2",
-                "content": "Pour la génération d’image : Avez-vous demandé à l’IA de faire une image ? Vous pouvez demander par exemple : dessine une cusine moderne où pourrait vivre une marmotte."
+                "content": "Pour la génération d’image : avez-vous demandé à l’IA de faire une image ? <br>Vous pouvez demander, par exemple : dessine une cusine moderne où pourrait vivre une marmotte."
               }
             }
           ]
@@ -1001,7 +1001,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "Le logiciel d'IA conversationnelle va avoir besoin de faire appel à des outils :&nbsp;- l'agenda pour le rendez-vous avec le cuisiniste,&nbsp;- la recherche sur internet pour donner des sources,&nbsp;- et la calculatrice pour l'estimation du nombre de lames pour la terrasse."
+                  "diagnosis": "Le logiciel d'IA conversationnelle va avoir besoin de faire appel à des outils :&nbsp;<br>- l'<strong>agenda </strong>pour le rendez-vous avec le cuisiniste,&nbsp;<br>- la <strong>recherche sur internet</strong> pour donner des sources,&nbsp;<br>- et la <strong>calculatrice </strong>pour l'estimation du nombre de lames pour la terrasse."
                 }
               }
             }
