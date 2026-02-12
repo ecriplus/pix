@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { FRENCH_FRANCE, FRENCH_SPOKEN, getBaseLocale } from '../../../shared/domain/services/locale-service.js';
+import { FRENCH_SPOKEN, getBaseLocale } from '../../../shared/domain/services/locale-service.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import * as skillRepository from '../../../shared/infrastructure/repositories/skill-repository.js';
@@ -23,8 +23,14 @@ export async function findByRecordIdsForCurrentUser({ ids, userId, locale }) {
   tutorialDtos.sort(byId);
   const tutorials = tutorialDtos.map(toDomain);
   const userSavedTutorials = await userSavedTutorialRepository.find({ userId });
-  const tutorialEvaluations = await tutorialEvaluationRepository.find({ userId });
-  return toTutorialsForUser({ tutorials, tutorialEvaluations, userSavedTutorials });
+  const tutorialEvaluations = await tutorialEvaluationRepository.find({
+    userId,
+  });
+  return toTutorialsForUser({
+    tutorials,
+    tutorialEvaluations,
+    userSavedTutorials,
+  });
 }
 
 export async function findPaginatedFilteredForCurrentUser({ userId, filters = {}, page }) {
@@ -32,7 +38,9 @@ export async function findPaginatedFilteredForCurrentUser({ userId, filters = {}
   const tutorialIds = userSavedTutorials.map(({ tutorialId }) => tutorialId);
   let tutorialDtos = await getInstance().loadMany(tutorialIds);
   tutorialDtos = tutorialDtos.filter((tutorialDto) => tutorialDto).sort(byId);
-  const tutorialEvaluations = await tutorialEvaluationRepository.find({ userId });
+  const tutorialEvaluations = await tutorialEvaluationRepository.find({
+    userId,
+  });
 
   let filteredTutorials = [...tutorialDtos];
   if (filters.competences?.length) {
@@ -64,21 +72,15 @@ export async function get({ tutorialId }) {
   return toDomain(tutorialDto);
 }
 
-export async function list({ locale = FRENCH_FRANCE }) {
-  const cacheKey = `list({ locale: ${locale} })`;
-  const lang = getBaseLocale(locale);
-  const listByLangCallback = (knex) => knex.whereLike('locale', `${lang}%`).orderBy('id');
-  const tutorialDtos = await getInstance().find(cacheKey, listByLangCallback);
-  return tutorialDtos.map(toDomain);
-}
-
 export async function findPaginatedFilteredRecommendedByUserId({
   userId,
   filters = {},
   page,
   lang = FRENCH_SPOKEN,
 } = {}) {
-  const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({ userId });
+  const invalidatedKnowledgeElements = await knowledgeElementRepository.findInvalidatedAndDirectByUserId({
+    userId,
+  });
 
   const [userSavedTutorials, tutorialEvaluations, skills] = await Promise.all([
     userSavedTutorialRepository.find({ userId }),
@@ -147,7 +149,12 @@ function toTutorialsForUserForRecommandation({ tutorials, tutorialEvaluations, u
   return tutorials.map((tutorial) => {
     const userSavedTutorial = userSavedTutorials.find(({ tutorialId }) => tutorialId === tutorial.id);
     const tutorialEvaluation = tutorialEvaluations.find(({ tutorialId }) => tutorialId === tutorial.id);
-    return new TutorialForUser({ ...tutorial, userSavedTutorial, tutorialEvaluation, skillId });
+    return new TutorialForUser({
+      ...tutorial,
+      userSavedTutorial,
+      tutorialEvaluation,
+      skillId,
+    });
   });
 }
 

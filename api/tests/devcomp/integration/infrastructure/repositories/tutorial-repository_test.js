@@ -1,13 +1,11 @@
 import _ from 'lodash';
 
-import { Tutorial } from '../../../../../src/devcomp/domain/models/Tutorial.js';
 import { TutorialEvaluation } from '../../../../../src/devcomp/domain/models/TutorialEvaluation.js';
 import { UserSavedTutorial } from '../../../../../src/devcomp/domain/models/UserSavedTutorial.js';
 import { TutorialForUser } from '../../../../../src/devcomp/domain/read-models/TutorialForUser.js';
 import * as tutorialRepository from '../../../../../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { ENGLISH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | tutorial-repository', function () {
@@ -119,7 +117,10 @@ describe('Integration | Repository | tutorial-repository', function () {
       await databaseBuilder.commit();
 
       // when
-      const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({ ids: ['recTutorial0'], userId });
+      const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({
+        ids: ['recTutorial0'],
+        userId,
+      });
 
       // then
       expect(tutorials).to.have.lengthOf(1);
@@ -147,7 +148,10 @@ describe('Integration | Repository | tutorial-repository', function () {
       await databaseBuilder.commit();
 
       // when
-      const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({ ids: ['recTutorial0'], userId });
+      const tutorials = await tutorialRepository.findByRecordIdsForCurrentUser({
+        ids: ['recTutorial0'],
+        userId,
+      });
 
       // then
       expect(tutorials).to.have.lengthOf(1);
@@ -260,8 +264,14 @@ describe('Integration | Repository | tutorial-repository', function () {
           databaseBuilder.factory.learningContent.build({
             tutorials: [{ id: tutorialId }],
           });
-          databaseBuilder.factory.buildUserSavedTutorial({ tutorialId, userId });
-          databaseBuilder.factory.buildTutorialEvaluation({ tutorialId, userId });
+          databaseBuilder.factory.buildUserSavedTutorial({
+            tutorialId,
+            userId,
+          });
+          databaseBuilder.factory.buildTutorialEvaluation({
+            tutorialId,
+            userId,
+          });
           await databaseBuilder.commit();
 
           // when
@@ -350,7 +360,10 @@ describe('Integration | Repository | tutorial-repository', function () {
     context('when user has saved a tutorial which is not available anymore', function () {
       it('should return an empty list', async function () {
         // given
-        databaseBuilder.factory.buildUserSavedTutorial({ tutorialId: 'recTutorial', userId });
+        databaseBuilder.factory.buildUserSavedTutorial({
+          tutorialId: 'recTutorial',
+          userId,
+        });
         await databaseBuilder.commit();
 
         // when
@@ -403,7 +416,12 @@ describe('Integration | Repository | tutorial-repository', function () {
 
         // then
         expect(tutorialsForUser.map((tutorial) => tutorial.id)).to.deep.equal(expectedTutorialIds);
-        expect(meta).to.deep.equal({ page: 1, pageSize: 4, rowCount: 4, pageCount: 1 });
+        expect(meta).to.deep.equal({
+          page: 1,
+          pageSize: 4,
+          rowCount: 4,
+          pageCount: 1,
+        });
       });
     });
 
@@ -416,9 +434,17 @@ describe('Integration | Repository | tutorial-repository', function () {
           tutorials,
         });
         tutorials.forEach((tutorial) => {
-          databaseBuilder.factory.buildUserSavedTutorial({ userId, tutorialId: tutorial.id });
+          databaseBuilder.factory.buildUserSavedTutorial({
+            userId,
+            tutorialId: tutorial.id,
+          });
         });
-        const expectedPagination = { page: 2, pageSize: 2, pageCount: 2, rowCount: 4 };
+        const expectedPagination = {
+          page: 2,
+          pageSize: 2,
+          pageCount: 2,
+          rowCount: 4,
+        };
         await databaseBuilder.commit();
 
         // when
@@ -439,7 +465,9 @@ describe('Integration | Repository | tutorial-repository', function () {
     context('when tutorial does not exist', function () {
       it('should throw a NotFoundError', async function () {
         // when
-        const error = await catchErr(tutorialRepository.get)({ tutorialId: 'recTutoImaginaire' });
+        const error = await catchErr(tutorialRepository.get)({
+          tutorialId: 'recTutoImaginaire',
+        });
 
         // then
         expect(error).to.be.instanceOf(NotFoundError);
@@ -464,7 +492,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const tutorial = await tutorialRepository.get({ tutorialId: 'recTutorial0' });
+        const tutorial = await tutorialRepository.get({
+          tutorialId: 'recTutorial0',
+        });
 
         // then
         expect(tutorial).to.deep.equal(
@@ -478,114 +508,6 @@ describe('Integration | Repository | tutorial-repository', function () {
           }),
         );
       });
-    });
-  });
-
-  describe('#list', function () {
-    it('should return all tutorials according to default locale', async function () {
-      // given
-      const frenchTutorials = [
-        {
-          duration: '00:00:54',
-          format: 'video',
-          link: 'https://tuto.fr',
-          source: 'tuto.fr',
-          title: 'tuto0',
-          id: 'recTutorial0',
-          locale: 'fr-fr',
-        },
-        {
-          duration: '00:01:54',
-          format: 'page',
-          link: 'https://tuto.com',
-          source: 'tuto.com',
-          title: 'tuto1',
-          id: 'recTutorial1',
-          locale: 'fr-fr',
-        },
-      ];
-      const englishTutorials = [
-        {
-          duration: '00:01:54',
-          format: 'page',
-          link: 'https://tuto.uk',
-          source: 'tuto.uk',
-          title: 'tuto2',
-          id: 'recTutorial2',
-          locale: 'en-us',
-        },
-      ];
-      databaseBuilder.factory.learningContent.build({
-        tutorials: [...frenchTutorials, ...englishTutorials],
-      });
-      await databaseBuilder.commit();
-
-      // when
-      const tutorials = await tutorialRepository.list({});
-
-      // then
-      expect(tutorials).to.have.lengthOf(2);
-      expect(tutorials[0]).to.be.instanceof(Tutorial);
-      const expectedTutorials = frenchTutorials.map((tuto) => _.omit(tuto, 'locale'));
-      expect(tutorials).to.deep.include.members(expectedTutorials);
-    });
-
-    it('should return tutorials according to given locale', async function () {
-      // given
-      const locale = ENGLISH_SPOKEN;
-      const frenchTutorial = {
-        duration: '00:00:54',
-        format: 'video',
-        link: 'https://tuto.fr',
-        source: 'tuto.fr',
-        title: 'tuto0',
-        id: 'recTutorial0',
-        locale: 'fr-fr',
-      };
-      const englishTutorial = {
-        duration: '00:01:54',
-        format: 'page',
-        link: 'https://tuto.uk',
-        source: 'tuto.uk',
-        title: 'tuto1',
-        id: 'recTutorial1',
-        locale: 'en-us',
-      };
-      databaseBuilder.factory.learningContent.build({
-        tutorials: [frenchTutorial, englishTutorial],
-      });
-      await databaseBuilder.commit();
-
-      // when
-      const tutorials = await tutorialRepository.list({ locale });
-
-      // then
-      expect(tutorials).to.have.lengthOf(1);
-      const expectedTutorial = _.omit(englishTutorial, 'locale');
-      expect(tutorials[0]).to.deep.equal(expectedTutorial);
-    });
-
-    it('should not break or return tutorials without locale', async function () {
-      // given
-      const locale = ENGLISH_SPOKEN;
-      const tutorial = {
-        duration: '00:00:54',
-        format: 'video',
-        link: 'https://tuto.fr',
-        source: 'tuto.fr',
-        title: 'tuto0',
-        id: 'recTutorial0',
-      };
-      databaseBuilder.factory.learningContent.build({
-        tutorials: [tutorial],
-      });
-      await databaseBuilder.commit();
-
-      // when
-      const tutorials = await tutorialRepository.list({ locale });
-
-      // then
-      expect(tutorials).to.have.lengthOf(0);
     });
   });
 
@@ -622,7 +544,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+        });
 
         // then
         expect(results).to.deep.equal([]);
@@ -659,7 +583,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+        });
 
         // then
         expect(results).to.deep.equal([]);
@@ -717,7 +643,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+        });
 
         // then
         expect(_.omit(results[0], ['userSavedTutorial', 'tutorialEvaluation'])).to.deep.equal({
@@ -778,7 +706,10 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId, lang });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+          lang,
+        });
 
         // then
         expect(results.map((tutorial) => tutorial.id)).to.exactlyContain(['tuto2', 'tuto1']);
@@ -811,7 +742,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+        });
 
         // then
         expect(results).to.deep.equal([]);
@@ -855,7 +788,9 @@ describe('Integration | Repository | tutorial-repository', function () {
         await databaseBuilder.commit();
 
         // when
-        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+        const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+          userId,
+        });
 
         // then
         expect(results.map(({ id, skillId }) => ({ id, skillId }))).to.exactlyContain([
@@ -908,7 +843,9 @@ describe('Integration | Repository | tutorial-repository', function () {
           await databaseBuilder.commit();
 
           // when
-          const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+          const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+            userId,
+          });
 
           // then
           expect(results[0].tutorialEvaluation).to.include({
@@ -980,7 +917,9 @@ describe('Integration | Repository | tutorial-repository', function () {
           await databaseBuilder.commit();
 
           // when
-          const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({ userId });
+          const { results } = await tutorialRepository.findPaginatedFilteredRecommendedByUserId({
+            userId,
+          });
 
           // then
           expect(results.length).to.equal(1);
@@ -1033,7 +972,12 @@ describe('Integration | Repository | tutorial-repository', function () {
             status: KnowledgeElement.StatusType.INVALIDATED,
             source: KnowledgeElement.SourceType.DIRECT,
           });
-          const expectedPagination = { page: 2, pageSize: 2, pageCount: 2, rowCount: 3 };
+          const expectedPagination = {
+            page: 2,
+            pageSize: 2,
+            pageCount: 2,
+            rowCount: 3,
+          };
           await databaseBuilder.commit();
 
           // when
@@ -1134,7 +1078,12 @@ describe('Integration | Repository | tutorial-repository', function () {
             source: KnowledgeElement.SourceType.DIRECT,
           });
           await databaseBuilder.commit();
-          const expectedPagination = { page: 1, pageSize: 10, pageCount: 1, rowCount: 4 };
+          const expectedPagination = {
+            page: 1,
+            pageSize: 10,
+            pageCount: 1,
+            rowCount: 4,
+          };
 
           const filters = { competences: 'competence2,competence3' };
 
@@ -1237,7 +1186,12 @@ describe('Integration | Repository | tutorial-repository', function () {
           });
           await databaseBuilder.commit();
 
-          const expectedPagination = { page: 2, pageSize: 2, pageCount: 2, rowCount: 4 };
+          const expectedPagination = {
+            page: 2,
+            pageSize: 2,
+            pageCount: 2,
+            rowCount: 4,
+          };
 
           const filters = { competences: 'competence2,competence3' };
 
