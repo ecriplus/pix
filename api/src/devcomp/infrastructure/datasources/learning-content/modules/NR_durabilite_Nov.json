@@ -772,7 +772,7 @@
                     "content": "<p>Pour limiter l'impact environnemental des smartphones il faut </p>"
                   },
                   {
-                    "input": "",
+                    "input": "input",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
@@ -817,7 +817,7 @@
                     "content": "<p>Pour cela il faut les </p>"
                   },
                   {
-                    "input": "",
+                    "input": "input",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
@@ -862,7 +862,7 @@
                     "content": "<p>Et si on doit vraiment en changer, il vaut mieux </p>"
                   },
                   {
-                    "input": "",
+                    "input": "input",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
@@ -907,7 +907,7 @@
                     "content": "<p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut </p>"
                   },
                   {
-                    "input": "",
+                    "input": "input",
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
