@@ -96,3 +96,19 @@ export const deletePassagesByModuleIdsAndOrganizationLearnerId = async ({
     .whereIn('referenceId', moduleIds)
     .andWhere('organizationLearnerId', organizationLearnerId);
 };
+export const deleteCombinedCourseParticipations = async ({ combinedCourseIds, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const stringifiedCombinedCourseIds = combinedCourseIds.map((id) => id.toString());
+  await knexConn('organization_learner_participations')
+    .update({ deletedAt: knexConn.fn.now(), deletedBy: userId, updatedAt: knexConn.fn.now() })
+    .whereIn('organization_learner_participations.referenceId', stringifiedCombinedCourseIds);
+};
+
+export const deletePassagesByModuleIds = async ({ moduleIds, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  await knexConn('organization_learner_participations')
+    .update({ deletedAt: knexConn.fn.now(), deletedBy: userId, updatedAt: knexConn.fn.now() })
+    .whereIn('organization_learner_participations.referenceId', moduleIds);
+}

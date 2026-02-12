@@ -400,4 +400,90 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(remainingPassage[0].deletedBy).to.be.null;
     });
   });
+  describe('#deleteCombinedCourseParticipation', function () {
+    it('should delete the exact participation', async function () {
+      //given
+      const { id: combinedCourseId } = await databaseBuilder.factory.buildCombinedCourse({ code: 'RANDOM' });
+      const { id: otherCombinedCourseId } = await databaseBuilder.factory.buildCombinedCourse();
+
+      const { userId } = await databaseBuilder.factory.buildMembership();
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        combinedCourseId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        combinedCourseId: otherCombinedCourseId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await organizationLearnerParticipationRepository.deleteCombinedCourseParticipations({
+        combinedCourseIds: [combinedCourseId],
+        userId,
+      });
+
+      //then
+      const deletedParticipation = await knex('organization_learner_participations').where({
+        referenceId: combinedCourseId.toString(),
+      });
+      const remainingParticipation = await knex('organization_learner_participations').where({
+        referenceId: otherCombinedCourseId.toString(),
+      });
+
+      expect(deletedParticipation[0].deletedAt).not.to.be.null;
+      expect(deletedParticipation[0].deletedBy).to.equal(userId);
+      expect(remainingParticipation[0].deletedAt).to.be.null;
+      expect(remainingParticipation[0].deletedBy).to.be.null;
+    });
+  });
+
+  describe('#deletePassagesByModuleIds', function () {
+    it('should delete the exact passage', async function () {
+      //given
+      const moduleId = "01151659-77c1-41cc-8724-89091357af3d";
+      const otherModuleId = "f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d";
+
+      const { userId } = await databaseBuilder.factory.buildMembership();
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        moduleId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        moduleId: otherModuleId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await organizationLearnerParticipationRepository.deletePassagesByModuleIds({
+        moduleIds: [moduleId],
+        userId,
+      });
+
+      //then
+      const deletedPassage = await knex('organization_learner_participations').where({
+        referenceId: moduleId,
+      });
+      const remainingPassage = await knex('organization_learner_participations').where({
+        referenceId: otherModuleId,
+      });
+
+      expect(deletedPassage[0].deletedAt).not.to.be.null;
+      expect(deletedPassage[0].deletedBy).to.equal(userId);
+      expect(remainingPassage[0].deletedAt).to.be.null;
+      expect(remainingPassage[0].deletedBy).to.be.null;
+    });
+  });
+
 });
