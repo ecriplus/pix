@@ -61,16 +61,6 @@ const serialize = function (campaignReports, meta) {
         },
       },
     },
-    campaignAnalysis: {
-      ref: 'id',
-      ignoreRelationshipData: true,
-      nullIfMissing: true,
-      relationshipLinks: {
-        related(record, current, parent) {
-          return `/api/campaigns/${parent.id}/analyses`;
-        },
-      },
-    },
     campaignResultLevelsPerTubesAndCompetence: {
       ref: 'id',
       ignoreRelationshipData: true,

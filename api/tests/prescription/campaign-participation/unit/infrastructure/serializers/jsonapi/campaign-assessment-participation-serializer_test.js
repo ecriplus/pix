@@ -44,11 +44,6 @@ describe('Unit | Serializer | JSONAPI | campaign-assessment-participation-serial
                   },
                 ],
               },
-              'campaign-analysis': {
-                links: {
-                  related: '/api/campaign-participations/1/analyses',
-                },
-              },
               'campaign-assessment-participation-result': {
                 links: {
                   related: '/api/campaigns/2/assessment-participations/1/results',
@@ -133,11 +128,6 @@ describe('Unit | Serializer | JSONAPI | campaign-assessment-participation-serial
             relationships: {
               badges: {
                 data: [],
-              },
-              'campaign-analysis': {
-                links: {
-                  related: '/api/campaign-participations/1/analyses',
-                },
               },
               'campaign-assessment-participation-result': {
                 links: {
