@@ -232,7 +232,7 @@
               "element": {
                 "id": "3255ed2b-a635-4a59-a9ba-b30e1da38c3b",
                 "type": "text",
-                "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l'utilisateur s’en rende compte.</p><br>\n<h5>🤔 Bon à savoir</h5>\n<p><strong>Un virus informatique</strong> est <strong>un type</strong> de logiciel malveillant parmi d’autres.</p>"
+                "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l'utilisateur s’en rende compte.</p><br><h5>🤔 Bon à savoir</h5><p><strong>Un virus informatique</strong> est <strong>un type</strong> de logiciel malveillant parmi d’autres.</p>"
               }
             }
           ]
@@ -334,7 +334,7 @@
               "element": {
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
-                "content": "<h5>Comment éviter d’installer un logiciel malveillant sur son appareil ?</h5><p>Il faut être <strong>vigilant</strong> et adopter <strong>des gestes sûrs</strong>&nbsp;:</p><ul><li><strong>Privilégiez les sites légaux et les magasins d'applications officiels</strong> pour télécharger un logiciel ou regarder un film. 🌐</li><li><strong>Ne pas cliquez sur des liens </strong>ou <strong>des pièces jointes</strong> dans des messages inconnus. ✉️</li><li><strong>Branchez uniquement des appareils de confiance.</strong></li><li><strong>N’ouvrez que les fichiers dont vous êtes sûrs.</strong></li><li><strong>Chargez un appareil sur une prise électrique</strong>. 🔌</li></ul>"
+                "content": "<p><strong>Pour éviter d'installer un logiciel malveillant</strong>, il faut être vigilant et adopter des gestes sûrs&nbsp;:</p><ul><li>Téléchargez des logiciels ou des applications sur <strong>des sites légaux et dans les magasins d’applications officiels</strong>.</li><li>Faites attention <strong>aux liens sur lesquels vous cliquez</strong> ainsi qu’<strong>aux fichiers ou pièces jointes que vous ouvrez</strong>.</li><li>Connectez seulement <strong>des appareils de confiance</strong>.</li></ul><br><h5>🤔 Bon à savoir</h5><p>Pour recharger votre appareil en toute sécurité, il est préférable d’utiliser votre propre chargeur (secteur) branché sur une prise électrique. 🔌</p>"
               }
             }
           ]
@@ -446,7 +446,7 @@
               "element": {
                 "id": "142142d6-fd32-452b-9158-fe7209543865",
                 "type": "text",
-                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment éviter les logiciels malveillants ? </h4><ul><li>Télécharger un logiciel ou une application depuis des sites légaux et des magasins d'applications officiels.</li><li>Ne pas cliquer sur liens ou des pièces jointes dans des&nbsp;messages inconnus.</li><li>Ouvrir uniquement les fichiers dont vous êtes sûrs.</li><li>Brancher uniquement des appareils de confiance (ex : clé usb) et de provenance connue.</li><li>Charger son appareil sur une prise électrique plutôt que sur une prise usb en libre accès.</li></ul>"
+                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment éviter les logiciels malveillants ? </h4><ul><li>Télécharger un logiciel ou une application depuis des sites légaux et des magasins d'applications officiels.</li><li>Ne pas cliquer sur les liens ou les pièces jointes dans des&nbsp;messages inconnus.</li><li>Ouvrir uniquement les fichiers dont vous êtes sûrs.</li><li>Connecter uniquement des appareils de confiance (ex : clé usb) et de provenance connue.</li><li>Charger un appareil avec votre propre chargeur, en le branchant sur une prise électrique.</li></ul>"
               }
             }
           ]
@@ -562,7 +562,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Brancher un casque filaire sur un ordianteur pour écouter de la musique.</p>",
+                          "content": "<p>Brancher un casque filaire sur un ordinateur pour écouter de la musique.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
@@ -665,78 +665,42 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
-                "content": "Il existe <strong>plusieurs types de logiciels malveillants</strong> avec des fonctionnements différents. Par exemple, il y a&nbsp;:&nbsp;le virus informatique, le rançongiciel, le logiciel espion ou encore le cheval de Troie. Saurez vous  les reconnaître à partir de leur définition ?"
+                "content": "Vous avez vu qu’il est important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur son appareil.<br>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils."
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
-                "type": "flashcards",
-                "instruction": "Pour chaque carte : <br><ul><li>Lisez la question.</li><li>Essayez de trouver le type de logiciel malveillant dans votre tête. 🤔</li><li>Retournez la carte en cliquant sur « Voir la réponse ». ↪️</li></ul>",
-                "title": "Les types de logiciels malveillants",
-                "introImage": {
-                  "url": ""
-                },
-                "cards": [
+                "type": "qcu-declarative",
+                "instruction": "<p>Parmi les actions suivantes, laquelle pouvez vous mettre en place pour renforcer la protection de vos appareils ?</p>",
+                "proposals": [
                   {
-                    "id": "c2a46a7e-8ac0-4df5-bd7d-4826ffdf03f7",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Quel logiciel malveillant se propage d’un appareil à un autre quand on ouvre un fichier infecté par exemple ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Le virus informatique"
+                    "id": "1",
+                    "content": "<p>Je peux installer un logiciel antivirus sur un de mes appareils.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est une bonne action. Un antivirus permet d’identifier, de neutraliser, voire d’éliminer les logiciels malveillants.<br>Pour rester efficace, il doit aussi être mis à jour régulièrement.</p>"
                     }
                   },
                   {
-                    "id": "2957c00c-3f5d-463a-8193-31af41a32608",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Quel logiciel malveillant se déguise en logiciel inoffensif pour tromper l'utilisateur et accéder à son appareil, et cache une fonctionnalité malveillante ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Le cheval de Troie"
+                    "id": "2",
+                    "content": "<p>Je peux mettre à jour régulièrement mes appareils, mes logiciels et mes applications.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bon choix. En plus d’apporter de nouvelles fonctionnalités, les mises à jour améliorent régulièrement la sécurité des programmes informatiques.<br>Il est souvent possible d'activer les mises à jour automatiques.</p>"
                     }
                   },
                   {
-                    "id": "6f45f731-3113-46b3-bd2d-d328aa65e384",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Quel logiciel malveillant empêche l’accès à un ordinateur ou à des fichiers puis demande de l’argent à l'utilisateur pour les débloquer ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Un rançongiciel (ou ransomware en anglais)"
+                    "id": "3",
+                    "content": "<p>J’ai déjà mis en place ces deux actions.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est super. Installer un antivirus et mettre à jour régulièrement ses appareils, ses logiciels et ses applications, sont deux actions complémentaires pour renforcer la protection de vos appareils.</p>"
                     }
                   },
                   {
-                    "id": "cf6b61ee-eaee-4e93-afdb-3e5a8c4cc468",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Quel logiciel malveillant surveille ce que fait l’utilisateur sur son ordinateur pour récupérer des informations ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Le logiciel espion (ou spyware en anglais)"
+                    "id": "4",
+                    "content": "<p>Je ne sais pas trop pour l’instant.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce n’est pas grave. C’est déjà bien d’être prudent au quotidien pour limiter les risques.<br>Pour commencer, accepter les notifications de mises à jour peut être une action simple à mettre en place.</p>"
                     }
                   }
                 ]
