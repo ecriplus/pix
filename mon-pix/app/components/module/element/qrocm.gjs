@@ -190,33 +190,18 @@ export default class ModuleQrocm extends ModuleElement {
             {{/if}}
             {{#if (eq block.type "input")}}
               <div class="element-qrocm-proposals__input element-qrocm-proposals__input--{{block.display}}">
-                {{#if (eq block.inputType "text")}}
-                  <PixInput
-                    @type="text"
-                    @value={{get this.selectedValues block.input}}
-                    @id={{block.input}}
-                    placeholder={{block.placeholder}}
-                    @screenReaderOnly={{true}}
-                    {{on "change" (fn this.onInputChanged block)}}
-                    size={{block.size}}
-                    readonly={{this.disableInput}}
-                  >
-                    <:label>{{block.ariaLabel}}</:label>
-                  </PixInput>
-                {{else if (eq block.inputType "number")}}
-                  <PixInput
-                    type="number"
-                    @value={{get this.selectedValues block.input}}
-                    @id={{block.input}}
-                    placeholder={{block.placeholder}}
-                    @screenReaderOnly={{true}}
-                    {{on "change" (fn this.onInputChanged block)}}
-                    size={{block.size}}
-                    readonly={{this.disableInput}}
-                  >
-                    <:label>{{block.ariaLabel}}</:label>
-                  </PixInput>
-                {{/if}}
+                <PixInput
+                  type={{block.inputType}}
+                  @value={{get this.selectedValues block.input}}
+                  @id={{block.input}}
+                  placeholder={{block.placeholder}}
+                  @screenReaderOnly={{true}}
+                  {{on "change" (fn this.onInputChanged block)}}
+                  size={{block.size}}
+                  readonly={{this.disableInput}}
+                >
+                  <:label>{{block.ariaLabel}}</:label>
+                </PixInput>
               </div>
             {{else if (eq block.type "select")}}
               <div class="element-qrocm-proposals__input element-qrocm-proposals__input--{{block.display}}">
