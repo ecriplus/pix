@@ -189,7 +189,31 @@ function convertObject(joiObjectDescribedSchema) {
   return jsonSchema;
 }
 
+function generateIfThenOtherwiseSchema(match) {
+  const baseSchema = convertFromType(match.otherwise);
+
+  const conditionalKeyName = Object.keys(match.is.keys)[0];
+  const schemaProperties = {
+    [conditionalKeyName]: {
+      const: match.is.keys[conditionalKeyName].allow[0].override,
+    },
+  };
+
+  return {
+    ...baseSchema,
+    title: match.otherwise.keys.type.allow[0],
+    if: { properties: schemaProperties },
+    then: { properties: convertFromType(match.then).properties },
+  };
+}
+
 function convertAlternatives(joiAlternativesDescribedSchema) {
+  const match = joiAlternativesDescribedSchema.matches[0];
+
+  if (Object.keys(match).includes('is')) {
+    return generateIfThenOtherwiseSchema(match);
+  }
+
   const oneOf = joiAlternativesDescribedSchema.matches.flatMap((match) => {
     if (match.ref !== undefined) {
       if (match.switch !== undefined) {

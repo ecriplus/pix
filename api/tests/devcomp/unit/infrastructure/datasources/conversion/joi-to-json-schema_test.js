@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { convertJoiToJsonSchema } from '../../../../../../src/devcomp/infrastructure/datasources/conversion/joi-to-json-schema.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { qcmElementSchema } from '../learning-content/validation/element/qcm-schema.js';
 
 describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema', function () {
   it('should throw if not Joi', function () {
@@ -498,6 +499,199 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
           },
           required: ['sport', 'data'],
           type: 'object',
+        });
+      });
+
+      describe('if then otherwise statement', function () {
+        it('should convert simple schema to json schema', function () {
+          // given
+          const joiSchema = qcmElementSchema;
+
+          const expectedJsonSchema = {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                format: 'uuid',
+              },
+              type: {
+                type: 'string',
+                enum: ['qcm'],
+              },
+              instruction: {
+                type: 'string',
+                format: 'jodit',
+              },
+              hasShortProposals: {
+                type: 'boolean',
+              },
+              proposals: {
+                type: 'array',
+                minItems: 3,
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      pattern: '^[0-9]+$',
+                    },
+                    content: {
+                      type: 'string',
+                      format: 'jodit',
+                    },
+                  },
+                  required: ['id', 'content'],
+                  additionalProperties: false,
+                  title: 'proposal',
+                },
+              },
+              feedbacks: {
+                type: 'object',
+                properties: {
+                  valid: {
+                    type: 'object',
+                    properties: {
+                      state: {
+                        type: 'string',
+                        format: 'jodit',
+                      },
+                      diagnosis: {
+                        type: 'string',
+                        format: 'jodit',
+                      },
+                    },
+                    required: ['state', 'diagnosis'],
+                    additionalProperties: false,
+                  },
+                  invalid: {
+                    type: 'object',
+                    properties: {
+                      state: {
+                        type: 'string',
+                        format: 'jodit',
+                      },
+                      diagnosis: {
+                        type: 'string',
+                        format: 'jodit',
+                      },
+                    },
+                    required: ['state', 'diagnosis'],
+                    additionalProperties: false,
+                  },
+                },
+                additionalProperties: false,
+              },
+              solutions: {
+                type: 'array',
+                minItems: 2,
+                items: {
+                  type: 'string',
+                  pattern: '^[0-9]+$',
+                  title: 'solution',
+                },
+              },
+            },
+            required: ['id', 'type', 'instruction', 'hasShortProposals', 'proposals', 'feedbacks', 'solutions'],
+            additionalProperties: false,
+            title: 'qcm',
+            if: {
+              properties: {
+                hasShortProposals: {
+                  const: true,
+                },
+              },
+            },
+            then: {
+              properties: {
+                id: {
+                  type: 'string',
+                  format: 'uuid',
+                },
+                type: {
+                  type: 'string',
+                  enum: ['qcm'],
+                },
+                instruction: {
+                  type: 'string',
+                  format: 'jodit',
+                },
+                hasShortProposals: {
+                  type: 'boolean',
+                },
+                proposals: {
+                  type: 'array',
+                  minItems: 3,
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: {
+                        type: 'string',
+                        pattern: '^[0-9]+$',
+                      },
+                      content: {
+                        type: 'string',
+                        maxLength: 20,
+                      },
+                    },
+                    required: ['id', 'content'],
+                    additionalProperties: false,
+                    title: 'proposal',
+                  },
+                },
+                feedbacks: {
+                  type: 'object',
+                  properties: {
+                    valid: {
+                      type: 'object',
+                      properties: {
+                        state: {
+                          type: 'string',
+                          format: 'jodit',
+                        },
+                        diagnosis: {
+                          type: 'string',
+                          format: 'jodit',
+                        },
+                      },
+                      required: ['state', 'diagnosis'],
+                      additionalProperties: false,
+                    },
+                    invalid: {
+                      type: 'object',
+                      properties: {
+                        state: {
+                          type: 'string',
+                          format: 'jodit',
+                        },
+                        diagnosis: {
+                          type: 'string',
+                          format: 'jodit',
+                        },
+                      },
+                      required: ['state', 'diagnosis'],
+                      additionalProperties: false,
+                    },
+                  },
+                  additionalProperties: false,
+                },
+                solutions: {
+                  type: 'array',
+                  minItems: 2,
+                  items: {
+                    type: 'string',
+                    pattern: '^[0-9]+$',
+                    title: 'solution',
+                  },
+                },
+              },
+            },
+          };
+
+          // when
+          const jsonSchema = convertJoiToJsonSchema(joiSchema);
+
+          // expect
+          expect(jsonSchema).to.deep.equal(expectedJsonSchema);
         });
       });
     });
