@@ -139,6 +139,7 @@ module('Integration | Component | users | user-detail-personal-information | aut
             // then
             const expectedLabel = t(
               'components.users.user-detail-personal-information.authentication-method.last-logged-at',
+              { date: '01/07/2022' },
             );
             const expectedValue = '01/07/2022';
             assert

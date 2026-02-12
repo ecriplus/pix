@@ -398,7 +398,7 @@ module('Integration | Component | Certifications | certification > details v3', 
         const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
         const expected = [
           {
-            term: 'Nombre de question répondues\n/ Nombre total de questions',
+            term: 'Nombre de question répondues / Nombre total de questions',
             definition: '9/15',
           },
           {
