@@ -118,7 +118,7 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
         await fillByLabel("Rattacher les organisations d'un profil cible existant", '43');
         await clickByName('Valider le rattachement à partir de ce profil cible');
 
-        assert.dom(await screen.findByRole('cell', { name: 'Organization for target profile 43' })).exists();
+        assert.ok(await screen.findByRole('cell', { name: 'Organization for target profile 43' }));
       });
     });
   });
