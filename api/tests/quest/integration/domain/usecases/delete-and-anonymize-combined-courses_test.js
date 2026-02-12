@@ -10,7 +10,7 @@ import { databaseBuilder, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Combined course | Domain | UseCases | delete-and-anonymize-combined-courses', function () {
   let campaign, organization, combinedCourse, otherCombinedCourse, campaignsApiStub;
-  const moduleId = "01151659-77c1-41cc-8724-89091357af3d";
+  const moduleId = '01151659-77c1-41cc-8724-89091357af3d';
 
   beforeEach(async function () {
     campaignsApiStub = {
@@ -86,7 +86,7 @@ describe('Integration | Combined course | Domain | UseCases | delete-and-anonymi
       'referenceId',
       combinedCourse.id,
     );
-     const deletedCombinedCoursePassage = await knex('organization_learner_participations').where(
+    const deletedCombinedCoursePassage = await knex('organization_learner_participations').where(
       'referenceId',
       moduleId,
     );
