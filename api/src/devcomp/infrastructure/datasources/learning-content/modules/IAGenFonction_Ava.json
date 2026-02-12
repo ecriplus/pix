@@ -563,7 +563,7 @@
                           "type": "select",
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [
                             ""
                           ],
@@ -594,7 +594,7 @@
                           "type": "select",
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [],
                           "options": [
                             {
@@ -623,7 +623,7 @@
                           "type": "select",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [],
                           "options": [
                             {
@@ -856,7 +856,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [
                       ""
                     ],
@@ -883,7 +883,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
