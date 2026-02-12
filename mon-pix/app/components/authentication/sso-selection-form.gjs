@@ -92,19 +92,19 @@ export default class SsoSelectionForm extends Component {
           {{#if @isForSignup}}
             {{t "pages.authentication.sso-selection.signup.button"}}
           {{else}}
-            {{t "pages.authentication.sso-selection.signin.button"}}
+            {{t "pages.authentication.sso-selection.login.button"}}
           {{/if}}
         </PixButton>
 
         <p id="signin-message" class="sso-selection-form__signin-message" aria-live="polite">
-          {{t "pages.authentication.sso-selection.signin.message" providerName=this.selectedProviderName}}
+          {{t "pages.authentication.sso-selection.login.message" providerName=this.selectedProviderName}}
         </p>
       {{else}}
         <PixButton @type="button" @isDisabled={{true}}>
           {{#if @isForSignup}}
             {{t "pages.authentication.sso-selection.signup.button"}}
           {{else}}
-            {{t "pages.authentication.sso-selection.signin.button"}}
+            {{t "pages.authentication.sso-selection.login.button"}}
           {{/if}}
         </PixButton>
       {{/if}}
