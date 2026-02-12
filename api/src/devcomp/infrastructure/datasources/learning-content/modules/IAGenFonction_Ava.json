@@ -1093,15 +1093,207 @@
                       "2"
                     ]
                   }
+                ,
+                  {
+                    "input": "classementetape3",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  }
+                ,
+
+                  {
+                    "input": "classementetape4",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  }
                 ],
+                        {
+                    "input": "classementetape5",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "5"
+                    ]
+                  }
+                ,          
+                        {
+                    "input": "classementetape4",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  }
+                ,
+                        {
+                    "input": "classementetape6",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "6"
+                    ]
+                  }
+                ],           
+      
                 "feedbacks": {
                   "valid": {
-                    "state": "",
-                    "diagnosis": ""
+                    "state": "Bonne réponse 🎉",
+                    "diagnosis": "Les étapes sont dans l'ordre."
                   },
                   "invalid": {
-                    "state": "",
-                    "diagnosis": ""
+                    "state": "Mauvaise réponse",
+                    "diagnosis": "Vous pouvez remontez voir le schéma si vous avez un doute."
                   }
                 }
               }
