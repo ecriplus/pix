@@ -29,9 +29,9 @@
       display: block;
       width: fit-content;
     }
-
-    &--inline {
-      display: inline-block;
-    }
   }
+}
+
+.element-qrocm__proposals > *:not(.element-qrocm-proposals__input--block, span) {
+  display: inline-block;
 }

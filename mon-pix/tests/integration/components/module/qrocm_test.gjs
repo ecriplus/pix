@@ -133,9 +133,9 @@ module('Integration | Component | Module | QROCM', function (hooks) {
       }),
     );
     assert.dom(screen.getByText('Ma première proposition')).exists({ count: 1 });
-    assert.ok(screen.queryByRole('spinbutton', { name: 'input-aria' }));
-    assert.ok(screen.queryByText("l'identifiant"));
-    assert.dom('.element-qrocm-proposals__input--inline').exists({ count: 2 });
+    assert.ok(screen.getByRole('spinbutton', { name: 'input-aria' }));
+    assert.ok(screen.getByText("l'identifiant"));
+    assert.dom('.element-qrocm-proposals__input--block').doesNotExist();
   });
 
   test('should be able to select an option', async function (assert) {
