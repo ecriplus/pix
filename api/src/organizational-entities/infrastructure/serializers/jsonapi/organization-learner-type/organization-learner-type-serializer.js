@@ -4,11 +4,6 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (organizationLearnerType) {
   return new Serializer('organization-learner-types', {
-    transform(record) {
-      return {
-        name: record.name,
-      };
-    },
     attributes: ['name'],
   }).serialize(organizationLearnerType);
 };

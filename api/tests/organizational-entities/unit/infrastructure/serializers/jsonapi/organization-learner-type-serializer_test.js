@@ -5,7 +5,10 @@ describe('Unit | Serializer | organization-learner-type-serializer', function ()
   describe('#serialize', function () {
     it('should return a JSON API serialized organization learner type', function () {
       // given
-      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType();
+      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType({
+        id: 123,
+        name: 'Student',
+      });
 
       // when
       const serializedOrganizationLearnerType = organizationLearnerTypeSerializer.serialize(organizationLearnerType);
@@ -13,9 +16,10 @@ describe('Unit | Serializer | organization-learner-type-serializer', function ()
       // then
       expect(serializedOrganizationLearnerType).to.deep.equal({
         data: {
+          id: '123',
           type: 'organization-learner-types',
           attributes: {
-            name: organizationLearnerType.name,
+            name: 'Student',
           },
         },
       });
