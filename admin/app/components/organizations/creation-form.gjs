@@ -143,6 +143,7 @@ export default class OrganizationCreationForm extends Component {
               required={{false}}
               @validationStatus={{if this.validator.errors.name "error"}}
               @errorMessage={{if this.validator.errors.name (t this.validator.errors.name)}}
+              @isFullWidth={{true}}
             >
               <:label>{{t "components.organizations.creation.name.label"}}</:label>
             </PixInput>
@@ -157,6 +158,7 @@ export default class OrganizationCreationForm extends Component {
             @value={{this.form.type}}
             @requiredLabel={{t "common.fields.required-field"}}
             @errorMessage={{if this.validator.errors.type (t this.validator.errors.type)}}
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.creation.type.label"}}</:label>
             <:default as |organizationType|>{{organizationType.label}}</:default>
@@ -174,6 +176,7 @@ export default class OrganizationCreationForm extends Component {
               this.validator.errors.administrationTeamId
               (t this.validator.errors.administrationTeamId)
             }}
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.creation.administration-team.selector.label"}}</:label>
           </PixSelect>
@@ -189,6 +192,7 @@ export default class OrganizationCreationForm extends Component {
             @isSearchable={{true}}
             @locale={{this.locale.currentLocale}}
             @errorMessage={{if this.validator.errors.countryCode (t this.validator.errors.countryCode)}}
+            @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.creation.country.selector.label"}}</:label>
           </PixSelect>
@@ -206,6 +210,7 @@ export default class OrganizationCreationForm extends Component {
               @id="externalId"
               {{on "change" (fn this.handleInputChange "externalId")}}
               placeholder={{t "components.organizations.creation.external-id.placeholder"}}
+              @isFullWidth={{true}}
             >
               <:label>{{t "components.organizations.creation.external-id.label"}}</:label>
             </PixInput>
@@ -224,6 +229,7 @@ export default class OrganizationCreationForm extends Component {
               @value="{{this.form.documentationUrl}}"
               @validationStatus={{if this.validator.errors.documentationUrl "error"}}
               @errorMessage={{if this.validator.errors.documentationUrl (t this.validator.errors.documentationUrl)}}
+              @isFullWidth={{true}}
             >
               <:label>{{t "components.organizations.creation.documentation-link"}}</:label>
             </PixInput>
@@ -263,6 +269,7 @@ export default class OrganizationCreationForm extends Component {
                 this.validator.errors.dataProtectionOfficerEmail
                 (t this.validator.errors.dataProtectionOfficerEmail)
               }}
+              @isFullWidth={{true}}
             >
               <:label>{{t "components.organizations.creation.dpo.email"}}
                 <abbr title={{t "components.organizations.creation.dpo.definition"}}>{{t
