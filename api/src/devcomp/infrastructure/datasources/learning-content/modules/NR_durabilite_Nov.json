@@ -244,40 +244,55 @@
               "type": "element",
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
-                "type": "qcu-discovery",
+                "type": "custom",
                 "instruction": "<p>Combien de tours de la Terre pour la fabrication d’un smartphone ?</p>",
-                "hasShortProposals": false,
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>1</p>",
-                    "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "1",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
+                    },
+                    {
+                      "label": "2",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
+                    },
+                    {
+                      "label": "3",
+                      "feedback": {
+                        "type": "close",
+                        "text": "Presque ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
+                    },
+                    {
+                      "label": "4",
+                      "feedback": {
+                        "type": "good",
+                        "text": "Exactement ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
+                    },
+                    {
+                      "label": "5",
+                      "feedback": {
+                        "type": "close",
+                        "text": "Presque ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
+                    },
+                    {
+                      "label": "6",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                      }
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>2</p>",
-                    "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>3</p>",
-                    "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>4</p>",
-                    "feedback": {
-                      "diagnosis": "<p>L’extraction et la transformation des métaux n’est qu’une étape de la fabrication d’un smartphone. Il faut rajouter la conception, le transport des matières premières pour la fabrication des composants, l’assemblage et la distribution. On estime qu’il faut faire 4 fois le tour de la Terre pour fabriquer un seul smartphone !&nbsp;</p>"
-                    }
-                  }
-                ],
-                "solution": "4"
+                  ]
+                }
               }
             }
           ]
@@ -377,7 +392,7 @@
                     },
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
-                    "solution": "B"
+                    "solution": "A"
                   },
                   {
                     "id": "8e062fe2-4588-4dae-97b9-87ec3e5e923c",
@@ -408,7 +423,7 @@
               "element": {
                 "id": "c08cdadc-1fbc-4e9e-bf46-ebef6e73a2d7",
                 "type": "text",
-                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (protéger l’écran, faire attention à la batterie, éviter la surchauffe).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
+                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (protéger l’écran, éviter la surchauffe, le débrancher une fois chargé, le recharger avant que la batterie soit trop faible).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
               }
             }
           ]
