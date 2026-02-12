@@ -34,7 +34,8 @@ function convertBoolean() {
 }
 
 function convertString(joiStringDescribedSchema) {
-  const jsonSchema = { type: 'string' };
+  const jsonSchema = { type: 'string', format: null };
+
   const rules = joiStringDescribedSchema.rules;
 
   const emailRule = findRule(rules, 'email');
