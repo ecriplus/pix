@@ -106,7 +106,7 @@
     "sass": "^1.94.2",
     "showdown": "^2.1.0",
     "sinon": "^21.0.0",
-    "stylelint": "^16.26.1",
+    "stylelint": "^17.0.0",
     "tracked-built-ins": "^4.0.0",
     "webpack": "^5.103.0",
     "xss": "^1.0.15"
