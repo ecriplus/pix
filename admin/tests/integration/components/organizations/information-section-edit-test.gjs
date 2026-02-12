@@ -29,6 +29,13 @@ module('Integration | Component | organizations/information-section-edit', funct
         store.createRecord('country', { code: '99101', name: 'Danemark' }),
         store.createRecord('country', { code: '99100', name: 'France' }),
       ]);
+
+    findAllStub
+      .withArgs('organization-learner-type')
+      .resolves([
+        store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
+        store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
+      ]);
   });
 
   module('organization validation', function (hooks) {
@@ -259,6 +266,36 @@ module('Integration | Component | organizations/information-section-edit', funct
 
       // then
       assert.ok(countryCodeErrorMessage);
+    });
+
+    test('it should show error message if organization learner type is empty', async function (assert) {
+      const organizationWithoutOrganizationLearnerType = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: '99100',
+        organizationLearnerTypeName: null,
+      });
+
+      // when
+      const screen = await render(
+        <template><InformationSectionEdit @organization={{organizationWithoutOrganizationLearnerType}} /></template>,
+      );
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
+
+      const organizationLearnerTypeErrorMessage = screen.getByText(
+        t('components.organizations.editing.organization-learner-type.selector.error-message'),
+      );
+
+      // then
+      assert.ok(organizationLearnerTypeErrorMessage);
     });
 
     module('#features', function () {
@@ -536,6 +573,96 @@ module('Integration | Component | organizations/information-section-edit', funct
       );
     });
   });
+
+  module('organization learner type select', function () {
+    test('it should display select with options loaded', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: 99100,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.editing.organization-learner-type.selector.label')} *`,
+        }),
+      );
+      const listbox = await screen.findByRole('listbox');
+
+      //then
+      assert.ok(within(listbox).getByRole('option', { name: 'Student' }));
+      assert.ok(within(listbox).getByRole('option', { name: 'Teacher' }));
+    });
+
+    test('it should display current organization-learner-type as pre-selected option if organization has one', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        features: {},
+        documentationUrl: 'https://pix.fr/',
+        administrationTeamId: 123,
+        countryCode: 99100,
+        organizationLearnerTypeName: 'Student',
+      });
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.editing.organization-learner-type.selector.label')} *`,
+          }),
+        ).getByText('Student'),
+      );
+    });
+
+    test('it should display the placeholder if organization does not have a organization-learner-type', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+        administrationTeamId: 123,
+        countryCode: 99100,
+        organizationLearnerTypeName: null,
+      });
+
+      //when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.ok(
+        within(
+          screen.getByRole('button', {
+            name: `${t('components.organizations.editing.organization-learner-type.selector.label')} *`,
+          }),
+        ).getByText(t('components.organizations.editing.organization-learner-type.selector.placeholder')),
+      );
+    });
+  });
 });
 
 module('Rendering', function (hooks) {
@@ -556,6 +683,13 @@ module('Rendering', function (hooks) {
       .resolves([
         store.createRecord('country', { code: '99101', name: 'Danemark' }),
         store.createRecord('country', { code: '99100', name: 'France' }),
+      ]);
+
+    findAllStub
+      .withArgs('organization-learner-type')
+      .resolves([
+        store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
+        store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
       ]);
 
     class AccessControlStub extends Service {

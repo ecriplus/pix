@@ -743,6 +743,13 @@
         "name": {
           "label": "Nom"
         },
+        "organization-learner-type": {
+          "selector": {
+            "error-message": "Le public prescrit est requis",
+            "label": "Public prescrit",
+            "placeholder": "Sélectionner un public prescrit"
+          }
+        },
         "province-code": {
           "label": "Département (en 3 chiffres)"
         },
