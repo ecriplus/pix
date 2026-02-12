@@ -125,6 +125,7 @@
     "joi": "^17.6.0",
     "jose": "^6.0.8",
     "js-yaml": "^4.1.0",
+    "json-autotranslate": "^1.16.1",
     "jsonapi-serializer": "^3.6.7",
     "jsonwebtoken": "^9.0.0",
     "jszip": "^3.10.0",
