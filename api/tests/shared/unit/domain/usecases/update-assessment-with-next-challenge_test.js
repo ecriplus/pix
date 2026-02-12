@@ -285,6 +285,20 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
           });
         });
+
+        context('when an unexpected error occurs', function () {
+          it('should propagate the error', async function () {
+            // given
+            const unexpectedError = new Error('Some unexpected error');
+            certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(unexpectedError);
+
+            // when
+            const promise = updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+
+            // then
+            await expect(promise).to.be.rejectedWith(unexpectedError);
+          });
+        });
       });
 
       context('for assessment of type unknown', function () {

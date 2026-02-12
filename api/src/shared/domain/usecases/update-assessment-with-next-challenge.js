@@ -1,3 +1,6 @@
+import { AssessmentEndedError } from '../errors.js';
+import { logger } from '../../infrastructure/utils/logger.js';
+
 export async function updateAssessmentWithNextChallenge({
   assessment,
   userId,
@@ -35,8 +38,16 @@ export async function updateAssessmentWithNextChallenge({
     if (assessment.isCompetenceEvaluation()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
     }
-  } catch {
-    nextChallenge = null;
+  } catch (error) {
+    if (error instanceof AssessmentEndedError) {
+      nextChallenge = null;
+    } else {
+      logger.error(
+        { assessmentId: assessment.id, assessmentType: assessment.type, err: error },
+        'Unexpected error while retrieving next challenge for assessment',
+      );
+      throw error;
+    }
   }
 
   if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {
