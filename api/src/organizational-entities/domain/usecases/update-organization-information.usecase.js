@@ -13,7 +13,7 @@ const updateOrganizationInformation = withTransaction(async function ({
   const existingOrganization = await organizationForAdminRepository.get({ organizationId: organization.id });
 
   let organizationLearnerType;
-  if (organization.organizationLearnerType) {
+  if (organization.organizationLearnerType?.name) {
     try {
       organizationLearnerType = await organizationLearnerTypeRepository.getByName(
         organization.organizationLearnerType.name,

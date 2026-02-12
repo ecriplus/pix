@@ -741,6 +741,13 @@
         "name": {
           "label": "Name"
         },
+        "organization-learner-type": {
+          "selector": {
+            "error-message": "Organization learner type is required",
+            "label": "Organization learner type",
+            "placeholder": "Choose an organization learner type"
+          }
+        },
         "province-code": {
           "label": "Province code (3 digits)"
         },

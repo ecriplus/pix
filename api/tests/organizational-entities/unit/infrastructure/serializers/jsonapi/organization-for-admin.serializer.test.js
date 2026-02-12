@@ -1,6 +1,7 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { Organization } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { organizationForAdminSerializer } from '../../../../../../src/organizational-entities/infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
@@ -187,6 +188,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
           [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: true },
         },
         countryCode: '99100',
+        organizationLearnerTypeName: 'Teacher',
       };
 
       // when
@@ -211,6 +213,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'administration-team-id': organizationAttributes.administrationTeamId,
             features: organizationAttributes.features,
             'country-code': organizationAttributes.countryCode,
+            'organization-learner-type-name': organizationAttributes.organizationLearnerTypeName,
           },
         },
       });
@@ -244,6 +247,10 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
           },
         },
         countryCode: 99100,
+        organizationLearnerType: new OrganizationLearnerType({
+          id: undefined,
+          name: organizationAttributes.organizationLearnerTypeName,
+        }),
       });
       expect(organization).to.be.instanceOf(OrganizationForAdmin);
       expect(organization).to.deep.equal(expectedOrganization);

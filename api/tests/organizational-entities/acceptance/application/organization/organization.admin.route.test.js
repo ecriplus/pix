@@ -34,7 +34,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
         url: '/api/admin/organizations/import-csv/template',
       };
 
@@ -62,7 +64,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organizationId }).id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile({
+        ownerOrganizationId: organizationId,
+      }).id;
       await databaseBuilder.commit();
 
       const buffer =
@@ -74,7 +78,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/import-csv`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdminUserId,
+        }),
         payload: buffer,
       });
 
@@ -186,11 +192,19 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         context(`when user has role ${role}`, function () {
           it('returns child organizations list with a 200 HTTP status code', async function () {
             // given
-            const userId = databaseBuilder.factory.buildUser.withRole({ role }).id;
+            const userId = databaseBuilder.factory.buildUser.withRole({
+              role,
+            }).id;
             const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
 
-            const firstChildId = databaseBuilder.factory.buildOrganization({ parentOrganizationId }).id + '';
-            const secondChildId = databaseBuilder.factory.buildOrganization({ parentOrganizationId }).id + '';
+            const firstChildId =
+              databaseBuilder.factory.buildOrganization({
+                parentOrganizationId,
+              }).id + '';
+            const secondChildId =
+              databaseBuilder.factory.buildOrganization({
+                parentOrganizationId,
+              }).id + '';
 
             await databaseBuilder.commit();
 
@@ -240,7 +254,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'GET',
         url: '/api/admin/organizations',
         payload: {},
-        headers: generateAuthenticatedUserRequestHeaders({ userId: userSuperAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: userSuperAdmin.id,
+        }),
       };
 
       return databaseBuilder.commit();
@@ -261,7 +277,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       it('should respond with a 403 - forbidden access - if user has not role Super Admin', async function () {
         // given
         const nonSuperAdminUserId = 9999;
-        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
+        options.headers = generateAuthenticatedUserRequestHeaders({
+          userId: nonSuperAdminUserId,
+        });
 
         // when
         const response = await server.inject(options);
@@ -284,7 +302,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
       it('should return pagination meta data', async function () {
         // given
-        const expectedMetaData = { page: 1, pageSize: 10, rowCount: 2, pageCount: 1 };
+        const expectedMetaData = {
+          page: 1,
+          pageSize: 10,
+          rowCount: 2,
+          pageCount: 1,
+        };
 
         // when
         const response = await server.inject(options);
@@ -296,7 +319,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       it('should return a 200 status code with paginated and filtered data', async function () {
         // given
         options.url = '/api/admin/organizations?filter[name]=orga&filter[externalId]=A&page[number]=2&page[size]=1';
-        const expectedMetaData = { page: 2, pageSize: 1, rowCount: 2, pageCount: 2 };
+        const expectedMetaData = {
+          page: 2,
+          pageSize: 1,
+          rowCount: 2,
+          pageCount: 2,
+        };
 
         // when
         const response = await server.inject(options);
@@ -312,7 +340,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         // given
         options.url =
           '/api/admin/organizations?filter[name]=Organization of the night&filter[externalId]=1234568A&filter[administrationTeamId]=1234&page[number]=1&page[size]=2';
-        const expectedMetaData = { page: 1, pageSize: 2, rowCount: 1, pageCount: 1 };
+        const expectedMetaData = {
+          page: 1,
+          pageSize: 2,
+          rowCount: 1,
+          pageCount: 1,
+        };
 
         // when
         const response = await server.inject(options);
@@ -329,7 +362,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         // given
         options.url =
           '/api/admin/organizations?filter[name]=orga&filter[type]=sco&filter[externalId]=B&page[number]=1&page[size]=1';
-        const expectedMetaData = { page: 1, pageSize: 1, rowCount: 0, pageCount: 0 };
+        const expectedMetaData = {
+          page: 1,
+          pageSize: 1,
+          rowCount: 0,
+          pageCount: 0,
+        };
 
         // when
         const response = await server.inject(options);
@@ -370,7 +408,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         it('returns 200 HTTP status code with the created organization', async function () {
           // given
           const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          databaseBuilder.factory.buildAdministrationTeam({
+            id: 1234,
+            name: 'Équipe 1',
+          });
           databaseBuilder.factory.buildCertificationCpfCountry({
             code: 99100,
             commonName: 'France',
@@ -397,7 +438,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                 },
               },
             },
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdminUserId,
+            }),
           });
 
           // then
@@ -419,7 +462,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         it('returns 200 HTTP status code with the created child organization', async function () {
           // given
           const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
-          databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+          databaseBuilder.factory.buildAdministrationTeam({
+            id: 1234,
+            name: 'Équipe 1',
+          });
           databaseBuilder.factory.buildCertificationCpfCountry({
             code: 99100,
             commonName: 'France',
@@ -446,7 +492,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                 },
               },
             },
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdminUserId }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdminUserId,
+            }),
           });
 
           // then
@@ -510,7 +558,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       it('should respond with a 403 - forbidden access - if user has not role Super Admin', function () {
         // given
         const nonSuperAdminUserId = 9999;
-        options.headers = generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId });
+        options.headers = generateAuthenticatedUserRequestHeaders({
+          userId: nonSuperAdminUserId,
+        });
 
         // when
         const promise = server.inject(options);
@@ -574,14 +624,19 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           updatedAt: createdAt,
         });
         const tag = databaseBuilder.factory.buildTag({ id: 7, name: 'AEFE' });
-        databaseBuilder.factory.buildOrganizationTag({ tagId: tag.id, organizationId: organization.id });
+        databaseBuilder.factory.buildOrganizationTag({
+          tagId: tag.id,
+          organizationId: organization.id,
+        });
         await databaseBuilder.commit();
 
         // when
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/${organization.id}`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: superAdmin.id,
+          }),
         });
 
         // then
@@ -618,11 +673,26 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'country-name': country.commonName,
               'organization-learner-type-name': `Type pour organisation ${organization.id}`,
               features: {
-                [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false, params: null },
-                [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true, params: null },
-                [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: false, params: null },
-                [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true, params: null },
-                [ORGANIZATION_FEATURE.SHOW_NPS.key]: { active: false, params: null },
+                [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+                  active: false,
+                  params: null,
+                },
+                [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: {
+                  active: true,
+                  params: null,
+                },
+                [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: {
+                  active: false,
+                  params: null,
+                },
+                [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: {
+                  active: true,
+                  params: null,
+                },
+                [ORGANIZATION_FEATURE.SHOW_NPS.key]: {
+                  active: false,
+                  params: null,
+                },
               },
             },
             id: organization.id.toString(),
@@ -676,7 +746,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const response = await server.inject({
           method: 'GET',
           url: `/api/admin/organizations/999`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: superAdmin.id,
+          }),
         });
 
         // then
@@ -715,7 +787,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const promise = server.inject({
           method: 'GET',
           url: `/api/admin/organizations/999`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: nonSuperAdminUserId }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: nonSuperAdminUserId,
+          }),
         });
 
         // then
@@ -736,7 +810,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         commonName: 'Islande',
         originalName: 'Islande',
       });
-      const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+      const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'New Learner Type',
+      });
 
       const organizationAttributes = {
         externalId: '0446758F',
@@ -745,7 +821,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         credit: 50,
       };
 
-      const organization = databaseBuilder.factory.buildOrganization({ ...organizationAttributes });
+      const organization = databaseBuilder.factory.buildOrganization({
+        ...organizationAttributes,
+      });
       await databaseBuilder.commit();
 
       const payload = {
@@ -777,10 +855,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data['external-id']).not.to.equal(organization.externalId);
-      const formerOrganizationLearnerType = await knex('organization_learner_types').where({
-        id: organization.organizationLearnerTypeId,
-      });
-      expect(response.result.data['organization-learner-type-name']).to.equal(formerOrganizationLearnerType.name);
     });
   });
 
@@ -794,7 +868,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/${organizationId}/archive`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
       });
 
       // then
@@ -805,7 +881,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
     it('is forbidden for role certif', async function () {
       // given
-      const certifUser = databaseBuilder.factory.buildUser.withRole({ role: ROLES.CERTIF });
+      const certifUser = databaseBuilder.factory.buildUser.withRole({
+        role: ROLES.CERTIF,
+      });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       await databaseBuilder.commit();
 
@@ -813,7 +891,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const response = await server.inject({
         method: 'POST',
         url: `/api/admin/organizations/${organizationId}/archive`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: certifUser.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: certifUser.id,
+        }),
       });
 
       // then
@@ -826,7 +906,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
         url: '/api/admin/organizations/batch-archive/template',
       };
 
@@ -842,8 +924,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     context('success case', function () {
       it('returns a 204 http request', async function () {
         const adminMember = databaseBuilder.factory.buildUser.withRole();
-        const organizationId1 = databaseBuilder.factory.buildOrganization({ archivedAt: null, archivedBy: null }).id;
-        const organizationId2 = databaseBuilder.factory.buildOrganization({ archivedAt: null, archivedBy: null }).id;
+        const organizationId1 = databaseBuilder.factory.buildOrganization({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
+        const organizationId2 = databaseBuilder.factory.buildOrganization({
+          archivedAt: null,
+          archivedBy: null,
+        }).id;
         await databaseBuilder.commit();
 
         const csvData = `ID de l'organisation\n${organizationId1}\n${organizationId2}\n`;
@@ -859,7 +947,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         });
 
         const headers = {
-          ...generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          ...generateAuthenticatedUserRequestHeaders({
+            userId: adminMember.id,
+          }),
           'Content-Type': `multipart/form-data; boundary=${boundary}`,
         };
 
@@ -918,7 +1008,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         });
 
         const headers = {
-          ...generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          ...generateAuthenticatedUserRequestHeaders({
+            userId: adminMember.id,
+          }),
           'Content-Type': `multipart/form-data; boundary=${boundary}`,
         };
 
@@ -953,7 +1045,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         const options = {
           method: 'POST',
           url: '/api/admin/organizations/batch-archive',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminMember.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: adminMember.id,
+          }),
           payload: buffer,
         };
 
@@ -970,7 +1064,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
         url: '/api/admin/organizations/add-organization-features/template',
       };
 
@@ -991,8 +1087,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           key: ORGANIZATION_FEATURE.COVER_RATE.key,
           description: ' best feature ever',
         });
-        firstOrganization = databaseBuilder.factory.buildOrganization({ name: 'first organization', type: 'PRO' });
-        otherOrganization = databaseBuilder.factory.buildOrganization({ name: 'other organization', type: 'PRO' });
+        firstOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'first organization',
+          type: 'PRO',
+        });
+        otherOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'other organization',
+          type: 'PRO',
+        });
 
         await databaseBuilder.commit();
       });
@@ -1005,7 +1107,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: superAdmin.id,
+          }),
           url: '/api/admin/organizations/add-organization-features',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -1047,7 +1151,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${firstChildOrganization.id},${secondChildOrganization.id}`,
             },
@@ -1085,7 +1191,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           context(`when user has "${role}" role`, function () {
             it('returns a 403 HTTP status code', async function () {
               // given
-              const userId = databaseBuilder.factory.buildUser.withRole({ role }).id;
+              const userId = databaseBuilder.factory.buildUser.withRole({
+                role,
+              }).id;
               await databaseBuilder.commit();
 
               const options = {
@@ -1169,7 +1277,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             const options = {
               method: 'POST',
               url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-              headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+              headers: generateAuthenticatedUserRequestHeaders({
+                userId: superAdmin.id,
+              }),
               payload: {
                 childOrganizationIds: '984512',
               },
@@ -1193,7 +1303,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${parentOrganizationId}`,
             },
@@ -1210,7 +1322,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF',
             title: 'Conflict',
             detail: 'Unable to attach child organization to itself',
-            meta: { childOrganizationId: parentOrganizationId, parentOrganizationId },
+            meta: {
+              childOrganizationId: parentOrganizationId,
+              parentOrganizationId,
+            },
           });
         });
       });
@@ -1228,7 +1343,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1263,7 +1380,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1280,7 +1399,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
             title: 'Conflict',
             detail: 'Unable to attach child organization to parent organization which is also a child organization',
-            meta: { grandParentOrganizationId: anotherParentOrganizationId, parentOrganizationId },
+            meta: {
+              grandParentOrganizationId: anotherParentOrganizationId,
+              parentOrganizationId,
+            },
           });
         });
       });
@@ -1294,7 +1416,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${parentOrganizationId}`,
             },
@@ -1324,13 +1448,18 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           // given
           const parentOrganizationId = databaseBuilder.factory.buildOrganization({ type: 'PRO' }).id;
           const childOrganizationId = databaseBuilder.factory.buildOrganization({ type: 'PRO' }).id;
-          databaseBuilder.factory.buildOrganization({ type: 'PRO', parentOrganizationId: childOrganizationId });
+          databaseBuilder.factory.buildOrganization({
+            type: 'PRO',
+            parentOrganizationId: childOrganizationId,
+          });
           await databaseBuilder.commit();
 
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
             payload: {
               childOrganizationIds: `${childOrganizationId}`,
             },
@@ -1362,7 +1491,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       let childOrganization;
 
       beforeEach(async function () {
-        parentOrganization = databaseBuilder.factory.buildOrganization({ name: 'Parent Organization' });
+        parentOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'Parent Organization',
+        });
         childOrganization = databaseBuilder.factory.buildOrganization({
           name: 'Child Organization',
           parentOrganizationId: parentOrganization.id,
@@ -1376,7 +1507,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const options = {
             method: 'POST',
             url: `/api/admin/organizations/${childOrganization.id}/detach-parent-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+            headers: generateAuthenticatedUserRequestHeaders({
+              userId: superAdmin.id,
+            }),
           };
 
           // when
@@ -1397,7 +1530,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
         url: '/api/admin/organizations/update-organizations/template',
       };
 
@@ -1442,7 +1577,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: superAdmin.id,
+          }),
           url: '/api/admin/organizations/update-organizations',
           payload: iconv.encode(input, 'UTF-8'),
         };
@@ -1462,7 +1599,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         context(`when user has "${role}" role`, function () {
           it('returns a 403 HTTP status code', async function () {
             // given
-            const userId = databaseBuilder.factory.buildUser.withRole({ role }).id;
+            const userId = databaseBuilder.factory.buildUser.withRole({
+              role,
+            }).id;
             await databaseBuilder.commit();
 
             const options = {
@@ -1509,7 +1648,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       // given
       const options = {
         method: 'GET',
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
         url: '/api/admin/organizations/import-tags-csv/template',
       };
 
@@ -1551,7 +1692,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
         const options = {
           method: 'POST',
-          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+          headers: generateAuthenticatedUserRequestHeaders({
+            userId: superAdmin.id,
+          }),
           url: '/api/admin/organizations/import-tags-csv',
           payload: iconv.encode(input, 'UTF-8'),
         };

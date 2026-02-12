@@ -34,6 +34,13 @@ module('Integration | Component | organizations/information-section', function (
         store.createRecord('country', { code: '99101', name: 'Danemark' }),
         store.createRecord('country', { code: '99100', name: 'France' }),
       ]);
+
+    findAllStub
+      .withArgs('organization-learner-type')
+      .resolves([
+        store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
+        store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
+      ]);
   });
 
   module('when editing organization', function () {
@@ -49,6 +56,7 @@ module('Integration | Component | organizations/information-section', function (
       features: {},
       administrationTeamId: 123,
       countryCode: 99100,
+      organizationLearnerTypeName: 'Student',
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {

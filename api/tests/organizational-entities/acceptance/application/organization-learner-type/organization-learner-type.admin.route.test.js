@@ -11,8 +11,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
     it('returns a list of organization learner types with 200 HTTP status code', async function () {
       // given
       const server = await createServer();
-      const organizationLearnerType1 = databaseBuilder.factory.buildOrganizationLearnerType({ name: 'Public 1' });
-      const organizationLearnerType2 = databaseBuilder.factory.buildOrganizationLearnerType({ name: 'Public 2' });
+      const organizationLearnerType1 = databaseBuilder.factory.buildOrganizationLearnerType({
+        id: 123,
+        name: 'Public 1',
+      });
+      const organizationLearnerType2 = databaseBuilder.factory.buildOrganizationLearnerType({
+        id: 456,
+        name: 'Public 2',
+      });
       await databaseBuilder.commit();
       const userId = (await insertUserWithRoleSuperAdmin()).id;
       const options = {
@@ -25,12 +31,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           attributes: {
             name: organizationLearnerType1.name,
           },
+          id: '123',
           type: 'organization-learner-types',
         },
         {
           attributes: {
             name: organizationLearnerType2.name,
           },
+          id: '456',
           type: 'organization-learner-types',
         },
       ];

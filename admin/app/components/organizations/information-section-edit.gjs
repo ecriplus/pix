@@ -31,6 +31,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @tracked showArchivingConfirmationModal = false;
   @tracked toggleLockPlaces = false;
   @tracked administrationTeams = [];
+  @tracked organizationLearnerTypes = [];
   @tracked countries = [];
 
   noIdentityProviderOption = { label: this.intl.t('common.words.none'), value: 'None' };
@@ -47,6 +48,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   async #loadAsyncData() {
     this.administrationTeams = await this.store.findAll('administration-team');
+    this.organizationLearnerTypes = await this.store.findAll('organization-learner-type');
     this.countries = await this.store.findAll('country');
   }
 
@@ -68,6 +70,9 @@ export default class OrganizationInformationSectionEditionMode extends Component
         ? `${this.args.organization.administrationTeamId}`
         : null,
       countryCode: this.args.organization.countryCode ? `${this.args.organization.countryCode}` : null,
+      organizationLearnerTypeName: this.args.organization.organizationLearnerTypeName
+        ? this.args.organization.organizationLearnerTypeName
+        : null,
     };
   }
 
@@ -92,6 +97,14 @@ export default class OrganizationInformationSectionEditionMode extends Component
       label: administrationTeam.name,
     }));
 
+    return options;
+  }
+
+  get organizationLearnerTypeOptions() {
+    const options = this.organizationLearnerTypes.map((organizationLearnerType) => ({
+      value: organizationLearnerType.name,
+      label: organizationLearnerType.name,
+    }));
     return options;
   }
 
@@ -170,6 +183,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('administrationTeamName', administrationTeamName);
     this.args.organization.set('countryCode', this.form.countryCode);
     this.args.organization.set('countryName', countryName ?? null);
+    this.args.organization.set('organizationLearnerTypeName', this.form.organizationLearnerTypeName);
 
     this.closeAndResetForm();
     return this.args.onSubmit();
@@ -216,6 +230,25 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @isFullWidth={{true}}
           >
             <:label>{{t "components.organizations.editing.administration-team.selector.label"}}</:label>
+          </PixSelect>
+
+          <PixSelect
+            required
+            @aria-required={{true}}
+            @requiredLabel={{t "common.forms.mandatory"}}
+            @errorMessage={{if
+              this.validator.errors.organizationLearnerTypeName
+              (t this.validator.errors.organizationLearnerTypeName)
+            }}
+            @validationStatus={{if this.validator.errors.organizationLearnerTypeName "error"}}
+            @options={{this.organizationLearnerTypeOptions}}
+            @value={{this.form.organizationLearnerTypeName}}
+            @onChange={{fn this.updateValue "organizationLearnerTypeName"}}
+            @hideDefaultOption={{true}}
+            @isFullWidth={{true}}
+            @placeholder={{t "components.organizations.editing.organization-learner-type.selector.placeholder"}}
+          >
+            <:label>{{t "components.organizations.editing.organization-learner-type.selector.label"}}</:label>
           </PixSelect>
 
           <PixSelect
@@ -420,6 +453,10 @@ const ORGANIZATION_FORM_VALIDATION_SCHEMA = Joi.object({
   countryCode: Joi.string().empty(['', null]).required().messages({
     'any.required': 'components.organizations.editing.country.selector.error-message',
     'string.empty': 'components.organizations.editing.country.selector.error-message',
+  }),
+  organizationLearnerTypeName: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.editing.organization-learner-type.selector.error-message',
+    'string.empty': 'components.organizations.editing.organization-learner-type.selector.error-message',
   }),
   identityProviderForCampaigns: Joi.string().empty(['', null]),
 });

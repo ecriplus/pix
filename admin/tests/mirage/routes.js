@@ -682,6 +682,27 @@ export default function routes() {
     };
   });
 
+  this.get('/admin/organization-learner-types', async () => {
+    return {
+      data: [
+        {
+          type: 'organization-learner-type',
+          id: '2',
+          attributes: {
+            name: 'Student',
+          },
+        },
+        {
+          type: 'organization-learner-type',
+          id: '1',
+          attributes: {
+            name: 'Teacher',
+          },
+        },
+      ],
+    };
+  });
+
   this.get('/admin/oidc/identity-providers', () => {
     return {
       data: [

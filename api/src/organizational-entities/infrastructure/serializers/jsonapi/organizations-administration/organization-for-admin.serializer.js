@@ -2,6 +2,7 @@ import { Serializer } from 'jsonapi-serializer';
 import _ from 'lodash';
 
 import { OrganizationForAdmin } from '../../../../domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../../../domain/models/OrganizationLearnerType.js';
 
 const serialize = function (organizations, meta) {
   return new Serializer('organizations', {
@@ -140,6 +141,10 @@ const deserialize = function (json) {
     features: attributes.features,
     tagIds,
     countryCode: attributes['country-code'] && parseInt(attributes['country-code']),
+    organizationLearnerType: new OrganizationLearnerType({
+      id: undefined,
+      name: attributes['organization-learner-type-name'],
+    }),
   });
   return organization;
 };
