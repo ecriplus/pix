@@ -76,7 +76,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"% maitrise de l\'ensemble des acquis du profil"' +
         '\n';
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -113,7 +113,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"% maitrise de l\'ensemble des acquis du profil"' +
         '\n';
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -154,7 +154,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"% maitrise de l\'ensemble des acquis du profil"' +
         '\n';
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -196,7 +196,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"% maitrise de l\'ensemble des acquis du profil"' +
         '\n';
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -240,7 +240,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '"% maitrise de l\'ensemble des acquis du profil"' +
         '\n';
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -283,7 +283,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '\n';
 
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -327,7 +327,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '\n';
 
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -368,7 +368,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '\n';
 
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 
@@ -412,7 +412,7 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
         '\n';
 
       //when
-      await campaignProfile.export();
+      await campaignProfile.export({});
 
       outputStream.end();
 

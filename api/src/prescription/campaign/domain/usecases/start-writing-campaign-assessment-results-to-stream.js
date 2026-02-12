@@ -48,8 +48,7 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   campaignRepository,
   campaignParticipationInfoRepository,
   organizationRepository,
-  knowledgeElementSnapshotRepository,
-  knowledgeElementRepository,
+  knowledgeElementForParticipationService,
   badgeAcquisitionRepository,
   targetProfileRepository,
   learningContentRepository,
@@ -57,6 +56,7 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   organizationFeatureApi,
   organizationLearnerImportFormatRepository,
   stageAcquisitionRepository,
+  improvementService,
 }) {
   let additionalHeaders = [];
   const campaign = await campaignRepository.get(campaignId);
@@ -65,9 +65,13 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
     throw new CampaignTypeError();
   }
 
-  const targetProfile = await targetProfileRepository.getByCampaignId({ campaignId: campaign.id });
+  const targetProfile = await targetProfileRepository.getByCampaignId({
+    campaignId: campaign.id,
+  });
   const learningContent = await learningContentRepository.findByCampaignId(campaign.id, locale);
-  const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
+  const stageCollection = await stageCollectionRepository.findStageCollection({
+    campaignId,
+  });
 
   const organization = await organizationRepository.get(campaign.organizationId);
   const campaignParticipationInfos = await campaignParticipationInfoRepository.findByCampaignId(campaign.id);
@@ -94,13 +98,13 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   // function, node will keep all the data in memory until the end of the
   // complete operation.
   campaignAssessment
-    .export(
+    .export({
       campaignParticipationInfos,
-      knowledgeElementRepository,
+      knowledgeElementForParticipationService,
       badgeAcquisitionRepository,
       stageAcquisitionRepository,
-      knowledgeElementSnapshotRepository,
-    )
+      improvementService,
+    })
     .then(() => {
       writableStream.end();
     })

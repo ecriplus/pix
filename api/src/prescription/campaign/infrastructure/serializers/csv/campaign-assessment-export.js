@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import * as improvementService from '../../../../../evaluation/domain/services/improvement-service.js';
 import {
   CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
   CONCURRENCY_HEAVY_OPERATIONS,
@@ -35,11 +36,12 @@ class CampaignAssessmentExport {
   }
 
   export(
-    campaignParticipationInfos,
-    knowledgeElementRepository,
-    badgeAcquisitionRepository,
-    stageAcquisitionRepository,
-    knowledgeElementSnapshotRepository,
+    {
+      campaignParticipationInfos,
+      knowledgeElementForParticipationService,
+      badgeAcquisitionRepository,
+      stageAcquisitionRepository,
+    },
     constants = {
       CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
       CONCURRENCY_HEAVY_OPERATIONS,
@@ -65,16 +67,24 @@ class CampaignAssessmentExport {
         });
 
         const sharedKnowledgeElementsByUserIdAndCompetenceId =
-          await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
-            sharedParticipations.map(({ campaignParticipationId }) => campaignParticipationId),
-          );
+          await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+            participationInfos: sharedParticipations.map(({ campaignParticipationId }) => {
+              return { campaignParticipationId };
+            }),
+            fetchFromSnapshot: true,
+          });
 
         const startedParticipations = campaignParticipationInfoChunk.filter(
           ({ isShared, isCompleted }) => !isShared && !isCompleted,
         );
-        const startedKnowledgeElementsByUserIdAndCompetenceId = await knowledgeElementRepository.findUniqByUserIds({
-          userIds: startedParticipations.map(({ userId }) => userId),
-        });
+
+        const startedKnowledgeElementsByUserIdAndCompetenceId =
+          await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+            participationInfos: startedParticipations.map(({ userId, campaignParticipationId }) => {
+              return { userId, campaignParticipationId };
+            }),
+            fetchFromSnapshot: this.campaign.isExam,
+          });
 
         const csvLines = campaignParticipationInfoChunk.map((campaignParticipationInfo) =>
           this.#buildCSVLineForParticipation({
@@ -82,8 +92,6 @@ class CampaignAssessmentExport {
             acquiredStages,
             campaignParticipationInfo,
             campaignParticipationInfoChunk,
-            knowledgeElementRepository,
-            knowledgeElementSnapshotRepository,
             sharedKnowledgeElementsByUserIdAndCompetenceId,
             startedKnowledgeElementsByUserIdAndCompetenceId,
           }),
@@ -120,11 +128,17 @@ class CampaignAssessmentExport {
       this.i18n.__('campaign-export.assessment.shared-on'),
 
       ...(this.stageCollection.hasStage
-        ? [this.i18n.__('campaign-export.assessment.success-rate', { value: this.stageCollection.totalStages - 1 })]
+        ? [
+            this.i18n.__('campaign-export.assessment.success-rate', {
+              value: this.stageCollection.totalStages - 1,
+            }),
+          ]
         : []),
 
       ..._.flatMap(this.targetProfile.badges, (badge) => [
-        this.i18n.__('campaign-export.assessment.thematic-result-name', { name: badge.title }),
+        this.i18n.__('campaign-export.assessment.thematic-result-name', {
+          name: badge.title,
+        }),
       ]),
 
       this.i18n.__('campaign-export.assessment.mastery-percentage-target-profile'),
@@ -143,8 +157,12 @@ class CampaignAssessmentExport {
 
   #competenceColumnHeaders() {
     return _.flatMap(this.competences, (competence) => [
-      this.i18n.__('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
-      this.i18n.__('campaign-export.assessment.skill.total-items', { name: competence.name }),
+      this.i18n.__('campaign-export.assessment.skill.mastery-percentage', {
+        name: competence.name,
+      }),
+      this.i18n.__('campaign-export.assessment.skill.total-items', {
+        name: competence.name,
+      }),
       this.i18n.__('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
     ]);
   }
@@ -152,7 +170,9 @@ class CampaignAssessmentExport {
   #areaColumnHeaders() {
     return _.flatMap(this.areas, (area) => [
       this.i18n.__('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
-      this.i18n.__('campaign-export.assessment.competence-area.total-items', { name: area.title }),
+      this.i18n.__('campaign-export.assessment.competence-area.total-items', {
+        name: area.title,
+      }),
       this.i18n.__('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
     ]);
   }
@@ -216,12 +236,27 @@ class CampaignAssessmentExport {
       );
     } else if (campaignParticipationInfo.isCompleted === false) {
       const othersResultInfo = startedKnowledgeElementsByUserIdAndCompetenceId.find(
-        (knowledElementForOtherParticipation) =>
-          campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId,
+        (knowledElementForOtherParticipation) => {
+          const assessmentValidation =
+            !this.campaign.isExam && campaignParticipationInfo.userId === knowledElementForOtherParticipation.userId;
+          const examValidation =
+            this.campaign.isExam &&
+            campaignParticipationInfo.campaignParticipationId ===
+              knowledElementForOtherParticipation.campaignParticipationId;
+
+          return assessmentValidation || examValidation;
+        },
       );
-      participantKnowledgeElementsByCompetenceId = this.learningContent.getKnowledgeElementsGroupedByCompetence(
-        othersResultInfo.knowledgeElements,
-      );
+
+      const filteredKnowledgeElements = improvementService.filterKnowledgeElements({
+        knowledgeElements: othersResultInfo.knowledgeElements,
+        isFromCampaign: true,
+        isImproving: true,
+        createdAt: campaignParticipationInfo.createdAt,
+      });
+
+      participantKnowledgeElementsByCompetenceId =
+        this.learningContent.getKnowledgeElementsGroupedByCompetence(filteredKnowledgeElements);
     }
     return participantKnowledgeElementsByCompetenceId;
   }

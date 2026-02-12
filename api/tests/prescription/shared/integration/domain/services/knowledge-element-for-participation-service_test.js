@@ -1,4 +1,7 @@
-import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  CampaignParticipationStatuses,
+  CampaignTypes,
+} from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import knowledgeElementForParticipationService from '../../../../../../src/prescription/shared/domain/services/knowledge-element-for-participation-service.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
@@ -858,6 +861,215 @@ describe('Integration | Prescription | Shared | Service | KnowledgeElementForPar
 
         // then
         expect(res).to.deep.equal([keA, keB]);
+      });
+    });
+  });
+
+  describe('#findUniqByUsersOrCampaignParticipationIds', function () {
+    context('When fetch data from snapshots', function () {
+      it('should return empty ke elements on started participation', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM });
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+          userId,
+        });
+
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          status: CampaignParticipationStatuses.STARTED,
+          userId: organizationLearner.userId,
+          organizationLearnerId: organizationLearner.id,
+          campaignId: campaign.id,
+        }).id;
+
+        databaseBuilder.factory.buildKnowledgeElement({
+          userId,
+          skillId: 'acquisABC123',
+          createdAt: new Date('2021-01-01'),
+        });
+
+        await databaseBuilder.commit();
+
+        const res = await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+          participationInfos: [
+            {
+              userId,
+              campaignParticipationId,
+            },
+          ],
+          fetchFromSnapshot: true,
+        });
+
+        // then
+        expect(res).to.deep.equal([
+          {
+            campaignParticipationId,
+            knowledgeElements: [],
+          },
+        ]);
+      });
+
+      it('should return knowledge element saved in snapshots only', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.EXAM }).id;
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+        }).id;
+        const assessmentId = databaseBuilder.factory.buildAssessment({ campaignParticipationId }).id;
+        const competenceEvaluationAssessmentId = databaseBuilder.factory.buildAssessment({
+          type: Assessment.types.COMPETENCE_EVALUATION,
+        }).id;
+        const answerId = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+        const otherAnswerId = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+        const domainKEOutsideOfParticipation = domainBuilder.buildKnowledgeElement({
+          id: 1,
+          userId,
+          skillId: 'acquisABC123',
+          answerId: otherAnswerId,
+          assessmentId: competenceEvaluationAssessmentId,
+          createdAt: new Date('2021-01-01'),
+        });
+        const domainKEInParticipation = domainBuilder.buildKnowledgeElement({
+          id: 'not_a_real_ke',
+          userId,
+          skillId: 'acquisDEF456',
+          answerId,
+          assessmentId,
+          createdAt: new Date('2022-01-01'),
+        });
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId,
+          snapshot: new KnowledgeElementCollection([domainKEInParticipation]).toSnapshot(),
+        });
+
+        databaseBuilder.factory.buildKnowledgeElement(domainKEOutsideOfParticipation);
+
+        await databaseBuilder.commit();
+
+        const res = await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+          participationInfos: [
+            {
+              userId,
+              campaignParticipationId,
+            },
+          ],
+          fetchFromSnapshot: true,
+        });
+
+        // then
+        expect(res).to.deep.equal([
+          {
+            campaignParticipationId,
+            knowledgeElements: [
+              {
+                ...domainKEInParticipation,
+                answerId: undefined,
+                assessmentId: undefined,
+                id: undefined,
+                userId: undefined,
+              },
+            ],
+          },
+        ]);
+      });
+    });
+
+    context('When fetch data from knowledge element', function () {
+      it('should return empty ke elements on started participation', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaign = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT });
+        const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+          userId,
+        });
+
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          status: CampaignParticipationStatuses.STARTED,
+          userId: organizationLearner.userId,
+          organizationLearnerId: organizationLearner.id,
+          campaignId: campaign.id,
+        }).id;
+
+        await databaseBuilder.commit();
+
+        const res = await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+          participationInfos: [
+            {
+              userId,
+              campaignParticipationId,
+            },
+          ],
+          fetchFromSnapshot: false,
+        });
+
+        // then
+        expect(res).to.deep.equal([
+          {
+            userId,
+            knowledgeElements: [],
+          },
+        ]);
+      });
+
+      it('should return knowledge element saved in knowledge element only', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const campaignId = databaseBuilder.factory.buildCampaign({ type: CampaignTypes.ASSESSMENT }).id;
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+        }).id;
+        const assessmentId = databaseBuilder.factory.buildAssessment({ campaignParticipationId }).id;
+        const competenceEvaluationAssessmentId = databaseBuilder.factory.buildAssessment({
+          type: Assessment.types.COMPETENCE_EVALUATION,
+        }).id;
+        const answerId = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+        const otherAnswerId = databaseBuilder.factory.buildAnswer({ assessmentId }).id;
+        const domainKEOutsideOfParticipation = domainBuilder.buildKnowledgeElement({
+          id: 1,
+          userId,
+          skillId: 'acquisABC123',
+          answerId: otherAnswerId,
+          assessmentId: competenceEvaluationAssessmentId,
+          createdAt: new Date('2021-01-01'),
+        });
+        const domainKEInParticipation = domainBuilder.buildKnowledgeElement({
+          id: 2,
+          userId,
+          skillId: 'acquisDEF456',
+          answerId,
+          assessmentId,
+          createdAt: new Date('2022-01-01'),
+        });
+        databaseBuilder.factory.buildKnowledgeElementSnapshot({
+          campaignParticipationId,
+          snapshot: new KnowledgeElementCollection([domainKEInParticipation]).toSnapshot(),
+        });
+
+        databaseBuilder.factory.buildKnowledgeElement(domainKEInParticipation);
+        databaseBuilder.factory.buildKnowledgeElement(domainKEOutsideOfParticipation);
+
+        await databaseBuilder.commit();
+
+        const res = await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+          participationInfos: [
+            {
+              userId,
+              campaignParticipationId,
+            },
+          ],
+          fetchFromSnapshot: false,
+        });
+
+        // then
+        expect(res).to.deep.equal([
+          {
+            userId,
+            knowledgeElements: [domainKEInParticipation, domainKEOutsideOfParticipation],
+          },
+        ]);
       });
     });
   });

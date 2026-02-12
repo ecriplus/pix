@@ -75,6 +75,18 @@ class KnowledgeElementForParticipationService {
 
     throw new Error(`find knowledge-elements for campaign of type ${campaign.type} not implemented`);
   }
+
+  async findUniqByUsersOrCampaignParticipationIds({ participationInfos, fetchFromSnapshot }) {
+    if (!fetchFromSnapshot) {
+      return await this.knowledgeElementRepository.findUniqByUserIds({
+        userIds: participationInfos.map(({ userId }) => userId),
+      });
+    }
+
+    return await this.knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
+      participationInfos.map(({ campaignParticipationId }) => campaignParticipationId),
+    );
+  }
 }
 
 const knowledgeElementService = new KnowledgeElementForParticipationService();
