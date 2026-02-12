@@ -48,7 +48,6 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
   campaignRepository,
   campaignParticipationInfoRepository,
   organizationRepository,
-  knowledgeElementSnapshotRepository,
   knowledgeElementForParticipationService,
   badgeAcquisitionRepository,
   targetProfileRepository,
@@ -66,9 +65,13 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
     throw new CampaignTypeError();
   }
 
-  const targetProfile = await targetProfileRepository.getByCampaignId({ campaignId: campaign.id });
+  const targetProfile = await targetProfileRepository.getByCampaignId({
+    campaignId: campaign.id,
+  });
   const learningContent = await learningContentRepository.findByCampaignId(campaign.id, locale);
-  const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
+  const stageCollection = await stageCollectionRepository.findStageCollection({
+    campaignId,
+  });
 
   const organization = await organizationRepository.get(campaign.organizationId);
   const campaignParticipationInfos = await campaignParticipationInfoRepository.findByCampaignId(campaign.id);
@@ -100,7 +103,6 @@ const startWritingCampaignAssessmentResultsToStream = async function ({
       knowledgeElementForParticipationService,
       badgeAcquisitionRepository,
       stageAcquisitionRepository,
-      knowledgeElementSnapshotRepository,
       improvementService,
     })
     .then(() => {

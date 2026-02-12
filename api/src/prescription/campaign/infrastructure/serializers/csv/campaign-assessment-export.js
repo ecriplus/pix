@@ -41,7 +41,6 @@ class CampaignAssessmentExport {
       knowledgeElementForParticipationService,
       badgeAcquisitionRepository,
       stageAcquisitionRepository,
-      knowledgeElementSnapshotRepository,
     },
     constants = {
       CHUNK_SIZE_CAMPAIGN_RESULT_PROCESSING,
@@ -68,9 +67,12 @@ class CampaignAssessmentExport {
         });
 
         const sharedKnowledgeElementsByUserIdAndCompetenceId =
-          await knowledgeElementSnapshotRepository.findCampaignParticipationKnowledgeElementSnapshots(
-            sharedParticipations.map(({ campaignParticipationId }) => campaignParticipationId),
-          );
+          await knowledgeElementForParticipationService.findUniqByUsersOrCampaignParticipationIds({
+            participationInfos: sharedParticipations.map(({ campaignParticipationId }) => {
+              return { campaignParticipationId };
+            }),
+            fetchFromSnapshot: true,
+          });
 
         const startedParticipations = campaignParticipationInfoChunk.filter(
           ({ isShared, isCompleted }) => !isShared && !isCompleted,
@@ -126,11 +128,17 @@ class CampaignAssessmentExport {
       this.i18n.__('campaign-export.assessment.shared-on'),
 
       ...(this.stageCollection.hasStage
-        ? [this.i18n.__('campaign-export.assessment.success-rate', { value: this.stageCollection.totalStages - 1 })]
+        ? [
+            this.i18n.__('campaign-export.assessment.success-rate', {
+              value: this.stageCollection.totalStages - 1,
+            }),
+          ]
         : []),
 
       ..._.flatMap(this.targetProfile.badges, (badge) => [
-        this.i18n.__('campaign-export.assessment.thematic-result-name', { name: badge.title }),
+        this.i18n.__('campaign-export.assessment.thematic-result-name', {
+          name: badge.title,
+        }),
       ]),
 
       this.i18n.__('campaign-export.assessment.mastery-percentage-target-profile'),
@@ -149,8 +157,12 @@ class CampaignAssessmentExport {
 
   #competenceColumnHeaders() {
     return _.flatMap(this.competences, (competence) => [
-      this.i18n.__('campaign-export.assessment.skill.mastery-percentage', { name: competence.name }),
-      this.i18n.__('campaign-export.assessment.skill.total-items', { name: competence.name }),
+      this.i18n.__('campaign-export.assessment.skill.mastery-percentage', {
+        name: competence.name,
+      }),
+      this.i18n.__('campaign-export.assessment.skill.total-items', {
+        name: competence.name,
+      }),
       this.i18n.__('campaign-export.assessment.skill.items-successfully-completed', { name: competence.name }),
     ]);
   }
@@ -158,7 +170,9 @@ class CampaignAssessmentExport {
   #areaColumnHeaders() {
     return _.flatMap(this.areas, (area) => [
       this.i18n.__('campaign-export.assessment.competence-area.mastery-percentage', { name: area.title }),
-      this.i18n.__('campaign-export.assessment.competence-area.total-items', { name: area.title }),
+      this.i18n.__('campaign-export.assessment.competence-area.total-items', {
+        name: area.title,
+      }),
       this.i18n.__('campaign-export.assessment.competence-area.items-successfully-completed', { name: area.title }),
     ]);
   }
