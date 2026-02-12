@@ -233,7 +233,8 @@
                     }
                   }
                 ],
-                "solution": "4"
+                "solution": "4",
+                "hasShortProposals": false
               }
             }
           ]
@@ -423,7 +424,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -449,7 +451,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }

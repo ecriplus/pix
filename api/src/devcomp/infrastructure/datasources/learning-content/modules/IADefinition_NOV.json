@@ -689,7 +689,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -733,7 +734,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -777,7 +779,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -824,7 +827,8 @@
                       "diagnosis": "<p>Vous n’êtes pas sûr, mais il y a de grandes chances que ce soit le cas. &nbsp;L’intelligence artificielle est présente&nbsp;dans de nombreux appareils et services de notre quotidien.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

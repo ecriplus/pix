@@ -83,7 +83,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -149,7 +150,8 @@
                       "diagnosis": "<p>Les trois termes proposés ici sont <strong>souvent utilisés pour désigner la même chose</strong> ! Cela signifie que deux étapes d’authentification sont nécessaires pour prouver l’identité de l’utilisateur.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]
@@ -243,7 +245,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -290,7 +293,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -337,7 +341,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -434,7 +439,8 @@
                           "diagnosis": "<p>Un mot de passe peut être partagé, deviné ou réutilisé par plusieurs personnes. Il peut aussi être oublié, mais il reste généralement facile à modifier.</p>"
                         }
                       },
-                      "solutions": ["1", "2"]
+                      "solutions": ["1", "2"],
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -481,7 +487,8 @@
                           "diagnosis": "<p>Un code SMS dépend du téléphone et du réseau. En cas de perte ou de vol du téléphone, une autre personne peut recevoir le code, mais ce moyen peut être remplacé.</p>"
                         }
                       },
-                      "solutions": ["2", "3"]
+                      "solutions": ["2", "3"],
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -528,7 +535,8 @@
                           "diagnosis": "Une empreinte digitale ne peut pas se modifier comme un mot de passe. Elle est propre à la personne et ne peut pas être oubliée, mais elle peut devenir inutilisable en cas de blessure."
                         }
                       },
-                      "solutions": ["3", "4"]
+                      "solutions": ["3", "4"],
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -621,7 +629,8 @@
                     "diagnosis": "<p>Beaucoup de services en ligne imposent l’authentification multifacteur. Ce sont notamment des services qui comportent <strong>des données personnelles ou des informations sensibles</strong> (informations bancaires, médicales, administratives, etc.)</p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4", "5", "6", "7", "8"]
+                "solutions": ["1", "2", "3", "4", "5", "6", "7", "8"],
+                "hasShortProposals": false
               }
             }
           ]
@@ -713,7 +722,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -781,7 +791,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]

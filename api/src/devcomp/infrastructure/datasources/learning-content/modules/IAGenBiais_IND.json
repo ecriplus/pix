@@ -100,7 +100,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -180,7 +181,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -222,7 +224,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -264,7 +267,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -365,7 +369,8 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "1",
+                "hasShortProposals": false
               }
             }
           ]
@@ -481,7 +486,8 @@
                           }
                         }
                       ],
-                      "solution": "4"
+                      "solution": "4",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -542,7 +548,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -611,7 +618,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -917,7 +925,8 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple ou vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": ["2", "4"]
+                "solutions": ["2", "4"],
+                "hasShortProposals": false
               }
             }
           ]
@@ -959,7 +968,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -992,7 +1002,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -1061,7 +1072,8 @@
                       "diagnosis": "<p>C’est une bonne idée ! </p><p>Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]

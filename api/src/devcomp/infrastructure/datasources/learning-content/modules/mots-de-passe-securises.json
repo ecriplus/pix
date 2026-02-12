@@ -373,7 +373,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -401,7 +402,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -429,7 +431,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -553,7 +556,8 @@
                     "diagnosis": "<p>Certaines bonnes réponses n'ont peut-être pas été sélectionnées.</p><p> Un mot de passe long est plus solide. Se servir d'une phrase permet de mieux s'en souvenir.</p>"
                   }
                 },
-                "solutions": ["1", "4"]
+                "solutions": ["1", "4"],
+                "hasShortProposals": false
               }
             }
           ]

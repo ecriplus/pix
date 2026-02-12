@@ -63,7 +63,8 @@
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   }
-                ]
+                ],
+                "hasShortProposals": false
               }
             }
           ]
@@ -143,7 +144,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -185,7 +187,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -227,7 +230,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -269,7 +273,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -704,7 +709,8 @@
                     "diagnosis": "<p>Pour vérifier la légitimité des adresses mail, regardez bien des deux côtés de l’arobase. Vous pouvez réessayer.</p>"
                   }
                 },
-                "solutions": ["2", "3"]
+                "solutions": ["2", "3"],
+                "hasShortProposals": false
               }
             }
           ]
@@ -799,7 +805,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]

@@ -83,7 +83,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -175,7 +176,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -229,7 +231,8 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "3",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -283,7 +286,8 @@
                           }
                         }
                       ],
-                      "solution": "1"
+                      "solution": "1",
+                      "hasShortProposals": false
                     }
                   ]
                 },
@@ -337,7 +341,8 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "2",
+                      "hasShortProposals": false
                     }
                   ]
                 }
@@ -515,7 +520,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
@@ -650,7 +656,8 @@
                     }
                   }
                 ],
-                "solution": "5"
+                "solution": "5",
+                "hasShortProposals": false
               }
             }
           ]
@@ -838,7 +845,8 @@
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "2",
+                "hasShortProposals": false
               }
             }
           ]
@@ -888,7 +896,8 @@
                     }
                   }
                 ],
-                "solution": "4"
+                "solution": "4",
+                "hasShortProposals": false
               }
             }
           ]
@@ -948,7 +957,8 @@
                     }
                   }
                 ],
-                "solution": "3"
+                "solution": "3",
+                "hasShortProposals": false
               }
             }
           ]
