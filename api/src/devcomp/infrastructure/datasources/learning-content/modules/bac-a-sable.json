@@ -84,7 +84,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<span>Pix est un</span>"
+                          "content": "<h1>Pix est un</h1>"
                         },
                         {
                           "input": "pix-name",
@@ -99,7 +99,7 @@
                         },
                         {
                           "type": "text",
-                          "content": "<span>d'intérêt public qui a été créée en</span>"
+                          "content": "<p>d'intérêt public qui a été créée en</p>"
                         },
                         {
                           "input": "pix-birth",

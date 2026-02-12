@@ -189,7 +189,10 @@ export default class ModuleQrocm extends ModuleElement {
               {{htmlUnsafe block.content}}
             {{/if}}
             {{#if (eq block.type "input")}}
-              <div class="element-qrocm-proposals__input element-qrocm-proposals__input--{{block.display}}">
+              <div
+                class="element-qrocm-proposals__input
+                  {{if (eq block.display 'block') 'element-qrocm-proposals__input--block'}}"
+              >
                 <PixInput
                   type={{block.inputType}}
                   @value={{get this.selectedValues block.input}}
@@ -204,7 +207,10 @@ export default class ModuleQrocm extends ModuleElement {
                 </PixInput>
               </div>
             {{else if (eq block.type "select")}}
-              <div class="element-qrocm-proposals__input element-qrocm-proposals__input--{{block.display}}">
+              <div
+                class="element-qrocm-proposals__input
+                  {{if (eq block.display 'block') 'element-qrocm-proposals__input--block'}}"
+              >
                 <PixSelect
                   @value={{get this.selectedValues block.input}}
                   @placeholder={{block.placeholder}}
