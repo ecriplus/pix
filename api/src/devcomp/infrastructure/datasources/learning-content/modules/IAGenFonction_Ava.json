@@ -1006,6 +1006,107 @@
               }
             }
           ]
+        },
+        {
+          "id": "c8bfd492-0b80-4521-93d1-f924bcf53125",
+          "type": "activity",
+          "title": "Comprendre le fonctionnement d’un appel d’outils lors de la génération d’une réponse par un logiciel d’IA générative",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6ec966d3-a57e-4796-b371-2bd7bd7722cd",
+                "type": "qrocm",
+                "instruction": "Classez dans l’ordre les étapes de la génération d’une réponse par un logiciel d’IA générative.",
+                "proposals": [
+                  {
+                    "input": "classementetape1",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur;"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "input": "classementetape2",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Une requête est envoyée à un outil tiers."
+                      },
+                      {
+                        "id": "5",
+                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                      },
+                      {
+                        "id": "2",
+                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                      },
+                      {
+                        "id": "1",
+                        "content": "L’utilisateur envoie un prompt."
+                      },
+                      {
+                        "id": "6",
+                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
+                      },
+                      {
+                        "id": "4",
+                        "content": "L’outil tiers envoie la réponse à la requête."
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "",
+                    "diagnosis": ""
+                  },
+                  "invalid": {
+                    "state": "",
+                    "diagnosis": ""
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     }
