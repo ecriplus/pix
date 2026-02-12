@@ -20,7 +20,6 @@ import * as knowledgeElementRepository from '../../../../shared/infrastructure/r
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as membershipRepository from '../../../../team/infrastructure/repositories/membership.repository.js';
-import * as campaignAnalysisRepository from '../../../campaign-participation/infrastructure/repositories/campaign-analysis-repository.js';
 import * as campaignParticipationRepository from '../../../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import * as organizationLearnerImportFormatRepository from '../../../learner-management/infrastructure/repositories/organization-learner-import-format-repository.js';
 import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
@@ -52,7 +51,6 @@ const dependencies = {
   badgeAcquisitionRepository,
   badgeRepository,
   campaignAdministrationRepository,
-  campaignAnalysisRepository,
   campaignAssessmentParticipationResultListRepository,
   campaignCollectiveResultRepository,
   campaignCreatorRepository,
