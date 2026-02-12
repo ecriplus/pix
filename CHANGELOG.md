@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.329.0](https://github.com/1024pix/pix/compare/v5.328.0...v5.329.0) (2026-02-12)
+
+### :rocket: Amélioration
+
+- [#15090](https://github.com/1024pix/pix/pull/15090) Alerter l'utilisateur qui supprime un profil cible attaché à un parcours combiné (PIX-21472). 
+- [#15092](https://github.com/1024pix/pix/pull/15092) modifs virus nov relecture marine 
+- [#15061](https://github.com/1024pix/pix/pull/15061) Remplir les champs de la page de création d'un contenu formatif lorsqu'il concerne un module sur Pix Admin (PIX-21237) 
+
+### :bug: Correction
+
+- [#15036](https://github.com/1024pix/pix/pull/15036) Corriger la progression dans le téléchargement des csv sur PixOrga (PIX-21433). 
+
+### :building_construction: Tech
+
+- [#15030](https://github.com/1024pix/pix/pull/15030) Supprime un index inutile dans la table "certification-centers" sur la colonne "archivedBy" 
+- [#15032](https://github.com/1024pix/pix/pull/15032) Supprime un index inutile dans la table "sessions" sur la colonne "accessCode" 
+
+### :arrow_up: Montée de version
+
+- [#15093](https://github.com/1024pix/pix/pull/15093) Update dependency ember-cli to ~6.10.0 (admin) 
+- [#15096](https://github.com/1024pix/pix/pull/15096) Update dependency nodemailer to v8 (api) 
+- [#15094](https://github.com/1024pix/pix/pull/15094) Update dependency oxfmt to ^0.28.0 (api) 
+- [#15097](https://github.com/1024pix/pix/pull/15097) Update dependency p-queue to v9 (certif) 
+- [#15101](https://github.com/1024pix/pix/pull/15101) Update dependency p-queue to v9 (mon-pix) 
+- [#15102](https://github.com/1024pix/pix/pull/15102) Update dependency p-queue to v9 (orga) 
+- [#15077](https://github.com/1024pix/pix/pull/15077) Update dependency stylelint to v17 (admin) 
+- [#15098](https://github.com/1024pix/pix/pull/15098) Update dependency vitest to v4 (audit-logger) 
+- [#15095](https://github.com/1024pix/pix/pull/15095) Update dependency webpack to v5.105.0 (junior)
+
 # [5.328.0](https://github.com/1024pix/pix/compare/v5.327.0...v5.328.0) (2026-02-11)
 
 ### :rocket: Amélioration
