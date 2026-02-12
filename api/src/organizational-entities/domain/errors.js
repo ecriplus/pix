@@ -98,6 +98,18 @@ class FeatureParamsNotProcessable extends DomainError {
   }
 }
 
+class OrganizationLearnerTypeNotFound extends DomainError {
+  constructor({
+    code = 'ORGANIZATION_LEARNER_TYPE_NOT_FOUND',
+    message = 'Organization learner type does not exist',
+    meta,
+  } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 class UnableToDetachParentOrganizationFromChildOrganization extends DomainError {
   constructor({
     code = 'UNABLE_TO_DETACH_PARENT_ORGANIZATION_FROM_CHILD_ORGANIZATION',
@@ -120,6 +132,7 @@ export {
   FeatureNotFound,
   FeatureParamsNotProcessable,
   OrganizationBatchUpdateError,
+  OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,

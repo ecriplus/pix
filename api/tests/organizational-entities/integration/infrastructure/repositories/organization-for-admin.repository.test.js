@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { repositories } from '../../../../../src/organizational-entities/infrastructure/repositories/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -16,12 +17,16 @@ import {
 } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | organization-for-admin', function () {
-  let clock, byDefaultFeatureId, administrationTeam;
+  let clock, byDefaultFeatureId, administrationTeam, organizationLearnerType, domainOrganizationLearnerType;
   const now = new Date('2022-02-02');
 
   beforeEach(async function () {
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
     administrationTeam = databaseBuilder.factory.buildAdministrationTeam({ name: 'ma team' });
+    organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+    domainOrganizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType({
+      ...organizationLearnerType,
+    });
     await databaseBuilder.commit();
   });
 
@@ -854,7 +859,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         identityProviderForCampaigns: 'genericOidcProviderCode',
         administrationTeamId: administrationTeam.id,
         administrationTeamName: administrationTeam.name,
-        organizationLearnerTypeName: organizationLearnerType.name,
+        organizationLearnerType: organizationLearnerType,
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: false },
           [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'BIDON' } },
@@ -900,6 +905,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           identityProviderForCampaigns: 'genericOidcProviderCode',
           administrationTeamId: administrationTeam.id,
           countryCode: 99100,
+          organizationLearnerTypeId: organizationLearnerType.id,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -960,7 +966,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
-          organizationLearnerTypeName: `Type pour organisation ${organization.id}`,
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -988,6 +994,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           identityProviderForCampaigns: 'genericOidcProviderCode',
           administrationTeamId: administrationTeam.id,
           countryCode: 99100,
+          organizationLearnerTypeId: organizationLearnerType.id,
         });
 
         databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -1071,7 +1078,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
-          organizationLearnerTypeName: `Type pour organisation ${organization.id}`,
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -1132,6 +1139,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           archivedAt,
           administrationTeamId: administrationTeam.id,
           countryCode: 99100,
+          organizationLearnerTypeId: organizationLearnerType.id,
         });
 
         await databaseBuilder.commit();
@@ -1177,7 +1185,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamId: administrationTeam.id,
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
-          organizationLearnerTypeName: `Type pour organisation ${insertedOrganization.id}`,
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         expect(foundOrganizationForAdmin).to.deepEqualInstance(expectedOrganizationForAdmin);
       });
@@ -1706,6 +1714,39 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       // then
       const { count: nbOrganizationsAfterUpdate } = await knex('organizations').count('*').first();
       expect(nbOrganizationsAfterUpdate).to.equal(nbOrganizationsBeforeUpdate);
+    });
+
+    it('should update learner type name', async function () {
+      // given
+      const firstOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'Ancien Learner Type',
+      });
+      const secondOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        name: 'Nouveau Learner Type',
+      });
+      const organization = databaseBuilder.factory.buildOrganization({
+        organizationLearnerTypeId: firstOrganizationLearnerType.id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const organizationToUpdate = new OrganizationForAdmin({
+        id: organization.id,
+        organizationLearnerType: new OrganizationLearnerType({
+          id: secondOrganizationLearnerType.id,
+          name: secondOrganizationLearnerType.name,
+        }),
+      });
+      await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
+
+      // then
+      const { organizationLearnerTypeId } = await knex('organizations')
+        .where({
+          id: organization.id,
+        })
+        .first();
+      expect(organizationLearnerTypeId).to.equal(secondOrganizationLearnerType.id);
     });
   });
 });

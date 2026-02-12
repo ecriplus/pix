@@ -8,6 +8,11 @@ const serialize = function (organizations, meta) {
     transform(record) {
       const dataProtectionOfficer = record.dataProtectionOfficer;
 
+      const organizationLearnerTypeName = record?.organizationLearnerType?.name;
+      if (organizationLearnerTypeName) {
+        record.organizationLearnerTypeName = organizationLearnerTypeName;
+      }
+
       if (dataProtectionOfficer) {
         record.dataProtectionOfficerFirstName = dataProtectionOfficer.firstName;
         record.dataProtectionOfficerLastName = dataProtectionOfficer.lastName;

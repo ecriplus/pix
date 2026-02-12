@@ -4,6 +4,7 @@ import {
   TagNotFoundError,
   UnableToDetachParentOrganizationFromChildOrganization,
 } from '../../../../src/organizational-entities/domain/errors.js';
+import { OrganizationLearnerTypeNotFound } from '../../../../src/organizational-entities/domain/errors.js';
 import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
 import { DomainErrorMappingConfiguration } from '../../../../src/shared/application/models/domain-error-mapping-configuration.js';
 import { expect } from '../../../test-helper.js';
@@ -70,6 +71,25 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
       // then
       expect(error).to.be.instanceOf(HttpErrors.NotFoundError);
       expect(error.message).to.equal('Country not found');
+      expect(error.meta).to.equal(meta);
+    });
+  });
+
+  context('when mapping "OrganizationLearnerTypeNotFound"', function () {
+    it('should return a UnprocessableEntityError Http Error', function () {
+      // given
+      const httpErrorMapper = organizationalEntitiesDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === OrganizationLearnerTypeNotFound.name,
+      );
+
+      const meta = { organizationLearnerTypeName: 'Student' };
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new OrganizationLearnerTypeNotFound({ meta }));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
+      expect(error.message).to.equal('Organization learner type does not exist');
       expect(error.meta).to.equal(meta);
     });
   });

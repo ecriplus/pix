@@ -1,5 +1,6 @@
 import { OrganizationBatchUpdateDTO } from '../../../../../src/organizational-entities/domain/dtos/OrganizationBatchUpdateDTO.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
@@ -747,6 +748,42 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(givenOrganization.features).to.deep.includes({
         [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
       });
+    });
+
+    it('updates organization learner type', function () {
+      // given
+      const formerOrganizationLearnerType = new OrganizationLearnerType({ id: 1, name: 'Student' });
+      const newOrganizationLearnerType = new OrganizationLearnerType({ id: 2, name: 'Professional' });
+      const givenOrganization = new OrganizationForAdmin({
+        organizationLearnerType: formerOrganizationLearnerType,
+      });
+
+      // when
+      givenOrganization.updateWithDataProtectionOfficerAndTags({
+        organizationLearnerType: newOrganizationLearnerType,
+        features,
+      });
+
+      // then
+      expect(givenOrganization.organizationLearnerType).to.deep.equal(newOrganizationLearnerType);
+    });
+
+    it('does not update organization learner type to undefined', function () {
+      // given
+      const formerOrganizationLearnerType = new OrganizationLearnerType({ id: 1, name: 'Student' });
+      const newOrganizationLearnerType = undefined;
+      const givenOrganization = new OrganizationForAdmin({
+        organizationLearnerType: formerOrganizationLearnerType,
+      });
+
+      // when
+      givenOrganization.updateWithDataProtectionOfficerAndTags({
+        organizationLearnerType: newOrganizationLearnerType,
+        features,
+      });
+
+      // then
+      expect(givenOrganization.organizationLearnerType).to.deep.equal(formerOrganizationLearnerType);
     });
   });
 

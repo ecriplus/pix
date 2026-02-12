@@ -1,6 +1,7 @@
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -23,6 +24,11 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
 
+    const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+      id: 1,
+      name: 'New Type',
+    });
+
     const newCountry = databaseBuilder.factory.buildCertificationCpfCountry({
       code: 99102,
       originalName: 'Islande',
@@ -31,16 +37,20 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     await databaseBuilder.commit();
 
-    const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+    const organizationNewInformation = domainBuilder.buildOrganizationForAdmin({
       id: organizationId,
       name: "Nouveau nom d'organization",
       administrationTeamId: newAdministrationTeamId,
       countryCode: newCountry.code,
+      organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+        id: null,
+        name: newOrganizationLearnerType.name,
+      }),
     });
 
     // when
     const updatedOrganization = await usecases.updateOrganizationInformation({
-      organization: organizationNewInformations,
+      organization: organizationNewInformation,
     });
 
     // then
@@ -48,6 +58,32 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization.name).to.equal("Nouveau nom d'organization");
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
     expect(updatedOrganization.countryCode).to.equal(99102);
+    expect(updatedOrganization.organizationLearnerType.id).to.equal(newOrganizationLearnerType.id);
+  });
+
+  context('when organization learner type does not exist', function () {
+    it('throws an OrganizationLearnerTypeNotFound error', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      await databaseBuilder.commit();
+
+      const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+        id: organizationId,
+        organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+          name: 'Student',
+        }),
+      });
+
+      // when
+      const error = await catchErr(usecases.updateOrganizationInformation)({
+        organization: organizationNewInformations,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(OrganizationLearnerTypeNotFound);
+      expect(error.meta.organizationLearnerTypeName).to.equal(organizationNewInformations.organizationLearnerType.name);
+    });
   });
 
   context('when administration team does not exist', function () {

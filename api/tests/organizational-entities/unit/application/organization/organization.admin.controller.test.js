@@ -1,6 +1,5 @@
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import {
   domainBuilder,
   expect,
@@ -179,16 +178,12 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
       const dependencies = {
         organizationForAdminSerializer: organizationForAdminSerializerStub,
       };
-      const domainTransaction = Symbol('domainTransaction');
-      sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
-        return callback(domainTransaction);
-      });
 
       dependencies.organizationForAdminSerializer.deserialize
         .withArgs(request.payload)
         .returns(organizationDeserialized);
       usecases.updateOrganizationInformation
-        .withArgs({ organization: organizationDeserialized, domainTransaction })
+        .withArgs({ organization: organizationDeserialized })
         .resolves(updatedOrganization);
       dependencies.organizationForAdminSerializer.serialize
         .withArgs(updatedOrganization)

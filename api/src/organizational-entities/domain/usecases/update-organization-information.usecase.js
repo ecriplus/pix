@@ -1,15 +1,33 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { AdministrationTeamNotFound, CountryNotFoundError } from '../errors.js';
+import { AdministrationTeamNotFound, CountryNotFoundError, OrganizationLearnerTypeNotFound } from '../errors.js';
 
 const updateOrganizationInformation = withTransaction(async function ({
   organization,
   organizationForAdminRepository,
   tagRepository,
   administrationTeamRepository,
+  organizationLearnerTypeRepository,
   countryRepository,
 }) {
   const existingOrganization = await organizationForAdminRepository.get({ organizationId: organization.id });
+
+  let organizationLearnerType;
+  if (organization.organizationLearnerType) {
+    try {
+      organizationLearnerType = await organizationLearnerTypeRepository.getByName(
+        organization.organizationLearnerType.name,
+      );
+      organization.organizationLearnerType = organizationLearnerType;
+    } catch {
+      throw new OrganizationLearnerTypeNotFound({
+        meta: {
+          organizationLearnerTypeName: organization.organizationLearnerType.name,
+        },
+      });
+    }
+  }
+
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);
 
   await _checkAdministrationTeamExists(organization.administrationTeamId, administrationTeamRepository);

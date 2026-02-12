@@ -54,7 +54,7 @@ class OrganizationForAdmin {
     administrationTeamName,
     countryCode,
     countryName,
-    organizationLearnerTypeName,
+    organizationLearnerType,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -85,7 +85,7 @@ class OrganizationForAdmin {
     this.tagIds = tagIds;
     this.administrationTeamId = administrationTeamId;
     this.administrationTeamName = administrationTeamName;
-    this.organizationLearnerTypeName = organizationLearnerTypeName;
+    this.organizationLearnerType = organizationLearnerType;
 
     // @deprecated you should use value stored in features property
     this.isManagingStudents = isManagingStudents;
@@ -244,6 +244,9 @@ class OrganizationForAdmin {
     this.tagsToRemove = differenceBy(this.tags, tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     if (organization.administrationTeamId) this.administrationTeamId = organization.administrationTeamId;
     if (organization.countryCode) this.countryCode = organization.countryCode;
+    if (organization.organizationLearnerType) {
+      this.organizationLearnerType = organization.organizationLearnerType;
+    }
   }
 
   setCountryName(countryName) {
