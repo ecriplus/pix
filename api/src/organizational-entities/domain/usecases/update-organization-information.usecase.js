@@ -1,6 +1,6 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { AdministrationTeamNotFound, CountryNotFoundError } from '../errors.js';
+import { AdministrationTeamNotFound, CountryNotFoundError, OrganizationLearnerTypeNotFound } from '../errors.js';
 
 const updateOrganizationInformation = withTransaction(async function ({
   organization,
@@ -14,10 +14,18 @@ const updateOrganizationInformation = withTransaction(async function ({
 
   let organizationLearnerType;
   if (organization.organizationLearnerType) {
-    organizationLearnerType = await organizationLearnerTypeRepository.getByName(
-      organization.organizationLearnerType.name,
-    );
-    organization.organizationLearnerType = organizationLearnerType;
+    try {
+      organizationLearnerType = await organizationLearnerTypeRepository.getByName(
+        organization.organizationLearnerType.name,
+      );
+      organization.organizationLearnerType = organizationLearnerType;
+    } catch {
+      throw new OrganizationLearnerTypeNotFound({
+        meta: {
+          organizationLearnerTypeName: organization.organizationLearnerType.name,
+        },
+      });
+    }
   }
 
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);

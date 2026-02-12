@@ -9,6 +9,7 @@ import {
   FeatureNotFound,
   FeatureParamsNotProcessable,
   OrganizationBatchUpdateError,
+  OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
@@ -26,6 +27,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   },
   {
     name: OrganizationNotFound.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
+  },
+  {
+    name: OrganizationLearnerTypeNotFound.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
   {

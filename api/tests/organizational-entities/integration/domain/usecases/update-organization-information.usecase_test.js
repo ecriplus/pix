@@ -1,6 +1,7 @@
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -58,6 +59,31 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
     expect(updatedOrganization.countryCode).to.equal(99102);
     expect(updatedOrganization.organizationLearnerType.id).to.equal(newOrganizationLearnerType.id);
+  });
+
+  context('when organization learner type does not exist', function () {
+    it('throws an OrganizationLearnerTypeNotFound error', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      await databaseBuilder.commit();
+
+      const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
+        id: organizationId,
+        organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+          name: 'Student',
+        }),
+      });
+
+      // when
+      const error = await catchErr(usecases.updateOrganizationInformation)({
+        organization: organizationNewInformations,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(OrganizationLearnerTypeNotFound);
+      expect(error.meta.organizationLearnerTypeName).to.equal(organizationNewInformations.organizationLearnerType.name);
+    });
   });
 
   context('when administration team does not exist', function () {
