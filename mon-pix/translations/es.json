@@ -1718,6 +1718,13 @@
         }
       },
       "preview": {
+        "elements-id-button": {
+          "choices": {
+            "no": "No",
+            "yes": "Si"
+          },
+          "label": "Mostrar ID de los elementos"
+        },
         "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",

@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -131,6 +132,11 @@ export default class ModulixPreview extends Component {
   noop() {}
 
   @action
+  enableElementsIdButton() {
+    this.modulixPreviewMode.enableElementsIdButton();
+  }
+
+  @action
   updateModule(event) {
     try {
       this.errorMessage = null;
@@ -168,6 +174,14 @@ export default class ModulixPreview extends Component {
         </PixButtonLink>
       </div>
     {{/unless}}
+
+    <div class="modulix-preview__elements-id-button">
+      <PixSegmentedControl @onChange={{this.enableElementsIdButton}} @variant="primary" @toggled={{true}}>
+        <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
+        <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
+        <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>
+      </PixSegmentedControl>
+    </div>
 
     <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">
       <aside class="module-preview__passage module-passage">
