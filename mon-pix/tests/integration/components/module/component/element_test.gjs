@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixElement from 'mon-pix/components/module/component/element';
@@ -457,5 +458,40 @@ module('Integration | Component | Module | Element', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('button', { name: 'Option A: Vrai' })).exists();
+  });
+
+  module('when preview mode is enabled and elements id button clicked', function () {
+    test('should display a tag with element Id', async function (assert) {
+      // given
+      class PreviewModeServiceStub extends Service {
+        isPreviewAndElementsIdButtonEnabled = true;
+      }
+      this.owner.register('service:modulixPreviewMode', PreviewModeServiceStub);
+
+      const element = {
+        id: 'ed795d29-5f04-499c-a9c8-4019125c5cb1',
+        type: 'qab',
+        instruction: '<p>Hello.</p>',
+        cards: [
+          {
+            id: 'e222b060-7c18-4ee2-afe2-2ae27c28946a',
+            image: {
+              url: 'https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg',
+              altText: '',
+            },
+            text: 'Les boules de pétanques sont creuses.',
+            proposalA: 'Vrai',
+            proposalB: 'Faux',
+            solution: 'A',
+          },
+        ],
+      };
+
+      // when
+      const screen = await render(<template><ModulixElement @element={{element}} /></template>);
+
+      // then
+      assert.dom(screen.getByText('element-id: ed795d29-5f04-499c-a9c8-4019125c5cb1')).exists();
+    });
   });
 });

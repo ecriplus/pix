@@ -16,4 +16,8 @@
     border: 2px solid var(--pix-primary-100);
     border-radius: 4px;
   }
+
+  &__elements-id-tag {
+    margin: var(--pix-spacing-2x) 0;
+  }
 }
