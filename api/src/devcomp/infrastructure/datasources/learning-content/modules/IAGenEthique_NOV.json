@@ -752,7 +752,7 @@
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
                 "type": "text",
-                "content": "<p><strong>Le prompt suivant a été écrit par Nadia.</strong></p>"
+                "content": "<p><strong>Nadia a un soucis non résolu avec un service client, elle décide de demander à un logiciel l'IA générative de lui écrire une lettre recommandée.</strong></p>"
               }
             },
             {
@@ -766,7 +766,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Rédige un message au service client : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali et mon numéro de téléphone est le 06 39 98 44 77, je voudrai être rappellée."
+                      "content": "Rédige une lettre recommandée pour une réclamation à un service client avec un ton ferme et les informations suivantes : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali, j'habite au 36 rue des Geais à Joliville et mon numéro de téléphone est le 06 39 98 44 77."
                     }
                   ]
                 }
