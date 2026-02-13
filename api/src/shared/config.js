@@ -145,6 +145,7 @@ const schema = Joi.object({
   LOG_OPS_METRICS: Joi.string().optional().valid('true', 'false'),
   MAILING_ENABLED: Joi.string().optional().valid('true', 'false'),
   MAILING_PROVIDER: Joi.string().optional().valid('brevo', 'mailpit'),
+  DEVCOMP_MODULE_JSON_SCHEMA_CACHE_MAX_AGE: Joi.number().optional(),
   NODE_ENV: Joi.string().optional().valid('development', 'test', 'production'),
   POLE_EMPLOI_CLIENT_ID: Joi.string().optional(),
   POLE_EMPLOI_CLIENT_SECRET: Joi.string().optional(),
@@ -410,7 +411,10 @@ const configuration = (function () {
       isDirectMetricsEnabled: toBoolean(process.env.FT_ENABLE_DIRECT_METRICS),
       isOppsyDisabled: toBoolean(process.env.FT_OPPSY_DISABLED),
     },
-    module: { secret: process.env.REDIRECTION_URL_SECRET },
+    module: {
+      secret: process.env.REDIRECTION_URL_SECRET,
+      jsonSchemaCacheMaxAge: _getNumber(process.env.DEVCOMP_MODULE_JSON_SCHEMA_CACHE_MAX_AGE, 900),
+    },
     mutex: {
       redisUrl: process.env.REDIS_URL,
     },
@@ -578,6 +582,7 @@ const configuration = (function () {
       'test-target-profile-no-certifiable-template-id';
     config.mailing.brevo.templates.warningConnectionTemplateId = 'test-warning-connection-template-id';
     config.module.secret = 'moduleUrlSecret';
+    config.module.jsonSchemaCacheMaxAge = 123;
     config.bcryptNumberOfSaltRounds = 1;
 
     config.authentication.secret = 'the-password-must-be-at-least-32-characters-long';

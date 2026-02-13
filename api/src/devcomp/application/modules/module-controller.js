@@ -1,3 +1,4 @@
+import { config } from '../../../shared/config.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 const getByShortId = async function (request, h, { moduleSerializer }) {
@@ -23,7 +24,7 @@ const getJsonSchema = async function (_request, h) {
     .response(jsonSchema)
     .type('application/json')
     .charset('UTF-8')
-    .header('Cache-Control', 'public, max-age=900')
+    .header('Cache-Control', `public, max-age=${config.module.jsonSchemaCacheMaxAge}`)
     .etag(jsonSchemaChecksum);
 };
 
