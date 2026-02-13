@@ -40,9 +40,7 @@ class AssessmentEndedError extends DomainError {
 
 class AssessmentLackOfChallengesError extends AssessmentEndedError {
   constructor({ numberOfAnswers, maximumAssessmentLength } = {}) {
-    super(
-      `No eligible challenges remaining. ${numberOfAnswers} answers (maximum was ${maximumAssessmentLength})`,
-    );
+    super(`No eligible challenges remaining. ${numberOfAnswers} answers (maximum was ${maximumAssessmentLength})`);
     this.numberOfAnswers = numberOfAnswers;
     this.maximumAssessmentLength = maximumAssessmentLength;
   }

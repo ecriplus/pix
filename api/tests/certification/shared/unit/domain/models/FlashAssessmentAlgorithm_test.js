@@ -265,9 +265,7 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
           skill: skill2,
         });
 
-        const assessmentAnswers = [
-          domainBuilder.buildAnswer({ challengeId: answeredChallenge.id }),
-        ];
+        const assessmentAnswers = [domainBuilder.buildAnswer({ challengeId: answeredChallenge.id })];
         const challenges = [answeredChallenge, remainingChallenge];
 
         flashAlgorithmImplementation.getCapacityAndErrorRate

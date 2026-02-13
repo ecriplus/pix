@@ -41,7 +41,11 @@ export async function updateAssessmentWithNextChallenge({
   } catch (error) {
     if (error instanceof AssessmentLackOfChallengesError) {
       logger.warn(
-        { assessmentId: assessment.id, numberOfAnswers: error.numberOfAnswers, maximumAssessmentLength: error.maximumAssessmentLength },
+        {
+          assessmentId: assessment.id,
+          numberOfAnswers: error.numberOfAnswers,
+          maximumAssessmentLength: error.maximumAssessmentLength,
+        },
         'Assessment ended prematurely: no challenge remaining before reaching maximum assessment length',
       );
       nextChallenge = null;
