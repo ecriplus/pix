@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.330.0](https://github.com/1024pix/pix/compare/v5.329.1...v5.330.0) (2026-02-13)
+
+### :rocket: Amélioration
+
+- [#15089](https://github.com/1024pix/pix/pull/15089) Les textes à trous configurées en inline appliquent le paramètre aux balises autour (PIX-21476). 
+- [#15091](https://github.com/1024pix/pix/pull/15091) Mise à jour du public prescrit d'une organisation (PIX-21314). 
+- [#15112](https://github.com/1024pix/pix/pull/15112) Pouvoir modifier le public prescrit d'une organisation (PIX-21248) 
+- [#15076](https://github.com/1024pix/pix/pull/15076) Rendre la propriété hasShortProposals obligatoire 
+
+### :bug: Correction
+
+- [#15116](https://github.com/1024pix/pix/pull/15116) Correction d'une régression sur les `qcu_image` et `qcm_image` de Pix Junior (PIX-21518) 
+
+### :building_construction: Tech
+
+- [#15041](https://github.com/1024pix/pix/pull/15041) Script de traduction des fichiers de langue via une API de traducteur (PIX-21224) 
+- [#15074](https://github.com/1024pix/pix/pull/15074) Utiliser l'attribut isFullWidth dans les pages de création et modification d'orga (PIX-21491) 
+
+### :arrow_up: Montée de version
+
+- [#15106](https://github.com/1024pix/pix/pull/15106) Mise à jour de @1024pix/epreuves-components à 2.8.0 
+- [#15110](https://github.com/1024pix/pix/pull/15110) Update dependency @1024pix/pix-ui to ^58.4.11 (junior) 
+- [#15111](https://github.com/1024pix/pix/pull/15111) Update dependency @1024pix/pix-ui to ^58.4.11 (orga)
+
 ## [5.329.1](https://github.com/1024pix/pix/compare/v5.329.0...v5.329.1) (2026-02-12)
 
 ### :bug: Correction
