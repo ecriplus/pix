@@ -68,7 +68,7 @@
               "element": {
                 "id": "b5060c55-6711-492e-90a2-0694df8c2594",
                 "type": "text",
-                "content": "Sur un forum, des enseignants témoignent de leur usage de l’IA dans leur pratique professionnelle.<br>Pour chacun d’entre eux, sélectionnez s’il s’agit d’un usage de l’IA comme «&nbsp;assistante&nbsp;» (elle soutient le geste enseignant) ou comme «&nbsp;remplaçante&nbsp;» (elle se substitue à l’expertise et au jugement de l’enseignant).<br>"
+                "content": "Sur un forum, des enseignants témoignent de leur usage de l’IA dans leur pratique professionnelle.<br>Pour chacun d’entre eux, sélectionnez s’il s’agit d’un usage de l’IA comme «&nbsp;assistante&nbsp;» (elle soutient le geste enseignant) ou comme «&nbsp;remplaçante&nbsp;» (elle se substitue à l’expertise et au jugement de l’enseignant)."
               }
             },
             {
@@ -503,7 +503,7 @@
                     {
                       "title": "Aurélie – Cycle 2 (école primaire)",
                       "description": "Aurélie mène une séance de sensibilisation à l’IA  (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
-                      "text": "",
+                      "text": "Aurélie mène une séance de sensibilisation à l’IA  (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/fenetre-femme.png",
                         "alt": ""
@@ -512,7 +512,7 @@
                     {
                       "title": "Vincent (4e – français)",
                       "description": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
-                      "text": "",
+                      "text": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/bulle-homme.png",
                         "alt": ""
@@ -521,7 +521,7 @@
                     {
                       "title": "Mickaël (3e – histoire-géo)",
                       "description": "Mickaël autorise les élèves à utiliser un logiciel d’IA générative grand public chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
-                      "text": "",
+                      "text": "Mickaël autorise les élèves à utiliser un logiciel d’IA générative grand public chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_bureau.png",
                         "alt": ""
@@ -529,7 +529,7 @@
                     },
                     {
                       "title": " Antoine – (2nd – SES)",
-                      "description": "",
+                      "description": "Antoine intègre l’IA dans un projet de recherche documentaire, avec des règles explicites (objectifs, limites, esprit critique), sans création de comptes personnels sur des services grand public.",
                       "text": "Antoine intègre l’IA dans un projet de recherche documentaire, avec des règles explicites (objectifs, limites, esprit critique), sans création de comptes personnels sur des services grand public.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_fauteuil.png",
@@ -539,7 +539,7 @@
                     {
                       "title": "Guillaume – (terminal – Mathématiques)",
                       "description": "Guillaume donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
-                      "text": "",
+                      "text": "Guillaume donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/ordi-homme.png",
                         "alt": ""
@@ -558,7 +558,7 @@
             {
               "type": "element",
               "element": {
-                "id": "046c8013-316a-4008-b9e2-67748ce6ae38",
+                "id": "51bbd879-50ca-4bb9-8f64-db01a370a797",
                 "type": "qcm",
                 "instruction": "Selon vous, quels enseignants adoptent des pratiques conformes au cadre d’usage de l’IA en éducation ?",
                 "hasShortProposals": false,
