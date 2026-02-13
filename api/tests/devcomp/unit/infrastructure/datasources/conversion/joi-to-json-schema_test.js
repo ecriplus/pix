@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 import { convertJoiToJsonSchema } from '../../../../../../src/devcomp/infrastructure/datasources/conversion/joi-to-json-schema.js';
 import { catchErrSync, expect } from '../../../../../test-helper.js';
-import { qcmElementSchema } from '../learning-content/validation/element/qcm-schema.js';
 
 describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema', function () {
   it('should throw if not Joi', function () {
@@ -518,193 +517,52 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
       describe('if then otherwise statement', function () {
         it('should convert simple schema to json schema', function () {
           // given
-          const joiSchema = qcmElementSchema;
+          const joiSchema = Joi.alternatives().conditional(Joi.object({ isNumber: true }).unknown(), {
+            then: Joi.object({
+              type: Joi.string().valid('qcu').required(),
+              value: Joi.number(),
+            }),
+            otherwise: Joi.object({
+              type: Joi.string().valid('qcu').required(),
+              value: Joi.string(),
+            }),
+          });
 
           const expectedJsonSchema = {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                format: 'uuid',
-              },
-              type: {
-                type: 'string',
-                enum: ['qcm'],
-                format: null,
-              },
-              instruction: {
-                type: 'string',
-                format: 'jodit',
-              },
-              hasShortProposals: {
-                type: 'boolean',
-              },
-              proposals: {
-                type: 'array',
-                minItems: 3,
-                items: {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      pattern: '^[0-9]+$',
-                      format: null,
-                    },
-                    content: {
-                      type: 'string',
-                      format: 'jodit',
-                    },
-                  },
-                  required: ['id', 'content'],
-                  additionalProperties: false,
-                  title: 'proposal',
-                },
-              },
-              feedbacks: {
-                type: 'object',
-                properties: {
-                  valid: {
-                    type: 'object',
-                    properties: {
-                      state: {
-                        type: 'string',
-                        format: 'jodit',
-                      },
-                      diagnosis: {
-                        type: 'string',
-                        format: 'jodit',
-                      },
-                    },
-                    required: ['state', 'diagnosis'],
-                    additionalProperties: false,
-                  },
-                  invalid: {
-                    type: 'object',
-                    properties: {
-                      state: {
-                        type: 'string',
-                        format: 'jodit',
-                      },
-                      diagnosis: {
-                        type: 'string',
-                        format: 'jodit',
-                      },
-                    },
-                    required: ['state', 'diagnosis'],
-                    additionalProperties: false,
-                  },
-                },
-                additionalProperties: false,
-              },
-              solutions: {
-                type: 'array',
-                minItems: 2,
-                items: {
-                  type: 'string',
-                  pattern: '^[0-9]+$',
-                  title: 'solution',
-                  format: null,
-                },
-              },
-            },
-            required: ['id', 'type', 'instruction', 'hasShortProposals', 'proposals', 'feedbacks', 'solutions'],
             additionalProperties: false,
-            title: 'qcm',
             if: {
               properties: {
-                hasShortProposals: {
+                isNumber: {
                   const: true,
                 },
               },
             },
+            properties: {
+              type: {
+                enum: ['qcu'],
+                format: null,
+                type: 'string',
+              },
+              value: {
+                format: null,
+                type: 'string',
+              },
+            },
+            required: ['type'],
             then: {
               properties: {
-                id: {
-                  type: 'string',
-                  format: 'uuid',
-                },
                 type: {
-                  type: 'string',
-                  enum: ['qcm'],
+                  enum: ['qcu'],
                   format: null,
-                },
-                instruction: {
                   type: 'string',
-                  format: 'jodit',
                 },
-                hasShortProposals: {
-                  type: 'boolean',
-                },
-                proposals: {
-                  type: 'array',
-                  minItems: 3,
-                  items: {
-                    type: 'object',
-                    properties: {
-                      id: {
-                        type: 'string',
-                        pattern: '^[0-9]+$',
-                        format: null,
-                      },
-                      content: {
-                        type: 'string',
-                        maxLength: 20,
-                        format: null,
-                      },
-                    },
-                    required: ['id', 'content'],
-                    additionalProperties: false,
-                    title: 'proposal',
-                  },
-                },
-                feedbacks: {
-                  type: 'object',
-                  properties: {
-                    valid: {
-                      type: 'object',
-                      properties: {
-                        state: {
-                          type: 'string',
-                          format: 'jodit',
-                        },
-                        diagnosis: {
-                          type: 'string',
-                          format: 'jodit',
-                        },
-                      },
-                      required: ['state', 'diagnosis'],
-                      additionalProperties: false,
-                    },
-                    invalid: {
-                      type: 'object',
-                      properties: {
-                        state: {
-                          type: 'string',
-                          format: 'jodit',
-                        },
-                        diagnosis: {
-                          type: 'string',
-                          format: 'jodit',
-                        },
-                      },
-                      required: ['state', 'diagnosis'],
-                      additionalProperties: false,
-                    },
-                  },
-                  additionalProperties: false,
-                },
-                solutions: {
-                  type: 'array',
-                  minItems: 2,
-                  items: {
-                    type: 'string',
-                    pattern: '^[0-9]+$',
-                    title: 'solution',
-                    format: null,
-                  },
+                value: {
+                  type: 'number',
                 },
               },
             },
+            title: 'qcu',
+            type: 'object',
           };
 
           // when
