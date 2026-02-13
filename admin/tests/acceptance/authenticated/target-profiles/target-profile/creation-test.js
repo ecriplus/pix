@@ -76,7 +76,6 @@ module('Acceptance | Target profile creation', function (hooks) {
       await clickByName('Nouveau profil cible');
       await fillByLabel(/Nom externe/, 'Un profil cible, et vite !');
       await fillByLabel(/Nom interne/, 'Un profil cible interne, et vite !');
-      await fillByLabel(/Identifiant de l'organisation de référence/, 1);
       await clickByName(/Permettre la remise à zéro des acquis du profil cible/);
       await fillByLabel(/Référentiels :/, 'Pi');
       const otherFrameworkChoice = screen.getByLabelText('Pix + Cuisine');
