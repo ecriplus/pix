@@ -430,50 +430,50 @@
                 "tagName": "quiz-stepper",
                 "props": {
                   "titleLevel": 2,
-                  "steps": [
+                   "steps": [
                     {
-                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d’usage de l’IA en éducation ?",
                       "feedback": {
-                        "success": "Effectivement, l'utilisation d'IA grand public exige l'anonymisation absolue des données personnelles identifiables (DPI). Le nom de l'élève et la mention de troubles d'apprentissage sont des informations personnelles protégées.",
-                        "failed": "Non, l'utilisation d'IA grand public exige l'anonymisation absolue des données personnelles identifiables (DPI). Le nom de l'élève et la mention de troubles d'apprentissage sont des informations personnelles protégées."
+                        "success": "L’utilisation d’IA grand public exige l’anonymisation absolue des données personnelles identifiables (DPI). Le nom de l’élève et la mention de troubles d’apprentissage sont des informations personnelles protégées.",
+                        "failed": "L’utilisation d’IA grand public exige l’anonymisation absolue des données personnelles identifiables (DPI). Le nom de l’élève et la mention de troubles d’apprentissage sont des informations personnelles protégées."
                       },
                       "choice1": {
-                        "title": "",
-                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.",
+                        "title": "Requête 1",
+                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.",
                         "isGoodAnswer": false
                       },
                       "choice2": {
-                        "title": "",
-                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : l’élève X est en difficulté en lecture et présente des troubles de l’attention.",
+                        "title": "Requête 2",
+                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : l’élève X est en difficulté en lecture et présente des troubles de l’attention.",
                         "isGoodAnswer": true
                       }
                     },
                     {
-                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d’usage de l’IA en éducation ?",
                       "feedback": {
-                        "success": "Effectivement, l'utilisation de données statistiques anonymes est autorisée pour l'aide à l'analyse, à condition qu'elle ne permette aucune identification d'élève.",
-                        "failed": "Non, l'utilisation de données statistiques anonymes est autorisée pour l'aide à l'analyse, uniquement à condition qu'elle ne permette aucune identification d'élève."
+                        "success": "L’utilisation de données statistiques anonymes est autorisée pour l’aide à l’analyse, à condition qu’elle ne permette aucune identification d’élève.",
+                        "failed": "L’utilisation de données statistiques anonymes est autorisée pour l’aide à l’analyse, uniquement à condition qu’elle ne permette aucune identification d’élève."
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe4emeanonymisé.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe4emeanonymisé.xls",
                         "isGoodAnswer": true
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎exportENT4emeC.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎exportENT4emeC.xls",
                         "isGoodAnswer": false
                       }
                     },
                     {
-                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d’usage de l’IA en éducation ?",
                       "feedback": {
-                        "success": "Effectivement, l'utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d'y renoncer.",
-                        "failed": "Non, l'utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d'y renoncer."
+                        "success": "L’utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d’y renoncer.",
+                        "failed": "L’utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d’y renoncer."
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": " À partir du Programme d'Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.",
+                        "content": " À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.",
                         "isGoodAnswer": false
                       },
                       "choice2": {
@@ -483,10 +483,10 @@
                       }
                     },
                     {
-                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d’usage de l’IA en éducation ?",
                       "feedback": {
-                        "success": "Effectivement, le contenu d'un manuel scolaire est protégé par le droit d'auteur et le droit à l'édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l'accord explicite de l'éditeur ou des auteurs est une violation de la propriété intellectuelle",
-                        "failed": "Non, le contenu d'un manuel scolaire est protégé par le droit d'auteur et le droit à l'édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l'accord explicite de l'éditeur ou des auteurs est une violation de la propriété intellectuelle"
+                        "success": "Le contenu d’un manuel scolaire est protégé par le droit d’auteur et le droit à l’édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l’accord explicite de l’éditeur ou des auteurs est une violation de la propriété intellectuelle",
+                        "failed": "Le contenu d’un manuel scolaire est protégé par le droit d’auteur et le droit à l’édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l’accord explicite de l’éditeur ou des auteurs est une violation de la propriété intellectuelle"
                       },
                       "choice1": {
                         "title": "Requête 1",
