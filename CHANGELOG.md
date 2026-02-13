@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.331.0](https://github.com/1024pix/pix/compare/v5.330.0...v5.331.0) (2026-02-13)
+
+### :rocket: Amélioration
+
+- [#15105](https://github.com/1024pix/pix/pull/15105) Déplacer le bouton Réessayer à droite pour les embed (PIX-21429) 
+
+### :bug: Correction
+
+- [#15115](https://github.com/1024pix/pix/pull/15115) Logger et ne plus cacher les erreurs liés au manque d'épreuve de get-next-challenge de certif (PIX-21514).
+
 # [5.330.0](https://github.com/1024pix/pix/compare/v5.329.1...v5.330.0) (2026-02-13)
 
 ### :rocket: Amélioration
