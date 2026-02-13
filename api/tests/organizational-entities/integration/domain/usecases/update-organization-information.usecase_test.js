@@ -43,8 +43,8 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
       administrationTeamId: newAdministrationTeamId,
       countryCode: newCountry.code,
       organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
-        id: null,
-        name: newOrganizationLearnerType.name,
+        id: newOrganizationLearnerType.id,
+        name: undefined,
       }),
     });
 
@@ -58,7 +58,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization.name).to.equal("Nouveau nom d'organization");
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
     expect(updatedOrganization.countryCode).to.equal(99102);
-    expect(updatedOrganization.organizationLearnerType.id).to.equal(newOrganizationLearnerType.id);
+    expect(updatedOrganization.organizationLearnerType.name).to.equal(newOrganizationLearnerType.name);
   });
 
   context('when organization learner type does not exist', function () {
@@ -71,7 +71,8 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
       const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
         id: organizationId,
         organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
-          name: 'Student',
+          id: 123,
+          name: undefined,
         }),
       });
 
@@ -82,7 +83,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // then
       expect(error).to.be.instanceOf(OrganizationLearnerTypeNotFound);
-      expect(error.meta.organizationLearnerTypeName).to.equal(organizationNewInformations.organizationLearnerType.name);
+      expect(error.meta.organizationLearnerTypeId).to.equal(organizationNewInformations.organizationLearnerType.id);
     });
   });
 

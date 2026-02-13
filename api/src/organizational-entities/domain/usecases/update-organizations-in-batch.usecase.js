@@ -12,6 +12,7 @@ import {
   CountryNotFoundError,
   DpoEmailInvalid,
   OrganizationBatchUpdateError,
+  OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../errors.js';
@@ -30,6 +31,7 @@ export const updateOrganizationsInBatch = async function ({
   organizationForAdminRepository,
   administrationTeamRepository,
   countryRepository,
+  organizationLearnerTypeRepository,
 }) {
   const organizationBatchUpdateDtos = await _getCsvData(filePath);
 
@@ -43,6 +45,7 @@ export const updateOrganizationsInBatch = async function ({
           organizationForAdminRepository,
           administrationTeamRepository,
           countryRepository,
+          organizationLearnerTypeRepository,
         });
 
         try {
@@ -67,6 +70,7 @@ async function _checkOrganizationUpdate({
   organizationForAdminRepository,
   administrationTeamRepository,
   countryRepository,
+  organizationLearnerTypeRepository,
 }) {
   const organization = await organizationForAdminRepository.exist({ organizationId: organizationBatchUpdateDto.id });
   if (!organization) {
@@ -121,6 +125,13 @@ async function _checkOrganizationUpdate({
     await _checkCountryExists(organizationBatchUpdateDto.countryCode, countryRepository);
   }
 
+  if (organizationBatchUpdateDto.organizationLearnerTypeId) {
+    await _checkOrganizationLearnerTypeExists(
+      organizationBatchUpdateDto.organizationLearnerTypeId,
+      organizationLearnerTypeRepository,
+    );
+  }
+
   return organization;
 }
 
@@ -133,6 +144,17 @@ async function _checkCountryExists(countryCode, countryRepository) {
       message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
     });
     throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
+  }
+}
+
+async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
+  try {
+    await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
+  } catch {
+    throw new OrganizationLearnerTypeNotFound({
+      message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
+      meta: { organizationLearnerTypeId },
+    });
   }
 }
 

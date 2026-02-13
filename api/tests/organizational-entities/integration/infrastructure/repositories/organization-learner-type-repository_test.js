@@ -41,16 +41,20 @@ describe('Integration | Repository | organization-learner-type-repository', func
     });
   });
 
-  describe('#getByName', function () {
-    it('should return the organization learner type with the given name', async function () {
+  describe('#getById', function () {
+    it('should return the organization learner type with the given id', async function () {
       // given
       const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
-        name: 'Type A',
+        id: 123,
+      });
+
+      databaseBuilder.factory.buildOrganizationLearnerType({
+        id: 456,
       });
       await databaseBuilder.commit();
 
       // when
-      const result = await organizationLearnerTypeRepository.getByName(organizationLearnerType.name);
+      const result = await organizationLearnerTypeRepository.getById(organizationLearnerType.id);
 
       // then
       expect(result).to.deep.equal(
@@ -62,8 +66,11 @@ describe('Integration | Repository | organization-learner-type-repository', func
     });
 
     it('should throw if there is no organization learner type with the given name', async function () {
+      // given
+      const unknownId = 123;
+
       // when
-      const error = await catchErr(organizationLearnerTypeRepository.getByName)('Unknown name');
+      const error = await catchErr(organizationLearnerTypeRepository.getById)(unknownId);
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);

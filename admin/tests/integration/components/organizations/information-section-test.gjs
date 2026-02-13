@@ -57,6 +57,7 @@ module('Integration | Component | organizations/information-section', function (
       administrationTeamId: 123,
       countryCode: 99100,
       organizationLearnerTypeName: 'Student',
+      organizationLearnerTypeId: 789,
     });
 
     test('it should toggle edition mode on click to edit button', async function (assert) {

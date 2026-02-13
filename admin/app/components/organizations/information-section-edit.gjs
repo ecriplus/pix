@@ -70,8 +70,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
         ? `${this.args.organization.administrationTeamId}`
         : null,
       countryCode: this.args.organization.countryCode ? `${this.args.organization.countryCode}` : null,
-      organizationLearnerTypeName: this.args.organization.organizationLearnerTypeName
-        ? this.args.organization.organizationLearnerTypeName
+      organizationLearnerTypeId: this.args.organization.organizationLearnerTypeId
+        ? `${this.args.organization.organizationLearnerTypeId}`
         : null,
     };
   }
@@ -102,7 +102,7 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   get organizationLearnerTypeOptions() {
     const options = this.organizationLearnerTypes.map((organizationLearnerType) => ({
-      value: organizationLearnerType.name,
+      value: organizationLearnerType.id,
       label: organizationLearnerType.name,
     }));
     return options;
@@ -166,6 +166,10 @@ export default class OrganizationInformationSectionEditionMode extends Component
       (team) => team.id === this.form.administrationTeamId,
     )?.name;
 
+    const organizationLearnerTypeName = this.organizationLearnerTypes.find(
+      (organizationLearnerType) => organizationLearnerType.id === this.form.organizationLearnerTypeId,
+    )?.name;
+
     const countryName = this.countries.find((country) => country.code === this.form.countryCode)?.name;
 
     this.args.organization.set('name', this.form.name);
@@ -183,7 +187,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('administrationTeamName', administrationTeamName);
     this.args.organization.set('countryCode', this.form.countryCode);
     this.args.organization.set('countryName', countryName ?? null);
-    this.args.organization.set('organizationLearnerTypeName', this.form.organizationLearnerTypeName);
+    this.args.organization.set('organizationLearnerTypeId', this.form.organizationLearnerTypeId);
+    this.args.organization.set('organizationLearnerTypeName', organizationLearnerTypeName);
 
     this.closeAndResetForm();
     return this.args.onSubmit();
@@ -237,13 +242,13 @@ export default class OrganizationInformationSectionEditionMode extends Component
             @aria-required={{true}}
             @requiredLabel={{t "common.forms.mandatory"}}
             @errorMessage={{if
-              this.validator.errors.organizationLearnerTypeName
-              (t this.validator.errors.organizationLearnerTypeName)
+              this.validator.errors.organizationLearnerTypeId
+              (t this.validator.errors.organizationLearnerTypeId)
             }}
-            @validationStatus={{if this.validator.errors.organizationLearnerTypeName "error"}}
+            @validationStatus={{if this.validator.errors.organizationLearnerTypeId "error"}}
             @options={{this.organizationLearnerTypeOptions}}
-            @value={{this.form.organizationLearnerTypeName}}
-            @onChange={{fn this.updateValue "organizationLearnerTypeName"}}
+            @value={{this.form.organizationLearnerTypeId}}
+            @onChange={{fn this.updateValue "organizationLearnerTypeId"}}
             @hideDefaultOption={{true}}
             @isFullWidth={{true}}
             @placeholder={{t "components.organizations.editing.organization-learner-type.selector.placeholder"}}
@@ -454,7 +459,7 @@ const ORGANIZATION_FORM_VALIDATION_SCHEMA = Joi.object({
     'any.required': 'components.organizations.editing.country.selector.error-message',
     'string.empty': 'components.organizations.editing.country.selector.error-message',
   }),
-  organizationLearnerTypeName: Joi.string().empty(['', null]).required().messages({
+  organizationLearnerTypeId: Joi.string().empty(['', null]).required().messages({
     'any.required': 'components.organizations.editing.organization-learner-type.selector.error-message',
     'string.empty': 'components.organizations.editing.organization-learner-type.selector.error-message',
   }),

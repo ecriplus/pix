@@ -13,16 +13,16 @@ const updateOrganizationInformation = withTransaction(async function ({
   const existingOrganization = await organizationForAdminRepository.get({ organizationId: organization.id });
 
   let organizationLearnerType;
-  if (organization.organizationLearnerType?.name) {
+  if (organization.organizationLearnerType?.id) {
     try {
-      organizationLearnerType = await organizationLearnerTypeRepository.getByName(
-        organization.organizationLearnerType.name,
+      organizationLearnerType = await organizationLearnerTypeRepository.getById(
+        organization.organizationLearnerType.id,
       );
       organization.organizationLearnerType = organizationLearnerType;
     } catch {
       throw new OrganizationLearnerTypeNotFound({
         meta: {
-          organizationLearnerTypeName: organization.organizationLearnerType.name,
+          organizationLearnerTypeId: organization.organizationLearnerType.id,
         },
       });
     }

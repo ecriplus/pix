@@ -15,7 +15,10 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         domainBuilder.buildTag({ id: 7, name: 'AEFE' }),
         domainBuilder.buildTag({ id: 44, name: 'PUBLIC' }),
       ];
-      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType();
+      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType({
+        id: 123,
+        name: 'Student',
+      });
 
       const parentOrganization = domainBuilder.buildOrganizationForAdmin({
         email: 'motherSco.generic.account@example.net',
@@ -102,6 +105,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'country-code': organization.countryCode,
             'country-name': organization.countryName,
             'organization-learner-type-name': organization.organizationLearnerType.name,
+            'organization-learner-type-id': organization.organizationLearnerType.id,
           },
           relationships: {
             'organization-memberships': {
@@ -189,6 +193,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         },
         countryCode: '99100',
         organizationLearnerTypeName: 'Teacher',
+        organizationLearnerTypeId: 123,
       };
 
       // when
@@ -213,6 +218,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'administration-team-id': organizationAttributes.administrationTeamId,
             features: organizationAttributes.features,
             'country-code': organizationAttributes.countryCode,
+            'organization-learner-type-id': organizationAttributes.organizationLearnerTypeId,
             'organization-learner-type-name': organizationAttributes.organizationLearnerTypeName,
           },
         },
@@ -248,8 +254,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         },
         countryCode: 99100,
         organizationLearnerType: new OrganizationLearnerType({
-          id: undefined,
-          name: organizationAttributes.organizationLearnerTypeName,
+          id: 123,
+          name: 'Teacher',
         }),
       });
       expect(organization).to.be.instanceOf(OrganizationForAdmin);

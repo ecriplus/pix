@@ -205,6 +205,10 @@ class OrganizationForAdmin {
     if (organizationBatchUpdateDto.administrationTeamId)
       this.administrationTeamId = organizationBatchUpdateDto.administrationTeamId;
     if (organizationBatchUpdateDto.countryCode) this.countryCode = organizationBatchUpdateDto.countryCode;
+    if (organizationBatchUpdateDto.organizationLearnerTypeId) {
+      this.organizationLearnerType.id = organizationBatchUpdateDto.organizationLearnerTypeId;
+      this.organizationLearnerType.name = undefined;
+    }
   }
 
   updateParentOrganizationId(parentOrganizationId) {

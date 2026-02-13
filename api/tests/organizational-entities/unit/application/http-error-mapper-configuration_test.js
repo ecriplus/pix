@@ -82,7 +82,7 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
         (httpErrorMapper) => httpErrorMapper.name === OrganizationLearnerTypeNotFound.name,
       );
 
-      const meta = { organizationLearnerTypeName: 'Student' };
+      const meta = { organizationLearnerTypeId: 123 };
 
       // when
       const error = httpErrorMapper.httpErrorFn(new OrganizationLearnerTypeNotFound({ meta }));
