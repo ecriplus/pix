@@ -200,6 +200,8 @@ export default class ModulixEmbed extends ModuleElement {
       </div>
 
       <div class={{if this.resetButtonDisplayed "element-embed__buttons" "element-embed__button"}}>
+        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
+
         {{#if this.resetButtonDisplayed}}
           <PixButton
             class="element-embed-buttons__retry"
@@ -209,8 +211,6 @@ export default class ModulixEmbed extends ModuleElement {
             aria-label="{{t 'pages.modulix.buttons.interactive-element.reset.ariaLabel'}}"
           >{{t "pages.modulix.buttons.interactive-element.reset.name"}}</PixButton>
         {{/if}}
-
-        <ModulixIssueReportBlock @reportInfo={{this.reportInfo}} />
       </div>
     </div>
   </template>
