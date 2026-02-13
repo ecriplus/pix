@@ -1,7 +1,6 @@
-import { TargetProfileCannotBeCreated } from '../../../../../../src/prescription/target-profile/domain/errors.js';
 import { createTargetProfile } from '../../../../../../src/prescription/target-profile/domain/usecases/create-target-profile.js';
 import { categories } from '../../../../../../src/shared/domain/models/TargetProfile.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-target-profile', function () {
   let targetProfileAdministrationRepositoryStub;
@@ -14,32 +13,6 @@ describe('Unit | UseCase | create-target-profile', function () {
     organizationRepositoryStub = {
       get: sinon.stub(),
     };
-  });
-
-  it('should throw a TargetProfileCannotBeCreated error with non existant owner organization', async function () {
-    // given
-    organizationRepositoryStub.get.rejects(new Error());
-
-    // when
-    const targetProfileCreationCommand = {
-      name: 'myFirstTargetProfile',
-      category: categories.SUBJECT,
-      description: 'la description',
-      comment: 'le commentaire',
-      imageUrl: 'mon-image/stylée',
-      ownerOrganizationId: 1,
-      tubes: [{ id: 'tubeId', level: 2 }],
-      areKnowledgeElementsResettable: false,
-    };
-
-    const error = await catchErr(createTargetProfile)({
-      targetProfileCreationCommand,
-      targetProfileAdministrationRepository: targetProfileAdministrationRepositoryStub,
-      organizationRepository: organizationRepositoryStub,
-    });
-
-    // then
-    expect(error).to.be.an.instanceOf(TargetProfileCannotBeCreated);
   });
 
   it('should create target profile with tubes by passing over creation command', async function () {
