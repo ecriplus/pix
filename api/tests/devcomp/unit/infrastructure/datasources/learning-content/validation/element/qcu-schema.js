@@ -5,25 +5,18 @@ import { feedbackSchema } from './feedback-schema.js';
 import { proposalContentSchema, shortProposalContentSchema } from './proposal-content-schema.js';
 
 const qcuElementSchema = Joi.alternatives().conditional(Joi.object({ hasShortProposals: true }).unknown(), {
-  then: Joi.object({
+  then: _getQcuSchemaWithProposalContentSchema(shortProposalContentSchema),
+  otherwise: _getQcuSchemaWithProposalContentSchema(proposalContentSchema),
+});
+
+export { qcuElementSchema };
+
+function _getQcuSchemaWithProposalContentSchema(proposalContentSchema) {
+  return Joi.object({
     id: uuidSchema,
     type: Joi.string().valid('qcu').required(),
     instruction: htmlSchema.required(),
     hasShortProposals: Joi.boolean().optional().default(false).required(),
-    proposals: Joi.array()
-      .items({
-        id: proposalIdSchema.required(),
-        content: shortProposalContentSchema.required(),
-        feedback: feedbackSchema.required(),
-      })
-      .required(),
-    solution: proposalIdSchema.required(),
-  }),
-  otherwise: Joi.object({
-    id: uuidSchema,
-    type: Joi.string().valid('qcu').required(),
-    instruction: htmlSchema.required(),
-    hasShortProposals: Joi.boolean().required().default(false).required(),
     proposals: Joi.array()
       .items({
         id: proposalIdSchema.required(),
@@ -32,7 +25,5 @@ const qcuElementSchema = Joi.alternatives().conditional(Joi.object({ hasShortPro
       })
       .required(),
     solution: proposalIdSchema.required(),
-  }),
-});
-
-export { qcuElementSchema };
+  });
+}

@@ -5,29 +5,18 @@ import { feedbackSchema } from './feedback-schema.js';
 import { proposalContentSchema, shortProposalContentSchema } from './proposal-content-schema.js';
 
 const qcmElementSchema = Joi.alternatives().conditional(Joi.object({ hasShortProposals: true }).unknown(), {
-  then: Joi.object({
+  then: _getQcmElementSchemaWithProposalContentSchema(shortProposalContentSchema),
+  otherwise: _getQcmElementSchemaWithProposalContentSchema(proposalContentSchema),
+});
+
+export { qcmElementSchema };
+
+function _getQcmElementSchemaWithProposalContentSchema(proposalContentSchema) {
+  return Joi.object({
     id: uuidSchema,
     type: Joi.string().valid('qcm').required(),
     instruction: htmlSchema.required(),
     hasShortProposals: Joi.boolean().optional().default(false).required(),
-    proposals: Joi.array()
-      .items({
-        id: proposalIdSchema.required(),
-        content: shortProposalContentSchema.required(),
-      })
-      .min(3)
-      .required(),
-    feedbacks: Joi.object({
-      valid: feedbackSchema,
-      invalid: feedbackSchema,
-    }).required(),
-    solutions: Joi.array().items(proposalIdSchema).min(2).required(),
-  }).required(),
-  otherwise: Joi.object({
-    id: uuidSchema,
-    type: Joi.string().valid('qcm').required(),
-    instruction: htmlSchema.required(),
-    hasShortProposals: Joi.boolean().required().default(false).required(),
     proposals: Joi.array()
       .items({
         id: proposalIdSchema.required(),
@@ -40,7 +29,5 @@ const qcmElementSchema = Joi.alternatives().conditional(Joi.object({ hasShortPro
       invalid: feedbackSchema,
     }).required(),
     solutions: Joi.array().items(proposalIdSchema).min(2).required(),
-  }).required(),
-});
-
-export { qcmElementSchema };
+  }).required();
+}
