@@ -26,7 +26,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
         const assessmentId = databaseBuilder.factory.buildAssessment({
           userId,
           courseId,
-          state: Assessment.states.STARTED,
+          state: Assessment.states.COMPLETED,
           type: Assessment.types.CERTIFICATION,
           certificationCourseId,
         }).id;
@@ -46,7 +46,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           type: 'assessments',
           id: assessmentId.toString(),
           attributes: {
-            state: Assessment.states.STARTED,
+            state: Assessment.states.COMPLETED,
             title: certificationCourseId,
             type: Assessment.types.CERTIFICATION,
             'certification-number': certificationCourseId,
@@ -267,7 +267,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
         const assessmentId = databaseBuilder.factory.buildAssessment({
           userId: null,
           courseId,
-          state: Assessment.states.STARTED,
+          state: Assessment.states.COMPLETED,
           type: Assessment.types.DEMO,
         }).id;
         await databaseBuilder.commit();
@@ -285,7 +285,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           type: 'assessments',
           id: assessmentId.toString(),
           attributes: {
-            state: Assessment.states.STARTED,
+            state: Assessment.states.COMPLETED,
             title: courseName,
             type: Assessment.types.DEMO,
             'has-ongoing-challenge-live-alert': false,

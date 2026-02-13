@@ -5,6 +5,7 @@
  * @typedef {import('../services/algorithm-methods/flash.js')} FlashAlgorithmImplementation
  */
 
+import { AssessmentLackOfChallengesError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from './FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
 import { FlashAssessmentAlgorithmNonAnsweredSkillsRule } from './FlashAssessmentAlgorithmNonAnsweredSkillsRule.js';
 import { FlashAssessmentAlgorithmOneQuestionPerTubeRule } from './FlashAssessmentAlgorithmOneQuestionPerTubeRule.js';
@@ -65,7 +66,10 @@ class FlashAssessmentAlgorithm {
     const challengesAfterRulesApplication = this.#applyChallengeSelectionRules(assessmentAnswers, challenges);
 
     if (challengesAfterRulesApplication?.length === 0) {
-      throw new RangeError('No eligible challenges in referential');
+      throw new AssessmentLackOfChallengesError({
+        numberOfAnswers: assessmentAnswers?.length,
+        maximumAssessmentLength,
+      });
     }
 
     return this.flashAlgorithmImplementation.getPossibleNextChallenges({

@@ -1,3 +1,6 @@
+import { logger } from '../../infrastructure/utils/logger.js';
+import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../errors.js';
+
 export async function updateAssessmentWithNextChallenge({
   assessment,
   userId,
@@ -35,8 +38,26 @@ export async function updateAssessmentWithNextChallenge({
     if (assessment.isCompetenceEvaluation()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
     }
-  } catch {
-    nextChallenge = null;
+  } catch (error) {
+    if (error instanceof AssessmentLackOfChallengesError) {
+      logger.warn(
+        {
+          assessmentId: assessment.id,
+          numberOfAnswers: error.numberOfAnswers,
+          maximumAssessmentLength: error.maximumAssessmentLength,
+        },
+        'Assessment ended prematurely: no challenge remaining before reaching maximum assessment length',
+      );
+      nextChallenge = null;
+    } else if (error instanceof AssessmentEndedError) {
+      nextChallenge = null;
+    } else {
+      logger.error(
+        { assessmentId: assessment.id, assessmentType: assessment.type, err: error },
+        'Unexpected error while retrieving next challenge for assessment',
+      );
+      throw error;
+    }
   }
 
   if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {

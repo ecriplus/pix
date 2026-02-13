@@ -202,7 +202,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           lastChallengeId: firstChallengeId,
           userId,
           lastQuestionDate: new Date('2020-01-20'),
-          state: 'started',
+          state: Assessment.states.COMPLETED,
         });
         databaseBuilder.factory.buildCertificationChallengeLiveAlert({
           assessmentId: assessment.id,

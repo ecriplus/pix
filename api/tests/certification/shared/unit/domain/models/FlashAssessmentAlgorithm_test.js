@@ -1,5 +1,6 @@
 import { FlashAssessmentAlgorithm } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
+import { AssessmentLackOfChallengesError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
@@ -236,6 +237,56 @@ describe('Unit | Domain | Models | FlashAssessmentAlgorithm', function () {
             expectedChallenges,
           );
         });
+      });
+    });
+
+    context('when all challenges are eliminated by rules', function () {
+      it('should throw an AssessmentLackOfChallengesError', function () {
+        // given
+        const initialCapacity = baseFlashAssessmentAlgorithmConfig.defaultCandidateCapacity;
+        const computedCapacity = 2;
+        const algorithm = new FlashAssessmentAlgorithm({
+          flashAlgorithmImplementation,
+          configuration: _getAlgorithmConfig({
+            maximumAssessmentLength: 32,
+            limitToOneQuestionPerTube: true,
+          }),
+        });
+
+        const skill1 = domainBuilder.buildSkill({ id: 'skill1', tubeId: 'tube1' });
+        const skill2 = domainBuilder.buildSkill({ id: 'skill2', tubeId: 'tube1' });
+
+        const answeredChallenge = domainBuilder.buildChallenge({
+          id: 'answeredChallenge',
+          skill: skill1,
+        });
+        const remainingChallenge = domainBuilder.buildChallenge({
+          id: 'remainingChallenge',
+          skill: skill2,
+        });
+
+        const assessmentAnswers = [domainBuilder.buildAnswer({ challengeId: answeredChallenge.id })];
+        const challenges = [answeredChallenge, remainingChallenge];
+
+        flashAlgorithmImplementation.getCapacityAndErrorRate
+          .withArgs(
+            _getCapacityAndErrorRateParams({
+              allAnswers: assessmentAnswers,
+              challenges,
+              capacity: initialCapacity,
+            }),
+          )
+          .returns({ capacity: computedCapacity });
+
+        // when
+        const error = catchErrSync(({ assessmentAnswers, challenges }) =>
+          algorithm.getPossibleNextChallenges({ assessmentAnswers, challenges }),
+        )({ assessmentAnswers, challenges });
+
+        // then
+        expect(error).to.be.instanceOf(AssessmentLackOfChallengesError);
+        expect(error.numberOfAnswers).to.equal(1);
+        expect(error.maximumAssessmentLength).to.equal(32);
       });
     });
   });

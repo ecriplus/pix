@@ -38,6 +38,14 @@ class AssessmentEndedError extends DomainError {
   }
 }
 
+class AssessmentLackOfChallengesError extends AssessmentEndedError {
+  constructor({ numberOfAnswers, maximumAssessmentLength } = {}) {
+    super(`No eligible challenges remaining. ${numberOfAnswers} answers (maximum was ${maximumAssessmentLength})`);
+    this.numberOfAnswers = numberOfAnswers;
+    this.maximumAssessmentLength = maximumAssessmentLength;
+  }
+}
+
 class AssessmentResultNotCreatedError extends DomainError {
   constructor(message = "L'assessment result n'a pas pu être généré.") {
     super(message);
@@ -1021,6 +1029,7 @@ export {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidCredentialsError,
   AssessmentEndedError,
+  AssessmentLackOfChallengesError,
   AssessmentNotCompletedError,
   AssessmentResultNotCreatedError,
   AuditLoggerApiError,
