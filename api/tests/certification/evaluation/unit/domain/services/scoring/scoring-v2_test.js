@@ -1345,12 +1345,9 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
       });
 
       context('when reproducibility rate is between 50% and 80%', function () {
-        beforeEach(function () {
-          certificationAssessment.certificationAnswersByDate = answersWithReproducibilityRateLessThan80();
-        });
-
         it('should return list of competences with certifiedLevel less or equal to estimatedLevel', async function () {
           // given
+          certificationAssessment.certificationAnswersByDate = await answersWithReproducibilityRateLessThan80();
           const malusForFalseAnswer = 8;
           const expectedCertifiedCompetences = [
             domainBuilder.buildCompetenceMark({
@@ -1386,7 +1383,10 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
         it('should return the percentage of correct answers', async function () {
           // given
-          const certificationAssessmentWithNeutralizedChallenge = _.cloneDeep(certificationAssessment);
+          const certificationAssessmentWithNeutralizedChallenge = structuredClone(certificationAssessment);
+          certificationAssessmentWithNeutralizedChallenge.certificationAnswersByDate =
+            answersWithReproducibilityRateLessThan80();
+          certificationAssessmentWithNeutralizedChallenge.certificationChallenges[0].isNeutralized = true;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[0].isNeutralized = true;
 
           // when
@@ -1407,6 +1407,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
           context('with one OK, one KO and one QROCM-dep OK', function () {
             it('should return level obtained equal to level positioned minus one', async function () {
+              certificationAssessment.certificationAnswersByDate = await answersWithReproducibilityRateLessThan80();
               // Given
               const positionedLevel = 2;
               const positionedScore = 20;
@@ -1939,7 +1940,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
       context('when certification has enough non neutralized challenges to be trusted', function () {
         it('should return a CertificationAssessmentScore which hasEnoughNonNeutralizedChallengesToBeTrusted is true', async function () {
           // given
-          const certificationAssessmentWithNeutralizedChallenge = _.cloneDeep(certificationAssessment);
+          const certificationAssessmentWithNeutralizedChallenge = certificationAssessment;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[0].isNeutralized = true;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[1].isNeutralized = true;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[2].isNeutralized = true;
@@ -1962,7 +1963,8 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
       context('when certification has not enough non neutralized challenges to be trusted', function () {
         it('should return a CertificationAssessmentScore which hasEnoughNonNeutralizedChallengesToBeTrusted is false', async function () {
           // given
-          const certificationAssessmentWithNeutralizedChallenge = _.cloneDeep(certificationAssessment);
+
+          const certificationAssessmentWithNeutralizedChallenge = certificationAssessment;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[0].isNeutralized = true;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[1].isNeutralized = true;
           certificationAssessmentWithNeutralizedChallenge.certificationChallenges[2].isNeutralized = true;

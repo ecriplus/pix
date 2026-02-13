@@ -98,7 +98,7 @@ describe('Integration | Application | Badges | Routes', function () {
           await httpTestServer.register(badgesRouter);
 
           // when
-          const payloadCopy = _.cloneDeep(payload);
+          const payloadCopy = structuredClone(payload);
           payloadCopy.data.attributes['capped-tubes-criteria'] = [
             {
               cappedTubes: [
@@ -126,7 +126,7 @@ describe('Integration | Application | Badges | Routes', function () {
           await httpTestServer.register(badgesRouter);
 
           // when
-          const payloadCopy = _.cloneDeep(payload);
+          const payloadCopy = structuredClone(payload);
           payloadCopy.data.attributes['capped-tubes-criteria'] = [
             {
               threshold: '20',

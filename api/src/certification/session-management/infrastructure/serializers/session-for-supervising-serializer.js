@@ -1,19 +1,16 @@
 import jsonapiSerializer from 'jsonapi-serializer';
-import _ from 'lodash';
 
 const { Serializer } = jsonapiSerializer;
 
 const serialize = function (sessions) {
   return new Serializer('sessionForSupervising', {
     transform(currentSessionForSupervising) {
-      const cloneSession = _.cloneDeep(currentSessionForSupervising);
-
-      cloneSession.certificationCandidates.forEach((candidate) => {
+      currentSessionForSupervising.certificationCandidates.forEach((candidate) => {
         candidate.enrolledComplementaryCertificationLabel = candidate.enrolledComplementaryCertification?.label ?? null;
         candidate.enrolledDoubleCertificationLabel = candidate.enrolledDoubleCertification?.label ?? null;
       });
 
-      return cloneSession;
+      return currentSessionForSupervising;
     },
     attributes: ['room', 'examiner', 'accessCode', 'date', 'time', 'certificationCandidates', 'address'],
     typeForAttribute: (attribute) =>
