@@ -426,7 +426,7 @@
               "element": {
                 "id": "36539262-25ad-4df4-b169-35a5a39bf861",
                 "type": "custom",
-                "instruction": "Pour chacune des requêtes, sélectionnez celle qui est conforme au RGPD et aux préconisations du cadre d'usage de l'IA en éducation.",
+                "instruction": "Pour chacune des requêtes, sélectionnez celle qui vous semble conforme au RGPD et aux préconisations du cadre d'usage de l'IA en éducation.",
                 "tagName": "quiz-stepper",
                 "props": {
                   "titleLevel": 2,
