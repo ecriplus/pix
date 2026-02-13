@@ -13,6 +13,8 @@ import { notEq } from 'ember-truth-helpers';
 import ModulixGrain from 'mon-pix/components/module/grain/grain';
 import ModulixSectionTitle from 'mon-pix/components/module/section-title';
 
+import didInsert from '../../modifiers/modifier-did-insert';
+
 export default class ModulixPreview extends Component {
   @service store;
   @service modulixPreviewMode;
@@ -155,6 +157,15 @@ export default class ModulixPreview extends Component {
     this.moduleCodeDisplayed = !this.moduleCodeDisplayed;
   }
 
+  @action
+  setHTMLElementOffset(htmlElement) {
+    const bannerElement = document.getElementById('pix-layout-banner-container');
+    if (!bannerElement) return;
+    const distanceBetweenNavigationAndBanner = 8;
+    const top = bannerElement.getBoundingClientRect().height + distanceBetweenNavigationAndBanner;
+    htmlElement.style.setProperty('top', `${top}px `);
+  }
+
   <template>
     {{pageTitle this.formattedModule.title}}
 
@@ -175,7 +186,7 @@ export default class ModulixPreview extends Component {
       </div>
     {{/unless}}
 
-    <div class="modulix-preview__elements-id-button">
+    <div class="modulix-preview__elements-id-button" {{didInsert this.setHTMLElementOffset}}>
       <PixSegmentedControl @onChange={{this.enableElementsIdButton}} @variant="primary" @toggled={{true}}>
         <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
         <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
