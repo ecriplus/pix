@@ -1007,6 +1007,26 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organizationToUpdate.countryCode).to.equal(countryCode);
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
+
+    it('updates the organization learner type id', function () {
+      // given
+      const organizationLearnerType = domainBuilder.acquisition.buildOrganizationLearnerType({
+        id: 1234,
+      });
+
+      const organizationToUpdate = domainBuilder.buildOrganizationForAdmin({
+        organizationLearnerType,
+      });
+
+      // when
+      organizationToUpdate.updateFromOrganizationBatchUpdateDto(
+        new OrganizationBatchUpdateDTO({ id: '1', organizationLearnerTypeId: 5678 }),
+      );
+
+      // then
+      expect(organizationToUpdate.organizationLearnerType.id).to.equal(5678);
+      expect(organizationToUpdate.organizationLearnerType.name).to.equal(undefined);
+    });
   });
 
   context('#setCountryName', function () {

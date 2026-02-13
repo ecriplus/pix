@@ -51,6 +51,10 @@ export const ORGANIZATIONS_UPDATE_HEADER = {
       name: 'Country Code',
       property: 'countryCode',
     }),
+    new CsvColumn({
+      name: 'Organization Learner Type ID',
+      property: 'organizationLearnerTypeId',
+    }),
   ],
 };
 

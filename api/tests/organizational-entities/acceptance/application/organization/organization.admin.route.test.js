@@ -2,6 +2,7 @@ import iconv from 'iconv-lite';
 import lodash from 'lodash';
 
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
+import { ORGANIZATIONS_UPDATE_HEADER } from '../../../../../src/organizational-entities/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
@@ -1575,9 +1576,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
       it('responds with a 204 - no content', async function () {
         // given
-        const input = `Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code
-      ${firstOrganization.id};MSFT;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;99500
-      ${otherOrganization.id};APPL;;;;;;;Cali;;1234;99500`;
+        const input = `${ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';')}
+      ${firstOrganization.id};MSFT;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;99500;
+      ${otherOrganization.id};APPL;;;;;;;Cali;;1234;99500;`;
 
         const options = {
           method: 'POST',
