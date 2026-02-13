@@ -111,6 +111,61 @@ module('Unit | Controller | Assessments | Challenge', function (hooks) {
     });
   });
 
+  module('#shouldBlurBanner', function () {
+    [
+      {
+        answer: null,
+        focused: true,
+        hasConfirmed: false,
+        expectedResult: true,
+      },
+      {
+        answer: 'some-answer',
+        focused: true,
+        hasConfirmed: false,
+        expectedResult: false,
+      },
+      {
+        answer: null,
+        focused: false,
+        hasConfirmed: false,
+        expectedResult: false,
+      },
+      {
+        answer: null,
+        focused: true,
+        hasConfirmed: true,
+        expectedResult: false,
+      },
+    ].forEach(({ answer, focused, hasConfirmed, expectedResult }) => {
+      const _hasAnswer = answer ? 'answer exists' : 'no answer';
+      const _isFocused = focused ? 'challenge is focused' : 'challenge is not focused';
+      const _hasConfirmed = hasConfirmed
+        ? 'focus warning screen is confirmed'
+        : 'focus warning screen is not confirmed';
+
+      test(`should be ${expectedResult} when ${_hasAnswer}, ${_isFocused} and ${_hasConfirmed}`, function (assert) {
+        // given
+        const focusedCertificationChallengeWarningManager = this.owner.lookup(
+          'service:focused-certification-challenge-warning-manager',
+        );
+        focusedCertificationChallengeWarningManager._hasConfirmedFocusChallengeScreen = hasConfirmed;
+
+        controller.model = {
+          answer,
+          challenge: { focused },
+          assessment: {},
+        };
+
+        // when
+        const result = controller.shouldBlurBanner;
+
+        // then
+        assert.strictEqual(result, expectedResult);
+      });
+    });
+  });
+
   module('#displayChallenge', function () {
     module('when challenge is focused and assessment is of type certification', function () {
       [
@@ -163,6 +218,7 @@ module('Unit | Controller | Assessments | Challenge', function (hooks) {
         });
       });
     });
+
     module('when challenge is not focused and has no timer', function () {
       [
         { answer: undefined, hasUserConfirmedTimedChallengeWarning: false, expectedResult: true },
