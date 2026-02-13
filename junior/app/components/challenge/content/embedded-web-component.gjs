@@ -5,7 +5,7 @@ import didRender from '../../../modifiers/did-render';
 
 export default class EmbeddedWebComponent extends Component {
   #customElement;
-  #handleAnswer = (event) => this.args.setAnswerValue(event.detail[0]?.answer);
+  #handleAnswer = (event) => this.args.setAnswerValue(event.detail[0].answer);
 
   @action
   mountCustomElement(container) {
