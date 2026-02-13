@@ -901,7 +901,23 @@
     {
       "id": "dd25e947-585e-45b4-97d5-236db9c22d7f",
       "type": "go-further",
-      "grains": []
+      "grains": [
+        {
+          "id": "827b90ed-3121-450f-86cc-da8da3764933",
+          "type": "challenge",
+          "title": "Défi/transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8a352994-da21-41a3-bfb6-d87536077b2c",
+                "type": "text",
+                "content": "à rédiger"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
