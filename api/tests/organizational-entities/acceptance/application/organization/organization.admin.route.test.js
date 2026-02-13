@@ -598,6 +598,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           originalName: 'France',
         });
 
+        const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+
         const organization = databaseBuilder.factory.buildOrganization({
           type: 'SCO',
           name: 'Organization catalina',
@@ -614,6 +616,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           createdAt,
           administrationTeamId: administrationTeam.id,
           countryCode: country.code,
+          organizationLearnerTypeId: organizationLearnerType.id,
         });
         const dataProtectionOfficer = databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
           firstName: 'Justin',
@@ -671,7 +674,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'administration-team-name': administrationTeam.name,
               'country-code': country.code,
               'country-name': country.commonName,
-              'organization-learner-type-name': `Type pour organisation ${organization.id}`,
+              'organization-learner-type-name': organizationLearnerType.name,
+              'organization-learner-type-id': organizationLearnerType.id,
               features: {
                 [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
                   active: false,

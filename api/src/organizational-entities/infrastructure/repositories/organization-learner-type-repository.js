@@ -17,16 +17,16 @@ const findAll = async function () {
 };
 
 /**
- * @param {*} name
+ * @param {*} id
  * @returns {Promise<OrganizationLearnerType>}
  * @throws {NotFoundError}
  */
-const getByName = async function (name) {
+const getById = async function (id) {
   const knexConn = DomainTransaction.getConnection();
   const organizationLearnerTypeDTO = await knexConn
     .select('name', 'id')
     .from('organization_learner_types')
-    .where({ name })
+    .where({ id })
     .first();
 
   if (!organizationLearnerTypeDTO) {
@@ -43,4 +43,4 @@ const _toDomain = function (organizationLearnerTypeDTO) {
   });
 };
 
-export { findAll, getByName };
+export { findAll, getById };

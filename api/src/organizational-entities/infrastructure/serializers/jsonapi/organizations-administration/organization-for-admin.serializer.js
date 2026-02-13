@@ -10,8 +10,10 @@ const serialize = function (organizations, meta) {
       const dataProtectionOfficer = record.dataProtectionOfficer;
 
       const organizationLearnerTypeName = record?.organizationLearnerType?.name;
-      if (organizationLearnerTypeName) {
+      const organizationLearnerTypeId = record?.organizationLearnerType?.id;
+      if (organizationLearnerTypeId) {
         record.organizationLearnerTypeName = organizationLearnerTypeName;
+        record.organizationLearnerTypeId = organizationLearnerTypeId;
       }
 
       if (dataProtectionOfficer) {
@@ -57,6 +59,7 @@ const serialize = function (organizations, meta) {
       'administrationTeamName',
       'countryCode',
       'countryName',
+      'organizationLearnerTypeId',
       'organizationLearnerTypeName',
     ],
     organizationMemberships: {
@@ -142,7 +145,7 @@ const deserialize = function (json) {
     tagIds,
     countryCode: attributes['country-code'] && parseInt(attributes['country-code']),
     organizationLearnerType: new OrganizationLearnerType({
-      id: undefined,
+      id: attributes['organization-learner-type-id'],
       name: attributes['organization-learner-type-name'],
     }),
   });

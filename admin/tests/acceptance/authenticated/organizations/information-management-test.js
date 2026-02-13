@@ -35,6 +35,7 @@ module('Acceptance | Organizations | Information management', function (hooks) {
         administrationTeamId: 456,
         countryCode: 99100,
         organizationLearnerTypeName: 'Student',
+        organizationLearnerTypeId: 2,
       });
       this.server.create('organization', { id: '1234', features: { PLACES_MANAGEMENT: { active: true } } });
 

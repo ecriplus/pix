@@ -620,6 +620,7 @@ module('Integration | Component | organizations/information-section-edit', funct
         administrationTeamId: 123,
         countryCode: 99100,
         organizationLearnerTypeName: 'Student',
+        organizationLearnerTypeId: 789,
       });
       const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
 
