@@ -453,7 +453,7 @@
             {
               "type": "element",
               "element": {
-                "id": "227a574b-c8b4-4c52-b339-423a2e676ed8",
+                "id": "b8e34139-377f-48df-b750-4b40d8a8fcf2",
                 "type": "text",
                 "content": "Divin aimerait réduire sa consommation électrique. À chaque situation, aidez Divin à faire le choix le moins consommateur d'électricité.&nbsp;"
               }
@@ -664,10 +664,7 @@
                     "diagnosis": "<p>Il faut faire la distinction entre ce qui permet de se séparer d’appareils non utilisés et ce qui augmente le nombre d’appareils.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]
@@ -693,7 +690,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "sélectionnez",
                     "tolerances": [],
                     "options": [
                       {
@@ -709,9 +706,7 @@
                         "content": "en veille"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -722,7 +717,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "sélectionnez",
                     "tolerances": [],
                     "options": [
                       {
@@ -738,9 +733,7 @@
                         "content": "branchés"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -751,7 +744,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "sélectionnez",
                     "tolerances": [],
                     "options": [
                       {
@@ -767,9 +760,7 @@
                         "content": "invisible"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
