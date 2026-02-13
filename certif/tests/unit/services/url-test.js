@@ -179,7 +179,7 @@ module('Unit | Service | url', function (hooks) {
       const urlToDownloadSessionIssueReportSheet = service.urlToDownloadSessionIssueReportSheet;
 
       // then
-      assert.strictEqual(urlToDownloadSessionIssueReportSheet, 'https://cloud.pix.fr/s/ro7jHtsZZbY5SCX/download');
+      assert.strictEqual(urlToDownloadSessionIssueReportSheet, 'https://cloud.pix.fr/s/B6egBZnbjJFSiaN');
     });
   });
 
@@ -204,7 +204,7 @@ module('Unit | Service | url', function (hooks) {
       const urlToDownloadSessionV3IssueReportSheet = service.urlToDownloadSessionV3IssueReportSheet;
 
       // then
-      assert.strictEqual(urlToDownloadSessionV3IssueReportSheet, 'https://cloud.pix.fr/s/ro7jHtsZZbY5SCX/download');
+      assert.strictEqual(urlToDownloadSessionV3IssueReportSheet, 'https://cloud.pix.fr/s/B6egBZnbjJFSiaN');
     });
   });
 });
