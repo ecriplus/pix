@@ -501,7 +501,8 @@
                   "type": "image-text",
                   "slides": [
                     {
-                      "title": "Aurélie – Cycle 2 (école primaire)",
+                      "title": "Aurélie",
+                      "description" : "Cycle 2 (école primaire)",
                       "text": "Aurélie mène une séance de sensibilisation à l’IA  (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/fenetre-femme.png",
@@ -509,7 +510,8 @@
                       }
                     },
                     {
-                      "title": "Vincent (4e – français)",
+                      "title": "Vincent",
+                      "description" : "(4e – français)",
                       "text": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/bulle-homme.png",
@@ -517,7 +519,8 @@
                       }
                     },
                     {
-                      "title": "Mickaël (3e – histoire-géo)",
+                      "title": "Mickaël",
+                      "description" : "3e – histoire-géo",
                       "text": "Mickaël autorise les élèves à utiliser un logiciel d’IA générative grand public chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_bureau.png",
@@ -525,7 +528,8 @@
                       }
                     },
                     {
-                      "title": " Antoine – (2nd – SES)",
+                      "title": " Antoine",
+                      "description" : "2nd – SES",
                       "text": "Antoine intègre l’IA dans un projet de recherche documentaire, avec des règles explicites (objectifs, limites, esprit critique), sans création de comptes personnels sur des services grand public.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_fauteuil.png",
@@ -533,7 +537,8 @@
                       }
                     },
                     {
-                      "title": "Guillaume – (terminal – Mathématiques)",
+                      "title": "Guillaume",
+                      "description" : "terminal – Mathématiques",
                       "text": "Guillaume donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/ordi-homme.png",
