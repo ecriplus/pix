@@ -328,7 +328,7 @@
               "element": {
                 "id": "d4e21a60-a89b-4d3f-b03d-e208749227cd",
                 "type": "qab",
-                "instruction": "Pour chacune des situations ci- dessous, indiquez s’il est pertinent ou pas pertinent d’utiliser un logiciel d’IA générative.",
+                "instruction": "Pour chacune des situations ci-dessous, indiquez s’il est pertinent ou pas pertinent d’utiliser un logiciel d’IA générative.",
                 "cards": [
                   {
                     "id": "7807dd05-4019-4d98-8202-aa8417556538",
@@ -337,8 +337,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "usage pertinent",
-                    "proposalB": "usage non pertinent",
+                    "proposalA": "Usage pertinent",
+                    "proposalB": "Usage non pertinent",
                     "solution": "B"
                   },
                   {
@@ -348,8 +348,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "usage pertinent",
-                    "proposalB": "usage non pertinent",
+                    "proposalA": "Usage pertinent",
+                    "proposalB": "Usage non pertinent",
                     "solution": "A"
                   },
                   {
@@ -359,8 +359,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "usage pertinent",
-                    "proposalB": "usage non pertinent",
+                    "proposalA": "Usage pertinent",
+                    "proposalB": "Usage non pertinent",
                     "solution": "B"
                   }
                 ],
@@ -426,7 +426,7 @@
               "element": {
                 "id": "b6cde6fc-d8ce-47f4-92a3-d1f3a35a0ab6",
                 "type": "text",
-                "content": "[élément QUIZ-STEPPER à venir]<br><strong>Pour chacune des requêtes, sélectionnez celle qui est conforme au RGPD et aux préconisations du cadre d’usage de l’IA en éducation ?<br><br></strong><br><strong>Requête 1</strong> <br>Version A «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Version B «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: l’élève X est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Feedback&nbsp;: ❌ L’utilisation d’IA grand public exige l’anonymisation absolue des données personnelles identifiables (DPI). Le nom de l’élève et la mention de troubles d’apprentissage sont des informations personnelles protégées. <br><hr><strong>Requête 2</strong><br>Version A «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎classe4emeanonymisé.xls»<br>Version B «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎exportPronote4emeC.xls» <br>Feedback&nbsp;: ✔️ L’utilisation de données statistiques anonymes est autorisée pour l’aide à l’analyse, à condition qu’elle ne permette aucune identification d’élève. <br><hr><strong>Requête 3</strong><br>Version A «&nbsp;À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.&nbsp;» <br>Version B «&nbsp;À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement.&nbsp;» 📎annexe_plan_accompagnement_personnalisé.pdf»&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br><br>Feedback&nbsp;: ❌ &nbsp;L’utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d’y renoncer. <br>Requête 4 Version A «&nbsp; À partir de ce scan du chapitre 3 de mon manuel, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde&nbsp;» Version B «&nbsp; À partir de la séquence que j’ai rédigée, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde.&nbsp;» <br>Le contenu d’un manuel scolaire est protégé par le droit d’auteur et le droit à l’édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l’accord explicite de l’éditeur ou des auteurs est une violation de la propriété intellectuelle.<br>"
+                "content": "[élément QUIZ-STEPPER à venir]<br><strong>Pour chacune des requêtes, sélectionnez celle qui est conforme au RGPD et aux préconisations du cadre d’usage de l’IA en éducation ?<br><br></strong><br><strong>Requête 1</strong> <br>Version A «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Version B «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: l’élève X est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Feedback&nbsp;: ❌ L’utilisation d’IA grand public exige l’anonymisation absolue des données personnelles identifiables (DPI). Le nom de l’élève et la mention de troubles d’apprentissage sont des informations personnelles protégées. <br><hr><strong>Requête 2</strong><br>Version A «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎classe4emeanonymisé.xls»<br>Version B «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎exportPronote4emeC.xls» <br>Feedback&nbsp;: ✔️ L’utilisation de données statistiques anonymes est autorisée pour l’aide à l’analyse, à condition qu’elle ne permette aucune identification d’élève. <br><hr><strong>Requête 3</strong><br>Version A «&nbsp;À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.&nbsp;» <br>Version B «&nbsp;À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement.&nbsp;» 📎annexe_plan_accompagnement_personnalisé.pdf»&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br><br>Feedback&nbsp;: ❌ &nbsp;L’utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d’y renoncer. <br><hr><strong>Requête 4</strong><br> Version A «&nbsp; À partir de ce scan du chapitre 3 de mon manuel, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde&nbsp;»<br> Version B «&nbsp; À partir de la séquence que j’ai rédigée, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde.&nbsp;» <br>Le contenu d’un manuel scolaire est protégé par le droit d’auteur et le droit à l’édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l’accord explicite de l’éditeur ou des auteurs est une violation de la propriété intellectuelle.<br>"
               }
             }
           ]
@@ -709,7 +709,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "Oui mais uniquement pour la conception des évaluations.",
+                          "content": "Non, elle doit uniquement assister l'enseignant sans jamais se substituer à son jugement.",
                           "feedback": {
                             "state": "Bonne réponse !&nbsp;🎉",
                             "diagnosis": "L’enseignant demeure le seul garant de la pertinence pédagogique, de l’exactitude des contenus et de la prise de décision. L’IA générative est un outil au service de son expertise."
