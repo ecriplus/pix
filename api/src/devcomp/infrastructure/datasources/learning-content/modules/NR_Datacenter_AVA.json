@@ -52,34 +52,34 @@
               "element": {
                 "id": "f2665813-82bb-4427-a9a0-14a6a5f3df8f",
                 "type": "qcu-discovery",
-                "instruction": "<p>L’agence internationale de l’énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données.<br>À votre avis, que disent ces projections pour la période 2025 à 2030 ?<br></p>",
+                "instruction": "<p>L’agence internationale de l’énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données.<br>À votre avis, que disent ces projections pour la période 2024 à 2030 ?<br></p>",
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Leur consommation d’énergie va diminuer. ↘️</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2025 et 2030.<br></strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2024 et 2030.<br></strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Leur consommation d’énergie va rester stable. ➡️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité</strong><strong> consommée par les</strong><strong> centres de données va doubler </strong>entre 2025 et 2030.<br><br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. </p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité</strong><strong> consommée par les</strong><strong> centres de données va doubler </strong>entre 2024&nbsp;et 2030.<br><br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. </p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Leur consommation d’énergie va augmenter de 20%. ↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br></p><p>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br></p><p>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Leur consommation d’énergie va doubler. ↗️↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2025 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Effectivement ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   }
                 ],
@@ -751,6 +751,12 @@
                               "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/9-fortis-construction-meta-sweden-campus-1.jpg",
                               "alt": "Photo du centre de données de Meta (Facebook) en Suède"
                             }
+                          },
+                          {
+                            "userName": "Dona",
+                            "direction": "incoming",
+                            "type": "Texte",
+                            "content": "Bonne idée ! Il va falloir creuser... Merci à tous pour vos propositions."
                           }
                         ]
                       }
@@ -786,79 +792,6 @@
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>L’idée est d’<strong>optimiser le système de refroidissement</strong>. C’est ce qu’a fait Méta, la maison mère de Facebook, qui a installé en 2013 des centres de données dans la ville de Lulea, en Suède, où la température moyenne annuelle est de 2°.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "3",
-                      "hasShortProposals": false
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "33523dd4-57f9-4f14-a040-f59d262c220a",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "message-conversation",
-                      "props": {
-                        "title": "Dona & Alaric",
-                        "messages": [
-                          {
-                            "userName": "Dona",
-                            "direction": "incoming",
-                            "type": "Texte",
-                            "content": "Pas mal… Une dernière suggestion ?"
-                          },
-                          {
-                            "userName": "Alaric",
-                            "direction": "outgoing",
-                            "type": "Texte",
-                            "content": "Pourquoi pas installer le centre de données sur une plateforme maritime, on pourrait utiliser l’eau de l’océan ?"
-                          },
-                          {
-                            "userName": "Alaric",
-                            "direction": "outgoing",
-                            "type": "Image seule",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/data-center-sous-marin-chine.jpg",
-                              "alt": "Photographie d’un centre de données sous-marin"
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "id": "918183c7-9552-4607-a464-8ca92a8a783b",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Alaric ?<br></p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "<p>Alimenter le centre de données avec une énergie renouvelable.<br></p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement.</strong> Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Transférer la chaleur produite par le centre de données.<br></p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement. </strong>Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
-                          "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>  Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Il s’agit de nouveau d’<strong>optimiser les techniques de refroidissement</strong>. Mais cette idée ne prend pas en compte l’impact de l’utilisation de l’eau et son réchauffement sur les écosystèmes marins.<br>Microsoft a testé ce fonctionnement avec des protoypes mais n’a pas donné suite à ce projet.</p>"
                           }
                         }
                       ],
@@ -1060,7 +993,7 @@
                       "feedbacks": {
                         "valid": {
                           "state": "Bonne réponse.",
-                          "diagnosis": "Ces métaux et de terres rares sont nécessaires à la fabrication des serveurs."
+                          "diagnosis": "Ces métaux et terres rares sont nécessaires à la fabrication des serveurs."
                         },
                         "invalid": {
                           "state": "Mauvaise réponse.",
