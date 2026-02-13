@@ -424,9 +424,83 @@
             {
               "type": "element",
               "element": {
-                "id": "b6cde6fc-d8ce-47f4-92a3-d1f3a35a0ab6",
-                "type": "text",
-                "content": "[élément QUIZ-STEPPER à venir]<br><strong>Pour chacune des requêtes, sélectionnez celle qui est conforme au RGPD et aux préconisations du cadre d’usage de l’IA en éducation ?<br><br></strong><br><strong>Requête 1</strong> <br>Version A «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Version B «&nbsp;Reformule cette appréciation pour la rendre plus bienveillante&nbsp;: l’élève X est en difficulté en lecture et présente des troubles de l’attention.&nbsp;» <br>Feedback&nbsp;: ❌ L’utilisation d’IA grand public exige l’anonymisation absolue des données personnelles identifiables (DPI). Le nom de l’élève et la mention de troubles d’apprentissage sont des informations personnelles protégées. <br><hr><strong>Requête 2</strong><br>Version A «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎classe4emeanonymisé.xls»<br>Version B «&nbsp;Analyse le tableau joint pour repérer les réussites et difficultés de la classe.<br>📎exportPronote4emeC.xls» <br>Feedback&nbsp;: ✔️ L’utilisation de données statistiques anonymes est autorisée pour l’aide à l’analyse, à condition qu’elle ne permette aucune identification d’élève. <br><hr><strong>Requête 3</strong><br>Version A «&nbsp;À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.&nbsp;» <br>Version B «&nbsp;À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement.&nbsp;» 📎annexe_plan_accompagnement_personnalisé.pdf»&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br><br>Feedback&nbsp;: ❌ &nbsp;L’utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d’y renoncer. <br><hr><strong>Requête 4</strong><br> Version A «&nbsp; À partir de ce scan du chapitre 3 de mon manuel, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde&nbsp;»<br> Version B «&nbsp; À partir de la séquence que j’ai rédigée, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde.&nbsp;» <br>Le contenu d’un manuel scolaire est protégé par le droit d’auteur et le droit à l’édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l’accord explicite de l’éditeur ou des auteurs est une violation de la propriété intellectuelle.<br>"
+                "id": "36539262-25ad-4df4-b169-35a5a39bf861",
+                "type": "custom",
+                "instruction": "Pour chacune des requêtes, sélectionnez celle qui est conforme au RGPD et aux préconisations du cadre d'usage de l'IA en éducation.",
+                "tagName": "quiz-stepper",
+                "props": {
+                  "titleLevel": 2,
+                  "steps": [
+                    {
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "feedback": {
+                        "success": "Effectivement, l'utilisation d'IA grand public exige l'anonymisation absolue des données personnelles identifiables (DPI). Le nom de l'élève et la mention de troubles d'apprentissage sont des informations personnelles protégées.",
+                        "failed": "Non, l'utilisation d'IA grand public exige l'anonymisation absolue des données personnelles identifiables (DPI). Le nom de l'élève et la mention de troubles d'apprentissage sont des informations personnelles protégées."
+                      },
+                      "choice1": {
+                        "title": "",
+                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : Lucas Dupont est en difficulté en lecture et présente des troubles de l’attention.",
+                        "isGoodAnswer": false
+                      },
+                      "choice2": {
+                        "title": "",
+                        "content": "Reformule cette appréciation pour la rendre plus bienveillante : l’élève X est en difficulté en lecture et présente des troubles de l’attention.",
+                        "isGoodAnswer": true
+                      }
+                    },
+                    {
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "feedback": {
+                        "success": "Effectivement, l'utilisation de données statistiques anonymes est autorisée pour l'aide à l'analyse, à condition qu'elle ne permette aucune identification d'élève.",
+                        "failed": "Non, l'utilisation de données statistiques anonymes est autorisée pour l'aide à l'analyse, uniquement à condition qu'elle ne permette aucune identification d'élève."
+                      },
+                      "choice1": {
+                        "title": "Requête 1",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe4emeanonymisé.xls",
+                        "isGoodAnswer": true
+                      },
+                      "choice2": {
+                        "title": "Requête 2",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎exportENT4emeC.xls",
+                        "isGoodAnswer": false
+                      }
+                    },
+                    {
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "feedback": {
+                        "success": "Effectivement, l'utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d'y renoncer.",
+                        "failed": "Non, l'utilisation des données sensibles et confidentielles (informations médicales, PAP) est interdite avec les IA grand public, le cadre exigeant d'y renoncer."
+                      },
+                      "choice1": {
+                        "title": "Requête 1",
+                        "content": " À partir du Programme d'Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées.",
+                        "isGoodAnswer": false
+                      },
+                      "choice2": {
+                        "title": "Requête 2",
+                        "content": "À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement.",
+                        "isGoodAnswer": true
+                      }
+                    },
+                    {
+                      "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d'usage de l'IA en éducation ?",
+                      "feedback": {
+                        "success": "Effectivement, le contenu d'un manuel scolaire est protégé par le droit d'auteur et le droit à l'édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l'accord explicite de l'éditeur ou des auteurs est une violation de la propriété intellectuelle",
+                        "failed": "Non, le contenu d'un manuel scolaire est protégé par le droit d'auteur et le droit à l'édition. Le reproduire, le scanner ou le traiter via une IA (grand public) sans l'accord explicite de l'éditeur ou des auteurs est une violation de la propriété intellectuelle"
+                      },
+                      "choice1": {
+                        "title": "Requête 1",
+                        "content": "À partir de la séquence que j’ai rédigée, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde. ",
+                        "isGoodAnswer": true
+                      },
+                      "choice2": {
+                        "title": "Requête 2",
+                        "content": "À partir de ce scan du chapitre 3 de mon manuel, synthétise les cinq points clés à retenir sur la Révolution française pour mes élèves de Seconde.",
+                        "isGoodAnswer": false
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
