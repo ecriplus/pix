@@ -426,11 +426,11 @@
               "element": {
                 "id": "36539262-25ad-4df4-b169-35a5a39bf861",
                 "type": "custom",
-                "instruction": "Pour chacune des requêtes, sélectionnez celle qui vous semble conforme au RGPD et aux préconisations du cadre d'usage de l'IA en éducation.",
+                "instruction": "Pour chacune des requêtes, sélectionnez celle qui vous semble conforme au RGPD et aux préconisations du cadre d’usage de l’IA en éducation.",
                 "tagName": "quiz-stepper",
                 "props": {
                   "titleLevel": 2,
-                   "steps": [
+                  "steps": [
                     {
                       "question": "Laquelle de ces deux requêtes est conforme au RGPD et au cadre d’usage de l’IA en éducation ?",
                       "feedback": {
@@ -576,7 +576,7 @@
                   "slides": [
                     {
                       "title": "Aurélie",
-                      "description" : "Cycle 2 (école primaire)",
+                      "description": "Cycle 2 (école primaire)",
                       "text": "Aurélie mène une séance de sensibilisation à l’IA  (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/fenetre-femme.png",
@@ -585,7 +585,7 @@
                     },
                     {
                       "title": "Vincent",
-                      "description" : "(4e – français)",
+                      "description": "(4e – français)",
                       "text": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/bulle-homme.png",
@@ -594,7 +594,7 @@
                     },
                     {
                       "title": "Mickaël",
-                      "description" : "3e – histoire-géo",
+                      "description": "3e – histoire-géo",
                       "text": "Mickaël autorise les élèves à utiliser un logiciel d’IA générative grand public chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_bureau.png",
@@ -603,7 +603,7 @@
                     },
                     {
                       "title": " Antoine",
-                      "description" : "2nd – SES",
+                      "description": "2nd – SES",
                       "text": "Antoine intègre l’IA dans un projet de recherche documentaire, avec des règles explicites (objectifs, limites, esprit critique), sans création de comptes personnels sur des services grand public.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_fauteuil.png",
@@ -612,7 +612,7 @@
                     },
                     {
                       "title": "Guillaume",
-                      "description" : "terminal – Mathématiques",
+                      "description": "terminal – Mathématiques",
                       "text": "Guillaume donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/ordi-homme.png",
@@ -783,7 +783,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "Non, elle doit uniquement assister l'enseignant sans jamais se substituer à son jugement.",
+                          "content": "Non, elle doit uniquement assister l’enseignant sans jamais se substituer à son jugement.",
                           "feedback": {
                             "state": "Bonne réponse !&nbsp;🎉",
                             "diagnosis": "L’enseignant demeure le seul garant de la pertinence pédagogique, de l’exactitude des contenus et de la prise de décision. L’IA générative est un outil au service de son expertise."
@@ -876,7 +876,123 @@
           "id": "1dd02f5d-94f0-4b25-8670-fa180b772e07",
           "type": "activity",
           "title": "Activité - 2",
-          "components": []
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2b91f1e0-97e9-44c0-a07f-5759976be002",
+                "type": "qrocm",
+                "instruction": "Complétez le texte suivant : ",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "Les logiciels d’IA générative ont un coût environnemental élevé car ils consomment beaucoup d’"
+                  },
+                  {
+                    "input": "un",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "écrire ici",
+                    "ariaLabel": "écrire ici",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "énergie",
+                      "électricité"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": ", mais aussi d’eau et de ressources matérielles."
+                  },
+                  {
+                    "type": "text",
+                    "content": "Le cadre d’usage promeut une approche "
+                  },
+                  {
+                    "input": "deux",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "écrire ici",
+                    "ariaLabel": "écrire ici",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "frugale"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": ", qui consiste à faire un choix "
+                  },
+                  {
+                    "input": "trois",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "écrire ici",
+                    "ariaLabel": "écrire ici",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "éclairé",
+                      "raisonné"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": " et "
+                  },
+                  {
+                    "input": "quatre",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 10,
+                    "display": "inline",
+                    "placeholder": "écrire ici",
+                    "ariaLabel": "écrire ici",
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "éclairé",
+                      "raisonné"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": " de l’outil utilisé."
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bonne réponse ! 🎉",
+                    "diagnosis": "Vous avez identifié les éléments clés du cadre d’usage et la logique de frugalité numérique liée à l’usage de l’IA."
+                  },
+                  "invalid": {
+                    "state": "Mauvaise réponse.",
+                    "diagnosis": "L’approche préconisée par le cadre d’usage de l’IA en éducation repose sur la prise en compte de l’impact environnemental de l’IA et sur un choix réfléchi des outils numériques utilisés."
+                  }
+                }
+              }
+            }
+          ]
         },
         {
           "id": "72f93798-ecb7-4622-9f07-7514b4bf0cf5",
