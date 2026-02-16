@@ -826,7 +826,7 @@ jobs:
 
   admin_lint:
     executor:
-      name: node-docker
+      name: node-docker-medium
     working_directory: ~/pix/admin
     steps:
       - attach_workspace:
