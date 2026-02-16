@@ -25,14 +25,60 @@
         {
           "id": "ee4ec0ac-1c75-461d-97ee-0d1bbb76653d",
           "type": "discovery",
-          "title": "Accroche",
+          "title": "Accroche - 1",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "1f083f72-4c0a-41d6-a8f8-a9b8c16d5bb5",
+                "type": "qcu-declarative",
+                "instruction": "<p>Dans votre pratique professionnelle actuelle, quel est votre usage de l’intelligence artificielle ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Je n’utilise pas du tout l’IA dans mon travail d’enseignant (je n’ai pas encore essayé ou je ne sais pas encore comment l’intégrer).</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Je l’utilise ponctuellement, par exemple pour reformuler des consignes, trouver des idées d’exercices ou gagner du temps dans mes préparations.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je l’intègre régulièrement dans mon travail (préparation de cours, différenciation pédagogique, aide à l’évaluation, supports pour les élèves).</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "ca6edc16-149f-45cc-903d-2c9c2753e533",
+          "type": "discovery",
+          "title": "Accroche - 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "Accroche à rédiger."
+                "content": "<p>L’IA s’impose désormais comme un <strong>puissant levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un usage éclairé et responsable.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’éducation nationale a publié en juin 2026 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Il veut fournir des repères pour que&nbsp; l’usage de l’IA s’effectue au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École et de la liberté pédagogique.</p>"
               }
             }
           ]
@@ -47,7 +93,7 @@
               "element": {
                 "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "Transition à rédiger."
+                "content": "<p>Découvrons les principes fondamentaux du cadre d’usage de l’IA en éducation en les appliquant à des pratiques concrètes et courantes, afin d’acquérir les bons réflexes pour un usage éclairé et conforme aux préconisations officielles.</p>"
               }
             }
           ]
@@ -313,7 +359,7 @@
               "element": {
                 "id": "aa092ff3-d3e2-4701-b6f1-c27961f7056b",
                 "type": "text",
-                "content": "Transition à rédiger."
+                "content": "<p>Nous avons vu que l’IA peut soutenir le geste enseignant. Néanmoins, avant de choisir de l’utiliser, il y a d’autres questions importantes à se poser…</p>"
               }
             }
           ]
@@ -411,7 +457,7 @@
               "element": {
                 "id": "30ff1b8b-0d83-4dcc-9b73-7b0163d8ac03",
                 "type": "text",
-                "content": "Transition à rédiger."
+                "content": "<p>Même si l’IA est utilisée en tant qu’assistante, dans une démarche frugale, il est primordial de se questionner quant aux données qu’on lui transmet.</p>"
               }
             }
           ]
@@ -554,7 +600,7 @@
               "element": {
                 "id": "e0c29f4a-5f5b-436b-8c1f-b839537f4d91",
                 "type": "text",
-                "content": "Transition à rédiger."
+                "content": "<p>Une autre question, et pas des moindre,&nbsp; s’impose lorsqu’on parle d’IA en éducation&nbsp;: «&nbsp;Et avec les élèves ? Peut-on exploiter l’IA en classe ? À partir de quel âge, et sous quelles conditions&nbsp;».</p>"
               }
             }
           ]
@@ -706,21 +752,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": "e06385ee-bb19-45cc-bd90-8e20f8d8f896",
-          "type": "transition",
-          "title": "Transition - 4",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "abf0a6d9-f2a7-4969-a8f0-60fddcbc1be0",
-                "type": "text",
-                "content": "Transition à rédiger"
-              }
-            }
-          ]
         }
       ]
     },
@@ -807,7 +838,7 @@
                           "content": "Parce qu’elle fonctionne sur un modèle statistique probabiliste et peut commettre des erreurs.",
                           "feedback": {
                             "state": "Bonne réponse !&nbsp;🎉",
-                            "diagnosis": "à rédiger."
+                            "diagnosis": "<p>L’IA fonctionne par prédiction du mot ou de l’information le plus probable. Elle est susceptible de se tromper. C’est pour cela qu’il faut toujours vérifier les résultats obtenus.</p>"
                           }
                         },
                         {
@@ -815,15 +846,15 @@
                           "content": "Parce que l’IA met trop de temps à générer des réponses exactes.",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "à rédiger."
+                            "diagnosis": "<p>L’impératif de vérification des résultats produits par l’IA n’est pas lié au temps de génération. Il faut plutôt penser à aux risques liés à son fonctionnement…</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "Parce que le RGPD l’interdit.",
                           "feedback": {
-                            "state": "Mauvaise réponse.",
-                            "diagnosis": "à rédiger"
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>L’impératif de vérification des résultats produits par l’IA n’est pas lié aux règles de protection des données (RGPD). Il faut plutôt penser à aux risques liés à son fonctionnement…</p>"
                           }
                         }
                       ],
@@ -844,7 +875,7 @@
                           "content": "L’utiliser directement pour gagner du temps.",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "à rédiger"
+                            "diagnosis": "<p>Le gain de temps est un avantage évident lié à l’usage de l’IA, mais cela peut devenir aussi un piège si l’on fait pas attention au contenu généréà rédiger.</p>"
                           }
                         },
                         {
@@ -852,7 +883,7 @@
                           "content": "La modifier uniquement si le style ne convient pas.",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "à rédiger"
+                            "diagnosis": "<p>Lorsque l’IA nous fournit un résultat,&nbsp;la question du style n’est pas à négliger, ce n’est pas la priorité.</p>"
                           }
                         },
                         {
@@ -860,7 +891,7 @@
                           "content": "La vérifier obligatoirement et la croiser avec d’autres sources fiables.",
                           "feedback": {
                             "state": "Bonne réponse !&nbsp;🎉",
-                            "diagnosis": "à rédiger"
+                            "diagnosis": "<p>Pour être sûre de l’exactitude et de la pertinence d’un résultat produit par l’IA, il faut le comparer à d’autres sources fiables de nature scientifique et/ou institutionnelles.</p>"
                           }
                         }
                       ],
@@ -882,112 +913,133 @@
               "element": {
                 "id": "2b91f1e0-97e9-44c0-a07f-5759976be002",
                 "type": "qrocm",
-                "instruction": "Complétez le texte suivant : ",
+                "instruction": "<p>Pour chacune des tâches suivantes, choisissez l’outil le plus adapté selon des préconisations du cadre.</p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "Les logiciels d’IA générative ont un coût environnemental élevé car ils consomment beaucoup d’ "
+                    "content": "<p>Trouver la date de publication d’un texte&nbsp;:</p>"
                   },
                   {
                     "input": "un",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "écrire ici",
-                    "ariaLabel": "écrire ici",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
+                    "placeholder": "Sélectionnez l’outil adapté",
+                    "ariaLabel": "Sélectionnez l’outil adapté",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "un moteur de recherche"
+                      },
+                      {
+                        "id": "2",
+                        "content": "un correcteur orthographique intégré"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un logiciel d’IA générative"
+                      }
                     ],
                     "solutions": [
-                      "énergie",
-                      "électricité"
+                      "1"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": ", mais aussi d’eau et de ressources matérielles."
-                  },
-                  {
-                    "type": "text",
-                    "content": "<br>Le cadre d’usage promeut une approche "
+                    "content": "<p><br>Créer 4 niveaux d’un même exercice&nbsp;:</p>"
                   },
                   {
                     "input": "deux",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "écrire ici",
-                    "ariaLabel": "écrire ici",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
+                    "placeholder": "Sélectionnez l’outil adapté",
+                    "ariaLabel": "Sélectionnez l’outil adapté",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "un moteur de recherche"
+                      },
+                      {
+                        "id": "2",
+                        "content": "un correcteur orthographique intégré"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un logiciel d’IA générative"
+                      }
                     ],
                     "solutions": [
-                      "frugale"
+                      "3"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": ", qui consiste à faire un choix "
+                    "content": "<p><br>Vérifier l’orthographe d’un court paragraphe&nbsp;:</p>"
                   },
                   {
                     "input": "trois",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "écrire ici",
-                    "ariaLabel": "écrire ici",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
+                    "placeholder": "Sélectionnez l’outil adapté",
+                    "ariaLabel": "Sélectionnez l’outil adapté",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "un moteur de recherche"
+                      },
+                      {
+                        "id": "2",
+                        "content": "un correcteur orthographique intégré"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un logiciel d’IA générative"
+                      }
                     ],
                     "solutions": [
-                      "éclairé",
-                      "raisonné"
+                      "2"
                     ]
                   },
                   {
                     "type": "text",
-                    "content": " et "
+                    "content": "<p><br>Créer une synthèse à partir de plusieurs sources&nbsp;:</p>"
                   },
                   {
                     "input": "quatre",
-                    "type": "input",
-                    "inputType": "text",
-                    "size": 10,
+                    "type": "select",
                     "display": "inline",
-                    "placeholder": "écrire ici",
-                    "ariaLabel": "écrire ici",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
+                    "placeholder": "Sélectionnez l’outil adapté",
+                    "ariaLabel": "Sélectionnez l’outil adapté",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "un moteur de recherche"
+                      },
+                      {
+                        "id": "2",
+                        "content": "un correcteur orthographique intégré"
+                      },
+                      {
+                        "id": "3",
+                        "content": "un logiciel d’IA générative"
+                      }
                     ],
                     "solutions": [
-                      "éclairé",
-                      "raisonné"
+                      "3"
                     ]
-                  },
-                  {
-                    "type": "text",
-                    "content": " de l’outil utilisé."
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "Bonne réponse ! 🎉",
-                    "diagnosis": "Vous avez identifié les éléments clés du cadre d’usage et la logique de frugalité numérique liée à l’usage de l’IA."
+                    "diagnosis": "<p>Choisir un outil adapté en prenant en compte l’impact environnemental est la clé pour un usage frugal de l’IA.</p>"
                   },
                   "invalid": {
                     "state": "Mauvaise réponse.",
-                    "diagnosis": "L’approche préconisée par le cadre d’usage de l’IA en éducation repose sur la prise en compte de l’impact environnemental de l’IA et sur un choix réfléchi des outils numériques utilisés."
+                    "diagnosis": "<p>Pour une utilisation frugale de l’IA, il faut prendre en compte son apport réel par rapport à son coût environnemental pour chaque tâche.</p>"
                   }
                 }
               }
@@ -998,7 +1050,111 @@
           "id": "72f93798-ecb7-4622-9f07-7514b4bf0cf5",
           "type": "activity",
           "title": "Activité - 3",
-          "components": []
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7aaa9f1b-ad1c-4968-a307-db753d4a06aa",
+                "type": "text",
+                "content": "<p>Karim, enseignant, se questionne sur différents usages de l’IA par rapport au cadre d’usage de l’IA en éducation et au RGDP.<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b4912713-9500-466a-88a7-d19fa58cd22a",
+                "type": "qrocm",
+                "instruction": "<p>Pour chacun des usages qu’il envisage, indiquez s’il s’agit d’un usage conforme ou non conforme.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<ul><li>Faire rédiger les appréciations du bulletin scolaire de ses élèves par un logiciel d’IA générative grand public en lui envoyant les données présentes dans le logiciel de vie scolaire.</li></ul>"
+                  },
+                  {
+                    "input": "un",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionnez la réponse",
+                    "ariaLabel": "Sélectionnez la réponse",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "usage conforme"
+                      },
+                      {
+                        "id": "2",
+                        "content": "usage non conforme"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<ul><li>Copier le texte officiel de la Constitution de 1958 dans une IA générative pour lui demander de créer un QCM de révision pour ses élèves, dans le cadre d’un cours sur la Vème République.</li></ul>"
+                  },
+                  {
+                    "input": "deux",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionnez la réponse",
+                    "ariaLabel": "Sélectionnez la réponse",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": ""
+                      },
+                      {
+                        "id": "2",
+                        "content": ""
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<ul><li>Demander à un logiciel d’IA générative de réécrire le chapitre d’un roman publié l’année précédente à la manière de Molière.</li></ul>"
+                  },
+                  {
+                    "input": "trois",
+                    "type": "select",
+                    "display": "block",
+                    "placeholder": "Sélectionnez la réponse",
+                    "ariaLabel": "Sélectionnez la réponse",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": ""
+                      },
+                      {
+                        "id": "2",
+                        "content": ""
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !&nbsp;🎉</p>",
+                    "diagnosis": "<p>Les logiciels d’IA générative grand public ne garantissent pas la <strong>non-réutilisation</strong> des données transmises. Il est donc interdit de transmettre des données concernant une personne physique ou morale ou des œuvres protégées par le droit d’auteur.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.<br></p>",
+                    "diagnosis": "<p>Les logiciels d’IA générative grand public ne garantissent pas la <strong>non-réutilisation</strong> des données transmises. Il est donc interdit de transmettre des données concernant une personne physique ou morale ou des oeuvres protégées par le droit d’auteur.</p>"
+                  }
+                }
+              }
+            }
+          ]
         },
         {
           "id": "03287fbd-11ed-4f7e-b0ed-be4f743cfee6",
@@ -1095,14 +1251,50 @@
         {
           "id": "827b90ed-3121-450f-86cc-da8da3764933",
           "type": "challenge",
-          "title": "Défi/transfert",
+          "title": "Défi",
           "components": [
             {
               "type": "element",
               "element": {
                 "id": "8a352994-da21-41a3-bfb6-d87536077b2c",
                 "type": "text",
-                "content": "à rédiger"
+                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫 <br><br>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp;&nbsp; Il les invite à se rendre sur Compra:IA, un comparateur de logiciels d’IA génératives. Parmi les modèles de langage, ils doivent choisir un “géant” (Gemini). Ensuite ils saisissent la requête suivante&nbsp;:&nbsp; “Explique moi la méthode de la dissertation pour le bac de français et donne des exemples de titres.<br>Les élèves se rendent compte que l’énergie consommée par cette requête est très importante (environ 100 Kilowatt). </p><p>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leur deux réponses.</p><br>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4f6307f5-8f02-4092-aff6-ca5b8deee2d8",
+                "type": "qcu",
+                "instruction": "<p>À combien équivaut l’énergie consommée par Gemini3 flash pour répondre à cette requête ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Laisser une ampoule LED allumée pendant plus de 2 heures ou à 15 min de streaming.</p>",
+                    "feedback": {
+                      "state": "<p>Pas tout à fait !</p>",
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Laisser une ampoule LED allumée pendant plus de 15 heures ou à plus d’1 heure de streaming.</p>",
+                    "feedback": {
+                      "state": "<p>Effectivement !</p>",
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Laisser une ampoule LED allumée pendant plus de 35 heures ou à 4 heures de streaming.</p>",
+                    "feedback": {
+                      "state": "<p>Pas tout à fait !&nbsp;<br></p>",
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                    }
+                  }
+                ],
+                "solution": "2"
               }
             }
           ]
