@@ -1209,6 +1209,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         createdBy: superAdminUserId,
         administrationTeamId: administrationTeam.id,
         countryCode: 99100,
+        organizationLearnerType: new OrganizationLearnerType({
+          id: organizationLearnerType.id,
+          name: organizationLearnerType.name,
+        }),
       });
 
       // when
@@ -1220,6 +1224,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedOrganization.type).to.equal('SCO');
       expect(savedOrganization.createdBy).to.equal(superAdminUserId);
       expect(savedOrganization.countryCode).to.equal(99100);
+      expect(savedOrganization.organizationLearnerType).to.be.instanceOf(OrganizationLearnerType);
+      expect(savedOrganization.organizationLearnerType.id).to.equal(organizationLearnerType.id);
     });
 
     context('when the organization type is SCO-1D', function () {

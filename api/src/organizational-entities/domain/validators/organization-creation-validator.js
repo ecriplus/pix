@@ -27,6 +27,15 @@ const organizationValidationJoiSchema = Joi.object({
     'number.min': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
     'number.max': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
   }),
+
+  organizationLearnerType: Joi.object({
+    id: Joi.number(),
+    name: Joi.string(),
+  })
+    .required()
+    .messages({
+      'any.required': "Le public prescrit n'est pas renseigné.",
+    }),
 });
 
 const validate = function (organizationCreationParams) {

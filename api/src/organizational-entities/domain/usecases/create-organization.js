@@ -2,6 +2,7 @@ import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../errors.js';
 import { Organization } from '../models/Organization.js';
@@ -12,6 +13,7 @@ const createOrganization = async function ({
   countryRepository,
   dataProtectionOfficerRepository,
   organizationForAdminRepository,
+  organizationLearnerTypeRepository,
   organizationCreationValidator,
   schoolRepository,
   codeGenerator,
@@ -25,6 +27,11 @@ const createOrganization = async function ({
   }
 
   organizationCreationValidator.validate(organization);
+
+  await _checkOrganizationLearnerTypeExists(
+    organization.organizationLearnerType?.id,
+    organizationLearnerTypeRepository,
+  );
 
   await _checkCountryExists(organization.countryCode, countryRepository);
 
@@ -66,6 +73,19 @@ function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
         parentOrganizationId: parentOrganization.id,
       },
     });
+  }
+}
+
+async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
+  if (organizationLearnerTypeId) {
+    try {
+      await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
+    } catch {
+      throw new OrganizationLearnerTypeNotFound({
+        message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
+        meta: { organizationLearnerTypeId },
+      });
+    }
   }
 }
 
