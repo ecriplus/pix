@@ -39,10 +39,6 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     return this.assessmentState === assessmentStates.ENDED_BY_INVIGILATOR;
   }
 
-  get wasCompleted() {
-    return this.assessmentState === assessmentStates.COMPLETED;
-  }
-
   get numberOfOkAnswers() {
     const certificationChallengesForAdministration = this.hasMany('certificationChallengesForAdministration').value();
     if (!certificationChallengesForAdministration) return 0;
@@ -69,7 +65,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
 
   get duration() {
     const start = new Date(this.createdAt);
-    const end = this.wasCompleted ? new Date(this.completedAt) : new Date(this.endedAt);
+    const end = new Date(this.completedAt || this.endedAt);
     return end - start;
   }
 
