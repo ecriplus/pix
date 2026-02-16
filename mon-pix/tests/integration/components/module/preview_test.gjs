@@ -132,4 +132,15 @@ module('Integration | Component | Module | Preview', function (hooks) {
       });
     });
   });
+
+  test('should display a button display elements id', async function (assert) {
+    // given
+    //  when
+    const screen = await render(<template><ModulixPreview /></template>);
+
+    // then
+    assert.dom(screen.getByRole('radiogroup', { name: t('pages.modulix.preview.elements-id-button.label') })).exists();
+    assert.dom(screen.getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.yes') })).exists();
+    assert.dom(screen.getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.no') })).exists();
+  });
 });

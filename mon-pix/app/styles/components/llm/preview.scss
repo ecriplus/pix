@@ -3,3 +3,21 @@
   height: 600px;
   border: none;
 }
+
+.modulix-preview {
+  &__elements-id-button {
+    position: sticky;
+    top: var(--pix-spacing-6x);
+    z-index: 200;
+    display: inline-block;
+    margin-left: var(--pix-spacing-6x);
+    padding: var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
+    border: 2px solid var(--pix-primary-100);
+    border-radius: 4px;
+  }
+
+  &__elements-id-tag {
+    margin: var(--pix-spacing-2x) 0;
+  }
+}

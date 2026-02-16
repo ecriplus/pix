@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -11,6 +12,8 @@ import { pageTitle } from 'ember-page-title';
 import { notEq } from 'ember-truth-helpers';
 import ModulixGrain from 'mon-pix/components/module/grain/grain';
 import ModulixSectionTitle from 'mon-pix/components/module/section-title';
+
+import didInsert from '../../modifiers/modifier-did-insert';
 
 export default class ModulixPreview extends Component {
   @service store;
@@ -131,6 +134,11 @@ export default class ModulixPreview extends Component {
   noop() {}
 
   @action
+  enableElementsIdButton() {
+    this.modulixPreviewMode.enableElementsIdButton();
+  }
+
+  @action
   updateModule(event) {
     try {
       this.errorMessage = null;
@@ -149,6 +157,15 @@ export default class ModulixPreview extends Component {
     this.moduleCodeDisplayed = !this.moduleCodeDisplayed;
   }
 
+  @action
+  setHTMLElementOffset(htmlElement) {
+    const bannerElement = document.getElementById('pix-layout-banner-container');
+    if (!bannerElement) return;
+    const distanceBetweenNavigationAndBanner = 8;
+    const top = bannerElement.getBoundingClientRect().height + distanceBetweenNavigationAndBanner;
+    htmlElement.style.setProperty('top', `${top}px `);
+  }
+
   <template>
     {{pageTitle this.formattedModule.title}}
 
@@ -164,11 +181,18 @@ export default class ModulixPreview extends Component {
           @size="small"
           target="_blank"
         >
-          {{! template-lint-disable "no-bare-strings" }}
-          Modulix Editor
+          {{t "pages.modulix.preview.modulix-editor"}}
         </PixButtonLink>
       </div>
     {{/unless}}
+
+    <div class="modulix-preview__elements-id-button" {{didInsert this.setHTMLElementOffset}}>
+      <PixSegmentedControl @onChange={{this.enableElementsIdButton}} @variant="primary" @toggled={{true}}>
+        <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
+        <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
+        <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>
+      </PixSegmentedControl>
+    </div>
 
     <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">
       <aside class="module-preview__passage module-passage">

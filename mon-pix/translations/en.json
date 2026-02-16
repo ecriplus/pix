@@ -1722,6 +1722,14 @@
         }
       },
       "preview": {
+        "elements-id-button": {
+          "choices": {
+            "no": "No",
+            "yes": "Yes"
+          },
+          "label": "Display elements ID"
+        },
+        "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",
         "textarea-label": "Module content"
