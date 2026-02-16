@@ -49,7 +49,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             assert.ok(importLink.href.endsWith('/import-participants'));
 
             const createCampaignLink = screen.queryByRole('link', { name: 'Créer les campagnes' });
-            assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/RaPpKjFHNX2kSR4');
+            assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt');
 
             const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
             assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/opiFxfjygR76S8y');
