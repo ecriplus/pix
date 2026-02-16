@@ -576,6 +576,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
         // then
         expect(module.sections[0].grains[0].components[0].element).to.be.an.instanceOf(Text);
       });
+
       it('should instantiate a Module with a ComponentElement which contains a Audio Element', async function () {
         // given
         const moduleData = {
@@ -956,6 +957,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: false,
                         id: '6a6944be-a8a3-4138-b5dc-af664cf40b07',
                         type: 'qcu-declarative',
                         instruction: '<p>Quand faut-il mouiller sa brosse à dents ?</p>',
@@ -1982,6 +1984,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         {
                           elements: [
                             {
+                              hasShortProposals: true,
                               id: '6a6944be-a8a3-4138-b5dc-af664cf40b07',
                               type: 'qcu-declarative',
                               instruction: '<p>Quand faut-il mouiller sa brosse à dents ?</p>',

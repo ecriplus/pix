@@ -317,6 +317,7 @@ export class ModuleFactory {
 
   static #buildQCUDeclarative(element) {
     return new QCUDeclarative({
+      hasShortProposals: element.hasShortProposals,
       id: element.id,
       instruction: element.instruction,
       proposals: element.proposals.map((proposal) => {
