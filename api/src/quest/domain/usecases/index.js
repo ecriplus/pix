@@ -51,6 +51,7 @@ import { createCombinedCourseBlueprint } from './create-combined-course-blueprin
 import { createCombinedCourses } from './create-combined-courses.js';
 import { createOrUpdateQuestsInBatch } from './create-or-update-quests-in-batch.js';
 import { deleteAndAnonymizeParticipationsForALearnerId } from './delete-and-anonymise-participations-for-a-learner-id.js';
+import { deleteAndAnonymizeCombinedCourses } from './delete-and-anonymize-combined-courses.js';
 import { detachOrganizationFromCombinedCourseBlueprint } from './detach-organization-from-combined-course-blueprint.js';
 import { findByOrganizationId } from './find-by-organization-id.js';
 import { findCombinedCourseBlueprints } from './find-combined-course-blueprints.js';
@@ -74,6 +75,7 @@ const usecasesWithoutInjectedDependencies = {
   checkUserQuest,
   createOrUpdateQuestsInBatch,
   detachOrganizationFromCombinedCourseBlueprint,
+  deleteAndAnonymizeCombinedCourses,
   findCombinedCourseByCampaignId,
   findCombinedCourseByModuleIdAndUserId,
   getCombinedCourseByCode,

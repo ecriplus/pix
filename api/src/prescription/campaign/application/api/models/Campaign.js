@@ -24,4 +24,8 @@ export class Campaign {
     this.isProfilesCollection = isProfilesCollection;
     this.targetProfileId = targetProfileId;
   }
+
+  setOrganizationId(id) {
+    this.organizationId = id;
+  }
 }

@@ -619,4 +619,43 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(result).lengthOf(0);
     });
   });
+
+  describe('#deleteCombinedCourses', function () {
+    it('should fill deletedAt, deletedBy and updates updatedAt for combined course', async function () {
+      //given
+      const { userId, organizationId } = databaseBuilder.factory.buildMembership();
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY123',
+        name: 'name1',
+        organizationId,
+        combinedCourseContents: [],
+      });
+
+      const otherCombinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY123',
+        name: 'name2',
+        organizationId,
+        combinedCourseContents: [],
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await combinedCourseRepository.deleteCombinedCourses({
+        combinedCourseIds: [combinedCourse.id],
+        deletedBy: userId,
+      });
+
+      const allCombinedCourses = await knex('combined_courses');
+      const notDeletedCombinedCourse = await knex('combined_courses').where('id', otherCombinedCourse.id).first();
+      const deletedCombinedCourse = await knex('combined_courses').where('id', combinedCourse.id).first();
+
+      //then
+      expect(allCombinedCourses).to.have.lengthOf(2);
+      expect(notDeletedCombinedCourse.deletedAt).to.be.null;
+      expect(notDeletedCombinedCourse.deletedBy).to.be.null;
+      expect(deletedCombinedCourse.deletedAt).to.not.be.null;
+      expect(deletedCombinedCourse.deletedBy).to.equal(userId);
+    });
+  });
 });

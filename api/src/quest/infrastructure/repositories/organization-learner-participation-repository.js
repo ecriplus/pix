@@ -70,12 +70,7 @@ export const deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationL
 }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  await knexConn('organization_learner_participations')
-    .update({
-      deletedAt: knexConn.fn.now(),
-      deletedBy: userId,
-      updatedAt: knexConn.fn.now(),
-    })
+  await baseUpdateQuery(knexConn, userId)
     .where('organizationLearnerId', organizationLearnerId)
     .andWhere('referenceId', combinedCourseId.toString());
 };
@@ -87,12 +82,30 @@ export const deletePassagesByModuleIdsAndOrganizationLearnerId = async ({
 }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  await knexConn('organization_learner_participations')
-    .update({
-      deletedAt: knexConn.fn.now(),
-      deletedBy: userId,
-      updatedAt: knexConn.fn.now(),
-    })
+  await baseUpdateQuery(knexConn, userId)
     .whereIn('referenceId', moduleIds)
     .andWhere('organizationLearnerId', organizationLearnerId);
 };
+export const deleteCombinedCourseParticipations = async ({ combinedCourseIds, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const stringifiedCombinedCourseIds = combinedCourseIds.map((id) => id.toString());
+  await baseUpdateQuery(knexConn, userId).whereIn(
+    'organization_learner_participations.referenceId',
+    stringifiedCombinedCourseIds,
+  );
+};
+
+export const deletePassagesByModuleIds = async ({ moduleIds, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  await baseUpdateQuery(knexConn, userId).whereIn('organization_learner_participations.referenceId', moduleIds);
+};
+
+function baseUpdateQuery(knexConn, userId) {
+  return knexConn('organization_learner_participations').update({
+    deletedAt: knexConn.fn.now(),
+    deletedBy: userId,
+    updatedAt: knexConn.fn.now(),
+  });
+}

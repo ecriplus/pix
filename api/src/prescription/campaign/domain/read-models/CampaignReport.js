@@ -25,6 +25,7 @@ class CampaignReport {
     stages = [],
     multipleSendings,
     targetProfileName,
+    organizationId,
   } = {}) {
     this.targetProfileName = targetProfileName;
     this.id = id;
@@ -49,6 +50,7 @@ class CampaignReport {
     this.stages = stages;
     this.multipleSendings = multipleSendings;
     this.tubes = this.canComputeCoverRate ? undefined : null;
+    this.organizationId = organizationId;
   }
 
   get isAssessment() {

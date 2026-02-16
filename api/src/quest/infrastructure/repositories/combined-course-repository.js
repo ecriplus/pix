@@ -138,6 +138,13 @@ const findByModuleIdAndOrganizationIds = async ({ moduleId, organizationIds }) =
   return combinedCourses.map(_toDomain);
 };
 
+const deleteCombinedCourses = async ({ combinedCourseIds, deletedBy }) => {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('combined_courses')
+    .update({ deletedAt: knexConn.fn.now(), deletedBy, updatedAt: knexConn.fn.now() })
+    .whereIn('id', combinedCourseIds);
+};
+
 const _toDomain = ({
   id,
   organizationId,
@@ -161,6 +168,7 @@ const _toDomain = ({
 };
 
 export {
+  deleteCombinedCourses,
   findByCampaignId,
   findByModuleIdAndOrganizationIds,
   findByOrganizationId,
