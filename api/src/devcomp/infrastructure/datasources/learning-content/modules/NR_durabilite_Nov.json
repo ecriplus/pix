@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/nr_durabilite-nov/picto-durab.jpg",
+    "image": "https://assets.pix.org/modules/nr_durabilite-nov/picto_nr_durabilite_nov.svg",
     "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication entraîne une forte pollution, des impacts écologiques importants et même des conditions humaines difficiles. </p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts.</p>",
     "duration": 10,
     "level": "novice",
@@ -40,9 +40,9 @@
                 "id": "f26b642c-4ffc-431f-b561-c6be35452d42",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/nr_durabilite-nov/chat-gpt-image-nov-5-2025-03_51_38-pm.png",
-                "alt": "",
+                "alt": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "alternativeText": "",
-                "legend": "",
+                "legend": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "licence": ""
               }
             }
