@@ -124,23 +124,6 @@ describe('Unit | Domain | Validators | target-profile/creationCommandValidator',
         }
       });
 
-      it('should reject when ownerOrganizationId is not valid', function () {
-        // given
-        const targetProfileCreationCommand = {
-          ...validParams,
-          ownerOrganizationId: 'not a number',
-        };
-
-        try {
-          // when
-          creationCommandValidator.validate(targetProfileCreationCommand);
-          expect.fail('should have thrown an error');
-        } catch (err) {
-          // then
-          expect(err).to.be.instanceOf(EntityValidationError);
-        }
-      });
-
       it('should reject when command has no tubes', function () {
         // given
         const targetProfileCreationCommand = {

@@ -8,7 +8,6 @@ const schema = base.keys({
   internalName: Joi.string(),
   comment: Joi.string().allow(null),
   imageUrl: Joi.string().allow(null),
-  ownerOrganizationId: Joi.number().allow(null).default(null),
   tubes: Joi.array()
     .items({
       id: Joi.string().required(),

@@ -7,7 +7,6 @@ const buildTargetProfileForCreation = function ({
   description = 'description',
   comment = 'commentaire',
   imageUrl = 'image/url',
-  ownerOrganizationId = null,
   tubes = [{ id: 'recTubeId', level: 8 }],
   areKnowledgeElementsResettable = false,
 } = {}) {
@@ -18,7 +17,6 @@ const buildTargetProfileForCreation = function ({
     description,
     comment,
     imageUrl,
-    ownerOrganizationId,
     tubes,
     areKnowledgeElementsResettable,
   });

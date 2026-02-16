@@ -1477,30 +1477,6 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
       sinon.assert.notCalled(targetProfileController.createTargetProfile);
     });
 
-    it('should return 400 without reaching controller if payload has wrong ownerOrganizationId format', async function () {
-      // given
-      sinon.stub(targetProfileController, 'createTargetProfile').returns('ok');
-
-      securityPreHandlers.checkAdminMemberHasRoleSuperAdmin.callsFake((request, h) =>
-        h.response({ errors: new Error('forbidden') }).code(403),
-      );
-      securityPreHandlers.checkAdminMemberHasRoleSupport.callsFake((request, h) =>
-        h.response({ errors: new Error('forbidden') }).code(403),
-      );
-      securityPreHandlers.checkAdminMemberHasRoleMetier.callsFake((request, h) => h.response(true));
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const payload = { ...validPayload };
-      payload.data.attributes['owner-organization-id'] = 'coucou';
-      const response = await httpTestServer.request('POST', '/api/admin/target-profiles', payload);
-
-      // then
-      expect(response.statusCode).to.equal(400);
-      sinon.assert.notCalled(targetProfileController.createTargetProfile);
-    });
-
     it('should return 400 without reaching controller if payload has wrong tubes format', async function () {
       // given
       sinon.stub(targetProfileController, 'createTargetProfile').returns('ok');

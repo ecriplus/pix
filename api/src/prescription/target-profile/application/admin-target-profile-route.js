@@ -66,10 +66,6 @@ const register = async function (server) {
                 description: Joi.string().allow(null).max(500).required(),
                 comment: Joi.string().allow(null).max(500).required(),
                 'image-url': Joi.string().uri().allow(null).required(),
-                'owner-organization-id': Joi.string()
-                  .pattern(/^[0-9]+$/, 'numbers')
-                  .allow(null)
-                  .required(),
                 tubes: Joi.array()
                   .items({
                     id: Joi.string().required(),

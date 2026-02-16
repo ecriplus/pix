@@ -102,22 +102,6 @@ export default class EditTargetProfileForm extends Component {
             <:label>Catégorie :</:label>
           </PixSelect>
 
-          {{#unless @updateMode}}
-            <PixInput
-              @id="organizationId"
-              type="number"
-              @errorMessage=""
-              required={{true}}
-              @requiredLabel={{t "common.forms.mandatory"}}
-              aria-required={{true}}
-              placeholder="7777"
-              value={{@targetProfile.ownerOrganizationId}}
-              {{on "change" (fn this.handleInputValue "ownerOrganizationId")}}
-            >
-              <:label>Identifiant de l'organisation de référence :</:label>
-            </PixInput>
-          {{/unless}}
-
           <PixCheckbox
             @checked={{@targetProfile.areKnowledgeElementsResettable}}
             onChange={{fn this.handleCheckboxChange "areKnowledgeElementsResettable"}}

@@ -938,7 +938,6 @@ describe('Integration | Repository | Target-profile', function () {
         description: 'la description',
         comment: 'le commentaire',
         imageUrl: 'mon-image/stylée',
-        ownerOrganizationId: 1,
         areKnowledgeElementsResettable: true,
       });
 
@@ -951,15 +950,7 @@ describe('Integration | Repository | Target-profile', function () {
 
       // then
       const targetProfileInDB = await knex('target-profiles')
-        .select([
-          'name',
-          'category',
-          'description',
-          'comment',
-          'imageUrl',
-          'ownerOrganizationId',
-          'areKnowledgeElementsResettable',
-        ])
+        .select(['name', 'category', 'description', 'comment', 'imageUrl', 'areKnowledgeElementsResettable'])
         .where({ id: targetProfileId })
         .first();
       expect(targetProfileInDB).to.deep.equal({
@@ -968,7 +959,6 @@ describe('Integration | Repository | Target-profile', function () {
         description: 'la description',
         comment: 'le commentaire',
         imageUrl: 'mon-image/stylée',
-        ownerOrganizationId: 1,
         areKnowledgeElementsResettable: true,
       });
     });

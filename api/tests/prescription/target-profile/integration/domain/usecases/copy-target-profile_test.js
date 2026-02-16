@@ -45,7 +45,6 @@ describe('Integration | UseCases | copy-target-profile', function () {
       expect(newlyCreatedTargetProfile.imageUrl).to.equal(originTargetProfile.imageUrl);
       expect(newlyCreatedTargetProfile.isSimplifiedAccess).to.equal(originTargetProfile.isSimplifiedAccess);
       expect(newlyCreatedTargetProfile.outdated).to.equal(originTargetProfile.outdated);
-      expect(newlyCreatedTargetProfile.ownerOrganizationId).to.equal(originTargetProfile.ownerOrganizationId);
     });
 
     it('should copy the tubes', async function () {
