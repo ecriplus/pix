@@ -10,14 +10,25 @@ export async function updateAssessmentWithNextChallenge({
   certificationEvaluationRepository,
   courseRepository,
   competenceRepository,
+  certificationChallengeLiveAlertRepository,
+  certificationCompanionAlertRepository,
 }) {
   let nextChallenge = null;
   try {
-    if (assessment.isCertification() && assessment.isStarted()) {
-      nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+    if (assessment.isCertification()) {
+      const challengeLiveAlerts = await certificationChallengeLiveAlertRepository.getByAssessmentId({
         assessmentId: assessment.id,
-        locale,
       });
+      const companionLiveAlerts = await certificationCompanionAlertRepository.getAllByAssessmentId({
+        assessmentId: assessment.id,
+      });
+      assessment.attachLiveAlerts({ challengeLiveAlerts, companionLiveAlerts });
+      if (assessment.isStarted()) {
+        nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+          assessmentId: assessment.id,
+          locale,
+        });
+      }
     }
 
     if (assessment.isPreview() && assessment.isStarted()) {

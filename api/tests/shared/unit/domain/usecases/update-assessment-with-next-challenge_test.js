@@ -19,6 +19,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let certificationEvaluationRepository_selectNextCertificationChallengeStub;
     let courseRepository_getStub;
     let competenceRepository_getCompetenceNameStub;
+    let certificationChallengeLiveAlertRepository_getByAssessmentIdStub;
+    let certificationCompanionAlertRepository_getAllByAssessmentIdStub;
 
     beforeEach(function () {
       userId = 'someUserId';
@@ -39,6 +41,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         .named('selectNextCertificationChallenge');
       courseRepository_getStub = sinon.stub().named('getCourse');
       competenceRepository_getCompetenceNameStub = sinon.stub().named('getCompetenceName');
+      certificationChallengeLiveAlertRepository_getByAssessmentIdStub = sinon.stub().named('getChallengeLiveAlerts');
+      certificationCompanionAlertRepository_getAllByAssessmentIdStub = sinon.stub().named('getCompanionLiveAlerts');
       preventStubsToBeCalledUnexpectedly([
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
@@ -49,6 +53,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         certificationEvaluationRepository_selectNextCertificationChallengeStub,
         courseRepository_getStub,
         competenceRepository_getCompetenceNameStub,
+        certificationChallengeLiveAlertRepository_getByAssessmentIdStub,
+        certificationCompanionAlertRepository_getAllByAssessmentIdStub,
       ]);
 
       const assessmentRepository = {
@@ -75,6 +81,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         getCompetenceName: competenceRepository_getCompetenceNameStub,
       };
 
+      const certificationChallengeLiveAlertRepository = {
+        getByAssessmentId: certificationChallengeLiveAlertRepository_getByAssessmentIdStub,
+      };
+      const certificationCompanionAlertRepository = {
+        getAllByAssessmentId: certificationCompanionAlertRepository_getAllByAssessmentIdStub,
+      };
+
       dependencies = {
         userId,
         locale,
@@ -83,6 +96,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         certificationEvaluationRepository,
         courseRepository,
         competenceRepository,
+        certificationChallengeLiveAlertRepository,
+        certificationCompanionAlertRepository,
       };
     });
 
@@ -305,7 +320,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       });
 
       context('for assessment of type CERTIFICATION', function () {
-        let assessment;
+        let assessment, certificationChallengeLiveAlert, certificationCompanionLiveAlert;
 
         beforeEach(function () {
           assessment = domainBuilder.buildAssessment({
@@ -314,6 +329,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.CERTIFICATION,
             answers: [],
           });
+          certificationChallengeLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
+            assessmentId: assessment.id,
+          });
+          certificationCompanionLiveAlert = domainBuilder.buildCertificationCompanionLiveAlert({
+            assessmentId: assessment.id,
+          });
+          certificationChallengeLiveAlertRepository_getByAssessmentIdStub
+            .withArgs({ assessmentId: assessment.id })
+            .resolves([certificationChallengeLiveAlert]);
+          certificationCompanionAlertRepository_getAllByAssessmentIdStub
+            .withArgs({ assessmentId: assessment.id })
+            .resolves([certificationCompanionLiveAlert]);
         });
 
         it('should call usecase and return value from certification usecase', async function () {
@@ -326,6 +353,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
+          expect(assessmentWithNextChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
         });
 
         context('when there is no more challenge', function () {
@@ -337,6 +366,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+            expect(assessmentWithoutChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
+            expect(assessmentWithoutChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
           });
         });
 
@@ -352,6 +383,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+            expect(assessmentWithoutChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
+            expect(assessmentWithoutChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
           });
         });
 
