@@ -1,7 +1,6 @@
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { getAssessment } from '../../../../../src/shared/domain/usecases/get-assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-assessment', function () {
   let assessment;
@@ -71,49 +70,6 @@ describe('Unit | UseCase | get-assessment', function () {
     expect(result).to.be.an.instanceOf(Assessment);
     expect(result.id).to.equal(assessment.id);
     expect(result.title).to.equal(expectedAssessmentTitle);
-  });
-
-  context('Assessment of type DEMO', function () {
-    it('should resolve the Assessment domain object with DEMO title matching the given assessment ID when course is playable', async function () {
-      // given
-      const playableCourse = domainBuilder.buildCourse({ name: 'Course Àpieds', isActive: true });
-      assessment.type = Assessment.types.DEMO;
-      assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-      courseRepository.get.withArgs(assessment.courseId).resolves(playableCourse);
-
-      // when
-      const result = await getAssessment({
-        assessmentId: assessment.id,
-        assessmentRepository,
-        competenceRepository,
-        courseRepository,
-      });
-
-      // then
-      expect(result).to.be.an.instanceOf(Assessment);
-      expect(result.id).to.equal(assessment.id);
-      expect(result.title).to.equal(course.name);
-    });
-
-    it('should throw a NotFoundError when course is not playable', async function () {
-      // given
-      const unplayableCourse = domainBuilder.buildCourse({ name: 'Course Àpieds', isActive: false });
-      assessment.type = Assessment.types.DEMO;
-      assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-      courseRepository.get.withArgs(assessment.courseId).resolves(unplayableCourse);
-
-      // when
-      const err = await catchErr(getAssessment)({
-        assessmentId: assessment.id,
-        assessmentRepository,
-        competenceRepository,
-        courseRepository,
-      });
-
-      // then
-      expect(err).to.be.an.instanceOf(NotFoundError);
-      expect(err.message).to.equal("Le test demandé n'existe pas");
-    });
   });
 
   context('Assessment of type CERTIFICATION', function () {

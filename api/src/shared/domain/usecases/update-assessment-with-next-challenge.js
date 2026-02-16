@@ -1,13 +1,14 @@
 import { logger } from '../../infrastructure/utils/logger.js';
-import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../errors.js';
+import { AssessmentEndedError, AssessmentLackOfChallengesError, NotFoundError } from '../errors.js';
 
 export async function updateAssessmentWithNextChallenge({
   assessment,
   userId,
   locale,
-  assessmentRepository,
   evaluationUsecases,
+  assessmentRepository,
   certificationEvaluationRepository,
+  courseRepository,
 }) {
   if (!assessment.isStarted()) {
     assessment.nextChallenge = null;
@@ -29,6 +30,11 @@ export async function updateAssessmentWithNextChallenge({
     }
 
     if (assessment.isDemo()) {
+      const course = await courseRepository.get(assessment.courseId);
+      if (!course.canBePlayed) {
+        throw new NotFoundError("Le test demandé n'existe pas");
+      }
+      assessment.title = course.name;
       nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
     }
 

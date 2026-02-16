@@ -1,7 +1,11 @@
-import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../../../../../src/shared/domain/errors.js';
+import {
+  AssessmentEndedError,
+  AssessmentLackOfChallengesError,
+  NotFoundError,
+} from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { updateAssessmentWithNextChallenge } from '../../../../../src/shared/domain/usecases/update-assessment-with-next-challenge.js';
-import { domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, preventStubsToBeCalledUnexpectedly, sinon } from '../../../../test-helper.js';
 
 describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
@@ -13,6 +17,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let evaluationUsecases_getNextChallengeForCampaignAssessmentStub;
     let evaluationUsecases_getNextChallengeForCompetenceEvaluationStub;
     let certificationEvaluationRepository_selectNextCertificationChallengeStub;
+    let courseRepository_getStub;
 
     beforeEach(function () {
       userId = 'someUserId';
@@ -31,6 +36,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       certificationEvaluationRepository_selectNextCertificationChallengeStub = sinon
         .stub()
         .named('selectNextCertificationChallenge');
+      courseRepository_getStub = sinon.stub().named('getCourse');
       preventStubsToBeCalledUnexpectedly([
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
@@ -39,6 +45,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
         certificationEvaluationRepository_selectNextCertificationChallengeStub,
+        courseRepository_getStub,
       ]);
 
       const assessmentRepository = {
@@ -57,12 +64,17 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         selectNextCertificationChallenge: certificationEvaluationRepository_selectNextCertificationChallengeStub,
       };
 
+      const courseRepository = {
+        get: courseRepository_getStub,
+      };
+
       dependencies = {
         userId,
         locale,
-        assessmentRepository,
         evaluationUsecases,
+        assessmentRepository,
         certificationEvaluationRepository,
+        courseRepository,
       };
     });
 
@@ -153,27 +165,54 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             type: Assessment.types.DEMO,
             answers: [],
+            courseId: 'recCourseId',
           });
           assessmentRepository_updateLastQuestionDateStub.resolves();
-          assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         });
 
-        it('should call usecase and return value from demo usecase', async function () {
-          const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
-          evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+        context('when course is not playable', function () {
+          it('should throw a NotFoundError', async function () {
+            courseRepository_getStub.withArgs('recCourseId').resolves(domainBuilder.buildCourse({ isActive: false }));
+            const err = await catchErr(updateAssessmentWithNextChallenge)({
+              assessment,
+              ...dependencies,
+            });
 
-          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+            expect(err).to.deepEqualInstance(new NotFoundError("Le test demandé n'existe pas"));
+          });
+        });
+
+        context('when there are still more challenges to evaluate', function () {
+          it('should call usecase and return value from demo usecase', async function () {
+            assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
+            courseRepository_getStub
+              .withArgs('recCourseId')
+              .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
+            const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
+            evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
+            const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({
+              assessment,
+              ...dependencies,
+            });
+
+            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+            expect(assessmentWithNextChallenge.title).to.equal('Mon super course');
+          });
         });
         context('when there is no more challenge', function () {
           it('should return an assessment with no nextChallenge', async function () {
             // given
+            assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
+            courseRepository_getStub
+              .withArgs('recCourseId')
+              .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
             evaluationUsecases_getNextChallengeForDemoStub.rejects(new AssessmentEndedError());
 
             // when
             const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+            expect(assessmentWithoutChallenge.title).to.equal('Mon super course');
           });
         });
       });

@@ -1,4 +1,3 @@
-import { NotFoundError } from '../errors.js';
 import { Assessment } from '../models/Assessment.js';
 
 export async function getAssessment({
@@ -6,7 +5,6 @@ export async function getAssessment({
   locale,
   assessmentRepository,
   competenceRepository,
-  courseRepository,
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
 }) {
@@ -25,15 +23,6 @@ export async function getAssessment({
 
     case Assessment.types.COMPETENCE_EVALUATION: {
       assessment.title = await competenceRepository.getCompetenceName({ id: assessment.competenceId, locale });
-      break;
-    }
-
-    case Assessment.types.DEMO: {
-      const course = await courseRepository.get(assessment.courseId);
-      if (!course.canBePlayed) {
-        throw new NotFoundError("Le test demandé n'existe pas");
-      }
-      assessment.title = course.name;
       break;
     }
   }
