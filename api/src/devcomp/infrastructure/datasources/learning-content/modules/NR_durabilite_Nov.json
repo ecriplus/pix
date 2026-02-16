@@ -171,74 +171,94 @@
           "title": "Les voyages des matériaux",
           "components": [
             {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
+              "type": "element",
+              "element": {
+                "id": "5fc90905-6385-40f4-880f-5c836fd721bb",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
                     {
-                      "id": "777d7f0d-be1f-4986-a0aa-5156d3874255",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Étape 1 : conception.",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
+                      "title": "Étape 1 : la conception. (Visuels en construction.)",
+                      "description": "La première étape de fabrication d'un smartphone est la conception. Elle a généralement lieu aux États-Unis, en Chine ou en Europe.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
                     {
-                      "id": "777d7f0d-be1f-4986-a0aa-5156d3874255",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Étape 2 : extraction et transformation des matières premières.",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
+                      "title": "Étape 2 : extraction et transformation des matières premières. (Visuels en construction.)",
+                      "description": "L'extraction des matières premières a lieu sur plusieurs continents : l'Amérique du Sud, l'Afrique, l'Océanie et l'Asie.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
                     {
-                      "id": "777d7f0d-be1f-4986-a0aa-5156d3874255",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Étape 3 : fabrication des principaux composants.",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
+                      "title": "Étape 3 : fabrication des principaux composants. (Visuels en construction.)",
+                      "description": "La fabrication des composants du smartphone a lieu en Asie, notamment en Chine.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
                     {
-                      "id": "777d7f0d-be1f-4986-a0aa-5156d3874255",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Étape 4 : assemblage.",
-                      "licence": ""
-                    }
-                  ]
-                },
-                {
-                  "elements": [
+                      "title": "Étape 4 : assemblage. (Visuels en construction.)",
+                      "description": "L'assemblage des composants a lieu en Asie du Sud-Est.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
                     {
-                      "id": "777d7f0d-be1f-4986-a0aa-5156d3874255",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Étape 5 : distribution.",
-                      "licence": ""
+                      "title": "Étape 5 : distribution. (Visuels en construction.)",
+                      "description": "La distribution des smartphones a lieu en principalement en Occident, donc en Europe et en Amérique du Nord.",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
                     }
-                  ]
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableStyleAroundImage": false,
+                  "enableLoop": false,
+                  "imageTextDisplay": ""
                 }
-              ]
+              }
             },
             {
               "type": "element",
@@ -559,7 +579,7 @@
                     {
                       "id": "ab421b9d-b6f1-4648-a481-26e05a5fe17f",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/weee_symbol.svg",
+                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/weee_symbol-250px.svg",
                       "alt": "Logo des déchets éléctriques et électroniques",
                       "alternativeText": "",
                       "legend": "",
@@ -616,7 +636,7 @@
               "element": {
                 "id": "84230031-3337-4598-9a01-971e1b8c8c47",
                 "type": "text",
-                "content": "<ul>\n    <li>Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent très polluante et réalisée dans de <strong>très mauvaises conditions de travail</strong>.</li>\n    <li>Les différentes étapes de fabrication d'un smartphone ont lieu dans des pays et des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>\n    <li>Pour limiter l’impact d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>S'il ne marche plus, il faut le déposer dans un <strong>point de collecte</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
+                "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent très polluante et réalisée dans de <strong>très mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les étapes de fabrication d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>\n    <li>💡 Pour limiter l’impact d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
               }
             }
           ]
@@ -647,16 +667,16 @@
                           "id": "1",
                           "content": "Vrai.",
                           "feedback": {
-                            "state": "Un smartphone est constitué d'au moins 70 matériaux différents.",
-                            "diagnosis": ""
+                            "state": "Bonne réponse !",
+                            "diagnosis": "Un smartphone est constitué d'au moins 70 matériaux différents."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Faux.",
                           "feedback": {
-                            "state": "Un smartphone est constitué d'au moins 70 matériaux différents.",
-                            "diagnosis": ""
+                            "state": "Mauvaise réponse !",
+                            "diagnosis": "Un smartphone est constitué d'au moins 70 matériaux différents."
                           }
                         }
                       ],
@@ -676,16 +696,16 @@
                           "id": "1",
                           "content": "Vrai.",
                           "feedback": {
-                            "state": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !",
-                            "diagnosis": ""
+                            "state": "Mauvaise réponse !",
+                            "diagnosis": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Faux.",
                           "feedback": {
-                            "state": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !",
-                            "diagnosis": ""
+                            "state": "Bonne réponse !",
+                            "diagnosis": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !"
                           }
                         }
                       ],
@@ -705,16 +725,16 @@
                           "id": "1",
                           "content": "Vrai.",
                           "feedback": {
-                            "state": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent.",
-                            "diagnosis": ""
+                            "state": "Bonne réponse !",
+                            "diagnosis": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Faux.",
                           "feedback": {
-                            "state": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent.",
-                            "diagnosis": ""
+                            "state": "Mauvaise réponse !",
+                            "diagnosis": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent."
                           }
                         }
                       ],
@@ -734,16 +754,16 @@
                           "id": "1",
                           "content": "Vrai.",
                           "feedback": {
-                            "state": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants.",
-                            "diagnosis": ""
+                            "state": "Mauvaise réponse !",
+                            "diagnosis": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants."
                           }
                         },
                         {
                           "id": "2",
                           "content": "Faux.",
                           "feedback": {
-                            "state": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants.",
-                            "diagnosis": ""
+                            "state": "Bonne réponse !",
+                            "diagnosis": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants."
                           }
                         }
                       ],
