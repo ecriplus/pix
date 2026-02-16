@@ -21,6 +21,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           documentationUrl: 'https://kingArthur.com',
           administrationTeamId: 1234,
           countryCode: 99123,
+          organizationLearnerType: {},
         };
 
         // when/then
@@ -41,6 +42,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 99123,
+            organizationLearnerType: {},
           };
 
           try {
@@ -73,6 +75,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: MISSING_VALUE,
             administrationTeamId: 1234,
             countryCode: 99123,
+            organizationLearnerType: {},
           };
 
           try {
@@ -97,6 +100,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PTT',
             administrationTeamId: 1234,
             countryCode: 99123,
+            organizationLearnerType: {},
           };
 
           try {
@@ -112,7 +116,13 @@ describe('Unit | Domain | Validators | organization-validator', function () {
         ['SUP', 'SCO', 'PRO', 'SCO-1D'].forEach((type) => {
           it(`should not throw with ${type} as type`, function () {
             // given
-            const organizationCreationParams = { name: 'ACME', type, administrationTeamId: 1234, countryCode: 99123 };
+            const organizationCreationParams = {
+              name: 'ACME',
+              type,
+              administrationTeamId: 1234,
+              countryCode: 99123,
+              organizationLearnerType: {},
+            };
 
             // when/then
             return expect(() => organizationCreationValidator.validate(organizationCreationParams)).to.not.throw();
@@ -129,6 +139,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             documentationUrl: 'invalidUrl',
             administrationTeamId: 1234,
             countryCode: 99123,
+            organizationLearnerType: {},
           };
           const error = await catchErr(organizationCreationValidator.validate)(organizationCreationParams);
 
@@ -150,6 +161,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             countryCode: 99123,
             administrationTeamId: undefined,
+            organizationLearnerType: {},
           };
 
           try {
@@ -175,6 +187,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: undefined,
+            organizationLearnerType: {},
           };
 
           try {
@@ -198,6 +211,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 98999,
+            organizationLearnerType: {},
           };
 
           try {
@@ -221,6 +235,32 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 100000,
+            organizationLearnerType: {},
+          };
+
+          try {
+            // when
+            organizationCreationValidator.validate(organizationCreationParams);
+            expect.fail('should have thrown an error');
+          } catch (errors) {
+            // then
+            _assertErrorMatchesWithExpectedOne(errors, expectedError);
+          }
+        });
+      });
+
+      context('on organizationLearnerType attribute', function () {
+        it('should reject with error when organizationLearnerType is missing', function () {
+          // given
+          const expectedError = {
+            attribute: 'organizationLearnerType',
+            message: "Le public prescrit n'est pas renseigné.",
+          };
+          const organizationCreationParams = {
+            name: 'ACME',
+            type: 'PRO',
+            administrationTeamId: 1234,
+            countryCode: 99998,
           };
 
           try {
@@ -241,6 +281,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           type: MISSING_VALUE,
           administrationTeamId: MISSING_VALUE,
           countryCode: MISSING_VALUE,
+          organizationLearnerType: {},
         };
 
         try {

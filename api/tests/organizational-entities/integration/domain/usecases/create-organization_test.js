@@ -1,10 +1,12 @@
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { EntityValidationError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import {
@@ -42,6 +44,9 @@ describe('Integration | UseCases | create-organization', function () {
       countryCode: 99100,
       externalId: 'My external Id',
       provinceCode: '078',
+      organizationLearnerType: new OrganizationLearnerType({
+        id: undefined,
+      }),
     });
 
     // when
@@ -85,45 +90,43 @@ describe('Integration | UseCases | create-organization', function () {
       });
 
       describe('when parent organization is a child organization', function () {
-        ('throws UnableToAttachChildOrganizationToParentOrganizationError',
-          async function () {
-            // given
-            const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-            const childOrganizationId = databaseBuilder.factory.buildOrganization({
-              id: 2000,
-              name: 'Parent Org',
-              type: Organization.types.SCO1D,
-              parentOrganizationId,
-            }).id;
+        it('throws UnableToAttachChildOrganizationToParentOrganizationError', async function () {
+          // given
+          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const childOrganizationId = databaseBuilder.factory.buildOrganization({
+            id: 2000,
+            name: 'Parent Org',
+            type: Organization.types.SCO1D,
+            parentOrganizationId,
+          }).id;
 
-            await databaseBuilder.commit();
+          await databaseBuilder.commit();
 
-            const organization = new OrganizationForAdmin({
-              name: 'ACME',
-              type: 'PRO',
-              documentationUrl: 'https://pix.fr',
-              createdBy: superAdminUserId,
-              administrationTeamId: 1234,
-              parentOrganizationId: childOrganizationId,
-              countryCode: 99100,
-            });
-
-            // when
-            const error = await catchErr(usecases.createOrganization)({ organization });
-
-            // then
-            expect(error).to.deep.equal(
-              new UnableToAttachChildOrganizationToParentOrganizationError({
-                code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-                message:
-                  'Unable to attach child organization to parent organization which is also a child organization',
-                meta: {
-                  grandParentOrganizationId: parentOrganizationId,
-                  parentOrganizationId: childOrganizationId,
-                },
-              }),
-            );
+          const organization = new OrganizationForAdmin({
+            name: 'ACME',
+            type: 'PRO',
+            documentationUrl: 'https://pix.fr',
+            createdBy: superAdminUserId,
+            administrationTeamId: 1234,
+            parentOrganizationId: childOrganizationId,
+            countryCode: 99100,
           });
+
+          // when
+          const error = await catchErr(usecases.createOrganization)({ organization });
+
+          // then
+          expect(error).to.deep.equal(
+            new UnableToAttachChildOrganizationToParentOrganizationError({
+              code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+              message: 'Unable to attach child organization to parent organization which is also a child organization',
+              meta: {
+                grandParentOrganizationId: parentOrganizationId,
+                parentOrganizationId: childOrganizationId,
+              },
+            }),
+          );
+        });
       });
     });
 
@@ -137,6 +140,9 @@ describe('Integration | UseCases | create-organization', function () {
           createdBy: superAdminUserId,
           administrationTeamId: 9999,
           countryCode: 99100,
+          organizationLearnerType: new OrganizationLearnerType({
+            id: undefined,
+          }),
         });
 
         // when
@@ -146,6 +152,38 @@ describe('Integration | UseCases | create-organization', function () {
         expect(error).to.deep.equal(
           new AdministrationTeamNotFound({
             meta: { administrationTeamId: organization.administrationTeamId },
+          }),
+        );
+      });
+    });
+
+    describe('when organization learner type does not exist', function () {
+      it('throws OrganizationLearnerTypeNotFound error', async function () {
+        // given
+        const organization = new OrganizationForAdmin({
+          name: 'ACME',
+          type: 'PRO',
+          documentationUrl: 'https://pix.fr',
+          createdBy: superAdminUserId,
+          administrationTeamId: 1234,
+          countryCode: 99100,
+          organizationLearnerType: new OrganizationLearnerType({
+            id: 5678,
+          }),
+        });
+
+        // when
+        const error = await catchErr(usecases.createOrganization)({
+          organization,
+        });
+
+        // then
+        expect(error).to.deep.equal(
+          new OrganizationLearnerTypeNotFound({
+            meta: {
+              organizationLearnerTypeId: organization.organizationLearnerType.id,
+            },
+            message: `Organization learner type not found for id ${organization.organizationLearnerType.id}`,
           }),
         );
       });
@@ -161,6 +199,9 @@ describe('Integration | UseCases | create-organization', function () {
           createdBy: superAdminUserId,
           administrationTeamId: 1234,
           countryCode: 99999,
+          organizationLearnerType: new OrganizationLearnerType({
+            id: undefined,
+          }),
         });
 
         // when
@@ -204,6 +245,9 @@ describe('Integration | UseCases | create-organization', function () {
         createdBy: superAdminUserId,
         administrationTeamId: 1234,
         countryCode: 99100,
+        organizationLearnerType: new OrganizationLearnerType({
+          id: undefined,
+        }),
       });
 
       // when
