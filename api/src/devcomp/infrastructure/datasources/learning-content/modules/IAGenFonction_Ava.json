@@ -302,14 +302,14 @@
                           "id": "1",
                           "content": "La recherche sur internet.",
                           "feedback": {
-                            "diagnosis": "Eh non ! Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                            "diagnosis": "Eh non ! <br> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "Eh non ! Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                            "diagnosis": "Eh non ! <br> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
                           }
                         },
                         {
@@ -364,28 +364,28 @@
                           "id": "1",
                           "content": "La recherche sur internet.",
                           "feedback": {
-                            "diagnosis": "Eh non !Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;"
+                            "diagnosis": "Eh non ! <br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;"
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "Eh non !Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "Eh non !<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
                           }
                         },
                         {
                           "id": "3",
                           "content": "La calculatrice.",
                           "feedback": {
-                            "diagnosis": "Eh non !Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "Eh non !<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
                           }
                         },
                         {
                           "id": "4",
                           "content": "Aucun outil ne va être utilisé.",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "Bien vu !&nbsp;<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
                           }
                         },
                         {
