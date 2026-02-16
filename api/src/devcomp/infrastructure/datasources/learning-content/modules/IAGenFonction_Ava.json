@@ -701,7 +701,7 @@
                     {
                       "id": "894da3c4-c063-4b77-8930-4d3bdd375d7b",
                       "type": "qcu-discovery",
-                      "instruction": "Quelle est la réponse que va faire le logiciel d’IA générative à l’utilisateur ?",
+                      "instruction": "Laquelle de ces réponses Yasmine a-t-elle le plus de chances de recevoir ?",
                       "hasShortProposals": false,
                       "proposals": [
                         {
