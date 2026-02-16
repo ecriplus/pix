@@ -14,7 +14,6 @@ export async function updateAssessmentWithNextChallenge({
     assessment.nextChallenge = null;
     return assessment;
   }
-  await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
 
   let nextChallenge = null;
   try {
@@ -66,6 +65,9 @@ export async function updateAssessmentWithNextChallenge({
     }
   }
 
+  if (nextChallenge) {
+    await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
+  }
   if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {
     await assessmentRepository.updateWhenNewChallengeIsAsked({
       id: assessment.id,
