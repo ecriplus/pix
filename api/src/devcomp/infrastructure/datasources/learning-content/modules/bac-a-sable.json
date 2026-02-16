@@ -340,6 +340,101 @@
           ]
         },
         {
+          "id": "1122aced-5885-4a5d-afed-99c7a9dff009",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
+                "type": "text",
+                "content": "<p>Section <strong>Réponses Courtes</strong> (QCU découverte et déclaratif)</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d8678f8a-902e-43c2-8c41-2c09e32905e1",
+          "type": "discovery",
+          "title": "qcu-discovery short proposals (4 et 3)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c3bc4466-2825-488e-ad5f-275ace4b19a8",
+                "type": "qcu-discovery",
+                "instruction": "<p>Quelle est la meilleure crêpe ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Nutella 🍫",
+                    "feedback": {
+                      "diagnosis": "<p>Les meilleures c'est clair !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Nature 🌱",
+                    "feedback": {
+                      "diagnosis": "<p>Si la pâte est bien faite, pas besoin de plus parfois !</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Beurre/sucre 🥞",
+                    "feedback": {
+                      "diagnosis": "<p>Pardon ?</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Complète avec poulet",
+                    "feedback": {
+                      "diagnosis": "<p>Galette, pas crêpe ! Avec la sauce biggy 🤤</p>"
+                    }
+                  }
+                ],
+                "solution": "1",
+                "hasShortProposals": true
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "81eaa0ab-6b2d-4748-94dc-9504732eabc5",
+                "type": "qcu-discovery",
+                "instruction": "<p>Combien de chiens/chats dans l'équipe ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "3🐶/3😺",
+                    "feedback": {
+                      "diagnosis": "<p>Non 😔</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "2🐶/2😺",
+                    "feedback": {
+                      "diagnosis": "<p>Ouiiii ! 🐶😺</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "2🐶/3😺",
+                    "feedback": {
+                      "diagnosis": "<p>Non, un certain E.LLM n'a pas adopté de chat encore 😛</p>"
+                    }
+                  }
+                ],
+                "solution": "2",
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
           "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
           "type": "summary",
           "title": "test table",
