@@ -41,6 +41,14 @@ export default class ModuleElement extends Component {
     throw new Error('ModuleElement.canValidateElement not implemented');
   }
 
+  get hasShortProposals() {
+    if (!this.element.hasShortProposals) {
+      return 'proposals';
+    }
+    const isNumberOfProposalsOdd = this.element.proposals.length === 3;
+    return isNumberOfProposalsOdd ? '3-short-proposals' : 'short-proposals';
+  }
+
   resetAnswers() {
     throw new Error('ModuleElement.resetAnswers not implemented');
   }
