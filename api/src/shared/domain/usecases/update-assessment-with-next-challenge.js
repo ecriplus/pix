@@ -10,21 +10,16 @@ export async function updateAssessmentWithNextChallenge({
   certificationEvaluationRepository,
   courseRepository,
 }) {
-  if (!assessment.isStarted()) {
-    assessment.nextChallenge = null;
-    return assessment;
-  }
-
   let nextChallenge = null;
   try {
-    if (assessment.isCertification()) {
+    if (assessment.isCertification() && assessment.isStarted()) {
       nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
         assessmentId: assessment.id,
         locale,
       });
     }
 
-    if (assessment.isPreview()) {
+    if (assessment.isPreview() && assessment.isStarted()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
     }
 
@@ -34,13 +29,15 @@ export async function updateAssessmentWithNextChallenge({
         throw new NotFoundError("Le test demandé n'existe pas");
       }
       assessment.title = course.name;
-      nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+      if (assessment.isStarted()) {
+        nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+      }
     }
 
-    if (assessment.isForCampaign()) {
+    if (assessment.isForCampaign() && assessment.isStarted()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
     }
-    if (assessment.isCompetenceEvaluation()) {
+    if (assessment.isCompetenceEvaluation() && assessment.isStarted()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
     }
   } catch (error) {
