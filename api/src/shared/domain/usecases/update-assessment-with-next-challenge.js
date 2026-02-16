@@ -2,7 +2,7 @@ import { logger } from '../../infrastructure/utils/logger.js';
 import { AssessmentEndedError, AssessmentLackOfChallengesError, NotFoundError } from '../errors.js';
 
 export async function updateAssessmentWithNextChallenge({
-  assessment,
+  assessmentId,
   userId,
   locale,
   evaluationUsecases,
@@ -13,6 +13,7 @@ export async function updateAssessmentWithNextChallenge({
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
 }) {
+  const assessment = await assessmentRepository.getWithAnswers(assessmentId);
   let nextChallenge = null;
   try {
     if (assessment.isCertification()) {

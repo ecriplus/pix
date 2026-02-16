@@ -27,14 +27,12 @@ const dependencies = {
 
 import { deleteUnassociatedBadge } from './delete-unassociated-badge.js';
 import { findCountries } from './find-countries.js';
-import { getAssessment } from './get-assessment.js';
 import { updateAssessmentWithNextChallenge } from './update-assessment-with-next-challenge.js';
 import { updateLastQuestionState } from './update-last-question-state.js';
 
 const usecasesWithoutInjectedDependencies = {
   deleteUnassociatedBadge,
   findCountries,
-  getAssessment,
   updateAssessmentWithNextChallenge,
   updateLastQuestionState,
 };

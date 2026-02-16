@@ -10,6 +10,7 @@ import { catchErr, domainBuilder, expect, preventStubsToBeCalledUnexpectedly, si
 describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
     let userId, assessmentId, locale, dependencies;
+    let assessmentRepository_getWithAnswersStub;
     let assessmentRepository_updateLastQuestionDateStub;
     let assessmentRepository_updateWhenNewChallengeIsAskedStub;
     let evaluationUsecases_getNextChallengeForPreviewStub;
@@ -26,6 +27,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       userId = 'someUserId';
       assessmentId = 'someAssessmentId';
       locale = 'someLocale';
+      assessmentRepository_getWithAnswersStub = sinon.stub().named('getWithAnswers');
       assessmentRepository_updateLastQuestionDateStub = sinon.stub().named('updateLastQuestionDate');
       assessmentRepository_updateWhenNewChallengeIsAskedStub = sinon.stub().named('updateWhenNewChallengeIsAsked');
       evaluationUsecases_getNextChallengeForPreviewStub = sinon.stub().named('getNextChallengeForPreview');
@@ -44,6 +46,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       certificationChallengeLiveAlertRepository_getByAssessmentIdStub = sinon.stub().named('getChallengeLiveAlerts');
       certificationCompanionAlertRepository_getAllByAssessmentIdStub = sinon.stub().named('getCompanionLiveAlerts');
       preventStubsToBeCalledUnexpectedly([
+        assessmentRepository_getWithAnswersStub,
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
         evaluationUsecases_getNextChallengeForPreviewStub,
@@ -58,6 +61,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       ]);
 
       const assessmentRepository = {
+        getWithAnswers: assessmentRepository_getWithAnswersStub,
         updateLastQuestionDate: assessmentRepository_updateLastQuestionDateStub,
         updateWhenNewChallengeIsAsked: assessmentRepository_updateWhenNewChallengeIsAskedStub,
       };
@@ -89,6 +93,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       };
 
       dependencies = {
+        assessmentId,
         userId,
         locale,
         evaluationUsecases,
@@ -106,6 +111,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
       beforeEach(function () {
         assessment = domainBuilder.buildAssessment({ id: assessmentId, type: Assessment.types.PREVIEW });
+        assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
       });
 
       [
@@ -117,7 +123,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it(`should return an assessment with its answers`, async function () {
           assessment.state = assessmentState;
 
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
           expect(assessmentWithNextChallenge.nextChallenge).to.be.null;
@@ -131,12 +137,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           state: Assessment.states.STARTED,
           type: Assessment.types.PREVIEW,
         });
+        assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
         evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
 
-        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
         expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
       });
@@ -147,12 +154,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           type: Assessment.types.PREVIEW,
           answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
         });
+        assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
         evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
 
-        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
         expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
       });
@@ -168,11 +176,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.PREVIEW,
             answers: [],
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         });
 
         it('should call usecase and return value from preview usecase', async function () {
           evaluationUsecases_getNextChallengeForPreviewStub.rejects(new AssessmentEndedError());
-          const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
         });
@@ -188,15 +197,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             answers: [],
             courseId: 'recCourseId',
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         });
 
         context('when course is not playable', function () {
           it('should throw a NotFoundError', async function () {
             courseRepository_getStub.withArgs('recCourseId').resolves(domainBuilder.buildCourse({ isActive: false }));
-            const err = await catchErr(updateAssessmentWithNextChallenge)({
-              assessment,
-              ...dependencies,
-            });
+            const err = await catchErr(updateAssessmentWithNextChallenge)(dependencies);
 
             expect(err).to.deepEqualInstance(new NotFoundError("Le test demandé n'existe pas"));
           });
@@ -211,10 +218,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
             const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
             evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
-            const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({
-              assessment,
-              ...dependencies,
-            });
+            const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
             expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
             expect(assessmentWithNextChallenge.title).to.equal('Mon super course');
@@ -230,7 +234,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForDemoStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.title).to.equal('Mon super course');
@@ -247,6 +251,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.CAMPAIGN,
             answers: [],
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         });
 
         it('should call usecase and return value from campaign usecase', async function () {
@@ -256,7 +261,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCampaignAssessmentStub
             .withArgs({ assessment, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
         });
@@ -267,7 +272,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForCampaignAssessmentStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
           });
@@ -284,6 +289,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             answers: [],
             competenceId: 'recCompetenceId',
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         });
 
         it('should call usecase and return value from competence evaluation usecase', async function () {
@@ -296,7 +302,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCompetenceEvaluationStub
             .withArgs({ assessment, userId, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
           expect(assessmentWithNextChallenge.title).to.equal('Ma super compétence');
@@ -311,7 +317,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForCompetenceEvaluationStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.title).to.equal('Ma super compétence');
@@ -329,6 +335,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.CERTIFICATION,
             answers: [],
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           certificationChallengeLiveAlert = domainBuilder.buildCertificationChallengeLiveAlert({
             assessmentId: assessment.id,
           });
@@ -350,7 +357,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           certificationEvaluationRepository_selectNextCertificationChallengeStub
             .withArgs({ assessmentId: assessment.id, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
           expect(assessmentWithNextChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
@@ -363,7 +370,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
@@ -379,7 +386,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             );
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
 
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
@@ -395,7 +402,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(unexpectedError);
 
             // when
-            const promise = updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            const promise = updateAssessmentWithNextChallenge(dependencies);
 
             // then
             await expect(promise).to.be.rejectedWith(unexpectedError);
@@ -417,6 +424,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             type: Assessment.types.PREVIEW,
             answers: [],
           });
+          assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
           evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves({ id: 'someChallengeId' });
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         });
@@ -428,7 +436,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it(`should update the last question date`, async function () {
           assessmentRepository_updateLastQuestionDateStub.resolves();
 
-          await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+          await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentRepository_updateLastQuestionDateStub).to.have.been.calledWithExactly({
             id: assessmentId,
@@ -449,9 +457,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               state: Assessment.states.STARTED,
               type: Assessment.types.PREVIEW,
             });
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
             evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(null);
 
-            await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            await updateAssessmentWithNextChallenge(dependencies);
 
             expect(assessmentRepository_updateWhenNewChallengeIsAskedStub).to.not.have.been.called;
           });
@@ -466,12 +475,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               lastChallengeId: 'currentChallengeId',
               answers: [domainBuilder.buildAnswer({ challengeId: 'currentChallengeId' })],
             });
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
 
             evaluationUsecases_getNextChallengeForPreviewStub
               .withArgs({})
               .resolves(domainBuilder.buildChallenge({ id: 'currentChallengeId' }));
 
-            await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            await updateAssessmentWithNextChallenge(dependencies);
 
             expect(assessmentRepository_updateWhenNewChallengeIsAskedStub).to.not.have.been.called;
           });
@@ -486,13 +496,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               lastChallengeId: 'previousChallengeId',
               answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
             });
+            assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
 
             evaluationUsecases_getNextChallengeForPreviewStub
               .withArgs({})
               .resolves(domainBuilder.buildChallenge({ id: 'nextChallengeId' }));
             assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
 
-            await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
+            await updateAssessmentWithNextChallenge(dependencies);
 
             expect(assessmentRepository_updateWhenNewChallengeIsAskedStub).to.have.been.calledWithExactly({
               id: assessmentId,

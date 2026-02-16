@@ -34,8 +34,6 @@ const getAssessmentWithNextChallenge = async function (
   const enableTransactionForGetNext = await featureToggles.get('enableTransactionForGetNext');
   if (enableTransactionForGetNext) {
     const assessment = await DomainTransaction.execute(async () => {
-      const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId });
-
       if (assessmentWithoutChallenge?.campaign?.isExam) {
         const progression = await evaluationUsecases.getProgression({
           progressionId: assessmentId.toString(),
@@ -43,9 +41,8 @@ const getAssessmentWithNextChallenge = async function (
         });
         globalProgression = progression.completionRate;
       }
-
       return sharedUsecases.updateAssessmentWithNextChallenge({
-        assessment: assessmentWithoutChallenge,
+        assessmentId,
         userId,
         locale,
       });
@@ -53,16 +50,15 @@ const getAssessmentWithNextChallenge = async function (
 
     return dependencies.assessmentSerializer.serialize(assessment.toDto(globalProgression));
   }
-
-  const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId });
-
   if (assessmentWithoutChallenge?.campaign?.isExam) {
-    const progression = await evaluationUsecases.getProgression({ progressionId: assessmentId.toString(), userId });
+    const progression = await evaluationUsecases.getProgression({
+      progressionId: assessmentId.toString(),
+      userId,
+    });
     globalProgression = progression.completionRate;
   }
-
   const assessment = await sharedUsecases.updateAssessmentWithNextChallenge({
-    assessment: assessmentWithoutChallenge,
+    assessmentId,
     userId,
     locale,
   });
@@ -97,7 +93,7 @@ const findCompetenceEvaluations = async function (request) {
 const autoValidateNextChallenge = async function (request, h) {
   const assessmentId = request.params.id;
   const locale = getChallengeLocale(request);
-  const assessment = await sharedUsecases.getAssessment({ assessmentId, locale });
+  const assessment = await assessmentRepository.getWithAnswers(assessmentId);
   const userId = assessment.userId;
   const fakeAnswer = new Answer({
     assessmentId,
