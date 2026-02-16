@@ -9,10 +9,7 @@ export const findByOrganizationLearnerIdAndModuleIds = async ({ organizationLear
 
   const organizationLearnerParticipations = await knexConn('organization_learner_participations')
     .select('organization_learner_participations.*')
-    .where({
-      organizationLearnerId,
-      type: OrganizationLearnerParticipationTypes.PASSAGE,
-    })
+    .where({ organizationLearnerId, type: OrganizationLearnerParticipationTypes.PASSAGE })
     .whereIn('referenceId', moduleIds)
     .whereNull('deletedAt');
 
@@ -31,17 +28,11 @@ export const synchronize = async ({ organizationLearnerId, moduleIds, modulesApi
   const knexConn = DomainTransaction.getConnection();
 
   const learner = await organizationLearnerApi.get(organizationLearnerId);
-  const modulePassages = await modulesApi.getUserModuleStatuses({
-    userId: learner.userId,
-    moduleIds,
-  });
+  const modulePassages = await modulesApi.getUserModuleStatuses({ userId: learner.userId, moduleIds });
 
   const learnerParticipationsByModule = await knexConn('organization_learner_participations')
     .select('organization_learner_participations.id', 'referenceId')
-    .where({
-      organizationLearnerId,
-      type: OrganizationLearnerParticipationTypes.PASSAGE,
-    })
+    .select('organization_learner_participations.id', 'referenceId')
     .whereNull('deletedAt')
     .whereIn('referenceId', moduleIds);
 

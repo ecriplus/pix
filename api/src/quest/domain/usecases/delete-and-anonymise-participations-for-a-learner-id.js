@@ -38,7 +38,7 @@ export const deleteAndAnonymizeParticipationsForALearnerId = withTransaction(
           campaignId,
         });
       const campaignParticipationIds = campaignParticipations.map((campaignParticipation) => campaignParticipation.id);
-      await campaignParticipationRepository.deleteCampaignParticipationsInCombinedCourse({
+      await campaignParticipationRepository.deleteCampaignParticipations({
         userId,
         campaignId: campaignId,
         campaignParticipationIds,

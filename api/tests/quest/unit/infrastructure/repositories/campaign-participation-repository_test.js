@@ -17,7 +17,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign-participation'
 
     campaignParticipationsApiStub = {
       getCampaignParticipationsByLearnerIdAndCampaignId: sinon.stub(),
-      deleteCampaignParticipationsInCombinedCourse: sinon.stub(),
+      deleteCampaignParticipations: sinon.stub(),
     };
     campaignParticipationsApiStub.getCampaignParticipationsByLearnerIdAndCampaignId
       .withArgs({ organizationLearnerId, campaignId })
@@ -48,7 +48,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign-participation'
       const keepPreviousDeletion = Symbol('true');
 
       // when
-      await campaignParticipationRepository.deleteCampaignParticipationsInCombinedCourse({
+      await campaignParticipationRepository.deleteCampaignParticipations({
         userId,
         campaignId,
         campaignParticipationIds,
@@ -59,7 +59,7 @@ describe('Quest | Unit | Infrastructure | Repositories | campaign-participation'
       });
 
       // then
-      expect(campaignParticipationsApiStub.deleteCampaignParticipationsInCombinedCourse).to.be.calledWithExactly({
+      expect(campaignParticipationsApiStub.deleteCampaignParticipations).to.be.calledWithExactly({
         userId,
         campaignParticipationIds,
         campaignId,

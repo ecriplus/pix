@@ -1,4 +1,4 @@
-export async function deleteCampaignParticipationsInCombinedCourse({
+export async function deleteCampaignParticipations({
   userId,
   campaignId,
   campaignParticipationIds,
@@ -7,7 +7,7 @@ export async function deleteCampaignParticipationsInCombinedCourse({
   campaignParticipationsApi,
   keepPreviousDeletion,
 }) {
-  return campaignParticipationsApi.deleteCampaignParticipationsInCombinedCourse({
+  return campaignParticipationsApi.deleteCampaignParticipations({
     userId,
     campaignParticipationIds,
     campaignId,

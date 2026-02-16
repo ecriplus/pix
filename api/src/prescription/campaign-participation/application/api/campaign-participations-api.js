@@ -18,7 +18,7 @@ export const getCampaignParticipationsByLearnerIdAndCampaignId = async ({ organi
   });
 };
 
-export const deleteCampaignParticipationsInCombinedCourse = async ({
+export const deleteCampaignParticipations = async ({
   userId,
   campaignParticipationIds,
   campaignId,
