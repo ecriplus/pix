@@ -795,8 +795,8 @@
                     "input": "input",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -809,29 +809,9 @@
                       }
                     ],
                     "solutions": [
-                      "1"
+                      "1", 4, 5 , 7
                     ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "Bonne réponse !",
-                    "diagnosis": ""
                   },
-                  "invalid": {
-                    "state": "Mauvaise réponse !",
-                    "diagnosis": ""
-                  }
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "71fa6eaf-2e7f-442a-974d-a395fb589b70",
-                "type": "qrocm",
-                "instruction": "",
-                "proposals": [
                   {
                     "type": "text",
                     "content": "<p>Pour cela il faut les </p>"
@@ -840,43 +820,23 @@
                     "input": "input",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
                     "tolerances": [],
                     "options": [
                       {
-                        "id": "1",
+                        "id": "3",
                         "content": "jeter dès qu'ils ont un problème."
                       },
                       {
-                        "id": "2",
+                        "id": "4",
                         "content": "protéger et les réparer."
                       }
                     ],
                     "solutions": [
-                      "2"
+                      "4"
                     ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "Bonne réponse !",
-                    "diagnosis": ""
                   },
-                  "invalid": {
-                    "state": "Mauvaise réponse !",
-                    "diagnosis": ""
-                  }
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "eba72931-8e78-49ec-9daa-a27350f7692c",
-                "type": "qrocm",
-                "instruction": "",
-                "proposals": [
                   {
                     "type": "text",
                     "content": "<p>Et si on doit vraiment en changer, il vaut mieux </p>"
@@ -885,43 +845,23 @@
                     "input": "input",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
                     "tolerances": [],
                     "options": [
                       {
-                        "id": "3",
+                        "id": "5",
                         "content": "les vendre ou les donner."
                       },
                       {
-                        "id": "4",
+                        "id": "6",
                         "content": "garder dans un tiroir."
                       }
                     ],
                     "solutions": [
-                      "3"
+                      "1", 4, 5 , 7
                     ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "Bonne réponse !",
-                    "diagnosis": ""
                   },
-                  "invalid": {
-                    "state": "Mauvaise réponse !",
-                    "diagnosis": ""
-                  }
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "71fa6eaf-2e7f-442a-974d-a395fb589b70",
-                "type": "qrocm",
-                "instruction": "",
-                "proposals": [
                   {
                     "type": "text",
                     "content": "<p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut </p>"
@@ -930,21 +870,21 @@
                     "input": "input",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "",
-                    "ariaLabel": "",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
                     "tolerances": [],
                     "options": [
                       {
-                        "id": "1",
+                        "id": "7",
                         "content": "les déposer dans des points de collectes pour qu'ils soient recycler."
                       },
                       {
-                        "id": "2",
+                        "id": "8",
                         "content": "les jeter à la poubelle."
                       }
                     ],
                     "solutions": [
-                      "1"
+                      "5"
                     ]
                   }
                 ],
