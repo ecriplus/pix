@@ -1,3 +1,4 @@
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Campaign } from '../../domain/models/Campaign.js';
 
 export const getByCode = async function ({ code, campaignsApi }) {
@@ -8,6 +9,24 @@ export const getByCode = async function ({ code, campaignsApi }) {
 export const get = async function ({ id, campaignsApi }) {
   const campaign = await campaignsApi.get(id);
   return new Campaign(campaign);
+};
+
+export const getCampaignIdsByCombinedCourseIds = async function ({ combinedCourseIds }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const successRequirements = await knexConn
+    .select('quests.successRequirements')
+    .from('combined_courses')
+    .join('quests', 'quests.id', 'combined_courses.questId')
+    .whereIn('combined_courses.id', combinedCourseIds)
+    .pluck('quests.successRequirements');
+
+  const campaignIds = successRequirements
+    .flat()
+    .filter((requirement) => requirement.data.campaignId)
+    .map((requirement) => parseInt(requirement.data.campaignId.data));
+
+  return campaignIds;
 };
 
 export const save = async function ({ campaigns, campaignsApi }) {

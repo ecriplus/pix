@@ -5,6 +5,7 @@ import { StatusesEnumValues } from '../../../../../src/devcomp/domain/models/mod
 import {
   OrganizationLearnerParticipation,
   OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import * as organizationLearnerParticipationRepository from '../../../../../src/quest/infrastructure/repositories/organization-learner-participation-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -197,7 +198,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
         },
       ];
       modulesApi.getUserModuleStatuses
-        .withArgs({ userId: organizationLearner.userId, moduleIds: ['1234-abcdef'] })
+        .withArgs({
+          userId: organizationLearner.userId,
+          moduleIds: ['1234-abcdef'],
+        })
         .resolves(moduleApiResponse);
 
       const organizationLearnerApiResponse = {
@@ -258,7 +262,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
         },
       ];
       modulesApi.getUserModuleStatuses
-        .withArgs({ userId: organizationLearner.userId, moduleIds: ['1234', '4567'] })
+        .withArgs({
+          userId: organizationLearner.userId,
+          moduleIds: ['1234', '4567'],
+        })
         .resolves(moduleApiResponse);
 
       const organizationLearnerApiResponse = {
@@ -284,6 +291,113 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       });
 
       expect(result).lengthOf(2);
+    });
+  });
+  describe('#deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationLearnerId', function () {
+    it('should delete the exact participation for the given learner id and combined course id', async function () {
+      //given
+      const organizationId = await databaseBuilder.factory.buildOrganization().id;
+
+      const { userId } = await databaseBuilder.factory.buildMembership({
+        organizationId,
+      });
+      const organizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      }).id;
+      const otherOrganizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      }).id;
+      const combinedCourseId = await databaseBuilder.factory.buildCombinedCourse({ organizationId }).id;
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        organizationLearnerId,
+        combinedCourseId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        organizationLearnerId: otherOrganizationLearnerId,
+        combinedCourseId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await organizationLearnerParticipationRepository.deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationLearnerId(
+        {
+          combinedCourseId,
+          organizationLearnerId,
+          userId,
+        },
+      );
+
+      //then
+      const deletedParticipation = await knex('organization_learner_participations').where({
+        referenceId: combinedCourseId.toString(),
+        organizationLearnerId,
+      });
+      const remainingParticipation = await knex('organization_learner_participations').where({
+        referenceId: combinedCourseId.toString(),
+        organizationLearnerId: otherOrganizationLearnerId,
+      });
+
+      expect(deletedParticipation[0].deletedAt).not.to.be.null;
+      expect(deletedParticipation[0].deletedBy).to.equal(userId);
+      expect(remainingParticipation[0].deletedAt).to.be.null;
+      expect(remainingParticipation[0].deletedBy).to.be.null;
+    });
+  });
+  describe('#deletePassagesByModulesIdAndOrganizationLearnerId', function () {
+    it('should delete the exact passage for given learner id and module id', async function () {
+      const moduleId = '01151659-77c1-41cc-8724-89091357af3d';
+      const otherModuleId = 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d';
+
+      const { userId, organizationId } = await databaseBuilder.factory.buildMembership();
+
+      const organizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      }).id;
+
+      await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        moduleId,
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      const { organizationLearnerId: otherOrganizationLearnerId } =
+        await databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          moduleId: otherModuleId,
+          status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        });
+
+      await databaseBuilder.commit();
+
+      //when
+      await organizationLearnerParticipationRepository.deletePassagesByModuleIdsAndOrganizationLearnerId({
+        moduleIds: [moduleId],
+        organizationLearnerId,
+        userId,
+      });
+
+      //then
+      const deletedPassage = await knex('organization_learner_participations').where({
+        referenceId: moduleId,
+        organizationLearnerId,
+      });
+      const remainingPassage = await knex('organization_learner_participations').where({
+        referenceId: otherModuleId,
+        organizationLearnerId: otherOrganizationLearnerId,
+      });
+
+      expect(deletedPassage[0].deletedAt).not.to.be.null;
+      expect(deletedPassage[0].deletedBy).to.equal(userId);
+      expect(remainingPassage[0].deletedAt).to.be.null;
+      expect(remainingPassage[0].deletedBy).to.be.null;
     });
   });
 });
