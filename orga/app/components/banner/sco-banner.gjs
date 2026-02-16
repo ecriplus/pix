@@ -4,7 +4,7 @@ import { t } from 'ember-intl';
 
 <template>
   <PixNotificationAlert @type="communication-orga" @withIcon={{true}}>
-    {{t "banners.import.message"}}
+    <span>{{t "banners.import.message"}}</span>
     <ol class="banner-list">
       <li>
         {{t "banners.import.step1a" htmlSafe=true}}
@@ -19,5 +19,6 @@ import { t } from 'ember-intl';
       <li>{{t "banners.import.step2" htmlSafe=true}}</li>
       <li>{{t "banners.import.step3" htmlSafe=true}}</li>
     </ol>
+    <span>{{t "banners.import.ia-message" htmlSafe=true}}</span>
   </PixNotificationAlert>
 </template>
