@@ -18,6 +18,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let evaluationUsecases_getNextChallengeForCompetenceEvaluationStub;
     let certificationEvaluationRepository_selectNextCertificationChallengeStub;
     let courseRepository_getStub;
+    let competenceRepository_getCompetenceNameStub;
 
     beforeEach(function () {
       userId = 'someUserId';
@@ -37,6 +38,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         .stub()
         .named('selectNextCertificationChallenge');
       courseRepository_getStub = sinon.stub().named('getCourse');
+      competenceRepository_getCompetenceNameStub = sinon.stub().named('getCompetenceName');
       preventStubsToBeCalledUnexpectedly([
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
@@ -46,6 +48,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
         certificationEvaluationRepository_selectNextCertificationChallengeStub,
         courseRepository_getStub,
+        competenceRepository_getCompetenceNameStub,
       ]);
 
       const assessmentRepository = {
@@ -68,6 +71,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         get: courseRepository_getStub,
       };
 
+      const competenceRepository = {
+        getCompetenceName: competenceRepository_getCompetenceNameStub,
+      };
+
       dependencies = {
         userId,
         locale,
@@ -75,6 +82,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         assessmentRepository,
         certificationEvaluationRepository,
         courseRepository,
+        competenceRepository,
       };
     });
 
@@ -259,10 +267,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             state: Assessment.states.STARTED,
             type: Assessment.types.COMPETENCE_EVALUATION,
             answers: [],
+            competenceId: 'recCompetenceId',
           });
         });
 
         it('should call usecase and return value from competence evaluation usecase', async function () {
+          competenceRepository_getCompetenceNameStub
+            .withArgs({ id: assessment.competenceId, locale })
+            .resolves('Ma super compétence');
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForCompetenceEvaluation' });
@@ -272,17 +284,22 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.title).to.equal('Ma super compétence');
         });
 
         context('when there is no more challenge', function () {
           it('should return an assessment with no nextChallenge', async function () {
             // given
+            competenceRepository_getCompetenceNameStub
+              .withArgs({ id: assessment.competenceId, locale })
+              .resolves('Ma super compétence');
             evaluationUsecases_getNextChallengeForCompetenceEvaluationStub.rejects(new AssessmentEndedError());
 
             // when
             const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge({ assessment, ...dependencies });
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+            expect(assessmentWithoutChallenge.title).to.equal('Ma super compétence');
           });
         });
       });

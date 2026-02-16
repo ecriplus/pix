@@ -2,9 +2,7 @@ import { Assessment } from '../models/Assessment.js';
 
 export async function getAssessment({
   assessmentId,
-  locale,
   assessmentRepository,
-  competenceRepository,
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
 }) {
@@ -18,11 +16,6 @@ export async function getAssessment({
         assessmentId: assessment.id,
       });
       assessment.attachLiveAlerts({ challengeLiveAlerts, companionLiveAlerts });
-      break;
-    }
-
-    case Assessment.types.COMPETENCE_EVALUATION: {
-      assessment.title = await competenceRepository.getCompetenceName({ id: assessment.competenceId, locale });
       break;
     }
   }

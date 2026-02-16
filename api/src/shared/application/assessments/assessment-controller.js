@@ -34,7 +34,7 @@ const getAssessmentWithNextChallenge = async function (
   const enableTransactionForGetNext = await featureToggles.get('enableTransactionForGetNext');
   if (enableTransactionForGetNext) {
     const assessment = await DomainTransaction.execute(async () => {
-      const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId, locale });
+      const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId });
 
       if (assessmentWithoutChallenge?.campaign?.isExam) {
         const progression = await evaluationUsecases.getProgression({
@@ -54,7 +54,7 @@ const getAssessmentWithNextChallenge = async function (
     return dependencies.assessmentSerializer.serialize(assessment.toDto(globalProgression));
   }
 
-  const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId, locale });
+  const assessmentWithoutChallenge = await sharedUsecases.getAssessment({ assessmentId });
 
   if (assessmentWithoutChallenge?.campaign?.isExam) {
     const progression = await evaluationUsecases.getProgression({ progressionId: assessmentId.toString(), userId });

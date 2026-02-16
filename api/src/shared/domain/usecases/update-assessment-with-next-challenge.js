@@ -9,6 +9,7 @@ export async function updateAssessmentWithNextChallenge({
   assessmentRepository,
   certificationEvaluationRepository,
   courseRepository,
+  competenceRepository,
 }) {
   let nextChallenge = null;
   try {
@@ -37,8 +38,15 @@ export async function updateAssessmentWithNextChallenge({
     if (assessment.isForCampaign() && assessment.isStarted()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
     }
-    if (assessment.isCompetenceEvaluation() && assessment.isStarted()) {
-      nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
+    if (assessment.isCompetenceEvaluation()) {
+      assessment.title = await competenceRepository.getCompetenceName({ id: assessment.competenceId, locale });
+      if (assessment.isStarted()) {
+        nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({
+          assessment,
+          userId,
+          locale,
+        });
+      }
     }
   } catch (error) {
     if (error instanceof AssessmentLackOfChallengesError) {

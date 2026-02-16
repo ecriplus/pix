@@ -4,31 +4,18 @@ import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-assessment', function () {
   let assessment;
-  let competence;
-  let course;
   let assessmentRepository;
-  let competenceRepository;
-  let courseRepository;
   let certificationChallengeLiveAlertRepository;
   let certificationCompanionAlertRepository;
   const certificationCourseId = 1;
-  const expectedCourseName = 'Course Àpieds';
-  const expectedAssessmentTitle = 'Traiter des données';
 
   beforeEach(function () {
-    competence = domainBuilder.buildCompetence({ id: 'recsvLz0W2ShyfD63', name: expectedAssessmentTitle });
-    course = domainBuilder.buildCourse({ id: 'ABC123', name: expectedCourseName });
-
     assessment = domainBuilder.buildAssessment({
       type: Assessment.types.PREVIEW,
-      competenceId: competence.id,
-      courseId: course.id,
       certificationCourseId,
     });
 
     assessmentRepository = { getWithAnswers: sinon.stub() };
-    competenceRepository = { getCompetenceName: sinon.stub() };
-    courseRepository = { get: sinon.stub() };
     certificationChallengeLiveAlertRepository = { getByAssessmentId: sinon.stub() };
     certificationCompanionAlertRepository = { getAllByAssessmentId: sinon.stub() };
   });
@@ -41,35 +28,11 @@ describe('Unit | UseCase | get-assessment', function () {
     const result = await getAssessment({
       assessmentId: assessment.id,
       assessmentRepository,
-      competenceRepository,
-      courseRepository,
     });
 
     // then
     expect(result).to.be.an.instanceOf(Assessment);
     expect(result.id).to.equal(assessment.id);
-  });
-
-  it('should resolve the Assessment domain object with COMPETENCE_EVALUATION title matching the given assessment ID', async function () {
-    // given
-    const locale = 'fr';
-    assessment.type = Assessment.types.COMPETENCE_EVALUATION;
-    assessmentRepository.getWithAnswers.withArgs(assessment.id).resolves(assessment);
-    competenceRepository.getCompetenceName.withArgs({ id: assessment.competenceId, locale }).resolves(competence.name);
-
-    // when
-    const result = await getAssessment({
-      assessmentId: assessment.id,
-      locale,
-      assessmentRepository,
-      competenceRepository,
-      courseRepository,
-    });
-
-    // then
-    expect(result).to.be.an.instanceOf(Assessment);
-    expect(result.id).to.equal(assessment.id);
-    expect(result.title).to.equal(expectedAssessmentTitle);
   });
 
   context('Assessment of type CERTIFICATION', function () {
@@ -97,8 +60,6 @@ describe('Unit | UseCase | get-assessment', function () {
       const result = await getAssessment({
         assessmentId: assessment.id,
         assessmentRepository,
-        competenceRepository,
-        courseRepository,
         certificationChallengeLiveAlertRepository,
         certificationCompanionAlertRepository,
       });
