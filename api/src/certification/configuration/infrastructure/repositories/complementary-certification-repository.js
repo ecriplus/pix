@@ -5,7 +5,7 @@
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { ComplementaryCertification } from '../../../complementary-certification/domain/models/ComplementaryCertification.js';
+import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
 /**
  * @param {object} row
