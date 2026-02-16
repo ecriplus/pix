@@ -435,6 +435,70 @@
           ]
         },
         {
+          "id": "12be4923-0130-45bf-9171-fcb38bb5d065",
+          "type": "challenge",
+          "title": "qcu-declarative short proposals (2 et 3)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dddddd7c-0bdd-447a-8958-84b50e0e2558",
+                "type": "qcu-declarative",
+                "instruction": "<p>Qui arrive en premier dans le bol : le lait ou les céréales ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Le lait 🥛",
+                    "feedback": {
+                      "diagnosis": "<p>...Intéressant. Tu chauffes ton lait aussi ? 👀</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Les céréales 🌾",
+                    "feedback": {
+                      "diagnosis": "<p>Meilleure stratégie ! Ça fait plus de céréales dans le bol 🥣</p>"
+                    }
+                  }
+                ],
+                "hasShortProposals": true
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "82eaf7ce-02f7-44e8-8c51-3d07ba29e400",
+                "type": "qcu-declarative",
+                "instruction": "<p>Toto et Tata sont sur un bâton 🛶, qui tombe à l'eau?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "Toto",
+                    "feedback": {
+                      "diagnosis": "<p>Ah bon ?</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Tata",
+                    "feedback": {
+                      "diagnosis": "<p>Tu est sûr ?</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Toto et Tata",
+                    "feedback": {
+                      "diagnosis": "<p>Pas facile de tenir sur un bâton oui 😏</p>"
+                    }
+                  }
+                ],
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
           "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
           "type": "summary",
           "title": "test table",
