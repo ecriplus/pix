@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.332.0](https://github.com/1024pix/pix/compare/v5.331.0...v5.332.0) (2026-02-16)
+
+### :rocket: Amélioration
+
+- [#15122](https://github.com/1024pix/pix/pull/15122) Ajouter une mention mettant en avant la découverte des parcours IA pour le SCO (Pix-21459). 
+- [#15126](https://github.com/1024pix/pix/pull/15126) Mettre à jour les liens anglais de doc dans PixCertif (PIX-21509). 
+- [#15124](https://github.com/1024pix/pix/pull/15124) Pouvoir modifier le public prescrit d'une organisation lors de la modification en masse (PIX-21327) 
+- [#15088](https://github.com/1024pix/pix/pull/15088) Update NR_Datacenter_AVA.json 
+
+### :bug: Correction
+
+- [#15129](https://github.com/1024pix/pix/pull/15129) Ne pas afficher le blur sur une question focus déjà répondue (PIX-18636). 
+
+### :building_construction: Tech
+
+- [#15075](https://github.com/1024pix/pix/pull/15075) :recycle: Remplace l'utilisation de la fonction `cloneDeep` de la librairie ` lodash` 
+- [#14983](https://github.com/1024pix/pix/pull/14983) Ajout de tests autos pédagogiques pour mieux comprendre la gestion de la stack trace dans un contexte de promesses 
+- [#15118](https://github.com/1024pix/pix/pull/15118) Autoriser la création de profil cible sans organization de reférence (PIX-21525). 
+- [#15113](https://github.com/1024pix/pix/pull/15113) Gérer l'utilisation du if/then/otherwise de Joi dans le script to conversion vers json-schema (PIX-21466) 
+- [#15031](https://github.com/1024pix/pix/pull/15031) Supprime un index inutile dans la table "certification-center-memberships" sur la colonne "updatedByUserId" 
+
+### :coffee: Autre
+
+- [#15119](https://github.com/1024pix/pix/pull/15119) Mettre à jour les traductions NL (PIX-21508)
+
 # [5.331.0](https://github.com/1024pix/pix/compare/v5.330.0...v5.331.0) (2026-02-13)
 
 ### :rocket: Amélioration
