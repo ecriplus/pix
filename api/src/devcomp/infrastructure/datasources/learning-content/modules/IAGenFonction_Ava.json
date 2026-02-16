@@ -158,7 +158,7 @@
         {
           "id": "0cdbd667-4b08-456c-abd8-fed3ca10422c",
           "type": "short-lesson",
-          "title": "L’intérêt de l’appel d’outil : lesson",
+          "title": "L’intérêt de l’appel d’outil : leçon",
           "components": [
             {
               "type": "stepper",
@@ -222,19 +222,46 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Le prompt système du logiciel d’IA conversationnel utilisé par Yasmine",
-                      "description": "à venir",
-                      "text": "Prompt système"
+                      "title": "Le prompt système",
+                      "description": "Le prompt système du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/pre-prompt.jpg",
+                        "alt": "Le prompt système du logiciel d’IA conversationnel utilisé par Yasmine"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
                     },
                     {
                       "title": "L’appel à l’outil génération d’image",
-                      "description": "à venir",
-                      "text": "Génération d’image"
+                      "description": "L’appel à l’outil génération d’image du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-generateur-image.jpg",
+                        "alt": "L’appel à l’outil génération d’image"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
                     },
                     {
                       "title": "L’appel à l’outil calculatrice",
-                      "description": "{   \"name\": \"calculator\",   \"description\": \"Évalue une expression mathématique\",   \"parameters\": {     \"type\": \"object\",     \"properties\": {       \"expression\": {         \"type\": \"string\",         \"description\": \"Expression mathématique à calculer\"       }     },     \"required\": [\"expression\"]   } }",
-                      "text": "Calculatrice"
+                      "description": "L’appel à l’outil calculatrice du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-calculatrice.jpg",
+                        "alt": "L’appel à l’outil calculatrice"
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
                     }
                   ],
                   "randomSlides": false,
@@ -242,7 +269,7 @@
                   "disableAnimation": false,
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
-                  "imageTextDisplay": "1:2"
+                  "imageTextDisplay": "1:1"
                 }
               }
             },
@@ -853,7 +880,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "La recherche d’image&nbsp;:&nbsp;"
+                    "content": "La recherche sur le web :"
                   },
                   {
                     "input": "rechercheImage",
