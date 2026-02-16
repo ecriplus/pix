@@ -1028,6 +1028,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: true,
                         id: '6a6944be-a8a3-4138-b5dc-af664cf40b07',
                         type: 'qcu-discovery',
                         instruction: '<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>',

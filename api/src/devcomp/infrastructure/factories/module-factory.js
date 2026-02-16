@@ -331,6 +331,7 @@ export class ModuleFactory {
 
   static #buildQCUDiscovery(element) {
     return new QCUDiscovery({
+      hasShortProposals: element.hasShortProposals,
       id: element.id,
       instruction: element.instruction,
       proposals: element.proposals.map((proposal) => {
