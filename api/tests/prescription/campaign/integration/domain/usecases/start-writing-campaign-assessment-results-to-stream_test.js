@@ -12,7 +12,14 @@ import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/s
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { databaseBuilder, expect, mockLearningContent, sinon, streamToPromise } from '../../../../../test-helper.js';
+import {
+  databaseBuilder,
+  domainBuilder,
+  expect,
+  mockLearningContent,
+  sinon,
+  streamToPromise,
+} from '../../../../../test-helper.js';
 
 describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-results-to-stream', function () {
   describe('#startWritingCampaignAssessmentResultsToStream', function () {
@@ -90,10 +97,10 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
     });
 
     [
-      { type: CampaignTypes.ASSESSMENT, hideProgression: false },
+      { type: CampaignTypes.ASSESSMENT },
 
-      { type: CampaignTypes.EXAM, hideProgression: true },
-    ].forEach(function ({ type, hideProgression }) {
+      { type: CampaignTypes.EXAM },
+    ].forEach(function ({ type }) {
       context(`campaign of type ${type}`, function () {
         beforeEach(function () {
           const user = databaseBuilder.factory.buildUser();
@@ -246,7 +253,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";` +
               `"${campaignParticipation.participantExternalId}";`;
-            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine += '1;';
             csvSecondLine +=
               `"${createdAtFormated}";` +
               '"Oui";' +
@@ -391,7 +398,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";` +
               `"${organizationLearner.attributes.hobby}";`;
-            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine += '1;';
             csvSecondLine +=
               `"${createdAtFormated}";` +
               '"Oui";' +
@@ -525,7 +532,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${targetProfile.name}";` +
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";`;
-            if (!hideProgression) csvSecondLine += '1;';
+            csvSecondLine += '1;';
             csvSecondLine +=
               `"${createdAtFormated}";` +
               '"Oui";' +
@@ -628,13 +635,27 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               createdAt: new Date('2018-01-01'),
             });
 
-            databaseBuilder.factory.buildKnowledgeElement({
-              status: 'validated',
-              skillId: 'recSkillWeb1',
-              competenceId: 'recCompetence1',
-              userId: anonymizedUser.id,
-              createdAt: new Date('2018-01-01'),
-            });
+            if (type === 'EXAM') {
+              const ke = domainBuilder.buildKnowledgeElement({
+                status: 'validated',
+                skillId: 'recSkillWeb1',
+                competenceId: 'recCompetence1',
+                userId: anonymizedUser.id,
+                createdAt: new Date('2018-01-01'),
+              });
+              databaseBuilder.factory.buildKnowledgeElementSnapshot({
+                campaignParticipationId: campaignParticipation.id,
+                snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
+              });
+            } else {
+              databaseBuilder.factory.buildKnowledgeElement({
+                status: 'validated',
+                skillId: 'recSkillWeb1',
+                competenceId: 'recCompetence1',
+                userId: anonymizedUser.id,
+                createdAt: new Date('2018-01-01'),
+              });
+            }
 
             await databaseBuilder.commit();
           });
@@ -651,7 +672,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${targetProfile.name}";` +
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";`;
-            if (!hideProgression) csvSecondLine += '0,333;';
+            csvSecondLine += '0,333;';
             csvSecondLine +=
               `"${createdAtFormated}";` +
               '"Non";' +
@@ -677,7 +698,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${targetProfile.name}";` +
               `"Anonymized";` +
               `"Anonymized";`;
-            if (!hideProgression) csvThirdLine += '0;';
+            csvThirdLine += '0;';
             csvThirdLine +=
               `"01/01/2018 01:00";` +
               '"Non";' +
@@ -790,13 +811,33 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               createdAt,
             });
 
-            databaseBuilder.factory.buildKnowledgeElement({
-              status: KnowledgeElement.StatusType.RESET,
-              skillId: 'recSkillWeb2',
-              competenceId: 'recCompetence1',
-              userId: participant.id,
-              createdAt: secondParticipationDateCreatedAt,
-            });
+            if (type === 'EXAM') {
+              databaseBuilder.factory.buildKnowledgeElementSnapshot({
+                campaignParticipationId: secondCampaignParticipation.id,
+                snapshot: new KnowledgeElementCollection([
+                  domainBuilder.buildKnowledgeElement({
+                    status: 'validated',
+                    skillId: 'recSkillWeb1',
+                    competenceId: 'recCompetence1',
+                    createdAt: new Date('2018-01-01'),
+                  }),
+                  domainBuilder.buildKnowledgeElement({
+                    status: 'validated',
+                    skillId: 'recSkillWeb3',
+                    competenceId: 'recCompetence1',
+                    createdAt: new Date('2018-01-01'),
+                  }),
+                ]).toSnapshot(),
+              });
+            } else {
+              databaseBuilder.factory.buildKnowledgeElement({
+                status: KnowledgeElement.StatusType.RESET,
+                skillId: 'recSkillWeb2',
+                competenceId: 'recCompetence1',
+                userId: participant.id,
+                createdAt: secondParticipationDateCreatedAt,
+              });
+            }
 
             databaseBuilder.factory.buildKnowledgeElementSnapshot({
               campaignParticipationId: campaignParticipation.id,
@@ -824,7 +865,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${targetProfile.name}";` +
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";`;
-            if (!hideProgression) csvSecondLine += '0,667;';
+            csvSecondLine += '0,667;';
             csvSecondLine +=
               `"${secondParticipationCreatedFormated}";` +
               '"Non";' +
@@ -850,7 +891,7 @@ describe('Integration | Domain | Use Cases | start-writing-campaign-assessment-r
               `"'${targetProfile.name}";` +
               `"'${organizationLearner.lastName}";` +
               `"'${organizationLearner.firstName}";`;
-            if (!hideProgression) csvThirdLine += '1;';
+            csvThirdLine += '1;';
             csvThirdLine +=
               `"${createdAtFormated}";` +
               '"Oui";' +
