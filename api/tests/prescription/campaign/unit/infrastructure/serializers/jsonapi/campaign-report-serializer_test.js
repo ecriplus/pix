@@ -74,11 +74,6 @@ describe('Unit | Serializer | JSONAPI | campaign-report-serializer', function ()
                 },
               ],
             },
-            'campaign-analysis': {
-              links: {
-                related: '/api/campaigns/campaign_report_id/analyses',
-              },
-            },
             'campaign-result-levels-per-tubes-and-competence': {
               links: {
                 related: '/api/campaigns/campaign_report_id/level-per-tubes-and-competences',

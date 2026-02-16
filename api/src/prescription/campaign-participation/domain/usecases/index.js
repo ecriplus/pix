@@ -24,7 +24,6 @@ import * as stageCollectionRepository from '../../../campaign/infrastructure/rep
 import * as organizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
-import * as campaignAnalysisRepository from '../../infrastructure/repositories/campaign-analysis-repository.js';
 import * as campaignAssessmentParticipationRepository from '../../infrastructure/repositories/campaign-assessment-participation-repository.js';
 import * as campaignAssessmentParticipationResultRepository from '../../infrastructure/repositories/campaign-assessment-participation-result-repository.js';
 import * as campaignParticipationOverviewRepository from '../../infrastructure/repositories/campaign-participation-overview-repository.js';
@@ -50,7 +49,6 @@ const dependencies = {
   badgeForCalculationRepository,
   badgeRepository,
   campaignRepository,
-  campaignAnalysisRepository,
   campaignAssessmentParticipationRepository,
   campaignAssessmentParticipationResultRepository,
   campaignParticipantRepository: campaignRepositories.campaignParticipantRepository,
@@ -88,7 +86,6 @@ const dependencies = {
 };
 
 import { checkUserHasAccessToCampaignParticipation } from './check-user-has-access-to-campaign-participation.js';
-import { computeCampaignParticipationAnalysis } from './compute-campaign-participation-analysis.js';
 import { deleteCampaignParticipation } from './delete-campaign-participation.js';
 import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
 import { findPaginatedParticipationsForCampaignManagement } from './find-paginated-participations-for-campaign-management.js';
@@ -114,7 +111,6 @@ import { updateParticipantExternalId } from './update-participant-external-id.js
 
 const usecasesWithoutInjectedDependencies = {
   checkUserHasAccessToCampaignParticipation,
-  computeCampaignParticipationAnalysis,
   deleteCampaignParticipation,
   findCampaignParticipationsForUserManagement,
   findPaginatedParticipationsForCampaignManagement,

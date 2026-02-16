@@ -3,7 +3,6 @@ import * as campaignResultLevelsPerTubesAndCompetencesSerializer from '../../cam
 import { usecases } from '../domain/usecases/index.js';
 import * as anonymisedCampaignAssessmentSerializer from '../infrastructure/serializers/jsonapi/anonymised-campaign-assessment-serializer.js';
 import * as availableCampaignParticipationsSerializer from '../infrastructure/serializers/jsonapi/available-campaign-participation-serializer.js';
-import * as campaignAnalysisSerializer from '../infrastructure/serializers/jsonapi/campaign-analysis-serializer.js';
 import * as campaignAssessmentParticipationResultSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-result-serializer.js';
 import * as campaignAssessmentParticipationSerializer from '../infrastructure/serializers/jsonapi/campaign-assessment-participation-serializer.js';
 import * as campaignParticipationOverviewSerializer from '../infrastructure/serializers/jsonapi/campaign-participation-overview-serializer.js';
@@ -36,19 +35,6 @@ const findPaginatedParticipationsForCampaignManagement = async function (request
       page,
     });
   return participationForCampaignManagementSerializer.serialize(participationsForCampaignManagement, meta);
-};
-
-const getAnalysis = async function (request, h, dependencies = { campaignAnalysisSerializer }) {
-  const { userId } = request.auth.credentials;
-  const { campaignParticipationId } = request.params;
-  const locale = getChallengeLocale(request);
-
-  const campaignAnalysis = await usecases.computeCampaignParticipationAnalysis({
-    userId,
-    campaignParticipationId,
-    locale,
-  });
-  return dependencies.campaignAnalysisSerializer.serialize(campaignAnalysis);
 };
 
 const getLevelPerTubesAndCompetences = async function (
@@ -228,7 +214,6 @@ const campaignParticipationController = {
   deleteParticipation,
   deleteParticipationFromAdmin,
   findPaginatedParticipationsForCampaignManagement,
-  getAnalysis,
   getLevelPerTubesAndCompetences,
   getAnonymisedCampaignAssessments,
   getCampaignAssessmentParticipation,

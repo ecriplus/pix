@@ -70,13 +70,6 @@ class LearningContent {
     if (!frameworkId) return '';
     return this.findFramework(frameworkId).name;
   }
-  getValidatedKnowledgeElementsGroupedByTube(knowledgeElements) {
-    return this._filterTargetedKnowledgeElementAndGroupByTube(
-      knowledgeElements,
-      (knowledgeElement) => knowledgeElement.isValidated,
-    );
-  }
-
   getKnowledgeElementsGroupedByCompetence(knowledgeElements) {
     return this._filterTargetedKnowledgeElementAndGroupByCompetence(knowledgeElements);
   }

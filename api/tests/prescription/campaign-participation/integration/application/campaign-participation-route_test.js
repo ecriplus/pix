@@ -11,7 +11,6 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
     sandbox.stub(securityPreHandlers, 'checkRequestedUserIsAuthenticatedUser');
     sandbox.stub(securityPreHandlers, 'checkOrganizationAccess').returns(true);
 
-    sinon.stub(campaignParticipationController, 'getAnalysis').callsFake((request, h) => h.response('ok').code(200));
     sinon
       .stub(campaignParticipationController, 'getCampaignAssessmentParticipationResult')
       .callsFake((request, h) => h.response('ok').code(200));
@@ -75,30 +74,6 @@ describe('Integration | Application | Route | campaignParticipationRouter', func
 
         // then
         expect(response.statusCode).to.equal(401);
-      });
-    });
-  });
-
-  describe('GET /api/campaign-participations/{id}/analyses', function () {
-    const method = 'GET';
-
-    context('when id is not an integer', function () {
-      it('should return 400 - Bad request', async function () {
-        // when
-        const response = await httpTestServer.request(method, '/api/campaign-participations/FAKE_ID/analyses');
-
-        // then
-        expect(response.statusCode).to.equal(400);
-      });
-    });
-
-    context('when id is an integer', function () {
-      it('should return 200', async function () {
-        // when
-        const response = await httpTestServer.request(method, '/api/campaign-participations/12/analyses');
-
-        // then
-        expect(response.statusCode).to.equal(200);
       });
     });
   });

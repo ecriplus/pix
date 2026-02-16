@@ -42,16 +42,6 @@ const serialize = function (campaignAssessmentParticipation) {
         },
       },
     },
-    campaignAnalysis: {
-      ref: 'id',
-      ignoreRelationshipData: true,
-      nullIfMissing: true,
-      relationshipLinks: {
-        related(record) {
-          return `/api/campaign-participations/${record.campaignParticipationId}/analyses`;
-        },
-      },
-    },
     campaignParticipationLevelsPerTubesAndCompetence: {
       ref: 'id',
       ignoreRelationshipData: true,
