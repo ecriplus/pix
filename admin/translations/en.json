@@ -704,6 +704,7 @@
           "dpo-email": "The email adress is not in the correct format",
           "error-toast": "Please correct the fields with errors.",
           "name": "Name is required",
+          "organization-learner-type": "Learner type is required",
           "type": "Organization type is required"
         },
         "external-id": {
@@ -715,6 +716,12 @@
         "name": {
           "label": "Name of the organization",
           "placeholder": "My new organization"
+        },
+        "organization-learner-type": {
+          "selector": {
+            "label": "Learner Type",
+            "placeholder": "Select one learner type"
+          }
         },
         "parent-organization-name": "Parent organization: {parentOrganizationName}",
         "province-code": "Province code (3 digits)",
