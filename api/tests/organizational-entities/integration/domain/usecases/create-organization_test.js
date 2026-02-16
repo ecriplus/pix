@@ -85,45 +85,43 @@ describe('Integration | UseCases | create-organization', function () {
       });
 
       describe('when parent organization is a child organization', function () {
-        ('throws UnableToAttachChildOrganizationToParentOrganizationError',
-          async function () {
-            // given
-            const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-            const childOrganizationId = databaseBuilder.factory.buildOrganization({
-              id: 2000,
-              name: 'Parent Org',
-              type: Organization.types.SCO1D,
-              parentOrganizationId,
-            }).id;
+        it('throws UnableToAttachChildOrganizationToParentOrganizationError', async function () {
+          // given
+          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const childOrganizationId = databaseBuilder.factory.buildOrganization({
+            id: 2000,
+            name: 'Parent Org',
+            type: Organization.types.SCO1D,
+            parentOrganizationId,
+          }).id;
 
-            await databaseBuilder.commit();
+          await databaseBuilder.commit();
 
-            const organization = new OrganizationForAdmin({
-              name: 'ACME',
-              type: 'PRO',
-              documentationUrl: 'https://pix.fr',
-              createdBy: superAdminUserId,
-              administrationTeamId: 1234,
-              parentOrganizationId: childOrganizationId,
-              countryCode: 99100,
-            });
-
-            // when
-            const error = await catchErr(usecases.createOrganization)({ organization });
-
-            // then
-            expect(error).to.deep.equal(
-              new UnableToAttachChildOrganizationToParentOrganizationError({
-                code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-                message:
-                  'Unable to attach child organization to parent organization which is also a child organization',
-                meta: {
-                  grandParentOrganizationId: parentOrganizationId,
-                  parentOrganizationId: childOrganizationId,
-                },
-              }),
-            );
+          const organization = new OrganizationForAdmin({
+            name: 'ACME',
+            type: 'PRO',
+            documentationUrl: 'https://pix.fr',
+            createdBy: superAdminUserId,
+            administrationTeamId: 1234,
+            parentOrganizationId: childOrganizationId,
+            countryCode: 99100,
           });
+
+          // when
+          const error = await catchErr(usecases.createOrganization)({ organization });
+
+          // then
+          expect(error).to.deep.equal(
+            new UnableToAttachChildOrganizationToParentOrganizationError({
+              code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
+              message: 'Unable to attach child organization to parent organization which is also a child organization',
+              meta: {
+                grandParentOrganizationId: parentOrganizationId,
+                parentOrganizationId: childOrganizationId,
+              },
+            }),
+          );
+        });
       });
     });
 
