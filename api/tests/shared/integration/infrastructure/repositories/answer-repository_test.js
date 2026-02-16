@@ -104,7 +104,7 @@ describe('Integration | Repository | answerRepository', function () {
       expect(foundAnswer).to.deepEqualInstance(expectedAnswer);
     });
 
-    it('should return the most recent answer when several answers match with challenge and assessment', async function () {
+    it('should return the least recent answer when several answers match with challenge and assessment', async function () {
       // given
       const olderAnswer = domainBuilder.buildAnswer({
         id: 1,
@@ -146,7 +146,7 @@ describe('Integration | Repository | answerRepository', function () {
       });
 
       // then
-      expect(foundAnswer).to.deepEqualInstance(newerAnswer);
+      expect(foundAnswer).to.deepEqualInstance(olderAnswer);
     });
   });
 
