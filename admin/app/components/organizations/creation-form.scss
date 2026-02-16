@@ -26,4 +26,8 @@
   &__parent-name--full {
     grid-column: 1 / span 2;
   }
+
+  &__field--force-grid-start {
+    grid-column-start: 1;
+  }
 }
