@@ -126,6 +126,7 @@
                 "id": "c829b624-f3b1-466b-b4a4-a5fc63708f1e",
                 "type": "qcu-discovery",
                 "instruction": "À votre avis, dans quel exemple le logiciel d’IA conversationnelle a-t-il fait appel à un outil ?",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -268,6 +269,7 @@
                       "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
                       "type": "qcu-discovery",
                       "instruction": "Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -329,6 +331,7 @@
                       "id": "e99bf18b-14df-4e78-ae8d-8b756f704898",
                       "type": "qcu-discovery",
                       "instruction": "Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -672,6 +675,7 @@
                       "id": "894da3c4-c063-4b77-8930-4d3bdd375d7b",
                       "type": "qcu-discovery",
                       "instruction": "Quelle est la réponse que va faire le logiciel d’IA générative à l’utilisateur ?",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
