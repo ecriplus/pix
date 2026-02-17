@@ -38,6 +38,14 @@
             {
               "type": "element",
               "element": {
+                "id": "164812ba-d74a-42d3-8e4a-023b3849a086",
+                "type": "text",
+                "content": "<p><em>Note à la relecture : il s'agit d'une version brouillon avant développement</em><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "1e4a36f0-e2a9-4944-b814-10d787a56f5a",
                 "type": "custom-draft",
                 "title": "calculateur d’appareils",
@@ -75,6 +83,14 @@
           "title": "Activité découverte 1",
           "components": [
             {
+              "type": "element",
+              "element": {
+                "id": "5f6de37f-8bfc-439e-b01e-05f2c139fef1",
+                "type": "text",
+                "content": "<p>Observons ensemble quelques situations pouvant mener au suréquipement et les conseils que l’on pourrait donner pour éviter cela.<br></p>"
+              }
+            },
+            {
               "type": "stepper",
               "steps": [
                 {
@@ -82,7 +98,7 @@
                     {
                       "id": "de37f1db-372e-4860-9298-8c3a9e458c26",
                       "type": "text",
-                      "content": "<p>Observons ensemble quelques situations pouvant mener au suréquipement et les conseils que l’on pourrait donner pour éviter cela.<br><br>Suivons Thelma dans son quotidien.<br>Elle vient de changer d’ordinateur portable. Son ancien ordinateur ne fonctionne plus du tout. </p>"
+                      "content": "<p>Suivons Thelma dans son quotidien.<br>Elle vient de changer d’ordinateur portable. Son ancien ordinateur ne fonctionne plus du tout. </p>"
                     },
                     {
                       "id": "6018b056-66ef-4866-b6e4-282c6a696634",
@@ -103,7 +119,7 @@
                           "id": "2",
                           "content": "<p>Pour ne pas se faire voler ses données, il vaut mieux qu’elle le garde dans un tiroir.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Rien ne sert de stocker, il existe des&nbsp;solutions pour s’en débarrasser en toute sécurité. Thelma pourrait déposer l’ordinateur en point de collecte pour le recycler.</p>"
+                            "diagnosis": "<p>Rien ne sert de stocker un appareil numérique cassé, il existe des&nbsp;solutions pour s’en débarrasser en toute sécurité. Thelma pourrait déposer l’ordinateur en point de collecte pour le recycler.</p>"
                           }
                         },
                         {
@@ -117,7 +133,7 @@
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Inutile de stocker, Thelma devrait plutôt déposer son ancien appareil dans un point de collecte pour le faire recycler.</p>"
+                            "diagnosis": "<p>Inutile de conserver un appareil numérique cassé, Thelma devrait déposer son ancien appareil dans un point de collecte pour le faire recycler.</p>"
                           }
                         }
                       ],
@@ -238,7 +254,7 @@
                     {
                       "id": "bb19fc33-491a-4137-bfb0-a53644cf0fbc",
                       "type": "text",
-                      "content": "Garder un appareil qui ne fonctionne plus ou acheter un nouvel appareil sans se séparer de l’ancien : voici des pratiques qui peuvent mener à terme à du <strong>suréquipement</strong>.&nbsp;Il s'agit en effet de posséder plus d'appareils numériques que ce dont on a réellement besoin.&nbsp;"
+                      "content": "<p>Garder un appareil qui ne fonctionne plus ou acheter un nouvel appareil sans se séparer de l’ancien : voici des pratiques qui peuvent mener à terme à du <strong>suréquipement</strong>.</p>"
                     }
                   ]
                 },
@@ -425,7 +441,7 @@
               "element": {
                 "id": "28c33c92-ee3e-4b5b-ac60-3f3a63217b5d",
                 "type": "text",
-                "content": "<p><span style=\"font-size: 16px;\">Chez soi, de nombreux appareils restent branchés en permanence&nbsp;: box internet, télévision, console de jeux, objets connectés…&nbsp;</span></p><p><br>Ces équipements consomment de l’électricité lorsqu’ils sont utilisés ou en charge, mais aussi… <strong>lorsqu’ils sont en veille</strong>. On parle alors de <strong>consommation statique</strong>&nbsp;: un gaspillage souvent sous-estimé.<br></p>"
+                "content": "<p>Chez soi, de nombreux appareils restent branchés en permanence&nbsp;: box internet, télévision, console de jeux, objets connectés…&nbsp;<br><br>Ces équipements consomment de l’électricité lorsqu’ils sont utilisés ou en charge, mais aussi… <strong>lorsqu’ils sont en veille</strong>. On parle alors de <strong>consommation statique</strong>&nbsp;: un gaspillage souvent sous-estimé.<br></p>"
               }
             }
           ]
@@ -466,7 +482,7 @@
                     {
                       "id": "62e778a0-8d42-49ca-a0cc-ae37e0968aa9",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Divin a passé toute la journée sur son ordinateur et vient de terminer sa journée de travail. Que lui conseillez-vous pour réduire sa consommation électrique ?&nbsp;</p>",
+                      "instruction": "<p>Divin a passé toute la journée sur son ordinateur et vient de terminer sa journée de travail. Que lui conseillez-vous pour l'aider à <strong>réduire sa consommation électrique</strong> ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -487,7 +503,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "Eteindre totalement l'ordinateur permet l'aider à réduire sa consommation électrique."
+                            "diagnosis": "<p>Eteindre totalement l'ordinateur permet l'aider à réduire sa consommation électrique.</p>"
                           }
                         }
                       ],
@@ -500,21 +516,21 @@
                     {
                       "id": "263d9c42-a097-467a-9786-e822916314c7",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Pour se détendre, Divin allume la télévision pour lancer une série. Puis il prend son téléphone pour regarder une vidéo en streaming. Quel serait votre conseil pour l'aider à réduire sa consommation électrique ?</p>",
+                      "instruction": "<p>Pour se détendre, Divin allume la télévision pour lancer une série. Puis il prend son téléphone pour regarder une vidéo en streaming. Quel serait votre conseil pour l'aider à r<strong>éduire sa consommation électrique </strong>?</p>",
                       "hasShortProposals": false,
                       "proposals": [
+                        {
+                          "id": "2",
+                          "content": "<p>Couper le son de sa série.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>La télévision consommera encore de l’électricité si elle n'est pas éteinte.&nbsp;</p>"
+                          }
+                        },
                         {
                           "id": "1",
                           "content": "<p>Éteindre la télévision s’il ne la regarde pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>Oui ! La télévision consomme de l’électricité alors que Divin ne la regarde pas.&nbsp;</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Mettre la télévision en pause.",
-                          "feedback": {
-                            "diagnosis": "<p>Pas vraiment, la télévision consommera encore de l’électricité si elle n'est pas éteinte.&nbsp;</p>"
                           }
                         },
                         {
@@ -534,12 +550,12 @@
                     {
                       "id": "4ec51b96-64ee-4989-8caf-08d8e845a3cb",
                       "type": "qcu-discovery",
-                      "instruction": "Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d'ordinateurs branchés, même s'il ne charge pas d'appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;",
+                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d'ordinateurs branchés, même si Divin&nbsp;ne charge pas d'appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
-                          "content": "<p>Laisser les chargeurs branchés, sans appareil connecté, ils ne consomment pas.</p>",
+                          "content": "<p>Laisser les chargeurs branchés : sans appareil connecté, ils ne consomment pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non, même si ces chargeurs ne chargent pas d'appareils, quand ils sont&nbsp; branchés, ils consomment.</p>"
                           }
@@ -589,7 +605,7 @@
                     {
                       "id": "5d4b20c7-0eb5-4cfa-b9ff-0c57de69fa8d",
                       "type": "text",
-                      "content": "<p><strong>Et lorsque l’on utilise nos appareils ?<br><br></strong>Quelques gestes simples peuvent aider à limiter la consommation d'électricité. Il est possible par exemple de réduire la luminosité de l'écran quand cela est possible. On peut également éviter de laisser plusieurs appareils numériques allumés en même temps si on ne les utilise pas tous.&nbsp;</p>"
+                      "content": "<h5><strong>Et lorsque l’on utilise nos appareils ?</strong></h5><p><strong><br></strong>Quelques gestes simples peuvent aider à limiter la consommation d'électricité. Il est possible par exemple de réduire la luminosité de l'écran quand cela est possible. On peut également éviter de laisser plusieurs appareils numériques allumés en même temps si on ne les utilise pas tous.&nbsp;</p><p><br></p>"
                     }
                   ]
                 }
@@ -613,7 +629,7 @@
               "element": {
                 "id": "a60794da-ef3b-4850-b058-2717382e1a08",
                 "type": "text",
-                "content": "<ul><em>A noter à la relecture : sera (surement) transformé en infographie<br><br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. De nombreux foyers achètent et stockent plus d’appareils numériques qu’ils n’en ont vraiment besoin.<br><br></li><li> Fabriquer et utiliser autant d’appareils numériques à un coût environnemental fort.&nbsp;🌍<br><br></li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille&nbsp;</strong>notamment crée une consommation électrique <strong>sous-estimée</strong>. ⚡<br><br></li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
+                "content": "<ul><em>A noter à la relecture : sera (surement) transformé en infographie.<br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. De nombreux foyers achètent et stockent plus d’appareils numériques qu’ils n’en ont vraiment besoin.<br><br></li><li> Fabriquer et utiliser autant d’appareils numériques à un coût environnemental fort.&nbsp;🌍<br><br></li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille&nbsp;</strong>notamment crée une consommation électrique souvent&nbsp;<strong>sous-estimée</strong>. ⚡<br><br></li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
               }
             }
           ]
@@ -664,7 +680,10 @@
                     "diagnosis": "<p>Il faut faire la distinction entre ce qui permet de se séparer d’appareils non utilisés et ce qui augmente le nombre d’appareils.</p>"
                   }
                 },
-                "solutions": ["2", "3"]
+                "solutions": [
+                  "2",
+                  "3"
+                ]
               }
             }
           ]
@@ -706,7 +725,9 @@
                         "content": "en veille"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -733,7 +754,9 @@
                         "content": "branchés"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -760,7 +783,9 @@
                         "content": "invisible"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
