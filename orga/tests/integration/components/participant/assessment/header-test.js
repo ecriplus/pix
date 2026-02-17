@@ -160,7 +160,7 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
 
   module('progression', function () {
     test('it displays campaign participation progression on type ASSESSMENT', async function (assert) {
-      this.participation = { progression: 0.75 };
+      this.participation = { progression: 0.75, isShared: false };
       this.campaign = { isTypeExam: false, isTypeAssessment: true };
 
       const screen = await render(
@@ -171,16 +171,16 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
       assert.ok(screen.getByText('75 %'));
     });
 
-    test('it hide campaign participation progression on type EXAM', async function (assert) {
-      this.participation = { progression: 0.75 };
+    test('it displays campaign participation progression on type EXAM', async function (assert) {
+      this.participation = { progression: 0.75, isShared: false };
       this.campaign = { isTypeExam: true, isTypeAssessment: false };
 
       const screen = await render(
         hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
       );
 
-      assert.notOk(screen.queryByText(t('pages.assessment-individual-results.progression')));
-      assert.notOk(screen.queryByText('75 %'));
+      assert.ok(screen.queryByText(t('pages.assessment-individual-results.progression')));
+      assert.ok(screen.queryByText('75 %'));
     });
   });
 
@@ -237,7 +237,7 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
         );
       });
 
-      test('hides participant progression on campaign of type exam', async function (assert) {
+      test('show participant progression on campaign of type exam', async function (assert) {
         this.participation = {
           isShared: false,
           progression: 0.8,
@@ -251,8 +251,8 @@ module('Integration | Component | Participant::Assessment::Header', function (ho
           hbs`<Participant::Assessment::Header @participation={{this.participation}} @campaign={{this.campaign}} />`,
         );
 
-        assert.notOk(screen.queryByText(t('pages.assessment-individual-results.progression')));
-        assert.notOk(
+        assert.ok(screen.queryByText(t('pages.assessment-individual-results.progression')));
+        assert.ok(
           screen.queryByText(t('common.result.percentage', { value: 0.8 }), {
             normalizer: getDefaultNormalizer({ collapseWhitespace: false }),
           }),

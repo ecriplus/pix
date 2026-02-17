@@ -80,9 +80,8 @@ export default class Header extends Component {
   }
 
   get displayProgression() {
-    const { participation, campaign } = this.args;
-
-    return !campaign.isTypeExam && !participation.isShared;
+    const { participation } = this.args;
+    return !participation.isShared;
   }
 
   get selectedParticipation() {
