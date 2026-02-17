@@ -1,7 +1,7 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { Organization } from '../../../organizational-entities/domain/models/Organization.js';
 import { Tag } from '../../../organizational-entities/domain/models/Tag.js';
 import { config } from '../../../shared/config.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ForbiddenAccess, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { Membership } from '../../../shared/domain/models/Membership.js';
 import { UserOrgaSettings } from '../../domain/models/UserOrgaSettings.js';
@@ -14,7 +14,9 @@ import { Prescriber } from '../../domain/read-models/Prescriber.js';
  * @return {Promise<Prescriber>}
  */
 const getPrescriber = async function ({ userId, legalDocumentApi }) {
-  const user = await knex('users').select('id', 'firstName', 'lastName', 'lang').where({ id: userId }).first();
+  const knexConn = DomainTransaction.getConnection();
+
+  const user = await knexConn('users').select('id', 'firstName', 'lastName', 'lang').where({ id: userId }).first();
 
   if (!user) {
     throw new UserNotFoundError(`User not found for ID ${userId}`);
@@ -26,20 +28,20 @@ const getPrescriber = async function ({ userId, legalDocumentApi }) {
     type: 'TOS',
   });
 
-  const memberships = await knex('memberships').where({ userId, disabledAt: null }).orderBy('id');
+  const memberships = await knexConn('memberships').where({ userId, disabledAt: null }).orderBy('id');
 
   if (memberships.length === 0) {
     throw new ForbiddenAccess(`User of ID ${userId} is not a prescriber`);
   }
 
   const organizationIds = memberships.map((membership) => membership.organizationId);
-  const organizations = await knex('organizations').whereIn('id', organizationIds);
-  const userOrgaSettings = await knex('user-orga-settings').where({ userId }).first();
-  const tags = await knex('tags')
+  const organizations = await knexConn('organizations').whereIn('id', organizationIds);
+  const userOrgaSettings = await knexConn('user-orga-settings').where({ userId }).first();
+  const tags = await knexConn('tags')
     .join('organization-tags', 'organization-tags.tagId', 'tags.id')
     .where({ organizationId: userOrgaSettings.currentOrganizationId });
 
-  const schools = await knex('schools').whereIn('organizationId', organizationIds);
+  const schools = await knexConn('schools').whereIn('organizationId', organizationIds);
 
   const prescriber = _toPrescriberDomain({
     user,
@@ -101,7 +103,8 @@ function _toPrescriberDomain({
 }
 
 async function _areNewYearOrganizationLearnersImportedForPrescriber(currentOrganizationId) {
-  const atLeastOneOrganizationLearner = await knex('organizations')
+  const knexConn = DomainTransaction.getConnection();
+  const atLeastOneOrganizationLearner = await knexConn('organizations')
     .select('organizations.id')
     .join('view-active-organization-learners', 'view-active-organization-learners.organizationId', 'organizations.id')
     .where((qb) => {
@@ -120,7 +123,8 @@ async function _areNewYearOrganizationLearnersImportedForPrescriber(currentOrgan
 }
 
 async function _getParticipantCount(currentOrganizationId) {
-  const { count: allCounts } = await knex('view-active-organization-learners')
+  const knexConn = DomainTransaction.getConnection();
+  const { count: allCounts } = await knexConn('view-active-organization-learners')
     .count('view-active-organization-learners.id')
     .leftJoin('users', 'users.id', 'view-active-organization-learners.userId')
     .where('isAnonymous', false)
@@ -145,11 +149,13 @@ async function _organizationFeatures(currentOrganizationId) {
 }
 
 function _allFeatures() {
-  return knex('features').select('key').pluck('key');
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('features').select('key').pluck('key');
 }
 
 function _availableFeaturesQueryBuilder(currentOrganizationId) {
-  return knex('features')
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('features')
     .select('key', 'organization-features.params')
     .join('organization-features', function () {
       this.on('features.id', 'organization-features.featureId').andOn(
