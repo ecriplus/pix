@@ -50,11 +50,6 @@ const anonymizeUser = withTransaction(async function ({
     await resetPasswordDemandRepository.removeAllByEmail(user.email);
   }
 
-  await certificationCenterMembershipRepository.disableMembershipsByUserId({
-    updatedByUserId: anonymizedByUserId,
-    userId,
-  });
-
   await _anonymizeOrganizationLearner({
     userId,
     learnersApiRepository,
@@ -64,7 +59,7 @@ const anonymizeUser = withTransaction(async function ({
 
   await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
 
-  await _anonymizeCertificationCenterMembershipsLastAccessedAt(certificationCenterMembershipRepository, userId);
+  await _anonymizeCertificationCenterMemberships(certificationCenterMembershipRepository, userId, anonymizedByUserId);
 
   await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
 
@@ -103,7 +98,11 @@ async function _anonymizeMemberships({ userId, anonymizedByUserId, membershipRep
   await membershipRepository.disableMembershipsByUserId({ userId, updatedByUserId: anonymizedByUserId });
 }
 
-async function _anonymizeCertificationCenterMembershipsLastAccessedAt(certificationCenterMembershipRepository, userId) {
+async function _anonymizeCertificationCenterMemberships(
+  certificationCenterMembershipRepository,
+  userId,
+  anonymizedByUserId,
+) {
   const userCertificationCenterMemberships = await certificationCenterMembershipRepository.findByUserId(userId);
 
   for (const certificationCenterMembership of userCertificationCenterMemberships) {
@@ -115,6 +114,11 @@ async function _anonymizeCertificationCenterMembershipsLastAccessedAt(certificat
       lastAccessedAt: anonymizedCertificationCenterMembershipLastAccessedAt,
     });
   }
+
+  await certificationCenterMembershipRepository.disableMembershipsByUserId({
+    updatedByUserId: anonymizedByUserId,
+    userId,
+  });
 }
 
 async function _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId) {
