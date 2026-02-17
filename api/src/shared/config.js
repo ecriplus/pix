@@ -192,6 +192,17 @@ const configuration = (function () {
     apiManager: {
       url: process.env.APIM_URL || 'https://gateway.pix.fr',
     },
+    attestations: {
+      storage: {
+        client: {
+          accessKeyId: process.env.ATTESTATIONS_STORAGE_ACCESS_KEY_ID,
+          secretAccessKey: process.env.ATTESTATIONS_STORAGE_SECRET_ACCESS_KEY,
+          endpoint: process.env.ATTESTATIONS_STORAGE_ENDPOINT,
+          region: process.env.ATTESTATIONS_STORAGE_REGION,
+          bucket: process.env.ATTESTATIONS_STORAGE_BUCKET_NAME,
+        },
+      },
+    },
     auditLogger: {
       isEnabled: toBoolean(process.env.PIX_AUDIT_LOGGER_ENABLED),
       baseUrl: process.env.PIX_AUDIT_LOGGER_BASE_URL,
@@ -645,6 +656,19 @@ const configuration = (function () {
           endpoint: process.env.TEST_IMPORT_STORAGE_ENDPOINT,
           region: 'nothing',
           bucket: process.env.TEST_IMPORT_STORAGE_BUCKET_NAME,
+          forcePathStyle: true,
+        },
+      },
+    };
+
+    config.attestations = {
+      storage: {
+        client: {
+          accessKeyId: 'nothing',
+          secretAccessKey: 'nothing',
+          endpoint: process.env.TEST_ATTESTATIONS_STORAGE_ENDPOINT,
+          region: 'nothing',
+          bucket: process.env.TEST_ATTESTATIONS_STORAGE_BUCKET_NAME,
           forcePathStyle: true,
         },
       },
