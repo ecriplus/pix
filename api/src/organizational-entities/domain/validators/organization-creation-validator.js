@@ -30,7 +30,7 @@ const organizationValidationJoiSchema = Joi.object({
 
   organizationLearnerType: Joi.object({
     id: Joi.number(),
-    name: Joi.string(),
+    name: Joi.string().allow(null),
   })
     .required()
     .messages({
