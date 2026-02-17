@@ -67,4 +67,11 @@ export class AssessmentSheet {
   get isAbortReasonTechnical() {
     return this.abortReason === ABORT_REASONS.TECHNICAL;
   }
+
+  complete() {
+    if (this.state === Assessment.states.STARTED) {
+      this.state = Assessment.states.COMPLETED;
+      this.updatedAt = new Date();
+    }
+  }
 }
