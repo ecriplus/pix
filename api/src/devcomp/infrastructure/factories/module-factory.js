@@ -301,6 +301,7 @@ export class ModuleFactory {
 
   static #buildQCU(element) {
     return new QCU({
+      hasShortProposals: element.hasShortProposals,
       id: element.id,
       instruction: element.instruction,
       locales: element.locales,

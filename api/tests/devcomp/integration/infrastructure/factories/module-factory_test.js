@@ -894,6 +894,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: true,
                         id: 'ba78dead-a806-4954-b408-e8ef28d28fab',
                         type: 'qcu',
                         instruction: '<p>L’adresse mail M3g4Cool1415@gmail.com est correctement écrite ?</p>',
@@ -1912,6 +1913,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         {
                           elements: [
                             {
+                              hasShortProposals: true,
                               id: '71de6394-ff88-4de3-8834-a40057a50ff4',
                               type: 'qcu',
                               instruction: '<p>Pix évalue 16 compétences numériques différentes.</p>',
