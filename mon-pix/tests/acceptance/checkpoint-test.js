@@ -39,7 +39,7 @@ module('Acceptance | Checkpoint', function (hooks) {
       await visit(`/assessments/${assessment.id}/checkpoint`);
 
       // then
-      assert.strictEqual(find('.checkpoint__progression-gauge progress').textContent.trim(), '100%');
+      assert.strictEqual(find('.checkpoint__progression-gauge progress').textContent.trim(), '20 %');
       assert.dom('.assessment-results__list').exists();
       assert.dom('.result-item').exists({ count: NB_ANSWERS });
       assert.strictEqual(find('.checkpoint__continue').textContent.trim(), 'Continuer');

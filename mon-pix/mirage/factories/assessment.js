@@ -21,6 +21,14 @@ export default Factory.extend({
     return true;
   },
 
+  showGlobalProgression() {
+    return false;
+  },
+
+  globalProgression() {
+    return 0.76;
+  },
+
   showQuestionCounter() {
     return true;
   },
@@ -41,7 +49,7 @@ export default Factory.extend({
     type: 'COMPETENCE_EVALUATION',
     afterCreate(assessment, server) {
       assessment.update({
-        progression: server.create('progression', { id: '3', completionRate: 20 }),
+        progression: server.create('progression', { id: '3', completionRate: 0.2 }),
       });
     },
   }),
