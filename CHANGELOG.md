@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.333.0](https://github.com/1024pix/pix/compare/v5.332.0...v5.333.0) (2026-02-17)
+
+### :rocket: Amélioration
+
+- [#15114](https://github.com/1024pix/pix/pull/15114) Afficher l'id des éléments sur la preview d'un module (PIX-21512). 
+- [#15138](https://github.com/1024pix/pix/pull/15138) Afficher la progression pour les campagnes de type exam (PIX-21457) 
+- [#15137](https://github.com/1024pix/pix/pull/15137) Afficher la progression sur les exports des campagnes de type EXAM (PIX-21458). 
+- [#15131](https://github.com/1024pix/pix/pull/15131) Ajout de l'organizationTypeLearnerId lors de la création d'une organisation (PIX-21329). 
+- [#15139](https://github.com/1024pix/pix/pull/15139) Ajout du choix obligatoire de public prescrit dans la création d'organisation (PIX-21330). 
+- [#15039](https://github.com/1024pix/pix/pull/15039) Create IAGenFonction_Ava.json 
+- [#15128](https://github.com/1024pix/pix/pull/15128) Mettre à jour les évènements QAB_CARD_RETRIED de la table passage-events (PIX-21427) 
+- [#15127](https://github.com/1024pix/pix/pull/15127) Permettre de supprimer et anonymiser les participations d'un prescrit sur un parcours combiné précis (PIX-21505) 
+- [#15065](https://github.com/1024pix/pix/pull/15065) Pouvoir supprimer un parcours combiné et anonymiser ses participations (PIX-21503) 
+
+### :bug: Correction
+
+- [#15079](https://github.com/1024pix/pix/pull/15079) Corriger l'alignement du texte de la consigne sur un QCM (PIX-21401). 
+- [#15141](https://github.com/1024pix/pix/pull/15141) Mise à jour des seeds de création d'organisation. 
+
+### :building_construction: Tech
+
+- [#15135](https://github.com/1024pix/pix/pull/15135) :truck: Déplace le modèle `ComplementaryCertification` dans le contexte de configuration 
+- [#15125](https://github.com/1024pix/pix/pull/15125) Ajout de test de non regression pour les QCU et QCM image pour Pix Junior (PIX-21540) 
+- [#15140](https://github.com/1024pix/pix/pull/15140) Augmente les capacités de l'exécuteur `admin_lint` pour éviter les problèmes mémoire lors de la CI. 
+- [#15100](https://github.com/1024pix/pix/pull/15100) Exposer le JSON Schema des modules sur une route API (PIX-21470) 
+- [#15133](https://github.com/1024pix/pix/pull/15133) Refactor la durée d'un certif course dans PixAdmin 
+- [#15059](https://github.com/1024pix/pix/pull/15059) Suppression des Promise All dans le contexte evaluation (PIX-21452). 
+- [#15108](https://github.com/1024pix/pix/pull/15108) Supprimer la route getAnalysis qui n'est plus utilisée en production (Pix-21492).
+
 # [5.332.0](https://github.com/1024pix/pix/compare/v5.331.0...v5.332.0) (2026-02-16)
 
 ### :rocket: Amélioration
