@@ -45,15 +45,15 @@
 .proposal-button--variant-discovery {
   &:hover,
   &:active {
-    background: rgb(var(--pix-orga-50-inline), 0.5);
+    background: rgb(var(--pix-info-100-inline), 0.5);
   }
 
   &.proposal-button--selected {
-    background: var(--pix-orga-50);
+    background: var(--pix-info-100);
     border-color: var(--pix-neutral-500);
 
     &:hover {
-      background: var(--pix-orga-50);
+      background: var(--pix-info-100);
     }
   }
 
