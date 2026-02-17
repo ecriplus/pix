@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationCenterInvitation } from '../../domain/models/CertificationCenterInvitation.js';
@@ -25,7 +24,8 @@ function _toDomain(invitationDTO) {
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const findPendingByCertificationCenterId = async function ({ certificationCenterId }) {
-  const pendingCertificationCenterInvitations = await knex(CERTIFICATION_CENTER_INVITATIONS)
+  const knexConn = DomainTransaction.getConnection();
+  const pendingCertificationCenterInvitations = await knexConn(CERTIFICATION_CENTER_INVITATIONS)
     .select('id', 'email', 'certificationCenterId', 'updatedAt', 'role', 'locale')
     .where({ certificationCenterId, status: CertificationCenterInvitation.StatusType.PENDING })
     .orderBy('updatedAt', 'desc');
@@ -38,7 +38,8 @@ const findPendingByCertificationCenterId = async function ({ certificationCenter
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const getByIdAndCode = async function ({ id, code }) {
-  const certificationCenterInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS)
+  const knexConn = DomainTransaction.getConnection();
+  const certificationCenterInvitation = await knexConn(CERTIFICATION_CENTER_INVITATIONS)
     .select({
       id: 'certification-center-invitations.id',
       status: 'certification-center-invitations.status',
@@ -69,7 +70,11 @@ const getByIdAndCode = async function ({ id, code }) {
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const get = async function (id) {
-  const certificationCenterInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS).select('*').where({ id }).first();
+  const knexConn = DomainTransaction.getConnection();
+  const certificationCenterInvitation = await knexConn(CERTIFICATION_CENTER_INVITATIONS)
+    .select('*')
+    .where({ id })
+    .first();
   if (!certificationCenterInvitation) {
     throw new NotFoundError("L'invitation à ce centre de certification n'existe pas");
   }
@@ -82,7 +87,8 @@ const get = async function (id) {
  * @returns {Promise<CertificationCenterInvitation|null>}
  */
 const findOnePendingByEmailAndCertificationCenterId = async function ({ email, certificationCenterId }) {
-  const existingPendingInvitation = await knex(CERTIFICATION_CENTER_INVITATIONS)
+  const knexConn = DomainTransaction.getConnection();
+  const existingPendingInvitation = await knexConn(CERTIFICATION_CENTER_INVITATIONS)
     .where({ email, certificationCenterId, status: CertificationCenterInvitation.StatusType.PENDING })
     .first();
 
@@ -95,11 +101,12 @@ const findOnePendingByEmailAndCertificationCenterId = async function ({ email, c
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const create = async function (invitation) {
-  const [newInvitation] = await knex(CERTIFICATION_CENTER_INVITATIONS)
+  const knexConn = DomainTransaction.getConnection();
+  const [newInvitation] = await knexConn(CERTIFICATION_CENTER_INVITATIONS)
     .insert(invitation)
     .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role', 'locale']);
 
-  const { name: certificationCenterName } = await knex('certification-centers')
+  const { name: certificationCenterName } = await knexConn('certification-centers')
     .select('name')
     .where({ id: newInvitation.certificationCenterId })
     .first();
@@ -113,7 +120,8 @@ const create = async function (invitation) {
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const update = async function (certificationCenterInvitation) {
-  const [updatedCertificationCenterInvitation] = await knex('certification-center-invitations')
+  const knexConn = DomainTransaction.getConnection();
+  const [updatedCertificationCenterInvitation] = await knexConn('certification-center-invitations')
     .update({
       ...certificationCenterInvitation,
       updatedAt: new Date(),
@@ -121,7 +129,7 @@ const update = async function (certificationCenterInvitation) {
     .where({ id: certificationCenterInvitation.id })
     .returning(['id', 'email', 'code', 'certificationCenterId', 'updatedAt', 'role', 'locale']);
 
-  const { name: certificationCenterName } = await knex('certification-centers')
+  const { name: certificationCenterName } = await knexConn('certification-centers')
     .select('name')
     .where({ id: updatedCertificationCenterInvitation.certificationCenterId })
     .first();
@@ -135,7 +143,8 @@ const update = async function (certificationCenterInvitation) {
  * @returns {Promise<CertificationCenterInvitation>}
  */
 const markAsCancelled = async function ({ id }) {
-  const [certificationCenterInvitation] = await knex('certification-center-invitations')
+  const knexConn = DomainTransaction.getConnection();
+  const [certificationCenterInvitation] = await knexConn('certification-center-invitations')
     .where({ id })
     .update({
       status: CertificationCenterInvitation.StatusType.CANCELLED,
@@ -166,7 +175,8 @@ const markAsCancelledByCertificationCenter = async function ({ certificationCent
  * @returns {Promise<void>}
  */
 const updateModificationDate = async function (certificationCenterInvitationId) {
-  await knex(CERTIFICATION_CENTER_INVITATIONS)
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(CERTIFICATION_CENTER_INVITATIONS)
     .where({ id: certificationCenterInvitationId })
     .update({ updatedAt: new Date() });
 };
