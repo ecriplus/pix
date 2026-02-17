@@ -28,3 +28,13 @@ export async function findByCertificationCourseId(certificationCourseId) {
     answers,
   });
 }
+
+export async function update(assessmentSheet) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('assessments')
+    .update({
+      updatedAt: assessmentSheet.updatedAt,
+      state: assessmentSheet.state,
+    })
+    .where('assessments.id', '=', assessmentSheet.assessmentId);
+}
