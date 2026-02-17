@@ -1,24 +1,31 @@
 import { randomUUID } from 'node:crypto';
 
+import { audioElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/audio-schema.js';
+import { customDraftElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/custom-draft-element-schema.js';
+import { customElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/custom-element-schema.js';
+import { downloadElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/download-schema.js';
+import { embedElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/embed-schema.js';
+import { flashcardsElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/flashcards-schema.js';
+import { imageElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/image-schema.js';
+import { qabElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qab-schema.js';
+import { qcmElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcm-schema.js';
+import { qcuDiscoveryElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcu-discovery-schema.js';
+import { qcuElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcu-schema.js';
+import {
+  blockInputSchema,
+  blockSelectSchema,
+  qrocmElementSchema,
+} from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qrocm-schema.js';
+import { separatorElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/separator-schema.js';
+import { shortVideoElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/short-video-schema.js';
+import { textElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/text-schema.js';
+import { videoElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/video-schema.js';
+import {
+  grainSchema,
+  moduleSchema,
+} from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/module-schema.js';
 import { expect } from '../../../../../../test-helper.js';
-import { audioElementSchema } from './element/audio-schema.js';
-import { customDraftElementSchema } from './element/custom-draft-element-schema.js';
-import { customElementSchema } from './element/custom-element-schema.js';
-import { downloadElementSchema } from './element/download-schema.js';
-import { embedElementSchema } from './element/embed-schema.js';
-import { flashcardsElementSchema } from './element/flashcards-schema.js';
-import { imageElementSchema } from './element/image-schema.js';
-import { qabElementSchema } from './element/qab-schema.js';
-import { qcmElementSchema } from './element/qcm-schema.js';
-import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
-import { qcuElementSchema } from './element/qcu-schema.js';
-import { blockInputSchema, blockSelectSchema, qrocmElementSchema } from './element/qrocm-schema.js';
-import { separatorElementSchema } from './element/separator-schema.js';
-import { shortVideoElementSchema } from './element/short-video-schema.js';
-import { textElementSchema } from './element/text-schema.js';
-import { videoElementSchema } from './element/video-schema.js';
 import { joiErrorParser } from './joi-error-parser.js';
-import { grainSchema, moduleSchema } from './module-schema.js';
 
 describe('Unit | Infrastructure | Datasources | Learning Content | Module Datasource | format validation', function () {
   describe('when element has a valid structure', function () {

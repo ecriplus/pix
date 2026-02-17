@@ -21,8 +21,6 @@ const register = async function (server) {
         tags: ['api', 'modules'],
       },
     },
-  ]);
-  server.route([
     {
       method: 'GET',
       path: '/api/modules/v2/{shortId}',
@@ -36,6 +34,16 @@ const register = async function (server) {
           }),
         },
         notes: ['- Permet de récupérer un module grâce à son id raccourci'],
+        tags: ['api', 'modules'],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/module-schema/module-json-schema.json',
+      config: {
+        auth: false,
+        handler: handlerWithDependencies(modulesController.getJsonSchema),
+        notes: ['- Permet de récupérer le JSON Schema de la structure des modules'],
         tags: ['api', 'modules'],
       },
     },
