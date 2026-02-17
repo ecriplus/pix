@@ -680,10 +680,7 @@
                     "diagnosis": "<p>Il faut faire la distinction entre ce qui permet de se séparer d’appareils non utilisés et ce qui augmente le nombre d’appareils.</p>"
                   }
                 },
-                "solutions": [
-                  "2",
-                  "3"
-                ]
+                "solutions": ["2", "3"]
               }
             }
           ]
@@ -725,9 +722,7 @@
                         "content": "en veille"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -754,9 +749,7 @@
                         "content": "branchés"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -783,9 +776,7 @@
                         "content": "invisible"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
