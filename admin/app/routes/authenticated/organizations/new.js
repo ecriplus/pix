@@ -18,6 +18,7 @@ export default class NewRoute extends Route {
   async model(_, transition) {
     const administrationTeams = await this.store.findAll('administration-team');
     const countries = await this.store.findAll('country');
+    const organizationLearnerTypes = await this.store.findAll('organization-learner-type');
     let parentOrganization = null;
     const { parentOrganizationId } = transition.to.queryParams;
     if (parentOrganizationId) {
@@ -27,6 +28,7 @@ export default class NewRoute extends Route {
       administrationTeams,
       countries,
       parentOrganization,
+      organizationLearnerTypes,
     });
   }
 

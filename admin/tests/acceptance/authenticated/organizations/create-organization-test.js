@@ -118,6 +118,14 @@ module('Acceptance | Organizations | Create', function (hooks) {
 
       await click(
         screen.getByRole('button', {
+          name: `${t('components.organizations.creation.organization-learner-type.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      await click(screen.getByText('Teacher'));
+
+      await click(
+        screen.getByRole('button', {
           name: `${t('components.organizations.creation.country.selector.label')} *`,
         }),
       );

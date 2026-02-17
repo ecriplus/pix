@@ -51,6 +51,15 @@ export default class OrganizationCreationForm extends Component {
     return options;
   }
 
+  get organizationLearnerTypesOptions() {
+    const options = this.args.organizationLearnerTypes.map((organizationLearnerType) => ({
+      value: organizationLearnerType.id,
+      label: organizationLearnerType.name,
+    }));
+
+    return options;
+  }
+
   get submitButtonText() {
     return this.args.parentOrganization?.name
       ? 'components.organizations.creation.actions.add-child-organization'
@@ -182,7 +191,24 @@ export default class OrganizationCreationForm extends Component {
           </PixSelect>
 
           <PixSelect
+            @id="organizationLearnerTypeId"
+            @onChange={{fn this.handleSelectChange "organizationLearnerTypeId"}}
+            @options={{this.organizationLearnerTypesOptions}}
+            @placeholder={{t "components.organizations.creation.organization-learner-type.selector.placeholder"}}
+            @hideDefaultOption={{true}}
+            @value={{this.form.organizationLearnerTypeId}}
+            @requiredLabel={{t "common.fields.required-field"}}
+            @errorMessage={{if
+              this.validator.errors.organizationLearnerTypeId
+              (t this.validator.errors.organizationLearnerTypeId)
+            }}
+            @isFullWidth={{true}}
+          >
+            <:label>{{t "components.organizations.creation.organization-learner-type.selector.label"}}</:label>
+          </PixSelect>
+          <PixSelect
             @id="countryCode"
+            class="organization-creation-form__field--force-grid-start"
             @onChange={{fn this.handleSelectChange "countryCode"}}
             @options={{this.countriesOptions}}
             @placeholder={{t "components.organizations.creation.country.selector.placeholder"}}
@@ -304,6 +330,10 @@ const ORGANIZATION_CREATION_FORM_VALIDATION_SCHEMA = Joi.object({
   administrationTeamId: Joi.string().empty(['', null]).required().messages({
     'any.required': 'components.organizations.creation.error-messages.administration-team',
     'string.empty': 'components.organizations.creation.error-messages.administration-team',
+  }),
+  organizationLearnerTypeId: Joi.string().empty(['', null]).required().messages({
+    'any.required': 'components.organizations.creation.error-messages.organization-learner-type',
+    'string.empty': 'components.organizations.creation.error-messages.organization-learner-type',
   }),
   countryCode: Joi.string().empty(['', null]).required().messages({
     'any.required': 'components.organizations.creation.error-messages.country',

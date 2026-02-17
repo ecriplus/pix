@@ -413,6 +413,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             id: 1234,
             name: 'Équipe 1',
           });
+          databaseBuilder.factory.buildOrganizationLearnerType({ id: 123 });
           databaseBuilder.factory.buildCertificationCpfCountry({
             code: 99100,
             commonName: 'France',
@@ -436,6 +437,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'country-code': 99100,
                   'external-id': 'My external Id',
                   'province-code': '078',
+                  'organization-learner-type-id': 123,
+                  'organization-learner-type-name': null,
                 },
               },
             },

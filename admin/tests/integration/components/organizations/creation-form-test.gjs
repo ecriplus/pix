@@ -25,6 +25,11 @@ module('Integration | Component | organizations/creation-form', function (hooks)
     { id: 'team-2', name: 'Équipe 2' },
   ];
 
+  const organizationLearnerTypes = [
+    { id: '123', name: 'Student' },
+    { id: '456', name: 'Teacher' },
+  ];
+
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
 
@@ -42,6 +47,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         <template>
           <CreationForm
             @administrationTeams={{administrationTeams}}
+            @organizationLearnerTypes={{organizationLearnerTypes}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
             @onCancel={{onCancel}}
@@ -53,6 +59,9 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       assert.ok(screen.getByRole('textbox', { name: `${t('components.organizations.creation.name.label')} *` }));
       assert.ok(screen.getByLabelText(`${t('components.organizations.creation.type.label')} *`));
       assert.ok(screen.getByText(t('components.organizations.creation.administration-team.selector.placeholder')));
+      assert.ok(
+        screen.getByLabelText(`${t('components.organizations.creation.organization-learner-type.selector.label')} *`),
+      );
       assert.ok(screen.getByLabelText(`${t('components.organizations.creation.country.selector.label')} *`));
       assert.ok(screen.getByRole('textbox', { name: t('components.organizations.creation.province-code') }));
       assert.ok(screen.getByRole('textbox', { name: t('components.organizations.creation.external-id.label') }));
@@ -73,6 +82,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
           <CreationForm
             @organization={{organization}}
             @administrationTeams={{administrationTeams}}
+            @organizationLearnerTypes={{organizationLearnerTypes}}
             @countries={{countries}}
             @onSubmit={{onSubmit}}
             @onCancel={{onCancel}}
@@ -95,6 +105,38 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       assert.strictEqual(options[1].title, 'Danemark (99101)');
     });
 
+    test('should render learner types options in list', async function (assert) {
+      // given
+      const organization = store.createRecord('organization', { type: '' });
+
+      const screen = await render(
+        <template>
+          <CreationForm
+            @organization={{organization}}
+            @administrationTeams={{administrationTeams}}
+            @organizationLearnerTypes={{organizationLearnerTypes}}
+            @countries={{countries}}
+            @onSubmit={{onSubmit}}
+            @onCancel={{onCancel}}
+          />
+        </template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.organization-learner-type.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      const options = await screen.getAllByRole('option');
+
+      // then
+      assert.strictEqual(options.length, 2);
+      assert.strictEqual(options[0].title, 'Student');
+      assert.strictEqual(options[1].title, 'Teacher');
+    });
+
     module('when there is a parent organization', function () {
       test("it prefills the administration team selector with its parent's", async function (assert) {
         // given - when
@@ -105,6 +147,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{organization}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -125,6 +168,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{organization}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -148,6 +192,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{organization}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -173,6 +218,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{organization}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -195,6 +241,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{null}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -216,6 +263,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{null}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -237,6 +285,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{null}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -258,6 +307,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <CreationForm
               @parentOrganization={{null}}
               @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
               @countries={{countries}}
               @onSubmit={{onSubmit}}
               @onCancel={{onCancel}}
@@ -284,6 +334,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         <template>
           <CreationForm
             @administrationTeams={{administrationTeams}}
+            @organizationLearnerTypes={{organizationLearnerTypes}}
             @countries={{countries}}
             @onSubmit={{handleSubmitStub}}
             @onCancel={{onCancel}}
@@ -306,6 +357,14 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       );
       await screen.findByRole('listbox');
       click(await screen.findByRole('option', { name: 'Équipe 2' }));
+
+      click(
+        screen.getByRole('button', {
+          name: `${t('components.organizations.creation.organization-learner-type.selector.label')} *`,
+        }),
+      );
+      await screen.findByRole('listbox');
+      click(await screen.findByRole('option', { name: 'Student' }));
 
       await fillByLabel(t('components.organizations.creation.province-code'), '78');
 
@@ -332,6 +391,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         type: 'SCO',
         externalId: 'Mon identifiant externe',
         administrationTeamId: 'team-2',
+        organizationLearnerTypeId: '123',
         provinceCode: '78',
         countryCode: '99100',
         documentationUrl: 'https://www.documentation.fr',
@@ -353,6 +413,7 @@ module('Integration | Component | organizations/creation-form', function (hooks)
             <template>
               <CreationForm
                 @administrationTeams={{administrationTeams}}
+                @organizationLearnerTypes={{organizationLearnerTypes}}
                 @countries={{countries}}
                 @onSubmit={{handleSubmitStub}}
               />
@@ -369,7 +430,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         test('should display error toast and display specific error messages on required fields', async function (assert) {
           // given
           const screen = await render(
-            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @organizationLearnerTypes={{organizationLearnerTypes}}
+                @countries={{countries}}
+              />
+            </template>,
           );
 
           // when
@@ -381,11 +448,15 @@ module('Integration | Component | organizations/creation-form', function (hooks)
           const administrationTeamErrorMessage = screen.getByText(
             t('components.organizations.creation.error-messages.administration-team'),
           );
+          const organizationLearnerTypeErrorMessage = screen.getByText(
+            t('components.organizations.creation.error-messages.organization-learner-type'),
+          );
           const countryErrorMessage = screen.getByText(t('components.organizations.creation.error-messages.country'));
 
           assert.ok(nameErrorMessage);
           assert.ok(typeErrorMessage);
           assert.ok(administrationTeamErrorMessage);
+          assert.ok(organizationLearnerTypeErrorMessage);
           assert.ok(countryErrorMessage);
           assert.ok(
             errorNotificationStub.calledWithExactly({
@@ -399,7 +470,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         test('should display specific error if documentation link or DPO email are not valid', async function (assert) {
           // given
           const screen = await render(
-            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @organizationLearnerTypes={{organizationLearnerTypes}}
+                @countries={{countries}}
+              />
+            </template>,
           );
 
           await fillByLabel(t('components.organizations.creation.documentation-link'), 'non-valid-documentation-url');
@@ -425,7 +502,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       test('should make error messages disappear when updating fields in error with correct values', async function (assert) {
         // given
         const screen = await render(
-          <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+          <template>
+            <CreationForm
+              @administrationTeams={{administrationTeams}}
+              @organizationLearnerTypes={{organizationLearnerTypes}}
+              @countries={{countries}}
+            />
+          </template>,
         );
 
         await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
@@ -470,7 +553,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         test('it should focus on it after submit', async function (assert) {
           // given
           const screen = await render(
-            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @organizationLearnerTypes={{organizationLearnerTypes}}
+                @countries={{countries}}
+              />
+            </template>,
           );
 
           // when
@@ -488,7 +577,13 @@ module('Integration | Component | organizations/creation-form', function (hooks)
         test('it should focus on it after submit', async function (assert) {
           // given
           const screen = await render(
-            <template><CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} /></template>,
+            <template>
+              <CreationForm
+                @administrationTeams={{administrationTeams}}
+                @organizationLearnerTypes={{organizationLearnerTypes}}
+                @countries={{countries}}
+              />
+            </template>,
           );
 
           await fillByLabel(`${t('components.organizations.creation.name.label')} *`, 'Organisation de Test');
@@ -510,7 +605,12 @@ module('Integration | Component | organizations/creation-form', function (hooks)
       // given
       const screen = await render(
         <template>
-          <CreationForm @administrationTeams={{administrationTeams}} @countries={{countries}} @onCancel={{onCancel}} />
+          <CreationForm
+            @administrationTeams={{administrationTeams}}
+            @organizationLearnerTypes={{organizationLearnerTypes}}
+            @countries={{countries}}
+            @onCancel={{onCancel}}
+          />
         </template>,
       );
 

@@ -706,6 +706,7 @@
           "dpo-email": "L'adresse e-mail n'est pas au bon format",
           "error-toast": "Veuillez corriger les champs en erreur.",
           "name": "Le nom est requis",
+          "organization-learner-type": "Le public prescrit est requis",
           "type": "Le type d'organisation est requis"
         },
         "external-id": {
@@ -717,6 +718,12 @@
         "name": {
           "label": "Nom de l'organisation",
           "placeholder": "Ma nouvelle organisation"
+        },
+        "organization-learner-type": {
+          "selector": {
+            "label": "Public prescrit",
+            "placeholder": "Sélectionner un public prescrit"
+          }
         },
         "parent-organization-name": "Organisation mère : {parentOrganizationName}",
         "province-code": "Département (en 3 chiffres)",

@@ -17,6 +17,7 @@ import CreationForm from 'pix-admin/components/organizations/creation-form';
     <CreationForm
       @administrationTeams={{@model.administrationTeams}}
       @countries={{@model.countries}}
+      @organizationLearnerTypes={{@model.organizationLearnerTypes}}
       @onSubmit={{@controller.addOrganization}}
       @onCancel={{@controller.redirectOnCancel}}
       @parentOrganization={{@model.parentOrganization}}
