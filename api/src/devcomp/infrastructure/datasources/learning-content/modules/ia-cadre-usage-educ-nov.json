@@ -714,11 +714,7 @@
                     "diagnosis": "Les pratiques de Mickaël et Guillaume ne respectent pas le cadre d’usage de l’IA en éducation&nbsp;: l’outil doit rester<strong> encadré, progressif et sécurisé</strong> pour éviter toute délégation et tout risque de remplacer l’effort intellectuel de l’élève."
                   }
                 },
-                "solutions": [
-                  "1",
-                  "2",
-                  "4"
-                ]
+                "solutions": ["1", "2", "4"]
               }
             }
           ]
@@ -940,9 +936,7 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -969,9 +963,7 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "type": "text",
@@ -998,9 +990,7 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -1027,9 +1017,7 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   }
                 ],
                 "feedbacks": {
@@ -1087,9 +1075,7 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -1112,9 +1098,7 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -1137,9 +1121,7 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   }
                 ],
                 "feedbacks": {
