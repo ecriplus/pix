@@ -502,12 +502,12 @@
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe4emeanonymisé.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. <br>📎classe4emeanonymisé.xls",
                         "isGoodAnswer": true
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎exportENT4emeC.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. <br>📎exportENT4emeC.xls",
                         "isGoodAnswer": false
                       }
                     },
