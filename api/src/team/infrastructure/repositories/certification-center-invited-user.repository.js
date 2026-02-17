@@ -1,9 +1,11 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationCenterInvitedUser } from '../../domain/models/CertificationCenterInvitedUser.js';
 
 const get = async function ({ certificationCenterInvitationId, email }) {
-  const invitation = await knex('certification-center-invitations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const invitation = await knexConn('certification-center-invitations')
     .select('id', 'certificationCenterId', 'code', 'status', 'role', 'locale')
     .where({ id: certificationCenterInvitationId })
     .first();
@@ -11,7 +13,7 @@ const get = async function ({ certificationCenterInvitationId, email }) {
     throw new NotFoundError(`No certification center invitation found for ID ${certificationCenterInvitationId}`);
   }
 
-  const user = await knex('users').select('id').where({ email }).first();
+  const user = await knexConn('users').select('id').where({ email }).first();
   if (!user) {
     throw new NotFoundError(`No user found for email ${email} for this certification center invitation`);
   }
@@ -26,13 +28,15 @@ const get = async function ({ certificationCenterInvitationId, email }) {
 };
 
 const save = async function (certificationCenterInvitedUser) {
-  await knex('certification-center-memberships').insert({
+  const knexConn = DomainTransaction.getConnection();
+
+  await knexConn('certification-center-memberships').insert({
     certificationCenterId: certificationCenterInvitedUser.invitation.certificationCenterId,
     userId: certificationCenterInvitedUser.userId,
     role: certificationCenterInvitedUser.role,
   });
 
-  await knex('certification-center-invitations')
+  await knexConn('certification-center-invitations')
     .update({ status: certificationCenterInvitedUser.status, updatedAt: new Date() })
     .where({ id: certificationCenterInvitedUser.invitation.id });
 };
