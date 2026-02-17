@@ -499,6 +499,93 @@
           ]
         },
         {
+          "id": "e2b88606-c4aa-4ac2-9505-1ac691df3d67",
+          "type": "challenge",
+          "title": "qcu short proposals (3 et 4)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "19525c84-e8e7-4852-868b-e1857f21daae",
+                "type": "qcu",
+                "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on ne participe pas au mob ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "🔥",
+                    "feedback": {
+                      "state": "🔥🔥🔥",
+                      "diagnosis": "<p> Non, cet émoji n'est pas disponible en autocollant sur le huddle de travail.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "☕️",
+                    "feedback": {
+                      "state": "What else ? ☕️",
+                      "diagnosis": "<p>Non, mais cet émoji est bien présent comme autocollant sur le huddle.<br> Il nous permet d'indiquer que l'on s'absente un moment.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "👎",
+                    "feedback": {
+                      "state": "👍 !",
+                      "diagnosis": "<p>Tout à fait ! Cet émoji, présent comme autocollant sur le huddle, nous permet d'indiquer cette information au reste de l'équipe.</p>"
+                    }
+                  }
+                ],
+                "solution": "3",
+                "hasShortProposals": true
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b671a789-1aff-4941-b49b-ac8a1634e9eb",
+                "type": "qcu",
+                "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on commit une feature ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "🦀",
+                    "feedback": {
+                      "state": "Alors non...",
+                      "diagnosis": "<p>Cet émoji fait partie de la DA de l'équipe, mais rien à voir avec nos standards de commit.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "⚡️",
+                    "feedback": {
+                      "state": "Oui !",
+                      "diagnosis": "<p>Pure décision de l'équipe, <strong>Gitmoji</strong> le recommandant normalement pour les améliorations de performance. <br> C'est juste qu'il est COOL 😎</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "✨",
+                    "feedback": {
+                      "state": "🤖INCORRECT🤖",
+                      "diagnosis": "<p>Il s'agit effectivement de l'émoji recommandé par <strong>Gitmoji</strong> mais nous avons changé depuis peu car il est devenu le symbole non officiel de l’IA.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "🔥",
+                    "feedback": {
+                      "state": "🔥🔥🔥",
+                      "diagnosis": "<p>Celui-ci indique que l'on supprime du code ! il nous vient du guide <strong>Gitmoji</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "2",
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
           "id": "f1738f85-e272-43d3-aee2-f4190be54c34",
           "type": "summary",
           "title": "test table",
