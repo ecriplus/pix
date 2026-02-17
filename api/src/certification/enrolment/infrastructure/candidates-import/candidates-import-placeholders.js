@@ -1,4 +1,4 @@
-import { ComplementaryCertificationKeys } from '../../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 
 const IMPORT_CANDIDATES_SESSION_TEMPLATE_HEADERS = [
   'headers.birthcity',
@@ -130,28 +130,28 @@ const IMPORT_CANDIDATES_TEMPLATE_VALUES = [
     validator: 'val-prepayment-code',
   },
   {
-    placeholder: ComplementaryCertificationKeys.CLEA,
-    propertyName: 'cleaNumerique',
+    placeholder: Frameworks.CLEA,
+    propertyName: Frameworks.CLEA,
   },
   {
-    placeholder: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-    propertyName: 'pixPlusDroit',
+    placeholder: Frameworks.DROIT,
+    propertyName: Frameworks.DROIT,
   },
   {
-    placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
-    propertyName: 'pixPlusEdu1erDegre',
+    placeholder: Frameworks.EDU_1ER_DEGRE,
+    propertyName: Frameworks.EDU_1ER_DEGRE,
   },
   {
-    placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_2ND_DEGRE,
-    propertyName: 'pixPlusEdu2ndDegre',
+    placeholder: Frameworks.EDU_2ND_DEGRE,
+    propertyName: Frameworks.EDU_2ND_DEGRE,
   },
   {
-    placeholder: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
-    propertyName: 'pixPlusProSante',
+    placeholder: Frameworks.PRO_SANTE,
+    propertyName: Frameworks.PRO_SANTE,
   },
   {
-    placeholder: ComplementaryCertificationKeys.PIX_PLUS_EDU_CPE,
-    propertyName: 'pixPlusEduCPE',
+    placeholder: Frameworks.EDU_CPE,
+    propertyName: Frameworks.EDU_CPE,
   },
 ];
 

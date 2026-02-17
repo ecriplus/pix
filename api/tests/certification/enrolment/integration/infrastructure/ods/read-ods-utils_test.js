@@ -10,7 +10,7 @@ const i18n = getI18n();
 
 import * as url from 'node:url';
 
-import { getTransformationStructsForPixCertifCandidatesImport } from '../../../../../../src/certification/enrolment/infrastructure/files/candidates-import/candidates-import-transformation-structures.js';
+import { getTransformationStructsForPixCertifCandidatesImport } from '../../../../../../src/certification/enrolment/infrastructure/candidates-import/candidates-import-transformation-structures.js';
 import {
   extractTableDataFromOdsFile,
   getContentXml,

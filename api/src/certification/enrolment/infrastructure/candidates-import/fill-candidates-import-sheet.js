@@ -1,16 +1,16 @@
 /**
- * @typedef {import('../../../../session-management/domain/models/SessionManagement.js').SessionManagement} SessionManagement
- * @typedef {import('../../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
- * @typedef {import('../../../../session-management/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
+ * @typedef {import('../../../session-management/domain/models/SessionManagement.js').SessionManagement} SessionManagement
+ * @typedef {import('../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
+ * @typedef {import('../../../session-management/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
  */
 
 import * as url from 'node:url';
 
 import _ from 'lodash';
 
-import { CertificationCandidate } from '../../../../shared/domain/models/CertificationCandidate.js';
-import * as readOdsUtils from '../../utils/ods/read-ods-utils.js';
-import { OdsUtilsBuilder } from '../../utils/ods/write-ods-utils.js';
+import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
+import * as readOdsUtils from '../utils/ods/read-ods-utils.js';
+import { OdsUtilsBuilder } from '../utils/ods/write-ods-utils.js';
 import { CandidateData } from './CandidateData.js';
 import {
   EXTRA_EMPTY_CANDIDATE_ROWS,
@@ -176,7 +176,7 @@ function _getCandidatesData({ enrolledCandidates, certificationCenterHabilitatio
 }
 
 function _getCandidatesImportTemplatePath() {
-  return __dirname + '/1.5/candidates_import_template.ods';
+  return __dirname + '/candidates_import_template.ods';
 }
 
 function _certificationCandidatesToCandidatesData({ enrolledCandidates, certificationCenterHabilitations, i18n }) {
