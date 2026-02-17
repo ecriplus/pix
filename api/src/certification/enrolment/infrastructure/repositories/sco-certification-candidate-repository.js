@@ -3,10 +3,8 @@
  * @typedef {import ('../../domain/models/SCOCertificationCandidate.js').SCOCertificationCandidate} SCOCertificationCandidate
  */
 
-import { knex } from '../../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
-
-// We voluntarily keep the transaction contained in the repository as the usecase initiate a lengthy treatment
 
 /**
  * @function
@@ -16,33 +14,37 @@ import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
  * @returns {Promise<void>}
  */
 const addNonEnrolledCandidatesToSession = async function ({ sessionId, scoCertificationCandidates }) {
-  await knex.transaction(async (trx) => {
-    const organizationLearnerIds = scoCertificationCandidates.map((candidate) => candidate.organizationLearnerId);
+  const knexConn = DomainTransaction.getConnection();
 
-    const alreadyEnrolledCandidates = await trx
-      .select(['organizationLearnerId'])
-      .from('certification-candidates')
-      .whereIn('organizationLearnerId', organizationLearnerIds)
-      .where({ sessionId });
+  const organizationLearnerIds = scoCertificationCandidates.map((candidate) => candidate.organizationLearnerId);
 
-    const alreadyEnrolledCandidateOrganizationLearnerIds = new Set(
-      alreadyEnrolledCandidates.map((c) => c.organizationLearnerId),
-    );
+  const alreadyEnrolledCandidates = await knexConn
+    .select(['organizationLearnerId'])
+    .from('certification-candidates')
+    .whereIn('organizationLearnerId', organizationLearnerIds)
+    .where({ sessionId });
 
-    const scoCandidateToDTO = _scoCandidateToDTOForSession(sessionId);
-    const candidateDTOs = scoCertificationCandidates
-      .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.has(candidate.organizationLearnerId))
-      .map(scoCandidateToDTO);
+  const alreadyEnrolledCandidateOrganizationLearnerIds = new Set(
+    alreadyEnrolledCandidates.map((c) => c.organizationLearnerId),
+  );
 
-    if (candidateDTOs.length === 0) return;
+  const scoCandidateToDTO = _scoCandidateToDTOForSession(sessionId);
+  const candidateDTOs = scoCertificationCandidates
+    .filter((candidate) => !alreadyEnrolledCandidateOrganizationLearnerIds.has(candidate.organizationLearnerId))
+    .map(scoCandidateToDTO);
 
-    const insertedCandidateDTOs = await trx('certification-candidates').insert(candidateDTOs).returning(['id']);
+  if (candidateDTOs.length === 0) return;
+
+  // We voluntarily keep the transaction contained in the repository as the usecase initiate a lengthy treatment
+  await DomainTransaction.execute(async () => {
+    const trxConn = DomainTransaction.getConnection();
+    const insertedCandidateDTOs = await trxConn('certification-candidates').insert(candidateDTOs).returning(['id']);
 
     const subscriptionDTOs = insertedCandidateDTOs.map((insertedCandidateDTO) => ({
       certificationCandidateId: insertedCandidateDTO.id,
       type: SUBSCRIPTION_TYPES.CORE,
     }));
-    await trx('certification-subscriptions').insert(subscriptionDTOs);
+    await trxConn('certification-subscriptions').insert(subscriptionDTOs);
   });
 };
 
