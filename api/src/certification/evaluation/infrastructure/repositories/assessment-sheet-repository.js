@@ -11,6 +11,8 @@ export async function findByCertificationCourseId(certificationCourseId) {
       abortReason: 'certification-courses.abortReason',
       maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
+      state: 'assessments.state',
+      updatedAt: 'assessments.updatedAt',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

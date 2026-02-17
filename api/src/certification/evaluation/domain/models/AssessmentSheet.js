@@ -6,6 +6,7 @@ import Joi from 'joi';
 
 import { Answer } from '../../../../evaluation/domain/models/Answer.js';
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
 
 export class AssessmentSheet {
@@ -16,6 +17,8 @@ export class AssessmentSheet {
    * @param {ABORT_REASONS} params.abortReason
    * @param {number} params.maxReachableLevelOnCertificationDate
    * @param {boolean} params.isRejectedForFraud
+   * @param {Assessment.states} params.state
+   * @param {Date} params.updatedAt
    * @param {Answer[]} params.answers
    */
   static #schema = Joi.object({
@@ -26,6 +29,10 @@ export class AssessmentSheet {
       .allow(null),
     maxReachableLevelOnCertificationDate: Joi.number().required(),
     isRejectedForFraud: Joi.boolean().required(),
+    state: Joi.string()
+      .valid(...Object.values(Assessment.states))
+      .required(),
+    updatedAt: Joi.date().optional(),
     answers: Joi.array().items(Joi.object().instance(Answer)).required(),
   });
 
@@ -35,6 +42,8 @@ export class AssessmentSheet {
     abortReason,
     maxReachableLevelOnCertificationDate,
     isRejectedForFraud,
+    state,
+    updatedAt,
     answers,
   }) {
     this.certificationCourseId = certificationCourseId;
@@ -42,6 +51,8 @@ export class AssessmentSheet {
     this.abortReason = abortReason;
     this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.isRejectedForFraud = isRejectedForFraud;
+    this.state = state;
+    this.updatedAt = updatedAt;
     this.answers = answers;
     this.#validate();
   }

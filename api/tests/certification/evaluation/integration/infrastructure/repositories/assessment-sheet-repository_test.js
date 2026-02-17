@@ -1,4 +1,5 @@
 import * as assessmentSheetRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/assessment-sheet-repository.js';
+import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
@@ -11,7 +12,11 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         maxReachableLevelOnCertificationDate: 6,
         isRejectedForFraud: true,
       }).id;
-      assessmentId = databaseBuilder.factory.buildAssessment({ certificationCourseId }).id;
+      assessmentId = databaseBuilder.factory.buildAssessment({
+        certificationCourseId,
+        state: Assessment.states.COMPLETED,
+        updatedAt: new Date('2023-10-05'),
+      }).id;
       answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
       await databaseBuilder.commit();
     });
@@ -29,6 +34,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             abortReason: 'candidate',
             maxReachableLevelOnCertificationDate: 6,
             isRejectedForFraud: true,
+            state: Assessment.states.COMPLETED,
+            updatedAt: new Date('2023-10-05'),
             answers: [domainBuilder.buildAnswer(answerData)],
           }),
         );
