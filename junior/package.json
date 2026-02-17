@@ -19,8 +19,8 @@
   "files": [],
   "scripts": {
     "build": "ember build --environment=production",
-    "lint": "run-p --continue-on-error 'lint:!(fix)'",
-    "lint:fix": "run-p --continue-on-error lint:*:fix",
+    "lint": "run-s -clns 'lint:(hbs|js|scss|translations)'",
+    "lint:fix": "run-s -clns 'lint:(hbs|js|scss|translations):fix'",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache --cache-strategy content",
