@@ -122,7 +122,7 @@ class CampaignAssessmentExport {
       ...(forSupStudents ? [this.i18n.__('campaign-export.common.participant-student-number')] : []),
       ...(this.campaign.externalIdLabel ? [this.campaign.externalIdLabel] : []),
 
-      ...(this.campaign.isAssessment ? [this.i18n.__('campaign-export.assessment.progress')] : []),
+      this.i18n.__('campaign-export.assessment.progress'),
       this.i18n.__('campaign-export.assessment.started-on'),
       this.i18n.__('campaign-export.assessment.is-shared'),
       this.i18n.__('campaign-export.assessment.shared-on'),

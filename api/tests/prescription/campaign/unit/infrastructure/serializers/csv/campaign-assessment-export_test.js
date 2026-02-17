@@ -86,43 +86,6 @@ describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
       expect(csv).to.equal(expectedHeader);
     });
 
-    it('should hide progression header on campaign of type Exam', async function () {
-      //given
-      const campaignProfile = new CampaignAssessmentExport({
-        outputStream,
-        organization,
-        campaign: domainBuilder.prescription.campaign.buildCampaign.ofTypeExam({ externalIdLabel: null }),
-        competences,
-        targetProfile,
-        learningContent,
-        stageCollection,
-        translate,
-      });
-
-      const expectedHeader =
-        '\uFEFF"Nom de l\'organisation";' +
-        '"ID Campagne";' +
-        '"Code";' +
-        '"Nom de la campagne";' +
-        '"Parcours";' +
-        '"Nom du Participant";' +
-        '"Prénom du Participant";' +
-        '"Date et heure de début (Europe/Paris)";' +
-        '"Partage (O/N)";' +
-        '"Date et heure du partage (Europe/Paris)";' +
-        '"% maitrise de l\'ensemble des acquis du profil"' +
-        '\n';
-      //when
-      await campaignProfile.export({});
-
-      outputStream.end();
-
-      const csv = await csvPromise;
-
-      // then
-      expect(csv).to.equal(expectedHeader);
-    });
-
     it('should display additional header on generic import', async function () {
       //given
       const campaignProfile = new CampaignAssessmentExport({

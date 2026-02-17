@@ -65,6 +65,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             `"${targetProfile.name}";` +
             `"${campaignParticipationInfo.participantLastName}";` +
             `"${campaignParticipationInfo.participantFirstName}";` +
+            '1;' +
             `"${createdAtFormated}";` +
             '"Oui";' +
             `"${sharedAtFormated}";` +
@@ -115,6 +116,7 @@ describe('Unit | Infrastructure | Utils | CampaignAssessmentResultLine', functio
             `"${targetProfile.name}";` +
             `"${campaignParticipationInfo.participantLastName}";` +
             `"${campaignParticipationInfo.participantFirstName}";` +
+            '0;' +
             `"${createdAtFormated}";` +
             '"Non";' +
             '"NA";' +
