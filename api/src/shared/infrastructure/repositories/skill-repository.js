@@ -1,4 +1,4 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Skill } from '../../domain/models/Skill.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
@@ -59,7 +59,8 @@ export async function findOperativeByCompetenceId(competenceId) {
 }
 
 export async function findOperativeByCompetenceIds(competenceIds) {
-  const ids = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const ids = await knexConn
     .pluck('id')
     .from(TABLE_NAME)
     .whereIn('competenceId', competenceIds)
