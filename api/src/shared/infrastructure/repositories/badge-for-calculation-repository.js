@@ -34,7 +34,6 @@ const findByCampaignParticipationId = async function ({ campaignParticipationId 
   const badges = [];
   for (const badgeDTO of badgesDTO) {
     const badge = await _buildBadge(
-      knexConn,
       campaignSkillsByTube,
       campaignSkillIds,
       badgeCriteriaDTOByBadge[badgeDTO.id],
@@ -70,7 +69,6 @@ const findByCampaignId = async function ({ campaignId }) {
   const badges = [];
   for (const badgeDTO of badgesDTO) {
     const badge = await _buildBadge(
-      knexConn,
       campaignSkillsByTube,
       campaignSkillIds,
       badgeCriteriaDTOByBadge[badgeDTO.id],
@@ -106,10 +104,10 @@ const getByCertifiableBadgeAcquisition = async function ({ certifiableBadgeAcqui
   const campaignSkillIds = campaignSkills.map(({ id }) => id);
   const campaignSkillsByTube = Object.groupBy(campaignSkills, (campaignSkill) => campaignSkill.tubeId);
 
-  return _buildBadge(knexConn, campaignSkillsByTube, campaignSkillIds, badgeCriteriaDTO, badgeDTO);
+  return _buildBadge(campaignSkillsByTube, campaignSkillIds, badgeCriteriaDTO, badgeDTO);
 };
 
-async function _buildBadge(knex, campaignSkillsByTube, campaignSkillIds, badgeCriteriaDTO, badgeDTO) {
+async function _buildBadge(campaignSkillsByTube, campaignSkillIds, badgeCriteriaDTO, badgeDTO) {
   const badgeCriteria = [];
   for (const badgeCriterionDTO of badgeCriteriaDTO) {
     if (badgeCriterionDTO.scope === SCOPES.CAMPAIGN_PARTICIPATION) {
