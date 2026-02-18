@@ -1,4 +1,3 @@
-import { knex } from '../../../../db/knex-database-connection.js';
 import { UserLogin } from '../../../identity-access-management/domain/models/UserLogin.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
@@ -34,7 +33,8 @@ const getByUserId = async function (userId) {
 };
 
 const create = async function (userLogin) {
-  const [userLoginDTO] = await knex(USER_LOGINS_TABLE_NAME).insert(userLogin).returning('*');
+  const knexConn = DomainTransaction.getConnection();
+  const [userLoginDTO] = await knexConn(USER_LOGINS_TABLE_NAME).insert(userLogin).returning('*');
   return _toDomain(userLoginDTO);
 };
 
@@ -53,7 +53,8 @@ const update = async function (userLogin, { preventUpdatedAt } = {}) {
 };
 
 const findByUsername = async function (username) {
-  const userLoginDTO = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const userLoginDTO = await knexConn
     .select('user-logins.*')
     .from(USER_LOGINS_TABLE_NAME)
     .where('users.email', username.toLowerCase())
@@ -67,7 +68,8 @@ const findByUsername = async function (username) {
 const updateLastLoggedAt = async function ({ userId }) {
   const now = new Date();
 
-  await knex(USER_LOGINS_TABLE_NAME)
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(USER_LOGINS_TABLE_NAME)
     .insert({
       userId,
       lastLoggedAt: now,

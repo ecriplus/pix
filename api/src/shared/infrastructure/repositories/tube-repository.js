@@ -1,4 +1,4 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { LearningContentResourceNotFound } from '../../domain/errors.js';
 import { Tube } from '../../domain/models/Tube.js';
 import { getTranslatedKey } from '../../domain/services/get-translated-text.js';
@@ -30,7 +30,8 @@ export async function findByNames({ tubeNames, locale }) {
   if (!tubeNames) {
     return [];
   }
-  const ids = await knex.pluck('id').from(TABLE_NAME).whereIn('name', tubeNames).orderBy('name');
+  const knexConn = DomainTransaction.getConnection();
+  const ids = await knexConn.pluck('id').from(TABLE_NAME).whereIn('name', tubeNames).orderBy('name');
   const tubeDtos = await getInstance().loadMany(ids);
   return toDomainList(tubeDtos, locale);
 }
@@ -44,7 +45,8 @@ export async function findByRecordIds(ids, locale) {
 }
 
 export async function findActiveByRecordIds(ids, locale) {
-  const activeTubeIds = await knex
+  const knexConn = DomainTransaction.getConnection();
+  const activeTubeIds = await knexConn
     .pluck('tubeId')
     .distinct()
     .from('learningcontent.skills')
