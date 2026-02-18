@@ -759,7 +759,7 @@
               "element": {
                 "id": "3df06343-3744-4851-b381-4df216e0ddbf",
                 "type": "text",
-                "content": "<p>Dans l'interface ci-dessous, ouvrez le mail envoyé par Médiathèque à propos de « Ateliers ouverts à tous » puis répondez à la question.</p><p><br></p><p>[Pixmail avec 3 mails + 3 templatemail une fois mail ouvert]</p>"
+                "content": "<p>Dans l'interface ci-dessous, ouvrez le mail envoyé par Club Nature à propos de la « Prochaine course d'orientation » puis répondez à la question.</p><p><br></p><p>[Pixmail avec 3 mails + 3 templatemail une fois mail ouvert]</p>"
               }
             },
             {
@@ -855,7 +855,7 @@
                 "isCompletionRequired": false,
                 "title": "Messagerie électronique",
                 "url": "https://epreuves.pix.fr/pixmail-merci/",
-                "instruction": "<p>Claire vous envoyé un mail à propos de l'organisation du concours d'échec. Répondez lui par mail :</p>\n<blockquote><em>Bonjour Madame Durand,<br><br> </em>\n<p><em>Je vous confirme ma présence à la réunion du 12 avril. </em><em><br><br>Cordialement</em></p></blockquote><p>[cf @répondremail2]</p><p><br></p>",
+                "instruction": "<p>Claire Durand vous envoyé un mail à propos de l'organisation du concours d'échec. Répondez lui par mail :</p>\n<blockquote><em>Bonjour Madame Durand,<br><br> </em>\n<p><em>Je vous confirme ma présence à la réunion du 12 avril. </em><em><br><br>Cordialement</em></p></blockquote><p>[cf @répondremail2]</p><p><br></p>",
                 "solution": "",
                 "height": 500
               }
