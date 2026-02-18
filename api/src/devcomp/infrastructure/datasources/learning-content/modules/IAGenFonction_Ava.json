@@ -41,7 +41,7 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "J’ai demandé à l’IA de l’aide pour les travaux. Estimer combien de litres de peinture on aura besoin pour le salon, faire des simulations du rendu final, c’est trop pratique !"
+                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer combien de litres de peinture on aura besoin pour le salon, faire des simulations du rendu final, c’est trop pratique ! 🤩"
                     },
                     {
                       "userName": "Steven",
@@ -59,7 +59,7 @@
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Je suis pas hyper convaincu… "
+                      "content": "Je suis pas hyper convaincu… 🤔"
                     },
                     {
                       "userName": "Yasmine",
@@ -295,7 +295,7 @@
                     {
                       "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
                       "type": "qcu-discovery",
-                      "instruction": "Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;",
+                      "instruction": "<p>Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -364,35 +364,35 @@
                           "id": "1",
                           "content": "La recherche sur internet.",
                           "feedback": {
-                            "diagnosis": "Eh non ! <br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;"
+                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "Eh non !<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé !</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "La calculatrice.",
                           "feedback": {
-                            "diagnosis": "Eh non !<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "4",
-                          "content": "Aucun outil ne va être utilisé.",
+                          "content": "<p>Aucun outil ne va être utilisé.</p>",
                           "feedback": {
-                            "diagnosis": "Bien vu !&nbsp;<br>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "<p>Bien vu !&nbsp;</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA."
+                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         }
                       ],
@@ -487,19 +487,19 @@
                   "messages": [
                     {
                       "userName": "Steven",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "type": "Texte",
                       "content": "Ah ! c’est donc grâce à la définition des outils par les concepteurs,  que l’on peut faire tout ça !"
                     },
                     {
                       "userName": "Yasmine",
-                      "direction": "outgoing",
+                      "direction": "incoming",
                       "type": "Texte",
-                      "content": "Eh oui, c’est fou !"
+                      "content": "Eh oui, c’est fou ! 🤯"
                     },
                     {
                       "userName": "Stephen",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "type": "Texte",
                       "content": "Mais quand, je fais une demande à l’IA, qu’est-ce qu’il se passe exactement ?"
                     }
@@ -594,7 +594,9 @@
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
-                          "tolerances": [""],
+                          "tolerances": [
+                            ""
+                          ],
                           "options": [
                             {
                               "id": "1",
@@ -609,7 +611,9 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": ["1"]
+                          "solutions": [
+                            "1"
+                          ]
                         },
                         {
                           "type": "text",
@@ -636,7 +640,9 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": ["2"]
+                          "solutions": [
+                            "2"
+                          ]
                         },
                         {
                           "type": "text",
@@ -663,7 +669,9 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": ["3"]
+                          "solutions": [
+                            "3"
+                          ]
                         },
                         {
                           "type": "text",
@@ -777,27 +785,27 @@
                   "messages": [
                     {
                       "userName": "Steven",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "type": "Texte",
-                      "content": " Incroyable ! L’IA a vraiment des tas d’outils à disposition !"
+                      "content": " Incroyable ! L’IA a vraiment des tas d’outils à disposition ! 🛠️"
                     },
                     {
                       "userName": "Yasmine",
-                      "direction": "outgoing",
+                      "direction": "incoming",
                       "type": "Texte",
                       "content": "Oui, c’est un peu comme si nous, on avait dévalisé tout le magasin de bricolage !"
                     },
                     {
                       "userName": "Steven",
-                      "direction": "incoming",
+                      "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Alors, on la fait cette peinture ?"
+                      "content": "Alors, on la fait cette peinture ? 🧑‍🎨"
                     },
                     {
                       "userName": "Yasmine",
-                      "direction": "outgoing",
+                      "direction": "incoming",
                       "type": "Texte",
-                      "content": "Allez ! J’ai pas l’impression que l’IA sache déjà faire ça…."
+                      "content": "Allez ! J’ai pas l’impression que l’IA sache déjà faire ça…. 😉"
                     }
                   ],
                   "animationSpeed": 0
@@ -880,7 +888,9 @@
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [""],
+                    "tolerances": [
+                      ""
+                    ],
                     "options": [
                       {
                         "id": "1",
@@ -891,7 +901,9 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -914,7 +926,9 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1069,7 +1083,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "input": "classementetape2",
@@ -1104,7 +1120,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "input": "classementetape3",
@@ -1139,7 +1157,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "input": "classementetape4",
@@ -1174,7 +1194,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["4"]
+                    "solutions": [
+                      "4"
+                    ]
                   },
                   {
                     "input": "classementetape5",
@@ -1209,42 +1231,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["5"]
-                  },
-                  {
-                    "input": "classementetape4",
-                    "type": "select",
-                    "display": "inline",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "- Sélectionnez -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "3",
-                        "content": "Une requête est envoyée à un outil tiers."
-                      },
-                      {
-                        "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
-                      },
-                      {
-                        "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
-                      },
-                      {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
-                        "id": "6",
-                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
-                      },
-                      {
-                        "id": "4",
-                        "content": "L’outil tiers envoie la réponse à la requête."
-                      }
-                    ],
-                    "solutions": ["4"]
+                    "solutions": [
+                      "5"
+                    ]
                   },
                   {
                     "input": "classementetape6",
@@ -1279,7 +1268,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["6"]
+                    "solutions": [
+                      "6"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1300,7 +1291,7 @@
     },
     {
       "id": "719c6a45-d2f9-45e6-8390-bbb7c2af69cd",
-      "type": "question-yourself",
+      "type": "go-further",
       "grains": [
         {
           "id": "06dff54c-699a-4e5f-8dbf-430ef11ffe42",
