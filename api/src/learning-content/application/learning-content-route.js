@@ -83,4 +83,4 @@ export async function register(server) {
   ]);
 }
 
-export const name = 'lcms-api';
+export const name = 'learning-content/lcms-api';
