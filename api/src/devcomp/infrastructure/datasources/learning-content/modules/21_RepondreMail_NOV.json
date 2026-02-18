@@ -1,0 +1,991 @@
+{
+  "id": "0d8e8473-96d2-4a7a-bfa5-8cbf14a6e7e7",
+  "shortId": "e2a291d1",
+  "slug": "repondre-mail-nov",
+  "title": " Vous avez reçu un mail",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>On échange très souvent par sms, mais ce n’est pas le seul moyen de communication. Pour ne pas passer à côté d’une information importante, il est également utile de consulter ses mails régulièrement.<br><br> Dans ce module, découvrez comment accéder à votre messagerie électronique pour consulter les mails que vous avez reçu et y répondre.</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Consulter ses mails dans la messagerie électronique</p>",
+      "<p>Lire les informations principales d’un mail dans la boîte de réception</p>",
+      "<p>Répondre à un mail</p>"
+    ],
+    "tabletSupport": "obstructed"
+  },
+  "sections": [
+    {
+      "id": "f28a156b-e9f9-4d09-816f-c4e91e0d1f59",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "6e1c60be-ffa9-4b69-8f40-abc57ec05933",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c98b3261-a4a0-408b-9b6c-95248f95aed1",
+                "type": "text",
+                "content": "<p>Vous avez envoyé votre candidature pour un stage de «&nbsp;Vendeur de choux&nbsp;». Quelques jours plus tard, le recruteur vous laisse un message vocal.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "228e4af9-d872-44ca-b01d-f33d576db158",
+                "type": "audio",
+                "title": "Message vocal du recruteur",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/bonjour-c-est-stefan-1.mp4",
+                "transcription": "<p>Bonjour, c’est Stefan de l’entreprise BioChoux, Je vous appelle pour vous dire que nous avons bien reçu votre candidature pour le stage de « Vendeur de choux ». Nous vous enverrons une réponse par mail dans les prochains jours. À très bientôt.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "69108c43-5e50-4ca0-8823-0d8fc014374e",
+          "type": "discovery",
+          "title": "Accroche partie 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d5ad77e1-6d87-4f3c-9856-b19fd9379430",
+                "type": "text",
+                "content": "<p>Vous allez bientôt recevoir une réponse par <strong>mail</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0dec7f85-4236-4b5e-a17f-26328bb2f580",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Accéder à sa messagerie électronique",
+                "url": "https://epreuves.pix.fr/pixmail-merci/",
+                "instruction": "<p>Dans l’interface ci-dessous, cliquez sur l’icône qui permet de consulter les mails.</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "31df5b6c-fa1e-4286-8ca9-fa43bc590892",
+                "type": "text",
+                "content": "<p><strong><em>[Auto-embed guidé de bureau avec icône de messagerie : ordi ou smartphone --&gt; à trancher]</em></strong></p><p><strong><em><br></em></strong></p><p><strong>Feedback : </strong>Bien joué ! Vous avez bien reçu un mail. Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par une icône en forme d’enveloppe.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "610ce9aa-3420-45c0-b7c0-f58f62e951b0",
+          "type": "transition",
+          "title": "Transition de l'accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "353545a8-7d86-42da-bb17-3b9d48503448",
+                "type": "text",
+                "content": "<p>Le mail est souvent utilisé pour transmettre des informations importantes (professionnelles, administratives).&nbsp; Maintenant, regardons plus en détail le mail que vous avez reçu.<br><br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cf57ed99-a490-491a-8506-6909a4a452e3",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "8ee2f8f1-0d2e-48cf-88e7-ddedbb8ea89f",
+          "type": "discovery",
+          "title": "Découverte #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "da94bec1-5d25-4c93-bf5a-05ab2fc52c56",
+                "type": "text",
+                "content": "<p>Observez les informations du mail affiché dans l’interface ci-dessous puis répondez aux questions.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dc65d916-1df5-44a0-8eed-3d1665705bd0",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/capture-d-ecran-decouverte1.png",
+                "alt": "Capture d'écran d'une interface de messagerie électronique",
+                "alternativeText": "<p>Capture d'écran d'une interface de messagerie électronique avec un mail présent.</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fae158f6-ccff-4ca1-9167-0b51853a5c71",
+                "type": "qab",
+                "instruction": "<p>D’après ce que vous observez, quelles informations pouvez vous déjà lire ?</p>",
+                "cards": [
+                  {
+                    "id": "7f5c91b8-13ec-4787-a51b-bb5534c544a1",
+                    "text": "Je peux lire qui a envoyé le mail.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "6711e260-fd11-445f-b312-957c11413ac4",
+                    "text": "Je peux lire le contenu complet du mail.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "2ac7ce75-37d8-4f2b-b26f-c07b80e363ca",
+                    "text": "Je peux lire la date du mail.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Oui",
+                    "proposalB": "Non",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Quand vous recevez un mail, certaines informations s’affichent avant même de l’ouvrir&nbsp;:</p>\n<ul>\n    <li>le <strong>nom de l’expéditeur</strong>, c’est-à-dire qui vous a envoyé le mail : « BioChoux ».</li>\n    <li>l’<strong>objet</strong>, c’est-à-dire le sujet du mail : « Candidature de stage ».</li>\n    <li>la <strong>date et l’heure de réception</strong> du mail : « 22 Janvier 2026 à 15h ».</li>\n</ul>\n<p>En revanche, sans ouvrir un mail, vous ne pouvez pas encore lire son contenu complet. </p>"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2bc829bf-d740-430e-a208-b5405e06a14a",
+          "type": "short-lesson",
+          "title": "Leçon #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3a663ef0-b312-4ce8-928c-658ada1cb201",
+                "type": "text",
+                "content": "<p>Quand vous ouvrez votre messagerie électronique, vous accédez à la <strong>boîte de réception</strong>. C’est dans cette boîte  que s’affichent les mails reçus, avec les principales informations.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2594b775-b8db-4e38-8bff-252df37e5bad",
+          "type": "transition",
+          "title": "Transition #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1252a55f-9b38-4baf-8513-801f867be6f2",
+                "type": "text",
+                "content": "<p>Pour en savoir plus sur un mail, il faut l’ouvrir. Il est temps de découvrir la réponse à votre candidature de stage.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d83dd0ab-d22c-4d02-8ae7-61f8ff356cf7",
+          "type": "discovery",
+          "title": "Découverte #2 (partie 1)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "985c0c74-6b86-465b-b33e-993a2852fc5f",
+                "type": "text",
+                "content": "<p><strong>Dans l’interface ci-dessous, ouvrez le mail envoyé par BioChoux concernant votre candidature de stage.</strong></p><p><strong><br></strong></p><p><strong><em>[Simulateur guidée d’interface de messagerie → Template mailMessage du mail]</em></strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6b6a136d-c0c1-4850-944d-1672ca5406c0",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/capture-d-ecran-decouverte1.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1112b5f5-bdda-455e-b38a-2ee26ad003f0",
+                "type": "custom",
+                "instruction": "<p><br></p>",
+                "tagName": "template-mail",
+                "props": {
+                  "titleLevel": 0,
+                  "subject": "Candidature de Stage",
+                  "mailAddress": "stage@biochoux.fr",
+                  "avatarColor": "#f24645",
+                  "expeditor": "BioChoux",
+                  "content": "Bonjour, <br>Nous vous remercions pour votre candidature. <br>Nous vous proposons un entretien le 3 février à 14h dans nos locaux. <br>Merci de confirmer votre présence en répondant à ce mail.<br><br>Bien cordialement,  <br>Stephan de l’entreprise BioChoux",
+                  "time": {
+                    "days": -20,
+                    "minutes": -8880
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8809f071-d4fa-45ff-a447-19ba05a5261c",
+                "type": "expand",
+                "title": "🗝️Indice(s)/Aide(s)",
+                "content": "<ul><li>Pour lire le contenu d’un mail, il faut cliquer sur la ligne du mail. (procédure)</li><li>Trouver l’information dans le texte. (pour le qcu après)</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "50383822-46ef-468e-aa80-c0d36bf22eaf",
+          "type": "discovery",
+          "title": "Découverte #2 (partie 2)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b591838a-dd91-4752-8084-0cb3f3ea7aea",
+                "type": "qcu-discovery",
+                "instruction": "<p>Quel est la date proposée pour l’entretien ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le 3 février à 14h</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! La date proposée pour l'entretien est le 3 février à 14h.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour ne pas manquer une information importante.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le 22 janvier à 15h</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. La date proposée pour l'entretien est le 3 février à 14h.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour ne pas manquer une information importante.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Le 20 mars à 9h</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. La date proposée pour l'entretien est le 3 février à 14h.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour ne pas manquer une information importante.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>La date proposée pour l'entretien est le 3 février à 14h.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour ne pas manquer une information importante.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9427737e-454c-4eed-a235-6adbb8eaa44e",
+          "type": "short-lesson",
+          "title": "Leçon #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "05113e75-4a2e-4207-aaff-f528da503ab9",
+                "type": "text",
+                "content": "<p>Dans un mail ouvert, on peut voir les informations suivantes :</p>\n\n    <ol><li>Le <strong>destinataire</strong> (À) : c’est vous qui recevez le mail,</li><li>Le<strong> texte complet</strong> du mail.</li></ol>\n<p>L’objet et l’expéditeur restent également affichés.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "04126443-b74d-42a5-aa10-bb7f6a4a350e",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon2.png",
+                "alt": "Capture d'écran mail ouvert",
+                "alternativeText": "<p>à écrire</p>",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "fff62821-9e24-4c23-adae-c0147ed2dd64",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "bac2a6f7-65e0-468a-90d4-cfb663addbbc",
+                "type": "text",
+                "content": "<p>Dans son mail, le recruteur vous demande de confirmer par mail votre présence pour l’entretien. </p><p>Voyons ensemble comment lui répondre.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "085454bb-648b-4ac3-9255-7061fb12c4a7",
+          "type": "discovery",
+          "title": "Découverte #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f8575dbf-3455-4975-8ced-b43a0db31776",
+                "type": "text",
+                "content": "<p>Pour confirmer votre présence, vous devez répondre au mail du recruteur.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7ed9ce41-7f5c-4ba2-bdfa-1fb524bbad9c",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Répondre à un mail",
+                "url": "https://epreuves.pix.fr/pixmail-merci/",
+                "instruction": "<p>Pour cela, suivez les instructions suivantes :&nbsp; </p>\n<ul>\n    <li>cliquez sur le bouton qui permet de répondre au mail,&nbsp;</li>\n    <li>puis, écrivez la réponse suivante puis envoyez le mail :</li>\n</ul>\n<blockquote><em>Bonjour, </em></blockquote>\n<blockquote><em>Je vous remercie de votre proposition. </em></blockquote>\n<blockquote><em>Je vous confirme ma présence à l’entretien le 3 février à 14h. </em></blockquote>\n<p><em>Cordialement<br><br>[Simulateur guidée d’interface de messagerie/Template mailMessage du mail cf @répondremail2]</em></p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6751ecdb-300a-4076-928b-02336f5e99bf",
+                "type": "expand",
+                "title": "🗝️Indice(s)/Aide(s) possibles",
+                "content": "<ul><li>Trouver le bouton « Répondre »</li><li>Pour écrire le message, l’apprenant peut copier-coller ou écrire le message → si l’apprenant n’arrive pas à copier-coller/ou écrire en entier :<ul><li><p>afficher en transparence le message à écrire,&nbsp;</p></li><li><p>possibilité de pouvoir cliquer pour copier le message automatiquement, autres options </p></li></ul></li><li><p>Trouver le bouton « Envoyer »</p></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "75166d79-fb2f-4d10-9d24-8964a2f48305",
+                "type": "text",
+                "content": "<p><strong>Feedback :</strong> Bien joué ! Le mail a été <strong>envoyé</strong>. Il est maintenant rangé dans une boîte appelée <strong>Messages envoyés</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1c83622e-49e8-49c0-996f-3717aab30fd6",
+          "type": "short-lesson",
+          "title": "Leçon #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f2f8cb14-b6e9-4c82-80f5-eb6d2cc97aa5",
+                "type": "text",
+                "content": "<p>Quand vous répondez à un mail, le destinataire et l’objet du mail sont déjà remplis. Le texte du mail reçu (auquel vous répond) reste affiché. </p><p>Il vous reste à écrire votre message puis cliquer sur « Envoyer ».</p><p><br></p><p>🤔<strong> Bon à savoir</strong> </p><p>Le « Re : » dans l’objet, indique que c’est une réponse à mail. </p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "7aab47d6-a3af-4596-a754-60e08bdbd5cb",
+          "type": "short-lesson",
+          "title": "Transition #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6a16ac8d-e725-4777-b2e6-5bfa3f14be62",
+                "type": "text",
+                "content": "<p>Vous pouvez recevoir plusieurs mails dans votre boîte de réception. Découvrons ensemble comment ils s’affichent.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bc976350-cba7-449b-b1d7-dfbd9f5438ef",
+          "type": "discovery",
+          "title": "Découverte #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "28fc8aaa-b30a-4974-a983-e65c84cc4299",
+                "type": "text",
+                "content": "<p>Dans une messagerie électronique, les <strong>mails reçus</strong> s’affichent à l’écran sous forme de <strong>liste</strong>. <br>Observez les mails reçus dans la messagerie électronique ci-dessous.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "944ae840-1837-47f7-bf2d-a59b45188519",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/deouverte4.png",
+                "alt": "Capture d'écran",
+                "alternativeText": "<p>à écrire</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "8342b6c5-ab2d-4155-8368-6e707092b40d",
+                      "type": "text",
+                      "content": "<p>Certains ont déjà été lus, d’autres pas encore.</p>"
+                    },
+                    {
+                      "id": "29a173e8-8a4b-4f4d-bd84-897d492b57e0",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>D’après ce que vous observez, combien de mails n’ont pas encore été lus ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>1<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Trois mails n'ont pas encore été lus. Les mails qui n’ont <strong>pas encore été lus</strong> apparaissent en <strong>gras</strong>. Une fois lus (et donc ouverts), les mails ne sont plus en gras mais restent présents dans la boîte de réception.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>2<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Trois mails n'ont pas encore été lus. Les mails qui n’ont <strong>pas encore été lus</strong> apparaissent en <strong>gras</strong>. Une fois lus (et donc ouverts), les mails ne sont plus en gras mais restent présents dans la boîte de réception.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>3<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh oui. Trois mails n'ont pas encore été lus. Les mails qui n’ont <strong>pas encore été lus</strong> apparaissent en <strong>gras</strong>. Une fois lus (et donc ouverts), les mails ne sont plus en gras mais restent présents dans la boîte de réception.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Trois mails n'ont pas encore été lus. Les mails qui n’ont <strong>pas encore été lus</strong> apparaissent en <strong>gras</strong>. Une fois lus (et donc ouverts), les mails ne sont plus en gras mais restent présents dans la boîte de réception.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "56941616-026a-4c55-930e-697a18da74e1",
+                      "type": "text",
+                      "content": "<p>Tous les mails n’ont pas été reçus à la même date.</p>"
+                    },
+                    {
+                      "id": "bc0416c8-1cdd-40d7-a4fc-607c2bfe4649",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel est le mail le plus récent ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Le mail envoyé par «&nbsp;École de danse&nbsp;» le 22 janvier 2026.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Le mail envoyé par « Biochoux&nbsp;» le 06 mars 2026 est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. Les mails sont rangés du plus récent (en haut de la liste) au plus ancien (en bas de la liste).</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Le mail envoyé par «&nbsp;Promosport&nbsp;» le 03 février 2026.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Le mail envoyé par « Biochoux&nbsp;» le 06 mars 2026 est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. Les mails sont rangés du plus récent (en haut de la liste) au plus ancien (en bas de la liste).</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Le mail envoyé par «&nbsp;Biochoux&nbsp;» le 06 mars 2026.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu ! Le mail envoyé par « Biochoux&nbsp;» le 06 mars 2026 est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. Les mails sont rangés du plus récent (en haut de la liste) au plus ancien (en bas de la liste).</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le mail envoyé par « Biochoux&nbsp;» le 06 mars 2026 est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. Les mails sont rangés du plus récent (en haut de la liste) au plus ancien (en bas de la liste).</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2cf45379-37bd-4489-9d27-9d24a69c11c2",
+          "type": "short-lesson",
+          "title": "Leçon #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e122bb57-c302-476c-b15e-7c58d95bd953",
+                "type": "text",
+                "content": "<p>🤔<strong>Bon à savoir</strong><br>Il existe de nombreux services de messagerie électronique, comme : Gmail, Outlook, Mail, Thunderbird, etc.<br></p><p>Leur apparence peut varier, mais <strong>l’organisation des mails reste la même</strong> dans la boîte de réception.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "829b24b2-1f63-47cc-8244-29b352d94bcf",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon4.png",
+                "alt": "Icônes de services de messagerie électronique",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "88a194d4-bf40-4810-b545-5c12f5b31a83",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "9f91b144-7da9-44b7-a6e2-a54dda65936c",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d0b8befc-28cd-44a7-aba4-c110548386c0",
+                "type": "text",
+                "content": "<ul><li>Pour consulter ses mails, il faut <strong>ouvrir sa messagerie électronique</strong>. <br>Les <strong>mails reçus</strong> se trouvent dans la <strong>boîte de réception</strong> et s’affichent sous forme de<strong> liste</strong>.<br><br></li><li>Dans cette liste, des informations sont affichées pour chaque mail : le <strong>nom de l’expéditeur</strong>, l’<strong>objet</strong> et la <strong>date de réception</strong> du mail.<br><br></li><li>Les mails qui <strong>n’ont pas encore été lus</strong> apparaissent en <strong>gras</strong>. <br>Le mail<strong> le plus récent</strong> est placé <strong>en</strong><strong> haut de la liste</strong> par défaut.<br><br></li><li>Lorsqu’on <strong>ouvre un mail</strong>, on peut lire <strong>son contenu</strong>.<br>Depuis un mail ouvert, on peut cliquer sur <strong>répondre</strong>, puis <strong>écrire</strong><strong> son message</strong> et l’<strong>envoyer</strong>.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ef1d1800-74cb-49bd-87c3-cccda1805593",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "c4c12356-14c1-4c4b-89d1-1ba0c1430fb8",
+          "type": "activity",
+          "title": "Activité d'application #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cd2893bc-b11d-48d0-ab4e-e678090af40f",
+                "type": "text",
+                "content": "<p>Observez les mails dans l’interface ci-dessous puis répondez aux questions.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "71121e18-b556-48e8-8d6f-4da90bf4f75b",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite1.png",
+                "alt": "Capture d'écran d'une interface de messagerie électronique",
+                "alternativeText": "<p>à écrire</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "92efc87a-c165-4589-90a1-4e7914ae7e9b",
+                      "type": "qcu",
+                      "instruction": "<p>Combien de mails ont déjà été lus ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "1",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras : ici deux mails ne sont pas en gras. Certains mails sont en gras, d’autres non. Comment apparaissent les mails déjà lus ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "2",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras : ici deux mails ne sont pas en gras.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "3",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Certains mails sont en gras, d’autres non. Comment apparaissent les mails déjà lus ?</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "70722583-eb6f-43d9-900b-b56333131663",
+                      "type": "qcu",
+                      "instruction": "<p>Quel est l’objet du mail envoyé par Naïma ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>« Photos »</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Dans la liste des mails, l’objet apparaît après le nom de l’expéditeur. Pour le mail de Naïma, l’objet indiqué est « Photos ».</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>« Lettre d'information&nbsp;»</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Observez la ligne correspondant au mail de Naïma.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>« Projet 2027 »</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Observez la ligne correspondant au mail de Naïma.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "59b8abc5-20ce-4cd6-ab47-05c6c825d2a8",
+                      "type": "qcu",
+                      "instruction": "<p>Combien de mails ont été reçus le 9 février 2026 ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>1<br></p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Observez attentivement les dates. Quels mails ont été reçu le 09 février ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>2<br></p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Deux mails ont été reçus le 9 février 2026 : celui de Naïma et celui de Espaces verts.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>3<br></p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Observez attentivement les dates. Quels mails ont été reçu le 09 février ?</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c175ab4a-59bd-41db-a3ec-7f8b00bd5580",
+          "type": "activity",
+          "title": "Activité d'application #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3df06343-3744-4851-b381-4df216e0ddbf",
+                "type": "text",
+                "content": "<p>Dans l'interface ci-dessous, ouvrez le mail envoyé par Club Nature à propos de la « Prochaine course d'orientation » puis répondez à la question.</p><p><br></p><p>[Pixmail avec 3 mails + 3 templatemail une fois mail ouvert]</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "5d4faa96-d342-45c1-9076-59f3049933db",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite2.png",
+                "alt": "Capture d'écran",
+                "alternativeText": "<p>à écrire</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1c85ef8d-7ec8-4b94-81ee-70e3be250a38",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "template-mail",
+                "props": {
+                  "titleLevel": 0,
+                  "subject": "Prochaine course d’orientation",
+                  "mailAddress": "informations@clubnature.fr",
+                  "avatarColor": "#f24645",
+                  "expeditor": "Club Nature",
+                  "content": " Bonjour à toutes et à tous,  <br><br> La prochaine course d’orientation aura lieu le dimanche 1er mars 2026 dans la commune rurale de Valmont. Le parcours se fera en forêt avec plusieurs balises à trouver.   <br><br>Le rendez-vous est à 9h00 sur la place de la mairie. Pensez à prendre de l’eau et à porter des chaussures adaptées.   <br><br>À bientôt,  <br>L’équipe du club",
+                  "time": {
+                    "days": -1,
+                    "minutes": -1
+                  }
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "45728e0f-ec3f-4d3c-8bbe-d43ae18a0974",
+                "type": "qrocm",
+                "instruction": "<p>Dans quelle ville aura lieu la prochaine course d’orientation organisée par Club Nature ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>La prochaine course d'orientation aura lieu à :&nbsp;</p>"
+                  },
+                  {
+                    "input": "Valmontre",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "sélectionner",
+                    "ariaLabel": "sélectionner",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Valmont"
+                      },
+                      {
+                        "id": "2",
+                        "content": "La mairie"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>Pour trouver l’information, il fallait lire le contenu du mail en entier.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.<br></p>",
+                    "diagnosis": "<p>Relisez le contenu du mail : le lieu de la prochaine aura lieu dans une commune rurale.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d259ac58-1618-4981-886f-9c92b1b9f2e8",
+          "type": "activity",
+          "title": "Activité d'application #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "daf204a6-660c-4d58-a9e3-a059e8b37890",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Messagerie électronique",
+                "url": "https://epreuves.pix.fr/pixmail-merci/",
+                "instruction": "<p>Claire Durand vous envoyé un mail à propos de l'organisation du concours d'échec. Répondez lui par mail :</p>\n<blockquote><em>Bonjour Madame Durand,<br><br> </em>\n<p><em>Je vous confirme ma présence à la réunion du 12 avril. </em><em><br><br>Cordialement</em></p></blockquote><p>[cf @répondremail2]</p><p><br></p>",
+                "solution": "",
+                "height": 500
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10284792-8246-469a-aa5b-5365a11a9365",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "bf6af7f5-de62-4fbe-8855-233c12b52ac2",
+          "type": "challenge",
+          "title": "Aller plus loin",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "56fe3307-eaa6-483f-a181-6e310af5b2b1",
+                "type": "text",
+                "content": "<p>On ne rédige pas un mail comme on rédige un SMS. Pour bien rédiger un mail, il ya quelques règles simples à suivre.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "449d010d-facc-432d-bdba-05ff8a612cdc",
+                "type": "custom",
+                "instruction": "<p>Observez les trois exemples de mails ci-dessous puis répondez à la question. [reprendre templatemail dans carrrousel image]</p>",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Mail 1",
+                      "description": "",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RepondreMail_NOV/mail1.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Mail 2",
+                      "description": "",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RepondreMail_NOV/mail2.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Mail 3",
+                      "description": "",
+                      "displayWidth": 0,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/RepondreMail_NOV/mail3.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 2,
+                  "disableAnimation": false,
+                  "disableStyleAroundImage": false,
+                  "enableLoop": false,
+                  "imageTextDisplay": ""
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "001d8838-c56b-4e5e-89a0-a93acf906c2f",
+                "type": "qcu-discovery",
+                "instruction": "<p>Selon vous, quel mail est bien rédigé ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le mail 1</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp;Dans un mail, il est de coutume d’ajouter des signes de politesse. Aussi, il est préférable d’éviter d’écrire des mots en majuscules car cela donne l’impression que l’on crie.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le mail 2</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp;Dans un mail, il est de coutume d’ajouter des signes de politesse. Aussi, il est préférable d’éviter d’écrire des mots en majuscules car cela donne l’impression que l’on crie.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Le mail 3</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement.&nbsp;Dans un mail, il est de coutume d’ajouter des signes de politesse. Aussi, il est préférable d’éviter d’écrire des mots en majuscules car cela donne l’impression que l’on crie.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.&nbsp;Dans un mail, il est de coutume d’ajouter des signes de politesse. Aussi, il est préférable d’éviter d’écrire des mots en majuscules car cela donne l’impression que l’on crie.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
