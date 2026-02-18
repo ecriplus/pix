@@ -243,20 +243,13 @@
                   "titleLevel": 0,
                   "subject": "Candidature de Stage",
                   "mailAddress": "stage@biochoux.fr",
-                  "avatarColor": "",
+                  "avatarColor": "#f24645",
                   "expeditor": "BioChoux",
                   "content": "Bonjour, <br>Nous vous remercions pour votre candidature. <br>Nous vous proposons un entretien le 3 février à 14h dans nos locaux. <br>Merci de confirmer votre présence en répondant à ce mail.<br><br>Bien cordialement,  <br>Stephan de l’entreprise BioChoux",
                   "time": {
                     "days": -20,
                     "minutes": -8880
-                  },
-                  "previousMail": {
-                    "name": "",
-                    "content": "",
-                    "time": {
-                      "days": -1,
-                      "minutes": -1
-                    }
+                  }
                   }
                 }
               }
@@ -793,20 +786,12 @@
                   "titleLevel": 0,
                   "subject": "Prochaine course d’orientation",
                   "mailAddress": "informations@clubnature.fr",
-                  "avatarColor": "",
+                  "avatarColor": "#f24645",
                   "expeditor": "Club Nature",
                   "content": " Bonjour à toutes et à tous,  <br><br> La prochaine course d’orientation aura lieu le dimanche 1er mars 2026 dans la commune rurale de Valmont. Le parcours se fera en forêt avec plusieurs balises à trouver.   <br><br>Le rendez-vous est à 9h00 sur la place de la mairie. Pensez à prendre de l’eau et à porter des chaussures adaptées.   <br><br>À bientôt,  <br>L’équipe du club",
                   "time": {
                     "days": -1,
                     "minutes": -1
-                  },
-                  "previousMail": {
-                    "name": "",
-                    "content": "",
-                    "time": {
-                      "days": -1,
-                      "minutes": -1
-                    }
                   }
                 }
               }
@@ -827,7 +812,7 @@
                     "type": "select",
                     "display": "inline",
                     "placeholder": "sélectionner",
-                    "ariaLabel": "",
+                    "ariaLabel": "sélectionner",
                     "tolerances": [],
                     "options": [
                       {
@@ -869,8 +854,8 @@
                 "id": "daf204a6-660c-4d58-a9e3-a059e8b37890",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
-                "url": "",
+                "title": "Messagerie électronique",
+                "url": "https://epreuves.pix.fr/pixmail-merci/",
                 "instruction": "<p>Claire vous envoyé un mail à propos de l'organisation du concours d'échec. Répondez lui par mail :</p>\n<blockquote><em>Bonjour Madame Durand,<br><br> </em>\n<p><em>Je vous confirme ma présence à la réunion du 12 avril. </em><em><br><br>Cordialement</em></p></blockquote><p>[cf @répondremail2]</p><p><br></p>",
                 "solution": "",
                 "height": 500
