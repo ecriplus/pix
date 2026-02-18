@@ -56,6 +56,7 @@ export const PIX_WEBSITE_ROOT_URLS = {
   en: 'https://pix.org/en',
   es: 'https://pix.org/en',
   'es-419': 'https://pix.org/en',
+  it: 'https://pix.org/en',
   fr: 'https://pix.org/fr',
 };
 
@@ -69,6 +70,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'terms-and-conditions',
     es: 'terms-and-conditions',
     'es-419': 'terms-and-conditions',
+    it: 'terms-and-conditions',
     fr: 'conditions-generales-d-utilisation',
   },
   LEGAL_NOTICE: {
@@ -79,6 +81,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'legal-notice',
     es: 'legal-notice',
     'es-419': 'legal-notice',
+    it: 'legal-notice',
     fr: 'mentions-legales',
   },
   DATA_PROTECTION_POLICY: {
@@ -89,6 +92,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'personal-data-protection-policy',
     es: 'personal-data-protection-policy',
     'es-419': 'personal-data-protection-policy',
+    it: 'personal-data-protection-policy',
     fr: 'politique-protection-donnees-personnelles-app',
   },
   ACCESSIBILITY: {
@@ -99,6 +103,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'accessibility',
     es: 'accessibility',
     'es-419': 'accessibility',
+    it: 'accessibility',
     fr: 'accessibilite',
   },
   ACCESSIBILITY_ORGA: {
@@ -109,6 +114,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'accessibility-pix-orga',
     es: 'accessibility-pix-orga',
     'es-419': 'accessibility-pix-orga',
+    it: 'accessibility-pix-orga',
     fr: 'accessibilite-pix-orga',
   },
   ACCESSIBILITY_CERTIF: {
@@ -119,6 +125,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'accessibility-pix-certif',
     es: 'accessibility-pix-certif',
     'es-419': 'accessibility-pix-certif',
+    it: 'accessibility-pix-certif',
     fr: 'accessibilite-pix-certif',
   },
   SUPPORT: {
@@ -129,6 +136,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'support',
     es: 'support',
     'es-419': 'support',
+    it: 'support',
     fr: 'support',
   },
   CERTIFICATION_RESULTS_EXPLANATION: {
@@ -139,6 +147,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'understand-certification-results',
     es: 'understand-certification-results',
     'es-419': 'understand-certification-results',
+    it: 'understand-certification-results',
     fr: 'certification-comprendre-score-niveau',
   },
   CERTIFICATION_HOW_TO: {
@@ -149,6 +158,7 @@ export const PIX_WEBSITE_PATHS = {
     en: 'certify-my-digital-skills',
     es: 'certify-my-digital-skills',
     'es-419': 'certify-my-digital-skills',
+    it: 'certify-my-digital-skills',
     fr: 'se-certifier',
   },
 };
