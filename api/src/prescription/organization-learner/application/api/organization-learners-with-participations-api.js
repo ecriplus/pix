@@ -81,8 +81,8 @@ export async function find({ userIds }) {
 }
 
 export async function findByOrganizationAndOrganizationLearnerId({ organizationLearnerId, organizationId }) {
-  const organizationLearnerWithParticipation = await getOrganizationLearnerWithParticipations({
-    organizationLearnerId,
+  const organizationLearnerWithParticipations = await getOrganizationLearnerWithParticipations({
+    organizationLearnerIds: [organizationLearnerId],
     organizationId,
     organizationLearnerRepository,
     organizationRepository,
@@ -92,5 +92,26 @@ export async function findByOrganizationAndOrganizationLearnerId({ organizationL
     stageAcquisitionRepository,
     stageAcquisitionComparisonService,
   });
-  return new OrganizationLearnerWithParticipations(organizationLearnerWithParticipation);
+  return new OrganizationLearnerWithParticipations(organizationLearnerWithParticipations.get(organizationLearnerId));
+}
+
+export async function findByOrganizationAndOrganizationLearnerIds({ organizationLearnerIds, organizationId }) {
+  const organizationLearnerWithParticipations = await getOrganizationLearnerWithParticipations({
+    organizationLearnerIds,
+    organizationId,
+    organizationLearnerRepository,
+    organizationRepository,
+    tagRepository,
+    campaignParticipationOverviewRepository,
+    stageRepository,
+    stageAcquisitionRepository,
+    stageAcquisitionComparisonService,
+  });
+  for (const [key, organizationLearnerWithParticipation] of organizationLearnerWithParticipations) {
+    organizationLearnerWithParticipations.set(
+      key,
+      new OrganizationLearnerWithParticipations(organizationLearnerWithParticipation),
+    );
+  }
+  return organizationLearnerWithParticipations;
 }

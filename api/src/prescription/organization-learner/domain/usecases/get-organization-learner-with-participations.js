@@ -2,7 +2,7 @@ import { CampaignParticipationStatuses } from '../../../shared/domain/constants.
 
 export const getOrganizationLearnerWithParticipations = async function ({
   organizationId,
-  organizationLearnerId,
+  organizationLearnerIds,
   organizationRepository,
   campaignParticipationOverviewRepository,
   tagRepository,
@@ -11,27 +11,33 @@ export const getOrganizationLearnerWithParticipations = async function ({
   stageAcquisitionComparisonService,
 }) {
   const organization = await organizationRepository.get(organizationId);
-  const campaignParticipationOverviews = await campaignParticipationOverviewRepository.findByOrganizationLearnerId({
-    organizationLearnerId,
-  });
+  const campaignParticipationOverviewsByLearner =
+    await campaignParticipationOverviewRepository.findByOrganizationLearnerIds(organizationLearnerIds);
 
   const campaignParticipationIds = [];
   const targetProfileIdsSet = new Set();
 
-  for (const campaignParticipationOverview of campaignParticipationOverviews) {
-    if (campaignParticipationOverview.status === CampaignParticipationStatuses.SHARED) {
-      campaignParticipationIds.push(campaignParticipationOverview.id);
-      targetProfileIdsSet.add(campaignParticipationOverview.targetProfileId);
+  campaignParticipationOverviewsByLearner.forEach((campaignParticipationOverviews) => {
+    for (const campaignParticipationOverview of campaignParticipationOverviews) {
+      if (campaignParticipationOverview.status === CampaignParticipationStatuses.SHARED) {
+        campaignParticipationIds.push(campaignParticipationOverview.id);
+        targetProfileIdsSet.add(campaignParticipationOverview.targetProfileId);
+      }
     }
-  }
+  });
 
-  const targetProfileIds = [...targetProfileIdsSet];
+  const deduplicatedTargetProfileIds = [...targetProfileIdsSet];
 
-  const stages = await stageRepository.getByTargetProfileIds(targetProfileIds);
+  const stages = await stageRepository.getByTargetProfileIds(deduplicatedTargetProfileIds);
   const acquiredStages = await stageAcquisitionRepository.getByCampaignParticipations(campaignParticipationIds);
 
-  const campaignParticipationOverviewsWithStages = campaignParticipationOverviews.map(
-    (campaignParticipationOverview) => {
+  const tags = await tagRepository.findByIds(organization.tags.map((tag) => tag.id));
+
+  const resultByLearnerId = new Map();
+
+  organizationLearnerIds.forEach((organizationLearnerId) => {
+    const campaignParticipations = campaignParticipationOverviewsByLearner.get(organizationLearnerId) ?? [];
+    const campaignParticipationOverviewsWithStages = campaignParticipations.map((campaignParticipationOverview) => {
       const stagesForThisCampaign = stages.filter(
         ({ targetProfileId }) => targetProfileId === campaignParticipationOverview.targetProfileId,
       );
@@ -49,15 +55,15 @@ export const getOrganizationLearnerWithParticipations = async function ({
       };
 
       return campaignParticipationOverview;
-    },
-  );
+    });
 
-  const tags = await tagRepository.findByIds(organization.tags.map((tag) => tag.id));
+    resultByLearnerId.set(organizationLearnerId, {
+      organizationLearner: { id: organizationLearnerId },
+      organization,
+      campaignParticipations: campaignParticipationOverviewsWithStages,
+      tagNames: tags.map((tag) => tag.name),
+    });
+  });
 
-  return {
-    organizationLearner: { id: organizationLearnerId },
-    organization,
-    campaignParticipations: campaignParticipationOverviewsWithStages,
-    tagNames: tags.map((tag) => tag.name),
-  };
+  return resultByLearnerId;
 };
