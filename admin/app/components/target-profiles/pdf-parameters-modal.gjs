@@ -15,6 +15,7 @@ export default class PdfParametersModal extends Component {
     this.options = [
       { value: 'fr', label: 'Français' },
       { value: 'en', label: 'Anglais' },
+      { value: 'nl', label: 'Néerlandais' },
     ];
     this.language = 'fr';
   }
@@ -49,7 +50,7 @@ export default class PdfParametersModal extends Component {
           @hideDefaultOption={{true}}
           class="pdf-modal--select"
         >
-          <:label>Langue du référentiel (français ou anglais) :</:label>
+          <:label>Langue du référentiel (français, anglais ou néerlandais) :</:label>
         </PixSelect>
       </:content>
       <:footer>
