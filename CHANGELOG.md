@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## [5.334.1](https://github.com/1024pix/pix/compare/v5.334.0...v5.334.1) (2026-02-18)
+
+### :bug: Correction
+
+- [#15160](https://github.com/1024pix/pix/pull/15160) Ajout d'une condition supplémentaire sur l'upsert de organization_learner_participations 
+
+### :building_construction: Tech
+
+- [#15150](https://github.com/1024pix/pix/pull/15150) Utiliser les domaines transaction dans les repo Team
+
 # [5.334.0](https://github.com/1024pix/pix/compare/v5.333.0...v5.334.0) (2026-02-18)
 
 ### :rocket: Amélioration
