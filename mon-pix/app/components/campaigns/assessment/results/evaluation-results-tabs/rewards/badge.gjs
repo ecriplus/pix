@@ -16,6 +16,10 @@ export default class RewardsBadge extends Component {
     this.isDescriptionShrinked = !this.isDescriptionShrinked;
   }
 
+  get completionRatio() {
+    return this.args.badge.acquisitionPercentage / 100;
+  }
+
   <template>
     <li
       class={{if
@@ -47,7 +51,11 @@ export default class RewardsBadge extends Component {
           <MarkdownToHtml @markdown={{@badge.message}} @isInline={{true}} />
         </ShowMoreText>
         {{#unless @badge.isAcquired}}
-          <PixProgressBar class="evaluation-results-tab-badge__progress-bar" @value={{@badge.acquisitionPercentage}} />
+          <PixProgressBar
+            class="evaluation-results-tab-badge__progress-bar"
+            @value={{this.completionRatio}}
+            @percentageValue={{t "common.display.percentage" value=this.completionRatio}}
+          />
         {{/unless}}
       </div>
     </li>

@@ -35,12 +35,9 @@ import ResultItem from 'mon-pix/components/result-item';
         {{#if @controller.shouldDisplayAnswers}}
           <PixProgressBar
             class="checkpoint__progression-gauge"
-            @value={{@controller.completionPercentage}}
-            @label={{t
-              "pages.checkpoint.completion-percentage.label"
-              completionPercentage=@controller.completionPercentage
-              htmlSafe=true
-            }}
+            @value={{@controller.completionRate}}
+            @label={{t "pages.checkpoint.completion-percentage.label" completion=@controller.completionRate}}
+            @percentageValue={{t "common.display.percentage" value=@controller.completionRate}}
             @subtitle={{t "pages.checkpoint.completion-percentage.caption"}}
             @themeMode="dark"
           />
