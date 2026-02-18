@@ -1,27 +1,20 @@
-import * as path from 'node:path';
-import * as url from 'node:url';
-
 import { FRENCH_FRANCE } from '../../shared/domain/services/locale-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as attestationSerializer from '../infrastructure/serializers/jsonapi/attestation-detail-serializer.js';
 import * as pdfWithFormSerializer from '../infrastructure/serializers/pdf/pdf-with-form-serializer.js';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const getUserAttestation = async function (request, h, dependencies = { pdfWithFormSerializer }) {
   const userId = request.params.userId;
   const attestationKey = request.params.attestationKey;
 
   const locale = FRENCH_FRANCE;
-  const { data, templateName } = await usecases.getAttestationDataForUsers({
+  const { data, template } = await usecases.getAttestationDataForUsers({
     attestationKey,
     userIds: [userId],
     locale,
   });
 
-  const templatePath = path.join(__dirname, `../infrastructure/serializers/pdf/templates/${templateName}.pdf`);
-
-  const buffer = await dependencies.pdfWithFormSerializer.serialize(templatePath, data);
+  const buffer = await dependencies.pdfWithFormSerializer.serializeStream(template, data);
 
   return h.response(buffer).header('Content-Type', 'application/pdf');
 };

@@ -7,8 +7,9 @@ describe('Profile | Unit | Controller | attestation-controller', function () {
   describe('#getUserAttestation', function () {
     it('should call the expected usecase and serializer', async function () {
       // given
-      const pdfWithFormSerializerStub = { serialize: sinon.stub() };
+      const pdfWithFormSerializerStub = { serializeStream: sinon.stub() };
       sinon.stub(usecases, 'getAttestationDataForUsers');
+
       const userId = '12';
       const locale = FRENCH_FRANCE;
       const attestationKey = 'key';
@@ -20,16 +21,17 @@ describe('Profile | Unit | Controller | attestation-controller', function () {
         },
       };
       sinon.stub(hFake, 'response');
+      const template = Symbol('template');
       hFake.response.callThrough();
 
-      const expectedUsecaseResponse = { data: Symbol('data'), templateName: 'sixth-grade-attestation-template' };
+      const expectedUsecaseResponse = { data: Symbol('data'), template };
       const expectedBuffer = Symbol('expectedBuffer');
 
       usecases.getAttestationDataForUsers
         .withArgs({ attestationKey, userIds: [userId], locale })
         .resolves(expectedUsecaseResponse);
-      pdfWithFormSerializerStub.serialize
-        .withArgs(sinon.match(/(\w*\/)*sixth-grade-attestation-template.pdf/), expectedUsecaseResponse.data)
+      pdfWithFormSerializerStub.serializeStream
+        .withArgs(template, expectedUsecaseResponse.data)
         .resolves(expectedBuffer);
 
       // when
