@@ -1,22 +1,13 @@
-import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  knex,
-  preventStubsToBeCalledUnexpectedly,
-  sinon,
-} from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const { completeCertificationAssessment } = usecases;
 
 describe('Certification | Evaluation | Integration | Domain | UseCase | complete-certification-assessment', function () {
   const locale = 'someLocale';
-  let certificationCourseId, assessmentId, dependencies, clock;
-  let certificationCompletedJobRepository_performAsyncStub;
+  let certificationCourseId, assessmentId, args, clock;
   const now = new Date();
 
   beforeEach(async function () {
@@ -28,17 +19,9 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
     }).id;
     await databaseBuilder.commit();
 
-    certificationCompletedJobRepository_performAsyncStub = sinon.stub().named('performAsync');
-    preventStubsToBeCalledUnexpectedly([certificationCompletedJobRepository_performAsyncStub]);
-
-    const certificationCompletedJobRepository = {
-      performAsync: certificationCompletedJobRepository_performAsyncStub,
-    }; // todo lancer pour de vrai, await expect scheduled withjobscount
-
-    dependencies = {
+    args = {
       certificationCourseId,
       locale,
-      certificationCompletedJobRepository,
     };
   });
 
@@ -49,7 +32,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
   context('when certification does not exist', function () {
     it('should throw a NotFound error', async function () {
       const err = await catchErr(completeCertificationAssessment)({
-        ...dependencies,
+        ...args,
         certificationCourseId: certificationCourseId + 1,
       });
 
@@ -66,17 +49,9 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         updatedAt: new Date('2023-10-05'),
       }).id;
       await databaseBuilder.commit();
-      certificationCompletedJobRepository_performAsyncStub
-        .withArgs(
-          new CertificationCompletedJob({
-            certificationCourseId,
-            locale,
-          }),
-        )
-        .resolves();
 
       // when
-      await completeCertificationAssessment(dependencies);
+      await completeCertificationAssessment(args);
 
       // then
       const assessmentStateAndUpdatedAt = await knex('assessments')
@@ -84,6 +59,9 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         .where({ id: assessmentId })
         .first();
       expect(assessmentStateAndUpdatedAt).to.deep.equal({ state: Assessment.states.COMPLETED, updatedAt: now });
+      await expect('CertificationCompletedJob').to.have.been.schedule.withJob({
+        data: { certificationCourseId, locale },
+      });
     });
   });
 
@@ -99,7 +77,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         await databaseBuilder.commit();
 
         // when
-        await completeCertificationAssessment(dependencies);
+        await completeCertificationAssessment(args);
 
         // then
         const assessmentStateAndUpdatedAt = await knex('assessments')
@@ -107,6 +85,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
           .where({ id: assessmentId })
           .first();
         expect(assessmentStateAndUpdatedAt).to.deep.equal({ state, updatedAt: new Date('2023-10-05') });
+        await expect('CertificationCompletedJob').to.have.been.schedule.withJobsCount(0);
       });
     });
 });

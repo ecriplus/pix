@@ -8,7 +8,6 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
-// todo use redismutex instead of locking assessment ?
 describe('Integration | Application | Certification | Evaluation | API', function () {
   describe('#selectNextCertificationChallenge', function () {
     it('should lock assessment during challenge selection', async function () {
