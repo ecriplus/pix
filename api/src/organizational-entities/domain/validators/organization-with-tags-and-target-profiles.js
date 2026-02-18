@@ -63,6 +63,10 @@ const schema = Joi.object({
     'number.min': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
     'number.max': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
   }),
+  organizationLearnerTypeId: Joi.number().strict().empty(null).required().messages({
+    'any.required': "L'id du public prescrit est manquant",
+    'number.base': "L'id du public prescrit n'est pas un nombre",
+  }),
 });
 
 const validate = function (organization) {

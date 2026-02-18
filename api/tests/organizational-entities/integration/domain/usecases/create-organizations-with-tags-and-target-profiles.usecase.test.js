@@ -3,6 +3,7 @@ import lodash from 'lodash';
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
@@ -33,7 +34,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     userId,
     byDefaultFeatureId,
     administrationTeamId,
-    countryCode;
+    countryCode,
+    organizationLearnerTypeId;
 
   beforeEach(async function () {
     databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY);
@@ -46,6 +48,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       originalName: 'Lalaland',
       commonName: 'Lalaland',
     }).code;
+    organizationLearnerTypeId = databaseBuilder.factory.buildOrganizationLearnerType({ id: 1234 }).id;
     ondeImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
     });
@@ -90,6 +93,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: '',
             administrationTeamId: null,
             countryCode: null,
+            organizationLearnerTypeId: null,
           },
         ];
 
@@ -138,6 +142,10 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             message: "L'id de l'équipe en charge est manquant",
           },
           { attribute: 'countryCode', message: 'Le code pays n’est pas renseigné.' },
+          {
+            attribute: 'organizationLearnerTypeId',
+            message: "L'id du public prescrit est manquant",
+          },
         ]);
       });
     });
@@ -161,6 +169,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
           {
             type: 'PRO',
@@ -177,6 +186,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
           {
             type: 'PRO',
@@ -193,6 +203,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
         ];
 
@@ -234,6 +245,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
           {
             type: 'PRO',
@@ -250,6 +262,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'MEMBER',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
           {
             type: 'PRO',
@@ -266,6 +279,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             organizationInvitationRole: 'ADMIN',
             administrationTeamId,
             countryCode,
+            organizationLearnerTypeId,
           },
         ];
 
@@ -310,6 +324,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -326,6 +341,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -342,6 +358,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -373,6 +390,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'targetProfiles',
             'administrationTeamId',
             'countryCode',
+            'organizationLearnerTypeId',
           ),
         );
 
@@ -407,6 +425,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -423,6 +442,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'MEMBER',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -439,6 +459,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -476,6 +497,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -492,6 +514,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'MEMBER',
           administrationTeamId: 9999,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -532,6 +555,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -548,6 +572,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'MEMBER',
           administrationTeamId: anotherAdministrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -584,6 +609,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode: invalidCountryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -621,6 +647,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -633,6 +660,116 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       const organizationsInDB = await knex('organizations').select();
       expect(organizationsInDB).to.have.lengthOf(1);
       expect(organizationsInDB[0].countryCode).to.equal(Number(countryCode));
+    });
+  });
+
+  describe('when one provided organization learner type id is not found in database', function () {
+    it('should rollback', async function () {
+      // given
+      const nonExistingOrganizationLearnerTypeId = 5678;
+
+      const organizationsWithOneNonExistingOrganizationLearnerType = [
+        {
+          type: 'SCO',
+          externalId: 'a100',
+          name: 'Collège Bob',
+          provinceCode: '044',
+          credit: 1,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+          countryCode,
+          organizationLearnerTypeId,
+        },
+        {
+          type: 'PRO',
+          externalId: 'a200',
+          name: 'Thomas Transports',
+          provinceCode: '044',
+          credit: 1,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'MEMBER',
+          administrationTeamId,
+          countryCode,
+          organizationLearnerTypeId: nonExistingOrganizationLearnerTypeId,
+        },
+      ];
+
+      // when
+      const error = await catchErr(usecases.createOrganizationsWithTagsAndTargetProfiles)({
+        organizations: organizationsWithOneNonExistingOrganizationLearnerType,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(OrganizationLearnerTypeNotFound);
+      expect(error.meta).to.deep.equal({
+        organizationLearnerTypeId: nonExistingOrganizationLearnerTypeId,
+      });
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(0);
+    });
+  });
+
+  describe('when provided organizationLearnerTypeId is found in database', function () {
+    it('should save the organizations', async function () {
+      // given
+      const organizationsWithExistingOrganizationLearnerType = [
+        {
+          type: 'PRO',
+          externalId: 'a200',
+          name: 'Thomas Transports',
+          provinceCode: '044',
+          credit: 1,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'MEMBER',
+          administrationTeamId,
+          countryCode,
+          organizationLearnerTypeId,
+        },
+        {
+          type: 'PRO',
+          externalId: 'a300',
+          name: "Les boulangeries de l'ouest",
+          provinceCode: '056',
+          credit: 15,
+          emailInvitations: '',
+          locale: 'fr-fr',
+          tags: '',
+          targetProfiles: '',
+          createdBy: userId,
+          documentationUrl: 'http://www.pix.fr',
+          organizationInvitationRole: 'ADMIN',
+          administrationTeamId,
+          countryCode,
+          organizationLearnerTypeId,
+        },
+      ];
+
+      // when
+      await usecases.createOrganizationsWithTagsAndTargetProfiles({
+        organizations: organizationsWithExistingOrganizationLearnerType,
+      });
+
+      // then
+      const organizationsInDB = await knex('organizations').select();
+      expect(organizationsInDB).to.have.lengthOf(2);
+      expect(organizationsInDB[0].organizationLearnerTypeId).to.equal(organizationLearnerTypeId);
+      expect(organizationsInDB[1].organizationLearnerTypeId).to.equal(organizationLearnerTypeId);
     });
   });
 
@@ -661,6 +798,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -677,6 +815,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -693,6 +832,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizationInvitationRole: 'ADMIN',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -724,6 +864,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             'targetProfiles',
             'administrationTeamId',
             'countryCode',
+            'organizationLearnerTypeId',
           ),
         );
 
@@ -760,6 +901,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -776,6 +918,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -817,6 +960,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -870,6 +1014,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'PRO',
@@ -885,6 +1030,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           documentationUrl: 'http://www.pix.fr',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -928,6 +1074,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           provinceCode: '123',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
         {
           type: 'SCO-1D',
@@ -941,6 +1088,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           provinceCode: '123',
           administrationTeamId,
           countryCode,
+          organizationLearnerTypeId,
         },
       ];
 
@@ -977,6 +1125,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             administrationTeamId,
             parentOrganizationId,
             countryCode,
+            organizationLearnerTypeId,
           },
         ];
 
@@ -1003,6 +1152,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             administrationTeamId,
             parentOrganizationId: 12345,
             countryCode,
+            organizationLearnerTypeId,
           },
         ];
 
@@ -1035,6 +1185,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             administrationTeamId,
             parentOrganizationId,
             countryCode,
+            organizationLearnerTypeId,
           },
         ];
 

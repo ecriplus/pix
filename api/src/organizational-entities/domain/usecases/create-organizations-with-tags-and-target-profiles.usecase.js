@@ -17,10 +17,12 @@ import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils
 import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
+  OrganizationLearnerTypeNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
+import { OrganizationLearnerType } from '../models/OrganizationLearnerType.js';
 
 const SEPARATOR = '_';
 
@@ -41,6 +43,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
   targetProfileShareRepository,
   organizationValidator,
   countryRepository,
+  organizationLearnerTypeRepository,
 }) {
   if (isEmpty(organizations)) {
     throw new ObjectValidationError('Les organisations ne sont pas renseignées.');
@@ -61,6 +64,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
       organizationForAdminRepository,
       transformedOrganizationsData,
       countryRepository,
+      organizationLearnerTypeRepository,
     });
 
     await _addDataProtectionOfficers({
@@ -98,9 +102,11 @@ async function _createOrganizations({
   administrationTeamRepository,
   organizationForAdminRepository,
   countryRepository,
+  organizationLearnerTypeRepository,
 }) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
-    const { administrationTeamId, parentOrganizationId, countryCode } = organizationToCreate.organization;
+    const { administrationTeamId, parentOrganizationId, countryCode, organizationLearnerType } =
+      organizationToCreate.organization;
     const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
 
     if (!administrationTeam) {
@@ -120,6 +126,8 @@ async function _createOrganizations({
     }
 
     await _checkCountryExists(countryCode, countryRepository);
+
+    await _checkOrganizationLearnerTypeExists(organizationLearnerType.id, organizationLearnerTypeRepository);
 
     try {
       const createdOrganization = await organizationForAdminRepository.save({
@@ -172,6 +180,7 @@ function _transformOrganizationsCsvData(organizationsCsvData) {
       organization: new OrganizationForAdmin({
         ...organizationCsvData,
         email,
+        organizationLearnerType: new OrganizationLearnerType({ id: organizationCsvData.organizationLearnerTypeId }),
       }),
       dataProtectionOfficer: {
         firstName: organizationCsvData.DPOFirstName,
@@ -308,6 +317,17 @@ async function _checkCountryExists(countryCode, countryRepository) {
     await countryRepository.getByCode(countryCode);
   } catch {
     throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
+  }
+}
+
+async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
+  try {
+    await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
+  } catch {
+    throw new OrganizationLearnerTypeNotFound({
+      message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
+      meta: { organizationLearnerTypeId },
+    });
   }
 }
 
