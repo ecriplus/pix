@@ -595,7 +595,7 @@
               "element": {
                 "id": "d0b8befc-28cd-44a7-aba4-c110548386c0",
                 "type": "text",
-                "content": "<ul><li>Pour consulter ses mails, il faut <strong>ouvrir sa messagerie électronique</strong>. <br>Les <strong>mails reçus</strong> se trouvent dans la <strong>boîte de réception</strong> et s’affichent sous forme de<strong> list</strong>e.<br><br></li><li>Dans cette liste, des informations sont affichées pour chaque mail : le <strong>nom de l’expéditeur</strong>, l’<strong>obje</strong>t et la <strong>date de réception</strong> du mail.<br><br></li><li>Les mails qui <strong>n’ont pas encore été lus</strong> apparaissent en <strong>gras</strong>. <br>Le mail<strong> le plus récent</strong> est placé <strong>en</strong><strong> haut de la liste</strong> par défaut.<br><br></li><li>Lorsqu’on <strong>ouvre un mail</strong>, on peut lire <strong>son contenu</strong>.<br>Depuis un mail ouvert, on peut cliquer sur r<strong>épondre</strong>, puis <strong>écrire</strong><strong> son message</strong> et l’<strong>envoyer</strong>.</li></ul>"
+                "content": "<ul><li>Pour consulter ses mails, il faut <strong>ouvrir sa messagerie électronique</strong>. <br>Les <strong>mails reçus</strong> se trouvent dans la <strong>boîte de réception</strong> et s’affichent sous forme de<strong> liste</strong>.<br><br></li><li>Dans cette liste, des informations sont affichées pour chaque mail : le <strong>nom de l’expéditeur</strong>, l’<strong>objet</strong> et la <strong>date de réception</strong> du mail.<br><br></li><li>Les mails qui <strong>n’ont pas encore été lus</strong> apparaissent en <strong>gras</strong>. <br>Le mail<strong> le plus récent</strong> est placé <strong>en</strong><strong> haut de la liste</strong> par défaut.<br><br></li><li>Lorsqu’on <strong>ouvre un mail</strong>, on peut lire <strong>son contenu</strong>.<br>Depuis un mail ouvert, on peut cliquer sur <strong>répondre</strong>, puis <strong>écrire</strong><strong> son message</strong> et l’<strong>envoyer</strong>.</li></ul>"
               }
             }
           ]
@@ -647,7 +647,7 @@
                           "content": "1",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras : ici deux mails ne sont pas en gras.Certains mails sont en gras, d’autres non. Comment apparaissent les mails déjà lus ?</p>"
+                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras : ici deux mails ne sont pas en gras. Certains mails sont en gras, d’autres non. Comment apparaissent les mails déjà lus ?</p>"
                           }
                         },
                         {
