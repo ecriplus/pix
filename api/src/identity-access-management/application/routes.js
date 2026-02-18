@@ -36,6 +36,6 @@ function register(server, { routes = allRoutes, tags }) {
   server.route(filteredRoutes);
 }
 
-const name = 'identity-access-management-api';
+const name = 'identity-access-management/identity-access-management-api';
 
 export const identityAccessManagementRoutes = [{ register, name }];
