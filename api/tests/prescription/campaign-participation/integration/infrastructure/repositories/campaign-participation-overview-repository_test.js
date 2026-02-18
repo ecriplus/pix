@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { CampaignParticipationOverview } from '../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
 import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
 import {
   CampaignParticipationStatuses,
@@ -325,6 +326,89 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       });
 
       expect(campaignParticipation.disabledAt).to.deep.equal(archivedAt);
+    });
+  });
+
+  describe('#findByOrganizationLearnerIds', function () {
+    it('retrieves campaign participations overviews for many learners', async function () {
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' });
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({
+        title: 'Campaign ABCD',
+        name: 'Campaign Name DEF',
+        code: 'ABCD',
+        organizationId,
+        targetProfileId: targetProfile.id,
+      });
+      const userId2 = databaseBuilder.factory.buildUser().id;
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId }).id;
+      const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      }).id;
+      const organizationLearnerWithoutParticipationId = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+      }).id;
+      const organizationLearnerDeletedId = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        isDeleted: true,
+      }).id;
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillId1' });
+
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        userId,
+        campaignId,
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2020-01-02'),
+        validatedSkillsCount: 1,
+        status: CampaignParticipationStatuses.SHARED,
+        masteryRate: 0.1,
+      });
+      const { id: participationId2 } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        userId,
+      });
+      const { id: participationId3 } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId: organizationLearnerId2,
+        userId: userId2,
+        campaignId,
+        createdAt: new Date('2020-01-01'),
+        sharedAt: new Date('2020-01-02'),
+        validatedSkillsCount: 1,
+        status: CampaignParticipationStatuses.SHARED,
+        masteryRate: 0.1,
+      });
+
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participationId,
+        state: Assessment.states.COMPLETED,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participationId2,
+        state: Assessment.states.COMPLETED,
+      });
+      databaseBuilder.factory.buildAssessment({
+        campaignParticipationId: participationId3,
+        state: Assessment.states.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      const campaignParticipation = await campaignParticipationOverviewRepository.findByOrganizationLearnerIds([
+        organizationLearnerId,
+        organizationLearnerId2,
+      ]);
+
+      expect(campaignParticipation.get(organizationLearnerId)).lengthOf(2);
+      expect(campaignParticipation.get(organizationLearnerId)[0]).instanceOf(CampaignParticipationOverview);
+      expect(campaignParticipation.get(organizationLearnerId)[1]).instanceOf(CampaignParticipationOverview);
+
+      expect(campaignParticipation.get(organizationLearnerId).map(({ id }) => id)).to.deep.equal([
+        participationId,
+        participationId2,
+      ]);
+      expect(campaignParticipation.get(organizationLearnerId2).map(({ id }) => id)).to.deep.equal([participationId3]);
+      expect(campaignParticipation.get(organizationLearnerWithoutParticipationId)).to.be.undefined;
+      expect(campaignParticipation.get(organizationLearnerDeletedId)).to.be.undefined;
     });
   });
 

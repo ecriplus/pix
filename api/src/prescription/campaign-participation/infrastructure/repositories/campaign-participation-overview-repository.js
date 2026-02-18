@@ -46,7 +46,23 @@ const findByOrganizationLearnerId = async ({ organizationLearnerId }) => {
   return results.map((result) => new CampaignParticipationOverview(result));
 };
 
-export { findByOrganizationLearnerId, findByUserIdWithFilters };
+const findByOrganizationLearnerIds = async (organizationLearnerIds) => {
+  const results = await _getQueryBuilder((qb) => {
+    qb.whereIn('campaign-participations.organizationLearnerId', organizationLearnerIds);
+  });
+  return results.reduce((participationsByLearner, campaignParticipation) => {
+    const organizationLearnerId = campaignParticipation.organizationLearnerId;
+    const campaignParticipationOverview = new CampaignParticipationOverview(campaignParticipation);
+
+    if (!participationsByLearner.has(organizationLearnerId)) participationsByLearner.set(organizationLearnerId, []);
+
+    participationsByLearner.get(organizationLearnerId).push(campaignParticipationOverview);
+
+    return participationsByLearner;
+  }, new Map());
+};
+
+export { findByOrganizationLearnerId, findByOrganizationLearnerIds, findByUserIdWithFilters };
 
 function _getQueryBuilder(callback) {
   const knexConn = DomainTransaction.getConnection();
@@ -66,6 +82,7 @@ function _getQueryBuilder(callback) {
         targetProfileId: 'campaigns.targetProfileId',
         campaignArchivedAt: 'campaigns.archivedAt',
         organizationName: 'organizations.name',
+        organizationLearnerId: 'view-active-organization-learners.id',
         deletedAt: 'campaign-participations.deletedAt',
         participationState: _computeCampaignParticipationState(knexConn),
         campaignId: 'campaigns.id',
