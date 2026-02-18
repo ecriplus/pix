@@ -2,11 +2,11 @@ import { AttestationNotFoundError } from '../../../../../src/profile/domain/erro
 import { AttestationUserDetail } from '../../../../../src/profile/domain/models/AttestationUserDetail.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, mockAttestationStorage, sinon } from '../../../../test-helper.js';
 import { buildAttestationUserDetail } from '../../../../tooling/domain-builder/factory/index.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-user-detail-by-organization-id', function () {
-  let clock, attestationStorageStub;
+  let clock;
   const now = new Date('2022-12-25');
 
   beforeEach(function () {
@@ -14,9 +14,6 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
       now,
       toFake: ['Date'],
     });
-    attestationStorageStub = {
-      readFile: sinon.stub().resolves(Symbol('fakeData')),
-    };
   });
 
   afterEach(async function () {
@@ -27,6 +24,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
     it('should return array of AttestationUserDetail by organizationId', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
       const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
       const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -56,7 +54,6 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
         attestationKey: attestation.key,
         organizationId,
         locale,
-        attestationStorage: attestationStorageStub,
       });
 
       expect(results[0]).to.be.instanceOf(AttestationUserDetail);
@@ -100,6 +97,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
       //given
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'Alex', lastName: 'Terieur' }));
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       databaseBuilder.factory.buildProfileReward({
@@ -114,7 +112,6 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
         attestationKey: attestation.key,
         organizationId,
         locale,
-        attestationStorage: attestationStorageStub,
       });
 
       //then

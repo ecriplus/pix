@@ -1,6 +1,6 @@
 import { AttestationParticipantStatus } from '../../../../../../src/prescription/organization-learner/domain/read-models/AttestationParticipantStatus.js';
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
 
 describe('Integration | Prescription | Learner Management | Domain | UseCase | find-paginated-filtered-attestation-participant-status', function () {
   let attestation, organizationId, firstLearner, secondLearner;
@@ -14,6 +14,7 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | f
     });
     secondLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme B' });
     attestation = databaseBuilder.factory.buildAttestation();
+    mockAttestationStorage(attestation);
     const firstRewardId = databaseBuilder.factory.buildProfileReward({
       rewardId: attestation.id,
       userId: firstLearner.userId,

@@ -18,9 +18,10 @@ describe('Profile | Unit | Application | Api | attestations', function () {
 
       const dependencies = {
         pdfWithFormSerializer: {
-          serialize: sinon.stub(),
+          serializeStream: sinon.stub(),
         },
       };
+      const template = Symbol('fake-data');
 
       sinon.stub(usecases, 'getSharedAttestationsForOrganizationByUserIds');
 
@@ -28,12 +29,10 @@ describe('Profile | Unit | Application | Api | attestations', function () {
         .withArgs({ attestationKey, userIds, organizationId, locale })
         .resolves({
           data,
-          templateName: 'sixth-grade-attestation-template',
+          template,
         });
 
-      dependencies.pdfWithFormSerializer.serialize
-        .withArgs(sinon.match(/(\w*\/)*sixth-grade-attestation-template.pdf/), data)
-        .resolves(expectedBuffer);
+      dependencies.pdfWithFormSerializer.serializeStream.withArgs(template, data).resolves(expectedBuffer);
 
       const result = await generateAttestations({ attestationKey, userIds, organizationId, dependencies });
 

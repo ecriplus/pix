@@ -1,16 +1,10 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import * as url from 'node:url';
-
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  nock,
+  mockAttestationStorage,
 } from '../../../test-helper.js';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 describe('Profile | Acceptance | Application | Attestation Route ', function () {
   let server;
@@ -26,9 +20,7 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
       const attestation = databaseBuilder.factory.buildAttestation();
       await databaseBuilder.commit();
 
-      nock('http://attestations.fake.endpoint.example.net:80')
-        .get(`/attestations.bucket/${attestation.templateName}?x-id=GetObject`)
-        .reply(200, () => fs.createReadStream(path.join(__dirname, 'template.pdf')));
+      mockAttestationStorage(attestation);
 
       const options = {
         method: 'GET',

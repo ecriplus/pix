@@ -2,7 +2,7 @@ import { AttestationNotFoundError } from '../../../../../src/profile/domain/erro
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, mockAttestationStorage, sinon } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Domain | get-attestation-data-for-users', function () {
   let clock;
@@ -21,11 +21,9 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
 
   describe('#getAttestationDataForUsers', function () {
     it('should return profile rewards', async function () {
-      const fakeData = Symbol('fakeData');
-      const attestationStorageStub = { readFile: sinon.stub().resolves(fakeData) };
-
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
       const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
       const firstCreatedAt = databaseBuilder.factory.buildProfileReward({
@@ -43,16 +41,13 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
         attestationKey: attestation.key,
         userIds: [firstUser.id, secondUser.id],
         locale,
-        attestationStorage: attestationStorageStub,
       });
 
-      expect(results).to.deep.equal({
-        data: [
-          firstUser.toForm(firstCreatedAt, locale, normalizeAndRemoveAccents),
-          secondUser.toForm(secondCreatedAt, locale, normalizeAndRemoveAccents),
-        ],
-        template: fakeData,
-      });
+      expect(results.data).to.deep.equal([
+        firstUser.toForm(firstCreatedAt, locale, normalizeAndRemoveAccents),
+        secondUser.toForm(secondCreatedAt, locale, normalizeAndRemoveAccents),
+      ]);
+      expect(results.template).to.be.not.null;
       expect(results.data[0].get('firstName')).to.equal('Alex');
       expect(results.data[0].get('lastName')).to.equal('TERIEUR');
       expect(results.data[1].get('firstName')).to.equal('Theo');
