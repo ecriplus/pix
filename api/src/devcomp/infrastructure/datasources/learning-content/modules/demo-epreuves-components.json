@@ -1578,6 +1578,57 @@
               }
             }
           ]
+        },
+        {
+          "id": "20771248-1454-417c-b604-7c37eb67e0dc",
+          "type": "discovery",
+          "title": "trouver-mdp-rs",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "141326a5-a60f-49d1-9bf3-544fdcf0ad50",
+                "type": "text",
+                "content": "<p>trouver-mdp-rs</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4e03396f-1e10-4171-a60f-15a4acd3112e",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "trouver-mdp-rs",
+                "props": {
+                  "titleLevel": 2,
+                  "validations": {
+                    "password": "Timeo2014",
+                    "user": "emma_vtr"
+                  },
+                  "feedback": {
+                    "success": "Quelqu’un qui vous connaît ou un pirate informatique qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe.",
+                    "failed": "Astuce : Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat. Réessayer en saisissant le bon mot de passe à l’aide de ces informations en complétant le champ adéquat."
+                  },
+                  "userProfile": {
+                    "userName": "Emma_VTR",
+                    "tag": "@emma_vtr",
+                    "bio": "Bio : Fan de chats 🐱 · Voyage à Lisbonne 2023 🇵🇹 · Maman de Timéo 💕",
+                    "location": "Paris, FR",
+                    "publications": [
+                      {
+                        "date": "2024-12-09",
+                        "content": "Déjà 10 ans que j'ai sauvé Misty ! 🐾💖 De petit chaton abandonné, il s'est transformé en panthère d'appartement !"
+                      },
+                      {
+                        "date": "2024-12-08",
+                        "content": "Lisbonne, souvenirs d’été"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     }
