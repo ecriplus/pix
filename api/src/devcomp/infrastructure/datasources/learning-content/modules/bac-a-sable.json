@@ -349,7 +349,7 @@
               "element": {
                 "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
                 "type": "text",
-                "content": "<p>Section <strong>Réponses Courtes</strong> (QCU découverte et déclaratif)</p>"
+                "content": "<p>Section <strong>Réponses Courtes</strong> (QCM, QCU (+ découverte et déclaratif))</p>"
               }
             }
           ]
@@ -364,7 +364,7 @@
               "element": {
                 "id": "c3bc4466-2825-488e-ad5f-275ace4b19a8",
                 "type": "qcu-discovery",
-                "instruction": "<p>Quelle est la meilleure crêpe ?</p>",
+                "instruction": "<p>Quelle est la meilleure crêpe 🥞 ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -382,7 +382,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "Beurre/sucre 🥞",
+                    "content": "Citron/sucre 🍋",
                     "feedback": {
                       "diagnosis": "<p>Pardon ?</p>"
                     }
@@ -580,6 +580,51 @@
                   }
                 ],
                 "solution": "2",
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "aa40e5bb-fe1e-41df-9318-a00aaca6dbe8",
+          "type": "challenge",
+          "title": "qcm short proposals (3 et 4)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e48f8ce7-cd94-40d3-bb62-bbee4116951c",
+                "type": "qcm",
+                "instruction": "<p>Dans ces propositions, lesquels sont des palindromes?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "De la salade"
+                  },
+                  {
+                    "id": "2",
+                    "content": "KEYAK"
+                  },
+                  {
+                    "id": "3",
+                    "content": "10/02/2001"
+                  },
+                  {
+                    "id": "4",
+                    "content": "Réifier"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Correct&#8239;!",
+                    "diagnosis": "<p>On trouve ici un palindrome classique par lecture des lettres, un palindrome de forme numérique et un palindrome syllabique.</p>"
+                  },
+                  "invalid": {
+                    "state": "Et non&#8239;!",
+                    "diagnosis": "<p>Essayez encore 🦀</p>"
+                  }
+                },
+                "solutions": ["1", "3", "4"],
                 "hasShortProposals": true
               }
             }
