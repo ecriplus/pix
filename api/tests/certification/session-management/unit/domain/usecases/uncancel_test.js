@@ -21,14 +21,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       const certificationCourseRepository = {
         get: sinon.stub(),
       };
-      const certificationRescoringRepository = {
+      const certificationEvaluationRepository = {
         rescoreV2Certification: sinon.stub(),
       };
       const sessionRepository = {
         isFinalized: sinon.stub(),
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-      certificationRescoringRepository.rescoreV2Certification.resolves();
+      certificationEvaluationRepository.rescoreV2Certification.resolves();
       sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
 
       // when
@@ -36,12 +36,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         certificationCourseId: 123,
         juryId,
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         sessionRepository,
       });
 
       // then
-      expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledWithExactly({
+      expect(certificationEvaluationRepository.rescoreV2Certification).to.have.been.calledWithExactly({
         event: new CertificationUncancelled({
           certificationCourseId: certificationCourse.getId(),
           juryId,
@@ -101,14 +101,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       const certificationCourseRepository = {
         get: sinon.stub(),
       };
-      const certificationRescoringRepository = {
+      const certificationEvaluationRepository = {
         rescoreV3Certification: sinon.stub(),
       };
       const sessionRepository = {
         isFinalized: sinon.stub(),
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-      certificationRescoringRepository.rescoreV3Certification.resolves();
+      certificationEvaluationRepository.rescoreV3Certification.resolves();
       sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
 
       // when
@@ -116,12 +116,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         certificationCourseId: 123,
         juryId,
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         sessionRepository,
       });
 
       // then
-      expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledWithExactly({
+      expect(certificationEvaluationRepository.rescoreV3Certification).to.have.been.calledWithExactly({
         event: new CertificationUncancelled({
           certificationCourseId: certificationCourse.getId(),
           juryId,

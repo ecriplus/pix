@@ -1,7 +1,7 @@
 /**
  * @typedef {import ('./index.js').CertificationEvaluationApi} CertificationEvaluationApi
  * @typedef {import ('../../domain/models/Challenge.js').Challenge} Challenge
- * @typedef {import ('../../domain/errors.js').AssessmentEndedError} AssessmentEndedError
+ * @typedef {import ('../../../certification/evaluation/domain/errors.js').AssessmentEndedError} AssessmentEndedError
  */
 
 /**

@@ -9,7 +9,7 @@ import * as competenceRepository from '../../../../shared/infrastructure/reposit
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as certificationCpfCityRepository from '../../../enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
 import * as certificationCpfCountryRepository from '../../../enrolment/infrastructure/repositories/certification-cpf-country-repository.js';
-import * as certificationEvaluationApi from '../../../evaluation/application/api/rescore-certification-api.js';
+import * as certificationEvaluationApi from '../../../evaluation/application/api/certification-evaluation-api.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationChallengeRepository from '../../../shared/infrastructure/repositories/certification-challenge-repository.js';
@@ -21,9 +21,9 @@ import * as certificationCandidateForSupervisingRepository from './certification
 import * as certificationCandidateRepository from './certification-candidate-repository.js';
 import * as certificationCenterAccessRepository from './certification-center-access-repository.js';
 import * as certificationCompanionAlertRepository from './certification-companion-alert-repository.js';
+import * as certificationEvaluationRepository from './certification-evaluation-repository.js';
 import * as certificationOfficerRepository from './certification-officer-repository.js';
 import * as certificationRepository from './certification-repository.js';
-import * as certificationRescoringRepository from './certification-rescoring-repository.js';
 import * as competenceMarkRepository from './competence-mark-repository.js';
 import * as courseAssessmentResultRepository from './course-assessment-result-repository.js';
 import * as cpfExportRepository from './cpf-export-repository.js';
@@ -79,7 +79,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {juryCertificationSummaryRepository} JuryCertificationSummaryRepository
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
  * @typedef {typeof certificationCompanionAlertRepository} CertificationCompanionAlertRepository
- * @typedef {certificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {certificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {certificationCenterAccessApi} CertificationCenterAccessApi
  * @typedef {certificationCenterAccessRepository} CertificationCenterAccessRepository
  */
@@ -117,7 +117,7 @@ const repositoriesWithoutInjectedDependencies = {
   certificationCpfCountryRepository,
   certificationCandidateRepository,
   certificationCompanionAlertRepository,
-  certificationRescoringRepository,
+  certificationEvaluationRepository,
   certificationCenterAccessRepository,
 };
 

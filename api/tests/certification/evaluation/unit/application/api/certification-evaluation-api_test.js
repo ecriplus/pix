@@ -1,4 +1,4 @@
-import * as selectNextCertificationChallengeApi from '../../../../../../src/certification/evaluation/application/api/select-next-certification-challenge-api.js';
+import * as certificationEvaluationApi from '../../../../../../src/certification/evaluation/application/api/certification-evaluation-api.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
@@ -26,7 +26,7 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
       sinon.stub(usecases, 'getNextChallenge');
 
       // when
-      await selectNextCertificationChallengeApi.selectNextCertificationChallenge({
+      await certificationEvaluationApi.selectNextCertificationChallenge({
         assessmentId: 'assessmentId',
         locale,
         dependencies,

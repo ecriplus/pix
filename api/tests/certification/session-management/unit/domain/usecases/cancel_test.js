@@ -30,14 +30,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const sessionRepository = {
           isFinalized: sinon.stub(),
         };
-        const certificationRescoringRepository = {
+        const certificationEvaluationRepository = {
           rescoreV2Certification: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        certificationRescoringRepository.rescoreV2Certification.resolves();
+        certificationEvaluationRepository.rescoreV2Certification.resolves();
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
@@ -47,12 +47,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           juryId,
           certificationCourseRepository,
           sessionRepository,
-          certificationRescoringRepository,
+          certificationEvaluationRepository,
           courseAssessmentResultRepository,
         });
 
         // then
-        expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledWithExactly({
+        expect(certificationEvaluationRepository.rescoreV2Certification).to.have.been.calledWithExactly({
           event: new CertificationCancelled({
             certificationCourseId: certificationCourse.getId(),
             juryId,
@@ -119,14 +119,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const sessionRepository = {
           isFinalized: sinon.stub(),
         };
-        const certificationRescoringRepository = {
+        const certificationEvaluationRepository = {
           rescoreV2Certification: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        certificationRescoringRepository.rescoreV2Certification.resolves();
+        certificationEvaluationRepository.rescoreV2Certification.resolves();
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
@@ -165,14 +165,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const sessionRepository = {
           isFinalized: sinon.stub(),
         };
-        const certificationRescoringRepository = {
+        const certificationEvaluationRepository = {
           rescoreV3Certification: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        certificationRescoringRepository.rescoreV3Certification.resolves();
+        certificationEvaluationRepository.rescoreV3Certification.resolves();
         sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
@@ -182,12 +182,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           juryId,
           certificationCourseRepository,
           sessionRepository,
-          certificationRescoringRepository,
+          certificationEvaluationRepository,
           courseAssessmentResultRepository,
         });
 
         // then
-        expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledWithExactly({
+        expect(certificationEvaluationRepository.rescoreV3Certification).to.have.been.calledWithExactly({
           event: new CertificationCancelled({
             certificationCourseId: certificationCourse.getId(),
             juryId,
@@ -255,14 +255,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       const sessionRepository = {
         isFinalized: sinon.stub(),
       };
-      const certificationRescoringRepository = {
+      const certificationEvaluationRepository = {
         rescoreV3Certification: sinon.stub(),
       };
       const courseAssessmentResultRepository = {
         getLatestAssessmentResult: sinon.stub(),
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-      certificationRescoringRepository.rescoreV3Certification.resolves();
+      certificationEvaluationRepository.rescoreV3Certification.resolves();
       sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
       courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
@@ -272,13 +272,13 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         juryId,
         certificationCourseRepository,
         sessionRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
-      expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.called;
+      expect(certificationEvaluationRepository.rescoreV3Certification).to.not.have.been.called;
     });
   });
 
@@ -301,7 +301,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       const sessionRepository = {
         isFinalized: sinon.stub(),
       };
-      const certificationRescoringRepository = {
+      const certificationEvaluationRepository = {
         rescoreV2Certification: sinon.stub(),
       };
       const courseAssessmentResultRepository = {
@@ -319,13 +319,13 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         juryId,
         certificationCourseRepository,
         sessionRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       });
 
       // then
       expect(error).to.be.instanceOf(CertificationCancelNotAllowedError);
-      expect(certificationRescoringRepository.rescoreV2Certification).to.not.have.been.called;
+      expect(certificationEvaluationRepository.rescoreV2Certification).to.not.have.been.called;
     });
   });
 });

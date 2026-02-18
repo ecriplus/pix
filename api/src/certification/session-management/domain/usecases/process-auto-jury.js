@@ -1,5 +1,5 @@
 /**
- * @typedef {import('./index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {import('./index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  */
@@ -13,7 +13,7 @@ import { CertificationIssueReportResolutionStrategies } from '../models/Certific
 
 /**
  * @param {object} params
- * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  */
@@ -23,7 +23,7 @@ export async function processAutoJury({
   certificationAssessmentRepository,
   certificationCourseRepository,
   challengeRepository,
-  certificationRescoringRepository,
+  certificationEvaluationRepository,
 }) {
   const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
     sessionId,
@@ -34,7 +34,7 @@ export async function processAutoJury({
       await _handleAutoJuryV3({
         certificationCourse,
         certificationAssessmentRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
       });
     }
 
@@ -44,7 +44,7 @@ export async function processAutoJury({
         certificationIssueReportRepository,
         challengeRepository,
         certificationAssessmentRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
       });
     }
   }
@@ -52,7 +52,7 @@ export async function processAutoJury({
 
 /**
  * @param {object} params
- * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  */
 async function _handleAutoJuryV2({
@@ -60,7 +60,7 @@ async function _handleAutoJuryV2({
   certificationIssueReportRepository,
   challengeRepository,
   certificationAssessmentRepository,
-  certificationRescoringRepository,
+  certificationEvaluationRepository,
 }) {
   const resolutionStrategies = new CertificationIssueReportResolutionStrategies({
     certificationIssueReportRepository,
@@ -90,7 +90,7 @@ async function _handleAutoJuryV2({
       certificationCourseId: certificationCourse.getId(),
     });
 
-    await certificationRescoringRepository.rescoreV2Certification({
+    await certificationEvaluationRepository.rescoreV2Certification({
       event: certificationJuryDoneEvent,
     });
   }
@@ -99,10 +99,10 @@ async function _handleAutoJuryV2({
 const _handleAutoJuryV3 = withTransaction(
   /**
    * @param {object} params
-   * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+   * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
    * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
    */
-  async ({ certificationCourse, certificationAssessmentRepository, certificationRescoringRepository }) => {
+  async ({ certificationCourse, certificationAssessmentRepository, certificationEvaluationRepository }) => {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
       certificationCourseId: certificationCourse.getId(),
     });
@@ -111,7 +111,7 @@ const _handleAutoJuryV3 = withTransaction(
         certificationCourseId: certificationCourse.getId(),
       });
 
-      await certificationRescoringRepository.rescoreV3Certification({
+      await certificationEvaluationRepository.rescoreV3Certification({
         event: certificationJuryDoneEvent,
       });
     }

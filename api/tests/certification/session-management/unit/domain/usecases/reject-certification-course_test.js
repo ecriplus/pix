@@ -11,13 +11,13 @@ describe('Unit | UseCase | reject-certification-course', function () {
     it('should reject a newly created assessment result', async function () {
       // given
       const certificationCourseRepository = { get: sinon.stub(), update: sinon.stub() };
-      const certificationRescoringRepository = { rescoreV2Certification: sinon.stub() };
+      const certificationEvaluationRepository = { rescoreV2Certification: sinon.stub() };
       const courseAssessmentResultRepository = { getLatestAssessmentResult: sinon.stub() };
       const juryId = 123;
 
       const dependencies = {
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       };
       const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V2 });
@@ -25,7 +25,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
 
       certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
       certificationCourseRepository.update.resolves();
-      certificationRescoringRepository.rescoreV2Certification.resolves();
+      certificationEvaluationRepository.rescoreV2Certification.resolves();
       courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
       // when
@@ -45,7 +45,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
         certificationCourse: expectedCertificationCourse,
       });
 
-      expect(certificationRescoringRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
+      expect(certificationEvaluationRepository.rescoreV2Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationCourseRejected({
           certificationCourseId,
           juryId,
@@ -97,13 +97,13 @@ describe('Unit | UseCase | reject-certification-course', function () {
     it('should reject a newly created assessment result', async function () {
       // given
       const certificationCourseRepository = { get: sinon.stub(), update: sinon.stub() };
-      const certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
+      const certificationEvaluationRepository = { rescoreV3Certification: sinon.stub() };
       const courseAssessmentResultRepository = { getLatestAssessmentResult: sinon.stub() };
       const juryId = 123;
 
       const dependencies = {
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       };
       const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
@@ -111,7 +111,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
 
       certificationCourseRepository.get.withArgs({ id: certificationCourseId }).resolves(certificationCourse);
       certificationCourseRepository.update.resolves();
-      certificationRescoringRepository.rescoreV3Certification.resolves();
+      certificationEvaluationRepository.rescoreV3Certification.resolves();
       courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
       // when
@@ -131,7 +131,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
         certificationCourse: expectedCertificationCourse,
       });
 
-      expect(certificationRescoringRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
+      expect(certificationEvaluationRepository.rescoreV3Certification).to.have.been.calledOnceWithExactly({
         event: new CertificationCourseRejected({
           certificationCourseId,
           juryId,
@@ -144,13 +144,13 @@ describe('Unit | UseCase | reject-certification-course', function () {
     it('should not reject the certification and throw NotFoundError', async function () {
       // given
       const certificationCourseRepository = { get: sinon.stub(), update: sinon.stub() };
-      const certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
+      const certificationEvaluationRepository = { rescoreV3Certification: sinon.stub() };
       const courseAssessmentResultRepository = { getLatestAssessmentResult: sinon.stub() };
       const juryId = 123;
 
       const dependencies = {
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       };
       const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
@@ -169,7 +169,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       // then
       expect(error).to.be.instanceOf(NotFoundError);
       expect(certificationCourseRepository.update).to.not.have.been.called;
-      expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.called;
+      expect(certificationEvaluationRepository.rescoreV3Certification).to.not.have.been.called;
     });
   });
 
@@ -177,13 +177,13 @@ describe('Unit | UseCase | reject-certification-course', function () {
     it('should not reject the certification and throw CertificationRejectNotAllowedError', async function () {
       // given
       const certificationCourseRepository = { get: sinon.stub(), update: sinon.stub() };
-      const certificationRescoringRepository = { rescoreV3Certification: sinon.stub() };
+      const certificationEvaluationRepository = { rescoreV3Certification: sinon.stub() };
       const courseAssessmentResultRepository = { getLatestAssessmentResult: sinon.stub() };
       const juryId = 123;
 
       const dependencies = {
         certificationCourseRepository,
-        certificationRescoringRepository,
+        certificationEvaluationRepository,
         courseAssessmentResultRepository,
       };
       const certificationCourse = domainBuilder.buildCertificationCourse({ version: AlgorithmEngineVersion.V3 });
@@ -204,7 +204,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       // then
       expect(error).to.be.instanceOf(CertificationRejectNotAllowedError);
       expect(certificationCourseRepository.update).to.not.have.been.called;
-      expect(certificationRescoringRepository.rescoreV3Certification).to.not.have.been.called;
+      expect(certificationEvaluationRepository.rescoreV3Certification).to.not.have.been.called;
     });
   });
 });

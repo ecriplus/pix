@@ -7,7 +7,7 @@ export const rejectCertificationCourse = async ({
   certificationCourseId,
   juryId,
   certificationCourseRepository,
-  certificationRescoringRepository,
+  certificationEvaluationRepository,
   courseAssessmentResultRepository,
 }) => {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
@@ -28,10 +28,10 @@ export const rejectCertificationCourse = async ({
   const event = new CertificationCourseRejected({ certificationCourseId, juryId });
 
   if (AlgorithmEngineVersion.isV3(certificationCourse.getVersion())) {
-    return certificationRescoringRepository.rescoreV3Certification({ event });
+    return certificationEvaluationRepository.rescoreV3Certification({ event });
   }
 
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
-    return certificationRescoringRepository.rescoreV2Certification({ event });
+    return certificationEvaluationRepository.rescoreV2Certification({ event });
   }
 };

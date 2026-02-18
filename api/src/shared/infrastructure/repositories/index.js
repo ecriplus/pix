@@ -1,6 +1,6 @@
-import * as certificationEvaluationApi from '../../../certification/evaluation/application/api/select-next-certification-challenge-api.js';
-import * as certificationEvaluationRepository from '../../../certification/evaluation/infrastructure/repositories/certification-challenge-repository.js';
+import * as certificationEvaluationApi from '../../../certification/evaluation/application/api/certification-evaluation-api.js';
 import { injectDependencies } from '../utils/dependency-injection.js';
+import * as certificationEvaluationRepository from './certification-evaluation-repository.js';
 import * as countryRepository from './country-repository.js';
 import * as knowledgeElementRepository from './knowledge-element-repository.js';
 
