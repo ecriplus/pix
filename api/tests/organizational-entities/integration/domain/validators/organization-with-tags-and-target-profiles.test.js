@@ -109,8 +109,27 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
       });
     });
 
-    context('when country code is below minimum value', function () {
-      it('returns an EntityValidation error', function () {
+    context('countryCode validation', function () {
+      it('returns a required error when countryCode is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          countryCode: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'countryCode',
+          message: 'Le code pays n’est pas renseigné.',
+        });
+      });
+
+      it('returns an EntityValidation error when country code is below minimum value', function () {
         // given
         const organization = {
           ...DEFAULT_ORGANIZATION,
@@ -128,10 +147,8 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
           message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
         });
       });
-    });
 
-    context('when country code is above maximum value', function () {
-      it('returns an EntityValidation error', function () {
+      it('returns an EntityValidation error when country code is above maximum value', function () {
         // given
         const organization = {
           ...DEFAULT_ORGANIZATION,
@@ -147,6 +164,48 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         expect(error.invalidAttributes).to.deep.include({
           attribute: 'countryCode',
           message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+        });
+      });
+    });
+
+    context('createdBy validation', function () {
+      it('returns a required error when createdBy is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          createdBy: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'createdBy',
+          message: "L'id du créateur est manquant",
+        });
+      });
+    });
+
+    context('administrationTeamId validation', function () {
+      it('returns a required error when administrationTeamId is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          administrationTeamId: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'administrationTeamId',
+          message: "L'id de l'équipe en charge est manquant",
         });
       });
     });

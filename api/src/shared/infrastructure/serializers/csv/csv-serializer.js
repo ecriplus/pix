@@ -164,18 +164,14 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'DPOEmail' ||
           columnName === 'parentOrganizationId' ||
           columnName === 'provinceCode' ||
-          columnName === 'emailForSCOActivation'
+          columnName === 'emailForSCOActivation' ||
+          columnName === 'administrationTeamId' ||
+          columnName === 'countryCode'
         ) {
           value = null;
         }
         if (columnName === 'locale') {
           value = 'fr-fr';
-        }
-        if (columnName === 'adminstrationTeamId') {
-          value = parseInt(value, 10);
-        }
-        if (columnName === 'countryCode') {
-          value = parseInt(value, 10);
         }
       }
       return value;

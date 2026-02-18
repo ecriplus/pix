@@ -83,12 +83,12 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             credit: '',
             locale: '',
             tags: '',
-            createdBy: '',
+            createdBy: null,
             documentationUrl: '',
             targetProfiles: '',
             organizationInvitationRole: '',
-            administrationTeamId: '',
-            countryCode: undefined,
+            administrationTeamId: null,
+            countryCode: null,
           },
         ];
 
