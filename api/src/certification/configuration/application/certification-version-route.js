@@ -110,5 +110,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-versions-api';
+const name = 'certification/configuration/certification-versions-api';
 export { name, register };

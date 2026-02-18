@@ -33,5 +33,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-enrolment-certification-eligibility-api';
+const name = 'certification/enrolment/certification-enrolment-certification-eligibility-api';
 export { name, register };

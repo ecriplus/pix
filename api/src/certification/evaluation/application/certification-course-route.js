@@ -57,5 +57,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-courses-api';
+const name = 'certification/evaluation/certification-courses-api';
 export { name, register };

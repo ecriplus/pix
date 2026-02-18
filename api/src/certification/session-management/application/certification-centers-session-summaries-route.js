@@ -31,5 +31,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'session-summaries-api';
+const name = 'certification/session-management/session-summaries-api';
 export { name, register };

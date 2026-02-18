@@ -95,5 +95,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'session-mass-import-api';
+const name = 'certification/enrolment/session-mass-import-api';
 export { name, register };

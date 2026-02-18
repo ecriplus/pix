@@ -83,5 +83,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'enrolment-api';
+const name = 'certification/enrolment/enrolment-api';
 export { name, register };

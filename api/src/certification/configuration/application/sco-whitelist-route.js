@@ -60,5 +60,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sco-whitelist-api';
+const name = 'certification/configuration/sco-whitelist-api';
 export { name, register };

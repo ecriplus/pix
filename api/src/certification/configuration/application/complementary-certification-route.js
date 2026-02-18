@@ -125,5 +125,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'complementary-certifications-api';
+const name = 'certification/configuration/complementary-certifications-api';
 export { name, register };

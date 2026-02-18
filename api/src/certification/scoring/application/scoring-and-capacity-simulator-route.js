@@ -34,6 +34,6 @@ const register = async (server) => {
   ]);
 };
 
-const name = 'scoring-and-capacity-simulator';
+const name = 'certification/scoring/scoring-and-capacity-simulator-api';
 
 export { name, register };

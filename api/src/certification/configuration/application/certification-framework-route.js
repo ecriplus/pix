@@ -133,5 +133,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-frameworks-api';
+const name = 'certification/configuration/certification-frameworks-api';
 export { name, register };

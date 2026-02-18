@@ -128,5 +128,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-results-api';
+const name = 'certification/results/certification-results-api';
 export { name, register };

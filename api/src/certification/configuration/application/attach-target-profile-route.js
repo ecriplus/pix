@@ -76,5 +76,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'attach-target-profile-api';
+const name = 'certification/configuration/attach-target-profile-api';
 export { name, register };
