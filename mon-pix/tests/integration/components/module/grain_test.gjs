@@ -1111,6 +1111,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         const verifyButton = screen.getByRole('button', { name: 'Vérifier ma réponse' });
         await click(verifyButton);
         await clock.tickAsync(VERIFY_RESPONSE_DELAY);
+
         await click(screen.getByRole('button', { name: t('pages.modulix.buttons.activity.retry') }));
         sinon.assert.calledOnce(onElementRetryStub);
         assert.ok(true);
