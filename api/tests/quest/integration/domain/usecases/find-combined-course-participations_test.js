@@ -183,4 +183,19 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
     expect(combinedCourseParticipations).lengthOf(1);
     expect(combinedCourseParticipations[0].id).equal(participation2.id);
   });
+
+  it('should include all paginated learners in the result even when they have no campaign or module participations', async function () {
+    // when
+    const { combinedCourseParticipations } = await usecases.findCombinedCourseParticipations({
+      combinedCourseId,
+      filters: { fullName: 'Paul' },
+    });
+
+    // then
+    expect(combinedCourseParticipations).lengthOf(1);
+    expect(combinedCourseParticipations[0]).instanceOf(CombinedCourseParticipationDetails);
+    expect(combinedCourseParticipations[0].id).to.equal(participation1.id);
+    expect(combinedCourseParticipations[0].nbCampaignsCompleted).to.equal(0);
+    expect(combinedCourseParticipations[0].nbModulesCompleted).to.equal(0);
+  });
 });
