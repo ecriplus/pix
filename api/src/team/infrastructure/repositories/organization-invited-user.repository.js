@@ -1,20 +1,22 @@
-import { knex } from '../../../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { InvitationNotFoundError, UserNotFoundError } from '../../../shared/domain/errors.js';
 import { OrganizationInvitedUser } from '../../domain/models/OrganizationInvitedUser.js';
 
 const get = async function ({ organizationInvitationId, userId }) {
-  const invitation = await knex('organization-invitations')
+  const knexConn = DomainTransaction.getConnection();
+
+  const invitation = await knexConn('organization-invitations')
     .select('id', 'organizationId', 'code', 'role', 'status')
     .where({ id: organizationInvitationId })
     .first();
   if (!invitation) throw new InvitationNotFoundError();
 
-  const user = await knex('users').select('id').where({ id: userId }).first();
+  const user = await knexConn('users').select('id').where({ id: userId }).first();
   if (!user) {
     throw new UserNotFoundError();
   }
 
-  const memberships = await knex('memberships')
+  const memberships = await knexConn('memberships')
     .select('id', 'userId', 'organizationRole')
     .where({
       organizationId: invitation.organizationId,
@@ -35,17 +37,18 @@ const get = async function ({ organizationInvitationId, userId }) {
 };
 
 const save = async function ({ organizationInvitedUser }) {
+  const knexConn = DomainTransaction.getConnection();
   const date = new Date();
 
   if (organizationInvitedUser.isAlreadyMemberOfOrganization) {
-    await knex('memberships')
+    await knexConn('memberships')
       .update({
         organizationRole: organizationInvitedUser.currentRole,
         updatedAt: date,
       })
       .where({ id: organizationInvitedUser.currentMembershipId });
   } else {
-    const [{ id: membershipId }] = await knex('memberships')
+    const [{ id: membershipId }] = await knexConn('memberships')
       .insert({
         organizationRole: organizationInvitedUser.currentRole,
         organizationId: organizationInvitedUser.invitation.organizationId,
@@ -56,7 +59,7 @@ const save = async function ({ organizationInvitedUser }) {
     organizationInvitedUser.currentMembershipId = membershipId;
   }
 
-  await knex('user-orga-settings')
+  await knexConn('user-orga-settings')
     .insert({
       userId: organizationInvitedUser.userId,
       currentOrganizationId: organizationInvitedUser.invitation.organizationId,
@@ -65,7 +68,7 @@ const save = async function ({ organizationInvitedUser }) {
     .onConflict('userId')
     .merge();
 
-  await knex('organization-invitations')
+  await knexConn('organization-invitations')
     .update({ status: organizationInvitedUser.status, updatedAt: date })
     .where({ id: organizationInvitedUser.invitation.id });
 };
