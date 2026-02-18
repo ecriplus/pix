@@ -19,6 +19,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
     type: 'SCO',
     administrationTeamId: 1,
     countryCode: 99123,
+    organizationLearnerTypeId: 456,
   };
 
   context('success', function () {
@@ -52,6 +53,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
               createdBy: 0,
               administrationTeamId: 1,
               countryCode: 99123,
+              organizationLearnerTypeId: 456,
             };
 
             // when
@@ -84,6 +86,7 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
           { attribute: 'createdBy', message: "L'id du créateur est manquant" },
           { attribute: 'administrationTeamId', message: "L'id de l'équipe en charge est manquant" },
           { attribute: 'countryCode', message: 'Le code pays n’est pas renseigné.' },
+          { attribute: 'organizationLearnerTypeId', message: "L'id du public prescrit est manquant" },
         ]);
       });
     });
@@ -109,8 +112,46 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
       });
     });
 
-    context('when country code is below minimum value', function () {
-      it('returns an EntityValidation error', function () {
+    context('countryCode validation', function () {
+      it('returns a required error when countryCode is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          countryCode: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'countryCode',
+          message: 'Le code pays n’est pas renseigné.',
+        });
+      });
+
+      it('returns an EntityValidation error when countryCode is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          countryCode: '99100',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'countryCode',
+          message: "Le code pays n'est pas un nombre",
+        });
+      });
+
+      it('returns an EntityValidation error when country code is below minimum value', function () {
         // given
         const organization = {
           ...DEFAULT_ORGANIZATION,
@@ -128,10 +169,8 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
           message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
         });
       });
-    });
 
-    context('when country code is above maximum value', function () {
-      it('returns an EntityValidation error', function () {
+      it('returns an EntityValidation error when country code is above maximum value', function () {
         // given
         const organization = {
           ...DEFAULT_ORGANIZATION,
@@ -147,6 +186,126 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         expect(error.invalidAttributes).to.deep.include({
           attribute: 'countryCode',
           message: 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+        });
+      });
+    });
+
+    context('createdBy validation', function () {
+      it('returns a required error when createdBy is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          createdBy: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'createdBy',
+          message: "L'id du créateur est manquant",
+        });
+      });
+
+      it('returns an EntityValidation error when createdBy is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          createdBy: '123456',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'createdBy',
+          message: "L'id du créateur n'est pas un nombre",
+        });
+      });
+    });
+
+    context('administrationTeamId validation', function () {
+      it('returns a required error when administrationTeamId is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          administrationTeamId: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'administrationTeamId',
+          message: "L'id de l'équipe en charge est manquant",
+        });
+      });
+
+      it('returns an EntityValidation error when administrationTeamId is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          administrationTeamId: '8001',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'administrationTeamId',
+          message: "L'id de l'équipe en charge n'est pas un nombre",
+        });
+      });
+    });
+
+    context('organizationLearnerTypeId validation', function () {
+      it('returns a required error when organizationLearnerTypeId is null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          organizationLearnerTypeId: null,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'organizationLearnerTypeId',
+          message: "L'id du public prescrit est manquant",
+        });
+      });
+
+      it('returns an EntityValidation error when organizationLearnerTypeId is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          organizationLearnerTypeId: '100025',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'organizationLearnerTypeId',
+          message: "L'id du public prescrit n'est pas un nombre",
         });
       });
     });

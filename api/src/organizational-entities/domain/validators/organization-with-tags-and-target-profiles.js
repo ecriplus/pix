@@ -49,18 +49,23 @@ const schema = Joi.object({
     .messages({
       'any.only': "Le rôle fourni doit avoir l'une des valeurs suivantes : ADMIN ou MEMBER",
     }),
-  createdBy: Joi.number().empty('').required().messages({
+  createdBy: Joi.number().empty(null).strict().required().messages({
     'any.required': "L'id du créateur est manquant",
     'number.base': "L'id du créateur n'est pas un nombre",
   }),
-  administrationTeamId: Joi.number().empty('').required().messages({
+  administrationTeamId: Joi.number().empty(null).strict().required().messages({
     'any.required': "L'id de l'équipe en charge est manquant",
     'number.base': "L'id de l'équipe en charge n'est pas un nombre",
   }),
-  countryCode: Joi.number().min(99000).max(99999).integer().required().messages({
+  countryCode: Joi.number().min(99000).max(99999).empty(null).integer().strict().required().messages({
     'any.required': 'Le code pays n’est pas renseigné.',
+    'number.base': "Le code pays n'est pas un nombre",
     'number.min': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
     'number.max': 'Le code pays doit être un nombre entier compris entre 99000 et 99999.',
+  }),
+  organizationLearnerTypeId: Joi.number().strict().empty(null).required().messages({
+    'any.required': "L'id du public prescrit est manquant",
+    'number.base': "L'id du public prescrit n'est pas un nombre",
   }),
 });
 

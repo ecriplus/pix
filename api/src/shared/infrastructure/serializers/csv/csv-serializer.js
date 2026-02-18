@@ -121,6 +121,7 @@ const requiredFieldNamesForOrganizationsImport = [
   'administrationTeamId',
   'parentOrganizationId',
   'countryCode',
+  'organizationLearnerTypeId',
 ];
 
 async function deserializeForOrganizationsImport(file) {
@@ -143,15 +144,17 @@ async function deserializeForOrganizationsImport(file) {
         ) {
           value = value.toUpperCase();
         }
-        if (columnName === 'createdBy') {
+        if (
+          columnName === 'createdBy' ||
+          columnName === 'parentOrganizationId' ||
+          columnName === 'administrationTeamId' ||
+          columnName === 'countryCode' ||
+          columnName === 'organizationLearnerTypeId'
+        ) {
           value = parseInt(value, 10);
         }
         if (columnName === 'emailInvitations' || columnName === 'emailForSCOActivation' || columnName === 'DPOEmail') {
           value = value.replaceAll(' ', '').toLowerCase();
-        }
-
-        if (columnName === 'parentOrganizationId') {
-          value = parseInt(value, 10);
         }
       } else {
         if (columnName === 'credit') {
@@ -164,18 +167,15 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'DPOEmail' ||
           columnName === 'parentOrganizationId' ||
           columnName === 'provinceCode' ||
-          columnName === 'emailForSCOActivation'
+          columnName === 'emailForSCOActivation' ||
+          columnName === 'administrationTeamId' ||
+          columnName === 'countryCode' ||
+          columnName === 'organizationLearnerTypeId'
         ) {
           value = null;
         }
         if (columnName === 'locale') {
           value = 'fr-fr';
-        }
-        if (columnName === 'adminstrationTeamId') {
-          value = parseInt(value, 10);
-        }
-        if (columnName === 'countryCode') {
-          value = parseInt(value, 10);
         }
       }
       return value;
