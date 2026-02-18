@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.334.0](https://github.com/1024pix/pix/compare/v5.333.0...v5.334.0) (2026-02-18)
+
+### :rocket: Amélioration
+
+- [#15123](https://github.com/1024pix/pix/pull/15123) MDX-18 modification transfert 
+- [#15152](https://github.com/1024pix/pix/pull/15152) modifs rangerfichiers ind 
+- [#15136](https://github.com/1024pix/pix/pull/15136) Permettre l'affichage des réponses courtes en cas de QCU déclaratif ou découverte sur Pix App (PIX-21287). 
+- [#15120](https://github.com/1024pix/pix/pull/15120) WIP module IA enseignants 
+
+### :building_construction: Tech
+
+- [#15040](https://github.com/1024pix/pix/pull/15040)  Generaliser le code specifique pour les certifs complementaires autour des candidats de certification (Pix-11341) 
+- [#15149](https://github.com/1024pix/pix/pull/15149) Ajoute un script de copie des templates d'attestation vers un bucket S3. 
+- [#15143](https://github.com/1024pix/pix/pull/15143) Améliore le lint de Pix Admin. 
+- [#15155](https://github.com/1024pix/pix/pull/15155) Ignorer le contenu des modules dans le check de format API (PIX-21599) 
+- [#15147](https://github.com/1024pix/pix/pull/15147) Uniformise les tâches CI de lint des fronts. 
+- [#15144](https://github.com/1024pix/pix/pull/15144) Utiliser les domaines transaction dans les repo certification 
+
+### :arrow_up: Montée de version
+
+- [#15148](https://github.com/1024pix/pix/pull/15148) Monté de version de epreuve-components en  v2.8.1
+
 # [5.333.0](https://github.com/1024pix/pix/compare/v5.332.0...v5.333.0) (2026-02-17)
 
 ### :rocket: Amélioration
