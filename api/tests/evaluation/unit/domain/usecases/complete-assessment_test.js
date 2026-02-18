@@ -19,7 +19,7 @@ describe('Unit | UseCase | complete-assessment', function () {
     };
 
     certificationEvaluationRepository = {
-      completeCertificationTest: _.noop,
+      completeCertificationAssessment: _.noop,
     };
 
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
@@ -61,7 +61,7 @@ describe('Unit | UseCase | complete-assessment', function () {
           sinon.stub(assessmentRepository, 'get').withArgs(assessment.id).resolves(assessment);
           sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
           sinon
-            .stub(certificationEvaluationRepository, 'completeCertificationTest')
+            .stub(certificationEvaluationRepository, 'completeCertificationAssessment')
             .rejects(new Error('should not been called'));
         });
 
@@ -93,7 +93,7 @@ describe('Unit | UseCase | complete-assessment', function () {
           .resolves(expectedCompletedAssessment);
         sinon.stub(assessmentRepository, 'completeByAssessmentId').resolves();
         sinon
-          .stub(certificationEvaluationRepository, 'completeCertificationTest')
+          .stub(certificationEvaluationRepository, 'completeCertificationAssessment')
           .withArgs(
             new CertificationCompletedJob({
               locale: 'fr',
@@ -111,7 +111,7 @@ describe('Unit | UseCase | complete-assessment', function () {
         });
 
         // then
-        expect(certificationEvaluationRepository.completeCertificationTest).to.have.been.called;
+        expect(certificationEvaluationRepository.completeCertificationAssessment).to.have.been.called;
         expect(actualCompletedAssessment).to.deepEqualInstance(expectedCompletedAssessment);
       });
     });

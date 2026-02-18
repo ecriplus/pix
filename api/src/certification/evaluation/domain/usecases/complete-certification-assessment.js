@@ -2,7 +2,7 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { CertificationCompletedJob } from '../events/CertificationCompleted.js';
 
-export const completeCertificationTest =
+export const completeCertificationAssessment =
   /**
    * @param {object} params
    * @param {number} params.certificationCourseId

@@ -67,7 +67,7 @@ export const selectNextCertificationChallenge = withTransaction(
 
 /**
  * @function
- * @name completeCertificationTest
+ * @name completeCertificationAssessment
  *
  * @param {object} params
  * @param {number} params.certificationCourseId
@@ -75,6 +75,6 @@ export const selectNextCertificationChallenge = withTransaction(
  *
  * @returns {Promise<void>}
  */
-export const completeCertificationTest = async ({ certificationCourseId, locale }) => {
-  return usecases.completeCertificationTest({ certificationCourseId, locale });
+export const completeCertificationAssessment = async ({ certificationCourseId, locale }) => {
+  return usecases.completeCertificationAssessment({ certificationCourseId, locale });
 };

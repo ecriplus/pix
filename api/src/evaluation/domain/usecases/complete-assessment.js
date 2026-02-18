@@ -8,7 +8,7 @@ const completeAssessment = async function ({
 }) {
   const assessment = await assessmentRepository.get(assessmentId);
   if (assessment.isCertification()) {
-    await certificationEvaluationRepository.completeCertificationTest({
+    await certificationEvaluationRepository.completeCertificationAssessment({
       certificationCourseId: assessment.certificationCourseId,
       locale,
     });

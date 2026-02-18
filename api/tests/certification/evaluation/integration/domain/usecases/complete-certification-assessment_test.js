@@ -11,9 +11,9 @@ import {
   sinon,
 } from '../../../../../test-helper.js';
 
-const { completeCertificationTest } = usecases;
+const { completeCertificationAssessment } = usecases;
 
-describe('Certification | Evaluation | Integration | Domain | UseCase | complete-certification-test', function () {
+describe('Certification | Evaluation | Integration | Domain | UseCase | complete-certification-assessment', function () {
   const locale = 'someLocale';
   let certificationCourseId, assessmentId, dependencies, clock;
   let certificationCompletedJobRepository_performAsyncStub;
@@ -48,7 +48,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
 
   context('when certification does not exist', function () {
     it('should throw a NotFound error', async function () {
-      const err = await catchErr(completeCertificationTest)({
+      const err = await catchErr(completeCertificationAssessment)({
         ...dependencies,
         certificationCourseId: certificationCourseId + 1,
       });
@@ -76,7 +76,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         .resolves();
 
       // when
-      await completeCertificationTest(dependencies);
+      await completeCertificationAssessment(dependencies);
 
       // then
       const assessmentStateAndUpdatedAt = await knex('assessments')
@@ -99,7 +99,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         await databaseBuilder.commit();
 
         // when
-        await completeCertificationTest(dependencies);
+        await completeCertificationAssessment(dependencies);
 
         // then
         const assessmentStateAndUpdatedAt = await knex('assessments')

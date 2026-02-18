@@ -37,18 +37,18 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
     });
   });
 
-  describe('#completeCertificationTest', function () {
-    it('should call completeCertificationTest', async function () {
+  describe('#completeCertificationAssessment', function () {
+    it('should call completeCertificationAssessment', async function () {
       // given
       const locale = Symbol('locale');
       const certificationCourseId = Symbol('certificationCourseId');
-      sinon.stub(usecases, 'completeCertificationTest');
+      sinon.stub(usecases, 'completeCertificationAssessment');
 
       // when
-      await certificationEvaluationApi.completeCertificationTest({ certificationCourseId, locale });
+      await certificationEvaluationApi.completeCertificationAssessment({ certificationCourseId, locale });
 
       // then
-      expect(usecases.completeCertificationTest).to.have.been.calledOnceWith({ locale, certificationCourseId });
+      expect(usecases.completeCertificationAssessment).to.have.been.calledOnceWith({ locale, certificationCourseId });
     });
   });
 });

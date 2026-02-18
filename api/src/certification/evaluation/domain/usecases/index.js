@@ -31,7 +31,7 @@ import * as evaluationSessionRepository from '../../infrastructure/repositories/
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
-import { completeCertificationTest } from './complete-certification-test.js';
+import { completeCertificationAssessment } from './complete-certification-assessment.js';
 import { createCompanionAlert } from './create-companion-alert.js';
 import { deneutralizeChallenge } from './deneutralize-challenge.js';
 import { getCertificationCourse } from './get-certification-course.js';
@@ -112,7 +112,7 @@ const usecasesWithoutInjectedDependencies = {
   retrieveLastOrCreateCertificationCourse,
   simulateFlashAssessmentScenario,
   scoreV3Certification,
-  completeCertificationTest,
+  completeCertificationAssessment,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 

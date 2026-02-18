@@ -11,12 +11,12 @@
  *
  * @returns {Promise<void>}
  */
-export const completeCertificationTest = async function ({
+export const completeCertificationAssessment = async function ({
   certificationCourseId,
   locale,
   certificationEvaluationApi,
 }) {
-  return certificationEvaluationApi.completeCertificationTest({
+  return certificationEvaluationApi.completeCertificationAssessment({
     certificationCourseId,
     locale,
   });
