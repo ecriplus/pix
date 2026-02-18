@@ -212,5 +212,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-centers-admin';
+const name = 'organizational-entities/certification-center-admin';
 export { name, register };

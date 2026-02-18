@@ -30,6 +30,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'administration-teams-admin-api';
+const name = 'organizational-entities/administration-team-admin-api';
 
 export { name, register };

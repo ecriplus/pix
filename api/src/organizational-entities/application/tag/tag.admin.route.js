@@ -92,6 +92,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'tags-admin-api';
+const name = 'organizational-entities/tag-admin-api';
 
 export { name, register };
