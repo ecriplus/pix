@@ -75,5 +75,5 @@ const register = async function (server) {
     },
   ]);
 };
-const name = 'assessment-pix1d-api';
+const name = 'school/assessment-pix1d-api';
 export { name, register };
