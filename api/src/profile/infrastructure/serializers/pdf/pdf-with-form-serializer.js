@@ -1,12 +1,11 @@
-import { readFile } from 'node:fs/promises';
-
 import JSZip from 'jszip';
 import { PDFDocument } from 'pdf-lib';
 
 import { FONTS, initializeFonts } from '../../../../shared/infrastructure/serializers/pdf/utils.js';
+import { getDataBuffer } from '../../../../shared/infrastructure/utils/buffer.js';
 
-export async function serialize(templateUrl, entry, creationDate = new Date()) {
-  const template = await readFile(templateUrl);
+export async function serializeStream(stream, entry, creationDate = new Date()) {
+  const template = await getDataBuffer(stream);
 
   return serializePdf(template, entry, creationDate);
 }
