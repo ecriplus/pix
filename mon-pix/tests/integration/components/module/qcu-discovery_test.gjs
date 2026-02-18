@@ -188,9 +188,28 @@ module('Integration | Component | Module | QCUDiscovery', function (hooks) {
       assert.dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 })).exists();
     });
   });
+
+  module('when qcu discovery has short proposals', function () {
+    test('should display proposals in a grid', async function (assert) {
+      // given
+      const hasShortProposals = true;
+      const qcuDiscoveryElementWithShortProposals = _getQcuDiscoveryElement(hasShortProposals);
+      const { proposals } = qcuDiscoveryElementWithShortProposals;
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDiscovery @element={{qcuDiscoveryElementWithShortProposals}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(screen.getByRole('button', { name: proposals[0].content }).parentElement)
+        .hasClass('element-qcu-discovery__short-proposals');
+    });
+  });
 });
 
-function _getQcuDiscoveryElement() {
+function _getQcuDiscoveryElement(hasShortProposals = false) {
   const instruction = '<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>';
   const solution = '1';
 
@@ -226,5 +245,5 @@ function _getQcuDiscoveryElement() {
     },
   ];
 
-  return { id: '0c397035-a940-441f-8936-050db7f997af', instruction, proposals, solution };
+  return { id: '0c397035-a940-441f-8936-050db7f997af', hasShortProposals, instruction, proposals, solution };
 }
