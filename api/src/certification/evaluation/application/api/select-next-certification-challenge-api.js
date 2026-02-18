@@ -2,7 +2,6 @@
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentEndedError} AssessmentEndedError
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
- * @typedef {import ('./models/CertificationAssessmentIdentifier.js').CertificationAssessmentIdentifier} CertificationAssessmentIdentifier
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
@@ -13,7 +12,7 @@ import * as assessmentRepository from '../../infrastructure/repositories/assessm
  * @function
  * @name selectNextCertificationChallenge
  *
- * @param {CertificationAssessmentIdentifier} params.assessmentId
+ * @param {number} params.assessmentId
  * @param {string} params.locale
  *
  * @returns {Challenge}
