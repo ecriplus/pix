@@ -259,5 +259,5 @@ const register = async function (server) {
     },
   ]);
 };
-const name = 'combined-courses-api';
+const name = 'quest/combined-courses-api';
 export { name, register };
