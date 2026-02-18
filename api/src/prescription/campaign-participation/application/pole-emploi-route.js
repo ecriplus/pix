@@ -60,5 +60,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'pole-emploi-api';
+const name = 'prescription/campaign-participation/pole-emploi-api';
 export { name, register };

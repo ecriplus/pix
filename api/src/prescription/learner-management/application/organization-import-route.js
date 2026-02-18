@@ -81,6 +81,6 @@ const register = async (server) => {
   ]);
 };
 
-const name = 'organization-import-api';
+const name = 'prescription/learner-management/organization-import-api';
 
 export { name, register };

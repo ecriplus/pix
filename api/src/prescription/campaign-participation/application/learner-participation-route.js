@@ -78,5 +78,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'learner-participation-api';
+const name = 'prescription/campaign-participation/learner-participation-api';
 export { name, register };

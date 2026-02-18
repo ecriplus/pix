@@ -68,6 +68,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sup-learner-list-api';
+const name = 'prescription/organization-learner/sup-learner-list-api';
 
 export { name, register };

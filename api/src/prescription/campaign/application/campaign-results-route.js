@@ -103,5 +103,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'campaigns-participation-api';
+const name = 'prescription/campaign/campaign-results-api';
 export { name, register };

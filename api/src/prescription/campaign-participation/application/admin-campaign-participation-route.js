@@ -34,5 +34,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'admin-campaign-participation-api';
+const name = 'prescription/campaign-participation/admin-campaign-participation-api';
 export { name, register };

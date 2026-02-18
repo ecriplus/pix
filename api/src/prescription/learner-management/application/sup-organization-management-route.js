@@ -184,5 +184,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sup-organization-management';
+const name = 'prescription/learner-management/sup-organization-management-api';
 export { name, register };

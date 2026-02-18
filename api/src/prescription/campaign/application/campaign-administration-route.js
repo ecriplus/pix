@@ -360,5 +360,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'campaigns-administration-api';
+const name = 'prescription/campaign/campaign-administration-api';
 export { name, register };
