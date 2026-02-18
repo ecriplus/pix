@@ -129,6 +129,25 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         });
       });
 
+      it('returns an EntityValidation error when countryCode is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          countryCode: '99100',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'countryCode',
+          message: "Le code pays n'est pas un nombre",
+        });
+      });
+
       it('returns an EntityValidation error when country code is below minimum value', function () {
         // given
         const organization = {
@@ -187,6 +206,25 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
           message: "L'id du créateur est manquant",
         });
       });
+
+      it('returns an EntityValidation error when createdBy is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          createdBy: '123456',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'createdBy',
+          message: "L'id du créateur n'est pas un nombre",
+        });
+      });
     });
 
     context('administrationTeamId validation', function () {
@@ -206,6 +244,25 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         expect(error.invalidAttributes).to.deep.include({
           attribute: 'administrationTeamId',
           message: "L'id de l'équipe en charge est manquant",
+        });
+      });
+
+      it('returns an EntityValidation error when administrationTeamId is not a number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          administrationTeamId: '8001',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'administrationTeamId',
+          message: "L'id de l'équipe en charge n'est pas un nombre",
         });
       });
     });

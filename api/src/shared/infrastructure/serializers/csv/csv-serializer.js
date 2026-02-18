@@ -143,15 +143,16 @@ async function deserializeForOrganizationsImport(file) {
         ) {
           value = value.toUpperCase();
         }
-        if (columnName === 'createdBy') {
+        if (
+          columnName === 'createdBy' ||
+          columnName === 'parentOrganizationId' ||
+          columnName === 'administrationTeamId' ||
+          columnName === 'countryCode'
+        ) {
           value = parseInt(value, 10);
         }
         if (columnName === 'emailInvitations' || columnName === 'emailForSCOActivation' || columnName === 'DPOEmail') {
           value = value.replaceAll(' ', '').toLowerCase();
-        }
-
-        if (columnName === 'parentOrganizationId') {
-          value = parseInt(value, 10);
         }
       } else {
         if (columnName === 'credit') {

@@ -42,6 +42,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     importStudentsFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
     administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
     countryCode = databaseBuilder.factory.buildCertificationCpfCountry({
+      code: 99997,
       originalName: 'Lalaland',
       commonName: 'Lalaland',
     }).code;
