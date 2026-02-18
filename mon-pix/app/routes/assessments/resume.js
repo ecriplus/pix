@@ -53,20 +53,15 @@ export default class ResumeRoute extends Route {
   }
 
   _resumeAssessmentWithoutCheckpoint(assessment) {
-    const { assessmentIsCompleted } = this._parseState(assessment);
-
-    if (this.assessmentHasNoMoreQuestions || assessmentIsCompleted) {
+    if (this.assessmentHasNoMoreQuestions) {
       return this._rateAssessment(assessment);
     }
     return this._routeToNextChallenge(assessment);
   }
 
   _resumeAssessmentWithCheckpoint(assessment) {
-    const { assessmentIsCompleted, userHasSeenCheckpoint, userHasReachedCheckpoint } = this._parseState(assessment);
+    const { userHasSeenCheckpoint, userHasReachedCheckpoint } = this._parseState(assessment);
 
-    if (assessmentIsCompleted) {
-      return this._rateAssessment(assessment);
-    }
     if (this.assessmentHasNoMoreQuestions && userHasSeenCheckpoint) {
       return this._rateAssessment(assessment);
     }
@@ -87,12 +82,9 @@ export default class ResumeRoute extends Route {
       quantityOfAnswersInAssessment > 0 &&
       quantityOfAnswersInAssessment % ENV.APP.NUMBER_OF_CHALLENGES_BETWEEN_TWO_CHECKPOINTS === 0;
 
-    const assessmentIsCompleted = assessment.isCompleted;
-
     return {
       userHasSeenCheckpoint,
       userHasReachedCheckpoint,
-      assessmentIsCompleted,
     };
   }
 

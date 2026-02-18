@@ -9,8 +9,6 @@ describe('Integration | Repository | Jobs | CertificationCompletedJobRepository'
     it('publish a job', async function () {
       // given
       const data = new CertificationCompletedJob({
-        assessmentId: 1,
-        userId: 2,
         certificationCourseId: 3,
         locale: FRENCH_SPOKEN,
       });

@@ -44,7 +44,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         // given
         const assessmentId = 1214;
         const certificationCourseId = 1234;
-        const userId = 4567;
 
         const candidate = domainBuilder.certification.evaluation.buildCandidate({
           subscriptionScope: SCOPES.CORE,
@@ -57,8 +56,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         const event = new CertificationCompletedJob({
-          assessmentId,
-          userId,
           certificationCourseId,
         });
 

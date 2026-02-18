@@ -35,10 +35,7 @@ export default class ChallengeRoute extends Route {
     }
 
     if (!challenge) {
-      return RSVP.hash({
-        assessment,
-        challenge,
-      });
+      this.router.transitionTo('assessments.resume', assessment.id);
     }
 
     // WORKAROUND for PIX-4471 (wrongly displayed focusedout message)

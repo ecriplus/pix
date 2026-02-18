@@ -1,6 +1,6 @@
 import { KnexTimeoutError } from 'knex/lib/util/timeout.js';
 
-import * as selectNextCertificationChallengeApi from '../../../../../../src/certification/evaluation/application/api/select-next-certification-challenge-api.js';
+import * as certificationEvaluationApi from '../../../../../../src/certification/evaluation/application/api/certification-evaluation-api.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
@@ -55,7 +55,7 @@ describe('Integration | Application | Certification | Evaluation | API', functio
       });
 
       // when
-      const timeoutError = await catchErr(selectNextCertificationChallengeApi.selectNextCertificationChallenge)({
+      const timeoutError = await catchErr(certificationEvaluationApi.selectNextCertificationChallenge)({
         assessmentId: originalAssessment.id,
         locale: FRENCH_FRANCE,
       });

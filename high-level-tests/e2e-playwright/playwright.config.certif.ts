@@ -13,7 +13,8 @@ export default defineConfig({
     {
       name: 'Recette',
       testDir: 'tests/recette-certif',
-      testMatch: '**/pro/**/*.spec.ts',
+      testMatch: '**/*.spec.ts',
+      testIgnore: '**/prepare-user-ready-for-certifications.spec.ts',
       dependencies: ['Setup - utilisateur certifiable et prêt pour le cléa'],
     },
   ],

@@ -11,6 +11,8 @@ export async function findByCertificationCourseId(certificationCourseId) {
       abortReason: 'certification-courses.abortReason',
       maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
+      state: 'assessments.state',
+      updatedAt: 'assessments.updatedAt',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -25,4 +27,14 @@ export async function findByCertificationCourseId(certificationCourseId) {
     ...data,
     answers,
   });
+}
+
+export async function update(assessmentSheet) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('assessments')
+    .update({
+      updatedAt: assessmentSheet.updatedAt,
+      state: assessmentSheet.state,
+    })
+    .where('assessments.id', '=', assessmentSheet.assessmentId);
 }

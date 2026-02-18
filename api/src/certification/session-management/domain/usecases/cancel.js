@@ -1,7 +1,7 @@
 /**
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').SessionRepository} SessionRepository
- * @typedef {import('./index.js').CertificationRescoringRepository} CertificationRescoringRepository
+ * @typedef {import('./index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {import('./index.js').CourseAssessmentResultRepository} CourseAssessmentResultRepository
  */
 
@@ -15,7 +15,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
  * @param {number} params.certificationCourseId
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SessionRepository} params.sessionRepository
- * @param {CertificationRescoringRepository} params.certificationRescoringRepository
+ * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
  * @param {CourseAssessmentResultRepository} params.courseAssessmentResultRepository
  */
 export const cancel = async function ({
@@ -23,7 +23,7 @@ export const cancel = async function ({
   juryId,
   certificationCourseRepository,
   sessionRepository,
-  certificationRescoringRepository,
+  certificationEvaluationRepository,
   courseAssessmentResultRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
@@ -48,10 +48,10 @@ export const cancel = async function ({
   });
 
   if (AlgorithmEngineVersion.isV3(certificationCourse.getVersion())) {
-    await certificationRescoringRepository.rescoreV3Certification({ event });
+    await certificationEvaluationRepository.rescoreV3Certification({ event });
   }
 
   if (AlgorithmEngineVersion.isV2(certificationCourse.getVersion())) {
-    await certificationRescoringRepository.rescoreV2Certification({ event });
+    await certificationEvaluationRepository.rescoreV2Certification({ event });
   }
 };

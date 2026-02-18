@@ -700,8 +700,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
             expect(response.statusCode).to.equal(204);
 
             await expect(CertificationCompletedJob.name).to.have.been.performed.withJobPayload({
-              assessmentId: certificationAssessment.id,
-              userId: certifiableUserId,
               certificationCourseId,
               locale: FRENCH_FRANCE,
             });
