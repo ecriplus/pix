@@ -65,5 +65,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'badge-criteria-api';
+const name = 'evaluation/badge-criteria-api';
 export { name, register };

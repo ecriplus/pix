@@ -17,5 +17,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'progressions-api';
+const name = 'evaluation/progressions-api';
 export { name, register };
