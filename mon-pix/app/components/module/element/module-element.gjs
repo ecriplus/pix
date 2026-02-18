@@ -1,8 +1,11 @@
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
 export default class ModuleElement extends Component {
+  @service modulixPreviewMode;
+
   @tracked shouldDisplayRequiredMessage = false;
   @tracked isOnRetryMode = false;
 
@@ -39,6 +42,14 @@ export default class ModuleElement extends Component {
 
   get canValidateElement() {
     throw new Error('ModuleElement.canValidateElement not implemented');
+  }
+
+  get hasShortProposals() {
+    if (!this.element.hasShortProposals || this.modulixPreviewMode.isEnabled) {
+      return 'proposals';
+    }
+    const isNumberOfProposalsOdd = this.element.proposals.length === 3;
+    return isNumberOfProposalsOdd ? '3-short-proposals' : 'short-proposals';
   }
 
   resetAnswers() {

@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 .element-qcu-declarative {
   width: 100%;
@@ -20,11 +21,31 @@
     color: var(--pix-neutral-800);
   }
 
-  &__proposals {
-    display:flex;
-    flex-direction: column;
+  &__short-proposals, &__proposals, &__3-short-proposals {
     gap: var(--pix-spacing-3x);
     margin-top: var(--pix-spacing-4x);
+  }
+
+  &__proposals {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__short-proposals {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__3-short-proposals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoints.device-is('mobile') {
+    &__short-proposals, &__3-short-proposals {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__feedback {

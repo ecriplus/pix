@@ -72,7 +72,7 @@ export default class ModuleQcuDeclarative extends ModuleElement {
         <p class="element-qcu-declarative__complementary-instruction">
           {{t "pages.modulix.qcuDeclarative.complementaryInstruction"}}
         </p>
-        <div class="element-qcu-declarative__proposals">
+        <div class="element-qcu-declarative__{{this.hasShortProposals}}">
           {{#each this.element.proposals as |proposal|}}
             <ProposalButton
               @proposal={{proposal}}
