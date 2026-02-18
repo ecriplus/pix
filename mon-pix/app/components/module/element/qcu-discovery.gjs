@@ -73,7 +73,7 @@ export default class ModuleQcuDiscovery extends ModuleElement {
         <p class="element-qcu-discovery__direction">
           {{t "pages.modulix.qcuDiscovery.direction"}}
         </p>
-        <div class="element-qcu-discovery__{{this.hasShortProposals}}">
+        <div class="element-qcu-discovery__{{this.proposalsStyle}}">
           {{#each this.element.proposals as |proposal|}}
             <ProposalButton
               @proposal={{proposal}}
