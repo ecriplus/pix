@@ -291,6 +291,7 @@ export default class ModulixStepper extends Component {
               @onExpandToggle={{@onExpandToggle}}
               @onNextButtonClick={{this.displayNextStep}}
               @shouldDisplayNextButton={{this.shouldDisplayVerticalNextButton index}}
+              @preventScrollAndFocus={{this.preventScrollAndFocus}}
               @updateSkipButton={{@updateSkipButton}}
               @nextButtonName={{t "pages.modulix.buttons.stepper.next.vertical.name"}}
               @lastDisplayedStepIndex={{index}}
