@@ -177,6 +177,10 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
     });
 
     it('should update passage when participation already exists', async function () {
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        moduleId: '1234-abcdef',
+        status: 'STARTED',
+      });
       const learnerParticipationId = databaseBuilder.factory.buildOrganizationLearnerParticipation({
         status: 'STARTED',
         organizationLearnerId: organizationLearner.id,
