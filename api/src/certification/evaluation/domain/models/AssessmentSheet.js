@@ -68,6 +68,10 @@ export class AssessmentSheet {
     return this.abortReason === ABORT_REASONS.TECHNICAL;
   }
 
+  get isStarted() {
+    return this.state === Assessment.states.STARTED;
+  }
+
   complete() {
     if (this.state === Assessment.states.STARTED) {
       this.state = Assessment.states.COMPLETED;

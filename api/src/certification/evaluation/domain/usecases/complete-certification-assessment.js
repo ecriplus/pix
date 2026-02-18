@@ -1,5 +1,4 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { CertificationCompletedJob } from '../events/CertificationCompleted.js';
 
 export const completeCertificationAssessment =
@@ -15,11 +14,9 @@ export const completeCertificationAssessment =
 
     if (!assessmentSheet) throw new NotFoundError('Assessment not found');
 
-    const shouldStartScoreJob = assessmentSheet.state === Assessment.states.STARTED;
-    assessmentSheet.complete();
-    await assessmentSheetRepository.update(assessmentSheet);
-
-    if (shouldStartScoreJob) {
+    if (assessmentSheet.isStarted) {
+      assessmentSheet.complete();
+      await assessmentSheetRepository.update(assessmentSheet);
       await certificationCompletedJobRepository.performAsync(
         new CertificationCompletedJob({
           certificationCourseId,

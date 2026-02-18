@@ -3,7 +3,7 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet', function () {
-  context('isAbortReasonTechnical', function () {
+  context('get isAbortReasonTechnical', function () {
     it('should return false when abort reason is null', function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         abortReason: null,
@@ -23,6 +23,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
       expect(assessmentSheet.isAbortReasonTechnical).to.be.false;
     });
   });
+
   context('complete', function () {
     let clock, assessmentSheetBaseData;
     const now = new Date();
@@ -78,6 +79,28 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
               updatedAt: new Date('2021-10-29'),
             }),
           );
+        });
+      });
+  });
+
+  context('get isStarted', function () {
+    it(`returns true when state is ${Assessment.states.STARTED}`, function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        state: Assessment.states.STARTED,
+      });
+
+      expect(assessmentSheet.isStarted).to.be.true;
+    });
+
+    Object.values(Assessment.states)
+      .filter((state) => state !== Assessment.states.STARTED)
+      .forEach((state) => {
+        it(`return false when state is ${state}`, async function () {
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            state,
+          });
+
+          expect(assessmentSheet.isStarted).to.be.false;
         });
       });
   });
