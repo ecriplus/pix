@@ -25,11 +25,13 @@ import * as certificationCandidateRepository from '../../infrastructure/reposito
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as pixPlusCertificationCourseRepository from '../../infrastructure/repositories/pix-plus-certification-course-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
+import { completeCertificationTest } from './complete-certification-test.js';
 import { createCompanionAlert } from './create-companion-alert.js';
 import { deneutralizeChallenge } from './deneutralize-challenge.js';
 import { getCertificationCourse } from './get-certification-course.js';
@@ -62,6 +64,7 @@ import { simulateFlashAssessmentScenario } from './simulate-flash-assessment-sce
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {versionRepository} VersionRepository
+ * @typedef {certificationCompletedJobRepository} CertificationCompletedJobRepository
  * @typedef {services} Services
  */
 const dependencies = {
@@ -95,6 +98,7 @@ const dependencies = {
   certificationChallengeLiveAlertRepository,
   pixPlusCertificationCourseRepository,
   versionRepository,
+  certificationCompletedJobRepository,
   services,
 };
 
@@ -108,6 +112,7 @@ const usecasesWithoutInjectedDependencies = {
   retrieveLastOrCreateCertificationCourse,
   simulateFlashAssessmentScenario,
   scoreV3Certification,
+  completeCertificationTest,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
