@@ -60,5 +60,5 @@ const register = async function (server) {
   server.route([...userRoutes]);
 };
 
-const name = 'attestation-api';
+const name = 'profile/attestation-api';
 export { name, register };
