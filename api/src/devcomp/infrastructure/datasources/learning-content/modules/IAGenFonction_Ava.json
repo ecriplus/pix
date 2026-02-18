@@ -577,7 +577,7 @@
                     {
                       "id": "021d4850-4231-4811-8a2c-d0c3a14265ff",
                       "type": "text",
-                      "content": "<em>[à transformer en POI avec un format \"code\"]</em>"
+                      "content": "<p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
                     },
                     {
                       "id": "36f8d720-4607-4bbd-8b36-161f782e8f70",
@@ -617,7 +617,7 @@
                         },
                         {
                           "type": "text",
-                          "content": "<code>\",&nbsp;&nbsp;<br>\"arguments\":&nbsp;<br>{ location\": \"</code>"
+                          "content": "<blockquote>\",<br>\"arguments\":<br>{ location\": \"</blockquote>"
                         },
                         {
                           "input": "location",
@@ -646,7 +646,7 @@
                         },
                         {
                           "type": "text",
-                          "content": "<code>\",<br>\"date\": \"</code><br>"
+                          "content": "<p><code>\",<br> \"date\": \"</code></p>"
                         },
                         {
                           "input": "date",
@@ -1303,7 +1303,7 @@
               "element": {
                 "id": "9ff41ea1-9020-4bdc-a273-eb43e1f42ffe",
                 "type": "text",
-                "content": "Steven utilise un logiciel d’IA conversationnelle.&nbsp; <br>Il a donné accès à son agenda.&nbsp; <br><br>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l’<strong>agenda</strong>."
+                "content": "<p>Steven utilise un logiciel d’IA conversationnelle.&nbsp;</p><p>Il a donné accès à son agenda.</p><p>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l'<strong>agenda</strong>.&nbsp;</p>"
               }
             },
             {
@@ -1314,7 +1314,7 @@
                 "isCompletionRequired": false,
                 "title": "ChatPix configuration appel 2 outils",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmljomhkk00024z0167vunpga",
-                "instruction": "À&nbsp;vous de jouer ! Vous avez 5 prompts.",
+                "instruction": "<p>À&nbsp;vous de jouer !</p>",
                 "solution": "",
                 "height": 500
               }
@@ -1325,16 +1325,7 @@
                 "id": "2dee621b-251b-4ef0-8f5f-ee03fc833c14",
                 "type": "expand",
                 "title": "🔑 Indice",
-                "content": "Avez-vous vérifié que votre prompt fait bien appel à l’agenda ?"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c2aa7e53-3496-49a3-9626-24151550d042",
-                "type": "expand",
-                "title": "🔑 Indice",
-                "content": "Avez-vous vérifié que votre prompt nécessite bien une recherche sur internet ?"
+                "content": "<p>Avez-vous vérifié que votre prompt fait bien appel à l'<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
               }
             },
             {
@@ -1343,7 +1334,7 @@
                 "id": "c136506a-5fa1-4903-9476-d8a1700e964b",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l’<strong>agenda</strong>, votre réponse devrait être validée. ✅<br><br> Voici quelques exemples&nbsp;:&nbsp;<br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires où des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul><br>"
+                "content": "<p>Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l'<strong>agenda</strong>, votre réponse devrait être validée.</p><br><br><p> Voici quelques exemples&nbsp;:&nbsp;</p><br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires où des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul><br>"
               }
             }
           ]
