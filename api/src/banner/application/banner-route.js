@@ -14,5 +14,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'src-banners-api';
+const name = 'banner/banner-api';
 export { name, register };
