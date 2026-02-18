@@ -24,4 +24,33 @@ export const findByOrganizationAndOrganizationLearnerId = async ({
   return toDomain({ ...result, passages });
 };
 
+export const findByOrganizationAndOrganizationLearnerIds = async ({
+  organizationLearnerIds,
+  organizationId,
+  organizationLearnerWithParticipationApi,
+  organizationLearnerParticipationRepository = questOrganizationLearnerParticipationRepository,
+  moduleIds = [],
+}) => {
+  const passagesByLearnerId = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds(
+    {
+      organizationLearnerIds,
+      moduleIds,
+    },
+  );
+  const resultsByLearnerId = await organizationLearnerWithParticipationApi.findByOrganizationAndOrganizationLearnerIds({
+    organizationLearnerIds,
+    organizationId,
+  });
+
+  const eligibilitiesByLearnerId = new Map();
+  for (const organizationLearnerId of organizationLearnerIds) {
+    const result = resultsByLearnerId.get(organizationLearnerId);
+    const passages = passagesByLearnerId.get(organizationLearnerId) ?? [];
+    if (result) {
+      eligibilitiesByLearnerId.set(organizationLearnerId, toDomain({ ...result, passages }));
+    }
+  }
+  return eligibilitiesByLearnerId;
+};
+
 const toDomain = (organizationLearnersWithParticipations) => new Eligibility(organizationLearnersWithParticipations);
