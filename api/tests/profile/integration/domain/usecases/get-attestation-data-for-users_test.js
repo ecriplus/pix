@@ -21,6 +21,9 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
 
   describe('#getAttestationDataForUsers', function () {
     it('should return profile rewards', async function () {
+      const fakeData = Symbol('fakeData');
+      const attestationStorageStub = { readFile: sinon.stub().resolves(fakeData) };
+
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
@@ -40,6 +43,7 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
         attestationKey: attestation.key,
         userIds: [firstUser.id, secondUser.id],
         locale,
+        attestationStorage: attestationStorageStub,
       });
 
       expect(results).to.deep.equal({
@@ -47,7 +51,7 @@ describe('Profile | Integration | Domain | get-attestation-data-for-users', func
           firstUser.toForm(firstCreatedAt, locale, normalizeAndRemoveAccents),
           secondUser.toForm(secondCreatedAt, locale, normalizeAndRemoveAccents),
         ],
-        templateName: attestation.templateName,
+        template: fakeData,
       });
       expect(results.data[0].get('firstName')).to.equal('Alex');
       expect(results.data[0].get('lastName')).to.equal('TERIEUR');
