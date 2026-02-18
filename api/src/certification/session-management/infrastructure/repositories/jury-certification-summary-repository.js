@@ -13,7 +13,7 @@ const findBySessionId = async function ({ sessionId }) {
 
   const juryCertificationSummaryDTOs = await _getJuryCertificationSummaries(orderResults);
 
-  return _.map(juryCertificationSummaryDTOs, _toDomain);
+  return juryCertificationSummaryDTOs.map(_toDomain);
 };
 
 const findBySessionIdPaginated = async function ({ page, sessionId }) {
@@ -28,7 +28,7 @@ const findBySessionIdPaginated = async function ({ page, sessionId }) {
   const orderedResults = await _getByCertificationCourseIds(orderedCertificationCourseIds);
 
   const juryCertificationSummaryDTOs = await _getJuryCertificationSummaries(orderedResults);
-  const juryCertificationSummaries = _.map(juryCertificationSummaryDTOs, _toDomain);
+  const juryCertificationSummaries = juryCertificationSummaryDTOs.map(_toDomain);
   return {
     pagination,
     juryCertificationSummaries,

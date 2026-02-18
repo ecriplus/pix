@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertification } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertification.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
@@ -20,20 +18,23 @@ describe('Integration | Repository | CertificationCandidate', function () {
     beforeEach(async function () {
       // given
       const anotherSessionId = databaseBuilder.factory.buildSession().id;
-      _.each(
-        [
-          { lastName: 'Rine', firstName: 'Lena', sessionId },
-          { lastName: 'Pafromage', firstName: 'Lara', sessionId },
-          { lastName: 'Mate', firstName: 'Otto', sessionId },
-          { lastName: 'Attrak', firstName: 'Pat', sessionId: anotherSessionId },
-          { lastName: 'Registre', firstName: 'Jean', sessionId: anotherSessionId },
-          { lastName: 'Damant', firstName: 'Evy', sessionId },
-        ],
-        (candidate) => {
-          const aCandidate = databaseBuilder.factory.buildCertificationCandidate(candidate);
-          databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: aCandidate.id });
+      [
+        { lastName: 'Rine', firstName: 'Lena', sessionId },
+        { lastName: 'Pafromage', firstName: 'Lara', sessionId },
+        { lastName: 'Mate', firstName: 'Otto', sessionId },
+        { lastName: 'Attrak', firstName: 'Pat', sessionId: anotherSessionId },
+        {
+          lastName: 'Registre',
+          firstName: 'Jean',
+          sessionId: anotherSessionId,
         },
-      );
+        { lastName: 'Damant', firstName: 'Evy', sessionId },
+      ].forEach((candidate) => {
+        const aCandidate = databaseBuilder.factory.buildCertificationCandidate(candidate);
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: aCandidate.id,
+        });
+      });
 
       await databaseBuilder.commit();
     });
@@ -65,19 +66,25 @@ describe('Integration | Repository | CertificationCandidate', function () {
           firstName: 'Otto',
           sessionId,
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: ottoMate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: ottoMate.id,
+        });
         const patAttrak = databaseBuilder.factory.buildCertificationCandidate({
           lastName: 'Attrak',
           firstName: 'Pat',
           sessionId,
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: patAttrak.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: patAttrak.id,
+        });
         const evyDamant = databaseBuilder.factory.buildCertificationCandidate({
           lastName: 'Damant',
           firstName: 'Evy',
           sessionId,
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: evyDamant.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: evyDamant.id,
+        });
 
         databaseBuilder.factory.buildComplementaryCertificationSubscription({
           complementaryCertificationId: rockCertification.id,
@@ -157,7 +164,9 @@ describe('Integration | Repository | CertificationCandidate', function () {
         reconciledAt,
       }).id;
 
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId });
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId,
+      });
 
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         complementaryCertificationId: complementaryCertification.id,
@@ -170,10 +179,15 @@ describe('Integration | Repository | CertificationCandidate', function () {
     context('when there is one certification candidate with the given session id and user id', function () {
       it('should fetch the candidate', async function () {
         // when
-        const result = await certificationCandidateRepository.getBySessionIdAndUserId({ sessionId, userId });
+        const result = await certificationCandidateRepository.getBySessionIdAndUserId({
+          sessionId,
+          userId,
+        });
 
         // then
-        const actualCandidate = _.omit(result, 'subscriptions');
+        // eslint-disable-next-line no-unused-vars
+        const { subscriptions, ...actualCandidate } = result;
+
         expect(actualCandidate).to.deep.equal({
           accessibilityAdjustmentNeeded: false,
           authorizedToStart: false,
@@ -263,7 +277,9 @@ describe('Integration | Repository | CertificationCandidate', function () {
           id: 456,
           lastName: 'last-name',
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: certificationCandidate.id,
+        });
         await databaseBuilder.commit();
 
         // when
@@ -301,7 +317,9 @@ describe('Integration | Repository | CertificationCandidate', function () {
           id: 456,
           lastName: 'last-name',
         });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: candidate.id,
+        });
 
         await databaseBuilder.commit();
         const wrongCandidateId = 1298;
@@ -325,8 +343,12 @@ describe('Integration | Repository | CertificationCandidate', function () {
     context('when certification candidate is not found', function () {
       it('should throw NotFound error', async function () {
         // given
-        const candidate = databaseBuilder.factory.buildCertificationCandidate({ id: 1 });
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
+        const candidate = databaseBuilder.factory.buildCertificationCandidate({
+          id: 1,
+        });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: candidate.id,
+        });
         const wrongCandidateId = 99;
         await databaseBuilder.commit();
 
@@ -344,7 +366,9 @@ describe('Integration | Repository | CertificationCandidate', function () {
       it('should return the candidate with empty complementary certification', async function () {
         // given
         const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate();
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: certificationCandidate.id,
+        });
         await databaseBuilder.commit();
 
         // when
@@ -406,7 +430,9 @@ describe('Integration | Repository | CertificationCandidate', function () {
       it('should return the candidate with his complementary certification', async function () {
         // given
         const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate();
-        databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: certificationCandidate.id,
+        });
         const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
           label: 'Complementary certification 2',
         });
@@ -423,7 +449,13 @@ describe('Integration | Repository | CertificationCandidate', function () {
         });
 
         // then
-        const certificationCandidateWithComplementaryCertification = _.omit(result, 'subscriptions');
+
+        const {
+          // eslint-disable-next-line no-unused-vars
+          subscriptions,
+          ...certificationCandidateWithComplementaryCertification
+        } = result;
+
         expect(certificationCandidateWithComplementaryCertification).to.deep.equal({
           accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
           authorizedToStart: certificationCandidate.authorizedToStart,

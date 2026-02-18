@@ -1,9 +1,5 @@
 import { Parser } from '@json2csv/plainjs';
 
-const { omit } = lodash;
-
-import lodash from 'lodash';
-
 import {
   COMPLEMENTARY_CERTIFICATION_SUFFIX,
   headers,
@@ -26,9 +22,9 @@ function _getComplementaryCertificationsHeaders(habilitationLabels) {
 }
 
 function _getHeadersAsArray(complementaryCertificationsHeaders = [], shouldDisplayBillingModeColumns) {
-  const certificationCenterCsvHeaders = shouldDisplayBillingModeColumns
-    ? headers
-    : omit(headers, ['billingMode', 'prepaymentCode']);
+  // eslint-disable-next-line no-unused-vars
+  const { billingMode, prepaymentCode, ...headersWithoutBillingMode } = headers;
+  const certificationCenterCsvHeaders = shouldDisplayBillingModeColumns ? headers : headersWithoutBillingMode;
 
   const csvHeaders = Object.keys(certificationCenterCsvHeaders).reduce((arr, key) => [...arr, headers[key]], []);
   return [...csvHeaders, ...complementaryCertificationsHeaders];
