@@ -285,6 +285,7 @@ export class ModuleFactory {
 
   static #buildQCM(element) {
     return new QCM({
+      hasShortProposals: element.hasShortProposals,
       id: element.id,
       instruction: element.instruction,
       locales: element.locales,

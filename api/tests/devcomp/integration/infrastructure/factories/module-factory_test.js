@@ -1116,6 +1116,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: true,
                         id: '30701e93-1b4d-4da4-b018-fa756c07d53f',
                         type: 'qcm',
                         instruction: '<p>Quels sont les 3 piliers de Pix ?</p>',
@@ -2067,6 +2068,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         {
                           elements: [
                             {
+                              hasShortProposals: true,
                               id: '30701e93-1b4d-4da4-b018-fa756c07d53f',
                               type: 'qcm',
                               instruction: '<p>Quels sont les 3 piliers de Pix&#8239;?</p>',
