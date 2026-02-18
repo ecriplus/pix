@@ -6,7 +6,7 @@ import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helpe
 import { buildAttestationUserDetail } from '../../../../tooling/domain-builder/factory/index.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-user-detail-by-organization-id', function () {
-  let clock;
+  let clock, attestationStorageStub;
   const now = new Date('2022-12-25');
 
   beforeEach(function () {
@@ -14,6 +14,9 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
       now,
       toFake: ['Date'],
     });
+    attestationStorageStub = {
+      readFile: sinon.stub().resolves(Symbol('fakeData')),
+    };
   });
 
   afterEach(async function () {
@@ -53,6 +56,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
         attestationKey: attestation.key,
         organizationId,
         locale,
+        attestationStorage: attestationStorageStub,
       });
 
       expect(results[0]).to.be.instanceOf(AttestationUserDetail);
@@ -110,6 +114,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
         attestationKey: attestation.key,
         organizationId,
         locale,
+        attestationStorage: attestationStorageStub,
       });
 
       //then

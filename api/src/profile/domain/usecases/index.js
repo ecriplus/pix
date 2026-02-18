@@ -1,6 +1,7 @@
 import * as competenceEvaluationRepository from '../../../evaluation/infrastructure/repositories/competence-evaluation-repository.js';
 import { repositories } from '../../../profile/infrastructure/repositories/index.js';
 import * as profileRewardRepository from '../../../profile/infrastructure/repositories/profile-reward-repository.js';
+import { AttestationStorage } from '../../../quest/infrastructure/storage/attestation-storage.js';
 import * as areaRepository from '../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../shared/infrastructure/repositories/competence-repository.js';
 import * as knowledgeElementRepository from '../../../shared/infrastructure/repositories/knowledge-element-repository.js';
@@ -11,6 +12,8 @@ import * as attestationRepository from '../../infrastructure/repositories/attest
 import * as campaignParticipationRepository from '../../infrastructure/repositories/campaign-participation-repository.js';
 import * as organizationProfileRewardRepository from '../../infrastructure/repositories/organizations-profile-reward-repository.js';
 import * as rewardRepository from '../../infrastructure/repositories/reward-repository.js';
+
+const attestationStorage = AttestationStorage.createClient();
 
 const dependencies = {
   competenceRepository,
@@ -25,6 +28,7 @@ const dependencies = {
   campaignParticipationRepository,
   stringUtils,
   PromiseUtils,
+  attestationStorage,
 };
 
 import { getAttestationDataForUsers } from './get-attestation-data-for-users.js';
