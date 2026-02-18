@@ -22,5 +22,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'challenges-api';
+const name = 'shared/challenges-api';
 export { name, register };

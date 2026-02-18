@@ -162,5 +162,5 @@ const register = async function (server) {
   server.route(routes);
 };
 
-const name = 'assessments-api';
+const name = 'shared/assessments-api';
 export { name, register };

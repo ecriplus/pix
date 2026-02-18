@@ -17,5 +17,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-cpf-countries';
+const name = 'shared/certification-cpf-countries-api';
 export { name, register };
