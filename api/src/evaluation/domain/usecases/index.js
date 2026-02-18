@@ -1,5 +1,4 @@
 import * as certificationEvaluationCandidateRepository from '../../../certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
-import { certificationCompletedJobRepository } from '../../../certification/evaluation/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as llmApi from '../../../llm/application/api/llm-api.js';
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
@@ -42,7 +41,6 @@ import * as getNewAcquiredStagesService from '../services/stages/get-new-acquire
 const dependencies = {
   algorithmDataFetcherService,
   answerJobRepository,
-  certificationCompletedJobRepository,
   fromDatasourceObject,
   answerRepository,
   correctionRepository: repositories.correctionRepository,
@@ -50,6 +48,7 @@ const dependencies = {
   assessmentRepository,
   autonomousCourseRepository: repositories.autonomousCourseRepository,
   autonomousCourseTargetProfileRepository: repositories.autonomousCourseTargetProfileRepository,
+  certificationEvaluationRepository: repositories.certificationEvaluationRepository,
   badgeAcquisitionRepository,
   badgeCriteriaRepository,
   badgeForCalculationRepository,

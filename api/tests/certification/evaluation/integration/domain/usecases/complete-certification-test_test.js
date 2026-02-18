@@ -33,7 +33,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
 
     const certificationCompletedJobRepository = {
       performAsync: certificationCompletedJobRepository_performAsyncStub,
-    };
+    }; // todo lancer pour de vrai, await expect scheduled withjobscount
 
     dependencies = {
       certificationCourseId,

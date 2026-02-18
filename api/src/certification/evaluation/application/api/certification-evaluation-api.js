@@ -64,3 +64,17 @@ export const selectNextCertificationChallenge = withTransaction(
     return usecases.getNextChallenge({ assessment, locale });
   },
 );
+
+/**
+ * @function
+ * @name completeCertificationTest
+ *
+ * @param {object} params
+ * @param {number} params.certificationCourseId
+ * @param {string} params.locale
+ *
+ * @returns {Promise<void>}
+ */
+export const completeCertificationTest = async ({ certificationCourseId, locale }) => {
+  return usecases.completeCertificationTest({ certificationCourseId, locale });
+};

@@ -36,4 +36,19 @@ describe('Unit | Application | Certification | Evaluation | API', function () {
       expect(usecases.getNextChallenge).to.have.been.called;
     });
   });
+
+  describe('#completeCertificationTest', function () {
+    it('should call completeCertificationTest', async function () {
+      // given
+      const locale = Symbol('locale');
+      const certificationCourseId = Symbol('certificationCourseId');
+      sinon.stub(usecases, 'completeCertificationTest');
+
+      // when
+      await certificationEvaluationApi.completeCertificationTest({ certificationCourseId, locale });
+
+      // then
+      expect(usecases.completeCertificationTest).to.have.been.calledOnceWith({ locale, certificationCourseId });
+    });
+  });
 });

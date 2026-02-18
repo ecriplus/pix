@@ -1,29 +1,25 @@
-import { CertificationCompletedJob } from '../../../certification/evaluation/domain/events/CertificationCompleted.js';
 import { AlreadyRatedAssessmentError } from '../errors.js';
 
 const completeAssessment = async function ({
   assessmentId,
   assessmentRepository,
-  certificationCompletedJobRepository,
+  certificationEvaluationRepository,
   locale,
 }) {
   const assessment = await assessmentRepository.get(assessmentId);
+  if (assessment.isCertification()) {
+    await certificationEvaluationRepository.completeCertificationTest({
+      certificationCourseId: assessment.certificationCourseId,
+      locale,
+    });
+    return await assessmentRepository.get(assessmentId);
+  }
 
   if (assessment.isCompleted()) {
     throw new AlreadyRatedAssessmentError();
   }
 
   await assessmentRepository.completeByAssessmentId(assessmentId);
-
-  if (assessment.certificationCourseId) {
-    await certificationCompletedJobRepository.performAsync(
-      new CertificationCompletedJob({
-        certificationCourseId: assessment.certificationCourseId,
-        locale,
-      }),
-    );
-  }
-
   return assessment;
 };
 
