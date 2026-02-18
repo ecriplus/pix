@@ -13,6 +13,7 @@ import ModuleGrain from 'mon-pix/components/module/grain/grain';
 import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import { inc } from 'mon-pix/helpers/inc';
 import { TrackedSet } from 'tracked-built-ins';
+import { localCopy } from 'tracked-toolbox';
 
 import didInsert from '../../../modifiers/modifier-did-insert';
 import { VERIFY_RESPONSE_DELAY } from './element';
@@ -33,8 +34,7 @@ export default class ModulixStepper extends Component {
 
   @tracked displayedStepIndex = 0;
 
-  @tracked
-  preventScrollAndFocus = false;
+  @localCopy('args.preventInitialScrollAndFocus', false) preventScrollAndFocus;
 
   @tracked shouldAppearToRight = false;
   @tracked shouldDisplayHorizontalNextButton = this.shouldDisplayNextButton;
