@@ -10,8 +10,8 @@ const __dirname = import.meta.dirname;
 const translationsFolder = path.resolve(path.join(__dirname, '../../../../translations'));
 
 export const defaultSettings = {
-  locales: ['en', 'fr', 'es', 'es-419', 'nl'],
-  fallbacks: { 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl' },
+  locales: ['en', 'fr', 'es', 'es-419', 'nl', 'it'],
+  fallbacks: { 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl', 'it-*': 'it' },
   defaultLocale: 'fr', // default locale must match an existing translation file (fr => fr.json)
   directory: translationsFolder,
   objectNotation: true,
