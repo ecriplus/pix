@@ -32,14 +32,13 @@ export const synchronize = async ({ organizationLearnerId, moduleIds, modulesApi
 
   const learnerParticipationsByModule = await knexConn('organization_learner_participations')
     .select('organization_learner_participations.id', 'referenceId')
-    .select('organization_learner_participations.id', 'referenceId')
     .whereNull('deletedAt')
+    .where('organizationLearnerId', organizationLearnerId)
     .whereIn('referenceId', moduleIds);
 
   for (const modulePassage of modulePassages) {
     const learnerParticipationModule = learnerParticipationsByModule.find(
-      (learnerParticipation) =>
-        learnerParticipation.moduleId === modulePassage.id || learnerParticipation.referenceId === modulePassage.id,
+      (learnerParticipation) => learnerParticipation.referenceId === modulePassage.id,
     );
 
     const { id: organizationLearnerParticipationId, ...organizationLearnerPassageParticipation } =
