@@ -137,5 +137,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'passages-api';
+const name = 'devcomp/passages-api';
 export { name, register };

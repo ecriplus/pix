@@ -32,5 +32,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'users-api';
+const name = 'devcomp/users-api';
 export { name, register };

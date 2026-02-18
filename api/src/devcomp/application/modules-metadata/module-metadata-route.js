@@ -24,5 +24,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'modules-metadata-api';
+const name = 'devcomp/modules-metadata-api';
 export { name, register };

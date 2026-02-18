@@ -50,5 +50,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'modules-api';
+const name = 'devcomp/modules-api';
 export { name, register };

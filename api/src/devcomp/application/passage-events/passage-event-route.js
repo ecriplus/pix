@@ -38,5 +38,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'passage-events-api';
+const name = 'devcomp/passage-events-api';
 export { name, register };
