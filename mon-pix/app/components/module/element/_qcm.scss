@@ -1,4 +1,5 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 .element-qcm {
   &__instruction {
@@ -12,7 +13,7 @@
     color: var(--pix-neutral-500);
   }
 
-  &__proposals {
+  &__proposals, &__short-proposals, &__3-short-proposals {
     margin: var(--pix-spacing-4x) 0;
 
     @media (not (prefers-reduced-motion: reduce)) {
@@ -38,6 +39,30 @@
       border-color: var(--pix-success-700);
 
       --state-background-color: var(--pix-success-50);
+    }
+  }
+
+  &__short-proposals, &__3-short-proposals {
+    display: grid;
+    gap: var(--pix-spacing-3x);
+
+    .pix-checkbox + .pix-checkbox {
+      margin: 0;
+    }
+  }
+
+  &__short-proposals {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__3-short-proposals {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoints.device-is('mobile') {
+    &__short-proposals, &__3-short-proposals {
+      display: flex;
+      flex-direction: column;
     }
   }
 
