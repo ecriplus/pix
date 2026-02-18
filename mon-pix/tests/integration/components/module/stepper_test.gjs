@@ -2510,8 +2510,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       focusAndScrollStub.restore();
     });
 
-    module('when preventInitialFocusAndScroll is true', function () {
-      test("it should not call 'modulixAutoScroll.focusAndScroll' function when rendering component", async function (assert) {
+    module('when preventInitialScrollAndFocus is true', function () {
+      test("it prevents scroll and focus on stepper when rendering component", async function (assert) {
         // given
         const steps = [
           {
@@ -2557,8 +2557,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       });
     });
 
-    module('when preventInitialFocusAndScroll is false', function () {
-      test("it should call 'modulixAutoScroll.focusAndScroll' function when rendering component", async function (assert) {
+    module('when preventInitialScrollAndFocus is false', function () {
+      test("it prevents scroll and focus on stepper when rendering component", async function (assert) {
         // given
         const steps = [
           {
