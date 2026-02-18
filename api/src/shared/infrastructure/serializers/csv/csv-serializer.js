@@ -121,6 +121,7 @@ const requiredFieldNamesForOrganizationsImport = [
   'administrationTeamId',
   'parentOrganizationId',
   'countryCode',
+  'organizationLearnerTypeId',
 ];
 
 async function deserializeForOrganizationsImport(file) {
@@ -147,7 +148,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'createdBy' ||
           columnName === 'parentOrganizationId' ||
           columnName === 'administrationTeamId' ||
-          columnName === 'countryCode'
+          columnName === 'countryCode' ||
+          columnName === 'organizationLearnerTypeId'
         ) {
           value = parseInt(value, 10);
         }
@@ -167,7 +169,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'provinceCode' ||
           columnName === 'emailForSCOActivation' ||
           columnName === 'administrationTeamId' ||
-          columnName === 'countryCode'
+          columnName === 'countryCode' ||
+          columnName === 'organizationLearnerTypeId'
         ) {
           value = null;
         }
