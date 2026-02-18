@@ -1597,6 +1597,7 @@
               "element": {
                 "id": "4e03396f-1e10-4171-a60f-15a4acd3112e",
                 "type": "custom",
+                "instruction": "",
                 "tagName": "trouver-mdp-rs",
                 "props": {
                   "titleLevel": 2,
