@@ -18,8 +18,6 @@ const completeAssessment = async function ({
   if (assessment.certificationCourseId) {
     await certificationCompletedJobRepository.performAsync(
       new CertificationCompletedJob({
-        assessmentId: assessment.id,
-        userId: assessment.userId,
         certificationCourseId: assessment.certificationCourseId,
         locale,
       }),

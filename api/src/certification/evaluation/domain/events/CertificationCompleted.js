@@ -1,7 +1,5 @@
 export class CertificationCompletedJob {
-  constructor({ assessmentId, userId, certificationCourseId, locale }) {
-    this.assessmentId = assessmentId;
-    this.userId = userId;
+  constructor({ certificationCourseId, locale }) {
     this.certificationCourseId = certificationCourseId;
     this.locale = locale;
   }

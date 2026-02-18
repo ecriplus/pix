@@ -168,8 +168,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Scoring
     it('should score the certification', async function () {
       // given
       const event = new CertificationCompletedJob({
-        assessmentId: completedCertificationAssessmentId,
-        userId: certifiableUserId,
         certificationCourseId,
         locale: FRENCH_SPOKEN,
       });
@@ -214,8 +212,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Scoring
     it('should rollback scoring if any error happens', async function () {
       // given
       const event = new CertificationCompletedJob({
-        assessmentId: completedCertificationAssessmentId,
-        userId: certifiableUserId,
         certificationCourseId,
         locale: FRENCH_SPOKEN,
       });
@@ -333,8 +329,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Scoring
     it('should acquire the double certification', async function () {
       // given
       const event = new CertificationCompletedJob({
-        assessmentId: completedCertificationAssessmentId,
-        userId: certifiableUserId,
         certificationCourseId,
         locale: FRENCH_SPOKEN,
       });
@@ -385,8 +379,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Scoring
     it('should rollback scoring if any error happens', async function () {
       // given
       const event = new CertificationCompletedJob({
-        assessmentId: completedCertificationAssessmentId,
-        userId: certifiableUserId,
         certificationCourseId,
         locale: FRENCH_SPOKEN,
       });

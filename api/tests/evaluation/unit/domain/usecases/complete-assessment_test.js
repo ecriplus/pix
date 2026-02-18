@@ -87,8 +87,6 @@ describe('Unit | UseCase | complete-assessment', function () {
           .stub(certificationCompletedJobRepository, 'performAsync')
           .withArgs(
             new CertificationCompletedJob({
-              assessmentId: assessment.id,
-              userId: assessment.userId,
               certificationCourseId: assessment.certificationCourseId,
             }),
           )

@@ -12,7 +12,8 @@
  * @typedef {import('../../../../session-management/domain/events/CertificationCourseRejected.js').CertificationCourseRejected} CertificationCourseRejected
  * @typedef {import('../../../../session-management/domain/events/CertificationJuryDone.js').CertificationJuryDone} CertificationJuryDone
  * @typedef {import('../../events/CertificationRescored.js').default} CertificationRescored
- * @typedef {CertificationJuryDone | CertificationCourseRejected | CertificationCourseUnrejected | CertificationCancelled | CertificationRescored | CertificationUncancelled} CertificationRescoringEvent
+ * @typedef {import('../../events/CertificationCompleted.js').default} CertificationCompleted
+ * @typedef {CertificationJuryDone | CertificationCourseRejected | CertificationCourseUnrejected | CertificationCancelled | CertificationRescored | CertificationUncancelled | CertificationCompleted} CertificationScoringEvent
  */
 
 import CertificationCancelled from '../../../../../shared/domain/events/CertificationCancelled.js';
@@ -24,7 +25,7 @@ import { createV3AssessmentResult } from './create-v3-assessment-result.js';
 export const handleV3CertificationScoring =
   /**
    * @param {object} params
-   * @param {CertificationRescoringEvent} [params.event]
+   * @param {CertificationScoringEvent} [params.event]
    * @param {Candidate} params.candidate
    * @param {AssessmentSheet} params.assessmentSheet
    * @param {FlashAssessmentAlgorithm} params.algorithm
@@ -93,7 +94,7 @@ export const handleV3CertificationScoring =
 
 /**
  * @param {object} params
- * @param {CertificationRescoringEvent} [params.event]
+ * @param {CertificationScoringEvent} [params.event]
  * @param {AssessmentSheet} params.assessmentSheet
  * @param {FlashAssessmentAlgorithm} params.algorithm
  * @param {V3CertificationScoring} params.v3CertificationScoring

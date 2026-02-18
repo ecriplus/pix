@@ -7,13 +7,11 @@ import { expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | Certification | Evaluation | Application | jobs | CertificationCompletedJobController', function () {
   let certificationCompletedJobController, data;
   const certificationCourseId = 123;
-  const userId = 4567;
 
   beforeEach(function () {
     certificationCompletedJobController = new CertificationCompletedJobController();
     data = new CertificationCompletedJob({
       certificationCourseId,
-      userId,
       locale: FRENCH_SPOKEN,
     });
   });
