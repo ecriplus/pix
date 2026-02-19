@@ -31,39 +31,40 @@
               "type": "element",
               "element": {
                 "id": "1f083f72-4c0a-41d6-a8f8-a9b8c16d5bb5",
-                "type": "qcu-declarative",
+                "type": "qcu-discovery",
                 "instruction": "<p>Dans votre pratique professionnelle actuelle, quel est votre usage de l’intelligence artificielle ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Je n’utilise pas du tout l’IA dans mon travail d’enseignant (je n’ai pas encore essayé ou je ne sais pas encore comment l’intégrer).</p>",
+                    "content": "<p>Je n’utilise pas du tout l’IA dans mon travail d’enseignant&nbsp;: je ne sais pas comment l’intégrer ou je ne souhaite pas l’utiliser.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’Éducation, du Sport et de la Recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnelles</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Je l’utilise ponctuellement, par exemple pour reformuler des consignes, trouver des idées d’exercices ou gagner du temps dans mes préparations.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’Éducation, du Sport et de la Recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnelles</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je l’intègre régulièrement dans mon travail (préparation de cours, différenciation pédagogique, aide à l’évaluation, supports pour les élèves).</p>",
                     "feedback": {
-                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’Éducation, du Sport et de la Recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnelles</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je ne sais pas.<br></p>",
+                    "content": "<p>Je ne souhaite pas répondre.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’éducation, du sport et de la recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnels</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
+                      "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’Éducation, du Sport et de la Recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnelles</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
                     }
                   }
-                ]
+                ],
+                "solution": "2"
               }
             }
           ]
@@ -78,7 +79,7 @@
               "element": {
                 "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "<p>L’IA s’impose désormais comme un <strong>puissant levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un usage éclairé et responsable.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’éducation nationale a publié en juin 2026 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Il veut fournir des repères pour que&nbsp; l’usage de l’IA s’effectue au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École et de la liberté pédagogique.</p>"
+                "content": "<p>L’IA s’impose désormais comme un <strong>puissant levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un usage éclairé et responsable.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2026 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Il veut fournir des repères pour que&nbsp;l’usage de l’IA s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
               }
             }
           ]
@@ -164,7 +165,7 @@
                     {
                       "id": "8640574a-91ba-4dd1-918c-f1446f38a2de",
                       "type": "text",
-                      "content": "Julien, professeur de mathématiques&nbsp;: <br><blockquote>«&nbsp;Moi, personnellement,  je m’en sers en amont de l’évaluation. Je demande à l’IA de m’aider à construire une grille de critères précise ou à lister les attendus de fin de cycle. Une fois la grille faite, c’est moi qui corrige les copies et qui note.&nbsp;»</blockquote>"
+                      "content": "<p>Julien, professeur de mathématiques&nbsp;:</p><blockquote>«&nbsp;Moi, personnellement,  je m’en sers en amont de l’évaluation. Je demande à l’IA de m’aider à construire une grille de critères précise ou à lister les attendus de fin de cycle. Une fois la grille faite, c’est moi qui corrige les copies et qui note.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "0725c260-c520-48e8-8317-4861f54f53d9",
@@ -502,12 +503,12 @@
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe4emeanonymisé.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe_4eme_anonymisée.xls",
                         "isGoodAnswer": true
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎exportENT4emeC.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎export_ENT_4emeC.xls",
                         "isGoodAnswer": false
                       }
                     },
@@ -524,7 +525,7 @@
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement.",
+                        "content": "À partir de la fiche vierge en PJ propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement. 📎annexe_plan_accompagnement_personnalisé.pdf",
                         "isGoodAnswer": true
                       }
                     },
@@ -631,7 +632,7 @@
                     },
                     {
                       "title": "Vincent",
-                      "description": "4e – français",
+                      "description": "4e – Français",
                       "text": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/bulle-homme.png",
@@ -640,7 +641,7 @@
                     },
                     {
                       "title": "Mickaël",
-                      "description": "3e – histoire-géo",
+                      "description": "3e – Histoire-Géographie",
                       "text": "Mickaël autorise les élèves à utiliser un logiciel d’IA générative grand public chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_bureau.png",
@@ -658,7 +659,7 @@
                     },
                     {
                       "title": "Guillaume",
-                      "description": "terminal – Mathématiques",
+                      "description": "Terminale – Mathématiques",
                       "text": "Guillaume donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/ordi-homme.png",
@@ -714,7 +715,11 @@
                     "diagnosis": "Les pratiques de Mickaël et Guillaume ne respectent pas le cadre d’usage de l’IA en éducation&nbsp;: l’outil doit rester<strong> encadré, progressif et sécurisé</strong> pour éviter toute délégation et tout risque de remplacer l’effort intellectuel de l’élève."
                   }
                 },
-                "solutions": ["1", "2", "4"]
+                "solutions": [
+                  "1",
+                  "2",
+                  "4"
+                ]
               }
             }
           ]
@@ -871,7 +876,7 @@
                           "content": "L’utiliser directement pour gagner du temps.",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Le gain de temps est un avantage évident lié à l’usage de l’IA, mais cela peut devenir aussi un piège si l’on fait pas attention au contenu généréà rédiger.</p>"
+                            "diagnosis": "<p>Le gain de temps est un avantage évident lié à l’usage de l’IA, mais cela peut devenir aussi un piège si l’on ne fait pas attention au contenu généré à rédiger.</p>"
                           }
                         },
                         {
@@ -879,7 +884,7 @@
                           "content": "La modifier uniquement si le style ne convient pas.",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Lorsque l’IA nous fournit un résultat,&nbsp;la question du style n’est pas à négliger, ce n’est pas la priorité.</p>"
+                            "diagnosis": "<p>Lorsque l’IA nous fournit un résultat,&nbsp;la question du style n’est pas à négliger, mais ce n’est pas la priorité.</p>"
                           }
                         },
                         {
@@ -909,7 +914,7 @@
               "element": {
                 "id": "2b91f1e0-97e9-44c0-a07f-5759976be002",
                 "type": "qrocm",
-                "instruction": "<p>Pour chacune des tâches suivantes, choisissez l’outil le plus adapté selon des préconisations du cadre.</p>",
+                "instruction": "<p>Pour chacune des tâches suivantes, choisissez l’outil numérique le plus efficace et respectueux du cadre.</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -936,7 +941,9 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -963,7 +970,9 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -990,7 +999,9 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -1017,7 +1028,9 @@
                         "content": "un logiciel d’IA générative"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1075,7 +1088,9 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -1098,7 +1113,9 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -1121,7 +1138,9 @@
                         "content": "usage non conforme"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1131,7 +1150,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.<br></p>",
-                    "diagnosis": "<p>Les logiciels d’IA générative grand public ne garantissent pas la <strong>non-réutilisation</strong> des données transmises. Il est donc interdit de transmettre des données concernant une personne physique ou morale ou des oeuvres protégées par le droit d’auteur.</p>"
+                    "diagnosis": "<p>Les logiciels d’IA générative grand public ne garantissent pas la <strong>non-réutilisation</strong> des données transmises. Il est donc interdit de transmettre des données concernant une personne physique ou morale ou des œuvres protégées par le droit d’auteur. Vous pouvez réessayer.</p>"
                   }
                 }
               }
@@ -1240,7 +1259,7 @@
               "element": {
                 "id": "8a352994-da21-41a3-bfb6-d87536077b2c",
                 "type": "text",
-                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫 <br><br>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp;&nbsp; Il les invite à se rendre sur Compra:IA, un comparateur de logiciels d’IA génératives. Parmi les modèles de langage, ils doivent choisir un “géant” (Gemini). Ensuite ils saisissent la requête suivante&nbsp;:&nbsp; “Explique moi la méthode de la dissertation pour le bac de français et donne des exemples de titres.<br>Les élèves se rendent compte que l’énergie consommée par cette requête est très importante (environ 100 Kilowatt). </p><p>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leur deux réponses.</p><br>"
+                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫</p><p>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp; <br>Il les invite à comparer deux logiciels d’IA génératives avec la même requête&nbsp;: «&nbsp;Explique moi la méthode de la dissertation pour le bac de français et donne des exemples de titres.&nbsp;»<br>Les élèves se rendent compte que l’énergie consommée est très importante (environ 100 Kilowatt).<br> </p><p>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leur deux réponses.</p>"
               }
             },
             {
@@ -1256,7 +1275,7 @@
                     "content": "<p>Laisser une ampoule LED allumée pendant plus de 2 heures ou à 15 min de streaming.</p>",
                     "feedback": {
                       "state": "<p>Pas tout à fait !</p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. <br>Plus globalement, la maîtrise des différents enjeux de l’IA permettra aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
                     }
                   },
                   {
@@ -1264,7 +1283,7 @@
                     "content": "<p>Laisser une ampoule LED allumée pendant plus de 15 heures ou à plus d’1 heure de streaming.</p>",
                     "feedback": {
                       "state": "<p>Effectivement !</p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. <br>Plus globalement, la maîtrise des différents enjeux de l’IA permettra aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
                     }
                   },
                   {
@@ -1272,7 +1291,7 @@
                     "content": "<p>Laisser une ampoule LED allumée pendant plus de 35 heures ou à 4 heures de streaming.</p>",
                     "feedback": {
                       "state": "<p>Pas tout à fait !&nbsp;<br></p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. Plus globalement, ils doivent se former sur tous les enjeux relatifs à l’IA pour adopter une démarche responsable et sensibiliser efficacement les élèves.</p>"
+                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience.&nbsp;<br>Plus globalement, la maîtrise des différents enjeux de l’IA permettra aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
                     }
                   }
                 ],
