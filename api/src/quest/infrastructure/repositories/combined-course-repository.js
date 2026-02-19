@@ -145,6 +145,11 @@ const deleteCombinedCourses = async ({ combinedCourseIds, deletedBy }) => {
     .whereIn('id', combinedCourseIds);
 };
 
+const updateCombinedCourses = async ({ combinedCourseIds, name }) => {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('combined_courses').update({ name, updatedAt: knexConn.fn.now() }).whereIn('id', combinedCourseIds);
+};
+
 const _toDomain = ({
   id,
   organizationId,
@@ -177,4 +182,5 @@ export {
   save,
   saveInBatch,
   targetProfileIdsPartOfAnyCombinedCourse,
+  updateCombinedCourses,
 };

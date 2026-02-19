@@ -658,4 +658,48 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(deletedCombinedCourse.deletedBy).to.equal(userId);
     });
   });
+
+  describe('#updateCombinedCourses', function () {
+    let lastUpdatedAt;
+
+    beforeEach(async function () {
+      lastUpdatedAt = new Date('2023-01-01');
+    });
+
+    it('should update name for given combined courses ids', async function () {
+      //given
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY123',
+        name: 'name1',
+        combinedCourseContents: [],
+        updatedAt: lastUpdatedAt,
+      });
+
+      const otherCombinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY123',
+        name: 'name2',
+        combinedCourseContents: [],
+        updatedAt: lastUpdatedAt,
+      });
+
+      await databaseBuilder.commit();
+
+      //when
+      await combinedCourseRepository.updateCombinedCourses({
+        combinedCourseIds: [combinedCourse.id],
+        name: 'new-name',
+      });
+
+      const allCombinedCourses = await knex('combined_courses');
+      const notUpdatedCombinedCourse = await knex('combined_courses').where('id', otherCombinedCourse.id).first();
+      const updatedCombinedCourse = await knex('combined_courses').where('id', combinedCourse.id).first();
+
+      //then
+      expect(allCombinedCourses).to.have.lengthOf(2);
+      expect(notUpdatedCombinedCourse.updatedAt).to.not.be.above(lastUpdatedAt);
+      expect(notUpdatedCombinedCourse.name).to.equal(otherCombinedCourse.name);
+      expect(updatedCombinedCourse.updatedAt).to.be.above(lastUpdatedAt);
+      expect(updatedCombinedCourse.name).to.equal('new-name');
+    });
+  });
 });
