@@ -1,12 +1,12 @@
 import { SessionManagement } from '../../../../../../src/certification/session-management/domain/models/SessionManagement.js';
-import * as sessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-repository.js';
+import * as sessionManagementRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-management-repository.js';
 import { SESSION_STATUSES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | Certification | session | SessionManagement', function () {
+describe('Certification | SessionManagement | Integration | Infrastructure | Repository | session-management', function () {
   describe('#get', function () {
     let session;
     let expectedSessionValues;
@@ -43,7 +43,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return session informations in a session Object', async function () {
       // when
-      const actualSession = await sessionRepository.get({ id: session.id });
+      const actualSession = await sessionManagementRepository.get({ id: session.id });
 
       // then
       expect(actualSession).to.be.instanceOf(SessionManagement);
@@ -52,7 +52,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return a Not found error when no session was found', async function () {
       // when
-      const error = await catchErr(sessionRepository.get)({ id: 2 });
+      const error = await catchErr(sessionManagementRepository.get)({ id: 2 });
 
       // then
       expect(error).to.be.instanceOf(NotFoundError);
@@ -72,7 +72,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return true if the session status is finalized', async function () {
       // when
-      const isFinalized = await sessionRepository.isFinalized({ id: finalizedSessionId });
+      const isFinalized = await sessionManagementRepository.isFinalized({ id: finalizedSessionId });
 
       // then
       expect(isFinalized).to.be.equal(true);
@@ -80,7 +80,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return false if the session status is not finalized', async function () {
       // when
-      const isFinalized = await sessionRepository.isFinalized({ id: notFinalizedSessionId });
+      const isFinalized = await sessionManagementRepository.isFinalized({ id: notFinalizedSessionId });
 
       // then
       expect(isFinalized).to.be.equal(false);
@@ -95,7 +95,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const isPublished = await sessionRepository.isPublished({ id: 40 });
+        const isPublished = await sessionManagementRepository.isPublished({ id: 40 });
 
         // then
         expect(isPublished).to.be.equal(true);
@@ -109,7 +109,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const isPublished = await sessionRepository.isPublished({ id: 40 });
+        const isPublished = await sessionManagementRepository.isPublished({ id: 40 });
 
         // then
         expect(isPublished).to.be.equal(false);
@@ -136,7 +136,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
       await databaseBuilder.commit();
 
       // when
-      const hasMembership = await sessionRepository.doesUserHaveCertificationCenterMembershipForSession({
+      const hasMembership = await sessionManagementRepository.doesUserHaveCertificationCenterMembershipForSession({
         userId,
         sessionId,
       });
@@ -157,7 +157,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
       await databaseBuilder.commit();
 
       // when
-      const hasMembership = await sessionRepository.doesUserHaveCertificationCenterMembershipForSession({
+      const hasMembership = await sessionManagementRepository.doesUserHaveCertificationCenterMembershipForSession({
         userId,
         sessionId,
       });
@@ -184,7 +184,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
       await databaseBuilder.commit();
 
       // when
-      const hasMembership = await sessionRepository.doesUserHaveCertificationCenterMembershipForSession({
+      const hasMembership = await sessionManagementRepository.doesUserHaveCertificationCenterMembershipForSession({
         userId: userIdNotAllowed,
         sessionId,
       });
@@ -207,7 +207,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return an updated SessionManagement domain object', async function () {
       // when
-      const sessionSaved = await sessionRepository.finalize({
+      const sessionSaved = await sessionManagementRepository.finalize({
         id: sessionToFinalize.id,
         examinerGlobalComment,
         hasIncident,
@@ -238,7 +238,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
       await databaseBuilder.commit();
 
       // when
-      await sessionRepository.unfinalize({ id: 99 });
+      await sessionManagementRepository.unfinalize({ id: 99 });
 
       // then
       const dbSession = await knex('sessions').select('*').where({ id: 99 }).first();
@@ -258,7 +258,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
         // when
         await DomainTransaction.execute(async (domainTransaction) => {
-          await sessionRepository.unfinalize({ id: 99 });
+          await sessionManagementRepository.unfinalize({ id: 99 });
           return domainTransaction.knexTransaction.rollback();
         });
 
@@ -272,7 +272,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
       it('should throw a not found error', async function () {
         // given
         // when
-        const error = await catchErr(sessionRepository.unfinalize)({ id: 99 });
+        const error = await catchErr(sessionManagementRepository.unfinalize)({ id: 99 });
 
         // then
         expect(error).to.be.instanceOf(NotFoundError);
@@ -292,7 +292,10 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return a flagged SessionManagement domain object', async function () {
       // when
-      const sessionFlagged = await sessionRepository.flagResultsAsSentToPrescriber({ id, resultsSentToPrescriberAt });
+      const sessionFlagged = await sessionManagementRepository.flagResultsAsSentToPrescriber({
+        id,
+        resultsSentToPrescriberAt,
+      });
 
       // then
       expect(sessionFlagged).to.be.an.instanceof(SessionManagement);
@@ -313,7 +316,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
 
     it('should return a updated SessionManagement domain object', async function () {
       // when
-      const sessionFlagged = await sessionRepository.updatePublishedAt({ id, publishedAt });
+      const sessionFlagged = await sessionManagementRepository.updatePublishedAt({ id, publishedAt });
 
       // then
       expect(sessionFlagged).to.be.an.instanceof(SessionManagement);
@@ -356,7 +359,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
           await databaseBuilder.commit();
 
           // when
-          const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+          const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
 
           // then
           expect(hasSomeCleaAcquired).to.be.true;
@@ -396,7 +399,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+        const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
 
         // then
         expect(hasSomeCleaAcquired).to.be.false;
@@ -433,7 +436,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+        const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
 
         // then
         expect(hasSomeCleaAcquired).to.be.false;
@@ -451,7 +454,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+        const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
 
         // then
         expect(hasSomeCleaAcquired).to.be.false;
@@ -466,7 +469,7 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+        const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
 
         // then
         expect(hasSomeCleaAcquired).to.be.false;
@@ -490,7 +493,9 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
+        const hasNoStartedCertification = await sessionManagementRepository.hasNoStartedCertification({
+          id: sessionId,
+        });
 
         // then
         expect(hasNoStartedCertification).to.be.false;
@@ -505,7 +510,9 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
+        const hasNoStartedCertification = await sessionManagementRepository.hasNoStartedCertification({
+          id: sessionId,
+        });
 
         // then
         expect(hasNoStartedCertification).to.be.true;
@@ -573,9 +580,10 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const unfinishedCertificationsCount = await sessionRepository.countUncompletedCertificationsAssessment({
-          id: sessionId,
-        });
+        const unfinishedCertificationsCount =
+          await sessionManagementRepository.countUncompletedCertificationsAssessment({
+            id: sessionId,
+          });
 
         // then
         expect(unfinishedCertificationsCount).to.equal(3);
@@ -602,9 +610,10 @@ describe('Integration | Repository | Certification | session | SessionManagement
         await databaseBuilder.commit();
 
         // when
-        const unfinishedCertificationsCount = await sessionRepository.countUncompletedCertificationsAssessment({
-          id: sessionId,
-        });
+        const unfinishedCertificationsCount =
+          await sessionManagementRepository.countUncompletedCertificationsAssessment({
+            id: sessionId,
+          });
 
         // then
         expect(unfinishedCertificationsCount).to.equal(0);

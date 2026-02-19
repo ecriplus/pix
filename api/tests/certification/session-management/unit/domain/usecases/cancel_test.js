@@ -27,7 +27,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const certificationEvaluationRepository = {
@@ -38,7 +38,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationEvaluationRepository.rescoreV2Certification.resolves();
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
@@ -46,7 +46,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseId: 123,
           juryId,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           certificationEvaluationRepository,
           courseAssessmentResultRepository,
         });
@@ -77,21 +77,21 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
         const error = await catchErr(cancel)({
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           juryId,
           courseAssessmentResultRepository,
         });
@@ -116,7 +116,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const certificationEvaluationRepository = {
@@ -127,14 +127,14 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationEvaluationRepository.rescoreV2Certification.resolves();
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         const error = await catchErr(cancel)({
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           juryId,
           courseAssessmentResultRepository,
         });
@@ -162,7 +162,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const certificationEvaluationRepository = {
@@ -173,7 +173,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
         certificationEvaluationRepository.rescoreV3Certification.resolves();
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(domainBuilder.buildAssessmentResult());
 
         // when
@@ -181,7 +181,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
           certificationCourseId: 123,
           juryId,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           certificationEvaluationRepository,
           courseAssessmentResultRepository,
         });
@@ -212,21 +212,21 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         const error = await catchErr(cancel)({
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           juryId,
           courseAssessmentResultRepository,
         });
@@ -252,7 +252,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       const certificationCourseRepository = {
         get: sinon.stub(),
       };
-      const sessionRepository = {
+      const sessionManagementRepository = {
         isFinalized: sinon.stub(),
       };
       const certificationEvaluationRepository = {
@@ -263,7 +263,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       certificationEvaluationRepository.rescoreV3Certification.resolves();
-      sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+      sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
       courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
       // when
@@ -271,7 +271,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         certificationCourseId: 123,
         juryId,
         certificationCourseRepository,
-        sessionRepository,
+        sessionManagementRepository,
         certificationEvaluationRepository,
         courseAssessmentResultRepository,
       });
@@ -298,7 +298,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       const certificationCourseRepository = {
         get: sinon.stub(),
       };
-      const sessionRepository = {
+      const sessionManagementRepository = {
         isFinalized: sinon.stub(),
       };
       const certificationEvaluationRepository = {
@@ -309,7 +309,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       };
 
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-      sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+      sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
       courseAssessmentResultRepository.getLatestAssessmentResult.resolves(
         domainBuilder.buildAssessmentResult({ status: assessmentResultStatuses.REJECTED }),
       );
@@ -318,7 +318,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
         certificationCourseId: 123,
         juryId,
         certificationCourseRepository,
-        sessionRepository,
+        sessionManagementRepository,
         certificationEvaluationRepository,
         courseAssessmentResultRepository,
       });

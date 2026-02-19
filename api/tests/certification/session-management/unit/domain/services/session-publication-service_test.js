@@ -16,7 +16,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 describe('Certification | Session Management | Unit | Domain | Services | session-publication-service', function () {
   const sessionId = 123;
   let certificationRepository,
-    sessionRepository,
+    sessionManagementRepository,
     sharedSessionRepository,
     finalizedSessionRepository,
     certificationCenterRepository,
@@ -79,7 +79,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           getStatusesBySessionId: sinon.stub(),
           publishCertificationCourses: sinon.stub(),
         };
-        sessionRepository = {
+        sessionManagementRepository = {
           updatePublishedAt: sinon.stub(),
         };
         sharedSessionRepository = {
@@ -108,7 +108,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             publishedAt: now,
             certificationRepository: undefined,
             finalizedSessionRepository: undefined,
-            sessionRepository,
+            sessionManagementRepository,
             sharedSessionRepository,
           });
 
@@ -124,7 +124,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           const updatedSessionWithPublishedAt = { ...originalSession, publishedAt: now };
           certificationRepository.getStatusesBySessionId.withArgs(sessionId).resolves(certificationStatuses);
           certificationRepository.publishCertificationCourses.withArgs(certificationStatuses).resolves();
-          sessionRepository.updatePublishedAt
+          sessionManagementRepository.updatePublishedAt
             .withArgs({ id: sessionId, publishedAt: now })
             .resolves(updatedSessionWithPublishedAt);
           const finalizedSession = new FinalizedSession({
@@ -139,7 +139,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             publishedAt: now,
             certificationRepository,
             finalizedSessionRepository,
-            sessionRepository,
+            sessionManagementRepository,
             sharedSessionRepository,
           });
 
@@ -171,7 +171,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             publishedAt: now,
             certificationRepository,
             finalizedSessionRepository: undefined,
-            sessionRepository,
+            sessionManagementRepository,
             sharedSessionRepository,
           });
 
@@ -199,7 +199,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             publishedAt: now,
             certificationRepository,
             finalizedSessionRepository: undefined,
-            sessionRepository,
+            sessionManagementRepository,
             sharedSessionRepository,
           });
 
@@ -212,7 +212,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
 
   describe('#manageEmails', function () {
     beforeEach(function () {
-      sessionRepository = {
+      sessionManagementRepository = {
         hasSomeCleaAcquired: sinon.stub(),
         flagResultsAsSentToPrescriber: sinon.stub(),
       };
@@ -241,7 +241,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       await manageEmails({
         session: originalSession,
         certificationCenterRepository,
-        sessionRepository,
+        sessionManagementRepository,
         startedCertificationCoursesUserIds,
         dependencies: { mailService },
       });
@@ -294,7 +294,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       await manageEmails({
         session: originalSession,
         certificationCenterRepository,
-        sessionRepository,
+        sessionManagementRepository,
         startedCertificationCoursesUserIds,
         dependencies: { mailService },
       });
@@ -318,7 +318,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         const now = new Date();
         const updatedSessionWithPublishedAt = { ...originalSession, publishedAt: now };
         const updatedSessionWithResultSent = { ...updatedSessionWithPublishedAt, resultsSentToPrescriberAt: now };
-        sessionRepository.flagResultsAsSentToPrescriber
+        sessionManagementRepository.flagResultsAsSentToPrescriber
           .withArgs({ id: sessionId, resultsSentToPrescriberAt: now })
           .resolves(updatedSessionWithResultSent);
         mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success(recipient1));
@@ -336,13 +336,13 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           session: originalSession,
           publishedAt: now,
           certificationCenterRepository,
-          sessionRepository,
+          sessionManagementRepository,
           startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
 
         // then
-        expect(sessionRepository.flagResultsAsSentToPrescriber).to.have.been.calledWithExactly({
+        expect(sessionManagementRepository.flagResultsAsSentToPrescriber).to.have.been.calledWithExactly({
           id: sessionId,
           resultsSentToPrescriberAt: now,
         });
@@ -371,13 +371,13 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         await manageEmails({
           session: updatedSessionWithPublishedAt,
           certificationCenterRepository,
-          sessionRepository,
+          sessionManagementRepository,
           startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
 
         // then
-        expect(sessionRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
+        expect(sessionManagementRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
       });
     });
 
@@ -421,7 +421,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           session: sessionWithMixedCandidates,
           publishedAt: now,
           certificationCenterRepository,
-          sessionRepository,
+          sessionManagementRepository,
           startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
@@ -456,7 +456,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           const updatedSessionWithPublishedAt = { ...session, publishedAt: now };
           const updatedSessionWithResultSent = { ...updatedSessionWithPublishedAt, resultsSentToPrescriberAt: now };
           const user = domainBuilder.buildUser({ email: 'referer@example.net' });
-          sessionRepository.flagResultsAsSentToPrescriber
+          sessionManagementRepository.flagResultsAsSentToPrescriber
             .withArgs({ id: session.id, resultsSentToPrescriberAt: now })
             .resolves(updatedSessionWithResultSent);
           mailService.sendNotificationToCertificationCenterRefererForCleaResults.resolves(
@@ -464,7 +464,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           );
           mailService.sendCertificationResultEmail.onCall(0).resolves(EmailingAttempt.success('candidate@example.net'));
 
-          sessionRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
+          sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
           certificationCenterRepository.getRefererEmails
             .withArgs({ id: session.certificationCenterId })
             .resolves([{ email: user.email }]);
@@ -475,7 +475,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           await manageEmails({
             session: updatedSessionWithPublishedAt,
             certificationCenterRepository,
-            sessionRepository,
+            sessionManagementRepository,
             startedCertificationCoursesUserIds,
             dependencies: { mailService },
           });
@@ -507,7 +507,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             const updatedSessionWithResultSent = { ...updatedSessionWithPublishedAt, resultsSentToPrescriberAt: now };
             const user = domainBuilder.buildUser({ email: 'referer@example.net' });
 
-            sessionRepository.flagResultsAsSentToPrescriber
+            sessionManagementRepository.flagResultsAsSentToPrescriber
               .withArgs({ id: session.id, resultsSentToPrescriberAt: now })
               .resolves(updatedSessionWithResultSent);
             mailService.sendNotificationToCertificationCenterRefererForCleaResults.resolves(
@@ -517,7 +517,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
               .onCall(0)
               .resolves(EmailingAttempt.success('candidate@example.net'));
 
-            sessionRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
+            sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: session.id }).resolves(true);
             certificationCenterRepository.getRefererEmails
               .withArgs({ id: session.certificationCenterId })
               .resolves([{ email: user.email }]);
@@ -528,7 +528,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             const error = await catchErr(manageEmails)({
               session: updatedSessionWithPublishedAt,
               certificationCenterRepository,
-              sessionRepository,
+              sessionManagementRepository,
               startedCertificationCoursesUserIds,
               dependencies: { mailService },
             });
@@ -546,7 +546,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         it('should send result emails', async function () {
           // given
           mailService.sendCertificationResultEmail.resolves(EmailingAttempt.success(recipient1));
-          sessionRepository.hasSomeCleaAcquired.withArgs({ id: originalSession.id }).resolves(true);
+          sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: originalSession.id }).resolves(true);
           certificationCenterRepository.getRefererEmails
             .withArgs({ id: originalSession.certificationCenterId })
             .resolves([]);
@@ -562,13 +562,13 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           await manageEmails({
             session: originalSession,
             certificationCenterRepository,
-            sessionRepository,
+            sessionManagementRepository,
             startedCertificationCoursesUserIds,
             dependencies: { mailService },
           });
 
           // then
-          expect(sessionRepository.hasSomeCleaAcquired).to.have.been.calledOnce;
+          expect(sessionManagementRepository.hasSomeCleaAcquired).to.have.been.calledOnce;
           expect(certificationCenterRepository.getRefererEmails).to.have.been.calledOnce;
           expect(mailService.sendNotificationToCertificationCenterRefererForCleaResults).to.not.have.been.called;
           expect(mailService.sendCertificationResultEmail).to.have.been.calledTwice;
@@ -593,7 +593,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
         const error = await catchErr(manageEmails)({
           session: originalSession,
           certificationCenterRepository,
-          sessionRepository,
+          sessionManagementRepository,
           startedCertificationCoursesUserIds,
           dependencies: { mailService },
         });
@@ -615,7 +615,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           sessionDate: originalSession.date,
           email: 'email2@example.net',
         });
-        expect(sessionRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
+        expect(sessionManagementRepository.flagResultsAsSentToPrescriber).to.not.have.been.called;
         expect(error).to.be.an.instanceOf(SendingEmailToResultRecipientError);
       });
     });

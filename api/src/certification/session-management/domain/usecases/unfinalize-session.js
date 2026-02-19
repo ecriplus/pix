@@ -8,17 +8,17 @@ import { SessionAlreadyPublishedError } from '../errors.js';
 
 /**
  * @param {object} params
- * @param {SessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
  */
-const unfinalizeSession = async function ({ sessionId, sessionRepository, finalizedSessionRepository }) {
-  if (await sessionRepository.isPublished({ id: sessionId })) {
+const unfinalizeSession = async function ({ sessionId, sessionManagementRepository, finalizedSessionRepository }) {
+  if (await sessionManagementRepository.isPublished({ id: sessionId })) {
     throw new SessionAlreadyPublishedError();
   }
 
   return DomainTransaction.execute(async () => {
     await finalizedSessionRepository.remove({ sessionId });
-    await sessionRepository.unfinalize({ id: sessionId });
+    await sessionManagementRepository.unfinalize({ id: sessionId });
   });
 };
 

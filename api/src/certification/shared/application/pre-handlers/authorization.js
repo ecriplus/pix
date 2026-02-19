@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../../shared/application/http-errors.js';
-import * as sessionRepository from '../../../session-management/infrastructure/repositories/session-repository.js';
+import * as sessionRepository from '../../../session-management/infrastructure/repositories/session-management-repository.js';
 import * as certificationCourseRepository from '../../infrastructure/repositories/certification-course-repository.js';
 
 const verifySessionAuthorization = (request, h, dependencies = { sessionRepository }) => {

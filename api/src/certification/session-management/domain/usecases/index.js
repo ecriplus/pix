@@ -28,7 +28,6 @@ import * as sessionPublicationService from '../services/session-publication-serv
 
 /**
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCourseRepository} CertificationCourseRepository
- * @typedef {import('../../infrastructure/repositories/index.js').FinalizedSessionRepository} FinalizedSessionRepository
  * @typedef {import('../../infrastructure/repositories/index.js').JuryCertificationSummaryRepository} JuryCertificationSummaryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').InvigilatorAccessRepository} InvigilatorAccessRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationOfficerRepository} CertificationOfficerRepository
@@ -45,7 +44,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../../infrastructure/repositories/index.js').IssueReportCategoryRepository} IssueReportCategoryRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SessionJuryCommentRepository} SessionJuryCommentRepository
- * @typedef {import('../../infrastructure/repositories/index.js').SessionRepository} SessionRepository
+ * @typedef {import('../../infrastructure/repositories/index.js').SessionManagementRepository} SessionManagementRepository
  * @typedef {import('../../infrastructure/repositories/index.js').InvigilatorSessionRepository} InvigilatorSessionRepository
  * @typedef {import('../../infrastructure/repositories/index.js').SessionForSupervisingRepository} SessionForSupervisingRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationReportRepository} CertificationReportRepository
@@ -94,7 +93,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {issueReportCategoryRepository} IssueReportCategoryRepository
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {sessionJuryCommentRepository} SessionJuryCommentRepository
- * @typedef {sessionRepository} SessionRepository
+ * @typedef {sessionManagementRepository} SessionManagementRepository
  * @typedef {invigilatorSessionRepository} InvigilatorSessionRepository
  * @typedef {sessionSummaryRepository} SessionSummaryRepository
  * @typedef {certificationReportRepository} CertificationReportRepository

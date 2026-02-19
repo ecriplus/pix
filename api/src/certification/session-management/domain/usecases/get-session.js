@@ -1,6 +1,6 @@
-const getSession = async function ({ sessionId, sessionRepository }) {
-  const session = await sessionRepository.get({ id: sessionId });
-  const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: sessionId });
+const getSession = async function ({ sessionId, sessionManagementRepository }) {
+  const session = await sessionManagementRepository.get({ id: sessionId });
+  const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: sessionId });
   return {
     session,
     hasSomeCleaAcquired,

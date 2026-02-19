@@ -7,7 +7,7 @@ import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-help
 describe('Unit | UseCase | delete-certification-issue-report', function () {
   const certificationCourseRepository = { getSessionId: () => _.noop() };
   let certificationIssueReportRepository;
-  const sessionRepository = { isFinalized: () => _.noop() };
+  const sessionManagementRepository = { isFinalized: () => _.noop() };
   const certificationIssueReportId = 456;
   const userId = 789;
   const sessionId = 159;
@@ -25,12 +25,12 @@ describe('Unit | UseCase | delete-certification-issue-report', function () {
     certificationIssueReportRepository.get
       .withArgs({ id: certificationIssueReportId })
       .resolves(certificationIssueReport);
-    sinon.stub(sessionRepository, 'isFinalized');
+    sinon.stub(sessionManagementRepository, 'isFinalized');
   });
 
   it('should throw a ForbiddenAccess error when session is already finalized', async function () {
     // given
-    sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(true);
+    sessionManagementRepository.isFinalized.withArgs({ id: sessionId }).resolves(true);
 
     // when
     const error = await catchErr(deleteCertificationIssueReport)({
@@ -38,7 +38,7 @@ describe('Unit | UseCase | delete-certification-issue-report', function () {
       userId,
       certificationCourseRepository,
       certificationIssueReportRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
 
     // then
@@ -48,7 +48,7 @@ describe('Unit | UseCase | delete-certification-issue-report', function () {
   it('should return deletion result', async function () {
     // given
     const deletionResult = Symbol('someValue');
-    sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
+    sessionManagementRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
     certificationIssueReportRepository.remove.withArgs({ id: certificationIssueReportId }).resolves(deletionResult);
 
     // when
@@ -57,7 +57,7 @@ describe('Unit | UseCase | delete-certification-issue-report', function () {
       userId,
       certificationCourseRepository,
       certificationIssueReportRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
 
     // then

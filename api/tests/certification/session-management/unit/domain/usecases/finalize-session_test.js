@@ -13,7 +13,7 @@ describe('Unit | UseCase | finalize-session', function () {
   let sessionId;
   let updatedSession;
   let examinerGlobalComment;
-  let sessionRepository;
+  let sessionManagementRepository;
   let certificationReportRepository;
   let certificationCourseRepository;
   let hasIncident;
@@ -32,7 +32,7 @@ describe('Unit | UseCase | finalize-session', function () {
       finalizedAt: new Date(),
     });
     examinerGlobalComment = 'It was a fine session my dear.';
-    sessionRepository = {
+    sessionManagementRepository = {
       finalize: sinon.stub(),
       isFinalized: sinon.stub(),
       hasNoStartedCertification: sinon.stub(),
@@ -51,13 +51,13 @@ describe('Unit | UseCase | finalize-session', function () {
   context('When the session status is already finalized', function () {
     it('should throw a SessionAlreadyFinalizedError error', async function () {
       // given
-      sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(true);
+      sessionManagementRepository.isFinalized.withArgs({ id: sessionId }).resolves(true);
 
       // when
       const err = await catchErr(finalizeSession)({
         sessionId,
         examinerGlobalComment,
-        sessionRepository,
+        sessionManagementRepository,
         certificationReports: [],
         certificationReportRepository,
       });
@@ -70,13 +70,13 @@ describe('Unit | UseCase | finalize-session', function () {
   context('When the session has not started yet', function () {
     it('should throw a SessionWithoutStartedCertificationError error', async function () {
       // given
-      sessionRepository.hasNoStartedCertification.withArgs({ id: sessionId }).resolves(true);
+      sessionManagementRepository.hasNoStartedCertification.withArgs({ id: sessionId }).resolves(true);
 
       // when
       const err = await catchErr(finalizeSession)({
         sessionId,
         examinerGlobalComment,
-        sessionRepository,
+        sessionManagementRepository,
         certificationReports: [],
         certificationReportRepository,
       });
@@ -101,7 +101,7 @@ describe('Unit | UseCase | finalize-session', function () {
         const err = await catchErr(finalizeSession)({
           sessionId,
           examinerGlobalComment,
-          sessionRepository,
+          sessionManagementRepository,
           certificationReports,
           certificationReportRepository,
           certificationCourseRepository,
@@ -121,7 +121,7 @@ describe('Unit | UseCase | finalize-session', function () {
           abortReason: null,
           completedAt: null,
         });
-        sessionRepository.countUncompletedCertificationsAssessment.withArgs({ id: sessionId }).resolves(1);
+        sessionManagementRepository.countUncompletedCertificationsAssessment.withArgs({ id: sessionId }).resolves(1);
         certificationCourseRepository.findCertificationCoursesBySessionId
           .withArgs({ sessionId })
           .resolves([uncompletedCertificationCourse]);
@@ -134,7 +134,7 @@ describe('Unit | UseCase | finalize-session', function () {
         const err = await catchErr(finalizeSession)({
           sessionId,
           examinerGlobalComment,
-          sessionRepository,
+          sessionManagementRepository,
           certificationReports,
           certificationReportRepository,
           certificationCourseRepository,
@@ -154,9 +154,9 @@ describe('Unit | UseCase | finalize-session', function () {
           examinerComment: 'signalement sur le candidat',
         });
         certificationReports = [validReportForFinalization];
-        sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
         certificationReportRepository.finalizeAll.withArgs({ certificationReports }).resolves();
-        sessionRepository.finalize
+        sessionManagementRepository.finalize
           .withArgs({
             id: sessionId,
             examinerGlobalComment,
@@ -172,9 +172,9 @@ describe('Unit | UseCase | finalize-session', function () {
           isCompleted: true,
         });
         certificationReports = [validReportForFinalization];
-        sessionRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: sessionId }).resolves(false);
         certificationReportRepository.finalizeAll.withArgs({ certificationReports }).resolves();
-        sessionRepository.finalize
+        sessionManagementRepository.finalize
           .withArgs({
             id: sessionId,
             examinerGlobalComment,
@@ -189,7 +189,7 @@ describe('Unit | UseCase | finalize-session', function () {
           examinerGlobalComment,
           hasIncident,
           hasJoiningIssue,
-          sessionRepository,
+          sessionManagementRepository,
           certificationReports,
           certificationReportRepository,
           certificationCourseRepository,
@@ -197,7 +197,7 @@ describe('Unit | UseCase | finalize-session', function () {
 
         // then
         expect(
-          sessionRepository.finalize.calledWithExactly({
+          sessionManagementRepository.finalize.calledWithExactly({
             id: sessionId,
             examinerGlobalComment,
             hasIncident,
@@ -220,9 +220,9 @@ describe('Unit | UseCase | finalize-session', function () {
           isCompleted: true,
         });
         certificationReports = [validReportForFinalization];
-        sessionRepository.isFinalized.withArgs(sessionId).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs(sessionId).resolves(false);
         certificationReportRepository.finalizeAll.withArgs({ certificationReports }).resolves();
-        sessionRepository.finalize
+        sessionManagementRepository.finalize
           .withArgs({
             id: sessionId,
             examinerGlobalComment,
@@ -237,7 +237,7 @@ describe('Unit | UseCase | finalize-session', function () {
           examinerGlobalComment,
           hasIncident,
           hasJoiningIssue,
-          sessionRepository,
+          sessionManagementRepository,
           certificationReports,
           certificationReportRepository,
           certificationCourseRepository,

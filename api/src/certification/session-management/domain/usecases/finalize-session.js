@@ -17,7 +17,7 @@ import { SessionFinalized } from '../read-models/SessionFinalized.js';
 const finalizeSession = withTransaction(
   /**
    * @param {object} params
-   * @param {SessionRepository} params.sessionRepository
+   * @param {SessionManagementRepository} params.sessionManagementRepository
    * @param {CertificationCourseRepository} params.certificationCourseRepository
    * @param {CertificationReportRepository} params.certificationReportRepository
    * @return {Promise<SessionFinalized>}
@@ -26,17 +26,17 @@ const finalizeSession = withTransaction(
     sessionId,
     examinerGlobalComment,
     certificationReports,
-    sessionRepository,
+    sessionManagementRepository,
     certificationCourseRepository,
     certificationReportRepository,
     hasIncident,
     hasJoiningIssue,
   }) {
-    const isSessionAlreadyFinalized = await sessionRepository.isFinalized({ id: sessionId });
+    const isSessionAlreadyFinalized = await sessionManagementRepository.isFinalized({ id: sessionId });
 
-    const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
+    const hasNoStartedCertification = await sessionManagementRepository.hasNoStartedCertification({ id: sessionId });
 
-    const uncompletedCertificationCount = await sessionRepository.countUncompletedCertificationsAssessment({
+    const uncompletedCertificationCount = await sessionManagementRepository.countUncompletedCertificationsAssessment({
       id: sessionId,
     });
 
@@ -73,7 +73,7 @@ const finalizeSession = withTransaction(
 
     await certificationReportRepository.finalizeAll({ certificationReports });
 
-    const finalizedSession = await sessionRepository.finalize({
+    const finalizedSession = await sessionManagementRepository.finalize({
       id: sessionId,
       examinerGlobalComment,
       hasIncident,

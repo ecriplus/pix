@@ -3,10 +3,10 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-session', function () {
-  let sessionRepository;
+  let sessionManagementRepository;
 
   beforeEach(function () {
-    sessionRepository = {
+    sessionManagementRepository = {
       hasSomeCleaAcquired: sinon.stub(),
       get: sinon.stub(),
     };
@@ -17,13 +17,13 @@ describe('Unit | UseCase | get-session', function () {
       // given
       const sessionId = 123;
       const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
-      sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
+      sessionManagementRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
+      sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
 
       // when
       const { session: actualSession } = await getSession({
         sessionId,
-        sessionRepository,
+        sessionManagementRepository,
       });
 
       // then
@@ -35,13 +35,13 @@ describe('Unit | UseCase | get-session', function () {
         // given
         const sessionId = 123;
         const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
-        sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(true);
+        sessionManagementRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
+        sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(true);
 
         // when
         const { hasSomeCleaAcquired } = await getSession({
           sessionId,
-          sessionRepository,
+          sessionManagementRepository,
         });
 
         // then
@@ -54,13 +54,13 @@ describe('Unit | UseCase | get-session', function () {
         // given
         const sessionId = 123;
         const sessionToFind = domainBuilder.certification.enrolment.buildSession({ id: sessionId });
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
-        sessionRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
+        sessionManagementRepository.get.withArgs({ id: sessionId }).resolves(sessionToFind);
+        sessionManagementRepository.hasSomeCleaAcquired.withArgs({ id: sessionId }).resolves(false);
 
         // when
         const { hasSomeCleaAcquired } = await getSession({
           sessionId,
-          sessionRepository,
+          sessionManagementRepository,
         });
 
         // then
@@ -73,12 +73,12 @@ describe('Unit | UseCase | get-session', function () {
     it('should throw an error the session', async function () {
       // given
       const sessionId = 123;
-      sessionRepository.get.withArgs({ id: sessionId }).rejects(new NotFoundError());
+      sessionManagementRepository.get.withArgs({ id: sessionId }).rejects(new NotFoundError());
 
       // when
       const err = await catchErr(getSession)({
         sessionId,
-        sessionRepository,
+        sessionManagementRepository,
       });
 
       // then
