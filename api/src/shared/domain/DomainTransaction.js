@@ -7,6 +7,7 @@ const asyncLocalStorage = new AsyncLocalStorage();
 class DomainTransaction {
   constructor(knexTransaction) {
     this.knexTransaction = knexTransaction;
+    this.successHandlers = [];
   }
 
   static execute(lambda, transactionConfig) {
@@ -14,17 +15,28 @@ class DomainTransaction {
     if (existingConn.isTransaction) {
       return lambda();
     }
-    return (
-      knex
-        .transaction((trx) => {
-          const domainTransaction = new DomainTransaction(trx);
-          return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
-        }, transactionConfig)
-        // Need to re-throw otherwise the error goes silent
-        .catch((err) => {
-          throw err;
-        })
-    );
+    let domainTransaction;
+    return knex
+      .transaction((trx) => {
+        domainTransaction = new DomainTransaction(trx);
+        return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
+      }, transactionConfig)
+      .then(async (result) => {
+        for (const handler of domainTransaction.successHandlers) {
+          await handler();
+        }
+        return result;
+      });
+  }
+
+  static async addSuccessHandler(handler) {
+    const store = asyncLocalStorage.getStore();
+
+    if (store?.transaction) {
+      store.transaction.successHandlers.push(handler);
+    } else {
+      await handler();
+    }
   }
 
   /**

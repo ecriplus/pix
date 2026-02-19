@@ -1,5 +1,5 @@
 import { DomainTransaction, withTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, knex } from '../../../../tests/test-helper.js';
+import { catchErr, expect, knex, sinon } from '../../../../tests/test-helper.js';
 
 describe('Shared | Integration | Domain | DomainTransaction', function () {
   context('behaviour when nesting', function () {
@@ -284,6 +284,54 @@ describe('Shared | Integration | Domain | DomainTransaction', function () {
         expect(err.message).to.equal("Let's rollback !");
         const { count } = await knex('features').count('id').first();
         expect(count).to.equal(0);
+      });
+    });
+  });
+
+  context.only('onSuccess management', function () {
+    context('when transaction is committed', function () {
+      it('executes onSuccess handlers after transaction is committed', async function () {
+        const afterSuccessHandler = sinon.stub().resolves();
+        const successHandler1 = sinon.stub().resolves();
+        const successHandler2 = sinon.stub().resolves();
+
+        const result = await DomainTransaction.execute(async () => {
+          await DomainTransaction.addSuccessHandler(successHandler1);
+          await afterSuccessHandler();
+          await DomainTransaction.addSuccessHandler(successHandler2);
+          return 'result';
+        });
+
+        expect(successHandler1.calledAfter(afterSuccessHandler)).to.be.true;
+        expect(successHandler2.calledAfter(successHandler1)).to.be.true;
+        expect(result).to.equal('result');
+      });
+    });
+    context('when transaction is rollbacked', function () {
+      it('does not execute onSuccess handlers after transaction is rollbacked', async function () {
+        const afterSuccessHandler = sinon.stub().rejects(new Error('Error during transaction'));
+        const successHandler = sinon.stub().resolves();
+
+        await expect(
+          DomainTransaction.execute(async () => {
+            await DomainTransaction.addSuccessHandler(successHandler);
+            await afterSuccessHandler();
+            return 'result';
+          }),
+        ).to.be.rejectedWith(Error);
+
+        expect(successHandler).to.not.have.been.called;
+      });
+    });
+    context('when there is no transactions', function () {
+      it('executes onSuccess handlers immediately', async function () {
+        const afterSuccessHandler = sinon.stub().resolves();
+        const successHandler = sinon.stub().resolves();
+
+        await DomainTransaction.addSuccessHandler(successHandler);
+        await afterSuccessHandler();
+
+        expect(successHandler.calledBefore(afterSuccessHandler)).to.be.true;
       });
     });
   });
