@@ -434,4 +434,41 @@ module('Integration | Component | Module | QCM', function (hooks) {
       assert.dom(screen.getByText('Too Bad!')).exists();
     });
   });
+
+  module('when QCM has short proposals', function () {
+    test('should display proposals in a grid', async function (assert) {
+      // given
+      const hasShortProposals = true;
+      const qcmElementWithShortProposals = {
+        hasShortProposals,
+        id: 'a2638f8e-05ee-42e0-9820-13a9977cf5dc',
+        instruction: 'Instruction',
+        proposals: [
+          { id: '1', content: 'checkbox1' },
+          { id: '2', content: 'checkbox2' },
+          { id: '3', content: 'checkbox3' },
+        ],
+        feedbacks: {
+          valid: {
+            state: 'Correct!',
+            diagnosis: '<p>Good job!</p>',
+          },
+          invalid: {
+            state: 'Wrong!',
+            diagnosis: '<p>Too Bad!</p>',
+          },
+        },
+        solutions: ['1', '2'],
+        type: 'qcm',
+      };
+
+      // when
+      const screen = await render(<template><ModulixQcm @element={{qcmElementWithShortProposals}} /></template>);
+
+      // then
+      assert
+        .dom(screen.getByRole('checkbox', { name: 'checkbox1' }).parentElement.parentElement.parentElement)
+        .hasClass('element-qcm__3-short-proposals');
+    });
+  });
 });

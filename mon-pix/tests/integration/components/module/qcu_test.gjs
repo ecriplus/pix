@@ -277,10 +277,27 @@ module('Integration | Component | Module | QCU', function (hooks) {
       assert.dom(screen.getByText('Try again!')).exists();
     });
   });
+
+  module('when qcu has short proposals', function () {
+    test('should display proposals in a grid', async function (assert) {
+      // given
+      const hasShortProposals = true;
+      const qcuElementWithShortProposals = _getQcuElement(hasShortProposals);
+
+      // when
+      const screen = await render(<template><ModulixQcu @element={{qcuElementWithShortProposals}} /></template>);
+
+      // then
+      assert
+        .dom(screen.getByRole('radio', { name: 'radio1' }).parentElement.parentElement.parentElement)
+        .hasClass('element-qcu__short-proposals');
+    });
+  });
 });
 
-function _getQcuElement() {
-  const qcuElement = {
+function _getQcuElement(hasShortProposals = false) {
+  return {
+    hasShortProposals,
     id: 'd0690f26-978c-41c3-9a21-da931857739c',
     instruction: 'Instruction',
     proposals: [
@@ -290,6 +307,4 @@ function _getQcuElement() {
     solution: '1',
     type: 'qcu',
   };
-
-  return qcuElement;
 }

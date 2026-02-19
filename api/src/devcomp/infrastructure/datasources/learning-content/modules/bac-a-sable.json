@@ -349,7 +349,7 @@
               "element": {
                 "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
                 "type": "text",
-                "content": "<p>Section <strong>Réponses Courtes</strong> (QCU découverte et déclaratif)</p>"
+                "content": "<p>Section <strong>Réponses Courtes</strong> (QCM, QCU (+ découverte et déclaratif))</p>"
               }
             }
           ]
@@ -364,7 +364,7 @@
               "element": {
                 "id": "c3bc4466-2825-488e-ad5f-275ace4b19a8",
                 "type": "qcu-discovery",
-                "instruction": "<p>Quelle est la meilleure crêpe ?</p>",
+                "instruction": "<p>Quelle est la meilleure crêpe 🥞 ?</p>",
                 "proposals": [
                   {
                     "id": "1",
@@ -382,7 +382,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "Beurre/sucre 🥞",
+                    "content": "Citron/sucre 🍋",
                     "feedback": {
                       "diagnosis": "<p>Pardon ?</p>"
                     }
@@ -493,6 +493,138 @@
                     }
                   }
                 ],
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "e2b88606-c4aa-4ac2-9505-1ac691df3d67",
+          "type": "challenge",
+          "title": "qcu short proposals (3 et 4)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "19525c84-e8e7-4852-868b-e1857f21daae",
+                "type": "qcu",
+                "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on ne participe pas au mob ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "🔥",
+                    "feedback": {
+                      "state": "🔥🔥🔥",
+                      "diagnosis": "<p> Non, cet émoji n'est pas disponible en autocollant sur le huddle de travail.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "☕️",
+                    "feedback": {
+                      "state": "What else ? ☕️",
+                      "diagnosis": "<p>Non, mais cet émoji est bien présent comme autocollant sur le huddle.<br> Il nous permet d'indiquer que l'on s'absente un moment.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "👎",
+                    "feedback": {
+                      "state": "👍 !",
+                      "diagnosis": "<p>Tout à fait ! Cet émoji, présent comme autocollant sur le huddle, nous permet d'indiquer cette information au reste de l'équipe.</p>"
+                    }
+                  }
+                ],
+                "solution": "3",
+                "hasShortProposals": true
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b671a789-1aff-4941-b49b-ac8a1634e9eb",
+                "type": "qcu",
+                "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on commit une feature ?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "🦀",
+                    "feedback": {
+                      "state": "Alors non...",
+                      "diagnosis": "<p>Cet émoji fait partie de la DA de l'équipe, mais rien à voir avec nos standards de commit.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "⚡️",
+                    "feedback": {
+                      "state": "Oui !",
+                      "diagnosis": "<p>Pure décision de l'équipe, <strong>Gitmoji</strong> le recommandant normalement pour les améliorations de performance. <br> C'est juste qu'il est COOL 😎</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "✨",
+                    "feedback": {
+                      "state": "🤖INCORRECT🤖",
+                      "diagnosis": "<p>Il s'agit effectivement de l'émoji recommandé par <strong>Gitmoji</strong> mais nous avons changé depuis peu car il est devenu le symbole non officiel de l’IA.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "🔥",
+                    "feedback": {
+                      "state": "🔥🔥🔥",
+                      "diagnosis": "<p>Celui-ci indique que l'on supprime du code ! il nous vient du guide <strong>Gitmoji</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "2",
+                "hasShortProposals": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "aa40e5bb-fe1e-41df-9318-a00aaca6dbe8",
+          "type": "challenge",
+          "title": "qcm short proposals (3 et 4)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e48f8ce7-cd94-40d3-bb62-bbee4116951c",
+                "type": "qcm",
+                "instruction": "<p>Dans ces propositions, lesquels sont des palindromes?</p>",
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "De la salade"
+                  },
+                  {
+                    "id": "2",
+                    "content": "KEYAK"
+                  },
+                  {
+                    "id": "3",
+                    "content": "10/02/2001"
+                  },
+                  {
+                    "id": "4",
+                    "content": "Réifier"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Correct&#8239;!",
+                    "diagnosis": "<p>On trouve ici un palindrome classique par lecture des lettres, un palindrome de forme numérique et un palindrome syllabique.</p>"
+                  },
+                  "invalid": {
+                    "state": "Et non&#8239;!",
+                    "diagnosis": "<p>Essayez encore 🦀</p>"
+                  }
+                },
+                "solutions": ["1", "3", "4"],
                 "hasShortProposals": true
               }
             }

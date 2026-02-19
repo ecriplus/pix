@@ -139,7 +139,7 @@ export default class ModuleQcu extends ModuleElement {
           {{t "pages.modulix.qcu.direction"}}
         </p>
 
-        <div class="element-qcu__proposals">
+        <div class="element-qcu__{{this.proposalsStyle}}">
           {{#each this.element.proposals as |proposal|}}
             <PixRadioButton
               name={{this.element.id}}

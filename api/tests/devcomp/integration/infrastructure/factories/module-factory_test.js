@@ -894,6 +894,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: true,
                         id: 'ba78dead-a806-4954-b408-e8ef28d28fab',
                         type: 'qcu',
                         instruction: '<p>L’adresse mail M3g4Cool1415@gmail.com est correctement écrite ?</p>',
@@ -1115,6 +1116,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                     {
                       type: 'element',
                       element: {
+                        hasShortProposals: true,
                         id: '30701e93-1b4d-4da4-b018-fa756c07d53f',
                         type: 'qcm',
                         instruction: '<p>Quels sont les 3 piliers de Pix ?</p>',
@@ -1912,6 +1914,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         {
                           elements: [
                             {
+                              hasShortProposals: true,
                               id: '71de6394-ff88-4de3-8834-a40057a50ff4',
                               type: 'qcu',
                               instruction: '<p>Pix évalue 16 compétences numériques différentes.</p>',
@@ -2065,6 +2068,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         {
                           elements: [
                             {
+                              hasShortProposals: true,
                               id: '30701e93-1b4d-4da4-b018-fa756c07d53f',
                               type: 'qcm',
                               instruction: '<p>Quels sont les 3 piliers de Pix&#8239;?</p>',

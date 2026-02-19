@@ -44,7 +44,7 @@ export default class ModuleElement extends Component {
     throw new Error('ModuleElement.canValidateElement not implemented');
   }
 
-  get hasShortProposals() {
+  get proposalsStyle() {
     if (!this.element.hasShortProposals || this.modulixPreviewMode.isEnabled) {
       return 'proposals';
     }

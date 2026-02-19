@@ -156,7 +156,7 @@ export default class ModuleQcm extends ModuleElement {
           {{t "pages.modulix.qcm.direction"}}
         </p>
 
-        <div class="element-qcm__proposals">
+        <div class="element-qcm__{{this.proposalsStyle}}">
           {{#each this.element.proposals as |proposal|}}
             <PixCheckbox
               name={{this.element.id}}

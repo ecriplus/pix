@@ -167,9 +167,28 @@ module('Integration | Component | Module | QCUDeclarative', function (hooks) {
       assert.dom(screen.getByRole('heading', { name: t('pages.modulix.issue-report.modal.title'), level: 1 })).exists();
     });
   });
+
+  module('when qcu declarative has short proposals', function () {
+    test('should display proposals in a grid', async function (assert) {
+      // given
+      const hasShortProposals = true;
+      const qcuDeclarativeElementWithShortProposals = _getQcuDeclarativeElement(hasShortProposals);
+      const { proposals } = qcuDeclarativeElementWithShortProposals;
+
+      // when
+      const screen = await render(
+        <template><ModuleQcuDeclarative @element={{qcuDeclarativeElementWithShortProposals}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(screen.getByRole('button', { name: proposals[0].content }).parentElement)
+        .hasClass('element-qcu-declarative__3-short-proposals');
+    });
+  });
 });
 
-function _getQcuDeclarativeElement() {
+function _getQcuDeclarativeElement(hasShortProposals = false) {
   const instruction = '<p>De quoi le ‘oui‘ a-t-il besoin pour gagner ?</p>';
   const complementaryInstruction = 'Il n’y a pas de bonne ou de mauvaise réponse.';
 
@@ -197,5 +216,5 @@ function _getQcuDeclarativeElement() {
     },
   ];
 
-  return { instruction, complementaryInstruction, proposals };
+  return { instruction, hasShortProposals, complementaryInstruction, proposals };
 }
