@@ -1235,6 +1235,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const missionManagementFeatureId = databaseBuilder.factory.buildFeature(
           ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT,
         ).id;
+        const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
         const oralizationFeatureId = databaseBuilder.factory.buildFeature(
           ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER,
         ).id;
@@ -1252,6 +1253,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           createdBy: superAdminUserId,
           administrationTeamId: administrationTeam.id,
           countryCode: 99100,
+          organizationLearnerType: new OrganizationLearnerType(organizationLearnerType),
         });
 
         const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });

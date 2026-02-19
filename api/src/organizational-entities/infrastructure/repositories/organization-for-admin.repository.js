@@ -216,12 +216,11 @@ const save = async function ({ organization }) {
     'parentOrganizationId',
     'countryCode',
   ]);
-  // TODO: supprimer l'optional chaining quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME)
     .returning('*')
     .insert({
       ...data,
-      organizationLearnerTypeId: organization.organizationLearnerType?.id,
+      organizationLearnerTypeId: organization.organizationLearnerType.id,
     });
   const savedOrganization = _toDomain(organizationCreated);
 
