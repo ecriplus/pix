@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.335.0](https://github.com/1024pix/pix/compare/v5.334.1...v5.335.0) (2026-02-19)
+
+### :rocket: Amélioration
+
+- [#15173](https://github.com/1024pix/pix/pull/15173) Ajout POI def module CYPhishingAVA 
+- [#15158](https://github.com/1024pix/pix/pull/15158) intégration v0 repondremail nov 
+- [#15163](https://github.com/1024pix/pix/pull/15163) Pouvoir renseigner le public prescrit lors de la création d'organisation en masse (PIX-21331) 
+- [#15165](https://github.com/1024pix/pix/pull/15165) Retours experts CY_MFA_IND 
+- [#15121](https://github.com/1024pix/pix/pull/15121) surequipement-modif-relectures 
+
+### :bug: Correction
+
+- [#15157](https://github.com/1024pix/pix/pull/15157)  Réalignement de l'image des carte de mission avant lancement d'une mission (PIX-21602) 
+- [#15153](https://github.com/1024pix/pix/pull/15153) Éviter à un candidat en certif de finir dans un état invalide (PIX-21579) 
+
+### :building_construction: Tech
+
+- [#15099](https://github.com/1024pix/pix/pull/15099) :broom: Réduit l'utilisation de la  librairie `lodash` 
+- [#15154](https://github.com/1024pix/pix/pull/15154) Utiliser DomainTransaction dans les repo de Shared
+
 ## [5.334.1](https://github.com/1024pix/pix/compare/v5.334.0...v5.334.1) (2026-02-18)
 
 ### :bug: Correction
