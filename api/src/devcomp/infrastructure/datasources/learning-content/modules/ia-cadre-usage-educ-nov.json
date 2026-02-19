@@ -852,7 +852,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "Parce que le RGPD l’interdit.",
+                          "content": "Parce que le RGPD l’impose légalement.",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>L’impératif de vérification des résultats produits par l’IA n’est pas lié aux règles de protection des données (RGPD). Il faut plutôt penser à aux risques liés à son fonctionnement…</p>"
