@@ -895,7 +895,7 @@
                   },
                   "invalid": {
                     "state": "Mauvaise réponse !",
-                    "diagnosis": ""
+                    "diagnosis": "<p>Pour limiter l'impact environnemental des smartphones il faut <strong>essayer de les conserver le plus longtemps possible</strong>. Pour cela il faut <strong>les protéger et les réparer</strong>.</p><p>Et si on doit vraiment en changer, il vaut mieux <strong>les vendre ou les donner</strong>.</p><p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut <strong>les déposer dans des points de collecte pour qu'ils soient recycler</strong>.</p>"
                   }
                 }
               }
