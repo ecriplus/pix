@@ -76,11 +76,6 @@ async function _deleteExistingCandidatesInSession({ candidateRepository, session
 }
 
 async function _saveCandidates({ candidates, sessionId, candidateRepository }) {
-  for (const candidateDTO of candidates) {
-    const candidate = new Candidate({ ...candidateDTO });
-    await candidateRepository.saveInSession({
-      sessionId,
-      candidate,
-    });
-  }
+  const candidatesToSave = candidates.map((candidate) => new Candidate({ ...candidate, sessionId }));
+  await candidateRepository.save({ candidates: candidatesToSave });
 }
