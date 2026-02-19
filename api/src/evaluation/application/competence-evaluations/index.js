@@ -42,5 +42,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'competence-evaluations-api';
+const name = 'evaluation/competence-evaluations-api';
 export { name, register };

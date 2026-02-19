@@ -396,5 +396,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'trainings-api';
+const name = 'devcomp/trainings-api';
 export { name, register };

@@ -89,4 +89,4 @@ export async function register(server) {
   ]);
 }
 
-export const name = 'llm-preview-api';
+export const name = 'llm/llm-preview-api';

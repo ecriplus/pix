@@ -87,5 +87,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'tutorials-api';
+const name = 'devcomp/tutorials-api';
 export { name, register };

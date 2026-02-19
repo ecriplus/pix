@@ -85,6 +85,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sco-organization-management';
+const name = 'prescription/learner-management/sco-organization-management-api';
 
 export { name, register };

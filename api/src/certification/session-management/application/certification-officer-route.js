@@ -39,6 +39,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'session-certification-officer-api';
+const name = 'certification/session-management/session-certification-officer-api';
 
 export { name, register };

@@ -74,5 +74,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'frameworks-api';
+const name = 'learning-content/frameworks-api';
 export { name, register };

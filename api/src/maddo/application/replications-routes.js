@@ -29,5 +29,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'maddo-replications-api';
+const name = 'maddo/maddo-replications-api';
 export { name, register };

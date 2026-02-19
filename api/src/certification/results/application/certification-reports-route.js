@@ -32,5 +32,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-reports';
+const name = 'certification/results/certification-reports';
 export { name, register };

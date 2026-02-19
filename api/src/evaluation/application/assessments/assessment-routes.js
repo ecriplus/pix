@@ -87,5 +87,5 @@ const register = async function (server) {
   server.route(routes);
 };
 
-const name = 'evaluation-assessments-api';
+const name = 'evaluation/evaluation-assessments-api';
 export { name, register };

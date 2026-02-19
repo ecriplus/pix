@@ -28,6 +28,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'team-api';
+const name = 'team/team-api';
 
 export const teamRoutes = [{ register, name }];

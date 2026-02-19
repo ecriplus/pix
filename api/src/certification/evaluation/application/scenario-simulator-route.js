@@ -48,5 +48,5 @@ const register = async (server) => {
   ]);
 };
 
-const name = 'scenario-simulator-api';
+const name = 'certification/evaluation/scenario-simulator-api';
 export { name, register };

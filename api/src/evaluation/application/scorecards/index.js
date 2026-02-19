@@ -61,5 +61,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'scorecards-api';
+const name = 'evaluation/scorecards-api';
 export { name, register };

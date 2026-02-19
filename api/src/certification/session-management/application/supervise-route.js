@@ -39,5 +39,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'session-supervise-api';
+const name = 'certification/session-management/session-supervise-api';
 export { name, register };

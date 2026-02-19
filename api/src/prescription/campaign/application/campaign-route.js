@@ -75,5 +75,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'campaign-api';
+const name = 'prescription/campaign/campaign-api';
 export { name, register };

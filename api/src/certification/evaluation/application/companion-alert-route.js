@@ -29,5 +29,5 @@ const register = async function (server) {
   server.route(routes);
 };
 
-const name = 'evaluation-companion-alert-api';
+const name = 'certification/evaluation/evaluation-companion-alert-api';
 export { name, register };

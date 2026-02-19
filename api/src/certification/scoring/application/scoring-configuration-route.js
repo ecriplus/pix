@@ -77,6 +77,6 @@ const register = async (server) => {
   ]);
 };
 
-const name = 'scoring-configuration';
+const name = 'certification/scoring/scoring-configuration-api';
 
 export { name, register };

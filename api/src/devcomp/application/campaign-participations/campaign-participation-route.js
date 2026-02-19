@@ -25,5 +25,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'old-campaign-participations-api';
+const name = 'devcomp/old-campaign-participations-api';
 export { name, register };

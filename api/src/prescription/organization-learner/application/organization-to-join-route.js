@@ -27,5 +27,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'organization-to-join';
+const name = 'prescription/organization-learner/organization-to-join-api';
 export { name, register };

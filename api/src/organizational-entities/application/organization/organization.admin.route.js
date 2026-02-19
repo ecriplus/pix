@@ -526,6 +526,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'organizational-entities-api';
+const name = 'organizational-entities/organization-admin-api';
 
 export { name, register };

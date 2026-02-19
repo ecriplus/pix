@@ -15,5 +15,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'feature-toggles-api';
+const name = 'shared/feature-toggles-api';
 export { name, register };

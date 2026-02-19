@@ -49,5 +49,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'feedbacks-api';
+const name = 'evaluation/feedbacks-api';
 export { name, register };

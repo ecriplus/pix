@@ -26,5 +26,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'school-organization-learners-api';
+const name = 'school/school-organization-learners-api';
 export { name, register };

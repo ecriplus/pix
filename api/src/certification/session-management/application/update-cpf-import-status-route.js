@@ -39,5 +39,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'update-cpf-import-status-api';
+const name = 'certification/session-management/update-cpf-import-status-api';
 export { name, register };

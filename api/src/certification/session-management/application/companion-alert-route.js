@@ -48,4 +48,4 @@ export function register(server) {
   ]);
 }
 
-export const name = 'session-management-companion-alert-api';
+export const name = 'certification/session-management/session-management-companion-alert-api';

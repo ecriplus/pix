@@ -29,6 +29,6 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'organization-learner-types-admin-api';
+const name = 'organizational-entities/organization-learner-type-admin-api';
 
 export { name, register };

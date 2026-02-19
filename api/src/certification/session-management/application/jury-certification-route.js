@@ -34,5 +34,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'jury-certification-api';
+const name = 'certification/session-management/jury-certification-api';
 export { name, register };

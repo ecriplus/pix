@@ -50,5 +50,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'orga-target-profiles-api';
+const name = 'prescription/target-profile/target-profile-api';
 export { name, register };

@@ -34,5 +34,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-rescoring-api';
+const name = 'certification/evaluation/certification-rescoring-api';
 export { name, register };

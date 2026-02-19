@@ -88,5 +88,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'session-live-alert-api';
+const name = 'certification/session-management/session-live-alert-api';
 export { name, register };

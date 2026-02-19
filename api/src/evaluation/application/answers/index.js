@@ -109,5 +109,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'answers-api';
+const name = 'evaluation/answers-api';
 export { name, register };

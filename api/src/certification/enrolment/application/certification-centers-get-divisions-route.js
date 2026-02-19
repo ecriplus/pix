@@ -32,5 +32,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-centers-get-divisions-api';
+const name = 'certification/enrolment/certification-centers-get-divisions-api';
 export { name, register };

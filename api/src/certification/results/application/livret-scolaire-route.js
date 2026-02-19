@@ -46,5 +46,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'livret-scolaire-api';
+const name = 'certification/results/livret-scolaire-api';
 export { name, register };

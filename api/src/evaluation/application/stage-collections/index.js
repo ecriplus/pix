@@ -57,5 +57,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'stage-collections-api';
+const name = 'evaluation/stage-collections-api';
 export { name, register };

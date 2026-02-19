@@ -112,5 +112,5 @@ const register = async function (server) {
     },
   ]);
 };
-const name = 'quest-api';
+const name = 'quest/quest-api';
 export { name, register };

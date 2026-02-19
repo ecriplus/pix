@@ -168,5 +168,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'combined-course-blueprints-api';
+const name = 'quest/combined-course-blueprints-api';
 export { name, register };

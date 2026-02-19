@@ -115,5 +115,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'organization-learners-route';
+const name = 'prescription/organization-learner/organization-learners-api';
 export { name, register };

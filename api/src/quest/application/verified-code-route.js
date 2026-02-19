@@ -23,5 +23,5 @@ const register = async function (server) {
     },
   ]);
 };
-const name = 'verified-codes-api';
+const name = 'quest/verified-codes-api';
 export { name, register };

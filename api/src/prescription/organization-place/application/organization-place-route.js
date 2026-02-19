@@ -180,6 +180,6 @@ const register = async (server) => {
   ]);
 };
 
-const name = 'organization-place-api';
+const name = 'prescription/organization-place/organization-place-api';
 
 export { name, register };

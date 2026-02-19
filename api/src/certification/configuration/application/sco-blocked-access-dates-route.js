@@ -66,5 +66,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sco-blocked-access-dates-api';
+const name = 'certification/configuration/sco-blocked-access-dates-api';
 export { name, register };

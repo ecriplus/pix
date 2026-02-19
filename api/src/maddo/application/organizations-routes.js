@@ -120,5 +120,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'maddo-meta-api';
+const name = 'maddo/maddo-meta-api';
 export { name, register };

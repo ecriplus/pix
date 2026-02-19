@@ -34,5 +34,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'module-issue-report-api';
+const name = 'devcomp/module-issue-report-api';
 export { name, register };

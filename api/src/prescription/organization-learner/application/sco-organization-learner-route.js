@@ -219,5 +219,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'sco-organization-learner-route';
+const name = 'prescription/organization-learner/sco-organization-learner-api';
 export { name, register };

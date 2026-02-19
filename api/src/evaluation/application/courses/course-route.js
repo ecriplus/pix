@@ -22,5 +22,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'courses-api';
+const name = 'evaluation/courses-api';
 export { name, register };

@@ -135,5 +135,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'badges-api';
+const name = 'evaluation/badges-api';
 export { name, register };

@@ -39,6 +39,7 @@ function requestSerializer(req) {
     user_id: monitoringTools.extractUserIdFromRequest(req),
     metrics: context?.metrics,
     route: context?.request?.route?.path,
+    routeDomain: context?.request?.route?.realm?.plugin,
   };
 }
 
@@ -69,13 +70,7 @@ const plugin = {
         return;
       }
       if (event.error) {
-        logger.error(
-          {
-            tags: event.tags,
-            err: event.error,
-          },
-          'request error',
-        );
+        logger.error({ tags: event.tags, err: event.error }, 'request error');
       }
     });
 

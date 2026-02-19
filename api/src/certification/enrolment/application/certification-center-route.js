@@ -42,5 +42,5 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification-centers-session-students-api';
+const name = 'certification/enrolment/certification-centers-session-students-api';
 export { name, register };
