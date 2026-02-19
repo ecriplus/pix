@@ -13,7 +13,7 @@
  * @typedef {import('./index.js').ComplementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  */
 
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
@@ -21,98 +21,100 @@ import { ComplementaryCertificationCourseResult } from '../../../shared/domain/m
 import { CertificationAssessmentHistory } from '../models/CertificationAssessmentHistory.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
-export const scoreV3Certification = withTransaction(
-  /**
-   * @param {object} params
-   * @param {number} params.certificationCourseId
-   * @param {Object} params.event
-   * @param {Services} params.services
-   * @param {AssessmentSheetRepository} params.assessmentSheetRepository
-   * @param {CertificationCandidateRepository} params.certificationCandidateRepository
-   * @param {SharedVersionRepository} params.sharedVersionRepository
-   * @param {AssessmentResultRepository} params.assessmentResultRepository
-   * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
-   * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
-   * @param {CertificationCourseRepository} params.certificationCourseRepository
-   * @param {ComplementaryCertificationCourseResultRepository} params.complementaryCertificationCourseResultRepository
-   * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
-   * @param {EvaluationSessionRepository} params.evaluationSessionRepository
-   * @param {ComplementaryCertificationScoringCriteriaRepository} params.complementaryCertificationScoringCriteriaRepository
-   */
-  async ({
-    event,
-    certificationCourseId,
-    services,
-    assessmentSheetRepository,
-    certificationCandidateRepository,
-    sharedVersionRepository,
-    assessmentResultRepository,
-    sharedCompetenceMarkRepository,
-    certificationAssessmentHistoryRepository,
-    certificationCourseRepository,
-    complementaryCertificationCourseResultRepository,
-    scoringConfigurationRepository,
+/**
+ * @param {object} params
+ * @param {number} params.certificationCourseId
+ * @param {Object} params.event
+ * @param {Services} params.services
+ * @param {AssessmentSheetRepository} params.assessmentSheetRepository
+ * @param {CertificationCandidateRepository} params.certificationCandidateRepository
+ * @param {SharedVersionRepository} params.sharedVersionRepository
+ * @param {AssessmentResultRepository} params.assessmentResultRepository
+ * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
+ * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ * @param {ComplementaryCertificationCourseResultRepository} params.complementaryCertificationCourseResultRepository
+ * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
+ * @param {EvaluationSessionRepository} params.evaluationSessionRepository
+ * @param {ComplementaryCertificationScoringCriteriaRepository} params.complementaryCertificationScoringCriteriaRepository
+ */
+export const scoreV3Certification = async ({
+  event,
+  certificationCourseId,
+  services,
+  assessmentSheetRepository,
+  certificationCandidateRepository,
+  sharedVersionRepository,
+  assessmentResultRepository,
+  sharedCompetenceMarkRepository,
+  certificationAssessmentHistoryRepository,
+  certificationCourseRepository,
+  complementaryCertificationCourseResultRepository,
+  scoringConfigurationRepository,
+  evaluationSessionRepository,
+  complementaryCertificationScoringCriteriaRepository,
+}) => {
+  const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
+  if (!assessmentSheet)
+    throw new NotFoundError('No AssessmentSheet found for certificationCourseId ' + certificationCourseId);
+
+  const candidate = await certificationCandidateRepository.findByAssessmentId({
+    assessmentId: assessmentSheet.assessmentId,
+  });
+
+  const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
+    scope: candidate.subscriptionScope,
+    reconciliationDate: candidate.reconciledAt,
+  });
+
+  await _verifyCertificationIsScorable({
+    certificationCourseId: assessmentSheet.certificationCourseId,
+    answers: assessmentSheet.answers,
+    maximumAssessmentLength: version.challengesConfiguration.maximumAssessmentLength,
     evaluationSessionRepository,
-    complementaryCertificationScoringCriteriaRepository,
-  }) => {
-    const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
-    if (!assessmentSheet)
-      throw new NotFoundError('No AssessmentSheet found for certificationCourseId ' + certificationCourseId);
+  });
 
-    const candidate = await certificationCandidateRepository.findByAssessmentId({
-      assessmentId: assessmentSheet.assessmentId,
-    });
-
-    const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
-      scope: candidate.subscriptionScope,
-      reconciliationDate: candidate.reconciledAt,
-    });
-
-    await _verifyCertificationIsScorable({
-      certificationCourseId: assessmentSheet.certificationCourseId,
-      answers: assessmentSheet.answers,
-      maximumAssessmentLength: version.challengesConfiguration.maximumAssessmentLength,
-      evaluationSessionRepository,
-    });
-
-    const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
+  const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
       await services.findByCertificationCourseAndVersion({
         certificationCourseId: assessmentSheet.certificationCourseId,
         assessmentId: assessmentSheet.assessmentId,
         version,
       });
 
-    const algorithm = new FlashAssessmentAlgorithm({
-      flashAlgorithmImplementation: services.flashAlgorithmService,
-      configuration: version.challengesConfiguration,
-    });
+  const algorithm = new FlashAssessmentAlgorithm({
+    flashAlgorithmImplementation: services.flashAlgorithmService,
+    configuration: version.challengesConfiguration,
+  });
 
-    const v3CertificationScoring = await scoringConfigurationRepository.getLatestByVersion({
-      version,
-    });
+  const v3CertificationScoring = await scoringConfigurationRepository.getLatestByVersion({
+    version,
+  });
 
-    const [cleaScoringCriteria] = await complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId(
-      {
-        certificationCourseId: assessmentSheet.certificationCourseId,
-      },
-    );
+  const [cleaScoringCriteria] = await complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId(
+    {
+      certificationCourseId: assessmentSheet.certificationCourseId,
+    },
+  );
 
-    const { coreScoring, doubleCertificationScoring } = services.handleV3CertificationScoring({
-      event,
-      candidate,
-      assessmentSheet,
-      allChallenges,
-      askedChallengesWithoutLiveAlerts,
-      algorithm,
-      v3CertificationScoring,
-      cleaScoringCriteria,
-    });
+  const { coreScoring, doubleCertificationScoring } = services.handleV3CertificationScoring({
+    event,
+    candidate,
+    assessmentSheet,
+    allChallenges,
+    askedChallengesWithoutLiveAlerts,
+    algorithm,
+    v3CertificationScoring,
+    cleaScoringCriteria,
+  });
 
-    const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
-      algorithm,
-      challenges: challengeCalibrationsWithoutLiveAlerts,
-      allAnswers: assessmentSheet.answers,
-    });
+  const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
+    algorithm,
+    challenges: challengeCalibrationsWithoutLiveAlerts,
+    allAnswers: assessmentSheet.answers,
+  });
+
+  // We reduce the coverage of the transaction since, before that point, only reads are done
+  await DomainTransaction.execute(async () => {
     await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
 
     if (coreScoring) {
@@ -136,8 +138,8 @@ export const scoreV3Certification = withTransaction(
         }),
       );
     }
-  },
-);
+  });
+};
 
 /**
  * @param {object} params
