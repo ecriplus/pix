@@ -7,13 +7,13 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Tous nos usages numériques mobilisent des serveurs, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à l’échelle des entreprises et des législateurs.<br><br></p>",
+    "description": "<p>Tous les usages numériques mobilisent des centres de données, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à l’échelle des entreprises.<br><br></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
-      "<p>Décrire les impacts environnementaux des centres de données.</p>",
-      "<p>Identifier les changements de pratiques nécessaires pour réduire l’impact environnemental des centres de données. </p>",
-      "<p>Connaître des solutions techniques pour réduire les impacts environnementaux des centres de données.</p>"
+      "<p>Décrire les impacts environnementaux des centres de données</p>",
+      "<p>Identifier des changements de pratiques nécessaires pour réduire l’impact environnemental des centres de données </p>",
+      "<p>Connaître des solutions techniques pour réduire les impacts environnementaux des centres de données</p>"
     ],
     "tabletSupport": "inconvenient"
   },
@@ -43,7 +43,7 @@
                 "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacentermap.png",
                 "alt": "Une carte des centres de données dans le monde.",
                 "alternativeText": "<p>Une carte des centres de données dans le monde.</p>",
-                "legend": "",
+                "legend": "Évolution des centres de données dans le monde de 2000 à 2025.",
                 "licence": ""
               }
             },
@@ -52,39 +52,39 @@
               "element": {
                 "id": "f2665813-82bb-4427-a9a0-14a6a5f3df8f",
                 "type": "qcu-discovery",
-                "instruction": "<p>L’agence internationale de l’énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données.<br>À votre avis, que disent ces projections pour la période 2024 à 2030 ?<br></p>",
+                "instruction": "<p>L’agence internationale de l’énergie (IAE) a fait des projections concernant la consommation d’énergie par les centres de données pour les années à venir.<br>À votre avis, que disent ces projections pour la période 2024 à 2030 ?<br></p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Leur consommation d’énergie va diminuer. ↘️</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2024 et 2030.<br></strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2024 et 2030.&nbsp;</strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie&nbsp;</strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour les vidéos, les objets connectés, les cryptomonnaies mais surtout à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Leur consommation d’énergie va rester stable. ➡️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité</strong><strong> consommée par les</strong><strong> centres de données va doubler </strong>entre 2024&nbsp;et 2030.<br><br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. </p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité</strong><strong> consommée par les</strong><strong> centres de données va doubler </strong>entre 2024&nbsp;et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie </strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour les vidéos, les objets connectés, les cryptomonnaies mais surtout l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public. </p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Leur consommation d’énergie va augmenter de 20%. ↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br></p><p>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br></p><p>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie </strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour&nbsp;les objets connectés, les cryptomonnaies mais surtout à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Leur consommation d’énergie va doubler. ↗️↗️<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergies </strong>et les nouvelles technologies sont très gourmandes en calcul. On pense aux vidéos, aux objets connectés, cryptomonnaies mais surtout à l’essor l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Effectivement ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler </strong>entre 2024 et 2030.<br>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie </strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour les vidéos, les objets connectés les cryptomonnaies mais surtout l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   }
                 ],
-                "solution": "4",
-                "hasShortProposals": false
+                "solution": "4"
               }
             }
           ]
@@ -105,7 +105,7 @@
               "element": {
                 "id": "1ec87fee-69c4-4062-8a25-89da3a479c2f",
                 "type": "text",
-                "content": "La <strong>construction </strong>d’un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle contribue également à l’<strong>artificialisation des sols</strong>.<br>De plus, le centre de données consomme une grande quantité d’<strong>eau</strong> et d’<strong>énergie</strong> et génère de nombreux <strong>déchets</strong> toxiques."
+                "content": "<p>La <strong>construction </strong>d’un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle participe également à l’<strong>artificialisation des sols</strong>.</p><br><p>De plus, le centre de données consomme une grande quantité d’<strong>énergie</strong>&nbsp;et <strong>d'eau </strong>(pour son refroidissement) et génère de nombreux <strong>déchets</strong> toxiques.</p>"
               }
             },
             {
@@ -145,6 +145,7 @@
                       "id": "2325603b-bf07-498a-bbdf-754cb4858782",
                       "type": "qcm",
                       "instruction": "<p>Quelles sont les conséquences de l’extraction de métaux pour la construction des centres des données ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -169,12 +170,16 @@
                           "diagnosis": "<p>Il fallait cocher toutes les cases car toutes ces propositions sont des impacts  de l’extraction de métaux pour la construction de centres de données.</p>"
                         },
                         "invalid": {
-                          "state": "<p>Malheureusement, non...</p>",
+                          "state": "<p>Pas tout à fait<br></p>",
                           "diagnosis": "<p>Toutes les propositions sont des impacts de l’extraction de métaux pour la construction de centres de données.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -193,6 +198,7 @@
                       "id": "b35bcf4a-abae-4162-ae50-2384367ed6f4",
                       "type": "qcm",
                       "instruction": "<p>Quelles sont les conséquences de la consommation d’eau des centres des données ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -221,8 +227,10 @@
                           "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
                         }
                       },
-                      "solutions": ["1", "3"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -246,6 +254,7 @@
                       "id": "e3363973-52e7-4757-b9fc-4d820b7bb355",
                       "type": "qcm",
                       "instruction": "<p>Au global, quelles sont les conséquences de la construction et du fonctionnement des centres de données ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -270,12 +279,16 @@
                           "diagnosis": "<p>Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine.</p>"
                         },
                         "invalid": {
-                          "state": "<p>Malheureusement non...</p>",
+                          "state": "<p>Pas tout à fait<br></p>",
                           "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine."
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 }
@@ -335,7 +348,7 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
-                "content": "<p>Malo est concepteur de site web dans une entreprise, il est en train d’améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centres de données ?&nbsp;🤔</p>"
+                "content": "<p>Prenons l'exemple de Malo, concepteur de site web dans une entreprise.&nbsp;Il est en train d’améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centres de données ?&nbsp;🤔</p>"
               }
             },
             {
@@ -359,21 +372,21 @@
                             "label": "Elle diminue. 📉",
                             "feedback": {
                               "type": "neutral",
-                              "text": "C’est faux. Une vidéo va davantage solliciter les serveurs d’une image."
+                              "text": "C’est faux. Une vidéo va davantage solliciter les serveurs qu’une image."
                             }
                           },
                           {
                             "label": "Elle reste stable. ",
                             "feedback": {
                               "type": "neutral",
-                              "text": "C’est faux. Une vidéo va davantage solliciter les serveurs d’une image."
+                              "text": "C’est faux. Une vidéo va davantage solliciter les serveurs qu’une image."
                             }
                           },
                           {
                             "label": "Elle augmente. 📈",
                             "feedback": {
                               "type": "neutral",
-                              "text": "C’est vrai. Une vidéo va d’avantage solliciter les serveurs d’une image."
+                              "text": "C’est vrai. Une vidéo va davantage solliciter les serveurs qu’une image."
                             }
                           }
                         ]
@@ -426,7 +439,7 @@
                     {
                       "id": "523a1d70-ea60-498a-be0a-554d14e2907c",
                       "type": "text",
-                      "content": "Malo choisit d’activer la lecture automatique des vidéos."
+                      "content": "<p>Malo choisit d’activer la lecture automatique des vidéos, c'est-à-dire qu'à la fin d'une vidéo, une autre est lancée automatiquement sans action de l'utilisateur.</p>"
                     },
                     {
                       "id": "3e486e8b-cca0-45c5-b022-b40574eeb8bc",
@@ -527,7 +540,7 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
-                      "content": "On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie du logiciel ou du produit&nbsp;: conception, développement, utilisation et fin de vie."
+                      "content": "<p>On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie d'un logiciel ou d'un produit&nbsp;: conception, développement, utilisation et fin de vie.</p>"
                     }
                   ]
                 },
@@ -536,7 +549,7 @@
                     {
                       "id": "b2328855-4a62-4909-b3cd-dd89682f43c2",
                       "type": "text",
-                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5><p>En pratique, elles sont encore peu appliquées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
+                      "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5><p> Elles sont encore peu utilisées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
                     }
                   ]
                 }
@@ -613,6 +626,7 @@
                       "id": "9b8689af-c414-4cfc-a19d-1bb8991b7330",
                       "type": "qcu-discovery",
                       "instruction": "<p>À quelle catégorie appartient la solution proposée par Boubacar ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -625,26 +639,25 @@
                           "id": "2",
                           "content": "Utiliser des techniques de refroidissement moins consommatrices d’énergie.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire, éolienne, etc.) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Alimenter le centre de données avec une énergie renouvelable.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable</strong> (solaire, éolienne, etc.) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<strong></strong></p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire ou éolienne) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
+                            "diagnosis": "<p>Cette solution permet d’alimenter le centre de données avec une <strong>énergie renouvelable </strong>(solaire, éolienne, etc.) et permet donc de <strong>réduire les émissions de gaz à effet de serre.<br></strong>À Champs sur Marne, un centre de données est ainsi équipé de panneaux solaires depuis 2024.&nbsp;Cependant,&nbsp;ils ne couvrent que 2% de la consommation d’énergie annuelle&nbsp;du centre de données.</p>"
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -656,7 +669,7 @@
                       "instruction": "",
                       "tagName": "message-conversation",
                       "props": {
-                        "title": "Dona & Oscar",
+                        "title": "Dona & Amira",
                         "messages": [
                           {
                             "userName": "Dona",
@@ -665,13 +678,13 @@
                             "content": "C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !"
                           },
                           {
-                            "userName": "Oscar",
+                            "userName": "Amira",
                             "direction": "outgoing",
                             "type": "Texte",
                             "content": "Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊"
                           },
                           {
-                            "userName": "Oscar",
+                            "userName": "Amira",
                             "direction": "outgoing",
                             "type": "Image seule",
                             "image": {
@@ -685,7 +698,8 @@
                     {
                       "id": "19d83e51-2310-4564-8037-44105f3b514f",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Oscar ? </p>",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Amira ? </p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -716,8 +730,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -729,7 +742,7 @@
                       "instruction": "",
                       "tagName": "message-conversation",
                       "props": {
-                        "title": "Dona & Amira",
+                        "title": "Dona & Oscar",
                         "messages": [
                           {
                             "userName": "Dona",
@@ -738,13 +751,13 @@
                             "content": "C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?"
                           },
                           {
-                            "userName": "Amira",
+                            "userName": "Oscar",
                             "direction": "outgoing",
                             "type": "Texte",
                             "content": "Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides : par exemple en Suède ?❄️"
                           },
                           {
-                            "userName": "Amira",
+                            "userName": "Oscar",
                             "direction": "outgoing",
                             "type": "Image seule",
                             "image": {
@@ -764,7 +777,8 @@
                     {
                       "id": "1f59df7b-6743-4ae9-99b8-2524b4305b1f",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Amira ? <br></p>",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Oscar ? <br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -795,8 +809,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 }
@@ -832,7 +845,7 @@
                       "id": "331b8252-cd22-4713-af75-212a5b912302",
                       "type": "expand",
                       "title": "💡 Et en France ?",
-                      "content": "En France, la <strong>loi REEN</strong> vise également à inciter les <strong>centres de données </strong>à être moins consommateurs en leur accordant la réduction d’une taxe s’ils respectent des <strong>critères environnementaux</strong>."
+                      "content": "<p>En France, depuis 2021, la <strong>loi sur la Réduction de l'Empreinte Environnementale du Numérique (REEN)</strong> vise également à inciter les <strong>centres de données </strong>à être moins consommateurs en leur accordant la réduction d’une taxe s’ils respectent des <strong>critères environnementaux</strong>.</p>"
                     }
                   ]
                 }
@@ -856,7 +869,7 @@
               "element": {
                 "id": "8dde623f-d573-4782-925b-f3c0e50bf780",
                 "type": "text",
-                "content": "<ul><li><strong>📈L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>📉En tant que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>💡Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable…<br></li><li>⚖️ La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
+                "content": "<ul><li><strong>📈L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>📉En tant que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>💡Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable.<br></li><li>⚖️ La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
               }
             }
           ]
@@ -867,6 +880,21 @@
       "id": "a9874e16-5333-446f-92f2-b2c39fdfa04d",
       "type": "practise",
       "grains": [
+        {
+          "id": "db1811ed-217f-4261-a309-d683da2ce69b",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "39d231e6-08e4-4db5-8acc-601dc4a0c8e1",
+                "type": "text",
+                "content": "<p>Voyons voir si vous avez retenu l'essentiel.</p><p><br></p>"
+              }
+            }
+          ]
+        },
         {
           "id": "c792086b-77f6-4685-afb4-5e6d0b0e1202",
           "type": "activity",
@@ -903,27 +931,19 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["centre de données"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "centre de données",
+                            "datacenter"
+                          ]
                         },
                         {
                           "type": "text",
-                          "content": "contient des centaines de"
-                        },
-                        {
-                          "input": "456",
-                          "type": "input",
-                          "inputType": "text",
-                          "size": 15,
-                          "display": "inline",
-                          "placeholder": "à compléter",
-                          "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["serveurs"]
-                        },
-                        {
-                          "type": "text",
-                          "content": "qui sont sollicités pour permettre, entre autres, notre utilisation d’internet et de l’intelligence artificielle.<br>"
+                          "content": "contient des centaines de serveurs&nbsp;qui sont sollicités pour permettre, entre autres, notre utilisation d’internet et de l’intelligence artificielle."
                         }
                       ],
                       "feedbacks": {
@@ -967,8 +987,14 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["métaux"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "métaux"
+                          ]
                         },
                         {
                           "type": "text",
@@ -982,12 +1008,18 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["terres"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "terres"
+                          ]
                         },
                         {
                           "type": "text",
-                          "content": "rares qui sont nécessaires à la construction de ces infrastructures.<br>"
+                          "content": "<p>rares qui sont nécessaires à la construction de ces centres de données.</p><br>"
                         }
                       ],
                       "feedbacks": {
@@ -1021,7 +1053,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "Ces infrastructure consomment de l’eau"
+                          "content": "<p>Ces centres de données consomment de l’eau</p>"
                         },
                         {
                           "input": "103432",
@@ -1031,8 +1063,15 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["douce", "potable"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "douce",
+                            "potable"
+                          ]
                         },
                         {
                           "type": "text",
@@ -1046,8 +1085,15 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["pénuries", "manques"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "pénuries",
+                            "manques"
+                          ]
                         },
                         {
                           "type": "text",
@@ -1120,7 +1166,7 @@
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/pagestatique.png",
-                        "alt": "Toutes les pages de RecetteSuzette sont statiques."
+                        "alt": "Toutes les pages de RecetteSuzette sont statiques, sans animation."
                       },
                       "license": {
                         "name": "",
@@ -1129,7 +1175,7 @@
                       }
                     },
                     {
-                      "title": " Les médias de Youpix sont présentées dans la meilleure qualité possible.",
+                      "title": " Les médias de Youpix sont présentés dans la meilleure qualité possible.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
@@ -1156,7 +1202,8 @@
               "element": {
                 "id": "b040a865-2b7f-4729-958b-bad07815a8b5",
                 "type": "qcm",
-                "instruction": "<p>Parmi ces exemples de site web, lesquels respectent des pratiques d’éco-conception ?</p>",
+                "instruction": "<p>Parmi ces exemples de sites web, lesquels respectent des pratiques d’éco-conception ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -1182,11 +1229,13 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Essayer de vous demandez quelles pratiques sollicitent le moins les serveurs.</p>"
+                    "diagnosis": "<p>Essayer de vous demander quelles pratiques sollicitent le moins les serveurs.</p>"
                   }
                 },
-                "solutions": ["2", "3"],
-                "hasShortProposals": false
+                "solutions": [
+                  "2",
+                  "3"
+                ]
               }
             }
           ]
@@ -1271,7 +1320,7 @@
               "element": {
                 "id": "4cf542a5-1027-4dd5-899b-e5fb4048ff1d",
                 "type": "custom",
-                "instruction": "<p>Lisez cet article puis répondez aux questions.</p>",
+                "instruction": "<p>Lisez l'article suivant puis répondez aux questions.</p>",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 0,
@@ -1308,6 +1357,7 @@
                       "id": "9e2e22f4-e6fe-44a7-bfdc-d9412431174b",
                       "type": "qcu",
                       "instruction": "<p>D’après vous, quel est l’objectif de cet article ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -1334,8 +1384,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -1345,6 +1394,7 @@
                       "id": "623a15cf-4b46-4ee2-a068-4bd0b1555022",
                       "type": "qcm",
                       "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Quérato ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -1352,7 +1402,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Les résidents voisins des centres de données ont vécu des coupures d’eau et de courant.<br></p>"
+                          "content": "<p>Les populations voisines des centres de données ont vécu des coupures d’eau et de courant.<br></p>"
                         },
                         {
                           "id": "3",
@@ -1369,8 +1419,11 @@
                           "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
