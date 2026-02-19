@@ -881,6 +881,21 @@
       "type": "practise",
       "grains": [
         {
+          "id": "db1811ed-217f-4261-a309-d683da2ce69b",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "39d231e6-08e4-4db5-8acc-601dc4a0c8e1",
+                "type": "text",
+                "content": "<p>Voyons voir si vous avez retenu l'essentiel.</p><p><br></p>"
+              }
+            }
+          ]
+        },
+        {
           "id": "c792086b-77f6-4685-afb4-5e6d0b0e1202",
           "type": "activity",
           "title": "Les impacts environnementaux en cascade des centres de données",
@@ -922,33 +937,13 @@
                             "t3"
                           ],
                           "solutions": [
-                            "centre de données"
+                            "centre de données",
+                            "datacenter"
                           ]
                         },
                         {
                           "type": "text",
-                          "content": "contient des centaines de"
-                        },
-                        {
-                          "input": "456",
-                          "type": "input",
-                          "inputType": "text",
-                          "size": 15,
-                          "display": "inline",
-                          "placeholder": "à compléter",
-                          "ariaLabel": "à compléter",
-                          "tolerances": [
-                            "t1",
-                            "t2",
-                            "t3"
-                          ],
-                          "solutions": [
-                            "serveurs"
-                          ]
-                        },
-                        {
-                          "type": "text",
-                          "content": "qui sont sollicités pour permettre, entre autres, notre utilisation d’internet et de l’intelligence artificielle.<br>"
+                          "content": "contient des centaines de serveurs&nbsp;qui sont sollicités pour permettre, entre autres, notre utilisation d’internet et de l’intelligence artificielle."
                         }
                       ],
                       "feedbacks": {
@@ -1024,7 +1019,7 @@
                         },
                         {
                           "type": "text",
-                          "content": "rares qui sont nécessaires à la construction de ces infrastructures.<br>"
+                          "content": "<p>rares qui sont nécessaires à la construction de ces centres de données.</p><br>"
                         }
                       ],
                       "feedbacks": {
@@ -1058,7 +1053,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "Ces infrastructure consomment de l’eau"
+                          "content": "<p>Ces centres de données consomment de l’eau</p>"
                         },
                         {
                           "input": "103432",
@@ -1171,7 +1166,7 @@
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/pagestatique.png",
-                        "alt": "Toutes les pages de RecetteSuzette sont statiques."
+                        "alt": "Toutes les pages de RecetteSuzette sont statiques, sans animation."
                       },
                       "license": {
                         "name": "",
@@ -1180,7 +1175,7 @@
                       }
                     },
                     {
-                      "title": " Les médias de Youpix sont présentées dans la meilleure qualité possible.",
+                      "title": " Les médias de Youpix sont présentés dans la meilleure qualité possible.",
                       "description": "",
                       "displayWidth": 0,
                       "image": {
@@ -1207,7 +1202,7 @@
               "element": {
                 "id": "b040a865-2b7f-4729-958b-bad07815a8b5",
                 "type": "qcm",
-                "instruction": "<p>Parmi ces exemples de site web, lesquels respectent des pratiques d’éco-conception ?</p>",
+                "instruction": "<p>Parmi ces exemples de sites web, lesquels respectent des pratiques d’éco-conception ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -1234,7 +1229,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
-                    "diagnosis": "<p>Essayer de vous demandez quelles pratiques sollicitent le moins les serveurs.</p>"
+                    "diagnosis": "<p>Essayer de vous demander quelles pratiques sollicitent le moins les serveurs.</p>"
                   }
                 },
                 "solutions": [
@@ -1325,7 +1320,7 @@
               "element": {
                 "id": "4cf542a5-1027-4dd5-899b-e5fb4048ff1d",
                 "type": "custom",
-                "instruction": "<p>Lisez cet article puis répondez aux questions.</p>",
+                "instruction": "<p>Lisez l'article suivant puis répondez aux questions.</p>",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 0,
@@ -1407,7 +1402,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Les résidents voisins des centres de données ont vécu des coupures d’eau et de courant.<br></p>"
+                          "content": "<p>Les populations voisines des centres de données ont vécu des coupures d’eau et de courant.<br></p>"
                         },
                         {
                           "id": "3",
