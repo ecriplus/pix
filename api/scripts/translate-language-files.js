@@ -93,6 +93,7 @@ export class TranslateLanguageFiles extends Script {
         'icu',
         '--type',
         'key-based',
+        '--decode-escapes',
         '--config',
         `${deeplKey},${formality},${batchSize}`,
       ];
