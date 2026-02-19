@@ -26,8 +26,11 @@ async function listModulesForMetabaseFilter() {
 }
 
 async function main() {
+  if (process.argv[2] === 'metabase-filter') {
+    await listModulesForMetabaseFilter();
+    return;
+  }
   await listModulesForDBReplication();
-  await listModulesForMetabaseFilter();
 }
 
 await main();
