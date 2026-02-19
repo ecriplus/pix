@@ -265,7 +265,7 @@ const update = async function ({ organization }) {
   await knexConn(ORGANIZATIONS_TABLE_NAME)
     .update({
       ...organizationRawData,
-      organizationLearnerTypeId: organization.organizationLearnerType?.id,
+      organizationLearnerTypeId: organization.organizationLearnerType.id,
       updatedAt: new Date(),
     })
     .where({ id: organization.id });

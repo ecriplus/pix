@@ -1300,6 +1300,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         ...childOrganization,
         parentOrganizationId,
         countryCode: 99243,
+        organizationLearnerType: domainOrganizationLearnerType,
       });
 
       // when
@@ -1331,6 +1332,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false },
             [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
           },
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1362,6 +1364,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           features: {
             [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: true },
           },
+          organizationLearnerType: domainOrganizationLearnerType,
         });
 
         await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
@@ -1400,6 +1403,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           features: {
             [ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT.key]: { active: false },
           },
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1424,8 +1428,11 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           id: organization.id,
           documentationUrl: 'https://pix.fr/',
           features: {
-            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+            [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+              active: false,
+            },
           },
+          organizationLearnerType: domainOrganizationLearnerType,
         });
         await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1456,12 +1463,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             id: organization.id,
             documentationUrl: 'https://pix.fr/',
             features: {
-              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+                active: false,
+              },
               [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
                 active: true,
                 params: { enableMaximumPlacesLimit: true },
               },
             },
+            organizationLearnerType: domainOrganizationLearnerType,
           });
           await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1477,12 +1487,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             id: organization.id,
             documentationUrl: 'https://pix.fr/',
             features: {
-              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+                active: false,
+              },
               [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
                 active: true,
                 params: null,
               },
             },
+            organizationLearnerType: domainOrganizationLearnerType,
           });
 
           await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
@@ -1507,12 +1520,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             id: organization.id,
             documentationUrl: 'https://pix.fr/',
             features: {
-              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+                active: false,
+              },
               [ORGANIZATION_FEATURE.PLACES_MANAGEMENT.key]: {
                 active: true,
                 params: { enableMaximumPlacesLimit: true },
               },
             },
+            organizationLearnerType: domainOrganizationLearnerType,
           });
 
           await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
@@ -1546,12 +1562,15 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
             id: organization.id,
             documentationUrl: 'https://pix.fr/',
             features: {
-              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: false },
+              [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+                active: false,
+              },
               [ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key]: {
                 active: true,
                 params: ['my-reward', 'other-reward'],
               },
             },
+            organizationLearnerType: domainOrganizationLearnerType,
           });
           await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1580,6 +1599,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerEmail: 'iron@man.fr',
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
+        organizationLearnerType: domainOrganizationLearnerType,
       });
       await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1618,6 +1638,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         dataProtectionOfficerEmail: 'iron@man.fr',
         dataProtectionOfficerFirstName: 'Iron',
         dataProtectionOfficerLastName: 'Man',
+        organizationLearnerType: domainOrganizationLearnerType,
       });
       await repositories.organizationForAdminRepository.update({ organization: organizationToUpdate });
 
@@ -1648,6 +1669,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const organizationToUpdate = new OrganizationForAdmin({
         id: organizationId,
         documentationUrl: 'https://pix.fr/',
+        organizationLearnerType: domainOrganizationLearnerType,
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
@@ -1670,6 +1692,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const organizationToUpdate = new OrganizationForAdmin({
         id: organizationId,
         documentationUrl: 'https://pix.fr/',
+        organizationLearnerType: domainOrganizationLearnerType,
       });
 
       organizationToUpdate.tagsToAdd = tagsToAdd;
@@ -1698,6 +1721,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const organizationToUpdate = new OrganizationForAdmin({
         id: organizationId,
         documentationUrl: 'https://pix.fr/',
+        organizationLearnerType: domainOrganizationLearnerType,
       });
 
       organizationToUpdate.tagsToRemove = tagsToRemove;
@@ -1716,7 +1740,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
       // when
       await repositories.organizationForAdminRepository.update({
-        organization: new OrganizationForAdmin(organization),
+        organization: new OrganizationForAdmin({
+          ...organization,
+          organizationLearnerType: domainOrganizationLearnerType,
+        }),
       });
 
       // then
