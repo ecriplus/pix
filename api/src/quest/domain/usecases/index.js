@@ -69,6 +69,7 @@ import { getVerifiedCode } from './get-verified-code.js';
 import { rewardUser } from './reward-user.js';
 import { startCombinedCourse } from './start-combined-course.js';
 import { updateCombinedCourse } from './update-combined-course.js';
+import { updateCombinedCourses } from './update-combined-courses.js';
 
 const usecasesWithoutInjectedDependencies = {
   attachOrganizationsToCombinedCourseBlueprint,
@@ -96,6 +97,7 @@ const usecasesWithoutInjectedDependencies = {
   createCombinedCourse,
   findByOrganizationId,
   deleteAndAnonymizeParticipationsForALearnerId,
+  updateCombinedCourses,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
