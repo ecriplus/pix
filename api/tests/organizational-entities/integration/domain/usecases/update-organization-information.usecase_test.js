@@ -90,13 +90,19 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
   context('when administration team does not exist', function () {
     it('throws an AdministrationTeamNotFound error', async function () {
       // given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+      const organizationId = databaseBuilder.factory.buildOrganization({
+        organizationLearnerTypeId: organizationLearnerType.id,
+      }).id;
 
       await databaseBuilder.commit();
 
       const organizationNewInformations = domainBuilder.buildOrganizationForAdmin({
         id: organizationId,
         administrationTeamId: 123,
+        organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: organizationLearnerType.id,
+        }),
       });
 
       // when
@@ -112,7 +118,10 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
   context('when country does not exist', function () {
     it('should throw a CountryNotFound error', async function () {
       // given
-      const organization = databaseBuilder.factory.buildOrganization();
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+      const organization = databaseBuilder.factory.buildOrganization({
+        organizationLearnerTypeId: organizationLearnerType.id,
+      });
 
       await databaseBuilder.commit();
 
@@ -120,6 +129,9 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
         id: organization.id,
         administrationTeamId: organization.administrationTeamId,
         countryCode: 123456,
+        organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: organizationLearnerType.id,
+        }),
       });
 
       // when
@@ -137,7 +149,10 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
   context('when there is no new country code', function () {
     it('should not update country code', async function () {
       // given
-      const initialOrganization = databaseBuilder.factory.buildOrganization();
+      const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType();
+      const initialOrganization = databaseBuilder.factory.buildOrganization({
+        organizationLearnerTypeId: organizationLearnerType.id,
+      });
 
       const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
 
@@ -147,6 +162,9 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
         id: initialOrganization.id,
         administrationTeamId: newAdministrationTeamId,
         countryCode: null,
+        organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+          id: organizationLearnerType.id,
+        }),
       });
 
       // when
