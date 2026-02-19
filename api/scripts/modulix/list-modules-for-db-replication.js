@@ -8,7 +8,18 @@ async function listModulesForDBReplication() {
   const imports = await moduleDatasource.list();
   console.log('--- List of modules for DB replication ---');
   const moduleInformation = imports.map((module) => {
-    return { id: module.id, shortId: module.shortId, slug: module.slug, title: module.title };
+    const moduleObjectivesInline = module.details.objectives.join(', ');
+    return {
+      id: module.id,
+      shortId: module.shortId,
+      slug: module.slug,
+      title: module.title,
+      level: module.details.level,
+      duration: module.details.duration,
+      objectives: moduleObjectivesInline,
+      isBeta: module.isBeta,
+      visibility: module.visibility,
+    };
   });
   console.log(JSON.stringify(moduleInformation, null, 2).replace(/"([^"]+)": "([^"]+)"/g, "$1: '$2'"));
 }
