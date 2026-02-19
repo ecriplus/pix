@@ -455,7 +455,7 @@
                         "mailAddress": "paul.martin@pixmail.org",
                         "avatarColor": "#f24645",
                         "expeditor": "Paul Martin",
-                        "content": "Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>— Paul Martin, Directeur Général",
+                        "content": "Suite à ma réunion avec notre partenaire, merci d’effectuer aujourd’hui un virement confidentiel de 36 200 € sur le compte indiqué ci-dessous.<br>C’est urgent et discret. Confirme-moi quand c’est fait. <br>Paul Martin, Directeur Général",
                         "time": {
                           "days": -10,
                           "minutes": -2
@@ -573,7 +573,7 @@
                         "mailAddress": "alex.marchal@pixmail.org",
                         "avatarColor": "#f12142",
                         "expeditor": "Alex",
-                        "content": ">Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>— Alex</p>",
+                        "content": "Coucou mon coeur, <br>Merci pour nos discussions ! J’ai tellement hâte de te rencontrer enfin, mais je suis coincé à l’aéroport&nbsp;: ma carte ne passe plus et je dois payer mon avion pour te rejoindre. Peux-tu m’envoyer 450 € via un transfert rapide ? Je te rembourse dès mon arrivée, promis. Tu comptes tellement pour moi.<br>Alex</p>",
                         "time": {
                           "days": -1,
                           "minutes": -1
