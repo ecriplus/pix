@@ -318,7 +318,7 @@ export default class ModuleGrain extends Component {
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
-                  @preventInitialScrollAndFocus={{this.preventStepperInitialScrollAndFocus index}}
+                  @preventInitialFocusAndScroll={{this.preventStepperInitialScrollAndFocus index}}
                   @direction={{this.stepperDirection}}
                   @updateSkipButton={{this.updateSkipButton}}
                 />

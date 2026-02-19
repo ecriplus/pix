@@ -34,7 +34,7 @@ export default class ModulixStepper extends Component {
 
   @tracked displayedStepIndex = 0;
 
-  @localCopy('args.preventInitialScrollAndFocus', false) preventScrollAndFocus;
+  @localCopy('args.preventInitialFocusAndScroll', false) preventFocusAndScroll;
 
   @tracked shouldAppearToRight = false;
   @tracked shouldDisplayHorizontalNextButton = this.shouldDisplayNextButton;
@@ -79,7 +79,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.displayedStepIndex -= 1;
-    this.preventScrollAndFocus = true;
+    this.preventFocusAndScroll = true;
   }
 
   @action
@@ -96,7 +96,7 @@ export default class ModulixStepper extends Component {
 
     this.args.onStepperNextStep(currentStepPosition);
     this.displayedStepIndex = currentStepPosition;
-    this.preventScrollAndFocus = false;
+    this.preventFocusAndScroll = false;
 
     if (!this.userPrefersReducedMotion) {
       this.shouldAppearToRight = true;
@@ -113,7 +113,7 @@ export default class ModulixStepper extends Component {
     }
 
     this.displayedStepIndex++;
-    this.preventScrollAndFocus = true;
+    this.preventFocusAndScroll = true;
   }
 
   get lastDisplayedStepIndex() {
@@ -264,7 +264,7 @@ export default class ModulixStepper extends Component {
                 @onExpandToggle={{@onExpandToggle}}
                 @onNextButtonClick={{this.displayNextStep}}
                 @shouldDisplayNextButton={{this.shouldDisplayHorizontalNextButton}}
-                @preventScrollAndFocus={{this.preventScrollAndFocus}}
+                @preventFocusAndScroll={{this.preventFocusAndScroll}}
                 @shouldAppearToRight={{this.shouldAppearToRight}}
                 @updateSkipButton={{@updateSkipButton}}
                 @nextButtonName={{t "pages.modulix.buttons.stepper.next.horizontal.name"}}
@@ -291,7 +291,7 @@ export default class ModulixStepper extends Component {
               @onExpandToggle={{@onExpandToggle}}
               @onNextButtonClick={{this.displayNextStep}}
               @shouldDisplayNextButton={{this.shouldDisplayVerticalNextButton index}}
-              @preventScrollAndFocus={{this.preventScrollAndFocus}}
+              @preventFocusAndScroll={{this.preventFocusAndScroll}}
               @updateSkipButton={{@updateSkipButton}}
               @nextButtonName={{t "pages.modulix.buttons.stepper.next.vertical.name"}}
               @lastDisplayedStepIndex={{index}}

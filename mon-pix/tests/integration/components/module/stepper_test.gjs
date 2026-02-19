@@ -2510,8 +2510,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       focusAndScrollStub.restore();
     });
 
-    module('when preventInitialScrollAndFocus is true', function () {
-      test("it prevents scroll and focus on stepper when rendering component", async function (assert) {
+    module('when preventInitialFocusAndScroll is true', function () {
+      test('it prevents scroll and focus on stepper when rendering component', async function (assert) {
         // given
         const steps = [
           {
@@ -2543,7 +2543,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           <template>
             <ModulixStepper
               @direction="horizontal"
-              @preventInitialScrollAndFocus={{true}}
+              @preventInitialFocusAndScroll={{true}}
               @steps={{steps}}
               @stepperIsFinished={{stepperIsFinished}}
               @onStepperNextStep={{onStepperNextStepStub}}
@@ -2557,8 +2557,8 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       });
     });
 
-    module('when preventInitialScrollAndFocus is false', function () {
-      test("it prevents scroll and focus on stepper when rendering component", async function (assert) {
+    module('when preventInitialFocusAndScroll is false', function () {
+      test('it prevents scroll and focus on stepper when rendering component', async function (assert) {
         // given
         const steps = [
           {
@@ -2590,7 +2590,7 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           <template>
             <ModulixStepper
               @direction="horizontal"
-              @preventInitialScrollAndFocus={{false}}
+              @preventInitialFocusAndScroll={{false}}
               @steps={{steps}}
               @stepperIsFinished={{stepperIsFinished}}
               @onStepperNextStep={{onStepperNextStepStub}}
