@@ -4,7 +4,7 @@ class OrganizationLearnerType {
    * @param {number} params.id
    * @param {string} params.name
    */
-  constructor({ id, name }) {
+  constructor({ id, name } = {}) {
     this.id = id;
     this.name = name;
   }
