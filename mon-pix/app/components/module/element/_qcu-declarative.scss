@@ -43,8 +43,7 @@
 
   @include breakpoints.device-is('mobile') {
     &__short-proposals, &__3-short-proposals {
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
   }
 
