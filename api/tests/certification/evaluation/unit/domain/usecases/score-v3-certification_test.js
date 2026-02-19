@@ -180,9 +180,7 @@ function stubServices({ hasPixPlusSubscription = false } = {}) {
   const scoringObject = {
     coreScoring: !hasPixPlusSubscription
       ? {
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScore({
-            competenceMarks: [domainBuilder.buildCompetenceMark(assessmentResultId)],
-          }),
+          competenceMarks: [domainBuilder.buildCompetenceMark(assessmentResultId)],
           assessmentResult: domainBuilder.buildAssessmentResult({ id: assessmentResultId }),
         }
       : null,

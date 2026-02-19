@@ -138,7 +138,7 @@ function _scoreCoreCertification({
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
   });
 
-  return new CoreScoring({ certificationAssessmentScore, assessmentResult });
+  return new CoreScoring({ competenceMarks: certificationAssessmentScore.competenceMarks, assessmentResult });
 }
 
 /**

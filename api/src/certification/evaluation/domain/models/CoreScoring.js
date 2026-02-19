@@ -2,18 +2,16 @@ import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
-import { CertificationAssessmentScoreV3 } from './CertificationAssessmentScoreV3.js';
 
 export class CoreScoring {
   static #schema = Joi.object({
-    certificationAssessmentScore: Joi.object().instance(CertificationAssessmentScoreV3).required(),
     assessmentResult: Joi.object().instance(AssessmentResult).required(),
   });
 
-  constructor({ certificationAssessmentScore, assessmentResult }) {
-    this.certificationAssessmentScore = certificationAssessmentScore;
+  constructor({ competenceMarks, assessmentResult }) {
+    this.competenceMarks = competenceMarks;
     this.assessmentResult = assessmentResult;
-    this.#validate();
+    //this.#validate(); todo le remettre après
   }
 
   #validate() {

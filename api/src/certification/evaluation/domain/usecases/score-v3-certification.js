@@ -75,11 +75,11 @@ export const scoreV3Certification = async ({
   });
 
   const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-      await services.findByCertificationCourseAndVersion({
-        certificationCourseId: assessmentSheet.certificationCourseId,
-        assessmentId: assessmentSheet.assessmentId,
-        version,
-      });
+    await services.findByCertificationCourseAndVersion({
+      certificationCourseId: assessmentSheet.certificationCourseId,
+      assessmentId: assessmentSheet.assessmentId,
+      version,
+    });
 
   const algorithm = new FlashAssessmentAlgorithm({
     flashAlgorithmImplementation: services.flashAlgorithmService,
@@ -90,11 +90,9 @@ export const scoreV3Certification = async ({
     version,
   });
 
-  const [cleaScoringCriteria] = await complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId(
-    {
-      certificationCourseId: assessmentSheet.certificationCourseId,
-    },
-  );
+  const [cleaScoringCriteria] = await complementaryCertificationScoringCriteriaRepository.findByCertificationCourseId({
+    certificationCourseId: assessmentSheet.certificationCourseId,
+  });
 
   const { coreScoring, doubleCertificationScoring } = services.handleV3CertificationScoring({
     event,
@@ -121,7 +119,7 @@ export const scoreV3Certification = async ({
       await _saveV3Result({
         assessmentResult: coreScoring.assessmentResult,
         certificationCourseId: assessmentSheet.certificationCourseId,
-        certificationAssessmentScore: coreScoring.certificationAssessmentScore,
+        competenceMarks: coreScoring.competenceMarks,
         assessmentResultRepository,
         sharedCompetenceMarkRepository,
         certificationCourseRepository,
@@ -173,14 +171,14 @@ const _verifyCertificationIsScorable = async ({
  * @param {object} params
  * @param {AssessmentResult} params.assessmentResult
  * @param {number} params.certificationCourseId
- * @param {CertificationAssessmentScoreV3} params.certificationAssessmentScore
+ * @param {CompetenceMark} params.competenceMarks
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {sharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
  */
 async function _saveV3Result({
   assessmentResult,
   certificationCourseId,
-  certificationAssessmentScore,
+  competenceMarks,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
   certificationCourseRepository,
@@ -190,7 +188,7 @@ async function _saveV3Result({
     assessmentResult,
   });
 
-  for (const competenceMark of certificationAssessmentScore.competenceMarks) {
+  for (const competenceMark of competenceMarks) {
     const competenceMarkDomain = new CompetenceMark({
       ...competenceMark,
       assessmentResultId: newAssessmentResult.id,
