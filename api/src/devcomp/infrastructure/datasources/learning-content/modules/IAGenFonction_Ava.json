@@ -41,7 +41,7 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer combien de litres de peinture on aura besoin pour le salon, faire des simulations du rendu final, c’est trop pratique ! 🤩"
+                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer combien de litres de peinture on aura besoin pour le salon, faire des simulations du rendu final, c’est trop pratique ! 🤩"
                     },
                     {
                       "userName": "Steven",
@@ -59,7 +59,7 @@
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Je suis pas hyper convaincu… 🤔"
+                      "content": "Je suis pas hyper convaincu… 🤔"
                     },
                     {
                       "userName": "Yasmine",
@@ -364,35 +364,35 @@
                           "id": "1",
                           "content": "La recherche sur internet.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;</p>"
+                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé !</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Eh non , aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "La calculatrice.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Aucun outil ne va être utilisé.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p>\n<p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
                           }
                         }
                       ],
@@ -495,7 +495,7 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Eh oui, c’est fou ! 🤯"
+                      "content": "Eh oui, c’est fou ! 🤯"
                     },
                     {
                       "userName": "Stephen",
@@ -701,7 +701,7 @@
                     {
                       "id": "894da3c4-c063-4b77-8930-4d3bdd375d7b",
                       "type": "qcu-discovery",
-                      "instruction": "Laquelle de ces réponses Yasmine a-t-elle le plus de chances de recevoir ?",
+                      "instruction": "Laquelle de ces réponses Yasmine a-t-elle le plus de chances de recevoir ?",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -787,7 +787,7 @@
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": " Incroyable ! L’IA a vraiment des tas d’outils à disposition ! 🛠️"
+                      "content": " Incroyable ! L’IA a vraiment des tas d’outils à disposition ! 🛠️"
                     },
                     {
                       "userName": "Yasmine",
@@ -799,13 +799,13 @@
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Alors, on la fait cette peinture ? 🧑‍🎨"
+                      "content": "Alors, on la fait cette peinture ? 🧑‍🎨"
                     },
                     {
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Allez ! J’ai pas l’impression que l’IA sache déjà faire ça…. 😉"
+                      "content": "Allez ! J’ai pas l’impression que l’IA sache déjà faire ça…. 😉"
                     }
                   ],
                   "animationSpeed": 0
@@ -880,7 +880,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "La recherche sur le web :"
+                    "content": "La recherche sur le web&nbsp;:"
                   },
                   {
                     "input": "rechercheImage",
@@ -1303,7 +1303,7 @@
               "element": {
                 "id": "9ff41ea1-9020-4bdc-a273-eb43e1f42ffe",
                 "type": "text",
-                "content": "<p>Steven utilise un logiciel d’IA conversationnelle.&nbsp;</p><p>Il a donné accès à son agenda.</p><p>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l'<strong>agenda</strong>.&nbsp;</p>"
+                "content": "<p>Steven utilise un logiciel d’IA conversationnelle.&nbsp;</p><p>Il a donné accès à son agenda.</p><p>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l’<strong>agenda</strong>.&nbsp;</p>"
               }
             },
             {
@@ -1325,7 +1325,7 @@
                 "id": "2dee621b-251b-4ef0-8f5f-ee03fc833c14",
                 "type": "expand",
                 "title": "🔑 Indice",
-                "content": "<p>Avez-vous vérifié que votre prompt fait bien appel à l'<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
+                "content": "<p>Avez-vous vérifié que votre prompt fait bien appel à l’<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
               }
             },
             {
@@ -1334,7 +1334,7 @@
                 "id": "c136506a-5fa1-4903-9476-d8a1700e964b",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l'<strong>agenda</strong>, votre réponse devrait être validée.</p><br><br><p> Voici quelques exemples&nbsp;:&nbsp;</p><br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires où des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul><br>"
+                "content": "<p>Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l’<strong>agenda</strong>, votre réponse devrait être validée.</p><br><br><p> Voici quelques exemples&nbsp;:&nbsp;</p><br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires où des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul><br>"
               }
             }
           ]
