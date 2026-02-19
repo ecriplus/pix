@@ -4,7 +4,7 @@ import * as candidateRepository from '../../../../../../src/certification/enrolm
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Certification | Enrolment | Repository | Candidate', function () {
   describe('#get', function () {
@@ -381,81 +381,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
           certificationCandidateId: candidateId,
           type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
           complementaryCertificationId: 22,
-        },
-        ['createdAt'],
-      );
-      expect(savedSubscriptionsData[1]).to.deepEqualInstanceOmitting(
-        {
-          certificationCandidateId: candidateId,
-          type: SUBSCRIPTION_TYPES.CORE,
-          complementaryCertificationId: null,
-        },
-        ['createdAt'],
-      );
-    });
-  });
-
-  describe('#saveInSession', function () {
-    it("should insert session's candidate in DB with subscriptions", async function () {
-      // given
-      const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification.clea({}).id;
-      const sessionId = databaseBuilder.factory.buildSession({}).id;
-      const aUserId = databaseBuilder.factory.buildUser().id;
-      await databaseBuilder.commit();
-      const candidate = domainBuilder.certification.enrolment.buildCandidate({
-        accessibilityAdjustmentNeeded: true,
-        userId: aUserId,
-        subscriptions: [
-          domainBuilder.certification.enrolment.buildCoreSubscription(),
-          domainBuilder.certification.enrolment.buildComplementarySubscription({
-            complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
-          }),
-        ],
-      });
-
-      // when
-      const candidateId = await candidateRepository.saveInSession({ candidate, sessionId });
-
-      // then
-      const savedCandidateData = await knex('certification-candidates').select('*').where({ id: candidateId }).first();
-      const savedSubscriptionsData = await knex('certification-subscriptions')
-        .select('*')
-        .where({ certificationCandidateId: candidateId })
-        .orderBy('type');
-
-      expect(_.omit(savedCandidateData, ['createdAt', 'extraTimePercentage'])).to.deep.equal({
-        id: candidateId,
-        firstName: candidate.firstName,
-        reconciledAt: null,
-        lastName: candidate.lastName,
-        birthCity: candidate.birthCity,
-        externalId: candidate.externalId,
-        birthdate: candidate.birthdate,
-        sessionId: sessionId,
-        birthProvinceCode: candidate.birthProvinceCode,
-        birthCountry: candidate.birthCountry,
-        userId: candidate.userId,
-        email: candidate.email,
-        resultRecipientEmail: candidate.resultRecipientEmail,
-        organizationLearnerId: candidate.organizationLearnerId,
-        birthPostalCode: candidate.birthPostalCode,
-        birthINSEECode: candidate.birthINSEECode,
-        sex: candidate.sex,
-        authorizedToStart: false,
-        billingMode: candidate.billingMode,
-        prepaymentCode: candidate.prepaymentCode,
-        hasSeenCertificationInstructions: false,
-        accessibilityAdjustmentNeeded: candidate.accessibilityAdjustmentNeeded,
-      });
-      expect(savedCandidateData.createdAt).to.be.instanceOf(Date);
-      expect(parseFloat(savedCandidateData.extraTimePercentage)).to.equal(candidate.extraTimePercentage);
-
-      expect(savedSubscriptionsData).to.have.lengthOf(2);
-      expect(savedSubscriptionsData[0]).to.deepEqualInstanceOmitting(
-        {
-          certificationCandidateId: candidateId,
-          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-          complementaryCertificationId,
         },
         ['createdAt'],
       );

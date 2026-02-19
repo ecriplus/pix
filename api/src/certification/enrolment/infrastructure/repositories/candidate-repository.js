@@ -159,44 +159,6 @@ export async function deleteBySessionId({ sessionId }) {
 
 /**
  * @function
- * @param {object} params
- * @param {Candidate} params.candidate
- * @param {number} params.sessionId
- * @returns {Promise<number>} return saved candidate id
- */
-export async function saveInSession({ candidate, sessionId }) {
-  const candidateDataToSave = adaptModelToDb(candidate);
-  const knexConn = DomainTransaction.getConnection();
-
-  const [{ id: certificationCandidateId }] = await knexConn('certification-candidates')
-    .insert({ ...candidateDataToSave, sessionId })
-    .returning('id');
-
-  for (const subscription of candidate.subscriptions) {
-    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
-      await knexConn('certification-subscriptions').insert({
-        certificationCandidateId: certificationCandidateId,
-        type: subscription.type,
-        complementaryCertificationId: null,
-      });
-    } else {
-      const { id: complementaryCertificationId } = await knexConn('complementary-certifications')
-        .select('id')
-        .where({ key: subscription.complementaryCertificationKey })
-        .first();
-      await knexConn('certification-subscriptions').insert({
-        certificationCandidateId: certificationCandidateId,
-        type: subscription.type,
-        complementaryCertificationId: complementaryCertificationId,
-      });
-    }
-  }
-
-  return certificationCandidateId;
-}
-
-/**
- * @function
  * @param {Candidate[]} candidates
  * @returns {Promise<void>}
  */
