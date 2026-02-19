@@ -9,8 +9,8 @@ const serialize = function (organizations, meta) {
     transform(record) {
       const dataProtectionOfficer = record.dataProtectionOfficer;
 
-      const organizationLearnerTypeName = record?.organizationLearnerType?.name;
-      const organizationLearnerTypeId = record?.organizationLearnerType?.id;
+      const organizationLearnerTypeName = record?.organizationLearnerType.name;
+      const organizationLearnerTypeId = record?.organizationLearnerType.id;
       if (organizationLearnerTypeId) {
         record.organizationLearnerTypeName = organizationLearnerTypeName;
         record.organizationLearnerTypeId = organizationLearnerTypeId;
