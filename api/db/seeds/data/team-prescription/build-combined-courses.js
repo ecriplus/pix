@@ -42,6 +42,8 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
   const { id: combinedCourseId } = buildCombinedCourse({
     ...combinedCourseData.quest,
     organizationId: combinedCourseData.organizationId,
+    deletedAt: combinedCourseData.deletedAt,
+    deletedBy: combinedCourseData.deletedBy,
   });
 
   // Build target profile if needed

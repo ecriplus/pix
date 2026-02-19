@@ -16,6 +16,8 @@ const buildCombinedCourse = function ({
   createdAt = new Date(),
   updatedAt,
   combinedCourseBlueprintId,
+  deletedAt = null,
+  deletedBy = null,
 } = {}) {
   organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
 
@@ -38,6 +40,8 @@ const buildCombinedCourse = function ({
     updatedAt: updatedAt ?? createdAt,
     questId,
     combinedCourseBlueprintId,
+    deletedAt,
+    deletedBy,
   };
 
   return databaseBuffer.pushInsertable({
