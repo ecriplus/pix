@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYphishingava/picto_cyber_phishing_ava.svg",
-    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois parfois à des cyberattaquants de convaincre une personne d’agir volontairement contre ses propres intérêts pour arriver à leurs fins.🔓<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
+    "description": "<p>Alors que les systèmes informatiques sont de mieux en mieux protégés et techniquement robustes, il suffit parfois à des cyberattaquants de convaincre une personne d’agir volontairement contre ses propres intérêts pour arriver à leurs fins.🔓<br>Dans ce module, découvrez les mécanismes des attaques par ingénierie sociale et les différentes formes qu’elles peuvent prendre.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -102,7 +102,7 @@
               "element": {
                 "id": "0252575f-bb33-4972-9b22-b23cd6b8b345",
                 "type": "text",
-                "content": "<p>Comment les failles humaines sont-elles exploitées ? Découvrons le ensemble.</p>"
+                "content": "<p>Comment les failles humaines sont-elles exploitées ? Découvrons-le ensemble.</p>"
               }
             }
           ]
