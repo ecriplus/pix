@@ -575,9 +575,32 @@
                 {
                   "elements": [
                     {
+                      "id": "838dd2fd-5a2c-462c-b93a-b230dadc4e62",
+                      "type": "text",
+                      "content": "<p>Le logiciel d'IA analyse le prompt et identifie l'outil pertinent.</p>"
+                    },
+                    {
+                      "id": "d81c2f6a-7811-4ed5-8959-70fd4ed60bd2",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/IAGenFonctionAva/etape1.png",
+                      "alt": "Le logiciel d'IA analyse le prompt.",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "35b5a582-ff1f-4561-bba3-00635e4f88a8",
+                      "type": "text",
+                      "content": "<p>Et ensuite, que se passe-t-il ?<br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
                       "id": "021d4850-4231-4811-8a2c-d0c3a14265ff",
                       "type": "text",
-                      "content": "<p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
+                      "content": "<p>Le logiciel envoie une requête à l'outil identifié.</p><p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
                     },
                     {
                       "id": "36f8d720-4607-4bbd-8b36-161f782e8f70",
@@ -694,6 +717,24 @@
                 {
                   "elements": [
                     {
+                      "id": "8d039074-9bcf-4c83-bcb8-e277963d5ba3",
+                      "type": "text",
+                      "content": "<p>L'outil traite la requête et renvoie la réponse.<br></p>"
+                    },
+                    {
+                      "id": "d0ad2b49-770f-437e-8b00-ef2d6530bd67",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/IAGenFonctionAva/etape2.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
                       "id": "f9fe4d5a-1c3d-41d4-8c6c-5ca58f8912f0",
                       "type": "text",
                       "content": "Voici la réponse que renvoie l’outil Météo au logiciel d’IA générative.<br><blockquote><code>{ &nbsp;<br>&nbsp;\"condition\": \"ensoleillé\", &nbsp;&nbsp;<br>\"temperature\": 30 <br>}</code></blockquote><br>"
@@ -751,7 +792,7 @@
               "element": {
                 "id": "18c439bf-63ae-4ddb-9fa7-82c2b4db17c3",
                 "type": "text",
-                "content": "Voici le schéma de la génération d’une réponse par&nbsp;un logiciel d’IA qui fait appel à un outil."
+                "content": "<p>Voici la vision d'ensemble avec un schéma de la génération d’une réponse par&nbsp;un logiciel d’IA qui fait appel à un outil.</p>"
               }
             },
             {
