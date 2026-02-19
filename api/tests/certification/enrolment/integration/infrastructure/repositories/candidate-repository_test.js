@@ -4,7 +4,7 @@ import * as candidateRepository from '../../../../../../src/certification/enrolm
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Certification | Enrolment | Repository | Candidate', function () {
   describe('#get', function () {
@@ -464,6 +464,193 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
           certificationCandidateId: candidateId,
           type: SUBSCRIPTION_TYPES.CORE,
           complementaryCertificationId: null,
+        },
+        ['createdAt'],
+      );
+    });
+  });
+
+  describe('#save', function () {
+    it("should insert session's candidates in DB with their subscriptions", async function () {
+      // given
+      const cleaCertificationId = databaseBuilder.factory.buildComplementaryCertification.clea({}).id;
+      const droitCertificationId = databaseBuilder.factory.buildComplementaryCertification.droit({}).id;
+      const sessionId = databaseBuilder.factory.buildSession({}).id;
+      await databaseBuilder.commit();
+      const candidateA = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Lolo',
+        lastName: 'Lapraline',
+        accessibilityAdjustmentNeeded: true,
+        sessionId,
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildCoreSubscription(),
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
+            complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+          }),
+        ],
+      });
+      const candidateB = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Geogeo',
+        lastName: 'Lenougat',
+        accessibilityAdjustmentNeeded: true,
+        sessionId,
+        subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+      });
+      const candidateC = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Loulou',
+        lastName: 'Lapistache',
+        sessionId,
+        accessibilityAdjustmentNeeded: false,
+        subscriptions: [
+          domainBuilder.certification.enrolment.buildComplementarySubscription({
+            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          }),
+        ],
+      });
+
+      // when
+      await candidateRepository.save({ candidates: [candidateA, candidateB, candidateC] });
+
+      // then
+      // Candidate A
+      const savedCandidateAData = await knex('certification-candidates')
+        .select('*')
+        .where({ firstName: 'Lolo' })
+        .first();
+      const savedSubscriptionsAData = await knex('certification-subscriptions')
+        .select('*')
+        .where({ certificationCandidateId: savedCandidateAData.id })
+        .orderBy('type');
+      expect(_.omit(savedCandidateAData, ['createdAt', 'extraTimePercentage'])).to.deep.equal({
+        id: savedCandidateAData.id,
+        firstName: candidateA.firstName,
+        reconciledAt: null,
+        lastName: candidateA.lastName,
+        birthCity: candidateA.birthCity,
+        externalId: candidateA.externalId,
+        birthdate: candidateA.birthdate,
+        sessionId: sessionId,
+        birthProvinceCode: candidateA.birthProvinceCode,
+        birthCountry: candidateA.birthCountry,
+        userId: null,
+        email: candidateA.email,
+        resultRecipientEmail: candidateA.resultRecipientEmail,
+        organizationLearnerId: candidateA.organizationLearnerId,
+        birthPostalCode: candidateA.birthPostalCode,
+        birthINSEECode: candidateA.birthINSEECode,
+        sex: candidateA.sex,
+        authorizedToStart: false,
+        billingMode: candidateA.billingMode,
+        prepaymentCode: candidateA.prepaymentCode,
+        hasSeenCertificationInstructions: false,
+        accessibilityAdjustmentNeeded: candidateA.accessibilityAdjustmentNeeded,
+      });
+      expect(savedCandidateAData.createdAt).to.be.instanceOf(Date);
+      expect(parseFloat(savedCandidateAData.extraTimePercentage)).to.equal(candidateA.extraTimePercentage);
+      expect(savedSubscriptionsAData).to.have.lengthOf(2);
+      expect(savedSubscriptionsAData[0]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: savedCandidateAData.id,
+          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+          complementaryCertificationId: cleaCertificationId,
+        },
+        ['createdAt'],
+      );
+      expect(savedSubscriptionsAData[1]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: savedCandidateAData.id,
+          type: SUBSCRIPTION_TYPES.CORE,
+          complementaryCertificationId: null,
+        },
+        ['createdAt'],
+      );
+
+      // Candidate B
+      const savedCandidateBData = await knex('certification-candidates')
+        .select('*')
+        .where({ firstName: 'Geogeo' })
+        .first();
+      const savedSubscriptionsBData = await knex('certification-subscriptions')
+        .select('*')
+        .where({ certificationCandidateId: savedCandidateBData.id })
+        .orderBy('type');
+      expect(_.omit(savedCandidateBData, ['createdAt', 'extraTimePercentage'])).to.deep.equal({
+        id: savedCandidateBData.id,
+        firstName: candidateB.firstName,
+        reconciledAt: null,
+        lastName: candidateB.lastName,
+        birthCity: candidateB.birthCity,
+        externalId: candidateB.externalId,
+        birthdate: candidateB.birthdate,
+        sessionId: sessionId,
+        birthProvinceCode: candidateB.birthProvinceCode,
+        birthCountry: candidateB.birthCountry,
+        userId: null,
+        email: candidateB.email,
+        resultRecipientEmail: candidateB.resultRecipientEmail,
+        organizationLearnerId: candidateB.organizationLearnerId,
+        birthPostalCode: candidateB.birthPostalCode,
+        birthINSEECode: candidateB.birthINSEECode,
+        sex: candidateB.sex,
+        authorizedToStart: false,
+        billingMode: candidateB.billingMode,
+        prepaymentCode: candidateB.prepaymentCode,
+        hasSeenCertificationInstructions: false,
+        accessibilityAdjustmentNeeded: candidateB.accessibilityAdjustmentNeeded,
+      });
+      expect(savedCandidateBData.createdAt).to.be.instanceOf(Date);
+      expect(parseFloat(savedCandidateBData.extraTimePercentage)).to.equal(candidateB.extraTimePercentage);
+      expect(savedSubscriptionsBData).to.have.lengthOf(1);
+      expect(savedSubscriptionsBData[0]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: savedCandidateBData.id,
+          type: SUBSCRIPTION_TYPES.CORE,
+          complementaryCertificationId: null,
+        },
+        ['createdAt'],
+      );
+
+      // Candidate C
+      const savedCandidateCData = await knex('certification-candidates')
+        .select('*')
+        .where({ firstName: 'Loulou' })
+        .first();
+      const savedSubscriptionsCData = await knex('certification-subscriptions')
+        .select('*')
+        .where({ certificationCandidateId: savedCandidateCData.id })
+        .orderBy('type');
+      expect(_.omit(savedCandidateCData, ['createdAt', 'extraTimePercentage'])).to.deep.equal({
+        id: savedCandidateCData.id,
+        firstName: candidateC.firstName,
+        reconciledAt: null,
+        lastName: candidateC.lastName,
+        birthCity: candidateC.birthCity,
+        externalId: candidateC.externalId,
+        birthdate: candidateC.birthdate,
+        sessionId: sessionId,
+        birthProvinceCode: candidateC.birthProvinceCode,
+        birthCountry: candidateC.birthCountry,
+        userId: null,
+        email: candidateC.email,
+        resultRecipientEmail: candidateC.resultRecipientEmail,
+        organizationLearnerId: candidateC.organizationLearnerId,
+        birthPostalCode: candidateC.birthPostalCode,
+        birthINSEECode: candidateC.birthINSEECode,
+        sex: candidateC.sex,
+        authorizedToStart: false,
+        billingMode: candidateC.billingMode,
+        prepaymentCode: candidateC.prepaymentCode,
+        hasSeenCertificationInstructions: false,
+        accessibilityAdjustmentNeeded: candidateC.accessibilityAdjustmentNeeded,
+      });
+      expect(savedCandidateCData.createdAt).to.be.instanceOf(Date);
+      expect(parseFloat(savedCandidateCData.extraTimePercentage)).to.equal(candidateC.extraTimePercentage);
+      expect(savedSubscriptionsCData).to.have.lengthOf(1);
+      expect(savedSubscriptionsCData[0]).to.deepEqualInstanceOmitting(
+        {
+          certificationCandidateId: savedCandidateCData.id,
+          type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+          complementaryCertificationId: droitCertificationId,
         },
         ['createdAt'],
       );
