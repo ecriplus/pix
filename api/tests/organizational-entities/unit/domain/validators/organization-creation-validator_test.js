@@ -21,7 +21,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           documentationUrl: 'https://kingArthur.com',
           administrationTeamId: 1234,
           countryCode: 99123,
-          organizationLearnerType: {},
+          organizationLearnerType: { id: 1 },
         };
 
         // when/then
@@ -42,7 +42,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 99123,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -75,7 +75,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: MISSING_VALUE,
             administrationTeamId: 1234,
             countryCode: 99123,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -100,7 +100,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PTT',
             administrationTeamId: 1234,
             countryCode: 99123,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -121,7 +121,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
               type,
               administrationTeamId: 1234,
               countryCode: 99123,
-              organizationLearnerType: {},
+              organizationLearnerType: { id: 1 },
             };
 
             // when/then
@@ -139,7 +139,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             documentationUrl: 'invalidUrl',
             administrationTeamId: 1234,
             countryCode: 99123,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
           const error = await catchErr(organizationCreationValidator.validate)(organizationCreationParams);
 
@@ -161,7 +161,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             countryCode: 99123,
             administrationTeamId: undefined,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -187,7 +187,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: undefined,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -211,7 +211,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 98999,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -235,7 +235,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
             type: 'PRO',
             administrationTeamId: 1234,
             countryCode: 100000,
-            organizationLearnerType: {},
+            organizationLearnerType: { id: 1 },
           };
 
           try {
@@ -281,7 +281,7 @@ describe('Unit | Domain | Validators | organization-validator', function () {
           type: MISSING_VALUE,
           administrationTeamId: MISSING_VALUE,
           countryCode: MISSING_VALUE,
-          organizationLearnerType: {},
+          organizationLearnerType: { id: 1 },
         };
 
         try {

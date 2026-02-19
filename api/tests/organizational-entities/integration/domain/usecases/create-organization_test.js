@@ -23,6 +23,7 @@ describe('Integration | UseCases | create-organization', function () {
   beforeEach(async function () {
     superAdminUserId = databaseBuilder.factory.buildUser().id;
     databaseBuilder.factory.buildAdministrationTeam({ id: 1234, name: 'Équipe 1' });
+    databaseBuilder.factory.buildOrganizationLearnerType({ id: 5678 });
     databaseBuilder.factory.buildCertificationCpfCountry({
       code: 99100,
       commonName: 'France',
@@ -45,7 +46,7 @@ describe('Integration | UseCases | create-organization', function () {
       externalId: 'My external Id',
       provinceCode: '078',
       organizationLearnerType: new OrganizationLearnerType({
-        id: undefined,
+        id: 5678,
       }),
     });
 
@@ -141,7 +142,7 @@ describe('Integration | UseCases | create-organization', function () {
           administrationTeamId: 9999,
           countryCode: 99100,
           organizationLearnerType: new OrganizationLearnerType({
-            id: undefined,
+            id: 5678,
           }),
         });
 
@@ -168,7 +169,7 @@ describe('Integration | UseCases | create-organization', function () {
           administrationTeamId: 1234,
           countryCode: 99100,
           organizationLearnerType: new OrganizationLearnerType({
-            id: 5678,
+            id: 9012,
           }),
         });
 
@@ -200,7 +201,7 @@ describe('Integration | UseCases | create-organization', function () {
           administrationTeamId: 1234,
           countryCode: 99999,
           organizationLearnerType: new OrganizationLearnerType({
-            id: undefined,
+            id: 5678,
           }),
         });
 
@@ -246,7 +247,7 @@ describe('Integration | UseCases | create-organization', function () {
         administrationTeamId: 1234,
         countryCode: 99100,
         organizationLearnerType: new OrganizationLearnerType({
-          id: undefined,
+          id: 5678,
         }),
       });
 
