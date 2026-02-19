@@ -139,7 +139,7 @@
                     "id": "2",
                     "content": "L’exemple 2",
                     "feedback": {
-                      "diagnosis": "<p>Eh non  !</p>\n<p>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Eh non  !</p><p>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   },
                   {
