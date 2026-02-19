@@ -493,15 +493,10 @@ function _toDomain(rawOrganization) {
 }
 
 function _createOrganizationLearnerType(organizationLearnerTypeId, organizationLearnerTypeName) {
-  // TODO: supprimer la condition quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
-  if (organizationLearnerTypeId) {
-    return new OrganizationLearnerType({
-      id: organizationLearnerTypeId,
-      name: organizationLearnerTypeName,
-    });
-  } else {
-    return null;
-  }
+  return new OrganizationLearnerType({
+    id: organizationLearnerTypeId,
+    name: organizationLearnerTypeName,
+  });
 }
 
 export const organizationForAdminRepository = {
