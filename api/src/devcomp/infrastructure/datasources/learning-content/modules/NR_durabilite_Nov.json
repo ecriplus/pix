@@ -819,7 +819,7 @@
                   {
                     "input": "input2",
                     "type": "select",
-                    "display": "inline",
+                    "display": "block",
                     "placeholder": "Sélectionner une option",
                     "ariaLabel": "Sélectionner une option",
                     "tolerances": [],
