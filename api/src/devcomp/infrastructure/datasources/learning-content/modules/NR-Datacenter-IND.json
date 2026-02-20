@@ -52,7 +52,8 @@
               "element": {
                 "id": "f5befd08-56e1-42d8-b69f-47ef8a073e06",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, quel a été l’ampleur de l'impact de cet incendie ?</p>",
+                "instruction": "<p>À votre avis, quel a été l’ampleur de l’impact de cet incendie ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -63,7 +64,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Un impact moyen : des ralentissements ont été observés sur certains sites pendant la nuit, sans perte de données.</p>",
+                    "content": "<p>Un impact moyen&nbsp;: des ralentissements ont été observés sur certains sites pendant la nuit, sans perte de données.</p>",
                     "feedback": {
                       "diagnosis": "<p>Au contraire ! La mise hors service d’un centre de données peut rapidement avoir des conséquences importantes sur les services et les usagers. Lors de cet incendie, certains utilisateurs ont perdu des données et pour certains des années de travail.</p>"
                     }
@@ -83,8 +84,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -120,7 +120,7 @@
               "element": {
                 "id": "d24a7253-3d4d-4190-a093-57f82dfb4bbf",
                 "type": "text",
-                "content": "<p>Anna est directrice d'un centre de données et assure une visite exceptionnelle de ce lieu hautement sécurisé. </p>"
+                "content": "<p>Anna est directrice d’un centre de données et assure une visite exceptionnelle de ce lieu hautement sécurisé. </p>"
               }
             },
             {
@@ -146,10 +146,11 @@
                       "id": "16ed595e-51f0-4286-8862-fb34019be450",
                       "type": "qcu-discovery",
                       "instruction": "<p>Pourquoi y a-t-il  des systèmes de sécurité aussi poussés dans un centre de données ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Pour limiter l'accès aux salles à trois personnes en même temps car les serveurs sont fragiles.</p>",
+                          "content": "<p>Pour limiter l’accès aux salles à trois personnes en même temps car les serveurs sont fragiles.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Dans un centre de données, on ne rigole pas avec la sécurité pour éviter tout <strong>risque d’attaque</strong> ou <strong>d’intrusion</strong> qui pourrait venir interrompre le service.</p>"
                           }
@@ -176,8 +177,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -201,6 +201,7 @@
                       "id": "b363d1ee-4f07-46ee-89b2-fa3fe49a0e5f",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, à quoi servent les serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -231,8 +232,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -256,6 +256,7 @@
                       "id": "a24c03f9-75bf-465f-b456-d73034ef9d6d",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, pourquoi trouve-t-on de puissants systèmes de refroidissement dans ce centre de données ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -286,8 +287,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -296,13 +296,13 @@
                     {
                       "id": "7b6d1a06-ab74-4839-8496-eca9e66a1b98",
                       "type": "text",
-                      "content": "<p>Enfin, la visite se termine par la salle du générateur électrique.</p>"
+                      "content": "<p>Enfin, la visite se termine par le local des groupes électrogènes.</p>"
                     },
                     {
                       "id": "b2d1f2ff-11b9-49f4-9742-9882aad281bc",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/generateur.png",
-                      "alt": "photo d’un générateur electrique",
+                      "alt": "photo d’un groupe électrogène",
                       "alternativeText": "",
                       "legend": "",
                       "licence": ""
@@ -310,13 +310,14 @@
                     {
                       "id": "166daaa1-b53f-4634-9450-5ee2796059dd",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Pourquoi ce centre de données possède-t-il un tel générateur électrique ?</p>",
+                      "instruction": "<p>Pourquoi ce centre de données possède-t-il un groupe électrogène ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Pour fournir de l'électricité aux habitations à proximité.</p>",
+                          "content": "<p>Pour fournir de l’électricité aux habitations à proximité.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non  ! Ce générateur électrique permet de prendre le relais du réseau électrique en cas de coupure de courant. En effet, un centre de données <strong>ne doit pas s’arrêter de fonctionner</strong>.</p>"
+                            "diagnosis": "<p>Eh non  ! Ce générateur électrique permet de prendre le relais du réseau électrique en cas de coupure de courant. En effet, un centre de données <strong>ne doit pas s’arrêter de fonctionner</strong>.</p>"
                           }
                         },
                         {
@@ -341,8 +342,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -363,7 +363,7 @@
                     {
                       "id": "aa4ceb37-21c7-42be-a322-09262f76ab48",
                       "type": "text",
-                      "content": "<p>Vous l'aurez compris, tout est  mis en place dans un centre de données pour que les serveurs tournent 24 heures sur 24, 7 jours sur 7.</p>"
+                      "content": "<p>Vous l’aurez compris, tout est  mis en place dans un centre de données pour que les serveurs tournent 24 heures sur 24, 7 jours sur 7.</p>"
                     }
                   ]
                 },
@@ -372,7 +372,7 @@
                     {
                       "id": "8f6df0cc-e134-405b-96ea-ae13a3599b1a",
                       "type": "text",
-                      "content": "<p><strong>Et si, malgré toutes ces précautions, il y a une interruption de service ?</strong>&nbsp; </p><p>C’est peu probable. Pour garantir une disponibilité totale, le système est <strong>surdimensionné</strong>, c'est-à-dire qu'il est volontairement plus puissant que nécessaire. Cela permet d’anticiper les dysfonctionnements, les pannes ou les fortes demandes, appelées pics de charge.</p>"
+                      "content": "<p><strong>Et si, malgré toutes ces précautions, il y a une interruption de service ?</strong>&nbsp; </p><p>C’est peu probable. Pour garantir une disponibilité totale, le système est <strong>surdimensionné</strong>, c’est-à-dire qu’il est volontairement plus puissant que nécessaire. Cela permet d’anticiper les dysfonctionnements, les pannes ou les fortes demandes, appelées pics de charge.</p>"
                     }
                   ]
                 },
@@ -463,7 +463,7 @@
                     },
                     {
                       "title": "En résumé,",
-                      "description": "On a donc une chaîne de refroidissement en plusieurs étapes. Produire du froid nécessite de l’énergie et de l’eau !",
+                      "description": "On a donc une chaîne de refroidissement en plusieurs étapes. Produire du froid nécessite de l’énergie et généralement de l’eau !",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/8le-systeme-refroidissement-resume.png",
@@ -489,39 +489,39 @@
               "element": {
                 "id": "79544052-5f82-474f-8146-3035d8aa8941",
                 "type": "qcu-discovery",
-                "instruction": "<p>A l’échelle mondiale, les systèmes de refroidissement des centres de données ont besoin de&nbsp;:</p>",
+                "instruction": "<p>Maintenant que vous avez vu le fonctionnement du système de refroidissement d’un centre de données, imaginez qu’un nouveau centre de données s’installe dans votre région. Que pouvez-vous dire de l’impact que cela aura ?&nbsp;</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
-                    "id": "1",
-                    "content": "<p>Peu d’électricité et très peu d’eau.</p>",
+                    "id": "3",
+                    "content": "<p>Son installation réduira la consommation d’électricité locale grâce à l’efficacité énergétique des serveurs modernes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Non, les systèmes de refroidissement sont très gourmands en énergie et en eau. Ils représentent <strong>entre  20 et 30% de la consommation d’électricité </strong>du centre de données et des <strong>milliards de litres d’eau</strong>.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Cela créera une augmentation de la consommation d’eau et d’électricité et peut provoquer des tensions locales (pénuries par exemple).</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p> Cela augmentera  la consommation d’eau et d’électricité, créant des tensions localement. </p>",
+                    "feedback": {
+                      "diagnosis": "<p>En effet, en augmentant la consommation d’eau et d’électricité, un centre de données peut provoquer des tensions locales (pénuries par exemple).</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Beaucoup d’électricité et des centaines de litres d’eau.</p>",
+                    "content": "<p>Il n’aura aucun impact sur les ressources locales, car tout fonctionne de manière autonome.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, les systèmes de refroidissement ont besoin d'encore plus d'eau ! Ces systèmes représentent entre  20 et 30% de la consommation d’électricité du centre de données et des <strong>milliards de litres d’eau</strong>.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>Beaucoup d’électricité et des milliards de litres d’eau.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>En effet ! Les systèmes de refroidissement sont très gourmands en énergie et en eau. Ils représentent <strong>entre  20 et 30% de la consommation d’électricité</strong> du centre de données et des <strong>milliards de litres d’eau</strong>.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Cela créera une augmentation de la consommation d’eau et d’électricité et peut provoquer des tensions locales (pénuries par exemple).</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Les systèmes de refroidissement sont très gourmands en énergie et en eau. Ils représentent entre  <strong>20 et 30% de la consommation d’électricité</strong> du centre de données et des<strong> milliards de litres d’eau</strong>.</p>"
+                      "diagnosis": "<p>Les centres de données consomment de grandes quantités d’eau et d’électricité pour fonctionner. Leur installation  peut donc augmenter la pression sur ces ressources locales et créer des pénuries par exemple.</p>"
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -536,7 +536,7 @@
               "element": {
                 "id": "edbc9c1f-616e-4702-82c2-b282c887d5f0",
                 "type": "text",
-                "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, ces milliards de litres d’eau prelevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation. </p><p><br>Et même lorsque le refroidissement à l’eau fonctionne en circuit fermé, tout au long de la vie du centre, de l’<strong>eau supplémentaire</strong> est nécessaire pour accélérer le refroidissement. On vaporise par exemple de l’eau pour refroidir les serveurs en cas de fortes chaleurs.&nbsp;<br><br></p>"
+                "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, à l’échelle mondiale, ces milliards de litres d’eau prelevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation. </p>"
               }
             }
           ]
@@ -585,12 +585,6 @@
                       "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/crypto.png"
                     },
                     {
-                      "name": "Le cloud",
-                      "description": "Les fichiers, logiciels et services ne sont plus stockés sur les appareils numériques personnels mais sur des serveurs à distance, hébergés dans les centres de données.",
-                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/cloud.png",
-                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/cloud.png"
-                    },
-                    {
                       "name": "Le streaming",
                       "description": "Les vidéos et musiques sont hébergées dans des serveurs qui doivent être accessibles en continu. ",
                       "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/streaming.png",
@@ -611,53 +605,39 @@
               "element": {
                 "id": "0d766e7a-a253-4a2e-8601-cfc3cb38dfb8",
                 "type": "qcu-discovery",
-                "instruction": "<p>D’après vous, parmi les technologies suivantes, laquelle consomme le plus d’énergie ?</p>",
+                "instruction": "<p>Eric lit ceci sur un site d’actualité&nbsp;:</p><p> «&nbsp;<em>L’essor des nouvelles technologies, l’IA générative en tête, pourrait faire exploser la consommation énergétique des centres de données dans les prochaines années.</em>&nbsp;»</p><p>Que faut-il comprendre ?</p><br>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>les objets connectés</p>",
+                    "content": "<p>Les nouveaux usages numériques n’influencent pas la consommation d’énergie des centres de données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Non, l<strong>’IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Les évolutions technologiques successives amènent à des usages toujours plus consommateurs d’énergie.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>la crypto-monnaie</p>",
+                    "content": "<p>L’usage des nouvelles technologies augmente la consommation d’énergie des centres de données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                      "diagnosis": "<p>Tout à fait !&nbsp;Les évolutions technologiques successives amènent à des usages toujours plus consommateurs d’énergie.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>le cloud</p>",
+                    "content": "<p>L’IA générative permet de réduire la consommation énergétique des centres de données.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                      "diagnosis": "<p>Eh non ! Les évolutions technologiques, et en particulier l’IA générative, amènent à des usages toujours plus consommateurs d’énergie.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>le streaming</p>",
+                    "content": "<p>Je ne sais pas.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Non, l’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
-                    }
-                  },
-                  {
-                    "id": "5",
-                    "content": "<p>l’IA générative</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Eh oui ! L’<strong>IA générative</strong> est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
-                    }
-                  },
-                  {
-                    "id": "6",
-                    "content": "<p>Je ne sais pas.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>L’<strong>IA générative </strong>est bien plus gourmande en ressources que les autres technologies puisque son utilisation nécessite que les serveurs effectuent de nombreux calculs et stockent énormément de données.</p>"
+                      "diagnosis": "<p>Les évolutions technologiques successives, et en particulier l’IA générative, amènent à des usages toujours plus consommateurs d’énergie.</p>"
                     }
                   }
                 ],
-                "solution": "5",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -684,7 +664,7 @@
                     {
                       "id": "069b9b8e-43d0-43d3-bd38-18c57e2f0fc2",
                       "type": "text",
-                      "content": "<p><strong>Et cette consommation d’énergie augmente  ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. Selon l'Agence internationale de l'énergie,&nbsp;en 2030, ces besoins auront <strong>doublé</strong>. <br></p>"
+                      "content": "<p><strong>Et cette consommation d’énergie augmente  ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. Selon l’Agence internationale de l’énergie,&nbsp;en 2030, ces besoins auront <strong>doublé </strong>par rapport à 2025. <br></p>"
                     }
                   ]
                 },
@@ -693,7 +673,7 @@
                     {
                       "id": "bdc0cdd2-c802-4a07-a3c4-fb08673c1ad4",
                       "type": "text",
-                      "content": "<p><strong>Concrètement, face à cette accélération, des solutions sont possibles ?&nbsp;</strong> <br>Il est possible de limiter les impacts. En tant qu’utilisateur, il est important de garder en mémoire que certaines technologies sont bien plus gourmandes que d’autres&nbsp;: le streaming vidéo et l’intelligence artificielle générative en tête. Avoir un <strong>usage raisonné</strong> de ces technologies est un enjeu majeur. </p>"
+                      "content": "<p><strong>Concrètement, face à cette accélération, des solutions sont possibles ?&nbsp;</strong> <br>Il est possible de limiter les impacts. En tant qu’utilisateur, il est important de garder en mémoire que certaines technologies sont bien plus gourmandes que d’autres, notamment l’intelligence artificielle générative en tête. Avoir un <strong>usage raisonné</strong> de ces technologies est un enjeu majeur. </p>"
                     }
                   ]
                 }
@@ -717,7 +697,7 @@
               "element": {
                 "id": "8c366312-52a5-4a3e-9db2-2174cb0745a5",
                 "type": "text",
-                "content": "<ul><li>Les centres de données sont des <strong>infrastructures</strong> complexes&nbsp;: équipements informatiques, systèmes de refroidissement, sécurisation, etc.&nbsp;🛡️<br><br></li><li>Afin d’assurer un service continu aux internautes, ils sont <strong>surdimensionnés</strong> pour anticiper certains dysfonctionnements ou pics de charge.&nbsp;⬆️<br><br></li><li>Le <strong>refroidissement</strong> des centres de données représente environ 30% à 40% de l’électricité d’un centre de données et consomme des milliards de litres d’eau.&nbsp;❄️<br><br></li><li>Les évolutions technologiques successives (streaming, stockage cloud, cryptomonnaie, objets connectés, IA générative) amènent à des <strong>usages toujours plus consommateurs d’énergie</strong>.&nbsp;⚡⚡</li></ul>"
+                "content": "<ul><li>Les centres de données sont des <strong>infrastructures</strong> complexes&nbsp;: équipements informatiques, systèmes de refroidissement, sécurisation, etc.&nbsp;🛡️<br><br></li><li>Afin d’assurer un service continu aux internautes, ils sont <strong>surdimensionnés</strong> pour anticiper certains dysfonctionnements ou pics de charge.&nbsp;⬆️<br><br></li><li>Le <strong>refroidissement</strong> des centres de données consomme de l’électricité et des milliards de litres d’eau à l’échelle mondiale.&nbsp;❄️<br><br></li><li>Les évolutions technologiques successives (streaming, stockage cloud, cryptomonnaie, objets connectés, IA générative) amènent à des <strong>usages toujours plus consommateurs d’énergie</strong>.&nbsp;⚡⚡</li></ul>"
               }
             }
           ]
@@ -811,6 +791,7 @@
                 "id": "089943ea-d233-40cd-8ab8-009b37e48897",
                 "type": "qcu",
                 "instruction": "<p>Pourquoi les systèmes de refroidissement des centres de données ont-ils des conséquences sur l’environnement ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "3",
@@ -845,8 +826,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -861,7 +841,8 @@
               "element": {
                 "id": "7854fd2f-5062-4248-9a1e-08a4b971614e",
                 "type": "qcu",
-                "instruction": "Quel impact ont les nouvelles technologies sur la consommation d’énergie des centres de données ? ",
+                "instruction": "<p>Quel impact ont les nouvelles technologies (IA, streaming, cryptomonnaie etc) sur la consommation d’énergie des centres de données ? </p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "2",
@@ -896,8 +877,7 @@
                     }
                   }
                 ],
-                "solution": "4",
-                "hasShortProposals": false
+                "solution": "4"
               }
             }
           ]
@@ -916,49 +896,49 @@
             {
               "type": "element",
               "element": {
-                "id": "1baf5bf6-4e2c-451a-ac35-2373ac9b2a10",
-                "type": "text",
-                "content": "<p>Maintenant que vous comprenez mieux le fonctionnement des centres de données, voici quelques questions pour vous aider à réfléchir à vos habitudes numériques et à adopter des usages numériques plus responsables. </p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "68cc1630-2c34-4f79-aff0-818dc8ff5b87",
-                "type": "qcu-discovery",
-                "instruction": "Vous&nbsp;recevez une alerte vous signalant que l’espace de stockage de votre PixCloud est plein, que faites-vous ?",
+                "type": "qcm",
+                "instruction": "<p>Maintenant que vous comprenez mieux le fonctionnement des centres de données, voici quelques situations du quotidien.&nbsp;Lesquelles font travailler un centre de données ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Vous faites du ménage dans vos données (photos etc).",
-                    "feedback": {
-                      "diagnosis": "Bon réflexe !&nbsp;Moins vous stockez de données sur le cloud, moins vous faites travailler les centres de données."
-                    }
+                    "content": "<p>Écouter de la musique en ligne.</p>"
                   },
                   {
                     "id": "2",
-                    "content": "Vous achetez de l'espace supplémentaire.",
-                    "feedback": {
-                      "diagnosis": "Vous allez stocker encore plus. Garder en mémoire que plus vous stockez de données sur le cloud, plus vous faites travailler les centres de données."
-                    }
+                    "content": "<p>Poster une photo sur un réseau social.<br></p>"
                   },
                   {
                     "id": "3",
-                    "content": "Vous&nbsp;transfèrez vos données sur un disque dur externe.",
-                    "feedback": {
-                      "diagnosis": "Bravo, c'est un bon réflexe !&nbsp;"
-                    }
+                    "content": "<p>Consulter vos comptes bancaires sur l’application de votre banque.</p>"
                   },
                   {
                     "id": "4",
-                    "content": "Vous ne faites rien, ça arrive régulièrement.",
-                    "feedback": {
-                      "diagnosis": "Gardez en mémoire que plus vous stockez de données sur le cloud, plus vous faites travailler les centres de données.<br>"
-                    }
+                    "content": "<p>Réserver un billet de train en ligne.</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Envoyer un email.<br></p>"
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien joué !<br></p>",
+                    "diagnosis": "<p>Effectivement, aujourd’hui, de nombreuses activités du quotidien se font en ligne et font donc travailler les centres de données.&nbsp;<br></p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Il en manque !&nbsp;<br></p>",
+                    "diagnosis": "<p>Aujourd’hui, de nombreuses activités du quotidien se font en ligne et font donc travailler les centres de données.&nbsp;</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ]
               }
             }
           ]
