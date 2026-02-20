@@ -35,7 +35,6 @@ import { buildCenterForAdmin } from './build-center-for-admin.js';
 import { buildCertifiableBadgeAcquisition } from './build-certifiable-badge-acquisition.js';
 import { buildCertificationAssessment } from './build-certification-assessment.js';
 import { buildCertificationAssessmentScore } from './build-certification-assessment-score.js';
-import { buildCertificationAssessmentScoreV3 } from './build-certification-assessment-score-v3.js';
 import { buildCertificationAttestation } from './build-certification-attestation.js';
 import { buildCertificationCandidate } from './build-certification-candidate.js';
 import { buildCertificationCandidateForAttendanceSheet } from './build-certification-candidate-for-attendance-sheet.js';
@@ -401,7 +400,6 @@ export {
   buildCertifiableBadgeAcquisition,
   buildCertificationAssessment,
   buildCertificationAssessmentScore,
-  buildCertificationAssessmentScoreV3,
   buildCertificationAttestation,
   buildCertificationCandidate,
   buildCertificationCandidateForAttendanceSheet,

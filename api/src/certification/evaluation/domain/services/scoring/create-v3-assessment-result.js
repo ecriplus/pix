@@ -4,7 +4,9 @@ export function createV3AssessmentResult({
   toBeCancelled,
   allAnswers,
   assessmentId,
-  certificationAssessmentScore,
+  pixScore,
+  status,
+  competenceMarks,
   isRejectedForFraud,
   isAbortReasonTechnical,
   juryId,
@@ -13,15 +15,15 @@ export function createV3AssessmentResult({
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
       juryId,
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      pixScore,
+      reproducibilityRate: 100,
       assessmentId,
     });
   }
   if (isRejectedForFraud) {
     return AssessmentResultFactory.buildFraud({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      pixScore,
+      reproducibilityRate: 100,
       assessmentId,
       juryId,
     });
@@ -32,36 +34,36 @@ export function createV3AssessmentResult({
   ) {
     if (isAbortReasonTechnical) {
       return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
-        pixScore: certificationAssessmentScore.nbPix,
-        reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+        pixScore,
+        reproducibilityRate: 100,
         assessmentId,
         juryId,
       });
     } else {
       return AssessmentResultFactory.buildLackOfAnswers({
-        pixScore: certificationAssessmentScore.nbPix,
-        reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-        status: certificationAssessmentScore.status,
+        pixScore,
+        reproducibilityRate: 100,
+        status,
         assessmentId,
         juryId,
       });
     }
   }
 
-  if (certificationAssessmentScore.nbPix === 0) {
+  if (pixScore === 0) {
     return AssessmentResultFactory.buildRejectedDueToZeroPixScore({
-      pixScore: certificationAssessmentScore.nbPix,
-      reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
+      pixScore,
+      reproducibilityRate: 100,
       assessmentId,
       juryId,
-      competenceMarks: certificationAssessmentScore.competenceMarks,
+      competenceMarks,
     });
   }
 
   return AssessmentResultFactory.buildStandardAssessmentResult({
-    pixScore: certificationAssessmentScore.nbPix,
-    reproducibilityRate: certificationAssessmentScore.getPercentageCorrectAnswers(),
-    status: certificationAssessmentScore.status,
+    pixScore,
+    reproducibilityRate: 100,
+    status,
     assessmentId,
     juryId,
   });

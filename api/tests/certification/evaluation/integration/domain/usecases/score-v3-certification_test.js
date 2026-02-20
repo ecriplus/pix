@@ -19,7 +19,7 @@ const challengeParams = {
   langues: ['Franco Français'],
 };
 
-describe('Certification | Evaluation | Integration | Domain | Usecases | Scoring V3', function () {
+describe('Certification | Evaluation | Integration | Domain | Usecases | Score v3 certification', function () {
   let certificationVersionId;
   beforeEach(async function () {
     const learningContent = [

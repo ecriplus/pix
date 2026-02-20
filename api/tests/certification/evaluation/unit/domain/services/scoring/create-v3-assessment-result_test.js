@@ -1,12 +1,14 @@
 import { createV3AssessmentResult } from '../../../../../../../src/certification/evaluation/domain/services/scoring/create-v3-assessment-result.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
 
 const minimumAnswersRequiredToValidateACertification = 20;
 
 describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Assessment Result', function () {
+  const competenceMarks = Symbol('someCompetenceMarks');
+  const pixScore = 456;
   describe('createV3AssessmentResult', function () {
     it('it should return cancelled AssessmentResult if toBeCancelled is true', function () {
       //when
@@ -14,7 +16,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         toBeCancelled: true,
         allAnswers: [],
         assessmentId: 123,
-        certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3(),
+        pixScore,
+        status: AssessmentResult.status.CANCELLED,
+        competenceMarks,
         isRejectedForFraud: false,
         isAbortReasonTechnical: false,
         juryId: 123,
@@ -23,14 +27,20 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
 
       //then
       expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
+      expect(assessmentResult.pixScore).to.equal(pixScore);
+      expect(assessmentResult.competenceMarks).to.deep.equal([]);
+      expect(assessmentResult.reproducibilityRate).to.equal(100);
     });
+
     it('it should return a rejected for fraud AssessmentResult if isRejectedForFraud is true', function () {
       //when
       const assessmentResult = createV3AssessmentResult({
         toBeCancelled: false,
         allAnswers: [],
+        pixScore,
+        status: AssessmentResult.status.REJECTED,
+        competenceMarks,
         assessmentId: 123,
-        certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3({ status: status.REJECTED }),
         isRejectedForFraud: true,
         isAbortReasonTechnical: false,
         juryId: 123,
@@ -43,7 +53,11 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
       });
       expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
       expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+      expect(assessmentResult.pixScore).to.equal(pixScore);
+      expect(assessmentResult.competenceMarks).to.deep.equal([]);
+      expect(assessmentResult.reproducibilityRate).to.equal(100);
     });
+
     context('when there is an insuffisant number of answer', function () {
       it('should return a cancelled AssessmentResult if the cause is technical', function () {
         //when
@@ -51,7 +65,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           toBeCancelled: false,
           allAnswers: [],
           assessmentId: 123,
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3(),
+          pixScore,
+          status: AssessmentResult.status.VALIDATED,
+          competenceMarks,
           isRejectedForFraud: false,
           isAbortReasonTechnical: true,
           juryId: 123,
@@ -64,14 +80,20 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+        expect(assessmentResult.pixScore).to.equal(pixScore);
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.reproducibilityRate).to.equal(100);
       });
+
       it('should return a rejected AssessmentResult if the cause is not technical', function () {
         //when
         const assessmentResult = createV3AssessmentResult({
           toBeCancelled: false,
           allAnswers: [],
           assessmentId: 123,
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3({ status: status.REJECTED }),
+          pixScore,
+          status: AssessmentResult.status.REJECTED,
+          competenceMarks,
           isRejectedForFraud: false,
           isAbortReasonTechnical: false,
           juryId: 123,
@@ -84,6 +106,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+        expect(assessmentResult.pixScore).to.equal(pixScore);
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.reproducibilityRate).to.equal(100);
       });
     });
     context('when there is a sufficient number of answers', function () {
@@ -94,13 +119,16 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
 
         answers = _buildDataFromAnsweredChallenges(answeredChallenges).answers;
       });
+
       it('should return a rejected AssessmentResult if pix score is 0', function () {
         //when
         const assessmentResult = createV3AssessmentResult({
           toBeCancelled: false,
           allAnswers: answers,
           assessmentId: 123,
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3({ nbPix: 0 }),
+          pixScore: 0,
+          status: AssessmentResult.status.VALIDATED,
+          competenceMarks,
           isRejectedForFraud: false,
           isAbortReasonTechnical: false,
           juryId: 123,
@@ -113,17 +141,20 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+        expect(assessmentResult.pixScore).to.equal(0);
+        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
+        expect(assessmentResult.reproducibilityRate).to.equal(100);
       });
+
       it('should return a standard AssessmentResult if pix score is not 0', function () {
         //when
         const assessmentResult = createV3AssessmentResult({
           toBeCancelled: false,
           allAnswers: answers,
           assessmentId: 123,
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScoreV3({
-            nbPix: 100,
-            status: status.VALIDATED,
-          }),
+          pixScore,
+          status: AssessmentResult.status.VALIDATED,
+          competenceMarks,
           isRejectedForFraud: false,
           isAbortReasonTechnical: false,
           juryId: 123,
@@ -132,7 +163,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
 
         //then
         expect(assessmentResult.status).to.equal(AssessmentResult.status.VALIDATED);
-        expect(assessmentResult.pixScore).to.equal(100);
+        expect(assessmentResult.pixScore).to.equal(pixScore);
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.reproducibilityRate).to.equal(100);
       });
     });
   });
