@@ -104,23 +104,24 @@ function scoreCertification({
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
 }) {
-  const allAnswers = [...assessmentSheet.answers];
   const shouldDowngradeCapacity = _shouldDowngradeCapacity({
     maximumAssessmentLength,
-    answers: allAnswers,
+    answers: assessmentSheet.answers,
     abortReason: assessmentSheet.abortReason,
     minimumAnswersRequiredToValidateACertification,
   });
+
   const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity });
   const pixScore = scoringV3Algorithm.computePixScoreFromCapacity({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
   const status = _isCertificationRejected({
-    answers: allAnswers,
+    answers: assessmentSheet.answers,
     abortReason: assessmentSheet.abortReason,
     minimumAnswersRequiredToValidateACertification,
   })
     ? CertificationStatus.REJECTED
     : CertificationStatus.VALIDATED;
+
   const toBeCancelled = event instanceof CertificationCancelled;
   const assessmentResult = createV3AssessmentResult({
     toBeCancelled,
@@ -158,14 +159,6 @@ function _scoreDoubleCertification({ assessmentSheet, assessmentResult, cleaScor
   });
 }
 
-const _hasCandidateAnsweredEnoughQuestions = ({ answers, minimumAnswersRequiredToValidateACertification }) => {
-  return answers.length >= minimumAnswersRequiredToValidateACertification;
-};
-
-const _hasCandidateCompletedTheCertification = ({ answers, maximumAssessmentLength }) => {
-  return answers.length >= maximumAssessmentLength;
-};
-
 const _shouldDowngradeCapacity = ({
   maximumAssessmentLength,
   answers,
@@ -173,13 +166,14 @@ const _shouldDowngradeCapacity = ({
   minimumAnswersRequiredToValidateACertification,
 }) => {
   return (
-    _hasCandidateAnsweredEnoughQuestions({ answers, minimumAnswersRequiredToValidateACertification }) &&
-    !_hasCandidateCompletedTheCertification({ answers, maximumAssessmentLength }) &&
+    answers.length >= minimumAnswersRequiredToValidateACertification &&
+    answers.length < maximumAssessmentLength &&
     abortReason === ABORT_REASONS.CANDIDATE
   );
 };
+
 const _isCertificationRejected = ({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) => {
-  return (
-    !_hasCandidateAnsweredEnoughQuestions({ answers, minimumAnswersRequiredToValidateACertification }) && abortReason
-  );
+  // Dans la vraie vie, en cas de nombre de réponses insuffisant, la certif est rejetée seulement si l'abortReason est "candidate"
+  // ici on ne regarde pas la valeur de abortReason ce qui n'est pas très clair. Le coup est rattrapé plus tard dans createV3AssessmentResult ( et c'est moche )
+  return answers.length < minimumAnswersRequiredToValidateACertification && abortReason;
 };
