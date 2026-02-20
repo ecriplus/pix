@@ -1,6 +1,3 @@
-// eslint-disable-next-line n/no-missing-import
-import 'json-autotranslate';
-
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -61,37 +58,53 @@ export class TranslateLanguageFiles extends Script {
     const sourcePath = path.join(dir, `${sourceLang}.json`);
     const targetPath = path.join(dir, `${targetLang}.json`);
 
-    const tmpDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'json-autotranslate-'));
-    const tmpSourcePath = path.join(tmpDir, `${sourceLang}.json`);
-    const tmpTargetPath = path.join(tmpDir, `${targetLang}.json`);
-
-    const execute = 'npx';
-    const args = [
-      'json-autotranslate',
-      '-s',
-      'deepl-free',
-      '-i',
-      tmpDir,
-      '-l',
-      sourceLang,
-      '--directory-structure',
-      'ngx-translate',
-      '--type',
-      'key-based',
-      '--config',
-      `${deeplKey},${formality},${batchSize}`,
-    ];
-    const commandForLog = `${execute} ${args.join(' ')}`;
+    let tmpDir;
+    let tmpI18nDir;
+    let tmpSourcePath;
+    let tmpTargetPath;
 
     try {
-      logger.info(`Temp dir: ${tmpDir}`);
+      tmpDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'json-autotranslate-'));
+      tmpI18nDir = path.join(tmpDir, 'i18n');
+
+      await fs.promises.mkdir(tmpI18nDir, { recursive: true });
+      logger.info(`Temp dir: ${tmpI18nDir}`);
+
+      tmpSourcePath = path.join(tmpI18nDir, `${sourceLang}.json`);
+      tmpTargetPath = path.join(tmpI18nDir, `${targetLang}.json`);
+
       logger.info(`Real source: ${sourcePath}`);
       logger.info(`Real target: ${targetPath}`);
+
+      const args = [
+        'json-autotranslate',
+        '-s',
+        'deepl-free',
+        '-i',
+        tmpI18nDir,
+        '-l',
+        sourceLang,
+        '--directory-structure',
+        'ngx-translate',
+        '--matcher',
+        'icu',
+        '--type',
+        'key-based',
+        '--decode-escapes',
+        '--config',
+        `${deeplKey},${formality},${batchSize}`,
+      ];
+
       if (dryRun) {
-        logger.info(`DryRun - will run: ${commandForLog}`);
+        logger.info('Dry run');
+        logger.info('Translator: deepl-free');
+        logger.info(`Languages: ${sourceLang} → ${targetLang}`);
+        logger.info(`Formality: ${formality}, batchSize: ${batchSize}`);
         return;
       }
+
       await fs.promises.copyFile(sourcePath, tmpSourcePath);
+
       try {
         await fs.promises.copyFile(targetPath, tmpTargetPath);
       } catch (err) {
@@ -102,16 +115,27 @@ export class TranslateLanguageFiles extends Script {
         }
       }
 
-      logger.info(`Running: ${commandForLog}`);
+      const execute = 'npx';
+      logger.info(`Running: npx json-autotranslate (deepl-free)`);
       await run(execute, args);
-      await fs.promises.copyFile(tmpTargetPath, targetPath);
+
+      let translatedContent;
+      try {
+        translatedContent = await fs.promises.readFile(tmpTargetPath, 'utf-8');
+      } catch (err) {
+        throw new Error(`Translation output not found at ${tmpTargetPath}.`, { cause: err });
+      }
+      await fs.promises.writeFile(targetPath, translatedContent, 'utf-8');
       logger.info(`Updated target: ${targetPath}`);
     } finally {
-      await fs.promises.rm(tmpDir, { recursive: true, force: true });
-      logger.info(`Temp dir deleted: ${tmpDir}`);
+      if (tmpDir) {
+        await fs.promises.rm(tmpDir, { recursive: true, force: true });
+        logger.info(`Temp dir deleted: ${tmpDir}`);
+      }
     }
   }
 }
+
 function run(cmd, args) {
   return new Promise((resolve, reject) => {
     const child = spawn(cmd, args, { stdio: 'inherit' });
