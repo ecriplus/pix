@@ -1,4 +1,4 @@
-import { scoringConfigurationController } from '../../../../../src/certification/scoring/application/scoring-configuration-controller.js';
+import { scoringConfigurationController } from '../../../../../src/certification/evaluation/application/scoring-configuration-controller.js';
 import { usecases } from '../../../../../src/certification/scoring/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 

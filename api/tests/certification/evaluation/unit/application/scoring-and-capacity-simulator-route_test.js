@@ -1,7 +1,7 @@
-import { scoringAndCapacitySimulatorController } from '../../../../../src/certification/scoring/application/scoring-and-capacity-simulator-controller.js';
-import * as moduleUnderTest from '../../../../../src/certification/scoring/application/scoring-and-capacity-simulator-route.js';
+import { scoringAndCapacitySimulatorController } from '../../../../../src/certification/evaluation/application/scoring-and-capacity-simulator-controller.js';
+import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/scoring-and-capacity-simulator-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../../tests/test-helper.js';
+import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Route | scoring-and-capacity-simulator-route', function () {
   describe('GET /api/admin/simulate-score-or-capacity', function () {

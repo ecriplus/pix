@@ -15,7 +15,6 @@ import {
 import { certificationEnrolmentRoutes } from './src/certification/enrolment/routes.js';
 import { certificationEvaluationRoutes } from './src/certification/evaluation/routes.js';
 import { certificationResultRoutes } from './src/certification/results/routes.js';
-import { scoringRoutes } from './src/certification/scoring/routes.js';
 import { certificationSessionRoutes } from './src/certification/session-management/routes.js';
 import { devcompRoutes } from './src/devcomp/routes.js';
 import { evaluationRoutes } from './src/evaluation/routes.js';
@@ -51,7 +50,6 @@ const certificationRoutes = [
   certificationEnrolmentRoutes,
   certificationResultRoutes,
   certificationSessionRoutes,
-  scoringRoutes,
   scoBlockedAccessDatesRoutes,
   scoWhitelistRoutes,
   certificationEvaluationRoutes,

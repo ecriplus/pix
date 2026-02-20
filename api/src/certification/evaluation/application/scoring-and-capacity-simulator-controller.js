@@ -1,5 +1,5 @@
-import { usecases } from '../domain/usecases/index.js';
-import * as serializer from '../infrastructure/serializers/jsonapi/scoring-and-capacity-simulator-report-serializer.js';
+import { usecases } from '../../scoring/domain/usecases/index.js';
+import * as serializer from '../infrastructure/serializers/scoring-and-capacity-simulator-report-serializer.js';
 
 const simulateScoringOrCapacity = async (req, h) => {
   const { capacity, score } = req.payload.data;

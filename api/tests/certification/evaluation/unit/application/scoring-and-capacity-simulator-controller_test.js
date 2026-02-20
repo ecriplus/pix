@@ -1,4 +1,4 @@
-import { scoringAndCapacitySimulatorController } from '../../../../../src/certification/scoring/application/scoring-and-capacity-simulator-controller.js';
+import { scoringAndCapacitySimulatorController } from '../../../../../src/certification/evaluation/application/scoring-and-capacity-simulator-controller.js';
 import { usecases } from '../../../../../src/certification/scoring/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 

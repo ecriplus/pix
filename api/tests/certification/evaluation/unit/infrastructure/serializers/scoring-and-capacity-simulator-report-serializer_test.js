@@ -1,5 +1,5 @@
-import * as serializer from '../../../../../../../src/certification/scoring/infrastructure/serializers/jsonapi/scoring-and-capacity-simulator-report-serializer.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import * as serializer from '../../../../../../src/certification/evaluation/infrastructure/serializers/scoring-and-capacity-simulator-report-serializer.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Serializer | JSONAPI | scoring-and-capacity-simulator-report', function () {
   describe('#serialize', function () {
