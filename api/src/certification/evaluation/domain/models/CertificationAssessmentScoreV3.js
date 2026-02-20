@@ -7,7 +7,6 @@
  * @typedef {import('../../../shared/domain/models/CompetenceMark.js').CompetenceMark} CompetenceMark
  */
 
-import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
 import { status as CertificationStatus } from '../../../../shared/domain/models/AssessmentResult.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
