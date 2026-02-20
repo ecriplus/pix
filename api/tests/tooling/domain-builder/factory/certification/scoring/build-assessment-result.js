@@ -1,4 +1,4 @@
-import { AssessmentResultFactory } from '../../../../../../src/certification/scoring/domain/models/factories/AssessmentResultFactory.js';
+import { AssessmentResultFactory } from '../../../../../../src/certification/evaluation/domain/models/factories/AssessmentResultFactory.js';
 
 const buildAssessmentResult = {};
 

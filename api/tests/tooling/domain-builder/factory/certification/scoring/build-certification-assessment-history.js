@@ -1,4 +1,4 @@
-import { CertificationAssessmentHistory } from '../../../../../../src/certification/scoring/domain/models/CertificationAssessmentHistory.js';
+import { CertificationAssessmentHistory } from '../../../../../../src/certification/evaluation/domain/models/CertificationAssessmentHistory.js';
 
 export const buildCertificationAssessmentHistory = ({ capacityHistory }) => {
   return new CertificationAssessmentHistory({

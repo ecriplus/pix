@@ -2,7 +2,7 @@ import { scoringConfigurationController } from '../../../../../src/certification
 import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Application | ScoringConfigurationController', function () {
+describe('Certification | Evaluation | Integration | Application | ScoringConfigurationController', function () {
   describe('#saveCompetenceForScoringConfiguration', function () {
     it('should save the competence for scoring configuration', async function () {
       // given

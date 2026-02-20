@@ -1,4 +1,4 @@
-import { ScoringAndCapacitySimulatorReport } from '../../../../src/certification/scoring/domain/models/ScoringAndCapacitySimulatorReport.js';
+import { ScoringAndCapacitySimulatorReport } from '../../../../src/certification/evaluation/domain/models/ScoringAndCapacitySimulatorReport.js';
 
 function buildScoringAndCapacitySimulatorReport({
   capacity,

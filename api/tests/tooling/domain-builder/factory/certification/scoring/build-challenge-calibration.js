@@ -1,4 +1,4 @@
-import { ChallengeCalibration } from '../../../../../../src/certification/scoring/domain/read-models/ChallengeCalibration.js';
+import { ChallengeCalibration } from '../../../../../../src/certification/evaluation/domain/read-models/ChallengeCalibration.js';
 
 const buildChallengeCalibration = function ({
   id = 123,

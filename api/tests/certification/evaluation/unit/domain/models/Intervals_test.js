@@ -1,7 +1,7 @@
-import { Intervals } from '../../../../../../src/certification/scoring/domain/models/Intervals.js';
+import { Intervals } from '../../../../../../src/certification/evaluation/domain/models/Intervals.js';
 import { expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | Intervals ', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | Intervals ', function () {
   describe('length', function () {
     it('returns the length of the given intervals', async function () {
       const intervals = new Intervals({ intervals: [{ hello: 'world' }, { goodbye: 'world' }] });

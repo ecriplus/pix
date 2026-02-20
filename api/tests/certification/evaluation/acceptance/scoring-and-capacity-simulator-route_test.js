@@ -1,4 +1,4 @@
-import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
+import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import {
   createServer,
   databaseBuilder,
@@ -6,9 +6,9 @@ import {
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
   mockLearningContent,
-} from '../../../../test-helper.js';
+} from '../../../test-helper.js';
 
-describe('Acceptance | Application | scoring-and-capacity-simulator-route', function () {
+describe('Certification | Evaluation | Acceptance | scoring-and-capacity-simulator-route', function () {
   let server;
 
   beforeEach(async function () {

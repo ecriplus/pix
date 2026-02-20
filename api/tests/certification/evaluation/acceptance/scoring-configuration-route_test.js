@@ -1,13 +1,13 @@
-import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
+import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-} from '../../../../test-helper.js';
+} from '../../../test-helper.js';
 
-describe('Acceptance | Application | scoring-configuration-route', function () {
+describe('Certification | Evaluation | Acceptance | scoring-configuration-route', function () {
   let server;
 
   beforeEach(async function () {

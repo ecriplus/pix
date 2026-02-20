@@ -1,7 +1,7 @@
-import { CapacitySimulator } from '../../../../../../src/certification/scoring/domain/models/CapacitySimulator.js';
+import { CapacitySimulator } from '../../../../../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Domain | Models | CapacitySimulator', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | CapacitySimulator', function () {
   const certificationScoringIntervals = [
     { bounds: { max: -2, min: -8 }, meshLevel: 0 }, // Score de 0 à 63
     { bounds: { max: -0.5, min: -2 }, meshLevel: 1 }, // Score de 64 à 127

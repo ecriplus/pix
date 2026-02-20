@@ -1,4 +1,4 @@
-import { ScoringSimulator } from '../../../scoring/domain/models/ScoringSimulator.js';
+import { ScoringSimulator } from '../models/ScoringSimulator.js';
 
 export async function simulateScoreFromCapacity({ capacity, date, scoringConfigurationRepository }) {
   const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
