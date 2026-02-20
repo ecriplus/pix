@@ -1,6 +1,8 @@
 import { ScoringSimulator } from '../../../../../../src/certification/evaluation/domain/models/ScoringSimulator.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
+const MAX_REACHABLE_LEVEL = 7;
+
 describe('Certification | Evaluation | Unit | Domain | Models | ScoringSimulator', function () {
   describe('#compute', function () {
     [
@@ -263,7 +265,12 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringSimulator
         ];
 
         // when
-        const result = ScoringSimulator.compute({ capacity, certificationScoringIntervals, competencesForScoring });
+        const result = ScoringSimulator.compute({
+          capacity,
+          certificationScoringIntervals,
+          competencesForScoring,
+          maxReachableLevel: MAX_REACHABLE_LEVEL,
+        });
 
         // then
         expect(result).to.deepEqualInstance(

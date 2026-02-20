@@ -81,6 +81,8 @@ describe('Certification | Evaluation | Unit | Domain | Models | CapacitySimulato
     },
   ];
 
+  const MAX_REACHABLE_LEVEL = 7;
+
   describe('#compute', function () {
     [
       {
@@ -207,7 +209,12 @@ describe('Certification | Evaluation | Unit | Domain | Models | CapacitySimulato
     ].forEach(({ score, expectedCapacity, expectedCompetences }) => {
       it(`returns the capacity ${expectedCapacity} and ${expectedCompetences} when score is ${score}`, function () {
         // when
-        const result = CapacitySimulator.compute({ certificationScoringIntervals, competencesForScoring, score });
+        const result = CapacitySimulator.compute({
+          certificationScoringIntervals,
+          competencesForScoring,
+          score,
+          maxReachableLevel: MAX_REACHABLE_LEVEL,
+        });
 
         // then
         expect(result).to.deepEqualInstance(

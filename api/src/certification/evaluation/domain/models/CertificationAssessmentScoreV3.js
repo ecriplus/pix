@@ -10,8 +10,8 @@
 import { config } from '../../../../shared/config.js';
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
 import { status as CertificationStatus } from '../../../../shared/domain/models/AssessmentResult.js';
-import { meshConfiguration } from '../../../results/domain/models/v3/MeshConfiguration.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
+import { MESH_CONFIGURATION } from '../../../shared/domain/constants/mesh-configuration.js';
 import { Intervals } from './Intervals.js';
 
 export class CertificationAssessmentScoreV3 {
@@ -36,7 +36,6 @@ export class CertificationAssessmentScoreV3 {
    * @param {Answer[]} params.allAnswers
    * @param {CalibratedChallenge[]} params.allChallenges
    * @param {ABORT_REASONS} params.abortReason
-   * @param {number} params.maxReachableLevelOnCertificationDate
    * @param {V3CertificationScoring} params.v3CertificationScoring
    * @param {ScoringDegradationService} params.scoringDegradationService
    * @returns {CertificationAssessmentScoreV3}
@@ -47,12 +46,11 @@ export class CertificationAssessmentScoreV3 {
     allAnswers,
     allChallenges,
     abortReason,
-    maxReachableLevelOnCertificationDate,
     v3CertificationScoring,
     scoringDegradationService,
   }) {
-    const certificationScoringIntervals = v3CertificationScoring.getIntervals();
-    const numberOfIntervals = v3CertificationScoring.getNumberOfIntervals();
+    const certificationScoringIntervals = v3CertificationScoring.intervals;
+    const maxReachableLevel = v3CertificationScoring.maxReachableLevel;
     const flashAssessmentAlgorithmConfiguration = algorithm.getConfiguration();
 
     let { capacity } = algorithm.getCapacityAndErrorRate({
@@ -78,9 +76,8 @@ export class CertificationAssessmentScoreV3 {
 
     const nbPix = _calculateScore({
       capacity,
-      maxReachableLevelOnCertificationDate,
       certificationScoringIntervals,
-      numberOfIntervals,
+      maxReachableLevel,
     });
 
     const competenceMarks = v3CertificationScoring.getCompetencesScore(capacity);
@@ -109,8 +106,8 @@ export class CertificationAssessmentScoreV3 {
   }
 }
 
-const _calculateScore = ({ capacity, certificationScoringIntervals }) => {
-  const MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;
+const _calculateScore = ({ capacity, certificationScoringIntervals, maxReachableLevel }) => {
+  const MAX_REACHABLE_LEVEL = maxReachableLevel;
   const MIN_PIX_SCORE = 0;
   const maximumReachableScore = MAX_REACHABLE_LEVEL * COMPETENCES_COUNT * PIX_COUNT_BY_LEVEL - 1;
 
@@ -127,7 +124,7 @@ const _calculateScore = ({ capacity, certificationScoringIntervals }) => {
   const intervalIndex = scoringIntervals.findIntervalIndexFromCapacity(capacity);
   const intervalMaximum = scoringIntervals.max(intervalIndex);
   const intervalMinimum = scoringIntervals.min(intervalIndex);
-  const meshes = Array.from(meshConfiguration.MESH_CONFIGURATION.values());
+  const meshes = Array.from(MESH_CONFIGURATION.values());
   const intervalWeight = meshes[intervalIndex].weight;
   const intervalCoefficient = meshes[intervalIndex].coefficient;
   const progressionPercentage = 1 - (intervalMaximum - capacity) / (intervalMaximum - intervalMinimum);

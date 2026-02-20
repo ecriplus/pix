@@ -2,7 +2,7 @@
  * @typedef {import ('../../read-models/CertifiedBadge.js').CertifiedBadge} CertifiedBadge
  */
 import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
-import { CERTIFICATE_LEVELS } from './CertificateLevels.js';
+import { CERTIFICATE_LEVELS } from '../../../../shared/domain/constants/mesh-configuration.js';
 import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
 
 export class Certificate {
@@ -32,6 +32,7 @@ export class Certificate {
     deliveredAt,
     pixScore,
     verificationCode,
+    maxReachableLevelOnCertificationDate,
     resultCompetenceTree,
     algorithmEngineVersion,
     certificationDate,
@@ -45,7 +46,7 @@ export class Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = this.#findLevel();
+    this.globalLevel = this.#findLevel(pixScore, maxReachableLevelOnCertificationDate);
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
     this.resultCompetenceTree = this.globalLevel ? resultCompetenceTree : null;
@@ -54,8 +55,11 @@ export class Certificate {
     this.acquiredComplementaryCertification = acquiredComplementaryCertification;
   }
 
-  #findLevel() {
-    const globalCertificationLevel = new GlobalCertificationLevel({ score: this.pixScore });
+  #findLevel(pixScore, maxReachableLevelOnCertificationDate) {
+    const globalCertificationLevel = new GlobalCertificationLevel({
+      score: pixScore,
+      maxReachableLevel: maxReachableLevelOnCertificationDate,
+    });
     return globalCertificationLevel.meshLevel === CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }
 }

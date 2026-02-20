@@ -24,6 +24,7 @@ export class CertificationResult {
     pixScore,
     certificationDate,
     competences,
+    maxReachableLevel,
   }) {
     this.ine = ine;
     this.organizationUai = organizationUai;
@@ -33,7 +34,7 @@ export class CertificationResult {
     this.status = status;
     this.pixScore = pixScore;
     this.certificationDate = certificationDate;
-    this.globalLevel = new GlobalCertificationLevel({ score: pixScore });
+    this.globalLevel = new GlobalCertificationLevel({ score: pixScore, maxReachableLevel });
     this.competences = competences;
   }
 }

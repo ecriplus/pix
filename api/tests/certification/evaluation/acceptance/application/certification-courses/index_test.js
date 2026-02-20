@@ -27,6 +27,7 @@ describe('Acceptance | Route | Certification Courses', function () {
             competences: [
               {
                 id: 'recCompetence0',
+                index: '1.0',
                 tubes: [
                   {
                     id: 'recTube0_0',
@@ -55,6 +56,7 @@ describe('Acceptance | Route | Certification Courses', function () {
               },
               {
                 id: 'recCompetence1',
+                index: '1.1',
                 tubes: [
                   {
                     id: 'recTube1_0',
@@ -83,6 +85,7 @@ describe('Acceptance | Route | Certification Courses', function () {
               },
               {
                 id: 'recCompetence2',
+                index: '1.2',
                 tubes: [
                   {
                     id: 'recTube2_0',
@@ -111,6 +114,7 @@ describe('Acceptance | Route | Certification Courses', function () {
               },
               {
                 id: 'recCompetence3',
+                index: '1.3',
                 tubes: [
                   {
                     id: 'recTube3_0',
@@ -139,6 +143,7 @@ describe('Acceptance | Route | Certification Courses', function () {
               },
               {
                 id: 'recCompetence4',
+                index: '1.4',
                 tubes: [
                   {
                     id: 'recTube4_0',

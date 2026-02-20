@@ -37,6 +37,10 @@ describe('Certification | Evaluation | Unit | Domain | Usecase | simulate-score-
           bounds: { max: 4, min: -4 },
           meshLevel: 0,
         },
+        {
+          bounds: { max: 8, min: 4 },
+          meshLevel: 1,
+        },
       ],
     });
 

@@ -6,11 +6,13 @@ export async function simulateScoreFromCapacity({ capacity, date, scoringConfigu
     date,
   });
 
-  const certificationScoringIntervals = v3CertificationScoring.getIntervals();
+  const certificationScoringIntervals = v3CertificationScoring.intervals;
+  const maxReachableLevel = v3CertificationScoring.maxReachableLevel;
 
   return ScoringSimulator.compute({
     capacity,
     certificationScoringIntervals,
     competencesForScoring: v3CertificationScoring.competencesForScoring,
+    maxReachableLevel,
   });
 }

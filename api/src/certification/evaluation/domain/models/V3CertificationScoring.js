@@ -10,12 +10,12 @@ export class V3CertificationScoring {
     return this._competencesForScoring.map((competenceForScoring) => competenceForScoring.getCompetenceMark(capacity));
   }
 
-  getNumberOfIntervals() {
-    return this._certificationScoringConfiguration.length;
+  get intervals() {
+    return this._certificationScoringConfiguration;
   }
 
-  getIntervals() {
-    return this._certificationScoringConfiguration;
+  get maxReachableLevel() {
+    return this._certificationScoringConfiguration.length - 1;
   }
 
   get competencesForScoring() {

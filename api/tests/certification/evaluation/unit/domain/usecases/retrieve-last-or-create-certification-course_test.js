@@ -5,7 +5,6 @@ import { CenterHabilitationError } from '../../../../../../src/certification/sha
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { config } from '../../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   CandidateNotAuthorizedToJoinSessionError,
@@ -34,8 +33,9 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const verifyCertificateCodeService = {};
   const userRepository = {};
   const versionRepository = {};
+  const scoringConfigurationRepository = {};
 
-  const MAX_REACHABLE_LEVEL = config.v3Certification.maxReachableLevel;
+  const MAX_REACHABLE_LEVEL = 7;
 
   const injectables = {
     assessmentRepository,
@@ -49,6 +49,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     verifyCertificateCodeService,
     userRepository,
     versionRepository,
+    scoringConfigurationRepository,
   };
 
   beforeEach(function () {
@@ -69,6 +70,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
     versionRepository.getByScopeAndReconciliationDate = sinon.stub();
+    scoringConfigurationRepository.getLatestByVersion = sinon.stub();
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
@@ -149,6 +151,11 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .withArgs({ sessionId: 1, userId: 2 })
               .resolves(candidateNotAuthorizedToStart);
 
+            const version = domainBuilder.certification.shared.buildVersion();
+            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
+
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
               sessionId: 1,
@@ -186,6 +193,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId
               .withArgs({ userId: 2, sessionId: 1 })
               .resolves(existingCertificationCourse);
+
+            const version = domainBuilder.certification.shared.buildVersion();
+            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+
+            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -277,6 +290,9 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
+            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
+
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
               sessionId: 1,
@@ -336,6 +352,9 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
+
+            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -397,6 +416,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 .onCall(1)
                 .resolves(certificationCourseCreatedMeanwhile);
 
+              const version = domainBuilder.certification.shared.buildVersion();
+              versionRepository.getByScopeAndReconciliationDate.resolves(version);
+
+              const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+              scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
+
               // when
               const result = await retrieveLastOrCreateCertificationCourse({
                 sessionId: foundSession.id,
@@ -428,6 +453,9 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
+
+              const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
+              scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
             });
 
             it('should return it with flag created marked as true with related resources', async function () {

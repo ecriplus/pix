@@ -37,6 +37,7 @@ const _getBySearchParams = async (searchParams) => {
           'competence_level', "competence_level"
         ))`,
       ),
+      scoring_configuration: 'configuration',
     })
     .where(searchParams)
     .groupBy(
@@ -48,6 +49,7 @@ const _getBySearchParams = async (searchParams) => {
       'status',
       'pix_score',
       'certification_date',
+      'configuration',
     );
 
   if (!certificationResultDto.length) {
@@ -74,11 +76,12 @@ const getByVerificationCode = async ({ verificationCode }) => {
           'competence_level', "competence_level"
         ))`,
       ),
+      scoring_configuration: 'configuration',
     })
     .where({
       certification_code_verification: verificationCode,
     })
-    .groupBy('last_name', 'first_name', 'birthdate', 'status', 'pix_score', 'certification_date');
+    .groupBy('last_name', 'first_name', 'birthdate', 'status', 'pix_score', 'certification_date', 'configuration');
 
   if (!certificationResultDto.length) {
     throw new NotFoundError('No certifications found for given search parameters');
@@ -115,6 +118,7 @@ const _toDomain = (certificationResultDto) => {
       pixScore: certificationResult.pix_score,
       certificationDate: certificationResult.certification_date,
       competences: Array.from(uniqCompetences.values()),
+      maxReachableLevel: certificationResult.scoring_configuration.length - 1,
     });
   });
 };
