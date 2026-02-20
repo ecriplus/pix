@@ -13,15 +13,15 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
       const thirdAnswerId = 789;
 
       const challenges = [
-        domainBuilder.certification.scoring.buildChallengeCalibration({
+        domainBuilder.certification.evaluation.buildChallengeCalibration({
           id: 'challenge1',
           certificationChallengeId: 'certificationChallengeId1',
         }),
-        domainBuilder.certification.scoring.buildChallengeCalibration({
+        domainBuilder.certification.evaluation.buildChallengeCalibration({
           id: 'challenge2',
           certificationChallengeId: 'certificationChallengeId2',
         }),
-        domainBuilder.certification.scoring.buildChallengeCalibration({
+        domainBuilder.certification.evaluation.buildChallengeCalibration({
           id: 'challenge3',
           certificationChallengeId: 'certificationChallengeId3',
         }),
@@ -52,17 +52,17 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
 
       // then
       const expectedCapacityHistory = [
-        domainBuilder.buildCertificationChallengeCapacity({
+        domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
           answerId: firstAnswerId,
           certificationChallengeId: 'certificationChallengeId1',
           capacity: 1,
         }),
-        domainBuilder.buildCertificationChallengeCapacity({
+        domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
           answerId: secondAnswerId,
           certificationChallengeId: 'certificationChallengeId2',
           capacity: 2,
         }),
-        domainBuilder.buildCertificationChallengeCapacity({
+        domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
           answerId: thirdAnswerId,
           certificationChallengeId: 'certificationChallengeId3',
           capacity: 3,

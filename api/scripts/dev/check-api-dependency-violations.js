@@ -83,7 +83,6 @@ const config = {
     'src/certification/enrolment',
     'src/certification/evaluation',
     'src/certification/results',
-    'src/certification/scoring',
     'src/certification/session-management',
     'src/certification/shared',
     'src/devcomp',

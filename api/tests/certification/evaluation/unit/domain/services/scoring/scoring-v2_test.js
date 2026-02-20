@@ -260,7 +260,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             id: certificationCourseId,
             completedAt: null,
           });
-          const savedAssessmentResult = domainBuilder.certification.scoring.buildAssessmentResult.standard({
+          const savedAssessmentResult = domainBuilder.certification.evaluation.buildAssessmentResult.standard({
             id: assessmentResultId,
             pixScore: certificationAssessmentScore.nbPix,
             reproducibilityRate: certificationAssessmentScore.percentageCorrectAnswers,
@@ -534,7 +534,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             percentageCorrectAnswers: 80,
             hasEnoughNonNeutralizedChallengesToBeTrusted: false,
           });
-          const assessmentResultToBeSaved = domainBuilder.certification.scoring.buildAssessmentResult.notTrustable({
+          const assessmentResultToBeSaved = domainBuilder.certification.evaluation.buildAssessmentResult.notTrustable({
             pixScore: 30,
             reproducibilityRate: 80,
             assessmentId: 123,
@@ -579,12 +579,14 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               percentageCorrectAnswers: 45,
               hasEnoughNonNeutralizedChallengesToBeTrusted: false,
             });
-            const assessmentResultToBeSaved = domainBuilder.certification.scoring.buildAssessmentResult.notTrustable({
-              pixScore: 0,
-              reproducibilityRate: 45,
-              assessmentId: 123,
-              juryId: 7,
-            });
+            const assessmentResultToBeSaved = domainBuilder.certification.evaluation.buildAssessmentResult.notTrustable(
+              {
+                pixScore: 0,
+                reproducibilityRate: 45,
+                assessmentId: 123,
+                juryId: 7,
+              },
+            );
             const savedAssessmentResult = new AssessmentResult({ ...assessmentResultToBeSaved, id: 4 });
 
             assessmentResultRepository.save.resolves({
@@ -646,7 +648,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             percentageCorrectAnswers: 80,
             hasEnoughNonNeutralizedChallengesToBeTrusted: true,
           });
-          const assessmentResultToBeSaved = domainBuilder.certification.scoring.buildAssessmentResult.standard({
+          const assessmentResultToBeSaved = domainBuilder.certification.evaluation.buildAssessmentResult.standard({
             pixScore: 30,
             reproducibilityRate: 80,
             status: AssessmentResult.status.VALIDATED,
@@ -718,7 +720,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               hasEnoughNonNeutralizedChallengesToBeTrusted: true,
             });
 
-            const savedAssessmentResult = domainBuilder.certification.scoring.buildAssessmentResult.fraud({
+            const savedAssessmentResult = domainBuilder.certification.evaluation.buildAssessmentResult.fraud({
               pixScore: 30,
               reproducibilityRate: 80,
               assessmentId: 123,
@@ -786,7 +788,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             });
 
             const assessmentResultToBeSaved =
-              domainBuilder.certification.scoring.buildAssessmentResult.insufficientCorrectAnswers({
+              domainBuilder.certification.evaluation.buildAssessmentResult.insufficientCorrectAnswers({
                 pixScore: 0,
                 reproducibilityRate: 33,
                 assessmentId: 123,
@@ -845,7 +847,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               });
 
               const assessmentResultToBeSaved =
-                domainBuilder.certification.scoring.buildAssessmentResult.lackOfAnswersForTechnicalReason({
+                domainBuilder.certification.evaluation.buildAssessmentResult.lackOfAnswersForTechnicalReason({
                   pixScore: 0,
                   reproducibilityRate: 33,
                   assessmentId: 123,

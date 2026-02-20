@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../scoring/domain/usecases/index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
+ * @typedef {import('./index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';

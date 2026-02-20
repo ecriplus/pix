@@ -141,7 +141,7 @@ const _buildDataFromAnsweredChallenges = (answeredChallenges) => {
 };
 
 const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty, id }) => {
-  return domainBuilder.certification.scoring.buildChallengeCalibration({
+  return domainBuilder.certification.evaluation.buildChallengeCalibration({
     id,
     discriminant,
     difficulty,
