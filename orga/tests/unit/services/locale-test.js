@@ -71,7 +71,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLocales = localeService.pixLocales;
 
       // then
-      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE', 'it']);
+      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'fr-BE', 'fr-FR', 'it', 'nl', 'nl-BE']);
     });
   });
 
@@ -81,7 +81,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLanguages = localeService.pixLanguages;
 
       // then
-      assert.deepEqual(pixLanguages, ['fr', 'en', 'nl', 'es', 'it']);
+      assert.deepEqual(pixLanguages, ['en', 'es', 'fr', 'it', 'nl']);
     });
   });
 
@@ -260,7 +260,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixChallengeLocales = localeService.pixChallengeLocales;
 
       // then
-      assert.deepEqual(pixChallengeLocales, ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de']);
+      assert.deepEqual(pixChallengeLocales, ['de', 'en', 'es', 'es-419', 'fr', 'fr-fr', 'it', 'nl']);
     });
   });
 
@@ -274,6 +274,10 @@ module('Unit | Services | locale', function (hooks) {
         {
           label: 'English',
           value: 'en',
+        },
+        {
+          label: 'Español',
+          value: 'es',
         },
         {
           label: 'Français',
@@ -290,10 +294,6 @@ module('Unit | Services | locale', function (hooks) {
         {
           label: 'Nederlands (België)',
           value: 'nl-BE',
-        },
-        {
-          label: 'Español',
-          value: 'es',
         },
       ]);
     });
