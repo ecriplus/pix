@@ -38,15 +38,6 @@ class CertificationCourseNotPublishableError extends DomainError {
   }
 }
 
-class SessionWithAbortReasonOnCompletedCertificationCourseError extends DomainError {
-  constructor(
-    message = 'The field "Reason for abandonment" has been filled in for a candidate who has finished their certification exam in between. The session therefore can\'t be finalised. Please refresh the page before finalising.',
-  ) {
-    super(message);
-    this.code = 'SESSION_WITH_ABORT_REASON_ON_COMPLETED_CERTIFICATION_COURSE';
-  }
-}
-
 class SessionWithMissingAbortReasonError extends DomainError {
   constructor(
     message = "Une ou plusieurs certifications non terminées n'ont pas de “Raison de l’abandon” renseignées. La session ne peut donc pas être finalisée.",
@@ -123,7 +114,6 @@ export {
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionNotAccessible,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,
 };
