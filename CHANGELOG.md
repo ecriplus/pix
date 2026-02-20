@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.336.0](https://github.com/1024pix/pix/compare/v5.335.0...v5.336.0) (2026-02-20)
+
+### :rocket: Amélioration
+
+- [#15117](https://github.com/1024pix/pix/pull/15117) : MDX43 - NR_Durabilité_NOV - intégration pour relecture 
+- [#15168](https://github.com/1024pix/pix/pull/15168) Ajouter la possibilité d'exporter le PDF d'un PC dans Admin (PIX-21627) 
+- [#15174](https://github.com/1024pix/pix/pull/15174) MDX-56 Surequipement, correction ortho-typo 
+- [#15176](https://github.com/1024pix/pix/pull/15176) modifs IA-enseignants relecture FRI 
+- [#15151](https://github.com/1024pix/pix/pull/15151) Permettre l'affichage des réponses courtes en cas de QCU et QCM sur Pix App (PIX-21288). 
+- [#15164](https://github.com/1024pix/pix/pull/15164) Tmp retours genfonction ava 
+- [#15170](https://github.com/1024pix/pix/pull/15170) Update NR_Datacenter_AVA.json 
+
+### :bug: Correction
+
+- [#15159](https://github.com/1024pix/pix/pull/15159) Ne pas afficher l'indicateur de focus sur le stepper lorsqu'il n'est pas le premier composant d'un grain (PIX-21232) 
+
+### :building_construction: Tech
+
+- [#15166](https://github.com/1024pix/pix/pull/15166) Ajout le domaine des routes dans les logs 
+- [#15161](https://github.com/1024pix/pix/pull/15161) Ajouter un script pour rattacher les ownerOrganizationId au profile cible dans la table dédié (PIX-21603). 
+- [#15162](https://github.com/1024pix/pix/pull/15162) Améliorer le script de traduction des fichiers de langues 
+- [#15178](https://github.com/1024pix/pix/pull/15178) Réduire le nombre de requêtes SQL générées lors de l'inscription de plusieurs candidats d'un coup (PIX-21620) 
+- [#15167](https://github.com/1024pix/pix/pull/15167) Utilise les modèles d'attestation depuis le bucket S3 (PIX-21597).
+
 # [5.335.0](https://github.com/1024pix/pix/compare/v5.334.1...v5.335.0) (2026-02-19)
 
 ### :rocket: Amélioration
