@@ -338,6 +338,35 @@ describe('Shared | Integration | Domain | DomainTransaction', function () {
       });
     });
 
+    context('when success handlers are defined in deeper functions', function () {
+      it('executes onSuccess handlers after transaction is committed', async function () {
+        const firstCallProcess = sinon.stub().resolves();
+        const secondCallProcess = sinon.stub().resolves();
+        const firstCallSuccessHandler = sinon.stub().resolves();
+        const secondCallSuccessHandler = sinon.stub().resolves();
+
+        async function firstCall() {
+          await DomainTransaction.addSuccessHandler(firstCallSuccessHandler);
+          await firstCallProcess();
+        }
+        async function secondCall() {
+          await DomainTransaction.addSuccessHandler(secondCallSuccessHandler);
+          await secondCallProcess();
+        }
+
+        const myTransaction = withTransaction(async () => {
+          await firstCall();
+          await secondCall();
+        });
+        await myTransaction();
+
+        expect(secondCallProcess.calledAfter(firstCallProcess)).to.be.true;
+        expect(firstCallSuccessHandler.calledAfter(secondCallProcess)).to.be.true;
+        expect(secondCallSuccessHandler.calledAfter(secondCallProcess)).to.be.true;
+        expect(secondCallSuccessHandler.calledAfter(firstCallSuccessHandler)).to.be.true;
+      });
+    });
+
     context('when successHandlersForDomainTransaction feature toggle is disabled', function () {
       it('executes onSuccess handlers immediately', async function () {
         await featureToggles.set('successHandlersForDomainTransaction', false);

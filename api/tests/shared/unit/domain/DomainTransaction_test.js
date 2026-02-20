@@ -73,8 +73,8 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
     it('should get transaction from store', async function () {
       const transactionStub = { commit: sinon.stub() };
       sinon.stub(knex, 'transaction');
-      knex.transaction.callsFake(async () => transactionStub);
-      const myUseCase = withTransaction(() => {
+      knex.transaction.callsFake(async (fn) => fn(transactionStub));
+      const myUseCase = withTransaction(async () => {
         return DomainTransaction.getConnection();
       });
       const connection = await myUseCase();
