@@ -140,6 +140,7 @@ export class CommonCertificationVersions {
         challengesConfiguration: JSON.stringify(CHALLENGES_CONFIGURATION),
         globalScoringConfiguration: JSON.stringify(GLOBAL_SCORING_CONFIGURATION),
         competencesScoringConfiguration: JSON.stringify(COMPETENCES_SCORING_CONFIGURATION),
+        minimumAnswersRequiredToValidateACertification: MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
       });
     await databaseBuilder.commit();
   }
@@ -231,6 +232,8 @@ export class CommonCertificationVersions {
     return currentVersionId;
   }
 }
+
+const MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION = 20;
 
 const CHALLENGES_CONFIGURATION = {
   maximumAssessmentLength: 32,
