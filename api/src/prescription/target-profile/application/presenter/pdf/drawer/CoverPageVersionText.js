@@ -9,6 +9,7 @@ import { Text } from './Text.js';
 const textByLang = {
   en: 'Version {date}',
   fr: 'Version du {date}',
+  nl: 'Versie van {date}',
 };
 
 class CoverPageVersionText extends Text {

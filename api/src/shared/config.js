@@ -74,7 +74,7 @@ function getSeedsConfig() {
     context,
     learningContent: {
       frameworks,
-      locales: process.env.SEEDS_LEARNING_CONTENT_LOCALES?.split(',') ?? ['fr-fr', 'en'],
+      locales: process.env.SEEDS_LEARNING_CONTENT_LOCALES?.split(',') ?? ['fr-fr', 'en', 'nl', 'nl-BE'],
     },
   };
 }

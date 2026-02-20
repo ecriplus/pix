@@ -1,4 +1,6 @@
 import 'dayjs/locale/fr.js';
+import 'dayjs/locale/en.js';
+import 'dayjs/locale/nl.js';
 
 import { PDFDocument } from 'pdf-lib';
 

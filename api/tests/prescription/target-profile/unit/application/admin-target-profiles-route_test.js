@@ -571,7 +571,7 @@ describe('Unit | Application | Admin Target Profiles | Routes', function () {
         expect(error).to.deep.equal({
           status: '400',
           title: 'Bad Request',
-          detail: '"language" must be one of [fr, en]',
+          detail: '"language" must be one of [fr, en, nl]',
         });
         expect(targetProfileController.getLearningContentAsPdf).to.not.have.been.called;
       });

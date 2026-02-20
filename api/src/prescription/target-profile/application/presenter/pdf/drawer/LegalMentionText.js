@@ -8,6 +8,7 @@ import { Text } from './Text.js';
 const textByLang = {
   en: 'This is a working document, updated regularly. Its distribution is restricted and its use limited to Pix Orga members in the context of the implementation of the support of their users. - Version {date}',
   fr: "Ceci est un document de travail. Il évolue régulièrement. Sa diffusion est restreinte et son usage limité aux utilisateurs de Pix Orga dans le cadre de la mise en oeuvre de l'accompagnement de leurs publics. - Version du {date}",
+  nl: 'Dit is een werkdocument. Het wordt regelmatig bijgewerkt. De verspreiding ervan is beperkt en het gebruik ervan is voorbehouden aan gebruikers van Pix Orga in het kader van de begeleiding van hun publiek. - Versie van {date}',
 };
 
 class LegalMentionText extends Text {

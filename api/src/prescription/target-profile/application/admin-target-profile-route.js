@@ -226,7 +226,7 @@ const register = async function (server) {
             id: identifiersType.targetProfileId,
           }),
           query: Joi.object({
-            language: Joi.string().valid('fr', 'en').required(),
+            language: Joi.string().valid('fr', 'en', 'nl').required(),
           }),
         },
         handler: targetProfileController.getLearningContentAsPdf,
