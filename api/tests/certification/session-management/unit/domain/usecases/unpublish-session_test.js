@@ -28,7 +28,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | unpub
   it('should return the session', async function () {
     // given
     const sessionId = 123;
-    const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
+    const expectedSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
       id: sessionId,
       publishedAt: new Date('2020-01-01'),
     });

@@ -12,7 +12,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       it(`should return invigilator kit in ${lang}`, async function () {
         // given
         sinon.stub(usecases, 'getInvigilatorKitSessionInfo');
-        const sessionMainInfo = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
+        const sessionMainInfo = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 1 });
         const invigilatorKitBuffer = 'binary string';
         const userId = 1;
         const locale = lang;

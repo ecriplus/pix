@@ -12,7 +12,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | get-session-resu
 
   it('should return session', async function () {
     // given
-    const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
+    const expectedSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
       certificationCandidates: [],
     });
     sharedSessionRepository.getWithCertificationCandidates.withArgs({ id: 123 }).resolves(expectedSession);
@@ -55,7 +55,7 @@ describe('Certification | Results | Unit | Domain | Use Cases | get-session-resu
       subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
 
-    const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
+    const expectedSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
       certificationCandidates: [
         certificationCandidate1,
         certificationCandidate2,

@@ -29,7 +29,7 @@ describe('Certification | Shared | Integration | Infrastructure | Repository | S
       const actualSession = await sessionRepository.getWithCertificationCandidates({ id: session.id });
 
       // then
-      const expectedSession = domainBuilder.certification.sessionManagement.buildSession(session);
+      const expectedSession = domainBuilder.certification.sessionManagement.buildSessionManagement(session);
       expect(actualSession).to.deepEqualInstance(expectedSession);
     });
 

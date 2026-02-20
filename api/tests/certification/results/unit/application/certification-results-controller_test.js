@@ -14,7 +14,7 @@ describe('Certification | Results | Unit | Controller | certification results', 
           sessionId: 1,
         },
       };
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         id: 1,
         date: '2021-01-01',
         time: '14:30',

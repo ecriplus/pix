@@ -27,8 +27,8 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
 
   it('delegates to the publish session service', async function () {
     // given
-    const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
-    const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
+    const session1 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 1 });
+    const session2 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 2 });
     const publishedAt = Symbol('a publication date');
     const startedCertificationCoursesUserIds1 = [101, 102];
     const startedCertificationCoursesUserIds2 = [201, 202];
@@ -90,8 +90,8 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
   context('when one or many session publication fail', function () {
     it('should continue', async function () {
       // given
-      const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
-      const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
+      const session1 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 1 });
+      const session2 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 2 });
       const publishedAt = Symbol('a publication date');
       const startedCertificationCoursesUserIds2 = [201, 202];
 

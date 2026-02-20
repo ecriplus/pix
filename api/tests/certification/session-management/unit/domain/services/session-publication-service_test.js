@@ -52,7 +52,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       resultRecipientEmail: null,
       subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
     });
-    originalSession = domainBuilder.certification.sessionManagement.buildSession({
+    originalSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
       id: sessionId,
       certificationCenter,
       date: sessionDate,
@@ -95,7 +95,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       context('when the session is already published', function () {
         it('should throw an error', async function () {
           // given
-          const session = domainBuilder.certification.sessionManagement.buildSession({
+          const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
             id: 'sessionId',
             publishedAt: new Date(),
           });
@@ -155,7 +155,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       context('when some certifications are in error', function () {
         it('should throw a CertificationCourseNotPublishableError', async function () {
           // given
-          const session = domainBuilder.certification.sessionManagement.buildSession({
+          const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
             id: 'sessionId',
             publishedAt: null,
           });
@@ -183,7 +183,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
       context('when some certification are still started', function () {
         it('should throw a CertificationCourseNotPublishableError without publishing any certification nor setting pixCertificationStatus', async function () {
           // given
-          const session = domainBuilder.certification.sessionManagement.buildSession({
+          const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
             id: 'sessionId',
             publishedAt: null,
           });
@@ -356,7 +356,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
           resultRecipientEmail: null,
         });
-        const sessionWithoutResultsRecipient = domainBuilder.certification.sessionManagement.buildSession({
+        const sessionWithoutResultsRecipient = domainBuilder.certification.sessionManagement.buildSessionManagement({
           id: sessionId,
           certificationCenter,
           date: sessionDate,
@@ -403,7 +403,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
           subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
         });
 
-        const sessionWithMixedCandidates = domainBuilder.certification.sessionManagement.buildSession({
+        const sessionWithMixedCandidates = domainBuilder.certification.sessionManagement.buildSessionManagement({
           id: sessionId,
           certificationCenter,
           date: sessionDate,
@@ -447,7 +447,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
             resultRecipientEmail: 'candidate@example.net',
             subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
           });
-          const session = domainBuilder.certification.sessionManagement.buildSession({
+          const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
             certificationCenterId: 101,
             finalizedAt: now,
             publishedAt: null,
@@ -497,7 +497,7 @@ describe('Certification | Session Management | Unit | Domain | Services | sessio
               resultRecipientEmail: 'candidate@example.net',
               subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             });
-            const session = domainBuilder.certification.sessionManagement.buildSession({
+            const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
               certificationCenterId: 101,
               finalizedAt: now,
               publishedAt: null,

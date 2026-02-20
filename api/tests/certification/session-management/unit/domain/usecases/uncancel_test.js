@@ -9,7 +9,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
     it('should uncancel the certification', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V2,
       });
@@ -53,7 +53,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       it('should not uncancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V2,
         });
@@ -89,7 +89,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
     it('should uncancel the certification', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V3,
       });
@@ -133,7 +133,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       it('should not uncancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V3,
         });

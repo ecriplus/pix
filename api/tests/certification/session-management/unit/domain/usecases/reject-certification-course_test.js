@@ -56,7 +56,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       it('should not cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V2,
         });

@@ -1,0 +1,19 @@
+import { buildAllowedCertificationCenterAccess } from './build-allowed-certification-center-access.js';
+import { buildCertificationCandidate } from './build-certification-candidate.js';
+import { buildCertificationCourse } from './build-certification-course.js';
+import { buildCertificationDetails } from './build-certification-details.js';
+import { buildCertificationSessionComplementaryCertification } from './build-certification-session-complementary-certification.js';
+import { buildJurySessionCounters } from './build-jury-session-counters.js';
+import { buildSession } from './build-session.js';
+import { buildSessionManagement } from './build-session-management.js';
+
+export const builders = {
+  buildAllowedCertificationCenterAccess,
+  buildCertificationCandidate,
+  buildCertificationCourse,
+  buildCertificationDetails,
+  buildCertificationSessionComplementaryCertification,
+  buildJurySessionCounters,
+  buildSessionManagement,
+  buildSession,
+};

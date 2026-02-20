@@ -15,7 +15,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       it('should cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: new Date('2020-01-01'),
           version: AlgorithmEngineVersion.V2,
         });
@@ -65,7 +65,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       it('should not cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V2,
         });
@@ -104,7 +104,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       it('should not cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: new Date('2020-01-01'),
           version: AlgorithmEngineVersion.V2,
         });
@@ -150,7 +150,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       it('should cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: new Date('2020-01-01'),
           version: AlgorithmEngineVersion.V3,
         });
@@ -200,7 +200,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
       it('should not cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V3,
         });
@@ -240,7 +240,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
     it('should not reject the certification and throw NotFoundError', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V3,
       });
@@ -286,7 +286,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | cancel
     it('should not cancel the certification and throw CertificationCancelNotAllowedError', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V2,
       });

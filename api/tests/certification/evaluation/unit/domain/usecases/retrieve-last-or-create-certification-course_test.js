@@ -83,7 +83,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   context('when session access code is different from provided access code', function () {
     it('should throw a not found error', async function () {
       // given
-      const foundSession = domainBuilder.certification.sessionManagement.buildSession({
+      const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
         accessCode: 'differentAccessCode',
       });
       evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
@@ -135,7 +135,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
         context('when the user tries to join the session for the first time', function () {
           it('should throw a CandidateNotAuthorizedToJoinSessionError', async function () {
             // given
-            const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+            const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
               id: 1,
               accessCode: 'accessCode',
             });
@@ -173,7 +173,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
         context('when the user tries to go back to the session without authorization', function () {
           it('should throw a CandidateNotAuthorizedToResumeCertificationTestError', async function () {
             // given
-            const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+            const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
               id: 1,
               accessCode: 'accessCode',
             });
@@ -219,7 +219,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
         context('when the user is not connected with the correct account', function () {
           it('should throw a CandidateNotAuthorizedToJoinSessionError xxx', async function () {
             // given
-            const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+            const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
               id: 1,
               accessCode: 'accessCode',
             });
@@ -259,7 +259,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
         context('when a certification course with provided userId and sessionId already exists', function () {
           it('return existing certification course and unauthorize candidate to start', async function () {
             // given
-            const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+            const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
               id: 1,
               accessCode: 'accessCode',
             });
@@ -320,7 +320,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
           it('should set numberOfChallenges when existing certification course is V3', async function () {
             // given
-            const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+            const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
               id: 1,
               accessCode: 'accessCode',
             });
@@ -383,7 +383,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               const user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
               userRepository.get.withArgs({ id: user.id }).resolves(user);
 
-              const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+              const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                 id: 1,
                 accessCode: 'accessCode',
               });
@@ -460,7 +460,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
             it('should return it with flag created marked as true with related resources', async function () {
               // given
-              const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+              const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                 id: 1,
                 accessCode: 'accessCode',
               });
@@ -538,7 +538,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 // given
                 const userId = 2;
 
-                const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                   id: 1,
                   accessCode: 'accessCode',
                   version: 3,
@@ -587,7 +587,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 // given
                 const userId = 2;
 
-                const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                   id: 1,
                   accessCode: 'accessCode',
                   version: 3,
@@ -676,7 +676,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             context('when user is enrolled to core certification', function () {
               it('should not save complementary certification info', async function () {
                 // given
-                const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                   id: 1,
                   accessCode: 'accessCode',
                 });
@@ -760,7 +760,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     },
                   );
 
-                  const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                  const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                     id: 1,
                     accessCode: 'accessCode',
                   });
@@ -859,7 +859,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     },
                   );
 
-                  const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                  const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                     id: 1,
                     accessCode: 'accessCode',
                   });
@@ -931,7 +931,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       complementaryCertificationKey: cleaCertification.key,
                     });
 
-                    const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                    const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                       id: 1,
                       accessCode: 'accessCode',
                     });
@@ -1031,10 +1031,12 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         key: ComplementaryCertificationKeys.CLEA,
                       });
 
-                      const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
-                        id: 1,
-                        accessCode: 'accessCode',
-                      });
+                      const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created(
+                        {
+                          id: 1,
+                          accessCode: 'accessCode',
+                        },
+                      );
                       evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
 
                       certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId
@@ -1125,7 +1127,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     },
                   );
 
-                  const foundSession = domainBuilder.certification.sessionManagement.buildSession.created({
+                  const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                     id: 1,
                     accessCode: 'accessCode',
                   });
