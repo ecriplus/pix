@@ -1629,6 +1629,144 @@
               }
             }
           ]
+        },
+        {
+          "id": "b3ac67ab-9ff8-4a30-86b0-9fa8a2c57c1b",
+          "type": "discovery",
+          "title": "analyse-mails-phishing",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3621eccb-8169-44f3-beeb-3a91e9344152",
+                "type": "text",
+                "content": "<p>analyse-mails-phishing</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "70caf63a-4f06-4372-b9fb-72231b757466",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "analyse-mails-phishing",
+                "props": {
+                  "mails": [
+                    {
+                      "subject": "Votre nouvel avis d’imposition est disponible",
+                      "from": {
+                        "name": "Impost.g0uv",
+                        "address": "no-reply@impost.g0uv.fr"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Votre avis d’imposition est désormais en ligne.",
+                            "Pour consulter rapidement,",
+                            "merci de vous connecter à votre espace particulier via le lien ci-dessous."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Accéder à mon espace particulier"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Cordialement,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Service des impôts"]
+                        }
+                      ],
+                      "answers": ["from.name", "from.address"],
+                      "correctFeedback": "Le nom de l’expéditeur est orthographié ‘impost.g0uv’ au lieu de ‘impots.gouv’. Les erreurs dans les noms ou dans les adresses mail sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien l’orthographe du nom et de l’adresse d’expéditeur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Notification de facture impayée — EDF",
+                      "from": {
+                        "name": "EDF Service Client",
+                        "address": "support.edf-client@yxztbnc85de.ru"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous n’avons pas reçu le règlement de votre dernière facture.",
+                            "Veuillez consulter le détail et effectuer le paiement sécurisé",
+                            "dans les 48h pour éviter la suspension de votre abonnement."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Voir ma facture"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Merci,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["EDF — Service Client"]
+                        }
+                      ],
+                      "answers": ["from.address"],
+                      "correctFeedback": "La partie après l’arobase de l’adresse mail ‘yxztbnc85de.ru’ n’a aucun lien avec EDF ou la demande, et n’est même pas compréhensible. C’est un indicateur de hameçonnage.",
+                      "incorrectFeedback": "Concentrez-vous sur l’adresse mail de l’expediteur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Amende impayée - Service des infractions",
+                      "from": {
+                        "name": "Service des infractions",
+                        "address": "infractions@amendes-en-retard.com"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous vous informons que vous avez un retard de paiement d’une amende de 85€ auprès de l’Agence de Traitement Automatisé des Infractions (ANTAI).",
+                            "Référence de dossier : ML854YD9.",
+                            "Veuillez noter que si vous ne payez pas cette amende dans les prochaines 24 h,",
+                            "vous devrez payer une majoration à hauteur de 250€.",
+                            "Veuillez régulariser votre situation dans les plus brefs délais."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Payr mon amende"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Cordialement,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Service des infractions de l’ANTAI"]
+                        }
+                      ],
+                      "answers": ["from.address"],
+                      "correctFeedback": "L’adresse de l’expéditeur ne correspond à aucun organisme officiel. Les incohérences dans les noms et les adresses mails sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien le nom et l’adresse de l’expéditeur. Retentez votre chance ! "
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     }
