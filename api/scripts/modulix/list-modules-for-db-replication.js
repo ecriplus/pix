@@ -5,10 +5,22 @@ import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learn
  * @returns {Promise<void>}
  */
 async function listModulesForDBReplication() {
-  const imports = await moduleDatasource.list();
+  const imports = await moduleDatasource.listModulesWithFilename();
   console.log('--- List of modules for DB replication ---');
   const moduleInformation = imports.map((module) => {
-    return { id: module.id, shortId: module.shortId, slug: module.slug, title: module.title };
+    const moduleObjectivesInline = module.details.objectives.join(', ');
+    return {
+      id: module.id,
+      shortId: module.shortId,
+      slug: module.slug,
+      title: module.title,
+      filename: module.filename,
+      level: module.details.level,
+      duration: module.details.duration,
+      objectives: moduleObjectivesInline,
+      isBeta: module.isBeta,
+      visibility: module.visibility,
+    };
   });
   console.log(JSON.stringify(moduleInformation, null, 2).replace(/"([^"]+)": "([^"]+)"/g, "$1: '$2'"));
 }
@@ -26,8 +38,11 @@ async function listModulesForMetabaseFilter() {
 }
 
 async function main() {
+  if (process.argv[2] === 'metabase-filter') {
+    await listModulesForMetabaseFilter();
+    return;
+  }
   await listModulesForDBReplication();
-  await listModulesForMetabaseFilter();
 }
 
 await main();

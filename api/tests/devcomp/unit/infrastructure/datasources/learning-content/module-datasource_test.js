@@ -165,4 +165,14 @@ describe('Unit | Infrastructure | Datasources | Learning Content | ModuleDatasou
       });
     });
   });
+
+  describe('#listModulesWithFilename', function () {
+    it('should return a list of modules with their filename', async function () {
+      // when
+      const modules = await moduleDatasource.listModulesWithFilename();
+
+      expect(modules[0].filename).to.exist;
+      expect(modules[0].filename).to.be.a('string');
+    });
+  });
 });

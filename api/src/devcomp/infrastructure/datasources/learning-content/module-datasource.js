@@ -62,14 +62,25 @@ const moduleDatasource = {
   list: async () => {
     return referential.modules;
   },
+  listModulesWithFilename: async () => {
+    const modulesWithFilename = { modules: [] };
+
+    const { files, path } = await readModuleFiles();
+
+    for (const file of files) {
+      const fileURL = pathToFileURL(join(path, file.name));
+      const module = await import(fileURL, { with: { type: 'json' } });
+      modulesWithFilename.modules.push({ ...module.default, filename: file.name });
+    }
+
+    return modulesWithFilename.modules;
+  },
 };
 
 async function importModules() {
   const imports = { modules: [] };
 
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const path = join(__dirname, './modules');
-  const files = await readdir(path, { withFileTypes: true });
+  const { files, path } = await readModuleFiles();
 
   for (const file of files) {
     const fileURL = pathToFileURL(join(path, file.name));
@@ -78,6 +89,13 @@ async function importModules() {
   }
 
   return imports;
+}
+
+async function readModuleFiles() {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = join(__dirname, './modules');
+  const files = await readdir(path, { withFileTypes: true });
+  return { files, path };
 }
 
 export default moduleDatasource;
