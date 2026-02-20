@@ -119,6 +119,29 @@ describe('Unit | Application | Sessions | Routes', function () {
           expect(errors[0].detail).to.equals('"data.attributes.toto" is not allowed');
         });
       });
+
+      describe('when subscriptions in undefined', function () {
+        it('should return 400', async function () {
+          // given
+          sinon.stub(authorization, 'verifySessionAuthorization').returns(true);
+          sinon.stub(certificationCandidateController, 'addCandidate').returns('ok');
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request('POST', '/api/sessions/1/certification-candidates', {
+            data: {
+              attributes: { ...correctAttributes, subscriptions: undefined },
+              type: 'certification-candidates',
+            },
+          });
+
+          // then
+          expect(response.statusCode).to.equal(400);
+          const { errors } = JSON.parse(response.payload);
+          expect(errors[0].detail).to.equals('"data.attributes.subscriptions" is required');
+        });
+      });
     });
   });
 

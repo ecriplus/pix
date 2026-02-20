@@ -52,6 +52,7 @@ const register = async function (server) {
                         .allow(null),
                     }),
                   )
+                  .required()
                   .min(1)
                   .max(2),
               },

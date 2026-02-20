@@ -25,7 +25,7 @@ const register = async function (server) {
         tags: ['api', 'sessions'],
         notes: [
           '- **Cette route est restreinte aux utilisateurs appartenant à un centre de certification ayant créé la session**\n' +
-            '- Cette route permet de télécharger le pv de session pré-rempli au format ods',
+            "- Cette route permet de télécharger la feuille d'émargement pré-remplie au format PDF",
         ],
       },
     },

@@ -15,7 +15,7 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
 
   beforeEach(function () {
     centerRepository = { getById: sinon.stub() };
-    candidateRepository = { deleteBySessionId: sinon.stub(), saveInSession: sinon.stub() };
+    candidateRepository = { deleteBySessionId: sinon.stub(), save: sinon.stub() };
     sessionRepository = { save: sinon.stub() };
     temporarySessionsStorageForMassImportService = {
       getByKeyAndUserId: sinon.stub(),
@@ -33,10 +33,9 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
       sessionId: undefined,
       subscriptions: [
         domainBuilder.certification.enrolment.buildCoreSubscription(),
-        domainBuilder.certification.shared.buildComplementaryCertification({
+        domainBuilder.certification.enrolment.buildComplementarySubscription({
           id: 1,
-          label: 'Pix+Droit',
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
         }),
       ],
     };
@@ -101,7 +100,7 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
           // then
           const expectedSession = new SessionEnrolment({ ...temporaryCachedSessions[0], createdBy: sessionCreatorId });
           expect(sessionRepository.save).to.have.been.calledOnceWith({ session: expectedSession });
-          expect(candidateRepository.saveInSession).to.not.have.been.called;
+          expect(candidateRepository.save).to.not.have.been.called;
         });
       });
 
@@ -145,9 +144,8 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
           // then
           const expectedSession = new SessionEnrolment({ ...temporaryCachedSessions[0], createdBy: sessionCreatorId });
           expect(sessionRepository.save).to.have.been.calledOnceWith({ session: expectedSession });
-          expect(candidateRepository.saveInSession).to.have.been.calledOnceWith({
-            sessionId: 1234,
-            candidate,
+          expect(candidateRepository.save).to.have.been.calledOnceWith({
+            candidates: [domainBuilder.certification.enrolment.buildCandidate({ ...candidate, sessionId: 1234 })],
           });
         });
       });
@@ -182,9 +180,8 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
         expect(candidateRepository.deleteBySessionId).to.have.been.calledOnceWith({
           sessionId: 1234,
         });
-        expect(candidateRepository.saveInSession).to.have.been.calledOnceWith({
-          sessionId: 1234,
-          candidate,
+        expect(candidateRepository.save).to.have.been.calledOnceWith({
+          candidates: [domainBuilder.certification.enrolment.buildCandidate({ ...candidate, sessionId: 1234 })],
         });
       });
     });

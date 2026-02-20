@@ -20,7 +20,7 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
     candidateRepository = {
       deleteBySessionId: sinon.stub(),
       findBySessionId: sinon.stub(),
-      saveInSession: sinon.stub(),
+      save: sinon.stub(),
     };
     sessionRepository = {
       get: sinon.stub(),
@@ -132,11 +132,8 @@ describe('Unit | UseCase | import-certification-candidates-from-attendance-sheet
           expect(candidateRepository.deleteBySessionId).to.have.been.calledWithExactly({
             sessionId,
           });
-          expect(candidateRepository.saveInSession).to.have.been.calledWithExactly({
-            candidate,
-            sessionId,
-          });
-          expect(candidateRepository.deleteBySessionId.calledBefore(candidateRepository.saveInSession)).to.be.true;
+          expect(candidateRepository.save).to.have.been.calledWithExactly({ candidates });
+          expect(candidateRepository.deleteBySessionId.calledBefore(candidateRepository.save)).to.be.true;
         });
       });
     });

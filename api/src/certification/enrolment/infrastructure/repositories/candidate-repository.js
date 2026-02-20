@@ -3,6 +3,8 @@
  */
 
 // @ts-check
+import dayjs from 'dayjs';
+
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CertificationCandidateNotFoundError } from '../../domain/errors.js';
@@ -157,40 +159,41 @@ export async function deleteBySessionId({ sessionId }) {
 
 /**
  * @function
- * @param {object} params
- * @param {Candidate} params.candidate
- * @param {number} params.sessionId
- * @returns {Promise<number>} return saved candidate id
+ * @param {Candidate[]} candidates
+ * @returns {Promise<void>}
  */
-export async function saveInSession({ candidate, sessionId }) {
-  const candidateDataToSave = adaptModelToDb(candidate);
-  const knexTransaction = DomainTransaction.getConnection();
+export async function save({ candidates }) {
+  const knexConn = DomainTransaction.getConnection();
+  const complementaryCertificationsData = await knexConn('complementary-certifications').select('id', 'key');
 
-  const [{ id: certificationCandidateId }] = await knexTransaction('certification-candidates')
-    .insert({ ...candidateDataToSave, sessionId })
-    .returning('id');
+  const candidatesData = candidates.map(adaptModelToDb);
 
-  for (const subscription of candidate.subscriptions) {
-    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
-      await knexTransaction('certification-subscriptions').insert({
-        certificationCandidateId: certificationCandidateId,
+  const insertedCandidatesData = await knexConn('certification-candidates')
+    .insert(candidatesData)
+    .returning(['id', 'firstName', 'lastName', 'birthdate']);
+
+  const subscriptionsData = [];
+  for (const candidate of candidates) {
+    const insertedCandidateId = insertedCandidatesData.find(
+      (insertedCandidateData) =>
+        insertedCandidateData.firstName === candidate.firstName &&
+        insertedCandidateData.lastName === candidate.lastName &&
+        dayjs(insertedCandidateData.birthdate).format('YYYY-MM-DD') === candidate.birthdate,
+    ).id;
+
+    subscriptionsData.push(
+      ...candidate.subscriptions.map((subscription) => ({
+        certificationCandidateId: insertedCandidateId,
         type: subscription.type,
-        complementaryCertificationId: null,
-      });
-    } else {
-      const { id: complementaryCertificationId } = await knexTransaction('complementary-certifications')
-        .select('id')
-        .where({ key: subscription.complementaryCertificationKey })
-        .first();
-      await knexTransaction('certification-subscriptions').insert({
-        certificationCandidateId: certificationCandidateId,
-        type: subscription.type,
-        complementaryCertificationId: complementaryCertificationId,
-      });
-    }
+        complementaryCertificationId:
+          complementaryCertificationsData.find(
+            (complementaryCertificationData) =>
+              complementaryCertificationData.key === subscription.complementaryCertificationKey,
+          )?.id ?? null,
+      })),
+    );
   }
-
-  return certificationCandidateId;
+  await knexConn('certification-subscriptions').insert(subscriptionsData);
 }
 
 /**
