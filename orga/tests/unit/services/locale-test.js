@@ -291,6 +291,10 @@ module('Unit | Services | locale', function (hooks) {
           label: 'Nederlands (België)',
           value: 'nl-BE',
         },
+        {
+          label: 'Español',
+          value: 'es',
+        },
       ]);
     });
   });

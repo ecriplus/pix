@@ -38,6 +38,7 @@ module.exports = function (environment) {
         { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
         { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
         { value: 'en', nativeName: 'English', displayedInSwitcher: true },
+        { value: 'es', nativeName: 'Español', displayedInSwitcher: true },
         { value: 'nl', nativeName: 'Nederlands', displayedInSwitcher: false },
         { value: 'it', nativeName: 'Italiano', displayedInSwitcher: true },
         { value: 'nl-BE', nativeName: 'Nederlands (België)', displayedInSwitcher: true },
