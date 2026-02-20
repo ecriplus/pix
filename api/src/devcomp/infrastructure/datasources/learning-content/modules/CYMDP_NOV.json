@@ -113,20 +113,36 @@
               "type": "element",
               "element": {
                 "id": "3e4a50c4-62e2-4b05-904d-d4575c73c983",
-                "type": "custom-draft",
-                "title": "Page SnapGram d’Emma",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_MDP_NOV/RSmdp.html",
+                "type": "custom",
                 "instruction": "<p>À partir des informations visibles sur son profil, devinez son mot de passe et connectez-vous à son compte.</p>",
-                "height": 500
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c33f99a1-6883-4436-afa5-ce02eaf5975c",
-                "type": "expand",
-                "title": "🗝️ Si vous avez besoin d’aide, cliquer ici pour avoir un indice",
-                "content": "<p>Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat.</p>\n"
+                "tagName": "trouver-mdp-rs",
+                "props": {
+                  "titleLevel": 0,
+                  "validations": {
+                    "password": "Isaac2014",
+                    "user": "emma_vtr"
+                  },
+                  "feedback": {
+                    "success": "Quelqu’un qui vous connaît ou un pirate informatique qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe.",
+                    "failed": "Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat."
+                  },
+                  "userProfile": {
+                    "userName": "Emma_VTR",
+                    "tag": "@emma_vtr",
+                    "bio": "Fan de chats 🐱 · Voyage à Lisbonne 2023 🇵🇹 · Maman de Timéo 💕",
+                    "location": "",
+                    "publications": [
+                      {
+                        "date": "2024-06-09",
+                        "content": "Déjà 10 ans que j'ai sauvé Misty ! 🐾💖 De petit chaton abandonné, il s'est transformé en panthère d'appartement !"
+                      },
+                      {
+                        "date": "2023-08-21",
+                        "content": "Lisbonne, souvenirs d’été"
+                      }
+                    ]
+                  }
+                }
               }
             }
           ]
@@ -204,6 +220,7 @@
                 "id": "e63a240b-41fe-47ba-9f7b-489ce500e120",
                 "type": "qcu-discovery",
                 "instruction": "<p>À partir de ces seules informations, pensez-vous être capable de trouver son mot de passe ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -227,8 +244,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -250,11 +266,25 @@
               "type": "element",
               "element": {
                 "id": "43849ff1-22ed-497d-9e8e-4dbc72002ea4",
-                "type": "custom-draft",
-                "title": "Test des mots de passe les plus courants",
-                "url": "https://1024pix.github.io/atelier-contenus/MCU/liste-mdp-courants.html",
+                "type": "custom",
                 "instruction": "<p>Essayez les mots de passe de la liste ci-dessous pour trouver le mot de passe du compte d’Ulysse.</p>",
-                "height": 500
+                "tagName": "test-top-mdp",
+                "props": {
+                  "titleLevel": 0,
+                  "passwords": [
+                    "123456",
+                    "123456789",
+                    "azerty",
+                    "1234561",
+                    "qwerty",
+                    "marseille",
+                    "000000",
+                    "1234567891",
+                    "doudou",
+                    "12345"
+                  ],
+                  "expectedPassword": "marseille"
+                }
               }
             }
           ]
@@ -356,6 +386,7 @@
                 "id": "2b686ab7-db0c-4e18-8090-c181d44ce66a",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, combien de mots de passe de 5 caractères peut-on former avec toutes les lettres de l’alphabet ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -386,8 +417,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -482,6 +512,7 @@
                 "id": "519d3823-acab-4f3f-a4da-ac19351adee9",
                 "type": "qcu",
                 "instruction": "<p>Quel est le meilleur moyen de protéger son compte en ligne contre les piratages ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -508,8 +539,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -536,6 +566,7 @@
                       "id": "799481bf-03d3-461d-bdd8-5209cff065f6",
                       "type": "qcu",
                       "instruction": "<p>Pourquoi le mot de passe&nbsp;<em>ChateauDragons_1 </em>n’est pas un mot de passe fort ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -570,8 +601,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -581,6 +611,7 @@
                       "id": "7795c82c-0c62-4a54-a9f6-e8c205944fc3",
                       "type": "qcu",
                       "instruction": "<p>Pourquoi le mot de passe <em>Anniv_2012!!</em> n’est pas un mot de passe fort ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -615,8 +646,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -626,6 +656,7 @@
                       "id": "4ab807ec-d043-4aa3-861a-9fba4fbfd1ca",
                       "type": "qcu",
                       "instruction": "<p>Pourquoi le mot de passe <em>BirtamoNatina</em> n’est pas un mot de passe fort ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -660,8 +691,7 @@
                           }
                         }
                       ],
-                      "solution": "4",
-                      "hasShortProposals": false
+                      "solution": "4"
                     }
                   ]
                 },
@@ -671,6 +701,7 @@
                       "id": "157dcc14-75bc-4b5a-9cfa-057b88736bba",
                       "type": "qcu",
                       "instruction": "<p>Pourquoi le mot de passe <em>B@t1!z</em> n’est pas un mot de passe fort ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -705,8 +736,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 }
@@ -723,11 +753,18 @@
               "type": "element",
               "element": {
                 "id": "278f78f6-7116-45d6-90d2-3496abc12609",
-                "type": "custom-draft",
-                "title": "Classement mots de passe",
-                "url": "https://1024pix.github.io/atelier-contenus/LSI/CY_MDP_NOV/classement.html",
+                "type": "custom",
                 "instruction": "<p>Classez les mots de passe du plus faible au plus fort.</p>",
-                "height": 500
+                "tagName": "mdp-classement",
+                "props": {
+                  "passwords": [
+                    "8l.CEJ34b)QU/u3E",
+                    "r7&Kp9!qZ4#tV2",
+                    "MonCh@t!23\"",
+                    "Bonjour1",
+                    "1234567"
+                  ]
+                }
               }
             }
           ]
