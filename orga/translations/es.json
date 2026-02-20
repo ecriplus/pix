@@ -50,7 +50,7 @@
       "first-name-required": "El alumno con el INE {nationalStudentId} no tiene rellenado el campo nombre. Es obligatorio para cada alumno.",
       "ine-required": "El campo INE es obligatorio para cada estudiante.",
       "ine-unique": "El INE {nationalStudentId} está presente varias veces en el expediente para varios alumnos.",
-      "invalid-birthdate-format": "Un alumno con un INE de {nationalStudentId} no tiene el formato de fecha de nacimiento correcto. Debe tener el formato <DD/MM/AAAA>.",
+      "invalid-birthdate-format": "Un alumno con un INE de {nationalStudentId} no tiene el formato de fecha de nacimiento correcto. Debe tener el formato 'DD/MM/AAAA'",
       "invalid-file": "El expediente no es conforme.",
       "invalid-file-extension": "Extensión {fileExtension} no soportada.",
       "last-name-required": "El alumno con el INE {nationalStudentId} no tiene rellenado el campo Apellidos. Es obligatorio para cada alumno.",
@@ -68,17 +68,17 @@
     },
     "ia": {
       "message": "¡Los nuevos itinerarios de aprendizaje Pix sobre IA están disponibles en tu espacio Pix Orga! Son obligatorios para los alumnos de 4e, 2de (general y tecnológico) y 1º de CAP, y se introducirán progresivamente a lo largo de los cursos 2025-2026 y 2026-2027.",
-      "step1": "Echa un vistazo a '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='Kit de despliegue de IA' class='link--banner link--bold link--underlined' '>'el kit de despliegue'</a>'",
-      "step2": "Inscríbase en el '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link--banner link--bold link--underlined' '>'webinar'</a>'"
+      "step1": "Echa un vistazo a '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='Kit de despliegue de IA' class='link link--banner link--bold link--underlined' '>'el kit de despliegue'</a>'",
+      "step2": "Inscríbase en el '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinar'</a>'"
     },
     "import": {
-      "ia-message": "📢 '< a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link--banner link--bold link--underlined' '>'Nuevo: descubre el kit de despliegue de la vía de aprendizaje de IA'</a>'",
+      "ia-message": "📢 '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'Nuevo: descubre el kit de despliegue de la vía de aprendizaje de IA'</a>'",
       "message": "Etapas clave del curso escolar :",
-      "step1a": "Implement : '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Guía descarga resultados' class='link--banner link--bold link--underlined' '>'descarga resultados'</a>' certificación y",
+      "step1a": "Implement : '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Guía descarga resultados' class='link link--banner link--bold link--underlined' '>'descarga resultados'</a>' certificación y",
       "step1b": "importar",
       "step1c": "base de datos de estudiantes (admin)",
-      "step2": "<'a href='https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt' title='Guide Lancer les parcours de rentrée' class='link link--banner link--bold link--underlined' '>'Créer les campagnes'</a>' (cursos rentrée, 6e, temáticos, disciplinares, dirigidos...).",
-      "step3": "Certificar a los alumnos. <'a href='https://cloud.pix.fr/s/opiFxfjygR76S8y' title='Guía Preparación y organización de la certificación de alumnos' class='link--banner link--bold link--underlined' '>'Más información sobre la certificación'</a>'."
+      "step2": "'<'a href='https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt' title='Guía Iniciar los recorridos pix de vuelta al cole' class='link link--banner link--bold link--underlined' '>'Crear campañas'</a>' (itinerario de inicio de curso, de 6.º curso, temáticos, disciplinarios, específicos…).",
+      "step3": "Certificar a los alumnos. '<'a href='https://cloud.pix.fr/s/opiFxfjygR76S8y' title='Guía Preparación y organización de la certificación de alumnos' class='link link--banner link--bold link--underlined' '>'Más información sobre la certificación'</a>'."
     },
     "last-places-lot-available": {
       "message": "Tenga en cuenta que sus entradas caducan en {days, number} días."
@@ -207,12 +207,12 @@
       "internal-server-error": "Se ha producido un error interno. Nuestros equipos están resolviendo el problema. Vuelva a intentarlo más tarde.",
       "login-unauthorized-error": "La dirección de correo electrónico o el nombre de usuario y/o la contraseña introducidos son incorrectos.",
       "login-unauthorized-remaining-attempts-error": "Atención: aún tienes {remainingAttempts, plural, =0 {0 intentos} =1 {1 intento} other {# intentos}} antes de que tu cuenta Pix se bloquee definitivamente.",
-      "login-unauthorized-remaining-attempts-with-user-name-error": "Advertencia: aún tienes {remainingAttempts, plural, =0 {0 intentos} =1 {1 intento} other {# intentos}} antes de que tu cuenta Pix se bloquee permanentemente.'<br>'Si lo olvidas, <strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu inicio de sesión.",
-      "login-unauthorized-with-user-name-error": "El nombre de usuario y/o la contraseña introducidos son incorrectos.'<br><br>'Si lo olvidas, <strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu nombre de usuario.",
+      "login-unauthorized-remaining-attempts-with-user-name-error": "Advertencia: aún tienes {remainingAttempts, plural, =0 {0 intentos} =1 {1 intento} other {# intentos}} antes de que tu cuenta Pix se bloquee permanentemente.'<br>'Si lo olvidas, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu inicio de sesión.",
+      "login-unauthorized-with-user-name-error": "El nombre de usuario y/o la contraseña introducidos son incorrectos.'<br>'Si lo olvidas, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu nombre de usuario.",
       "login-unexpected-error": "No se ha podido conectar. Por favor, inténtelo de nuevo en unos instantes. Si el problema persiste, <'a href=\"{supportHomeUrl}\" target=\"blank\"'>'contacta con nosotros a través del centro de ayuda'</a>'.",
       "login-user-blocked-error": "Tu cuenta está bloqueada porque has realizado demasiados intentos de conexión. Para desbloquearla, <'a href=\"{url}\"'>'contacta con nosotros'</a>'.",
       "login-user-temporary-blocked-error": "Has realizado demasiados intentos de inicio de sesión, tu cuenta Pix está bloqueada temporalmente durante {blockingDurationMinutes} minutos. Vuelve a intentarlo más tarde o haz clic en <'a href=\"{url}\"'>'contraseña olvidada'</a>' para restablecerla.",
-      "login-user-temporary-blocked-with-username-error": "Has realizado demasiados intentos de inicio de sesión, tu cuenta Pix está bloqueada temporalmente durante {blockingDurationMinutes} minutos.'<br><br>'Si lo olvidas, <strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu inicio de sesión."
+      "login-user-temporary-blocked-with-username-error": "Has realizado demasiados intentos de inicio de sesión, tu cuenta Pix está bloqueada temporalmente durante {blockingDurationMinutes} minutos.'<br>'Si lo olvidas, '<strong>'ponte en contacto con tu profesor'</strong>' para restablecer tu contraseña y/o recuperar tu inicio de sesión."
     },
     "breadcrumb": "Rastro de migas de pan",
     "cgu": {
@@ -518,7 +518,7 @@
     },
     "credits": {
       "number": "{count, plural, =0 {0 créditos} =1 {1 crédito} other {{count, number} créditos}}",
-      "tooltip-text": "El número de créditos mostrado corresponde al número de créditos adquiridos por la organización y actualmente válidos (independientemente de su activación). Para más información, póngase en contacto con nosotros en <a href=mailto:pro@pix.fr>'pro@pix.fr'</a>'."
+      "tooltip-text": "El número de créditos mostrado corresponde al número de créditos adquiridos por la organización y actualmente válidos (independientemente de su activación). Para más información, póngase en contacto con nosotros en '<a href=mailto:pro@pix.fr>'pro@pix.fr'</a>'."
     },
     "external-link-title": "Abrir en una ventana nueva",
     "footer": {
@@ -983,7 +983,7 @@
           "header": "{count, plural, =1 {Esta campaña ya no será visible} other {Estas campañas ya no serán visibles}} en Pix Orga.",
           "main-participation-prevent": "Se eliminarán todas las entradas a {count, plural, =1 {esta campaña} other {estas campañas}} y sus resultados."
         },
-        "title": "{count, plural, =1 {¿Seguro que quiere borrar la campaña seleccionada?} other {¿Seguro que quiere borrar las campañas seleccionadas '<strong>'{count}'</strong>'?}}"
+        "title": "{count, plural, =1 {¿Seguro que quiere borrar la campaña seleccionada?} other {¿Seguro que quiere borrar las '<strong>'{count}'</strong>' campañas seleccionadas?}}"
       },
       "filter": {
         "by-name": "Buscar una campaña",
@@ -1421,10 +1421,10 @@
         "content": {
           "footer": "Tenga en cuenta que esta acción es irreversible.",
           "header": "{count, plural, =1 {Este participante ya no será visible} other {Estos participantes ya no serán visibles}} en Pix Orga.",
-          "main-campaign-prevent": "Esto repercutirá, por tanto, en los resultados y análisis de las campañas que {count, plural, =1 {ha} other {realizado.",
+          "main-campaign-prevent": "Esto repercutirá, por tanto, en los resultados y análisis de las campañas que {count, plural, =1 {ha} other {han}} realizado.",
           "main-participation-prevent": "Todas {count, plural, =1 {sus} other {sus}} entradas de campaña serán eliminadas."
         },
-        "title": "{count, plural, =1 {Borra '<strong>'{nombre} {apellido}'</strong>' de tus} otros {¿Estás seguro de que quieres borrar '<strong>'{count}'</strong>'}} participantes?"
+        "title": "{count, plural, =1 {Borra '<strong>'{firstname} {lastname}'</strong>' de tus} other {¿Estás seguro de que quieres borrar '<strong>'{count}'</strong>'}} participantes?"
       },
       "empty-state": {
         "action": "Ver mis campañas",
@@ -1833,10 +1833,10 @@
         "content": {
           "footer": "Tenga en cuenta que esta acción es irreversible.",
           "header": "{count, plural, =1 {Este alumno ya no será visible} other {Estos alumnos ya no serán visibles}} en Pix Orga.",
-          "main-campaign-prevent": "Esto repercutirá, por tanto, en los resultados y análisis de las campañas que {count, plural, =1 {ha} other {realizado.",
+          "main-campaign-prevent": "Esto repercutirá, por tanto, en los resultados y análisis de las campañas que {count, plural, =1 {ha} other {han}} realizado.",
           "main-participation-prevent": "Todas {count, plural, =1 {sus} other {sus}} entradas de campaña serán eliminadas."
         },
-        "title": "{count, plural, =1 {Borra '<strong>'{nombre} {apellido}'</strong>' de tus} otros {¿Estás seguro de que quieres borrar '<strong>'{count}'</strong>'}} alumnos?"
+        "title": "{count, plural, =1 {Borra '<strong>'{firstname} {lastname}'</strong>' de tus} other {¿Estás seguro de que quieres borrar '<strong>'{count}'</strong>'}} alumnos?"
       },
       "edit-student-number-modal": {
         "actions": {

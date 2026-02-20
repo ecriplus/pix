@@ -68,16 +68,17 @@
     },
     "ia": {
       "message": "I nuovi percorsi di apprendimento Pix sull'IA sono disponibili nel vostro spazio Pix Orga! Sono obbligatori per gli alunni delle 4e, 2de (generale e tecnologica) e del 1° anno del PAC, con un'implementazione graduale negli anni scolastici 2025-2026 e 2026-2027.",
-      "step1": "Consultate '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='AI Deployment Kit' class='link--banner link--bold link--underlined' '>'the deployment kit'</a>'",
-      "step2": "Registratevi per il '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link-banner link--bold link--underlined' '>'webinar'</a>'."
+      "step1": "Consultate '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' title='kit di implementazione IA' class='link link--banner link--bold link--underlined' '>'il kit di implementazione'</a>'",
+      "step2": "Registratevi per il '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinar'</a>'."
     },
     "import": {
+      "ia-message": "📢 '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'Novità: scoprite il kit di implementazione dei percorsi di apprendimento IA'</a>'",
       "message": "Fasi chiave dell'anno scolastico :",
-      "step1a": "Implementare : '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Guida scarica risultati' class='link--banner link- grassetto link--sottolineato' '>'scarica risultati'</a>' certificazione e",
+      "step1a": "Implementare : '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Guida scarica risultati' class='link link--banner link--bold link--underlined' '>'scarica risultati'</a>' certificazione e",
       "step1b": "Importazione",
       "step1c": "database degli studenti (admin)",
-      "step2": "'<'a href='https://cloud.pix.fr/s/RaPpKjFHNX2kSR4' title='Guide Lancer les parcours de rentrée' class='link--banner link- grassetto link--sottolineato' '>'Créer les campagnes'</a>' (corsi rentrée, 6e, tematici, disciplinari, mirati...).",
-      "step3": "Certificare gli studenti. '<'a href='https://cloud.pix.fr/s/opiFxfjygR76S8y' title='Guida Preparazione e organizzazione della certificazione degli studenti' class='link--banner link- grassetto link--sottolineato' '>'Per saperne di più sulla certificazione'</a>'."
+      "step2": "'<'a href='https://cloud.pix.fr/s/RaPpKjFHNX2kSR4' title='guida Avviare percorsi di rientro scolastico' class='link link--banner link--bold link--underlined' '>'Creare campagne'</a>' (ritorno a scuola, prima media, corsi tematici, corsi specifici per materia, corsi mirati, ecc.).",
+      "step3": "Certificare gli studenti. '<'a href='https://cloud.pix.fr/s/opiFxfjygR76S8y' title='Guida Preparazione e organizzazione della certificazione degli studenti' class='link link--banner link--bold link--underlined' '>'Per saperne di più sulla certificazione'</a>'."
     },
     "last-places-lot-available": {
       "message": "I biglietti scadono tra {days, number} giorni."
