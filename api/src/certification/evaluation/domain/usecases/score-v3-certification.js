@@ -15,10 +15,10 @@
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../shared/domain/errors.js';
-import { CertificationAssessmentHistory } from '../../../scoring/domain/models/CertificationAssessmentHistory.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { CertificationAssessmentHistory } from '../models/CertificationAssessmentHistory.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
 
 export const scoreV3Certification = withTransaction(

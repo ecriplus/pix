@@ -1,7 +1,7 @@
 /**
  * @typedef {import('../../models/Candidate.js')} Candidate
  * @typedef {import('../../models/FlashAssessmentAlgorithm.js')} FlashAssessmentAlgorithm
- * @typedef {import('../../../../shared/domain/models/V3CertificationScoring.js')} V3CertificationScoring
+ * @typedef {import('../../models/V3CertificationScoring.js')} V3CertificationScoring
  * @typedef {import('../../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
  * @typedef {import('../../../../../shared/domain/models/AssessmentResult.js')} AssessmentResult
  * @typedef {import('../../models/AssessmentSheet.js')} AssessmentSheet

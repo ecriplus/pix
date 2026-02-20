@@ -1,5 +1,5 @@
 import { config } from '../../../../../shared/config.js';
-import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
+import { AssessmentResultFactory } from '../../models/factories/AssessmentResultFactory.js';
 
 export function createV3AssessmentResult({
   toBeCancelled,

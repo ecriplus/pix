@@ -14,7 +14,6 @@ import * as sessionManagementCertificationChallengeRepository from '../../../sha
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
@@ -27,6 +26,7 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as pixPlusCertificationCourseRepository from '../../infrastructure/repositories/pix-plus-certification-course-repository.js';
+import * as scoringConfigurationRepository from '../../infrastructure/repositories/scoring-configuration-repository.js';
 import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
@@ -39,8 +39,12 @@ import { getNextChallenge } from './get-next-challenge.js';
 import { neutralizeChallenge } from './neutralize-challenge.js';
 import { rescoreV2Certification } from './rescore-v2-certification.js';
 import { retrieveLastOrCreateCertificationCourse } from './retrieve-last-or-create-certification-course.js';
+import { saveCertificationScoringConfiguration } from './save-certification-scoring-configuration.js';
+import { saveCompetenceForScoringConfiguration } from './save-competence-for-scoring-configuration.js';
 import { scoreV3Certification } from './score-v3-certification.js';
+import { simulateCapacityFromScore } from './simulate-capacity-from-score.js';
 import { simulateFlashAssessmentScenario } from './simulate-flash-assessment-scenario.js';
+import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
 
 /**
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
@@ -113,6 +117,10 @@ const usecasesWithoutInjectedDependencies = {
   simulateFlashAssessmentScenario,
   scoreV3Certification,
   completeCertificationAssessment,
+  saveCertificationScoringConfiguration,
+  saveCompetenceForScoringConfiguration,
+  simulateCapacityFromScore,
+  simulateScoreFromCapacity,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 

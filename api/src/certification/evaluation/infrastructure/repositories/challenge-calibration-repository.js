@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { ChallengeCalibration } from '../../../scoring/domain/read-models/ChallengeCalibration.js';
+import { ChallengeCalibration } from '../../domain/read-models/ChallengeCalibration.js';
 
 /**
  * @param {object} params

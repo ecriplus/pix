@@ -6,7 +6,7 @@ import {
   JuryComment,
   JuryCommentContexts,
 } from '../../../certification/shared/domain/models/JuryComment.js';
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { MissingAssessmentId, NotFoundError } from '../../domain/errors.js';
 import { AssessmentResult } from '../../domain/models/AssessmentResult.js';
 

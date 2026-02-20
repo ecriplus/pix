@@ -12,13 +12,13 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as competenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import * as scoringConfigurationRepository from '../../../shared/infrastructure/repositories/scoring-configuration-repository.js';
 import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
+import * as scoringConfigurationRepository from '../../infrastructure/repositories/scoring-configuration-repository.js';
 import * as flashAlgorithmService from './algorithm-methods/flash.js';
 import { findByCertificationCourseAndVersion } from './scoring/calibrated-challenge-service.js';
 import { scoreComplementaryCertificationV2 } from './scoring/score-complementary-certification-v2.js';

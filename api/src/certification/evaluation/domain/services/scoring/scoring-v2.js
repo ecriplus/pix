@@ -12,14 +12,14 @@
 import _ from 'lodash';
 
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
-import { ReproducibilityRate } from '../../../../../certification/shared/domain/models/ReproducibilityRate.js';
-import { CertificationAssessmentScore } from '../../../../scoring/domain/models/CertificationAssessmentScore.js';
-import { AssessmentResultFactory } from '../../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { AlgorithmEngineVersion } from '../../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { AnswerCollectionForScoring } from '../../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { CompetenceMark } from '../../../../shared/domain/models/CompetenceMark.js';
-import { CertifiedScore } from '../../../domain/models/CertifiedScore.js';
+import { ReproducibilityRate } from '../../../../shared/domain/models/ReproducibilityRate.js';
+import { CertificationAssessmentScore } from '../../models/CertificationAssessmentScore.js';
 import { CertifiedLevel } from '../../models/CertifiedLevel.js';
+import { CertifiedScore } from '../../models/CertifiedScore.js';
+import { AssessmentResultFactory } from '../../models/factories/AssessmentResultFactory.js';
 import { CertificationContract } from '../CertificationContract.js';
 
 /**

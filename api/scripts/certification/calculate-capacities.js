@@ -1,11 +1,11 @@
 import { knex } from '../../db/knex-database-connection.js';
+import { CertificationAssessmentHistory } from '../../src/certification/evaluation/domain/models/CertificationAssessmentHistory.js';
 import { FlashAssessmentAlgorithm } from '../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import * as flashAlgorithmService from '../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
 import { services as certificationEvaluationServices } from '../../src/certification/evaluation/domain/services/index.js';
 import * as assessmentSheetRepository from '../../src/certification/evaluation/infrastructure/repositories/assessment-sheet-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../src/certification/evaluation/infrastructure/repositories/certification-assessment-history-repository.js';
 import * as certificationCandidateRepository from '../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
-import { CertificationAssessmentHistory } from '../../src/certification/scoring/domain/models/CertificationAssessmentHistory.js';
 import * as sharedVersionRepository from '../../src/certification/shared/infrastructure/repositories/version-repository.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';

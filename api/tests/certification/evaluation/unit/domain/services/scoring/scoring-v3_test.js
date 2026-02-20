@@ -155,7 +155,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
 });
 
 const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty, id }) => {
-  return domainBuilder.certification.scoring.buildChallengeCalibration({
+  return domainBuilder.certification.evaluation.buildChallengeCalibration({
     id,
     discriminant,
     difficulty,

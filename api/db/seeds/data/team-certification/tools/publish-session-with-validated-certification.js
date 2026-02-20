@@ -4,7 +4,6 @@ import { usecases as enrolmentUseCases } from '../../../../../src/certification/
 import pickChallengeService from '../../../../../src/certification/evaluation/domain/services/pick-challenge-service.js';
 import { usecases as evaluationUseCases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { usecases as flashUseCases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
-import { usecases as scoringUseCases } from '../../../../../src/certification/scoring/domain/usecases/index.js';
 import { usecases as sessionManagementUseCases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/constants/abort-reasons.js';
 import { CertificationReport } from '../../../../../src/certification/shared/domain/models/CertificationReport.js';
@@ -15,7 +14,7 @@ import { knex } from '../../../../knex-database-connection.js';
 /**
  * @param {Object} params
  * @param {number} params.sessionId
- * @param {number} params.candidateId
+ * @param {number} params.candidatesIds
  * @param {number} params.pixScoreTarget - WARNING: final certification pix score will vary
  *                                         because simulation simulates a few user errors
  */
@@ -44,7 +43,7 @@ export default async function publishSessionWithValidatedCertification({
     const assessment = certificationCourse._assessment;
 
     // We simulate a certification in order to get the right capacity for a specific pix score
-    const { capacity } = await scoringUseCases.simulateCapacityFromScore({
+    const { capacity } = await evaluationUseCases.simulateCapacityFromScore({
       score: pixScoreTarget,
       date: new Date(),
     });

@@ -11,7 +11,6 @@ import CertificationCancelled from '../../../../shared/domain/events/Certificati
 import { CertificationCourseUnrejected } from '../../../../shared/domain/events/CertificationCourseUnrejected.js';
 import CertificationUncancelled from '../../../../shared/domain/events/CertificationUncancelled.js';
 import { checkEventTypes } from '../../../../shared/domain/events/check-event-types.js';
-import { AssessmentResultFactory } from '../../../scoring/domain/models/factories/AssessmentResultFactory.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
 import { CertificationCourseRejected } from '../../../session-management/domain/events/CertificationCourseRejected.js';
 import { CertificationJuryDone } from '../../../session-management/domain/events/CertificationJuryDone.js';
@@ -19,6 +18,7 @@ import { CertificationComputeError } from '../errors.js';
 import CertificationRescored from '../events/CertificationRescored.js';
 import { ChallengeDeneutralized } from '../events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../events/ChallengeNeutralized.js';
+import { AssessmentResultFactory } from '../models/factories/AssessmentResultFactory.js';
 
 const eventTypes = [
   ChallengeNeutralized,

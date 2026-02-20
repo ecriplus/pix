@@ -15,21 +15,22 @@ describe('Integration | Infrastructure | Repository | CertificationChallengeCapa
         const certificationChallenge2 = databaseBuilder.factory.buildCertificationChallenge();
 
         const capacityHistory = [
-          domainBuilder.buildCertificationChallengeCapacity({
+          domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
             answerId: answerId1,
             certificationChallengeId: certificationChallenge1.id,
             capacity: 10,
           }),
-          domainBuilder.buildCertificationChallengeCapacity({
+          domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
             answerId: answerId2,
             certificationChallengeId: certificationChallenge2.id,
             capacity: 20,
           }),
         ];
 
-        const certificationAssessmentHistory = domainBuilder.buildCertificationAssessmentHistory({
-          capacityHistory,
-        });
+        const certificationAssessmentHistory =
+          domainBuilder.certification.evaluation.buildCertificationAssessmentHistory({
+            capacityHistory,
+          });
 
         await databaseBuilder.commit();
 
@@ -68,21 +69,22 @@ describe('Integration | Infrastructure | Repository | CertificationChallengeCapa
         await databaseBuilder.commit();
 
         const capacityHistory = [
-          domainBuilder.buildCertificationChallengeCapacity({
+          domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
             answerId: answerId1,
             certificationChallengeId: certificationChallenge1.id,
             capacity: 10,
           }),
-          domainBuilder.buildCertificationChallengeCapacity({
+          domainBuilder.certification.evaluation.buildCertificationChallengeCapacity({
             answerId: answerId2,
             certificationChallengeId: certificationChallenge2.id,
             capacity: 20,
           }),
         ];
 
-        const certificationAssessmentHistory = domainBuilder.buildCertificationAssessmentHistory({
-          capacityHistory,
-        });
+        const certificationAssessmentHistory =
+          domainBuilder.certification.evaluation.buildCertificationAssessmentHistory({
+            capacityHistory,
+          });
 
         // when
         await save(certificationAssessmentHistory);
