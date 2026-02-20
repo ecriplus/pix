@@ -43,7 +43,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "",
+                  "title": "Accroche",
                   "messages": [
                     {
                       "userName": "Sadie",
@@ -677,7 +677,7 @@
                     "size": 10,
                     "display": "block",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "zone de saisie du chiffre",
                     "tolerances": [],
                     "solutions": [
                       5
