@@ -498,12 +498,6 @@ const configuration = (function () {
     timeouts: {
       server: parseInt(process.env.HTTP_SERVER_RESPONSE_TIMEOUT_MS, 10) || 0,
     },
-    v3Certification: {
-      scoring: {
-        minimumAnswersRequiredToValidateACertification: 20,
-        maximumReachableScore: 895,
-      },
-    },
     version: process.env.CONTAINER_VERSION || 'development',
     autonomousCourse: {
       autonomousCoursesOrganizationId: parseInt(process.env.AUTONOMOUS_COURSES_ORGANIZATION_ID, 10),

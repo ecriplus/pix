@@ -2,13 +2,13 @@ import _ from 'lodash';
 
 import { CertificationAssessmentScoreV3 } from '../../../../../src/certification/evaluation/domain/models/CertificationAssessmentScoreV3.js';
 import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/constants/abort-reasons.js';
-import { config } from '../../../../../src/shared/config.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { status } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
-describe('Certification | Evaluation | Unit | Domain | Models | CertificationAssessmentScoreV3 ', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | CertificationAssessmentScoreV3', function () {
   const maxReachableLevelOnCertificationDate = 7;
+  const minimumAnswersRequiredToValidateACertification = 20;
 
   const competenceId = 'recCompetenceId';
   const areaCode = '1';
@@ -422,7 +422,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
     describe('when at least the minimum number of answers required by the config has been answered', function () {
       it('should be validated', function () {
         const difficulty = 0;
-        const numberOfChallenges = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification;
+        const numberOfChallenges = minimumAnswersRequiredToValidateACertification;
         const challenges = _buildChallenges(difficulty, numberOfChallenges);
         const allAnswers = _buildAnswersForChallenges(challenges, AnswerStatus.OK);
 
@@ -454,7 +454,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
       describe('when the candidate did not finish the test due to technical issues', function () {
         it('should be cancelled', function () {
           const difficulty = 0;
-          const numberOfChallenges = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification - 1;
+          const numberOfChallenges = minimumAnswersRequiredToValidateACertification - 1;
           const challenges = _buildChallenges(difficulty, numberOfChallenges);
           const allAnswers = _buildAnswersForChallenges(challenges, AnswerStatus.OK);
           algorithm.getCapacityAndErrorRate
@@ -472,20 +472,20 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
             challenges,
             allAnswers,
             algorithm,
-            abortReason: 'candidate',
+            abortReason: ABORT_REASONS.TECHNICAL,
             maxReachableLevelOnCertificationDate,
             v3CertificationScoring,
             scoringDegradationService,
           });
 
-          expect(score.status).to.equal(status.REJECTED);
+          expect(score.status).to.equal(status.CANCELLED);
         });
       });
 
       describe('when the candidate did not finish the test due to time issues', function () {
         it('should be rejected', function () {
           const difficulty = 0;
-          const numberOfChallenges = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification - 1;
+          const numberOfChallenges = minimumAnswersRequiredToValidateACertification - 1;
           const challenges = _buildChallenges(difficulty, numberOfChallenges);
           const allAnswers = _buildAnswersForChallenges(challenges, AnswerStatus.OK);
           algorithm.getCapacityAndErrorRate
@@ -503,7 +503,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
             challenges,
             allAnswers,
             algorithm,
-            abortReason: 'candidate',
+            abortReason: ABORT_REASONS.CANDIDATE,
             maxReachableLevelOnCertificationDate,
             v3CertificationScoring,
             scoringDegradationService,
@@ -511,38 +511,6 @@ describe('Certification | Evaluation | Unit | Domain | Models | CertificationAss
 
           expect(score.status).to.equal(status.REJECTED);
         });
-      });
-    });
-
-    describe('when less than the minimum number of answers required by the config has been answered and the candidate didnt quit', function () {
-      it('should be validated', function () {
-        const difficulty = 0;
-        const certificationCourseAbortReason = 'technical';
-        const numberOfChallenges = config.v3Certification.scoring.minimumAnswersRequiredToValidateACertification - 1;
-        const challenges = _buildChallenges(difficulty, numberOfChallenges);
-        const allAnswers = _buildAnswersForChallenges(challenges, AnswerStatus.OK);
-        algorithm.getCapacityAndErrorRate
-          .withArgs({
-            challenges,
-            allAnswers,
-          })
-          .returns({
-            capacity: 0,
-          });
-
-        algorithm.getConfiguration.returns(domainBuilder.buildFlashAlgorithmConfiguration());
-
-        const score = CertificationAssessmentScoreV3.fromChallengesAndAnswers({
-          challenges,
-          allAnswers,
-          algorithm,
-          certificationCourseAbortReason,
-          maxReachableLevelOnCertificationDate,
-          v3CertificationScoring,
-          scoringDegradationService,
-        });
-
-        expect(score.status).to.equal(status.VALIDATED);
       });
     });
   });

@@ -7,6 +7,7 @@ export async function buildCoreVersion(knex: Knex) {
       startDate: new Date('2024-10-19'),
       expirationDate: null,
       assessmentDuration: 120,
+      minimumAnswersRequiredToValidateACertification: 20,
       globalScoringConfiguration:
         '[{"bounds": {"max": -1.4, "min": -8}, "meshLevel": 0}, {"bounds": {"max": -0.519, "min": -1.4}, "meshLevel": 1}, {"bounds": {"max": 0.6, "min": -0.519}, "meshLevel": 2}, {"bounds": {"max": 1.5, "min": 0.6}, "meshLevel": 3}, {"bounds": {"max": 2.25, "min": 1.5}, "meshLevel": 4}, {"bounds": {"max": 3.1, "min": 2.25}, "meshLevel": 5}, {"bounds": {"max": 4, "min": 3.1}, "meshLevel": 6}, {"bounds": {"max": 8, "min": 4}, "meshLevel": 7}]',
       competencesScoringConfiguration:
