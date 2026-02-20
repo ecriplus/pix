@@ -2,116 +2,85 @@ import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Evaluation | Domain | Models | DoubleCertificationScoring', function () {
   context('#isAcquired', function () {
-    context('reproducibility rate is equal or greater than minimum reproducibility rate', function () {
-      const minimumReproducibilityRate = 70;
-
-      [70, 80, 90].forEach((reproducibilityRate) => {
-        context('pix score is equal or greater than minimum earned pix', function () {
-          it('should return true', async function () {
-            // given
-            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
-              reproducibilityRate,
-              minimumReproducibilityRate,
-              pixScore: 120,
-              minimumEarnedPix: 120,
-            });
-
-            // when
-            const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
-
-            // then
-            expect(hasAcquiredCertif).to.be.true;
-          });
+    context('pix score is equal or greater than minimum earned pix', function () {
+      it('should return true', async function () {
+        // given
+        const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+          pixScore: 120,
+          minimumEarnedPix: 120,
+          hasAcquiredPixCertification: true,
+          isRejectedForFraud: false,
         });
 
-        context('pix score is lower than minimum earned pix', function () {
-          it('should return false', async function () {
-            // given
-            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
-              reproducibilityRate,
-              minimumReproducibilityRate,
-              pixScore: 119,
-              minimumEarnedPix: 120,
-            });
+        // when
+        const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
 
-            // when
-            const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
-
-            // then
-            expect(hasAcquiredCertif).to.be.false;
-          });
-        });
+        // then
+        expect(hasAcquiredCertif).to.be.true;
       });
     });
 
-    context('reproducibility rate is lower than minimum reproducibility rate', function () {
-      const minimumReproducibilityRate = 70;
-
-      [1, 50, 69].forEach((reproducibilityRate) => {
-        context('pix score is equal or greater than minimum earned pix', function () {
-          it('should return false', async function () {
-            // given
-            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
-              reproducibilityRate,
-              minimumReproducibilityRate,
-              pixScore: 120,
-              minimumEarnedPix: 120,
-            });
-
-            // when
-            const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
-
-            // then
-            expect(hasAcquiredCertif).to.be.false;
-          });
+    context('pix score is lower than minimum earned pix', function () {
+      it('should return false', async function () {
+        // given
+        const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+          pixScore: 119,
+          minimumEarnedPix: 120,
+          hasAcquiredPixCertification: true,
+          isRejectedForFraud: false,
         });
 
-        context('pix score is lower than minimum earned pix', function () {
-          it('should return false', async function () {
-            // given
-            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
-              reproducibilityRate,
-              minimumReproducibilityRate,
-              pixScore: 119,
-              minimumEarnedPix: 120,
-            });
+        // when
+        const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
 
-            // when
-            const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
+        // then
+        expect(hasAcquiredCertif).to.be.false;
+      });
+    });
 
-            // then
-            expect(hasAcquiredCertif).to.be.false;
-          });
+    context('certification is rejected for fraud', function () {
+      it('should return false', async function () {
+        // given
+        const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+          pixScore: 121,
+          minimumEarnedPix: 120,
+          hasAcquiredPixCertification: true,
+          isRejectedForFraud: true,
         });
 
-        context('pix core certification is not acquired', function () {
-          it('should return false', async function () {
-            // given
-            const cleaCertificationScoring = await _buildDoubleCertificationScoring({
-              reproducibilityRate,
-              minimumReproducibilityRate,
-              minimumEarnedPix: 120,
-              hasAcquiredPixCertification: false,
-            });
+        // when
+        const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
 
-            // when
-            const hasAcquiredCertification = cleaCertificationScoring.isAcquired();
+        // then
+        expect(hasAcquiredCertif).to.be.false;
+      });
+    });
 
-            // then
-            expect(hasAcquiredCertification).to.be.false;
-          });
+    context('certification has not acquired pix certification', function () {
+      it('should return false', async function () {
+        // given
+        const cleaCertificationScoring = await _buildDoubleCertificationScoring({
+          pixScore: 121,
+          minimumEarnedPix: 120,
+          hasAcquiredPixCertification: false,
+          isRejectedForFraud: false,
         });
+
+        // when
+        const hasAcquiredCertif = cleaCertificationScoring.isAcquired();
+
+        // then
+        expect(hasAcquiredCertif).to.be.false;
       });
     });
   });
 });
 
 function _buildDoubleCertificationScoring({
-  reproducibilityRate = 0,
   pixScore = 0,
   minimumEarnedPix,
-  minimumReproducibilityRate,
   hasAcquiredPixCertification,
+  isRejectedForFraud,
 }) {
   const certificationCourseId = 42;
   const complementaryCertificationCourseId = 999;
@@ -120,11 +89,10 @@ function _buildDoubleCertificationScoring({
   return domainBuilder.certification.evaluation.buildDoubleCertificationScoring({
     complementaryCertificationCourseId,
     certificationCourseId,
-    reproducibilityRate,
     complementaryCertificationBadgeId,
     pixScore,
     minimumEarnedPix,
-    minimumReproducibilityRate,
     hasAcquiredPixCertification,
+    isRejectedForFraud,
   });
 }
