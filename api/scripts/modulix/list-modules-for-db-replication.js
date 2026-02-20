@@ -5,7 +5,7 @@ import moduleDatasource from '../../src/devcomp/infrastructure/datasources/learn
  * @returns {Promise<void>}
  */
 async function listModulesForDBReplication() {
-  const imports = await moduleDatasource.list();
+  const imports = await moduleDatasource.listModulesWithFilename();
   console.log('--- List of modules for DB replication ---');
   const moduleInformation = imports.map((module) => {
     const moduleObjectivesInline = module.details.objectives.join(', ');
@@ -14,6 +14,7 @@ async function listModulesForDBReplication() {
       shortId: module.shortId,
       slug: module.slug,
       title: module.title,
+      filename: module.filename,
       level: module.details.level,
       duration: module.details.duration,
       objectives: moduleObjectivesInline,
