@@ -18,7 +18,6 @@
 
 import CertificationCancelled from '../../../../../shared/domain/events/CertificationCancelled.js';
 import { CertificationAssessmentScoreV3 } from '../../models/CertificationAssessmentScoreV3.js';
-import { CoreScoring } from '../../models/CoreScoring.js';
 import { DoubleCertificationScoring } from '../../models/DoubleCertificationScoring.js';
 import { createV3AssessmentResult } from './create-v3-assessment-result.js';
 
@@ -35,7 +34,7 @@ export const handleV3CertificationScoring =
    * @param {ComplementaryCertificationScoringCriteria} params.cleaScoringCriteria
    * @param {ScoringDegradationService} params.scoringDegradationService
    *
-   * @return {Object<CoreScoring, DoubleCertificationScoring>}
+   * @return {Object<CoreScoring, DoubleCertificationScoring>} // todo later
    */
   ({
     event,
@@ -102,7 +101,7 @@ export const handleV3CertificationScoring =
  * @param {Array<CalibratedChallenge>} params.askedChallengesWithoutLiveAlerts
  * @param {ScoringDegradationService} params.scoringDegradationService
  *
- * @returns {CoreScoring}
+ * @returns {CoreScoring} // todo later
  */
 function _scoreCoreCertification({
   event,
@@ -138,7 +137,7 @@ function _scoreCoreCertification({
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
   });
 
-  return new CoreScoring({ competenceMarks: certificationAssessmentScore.competenceMarks, assessmentResult });
+  return { competenceMarks: certificationAssessmentScore.competenceMarks, assessmentResult };
 }
 
 /**
