@@ -65,6 +65,20 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         });
       });
     });
+
+    it('should allow null for credit', function () {
+      // given
+      const organization = {
+        ...DEFAULT_ORGANIZATION,
+        credit: null,
+      };
+
+      // when
+      const result = validate(organization);
+
+      // then
+      expect(result).to.be.true;
+    });
   });
 
   context('error', function () {
@@ -306,6 +320,46 @@ describe('Unit | Domain | Validators | organization-with-tags-and-target-profile
         expect(error.invalidAttributes).to.deep.include({
           attribute: 'organizationLearnerTypeId',
           message: "L'id du public prescrit n'est pas un nombre",
+        });
+      });
+    });
+
+    context('credit validation', function () {
+      it('returns an EntityValidation error when credit is neither a number nor null', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          credit: 'String credit',
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'credit',
+          message: 'Le crédit doit être un entier.',
+        });
+      });
+
+      it('returns an EntityValidation error when credit is not a positive number', function () {
+        // given
+        const organization = {
+          ...DEFAULT_ORGANIZATION,
+          credit: -1,
+        };
+
+        // when
+        const error = catchErrSync(validate)(organization);
+
+        // then
+        expect(error).to.be.instanceOf(EntityValidationError);
+        expect(error.message).to.equal(`Échec de validation de l'entité.`);
+        expect(error.invalidAttributes).to.deep.include({
+          attribute: 'credit',
+          message: 'Le crédit doit être un nombre entier positif.',
         });
       });
     });
