@@ -1,4 +1,4 @@
-import { usecases } from '../../scoring/domain/usecases/index.js';
+import { usecases } from '../domain/usecases/index.js';
 import * as serializer from '../infrastructure/serializers/scoring-and-capacity-simulator-report-serializer.js';
 
 const simulateScoringOrCapacity = async (req, h) => {

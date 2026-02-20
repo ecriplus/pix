@@ -1,6 +1,6 @@
-import { CapacitySimulator } from '../models/CapacitySimulator.js';
+import { ScoringSimulator } from '../../../scoring/domain/models/ScoringSimulator.js';
 
-export async function simulateCapacityFromScore({ score, date, scoringConfigurationRepository }) {
+export async function simulateScoreFromCapacity({ capacity, date, scoringConfigurationRepository }) {
   const v3CertificationScoring = await scoringConfigurationRepository.getLatestByDateAndLocale({
     locale: 'fr-fr',
     date,
@@ -8,8 +8,8 @@ export async function simulateCapacityFromScore({ score, date, scoringConfigurat
 
   const certificationScoringIntervals = v3CertificationScoring.getIntervals();
 
-  return CapacitySimulator.compute({
-    score,
+  return ScoringSimulator.compute({
+    capacity,
     certificationScoringIntervals,
     competencesForScoring: v3CertificationScoring.competencesForScoring,
   });

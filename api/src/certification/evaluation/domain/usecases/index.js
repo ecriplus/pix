@@ -39,8 +39,12 @@ import { getNextChallenge } from './get-next-challenge.js';
 import { neutralizeChallenge } from './neutralize-challenge.js';
 import { rescoreV2Certification } from './rescore-v2-certification.js';
 import { retrieveLastOrCreateCertificationCourse } from './retrieve-last-or-create-certification-course.js';
+import { saveCertificationScoringConfiguration } from './save-certification-scoring-configuration.js';
+import { saveCompetenceForScoringConfiguration } from './save-competence-for-scoring-configuration.js';
 import { scoreV3Certification } from './score-v3-certification.js';
+import { simulateCapacityFromScore } from './simulate-capacity-from-score.js';
 import { simulateFlashAssessmentScenario } from './simulate-flash-assessment-scenario.js';
+import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
 
 /**
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
@@ -113,6 +117,10 @@ const usecasesWithoutInjectedDependencies = {
   simulateFlashAssessmentScenario,
   scoreV3Certification,
   completeCertificationAssessment,
+  saveCertificationScoringConfiguration,
+  saveCompetenceForScoringConfiguration,
+  simulateCapacityFromScore,
+  simulateScoreFromCapacity,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 

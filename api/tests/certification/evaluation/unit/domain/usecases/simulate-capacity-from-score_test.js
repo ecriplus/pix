@@ -1,7 +1,7 @@
-import { simulateCapacityFromScore } from '../../../../../../src/certification/scoring/domain/usecases/simulate-capacity-from-score.js';
+import { simulateCapacityFromScore } from '../../../../../../src/certification/evaluation/domain/usecases/simulate-capacity-from-score.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | UseCase | simulate-capacity-from-score', function () {
+describe('Certification | Evaluation | Unit | Domain | Usecase | simulate-capacity-from-score', function () {
   let scoringConfigurationRepository;
 
   beforeEach(function () {

@@ -1,16 +1,16 @@
 /**
- * @typedef {import('./index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
+ * @typedef {import('../../../scoring/domain/usecases/index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-export const saveCertificationScoringConfiguration = withTransaction(
+export const saveCompetenceForScoringConfiguration = withTransaction(
   /**
    * @param {object} params
    * @param {object} params.configuration
    * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
    */
   async ({ configuration, scoringConfigurationRepository }) => {
-    return scoringConfigurationRepository.saveCertificationScoringConfiguration({ configuration });
+    return scoringConfigurationRepository.saveCompetenceForScoringConfiguration({ configuration });
   },
 );
