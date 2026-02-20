@@ -2497,4 +2497,111 @@ module('Integration | Component | Module | Stepper', function (hooks) {
       });
     });
   });
+
+  module('focusAndScroll', function (hooks) {
+    let focusAndScrollStub;
+
+    hooks.beforeEach(async function () {
+      const modulixAutoScrollService = this.owner.lookup('service:modulixAutoScroll');
+      focusAndScrollStub = sinon.stub(modulixAutoScrollService, 'focusAndScroll');
+    });
+
+    hooks.afterEach(async function () {
+      focusAndScrollStub.restore();
+    });
+
+    module('when preventInitialFocusAndScroll is true', function () {
+      test('it prevents scroll and focus on stepper when rendering component', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        function stepperIsFinished() {}
+
+        function onStepperNextStepStub() {}
+
+        // when
+        await render(
+          <template>
+            <ModulixStepper
+              @direction="horizontal"
+              @preventInitialFocusAndScroll={{true}}
+              @steps={{steps}}
+              @stepperIsFinished={{stepperIsFinished}}
+              @onStepperNextStep={{onStepperNextStepStub}}
+            />
+          </template>,
+        );
+
+        // then
+        sinon.assert.notCalled(focusAndScrollStub);
+        assert.ok(true);
+      });
+    });
+
+    module('when preventInitialFocusAndScroll is false', function () {
+      test('it prevents scroll and focus on stepper when rendering component', async function (assert) {
+        // given
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        function stepperIsFinished() {}
+
+        function onStepperNextStepStub() {}
+
+        // when
+        await render(
+          <template>
+            <ModulixStepper
+              @direction="horizontal"
+              @preventInitialFocusAndScroll={{false}}
+              @steps={{steps}}
+              @stepperIsFinished={{stepperIsFinished}}
+              @onStepperNextStep={{onStepperNextStepStub}}
+            />
+          </template>,
+        );
+
+        // then
+        sinon.assert.calledOnce(focusAndScrollStub);
+        assert.ok(true);
+      });
+    });
+  });
 });

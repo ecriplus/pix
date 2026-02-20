@@ -33,7 +33,7 @@ export default class ModulixStep extends Component {
 
   @action
   focusAndScroll(htmlElement) {
-    if (!this.args.isActive || this.args.preventScrollAndFocus) {
+    if (!this.args.isActive || this.args.preventFocusAndScroll) {
       return;
     }
 

@@ -259,6 +259,11 @@ export default class ModuleGrain extends Component {
       : this.intl.t('pages.modulix.buttons.grain.skip');
   }
 
+  @action
+  preventStepperInitialScrollAndFocus(index) {
+    return index !== 0;
+  }
+
   <template>
     <article
       id={{this.elementId}}
@@ -282,8 +287,8 @@ export default class ModuleGrain extends Component {
             {{this.grainTitle}}</h3>
         {{/if}}
         <div class="grain-card__content">
-          <!-- eslint-disable-next-line no-unused-vars -->
-          {{#each this.displayableComponents as |component|}}
+
+          {{#each this.displayableComponents as |component index|}}
             {{#if (eq component.type "element")}}
               <div class="grain-card-content__element">
                 <Element
@@ -313,6 +318,7 @@ export default class ModuleGrain extends Component {
                   @onVideoTranscriptionOpen={{@onVideoTranscriptionOpen}}
                   @onFileDownload={{@onFileDownload}}
                   @onExpandToggle={{@onExpandToggle}}
+                  @preventInitialFocusAndScroll={{this.preventStepperInitialScrollAndFocus index}}
                   @direction={{this.stepperDirection}}
                   @updateSkipButton={{this.updateSkipButton}}
                 />
