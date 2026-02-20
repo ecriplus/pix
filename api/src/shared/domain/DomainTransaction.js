@@ -1,6 +1,7 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 import { knex } from '../../../db/knex-database-connection.js';
+import { featureToggles } from '../infrastructure/feature-toggles/index.js';
 
 const asyncLocalStorage = new AsyncLocalStorage();
 
@@ -31,8 +32,9 @@ class DomainTransaction {
 
   static async addSuccessHandler(handler) {
     const store = asyncLocalStorage.getStore();
+    const isSuccessHandlerEnabled = await featureToggles.get('successHandlersForDomainTransaction');
 
-    if (store?.transaction) {
+    if (store?.transaction && isSuccessHandlerEnabled) {
       store.transaction.successHandlers.push(handler);
     } else {
       await handler();

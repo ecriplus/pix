@@ -93,4 +93,11 @@ export default {
     defaultValue: true,
     tags: ['captain', 'backend', 'db', 'pool'],
   },
+  successHandlersForDomainTransaction: {
+    type: 'boolean',
+    description: 'Enable success handlers for DomainTransaction',
+    defaultValue: true,
+    devDefaultValues: { test: true, reviewApp: true },
+    tags: ['captain', 'backend', 'transactions'],
+  },
 };
