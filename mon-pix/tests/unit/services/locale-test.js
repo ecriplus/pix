@@ -280,6 +280,10 @@ module('Unit | Services | locale', function (hooks) {
           value: 'es-419',
         },
         {
+          label: 'Español',
+          value: 'es',
+        },
+        {
           label: 'Français',
           value: 'fr',
         },
