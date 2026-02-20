@@ -80,7 +80,7 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   const scoringConfiguration = await scoringConfigurationRepository.getLatestByVersion({
     version: certificationVersion,
   });
-  const maxReachableLevelOnCertificationDate = scoringConfiguration.getMaxReachableLevel();
+  const maxReachableLevelOnCertificationDate = scoringConfiguration.maxReachableLevel;
 
   const existingCertificationCourse =
     await certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId({

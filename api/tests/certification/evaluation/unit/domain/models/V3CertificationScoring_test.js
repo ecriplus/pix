@@ -36,6 +36,18 @@ describe('Certification | Evaluation | Unit | Domain | Models | V3CertificationS
     });
   });
 
+  describe('#getter maxReachableLevel', function () {
+    it('should return the competences score', function () {
+      const certificationScoringConfiguration = ['someMeshForLevel0', 'someMeshForLevel1', 'someMeshForLevel2'];
+      const v3CertificationScoring = new V3CertificationScoring({
+        competencesForScoring: [],
+        certificationScoringConfiguration,
+      });
+
+      expect(v3CertificationScoring.maxReachableLevel).to.equal(2);
+    });
+  });
+
   describe('#fromConfigurations', function () {
     it('should return a valid V3CertificationScoring', function () {
       const area = domainBuilder.buildArea();

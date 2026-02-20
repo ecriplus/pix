@@ -49,8 +49,8 @@ export class CertificationAssessmentScoreV3 {
     v3CertificationScoring,
     scoringDegradationService,
   }) {
-    const certificationScoringIntervals = v3CertificationScoring.getIntervals();
-    const maxReachableLevel = v3CertificationScoring.getMaxReachableLevel();
+    const certificationScoringIntervals = v3CertificationScoring.intervals;
+    const maxReachableLevel = v3CertificationScoring.maxReachableLevel;
     const flashAssessmentAlgorithmConfiguration = algorithm.getConfiguration();
 
     let { capacity } = algorithm.getCapacityAndErrorRate({

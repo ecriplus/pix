@@ -294,10 +294,6 @@ export class CertificationCourse {
     return this._lang;
   }
 
-  getMaxReachableLevelOnCertificationDate() {
-    return this._maxReachableLevelOnCertificationDate;
-  }
-
   getStartDate() {
     return this._createdAt;
   }
