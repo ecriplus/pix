@@ -71,7 +71,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLocales = localeService.pixLocales;
 
       // then
-      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE']);
+      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE', 'it']);
     });
   });
 
@@ -81,7 +81,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLanguages = localeService.pixLanguages;
 
       // then
-      assert.deepEqual(pixLanguages, ['fr', 'en', 'nl', 'es']);
+      assert.deepEqual(pixLanguages, ['fr', 'en', 'nl', 'es', 'it']);
     });
   });
 
@@ -282,6 +282,10 @@ module('Unit | Services | locale', function (hooks) {
         {
           label: 'Français (Belgique)',
           value: 'fr-BE',
+        },
+        {
+          label: 'Italiano',
+          value: 'it',
         },
         {
           label: 'Nederlands (België)',

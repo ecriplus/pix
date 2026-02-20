@@ -39,6 +39,7 @@ module.exports = function (environment) {
         { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
         { value: 'en', nativeName: 'English', displayedInSwitcher: true },
         { value: 'nl', nativeName: 'Nederlands', displayedInSwitcher: false },
+        { value: 'it', nativeName: 'Italiano', displayedInSwitcher: true },
         { value: 'nl-BE', nativeName: 'Nederlands (België)', displayedInSwitcher: true },
       ],
       BANNER_CONTENT: process.env.BANNER_CONTENT || '',

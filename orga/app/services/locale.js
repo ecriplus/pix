@@ -16,13 +16,13 @@ export const ENGLISH_INTERNATIONAL_LOCALE = 'en';
 
 const DEFAULT_LANGUAGE = new Intl.Locale(DEFAULT_LOCALE).language;
 
-const PIX_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE'];
+const PIX_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE', 'it'];
 
 // Currently the challenge locales are not in canonical locales, thus the "fr-fr" value.
 // This cannot be changed without migrating the challenges content.
 const PIX_CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de'];
 
-const PIX_LANGUAGES = ['fr', 'en', 'nl', 'es'];
+const PIX_LANGUAGES = ['fr', 'en', 'nl', 'es', 'it'];
 
 const COOKIE_LOCALE = 'locale';
 
