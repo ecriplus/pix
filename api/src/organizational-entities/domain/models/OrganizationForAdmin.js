@@ -5,7 +5,6 @@ import isEmpty from 'lodash/isEmpty.js';
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DataProtectionOfficer } from './DataProtectionOfficer.js';
 
-const CREDIT_DEFAULT_VALUE = 0;
 const PAD_TARGET_LENGTH = 3;
 const PAD_STRING = '0';
 
@@ -27,7 +26,7 @@ class OrganizationForAdmin {
     externalId,
     provinceCode,
     isManagingStudents,
-    credit = CREDIT_DEFAULT_VALUE,
+    credit = null,
     email,
     documentationUrl,
     createdBy,
