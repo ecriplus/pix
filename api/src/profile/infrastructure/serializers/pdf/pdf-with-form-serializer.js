@@ -1,31 +1,35 @@
-import { readFile } from 'node:fs/promises';
-
 import JSZip from 'jszip';
 import { PDFDocument } from 'pdf-lib';
 
 import { FONTS, initializeFonts } from '../../../../shared/infrastructure/serializers/pdf/utils.js';
+import { getDataBuffer } from '../../../../shared/infrastructure/utils/buffer.js';
 
-export async function serialize(templateUrl, entry, creationDate = new Date()) {
+export async function serializeStream(stream, entry, creationDate = new Date()) {
+  const template = await getDataBuffer(stream);
+
+  return serializePdf(template, entry, creationDate);
+}
+
+async function serializePdf(template, entry, creationDate = new Date()) {
   if (Array.isArray(entry)) {
-    return serializeArray(templateUrl, entry, creationDate);
+    return serializeArray(template, entry, creationDate);
   } else {
-    return serializeObject(templateUrl, entry, creationDate);
+    return serializeObject(template, entry, creationDate);
   }
 }
 
-async function serializeArray(templateUrl, entries, creationDate) {
+async function serializeArray(template, entries, creationDate) {
   const zip = new JSZip();
   await Promise.all(
     entries.map(async (entry) => {
-      const buffer = await serializeObject(templateUrl, entry, creationDate);
+      const buffer = await serializeObject(template, entry, creationDate);
       zip.file(entry.get('filename') + '.pdf', buffer);
     }),
   );
   return zip.generateAsync({ type: 'nodebuffer' });
 }
 
-async function serializeObject(templateUrl, entry, creationDate) {
-  const template = await readFile(templateUrl);
+async function serializeObject(template, entry, creationDate) {
   const pdf = await PDFDocument.load(template);
   const { [FONTS.robotoRegular]: embeddedRobotoFont } = await initializeFonts(pdf, [FONTS.robotoRegular]);
 

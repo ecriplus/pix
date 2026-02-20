@@ -664,11 +664,11 @@ const configuration = (function () {
     config.attestations = {
       storage: {
         client: {
-          accessKeyId: 'nothing',
-          secretAccessKey: 'nothing',
-          endpoint: process.env.TEST_ATTESTATIONS_STORAGE_ENDPOINT,
-          region: 'nothing',
-          bucket: process.env.TEST_ATTESTATIONS_STORAGE_BUCKET_NAME,
+          accessKeyId: 'attestations.accessKeyId',
+          secretAccessKey: 'attestations.secretAccessKey',
+          endpoint: 'http://attestations.fake.endpoint.example.net',
+          region: 'eu-west-par',
+          bucket: 'attestations.bucket',
           forcePathStyle: true,
         },
       },

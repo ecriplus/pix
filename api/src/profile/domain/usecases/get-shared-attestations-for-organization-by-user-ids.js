@@ -10,8 +10,9 @@ export async function getSharedAttestationsForOrganizationByUserIds({
   attestationRepository,
   organizationProfileRewardRepository,
   stringUtils,
+  attestationStorage,
 }) {
-  const attestationData = await attestationRepository.getByKey({ attestationKey });
+  const attestationData = await attestationRepository.getDataByKey({ key: attestationKey, attestationStorage });
 
   if (!attestationData) {
     throw new AttestationNotFoundError();
@@ -41,6 +42,6 @@ export async function getSharedAttestationsForOrganizationByUserIds({
 
   return {
     data,
-    templateName: attestationData.templateName,
+    template: attestationData,
   };
 }

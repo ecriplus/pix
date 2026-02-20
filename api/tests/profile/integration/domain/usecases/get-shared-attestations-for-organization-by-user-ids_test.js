@@ -2,7 +2,7 @@ import { AttestationNotFoundError, NoProfileRewardsFoundError } from '../../../.
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, mockAttestationStorage, sinon } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-for-organization-by-user-ids', function () {
   let clock;
@@ -23,6 +23,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
     it('should return profile rewards for given userIds', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
       const firstUser = new User(databaseBuilder.factory.buildUser({ firstName: 'alex', lastName: 'Terieur' }));
       const secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
       const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -55,10 +56,10 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
         locale,
       });
 
-      expect(results).to.deep.equal({
-        data: [firstUser.toForm(firstProfileReward.createdAt, locale, normalizeAndRemoveAccents)],
-        templateName: attestation.templateName,
-      });
+      expect(results.data).to.deep.equal([
+        firstUser.toForm(firstProfileReward.createdAt, locale, normalizeAndRemoveAccents),
+      ]);
+      expect(results.template).to.be.not.null;
       expect(results.data[0].get('firstName')).to.equal('Alex');
       expect(results.data[0].get('lastName')).to.equal('TERIEUR');
     });
@@ -66,6 +67,7 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
     it('should not return profile rewards for anonymous userIds', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
       const firstUser = databaseBuilder.factory.buildUser({
         firstName: 'alex',
         lastName: 'Terieur',
@@ -108,10 +110,8 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
         locale,
       });
 
-      expect(results).to.deep.equal({
-        data: [],
-        templateName: attestation.templateName,
-      });
+      expect(results.data).to.deep.equal([]);
+      expect(results.template).to.be.not.null;
     });
 
     it('should return AttestationNotFound error if attestation does not exist', async function () {
@@ -149,12 +149,15 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
 
       await databaseBuilder.commit();
 
+      const template = Symbol('fake-data');
+
       //when
       const error = await catchErr(usecases.getSharedAttestationsForOrganizationByUserIds)({
         attestationKey: attestation.key,
         userIds: [firstUser.id],
         organizationId,
         locale,
+        attestationStorage: { readFile: sinon.stub().resolves({ Body: template }) },
       });
 
       //then

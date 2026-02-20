@@ -7,8 +7,9 @@ export async function getSharedAttestationsUserDetailByOrganizationId({
   profileRewardRepository,
   attestationRepository,
   organizationProfileRewardRepository,
+  attestationStorage,
 }) {
-  const attestationData = await attestationRepository.getByKey({ attestationKey });
+  const attestationData = await attestationRepository.getDataByKey({ key: attestationKey, attestationStorage });
 
   if (!attestationData) {
     throw new AttestationNotFoundError();

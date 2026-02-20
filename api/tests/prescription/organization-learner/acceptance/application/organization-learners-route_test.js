@@ -8,6 +8,7 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertUserWithRoleSuperAdmin,
+  mockAttestationStorage,
 } from '../../../../test-helper.js';
 
 describe('Prescription | Organization Learner | Acceptance | Application | OrganizationLearnerRoute', function () {
@@ -35,6 +36,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
       const attestation = databaseBuilder.factory.buildAttestation({
         templateName: 'sixth-grade-attestation-template',
       });
+      mockAttestationStorage(attestation);
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
         division: '6emeA',
@@ -80,6 +82,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
       const attestation = databaseBuilder.factory.buildAttestation({
         templateName: 'sixth-grade-attestation-template',
       });
+      mockAttestationStorage(attestation);
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
         division: '6emeA',

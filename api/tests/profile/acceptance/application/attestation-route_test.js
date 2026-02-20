@@ -3,6 +3,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  mockAttestationStorage,
 } from '../../../test-helper.js';
 
 describe('Profile | Acceptance | Application | Attestation Route ', function () {
@@ -16,13 +17,15 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
     it('should be ok', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
-      const attestationKey = databaseBuilder.factory.buildAttestation().key;
-
+      const attestation = databaseBuilder.factory.buildAttestation();
       await databaseBuilder.commit();
+
+      mockAttestationStorage(attestation);
+
       const options = {
         method: 'GET',
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
-        url: `/api/users/${userId}/attestations/${attestationKey}`,
+        url: `/api/users/${userId}/attestations/${attestation.key}`,
       };
 
       // when

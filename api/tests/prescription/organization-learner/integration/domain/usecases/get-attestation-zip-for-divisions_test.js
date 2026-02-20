@@ -1,7 +1,7 @@
 import { Buffer } from 'node:buffer';
 
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
 
 describe('Integration | Prescription | Learner Management | Domain | UseCase | get-attestation-zip-for-divisions', function () {
   it('returns a zip attestation', async function () {
@@ -11,6 +11,7 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | g
     const firstLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
     const secondLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme B' });
     const attestation = databaseBuilder.factory.buildAttestation({ templateName });
+    mockAttestationStorage(attestation);
     const firstRewardId = databaseBuilder.factory.buildProfileReward({
       rewardId: attestation.id,
       userId: firstLearner.userId,

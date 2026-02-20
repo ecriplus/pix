@@ -1,7 +1,10 @@
 import 'dayjs/locale/fr.js';
 
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
+import * as url from 'node:url';
 
 import { Assertion, AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -47,6 +50,8 @@ import { buildLearningContent as learningContentBuilder } from './tooling/learni
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 dayjs.extend(localizedFormat);
 
@@ -423,6 +428,16 @@ global.chaiErr = function globalErr(fn, val) {
   throw new AssertionError('Expected an error');
 };
 
+function mockAttestationStorage(attestation) {
+  const template = fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
+
+  nock('http://attestations.fake.endpoint.example.net:80')
+    .get(`/attestations.bucket/${attestation.templateName}.pdf?x-id=GetObject`)
+    .reply(200, () => template);
+
+  return template;
+}
+
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
   for (const stub of stubs) {
     stub.rejects(
@@ -472,6 +487,7 @@ export {
   insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
+  mockAttestationStorage,
   MockDate,
   mockLearningContent,
   nock,
