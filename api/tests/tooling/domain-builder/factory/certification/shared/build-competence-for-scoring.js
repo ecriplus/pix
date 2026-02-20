@@ -1,4 +1,4 @@
-import { CompetenceForScoring } from '../../../../../../src/certification/shared/domain/models/CompetenceForScoring.js';
+import { CompetenceForScoring } from '../../../../../../src/certification/evaluation/domain/models/CompetenceForScoring.js';
 
 export const buildCompetenceForScoring = ({
   competenceId = 'recCompetenceId',

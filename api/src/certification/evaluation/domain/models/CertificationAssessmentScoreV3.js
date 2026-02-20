@@ -3,7 +3,7 @@
  * @typedef {import('../../../../evaluation/domain/models/Answer.js').Answer} Answer
  * @typedef {import('./FlashAssessmentAlgorithm.js').FlashAssessmentAlgorithm} FlashAssessmentAlgorithm
  * @typedef {import('../services/index.js').ScoringDegradationService} ScoringDegradationService
- * @typedef {import('../../../shared/domain/models/V3CertificationScoring.js').V3CertificationScoring} V3CertificationScoring
+ * @typedef {import('./V3CertificationScoring.js').V3CertificationScoring} V3CertificationScoring
  * @typedef {import('../../../shared/domain/models/CompetenceMark.js').CompetenceMark} CompetenceMark
  */
 

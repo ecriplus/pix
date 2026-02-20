@@ -1,7 +1,7 @@
-import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
+import { V3CertificationScoring } from '../../../../../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Certification | V3CertificationScoring', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | V3CertificationScoring', function () {
   describe('#getCompetencesScore', function () {
     it('should return the competences score', function () {
       // Given

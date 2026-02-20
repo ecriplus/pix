@@ -1,16 +1,16 @@
 import { knex } from '../../../../../../db/knex-database-connection.js';
-import { V3CertificationScoring } from '../../../../../../src/certification/shared/domain/models/V3CertificationScoring.js';
+import { V3CertificationScoring } from '../../../../../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
 import {
   getLatestByDateAndLocale,
   getLatestByVersion,
   saveCertificationScoringConfiguration,
   saveCompetenceForScoringConfiguration,
-} from '../../../../../../src/certification/shared/infrastructure/repositories/scoring-configuration-repository.js';
+} from '../../../../../../src/certification/evaluation/infrastructure/repositories/scoring-configuration-repository.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | scoring-configuration-repository', function () {
+describe('Certification | Evaluation | Integration | Repositories | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {
     beforeEach(async function () {
       const secondCompetenceScoringConfiguration = [

@@ -1,7 +1,7 @@
-import { CompetenceForScoring } from '../../../../../../src/certification/shared/domain/models/CompetenceForScoring.js';
+import { CompetenceForScoring } from '../../../../../../src/certification/evaluation/domain/models/CompetenceForScoring.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-describe('Unit | Certification | CompetenceForScoring', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | CompetenceForScoring', function () {
   describe('#getCompetenceMark', function () {
     let intervals;
 
