@@ -187,10 +187,6 @@ export class CertificationCourse {
     this._abortReason = reason;
   }
 
-  unabort() {
-    this._abortReason = null;
-  }
-
   correctFirstName(modifiedFirstName) {
     const sanitizedString = _sanitizedString(modifiedFirstName);
     if (_.isEmpty(sanitizedString)) {

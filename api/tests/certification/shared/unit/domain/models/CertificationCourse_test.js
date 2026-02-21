@@ -32,21 +32,6 @@ describe('Unit | Domain | Models | CertificationCourse', function () {
     });
   });
 
-  describe('#unabort', function () {
-    it('should unabort a certification course', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        abortReason: 'technical',
-      });
-
-      // when
-      certificationCourse.unabort();
-
-      // then
-      expect(certificationCourse.toDTO().abortReason).to.be.null;
-    });
-  });
-
   describe('#correctBirthdate', function () {
     ['2000-13-01', null, undefined, '', 'invalid'].forEach((invalidDate) => {
       it(`throws if date is invalid : ${invalidDate}`, function () {

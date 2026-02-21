@@ -1,6 +1,5 @@
 import {
   SessionAlreadyFinalizedError,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithoutStartedCertificationError,
 } from '../../../../src/certification/session-management/domain/errors.js';
 import * as LLMDomainErrors from '../../../../src/llm/domain/errors.js';
@@ -58,14 +57,6 @@ describe('Integration | API | Controller Error', function () {
 
   context('409 Conflict', function () {
     const CONFLICT_ERROR = 409;
-
-    it('responds Conflict when a SessionWithAbortReasonOnCompletedCertificationCourseError error occurs', async function () {
-      routeHandler.throws(new SessionWithAbortReasonOnCompletedCertificationCourseError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(CONFLICT_ERROR);
-      expect(responseCode(response)).to.equal('SESSION_WITH_ABORT_REASON_ON_COMPLETED_CERTIFICATION_COURSE');
-    });
 
     it('responds Conflict when a SessionAlreadyFinalizedError error occurs', async function () {
       routeHandler.throws(new SessionAlreadyFinalizedError());

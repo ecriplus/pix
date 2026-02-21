@@ -1,4 +1,3 @@
-import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -165,9 +164,8 @@ async function findAllByUserId({ userId }) {
   });
 }
 
-// TODO revoir plus tard la pertinence ou pas
-async function update({ certificationCourse, noTransaction = false }) {
-  const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
+async function update({ certificationCourse }) {
+  const knexConn = DomainTransaction.getConnection();
 
   const certificationCourseData = _extractPropertiesForUpdate(certificationCourse);
 
@@ -179,7 +177,7 @@ async function update({ certificationCourse, noTransaction = false }) {
     throw new NotFoundError(`No rows updated for certification course of id ${certificationCourse.getId()}.`);
   }
 
-  return get({ id: certificationCourseData.id }); // should have pass it noTransaction as well ?
+  return get({ id: certificationCourseData.id });
 }
 
 async function isVerificationCodeAvailable({ verificationCode }) {

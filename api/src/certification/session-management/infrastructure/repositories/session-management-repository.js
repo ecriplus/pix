@@ -66,22 +66,6 @@ const doesUserHaveCertificationCenterMembershipForSession = async function ({ us
   return Boolean(sessions.length);
 };
 
-const finalize = async function ({ id, examinerGlobalComment, hasIncident, hasJoiningIssue }) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const [finalizedSession] = await knexConn('sessions')
-    .where({ id })
-    .update({
-      examinerGlobalComment,
-      hasIncident,
-      hasJoiningIssue,
-      finalizedAt: knexConn.fn.now(),
-    })
-    .returning('*');
-
-  return new SessionManagement(finalizedSession);
-};
-
 const unfinalize = async function ({ id }) {
   const knexConn = DomainTransaction.getConnection();
   const updates = await knexConn('sessions')
@@ -144,7 +128,6 @@ const hasNoStartedCertification = async function ({ id }) {
 
 export {
   doesUserHaveCertificationCenterMembershipForSession,
-  finalize,
   flagResultsAsSentToPrescriber,
   get,
   hasNoStartedCertification,

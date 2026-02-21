@@ -1,9 +1,7 @@
 import { SessionManagement } from '../../../../../../src/certification/session-management/domain/models/SessionManagement.js';
 import * as sessionManagementRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-management-repository.js';
-import { SESSION_STATUSES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | SessionManagement | Integration | Infrastructure | Repository | session-management', function () {
@@ -191,37 +189,6 @@ describe('Certification | SessionManagement | Integration | Infrastructure | Rep
 
       // then
       expect(hasMembership).to.be.false;
-    });
-  });
-
-  describe('#finalize', function () {
-    let sessionToFinalize;
-    const examinerGlobalComment = '';
-    const hasIncident = false;
-    const hasJoiningIssue = true;
-
-    beforeEach(function () {
-      sessionToFinalize = databaseBuilder.factory.buildSession({ finalizedAt: null });
-      return databaseBuilder.commit();
-    });
-
-    it('should return an updated SessionManagement domain object', async function () {
-      // when
-      const sessionSaved = await sessionManagementRepository.finalize({
-        id: sessionToFinalize.id,
-        examinerGlobalComment,
-        hasIncident,
-        hasJoiningIssue,
-      });
-
-      // then
-      expect(sessionSaved).to.be.an.instanceof(SessionManagement);
-      expect(sessionSaved.id).to.deep.equal(sessionToFinalize.id);
-      expect(sessionSaved.examinerGlobalComment).to.deep.equal(examinerGlobalComment);
-      expect(sessionSaved.hasIncident).to.deep.equal(hasIncident);
-      expect(sessionSaved.hasJoiningIssue).to.deep.equal(hasJoiningIssue);
-      expect(sessionSaved.status).to.deep.equal(SESSION_STATUSES.FINALIZED);
-      expect(sessionSaved.finalizedAt).to.be.an.instanceof(Date);
     });
   });
 

@@ -10,10 +10,6 @@ describe('Certification | session-management | Unit | Domain | Errors', function
     expect(errors.SessionWithoutStartedCertificationError).to.exist;
   });
 
-  it('should export a SessionWithAbortReasonOnCompletedCertificationCourseError', function () {
-    expect(errors.SessionWithAbortReasonOnCompletedCertificationCourseError).to.exist;
-  });
-
   it('should export a SessionWithMissingAbortReasonError', function () {
     expect(errors.SessionWithMissingAbortReasonError).to.exist;
   });
