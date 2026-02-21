@@ -13,7 +13,6 @@ import data from '../data.json' with { type: 'json' };
 const testRef = 'EVAL_ENDED_BY_FINALIZATION_SKIP';
 
 test.describe(testRef, () => {
-  // test.fail();
   test.use({
     testRef,
     rightWrongAnswersSequence: Array(24).fill(true),
