@@ -1,5 +1,4 @@
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
-import { SessionFinalized } from '../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect, hFake, sinon } from '../../../../test-helper.js';
@@ -9,8 +8,8 @@ describe('Certification | Session Management | Unit | Application | Controller |
     it('should call the finalizeSession usecase with correct values', async function () {
       // given
       const sessionId = 1;
-      const aCertificationReport = Symbol('a certficication report');
-      const sessionFinalized = new SessionFinalized({ sessionId });
+      const aCertificationReport = Symbol('a certification report');
+      const session = Symbol('a session being finalized');
       const examinerGlobalComment = 'It was a fine session my dear';
       const hasIncident = true;
       const hasJoiningIssue = true;
@@ -36,7 +35,7 @@ describe('Certification | Session Management | Unit | Application | Controller |
       };
       const certificationReportSerializer = { deserialize: sinon.stub() };
       certificationReportSerializer.deserialize.resolves(aCertificationReport);
-      sinon.stub(usecases, 'finalizeSession').resolves(sessionFinalized);
+      sinon.stub(usecases, 'finalizeSession').resolves(session);
       sinon.stub(usecases, 'processAutoJury').resolves();
       sinon.stub(usecases, 'registerPublishableSession').resolves();
       sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -55,9 +54,9 @@ describe('Certification | Session Management | Unit | Application | Controller |
         certificationReports: [aCertificationReport],
       });
       expect(usecases.processAutoJury).to.have.been.calledWithExactly({
-        sessionId,
+        session,
       });
-      expect(usecases.registerPublishableSession).to.have.been.calledWithExactly({ sessionFinalized });
+      expect(usecases.registerPublishableSession).to.have.been.calledWithExactly({ session });
     });
   });
 });

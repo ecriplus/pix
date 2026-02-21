@@ -2,6 +2,8 @@
  * @typedef {import('./index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
+ * @typedef {import('../models/Session.js').Session} Session
+ * @typedef {import('../models/CertificationCourse.js').CertificationCourse} CertificationCourse
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
@@ -13,24 +15,19 @@ import { CertificationIssueReportResolutionStrategies } from '../models/Certific
 
 /**
  * @param {object} params
+ * @param {Session} params.session
  * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  */
 export async function processAutoJury({
-  sessionId,
+  session,
   certificationIssueReportRepository,
   certificationAssessmentRepository,
-  certificationCourseRepository,
   challengeRepository,
   certificationEvaluationRepository,
 }) {
-  const certificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
-    sessionId,
-  });
-
-  for (const certificationCourse of certificationCourses) {
-    if (certificationCourse.isV3()) {
+  for (const certificationCourse of session.certificationCourses) {
+    if (certificationCourse.isV3) {
       await _handleAutoJuryV3({
         certificationCourse,
         certificationAssessmentRepository,
@@ -38,7 +35,7 @@ export async function processAutoJury({
       });
     }
 
-    if (certificationCourse.isV2()) {
+    if (certificationCourse.isV2) {
       await _handleAutoJuryV2({
         certificationCourse,
         certificationIssueReportRepository,
@@ -52,6 +49,7 @@ export async function processAutoJury({
 
 /**
  * @param {object} params
+ * @param {CertificationCourse} params.certificationCourse
  * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
  * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  */
@@ -68,7 +66,7 @@ async function _handleAutoJuryV2({
   });
 
   const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
-    certificationCourseId: certificationCourse.getId(),
+    certificationCourseId: certificationCourse.id,
   });
 
   const hasAutoCompleteAnEffectOnScoring = await _autoCompleteUnfinishedTest({
@@ -87,7 +85,7 @@ async function _handleAutoJuryV2({
 
   if (hasAutoResolutionAnEffectOnScoring || hasAutoCompleteAnEffectOnScoring) {
     const certificationJuryDoneEvent = new CertificationJuryDone({
-      certificationCourseId: certificationCourse.getId(),
+      certificationCourseId: certificationCourse.id,
     });
 
     await certificationEvaluationRepository.rescoreV2Certification({
@@ -99,16 +97,17 @@ async function _handleAutoJuryV2({
 const _handleAutoJuryV3 = withTransaction(
   /**
    * @param {object} params
+   * @param {CertificationCourse} params.certificationCourse
    * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
    * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
    */
   async ({ certificationCourse, certificationAssessmentRepository, certificationEvaluationRepository }) => {
     const certificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
-      certificationCourseId: certificationCourse.getId(),
+      certificationCourseId: certificationCourse.id,
     });
     if (_v3CertificationShouldBeScored(certificationAssessment)) {
       const certificationJuryDoneEvent = new CertificationJuryDone({
-        certificationCourseId: certificationCourse.getId(),
+        certificationCourseId: certificationCourse.id,
       });
 
       await certificationEvaluationRepository.rescoreV3Certification({
@@ -131,15 +130,15 @@ async function _autoCompleteUnfinishedTest({
   certificationAssessment,
   certificationAssessmentRepository,
 }) {
-  if (certificationCourse.isCompleted()) {
+  if (certificationCourse.isCompleted) {
     return false;
   }
 
-  if (certificationCourse.isAbortReasonCandidateRelated()) {
+  if (certificationCourse.isAbortReasonCandidateRelated) {
     certificationAssessment.skipUnansweredChallenges();
   }
 
-  if (certificationCourse.isAbortReasonTechnical()) {
+  if (certificationCourse.isAbortReasonTechnical) {
     certificationAssessment.neutralizeUnansweredChallenges();
   }
 
@@ -158,7 +157,7 @@ async function _autoResolveCertificationIssueReport({
   resolutionStrategies,
 }) {
   const certificationIssueReports = await certificationIssueReportRepository.findByCertificationCourseId({
-    certificationCourseId: certificationCourse.getId(),
+    certificationCourseId: certificationCourse.id,
   });
 
   if (certificationIssueReports.length === 0) {

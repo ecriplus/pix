@@ -1,9 +1,9 @@
-import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import {
   catchErr,
   databaseBuilder,
+  domainBuilder,
   expect,
   knex,
   learningContentBuilder,
@@ -386,19 +386,15 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
   it('should register session as publishable', async function () {
     // given
     const sessionId = databaseBuilder.factory.buildSession().id;
-    const sessionFinalized = new SessionFinalized({
-      sessionId,
+    const session = domainBuilder.certification.sessionManagement.buildSession({
+      id: sessionId,
       finalizedAt: new Date(),
-      hasExaminerGlobalComment: false,
-      certificationCenterName: 'test',
-      sessionDate: new Date(),
-      sessionTime: '12:00',
     });
 
     await databaseBuilder.commit();
 
     // when
-    await usecases.registerPublishableSession({ sessionFinalized });
+    await usecases.registerPublishableSession({ session });
 
     // then
     const publishableSession = await knex('finalized-sessions').first();
@@ -409,24 +405,20 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
     it('should rollback and not register session as publishable', async function () {
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
-      const sessionFinalized = new SessionFinalized({
-        sessionId,
+      const session = domainBuilder.certification.sessionManagement.buildSession({
+        id: sessionId,
         finalizedAt: new Date(),
-        hasExaminerGlobalComment: false,
-        certificationCenterName: 'test',
-        sessionDate: new Date(),
-        sessionTime: '12:00',
       });
 
       await databaseBuilder.commit();
 
       // when
-      const errorDuringTransaction = await catchErr(async (sessionFinalized) => {
+      const errorDuringTransaction = await catchErr(async () => {
         await DomainTransaction.execute(async () => {
-          await usecases.registerPublishableSession({ sessionFinalized });
+          await usecases.registerPublishableSession({ session });
           throw new Error('test error');
         });
-      })(sessionFinalized);
+      })();
 
       // then
       expect(errorDuringTransaction.message).to.equal('test error');
