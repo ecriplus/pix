@@ -21,21 +21,22 @@ test.describe(testRef, () => {
 
   test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page by skipping. Certification should be scorable`, async ({
     page: pixAppPage,
+    pixCertifProPage,
     preparedCertificationTest,
-    pixSuperAdminContext,
+    pixAdminRoleCertifPage,
   }) => {
     test.slow();
 
-    const { sessionNumber, pixCertifPage } = preparedCertificationTest;
+    const { sessionNumber } = preparedCertificationTest;
 
     await test.step('user stops at 25th challenge', async () => {
       await expect(pixAppPage.getByLabel('Votre progression')).toContainText('25 / 32');
     });
 
     await test.step('Finalization by marking a technical issue and check scoring', async () => {
-      const sessionManagementPage = new SessionManagementPage(pixCertifPage);
+      const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
       const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-      await expect(pixCertifPage.getByText(data.certifiableUser.firstName)).toBeVisible();
+      await expect(pixCertifProPage.getByText(data.certifiableUser.firstName)).toBeVisible();
       await sessionFinalizationPage.markTechnicalIssueFor(data.certifiableUser.lastName);
 
       await sessionFinalizationPage.finalizeSession();
@@ -52,9 +53,7 @@ test.describe(testRef, () => {
       ).toBeVisible();
     });
 
-    const pixAdminPage = await pixSuperAdminContext.newPage();
-    await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
-    const adminHomepage = new AdminHomePage(pixAdminPage);
+    const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
@@ -75,7 +74,9 @@ test.describe(testRef, () => {
         });
       });
 
-      await pixAdminPage.getByRole('link', { name: 'Liste des certifications de la session', exact: true }).click();
+      await pixAdminRoleCertifPage
+        .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
+        .click();
       await test.step('Check certification information', async () => {
         const certificationListPage = await sessionPage.goToCertificationListPage();
         const certificationData = await certificationListPage.getCertificationData();

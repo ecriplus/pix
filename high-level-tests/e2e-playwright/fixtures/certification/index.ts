@@ -1,10 +1,9 @@
-import { Page } from '@playwright/test';
 import { z } from 'zod';
 
 import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { LoginPage } from '../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, InvigilatorOverviewPage, SessionListPage } from '../../pages/pix-certif/index.ts';
-import { test as sharedTest } from '../index.ts';
+import { loggedPagesFixtures } from './logged-pages.ts';
 
 const CandidateSchema = z.object({
   firstName: z.string().min(1),
@@ -32,7 +31,6 @@ type PreparedCertificationTestParams = z.infer<typeof ParamsSchema>;
 type PreparedCertificationTestResult = {
   sessionNumber: string;
   invigilatorOverviewPage: InvigilatorOverviewPage;
-  pixCertifPage: Page;
 };
 
 function validateParams(params: PreparedCertificationTestParams) {
@@ -44,7 +42,7 @@ function validateParams(params: PreparedCertificationTestParams) {
   }
 }
 
-export const test = sharedTest.extend<
+export const test = loggedPagesFixtures.extend<
   PreparedCertificationTestParams & { preparedCertificationTest: PreparedCertificationTestResult }
 >({
   testRef: ['', { option: true }],
@@ -54,7 +52,8 @@ export const test = sharedTest.extend<
   preparedCertificationTest: async (
     {
       page: pixAppPage,
-      pixCertifProContext,
+      pixCertifProPage,
+      pixCertifInvigilatorPage,
       snapshotHandler,
       testRef,
       rightWrongAnswersSequence,
@@ -69,16 +68,15 @@ export const test = sharedTest.extend<
       candidateData,
       certificationKey,
     });
-    const pixCertifPage = await pixCertifProContext.newPage();
     let sessionNumber = '',
       accessCode = '',
       invigilatorCode = '';
 
     await test.step('Enrollment', async () => {
-      await pixCertifPage.goto(process.env.PIX_CERTIF_URL!);
+      await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
       const sessionManagementPage = await test.step('Create session', async () => {
-        const sessionListPage = new SessionListPage(pixCertifPage);
+        const sessionListPage = new SessionListPage(pixCertifProPage);
         const sessionCreationPage = await sessionListPage.goToCreateSession();
         const sessionManagementPage = await sessionCreationPage.createSession({
           address: `address ${testRef}`,
@@ -131,8 +129,7 @@ export const test = sharedTest.extend<
         });
 
       const invigilatorOverviewPage = await test.step('Invigilator authorized candidate to start', async () => {
-        const invigilatorPage = await pixCertifProContext.newPage();
-        const invigLogin = await InvigilatorLoginPage.goto(invigilatorPage);
+        const invigLogin = new InvigilatorLoginPage(pixCertifInvigilatorPage);
         const invigOverview = await invigLogin.login(sessionNumber, invigilatorCode);
         await invigOverview.authorizeCandidateToStart(candidateData.firstName, candidateData.lastName);
         return invigOverview;
@@ -154,7 +151,6 @@ export const test = sharedTest.extend<
     const preparedCertificationTestResult: PreparedCertificationTestResult = {
       sessionNumber,
       invigilatorOverviewPage,
-      pixCertifPage,
     };
     await use(preparedCertificationTestResult);
   },

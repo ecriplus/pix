@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import * as fs from 'fs/promises';
 
-import { PIX_ADMIN_CERTIF_CREDENTIALS, saveStorageState } from './helpers/auth.ts';
+import { saveStorageState } from './helpers/auth.ts';
 import {
   AUTH_DIR,
   PIX_APP_USER_CREDENTIALS,
@@ -26,7 +26,6 @@ export default async function globalSetup() {
     await saveStorageState(PIX_ORGA_ADMIN_CREDENTIALS);
     await saveStorageState(PIX_ORGA_MEMBER_CREDENTIALS);
     await saveStorageState(PIX_CERTIF_PRO_CREDENTIALS);
-    await saveStorageState(PIX_ADMIN_CERTIF_CREDENTIALS);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('❌ Global setup failed:', error);

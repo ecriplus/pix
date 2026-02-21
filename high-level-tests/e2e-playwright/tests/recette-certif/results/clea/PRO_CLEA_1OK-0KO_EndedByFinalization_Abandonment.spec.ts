@@ -4,7 +4,7 @@ import {
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
-import { CERTIFICATIONS_DATA, PIX_CERTIF_PRO_DATA } from '../../../../helpers/db-data.ts';
+import { CERTIFICATIONS_DATA } from '../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
@@ -36,27 +36,31 @@ test.describe(testRef, () => {
         },
       ],
     },
-    async ({ page: pixAppPage, preparedCertificationTest, pixSuperAdminContext, snapshotHandler }) => {
+    async ({
+      page: pixAppPage,
+      pixCertifProPage,
+      preparedCertificationTest,
+      pixAdminRoleCertifPage,
+      snapshotHandler,
+    }) => {
       test.slow();
 
       let certificationNumber = '';
-      const { sessionNumber, pixCertifPage } = preparedCertificationTest;
+      const { sessionNumber } = preparedCertificationTest;
 
       await test.step('user stops at second challenge', async () => {
         await expect(pixAppPage.getByLabel('Votre progression')).toContainText('2 / 32');
       });
 
       await test.step('Finalization by marking a technical issue and scoring', async () => {
-        const sessionManagementPage = new SessionManagementPage(pixCertifPage);
+        const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
         const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-        await expect(pixCertifPage.getByText(data.certifiableUser.lastName)).toBeVisible();
+        await expect(pixCertifProPage.getByText(data.certifiableUser.lastName)).toBeVisible();
         await sessionFinalizationPage.markAbandonmentFor(data.certifiableUser.lastName);
         await sessionFinalizationPage.finalizeSession();
       });
 
-      const pixAdminPage = await pixSuperAdminContext.newPage();
-      await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
-      const adminHomepage = new AdminHomePage(pixAdminPage);
+      const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
 
       await test.step('Check all session data', async () => {
         const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
@@ -64,8 +68,6 @@ test.describe(testRef, () => {
 
         await test.step('Check session information', async () => {
           await checkSessionInformationAndExpectSuccess(sessionPage, {
-            certificationCenter:
-              PIX_CERTIF_PRO_DATA.certificationCenters[0].externalId + PIX_CERTIF_PRO_DATA.certificationCenters[0].type,
             address: `address ${testRef}`,
             room: `room ${testRef}`,
             invigilatorName: `examiner ${testRef}`,
@@ -77,7 +79,9 @@ test.describe(testRef, () => {
           });
         });
 
-        await pixAdminPage.getByRole('link', { name: 'Liste des certifications de la session', exact: true }).click();
+        await pixAdminRoleCertifPage
+          .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
+          .click();
         await test.step('Check certification information', async () => {
           const certificationListPage = await sessionPage.goToCertificationListPage();
           const certificationData = await certificationListPage.getCertificationData();

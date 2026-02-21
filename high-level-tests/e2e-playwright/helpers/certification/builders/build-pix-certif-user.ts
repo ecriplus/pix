@@ -9,7 +9,7 @@ import {
 } from '../../db-utils.ts';
 import { PixUserData } from './types.ts';
 
-interface PixCertifUserData extends PixUserData {
+export interface PixCertifUserData extends PixUserData {
   certificationCenters: {
     type: string;
     externalId: string;

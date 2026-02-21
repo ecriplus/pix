@@ -5,7 +5,6 @@ import { test as base } from '@playwright/test';
 
 import {
   AUTH_DIR,
-  PIX_ADMIN_CERTIF_CREDENTIALS,
   PIX_APP_USER_CREDENTIALS,
   PIX_CERTIF_PRO_CREDENTIALS,
   PIX_ORGA_ADMIN_CREDENTIALS,
@@ -22,7 +21,6 @@ export const browserContextsFixtures = base.extend<{
   pixOrgaAdminContext: BrowserContext;
   pixOrgaMemberContext: BrowserContext;
   pixCertifProContext: BrowserContext;
-  pixSuperAdminContext: BrowserContext;
 }>({
   pixAppUserContext: async ({ browser }, use, testInfo) => {
     const authFilePath = path.join(AUTH_DIR, `${PIX_APP_USER_CREDENTIALS.label}.json`);
@@ -74,22 +72,6 @@ export const browserContextsFixtures = base.extend<{
     const harFilePath = path.join(
       HAR_DIR,
       `${sanitizeFilename(testInfo.title)}-${PIX_CERTIF_PRO_CREDENTIALS.label}.har`,
-    );
-    const recordHar = shouldRecordHAR
-      ? {
-          path: harFilePath,
-          content: 'omit' as const,
-        }
-      : undefined;
-    const context = await browser.newContext({ storageState: authFilePath, recordHar });
-    await use(context);
-    await context.close();
-  },
-  pixSuperAdminContext: async ({ browser }, use, testInfo) => {
-    const authFilePath = path.join(AUTH_DIR, `${PIX_ADMIN_CERTIF_CREDENTIALS.label}.json`);
-    const harFilePath = path.join(
-      HAR_DIR,
-      `${sanitizeFilename(testInfo.title)}-${PIX_ADMIN_CERTIF_CREDENTIALS.label}.har`,
     );
     const recordHar = shouldRecordHAR
       ? {

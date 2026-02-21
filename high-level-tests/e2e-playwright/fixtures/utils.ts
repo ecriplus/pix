@@ -3,6 +3,8 @@ import path from 'node:path';
 import { test as base } from '@playwright/test';
 import crypto from 'crypto';
 
+import { sanitizeFilename } from '../helpers/utils.ts';
+
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
 const HAR_DIR = path.resolve(import.meta.dirname, '../.har-record');
 export const utilsFixtures = base.extend<{
@@ -36,7 +38,3 @@ export const utilsFixtures = base.extend<{
     await context.close();
   },
 });
-
-function sanitizeFilename(name: string) {
-  return name.replace(/[^a-z0-9_\-.]/gi, '_');
-}
