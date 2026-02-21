@@ -19,7 +19,7 @@ test.describe(testRef, () => {
     candidateData: data.certifiableUser,
   });
 
-  test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page. Certification should be scorable`, async ({
+  test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
     page: pixAppPage,
     preparedCertificationTest,
     pixSuperAdminContext,

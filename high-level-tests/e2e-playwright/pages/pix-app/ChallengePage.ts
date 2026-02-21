@@ -15,6 +15,20 @@ export class ChallengePage {
     await this.page.getByRole('radio', { name: shouldAnswerCorrectly ? 'Oui.' : 'Non.' }).check();
   }
 
+  async skip() {
+    const challengeNumber = await this.getChallengeImprint();
+    const validateAnswerButton = this.page.getByRole('button', {
+      name: 'Je passe et je vais à la prochaine question',
+    });
+    // Forces to wait until next challenge is loaded
+    const selector = `p:has-text("ninaimprint ${challengeNumber}")`;
+    await Promise.all([validateAnswerButton.click(), this.page.waitForSelector(selector, { state: 'detached' })]);
+    const hasLoader = await this.page.locator('.app-loader').isVisible();
+    if (hasLoader) {
+      await this.page.waitForSelector('.app-loader', { state: 'detached' });
+    }
+  }
+
   async validateAnswer() {
     const challengeNumber = await this.getChallengeImprint();
     const validateAnswerButton = this.page.getByRole('button', {

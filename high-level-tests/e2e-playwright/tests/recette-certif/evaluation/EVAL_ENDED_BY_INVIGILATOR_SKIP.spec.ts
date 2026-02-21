@@ -6,6 +6,7 @@ import {
 } from '../../../helpers/certification/utils.ts';
 import { PIX_CERTIF_PRO_DATA } from '../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
+import { ChallengePage } from '../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 import data from '../data.json' with { type: 'json' };
 
@@ -19,7 +20,7 @@ test.describe(testRef, () => {
     candidateData: data.certifiableUser,
   });
 
-  test(`${testRef} - User test is being ended by invigilator. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
+  test(`${testRef} - User test is being ended by invigilator. User should be able to reach expected end of test page after skipping. Certification should be scorable`, async ({
     page: pixAppPage,
     preparedCertificationTest,
     pixSuperAdminContext,
@@ -36,8 +37,9 @@ test.describe(testRef, () => {
       await invigilatorOverviewPage.endCertificationTest(data.certifiableUser.firstName, data.certifiableUser.lastName);
     });
 
-    await test.step('user reloads the page and reaches expected end of certification page', async () => {
-      await pixAppPage.reload();
+    await test.step('user skips the challenge and reaches expected end of certification page', async () => {
+      const challengePage = new ChallengePage(pixAppPage);
+      await challengePage.skip();
       await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
       await expect(
         pixAppPage.getByText(
