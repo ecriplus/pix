@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import * as fs from 'fs/promises';
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
 
@@ -10,7 +11,6 @@ import {
   PIX_ORGA_ADMIN_DATA,
   PIX_ORGA_MEMBER_DATA,
 } from './db-data.js';
-
 export const AUTH_DIR = path.resolve(import.meta.dirname, '../.auth');
 
 export type Credentials = {
@@ -59,7 +59,7 @@ export const PIX_CERTIF_PRO_CREDENTIALS: Credentials = {
   rawPassword: PIX_CERTIF_PRO_DATA.rawPassword,
   appUrl: process.env.PIX_CERTIF_URL as string,
 };
-export const PIX_SUPER_ADMIN_CREDENTIALS: Credentials = {
+export const PIX_ADMIN_CERTIF_CREDENTIALS: Credentials = {
   id: PIX_ADMIN_CERTIF_DATA.id,
   label: 'pix-admin_super',
   firstName: PIX_ADMIN_CERTIF_DATA.firstName,
@@ -94,4 +94,40 @@ export function getTokenForPixUser(userId: number, origin: string, expiresIn: ms
   return jwt.sign({ user_id: userId, source: 'pix', aud: origin }, process.env.AUTH_SECRET || '', {
     expiresIn,
   });
+}
+
+export async function saveStorageState(creds: Credentials) {
+  const filePath = path.join(AUTH_DIR, `${creds.label}.json`);
+  const storageState = generateStorageState(creds.id, creds.appUrl);
+  await fs.writeFile(filePath, JSON.stringify(storageState, null, 2));
+  // eslint-disable-next-line no-console
+  console.log(`✅ User auth state for ${creds.label} saved to ${filePath}`);
+}
+
+export function generateStorageState(userId: number, origin: string) {
+  const sessionObject = {
+    authenticated: {
+      authenticator: 'authenticator:oauth2',
+      token_type: 'bearer',
+      user_id: userId,
+      access_token: getTokenForPixUser(userId, origin, '1h'),
+      expires_in: ms('1h'),
+      expires_at: Date.now() + ms('1h'),
+    },
+  };
+
+  return {
+    cookies: [],
+    origins: [
+      {
+        origin: origin,
+        localStorage: [
+          {
+            name: 'ember_simple_auth-session',
+            value: JSON.stringify(sessionObject),
+          },
+        ],
+      },
+    ],
+  };
 }

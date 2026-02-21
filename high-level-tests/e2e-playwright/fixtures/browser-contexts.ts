@@ -5,11 +5,11 @@ import { test as base } from '@playwright/test';
 
 import {
   AUTH_DIR,
+  PIX_ADMIN_CERTIF_CREDENTIALS,
   PIX_APP_USER_CREDENTIALS,
   PIX_CERTIF_PRO_CREDENTIALS,
   PIX_ORGA_ADMIN_CREDENTIALS,
   PIX_ORGA_MEMBER_CREDENTIALS,
-  PIX_SUPER_ADMIN_CREDENTIALS,
 } from '../helpers/auth.js';
 
 const shouldRecordHAR = process.env.RECORD_HAR === 'true';
@@ -86,10 +86,10 @@ export const browserContextsFixtures = base.extend<{
     await context.close();
   },
   pixSuperAdminContext: async ({ browser }, use, testInfo) => {
-    const authFilePath = path.join(AUTH_DIR, `${PIX_SUPER_ADMIN_CREDENTIALS.label}.json`);
+    const authFilePath = path.join(AUTH_DIR, `${PIX_ADMIN_CERTIF_CREDENTIALS.label}.json`);
     const harFilePath = path.join(
       HAR_DIR,
-      `${sanitizeFilename(testInfo.title)}-${PIX_SUPER_ADMIN_CREDENTIALS.label}.har`,
+      `${sanitizeFilename(testInfo.title)}-${PIX_ADMIN_CERTIF_CREDENTIALS.label}.har`,
     );
     const recordHar = shouldRecordHAR
       ? {
