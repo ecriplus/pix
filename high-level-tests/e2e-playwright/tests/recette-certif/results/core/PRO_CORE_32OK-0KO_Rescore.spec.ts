@@ -8,7 +8,6 @@ import {
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
-import data from '../../data.json' with { type: 'json' };
 
 const testRef = 'PRO_CORE_32OK-0KO_Rescore';
 const snapshotPath = `recette-certif/${testRef}.json`;
@@ -18,7 +17,6 @@ test.describe(testRef, () => {
   test.use({
     testRef,
     rightWrongAnswersSequence: Array(32).fill(true),
-    candidateData: data.certifiableUser,
   });
 
   test(
@@ -37,29 +35,28 @@ test.describe(testRef, () => {
       ],
     },
     async ({
-      page: pixAppPage,
+      pixAppCertifiablePage,
       pixCertifProPage,
       preparedCertificationTest,
       pixAdminRoleCertifPage,
+      certifiableUserData,
       snapshotHandler,
     }) => {
-      test.slow();
-
       let certificationNumber = '';
       const { sessionNumber } = preparedCertificationTest;
 
       await test.step(`reaches end of certification test`, async () => {
-        await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
-        await expect(pixAppPage.locator('h2')).toContainText(
+        await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
+        await expect(pixAppCertifiablePage.locator('h2')).toContainText(
           'Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix',
         );
       });
-      await pixAppPage.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
+      await pixAppCertifiablePage.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
 
       await test.step('Finalization and scoring', async () => {
         const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
         const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-        await expect(pixCertifProPage.getByText(data.certifiableUser.firstName)).toBeVisible();
+        await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
 
         await sessionFinalizationPage.finalizeSession();
       });
@@ -91,15 +88,15 @@ test.describe(testRef, () => {
           const certificationData = await certificationListPage.getCertificationData();
           expect(certificationData.length).toBe(1);
           expect(certificationData[0]).toMatchObject({
-            Prénom: data.certifiableUser.firstName,
-            Nom: data.certifiableUser.lastName,
+            Prénom: certifiableUserData.firstName,
+            Nom: certifiableUserData.lastName,
             Statut: 'Validée',
             Score: '895',
             'Signalements impactants non résolus': '',
             'Certification passée': 'Certification Pix',
           });
           const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
-            data.certifiableUser.firstName,
+            certifiableUserData.firstName,
           );
           certificationNumber = certificationInformationPage.getCertificationNumber();
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
@@ -139,8 +136,8 @@ test.describe(testRef, () => {
       });
 
       await test.step('User checks their certification result', async () => {
-        await pixAppPage.goto(process.env.PIX_APP_URL as string);
-        const homePage = new HomePage(pixAppPage);
+        await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
+        const homePage = new HomePage(pixAppCertifiablePage);
         const certificationsListPage = await homePage.goToMyCertifications();
         const status = await certificationsListPage.getCertificationStatus(certificationNumber);
         expect(status).toBe('Obtenue');

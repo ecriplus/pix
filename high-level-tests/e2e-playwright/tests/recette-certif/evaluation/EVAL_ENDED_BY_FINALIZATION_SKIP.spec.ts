@@ -4,11 +4,9 @@ import {
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../helpers/certification/utils.ts';
-import { PIX_CERTIF_PRO_DATA } from '../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
 import { ChallengePage } from '../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
-import data from '../data.json' with { type: 'json' };
 
 const testRef = 'EVAL_ENDED_BY_FINALIZATION_SKIP';
 
@@ -16,38 +14,36 @@ test.describe(testRef, () => {
   test.use({
     testRef,
     rightWrongAnswersSequence: Array(24).fill(true),
-    candidateData: data.certifiableUser,
   });
 
   test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page by skipping. Certification should be scorable`, async ({
-    page: pixAppPage,
+    pixAppCertifiablePage,
     pixCertifProPage,
     preparedCertificationTest,
     pixAdminRoleCertifPage,
+    certifiableUserData,
   }) => {
-    test.slow();
-
     const { sessionNumber } = preparedCertificationTest;
 
     await test.step('user stops at 25th challenge', async () => {
-      await expect(pixAppPage.getByLabel('Votre progression')).toContainText('25 / 32');
+      await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
     });
 
     await test.step('Finalization by marking a technical issue and check scoring', async () => {
       const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
       const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-      await expect(pixCertifProPage.getByText(data.certifiableUser.firstName)).toBeVisible();
-      await sessionFinalizationPage.markTechnicalIssueFor(data.certifiableUser.lastName);
+      await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(certifiableUserData.lastName);
 
       await sessionFinalizationPage.finalizeSession();
     });
 
     await test.step('user skips the challenge and reaches expected end of certification page', async () => {
-      const challengePage = new ChallengePage(pixAppPage);
+      const challengePage = new ChallengePage(pixAppCertifiablePage);
       await challengePage.skip();
-      await expect(pixAppPage.locator('h1')).toContainText('Test terminé !');
+      await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
       await expect(
-        pixAppPage.getByText(
+        pixAppCertifiablePage.getByText(
           'La session a été finalisée par votre centre de certification. Vous ne pouvez plus continuer de répondre aux questions.',
         ),
       ).toBeVisible();
@@ -61,8 +57,6 @@ test.describe(testRef, () => {
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
-          certificationCenter:
-            PIX_CERTIF_PRO_DATA.certificationCenters[0].externalId + PIX_CERTIF_PRO_DATA.certificationCenters[0].type,
           address: `address ${testRef}`,
           room: `room ${testRef}`,
           invigilatorName: `examiner ${testRef}`,
@@ -82,15 +76,15 @@ test.describe(testRef, () => {
         const certificationData = await certificationListPage.getCertificationData();
         expect(certificationData.length).toBe(1);
         expect(certificationData[0]).toMatchObject({
-          Prénom: data.certifiableUser.firstName,
-          Nom: data.certifiableUser.lastName,
+          Prénom: certifiableUserData.firstName,
+          Nom: certifiableUserData.lastName,
           Statut: 'Validée',
           Score: '895',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Certification Pix',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
-          data.certifiableUser.firstName,
+          certifiableUserData.firstName,
         );
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
