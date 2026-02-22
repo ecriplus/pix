@@ -9,95 +9,95 @@ import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 
 const testRef = 'EVAL_ENDED_BY_FINALIZATION_RELOADING';
 
-test.describe(testRef, () => {
-  test.use({
+test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
+  pixCertifProPage,
+  preparedCertificationTest,
+  pixAdminRoleCertifPage,
+  getCertifiableUserData,
+  pixAppCertifiableUserPage,
+}) => {
+  const certifiableUserData = await getCertifiableUserData(0);
+  const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
+  const { sessionNumber } = await preparedCertificationTest({
     testRef,
     rightWrongAnswersSequence: Array(24).fill(true),
+    pixAppPage: pixAppCertifiablePage,
+    certifiableUserData,
   });
 
-  test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
-    pixAppCertifiablePage,
-    pixCertifProPage,
-    preparedCertificationTest,
-    pixAdminRoleCertifPage,
-    certifiableUserData,
-  }) => {
-    const { sessionNumber } = preparedCertificationTest;
+  await test.step('user stops at 25th challenge', async () => {
+    await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
+  });
 
-    await test.step('user stops at 25th challenge', async () => {
-      await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
-    });
+  await test.step('Finalization by marking a technical issue and check scoring', async () => {
+    const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
+    const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
+    await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
+    await sessionFinalizationPage.markTechnicalIssueFor(certifiableUserData.lastName);
 
-    await test.step('Finalization by marking a technical issue and check scoring', async () => {
-      const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
-      const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-      await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
-      await sessionFinalizationPage.markTechnicalIssueFor(certifiableUserData.lastName);
+    await sessionFinalizationPage.finalizeSession();
+  });
 
-      await sessionFinalizationPage.finalizeSession();
-    });
+  await test.step('user reloads the page and reaches expected end of certification page', async () => {
+    await pixAppCertifiablePage.reload();
+    await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
+    await expect(
+      pixAppCertifiablePage.getByText(
+        'La session a été finalisée par votre centre de certification. Vous ne pouvez plus continuer de répondre aux questions.',
+      ),
+    ).toBeVisible();
+  });
 
-    await test.step('user reloads the page and reaches expected end of certification page', async () => {
-      await pixAppCertifiablePage.reload();
-      await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
-      await expect(
-        pixAppCertifiablePage.getByText(
-          'La session a été finalisée par votre centre de certification. Vous ne pouvez plus continuer de répondre aux questions.',
-        ),
-      ).toBeVisible();
-    });
+  const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
 
-    const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
+  await test.step('Check all session data', async () => {
+    const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
+    const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
 
-    await test.step('Check all session data', async () => {
-      const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
-
-      await test.step('Check session information', async () => {
-        await checkSessionInformationAndExpectSuccess(sessionPage, {
-          address: `address ${testRef}`,
-          room: `room ${testRef}`,
-          invigilatorName: `examiner ${testRef}`,
-          status: 'Finalisée',
-          nbStartedCertifications: 0,
-          nbIssueReportsUnsolved: 0,
-          nbIssueReports: 0,
-          nbCertificationsInError: 0,
-        });
+    await test.step('Check session information', async () => {
+      await checkSessionInformationAndExpectSuccess(sessionPage, {
+        address: `address ${testRef}`,
+        room: `room ${testRef}`,
+        invigilatorName: `examiner ${testRef}`,
+        status: 'Finalisée',
+        nbStartedCertifications: 0,
+        nbIssueReportsUnsolved: 0,
+        nbIssueReports: 0,
+        nbCertificationsInError: 0,
       });
+    });
 
-      await pixAdminRoleCertifPage
-        .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
-        .click();
-      await test.step('Check certification information', async () => {
-        const certificationListPage = await sessionPage.goToCertificationListPage();
-        const certificationData = await certificationListPage.getCertificationData();
-        expect(certificationData.length).toBe(1);
-        expect(certificationData[0]).toMatchObject({
-          Prénom: certifiableUserData.firstName,
-          Nom: certifiableUserData.lastName,
-          Statut: 'Validée',
-          Score: '895',
-          'Signalements impactants non résolus': '',
-          'Certification passée': 'Certification Pix',
-        });
-        const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
-          certifiableUserData.firstName,
-        );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          score: '895 Pix',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          nbAnsweredQuestionsOverTotal: '24/32',
-          nbQuestionsOK: 24,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          testEndedBy: 'Finalisation session',
-          abortReason: 'Problème technique',
-        });
+    await pixAdminRoleCertifPage
+      .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
+      .click();
+    await test.step('Check certification information', async () => {
+      const certificationListPage = await sessionPage.goToCertificationListPage();
+      const certificationData = await certificationListPage.getCertificationData();
+      expect(certificationData.length).toBe(1);
+      expect(certificationData[0]).toMatchObject({
+        Prénom: certifiableUserData.firstName,
+        Nom: certifiableUserData.lastName,
+        Statut: 'Validée',
+        Score: '895',
+        'Signalements impactants non résolus': '',
+        'Certification passée': 'Certification Pix',
+      });
+      const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
+        certifiableUserData.firstName,
+      );
+      await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
+        sessionNumber,
+        status: 'Validée',
+        score: '895 Pix',
+      });
+      await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+        nbAnsweredQuestionsOverTotal: '24/32',
+        nbQuestionsOK: 24,
+        nbQuestionsKO: 0,
+        nbQuestionsAband: 0,
+        nbValidatedTechnicalIssues: 0,
+        testEndedBy: 'Finalisation session',
+        abortReason: 'Problème technique',
       });
     });
   });
