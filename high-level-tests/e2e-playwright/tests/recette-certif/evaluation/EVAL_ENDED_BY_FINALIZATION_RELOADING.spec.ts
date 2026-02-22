@@ -11,14 +11,14 @@ const testRef = 'EVAL_ENDED_BY_FINALIZATION_RELOADING';
 
 test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
   pixCertifProPage,
-  preparedCertificationTest,
+  enrollCandidateAndPassExam,
   pixAdminRoleCertifPage,
   getCertifiableUserData,
   pixAppCertifiableUserPage,
 }) => {
   const certifiableUserData = await getCertifiableUserData(0);
   const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-  const { sessionNumber } = await preparedCertificationTest({
+  const { sessionNumber } = await enrollCandidateAndPassExam({
     testRef,
     rightWrongAnswersSequence: Array(24).fill(true),
     pixAppPage: pixAppCertifiablePage,

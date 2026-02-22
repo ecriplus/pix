@@ -30,14 +30,14 @@ test(
   async ({
     getCertifiableUserData,
     pixCertifProPage,
-    preparedCertificationTest,
+    enrollCandidateAndPassExam,
     pixAdminRoleCertifPage,
     pixAppCertifiableUserPage,
     snapshotHandler,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber } = await preparedCertificationTest({
+    const { sessionNumber } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: Array(32).fill(false),
       certificationKey: CERTIFICATIONS_DATA.CLEA.key,
