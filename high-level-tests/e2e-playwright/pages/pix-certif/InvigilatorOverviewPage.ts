@@ -8,7 +8,11 @@ export class InvigilatorOverviewPage {
         name: `Confirmer la présence de l'élève ${firstName} ${lastName}`,
       })
       .click();
-    await this.page.getByText('1/1 candidat présent').waitFor({ state: 'visible' });
+    await this.page
+      .getByRole('button', {
+        name: `Annuler la confirmation de présence de l'élève ${firstName} ${lastName}`,
+      })
+      .waitFor({ state: 'visible' });
   }
 
   async endCertificationTest(firstName: string, lastName: string) {

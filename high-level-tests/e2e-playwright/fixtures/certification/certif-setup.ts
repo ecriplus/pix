@@ -28,6 +28,18 @@ type PassCertificationExamParams = {
   pixAppPage: Page;
 };
 
+type PassManyCertificationExamsParams = {
+  examsData: {
+    certifiableUserData: PixCertifiableUserData;
+    rightWrongAnswersSequence: boolean[];
+    certificationKey?: string;
+    pixAppPage: Page;
+  }[];
+  sessionNumber: string;
+  accessCode: string;
+  invigilatorCode: string;
+};
+
 type PassCertificationExamResult = {
   invigilatorOverviewPage: InvigilatorOverviewPage;
 };
@@ -49,6 +61,7 @@ type EnrollCandidateAndPassExamResult = {
 export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidate: (args: EnrollCandidateParams) => Promise<EnrollCandidateResult>;
   passCertificationExam: (args: PassCertificationExamParams) => Promise<PassCertificationExamResult>;
+  passManyCertificationExams: (args: PassManyCertificationExamsParams) => Promise<PassCertificationExamResult>;
   enrollCandidateAndPassExam: (args: EnrollCandidateAndPassExamParams) => Promise<EnrollCandidateAndPassExamResult>;
 }>({
   enrollCandidate: async ({ pixCertifProPage }, use) => {
@@ -155,6 +168,82 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       };
     };
     await use(passCertificationExam);
+  },
+  passManyCertificationExams: async ({ pixCertifInvigilatorPage }, use) => {
+    const passManyCertificationExams = async ({
+      examsData,
+      sessionNumber,
+      accessCode,
+      invigilatorCode,
+    }: PassManyCertificationExamsParams) => {
+      const invigilatorOverviewPage = await certifSetupFixtures.step('Evaluation', async () => {
+        const reachAccessCodePagePromises = examsData.map(async (examData) => {
+          await examData.pixAppPage.goto(process.env.PIX_APP_URL!);
+          return await certifSetupFixtures.step(
+            `Candidate ${examData.certifiableUserData.firstName} join the session, awaiting to be authorized to start`,
+            async () => {
+              const homePage = new HomePage(examData.pixAppPage);
+              const certificationStartPage = await homePage.goToStartCertification();
+              if (examData.certificationKey === CERTIFICATIONS_DATA.CLEA.key) {
+                await expect(examData.pixAppPage.getByText('Prêt pour le CléA numérique')).toBeVisible();
+              }
+              const accessCodePage = await certificationStartPage.fillSessionInfoAndNavigateIntro({
+                sessionNumber,
+                ...examData.certifiableUserData,
+              });
+              return {
+                examData,
+                accessCodePage,
+              };
+            },
+          );
+        });
+        const examDatasWithAccessCodePage = [];
+        for (const promise of reachAccessCodePagePromises) {
+          const accessCodePage = await promise;
+          examDatasWithAccessCodePage.push(accessCodePage);
+        }
+
+        const invigilatorOverviewPage = await certifSetupFixtures.step(
+          'Invigilator authorizes all candidates to start',
+          async () => {
+            const invigLogin = new InvigilatorLoginPage(pixCertifInvigilatorPage);
+            const invigOverview = await invigLogin.login(sessionNumber, invigilatorCode);
+            for (const examData of examsData) {
+              await invigOverview.authorizeCandidateToStart(
+                examData.certifiableUserData.firstName,
+                examData.certifiableUserData.lastName,
+              );
+            }
+            return invigOverview;
+          },
+        );
+
+        const passExamPromises = examDatasWithAccessCodePage.map(async ({ accessCodePage, examData }) => {
+          await certifSetupFixtures.step(
+            `Candidate ${examData.certifiableUserData.firstName} takes the test`,
+            async () => {
+              const challengePage = await accessCodePage.fillAccessCodeAndStartCertificationTest(accessCode);
+              for (const [i, shouldAnswerCorrectly] of examData.rightWrongAnswersSequence.entries()) {
+                await expect(examData.pixAppPage.getByLabel('Votre progression')).toContainText(`${i + 1} / 32`);
+                await challengePage.setRightOrWrongAnswer(shouldAnswerCorrectly);
+                await challengePage.validateAnswer();
+              }
+            },
+          );
+        });
+        for (const promise of passExamPromises) {
+          await promise;
+        }
+
+        return invigilatorOverviewPage;
+      });
+
+      return {
+        invigilatorOverviewPage,
+      };
+    };
+    await use(passManyCertificationExams);
   },
   enrollCandidateAndPassExam: async ({ enrollCandidate, passCertificationExam }, use) => {
     const enrollCandidateAndPassExam = async ({
