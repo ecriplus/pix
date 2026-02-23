@@ -30,9 +30,9 @@ module.exports = function (environment) {
       PIX_APP_URL_WITHOUT_EXTENSION: process.env.PIX_APP_URL_WITHOUT_EXTENSION || 'https://app.pix.',
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
       SUPPORTED_LOCALES: [
+        { value: 'en', nativeName: 'English', displayedInSwitcher: true },
         { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
         { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
-        { value: 'en', nativeName: 'English', displayedInSwitcher: true },
       ],
       API_ERROR_MESSAGES: {
         BAD_REQUEST: {

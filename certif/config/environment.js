@@ -35,10 +35,10 @@ module.exports = function (environment) {
       APPLICATION_NAME: process.env.APP || 'pix-certif-local',
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
       SUPPORTED_LOCALES: [
-        { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
-        { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
-        { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
         { value: 'en', nativeName: 'English', displayedInSwitcher: true },
+        { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
+        { value: 'fr-BE', nativeName: 'Français (Belgique)', displayedInSwitcher: true },
+        { value: 'fr-FR', nativeName: 'Français (France)', displayedInSwitcher: false },
       ],
       BANNER: {
         CONTENT: process.env.BANNER_CONTENT || '',
