@@ -207,7 +207,7 @@
                           "id": "1",
                           "content": "<p>À contrôler le système de climatisation.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh bien non. les serveurs sont des <strong>ordinateurs très puissants</strong> qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour&nbsp;répondre aux demandes des internautes. </p>"
+                            "diagnosis": "<p>Eh bien non. Les serveurs sont des <strong>ordinateurs très puissants</strong> qui constituent le cœur du centre de données. Ils servent à <strong>stocker</strong>, sécuriser les données et effectuer des <strong>calculs</strong> pour&nbsp;répondre aux demandes des internautes. </p>"
                           }
                         },
                         {
@@ -435,7 +435,7 @@
                     },
                     {
                       "title": "Il faut refroidir plus ! ",
-                      "description": "La ventilation a elle seule ne suffit pas, il faut expulser cet air chaud et amener de l’air froid. C’est le rôle des climatiseurs. Les climatiseurs consomment beaucoup d’énergie. ",
+                      "description": "La ventilation à elle seule ne suffit pas, il faut expulser cet air chaud et amener de l’air froid. C’est le rôle des climatiseurs. Les climatiseurs consomment beaucoup d’énergie. ",
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation-serveurs.png",
@@ -467,7 +467,7 @@
                       "displayWidth": 600,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/8le-systeme-refroidissement-resume.png",
-                        "alt": "chaine refroidissement résumée"
+                        "alt": "chaîne refroidissement résumée"
                       },
                       "license": {
                         "name": "",
@@ -536,7 +536,7 @@
               "element": {
                 "id": "edbc9c1f-616e-4702-82c2-b282c887d5f0",
                 "type": "text",
-                "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, à l’échelle mondiale, ces milliards de litres d’eau prelevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation. </p>"
+                "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, à l’échelle mondiale, ces milliards de litres d’eau prélevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation. </p>"
               }
             }
           ]
@@ -814,12 +814,12 @@
                     "content": "<p> Ils utilisent de grandes quantités d’eau douce pour le refroidissement et beaucoup d’électricité.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !</p>",
-                      "diagnosis": "<p>Les sysètmes de refroidissement ont besoin de beaucoup d’électricité et d’eau pour fonctionner !</p>"
+                      "diagnosis": "<p>Les systèmes de refroidissement ont besoin de beaucoup d’électricité et d’eau pour fonctionner !</p>"
                     }
                   },
                   {
                     "id": "5",
-                    "content": "<p>Les climatiseurs rejètent des gaz toxiques dans l’environnement.</p>",
+                    "content": "<p>Les climatiseurs rejettent des gaz toxiques dans l’environnement.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse !<br></p>",
                       "diagnosis": "<p>Les climatiseurs&nbsp;ne rejettent pas  de gaz toxiques en fonctionnement normal.</p>"
@@ -841,12 +841,12 @@
               "element": {
                 "id": "7854fd2f-5062-4248-9a1e-08a4b971614e",
                 "type": "qcu",
-                "instruction": "<p>Quel impact ont les nouvelles technologies (IA, streaming, cryptomonnaie etc) sur la consommation d’énergie des centres de données ? </p>",
+                "instruction": "<p>Quel impact ont les nouvelles technologies (IA, streaming, cryptomonnaie, etc.) sur la consommation d’énergie des centres de données ? </p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "2",
-                    "content": "Elles n’ont pas lien avec la consommation énergétique des centres de données.",
+                    "content": "Elles n’ont pas de lien avec la consommation énergétique des centres de données.",
                     "feedback": {
                       "state": "<p>Mauvaise réponse !&nbsp;</p>",
                       "diagnosis": "<p>L’IA générative, le streaming, le cloud... Toutes ces technologies&nbsp;amènent à des usages toujours plus consommateurs d’énergie.</p>"
@@ -861,7 +861,7 @@
                     }
                   },
                   {
-                    "id": "2",
+                    "id": "3",
                     "content": "<p>Elles n’augmentent la consommation que ponctuellement, lors du lancement de ces technologies ou des mises à jour.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse !&nbsp;</p>",
