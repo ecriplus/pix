@@ -474,6 +474,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             id: 1234,
             name: 'Équipe 1',
           });
+          databaseBuilder.factory.buildOrganizationLearnerType({ id: 5678 });
           databaseBuilder.factory.buildCertificationCpfCountry({
             code: 99100,
             commonName: 'France',
@@ -497,6 +498,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'administration-team-id': 1234,
                   'parent-organization-id': parentOrganizationId,
                   'country-code': 99100,
+                  'organization-learner-type-id': 5678,
                 },
               },
             },

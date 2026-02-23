@@ -216,12 +216,11 @@ const save = async function ({ organization }) {
     'parentOrganizationId',
     'countryCode',
   ]);
-  // TODO: supprimer l'optional chaining quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME)
     .returning('*')
     .insert({
       ...data,
-      organizationLearnerTypeId: organization.organizationLearnerType?.id,
+      organizationLearnerTypeId: organization.organizationLearnerType.id,
     });
   const savedOrganization = _toDomain(organizationCreated);
 
@@ -266,7 +265,7 @@ const update = async function ({ organization }) {
   await knexConn(ORGANIZATIONS_TABLE_NAME)
     .update({
       ...organizationRawData,
-      organizationLearnerTypeId: organization.organizationLearnerType?.id,
+      organizationLearnerTypeId: organization.organizationLearnerType.id,
       updatedAt: new Date(),
     })
     .where({ id: organization.id });
@@ -494,15 +493,10 @@ function _toDomain(rawOrganization) {
 }
 
 function _createOrganizationLearnerType(organizationLearnerTypeId, organizationLearnerTypeName) {
-  // TODO: supprimer la condition quand organizationLearnerTypeId sera not-nullable à la fin de l'epix PIX-19561
-  if (organizationLearnerTypeId) {
-    return new OrganizationLearnerType({
-      id: organizationLearnerTypeId,
-      name: organizationLearnerTypeName,
-    });
-  } else {
-    return null;
-  }
+  return new OrganizationLearnerType({
+    id: organizationLearnerTypeId,
+    name: organizationLearnerTypeName,
+  });
 }
 
 export const organizationForAdminRepository = {

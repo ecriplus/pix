@@ -248,7 +248,7 @@ class OrganizationForAdmin {
     this.tagsToRemove = differenceBy(this.tags, tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     if (organization.administrationTeamId) this.administrationTeamId = organization.administrationTeamId;
     if (organization.countryCode) this.countryCode = organization.countryCode;
-    if (organization.organizationLearnerType) {
+    if (organization.organizationLearnerType.id) {
       this.organizationLearnerType = organization.organizationLearnerType;
     }
   }

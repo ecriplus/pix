@@ -28,10 +28,7 @@ const createOrganization = async function ({
 
   organizationCreationValidator.validate(organization);
 
-  await _checkOrganizationLearnerTypeExists(
-    organization.organizationLearnerType?.id,
-    organizationLearnerTypeRepository,
-  );
+  await _checkOrganizationLearnerTypeExists(organization.organizationLearnerType.id, organizationLearnerTypeRepository);
 
   await _checkCountryExists(organization.countryCode, countryRepository);
 
