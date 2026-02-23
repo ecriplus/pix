@@ -972,24 +972,6 @@
             {
               "type": "element",
               "element": {
-                "id": "716b7f23-a6ef-4b67-b186-bd94a0233f4f",
-                "type": "expand",
-                "title": "Indice 1",
-                "content": "<table style=\"border-collapse: collapse; width: 100%;\">    <caption class=\"sr-only\">Répartition des IA par zone géographique</caption>    <thead>        <tr>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">Zone</th>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">IA concernées</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇪🇺 Union européenne</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">mistral</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇺🇸 États-Unis</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">claude, gemini, chatgpt, grok</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇨🇳 Chine</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">deepseek</td>        </tr>    </tbody></table>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "6faee291-d8b3-4b8f-9afe-077fc8c6c55b",
-                "type": "expand",
-                "title": "Indice 2",
-                "content": "<p>Le 4 juin 1989 correspond à la fin d’un mouvement de manifestations étudiantes à Pékin. Cet épisode de l’histoire chinoise contemporaine est traité différemment selon les contextes politiques et médiatiques.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "b48e6ebb-8242-4fb3-b924-556e6b814e8c",
                 "type": "qrocm",
                 "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a <strong>modifié</strong>, <strong>restreint</strong> ou <strong>refusé</strong> sa réponse à cette question ?</p>",
@@ -1047,6 +1029,33 @@
                     "diagnosis": "<p>Pas tout à fait.</p><p>Regardez les indices de <strong>restriction</strong> : refus explicite, réponse très courte, changement de sujet, formulations très vagues, ou message de sécurité.</p>"
                   }
                 }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "716b7f23-a6ef-4b67-b186-bd94a0233f4f",
+                "type": "expand",
+                "title": "Indice 1",
+                "content": "<table style=\"border-collapse: collapse; width: 100%;\">    <caption class=\"sr-only\">Répartition des IA par zone géographique</caption>    <thead>        <tr>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">Zone</th>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">IA concernées</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇪🇺 Union européenne</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">mistral</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇺🇸 États-Unis</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">claude, gemini, chatgpt, grok</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇨🇳 Chine</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">deepseek</td>        </tr>    </tbody></table>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b48e6ebb-8242-4fb3-b924-556e6b814e8c",
+                "type": "expand",
+                "title": "Indice 3",
+                "content": "<p>Si vous recevez le message&nbsp;« Oups, erreur temporaire » c'est potentiellement qu'un logiciel IA ne peux pas donner de réponse à votre question.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6faee291-d8b3-4b8f-9afe-077fc8c6c55b",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "<p>Le 4 juin 1989 correspond à la fin d’un mouvement de manifestations étudiantes à Pékin. Cet épisode de l’histoire chinoise contemporaine est traité différemment selon les contextes politiques et médiatiques.</p>"
               }
             }
           ]
