@@ -1,7 +1,7 @@
 import { Badge } from '../../../../evaluation/domain/models/Badge.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 
-const getAllIdsByTargetProfileId = async function ({ targetProfileId }) {
+export async function getAllIdsByTargetProfileId({ targetProfileId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const complementaryCertificationBadgesIds = await knexConn('badges')
@@ -12,17 +12,17 @@ const getAllIdsByTargetProfileId = async function ({ targetProfileId }) {
     .andWhere('complementary-certification-badges.detachedAt', null)
     .pluck('complementary-certification-badges.id');
   return complementaryCertificationBadgesIds;
-};
+}
 
-const detachByIds = async function ({ complementaryCertificationBadgeIds }) {
+export async function detachByIds({ complementaryCertificationBadgeIds }) {
   const knexConn = DomainTransaction.getConnection();
   const now = new Date();
   return knexConn('complementary-certification-badges')
     .whereIn('id', complementaryCertificationBadgeIds)
     .update({ detachedAt: now });
-};
+}
 
-const attach = async function ({ complementaryCertificationBadges }) {
+export async function attach({ complementaryCertificationBadges }) {
   const knexConn = DomainTransaction.getConnection();
   const createdAt = new Date();
 
@@ -32,9 +32,9 @@ const attach = async function ({ complementaryCertificationBadges }) {
       createdAt,
     });
   }
-};
+}
 
-const findAttachableBadgesByIds = async function ({ ids }) {
+export async function findAttachableBadgesByIds({ ids }) {
   const knexConn = DomainTransaction.getConnection();
   const badges = await knexConn
     .from('badges')
@@ -50,14 +50,12 @@ const findAttachableBadgesByIds = async function ({ ids }) {
   return badges.map((badge) => {
     return new Badge(badge);
   });
-};
+}
 
-const isRelatedToCertification = async function (badgeId) {
+export async function isRelatedToCertification(badgeId) {
   const knexConn = DomainTransaction.getConnection();
   const complementaryCertificationBadge = await knexConn('complementary-certification-badges')
     .where({ badgeId })
     .first();
   return !!complementaryCertificationBadge;
-};
-
-export { attach, detachByIds, findAttachableBadgesByIds, getAllIdsByTargetProfileId, isRelatedToCertification };
+}
