@@ -47,6 +47,25 @@ describe('Certification | Evaluation | Unit | Domain | Models | Candidate', func
     });
   });
 
+  context('#get isScorable', function () {
+    [
+      { subscriptionScope: SCOPES.CORE, isScorable: true },
+      { subscriptionScope: SCOPES.PIX_PLUS_EDU_1ER_DEGRE, isScorable: true },
+      { subscriptionScope: SCOPES.PIX_PLUS_EDU_2ND_DEGRE, isScorable: true },
+      { subscriptionScope: SCOPES.PIX_PLUS_EDU_CPE, isScorable: true },
+      { subscriptionScope: SCOPES.PIX_PLUS_DROIT, isScorable: false },
+      { subscriptionScope: SCOPES.PIX_PLUS_PRO_SANTE, isScorable: false },
+    ].forEach(({ subscriptionScope, isScorable }) => {
+      it(`should return ${isScorable} when candidate has subscribed to ${subscriptionScope} certification`, function () {
+        const candidate = domainBuilder.certification.evaluation.buildCandidate({
+          subscriptionScope: subscriptionScope,
+        });
+
+        expect(candidate.isScorable).to.equal(isScorable);
+      });
+    });
+  });
+
   context('#get hasOnlyCoreSubscription', function () {
     it('should return true when candidate has solely subscribed to CORE certification', function () {
       const candidate = domainBuilder.certification.evaluation.buildCandidate({
@@ -73,35 +92,6 @@ describe('Certification | Evaluation | Unit | Domain | Models | Candidate', func
       });
 
       expect(candidate.hasOnlyCoreSubscription).to.be.false;
-    });
-  });
-
-  context('#get hasPixPlusSubscription', function () {
-    it('should return false when candidate has solely subscribed to CORE certification', function () {
-      const candidate = domainBuilder.certification.evaluation.buildCandidate({
-        subscriptionScope: SCOPES.CORE,
-        hasCleaSubscription: false,
-      });
-
-      expect(candidate.hasPixPlusSubscription).to.be.false;
-    });
-
-    it('should return false when candidate has a double subscription CORE and CLEA', function () {
-      const candidate = domainBuilder.certification.evaluation.buildCandidate({
-        subscriptionScope: SCOPES.CORE,
-        hasCleaSubscription: true,
-      });
-
-      expect(candidate.hasPixPlusSubscription).to.be.false;
-    });
-
-    it('should return true when candidate has a pix plus subscription', function () {
-      const candidate = domainBuilder.certification.evaluation.buildCandidate({
-        subscriptionScope: SCOPES.PIX_PLUS_DROIT,
-        hasCleaSubscription: false,
-      });
-
-      expect(candidate.hasPixPlusSubscription).to.be.true;
     });
   });
 });

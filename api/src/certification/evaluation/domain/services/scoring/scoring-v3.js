@@ -48,11 +48,11 @@ export function handleV3CertificationScoring({
   cleaScoringCriteria,
   scoringDegradationService,
 }) {
-  if (candidate.hasPixPlusSubscription) {
+  if (!candidate.isScorable) {
     return {
       coreAssessmentResult: null,
       doubleCertificationScoring: null,
-    }; // WIP : will be done in the future
+    };
   }
 
   const scoringV3Algorithm = new ScoringV3Algorithm({

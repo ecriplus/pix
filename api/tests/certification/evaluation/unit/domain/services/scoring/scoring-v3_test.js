@@ -25,7 +25,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         return callback();
       });
       clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-      scoringDegradationService = { downgradeCapacity: sinon.stub().rejects(new Error('Args mismatch')) };
+      scoringDegradationService = {
+        downgradeCapacity: sinon.stub().rejects(new Error('Args mismatch')),
+      };
 
       const flashAssessmentAlgorithmConfiguration = domainBuilder.buildFlashAlgorithmConfiguration();
 
@@ -40,7 +42,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
       clock.restore();
     });
 
-    context('when scoring a only CORE scoped certification', function () {
+    context('when scoring a unique CORE scoped certification', function () {
       it('should return a CoreScoring', function () {
         // given
         const assessmentId = 1214;
@@ -63,7 +65,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const v3CertificationScoring = domainBuilder.buildV3CertificationScoring({
           competencesForScoring: [domainBuilder.buildCompetenceForScoring()],
         });
-        const challenges = generateChallengeList({ length: maximumAssessmentLength });
+        const challenges = generateChallengeList({
+          length: maximumAssessmentLength,
+        });
         const { answers } = _buildDataFromAnsweredChallenges(challenges);
 
         assessmentSheet.answers = answers;
@@ -88,7 +92,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
       });
     });
 
-    context('when scoring a CLEA scoped certification', function () {
+    context('when scoring a double certification (CLEA)', function () {
       it('should return a CoreScoring and a DoubleCertificationScoring', function () {
         const assessmentId = 1214;
         const certificationCourseId = 1234;
@@ -115,7 +119,9 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           competencesForScoring: [domainBuilder.buildCompetenceForScoring()],
         });
 
-        const challenges = generateChallengeList({ length: maximumAssessmentLength });
+        const challenges = generateChallengeList({
+          length: maximumAssessmentLength,
+        });
         const cleaScoringCriteria =
           domainBuilder.certification.evaluation.buildComplementaryCertificationScoringCriteria();
 
@@ -137,20 +143,70 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
       });
     });
 
-    context('when scoring a not CORE scoped certification', function () {
-      it('should return undefined because no scoring occurred', function () {
-        const candidate = domainBuilder.certification.evaluation.buildCandidate({
-          subscriptionScope: SCOPES.PIX_PLUS_DROIT,
-          hasCleaSubscription: false,
-        });
+    context('when scoring a Pix + scoped certification', function () {
+      context('when Pix + is EDU', function () {
+        it('should return undefined because no scoring occurred', function () {
+          // given
+          const assessmentId = 1214;
+          const certificationCourseId = 1234;
 
-        const hasScored = handleV3CertificationScoring({
-          candidate,
-        });
+          const candidate = domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: SCOPES.PIX_PLUS_EDU_1ER_DEGRE,
+            hasCleaSubscription: false,
+            reconciledAt: new Date('2021-01-01'),
+          });
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            assessmentId,
+            certificationCourseId,
+          });
 
-        expect(hasScored).to.deep.equal({
-          coreAssessmentResult: null,
-          doubleCertificationScoring: null,
+          const event = new CertificationCompletedJob({
+            certificationCourseId,
+          });
+
+          const v3CertificationScoring = domainBuilder.buildV3CertificationScoring();
+          const challenges = generateChallengeList({
+            length: maximumAssessmentLength,
+          });
+          const { answers } = _buildDataFromAnsweredChallenges(challenges);
+
+          assessmentSheet.answers = answers;
+
+          // when
+          const score = handleV3CertificationScoring({
+            event,
+            assessmentSheet,
+            candidate,
+            allChallenges: challenges,
+            askedChallengesWithoutLiveAlerts: challenges,
+            algorithm,
+            v3CertificationScoring,
+            cleaScoringCriteria: null,
+            scoringDegradationService,
+          });
+
+          // then
+          expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
+          expect(score.coreAssessmentResult.competenceMarks).to.have.lengthOf(0);
+          expect(score.doubleCertificationScoring).to.be.null;
+        });
+      });
+
+      context('when Pix + is not EDU', function () {
+        it('should return undefined because no scoring occurred', function () {
+          const candidate = domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: SCOPES.PIX_PLUS_DROIT,
+            hasCleaSubscription: false,
+          });
+
+          const hasScored = handleV3CertificationScoring({
+            candidate,
+          });
+
+          expect(hasScored).to.deep.equal({
+            coreAssessmentResult: null,
+            doubleCertificationScoring: null,
+          });
         });
       });
     });
@@ -168,7 +224,9 @@ const _generateCertificationChallengeForChallenge = ({ discriminant, difficulty,
 
 const _buildDataFromAnsweredChallenges = (answeredChallenges) => {
   const challengeCalibrationsWithoutLiveAlerts = answeredChallenges.map(_generateCertificationChallengeForChallenge);
-  const answers = generateAnswersForChallenges({ challenges: answeredChallenges });
+  const answers = generateAnswersForChallenges({
+    challenges: answeredChallenges,
+  });
 
   return { answers, challengeCalibrationsWithoutLiveAlerts };
 };
