@@ -156,6 +156,11 @@ function convertArray(joiArrayDescribedSchema, key = '') {
       jsonSchema.items = convertFromType(item);
       if (itemTitle) {
         jsonSchema.items.title = itemTitle;
+
+        // Add headerTemplate for JSON Editor lib
+        // See {@link https://github.com/json-editor/json-editor#dynamic-headers}
+        // for further informations
+        jsonSchema.items.headerTemplate = `${itemTitle} {{i0}}`;
       }
     }
   }

@@ -297,7 +297,12 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
         properties: {
           proposals: {
             type: 'array',
-            items: { title: 'proposal', type: 'string', format: null },
+            items: {
+              title: 'proposal',
+              headerTemplate: 'proposal {{i0}}',
+              type: 'string',
+              format: null,
+            },
           },
         },
         additionalProperties: false,
