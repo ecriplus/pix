@@ -162,7 +162,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
-                "content": "<p> <strong>Les IA génératives sont entraînées sur de vastes ensembles de contenus</strong>, parfois biaisés ou problématiques. Sans <strong>règles de sécurité</strong>, elles peuvent produire des réponses <strong>injurieuses, discriminatoires</strong> ou faisant <strong>l’apologie de la violence et d’actes illégaux</strong>.&nbsp;🚫</p><h5>🤔 Comment réduire le risque que cela arrive ?</h5><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><h5><br>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
+                "content": "<p> <strong>Les IA génératives sont entraînées sur de vastes ensembles de contenus</strong>, parfois biaisés ou problématiques. Sans <strong>règles de sécurité</strong>, elles peuvent produire des réponses <strong>injurieuses, discriminatoires</strong> ou faisant <strong>l’apologie de la violence et d’actes illégaux</strong>.&nbsp;🚫🤔 Comment réduire le risque que cela arrive ?</p><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><br><h5>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
               }
             }
           ]
@@ -528,14 +528,14 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Les deux&nbsp;modèles interprètent différemment le profil de l'utilisateur</p>",
+                    "content": "<p>Les deux&nbsp;modèles interprètent différemment le profil de l’utilisateur</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !</p><p>L’IA ne tire pas cette orientation du profil de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Un modèle prend en compte les conversation précédentes et l'autre non.</p>",
+                    "content": "<p>Un modèle prend en compte les conversations précédentes et l’autre non.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !&nbsp;</p><p>Il ne s’agit pas d’une influence des réponses précédentes, ici la discussion de Fabrice vient tout juste de commencer. Le logiciel d’intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
@@ -732,7 +732,7 @@
               "element": {
                 "id": "03437e86-505d-4eed-bfb0-ee635b9c9a6e",
                 "type": "qcu",
-                "instruction": "<p>Quel type d’alignement explique le plus probablement le comportement de l'IA ci-dessus ?</p>",
+                "instruction": "<p>Quel type d’alignement explique le plus probablement le comportement de l’IA ci-dessus ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -966,7 +966,7 @@
               "element": {
                 "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
-                "content": "<p>Le site <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">compar:IA</a>&nbsp;vous permet d’envoyer un prompt à deux logiciels d’intelligence artificielle en même temps.&nbsp;</p><p>Allez sur le site et essayez le prompt suivant.&nbsp;</p><blockquote>\"Que s’est il passé le 4 juin 1989 ?\"</blockquote><p>Observez les réponses de l’IA en comparant deux logiciels d’IA puis répondez à la question ci-dessous.</p>"
+                "content": "<p>Le site <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">compar:IA</a>&nbsp;vous permet d’envoyer un prompt à deux logiciels d’intelligence artificielle en même temps.&nbsp;</p><p>Allez sur le site et essayez le prompt suivant.&nbsp;</p><blockquote>\« Que s’est-il passé le 4 juin 1989 ?\ »</blockquote><p>Observez les réponses de l’IA en comparant deux logiciels d’IA puis répondez à la question ci-dessous.</p>"
               }
             },
             {
@@ -974,14 +974,14 @@
               "element": {
                 "id": "b48e6ebb-8242-4fb3-b924-556e6b814e8c",
                 "type": "qrocm",
-                "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a refusé de répondre à cette question ?</p>",
+                "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a refusé de répondre à cette question ?</p>",
                 "proposals": [
                   {
-                    "input": "Sélectionnez le logiciel d'IA",
+                    "input": "Sélectionnez le logiciel d’IA",
                     "type": "select",
                     "display": "inline",
-                    "placeholder": "Sélectionnez le logiciel d'IA",
-                    "ariaLabel": "Sélectionnez le logiciel d'IA",
+                    "placeholder": "Sélectionnez le logiciel d’IA",
+                    "ariaLabel": "Sélectionnez le logiciel d’IA",
                     "tolerances": [],
                     "options": [
                       {
@@ -1026,7 +1026,7 @@
                   },
                   "invalid": {
                     "state": "Pas tout à fait.",
-                    "diagnosis": "<p>Pas tout à fait.</p><p>Regardez les indices de <strong>restriction</strong> : refus explicite, réponse très courte, changement de sujet, formulations très vagues, ou message de sécurité.</p>"
+                    "diagnosis": "<p>Pas tout à fait.</p><p>Regardez les indices de <strong>restriction</strong>&nbsp;: refus explicite, réponse très courte, changement de sujet, formulations très vagues, ou message de sécurité.</p>"
                   }
                 }
               }
@@ -1046,7 +1046,7 @@
                 "id": "37b1608e-ba6e-40e6-8ed4-abe29849567b",
                 "type": "expand",
                 "title": "Indice 2",
-                "content": "<p>Si vous recevez le message&nbsp;« Oups, erreur temporaire » c'est potentiellement qu'un logiciel IA ne peut pas donner de réponse à votre question.&nbsp;</p>"
+                "content": "<p>Si vous recevez le message&nbsp;«&nbsp;Oups, erreur temporaire&nbsp;» c’est potentiellement qu’un logiciel IA ne peut pas donner de réponse à votre question.&nbsp;</p>"
               }
             },
             {
