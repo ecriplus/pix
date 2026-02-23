@@ -286,7 +286,6 @@ export default class DetailsV3 extends Component {
         >
           <dt>
             {{t "pages.certifications.certification.details.v3.more-informations.labels.numberof-answered-questions"}}
-            <br />
             /
             {{t "pages.certifications.certification.details.v3.more-informations.labels.total-numberof-questions"}}
           </dt>
