@@ -974,7 +974,7 @@
               "element": {
                 "id": "b48e6ebb-8242-4fb3-b924-556e6b814e8c",
                 "type": "qrocm",
-                "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a <strong>modifié</strong>, <strong>restreint</strong> ou <strong>refusé</strong> sa réponse à cette question ?</p>",
+                "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a refusé de répondre à cette question ?</p>",
                 "proposals": [
                   {
                     "input": "Sélectionnez le logiciel d'IA",
@@ -1045,8 +1045,8 @@
               "element": {
                 "id": "37b1608e-ba6e-40e6-8ed4-abe29849567b",
                 "type": "expand",
-                "title": "Indice 3",
-                "content": "<p>Si vous recevez le message&nbsp;« Oups, erreur temporaire » c'est potentiellement qu'un logiciel IA ne peux pas donner de réponse à votre question.&nbsp;</p>"
+                "title": "Indice 2",
+                "content": "<p>Si vous recevez le message&nbsp;« Oups, erreur temporaire » c'est potentiellement qu'un logiciel IA ne peut pas donner de réponse à votre question.&nbsp;</p>"
               }
             },
             {
@@ -1054,7 +1054,7 @@
               "element": {
                 "id": "6faee291-d8b3-4b8f-9afe-077fc8c6c55b",
                 "type": "expand",
-                "title": "Indice 2",
+                "title": "Indice 3",
                 "content": "<p>Le 4 juin 1989 correspond à la fin d’un mouvement de manifestations étudiantes à Pékin. Cet épisode de l’histoire chinoise contemporaine est traité différemment selon les contextes politiques et médiatiques.</p>"
               }
             }
