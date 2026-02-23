@@ -19,27 +19,138 @@
       "type": "blank",
       "grains": [
         {
-          "id": "5f7badec-9ffd-4e99-99d6-05aa3d978343",
+          "id": "b3ac67ab-9ff8-4a30-86b0-9fa8a2c57c1b",
           "type": "discovery",
-          "title": "capacity-calculation",
+          "title": "analyse-mails-phishing",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "5335cbac-503c-4aa0-a984-8c07897ff8e4",
+                "id": "3621eccb-8169-44f3-beeb-3a91e9344152",
                 "type": "text",
-                "content": "<p>capacity-calculation</p>"
+                "content": "<p>analyse-mails-phishing</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "4b7eb96e-134c-4b65-9513-cd57d9ed1e89",
+                "id": "70caf63a-4f06-4372-b9fb-72231b757466",
                 "type": "custom",
                 "instruction": "",
-                "tagName": "capacity-calculation",
+                "tagName": "analyse-mails-phishing",
                 "props": {
-                  "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
+                  "mails": [
+                    {
+                      "subject": "Votre nouvel avis d’imposition est disponible",
+                      "from": {
+                        "name": "Impost.g0uv",
+                        "address": "no-reply@impost.g0uv.fr"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Votre avis d’imposition est désormais en ligne.",
+                            "Pour consulter rapidement,",
+                            "merci de vous connecter à votre espace particulier via le lien ci-dessous."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Accéder à mon espace particulier"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Cordialement,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Service des impôts"]
+                        }
+                      ],
+                      "answers": ["from.name", "from.address"],
+                      "correctFeedback": "Le nom de l’expéditeur est orthographié ‘impost.g0uv’ au lieu de ‘impots.gouv’. Les erreurs dans les noms ou dans les adresses mail sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien l’orthographe du nom et de l’adresse d’expéditeur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Notification de facture impayée — EDF",
+                      "from": {
+                        "name": "EDF Service Client",
+                        "address": "support.edf-client@yxztbnc85de.ru"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous n’avons pas reçu le règlement de votre dernière facture.",
+                            "Veuillez consulter le détail et effectuer le paiement sécurisé",
+                            "dans les 48h pour éviter la suspension de votre abonnement."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Voir ma facture"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Merci,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["EDF — Service Client"]
+                        }
+                      ],
+                      "answers": ["from.address"],
+                      "correctFeedback": "La partie après l’arobase de l’adresse mail ‘yxztbnc85de.ru’ n’a aucun lien avec EDF ou la demande, et n’est même pas compréhensible. C’est un indicateur de hameçonnage.",
+                      "incorrectFeedback": "Concentrez-vous sur l’adresse mail de l’expediteur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Amende impayée - Service des infractions",
+                      "from": {
+                        "name": "Service des infractions",
+                        "address": "infractions@amendes-en-retard.com"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": ["Bonjour,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous vous informons que vous avez un retard de paiement d’une amende de 85€ auprès de l’Agence de Traitement Automatisé des Infractions (ANTAI).",
+                            "Référence de dossier : ML854YD9.",
+                            "Veuillez noter que si vous ne payez pas cette amende dans les prochaines 24 h,",
+                            "vous devrez payer une majoration à hauteur de 250€.",
+                            "Veuillez régulariser votre situation dans les plus brefs délais."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Payr mon amende"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Cordialement,"]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": ["Service des infractions de l’ANTAI"]
+                        }
+                      ],
+                      "answers": ["from.address"],
+                      "correctFeedback": "L’adresse de l’expéditeur ne correspond à aucun organisme officiel. Les incohérences dans les noms et les adresses mails sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien le nom et l’adresse de l’expéditeur. Retentez votre chance ! "
+                    }
+                  ]
                 }
               }
             }
@@ -66,6 +177,33 @@
                 "instruction": "",
                 "tagName": "calcul-impact",
                 "props": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "5f7badec-9ffd-4e99-99d6-05aa3d978343",
+          "type": "discovery",
+          "title": "capacity-calculation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5335cbac-503c-4aa0-a984-8c07897ff8e4",
+                "type": "text",
+                "content": "<p>capacity-calculation</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4b7eb96e-134c-4b65-9513-cd57d9ed1e89",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "capacity-calculation",
+                "props": {
+                  "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
+                }
               }
             }
           ]
@@ -351,170 +489,6 @@
           ]
         },
         {
-          "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
-          "type": "discovery",
-          "title": "message-conversation",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "c61b2ffd-6cd0-4b69-a2c4-d00f04e4323b",
-                "type": "text",
-                "content": "<p>message-conversation</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "835cbd72-783a-4306-9317-74b39fcdc8a2",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "message-conversation",
-                "props": {
-                  "title": "Confessions nocturnes",
-                  "messages": [
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ouais c'est qui là ?"
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, c'est Vi ouvre moi."
-                    },
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ça va Vi ?"
-                    },
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Non, ça va pas non."
-                    },
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ben dis-moi, qu'est qu'il y a ?"
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, assieds-toi faut que je te parle..."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "J'ai passé ma journée dans le noir."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
-                    }
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
-          "type": "discovery",
-          "title": "image-quiz simple",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "a1f5e147-ea8c-4046-8020-f21c28529389",
-                "type": "text",
-                "content": "<p>image-quiz à choix simple</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "image-quiz",
-                "props": {
-                  "name": "nouveau_motdepasse.name",
-                  "maxChoicesPerLine": 2,
-                  "hideChoicesName": true,
-                  "orderChoices": false,
-                  "imageChoicesSize": "large",
-                  "choices": [
-                    {
-                      "name": "Rima : J’utilise un mot de passe fort. J’utilise ce mot de passe uniquement pour mon compte Papotix.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp1.DeI6JOCC_1phss6.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "different"
-                    },
-                    {
-                      "name": "Émilio : J’utilise le même mot de passe pour tous mes comptes. Ce mot de passe est fort.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp2.AoNG9BXB_3dFjD.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "identique"
-                    },
-                    {
-                      "name": "Mathilde : J’utilise le nom du site comme mot de passe : papotix.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp3.Bz8igQ2L_Z2dxnC6.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "nomsite"
-                    },
-                    {
-                      "name": "Lorris : J’utilise un mot de passe courant : bonjour.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp4.C8nS-REk_10WA8f.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "courant"
-                    }
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
           "id": "04f4ebb5-bf91-42c7-8f77-68aafbc76dcc",
           "type": "discovery",
           "title": "image-quiz multiple",
@@ -611,6 +585,87 @@
                         "height": 460
                       },
                       "response": "6"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
+          "type": "discovery",
+          "title": "image-quiz simple",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a1f5e147-ea8c-4046-8020-f21c28529389",
+                "type": "text",
+                "content": "<p>image-quiz à choix simple</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "image-quiz",
+                "props": {
+                  "name": "nouveau_motdepasse.name",
+                  "maxChoicesPerLine": 2,
+                  "hideChoicesName": true,
+                  "orderChoices": false,
+                  "imageChoicesSize": "large",
+                  "choices": [
+                    {
+                      "name": "Rima : J’utilise un mot de passe fort. J’utilise ce mot de passe uniquement pour mon compte Papotix.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp1.DeI6JOCC_1phss6.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "different"
+                    },
+                    {
+                      "name": "Émilio : J’utilise le même mot de passe pour tous mes comptes. Ce mot de passe est fort.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp2.AoNG9BXB_3dFjD.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "identique"
+                    },
+                    {
+                      "name": "Mathilde : J’utilise le nom du site comme mot de passe : papotix.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp3.Bz8igQ2L_Z2dxnC6.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "nomsite"
+                    },
+                    {
+                      "name": "Lorris : J’utilise un mot de passe courant : bonjour.",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp4.C8nS-REk_10WA8f.webp",
+                        "loading": "lazy",
+                        "decoding": "async",
+                        "fetchpriority": "auto",
+                        "width": 1000,
+                        "height": 527
+                      },
+                      "response": "courant"
                     }
                   ]
                 }
@@ -935,6 +990,89 @@
                     {
                       "prompt": "Liste-moi 10 noms de chiens.",
                       "response": "1. Tokyo<br>2. Nala<br>3. Milou<br>4. Sushi<br>5. Luna<br>6. Apéro<br>7. Simba<br>8. Paco<br>9. Bart<br>10. Cookie"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
+          "type": "discovery",
+          "title": "message-conversation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "c61b2ffd-6cd0-4b69-a2c4-d00f04e4323b",
+                "type": "text",
+                "content": "<p>message-conversation</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "835cbd72-783a-4306-9317-74b39fcdc8a2",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "title": "Confessions nocturnes",
+                  "messages": [
+                    {
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Ouais c'est qui là ?"
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Mel, c'est Vi ouvre moi."
+                    },
+                    {
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Ça va Vi ?"
+                    },
+                    {
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Non, ça va pas non."
+                    },
+                    {
+                      "userName": "Mel",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Ben dis-moi, qu'est qu'il y a ?"
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Mel, assieds-toi faut que je te parle..."
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "J'ai passé ma journée dans le noir."
+                    },
+                    {
+                      "userName": "Vita",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
                 }
