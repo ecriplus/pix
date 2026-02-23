@@ -1,4 +1,4 @@
-import Brevo from '@getbrevo/brevo';
+import { BrevoClient } from '@getbrevo/brevo';
 import _ from 'lodash';
 
 import { config } from '../../../config.js';
@@ -40,18 +40,15 @@ class BrevoProvider extends MailingProvider {
   constructor() {
     super();
 
-    this._client = BrevoProvider.createBrevoSMTPApi();
-    this._client.authentications['apiKey'].apiKey = mailing.brevo.apiKey;
-  }
-
-  static createBrevoSMTPApi() {
-    return new Brevo.TransactionalEmailsApi();
+    this._client = new BrevoClient({
+      apiKey: mailing.brevo.apiKey,
+    });
   }
 
   async sendEmail(options) {
     const payload = _formatPayload(options);
     try {
-      return await this._client.sendTransacEmail(payload);
+      return await this._client.transactionalEmails.sendTransacEmail(payload);
     } catch (err) {
       if (err?.body?.code === 'invalid_parameter') {
         throw new MailingProviderInvalidEmailError(err?.body?.message);
