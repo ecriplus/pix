@@ -524,7 +524,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier2/carte_id.svg",
                 "alt": "Carte d’identité de Jean-Tobias Piéchaud",
-                "alternativeText": "<p>Carte d’identité contenant les informations suivantes&nbsp;:</p><ul><li>Nom&nbsp;:Piéchaud</li><li>Prénom&nbsp;:Jean-Tobias </li><li>Date de naissance&nbsp;:26/03/1984</li><li>Téléphone&nbsp;: 06 39 98 12 74</li><li>Mail&nbsp;: j-t.piechaud@pixmail.org</li></ul>",
+                "alternativeText": "<p>Carte d’identité contenant les informations suivantes&nbsp;:</p><ul><li>Nom&nbsp;: Piéchaud</li><li>Prénom&nbsp;: Jean-Tobias </li><li>Date de naissance&nbsp;: 26/03/1984</li><li>Téléphone&nbsp;: 06 39 98 12 74</li><li>Mail&nbsp;: j-t.piechaud@pixmail.org</li></ul>",
                 "legend": "",
                 "licence": ""
               }
