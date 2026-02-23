@@ -126,7 +126,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       sessionNumber,
       accessCode,
       invigilatorCode,
-      certificationKey,
+      certificationKey = 'CORE',
       rightWrongAnswersSequence,
       pixAppPage,
     }: PassCertificationExamParams) => {
@@ -263,7 +263,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidateAndPassExam: async ({ enrollCandidate, passCertificationExam }, use) => {
     const enrollCandidateAndPassExam = async ({
       testRef,
-      certificationKey,
+      certificationKey = 'CORE',
       certifiableUserData,
       rightWrongAnswersSequence,
       pixAppPage,
