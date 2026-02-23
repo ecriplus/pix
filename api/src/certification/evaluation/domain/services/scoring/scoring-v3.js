@@ -104,17 +104,17 @@ function scoreCertification({
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
 }) {
-  const shouldDowngradeCapacity = _shouldDowngradeCapacity({
+  const downgradeCapacity = shouldDowngradeCapacity({
     maximumAssessmentLength,
     answers: assessmentSheet.answers,
     abortReason: assessmentSheet.abortReason,
     minimumAnswersRequiredToValidateACertification,
   });
 
-  const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity });
+  const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity: downgradeCapacity });
   const pixScore = scoringV3Algorithm.computePixScoreFromCapacity({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
-  const status = _isCertificationRejected({
+  const status = isCertificationRejected({
     answers: assessmentSheet.answers,
     abortReason: assessmentSheet.abortReason,
     minimumAnswersRequiredToValidateACertification,
@@ -159,21 +159,21 @@ function _scoreDoubleCertification({ assessmentSheet, assessmentResult, cleaScor
   });
 }
 
-const _shouldDowngradeCapacity = ({
+function shouldDowngradeCapacity({
   maximumAssessmentLength,
   answers,
   abortReason,
   minimumAnswersRequiredToValidateACertification,
-}) => {
+}) {
   return (
     answers.length >= minimumAnswersRequiredToValidateACertification &&
     answers.length < maximumAssessmentLength &&
     abortReason === ABORT_REASONS.CANDIDATE
   );
-};
+}
 
-const _isCertificationRejected = ({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) => {
+function isCertificationRejected({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) {
   // Dans la vraie vie, en cas de nombre de réponses insuffisant, la certif est rejetée seulement si l'abortReason est "candidate"
   // ici on ne regarde pas la valeur de abortReason ce qui n'est pas très clair. Le coup est rattrapé plus tard dans createV3AssessmentResult ( et c'est moche )
   return answers.length < minimumAnswersRequiredToValidateACertification && abortReason;
-};
+}
