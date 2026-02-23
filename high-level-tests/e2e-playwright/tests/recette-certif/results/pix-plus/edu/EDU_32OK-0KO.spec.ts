@@ -1,21 +1,17 @@
-import { expect, test } from '../../../../fixtures/certification/index.ts';
-import { changeCandidateAnswers } from '../../../../helpers/certification/db.ts';
+import { expect, test } from '../../../../../fixtures/certification/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
-  checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
-} from '../../../../helpers/certification/utils.ts';
-import { CERTIFICATIONS_DATA } from '../../../../helpers/db-data.ts';
-import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
-import { HomePage } from '../../../../pages/pix-app/index.ts';
-import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
+} from '../../../../../helpers/certification/utils.ts';
+import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
+import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
+import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'PRO_CLEA_32OK-0KO_Rescore';
+const testRef = 'EDU_32OK-0KO';
 const snapshotPath = `recette-certif/${testRef}.json`;
-const certificateBasePath = `recette-certif/${testRef}.certificat`;
 
 test(
-  `${testRef} - User takes a certification test for a PRO certification center, CLEA subscription. 32 right answers. Certification is rescored`,
+  `${testRef} - User takes a certification test for a Pix+ Edu subscription. 32 right answers`,
   {
     tag: ['@snapshot'],
     annotation: [
@@ -42,8 +38,8 @@ test(
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
     const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
+      certificationKey: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
       rightWrongAnswersSequence: Array(32).fill(true),
-      certificationKey: CERTIFICATIONS_DATA.CLEA,
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });
@@ -68,7 +64,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -86,7 +82,8 @@ test(
       await pixAdminRoleCertifPage
         .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
         .click();
-      const certificationInformationPage = await test.step('Check certification information', async () => {
+
+      await test.step('Check certification information', async () => {
         const certificationListPage = await sessionPage.goToCertificationListPage();
         const certificationData = await certificationListPage.getCertificationData();
         expect(certificationData.length).toBe(1);
@@ -94,20 +91,13 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Validée',
-          Score: '895',
+          Score: '',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Double Certification Pix/CléA Numérique',
+          'Certification passée': 'Pix+ Édu 1er degré',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          score: '895 Pix',
-        });
-        const cleaResult = await certificationInformationPage.getCleaResult();
-        expect(cleaResult).toBe('Validée');
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           nbAnsweredQuestionsOverTotal: '32/32',
           nbQuestionsOK: 32,
@@ -115,47 +105,9 @@ test(
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
         });
-        return certificationInformationPage;
-      });
-      await test.step('Rescore certification and check for scoring', async () => {
-        await test.step('Alter candidate answers directly in BDD to have half right, half wrong, to demonstrate re-scoring', async () => {
-          const alternateRightWrongSequence = Array.from(Array(32).fill(true), (_, i) => i % 2 === 0);
-          await changeCandidateAnswers(parseInt(certificationNumber), alternateRightWrongSequence);
-        });
-
-        await test.step('Rescore certification', async () => {
-          await certificationInformationPage.rescoreCertification();
-          const cleaResult = await certificationInformationPage.getCleaResult();
-          expect(cleaResult).toBe('Validée');
-          await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-            sessionNumber,
-            status: 'Validée',
-            score: '806 Pix',
-          });
-        });
       });
     });
 
-    await test.step('Publish session', async () => {
-      const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      await sessionsMainPage.publishSession(sessionNumber);
-    });
-
-    await test.step('User checks their certification result', async () => {
-      await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
-      const homePage = new HomePage(pixAppCertifiablePage);
-      const certificationsListPage = await homePage.goToMyCertifications();
-      const status = await certificationsListPage.getCertificationStatus(certificationNumber);
-      expect(status).toBe('Obtenue');
-      const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
-      const { pixScoreObtained, pixLevelReached, isCleaObtained } = await certificationResultPage.getResultInfo();
-      expect(pixScoreObtained).toEqual('PIX 806 CERTIFIÉS');
-      expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
-      expect(isCleaObtained).toBe(true);
-      const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
-
-      await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
-    });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },
 );

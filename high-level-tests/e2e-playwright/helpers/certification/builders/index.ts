@@ -3,3 +3,4 @@ export { buildCoreVersion } from './build-core-version.ts';
 export { buildCpfData } from './build-cpf-data.ts';
 export { buildPixAdminUser } from './build-pix-admin-user.ts';
 export { buildPixCertifUser } from './build-pix-certif-user.ts';
+export { buildPixPlusEduData } from './build-pix-plus-edu-data.ts';

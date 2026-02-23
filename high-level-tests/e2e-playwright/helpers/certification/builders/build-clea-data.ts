@@ -6,7 +6,7 @@ import { CERTIFICATIONS_DATA } from '../../db-data.ts';
 export async function buildCleaData(knex: Knex) {
   const { id: cleaCertificationId } = await knex('complementary-certifications')
     .select('id')
-    .where({ key: CERTIFICATIONS_DATA.CLEA.key })
+    .where({ key: CERTIFICATIONS_DATA.CLEA })
     .first();
   const cleaTargetProfileId = await buildTargetProfile(knex);
   const [{ id: cleaBadgeId }] = await knex('badges')
@@ -15,7 +15,7 @@ export async function buildCleaData(knex: Knex) {
       message:
         'Bravo ! Vous maîtrisez les compétences indispensables pour utiliser le numérique en milieu professionnel. Pour valoriser vos compétences avec une double certification Pix-CléA numérique, renseignez-vous auprès de votre conseiller ou de votre formateur.',
       altMessage: 'Prêt pour le CléA numérique',
-      key: CERTIFICATIONS_DATA.CLEA.key,
+      key: CERTIFICATIONS_DATA.CLEA,
       imageUrl: 'https://assets.pix.org/badges/Logos_badge_Prêt-CléA_Num NEW 2020.svg',
       title: 'Prêt pour le CléA numérique V2',
       isCertifiable: true,
