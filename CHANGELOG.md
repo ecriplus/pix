@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.337.0](https://github.com/1024pix/pix/compare/v5.336.0...v5.337.0) (2026-02-23)
+
+### :rocket: Amélioration
+
+- [#15146](https://github.com/1024pix/pix/pull/15146) Ajouter l'italien sur Pix App et Pix Orga (PIX-21502) 
+- [#15197](https://github.com/1024pix/pix/pull/15197) modifs relecture experts 
+- [#15177](https://github.com/1024pix/pix/pull/15177) Rendre le champ organizationLearnerTypeId obligatoire pour la création et MAJ d'organisations (PIX-21332). 
+- [#15189](https://github.com/1024pix/pix/pull/15189) Tmp datacenterava - suppr une partie texte à trou 
+- [#15187](https://github.com/1024pix/pix/pull/15187) Update IAGenFonction_Ava.json - coquilles 
+
+### :building_construction: Tech
+
+- [#15142](https://github.com/1024pix/pix/pull/15142) Ajouter la propriété headerTemplate lors de la génération du schéma JSON des modules (PIX-21544) 
+- [#15196](https://github.com/1024pix/pix/pull/15196) Ajouter minimumAnswersRequiredToValidateACertification dans les seeds certif (PIX-21685). 
+- [#14912](https://github.com/1024pix/pix/pull/14912) Historisation du paramètre minimumAnswersRequiredToValidateACertification dans la version de certification (PIX-21280) 
+- [#15169](https://github.com/1024pix/pix/pull/15169) Mettre à jour le script api qui remonte les infos modules pour pix-db-replication (PIX-21624) 
+- [#15202](https://github.com/1024pix/pix/pull/15202) Permettre un lancement parallélisé + hot reload sur les tests playwright de certification 
+- [#15186](https://github.com/1024pix/pix/pull/15186) Retire les pdf d'attestations de la base de code 
+- [#15188](https://github.com/1024pix/pix/pull/15188) Suppression du bounded context déprécié "scoring" (PIX-21670) 
+- [#15013](https://github.com/1024pix/pix/pull/15013) Versionner la notion de "Niveau maximal atteignable" (PIX-21351) 
+
+### :arrow_up: Montée de version
+
+- [#15192](https://github.com/1024pix/pix/pull/15192) Monté de version d'épreuves-components en v2.9.0
+
 # [5.336.0](https://github.com/1024pix/pix/compare/v5.335.0...v5.336.0) (2026-02-20)
 
 ### :rocket: Amélioration
