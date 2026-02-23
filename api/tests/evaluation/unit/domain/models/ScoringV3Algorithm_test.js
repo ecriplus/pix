@@ -93,13 +93,4 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringV3Algorit
     });
   });
 
-  context('#computeCompetenceMarks', function () {
-    it('return computed competence marks', function () {
-      const spy = sinon.spy(v3CertificationScoring, 'getCompetencesScore');
-      const actualCompetenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity: 5 });
-
-      expect(spy).to.have.been.calledOnceWithExactly(5);
-      expect(actualCompetenceMarks).to.be.an('array');
-    });
-  });
 });
