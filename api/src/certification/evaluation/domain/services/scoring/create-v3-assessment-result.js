@@ -16,14 +16,12 @@ export function createV3AssessmentResult({
     return AssessmentResultFactory.buildCancelledAssessmentResult({
       juryId,
       pixScore,
-      reproducibilityRate: 100,
       assessmentId,
     });
   }
   if (isRejectedForFraud) {
     return AssessmentResultFactory.buildFraud({
       pixScore,
-      reproducibilityRate: 100,
       assessmentId,
       juryId,
     });
@@ -35,14 +33,12 @@ export function createV3AssessmentResult({
     if (isAbortReasonTechnical) {
       return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
         pixScore,
-        reproducibilityRate: 100,
         assessmentId,
         juryId,
       });
     } else {
       return AssessmentResultFactory.buildLackOfAnswers({
         pixScore,
-        reproducibilityRate: 100,
         status,
         assessmentId,
         juryId,
@@ -53,7 +49,6 @@ export function createV3AssessmentResult({
   if (pixScore === 0) {
     return AssessmentResultFactory.buildRejectedDueToZeroPixScore({
       pixScore,
-      reproducibilityRate: 100,
       assessmentId,
       juryId,
       competenceMarks,
@@ -62,7 +57,6 @@ export function createV3AssessmentResult({
 
   return AssessmentResultFactory.buildStandardAssessmentResult({
     pixScore,
-    reproducibilityRate: 100,
     status,
     assessmentId,
     juryId,
