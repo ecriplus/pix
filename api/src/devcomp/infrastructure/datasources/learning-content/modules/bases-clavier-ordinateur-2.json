@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-clavier2/picto-1eremarche_clavier2.svg",
-    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous apprendrez à taper des caractères en appuyant sur deux touches en même temps&nbsp;: les majuscules ou la ponctuation par exemple.</p>",
+    "description": "<p>Pour taper certains caractères, il suffit d’appuyer une fois sur une touche. Pour d’autres c’est un peu plus compliqué ! <br>Dans ce module, vous allez apprendre à taper des caractères en appuyant sur deux touches en même temps&nbsp;: les majuscules ou la ponctuation par exemple.</p>",
     "duration": 30,
     "level": "novice",
     "objectives": [
@@ -32,7 +32,7 @@
               "element": {
                 "id": "5bfffb2d-05bb-4497-a9ad-7a5402a5108f",
                 "type": "text",
-                "content": "<p>Dans ce module, vous allez apprendre à utiliser les touches du clavier qui ont plusieurs caractères.</p>"
+                "content": "<p>Dans ce module, vous allez apprendre à utiliser les touches du clavier qui ont plusieurs caractères (lettres, chiffres, caractères spéciaux).</p>"
               }
             }
           ]
@@ -75,7 +75,7 @@
                     "inputType": "text",
                     "size": 24,
                     "display": "inline",
-                    "placeholder": "Tapez ici",
+                    "placeholder": "Tapez ici.",
                     "ariaLabel": "zone de saisie",
                     "tolerances": [],
                     "solutions": ["voilà le zèbre déçu", "« voilà le zèbre déçu »"]
@@ -107,7 +107,7 @@
                 "id": "7e518859-11db-484a-bd2f-67bc56b4b094",
                 "type": "expand",
                 "title": "Indice 1",
-                "content": "<p>Cliquez dans la zone de texte pour commencer à taper</p>"
+                "content": "<p>Cliquez dans la zone de texte pour commencer à taper.</p>"
               }
             },
             {
@@ -281,7 +281,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier2/maj-schema_touches.svg",
                 "alt": "Schéma d’une touche comportant deux caractères. ",
-                "alternativeText": "<ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c’est le 1 (qui est présent en haut de la touche) qui est tapé à l’écran.</li><li>Quand on appuie seulement sur cette touche, c’est le &amp; (qui est présent en bas de la touche) qui est tapé à l’écran.</li></ul>",
+                "alternativeText": "<p>L’exemple de la touche qui contient le chiffre 1 et le caractère &.</p><ul><li>Quand on appuie sur cette touche en appuyant en même temps sur la touche Majuscule, c’est le 1 (qui est présent en haut de la touche) qui est tapé à l’écran.</li><li>Quand on appuie seulement sur cette touche, c’est le &amp; (qui est présent en bas de la touche) qui est tapé à l’écran.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -362,7 +362,7 @@
                     "inputType": "text",
                     "size": 50,
                     "display": "inline",
-                    "placeholder": "recopiez la phrase ",
+                    "placeholder": "Tapez ici.",
                     "ariaLabel": "zone de saisie",
                     "tolerances": ["t1"],
                     "solutions": ["Coucou, peux-tu mettre ces 3 pommes à cet endroit ?"]
@@ -375,7 +375,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse. 🍎🍎🍎</p>",
-                    "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. Elle vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
+                    "diagnosis": "<p>Pour taper les caractères spéciaux, faites bien attention à leur position sur la touche. La position vous indique si vous avez besoin d’utiliser la touche majuscule ⇧.</p>"
                   }
                 }
               }
@@ -392,7 +392,7 @@
               "element": {
                 "id": "75652d09-9acc-4e3d-9af8-2c12b63fba2a",
                 "type": "text",
-                "content": "<p>Sur certaines touches, il y a 3 caractères. Pour taper le 3ème caractère, apprenez à utiliser la touche Alt Gr.</p>"
+                "content": "<p>Sur certaines touches, il y a 3 caractères. Pour taper le 3e caractère, apprenez à utiliser la touche <strong>Alt Gr</strong>.</p>"
               }
             }
           ]
@@ -439,7 +439,7 @@
               "element": {
                 "id": "423d899e-e24d-4666-8f74-17c137279122",
                 "type": "text",
-                "content": "<p>Pour taper le caractère situé en bas à droite sur la touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
+                "content": "<p>Pour taper le caractère situé en bas à droite sur une touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
               }
             },
             {
@@ -514,7 +514,7 @@
               "element": {
                 "id": "ba5be535-ee02-4cc9-bc1b-1fdcbc2ccbb3",
                 "type": "text",
-                "content": "<p>Voici la carte d’identité de Jean-Tobias Piéchaud.</p>"
+                "content": "<p>Observez la carte d’identité suivante.</p>"
               }
             },
             {
@@ -524,7 +524,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier2/carte_id.svg",
                 "alt": "Carte d’identité de Jean-Tobias Piéchaud",
-                "alternativeText": "<p>Carte d’identité contenant les informations suivantes&nbsp;:</p><ul><li>Piéchaud, </li><li>Jean-Tobias </li><li>26/03/1984</li><li>téléphone&nbsp;: 06 39 98 12 74</li><li>mail&nbsp;: j-t.piechaud@pixmail.org</li></ul>",
+                "alternativeText": "<p>Carte d’identité contenant les informations suivantes&nbsp;:</p><ul><li>Nom&nbsp;:Piéchaud</li><li>Prénom&nbsp;:Jean-Tobias </li><li>Date de naissance&nbsp;:26/03/1984</li><li>Téléphone&nbsp;: 06 39 98 12 74</li><li>Mail&nbsp;: j-t.piechaud@pixmail.org</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -579,7 +579,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier2/recap_touches_v2.svg",
                 "alt": "",
-                "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche,&nbsp; il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
+                "alternativeText": "<ul><li>Pour taper un caractère en haut de la touche, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche du caractère.</li><li>Pour taper un caractère en bas à gauche de la touche, il faut uniquement appuyer sur la touche du caractère.</li><li>Pour taper un caractère en bas à droite de la touche, il faut appuyer sur la touche Alt Gr en même temps que la touche du caractère.</li><li>Pour taper une majuscule, il faut appuyer sur la touche majuscule ⇧ en même temps que la touche lettre.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -589,7 +589,7 @@
               "element": {
                 "id": "e51added-60dc-453b-98ed-b3230711155e",
                 "type": "text",
-                "content": "<p>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier2/pix-fiche-revision-premieres-marches-clavier-2.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a></p>"
+                "content": "<p>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier2/pix-fiche-revision-premieres-marches-clavier-2.pdf\" target=\"_blank\">ouvrir votre fiche de synthèse</a></p>"
               }
             }
           ]
@@ -604,7 +604,7 @@
               "element": {
                 "id": "17b65b49-03cf-4626-a651-dc6372c107ba",
                 "type": "text",
-                "content": "<p>Pour explorer les différentes touches, testez-vous dans ce mini-jeu.</p>"
+                "content": "<p>Pour explorer les différentes touches, testez-vous dans le mini-jeu suivant.</p>"
               }
             }
           ]

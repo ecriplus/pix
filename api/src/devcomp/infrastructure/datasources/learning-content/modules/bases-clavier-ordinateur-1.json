@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg",
-    "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. ⌨️<br>Vous apprendrez à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
+    "description": "<p>Dans ce module, découvrez ce qu’est un clavier et à quoi il sert. ⌨️<br>Vous allez apprendre à taper des mots simples et à modifier du texte.<br>Pour ce module, vous devez déjà savoir utiliser une souris d’ordinateur.</p>",
     "duration": 30,
     "level": "novice",
     "objectives": [
@@ -47,7 +47,7 @@
               "element": {
                 "id": "bcd20400-781c-4b7d-82c3-d348ddef88d2",
                 "type": "text",
-                "content": "<p>Le clavier fait partie de l’équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou disposition des touches.<br></p><p><br>Il y a différents types de clavier&nbsp;: </p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fil,</li> <li>les claviers inclus dans un ordinateur.</li> </ul>"
+                "content": "<p>Le clavier fait partie de l’équipement de base d’un ordinateur, avec la souris. <br>Le clavier est composé de touches sur lesquelles on peut appuyer.<br> Les claviers peuvent avoir différentes formes, tailles, couleurs ou dispositions des touches.<br></p><p><br>Il y a différents types de claviers&nbsp;: </p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fil,</li> <li>les claviers inclus dans un ordinateur.</li> </ul>"
               }
             },
             {
@@ -57,7 +57,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/claviers.png",
                 "alt": "Photographie dont le contenu est détaillé dans l’alternative textuelle",
-                "alternativeText": "<p>Photographies de plusieurs types de claviers de taille et de forme différentes&nbsp;:</p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fils,</li> <li>les claviers inclus dans unordinateur.</li> </ul>"
+                "alternativeText": "<p>Photographies de plusieurs types de claviers de tailles et de formes différentes&nbsp;:</p> <ul> <li>les claviers avec un fil,</li> <li>les claviers sans fils,</li> <li>les claviers inclus dans unordinateur.</li> </ul>"
               }
             },
             {
@@ -95,7 +95,7 @@
               "element": {
                 "id": "5f031cda-3e4c-4f80-9327-eb0f8df8f7f1",
                 "type": "text",
-                "content": "<p>À présent, vous allez découvrir les principales zones du clavier.</p>"
+                "content": "<p>À présent, vous allez découvrir les principales zones d’un clavier.</p>"
               }
             }
           ]
@@ -110,7 +110,7 @@
               "element": {
                 "id": "d6bb5ad8-bd97-4116-839d-425a444fcdfd",
                 "type": "text",
-                "content": "<p>Il y a 3 zones principales sur un clavier&nbsp;:</p><ul><li>lettres de l’alphabet</li><li>chiffres, caractères spéciaux et accents</li><li>flèches directionnelles</li></ul>"
+                "content": "<p>Il y a 3 zones principales sur un clavier&nbsp;:</p><ul><li>les lettres de l’alphabet,</li><li>les chiffres, caractères spéciaux et accents,</li><li>les flèches directionnelles.</li></ul>"
               }
             },
             {
@@ -120,7 +120,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/clavier_3zones.svg",
                 "alt": "Schéma détaillé dans l’alternative textuelle",
-                "alternativeText": "<p>Schéma des 3 zones principales sur un clavier&nbsp;:</p><ul><li>chiffres, caractères spéciaux et accents</li><li>lettres de l’alphabet</li><li>flèches directionnelles</li></ul>"
+                "alternativeText": "<p>Schéma des 3 zones principales sur un clavier&nbsp;:</p><ul><li>les chiffres, caractères spéciaux et accents,</li><li>les lettres de l’alphabet,</li><li> les flèches directionnelles.</li></ul>"
               }
             },
             {
@@ -153,7 +153,7 @@
                 "type": "custom-draft",
                 "title": "Élément interactif",
                 "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-zonesv2/index.html",
-                "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇 Préparez-vous à utiliser votre clavier et suivez les instructions pour taper vos premières touches.</p>",
+                "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇 Préparez-vous à utiliser votre clavier et suivez les instructions pour taper sur vos premières touches.</p>",
                 "height": 432
               }
             }
@@ -184,7 +184,7 @@
               "element": {
                 "id": "e4c30736-5efe-4a0d-bacc-b41e3546d47c",
                 "type": "text",
-                "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p><p>👇 Voici les touches essentielles&nbsp;:</p>"
+                "content": "<p>Pour taper et modifier du texte, il faut utiliser des touches de différentes zones.</p><p>👇 Voici ci-dessous les touches essentielles d'un clavier&nbsp;:</p>"
               }
             },
             {
@@ -194,7 +194,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/clavier_5zones_vector.svg",
                 "alt": "Schéma détaillé dans l’alternative textuelle",
-                "alternativeText": "<p>Les touches du module&nbsp;:</p><ul><li>les accents</li><li>effacer et entrée</li><li>les lettres</li><li>l’espace</li><li>les flèches directionnelles</li></ul>"
+                "alternativeText": "<p>Les touches essentielles d’un clavier&nbsp;:</p><ul><li>les accents,</li><li>effacer et entrée,</li><li>les lettres,</li><li>l’espace,</li><li>les flèches directionnelles.</li></ul>"
               }
             }
           ]
@@ -242,7 +242,7 @@
               "element": {
                 "id": "18c6f518-9e97-4e94-a5f3-e986cd52c219",
                 "type": "text",
-                "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots. <br>À présent, découvrez la zone de texte.</p>"
+                "content": "<p>Bravo ! 🎉 Vous avez tapé vos premiers mots. <br>À présent, découvrez ce qu'est la zone de texte.</p>"
               }
             }
           ]
@@ -266,8 +266,7 @@
                 "id": "d970ee82-b300-437f-acab-c5209b515818",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/fleche-curseur.svg",
-                "alt": "",
-                "alternativeText": ""
+                "alt": ""
               }
             },
             {
@@ -284,8 +283,7 @@
                 "id": "1cc33472-3576-4e95-ac60-2eb49f57d113",
                 "type": "short-video",
                 "title": "le curseur de la zone de texte",
-                "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-chatmiaou.mp4",
-                "transcription": "&nbsp; &nbsp; &nbsp; &nbsp;"
+                "url": "https://assets.pix.org/modules/1emarche-clavier1/gif-video-chatmiaou.mp4"
               }
             }
           ]
@@ -310,7 +308,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/phrase-cornichons.svg",
                 "alt": "Phrase dans l’alternative textuelle",
-                "alternativeText": "La phrase est&nbsp;: «&nbsp;Le bocal de cornichons est vide.&nbsp;».",
+                "alternativeText": "La phrase est&nbsp;: «&nbsp;Le bocal de cornichons est vide.&nbsp;»",
                 "legend": "",
                 "licence": ""
               }
@@ -359,11 +357,11 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonne réponse ! 🥒</p>",
-                    "diagnosis": "<p>Bravo ! Vous avez bien complété la phrase.</p>"
+                    "state": "<p>Bravo ! 🥒</p>",
+                    "diagnosis": "<p>Vous avez bien complété la phrase.</p>"
                   },
                   "invalid": {
-                    "state": "<p>Mauvaise réponse. 🍽️</p>",
+                    "state": "<p>Pas exactement. 🍽️</p>",
                     "diagnosis": "<p> Bien tenté ! Mais la phrase n’est pas identique. Réessayez !</p>"
                   }
                 }
@@ -396,7 +394,7 @@
               "element": {
                 "id": "f42a1f10-87a9-4607-bb81-9cde56c1d047",
                 "type": "text",
-                "content": "<p>Pour écrire et modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p>Voici les touches les plus utiles&nbsp;:</p><ul> <li><strong>Espace</strong></li> <li><strong>Entrée</strong></li> <li><strong>Effacer</strong></li> <li><strong>Les flèches directionnelles</strong></li> </ul> "
+                "content": "<p>Pour écrire et modifier du texte, il faut utiliser d’autres touches que les touches lettres.</p><br><p>Voici les touches les plus utiles&nbsp;:</p><ul> <li><strong>l’espace,</strong></li> <li><strong>entrée,</strong></li> <li><strong>effacer,</strong></li> <li><strong>les flèches directionnelles,</strong></li> </ul> "
               }
             },
             {
@@ -433,7 +431,7 @@
                     {
                       "id": "b65c1d05-27b9-429e-b8aa-b63bef94c67e",
                       "type": "text",
-                      "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne&nbsp;:<br>Quand vous êtes en train de taper du texte et que vous voulez écrire sur la ligne suivante, tapez sur la touche Entrée pour déplacer le curseur vers la ligne d’en dessous.</p>"
+                      "content": "<p>La touche <strong>Entrée </strong>permet d’aller à la ligne.<br>Quand vous êtes en train de taper du texte et que vous voulez écrire sur la ligne suivante, tapez sur la touche Entrée pour déplacer le curseur vers la ligne d’en dessous.</p>"
                     },
                     {
                       "id": "82fc806d-0d75-4202-85af-dfe7fca24315",
@@ -465,7 +463,7 @@
                     {
                       "id": "6dee7fcf-7faf-4748-9c56-70e93d7d4914",
                       "type": "text",
-                      "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>Flèches directionnelles</strong>.</p><p>➡️Par exemple&nbsp;: vous avez oublié d’aller à la ligne entre deux mots, vous pouvez déplacer le curseur entre les deux mots pour appuyer sur la touche Entrée et aller à la ligne.</p>"
+                      "content": "<p>Pour déplacer le curseur de texte, vous pouvez utiliser les <strong>flèches directionnelles</strong>.</p><p>➡️Par exemple&nbsp;: vous avez oublié d’aller à la ligne entre deux mots, vous pouvez déplacer le curseur entre les deux mots pour appuyer sur la touche Entrée et aller à la ligne.</p>"
                     },
                     {
                       "id": "5d93c1b7-2f8d-4891-9443-9a2f86104f4e",
@@ -516,7 +514,7 @@
               "element": {
                 "id": "caedc436-3ab8-45a8-a4b5-c7ee5b4f38c6",
                 "type": "text",
-                "content": "<p>🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️En cas de difficulté, n’hésitez pas à demandez conseil à la personne qui vous accompagne.</p>"
+                "content": "<p>🙋🏽‍♂️ 🙋🏿‍♀️ 🙋‍♂️En cas de difficulté, n’hésitez pas à demander conseil à la personne qui vous accompagne.</p>"
               }
             }
           ]
@@ -531,7 +529,7 @@
               "element": {
                 "id": "d77ec00d-f3f0-4a22-9e90-c6dff041b780",
                 "type": "text",
-                "content": "<p>Résumons avant de passer à la suite&nbsp;:</p><ol><li><strong>La zone de text</strong><strong>e</strong> est une zone dans laquelle on peut taper du texte. Il faut<strong> cliquer dans cette zone</strong> avant de commencer à taper.</li><li>Les <strong>touches des lettres</strong> se trouvent au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont&nbsp;: <strong>Espace</strong>, <strong>Entrée </strong>et <strong>Effacer</strong>. Les <strong>flèches directionnelles</strong> permettent de déplacer le curseur de texte.</li></ol>"
+                "content": "<p>Résumons avant de passer à la suite&nbsp;:</p><ul><li>La <strong>zone de text</strong><strong>e</strong> est une zone dans laquelle on peut taper du texte. Il faut<strong> cliquer dans cette zone</strong> avant de commencer à taper.</li><li>Les <strong>touches des lettres</strong> se trouvent au centre du clavier.</li><li>Pour écrire et modifier du texte, les touches de base sont&nbsp;: <strong>Espace</strong>, <strong>Entrée </strong>et <strong>Effacer</strong>. Les <strong>flèches directionnelles</strong> permettent de déplacer le curseur de texte.</li></ul>"
               }
             },
             {
@@ -541,7 +539,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/recap1_4zones.svg",
                 "alt": "",
-                "alternativeText": "<p>Récapitulatif des touches&nbsp;: </p><ul><li>effacer</li><li>entrée</li><li>espace</li><li>les lettres</li><li>les flèches directionnelles</li></ul>",
+                "alternativeText": "<p>Récapitulatif des touches&nbsp;: </p><ul><li>effacer,</li><li>entrée,</li><li>espace,</li><li>les lettres,</li><li>les flèches directionnelles.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -552,7 +550,7 @@
                 "id": "388eb851-d9c2-4434-89a1-5879d80467b2",
                 "type": "expand",
                 "title": "🤔 Bon à savoir",
-                "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.🙌 Quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
+                "content": "<p> Pour taper du texte rapidement, il est conseillé d’utiliser ses deux mains.🙌 Mais quand on débute, ce n’est pas nécessaire.<br> Pensez aussi à ne pas taper trop fort sur les touches pour ne pas les abîmer.</p>"
               }
             }
           ]
@@ -591,8 +589,8 @@
                 "id": "b61388bd-29a7-40cb-b3f0-89ce7a0b5565",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/1emarche-clavier1/accents.svg",
-                "alt": "",
-                "alternativeText": ""
+                "alt": "schéma d'un clavier pointant des touches, détaillées dans l'alternative textuelle",
+                "alternativeText": "<ul><li>la touche 2 pour é,</li><li>la touche 7 pour è,</li><li>la touche 9 pour ç,</li><li>la touche 0 pour àé,</li><li>la touche % pour ù,</li></ul>"
               }
             },
             {
@@ -600,7 +598,7 @@
               "element": {
                 "id": "0f10059b-3a41-47fd-808b-9f587cf7ab0c",
                 "type": "text",
-                "content": "<p>Les lettres accentuées sont écrites en bas à gauche des touches. <br>Il suffit de taper sur la touche pour que la lettre accentuée apparaisse à l’écran.</p>"
+                "content": "<p>Ces lettres accentuées sont écrites en bas à gauche des touches. <br>Il suffit de taper sur la touche pour que la lettre accentuée apparaisse à l’écran.</p>"
               }
             }
           ]
@@ -662,7 +660,7 @@
                         },
                         "invalid": {
                           "state": "Mauvaise réponse.",
-                          "diagnosis": " N’oubliez pas d’utiliser le e accentué."
+                          "diagnosis": " N’oubliez pas d’utiliser un e accentué."
                         }
                       }
                     }
@@ -694,7 +692,7 @@
                         },
                         "invalid": {
                           "state": "Mauvaise réponse",
-                          "diagnosis": "N’oubliez pas d’utiliser le e accentué."
+                          "diagnosis": "N’oubliez pas d’utiliser un e accentué."
                         }
                       }
                     }
@@ -772,7 +770,7 @@
               "element": {
                 "id": "52b120fe-5aa5-4ebc-aafc-ddd173377620",
                 "type": "text",
-                "content": "<p>📌 Pour taper, modifier ou effacer du texte, on clique dans une zone de texte avec la souris. Puis, on utilise les touches du clavier.&nbsp;Voici les touches du clavier à retenir&nbsp;: </p><ul>    <li><strong>Les lettres</strong> pour taper des lettres.</li>    <li><strong>Espace </strong>pour ajouter un espace entre deux mots.</li>    <li><strong>Entrée</strong> pour aller à la ligne.</li>    <li><strong>Effacer </strong>pour supprimer le caractère à gauche du curseur de texte.</li>    <li><strong>Les flèches directionnelles</strong> pour déplacer le curseur de texte.</li></ul><p><br>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier1/pix-fiche-revision-premieres-marches-clavier-1.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+                "content": "<p>📌 Pour taper, modifier ou effacer du texte, on clique dans une zone de texte avec la souris. Puis, on utilise les touches du clavier.&nbsp;Voici les touches du clavier à retenir&nbsp;: </p><ul>    <li><strong>Les lettres</strong> pour taper des lettres.</li>    <li><strong>Espace </strong>pour ajouter un espace entre deux mots.</li>    <li><strong>Entrée</strong> pour aller à la ligne.</li>    <li><strong>Effacer </strong>pour supprimer le caractère à gauche du curseur de texte.</li>    <li><strong>Les flèches directionnelles</strong> pour déplacer le curseur de texte.</li></ul><p><br>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier1/pix-fiche-revision-premieres-marches-clavier-1.pdf\" target=\"_blank\">ouvrir votre fiche de synthèse</a>.</p>"
               }
             }
           ]
