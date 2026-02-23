@@ -18,11 +18,9 @@ describe('Unit | Class | BrevoProvider', function () {
         sinon.stub(mailing, 'enabled').value(true);
         sinon.stub(mailing, 'provider').value('brevo');
 
-        sinon.stub(BrevoProvider, 'createBrevoSMTPApi');
-        stubbedBrevoSMTPApi = { sendTransacEmail: sinon.stub(), authentications: { apiKey: {} } };
-        BrevoProvider.createBrevoSMTPApi.returns(stubbedBrevoSMTPApi);
-
+        stubbedBrevoSMTPApi = { sendTransacEmail: sinon.stub() };
         mailingProvider = new BrevoProvider();
+        sinon.stub(mailingProvider, '_client').value({ transactionalEmails: stubbedBrevoSMTPApi });
       });
 
       context('when email check succeeds', function () {
