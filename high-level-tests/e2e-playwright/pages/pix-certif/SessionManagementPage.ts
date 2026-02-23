@@ -135,4 +135,10 @@ export class SessionManagementPage {
 
     return results;
   }
+
+  async importOdsFile(filePath: string) {
+    await this.page.getByRole('link', { name: 'Candidats' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/candidats$/);
+    await this.page.getByLabel('Importer (.ods)').setInputFiles(filePath);
+  }
 }
