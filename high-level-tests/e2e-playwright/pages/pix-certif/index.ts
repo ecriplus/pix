@@ -5,3 +5,4 @@ export * from './SessionCreationPage.ts';
 export * from './SessionFinalizationPage.ts';
 export * from './SessionListPage.ts';
 export * from './SessionManagementPage.ts';
+export * from './SessionMassCreationPage.ts';

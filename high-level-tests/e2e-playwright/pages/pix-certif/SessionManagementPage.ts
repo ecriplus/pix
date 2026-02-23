@@ -67,6 +67,7 @@ export class SessionManagementPage {
     birthCity,
     postalCode,
     enrollFor = 'CORE',
+    checkForSuccess = true,
   }: {
     sex: string;
     firstName: string;
@@ -76,6 +77,7 @@ export class SessionManagementPage {
     birthCity: string;
     postalCode: string;
     enrollFor?: CertificationKeys;
+    checkForSuccess?: boolean;
   }) {
     if (sex === 'F') {
       await this.page.getByRole('radio', { name: 'Femme' }).check();
@@ -107,6 +109,38 @@ export class SessionManagementPage {
       await radio.check();
     }
     await this.page.getByRole('button', { name: 'Inscrire le candidat' }).click();
-    await this.page.getByText('Le candidat a été inscrit avec succès.').waitFor({ state: 'visible' });
+    if (checkForSuccess) {
+      await this.page.getByText('Le candidat a été inscrit avec succès.').waitFor({ state: 'visible' });
+      await this.page.getByRole('button', { name: 'Fermer la notification' }).click();
+    }
+  }
+
+  async getEnrolledCandidatesData() {
+    await this.page.getByRole('link', { name: 'Candidats' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/candidats$/);
+    const table = this.page.locator('table');
+    const headers = await table.locator('thead th').allTextContents();
+    const rows = await table.locator('tbody tr').all();
+
+    const results = [];
+
+    for (const row of rows) {
+      const cells = await row.locator('td').allTextContents();
+      const rowObject: Record<string, string> = {};
+
+      for (let i = 0; i < headers.length; i++) {
+        const columnName = headers[i].trim();
+        rowObject[columnName] = cells[i]?.trim() || '';
+      }
+      results.push(rowObject);
+    }
+
+    return results;
+  }
+
+  async importOdsFile(filePath: string) {
+    await this.page.getByRole('link', { name: 'Candidats' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/candidats$/);
+    await this.page.getByLabel('Importer (.ods)').setInputFiles(filePath);
   }
 }

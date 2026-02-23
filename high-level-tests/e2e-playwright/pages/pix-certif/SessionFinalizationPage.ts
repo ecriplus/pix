@@ -22,7 +22,7 @@ export class SessionFinalizationPage {
       has: this.page.getByText(lastName),
     });
     await row.locator('.pix-select-button').click();
-    await this.page.getByRole('option', { name: 'Problème technique' }).click();
+    await row.getByRole('option', { name: 'Problème technique' }).click();
   }
 
   async markAbandonmentFor(lastName: string) {
@@ -30,6 +30,6 @@ export class SessionFinalizationPage {
       has: this.page.getByText(lastName),
     });
     await row.locator('.pix-select-button').click();
-    await this.page.getByRole('option', { name: 'Abandon : Manque de temps ou départ prématuré' }).click();
+    await row.getByRole('option', { name: 'Abandon : Manque de temps ou départ prématuré' }).click();
   }
 }
