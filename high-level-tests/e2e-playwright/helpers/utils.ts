@@ -71,3 +71,7 @@ async function getLocatorFromDescriptionList(
 export function normalizeWhitespace(str: string): string {
   return str.replace(/\s+/g, ' ').trim();
 }
+
+export function sanitizeFilename(name: string) {
+  return name.replace(/[^a-z0-9_\-.]/gi, '_');
+}

@@ -3,8 +3,9 @@ import { PIX_ADMIN_SUPPORT_DATA } from '../../../helpers/db-data.ts';
 import { LoginPage as AdminLoginPage } from '../../../pages/pix-admin/index.ts';
 import { LoginPage as AppLoginPage } from '../../../pages/pix-app/index.ts';
 import { HomePage as PixOrgaHomePage, ParticipantsPage } from '../../../pages/pix-orga/index.ts';
-
-test(`user is anonymized`, async ({ page: pixAppPage, pixSuperAdminContext, pixOrgaMemberContext }) => {
+// deso c moi, je me suis permise car je sais que tu n'utilises plus superAdminContext de toute façon, lors du merge accepte
+// tous tes changements
+test(`user is anonymized`, async ({ page: pixAppPage, pixOrgaMemberContext }) => {
   test.slow();
 
   await test.step('User can access to their account on PixApp', async function () {
@@ -15,7 +16,7 @@ test(`user is anonymized`, async ({ page: pixAppPage, pixSuperAdminContext, pixO
     await expect(pixAppPage.getByText('Bonjour Jambon')).toBeVisible();
   });
 
-  const pixAdminPage = await pixSuperAdminContext.newPage();
+  const pixAdminPage = pixAppPage;
   await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
   const adminLoginPage = new AdminLoginPage(pixAdminPage);
   const adminHomepage = await adminLoginPage.login(PIX_ADMIN_SUPPORT_DATA.email, PIX_ADMIN_SUPPORT_DATA.rawPassword);

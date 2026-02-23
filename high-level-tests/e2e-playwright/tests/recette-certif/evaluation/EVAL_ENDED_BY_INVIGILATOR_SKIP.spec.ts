@@ -5,11 +5,12 @@ import {
   checkSessionInformationAndExpectSuccess,
 } from '../../../helpers/certification/utils.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
+import { ChallengePage } from '../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 
-const testRef = 'EVAL_ENDED_BY_FINALIZATION_RELOADING';
+const testRef = 'EVAL_ENDED_BY_INVIGILATOR_RELOADING';
 
-test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
+test(`${testRef} - User test is being ended by invigilator. User should be able to reach expected end of test page after skipping. Certification should be scorable`, async ({
   pixCertifProPage,
   enrollCandidateAndPassExam,
   pixAdminRoleCertifPage,
@@ -18,7 +19,7 @@ test(`${testRef} - User test is being ended by finalization. User should be able
 }) => {
   const certifiableUserData = await getCertifiableUserData(0);
   const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-  const { sessionNumber } = await enrollCandidateAndPassExam({
+  const { sessionNumber, invigilatorOverviewPage } = await enrollCandidateAndPassExam({
     testRef,
     rightWrongAnswersSequence: Array(24).fill(true),
     pixAppPage: pixAppCertifiablePage,
@@ -29,6 +30,21 @@ test(`${testRef} - User test is being ended by finalization. User should be able
     await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
   });
 
+  await test.step('invigilator ends the certification test', async () => {
+    await invigilatorOverviewPage.endCertificationTest(certifiableUserData.firstName, certifiableUserData.lastName);
+  });
+
+  await test.step('user skips the challenge and reaches expected end of certification page', async () => {
+    const challengePage = new ChallengePage(pixAppCertifiablePage);
+    await challengePage.skip();
+    await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
+    await expect(
+      pixAppCertifiablePage.getByText(
+        'Votre surveillant a mis fin à votre test de certification. Vous ne pouvez plus continuer de répondre aux questions.',
+      ),
+    ).toBeVisible();
+  });
+
   await test.step('Finalization by marking a technical issue and check scoring', async () => {
     const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
     const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
@@ -36,16 +52,6 @@ test(`${testRef} - User test is being ended by finalization. User should be able
     await sessionFinalizationPage.markTechnicalIssueFor(certifiableUserData.lastName);
 
     await sessionFinalizationPage.finalizeSession();
-  });
-
-  await test.step('user reloads the page and reaches expected end of certification page', async () => {
-    await pixAppCertifiablePage.reload();
-    await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
-    await expect(
-      pixAppCertifiablePage.getByText(
-        'La session a été finalisée par votre centre de certification. Vous ne pouvez plus continuer de répondre aux questions.',
-      ),
-    ).toBeVisible();
   });
 
   const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
@@ -77,7 +83,7 @@ test(`${testRef} - User test is being ended by finalization. User should be able
       expect(certificationData[0]).toMatchObject({
         Prénom: certifiableUserData.firstName,
         Nom: certifiableUserData.lastName,
-        Statut: 'Validée',
+        Statut: 'Terminée par le surveillant',
         Score: '895',
         'Signalements impactants non résolus': '',
         'Certification passée': 'Certification Pix',
@@ -96,7 +102,7 @@ test(`${testRef} - User test is being ended by finalization. User should be able
         nbQuestionsKO: 0,
         nbQuestionsAband: 0,
         nbValidatedTechnicalIssues: 0,
-        testEndedBy: 'Finalisation session',
+        testEndedBy: 'Le surveillant',
         abortReason: 'Problème technique',
       });
     });

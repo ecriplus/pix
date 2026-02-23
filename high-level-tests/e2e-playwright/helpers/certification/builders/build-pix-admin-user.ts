@@ -1,14 +1,10 @@
 import { Knex } from 'knex';
 
 import { createUserInDB } from '../../db-utils.ts';
-import { PixUserData } from './types.ts';
-
-export interface PixAdminUserData extends PixUserData {
-  role: 'CERTIF' | 'METIER' | 'SUPER_ADMIN' | 'SUPPORT';
-}
+import { PixAdminUserData } from './types.ts';
 
 export async function buildPixAdminUser(knex: Knex, userData: PixAdminUserData) {
-  const admiUserId = await createUserInDB(
+  const adminUserId = await createUserInDB(
     {
       firstName: userData.firstName,
       lastName: userData.lastName,
@@ -21,5 +17,5 @@ export async function buildPixAdminUser(knex: Knex, userData: PixAdminUserData) 
     },
     knex,
   );
-  await knex('pix-admin-roles').insert({ userId: admiUserId, role: userData.role });
+  await knex('pix-admin-roles').insert({ userId: adminUserId, role: userData.role });
 }

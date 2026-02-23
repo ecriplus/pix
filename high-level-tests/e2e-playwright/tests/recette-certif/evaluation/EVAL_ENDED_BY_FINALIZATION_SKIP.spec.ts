@@ -5,11 +5,12 @@ import {
   checkSessionInformationAndExpectSuccess,
 } from '../../../helpers/certification/utils.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
+import { ChallengePage } from '../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 
-const testRef = 'EVAL_ENDED_BY_FINALIZATION_RELOADING';
+const testRef = 'EVAL_ENDED_BY_FINALIZATION_SKIP';
 
-test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page after reloading. Certification should be scorable`, async ({
+test(`${testRef} - User test is being ended by finalization. User should be able to reach expected end of test page by skipping. Certification should be scorable`, async ({
   pixCertifProPage,
   enrollCandidateAndPassExam,
   pixAdminRoleCertifPage,
@@ -38,8 +39,9 @@ test(`${testRef} - User test is being ended by finalization. User should be able
     await sessionFinalizationPage.finalizeSession();
   });
 
-  await test.step('user reloads the page and reaches expected end of certification page', async () => {
-    await pixAppCertifiablePage.reload();
+  await test.step('user skips the challenge and reaches expected end of certification page', async () => {
+    const challengePage = new ChallengePage(pixAppCertifiablePage);
+    await challengePage.skip();
     await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
     await expect(
       pixAppCertifiablePage.getByText(

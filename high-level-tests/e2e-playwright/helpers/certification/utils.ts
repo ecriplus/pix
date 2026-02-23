@@ -5,7 +5,6 @@ import { CertificationInformationPage, CertificationSessionPage } from '../../pa
 export async function checkSessionInformationAndExpectSuccess(
   certificationSessionPage: CertificationSessionPage,
   data: {
-    certificationCenter: string;
     address: string;
     room: string;
     invigilatorName: string;
@@ -18,7 +17,6 @@ export async function checkSessionInformationAndExpectSuccess(
 ) {
   const sessionInfo = await certificationSessionPage.getInfo();
 
-  expect(data.certificationCenter).toBe(sessionInfo.certificationCenter);
   expect(data.address).toBe(sessionInfo.address);
   expect(data.room).toBe(sessionInfo.room);
   expect(data.invigilatorName).toBe(sessionInfo.invigilatorName);

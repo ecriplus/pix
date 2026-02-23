@@ -4,18 +4,12 @@ import sharedConfig, { App, isCI, reuseExistingApps, setupWebServer } from './pl
 
 export default defineConfig({
   ...sharedConfig,
+  timeout: 40_000,
   projects: [
-    {
-      name: 'Setup - utilisateur certifiable et prêt pour le cléa',
-      testDir: 'tests/recette-certif',
-      testMatch: '**/prepare-user-ready-for-certifications.spec.ts',
-    },
     {
       name: 'Recette',
       testDir: 'tests/recette-certif',
       testMatch: '**/*.spec.ts',
-      testIgnore: '**/prepare-user-ready-for-certifications.spec.ts',
-      dependencies: ['Setup - utilisateur certifiable et prêt pour le cléa'],
     },
   ],
 

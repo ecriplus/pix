@@ -7,18 +7,7 @@ import {
   createCertificationCenterMembershipInDB,
   createUserInDB,
 } from '../../db-utils.ts';
-import { PixUserData } from './types.ts';
-
-interface PixCertifUserData extends PixUserData {
-  certificationCenters: {
-    type: string;
-    externalId: string;
-    habilitations: string[];
-    withOrganization?: {
-      isManagingStudents: boolean;
-    };
-  }[];
-}
+import { PixCertifUserData } from './types.ts';
 
 export async function buildPixCertifUser(knex: Knex, userData: PixCertifUserData) {
   const certificationUserId = await createUserInDB(
