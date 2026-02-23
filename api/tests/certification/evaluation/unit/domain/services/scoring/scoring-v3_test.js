@@ -1,11 +1,12 @@
 import { CertificationCompletedJob } from '../../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
-import { CoreScoring } from '../../../../../../../src/certification/evaluation/domain/models/CoreScoring.js';
 import { DoubleCertificationScoring } from '../../../../../../../src/certification/evaluation/domain/models/DoubleCertificationScoring.js';
 import * as flashAlgorithmService from '../../../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
 import { createV3AssessmentResult } from '../../../../../../../src/certification/evaluation/domain/services/scoring/create-v3-assessment-result.js';
 import { handleV3CertificationScoring } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v3.js';
+import { CompetenceMark } from '../../../../../../../src/certification/shared/domain/models/CompetenceMark.js';
 import { SCOPES } from '../../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
+import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
 
@@ -81,7 +82,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         // then
-        expect(score.coreScoring).to.be.instanceOf(CoreScoring);
+        expect(score.coreScoring.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreScoring.assessmentResult).to.be.instanceOf(AssessmentResult);
         expect(score.doubleCertificationScoring).to.be.null;
       });
     });
@@ -129,7 +131,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           scoringDegradationService,
         });
 
-        expect(score.coreScoring).to.be.instanceOf(CoreScoring);
+        expect(score.coreScoring.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreScoring.assessmentResult).to.be.instanceOf(AssessmentResult);
         expect(score.doubleCertificationScoring).to.be.instanceOf(DoubleCertificationScoring);
       });
     });

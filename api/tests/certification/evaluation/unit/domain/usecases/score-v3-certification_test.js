@@ -164,7 +164,7 @@ function stubSharedVersionRepository() {
 }
 function stubServices({ hasPixPlusSubscription = false } = {}) {
   const services = {
-    findByCertificationCourseAndVersion: sinon.stub(),
+    findCalibratedChallenges: sinon.stub(),
     handleV3CertificationScoring: sinon.stub(),
     flashAlgorithmService: {
       getCapacityAndErrorRateHistory: sinon.stub(),
@@ -180,15 +180,13 @@ function stubServices({ hasPixPlusSubscription = false } = {}) {
   const scoringObject = {
     coreScoring: !hasPixPlusSubscription
       ? {
-          certificationAssessmentScore: domainBuilder.buildCertificationAssessmentScore({
-            competenceMarks: [domainBuilder.buildCompetenceMark(assessmentResultId)],
-          }),
+          competenceMarks: [domainBuilder.buildCompetenceMark(assessmentResultId)],
           assessmentResult: domainBuilder.buildAssessmentResult({ id: assessmentResultId }),
         }
       : null,
     doubleCertificationScoring: null,
   };
-  services.findByCertificationCourseAndVersion.resolves(object);
+  services.findCalibratedChallenges.resolves(object);
   services.handleV3CertificationScoring.returns(scoringObject);
   services.flashAlgorithmService.getCapacityAndErrorRateHistory.returns([]);
 

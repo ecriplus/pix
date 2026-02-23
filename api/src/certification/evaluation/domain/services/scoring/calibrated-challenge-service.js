@@ -17,46 +17,43 @@
  * @property {Array<CalibratedChallenge>} askedChallengesWithoutLiveAlerts - Calibrated challenges presented to the candidate, excluding those with validated live alerts.
  * @property {Array<ChallengeCalibration>} challengeCalibrationsWithoutLiveAlerts - Calibrations of challenges presented to the candidate, excluding those with validated live alerts.
  */
-import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 
-export const findByCertificationCourseAndVersion = withTransaction(
-  /**
-   * @param {object} params
-   * @param {number} params.certificationCourseId
-   * @param {number} params.assessmentId
-   * @param {Version} params.version
-   * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
-   * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
-   * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
-   * @returns {Promise<FindByCertificationCourseAndVersionResult>}
-   */
-  async ({
+/**
+ * @param {object} params
+ * @param {number} params.certificationCourseId
+ * @param {number} params.assessmentId
+ * @param {Version} params.version
+ * @param {ChallengeCalibrationRepository} params.challengeCalibrationRepository
+ * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
+ * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
+ * @returns {Promise<FindByCertificationCourseAndVersionResult>}
+ */
+export async function findCalibratedChallenges({
+  certificationCourseId,
+  assessmentId,
+  version,
+  challengeCalibrationRepository,
+  certificationChallengeLiveAlertRepository,
+  calibratedChallengeRepository,
+}) {
+  const calibratedChallenges = await calibratedChallengeRepository.getAllCalibratedChallenges({ version });
+
+  const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
+    compatibleChallenges: calibratedChallenges,
     certificationCourseId,
-    assessmentId,
-    version,
     challengeCalibrationRepository,
-    certificationChallengeLiveAlertRepository,
-    calibratedChallengeRepository,
-  }) => {
-    const calibratedChallenges = await calibratedChallengeRepository.getAllCalibratedChallenges({ version });
+  });
 
-    const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
-      compatibleChallenges: calibratedChallenges,
-      certificationCourseId,
-      challengeCalibrationRepository,
-    });
+  const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
+    await _removeChallengesWithValidatedLiveAlerts(
+      challengesCalibrations,
+      assessmentId,
+      askedChallenges,
+      certificationChallengeLiveAlertRepository,
+    );
 
-    const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
-      await _removeChallengesWithValidatedLiveAlerts(
-        challengesCalibrations,
-        assessmentId,
-        askedChallenges,
-        certificationChallengeLiveAlertRepository,
-      );
-
-    return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
-  },
-);
+  return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
+}
 
 /**
  * @typedef {object} FindByCertificationCourseIdObject

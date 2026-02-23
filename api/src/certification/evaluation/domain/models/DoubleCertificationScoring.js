@@ -5,11 +5,9 @@ export class DoubleCertificationScoring extends PartnerCertificationScoring {
   constructor({
     complementaryCertificationCourseId,
     complementaryCertificationBadgeId,
-    reproducibilityRate,
     pixScore,
     minimumEarnedPix,
     hasAcquiredPixCertification,
-    minimumReproducibilityRate,
     isRejectedForFraud,
   } = {}) {
     super({
@@ -19,27 +17,15 @@ export class DoubleCertificationScoring extends PartnerCertificationScoring {
       hasAcquiredPixCertification,
       source: ChallengesReferential.PIX,
     });
-
-    this.reproducibilityRate = reproducibilityRate;
     this.pixScore = pixScore;
     this.minimumEarnedPix = minimumEarnedPix;
-    this.minimumReproducibilityRate = minimumReproducibilityRate;
   }
 
   isAcquired() {
-    return (
-      !this.isRejectedForFraud &&
-      this.hasAcquiredPixCertification &&
-      this._isAboveMinimumReproducibilityRate() &&
-      this._isAboveMinimumScore()
-    );
+    return !this.isRejectedForFraud && this.hasAcquiredPixCertification && this._isAboveMinimumScore();
   }
 
   _isAboveMinimumScore() {
     return this.pixScore >= this.minimumEarnedPix;
-  }
-
-  _isAboveMinimumReproducibilityRate() {
-    return this.reproducibilityRate >= this.minimumReproducibilityRate;
   }
 }
