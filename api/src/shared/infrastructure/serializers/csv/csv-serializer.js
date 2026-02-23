@@ -149,7 +149,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'parentOrganizationId' ||
           columnName === 'administrationTeamId' ||
           columnName === 'countryCode' ||
-          columnName === 'organizationLearnerTypeId'
+          columnName === 'organizationLearnerTypeId' ||
+          columnName === 'credit'
         ) {
           value = parseInt(value, 10);
         }
@@ -157,9 +158,6 @@ async function deserializeForOrganizationsImport(file) {
           value = value.replaceAll(' ', '').toLowerCase();
         }
       } else {
-        if (columnName === 'credit') {
-          value = 0;
-        }
         if (
           columnName === 'identityProviderForCampaigns' ||
           columnName === 'DPOFirstName' ||
@@ -170,7 +168,8 @@ async function deserializeForOrganizationsImport(file) {
           columnName === 'emailForSCOActivation' ||
           columnName === 'administrationTeamId' ||
           columnName === 'countryCode' ||
-          columnName === 'organizationLearnerTypeId'
+          columnName === 'organizationLearnerTypeId' ||
+          columnName === 'credit'
         ) {
           value = null;
         }
