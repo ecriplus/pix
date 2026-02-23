@@ -38,7 +38,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  * @param {ComplementaryCertificationScoringCriteriaRepository} params.complementaryCertificationScoringCriteriaRepository
  */
-export async function scoreV3Certification ({
+export async function scoreV3Certification({
   event,
   certificationCourseId,
   services,
@@ -124,20 +124,20 @@ export async function scoreV3Certification ({
         sharedCompetenceMarkRepository,
         certificationCourseRepository,
       });
-    }
 
-    if (doubleCertificationScoring) {
-      await complementaryCertificationCourseResultRepository.save(
-        ComplementaryCertificationCourseResult.from({
-          complementaryCertificationCourseId: doubleCertificationScoring.complementaryCertificationCourseId,
-          complementaryCertificationBadgeId: doubleCertificationScoring.complementaryCertificationBadgeId,
-          source: doubleCertificationScoring.source,
-          acquired: doubleCertificationScoring.isAcquired(),
-        }),
-      );
+      if (doubleCertificationScoring) {
+        await complementaryCertificationCourseResultRepository.save(
+          ComplementaryCertificationCourseResult.from({
+            complementaryCertificationCourseId: doubleCertificationScoring.complementaryCertificationCourseId,
+            complementaryCertificationBadgeId: doubleCertificationScoring.complementaryCertificationBadgeId,
+            source: doubleCertificationScoring.source,
+            acquired: doubleCertificationScoring.isAcquired(),
+          }),
+        );
+      }
     }
   });
-};
+}
 
 /**
  * @param {object} params

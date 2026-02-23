@@ -92,5 +92,4 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringV3Algorit
       });
     });
   });
-
 });

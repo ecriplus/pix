@@ -28,32 +28,32 @@
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @returns {Promise<FindByCertificationCourseAndVersionResult>}
  */
-export async function findCalibratedChallenges ({
+export async function findCalibratedChallenges({
+  certificationCourseId,
+  assessmentId,
+  version,
+  challengeCalibrationRepository,
+  certificationChallengeLiveAlertRepository,
+  calibratedChallengeRepository,
+}) {
+  const calibratedChallenges = await calibratedChallengeRepository.getAllCalibratedChallenges({ version });
+
+  const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
+    compatibleChallenges: calibratedChallenges,
     certificationCourseId,
-    assessmentId,
-    version,
     challengeCalibrationRepository,
-    certificationChallengeLiveAlertRepository,
-    calibratedChallengeRepository,
-  }) {
-    const calibratedChallenges = await calibratedChallengeRepository.getAllCalibratedChallenges({ version });
+  });
 
-    const { allChallenges, askedChallenges, challengesCalibrations } = await _findByCertificationCourseId({
-      compatibleChallenges: calibratedChallenges,
-      certificationCourseId,
-      challengeCalibrationRepository,
-    });
+  const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
+    await _removeChallengesWithValidatedLiveAlerts(
+      challengesCalibrations,
+      assessmentId,
+      askedChallenges,
+      certificationChallengeLiveAlertRepository,
+    );
 
-    const { challengeCalibrationsWithoutLiveAlerts, askedChallengesWithoutLiveAlerts } =
-      await _removeChallengesWithValidatedLiveAlerts(
-        challengesCalibrations,
-        assessmentId,
-        askedChallenges,
-        certificationChallengeLiveAlertRepository,
-      );
-
-    return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
-  };
+  return { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts };
+}
 
 /**
  * @typedef {object} FindByCertificationCourseIdObject
