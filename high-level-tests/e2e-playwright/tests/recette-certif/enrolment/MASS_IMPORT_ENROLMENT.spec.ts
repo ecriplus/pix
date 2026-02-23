@@ -6,12 +6,11 @@ import { checkSessionInformationAndExpectSuccess } from '../../../helpers/certif
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
 import { SessionListPage, SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 
-const testRef = 'ODS_FILE_ENROLMENT';
-
+const testRef = 'MASS_IMPORT_ENROLMENT';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-test(`${testRef} - Enroll candidates through importing ODS file`, async ({
+test(`${testRef} - Enroll candidates through the mass session creation feature`, async ({
   pixCertifProPage,
   pixAdminRoleCertifPage,
   getCertifiableUserData,
@@ -26,17 +25,23 @@ test(`${testRef} - Enroll candidates through importing ODS file`, async ({
   let sessionNumber = '',
     accessCode = '',
     invigilatorCode = '';
-  const sessionManagementPage = await test.step('Create session', async () => {
+  const sessionManagementPage = await test.step('Create session through mass creation feature', async () => {
     const sessionListPage = new SessionListPage(pixCertifProPage);
-    const sessionCreationPage = await sessionListPage.goToCreateSession();
-    const sessionManagementPage = await sessionCreationPage.createSession({
-      address: `address ${testRef}`,
-      room: `room ${testRef}`,
-      examiner: `examiner ${testRef}`,
-      hour: '09',
-      minute: '05',
-    });
+    const sessionMassCreationPage = await sessionListPage.goToMassSessionCreationPage();
+    await sessionMassCreationPage.importCsvFile(path.join(__dirname, `${testRef}_OK.csv`));
 
+    await expect(pixCertifProPage.getByText('1 session dont 0 session sans candidat')).toBeVisible();
+    await expect(pixCertifProPage.getByText('2 candidats')).toBeVisible();
+    await sessionMassCreationPage.finalize();
+    await expect(
+      pixCertifProPage.getByText(
+        'Succès ! 1 session dont 0 session sans candidat créée et 2 candidats créés ou édités',
+      ),
+    ).toBeVisible();
+
+    await await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
+
+    const sessionManagementPage = await sessionListPage.goToSession(`examiner ${testRef}`);
     const sessionData = await sessionManagementPage.getSessionData();
     sessionNumber = sessionData.sessionNumber;
     accessCode = sessionData.accessCode;
@@ -44,24 +49,7 @@ test(`${testRef} - Enroll candidates through importing ODS file`, async ({
     return sessionManagementPage;
   });
 
-  await test.step('First import ODS file with duplicates', async () => {
-    await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_DUPES.ods`));
-    await pixCertifProPage
-      .getByText(
-        'Aucun candidat n’a été importé.\n' +
-          'Ligne 15 : Veuillez supprimer le(s) doublon(s) de candidats avant de réimporter.',
-      )
-      .waitFor({ state: 'visible' });
-    await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
-    await expect(pixCertifProPage.getByText('Liste des candidats (0)')).toBeVisible();
-  });
-
-  await test.step('Then import valid ODS file', async () => {
-    await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_OK.ods`));
-    await pixCertifProPage
-      .getByText('La liste des candidats a été importée avec succès.')
-      .waitFor({ state: 'visible' });
-    await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
+  await test.step('Check enrolled candidate data', async () => {
     const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
     expect(enrolledCandidatesSoFar).toMatchObject([
       {

@@ -116,6 +116,8 @@ export class SessionManagementPage {
   }
 
   async getEnrolledCandidatesData() {
+    await this.page.getByRole('link', { name: 'Candidats' }).click();
+    await this.page.waitForURL(/\/sessions\/\d+\/candidats$/);
     const table = this.page.locator('table');
     const headers = await table.locator('thead th').allTextContents();
     const rows = await table.locator('tbody tr').all();
