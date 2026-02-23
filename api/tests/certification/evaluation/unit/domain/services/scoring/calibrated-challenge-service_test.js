@@ -6,7 +6,7 @@ import { generateChallengeList } from '../../../../../shared/fixtures/challenges
 const minimumAnswersRequiredToValidateACertification = 20;
 
 describe('Certification | Evaluation | Unit | Domain | Services | calibrated challenge service', function () {
-  context('#findByCertificationCourseAndVersion', function () {
+  context('#findCalibratedChallenges', function () {
     let challengeCalibrationRepository, calibratedChallengeRepository, certificationChallengeLiveAlertRepository;
 
     let challengeList;
@@ -57,7 +57,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
           allChallenges,
           askedChallengesWithoutLiveAlerts: askedChallenges,
           challengeCalibrationsWithoutLiveAlerts: challengeCalibrations,
-        } = await calibratedChallengeService.findByCertificationCourseAndVersion({
+        } = await calibratedChallengeService.findCalibratedChallenges({
           certificationCourseId,
           version,
           assessmentId,
@@ -106,7 +106,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
 
         // when
         const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-          await calibratedChallengeService.findByCertificationCourseAndVersion({
+          await calibratedChallengeService.findCalibratedChallenges({
             certificationCourseId,
             version,
             assessmentId,

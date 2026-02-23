@@ -38,7 +38,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  * @param {ComplementaryCertificationScoringCriteriaRepository} params.complementaryCertificationScoringCriteriaRepository
  */
-export const scoreV3Certification = async ({
+export async function scoreV3Certification ({
   event,
   certificationCourseId,
   services,
@@ -53,7 +53,7 @@ export const scoreV3Certification = async ({
   scoringConfigurationRepository,
   evaluationSessionRepository,
   complementaryCertificationScoringCriteriaRepository,
-}) => {
+}) {
   const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
   if (!assessmentSheet)
     throw new NotFoundError('No AssessmentSheet found for certificationCourseId ' + certificationCourseId);
@@ -75,7 +75,7 @@ export const scoreV3Certification = async ({
   });
 
   const { allChallenges, askedChallengesWithoutLiveAlerts, challengeCalibrationsWithoutLiveAlerts } =
-    await services.findByCertificationCourseAndVersion({
+    await services.findCalibratedChallenges({
       certificationCourseId: assessmentSheet.certificationCourseId,
       assessmentId: assessmentSheet.assessmentId,
       version,

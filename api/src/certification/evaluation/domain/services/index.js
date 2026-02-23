@@ -20,7 +20,7 @@ import * as challengeCalibrationRepository from '../../infrastructure/repositori
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as scoringConfigurationRepository from '../../infrastructure/repositories/scoring-configuration-repository.js';
 import * as flashAlgorithmService from './algorithm-methods/flash.js';
-import { findByCertificationCourseAndVersion } from './scoring/calibrated-challenge-service.js';
+import { findCalibratedChallenges } from './scoring/calibrated-challenge-service.js';
 import { scoreComplementaryCertificationV2 } from './scoring/score-complementary-certification-v2.js';
 import * as scoringDegradationService from './scoring/scoring-degradation-service.js';
 import { calculateCertificationAssessmentScore, handleV2CertificationScoring } from './scoring/scoring-v2.js';
@@ -78,7 +78,7 @@ const dependencies = {
 };
 
 const servicesWithoutInjectedDependencies = {
-  findByCertificationCourseAndVersion,
+  findCalibratedChallenges,
   scoreComplementaryCertificationV2,
   calculateCertificationAssessmentScore,
   handleV2CertificationScoring,
