@@ -318,7 +318,7 @@
                     "id": "2",
                     "content": "<p>La règle centrée sur la neutralité et l’analyse prudente.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La neutralité donne des réponses équilibrées, mais elle peut paraître <strong>peu engageante</strong> ou trop vague. Ce type de réponse est le résultat d’une <strong>règle interne</strong> qui dit à l’IA de <em>ne jamais prendre position</em>.&nbsp;</p>"
+                      "diagnosis": "<p>La neutralité donne des réponses équilibrées, mais elle peut paraître <strong>peu engageante</strong> ou trop vague. Ce type de réponse est le résultat d’une <strong>règle interne</strong> qui dit à l’IA de ne jamais prendre position.&nbsp;</p>"
                     }
                   },
                   {
@@ -480,7 +480,7 @@
               "element": {
                 "id": "f96a5a30-2fac-4f91-a692-ff8fbdd17713",
                 "type": "custom",
-                "instruction": "<p>Fabrice, le maire de Joliville, demande des idées à deux IA génératives différentes pour réduire la circulation dans sa ville.&nbsp;</p>",
+                "instruction": "<p>Fabrice, le maire de Jolieville, demande des idées à deux IA génératives différentes pour réduire la circulation dans sa ville.&nbsp;</p>",
                 "tagName": "llm-compare-messages",
                 "props": {
                   "conversation1": {
@@ -528,14 +528,14 @@
                   },
                   {
                     "id": "2",
-                    "content": "Les différences sont dues à une interprétation différente du profil de l’utilisateur.",
+                    "content": "<p>Les deux&nbsp;modèles interprètent différemment le profil de l'utilisateur</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !</p><p>L’IA ne tire pas cette orientation du profil de l’utilisateur. Elle applique son <strong>prompt système</strong>, qui définit la manière dont elle doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "Les différences viennent du fait que les réponses précédentes influencent directement les réponses suivantes.",
+                    "content": "<p>Un modèle prend en compte les conversation précédentes et l'autre non.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !&nbsp;</p><p>Il ne s’agit pas d’une influence des réponses précédentes, ici la discussion de Fabrice vient tout juste de commencer. Le logiciel d’intelligence artificielle applique son <strong>prompt système</strong>, qui définit la manière dont il doit aborder les situations liées aux déplacements et à la gestion de l’espace urbain. <br><strong>Une IA ne choisit pas ses valeurs&nbsp;: elle reflète celles définies par ses concepteurs.</strong></p>"
                     }
@@ -732,7 +732,7 @@
               "element": {
                 "id": "03437e86-505d-4eed-bfb0-ee635b9c9a6e",
                 "type": "qcu",
-                "instruction": "<p>Quel type d’alignement explique le plus probablement le comportement de cette IA, qui n’évoque&nbsp;que ce pays ?</p>",
+                "instruction": "<p>Quel type d’alignement explique le plus probablement le comportement de l'IA ci-dessus ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -966,7 +966,7 @@
               "element": {
                 "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
-                "content": "<p>Le site <a href=\"https://comparia.beta.gouv.fr/\">compar:IA</a>&nbsp;vous permet d’envoyer un prompt à deux logiciels d’intelligence artificielle en même temps.&nbsp;</p><p>Allez sur le site et essayez le prompt suivant.&nbsp;</p><blockquote>\"Que s’est il passé le 4 juin 1989 ?\"</blockquote>Observez les réponses de l’IA en comparant deux logiciels d’IA. Vous obtiendrez des résultats plus significatifs en comparant une IA chinoise et une autre."
+                "content": "<p>Le site <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">compar:IA</a>&nbsp;vous permet d’envoyer un prompt à deux logiciels d’intelligence artificielle en même temps.&nbsp;</p><p>Allez sur le site et essayez le prompt suivant.&nbsp;</p><blockquote>\"Que s’est il passé le 4 juin 1989 ?\"</blockquote><p>Observez les réponses de l’IA en comparant deux logiciels d’IA puis répondez à la question ci-dessous.</p>"
               }
             },
             {
@@ -974,33 +974,79 @@
               "element": {
                 "id": "716b7f23-a6ef-4b67-b186-bd94a0233f4f",
                 "type": "expand",
-                "title": "Pays des éditeurs d’IA",
-                "content": "<table style=\"border-collapse: collapse; width: 100%;\">    <caption class=\"sr-only\">Répartition des IA par zone géographique</caption>    <thead>        <tr>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">Zone</th>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">IA concernées</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇪🇺 Union européenne</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">apertus, mistral</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇺🇸 États-Unis</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">claude, gemini, chatgpt, llama, grok</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇨🇳 Chine</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">deepseek, glm, kimi, minimax, qwen</td>        </tr>    </tbody></table>"
+                "title": "Indice 1",
+                "content": "<table style=\"border-collapse: collapse; width: 100%;\">    <caption class=\"sr-only\">Répartition des IA par zone géographique</caption>    <thead>        <tr>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">Zone</th>            <th scope=\"col\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">IA concernées</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇪🇺 Union européenne</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">mistral</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇺🇸 États-Unis</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">claude, gemini, chatgpt, grok</td>        </tr>        <tr>            <th scope=\"row\" style=\"border: 1px solid #ddd; padding: 8px; text-align: left;\">🇨🇳 Chine</th>            <td style=\"border: 1px solid #ddd; padding: 8px;\">deepseek</td>        </tr>    </tbody></table>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "0e125234-9a42-4430-b2ab-b5bc7383a4c1",
-                "type": "qcu-declarative",
-                "instruction": "<p>Après avoir interrogé plusieurs IA sur la date du <strong>4 juin 1989</strong>, avez-vous obtenu des réponses similaires&nbsp;?</p>",
-                "hasShortProposals": false,
+                "id": "6faee291-d8b3-4b8f-9afe-077fc8c6c55b",
+                "type": "expand",
+                "title": "Indice 2",
+                "content": "<p>Le 4 juin 1989 correspond à la fin d’un mouvement de manifestations étudiantes à Pékin. Cet épisode de l’histoire chinoise contemporaine est traité différemment selon les contextes politiques et médiatiques.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b48e6ebb-8242-4fb3-b924-556e6b814e8c",
+                "type": "qrocm",
+                "instruction": "<p><strong>Parmi les logiciels d’IA suivants</strong>, lequel a <strong>modifié</strong>, <strong>restreint</strong> ou <strong>refusé</strong> sa réponse à cette question ?</p>",
                 "proposals": [
                   {
-                    "id": "1",
-                    "content": "<p>Oui, les réponses se ressemblaient.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Cela peut arriver… mais ce n’est pas garanti.</p><p>Les IA ne donnent pas toujours la même version d’un événement sensible. Certaines peuvent détailler les faits, d’autres rester vagues, ou éviter certains aspects.</p><p><strong>Pourquoi&nbsp;?</strong> Parce que chaque modèle est entraîné, filtré et encadré différemment selon son pays, son éditeur ou ses règles internes.</p><p><strong>👉 Une IA n’est jamais totalement neutre. Il est important de croiser les sources et de garder un regard critique.</strong></p>"
-                    }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>Non, les réponses étaient différentes.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Exactement.</p><p>Selon l’IA utilisée, la réponse peut être détaillée, partielle… ou très prudente.</p><p>Chaque modèle fonctionne avec ses propres règles, filtres et contraintes. Certaines informations sensibles peuvent être reformulées, minimisées ou absentes.</p><p><strong>👉 Une IA n’est jamais totalement neutre. Il est important de croiser les sources et de garder un regard critique.</strong></p>"
-                    }
+                    "input": "Sélectionnez le logiciel d'IA",
+                    "type": "select",
+                    "display": "inline",
+                    "placeholder": "Sélectionnez le logiciel d'IA",
+                    "ariaLabel": "Sélectionnez le logiciel d'IA",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "2",
+                        "content": "Mistral"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Claude"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Gemini"
+                      },
+                      {
+                        "id": "5",
+                        "content": "ChatGPT"
+                      },
+                      {
+                        "id": "7",
+                        "content": "Grok"
+                      },
+                      {
+                        "id": "8",
+                        "content": "DeepSeek"
+                      },
+                      {
+                        "id": "12",
+                        "content": "Qwen"
+                      }
+                    ],
+                    "solutions": [
+                      "8",
+                      "12"
+                    ]
                   }
-                ]
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Exactement.",
+                    "diagnosis": "<p>Exactement.</p><p>Selon l’IA utilisée, la réponse peut être détaillée, partielle… ou très prudente.</p><p>Chaque modèle fonctionne avec ses propres règles, filtres et contraintes (politiques d’usage, conformité, modération, etc.). Sur certains sujets sensibles, une IA peut <strong>refuser</strong>, <strong>reformuler fortement</strong> ou <strong>réduire</strong> les informations.</p><p><strong>👉 Une IA n’est jamais totalement neutre.</strong> Il est important de croiser les sources et de garder un regard critique.</p>"
+                  },
+                  "invalid": {
+                    "state": "Pas tout à fait.",
+                    "diagnosis": "<p>Pas tout à fait.</p><p>Regardez les indices de <strong>restriction</strong> : refus explicite, réponse très courte, changement de sujet, formulations très vagues, ou message de sécurité.</p>"
+                  }
+                }
               }
             }
           ]
