@@ -137,8 +137,11 @@ const schema = Joi.object({
   LCMS_API_KEY: Joi.string().requiredForApi(),
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
   LCMS_API_RELEASE_ID: Joi.any(),
-  LLM_API_GET_CONFIGURATIONS_URL: Joi.string().optional(),
   LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS: Joi.string().optional(),
+  LLM_CONFIGURATION_EDITOR_API_GET_CONFIGURATION_URL: Joi.string().optional(),
+  LLM_CONFIGURATION_EDITOR_API_JWT_SECRET: Joi.string().optional(),
+  LLM_INFERENCE_API_POST_PROMPT_URL: Joi.string().optional(),
+  LLM_INFERENCE_API_JWT_SECRET: Joi.string().optional(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
@@ -350,9 +353,16 @@ const configuration = (function () {
         expirationDelaySeconds: ms(process.env.LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS ?? '12h'),
       },
       lockChatExpirationDelayMilliseconds: (process.env.LLM_LOCK_CHAT_EXPIRATION_DELAY_SECONDS ?? 200) * 1000,
-      getConfigurationUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_GET_CONFIGURATIONS_URL ?? ''),
-      postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_API_POST_PROMPT_URL ?? ''),
-      authSecret: process.env.LLM_API_JWT_SECRET,
+      inferenceApi: {
+        postPromptUrl: _removeTrailingSlashFromUrl(process.env.LLM_INFERENCE_API_POST_PROMPT_URL ?? ''),
+        authSecret: process.env.LLM_INFERENCE_API_JWT_SECRET,
+      },
+      configurationEditorApi: {
+        getConfigurationUrl: _removeTrailingSlashFromUrl(
+          process.env.LLM_CONFIGURATION_EDITOR_API_GET_CONFIGURATION_URL ?? '',
+        ),
+        authSecret: process.env.LLM_CONFIGURATION_EDITOR_API_JWT_SECRET,
+      },
     },
     logging: {
       enabled: toBoolean(process.env.LOG_ENABLED),
@@ -538,10 +548,11 @@ const configuration = (function () {
     config.lcms.apiKey = 'test-api-key';
     config.lcms.url = 'https://lcms-test.pix.fr/api';
 
-    config.llm.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
-    config.llm.postPromptUrl = 'https://llm-test.pix.fr/api/chat';
+    config.llm.configurationEditorApi.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
+    config.llm.inferenceApi.postPromptUrl = 'https://llm-test.pix.fr/api/chat';
     config.llm.temporaryStorage.expirationDelaySeconds = 1;
-    config.llm.authSecret = 'Le secret dans les tests';
+    config.llm.configurationEditorApi.authSecret = 'Le secret dans les tests';
+    config.llm.inferenceApi.authSecret = 'Le secret dans les tests';
 
     config.domain.tldFr = '.fr';
     config.domain.tldOrg = '.org';
