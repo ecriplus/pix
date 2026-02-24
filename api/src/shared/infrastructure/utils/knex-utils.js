@@ -65,7 +65,7 @@ export function foreignKeyConstraintViolated(err) {
 }
 
 /**
- * Optimized batch update for PG, which result in a query similar as :
+ * Optimized batch update for PG, which results in a query similar as :
  *
  * UPDATE "users" AS t
  * SET
@@ -100,7 +100,7 @@ export async function batchUpdate({ schema = 'public', tableName, primaryKeyName
     for (const row of chunk) {
       const rowPlaceholders = columns.map((col) => `?::${columnTypes[col]}`).join(', ');
       values.push(`(${rowPlaceholders})`);
-      bindings.push(...columns.map((col) => row[col]));
+      bindings.push(...columns.map((col) => row[col] ?? null));
     }
 
     const setClause = columns

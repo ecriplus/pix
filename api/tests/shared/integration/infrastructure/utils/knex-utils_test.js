@@ -675,7 +675,7 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
             smallint_type: null,
             integer_type: null,
             biginteger_type: null,
-            numeric_type: null,
+            numeric_type: undefined,
             float_type: null,
             double_precision_type: null,
             boolean_type: null,
