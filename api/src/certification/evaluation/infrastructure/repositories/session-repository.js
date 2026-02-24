@@ -18,16 +18,20 @@ export const get = async ({ id }) => {
 
 export const getByCertificationCourseId = async ({ certificationCourseId }) => {
   const knexConn = DomainTransaction.getConnection();
-  const certificationCourseDTO = await knexConn('certification-courses').where('id', certificationCourseId).first();
+  const sessionDTO = await knexConn('sessions')
+    .select({
+      id: 'sessions.id',
+      accessCode: 'sessions.accessCode',
+      finalizedAt: 'sessions.finalizedAt',
+      publishedAt: 'sessions.publishedAt',
+    })
+    .join('certification-courses', 'certification-courses.sessionId', 'sessions.id')
+    .where('certification-courses.id', certificationCourseId)
+    .first();
 
-  if (!certificationCourseDTO) {
+  if (!sessionDTO) {
     throw new NotFoundError('Certification course does not exist');
   }
-
-  const sessionDTO = await knexConn('sessions')
-    .select('id', 'accessCode', 'finalizedAt', 'publishedAt')
-    .where('id', certificationCourseDTO.sessionId)
-    .first();
 
   return _toDomain(sessionDTO);
 };
