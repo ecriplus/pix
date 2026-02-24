@@ -4,7 +4,7 @@ import { catchErrSync, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Element | CustomDraft', function () {
   describe('#constructor', function () {
-    it('should instanciate a CustomDraft with right properties', function () {
+    it('should instantiate a CustomDraft with right properties', function () {
       // Given
       const props = {
         id: 'id',
@@ -24,6 +24,23 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomDraft', function ()
       expect(customDraft.url).to.equal('https://1024pix.github.io/atelier-contenus/custom-draft.html');
       expect(customDraft.instruction).to.equal('<p>instruction</p>');
       expect(customDraft.height).to.equal(400);
+    });
+
+    it('should allow a CustomDraft with an url from pix-epreuves-externes', function () {
+      // Given
+      const props = {
+        id: 'id',
+        title: 'title',
+        url: 'https://1024pix.github.io/pix-epreuves-externes/custom-draft.html',
+        instruction: '<p>instruction</p>',
+        height: 400,
+      };
+
+      // When
+      const customDraft = new CustomDraft(props);
+
+      // Then
+      expect(customDraft.url).to.equal('https://1024pix.github.io/pix-epreuves-externes/custom-draft.html');
     });
   });
 
@@ -53,7 +70,7 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomDraft', function ()
     });
   });
 
-  describe('When custom-draft URL is not from 1024pix.github.io/atelier-contenus', function () {
+  describe('When custom-draft URL is not from 1024pix.github.io/atelier-contenus nor 1024pix.github.io/pix-epreuves-externes', function () {
     it('should throw an error', function () {
       // given & when
       const error = catchErrSync(
@@ -69,7 +86,9 @@ describe('Unit | Devcomp | Domain | Models | Element | CustomDraft', function ()
 
       // then
       expect(error).to.be.instanceOf(DomainError);
-      expect(error.message).to.equal('The custom-draft URL must be from "1024pix.github.io/atelier-contenus"');
+      expect(error.message).to.equal(
+        'The custom-draft URL must be from "1024pix.github.io/atelier-contenus" or "1024pix.github.io/pix-epreuves-externes"',
+      );
     });
   });
 });
