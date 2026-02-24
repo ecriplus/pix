@@ -16,7 +16,6 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
-import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { CertificationAssessmentHistory } from '../models/CertificationAssessmentHistory.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
@@ -94,7 +93,7 @@ export async function scoreV3Certification({
     certificationCourseId: assessmentSheet.certificationCourseId,
   });
 
-  const { coreScoring, doubleCertificationScoring } = services.handleV3CertificationScoring({
+  const { coreAssessmentResult, doubleCertificationScoring } = services.handleV3CertificationScoring({
     event,
     candidate,
     assessmentSheet,
@@ -115,11 +114,10 @@ export async function scoreV3Certification({
   await DomainTransaction.execute(async () => {
     await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
 
-    if (coreScoring) {
+    if (coreAssessmentResult) {
       await _saveV3Result({
-        assessmentResult: coreScoring.assessmentResult,
+        assessmentResult: coreAssessmentResult,
         certificationCourseId: assessmentSheet.certificationCourseId,
-        competenceMarks: coreScoring.competenceMarks,
         assessmentResultRepository,
         sharedCompetenceMarkRepository,
         certificationCourseRepository,
@@ -178,7 +176,6 @@ const _verifyCertificationIsScorable = async ({
 async function _saveV3Result({
   assessmentResult,
   certificationCourseId,
-  competenceMarks,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
   certificationCourseRepository,
@@ -188,12 +185,9 @@ async function _saveV3Result({
     assessmentResult,
   });
 
-  for (const competenceMark of competenceMarks) {
-    const competenceMarkDomain = new CompetenceMark({
-      ...competenceMark,
-      assessmentResultId: newAssessmentResult.id,
-    });
-    await sharedCompetenceMarkRepository.save(competenceMarkDomain);
+  for (const competenceMark of assessmentResult.competenceMarks) {
+    competenceMark.assessmentResultId = newAssessmentResult.id;
+    await sharedCompetenceMarkRepository.save(competenceMark);
   }
 
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });

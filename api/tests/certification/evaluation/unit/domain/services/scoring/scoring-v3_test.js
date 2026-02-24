@@ -82,8 +82,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         // then
-        expect(score.coreScoring.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
-        expect(score.coreScoring.assessmentResult).to.be.instanceOf(AssessmentResult);
+        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
         expect(score.doubleCertificationScoring).to.be.null;
       });
     });
@@ -131,8 +131,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           scoringDegradationService,
         });
 
-        expect(score.coreScoring.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
-        expect(score.coreScoring.assessmentResult).to.be.instanceOf(AssessmentResult);
+        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
         expect(score.doubleCertificationScoring).to.be.instanceOf(DoubleCertificationScoring);
       });
     });
@@ -149,7 +149,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         expect(hasScored).to.deep.equal({
-          coreScoring: null,
+          coreAssessmentResult: null,
           doubleCertificationScoring: null,
         });
       });
