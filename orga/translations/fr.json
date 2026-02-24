@@ -51,6 +51,7 @@
       "ine-required": "Le champ INE est obligatoire pour chaque élève.",
       "ine-unique": "L’INE {nationalStudentId} est présent plusieurs fois dans le fichier pour plusieurs élèves.",
       "invalid-birthdate-format": "L’élève ayant pour INE {nationalStudentId} n'a pas le bon format de date de naissance. Il doit être au format 'DD/MM/YYYY'",
+      "invalid-char-detected": "Le nom / prénom de l'élève ayant pour INE {nationalStudentId} contient des caractères non supportés.",
       "invalid-file": "Le fichier n’est pas conforme.",
       "invalid-file-extension": "Extension {fileExtension} non supportée.",
       "last-name-required": "L’élève ayant pour INE {nationalStudentId} n’a pas le champ Nom de famille renseigné. Il est obligatoire pour chaque élève.",

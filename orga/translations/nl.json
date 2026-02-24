@@ -51,6 +51,7 @@
       "ine-required": "Het INE-veld is verplicht voor elke student.",
       "ine-unique": "De INE {nationalStudentId} komt meerdere keren voor in het bestand voor verschillende studenten.",
       "invalid-birthdate-format": "De student met de INE {nationalStudentId} heeft niet het juiste format voor de geboortedatum. Deze moet in het format 'DD/MM/JJJJ' zijn.",
+      "invalid-char-detected": "De naam of voornaam van de leerling met INE {nationalStudentId} bevat niet-ondersteunde tekens.",
       "invalid-file": "Het bestand is niet conform.",
       "invalid-file-extension": "Uitbreiding {fileExtension} niet ondersteund.",
       "last-name-required": "{nationalStudentId} Bij een leerling met een INE van is het veld Achternaam niet ingevuld. Dit is verplicht voor alle leerlingen.",
