@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/picto_gestion-mdp_nov.svg",
     "description": "<p>Même si vous choisissez des mots de passe forts, ce n’est pas toujours suffisant pour protéger vos nombreux services en ligne. Dans ce module, découvrez comment garder vos mots de passe secrets, réagir en cas d’oubli et éviter les erreurs courantes.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
@@ -116,32 +116,32 @@
                     {
                       "name": "Messagerie",
                       "description": "Compte piraté : des messages d’arnaque ont été envoyés à plusieurs personnes en se faisant passer pour Max.",
-                      "icon": "https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg",
-                      "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
+                      "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_msg.svg",
+                      "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_pirate.svg"
                     },
                     {
                       "name": "Réseau social",
                       "description": "Compte piraté : Max n’arrive plus à se connecter à son compte. !",
-                      "icon": "https://assets.pix.org/modules/mon-premier-prompt/picto_moduleIA_prompt1.svg",
-                      "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
+                      "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_rs.svg",
+                      "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_pirate.svg"
                     },
                     {
                       "name": "Achats en ligne",
                       "description": "Compte piraté : oh non… Un achat de 249 € a été effectué à la place de Max. 😓",
-                      "icon": "https://assets.pix.org/modules/jeux-video-enfant/ppn3_details.svg",
-                      "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-pirate.jpg"
+                      "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_achat.svg",
+                      "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_pirate.svg"
                     },
                     {
                       "name": "Réservation d’hôtels",
                       "description": "Rien à signaler sur ce compte.",
-                      "icon": "https://assets.pix.org/modules/ent-homme-fauteuil.png",
-                      "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-ok.jpg"
+                      "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_hotel.svg",
+                      "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_ok.svg"
                     },
                     {
                       "name": "Vidéo à la demande",
                       "description": "Rien à signaler sur ce compte.",
-                      "icon": "https://assets.pix.org/modules/tmp-ia-hallu/picto_moduleIA_hallu.svg",
-                      "image": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/flipcards-ok.jpg"
+                      "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_vod.svg",
+                      "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_ok.svg"
                     }
                   ]
                 }
@@ -242,7 +242,7 @@
                     "id": "dcd3d82b-b34a-4ee0-aadf-d32a0d381afe",
                     "text": "Écrire certains mots de passe dans un carnet.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp1.jpg",
+                      "url": "https://assets.pix.org/modules/CYGestionMDP_Nov/mdp_carnet.svg",
                       "altText": ""
                     },
                     "proposalA": "Méthode sécurisée",
@@ -253,7 +253,7 @@
                     "id": "4712472b-7dd9-495b-85b7-9e08b40193c2",
                     "text": "Noter tous ses mots de passe dans un fichier sur l’ordinateur familial.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp2.jpg",
+                      "url": "https://assets.pix.org/modules/CYGestionMDP_Nov/mdp_document.svg",
                       "altText": ""
                     },
                     "proposalA": "Méthode sécurisée",
@@ -264,7 +264,7 @@
                     "id": "08653d9f-54da-4177-83f5-5b19f629b302",
                     "text": "Envoyer un mot de passe par message à un ami de confiance.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp3.jpg",
+                      "url": "https://assets.pix.org/modules/CYGestionMDP_Nov/mdp_message.svg",
                       "altText": ""
                     },
                     "proposalA": "Méthode sécurisée",
@@ -275,7 +275,7 @@
                     "id": "5792e794-8e87-4eb6-8eeb-9e6a2d4363b1",
                     "text": "Enregistrer ses mots de passe dans son navigateur.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp4.jpg",
+                      "url": "https://assets.pix.org/modules/CYGestionMDP_Nov/mdp_navigateur.svg",
                       "altText": ""
                     },
                     "proposalA": "Méthode sécurisée",
@@ -286,7 +286,7 @@
                     "id": "f9425b88-9d61-4288-aba3-6ba33cde25a1",
                     "text": "Utiliser une phrase pour créer et mémoriser plus facilement son mot de passe.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_gestionmdp_nov/qabmemoiremdp5.jpg",
+                      "url": "https://assets.pix.org/modules/CYGestionMDP_Nov/mdp_phrase.svg",
                       "altText": ""
                     },
                     "proposalA": "Méthode sécurisée",
