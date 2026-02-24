@@ -72,13 +72,13 @@
       "step2": "S'inscrire au '<'a href='https://app.livestorm.co/pix-1/parcours-intelligence-artificielle-enseignement-scolaire?utm_source=pixorga' class='link link--banner link--bold link--underlined' '>'webinaire'</a>'"
     },
     "import": {
-      "ia-message": "📢 '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'Nouveau : découvrez le kit de déploiement des parcours apprenants IA'</a>'",
+      "ia-message": "🚀 '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'Nouveau : découvrez le kit de déploiement des parcours apprenants IA'</a>'",
       "message": "Les grandes étapes de l’année dans l’enseignement scolaire :",
-      "step1a": "Mettre en place&nbsp;: '<'a href='https://cloud.pix.fr/s/WjTnkSbFs9TDcSC' title='Guide télécharger les résultats' class='link link--banner link--bold link--underlined' '>'télécharger les résultats'</a>' de certification et",
+      "step1a": "Mettre en place&nbsp;: '<'a href='https://cloud.pix.fr/s/TBF97QzSni7SWpc' title='Guide télécharger les résultats' class='link link--banner link--bold link--underlined' '>'télécharger les résultats'</a>' de certification et",
       "step1b": "importer",
       "step1c": "la base élèves (admin)",
       "step2": "'<'a href='https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt' title='Guide Lancer les parcours de rentrée' class='link link--banner link--bold link--underlined' '>'Créer les campagnes'</a>' (parcours rentrée, 6e, thématiques, disciplinaires, ciblés…).",
-      "step3": "Certifier les apprenants. '<'a href='https://cloud.pix.fr/s/opiFxfjygR76S8y' title='Guide Préparer et organiser la certification des élèves' class='link link--banner link--bold link--underlined' '>'En savoir plus sur la certification'</a>'."
+      "step3": "Certifier les apprenants. '<'a href='https://cloud.pix.fr/s/nkEoMj9BtHX9EzE' title='Guide Préparer et organiser la certification des élèves' class='link link--banner link--bold link--underlined' '>'En savoir plus sur la certification'</a>'."
     },
     "last-places-lot-available": {
       "message": "Attention, vos places arrivent à échéance dans {days, number} jours."
