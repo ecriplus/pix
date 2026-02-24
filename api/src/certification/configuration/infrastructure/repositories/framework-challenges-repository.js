@@ -31,6 +31,7 @@ export async function getByVersionId({ versionId }) {
 export async function update(challenges) {
   const knexConn = DomainTransaction.getConnection();
 
+  // Note: cannot do onConflict.merge here because ['versionId', 'challengeId'] has no composite index
   for (const { versionId, discriminant, difficulty, challengeId } of challenges) {
     await knexConn('certification-frameworks-challenges')
       .update({

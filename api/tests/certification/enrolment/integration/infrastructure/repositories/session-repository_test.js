@@ -138,7 +138,7 @@ describe('Integration | Repository | certification | enrolment | SessionEnrolmen
     });
   });
 
-  describe('#delete', function () {
+  describe('#remove', function () {
     context('when session exists', function () {
       context('when the session has candidates', function () {
         it('should remove candidates and delete the session', async function () {
