@@ -308,7 +308,7 @@
                     "id": "1",
                     "content": "<p>En analysant le code du logiciel et en le comparant à celui de logiciels malveillants déjà identifiés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! Comme tout fichier, chaque logiciel malveillant possède des caractéristiques qui lui sont propres, appelées <strong>signature </strong>(virales).<br><br>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une une base contenant des informations sur des logiciels malveillants (déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
+                      "diagnosis": "<p>Effectivement ! Comme tout fichier, chaque logiciel malveillant possède des caractéristiques qui lui sont propres. On appelle cela : la <strong>signature</strong> du logiciel malveillant.<br><br>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
                     }
                   },
                   {
