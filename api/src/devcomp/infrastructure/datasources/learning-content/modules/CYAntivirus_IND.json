@@ -299,7 +299,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0fee0aa5-3408-47c2-81a6-1fce8b187903",
+                "id": "9834fd7c-235b-48d3-9109-c8d2ce8ac373",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, comment un antivirus reconnaît un logiciel malveillant ?</p>",
                 "hasShortProposals": false,
@@ -424,7 +424,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0fee0aa5-3408-47c2-81a6-1fce8b187903",
+                "id": "4b268a76-cae4-43b1-bde4-cb9df881c581",
                 "type": "text",
                 "content": "<p>Mais de nouveaux logiciels malveillants apparaissent chaque jour, comment rester protégé ?</p>"
               }
@@ -585,7 +585,7 @@
             {
               "type": "element",
               "element": {
-                "id": "d6b082d1-43eb-46b9-b756-3633c2c0e94b",
+                "id": "8a9454f7-e486-4069-9233-6f1cb8dc9dfd",
                 "type": "qab",
                 "instruction": "<p>Pour chacune des situations ci-dessous, indiquez si le comportement est adapté.</p>",
                 "cards": [
