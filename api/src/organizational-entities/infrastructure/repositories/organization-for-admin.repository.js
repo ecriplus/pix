@@ -67,6 +67,18 @@ const exist = async function ({ organizationId }) {
 
 /**
  * @type {function}
+ * @param {Array<string|number>} ids
+ * @return {Promise<Array<string|number>>}
+ */
+const findExistingIds = async function ({ ids } = {}) {
+  if (!ids || ids.length === 0) return [];
+  const knexConnection = DomainTransaction.getConnection();
+  const organizations = await knexConnection(ORGANIZATIONS_TABLE_NAME).select('id').whereIn('id', ids);
+  return organizations.map((org) => org.id);
+};
+
+/**
+ * @type {function}
  * @param {string|number} parentOrganizationId
  * @return {Promise<OrganizationForAdmin[]>}
  */
@@ -503,6 +515,7 @@ export const organizationForAdminRepository = {
   archive,
   createProOrganizationInvitation,
   exist,
+  findExistingIds,
   findPaginatedFiltered,
   findChildrenByParentOrganizationId,
   get,

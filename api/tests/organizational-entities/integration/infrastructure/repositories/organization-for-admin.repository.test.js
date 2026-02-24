@@ -1784,4 +1784,34 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(organizationLearnerTypeId).to.equal(secondOrganizationLearnerType.id);
     });
   });
+
+  describe('findExistingIds', function () {
+    it('should return organization ids matching given ids', async function () {
+      // given
+      const organization1 = databaseBuilder.factory.buildOrganization();
+      const organization2 = databaseBuilder.factory.buildOrganization();
+      await databaseBuilder.commit();
+
+      // when
+      const foundOrganizationIds = await repositories.organizationForAdminRepository.findExistingIds({
+        ids: [organization1.id, organization2.id],
+      });
+
+      // then
+      expect(foundOrganizationIds).to.deep.equal([organization1.id, organization2.id]);
+    });
+
+    it('should return an empty array if no organization id matches', async function () {
+      // given
+      const unknownOrganizationIds = [999, 998];
+
+      // when
+      const foundOrganizationIds = await repositories.organizationForAdminRepository.findExistingIds({
+        ids: unknownOrganizationIds,
+      });
+
+      // then
+      expect(foundOrganizationIds).to.deep.equal([]);
+    });
+  });
 });

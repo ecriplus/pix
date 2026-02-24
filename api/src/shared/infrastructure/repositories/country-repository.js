@@ -29,7 +29,22 @@ const getByCode = async function (code) {
   return _toDomain(result);
 };
 
-export { findAll, getByCode };
+/**
+ * @type {function}
+ * @param {Array<string>} codes
+ * @return {Promise<Array<string>>}
+ */
+const findExistingCodes = async function ({ codes } = {}) {
+  if (!codes || codes.length === 0) return [];
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn('certification-cpf-countries')
+    .select('code')
+    .whereIn('code', codes)
+    .where('commonName', '=', knexConn.ref('originalName'));
+  return result.map((row) => row.code);
+};
+
+export { findAll, findExistingCodes, getByCode };
 
 function _toDomain(row) {
   return new Country({
