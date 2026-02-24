@@ -1,5 +1,47 @@
 # Pix Changelog
 
+# [5.338.0](https://github.com/1024pix/pix/compare/v5.337.0...v5.338.0) (2026-02-24)
+
+### :rocket: Amélioration
+
+- [#15194](https://github.com/1024pix/pix/pull/15194) Ajouter la locale "es" sur Pix Orga et dans le locale switcher de Pix App (PIX-21667) 
+- [#15195](https://github.com/1024pix/pix/pull/15195) Creation module Visio_NOV 
+- [#15200](https://github.com/1024pix/pix/pull/15200) intégration poi mdp nov 
+- [#15198](https://github.com/1024pix/pix/pull/15198) MDX-17 Biais_AVA integration retours relecture 
+- [#15193](https://github.com/1024pix/pix/pull/15193) modif-relecture-experts 
+- [#15208](https://github.com/1024pix/pix/pull/15208) Ne plus mettre zéro crédit par défault lors de la création en masse d'organisations (PIX-21580) 
+- [#15184](https://github.com/1024pix/pix/pull/15184) Scripte une modification de nom de parcours combinés (PIX-21504) 
+
+### :building_construction: Tech
+
+- [#15205](https://github.com/1024pix/pix/pull/15205) :broom: Supprimer un serializer qui n'est plus utilisé 
+- [#15207](https://github.com/1024pix/pix/pull/15207) Ajout de tests e2e dans la recette certif autour de l'inscription de candidats 
+- [#15209](https://github.com/1024pix/pix/pull/15209) Ajouter un fichier .csv manquant pour un test e2e de recette certif 
+- [#14908](https://github.com/1024pix/pix/pull/14908) Clarification des variables d'environnement utilisées dans le contexte `llm` (PIX-21177) 
+- [#15191](https://github.com/1024pix/pix/pull/15191) Rendre modulaire les différents aspects du scoring (PIX-21671) 
+
+### :arrow_up: Montée de version
+
+- [#15206](https://github.com/1024pix/pix/pull/15206) Update dependency @1024pix/eslint-plugin to ^2.1.18 (admin) 
+- [#15212](https://github.com/1024pix/pix/pull/15212) Update dependency @1024pix/eslint-plugin to ^2.1.18 (api) 
+- [#15213](https://github.com/1024pix/pix/pull/15213) Update dependency @1024pix/eslint-plugin to ^2.1.18 (audit-logger) 
+- [#15214](https://github.com/1024pix/pix/pull/15214) Update dependency @1024pix/eslint-plugin to ^2.1.18 (certif) 
+- [#15215](https://github.com/1024pix/pix/pull/15215) Update dependency @1024pix/eslint-plugin to ^2.1.18 (dossier racine) 
+- [#15217](https://github.com/1024pix/pix/pull/15217) Update dependency @1024pix/eslint-plugin to ^2.1.18 (junior) 
+- [#15218](https://github.com/1024pix/pix/pull/15218) Update dependency @1024pix/eslint-plugin to ^2.1.18 (mon-pix) 
+- [#15219](https://github.com/1024pix/pix/pull/15219) Update dependency @1024pix/eslint-plugin to ^2.1.18 (orga) 
+- [#15109](https://github.com/1024pix/pix/pull/15109) Update dependency @1024pix/pix-ui to ^58.4.11 (admin) 
+- [#15220](https://github.com/1024pix/pix/pull/15220) Update dependency @1024pix/pix-ui to ^58.4.11 (certif) 
+- [#15221](https://github.com/1024pix/pix/pull/15221) Update dependency @1024pix/pix-ui to ^58.4.11 (mon-pix) 
+- [#15235](https://github.com/1024pix/pix/pull/15235) Update dependency @1024pix/pix-ui to v59 (certif) 
+- [#15236](https://github.com/1024pix/pix/pull/15236) Update dependency @1024pix/pix-ui to v59 (junior) 
+- [#15231](https://github.com/1024pix/pix/pull/15231) Update dependency eslint-plugin-unicorn to v63 (api) 
+- [#15232](https://github.com/1024pix/pix/pull/15232) Update dependency eslint-plugin-unicorn to v63 (audit-logger) 
+- [#15233](https://github.com/1024pix/pix/pull/15233) Update dependency eslint-plugin-unicorn to v63 (certif) 
+- [#15234](https://github.com/1024pix/pix/pull/15234) Update dependency eslint-plugin-unicorn to v63 (dossier racine) 
+- [#15230](https://github.com/1024pix/pix/pull/15230) Update dependency webpack to v5.105.2 (junior) 
+- [#15222](https://github.com/1024pix/pix/pull/15222) Update nginx Docker tag to v1.29.5
+
 # [5.337.0](https://github.com/1024pix/pix/compare/v5.336.0...v5.337.0) (2026-02-23)
 
 ### :rocket: Amélioration
