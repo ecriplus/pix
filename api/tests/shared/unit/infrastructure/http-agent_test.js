@@ -206,13 +206,15 @@ describe('Shared | Unit | Infrastructure | http-agent', function () {
 
           const axiosError = {
             name: 'error name',
+            message: 'MESSAGE_ERROR',
+            code: 'CODE_ERROR',
           };
           sinon.stub(axios, 'get').withArgs(url, { data: payload, headers }).rejects(axiosError);
 
           const expectedResponse = {
             isSuccessful: false,
-            code: '500',
-            data: null,
+            code: 'CODE_ERROR',
+            data: 'MESSAGE_ERROR',
           };
 
           // when

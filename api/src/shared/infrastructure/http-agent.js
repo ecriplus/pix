@@ -98,8 +98,8 @@ const httpAgent = {
         code = httpErr.response.status;
         data = httpErr.response.data;
       } else {
-        code = '500';
-        data = null;
+        code = httpErr.code;
+        data = httpErr.message;
       }
 
       logger.error({
