@@ -38,6 +38,9 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildStandardAssessmentResult', function () {
     it('should return a standard AssessmentResult', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildStandardAssessmentResult({
         pixScore: 55,
@@ -45,6 +48,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         status: AssessmentResult.status.VALIDATED,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
       });
 
       // then
@@ -54,7 +58,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         status: AssessmentResult.status.VALIDATED,
         pixScore: 55,
         reproducibilityRate: 90,
-        competenceMarks: [],
+        competenceMarks,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.commentForCandidate = undefined;
@@ -66,12 +70,16 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildCancelled', function () {
     it('should return a cancelled AssessmentResult', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildCancelledAssessmentResult({
         pixScore: 55,
         reproducibilityRate: 50.25,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
       });
 
       // then
@@ -81,6 +89,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         status: AssessmentResult.status.CANCELLED,
         pixScore: 55,
         reproducibilityRate: 50.25,
+        competenceMarks,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.createdAt = undefined;
@@ -90,12 +99,16 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildNotTrustableAssessmentResult', function () {
     it('should return a not trustable AssessmentResult', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildNotTrustableAssessmentResult({
         pixScore: 55,
         reproducibilityRate: 50.25,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
       });
 
       // then
@@ -105,7 +118,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         status: AssessmentResult.status.CANCELLED,
         pixScore: 55,
         reproducibilityRate: 50.25,
-        competenceMarks: [],
+        competenceMarks,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
         }),
@@ -156,6 +169,9 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildInsufficientCorrectAnswers', function () {
     it('should return an insufficient correct answers AssessmentResult', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildInsufficientCorrectAnswers({
         pixScore: 0,
@@ -163,6 +179,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         assessmentId: 123,
         status: AssessmentResult.status.REJECTED,
         juryId: 456,
+        competenceMarks,
       });
 
       // then
@@ -172,6 +189,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 49,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
         }),
@@ -222,12 +240,16 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildLackOfAnswersForTechnicalReason', function () {
     it('should return a cancelled AssessmentResult', function () {
+      // given
+      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
         pixScore: 0,
         reproducibilityRate: 49,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
       });
 
       // then
@@ -237,6 +259,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 49,
         assessmentId: 123,
         juryId: 456,
+        competenceMarks,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
         }),

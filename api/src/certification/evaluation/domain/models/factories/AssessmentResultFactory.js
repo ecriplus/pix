@@ -41,30 +41,40 @@ export class AssessmentResultFactory {
       status: AssessmentResult.status.ERROR,
       assessmentId,
       juryId,
+      competenceMarks: [],
     });
   }
 
-  static buildCancelledAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId }) {
+  static buildCancelledAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
     return new AssessmentResult({
       pixScore,
       reproducibilityRate,
       status: AssessmentResult.status.CANCELLED,
       assessmentId,
       juryId,
+      competenceMarks,
     });
   }
 
-  static buildStandardAssessmentResult({ pixScore, reproducibilityRate, status, assessmentId, juryId }) {
+  static buildStandardAssessmentResult({
+    pixScore,
+    reproducibilityRate,
+    status,
+    assessmentId,
+    juryId,
+    competenceMarks,
+  }) {
     return new AssessmentResult({
       pixScore,
       reproducibilityRate,
       status,
       assessmentId,
       juryId,
+      competenceMarks,
     });
   }
 
-  static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId }) {
+  static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
       status: AssessmentResult.status.CANCELLED,
@@ -72,6 +82,7 @@ export class AssessmentResultFactory {
       reproducibilityRate,
       assessmentId,
       juryId,
+      competenceMarks,
     });
   }
 
@@ -117,7 +128,7 @@ export class AssessmentResultFactory {
     });
   }
 
-  static buildInsufficientCorrectAnswers({ pixScore, reproducibilityRate, assessmentId, juryId }) {
+  static buildInsufficientCorrectAnswers({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
       status: AssessmentResult.status.REJECTED,
@@ -125,6 +136,7 @@ export class AssessmentResultFactory {
       reproducibilityRate,
       assessmentId,
       juryId,
+      competenceMarks,
     });
   }
 
