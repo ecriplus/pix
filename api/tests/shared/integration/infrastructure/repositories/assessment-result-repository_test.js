@@ -31,6 +31,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [],
+          capacity: 3.56,
         });
         assessmentResultToSave.id = undefined;
 
@@ -352,6 +353,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark2],
+          capacity: null,
         });
         databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,
@@ -421,6 +423,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark3],
+          capacity: null,
         });
         databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,
@@ -472,6 +475,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: 2,
           status: Assessment.states.STARTED,
           competenceMarks: [],
+          capacity: null,
         });
         expectedAssessmentResult.id = undefined;
         expectedAssessmentResult.commentByJury = undefined;
@@ -500,6 +504,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: null,
           status: Assessment.states.STARTED,
           competenceMarks: [],
+          capacity: null,
         });
         expectedAssessmentResult.id = undefined;
         expectedAssessmentResult.commentByJury = undefined;

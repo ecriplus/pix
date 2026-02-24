@@ -10,6 +10,7 @@ export class AssessmentResultFactory {
     assessmentId,
     juryId,
     competenceMarks,
+    capacity,
   }) {
     const commentForCandidate = new JuryComment({
       context: JuryCommentContexts.CANDIDATE,
@@ -30,6 +31,7 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
@@ -45,7 +47,14 @@ export class AssessmentResultFactory {
     });
   }
 
-  static buildCancelledAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+  static buildCancelledAssessmentResult({
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+  }) {
     return new AssessmentResult({
       pixScore,
       reproducibilityRate,
@@ -53,6 +62,7 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
@@ -63,6 +73,7 @@ export class AssessmentResultFactory {
     assessmentId,
     juryId,
     competenceMarks,
+    capacity,
   }) {
     return new AssessmentResult({
       pixScore,
@@ -71,10 +82,18 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
-  static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+  static buildNotTrustableAssessmentResult({
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+  }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
       status: AssessmentResult.status.CANCELLED,
@@ -83,10 +102,11 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
-  static buildFraud({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+  static buildFraud({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks, capacity }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.FRAUD,
       status: AssessmentResult.status.REJECTED,
@@ -95,10 +115,19 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
-  static buildLackOfAnswers({ pixScore, reproducibilityRate, status, assessmentId, juryId, competenceMarks }) {
+  static buildLackOfAnswers({
+    pixScore,
+    reproducibilityRate,
+    status,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+  }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
       status,
@@ -107,6 +136,7 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
@@ -116,6 +146,7 @@ export class AssessmentResultFactory {
     assessmentId,
     juryId,
     competenceMarks,
+    capacity,
   }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
@@ -125,10 +156,18 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
-  static buildInsufficientCorrectAnswers({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+  static buildInsufficientCorrectAnswers({
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+  }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
       status: AssessmentResult.status.REJECTED,
@@ -137,10 +176,18 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 
-  static buildRejectedDueToZeroPixScore({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
+  static buildRejectedDueToZeroPixScore({
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+  }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
       status: AssessmentResult.status.REJECTED,
@@ -149,6 +196,7 @@ export class AssessmentResultFactory {
       assessmentId,
       juryId,
       competenceMarks,
+      capacity,
     });
   }
 }

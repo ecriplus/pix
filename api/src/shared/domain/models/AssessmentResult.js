@@ -29,6 +29,7 @@ class AssessmentResult {
    * @param {Array<CompetenceMark>} competenceMarks
    * @param {number} assessmentId
    * @param {number} juryId
+   * @param {number} capacity
    */
   constructor({
     id,
@@ -42,6 +43,7 @@ class AssessmentResult {
     competenceMarks = [],
     assessmentId,
     juryId,
+    capacity = null,
   } = {}) {
     this.id = id;
     this.commentForCandidate = commentForCandidate;
@@ -54,6 +56,7 @@ class AssessmentResult {
     this.competenceMarks = competenceMarks;
     this.assessmentId = assessmentId;
     this.juryId = juryId;
+    this.capacity = capacity;
   }
 
   /**
@@ -82,6 +85,7 @@ class AssessmentResult {
       competenceMarks: this.competenceMarks,
       assessmentId: this.assessmentId,
       juryId: this.juryId,
+      capacity: this.capacity,
     });
   }
 

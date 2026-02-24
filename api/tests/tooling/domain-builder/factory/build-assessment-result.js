@@ -16,6 +16,7 @@ const buildAssessmentResult = function ({
   juryId = 1,
   assessmentId = 456,
   competenceMarks = [],
+  capacity = 1.2567,
 } = {}) {
   return new AssessmentResult({
     pixScore,
@@ -29,6 +30,7 @@ const buildAssessmentResult = function ({
     juryId,
     assessmentId,
     competenceMarks,
+    capacity,
   });
 };
 

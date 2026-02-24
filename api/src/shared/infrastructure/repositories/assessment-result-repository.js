@@ -35,11 +35,12 @@ function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
     pixScore: assessmentResultDTO.pixScore,
     reproducibilityRate: reproducibilityRateAsNumber,
     competenceMarks: competenceMarks,
+    capacity: assessmentResultDTO.capacity,
   });
 }
 
 const save = async function ({ certificationCourseId, assessmentResult }) {
-  const { pixScore, reproducibilityRate, status, commentByJury, id, juryId, assessmentId } = assessmentResult;
+  const { pixScore, reproducibilityRate, status, commentByJury, id, juryId, assessmentId, capacity } = assessmentResult;
   const commentByAutoJury = _getCommentByAutoJury(assessmentResult);
 
   if (_.isNil(assessmentId)) {
@@ -56,6 +57,7 @@ const save = async function ({ certificationCourseId, assessmentResult }) {
       id,
       juryId,
       assessmentId,
+      capacity,
       commentForCandidate: assessmentResult.commentForCandidate?.fallbackComment,
       commentForOrganization: assessmentResult.commentForOrganization?.fallbackComment,
       commentByAutoJury,

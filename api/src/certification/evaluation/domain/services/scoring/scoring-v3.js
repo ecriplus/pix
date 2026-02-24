@@ -128,6 +128,7 @@ function scoreCertification({
     allAnswers: assessmentSheet.answers,
     assessmentId: assessmentSheet.assessmentId,
     pixScore,
+    capacity,
     status,
     competenceMarks,
     isRejectedForFraud: assessmentSheet.isRejectedForFraud,
