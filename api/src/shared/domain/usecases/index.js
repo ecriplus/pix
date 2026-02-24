@@ -1,4 +1,4 @@
-import * as complementaryCertificationBadgeRepository from '../../../certification/complementary-certification/infrastructure/repositories/complementary-certification-badge-repository.js';
+import * as complementaryCertificationBadgeRepository from '../../../certification/configuration/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCompanionAlertRepository from '../../../certification/shared/infrastructure/repositories/certification-companion-alert-repository.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
