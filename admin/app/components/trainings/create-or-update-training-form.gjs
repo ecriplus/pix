@@ -36,7 +36,7 @@ class Form {
     this.internalTitle = internalTitle || null;
     this.link = link || null;
     this.type = type || null;
-    this.duration = duration || { days: 0, hours: 0, minutes: 0 };
+    this.duration = duration ? { ...duration } : { days: 0, hours: 0, minutes: 0 };
     this.locale = locale || null;
     this.editorLogoUrl = editorLogoUrl || null;
     this.editorName = editorName || null;
