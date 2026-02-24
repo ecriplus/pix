@@ -13,7 +13,7 @@ const DIVISION = 'D';
 
 const FRANCE_COUNTRY_CODE = '100';
 
-class XMLOrganizationLearnersSet {
+export class XMLOrganizationLearnersSet {
   constructor() {
     this.organizationLearnersByStudentId = new Map();
     this.studentIds = [];
@@ -126,4 +126,4 @@ function _frenchBornHasEmptyCityCode({ birthCountryCode, birthCityCode }) {
   return birthCountryCode === FRANCE_COUNTRY_CODE && isEmpty(birthCityCode);
 }
 
-export { XMLOrganizationLearnersSet };
+export const containsOnlyValidChars = (str) => /^([A-Za-zŽžÀ-ÿ \-'])+$/.test(str);
