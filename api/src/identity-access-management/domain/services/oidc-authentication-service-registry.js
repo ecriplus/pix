@@ -11,7 +11,7 @@ export class OidcAuthenticationServiceRegistry {
   #readyOidcProviderServicesByRequestedApplications = {};
 
   constructor(dependencies = {}) {
-    this.oidcProviderRepository = dependencies.oidcProviderRepository;
+    this.oidcProviderRepository = dependencies.oidcProviderRepository ?? oidcProviderRepository;
   }
 
   async configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
@@ -56,7 +56,7 @@ export class OidcAuthenticationServiceRegistry {
     }
 
     if (!oidcProviderServices) {
-      const oidcProviders = await oidcProviderRepository.findAllOidcProviders();
+      const oidcProviders = await this.oidcProviderRepository.findAllOidcProviders();
 
       oidcProviderServices = await PromiseUtils.mapSeries(oidcProviders, async (oidcProvider) => {
         await oidcProvider.decryptClientSecret(cryptoService);
