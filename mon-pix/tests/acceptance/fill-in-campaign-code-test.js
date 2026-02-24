@@ -3,6 +3,7 @@ import { click, currentURL, fillIn } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { Response } from 'miragejs';
 import { module, test } from 'qunit';
 
 import { authenticate } from '../helpers/authentication';
@@ -51,6 +52,47 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), `/parcours/${verifiedCode.id}`);
+      });
+      module('when access to combined course is forbidden', function () {
+        test('it displays oups page', async function (assert) {
+          // given
+          const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
+          this.server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+          this.server.create('combined-course', { code: verifiedCode.id });
+          this.server.patch(
+            'combined-courses/:code/reassess-status',
+            () => new Response(403, {}, { errors: [{ code: 403 }] }),
+          );
+          // when
+          const screen = await visit(`/campagnes`);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+
+          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+
+          // then
+          assert.strictEqual(currentURL(), `/campagnes/SOMETHING/oups`);
+        });
+      });
+      module('when access to combined course has failed', function () {
+        test('it displays error page', async function (assert) {
+          // given
+          const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
+          this.server.create('organization-to-join', { id: 1, code: verifiedCode.id, identityProvider: null });
+          this.server.create('combined-course', { code: verifiedCode.id });
+          this.server.patch(
+            'combined-courses/:code/reassess-status',
+            () => new Response(500, {}, { errors: [{ code: 500, message: 'An error occured' }] }),
+          );
+
+          // when
+          const screen = await visit(`/campagnes`);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+
+          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+
+          // then
+          assert.ok(screen.getByText('An error occured', { exact: false }));
+        });
       });
     });
   });
