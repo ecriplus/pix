@@ -61,8 +61,6 @@ export class OidcAuthenticationServiceRegistry {
     if (!oidcProviderService) return;
 
     await oidcProviderService.initializeClientConfig();
-
-    return true;
   }
 
   async #loadAllOidcProviderServices(oidcProviderServices) {
@@ -94,8 +92,6 @@ export class OidcAuthenticationServiceRegistry {
       ),
       (oidcProviderService) => generateGroupByKey(oidcProviderService.application, oidcProviderService.applicationTld),
     );
-
-    return true;
   }
 }
 
