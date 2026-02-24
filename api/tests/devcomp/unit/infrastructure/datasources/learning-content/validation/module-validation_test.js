@@ -35,7 +35,9 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
           const sample = {
             id: randomUUID(),
             type: 'custom',
+            title: 'Mon POI',
             instruction: 'Hello world',
+            functionalInstruction: 'Lire la conversation',
             tagName: 'message-conversation',
             props: {
               title: 'Conversation entre Naomi et Mickaël à propos d’une adresse mail',

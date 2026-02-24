@@ -6,7 +6,9 @@ import { htmlSchema, uuidSchema } from '../utils.js';
 const commonProps = {
   id: uuidSchema,
   type: Joi.string().valid('custom').required(),
+  title: Joi.string().allow('').required(),
   instruction: htmlSchema.allow('').required(),
+  functionalInstruction: htmlSchema.allow('').required(),
 };
 
 export const customElementSchema = Joi.alternatives().conditional('.tagName', {
