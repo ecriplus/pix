@@ -118,7 +118,7 @@ const _toDomain = (certificationResultDto) => {
       pixScore: certificationResult.pix_score,
       certificationDate: certificationResult.certification_date,
       competences: Array.from(uniqCompetences.values()),
-      maxReachableLevel: certificationResult.scoring_configuration.length - 1,
+      maxReachableLevel: certificationResult.scoring_configuration?.length - 1,
     });
   });
 };
