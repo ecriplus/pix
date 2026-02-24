@@ -43,7 +43,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             assert.ok(screen.getByText(this.intl.t('banners.import.message')));
 
             const downloadLink = screen.getByRole('link', { name: 'télécharger les résultats' });
-            assert.strictEqual(downloadLink.href, 'https://cloud.pix.fr/s/WjTnkSbFs9TDcSC');
+            assert.strictEqual(downloadLink.href, 'https://cloud.pix.fr/s/TBF97QzSni7SWpc');
 
             const importLink = screen.queryByRole('link', { name: 'importer' });
             assert.ok(importLink.href.endsWith('/import-participants'));
@@ -52,7 +52,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
             assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt');
 
             const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
-            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/opiFxfjygR76S8y');
+            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/nkEoMj9BtHX9EzE');
           });
 
           test('should render the ia sco banner', async function (assert) {
