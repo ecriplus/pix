@@ -40,7 +40,7 @@ module.exports = function (environment) {
       DEFAULT_LOCALE: process.env.DEFAULT_LOCALE || 'en',
       SUPPORTED_LOCALES: [
         { value: 'en', nativeName: 'English', displayedInSwitcher: true },
-        { value: 'es', nativeName: 'Español', displayedInSwitcher: false },
+        { value: 'es', nativeName: 'Español', displayedInSwitcher: true },
         { value: 'it', nativeName: 'Italiano', displayedInSwitcher: true },
         { value: 'es-419', nativeName: 'Español (Latinoamérica y el Caribe)', displayedInSwitcher: true },
         { value: 'fr', nativeName: 'Français', displayedInSwitcher: true },
