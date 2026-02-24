@@ -2,6 +2,37 @@ import { AssessmentResult } from '../../../../../shared/domain/models/Assessment
 import { AutoJuryCommentKeys, JuryComment, JuryCommentContexts } from '../../../../shared/domain/models/JuryComment.js';
 
 export class AssessmentResultFactory {
+  static #buildWithAutoJuryComment({
+    autoJuryCommentKey,
+    status,
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+  }) {
+    const commentForCandidate = new JuryComment({
+      context: JuryCommentContexts.CANDIDATE,
+      commentByAutoJury: autoJuryCommentKey,
+    });
+
+    const commentForOrganization = new JuryComment({
+      context: JuryCommentContexts.ORGANIZATION,
+      commentByAutoJury: autoJuryCommentKey,
+    });
+
+    return new AssessmentResult({
+      commentForCandidate,
+      commentForOrganization,
+      pixScore,
+      reproducibilityRate,
+      status,
+      assessmentId,
+      juryId,
+      competenceMarks,
+    });
+  }
+
   static buildAlgoErrorResult({ error, assessmentId, juryId }) {
     return new AssessmentResult({
       commentByJury: error.message,
@@ -34,44 +65,22 @@ export class AssessmentResultFactory {
   }
 
   static buildNotTrustableAssessmentResult({ pixScore, reproducibilityRate, assessmentId, juryId }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
-    });
-
-    return new AssessmentResult({
-      commentForCandidate,
-      commentForOrganization,
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
+      status: AssessmentResult.status.CANCELLED,
       pixScore,
       reproducibilityRate,
-      status: AssessmentResult.status.CANCELLED,
       assessmentId,
       juryId,
     });
   }
 
   static buildFraud({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.FRAUD,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.FRAUD,
-    });
-
-    return new AssessmentResult({
-      commentForCandidate,
-      commentForOrganization,
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.FRAUD,
+      status: AssessmentResult.status.REJECTED,
       pixScore,
       reproducibilityRate,
-      status: AssessmentResult.status.REJECTED,
       assessmentId,
       juryId,
       competenceMarks,
@@ -79,25 +88,14 @@ export class AssessmentResultFactory {
   }
 
   static buildLackOfAnswers({ pixScore, reproducibilityRate, status, assessmentId, juryId, competenceMarks }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
-    });
-
-    return new AssessmentResult({
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
+      status,
       pixScore,
       reproducibilityRate,
-      status,
       assessmentId,
       juryId,
       competenceMarks,
-      commentForCandidate,
-      commentForOrganization,
     });
   }
 
@@ -108,67 +106,34 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
   }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
-    });
-
-    return new AssessmentResult({
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
+      status: AssessmentResult.status.CANCELLED,
       pixScore,
       reproducibilityRate,
-      status: AssessmentResult.status.CANCELLED,
       assessmentId,
       juryId,
       competenceMarks,
-      commentForCandidate,
-      commentForOrganization,
     });
   }
 
   static buildInsufficientCorrectAnswers({ pixScore, reproducibilityRate, assessmentId, juryId }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
-    });
-
-    return new AssessmentResult({
-      commentForCandidate,
-      commentForOrganization,
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
+      status: AssessmentResult.status.REJECTED,
       pixScore,
       reproducibilityRate,
-      status: AssessmentResult.status.REJECTED,
       assessmentId,
       juryId,
     });
   }
 
   static buildRejectedDueToZeroPixScore({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks }) {
-    const commentForCandidate = new JuryComment({
-      context: JuryCommentContexts.CANDIDATE,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
-    });
-
-    const commentForOrganization = new JuryComment({
-      context: JuryCommentContexts.ORGANIZATION,
-      commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
-    });
-
-    return new AssessmentResult({
-      commentForCandidate,
-      commentForOrganization,
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+      status: AssessmentResult.status.REJECTED,
       pixScore,
       reproducibilityRate,
-      status: AssessmentResult.status.REJECTED,
       assessmentId,
       juryId,
       competenceMarks,
