@@ -1,5 +1,7 @@
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixIndicatorCard from '@1024pix/pix-ui/components/pix-indicator-card';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -7,9 +9,11 @@ import ActivityType from 'pix-orga/components/activity-type';
 import CopyPasteButton from 'pix-orga/components/copy-paste-button';
 import Breadcrumb from 'pix-orga/components/ui/breadcrumb';
 import PageTitle from 'pix-orga/components/ui/page-title';
+import { EVENT_NAME } from 'pix-orga/helpers/metrics-event-name';
 
 export default class CombinedCourseHeader extends Component {
   @service intl;
+  @service pixMetrics;
 
   get breadcrumbLinks() {
     return [
@@ -31,6 +35,11 @@ export default class CombinedCourseHeader extends Component {
     return index + 1;
   }
 
+  @action
+  trackCampaignClick() {
+    this.pixMetrics.trackEvent(EVENT_NAME.COMBINED_COURSE.VIEW_CAMPAIGN_CLICK);
+  }
+
   <template>
     <PageTitle>
       <:breadcrumb>
@@ -46,7 +55,12 @@ export default class CombinedCourseHeader extends Component {
           {{#if @campaignIds.length}}
             <div class="combined-course-page__campaigns">
               {{#each @campaignIds as |campaignId index|}}
-                <PixButtonLink @route="authenticated.campaigns.campaign" @model={{campaignId}} @variant="primary">
+                <PixButtonLink
+                  {{on "click" this.trackCampaignClick}}
+                  @route="authenticated.campaigns.campaign"
+                  @model={{campaignId}}
+                  @variant="primary"
+                >
                   {{t "pages.combined-course.campaigns" count=@campaignIds.length index=(this.getCampaignIndex index)}}
                 </PixButtonLink>
               {{/each}}
