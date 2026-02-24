@@ -12,7 +12,8 @@ class CompetenceEvaluationAssessment {
     this.hasOngoingChallengeLiveAlert = false;
     this.hasOngoingCompanionLiveAlert = false;
     this.hasCheckpoints = true;
-    this.showProgressBar = true;
+    this.showChallengeStepper = true;
+    this.showGlobalProgression = false;
     this.showLevelup = true;
     this.showQuestionCounter = true;
     this.answers = assessment.answers;

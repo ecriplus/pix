@@ -5,12 +5,6 @@
   "description": "Plateforme d'évaluation et de certification des compétences numériques",
   "license": "AGPL-3.0",
   "author": "GIP Pix",
-  "engines": {
-    "node": "^24.11.1"
-  },
-  "ember": {
-    "edition": "octane"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1024pix/pix.git"
@@ -20,6 +14,10 @@
     "test": "tests"
   },
   "files": [],
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
+  },
   "scripts": {
     "clean": "rm -rf tmp dist node_modules",
     "lint": "run-s -clns 'lint:(hbs|js|scss|translations)'",
@@ -46,8 +44,8 @@
     "@1024pix/ember-api-actions": "^1.1.0",
     "@1024pix/ember-testing-library": "^3.0.27",
     "@1024pix/epreuves-components": "^2.9.0",
-    "@1024pix/pix-ui": "^58.4.11",
     "@1024pix/eslint-plugin": "^2.1.18",
+    "@1024pix/pix-ui": "^60.0.1",
     "@1024pix/stylelint-config": "^5.1.37",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-proposal-decorators": "^7.24.7",
@@ -140,8 +138,10 @@
       "ember-source": "$ember-source"
     }
   },
-  "exports": {
-    "./tests/*": "./tests/*",
-    "./*": "./app/*"
+  "engines": {
+    "node": "^24.11.1"
+  },
+  "ember": {
+    "edition": "octane"
   }
 }

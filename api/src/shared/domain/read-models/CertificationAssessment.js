@@ -13,7 +13,8 @@ class CertificationAssessment {
     this.challengeLiveAlerts = assessment.challengeLiveAlerts;
     this.companionLiveAlerts = assessment.companionLiveAlerts;
     this.hasCheckpoints = false;
-    this.showProgressBar = false;
+    this.showChallengeStepper = false;
+    this.showGlobalProgression = false;
     this.showLevelup = false;
     this.showQuestionCounter = true;
     this.answers = assessment.answers;

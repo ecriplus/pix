@@ -17,8 +17,12 @@ describe('Unit | Domain | Read-Models | PreviewAssessment', function () {
       expect(assessment.method).to.equal(Assessment.methods.CHOSEN);
     });
 
-    it('should init showProgressBar', function () {
-      expect(assessment.showProgressBar).to.equal(false);
+    it('should init showChallengeStepper', function () {
+      expect(assessment.showChallengeStepper).to.equal(false);
+    });
+
+    it('should init showGlobalProgression', function () {
+      expect(assessment.showGlobalProgression).to.equal(false);
     });
 
     it('should init hasCheckpoints', function () {

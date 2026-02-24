@@ -1,3 +1,4 @@
+import PixProgressBar from '@1024pix/pix-ui/components/pix-progress-bar';
 import { service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
@@ -8,7 +9,7 @@ import progressInAssessment from 'mon-pix/utils/progress-in-assessment';
 export default class ProgressBar extends Component {
   <template>
     <div class="assessment-progress-bar">
-      {{#if this.showProgressBar}}
+      {{#if this.showChallengeStepper}}
         <div class="progress-bar-container">
           {{#if this.showQuestionCounterInsideProgressBar}}
             <div
@@ -47,6 +48,15 @@ export default class ProgressBar extends Component {
             {{this.maxStepsNumber}}
           </div>
         </div>
+      {{else if @assessment.showGlobalProgression}}
+        <PixProgressBar
+          class="checkpoint__progression-gauge"
+          @value={{@assessment.globalProgression}}
+          @label={{t "pages.checkpoint.completion-percentage.label" completion=@assessment.globalProgression}}
+          @percentageValue={{t "common.display.percentage" value=@assessment.globalProgression}}
+          @subtitle={{t "pages.checkpoint.completion-percentage.caption"}}
+          @themeMode="dark"
+        />
       {{/if}}
     </div>
   </template>
@@ -55,16 +65,16 @@ export default class ProgressBar extends Component {
   MINIMUM_WIDTH_STEP_IN_PERCENT = 1.7;
   MINIMUM_WIDTH_STEP_IN_PIXEL = 16;
 
-  get showProgressBar() {
-    return this.args.assessment.showProgressBar && this.media.isDesktop;
+  get showChallengeStepper() {
+    return this.args.assessment.showChallengeStepper && this.media.isDesktop;
   }
 
   get showQuestionCounterInsideProgressBar() {
-    return this.showProgressBar && this.args.assessment.showQuestionCounter;
+    return this.showChallengeStepper && this.args.assessment.showQuestionCounter;
   }
 
   get showQuestionCounterOutside() {
-    return !this.showProgressBar && this.args.assessment.showQuestionCounter;
+    return !this.showChallengeStepper && this.args.assessment.showQuestionCounter;
   }
 
   get currentStepIndex() {

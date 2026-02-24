@@ -9,6 +9,16 @@ describe('Unit | Domain | Read-Models | CampaignAssessment', function () {
       expect(new CampaignAssessment({}).type).to.equal(Assessment.types.CAMPAIGN);
     });
 
+    describe('globalProgression', function () {
+      it('should defined globalProgression', function () {
+        expect(new CampaignAssessment({}, 0.6).globalProgression).to.equal(0.6);
+      });
+
+      it('should set globalProgression to null by default', function () {
+        expect(new CampaignAssessment({}).globalProgression).null;
+      });
+    });
+
     it('should have method of type SMART_RANDOM', function () {
       expect(new CampaignAssessment({}).method).to.equal(Assessment.methods.SMART_RANDOM);
     });
@@ -20,8 +30,12 @@ describe('Unit | Domain | Read-Models | CampaignAssessment', function () {
         assessment = new CampaignAssessment({ campaign });
       });
 
-      it('should init showProgressBar', function () {
-        expect(assessment.showProgressBar).to.equal(true);
+      it('should init showChallengeStepper', function () {
+        expect(assessment.showChallengeStepper).to.equal(true);
+      });
+
+      it('should init showGlobalProgression', function () {
+        expect(assessment.showGlobalProgression).to.equal(false);
       });
 
       it('should init hasCheckpoints', function () {
@@ -48,8 +62,12 @@ describe('Unit | Domain | Read-Models | CampaignAssessment', function () {
         assessment = new CampaignAssessment({ campaign });
       });
 
-      it('should init showProgressBar', function () {
-        expect(assessment.showProgressBar).to.equal(false);
+      it('should init showChallengeStepper', function () {
+        expect(assessment.showChallengeStepper).to.equal(false);
+      });
+
+      it('should init showGlobalProgression', function () {
+        expect(assessment.showGlobalProgression).to.equal(true);
       });
 
       it('should init hasCheckpoints', function () {
@@ -69,14 +87,18 @@ describe('Unit | Domain | Read-Models | CampaignAssessment', function () {
       });
     });
 
-    describe('when campaign is anonymized', function () {
+    describe('when campaign is not defined', function () {
       let assessment;
       before(function () {
         assessment = new CampaignAssessment({ campaign: null });
       });
 
-      it('should init showProgressBar', function () {
-        expect(assessment.showProgressBar).to.equal(false);
+      it('should init showChallengeStepper', function () {
+        expect(assessment.showChallengeStepper).to.equal(false);
+      });
+
+      it('should init showGlobalProgression', function () {
+        expect(assessment.showGlobalProgression).to.equal(false);
       });
 
       it('should init hasCheckpoints', function () {

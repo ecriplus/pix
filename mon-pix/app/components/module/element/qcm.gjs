@@ -65,10 +65,6 @@ export default class ModuleQcm extends ModuleElement {
 
   @action
   getProposalState(proposalId) {
-    if (!this.correction) {
-      return null;
-    }
-
     if (!this.selectedAnswerIds.has(proposalId)) {
       return 'neutral';
     }
@@ -162,7 +158,7 @@ export default class ModuleQcm extends ModuleElement {
               name={{this.element.id}}
               @isDisabled={{this.disableInput}}
               @state={{this.getProposalState proposal.id}}
-              @variant="tile"
+              @variant="modulix"
               {{on "click" (fn this.checkboxSelected proposal.id)}}
             >
               <:label>{{htmlUnsafe proposal.content}}</:label>

@@ -44,10 +44,6 @@ export default class ModuleQcu extends ModuleElement {
 
   @action
   getProposalState(proposalId) {
-    if (!this.correction) {
-      return null;
-    }
-
     if (this.selectedAnswerId !== proposalId || !this.displayFeedbackState) {
       return 'neutral';
     }
@@ -146,7 +142,7 @@ export default class ModuleQcu extends ModuleElement {
               @value={{proposal.id}}
               @isDisabled={{this.disableInput}}
               @state={{this.getProposalState proposal.id}}
-              @variant="tile"
+              @variant="modulix"
               {{on "click" (fn this.radioClicked proposal.id)}}
             >
               <:label>

@@ -24,9 +24,11 @@ export default class Assessment extends Model {
   @attr('boolean', { defaultValue: false }) hasOngoingChallengeLiveAlert;
   @attr('boolean') hasOngoingCompanionLiveAlert;
   @attr('boolean') hasCheckpoints;
-  @attr('boolean') showProgressBar;
+  @attr('boolean') showChallengeStepper;
+  @attr('boolean') showGlobalProgression;
   @attr('boolean') showLevelup;
   @attr('boolean') showQuestionCounter;
+  @attr('number') globalProgression;
   @attr orderedChallengeIdsAnswered;
 
   // references

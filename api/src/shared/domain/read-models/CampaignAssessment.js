@@ -1,7 +1,7 @@
 import { Progression } from '../../../evaluation/domain/models/Progression.js';
 import { Assessment } from '../models/Assessment.js';
 class CampaignAssessment {
-  constructor(assessment) {
+  constructor(assessment, globalProgression = null) {
     this.id = assessment.id;
     this.createdAt = assessment.createdAt;
     this.codeCampaign = assessment.campaign?.code;
@@ -13,13 +13,15 @@ class CampaignAssessment {
     this.hasOngoingChallengeLiveAlert = false;
     this.hasOngoingCompanionLiveAlert = false;
     this.hasCheckpoints = assessment.campaign?.isAssessment ?? false;
-    this.showProgressBar = assessment.campaign?.isAssessment ?? false;
+    this.showChallengeStepper = assessment.campaign?.isAssessment ?? false;
+    this.showGlobalProgression = assessment.campaign?.isExam ?? false;
     this.showLevelup = assessment.campaign?.isAssessment ?? false;
     this.showQuestionCounter = assessment.campaign?.isAssessment ?? false;
     this.answers = assessment.answers;
     this.orderedChallengeIdsAnswered = assessment.answers?.map((answer) => answer.challengeId) ?? [];
     this.competenceId = assessment.competenceId;
     this.nextChallenge = assessment.nextChallenge;
+    this.globalProgression = globalProgression;
   }
 
   get progression() {
