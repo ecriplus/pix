@@ -99,7 +99,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
     if (this.form.type === MODULIX_TYPE) {
       if (key === 'link') {
         const selectedModule = this.modules.find((module) => module.link === value);
-        set(this.form, 'duration.minutes', selectedModule.duration);
+        this.form.duration = { days: 0, hours: 0, minutes: selectedModule.duration };
       }
 
       if (!this.form.editorLogoUrl) {
