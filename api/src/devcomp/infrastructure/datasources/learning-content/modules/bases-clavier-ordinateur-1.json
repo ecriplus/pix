@@ -3,7 +3,7 @@
   "shortId": "740d5aa9",
   "slug": "bases-clavier-1",
   "title": "Les bases du clavier sur ordinateur 1/2",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-clavier1/picto-1eremarche_clavier1.svg",
@@ -152,7 +152,7 @@
                 "id": "596c7964-281f-44ee-b94e-babc81c72e7b",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-zonesv2/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier1/1emarche-clavier1-zonesv2/index.html",
                 "instruction": "<p><span aria-hidden=\"\\&quot;true\\&quot;\">👇 Préparez-vous à utiliser votre clavier et suivez les instructions pour taper sur vos premières touches.</p>",
                 "height": 432
               }
@@ -225,7 +225,7 @@
                 "id": "62b13b03-4b39-4893-a3ac-5b55c5a4b0a2",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-1ersmots/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier1/1emarche-clavier1-1ersmots/index.html",
                 "instruction": "<p><strong>Dans l’espace ci-dessous, cliquez dans la zone indiquée, puis tapez les mots demandés.</strong></p>",
                 "height": 432
               }
@@ -505,7 +505,7 @@
                 "id": "247c064e-8d6f-4b8c-9298-0a12f0643e27",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-liste-de-course/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier1/1emarche-clavier1-liste-de-course/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, vous allez corriger une liste de courses en vous aidant des touches Espace, Entrée, Effacer et des flèches.</strong></p>",
                 "height": 432
               }
@@ -746,7 +746,7 @@
                 "id": "ddec6ee3-178f-4ab5-862a-fc776e9ff6f4",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier1-modifierphrase/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier1/1emarche-clavier1-modifierphrase/index.html",
                 "instruction": "<p><strong>Dans la zone de texte ci-dessous, modifiez la phrase qui apparaît pour écrire&nbsp;:&nbsp;</strong> </p><p>«Quelle bonne idée d’avoir mis de la purée de cornichons dans le bac à glaçons.»</p>",
                 "height": 432
               }

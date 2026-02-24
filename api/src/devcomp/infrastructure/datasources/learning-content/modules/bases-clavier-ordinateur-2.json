@@ -3,7 +3,7 @@
   "shortId": "31ca924a",
   "slug": "bases-clavier-2",
   "title": "Les bases du clavier sur ordinateur 2/2",
-  "isBeta": true,
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-clavier2/picto-1eremarche_clavier2.svg",
@@ -239,7 +239,7 @@
                 "id": "3b6efd13-0d4d-461c-a61a-15a58b46383a",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-prenoms/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier2/1emarche-clavier2-prenoms/index.html",
                 "instruction": "<p><strong>Tapez chaque prénom ci-dessous avec une majuscule&nbsp;:</strong></p>",
                 "height": 432
               }
@@ -482,7 +482,7 @@
                 "id": "d74e4428-accc-44c4-b206-105d4dee8e12",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-altgr/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier2/1emarche-clavier2-altgr/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, tapez les caractères demandés grâce à la touche Alt Gr&nbsp;:</strong></p>",
                 "height": 432
               }
@@ -620,7 +620,7 @@
                 "id": "0f0010c2-b794-49d3-9182-f813e416d317",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-clavier2-jeu-automatisation-scoring/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Clavier2/1emarche-clavier2-jeu-automatisation-scoring/index.html",
                 "instruction": "<p><strong>Dans l’espace ci-dessous, pour chaque niveau, tapez les caractères à l’écran dans la zone de texte pour les faire disparaître avant le temps imparti.</strong></p>",
                 "height": 432
               }
