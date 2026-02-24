@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.338.1](https://github.com/1024pix/pix/compare/v5.338.0...v5.338.1) (2026-02-24)
+
+### :bug: Correction
+
+- [#15242](https://github.com/1024pix/pix/pull/15242) Ne pas échouer si la valeur de scoring_configuration est nulle
+
 # [5.338.0](https://github.com/1024pix/pix/compare/v5.337.0...v5.338.0) (2026-02-24)
 
 ### :rocket: Amélioration
