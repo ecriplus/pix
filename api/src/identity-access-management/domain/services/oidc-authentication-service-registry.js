@@ -14,18 +14,6 @@ export class OidcAuthenticationServiceRegistry {
     this.oidcProviderRepository = dependencies.oidcProviderRepository ?? oidcProviderRepository;
   }
 
-  async configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
-    const oidcProviderService = this.#allOidcProviderServices?.find(
-      (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
-    );
-
-    if (!oidcProviderService) return;
-
-    await oidcProviderService.initializeClientConfig();
-
-    return true;
-  }
-
   /**
    * @return {OidcAuthenticationService[]|null}
    */
@@ -48,6 +36,23 @@ export class OidcAuthenticationServiceRegistry {
     }
 
     return oidcProviderService;
+  }
+
+  testOnly_reset() {
+    this.#allOidcProviderServices = null;
+    this.#readyOidcProviderServicesByRequestedApplications = {};
+  }
+
+  async configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
+    const oidcProviderService = this.#allOidcProviderServices?.find(
+      (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
+    );
+
+    if (!oidcProviderService) return;
+
+    await oidcProviderService.initializeClientConfig();
+
+    return true;
   }
 
   async loadOidcProviderServices(oidcProviderServices) {
@@ -81,11 +86,6 @@ export class OidcAuthenticationServiceRegistry {
     );
 
     return true;
-  }
-
-  testOnly_reset() {
-    this.#allOidcProviderServices = null;
-    this.#readyOidcProviderServicesByRequestedApplications = {};
   }
 }
 
