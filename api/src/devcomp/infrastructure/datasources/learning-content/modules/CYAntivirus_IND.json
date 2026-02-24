@@ -32,7 +32,7 @@
               "element": {
                 "id": "5fd179ed-e09d-496e-adbd-47cda8b2b1c6",
                 "type": "text",
-                "content": "<p>Philippe est très prudent sur internet&nbsp;: il évite les sites peu fiables, il est vigilant avant de cliquer sur un lien ou d’ouvrir une pièce jointe et il ne branche jamais d’appareils inconnus.&nbsp;🤔</p><p>Pourtant, il a peur que son ordinateur soit infecté par un logiciel malveillant. C’est arrivé à un de ses amis récemment, alors que lui aussi était prudent.</p>"
+                "content": "<p>Philippe est très prudent sur internet&nbsp;: il évite les sites peu fiables, il est vigilant avant de cliquer sur un lien ou d’ouvrir une pièce jointe et il ne branche jamais d’appareils inconnus.&nbsp;🤔</p><p><br>Pourtant, il a peur que son ordinateur soit infecté par un logiciel malveillant. C’est arrivé à un de ses amis récemment, alors que lui aussi était prudent.</p>"
               }
             },
             {
@@ -271,7 +271,7 @@
               "element": {
                 "id": "09624e99-41b4-4988-b697-5339222362cd",
                 "type": "text",
-                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, MacAfee, Trend, Lenovo, CyRadar, Avira, AVG, BitdeFender, ReasonLabs, ClamAV.<br><strong>Un seul antivirus suffit.</strong></p><p>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p><p><strong>🤔 Bon à savoir</strong> <br>Certains appareils intègrent déjà des systèmes de protection contre les logiciels malveillants. Il est tout de même nécessaire d’installer un logiciel antivirus.</p>"
+                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, MacAfee, Trend, Lenovo, CyRadar, Avira, AVG, BitdeFender, ReasonLabs, ClamAV.<br><strong>Un seul antivirus suffit.</strong></p><p>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p><p><br><strong>🤔 Bon à savoir</strong> <br>Certains appareils intègrent déjà des systèmes de protection contre les logiciels malveillants. Il est tout de même nécessaire d’installer un logiciel antivirus.</p>"
               }
             }
           ]
@@ -355,7 +355,7 @@
               "element": {
                 "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
                 "type": "text",
-                "content": "<p>🚨 Lorsque l’antivirus détecte une correspondance dans la base de signature, il peut&nbsp;:</p><ul><li><strong>bloquer</strong> le fichier,</li><li><strong>le placer en quarantaine</strong>,</li><li>ou <strong>le supprimer</strong>.</li></ul><p>Ce mécanisme permet de détecter rapidement les logiciels malveillants déjà recensés.</p><br>"
+                "content": "<p>🚨 Lorsque l’antivirus détecte une correspondance dans la base de signature, il peut&nbsp;:</p><ul><li><strong>bloquer</strong> le fichier,</li><li><strong>le placer en quarantaine</strong>,</li><li>ou <strong>le supprimer</strong>.</li></ul><p><br>Ce mécanisme permet de détecter rapidement les logiciels malveillants déjà recensés.</p><br>"
               }
             }
           ]
@@ -517,7 +517,7 @@
               "element": {
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
-                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège les appareils contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus pour renforcer la <strong>protection </strong>des appareils. 🛡️</li></ul><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><ul><li>Il compare chaque élément à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte une menace, il peut la bloquer,<strong> l’isoler ou la supprimer</strong>, puis vous en informe via une notification. 🙅</li></ul><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux virus recensés.⚙️</li></ul>"
+                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège les appareils contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus pour renforcer la <strong>protection </strong>des appareils. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Il compare chaque élément à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte une menace, il peut la bloquer,<strong> l’isoler ou la supprimer</strong>, puis vous en informe via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux virus recensés.⚙️</li></ul>"
               }
             }
           ]
