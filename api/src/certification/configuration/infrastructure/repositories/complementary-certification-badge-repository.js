@@ -4,14 +4,13 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 export async function getAllIdsByTargetProfileId({ targetProfileId }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const complementaryCertificationBadgesIds = await knexConn('badges')
+  return await knexConn('badges')
     .select('complementary-certification-badges')
     .leftJoin('complementary-certification-badges', 'complementary-certification-badges.badgeId', 'badges.id')
     .leftJoin('target-profiles', 'target-profiles.id', 'badges.targetProfileId')
     .where({ targetProfileId })
     .andWhere('complementary-certification-badges.detachedAt', null)
     .pluck('complementary-certification-badges.id');
-  return complementaryCertificationBadgesIds;
 }
 
 export async function detachByIds({ complementaryCertificationBadgeIds }) {
@@ -24,14 +23,9 @@ export async function detachByIds({ complementaryCertificationBadgeIds }) {
 
 export async function attach({ complementaryCertificationBadges }) {
   const knexConn = DomainTransaction.getConnection();
-  const createdAt = new Date();
-
-  for (const complementaryCertificationBadge of complementaryCertificationBadges) {
-    await knexConn('complementary-certification-badges').insert({
-      ...complementaryCertificationBadge,
-      createdAt,
-    });
-  }
+  await knexConn
+    .batchInsert('complementary-certification-badges', complementaryCertificationBadges)
+    .transacting(knexConn.isTransaction ? knexConn : null);
 }
 
 export async function findAttachableBadgesByIds({ ids }) {
