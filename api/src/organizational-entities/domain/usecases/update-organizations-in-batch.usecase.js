@@ -1,6 +1,6 @@
 import { createReadStream } from 'node:fs';
 
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import * as emailValidationService from '../../../shared/domain/services/email-validation-service.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { getDataBuffer } from '../../../shared/infrastructure/utils/buffer.js';
@@ -26,134 +26,138 @@ import {
  * @param {CountryRepository} params.countryRepository
  * @return {Promise<void>}
  */
-export const updateOrganizationsInBatch = async function ({
-  filePath,
-  organizationForAdminRepository,
-  administrationTeamRepository,
-  countryRepository,
-  organizationLearnerTypeRepository,
-}) {
-  const organizationBatchUpdateDtos = await _getCsvData(filePath);
+export const updateOrganizationsInBatch = withTransaction(
+  async ({
+    filePath,
+    organizationForAdminRepository,
+    administrationTeamRepository,
+    countryRepository,
+    organizationLearnerTypeRepository,
+  }) => {
+    const dtos = await _getCsvData(filePath);
+    if (dtos.length === 0) return;
 
-  if (organizationBatchUpdateDtos.length === 0) return;
+    const organizationIds = new Set();
+    const parentOrganizationIds = new Set();
+    const administrationTeamIds = new Set();
+    const countryCodes = new Set();
+    const organizationLearnerTypeIds = new Set();
 
-  await DomainTransaction.execute(async () => {
-    await Promise.all(
-      organizationBatchUpdateDtos.map(async (organizationBatchUpdateDto) => {
-        await _checkOrganizationUpdate({
-          organizationBatchUpdateDto,
-          organizationForAdminRepository,
-          administrationTeamRepository,
-          countryRepository,
-          organizationLearnerTypeRepository,
-        });
+    for (const dto of dtos) {
+      organizationIds.add(dto.id);
+      if (dto.parentOrganizationId) parentOrganizationIds.add(dto.parentOrganizationId);
+      if (dto.administrationTeamId) administrationTeamIds.add(dto.administrationTeamId);
+      if (dto.countryCode) countryCodes.add(dto.countryCode);
+      if (dto.organizationLearnerTypeId) organizationLearnerTypeIds.add(dto.organizationLearnerTypeId);
+    }
 
-        try {
-          const organization = await organizationForAdminRepository.get({
-            organizationId: organizationBatchUpdateDto.id,
-          });
-          organization.updateFromOrganizationBatchUpdateDto(organizationBatchUpdateDto);
-
-          await organizationForAdminRepository.update({ organization });
-        } catch {
-          throw new OrganizationBatchUpdateError({
-            meta: { organizationId: organizationBatchUpdateDto.id },
-          });
-        }
-      }),
+    const existingOrganizationIds = await _toExistingSet(
+      Array.from(new Set([...organizationIds, ...parentOrganizationIds])),
+      (ids) => organizationForAdminRepository.findExistingIds({ ids }),
     );
-  });
-};
 
-async function _checkOrganizationUpdate({
-  organizationBatchUpdateDto,
-  organizationForAdminRepository,
-  administrationTeamRepository,
-  countryRepository,
-  organizationLearnerTypeRepository,
-}) {
-  const organization = await organizationForAdminRepository.exist({ organizationId: organizationBatchUpdateDto.id });
-  if (!organization) {
-    throw new OrganizationNotFound({
-      meta: {
-        organizationId: organizationBatchUpdateDto.id,
-      },
-    });
-  }
+    const existingAdministrationTeamIds = await _toExistingSet(Array.from(administrationTeamIds), (ids) =>
+      administrationTeamRepository.findExistingIds({ ids }),
+    );
 
-  if (organizationBatchUpdateDto.parentOrganizationId) {
-    const parentOrganization = await organizationForAdminRepository.exist({
-      organizationId: organizationBatchUpdateDto.parentOrganizationId,
+    const existingCountryCodes = await _toExistingSet(Array.from(countryCodes), (codes) =>
+      countryRepository.findExistingCodes({ codes }),
+    );
+
+    const existingOrganizationLearnerTypeIds = await _toExistingSet(Array.from(organizationLearnerTypeIds), (ids) =>
+      organizationLearnerTypeRepository.findExistingIds({ ids }),
+    );
+
+    _validateAllDtos(dtos, {
+      existingOrganizationIds,
+      existingAdministrationTeamIds,
+      existingCountryCodes,
+      existingOrganizationLearnerTypeIds,
     });
-    if (!parentOrganization) {
+
+    for (const dto of dtos) {
+      await _updateOrganization(dto, organizationForAdminRepository);
+    }
+  },
+);
+
+async function _toExistingSet(values, finder) {
+  if (!values || values.length === 0) return new Set();
+  const existing = await finder(values);
+  return new Set(existing.map(String));
+}
+
+function _validateAllDtos(
+  dtos,
+  { existingOrganizationIds, existingAdministrationTeamIds, existingCountryCodes, existingOrganizationLearnerTypeIds },
+) {
+  for (const dto of dtos) {
+    if (!existingOrganizationIds.has(String(dto.id))) {
+      throw new OrganizationNotFound({
+        meta: { organizationId: dto.id },
+      });
+    }
+
+    if (dto.parentOrganizationId && !existingOrganizationIds.has(String(dto.parentOrganizationId))) {
       throw new UnableToAttachChildOrganizationToParentOrganizationError({
         meta: {
-          organizationId: organizationBatchUpdateDto.id,
-          value: organizationBatchUpdateDto.parentOrganizationId,
+          organizationId: dto.id,
+          value: dto.parentOrganizationId,
         },
       });
     }
-  }
 
-  if (
-    organizationBatchUpdateDto.dataProtectionOfficerEmail &&
-    !emailValidationService.validateEmailSyntax(organizationBatchUpdateDto.dataProtectionOfficerEmail)
-  ) {
-    throw new DpoEmailInvalid({
-      meta: {
-        organizationId: organizationBatchUpdateDto.id,
-        value: organizationBatchUpdateDto.dataProtectionOfficerEmail,
-      },
-    });
-  }
-
-  if (organizationBatchUpdateDto.administrationTeamId) {
-    const administrationTeam = await administrationTeamRepository.getById(
-      organizationBatchUpdateDto.administrationTeamId,
-    );
-
-    if (!administrationTeam) {
-      throw new AdministrationTeamNotFound({
+    if (dto.dataProtectionOfficerEmail && !emailValidationService.validateEmailSyntax(dto.dataProtectionOfficerEmail)) {
+      throw new DpoEmailInvalid({
         meta: {
-          administrationTeamId: organizationBatchUpdateDto.administrationTeamId,
+          organizationId: dto.id,
+          value: dto.dataProtectionOfficerEmail,
         },
       });
     }
-  }
 
-  if (organizationBatchUpdateDto.countryCode) {
-    await _checkCountryExists(organizationBatchUpdateDto.countryCode, countryRepository);
-  }
+    if (dto.administrationTeamId && !existingAdministrationTeamIds.has(String(dto.administrationTeamId))) {
+      throw new AdministrationTeamNotFound({
+        meta: { administrationTeamId: dto.administrationTeamId },
+      });
+    }
 
-  if (organizationBatchUpdateDto.organizationLearnerTypeId) {
-    await _checkOrganizationLearnerTypeExists(
-      organizationBatchUpdateDto.organizationLearnerTypeId,
-      organizationLearnerTypeRepository,
-    );
-  }
+    if (dto.countryCode && !existingCountryCodes.has(String(dto.countryCode))) {
+      logger.error({
+        event: 'Not_found_country',
+        message: `Le pays avec le code ${dto.countryCode} n'a pas été trouvé.`,
+      });
 
-  return organization;
+      throw new CountryNotFoundError({
+        message: `Country not found for code ${dto.countryCode}`,
+        meta: { countryCode: dto.countryCode },
+      });
+    }
+
+    if (
+      dto.organizationLearnerTypeId &&
+      !existingOrganizationLearnerTypeIds.has(String(dto.organizationLearnerTypeId))
+    ) {
+      throw new OrganizationLearnerTypeNotFound({
+        message: `Organization learner type not found for id ${dto.organizationLearnerTypeId}`,
+        meta: { organizationLearnerTypeId: dto.organizationLearnerTypeId },
+      });
+    }
+  }
 }
 
-async function _checkCountryExists(countryCode, countryRepository) {
+async function _updateOrganization(dto, repository) {
   try {
-    await countryRepository.getByCode(countryCode);
-  } catch {
-    logger.error({
-      event: 'Not_found_country',
-      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
+    const organization = await repository.get({
+      organizationId: dto.id,
     });
-    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
-  }
-}
 
-async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
-  try {
-    await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
+    organization.updateFromOrganizationBatchUpdateDto(dto);
+
+    await repository.update({ organization });
   } catch {
-    throw new OrganizationLearnerTypeNotFound({
-      message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
-      meta: { organizationLearnerTypeId },
+    throw new OrganizationBatchUpdateError({
+      meta: { organizationId: dto.id },
     });
   }
 }
