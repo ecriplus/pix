@@ -11,8 +11,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-redirect-l
       getRedirectLogoutUrl: sinon.stub().returns('https://logout.url'),
     };
     const oidcAuthenticationServiceRegistry = {
-      loadOidcProviderServices: sinon.stub().resolves(),
-      configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
       getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
     };
 
@@ -29,10 +27,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-redirect-l
     });
 
     // then
-    expect(oidcAuthenticationServiceRegistry.loadOidcProviderServices).to.have.been.calledOnce;
-    expect(oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode).to.have.been.calledWithExactly(
-      identityProvider,
-    );
     expect(oidcAuthenticationService.getRedirectLogoutUrl).to.have.been.calledWithExactly({
       userId: '1',
       logoutUrlUUID: '23fbed77-5891-4779-b337-65f57cc58ddf',

@@ -17,19 +17,25 @@ export class OidcAuthenticationServiceRegistry {
   /**
    * @return {OidcAuthenticationService[]|null}
    */
-  getAllOidcProviderServices() {
+  async getAllOidcProviderServices() {
+    await this.#loadAllOidcProviderServices();
+
     return this.#allOidcProviderServices;
   }
 
-  getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
+  async getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
+    await this.#loadAllOidcProviderServices();
+
     const groupByKey = generateGroupByKey(requestedApplication.applicationName, requestedApplication.applicationTld);
     return this.#readyOidcProviderServicesByRequestedApplications[groupByKey] || [];
   }
 
-  getOidcProviderServiceByCode({ identityProviderCode, requestedApplication }) {
-    const oidcProviderService = this.getReadyOidcProviderServicesByRequestedApplication(requestedApplication).find(
-      (service) => identityProviderCode === service.code,
-    );
+  async getOidcProviderServiceByCode({ identityProviderCode, requestedApplication }) {
+    await this.#loadAllOidcProviderServices();
+    await this.#configureReadyOidcProviderServiceByCode(identityProviderCode);
+
+    const oidcProviderServices = await this.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
+    const oidcProviderService = oidcProviderServices.find((service) => identityProviderCode === service.code);
 
     if (!oidcProviderService) {
       throw new InvalidIdentityProviderError(identityProviderCode);
@@ -38,12 +44,16 @@ export class OidcAuthenticationServiceRegistry {
     return oidcProviderService;
   }
 
-  testOnly_reset() {
+  async testOnly_reset(oidcProviderServices) {
     this.#allOidcProviderServices = null;
     this.#readyOidcProviderServicesByRequestedApplications = {};
+
+    if (oidcProviderServices) {
+      await this.#loadAllOidcProviderServices(oidcProviderServices);
+    }
   }
 
-  async configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
+  async #configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
     const oidcProviderService = this.#allOidcProviderServices?.find(
       (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
     );
@@ -55,7 +65,7 @@ export class OidcAuthenticationServiceRegistry {
     return true;
   }
 
-  async loadOidcProviderServices(oidcProviderServices) {
+  async #loadAllOidcProviderServices(oidcProviderServices) {
     if (this.#allOidcProviderServices) {
       return;
     }

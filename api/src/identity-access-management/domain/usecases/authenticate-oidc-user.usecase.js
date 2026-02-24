@@ -44,10 +44,7 @@ async function authenticateOidcUser({
   userRepository,
   lastUserApplicationConnectionsRepository,
 }) {
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProviderCode);
-
-  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+  const oidcAuthenticationService = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode,
     requestedApplication,
   });

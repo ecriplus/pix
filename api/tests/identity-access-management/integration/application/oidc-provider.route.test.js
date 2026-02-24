@@ -68,8 +68,7 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
 
       await databaseBuilder.commit();
 
-      oidcAuthenticationServiceRegistry.testOnly_reset();
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+      await oidcAuthenticationServiceRegistry.testOnly_reset();
 
       // when
       const headers1 = { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'orga.dev.pix.org' };

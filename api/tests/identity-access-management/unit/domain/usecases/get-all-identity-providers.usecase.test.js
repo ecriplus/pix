@@ -7,7 +7,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-all-identi
     const oneOidcProviderService = {};
     const anotherOidcProviderService = {};
     const oidcAuthenticationServiceRegistryStub = {
-      loadOidcProviderServices: sinon.stub().resolves(),
       getAllOidcProviderServices: sinon.stub().returns([oneOidcProviderService, anotherOidcProviderService]),
     };
 
@@ -17,7 +16,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-all-identi
     });
 
     // then
-    expect(oidcAuthenticationServiceRegistryStub.loadOidcProviderServices).to.have.been.calledOnce;
     expect(identityProviders).to.deep.equal([oneOidcProviderService, anotherOidcProviderService]);
   });
 });

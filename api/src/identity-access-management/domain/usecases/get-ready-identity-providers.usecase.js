@@ -6,8 +6,6 @@
  * @return {Promise<OidcAuthenticationService[]|null>}
  */
 const getReadyIdentityProviders = async function ({ requestedApplication, oidcAuthenticationServiceRegistry }) {
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-
   return oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
 };
 

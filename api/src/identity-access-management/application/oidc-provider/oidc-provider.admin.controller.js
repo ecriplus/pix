@@ -42,10 +42,7 @@ async function reconcileUserForAdmin(
   const origin = getForwardedOrigin(request.headers);
   const requestedApplication = RequestedApplication.fromOrigin(origin);
 
-  await dependencies.oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await dependencies.oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
-
-  const oidcAuthenticationService = dependencies.oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+  const oidcAuthenticationService = await dependencies.oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
     requestedApplication,
   });

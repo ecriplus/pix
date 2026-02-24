@@ -2,7 +2,7 @@ import { OidcAuthenticationServiceRegistry } from '../../../../../src/identity-a
 import { oidcProviderRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/oidc-provider-repository.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { InvalidIdentityProviderError } from '../../../../../src/shared/domain/errors.js';
-import { catchErrSync, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | Service | oidc-authentication-service-registry', function () {
   let oidcAuthenticationServiceRegistry;
@@ -111,11 +111,8 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
 
   describe('#getAllOidcProviderServices', function () {
     it('returns all OIDC Providers', async function () {
-      // given
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-
       // when
-      const services = oidcAuthenticationServiceRegistry.getAllOidcProviderServices();
+      const services = await oidcAuthenticationServiceRegistry.getAllOidcProviderServices();
 
       // then
       const serviceCodes = services.map((service) => service.code);
@@ -131,7 +128,6 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
   describe('#getReadyOidcProviderServicesByRequestedApplication', function () {
     it('returns ready OIDC Providers by requestedApplication', async function () {
       // given
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
       const requestedApplicationForApp = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
       const requestedApplicationForAdmin = new RequestedApplication({
         applicationName: 'admin',
@@ -140,11 +136,11 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
 
       // when
       const readyServicesForApp =
-        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+        await oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
           requestedApplicationForApp,
         );
       const readyServicesForAdmin =
-        oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
+        await oidcAuthenticationServiceRegistry.getReadyOidcProviderServicesByRequestedApplication(
           requestedApplicationForAdmin,
         );
 
@@ -164,10 +160,9 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     it('returns the ready OIDC Providers for Pix App', async function () {
       // given
       const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
       // when
-      const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+      const service = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
         identityProviderCode: 'OIDC_EXAMPLE',
         requestedApplication,
       });
@@ -179,10 +174,9 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
     it('returns the ready OIDC Providers for Pix Admin', async function () {
       // given
       const requestedApplication = new RequestedApplication({ applicationName: 'admin', applicationTld: '.fr' });
-      await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
       // when
-      const service = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+      const service = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
         identityProviderCode: 'OIDC_EXAMPLE_FOR_PIX_ADMIN',
         requestedApplication,
       });
@@ -195,17 +189,14 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       it('throws an InvalidIdentityProviderError', async function () {
         // given
         const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.fr' });
-        await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-        // when
-        const error = catchErrSync(
-          oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode,
-          oidcAuthenticationServiceRegistry,
-        )({ identityProviderCode: 'OIDC_EXAMPLE', requestedApplication });
-
-        // then
-        expect(error).to.be.an.instanceOf(InvalidIdentityProviderError);
-        expect(error.message).to.equal(`Identity provider OIDC_EXAMPLE is not supported.`);
+        // when & then
+        await expect(
+          oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+            identityProviderCode: 'OIDC_EXAMPLE',
+            requestedApplication,
+          }),
+        ).to.be.rejectedWith(InvalidIdentityProviderError, 'Identity provider OIDC_EXAMPLE is not supported.');
       });
     });
 
@@ -213,17 +204,14 @@ describe('Integration | Identity Access Management | Domain | Service | oidc-aut
       it('throws an InvalidIdentityProviderError', async function () {
         // given
         const requestedApplication = new RequestedApplication({ applicationName: 'app', applicationTld: '.org' });
-        await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
 
-        // when
-        const error = catchErrSync(
-          oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode,
-          oidcAuthenticationServiceRegistry,
-        )({ identityProviderCode: 'SOME_UNSUPPORTED_OP', requestedApplication });
-
-        // then
-        expect(error).to.be.an.instanceOf(InvalidIdentityProviderError);
-        expect(error.message).to.equal(`Identity provider SOME_UNSUPPORTED_OP is not supported.`);
+        // when & then
+        await expect(
+          oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+            identityProviderCode: 'SOME_UNSUPPORTED_OP',
+            requestedApplication,
+          }),
+        ).to.be.rejectedWith(InvalidIdentityProviderError, 'Identity provider SOME_UNSUPPORTED_OP is not supported.');
       });
     });
   });

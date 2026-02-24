@@ -9,8 +9,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-authorizat
       getAuthorizationUrl: sinon.stub().returns('https://authorization.url'),
     };
     const oidcAuthenticationServiceRegistry = {
-      loadOidcProviderServices: sinon.stub().resolves(),
-      configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
       getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
     };
 
@@ -25,10 +23,6 @@ describe('Unit | Identity Access Management | Domain | UseCases | get-authorizat
     });
 
     // then
-    expect(oidcAuthenticationServiceRegistry.loadOidcProviderServices).to.have.been.calledOnce;
-    expect(oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode).to.have.been.calledWithExactly(
-      identityProvider,
-    );
     expect(oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode).to.have.been.calledWithExactly({
       identityProviderCode: 'OIDC',
       requestedApplication: undefined,

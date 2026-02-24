@@ -14,10 +14,7 @@ async function getRedirectLogoutUrl({
   requestedApplication,
   oidcAuthenticationServiceRegistry,
 }) {
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
-
-  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+  const oidcAuthenticationService = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
     requestedApplication,
   });

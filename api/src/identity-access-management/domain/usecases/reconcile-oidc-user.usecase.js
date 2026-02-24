@@ -39,10 +39,7 @@ export const reconcileOidcUser = async function ({
 
   const { userId, externalIdentityId } = userInfo;
 
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
-  await oidcAuthenticationServiceRegistry.configureReadyOidcProviderServiceByCode(identityProvider);
-
-  const oidcAuthenticationService = oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
+  const oidcAuthenticationService = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
     requestedApplication,
   });
