@@ -327,6 +327,102 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
+  describe('#findByLearnerIds', function () {
+    it('should return most recent combinedCourse participation for given learnerIds and combinedCourse ids', async function () {
+      // given
+      const firstLearner = databaseBuilder.factory.buildOrganizationLearner();
+      const secondLearner = databaseBuilder.factory.buildOrganizationLearner();
+
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+        organizationId: firstLearner.organizationId,
+        code: 'COMBINIX1',
+      });
+      const expectedCombinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId: firstLearner.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        createdAt: new Date('2025-01-01'),
+        combinedCourseId,
+      });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId: firstLearner.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        createdAt: new Date('2024-01-01'),
+        combinedCourseId,
+      });
+
+      const secondCombinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId: secondLearner.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        createdAt: new Date('2025-01-01'),
+        combinedCourseId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseParticipationRepository.findByLearnerIds({
+        organizationLearnerIds: [firstLearner.id, secondLearner.id],
+        combinedCourseId,
+      });
+
+      // then
+      const combinedCourseParticipationForFirstLearner = result.find(
+        (participation) => participation.organizationLearnerId === firstLearner.id,
+      );
+
+      expect(combinedCourseParticipationForFirstLearner).instanceOf(CombinedCourseParticipation);
+
+      expect(combinedCourseParticipationForFirstLearner).to.deep.equal({
+        id: expectedCombinedCourseParticipation.id,
+        combinedCourseId,
+        organizationLearnerId: firstLearner.id,
+        division: firstLearner.division,
+        group: firstLearner.group,
+        firstName: firstLearner.firstName,
+        lastName: firstLearner.lastName,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        createdAt: expectedCombinedCourseParticipation.createdAt,
+        updatedAt: expectedCombinedCourseParticipation.updatedAt,
+      });
+
+      const combinedCourseParticipationForSecondLearner = result.find(
+        (participation) => participation.organizationLearnerId === secondLearner.id,
+      );
+
+      expect(combinedCourseParticipationForSecondLearner).instanceOf(CombinedCourseParticipation);
+      expect(combinedCourseParticipationForSecondLearner).to.deep.equal({
+        id: secondCombinedCourseParticipation.id,
+        combinedCourseId,
+        organizationLearnerId: secondLearner.id,
+        division: secondLearner.division,
+        group: secondLearner.group,
+        firstName: secondLearner.firstName,
+        lastName: secondLearner.lastName,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        createdAt: secondCombinedCourseParticipation.createdAt,
+        updatedAt: secondCombinedCourseParticipation.updatedAt,
+      });
+    });
+
+    it('should return an empty array when there are no participation', async function () {
+      // given
+      const organizationLearnerId = 1;
+      const combinedCourseId = 2;
+
+      // when
+      const result = await combinedCourseParticipationRepository.findByLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+        combinedCourseId,
+      });
+
+      // then
+      expect(result).empty;
+    });
+  });
+
   describe('#findPaginatedCombinedCourseParticipationById', function () {
     let combinedCourseId;
     let organizationLearner1, organizationLearner2, organizationLearner3;
