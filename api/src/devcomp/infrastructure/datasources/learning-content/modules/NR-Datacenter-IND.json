@@ -503,7 +503,7 @@
                   },
                   {
                     "id": "1",
-                    "content": "<p> Cela augmentera  la consommation d’eau et d’électricité, pouvant créer des tensions localement. </p>",
+                    "content": "<p> Cela augmentera la consommation d’eau et d’électricité, pouvant créer des tensions localement. </p>",
                     "feedback": {
                       "diagnosis": "<p>En effet, en augmentant la consommation d’eau et d’électricité, un centre de données peut provoquer des tensions locales (pénuries par exemple).</p>"
                     }
