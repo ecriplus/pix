@@ -49,3 +49,24 @@ export function configureConnectionExtension(knex) {
     }
   }
 }
+
+export function disableTypeCastingForJsonTypes(knexConfig) {
+  const JSON_OID = types.builtins.JSON;
+  const JSONB_OID = types.builtins.JSONB;
+
+  const originalAfterCreate = knexConfig.pool?.afterCreate;
+
+  knexConfig.pool = {
+    ...knexConfig.pool,
+    afterCreate: (conn, done) => {
+      conn.setTypeParser(JSON_OID, (val) => val);
+      conn.setTypeParser(JSONB_OID, (val) => val);
+
+      if (originalAfterCreate) {
+        return originalAfterCreate(conn, done);
+      }
+
+      done(null, conn);
+    },
+  };
+}
