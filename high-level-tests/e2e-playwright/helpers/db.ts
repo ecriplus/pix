@@ -348,6 +348,13 @@ export async function createOrganizationInDB({
     .returning('id')
     .then((rows) => rows[0].id);
 
+  const organizationLearnerTypeId = await knex('organization_learner_types')
+    .insert({
+      name: `Type for ${externalId}`,
+    })
+    .returning('id')
+    .then((rows) => rows[0].id);
+
   const [{ id }] = await knex('organizations')
     .insert({
       type,
@@ -371,6 +378,7 @@ export async function createOrganizationInDB({
       parentOrganizationId: null,
       administrationTeamId,
       countryCode: 99100,
+      organizationLearnerTypeId,
     })
     .returning('id');
   return id;
