@@ -53,7 +53,11 @@ const moduleDetailsSchema = Joi.object({
   description: htmlSchema.required().description('Texte d’introduction en dessous du titre du module.'),
   duration: Joi.number().integer().min(0).max(120).required(),
   level: Joi.string().valid('novice', 'independent', 'advanced', 'expert').required().description('Niveau du module.'),
-  objectives: Joi.array().items(htmlSchema).min(1).required(),
+  objectives: Joi.array()
+    .items(htmlSchema)
+    .min(1)
+    .required()
+    .description('Un objectif minimum. Ils s’affichent dans l’ordre contribué.'),
   tabletSupport: Joi.string()
     .valid('comfortable', 'inconvenient', 'obstructed')
     .required()

@@ -138,8 +138,12 @@ function convertNumber(joiNumberDescribedSchema) {
 }
 
 function convertArray(joiArrayDescribedSchema, key = '') {
-  const jsonSchema = { type: 'array' };
+  const jsonSchema = { type: 'array', options: null };
   const rules = joiArrayDescribedSchema.rules;
+
+  if (hasFlag(joiArrayDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiArrayDescribedSchema.flags['description'] };
+  }
 
   const minRule = findRule(rules, 'min');
   if (minRule !== undefined) {
@@ -163,7 +167,7 @@ function convertArray(joiArrayDescribedSchema, key = '') {
 
         // Add headerTemplate for JSON Editor lib
         // See {@link https://github.com/json-editor/json-editor#dynamic-headers}
-        // for further informations
+        // for further information
         jsonSchema.items.headerTemplate = `${itemTitle} {{i0}}`;
       }
     }
