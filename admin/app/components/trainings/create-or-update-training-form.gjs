@@ -36,7 +36,7 @@ class Form {
     this.internalTitle = internalTitle || null;
     this.link = link || null;
     this.type = type || null;
-    this.duration = duration || { days: 0, hours: 0, minutes: 0 };
+    this.duration = duration ? { ...duration } : { days: 0, hours: 0, minutes: 0 };
     this.locale = locale || null;
     this.editorLogoUrl = editorLogoUrl || null;
     this.editorName = editorName || null;
@@ -99,7 +99,7 @@ export default class CreateOrUpdateTrainingForm extends Component {
     if (this.form.type === MODULIX_TYPE) {
       if (key === 'link') {
         const selectedModule = this.modules.find((module) => module.link === value);
-        set(this.form, 'duration.minutes', selectedModule.duration);
+        this.form.duration = { days: 0, hours: 0, minutes: selectedModule.duration };
       }
 
       if (!this.form.editorLogoUrl) {
