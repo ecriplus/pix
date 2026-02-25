@@ -68,6 +68,10 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         const currentVersion = databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2010-02-01'),
           expirationDate: null,
+          globalScoringConfiguration: [
+            { bounds: { max: -4, min: -8 }, meshLevel: 0 },
+            { bounds: { max: 8, min: -4 }, meshLevel: 1 },
+          ],
           minimumAnswersRequiredToValidateACertification: 1,
         });
 
@@ -137,8 +141,9 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         const descOrderedAssessmentResults = await knex('assessment-results').orderBy('createdAt', 'DESC');
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
-        expect(lastAssessmentResult.pixScore).to.be.equal(48);
+        expect(lastAssessmentResult.pixScore).to.be.equal(69);
         expect(lastAssessmentResult.capacity).to.be.equal(-3);
+        expect(lastAssessmentResult.reachedMeshIndex).to.be.equal(1);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
         expect(lastAssessmentResult.versionId).to.be.equal(currentVersion.id);
       });
@@ -201,6 +206,10 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
             maximumAssessmentLength: 1,
             defaultCandidateCapacity: -3,
           }),
+          globalScoringConfiguration: [
+            { bounds: { max: -4, min: -8 }, meshLevel: 0 },
+            { bounds: { max: 8, min: -4 }, meshLevel: 1 },
+          ],
           minimumAnswersRequiredToValidateACertification: 1,
         });
 
@@ -281,8 +290,9 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         const descOrderedAssessmentResults = await knex('assessment-results').orderBy('createdAt', 'DESC');
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
-        expect(lastAssessmentResult.pixScore).to.be.equal(48);
+        expect(lastAssessmentResult.pixScore).to.be.equal(69);
         expect(lastAssessmentResult.capacity).to.be.equal(-3);
+        expect(lastAssessmentResult.reachedMeshIndex).to.be.equal(1);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
         expect(lastAssessmentResult.versionId).to.be.equal(archivedVersion.id);
       });

@@ -116,6 +116,7 @@ function scoreCertification({
 
   const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity: downgradeCapacity });
   const pixScore = scoringV3Algorithm.computePixScoreFromCapacity({ capacity });
+  const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
   const status = isCertificationRejected({
     answers: assessmentSheet.answers,
@@ -132,6 +133,7 @@ function scoreCertification({
     assessmentId: assessmentSheet.assessmentId,
     pixScore,
     capacity,
+    reachedMeshIndex,
     versionId,
     status,
     competenceMarks,

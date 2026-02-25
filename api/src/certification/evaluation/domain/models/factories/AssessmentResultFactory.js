@@ -11,6 +11,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     const commentForCandidate = new JuryComment({
@@ -33,6 +34,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -56,6 +58,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return new AssessmentResult({
@@ -66,6 +69,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -78,6 +82,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return new AssessmentResult({
@@ -88,6 +93,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -99,6 +105,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
@@ -110,11 +117,21 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
 
-  static buildFraud({ pixScore, reproducibilityRate, assessmentId, juryId, competenceMarks, capacity, versionId }) {
+  static buildFraud({
+    pixScore,
+    reproducibilityRate,
+    assessmentId,
+    juryId,
+    competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
+  }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.FRAUD,
       status: AssessmentResult.status.REJECTED,
@@ -124,6 +141,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -136,6 +154,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
@@ -147,6 +166,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -158,6 +178,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
@@ -169,6 +190,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -178,8 +200,8 @@ export class AssessmentResultFactory {
     reproducibilityRate,
     assessmentId,
     juryId,
-    competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
@@ -189,8 +211,8 @@ export class AssessmentResultFactory {
       reproducibilityRate,
       assessmentId,
       juryId,
-      competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -202,6 +224,7 @@ export class AssessmentResultFactory {
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
@@ -213,6 +236,7 @@ export class AssessmentResultFactory {
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }

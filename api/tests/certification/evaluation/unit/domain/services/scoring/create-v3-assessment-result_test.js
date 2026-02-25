@@ -10,6 +10,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
   const competenceMarks = Symbol('someCompetenceMarks');
   const pixScore = 456;
   const capacity = 2.45;
+  const reachedMeshIndex = 5;
   const versionId = 7;
 
   describe('createV3AssessmentResult', function () {
@@ -21,6 +22,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         assessmentId: 123,
         pixScore,
         capacity,
+        reachedMeshIndex,
         versionId,
         status: AssessmentResult.status.CANCELLED,
         competenceMarks,
@@ -35,6 +37,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
       expect(assessmentResult.pixScore).to.equal(pixScore);
       expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
       expect(assessmentResult.capacity).to.equal(capacity);
+      expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
       expect(assessmentResult.versionId).to.equal(versionId);
     });
 
@@ -45,6 +48,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         allAnswers: [],
         pixScore,
         capacity,
+        reachedMeshIndex,
         versionId,
         status: AssessmentResult.status.REJECTED,
         competenceMarks,
@@ -64,6 +68,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
       expect(assessmentResult.pixScore).to.equal(pixScore);
       expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
       expect(assessmentResult.capacity).to.equal(capacity);
+      expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
       expect(assessmentResult.versionId).to.equal(versionId);
     });
 
@@ -76,6 +81,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          reachedMeshIndex,
           versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
@@ -94,6 +100,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
         expect(assessmentResult.versionId).to.equal(versionId);
       });
 
@@ -105,6 +112,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          reachedMeshIndex,
           versionId,
           status: AssessmentResult.status.REJECTED,
           competenceMarks,
@@ -123,6 +131,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
@@ -143,6 +152,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore: 0,
           capacity,
+          reachedMeshIndex,
           versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
@@ -161,6 +171,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(0);
         expect(assessmentResult.competenceMarks).to.deep.equal([]);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
         expect(assessmentResult.versionId).to.equal(versionId);
       });
 
@@ -172,6 +183,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          reachedMeshIndex,
           versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
@@ -186,6 +198,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });

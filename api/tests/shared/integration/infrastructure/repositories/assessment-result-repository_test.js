@@ -34,6 +34,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: assessment.id,
           competenceMarks: [],
           capacity: 3.56,
+          reachedMeshIndex: 3,
           versionId: certificationVersion.id,
         });
         assessmentResultToSave.id = undefined;
@@ -72,6 +73,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: assessment.id,
           competenceMarks: [],
+          reachedMeshIndex: 3,
           versionId: certificationVersion.id,
         });
         assessmentResultToSave.id = undefined;
@@ -335,6 +337,7 @@ describe('Integration | Repository | AssessmentResult', function () {
     context('when certification course has one assessment result', function () {
       it('should return the assessment result', async function () {
         // given
+        const version = databaseBuilder.factory.buildCertificationVersion();
         databaseBuilder.factory.buildCertificationCourse({ id: 1 });
         databaseBuilder.factory.buildUser({ id: 100 });
         databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
@@ -372,8 +375,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark2],
-          capacity: null,
-          versionId: null,
+          capacity: 3,
+          reachedMeshIndex: 5,
+          versionId: version.id,
         });
         databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,
@@ -444,6 +448,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark3],
           capacity: null,
+          reachedMeshIndex: null,
           versionId: null,
         });
         databaseBuilder.factory.buildAssessmentResult({
@@ -497,6 +502,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           status: Assessment.states.STARTED,
           competenceMarks: [],
           capacity: null,
+          reachedMeshIndex: null,
           versionId: null,
         });
         expectedAssessmentResult.id = undefined;
@@ -527,6 +533,7 @@ describe('Integration | Repository | AssessmentResult', function () {
           status: Assessment.states.STARTED,
           competenceMarks: [],
           capacity: null,
+          reachedMeshIndex: null,
           versionId: null,
         });
         expectedAssessmentResult.id = undefined;

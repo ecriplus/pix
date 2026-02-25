@@ -14,6 +14,7 @@ describe('Unit | Domain | Models | AssessmentResult', function () {
         status: Assessment.states.STARTED,
         competenceMarks: [],
         capacity: null,
+        reachedMeshIndex: null,
         versionId: null,
       });
       expectedAssessmentResult.id = undefined;

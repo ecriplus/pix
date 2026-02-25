@@ -6,6 +6,7 @@ export function createV3AssessmentResult({
   assessmentId,
   pixScore,
   capacity,
+  reachedMeshIndex,
   versionId,
   status,
   competenceMarks,
@@ -21,6 +22,7 @@ export function createV3AssessmentResult({
       assessmentId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -31,6 +33,7 @@ export function createV3AssessmentResult({
       juryId,
       competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -45,6 +48,7 @@ export function createV3AssessmentResult({
         juryId,
         competenceMarks,
         capacity,
+        reachedMeshIndex,
         versionId,
       });
     } else {
@@ -55,6 +59,7 @@ export function createV3AssessmentResult({
         juryId,
         competenceMarks,
         capacity,
+        reachedMeshIndex,
         versionId,
       });
     }
@@ -65,8 +70,8 @@ export function createV3AssessmentResult({
       pixScore,
       assessmentId,
       juryId,
-      competenceMarks,
       capacity,
+      reachedMeshIndex,
       versionId,
     });
   }
@@ -78,6 +83,7 @@ export function createV3AssessmentResult({
     juryId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   });
 }

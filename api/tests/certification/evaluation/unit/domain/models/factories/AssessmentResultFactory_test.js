@@ -28,6 +28,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 0,
         competenceMarks: [],
         capacity: null,
+        reachedMeshIndex: null,
         versionId: null,
       });
       expectedAssessmentResult.id = undefined;
@@ -52,6 +53,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 1.7,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
 
@@ -64,6 +66,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 90,
         competenceMarks,
         capacity: 1.7,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
       expectedAssessmentResult.id = undefined;
@@ -87,6 +90,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 0.84,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
 
@@ -99,6 +103,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 0.84,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
       expectedAssessmentResult.id = undefined;
@@ -120,6 +125,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 2.13,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
 
@@ -132,6 +138,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 2.13,
+        reachedMeshIndex: 4,
         versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
@@ -159,6 +166,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 3.21,
+        reachedMeshIndex: 4,
         versionId: 10,
       });
 
@@ -171,6 +179,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 3.21,
+        reachedMeshIndex: 4,
         versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.FRAUD,
@@ -187,9 +196,6 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
 
   describe('#buildInsufficientCorrectAnswers', function () {
     it('should return an insufficient correct answers AssessmentResult', function () {
-      // given
-      const competenceMarks = [domainBuilder.buildCompetenceMark()];
-
       // when
       const actualAssessmentResult = AssessmentResultFactory.buildInsufficientCorrectAnswers({
         pixScore: 0,
@@ -197,8 +203,8 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         assessmentId: 123,
         status: AssessmentResult.status.REJECTED,
         juryId: 456,
-        competenceMarks,
         capacity: -1.52,
+        reachedMeshIndex: 0,
         versionId: 10,
       });
 
@@ -209,8 +215,8 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 49,
         assessmentId: 123,
         juryId: 456,
-        competenceMarks,
         capacity: -1.52,
+        reachedMeshIndex: 0,
         versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
@@ -238,6 +244,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -3.94,
+        reachedMeshIndex: 0,
         versionId: 10,
       });
 
@@ -250,6 +257,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -3.94,
+        reachedMeshIndex: 0,
         versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
@@ -277,6 +285,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -0.67,
+        reachedMeshIndex: 1,
         versionId: 10,
       });
 
@@ -289,6 +298,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -0.67,
+        reachedMeshIndex: 1,
         versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,

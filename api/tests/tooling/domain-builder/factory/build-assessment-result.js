@@ -17,6 +17,7 @@ const buildAssessmentResult = function ({
   assessmentId = 456,
   competenceMarks = [],
   capacity = 1.2567,
+  reachedMeshIndex = 2,
   versionId = 42,
 } = {}) {
   return new AssessmentResult({
@@ -32,6 +33,7 @@ const buildAssessmentResult = function ({
     assessmentId,
     competenceMarks,
     capacity,
+    reachedMeshIndex,
     versionId,
   });
 };
@@ -47,6 +49,9 @@ buildAssessmentResult.validated = function ({
   juryId,
   assessmentId,
   competenceMarks,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 } = {}) {
   return buildAssessmentResult({
     id,
@@ -60,6 +65,9 @@ buildAssessmentResult.validated = function ({
     juryId,
     assessmentId,
     competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 };
 
@@ -74,6 +82,9 @@ buildAssessmentResult.rejected = function ({
   juryId,
   assessmentId,
   competenceMarks,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 } = {}) {
   return buildAssessmentResult({
     id,
@@ -87,6 +98,9 @@ buildAssessmentResult.rejected = function ({
     juryId,
     assessmentId,
     competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 };
 
@@ -100,6 +114,9 @@ buildAssessmentResult.error = function ({
   juryId,
   assessmentId,
   competenceMarks,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 } = {}) {
   return buildAssessmentResult({
     id,
@@ -113,6 +130,9 @@ buildAssessmentResult.error = function ({
     juryId,
     assessmentId,
     competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 };
 
@@ -126,6 +146,9 @@ buildAssessmentResult.started = function ({
   juryId,
   assessmentId,
   competenceMarks,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 } = {}) {
   return buildAssessmentResult({
     id,
@@ -139,6 +162,9 @@ buildAssessmentResult.started = function ({
     juryId,
     assessmentId,
     competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 };
 

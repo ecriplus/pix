@@ -36,13 +36,24 @@ function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
     reproducibilityRate: reproducibilityRateAsNumber,
     competenceMarks: competenceMarks,
     capacity: assessmentResultDTO.capacity,
+    reachedMeshIndex: assessmentResultDTO.reachedMeshIndex,
     versionId: assessmentResultDTO.versionId,
   });
 }
 
 const save = async function ({ certificationCourseId, assessmentResult }) {
-  const { pixScore, reproducibilityRate, status, commentByJury, id, juryId, assessmentId, capacity, versionId } =
-    assessmentResult;
+  const {
+    pixScore,
+    reproducibilityRate,
+    status,
+    commentByJury,
+    id,
+    juryId,
+    assessmentId,
+    capacity,
+    reachedMeshIndex,
+    versionId,
+  } = assessmentResult;
   const commentByAutoJury = _getCommentByAutoJury(assessmentResult);
 
   if (_.isNil(assessmentId)) {
@@ -60,6 +71,7 @@ const save = async function ({ certificationCourseId, assessmentResult }) {
       juryId,
       assessmentId,
       capacity,
+      reachedMeshIndex,
       versionId,
       commentForCandidate: assessmentResult.commentForCandidate?.fallbackComment,
       commentForOrganization: assessmentResult.commentForOrganization?.fallbackComment,
