@@ -15,14 +15,21 @@ describe('Unit | Quest | Application | Jobs | UpdateCombinedCourseJobController'
         .withArgs({ userId, moduleId })
         .resolves([combinedCourse]);
 
-      sinon.stub(usecases, 'updateCombinedCourse').rejects().withArgs({ userId, code: combinedCourse.code }).resolves();
+      sinon
+        .stub(usecases, 'updateCombinedCourseProgress')
+        .rejects()
+        .withArgs({ userId, code: combinedCourse.code })
+        .resolves();
 
       // when
       await handler.handle({ data: { userId, moduleId } });
 
       // then
 
-      expect(usecases.updateCombinedCourse).to.have.been.calledOnceWithExactly({ userId, code: combinedCourse.code });
+      expect(usecases.updateCombinedCourseProgress).to.have.been.calledOnceWithExactly({
+        userId,
+        code: combinedCourse.code,
+      });
     });
   });
 });

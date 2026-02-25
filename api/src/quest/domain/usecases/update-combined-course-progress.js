@@ -1,7 +1,7 @@
 import { COMBINED_COURSE_ITEM_TYPES } from '../models/CombinedCourseItem.js';
 import { OrganizationLearnerParticipation } from '../models/OrganizationLearnerParticipation.js';
 
-export async function updateCombinedCourse({
+export async function updateCombinedCourseProgress({
   userId,
   code,
   combinedCourseRepository,

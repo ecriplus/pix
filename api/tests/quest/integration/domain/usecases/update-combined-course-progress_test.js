@@ -6,7 +6,7 @@ import {
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
 
-describe('Integration | Quest | Domain | UseCases | update-combined-course', function () {
+describe('Integration | Quest | Domain | UseCases | update-combined-course-progress', function () {
   let clock;
   const now = new Date('2025-07-07');
 
@@ -65,7 +65,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       });
     await databaseBuilder.commit();
 
-    await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourseProgress({ userId, code });
 
     const result = await knex('organization_learner_participations')
       .where({ id: combinedCourseParticipation.id })
@@ -126,7 +126,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     });
     await databaseBuilder.commit();
 
-    await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourseProgress({ userId, code });
 
     // then
     const result = await knex('organization_learner_participations').where({
@@ -159,7 +159,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
       });
     await databaseBuilder.commit();
 
-    await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourseProgress({ userId, code });
 
     const result = await knex('organization_learner_participations')
       .where({ id: combinedCourseParticipation.id })
@@ -182,7 +182,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     });
     await databaseBuilder.commit();
 
-    const result = await usecases.updateCombinedCourse({ userId, code });
+    const result = await usecases.updateCombinedCourseProgress({ userId, code });
 
     const participation = await knex('organization_learner_participations').where({ organizationLearnerId }).first();
     expect(participation).to.be.undefined;
@@ -210,7 +210,7 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course', fun
     });
     await databaseBuilder.commit();
 
-    await usecases.updateCombinedCourse({ userId, code });
+    await usecases.updateCombinedCourseProgress({ userId, code });
 
     const result = await knex('organization_learner_participations')
       .where({ id: combinedCourseParticipation.id })
