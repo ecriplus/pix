@@ -3,7 +3,10 @@ import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asser
 import { Element } from './Element.js';
 
 class CustomDraft extends Element {
-  static #VALID_URL_PREFIX = 'https://1024pix.github.io/atelier-contenus';
+  static #VALID_URL_PREFIX = {
+    ATELIER_CONTENUS: 'https://1024pix.github.io/atelier-contenus',
+    PIX_EPREUVES_EXTERNES: 'https://1024pix.github.io/pix-epreuves-externes',
+  };
 
   constructor({ id, title, url, instruction, height }) {
     super({ id, type: 'custom-draft' });
@@ -21,8 +24,13 @@ class CustomDraft extends Element {
     this.instruction = instruction;
     this.height = height;
 
-    if (!URL.parse(url).href.startsWith(CustomDraft.#VALID_URL_PREFIX)) {
-      throw new DomainError('The custom-draft URL must be from "1024pix.github.io/atelier-contenus"');
+    if (
+      !URL.parse(url).href.startsWith(CustomDraft.#VALID_URL_PREFIX.ATELIER_CONTENUS) &&
+      !URL.parse(url).href.startsWith(CustomDraft.#VALID_URL_PREFIX.PIX_EPREUVES_EXTERNES)
+    ) {
+      throw new DomainError(
+        'The custom-draft URL must be from "1024pix.github.io/atelier-contenus" or "1024pix.github.io/pix-epreuves-externes"',
+      );
     }
   }
 }
