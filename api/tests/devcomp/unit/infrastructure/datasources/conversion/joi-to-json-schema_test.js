@@ -132,37 +132,43 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
     it('should convert Joi.number to JSON Schema', function () {
       const joiSchema = Joi.number();
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'number' });
+      expect(jsonSchema).to.deep.equal({ type: 'number', options: null });
     });
 
     it('should convert Joi.number.integer to JSON Schema with type integer', function () {
       const joiSchema = Joi.number().integer();
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'integer' });
+      expect(jsonSchema).to.deep.equal({ type: 'integer', options: null });
     });
 
     it('should convert Joi.number.positive to JSON Schema with minimum 1', function () {
       const joiSchema = Joi.number().positive();
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'number', minimum: 1 });
+      expect(jsonSchema).to.deep.equal({ type: 'number', minimum: 1, options: null });
     });
 
     it('should convert Joi.number.negative to JSON Schema with maximum -1', function () {
       const joiSchema = Joi.number().negative();
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'number', maximum: -1 });
+      expect(jsonSchema).to.deep.equal({ type: 'number', maximum: -1, options: null });
     });
 
     it('should convert Joi.number.min to JSON Schema with minimum', function () {
       const joiSchema = Joi.number().min(0);
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'number', minimum: 0 });
+      expect(jsonSchema).to.deep.equal({ type: 'number', minimum: 0, options: null });
     });
 
     it('should convert Joi.number.max to JSON Schema with maximum', function () {
       const joiSchema = Joi.number().max(150);
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
-      expect(jsonSchema).to.deep.equal({ type: 'number', maximum: 150 });
+      expect(jsonSchema).to.deep.equal({ type: 'number', maximum: 150, options: null });
+    });
+
+    it('should convert Joi.number.description to JSON Schema with options infoText', function () {
+      const joiSchema = Joi.number().description('cool gang');
+      const jsonSchema = convertJoiToJsonSchema(joiSchema);
+      expect(jsonSchema).to.deep.equal({ type: 'number', options: { infoText: 'cool gang' } });
     });
   });
 
@@ -199,7 +205,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
       it('should convert Joi.array.items(number) to JSON Schema with items number', function () {
         const joiSchema = Joi.array().items(Joi.number());
         const jsonSchema = convertJoiToJsonSchema(joiSchema);
-        expect(jsonSchema).to.deep.equal({ type: 'array', items: { type: 'number' }, options: null });
+        expect(jsonSchema).to.deep.equal({ type: 'array', items: { type: 'number', options: null }, options: null });
       });
 
       it('should convert Joi.array.items(object) to JSON Schema with items object', function () {
@@ -254,7 +260,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
         type: 'object',
         properties: {
           name: { type: 'string', format: null, options: null },
-          age: { type: 'number' },
+          age: { type: 'number', options: null },
         },
         additionalProperties: false,
       });
@@ -270,7 +276,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
         type: 'object',
         properties: {
           name: { type: 'string', format: null, options: null },
-          age: { type: 'number' },
+          age: { type: 'number', options: null },
         },
         required: ['name'],
         additionalProperties: false,
@@ -335,7 +341,10 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
       expect(joiSchema.validate('string').error).to.be.undefined;
       expect(joiSchema.validate(123).error).to.be.undefined;
       expect(jsonSchema).to.deep.equal({
-        oneOf: [{ type: 'string', format: null, options: null }, { type: 'number' }],
+        oneOf: [
+          { type: 'string', format: null, options: null },
+          { type: 'number', options: null },
+        ],
       });
     });
 
@@ -396,6 +405,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
                 },
                 value: {
                   type: 'number',
+                  options: null,
                 },
               },
               required: ['sport', 'value'],
@@ -463,6 +473,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
                 },
                 value: {
                   type: 'number',
+                  options: null,
                 },
               },
               required: ['type', 'value'],
@@ -593,6 +604,7 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
                 },
                 value: {
                   type: 'number',
+                  options: null,
                 },
               },
             },

@@ -51,7 +51,12 @@ const moduleDetailsSchema = Joi.object({
       'Image qui s’affiche dans l’en-tête du module. Exemple: https://assets.pix.org/modules/placeholder-details.svg.',
     ),
   description: htmlSchema.required().description('Texte d’introduction en dessous du titre du module.'),
-  duration: Joi.number().integer().min(0).max(120).required(),
+  duration: Joi.number()
+    .integer()
+    .min(0)
+    .max(120)
+    .required()
+    .description('Durée du module (en minutes). Valeur acceptée: entre 0 et 120. Ne pas inclure l’unité.'),
   level: Joi.string().valid('novice', 'independent', 'advanced', 'expert').required().description('Niveau du module.'),
   objectives: Joi.array()
     .items(htmlSchema)

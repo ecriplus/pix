@@ -107,8 +107,12 @@ function handleNonStandardStringProperties(joiStringDescribedSchema, jsonSchema)
 }
 
 function convertNumber(joiNumberDescribedSchema) {
-  const jsonSchema = { type: 'number' };
+  const jsonSchema = { type: 'number', options: null };
   const rules = joiNumberDescribedSchema.rules;
+
+  if (hasFlag(joiNumberDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiNumberDescribedSchema.flags['description'] };
+  }
 
   const integerRule = findRule(rules, 'integer');
   if (integerRule !== undefined) {
