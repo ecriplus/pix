@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "Alors qu’à leurs débuts les IA génératives conversationnelles ne savaient que générer du texte, elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code.<br>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.",
+    "description": "<p>À leurs débuts les IA génératives conversationnelles ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br>\n<p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -183,7 +183,7 @@
                       "id": "c097beb6-b3cb-40ea-ac4a-028107c6e541",
                       "type": "expand",
                       "title": "💡Bon à savoir",
-                      "content": "En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être branchés à des systèmes du monde physique. 🔌<br><br> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾"
+                      "content": "<p>En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être connnectés à des systèmes du monde physique. 🔌</p><br><br><p> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾</p>"
                     }
                   ]
                 }
@@ -287,7 +287,7 @@
                         "messages": [
                           {
                             "direction": "outbound",
-                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5m de longueur, pour 3 couches de peinture avec une peinture de rendement 10m²/L/couche ?"
+                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5 m de longueur, pour 3 couches de peinture avec une peinture de rendement 10 m²/L/couche ?"
                           }
                         ]
                       }
@@ -478,42 +478,9 @@
             {
               "type": "element",
               "element": {
-                "id": "ba25a27d-c934-497e-9c92-9b6a8e26be71",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "message-conversation",
-                "props": {
-                  "title": "Suite de la conversation entre Yasmine et Steven",
-                  "messages": [
-                    {
-                      "userName": "Steven",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ah ! C’est donc grâce à la définition des outils par les concepteurs que l’on peut faire tout ça !"
-                    },
-                    {
-                      "userName": "Yasmine",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Eh oui, c’est fou ! 🤯"
-                    },
-                    {
-                      "userName": "Stephen",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Mais quand, je fais une demande à l’IA, qu’est-ce qu’il se passe exactement ?"
-                    }
-                  ],
-                  "animationSpeed": 0
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "7831fafa-8342-49ad-b93d-8c46106966ab",
                 "type": "text",
-                "content": "Comprendre comment le logiciel d’IA fait appel aux outils, c’est l’objectif&nbsp;de cette dernière partie."
+                "content": "<p>Une fois les outils  définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l'IA ?</p><p>C'est que nous allons voir dans cette dernière partie.</p>"
               }
             }
           ]
