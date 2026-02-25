@@ -1,5 +1,15 @@
 # Pix Changelog
 
+# [5.340.0](https://github.com/1024pix/pix/compare/v5.339.0...v5.340.0) (2026-02-25)
+
+### :rocket: Amélioration
+
+- [#15258](https://github.com/1024pix/pix/pull/15258) Autoriser des custom-draft stockés dans pix-epreuves-externe (PIX-21705) 
+
+### :bug: Correction
+
+- [#15278](https://github.com/1024pix/pix/pull/15278) Ne pas parser les données de type JSON et JSONB en provenance de datawarehouse
+
 # [5.339.0](https://github.com/1024pix/pix/compare/v5.338.1...v5.339.0) (2026-02-25)
 
 ### :rocket: Amélioration
