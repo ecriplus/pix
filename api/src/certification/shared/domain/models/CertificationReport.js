@@ -53,18 +53,6 @@ class CertificationReport {
     }
   }
 
-  static fromCertificationCourse(certificationCourse) {
-    const certificationCourseDTO = certificationCourse.toDTO();
-    return new CertificationReport({
-      certificationCourseId: certificationCourseDTO.id,
-      firstName: certificationCourseDTO.firstName,
-      lastName: certificationCourseDTO.lastName,
-      certificationIssueReports: certificationCourseDTO.certificationIssueReports,
-      isCompleted: certificationCourseDTO.assessment.isCompleted(),
-      abortReason: certificationCourseDTO.abortReason,
-    });
-  }
-
   static idFromCertificationCourseId(certificationCourseId) {
     return `CertificationReport-${certificationCourseId}`;
   }
