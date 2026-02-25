@@ -10,29 +10,34 @@ import { ComplementaryCertification } from '../../domain/models/ComplementaryCer
  * @param {number} params.userId
  * @returns {Promise<CertificationCandidate | undefined>}
  */
-
 const getBySessionIdAndUserId = async function ({ sessionId, userId }) {
-  const candidateData = await _candidateBaseQuery().where({ sessionId, userId }).first();
-  const subscriptionData = candidateData ? await _getSubscriptions(candidateData.id) : undefined;
-  return candidateData ? _toDomain({ candidateData, subscriptionData }) : undefined;
+  const candidateWithSubscriptionsData = await candidateWithSubscriptionsBaseQuery().where({ sessionId, userId });
+  if (candidateWithSubscriptionsData.length === 0) {
+    return undefined;
+  }
+  return toDomain(candidateWithSubscriptionsData);
 };
 
 const findBySessionId = async function (sessionId) {
-  const certificationCandidates = await _candidateBaseQuery()
+  const candidatesWithSubscriptionsData = await candidateWithSubscriptionsBaseQuery()
     .where({ 'certification-candidates.sessionId': sessionId })
     .orderByRaw('LOWER("certification-candidates"."lastName") asc')
     .orderByRaw('LOWER("certification-candidates"."firstName") asc');
 
-  const result = [];
-
-  for (const candidateData of certificationCandidates) {
-    const subscriptions = await _getSubscriptions(candidateData.id);
-    const certificationCandidate = _toDomain({ candidateData, subscriptions });
-
-    result.push(certificationCandidate);
+  if (candidatesWithSubscriptionsData.length === 0) {
+    return [];
   }
 
-  return result;
+  const candidatesDataByCandidate = new Map();
+
+  for (const candidateWithSubscriptionsData of candidatesWithSubscriptionsData) {
+    if (!candidatesDataByCandidate.has(candidateWithSubscriptionsData.id)) {
+      candidatesDataByCandidate.set(candidateWithSubscriptionsData.id, []);
+    }
+    candidatesDataByCandidate.get(candidateWithSubscriptionsData.id).push(candidateWithSubscriptionsData);
+  }
+
+  return Array.from(candidatesDataByCandidate.values(), toDomain);
 };
 
 const update = async function (certificationCandidate) {
@@ -47,68 +52,83 @@ const update = async function (certificationCandidate) {
 };
 
 const getWithComplementaryCertification = async function ({ id }) {
-  const candidateData = await _candidateBaseQuery().where('certification-candidates.id', id).first();
-
-  const subscriptionData = await _getSubscriptions(id);
-
-  if (!candidateData) {
+  const candidateWithSubscriptionsData = await candidateWithSubscriptionsBaseQuery().where(
+    'certification-candidates.id',
+    id,
+  );
+  if (candidateWithSubscriptionsData.length === 0) {
     throw new NotFoundError('Candidate not found');
   }
-
-  return _toDomain({ candidateData, subscriptionData });
+  return toDomain(candidateWithSubscriptionsData);
 };
 
 export { findBySessionId, getBySessionIdAndUserId, getWithComplementaryCertification, update };
 
-function _toDomain({ candidateData, subscriptionData }) {
-  const subscriptions = subscriptionData?.map((subscription) => new Subscription({ ...subscription }));
+function toDomain(candidateWithSubscriptionsData) {
+  const subscriptions = [];
+  let complementaryCertification = null;
+  for (const candidateSubscriptionData of candidateWithSubscriptionsData) {
+    const subscription = new Subscription({
+      certificationCandidateId: candidateSubscriptionData.id,
+      type: candidateSubscriptionData.subscriptionType,
+      complementaryCertificationKey: candidateSubscriptionData.complementaryCertificationKey,
+    });
+    subscriptions.push(subscription);
+    if (subscription.complementaryCertificationKey) {
+      complementaryCertification = new ComplementaryCertification({
+        id: candidateSubscriptionData.complementaryCertificationId,
+        key: candidateSubscriptionData.complementaryCertificationKey,
+        label: candidateSubscriptionData.complementaryCertificationLabel,
+      });
+    }
+  }
+
   return new CertificationCandidate({
-    ...candidateData,
+    ...candidateWithSubscriptionsData[0],
     subscriptions,
-    complementaryCertification: candidateData.complementaryCertificationId
-      ? new ComplementaryCertification({
-          id: candidateData.complementaryCertificationId,
-          key: candidateData.complementaryCertificationKey,
-          label: candidateData.complementaryCertificationLabel,
-        })
-      : null,
+    complementaryCertification,
   });
 }
 
-function _candidateBaseQuery() {
+function candidateWithSubscriptionsBaseQuery() {
   const knexConn = DomainTransaction.getConnection();
   return knexConn
     .select({
-      certificationCandidate: 'certification-candidates.*',
+      id: 'certification-candidates.id',
+      firstName: 'certification-candidates.firstName',
+      lastName: 'certification-candidates.lastName',
+      sex: 'certification-candidates.sex',
+      birthPostalCode: 'certification-candidates.birthPostalCode',
+      birthINSEECode: 'certification-candidates.birthINSEECode',
+      birthCity: 'certification-candidates.birthCity',
+      birthProvinceCode: 'certification-candidates.birthProvinceCode',
+      birthCountry: 'certification-candidates.birthCountry',
+      email: 'certification-candidates.email',
+      resultRecipientEmail: 'certification-candidates.resultRecipientEmail',
+      externalId: 'certification-candidates.externalId',
+      birthdate: 'certification-candidates.birthdate',
+      extraTimePercentage: 'certification-candidates.extraTimePercentage',
+      createdAt: 'certification-candidates.createdAt',
+      authorizedToStart: 'certification-candidates.authorizedToStart',
+      sessionId: 'certification-candidates.sessionId',
+      userId: 'certification-candidates.userId',
+      organizationLearnerId: 'certification-candidates.organizationLearnerId',
+      billingMode: 'certification-candidates.billingMode',
+      prepaymentCode: 'certification-candidates.prepaymentCode',
+      hasSeenCertificationInstructions: 'certification-candidates.hasSeenCertificationInstructions',
+      accessibilityAdjustmentNeeded: 'certification-candidates.accessibilityAdjustmentNeeded',
+      reconciledAt: 'certification-candidates.reconciledAt',
       complementaryCertificationId: 'complementary-certifications.id',
       complementaryCertificationLabel: 'complementary-certifications.label',
       complementaryCertificationKey: 'complementary-certifications.key',
+      subscriptionType: 'certification-subscriptions.type',
     })
     .from('certification-candidates')
-    .leftJoin('certification-subscriptions', (builder) =>
-      builder
-        .on('certification-candidates.id', '=', 'certification-subscriptions.certificationCandidateId')
-        .onNotNull('certification-subscriptions.complementaryCertificationId'),
-    )
-    .leftJoin(
-      'complementary-certifications',
-      'certification-subscriptions.complementaryCertificationId',
-      'complementary-certifications.id',
-    )
-    .groupBy('certification-candidates.id', 'complementary-certifications.id');
-}
-
-async function _getSubscriptions(candidateId) {
-  const knexConn = DomainTransaction.getConnection();
-  return knexConn
-    .select(
-      'certification-subscriptions.complementaryCertificationId',
+    .join(
+      'certification-subscriptions',
+      'certification-candidates.id',
       'certification-subscriptions.certificationCandidateId',
-      'certification-subscriptions.type',
-      'complementary-certifications.key as complementaryCertificationKey',
     )
-    .from('certification-subscriptions')
-    .where('certificationCandidateId', candidateId)
     .leftJoin(
       'complementary-certifications',
       'certification-subscriptions.complementaryCertificationId',

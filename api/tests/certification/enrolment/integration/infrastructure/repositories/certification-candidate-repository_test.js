@@ -5,7 +5,7 @@ import * as certificationCandidateRepository from '../../../../../../src/certifi
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | CertificationCandidate', function () {
+describe('Certification | Shared | Integration | Repository | CertificationCandidate', function () {
   let sessionId;
 
   beforeEach(async function () {
