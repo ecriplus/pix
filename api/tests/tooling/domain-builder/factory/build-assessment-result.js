@@ -17,6 +17,7 @@ const buildAssessmentResult = function ({
   assessmentId = 456,
   competenceMarks = [],
   capacity = 1.2567,
+  versionId = 42,
 } = {}) {
   return new AssessmentResult({
     pixScore,
@@ -31,6 +32,7 @@ const buildAssessmentResult = function ({
     assessmentId,
     competenceMarks,
     capacity,
+    versionId,
   });
 };
 

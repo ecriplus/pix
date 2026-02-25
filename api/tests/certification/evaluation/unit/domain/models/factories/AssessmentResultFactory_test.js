@@ -28,6 +28,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 0,
         competenceMarks: [],
         capacity: null,
+        versionId: null,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.commentForCandidate = undefined;
@@ -51,6 +52,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 1.7,
+        versionId: 10,
       });
 
       // then
@@ -62,6 +64,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 90,
         competenceMarks,
         capacity: 1.7,
+        versionId: 10,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.commentForCandidate = undefined;
@@ -84,6 +87,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 0.84,
+        versionId: 10,
       });
 
       // then
@@ -95,6 +99,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 0.84,
+        versionId: 10,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.createdAt = undefined;
@@ -115,6 +120,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 2.13,
+        versionId: 10,
       });
 
       // then
@@ -126,6 +132,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 2.13,
+        versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
         }),
@@ -152,6 +159,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: 3.21,
+        versionId: 10,
       });
 
       // then
@@ -163,6 +171,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         reproducibilityRate: 50.25,
         competenceMarks,
         capacity: 3.21,
+        versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.FRAUD,
         }),
@@ -190,6 +199,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -1.52,
+        versionId: 10,
       });
 
       // then
@@ -201,6 +211,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -1.52,
+        versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS,
         }),
@@ -227,6 +238,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -3.94,
+        versionId: 10,
       });
 
       // then
@@ -238,6 +250,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -3.94,
+        versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
         }),
@@ -264,6 +277,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -0.67,
+        versionId: 10,
       });
 
       // then
@@ -275,6 +289,7 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
         juryId: 456,
         competenceMarks,
         capacity: -0.67,
+        versionId: 10,
         commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON,
         }),

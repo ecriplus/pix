@@ -10,6 +10,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
   const competenceMarks = Symbol('someCompetenceMarks');
   const pixScore = 456;
   const capacity = 2.45;
+  const versionId = 7;
 
   describe('createV3AssessmentResult', function () {
     it('it should return cancelled AssessmentResult if toBeCancelled is true', function () {
@@ -20,6 +21,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         assessmentId: 123,
         pixScore,
         capacity,
+        versionId,
         status: AssessmentResult.status.CANCELLED,
         competenceMarks,
         isRejectedForFraud: false,
@@ -33,6 +35,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
       expect(assessmentResult.pixScore).to.equal(pixScore);
       expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
       expect(assessmentResult.capacity).to.equal(capacity);
+      expect(assessmentResult.versionId).to.equal(versionId);
     });
 
     it('it should return a rejected for fraud AssessmentResult if isRejectedForFraud is true', function () {
@@ -42,6 +45,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         allAnswers: [],
         pixScore,
         capacity,
+        versionId,
         status: AssessmentResult.status.REJECTED,
         competenceMarks,
         assessmentId: 123,
@@ -60,6 +64,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
       expect(assessmentResult.pixScore).to.equal(pixScore);
       expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
       expect(assessmentResult.capacity).to.equal(capacity);
+      expect(assessmentResult.versionId).to.equal(versionId);
     });
 
     context('when there is an insuffisant number of answer', function () {
@@ -71,6 +76,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
           isRejectedForFraud: false,
@@ -88,6 +94,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.versionId).to.equal(versionId);
       });
 
       it('should return a rejected AssessmentResult if the cause is not technical', function () {
@@ -98,6 +105,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          versionId,
           status: AssessmentResult.status.REJECTED,
           competenceMarks,
           isRejectedForFraud: false,
@@ -115,6 +123,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
     context('when there is a sufficient number of answers', function () {
@@ -134,6 +143,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore: 0,
           capacity,
+          versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
           isRejectedForFraud: false,
@@ -151,6 +161,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(0);
         expect(assessmentResult.competenceMarks).to.deep.equal([]);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.versionId).to.equal(versionId);
       });
 
       it('should return a standard AssessmentResult if pix score is not 0', function () {
@@ -161,6 +172,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
           assessmentId: 123,
           pixScore,
           capacity,
+          versionId,
           status: AssessmentResult.status.VALIDATED,
           competenceMarks,
           isRejectedForFraud: false,
@@ -174,6 +186,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.pixScore).to.equal(pixScore);
         expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
         expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
   });

@@ -47,6 +47,7 @@ export function handleV3CertificationScoring({
   v3CertificationScoring,
   cleaScoringCriteria,
   scoringDegradationService,
+  versionId,
 }) {
   if (candidate.hasPixPlusSubscription) {
     return {
@@ -71,6 +72,7 @@ export function handleV3CertificationScoring({
     maximumAssessmentLength,
     minimumAnswersRequiredToValidateACertification:
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
+    versionId,
   });
 
   let doubleCertificationScoring = null;
@@ -103,6 +105,7 @@ function scoreCertification({
   assessmentSheet,
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
+  versionId,
 }) {
   const downgradeCapacity = shouldDowngradeCapacity({
     maximumAssessmentLength,
@@ -129,6 +132,7 @@ function scoreCertification({
     assessmentId: assessmentSheet.assessmentId,
     pixScore,
     capacity,
+    versionId,
     status,
     competenceMarks,
     isRejectedForFraud: assessmentSheet.isRejectedForFraud,

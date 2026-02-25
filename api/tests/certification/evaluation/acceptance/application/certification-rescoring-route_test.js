@@ -65,7 +65,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           competencesScoringConfiguration: null,
           minimumAnswersRequiredToValidateACertification: 1,
         });
-        databaseBuilder.factory.buildCertificationVersion({
+        const currentVersion = databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2010-02-01'),
           expirationDate: null,
           minimumAnswersRequiredToValidateACertification: 1,
@@ -138,7 +138,9 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
         expect(lastAssessmentResult.pixScore).to.be.equal(48);
+        expect(lastAssessmentResult.capacity).to.be.equal(-3);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
+        expect(lastAssessmentResult.versionId).to.be.equal(currentVersion.id);
       });
     });
 
@@ -192,7 +194,7 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
           delta: 4.4,
         });
 
-        databaseBuilder.factory.buildCertificationVersion({
+        const archivedVersion = databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2010-02-01'),
           expirationDate: new Date('2024-02-01'),
           challengesConfiguration: domainBuilder.buildFlashAlgorithmConfiguration({
@@ -280,7 +282,9 @@ describe('Certification | Evaluation | Acceptance | Application |  certification
         expect(descOrderedAssessmentResults).to.have.length(2);
         const [lastAssessmentResult] = descOrderedAssessmentResults;
         expect(lastAssessmentResult.pixScore).to.be.equal(48);
+        expect(lastAssessmentResult.capacity).to.be.equal(-3);
         expect(lastAssessmentResult.juryId).to.be.equal(user.id);
+        expect(lastAssessmentResult.versionId).to.be.equal(archivedVersion.id);
       });
     });
   });
