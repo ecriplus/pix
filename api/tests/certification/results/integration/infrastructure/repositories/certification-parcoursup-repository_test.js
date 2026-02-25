@@ -16,12 +16,12 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate: '2000-01-01',
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
         datamartBuilder.factory.buildCertificationResult({
           ...certificationResultData,
           competenceCode: '1.1',
-          competenceName: 'Mener une recherche et une veille d’information',
+          competenceName: "Mener une recherche et une veille d'information",
           areaName: 'Informations et données',
           competenceLevel: 3,
         });
@@ -50,7 +50,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           competences: [
             domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
-              name: 'Mener une recherche et une veille d’information',
+              name: "Mener une recherche et une veille d'information",
               areaName: 'Informations et données',
               level: 3,
             }),
@@ -59,6 +59,52 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
+            }),
+          ],
+          maxReachableLevel: 7,
+        });
+        expect(results).to.deep.equal([expectedCertification]);
+      });
+
+      it('should fallback to MESH_CONFIGURATION size when scoring_configuration is null', async function () {
+        // given
+        const ine = '1234';
+        datamartBuilder.factory.buildCertificationResult({
+          nationalStudentId: ine,
+          organizationUai: 'UAI ETAB ELEVE',
+          lastName: 'NOM-ELEVE',
+          firstName: 'PRENOM-ELEVE',
+          birthdate: '2000-01-01',
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competenceCode: '1.1',
+          competenceName: "Mener une recherche et une veille d'information",
+          areaName: 'Informations et données',
+          competenceLevel: 3,
+          configuration: null,
+        });
+        await datamartBuilder.commit();
+
+        // when
+        const results = await certificationRepository.getByINE({ ine });
+
+        // then
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
+          ine,
+          organizationUai: 'UAI ETAB ELEVE',
+          lastName: 'NOM-ELEVE',
+          firstName: 'PRENOM-ELEVE',
+          birthdate: '2000-01-01',
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            domainBuilder.certification.results.parcoursup.buildCompetence({
+              code: '1.1',
+              name: "Mener une recherche et une veille d'information",
+              areaName: 'Informations et données',
+              level: 3,
             }),
           ],
           maxReachableLevel: 7,
@@ -77,11 +123,11 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate: '2000-01-01',
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
         const duplicatedCompetency = {
           competenceCode: '1.1',
-          competenceName: 'Mener une recherche et une veille d’information',
+          competenceName: "Mener une recherche et une veille d'information",
           areaName: 'Informations et données',
           competenceLevel: 3,
         };
@@ -111,7 +157,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           competences: [
             domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
-              name: 'Mener une recherche et une veille d’information',
+              name: "Mener une recherche et une veille d'information",
               areaName: 'Informations et données',
               level: 3,
             }),
@@ -153,12 +199,12 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate,
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
         datamartBuilder.factory.buildCertificationResult({
           ...certificationResultData,
           competenceCode: '1.1',
-          competenceName: 'Mener une recherche et une veille d’information',
+          competenceName: "Mener une recherche et une veille d'information",
           areaName: 'Informations et données',
           competenceLevel: 3,
         });
@@ -192,7 +238,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           competences: [
             domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
-              name: 'Mener une recherche et une veille d’information',
+              name: "Mener une recherche et une veille d'information",
               areaName: 'Informations et données',
               level: 3,
             }),
@@ -201,6 +247,60 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
+            }),
+          ],
+          maxReachableLevel: 7,
+        });
+        expect(results).to.deep.equal([expectedCertification]);
+      });
+
+      it('should fallback to MESH_CONFIGURATION size when scoring_configuration is null', async function () {
+        // given
+        const organizationUai = '1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+        datamartBuilder.factory.buildCertificationResult({
+          nationalStudentId: '1234',
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competenceCode: '1.1',
+          competenceName: "Mener une recherche et une veille d'information",
+          areaName: 'Informations et données',
+          competenceLevel: 3,
+          configuration: null,
+        });
+        await datamartBuilder.commit();
+
+        // when
+        const results = await certificationRepository.getByOrganizationUAI({
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+        });
+
+        // then
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
+          ine: '1234',
+          organizationUai,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            domainBuilder.certification.results.parcoursup.buildCompetence({
+              code: '1.1',
+              name: "Mener une recherche et une veille d'information",
+              areaName: 'Informations et données',
+              level: 3,
             }),
           ],
           maxReachableLevel: 7,
@@ -222,7 +322,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate,
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
 
         const duplicatedCompetency = {
@@ -312,12 +412,12 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate,
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
         datamartBuilder.factory.buildCertificationResultCodeValidation({
           ...certificationResultData,
           competenceCode: '1.1',
-          competenceName: 'Mener une recherche et une veille d’information',
+          competenceName: "Mener une recherche et une veille d'information",
           areaName: 'Informations et données',
           competenceLevel: 3,
         });
@@ -346,7 +446,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           competences: [
             domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
-              name: 'Mener une recherche et une veille d’information',
+              name: "Mener une recherche et une veille d'information",
               areaName: 'Informations et données',
               level: 3,
             }),
@@ -355,6 +455,54 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
               name: 'Gérer des données',
               areaName: 'Informations et données',
               level: 5,
+            }),
+          ],
+          maxReachableLevel: 7,
+        });
+        expect(results).to.deep.equal([expectedCertification]);
+      });
+
+      it('should fallback to MESH_CONFIGURATION size when scoring_configuration is null', async function () {
+        // given
+        const verificationCode = 'P-1234567A';
+        const lastName = 'LEPONGE';
+        const firstName = 'Bob';
+        const birthdate = '2000-01-01';
+        datamartBuilder.factory.buildCertificationResultCodeValidation({
+          verificationCode,
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competenceCode: '1.1',
+          competenceName: "Mener une recherche et une veille d'information",
+          areaName: 'Informations et données',
+          competenceLevel: 3,
+          configuration: null,
+        });
+        await datamartBuilder.commit();
+
+        // when
+        const results = await certificationRepository.getByVerificationCode({
+          verificationCode,
+        });
+
+        // then
+        const expectedCertification = domainBuilder.certification.results.parcoursup.buildCertificationResult({
+          lastName,
+          firstName,
+          birthdate,
+          status: 'validated',
+          pixScore: 327,
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
+          competences: [
+            domainBuilder.certification.results.parcoursup.buildCompetence({
+              code: '1.1',
+              name: "Mener une recherche et une veille d'information",
+              areaName: 'Informations et données',
+              level: 3,
             }),
           ],
           maxReachableLevel: 7,
@@ -375,12 +523,12 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           birthdate,
           status: 'validated',
           pixScore: 327,
-          certificationDate: '2024-11-22T09:39:54',
+          certificationDate: new Date('2024-11-22T09:39:54Z'),
         };
         const duplicatedCompetency = {
           ...certificationResultData,
           competenceCode: '1.1',
-          competenceName: 'Mener une recherche et une veille d’information',
+          competenceName: "Mener une recherche et une veille d'information",
           areaName: 'Informations et données',
           competenceLevel: 3,
         };
@@ -410,7 +558,7 @@ describe('Certification | Results | Infrastructure | Integration | Repositories 
           competences: [
             domainBuilder.certification.results.parcoursup.buildCompetence({
               code: '1.1',
-              name: 'Mener une recherche et une veille d’information',
+              name: "Mener une recherche et une veille d'information",
               areaName: 'Informations et données',
               level: 3,
             }),

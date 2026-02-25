@@ -1,5 +1,7 @@
 import { knex as datamartKnex } from '../../../../../datamart/knex-database-connection.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import { MESH_CONFIGURATION } from '../../../shared/domain/constants/mesh-configuration.js';
 import { CertificationResult } from '../../domain/read-models/parcoursup/CertificationResult.js';
 import { Competence } from '../../domain/read-models/parcoursup/Competence.js';
 
@@ -118,9 +120,24 @@ const _toDomain = (certificationResultDto) => {
       pixScore: certificationResult.pix_score,
       certificationDate: certificationResult.certification_date,
       competences: Array.from(uniqCompetences.values()),
-      maxReachableLevel: certificationResult.scoring_configuration?.length - 1,
+      maxReachableLevel: _getMaxReachableLevel(
+        certificationResult.scoring_configuration,
+        certificationResult.national_student_id,
+      ),
     });
   });
+};
+
+const _getMaxReachableLevel = (scoringConfiguration, ine) => {
+  if (!scoringConfiguration) {
+    logger.trace(
+      { ine },
+      'Missing scoring_configuration in certification result, using MESH_CONFIGURATION as fallback',
+    );
+    const lastMesh = [...MESH_CONFIGURATION.values()].at(-1);
+    return lastMesh.coefficient;
+  }
+  return scoringConfiguration.length - 1;
 };
 
 export { getByINE, getByOrganizationUAI, getByVerificationCode };
