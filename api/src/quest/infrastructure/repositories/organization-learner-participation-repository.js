@@ -5,18 +5,31 @@ import {
 } from '../../domain/models/OrganizationLearnerParticipation.js';
 
 export const findByOrganizationLearnerIdAndModuleIds = async ({ organizationLearnerId, moduleIds }) => {
+  const participationById = await findByOrganizationLearnerIdsAndModuleIds({
+    organizationLearnerIds: [organizationLearnerId],
+    moduleIds,
+  });
+  const participations = participationById.get(organizationLearnerId);
+  if (!participations) return [];
+  return participations;
+};
+
+export const findByOrganizationLearnerIdsAndModuleIds = async ({ organizationLearnerIds, moduleIds }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const organizationLearnerParticipations = await knexConn('organization_learner_participations')
-    .select('organization_learner_participations.*')
-    .where({ organizationLearnerId, type: OrganizationLearnerParticipationTypes.PASSAGE })
+  const result = await knexConn('organization_learner_participations')
+    .select('organization_learner_participations.*') // TODO: refactor to select only the required columns instead of *
+    .where({ type: OrganizationLearnerParticipationTypes.PASSAGE })
+    .whereIn('organizationLearnerId', organizationLearnerIds)
     .whereIn('referenceId', moduleIds)
     .whereNull('deletedAt');
 
-  if (!organizationLearnerParticipations) return [];
-
-  return organizationLearnerParticipations.map(
-    (organizationLearnerParticipation) => new OrganizationLearnerParticipation(organizationLearnerParticipation),
+  const organizationLearnerParticipations = result.map(
+    (moduleParticipation) => new OrganizationLearnerParticipation(moduleParticipation),
+  );
+  return Map.groupBy(
+    organizationLearnerParticipations,
+    (moduleParticipation) => moduleParticipation.organizationLearnerId,
   );
 };
 

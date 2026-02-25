@@ -49,7 +49,7 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(result[1]).instanceOf(OrganizationLearnerParticipation);
     });
 
-    it('return null on empty result', async function () {
+    it('return empty result when there is no participation', async function () {
       const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdAndModuleIds({
         organizationLearnerId: 1234,
         moduleIds: ['123-abcd'],
@@ -58,7 +58,7 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(result).empty;
     });
 
-    it('return null on deleted result', async function () {
+    it('return empty result when there is only deleted participation', async function () {
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
       databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
         organizationLearnerId: organizationLearner.id,
@@ -104,6 +104,110 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(result[0].referenceId).equal(passage.referenceId);
     });
   });
+
+  describe('#findByOrganizationLearnerIdsAndModuleIds', function () {
+    it('should return participations given learners and modulesIds', async function () {
+      // given
+      const otherLearner = databaseBuilder.factory.buildOrganizationLearner();
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: otherLearner.id,
+        moduleId: '123-abcd',
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: organizationLearner.id,
+        moduleId: '123-abcd',
+        status: OrganizationLearnerParticipationStatuses.NOT_STARTED,
+      });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: organizationLearner.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        moduleId: '456-abcd',
+      });
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: organizationLearner.id,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        moduleId: '789-abcd',
+      });
+
+      await databaseBuilder.commit();
+
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds({
+        organizationLearnerIds: [organizationLearner.id, otherLearner.id],
+        moduleIds: ['123-abcd', '456-abcd'],
+      });
+
+      expect(result.size).to.equal(2);
+      expect(
+        result
+          .get(organizationLearner.id)
+          .map(({ organizationLearnerId, referenceId }) => ({ organizationLearnerId, referenceId })),
+      ).to.deep.equal([
+        { organizationLearnerId: organizationLearner.id, referenceId: '123-abcd' },
+        { organizationLearnerId: organizationLearner.id, referenceId: '456-abcd' },
+      ]);
+      expect(result.get(organizationLearner.id)[0]).instanceOf(OrganizationLearnerParticipation);
+      expect(result.get(organizationLearner.id)[1]).instanceOf(OrganizationLearnerParticipation);
+    });
+
+    it('return null on empty result', async function () {
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds({
+        organizationLearnerIds: [1234],
+        moduleIds: ['123-abcd'],
+      });
+
+      expect(result).empty;
+    });
+
+    it('return null on deleted result', async function () {
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: organizationLearner.id,
+        moduleId: '123-abcd',
+        status: OrganizationLearnerParticipationStatuses.NOT_STARTED,
+        deletedAt: new Date('2024-01-01'),
+      });
+
+      await databaseBuilder.commit();
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds({
+        organizationLearnerIds: [organizationLearner.id],
+        moduleIds: ['123-abcd'],
+      });
+
+      expect(result).empty;
+    });
+
+    it('should fully instantiate model', async function () {
+      // given
+      const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
+      const passage = databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypePassage({
+        organizationLearnerId: organizationLearner.id,
+        moduleId: '123-abcd',
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+      });
+
+      await databaseBuilder.commit();
+
+      const result = await organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds({
+        organizationLearnerIds: [organizationLearner.id],
+        moduleIds: ['123-abcd'],
+      });
+
+      const [learnerPassage] = result.get(organizationLearner.id);
+      expect(learnerPassage.id).equal(passage.id);
+      expect(learnerPassage.organizationLearnerId).equal(passage.organizationLearnerId);
+      expect(learnerPassage.createdAt).deep.equal(passage.createdAt);
+      expect(learnerPassage.updatedAt).deep.equal(passage.updatedAt);
+      expect(learnerPassage.completedAt).deep.equal(passage.completedAt);
+      expect(learnerPassage.deletedAt).deep.equal(passage.deletedAt);
+      expect(learnerPassage.deletedBy).equal(passage.deletedBy);
+      expect(learnerPassage.status).equal(passage.status);
+      expect(learnerPassage.type).equal(passage.type);
+      expect(learnerPassage.referenceId).equal(passage.referenceId);
+    });
+  });
+
   describe('#synchronize', function () {
     let organizationLearner;
     let modulesApi;
@@ -297,6 +401,7 @@ describe('Quest | Integration | Infrastructure | repositories | organization lea
       expect(result).lengthOf(2);
     });
   });
+
   describe('#deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationLearnerId', function () {
     it('should delete the exact participation for the given learner id and combined course id', async function () {
       //given
