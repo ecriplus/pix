@@ -4,7 +4,8 @@
     "type": "PRO",
     "name": "Dragon & Co",
     "administrationTeamId": 1,
-    "countryCode": 99100
+    "countryCode": 99100,
+    "organizationLearnerTypeId": 2
   },
   {
     "id": 2,
@@ -12,7 +13,8 @@
     "name": "The Night Watch",
     "isManagingStudents": true,
     "administrationTeamId": 2,
-    "countryCode": 99100
+    "countryCode": 99100,
+    "organizationLearnerTypeId": 1
   },
   {
     "id": 3,
@@ -20,6 +22,7 @@
     "name": "The Order of Maesters",
     "isManagingStudents": true,
     "administrationTeamId": 1,
-    "countryCode": 99100
+    "countryCode": 99100,
+    "organizationLearnerTypeId": 1
   }
 ]
