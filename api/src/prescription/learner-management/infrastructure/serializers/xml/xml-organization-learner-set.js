@@ -76,6 +76,22 @@ export class XMLOrganizationLearnersSet {
     if (this.studentIds.includes(nationalStudentId)) {
       errors.push(new SiecleXmlImportError(SIECLE_ERRORS.INE_UNIQUE, { nationalStudentId }));
     }
+    if (!containsOnlyValidChars(firstName)) {
+      errors.push(
+        new SiecleXmlImportError(SIECLE_ERRORS.INVALID_CHAR_DETECTED, {
+          nationalStudentId,
+          field: 'firstName',
+        }),
+      );
+    }
+    if (!containsOnlyValidChars(lastName)) {
+      errors.push(
+        new SiecleXmlImportError(SIECLE_ERRORS.INVALID_CHAR_DETECTED, {
+          nationalStudentId,
+          field: 'lastName',
+        }),
+      );
+    }
 
     return errors;
   }
