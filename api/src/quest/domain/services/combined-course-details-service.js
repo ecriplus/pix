@@ -46,7 +46,7 @@ async function getCombinedCourseDetails({
   eligibilityRepository,
   recommendedModuleRepository,
 }) {
-  const participation = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+  const participation = await combinedCourseParticipationRepository.findByLearnerId({
     organizationLearnerId,
     combinedCourseId: combinedCourseDetails.id,
   });
@@ -82,4 +82,87 @@ async function getCombinedCourseDetails({
   return combinedCourseDetails;
 }
 
-export default { instantiateCombinedCourseDetails, getCombinedCourseDetails };
+async function getCombinedCourseDetailsForMultipleLearners({
+  combinedCourseDetails,
+  organizationLearnerIds,
+  combinedCourseParticipationRepository,
+  eligibilityRepository,
+  recommendedModuleRepository,
+}) {
+  const participations = await combinedCourseParticipationRepository.findByLearnerIds({
+    organizationLearnerIds,
+    combinedCourseId: combinedCourseDetails.id,
+  });
+
+  const learnerIdsWithParticipation = organizationLearnerIds.filter((organizationLearnerId) =>
+    participations.some((participation) => participation.organizationLearnerId === organizationLearnerId),
+  );
+
+  let eligibilitiesByLearnerId = new Map();
+
+  if (learnerIdsWithParticipation.length > 0) {
+    eligibilitiesByLearnerId = await eligibilityRepository.findByOrganizationAndOrganizationLearnerIds({
+      organizationLearnerIds: learnerIdsWithParticipation,
+      organizationId: combinedCourseDetails.organizationId,
+      moduleIds: combinedCourseDetails.moduleIds,
+    });
+  }
+
+  const dataForQuestByLearnerId = new Map();
+  const recommendedModulesByLearnerId = new Map();
+
+  for (const learnerId of learnerIdsWithParticipation) {
+    const eligibility = eligibilitiesByLearnerId.get(learnerId);
+    if (!eligibility) continue;
+
+    const dataForQuest = new DataForQuest({ eligibility });
+    dataForQuestByLearnerId.set(learnerId, dataForQuest);
+
+    const campaignParticipationIds =
+      combinedCourseDetails.quest.findCampaignParticipationIdsContributingToQuest(dataForQuest);
+
+    if (campaignParticipationIds.length > 0) {
+      const recommendedModules = await recommendedModuleRepository.findIdsByCampaignParticipationIds({
+        campaignParticipationIds,
+      });
+      recommendedModulesByLearnerId.set(learnerId, recommendedModules);
+    }
+  }
+
+  const resultsByLearnerId = new Map();
+
+  for (const organizationLearnerId of organizationLearnerIds) {
+    const participation = participations.find(
+      (participation) => participation.organizationLearnerId === organizationLearnerId,
+    );
+    const dataForQuest = dataForQuestByLearnerId.get(organizationLearnerId);
+    const recommendedModuleIdsForUser = recommendedModulesByLearnerId.get(organizationLearnerId) ?? [];
+
+    combinedCourseDetails.generateItems({
+      participation,
+      recommendedModuleIdsForUser,
+      dataForQuest,
+    });
+
+    const state = {
+      id: combinedCourseDetails.id,
+      status: combinedCourseDetails.status,
+      participation: combinedCourseDetails.participation,
+      items: combinedCourseDetails.items,
+    };
+
+    if (participation) {
+      state.participationDetails = combinedCourseDetails.participationDetails;
+    }
+
+    resultsByLearnerId.set(organizationLearnerId, state);
+  }
+
+  return resultsByLearnerId;
+}
+
+export default {
+  instantiateCombinedCourseDetails,
+  getCombinedCourseDetails,
+  getCombinedCourseDetailsForMultipleLearners,
+};

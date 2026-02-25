@@ -10,10 +10,45 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import {
+  OrganizationLearnerParticipationStatuses,
+  OrganizationLearnerParticipationTypes,
+} from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | get-organization-learner-with-participations', function () {
+  it('should return all participations', async function () {
+    const organization = databaseBuilder.factory.buildOrganization();
+    const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+      organizationId: organization.id,
+    });
+
+    const combinedCourseId = databaseBuilder.factory.buildCombinedCourse().id;
+    databaseBuilder.factory.buildOrganizationLearnerParticipation({
+      type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+      status: OrganizationLearnerParticipationStatuses.STARTED,
+      organizationLearnerId,
+      combinedCourseId,
+    });
+    await databaseBuilder.commit();
+
+    // when
+    const result = await getOrganizationLearnerWithParticipations({
+      organizationLearnerIds: [organizationLearnerId],
+      organizationId: organization.id,
+      organizationRepository,
+      campaignParticipationOverviewRepository,
+      tagRepository,
+      stageRepository,
+      stageAcquisitionRepository,
+      stageAcquisitionComparisonService,
+    });
+
+    expect(result).instanceOf(Map);
+    expect(result.size).equal(1);
+  });
+
   describe('without stages', function () {
     it('should return organization learner with participations', async function () {
       // given
@@ -46,8 +81,8 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
       await databaseBuilder.commit();
 
       // when
-      const result = await getOrganizationLearnerWithParticipations({
-        organizationLearnerId,
+      let result = await getOrganizationLearnerWithParticipations({
+        organizationLearnerIds: [organizationLearnerId],
         organizationId: organization.id,
         organizationRepository,
         campaignParticipationOverviewRepository,
@@ -56,6 +91,11 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
         stageAcquisitionRepository,
         stageAcquisitionComparisonService,
       });
+
+      expect(result).instanceOf(Map);
+      expect(result.size).equal(1);
+
+      result = result.get(organizationLearnerId);
 
       // then
       expect(result.organizationLearner.id).to.equal(organizationLearnerId);
@@ -66,6 +106,7 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
       expect(result.campaignParticipations).to.have.lengthOf(2);
       expect(result.campaignParticipations[0]).to.be.an.instanceOf(CampaignParticipationOverview);
       expect(result.campaignParticipations[1]).to.be.an.instanceOf(CampaignParticipationOverview);
+      expect(result.campaignParticipations).to.have.lengthOf(2);
       expect(result.campaignParticipations).deep.members([
         {
           id: firstCampaignParticipation.id,
@@ -117,6 +158,53 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
         },
       ]);
     });
+
+    it('should return participations for multiple learners independently', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const { id: learner1Id, userId: userId1 } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+      });
+      const { id: learner2Id, userId: userId2 } = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId: organization.id,
+      });
+
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organization.id }).id;
+      const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId: userId1,
+        organizationLearnerId: learner1Id,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId: userId2,
+        organizationLearnerId: learner2Id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await getOrganizationLearnerWithParticipations({
+        organizationLearnerIds: [learner1Id, learner2Id],
+        organizationId: organization.id,
+        organizationRepository,
+        campaignParticipationOverviewRepository,
+        tagRepository,
+        stageRepository,
+        stageAcquisitionRepository,
+        stageAcquisitionComparisonService,
+      });
+
+      // then
+      expect(result).instanceOf(Map);
+      expect(result.size).to.equal(2);
+      expect(result.get(learner1Id).organizationLearner.id).to.equal(learner1Id);
+      expect(result.get(learner1Id).campaignParticipations).to.have.lengthOf(1);
+      expect(result.get(learner2Id).organizationLearner.id).to.equal(learner2Id);
+      expect(result.get(learner2Id).campaignParticipations).to.have.lengthOf(1);
+    });
   });
 
   describe('with stages', function () {
@@ -147,8 +235,8 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
       await databaseBuilder.commit();
 
       // when
-      const result = await getOrganizationLearnerWithParticipations({
-        organizationLearnerId,
+      let result = await getOrganizationLearnerWithParticipations({
+        organizationLearnerIds: [organizationLearnerId],
         organizationId: organization.id,
         organizationRepository,
         campaignParticipationOverviewRepository,
@@ -157,6 +245,8 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
         stageAcquisitionRepository,
         stageAcquisitionComparisonService,
       });
+
+      result = result.get(organizationLearnerId);
 
       // then
       expect(result.organizationLearner.id).to.equal(organizationLearnerId);

@@ -11,7 +11,7 @@ import { repositories } from '../../../../../src/quest/infrastructure/repositori
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 import { injectDependencies } from '../../../../../src/shared/infrastructure/utils/dependency-injection.js';
-import { catchErr, databaseBuilder, expect, nock, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 const { combinedCourseDetailsService: CombinedCourseDetailsService } = injectDependencies(
   { combinedCourseDetailsService },
@@ -55,7 +55,6 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
 
     beforeEach(function () {
       // given
-      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
       const organizationLearner = databaseBuilder.factory.buildOrganizationLearner();
       organizationLearnerId = organizationLearner.id;
       userId = organizationLearner.userId;
@@ -211,6 +210,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       });
 
       // then
+      expect(result).to.be.instanceOf(CombinedCourse);
       expect(result.items).to.be.deep.equal([
         {
           id: campaign.id,
@@ -258,20 +258,84 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
           validatedStagesCount: null,
         },
       ]);
-      expect(result).to.be.instanceOf(CombinedCourse);
+
       expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.STARTED);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
     });
+
+    it('should return independent states for each learner when processing multiple learners', async function () {
+      // given
+      const secondLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+        combinedCourseContents: [{ campaignId: campaign.id }, { moduleId: moduleId1 }, { moduleId: moduleId2 }],
+      });
+
+      // First learner: STARTED combined course + SHARED campaign participation (campaign item completed)
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
+        combinedCourseId,
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId,
+        organizationLearnerId,
+        masteryRate: 0.8,
+        status: CampaignParticipationStatuses.SHARED,
+      });
+
+      // Second learner: STARTED combined course + STARTED campaign participation (campaign item not completed)
+      databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
+        combinedCourseId,
+        organizationLearnerId: secondLearner.id,
+        status: OrganizationLearnerParticipationStatuses.STARTED,
+      });
+      databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaign.id,
+        userId: secondLearner.userId,
+        organizationLearnerId: secondLearner.id,
+        masteryRate: null,
+        status: CampaignParticipationStatuses.STARTED,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourseDetails = await CombinedCourseDetailsService.instantiateCombinedCourseDetails({
+        combinedCourseId,
+      });
+      const resultsByLearnerId = await CombinedCourseDetailsService.getCombinedCourseDetailsForMultipleLearners({
+        organizationLearnerIds: [organizationLearnerId, secondLearner.id],
+        combinedCourseDetails,
+      });
+
+      // then
+      expect(resultsByLearnerId).instanceOf(Map);
+      expect(resultsByLearnerId.size).equal(2);
+      const firstLearnerResult = resultsByLearnerId.get(organizationLearnerId);
+      expect(firstLearnerResult.status).to.equal(CombinedCourseStatuses.STARTED);
+      expect(firstLearnerResult.participation).not.to.equal(null);
+      expect(firstLearnerResult.items).to.have.lengthOf(3);
+      expect(firstLearnerResult.items[0].participationStatus).to.equal(CampaignParticipationStatuses.SHARED);
+      expect(firstLearnerResult.items[0].isCompleted).to.equal(true);
+
+      const secondLearnerResult = resultsByLearnerId.get(secondLearner.id);
+      expect(secondLearnerResult.status).to.equal(CombinedCourseStatuses.STARTED);
+      expect(secondLearnerResult.participation).not.to.equal(null);
+      expect(secondLearnerResult.items).to.have.lengthOf(3);
+      expect(secondLearnerResult.items[0].participationStatus).to.equal(CampaignParticipationStatuses.STARTED);
+      expect(secondLearnerResult.items[0].isCompleted).to.equal(false);
+    });
   });
 
   describe('when there is no combined course participation yet', function () {
     it('should return correct data for a not started combined course participation', async function () {
       // given
-      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
-
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfile = databaseBuilder.factory.buildTargetProfile();
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
@@ -318,7 +382,6 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       });
 
       // then
-      expect(result).to.be.instanceOf(CombinedCourse);
       expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
       expect(result.participation).to.equal(null);

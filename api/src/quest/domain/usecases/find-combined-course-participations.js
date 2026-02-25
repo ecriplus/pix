@@ -1,5 +1,3 @@
-import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-
 export const findCombinedCourseParticipations = async ({
   combinedCourseId,
   page,
@@ -17,19 +15,17 @@ export const findCombinedCourseParticipations = async ({
   const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
     combinedCourseId,
   });
-  const combinedCourseParticipations = await PromiseUtils.mapSeries(
+
+  const resultsByLearnerId = await combinedCourseDetailsService.getCombinedCourseDetailsForMultipleLearners({
     organizationLearnerIds,
-    async (organizationLearnerId) => {
-      const combinedCourseDetail = await combinedCourseDetailsService.getCombinedCourseDetails({
-        organizationLearnerId,
-        combinedCourseDetails,
-      });
-      return combinedCourseDetail.participationDetails;
-    },
-  );
+    combinedCourseDetails,
+  });
 
   return {
-    combinedCourseParticipations,
+    combinedCourseParticipations: resultsByLearnerId
+      .values()
+      .toArray()
+      .map(({ participationDetails }) => participationDetails),
     meta,
   };
 };

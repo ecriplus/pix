@@ -108,10 +108,18 @@ export const getByUserId = async function ({ userId, combinedCourseId }) {
   return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
-export const findMostRecentByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
-  const knexConnection = DomainTransaction.getConnection();
+export const findByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
+  const participation = await findByLearnerIds({
+    organizationLearnerIds: [organizationLearnerId],
+    combinedCourseId,
+  });
+  if (participation.length > 0) return participation[0];
+  return null;
+};
 
-  const combinedCourseParticipation = await knexConnection('organization_learner_participations')
+export const findByLearnerIds = async function ({ organizationLearnerIds, combinedCourseId }) {
+  const knexConnection = DomainTransaction.getConnection();
+  const results = await knexConnection('organization_learner_participations')
     .select(
       'organization_learner_participations.id',
       'organizationLearnerId',
@@ -130,18 +138,15 @@ export const findMostRecentByLearnerId = async function ({ organizationLearnerId
       '=',
       'organization_learner_participations.organizationLearnerId',
     )
+    .whereIn('view-active-organization-learners.id', organizationLearnerIds)
     .where({
-      'view-active-organization-learners.id': organizationLearnerId,
       'organization_learner_participations.referenceId': combinedCourseId.toString(),
       'organization_learner_participations.type': OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     })
     .whereNull('organization_learner_participations.deletedAt')
-    .orderBy('organization_learner_participations.createdAt', 'DESC')
-    .first();
+    .orderBy([{ column: 'organization_learner_participations.createdAt', order: 'desc' }]);
 
-  if (!combinedCourseParticipation) return null;
-
-  return new CombinedCourseParticipation(combinedCourseParticipation);
+  return results.map((row) => new CombinedCourseParticipation(row));
 };
 
 export const findPaginatedCombinedCourseParticipationById = async function ({ combinedCourseId, page, filters }) {

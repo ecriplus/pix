@@ -288,13 +288,14 @@ export const MAXI_COMBINED_COURSE = {
       },
     ],
   },
-  participations: [
-    {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      email: 'maxi-combined@example.net',
-      status: OrganizationLearnerParticipationStatuses.STARTED,
-      campaignStatus: CampaignParticipationStatuses.SHARED,
-    },
-  ],
+  participations: Array.from({ length: 100 }).map((_, index) => ({
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    email: `${index}maxi-combined@example.net`,
+    status:
+      Math.random() > 0.5
+        ? OrganizationLearnerParticipationStatuses.STARTED
+        : OrganizationLearnerParticipationStatuses.COMPLETED,
+    campaignStatus: CampaignParticipationStatuses.SHARED,
+  })),
 };

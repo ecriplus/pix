@@ -100,4 +100,72 @@ describe('Quest | Unit | Infrastructure | repositories | eligibility', function 
       ]);
     });
   });
+
+  describe('#findByOrganizationAndOrganizationLearnerIds', function () {
+    it('should call organizationLearnerWithParticipationApi', async function () {
+      // given
+      const organizationLearnerIds = [Symbol('organizationLearnerId')];
+      const organization = { id: 1 };
+      const targetProfileId = Symbol('targetProfileId');
+      const apiResponseSymbol = new Map();
+      apiResponseSymbol.set(organizationLearnerIds[0], {
+        organizationLearner: {
+          id: organizationLearnerIds[0],
+        },
+        organization,
+        campaignParticipations: [{ targetProfileId }],
+      });
+      const moduleIds = Symbol('moduleIds');
+
+      const organizationLearnerParticipationRepository = {
+        findByOrganizationLearnerIdsAndModuleIds: sinon.stub(),
+      };
+      organizationLearnerParticipationRepository.findByOrganizationLearnerIdsAndModuleIds
+        .withArgs({
+          organizationLearnerIds,
+          moduleIds,
+        })
+        .resolves(
+          new Map([
+            [
+              organizationLearnerIds[0],
+              [
+                {
+                  status: OrganizationLearnerParticipationStatuses.STARTED,
+                  referenceId: 1,
+                  isTerminated: true,
+                },
+              ],
+            ],
+          ]),
+        );
+
+      const organizationLearnerWithParticipationApi = {
+        findByOrganizationAndOrganizationLearnerIds: sinon.stub(),
+      };
+      organizationLearnerWithParticipationApi.findByOrganizationAndOrganizationLearnerIds
+        .withArgs({ organizationLearnerIds, organizationId: organization.id })
+        .resolves(apiResponseSymbol);
+
+      // when
+      const result = await eligibilityRepository.findByOrganizationAndOrganizationLearnerIds({
+        organizationLearnerIds,
+        organizationId: organization.id,
+        organizationLearnerWithParticipationApi,
+        organizationLearnerParticipationRepository,
+        moduleIds,
+      });
+
+      const eligibility = result.get(organizationLearnerIds[0]);
+
+      // then
+      expect(eligibility).to.be.an.instanceof(Eligibility);
+      expect(eligibility.organization).to.equal(organization);
+      expect(eligibility.organizationLearner.id).to.equal(organizationLearnerIds[0]);
+      expect(eligibility.campaignParticipations[0].targetProfileId).to.equal(targetProfileId);
+      expect(eligibility.passages).to.deep.equal([
+        { status: OrganizationLearnerParticipationStatuses.STARTED, moduleId: 1, isTerminated: true },
+      ]);
+    });
+  });
 });
