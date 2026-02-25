@@ -30,6 +30,23 @@ class DomainTransaction {
       });
   }
 
+  /**
+   *
+   * @param {Function} handler : handler executed after transaction is successful
+   *
+   * @description Important notice: success handlers shall not be massively used
+   * You should be able to declare code to be exectuted after transaction success in a better way
+   * i.e declaring code **after** DomainTransaction.execture call :
+   *  -- myUsecase.js
+   *  function myUsecase() {
+   *    await DomainTransaction.execute(() => {
+   *      -- transactional code
+   *    });
+   *
+   *    -- sending job after transaction is successful
+   *    await myJob.performAsync(payload);
+   *  }
+   */
   static async addSuccessHandler(handler) {
     const store = asyncLocalStorage.getStore();
     const isSuccessHandlerEnabled = await featureToggles.get('successHandlersForDomainTransaction');
