@@ -1,5 +1,42 @@
 # Pix Changelog
 
+# [5.339.0](https://github.com/1024pix/pix/compare/v5.338.1...v5.339.0) (2026-02-25)
+
+### :rocket: Amélioration
+
+- [#15145](https://github.com/1024pix/pix/pull/15145) Afficher la progression globale en mode exam (PIX-20931) 
+- [#15203](https://github.com/1024pix/pix/pull/15203) Ajoute une colonne questId sur combined course blueprint  
+- [#15175](https://github.com/1024pix/pix/pull/15175) Empêcher l'accès aux parcours combinés supprimés (PIX-21506) 
+- [#15015](https://github.com/1024pix/pix/pull/15015) Images définitives dans le module gestionMDP_NOV 
+- [#15226](https://github.com/1024pix/pix/pull/15226) Tracker les clics sur les boutons de campagne depuis un parcours apprenant (PIX-21663) 
+
+### :bug: Correction
+
+- [#15270](https://github.com/1024pix/pix/pull/15270) Ajouter une valeur fallback pour maxReachableLevel de parcoursup 
+- [#15229](https://github.com/1024pix/pix/pull/15229) Mettre à jour les liens et l'icône du bandeau SCO (PIX-21630) 
+
+### :building_construction: Tech
+
+- [#15210](https://github.com/1024pix/pix/pull/15210) :broom: Supprime le sous domaine de Certification Complémentaire 
+- [#15240](https://github.com/1024pix/pix/pull/15240) Ajout de colonnes dans la table "assessment-results" pour permettre le stockage du scoring des pix plus et faciliter son interprétation (PIX-21697) 
+- [#15238](https://github.com/1024pix/pix/pull/15238) Retirer toutes mentions de ownerOrganizationId (PIX-21604) 
+- [#15239](https://github.com/1024pix/pix/pull/15239) Suppression du script modify-type-label-passage-event-qab-card-retried (PIX-21638). 
+
+### :arrow_up: Montée de version
+
+- [#15243](https://github.com/1024pix/pix/pull/15243) Update dependency @1024pix/pix-ui to v60 (admin) 
+- [#15248](https://github.com/1024pix/pix/pull/15248) Update dependency @datadog/datadog-api-client to v1.52.0 (api) 
+- [#15250](https://github.com/1024pix/pix/pull/15250) Update dependency @ember/optional-features to v3 (certif) 
+- [#15245](https://github.com/1024pix/pix/pull/15245) Update dependency @ember/optional-features to v3 (junior) 
+- [#15246](https://github.com/1024pix/pix/pull/15246) Update dependency @ember/optional-features to v3 (mon-pix) 
+- [#15247](https://github.com/1024pix/pix/pull/15247) Update dependency @ember/optional-features to v3 (orga) 
+- [#15262](https://github.com/1024pix/pix/pull/15262) Update dependency ember-cli to ~6.11.0 (admin) 
+- [#15263](https://github.com/1024pix/pix/pull/15263) Update dependency ember-exam to v10.1.0 (certif) 
+- [#15264](https://github.com/1024pix/pix/pull/15264) Update dependency ember-exam to v10.1.0 (junior) 
+- [#15265](https://github.com/1024pix/pix/pull/15265) Update dependency ember-exam to v10.1.0 (orga) 
+- [#15266](https://github.com/1024pix/pix/pull/15266) Update dependency ember-source to ~6.11.0 (admin) 
+- [#15267](https://github.com/1024pix/pix/pull/15267) Update dependency ember-source to ~6.11.0 (junior)
+
 ## [5.338.1](https://github.com/1024pix/pix/compare/v5.338.0...v5.338.1) (2026-02-24)
 
 ### :bug: Correction
