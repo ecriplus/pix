@@ -32,7 +32,7 @@ export class CombinedCourse {
       illustration,
       participations = [],
       questId,
-      blueprintId,
+      blueprintId = null,
       deletedAt = null,
       deletedBy = null,
     } = {},
@@ -227,6 +227,7 @@ export class CombinedCourseDetails extends CombinedCourse {
   generateItems({ recommendedModuleIdsForUser = [], dataForQuest, participation = null } = {}) {
     this.items = [];
     this.participation = participation;
+    this.dataForQuest = dataForQuest;
 
     if (!this.participation) {
       this.status = CombinedCourseStatuses.NOT_STARTED;
@@ -308,5 +309,9 @@ export class CombinedCourseDetails extends CombinedCourse {
         }
       }
     }
+  }
+
+  isSuccessful() {
+    return this.quest.isSuccessful(this.dataForQuest);
   }
 }

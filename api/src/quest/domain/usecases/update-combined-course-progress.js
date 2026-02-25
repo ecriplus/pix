@@ -9,6 +9,7 @@ export async function updateCombinedCourseProgress({
   organizationLearnerPrescriptionRepository,
   organizationLearnerParticipationRepository,
   combinedCourseDetailsService,
+  rewardRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
   const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
@@ -52,6 +53,13 @@ export async function updateCombinedCourseProgress({
       updatedCombinedCourseDetails.participation,
     );
     await combinedCourseParticipationRepository.update(organizationLearnerParticipation.fieldsForUpdate);
+    if (updatedCombinedCourseDetails.isSuccessful()) {
+      await rewardRepository.reward({
+        userId,
+        rewardId: combinedCourse.quest.rewardId,
+        rewardType: combinedCourse.quest.rewardType,
+      });
+    }
   }
 
   return updatedCombinedCourseDetails.participation;
