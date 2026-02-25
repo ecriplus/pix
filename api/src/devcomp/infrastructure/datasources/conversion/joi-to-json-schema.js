@@ -36,9 +36,13 @@ function convertBoolean() {
 }
 
 function convertString(joiStringDescribedSchema) {
-  const jsonSchema = { type: 'string', format: null };
+  const jsonSchema = { type: 'string', format: null, options: null };
 
   const rules = joiStringDescribedSchema.rules;
+
+  if (hasFlag(joiStringDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiStringDescribedSchema.flags['description'] };
+  }
 
   const emailRule = findRule(rules, 'email');
   if (emailRule !== undefined) {
@@ -277,7 +281,12 @@ function findRule(rules, ruleName) {
 
 function hasFlag(flags, flagName, flagValue) {
   if (flags !== undefined) {
-    return Object.entries(flags).some(([name, value]) => flagName === name && flagValue === value);
+    return Object.entries(flags).some(([name, value]) => {
+      if (!flagValue) {
+        return flagName === name;
+      }
+      return flagName === name && flagValue === value;
+    });
   }
   return false;
 }
