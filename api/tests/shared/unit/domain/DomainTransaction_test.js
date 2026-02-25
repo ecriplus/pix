@@ -89,7 +89,7 @@ describe('Unit | Infrastructure | DomainTransaction', function () {
       sinon.stub(knex, 'transaction');
       knex.transaction.callsFake(async (fn) => fn(transactionStub));
 
-      const myUseCase = withTransaction(function () {
+      const myUseCase = withTransaction(async function () {
         // Something
       });
       await myUseCase();

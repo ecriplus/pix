@@ -27,6 +27,9 @@ class DomainTransaction {
           await handler();
         }
         return result;
+      })
+      .finally(() => {
+        domainTransaction.successHandlers = [];
       });
   }
 
