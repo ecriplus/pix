@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "Alors qu’à leurs débuts les IA génératives conversationnelles ne savaient que générer du texte, elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code.<br>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.",
+    "description": "<p>À leurs débuts les IA génératives conversationnelles ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br>\n<p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -41,19 +41,19 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, c’est trop pratique ! 🤩"
+                      "content": "Hello mon cœur ! J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, c’est génial ! 🤩"
                     },
                     {
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mais tu es sûre de la réponse ? Je croyais que l’IA, c’était que pour le texte, et que pour les calculs, c’était pas top…"
+                      "content": "Mais tu es sûre des réponses ? Je croyais que l’IA, c’était que pour le texte ! Et que pour les calculs, c’était pas top…"
                     },
                     {
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "C’est vrai que c’était le cas il y a quelques années, mais les IA se sont beaucoup améliorées !"
+                      "content": "C’était avant ! Les IA se sont beaucoup améliorées !"
                     },
                     {
                       "userName": "Steven",
@@ -183,7 +183,7 @@
                       "id": "c097beb6-b3cb-40ea-ac4a-028107c6e541",
                       "type": "expand",
                       "title": "💡Bon à savoir",
-                      "content": "En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être branchés à des systèmes du monde physique. 🔌<br><br> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾"
+                      "content": "<p>En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être connnectés à des systèmes du monde physique. 🔌</p><br><br><p> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾</p>"
                     }
                   ]
                 }
@@ -216,18 +216,18 @@
               "element": {
                 "id": "348c6c66-c4c1-4803-94ba-7901f6d26394",
                 "type": "custom",
-                "instruction": "Analysez&nbsp;le prompt système du logiciel d’IA utilisé par Yasmine&nbsp;puis répondez aux questions.",
+                "instruction": "<p>Yasmine utilise ChatPix 3.0</p><p>Analysez&nbsp;le prompt système de ChatPix 3.0 puis répondez aux questions.</p>",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
                   "slides": [
                     {
                       "title": "Le prompt système",
-                      "description": "Le prompt système du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "description": "Le prompt système de ChatPix 3.0, utilisé par Yasmine",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/pre-prompt.jpg",
-                        "alt": "Le prompt système du logiciel d’IA conversationnel utilisé par Yasmine"
+                        "alt": "Le prompt système de ChatPix 3.0, utilisé par Yasmine"
                       },
                       "license": {
                         "name": "",
@@ -237,7 +237,7 @@
                     },
                     {
                       "title": "L’appel à l’outil génération d’image",
-                      "description": "L’appel à l’outil génération d’image du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "description": "L’appel à l’outil génération d’image de ChatPix 3.0 utilisé par Yasmine",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-generateur-image.jpg",
@@ -251,7 +251,7 @@
                     },
                     {
                       "title": "L’appel à l’outil calculatrice",
-                      "description": "L’appel à l’outil calculatrice du logiciel d’IA conversationnel utilisé par Yasmine",
+                      "description": "L’appel à l’outil calculatrice ChatPix 3.0, utilisé par Yasmine",
                       "displayWidth": 500,
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-calculatrice.jpg",
@@ -281,13 +281,13 @@
                     {
                       "id": "a898285f-1976-4273-a7a8-3c1b7ecf9f53",
                       "type": "custom",
-                      "instruction": "<p>Yasmine envoie ce prompt au logiciel d’IA conversationnelle défini ci-dessus.</p>",
+                      "instruction": "<p>Yasmine envoie ce prompt à ChatPix 3.0, le logiciel d'IA défini ci-dessus.</p>",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
                           {
                             "direction": "outbound",
-                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5m de longueur, pour 3 couches de peinture avec une peinture de rendement 10m²/L/couche ?"
+                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5 m de longueur, pour 3 couches de peinture avec une peinture de rendement 10 m²/L/couche ?"
                           }
                         ]
                       }
@@ -295,7 +295,7 @@
                     {
                       "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;</p>",
+                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -343,7 +343,7 @@
                     {
                       "id": "d51c484f-4e0f-424d-8d4e-4b22587a5260",
                       "type": "custom",
-                      "instruction": "Yasmine envoie le prompt suivant au logiciel d’IA conversationnelle définie ci-dessus.",
+                      "instruction": "<p>Yasmine envoie le prompt suivant à ChatPix 3.0, défini ci-dessus.</p>",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -357,42 +357,42 @@
                     {
                       "id": "e99bf18b-14df-4e78-ae8d-8b756f704898",
                       "type": "qcu-discovery",
-                      "instruction": "Quel outil peut être utilisé par ce logiciel d’IA conversationnelle pour répondre à cette demande ?&nbsp;",
+                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "La recherche sur internet.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.&nbsp;</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "La calculatrice.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Aucun outil ne va être utilisé.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ce logiciel d’IA.</p>"
+                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
                           }
                         }
                       ],
@@ -478,42 +478,9 @@
             {
               "type": "element",
               "element": {
-                "id": "ba25a27d-c934-497e-9c92-9b6a8e26be71",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "message-conversation",
-                "props": {
-                  "title": "Suite de la conversation entre Yasmine et Steven",
-                  "messages": [
-                    {
-                      "userName": "Steven",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ah ! C’est donc grâce à la définition des outils par les concepteurs que l’on peut faire tout ça !"
-                    },
-                    {
-                      "userName": "Yasmine",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Eh oui, c’est fou ! 🤯"
-                    },
-                    {
-                      "userName": "Stephen",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Mais quand, je fais une demande à l’IA, qu’est-ce qu’il se passe exactement ?"
-                    }
-                  ],
-                  "animationSpeed": 0
-                }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "7831fafa-8342-49ad-b93d-8c46106966ab",
                 "type": "text",
-                "content": "Comprendre comment le logiciel d’IA fait appel aux outils, c’est l’objectif&nbsp;de cette dernière partie."
+                "content": "<p>Une fois les outils  définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l'IA ?</p><p>C'est que nous allons voir dans cette dernière partie.</p>"
               }
             }
           ]
