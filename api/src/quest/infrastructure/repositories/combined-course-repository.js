@@ -7,7 +7,7 @@ const getByCode = async ({ code }) => {
   const knexConn = DomainTransaction.getConnection();
 
   const combinedCourse = await knexConn('combined_courses')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId', 'deletedAt', 'deletedBy')
     .where('code', code)
     .first();
   if (!combinedCourse) {
@@ -21,7 +21,7 @@ const getById = async ({ id }) => {
   const knexConn = DomainTransaction.getConnection();
 
   const combinedCourse = await knexConn('combined_courses')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
+    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId', 'deletedAt', 'deletedBy')
     .where('id', id)
     .whereNotNull('organizationId')
     .whereNotNull('code')
@@ -159,6 +159,8 @@ const _toDomain = ({
   illustration,
   questId,
   combinedCourseBlueprintId,
+  deletedAt,
+  deletedBy,
 }) => {
   return new CombinedCourse({
     id,
@@ -169,6 +171,8 @@ const _toDomain = ({
     illustration,
     questId,
     blueprintId: combinedCourseBlueprintId,
+    deletedAt,
+    deletedBy,
   });
 };
 

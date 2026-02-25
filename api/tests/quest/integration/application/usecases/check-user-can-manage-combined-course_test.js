@@ -1,8 +1,18 @@
 import * as checkUserCanManageCombinedCourse from '../../../../../src/quest/application/usecases/check-user-can-manage-combined-course.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Usecases | checkUserCanManageCombinedCourse', function () {
+  let clock;
+  const now = new Date('2003-04-05T03:04:05Z');
+
+  beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
   context('when user has membership in combined course organization', function () {
     it('should return true', async function () {
       // given
@@ -63,6 +73,24 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
 
       // then
       expect(canManage).to.be.false;
+    });
+  });
+  context('when combined course is deleted', function () {
+    it('should return authorized false', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ code, organizationId, deletedAt: now }).id;
+
+      await databaseBuilder.commit();
+
+      // when
+      const authorized = await checkUserCanManageCombinedCourse.execute({ combinedCourseId, userId });
+
+      // then
+      expect(authorized).to.be.false;
     });
   });
 });

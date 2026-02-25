@@ -522,6 +522,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           participations: [],
           questId: combinedCourseWithModule.questId,
           blueprintId: null,
+          deletedAt: null,
+          deletedBy: null,
         },
         {
           id: otherCombinedCourseWithModule.id,
@@ -533,6 +535,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           participations: [],
           questId: otherCombinedCourseWithModule.questId,
           blueprintId: null,
+          deletedAt: null,
+          deletedBy: null,
         },
       ]);
     });
@@ -587,6 +591,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           participations: [],
           questId: combinedCourseWithModule.questId,
           blueprintId: null,
+          deletedAt: null,
+          deletedBy: null,
         },
         {
           id: combinedCourseWithModuleAndOtherOrga.id,
@@ -598,6 +604,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           participations: [],
           questId: combinedCourseWithModuleAndOtherOrga.questId,
           blueprintId: null,
+          deletedAt: null,
+          deletedBy: null,
         },
       ]);
     });

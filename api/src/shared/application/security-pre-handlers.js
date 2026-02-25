@@ -679,12 +679,12 @@ async function checkAuthorizationToAccessCombinedCourse(
   const userId = request.auth.credentials.userId;
   const code = request.query?.filter?.code || request.params.code;
 
-  const belongsToOrganization = await dependencies.checkAuthorizationToAccessCombinedCourseUsecase.execute({
+  const canAccessCombinedCourse = await dependencies.checkAuthorizationToAccessCombinedCourseUsecase.execute({
     userId,
     code,
   });
 
-  if (belongsToOrganization) return h.response(true);
+  if (canAccessCombinedCourse) return h.response(true);
   return _replyForbiddenError(h);
 }
 

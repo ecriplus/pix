@@ -23,7 +23,19 @@ export class CombinedCourse {
   #quest;
 
   constructor(
-    { id, code, organizationId, name, description, illustration, participations = [], questId, blueprintId } = {},
+    {
+      id,
+      code,
+      organizationId,
+      name,
+      description,
+      illustration,
+      participations = [],
+      questId,
+      blueprintId,
+      deletedAt = null,
+      deletedBy = null,
+    } = {},
     quest,
   ) {
     this.id = id;
@@ -35,6 +47,8 @@ export class CombinedCourse {
     this.participations = participations;
     this.questId = questId;
     this.blueprintId = blueprintId;
+    this.deletedAt = deletedAt;
+    this.deletedBy = deletedBy;
 
     this.#validate({ id, code, organizationId, name, description, illustration });
 

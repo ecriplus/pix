@@ -25,9 +25,17 @@ export default class CombinedCoursePresentationRoute extends Route {
   }
 
   async model() {
-    const { code } = this.paramsFor('combined-courses');
-    await this.store.adapterFor('combined-course').reassessStatus(code);
-    return this.store.queryRecord('combined-course', { filter: { code } });
+    try {
+      const { code } = this.paramsFor('combined-courses');
+      await this.store.adapterFor('combined-course').reassessStatus(code);
+      return this.store.queryRecord('combined-course', { filter: { code } });
+    } catch (err) {
+      if (err.errors[0].code === 403) {
+        this.router.replaceWith('campaigns.archived-error');
+      } else {
+        throw err;
+      }
+    }
   }
 
   afterModel(combinedCourse) {

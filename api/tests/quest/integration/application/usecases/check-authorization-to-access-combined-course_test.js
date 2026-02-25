@@ -1,8 +1,19 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../src/quest/application/usecases/check-authorization-to-access-combined-course.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Application | Usecases | checkAuthorizationToAccessCombinedCourse', function () {
+  let clock;
+  const now = new Date('2003-04-05T03:04:05Z');
+
+  beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  afterEach(function () {
+    clock.restore();
+  });
+
   context('when user has organization learner in combined course organization', function () {
     it('should return true', async function () {
       // given
@@ -61,6 +72,25 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
         featureId: importFeature.id,
       });
       databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
+
+      // then
+      expect(authorized).to.be.false;
+    });
+  });
+
+  context('when combined course is deleted', function () {
+    it('should return authorized false', async function () {
+      // given
+      const code = 'COMBINIX1';
+      const userId = databaseBuilder.factory.buildUser().id;
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId, deletedAt: now });
+
       await databaseBuilder.commit();
 
       // when
