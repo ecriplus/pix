@@ -315,6 +315,43 @@ describe('Integration | Serializers | siecle-parser', function () {
         expect(errors.meta[1]).to.be.instanceof(SiecleXmlImportError);
       });
 
+      it('should abort parsing and reject with invalid char in firstName', async function () {
+        // given
+        const nationalStudentIdFromFile = '123';
+        const path = `${fixturesDirPath}/siecle-file/siecle-with-invalid-firstname.xml`;
+        const readableStream = fs.createReadStream(path);
+
+        // when
+        const siecleFileStreamer = await SiecleFileStreamer.create(readableStream, 'ISO-8859-15');
+        const parser = SiecleParser.create(siecleFileStreamer);
+        const errors = await catchErr(() => parser.parse())();
+
+        //then
+        expect(errors.meta).lengthOf(1);
+        expect(errors.meta[0]).to.be.instanceof(SiecleXmlImportError);
+        expect(errors.meta[0].code).to.be.equal(SIECLE_ERRORS.INVALID_CHAR_DETECTED);
+        expect(errors.meta[0].meta).to.contains({ nationalStudentId: nationalStudentIdFromFile });
+      });
+
+      it('should abort parsing and reject with invalid char in last name', async function () {
+        // given
+        const nationalStudentIdFromFile = '124';
+        const path = `${fixturesDirPath}/siecle-file/siecle-with-invalid-lastname.xml`;
+        const readableStream = fs.createReadStream(path);
+
+        // when
+        const siecleFileStreamer = await SiecleFileStreamer.create(readableStream, 'ISO-8859-15');
+        const parser = SiecleParser.create(siecleFileStreamer);
+        const errors = await catchErr(() => parser.parse())();
+
+        //then
+
+        expect(errors.meta).lengthOf(1);
+        expect(errors.meta[0]).to.be.instanceof(SiecleXmlImportError);
+        expect(errors.meta[0].code).to.be.equal(SIECLE_ERRORS.INVALID_CHAR_DETECTED);
+        expect(errors.meta[0].meta).to.contains({ nationalStudentId: nationalStudentIdFromFile });
+      });
+
       context('when student is born in France', function () {
         it('should abort parsing and reject with missing birth city code ', async function () {
           // given

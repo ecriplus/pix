@@ -51,6 +51,7 @@
       "ine-required": "INE is mandatory for each student.",
       "ine-unique": "The INE {nationalStudentId} is repeated several times within the file for several students.",
       "invalid-birthdate-format": "Student with {nationalStudentId} INE has the wrong date of birth format. It must be in 'DD/MM/YYYY' format.",
+      "invalid-char-detected": "The surname or first name of the student with INE {nationalStudentId} contains unsupported characters.",
       "invalid-file": "File does not match the requirements.",
       "invalid-file-extension": "File with extension {fileExtension} not supported.",
       "last-name-required": "Student with {nationalStudentId} INE has no last name filled out. This field is mandatory for each student.",

@@ -13,7 +13,7 @@ const DIVISION = 'D';
 
 const FRANCE_COUNTRY_CODE = '100';
 
-class XMLOrganizationLearnersSet {
+export class XMLOrganizationLearnersSet {
   constructor() {
     this.organizationLearnersByStudentId = new Map();
     this.studentIds = [];
@@ -76,6 +76,22 @@ class XMLOrganizationLearnersSet {
     if (this.studentIds.includes(nationalStudentId)) {
       errors.push(new SiecleXmlImportError(SIECLE_ERRORS.INE_UNIQUE, { nationalStudentId }));
     }
+    if (!containsOnlyValidChars(firstName)) {
+      errors.push(
+        new SiecleXmlImportError(SIECLE_ERRORS.INVALID_CHAR_DETECTED, {
+          nationalStudentId,
+          field: 'firstName',
+        }),
+      );
+    }
+    if (!containsOnlyValidChars(lastName)) {
+      errors.push(
+        new SiecleXmlImportError(SIECLE_ERRORS.INVALID_CHAR_DETECTED, {
+          nationalStudentId,
+          field: 'lastName',
+        }),
+      );
+    }
 
     return errors;
   }
@@ -126,4 +142,4 @@ function _frenchBornHasEmptyCityCode({ birthCountryCode, birthCityCode }) {
   return birthCountryCode === FRANCE_COUNTRY_CODE && isEmpty(birthCityCode);
 }
 
-export { XMLOrganizationLearnersSet };
+export const containsOnlyValidChars = (str) => /^([A-Za-zŽžÀ-ÿ \-'])+$/.test(str);

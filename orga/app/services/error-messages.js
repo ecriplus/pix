@@ -47,6 +47,7 @@ const XML_IMPORT_ERRORS = {
   INVALID_BIRTHDATE_FORMAT: 'api-error-messages.student-xml-import.invalid-birthdate-format',
   LAST_NAME_REQUIRED: 'api-error-messages.student-xml-import.last-name-required',
   FIRST_NAME_REQUIRED: 'api-error-messages.student-xml-import.first-name-required',
+  INVALID_CHAR_DETECTED: 'api-error-messages.student-xml-import.invalid-char-detected',
 };
 
 const ERROR_MESSAGES = {
