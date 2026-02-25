@@ -3,80 +3,43 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCenter } from '../../../../shared/domain/models/CertificationCenter.js';
 import { ComplementaryCertification } from '../../domain/models/ComplementaryCertification.js';
 
-const getComplementaryCertifications = async (knexConnection, certificationCenter) =>
-  await knexConnection('complementary-certifications')
-    .select([
-      'complementary-certifications.id',
-      'complementary-certifications.key',
-      'complementary-certifications.label',
-    ])
-    .join(
-      'complementary-certification-habilitations',
-      'complementary-certification-habilitations.complementaryCertificationId',
-      'complementary-certifications.id',
-    )
-    .where('complementary-certification-habilitations.certificationCenterId', certificationCenter.id)
-    .orderBy('complementary-certifications.id');
+export async function get({ id }) {
+  const certificationCenterWithHabilitationsData = await certificationCenterWithHabilitationsBaseQuery().where({
+    'certification-centers.id': id,
+  });
 
-export const get = async function ({ id }) {
-  const knexConnection = DomainTransaction.getConnection();
-
-  const certificationCenter = await knexConnection('certification-centers').orderBy('id', 'desc').where({ id }).first();
-
-  if (!certificationCenter) {
+  if (certificationCenterWithHabilitationsData.length === 0) {
     throw new NotFoundError(`Certification center with id: ${id} not found`);
   }
-  const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return _toDomain({
-    ...certificationCenter,
-    habilitations: complementaryCertifications,
-  });
-};
 
-export const getBySessionId = async ({ sessionId }) => {
-  const knexConnection = DomainTransaction.getConnection();
+  return toDomain(certificationCenterWithHabilitationsData);
+}
 
-  const certificationCenter = await knexConnection('certification-centers')
-    .select(
-      'certification-centers.id',
-      'certification-centers.name',
-      'certification-centers.externalId',
-      'certification-centers.type',
-      'certification-centers.createdAt',
-      'certification-centers.updatedAt',
-      'certification-centers.archivedAt',
-      'certification-centers.archivedBy',
-    )
-    .where({ 'sessions.id': sessionId })
+export async function getBySessionId({ sessionId }) {
+  const certificationCenterWithHabilitationsData = await certificationCenterWithHabilitationsBaseQuery()
     .innerJoin('sessions', 'sessions.certificationCenterId', 'certification-centers.id')
-    .first();
+    .where({ 'sessions.id': sessionId });
 
-  if (!certificationCenter) {
+  if (certificationCenterWithHabilitationsData.length === 0) {
     throw new NotFoundError(`Could not find certification center for sessionId ${sessionId}.`);
   }
-  const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return _toDomain({
-    ...certificationCenter,
-    habilitations: complementaryCertifications,
+
+  return toDomain(certificationCenterWithHabilitationsData);
+}
+
+export async function findByExternalId({ externalId }) {
+  const certificationCenterWithHabilitationsData = await certificationCenterWithHabilitationsBaseQuery().where({
+    'certification-centers.externalId': externalId,
   });
-};
 
-export const findByExternalId = async ({ externalId }) => {
-  const knexConnection = DomainTransaction.getConnection();
-
-  const certificationCenter = await knexConnection('certification-centers').where({ externalId }).first();
-  if (!certificationCenter) {
+  if (certificationCenterWithHabilitationsData.length === 0) {
     return null;
   }
 
-  const complementaryCertifications = await getComplementaryCertifications(knexConnection, certificationCenter);
-  return _toDomain({
-    ...certificationCenter,
-    habilitations: complementaryCertifications,
-  });
-};
+  return toDomain(certificationCenterWithHabilitationsData);
+}
 
-export const getRefererEmails = async ({ id }) => {
+export async function getRefererEmails({ id }) {
   const knexConn = DomainTransaction.getConnection();
   return knexConn('certification-centers')
     .select('users.email')
@@ -88,14 +51,53 @@ export const getRefererEmails = async ({ id }) => {
     .join('users', 'users.id', 'certification-center-memberships.userId')
     .where('certification-centers.id', id)
     .where('certification-center-memberships.isReferer', true);
-};
+}
 
-const _toDomain = (certificationCenter) => {
-  const habilitations = certificationCenter.habilitations.map((dbComplementaryCertification) => {
-    return new ComplementaryCertification(dbComplementaryCertification);
-  });
+function certificationCenterWithHabilitationsBaseQuery() {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn
+    .select({
+      id: 'certification-centers.id',
+      name: 'certification-centers.name',
+      externalId: 'certification-centers.externalId',
+      type: 'certification-centers.type',
+      createdAt: 'certification-centers.createdAt',
+      updatedAt: 'certification-centers.updatedAt',
+      archivedAt: 'certification-centers.archivedAt',
+      archivedBy: 'certification-centers.archivedBy',
+      complementaryCertificationId: 'complementary-certifications.id',
+      complementaryCertificationKey: 'complementary-certifications.key',
+      complementaryCertificationLabel: 'complementary-certifications.label',
+    })
+    .from('certification-centers')
+    .leftJoin(
+      'complementary-certification-habilitations',
+      'complementary-certification-habilitations.certificationCenterId',
+      'certification-centers.id',
+    )
+    .leftJoin(
+      'complementary-certifications',
+      'complementary-certification-habilitations.complementaryCertificationId',
+      'complementary-certifications.id',
+    )
+    .orderBy('complementary-certifications.id');
+}
+
+function toDomain(certificationCenterWithHabilitationsData) {
+  const habilitations = [];
+  for (const habilitationData of certificationCenterWithHabilitationsData) {
+    if (habilitationData.complementaryCertificationId) {
+      habilitations.push(
+        new ComplementaryCertification({
+          id: habilitationData.complementaryCertificationId,
+          label: habilitationData.complementaryCertificationLabel,
+          key: habilitationData.complementaryCertificationKey,
+        }),
+      );
+    }
+  }
   return new CertificationCenter({
-    ...certificationCenter,
+    ...certificationCenterWithHabilitationsData[0],
     habilitations,
   });
-};
+}

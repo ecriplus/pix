@@ -3,7 +3,7 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { CertificationCenter } from '../../../../../../src/shared/domain/models/CertificationCenter.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Integration | Repository | Certification Center', function () {
+describe('Certification | Shared | Integration | Repository | Certification Center', function () {
   let clock, now;
 
   beforeEach(function () {
