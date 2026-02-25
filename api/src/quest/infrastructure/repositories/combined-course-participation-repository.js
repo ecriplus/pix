@@ -108,8 +108,8 @@ export const getByUserId = async function ({ userId, combinedCourseId }) {
   return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
-export const findMostRecentByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
   const knexConnection = DomainTransaction.getConnection();
+export const findByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
 
   const combinedCourseParticipation = await knexConnection('organization_learner_participations')
     .select(

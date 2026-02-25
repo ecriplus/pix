@@ -270,8 +270,8 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
     });
   });
 
-  describe('#findMostRecentByLearnerId', function () {
-    it('should return most recent combinedCourse participation for given learnerId and combinedCourse ids', async function () {
+  describe('#findByLearnerId', function () {
+    it('should return combinedCourse participation for given learnerId and combinedCourse ids', async function () {
       // given
       const {
         firstName,
@@ -288,7 +288,6 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         combinedCourseId,
       });
       databaseBuilder.factory.buildOrganizationLearnerParticipation({
-        organizationLearnerId,
         status: OrganizationLearnerParticipationStatuses.COMPLETED,
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
         createdAt: new Date('2024-01-01'),
@@ -297,7 +296,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       await databaseBuilder.commit();
 
       // when
-      const result = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+      const result = await combinedCourseParticipationRepository.findByLearnerId({
         organizationLearnerId,
         combinedCourseId,
       });
@@ -318,7 +317,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       const combinedCourseId = 2;
 
       // when
-      const result = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+      const result = await combinedCourseParticipationRepository.findByLearnerId({
         organizationLearnerId,
         combinedCourseId,
       });

@@ -46,7 +46,7 @@ async function getCombinedCourseDetails({
   eligibilityRepository,
   recommendedModuleRepository,
 }) {
-  const participation = await combinedCourseParticipationRepository.findMostRecentByLearnerId({
+  const participation = await combinedCourseParticipationRepository.findByLearnerId({
     organizationLearnerId,
     combinedCourseId: combinedCourseDetails.id,
   });
