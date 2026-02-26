@@ -44,12 +44,31 @@ const ALLOWED_ELEMENTS_SCHEMA = [
 const ELEMENTS_FORBIDDEN_IN_STEPPER = ['flashcards', 'qab'];
 
 const moduleDetailsSchema = Joi.object({
-  image: Joi.string().uri().required(),
-  description: htmlSchema.required(),
-  duration: Joi.number().integer().min(0).max(120).required(),
-  level: Joi.string().valid('novice', 'independent', 'advanced', 'expert').required(),
-  objectives: Joi.array().items(htmlSchema).min(1).required(),
-  tabletSupport: Joi.string().valid('comfortable', 'inconvenient', 'obstructed').required(),
+  image: Joi.string()
+    .uri()
+    .required()
+    .description(
+      'Image qui s’affiche dans l’en-tête du module. Exemple: https://assets.pix.org/modules/placeholder-details.svg.',
+    ),
+  description: htmlSchema.required().description('Texte d’introduction en dessous du titre du module.'),
+  duration: Joi.number()
+    .integer()
+    .min(0)
+    .max(120)
+    .required()
+    .description('Durée du module (en minutes). Valeur acceptée: entre 0 et 120. Ne pas inclure l’unité.'),
+  level: Joi.string().valid('novice', 'independent', 'advanced', 'expert').required().description('Niveau du module.'),
+  objectives: Joi.array()
+    .items(htmlSchema)
+    .min(1)
+    .required()
+    .description('Un objectif minimum. Ils s’affichent dans l’ordre contribué.'),
+  tabletSupport: Joi.string()
+    .valid('comfortable', 'inconvenient', 'obstructed')
+    .required()
+    .description(
+      "Si la valeur est inconvenient ou obstructed, on indiquera à l'utilisateur que le module peut être difficile à réaliser sur un petit écran.",
+    ),
 });
 
 const elementSchema = Joi.alternatives().conditional('.type', {
@@ -82,7 +101,10 @@ const grainSchema = Joi.object({
   type: Joi.string()
     .valid('short-lesson', 'discovery', 'activity', 'challenge', 'lesson', 'summary', 'transition')
     .required(),
-  title: htmlNotAllowedSchema.required().allow(''),
+  title: htmlNotAllowedSchema
+    .required()
+    .allow('')
+    .description('Titre du grain. Usage interne pour faciliter la navigation sur Modulix Editor.'),
   components: Joi.array()
     .items(
       Joi.alternatives().conditional('.type', {
@@ -123,14 +145,22 @@ const moduleSectionSchema = Joi.object({
 });
 
 const moduleSchema = Joi.object({
-  id: uuidSchema,
-  shortId: Joi.string().length(8).required(),
+  id: uuidSchema.description('Identifiant universel unique (uuid) du module.'),
+  shortId: Joi.string().length(8).required().description("Identifiant court unique du module, présent dans l'url."),
   slug: Joi.string()
     .regex(/^[a-z0-9-]+$/)
-    .required(),
-  title: htmlNotAllowedSchema.required(),
+    .required()
+    .description(
+      "Identifiant texte unique du module, présent dans l'url. Caractères autorisés : Tout caractère entre a et z (minuscules), tout chiffre (0 à 9) et le trait d'union (-).",
+    ),
+  title: htmlNotAllowedSchema.required().description('Titre du module.'),
   isBeta: Joi.boolean().required(),
-  visibility: Joi.string().valid('private', 'public').required(),
+  visibility: Joi.string()
+    .valid('private', 'public')
+    .required()
+    .description(
+      'Valeurs acceptées : private, public. Si vous indiquez "public", le module pourra être sélectionné à la création d’un contenu formatif dans Pix Admin.',
+    ),
   details: moduleDetailsSchema.required(),
   sections: Joi.array().items(moduleSectionSchema).required(),
 }).required();

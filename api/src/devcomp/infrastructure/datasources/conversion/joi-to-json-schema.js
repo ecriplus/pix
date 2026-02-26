@@ -36,9 +36,13 @@ function convertBoolean() {
 }
 
 function convertString(joiStringDescribedSchema) {
-  const jsonSchema = { type: 'string', format: null };
+  const jsonSchema = { type: 'string', format: null, options: null };
 
   const rules = joiStringDescribedSchema.rules;
+
+  if (hasFlag(joiStringDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiStringDescribedSchema.flags['description'] };
+  }
 
   const emailRule = findRule(rules, 'email');
   if (emailRule !== undefined) {
@@ -103,8 +107,12 @@ function handleNonStandardStringProperties(joiStringDescribedSchema, jsonSchema)
 }
 
 function convertNumber(joiNumberDescribedSchema) {
-  const jsonSchema = { type: 'number' };
+  const jsonSchema = { type: 'number', options: null };
   const rules = joiNumberDescribedSchema.rules;
+
+  if (hasFlag(joiNumberDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiNumberDescribedSchema.flags['description'] };
+  }
 
   const integerRule = findRule(rules, 'integer');
   if (integerRule !== undefined) {
@@ -134,8 +142,12 @@ function convertNumber(joiNumberDescribedSchema) {
 }
 
 function convertArray(joiArrayDescribedSchema, key = '') {
-  const jsonSchema = { type: 'array' };
+  const jsonSchema = { type: 'array', options: null };
   const rules = joiArrayDescribedSchema.rules;
+
+  if (hasFlag(joiArrayDescribedSchema.flags, 'description')) {
+    jsonSchema.options = { infoText: joiArrayDescribedSchema.flags['description'] };
+  }
 
   const minRule = findRule(rules, 'min');
   if (minRule !== undefined) {
@@ -159,7 +171,7 @@ function convertArray(joiArrayDescribedSchema, key = '') {
 
         // Add headerTemplate for JSON Editor lib
         // See {@link https://github.com/json-editor/json-editor#dynamic-headers}
-        // for further informations
+        // for further information
         jsonSchema.items.headerTemplate = `${itemTitle} {{i0}}`;
       }
     }
@@ -277,7 +289,12 @@ function findRule(rules, ruleName) {
 
 function hasFlag(flags, flagName, flagValue) {
   if (flags !== undefined) {
-    return Object.entries(flags).some(([name, value]) => flagName === name && flagValue === value);
+    return Object.entries(flags).some(([name, value]) => {
+      if (!flagValue) {
+        return flagName === name;
+      }
+      return flagName === name && flagValue === value;
+    });
   }
   return false;
 }
