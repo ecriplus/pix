@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.341.0](https://github.com/1024pix/pix/compare/v5.340.0...v5.341.0) (2026-02-26)
+
+### :rocket: Amélioration
+
+- [#15257](https://github.com/1024pix/pix/pull/15257) Interdire l'import de fichier siecle xml avec des caractère non ASCII (PIX-21704) 
+- [#15273](https://github.com/1024pix/pix/pull/15273) Tmp iagenfonction ava modif 
+
+### :bug: Correction
+
+- [#15241](https://github.com/1024pix/pix/pull/15241) Corriger la mise à jour de la durée des contenus formatifs dans Pix Admin (PIX-21473) 
+
+### :building_construction: Tech
+
+- [#15255](https://github.com/1024pix/pix/pull/15255) Ajout de l'error.code et error.message dans un log (PIX-21715) 
+- [#15244](https://github.com/1024pix/pix/pull/15244) Ajouter une contrainte not-null sur le champ organizationLearnerTypeId de la table organizations (PIX-21334) 
+- [#15172](https://github.com/1024pix/pix/pull/15172) Améliorer les performances de la page des parcours apprenants sur PixOrga (PIX-21487) 
+- [#15256](https://github.com/1024pix/pix/pull/15256) Factoriser du code de l’oidcAuthenticationServiceRegistry (PIX-21712) 
+- [#15272](https://github.com/1024pix/pix/pull/15272) Permettre l'ajout d'une info bulle aux champs de Modulix Editor via la description JOI (PIX-21636). 
+
+### :arrow_up: Montée de version
+
+- [#15283](https://github.com/1024pix/pix/pull/15283) Update dependency @1024pix/pix-ui to v60 (certif) 
+- [#15284](https://github.com/1024pix/pix/pull/15284) Update dependency @1024pix/pix-ui to v60 (junior) 
+- [#15223](https://github.com/1024pix/pix/pull/15223) Update dependency @getbrevo/brevo to v4 (api)
+
 # [5.340.0](https://github.com/1024pix/pix/compare/v5.339.0...v5.340.0) (2026-02-25)
 
 ### :rocket: Amélioration
