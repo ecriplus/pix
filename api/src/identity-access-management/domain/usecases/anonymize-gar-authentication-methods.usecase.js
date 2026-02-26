@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { config } from '../../../shared/config.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 
 const USER_IDS_BATCH_SIZE = 1000;
@@ -25,22 +26,28 @@ export const anonymizeGarAuthenticationMethods = async function ({
 
   let garAnonymizedUserCount = 0;
 
-  for (const userIdsBatch of userIdBatches) {
-    const { garAnonymizedUserIds } = await authenticationMethodRepository.anonymizeByUserIds({ userIds: userIdsBatch });
-    garAnonymizedUserCount += garAnonymizedUserIds.length;
-
-    if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
-      await eventLoggingJobRepository.performAsync(
-        EventLoggingJob.forUsers({
-          client: 'PIX_ADMIN',
-          action: 'ANONYMIZATION_GAR',
-          userIds: garAnonymizedUserIds,
-          updatedByUserId: adminMemberId,
-          role: PIX_ADMIN.ROLES.SUPER_ADMIN,
-        }),
-      );
+  const eventLoggingJobs = [];
+  await DomainTransaction.execute(async () => {
+    for (const userIdsBatch of userIdBatches) {
+      const { garAnonymizedUserIds } = await authenticationMethodRepository.anonymizeByUserIds({
+        userIds: userIdsBatch,
+      });
+      garAnonymizedUserCount += garAnonymizedUserIds.length;
+      if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
+        eventLoggingJobs.push(
+          EventLoggingJob.forUsers({
+            client: 'PIX_ADMIN',
+            action: 'ANONYMIZATION_GAR',
+            userIds: garAnonymizedUserIds,
+            updatedByUserId: adminMemberId,
+            role: PIX_ADMIN.ROLES.SUPER_ADMIN,
+          }),
+        );
+      }
     }
+  });
+  for (const eventLoggingJob of eventLoggingJobs) {
+    await eventLoggingJobRepository.performAsync(eventLoggingJob);
   }
-
   return { garAnonymizedUserCount, total: userIds.length };
 };

@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { generateCSVTemplate } from '../../../shared/infrastructure/serializers/csv/csv-template.js';
 import { GarAnonymizationParser } from '../../domain/services/GarAnonymizationParser.js';
 import { usecases } from '../../domain/usecases/index.js';
@@ -17,9 +16,7 @@ async function anonymizeGarData(request, h) {
 
   const userIds = await GarAnonymizationParser.getCsvData(filePath);
 
-  const result = await DomainTransaction.execute(async () => {
-    return await usecases.anonymizeGarAuthenticationMethods({ userIds, adminMemberId });
-  });
+  const result = await usecases.anonymizeGarAuthenticationMethods({ userIds, adminMemberId });
 
   return h.response(anonymizeGarResultSerializer.serialize(result)).code(200);
 }
