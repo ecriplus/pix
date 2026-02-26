@@ -24,7 +24,7 @@
       "grains": [
         {
           "id": "3a4b8517-43a2-4e08-93d3-c93625e759e0",
-          "type": "activity",
+          "type": "discovery",
           "title": "conversation-accroche",
           "components": [
             {
@@ -32,7 +32,7 @@
               "element": {
                 "id": "37a9e342-ceee-494e-ae50-1690aea3b6bb",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "<p>Paul et Martine s'interrogent à propos des compteurs électriques connectés.<br></p>",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "conversation-accroche",
@@ -77,38 +77,40 @@
               "type": "element",
               "element": {
                 "id": "39525a43-8739-4c06-a43e-cbc108716e6f",
-                "type": "qcu-declarative",
-                "instruction": "<p>Avec qui êtes-vous le plus d’accord ?</p>",
+                "type": "qcu-discovery",
+                "instruction": "<p>Avec qui êtes-vous le plus d'accord ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Paul",
+                    "content": "<p>Paul<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Le numérique a des <strong>effets directs</strong> sur l’environnement, produits notamment par la fabrication des appareils et leur consommation d’énergie, mais aussi des <strong>effets indirects</strong>.    Paul parle d’effets directs, Martine d’effets indirects.</p>"
+                      "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "Martine",
+                    "content": "<p>Martine<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Le numérique a des <strong>effets directs</strong> sur l’environnement, produits notamment par la fabrication des appareils et leur consommation d’énergie, mais aussi des <strong>effets indirects</strong>.    Paul parle d’effets directs, Martine d’effets indirects.</p>"
+                      "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "Les deux",
+                    "content": "<p>Les deux<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Le numérique a des <strong>effets directs</strong> sur l’environnement, produits notamment par la fabrication des appareils et leur consommation d’énergie, mais aussi des <strong>effets indirects</strong>.    Paul parle d’effets directs, Martine d’effets indirects.</p>"
+                      "diagnosis": "<p>Bien vu !</p>\n<p>Le numérique a des <strong>effets directs </strong>sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects.</strong></p>\n<p><br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "Aucun des deux",
+                    "content": "<p>Aucun des deux</p>",
                     "feedback": {
-                      "diagnosis": "<p>Le numérique a des <strong>effets directs</strong> sur l’environnement, produits notamment par la fabrication des appareils et leur consommation d’énergie, mais aussi des <strong>effets indirects</strong>.    Paul parle d’effets directs, Martine d’effets indirects.</p>"
+                      "diagnosis": "<p>En fait, les deux ont raison.</p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   }
-                ]
+                ],
+                "solution": "3"
               }
             }
           ]
@@ -186,19 +188,7 @@
                   "elements": [
                     {
                       "id": "22b58806-c59e-46ef-9068-6af398d6b784",
-                      "type": "qcu",
-                      "instruction": "<p>Le meilleur suivi de consommation des ménages est un effet d’efficacité. Selon vous, qu’est-ce qu’un effet d’efficacité ?</p><p>🏗 QCU en cours de construction 🏗️️</p>",
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "C’est lorsqu’un processus devient plus facile à réaliser, ou donne de meilleures performances.",
-                          "feedback": {
-                            "state": "eh non",
-                            "diagnosis": "eh non"
-                          }
-                        }
-                      ],
-                      "solution": "1"
+                      "type": "text"
                     }
                   ]
                 },
@@ -225,7 +215,7 @@
               "element": {
                 "id": "7220f599-478a-4942-8950-9ae3503dbf38",
                 "type": "text",
-                "content": "<p>L’usage du numérique peut provoquer des <strong>changements de comportements</strong>, individuels ou collectifs. Ces nouveaux comportements peuvent avoir des effets sur l’environnement, on parle donc d’<strong>effets indirects du numérique</strong> sur l’environnement.</p><p>🤔 Est-ce que les effets indirects sont positifs ou négatifs ?</p><p>Ça dépend. Certains effets indirects peuvent être <strong>positifs</strong> pour l’environnement, d’autres peuvent être <strong>négatifs</strong>.</p>"
+                "content": "<p>L’usage du numérique peut provoquer des <strong>changements de comportements</strong>, individuels ou collectifs. Ces nouveaux comportements peuvent avoir des effets sur l’environnement, on parle donc d’<strong>effets indirects du numérique</strong> sur l’environnement.</p><p><br></p><h5>Est-ce que les effets indirects sont positifs ou négatifs ?</h5><p>Ça dépend. Certains effets indirects peuvent être <strong>positifs</strong> pour l’environnement, d’autres peuvent être <strong>négatifs</strong>.</p>"
               }
             }
           ]
@@ -255,7 +245,7 @@
                       "userName": "Martine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Tu vois ! Certes ce nouveau compteur est un peu plus polluant à fabriquer, mais il va te permettre de réduire ta consommation d’éléctricité, donc de moins polluer au final."
+                      "content": "Tu vois ! Certes, ce nouveau compteur est un peu plus polluant à fabriquer, mais il va te permettre de réduire ta consommation d’électricité, donc de moins polluer au final."
                     },
                     {
                       "userName": "Paul",
@@ -331,7 +321,7 @@
                 {
                   "elements": [
                     {
-                      "id": "9f8c052f-605f-4a3b-b244-6608309be571",
+                      "id": "fedd9ad3-0f8a-44a0-b106-f31bc1ad7292",
                       "type": "text",
                       "content": "<p>Dans certains cas, des effets positifs peuvent entraîner une hausse de la consommation globale&nbsp;: c’est l’<strong>effet rebond</strong>.</p>"
                     }
@@ -340,18 +330,9 @@
                 {
                   "elements": [
                     {
-                      "id": "fedd9ad3-0f8a-44a0-b106-f31bc1ad7292",
-                      "type": "text",
-                      "content": "<p>🤔 C’est un peu paradoxal, non ?</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "32787b95-3839-448a-a886-6714e7d86cc1",
                       "type": "text",
-                      "content": "<p>Effectivement, ça peut être contre-intuitif. L’amélioration de l’<strong>efficacité</strong> d’une technologie peut sembler être une bonne chose, mais elle provoque parfois une <strong>augmentation de son usage</strong> ou une <strong>augmentation de l’usage d’autres technologies</strong>. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l’amélioration.</p>"
+                      "content": "<h5>C’est un peu paradoxal, non ?</h5><p>Effectivement, ça peut être contre-intuitif. L’amélioration de l’<strong>efficacité</strong> d’une technologie peut sembler être une bonne chose, mais elle provoque parfois une <strong>augmentation de son usage</strong> ou une <strong>augmentation de l’usage d’autres technologies</strong>. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l’amélioration.</p>"
                     }
                   ]
                 }
@@ -382,7 +363,7 @@
     },
     {
       "id": "d22c7f74-b5e9-4901-85b2-c62a3311ecb7",
-      "type": "question-yourself",
+      "type": "explore-to-understand",
       "grains": [
         {
           "id": "83c6baaa-681a-4fea-900a-6f35d0637aa2",
@@ -464,7 +445,7 @@
                     {
                       "id": "9eae0db3-ac84-4101-9aa5-d29056eb05b6",
                       "type": "text",
-                      "content": "<p>Chercher à mesurer les effets indirects du numérique est aussi une bonne manière de les anticiper et de les limiter. Pour cela, il existe des méthodes scientifiques comme l’<stong>ACV conséquentielle</stong>. C’est une méthode de mesure normée qui <stong>prend en compte les effets directs et indirects</strong> sur l’environnement, sur plusieurs critères environnementaux et pour l’ensemble du cycle de vie.</p>"
+                      "content": "<p>Chercher à mesurer les effets indirects du numérique est aussi une bonne manière de les anticiper et de les limiter. Pour cela, il existe des méthodes scientifiques comme l’<stong>ACV conséquentielle</stong>. C’est une méthode de mesure normée qui <stong>prend en compte les effets directs et indirects sur l’environnement, sur plusieurs critères environnementaux et pour l’ensemble du cycle de vie.</stong></p>"
                     }
                   ]
                 },
@@ -473,16 +454,7 @@
                     {
                       "id": "3ef3640b-bac0-434e-9f1c-eca4f97559ee",
                       "type": "text",
-                      "content": "<p>🤔 <strong>Est-ce qu’il est possible de réduire les effets négatifs du numérique ?</strong></p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "01c4e8fb-58c9-4f8b-bf6d-8fc5696b763b",
-                      "type": "text",
-                      "content": "<p>Oui ! Adopter collectivement une démarche de sobriété, c’est-à-dire <strong>réduire autant que possible les usages du numérique</strong>, est la seule façon fiable de réduire les effets directs et indirects du numérique.</p>"
+                      "content": "<h5><strong>Est-ce qu’il est possible de réduire les effets négatifs du numérique ?</strong></h5><p>Oui ! Adopter collectivement une démarche de sobriété, c’est-à-dire<strong> réduire autant que possible les usages du numérique</strong>, est la seule façon fiable de réduire les effets directs et indirects du numérique.</p>"
                     }
                   ]
                 }
@@ -506,7 +478,251 @@
               "element": {
                 "id": "8bbd95c1-e34e-4910-99dd-46033164d5f6",
                 "type": "text",
-                "content": "<ul>    <li>Le numérique a des effets directs sur l’environnement, mais aussi des <strong>effets indirects</strong> provoqués par l’usage du numérique dans la société. Ces effets indirects peuvent être positifs ou négatifs pour l’environnement.    </li>    <li>        L’amélioration d’une technologie amène parfois une <strong>augmentation de son usage</strong>, ce qui peut annuler les bénéfices pour l’environnement. C’est l’<strong>effet rebond</strong>.    </li>    <li>        Certains industriels communiquent uniquement sur les effets positifs de leurs produits pour se donner une bonne image&nbsp;: c’est du <strong>greenwashing</strong>.    </li>    <li>        Il faut donc garder un <strong>regard critique</strong> sur les technologies et leurs améliorations, et s’appuyer sur des <strong>études scientifiques qui prennent en compte les effets indirects</strong> pour pouvoir les limiter.    </li>    <li>        Adopter une démarche de <strong>sobriété</strong>, en réduisant les usages du numérique, permet de réduire efficacement les effets négatifs sur l’environnement.    </li></ul>"
+                "content": "<ul>    <li>🤨Le numérique a des effets directs sur l’environnement, mais aussi des <strong>effets indirects</strong> provoqués par l’usage du numérique dans la société. Ces effets indirects peuvent être positifs ou négatifs pour l’environnement.    </li>    <li>🏀L’amélioration d’une technologie amène parfois une <strong>augmentation de son usage</strong>, ce qui peut annuler les bénéfices pour l’environnement. C’est l’<strong>effet rebond</strong>.    </li>    <li>        🌼Certains industriels communiquent uniquement sur les effets positifs de leurs produits pour se donner une bonne image&nbsp;: c’est du <strong>greenwashing</strong>.    </li>    <li>        🔎Il faut donc garder un <strong>regard critique</strong> sur les technologies et leurs améliorations, et s’appuyer sur des <strong>études scientifiques qui prennent en compte les effets indirects</strong> pour pouvoir les limiter.    </li>    <li>        ↘️Adopter une démarche de <strong>sobriété</strong>, en réduisant les usages du numérique, permet de réduire efficacement les effets négatifs sur l’environnement.    </li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a37f9f05-5cf1-45bc-9acf-47cd967c0cb4",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "262c841f-6fcc-493c-9473-31d7d6d8241e",
+          "type": "transition",
+          "title": "transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "01eba898-0798-4dcd-af47-9317f46f1184",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l'essentiel.<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b6b516fc-49f8-4993-bb84-322732dd344a",
+          "type": "activity",
+          "title": "Activité #1 : Identifier les effets environnementaux indirects du numérique",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "95dd2844-a55b-4e10-ba2b-27894f44e3b0",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des propositions suivantes, choisissez s’il s’agit d’un effet direct ou indirect du numérique.<br></p>",
+                "cards": [
+                  {
+                    "id": "933d08bf-4478-4f15-846b-850cb4c625df",
+                    "text": "La fabrication des équipements numériques nécessite l’extraction intensive de métaux rares.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Effet direct",
+                    "proposalB": "Effet indirect",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "07481063-6a3d-474e-818b-ec16aad53ed4",
+                    "text": "Les infrastructures numériques génèrent des émissions de gaz à effet de serre.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Effet direct",
+                    "proposalB": "Effet indirect",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "aff07c08-9ad9-4d79-995e-7f41d70952b0",
+                    "text": "Le commerce en ligne modifie les flux logistiques et les transports.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Effet direct",
+                    "proposalB": "Effet indirect",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Les <strong>effets directs </strong>sur l'environnement sont&nbsp; notamment liés à la fabrication des appareils et leur consommation d'énergie tandis que&nbsp;les <strong>effets indirects</strong> sont produits par des changements de comportements ou d'usage.</p>"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2b68f748-547f-4a10-af3e-ae2b60da3699",
+          "type": "activity",
+          "title": " Activité #2 : Comprendre le mécanisme de l’effet rebond et de son évaluation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4371a19e-a97f-4ecc-b135-9d3c4707abc7",
+                "type": "text",
+                "content": "<p>Légendez le schéma ci-dessous.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d25dd199-2045-4bd4-8682-4fe9cb7686b8",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/schema-a-completer.png",
+                "alt": "Schéma à compléter",
+                "alternativeText": "",
+                "legend": "Schéma en mode brouillon",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7506b590-6e26-4174-b036-95765d6709fb",
+                "type": "qrocm",
+                "instruction": "<p>À quoi correspond chaque point du schéma ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<ul><li>Point n°1 :<br></li></ul>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "point1",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "l’amélioration de l’efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "l’augmentation des usages"
+                      },
+                      {
+                        "id": "3",
+                        "content": " le cycle de vie"
+                      },
+                      {
+                        "id": "4",
+                        "content": " la diminution des usages"
+                      },
+                      {
+                        "id": "5",
+                        "content": "l’effet rebond"
+                      },
+                      {
+                        "id": "6",
+                        "content": "la perte énergétique"
+                      }
+                    ],
+                    "solutions": [
+                      "5"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<br>\n<ul>\n    <li>Point n°2 :</li>\n</ul>"
+                  },
+                                {
+                    "type": "select",
+                    "input": "point2",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "l’amélioration de l’efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "l’augmentation des usages"
+                      },
+                      {
+                        "id": "3",
+                        "content": " le cycle de vie"
+                      },
+                      {
+                        "id": "4",
+                        "content": " la diminution des usages"
+                      },
+                      {
+                        "id": "5",
+                        "content": "l’effet rebond"
+                      },
+                      {
+                        "id": "6",
+                        "content": "la perte énergétique"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><br>\n\n    Point n°3 :</p>"
+                  },
+                              {
+                    "type": "select",
+                    "input": "point3",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "l’amélioration de l’efficacité"
+                      },
+                      {
+                        "id": "2",
+                        "content": "l’augmentation des usages"
+                      },
+                      {
+                        "id": "3",
+                        "content": " le cycle de vie"
+                      },
+                      {
+                        "id": "4",
+                        "content": " la diminution des usages"
+                      },
+                      {
+                        "id": "5",
+                        "content": "l’effet rebond"
+                      },
+                      {
+                        "id": "6",
+                        "content": "la perte énergétique"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu ! </p>",
+                    "diagnosis": "<p>L’<strong>effet rebond</strong> a lieu lorsque l’<strong>amélioration de l’efficacité</strong> entraîne paradoxalement une <strong>augmentation des usages,</strong> qui entraîne une hausse de la consommation.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse !</p>",
+                    "diagnosis": "<p>Vous pouvez remonter dans le module pour voir le schéma correspondant.&nbsp;⬆️</p>"
+                  }
+                }
               }
             }
           ]
