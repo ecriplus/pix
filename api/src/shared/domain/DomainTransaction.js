@@ -1,12 +1,14 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 import { knex } from '../../../db/knex-database-connection.js';
+import { featureToggles } from '../infrastructure/feature-toggles/index.js';
 
 const asyncLocalStorage = new AsyncLocalStorage();
 
 class DomainTransaction {
   constructor(knexTransaction) {
     this.knexTransaction = knexTransaction;
+    this.successHandlers = [];
   }
 
   static execute(lambda, transactionConfig) {
@@ -14,17 +16,49 @@ class DomainTransaction {
     if (existingConn.isTransaction) {
       return lambda();
     }
-    return (
-      knex
-        .transaction((trx) => {
-          const domainTransaction = new DomainTransaction(trx);
-          return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
-        }, transactionConfig)
-        // Need to re-throw otherwise the error goes silent
-        .catch((err) => {
-          throw err;
-        })
-    );
+    let domainTransaction;
+    return knex
+      .transaction((trx) => {
+        domainTransaction = new DomainTransaction(trx);
+        return asyncLocalStorage.run({ transaction: domainTransaction }, lambda, domainTransaction);
+      }, transactionConfig)
+      .then(async (result) => {
+        for (const handler of domainTransaction.successHandlers) {
+          await handler();
+        }
+        return result;
+      })
+      .finally(() => {
+        domainTransaction.successHandlers = [];
+      });
+  }
+
+  /**
+   *
+   * @param {Function} handler : handler executed after transaction is successful
+   *
+   * @description Important notice: success handlers shall not be massively used
+   * You should be able to declare code to be exectuted after transaction success in a better way
+   * i.e declaring code **after** DomainTransaction.execture call :
+   *  -- myUsecase.js
+   *  function myUsecase() {
+   *    await DomainTransaction.execute(() => {
+   *      -- transactional code
+   *    });
+   *
+   *    -- sending job after transaction is successful
+   *    await myJob.performAsync(payload);
+   *  }
+   */
+  static async addSuccessHandler(handler) {
+    const store = asyncLocalStorage.getStore();
+    const isSuccessHandlerEnabled = await featureToggles.get('successHandlersForDomainTransaction');
+
+    if (store?.transaction && isSuccessHandlerEnabled) {
+      store.transaction.successHandlers.push(handler);
+    } else {
+      await handler();
+    }
   }
 
   /**
