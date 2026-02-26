@@ -93,3 +93,20 @@ export async function save({ session }) {
     rows: assessmentsDataToUpdate,
   });
 }
+
+export async function saveCertification({ certificationCourse }) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-courses')
+    .update({
+      updatedAt: certificationCourse.updatedAt,
+      endedAt: certificationCourse.endedAt,
+      abortReason: certificationCourse.abortReason,
+    })
+    .where({ id: certificationCourse.id });
+
+  await knexConn('assessments')
+    .update({
+      state: certificationCourse.assessmentState,
+    })
+    .where({ id: certificationCourse.assessmentId });
+}

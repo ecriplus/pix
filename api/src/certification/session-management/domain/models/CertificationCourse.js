@@ -3,7 +3,17 @@ import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 export class CertificationCourse {
-  constructor({ id, version, updatedAt, endedAt, completedAt, abortReason, assessmentId, assessmentState, assessmentLatestActivityAt }) {
+  constructor({
+    id,
+    version,
+    updatedAt,
+    endedAt,
+    completedAt,
+    abortReason,
+    assessmentId,
+    assessmentState,
+    assessmentLatestActivityAt,
+  }) {
     this.id = id;
     this.version = version;
     this.updatedAt = updatedAt;
@@ -44,8 +54,9 @@ export class CertificationCourse {
 
   endDueToFinalization() {
     if (this.assessmentState === Assessment.states.STARTED) {
-      this.state = Assessment.states.ENDED_DUE_TO_FINALIZATION;
+      this.assessmentState = Assessment.states.ENDED_DUE_TO_FINALIZATION;
       this.endedAt = this.assessmentLatestActivityAt;
+      this.updatedAt = new Date();
     }
   }
 }

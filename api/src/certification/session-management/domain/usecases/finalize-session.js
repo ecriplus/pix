@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../session-management/domain/usecases/index.js').SessionRepository} SessionRepository
+ * @typedef {import('./index.js').SessionRepository} SessionRepository
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
