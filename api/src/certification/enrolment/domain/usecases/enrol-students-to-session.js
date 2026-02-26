@@ -6,8 +6,6 @@
  * @typedef {import('./index.js').SessionRepository} SessionRepository
  * @typedef {import('../models/SCOCertificationCandidate.js').SCOCertificationCandidate} SCOCertificationCandidate
  */
-import _ from 'lodash';
-
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { UnknownCountryForStudentEnrolmentError } from '../errors.js';
@@ -89,7 +87,7 @@ const enrolStudentsToSession = async function ({
     });
   });
 
-  await scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
+  scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
     sessionId,
     scoCertificationCandidates,
   });
@@ -98,5 +96,5 @@ const enrolStudentsToSession = async function ({
 export { enrolStudentsToSession };
 
 async function _doAllStudentsBelongToSameCertificationCenterAsSession({ students, center }) {
-  return _.every(students, (student) => center.matchingOrganizationId === student.organizationId);
+  return students.every((student) => center.matchingOrganizationId === student.organizationId);
 }

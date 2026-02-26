@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { User } from '../../../enrolment/domain/models/User.js';
 
@@ -24,6 +22,6 @@ export async function get({ id }) {
 
   return new User({
     ...userData,
-    organizationLearnerIds: _.compact(userData.organizationLearnerIds),
+    organizationLearnerIds: userData.organizationLearnerIds.filter(Boolean),
   });
 }

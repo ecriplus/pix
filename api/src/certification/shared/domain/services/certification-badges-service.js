@@ -1,8 +1,6 @@
 /**
  * @typedef {import ('../models/CertifiableBadgeAcquisition.js').CertifiableBadgeAcquisition} CertifiableBadgeAcquisition
  */
-import _ from 'lodash';
-
 import * as certifiableBadgeAcquisitionRepository from '../../../../../src/certification/shared/infrastructure/repositories/certifiable-badge-acquisition-repository.js';
 import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
@@ -71,7 +69,7 @@ const _findBadgeAcquisitions = async function ({
     },
   );
 
-  return _.compact(badgeAcquisitions);
+  return badgeAcquisitions.filter(Boolean);
 };
 
 export { findLatestBadgeAcquisitions, findStillValidBadgeAcquisitions };

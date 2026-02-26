@@ -1,6 +1,4 @@
 // @ts-check
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionEnrolment } from '../../domain/models/SessionEnrolment.js';
@@ -91,15 +89,15 @@ export async function isSessionExistingBySessionAndCertificationCenterIds({ sess
  */
 export async function update(session) {
   const knexConn = DomainTransaction.getConnection();
-  const sessionDataToUpdate = _.pick(session, [
-    'address',
-    'room',
-    'accessCode',
-    'examiner',
-    'date',
-    'time',
-    'description',
-  ]);
+  const sessionDataToUpdate = {
+    address: session.address,
+    room: session.room,
+    accessCode: session.accessCode,
+    examiner: session.examiner,
+    date: session.date,
+    time: session.time,
+    description: session.description,
+  };
 
   await knexConn('sessions').where({ id: session.id }).update(sessionDataToUpdate);
 }
