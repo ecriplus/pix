@@ -8,6 +8,7 @@ describe("a11y", () => {
     cy.task("db:fixture", "users");
     cy.task("db:fixture", "authentication-methods");
     cy.task("db:fixture", "administration_teams");
+    cy.task('db:fixture', "organization_learner_types");
     cy.task("db:fixture", "organizations");
     cy.task("db:fixture", "memberships");
     cy.task("db:fixture", "organization-invitations");
