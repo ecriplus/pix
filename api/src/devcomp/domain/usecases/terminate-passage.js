@@ -1,28 +1,24 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { PassageDoesNotExistError, PassageTerminatedError } from '../errors.js';
 
-const terminatePassage = withTransaction(async function ({
-  passageId,
-  passageRepository,
-  updateCombinedCourseJobRepository,
-}) {
-  const passage = await _getPassage({ passageId, passageRepository });
-  if (passage.terminatedAt) {
-    throw new PassageTerminatedError();
-  }
-  passage.terminate();
-  const terminatedPassage = await passageRepository.update({ passage });
-
+const terminatePassage = async function ({ passageId, passageRepository, updateCombinedCourseJobRepository }) {
+  const passage = await DomainTransaction.execute(async () => {
+    const passage = await _getPassage({ passageId, passageRepository });
+    if (passage.terminatedAt) {
+      throw new PassageTerminatedError();
+    }
+    passage.terminate();
+    return passageRepository.update({ passage });
+  });
   if (passage.userId) {
     await updateCombinedCourseJobRepository.performAsync({
       userId: passage.userId,
       moduleId: passage.moduleId,
     });
   }
-
-  return terminatedPassage;
-});
+  return passage;
+};
 
 async function _getPassage({ passageId, passageRepository }) {
   try {

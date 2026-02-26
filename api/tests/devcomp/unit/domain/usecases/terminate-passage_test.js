@@ -108,6 +108,8 @@ describe('Unit | Devcomp | Domain | UseCases | terminate-passage', function () {
 
         const updatedPassage = {
           id: passageId,
+          userId: passage.userId,
+          moduleId: passage.moduleId,
           terminatedAt: new Date('2025-03-04'),
         };
         passageRepository.update.withArgs({ passage }).resolves(updatedPassage);
