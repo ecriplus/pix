@@ -13,9 +13,9 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     const userId = databaseBuilder.factory.buildUser().id;
     const organizationId = databaseBuilder.factory.buildOrganization().id;
 
-    const targetProfile = databaseBuilder.factory.buildTargetProfile();
-
     const targetProfileWithTraining = databaseBuilder.factory.buildTargetProfile();
+    const otherTargetProfile = databaseBuilder.factory.buildTargetProfile();
+
     const trainingId = databaseBuilder.factory.buildTraining({
       type: 'modulix',
       title: 'Demo combinix 1',
@@ -34,9 +34,10 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       illustration,
     } = databaseBuilder.factory.buildCombinedCourseBlueprint({
       content: [
-        { type: 'evaluation', value: targetProfile.id },
+        { type: 'evaluation', value: targetProfileWithTraining.id },
         { type: 'module', value: '27d6ca4f' },
         { type: 'module', value: 'df82ec66' },
+        { type: 'evaluation', value: otherTargetProfile.id },
       ],
     });
 
@@ -52,9 +53,9 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       organizationId,
     });
 
-    const [createdCampaign] = await knex('campaigns')
+    const campaigns = await knex('campaigns')
       .where({ organizationId })
-      .whereIn('targetProfileId', [targetProfile.id, targetProfileWithTraining.id])
+      .whereIn('targetProfileId', [otherTargetProfile.id, targetProfileWithTraining.id])
       .orderBy('id');
 
     const expectedModules = [
@@ -100,7 +101,7 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
           comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
             campaignId: {
-              data: createdCampaign.id,
+              data: campaigns[0].id,
               comparison: CRITERION_COMPARISONS.EQUAL,
             },
             status: {
@@ -110,6 +111,20 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
           },
         },
         ...expectedModules,
+        {
+          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+          data: {
+            campaignId: {
+              data: campaigns[1].id,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+            status: {
+              data: CampaignParticipationStatuses.SHARED,
+              comparison: CRITERION_COMPARISONS.EQUAL,
+            },
+          },
+        },
       ],
       description,
       illustration,
@@ -130,9 +145,14 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     expect(createdQuest.illustration).to.equal(expectedCreatedQuest.illustration);
 
     //Campaign 1
-    expect(createdCampaign.name).to.equal(targetProfile.internalName);
-    expect(createdCampaign.title).to.equal(targetProfile.name);
-    expect(createdCampaign.customResultPageButtonUrl.includes('/chargement')).false;
-    expect(createdCampaign.customResultPageButtonText).to.equal('Continuer');
+    expect(campaigns[0].name).to.equal(targetProfileWithTraining.internalName);
+    expect(campaigns[0].title).to.equal(targetProfileWithTraining.name);
+    expect(campaigns[0].customResultPageButtonUrl.includes('/chargement')).true;
+    expect(campaigns[0].customResultPageButtonText).to.equal('Continuer');
+
+    expect(campaigns[1].name).to.equal(otherTargetProfile.internalName);
+    expect(campaigns[1].title).to.equal(otherTargetProfile.name);
+    expect(campaigns[1].customResultPageButtonUrl.includes('/chargement')).false;
+    expect(campaigns[1].customResultPageButtonText).to.equal('Continuer');
   });
 });
