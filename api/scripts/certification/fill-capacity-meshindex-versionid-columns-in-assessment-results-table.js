@@ -12,7 +12,7 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
   constructor() {
     super({
       description:
-        'Capacity, meshIndex and versionId are three new columns recently added in assessment-results table. This script fills those columns',
+        'Capacity, reachedMeshIndex and versionId are three new columns recently added in assessment-results table. This script fills those columns',
       permanent: false,
       options: {
         dryRun: {
@@ -41,7 +41,7 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
     const coreScoringConfigurations = await getCoreScoringConfigurations();
 
     let currentStartId = startId;
-    let certificationsData = await selectCertificationsToProcess(coreScoringConfigurations, currentStartId, chunkSize);
+    let certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
     while (certificationsData.length > 0) {
       const { assessmentResultsToUpdate, latestCertificationIdProcessed } = await processCertifications(
         certificationsData,
@@ -55,14 +55,16 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
         logger.info(`Certifications up until ID ${latestCertificationIdProcessed} DONE`);
         if (dryRun) {
           await trx.rollback();
+        } else {
+          await trx.commit();
         }
       } catch (error) {
         await trx.rollback();
         throw error;
       }
 
-      currentStartId = latestCertificationIdProcessed;
-      certificationsData = await selectCertificationsToProcess(coreScoringConfigurations, currentStartId, chunkSize);
+      currentStartId = latestCertificationIdProcessed + 1;
+      certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
     }
 
     logger.info('No more certifications to process youpi');
@@ -105,10 +107,10 @@ async function getCoreScoringConfigurations() {
     v3CertificationScorings.push(data);
   }
 
-  return v3CertificationScorings.sort();
+  return v3CertificationScorings;
 }
 
-async function selectCertificationsToProcess(coreScoringConfigurations, startId, chunkSize) {
+async function selectCertificationsToProcess(startId, chunkSize) {
   return await knex
     .select({
       certificationCourseId: 'certification-courses.id',
@@ -129,10 +131,12 @@ async function selectCertificationsToProcess(coreScoringConfigurations, startId,
 async function processCertifications(certificationsData, coreScoringConfigurations, logger) {
   let latestCertificationIdProcessed;
   const assessmentResultsToUpdate = [];
-  logger.info(`Processing certification from ${certificationsData[0].id} to ${certificationsData.at(-1).id}...`);
+  logger.info(
+    `Processing certification from ${certificationsData[0].certificationCourseId} to ${certificationsData.at(-1).id}...`,
+  );
   for (const certificationData of certificationsData) {
     try {
-      latestCertificationIdProcessed = certificationData.id;
+      latestCertificationIdProcessed = certificationData.certificationCourseId;
       const assessmentResultData = await processCertification(coreScoringConfigurations, certificationData);
       assessmentResultsToUpdate.push(assessmentResultData);
     } catch (error) {
@@ -169,14 +173,17 @@ async function processCertification(v3CertificationScorings, certificationData) 
     return null;
   }
 
-  const capacity = computeCapacityFromPixScore(assessmentResultData.pixScore, coreScoringConfiguration);
-  const meshIndex = computeMeshIndexFromCapacity(capacity, coreScoringConfiguration);
+  const capacity = computeCapacityFromPixScore(
+    assessmentResultData.pixScore,
+    coreScoringConfiguration.scoringConfiguration,
+  );
+  const reachedMeshIndex = computeMeshIndexFromCapacity(capacity, coreScoringConfiguration.scoringConfiguration);
   const versionId = coreScoringConfiguration.id;
 
   return {
     ...assessmentResultData,
     capacity,
-    meshIndex,
+    reachedMeshIndex,
     versionId,
   };
 }
@@ -197,13 +204,12 @@ function findCorrespondingCoreScoringConfiguration(v3CertificationScorings, reco
 function computeCapacityFromPixScore(pixScore, scoringConfiguration) {
   const certificationScoringIntervals = scoringConfiguration.intervals;
   const maxReachableLevel = scoringConfiguration.maxReachableLevel;
-
   return CapacitySimulator.compute({
     score: pixScore,
     certificationScoringIntervals,
     competencesForScoring: scoringConfiguration.competencesForScoring,
     maxReachableLevel,
-  });
+  }).capacity;
 }
 
 function computeMeshIndexFromCapacity(capacity, scoringConfiguration) {
