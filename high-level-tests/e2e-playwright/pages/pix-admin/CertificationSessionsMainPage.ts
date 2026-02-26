@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
 
+import { waitForVisibleWithReload } from '../../helpers/utils.ts';
 import { CertificationSessionPage } from './index.ts';
 
 export class CertificationSessionsMainPage {
@@ -9,7 +10,13 @@ export class CertificationSessionsMainPage {
     await this.page.getByRole('link', { name: /V3 — Sessions à publier/ }).click();
     await this.page.waitForURL(/\/sessions\/list\/to-be-published\?version=3$/);
 
-    await this.page.getByRole('link', { name: sessionNumber, exact: true }).click();
+    const locatorToWaitFor = this.page.getByRole('link', {
+      name: sessionNumber,
+      exact: true,
+    });
+    await waitForVisibleWithReload(this.page, locatorToWaitFor);
+
+    await locatorToWaitFor.click();
     await this.page.waitForURL(/\/sessions\/\d+$/);
 
     return new CertificationSessionPage(this.page);

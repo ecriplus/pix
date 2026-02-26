@@ -50,7 +50,6 @@ test(
         'Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix',
       );
     });
-    await pixAppCertifiablePage.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
 
     await test.step('Finalization and scoring', async () => {
       const sessionManagementPage = new SessionManagementPage(pixCertifProPage);

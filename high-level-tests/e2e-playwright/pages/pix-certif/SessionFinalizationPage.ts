@@ -12,8 +12,6 @@ export class SessionFinalizationPage {
       .getByText('Les informations de la session ont été transmises avec succès.')
       .waitFor({ state: 'visible' });
 
-    await this.page.waitForTimeout(2000); // BEURK, attendre que le scoring soit bien passé
-
     return new SessionManagementPage(this.page);
   }
 

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export function* rightWrongAnswerCycle({ numRight = 1, numWrong = 1 }) {
   const answers: boolean[] = [];
@@ -74,4 +74,28 @@ export function normalizeWhitespace(str: string): string {
 
 export function sanitizeFilename(name: string) {
   return name.replace(/[^a-z0-9_\-.]/gi, '_');
+}
+
+export async function waitForVisibleWithReload(
+  page: Page,
+  locator: Locator,
+  options?: {
+    timeout?: number;
+    interval?: number;
+  },
+) {
+  const timeout = options?.timeout ?? 60_000;
+  const interval = options?.interval ?? 2_000;
+
+  const start = Date.now();
+
+  while (Date.now() - start < timeout) {
+    await page.reload();
+
+    if (await locator.isVisible()) return;
+
+    await page.waitForTimeout(interval);
+  }
+
+  throw new Error('Element did not appear before timeout');
 }
