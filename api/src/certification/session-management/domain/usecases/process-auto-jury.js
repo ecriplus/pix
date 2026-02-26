@@ -113,11 +113,11 @@ const _handleAutoJuryV3 = withTransaction(
       await certificationEvaluationRepository.rescoreV3Certification({
         event: certificationJuryDoneEvent,
       });
+
+      certificationAssessment.endDueToFinalization();
+
+      await certificationAssessmentRepository.save(certificationAssessment);
     }
-
-    certificationAssessment.endDueToFinalization();
-
-    await certificationAssessmentRepository.save(certificationAssessment);
   },
 );
 
