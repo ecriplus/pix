@@ -90,21 +90,21 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Martine<br></p>",
+                    "content": "Martine",
                     "feedback": {
                       "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Les deux<br></p>",
+                    "content": "les deux",
                     "feedback": {
                       "diagnosis": "<p>Bien vu !</p>\n<p>Le numérique a des <strong>effets directs </strong>sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects.</strong></p>\n<p><br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Aucun des deux</p>",
+                    "content": "aucun",
                     "feedback": {
                       "diagnosis": "<p>En fait, les deux ont raison.</p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
@@ -224,7 +224,7 @@
     },
     {
       "id": "6500aafd-1062-4da7-8fa2-6df096f6d632",
-      "type": "explore-to-understand",
+      "type": "blank",
       "grains": [
         {
           "id": "e7a0128a-63cb-49db-9bba-a7e294900b8d",
@@ -258,16 +258,6 @@
                 }
               }
             },
-            {
-              "type": "element",
-              "element": {
-                "id": "8f28f3bc-4240-431b-95e1-5aaab6c169d7",
-                "type": "text",
-                "content": ""
-              }
-            }
-          ]
-        },
         {
           "id": "cf41ba53-f52e-4521-80be-8a9b46fba54d",
           "type": "discovery",
@@ -284,7 +274,7 @@
                     "id": "23d49a6a-6439-4fbf-b1da-4be1bfa4297a",
                     "text": "Les personnes qui télétravailllent n’utilisent plus leur voiture pour se rendre au travail, ce qui réduit les émissions de gaz à effet de serre.",
                     "image": {
-                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                      "url": "",
                       "altText": ""
                     },
                     "proposalA": "Vrai",
@@ -295,7 +285,7 @@
                     "id": "9bd14d76-ff4e-4b03-8ed8-c245885f1701",
                     "text": "La consommation d’énergie des logements où des personnes télétravaillent augmente car elles doivent chauffer la pièce où elles travaillent.",
                     "image": {
-                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                      "url": "",
                       "altText": ""
                     },
                     "proposalA": "Vrai",
@@ -363,7 +353,7 @@
     },
     {
       "id": "d22c7f74-b5e9-4901-85b2-c62a3311ecb7",
-      "type": "explore-to-understand",
+      "type": "blank",
       "grains": [
         {
           "id": "83c6baaa-681a-4fea-900a-6f35d0637aa2",
