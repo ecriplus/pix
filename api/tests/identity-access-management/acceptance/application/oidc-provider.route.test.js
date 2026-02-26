@@ -3,6 +3,8 @@ import querystring from 'node:querystring';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
+import { refreshTokenRepository } from '../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
+import { revokedUserAccessRepository } from '../../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import {
@@ -584,6 +586,44 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     });
   });
 
+  describe('POST /api/oidc/logout', function () {
+    beforeEach(async function () {
+      await createServerWithMockedTestOidcProvider({
+        application: 'app',
+        applicationTld: '.org',
+        postLogoutRedirectUri: `https://app.dev.pix.fr/post-logout-redirect-uri`,
+      });
+    });
+
+    it('returns an object which contains the post logout url with an HTTP status code 200 and revokes access and refresh tokens', async function () {
+      // given
+      const userId = 1992;
+      const options = {
+        method: 'POST',
+        url: '/api/oidc/logout',
+        payload: {
+          identity_provider: 'OIDC_EXAMPLE_NET',
+          logout_url_uuid: '86e1338f-304c-41a8-9472-89fe1b9748a1',
+        },
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.redirectLogoutUrl).to.equal(
+        'https://oidc.example.net/ea5ac20c-5076-4806-860a-b0aeb01645d4/oauth2/v2.0/logout?client_id=client',
+      );
+
+      const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
+      expect(revokedUserAccess.revokeTimeStamp).to.be.a('number');
+      const refreshTokens = await refreshTokenRepository.findAllByUserId(userId);
+      expect(refreshTokens).to.have.lengthOf(0);
+    });
+  });
+
   context('when the OIDC provider has a connectionMethodCode', function () {
     describe('POST /api/oidc/token', function () {
       let payload, cookies;
@@ -850,12 +890,14 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     applicationTld,
     identityProvider,
     connectionMethodCode,
+    postLogoutRedirectUri,
   }) {
     openidClientMock = await createMockedTestOidcProvider({
       application,
       applicationTld,
       identityProvider,
       connectionMethodCode,
+      postLogoutRedirectUri,
     });
     server = await createServer();
   }
