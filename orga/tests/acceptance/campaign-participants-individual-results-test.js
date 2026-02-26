@@ -99,13 +99,22 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
       'withCompetenceResults',
       { id: 1, campaignId: 1 },
     );
-    server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
+    server.create('campaign-assessment-participation', {
+      id: 1,
+      campaignId: 1,
+      isShared: true,
+      masteryRate: 0.5,
+      campaignAssessmentParticipationResult,
+    });
 
     // when
     const screen = await visit('/campagnes/1/evaluations/1');
 
     // then
-    assert.dom(screen.getByText('Compétences (2)')).exists();
+
+    assert
+      .dom(screen.getByText(t('pages.assessment-individual-results.table.column.competences', { count: 2 })))
+      .exists();
   });
 
   test('it should not display individual results when competence results are empty', async function (assert) {
@@ -121,6 +130,22 @@ module('Acceptance | Campaign Participants Individual Results', function (hooks)
     const screen = await visit('/campagnes/1/evaluations/1');
 
     // then
-    assert.dom(screen.getByText('Compétences (-)')).exists();
+    assert.dom(screen.getByText(t('pages.assessment-individual-results.table.empty'))).exists();
+  });
+
+  test('it should not display individual results when participation is not shared', async function (assert) {
+    // given
+    const campaignAssessmentParticipationResult = server.create(
+      'campaign-assessment-participation-result',
+      'withCompetenceResults',
+      { id: 1, campaignId: 1, isShared: false },
+    );
+    server.create('campaign-assessment-participation', { id: 1, campaignId: 1, campaignAssessmentParticipationResult });
+
+    // when
+    const screen = await visit('/campagnes/1/evaluations/1');
+
+    // then
+    assert.dom(screen.getByText(t('pages.assessment-individual-results.table.empty'))).exists();
   });
 });

@@ -4,6 +4,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { t } from 'ember-intl';
 
 import multiply from '../../../helpers/multiply';
+import EmptyState from '../../ui/empty-state';
 
 function sortedCompetenceResults(results) {
   return results.sort((a, b) => {
@@ -20,7 +21,7 @@ function competenceCount(results) {
 }
 
 <template>
-  <section>
+  {{#if (displayResults @results)}}
     <PixTable
       @variant="orga"
       @caption={{t "pages.assessment-individual-results.table.title"}}
@@ -59,8 +60,7 @@ function competenceCount(results) {
       </:columns>
     </PixTable>
 
-    {{#unless (displayResults @results)}}
-      <p class="table__empty content-text">{{t "pages.assessment-individual-results.table.empty"}}</p>
-    {{/unless}}
-  </section>
+  {{else}}
+    <EmptyState @infoText={{t "pages.assessment-individual-results.table.empty"}} />
+  {{/if}}
 </template>

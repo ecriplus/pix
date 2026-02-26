@@ -25,7 +25,11 @@ export default class AnalysisRoute extends Route {
 
   async model() {
     const { campaignAssessmentParticipation } = this.modelFor('authenticated.campaigns.participant-assessment');
+
+    if (!campaignAssessmentParticipation.isShared) {
+      return { analysisData: null, isAnalysisAvailable: false, isForParticipant: true };
+    }
     const analysisData = await campaignAssessmentParticipation.campaignParticipationLevelsPerTubesAndCompetence;
-    return { analysisData, isForParticipant: true };
+    return { analysisData, isAnalysisAvailable: true, isForParticipant: true };
   }
 }
