@@ -76,4 +76,36 @@ describe('Integration | Repository | organization-learner-type-repository', func
       expect(error).to.be.instanceOf(NotFoundError);
     });
   });
+
+  describe('#findExistingIds', function () {
+    it('should return the ids of the organization learner types matching the given ids', async function () {
+      // given
+      const firstOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        id: 123,
+      });
+      const secondOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+        id: 456,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await organizationLearnerTypeRepository.findExistingIds({
+        ids: [firstOrganizationLearnerType.id, secondOrganizationLearnerType.id],
+      });
+
+      // then
+      expect(result).to.deep.equal([firstOrganizationLearnerType.id, secondOrganizationLearnerType.id]);
+    });
+
+    it('should return an empty array if no organization learner type matches the given ids', async function () {
+      // given
+      const unknownIds = [123, 456];
+
+      // when
+      const result = await organizationLearnerTypeRepository.findExistingIds({ ids: unknownIds });
+
+      // then
+      expect(result).to.deep.equal([]);
+    });
+  });
 });

@@ -109,4 +109,40 @@ describe('Integration | Shared | Repository | country-repository', function () {
       });
     });
   });
+
+  describe('#findExistingCodes', function () {
+    it('should return the codes matching the given codes', async function () {
+      // given
+      const togoCountry = databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99345',
+        commonName: 'TOGO',
+        originalName: 'TOGO',
+      });
+
+      const nabooCountry = databaseBuilder.factory.buildCertificationCpfCountry({
+        code: '99876',
+        commonName: 'NABOO',
+        originalName: 'NABOO',
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await countryRepository.findExistingCodes({ codes: [togoCountry.code, nabooCountry.code] });
+
+      // then
+      expect(result).to.deep.equal([togoCountry.code, nabooCountry.code]);
+    });
+
+    it('should return an empty array if there is no matching code', async function () {
+      // given
+      const nonExistingCodes = ['1234', '5678'];
+
+      // when
+      const result = await countryRepository.findExistingCodes({ codes: nonExistingCodes });
+
+      // then
+      expect(result).to.deep.equal([]);
+    });
+  });
 });

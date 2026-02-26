@@ -36,6 +36,18 @@ const getById = async function (id) {
   return _toDomain(organizationLearnerTypeDTO);
 };
 
+/**
+ * @type {function}
+ * @param {Array<string>} ids
+ * @return {Promise<Array<number>>}
+ */
+const findExistingIds = async function ({ ids } = {}) {
+  if (!ids || ids.length === 0) return [];
+  const knexConn = DomainTransaction.getConnection();
+  const organizationLearnerTypes = await knexConn('organization_learner_types').select('id').whereIn('id', ids);
+  return organizationLearnerTypes.map((type) => type.id);
+};
+
 const _toDomain = function (organizationLearnerTypeDTO) {
   return new OrganizationLearnerType({
     id: organizationLearnerTypeDTO.id,
@@ -43,4 +55,4 @@ const _toDomain = function (organizationLearnerTypeDTO) {
   });
 };
 
-export { findAll, getById };
+export { findAll, findExistingIds, getById };
