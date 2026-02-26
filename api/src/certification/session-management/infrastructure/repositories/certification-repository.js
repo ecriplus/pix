@@ -31,7 +31,6 @@ const publishCertificationCourses = async function (certificationStatuses) {
   }));
 
   const knexConn = DomainTransaction.getConnection();
-  // Trick to .batchUpdate(), which does not exist in knex per say
   await knexConn('certification-courses')
     .insert(certificationDataToUpdate)
     .onConflict('id')

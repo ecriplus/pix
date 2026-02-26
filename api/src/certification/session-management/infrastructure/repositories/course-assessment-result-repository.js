@@ -38,26 +38,57 @@ function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
 const getLatestAssessmentResult = async function ({ certificationCourseId }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const latestAssessmentResult = await knexConn('certification-courses-last-assessment-results')
-    .select('assessment-results.*')
+  const latestAssessmentResultDTO = await knexConn('certification-courses-last-assessment-results')
+    .select({
+      id: 'assessment-results.id',
+      assessmentId: 'assessment-results.assessmentId',
+      status: 'assessment-results.status',
+      commentByJury: 'assessment-results.commentByJury',
+      commentByAutoJury: 'assessment-results.commentByAutoJury',
+      commentForCandidate: 'assessment-results.commentForCandidate',
+      commentForOrganization: 'assessment-results.commentForOrganization',
+      createdAt: 'assessment-results.createdAt',
+      juryId: 'assessment-results.juryId',
+      pixScore: 'assessment-results.pixScore',
+      reproducibilityRate: 'assessment-results.reproducibilityRate',
+      competenceMarkId: 'competence-marks.id',
+      competenceMarkAreaCode: 'competence-marks.area_code',
+      competenceMarkCompetenceCode: 'competence-marks.competence_code',
+      competenceMarkCompetenceId: 'competence-marks.competenceId',
+      competenceMarkLevel: 'competence-marks.level',
+      competenceMarkScore: 'competence-marks.score',
+      competenceMarkAssessmentResultId: 'competence-marks.assessmentResultId',
+    })
     .join(
       'assessment-results',
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
     )
-    .where({ certificationCourseId })
-    .first();
-  if (latestAssessmentResult) {
-    const competencesMarksDTO = await knexConn('competence-marks').where({
-      assessmentResultId: latestAssessmentResult.id,
-    });
+    .leftJoin('competence-marks', 'competence-marks.assessmentResultId', 'assessment-results.id')
+    .where('certification-courses-last-assessment-results.certificationCourseId', certificationCourseId);
 
-    return _toDomain({
-      assessmentResultDTO: latestAssessmentResult,
-      competencesMarksDTO,
-    });
+  if (latestAssessmentResultDTO.length === 0) {
+    return null;
   }
-  return null;
+  const competencesMarksDTO = [];
+  for (const competenceMarkDTO of latestAssessmentResultDTO) {
+    if (competenceMarkDTO.competenceMarkId) {
+      competencesMarksDTO.push({
+        id: competenceMarkDTO.competenceMarkId,
+        area_code: competenceMarkDTO.competenceMarkAreaCode,
+        competence_code: competenceMarkDTO.competenceMarkCompetenceCode,
+        competenceId: competenceMarkDTO.competenceMarkCompetenceId,
+        level: competenceMarkDTO.competenceMarkLevel,
+        score: competenceMarkDTO.competenceMarkScore,
+        assessmentResultId: competenceMarkDTO.competenceMarkAssessmentResultId,
+      });
+    }
+  }
+
+  return _toDomain({
+    assessmentResultDTO: latestAssessmentResultDTO[0],
+    competencesMarksDTO,
+  });
 };
 
 export { getLatestAssessmentResult };

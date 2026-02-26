@@ -113,21 +113,11 @@ export async function update(session) {
  */
 export async function remove({ id }) {
   const knexConn = DomainTransaction.getConnection();
-  const certificationCandidateIdsInSession = await knexConn('certification-candidates')
-    .where({ sessionId: id })
-    .pluck('id');
-  const invigilatorAccessIds = await knexConn('invigilator_accesses').where({ sessionId: id }).pluck('id');
-
-  if (invigilatorAccessIds) {
-    await knexConn('invigilator_accesses').whereIn('id', invigilatorAccessIds).del();
-  }
-
-  if (certificationCandidateIdsInSession.length) {
-    await knexConn('certification-subscriptions')
-      .whereIn('certificationCandidateId', certificationCandidateIdsInSession)
-      .del();
-    await knexConn('certification-candidates').whereIn('id', certificationCandidateIdsInSession).del();
-  }
-  const nbSessionsDeleted = await knexConn('sessions').where('id', id).del();
+  await knexConn('invigilator_accesses').where({ sessionId: id }).del();
+  await knexConn('certification-subscriptions')
+    .whereIn('certificationCandidateId', knexConn('certification-candidates').select('id').where({ sessionId: id }))
+    .del();
+  await knexConn('certification-candidates').where({ sessionId: id }).del();
+  const nbSessionsDeleted = await knexConn('sessions').where({ id }).del();
   if (nbSessionsDeleted === 0) throw new NotFoundError();
 }

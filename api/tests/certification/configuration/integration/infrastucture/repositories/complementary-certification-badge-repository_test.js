@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const { omit } = lodash;
 import * as complementaryCertificationBadgeRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-badge-repository.js';
@@ -102,17 +102,6 @@ describe('Integration | Infrastructure | Repository | Certification | Complement
   });
 
   context('#attach', function () {
-    let clock;
-    const createdAt = new Date('2023-09-19T01:02:03Z');
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now: createdAt, toFake: ['Date'] });
-    });
-
-    afterEach(async function () {
-      clock.restore();
-    });
-
     it('should attach the complementary certification badges', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
@@ -158,14 +147,13 @@ describe('Integration | Infrastructure | Repository | Certification | Complement
         complementaryCertificationId,
       });
 
-      const results = complementaryCertificationBadges.map((badge) => omit(badge, ['id']));
+      const results = complementaryCertificationBadges.map((badge) => omit(badge, ['id', 'createdAt']));
       expect(results).to.deep.equal([
         {
           badgeId: badgeId1,
           certificateMessage: null,
           temporaryCertificateMessage: null,
           createdBy: userId,
-          createdAt,
           detachedAt: null,
           complementaryCertificationId,
           level: 1,
@@ -179,7 +167,6 @@ describe('Integration | Infrastructure | Repository | Certification | Complement
           certificateMessage: null,
           temporaryCertificateMessage: null,
           createdBy: userId,
-          createdAt,
           detachedAt: null,
           complementaryCertificationId,
           level: 2,

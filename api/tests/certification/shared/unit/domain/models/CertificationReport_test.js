@@ -2,7 +2,6 @@ import lodash from 'lodash';
 
 import { InvalidCertificationReportForFinalization } from '../../../../../../src/certification/shared/domain/errors.js';
 import { CertificationReport } from '../../../../../../src/certification/shared/domain/models/CertificationReport.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, domainBuilder, EMPTY_BLANK_AND_NULL, expect } from '../../../../../test-helper.js';
 const { keys } = lodash;
 
@@ -75,55 +74,6 @@ describe('Unit | Domain | Models | CertificationReport', function () {
       // then
       expect(error).to.be.instanceOf(InvalidCertificationReportForFinalization);
       expect(error.message).to.equal('Abort reason is required if certificationReport is not completed');
-    });
-  });
-
-  describe('#fromCertificationCourse', function () {
-    it('should return a certificationReport from a certificationCourse', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse();
-      const certificationCourseDTO = certificationCourse.toDTO();
-      const expectedCertificationReport = domainBuilder.buildCertificationReport({
-        id: `CertificationReport:${certificationCourseDTO.id}`,
-        certificationCourseId: certificationCourseDTO.id,
-        examinerComment: null,
-        certificationIssueReports: certificationCourseDTO.certificationIssueReports,
-        firstName: certificationCourseDTO.firstName,
-        isCompleted: true,
-        lastName: certificationCourseDTO.lastName,
-      });
-
-      // when
-      const certificationReport = CertificationReport.fromCertificationCourse(certificationCourse);
-
-      // then
-      expect(certificationReport).to.deepEqualInstance(expectedCertificationReport);
-    });
-
-    it('should return a certificationReport from a uncompleted certificationCourse', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        assessment: domainBuilder.buildAssessment({ state: Assessment.states.STARTED }),
-      });
-
-      // when
-      const { isCompleted } = CertificationReport.fromCertificationCourse(certificationCourse);
-
-      // then
-      expect(isCompleted).to.be.false;
-    });
-
-    it('should return a certificationReport from a completed certificationCourse', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        assessment: domainBuilder.buildAssessment({ state: Assessment.states.COMPLETED }),
-      });
-
-      // when
-      const { isCompleted } = CertificationReport.fromCertificationCourse(certificationCourse);
-
-      // then
-      expect(isCompleted).to.be.true;
     });
   });
 });

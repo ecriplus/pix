@@ -1,4 +1,4 @@
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SessionStartedDeletionError } from '../errors.js';
 
 /**
@@ -11,12 +11,14 @@ import { SessionStartedDeletionError } from '../errors.js';
  * @param {SessionRepository} params.sessionRepository
  * @param {SessionManagementRepository} params.sessionManagementRepository
  */
-const deleteSession = withTransaction(async ({ sessionId, sessionRepository, sessionManagementRepository }) => {
+const deleteSession = async ({ sessionId, sessionRepository, sessionManagementRepository }) => {
   if (!(await sessionManagementRepository.hasNoStartedCertification({ id: sessionId }))) {
     throw new SessionStartedDeletionError();
   }
 
-  await sessionRepository.remove({ id: sessionId });
-});
+  await DomainTransaction.execute(async () => {
+    await sessionRepository.remove({ id: sessionId });
+  });
+};
 
 export { deleteSession };

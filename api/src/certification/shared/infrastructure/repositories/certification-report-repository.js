@@ -1,51 +1,62 @@
-import { Assessment } from '../../../../school/domain/models/Assessment.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { Challenge } from '../../../../shared/domain/models/Challenge.js';
-import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { CertificationCourseUpdateError } from '../../domain/errors.js';
-import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
 import { CertificationReport } from '../../domain/models/CertificationReport.js';
 
-const ASSESSMENTS_TABLE = 'assessments';
 const CERTIFICATION_COURSES_TABLE = 'certification-courses';
-const CERTIFICATION_CHALLENGES_TABLE = 'certification-challenges';
-const CERTIFICATION_ISSUE_REPORTS_TABLE = 'certification-issue-reports';
-const COMPLEMENTARY_CERTIFICATION_COURSES_TABLE = 'complementary-certification-courses';
 
 export const findBySessionId = async ({ sessionId }) => {
-  const knexConnection = DomainTransaction.getConnection();
-  const certificationCourses = await knexConnection(CERTIFICATION_COURSES_TABLE)
-    .where({ sessionId })
-    .orderByRaw('LOWER("lastName") ASC, LOWER("firstName") ASC');
+  const knexConn = DomainTransaction.getConnection();
+  const certificationReportsData = await knexConn
+    .select({
+      firstName: 'certification-courses.firstName',
+      lastName: 'certification-courses.lastName',
+      examinerComment: 'certification-courses.examinerComment',
+      certificationCourseId: 'certification-courses.id',
+      assessmentState: 'assessments.state',
+      abortReason: 'certification-courses.abortReason',
+      issueReportId: 'certification-issue-reports.id',
+      issueReportCategory: 'certification-issue-reports.category',
+      issueReportCategoryId: 'certification-issue-reports.categoryId',
+      issueReportDescription: 'certification-issue-reports.description',
+      issueReportSubcategory: 'certification-issue-reports.subcategory',
+      issueReportQuestionNumber: 'certification-issue-reports.questionNumber',
+      issueReportHasBeenAutomaticallyResolved: 'certification-issue-reports.hasBeenAutomaticallyResolved',
+      issueReportLiveAlertId: 'certification-issue-reports.liveAlertId',
+      issueReportResolvedAt: 'certification-issue-reports.resolvedAt',
+      issueReportResolution: 'certification-issue-reports.resolution',
+    })
+    .from('certification-courses')
+    .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
+    .leftJoin(
+      'certification-issue-reports',
+      'certification-issue-reports.certificationCourseId',
+      'certification-courses.id',
+    )
+    .where('certification-courses.sessionId', sessionId)
+    .orderByRaw('LOWER("certification-courses"."lastName") ASC, LOWER("certification-courses"."firstName") ASC');
 
-  const certificationCoursesIds = certificationCourses.map(({ id }) => id);
-
-  if (!certificationCourses.length) {
+  if (!certificationReportsData.length) {
     return [];
   }
+  const certificationReportsWithIssuesDataByCertif = new Map();
 
-  const assessments = await knexConnection(ASSESSMENTS_TABLE).whereIn('certificationCourseId', certificationCoursesIds);
-  const certificationChallenges = await knexConnection(CERTIFICATION_CHALLENGES_TABLE).whereIn(
-    'courseId',
-    certificationCoursesIds,
-  );
-  const certificationIssueReports = await knexConnection(CERTIFICATION_ISSUE_REPORTS_TABLE).whereIn(
-    'certificationCourseId',
-    certificationCoursesIds,
-  );
-  const complementaryCertificationCourses = await knexConnection(COMPLEMENTARY_CERTIFICATION_COURSES_TABLE).whereIn(
-    'certificationCourseId',
-    certificationCoursesIds,
-  );
+  for (const certificationReportWithIssuesDataByCertif of certificationReportsData) {
+    if (
+      !certificationReportsWithIssuesDataByCertif.has(certificationReportWithIssuesDataByCertif.certificationCourseId)
+    ) {
+      certificationReportsWithIssuesDataByCertif.set(
+        certificationReportWithIssuesDataByCertif.certificationCourseId,
+        [],
+      );
+    }
+    certificationReportsWithIssuesDataByCertif
+      .get(certificationReportWithIssuesDataByCertif.certificationCourseId)
+      .push(certificationReportWithIssuesDataByCertif);
+  }
 
-  return toDomain(
-    assessments,
-    certificationCourses,
-    certificationChallenges,
-    certificationIssueReports,
-    complementaryCertificationCourses,
-  ).map(CertificationReport.fromCertificationCourse);
+  return Array.from(certificationReportsWithIssuesDataByCertif.values(), toDomain);
 };
 
 export const finalizeAll = async ({ certificationReports }) => {
@@ -63,31 +74,30 @@ const finalize = async (certificationReport) => {
   });
 };
 
-const toDomain = (
-  assessments,
-  certificationCourses,
-  certificationChallenges,
-  certificationIssueReports,
-  complementaryCertificationCourses,
-) =>
-  certificationCourses.map(
-    (certificationCourse) =>
-      new CertificationCourse({
-        ...certificationCourse,
-        assessment: new Assessment(
-          assessments.find(({ certificationCourseId }) => certificationCourseId === certificationCourse.id),
-        ),
-        challenges: certificationChallenges
-          .filter(({ courseId }) => courseId === certificationCourse.id)
-          .map((challenge) => new Challenge(challenge)),
-        certificationIssueReports: certificationIssueReports
-          .filter(({ certificationCourseId }) => certificationCourseId === certificationCourse.id)
-          .map((certificationIssueReport) => new CertificationIssueReport(certificationIssueReport)),
-        complementaryCertificationCourses: complementaryCertificationCourses
-          .filter(({ certificationCourseId }) => certificationCourseId === certificationCourse.id)
-          .map(
-            (complementaryCertificationCourse) =>
-              new ComplementaryCertificationCourse(complementaryCertificationCourse),
-          ),
-      }),
-  );
+function toDomain(certificationReportWithIssuesData) {
+  const certificationIssueReports = [];
+  for (const issueReportData of certificationReportWithIssuesData) {
+    if (issueReportData.issueReportId) {
+      const issueReport = new CertificationIssueReport({
+        id: issueReportData.issueReportId,
+        certificationCourseId: issueReportData.certificationCourseId,
+        category: issueReportData.issueReportCategory,
+        categoryId: issueReportData.issueReportCategoryId,
+        description: issueReportData.issueReportDescription,
+        subcategory: issueReportData.issueReportSubcategory,
+        questionNumber: issueReportData.issueReportQuestionNumber,
+        hasBeenAutomaticallyResolved: issueReportData.issueReportHasBeenAutomaticallyResolved,
+        liveAlertId: issueReportData.issueReportLiveAlertId,
+        resolvedAt: issueReportData.issueReportResolvedAt,
+        resolution: issueReportData.issueReportResolution,
+      });
+      certificationIssueReports.push(issueReport);
+    }
+  }
+
+  return new CertificationReport({
+    ...certificationReportWithIssuesData[0],
+    isCompleted: certificationReportWithIssuesData[0].assessmentState === Assessment.states.COMPLETED,
+    certificationIssueReports,
+  });
+}
