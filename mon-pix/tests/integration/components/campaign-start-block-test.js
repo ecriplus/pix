@@ -205,6 +205,7 @@ module('Integration | Component | campaign-start-block', function (hooks) {
             }),
           )
           .exists();
+        assert.dom(screen.getByText(t('pages.campaign-landing.assessment.exam-notice'))).exists();
         assert.dom(screen.getByText(t('pages.campaign-landing.assessment.legal'))).exists();
       });
 
