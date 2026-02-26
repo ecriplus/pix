@@ -387,7 +387,7 @@
                     "id": "23d49a6a-6439-4fbf-b1da-4be1bfa4297a",
                     "text": "Les personnes qui télétravailllent n’utilisent plus leur voiture pour se rendre au travail, ce qui réduit les émissions de gaz à effet de serre.",
                     "image": {
-                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                      "url": "",
                       "altText": ""
                     },
                     "proposalA": "Vrai",
@@ -398,7 +398,7 @@
                     "id": "9bd14d76-ff4e-4b03-8ed8-c245885f1701",
                     "text": "La consommation d’énergie des logements où des personnes télétravaillent augmente car elles doivent chauffer la pièce où elles travaillent.",
                     "image": {
-                      "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                      "url": "",
                       "altText": ""
                     },
                     "proposalA": "Vrai",
@@ -453,10 +453,10 @@
               "element": {
                 "id": "b2f1c1ec-e4d5-485e-904c-1b8d429dee9e",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/NR_Durabilite_AVA/nr_durabilite_decouverte_batterie_ordinateur.png",
+                "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/schema-effet-rebond.png",
                 "alt": "",
-                "alternativeText": "Schéma de l’effet rebond&nbsp;: lorsque la consommation ou les émissions actuelles baissent, la réduction réelle est moins importante que la réduction attendue. C’est l’effet rebond.",
-                "legend": "",
+                "alternativeText": "<p>Schéma de l’effet rebond&nbsp;: lorsque la consommation ou les émissions actuelles baissent, la réduction réelle est moins importante que la réduction attendue. C’est l’effet rebond.</p>",
+                "legend": "Schéma brouillon",
                 "licence": ""
               }
             }
