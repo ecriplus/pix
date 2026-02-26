@@ -360,14 +360,6 @@
                   "animationSpeed": 0
                 }
               }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "8f28f3bc-4240-431b-95e1-5aaab6c169d7",
-                "type": "text",
-                "content": ""
-              }
             }
           ]
         },
@@ -501,16 +493,6 @@
           "type": "discovery",
           "title": "Découverte 3",
           "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "7a25758c-ebf0-4195-abe8-759a081c3916",
-                "type": "text",
-                "content": ""
-              }
-            }
-          ]
-        },
         {
           "id": "a09f6c54-4c6d-45b4-b886-9774c9913ab7",
           "type": "discovery",
@@ -1037,4 +1019,6 @@
       ]
     }
   ]
+}
+    ]
 }
