@@ -634,7 +634,7 @@
                     "type": "text",
                     "content": "<br>\n<ul>\n    <li>Point n°2 :</li>\n</ul>"
                   },
-                                {
+                  {
                     "type": "select",
                     "input": "point2",
                     "display": "inline",
@@ -673,9 +673,9 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br>\n\n    Point n°3 :</p>"
+                    "content": "<br>\n<ul>\n    <li>Point n°3 :</li>\n</ul>"
                   },
-                              {
+                  {
                     "type": "select",
                     "input": "point3",
                     "display": "inline",
@@ -723,6 +723,210 @@
                     "diagnosis": "<p>Vous pouvez remonter dans le module pour voir le schéma correspondant.&nbsp;⬆️</p>"
                   }
                 }
+              }
+            }
+          ]
+        },
+        {
+          "id": "185514d7-cc1a-4b16-8b48-7c0fc3d5f9b2",
+          "type": "activity",
+          "title": "Activité #3 : Éveiller son esprit critique et encourager la sobriété",
+          "components": [
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "e0f6a3e0-7281-4710-80af-86a3da8d2fb6",
+                      "type": "text",
+                      "content": "<p>Yann est en télétravail. Grâce à cela, il a réduit ses dépenses d’essence.</p>"
+                    },
+                    {
+                      "id": "cb2162a6-687b-4a74-9ca2-6d764e9e3807",
+                      "type": "qcu",
+                      "instruction": "<p>Que peut-il faire de l’argent gagné, en limitant l’effet rebond ?<br></p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Acheter des lunettes connectées pour prendre des photos de la vie quotidienne.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de gain de revenus&nbsp; : on dispose de plus de revenus qu’on consacre à une consommation supplémentaire. Quel achat est le moins consommateur ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Acheter une plus grande télévision pour les soirées cinéma.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de gain de revenus&nbsp; : on dispose de plus de revenus qu’on consacre à une consommation supplémentaire.</p><p>Quel achat est le moins consommateur ?</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Acheter de la mémoire RAM pour augmenter les performances de son PC.</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse.<br></p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de gain de revenus&nbsp; : on dispose de plus de revenus qu’on consacre à une consommation supplémentaire.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "661e84b4-9710-4e2b-b1cf-7b622bc1e352",
+                      "type": "text",
+                      "content": "<p>Laure est freelance : elle a automatisé l’envoi de devis et a gagné du temps grâce au numérique.</p>"
+                    },
+                    {
+                      "id": "3b4824fc-2070-4db1-9ba6-1b9cc2432bb7",
+                      "type": "qcu",
+                      "instruction": "<p>Que peut-elle faire du temps gagné, en limitant l’effet rebond ?<br></p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Regarder un film en streaming.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de <strong>gain de temps</strong> : on dispose de plus de temps qu’on consacre à une consommation supplémentaire.&nbsp;</p><p>Quelle activité est la moins consommatrice ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Faire une balade autour de chez elle.</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse.</p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de gain de temps : on dispose de plus de temps qu’on consacre à une consommation supplémentaire.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Générer une vidéo avec l’IA.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de <strong>gain de temps</strong> : on dispose de plus de temps qu’on consacre à une consommation supplémentaire.&nbsp;</p>\n<p>Quelle activité est la moins consommatrice ?</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "c16acaf6-f3be-4f41-a48c-f4b1c8a00608",
+                      "type": "text",
+                      "content": "<p>La banque Banquix a fermé plusieurs agences car les gens gèrent maintenant leurs comptes en ligne. Elle a revendu les locaux de ces agences.</p>"
+                    },
+                    {
+                      "id": "a6389ebc-e830-4e6c-9052-d8322737f6fa",
+                      "type": "qcu",
+                      "instruction": "<p>Que peut faire la banque Banquix de cette économie, en évitant l’effet rebond ?&nbsp;<br></p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Offrir à ses employés un week-end en avion à New-York.</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de<strong> gain</strong> <strong>de revenus,</strong> à l'échelle d'une entreprise. </p><p>Quelle action est le moins consommatrice de resssources ?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Offrir à ses meilleurs clients une montre connectée.</p>",
+                          "feedback": {
+                            "state": "<p>Mauaise réponse.</p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de <strong>gain de revenus</strong>, à l'échelle d'une entreprise.  Quelle action est le moins consommatrice de resssources ?</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Offrir une réduction sur les frais bancaires de ses clients.</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Il s’agit d’un exemple de <strong>gain de revenus</strong>, à l'échelle d'une entreprise.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7f17e423-2673-40e2-90b1-0ef3c6e6b3ba",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "56fc44ae-4962-4e66-82d3-19792d4b01a5",
+          "type": "challenge",
+          "title": "L'analyse conséquentielle de l'Ademe sur le télétravail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e816e4a9-a35f-4054-8141-5f4b40682900",
+                "type": "text",
+                "content": "<p>Cette <a href=\"https://librairie.ademe.fr/economie-circulaire-et-dechets/7785-evaluation-environnementale-des-effets-directs-et-indirects-du-numerique-pour-des-cas-d-usage.html\" target=\"_blank\">étude de l’ADEME</a>, datant de 2025, a analysé la numérisation de plusieurs cas d’usage, afin d’étudier leurs effets directs et indirects.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ac07f933-2e8e-4faa-a42b-effe98691e12",
+                "type": "qcm",
+                "instruction": "<p>Dans cette étude, quels effets ont été <strong>quantifiés </strong>pour le <strong>télétravail </strong>?<br></p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>L’évolution de la distance parcourus pour les trajets domicile- travail.</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Les problèmes de santé physique et mentale.</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>La réduction des besoins en espaces de travail.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>La réaffectation des économies réalisées par les employeurs.</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>La relocalisation potentielle du domicile des travailleurs.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !<br></p>",
+                    "diagnosis": "<p>Effectivement, ces impacts ont bien été identifiés mais n'ont pas été quantifiés dans cette étude. Ils pourraient l'être dans d'autres études.<br></p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.<br></p>",
+                    "diagnosis": "<p>Avez-vous trouvé dans l'étude, disponible en pdf à télécharger, la section consacrée au télétravail ?<br></p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "3"
+                ]
               }
             }
           ]
