@@ -1,6 +1,7 @@
 import iconv from 'iconv-lite';
 
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
+import { ValidateCsvOrganizationImportFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateCsvOrganizationImportFileJob.js';
 import { uploadCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/upload-csv-file.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
@@ -20,12 +21,13 @@ describe('Unit | UseCase | uploadCsvFile', function () {
   let timer,
     fakeDate,
     organizationImportRepositoryStub,
-    validateCsvOrganizationImportFileJobRepositoryStub,
     importStorageStub,
     payload,
     filepath,
     s3Filename,
     csvContent,
+    importType,
+    validateCsvOrganizationImportFileJobRepositoryStub,
     organizationImportStub,
     organizationImportSavedStub,
     organizationImportId;
@@ -36,7 +38,7 @@ describe('Unit | UseCase | uploadCsvFile', function () {
     });
 
     organizationImportId = Symbol('organizationImportId');
-
+    importType = Symbol('FREGATA');
     s3Filename = Symbol('filename');
     csvContent = iconv.encode(
       `${supOrganizationLearnerImportHeader}
@@ -57,8 +59,6 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       getParser: sinon.stub(),
     };
 
-    validateCsvOrganizationImportFileJobRepositoryStub = { performAsync: sinon.stub() };
-
     organizationImportStub = { upload: sinon.stub() };
 
     organizationImportSavedStub = { id: organizationImportId, upload: sinon.stub() };
@@ -75,6 +75,10 @@ describe('Unit | UseCase | uploadCsvFile', function () {
     organizationImportRepositoryStub.getLastByOrganizationId
       .withArgs(organizationId)
       .resolves(organizationImportSavedStub);
+
+    validateCsvOrganizationImportFileJobRepositoryStub = {
+      performAsync: sinon.stub(),
+    };
   });
 
   afterEach(async function () {
@@ -92,14 +96,16 @@ describe('Unit | UseCase | uploadCsvFile', function () {
         .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
 
       // when
-      const result = await uploadCsvFile({
+      await uploadCsvFile({
         Parser: SupOrganizationLearnerParser,
         payload,
         userId,
         organizationId,
         i18n,
+        type: importType,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
+        validateCsvOrganizationImportFileJobRepository: validateCsvOrganizationImportFileJobRepositoryStub,
       });
 
       // then
@@ -107,7 +113,13 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       expect(organizationImportRepositoryStub.save.getCall(1)).to.have.been.calledWithExactly(
         organizationImportSavedStub,
       );
-      expect(result).to.be.equals(organizationImportId);
+      expect(validateCsvOrganizationImportFileJobRepositoryStub.performAsync).to.have.been.calledWithExactly(
+        new ValidateCsvOrganizationImportFileJob({
+          organizationImportId,
+          type: importType,
+          locale: i18n.getLocale(),
+        }),
+      );
     });
   });
 
@@ -138,43 +150,6 @@ describe('Unit | UseCase | uploadCsvFile', function () {
         encoding: undefined,
         errors: [errorS3],
       });
-    });
-
-    it('should save organization import with error when save job fails', async function () {
-      //given
-      const expectedError = new Error('jobFails');
-      const parserStub = { getFileEncoding: sinon.stub() };
-      const encoding = Symbol('encoding');
-
-      validateCsvOrganizationImportFileJobRepositoryStub.performAsync.rejects(expectedError);
-
-      importStorageStub.sendFile.withArgs({ filepath: payload.path }).resolves(s3Filename);
-      importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: s3Filename }, organizationId, i18n)
-        .resolves(parserStub);
-
-      parserStub.getFileEncoding.returns(encoding);
-
-      // when
-      await catchErr(uploadCsvFile)({
-        Parser: SupOrganizationLearnerParser,
-        payload,
-        userId,
-        organizationId,
-        i18n,
-        type: Symbol('type'),
-        organizationImportRepository: organizationImportRepositoryStub,
-        importStorage: importStorageStub,
-        validateCsvOrganizationImportFileJobRepository: validateCsvOrganizationImportFileJobRepositoryStub,
-      });
-
-      //then
-      expect(organizationImportSavedStub.upload).to.have.been.calledWithExactly({
-        filename: s3Filename,
-        encoding,
-        errors: [expectedError],
-      });
-      expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
     });
   });
 });
