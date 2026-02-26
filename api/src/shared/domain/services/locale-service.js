@@ -4,10 +4,10 @@ const FRENCH_SPOKEN = 'fr';
 const FRENCH_FRANCE_LOCALE = 'fr-FR';
 
 const DEFAULT_CHALLENGE_LOCALE = 'fr-fr';
-const CHALLENGE_LOCALES = ['en', 'fr', 'fr-fr', 'nl', 'es', 'es-419', 'it', 'de'];
+const CHALLENGE_LOCALES = ['de', 'de-AT', 'en', 'es', 'es-419', 'fr', 'fr-fr', 'it', 'nl'];
 
 const DEFAULT_LOCALE = 'fr';
-const SUPPORTED_LOCALES = ['en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE', 'it'];
+const SUPPORTED_LOCALES = ['de-AT', 'en', 'es', 'es-419', 'fr', 'nl', 'fr-BE', 'fr-FR', 'nl-BE', 'it'];
 
 const SUPPORTED_LANGUAGES = Array.from(new Set(SUPPORTED_LOCALES.map((locale) => new Intl.Locale(locale).language)));
 

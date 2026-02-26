@@ -10,6 +10,7 @@ const PIX_WEBSITE_DOMAIN_ORG = `${config.domain.pix}${config.domain.tldOrg}`;
 
 // Pix website URLs for each supported locales
 export const PIX_WEBSITE_ROOT_URLS = {
+  'de-AT': `${PIX_WEBSITE_DOMAIN_ORG}/en`,
   'fr-FR': PIX_WEBSITE_DOMAIN_FR,
   'fr-BE': `${PIX_WEBSITE_DOMAIN_ORG}/fr-be`,
   'nl-BE': `${PIX_WEBSITE_DOMAIN_ORG}/nl-be`,
@@ -118,6 +119,7 @@ export function getEmailValidationUrl({ locale, redirectUrl, token } = {}) {
 // Pix website paths for each supported locales
 export const PIX_WEBSITE_PATHS = {
   SUPPORT: {
+    'de-AT': 'support',
     'fr-FR': 'support',
     'fr-BE': 'support',
     'nl-BE': 'support',
