@@ -137,7 +137,7 @@ describe('Unit | UseCase | start-campaign-participation', function () {
       campaignParticipantRepository.save
         .withArgs({ campaignParticipant: sinon.match(campaignParticipant) })
         .resolves(12);
-      campaignParticipationRepository.get.withArgs(12).resolves();
+      campaignParticipationRepository.get.withArgs(12).resolves({ id: 'campaignParticipationId' });
     });
 
     context('when campaign is resettable', function () {

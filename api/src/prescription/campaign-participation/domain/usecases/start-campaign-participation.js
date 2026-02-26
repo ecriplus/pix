@@ -1,29 +1,29 @@
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../shared/domain/models/KnowledgeElement.js';
 import { ParticipationStartedJob } from '../models/ParticipationStartedJob.js';
 
-export const startCampaignParticipation = withTransaction(
-  async ({
-    campaignParticipation,
+export const startCampaignParticipation = async ({
+  campaignParticipation,
+  userId,
+  campaignRepository,
+  assessmentRepository,
+  knowledgeElementRepository,
+  campaignParticipantRepository,
+  campaignParticipationRepository,
+  competenceEvaluationRepository,
+  participationStartedJobRepository,
+}) => {
+  const campaignParticipant = await campaignParticipantRepository.get({
     userId,
-    campaignRepository,
-    assessmentRepository,
-    knowledgeElementRepository,
-    campaignParticipantRepository,
-    campaignParticipationRepository,
-    competenceEvaluationRepository,
-    participationStartedJobRepository,
-  }) => {
-    const campaignParticipant = await campaignParticipantRepository.get({
-      userId,
-      campaignId: campaignParticipation.campaignId,
-    });
+    campaignId: campaignParticipation.campaignId,
+  });
 
-    campaignParticipant.start({
-      participantExternalId: campaignParticipation.participantExternalId,
-      isReset: campaignParticipation.isReset,
-    });
+  campaignParticipant.start({
+    participantExternalId: campaignParticipation.participantExternalId,
+    isReset: campaignParticipation.isReset,
+  });
 
+  const createdCampaignParticipation = await DomainTransaction.execute(async () => {
     const campaignParticipationId = await campaignParticipantRepository.save({ campaignParticipant });
 
     const createdCampaignParticipation = await campaignParticipationRepository.get(campaignParticipationId);
@@ -42,13 +42,16 @@ export const startCampaignParticipation = withTransaction(
         knowledgeElementRepository,
       });
     }
+    return createdCampaignParticipation;
+  });
 
-    await participationStartedJobRepository.performAsync(new ParticipationStartedJob({ campaignParticipationId }));
-    return {
-      campaignParticipation: createdCampaignParticipation,
-    };
-  },
-);
+  await participationStartedJobRepository.performAsync(
+    new ParticipationStartedJob({ campaignParticipationId: createdCampaignParticipation.id }),
+  );
+  return {
+    campaignParticipation: createdCampaignParticipation,
+  };
+};
 
 async function _resetCampaignParticipation({
   campaignParticipation,
