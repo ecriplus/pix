@@ -602,6 +602,7 @@
           "description": "You will have to carry out searches online, use your digital working environment, test your knowledge, etc.",
           "title": "Measure your digital skills with fun and educational challenges that adapt to your level of proficiency  (through an adaptive algorithm)."
         },
+        "exam-notice": "During this customised test, your competences profile will not be taken into account or modified. Your answers will not affect your skills levels or your overall Pix score.",
         "legal": "By clicking on “Begin your test“, information about your progress will be shared with the organiser so they can assist you if necessary. At the end of your test, your results will be automatically shared with your organisation.",
         "title": "Begin your customised test",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' ready to assess your digital skills?"

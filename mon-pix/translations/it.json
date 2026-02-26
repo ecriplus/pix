@@ -602,6 +602,7 @@
           "description": "Dovrete effettuare ricerche su Internet, utilizzare il vostro ambiente di lavoro digitale, testare le vostre conoscenze, ecc.",
           "title": "Misurate le vostre competenze digitali con sfide di apprendimento divertenti che si adattano al vostro livello di competenza (utilizzando un algoritmo adattivo)."
         },
+        "exam-notice": "Durante questo percorso, il Suo profilo di competenze non verrà preso in considerazione né modificato. Le Sue risposte non avranno alcun impatto sui Suoi livelli di competenze né sul Suo punteggio globale Pix.",
         "legal": "Cliccando su \"Sto iniziando\", le informazioni sui vostri progressi nel corso saranno inviate all'organizzatore del corso in modo che possa supportarvi. Al termine del corso, i risultati saranno inviati automaticamente all'organizzatore.",
         "title": "Inizia il tuo viaggio Pix",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' pronti a valutare le vostre competenze digitali?"

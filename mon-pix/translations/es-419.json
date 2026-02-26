@@ -1,5 +1,10 @@
 {
   "pages": {
+    "campaign-landing": {
+      "assessment": {
+        "exam-notice": "Durante este test, su perfil de competencias no será tomado en cuenta ni modificado. Sus respuestas no afectarán sus niveles de habilidades ni su puntaje global de Pix."
+      }
+    },
     "sign-in": {
       "first-title": "Accede a tu cuenta"
     }

@@ -31,6 +31,11 @@ export default class CampaignStartBlock extends Component {
           {{#unless this.session.isAuthenticated}}
             <h2 class="campaign-landing-page-start__subtitle">{{this.announcementText}}</h2>
           {{/unless}}
+          {{#if this.showExamCampaignInfo}}
+            <p class="campaign-landing-page-detail__exam-notice">{{t
+                "pages.campaign-landing.assessment.exam-notice"
+              }}</p>
+          {{/if}}
           <PixButton
             @type="submit"
             class="campaign-landing-page__start-button"
@@ -72,6 +77,10 @@ export default class CampaignStartBlock extends Component {
 
   get campaignType() {
     return this.args.campaign.isAssessment || this.args.campaign.isExam ? 'assessment' : 'profiles-collection';
+  }
+
+  get showExamCampaignInfo() {
+    return this.args.campaign.isExam;
   }
 
   get titleText() {
