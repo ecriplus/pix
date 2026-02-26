@@ -98,7 +98,7 @@ describe('Unit | Certification | Evaluation | Domain | UseCase | Score V3 Certif
 
         expect(dependencies.certificationAssessmentHistoryRepository.save).to.have.been.called;
         expect(dependencies.assessmentResultRepository.save).not.to.have.been.called;
-        expect(dependencies.sharedCompetenceMarkRepository.save).not.to.have.been.called;
+        expect(dependencies.sharedCompetenceMarkRepository.saveMany).not.to.have.been.called;
         expect(dependencies.certificationCourseRepository.update).not.to.have.been.called;
         expect(dependencies.complementaryCertificationCourseResultRepository.save).not.to.have.been.called;
       });
@@ -233,7 +233,7 @@ function stubCertificationCourseRepository() {
 
 function stubSharedCompetenceMarkRepository() {
   const sharedCompetenceMarkRepository = {
-    save: sinon.stub(),
+    saveMany: sinon.stub(),
   };
   return sharedCompetenceMarkRepository;
 }

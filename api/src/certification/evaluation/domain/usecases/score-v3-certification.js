@@ -16,6 +16,7 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { SessionAlreadyPublishedError } from '../../../session-management/domain/errors.js';
+import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { CertificationAssessmentHistory } from '../models/CertificationAssessmentHistory.js';
 import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js';
@@ -170,9 +171,9 @@ const _verifyCertificationIsScorable = async ({
  * @param {object} params
  * @param {AssessmentResult} params.assessmentResult
  * @param {number} params.certificationCourseId
- * @param {CompetenceMark} params.competenceMarks
  * @param {AssessmentResultRepository} params.assessmentResultRepository
- * @param {sharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
+ * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
  */
 async function _saveV3Result({
   assessmentResult,
@@ -186,10 +187,13 @@ async function _saveV3Result({
     assessmentResult,
   });
 
-  for (const competenceMark of assessmentResult.competenceMarks) {
-    competenceMark.assessmentResultId = newAssessmentResult.id;
-    await sharedCompetenceMarkRepository.save(competenceMark);
-  }
+  const competenceMarksToSave = assessmentResult.competenceMarks.map(
+    (competenceMark) => new CompetenceMark({ ...competenceMark, assessmentResultId: newAssessmentResult.id }),
+  );
+
+  await sharedCompetenceMarkRepository.saveMany({
+    competenceMarks: competenceMarksToSave,
+  });
 
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   certificationCourse.complete({ now: new Date() });
