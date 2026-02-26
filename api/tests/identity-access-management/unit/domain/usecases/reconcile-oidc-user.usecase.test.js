@@ -35,8 +35,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         createAuthenticationComplement: sinon.stub(),
       };
       oidcAuthenticationServiceRegistry = {
-        loadOidcProviderServices: sinon.stub().resolves(),
-        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
       };
 
@@ -224,8 +222,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         createAuthenticationComplement: sinon.stub(),
       };
       oidcAuthenticationServiceRegistry = {
-        loadOidcProviderServices: sinon.stub().resolves(),
-        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
       };
 

@@ -58,8 +58,7 @@ describe('Integration | Identity Access Management | Domain | UseCases | get-rea
 
     await databaseBuilder.commit();
 
-    oidcAuthenticationServiceRegistry.testOnly_reset();
-    await oidcAuthenticationServiceRegistry.loadOidcProviderServices();
+    await oidcAuthenticationServiceRegistry.testOnly_reset();
   });
 
   it('returns the ready OIDC Providers for Pix App', async function () {

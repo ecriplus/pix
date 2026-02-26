@@ -56,8 +56,6 @@ async function createMockedTestOidcProvider({
   connectionMethodCode,
   identityProvider = 'OIDC_EXAMPLE_NET',
 }) {
-  oidcAuthenticationServiceRegistry.testOnly_reset();
-
   const openidClientMock = createOpenIdClientMock(openIdConfigurationResponse);
 
   const redirectUri = `https://${application}.dev.pix${applicationTld}/connexion/oidc-example-net`;
@@ -68,7 +66,7 @@ async function createMockedTestOidcProvider({
   const endSessionUrl = `${openIdConfigurationResponse.end_session_endpoint}?client_id=${clientId}`;
   openidClientMock.buildEndSessionUrl.returns(endSessionUrl);
 
-  await oidcAuthenticationServiceRegistry.loadOidcProviderServices([
+  await oidcAuthenticationServiceRegistry.testOnly_reset([
     new OidcAuthenticationService(
       {
         accessTokenLifespanMs: 60000,

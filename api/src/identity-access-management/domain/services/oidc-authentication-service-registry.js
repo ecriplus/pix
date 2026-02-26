@@ -11,37 +11,31 @@ export class OidcAuthenticationServiceRegistry {
   #readyOidcProviderServicesByRequestedApplications = {};
 
   constructor(dependencies = {}) {
-    this.oidcProviderRepository = dependencies.oidcProviderRepository;
-  }
-
-  async configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
-    const oidcProviderService = this.#allOidcProviderServices?.find(
-      (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
-    );
-
-    if (!oidcProviderService) return;
-
-    await oidcProviderService.initializeClientConfig();
-
-    return true;
+    this.oidcProviderRepository = dependencies.oidcProviderRepository ?? oidcProviderRepository;
   }
 
   /**
    * @return {OidcAuthenticationService[]|null}
    */
-  getAllOidcProviderServices() {
+  async getAllOidcProviderServices() {
+    await this.#loadAllOidcProviderServices();
+
     return this.#allOidcProviderServices;
   }
 
-  getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
+  async getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
+    await this.#loadAllOidcProviderServices();
+
     const groupByKey = generateGroupByKey(requestedApplication.applicationName, requestedApplication.applicationTld);
     return this.#readyOidcProviderServicesByRequestedApplications[groupByKey] || [];
   }
 
-  getOidcProviderServiceByCode({ identityProviderCode, requestedApplication }) {
-    const oidcProviderService = this.getReadyOidcProviderServicesByRequestedApplication(requestedApplication).find(
-      (service) => identityProviderCode === service.code,
-    );
+  async getOidcProviderServiceByCode({ identityProviderCode, requestedApplication }) {
+    await this.#loadAllOidcProviderServices();
+    await this.#configureReadyOidcProviderServiceByCode(identityProviderCode);
+
+    const oidcProviderServices = await this.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
+    const oidcProviderService = oidcProviderServices.find((service) => identityProviderCode === service.code);
 
     if (!oidcProviderService) {
       throw new InvalidIdentityProviderError(identityProviderCode);
@@ -50,13 +44,32 @@ export class OidcAuthenticationServiceRegistry {
     return oidcProviderService;
   }
 
-  async loadOidcProviderServices(oidcProviderServices) {
+  async testOnly_reset(oidcProviderServices) {
+    this.#allOidcProviderServices = null;
+    this.#readyOidcProviderServicesByRequestedApplications = {};
+
+    if (oidcProviderServices) {
+      await this.#loadAllOidcProviderServices(oidcProviderServices);
+    }
+  }
+
+  async #configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
+    const oidcProviderService = this.#allOidcProviderServices?.find(
+      (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
+    );
+
+    if (!oidcProviderService) return;
+
+    await oidcProviderService.initializeClientConfig();
+  }
+
+  async #loadAllOidcProviderServices(oidcProviderServices) {
     if (this.#allOidcProviderServices) {
       return;
     }
 
     if (!oidcProviderServices) {
-      const oidcProviders = await oidcProviderRepository.findAllOidcProviders();
+      const oidcProviders = await this.oidcProviderRepository.findAllOidcProviders();
 
       oidcProviderServices = await PromiseUtils.mapSeries(oidcProviders, async (oidcProvider) => {
         await oidcProvider.decryptClientSecret(cryptoService);
@@ -79,13 +92,6 @@ export class OidcAuthenticationServiceRegistry {
       ),
       (oidcProviderService) => generateGroupByKey(oidcProviderService.application, oidcProviderService.applicationTld),
     );
-
-    return true;
-  }
-
-  testOnly_reset() {
-    this.#allOidcProviderServices = null;
-    this.#readyOidcProviderServicesByRequestedApplications = {};
   }
 }
 

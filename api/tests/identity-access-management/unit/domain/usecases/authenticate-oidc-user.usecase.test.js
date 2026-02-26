@@ -30,8 +30,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         getUserInfo: sinon.stub(),
       };
       oidcAuthenticationServiceRegistry = {
-        loadOidcProviderServices: sinon.stub().resolves(),
-        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
       };
       authenticationMethodRepository = {
@@ -305,8 +303,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         getUserInfo: sinon.stub(),
       };
       oidcAuthenticationServiceRegistry = {
-        loadOidcProviderServices: sinon.stub().resolves(),
-        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
       };
       authenticationMethodRepository = {
@@ -492,8 +488,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oi
         getUserInfo: sinon.stub(),
       };
       oidcAuthenticationServiceRegistry = {
-        loadOidcProviderServices: sinon.stub().resolves(),
-        configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
         getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
       };
       authenticationMethodRepository = {

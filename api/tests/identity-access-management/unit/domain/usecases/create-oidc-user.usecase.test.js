@@ -28,8 +28,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       saveIdToken: sinon.stub(),
     };
     oidcAuthenticationServiceRegistry = {
-      loadOidcProviderServices: sinon.stub().resolves(),
-      configureReadyOidcProviderServiceByCode: sinon.stub().resolves(),
       getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
     };
   });
