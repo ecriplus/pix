@@ -23,33 +23,8 @@ module('Unit | Route | session-supervising', function (hooks) {
     });
 
     module('when an error occurs in session supervising fetch', function () {
-      test('it should stop polling', async function (assert) {
-        // given
-        ENV.APP.sessionSupervisingPollingRate = 100;
-        const session = { id: '123' };
-
-        class StoreStub extends Service {
-          queryRecord = sinon.stub();
-        }
-
-        this.owner.register('service:store', StoreStub);
-
-        const route = this.owner.lookup('route:session-supervising');
-        route.store.queryRecord.onCall(0).returns(Promise.resolve());
-        route.store.queryRecord.onCall(1).throws(new Error());
-
-        // when
-        route.afterModel(session);
-
-        await clock.tickAsync(250);
-
-        // then
-        assert.strictEqual(route.poller, null);
-        assert.strictEqual(route.store.queryRecord.callCount, 2);
-      });
-
       module('when the error has a 401 status', function () {
-        test('it should redirect to session supervising login page', async function (assert) {
+        test('it should redirect to session supervising login page and stop polling', async function (assert) {
           // given
           ENV.APP.sessionSupervisingPollingRate = 100;
           const session = { id: '123' };
@@ -71,15 +46,17 @@ module('Unit | Route | session-supervising', function (hooks) {
 
           // when
           route.afterModel(session);
-          await clock.tickAsync(250);
+          await clock.tickAsync(350);
 
           // then
           assert.ok(route.router.replaceWith.calledWith('login-session-invigilator'));
+          assert.strictEqual(route.poller, null);
+          assert.strictEqual(route.store.queryRecord.callCount, 1);
         });
       });
 
       module('when the user loses connection', function () {
-        test('it should display a notification', async function (assert) {
+        test('it should display a notification and stop polling', async function (assert) {
           // given
           ENV.APP.sessionSupervisingPollingRate = 100;
           const session = { id: '123' };
@@ -102,7 +79,7 @@ module('Unit | Route | session-supervising', function (hooks) {
 
           // when
           route.afterModel(session);
-          await clock.tickAsync(250);
+          await clock.tickAsync(350);
 
           // then
           assert.ok(
@@ -111,6 +88,35 @@ module('Unit | Route | session-supervising', function (hooks) {
                 'Votre connexion internet est actuellement interrompue, les données affichées ne sont plus à jour. Veuillez vous reconnecter à internet et recharger la page.',
             }),
           );
+          assert.strictEqual(route.poller, null);
+          assert.strictEqual(route.store.queryRecord.callCount, 1);
+        });
+      });
+
+      module('for any other reason', function () {
+        test('it should not stop polling', async function (assert) {
+          // given
+          ENV.APP.sessionSupervisingPollingRate = 100;
+          const session = { id: '123' };
+
+          class StoreStub extends Service {
+            queryRecord = sinon.stub();
+          }
+
+          this.owner.register('service:store', StoreStub);
+
+          const route = this.owner.lookup('route:session-supervising');
+          route.store.queryRecord.returns(Promise.resolve());
+          route.store.queryRecord.onCall(1).throws(new Error());
+
+          // when
+          route.afterModel(session);
+
+          await clock.tickAsync(350);
+
+          // then
+          assert.notEqual(route.poller, null);
+          assert.ok(route.store.queryRecord.callCount > 2);
         });
       });
     });
