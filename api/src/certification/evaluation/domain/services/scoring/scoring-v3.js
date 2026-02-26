@@ -35,7 +35,7 @@ import { createV3AssessmentResult } from './create-v3-assessment-result.js';
  * @param {ComplementaryCertificationScoringCriteria} params.cleaScoringCriteria
  * @param {ScoringDegradationService} params.scoringDegradationService
  *
- * @return {Object<Object<AssessmentResult, CompetenceMark[]>, DoubleCertificationScoring>}
+ * @return {Object<AssessmentResult, DoubleCertificationScoring>}
  */
 export function handleV3CertificationScoring({
   event,
@@ -50,7 +50,7 @@ export function handleV3CertificationScoring({
 }) {
   if (candidate.hasPixPlusSubscription) {
     return {
-      coreScoring: null,
+      coreAssessmentResult: null,
       doubleCertificationScoring: null,
     }; // WIP : will be done in the future
   }
@@ -64,13 +64,14 @@ export function handleV3CertificationScoring({
     downgradeCapacityFunction: scoringDegradationService.downgradeCapacity,
   });
   const maximumAssessmentLength = algorithm.getConfiguration().maximumAssessmentLength;
-  const { assessmentResult, competenceMarks } = scoreCertification({
+  const assessmentResult = scoreCertification({
     event,
     scoringV3Algorithm,
     assessmentSheet,
     maximumAssessmentLength,
     minimumAnswersRequiredToValidateACertification:
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
+    versionId: v3CertificationScoring.versionId,
   });
 
   let doubleCertificationScoring = null;
@@ -82,7 +83,7 @@ export function handleV3CertificationScoring({
     });
   }
   return {
-    coreScoring: { assessmentResult, competenceMarks },
+    coreAssessmentResult: assessmentResult,
     doubleCertificationScoring,
   };
 }
@@ -95,7 +96,7 @@ export function handleV3CertificationScoring({
  * @param {number} params.maximumAssessmentLength
  * @param {number} params.minimumAnswersRequiredToValidateACertification
  *
- * @returns {Object<AssessmentResult, CompetenceMark[]>}
+ * @returns {AssessmentResult}
  */
 function scoreCertification({
   event,
@@ -103,6 +104,7 @@ function scoreCertification({
   assessmentSheet,
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
+  versionId,
 }) {
   const downgradeCapacity = shouldDowngradeCapacity({
     maximumAssessmentLength,
@@ -113,6 +115,7 @@ function scoreCertification({
 
   const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity: downgradeCapacity });
   const pixScore = scoringV3Algorithm.computePixScoreFromCapacity({ capacity });
+  const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
   const status = isCertificationRejected({
     answers: assessmentSheet.answers,
@@ -128,6 +131,9 @@ function scoreCertification({
     allAnswers: assessmentSheet.answers,
     assessmentId: assessmentSheet.assessmentId,
     pixScore,
+    capacity,
+    reachedMeshIndex,
+    versionId,
     status,
     competenceMarks,
     isRejectedForFraud: assessmentSheet.isRejectedForFraud,
@@ -135,7 +141,7 @@ function scoreCertification({
     juryId: event?.juryId,
     minimumAnswersRequiredToValidateACertification,
   });
-  return { competenceMarks, assessmentResult };
+  return assessmentResult;
 }
 
 /**

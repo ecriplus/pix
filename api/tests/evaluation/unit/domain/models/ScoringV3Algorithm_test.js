@@ -92,4 +92,12 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringV3Algorit
       });
     });
   });
+
+  context('#computeReachedMeshIndex', function () {
+    it('should return the interval index for a given capacity', function () {
+      const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity: 2 });
+
+      expect(reachedMeshIndex).to.equal(4);
+    });
+  });
 });

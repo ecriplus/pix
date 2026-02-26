@@ -47,4 +47,28 @@ describe('Integration | Repository | CompetenceMark', function () {
       expect(savedMark).to.have.property('id').and.not.to.be.null;
     });
   });
+
+  describe('#saveMany', function () {
+    it('should persist competence marks in db and return them', async function () {
+      // given
+      const assessmentResultId = await databaseBuilder.factory.buildAssessmentResult().id;
+      await databaseBuilder.commit();
+
+      const competenceMarks = [
+        domainBuilder.buildCompetenceMark({ assessmentResultId }),
+        domainBuilder.buildCompetenceMark({ assessmentResultId }),
+        domainBuilder.buildCompetenceMark({ assessmentResultId }),
+      ];
+
+      // when
+      const savedMarks = await competenceMarkRepository.saveMany({ competenceMarks });
+
+      // then
+      const marks = await knex('competence-marks').select();
+      expect(marks).to.have.lengthOf(3);
+
+      expect(savedMarks[1]).to.be.an.instanceOf(CompetenceMark);
+      expect(savedMarks[1]).to.have.property('id').and.not.to.be.null;
+    });
+  });
 });

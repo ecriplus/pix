@@ -100,6 +100,17 @@ export class ScoringV3Algorithm {
   /**
    *  @param {object} params
    *  @param {number} params.capacity
+   *  @returns {number} reachedMeshIndex
+   */
+  computeReachedMeshIndex({ capacity }) {
+    const certificationScoringIntervals = this.v3CertificationScoring.intervals;
+    const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
+    return scoringIntervals.findIntervalIndexFromCapacity(capacity);
+  }
+
+  /**
+   *  @param {object} params
+   *  @param {number} params.capacity
    *  @returns {CompetenceMark[]} competenceMarks
    */
   computeCompetenceMarks({ capacity }) {

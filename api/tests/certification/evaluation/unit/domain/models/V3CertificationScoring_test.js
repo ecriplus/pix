@@ -48,6 +48,18 @@ describe('Certification | Evaluation | Unit | Domain | Models | V3CertificationS
     });
   });
 
+  describe('#versionId', function () {
+    it('should return the versionId', function () {
+      const v3CertificationScoring = new V3CertificationScoring({
+        competencesForScoring: [],
+        certificationScoringConfiguration: [],
+        versionId: 42,
+      });
+
+      expect(v3CertificationScoring.versionId).to.equal(42);
+    });
+  });
+
   describe('#fromConfigurations', function () {
     it('should return a valid V3CertificationScoring', function () {
       const area = domainBuilder.buildArea();
@@ -73,8 +85,10 @@ describe('Certification | Evaluation | Unit | Domain | Models | V3CertificationS
         certificationScoringConfiguration: {},
         allAreas: [area],
         competenceList: [competence],
+        versionId: 99,
       });
 
+      expect(v3CertificationScoring.versionId).to.equal(99);
       expect(v3CertificationScoring.getCompetencesScore(0.5)).to.deep.equal([
         domainBuilder.buildCompetenceMark({
           competenceId: competence.id,

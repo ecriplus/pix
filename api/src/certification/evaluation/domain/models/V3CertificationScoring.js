@@ -5,10 +5,12 @@ export class V3CertificationScoring {
     competencesForScoring,
     certificationScoringConfiguration,
     minimumAnswersRequiredToValidateACertification,
+    versionId,
   }) {
     this._competencesForScoring = competencesForScoring;
     this._certificationScoringConfiguration = certificationScoringConfiguration;
     this.minimumAnswersRequiredToValidateACertification = minimumAnswersRequiredToValidateACertification;
+    this.versionId = versionId;
   }
 
   getCompetencesScore(capacity) {
@@ -33,6 +35,7 @@ export class V3CertificationScoring {
     allAreas,
     competenceList,
     minimumAnswersRequiredToValidateACertification,
+    versionId,
   }) {
     const competencesForScoring =
       competenceForScoringConfiguration?.map(({ competence: competenceCode, values }) => {
@@ -50,6 +53,7 @@ export class V3CertificationScoring {
       competencesForScoring,
       certificationScoringConfiguration,
       minimumAnswersRequiredToValidateACertification,
+      versionId,
     });
   }
 }
