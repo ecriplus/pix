@@ -32,6 +32,9 @@ function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
     commentForOrganization,
     reproducibilityRate: reproducibilityRateAsNumber,
     competenceMarks: competenceMarks,
+    capacity: assessmentResultDTO.capacity,
+    reachedMeshIndex: assessmentResultDTO.reachedMeshIndex,
+    versionId: assessmentResultDTO.versionId,
   });
 }
 
@@ -51,6 +54,9 @@ const getLatestAssessmentResult = async function ({ certificationCourseId }) {
       juryId: 'assessment-results.juryId',
       pixScore: 'assessment-results.pixScore',
       reproducibilityRate: 'assessment-results.reproducibilityRate',
+      capacity: 'assessment-results.capacity',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
+      versionId: 'assessment-results.versionId',
       competenceMarkId: 'competence-marks.id',
       competenceMarkAreaCode: 'competence-marks.area_code',
       competenceMarkCompetenceCode: 'competence-marks.competence_code',
