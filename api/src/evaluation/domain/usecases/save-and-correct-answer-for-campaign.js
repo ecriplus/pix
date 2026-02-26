@@ -78,18 +78,21 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
       knowledgeElements: knowledgeElementsToAdd,
       campaignParticipationId: assessment.campaignParticipationId,
     });
-    answerSaved.levelup = await computeLevelUpInformation({
-      answerSaved,
-      userId,
-      competenceId: challenge.competenceId,
-      locale,
-      knowledgeElementsBefore,
-      knowledgeElementsAdded: knowledgeElementsToAdd,
-      scorecardService,
-      areaRepository,
-      competenceRepository,
-      competenceEvaluationRepository,
-    });
+    answerSaved.levelup = {};
+    if (!campaign.isExam) {
+      answerSaved.levelup = await computeLevelUpInformation({
+        answerSaved,
+        userId,
+        competenceId: challenge.competenceId,
+        locale,
+        knowledgeElementsBefore,
+        knowledgeElementsAdded: knowledgeElementsToAdd,
+        scorecardService,
+        areaRepository,
+        competenceRepository,
+        competenceEvaluationRepository,
+      });
+    }
   }
 
   if (userId) {
