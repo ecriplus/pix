@@ -21,7 +21,7 @@ const validateSiecleXmlFile = async function ({
   importStorage,
   importOrganizationLearnersJobRepository,
 }) {
-  await DomainTransaction.execute(async () => {
+  const organizationImport = await DomainTransaction.execute(async () => {
     const organizationImport = await organizationImportRepository.get(organizationImportId);
 
     const organization = await organizationRepository.get(organizationImport.organizationId);
@@ -44,10 +44,7 @@ const validateSiecleXmlFile = async function ({
       if (isEmpty(organizationLearnerData)) {
         throw new SiecleXmlImportError(ERRORS.EMPTY);
       }
-
-      await importOrganizationLearnersJobRepository.performAsync(
-        new ImportOrganizationLearnersJob({ organizationImportId: organizationImport.id }),
-      );
+      return organizationImport;
     } catch (error) {
       if (error instanceof AggregateImportError) {
         errors.push(...error.meta);
@@ -63,6 +60,10 @@ const validateSiecleXmlFile = async function ({
       await organizationImportRepository.save(organizationImport);
     }
   });
+
+  await importOrganizationLearnersJobRepository.performAsync(
+    new ImportOrganizationLearnersJob({ organizationImportId: organizationImport.id }),
+  );
 };
 
 export { validateSiecleXmlFile };

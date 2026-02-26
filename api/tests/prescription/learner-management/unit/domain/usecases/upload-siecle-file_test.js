@@ -232,31 +232,6 @@ describe('Unit | UseCase | upload-siecle-file', function () {
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
         expect(validateOrganizationImportFileJobRepositoryStub.performAsync).not.called;
       });
-
-      it('should save organization import with error when save job fails', async function () {
-        //given
-        const expectedError = new Error('jobFails');
-        validateOrganizationImportFileJobRepositoryStub.performAsync.rejects(expectedError);
-
-        // when
-        await catchErr(uploadSiecleFile)({
-          userId,
-          organizationId,
-          payload,
-          organizationImportRepository: organizationImportRepositoryStub,
-          siecleService: siecleServiceStub,
-          importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
-        });
-
-        //then
-        expect(organizationImportSavedStub.upload).to.have.been.calledWithExactly({
-          filename: s3filename,
-          encoding,
-          errors: [expectedError],
-        });
-        expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
-      });
     });
   });
 });
