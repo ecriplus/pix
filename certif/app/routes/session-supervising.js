@@ -21,12 +21,13 @@ export default class SessionSupervisingRoute extends Route {
       try {
         await this.store.queryRecord('session-for-supervising', { sessionId: model.id });
       } catch (response) {
-        this.#stopPolling();
         if (response?.errors?.[0]?.status === '401') {
+          this.#stopPolling();
           this.router.replaceWith('login-session-invigilator');
         }
 
         if (response.message === NO_INTERNET_MESSAGE) {
+          this.#stopPolling();
           this.pixToast.sendErrorNotification({
             message: this.intl.t('pages.session-supervising-error.no-internet-error'),
           });
