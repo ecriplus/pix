@@ -54,7 +54,9 @@
                   ],
                   "highlightedSentence": "L’entreprise agroalimentaire AgroDélices a subi une <strong>fraude au président</strong>, entraînant la perte de <strong>150 000 €</strong>.",
                   "colorOfHighlightSentence": "#000000"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -391,7 +393,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -460,7 +464,9 @@
                           "days": -10,
                           "minutes": -2
                         }
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "95c9b0b1-8e62-417e-a8ad-48d02cd27878",
@@ -519,7 +525,9 @@
                           "days": -4,
                           "minutes": -14
                         }
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "b6d97db2-c642-4b6f-a808-a41ea6c43ba9",
@@ -586,7 +594,9 @@
                             "minutes": -670
                           }
                         }
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "6a1432fa-40cd-4c85-a96c-d0172cf5c0e3",
@@ -758,7 +768,9 @@
                   ],
                   "highlightedSentence": "Un important groupe hôtelier a confirmé avoir été victime d’une cyberattaque reposant sur l’ingénierie sociale.",
                   "colorOfHighlightSentence": "#000000"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

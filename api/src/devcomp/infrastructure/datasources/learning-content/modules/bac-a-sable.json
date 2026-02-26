@@ -1143,7 +1143,9 @@
                       "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -1230,7 +1232,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

@@ -84,7 +84,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -176,7 +178,9 @@
                       "info": "🔈 Haut-parleur / Microphone : production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -474,7 +478,9 @@
                         ],
                         "highlightedSentence": "Des enfants participent parfois au tri ou au transport du minerai, travaillant dans des conditions dangereuses et sans protection.",
                         "colorOfHighlightSentence": "#483248"
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "664090f9-9d14-45f8-bfbd-8c09715ee51a",
@@ -1060,7 +1066,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

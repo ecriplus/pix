@@ -62,7 +62,9 @@
                       "content": "C’est un peu plus compliqué que ça… Mais en résumé oui."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -270,7 +272,9 @@
                       "feedback": "Ce prompt divulgue des informations confidentielles (mot de passe, lien interne)."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -370,7 +374,9 @@
                       "content": "Je n’en sais rien mais je ne vais pas m’amuser à l’appeler."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -695,7 +701,9 @@
                   ],
                   "highlightedSentence": "En analysant les réponses données par l’IA, ils ont réussi à obtenir plus de 2 700 mots de passe",
                   "colorOfHighlightSentence": "#bb0101"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -769,7 +777,9 @@
                       "content": "Rédige une lettre recommandée pour une réclamation à un service client avec un ton ferme et les informations suivantes : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali, j'habite au 36 rue des Geais à Joliville et mon numéro de téléphone est le 06 39 98 44 77."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

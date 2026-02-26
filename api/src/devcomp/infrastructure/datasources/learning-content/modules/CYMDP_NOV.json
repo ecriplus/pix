@@ -70,7 +70,9 @@
                       "content": "Mais non, ce mot de passe n’est pas du tout assez fort. Un pirate informatique peut le trouver facilement ! 😐"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -142,7 +144,9 @@
                       }
                     ]
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -196,7 +200,9 @@
                       "content": "En fait, les pirates ont aussi d’autres techniques pour trouver les mots de passe. ..🥲"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -284,7 +290,9 @@
                     "12345"
                   ],
                   "expectedPassword": "marseille"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -344,7 +352,9 @@
                       "content": "Quoi ? Il y a encore autre chose ? Ils sont forts ces pirates ! 😧"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -465,7 +475,9 @@
                       "content": "Eh oui ! Le mieux, c’est même d’avoir un mot de passe différent pour chacun de tes services en ligne ! ☺️"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -763,7 +775,9 @@
                     "Bonjour1",
                     "1234567"
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -826,7 +840,9 @@
                       "content": "Trop malin 😍"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

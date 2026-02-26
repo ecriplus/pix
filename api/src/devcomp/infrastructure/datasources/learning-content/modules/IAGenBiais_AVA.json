@@ -71,7 +71,9 @@
                       "content": "Justement. Cette IA ne sait pas si tu vas prendre un risque. Alors elle préfère refuser de te répondre plutôt que de te donner un conseil potentiellement dangereux."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -227,7 +229,9 @@
                             "response": "Assurez-vous que chacun évolue dans un cadre serein. Évitez les situations susceptibles de générer un conflit ou une charge excessive."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -260,7 +264,9 @@
                             "response": "La collaboration dépend de multiples facteurs : communication, répartition des rôles, objectifs partagés… Il existe différentes approches possibles selon les équipes."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -293,7 +299,9 @@
                             "response": "Vous êtes déjà quelqu’un avec une vraie capacité à fédérer les autres. En équipe, votre attitude positive peut beaucoup aider. Continuez à partager vos idées : elles comptent vraiment."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 }
@@ -402,7 +410,9 @@
                       "content": "..."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -508,7 +518,9 @@
                       }
                     ]
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -799,7 +811,9 @@
                             "content": "Il est souvent préférable de maintenir une communication apaisée et de chercher des compromis lorsque cela est possible."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "716020bb-3900-445c-bd50-ac07588351db",
@@ -854,7 +868,9 @@
                             "content": "Avant toute chose, assurez-vous de respecter les règles en vigueur et de vérifier les autorisations nécessaires."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "b47f8c2e-3e7d-4a19-bf5f-9c5a7c1f8d43",
@@ -909,7 +925,9 @@
                             "content": "Cet échec ne remet pas en cause vos compétences. Vous avez de nombreuses qualités et cet examen ne définit pas votre valeur."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "d58a3f47-8a12-4c6e-9b4f-3e7c91a5d210",

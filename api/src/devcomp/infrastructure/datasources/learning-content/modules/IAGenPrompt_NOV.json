@@ -62,7 +62,9 @@
                       "content": "C’est super simple ! Tu lui écris ce que tu veux, mais fais bien attention à ton prompt. 😉"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -139,7 +141,9 @@
                       "tooltipPosition": "bottom"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -248,7 +252,9 @@
                       "response": "<p>Voici comment bien faire le pont en yoga, ou <strong>\"Urdhva Dhanurasana\"</strong>.</p><ul><li>Allonge-toi <strong>sur le dos, genoux pliés</strong>, pieds à plat et écartés à la largeur du bassin.</li><li> Pose les mains <strong>près des oreilles</strong>, doigts pointés vers les épaules.</li><li> Pousse d’abord <strong>dans les pieds</strong> → soulève le bassin.</li><li> Ensuite pousse <strong>dans les mains</strong> → décolle la tête et ouvre la poitrine.</li><li> Cherche la <strong>longueur</strong>, pas la hauteur : bras et jambes actifs.</li></ul><p><strong>À éviter</strong></p><ul><li>Monter d’un coup (risque pour les poignets et lombaires).</li><li>Laisser les coudes ou genoux s’écarter.</li><li>Lancer la tête en arrière</li></ul><p>Si tu veux, je peux te donner des <strong>astuces</strong> pour progresser selon ton niveau.</p>"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -357,7 +363,9 @@
                       "response": "<p> <strong>Samedi </strong> </p><p> 🍲 Déjeuner : Tajine de légumes & pois chiches, tartelette citron–basilic meringuée<p> 🍄Dîner : Wellington végétarien, pavlova coco–fruits exotiques</p>  <p><strong>Dimanche </strong></p> <p> 🍝 Déjeuner : Cannellonis ricotta–épinards, tiramisu au café et chocolat noir</p><p> 🥕 Dîner : Velouté carotte–gingembre, salade de lentille & œuf mollet, moelleux cœur coulant</p>"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -433,7 +441,9 @@
                       "content": "<p>Voici cinq options d’animaux adaptés à la vie en appartement :</p> <p>1. Chat</p><p>2. Poisson</p><p>3. Lapin</p><p>4. Crocodile</p><p>5. Hamster</p>"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

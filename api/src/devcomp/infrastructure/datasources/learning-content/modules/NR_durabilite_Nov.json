@@ -257,7 +257,9 @@
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
                   "imageTextDisplay": ""
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -312,7 +314,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

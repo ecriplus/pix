@@ -196,7 +196,9 @@
                   "failImage": "https://assets.pix.org/modules/deepfakes/failimage.svg",
                   "infoImage": "https://assets.pix.org/modules/deepfakes/infoimage.svg",
                   "searchImage": "https://assets.pix.org/modules/deepfakes/poi-deepfake.gif"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -645,7 +647,9 @@
                   ],
                   "highlightedSentence": "« Il s’agit d’un deepfake »",
                   "colorOfHighlightSentence": "#bb0101"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

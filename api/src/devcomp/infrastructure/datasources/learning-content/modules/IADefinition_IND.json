@@ -87,7 +87,9 @@
                       "content": "Écoute, je t’explique comment ça marche, tu verras s’il est fiable."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1079,7 +1081,9 @@
                   "randomSlides": false,
                   "titleLevel": 0,
                   "disableAnimation": false
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

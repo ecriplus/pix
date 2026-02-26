@@ -62,7 +62,9 @@
                       "response": "La natation est une excellente activité de rééducation après une blessure car elle permet de renforcer les muscles et d’améliorer la mobilité sans exercer de pression excessive sur les articulations."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
