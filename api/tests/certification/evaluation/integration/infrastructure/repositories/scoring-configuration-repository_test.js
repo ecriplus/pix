@@ -93,6 +93,7 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
 
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
+      expect(result.versionId).to.be.a('number');
       expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
       expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-8);
@@ -128,6 +129,7 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
 
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
+      expect(result.versionId).to.equal(1);
       expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
     });

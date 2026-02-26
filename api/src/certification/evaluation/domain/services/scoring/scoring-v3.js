@@ -47,7 +47,6 @@ export function handleV3CertificationScoring({
   v3CertificationScoring,
   cleaScoringCriteria,
   scoringDegradationService,
-  versionId,
 }) {
   if (candidate.hasPixPlusSubscription) {
     return {
@@ -72,7 +71,7 @@ export function handleV3CertificationScoring({
     maximumAssessmentLength,
     minimumAnswersRequiredToValidateACertification:
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
-    versionId,
+    versionId: v3CertificationScoring.versionId,
   });
 
   let doubleCertificationScoring = null;

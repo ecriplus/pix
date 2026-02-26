@@ -103,7 +103,6 @@ export async function scoreV3Certification({
     algorithm,
     v3CertificationScoring,
     cleaScoringCriteria,
-    versionId: version.id,
   });
 
   const certificationAssessmentHistory = CertificationAssessmentHistory.fromChallengesAndAnswers({
