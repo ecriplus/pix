@@ -8,6 +8,7 @@ const baseConfiguration = {
   connection: {
     connectionString: process.env.DATAWAREHOUSE_DATABASE_URL,
   },
+  disableJsonTypesParsing: true,
 };
 
 const environments = {
