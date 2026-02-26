@@ -1,4 +1,11 @@
-export function buildPostgresEnvironment({ connection, pool, migrationsDirectory, seedsDirectory, name }) {
+export function buildPostgresEnvironment({
+  connection,
+  pool,
+  migrationsDirectory,
+  seedsDirectory,
+  name,
+  disableJsonTypesParsing = false,
+}) {
   return {
     name,
     client: 'postgresql',
@@ -17,5 +24,8 @@ export function buildPostgresEnvironment({ connection, pool, migrationsDirectory
       loadExtensions: ['.js'],
     },
     asyncStackTraces: process.env.KNEX_ASYNC_STACKTRACE_ENABLED !== 'false',
+    customFlags: {
+      disableJsonTypesParsing,
+    },
   };
 }

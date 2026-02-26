@@ -22,7 +22,7 @@ export class DatabaseConnection {
   constructor(knexConfig) {
     this.#hasConnection = Boolean(knexConfig?.connection?.connectionString);
     if (this.#hasConnection) {
-      if (knexConfig.name === 'datawarehouse') {
+      if (knexConfig?.customFlags?.disableJsonTypesParsing) {
         disableTypeCastingForJsonTypes(knexConfig);
       }
       this.knex = Knex(knexConfig);
