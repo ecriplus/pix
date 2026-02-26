@@ -296,7 +296,7 @@
         "ASSESSMENT": "Campaña de evaluación",
         "CAMPAIGN": "Campaña de evaluación",
         "COMBINED_COURSE": "Ruta de aprendizaje",
-        "EXAM": "Modo de consulta [beta]",
+        "EXAM": "Modo de consulta",
         "FORMATION": "Formación",
         "MODULE": "Módulo",
         "PROFILES_COLLECTION": "Campaña de recogida de perfiles"
@@ -305,7 +305,7 @@
         "ASSESSMENT": "Evaluación",
         "CAMPAIGN": "Evaluación",
         "COMBINED_COURSE": "Ruta de aprendizaje",
-        "EXAM": "Modo de consulta [beta]",
+        "EXAM": "Modo de consulta",
         "FORMATION": "Formación",
         "MODULE": "Módulo",
         "PROFILES_COLLECTION": "Colección de perfiles"
@@ -799,7 +799,7 @@
         "assessment": "Evaluación de los participantes",
         "assessment-info": "Una campaña de evaluación permite poner a prueba a los participantes sobre temas concretos.",
         "combined-course": "Crear una ruta combinada",
-        "exam": "Modo de consulta [beta]",
+        "exam": "Modo de consulta",
         "exam-info": "Una campaña en \"modo test\" permite examinar a los participantes sobre temas específicos, sin tener en cuenta su perfil de usuario ni influir en él. Los tests propuestos son personalizados para cada participante, en función de lo avanzado que esté en el curso.",
         "label": "¿Cuál es el objetivo de su campaña?",
         "profiles-collection": "Recoger los perfiles Pix de los participantes",
@@ -922,7 +922,7 @@
       },
       "campaign-type": {
         "assessment": "Campaña de evaluación",
-        "exam": "Campaña de concursos [beta]",
+        "exam": "Campaña de concursos",
         "profiles-collection": "Campaña de recogida de perfiles",
         "title": "Tipo de campaña"
       },

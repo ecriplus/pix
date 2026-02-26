@@ -296,7 +296,7 @@
         "ASSESSMENT": "Campagne d'évaluation",
         "CAMPAIGN": "Campagne d'évaluation",
         "COMBINED_COURSE": "Parcours apprenant",
-        "EXAM": "Mode interro [bêta]",
+        "EXAM": "Mode interro",
         "FORMATION": "Formation",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Campagne de collecte de profil"
@@ -305,7 +305,7 @@
         "ASSESSMENT": "Évaluation",
         "CAMPAIGN": "Évaluation",
         "COMBINED_COURSE": "Parcours apprenant",
-        "EXAM": "Mode interro [bêta]",
+        "EXAM": "Mode interro",
         "FORMATION": "Formation",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Collecte de profil"
@@ -799,7 +799,7 @@
         "assessment": "Évaluer les participants",
         "assessment-info": "Une campagne d’évaluation permet de tester les participants sur des sujets précis.",
         "combined-course": "Créer un parcours combiné",
-        "exam": "Mode interro [bêta]",
+        "exam": "Mode interro",
         "exam-info": "Une campagne de type “mode interro” permet de tester les participants sur des sujets précis, sans prendre en compte le profil utilisateur, et sans impacter celui-ci. Les épreuves proposées sont personnalisées pour chaque participant selon son avancement dans le parcours.",
         "label": "Quel est l'objectif de votre campagne ?",
         "profiles-collection": "Collecter les profils Pix des participants",
@@ -922,7 +922,7 @@
       },
       "campaign-type": {
         "assessment": "Campagne d'évaluation",
-        "exam": "Campagne d'interro [bêta]",
+        "exam": "Campagne d'interro",
         "profiles-collection": "Campagne de collecte de profils",
         "title": "Type de la campagne"
       },

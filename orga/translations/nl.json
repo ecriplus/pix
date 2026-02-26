@@ -296,7 +296,7 @@
       "explanation": {
         "ASSESSMENT": "Beoordelingscampagne",
         "COMBINED_COURSE": "Leerprogramma",
-        "EXAM": "Vraagmodus [beta]",
+        "EXAM": "Vraagmodus",
         "FORMATION": "Training",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Campagne profielenverzameling"
@@ -304,7 +304,7 @@
       "information": {
         "ASSESSMENT": "Beoordeling",
         "COMBINED_COURSE": "Leerprogramma",
-        "EXAM": "Vraagmodus [beta]",
+        "EXAM": "Vraagmodus",
         "FORMATION": "Training",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Profielverzameling"
@@ -798,7 +798,7 @@
         "assessment": "Deelnemers evalueren",
         "assessment-info": "Een beoordelingscampagne stelt deelnemers in staat om getest te worden op specifieke onderwerpen.",
         "combined-course": "Maak een gecombineerde cursus",
-        "exam": "Vraagmodus [beta]",
+        "exam": "Vraagmodus",
         "exam-info": "Met een campagne in de “quizmodus” kunnen deelnemers worden getest op specifieke onderwerpen, zonder rekening te houden met hun gebruikersprofiel of er invloed op te hebben. De aangeboden tests zijn gepersonaliseerd voor elke deelnemer, afhankelijk van hoe ver ze gevorderd zijn in het traject.",
         "label": "Wat is het doel van je campagne?",
         "profiles-collection": "Pix-profielen van deelnemers verzamelen",
@@ -921,7 +921,7 @@
       },
       "campaign-type": {
         "assessment": "Beoordelingscampagne",
-        "exam": "Quiz-campagne[beta]",
+        "exam": "Quiz-campagne",
         "profiles-collection": "Verzamelcampagne profielen",
         "title": "Soort campagne"
       },
