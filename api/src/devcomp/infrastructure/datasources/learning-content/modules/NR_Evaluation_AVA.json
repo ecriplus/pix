@@ -83,7 +83,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Paul<br></p>",
+                    "content": "Paul",
                     "feedback": {
                       "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
                     }
@@ -229,8 +229,39 @@
                 {
                   "elements": [
                     {
+                      "id": "9f02c54c-8e18-40a3-9e8a-bef01734f4fb",
+                      "type": "text",
+                      "content": "<p>Le meilleur suivi de consommation des ménages est un effet d'efficacité.</p>"
+                    },
+                    {
                       "id": "22b58806-c59e-46ef-9068-6af398d6b784",
-                      "type": "text"
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Selon vous, qu'est-ce qu'un effet d'efficacité ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>C'est lorsqu'un processus devient plus facile à réaliser, ou donne de meilleures performances.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp; </p>\n<p>L’effet d’efficacité est un exemple d’effet indirect.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>C'est lorsqu'une nouvelle technologie remplace une ancienne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il s’agissait d’un processus qui donne de meilleur performances. </p>\n<p>L’effet d’efficacité est un exemple d’effet indirect.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Il s’agissait d’un processus qui donne de meilleur performances. \nL’effet d’efficacité est un exemple d’effet indirect.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
                   ]
                 },
@@ -239,7 +270,37 @@
                     {
                       "id": "74c689fd-8e8f-40a0-8758-75b7deee6621",
                       "type": "text",
-                      "content": "🏗️"
+                      "content": "<p>La réalisation de certaines opérations à distance plutôt que sur place est un effet de substitution.</p>"
+                    },
+                    {
+                      "id": "6b9a3fb3-5cee-4382-be2e-174936694090",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Selon vous, qu'est-ce qu'un effet de substitution ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>C'est lorsqu'un processus devient plus facile à réaliser, ou donne de meilleures performances</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il s'agissant d'une nouvelle technologie qui remplace une ancienne.</p><p>L’effet de subsitution est un exemple d’effet indirect.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>C'est lorsqu'une nouvelle technologie remplace une ancienne.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp; </p>\n<p>L’effet de subsitution est un exemple d’effet indirect.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, il s'agissant d'une nouvelle technologie qui remplace une ancienne.</p><p>L’effet de subsitution est un exemple d’effet indirect.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
                   ]
                 }
