@@ -1,5 +1,5 @@
 import { config } from '../../../shared/config.js';
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/date-utils.js';
 
@@ -21,7 +21,7 @@ import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/da
  * @param{EventLoggingJobRepository} params.eventLoggingJobRepository
  * @returns {Promise<void>}
  */
-const anonymizeUser = withTransaction(async function ({
+const anonymizeUser = async function ({
   userId,
   anonymizedByUserId,
   anonymizedByUserRole,
@@ -38,36 +38,38 @@ const anonymizeUser = withTransaction(async function ({
   userAcceptanceRepository,
   learnersApiRepository,
 }) {
-  const user = await userRepository.get(userId);
+  await DomainTransaction.execute(async () => {
+    const user = await userRepository.get(userId);
 
-  await userRepository.get(anonymizedByUserId);
+    await userRepository.get(anonymizedByUserId);
 
-  await authenticationMethodRepository.removeAllAuthenticationMethodsByUserId({ userId });
+    await authenticationMethodRepository.removeAllAuthenticationMethodsByUserId({ userId });
 
-  await refreshTokenRepository.revokeAllByUserId({ userId });
+    await refreshTokenRepository.revokeAllByUserId({ userId });
 
-  if (user.email) {
-    await resetPasswordDemandRepository.removeAllByEmail(user.email);
-  }
+    if (user.email) {
+      await resetPasswordDemandRepository.removeAllByEmail(user.email);
+    }
 
-  await _anonymizeOrganizationLearner({
-    userId,
-    learnersApiRepository,
+    await _anonymizeOrganizationLearner({
+      userId,
+      learnersApiRepository,
+    });
+
+    await _anonymizeMemberships({ membershipRepository, userId, updatedByUserId: anonymizedByUserId });
+
+    await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
+
+    await _anonymizeCertificationCenterMemberships(certificationCenterMembershipRepository, userId, anonymizedByUserId);
+
+    await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
+
+    await userAcceptanceRepository.removeAllByUserId(userId);
+
+    await _anonymizeUserLogin({ userId, userLoginRepository });
+
+    await _anonymizeUser({ user, anonymizedByUserId, userRepository });
   });
-
-  await _anonymizeMemberships({ membershipRepository, userId, updatedByUserId: anonymizedByUserId });
-
-  await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
-
-  await _anonymizeCertificationCenterMemberships(certificationCenterMembershipRepository, userId, anonymizedByUserId);
-
-  await _anonymizeLastUserApplicationConnections(lastUserApplicationConnectionsRepository, userId);
-
-  await userAcceptanceRepository.removeAllByUserId(userId);
-
-  await _anonymizeUserLogin({ userId, userLoginRepository });
-
-  await _anonymizeUser({ user, anonymizedByUserId, userRepository });
 
   if (config.auditLogger.isEnabled) {
     await eventLoggingJobRepository.performAsync(
@@ -80,7 +82,7 @@ const anonymizeUser = withTransaction(async function ({
       }),
     );
   }
-});
+};
 
 async function _anonymizeMemberships({ userId, anonymizedByUserId, membershipRepository }) {
   // Anonymize last accessed at
