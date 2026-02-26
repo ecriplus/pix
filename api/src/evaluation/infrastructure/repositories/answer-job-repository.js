@@ -22,17 +22,8 @@ export class AnswerJobRepository extends JobRepository {
     )
       return;
 
-    const knexConn = DomainTransaction.getConnection();
-
-    if (knexConn.isTransaction) {
-      await super.performAsync(job);
-      await this.#profileRewardTemporaryStorage.increment(job.userId);
-    } else {
-      await DomainTransaction.execute(async () => {
-        await super.performAsync(job);
-        await this.#profileRewardTemporaryStorage.increment(job.userId);
-      });
-    }
+    await super.performAsync(job);
+    await this.#profileRewardTemporaryStorage.increment(job.userId);
   }
 }
 
