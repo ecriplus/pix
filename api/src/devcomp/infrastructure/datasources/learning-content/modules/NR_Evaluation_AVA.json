@@ -219,13 +219,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "6500aafd-1062-4da7-8fa2-6df096f6d632",
-      "type": "blank",
-      "grains": [
+        },
         {
           "id": "e7a0128a-63cb-49db-9bba-a7e294900b8d",
           "type": "transition",
@@ -348,13 +342,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "d22c7f74-b5e9-4901-85b2-c62a3311ecb7",
-      "type": "blank",
-      "grains": [
+        },
         {
           "id": "83c6baaa-681a-4fea-900a-6f35d0637aa2",
           "type": "transition",
