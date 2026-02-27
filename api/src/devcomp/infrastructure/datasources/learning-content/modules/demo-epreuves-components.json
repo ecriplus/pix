@@ -151,7 +151,9 @@
                       "incorrectFeedback": "Observez bien le nom et l’adresse de l’expéditeur. Retentez votre chance ! "
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -176,7 +178,9 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "calcul-impact",
-                "props": {}
+                "props": {},
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -203,7 +207,9 @@
                 "tagName": "capacity-calculation",
                 "props": {
                   "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -313,7 +319,9 @@
                       "tooltipPosition": "bottom"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -424,7 +432,9 @@
                   "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                   "llmMessage": "On peut mettre du ",
                   "wordsToAdd": ["beurre", "et", "du"]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -483,7 +493,9 @@
                       "image": "https://assets.pix.org/modules/flip-cards/transport.png"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -587,7 +599,9 @@
                       "response": "6"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -668,7 +682,9 @@
                       "response": "courant"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -825,7 +841,9 @@
                       ]
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -890,7 +908,9 @@
                       }
                     ]
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -946,7 +966,9 @@
                       "content": "Non, je m'en vais."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -992,7 +1014,9 @@
                       "response": "1. Tokyo<br>2. Nala<br>3. Milou<br>4. Sushi<br>5. Luna<br>6. Apéro<br>7. Simba<br>8. Paco<br>9. Bart<br>10. Cookie"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1075,7 +1099,9 @@
                       "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1100,7 +1126,9 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "phishing-message",
-                "props": {}
+                "props": {},
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1196,7 +1224,9 @@
                     }
                   ],
                   "informationMessage": "Souvent, les escrocs envoient de faux messages qui semblent venir d’un proche, d’une célébrité ou d’un service connu pour gagner votre confiance."
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1298,7 +1328,9 @@
                       "feedback": "On reformule ici afin d’éviter de donner des informations perso à une IA, c’est pas bieng faut pas le faire"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1333,7 +1365,9 @@
                   ],
                   "highlightedSentence": "« Il s’agit d’un deepfake »",
                   "colorOfHighlightSentence": "#bb0101"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1420,7 +1454,9 @@
                   ],
                   "randomSlides": false,
                   "disableAnimation": false
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1476,7 +1512,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1506,7 +1544,9 @@
                   "failImage": "https://epreuves.pix.fr/images/icones/actu.jpg",
                   "infoImage": "https://epreuves.pix.fr/images/icones/avg.png",
                   "searchImage": "https://epreuves.pix.fr/images/icones/avira.svg"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1579,7 +1619,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1630,7 +1672,9 @@
                       "feedback": "Rappeler le numéro, c’est prendre le risque de tomber sur un escroc qui vous manipulera.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1673,7 +1717,9 @@
                     "content": "[Madame, / Monsieur,]<br><br>Nous vous remercions sincèrement pour votre message et l’intérêt que vous portez à [Nom de votre entreprise] ainsi qu’à nos services.Nous répondrons à votre message dans les plus brefs délais et restons à votre disposition pour toute demande supplémentaire, y compris une rencontre personnelle si vous le souhaitez. D’ici là, vous pouvez obtenir des informations complémentaires sur nos [Produits/Services] en consultant, par exemple, nos réseaux sociaux sur [Lien vers les réseaux sociaux, par exemple, YouTube] ou en téléchargeant notre [Lien de téléchargement, tel qu’une présentation d’entreprise ou un document technique].<br>Chaleureusement,<br>L’équipe de [Nom de votre entreprise]",
                     "name": "Alex"
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1712,7 +1758,9 @@
                     "12345"
                   ],
                   "expectedPassword": "marseille"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -1763,7 +1811,9 @@
                       }
                     ]
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

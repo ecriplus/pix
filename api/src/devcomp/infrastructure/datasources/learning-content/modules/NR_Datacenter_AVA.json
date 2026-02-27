@@ -390,7 +390,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -430,7 +432,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -470,7 +474,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -510,7 +516,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 }
@@ -620,7 +628,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "9b8689af-c414-4cfc-a19d-1bb8991b7330",
@@ -693,7 +703,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "19d83e51-2310-4564-8037-44105f3b514f",
@@ -772,7 +784,9 @@
                             "content": "Bonne idée ! Il va falloir creuser... Merci à tous pour vos propositions."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "1f59df7b-6743-4ae9-99b8-2524b4305b1f",
@@ -1116,7 +1130,9 @@
                   "disableAnimation": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:2"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -1255,7 +1271,9 @@
                   ],
                   "highlightedSentence": "centres de données",
                   "colorOfHighlightSentence": "#6B2518"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

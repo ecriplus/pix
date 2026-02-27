@@ -76,7 +76,9 @@
                       "content": " Oui ! Je lui ai demandé de trouver un bowling pour se retrouver là-bas samedi soir... Mais une fois arrivés à l’adresse donnée par l’IA, c’était une agence immobilière. 😤"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -136,7 +138,9 @@
                             "content": "L’invention d’Internet est couramment attribuée à <strong>Bill Gates</strong> , le fondateur de Microsoft. Son objectif était de <strong>faciliter une communication universelle et interopérable</strong> entre les ordinateurs du monde entier."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "a2082653-6928-4931-b9e3-da97a0c799ed",
@@ -179,7 +183,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -201,7 +207,9 @@
                             "content": "Le mari de Marie Curie était Pierre Curie, physicien français. Ensemble, ils ont découvert la radioactivité et reçu le prix Nobel de physique en 1903."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "7610cfd4-cf56-45ae-8700-c7abc8d256a3",
@@ -244,7 +252,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -266,7 +276,9 @@
                             "content": "<strong>Absolument</strong>. La référence suivante confirme l’idée d’une petite taille pour Napoléon Bonaparte :<ul><li><strong>Ouvrage</strong> : \"Napoleon’s True Height\" (La Vraie Taille de Napoléon)</li><li><strong>Auteur</strong> : Jonathan Ellsworth (historien militaire)</li><li><strong>Publication</strong> : Presses Universitaires de Cambridge, 1983</li><li><strong>Conclusion clé</strong> : Sur la base d’une réévaluation des uniformes et des registres funéraires français de l’époque, Ellsworth avance que la taille de l’Empereur était d'1m57 à sa mort.</li></ul>"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "0e479354-152f-4245-acad-35ce025eec12",
@@ -309,7 +321,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -331,7 +345,9 @@
                             "content": "<strong>C’est une bonne intuition !</strong> ✅ Quand on cumule des pourcentages ainsi, l’augmentation totale est de <strong>20%</strong> sur la période de deux ans. On ajoute simplement les deux augmentations de 10 % à la population initiale. 📈"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "72d76f56-e5a6-489e-bca5-1301bbd5608c",
@@ -374,7 +390,9 @@
                             }
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 }
@@ -443,7 +461,9 @@
                       "content": "<p>Carlos Alcaraz n’a remporté <strong>qu’un</strong> titre à Roland-Garros à ce jour :</p> <ul>     <li><strong> 9 juin 2024</strong> : il gagne sa <strong>première </strong>victoire à Roland-Garros en battant Alexander Zverev en finale (6-3, 2-6, 5-7, 6-1, 6-2). </li> </ul> <p>Il totalise donc <strong>un </strong>titre à Paris (2024), et <strong>non deux</strong> pour le moment. Si tu pensais à un deuxième, peut-être mélanges-tu avec ses victoires à Wimbledon (2023) ou l’US Open 2022 ! Souhaites-tu que je t’en donne plus ?</p>"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -580,7 +600,9 @@
                       }
                     ]
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -924,7 +946,9 @@
                             "content": "Novak Djokovic va bien, il continue de performer à un niveau très élevé sur le circuit ATP. Ses récents résultats montrent qu’il reste l’un des meilleurs joueurs du monde. Il a eu quelques problèmes de santé et des blessures par le passé, mais il semble s’être bien rétabli."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "4973d664-0caf-4e10-9ea9-7fae95bf0164",
@@ -984,7 +1008,9 @@
                             "content": "<p>Voici un article traitant du traitement des eaux pluviales :<br><strong>Barra, M., Houeix, K., Hemminki, J., &amp; Grandin, G.</strong>&nbsp;(2019).&nbsp;<em>Gestion des eaux pluviales et biodiversité urbaine&nbsp;: état de la contamination et préconisations</em><em>.</em>&nbsp;<strong>Annales de la Floristique Régionale Île‑de‑France</strong>, 10–33.</p>"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "53332773-3d53-4d86-8ab3-7af01a291d1d",

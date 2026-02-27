@@ -297,7 +297,9 @@
                     "days": -20,
                     "minutes": -8880
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -859,7 +861,9 @@
                     "days": -1,
                     "minutes": -1
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -915,7 +919,9 @@
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
                   "imageTextDisplay": ""
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

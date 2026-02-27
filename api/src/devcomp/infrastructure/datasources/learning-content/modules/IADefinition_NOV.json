@@ -117,7 +117,9 @@
                       }
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -409,7 +411,9 @@
                       "tooltipPosition": "bottom"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -514,7 +518,9 @@
                       "image": "https://assets.pix.org/modules/ia-dit-ia/reco_fraude.svg"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

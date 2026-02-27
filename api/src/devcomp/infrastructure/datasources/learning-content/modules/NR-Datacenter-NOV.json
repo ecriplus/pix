@@ -284,7 +284,9 @@
                             "tooltipPosition": "bottom"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -332,7 +334,9 @@
                             "tooltipPosition": "bottom"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 }

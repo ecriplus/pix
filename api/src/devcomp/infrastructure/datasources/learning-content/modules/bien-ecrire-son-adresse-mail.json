@@ -95,7 +95,9 @@
                       "content": "Dans une adresse mail, il y a toujours le symbole arobase !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

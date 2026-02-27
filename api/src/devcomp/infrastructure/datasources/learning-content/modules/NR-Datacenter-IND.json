@@ -481,7 +481,9 @@
                   "disableAnimation": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:1"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -597,7 +599,9 @@
                       "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/iag.png"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

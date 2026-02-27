@@ -63,7 +63,9 @@
                       "content": "Moi, je l’ai reçu la semaine dernière. Ma sœur aussi, alors qu’elle n’a même pas de compte bancaire !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -248,7 +250,9 @@
                       "content": "Oui les escrocs sont forts, ils arrivent même à se faire passer pour une banque ! 🤯 "
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -345,7 +349,9 @@
                   ],
                   "informationMessage": "Souvent, les escrocs envoient de faux messages qui semblent venir d’un proche, d’une célébrité ou d’un service connu pour gagner votre confiance.",
                   "titleLevel": 0
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -393,7 +399,9 @@
                       "content": "Là, par exemple, le faux message de ta banque est très alarmiste. C’est pour te pousser à répondre."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -410,7 +418,9 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "phishing-message",
-                "props": {}
+                "props": {},
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -462,7 +472,9 @@
                       "content": "Déjà, tu m’en as parlé et c’est un bon réflexe."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -506,7 +518,9 @@
                       "feedback": "Rappeler le numéro, c’est prendre le risque de tomber sur un escroc qui vous manipulera.<br>Dans le doute vérifiez l’information en contactant la personne ou le service qui aurait écrit le message par un autre moyen. Par exemple ici, contacter sa banque au numéro de téléphone habituel après avoir reçu un sms suspect d’un conseiller bancaire."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -560,7 +574,9 @@
                       "content": "Merci Enzo ! Heureusement que tu étais là !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

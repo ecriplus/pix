@@ -385,7 +385,9 @@
                       "tooltipPosition": "bottom"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

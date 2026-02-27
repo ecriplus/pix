@@ -124,7 +124,9 @@
                       "content": "Non, je m'en vais."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
