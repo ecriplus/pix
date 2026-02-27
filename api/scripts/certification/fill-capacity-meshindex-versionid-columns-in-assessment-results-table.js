@@ -192,7 +192,7 @@ function findCorrespondingCoreScoringConfiguration(v3CertificationScorings, reco
   for (const v3CertificationScoring of v3CertificationScorings) {
     if (
       reconciledAt >= v3CertificationScoring.startDate &&
-      (v3CertificationScoring.expirationDate === null || reconciledAt < v3CertificationScoring.startDate)
+      (v3CertificationScoring.expirationDate === null || reconciledAt < v3CertificationScoring.expirationDate)
     ) {
       return v3CertificationScoring;
     }
