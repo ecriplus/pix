@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.343.0](https://github.com/1024pix/pix/compare/v5.342.0...v5.343.0) (2026-02-27)
+
+### :rocket: Amélioration
+
+- [#15275](https://github.com/1024pix/pix/pull/15275) Ajouter les nouvelles propriétés pour la consigne des POI côté API (PIX-21661) 
+- [#15251](https://github.com/1024pix/pix/pull/15251) Créa V2 module Antitivrus 
+- [#15292](https://github.com/1024pix/pix/pull/15292) Ne pas calculer les levelup en mode exam (PIX-21731) 
+
+### :bug: Correction
+
+- [#15304](https://github.com/1024pix/pix/pull/15304) Le scoring ne marche pas quand le candidat a un score de 0 pix (PIX-21760) 
+
+### :building_construction: Tech
+
+- [#15298](https://github.com/1024pix/pix/pull/15298) :broom: Réduit l'utilisation de LODASH ... 
+- [#15201](https://github.com/1024pix/pix/pull/15201) Réduit le nombre d'appels SQL généré par le endpoint de finalisation de session - sur la première étape de finalisation (PIX-21693)
+
 # [5.342.0](https://github.com/1024pix/pix/compare/v5.341.0...v5.342.0) (2026-02-27)
 
 ### :rocket: Amélioration
