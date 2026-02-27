@@ -67,7 +67,7 @@ test(
       const startCampaignPage = new StartCampaignPage(pixAppPage);
       await startCampaignPage.goToFirstChallenge(campaignCode as string);
       await test.step(` answering right or wrong according to pattern`, async () => {
-        while (!pixAppPage.url().endsWith('/checkpoint?finalCheckpoint=true')) {
+        while (!pixAppPage.url().includes('finalCheckpoint=true')) {
           const challengePage = new ChallengePage(pixAppPage);
           const challengeImprint = await challengePage.getChallengeImprint();
           snapshotHandler.push('challenge imprint to have value', challengeImprint);
