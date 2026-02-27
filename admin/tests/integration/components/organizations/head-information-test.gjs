@@ -20,6 +20,8 @@ module('Integration | Component | organizations/header-information', function (h
 
       // then
       assert.dom(screen.getByRole('heading', { name: 'Organization SCO' })).exists();
+      assert.dom(screen.getByText((_, element) => element.textContent === 'ID : 1')).exists();
+      assert.dom(screen.getByRole('button', { name: t('components.organizations.head-information.copy-id') })).exists();
     });
 
     test('it generates correct external dashboard URL', async function (assert) {

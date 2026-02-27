@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
+import CopyButton from 'pix-admin/components/ui/copy-button';
 import ENV from 'pix-admin/config/environment';
 
 export default class HeadInformation extends Component {
@@ -37,7 +38,7 @@ export default class HeadInformation extends Component {
   }
 
   <template>
-    <div class="organization__header">
+    <div class="organization__head-information">
       <div class="organization__logo">
         <figure class="organization__logo-figure">
           {{#if @organization.logoUrl}}
@@ -55,7 +56,18 @@ export default class HeadInformation extends Component {
       </div>
 
       <div class="organization__title">
-        <h1 class="organization__name">{{@organization.name}}</h1>
+        <div>
+          <h1 class="organization__name">{{@organization.name}}</h1>
+          <div class="organization__id">
+            <p>ID : <span>{{@organization.id}}</span></p>
+            <CopyButton
+              @id="copy-organization-id"
+              @value={{@organization.id}}
+              @tooltip={{t "components.organizations.head-information.copy-id"}}
+              @label={{t "components.organizations.head-information.copy-id"}}
+            />
+          </div>
+        </div>
 
         <ul class="organization-tags-list">
           {{#if this.hasChildren}}

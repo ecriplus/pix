@@ -764,6 +764,7 @@
       },
       "head-information": {
         "child-organization": "Organisation fille de",
+        "copy-id": "Copier l'ID",
         "parent-organization": "Organisation mère"
       },
       "information-section-view": {
