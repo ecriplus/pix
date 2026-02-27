@@ -158,7 +158,7 @@
                     {
                       "id": "e7fcc562-2f50-4e49-8c20-9297175e15e3",
                       "type": "text",
-                      "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un grand<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle  utilisent désormais des <strong>outils </strong>complémentaires (tool calling, anglais) qui leur permettent d’effectuer d’autres tâches.</p>"
+                      "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un grand<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle  utilisent désormais des <strong>outils </strong>complémentaires (tool calling, en anglais) qui leur permettent d’effectuer d’autres tâches.</p>"
                     }
                   ]
                 },
