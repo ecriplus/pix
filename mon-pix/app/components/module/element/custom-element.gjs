@@ -62,12 +62,6 @@ export default class ModulixCustomElement extends ModuleElement {
 
   <template>
     <div class="element-custom">
-      {{#if this.hasInstruction}}
-        <div class="element-custom__instruction">
-          {{htmlUnsafe @component.instruction}}
-        </div>
-      {{/if}}
-
       {{#if this.isInteractive}}
         <fieldset
           class="element-custom__container
@@ -80,6 +74,12 @@ export default class ModulixCustomElement extends ModuleElement {
           <div {{didInsert this.mountCustomElement}} />
         </fieldset>
       {{else}}
+        {{#if this.hasInstruction}}
+          <div class="element-custom__instruction">
+            {{htmlUnsafe @component.instruction}}
+          </div>
+        {{/if}}
+
         <div
           class={{if this.resetButtonDisplayed "element-custom--reset-state"}}
           {{didInsert this.mountCustomElement}}

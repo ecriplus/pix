@@ -197,4 +197,29 @@ module('Integration | Component | Module | Custom Element', function (hooks) {
       });
     });
   });
+
+  module('when custom element is not interactive', function () {
+    module('when custom element has instruction', function () {
+      test('should display instruction', async function (assert) {
+        // given
+        const customElement = {
+          id: 'b0e9d79f-1727-4861-ac89-bd834473d62b',
+          title: 'mon-custom-test',
+          instruction: 'Test POI quiz image',
+          tagName: 'llm-compare-messages',
+          props: {
+            conversation1: { title: 'Conversation 1', llmName: 'Nono' },
+            conversation2: { title: 'Conversation 2', llmName: 'Jaja' },
+          },
+          type: 'custom',
+        };
+
+        // when
+        const screen = await render(<template><ModulixCustomElement @component={{customElement}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('Test POI quiz image')).exists();
+      });
+    });
+  });
 });
