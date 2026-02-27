@@ -80,5 +80,5 @@ function _isOmitted(aString) {
 }
 
 function _hasNoExaminerComment(aString) {
-  return _.isEmpty(aString.trim());
+return aString == null || aString.trim() === "";
 }
