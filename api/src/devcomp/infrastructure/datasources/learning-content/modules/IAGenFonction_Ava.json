@@ -2,16 +2,16 @@
   "id": "4b3e2191-b9e6-4539-90bb-ef438895c157",
   "shortId": "a0bf86e9",
   "slug": "outils-ia",
-  "title": "La boîte à outils des IA",
+  "title": "Appeler des outils : la botte secrète des IA génératives",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>À leurs débuts les IA génératives conversationnelles ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br>\n<p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
+    "description": "<p>À leurs débuts les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
-      "Comprendre à quoi servent les appels d’outils dans les logiciels d’IA conversationnelle",
+      "<p>Comprendre à quoi servent les appels d’outils dans les logiciels d’IA&nbsp;</p>",
       "Comprendre le fonctionnement des appels d’outils par les logiciels d’IA",
       "Identifier des situations dans lesquelles l’appel d’outil par le logiciel d’IA est utile"
     ],
@@ -32,7 +32,9 @@
               "element": {
                 "id": "0fa496f9-61b0-4c55-9a19-a8c418db549f",
                 "type": "custom",
-                "instruction": "Yasmine et Steven emménagent ensemble. Ils ont décidé de faire des travaux.",
+                "title": "",
+                "instruction": "<p>Yasmine et Steven ont décidé de faire des travaux chez eux.</p>",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Début de la conversation entre Yasmine & Steven",
@@ -41,37 +43,23 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Hello mon cœur ! J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, c’est génial ! 🤩"
+                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, c’est génial ! 🤩"
                     },
                     {
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mais tu es sûre des réponses ? Je croyais que l’IA, c’était que pour le texte ! Et que pour les calculs, c’était pas top…"
+                      "content": "Mais tu es sûre des réponses ? Je croyais que l’IA, c’était que pour le texte ! Et que pour les calculs, c’était pas top…"
                     },
                     {
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "C’était avant ! Les IA se sont beaucoup améliorées !"
-                    },
-                    {
-                      "userName": "Steven",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Je suis pas hyper convaincu… 🤔"
-                    },
-                    {
-                      "userName": "Yasmine",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Attends, je vais te montrer !"
+                      "content": "Les IA se sont beaucoup améliorées. Regarde, je vais te montrer !"
                     }
                   ],
                   "animationSpeed": 0
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -86,7 +74,7 @@
               "element": {
                 "id": "45c54a3a-f5d5-48b4-b408-2efc1370dce4",
                 "type": "text",
-                "content": "Les logiciels d’IA conversationnelle ont beaucoup amélioré leurs capacités grâce aux appels à des outils. Regardons ça de plus près."
+                "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’appel à des outils.</p><p>Regardons ça de plus près.</p>"
               }
             }
           ]
@@ -107,7 +95,7 @@
               "element": {
                 "id": "540b867d-1e06-496c-a9e9-425c2012fef8",
                 "type": "text",
-                "content": "Yasmine a posé la même question à 2 logiciels d’IA conversationnelle différents.<br>Observez la différence entre ces 2 réponses."
+                "content": "<p>Yasmine a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
               }
             },
             {
@@ -134,21 +122,21 @@
                     "id": "1",
                     "content": "L’exemple 1",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu&nbsp;!</p><br><p>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, par exemple ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Bien vu&nbsp;!</p><p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "L’exemple 2",
                     "feedback": {
-                      "diagnosis": "<p>Eh non  !</p><p>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Eh non !</p><p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p>Les IA conversationnelles ont progressé grâce au fait de pouvoir appeler des outils, par exemple, ici, la génération d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   }
                 ],
@@ -160,7 +148,7 @@
         {
           "id": "0cdbd667-4b08-456c-abd8-fed3ca10422c",
           "type": "short-lesson",
-          "title": "L’intérêt de l’appel d’outil : leçon",
+          "title": "L’intérêt de l’appel d’outils : leçon",
           "components": [
             {
               "type": "stepper",
@@ -170,7 +158,7 @@
                     {
                       "id": "e7fcc562-2f50-4e49-8c20-9297175e15e3",
                       "type": "text",
-                      "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle grand public utilisent désormais des <strong>outils </strong>complémentaires qui leur permettent d’effectuer d’autres tâches.</p>"
+                      "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un grand<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle  utilisent désormais des <strong>outils </strong>complémentaires (tool calling, anglais) qui leur permettent d’effectuer d’autres tâches.</p>"
                     }
                   ]
                 },
@@ -179,7 +167,7 @@
                     {
                       "id": "7df2eef2-779e-4dca-a954-c4ca258994da",
                       "type": "text",
-                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles ?</h5><br> Par exemple, elles peuvent&nbsp;: <br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire des images ou un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅….</li></ul>"
+                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire des images ou un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅….</li></ul>"
                     },
                     {
                       "id": "c097beb6-b3cb-40ea-ac4a-028107c6e541",
@@ -216,199 +204,10 @@
             {
               "type": "element",
               "element": {
-                "id": "348c6c66-c4c1-4803-94ba-7901f6d26394",
-                "type": "custom",
-                "instruction": "<p>Yasmine utilise ChatPix 3.0</p><p>Analysez&nbsp;le prompt système de ChatPix 3.0 puis répondez aux questions.</p>",
-                "tagName": "pix-carousel",
-                "props": {
-                  "type": "image",
-                  "slides": [
-                    {
-                      "title": "Le prompt système",
-                      "description": "Le prompt système de ChatPix 3.0, utilisé par Yasmine",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/pre-prompt.jpg",
-                        "alt": "Le prompt système de ChatPix 3.0, utilisé par Yasmine"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "L’appel à l’outil génération d’image",
-                      "description": "L’appel à l’outil génération d’image de ChatPix 3.0 utilisé par Yasmine",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-generateur-image.jpg",
-                        "alt": "L’appel à l’outil génération d’image"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    },
-                    {
-                      "title": "L’appel à l’outil calculatrice",
-                      "description": "L’appel à l’outil calculatrice ChatPix 3.0, utilisé par Yasmine",
-                      "displayWidth": 500,
-                      "image": {
-                        "src": "https://assets.pix.org/draft/modules/IAGenFonctionAva/outil-calculatrice.jpg",
-                        "alt": "L’appel à l’outil calculatrice"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
-                      }
-                    }
-                  ],
-                  "randomSlides": false,
-                  "titleLevel": 1,
-                  "disableAnimation": false,
-                  "disableStyleAroundImage": false,
-                  "enableLoop": false,
-                  "imageTextDisplay": "1:1"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                "id": "d8c78172-4027-44f7-abe4-c316d4da0925",
+                "type": "text",
+                "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0 </p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants : <br>- generate_image : pour générer des images <br>- calculator : pour effectuer des calculs numériques<br> <br> Règles d’utilisation : <br>1. Si l’utilisateur demande explicitement la création ou la génération d’une image, tu DOIS appeler l’outil `generate_image`. <br>2. Si la demande peut être résolue par un calcul mathématique exact,&nbsp;tu DOIS appeler l’outil `calculator`.`. <br>3. Si aucun outil n’est appropriée, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil : <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid</code><br></blockquote>"
               }
-            },
-            {
-              "type": "stepper",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "a898285f-1976-4273-a7a8-3c1b7ecf9f53",
-                      "type": "custom",
-                      "instruction": "<p>Yasmine envoie ce prompt à ChatPix 3.0, le logiciel d'IA défini ci-dessus.</p>",
-                      "tagName": "llm-messages",
-                      "props": {
-                        "messages": [
-                          {
-                            "direction": "outbound",
-                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5 m de longueur, pour 3 couches de peinture avec une peinture de rendement 10 m²/L/couche ?"
-                          }
-                        ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
-                    },
-                    {
-                      "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
-                      "hasShortProposals": false,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "La recherche sur internet.",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><br><p> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "La génération d’image.",
-                          "feedback": {
-                            "diagnosis": "Eh non ! <br> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "La calculatrice.",
-                          "feedback": {
-                            "diagnosis": "Bien vu ! Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "Aucun outil ne va être utilisé.",
-                          "feedback": {
-                            "diagnosis": "Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "Je ne sais pas.",
-                          "feedback": {
-                            "diagnosis": "Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
-                          }
-                        }
-                      ],
-                      "solution": "3"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "d51c484f-4e0f-424d-8d4e-4b22587a5260",
-                      "type": "custom",
-                      "instruction": "<p>Yasmine envoie le prompt suivant à ChatPix 3.0, défini ci-dessus.</p>",
-                      "tagName": "llm-messages",
-                      "props": {
-                        "messages": [
-                          {
-                            "direction": "inbound",
-                            "content": "Quelle est l’heure de fermeture du magasin de bricolage qui ferme le plus tard à proximité de Jolieville ?"
-                          }
-                        ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
-                    },
-                    {
-                      "id": "e99bf18b-14df-4e78-ae8d-8b756f704898",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
-                      "hasShortProposals": false,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "La recherche sur internet.",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ChatPix 3.0.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "La génération d’image.",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "La calculatrice.",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
-                          }
-                        },
-                        {
-                          "id": "4",
-                          "content": "<p>Aucun outil ne va être utilisé.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
-                          }
-                        },
-                        {
-                          "id": "5",
-                          "content": "Je ne sais pas.",
-                          "feedback": {
-                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "4"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -425,7 +224,7 @@
                     {
                       "id": "582588be-aeba-495e-9eaf-fb4b703ade17",
                       "type": "text",
-                      "content": "Les développeurs permettent la <strong>mise en place d’appel d’outils</strong> dans un logiciel d’IA générative qui a lieu en définissant les <strong>paramètres </strong>de l’outil dans le prompt système. Ils décrivent pour chaque outil&nbsp;: son nom, son contexte d’utilisation (objectif, finalité), ses valeurs d’entrées, le format de la réponse attendue, etc.&nbsp;"
+                      "content": "<p>Les développeurs configurent les logiciels d’IA pour faire appel à des outils. Pour cela, ils définissent les <strong>paramètres </strong>de l’outil dans le prompt système : ils décrivent pour chaque outil&nbsp;: son nom, son contexte d’utilisation (objectif, finalité), ses valeurs d’entrées, le format de la réponse attendue, etc.&nbsp;</p>"
                     }
                   ]
                 },
@@ -434,7 +233,7 @@
                     {
                       "id": "116f00ef-b0ee-4df5-ab5e-eadd4be5a31b",
                       "type": "text",
-                      "content": "<h5>Mais que peut faire l’utilisateur dans la configuration de ces outils ?</h5><br> ✅ Dans certains cas, des <strong>accès </strong>doivent être autorisés par l’utilisateur (ex.&nbsp;: accepter l’accès à la boîte mail, à un agenda, un cloud, etc.)&nbsp;"
+                      "content": "<h5>Mais que peut faire l’utilisateur dans la configuration de ces outils ?</h5><br><p> ✅ Dans certains cas, des <strong>accès </strong>doivent être autorisés par l’utilisateur (ex.&nbsp;: autoriser l’accès à la boîte mail, à un agenda, un cloud, etc.)&nbsp;</p>"
                     }
                   ]
                 },
@@ -488,7 +287,7 @@
               "element": {
                 "id": "7831fafa-8342-49ad-b93d-8c46106966ab",
                 "type": "text",
-                "content": "<p>Une fois les outils  définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l'IA ?</p><p>C'est que nous allons voir dans cette dernière partie.</p>"
+                "content": "<p>Une fois les outils  définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l’IA ?</p><p>C’est que nous allons voir dans cette dernière partie.</p>"
               }
             }
           ]
@@ -511,7 +310,9 @@
                     {
                       "id": "57d18016-3c27-4b72-92d5-54a8ebc9679e",
                       "type": "custom",
+                      "title": "",
                       "instruction": "À&nbsp;votre avis, quelle partie du prompt permet d’identifier l’outil nécessaire au logiciel d’IA conversationnel ?",
+                      "functionalInstruction": "",
                       "tagName": "pix-anonymisation",
                       "props": {
                         "titleLevel": 2,
@@ -543,9 +344,7 @@
                             "feedback": " Lors de la génération, le logiciel d’IA décide de faire appel ou non à un outil. L’utilisateur peut aussi explicitement demander dans son prompt l’utilisation d’un outil."
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 },
@@ -554,13 +353,13 @@
                     {
                       "id": "838dd2fd-5a2c-462c-b93a-b230dadc4e62",
                       "type": "text",
-                      "content": "<p>Le logiciel d'IA analyse le prompt et identifie l'outil pertinent.</p>"
+                      "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p>"
                     },
                     {
                       "id": "d81c2f6a-7811-4ed5-8959-70fd4ed60bd2",
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/IAGenFonctionAva/etape1.png",
-                      "alt": "Le logiciel d'IA analyse le prompt.",
+                      "alt": "Le logiciel d’IA analyse le prompt.",
                       "alternativeText": "",
                       "legend": "",
                       "licence": ""
@@ -568,7 +367,7 @@
                     {
                       "id": "35b5a582-ff1f-4561-bba3-00635e4f88a8",
                       "type": "text",
-                      "content": "<p>Et ensuite, que se passe-t-il ?<br></p>"
+                      "content": "<p>Et ensuite, que se passe-t-il ?<br></p>"
                     }
                   ]
                 },
@@ -577,7 +376,7 @@
                     {
                       "id": "021d4850-4231-4811-8a2c-d0c3a14265ff",
                       "type": "text",
-                      "content": "<p>Le logiciel envoie une requête à l'outil identifié.</p><p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
+                      "content": "<p>Le logiciel envoie une requête à l’outil identifié.</p><p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
                     },
                     {
                       "id": "36f8d720-4607-4bbd-8b36-161f782e8f70",
@@ -589,8 +388,8 @@
                           "content": "<code>La requête est&nbsp;:<br>{ \"tool\": \"</code>"
                         },
                         {
-                          "input": "tool",
                           "type": "select",
+                          "input": "tool",
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
@@ -616,8 +415,8 @@
                           "content": "<blockquote>\",<br>\"arguments\":<br>{ location\": \"</blockquote>"
                         },
                         {
-                          "input": "location",
                           "type": "select",
+                          "input": "location",
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
@@ -643,8 +442,8 @@
                           "content": "<p><code>\",<br> \"date\": \"</code></p>"
                         },
                         {
-                          "input": "date",
                           "type": "select",
+                          "input": "date",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
                           "ariaLabel": "- Sélectionner -",
@@ -673,11 +472,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "Bien vu !&nbsp;",
-                          "diagnosis": "<p>Le programme a choisi l’<strong>outil Météo</strong>&nbsp;et lui a transmis l’information du lieu et de la date recherchés. Ces informations sont les <strong>arguments </strong>de la requête.</p><br>"
+                          "diagnosis": "<p>Le logiciel a choisi l’<strong>outil Météo</strong>&nbsp;et lui a transmis l’information du lieu et de la date recherchés. Ces informations sont les <strong>arguments </strong>de la requête.</p><br>"
                         },
                         "invalid": {
                           "state": "Eh non !",
-                          "diagnosis": "<p>Le programme a choisi l’<strong>outil Météo</strong> (en anglais \"weather\")&nbsp;et lui a transmis l’information du lieu et de la date recherchés. Ces informations sont les <strong>arguments </strong>de la requête.</p>"
+                          "diagnosis": "<p>Le logiciel a choisi l’<strong>outil Météo</strong> (en anglais \"weather\")&nbsp;et lui a transmis l’information du lieu et de la date recherchés. Ces informations sont les <strong>arguments </strong>de la requête.</p>"
                         }
                       }
                     }
@@ -688,7 +487,7 @@
                     {
                       "id": "8d039074-9bcf-4c83-bcb8-e277963d5ba3",
                       "type": "text",
-                      "content": "<p>L'outil traite la requête et renvoie la réponse.<br></p>"
+                      "content": "<p>L’outil traite la requête et renvoie la réponse.<br></p>"
                     },
                     {
                       "id": "d0ad2b49-770f-437e-8b00-ef2d6530bd67",
@@ -761,7 +560,7 @@
               "element": {
                 "id": "18c439bf-63ae-4ddb-9fa7-82c2b4db17c3",
                 "type": "text",
-                "content": "<p>Voici la vision d'ensemble avec un schéma de la génération d’une réponse par&nbsp;un logiciel d’IA qui fait appel à un outil.</p>"
+                "content": "<p>Voici la vision d’ensemble avec un schéma de la génération d’une réponse par&nbsp;un logiciel d’IA qui fait appel à un outil.</p>"
               }
             },
             {
@@ -788,7 +587,9 @@
               "element": {
                 "id": "18dc8ff7-6169-41d8-9c7c-59b33ba9f43a",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Fin de la discussion entre Yasmine et Steven",
@@ -819,9 +620,7 @@
                     }
                   ],
                   "animationSpeed": 0
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -842,7 +641,7 @@
               "element": {
                 "id": "8454a04e-e0aa-432f-97da-72c94c43e3e5",
                 "type": "text",
-                "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les concepteurs d’IA ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les fournisseurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils tiers</strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
+                "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les fournisseurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
               }
             },
             {
@@ -878,7 +677,7 @@
                 "isCompletionRequired": false,
                 "title": "ChatPix pour tester",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmlfcrotr00004z01vw5daup4",
-                "instruction": "Testez ce logiciel d’IA générative puis répondez aux questions.",
+                "instruction": "<p>Testez ce logiciel d’IA générative pour déduire les outils auxquels il a accès puis répondez à la question.</p>",
                 "solution": "",
                 "height": 550
               }
@@ -895,8 +694,8 @@
                     "content": "La recherche sur le web&nbsp;:"
                   },
                   {
-                    "input": "rechercheImage",
                     "type": "select",
+                    "input": "rechercheImage",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
@@ -918,8 +717,8 @@
                     "content": "<br>La génération d’image&nbsp;:&nbsp;"
                   },
                   {
-                    "input": "generationImage",
                     "type": "select",
+                    "input": "generationImage",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
@@ -944,27 +743,9 @@
                   },
                   "invalid": {
                     "state": "Mauvaise réponse !",
-                    "diagnosis": " Avez-vous testé avec un prompt pour chaque situation ?"
+                    "diagnosis": "<p> Avez-vous testé avec un prompt pour chaque situation ?</p><ul><li>Pour la recherche sur internet&nbsp;: avez-vous posé à l’IA une question d’actualité ?  <br>Par exemple&nbsp;: qui a gagné le dernier match de Hockey à Montréal ?</li><li>Pour la génération d’image&nbsp;: avez-vous demandé à l’IA de faire une image ?  <br>Par exemple&nbsp;: dessine une cuisine moderne où pourrait vivre une marmotte.</li></ul>"
                   }
                 }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "ce46c90d-193a-4479-a163-d85f56ff95ff",
-                "type": "expand",
-                "title": "🔑 Indice n°1",
-                "content": "Pour la recherche sur internet&nbsp;: avez-vous posé à l’IA une question d’actualité ? <br>Vous pouvez demander, par exemple&nbsp;: qui a gagné le dernier match de Hockey à Montréal ?"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "af33a8d9-20e4-4c66-b9d1-4d1ee8b907f5",
-                "type": "expand",
-                "title": "🔑 Indice n°2",
-                "content": "<p>Pour la génération d’image&nbsp;: avez-vous demandé à l’IA de faire une image ? </p><br><p>Vous pouvez demander, par exemple&nbsp;: dessine une cuisine moderne où pourrait vivre une marmotte.</p>"
               }
             }
           ]
@@ -979,11 +760,11 @@
               "element": {
                 "id": "d14eac04-d14f-42aa-a61a-b914fcfb11e1",
                 "type": "qab",
-                "instruction": "Est-ce que ces prompts incitent à l’appel de fonction ?",
+                "instruction": "<p>Pour chaque prompt suivant, dites s’il encourage à faire appel à un outil.</p>",
                 "cards": [
                   {
                     "id": "5cabf99b-be7e-459a-a2d2-7e021df91abe",
-                    "text": "Traduis en espagnol la phrase : “J’ai besoin d’acheter de la peinture jaune. Savez-vous où est le rayon dans le magasin ?”",
+                    "text": "Traduis en espagnol la phrase : « J’ai besoin d’acheter de la peinture jaune. Savez-vous où est le rayon dans le magasin ? »",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1038,7 +819,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "Le logiciel d’IA conversationnelle va avoir besoin de faire appel à des outils&nbsp;:&nbsp;<br>- l’<strong>agenda </strong>pour le rendez-vous avec le cuisiniste,&nbsp;<br>- la <strong>recherche sur internet</strong> pour donner des sources,&nbsp;<br>- et la <strong>calculatrice </strong>pour l’estimation du nombre de lames pour la terrasse."
+                  "diagnosis": "<p>Le logiciel d’IA conversationnelle va avoir besoin de faire appel à des outils&nbsp;:</p><ul><li> l’<strong>agenda </strong>pour le rendez-vous avec le cuisiniste,</li><li>la <strong>recherche sur internet</strong> pour donner des sources,&nbsp;</li><li> et la <strong>calculatrice </strong>pour l’estimation du nombre de lames pour la terrasse.</li></ul>"
                 }
               }
             }
@@ -1057,8 +838,8 @@
                 "instruction": "Classez dans l’ordre les étapes de la génération d’une réponse par un logiciel d’IA générative.",
                 "proposals": [
                   {
-                    "input": "classementetape1",
                     "type": "select",
+                    "input": "classementetape1",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1092,8 +873,8 @@
                     "solutions": ["1"]
                   },
                   {
-                    "input": "classementetape2",
                     "type": "select",
+                    "input": "classementetape2",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1127,8 +908,8 @@
                     "solutions": ["2"]
                   },
                   {
-                    "input": "classementetape3",
                     "type": "select",
+                    "input": "classementetape3",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1162,8 +943,8 @@
                     "solutions": ["3"]
                   },
                   {
-                    "input": "classementetape4",
                     "type": "select",
+                    "input": "classementetape4",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1197,8 +978,8 @@
                     "solutions": ["4"]
                   },
                   {
-                    "input": "classementetape5",
                     "type": "select",
+                    "input": "classementetape5",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1232,8 +1013,8 @@
                     "solutions": ["5"]
                   },
                   {
-                    "input": "classementetape6",
                     "type": "select",
+                    "input": "classementetape6",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "- Sélectionnez -",
@@ -1319,7 +1100,7 @@
                 "id": "2dee621b-251b-4ef0-8f5f-ee03fc833c14",
                 "type": "expand",
                 "title": "🔑 Indice",
-                "content": "<p>Avez-vous vérifié que votre prompt fait bien appel à l’<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
+                "content": "<p>Avez-vous vérifié que votre prompt faisait bien appel à l’<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
               }
             },
             {
