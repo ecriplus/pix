@@ -377,7 +377,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon2.png",
                 "alt": "Capture d’écran mail ouvert",
-                "alternativeText": "<p>Capture d’écran d’un mail ouvert<br></p>",
+                "alternativeText": "<p>Capture d’écran d’un mail ouvert</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -417,7 +417,7 @@
               "element": {
                 "id": "7ed9ce41-7f5c-4ba2-bdfa-1fb524bbad9c",
                 "type": "text",
-                "content": "<p><strong>Pour cela, suivez les instructions suivantes&nbsp;:&nbsp; </strong></p><ul><li><strong>cliquez sur le bouton qui permet de répondre au mail,&nbsp;</strong></li><li><strong>écrivez la réponse suivante puis envoyer le mail&nbsp;:&nbsp;</strong></li></ul><blockquote><em>Bonjour, <br>Je vous remercie de votre proposition. <br>Je vous confirme ma présence à l’entretien le 3 février à 14h. <br>Cordialement</em><br><br></blockquote>"
+                "content": "<p><strong>Pour cela, suivez les instructions suivantes&nbsp;:&nbsp; </strong></p><ul><li><strong>cliquez sur le bouton qui permet de répondre au mail,&nbsp;</strong></li><li><strong>écrivez la réponse suivante puis envoyer le mail&nbsp;:&nbsp;</strong></li></ul><blockquote><em>Bonjour, <br>Je vous remercie de votre proposition. <br>Je vous confirme ma présence à l’entretien le 3 février à 14h. <br>Cordialement</em></blockquote>"
               }
             },
             {
@@ -447,7 +447,7 @@
                 "id": "75166d79-fb2f-4d10-9d24-8964a2f48305",
                 "type": "expand",
                 "title": "🗝️Indices/Aides possibles",
-                "content": "<ul><li>Pour trouver le bouton «&nbsp;Répondre&nbsp;» et «Envoyer&nbsp;»</li><li>Pour écrire le message dans la zone&nbsp;: l’apprenant peut copier-coller ou écrire directement le message&nbsp;<ul><li>Afficher en transparence le message à écrire ?</li><li>Si l’apprenant n’arrive pas à copier-coller/ou écrire en entier&nbsp;:&nbsp;<ul><li>possibilité de pouvoir cliquer pour copier/insérer/corriger le message automatiquement, autres options ?</li><li>que faire si message pas recopier exactement&nbsp;: tolérance acceptée ?</li><li>par contre ne pas laisser la possibilité d’envoyer n’importe quel message</li></ul></li></ul></li></ul>"
+                "content": "<ul><li>Pour trouver le bouton «&nbsp;Répondre&nbsp;» et «&nbsp;Envoyer&nbsp;»</li><li>Pour écrire le message dans la zone&nbsp;: l’apprenant peut copier-coller ou écrire directement le message&nbsp;<ul><li>Afficher en transparence le message à écrire ?</li><li>Si l’apprenant n’arrive pas à copier-coller/ou écrire en entier&nbsp;:&nbsp;<ul><li>possibilité de pouvoir cliquer pour copier/insérer/corriger le message automatiquement, autres options ?</li><li>que faire si message pas recopier exactement&nbsp;: tolérance acceptée ?</li><li>par contre ne pas laisser la possibilité d’envoyer n’importe quel message</li></ul></li></ul></li></ul>"
               }
             },
             {
