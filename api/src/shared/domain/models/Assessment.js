@@ -137,6 +137,10 @@ class Assessment {
     return this.type === types.CAMPAIGN;
   }
 
+  isForExamCampaign() {
+    return this.type === types.CAMPAIGN && this.campaign?.isExam;
+  }
+
   isCampaignParticipationAvailable() {
     return this.isForCampaign() && Boolean(this.campaignParticipationId);
   }

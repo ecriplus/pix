@@ -14,6 +14,7 @@ export async function updateAssessmentWithNextChallenge({
   certificationCompanionAlertRepository,
 }) {
   const assessment = await assessmentRepository.getWithAnswers(assessmentId);
+  let globalProgression = null;
   let nextChallenge = null;
   try {
     if (assessment.isCertification()) {
@@ -48,6 +49,13 @@ export async function updateAssessmentWithNextChallenge({
     }
 
     if (assessment.isForCampaign() && assessment.isStarted()) {
+      if (assessment.isForExamCampaign()) {
+        const progression = await evaluationUsecases.getProgression({
+          progressionId: assessmentId.toString(),
+          userId,
+        });
+        globalProgression = progression.completionRate;
+      }
       nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
     }
     if (assessment.isCompetenceEvaluation()) {
@@ -93,5 +101,8 @@ export async function updateAssessmentWithNextChallenge({
   }
   assessment.nextChallenge = nextChallenge;
 
-  return assessment;
+  return {
+    assessment,
+    globalProgression,
+  };
 }

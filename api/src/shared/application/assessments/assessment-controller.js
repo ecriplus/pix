@@ -26,21 +26,13 @@ const getAssessmentWithNextChallenge = async function (
   h,
   dependencies = { assessmentSerializer, extractUserIdFromRequest },
 ) {
-  let globalProgression = null;
   const assessmentId = request.params.id;
   const locale = getChallengeLocale(request);
   const userId = dependencies.extractUserIdFromRequest(request);
 
   const enableTransactionForGetNext = await featureToggles.get('enableTransactionForGetNext');
   if (enableTransactionForGetNext) {
-    const assessment = await DomainTransaction.execute(async () => {
-      if (assessmentWithoutChallenge?.campaign?.isExam) {
-        const progression = await evaluationUsecases.getProgression({
-          progressionId: assessmentId.toString(),
-          userId,
-        });
-        globalProgression = progression.completionRate;
-      }
+    const { assessment, globalProgression } = await DomainTransaction.execute(async () => {
       return sharedUsecases.updateAssessmentWithNextChallenge({
         assessmentId,
         userId,
@@ -50,14 +42,8 @@ const getAssessmentWithNextChallenge = async function (
 
     return dependencies.assessmentSerializer.serialize(assessment.toDto(globalProgression));
   }
-  if (assessmentWithoutChallenge?.campaign?.isExam) {
-    const progression = await evaluationUsecases.getProgression({
-      progressionId: assessmentId.toString(),
-      userId,
-    });
-    globalProgression = progression.completionRate;
-  }
-  const assessment = await sharedUsecases.updateAssessmentWithNextChallenge({
+
+  const { assessment, globalProgression } = await sharedUsecases.updateAssessmentWithNextChallenge({
     assessmentId,
     userId,
     locale,

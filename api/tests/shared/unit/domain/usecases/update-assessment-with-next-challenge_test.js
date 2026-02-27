@@ -1,3 +1,4 @@
+import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import {
   AssessmentEndedError,
   AssessmentLackOfChallengesError,
@@ -17,6 +18,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let evaluationUsecases_getNextChallengeForDemoStub;
     let evaluationUsecases_getNextChallengeForCampaignAssessmentStub;
     let evaluationUsecases_getNextChallengeForCompetenceEvaluationStub;
+    let evaluationUsecases_getProgressionStub;
     let certificationEvaluationRepository_selectNextCertificationChallengeStub;
     let courseRepository_getStub;
     let competenceRepository_getCompetenceNameStub;
@@ -38,6 +40,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       evaluationUsecases_getNextChallengeForCompetenceEvaluationStub = sinon
         .stub()
         .named('getNextChallengeForCompetenceEvaluation');
+      evaluationUsecases_getProgressionStub = sinon.stub().named('getProgression');
       certificationEvaluationRepository_selectNextCertificationChallengeStub = sinon
         .stub()
         .named('selectNextCertificationChallenge');
@@ -53,6 +56,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         evaluationUsecases_getNextChallengeForDemoStub,
         evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
+        evaluationUsecases_getProgressionStub,
         certificationEvaluationRepository_selectNextCertificationChallengeStub,
         courseRepository_getStub,
         competenceRepository_getCompetenceNameStub,
@@ -71,6 +75,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         getNextChallengeForDemo: evaluationUsecases_getNextChallengeForDemoStub,
         getNextChallengeForCampaignAssessment: evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         getNextChallengeForCompetenceEvaluation: evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
+        getProgression: evaluationUsecases_getProgressionStub,
       };
 
       const certificationEvaluationRepository = {
@@ -123,10 +128,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it(`should return an assessment with its answers`, async function () {
           assessment.state = assessmentState;
 
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+          const { assessment: assessmentWithNextChallenge, globalProgression } =
+            await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
           expect(assessmentWithNextChallenge.nextChallenge).to.be.null;
+          expect(globalProgression).to.be.null;
         });
       });
     });
@@ -143,9 +150,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
         evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
 
-        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+        const { assessment: assessmentWithNextChallenge, globalProgression } =
+          await updateAssessmentWithNextChallenge(dependencies);
 
         expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
+        expect(globalProgression).to.be.null;
       });
 
       it('should compute next challenge', async function () {
@@ -160,9 +169,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
         evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
 
-        const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+        const { assessment: assessmentWithNextChallenge, globalProgression } =
+          await updateAssessmentWithNextChallenge(dependencies);
 
         expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+        expect(globalProgression).to.be.null;
       });
     });
 
@@ -181,9 +192,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
         it('should call usecase and return value from preview usecase', async function () {
           evaluationUsecases_getNextChallengeForPreviewStub.rejects(new AssessmentEndedError());
-          const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+          const { assessment: assessmentWithoutChallenge, globalProgression } =
+            await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+          expect(globalProgression).to.be.null;
         });
       });
 
@@ -218,10 +231,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
             const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
             evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
-            const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithNextChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
 
             expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
             expect(assessmentWithNextChallenge.title).to.equal('Mon super course');
+            expect(globalProgression).to.be.null;
           });
         });
         context('when there is no more challenge', function () {
@@ -234,10 +249,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForDemoStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithoutChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.title).to.equal('Mon super course');
+            expect(globalProgression).to.be.null;
           });
         });
       });
@@ -261,9 +278,11 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCampaignAssessmentStub
             .withArgs({ assessment, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+          const { assessment: assessmentWithNextChallenge, globalProgression } =
+            await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(globalProgression).to.be.null;
         });
 
         context('when there is no more challenge', function () {
@@ -272,9 +291,49 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForCampaignAssessmentStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithoutChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
+            expect(globalProgression).to.be.null;
+          });
+        });
+
+        context('when campaign is of type Exam', function () {
+          it('should call usecase and return value from campaign usecase and global progression', async function () {
+            const examAssessment = domainBuilder.buildAssessment({
+              id: 1234,
+              state: Assessment.states.STARTED,
+              type: Assessment.types.CAMPAIGN,
+              campaign: domainBuilder.buildCampaign({
+                type: CampaignTypes.EXAM,
+              }),
+              answers: [],
+            });
+            assessmentRepository_getWithAnswersStub.withArgs(1234).resolves(examAssessment);
+            assessmentRepository_updateLastQuestionDateStub.resolves();
+            assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
+            const myGlobalProgression = Symbol('myGlobalProgression');
+            evaluationUsecases_getProgressionStub
+              .withArgs({
+                progressionId: '1234',
+                userId,
+              })
+              .resolves({
+                completionRate: myGlobalProgression,
+              });
+            const challenge = domainBuilder.buildChallenge({ id: 'challengeForCampaign' });
+            evaluationUsecases_getNextChallengeForCampaignAssessmentStub
+              .withArgs({ assessment: examAssessment, locale })
+              .resolves(challenge);
+            const { assessment: assessmentWithNextChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge({
+                ...dependencies,
+                assessmentId: 1234,
+              });
+
+            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+            expect(globalProgression).to.equal(myGlobalProgression);
           });
         });
       });
@@ -302,10 +361,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           evaluationUsecases_getNextChallengeForCompetenceEvaluationStub
             .withArgs({ assessment, userId, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+          const { assessment: assessmentWithNextChallenge, globalProgression } =
+            await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
           expect(assessmentWithNextChallenge.title).to.equal('Ma super compétence');
+          expect(globalProgression).to.be.null;
         });
 
         context('when there is no more challenge', function () {
@@ -317,10 +378,12 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             evaluationUsecases_getNextChallengeForCompetenceEvaluationStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithoutChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.title).to.equal('Ma super compétence');
+            expect(globalProgression).to.be.null;
           });
         });
       });
@@ -357,11 +420,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           certificationEvaluationRepository_selectNextCertificationChallengeStub
             .withArgs({ assessmentId: assessment.id, locale })
             .resolves(challenge);
-          const assessmentWithNextChallenge = await updateAssessmentWithNextChallenge(dependencies);
+          const { assessment: assessmentWithNextChallenge, globalProgression } =
+            await updateAssessmentWithNextChallenge(dependencies);
 
           expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
           expect(assessmentWithNextChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
           expect(assessmentWithNextChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
+          expect(globalProgression).to.be.null;
         });
 
         context('when there is no more challenge', function () {
@@ -370,11 +435,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             certificationEvaluationRepository_selectNextCertificationChallengeStub.rejects(new AssessmentEndedError());
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithoutChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
             expect(assessmentWithoutChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
+            expect(globalProgression).to.be.null;
           });
         });
 
@@ -386,12 +453,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             );
 
             // when
-            const assessmentWithoutChallenge = await updateAssessmentWithNextChallenge(dependencies);
+            const { assessment: assessmentWithoutChallenge, globalProgression } =
+              await updateAssessmentWithNextChallenge(dependencies);
 
             // then
             expect(assessmentWithoutChallenge.nextChallenge).to.be.null;
             expect(assessmentWithoutChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
             expect(assessmentWithoutChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
+            expect(globalProgression).to.be.null;
           });
         });
 

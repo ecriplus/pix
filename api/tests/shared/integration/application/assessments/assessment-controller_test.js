@@ -24,7 +24,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should resolve a 200 HTTP response', async function () {
         // given
-        sharedUsecases.updateAssessmentWithNextChallenge.resolves(assessment);
+        sharedUsecases.updateAssessmentWithNextChallenge.resolves({ assessment, globalProgression: null });
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');
@@ -35,7 +35,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should return a JSON API assessment', async function () {
         // given
-        sharedUsecases.updateAssessmentWithNextChallenge.resolves(assessment);
+        sharedUsecases.updateAssessmentWithNextChallenge.resolves({ assessment, globalProgression: null });
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');
