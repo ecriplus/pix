@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.342.0](https://github.com/1024pix/pix/compare/v5.341.0...v5.342.0) (2026-02-27)
+
+### :rocket: Amélioration
+
+- [#15302](https://github.com/1024pix/pix/pull/15302) ajout d'un timeout pour le client pushgateway 
+- [#15299](https://github.com/1024pix/pix/pull/15299) modifs relecture interne repondremail nov 
+- [#15289](https://github.com/1024pix/pix/pull/15289) Rajouter un wording avant de démarrer une campagne exam (PIX-21707) 
+- [#15279](https://github.com/1024pix/pix/pull/15279) Récompense l'utilisateur en fin de parcours combiné (PIX-21720). 
+- [#15260](https://github.com/1024pix/pix/pull/15260) Sauvegarder la capacité, l'index de maille et l'id de version lors du scoring (PIX-21698). 
+
+### :bug: Correction
+
+- [#15293](https://github.com/1024pix/pix/pull/15293) Corrige un bug empêchant de créer des parcours combiné avec deux campagnes depuis PixOrga (PIX-21738). 
+- [#15290](https://github.com/1024pix/pix/pull/15290) Ne pas arrêter le polling vers le endpoint de supervision de session sur l'espace surveillant lorsque il y a des erreurs sur les appels (PIX-21732) 
+
+### :building_construction: Tech
+
+- [#15296](https://github.com/1024pix/pix/pull/15296) Ajout id d'organisation dans le titre de l'onglet (PIX-21517) 
+- [#15185](https://github.com/1024pix/pix/pull/15185) Ajoute des handlers de succès dans la DomainTransaction. 
+- [#15228](https://github.com/1024pix/pix/pull/15228) Ajouter une méthode dans le knex-utils pour faire du "batch update" 
+- [#15288](https://github.com/1024pix/pix/pull/15288) Avoir la possibilité de désactiver le parsing des types JSON et JSONB dans knex via un flag dans la knex config 
+- [#15300](https://github.com/1024pix/pix/pull/15300) Limiter la flakyness des tests de certif E2E 
+- [#15268](https://github.com/1024pix/pix/pull/15268) Limiter le nombre de requêtes lors de la modification en masse d'organisation (PIX-201703) 
+- [#15204](https://github.com/1024pix/pix/pull/15204) Mettre à jour (déplacer, séparer, corriger) le script api/scripts/make-saml-env.js (PIX-21688) 
+- [#15261](https://github.com/1024pix/pix/pull/15261) Réduit le nombre de requêtes SQL généré par les repositories du scope "Certification" (PIX-21725) 
+
+### :arrow_up: Montée de version
+
+- [#15286](https://github.com/1024pix/pix/pull/15286) Update dependency eslint-plugin-cypress to v6 (e2e) 
+- [#15297](https://github.com/1024pix/pix/pull/15297) Update dependency oxfmt to ^0.33.0 (api)
+
 # [5.341.0](https://github.com/1024pix/pix/compare/v5.340.0...v5.341.0) (2026-02-26)
 
 ### :rocket: Amélioration
