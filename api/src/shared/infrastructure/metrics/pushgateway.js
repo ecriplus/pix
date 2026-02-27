@@ -1,4 +1,4 @@
-import http from 'node:http';
+import https from 'node:https';
 
 import { Pushgateway } from 'prom-client';
 
@@ -23,7 +23,7 @@ const pushgateway = new Pushgateway(
   {
     headers,
     timeout: config.metrics.prometheus.pushgateway.timeout,
-    agent: new http.Agent({
+    agent: new https.Agent({
       keepAlive: true,
       keepAliveMsec: config.metrics.prometheus.pushgateway.keepAlive,
       maxSockets: 1,
