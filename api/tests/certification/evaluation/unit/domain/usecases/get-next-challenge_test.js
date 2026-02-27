@@ -13,7 +13,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     let answerRepository,
       sharedChallengeRepository,
       calibratedChallengeRepository,
-      certificationCourseRepository,
       complementaryCertificationRepository,
       certificationChallengeLiveAlertRepository,
       sessionManagementCertificationChallengeRepository,
@@ -39,9 +38,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       calibratedChallengeRepository = {
         findActiveFlashCompatible: sinon.stub(),
         getMany: sinon.stub(),
-      };
-      certificationCourseRepository = {
-        get: sinon.stub(),
       };
       complementaryCertificationRepository = {
         get: sinon.stub(),
@@ -88,12 +84,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             id: complementaryCertificationId,
             key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           });
-        const v3CertificationCourseWithComplementary = domainBuilder.buildCertificationCourse({
-          version: AlgorithmEngineVersion.V3,
-          complementaryCertificationCourse: {
-            complementaryCertificationId,
-          },
-        });
 
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
@@ -104,9 +94,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourseWithComplementary);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
@@ -157,7 +144,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           sharedChallengeRepository,
           versionRepository,
           calibratedChallengeRepository,
@@ -194,9 +180,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               colorBlindnessCompatibility: 'OK',
             }),
           ];
-          const v3CertificationCourse = domainBuilder.buildCertificationCourse({
-            version: AlgorithmEngineVersion.V3,
-          });
           const assessment = domainBuilder.buildAssessment();
           const locale = 'fr-FR';
 
@@ -209,9 +192,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
 
-          certificationCourseRepository.get
-            .withArgs({ id: assessment.certificationCourseId })
-            .resolves(v3CertificationCourse);
           sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
             .withArgs(assessment.certificationCourseId, [])
             .resolves(null);
@@ -265,7 +245,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             assessment,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
-            certificationCourseRepository,
             calibratedChallengeRepository,
             sharedChallengeRepository,
             versionRepository,
@@ -306,9 +285,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
 
-          certificationCourseRepository.get
-            .withArgs({ id: assessment.certificationCourseId })
-            .resolves(v3CertificationCourse);
           sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
             .withArgs(assessment.certificationCourseId, [])
             .resolves(nonAnsweredCertificationChallenge);
@@ -322,7 +298,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             assessment,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
-            certificationCourseRepository,
             sharedChallengeRepository,
             calibratedChallengeRepository,
             versionRepository,
@@ -355,9 +330,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           status: 'validé',
         });
         const outdatedChallenge = domainBuilder.buildChallenge({ id: 'outdatedChallenge', status: 'périmé' });
-        const v3CertificationCourse = domainBuilder.buildCertificationCourse({
-          version: AlgorithmEngineVersion.V3,
-        });
         const locale = 'fr-FR';
 
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
@@ -372,9 +344,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
@@ -428,7 +397,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           sharedChallengeRepository,
           calibratedChallengeRepository,
           versionRepository,
@@ -511,9 +479,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([nonAnsweredCertificationChallenge.challengeId]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
@@ -534,7 +499,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           sharedChallengeRepository,
           calibratedChallengeRepository,
           versionRepository,
@@ -621,9 +585,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([nonAnsweredCertificationChallenge.challengeId]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(nonAnsweredCertificationChallenge);
@@ -644,7 +605,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           calibratedChallengeRepository,
           sharedChallengeRepository,
           versionRepository,
@@ -666,9 +626,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         // given
         const answeredChallenge = domainBuilder.buildChallenge();
         const answer = domainBuilder.buildAnswer({ challengeId: answeredChallenge.id });
-        const v3CertificationCourse = domainBuilder.buildCertificationCourse({
-          version: AlgorithmEngineVersion.V3,
-        });
         const assessment = domainBuilder.buildAssessment();
         const locale = 'fr-FR';
 
@@ -689,9 +646,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [answeredChallenge.id])
           .resolves(null);
@@ -718,7 +672,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           calibratedChallengeRepository,
           sharedChallengeRepository,
           versionRepository,
@@ -753,10 +706,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge();
             const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
-            const v3CertificationCourse = domainBuilder.buildCertificationCourse({
-              version: AlgorithmEngineVersion.V3,
-            });
-
             version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration: flashConfiguration });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
@@ -770,9 +719,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               .withArgs({ assessmentId: assessment.id })
               .resolves([]);
 
-            certificationCourseRepository.get
-              .withArgs({ id: assessment.certificationCourseId })
-              .resolves(v3CertificationCourse);
             sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
               .withArgs(assessment.certificationCourseId, [])
               .resolves(null);
@@ -823,7 +769,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               assessment,
               sessionManagementCertificationChallengeRepository,
               certificationChallengeLiveAlertRepository,
-              certificationCourseRepository,
               calibratedChallengeRepository,
               sharedChallengeRepository,
               versionRepository,
@@ -861,9 +806,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
@@ -892,7 +834,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           calibratedChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
@@ -930,9 +871,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
 
-        certificationCourseRepository.get
-          .withArgs({ id: assessment.certificationCourseId })
-          .resolves(v3CertificationCourse);
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
@@ -954,7 +892,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           assessment,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
-          certificationCourseRepository,
           calibratedChallengeRepository,
           sharedChallengeRepository,
           flashAlgorithmService,
