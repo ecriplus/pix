@@ -3,14 +3,11 @@
  * @typedef {import ('../models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationBadge.js').ComplementaryCertificationBadge} ComplementaryCertificationBadge
  */
-import lodash from 'lodash';
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { InvalidBadgeLevelError } from '../errors.js';
 import { BadgeToAttach } from '../models/BadgeToAttach.js';
-
-const { isNil, uniq } = lodash;
 
 /**
  * @param {object} params
@@ -76,8 +73,8 @@ export { attachBadges };
 function _isRequiredInformationMissing(complementaryCertificationBadgesToAttachDTO) {
   return complementaryCertificationBadgesToAttachDTO.some(
     (complementaryCertificationBadge) =>
-      isNil(complementaryCertificationBadge.certificateMessage) ||
-      isNil(complementaryCertificationBadge.temporaryCertificateMessage),
+      complementaryCertificationBadge.certificateMessage == null ||
+      complementaryCertificationBadge.temporaryCertificateMessage == null,
   );
 }
 
@@ -130,7 +127,7 @@ function _isLastLevelDifferentThanExpectedMaximum({ sortedUniqLevels, complement
 function _verifyThatLevelsAreConsistent({ complementaryCertificationBadgesToAttachDTO }) {
   const extractedLevelsFromBadges =
     complementaryCertificationBadgesToAttachDTO?.map((badge) => badge.level).filter(Number.isInteger) ?? [];
-  const sortedUniqLevels = uniq([...extractedLevelsFromBadges]).sort(_compareLevels);
+  const sortedUniqLevels = [...new Set([...extractedLevelsFromBadges])].sort(_compareLevels);
   if (!_ifLevelIsUniq({ sortedUniqLevels, complementaryCertificationBadgesToAttachDTO })) {
     throw new InvalidBadgeLevelError();
   }

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   CertificationChallengeLiveAlert,
@@ -37,7 +35,7 @@ const getLiveAlertValidatedChallengeIdsByAssessmentId = async ({ assessmentId })
       status: CertificationChallengeLiveAlertStatus.VALIDATED,
     });
 
-  return _.map(liveAlertValidatedChallengeIds, 'challengeId');
+  return liveAlertValidatedChallengeIds.map((ccla) => ccla.challengeId);
 };
 
 const getOngoingBySessionIdAndUserId = async ({ sessionId, userId }) => {

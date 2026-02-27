@@ -64,7 +64,7 @@ class CertificationResult {
 
   static from({ certificationResultDTO }) {
     const certificationStatus = certificationResultDTO?.assessmentResultStatus ?? status.STARTED;
-    const competenceMarkDTOs = _.compact(certificationResultDTO.competenceMarks);
+    const competenceMarkDTOs = certificationResultDTO.competenceMarks.filter(Boolean);
     const competencesWithMark = _.map(
       competenceMarkDTOs,
       (competenceMarkDTO) =>
@@ -74,11 +74,12 @@ class CertificationResult {
           competence_code: competenceMarkDTO.competence_code.toString(),
         }),
     );
-    const complementaryCertificationCourseResults = _.compact(
-      certificationResultDTO.complementaryCertificationCourseResults,
-    ).map(
-      (complementaryCertifCourseResult) => new ComplementaryCertificationCourseResult(complementaryCertifCourseResult),
-    );
+    const complementaryCertificationCourseResults = certificationResultDTO.complementaryCertificationCourseResults
+      .filter(Boolean)
+      .map(
+        (complementaryCertifCourseResult) =>
+          new ComplementaryCertificationCourseResult(complementaryCertifCourseResult),
+      );
 
     const commentForOrganization = new JuryComment({
       fallbackComment: certificationResultDTO.commentForOrganization,

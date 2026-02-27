@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -171,10 +169,10 @@ async function findAllByUserId({ userId }) {
 async function update({ certificationCourse, noTransaction = false }) {
   const knexConn = noTransaction ? knex : DomainTransaction.getConnection();
 
-  const certificationCourseData = _pickUpdatableProperties(certificationCourse);
+  const certificationCourseData = _extractPropertiesForUpdate(certificationCourse);
 
   const nbOfUpdatedCertificationCourses = await knexConn('certification-courses')
-    .update({ ...certificationCourseData, updatedAt: new Date() })
+    .update(certificationCourseData)
     .where({ id: certificationCourseData.id });
 
   if (nbOfUpdatedCertificationCourses === 0) {
@@ -244,30 +242,36 @@ export {
 };
 
 function _adaptModelToDb(certificationCourse) {
-  return _.omit(certificationCourse.toDTO(), [
-    'complementaryCertificationCourse',
-    'certificationIssueReports',
-    'assessment',
-    'challenges',
-    'createdAt',
-    'numberOfChallenges',
-    'isAdjustedForAccessibility',
-  ]);
+  /* eslint-disable no-unused-vars */
+  const {
+    complementaryCertificationCourse,
+    certificationIssueReports,
+    assessment,
+    challenges,
+    createdAt,
+    numberOfChallenges,
+    isAdjustedForAccessibility,
+    ...rest
+  } = certificationCourse.toDTO();
+  /* eslint-enable no-unused-vars */
+  return rest;
 }
 
-function _pickUpdatableProperties(certificationCourse) {
-  return _.pick(certificationCourse.toDTO(), [
-    'id',
-    'birthdate',
-    'birthplace',
-    'firstName',
-    'lastName',
-    'sex',
-    'birthCountry',
-    'birthINSEECode',
-    'birthPostalCode',
-    'abortReason',
-    'completedAt',
-    'isRejectedForFraud',
-  ]);
+function _extractPropertiesForUpdate(certificationCourse) {
+  const certificationCourseDTO = certificationCourse.toDTO();
+  return {
+    id: certificationCourseDTO.id,
+    birthdate: certificationCourseDTO.birthdate,
+    birthplace: certificationCourseDTO.birthplace,
+    firstName: certificationCourseDTO.firstName,
+    lastName: certificationCourseDTO.lastName,
+    updatedAt: new Date(),
+    sex: certificationCourseDTO.sex,
+    birthCountry: certificationCourseDTO.birthCountry,
+    birthINSEECode: certificationCourseDTO.birthINSEECode,
+    birthPostalCode: certificationCourseDTO.birthPostalCode,
+    abortReason: certificationCourseDTO.abortReason,
+    completedAt: certificationCourseDTO.completedAt,
+    isRejectedForFraud: certificationCourseDTO.isRejectedForFraud,
+  };
 }
