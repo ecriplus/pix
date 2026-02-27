@@ -208,6 +208,139 @@
                 "type": "text",
                 "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0 </p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants : <br>- generate_image : pour générer des images <br>- calculator : pour effectuer des calculs numériques<br> <br> Règles d’utilisation : <br>1. Si l’utilisateur demande explicitement la création ou la génération d’une image, tu DOIS appeler l’outil `generate_image`. <br>2. Si la demande peut être résolue par un calcul mathématique exact,&nbsp;tu DOIS appeler l’outil `calculator`.`. <br>3. Si aucun outil n’est appropriée, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil : <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid</code><br></blockquote>"
               }
+               },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "a898285f-1976-4273-a7a8-3c1b7ecf9f53",
+                      "type": "custom",
+                      "instruction": "<p>Yasmine envoie ce prompt à ChatPix 3.0, le logiciel d'IA défini ci-dessus.</p>",
+                      "tagName": "llm-messages",
+                      "props": {
+                        "messages": [
+                          {
+                            "direction": "outbound",
+                            "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5 m de longueur, pour 3 couches de peinture avec une peinture de rendement 10 m²/L/couche ?"
+                          }
+                        ]
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
+                    },
+                    {
+                      "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "La recherche sur internet.",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><br><p> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "La génération d’image.",
+                          "feedback": {
+                            "diagnosis": "Eh non ! <br> Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "La calculatrice.",
+                          "feedback": {
+                            "diagnosis": "Bien vu ! Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "Aucun outil ne va être utilisé.",
+                          "feedback": {
+                            "diagnosis": "Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "Le logiciel d’IA doit mobiliser la calculatrice pour répondre à cette question. Cet outil est justement défini dans son prompt système."
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "d51c484f-4e0f-424d-8d4e-4b22587a5260",
+                      "type": "custom",
+                      "instruction": "<p>Yasmine envoie le prompt suivant à ChatPix 3.0, défini ci-dessus.</p>",
+                      "tagName": "llm-messages",
+                      "props": {
+                        "messages": [
+                          {
+                            "direction": "inbound",
+                            "content": "Quelle est l’heure de fermeture du magasin de bricolage qui ferme le plus tard à proximité de Jolieville ?"
+                          }
+                        ]
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
+                    },
+                    {
+                      "id": "e99bf18b-14df-4e78-ae8d-8b756f704898",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Quel outil peut être utilisé par ChatPix 3.0 pour répondre à cette demande ?&nbsp;</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "La recherche sur internet.",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé ! </p><br><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de ChatPix 3.0.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "La génération d’image.",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "La calculatrice.",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Aucun outil ne va être utilisé.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
+                          }
+                        },
+                        {
+                          "id": "5",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais cet outil n’est pas disponible dans la liste des outils mis à disposition de&nbsp;ChatPix 3.0.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "4"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
