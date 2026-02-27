@@ -35,6 +35,7 @@ test(
     enrollCandidateAndPassExam,
     pixAdminRoleCertifPage,
     getCertifiableUserData,
+    waitForScoringJobToBeCompleted,
     snapshotHandler,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
@@ -52,6 +53,7 @@ test(
       await expect(pixAppCertifiablePage.locator('h2')).toContainText(
         'Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix',
       );
+      await waitForScoringJobToBeCompleted(certificationNumber);
     });
 
     await test.step('Finalization and scoring', async () => {

@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 
 import { PixCertifiableUserData } from '../../helpers/certification/builders/types.ts';
+import { knex } from '../../helpers/db.ts';
 import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { HomePage } from '../../pages/pix-app/index.ts';
 import { InvigilatorLoginPage, InvigilatorOverviewPage, SessionListPage } from '../../pages/pix-certif/index.ts';
@@ -69,6 +70,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
   passCertificationExam: (args: PassCertificationExamParams) => Promise<PassCertificationExamResult>;
   passManyCertificationExams: (args: PassManyCertificationExamsParams) => Promise<PassManyCertificationExamsResults>;
   enrollCandidateAndPassExam: (args: EnrollCandidateAndPassExamParams) => Promise<EnrollCandidateAndPassExamResult>;
+  waitForScoringJobToBeCompleted: (args: string) => Promise<void>;
 }>({
   enrollCandidate: async ({ pixCertifProPage }, use) => {
     const enrollCandidate = async ({
@@ -284,6 +286,30 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       return { sessionNumber, invigilatorOverviewPage, certificationNumber };
     };
     await use(enrollCandidateAndPassExam);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  waitForScoringJobToBeCompleted: async ({}, use) => {
+    const waitForScoringJobToBeCompleted = async (certificationNumber: string) => {
+      const start = Date.now();
+
+      while (Date.now() - start < 10_000) {
+        const job = await knex('pgboss.job')
+          .where({
+            name: 'CertificationCompletedJob',
+          })
+          .whereRaw(`data @> ?::jsonb`, [JSON.stringify({ certificationCourseId: parseInt(certificationNumber) })])
+          .first();
+
+        if (job?.state === 'completed') {
+          return;
+        }
+
+        await new Promise((r) => setTimeout(r, 1_000));
+      }
+
+      throw new Error('Certification job did not reach completed state in time or never existed');
+    };
+    await use(waitForScoringJobToBeCompleted);
   },
 });
 
