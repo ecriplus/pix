@@ -191,7 +191,7 @@
           "errors": {
             "error-in-batch": "L'archivage d'une des organisations a échoué. L'organization concernée est à la ligne {currentLine} du fichier comportant {totalLines} lignes. Corrigez la ligne concernée et ré-importez le fichier."
           },
-          "success": "Les organisations ont bien été archivées."
+          "success": "{ count, plural, one {Une organisation a bien été archivée.} other {{ count } organisations ont bien été archivées.}}"
         },
         "title": "Archivage des organisations en masse",
         "upload-button": "Importer un fichier CSV"
