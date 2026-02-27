@@ -122,21 +122,21 @@
                     "id": "1",
                     "content": "L’exemple 1",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu&nbsp;!</p><p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Bien vu&nbsp;!</p><p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "L’exemple 2",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !</p><p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Eh non !</p><p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p>Les réponses données par les IA générative se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
                     }
                   }
                 ],
