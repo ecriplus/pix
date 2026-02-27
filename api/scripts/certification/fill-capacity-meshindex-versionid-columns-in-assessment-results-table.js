@@ -132,7 +132,7 @@ async function processCertifications(certificationsData, coreScoringConfiguratio
   let latestCertificationIdProcessed;
   const assessmentResultsToUpdate = [];
   logger.info(
-    `Processing certification from ${certificationsData[0].certificationCourseId} to ${certificationsData.at(-1).id}...`,
+    `Processing certification from ${certificationsData[0].certificationCourseId} to ${certificationsData.at(-1).certificationCourseId}...`,
   );
   for (const certificationData of certificationsData) {
     try {
