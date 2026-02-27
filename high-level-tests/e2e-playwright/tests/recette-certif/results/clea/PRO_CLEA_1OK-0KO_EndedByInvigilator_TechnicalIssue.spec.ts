@@ -37,14 +37,13 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, invigilatorOverviewPage } = await enrollCandidateAndPassExam({
+    const { sessionNumber, invigilatorOverviewPage, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: [true],
       certificationKey: CERTIFICATIONS_DATA.CLEA.key,
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });
-    let certificationNumber = '';
 
     await test.step('user stops at second challenge', async () => {
       await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('2 / 32');
@@ -99,7 +98,6 @@ test(
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        certificationNumber = certificationInformationPage.getCertificationNumber();
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',

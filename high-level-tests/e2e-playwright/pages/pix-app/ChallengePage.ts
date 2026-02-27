@@ -65,4 +65,8 @@ export class ChallengePage {
     await this.page.getByRole('button', { name: 'Quitter' }).click();
     await this.page.getByRole('link', { name: "Quitter l'épreuve et retourner à la page d'accueil" }).click();
   }
+
+  async getCertificationNumber() {
+    return await this.page.locator('.certification-number__value').innerText();
+  }
 }

@@ -42,6 +42,12 @@ type PassManyCertificationExamsParams = {
 
 type PassCertificationExamResult = {
   invigilatorOverviewPage: InvigilatorOverviewPage;
+  certificationNumber: string;
+};
+
+type PassManyCertificationExamsResults = {
+  invigilatorOverviewPage: InvigilatorOverviewPage;
+  certificationNumbers: string[];
 };
 
 type EnrollCandidateAndPassExamParams = {
@@ -54,14 +60,14 @@ type EnrollCandidateAndPassExamParams = {
 
 type EnrollCandidateAndPassExamResult = {
   sessionNumber: string;
+  certificationNumber: string;
   invigilatorOverviewPage: InvigilatorOverviewPage;
 };
 
-// todo renomme moi
 export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidate: (args: EnrollCandidateParams) => Promise<EnrollCandidateResult>;
   passCertificationExam: (args: PassCertificationExamParams) => Promise<PassCertificationExamResult>;
-  passManyCertificationExams: (args: PassManyCertificationExamsParams) => Promise<PassCertificationExamResult>;
+  passManyCertificationExams: (args: PassManyCertificationExamsParams) => Promise<PassManyCertificationExamsResults>;
   enrollCandidateAndPassExam: (args: EnrollCandidateAndPassExamParams) => Promise<EnrollCandidateAndPassExamResult>;
 }>({
   enrollCandidate: async ({ pixCertifProPage }, use) => {
@@ -122,6 +128,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       rightWrongAnswersSequence,
       pixAppPage,
     }: PassCertificationExamParams) => {
+      let certificationNumber: string = '';
       const invigilatorOverviewPage = await certifSetupFixtures.step('Evaluation', async () => {
         await pixAppPage.goto(process.env.PIX_APP_URL!);
 
@@ -152,6 +159,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
 
         await certifSetupFixtures.step('Candidate takes the test', async () => {
           const challengePage = await certificationAccessCodePage.fillAccessCodeAndStartCertificationTest(accessCode);
+          certificationNumber = await challengePage.getCertificationNumber();
           for (const [i, shouldAnswerCorrectly] of rightWrongAnswersSequence.entries()) {
             const challengeImprint = await challengePage.getChallengeImprint();
             snapshotHandler.push('challenge imprint to have value', challengeImprint);
@@ -165,6 +173,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
 
       return {
         invigilatorOverviewPage,
+        certificationNumber,
       };
     };
     await use(passCertificationExam);
@@ -176,6 +185,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       accessCode,
       invigilatorCode,
     }: PassManyCertificationExamsParams) => {
+      const certificationNumbers: string[] = [];
       const invigilatorOverviewPage = await certifSetupFixtures.step('Evaluation', async () => {
         const reachAccessCodePagePromises = examsData.map(async (examData) => {
           await examData.pixAppPage.goto(process.env.PIX_APP_URL!);
@@ -224,6 +234,8 @@ export const certifSetupFixtures = baseCertifTest.extend<{
             `Candidate ${examData.certifiableUserData.firstName} takes the test`,
             async () => {
               const challengePage = await accessCodePage.fillAccessCodeAndStartCertificationTest(accessCode);
+              const certificationNumber = await challengePage.getCertificationNumber();
+              certificationNumbers.push(certificationNumber);
               for (const [i, shouldAnswerCorrectly] of examData.rightWrongAnswersSequence.entries()) {
                 await expect(examData.pixAppPage.getByLabel('Votre progression')).toContainText(`${i + 1} / 32`);
                 await challengePage.setRightOrWrongAnswer(shouldAnswerCorrectly);
@@ -241,6 +253,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
 
       return {
         invigilatorOverviewPage,
+        certificationNumbers,
       };
     };
     await use(passManyCertificationExams);
@@ -258,7 +271,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
         certificationKey,
         certifiableUserData,
       });
-      const { invigilatorOverviewPage } = await passCertificationExam({
+      const { invigilatorOverviewPage, certificationNumber } = await passCertificationExam({
         certifiableUserData,
         sessionNumber,
         accessCode,
@@ -268,7 +281,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
         pixAppPage,
       });
 
-      return { sessionNumber, invigilatorOverviewPage };
+      return { sessionNumber, invigilatorOverviewPage, certificationNumber };
     };
     await use(enrollCandidateAndPassExam);
   },
