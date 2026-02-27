@@ -3,6 +3,8 @@ import fs from 'node:fs/promises';
 
 import { examples } from '@1024pix/epreuves-components/examples';
 
+import demoEpreuveComponents from '../../src/devcomp/infrastructure/datasources/learning-content/modules/demo-epreuves-components.json' with { type: 'json' };
+
 const module = {
   id: '235c680e-cbd2-4c56-bef6-80d3ed4d417a',
   shortId: '0aefd71f',
@@ -32,21 +34,22 @@ const module = {
 
 function generateGrain(poiName, props) {
   const grain = {};
+  const oldGrain = demoEpreuveComponents.sections[0].grains.find((grain) => grain.title === poiName);
 
-  grain.id = randomUUID();
+  grain.id = oldGrain?.id ?? randomUUID();
   grain.type = 'discovery';
   grain.title = poiName;
-  grain.components = generateComponent(poiName, props);
+  grain.components = generateComponents(poiName, props, oldGrain);
 
   return grain;
 }
 
-function generateComponent(poiName, props) {
+function generateComponents(poiName, props, oldGrain) {
   return [
     {
       type: 'element',
       element: {
-        id: randomUUID(),
+        id: oldGrain?.components[0].element.id ?? randomUUID(),
         type: 'text',
         content: `<p>${poiName}</p>`,
       },
@@ -54,7 +57,7 @@ function generateComponent(poiName, props) {
     {
       type: 'element',
       element: {
-        id: randomUUID(),
+        id: oldGrain?.components[1].element.id ?? randomUUID(),
         type: 'custom',
         instruction: '',
         tagName: poiName,
