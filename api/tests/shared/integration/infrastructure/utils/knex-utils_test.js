@@ -1,7 +1,11 @@
 import _ from 'lodash';
 
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { DEFAULT_PAGINATION, fetchPage } from '../../../../../src/shared/infrastructure/utils/knex-utils.js';
+import {
+  batchUpdate,
+  DEFAULT_PAGINATION,
+  fetchPage,
+} from '../../../../../src/shared/infrastructure/utils/knex-utils.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Utils | Knex utils', function () {
@@ -512,6 +516,430 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
           });
         }
       });
+    });
+  });
+
+  describe('batchUpdate', function () {
+    beforeEach(async function () {
+      await knex.raw(`
+        CREATE TYPE batch_status AS ENUM ('pending', 'running', 'done', 'failed');
+      `);
+
+      await knex.schema.createTable('batch_update_test', (table) => {
+        table.integer('id').primary();
+        table.string('string_type', 255);
+        table.text('text_type');
+        table.specificType('smallint_type', 'smallint');
+        table.integer('integer_type');
+        table.bigInteger('biginteger_type');
+        table.specificType('numeric_type', 'numeric(12,4)');
+        table.float('float_type');
+        table.specificType('double_precision_type', 'double precision');
+        table.boolean('boolean_type');
+        table.timestamp('timestamp_type', { useTz: false });
+        table.timestamp('timestamptz_type', { useTz: true });
+        table.date('date_type');
+        table.time('time_type');
+        table.specificType('interval_type', 'interval');
+        table.uuid('uuid_type');
+        table.json('json_type');
+        table.jsonb('jsonb_type');
+        table.specificType('array_text_type', 'text[]');
+        table.specificType('array_integer_type', 'integer[]');
+        table.specificType('enum_type', 'batch_status');
+        table.specificType('array_enum_type', 'batch_status[]');
+        table.binary('binary_type');
+      });
+    });
+
+    afterEach(async function () {
+      await knex.schema.dropTableIfExists('batch_update_test');
+      await knex.raw(`DROP TYPE IF EXISTS batch_status CASCADE`);
+    });
+
+    it('can update correctly for all types', async function () {
+      // given
+      const insertRows = [
+        {
+          id: 1,
+          string_type: 'row1_string_type',
+          text_type: 'row1_desc',
+          smallint_type: 1,
+          integer_type: 10,
+          biginteger_type: 100,
+          numeric_type: 1.1111,
+          float_type: 1.1,
+          double_precision_type: 1.11,
+          boolean_type: true,
+          timestamp_type: new Date('2024-01-01T01:00:00Z'),
+          timestamptz_type: new Date('2024-01-01T01:00:00Z'),
+          date_type: '1991-01-01',
+          time_type: '06:00:00',
+          interval_type: '1 hour',
+          uuid_type: '11111111-1111-1111-1111-111111111111',
+          json_type: { row: 1 },
+          jsonb_type: { meta: 1 },
+          array_text_type: ['r1a', 'r1b'],
+          array_integer_type: [1, 2],
+          enum_type: 'pending',
+          array_enum_type: ['pending'],
+          binary_type: Buffer.from('row1_raw'),
+        },
+        {
+          id: 2,
+          string_type: 'row2_string_type',
+          text_type: 'row2_desc',
+          smallint_type: 2,
+          integer_type: 20,
+          biginteger_type: 200,
+          numeric_type: 2.2222,
+          float_type: 2.2,
+          double_precision_type: 2.22,
+          boolean_type: false,
+          timestamp_type: new Date('2024-02-02T02:00:00Z'),
+          timestamptz_type: new Date('2024-02-02T02:00:00Z'),
+          date_type: '1992-02-02',
+          time_type: '07:00:00',
+          interval_type: '2 hours',
+          uuid_type: '22222222-2222-2222-2222-222222222222',
+          json_type: { row: 2 },
+          jsonb_type: { meta: 2 },
+          array_text_type: ['r2a', 'r2b'],
+          array_integer_type: [3, 4],
+          enum_type: 'running',
+          array_enum_type: ['running'],
+          binary_type: Buffer.from('row2_raw'),
+        },
+        {
+          id: 3,
+          string_type: 'row3_string_type',
+          text_type: 'row3_desc',
+          smallint_type: 3,
+          integer_type: 30,
+          biginteger_type: 300,
+          numeric_type: 3.3333,
+          float_type: 3.3,
+          double_precision_type: 3.33,
+          boolean_type: true,
+          timestamp_type: new Date('2024-03-03T03:00:00Z'),
+          timestamptz_type: new Date('2024-03-03T03:00:00Z'),
+          date_type: '1993-03-03',
+          time_type: '08:00:00',
+          interval_type: '3 hours',
+          uuid_type: '33333333-3333-3333-3333-333333333333',
+          json_type: { row: 3 },
+          jsonb_type: { meta: 3 },
+          array_text_type: ['r3a', 'r3b'],
+          array_integer_type: [5, 6],
+          enum_type: 'failed',
+          array_enum_type: ['failed'],
+          binary_type: Buffer.from('row3_raw'),
+        },
+      ];
+      await knex('batch_update_test').insert(insertRows);
+
+      // when
+      await batchUpdate({
+        tableName: 'batch_update_test',
+        primaryKeyName: 'id',
+        rows: [
+          {
+            id: 1,
+            string_type: 'row1_new',
+            text_type: 'row1_desc_new',
+            smallint_type: 11,
+            integer_type: 110,
+            biginteger_type: 1100,
+            numeric_type: 11.1111,
+            float_type: 11.1,
+            double_precision_type: 11.11,
+            boolean_type: false,
+            timestamp_type: new Date('2025-01-01T01:00:00Z'),
+            timestamptz_type: new Date('2025-01-01T01:00:00Z'),
+            date_type: '2001-01-01',
+            time_type: '09:00:00',
+            interval_type: '11 hours',
+            uuid_type: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+            json_type: { row: '1_updated' },
+            jsonb_type: { meta: '1_updated' },
+            array_text_type: ['r1_new'],
+            array_integer_type: [10, 11],
+            enum_type: 'done',
+            array_enum_type: ['running', 'done'],
+            binary_type: Buffer.from('row1_new_raw'),
+          },
+          {
+            id: 2,
+            string_type: null,
+            text_type: null,
+            smallint_type: null,
+            integer_type: null,
+            biginteger_type: null,
+            numeric_type: undefined,
+            float_type: null,
+            double_precision_type: null,
+            boolean_type: null,
+            timestamp_type: null,
+            timestamptz_type: null,
+            date_type: null,
+            time_type: null,
+            interval_type: null,
+            uuid_type: null,
+            json_type: null,
+            jsonb_type: null,
+            array_text_type: null,
+            array_integer_type: null,
+            enum_type: null,
+            array_enum_type: null,
+            binary_type: null,
+          },
+        ],
+      });
+
+      // then
+      const [r1, r2, r3] = await knex('batch_update_test').orderBy('id');
+      expect(r1).to.deep.include({
+        id: 1,
+        string_type: 'row1_new',
+        text_type: 'row1_desc_new',
+        smallint_type: 11,
+        integer_type: 110,
+        biginteger_type: 1100,
+        numeric_type: '11.1111',
+        float_type: 11.1,
+        double_precision_type: 11.11,
+        boolean_type: false,
+        uuid_type: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+        json_type: { row: '1_updated' },
+        jsonb_type: { meta: '1_updated' },
+        array_text_type: ['r1_new'],
+        array_integer_type: [10, 11],
+        enum_type: 'done',
+        array_enum_type: '{running,done}',
+        binary_type: Buffer.from('row1_new_raw'),
+      });
+
+      expect(r2).to.deep.include({
+        id: 2,
+        string_type: null,
+        text_type: null,
+        smallint_type: null,
+        integer_type: null,
+        biginteger_type: null,
+        numeric_type: null,
+        float_type: null,
+        double_precision_type: null,
+        boolean_type: null,
+        uuid_type: null,
+        json_type: null,
+        jsonb_type: null,
+        array_text_type: null,
+        array_integer_type: null,
+        enum_type: null,
+        array_enum_type: null,
+        binary_type: null,
+      });
+
+      expect(r3).to.deep.include({
+        id: 3,
+        string_type: 'row3_string_type',
+        text_type: 'row3_desc',
+        smallint_type: 3,
+        integer_type: 30,
+        biginteger_type: 300,
+        numeric_type: '3.3333',
+        float_type: 3.3,
+        double_precision_type: 3.33,
+        boolean_type: true,
+        uuid_type: '33333333-3333-3333-3333-333333333333',
+        json_type: { row: 3 },
+        jsonb_type: { meta: 3 },
+        array_text_type: ['r3a', 'r3b'],
+        array_integer_type: [5, 6],
+        enum_type: 'failed',
+        array_enum_type: '{failed}',
+        binary_type: Buffer.from('row3_raw'),
+      });
+    });
+
+    it('can partially update rows', async function () {
+      // given
+      const insertRows = [
+        {
+          id: 1,
+          string_type: 'row1_original',
+          integer_type: 10,
+        },
+        {
+          id: 2,
+          string_type: 'row2_original',
+          integer_type: 20,
+        },
+        {
+          id: 3,
+          string_type: 'row3_original',
+          integer_type: 30,
+        },
+      ];
+      await knex('batch_update_test').insert(insertRows);
+
+      // when
+      await batchUpdate({
+        tableName: 'batch_update_test',
+        primaryKeyName: 'id',
+        rows: [
+          {
+            id: 1,
+            integer_type: 110,
+          },
+          {
+            id: 2,
+            integer_type: null,
+          },
+        ],
+      });
+
+      // then
+      const [r1, r2, r3] = await knex('batch_update_test').orderBy('id');
+      expect(r1).to.deep.include({
+        id: 1,
+        string_type: 'row1_original',
+        text_type: null,
+        integer_type: 110,
+        smallint_type: null,
+        biginteger_type: null,
+        numeric_type: null,
+        float_type: null,
+        double_precision_type: null,
+        boolean_type: null,
+        uuid_type: null,
+        json_type: null,
+        jsonb_type: null,
+        array_text_type: null,
+        array_integer_type: null,
+        enum_type: null,
+        array_enum_type: null,
+        binary_type: null,
+      });
+
+      expect(r2).to.deep.include({
+        id: 2,
+        string_type: 'row2_original',
+        text_type: null,
+        smallint_type: null,
+        integer_type: null,
+        biginteger_type: null,
+        numeric_type: null,
+        float_type: null,
+        double_precision_type: null,
+        boolean_type: null,
+        uuid_type: null,
+        json_type: null,
+        jsonb_type: null,
+        array_text_type: null,
+        array_integer_type: null,
+        enum_type: null,
+        array_enum_type: null,
+        binary_type: null,
+      });
+
+      expect(r3).to.deep.include({
+        id: 3,
+        string_type: 'row3_original',
+        text_type: null,
+        smallint_type: null,
+        integer_type: 30,
+        biginteger_type: null,
+        numeric_type: null,
+        float_type: null,
+        double_precision_type: null,
+        boolean_type: null,
+        uuid_type: null,
+        json_type: null,
+        jsonb_type: null,
+        array_text_type: null,
+        array_integer_type: null,
+        enum_type: null,
+        array_enum_type: null,
+        binary_type: null,
+      });
+    });
+
+    it('does nothing when passing an empty array of rows', async function () {
+      const insertRows = [
+        {
+          id: 1,
+          string_type: 'row1_original',
+        },
+        {
+          id: 2,
+          string_type: 'row2_original',
+        },
+      ];
+      await knex('batch_update_test').insert(insertRows);
+
+      // when
+      await batchUpdate({
+        tableName: 'batch_update_test',
+        primaryKeyName: 'id',
+        rows: [],
+      });
+
+      // then
+      const [r1, r2] = await knex('batch_update_test').orderBy('id');
+      expect(r1).to.deep.include({
+        id: 1,
+        string_type: 'row1_original',
+      });
+
+      expect(r2).to.deep.include({
+        id: 2,
+        string_type: 'row2_original',
+      });
+    });
+
+    it('should chunk updates', async function () {
+      // given
+      const total = 100;
+      const rowsToInsert = [];
+      const rowsToUpdate = [];
+      for (let index = 0; index < total; index++) {
+        rowsToInsert.push({
+          id: index + 1,
+          string_type: `row${index}-original`,
+        });
+        if (index % 2 === 0) {
+          rowsToUpdate.push({
+            id: index + 1,
+            string_type: `row${index}-updated`,
+          });
+        }
+      }
+      await knex('batch_update_test').insert(rowsToInsert);
+      let updateQueryCount = 0;
+      function countUpdatesListener(query) {
+        if (query.sql.startsWith('UPDATE "public"."batch_update_test"')) {
+          updateQueryCount++;
+        }
+      }
+      knex.on('query', countUpdatesListener);
+
+      // when
+      try {
+        await batchUpdate({
+          tableName: 'batch_update_test',
+          primaryKeyName: 'id',
+          rows: rowsToUpdate,
+          chunkSize: 10,
+        });
+      } finally {
+        knex.off('query', countUpdatesListener);
+      }
+
+      // then
+      const countUpdated = await knex('batch_update_test').whereLike('string_type', '%-updated');
+      expect(countUpdated.length).to.equal(50);
+      expect(updateQueryCount).to.equal(5);
     });
   });
 });
