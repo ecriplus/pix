@@ -19,9 +19,12 @@ export async function get({ id }) {
       certificationCourseId: 'certification-courses.id',
       certificationCourseVersion: 'certification-courses.version',
       certificationCourseUpdatedAt: 'certification-courses.updatedAt',
+      certificationCourseEndedAt: 'certification-courses.endedAt',
       certificationCourseCompletedAt: 'certification-courses.completedAt',
       certificationCourseAbortReason: 'certification-courses.abortReason',
+      certificationCourseAssessmentId: 'assessments.id',
       certificationCourseAssessmentState: 'assessments.state',
+      certificationCourseAssessmentUpdatedAt: 'assessments.updatedAt',
     })
     .from('sessions')
     .leftJoin('certification-courses', 'certification-courses.sessionId', 'sessions.id')
@@ -40,9 +43,12 @@ export async function get({ id }) {
         id: certificationCourseData.certificationCourseId,
         version: certificationCourseData.certificationCourseVersion,
         updatedAt: certificationCourseData.certificationCourseUpdatedAt,
+        endedAt: certificationCourseData.certificationCourseEndedAt,
         completedAt: certificationCourseData.certificationCourseCompletedAt,
         abortReason: certificationCourseData.certificationCourseAbortReason,
+        assessmentId: certificationCourseData.certificationCourseAssessmentId,
         assessmentState: certificationCourseData.certificationCourseAssessmentState,
+        assessmentLatestActivityAt: certificationCourseData.certificationCourseAssessmentUpdatedAt,
       });
       certificationCourses.push(certificationCourse);
     }
@@ -68,6 +74,7 @@ export async function save({ session }) {
   const certificationCoursesDataToUpdate = session.certificationCourses.map((certificationCourse) => ({
     id: certificationCourse.id,
     updatedAt: certificationCourse.updatedAt,
+    endedAt: certificationCourse.endedAt,
     abortReason: certificationCourse.abortReason,
   }));
   await batchUpdate({
@@ -75,4 +82,31 @@ export async function save({ session }) {
     primaryKeyName: 'id',
     rows: certificationCoursesDataToUpdate,
   });
+
+  const assessmentsDataToUpdate = session.certificationCourses.map((certificationCourse) => ({
+    id: certificationCourse.assessmentId,
+    state: certificationCourse.assessmentState,
+  }));
+  await batchUpdate({
+    tableName: 'assessments',
+    primaryKeyName: 'id',
+    rows: assessmentsDataToUpdate,
+  });
+}
+
+export async function saveCertification({ certificationCourse }) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-courses')
+    .update({
+      updatedAt: certificationCourse.updatedAt,
+      endedAt: certificationCourse.endedAt,
+      abortReason: certificationCourse.abortReason,
+    })
+    .where({ id: certificationCourse.id });
+
+  await knexConn('assessments')
+    .update({
+      state: certificationCourse.assessmentState,
+    })
+    .where({ id: certificationCourse.assessmentId });
 }

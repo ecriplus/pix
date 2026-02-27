@@ -101,11 +101,14 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
             sessionId,
             abortReason: null,
             version: 3,
+            endedAt: null,
             completedAt: null,
           }).id;
           databaseBuilder.factory.buildAssessment({
+            id: 1,
             state: Assessment.states.COMPLETED,
             certificationCourseId: certificationCourseIdForCompleted,
+            updatedAt: new Date('2021-10-29'),
           });
           certificationReports.push(
             domainBuilder.buildCertificationReport({
@@ -118,11 +121,14 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
             sessionId,
             version: 3,
             completedAt: null,
+            endedAt: null,
             abortReason: 'candidate',
           }).id;
           databaseBuilder.factory.buildAssessment({
+            id: 2,
             state: Assessment.states.STARTED,
             certificationCourseId: certificationCourseIdForNotCompletedWithAbortReason,
+            updatedAt: new Date('2021-10-29'),
           });
           certificationReports.push(
             domainBuilder.buildCertificationReport({
@@ -168,13 +174,16 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           it('finalizes the session and the related certifications, also unaborts any completed certifications', async function () {
             const certificationCourseIdToUnabort = databaseBuilder.factory.buildCertificationCourse({
               sessionId,
+              endedAt: null,
               completedAt: new Date('2022-01-01'),
               abortReason: 'technical',
               version: 3,
             }).id;
             databaseBuilder.factory.buildAssessment({
+              id: 3,
               state: Assessment.states.ENDED_BY_INVIGILATOR,
               certificationCourseId: certificationCourseIdToUnabort,
+              updatedAt: new Date('2021-10-29'),
             });
             certificationReports.push(
               domainBuilder.buildCertificationReport({
@@ -205,23 +214,32 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
                   domainBuilder.certification.sessionManagement.buildCertificationCourse({
                     id: certificationCourseIdForCompleted,
                     abortReason: null,
+                    assessmentId: 1,
                     assessmentState: Assessment.states.COMPLETED,
+                    assessmentLatestActivityAt: new Date('2021-10-29'),
                     completedAt: null,
+                    endedAt: null,
                     updatedAt: now,
                     version: 3,
                   }),
                   domainBuilder.certification.sessionManagement.buildCertificationCourse({
                     id: certificationCourseIdForNotCompletedWithAbortReason,
                     abortReason: 'candidate',
+                    assessmentId: 2,
                     assessmentState: Assessment.states.STARTED,
+                    assessmentLatestActivityAt: new Date('2021-10-29'),
                     completedAt: null,
+                    endedAt: null,
                     updatedAt: now,
                     version: 3,
                   }),
                   domainBuilder.certification.sessionManagement.buildCertificationCourse({
                     id: certificationCourseIdToUnabort,
                     abortReason: null,
+                    assessmentId: 3,
                     assessmentState: Assessment.states.ENDED_BY_INVIGILATOR,
+                    assessmentLatestActivityAt: new Date('2021-10-29'),
+                    endedAt: null,
                     completedAt: new Date('2022-01-01'),
                     updatedAt: now,
                     version: 3,

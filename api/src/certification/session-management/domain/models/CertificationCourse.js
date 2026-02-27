@@ -1,14 +1,28 @@
+import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 
 export class CertificationCourse {
-  constructor({ id, version, updatedAt, completedAt, abortReason, assessmentState }) {
+  constructor({
+    id,
+    version,
+    updatedAt,
+    endedAt,
+    completedAt,
+    abortReason,
+    assessmentId,
+    assessmentState,
+    assessmentLatestActivityAt,
+  }) {
     this.id = id;
     this.version = version;
     this.updatedAt = updatedAt;
+    this.endedAt = endedAt;
     this.completedAt = completedAt;
     this.abortReason = abortReason;
+    this.assessmentId = assessmentId;
     this.assessmentState = assessmentState;
+    this.assessmentLatestActivityAt = assessmentLatestActivityAt;
   }
 
   finalize({ finalizedAt, certificationReport }) {
@@ -36,5 +50,13 @@ export class CertificationCourse {
 
   get isAbortReasonTechnical() {
     return this.abortReason === ABORT_REASONS.TECHNICAL;
+  }
+
+  endDueToFinalization() {
+    if (this.assessmentState === Assessment.states.STARTED) {
+      this.assessmentState = Assessment.states.ENDED_DUE_TO_FINALIZATION;
+      this.endedAt = this.assessmentLatestActivityAt;
+      this.updatedAt = new Date();
+    }
   }
 }
