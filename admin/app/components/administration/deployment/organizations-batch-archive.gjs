@@ -24,6 +24,8 @@ export default class OrganizationsBatchArchive extends Component {
     const formData = new FormData();
     formData.append('file', files[0]);
 
+    const numberOfDataLines = await _getCsvDataLinesCount(files);
+
     try {
       await this.requestManager.request({
         url: `${ENV.APP.API_HOST}/api/admin/organizations/batch-archive`,
@@ -32,7 +34,9 @@ export default class OrganizationsBatchArchive extends Component {
       });
 
       this.pixToast.sendSuccessNotification({
-        message: this.intl.t('components.administration.organizations-batch-archive.notifications.success'),
+        message: this.intl.t('components.administration.organizations-batch-archive.notifications.success', {
+          count: numberOfDataLines,
+        }),
       });
     } catch (errorResponse) {
       const errors = errorResponse.errors;
@@ -82,4 +86,22 @@ export default class OrganizationsBatchArchive extends Component {
       </DownloadTemplate>
     </AdministrationBlockLayout>
   </template>
+}
+
+async function _getCsvDataLinesCount(files) {
+  const file = files[0];
+
+  const text = await file.text();
+
+  const lines = text.split(/\r?\n/);
+
+  const filtered = _filterEmptyLines(lines);
+
+  const numberOfDataLines = filtered.length - 1;
+  return numberOfDataLines;
+}
+
+function _filterEmptyLines(lines) {
+  const filtered = lines.filter((line) => line.trim() !== '');
+  return filtered;
 }

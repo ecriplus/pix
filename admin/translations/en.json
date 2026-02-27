@@ -190,7 +190,7 @@
           "errors": {
             "error-in-batch": "The organizations archiving has failed. The organization ID line n°{currentLine} failed, out of {totalLines} lines."
           },
-          "success": "The organizations have been archived."
+          "success": "{ count, plural, one {One organization has been successfully archived.} other {{ count } organizations have been successfully archived.}}"
         },
         "title": "Archiving of organizations in batch",
         "upload-button": "Import a CSV file"

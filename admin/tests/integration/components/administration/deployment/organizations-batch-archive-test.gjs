@@ -22,24 +22,35 @@ module('Integration | Component | administration/organizations-batch-archive', f
   });
 
   module('when batch archive succeeds', function () {
-    test('it displays a success notification', async function (assert) {
+    test('it displays the correct number of archived organizations in success notification', async function (assert) {
       // given
-      const file = new Blob(['foo'], { type: `valid-file` });
+      const csvContent = `id
+                          1,
+                          2,
+                          3,`;
+
+      const file = new File([csvContent], 'test.csv', { type: 'text/csv' });
 
       requestManagerService.request.resolves({ response: { ok: true, status: 204 } });
 
-      // when
       const screen = await render(
         <template><OrganizationsBatchArchive /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
       );
+
       const input = await screen.findByLabelText(
         t('components.administration.organizations-batch-archive.upload-button'),
       );
+
+      // when
       await triggerEvent(input, 'change', { files: [file] });
 
       // then
       assert.ok(
-        await screen.findByText(t('components.administration.organizations-batch-archive.notifications.success')),
+        await screen.findByText(
+          t('components.administration.organizations-batch-archive.notifications.success', {
+            count: 3,
+          }),
+        ),
       );
     });
   });
