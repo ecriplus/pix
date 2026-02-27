@@ -35,7 +35,7 @@ const getLiveAlertValidatedChallengeIdsByAssessmentId = async ({ assessmentId })
       status: CertificationChallengeLiveAlertStatus.VALIDATED,
     });
 
-  return liveAlertValidatedChallengeIds.map((ccla) => {ccla.challengeId});
+  return liveAlertValidatedChallengeIds.map((ccla) => ccla.challengeId);
 };
 
 const getOngoingBySessionIdAndUserId = async ({ sessionId, userId }) => {
