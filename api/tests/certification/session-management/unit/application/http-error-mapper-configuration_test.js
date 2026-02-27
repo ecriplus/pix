@@ -5,7 +5,6 @@ import {
   InvalidSessionSupervisingLoginError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithoutStartedCertificationError,
 } from '../../../../../src/certification/session-management/domain/errors.js';
 import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
@@ -36,27 +35,6 @@ describe('Unit | Certification | Session | Application | HttpErrorMapperConfigur
 
       //then
       expect(error).to.be.instanceOf(HttpErrors.BadRequestError);
-      expect(error.message).to.equal(message);
-      expect(error.code).to.equal(code);
-    });
-  });
-
-  context('when mapping "SessionWithAbortReasonOnCompletedCertificationCourseError"', function () {
-    it('returns an UnauthorizedError Http Error', function () {
-      //given
-      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
-        (httpErrorMapper) => httpErrorMapper.name === SessionWithAbortReasonOnCompletedCertificationCourseError.name,
-      );
-      const message = 'Test message error';
-      const code = 'SESSION_WITH_ABORT_REASON_ON_COMPLETED_CERTIFICATION_COURSE';
-
-      //when
-      const error = httpErrorMapper.httpErrorFn(
-        new SessionWithAbortReasonOnCompletedCertificationCourseError(message, code),
-      );
-
-      //then
-      expect(error).to.be.instanceOf(HttpErrors.ConflictError);
       expect(error.message).to.equal(message);
       expect(error.code).to.equal(code);
     });

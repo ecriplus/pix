@@ -209,12 +209,8 @@ import { buildGlobalCertificationLevel } from './certification/results/build-glo
 import { buildCertificate } from './certification/results/build-v3-certification-attestation.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
-import { buildAllowedCertificationCenterAccess as buildSessionManagementAllowedCertificationCenterAccess } from './certification/session-management/build-allowed-certification-center-access.js';
-import { buildCertificationCandidate as buildSessionManagementCandidate } from './certification/session-management/build-certification-candidate.js';
 import { buildCertificationDetails } from './certification/session-management/build-certification-details.js';
-import { buildCertificationSessionComplementaryCertification } from './certification/session-management/build-certification-session-complementary-certification.js';
-import { buildJurySessionCounters } from './certification/session-management/build-jury-session-counters.js';
-import { buildSessionManagement } from './certification/session-management/build-session.js';
+import { builders as sessionManagementBuilders } from './certification/session-management/index.js';
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
 import { buildComplementaryCertification as buildSharedComplementaryCertification } from './certification/shared/build-complementary-certification.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
@@ -239,7 +235,6 @@ import { buildOrganizationLearnerImportFormat } from './prescription/learner-man
 import { buildOrganizationToJoin } from './prescription/organization-learner/build-organization-to-join.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
-
 const acquisition = {
   buildOrganizationLearnerType,
 };
@@ -297,13 +292,7 @@ const certification = {
     buildCertificationChallengeCapacity,
     buildCertificationAssessmentHistory,
   },
-  sessionManagement: {
-    buildAllowedCertificationCenterAccess: buildSessionManagementAllowedCertificationCenterAccess,
-    buildCertificationSessionComplementaryCertification,
-    buildSession: buildSessionManagement,
-    buildCertificationCandidate: buildSessionManagementCandidate,
-    buildJurySessionCounters,
-  },
+  sessionManagement: sessionManagementBuilders,
   shared: {
     buildCertificationCompanionLiveAlert,
     buildJuryComment: buildJuryComment,

@@ -307,7 +307,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         const userId = 1;
 
         const v3CertificationAttestation = domainBuilder.certification.results.buildCertificate();
-        const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement.finalized({ id: 12 });
         const generatedPdf = Symbol('Stream');
 
         const request = {
@@ -347,7 +347,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
     describe('when attestations are for a v2 session', function () {
       it('should return an attestation in PDF binary format', async function () {
         // given
-        const session = domainBuilder.certification.sessionManagement.buildSession.finalized({ id: 12 });
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement.finalized({ id: 12 });
         domainBuilder.buildCertificationCourse({
           id: 1,
           sessionId: 12,

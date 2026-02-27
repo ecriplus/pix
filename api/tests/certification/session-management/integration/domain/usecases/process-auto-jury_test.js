@@ -5,6 +5,7 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import {
   catchErr,
   databaseBuilder,
+  domainBuilder,
   expect,
   knex,
   learningContentBuilder,
@@ -389,7 +390,7 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
 
       it('should score and end assessment by finalization', async function () {
         // given
-        const sessionId = databaseBuilder.factory.buildSession({ finalizedAt: new Date() }).id;
+        const sessionId = databaseBuilder.factory.buildSession({ finalizedAt: new Date('2025-01-01') }).id;
         const userId = databaseBuilder.factory.buildUser().id;
         databaseBuilder.factory.buildCertificationCandidate({
           sessionId,
@@ -410,11 +411,24 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           type: Assessment.types.CERTIFICATION,
           createdAt,
         }).id;
+        const session = domainBuilder.certification.sessionManagement.buildSession({
+          id: sessionId,
+          finalizedAt: new Date('2025-01-01'),
+          certificationCourses: [
+            domainBuilder.certification.sessionManagement.buildCertificationCourse({
+              id: certificationCourseId,
+              completedAt: null,
+              sessionId,
+              version: AlgorithmEngineVersion.V3,
+              assessmentState: Assessment.states.STARTED,
+            }),
+          ],
+        });
 
         await databaseBuilder.commit();
 
         // when
-        await usecases.processAutoJury({ sessionId });
+        await usecases.processAutoJury({ session });
 
         // then
         const scoring = await knex('assessment-results').where({ assessmentId: aStartedAssessmentId });
@@ -449,16 +463,29 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
             type: Assessment.types.CERTIFICATION,
             createdAt,
           }).id;
+          const session = domainBuilder.certification.sessionManagement.buildSession({
+            id: sessionId,
+            finalizedAt: new Date('2025-01-01'),
+            certificationCourses: [
+              domainBuilder.certification.sessionManagement.buildCertificationCourse({
+                id: certificationCourseId,
+                completedAt: null,
+                sessionId,
+                version: AlgorithmEngineVersion.V3,
+                assessmentState: Assessment.states.STARTED,
+              }),
+            ],
+          });
 
           await databaseBuilder.commit();
 
           // when
-          const errorDuringTransaction = await catchErr(async (sessionId) => {
+          const errorDuringTransaction = await catchErr(async () => {
             await DomainTransaction.execute(async () => {
-              await usecases.processAutoJury({ sessionId });
+              await usecases.processAutoJury({ session });
               throw new Error('test error');
             });
-          })(sessionId);
+          })();
 
           // then
           expect(errorDuringTransaction.message).to.equal('test error');

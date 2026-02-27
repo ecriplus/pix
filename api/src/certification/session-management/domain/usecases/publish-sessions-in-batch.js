@@ -10,7 +10,7 @@ const publishSessionsInBatch = async function ({
   certificationCenterRepository,
   certificationRepository,
   finalizedSessionRepository,
-  sessionRepository,
+  sessionManagementRepository,
   sharedSessionRepository,
   sessionPublicationService,
 }) {
@@ -24,7 +24,7 @@ const publishSessionsInBatch = async function ({
           certificationRepository,
           finalizedSessionRepository,
           sharedSessionRepository,
-          sessionRepository,
+          sessionManagementRepository,
         });
 
         await sessionPublicationService.manageEmails({
@@ -32,7 +32,7 @@ const publishSessionsInBatch = async function ({
           startedCertificationCoursesUserIds,
           publishedAt,
           certificationCenterRepository,
-          sessionRepository,
+          sessionManagementRepository,
         });
       });
     } catch (error) {

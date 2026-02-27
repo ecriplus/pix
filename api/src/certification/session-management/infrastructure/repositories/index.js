@@ -36,6 +36,7 @@ import * as jurySessionRepository from './jury-session-repository.js';
 import * as sessionForInvigilatorKitRepository from './session-for-invigilator-kit-repository.js';
 import * as sessionForSupervisingRepository from './session-for-supervising-repository.js';
 import * as sessionJuryCommentRepository from './session-jury-comment-repository.js';
+import * as sessionManagementRepository from './session-management-repository.js';
 import * as sessionRepository from './session-repository.js';
 import * as sessionSummaryRepository from './session-summary-repository.js';
 import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-certification-course-details-for-administration-repository.js';
@@ -59,7 +60,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {sessionForSupervisingRepository} SessionForSupervisingRepository
  * @typedef {sessionJuryCommentRepository} SessionJuryCommentRepository
  * @typedef {sessionSummaryRepository} SessionSummaryRepository
- * @typedef {sessionRepository} SessionRepository
+ * @typedef {sessionManagementRepository} SessionManagementRepository
  * @typedef {invigilatorSessionRepository} InvigilatorSessionRepository
  * @typedef {invigilatorAccessRepository} InvigilatorAccessRepository
  * @typedef {certificationReportRepository} CertificationReportRepository
@@ -82,6 +83,7 @@ import * as v3CertificationCourseDetailsForAdministrationRepository from './v3-c
  * @typedef {certificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {certificationCenterAccessApi} CertificationCenterAccessApi
  * @typedef {certificationCenterAccessRepository} CertificationCenterAccessRepository
+ * @typedef {sessionRepository} SessionRepository
  */
 const repositoriesWithoutInjectedDependencies = {
   assessmentRepository,
@@ -96,7 +98,7 @@ const repositoriesWithoutInjectedDependencies = {
   jurySessionRepository,
   sessionForInvigilatorKitRepository,
   issueReportCategoryRepository,
-  sessionRepository,
+  sessionManagementRepository,
   invigilatorSessionRepository,
   sessionSummaryRepository,
   sessionForSupervisingRepository,
@@ -119,6 +121,7 @@ const repositoriesWithoutInjectedDependencies = {
   certificationCompanionAlertRepository,
   certificationEvaluationRepository,
   certificationCenterAccessRepository,
+  sessionRepository,
 };
 
 /**
@@ -144,6 +147,7 @@ export {
   competenceMarkRepository,
   cpfExportRepository,
   repositories,
+  sessionRepository,
   sessionSummaryRepository,
   sharedCompetenceMarkRepository,
 };

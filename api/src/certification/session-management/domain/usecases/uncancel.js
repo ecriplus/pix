@@ -14,17 +14,17 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
  * @param {number} params.juryId
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationEvaluationRepository} params.certificationEvaluationRepository
- * @param {SessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  */
 export const uncancel = async function ({
   certificationCourseId,
   juryId,
   certificationCourseRepository,
   certificationEvaluationRepository,
-  sessionRepository,
+  sessionManagementRepository,
 }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-  const isSessionFinalized = await sessionRepository.isFinalized({ id: certificationCourse.getSessionId() });
+  const isSessionFinalized = await sessionManagementRepository.isFinalized({ id: certificationCourse.getSessionId() });
   if (!isSessionFinalized) {
     throw new NotFinalizedSessionError();
   }

@@ -1,4 +1,4 @@
-import * as sessionRepository from '../../../certification/session-management/infrastructure/repositories/session-repository.js';
+import * as sessionRepository from '../../../certification/session-management/infrastructure/repositories/session-management-repository.js';
 import * as certificationCourseRepository from '../../../certification/shared/infrastructure/repositories/certification-course-repository.js';
 
 const execute = async function ({

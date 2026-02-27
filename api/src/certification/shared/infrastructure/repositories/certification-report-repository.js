@@ -1,10 +1,7 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
-import { CertificationCourseUpdateError } from '../../domain/errors.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
 import { CertificationReport } from '../../domain/models/CertificationReport.js';
-
-const CERTIFICATION_COURSES_TABLE = 'certification-courses';
 
 export const findBySessionId = async ({ sessionId }) => {
   const knexConn = DomainTransaction.getConnection();
@@ -57,21 +54,6 @@ export const findBySessionId = async ({ sessionId }) => {
   }
 
   return Array.from(certificationReportsWithIssuesDataByCertif.values(), toDomain);
-};
-
-export const finalizeAll = async ({ certificationReports }) => {
-  try {
-    await Promise.all(certificationReports.map((certificationReport) => finalize(certificationReport)));
-  } catch {
-    throw new CertificationCourseUpdateError('An error occurred while finalizing the session');
-  }
-};
-
-const finalize = async (certificationReport) => {
-  const knexConnection = DomainTransaction.getConnection();
-  return knexConnection(CERTIFICATION_COURSES_TABLE).where({ id: certificationReport.certificationCourseId }).update({
-    updatedAt: new Date(),
-  });
 };
 
 function toDomain(certificationReportWithIssuesData) {

@@ -1,16 +1,17 @@
 /**
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').CertificationRepository} CertificationRepository
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').MailService} MailService
+ * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').SessionManagementRepository} SessionManagementRepository
  */
 import lodash from 'lodash';
 
-import { mailService } from '../../../../../src/certification/session-management/domain/services/mail-service.js';
 import {
   CertificationCourseNotPublishableError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
 } from '../errors.js';
 import { SessionAlreadyPublishedError } from '../errors.js';
+import { mailService } from './mail-service.js';
 
 const { some, uniqBy } = lodash;
 
@@ -21,7 +22,7 @@ import { logger } from '../../../../shared/infrastructure/utils/logger.js';
  * @param {object} params
  * @param {CertificationRepository} params.certificationRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
- * @param {SessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  * @param {SharedSessionRepository} params.sharedSessionRepository
  */
 async function publishSession({
@@ -29,7 +30,7 @@ async function publishSession({
   sessionId,
   certificationRepository,
   finalizedSessionRepository,
-  sessionRepository,
+  sessionManagementRepository,
   sharedSessionRepository,
 }) {
   const session = await sharedSessionRepository.getWithCertificationCandidates({ id: sessionId });
@@ -45,7 +46,7 @@ async function publishSession({
 
   await certificationRepository.publishCertificationCourses(certificationStatuses);
 
-  await sessionRepository.updatePublishedAt({ id: sessionId, publishedAt });
+  await sessionManagementRepository.updatePublishedAt({ id: sessionId, publishedAt });
 
   await _updateFinalizedSession(finalizedSessionRepository, sessionId, publishedAt);
 
@@ -57,7 +58,7 @@ async function publishSession({
 /**
  * @param {object} params
  * @param {certificationCenterRepository} params.certificationCenterRepository
- * @param {sessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  * @param {Array<number>} params.startedCertificationCoursesUserIds
  * @param {object} params.dependencies
  * @param {mailService} params.dependencies.mailService
@@ -66,13 +67,13 @@ async function manageEmails({
   session,
   publishedAt,
   certificationCenterRepository,
-  sessionRepository,
+  sessionManagementRepository,
   startedCertificationCoursesUserIds,
   dependencies = { mailService },
 }) {
   const cleaEmailingAttempts = await _manageCleaEmails({
     session,
-    sessionRepository,
+    sessionManagementRepository,
     certificationCenterRepository,
     mailService: dependencies.mailService,
   });
@@ -84,7 +85,7 @@ async function manageEmails({
   });
 
   if (_someHaveSucceeded(prescribersEmailingAttempts) && _noneHaveFailed(prescribersEmailingAttempts)) {
-    await sessionRepository.flagResultsAsSentToPrescriber({
+    await sessionManagementRepository.flagResultsAsSentToPrescriber({
       id: session.id,
       resultsSentToPrescriberAt: publishedAt,
     });
@@ -104,11 +105,11 @@ async function manageEmails({
 /**
  * @param {object} params
  * @param {CertificationCenterRepository} params.certificationCenterRepository
- * @param {SessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  * @param {MailService} params.mailService
  */
-async function _manageCleaEmails({ session, certificationCenterRepository, sessionRepository, mailService }) {
-  const hasSomeCleaAcquired = await sessionRepository.hasSomeCleaAcquired({ id: session.id });
+async function _manageCleaEmails({ session, certificationCenterRepository, sessionManagementRepository, mailService }) {
+  const hasSomeCleaAcquired = await sessionManagementRepository.hasSomeCleaAcquired({ id: session.id });
   if (!hasSomeCleaAcquired) {
     logger.debug(`No CLEA certifications in session ${session.id}`);
     return;

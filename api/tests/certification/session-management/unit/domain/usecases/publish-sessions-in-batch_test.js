@@ -6,14 +6,14 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
   let sessionPublicationService;
   let certificationRepository,
     finalizedSessionRepository,
-    sessionRepository,
+    sessionManagementRepository,
     certificationCenterRepository,
     sharedSessionRepository;
 
   beforeEach(function () {
     certificationRepository = Symbol('certificationRepository');
     finalizedSessionRepository = Symbol('finalizedSessionRepository');
-    sessionRepository = Symbol('sessionRepository');
+    sessionManagementRepository = Symbol('sessionManagementRepository');
     certificationCenterRepository = {};
     sharedSessionRepository = {};
 
@@ -27,8 +27,8 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
 
   it('delegates to the publish session service', async function () {
     // given
-    const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
-    const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
+    const session1 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 1 });
+    const session2 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 2 });
     const publishedAt = Symbol('a publication date');
     const startedCertificationCoursesUserIds1 = [101, 102];
     const startedCertificationCoursesUserIds2 = [201, 202];
@@ -48,7 +48,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       certificationRepository,
       certificationCenterRepository,
       finalizedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
       sessionPublicationService,
     });
@@ -59,7 +59,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       publishedAt,
       certificationRepository,
       finalizedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
@@ -67,7 +67,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       startedCertificationCoursesUserIds: startedCertificationCoursesUserIds1,
       publishedAt,
       certificationCenterRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
 
     expect(sessionPublicationService.publishSession).to.have.been.calledWithExactly({
@@ -76,22 +76,22 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
       certificationRepository,
       finalizedSessionRepository,
       sharedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
       session: session2,
       startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2,
       publishedAt,
       certificationCenterRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
   });
 
   context('when one or many session publication fail', function () {
     it('should continue', async function () {
       // given
-      const session1 = domainBuilder.certification.sessionManagement.buildSession({ id: 1 });
-      const session2 = domainBuilder.certification.sessionManagement.buildSession({ id: 2 });
+      const session1 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 1 });
+      const session2 = domainBuilder.certification.sessionManagement.buildSessionManagement({ id: 2 });
       const publishedAt = Symbol('a publication date');
       const startedCertificationCoursesUserIds2 = [201, 202];
 
@@ -101,7 +101,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
           publishedAt,
           certificationRepository,
           finalizedSessionRepository,
-          sessionRepository,
+          sessionManagementRepository,
           sharedSessionRepository,
         })
         .rejects(new Error('an error'));
@@ -117,7 +117,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         certificationCenterRepository,
         certificationRepository,
         finalizedSessionRepository,
-        sessionRepository,
+        sessionManagementRepository,
         sharedSessionRepository,
         sessionPublicationService,
       });
@@ -127,7 +127,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         publishedAt,
         certificationRepository,
         finalizedSessionRepository,
-        sessionRepository,
+        sessionManagementRepository,
         sharedSessionRepository,
       });
       expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
@@ -135,7 +135,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         startedCertificationCoursesUserIds: startedCertificationCoursesUserIds2,
         publishedAt,
         certificationCenterRepository,
-        sessionRepository,
+        sessionManagementRepository,
       });
     });
 
@@ -153,7 +153,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
           publishedAt,
           certificationRepository,
           finalizedSessionRepository,
-          sessionRepository,
+          sessionManagementRepository,
           sharedSessionRepository,
         })
         .rejects(error1);
@@ -163,7 +163,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
           publishedAt,
           certificationRepository,
           finalizedSessionRepository,
-          sessionRepository,
+          sessionManagementRepository,
           sharedSessionRepository,
         })
         .rejects(error2);
@@ -176,7 +176,7 @@ describe('Unit | UseCase | publish-sessions-in-batch', function () {
         certificationRepository,
         certificationCenterRepository,
         finalizedSessionRepository,
-        sessionRepository,
+        sessionManagementRepository,
         sharedSessionRepository,
         sessionPublicationService,
       });

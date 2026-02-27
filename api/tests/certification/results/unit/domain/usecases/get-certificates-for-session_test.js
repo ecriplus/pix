@@ -16,7 +16,7 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
 
   it('should return multiple certificates enhanced with result competence tree for a sessions', async function () {
     // given
-    domainBuilder.certification.sessionManagement.buildSession({
+    domainBuilder.certification.sessionManagement.buildSessionManagement({
       id: 11,
       finalizedAt: new Date('2020-01-02T14:00:00Z'),
       certificationCenter: 'Centre des deux certificats',
@@ -85,7 +85,7 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
   describe('when there is no certification courses for the session', function () {
     it('should throw a NotFoundError', async function () {
       // given
-      domainBuilder.certification.sessionManagement.buildSession({
+      domainBuilder.certification.sessionManagement.buildSessionManagement({
         id: 12,
         finalizedAt: new Date('2020-01-02T14:00:00Z'),
         certificationCenter: 'Centre sans attestation',
@@ -108,7 +108,7 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
   describe('when there is no certificate for the session', function () {
     it('should throw a NotFoundError', async function () {
       // given
-      domainBuilder.certification.sessionManagement.buildSession({
+      domainBuilder.certification.sessionManagement.buildSessionManagement({
         id: 13,
         finalizedAt: new Date('2020-01-02T14:00:00Z'),
         certificationCenter: 'Centre sans attestation',

@@ -8,7 +8,6 @@ import {
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionNotAccessible,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,
 } from '../domain/errors.js';
@@ -17,10 +16,6 @@ const sessionDomainErrorMappingConfiguration = [
   {
     name: SessionWithoutStartedCertificationError.name,
     httpErrorFn: (error) => new HttpErrors.BadRequestError(error.message, error.code, error.meta),
-  },
-  {
-    name: SessionWithAbortReasonOnCompletedCertificationCourseError.name,
-    httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
   },
   {
     name: SessionWithMissingAbortReasonError.name,

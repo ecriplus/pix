@@ -4,13 +4,13 @@ const deleteCertificationIssueReport = async function ({
   certificationIssueReportId,
   certificationCourseRepository,
   certificationIssueReportRepository,
-  sessionRepository,
+  sessionManagementRepository,
 }) {
   const certificationIssueReport = await certificationIssueReportRepository.get({ id: certificationIssueReportId });
   const sessionId = await certificationCourseRepository.getSessionId({
     id: certificationIssueReport.certificationCourseId,
   });
-  const isFinalized = await sessionRepository.isFinalized({ id: sessionId });
+  const isFinalized = await sessionManagementRepository.isFinalized({ id: sessionId });
 
   if (isFinalized) {
     throw new ForbiddenAccess('Certification issue report deletion forbidden');

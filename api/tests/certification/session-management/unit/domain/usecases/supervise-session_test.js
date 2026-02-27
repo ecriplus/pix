@@ -131,7 +131,7 @@ describe('Unit | UseCase | supervise-session', function () {
       // given
       const sessionId = 123;
       const certificationCenterId = 456;
-      const session = domainBuilder.certification.sessionManagement.buildSession.created({ id: sessionId });
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement.created({ id: sessionId });
       const userId = 434;
       const certificationCenter = domainBuilder.buildCertificationCenter({ id: certificationCenterId });
       const blockedCertificationCenterAccess =

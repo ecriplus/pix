@@ -1,6 +1,6 @@
 import * as dataProtectionOfficerRepository from '../../../../organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
-import * as sessionManagementRepository from '../../../session-management/infrastructure/repositories/session-repository.js';
+import * as sessionManagementRepository from '../../../session-management/infrastructure/repositories/session-management-repository.js';
 import * as certificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as targetProfileHistoryRepository from '../../../shared/infrastructure/repositories/target-profile-history-repository.js';
