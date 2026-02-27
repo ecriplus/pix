@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.343.1](https://github.com/1024pix/pix/compare/v5.343.0...v5.343.1) (2026-02-27)
+
+### :building_construction: Tech
+
+- [#15301](https://github.com/1024pix/pix/pull/15301) Amélioration du nombre de requêtes généré par le usecase process-auto-jury (PIX-21763)
+
 # [5.343.0](https://github.com/1024pix/pix/compare/v5.342.0...v5.343.0) (2026-02-27)
 
 ### :rocket: Amélioration
