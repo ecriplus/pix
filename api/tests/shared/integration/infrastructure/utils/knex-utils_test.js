@@ -638,7 +638,7 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
       ];
       await knex('batch_update_test').insert(insertRows);
 
-      // given
+      // when
       await batchUpdate({
         tableName: 'batch_update_test',
         primaryKeyName: 'id',
@@ -783,7 +783,7 @@ describe('Integration | Infrastructure | Utils | Knex utils', function () {
       ];
       await knex('batch_update_test').insert(insertRows);
 
-      // given
+      // when
       await batchUpdate({
         tableName: 'batch_update_test',
         primaryKeyName: 'id',
