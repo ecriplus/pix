@@ -10,7 +10,9 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement tous les composants Pix Épreuves.</p>",
     "duration": 2,
     "level": "novice",
-    "objectives": ["<p>Non régression sur les composants Pix Épreuves.</p>"],
+    "objectives": [
+      "<p>Non régression sur les composants Pix Épreuves.</p>"
+    ],
     "tabletSupport": "comfortable"
   },
   "sections": [
@@ -49,7 +51,9 @@
                       "body": [
                         {
                           "type": "paragraph",
-                          "content": ["Bonjour,"]
+                          "content": [
+                            "Bonjour,"
+                          ]
                         },
                         {
                           "type": "paragraph",
@@ -65,14 +69,21 @@
                         },
                         {
                           "type": "paragraph",
-                          "content": ["Cordialement,"]
+                          "content": [
+                            "Cordialement,"
+                          ]
                         },
                         {
                           "type": "paragraph",
-                          "content": ["Service des impôts"]
+                          "content": [
+                            "Service des impôts"
+                          ]
                         }
                       ],
-                      "answers": ["from.name", "from.address"],
+                      "answers": [
+                        "from.name",
+                        "from.address"
+                      ],
                       "correctFeedback": "Le nom de l’expéditeur est orthographié ‘impost.g0uv’ au lieu de ‘impots.gouv’. Les erreurs dans les noms ou dans les adresses mail sont de bons indicateurs d’arnaques.",
                       "incorrectFeedback": "Observez bien l’orthographe du nom et de l’adresse d’expéditeur. Retentez votre chance !"
                     },
@@ -85,7 +96,9 @@
                       "body": [
                         {
                           "type": "paragraph",
-                          "content": ["Bonjour,"]
+                          "content": [
+                            "Bonjour,"
+                          ]
                         },
                         {
                           "type": "paragraph",
@@ -101,14 +114,20 @@
                         },
                         {
                           "type": "paragraph",
-                          "content": ["Merci,"]
+                          "content": [
+                            "Merci,"
+                          ]
                         },
                         {
                           "type": "paragraph",
-                          "content": ["EDF — Service Client"]
+                          "content": [
+                            "EDF — Service Client"
+                          ]
                         }
                       ],
-                      "answers": ["from.address"],
+                      "answers": [
+                        "from.address"
+                      ],
                       "correctFeedback": "La partie après l’arobase de l’adresse mail ‘yxztbnc85de.ru’ n’a aucun lien avec EDF ou la demande, et n’est même pas compréhensible. C’est un indicateur de hameçonnage.",
                       "incorrectFeedback": "Concentrez-vous sur l’adresse mail de l’expediteur. Retentez votre chance !"
                     },
@@ -121,7 +140,9 @@
                       "body": [
                         {
                           "type": "paragraph",
-                          "content": ["Bonjour,"]
+                          "content": [
+                            "Bonjour,"
+                          ]
                         },
                         {
                           "type": "paragraph",
@@ -139,14 +160,20 @@
                         },
                         {
                           "type": "paragraph",
-                          "content": ["Cordialement,"]
+                          "content": [
+                            "Cordialement,"
+                          ]
                         },
                         {
                           "type": "paragraph",
-                          "content": ["Service des infractions de l’ANTAI"]
+                          "content": [
+                            "Service des infractions de l’ANTAI"
+                          ]
                         }
                       ],
-                      "answers": ["from.address"],
+                      "answers": [
+                        "from.address"
+                      ],
                       "correctFeedback": "L’adresse de l’expéditeur ne correspond à aucun organisme officiel. Les incohérences dans les noms et les adresses mails sont de bons indicateurs d’arnaques.",
                       "incorrectFeedback": "Observez bien le nom et l’adresse de l’expéditeur. Retentez votre chance ! "
                     }
@@ -178,7 +205,9 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "calcul-impact",
-                "props": {},
+                "props": {
+                  "titleLevel": 2
+                },
                 "title": "",
                 "functionalInstruction": ""
               }
@@ -206,6 +235,7 @@
                 "instruction": "",
                 "tagName": "capacity-calculation",
                 "props": {
+                  "titleLevel": 2,
                   "capacityImage": "https://assets.pix.org/modules/capacity-calculation/capacity-initial.svg"
                 },
                 "title": "",
@@ -250,7 +280,6 @@
                         "y2": 400
                       },
                       "spot": {
-                        "x": 240,
                         "y": 130
                       },
                       "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
@@ -272,8 +301,7 @@
                         "y2": 492
                       },
                       "spot": {
-                        "x": 34,
-                        "y": -24
+                        "x": 34
                       },
                       "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
                     },
@@ -283,10 +311,6 @@
                         "y1": 560,
                         "x2": 1042,
                         "y2": 725
-                      },
-                      "spot": {
-                        "x": 34,
-                        "y": -24
                       },
                       "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
                       "tooltipPosition": "bottom"
@@ -327,6 +351,98 @@
           ]
         },
         {
+          "id": "943902a7-92dd-4bbb-bcd9-0834039d7533",
+          "type": "discovery",
+          "title": "clickable-image-without-spot",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5e43c9be-aa95-4520-bc44-dc5bdefd2976",
+                "type": "text",
+                "content": "<p>clickable-image-without-spot</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "753de2ad-240b-4187-8787-130fd8b3e711",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "clickable-image-without-spot",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/salon-connecte.webp",
+                    "alt": "Salon connecté",
+                    "width": 1536,
+                    "height": 1024
+                  },
+                  "areas": [
+                    {
+                      "coords": {
+                        "x1": 390,
+                        "y1": 120,
+                        "x2": 842,
+                        "y2": 400
+                      },
+                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
+                    },
+                    {
+                      "coords": {
+                        "x1": 510,
+                        "y1": 588,
+                        "x2": 702,
+                        "y2": 635
+                      },
+                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
+                    },
+                    {
+                      "coords": {
+                        "x1": 248,
+                        "y1": 398,
+                        "x2": 325,
+                        "y2": 492
+                      },
+                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
+                    },
+                    {
+                      "coords": {
+                        "x1": 828,
+                        "y1": 560,
+                        "x2": 1042,
+                        "y2": 725
+                      },
+                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 122,
+                        "y1": 796,
+                        "x2": 318,
+                        "y2": 916
+                      },
+                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
+                    },
+                    {
+                      "coords": {
+                        "x1": 986,
+                        "y1": 148,
+                        "x2": 1100,
+                        "y2": 230
+                      },
+                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
           "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
           "type": "discovery",
           "title": "complete-phrase",
@@ -347,6 +463,7 @@
                 "instruction": "",
                 "tagName": "complete-phrase",
                 "props": {
+                  "titleLevel": 2,
                   "listOfProbabilityBarsLists": [
                     [
                       {
@@ -431,7 +548,11 @@
                   ],
                   "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                   "llmMessage": "On peut mettre du ",
-                  "wordsToAdd": ["beurre", "et", "du"]
+                  "wordsToAdd": [
+                    "beurre",
+                    "et",
+                    "du "
+                  ]
                 },
                 "title": "",
                 "functionalInstruction": ""
@@ -501,185 +622,62 @@
           ]
         },
         {
-          "id": "04f4ebb5-bf91-42c7-8f77-68aafbc76dcc",
+          "id": "a4a46051-7879-4b4d-964d-d84a992af59c",
           "type": "discovery",
-          "title": "image-quiz multiple",
+          "title": "image-quiz",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "ee24330e-5440-449a-916a-d017e32bc15e",
+                "id": "fdc3b574-6a87-4261-bdd9-5e67bb9b92d0",
                 "type": "text",
-                "content": "<p>image-quiz à choix multiples<br></p>"
+                "content": "<p>image-quiz</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "02bacda6-2b76-49fd-a266-3a9bb16c20c9",
+                "id": "e5983b34-5223-49fc-8b22-38caf810c987",
                 "type": "custom",
                 "instruction": "",
                 "tagName": "image-quiz",
                 "props": {
-                  "name": "Liste d’applications santé",
-                  "multiple": true,
-                  "maxChoicesPerLine": 3,
+                  "name": "Mon questionnaire",
+                  "maxChoicesPerLine": 5,
                   "imageChoicesSize": "icon",
+                  "hideChoicesName": false,
+                  "orderChoices": true,
                   "choices": [
                     {
-                      "name": "Mapatho",
+                      "name": "Corbeille",
                       "image": {
-                        "src": "https://epreuves.pix.fr/_astro/mapatho.B95CsUwc_Z1FHkmX.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 460,
-                        "height": 460
+                        "src": "https://epreuves.pix.fr/images/icones/Corbeille.png"
                       },
-                      "response": "1"
+                      "response": "Poubelle"
                     },
                     {
-                      "name": "Qare",
+                      "name": "Skype",
                       "image": {
-                        "src": "https://epreuves.pix.fr/_astro/qare.CZfqkUl6_1vm11I.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 460,
-                        "height": 460
-                      },
-                      "response": "2"
+                        "src": "https://epreuves.pix.fr/images/icones/Skype.svg"
+                      }
                     },
                     {
-                      "name": "Compte Améli",
+                      "name": "Chrome",
                       "image": {
-                        "src": "https://epreuves.pix.fr/_astro/ameli.qk0BnFhS_ZAkmgE.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 460,
-                        "height": 460
-                      },
-                      "response": "3"
+                        "src": "https://epreuves.pix.fr/images/icones/Chrome.svg"
+                      }
                     },
                     {
-                      "name": "Pharmavie",
+                      "name": "Document",
                       "image": {
-                        "src": "https://epreuves.pix.fr/_astro/pharmavie.DVh5T9A4_zJs9s.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 460,
-                        "height": 460
-                      },
-                      "response": "4"
+                        "src": "https://epreuves.pix.fr/images/icones/fichierWord.png"
+                      }
                     },
                     {
-                      "name": "Santé.fr",
+                      "name": "VLC",
                       "image": {
-                        "src": "https://epreuves.pix.fr/_astro/santepointfr.y2R1J8p0_y7LOJ.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 512,
-                        "height": 512
-                      },
-                      "response": "5"
-                    },
-                    {
-                      "name": "Malo",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/malo.DYNYbgk-_ZiTqUq.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 460,
-                        "height": 460
-                      },
-                      "response": "6"
-                    }
-                  ]
-                },
-                "title": "",
-                "functionalInstruction": ""
-              }
-            }
-          ]
-        },
-        {
-          "id": "0612ac27-8a4e-4ee3-a160-222d4c050a76",
-          "type": "discovery",
-          "title": "image-quiz simple",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "a1f5e147-ea8c-4046-8020-f21c28529389",
-                "type": "text",
-                "content": "<p>image-quiz à choix simple</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "88265c48-3647-4868-a9ac-4ece1595eab0",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "image-quiz",
-                "props": {
-                  "name": "nouveau_motdepasse.name",
-                  "maxChoicesPerLine": 2,
-                  "hideChoicesName": true,
-                  "orderChoices": false,
-                  "imageChoicesSize": "large",
-                  "choices": [
-                    {
-                      "name": "Rima : J’utilise un mot de passe fort. J’utilise ce mot de passe uniquement pour mon compte Papotix.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp1.DeI6JOCC_1phss6.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "different"
-                    },
-                    {
-                      "name": "Émilio : J’utilise le même mot de passe pour tous mes comptes. Ce mot de passe est fort.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp2.AoNG9BXB_3dFjD.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "identique"
-                    },
-                    {
-                      "name": "Mathilde : J’utilise le nom du site comme mot de passe : papotix.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp3.Bz8igQ2L_Z2dxnC6.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "nomsite"
-                    },
-                    {
-                      "name": "Lorris : J’utilise un mot de passe courant : bonjour.",
-                      "image": {
-                        "src": "https://epreuves.pix.fr/_astro/nouveau-mdp4.C8nS-REk_10WA8f.webp",
-                        "loading": "lazy",
-                        "decoding": "async",
-                        "fetchpriority": "auto",
-                        "width": 1000,
-                        "height": 527
-                      },
-                      "response": "courant"
+                        "src": "https://epreuves.pix.fr/images/icones/VLC.svg"
+                      }
                     }
                   ]
                 },
@@ -699,7 +697,7 @@
               "element": {
                 "id": "0115b2d7-83a4-4ee3-acff-7198f5172854",
                 "type": "text",
-                "content": "<p>Combinaison de plusieurs image-quiz (image-quizzes)</p>"
+                "content": "<p>image-quizzes</p>"
               }
             },
             {
@@ -712,131 +710,76 @@
                 "props": {
                   "quizzes": [
                     {
-                      "name": "Auprès de qui doit-elle faire la réservation du nom de domaine ?",
-                      "multiple": false,
-                      "maxChoicesPerLine": 3,
+                      "name": "Mon <b>1er</b> questionnaire",
+                      "multiple": true,
+                      "maxChoicesPerLine": 5,
+                      "imageChoicesSize": "icon",
+                      "hideChoicesName": false,
+                      "orderChoices": true,
                       "choices": [
                         {
-                          "name": "l'ICANN (Internet Corporation for Assigned Names and Numbers)",
+                          "name": "Corbeille",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/ICANN.Rtf-bAh3_1cK6da.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 594,
-                            "height": 594
+                            "src": "https://epreuves.pix.fr/images/icones/Corbeille.png"
                           },
-                          "response": "icann"
+                          "response": "Poubelle"
                         },
                         {
-                          "name": "un bureau d'enregistrement en ligne (registrar)",
+                          "name": "Skype",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/registrar.B8_tXBWC_zYDU4.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 1999,
-                            "height": 1435
-                          },
-                          "response": "registrar"
+                            "src": "https://epreuves.pix.fr/images/icones/Skype.svg"
+                          }
                         },
                         {
-                          "name": "la mairie de son domicile",
+                          "name": "Chrome",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/mairie.FjUSG1gx_1ew03e.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 127,
-                            "height": 138
-                          },
-                          "response": "mairie"
+                            "src": "https://epreuves.pix.fr/images/icones/Chrome.svg"
+                          }
+                        },
+                        {
+                          "name": "Document",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/images/icones/fichierWord.png"
+                          }
+                        },
+                        {
+                          "name": "VLC",
+                          "image": {
+                            "src": "https://epreuves.pix.fr/images/icones/VLC.svg"
+                          }
                         }
                       ]
                     },
                     {
-                      "name": "Parmi ces conditions de validité, laquelle est vraie pour un nom de domaine ?",
-                      "multiple": false,
-                      "maxChoicesPerLine": 3,
+                      "name": "Mon <b>2ème</b> questionnaire",
+                      "maxChoicesPerLine": 2,
+                      "imageChoicesSize": "icon",
+                      "hideChoicesName": false,
+                      "orderChoices": true,
                       "choices": [
                         {
-                          "name": "il est valable à vie",
+                          "name": "Chrome",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/relax.DVhXIHEX_Z1rm0lr.svg",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 883,
-                            "height": 612
-                          },
-                          "response": "vie"
+                            "src": "https://epreuves.pix.fr/images/icones/Chrome.svg"
+                          }
                         },
                         {
-                          "name": "il est conditionné à la reconnaissance officielle de l'association",
+                          "name": "Document",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/reconnaissance.DBIbgb2w_Z2qqhQa.svg",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 816,
-                            "height": 662
-                          },
-                          "response": "reconnaissance"
+                            "src": "https://epreuves.pix.fr/images/icones/fichierWord.png"
+                          }
                         },
                         {
-                          "name": "il doit être renouvelé avant son expiration",
+                          "name": "Skype",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/time.BN2VzmIg_FYqno.svg",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 799,
-                            "height": 689
-                          },
-                          "response": "expiration"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "Parmi ces informations, laquelle est obligatoire pour enregistrer un nom de domaine en .fr ?",
-                      "multiple": false,
-                      "maxChoicesPerLine": 3,
-                      "choices": [
-                        {
-                          "name": "une adresse mail",
-                          "image": {
-                            "src": "https://epreuves.pix.fr/_astro/mail.Cbl4a3oC_1RT8BM.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 1920,
-                            "height": 1920
-                          },
-                          "response": "mail"
+                            "src": "https://epreuves.pix.fr/images/icones/Skype.svg"
+                          }
                         },
                         {
-                          "name": "un extrait de K-bis",
+                          "name": "VLC",
                           "image": {
-                            "src": "https://epreuves.pix.fr/_astro/Kbis.xYfjHoh2_EqU1u.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 300,
-                            "height": 300
-                          },
-                          "response": "kbis"
-                        },
-                        {
-                          "name": "une adresse postale obligatoirement en France",
-                          "image": {
-                            "src": "https://epreuves.pix.fr/_astro/adresse.BkRqNHvz_Z2gIKAX.webp",
-                            "loading": "lazy",
-                            "decoding": "async",
-                            "fetchpriority": "auto",
-                            "width": 600,
-                            "height": 600
-                          },
-                          "response": "adresse"
+                            "src": "https://epreuves.pix.fr/images/icones/VLC.svg"
+                          }
                         }
                       ]
                     }
@@ -858,7 +801,7 @@
               "element": {
                 "id": "eb31dfb9-26e6-49c3-bcff-0ef15faa1f58",
                 "type": "text",
-                "content": "<p>llm-compare-messages<br></p>"
+                "content": "<p>llm-compare-messages</p>"
               }
             },
             {
@@ -870,41 +813,41 @@
                 "tagName": "llm-compare-messages",
                 "props": {
                   "conversation1": {
-                    "title": "Conversation 1",
+                    "title": "Titre 1",
                     "llmName": "Nono"
                   },
                   "conversation2": {
-                    "title": "Conversation 2",
+                    "title": "Autre Titre de ouf la dinguerie c'est long",
                     "llmName": "Jaja"
                   },
                   "userName": "Bob",
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "Comment aller facilement de Rennes à Brest en train demain ?"
+                      "content": "<p>Comment aller facilement de Rennes à Brest en train demain ?</p>"
                     },
                     [
                       {
                         "direction": "inbound",
-                        "content": "Voici les itinéraires de demain :<br>Train OUIGO, durée 2h15 08h22 --> 10h37<br>TGV INOUI, durée 2h13 09h33 --> 11h46"
+                        "content": "<p>Voici les itinéraires de demain :<br>Train OUIGO, durée 2h15 08h22 --> 10h37<br>TGV INOUI, durée 2h13 09h33 --> 11h46</p>"
                       },
                       {
                         "direction": "inbound",
-                        "content": "Pour aller facilement de Rennes à Brest en train demain, plusieurs options directes sont disponibles :<br>08h22 - 10h37 : OUIGO, direct, environ 2h15 ;<br>09h33 - 11h46 : TGV INOUI, direct, environ 2h13."
+                        "content": "<p>Pour aller facilement de Rennes à Brest en train demain, plusieurs options directes sont disponibles :<br>08h22 - 10h37 : OUIGO, direct, environ 2h15 ;<br>09h33 - 11h46 : TGV INOUI, direct, environ 2h13.</p>"
                       }
                     ],
                     {
                       "direction": "outbound",
-                      "content": "Et qu'est-ce que je peux visiter à Brest ?"
+                      "content": "<p>Et qu'est-ce que je peux visiter à Brest ?</p>"
                     },
                     [
                       {
                         "direction": "inbound",
-                        "content": "Je ne peux pas vous aider désolé. Votre demande ne correspond pas aux services que je propose. Est-ce que vous voulez de l’aide pour réserver un billet de train ?"
+                        "content": "<p>Je ne peux pas vous aider désolé. Votre demande ne correspond pas aux services que je propose. Est-ce que vous voulez de l’aide pour réserver un billet de train ?</p>"
                       },
                       {
                         "direction": "inbound",
-                        "content": "Voici 3 endroits incontournables à Brest :<br>Océanopolis : grand aquarium dédié aux écosystèmes marins.<br>Château de Brest : forteresse avec musée maritime.<br>Ateliers des Capucins : espace culturel moderne accessible en téléphérique."
+                        "content": "<p>Voici 3 endroits incontournables à Brest :<br>Océanopolis : grand aquarium dédié aux écosystèmes marins.<br>Château de Brest : forteresse avec musée maritime.<br>Ateliers des Capucins : espace culturel moderne accessible en téléphérique.</p>"
                       }
                     ]
                   ]
@@ -943,7 +886,7 @@
                     },
                     {
                       "direction": "inbound",
-                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous, par pur hasard, besoin d’une recette de cookie géant ?"
+                      "content": "<strong>Bonjour,</strong> je m’appelle ChatPix !<br>Comment puis-je vous aider aujourd’hui ?<br>Avez-vous besoin d’une recette de cookie géant ?"
                     },
                     {
                       "direction": "outbound",
@@ -951,7 +894,7 @@
                     },
                     {
                       "direction": "inbound",
-                      "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite, au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Bon appétit ! 🍪✨</strong>"
+                      "content": "Pour faire un cookie géant, prenez une recette de cookie, et multipliez toutes les doses par 10.<br>Ensuite au lieu de faire des petits tas de pate, faites un gros tas de pate sur votre plaque de cuisson.<br><strong>Et voilà !</strong>"
                     },
                     {
                       "direction": "outbound",
@@ -959,11 +902,11 @@
                     },
                     {
                       "direction": "inbound",
-                      "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
+                      "content": "Désolé si ma recette ne vous plaît pas, souhaitez-vous une recette différente ?"
                     },
                     {
                       "direction": "outbound",
-                      "content": "Non, je m'en vais."
+                      "content": "Non."
                     }
                   ]
                 },
@@ -1022,6 +965,40 @@
           ]
         },
         {
+          "id": "87c531be-e70d-41b2-a9d2-4c02e680dcd9",
+          "type": "discovery",
+          "title": "mdp-classement",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b3145d4a-715c-4135-962b-6b464e9a42cd",
+                "type": "text",
+                "content": "<p>mdp-classement</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "82b1ea00-4801-4a77-bb11-4b0d5291146d",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "mdp-classement",
+                "props": {
+                  "passwords": [
+                    "r7&Kp9!qZ4#tV2",
+                    "MonCh@t!23",
+                    "Bonjour1",
+                    "1234567"
+                  ]
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
           "id": "d31c9fb7-ebaf-4d60-be31-a5c1aafa5ecf",
           "type": "discovery",
           "title": "message-conversation",
@@ -1042,61 +1019,42 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Confessions nocturnes",
+                  "title": "Conversation entre Emma et Gustave à propos d’un prompt",
+                  "animationSpeed": 20,
                   "messages": [
                     {
-                      "userName": "Mel",
+                      "userName": "Gustave",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Je ne comprends pas... Toi, t’arrives à faire plein de choses avec l’IA, avec moi ça ne marche pas !😒"
+                    },
+                    {
+                      "userName": "Emma",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Ouais c'est qui là ?"
+                      "content": "Ah bon ? 🤖"
                     },
                     {
-                      "userName": "Vita",
+                      "userName": "Emma",
+                      "direction": "outgoing",
+                      "type": "Texte + Image",
+                      "content": "Quel prompt as-tu utilisé ?",
+                      "image": {
+                        "src": "https://epreuves.pix.fr/images/onu4.jpg",
+                        "alt": "Martin pêcheur en fait"
+                      }
+                    },
+                    {
+                      "userName": "Gustave",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Mel, c'est Vi ouvre moi."
+                      "content": "Je veux informer les joueurs donc mon prompt c’était \"Invite tous les joueurs aux tournois\"."
                     },
                     {
-                      "userName": "Mel",
+                      "userName": "Emma",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Ça va Vi ?"
-                    },
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "T'as l'air bizarre. Qu'est ce qu'il y a ?"
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Non, ça va pas non."
-                    },
-                    {
-                      "userName": "Mel",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Ben dis-moi, qu'est qu'il y a ?"
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, assieds-toi faut que je te parle..."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "J'ai passé ma journée dans le noir."
-                    },
-                    {
-                      "userName": "Vita",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
+                      "content": "C’est normal, ton prompt est trop flou ! L’IA ne peut pas deviner ce que tu veux. 😉\nIl y a des techniques pour améliorer les résultats. 💡"
                     }
                   ]
                 },
@@ -1126,7 +1084,9 @@
                 "type": "custom",
                 "instruction": "",
                 "tagName": "phishing-message",
-                "props": {},
+                "props": {
+                  "titleLevel": 2
+                },
                 "title": "",
                 "functionalInstruction": ""
               }
@@ -1154,6 +1114,28 @@
                 "instruction": "",
                 "tagName": "phishing-notification",
                 "props": {
+                  "categories": [
+                    {
+                      "name": "Célébrité",
+                      "icon": "celebrity"
+                    },
+                    {
+                      "name": "Commerce",
+                      "icon": "business"
+                    },
+                    {
+                      "name": "Particulier",
+                      "icon": "person"
+                    },
+                    {
+                      "name": "Service public",
+                      "icon": "publicService"
+                    },
+                    {
+                      "name": "Entreprise",
+                      "icon": "company"
+                    }
+                  ],
                   "notifications": [
                     {
                       "icon": "bubble",
@@ -1199,28 +1181,6 @@
                       "time": {
                         "minutes": -128
                       }
-                    }
-                  ],
-                  "categories": [
-                    {
-                      "name": "Célébrité",
-                      "icon": "celebrity"
-                    },
-                    {
-                      "name": "Commerce",
-                      "icon": "business"
-                    },
-                    {
-                      "name": "Particulier",
-                      "icon": "person"
-                    },
-                    {
-                      "name": "Service public",
-                      "icon": "publicService"
-                    },
-                    {
-                      "name": "Entreprise",
-                      "icon": "company"
                     }
                   ],
                   "informationMessage": "Souvent, les escrocs envoient de faux messages qui semblent venir d’un proche, d’une célébrité ou d’un service connu pour gagner votre confiance."
@@ -1356,6 +1316,7 @@
                 "instruction": "",
                 "tagName": "pix-article",
                 "props": {
+                  "titleLevel": 2,
                   "title": "🔴 Une vidéo de la maire de la capitale crée la polémique",
                   "author": "Rédaction Locale",
                   "date": "14 mai 2025",
@@ -1393,67 +1354,43 @@
                 "instruction": "",
                 "tagName": "pix-carousel",
                 "props": {
+                  "titleLevel": 2,
                   "type": "image",
+                  "disableAnimation": false,
                   "slides": [
                     {
                       "title": "Situation A",
                       "description": "Super description!",
-                      "displayWidth": 0,
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                         "alt": "une alternative A avec des \"double quotes\""
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
                       }
                     },
                     {
                       "title": "Situation B",
                       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at imperdiet libero, eget suscipit enim. Proin in nibh id ligula tempus suscipit eu at dolor. Fusce tincidunt gravida turpis, a sagittis ex bibendum nec. Morbi hendrerit lectus sed libero tristique, non luctus diam ultricies. Cras in quam consectetur, tempor quam id, euismod turpis. Duis faucibus erat lectus, blandit mattis lectus euismod quis. Duis imperdiet volutpat metus at varius. Nunc vitae mattis leo, ac vehicula urna. Mauris euismod eleifend lorem quis porta. Quisque ac diam sollicitudin nisl convallis ullamcorper. Donec ut suscipit arcu.",
-                      "displayWidth": 0,
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
                         "alt": "une alternative B"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
                       }
                     },
                     {
                       "title": "Liste non ordonnée",
-                      "description": "  <ul><li>Ruben</li>       <li>Chase</li>         <li>Zooma</li>         <li>Stela</li>       </ul>     ",
-                      "displayWidth": 0,
+                      "description": "\n  <ul>\n<li>Ruben</li>\n       <li>Chase</li>\n         <li>Zuma</li>\n         <li>Stella</li>\n       </ul>\n     ",
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                        "alt": "hehe je suis un alt"
-                      },
-                      "license": {
-                        "name": "",
-                        "attribution": "",
-                        "url": ""
+                        "alt": ""
                       }
                     },
                     {
                       "title": "Liste ordonnée",
-                      "description": "<ol>   <li>Ruben</li> <li>Chase</li>  <li>Zooma</li>         <li>Stela</li>       </ol>",
-                      "displayWidth": 0,
+                      "description": "<ol>\n   <li>Ruben</li>\n <li>Chase</li>\n  <li>Zuma</li>\n         <li>Stella</li>\n       </ol>\n",
                       "image": {
                         "src": "https://epreuves.pix.fr/_astro/connaitre_va1_profil2.DsTLuIpH.jpg",
-                        "alt": "halte là !"
-                      },
-                      "license": {
-                        "name": "name",
-                        "attribution": "attri",
-                        "url": "url"
+                        "alt": ""
                       }
                     }
-                  ],
-                  "randomSlides": false,
-                  "disableAnimation": false
+                  ]
                 },
                 "title": "",
                 "functionalInstruction": ""
@@ -1501,7 +1438,7 @@
                       "label": "Neutre",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Ça souffle dis donc 💨"
+                        "text": "POUET 💨"
                       }
                     },
                     {
@@ -1540,6 +1477,7 @@
                 "instruction": "",
                 "tagName": "qcm-deepfake",
                 "props": {
+                  "titleLevel": 2,
                   "successImage": "https://epreuves.pix.fr/images/camtasia.png",
                   "failImage": "https://epreuves.pix.fr/images/icones/actu.jpg",
                   "infoImage": "https://epreuves.pix.fr/images/icones/avg.png",
@@ -1689,7 +1627,7 @@
               "element": {
                 "id": "6554ce8c-d968-4921-9980-19cf8b63db0c",
                 "type": "text",
-                "content": "<p>Template mail</p>"
+                "content": "<p>template-mail</p>"
               }
             },
             {
@@ -1734,7 +1672,7 @@
               "element": {
                 "id": "9f2b4dd1-9120-45cc-847e-37a7d944bbd4",
                 "type": "text",
-                "content": "<p>test top mdp</p>"
+                "content": "<p>test-top-mdp</p>"
               }
             },
             {
