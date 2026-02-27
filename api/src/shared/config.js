@@ -422,6 +422,8 @@ const configuration = (function () {
           pushInterval: ms(process.env.PROMETHEUS_PUSHGATEWAY_PUSH_INTERVAL ?? '15s'),
           url: process.env.PROMETHEUS_PUSHGATEWAY_URL,
           basicAuth: process.env.PROMETHEUS_PUSHGATEWAY_BASIC_AUTH,
+          timeout: ms(process.env.PROMETHEUS_PUSHGATEWAY_TIMEOUT ?? '5s'),
+          keepAliveMsec: ms(process.env.PROMETHEUS_PUSHGATEWAY_KEEP_ALIVE ?? '1s'),
         },
         buckets: Object.assign(
           { lc_loadcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16], lc_findcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16] },
