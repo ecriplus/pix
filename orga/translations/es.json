@@ -1911,6 +1911,7 @@
     },
     "team-invitations": {
       "cancel-invitation": "Borrar invitación",
+      "empty-table": "No hay invitaciones pendientes.",
       "invitation-cancelled-succeed-message": "La invitación ha sido eliminada.",
       "invitation-resent-succeed-message": "La invitación ha sido devuelta.",
       "resend-invitation": "Reenviar invitación",

@@ -1924,6 +1924,7 @@
     },
     "team-invitations": {
       "cancel-invitation": "Delete this invitation",
+      "empty-table": "You have no pending invitations.",
       "invitation-cancelled-succeed-message": "The invitation has been deleted.",
       "invitation-resent-succeed-message": "The invitation has been resent.",
       "resend-invitation": "Resend the invitation",

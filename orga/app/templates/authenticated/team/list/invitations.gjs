@@ -6,5 +6,7 @@ import InvitationsList from 'pix-orga/components/team/invitations-list';
 
   {{#if @model}}
     <InvitationsList @invitations={{@model}} />
+  {{else}}
+    <div class="table__empty">{{t "pages.team-invitations.empty-table"}}</div>
   {{/if}}
 </template>
