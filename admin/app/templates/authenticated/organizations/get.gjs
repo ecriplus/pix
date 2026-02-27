@@ -14,7 +14,7 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
     <HeadInformation @organization={{@model}} />
 
     {{#if @model.isArchived}}
-      <PixNotificationAlert class="organization-information-section__archived-message" @type="warning">
+      <PixNotificationAlert @type="warning">
         {{t
           "components.organizations.information-section-view.is-archived-warning"
           archivedAt=@model.archivedFormattedDate
@@ -23,7 +23,11 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
       </PixNotificationAlert>
     {{/if}}
 
-    <PixTabs @variant="primary" @ariaLabel={{t "pages.organization.navbar.aria-label"}} class="navigation">
+    <PixTabs
+      @variant="primary"
+      @ariaLabel={{t "pages.organization.navbar.aria-label"}}
+      class="navigation organization__navigation"
+    >
 
       <LinkTo @route="authenticated.organizations.get.details" @model={{@model}}>
         {{t "pages.organization.navbar.details"}}
