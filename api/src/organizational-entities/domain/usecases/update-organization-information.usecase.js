@@ -1,5 +1,5 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { AdministrationTeamNotFound, OrganizationLearnerTypeNotFound } from '../errors.js';
+import { AdministrationTeamNotFound } from '../errors.js';
 
 const updateOrganizationInformation = withTransaction(async function ({
   organization,
@@ -16,18 +16,11 @@ const updateOrganizationInformation = withTransaction(async function ({
 
   let organizationLearnerType;
   if (organization.organizationLearnerType.id) {
-    try {
-      organizationLearnerType = await organizationLearnerTypeRepository.getById(
-        organization.organizationLearnerType.id,
-      );
-      organization.organizationLearnerType = organizationLearnerType;
-    } catch {
-      throw new OrganizationLearnerTypeNotFound({
-        meta: {
-          organizationLearnerTypeId: organization.organizationLearnerType.id,
-        },
-      });
-    }
+    organizationLearnerType = await organizationVerificationService.checkOrganizationLearnerTypeExists(
+      organization.organizationLearnerType.id,
+      organizationLearnerTypeRepository,
+    );
+    organization.organizationLearnerType = organizationLearnerType;
   }
 
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);

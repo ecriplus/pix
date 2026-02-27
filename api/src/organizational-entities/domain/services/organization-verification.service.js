@@ -1,5 +1,5 @@
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { CountryNotFoundError } from '../errors.js';
+import { CountryNotFoundError, OrganizationLearnerTypeNotFound } from '../errors.js';
 
 const checkCountryExists = async (countryCode, countryRepository) => {
   try {
@@ -13,4 +13,17 @@ const checkCountryExists = async (countryCode, countryRepository) => {
   }
 };
 
-export { checkCountryExists };
+const checkOrganizationLearnerTypeExists = async (organizationLearnerTypeId, organizationLearnerTypeRepository) => {
+  if (organizationLearnerTypeId) {
+    try {
+      return await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
+    } catch {
+      throw new OrganizationLearnerTypeNotFound({
+        message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
+        meta: { organizationLearnerTypeId },
+      });
+    }
+  }
+};
+
+export { checkCountryExists, checkOrganizationLearnerTypeExists };

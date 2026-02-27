@@ -1,8 +1,4 @@
-import {
-  AdministrationTeamNotFound,
-  OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../errors.js';
+import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
@@ -27,7 +23,10 @@ const createOrganization = async function ({
 
   organizationCreationValidator.validate(organization);
 
-  await _checkOrganizationLearnerTypeExists(organization.organizationLearnerType.id, organizationLearnerTypeRepository);
+  await organizationVerificationService.checkOrganizationLearnerTypeExists(
+    organization.organizationLearnerType.id,
+    organizationLearnerTypeRepository,
+  );
 
   await organizationVerificationService.checkCountryExists(organization.countryCode, countryRepository);
 
@@ -73,18 +72,5 @@ function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
         parentOrganizationId: parentOrganization.id,
       },
     });
-  }
-}
-
-async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
-  if (organizationLearnerTypeId) {
-    try {
-      await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
-    } catch {
-      throw new OrganizationLearnerTypeNotFound({
-        message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
-        meta: { organizationLearnerTypeId },
-      });
-    }
   }
 }

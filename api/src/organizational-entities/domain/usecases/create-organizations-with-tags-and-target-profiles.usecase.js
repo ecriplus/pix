@@ -14,11 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import {
-  AdministrationTeamNotFound,
-  OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../errors.js';
+import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../models/OrganizationLearnerType.js';
@@ -129,7 +125,10 @@ async function _createOrganizations({
 
     await organizationVerificationService.checkCountryExists(countryCode, countryRepository);
 
-    await _checkOrganizationLearnerTypeExists(organizationLearnerType.id, organizationLearnerTypeRepository);
+    await organizationVerificationService.checkOrganizationLearnerTypeExists(
+      organizationLearnerType.id,
+      organizationLearnerTypeRepository,
+    );
 
     try {
       const createdOrganization = await organizationForAdminRepository.save({
@@ -311,17 +310,6 @@ async function _addTargetProfiles({ createdOrganizations, targetProfileShareRepo
     }
 
     throw new DomainError(error.message);
-  }
-}
-
-async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
-  try {
-    await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
-  } catch {
-    throw new OrganizationLearnerTypeNotFound({
-      message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
-      meta: { organizationLearnerTypeId },
-    });
   }
 }
 
