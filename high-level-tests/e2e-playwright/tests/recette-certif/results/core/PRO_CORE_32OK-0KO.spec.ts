@@ -33,23 +33,24 @@ test(
     enrollCandidateAndPassExam,
     pixAdminRoleCertifPage,
     getCertifiableUserData,
+    waitForScoringJobToBeCompleted,
     snapshotHandler,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber } = await enrollCandidateAndPassExam({
+    const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: Array(32).fill(true),
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });
-    let certificationNumber = '';
 
     await test.step(`reaches end of certification test`, async () => {
       await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
       await expect(pixAppCertifiablePage.locator('h2')).toContainText(
         'Vos résultats, en attente de validation par les équipes Pix, seront bientôt disponibles sur votre compte Pix',
       );
+      await waitForScoringJobToBeCompleted(certificationNumber);
     });
 
     await test.step('Finalization and scoring', async () => {
@@ -97,7 +98,6 @@ test(
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        certificationNumber = certificationInformationPage.getCertificationNumber();
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',

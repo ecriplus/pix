@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export function* rightWrongAnswerCycle({ numRight = 1, numWrong = 1 }) {
   const answers: boolean[] = [];
@@ -91,10 +91,14 @@ export async function waitForVisibleWithReload(
 
   while (Date.now() - start < timeout) {
     await page.reload();
+    await page.waitForLoadState('domcontentloaded');
 
-    if (await locator.isVisible()) return;
-
-    await page.waitForTimeout(interval);
+    try {
+      await expect(locator).toBeVisible({ timeout: interval });
+      return;
+    } catch {
+      // element not here yet, reloading...
+    }
   }
 
   throw new Error('Element did not appear before timeout');
