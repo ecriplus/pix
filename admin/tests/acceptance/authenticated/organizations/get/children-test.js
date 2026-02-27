@@ -34,6 +34,8 @@ module('Acceptance | Organizations | Children', function (hooks) {
         // then
         assert.dom(screen.getByText('Aucune organisation fille')).exists();
         assert.dom(screen.getByRole('heading', { name: 'Organisations filles', level: 2 })).exists();
+        const headScreen = within(document.head);
+        assert.ok(headScreen.getByText(`Orga ${organizationId} | Organisations filles`, { selector: 'title' }));
       });
     });
 
