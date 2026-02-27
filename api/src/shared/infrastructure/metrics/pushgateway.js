@@ -1,3 +1,5 @@
+import http from 'node:http';
+
 import { Pushgateway } from 'prom-client';
 
 import { config } from '../../config.js';
@@ -16,7 +18,19 @@ register.setDefaultLabels({
   instance: config.infra.containerName ?? 'localhost',
 });
 
-const pushgateway = new Pushgateway(config.metrics.prometheus.pushgateway.url, { headers }, register);
+const pushgateway = new Pushgateway(
+  config.metrics.prometheus.pushgateway.url,
+  {
+    headers,
+    timeout: config.metrics.prometheus.pushgateway.timeout,
+    agent: new http.Agent({
+      keepAlive: true,
+      keepAliveMsec: config.metrics.prometheus.pushgateway.keepAlive,
+      maxSockets: 1,
+    }),
+  },
+  register,
+);
 
 async function pushMetrics() {
   logger.debug('pushing metrics');
