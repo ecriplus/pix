@@ -1,7 +1,5 @@
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import {
   AdministrationTeamNotFound,
-  CountryNotFoundError,
   OrganizationLearnerTypeNotFound,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../errors.js';
@@ -17,6 +15,7 @@ const createOrganization = async function ({
   organizationCreationValidator,
   schoolRepository,
   codeGenerator,
+  organizationVerificationService,
 }) {
   if (organization.parentOrganizationId) {
     const parentOrganization = await organizationForAdminRepository.get({
@@ -30,7 +29,7 @@ const createOrganization = async function ({
 
   await _checkOrganizationLearnerTypeExists(organization.organizationLearnerType.id, organizationLearnerTypeRepository);
 
-  await _checkCountryExists(organization.countryCode, countryRepository);
+  await organizationVerificationService.checkCountryExists(organization.countryCode, countryRepository);
 
   const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
 
@@ -42,7 +41,9 @@ const createOrganization = async function ({
     });
   }
 
-  const savedOrganization = await organizationForAdminRepository.save({ organization });
+  const savedOrganization = await organizationForAdminRepository.save({
+    organization,
+  });
 
   await dataProtectionOfficerRepository.create({
     organizationId: savedOrganization.id,
@@ -55,7 +56,9 @@ const createOrganization = async function ({
     const code = await codeGenerator.generate(schoolRepository);
     await schoolRepository.save({ organizationId: savedOrganization.id, code });
   }
-  return await organizationForAdminRepository.get({ organizationId: savedOrganization.id });
+  return await organizationForAdminRepository.get({
+    organizationId: savedOrganization.id,
+  });
 };
 
 export { createOrganization };
@@ -83,17 +86,5 @@ async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, or
         meta: { organizationLearnerTypeId },
       });
     }
-  }
-}
-
-async function _checkCountryExists(countryCode, countryRepository) {
-  try {
-    await countryRepository.getByCode(countryCode);
-  } catch {
-    logger.error({
-      event: 'Not_found_country',
-      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
-    });
-    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
   }
 }
