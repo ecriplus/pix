@@ -259,17 +259,19 @@ function _adaptModelToDb(certificationCourse) {
 
 function _extractPropertiesForUpdate(certificationCourse) {
   const certificationCourseDTO = certificationCourse.toDTO();
-  return {id: certificationCourseDTO.id,
+  return {
+    id: certificationCourseDTO.id,
     birthdate: certificationCourseDTO.birthdate,
     birthplace: certificationCourseDTO.birthplace,
-    firstName:  certificationCourseDTO.firstName,
-    lastName:  certificationCourseDTO.lastName,
+    firstName: certificationCourseDTO.firstName,
+    lastName: certificationCourseDTO.lastName,
     updatedAt: new Date(),
-    sex:  certificationCourseDTO.sex,
-    birthCountry:  certificationCourseDTO.birthCountry,
-    birthINSEECode:  certificationCourseDTO.birthINSEECode,
-    birthPostalCode:  certificationCourseDTO.birthPostalCode,
-    abortReason:  certificationCourseDTO.abortReason,
-    completedAt:  certificationCourseDTO.completedAt,
-    isRejectedForFraud:  certificationCourseDTO.isRejectedForFraud};
+    sex: certificationCourseDTO.sex,
+    birthCountry: certificationCourseDTO.birthCountry,
+    birthINSEECode: certificationCourseDTO.birthINSEECode,
+    birthPostalCode: certificationCourseDTO.birthPostalCode,
+    abortReason: certificationCourseDTO.abortReason,
+    completedAt: certificationCourseDTO.completedAt,
+    isRejectedForFraud: certificationCourseDTO.isRejectedForFraud,
+  };
 }

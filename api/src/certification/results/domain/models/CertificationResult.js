@@ -74,10 +74,12 @@ class CertificationResult {
           competence_code: competenceMarkDTO.competence_code.toString(),
         }),
     );
-    const complementaryCertificationCourseResults =
-      certificationResultDTO.complementaryCertificationCourseResults.filter(Boolean).map(
-      (complementaryCertifCourseResult) => new ComplementaryCertificationCourseResult(complementaryCertifCourseResult),
-    );
+    const complementaryCertificationCourseResults = certificationResultDTO.complementaryCertificationCourseResults
+      .filter(Boolean)
+      .map(
+        (complementaryCertifCourseResult) =>
+          new ComplementaryCertificationCourseResult(complementaryCertifCourseResult),
+      );
 
     const commentForOrganization = new JuryComment({
       fallbackComment: certificationResultDTO.commentForOrganization,

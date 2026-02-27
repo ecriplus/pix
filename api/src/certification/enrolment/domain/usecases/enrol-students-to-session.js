@@ -87,7 +87,7 @@ const enrolStudentsToSession = async function ({
     });
   });
 
-  scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
+  await scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
     sessionId,
     scoCertificationCandidates,
   });

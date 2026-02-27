@@ -73,8 +73,8 @@ export { attachBadges };
 function _isRequiredInformationMissing(complementaryCertificationBadgesToAttachDTO) {
   return complementaryCertificationBadgesToAttachDTO.some(
     (complementaryCertificationBadge) =>
-      (complementaryCertificationBadge.certificateMessage == null) ||
-      (complementaryCertificationBadge.temporaryCertificateMessage == null),
+      complementaryCertificationBadge.certificateMessage == null ||
+      complementaryCertificationBadge.temporaryCertificateMessage == null,
   );
 }
 
