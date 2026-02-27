@@ -68,7 +68,7 @@ import { getQuestResultsForCampaignParticipation } from './get-quest-results-for
 import { getVerifiedCode } from './get-verified-code.js';
 import { rewardUser } from './reward-user.js';
 import { startCombinedCourse } from './start-combined-course.js';
-import { updateCombinedCourse } from './update-combined-course.js';
+import { updateCombinedCourseProgress } from './update-combined-course-progress.js';
 import { updateCombinedCourses } from './update-combined-courses.js';
 
 const usecasesWithoutInjectedDependencies = {
@@ -91,7 +91,7 @@ const usecasesWithoutInjectedDependencies = {
   getVerifiedCode,
   rewardUser,
   startCombinedCourse,
-  updateCombinedCourse,
+  updateCombinedCourseProgress,
   createCombinedCourses,
   createCombinedCourseBlueprint,
   createCombinedCourse,

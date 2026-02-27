@@ -38,11 +38,11 @@ const buildQuest = function ({
   };
 };
 
-const buildQuestForCombinedCourse = function ({ successRequirements = [] } = {}) {
+const buildQuestForCombinedCourse = function ({ successRequirements = [], rewardId, rewardType } = {}) {
   return buildQuest({
     successRequirements,
-    rewardId: null,
-    rewardType: null,
+    rewardId,
+    rewardType,
   });
 };
 

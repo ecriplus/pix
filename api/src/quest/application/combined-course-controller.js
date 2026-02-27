@@ -82,7 +82,7 @@ const reassessStatus = async function (request, h) {
   const userId = extractUserIdFromRequest(request);
   const code = request.params.code;
 
-  await usecases.updateCombinedCourse({
+  await usecases.updateCombinedCourseProgress({
     userId,
     code,
   });
