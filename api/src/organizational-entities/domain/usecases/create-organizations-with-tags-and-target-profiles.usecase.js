@@ -14,7 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../models/OrganizationLearnerType.js';
@@ -105,15 +105,11 @@ async function _createOrganizations({
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
     const { administrationTeamId, parentOrganizationId, countryCode, organizationLearnerType } =
       organizationToCreate.organization;
-    const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
 
-    if (!administrationTeam) {
-      throw new AdministrationTeamNotFound({
-        meta: {
-          administrationTeamId,
-        },
-      });
-    }
+    await organizationVerificationService.checkAdministrationTeamExists(
+      administrationTeamId,
+      administrationTeamRepository,
+    );
 
     if (parentOrganizationId) {
       const organization = await organizationForAdminRepository.get({

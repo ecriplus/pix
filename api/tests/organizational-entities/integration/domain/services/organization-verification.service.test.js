@@ -1,8 +1,11 @@
+import { ADMINISTRATION_TEAM_ROCKET_ID } from '../../../../../db/seeds/data/team-acquisition/constants.js';
 import {
+  AdministrationTeamNotFound,
   CountryNotFoundError,
   OrganizationLearnerTypeNotFound,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import * as organizationVerificationService from '../../../../../src/organizational-entities/domain/services/organization-verification.service.js';
+import * as administrationTeamRepository from '../../../../../src/organizational-entities/infrastructure/repositories/administration-team-repository.js';
 import * as organizationLearnerTypeRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-learner-type-repository.js';
 import * as countryRepository from '../../../../../src/shared/infrastructure/repositories/country-repository.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
@@ -83,6 +86,49 @@ describe('Integration | Organizational Entities | Domain | Services | organizati
             message: `Organization learner type not found for id ${unknownOrganizationLearnerTypeId}`,
             meta: {
               organizationLearnerTypeId: unknownOrganizationLearnerTypeId,
+            },
+          }),
+        );
+      });
+    });
+  });
+
+  describe('#checkAdministrationTeamExists', function () {
+    describe('when the administration team exists', function () {
+      it('does not throw an error', async function () {
+        // given
+        const administrationTeam = databaseBuilder.factory.buildAdministrationTeam({
+          id: ADMINISTRATION_TEAM_ROCKET_ID,
+          name: 'Team Rocket',
+        });
+        await databaseBuilder.commit();
+
+        // then
+        await expect(
+          organizationVerificationService.checkAdministrationTeamExists(
+            administrationTeam.id,
+            administrationTeamRepository,
+          ),
+        ).not.to.be.rejected;
+      });
+    });
+
+    describe('when the administration team does not exist', function () {
+      it('throws an error', async function () {
+        // given
+        const unknownAdministrationTeamId = 99000;
+
+        // when
+        const error = await catchErr(organizationVerificationService.checkAdministrationTeamExists)(
+          unknownAdministrationTeamId,
+          administrationTeamRepository,
+        );
+
+        // then
+        expect(error).to.deepEqualInstance(
+          new AdministrationTeamNotFound({
+            meta: {
+              administrationTeamId: unknownAdministrationTeamId,
             },
           }),
         );

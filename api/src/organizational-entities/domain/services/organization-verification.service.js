@@ -1,5 +1,5 @@
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { CountryNotFoundError, OrganizationLearnerTypeNotFound } from '../errors.js';
+import { AdministrationTeamNotFound, CountryNotFoundError, OrganizationLearnerTypeNotFound } from '../errors.js';
 
 const checkCountryExists = async (countryCode, countryRepository) => {
   try {
@@ -26,4 +26,16 @@ const checkOrganizationLearnerTypeExists = async (organizationLearnerTypeId, org
   }
 };
 
-export { checkCountryExists, checkOrganizationLearnerTypeExists };
+async function checkAdministrationTeamExists(administrationTeamId, administrationTeamRepository) {
+  const existingAdministrationTeam = await administrationTeamRepository.getById(administrationTeamId);
+
+  if (!existingAdministrationTeam) {
+    throw new AdministrationTeamNotFound({
+      meta: {
+        administrationTeamId: administrationTeamId,
+      },
+    });
+  }
+}
+
+export { checkAdministrationTeamExists, checkCountryExists, checkOrganizationLearnerTypeExists };

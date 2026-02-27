@@ -1,4 +1,4 @@
-import { AdministrationTeamNotFound, UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
@@ -30,15 +30,10 @@ const createOrganization = async function ({
 
   await organizationVerificationService.checkCountryExists(organization.countryCode, countryRepository);
 
-  const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
-
-  if (!administrationTeam) {
-    throw new AdministrationTeamNotFound({
-      meta: {
-        administrationTeamId: organization.administrationTeamId,
-      },
-    });
-  }
+  await organizationVerificationService.checkAdministrationTeamExists(
+    organization.administrationTeamId,
+    administrationTeamRepository,
+  );
 
   const savedOrganization = await organizationForAdminRepository.save({
     organization,

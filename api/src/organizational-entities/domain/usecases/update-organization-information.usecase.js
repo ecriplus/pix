@@ -1,5 +1,4 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { AdministrationTeamNotFound } from '../errors.js';
 
 const updateOrganizationInformation = withTransaction(async function ({
   organization,
@@ -25,7 +24,10 @@ const updateOrganizationInformation = withTransaction(async function ({
 
   const tagsToUpdate = await tagRepository.findByIds(organization.tagIds);
 
-  await _checkAdministrationTeamExists(organization.administrationTeamId, administrationTeamRepository);
+  await organizationVerificationService.checkAdministrationTeamExists(
+    organization.administrationTeamId,
+    administrationTeamRepository,
+  );
 
   if (organization.countryCode) {
     await organizationVerificationService.checkCountryExists(organization.countryCode, countryRepository);
@@ -45,17 +47,5 @@ const updateOrganizationInformation = withTransaction(async function ({
     organizationId: organization.id,
   });
 });
-
-async function _checkAdministrationTeamExists(administrationTeamId, administrationTeamRepository) {
-  const existingAdministrationTeam = await administrationTeamRepository.getById(administrationTeamId);
-
-  if (!existingAdministrationTeam) {
-    throw new AdministrationTeamNotFound({
-      meta: {
-        administrationTeamId: administrationTeamId,
-      },
-    });
-  }
-}
 
 export { updateOrganizationInformation };
