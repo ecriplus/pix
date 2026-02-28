@@ -71,7 +71,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLocales = localeService.pixLocales;
 
       // then
-      assert.deepEqual(pixLocales, ['en', 'es', 'es-419', 'fr', 'fr-BE', 'fr-FR', 'it', 'nl', 'nl-BE']);
+      assert.deepEqual(pixLocales, ['de-AT', 'en', 'es', 'es-419', 'fr', 'fr-BE', 'fr-FR', 'it', 'nl', 'nl-BE']);
     });
   });
 
@@ -81,7 +81,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixLanguages = localeService.pixLanguages;
 
       // then
-      assert.deepEqual(pixLanguages, ['en', 'es', 'fr', 'it', 'nl']);
+      assert.deepEqual(pixLanguages, ['de', 'en', 'es', 'fr', 'it', 'nl']);
     });
   });
 
@@ -260,7 +260,7 @@ module('Unit | Services | locale', function (hooks) {
       const pixChallengeLocales = localeService.pixChallengeLocales;
 
       // then
-      assert.deepEqual(pixChallengeLocales, ['de', 'en', 'es', 'es-419', 'fr', 'fr-fr', 'it', 'nl']);
+      assert.deepEqual(pixChallengeLocales, ['de', 'de-AT', 'en', 'es', 'es-419', 'fr', 'fr-fr', 'it', 'nl']);
     });
   });
 

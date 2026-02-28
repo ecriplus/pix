@@ -1,0 +1,550 @@
+{
+  "account-recovery-email": {
+    "params": {
+      "choosePassword": "Ein Passwort wählen",
+      "context": "Sie haben die Wiederherstellung Ihres Pix-Kontos beantragt.",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf.",
+      "instruction": "Wählen Sie ein Passwort, um den Vorgang abzuschließen.",
+      "linkValidFor": "Dieser Link ist 24 Stunden lang gültig. Wenn Sie nicht der Urheber dieser Anfrage sind, ignorieren Sie diese E-Mail bitte.",
+      "moreOn": "Mehr über",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen.",
+      "signing": "- Das Pix-Team"
+    }
+  },
+  "attendance-sheet": {
+    "certification-information": {
+      "date": "Datum :",
+      "local-time": "Ortszeit (Beginn) :",
+      "location-name": "Name der Website :",
+      "number": "N°",
+      "room-name": "Name des Raumes :",
+      "session": "Die Zertifizierungssitzung"
+    },
+    "examiner-information": {
+      "invigilated-by": "Überwacht von :",
+      "signature": "Unterschrift(en) :",
+      "title": "Die Aufsichtsperson(en)"
+    },
+    "file-name": "sitzung-einzahlungsblatt-",
+    "header": {
+      "page": "Seite",
+      "title": "Unterschriftenblatt"
+    },
+    "table": {
+      "birth-name": "Name bei der Geburt",
+      "date-of-birth": {
+        "example": "(tt/mm/jjjj)",
+        "label": "Geburtsdatum"
+      },
+      "division": "Klasse",
+      "external-id": "Lokale Kennung",
+      "first-name": "Vorname",
+      "signature": "Unterschrift",
+      "title": "Liste der Kandidaten"
+    }
+  },
+  "campaign-export": {
+    "assessment": {
+      "competence-area": {
+        "items-successfully-completed": "Beherrschte Lernergebnisse im Bereich {name}.",
+        "mastery-percentage": "% Beherrschung der Lernergebnisse im Bereich {name}.",
+        "total-items": "Anzahl der Lernergebnisse des Zielprofils des Bereichs {name}."
+      },
+      "is-shared": "Teilen (J/N)",
+      "mastery-percentage-target-profile": "% Beherrschung aller Errungenschaften des Profils",
+      "progress": "% Fortschritt",
+      "shared-on": "Datum und Uhrzeit der Teilung (Europa/Paris)",
+      "skill": {
+        "items-successfully-completed": "Beherrschte Lernergebnisse in der Kompetenz {name}.",
+        "mastery-percentage": "% Beherrschung der Lernergebnisse der Kompetenz {name}.",
+        "total-items": "Anzahl der Lernergebnisse des Zielprofils in der Kompetenz {name}."
+      },
+      "started-on": "Datum und Uhrzeit des Beginns (Europa/Paris)",
+      "status": {
+        "ko": "KO",
+        "not-tested": "Nicht getestet",
+        "ok": "OK"
+      },
+      "success-rate": "Erreichte Stufe (/{value})",
+      "target-profile-name": "Parcours",
+      "thematic-result-name": "{name} erhalten (J/N)"
+    },
+    "common": {
+      "campaign-code": "Code",
+      "campaign-id": "ID Kampagne",
+      "campaign-name": "Name der Kampagne",
+      "file-name": "Ergebnisse-{name}-{id}-{date}.csv",
+      "no": "Nicht",
+      "not-available": "NA",
+      "organization-name": "Name der Organisation",
+      "participant-division": "Klasse",
+      "participant-firstname": "Vorname des Teilnehmers",
+      "participant-group": "Gruppe",
+      "participant-lastname": "Name des Teilnehmers",
+      "participant-student-number": "Studentennummer",
+      "yes": "Ja"
+    },
+    "profiles-collection": {
+      "certifiable-skills": "Anzahl der zertifizierbaren Kompetenzen",
+      "is-certifiable": "Zertifizierbar (J/N)",
+      "is-sent": "Senden (J/N)",
+      "pix-score": "Anzahl der Pix insgesamt",
+      "sent-on": "Datum und Uhrzeit der Absendung (Europa/Paris)",
+      "skill-level": "Stufe für die Fertigkeit {name}.",
+      "skill-ranking": "Anzahl der Pix für die Fertigkeit {name}."
+    }
+  },
+  "candidate-list-template": {
+    "billing-mode": {
+      "free": "Kostenlos",
+      "paid": "Kostenpflichtig",
+      "prepaid": "Prepaid"
+    },
+    "certification": "Zertifizierung",
+    "complementary": "ergänzend",
+    "filename": "liste-kandidaten-session-",
+    "headers": {
+      "birth-date": "* Geburtsdatum (Format: tt/mm/jjjj)",
+      "birthcity": "Name der Gemeinde",
+      "birthcity-inseecode": "Insee Code",
+      "birthcity-postcode": "Postleitzahl",
+      "birthcountry": "Land",
+      "birthname": "* Geburtsname",
+      "birthplace": "* Geburtsort",
+      "birthplace-instructions": "Anleitung zum Ausfüllen des Geburtsortes :",
+      "birthplace-instructions-abroad": "- Im Ausland geborene Bewerberin oder im Ausland geborener Bewerber: Füllen Sie die Spalten \"Land\" und \"Name der Gemeinde\" aus und",
+      "birthplace-instructions-abroad-insee": "       in der Spalte \"Insee-Code\" 99 eintragen",
+      "birthplace-instructions-france": "- In Frankreich geborener Bewerber: Geben Sie in der Spalte \"Land\" Frankreich ein.",
+      "birthplace-instructions-france-insee": "    - Wenn Insee-Code: Nur die Spalte \"Insee-Code\" ausfüllen",
+      "birthplace-instructions-france-postal": "    - Wenn Postleitzahl: Füllen Sie die Spalten \"Postleitzahl\" und \"Name der Gemeinde\" aus.",
+      "born-abroad": "Im Ausland geborener Bewerber: Insee-Code 99 UND Name der Gemeinde",
+      "born-in-france": "In Frankreich geborene Bewerberin/geborener Bewerber: Insee-Code ODER Postleitzahl und Name der Gemeinde",
+      "candidates": "Teilnehmer",
+      "candidates-list": "Liste der Kandidaten",
+      "date": "Datum",
+      "email-convocation": "E-Mail mit der Einladung",
+      "email-results": "E-Mail des Empfängers der Ergebnisse (Trainer, Lehrer...)",
+      "externalid": "Lokale Kennung",
+      "extra-time": "Zeitzuschlag?",
+      "firstname": "* Vorname",
+      "gender": "* Geschlecht (M oder F)",
+      "locale-time": "Ortszeit (Anfang)",
+      "room-name": "Name des Raumes",
+      "session-certification": "Die Zertifizierungssitzung",
+      "session-invigilates-by": "Sitzung überwacht von :",
+      "session-invigilators": "Unterschrift der Aufsichtsperson(en) :",
+      "session-number": "Sitzungsnummer",
+      "site-name": "Name der Seite"
+    },
+    "one-per-candidate": "(nur eine pro Kandidat)",
+    "options": "Mögliche Optionen :",
+    "prepayment": "Vorauszahlungscode",
+    "pricing": "Preisgestaltung",
+    "pricing-pix": "Preisgestaltung Pix-Anteil",
+    "tooltip-line-1": "(Erforderlich insbesondere beim Kauf von Kombikrediten)",
+    "tooltip-line-2": "Muss aus der SIRET der Organisation und der Rechnungsnummer bestehen. Bsp: 12345678912345/FACT12345",
+    "tooltip-line-3": "Wenn Sie keine Rechnung haben, muss mit Pix ein Vorauszahlungscode vereinbart werden.",
+    "tooltips": {
+      "date-format": "Verwenden Sie das Datumsformat tt/mm/jjjj",
+      "email-format": "Ihre E-Mail muss ein '@' und ein '. ,\n Beispiel: nom@exemple.fr Dieses Feld ist optional,\n es dient dazu, die Einberufung der Bewerber zu erleichtern.",
+      "email-results": "E-Mail des Empfängers der Ergebnisse (Ausbilder, Lehrer...),\n Wenn das Feld nicht ausgefüllt ist, werden die Ergebnisse für den/die betreffenden Kandidaten nicht per E-Mail übermittelt..,\n Dem Kandidaten werden die Ergebnisse direkt in seinem Pix-Konto angezeigt.",
+      "extra-time": "Dieses Feld ist erforderlich, wenn dem Kandidaten für die Zertifizierung ein Zeitzuschlag gewährt wird.\n Es wird eine ganze Zahl zwischen 1 und 99 % erwartet, ausgedrückt als Prozentsatz (z. B. 33 %).",
+      "gender-format": "M=Mann F=Frau"
+    },
+    "yes": "Ja",
+    "yes-or-empty": "(\"Ja\" oder leer lassen)"
+  },
+  "certification": {
+    "certificate": {
+      "file-metadata": {
+        "title": "Pix-Zertifizierung(en)"
+      },
+      "file-name": "certification-pix-{deliveredAt}.pdf",
+      "v2": {
+        "competences-content": {
+          "level": "Ebene",
+          "title": "Zertifizierte Kompetenzen (Stufen auf {maxReachableLevelOnCertificationDate})"
+        },
+        "complementary-certification-title": "Andere erhaltene Zertifizierung",
+        "description": "Dieses Dokument bescheinigt den Erhalt einer Pix-Zertifizierung",
+        "main-content": {
+          "birth": "Geburtsdatum und -ort :",
+          "certification-center": "Zertifizierungsstelle :",
+          "delivered-at": "Ausgestellt am :",
+          "first-and-last-names": "Vorname und Name :",
+          "from-birthplace": " à",
+          "professionalizing-certification-message": "Das Pix-Zertifikat wird von France compétences ab einer Mindestpunktzahl von 120 PIX als berufsqualifizierend anerkannt."
+        },
+        "not-a-certificate": "Dieses Dokument ist kein Zeugnis",
+        "qr-code-content": {
+          "link": {
+            "description": "Verwenden Sie diesen Code auf der :",
+            "label": "app.pix.de/verifikation-zertifikat",
+            "url": "https://app.pix.fr/verification-certificat"
+          },
+          "title": "Die Echtheit der Zertifizierung überprüfen",
+          "verification-code": "Verifizierungscode"
+        },
+        "score-content": {
+          "absolute-max-level-indication": "Wenn alle 8 Ebenen des Pix-Referenzsystems verfügbar sind, wird diese maximale Anzahl 1024 Pix betragen.",
+          "max-reachable-level-indication": "* Zum Zeitpunkt der Erlangung dieser Zertifizierung betrug die maximal erreichbare Anzahl an Pixeln { maxReachableScore }, was der Stufe { maxReachableLevelOnCertificationDate } entspricht."
+        },
+        "signature": "Benjamin Marteau, Direktor des GIP Pix",
+        "title": "Bescheinigung"
+      },
+      "v3": {
+        "complementary-content": {
+          "title": "Erhaltene Zusatzqualifikation :"
+        },
+        "main-content": {
+          "birth": "geboren am : {birthdate} in {birthplace}.",
+          "certification-center": "Zertifizierungsstelle: {certificationCenter}.",
+          "delivered-at": {
+            "date": "der {deliveredAt}.",
+            "label": "ausgestellt auf"
+          },
+          "signature": "Benjamin Marteau, Direktor des GIP Pix",
+          "title": "Pix-Zertifizierung"
+        },
+        "qr-code-content": {
+          "explanation": "Um die Echtheit dieser Bescheinigung zu überprüfen, verwenden Sie diesen Code auf",
+          "link": {
+            "label": "app.pix.de/verifikation-zertifikat",
+            "url": "https://app.pix.fr/verification-certificat"
+          }
+        },
+        "score-content": {
+          "global-level": "Globale Ebene",
+          "level-explanation": "Ihre Stufe bedeutet, dass :"
+        }
+      }
+    },
+    "global": {
+      "meshlevel": {
+        "LEVEL_ADVANCED_5": {
+          "description": "Sie sind in der Lage, auf spezialisierte Werkzeuge zurückzugreifen, um zuverlässig nach Informationen zu suchen, soziale Netzwerke zu verwalten und Bilder und Videos zu bearbeiten. Sie sind in der Lage, Datenanalysen und geeignete grafische Darstellungen zu erstellen. Sie sind in der Lage, eine digitale Umgebung einzurichten (Installation und Parametrierung). Sie kennen die Herausforderungen rund um die Rückverfolgung und Sammlung von Daten. Sie verstehen die ökologischen und gesellschaftlichen Auswirkungen der digitalen Nutzung und können Ihre Praktiken anpassen.",
+          "label": "Fortgeschrittene 1",
+          "summary": "Sie haben fortgeschrittene digitale Praktiken und verfügen über ein solides Wissen, das es Ihnen ermöglicht, neue Situationen allein zu bewältigen. Sie können anderen Menschen helfen."
+        },
+        "LEVEL_ADVANCED_6": {
+          "description": "Sie haben die volle Kontrolle über Ihre digitale Umgebung, um Inhalte zu erstellen und zu verbreiten, zu kommunizieren und zusammenzuarbeiten. Sie können Ihre Online-Präsenz verwalten und die relevanten Einstellungen für Ihre Verbreitungen wählen. Sie können bestimmte Aufgaben programmieren und automatisieren (Datenverarbeitung, Datensicherung, Aktualisierung usw.). Sie können andere dabei begleiten, ihre Praktiken zu sichern und insbesondere ihre Auswirkungen auf Umwelt und Gesundheit zu begrenzen.",
+          "label": "Fortgeschrittene 2",
+          "summary": "Sie haben fortgeschrittene digitale Praktiken und verfügen über umfassende Kenntnisse, die Sie für sich selbst oder andere auf kreative und sichere Weise einsetzen können. Sie können den Kompetenzaufbau anderer Personen begleiten."
+        },
+        "LEVEL_BEGINNER_1": {
+          "description": "Sie können sich auf den Benutzeroberflächen der digitalen Geräte, die Sie bereits verwendet haben (Telefon, Tablet, Computer), zurechtfinden. Mit punktueller Begleitung können Sie eine Website besuchen, Ihre Nachrichten (SMS, E-Mails, ...) lesen und beantworten, einfache Anwendungen auf dem Telefon oder Tablet nutzen und auf Online-Dienste zugreifen.",
+          "label": "Novize 1",
+          "summary": "Sie haben einfache digitale Praktiken, indem Sie oft Hilfe benötigen"
+        },
+        "LEVEL_BEGINNER_2": {
+          "description": "In Ihrer gewohnten digitalen Umgebung können Sie im Web nach Informationen suchen, eine Datei herunterladen und wiederfinden, E-Mails abrufen und versenden und Ihre Geräte mit dem Internet verbinden (Computer, Tablet, Telefon). Sie können einen Text mit einfacher Formatierung eingeben und speichern. Sie wissen, dass manche Informationen, die online veröffentlicht werden, falsch sind und dass es wichtig ist, seine Konten mit sicheren Passwörtern zu schützen.",
+          "label": "Novize 2",
+          "summary": "Sie haben einfache digitale Praktiken mit Hilfe, wenn die Situation kompliziert wird."
+        },
+        "LEVEL_EXPERT_7": {
+          "description": "Sie sind in der Lage, einen Bedarf zu analysieren, selbst technische Dokumentationen zu konsultieren und digitale Lösungen zu bewerten, um die optimalste umzusetzen, oder sogar selbst Werkzeuge zu entwickeln. Sie verstehen die wirtschaftlichen, gesellschaftlichen und ethischen Herausforderungen, die mit digitalen Technologien verbunden sind, und können Ihre digitalen Praktiken kritisch hinterfragen. Sie sind in der Lage, sich in neue Techniken einzuarbeiten und können mit den neuesten technologischen Entwicklungen, wie z. B. der künstlichen Intelligenz, problemlos umgehen.",
+          "label": "Experte 1",
+          "summary": "Sie haben optimierte digitale Praktiken und verfügen über Expertenwissen, das es Ihnen ermöglicht, komplexe und neue Situationen methodisch anzugehen."
+        },
+        "LEVEL_EXPERT_8": {
+          "label": "Experte 2",
+          "summary": "Sie sind in der Lage, Ihre Lösungen für neue und spezifische Probleme zu dokumentieren, um sie mit anderen zu teilen."
+        },
+        "LEVEL_INDEPENDENT_3": {
+          "description": "Sie können im Web navigieren, um eine gründliche Suche mit relevanten Informationen durchzuführen. Sie können an kollaborativen Aktivitäten teilnehmen (E-Mail, gemeinsamer Terminkalender, Videokonferenzen, gemeinsame Dokumente). Sie können die gängigsten Funktionen gängiger Software (Textverarbeitung und Tabellenkalkulation) nutzen. Sie sind sich der Risiken bewusst, die mit Ihren digitalen Praktiken verbunden sind, sowie der Notwendigkeit, diese zu sichern, und der Umweltauswirkungen Ihrer digitalen Nutzung. Sie können gängige Probleme lösen (Passwort, Login).",
+          "label": "Unabhängig 1",
+          "summary": "Sie verfügen über einfache digitale Praktiken, die Sie selbstständig in den meisten alltäglichen Situationen anwenden können."
+        },
+        "LEVEL_INDEPENDENT_4": {
+          "description": "Sie können eine Strategie zur Informationssuche im Web und über soziale Netzwerke umsetzen und die Zuverlässigkeit der gefundenen Informationen überprüfen. Sie können die wichtigsten Funktionen kollaborativer Tools nutzen und mithilfe verschiedener Software (Textverarbeitung, Tabellenkalkulation, Diashow, Bilder) Dokumente erstellen. Sie können sichere Praktiken in Bezug auf persönliche Daten und den Schutz Ihrer Geräte umsetzen. Sie können Ihre digitalen Praktiken anpassen, um deren Auswirkungen auf die Umwelt und Ihre Gesundheit zu begrenzen.",
+          "label": "Unabhängig 2",
+          "summary": "Sie fühlen sich in allen gängigen Situationen der digitalen Nutzung wohl und beherrschen das gängige Vokabular im Zusammenhang mit digitalen Technologien."
+        }
+      }
+    }
+  },
+  "certification-center-invitation-email": {
+    "params": {
+      "acceptInvitation": "Einladung annehmen",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf.",
+      "here": "hier",
+      "moreAbout": "Mehr über",
+      "needHelp": "Brauchen Sie Hilfe, kontaktieren Sie uns",
+      "oneTimeLink": "Dieser Link ist für den einmaligen Gebrauch",
+      "pixCertifPresentation": "Der Pix Certif-Bereich ist ein spezielles Werkzeug für die Organisation von Zertifizierungssitzungen.",
+      "title": "Einladung, sich dem Raum anzuschließen",
+      "yourCertificationCenter": "Ihre Zertifizierungsstelle"
+    },
+    "subject": "Einladung, sich Pix Certif anzuschließen"
+  },
+  "certification-result-email": {
+    "params": {
+      "doNotReply": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf.",
+      "download": "Ergebnisse herunterladen",
+      "emailValidFor": "Dieser Link ist dreißig Tage lang gültig.",
+      "findOutMore": "Mehr über",
+      "findOutMoreFranceSuffix": " (Frankreich) oder",
+      "findOutMoreInternationalSuffix": " (International)",
+      "guidelines": "Die von der Zertifizierungsstelle gemeldeten Ausschreibungen wurden - falls zutreffend - in der Pix-Jury tatsächlich berücksichtigt. Hinweise zur Interpretation dieser Ergebnisse finden Sie hier.",
+      "guidelinesLinkName": "Interpretation der Ergebnisse verschreibend",
+      "overviewText": "Hallo, hier sind die Ergebnisse der Zertifizierungen, die Sie Ihrem Publikum verschrieben haben",
+      "resultsAvailable": "Die Ergebnisse der Pix-Zertifizierungen, die Sie Ihrem Publikum verschrieben haben, sind verfügbar.",
+      "subject": "[Pix] Zertifizierung Sitzung",
+      "viewResultsInProfile": "Die Bewerber können ihr Ergebnis über ihr Pix-Profil einsehen."
+    },
+    "title": "Sehen Sie sich die Ergebnisse der Zertifizierungssitzung Nr. {sessionId} an!"
+  },
+  "certification-results-csv": {
+    "filenames": {
+      "DIVISION_CERTIFICATION_RESULTS_FILENAME": "{dateWithTime}_Ergebnisse_{division}.csv",
+      "SESSION_CERTIFICATION_RESULTS_FILENAME": "{dateWithTime}_Ergebnisse_der_Sitzung_{sessionId}.csv"
+    },
+    "headers": {
+      "BIRTHDATE": "Geburtsdatum",
+      "BIRTHPLACE": "Geburtsort",
+      "CERTIFICATION_CENTER": "Zertifizierungsstelle",
+      "CERTIFICATION_DATE": "Datum, an dem die Zertifizierung abgelegt wurde",
+      "CERTIFICATION_LABEL": "Zertifizierung {label}.",
+      "CERTIFICATION_NUMBER": "Zertifizierungsnummer",
+      "EXTERNAL_ID": "Externe Kennung",
+      "FIRSTNAME": "Vorname",
+      "JURY_COMMENT_FOR_ORGANIZATION": "Kommentar Jury für die Organisation",
+      "LASTNAME": "Name",
+      "PIX_SCORE": "Anzahl der Pix",
+      "REGISTRATION_STATUS": "Status bei der Anmeldung",
+      "SESSION_ID": "Sitzung",
+      "SKILL_LABEL": "{skillIndex}",
+      "STATUS": "Status"
+    },
+    "values": {
+      "CERTIFICATION_CANCELLED": "Abgesagt",
+      "CERTIFICATION_IN_ERROR": "In Fehler",
+      "CERTIFICATION_REJECTED": "Abgelehnt",
+      "CERTIFICATION_STARTED": "Gestartet",
+      "CERTIFICATION_VALIDATED": "Freigegeben",
+      "COMPLEMENTARY_CERTIFICATION_CANCELLED": "Abgesagt",
+      "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "Nicht bestanden",
+      "COMPLEMENTARY_CERTIFICATION_REJECTED": "Abgelehnt",
+      "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Freigegeben",
+      "REJECTED_AUTOMATICALLY_COMMENT": "Der Kandidat hat mehr als 50% der gestellten Fragen falsch beantwortet. Dies machte die gesamte Zertifizierung ungültig und führte daher zu einer Punktzahl von 0 Pixeln."
+    }
+  },
+  "common": {
+    "email": {
+      "contactUs": "kontaktieren Sie uns hier",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf",
+      "moreOn": "Mehr über",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen."
+    }
+  },
+  "csv-import-values": {
+    "sup-organization-learner": {
+      "diplomas": {
+        "bts": "Staatlich kontrolliertes BTS",
+        "classe-preparatoire": "Staatlich kontrollierte Vorbereitungsklasse",
+        "dcg ": "DCG staatlich kontrolliert",
+        "deust": "Staatlich geprüfte DEUST",
+        "dma ": "Staatlich kontrollierte DMA",
+        "dnmade": "DNMADE staatlich kontrolliert",
+        "doctorat": "Staatlich kontrolliertes nationales Doktoratsdiplom",
+        "dts": "Staatlich kontrollierte SZR",
+        "dut": "Staatlich kontrolliertes DUT",
+        "etat-controle": "Kontrolliertes staatliches Diplom",
+        "ingenieur": "Staatlich geprüfter Ingenieurabschluss",
+        "license": "Staatlich kontrolliertes nationales Lizenzdiplom",
+        "license-grade": "Staatlich geprüfter Abschluss, der den Grad eines Bachelors verleiht",
+        "master": "Staatlich geprüftes nationales Master-Diplom",
+        "master-grade": "Staatlich geprüfter Abschluss, der den Grad eines Masters verleiht",
+        "other": "Andere",
+        "vise": "Staatlich kontrollierter, angestrebter Abschluss"
+      },
+      "study-schemes": {
+        "continuous-training": "Weiterbildung",
+        "initial-training": "Erstausbildung ohne Lehrlingsausbildung",
+        "other": "Andere",
+        "training": "Lernen"
+      },
+      "unknown": "Nicht anerkannt"
+    }
+  },
+  "csv-template": {
+    "organization-learners": {
+      "birth-city": "Bezeichnung Geburtsgemeinde**",
+      "birth-city-code": "Code Geburtsgemeinde**",
+      "birth-country-code": "Code Geburtsland*",
+      "birth-province-code": "Code Département Geburt*",
+      "birthdate": "Geburtsdatum (tt/mm/jjjj)*.",
+      "division": "Abteilung*",
+      "first-name": "Erster Vorname*",
+      "last-name": "Nachname*",
+      "mef-code": "MEF-Code*",
+      "middle-name": "Zweiter Vorname",
+      "national-identifier": "Eindeutige Kennung*",
+      "preferred-last-name": "Gebrauchsname",
+      "sex": "Code Geschlecht*",
+      "status": "Status*",
+      "third-name": "Dritter Vorname"
+    },
+    "sup-organization-learners": {
+      "birthdate": "Geburtsdatum (tt/mm/jjjj)",
+      "department": "Komponente",
+      "diploma": "Abschluss",
+      "educational-team": "Pädagogisches Team",
+      "email": "E-Mail",
+      "first-name": "Erster Vorname",
+      "group": "Gruppe",
+      "last-name": "Nachname",
+      "middle-name": "Zweiter Vorname",
+      "preferred-lastname": "Gebrauchsname",
+      "student-number": "Studentennummer",
+      "study-scheme": "Diät",
+      "third-name": "Dritter Vorname"
+    },
+    "template-name": "model-import"
+  },
+  "email-sender-name": {
+    "pix-app": "PIX - Nicht antworten",
+    "pix-certif": "Pix Certificate - Nicht antworten",
+    "pix-orga": "Pix Orga - Nicht antworten"
+  },
+  "entity-validation-errors": {
+    "ACCEPT_CGU": "Sie müssen den Nutzungsbedingungen von Pix zustimmen, um ein Konto zu erstellen.",
+    "ALREADY_REGISTERED_EMAIL": "Diese E-Mail-Adresse ist bereits registriert. Melden Sie sich an.",
+    "CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_URL_IS_FILLED": "Eine URL für die Schaltfläche wird eingegeben: Ein Text ist ebenfalls erforderlich.",
+    "CUSTOM_RESULT_PAGE_BUTTON_URL_IS_REQUIRED_WHEN_CUSTOM_RESULT_PAGE_BUTTON_TEXT_IS_FILLED": "Ein Text für die Schaltfläche wird eingegeben: Eine URL ist ebenfalls erforderlich.",
+    "CUSTOM_RESULT_PAGE_BUTTON_URL_MUST_BE_A_URL": "Die URL der Schaltfläche muss eine vollständige und gültige URL sein.",
+    "EMPTY_EMAIL": "Ihre E-Mail-Adresse ist nicht ausgefüllt.",
+    "EMPTY_FIRST_NAME": "Ihr Vorname ist nicht ausgefüllt.",
+    "EMPTY_INPUT": "Kein Feld ist ausgefüllt.",
+    "EMPTY_LAST_NAME": "Ihr Name ist nicht ausgefüllt.",
+    "EMPTY_USERNAME": "Ihr Benutzername ist nicht ausgefüllt.",
+    "FILL_USERNAME_OR_EMAIL": "Sie müssen eine E-Mail-Adresse und/oder einen Benutzernamen eingeben.",
+    "MAX_SIZE_EMAIL": "Ihre E-Mail-Adresse darf nicht länger als 255 Zeichen sein.",
+    "MAX_SIZE_FIRST_NAME": "Ihr Vorname darf nicht länger als 255 Zeichen sein.",
+    "MAX_SIZE_LAST_NAME": "Ihr Name darf nicht länger als 255 Zeichen sein.",
+    "STAGE_TARGET_PROFILE_IS_REQUIRED": "Das Zielprofil ist obligatorisch",
+    "STAGE_THRESHOLD_IS_REQUIRED": "Die Schwelle der Stufe ist obligatorisch",
+    "STAGE_TITLE_IS_REQUIRED": "Der Titel der Stufe ist obligatorisch",
+    "WRONG_EMAIL_FORMAT": "Das Format der E-Mail-Adresse ist falsch."
+  },
+  "jury": {
+    "comment": {
+      "CANCELLED_DUE_TO_LACK_OF_ANSWERS_FOR_TECHNICAL_REASON": {
+        "candidate": "Ein oder mehrere technische Probleme, die Ihrer Aufsichtsperson während der Zertifizierungssitzung mitgeteilt wurden, haben die Qualität des Zertifizierungstests beeinträchtigt. Aufgrund der zu großen Anzahl von Fragen, die Sie nicht unter guten Bedingungen beantworten konnten, sind wir leider nicht in der Lage, eine zuverlässige Punktzahl zu berechnen und ein Zertifikat auszustellen. Die Zertifizierung wird annulliert und der Auftraggeber Ihrer Zertifizierung (falls zutreffend) wird darüber informiert.",
+        "organization": "Ein oder mehrere technische Probleme, die von dieser Kandidatin/diesem Kandidaten der Aufsichtsperson der Zertifizierungssitzung gemeldet wurden, haben den ordnungsgemäßen Ablauf des Zertifizierungstests beeinträchtigt. Wir sind nicht in der Lage, ihn/sie zu zertifizieren, seine/ihre Zertifizierung wird daher annulliert. Diese Information ist zu berücksichtigen und kann dazu führen, dass Sie eine neue Zertifizierungssitzung für diesen Kandidaten/diese Kandidatin vorschlagen."
+      },
+      "CANCELLED_DUE_TO_NEUTRALIZATION": {
+        "candidate": "Ein oder mehrere technische Probleme, die Ihrer Aufsichtsperson während der Zertifizierungssitzung mitgeteilt wurden, haben die Qualität des Zertifizierungstests beeinträchtigt. Aufgrund der zu großen Anzahl an Fragen, die Sie nicht beantworten konnten, können wir keine Zertifizierung ausstellen. Die Zertifizierung wird annulliert und der Auftraggeber Ihrer Zertifizierung (falls zutreffend) wird darüber informiert.",
+        "organization": "Ein oder mehrere technische Probleme, hat/haben den reibungslosen Ablauf des Zertifizierungstests beeinträchtigt. Wir sind nicht in der Lage, die Zertifizierung auszustellen, daher wird sie annulliert. Diese Information kann dazu führen, dass Sie eine neue Zertifizierungssitzung für diesen Kandidaten/diese Kandidatin anbieten."
+      },
+      "FRAUD": {
+        "candidate": "Da die Bedingungen für das Ablegen des Zertifizierungstests nicht eingehalten wurden und Sie wegen Betrugs gemeldet wurden, wurde Ihre Zertifizierung entsprechend für ungültig erklärt.",
+        "organization": "Es wurde eine Betrugssituation aufgedeckt: Nach der Analyse entschieden wir uns für eine Ablehnung der Zertifizierung."
+      },
+      "LOWER_LEVEL_COMPLEMENTARY_CERTIFICATION_ACQUIRED": {
+        "candidate": "Herzlichen Glückwunsch, Sie haben mit Ihrer Punktzahl Ihre Zusatzqualifikation bestanden! Die erreichte Stufe entspricht der Stufe unterhalb der Stufe, für die Sie berechtigt waren.",
+        "organization": "Die Punktzahl des Bewerbers reichte nicht aus, um seine Zusatzqualifikation auf dem Niveau zu validieren, für das er berechtigt war. Dennoch bestätigte er die direkt darunter liegende Stufe dieser ergänzenden Qualifikation. Er wurde daher zertifiziert."
+      },
+      "REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS": {
+        "candidate": "Sie haben mehr als 50 % der Fragen falsch beantwortet, was Ihre gesamte Zertifizierung ungültig macht und zu einer Punktzahl von 0 Pixeln führt.",
+        "organization": "Der Kandidat hat mehr als 50 % der gestellten Fragen falsch beantwortet. Dies machte die gesamte Zertifizierung ungültig und führte daher zu einer Punktzahl von 0 Pixeln."
+      },
+      "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
+        "candidate": "Die Anzahl der während Ihres Zertifizierungstests beantworteten Fragen ist nicht ausreichend und erlaubt es uns nicht, Ihnen eine Pix-Zertifizierung auszustellen.",
+        "organization": "Die Anzahl der Fragen, die der Kandidat während seines Zertifizierungstests beantwortet hat, ist nicht ausreichend und erlaubt uns nicht, ihm eine Pix-Zertifizierung auszustellen."
+      },
+      "REJECTED_DUE_TO_ZERO_PIX_SCORE": {
+        "candidate": "Die erzielten Ergebnisse reichen noch nicht für die Ausstellung der Pix-Zertifizierung aus. Sie müssen sich weiterentwickeln, um sich in Ihrer digitalen Umgebung wohler zu fühlen und Ihre Fähigkeiten aufwerten zu können.",
+        "organization": "Die von diesem Kandidaten erzielten Ergebnisse reichen nicht aus, um die Pix-Zertifizierung auszustellen. Er muss sich weiterentwickeln, um sich in seiner digitalen Umgebung wohler zu fühlen und seine Fähigkeiten zur Geltung bringen zu können."
+      }
+    }
+  },
+  "jury-certification-summary": {
+    "comment": {
+      "CORE": "Pix-Zertifizierung",
+      "DOUBLE_CORE_CLEA": "Doppelte Zertifizierung Pix/CléA Numérique"
+    }
+  },
+  "organization-invitation-email": {
+    "params": {
+      "acceptInvitation": "Einladung annehmen",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf.",
+      "here": "hier",
+      "moreAbout": "Mehr über",
+      "needHelp": "Brauchen Sie Hilfe, kontaktieren Sie uns",
+      "oneTimeLink": "Dieser Link ist für den einmaligen Gebrauch",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen.",
+      "subtitle": "Mit der Pix Orga-Plattform können Sie Testkampagnen erstellen, verwalten und den Fortschritt Ihrer Teilnehmer verfolgen.",
+      "title": "Sie werden eingeladen, sich Pix Orga anzuschließen",
+      "yourOrganization": "Ihre Organisation"
+    },
+    "subject": "Einladung, sich Pix Orga anzuschließen"
+  },
+  "pix-account-creation-email": {
+    "params": {
+      "askForHelp": "Brauchen Sie Hilfe, kontaktieren Sie uns",
+      "disclaimer": "Wenn Sie die Erstellung des Kontos nicht selbst veranlasst haben, können Sie die Löschung beantragen",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf.",
+      "goToPix": "Ich überprüfe meine E-Mail-Adresse",
+      "helpdeskLinkLabel": "hier",
+      "moreOn": "Mehr über",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen.",
+      "subtitle": "Vielen Dank, dass Sie Ihr Konto eingerichtet haben. Es bleibt noch ein Schritt, um Ihr Konto zu sichern, indem Sie Ihre E-Mail-Adresse verifizieren.",
+      "subtitleDescription": "Es ist ganz einfach, Sie müssen nur auf die Schaltfläche unten klicken und sich in Ihr Pix-Konto einloggen.",
+      "title": "Hallo {firstName},"
+    },
+    "subject": "Ihr Pix-Konto wurde erfolgreich erstellt"
+  },
+  "reset-password-demand-email": {
+    "params": {
+      "clickOnTheButton": "Klicken Sie auf die Schaltfläche unten, um ein neues Passwort zu wählen.",
+      "contactUs": "kontaktieren Sie uns hier",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf. Benötige Hilfe,",
+      "linkValidFor": "Dieser Link ist 24 Stunden lang gültig. Wenn Sie nicht der Urheber dieser Anfrage sind, ignorieren Sie diese E-Mail bitte.",
+      "moreOn": "Mehr über",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen.",
+      "resetMyPassword": "Ein neues Passwort festlegen",
+      "title": "Ihr Passwort zurücksetzen",
+      "weCannotSendYourPassword": "Hallo, aus Sicherheitsgründen senden wir Ihnen Ihr Passwort nicht per E-Mail zu."
+    },
+    "subject": "Antrag auf Zurücksetzen des Pix-Passworts"
+  },
+  "self-account-deletion-email": {
+    "params": {
+      "contactUs": "kontaktieren Sie uns hier",
+      "hello": "Hallo {firstName},",
+      "requestConfirmation": "Nach Ihrer Anfrage bestätigen wir Ihnen, dass Ihr Pix-Konto und Ihre persönlichen Daten gelöscht werden.",
+      "seeYouSoon": "Wir hoffen, Sie bald wieder für neue digitale Abenteuer begrüßen zu dürfen.",
+      "signing": "Das Pix-Team",
+      "title": "Löschen Ihres Kontos",
+      "warning": "Wenn diese Anfrage nicht von Ihnen stammt, wenden Sie sich bitte an den Support."
+    },
+    "subject": "Löschen Ihres Kontos"
+  },
+  "verification-code-email": {
+    "body": {
+      "context": "Sie möchten eine Änderung Ihrer E-Mail-Adresse in Ihrem Konto vornehmen. Um fortzufahren, geben Sie auf Pix den folgenden Code ein:",
+      "doNotAnswer": "Dies ist eine automatische E-Mail, bitte antworten Sie nicht darauf",
+      "greeting": "Hallo,",
+      "moreOn": "Mehr über",
+      "pixPresentation": "Pix ist der öffentliche Online-Dienst zur Bewertung, Entwicklung und Zertifizierung von digitalen Kompetenzen.",
+      "seeYouSoon": "Bis gleich auf Pix.",
+      "signing": "- Das Pix-Team",
+      "warningMessage": "Falls Sie es nicht waren, sollten Sie Ihr Passwort so schnell wie möglich zurücksetzen, um Ihr Konto zu sichern."
+    },
+    "subject": "Ihr Pix-Code lautet {code}."
+  },
+  "warning-connection-email": {
+    "params": {
+      "context": "Wir haben bemerkt, dass Sie sich nach einer Inaktivität von 12 Monaten oder länger erneut in Ihr Pix-Konto eingeloggt haben.",
+      "disclaimer": "Wenn diese Verbindung tatsächlich von Ihnen stammt, sind keine weiteren Maßnahmen erforderlich.",
+      "hello": "Hallo {firstName},",
+      "resetMyPassword": "Ein neues Passwort festlegen",
+      "signing": "Das Pix-Team",
+      "supportContact": "Wenn Sie sich nicht sicher sind oder Fragen haben, steht Ihnen unser Support zur Verfügung, um Ihnen zu helfen.",
+      "thanks": "Vielen Dank für Ihre Wachsamkeit,",
+      "warningMessage": "Sollte dies nicht der Fall sein, bitten wir Sie, Ihr Passwort sofort zu ändern, um Ihr Konto zu sichern, indem Sie auf die untenstehende Schaltfläche klicken:"
+    },
+    "subject": "Aktuelle Aktivitäten in Ihrem Pix-Konto"
+  }
+}
