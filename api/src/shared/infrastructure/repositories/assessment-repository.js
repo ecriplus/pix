@@ -5,7 +5,7 @@ import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Assessment } from '../../domain/models/Assessment.js';
 
-const { uniqBy, omit } = lodash;
+const { omit } = lodash;
 
 const getWithAnswers = async function (id) {
   const knexConn = DomainTransaction.getConnection();
@@ -14,11 +14,11 @@ const getWithAnswers = async function (id) {
     throw new NotFoundError(`Assessment not found for ID ${id}`);
   }
 
-  const answers = await knexConn('answers')
+  const answerDTOs = await knexConn('answers')
     .select('id', 'challengeId', 'value')
     .where('assessmentId', id)
     .orderBy('createdAt');
-  assessment.answers = uniqBy(answers, 'challengeId');
+  assessment.answers = uniqByChallenge(answerDTOs);
   return new Assessment({
     ...assessment,
     campaign: await _getAssociatedCampaign(assessment.campaignParticipationId),
@@ -247,4 +247,16 @@ function _adaptModelToDb(assessment) {
     'showLevelup',
     'showQuestionCounter',
   ]);
+}
+
+function uniqByChallenge(answerDTOs) {
+  const map = new Map();
+
+  for (const a of answerDTOs) {
+    if (!map.has(a.challengeId)) {
+      map.set(a.challengeId, a);
+    }
+  }
+
+  return [...map.values()];
 }
