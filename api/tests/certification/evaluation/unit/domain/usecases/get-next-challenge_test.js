@@ -30,7 +30,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         getByScopeAndReconciliationDate: sinon.stub(),
       };
       answerRepository = {
-        findByAssessmentExcludingChallengeIds: sinon.stub(),
+        findByAssessment: sinon.stub(),
       };
       sharedChallengeRepository = {
         get: sinon.stub(),
@@ -87,9 +87,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-          .resolves([]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
@@ -185,9 +183,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
           versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-          answerRepository.findByAssessmentExcludingChallengeIds
-            .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-            .resolves([]);
+          answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
@@ -278,9 +274,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             id: nonAnsweredCertificationChallenge.challengeId,
           });
 
-          answerRepository.findByAssessmentExcludingChallengeIds
-            .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-            .resolves([]);
+          answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessment.id })
             .resolves([]);
@@ -336,8 +330,8 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         const answerStillValid = domainBuilder.buildAnswer({ challengeId: alreadyAnsweredChallenge.id });
         const answerWithOutdatedChallenge = domainBuilder.buildAnswer({ challengeId: outdatedChallenge.id });
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
+        answerRepository.findByAssessment
+          .withArgs(assessment.id)
           .resolves([answerStillValid, answerWithOutdatedChallenge]);
 
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
@@ -439,12 +433,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({
-            assessmentId: assessment.id,
-            excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
-          })
-          .resolves([]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
 
         const candidate = domainBuilder.certification.evaluation.buildCandidate();
         certificationCandidateRepository.findByAssessmentId
@@ -550,12 +539,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({
-            assessmentId: assessment.id,
-            excludedChallengeIds: [nonAnsweredCertificationChallenge.challengeId],
-          })
-          .resolves([]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs()
           .resolves([
@@ -639,9 +623,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
         versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-          .resolves([answer]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
@@ -712,9 +694,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const assessment = domainBuilder.buildAssessment();
             const locale = 'fr-FR';
 
-            answerRepository.findByAssessmentExcludingChallengeIds
-              .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-              .resolves([]);
+            answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
             certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
               .withArgs({ assessmentId: assessment.id })
               .resolves([]);
@@ -799,9 +779,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
         const locale = 'fr-FR';
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-          .resolves([]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);
@@ -864,9 +842,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         });
         const locale = 'fr-FR';
 
-        answerRepository.findByAssessmentExcludingChallengeIds
-          .withArgs({ assessmentId: assessment.id, excludedChallengeIds: [] })
-          .resolves([]);
+        answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessment.id })
           .resolves([]);

@@ -48,10 +48,8 @@ const getNextChallenge = async function ({
     certificationChallengeLiveAlertRepository,
   });
 
-  const allAnswers = await answerRepository.findByAssessmentExcludingChallengeIds({
-    assessmentId: assessment.id,
-    excludedChallengeIds: validatedLiveAlertChallengeIds,
-  });
+  let allAnswers = await answerRepository.findByAssessment(assessment.id);
+  allAnswers = allAnswers.filter(({ challengeId }) => !validatedLiveAlertChallengeIds.includes(challengeId));
 
   const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 

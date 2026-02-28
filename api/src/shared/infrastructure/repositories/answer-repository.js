@@ -56,23 +56,6 @@ export async function findByAssessment(assessmentId) {
   return _toDomainArray(dedupedAnswerDTOs);
 }
 
-export async function findByAssessmentExcludingChallengeIds({ assessmentId, excludedChallengeIds = [] }) {
-  const knexConn = DomainTransaction.getConnection();
-  const answerDTOs = await knexConn
-    .with('all-first-answers', (qb) => {
-      qb.select('*')
-        .distinctOn('challengeId', 'assessmentId')
-        .from('answers')
-        .where({ assessmentId })
-        .whereNotIn('challengeId', excludedChallengeIds)
-        .orderBy(['challengeId', 'assessmentId', 'createdAt']);
-    })
-    .from('all-first-answers')
-    .orderBy('all-first-answers.createdAt'); // todo lolo ici
-
-  return _toDomainArray(answerDTOs);
-}
-
 export async function save({ answer }) {
   const knexConn = DomainTransaction.getConnection();
   const answerForDB = _adaptAnswerToDb(answer);
