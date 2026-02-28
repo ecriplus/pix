@@ -697,6 +697,8 @@ const configuration = (function () {
     config.apiManager.url = 'http://external-partners-access/';
 
     config.infra.engineeringUserId = 800;
+
+    config.timeouts.server = 10_000;
   }
 
   return config;

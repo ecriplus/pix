@@ -1,6 +1,5 @@
-import { config } from '../../../../../src/shared/config.js';
 import { redisMutex } from '../../../../../src/shared/infrastructure/mutex/RedisMutex.js';
-import { expect, sinon, wait } from '../../../../test-helper.js';
+import { expect, wait } from '../../../../test-helper.js';
 
 describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function () {
   describe('#lock', function () {
@@ -15,15 +14,15 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     });
 
     it('should release automatically after expiration delay', async function () {
-      sinon.stub(config.llm, 'lockChatExpirationDelayMilliseconds').value(250);
-      await redisMutex.lock('someResourceId');
+      const lockExpirationDelay = 250;
+      await redisMutex.lock('someResourceId', lockExpirationDelay);
 
       // when
-      const isLockSuccess_beforeDelay1 = await redisMutex.lock('someResourceId');
+      const isLockSuccess_beforeDelay1 = await redisMutex.lock('someResourceId', lockExpirationDelay);
       await wait(100);
-      const isLockSuccess_beforeDelay2 = await redisMutex.lock('someResourceId');
+      const isLockSuccess_beforeDelay2 = await redisMutex.lock('someResourceId', lockExpirationDelay);
       await wait(151);
-      const isLockSuccess_afterDelay = await redisMutex.lock('someResourceId');
+      const isLockSuccess_afterDelay = await redisMutex.lock('someResourceId', lockExpirationDelay);
 
       // then
       expect(isLockSuccess_beforeDelay1).to.be.false;

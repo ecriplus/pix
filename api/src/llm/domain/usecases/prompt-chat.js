@@ -1,3 +1,4 @@
+import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { ChatForbiddenError, ChatNotFoundError, LLMApiError, PromptAlreadyOngoingError } from '../errors.js';
 import { Chat } from '../models/Chat.js';
@@ -41,7 +42,7 @@ export async function promptChat({
     throw new ChatNotFoundError('null id provided');
   }
 
-  const locked = await redisMutex.lock(chatId);
+  const locked = await redisMutex.lock(chatId, config.llm.lockChatExpirationDelayMilliseconds);
   if (!locked) {
     throw new PromptAlreadyOngoingError(chatId);
   }

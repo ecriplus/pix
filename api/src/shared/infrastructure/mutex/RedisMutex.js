@@ -11,12 +11,11 @@ class RedisMutex {
   /**
    *
    * @param { string } resourceId
+   * @param { number } lockExpirationDelay - in milliseconds. Default value : 5 seconds less than HTTP server timeout
    * @returns { Promise<boolean> } true : successful lock
    */
-  async lock(resourceId) {
-    return (
-      (await this._client.set(resourceId, '1', 'PX', config.llm.lockChatExpirationDelayMilliseconds, 'NX')) === 'OK'
-    );
+  async lock(resourceId, lockExpirationDelay = config.timeouts.server - 5_000) {
+    return (await this._client.set(resourceId, '1', 'PX', lockExpirationDelay, 'NX')) === 'OK';
   }
 
   /**
