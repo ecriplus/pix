@@ -1905,6 +1905,7 @@
     },
     "team-invitations": {
       "cancel-invitation": "Uitnodiging verwijderen",
+      "empty-table": "Je hebt geen uitnodigingen in behandeling.",
       "invitation-cancelled-succeed-message": "De uitnodiging is verwijderd.",
       "invitation-resent-succeed-message": "De uitnodiging is opnieuw gestuurd.",
       "resend-invitation": "Uitnodiging opnieuw versturen",

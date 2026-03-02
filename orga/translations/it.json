@@ -1911,6 +1911,7 @@
     },
     "team-invitations": {
       "cancel-invitation": "Cancellare l'invito",
+      "empty-table": "Non ci sono inviti in attesa.",
       "invitation-cancelled-succeed-message": "L'invito è stato cancellato.",
       "invitation-resent-succeed-message": "L'invito è stato restituito.",
       "resend-invitation": "Reinvio dell'invito",
