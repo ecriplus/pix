@@ -14,7 +14,7 @@ module('Integration | Component | Participant::Assessment::Results', function (h
     store = this.owner.lookup('service:store');
   });
 
-  test('it should display a sentence when displayResults is false', async function (assert) {
+  test('it should hide table when there is no results', async function (assert) {
     // when
     const competenceResults = [];
 
@@ -25,7 +25,7 @@ module('Integration | Component | Participant::Assessment::Results', function (h
     assert.dom(screen.getByText(t('pages.assessment-individual-results.table.empty'))).exists();
   });
 
-  test('it should display results when displayResults is true', async function (assert) {
+  test('it should display results when there are results', async function (assert) {
     // given
     const competenceResult = store.createRecord('campaign-assessment-participation-competence-result', {
       name: 'Compétence 1',
