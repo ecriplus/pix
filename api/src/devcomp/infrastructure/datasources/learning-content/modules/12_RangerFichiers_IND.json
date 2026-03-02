@@ -647,7 +647,7 @@
               "element": {
                 "id": "a940f5e1-66ee-4c43-975d-35c955b48138",
                 "type": "text",
-                "content": "<p>Dans le gestionnaire de fichiers ci-dessous&nbsp;:&nbsp;</p><ul><li>Rangez le dossier «&nbsp;Documents&nbsp;», en suivant la même organisation que pour le dossier «&nbsp;Images&nbsp;».</li><li>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier plus «&nbsp;Musique&nbsp;».</li></ul>"
+                "content": "<p><strong>Dans le gestionnaire de fichiers ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Rangez le dossier «&nbsp;Documents&nbsp;», en suivant la même organisation que pour le dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier plus «&nbsp;Musique&nbsp;».</strong></li></ul>"
               }
             },
             {
