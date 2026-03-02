@@ -296,7 +296,7 @@
         "ASSESSMENT": "Campaign of type assessment",
         "CAMPAIGN": "Campaign of type assessment",
         "COMBINED_COURSE": "Learning program",
-        "EXAM": "Exam mode [beta]",
+        "EXAM": "Exam mode",
         "FORMATION": "Training",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Campaign of type profiles collection"
@@ -305,7 +305,7 @@
         "ASSESSMENT": "Assessment",
         "CAMPAIGN": "Assessment",
         "COMBINED_COURSE": "Learning program",
-        "EXAM": "Exam mode [beta]",
+        "EXAM": "Exam mode",
         "FORMATION": "Training",
         "MODULE": "Module",
         "PROFILES_COLLECTION": "Profiles collection"
@@ -811,7 +811,7 @@
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
         "combined-course": "Create a combined course",
-        "exam": "Exam mode [beta]",
+        "exam": "Exam mode",
         "exam-info": "A ‘exam mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
         "profiles-collection": "Collect the participants' Pix profiles",
@@ -934,7 +934,7 @@
       },
       "campaign-type": {
         "assessment": "Assessment campaign",
-        "exam": "Questioning campaign [beta]",
+        "exam": "Questioning campaign",
         "profiles-collection": "Profiles collection campaign",
         "title": "Type of campaign"
       },
