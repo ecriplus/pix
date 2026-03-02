@@ -143,4 +143,67 @@ module('Unit | Authenticator | oidc', function (hooks) {
       });
     });
   });
+
+  module('#invalidate', function () {
+    module('when user has no logout_url_uuid in their session (because shouldCloseSession is false)', function () {
+      test('does not set alternativeRootURL', async function (assert) {
+        // given
+        const sessionStub = Service.create({
+          isAuthenticated: true,
+        });
+        const authenticator = this.owner.lookup('authenticator:oidc');
+        authenticator.session = sessionStub;
+
+        const redirectLogoutUrl = undefined;
+        const requestManager = this.owner.lookup('service:request-manager');
+        sinon.stub(requestManager, 'request').resolves({
+          content: {
+            redirectLogoutUrl,
+          },
+        });
+
+        // when
+        await authenticator.invalidate({
+          identityProviderCode: 'OIDC_PARTNER',
+        });
+
+        // then
+        assert.strictEqual(authenticator.session.alternativeRootURL, undefined);
+      });
+    });
+
+    module('when user has a logout_url_uuid in their session (because shouldCloseSession is true)', function () {
+      test('sets alternativeRootURL with the redirectLogoutUrl', async function (assert) {
+        // given
+        const sessionStub = Service.create({
+          isAuthenticated: true,
+          data: {
+            authenticated: {
+              logout_url_uuid: 'uuid',
+            },
+          },
+        });
+        const authenticator = this.owner.lookup('authenticator:oidc');
+        authenticator.session = sessionStub;
+
+        const redirectLogoutUrl =
+          'https://oidc.example.net/ea5ac20c-5076-4806-860a-b0aeb01645d4/oauth2/v2.0/logout?client_id=client';
+        const requestManager = this.owner.lookup('service:request-manager');
+        sinon.stub(requestManager, 'request').resolves({
+          content: {
+            redirectLogoutUrl,
+          },
+        });
+
+        // when
+        await authenticator.invalidate({
+          identityProviderCode: 'OIDC_PARTNER',
+          logoutUrlUuid: 'uuid',
+        });
+
+        // then
+        assert.strictEqual(authenticator.session.alternativeRootURL, redirectLogoutUrl);
+      });
+    });
+  });
 });
