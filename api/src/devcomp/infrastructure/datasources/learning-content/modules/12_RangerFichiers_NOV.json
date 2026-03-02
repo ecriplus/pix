@@ -61,6 +61,7 @@
                 "id": "be1361b1-0008-4a78-bb0e-86c1ba5f1e01",
                 "type": "qcu-discovery",
                 "instruction": "À votre avis, qu’est-ce qui pourrait aider Maëva à mieux s’y retrouver ?",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -91,8 +92,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -158,8 +158,8 @@
                           "content": "«&nbsp;Janvier&nbsp;» est un&nbsp;"
                         },
                         {
-                          "input": "janvier",
                           "type": "select",
+                          "input": "janvier",
                           "display": "inline",
                           "placeholder": "Sélectionnez",
                           "ariaLabel": "Sélectionnez",
@@ -174,7 +174,9 @@
                               "content": "dossier"
                             }
                           ],
-                          "solutions": ["2"]
+                          "solutions": [
+                            "2"
+                          ]
                         },
                         {
                           "type": "text",
@@ -206,8 +208,8 @@
                           "content": "«&nbsp;Demande de documents&nbsp;» est un&nbsp;"
                         },
                         {
-                          "input": "demande de documents",
                           "type": "select",
+                          "input": "demande de documents",
                           "display": "inline",
                           "placeholder": "Sélectionnez",
                           "ariaLabel": "Sélectionnez",
@@ -222,7 +224,9 @@
                               "content": "dossier"
                             }
                           ],
-                          "solutions": ["1"]
+                          "solutions": [
+                            "1"
+                          ]
                         },
                         {
                           "type": "text",
@@ -286,7 +290,7 @@
               "element": {
                 "id": "87d28944-5b26-48ad-9862-ec8e67c7109d",
                 "type": "text",
-                "content": "Maëva a de nombreuses photos sur son bureau.&nbsp;Elle souhaite les ranger toutes au même endroit.&nbsp;<br>Pour organiser ses fichiers, elle veut créer un nouveau dossier.&nbsp;"
+                "content": "<p>Maëva a de nombreuses photos sur son bureau.&nbsp;Elle souhaite les ranger toutes au même endroit.&nbsp;</p><br><p>Pour organiser ses fichiers, elle veut créer un nouveau dossier.&nbsp;</p>"
               }
             },
             {
@@ -294,7 +298,28 @@
               "element": {
                 "id": "617bda78-d613-4dbd-9b18-84dd86bb89d5",
                 "type": "text",
-                "content": "<strong>Créez un dossier “Photos” sur le bureau de Maëva.</strong> <br>[ Objet interactif avec indices procédures (travail de réflexion sur la forme et les modalités avec le design)<br>Actions&nbsp;: clic droit → “Nouveau dossier” ou “dossier” → écrire un nom → appuyer sur Entrée ]"
+                "content": "<p><strong>Dans l'interface ci-dessous, créez un dossier “Photos” sur le bureau de Maëva.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4b1f7c83-c5c4-4934-8baa-fbb13a921563",
+                "type": "expand",
+                "title": "[ Simulateur d'interface de bureau d'ordinateur ]",
+                "content": "<p>Même bureau que dans les illustrations de début de module avec fichiers et dossiers.</p><ul><li>Actions attendues : <ul><li>clic droit → “Nouveau dossier” ou “dossier” → écrire un nom → appuyer sur Entrée</li></ul></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c395832a-33b6-4711-ab70-4df910e6a05f",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/bureauaccroche.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
@@ -347,7 +372,25 @@
               "element": {
                 "id": "24580343-0718-4c50-9683-6047f0ee2e10",
                 "type": "text",
-                "content": "<ul><li>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</li><li>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</li></ul><strong>[simulateur avec indices]</strong><br>STEP 1<br>Donnez le nom «&nbsp;Portugal&nbsp;» à la photo «&nbsp;DCIM2115&nbsp;». <br>Actions&nbsp;: clic droit → Renommer → taper le nom<br><strong>Feedback step 1 </strong>: À tout moment, vous pouvez modifier le nom d’un fichier pour choisir un nom qui a du sens pour vous.&nbsp; <br><br>STEP 2<br>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»<br> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ]<br><strong>Feedback step 2</strong>&nbsp;: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.&nbsp;"
+                "content": "<p><strong>Dans l'interface ci-dessous :&nbsp;</strong></p><ul><li><strong>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</strong></li><li><strong>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</strong></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "396abb24-bc62-458a-a051-945bfd38b658",
+                "type": "expand",
+                "title": "[ Simulateur d'interface de bureau d'ordinateur - Step1]",
+                "content": "<p>STEP 1 </p><ul><li><strong>Donnez le nom «&nbsp;Portugal&nbsp;» à la photo «&nbsp;DCIM2115&nbsp;».</strong>  </li><li>Actions&nbsp;: clic droit → Renommer → taper le nom </li><li><strong>Feedback step 1 </strong>: À tout moment, vous pouvez modifier le nom d’un fichier pour choisir un nom qui a du sens pour vous.&nbsp;  </li><br></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e59ce079-a0bb-4610-9403-59984ec3582e",
+                "type": "expand",
+                "title": "[ Simulateur d'interface de bureau d'ordinateur - Step1]",
+                "content": "<p>STEP 2 </p><ul><li> <strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»</strong> </li><li> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ] </li><li><strong>Feedback step 2&nbsp;</strong>: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.</li></ul>"
               }
             }
           ]
@@ -401,6 +444,7 @@
                 "id": "99528f9d-32b9-4388-ade2-46c05929846d",
                 "type": "qcu-discovery",
                 "instruction": "À votre avis, Maëva peut-elle récupérer son fichier ?",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -431,8 +475,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -447,7 +490,36 @@
               "element": {
                 "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
                 "type": "text",
-                "content": "<strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong><br>[ Objet interactif avec indices procédures<br>Actions&nbsp;: Ouvrir la corbeille → double clic sur l’icône de la corbeille<br>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre ]<br><br><strong>Feedback&nbsp;: </strong>Quand un fichier est <strong>récupéré depuis la corbeille</strong>, il est r<strong>envoyé à son emplacement d’origine</strong>. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva."
+                "content": "<p><strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8a3d8b71-d0f8-48aa-b9ab-4083e2cffbe0",
+                "type": "expand",
+                "title": "[ Simulateur d'interface de bureau d'ordinateur]",
+                "content": "<ul><li> Actions&nbsp;: <ul><li>Ouvrir la corbeille → double clic sur l’icône de la corbeille</li><li>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre <br></li></ul></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "60223c63-944a-4e07-9cd2-a7b558696954",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/corbeille.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a453471b-b9b3-4aed-970f-768caab74d70",
+                "type": "text",
+                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva.</p>"
               }
             }
           ]
@@ -603,7 +675,9 @@
                     "placeholder": "Tapez un chiffre",
                     "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
-                    "solutions": [4]
+                    "solutions": [
+                      4
+                    ]
                   },
                   {
                     "type": "text",
@@ -618,7 +692,9 @@
                     "placeholder": "Tapez un chiffre",
                     "ariaLabel": "Tapez un chiffre",
                     "tolerances": [],
-                    "solutions": [6]
+                    "solutions": [
+                      6
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -645,7 +721,16 @@
               "element": {
                 "id": "7efd6a00-11a9-4dd9-b8ee-0ff3c9bd18fa",
                 "type": "text",
-                "content": "Dans l’application ci-dessous&nbsp;: <br><ul><li>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;».</li><li>Créez un dossier «&nbsp;Images&nbsp;».</li><li>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</li></ul><strong>[Simulateur bureau (sans indices) avec autovolidation]</strong>"
+                "content": "<p><strong>Dans l’application ci-dessous&nbsp;: </strong></p><p><strong><br></strong></p><ul><li><strong>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;».</strong></li><li><strong>Créez un dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</strong></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b39ab6e2-31e0-4aef-96fc-692b9de1d5bd",
+                "type": "expand",
+                "title": "[Simulateur d'interface bureau (sans indices) avec autovalidation]",
+                "content": "<p>Actions : </p><ul><li>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;». : clic droit -&gt; supprimer</li><li>Créez un dossier «&nbsp;Images&nbsp;». : clic droit -&gt; nouveau dossier -&gt; Images -&gt; entrée</li><li>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé. clic droit -&gt; copier sur le fichier puis clic droit -&gt; coller sur le dossier</li></ul>"
               }
             }
           ]
@@ -674,7 +759,7 @@
               "element": {
                 "id": "281c9e6c-6b57-4c80-92e9-e9d4afb62677",
                 "type": "text",
-                "content": "Récupérez le dossier « Administratif » dans l’application ci-dessous puis répondez à la question. <br><strong>[Simulateur sans indices internes]</strong><br>"
+                "content": "<p><strong>Récupérez le dossier « Administratif » dans l’application ci-dessous puis répondez à la question.</strong> </p><br>"
               }
             },
             {
@@ -692,8 +777,14 @@
                     "display": "inline",
                     "placeholder": "Nom du fichier",
                     "ariaLabel": "Nom du fichier",
-                    "tolerances": ["t1", "t2", "t3"],
-                    "solutions": ["courrier"]
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
+                    "solutions": [
+                      "courrier"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -706,6 +797,15 @@
                     "diagnosis": "Feedback à rédiger"
                   }
                 }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "22c43fcc-950e-461f-9214-15369213a206",
+                "type": "expand",
+                "title": "[Simulateur d'interface de bureau avec corbeille]",
+                "content": "<p>Actions&nbsp;: </p><ul><li>Ouvrir la corbeille → double clic sur l’icône de la corbeille</li><li>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre</li><li>Ouvrir le dossier Administratif sur le bureau : double clic gauche</li></ul>"
               }
             }
           ]
