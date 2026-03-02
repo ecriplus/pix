@@ -100,4 +100,11 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['captain', 'backend', 'transactions'],
   },
+  multipleLocalesForTrainingsEnabled: {
+    type: 'boolean',
+    description: 'Enable trainings with multiple locales',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
+    tags: ['team-devcomp', 'pix-api', 'pix-admin', 'frontend', 'backend'],
+  },
 };
