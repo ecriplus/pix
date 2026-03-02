@@ -3,10 +3,6 @@
 
 /* stylelint-disable color-no-hex */
 .organization-information-section {
-  &__archived-message {
-    margin-bottom: var(--pix-spacing-3x);
-  }
-
   &__card {
     &--general {
       .card__content {

@@ -761,8 +761,9 @@
         "required-fields-error": "Please fill in all required fields."
       },
       "head-information": {
-        "child-organization": "Organisation fille de",
-        "parent-organization": "Organisation mère"
+        "child-organization": "Child organization of",
+        "copy-id": "Copy ID",
+        "parent-organization": "Parent organization"
       },
       "information-section-view": {
         "administration-team": "Administration team",
