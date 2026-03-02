@@ -31,7 +31,7 @@
   },
   "addons": [
     {
-      "plan": "postgresql:postgresql-sandbox",
+      "plan": "postgresql:postgresql-starter-512",
       "options": {
         "version": "16.9"
       }
@@ -43,5 +43,5 @@
       "size": "S"
     }
   },
-  "stack": "scalingo-22"
+  "stack": "scalingo-24"
 }
