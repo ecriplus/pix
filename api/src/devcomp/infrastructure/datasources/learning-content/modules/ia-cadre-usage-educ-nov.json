@@ -79,7 +79,7 @@
               "element": {
                 "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "<p>L’IA s’impose désormais comme un <strong>puissant levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un usage éclairé et responsable.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Il veut fournir des repères pour que&nbsp;l’usage de l’IA s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
+                "content": "<p>L’IA s’impose désormais comme un <strong>puissant levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un <strong>usage éclairé et responsable</strong>.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Il veut fournir des repères pour que&nbsp;l’usage de l’IA s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
               }
             }
           ]
@@ -603,7 +603,7 @@
               "element": {
                 "id": "e0c29f4a-5f5b-436b-8c1f-b839537f4d91",
                 "type": "text",
-                "content": "<p>Une autre question, et pas des moindres,&nbsp; s’impose lorsqu’on parle d’IA en éducation&nbsp;: «&nbsp;Et avec les élèves ? Peut-on exploiter l’IA en classe ? À partir de quel âge, et sous quelles conditions&nbsp;».</p>"
+                "content": "<p>Une autre question, et pas des moindres,&nbsp; s’impose lorsqu’on parle d’IA en éducation&nbsp;: «&nbsp;Et avec les élèves ? Peut-on exploiter l’IA en classe ? À partir de quel âge, et sous quelles conditions&nbsp?&nbsp;».</p>"
               }
             }
           ]
@@ -774,7 +774,7 @@
               "element": {
                 "id": "76081d34-b024-4409-a09a-36201ca6c91c",
                 "type": "text",
-                "content": "Face au développement rapide et constant de l’IA, le cadre d’usage de l’intelligence artificielle en éducation, publié par le ministère de L’Éducation nationale en juin 2025, a pour objectif de promouvoir des pratiques éclairées et responsables. <br> [INFOGRAPHIE&nbsp;: <br><strong>Pour un usage éclairé et responsable de l’IA en éducation </strong>:<br><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et<strong> renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li><strong>Introduisez de manière progressive</strong>, encadrée et sécurisée l’usage de l’IA avec vos élèves.]</li></ul>"
+                "content": "Face au développement rapide et constant de l’IA, le <strong>cadre d’usage de l’intelligence artificielle en éducation</strong>, publié par le ministère de L’Éducation nationale en juin 2025, a pour objectif de promouvoir des pratiques éclairées et responsables. <br> [INFOGRAPHIE&nbsp;: <br><strong>Pour un usage éclairé et responsable de l’IA en éducation </strong>:<br><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et<strong> renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li><strong>Introduisez de manière progressive, encadrée et sécurisée</strong> l’usage de l’IA avec vos élèves.]</li></ul>"
               }
             }
           ]
