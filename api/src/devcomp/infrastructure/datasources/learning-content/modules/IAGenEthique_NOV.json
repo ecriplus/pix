@@ -193,7 +193,7 @@
               "element": {
                 "id": "1c479a77-fcc8-4056-9459-6aa9ba1bc6b2",
                 "type": "custom",
-                "instruction": "<p>Parmi les prompts suivants, certains donnent des informations privées ou secrètes. Repérez-les et sélectionnez-les.</p>",
+                "instruction": "Voici plusieurs prompts. Certains donnent des informations privées ou secrètes. Repérez-les et sélectionnez-les.",
                 "tagName": "pix-anonymisation",
                 "props": {
                   "titleLevel": 2,
@@ -254,11 +254,11 @@
                           "content": "Peux-tu rédiger un mail pour mon équipe"
                         },
                         {
-                          "content": "pour lui rappeler que le mot de passe du wifi est AzErTy2024!",
+                          "content": "afin de lui rappeler que le mot de passe du wifi est AzErTy2024!",
                           "isAnonymizable": true
                         },
                         {
-                          "content": "et qu’elle doit suivre le mode d’emploi suivant :"
+                          "content": "et qu’ils doivent suivre le mode d’emploi suivant :"
                         },
                         {
                           "content": " http://intranet.example.invalid/procedure-connexion",
@@ -352,7 +352,7 @@
               "element": {
                 "id": "80ee8557-53ba-42e3-a7cf-ed977cac9a27",
                 "type": "custom",
-                "instruction": "<p>La discussion suivante présente un échange entre Sarah et Maëlle. Sarah remarque que l’IA a produit une image avec des informations qui ressemblent fortement à des informations réelles.</p>",
+                "instruction": "Voici une discussion entre Sarah et Maëlle. Sarah remarque que l’IA a généré des informations qui ressemblent fortement à des informations réelles.",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
@@ -364,7 +364,7 @@
                       "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
-                        "alt": "Carte de visite de maçon Cédric Fostabley avec logo en forme de mur en briques, adresse et numéro de téléphone."
+                        "alt": "Image draft"
                       }
                     },
                     {
@@ -688,7 +688,7 @@
               "element": {
                 "id": "935a2724-84d4-4cd0-b320-9a79ab743547",
                 "type": "custom",
-                "instruction": "<p>Lisez attentivement l’article suivant, puis répondez à la question. </p>",
+                "instruction": "<p>Lisez attentivement l’article suivant, puis répondez à la question.</p>",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
@@ -768,7 +768,7 @@
               "element": {
                 "id": "bae27e2d-8f78-4836-bb1f-7f2a19c91b5f",
                 "type": "custom",
-                "instruction": " ",
+                "instruction": "",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
