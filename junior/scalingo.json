@@ -15,7 +15,7 @@
   "stack": "scalingo-24",
   "addons": [
     {
-      "plan": "postgresql:postgresql-sandbox"
+      "plan": "postgresql:postgresql-starter-512"
     }
   ]
 }
