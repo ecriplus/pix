@@ -2,11 +2,11 @@
   "id": "e2b42968-4797-46e7-b9ca-11d0d0dfa978",
   "shortId": "dc38a091",
   "slug": "metaux-eau-reemploi",
-  "title": "Le numérique : pourquoi privilégier le réemploi ?",
+  "title": "Métaux, eau, pollution : le vrai coût du numérique",
   "isBeta": false,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/picto_nr_durabilite_ind-1.svg",
     "description": "<p>Nos smartphones et ordinateurs contiennent de nombreux métaux (lithium, cobalt, terres rares) dont l’extraction consomme beaucoup d’eau et de produits chimiques, avec des impacts sur l’environnement et la santé. 🌍</p><p>Ce module vous montre les impacts de la fabrication des appareils numériques et montre comment le réemploi et le reconditionnement permettent d’en réduire l’empreinte. 🔁</p>",
     "duration": 10,
     "level": "independent",
@@ -32,7 +32,7 @@
               "element": {
                 "id": "a67c4f7f-4995-4c3d-9257-f92ba8d9cdc8",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/926c637c-e574-4e55-a74d-49c9a19801af.png",
+                "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/picto_nr_durabilite_ind-1.svg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "",
@@ -44,7 +44,9 @@
               "element": {
                 "id": "539c81ce-9924-46f1-b221-00fc2ce2642e",
                 "type": "custom",
-                "instruction": "<p>Selon vous, combien de kilogrammes (kg) de matières premières faut-il pour fabriquer un seul smartphone ?<br></p>",
+                "title": "",
+                "instruction": "<p>Selon vous, combien de kilogrammes (kg) de ressources faut-il mobiliser pour fabriquer un seul smartphone ?<br></p>",
+                "functionalInstruction": "",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
@@ -84,9 +86,7 @@
                       }
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -122,65 +122,85 @@
               "element": {
                 "id": "9b0552bc-4f23-4190-9c27-f7f4892b3383",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Cliquez sur les différentes parties du smartphone ci-dessous pour découvrir les matériaux qui le composent.</p>",
+                "functionalInstruction": "",
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/nr_durabilite_ind/unnamed.png",
-                    "alt": "Smartphone démonté en plusieurs parties : batterie, écran, boîtier, carte de circuits et coque",
-                    "width": 512,
-                    "height": 341
+                    "src": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/smartphone_pieces_illu.png",
+                    "alt": "Smartphone démonté en plusieurs parties : écran, carte électronique, batterie, châssis, coque arrière",
+                    "width": 1024,
+                    "height": 472
                   },
                   "areas": [
                     {
                       "coords": {
-                        "x1": 10,
-                        "y1": 100,
-                        "x2": 90,
-                        "y2": 260
-                      },
-                      "info": "🔋 Batterie : stockage d’énergie grâce aux métaux rares (lithium et cobalt)."
-                    },
-                    {
-                      "coords": {
-                        "x1": 100,
-                        "y1": 60,
-                        "x2": 180,
-                        "y2": 280
-                      },
-                      "info": "📱 Écran tactile : sensibilité et couleurs assurées par l’indium, l’étain et plusieurs terres rares (europium, terbium et yttrium)."
-                    },
-                    {
-                      "coords": {
-                        "x1": 190,
+                        "x1": 40,
                         "y1": 40,
-                        "x2": 270,
-                        "y2": 300
+                        "x2": 250,
+                        "y2": 440
                       },
-                      "info": "💻 Boîtier / Structure : solidité et légèreté obtenues grâce à l’aluminium et au magnésium."
+                      "info": "📱 Écran tactile : sensibilité et couleurs assurées par l’indium, l’étain et plusieurs terres rares (europium, terbium et yttrium).",
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      }
                     },
                     {
                       "coords": {
-                        "x1": 280,
-                        "y1": 70,
-                        "x2": 360,
-                        "y2": 290
+                        "x1": 270,
+                        "y1": 40,
+                        "x2": 470,
+                        "y2": 440
                       },
-                      "info": "⚙️ Circuits électroniques : Conduction et résistance assurées grâce aux métaux précieux (cuivre, argent et or)."
+                      "info": "⚙️ Circuits électroniques : Conduction et résistance assurées grâce aux métaux précieux (cuivre, argent et or).",
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      }
                     },
                     {
                       "coords": {
-                        "x1": 370,
-                        "y1": 50,
-                        "x2": 460,
-                        "y2": 310
+                        "x1": 470,
+                        "y1": 210,
+                        "x2": 560,
+                        "y2": 360
                       },
-                      "info": "🔈 Haut-parleur / Microphone : production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique."
+                      "info": "🔋 Batterie : stockage d’énergie grâce aux métaux rares (lithium et cobalt).",
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "coords": {
+                        "x1": 580,
+                        "y1": 40,
+                        "x2": 800,
+                        "y2": 440
+                      },
+                      "info": "💻 Boîtier / Structure : solidité et légèreté obtenues grâce à l’aluminium et au magnésium.",
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "coords": {
+                        "x1": 820,
+                        "y1": 40,
+                        "x2": 990,
+                        "y2": 440
+                      },
+                      "info": "🔈 Haut-parleur / Microphone : production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique.",
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      }
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -195,8 +215,8 @@
                     "content": "<p><span>Le lithium</span></p>"
                   },
                   {
-                    "input": "choice1",
                     "type": "select",
+                    "input": "choice1",
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour le lithium",
@@ -215,15 +235,17 @@
                         "content": "Circuits électroniques"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<p><span>Les terres rares (europium, terbium, yttrium…)</span></p>"
                   },
                   {
-                    "input": "choice2",
                     "type": "select",
+                    "input": "choice2",
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour les terres rares",
@@ -242,15 +264,17 @@
                         "content": "Écrans (couleurs et sensibilité tactile)"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<p>L’or, le cuivre et&nbsp;l’argent<br></p>"
                   },
                   {
-                    "input": "choice3",
                     "type": "select",
+                    "input": "choice3",
                     "display": "block",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour l’or, le cuivre et l’argent",
@@ -269,7 +293,9 @@
                         "content": "Batteries"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -299,7 +325,7 @@
                     {
                       "id": "fd4686e7-d519-425e-a6f0-f8b14c5d18f9",
                       "type": "text",
-                      "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p>La demande en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le tantale ou l’indium.</p>"
+                      "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p>La demande en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le germanium ou l’indium.</p>"
                     }
                   ]
                 },
@@ -344,12 +370,22 @@
                     {
                       "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
                       "type": "text",
-                      "content": "<p>Observez l’évolution de cette mine au fil des années, à partir d’une vue aérienne. Répondez ensuite à la question ci-dessous.&nbsp;</p><p><a href=\"https://earth.google.com/web/search/Bayan+Obo,+Baotou,+Mongolie-int%c3%a9rieure,+Chine/@41.80231179,109.99371383,1603.900575a,30139.21568664d,35y,0h,0t,0r/data=CjsiJgokCdr95P0-HiDAEWVu9880gSHAGUXlCzo3b1LAIaC-jA5Q11LAOg0IAREAAAAAAADwPyABQgIIAToDCgEwQgIIAEoNCP___________wEQAA\" target=\"_blank\">Vue Google Earth&nbsp;: Bayan Obo / Baotou, Chine</a>&nbsp;(sera directement lu en short vidéo)</p>"
+                      "content": "<p>Observez l’évolution de cette mine au fil des années, à partir d’une vue aérienne. Répondez ensuite à la question ci-dessous.</p>"
+                    },
+                    {
+                      "id": "6d6c87da-b248-4abc-936a-62938426826a",
+                      "type": "video",
+                      "title": "Timelapse d’une vue aérienne. ",
+                      "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/timelaps_mine.mp4",
+                      "poster": "",
+                      "subtitles": "",
+                      "transcription": "<p>Vidéo en vue aérienne montrant l’évolution d’une zone industrielle entre 1985 et 2025. Une petite tache noire apparaît au sol en 1985. Au fil des années, elle s’agrandit progressivement, s’étend sur le paysage et finit par occuper une grande partie de l’image en 2025.</p>"
                     },
                     {
                       "id": "8db7e730-9601-4e62-b6a4-9e351097e40f",
                       "type": "qcu-discovery",
                       "instruction": "<p> À votre avis, à cause de quoi s’est formé le «&nbsp;lac noir&nbsp;» visible depuis l’espace ?<br><br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -380,8 +416,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -394,22 +429,105 @@
                     },
                     {
                       "id": "d03f5276-0dbf-46f1-8c85-88edd79f1fe9",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/2025-11-07-12-08-01-greenshot.png",
-                      "alt": "Schéma extraction lithium",
-                      "alternativeText": "",
-                      "legend": "",
-                      "licence": ""
-                    },
-                    {
-                      "id": "154555e7-4169-41f8-a3ea-e74f40decb34",
-                      "type": "text",
-                      "content": "<p>Pour extraire le lithium (essentiel pour les batteries), on pompe l’eau salée des nappes souterraines dans de grands bassins d’évaporation.<br> Ce procédé consomme d’<strong>énormes volumes d’eau</strong> dans des régions souvent arides, et laisse derrière lui<strong> des déchets salins et chimiques</strong>.<br> Les sols s’appauvrissent, les sources d’eau potable s’assèchent, et la faune locale décline.</p>"
+                      "type": "custom",
+                      "title": "Le cycle du lithium",
+                      "instruction": "",
+                      "functionalInstruction": "",
+                      "tagName": "clickable-image",
+                      "props": {
+                        "image": {
+                          "src": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/schema_cycle_lithium.svg",
+                          "alt": "Schéma en coupe montrant le processus d’extraction du lithium. De l’eau salée est pompée depuis le sous-sol, puis versée dans de grands bassins où elle s’évapore au soleil. Le lithium se concentre progressivement. Il est ensuite transporté vers une usine pour être transformé et utilisé dans la fabrication de batteries.",
+                          "width": 286,
+                          "height": 150
+                        },
+                        "areas": [
+                          {
+                            "coords": {
+                              "x1": 5,
+                              "y1": 80,
+                              "x2": 60,
+                              "y2": 140
+                            },
+                            "info": "1. Eau saléeSous le désert de sel, il y a de l’eau très salée qui contient du lithium.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          },
+                          {
+                            "coords": {
+                              "x1": 55,
+                              "y1": 55,
+                              "x2": 95,
+                              "y2": 95
+                            },
+                            "info": "2. Pompage de l’eauCette eau est pompée depuis le sous-sol.👉 Cela utilise beaucoup d’eau, dans des régions souvent très sèches.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          },
+                          {
+                            "coords": {
+                              "x1": 95,
+                              "y1": 70,
+                              "x2": 145,
+                              "y2": 115
+                            },
+                            "info": "3. Bassins au soleil ☀️L’eau est versée dans de grands bassins.Le soleil fait évaporer l’eau lentement.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          },
+                          {
+                            "coords": {
+                              "x1": 135,
+                              "y1": 68,
+                              "x2": 185,
+                              "y2": 115
+                            },
+                            "info": "4. Le lithium se concentreQuand l’eau disparaît, le lithium se concentre.Des résidus de sel et de produits chimiques restent sur place.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          },
+                          {
+                            "coords": {
+                              "x1": 185,
+                              "y1": 60,
+                              "x2": 225,
+                              "y2": 105
+                            },
+                            "info": "5. Transport et transformationLe lithium est envoyé vers une usine pour être transformé en poudre.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          },
+                          {
+                            "coords": {
+                              "x1": 225,
+                              "y1": 55,
+                              "x2": 280,
+                              "y2": 115
+                            },
+                            "info": "6. Fabrication des batteriesCette poudre sert à fabriquer des batteries.",
+                            "spot": {
+                              "x": 0,
+                              "y": -5
+                            }
+                          }
+                        ]
+                      }
                     },
                     {
                       "id": "f6da76af-0fca-4bb8-862e-f3f6433b1dcb",
                       "type": "qcu-discovery",
                       "instruction": "<p>Existe-t-il des batteries dont l’impact environnemental est faible ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -436,26 +554,16 @@
                           "id": "4",
                           "content": "<p>Je ne sais pas.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le <strong>lithium</strong> est indispensable aux batteries, mais son extraction <strong>détruit les écosystèmes</strong> et <strong>contamine les nappes phréatiques</strong>, entraînant manque d’eau et pollution pour les populations locales.</p>"
+                            "diagnosis": "<p>Le <strong>lithium</strong> est indispensable aux batteries, mais son extraction <strong>détruit les écosystèmes</strong> et <strong>contamine les nappes phréatiques</strong>, entraînant manque d’eau et pollution pour les populations locales, ce qui engendre parfois des tensions pour le contrôle de celles-ci.</p>"
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
                 {
                   "elements": [
-                    {
-                      "id": "25443807-d8bc-4abe-8041-6a30ad46976f",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/nr_durabilite_ind/child-labor-artisan-mining-in-kailo-congo.jpg",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "",
-                      "licence": ""
-                    },
                     {
                       "id": "4aa32b42-e1e5-42e6-bda8-259a57f04e19",
                       "type": "text",
@@ -463,29 +571,18 @@
                     },
                     {
                       "id": "f0ae6082-f34e-49f9-a269-05bdb82d7468",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "pix-article",
-                      "props": {
-                        "titleLevel": 2,
-                        "title": "⛏️ Extraction artisanale en RDC : conditions de travail et risques humains",
-                        "author": "PLACEHOLDER",
-                        "date": "Novembre 2014",
-                        "paragraphs": [
-                          "Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques.",
-                          "{{highlightedSentence}} Ces activités artisanales exposent les travailleurs à des conditions précaires et à un manque de protections élémentaires.",
-                          "Dans cette région, l’exploitation minière représente souvent la seule source de revenus, mais elle se fait au prix de risques sanitaires importants pour les adultes comme pour les enfants."
-                        ],
-                        "highlightedSentence": "Des enfants participent parfois au tri ou au transport du minerai, travaillant dans des conditions dangereuses et sans protection.",
-                        "colorOfHighlightSentence": "#483248"
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/article_mine.svg",
+                      "alt": "",
+                      "alternativeText": "<p><strong>Extraction artisanale en RDC : conditions de travail et risques humains</strong></p>\n<p>Novembre 2014 – Par la rédaction</p>\n\n<p>Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques.</p>\n\n<p><strong>Des enfants participent parfois au tri ou au transport du minerai, travaillant dans des conditions dangereuses et sans protection.</strong> Ces activités artisanales exposent les travailleurs à des conditions précaires et à un manque de protections élémentaires.</p>\n\n<p>Dans cette région, l’exploitation minière représente souvent la seule source de revenus, mais elle se fait au prix de risques sanitaires importants pour les adultes comme pour les enfants.</p>",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "664090f9-9d14-45f8-bfbd-8c09715ee51a",
                       "type": "qcu-discovery",
                       "instruction": "<p>En 2014, certaines mines impliquaient des enfants. Est-ce encore le cas aujourd’hui, selon vous ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
@@ -516,8 +613,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -574,6 +670,7 @@
                       "id": "c62a71c2-ec8a-4da8-b1dc-fbebd3e86f69",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, quelle solution Amandine doit-elle choisir pour limiter son impact environnemental ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
@@ -604,8 +701,7 @@
                           }
                         }
                       ],
-                      "solution": "4",
-                      "hasShortProposals": false
+                      "solution": "4"
                     }
                   ]
                 },
@@ -620,6 +716,7 @@
                       "id": "22e11b89-febc-4cbc-b65a-ebc109072b52",
                       "type": "qcu-discovery",
                       "instruction": "<p>Que peut faire Amandine pour limiter son impact environnemental tout en répondant à ses nouveaux besoins ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -650,8 +747,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 }
@@ -807,10 +903,11 @@
                 "id": "728ddefd-d9c9-457f-8c5d-032448fa010d",
                 "type": "qcm",
                 "instruction": "<p>Quels problèmes majeurs l’extraction des terres rares provoque-t-elle dans l’État de Kachin, au Myanmar ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>la pollution des sols et des sources d'eau douce</p>"
+                    "content": "<p>la pollution des sols et des sources d’eau douce</p>"
                   },
                   {
                     "id": "2",
@@ -831,16 +928,19 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bien joué !</p>",
-                    "diagnosis": "<p>Ces situations entraînent souvent de fortes pollutions, des risques pour la santé et le déplacement de familles touchées par la dégradation durable de leur environnement. Et ce ne sont que quelques exemples : d’autres impacts sociaux et humains existent, même s’ils ne figurent pas ici.</p>"
+                    "state": "<p>Bien joué !</p>",
+                    "diagnosis": "<p>Ces situations entraînent souvent de fortes pollutions, des risques pour la santé et le déplacement de familles touchées par la dégradation durable de leur environnement. Et ce ne sont que quelques exemples&nbsp;: d’autres impacts sociaux et humains existent, même s’ils ne figurent pas ici.</p>"
                   },
                   "invalid": {
                     "state": "<p>Eh non.</p>",
-                    "diagnosis": "<p>Certaines conséquences importantes ne figurent pas dans votre sélection. L’extraction peut entraîner divers effets environnementaux, sociaux et sanitaires. Et ce ne sont que quelques exemples : d’autres impacts existent, même s’ils ne sont pas listés ici.</p>"
+                    "diagnosis": "<p>Certaines conséquences importantes ne figurent pas dans votre sélection. L’extraction peut entraîner divers effets environnementaux, sociaux et sanitaires. Et ce ne sont que quelques exemples&nbsp;: d’autres impacts existent, même s’ils ne sont pas listés ici.</p>"
                   }
                 },
-                "solutions": ["1", "4", "5"],
-                "hasShortProposals": false
+                "solutions": [
+                  "1",
+                  "4",
+                  "5"
+                ]
               }
             }
           ]
@@ -862,8 +962,8 @@
                     "content": "<p><span>Un achat d’appareil neuf</span></p>"
                   },
                   {
-                    "input": "choice1",
                     "type": "select",
+                    "input": "choice1",
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat d’un appareil neuf",
@@ -886,15 +986,17 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": ["4"]
+                    "solutions": [
+                      "4"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<p><span>Un achat d’appareil reconditionné alors que l’appareil actuel fonctionne encore bien</span></p>"
                   },
                   {
-                    "input": "choice2",
                     "type": "select",
+                    "input": "choice2",
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat reconditionné alors que l’appareil fonctionne encore",
@@ -917,15 +1019,17 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<p><span>Un achat d’appareil reconditionné après que l’ancien est devenu inutilisable</span></p>"
                   },
                   {
-                    "input": "choice3",
                     "type": "select",
+                    "input": "choice3",
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour l’achat reconditionné après fin de vie",
@@ -948,15 +1052,17 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<p><span>Une réparation d’appareil</span>&nbsp;</p>"
                   },
                   {
-                    "input": "choice4",
                     "type": "select",
+                    "input": "choice4",
                     "display": "block",
                     "placeholder": "Sélectionner un rang",
                     "ariaLabel": "Sélectionner un rang pour la réparation",
@@ -979,7 +1085,9 @@
                         "content": "4 (le plus polluant)"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1012,7 +1120,9 @@
               "element": {
                 "id": "787a7af6-dc3f-4eff-a8cb-e8616d5d776c",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>À votre tour de jouer ! Quel âge a votre smartphone ? <br>Faites glisser la jauge pour indiquer son âge. Cette question permet d’estimer votre durée d’usage et de la comparer à la durée de vie réelle d’un smartphone.</p>",
+                "functionalInstruction": "",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
@@ -1066,9 +1176,7 @@
                       }
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
