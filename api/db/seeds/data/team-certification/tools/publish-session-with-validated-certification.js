@@ -120,9 +120,9 @@ export default async function publishSessionWithValidatedCertification({
     certificationReports: reports,
   });
 
-  await sessionManagementUseCases.processAutoJury({ sessionId: sessionFinalized.sessionId });
+  await sessionManagementUseCases.processAutoJury({ session: sessionFinalized });
 
-  await sessionManagementUseCases.registerPublishableSession({ sessionFinalized });
+  await sessionManagementUseCases.registerPublishableSession({ session: sessionFinalized });
 
   await databaseBuilder.commit();
 
