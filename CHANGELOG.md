@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.344.0](https://github.com/1024pix/pix/compare/v5.343.1...v5.344.0) (2026-03-02)
+
+### :rocket: Amélioration
+
+- [#15303](https://github.com/1024pix/pix/pull/15303) Afficher le nb d'orgas qui ont été archivés (PIX-21350) 
+- [#15227](https://github.com/1024pix/pix/pull/15227) Ajouter la locale de-AT sur Pix App et Pix Orga (pix-21668) 
+- [#15307](https://github.com/1024pix/pix/pull/15307) Retravailler le design du header de la page d'une organisation (PIX-21349) 
+- [#15291](https://github.com/1024pix/pix/pull/15291) Supprimer le wording bêta des campagne de type exam (PIX-21659) 
+
+### :bug: Correction
+
+- [#15274](https://github.com/1024pix/pix/pull/15274) Ajouter le feature toggle disabledLocalesInFrontend dans toutes les applications front 
+
+### :building_construction: Tech
+
+- [#15312](https://github.com/1024pix/pix/pull/15312) Amélioration de la performance sur le choix de prochaine épreuve en certification. Éviter de récupérer toute la ressource "certficationCourse" et ses dépendances, inutiles pour le calcul 
+- [#15277](https://github.com/1024pix/pix/pull/15277) Fix admin flaky (PIX-21772) 
+
+### :arrow_up: Montée de version
+
+- [#15317](https://github.com/1024pix/pix/pull/15317) Update dependency oxfmt to ^0.34.0 (api)
+
 ## [5.343.1](https://github.com/1024pix/pix/compare/v5.343.0...v5.343.1) (2026-02-27)
 
 ### :building_construction: Tech
