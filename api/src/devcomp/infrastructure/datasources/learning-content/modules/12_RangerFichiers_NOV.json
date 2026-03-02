@@ -770,6 +770,15 @@
                 "content": "<p><strong>Récupérez le dossier « Administratif » dans l’application ci-dessous puis répondez à la question.</strong> </p><br>"
               }
             },
+                        {
+              "type": "element",
+              "element": {
+                "id": "22c43fcc-950e-461f-9214-15369213a206",
+                "type": "expand",
+                "title": "[Simulateur d’interface de bureau avec corbeille]",
+                "content": "<p>Actions&nbsp;: </p><ul><li>Ouvrir la corbeille → double clic sur l’icône de la corbeille</li><li>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre</li><li>Ouvrir le dossier Administratif sur le bureau&nbsp;: double clic gauche</li></ul>"
+              }
+            },
             {
               "type": "element",
               "element": {
@@ -805,15 +814,6 @@
                     "diagnosis": "Feedback à rédiger"
                   }
                 }
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "22c43fcc-950e-461f-9214-15369213a206",
-                "type": "expand",
-                "title": "[Simulateur d’interface de bureau avec corbeille]",
-                "content": "<p>Actions&nbsp;: </p><ul><li>Ouvrir la corbeille → double clic sur l’icône de la corbeille</li><li>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre</li><li>Ouvrir le dossier Administratif sur le bureau&nbsp;: double clic gauche</li></ul>"
               }
             }
           ]
