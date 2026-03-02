@@ -37,7 +37,7 @@ module('Acceptance | Campaign Creation', function (hooks) {
 
     const screen = await visit('/campagnes/creation');
     await fillByLabel('Nom de la campagne *', 'Mon parcours combiné');
-    await clickByName('Créer un parcours combiné');
+    await clickByName('Développer les compétences des participants (parcours apprenants)');
 
     await click(screen.getByLabelText(`${t('pages.campaign-creation.combined-course-blueprints-list-label')} *`));
     await click(await screen.findByRole('option', { description: expectedCombinedCourseBlueprintName }));

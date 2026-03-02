@@ -810,7 +810,7 @@
       "purpose": {
         "assessment": "Assess participants",
         "assessment-info": "An assessment campaign tests participants on specific topics.",
-        "combined-course": "Create a combined course",
+        "combined-course": "Developing participants' skills (learning courses)",
         "exam": "Exam mode",
         "exam-info": "A ‘exam mode’ campaign enables participants to be tested on specific topics, without taking their user profile into account or having any impact on it. The campaign's questions are personalised for each participant, depending on how far they have progressed along the route.",
         "label": "What is the purpose of your campaign?",
