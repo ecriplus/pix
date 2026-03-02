@@ -1,10 +1,4 @@
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import {
-  AdministrationTeamNotFound,
-  CountryNotFoundError,
-  OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../errors.js';
+import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
@@ -17,6 +11,7 @@ const createOrganization = async function ({
   organizationCreationValidator,
   schoolRepository,
   codeGenerator,
+  organizationVerificationService,
 }) {
   if (organization.parentOrganizationId) {
     const parentOrganization = await organizationForAdminRepository.get({
@@ -28,21 +23,21 @@ const createOrganization = async function ({
 
   organizationCreationValidator.validate(organization);
 
-  await _checkOrganizationLearnerTypeExists(organization.organizationLearnerType.id, organizationLearnerTypeRepository);
+  await organizationVerificationService.checkOrganizationLearnerTypeExists(
+    organization.organizationLearnerType.id,
+    organizationLearnerTypeRepository,
+  );
 
-  await _checkCountryExists(organization.countryCode, countryRepository);
+  await organizationVerificationService.checkCountryExists(organization.countryCode, countryRepository);
 
-  const administrationTeam = await administrationTeamRepository.getById(organization.administrationTeamId);
+  await organizationVerificationService.checkAdministrationTeamExists(
+    organization.administrationTeamId,
+    administrationTeamRepository,
+  );
 
-  if (!administrationTeam) {
-    throw new AdministrationTeamNotFound({
-      meta: {
-        administrationTeamId: organization.administrationTeamId,
-      },
-    });
-  }
-
-  const savedOrganization = await organizationForAdminRepository.save({ organization });
+  const savedOrganization = await organizationForAdminRepository.save({
+    organization,
+  });
 
   await dataProtectionOfficerRepository.create({
     organizationId: savedOrganization.id,
@@ -55,7 +50,9 @@ const createOrganization = async function ({
     const code = await codeGenerator.generate(schoolRepository);
     await schoolRepository.save({ organizationId: savedOrganization.id, code });
   }
-  return await organizationForAdminRepository.get({ organizationId: savedOrganization.id });
+  return await organizationForAdminRepository.get({
+    organizationId: savedOrganization.id,
+  });
 };
 
 export { createOrganization };
@@ -70,30 +67,5 @@ function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
         parentOrganizationId: parentOrganization.id,
       },
     });
-  }
-}
-
-async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
-  if (organizationLearnerTypeId) {
-    try {
-      await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
-    } catch {
-      throw new OrganizationLearnerTypeNotFound({
-        message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
-        meta: { organizationLearnerTypeId },
-      });
-    }
-  }
-}
-
-async function _checkCountryExists(countryCode, countryRepository) {
-  try {
-    await countryRepository.getByCode(countryCode);
-  } catch {
-    logger.error({
-      event: 'Not_found_country',
-      message: `Le pays avec le code ${countryCode} n'a pas été trouvé.`,
-    });
-    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
   }
 }

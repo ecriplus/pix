@@ -14,12 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import {
-  AdministrationTeamNotFound,
-  CountryNotFoundError,
-  OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../errors.js';
+import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../models/OrganizationLearnerType.js';
@@ -44,6 +39,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
   organizationValidator,
   countryRepository,
   organizationLearnerTypeRepository,
+  organizationVerificationService,
 }) {
   if (isEmpty(organizations)) {
     throw new ObjectValidationError('Les organisations ne sont pas renseignées.');
@@ -65,6 +61,7 @@ const createOrganizationsWithTagsAndTargetProfiles = async function ({
       transformedOrganizationsData,
       countryRepository,
       organizationLearnerTypeRepository,
+      organizationVerificationService,
     });
 
     await _addDataProtectionOfficers({
@@ -103,19 +100,16 @@ async function _createOrganizations({
   organizationForAdminRepository,
   countryRepository,
   organizationLearnerTypeRepository,
+  organizationVerificationService,
 }) {
   return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
     const { administrationTeamId, parentOrganizationId, countryCode, organizationLearnerType } =
       organizationToCreate.organization;
-    const administrationTeam = await administrationTeamRepository.getById(administrationTeamId);
 
-    if (!administrationTeam) {
-      throw new AdministrationTeamNotFound({
-        meta: {
-          administrationTeamId,
-        },
-      });
-    }
+    await organizationVerificationService.checkAdministrationTeamExists(
+      administrationTeamId,
+      administrationTeamRepository,
+    );
 
     if (parentOrganizationId) {
       const organization = await organizationForAdminRepository.get({
@@ -125,9 +119,12 @@ async function _createOrganizations({
       _assertOrganizationIsNotChildOrganization(organization);
     }
 
-    await _checkCountryExists(countryCode, countryRepository);
+    await organizationVerificationService.checkCountryExists(countryCode, countryRepository);
 
-    await _checkOrganizationLearnerTypeExists(organizationLearnerType.id, organizationLearnerTypeRepository);
+    await organizationVerificationService.checkOrganizationLearnerTypeExists(
+      organizationLearnerType.id,
+      organizationLearnerTypeRepository,
+    );
 
     try {
       const createdOrganization = await organizationForAdminRepository.save({
@@ -309,25 +306,6 @@ async function _addTargetProfiles({ createdOrganizations, targetProfileShareRepo
     }
 
     throw new DomainError(error.message);
-  }
-}
-
-async function _checkCountryExists(countryCode, countryRepository) {
-  try {
-    await countryRepository.getByCode(countryCode);
-  } catch {
-    throw new CountryNotFoundError({ message: `Country not found for code ${countryCode}`, meta: { countryCode } });
-  }
-}
-
-async function _checkOrganizationLearnerTypeExists(organizationLearnerTypeId, organizationLearnerTypeRepository) {
-  try {
-    await organizationLearnerTypeRepository.getById(organizationLearnerTypeId);
-  } catch {
-    throw new OrganizationLearnerTypeNotFound({
-      message: `Organization learner type not found for id ${organizationLearnerTypeId}`,
-      meta: { organizationLearnerTypeId },
-    });
   }
 }
 
