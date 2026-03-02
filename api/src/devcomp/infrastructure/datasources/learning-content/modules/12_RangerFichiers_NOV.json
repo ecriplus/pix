@@ -397,7 +397,7 @@
               "element": {
                 "id": "e59ce079-a0bb-4610-9403-59984ec3582e",
                 "type": "expand",
-                "title": "[ Simulateur d’interface de bureau d’ordinateur - Step1]",
+                "title": "[ Simulateur d’interface de bureau d’ordinateur - Step2]",
                 "content": "<p>STEP 2 </p><ul><li> <strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»</strong> </li><li> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ] </li><li><strong>Feedback step 2&nbsp;</strong>: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.</li></ul>"
               }
             }
@@ -465,7 +465,7 @@
                     "id": "2",
                     "content": "Oui, mais uniquement dans les 5 minutes qui suivent la suppression.",
                     "feedback": {
-                      "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                      "diagnosis": "<p> Eh non, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
                     }
                   },
                   {
@@ -479,7 +479,7 @@
                     "id": "4",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p> Effectivement, quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
+                      "diagnosis": "<p> Quand un fichier est supprimé, il est déplacé dans <strong>la corbeille</strong>.<br>Pour l’instant, le fichier n’est <strong>pas effacé</strong> de l’ordinateur, l’utilisateur peut encore le <strong>récupérer</strong>.</p>"
                     }
                   }
                 ],
@@ -527,7 +527,7 @@
               "element": {
                 "id": "a453471b-b9b3-4aed-970f-768caab74d70",
                 "type": "text",
-                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier Lettre est de nouveau stocké sur le bureau de Maëva.</p>"
+                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier « Lettre » est de nouveau stocké sur le bureau de Maëva.</p>"
               }
             }
           ]
@@ -542,7 +542,7 @@
               "element": {
                 "id": "aa2945b0-cec7-4b40-8ce7-82d97b37a451",
                 "type": "text",
-                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur “ Supprimer “ (Windows) ou “ Placer dans la corbeille “ (Mac).</p><p><br><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
+                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur « Supprimer » (Windows) ou « Placer dans la corbeille » (Mac).</p><p><br><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
               }
             }
           ]
