@@ -250,6 +250,8 @@ const reconcileUserByNationalStudentIdAndOrganizationId = async function ({
         nationalStudentId,
         isDisabled: false,
       })
+      .whereNull('deletedAt')
+      .whereNotNull('nationalStudentId')
       .update({ userId, updatedAt: knexConn.fn.now() })
       .returning('*');
 

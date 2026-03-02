@@ -1760,6 +1760,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           firstName: 'Steeve',
           lastName: 'Roger',
           isDisabled: false,
+          nationalStudentId: 'INE123456',
         });
         user = databaseBuilder.factory.buildUser({ firstName: 'Steeve', lastName: 'Roger' });
         await databaseBuilder.commit();
@@ -1824,6 +1825,80 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         expect(error).to.be.instanceof(UserCouldNotBeReconciledError);
       });
     });
+    context('when the organizationLearner has no national Student Id and there is anonymised learner', function () {
+      it('should return an error', async function () {
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization();
+        const { id: userId } = databaseBuilder.factory.buildUser({ firstName: 'Natasha', lastName: 'Romanoff' });
+
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId: null,
+          nationalStudentId: '123456789',
+          firstName: 'Natasha',
+          lastName: 'Romanoff',
+          isDisabled: false,
+        });
+
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId: null,
+          firstName: '(anonymised)',
+          lastName: '(anonymised)',
+          nationalStudentId: null,
+          isDisabled: false,
+          deletedAt: new Date(),
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(reconcileUserByNationalStudentIdAndOrganizationId)({
+          userId,
+          nationalStudentId: null,
+          organizationId,
+        });
+
+        // then
+        expect(error).to.be.instanceof(UserCouldNotBeReconciledError);
+      });
+    });
+
+    context('when the organizationLearner has no national Student Id', function () {
+      it('should return an error', async function () {
+        const { id: organizationId } = databaseBuilder.factory.buildOrganization();
+        const { id: userId } = databaseBuilder.factory.buildUser({ firstName: 'Natasha', lastName: 'Romanoff' });
+
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId: null,
+          nationalStudentId: '123456789',
+          firstName: 'Natasha',
+          lastName: 'Romanoff',
+          isDisabled: false,
+        });
+
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+          userId: null,
+          firstName: '(anonymised)',
+          lastName: '(anonymised)',
+          nationalStudentId: null,
+          isDisabled: false,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(reconcileUserByNationalStudentIdAndOrganizationId)({
+          userId,
+          nationalStudentId: null,
+          organizationId,
+        });
+
+        // then
+        expect(error).to.be.instanceof(UserCouldNotBeReconciledError);
+      });
+    });
 
     context('when the organizationLearner is disabled', function () {
       it('should return an error', async function () {
@@ -1836,6 +1911,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           lastName: 'Romanoff',
           isDisabled: true,
         });
+        await databaseBuilder.commit();
         // when
         const error = await catchErr(reconcileUserByNationalStudentIdAndOrganizationId)({
           userId,
