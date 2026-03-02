@@ -266,11 +266,11 @@ export default class DetailsV3 extends Component {
             <dd aria-labelledby="abort-reason">{{t this.abortReasonLabel}}</dd>
           {{/if}}
 
-          <dt id="pix-score">
-            {{t "pages.certifications.certification.details.v3.general-informations.labels.pix-score"}}
+          <dt id="results">
+            {{t "pages.certifications.certification.details.v3.general-informations.labels.results"}}
             :
           </dt>
-          <dd aria-labelledby="pix-score">{{@details.pixScore}}</dd>
+          <dd aria-labelledby="results">{{@details.pixScore}}</dd>
         </dl>
       </section>
       <section class="page-section">

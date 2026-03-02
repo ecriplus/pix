@@ -129,7 +129,7 @@ module('Integration | Component | Certifications | certification > details v3', 
         const creationDate = await screen.getByLabelText('Créée le :').innerText;
 
         // then
-        const pixScoreLabel = t('pages.certifications.certification.details.v3.general-informations.labels.pix-score');
+        const pixScoreLabel = t('pages.certifications.certification.details.v3.general-informations.labels.results');
 
         assert.dom(screen.getByRole('heading', { name: 'Certification N°123456', level: 2 })).exists();
         assert.dom(screen.getByLabelText(`${pixScoreLabel} :`)).exists();

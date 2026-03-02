@@ -43,7 +43,7 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
       <DescriptionList.Divider />
 
-      <DescriptionList.Item @label="Score">
+      <DescriptionList.Item @label="Résultats">
         {{@certification.pixScore}}
         Pix
       </DescriptionList.Item>

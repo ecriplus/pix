@@ -1256,7 +1256,7 @@
                 "created-at": "Created on",
                 "ended-at": "Completed on",
                 "ended-by": "Certification completed by",
-                "pix-score": "Score (in pix)"
+                "results": "Results"
               },
               "title": "Certification N°{certificationCourseId}"
             },
@@ -1319,7 +1319,7 @@
             "headers": {
               "competence": "Competence",
               "level": "Level",
-              "score": "Score"
+              "results": "Results"
             },
             "label": "Result details by competence"
           }
@@ -1342,7 +1342,7 @@
           "id": "ID",
           "last-name": "Last name",
           "other-certification": "Certification passed",
-          "pix-score": "Score",
+          "results": "Results",
           "started-certification-date": "Start",
           "status": "Status",
           "unresolved-reports": "Unresolved reports"
