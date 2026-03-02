@@ -759,8 +759,19 @@
               "type": "element",
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
-                "type": "text",
-                "content": "<p><strong>Nadia a un souci non résolu avec le service client de la folie du hockey, un magasin de matériel sportif.&nbsp;Elle décide de demander à un logiciel d’IA générative de lui écrire une lettre recommandée.</strong>&nbsp;</p>"
+                "type": "custom",
+                "instruction": "",
+                "tagName": "llm-messages",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "<p><strong>Nadia a un souci non résolu avec le service client de la folie du hockey, un magasin de matériel sportif.&nbsp;Elle décide de demander à un logiciel d’IA générative de lui écrire une lettre recommandée.</strong>&nbsp;</p>"
+                    }
+                  ]
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
