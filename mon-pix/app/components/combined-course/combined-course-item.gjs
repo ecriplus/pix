@@ -55,7 +55,9 @@ const Content = <template>
           class="combined-course-item__indicator--completed
             {{if @hasYellowBorder 'combined-course-item__indicator--yellow'}}"
         >
-          <span class="combined-course-item__completion-field">{{t "pages.combined-courses.items.completed"}}</span>
+          {{#unless @isCampaignType}}
+            <span class="combined-course-item__completion-field">{{t "pages.combined-courses.items.completed"}}</span>
+          {{/unless}}
           <PixIcon
             @name="checkCircle"
             @plainIcon={{true}}
@@ -100,13 +102,7 @@ const Duration = <template>
 </template>;
 
 function hasWhiteBackground(item) {
-  if (!item.isCompleted && !item.isLocked) {
-    return true;
-  } else if (item.type === CombinedCourseItemTypes.MODULE && item.isCompleted) {
-    return true;
-  } else {
-    return false;
-  }
+  return item.isCompleted || !item.isLocked;
 }
 
 <template>
