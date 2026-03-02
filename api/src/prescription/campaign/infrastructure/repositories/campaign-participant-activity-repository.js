@@ -21,15 +21,7 @@ export class ParticipantActivityFilters {
   }
 
   get participationStatus() {
-    if (this.#status === CampaignParticipationStatuses.STARTED)
-      return [CampaignParticipationStatuses.STARTED, CampaignParticipationStatuses.TO_SHARE];
-
-    if (!this.#status)
-      return [
-        CampaignParticipationStatuses.SHARED,
-        CampaignParticipationStatuses.STARTED,
-        CampaignParticipationStatuses.TO_SHARE,
-      ];
+    if (!this.#status) return [CampaignParticipationStatuses.SHARED, CampaignParticipationStatuses.STARTED];
 
     return [this.#status];
   }

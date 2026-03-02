@@ -134,7 +134,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
 
     it('should return participations counts by stages', async function () {
       // this participation should not be taken into account
-      const toShareParticipation = databaseBuilder.factory.buildCampaignParticipation({
+      const startedParticipation2 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         status: CampaignParticipationStatuses.STARTED,
       });
@@ -165,7 +165,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
 
       // stage 2
       databaseBuilder.factory.buildStageAcquisition({
-        campaignParticipationId: toShareParticipation.id,
+        campaignParticipationId: startedParticipation2.id,
         stageId: stage2.id,
       }); // this participation should not be taken into account
       databaseBuilder.factory.buildStageAcquisition({

@@ -12,7 +12,7 @@ class CampaignParticipantActivity {
     this.firstName = firstName;
     this.lastName = lastName;
     this.participantExternalId = participantExternalId;
-    this.status = status === status;
+    this.status = status;
     this.lastCampaignParticipationId = campaignParticipationId;
     this.participationCount = participationCount || 0;
   }
