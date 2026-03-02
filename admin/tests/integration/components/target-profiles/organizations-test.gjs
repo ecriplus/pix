@@ -310,7 +310,7 @@ module('Integration | Component | target-profiles | Organizations', function (ho
           data: { attributes: { 'duplicated-ids': [], 'attached-ids': [1, 2] } },
         });
         const router = this.owner.lookup('service:router');
-        const refreshStub = sinon.stub(router, 'refresh');
+        const refreshStub = sinon.stub(router, 'replaceWith');
 
         // when
         await render(
