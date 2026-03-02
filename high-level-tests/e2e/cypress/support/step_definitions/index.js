@@ -14,6 +14,7 @@ Given("les données de test sont chargées", () => {
   cy.task("db:fixture", "organization-invitations");
   cy.task("db:fixture", "user-orga-settings");
   cy.task("db:fixture", "target-profiles");
+  cy.task("db:fixture", "target-profile-shares");
   cy.task("db:fixture", "target-profile_tubes");
   cy.task("db:fixture", "campaigns");
   cy.task("db:fixture", "campaign_skills");

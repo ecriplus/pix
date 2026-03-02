@@ -2,7 +2,6 @@
   {
     "id": 1,
     "name": "Compétences pour un Mestre",
-    "internalName": "Nom interne pour un Mestre",
-    "ownerOrganizationId": 1
+    "internalName": "Nom interne pour un Mestre"
   }
 ]

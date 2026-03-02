@@ -412,7 +412,6 @@ export async function createTargetProfileInDB(name: string) {
   const [{ id }] = await knex('target-profiles')
     .insert({
       name,
-      ownerOrganizationId: null,
       internalName: name,
       imageUrl: null,
       isSimplifiedAccess: false,
