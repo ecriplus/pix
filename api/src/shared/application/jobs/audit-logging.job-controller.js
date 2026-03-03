@@ -1,10 +1,10 @@
-import { EventLoggingJob } from '../../domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../domain/models/jobs/AuditLoggingJob.js';
 import { auditLoggerRepository } from '../../infrastructure/repositories/audit-logger-repository.js';
 import { JobController } from './job-controller.js';
 
-export class EventLoggingJobController extends JobController {
+export class AuditLoggingJobController extends JobController {
   constructor() {
-    super(EventLoggingJob.name);
+    super(AuditLoggingJob.name);
   }
 
   async handle({ data: jobData, dependencies = { auditLoggerRepository } }) {

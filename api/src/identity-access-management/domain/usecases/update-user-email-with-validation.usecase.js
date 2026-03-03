@@ -3,14 +3,14 @@ import {
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../shared/domain/errors.js';
-import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../shared/domain/models/jobs/AuditLoggingJob.js';
 
 const updateUserEmailWithValidation = async function ({
   code,
   userId,
   userEmailRepository,
   userRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
 }) {
   const user = await userRepository.get(userId);
   if (!user.email) {
@@ -37,8 +37,8 @@ const updateUserEmailWithValidation = async function ({
   });
 
   // Currently only used in Pix App, which is why app name is hard-coded for the audit log.
-  await eventLoggingJobRepository.performAsync(
-    EventLoggingJob.forUser({
+  await auditLoggingJobRepository.performAsync(
+    AuditLoggingJob.forUser({
       client: 'PIX_APP',
       action: 'EMAIL_CHANGED',
       role: 'USER',

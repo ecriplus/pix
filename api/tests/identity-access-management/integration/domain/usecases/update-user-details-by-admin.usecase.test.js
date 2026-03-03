@@ -6,7 +6,7 @@ import {
   AlreadyRegisteredEmailError,
   AlreadyRegisteredUsernameError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { roles } from '../../../../../src/shared/domain/models/Membership.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
@@ -54,7 +54,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
     expect(result.firstName).equal(userDetailsToUpdate.firstName);
     expect(result.lastName).equal(userDetailsToUpdate.lastName);
 
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_ADMIN',
       action: 'EMAIL_CHANGED',
       role: 'SUPPORT',
@@ -118,7 +118,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       // then
       expect(result.email).equal(userDetailsToUpdate.email);
 
-      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
+      await expect(AuditLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
   });
 

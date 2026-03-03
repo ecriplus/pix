@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../shared/domain/models/jobs/AuditLoggingJob.js';
 
 const deleteCampaignParticipation = async function ({
   userId,
@@ -9,7 +9,7 @@ const deleteCampaignParticipation = async function ({
   client,
   badgeAcquisitionRepository,
   campaignParticipationRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   assessmentRepository,
   userRecommendedTrainingRepository,
   keepPreviousDeleted = false,
@@ -21,15 +21,15 @@ const deleteCampaignParticipation = async function ({
       keepPreviousDeleted,
     });
 
-  const eventLoggingJobs = [];
+  const auditLoggingJobs = [];
 
   await DomainTransaction.execute(async () => {
     for (const campaignParticipation of campaignParticipations) {
       campaignParticipation.delete(userId);
       await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
 
-      eventLoggingJobs.push(
-        EventLoggingJob.forUser({
+      auditLoggingJobs.push(
+        AuditLoggingJob.forUser({
           client,
           action: campaignParticipation.loggerContext,
           role: userRole,
@@ -52,8 +52,8 @@ const deleteCampaignParticipation = async function ({
     }
   });
 
-  for (const eventLoggingJob of eventLoggingJobs) {
-    await eventLoggingJobRepository.performAsync(eventLoggingJob);
+  for (const auditLoggingJob of auditLoggingJobs) {
+    await auditLoggingJobRepository.performAsync(auditLoggingJob);
   }
 };
 

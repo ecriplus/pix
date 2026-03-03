@@ -1,8 +1,8 @@
-import { EventLoggingJobController } from '../../../../../src/shared/application/jobs/event-logging.job-controller.js';
-import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJobController } from '../../../../../src/shared/application/jobs/audit-logging.job-controller.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
-describe('Unit | Shared | Application | Jobs | EventLoggingJobController', function () {
+describe('Unit | Shared | Application | Jobs | AuditLoggingJobController', function () {
   const now = new Date(2024, 1, 1);
   let clock;
 
@@ -15,8 +15,8 @@ describe('Unit | Shared | Application | Jobs | EventLoggingJobController', funct
   });
 
   it('sets up the job controller configuration', async function () {
-    const jobController = new EventLoggingJobController();
-    expect(jobController.jobName).to.equal(EventLoggingJob.name);
+    const jobController = new AuditLoggingJobController();
+    expect(jobController.jobName).to.equal(AuditLoggingJob.name);
   });
 
   it('logs the event', async function () {
@@ -34,7 +34,7 @@ describe('Unit | Shared | Application | Jobs | EventLoggingJobController', funct
     };
 
     // when
-    const jobController = new EventLoggingJobController();
+    const jobController = new AuditLoggingJobController();
     await jobController.handle({ data, ...options });
 
     // then

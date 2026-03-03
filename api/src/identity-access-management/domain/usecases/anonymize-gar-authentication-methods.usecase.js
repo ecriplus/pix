@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../shared/domain/models/jobs/AuditLoggingJob.js';
 
 const USER_IDS_BATCH_SIZE = 1000;
 
@@ -12,7 +12,7 @@ const USER_IDS_BATCH_SIZE = 1000;
  * @param {Object} params
  * @param {Array<string>} params.userIds
  * @param {AuthenticationMethodRepository} params.authenticationMethodRepository
- * @param {EventLoggingJobRepository} params.eventLoggingJobRepository
+ * @param {AuditLoggingJobRepository} params.auditLoggingJobRepository
  * @return {Promise<{garAnonymizedUserCount: number, total: number}>}
  */
 export const anonymizeGarAuthenticationMethods = async function ({
@@ -20,13 +20,13 @@ export const anonymizeGarAuthenticationMethods = async function ({
   userIdsBatchSize = USER_IDS_BATCH_SIZE,
   adminMemberId,
   authenticationMethodRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
 }) {
   const userIdBatches = _.chunk(userIds, userIdsBatchSize);
 
   let garAnonymizedUserCount = 0;
 
-  const eventLoggingJobs = [];
+  const auditLoggingJobs = [];
   await DomainTransaction.execute(async () => {
     for (const userIdsBatch of userIdBatches) {
       const { garAnonymizedUserIds } = await authenticationMethodRepository.anonymizeByUserIds({
@@ -34,8 +34,8 @@ export const anonymizeGarAuthenticationMethods = async function ({
       });
       garAnonymizedUserCount += garAnonymizedUserIds.length;
       if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
-        eventLoggingJobs.push(
-          EventLoggingJob.forUsers({
+        auditLoggingJobs.push(
+          AuditLoggingJob.forUsers({
             client: 'PIX_ADMIN',
             action: 'ANONYMIZATION_GAR',
             userIds: garAnonymizedUserIds,
@@ -46,8 +46,8 @@ export const anonymizeGarAuthenticationMethods = async function ({
       }
     }
   });
-  for (const eventLoggingJob of eventLoggingJobs) {
-    await eventLoggingJobRepository.performAsync(eventLoggingJob);
+  for (const auditLoggingJob of auditLoggingJobs) {
+    await auditLoggingJobRepository.performAsync(auditLoggingJob);
   }
   return { garAnonymizedUserCount, total: userIds.length };
 };

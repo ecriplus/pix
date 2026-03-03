@@ -8,7 +8,7 @@ import * as placementProfileService from '../../../../shared/domain/services/pla
 import * as userReconciliationService from '../../../../shared/domain/services/user-reconciliation-service.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
-import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import { auditLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/audit-logging-job.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
@@ -42,7 +42,7 @@ const dependencies = {
   campaignParticipationRepository: repositories.campaignParticipationRepository,
   campaignParticipationRepositoryFromBC,
   campaignRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   featureToggles,
   importCommonOrganizationLearnersJobRepository,
   importOrganizationLearnersJobRepository,

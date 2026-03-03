@@ -16,7 +16,7 @@ const ACTIONS = [
 ];
 const ROLES = ['SUPER_ADMIN', 'SUPPORT', 'USER', 'ORGA_ADMIN'];
 
-const EventLogSchema = Joi.object({
+const AuditLogSchema = Joi.object({
   client: Joi.string()
     .valid(...CLIENTS)
     .required(),
@@ -32,7 +32,7 @@ const EventLogSchema = Joi.object({
   occurredAt: Joi.date().optional(),
 });
 
-export class EventLoggingJob {
+export class AuditLoggingJob {
   constructor({ client, action, role, userId, targetUserIds, data, occurredAt }) {
     this.client = client;
     this.action = action;
@@ -46,7 +46,7 @@ export class EventLoggingJob {
   }
 
   static forUser({ client, action, role, userId, updatedByUserId, data, occurredAt }) {
-    return new EventLoggingJob({
+    return new AuditLoggingJob({
       client,
       action,
       role,
@@ -58,7 +58,7 @@ export class EventLoggingJob {
   }
 
   static forUsers({ client, action, role, userIds, updatedByUserId, data, occurredAt }) {
-    return new EventLoggingJob({
+    return new AuditLoggingJob({
       client,
       action,
       role,
@@ -70,7 +70,7 @@ export class EventLoggingJob {
   }
 
   #validate() {
-    const { error } = EventLogSchema.validate(this, { abortEarly: false });
+    const { error } = AuditLogSchema.validate(this, { abortEarly: false });
     if (error) throw EntityValidationError.fromJoiErrors(error.details);
   }
 }

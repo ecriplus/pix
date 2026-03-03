@@ -6,7 +6,7 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
@@ -97,7 +97,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
     });
 
     // then
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_ADMIN',
       action: 'ANONYMIZATION',
       role: PIX_ADMIN.ROLES.SUPER_ADMIN,
@@ -302,7 +302,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
       expect(anonymizedUser.hasBeenAnonymised).to.be.true;
 
-      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
+      await expect(AuditLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
   });
 });

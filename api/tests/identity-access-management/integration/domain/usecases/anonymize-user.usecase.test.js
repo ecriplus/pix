@@ -4,7 +4,7 @@ import { usecases } from '../../../../../src/identity-access-management/domain/u
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
@@ -64,7 +64,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
     });
 
     // then
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_ADMIN',
       action: 'ANONYMIZATION',
       role: PIX_ADMIN.ROLES.SUPER_ADMIN,
@@ -207,7 +207,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       const anonymizedUser = await knex('users').where({ id: user.id }).first();
       expect(anonymizedUser.hasBeenAnonymised).to.be.true;
 
-      await expect(EventLoggingJob.name).to.have.been.performed.withJobsCount(0);
+      await expect(AuditLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
   });
 });

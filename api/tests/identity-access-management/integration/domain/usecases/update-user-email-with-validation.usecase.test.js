@@ -8,7 +8,7 @@ import {
   InvalidVerificationCodeError,
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, databaseBuilder, knex, sinon } from '../../../../test-helper.js';
 
@@ -45,7 +45,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
     expect(updatedUser.email).to.equal(newEmail);
     expect(updatedUser.emailConfirmedAt).to.not.be.null;
 
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_APP',
       action: 'EMAIL_CHANGED',
       role: 'USER',

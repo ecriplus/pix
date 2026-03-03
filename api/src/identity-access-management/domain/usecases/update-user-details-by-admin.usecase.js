@@ -7,14 +7,14 @@ import {
   AlreadyRegisteredEmailAndUsernameError,
   AlreadyRegisteredUsernameError,
 } from '../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../shared/domain/models/jobs/AuditLoggingJob.js';
 
 const updateUserDetailsByAdmin = async function ({
   userId,
   userDetailsToUpdate,
   updatedByAdminId,
   userRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
 }) {
   const { email, username } = userDetailsToUpdate;
 
@@ -29,7 +29,7 @@ const updateUserDetailsByAdmin = async function ({
 
   await userRepository.updateUserDetailsForAdministration({ id: userId, userAttributes: userDetailsToUpdate });
 
-  await _auditLogForEmailChanged({ currentUser, newEmail: email, updatedByAdminId, eventLoggingJobRepository });
+  await _auditLogForEmailChanged({ currentUser, newEmail: email, updatedByAdminId, auditLoggingJobRepository });
 
   return userRepository.getUserDetailsForAdmin(userId);
 };
@@ -58,12 +58,12 @@ function _isAddingEmailForFirstTime({ currentUser, newEmail }) {
   return userWithoutEmail && userHasUsername && shouldChangeEmail;
 }
 
-async function _auditLogForEmailChanged({ currentUser, newEmail, updatedByAdminId, eventLoggingJobRepository }) {
+async function _auditLogForEmailChanged({ currentUser, newEmail, updatedByAdminId, auditLoggingJobRepository }) {
   if (!newEmail || newEmail === currentUser.email) return;
 
   // Currently only used in Pix Admin, which is why app name is hard-coded for the audit log
-  await eventLoggingJobRepository.performAsync(
-    EventLoggingJob.forUser({
+  await auditLoggingJobRepository.performAsync(
+    AuditLoggingJob.forUser({
       client: 'PIX_ADMIN',
       action: 'EMAIL_CHANGED',
       role: 'SUPPORT',

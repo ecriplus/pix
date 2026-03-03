@@ -6,7 +6,7 @@ import * as campaignAdministrationRepository from '../../../../../../src/prescri
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
@@ -363,7 +363,7 @@ describe('Integration | UseCases | delete-campaign', function () {
         });
 
         // then
-        await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+        await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
           client: 'PIX_ORGA',
           action: CampaignParticipationLoggerContext.DELETION,
           role: 'ORGA_ADMIN',
