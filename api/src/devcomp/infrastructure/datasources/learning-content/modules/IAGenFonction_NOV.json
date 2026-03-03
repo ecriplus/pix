@@ -52,6 +52,7 @@
                 "id": "e1dffc31-9bbb-49d9-85e3-3a5caa5dc9fc",
                 "type": "qcu-discovery",
                 "instruction": "<p>Imaginez que vous êtes à la place de Bob.</p><p>Que souhaiteriez-vous que ChatGPT réponde à cette demande ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -75,8 +76,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -97,7 +97,8 @@
               "element": {
                 "id": "81f44774-8b4d-4d91-b1c2-2a26044eb9df",
                 "type": "qcu-discovery",
-                "instruction": "<p>Il existe d’autres logiciels comme ChatGPT.&nbsp;</p><p>En reconnaissez-vous un ci-dessous ?&nbsp;</p>",
+                "instruction": "<p>Il existe d’autres logiciels comme ChatGPT.&nbsp;</p><p>En connaissez-vous un autre ?&nbsp;</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -122,14 +123,13 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je ne sais pas.</p>",
+                    "content": "<p>Je n'en&nbsp;connais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce sont tous des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: Microsoft Copilot, Perplexity, Claude, etc.</p>"
+                      "diagnosis": "<p>Toutes les propositions sont des <strong>logiciels d’Intelligence Artificielle générative</strong>. Il en existe beaucoup d’autres, par exemple&nbsp;: Microsoft Copilot, Perplexity, Claude, etc.</p>"
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -200,7 +200,11 @@
                           "display": "inline",
                           "placeholder": "votre mot",
                           "ariaLabel": "zone de saisie",
-                          "tolerances": ["t1", "t2", "t3"],
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
                           "solutions": [
                             "beurre",
                             "sucre",
@@ -211,7 +215,25 @@
                             "confiture de fraise",
                             "confiture d’abricot",
                             "fromage",
-                            "harissa"
+                            "harissa",
+                            "miel",
+                            "oeuf",
+                            "sucre glace",
+                            "du sucre",
+                            "du sucre glace",
+                            "pâte à tartiner",
+                            "de la pâte à tartiner",
+                            "sirop d'érable",
+                            "du sirop d'érable",
+                            "du nutella",
+                            "de la confiture",
+                            "du chocolat fondu",
+                            "beur ",
+                            "buerre",
+                            "du caramel",
+                            "du fromage",
+                            "du beurre",
+                            "du miel"
                           ]
                         }
                       ],
@@ -234,6 +256,7 @@
                       "id": "de590f05-252c-4110-859a-07a2e276ac80",
                       "type": "qcu-discovery",
                       "instruction": "<p>Comment avez-vous choisi votre mot ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -257,8 +280,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -272,7 +294,9 @@
                     {
                       "id": "4c1b444d-2e5a-4e50-926f-8a73b8259181",
                       "type": "custom",
+                      "title": "",
                       "instruction": "",
+                      "functionalInstruction": "<p><br></p>",
                       "tagName": "complete-phrase",
                       "props": {
                         "titleLevel": 2,
@@ -280,7 +304,7 @@
                           [
                             {
                               "name": "beurre",
-                              "percent": 100
+                              "percent": 90
                             },
                             {
                               "name": "chocolat",
@@ -298,7 +322,7 @@
                           [
                             {
                               "name": "et",
-                              "percent": 100
+                              "percent": 90
                             },
                             {
                               "name": "avec",
@@ -316,7 +340,7 @@
                           [
                             {
                               "name": "du",
-                              "percent": 100
+                              "percent": 90
                             },
                             {
                               "name": "puis",
@@ -326,7 +350,7 @@
                           [
                             {
                               "name": "sucre",
-                              "percent": 100
+                              "percent": 90
                             },
                             {
                               "name": "miel",
@@ -344,10 +368,12 @@
                         ],
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
-                        "wordsToAdd": ["beurre", "et", "du"]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                        "wordsToAdd": [
+                          "beurre",
+                          "et",
+                          "du"
+                        ]
+                      }
                     }
                   ]
                 }
@@ -373,7 +399,9 @@
               "element": {
                 "id": "31291521-b440-4cdf-9518-bde1191b8b73",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -439,9 +467,7 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "imageTextDisplay": "1:1"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -488,6 +514,7 @@
                 "id": "4deeee7c-1c90-4753-8d89-8a0d86dac39b",
                 "type": "qcu-discovery",
                 "instruction": "<p>Si vous deviez entraîner une IA, quels textes disponibles sur internet lui donneriez-vous ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -525,8 +552,7 @@
                     }
                   }
                 ],
-                "solution": "4",
-                "hasShortProposals": false
+                "solution": "4"
               }
             }
           ]
@@ -553,7 +579,7 @@
                     {
                       "id": "a7513ccb-063d-473c-8282-6297533ca409",
                       "type": "text",
-                      "content": "<h5>🤔Tous ces textes sont-ils fiables ?</h5><p>⚠️ Non&nbsp;: certains sont faux, incomplets ou trompeurs.</p><p> Comme <strong>le logiciel d’IA générative ne comprend pas les textes sur lesquels il s’entraîne</strong>, il peut reproduire <strong>ces erreurs</strong> dans ses réponses.<br>🔍 Il faut donc <strong>toujours vérifier les informations</strong> avant de les utiliser. </p><p>Pour cela, on peut poursuivre la conversation, mais aussi croiser les informations avec d’autres sources&nbsp;: livres, articles, sites fiables, etc.</p>"
+                      "content": "<h5>🤔Tous ces textes sont-ils fiables ?</h5><p>⚠️ Non, certains textes contiennent des erreurs, sont incomplets ou trompeurs.</p><p> Comme <strong>le logiciel d’IA générative ne comprend pas les textes sur lesquels il s’entraîne</strong>, il peut reproduire <strong>ces erreurs</strong> dans ses réponses.<br>🔍 Il faut donc <strong>toujours vérifier les informations</strong> avant de les utiliser. </p><p>Pour cela, on peut poursuivre la conversation avec l'IA, mais aussi croiser les informations avec d’autres sources&nbsp;: livres, articles, sites fiables, etc.</p>"
                     }
                   ]
                 }
@@ -614,6 +640,7 @@
                 "id": "58a0b8d9-30ce-4e62-95a6-b30a55a9c76d",
                 "type": "qcu",
                 "instruction": "<p>Parmi les propositions suivantes, laquelle définit le mieux ce qu’est un <strong>logiciel d’IA générative</strong> ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -648,8 +675,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -739,6 +765,7 @@
                 "id": "546fcfcd-a7a8-4290-bde6-a8cc203013f3",
                 "type": "qcu-declarative",
                 "instruction": "<p>La prochaine fois que vous utiliserez un logiciel d’IA générative, que ferez-vous ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -768,8 +795,7 @@
                       "diagnosis": "<p><strong>Pas toujours facile de choisir !</strong> </p><p>Souvenez-vous qu’un logiciel d’IA générative peut faire des erreurs. Il faut donc toujours vérifier les réponses qu'il donne.</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]
