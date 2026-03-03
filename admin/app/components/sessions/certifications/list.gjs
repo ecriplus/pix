@@ -86,7 +86,7 @@ export default class CertificationsHeader extends Component {
               {{t "pages.certifications.table.headers.results"}}
             </:header>
             <:cell>
-              {{certification.pixScore}}
+              {{certification.result}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

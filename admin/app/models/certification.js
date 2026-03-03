@@ -47,6 +47,7 @@ export default class Certification extends Model {
   @attr('string') commentForOrganization;
   @attr('string') commentByJury;
   @attr() pixScore;
+  @attr() reachedLevel;
   @attr() competencesWithMark;
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
@@ -106,6 +107,11 @@ export default class Certification extends Model {
 
   get isV3() {
     return this.version === 3;
+  }
+
+  get result() {
+    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
+    return this.reachedLevel + strPixScore;
   }
 
   wasBornInFrance() {

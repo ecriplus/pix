@@ -1256,7 +1256,7 @@
                 "created-at": "Created on",
                 "ended-at": "Completed on",
                 "ended-by": "Certification completed by",
-                "results": "Results"
+                "result": "Result"
               },
               "title": "Certification N°{certificationCourseId}"
             },
@@ -1319,7 +1319,7 @@
             "headers": {
               "competence": "Competence",
               "level": "Level",
-              "results": "Results"
+              "score": "Score"
             },
             "label": "Result details by competence"
           }

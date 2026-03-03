@@ -16,6 +16,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() lastName;
   @attr() status;
   @attr() pixScore;
+  @attr() reachedLevel;
   @attr() createdAt;
   @attr() completedAt;
   @attr() isPublished;
@@ -55,5 +56,10 @@ export default class JuryCertificationSummary extends Model {
 
   get isCertificationWithCoreScope() {
     return !this.complementaryCertificationKeyObtained || this.complementaryCertificationKeyObtained == 'CLEA';
+  }
+
+  get result() {
+    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
+    return this.reachedLevel + strPixScore;
   }
 }

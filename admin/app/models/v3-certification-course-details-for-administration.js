@@ -18,6 +18,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('string') assessmentState;
   @attr('string') abortReason;
   @attr('number') pixScore;
+  @attr('string') reachedLevel;
   @attr('number') numberOfChallenges;
   @hasMany('certification-challenges-for-administration', { async: true, inverse: null })
   certificationChallengesForAdministration;
@@ -78,5 +79,9 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     return [assessmentStates.ENDED_BY_INVIGILATOR, assessmentStates.ENDED_DUE_TO_FINALIZATION].includes(
       this.assessmentState,
     );
+  }
+  get result() {
+    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
+    return this.reachedLevel + strPixScore;
   }
 }
