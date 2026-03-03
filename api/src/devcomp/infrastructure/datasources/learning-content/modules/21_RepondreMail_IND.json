@@ -338,11 +338,11 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "<p>Eh non.</p>",
+                          "state": "<p>Eh oui.</p>",
                           "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
                         },
                         "invalid": {
-                          "state": "<p>Eh oui.<br></p>",
+                          "state": "<p>Eh non.<br></p>",
                           "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de ne pas le transférer.</p>"
                         }
                       }
@@ -388,11 +388,11 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "<p>Eh non.</p>",
+                          "state": "<p>Eh oui.</p>",
                           "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais forward).</p>"
                         },
                         "invalid": {
-                          "state": "<p>Eh oui.<br></p>",
+                          "state": "<p>Eh non.<br></p>",
                           "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un mail transféré, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais forward).</p>"
                         }
                       }
