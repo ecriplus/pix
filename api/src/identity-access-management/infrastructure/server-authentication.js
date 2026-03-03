@@ -4,6 +4,7 @@ import { config } from '../../shared/config.js';
 import { tokenService } from '../../shared/domain/services/token-service.js';
 import {
   jwtApplicationAuthenticationStrategyName,
+  jwtOptionalUserAuthenticationStrategyName,
   jwtUserAuthenticationStrategyName,
 } from '../../shared/infrastructure/authentication-strategy-names.js';
 import { logger } from '../../shared/infrastructure/utils/logger.js';
@@ -19,12 +20,30 @@ const schemes = {
       };
     },
   },
+  optionalJwt: {
+    name: 'jwt-optional-scheme',
+    scheme(_, strategyConfiguration) {
+      return {
+        authenticate: authenticateOptionalJWT(strategyConfiguration),
+      };
+    },
+  },
 };
 
 const strategies = {
   jwtUser: {
     name: jwtUserAuthenticationStrategyName,
     schemeName: schemes.jwt.name,
+    configuration: {
+      key: config.authentication.secret,
+      validate: (decodedAccessToken, options) =>
+        validateUser(decodedAccessToken, { ...options, revokedUserAccessRepository }),
+    },
+  },
+
+  jwtOptionalUser: {
+    name: jwtOptionalUserAuthenticationStrategyName,
+    schemeName: schemes.optionalJwt.name,
     configuration: {
       key: config.authentication.secret,
       validate: (decodedAccessToken, options) =>
@@ -89,6 +108,17 @@ async function validateClientApplication(decodedAccessToken) {
       scope: decodedAccessToken.scope.split(/\s/g),
       source: decodedAccessToken.source,
     },
+  };
+}
+
+function authenticateOptionalJWT({ key, validate }) {
+  return async (request, h) => {
+    const authorizationHeader = request.headers.authorization;
+    if (!authorizationHeader) {
+      return h.authenticated({ credentials: { userId: null } });
+    }
+
+    return authenticateJWT({ key, validate })(request, h);
   };
 }
 
