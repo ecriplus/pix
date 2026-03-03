@@ -47,7 +47,9 @@
               "element": {
                 "id": "f49a0fed-c65d-467e-a30d-73445381c61c",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Conversation d’introduction",
@@ -77,9 +79,7 @@
                       "content": "C’est normal, ta demande est trop floue ! L’IA ne peut pas deviner ce que tu veux. 😉"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -124,6 +124,7 @@
                 "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
                 "type": "qcm",
                 "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l’améliorer ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -152,8 +153,12 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"],
-                "hasShortProposals": false
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -191,7 +196,9 @@
               "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Vous pouvez changer le ton de ce message avec l’aide de l’IA.</p>",
+                "functionalInstruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
@@ -219,9 +226,7 @@
                       "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -230,6 +235,7 @@
                 "id": "44028e11-c07a-4920-b1c1-f487f04525e9",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quel message de relance créé avec l’IA est votre préféré ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -260,8 +266,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -390,7 +395,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
-                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….</p>"
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation avec l'IA et demandez des modifications….</p>"
                     }
                   ]
                 }
@@ -452,6 +457,7 @@
                       "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
                       "type": "qcm",
                       "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -473,11 +479,13 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d'un match de hockey.</li></ul>"
                         }
                       },
-                      "solutions": ["1", "2"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -492,6 +500,7 @@
                       "id": "bf5ec9f6-31ce-44ad-b880-5694072cd0e4",
                       "type": "qcm",
                       "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -513,11 +522,14 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>: un discours,&nbsp;</li><li>le <strong>ton </strong>: amusant,</li><li>et le <strong>contexte </strong>est donné par la description du pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</li></ul>"
                         }
                       },
-                      "solutions": ["1", "2", "3"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
@@ -564,7 +576,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p><p><br></p>"
               }
             },
             {
@@ -573,7 +585,7 @@
                 "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si le logiciel d’IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s’agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Dans le cas où vous avez obtenu un compte-rendu, le logiciel a sûrement fait une <strong>erreur</strong>. En effet, les <strong>récompenses </strong>du tournois sont des <strong>médailles </strong>dans la prise de notes de Gustave.&nbsp;🎖️</p><p>Il faut donc demander au logiciel de corriger cette erreur.</p><p>Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
@@ -594,7 +606,7 @@
               "element": {
                 "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
-                "content": "Gustave a du mal à trouver un lieu pour le tournoi de volley-ball qui approche à grands pas.<br>Pour le tournoi, Gustave recherche un endroit à Jolieville, avec au moins 4 terrains. <br>Il a un budget maximal de 300 pixmoney. Il est à la recherche d’un bon plan.<br><br>"
+                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d'au moins 4 terrains. </p>\n<p>Son budget maximal de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d'IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
               }
             },
             {
@@ -605,7 +617,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
-                "instruction": "<p>À partir des critères de recherche de Gustave, utilisez le logiciel d'IA générative ci-dessous, utilisé par Jolieville, pour trouver un lieu adapté.</p>",
+                "instruction": "<p>Utilisez le logiciel d’IA de Jolieville, ci-dessous, pour trouver le gymnase qui correspond à ses besoins🔍</p><p>Une fois que vous avez trouvé, écrivez le nom du gymnase en dessous.&nbsp;👇</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -615,7 +627,7 @@
               "element": {
                 "id": "0ccbd3b1-b27d-46d7-9b8c-d2fffc76b8e3",
                 "type": "qrocm",
-                "instruction": "Quel gymnase devrait contacter Gustave ?",
+                "instruction": "<p>Quel gymnase devrait contacter Gustave ?</p>",
                 "proposals": [
                   {
                     "input": "NomGymnase",
@@ -625,7 +637,11 @@
                     "display": "inline",
                     "placeholder": "Nom du gymnase",
                     "ariaLabel": "Nom du gymnase",
-                    "tolerances": ["t1", "t2", "t3"],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Le gymnase des 3 sapins",
                       "gymnase des 3 sapins",
