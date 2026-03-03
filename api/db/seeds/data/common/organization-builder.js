@@ -1,3 +1,4 @@
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import {
   ADMINISTRATION_TEAM_ALPHA_ID,
@@ -46,6 +47,7 @@ async function _createScoOrganization(databaseBuilder) {
     tagIds: [COLLEGE_TAG.id],
     administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
     organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+    identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
   });
 
   await organization.createOrganization({
