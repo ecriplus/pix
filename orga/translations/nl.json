@@ -1775,7 +1775,11 @@
         "description": "Studententabel gesorteerd op naam. Voor studenten die een inlogmethode hebben opgegeven, kun je een menu in de kolom 'Acties' gebruiken om de geautoriseerde inlogmethoden te beheren en het wachtwoord van de student opnieuw in te stellen.",
         "empty": "Geen studenten."
       },
-      "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}"
+      "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Geblokkeerd account",
+        "temporarily-blocked": "Tijdelijk geblokkeerd account"
+      }
     },
     "sso-selection": {
       "login": {

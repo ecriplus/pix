@@ -1780,7 +1780,11 @@
         "description": "Nach Namen sortierte Tabelle der Schüler. Bei Schülern, die eine Verbindungsmethode angegeben haben, können Sie über ein Menü in der Spalte 'Aktionen' die erlaubten Verbindungsmethoden verwalten und das Schülerpasswort zurücksetzen.",
         "empty": "Keine Schülerinnen und Schüler."
       },
-      "title": "{count, plural, =0 {Schüler} =1 {Schüler ({count})} other {Schüler ({count})}}"
+      "title": "{count, plural, =0 {Schüler} =1 {Schüler ({count})} other {Schüler ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Gesperrten Mitgliedskontos",
+        "temporarily-blocked": "Vorübergehend Gesperrten Mitgliedskontos"
+      }
     },
     "sso-selection": {
       "login": {

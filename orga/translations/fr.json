@@ -1781,7 +1781,11 @@
         "description": "Tableau des élèves trié par nom. Pour les élèves ayant fourni une méthode de connexion, vous pouvez, via un menu situé dans la colonne 'Actions', gérer les modes de connexion autorisés et réinitialiser le mot de passe de l'élève",
         "empty": "Aucun élève."
       },
-      "title": "{count, plural, =0 {Élèves} =1 {Élève ({count})} other {Élèves ({count})}}"
+      "title": "{count, plural, =0 {Élèves} =1 {Élève ({count})} other {Élèves ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Compte bloqué",
+        "temporarily-blocked": "Compte bloqué temporairement"
+      }
     },
     "sso-selection": {
       "login": {

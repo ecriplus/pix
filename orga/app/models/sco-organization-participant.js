@@ -9,6 +9,8 @@ export default class ScoOrganizationParticipant extends Model {
   @attr('string') division;
   @attr('number') participationCount;
   @attr('date') lastParticipationDate;
+  @attr('boolean') isTemporarilyBlocked;
+  @attr('boolean') isBlocked;
   @attr('boolean') isAuthenticatedFromGar;
   @attr('string') campaignName;
   @attr('string') campaignType;

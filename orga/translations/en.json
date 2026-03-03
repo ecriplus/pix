@@ -1794,7 +1794,11 @@
         "description": "Table of students, sorted by name. For students who have provided an authentication method, you can manage the allowed login modes and reset the student's password through a menu in 'Actions' column",
         "empty": "No students."
       },
-      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}"
+      "title": "{count, plural, =0 {Students} =1 {Student ({count})} other {Students ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Blocked account",
+        "temporarily-blocked": "Temporarily blocked account"
+      }
     },
     "sso-selection": {
       "login": {

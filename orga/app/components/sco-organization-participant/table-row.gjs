@@ -8,6 +8,7 @@ import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
 import { CONNECTION_TYPES } from '../../helpers/connection-types';
+import { USER_ACCOUNT_BLOCKING_TYPES } from '../../helpers/user-account-blocking-types';
 import Cell from '../certificability/cell';
 import Tooltip from '../certificability/tooltip';
 import IconTrigger from '../dropdown/icon-trigger';
@@ -75,9 +76,20 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
   </PixTableColumn>
   <PixTableColumn @context={{@context}}>
     <:header>{{t "pages.sco-organization-participants.table.column.login-method"}}</:header>
-    <:cell>{{#each @student.authenticationMethods as |authenticationMethod|}}
+    <:cell>
+      {{#if @student.isTemporarilyBlocked}}
+        <p class="sco-organization-participant-list-page__user-account-temporarily-blocked">{{t
+            (get USER_ACCOUNT_BLOCKING_TYPES "temporarily_blocked")
+          }}</p>
+      {{else if @student.isBlocked}}
+        <p class="sco-organization-participant-list-page__user-account-blocked">{{t
+            (get USER_ACCOUNT_BLOCKING_TYPES "blocked")
+          }}</p>
+      {{/if}}
+      {{#each @student.authenticationMethods as |authenticationMethod|}}
         <p>{{t (get CONNECTION_TYPES authenticationMethod)}}</p>
-      {{/each}}</:cell>
+      {{/each}}
+    </:cell>
   </PixTableColumn>
   <PixTableColumn
     @context={{@context}}
