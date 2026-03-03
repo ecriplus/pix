@@ -11,7 +11,7 @@
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Connaître les métaux et terres rares qui composent les appareils numériques (ordinateurs, tablettes, smarphones...).</p>",
+      "<p>Connaître les métaux et terres rares qui composent les appareils numériques (ordinateurs, tablettes, smarphones, etc).</p>",
       "<p>Identifier les principaux impacts environnementaux liés à l’extraction des métaux et terres rares.</p>",
       "<p>Comprendre l’intérêt du réemploi et du reconditionnement pour réduire l’impact environnemental.</p>"
     ],
@@ -154,7 +154,7 @@
                         "x2": 470,
                         "y2": 440
                       },
-                      "info": "⚙️ Circuits électroniques : Conduction et résistance assurées grâce aux métaux précieux (cuivre, argent et or).",
+                      "info": "⚙️ Circuits électroniques : conduction et résistance assurées grâce aux métaux précieux (cuivre, argent et or).",
                       "spot": {
                         "x": 0,
                         "y": 0
@@ -241,7 +241,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>Les terres rares (europium, terbium, yttrium…)</span></p>"
+                    "content": "<p><span>Les terres rares (europium, terbium, yttrium, etc)</span></p>"
                   },
                   {
                     "type": "select",
@@ -334,7 +334,7 @@
                     {
                       "id": "843b69d0-3f09-4c93-adb4-f57ffe20b587",
                       "type": "text",
-                      "content": "<p><strong>💡Bon à savoir</strong></p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium...) sont des métaux <strong>essentiels aux appareils numériques&nbsp;</strong>(les ordinateurs, tablettes, smartphones...). Présentes en très faible concentration dans la terre, leur extraction demande beaucoup d’énergie, d’eau et de produits chimiques polluants.</p>"
+                      "content": "<p><strong>💡Bon à savoir</strong></p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium, etc) sont des métaux <strong>essentiels aux appareils numériques&nbsp;</strong>(les ordinateurs, tablettes, smartphones, etc). Présentes en très faible concentration dans la terre, leur extraction demande beaucoup d’énergie, d’eau et de produits chimiques polluants.</p>"
                     }
                   ]
                 }
@@ -374,38 +374,36 @@
                     },
                     {
                       "id": "6d6c87da-b248-4abc-936a-62938426826a",
-                      "type": "video",
+                      "type": "short-video",
                       "title": "Timelapse d’une vue aérienne. ",
                       "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/timelaps_mine.mp4",
-                      "poster": "",
-                      "subtitles": "",
                       "transcription": "<p>Vidéo en vue aérienne montrant l’évolution d’une zone industrielle entre 1985 et 2025. Une petite tache noire apparaît au sol en 1985. Au fil des années, elle s’agrandit progressivement, s’étend sur le paysage et finit par occuper une grande partie de l’image en 2025.</p>"
                     },
                     {
                       "id": "8db7e730-9601-4e62-b6a4-9e351097e40f",
                       "type": "qcu-discovery",
-                      "instruction": "<p> À votre avis, à cause de quoi s’est formé le «&nbsp;lac noir&nbsp;» visible depuis l’espace ?<br><br></p>",
+                      "instruction": "<p> À votre avis, à cause de quoi s’est formé le «&nbsp;lac noir&nbsp;» visible depuis l’espace ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>La fonte des glaces</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Eh non. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Le traitement des terres rares&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Bien vu. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Une coulée de pétrole</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.<br><br></p>"
+                            "diagnosis": "<p>Eh non. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
@@ -449,10 +447,10 @@
                               "x2": 60,
                               "y2": 140
                             },
-                            "info": "1. Eau saléeSous le désert de sel, il y a de l’eau très salée qui contient du lithium.",
+                            "info": "Sous le désert de sel, il y a de l’eau très salée qui contient du lithium.",
                             "spot": {
-                              "x": 0,
-                              "y": -5
+                              "x": 3,
+                              "y": 12
                             }
                           },
                           {
@@ -462,10 +460,10 @@
                               "x2": 95,
                               "y2": 95
                             },
-                            "info": "2. Pompage de l’eauCette eau est pompée depuis le sous-sol.👉 Cela utilise beaucoup d’eau, dans des régions souvent très sèches.",
+                            "info": "Cette eau est pompée depuis le sous-sol. Cela utilise beaucoup d’eau, dans des régions souvent très sèches.",
                             "spot": {
-                              "x": 0,
-                              "y": -5
+                              "x": -15,
+                              "y": 0
                             }
                           },
                           {
@@ -475,22 +473,22 @@
                               "x2": 145,
                               "y2": 115
                             },
-                            "info": "3. Bassins au soleil ☀️L’eau est versée dans de grands bassins.Le soleil fait évaporer l’eau lentement.",
+                            "info": "L’eau est versée dans de grands bassins. Le soleil fait évaporer l’eau lentement.",
                             "spot": {
-                              "x": 0,
-                              "y": -5
+                              "x": -3,
+                              "y": -3
                             }
                           },
                           {
                             "coords": {
-                              "x1": 135,
+                              "x1": 120,
                               "y1": 68,
-                              "x2": 185,
+                              "x2": 175,
                               "y2": 115
                             },
-                            "info": "4. Le lithium se concentreQuand l’eau disparaît, le lithium se concentre.Des résidus de sel et de produits chimiques restent sur place.",
+                            "info": "Quand l’eau disparaît, le lithium se concentre. Des résidus de sel et de produits chimiques restent sur place.",
                             "spot": {
-                              "x": 0,
+                              "x": -9,
                               "y": -5
                             }
                           },
@@ -501,7 +499,7 @@
                               "x2": 225,
                               "y2": 105
                             },
-                            "info": "5. Transport et transformationLe lithium est envoyé vers une usine pour être transformé en poudre.",
+                            "info": "Le lithium est envoyé vers une usine pour être transformé en poudre.",
                             "spot": {
                               "x": 0,
                               "y": -5
@@ -514,7 +512,7 @@
                               "x2": 280,
                               "y2": 115
                             },
-                            "info": "6. Fabrication des batteriesCette poudre sert à fabriquer des batteries.",
+                            "info": "Cette poudre sert à fabriquer des batteries.",
                             "spot": {
                               "x": 0,
                               "y": -5
@@ -631,7 +629,7 @@
               "element": {
                 "id": "5d37b812-b5a9-4ebc-af92-260c6ede361e",
                 "type": "text",
-                "content": "<p>L’extraction des métaux nécessaires aux smartphones, ordinateurs et batteries a des <strong>impacts environnementaux et humains importants</strong>&nbsp;:</p><ul>    <li>une forte consommation d’eau</li>    <li>la pollution des sols</li>    <li>des risques pour la santé et les droits des populations locales</li></ul><h5>🤔Tout cela, pour fabriquer nos smartphones et ordinateurs ?</h5><p>Oui. Ces métaux sont essentiels au fonctionnement des appareils numériques. Leur demande croissante pour fabriquer toujours plus d’appareils pèse fortement sur l’environnement et les droits humains.</p>"
+                "content": "<p>L’extraction des métaux nécessaires aux smartphones, ordinateurs et batteries a des <strong>impacts environnementaux et humains importants</strong>&nbsp;:</p><ul>    <li>une forte consommation d’eau</li>    <li>la pollution des sols</li>    <li>des risques pour la santé et les droits des populations locales</li></ul><h5>🤔 Tout cela, pour fabriquer nos smartphones et ordinateurs ?</h5><p>Oui. Ces métaux sont essentiels au fonctionnement des appareils numériques. Leur demande croissante pour fabriquer toujours plus d’appareils pèse fortement sur l’environnement et les droits humains.</p>"
               }
             }
           ]
@@ -664,7 +662,7 @@
                     {
                       "id": "1a7e6933-9fd4-42ce-a844-44547efcd603",
                       "type": "text",
-                      "content": "<p><strong>Amandine a un souci d’ordinateur portable.</strong><br>Au bout de quelques années son appareil commence à avoir <strong>des problèmes d’affichage</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
+                      "content": "<p><strong>Amandine a un souci d’ordinateur portable.</strong><br>Au bout de quelques années, son appareil commence à avoir <strong>des problèmes d’affichage</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
                     },
                     {
                       "id": "c62a71c2-ec8a-4da8-b1dc-fbebd3e86f69",
@@ -710,7 +708,7 @@
                     {
                       "id": "685e2165-8a4c-426c-b43d-5e48b6ce67ea",
                       "type": "text",
-                      "content": "<p><strong>Deux ans plus tard</strong>, Amandine commence une formation de graphiste.<br><strong>Son ordinateur</strong> réparé <strong>fonctionne toujours</strong>, mais il n’est <strong>plus assez puissant</strong> pour utiliser les logiciels de création dont elle a <strong>besoin</strong> (retouche photo, modélisation 3D…).<br><br></p>"
+                      "content": "<p><strong>Deux ans plus tard</strong>, Amandine commence une formation de graphiste.<br><strong>Son ordinateur</strong> réparé <strong>fonctionne toujours</strong>, mais il n’est <strong>plus assez puissant</strong> pour utiliser les logiciels de création dont elle a <strong>besoin</strong> (retouche photo, modélisation 3D, etc).<br><br></p>"
                     },
                     {
                       "id": "22e11b89-febc-4cbc-b65a-ebc109072b52",
@@ -743,7 +741,7 @@
                           "id": "4",
                           "content": "<p>Je ne sais pas.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici acheter un <strong>ordinateur reconditionné</strong> est la meilleure solution. Il est déjà fabriqué et remis en état avant revente, un appareil <strong>reconditionné</strong> répond aux nouveaux besoins <strong>sans relancer la production</strong> d’un neuf.</p>"
+                            "diagnosis": "<p>Ici, acheter un <strong>ordinateur reconditionné</strong> est la meilleure solution. Il est déjà fabriqué et remis en état avant revente, un appareil <strong>reconditionné</strong> répond aux nouveaux besoins <strong>sans relancer la production</strong> d’un neuf.</p>"
                           }
                         }
                       ],
@@ -768,7 +766,7 @@
                     {
                       "id": "db56ae01-3e09-4601-83bf-338c6520d013",
                       "type": "text",
-                      "content": "<p><strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter d’en fabriquer un nouveau.&nbsp; </p><h5>🤔Et si j’ai besoin d’en changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>; ce qui lui donne une seconde vie et limite son impact. </p><h5><br></h5>"
+                      "content": "<p><strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter d’en fabriquer un nouveau.&nbsp; </p><h5>🤔 Et si j’ai besoin d’en changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>; ce qui lui donne une seconde vie et limite son impact. </p><h5><br></h5>"
                     }
                   ]
                 },
@@ -777,12 +775,12 @@
                     {
                       "id": "0612b141-3b5d-4ba9-9a12-cfc99392e67d",
                       "type": "text",
-                      "content": "<h5>🤔Le reconditionné, c’est donc mieux pour la planète ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p>"
+                      "content": "<h5>🤔 Le reconditionné, c’est donc mieux pour la planète ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p>"
                     },
                     {
                       "id": "5aafa8f3-3e00-416f-92e9-17d052c50516",
                       "type": "text",
-                      "content": "<p><strong>💡Astuce</strong></p><p>Pensez à <strong>protéger</strong> vos appareils (coques, écrans, antivirus…) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;</p>"
+                      "content": "<p><strong>💡Astuce</strong></p><p>Pensez à <strong>protéger</strong> vos appareils (coques, écrans, antivirus, etc) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;</p>"
                     }
                   ]
                 }
@@ -806,7 +804,7 @@
               "element": {
                 "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
                 "type": "text",
-                "content": "<ul>    <li>Un ordinateur&nbsp;ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>    <li><strong>Faire durer</strong> <strong>ou </strong><strong>réparer</strong> <strong>ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>    <li>        Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li><li><strong>Chaque geste compte.&nbsp;</strong>Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li></ul>"
+                "content": "<ul>\n    <li>🧱 Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>\n\n    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>\n\n    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>\n\n    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li>\n</ul>"
               }
             }
           ]
@@ -911,7 +909,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>une hasse des conflits entre les exploitants des ressources et les autorités locales</p>"
+                    "content": "<p>une hausse des conflits entre les exploitants des ressources et les autorités locales</p>"
                   },
                   {
                     "id": "3",
