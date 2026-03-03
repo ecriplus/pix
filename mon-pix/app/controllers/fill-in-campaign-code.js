@@ -38,10 +38,11 @@ export default class FillInCampaignCodeController extends Controller {
       const organizationToJoin = await this.store.queryRecord('organization-to-join', { code: verifiedCode.id });
       this.organizationName = organizationToJoin.name;
       this.code = verifiedCode.id;
+      this.verifiedCode = verifiedCode;
       const isGARCampaign = organizationToJoin.identityProvider === IDENTITY_PROVIDER_ID_GAR;
 
       if (_shouldShowGARModal(isGARCampaign, this.isUserAuthenticatedByGAR, this.isUserAuthenticatedByPix)) {
-        if (verifiedCode.type === 'campaign') {
+        if (this.verifiedCode.type === 'campaign') {
           const campaign = await verifiedCode.campaign;
           this.name = campaign.targetProfileName;
         } else {
@@ -53,15 +54,19 @@ export default class FillInCampaignCodeController extends Controller {
         return;
       }
 
-      if (verifiedCode.type === 'campaign') {
+      if (this.verifiedCode.type === 'campaign') {
         this.campaign = await verifiedCode.campaign;
-        this.router.transitionTo('campaigns.entry-point', verifiedCode.id);
+        this.router.transitionTo('campaigns.entry-point', this.code);
       } else {
-        this.router.transitionTo('organizations.access', verifiedCode.id);
+        this.router.transitionTo('organizations.access', this.code);
       }
     } catch (error) {
       this.onStartCampaignError(error);
     }
+  }
+
+  get routeToTransitionAfterGarModal() {
+    return this.verifiedCode?.type === 'campaign' ? 'campaigns.entry-point' : 'organizations.access';
   }
 
   onStartCampaignError(error) {
