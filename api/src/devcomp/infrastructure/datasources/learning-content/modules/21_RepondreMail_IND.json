@@ -265,7 +265,7 @@
                           "input": "0",
                           "display": "inline",
                           "placeholder": "",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [],
                           "options": [
                             {
@@ -315,7 +315,7 @@
                           "input": "0",
                           "display": "inline",
                           "placeholder": "",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [],
                           "options": [
                             {
@@ -365,7 +365,7 @@
                           "input": "0",
                           "display": "inline",
                           "placeholder": "",
-                          "ariaLabel": "",
+                          "ariaLabel": "- Sélectionner -",
                           "tolerances": [],
                           "options": [
                             {
@@ -633,7 +633,7 @@
                     "input": "0",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
@@ -670,7 +670,7 @@
                     "input": "1",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
@@ -707,7 +707,7 @@
                     "input": "2",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
@@ -744,7 +744,7 @@
                     "input": "4",
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
@@ -988,11 +988,11 @@
                           "minutes": -66
                         },
                         "previousMail": {
-                          "name": "",
+                          "name": "Suppr",
                           "content": "[À supprimer]",
                           "time": {
-                            "days": 0,
-                            "minutes": 0
+                            "days": -33,
+                            "minutes": -33
                           }
                         }
                       }
@@ -1058,11 +1058,11 @@
                           "minutes": -622
                         },
                         "previousMail": {
-                          "name": "",
+                          "name": "Suppr",
                           "content": "[À supprimer]",
                           "time": {
-                            "days": 0,
-                            "minutes": 0
+                            "days": -33,
+                            "minutes": -33
                           }
                         }
                       }
@@ -1128,11 +1128,11 @@
                           "minutes": -673
                         },
                         "previousMail": {
-                          "name": "",
+                          "name": "Suppr",
                           "content": "[À supprimer]",
                           "time": {
-                            "days": 0,
-                            "minutes": 0
+                            "days": -33,
+                            "minutes": -33
                           }
                         }
                       }
@@ -1217,7 +1217,7 @@
                     }
                   },
                   {
-                    "id": "",
+                    "id": "3",
                     "content": "<p>Rien de spécial.</p>",
                     "feedback": {
                       "diagnosis": "<p>[Feedback à rédiger]</p>"
