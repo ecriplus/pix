@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.345.0](https://github.com/1024pix/pix/compare/v5.344.0...v5.345.0) (2026-03-03)
+
+### :rocket: Amélioration
+
+- [#15306](https://github.com/1024pix/pix/pull/15306) : Coquilles IA enseignants 
+- [#15324](https://github.com/1024pix/pix/pull/15324) : travail sur description poi non créés - RangerfichiersNOV 
+- [#15309](https://github.com/1024pix/pix/pull/15309) Afficher qu'il n'y a pas d'invitations en cours (PIX-20524) 
+- [#15322](https://github.com/1024pix/pix/pull/15322) Ajout de description dans le schéma Joi de custom-element (PIX-21762) 
+- [#15328](https://github.com/1024pix/pix/pull/15328) Ajouter le feature toggle multipleLocalesForTrainingsEnabled (PIX-21773). 
+- [#15271](https://github.com/1024pix/pix/pull/15271) datacenter-mini-modif 
+- [#15269](https://github.com/1024pix/pix/pull/15269) Ne pas afficher la page d'analyse pour une participation en cours (PIX-21468) 
+- [#15130](https://github.com/1024pix/pix/pull/15130) Révoquer les tokens des utilisateurs OIDC lors de la déconnexion (PIX-20688). 
+- [#15335](https://github.com/1024pix/pix/pull/15335) travail sur description poi non créés - RangerFichiersIND 
+- [#15325](https://github.com/1024pix/pix/pull/15325) Update IADefinition_IND.json 
+- [#15323](https://github.com/1024pix/pix/pull/15323) Utiliser un wording cohérent dans la création de parcours combiné (PIX-20325). 
+
+### :building_construction: Tech
+
+- [#15320](https://github.com/1024pix/pix/pull/15320) Mettre à jour la stack des RA et la version de l'addon PG 
+- [#15338](https://github.com/1024pix/pix/pull/15338) Mettre à jour le plan de l'addon redis en starter-256 
+- [#15318](https://github.com/1024pix/pix/pull/15318) Mutualisation de la logique de vérification d'infos pour une organisation (PIX-20805). 
+- [#15326](https://github.com/1024pix/pix/pull/15326) Réparer les seeds certif 
+- [#15305](https://github.com/1024pix/pix/pull/15305) Supprimer le paramètre variant tile pour les PixCheckbox de Pix Admin 
+
+### :arrow_up: Montée de version
+
+- [#15321](https://github.com/1024pix/pix/pull/15321) Update dependency @1024pix/pix-ui to ^60.0.3 (admin)
+
 # [5.344.0](https://github.com/1024pix/pix/compare/v5.343.1...v5.344.0) (2026-03-02)
 
 ### :rocket: Amélioration
