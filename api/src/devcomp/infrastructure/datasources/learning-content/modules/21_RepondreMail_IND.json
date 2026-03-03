@@ -663,7 +663,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p>Le pâté en croûte sera apporté par</p>"
+                    "content": "<p>.</p><br><p>Le pâté en croûte sera apporté par</p>"
                   },
                   {
                     "type": "select",
@@ -737,7 +737,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p><br></p><p>Par contre,</p>"
+                    "content": "<p>.</p><br><p>Par contre,</p>"
                   },
                   {
                     "type": "select",
