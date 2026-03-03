@@ -389,21 +389,21 @@
                           "id": "1",
                           "content": "<p>La fonte des glaces</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
+                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Le traitement des terres rares&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
+                            "diagnosis": "<p>Bien vu. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Une coulée de pétrole</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. </p>\n<p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
+                            "diagnosis": "<p>Eh non. </p><p>Ce bassin est constitué de <strong>résidus toxiques</strong> issus du raffinage des terres rares, utilisées dans les écrans, les aimants et les batteries. Ces déchets polluent durablement l’eau, les sols et l’air des régions minières.</p>"
                           }
                         },
                         {
@@ -572,7 +572,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/article_mine.svg",
                       "alt": "",
-                      "alternativeText": "<p><strong>Extraction artisanale en RDC : conditions de travail et risques humains</strong></p>\n<p>Novembre 2014 – Par la rédaction</p>\n\n<p>Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques.</p>\n\n<p><strong>Des enfants participent parfois au tri ou au transport du minerai, travaillant dans des conditions dangereuses et sans protection.</strong> Ces activités artisanales exposent les travailleurs à des conditions précaires et à un manque de protections élémentaires.</p>\n\n<p>Dans cette région, l’exploitation minière représente souvent la seule source de revenus, mais elle se fait au prix de risques sanitaires importants pour les adultes comme pour les enfants.</p>",
+                      "alternativeText": "<p><strong>Extraction artisanale en RDC&nbsp;: conditions de travail et risques humains</strong></p><p>Novembre 2014 – Par la rédaction</p><p>Dans la mine de Kailo, en République démocratique du Congo, les habitants extraient à la main de la wolframite (pour le tungstène) et de la cassitérite (pour l’étain), deux minerais essentiels à la fabrication d’appareils électroniques.</p><p><strong>Des enfants participent parfois au tri ou au transport du minerai, travaillant dans des conditions dangereuses et sans protection.</strong> Ces activités artisanales exposent les travailleurs à des conditions précaires et à un manque de protections élémentaires.</p><p>Dans cette région, l’exploitation minière représente souvent la seule source de revenus, mais elle se fait au prix de risques sanitaires importants pour les adultes comme pour les enfants.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -804,7 +804,7 @@
               "element": {
                 "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
                 "type": "text",
-                "content": "<ul>\n    <li>🧱 Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>\n\n    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>\n\n    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>\n\n    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li>\n</ul>"
+                "content": "<ul>    <li>🧱 Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li></ul>"
               }
             }
           ]
