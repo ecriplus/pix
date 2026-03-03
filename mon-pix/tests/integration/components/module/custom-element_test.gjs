@@ -197,4 +197,99 @@ module('Integration | Component | Module | Custom Element', function (hooks) {
       });
     });
   });
+
+  module('when custom element is not interactive', function () {
+    module('when custom element has instruction', function () {
+      test('should display instruction', async function (assert) {
+        // given
+        const customElement = {
+          id: 'b0e9d79f-1727-4861-ac89-bd834473d62b',
+          title: 'mon-custom-test',
+          instruction: 'Test POI quiz image',
+          tagName: 'llm-compare-messages',
+          props: {
+            conversation1: { title: 'Conversation 1', llmName: 'Nono' },
+            conversation2: { title: 'Conversation 2', llmName: 'Jaja' },
+          },
+          type: 'custom',
+        };
+
+        // when
+        const screen = await render(<template><ModulixCustomElement @component={{customElement}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('Test POI quiz image')).exists();
+      });
+    });
+  });
+
+  module('when custom element is interactive', function () {
+    module('when custom element has instructions', function () {
+      test('should display instructions (title, instruction and functionalInstruction)', async function (assert) {
+        // given
+        const customElement = {
+          id: 'b0e9d79f-1727-4861-ac89-bd834473d62b',
+          title: 'mon-custom-test',
+          instruction: 'Test POI quiz image',
+          functionalInstruction: 'Consigne fonctionnelle du POI quiz image',
+          tagName: 'image-quiz',
+          props: {
+            name: 'Liste d‘applications',
+            imageChoicesSize: 'icon',
+            choices: [
+              {
+                name: 'Google',
+                image: {
+                  width: 534,
+                  height: 544,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg',
+                },
+              },
+              {
+                name: 'LibreOffice Writer',
+                image: {
+                  width: 205,
+                  height: 246,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp',
+                },
+              },
+              {
+                name: 'Explorateur',
+                image: {
+                  width: 128,
+                  height: 128,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp',
+                },
+              },
+              {
+                name: 'Geogebra',
+                image: {
+                  width: 640,
+                  height: 640,
+                  loading: 'lazy',
+                  decoding: 'async',
+                  src: 'https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp',
+                },
+              },
+            ],
+          },
+          type: 'custom',
+        };
+
+        // when
+        const screen = await render(<template><ModulixCustomElement @component={{customElement}} /></template>);
+
+        // then
+        assert.dom(screen.getByText('mon-custom-test')).exists();
+        assert.dom(screen.getByText('Test POI quiz image')).exists();
+        assert.dom(screen.getByText('Consigne fonctionnelle du POI quiz image')).exists();
+      });
+    });
+  });
 });
