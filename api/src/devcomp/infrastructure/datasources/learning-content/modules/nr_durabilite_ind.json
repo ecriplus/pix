@@ -32,7 +32,7 @@
               "element": {
                 "id": "a67c4f7f-4995-4c3d-9257-f92ba8d9cdc8",
                 "type": "image",
-                "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/picto_nr_durabilite_ind-1.svg",
+                "url": "https://assets.pix.org/modules/NR_Durabilit%C3%A9_IND/telephone_matieres.svg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "",
@@ -180,10 +180,10 @@
                         "x2": 800,
                         "y2": 440
                       },
-                      "info": "💻 Boîtier / Structure : solidité et légèreté obtenues grâce à l’aluminium et au magnésium.",
+                      "info": "🔈 Haut-parleur / Microphone : production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique.",
                       "spot": {
                         "x": 0,
-                        "y": 0
+                        "y": 30
                       }
                     },
                     {
@@ -193,7 +193,7 @@
                         "x2": 990,
                         "y2": 440
                       },
-                      "info": "🔈 Haut-parleur / Microphone : production du son rendue possible par le cobalt et le néodyme, une terre rare magnétique.",
+                      "info": "💻 Boîtier / Structure : solidité et légèreté obtenues grâce à l’aluminium et au magnésium.",
                       "spot": {
                         "x": 0,
                         "y": 0
@@ -370,7 +370,7 @@
                     {
                       "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
                       "type": "text",
-                      "content": "<p>Observez l’évolution de cette mine au fil des années, à partir d’une vue aérienne. Répondez ensuite à la question ci-dessous.</p>"
+                      "content": "<p>Observez l’évolution de cette mine de terres rares de Mongolie intérieure au fil des années. Répondez ensuite à la question ci-dessous.</p>"
                     },
                     {
                       "id": "6d6c87da-b248-4abc-936a-62938426826a",
@@ -429,7 +429,7 @@
                       "id": "d03f5276-0dbf-46f1-8c85-88edd79f1fe9",
                       "type": "custom",
                       "title": "Le cycle du lithium",
-                      "instruction": "",
+                      "instruction": "<p><br></p>",
                       "functionalInstruction": "",
                       "tagName": "clickable-image",
                       "props": {
@@ -486,7 +486,7 @@
                               "x2": 175,
                               "y2": 115
                             },
-                            "info": "Quand l’eau disparaît, le lithium se concentre. Des résidus de sel et de produits chimiques restent sur place.",
+                            "info": "Quand l’eau disparaît, le lithium se concentre. Des résidus de sel et de produits chimiques restent sur place, polluants durablement les sols.",
                             "spot": {
                               "x": -9,
                               "y": -5
@@ -804,7 +804,7 @@
               "element": {
                 "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
                 "type": "text",
-                "content": "<ul>    <li>🧱 Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li></ul>"
+                "content": "<ul>    <li>⛏️ Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li></ul>"
               }
             }
           ]
@@ -900,7 +900,7 @@
               "element": {
                 "id": "728ddefd-d9c9-457f-8c5d-032448fa010d",
                 "type": "qcm",
-                "instruction": "<p>Quels problèmes majeurs l’extraction des terres rares provoque-t-elle dans l’État de Kachin, au Myanmar ?</p>",
+                "instruction": "<p>Quels problèmes majeurs l’extraction des terres rares provoque-t-elle ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -1135,35 +1135,35 @@
                       "label": "1 an",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Votre téléphone est encore très loin de ses limites techniques. En en prenant soin, un smartphone moderne peut fonctionner 5 à 10 ans."
+                        "text": "Votre téléphone est encore très loin de ses limites techniques. Un smartphone peut fonctionner 5 à 10 ans. Prenez en soin."
                       }
                     },
                     {
                       "label": "2 ans",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Vous êtes dans la moyenne exacte de remplacement observée dans les pays de l’OCDE. Pourtant, votre téléphone peut souvent durer bien plus de 5 ans s’il est entretenu ou réparé."
+                        "text": "Vous êtes dans la moyenne exacte de remplacement observée dans les pays de l’OCDE. Pourtant, votre téléphone peut souvent durer bien plus de 5 ans s’il est entretenu ou réparé. Prenez en soin."
                       }
                     },
                     {
                       "label": "3 ans",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Vous arrivez à l’âge où beaucoup d’utilisateurs changent leur smartphone. Toutefois, la durée de vie de votre appareil reste généralement supérieure à 5 ans, voire davantage en cas de réparation."
+                        "text": "Vous arrivez à l’âge où beaucoup d’utilisateurs changent leur smartphone. Toutefois, la durée de vie de votre appareil reste généralement supérieure à 5 ans, voire davantage en cas de réparation. Prenez en soin."
                       }
                     },
                     {
                       "label": "4 ans",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Votre téléphone approche de l’âge où certaines limites peuvent apparaître (batterie, performances). Mais un smartphone peut encore fonctionner plus de 5 ans avec une batterie neuve ou une petite réparation."
+                        "text": "Votre téléphone approche de l’âge où certaines limites peuvent apparaître (batterie, performances). Mais un smartphone peut encore fonctionner plus de 5 ans avec une batterie neuve ou une petite réparation. Prenez en soin."
                       }
                     },
                     {
                       "label": "5 ans",
                       "feedback": {
                         "type": "neutral",
-                        "text": "Félicitations ! Vous dépassez déjà la durée d’usage moyenne de 2 à 3 ans observée dans les pays de l’OCDE. Vous exploitez bien les capacités techniques de votre appareil, qui peut encore fonctionner avec des réparations simples."
+                        "text": "Félicitations ! Vous dépassez déjà la durée d’usage moyenne de 2 à 3 ans observée dans les pays de l’OCDE. Vous exploitez bien les capacités techniques de votre appareil, qui peut encore fonctionner avec des réparations simples. Prenez en soin. "
                       }
                     },
                     {
