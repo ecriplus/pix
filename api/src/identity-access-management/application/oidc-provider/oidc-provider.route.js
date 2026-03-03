@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { oidcProviderController } from './oidc-provider.controller.js';
 
 export const oidcProviderRoutes = [
@@ -152,6 +152,21 @@ export const oidcProviderRoutes = [
           '- Elle retourne un access token et une uri de déconnexion',
       ],
       tags: ['identity-access-management', 'api', 'oidc'],
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/oidc/logout',
+    config: {
+      validate: {
+        payload: Joi.object({
+          identity_provider: Joi.string().required(),
+          logout_url_uuid: Joi.string().optional(),
+        }).required(),
+      },
+      handler: (request, h) => oidcProviderController.logout(request, h),
+      notes: ['- Cette route permet de déconnecter un utilisateur OIDC et de supprimer/révoquer ses tokens'],
+      tags: ['identity-access-management', 'api', 'token', 'oidc'],
     },
   },
 ];

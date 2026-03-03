@@ -147,6 +147,7 @@ import { getUserByResetPasswordDemand } from './get-user-by-reset-password-deman
 import { getUserDetailsForAdmin } from './get-user-details-for-admin.usecase.js';
 import { importUserLastLoggedAt } from './import-user-last-logged-at.usecase.js';
 import { listLtiPublicKeys } from './list-lti-public-keys.usecase.js';
+import { logoutOidcUser } from './logout-oidc-user.usecase.js';
 import { markAssessmentInstructionsInfoAsSeen } from './mark-assessment-instructions-info-as-seen.usecase.js';
 import { markUserHasSeenNewDashboardInfo } from './mark-user-has-seen-new-dashboard-info.usecase.js';
 import { reassignAuthenticationMethodToAnotherUser } from './reassign-authentication-method-to-another-user.usecase.js';
@@ -206,6 +207,7 @@ const usecasesWithoutInjectedDependencies = {
   getUserDetailsForAdmin,
   importUserLastLoggedAt,
   listLtiPublicKeys,
+  logoutOidcUser,
   markAssessmentInstructionsInfoAsSeen,
   markUserHasSeenNewDashboardInfo,
   reassignAuthenticationMethodToAnotherUser,

@@ -55,6 +55,7 @@ async function createMockedTestOidcProvider({
   applicationTld,
   connectionMethodCode,
   identityProvider = 'OIDC_EXAMPLE_NET',
+  postLogoutRedirectUri,
 }) {
   const openidClientMock = createOpenIdClientMock(openIdConfigurationResponse);
 
@@ -85,6 +86,7 @@ async function createMockedTestOidcProvider({
         redirectUri,
         slug: 'oidc-example-net',
         source: 'oidcexamplenet',
+        postLogoutRedirectUri,
       },
       { openidClient: openidClientMock },
     ),

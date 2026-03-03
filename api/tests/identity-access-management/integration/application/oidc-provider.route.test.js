@@ -13,7 +13,14 @@ import {
 } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
 import * as serverSideCookieSession from '../../../../src/shared/infrastructure/plugins/yar.js';
-import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import {
+  databaseBuilder,
+  expect,
+  generateAuthenticatedUserRequestHeaders,
+  HttpTestServer,
+  sinon,
+} from '../../../test-helper.js';
+import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 
@@ -23,6 +30,7 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
   beforeEach(async function () {
     httpTestServer = new HttpTestServer();
     httpTestServer.setupDeserialization();
+    httpTestServer.setupAuthentication();
     await httpTestServer.register(serverSideCookieSession);
     await httpTestServer.register(routesUnderTest);
   });
@@ -240,6 +248,36 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
         expect(response.result.errors[0].detail).to.equal(
           "La valeur de l'externalIdentifier de la méthode de connexion ne correspond pas à celui reçu par le partenaire.",
         );
+      });
+    });
+  });
+
+  describe('POST /api/oidc/logout', function () {
+    context('when the url UUID is invalid', function () {
+      it(`returns an error and does not revoke tokens`, async function () {
+        // given
+        const headers = generateAuthenticatedUserRequestHeaders({ userId: 1234, audience: 'https://orga.pix.org' });
+        //const auth = { credentials: { userId: 1234 }, strategy: {} };
+        const payload = {
+          identity_provider: 'OIDC_LOGOUT_EXAMPLE_NET',
+          logout_url_uuid: 'invalid',
+        };
+
+        const identityProvider = 'OIDC_LOGOUT_EXAMPLE_NET';
+        const openIdClientMock = await createMockedTestOidcProvider({
+          application: 'orga',
+          applicationTld: '.org',
+          identityProvider,
+        });
+
+        openIdClientMock.buildEndSessionUrl.throws(new Error('Client Error: Wrong token hint'));
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/oidc/logout', payload, null, headers);
+
+        // then
+        expect(response.statusCode).to.equal(422);
+        expect(response.result.errors[0].code).to.equal('OIDC_GENERIC_ERROR');
       });
     });
   });
