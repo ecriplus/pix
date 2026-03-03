@@ -152,7 +152,7 @@ class CampaignAssessmentExport {
     // WHY: add \uFEFF the UTF-8 BOM at the start of the text, see:
     // - https://en.wikipedia.org/wiki/Byte_order_mark
     // - https://stackoverflow.com/a/38192870
-    return '\uFEFF' + csvSerializer.serializeLine(_.compact(headers));
+    return '\uFEFF' + csvSerializer.serializeLine(headers.filter(Boolean));
   }
 
   #competenceColumnHeaders() {

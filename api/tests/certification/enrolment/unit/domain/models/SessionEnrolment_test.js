@@ -78,7 +78,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | SessionEnrolment'
           });
         return null;
       });
-      notScoSessions = _.compact(notScoSessions);
+      notScoSessions = notScoSessions.filter(Boolean);
 
       // when
       for (const notScoSession of notScoSessions) {

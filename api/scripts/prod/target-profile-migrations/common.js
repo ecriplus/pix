@@ -25,7 +25,7 @@ const autoMigrateTargetProfile = async function (id, trx) {
     if (!tubeExists) throw new Error(`Le sujet "${foundSkill.tubeId}" n'existe pas dans le référentiel.`);
     return foundSkill;
   });
-  const skillsGroupedByTubeId = _.groupBy(_.compact(skills), 'tubeId');
+  const skillsGroupedByTubeId = _.groupBy(skills.filter(Boolean), 'tubeId');
   const tubes = [];
   for (const [tubeId, skills] of Object.entries(skillsGroupedByTubeId)) {
     const skillWithHighestDifficulty = _.maxBy(skills, 'difficulty');

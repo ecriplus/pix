@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { CenterTypes } from '../../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
 import { types } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
@@ -47,7 +45,7 @@ describe('Unit | Certification | Enrolment | Domain | Models | Center', function
           });
         return null;
       });
-      notScoCenters = _.compact(notScoCenters);
+      notScoCenters = notScoCenters.filter(Boolean);
 
       // when
       for (const notScoCenter of notScoCenters) {

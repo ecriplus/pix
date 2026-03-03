@@ -146,7 +146,7 @@ const buildLearningContent = function (learningContent) {
     competences: allCompetences.flat(),
     tubes: allTubes.flat(),
     skills: allSkills.flat(),
-    challenges: _.compact(allChallenges.flat()),
+    challenges: allChallenges.flat().filter(Boolean),
     courses: _.compact(allCourses.flat()),
     tutorials: _.compact(allTutorials.flat()),
     thematics: allThematics.flat(),
