@@ -262,7 +262,7 @@ export default class ScoList extends Component {
             @totalAffectedStudents={{this.affectedStudents.length}}
             @onTriggerAction={{fn this.generateUsernamePasswordForStudents this.affectedStudents reset}}
             @showResetPasswordModal={{this.showResetPasswordModal}}
-            @onCloseResetPassworModal={{this.closeResetPasswordModal}}
+            @onCloseResetPasswordModal={{this.closeResetPasswordModal}}
             @showGeneratePasswordModal={{this.showGenerateUsernamePasswordModal}}
             @onCloseGeneratePasswordModal={{this.closeGenerateUsernamePasswordModal}}
           />
