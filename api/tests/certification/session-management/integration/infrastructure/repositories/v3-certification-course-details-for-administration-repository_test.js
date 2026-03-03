@@ -23,6 +23,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
+      const reachedMeshIndex = 1;
 
       databaseBuilder.factory.buildCertificationCourse({
         id: certificationCourseId,
@@ -51,6 +52,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
 
       const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
         pixScore,
+        reachedMeshIndex,
         certificationCourseId,
         assessmentId,
         assessmentResultStatus,
@@ -95,6 +97,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         assessmentResultStatus,
         abortReason,
         pixScore,
+        reachedMeshIndex,
         numberOfChallenges: null,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
       });

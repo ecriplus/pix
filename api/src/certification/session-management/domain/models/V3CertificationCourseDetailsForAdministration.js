@@ -10,6 +10,7 @@ export class V3CertificationCourseDetailsForAdministration {
     assessmentResultStatus,
     abortReason,
     pixScore,
+    reachedMeshIndex,
     numberOfChallenges,
   }) {
     this.certificationCourseId = certificationCourseId;
@@ -21,6 +22,7 @@ export class V3CertificationCourseDetailsForAdministration {
     this.assessmentResultStatus = assessmentResultStatus;
     this.abortReason = abortReason;
     this.pixScore = pixScore;
+    this.reachedMeshIndex = reachedMeshIndex;
     this.numberOfChallenges = numberOfChallenges;
     this.endedAt = endedAt;
   }

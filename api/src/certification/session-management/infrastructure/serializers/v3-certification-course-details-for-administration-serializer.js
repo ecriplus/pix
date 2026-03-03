@@ -14,6 +14,7 @@ const serialize = function ({ certificationDetails }) {
     'assessmentResultStatus',
     'abortReason',
     'pixScore',
+    'reachedMeshIndex',
     'numberOfChallenges',
   ];
 

@@ -29,6 +29,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
+      const reachedMeshIndex = 1;
 
       const certificationChallenge = new V3CertificationChallengeForAdministration({
         challengeId,
@@ -63,6 +64,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
             'assessment-result-status': assessmentResultStatus,
             'abort-reason': abortReason,
             'pix-score': pixScore,
+            'reached-mesh-index': reachedMeshIndex,
             'number-of-challenges': 20,
           },
         },
@@ -96,6 +98,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
         assessmentResultStatus,
         abortReason,
         pixScore,
+        reachedMeshIndex,
         numberOfChallenges,
         certificationChallengesForAdministration: [certificationChallenge],
       });

@@ -28,6 +28,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         assessmentResultStatus: 'rejected',
         juryId: 1,
         pixScore: 555,
+        reachedMeshIndex: 5,
         commentForCandidate: 'coucou',
         commentForOrganization: 'comment',
         commentByJury: 'ça va',

@@ -12,6 +12,7 @@ export class JuryCertificationSummary {
     lastName,
     status,
     pixScore,
+    reachedMeshIndex,
     createdAt,
     completedAt,
     abortReason,
@@ -26,6 +27,7 @@ export class JuryCertificationSummary {
     this.lastName = lastName;
     this.status = _getStatus({ status, isEndedByInvigilator });
     this.pixScore = pixScore;
+    this.reachedMeshIndex = reachedMeshIndex;
     this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
     this.certificationObtained = _getCertificationObtained({
       complementaryCertificationLabelObtained,

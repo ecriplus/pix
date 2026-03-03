@@ -20,6 +20,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         isFlaggedAborted: false,
         isPublished: false,
         pixScore: 751,
+        reachedMeshIndex: 6,
         status: 'started',
         complementaryCertificationLabelObtained: null,
         complementaryCertificationKeyObtained: null,
@@ -41,6 +42,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         isFlaggedAborted: false,
         isPublished: false,
         pixScore: 751,
+        reachedMeshIndex: 6,
         status: 'started',
       });
     });

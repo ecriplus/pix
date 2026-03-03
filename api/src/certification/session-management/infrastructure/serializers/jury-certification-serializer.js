@@ -32,6 +32,7 @@ const serialize = function (juryCertification, { translate }) {
       'isRejectedForFraud',
       'juryId',
       'pixScore',
+      'reachedMeshIndex',
       'competencesWithMark',
       'commentForCandidate',
       'commentForOrganization',

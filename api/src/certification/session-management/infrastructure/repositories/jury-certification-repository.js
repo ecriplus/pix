@@ -93,6 +93,7 @@ function _selectJuryCertifications(knexConn) {
       assessmentId: 'assessments.id',
       assessmentResultId: 'assessment-results.id',
       pixScore: 'assessment-results.pixScore',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       juryId: 'assessment-results.juryId',
       assessmentResultStatus: 'assessment-results.status',
       commentForCandidate: 'assessment-results.commentForCandidate',

@@ -86,6 +86,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           isPublished: manyAsrCertification.isPublished,
           lastName: 'AAA',
           pixScore: latestAssessmentResult.pixScore,
+          reachedMeshIndex: latestAssessmentResult.reachedMeshIndex,
           status: latestAssessmentResult.status,
           certificationIssueReports: [
             domainBuilder.buildCertificationIssueReport({
@@ -112,6 +113,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
           // then
           expect(juryCertificationSummaries[0].pixScore).to.equal(latestAssessmentResult.pixScore);
+          expect(juryCertificationSummaries[0].reachedMeshIndex).to.equal(latestAssessmentResult.reachedMeshIndex);
           expect(juryCertificationSummaries[0].status).to.equal(AssessmentResult.status.VALIDATED);
           expect(juryCertificationSummaries[0].firstName).to.equal(manyAsrCertification.firstName);
           expect(juryCertificationSummaries[0].lastName).to.equal(manyAsrCertification.lastName);
@@ -421,6 +423,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         // then
         expect(juryCertificationSummary.pixScore).to.equal(latestAssessmentResult.pixScore);
+        expect(juryCertificationSummary.reachedMeshIndex).to.equal(latestAssessmentResult.reachedMeshIndex);
         expect(juryCertificationSummary.status).to.equal(AssessmentResult.status.VALIDATED);
         expect(juryCertificationSummary.firstName).to.equal(manyAsrCertification.firstName);
         expect(juryCertificationSummary.lastName).to.equal(manyAsrCertification.lastName);
