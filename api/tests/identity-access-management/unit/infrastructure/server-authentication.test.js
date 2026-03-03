@@ -2,8 +2,8 @@ import { RevokedUserAccess } from '../../../../src/identity-access-management/do
 import { revokedUserAccessRepository } from '../../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import {
   schemes,
-  validateClientApplication,
-  validateUser,
+  validateClientApplicationAccessToken,
+  validateUserAccessToken,
 } from '../../../../src/identity-access-management/infrastructure/server-authentication.js';
 import { ForwardedOriginError } from '../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
@@ -88,7 +88,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
     });
   });
 
-  describe('#validateUser', function () {
+  describe('#validateUserAccessToken', function () {
     describe('when there is no user Id', function () {
       it('should throw an error', async function () {
         // given
@@ -109,7 +109,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
         const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
           validate: (decodedAccessToken, options) =>
-            validateUser(decodedAccessToken, {
+            validateUserAccessToken(decodedAccessToken, {
               ...options,
               revokedUserAccessRepository,
             }),
@@ -147,7 +147,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
           const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
-              validateUser(decodedAccessToken, {
+              validateUserAccessToken(decodedAccessToken, {
                 ...options,
                 revokedUserAccessRepository,
               }),
@@ -189,7 +189,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
           const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
-              validateUser(decodedAccessToken, {
+              validateUserAccessToken(decodedAccessToken, {
                 ...options,
                 revokedUserAccessRepository,
               }),
@@ -226,7 +226,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
           const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
-              validateUser(decodedAccessToken, {
+              validateUserAccessToken(decodedAccessToken, {
                 ...options,
                 revokedUserAccessRepository,
               }),
@@ -256,7 +256,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
           const { authenticate } = schemes.jwt.scheme(undefined, {
             key: 'dummy-secret',
             validate: (decodedAccessToken, options) =>
-              validateUser(decodedAccessToken, {
+              validateUserAccessToken(decodedAccessToken, {
                 ...options,
                 revokedUserAccessRepository,
               }),
@@ -270,7 +270,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
     });
   });
 
-  describe('#validateClientApplication', function () {
+  describe('#validateClientApplicationAccessToken', function () {
     describe('when there is a clientId', function () {
       it('should call h.authenticated with credentials', async function () {
         const request = { headers: { authorization: 'Bearer token' } };
@@ -291,7 +291,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
 
         const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
-          validate: validateClientApplication,
+          validate: validateClientApplicationAccessToken,
         });
         await authenticate(request, h);
 
@@ -313,7 +313,7 @@ describe('Unit | Identity Access Management | Infrastructure | serverAuthenticat
 
         const { authenticate } = schemes.jwt.scheme(undefined, {
           key: 'dummy-secret',
-          validate: validateClientApplication,
+          validate: validateClientApplicationAccessToken,
         });
         const response = await authenticate(request, h);
 

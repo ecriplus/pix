@@ -37,7 +37,7 @@ const strategies = {
     configuration: {
       key: config.authentication.secret,
       validate: (decodedAccessToken, options) =>
-        validateUser(decodedAccessToken, { ...options, revokedUserAccessRepository }),
+        validateUserAccessToken(decodedAccessToken, { ...options, revokedUserAccessRepository }),
     },
   },
 
@@ -47,7 +47,7 @@ const strategies = {
     configuration: {
       key: config.authentication.secret,
       validate: (decodedAccessToken, options) =>
-        validateUser(decodedAccessToken, { ...options, revokedUserAccessRepository }),
+        validateUserAccessToken(decodedAccessToken, { ...options, revokedUserAccessRepository }),
     },
   },
 
@@ -56,12 +56,12 @@ const strategies = {
     schemeName: schemes.jwt.name,
     configuration: {
       key: config.authentication.secret,
-      validate: validateClientApplication,
+      validate: validateClientApplicationAccessToken,
     },
   },
 };
 
-async function validateUser(decodedAccessToken, { request, revokedUserAccessRepository }) {
+async function validateUserAccessToken(decodedAccessToken, { request, revokedUserAccessRepository }) {
   const userId = decodedAccessToken.user_id;
   if (!userId) {
     return { isValid: false };
@@ -91,7 +91,7 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
 }
 
-async function validateClientApplication(decodedAccessToken) {
+async function validateClientApplicationAccessToken(decodedAccessToken) {
   if (!decodedAccessToken.client_id) {
     logger.warn({
       message: 'decodedAccessToken has no client_id',
@@ -164,4 +164,4 @@ function authenticateJWT({ key, validate }) {
   };
 }
 
-export { schemes, strategies, validateClientApplication, validateUser };
+export { schemes, strategies, validateClientApplicationAccessToken, validateUserAccessToken };
