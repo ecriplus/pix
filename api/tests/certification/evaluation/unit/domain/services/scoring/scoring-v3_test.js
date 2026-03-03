@@ -43,7 +43,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
     });
 
     context('when scoring a unique CORE scoped certification', function () {
-      it('should return a CoreScoring', function () {
+      it('should return an AssessmentResult with a pixScore', function () {
         // given
         const assessmentId = 1214;
         const certificationCourseId = 1234;
@@ -86,14 +86,15 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         // then
-        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
         expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
+        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreAssessmentResult.pixScore).to.equal(880);
         expect(score.doubleCertificationScoring).to.be.null;
       });
     });
 
     context('when scoring a double certification (CLEA)', function () {
-      it('should return a CoreScoring and a DoubleCertificationScoring', function () {
+      it('should return an AssessmentResult with a pixScore and a DoubleCertificationScoring', function () {
         const assessmentId = 1214;
         const certificationCourseId = 1234;
         const userId = 4567;
@@ -137,15 +138,16 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           scoringDegradationService,
         });
 
-        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
         expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
+        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
+        expect(score.coreAssessmentResult.pixScore).to.equal(55);
         expect(score.doubleCertificationScoring).to.be.instanceOf(DoubleCertificationScoring);
       });
     });
 
     context('when scoring a Pix + scoped certification', function () {
       context('when Pix + is EDU', function () {
-        it('should return undefined because no scoring occurred', function () {
+        it('should return an AssessmentResult without pixScore', function () {
           // given
           const assessmentId = 1214;
           const certificationCourseId = 1234;
@@ -188,6 +190,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           // then
           expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
           expect(score.coreAssessmentResult.competenceMarks).to.have.lengthOf(0);
+          expect(score.coreAssessmentResult.pixScore).to.be.null;
           expect(score.doubleCertificationScoring).to.be.null;
         });
       });
