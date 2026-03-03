@@ -287,4 +287,23 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       expect(result.items[2]).instanceOf(CombinedCourseItem);
     });
   });
+
+  describe('when there is no userId provided', function () {
+    it('should return combined course without any details', async function () {
+      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
+
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      const result = await usecases.getCombinedCourseByCode({ code, userId: null });
+      expect(result).to.be.instanceOf(CombinedCourse);
+      expect(result.id).to.equal(combinedCourseId);
+    });
+  });
 });

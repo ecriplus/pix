@@ -92,49 +92,73 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
   });
 
   describe('GET /api/combined-courses', function () {
-    it('should return the combined course requested by code', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+    context('when authentication is provided', function () {
+      it('should return the combined course requested by code', async function () {
+        // given
+        const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
 
-      const { userId } = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
+        const { userId } = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId,
+        });
+
+        const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+          code: 'SOMETHING',
+          name: 'Mon parcours',
+          organizationId,
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-courses/?filter[code]=${combinedCourse.code}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(Number(response.result.data.id)).to.equal(combinedCourse.id);
+        expect(response.result.data.attributes.name).to.equal('Mon parcours');
       });
+    });
 
-      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
-        code: 'SOMETHING',
-        name: 'Mon parcours',
-        organizationId,
+    // TODO: add a test to cover importFeature == true or isManagingStudents == true
+    context('when authentication is not provided', function () {
+      it('should return the combined course requested by code', async function () {
+        // given
+        const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+
+        const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+          code: 'SOMETHING',
+          name: 'Mon parcours',
+          organizationId,
+        });
+
+        await databaseBuilder.commit();
+
+        const options = {
+          method: 'GET',
+          url: `/api/combined-courses/?filter[code]=${combinedCourse.code}`,
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(Number(response.result.data.id)).to.equal(combinedCourse.id);
+        expect(response.result.data.attributes.name).to.equal('Mon parcours');
       });
-
-      await databaseBuilder.commit();
-
-      const options = {
-        method: 'GET',
-        url: `/api/combined-courses/?filter[code]=${combinedCourse.code}`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(Number(response.result.data.id)).to.equal(combinedCourse.id);
-      expect(response.result.data.attributes.name).to.equal('Mon parcours');
     });
 
     it('should return 404 when combined course with this code does not exist', async function () {
       // given
-      const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
-
-      const { userId } = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      });
-
       const options = {
         method: 'GET',
         url: `/api/combined-courses/?filter[code]=NOTHINGTT`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
       // when
@@ -142,6 +166,30 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
 
       // then
       expect(response.statusCode).to.equal(404);
+    });
+
+    it('should return 403 when combined course is deleted', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'SOMETHING',
+        name: 'Mon parcours',
+        organizationId,
+        deletedAt: new Date(),
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/combined-courses/?filter[code]=SOMETHING`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
     });
   });
 

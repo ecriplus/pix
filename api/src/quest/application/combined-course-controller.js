@@ -10,6 +10,7 @@ import * as combinedCourseParticipationDetailSerializer from '../infrastructure/
 import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 import * as combinedCourseStatisticsSerializer from '../infrastructure/serializers/combined-course-statistics-serializer.js';
+
 const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
   const { code } = request.query.filter;
 
