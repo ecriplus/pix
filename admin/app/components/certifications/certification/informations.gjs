@@ -115,13 +115,15 @@ import CertificationInformationState from './informations/state';
 
     <CertificationComments @onJuryCommentSave={{@onJuryCommentSave}} @certification={{@certification}} />
 
-    <PixBlock @variant="admin" class="certification-information-results">
-      <h2 class="certification-information__title">Résultats</h2>
+    {{#if @certification.competences.length}}
+      <PixBlock @variant="admin" class="certification-information-results">
+        <h2 class="certification-information__title">Résultats</h2>
 
-      <CertificationCompetenceList
-        @competences={{@certification.competences}}
-        @shouldDisplayPixScore={{@shouldDisplayPixScore}}
-      />
-    </PixBlock>
+        <CertificationCompetenceList
+          @competences={{@certification.competences}}
+          @shouldDisplayPixScore={{@shouldDisplayPixScore}}
+        />
+      </PixBlock>
+    {{/if}}
   </div>
 </template>
