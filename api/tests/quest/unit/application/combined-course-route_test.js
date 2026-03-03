@@ -2,7 +2,7 @@ import { combinedCourseController } from '../../../../src/quest/application/comb
 import * as combinedCourseRoute from '../../../../src/quest/application/combined-course-route.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Quest | Unit | Routes | combined-course-route', function () {
   describe('GET /api/combined-course', function () {
@@ -12,6 +12,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'getByCode').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
@@ -29,10 +30,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'getById').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('GET', '/api/combined-courses/123');
+      await httpTestServer.request(
+        'GET',
+        '/api/combined-courses/123',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkUserCanManageCombinedCourse).to.have.been.called;
@@ -46,10 +54,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'getStatistics').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('GET', '/api/combined-courses/123/statistics');
+      await httpTestServer.request(
+        'GET',
+        '/api/combined-courses/123/statistics',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkUserCanManageCombinedCourse).to.have.been.called;
@@ -63,6 +78,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'findParticipations').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
@@ -75,6 +91,9 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
           `&filters[statuses][]=${OrganizationLearnerParticipationStatuses.STARTED}` +
           '&filters[divisions][]=6eme' +
           '&filters[groups][]=A',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
       );
 
       // then
@@ -90,10 +109,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'getCombinedCourseParticipationById').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('GET', '/api/combined-courses/123/participations/456');
+      await httpTestServer.request(
+        'GET',
+        '/api/combined-courses/123/participations/456',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkUserCanManageCombinedCourse).to.have.been.called;
@@ -108,10 +134,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'start').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('PUT', '/api/combined-courses/ABC/start');
+      await httpTestServer.request(
+        'PUT',
+        '/api/combined-courses/ABC/start',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
@@ -125,10 +158,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'reassessStatus').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('PATCH', '/api/combined-courses/ABC/reassess-status');
+      await httpTestServer.request(
+        'PATCH',
+        '/api/combined-courses/ABC/reassess-status',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
@@ -142,10 +182,17 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       sinon.stub(combinedCourseController, 'getByOrganizationId').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
       await httpTestServer.register(combinedCourseRoute);
 
       // when
-      await httpTestServer.request('GET', '/api/organizations/123/combined-courses');
+      await httpTestServer.request(
+        'GET',
+        '/api/organizations/123/combined-courses',
+        null,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
 
       // then
       expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.called;
