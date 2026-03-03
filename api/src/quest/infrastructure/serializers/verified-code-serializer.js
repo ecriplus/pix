@@ -21,7 +21,7 @@ const serialize = function (verifiedCode) {
       nullIfMissing: true,
       relationshipLinks: {
         related: function (record, current, verifiedCode) {
-          return `/api/combined-course?filter[code]=${verifiedCode.id}`;
+          return `/api/combined-courses?filter[code]=${verifiedCode.id}`;
         },
       },
     },

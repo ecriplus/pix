@@ -26,7 +26,7 @@ describe('Quest | Unit | Infrastructure | Serializers | verified-code', function
           },
           'combined-course': {
             links: {
-              related: '/api/combined-course?filter[code]=ABCDEFGH',
+              related: '/api/combined-courses?filter[code]=ABCDEFGH',
             },
           },
         },

@@ -22,7 +22,7 @@ describe('Quest | Acceptance | Application | Verified Code Route ', function () 
     });
     it('should return verified code with campaign link for given campaign', async function () {
       // given
-      databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
+      databaseBuilder.factory.buildOrganization({ type: 'SCO' });
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
       await databaseBuilder.commit();
@@ -51,7 +51,7 @@ describe('Quest | Acceptance | Application | Verified Code Route ', function () 
             },
             'combined-course': {
               links: {
-                related: `/api/combined-course?filter[code]=${campaign.code}`,
+                related: `/api/combined-courses?filter[code]=${campaign.code}`,
               },
             },
           },
