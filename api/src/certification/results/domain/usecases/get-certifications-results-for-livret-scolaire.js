@@ -1,11 +1,11 @@
-import lodash from 'lodash';
-
 import { CertificationsResults } from '../read-models/livret-scolaire/CertificationsResults.js';
 import { Competence } from '../read-models/livret-scolaire/Competence.js';
 
-const { sortBy } = lodash;
+function sortBy(key) {
+  return (a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0);
+}
 
-const getCertificationsResultsForLivretScolaire = async function ({
+export async function getCertificationsResultsForLivretScolaire({
   uai,
   certificationLivretScolaireRepository,
   competenceTreeRepository,
@@ -22,9 +22,7 @@ const getCertificationsResultsForLivretScolaire = async function ({
       return new Competence({ area, id: competence.index, name: competence.name });
     }),
   );
-  const sortedCompetences = sortBy(competences, 'id');
+  const sortedCompetences = competences.sort(sortBy('id'));
 
   return new CertificationsResults({ certifications, competences: sortedCompetences });
-};
-
-export { getCertificationsResultsForLivretScolaire };
+}
