@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
-import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { AuditLoggingJob } from '../../../shared/domain/models/jobs/AuditLoggingJob.js';
 
