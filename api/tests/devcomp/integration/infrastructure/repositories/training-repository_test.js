@@ -599,6 +599,7 @@ describe('Integration | Repository | training-repository', function () {
         type: 'webinaire',
         duration: '6h',
         locale: 'fr',
+        locales: ['fr'],
         editorName: 'Un ministère',
         editorLogoUrl: 'https://mon-logo.svg',
       };
@@ -629,6 +630,7 @@ describe('Integration | Repository | training-repository', function () {
           minutes: 30,
         },
         locale: 'fr',
+        locales: ['fr'],
         editorName: 'Un ministère',
         editorLogoUrl: 'https://mon-logo.svg',
       };
