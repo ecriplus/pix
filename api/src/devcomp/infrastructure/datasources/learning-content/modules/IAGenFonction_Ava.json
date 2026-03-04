@@ -518,7 +518,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<code>La requête est&nbsp;:<br>{ \"tool\": \"</code>"
+                          "content": "<p><code>La requête est&nbsp;:<br>{ \"tool\":</code></p>"
                         },
                         {
                           "type": "select",
@@ -530,22 +530,22 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "weather"
+                              "content": "\"weather\","
                             },
                             {
                               "id": "2",
-                              "content": "Jolieville"
+                              "content": "\"Jolieville\","
                             },
                             {
                               "id": "3",
-                              "content": "ce week-end"
+                              "content": "\"ce week-end\","
                             }
                           ],
                           "solutions": ["1"]
                         },
                         {
                           "type": "text",
-                          "content": "<blockquote>\",<br>\"arguments\":<br>{ location\": \"</blockquote>"
+                          "content": "<br>\n<p><code>\"arguments\":<br>{ \"location\":</code></p>"
                         },
                         {
                           "type": "select",
@@ -557,22 +557,22 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "weather"
+                              "content": "\"weather\","
                             },
                             {
                               "id": "2",
-                              "content": "Jolieville"
+                              "content": "\"Jolieville\","
                             },
                             {
                               "id": "3",
-                              "content": "ce week-end"
+                              "content": "\"ce week-end\","
                             }
                           ],
                           "solutions": ["2"]
                         },
                         {
                           "type": "text",
-                          "content": "<p><code>\",<br> \"date\": \"</code></p>"
+                          "content": "<br><p><code>&nbsp; &nbsp;\"date\": \"</code></p>"
                         },
                         {
                           "type": "select",
@@ -584,22 +584,22 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "weather"
+                              "content": "\"weather\""
                             },
                             {
                               "id": "2",
-                              "content": "Jolieville"
+                              "content": "\"Jolieville\""
                             },
                             {
                               "id": "3",
-                              "content": "ce week-end"
+                              "content": "\"ce week-end\""
                             }
                           ],
                           "solutions": ["3"]
                         },
                         {
                           "type": "text",
-                          "content": "<blockquote><code>\"&nbsp; <br>} <br>}</code></blockquote>"
+                          "content": "<p><code>} }</code></p>"
                         }
                       ],
                       "feedbacks": {
@@ -693,7 +693,7 @@
               "element": {
                 "id": "18c439bf-63ae-4ddb-9fa7-82c2b4db17c3",
                 "type": "text",
-                "content": "<p>Voici la vision d’ensemble avec un schéma de la génération d’une réponse par&nbsp;un logiciel d’IA qui fait appel à un outil.</p>"
+                "content": "<p>En résumé, voici un schéma montrant comment un logiciel d’IA génère une réponse en faisant appel à un outil.</p>"
               }
             },
             {
@@ -706,6 +706,14 @@
                 "alternativeText": "à venir",
                 "legend": "Ceci est une version brouillon.",
                 "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b88d46da-1c84-442c-a481-b3b9998e58a2",
+                "type": "text",
+                "content": "<p><strong>⚠️Point de vigilance :&nbsp;</strong></p><p>Ce n'est pas parce qu'un outil fait appel à un outil qu'il devient infaillible : il peut toujours halluciner, se tromper d'outils ou d'informations à lui envoyer. Restez vigilant avec les résultats obtenus.</p>"
               }
             }
           ]
@@ -737,7 +745,7 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Oui, c’est un peu comme si nous, on avait dévalisé tout le magasin de bricolage !"
+                      "content": "Oui, c’est un peu comme si on avait dévalisé tout le magasin de bricolage !"
                     },
                     {
                       "userName": "Steven",
@@ -988,7 +996,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
@@ -1023,7 +1031,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
@@ -1058,7 +1066,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
@@ -1093,7 +1101,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
@@ -1128,7 +1136,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
@@ -1163,7 +1171,7 @@
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt pour savoir si un outil est utile."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
                         "id": "1",
