@@ -43,40 +43,12 @@ module('Integration | Component | CampaignParticipationOverview | Card | Archive
         assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.started-at', { date: '01/01/2020' })));
       });
 
-      test('should render explanatory text given to_share status', async function (assert) {
-        // given
-        const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
-          createdAt: '2020-01-01',
-          disabledAt: '2020-01-03',
-          status: 'TO_SHARE',
-          campaignTitle: 'My campaign',
-          campaignCode: 'CAMPAIGN',
-          organizationName: 'My organization',
-          masteryRate: null,
-        });
-        this.set('campaignParticipationOverview', campaignParticipationOverview);
-
-        // when
-        const screen = await render(
-          hbs`<CampaignParticipationOverview::Card::Disabled @model={{this.campaignParticipationOverview}} />`,
-        );
-
-        // then
-        assert.ok(screen.getByRole('heading', { name: 'My organization' }));
-        assert.ok(screen.getByText('My campaign'));
-        assert.ok(
-          screen.getByText('Parcours désactivé par votre organisation.Vous ne pouvez plus envoyer vos résultats.'),
-        );
-        assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.tag.disabled')));
-        assert.ok(screen.getByText(t('pages.campaign-participation-overview.card.started-at', { date: '01/01/2020' })));
-      });
-
       test('should not display go to details link', async function (assert) {
         // given
         const campaignParticipationOverview = store.createRecord('campaign-participation-overview', {
           createdAt: '2020-01-01',
           disabledAt: '2020-01-03',
-          status: 'TO_SHARE',
+          status: 'STARTED',
           campaignTitle: 'My campaign',
           campaignCode: 'CAMPAIGN',
           organizationName: 'My organization',

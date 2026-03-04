@@ -7,7 +7,7 @@ import { buildCampaignSkill } from './build-campaign-skill.js';
 import { buildOrganizationLearner } from './build-organization-learner.js';
 import { buildUser } from './build-user.js';
 
-const { STARTED, SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 const build = function ({
   organizationLearnerId,
@@ -21,15 +21,13 @@ const build = function ({
   deletedBy,
   id,
 } = {}) {
-  const status = assessmentState === Assessment.states.COMPLETED ? TO_SHARE : STARTED;
-
   const campaignParticipation = buildCampaignParticipation({
     organizationLearnerId,
     userId,
     campaignId,
     createdAt: createdAt,
     sharedAt: sharedAt,
-    status: sharedAt ? SHARED : status,
+    status: sharedAt ? SHARED : STARTED,
     deletedAt,
     deletedBy,
   });
@@ -61,28 +59,6 @@ const buildOnGoing = function ({ userId, createdAt, assessmentCreatedAt, campaig
     userId,
     campaignParticipationId: campaignParticipation.id,
     state: Assessment.states.STARTED,
-    createdAt: assessmentCreatedAt,
-  });
-
-  return campaignParticipation;
-};
-
-const buildToShare = function ({ userId, createdAt, assessmentCreatedAt, campaignSkills } = {}) {
-  const campaign = buildCampaign();
-  campaignSkills.forEach((skill) => buildCampaignSkill({ campaignId: campaign.id, skillId: skill }));
-
-  const campaignParticipation = buildCampaignParticipation({
-    userId,
-    createdAt: createdAt,
-    sharedAt: null,
-    status: TO_SHARE,
-    campaignId: campaign.id,
-  });
-
-  buildAssessment({
-    userId,
-    campaignParticipationId: campaignParticipation.id,
-    state: Assessment.states.COMPLETED,
     createdAt: assessmentCreatedAt,
   });
 
@@ -206,4 +182,4 @@ const buildDeletedAndAnonymised = function ({
   return { assessment, campaignParticipation };
 };
 
-export { build, buildArchived, buildDeleted, buildDeletedAndAnonymised, buildEnded, buildOnGoing, buildToShare };
+export { build, buildArchived, buildDeleted, buildDeletedAndAnonymised, buildEnded, buildOnGoing };

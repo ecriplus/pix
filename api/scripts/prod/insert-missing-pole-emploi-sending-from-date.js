@@ -14,8 +14,6 @@ import { campaignParticipationResultRepository } from '../../src/prescription/ca
 import * as poleEmploiSendingRepository from '../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
 import { CampaignParticipationStatuses } from '../../src/prescription/shared/domain/constants.js';
 import * as targetProfileRepository from '../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
-import { Assessment } from '../../src/shared/domain/models/Assessment.js';
-import * as assessmentRepository from '../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as organizationRepository from '../../src/shared/infrastructure/repositories/organization-repository.js';
 import { logger } from '../../src/shared/infrastructure/utils/logger.js';
 
@@ -51,15 +49,11 @@ async function insertMissingPoleEmploiSendingFromDate(startDate, endDate = new D
   const startedParticipations = await _getStartedParticipationsInsideIntervall(campaign.id, start, end);
   logger.info('Started Participation found :', startedParticipations.length);
 
-  const toShareParticipations = await _getToShareParticipationsInsideIntervall(campaign.id, start, end);
-  logger.info('To Share Participation found :', toShareParticipations.length);
-
-  const sharedParticipations = await _getSharedParticipationsInsideIntervall(campaign.id, start, end);
+  const sharedParticipations = await _getSharedParticipationsInsideInterval(campaign.id, start, end);
   logger.info('Shared Participation found :', sharedParticipations.length);
 
   const campaignParticipationIds = _aggregatePoleEmploiSendingsToCreateByCampaignParticipation(
     startedParticipations,
-    toShareParticipations,
     sharedParticipations,
   );
 
@@ -77,10 +71,6 @@ async function insertMissingPoleEmploiSendingFromDate(startDate, endDate = new D
     //handle-pole-emploi-participation-started
     if (poleEmploiSendingTypes.includes(PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START))
       await _buildStartSendingParticipation({ campaign, participation, user, targetProfile, responseCode });
-
-    //handle-pole-emploi-participation-finished
-    if (poleEmploiSendingTypes.includes(PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION))
-      await _buildCompletionSendingParticipation({ campaign, participation, user, targetProfile, responseCode });
 
     //send-shared-participation-results-to-pole-emploi
     if (poleEmploiSendingTypes.includes(PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_SHARING))
@@ -130,26 +120,6 @@ async function _buildStartSendingParticipation({ campaign, participation, user, 
   return poleEmploiSendingRepository.create({ poleEmploiSending });
 }
 
-async function _buildCompletionSendingParticipation({ campaign, participation, user, targetProfile, responseCode }) {
-  const assessment = await assessmentRepository.get(participation.lastAssessment.id);
-
-  const payload = PoleEmploiPayload.buildForParticipationFinished({
-    user,
-    campaign,
-    targetProfile,
-    participation,
-    assessment,
-  });
-
-  const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({
-    campaignParticipationId: participation.id,
-    payload: payload.toString(),
-    responseCode,
-  });
-
-  return poleEmploiSendingRepository.create({ poleEmploiSending });
-}
-
 async function _buildSharingSendingParticipation({
   campaign,
   participation,
@@ -184,11 +154,7 @@ async function _buildSharingSendingParticipation({
   return poleEmploiSendingRepository.create({ poleEmploiSending });
 }
 
-function _aggregatePoleEmploiSendingsToCreateByCampaignParticipation(
-  startedParticipations,
-  toShareParticipations,
-  sharedParticipations,
-) {
+function _aggregatePoleEmploiSendingsToCreateByCampaignParticipation(startedParticipations, sharedParticipations) {
   const campaignParticipationIds = {};
 
   startedParticipations.forEach((participation) => {
@@ -198,30 +164,11 @@ function _aggregatePoleEmploiSendingsToCreateByCampaignParticipation(
       PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
     );
   });
-
-  toShareParticipations.forEach((participation) => {
-    _insertPoleEmploiSending(
-      campaignParticipationIds,
-      participation,
-      PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-    );
-    _insertPoleEmploiSending(
-      campaignParticipationIds,
-      participation,
-      PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-    );
-  });
-
   sharedParticipations.forEach((participation) => {
     _insertPoleEmploiSending(
       campaignParticipationIds,
       participation,
       PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_START,
-    );
-    _insertPoleEmploiSending(
-      campaignParticipationIds,
-      participation,
-      PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
     );
     _insertPoleEmploiSending(
       campaignParticipationIds,
@@ -268,7 +215,7 @@ function _getStartedParticipationsInsideIntervall(campaignId, startDate, endDate
     .havingRaw('count("pole-emploi-sendings"."id") = 0');
 }
 
-function _getSharedParticipationsInsideIntervall(campaignId, startDate, endDate) {
+function _getSharedParticipationsInsideInterval(campaignId, startDate, endDate) {
   return knex
     .with('createdAtWithParticipationId', (queryBuilder) => {
       queryBuilder
@@ -290,51 +237,6 @@ function _getSharedParticipationsInsideIntervall(campaignId, startDate, endDate)
       'createdAtWithParticipationId.campaignParticipationId',
     )
     .groupBy('createdAtWithParticipationId.campaignParticipationId');
-}
-
-function _getToShareParticipationsInsideIntervall(campaignId, startDate, endDate) {
-  return knex
-    .with('createdAtWithParticipationId', (queryBuilder) => {
-      queryBuilder
-        .select({
-          campaignParticipationId: 'assessments.campaignParticipationId',
-          createdAt: 'answers.createdAt',
-        })
-        .from('answers')
-        .join('assessments', function () {
-          this.on('assessments.id', 'answers.assessmentId')
-            .andOnVal('assessments.state', Assessment.states.COMPLETED)
-            .andOnVal('assessments.isImproving', knex.raw('IS'), knex.raw('false'))
-            .andOnVal(
-              'assessments.campaignParticipationId',
-              knex.raw('IN'),
-              knex.select('id').from('campaign-participations').where({
-                campaignId,
-                status: CampaignParticipationStatuses.TO_SHARE,
-              }),
-            );
-        })
-        .whereBetween('answers.createdAt', [startDate, endDate]);
-    })
-    .with('oneDateByParticipation', (queryBuilder) => {
-      queryBuilder
-        .select('campaignParticipationId')
-        .max('createdAt')
-        .from('createdAtWithParticipationId')
-        .groupBy('campaignParticipationId');
-    })
-    .select({
-      campaignParticipationId: 'oneDateByParticipation.campaignParticipationId',
-      types: knex.raw('string_agg("pole-emploi-sendings"."type", \',\')'),
-    })
-    .from('oneDateByParticipation')
-    .leftJoin(
-      'pole-emploi-sendings',
-      'pole-emploi-sendings.campaignParticipationId',
-      'oneDateByParticipation.campaignParticipationId',
-    )
-    .groupBy('oneDateByParticipation.campaignParticipationId')
-    .havingRaw('count("pole-emploi-sendings"."id") <= 1');
 }
 
 export { insertMissingPoleEmploiSendingFromDate };

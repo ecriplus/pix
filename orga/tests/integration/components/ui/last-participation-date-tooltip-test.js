@@ -104,32 +104,6 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
     );
   });
 
-  test('it should display participation status with TO_SHARE status', async function (assert) {
-    // given
-    this.participant = { participationStatus: 'TO_SHARE' };
-
-    // when
-    const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @participationStatus={{this.participant.participationStatus}} />`,
-    );
-
-    // then
-    assert.ok(
-      screen.getByText(
-        t('pages.participants-list.latest-participation-information-tooltip.campaign-status'),
-        // WARNING : nous avons ici un problème de rupture de la séparation des responsabilité
-        // ce pourquoi nous sommes obligés de renseigner `normalizer: getDefaultNormalizer({ trim: false })z.
-        // TODO :gérer les espaces en fin de texte avec du css et non dans les clés de traduction
-        { exact: false, normalizer: getDefaultNormalizer({ trim: false }) },
-      ),
-    );
-    assert.ok(
-      screen.getByText(
-        t('pages.participants-list.latest-participation-information-tooltip.participation-STARTED-status'),
-      ),
-    );
-  });
-
   test('it should display participation status with STARTED status', async function (assert) {
     // given
     this.participant = { participationStatus: 'STARTED' };

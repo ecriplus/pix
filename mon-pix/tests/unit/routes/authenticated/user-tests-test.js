@@ -21,7 +21,7 @@ module('Unit | Route | User-Tests', function (hooks) {
       store.query
         .withArgs('campaign-participation-overview', {
           userId: '1',
-          'filter[states]': ['ONGOING', 'TO_SHARE', 'ENDED', 'DISABLED'],
+          'filter[states]': ['ONGOING', 'ENDED', 'DISABLED'],
         })
         .returns(campaignParticipationOverviews);
 

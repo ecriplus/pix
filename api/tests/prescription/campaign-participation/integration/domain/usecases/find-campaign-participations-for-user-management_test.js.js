@@ -48,7 +48,7 @@ describe('Integration | UseCase | find-campaign-participations-for-user-manageme
     databaseBuilder.factory.buildCampaignParticipation({
       userId,
       campaignId: campaignofTypeProfileCollection.id,
-      status: CampaignParticipationStatuses.TO_SHARE,
+      status: CampaignParticipationStatuses.STARTED,
     });
 
     // Exam Campaign

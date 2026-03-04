@@ -156,7 +156,7 @@ describe('Integration | Repository | Campaign Participation Statistics', functio
         });
         buildParticipationSharedMoreThan30DaysAgo({
           campaignId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
         buildParticipationSharedMoreThan30DaysAgo({
           campaignId,

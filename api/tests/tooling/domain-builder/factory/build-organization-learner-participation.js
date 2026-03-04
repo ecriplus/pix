@@ -7,7 +7,7 @@ const buildOrganizationLearnerParticipation = function ({
   campaignName = 'Ma campagne',
   createdAt = new Date('2020-01-01'),
   sharedAt = new Date('2020-02-01'),
-  status = CampaignParticipationStatuses.TO_SHARE,
+  status = CampaignParticipationStatuses.STARTED,
 } = {}) {
   return new OrganizationLearnerParticipation({
     id,

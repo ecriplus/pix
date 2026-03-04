@@ -249,7 +249,8 @@ export default async function initUser(databaseBuilder) {
     pixScore: 500,
     validatedSkillsCount: 5,
     isCertifiable: true,
-    status: 'TO_SHARE',
+    status: 'SHARED',
+    sharedAt: new Date('2020-01-02'),
   });
 
   // 3. Build wanted badges acquisitions

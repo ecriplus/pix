@@ -332,7 +332,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
         databaseBuilder.factory.buildCampaignParticipation({
           organizationLearnerId,
           userId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
           campaignId,
           createdAt: new Date('2022-03-17'),
         });
@@ -345,7 +345,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
         });
 
         //then
-        expect(participationStatus).to.equal(CampaignParticipationStatuses.TO_SHARE);
+        expect(participationStatus).to.equal(CampaignParticipationStatuses.STARTED);
       });
 
       it('should return the date of the last participation', async function () {
@@ -1831,7 +1831,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
         databaseBuilder.factory.buildCampaignParticipation({
           organizationLearnerId,
           userId,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
           campaignId,
           createdAt: new Date('2022-03-17'),
         });
@@ -1844,7 +1844,7 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
         });
 
         //then
-        expect(participationStatus).to.equal(CampaignParticipationStatuses.TO_SHARE);
+        expect(participationStatus).to.equal(CampaignParticipationStatuses.STARTED);
       });
 
       it('should return the date of the last participation', async function () {

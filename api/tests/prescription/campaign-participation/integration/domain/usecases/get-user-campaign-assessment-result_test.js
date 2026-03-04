@@ -45,8 +45,8 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         userId,
-        sharedAt: null,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        sharedAt: new Date(),
+        status: CampaignParticipationStatuses.SHARED,
       }).id;
       const assessmentDB = databaseBuilder.factory.buildAssessment({
         userId,
@@ -123,8 +123,8 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
         const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
           campaignId,
           userId,
-          sharedAt: null,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          sharedAt: new Date(),
+          status: CampaignParticipationStatuses.SHARED,
         }).id;
 
         databaseBuilder.factory.buildStageAcquisition({
@@ -197,8 +197,8 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
         campaignId,
         userId,
-        sharedAt: null,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        sharedAt: new Date(),
+        status: CampaignParticipationStatuses.SHARED,
       }).id;
       const assessmentDB = databaseBuilder.factory.buildAssessment({
         userId,

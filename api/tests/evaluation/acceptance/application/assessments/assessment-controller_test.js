@@ -460,7 +460,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
             organizationLearnerId,
             userId,
             campaignId,
-            status: 'TO_SHARE',
+            status: 'STARTED',
             sharedAt: null,
           }).id;
           const assessment = databaseBuilder.factory.buildAssessment({
@@ -964,7 +964,7 @@ async function _createAndCompleteCampaignParticipation({ user, campaign, badge, 
   const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
     campaignId: campaign.id,
     userId: user.id,
-    status: 'TO_SHARE',
+    status: 'STARTED',
     sharedAt: null,
   });
   const campaignAssessment = databaseBuilder.factory.buildAssessment({

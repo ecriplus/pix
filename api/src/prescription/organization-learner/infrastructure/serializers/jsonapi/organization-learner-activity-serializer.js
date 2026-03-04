@@ -28,7 +28,7 @@ const serialize = function (organizationLearnerActivity) {
     organizationLearnerStatistics: {
       ref: 'campaignType',
       includes: true,
-      attributes: ['total', 'shared', 'started', 'to_share'],
+      attributes: ['total', 'shared', 'started'],
     },
   }).serialize(organizationLearnerActivity);
 };

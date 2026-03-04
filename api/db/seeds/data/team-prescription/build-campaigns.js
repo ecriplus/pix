@@ -29,8 +29,7 @@ async function _createScoCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },
@@ -50,8 +49,7 @@ async function _createScoCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },
@@ -85,8 +83,7 @@ async function _createSupCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },
@@ -106,8 +103,7 @@ async function _createSupCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },
@@ -174,8 +170,7 @@ async function _createProCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },
@@ -198,8 +193,7 @@ async function _createProCampaigns(databaseBuilder) {
     configCampaign: {
       participantCount: 10,
       completionDistribution: {
-        started: 1,
-        to_share: 2,
+        started: 3,
         shared_one_validated_skill: 1,
         shared_perfect: 1,
       },

@@ -5,7 +5,7 @@ import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/domain/constants.js';
 import { CampaignManagement } from '../../domain/models/CampaignManagement.js';
 
-const { SHARED, TO_SHARE, STARTED } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 const get = async function (campaignId) {
   const knexConn = DomainTransaction.getConnection();
@@ -112,7 +112,6 @@ async function _countParticipationsByStatus(campaignId, campaignType) {
   const row = await knexConn('campaign-participations')
     .select([
       knexConn.raw(`sum(case when status = ? then 1 else 0 end) as shared`, SHARED),
-      knexConn.raw(`sum(case when status = ? then 1 else 0 end) as completed`, TO_SHARE),
       knexConn.raw(`sum(case when status = ? then 1 else 0 end) as started`, STARTED),
     ])
     .where({ campaignId, isImproved: false })
@@ -126,7 +125,7 @@ async function _countParticipationsByStatus(campaignId, campaignType) {
 function _mapToParticipationByStatus(row = {}, campaignType) {
   const participationByStatus = {
     shared: row.shared || 0,
-    completed: row.completed || 0,
+    completed: 0,
   };
   if (campaignType === CampaignTypes.ASSESSMENT) {
     participationByStatus.started = row.started || 0;
