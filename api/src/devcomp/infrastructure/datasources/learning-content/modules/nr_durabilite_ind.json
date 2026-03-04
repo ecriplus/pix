@@ -241,7 +241,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span>Les terres rares (europium, terbium, yttrium, etc)</span></p>"
+                    "content": "<p><span><br>Les terres rares (europium, terbium, yttrium, etc)</span></p>"
                   },
                   {
                     "type": "select",
@@ -270,7 +270,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>L’or, le cuivre et&nbsp;l’argent<br></p>"
+                    "content": "<p><br>L’or, le cuivre et&nbsp;l’argent<br></p>"
                   },
                   {
                     "type": "select",
