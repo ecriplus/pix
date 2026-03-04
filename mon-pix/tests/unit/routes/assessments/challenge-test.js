@@ -170,4 +170,13 @@ module('Unit | Route | Assessments | Challenge', function (hooks) {
       });
     });
   });
+
+  module('#afterModel', function () {
+    test('it should redirect user to campaign archived error page', async function (assert) {
+      const code = 'ABCPIX123';
+      const assessment = { isForCampaign: true, campaign: Promise.resolve({ code, isAccessible: false }) };
+      await route.afterModel({ assessment });
+      assert.ok(route.router.replaceWith.calledWith('campaigns.archived-error', code));
+    });
+  });
 });

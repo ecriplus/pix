@@ -49,7 +49,6 @@ module('Acceptance | Footer', function (hooks) {
 
     // when
     await resumeCampaignOfTypeAssessmentByCode(campaign.code, false);
-
     // then
     assert.dom('#footer').doesNotExist();
   });
