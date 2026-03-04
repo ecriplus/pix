@@ -8,20 +8,32 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | g
     // given
     const templateName = 'sixth-grade-attestation-template';
     const organizationId = databaseBuilder.factory.buildOrganization().id;
-    const firstLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
-    const secondLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme B' });
+    const firstLearner = databaseBuilder.factory.buildOrganizationLearner({
+      organizationId,
+      division: '6eme A',
+    });
+    const secondLearner = databaseBuilder.factory.buildOrganizationLearner({
+      organizationId,
+      division: '6eme B',
+    });
     const attestation = databaseBuilder.factory.buildAttestation({ templateName });
     mockAttestationStorage(attestation);
     const firstRewardId = databaseBuilder.factory.buildProfileReward({
       rewardId: attestation.id,
       userId: firstLearner.userId,
     });
-    databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id, userId: secondLearner.userId });
-    databaseBuilder.factory.buildOrganizationsProfileRewards({ organizationId, profileRewardId: firstRewardId.id });
+    databaseBuilder.factory.buildProfileReward({
+      rewardId: attestation.id,
+      userId: secondLearner.userId,
+    });
+    databaseBuilder.factory.buildOrganizationsProfileRewards({
+      organizationId,
+      profileRewardId: firstRewardId.id,
+    });
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getAttestationZipForDivisions({
+    const result = await usecases.getAttestationZipFromFilters({
       attestationKey: attestation.key,
       divisions: ['6eme A', '6eme B'],
       organizationId,

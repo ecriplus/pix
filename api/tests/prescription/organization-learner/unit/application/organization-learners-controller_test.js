@@ -4,7 +4,7 @@ import { NoProfileRewardsFoundError } from '../../../../../src/profile/domain/er
 import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Application | Organization-Learner | organization-learners-controller', function () {
-  describe('#getAttestationZipForDivisions', function () {
+  describe('#getAttestationZipFromFilters', function () {
     describe('success case', function () {
       it('should return buffer', async function () {
         // given
@@ -13,9 +13,9 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         const divisions = Symbol('divisions');
         const expectedBuffer = Symbol('buffer');
 
-        sinon.stub(usecases, 'getAttestationZipForDivisions');
+        sinon.stub(usecases, 'getAttestationZipFromFilters');
 
-        usecases.getAttestationZipForDivisions
+        usecases.getAttestationZipFromFilters
           .withArgs({ organizationId, attestationKey, divisions })
           .resolves(expectedBuffer);
 
@@ -30,7 +30,7 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         };
 
         // when
-        const response = await organizationLearnersController.getAttestationZipForDivisions(request, hFake);
+        const response = await organizationLearnersController.getAttestationZipFromFilters(request, hFake);
 
         // then
         expect(response.statusCode).to.equal(200);
@@ -44,9 +44,9 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         const attestationKey = Symbol('attestationKey');
         const divisions = Symbol('divisions');
 
-        sinon.stub(usecases, 'getAttestationZipForDivisions');
+        sinon.stub(usecases, 'getAttestationZipFromFilters');
 
-        usecases.getAttestationZipForDivisions
+        usecases.getAttestationZipFromFilters
           .withArgs({ organizationId, attestationKey, divisions })
           .rejects(new NoProfileRewardsFoundError());
 
@@ -61,7 +61,7 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         };
 
         // when
-        const response = await organizationLearnersController.getAttestationZipForDivisions(request, hFake);
+        const response = await organizationLearnersController.getAttestationZipFromFilters(request, hFake);
 
         // then
         expect(response.statusCode).to.equal(204);
@@ -73,9 +73,9 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         const attestationKey = Symbol('attestationKey');
         const divisions = Symbol('divisions');
         const expectedError = Symbol('error');
-        sinon.stub(usecases, 'getAttestationZipForDivisions');
+        sinon.stub(usecases, 'getAttestationZipFromFilters');
 
-        usecases.getAttestationZipForDivisions
+        usecases.getAttestationZipFromFilters
           .withArgs({ organizationId, attestationKey, divisions })
           .rejects(expectedError);
 
@@ -90,7 +90,7 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
         };
 
         // when
-        const error = await catchErr(organizationLearnersController.getAttestationZipForDivisions)(request, hFake);
+        const error = await catchErr(organizationLearnersController.getAttestationZipFromFilters)(request, hFake);
 
         // then
         expect(error).to.equal(expectedError);

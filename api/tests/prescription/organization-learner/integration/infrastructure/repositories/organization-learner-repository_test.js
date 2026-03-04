@@ -710,7 +710,27 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
       // then
       expect(learners).to.have.lengthOf(1);
-      expect(learners).to.deep.equal([new OrganizationLearner(learner1)]);
+      expect(learners).to.deep.equal([learner1.userId]);
+    });
+
+    it('should not return unreconcilied organization learners', async function () {
+      // given
+      databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        userId: null,
+        division: '6eme A',
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const learners = await organizationLearnerRepository.findUserIdsFromFilters({
+        organizationId,
+        divisions: ['6eme A'],
+      });
+
+      // then
+      expect(learners).to.have.lengthOf(0);
     });
 
     context('when there is no organization with organizationId', function () {

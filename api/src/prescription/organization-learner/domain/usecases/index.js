@@ -103,7 +103,7 @@ import { generateResetOrganizationLearnersPasswordCsvContent } from './generate-
 import { generateUsername } from './generate-username.js';
 import { generateUsernameWithTemporaryPassword } from './generate-username-with-temporary-password.js';
 import { getAnalysisByTubes } from './get-analysis-by-tubes.js';
-import { getAttestationZipForDivisions } from './get-attestation-zip-for-divisions.js';
+import { getAttestationZipFromFilters } from './get-attestation-zip-from-filters.js';
 import { getOrganizationLearner } from './get-organization-learner.js';
 import { getOrganizationLearnerActivity } from './get-organization-learner-activity.js';
 import { getOrganizationToJoin } from './get-organization-to-join.js';
@@ -126,7 +126,7 @@ const usecasesWithoutInjectedDependencies = {
   generateUsername,
   generateUsernameWithTemporaryPassword,
   getAnalysisByTubes,
-  getAttestationZipForDivisions,
+  getAttestationZipFromFilters,
   getOrganizationLearner,
   getOrganizationLearnerActivity,
   getOrganizationLearnerStatistics: getCampaignParticipationStatistics,

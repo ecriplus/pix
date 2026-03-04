@@ -3,13 +3,17 @@ import { usecases } from '../domain/usecases/index.js';
 import * as analysisByTubesSerializer from '../infrastructure/serializers/jsonapi/analysis-by-tubes-serializer.js';
 import * as attestationParticipantStatusSerializer from '../infrastructure/serializers/jsonapi/attestation-participants-status-serializer.js';
 
-const getAttestationZipForDivisions = async function (request, h) {
+const getAttestationZipFromFilters = async function (request, h) {
   const organizationId = request.params.organizationId;
   const attestationKey = request.params.attestationKey;
   const divisions = request.query.divisions;
 
   try {
-    const buffer = await usecases.getAttestationZipForDivisions({ attestationKey, organizationId, divisions });
+    const buffer = await usecases.getAttestationZipFromFilters({
+      attestationKey,
+      organizationId,
+      divisions,
+    });
     return h.response(buffer).header('Content-Type', 'application/zip');
   } catch (error) {
     if (error instanceof NoProfileRewardsFoundError) {
@@ -44,7 +48,7 @@ const getAttestationParticipantsStatus = async function (
 
 const organizationLearnersController = {
   getAnalysisByTubes,
-  getAttestationZipForDivisions,
+  getAttestationZipFromFilters,
   getAttestationParticipantsStatus,
 };
 
