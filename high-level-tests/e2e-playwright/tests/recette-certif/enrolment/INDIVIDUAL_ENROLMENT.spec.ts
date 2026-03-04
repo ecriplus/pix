@@ -93,7 +93,7 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
     await sessionManagementPage.goToEnrollCandidateForm();
     await sessionManagementPage.addCandidate({
       ...userDataCleaSubscription,
-      enrollFor: CERTIFICATIONS_DATA.CLEA.key,
+      enrollFor: CERTIFICATIONS_DATA.CLEA,
     });
     const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
     expect(enrolledCandidatesSoFar).toMatchObject([

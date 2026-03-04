@@ -126,7 +126,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       sessionNumber,
       accessCode,
       invigilatorCode,
-      certificationKey,
+      certificationKey = 'CORE',
       rightWrongAnswersSequence,
       pixAppPage,
     }: PassCertificationExamParams) => {
@@ -139,7 +139,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
           async () => {
             const homePage = new HomePage(pixAppPage);
             const certificationStartPage = await homePage.goToStartCertification();
-            if (certificationKey === CERTIFICATIONS_DATA.CLEA.key) {
+            if (certificationKey === CERTIFICATIONS_DATA.CLEA) {
               await expect(pixAppPage.getByText('Prêt pour le CléA numérique')).toBeVisible();
             }
             return certificationStartPage.fillSessionInfoAndNavigateIntro({
@@ -196,7 +196,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
             async () => {
               const homePage = new HomePage(examData.pixAppPage);
               const certificationStartPage = await homePage.goToStartCertification();
-              if (examData.certificationKey === CERTIFICATIONS_DATA.CLEA.key) {
+              if (examData.certificationKey === CERTIFICATIONS_DATA.CLEA) {
                 await expect(examData.pixAppPage.getByText('Prêt pour le CléA numérique')).toBeVisible();
               }
               const accessCodePage = await certificationStartPage.fillSessionInfoAndNavigateIntro({
@@ -263,7 +263,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidateAndPassExam: async ({ enrollCandidate, passCertificationExam }, use) => {
     const enrollCandidateAndPassExam = async ({
       testRef,
-      certificationKey,
+      certificationKey = 'CORE',
       certifiableUserData,
       rightWrongAnswersSequence,
       pixAppPage,

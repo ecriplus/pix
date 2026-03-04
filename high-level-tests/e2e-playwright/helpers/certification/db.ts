@@ -1,11 +1,18 @@
 import { knex } from '../db.ts';
 import { PIX_CERTIF_PRO_DATA } from '../db-data.ts';
-import { buildCleaData, buildCoreVersion, buildCpfData, buildPixCertifUser } from './builders/index.ts';
+import {
+  buildCleaData,
+  buildCoreVersion,
+  buildCpfData,
+  buildPixCertifUser,
+  buildPixPlusEduData,
+} from './builders/index.ts';
 
 export async function buildCertificationData() {
   await buildCpfData(knex);
   await buildCoreVersion(knex);
   await buildCleaData(knex);
+  await buildPixPlusEduData(knex);
   await buildPixCertifUser(knex, PIX_CERTIF_PRO_DATA);
 }
 

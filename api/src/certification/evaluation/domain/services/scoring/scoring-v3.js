@@ -19,6 +19,7 @@
 import CertificationCancelled from '../../../../../shared/domain/events/CertificationCancelled.js';
 import { status as CertificationStatus } from '../../../../../shared/domain/models/AssessmentResult.js';
 import { ABORT_REASONS } from '../../../../shared/domain/constants/abort-reasons.js';
+import { SCOPES } from '../../../../shared/domain/models/Scopes.js';
 import { DoubleCertificationScoring } from '../../models/DoubleCertificationScoring.js';
 import { ScoringV3Algorithm } from '../../models/ScoringV3Algorithm.js';
 import { createV3AssessmentResult } from './create-v3-assessment-result.js';
@@ -48,11 +49,11 @@ export function handleV3CertificationScoring({
   cleaScoringCriteria,
   scoringDegradationService,
 }) {
-  if (candidate.hasPixPlusSubscription) {
+  if (!candidate.isScorable) {
     return {
       coreAssessmentResult: null,
       doubleCertificationScoring: null,
-    }; // WIP : will be done in the future
+    };
   }
 
   const scoringV3Algorithm = new ScoringV3Algorithm({
@@ -64,6 +65,7 @@ export function handleV3CertificationScoring({
     downgradeCapacityFunction: scoringDegradationService.downgradeCapacity,
   });
   const maximumAssessmentLength = algorithm.getConfiguration().maximumAssessmentLength;
+
   const assessmentResult = scoreCertification({
     event,
     scoringV3Algorithm,
@@ -72,6 +74,7 @@ export function handleV3CertificationScoring({
     minimumAnswersRequiredToValidateACertification:
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
     versionId: v3CertificationScoring.versionId,
+    certificationScope: candidate.subscriptionScope,
   });
 
   let doubleCertificationScoring = null;
@@ -95,6 +98,8 @@ export function handleV3CertificationScoring({
  * @param {AssessmentSheet} params.assessmentSheet
  * @param {number} params.maximumAssessmentLength
  * @param {number} params.minimumAnswersRequiredToValidateACertification
+ * @param {number} params.versionId
+ * @param {SCOPES} params.certificationScope
  *
  * @returns {AssessmentResult}
  */
@@ -105,6 +110,7 @@ function scoreCertification({
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
   versionId,
+  certificationScope,
 }) {
   const downgradeCapacity = shouldDowngradeCapacity({
     maximumAssessmentLength,
@@ -114,7 +120,8 @@ function scoreCertification({
   });
 
   const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity: downgradeCapacity });
-  const pixScore = scoringV3Algorithm.computePixScoreFromCapacity({ capacity });
+  const pixScore =
+    certificationScope === SCOPES.CORE ? scoringV3Algorithm.computePixScoreFromCapacity({ capacity }) : null;
   const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
   const status = isCertificationRejected({

@@ -41,7 +41,7 @@ test(
     const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: Array(32).fill(false),
-      certificationKey: CERTIFICATIONS_DATA.CLEA.key,
+      certificationKey: CERTIFICATIONS_DATA.CLEA,
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });

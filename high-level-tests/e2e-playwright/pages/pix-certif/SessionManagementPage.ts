@@ -3,7 +3,7 @@ import type { Page } from '@playwright/test';
 import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { SessionFinalizationPage } from './SessionFinalizationPage.ts';
 
-export type CertificationKeys = (typeof CERTIFICATIONS_DATA)[keyof typeof CERTIFICATIONS_DATA]['key'] | 'CORE';
+export type CertificationKeys = (typeof CERTIFICATIONS_DATA)[keyof typeof CERTIFICATIONS_DATA] | 'CORE';
 
 export class SessionManagementPage {
   constructor(public readonly page: Page) {}
@@ -96,8 +96,11 @@ export class SessionManagementPage {
     await this.page.getByRole('option', { name: 'Gratuite' }).click();
     let choice;
     switch (enrollFor) {
-      case CERTIFICATIONS_DATA.CLEA.key:
+      case CERTIFICATIONS_DATA.CLEA:
         choice = 'Double Certification Pix-CléA Numérique';
+        break;
+      case CERTIFICATIONS_DATA.EDU_1ER_DEGRE:
+        choice = 'Pix+ Édu 1er degré';
         break;
       default:
         choice = 'Certification Pix';
