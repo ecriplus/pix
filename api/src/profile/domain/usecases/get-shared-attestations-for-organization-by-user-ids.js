@@ -18,8 +18,6 @@ export async function getSharedAttestationsForOrganizationByUserIds({
     throw new AttestationNotFoundError();
   }
 
-  const users = await userRepository.getByIds({ userIds });
-
   const sharedProfileRewards = await organizationProfileRewardRepository.getByOrganizationId({
     attestationKey,
     organizationId,
@@ -34,6 +32,8 @@ export async function getSharedAttestationsForOrganizationByUserIds({
   }
 
   const data = [];
+
+  const users = await userRepository.getByIds({ userIds: filteredProfileRewards.map(({ userId }) => userId) });
 
   filteredProfileRewards.forEach(({ userId, createdAt }) => {
     const user = users.find((user) => user.id === userId);

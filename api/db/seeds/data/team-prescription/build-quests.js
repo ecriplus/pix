@@ -77,11 +77,6 @@ const USERS = [
     email: 'attestation-success@example.net',
   },
   {
-    firstName: 'attestation-success-shared',
-    lastName: 'attestation',
-    email: 'attestation-success-shared@example.net',
-  },
-  {
     firstName: 'attestation-failed',
     lastName: 'attestation',
     email: 'attestation-failed@example.net',
@@ -144,12 +139,12 @@ const TARGET_PROFILE_CONFIG = [
   },
 ];
 
-const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
-
 const buildOrganization = (databaseBuilder) => databaseBuilder.factory.buildOrganization(ORGANIZATION);
 
-const buildOrganizationLearners = (databaseBuilder, organization, users) =>
-  users.map((user) =>
+const buildUsers = (databaseBuilder) => USERS.map((user) => databaseBuilder.factory.buildUser.withRawPassword(user));
+
+const buildOrganizationLearners = (databaseBuilder, organization, organizationLearnersData) =>
+  organizationLearnersData.map((user) =>
     databaseBuilder.factory.buildOrganizationLearner({
       ...user,
       organizationId: organization.id,
@@ -321,8 +316,7 @@ const buildCampaigns = async (databaseBuilder, organization) => {
 
 export const buildQuests = async (databaseBuilder) => {
   // Create USERS
-  const [successUser, successSharedUser, failedUser, pendingUser, blankUser, disabledUser] =
-    buildUsers(databaseBuilder);
+  const [successUser, failedUser, pendingUser, blankUser, disabledUser] = buildUsers(databaseBuilder);
 
   // Create organization
   const organization = buildOrganization(databaseBuilder);
@@ -354,12 +348,6 @@ export const buildQuests = async (databaseBuilder) => {
   // Create organizationLearners
   const organizationLearnersData = [
     { userId: successUser.id, division: '6emeA', firstName: 'attestation-success', lastName: 'attestation-success' },
-    {
-      userId: successSharedUser.id,
-      division: '6emeA',
-      firstName: 'attestation-success-shared',
-      lastName: 'attestation-success-shared',
-    },
     { userId: failedUser.id, division: '6emeA', firstName: 'attestation-failed', lastName: 'attestation-failed' },
     { userId: pendingUser.id, division: '6emeB', firstName: 'attestation-pending', lastName: 'attestation-pending' },
     { userId: disabledUser.id, division: '6emeB', firstName: 'Disabled', lastName: 'attestation', isDisabled: true },
@@ -368,7 +356,6 @@ export const buildQuests = async (databaseBuilder) => {
 
   const [
     successOrganizationLearner,
-    successSharedOrganizationLearner,
     failedOrganizationLearner,
     pendingOrganizationLearner,
     disabledOrganizationLearner,
@@ -406,6 +393,8 @@ export const buildQuests = async (databaseBuilder) => {
       organizationLearner: successSharedOrganizationLearner,
       sharedAt: new Date('2024-01-13'),
       status: CampaignParticipationStatuses.SHARED,
+      sharedAt: null,
+      status: CampaignParticipationStatuses.SHARED,
     },
     {
       user: failedUser,
@@ -418,8 +407,7 @@ export const buildQuests = async (databaseBuilder) => {
       user: pendingUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: pendingOrganizationLearner,
-      sharedAt: new Date('2024-01-15'),
-      status: CampaignParticipationStatuses.SHARED,
+      status: CampaignParticipationStatuses.STARTED,
     },
     {
       user: disabledUser,
@@ -440,15 +428,9 @@ export const buildQuests = async (databaseBuilder) => {
   await buildSixthGradeQuests(databaseBuilder, rewardId, campaigns);
   const parenthoodAttestationId = await buildParenthoodQuest(databaseBuilder);
 
-  // Create reward for success user
-  databaseBuilder.factory.buildProfileReward({
-    userId: successUser.id,
-    rewardType: REWARD_TYPES.ATTESTATION,
-    rewardId,
-  });
-
+  // Create reward for success users
   const { id: sharedProfileRewardId } = databaseBuilder.factory.buildProfileReward({
-    userId: successSharedUser.id,
+    userId: successUser.id,
     rewardType: REWARD_TYPES.ATTESTATION,
     rewardId,
   });
