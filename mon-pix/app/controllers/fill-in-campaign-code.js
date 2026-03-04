@@ -17,6 +17,7 @@ export default class FillInCampaignCodeController extends Controller {
   @tracked name = null;
   @tracked organizationName = null;
   @tracked code = null;
+  @tracked verifiedCode = null;
 
   get isUserAuthenticatedByPix() {
     return this.session.isAuthenticated;
@@ -66,7 +67,7 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   get routeToTransitionAfterGarModal() {
-    return this.verifiedCode?.type === 'campaign' ? 'campaigns.entry-point' : 'organizations.access';
+    return this.verifiedCode?.type === 'campaign' ? 'campaigns.entry-point' : 'organizations.join.sco-mediacentre';
   }
 
   onStartCampaignError(error) {

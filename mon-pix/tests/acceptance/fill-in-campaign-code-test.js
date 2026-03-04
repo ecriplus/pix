@@ -98,88 +98,167 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
   });
 
   module('when user is not connected to his Mediacentre', function () {
-    module('and starts a campaign with GAR as identity provider', function () {
-      test('should not redirect the user and display a modal', async function (assert) {
-        // given
-        const campaign = server.create('campaign', {
-          organizationId: 1,
-          targetProfileName: 'My Profile',
-          organizationName: 'AWS',
-        });
-        server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
-
-        // when
-        const screen = await visit(`/campagnes`);
-        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
-        await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-
-        // then
-        assert.strictEqual(currentURL(), '/campagnes');
-        assert.ok(screen.getByText(t('pages.fill-in-campaign-code.mediacentre-start-campaign-modal.title')));
-      });
-
-      module('and wants to continue', function () {
-        test('should be redirected to the campaign entry page', async function (assert) {
+    module('when code is linked to a campaign', function () {
+      module('and starts a campaign with GAR as identity provider', function () {
+        test('should not redirect the user and display a modal', async function (assert) {
           // given
           const campaign = server.create('campaign', {
             organizationId: 1,
-            identityProvider: 'GAR',
             targetProfileName: 'My Profile',
             organizationName: 'AWS',
           });
-
           server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
 
           // when
           const screen = await visit(`/campagnes`);
           await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
           await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-          await waitForDialog();
-          await click(screen.getByRole('link', { name: 'Continuer' }));
+
+          // then
+          assert.strictEqual(currentURL(), '/campagnes');
+          assert.ok(
+            await screen.findByRole('dialog', {
+              title: t('pages.fill-in-campaign-code.mediacentre-start-campaign-modal.title'),
+            }),
+          );
+        });
+
+        module('and wants to continue', function () {
+          test('should be redirected to the campaign entry page', async function (assert) {
+            // given
+            const campaign = server.create('campaign', {
+              organizationId: 1,
+              targetProfileName: 'My Profile',
+              organizationName: 'AWS',
+            });
+
+            server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
+
+            // when
+            const screen = await visit(`/campagnes`);
+            await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
+            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await waitForDialog();
+            await click(screen.getByRole('link', { name: 'Continuer' }));
+
+            // then
+            assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
+          });
+        });
+
+        module('and wants to connect to his Mediacentre', function () {
+          test('should stay on the same page after closing the modal', async function (assert) {
+            // given
+            const campaign = server.create('campaign', {
+              organizationId: 1,
+              targetProfileName: 'My Profile',
+              organizationName: 'AWS',
+            });
+
+            server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
+
+            // when
+            const screen = await visit(`/campagnes`);
+            await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
+            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await waitForDialog();
+            await click(screen.getByRole('button', { name: 'Quitter' }));
+
+            // then
+            assert.strictEqual(currentURL(), '/campagnes');
+          });
+        });
+      });
+
+      module('and starts a campaign without GAR as identity provider', function () {
+        test('should redirect the user to the campaign entry page', async function (assert) {
+          // given
+          const campaign = server.create('campaign');
+          server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: null });
+
+          // when
+          const screen = await visit(`/campagnes`);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
+          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
         });
       });
+    });
 
-      module('and wants to connect to his Mediacentre', function () {
-        test('should stay on the same page after closing the modal', async function (assert) {
+    module('when code is linked to a combined course', function () {
+      module('and starts a combined course with GAR as identity provider', function () {
+        test('should not redirect the user and display a modal', async function (assert) {
           // given
-          const campaign = server.create('campaign', {
-            organizationId: 1,
-            identityProvider: 'GAR',
-            targetProfileName: 'My Profile',
-            organizationName: 'AWS',
-          });
+          const combinedCourse = server.create('combined-course', { code: 'SOMETHING' });
+          server.create('organization-to-join', { id: 1, code: combinedCourse.code, identityProvider: 'GAR' });
 
-          server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: 'GAR' });
+          // when
+          const screen = await visit(`/campagnes`);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), combinedCourse.code);
+          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+
+          // then
+          assert.strictEqual(currentURL(), '/campagnes');
+          assert.ok(
+            await screen.findByRole('dialog', {
+              title: t('pages.fill-in-campaign-code.mediacentre-start-campaign-modal.title'),
+            }),
+          );
+        });
+
+        module('and wants to continue', function () {
+          test('should be redirected to the combined course entry page', async function (assert) {
+            // given
+            const combinedCourse = server.create('combined-course', { code: 'SOMETHING' });
+            server.create('organization-to-join', { id: 1, code: combinedCourse.code, identityProvider: 'GAR' });
+
+            // when
+            const screen = await visit(`/campagnes`);
+            await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), combinedCourse.code);
+            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await waitForDialog();
+            await click(screen.getByRole('link', { name: 'Continuer' }));
+
+            // then
+            assert.strictEqual(currentURL(), '/organisations/SOMETHING/rejoindre/mediacentre');
+          });
+        });
+
+        module('and wants to connect to his Mediacentre', function () {
+          test('should stay on the same page after closing the modal', async function (assert) {
+            // given
+            const combinedCourse = server.create('combined-course', { code: 'SOMETHING' });
+            server.create('organization-to-join', { id: 1, code: combinedCourse.code, identityProvider: 'GAR' });
+
+            // when
+            const screen = await visit(`/campagnes`);
+            await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), combinedCourse.code);
+            await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+            await waitForDialog();
+            await click(screen.getByRole('button', { name: 'Quitter' }));
+
+            // then
+            assert.strictEqual(currentURL(), '/campagnes');
+          });
+        });
+      });
+
+      module('and starts a campaign without GAR as identity provider', function () {
+        test('should redirect the user to the campaign entry page', async function (assert) {
+          // given
+          const campaign = server.create('campaign');
+          server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: null });
 
           // when
           const screen = await visit(`/campagnes`);
           await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
           await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-          await waitForDialog();
-          await click(screen.getByRole('button', { name: 'Quitter' }));
 
           // then
-          assert.strictEqual(currentURL(), '/campagnes');
+          assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
         });
-      });
-    });
-
-    module('and starts a campaign without GAR as identity provider', function () {
-      test('should redirect the user to the campaign entry page', async function (assert) {
-        // given
-        const campaign = server.create('campaign');
-        server.create('organization-to-join', { id: 1, code: campaign.code, identityProvider: null });
-
-        // when
-        const screen = await visit(`/campagnes`);
-        await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), campaign.code);
-        await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-
-        // then
-        assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
       });
     });
   });
