@@ -16,6 +16,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
   const userId = 1;
   let assessment;
   let challenge;
+  let campaign;
   let solution;
   let validator;
   let correctAnswerValue;
@@ -45,6 +46,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
     answerRepository = { save: sinon.stub() };
     challengeRepository = { get: sinon.stub() };
     scorecardService = { computeLevelUpInformation: sinon.stub() };
+    campaign = domainBuilder.buildCampaign({ id: campaignId });
     campaignRepository = {
       findSkillsByCampaignParticipationId: sinon.stub(),
       get: sinon.stub(),
@@ -74,11 +76,12 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       method: Assessment.methods.SMART_RANDOM,
       campaignParticipationId,
       answers: [],
+      campaign,
     });
     campaignRepository.getCampaignIdByCampaignParticipationId
       .withArgs(assessment.campaignParticipationId)
       .resolves(campaignId);
-    campaignRepository.get.withArgs(campaignId).resolves(domainBuilder.buildCampaign({ id: campaignId }));
+    campaignRepository.get.withArgs(campaignId).resolves(campaign);
     answer = domainBuilder.buildAnswer({ assessmentId: assessment.id, value: correctAnswerValue, challengeId });
     answer.id = undefined;
     answer.result = undefined;
@@ -184,6 +187,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
         type: Assessment.types.CAMPAIGN,
         answers: [],
+        campaign,
       });
 
       // when
@@ -219,9 +223,10 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
       assessment = domainBuilder.buildAssessment({
         userId,
         lastQuestionDate: new Date('2021-03-11T11:00:00Z'),
-        type: Assessment.types.COMPETENCE_EVALUATION,
+        type: Assessment.types.CAMPAIGN,
         campaignParticipationId,
         answers: [],
+        campaign,
       });
       const answerSaved = domainBuilder.buildAnswer(emptyAnswer);
       answerRepository.save.resolves(answerSaved);
@@ -361,6 +366,7 @@ describe('Unit | Evaluation | Domain | Use Cases | save-and-correct-answer-for-c
         method: Assessment.methods.SMART_RANDOM,
         campaignParticipationId,
         answers: [],
+        campaign,
       });
       answerSaved = domainBuilder.buildAnswer(answer);
       answerSaved.timeSpent = 5;
