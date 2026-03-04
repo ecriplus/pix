@@ -5,10 +5,10 @@ import { securityPreHandlers } from '../../../../src/shared/application/security
 import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Quest | Unit | Routes | combined-course-route', function () {
-  describe('GET /api/combined-course', function () {
+  describe('GET /api/combined-courses', function () {
     it('should call prehandler', async function () {
       // given
-      sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
+      sinon.stub(securityPreHandlers, 'checkCombinedCourseIsNotDeleted').returns(() => true);
       sinon.stub(combinedCourseController, 'getByCode').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
@@ -19,7 +19,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
       await httpTestServer.request('GET', '/api/combined-courses?filter[code]=ABC');
 
       // then
-      expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
+      expect(securityPreHandlers.checkCombinedCourseIsNotDeleted).to.have.been.called;
     });
   });
 

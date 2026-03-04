@@ -41,8 +41,8 @@ import CampaignCodeForm from 'mon-pix/components/campaign-code-form';
       <div class="mediacentre-start-campaign-modal__action-buttons">
         <LinkTo
           class="mediacentre-start-campaign-modal-action-buttons__continue-action"
-          @route="campaigns.entry-point"
-          @model={{@controller.code}}
+          @route={{@controller.routeToTransitionAfterGarModal}}
+          @model={{@controller.verifiedCode.id}}
         >
           {{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.actions.continue"}}
         </LinkTo>
