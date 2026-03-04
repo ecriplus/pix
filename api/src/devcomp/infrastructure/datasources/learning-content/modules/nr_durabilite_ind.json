@@ -212,7 +212,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p><span>Le lithium</span></p>"
+                    "content": "<p><span>Le lithium :</span></p>"
                   },
                   {
                     "type": "select",
@@ -241,7 +241,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><span><br>Les terres rares (europium, terbium, yttrium, etc)</span></p>"
+                    "content": "<br><p><span>Les terres rares (europium, terbium, yttrium, etc) : </span></p>"
                   },
                   {
                     "type": "select",
@@ -270,7 +270,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br>L’or, le cuivre et&nbsp;l’argent<br></p>"
+                    "content": "<br><p>L’or, le cuivre et&nbsp;l’argent :</p>"
                   },
                   {
                     "type": "select",
