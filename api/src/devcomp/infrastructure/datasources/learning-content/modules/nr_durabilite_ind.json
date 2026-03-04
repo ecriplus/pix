@@ -217,7 +217,7 @@
                   {
                     "type": "select",
                     "input": "choice1",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour le lithium",
                     "tolerances": [],
@@ -246,7 +246,7 @@
                   {
                     "type": "select",
                     "input": "choice2",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour les terres rares",
                     "tolerances": [],
@@ -275,7 +275,7 @@
                   {
                     "type": "select",
                     "input": "choice3",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "Sélectionnez une réponse.",
                     "ariaLabel": "Sélectionner un usage pour l’or, le cuivre et l’argent",
                     "tolerances": [],
@@ -370,7 +370,7 @@
                     {
                       "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
                       "type": "text",
-                      "content": "<p>Observez l’évolution de cette mine de terres rares de Mongolie intérieure au fil des années. Répondez ensuite à la question ci-dessous.</p>"
+                      "content": "<p>Observez l’évolution de cette mine de Mongolie intérieure au fil des années. Répondez ensuite à la question ci-dessous.</p>"
                     },
                     {
                       "id": "6d6c87da-b248-4abc-936a-62938426826a",
