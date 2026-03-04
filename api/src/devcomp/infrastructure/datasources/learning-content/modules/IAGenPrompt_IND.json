@@ -296,7 +296,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement pour travailler les <strong>manchettes</strong>,&nbsp;sous la forme d’un <strong>tableau</strong>.<br></p>"
+                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p>\n<p>Pour cela, il prépare un document d’entraînement pour travailler les <strong>manchettes</strong>,&nbsp;sous la forme d’un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -304,7 +304,7 @@
               "element": {
                 "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
-                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette.</td>        </tr>    </tbody></table>"
+                "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\" class=\"width-15\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchette</td>\n            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>\n        </tr>\n        <tr>\n\n            <th>Avancé</th>\n            <td>Réception de service réel</td>\n            <td>Un joueur reçoit des services puissants en manchette.</td>\n        </tr>\n         <tr>\n\n            <th>Expert</th>\n            <td>...</td>\n            <td>...</td>\n        </tr>\n\n    </tbody>\n</table>"
               }
             }
           ]
@@ -319,7 +319,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br><p>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à obtenir un tableau complété avec des exercices pour les joueurs de tous niveaux.</p><br>"
+                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br>\n<p>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à obtenir un <strong>tableau complet</strong> avec des exercices pour les joueurs de tous niveaux.</p>"
               }
             },
             {
