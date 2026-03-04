@@ -296,7 +296,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement sous la forme d’un <strong>tableau</strong>.<br></p>"
+                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement pour travailler les <strong>manchettes</strong>,&nbsp;sous la forme d’un <strong>tableau</strong>.<br></p>"
               }
             },
             {
@@ -319,7 +319,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus d'idée… <br>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à compléter son tableau.<br>"
+                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br><p>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à obtenir un tableau complété avec des exercices pour les joueurs de tous niveaux.</p><br>"
               }
             },
             {
@@ -350,7 +350,7 @@
                 "id": "52a47dfc-5c8d-49b8-a08e-c771c3a1c8d7",
                 "type": "expand",
                 "title": "🗝️ Indice 1",
-                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
+                "content": "<p>Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?</p>\n<p>Vous pouvez le copier-coller dans votre prompt !</p>"
               }
             },
             {
@@ -576,7 +576,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details></p><p><br></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p><br></p>"
               }
             },
             {
