@@ -43,13 +43,13 @@
                       "userName": "Yasmine",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, c’est génial ! 🤩"
+                      "content": "J’ai demandé à l’IA de l’aide pour les travaux : estimer le nombre de litres de peinture dont on aura besoin pour le salon, faire des simulations du rendu final, demander les dernières tendances en décoration... C’est génial ! 🤩"
                     },
                     {
                       "userName": "Steven",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mais tu es sûre des réponses ? Je croyais que l’IA, c’était que pour le texte ! Et que pour les calculs, c’était pas top…"
+                      "content": "Mais tu es sûre des réponses ? Je croyais que l’IA, c’était que pour le texte , et encore sans accès aux infos récentes ! Et que pour les calculs, c’était pas top… "
                     },
                     {
                       "userName": "Yasmine",
@@ -431,6 +431,29 @@
           "title": "Comment le programme fait appel à l’outil ? - découverte",
           "components": [
             {
+              "type": "element",
+              "element": {
+                "id": "ac63719a-64dc-425d-b8cd-e3a7441830b0",
+                "type": "custom",
+                "title": "Le prompt de Yasmine",
+                "instruction": "<p>Yasmine a fait une demande à un logiciel d’IA conversationnelle.</p>",
+                "functionalInstruction": "",
+                "tagName": "llm-messages",
+                "props": {
+                  "messages": [
+                    {
+                      "direction": "inbound",
+                      "content": "Comment puis-je vous aider ?"
+                    },
+                    {
+                      "direction": "outbound",
+                      "content": "J’habite à Jolieville et je veux refaire ma terrasse. Est-ce que le temps permettra de le faire ce week-end ?"
+                    }
+                  ]
+                }
+              }
+            },
+            {
               "type": "stepper",
               "steps": [
                 {
@@ -438,7 +461,7 @@
                     {
                       "id": "ec963e6e-ecdf-437a-a973-2d9f8976edb1",
                       "type": "text",
-                      "content": "Yasmine a fait une demande à un logiciel d’IA conversationnelle.<br><br>[Ce sera une variante du POI -&gt; à imaginer sans la consigne et le titre]"
+                      "content": "<p><em>[Ce sera une variante du POI -&gt; à imaginer sans la consigne et le titre]</em></p>"
                     },
                     {
                       "id": "57d18016-3c27-4b72-92d5-54a8ebc9679e",
@@ -509,7 +532,7 @@
                     {
                       "id": "021d4850-4231-4811-8a2c-d0c3a14265ff",
                       "type": "text",
-                      "content": "<p>Le logiciel envoie une requête à l’outil identifié.</p><p><em>[à transformer pour réparer la mise en forme et mettre au format \"code\"]</em></p>"
+                      "content": "<p>Le logiciel fait appel à l'outil identifié, sous la forme d'une requête.</p>"
                     },
                     {
                       "id": "36f8d720-4607-4bbd-8b36-161f782e8f70",
@@ -518,7 +541,11 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<p><code>La requête est&nbsp;:<br>{ \"tool\":</code></p>"
+                          "content": "La requête est&nbsp;:"
+                        },
+                        {
+                          "type": "text",
+                          "content": "<br><p><code><br>{ \"tool\":</code></p>"
                         },
                         {
                           "type": "select",
@@ -643,14 +670,14 @@
                     {
                       "id": "894da3c4-c063-4b77-8930-4d3bdd375d7b",
                       "type": "qcu-discovery",
-                      "instruction": "Laquelle de ces réponses Yasmine a-t-elle le plus de chances de recevoir ?",
+                      "instruction": "<p>Laquelle de ces réponses Yasmine a-t-elle le plus de chance de recevoir à sa demande concernant les travaux de sa terrasse ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "condition&nbsp;: ensoleillé ; temperature&nbsp;: 30",
                           "feedback": {
-                            "diagnosis": "Eh non ! <br>Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans son contexte de prompt pour générer sa réponse."
+                            "diagnosis": "<p>Eh non !</p>\n<p>Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans le contexte de son prompt pour générer sa réponse.</p>"
                           }
                         },
                         {
@@ -818,7 +845,7 @@
                 "isCompletionRequired": false,
                 "title": "ChatPix pour tester",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmlfcrotr00004z01vw5daup4",
-                "instruction": "<p>Testez ce logiciel d’IA générative pour déduire les outils auxquels il a accès puis répondez à la question.</p>",
+                "instruction": "<p>Testez ce logiciel d’IA générative pour déduire les outils auxquels il a accès puis répondez aux questions.</p>",
                 "solution": "",
                 "height": 550
               }
@@ -1251,6 +1278,58 @@
                 "type": "expand",
                 "title": "🙈 Solution",
                 "content": "<p>Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l’<strong>agenda</strong>, votre réponse devrait être validée.</p><br><br><p> Voici quelques exemples&nbsp;:&nbsp;</p><br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire à Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires auxquels des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2bdd21b4-0345-4396-85fe-063d31f129e2",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "6f41fa20-374e-4bb8-9f82-6c6b1e00fd8b",
+          "type": "challenge",
+          "title": "Et vous, vous utilisiez déjà les outils ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "65220197-b2bf-4f2d-ad5d-7d6ef8d11070",
+                "type": "qcu-declarative",
+                "instruction": "<p>Vous en savez maintenant davantage sur les appel d'outils.</p><p>Que pouvez-vous dire de leurs usages&nbsp; dans votre utilisation de l'IA ?<br></p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>J'ai déjà fait appel à des outils en utilisant un prompt.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>C'est probable, ils sont très utilisés !<br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>J'ai déjà activité ou désactivé des outils dans mon interface d'IA générative.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Intéressant, vous avez un usage contrôlé de votre logiciel d'IA.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>J'ai déjà configuré mon propre outil.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Félicitations, vous avez un usage avancé de l'IA !<br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je n'utilise pas d'IA générative.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Et, c'est une attitude très sobre !</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
