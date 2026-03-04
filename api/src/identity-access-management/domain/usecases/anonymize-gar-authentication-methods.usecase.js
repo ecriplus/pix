@@ -33,7 +33,7 @@ export const anonymizeGarAuthenticationMethods = async function ({
         userIds: userIdsBatch,
       });
       garAnonymizedUserCount += garAnonymizedUserIds.length;
-      if (config.auditLogger.isEnabled && garAnonymizedUserIds?.length > 0) {
+      if (garAnonymizedUserIds?.length > 0) {
         auditLoggingJobs.push(
           AuditLoggingJob.forUsers({
             client: 'PIX_ADMIN',

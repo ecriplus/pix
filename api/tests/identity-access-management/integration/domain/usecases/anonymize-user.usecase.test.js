@@ -2,7 +2,6 @@ import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js'
 import { RefreshToken } from '../../../../../src/identity-access-management/domain/models/RefreshToken.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
-import { config } from '../../../../../src/shared/config.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
@@ -163,51 +162,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       expect(anonymizedUser.firstName).to.equal('(anonymised)');
       expect(anonymizedUser.hasBeenAnonymised).to.be.true;
       expect(anonymizedUser.hasBeenAnonymisedBy).to.equal(newAdmin.id);
-    });
-  });
-
-  context('when audit logger is disabled', function () {
-    it('does not trigger audit log', async function () {
-      // given
-      const user = databaseBuilder.factory.buildUser.withMembership({
-        createdAt: new Date('2012-12-12T12:12:12Z'),
-        updatedAt: new Date('2023-03-23T23:23:23Z'),
-      });
-
-      const admin = databaseBuilder.factory.buildUser.withRole();
-
-      const userId = user.id;
-      const anonymizedByUserId = admin.id;
-
-      databaseBuilder.factory.buildCertificationCenterMembership({ userId });
-
-      const managingStudentsOrga = databaseBuilder.factory.buildOrganization({ isManagingStudents: true });
-      databaseBuilder.factory.buildOrganizationLearner({ userId, organizationId: managingStudentsOrga.id });
-
-      databaseBuilder.factory.buildUserLogin({
-        userId,
-        createdAt: new Date('2012-12-12T12:25:34Z'),
-        updatedAt: new Date('2023-03-23T09:44:30Z'),
-        lastLoggedAt: new Date('2023-02-18T18:18:02Z'),
-        temporaryBlockedUntil: new Date('2023-03-23T08:16:16Z'),
-        blockedAt: new Date('2023-03-23T09:44:30Z'),
-      });
-
-      await databaseBuilder.commit();
-
-      sinon.stub(config.auditLogger, 'isEnabled').value(false);
-
-      // when
-      await usecases.anonymizeUser({
-        userId,
-        updatedByUserId: anonymizedByUserId,
-      });
-
-      // then
-      const anonymizedUser = await knex('users').where({ id: user.id }).first();
-      expect(anonymizedUser.hasBeenAnonymised).to.be.true;
-
-      await expect(AuditLoggingJob.name).to.have.been.performed.withJobsCount(0);
     });
   });
 });
