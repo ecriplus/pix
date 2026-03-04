@@ -42,7 +42,7 @@ import CampaignCodeForm from 'mon-pix/components/campaign-code-form';
         <LinkTo
           class="mediacentre-start-campaign-modal-action-buttons__continue-action"
           @route={{@controller.routeToTransitionAfterGarModal}}
-          @model={{@controller.code}}
+          @model={{@controller.verifiedCode.id}}
         >
           {{t "pages.fill-in-campaign-code.mediacentre-start-campaign-modal.actions.continue"}}
         </LinkTo>
