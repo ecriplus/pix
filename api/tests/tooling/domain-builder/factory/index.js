@@ -1,3 +1,4 @@
+import { buildNetwork } from './acquisition/build-network.js';
 import { buildOrganizationLearnerType } from './acquisition/build-organization-learner-type.js';
 import { buildEmptyInformationBanner, buildInformationBanner } from './banner/build-banner-information.js';
 import { buildAccountRecoveryDemand } from './build-account-recovery-demand.js';
@@ -236,6 +237,7 @@ import { buildOrganizationToJoin } from './prescription/organization-learner/bui
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
 const acquisition = {
+  buildNetwork,
   buildOrganizationLearnerType,
 };
 
