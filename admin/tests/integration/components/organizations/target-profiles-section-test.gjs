@@ -7,6 +7,7 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+import { waitForDialogClose } from '../../../helpers/wait-for';
 
 module('Integration | Component | organizations/target-profiles-section', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -36,14 +37,9 @@ module('Integration | Component | organizations/target-profiles-section', functi
       assert.dom(screen.getByRole('button', { name: 'Valider' })).hasAttribute('aria-disabled');
     });
 
-    test('it calls the organization action when the input is not empty and user clicks on button', async function (assert) {
+    test('it calls onAttachTargetProfiles with parsed IDs when input is not empty and user clicks on button', async function (assert) {
       // given
-      class NotificationsStub extends Service {
-        sendSuccessNotification = sinon.stub();
-      }
-      const adapter = store.adapterFor('organization');
-      const attachTargetProfileStub = sinon.stub(adapter, 'attachTargetProfile').resolves();
-      this.owner.register('service:pixToast', NotificationsStub);
+      const onAttachTargetProfiles = sinon.stub().resolves();
       const targetProfileSummary = store.createRecord('target-profile-summary', {
         id: '666',
         internalName: 'Number of The Beast',
@@ -52,21 +48,23 @@ module('Integration | Component | organizations/target-profiles-section', functi
         id: '1',
         targetProfiles: [],
       });
-
       const targetProfileSummaries = [targetProfileSummary];
-      targetProfileSummaries.reload = sinon.stub();
 
       // when
       await render(
         <template>
-          <TargetProfilesSection @organization={{organization}} @targetProfileSummaries={{targetProfileSummaries}} />
+          <TargetProfilesSection
+            @organization={{organization}}
+            @targetProfileSummaries={{targetProfileSummaries}}
+            @onAttachTargetProfiles={{onAttachTargetProfiles}}
+          />
         </template>,
       );
-      await fillByLabel('ID du ou des profil(s) cible(s)', '1');
+      await fillByLabel('ID du ou des profil(s) cible(s)', '1, 12,   1000 ');
       await clickByName('Valider');
 
       // then
-      assert.ok(attachTargetProfileStub.calledWith({ organizationId: '1', targetProfileIds: ['1'] }));
+      assert.ok(onAttachTargetProfiles.calledWith(['1', '12', '1000']));
     });
 
     test('it should have a link to redirect on target profile page', async function (assert) {
@@ -145,14 +143,9 @@ module('Integration | Component | organizations/target-profiles-section', functi
         assert.ok(screen.getByRole('heading', { name: "Détacher le profil cible de l'organisation" }));
       });
 
-      test('it should detach a target profile when click on "Confirmer" button', async function (assert) {
+      test('it should call onDetachTargetProfile with the target profile id when click on "Confirmer" button', async function (assert) {
         // given
-
-        const notificationService = this.owner.lookup('service:pixToast');
-        sinon.stub(notificationService, 'sendSuccessNotification');
-
-        const adapter = store.adapterFor('target-profile');
-        const detachOrganizationsTargetProfileStub = sinon.stub(adapter, 'detachOrganizations').resolves();
+        const onDetachTargetProfile = sinon.stub().resolves();
         const targetProfileSummary = store.createRecord('target-profile-summary', {
           id: '666',
           internalName: 'Number of The Beast',
@@ -160,57 +153,59 @@ module('Integration | Component | organizations/target-profiles-section', functi
         const organization = store.createRecord('organization', {
           id: '1',
           targetProfiles: [],
-          get: sinon.stub().returns({ reload: sinon.stub() }),
         });
         const targetProfileSummaries = [targetProfileSummary];
 
         //when
         const screen = await render(
           <template>
-            <TargetProfilesSection @organization={{organization}} @targetProfileSummaries={{targetProfileSummaries}} />
+            <TargetProfilesSection
+              @organization={{organization}}
+              @targetProfileSummaries={{targetProfileSummaries}}
+              @onDetachTargetProfile={{onDetachTargetProfile}}
+            />
           </template>,
         );
         const detachButton = screen.getByRole('button', { name: 'Détacher' });
         await click(detachButton);
         const confirmButton = await screen.findByRole('button', { name: 'Confirmer' });
         await click(confirmButton);
+
         // then
-        assert.true(detachOrganizationsTargetProfileStub.calledOnceWith(targetProfileSummary.id));
+        assert.true(onDetachTargetProfile.calledOnceWith(targetProfileSummary.id));
       });
 
-      test('it should show a notification on success', async function (assert) {
+      test('it should close the modal after successful detach', async function (assert) {
         // given
-        const notificationService = this.owner.lookup('service:pixToast');
-        const notificationSuccessStub = sinon.stub(notificationService, 'sendSuccessNotification');
-
-        const adapter = store.adapterFor('target-profile');
-        sinon.stub(adapter, 'detachOrganizations').resolves();
-
+        const onDetachTargetProfile = sinon.stub().resolves();
+        const targetProfileSummary = store.createRecord('target-profile-summary', {
+          id: '666',
+          internalName: 'Number of The Beast',
+        });
         const organization = store.createRecord('organization', {
           id: '1',
           targetProfiles: [],
         });
-        const targetProfileSummaries = [
-          store.createRecord('target-profile-summary', {
-            id: '666',
-            internalName: 'Number of The Beast',
-          }),
-        ];
-        targetProfileSummaries.reload = sinon.stub();
+        const targetProfileSummaries = [targetProfileSummary];
 
         // when
         const screen = await render(
           <template>
-            <TargetProfilesSection @organization={{organization}} @targetProfileSummaries={{targetProfileSummaries}} />
+            <TargetProfilesSection
+              @organization={{organization}}
+              @targetProfileSummaries={{targetProfileSummaries}}
+              @onDetachTargetProfile={{onDetachTargetProfile}}
+            />
           </template>,
         );
         const detachButton = screen.getByRole('button', { name: 'Détacher' });
         await click(detachButton);
         const confirmButton = await screen.findByRole('button', { name: 'Confirmer' });
         await click(confirmButton);
+        await waitForDialogClose();
 
         // then
-        assert.ok(notificationSuccessStub.calledOnceWithExactly({ message: 'Profil cible détaché avec succès.' }));
+        assert.dom(screen.queryByRole('dialog')).doesNotExist();
       });
     });
   });

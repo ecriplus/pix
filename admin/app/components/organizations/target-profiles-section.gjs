@@ -19,10 +19,8 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
   @tracked targetProfileToDetach;
 
   @service accessControl;
-  @service pixToast;
-  @service router;
-  @service store;
   @service intl;
+  @service pixToast;
 
   get isDisabled() {
     return this.targetProfilesToAttach === '';
@@ -40,64 +38,18 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
   @action
   async attachTargetProfiles(e) {
     e.preventDefault();
-    if (this.isDisabled) return;
-
-    const organization = this.args.organization;
-    const targetProfileSummaries = this.args.targetProfileSummaries;
-
-    try {
-      const targetProfileIdsBefore = targetProfileSummaries.map(({ id }) => id);
-      const targetProfileIdsToAttach = this._getUniqueTargetProfileIds();
-      const adapter = this.store.adapterFor('organization');
-
-      await adapter.attachTargetProfile({
-        organizationId: organization.id,
-        targetProfileIds: targetProfileIdsToAttach,
-      });
-      await targetProfileSummaries.reload();
-      const targetProfileIdsAfter = targetProfileSummaries.map(({ id }) => id);
-      const attachedIds = targetProfileIdsAfter.filter((id) => !targetProfileIdsBefore.includes(id));
-      const duplicatedIds = targetProfileIdsBefore.filter((id) => targetProfileIdsToAttach.includes(id));
-      const hasInserted = attachedIds.length > 0;
-      const hasDuplicated = duplicatedIds.length > 0;
-      const message = [];
-      if (hasInserted) {
-        message.push('Profil(s) cible(s) rattaché(s) avec succès.');
-      }
-      if (hasInserted && hasDuplicated) {
-        message.push('<br/>');
-      }
-      if (hasDuplicated) {
-        message.push(
-          `Le(s) profil(s) cible(s) suivant(s) étai(en)t déjà rattaché(s) à cette organisation : ${duplicatedIds.join(
-            ', ',
-          )}.`,
-        );
-      }
-      this.targetProfilesToAttach = '';
-      return this.pixToast.sendSuccessNotification({ message: message.join('') });
-    } catch (responseError) {
-      this._handleResponseError(responseError);
+    if (this.isDisabled) {
+      return;
     }
+
+    await this.args.onAttachTargetProfiles(this.getUniqueTargetProfileIds());
+    this.targetProfilesToAttach = '';
   }
 
   @action
-  goToTargetProfilePage(targetProfileId) {
-    this.router.transitionTo('authenticated.target-profiles.target-profile', targetProfileId);
-  }
-
-  @action
-  async detachTargetProfile(targetProfilId) {
-    const adapter = this.store.adapterFor('target-profile');
-
-    try {
-      await adapter.detachOrganizations(targetProfilId, [this.args.organization.id]);
-      this.closeModal();
-      await this.args.organization.get('targetProfileSummaries').reload();
-      return this.pixToast.sendSuccessNotification({ message: 'Profil cible détaché avec succès.' });
-    } catch (responseError) {
-      this._handleResponseError(responseError);
-    }
+  async detachTargetProfile(targetProfileId) {
+    await this.args.onDetachTargetProfile(targetProfileId);
+    this.closeModal();
   }
 
   @action
@@ -112,21 +64,7 @@ export default class OrganizationTargetProfilesSectionComponent extends Componen
     this.targetProfileToDetach = null;
   }
 
-  _handleResponseError({ errors }) {
-    const genericErrorMessage = this.intl.t('common.notifications.generic-error');
-
-    if (!errors) {
-      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
-    }
-    errors.forEach((error) => {
-      if (['404', '412'].includes(error.status)) {
-        return this.pixToast.sendErrorNotification({ message: error.detail });
-      }
-      return this.pixToast.sendErrorNotification({ message: genericErrorMessage });
-    });
-  }
-
-  _getUniqueTargetProfileIds() {
+  getUniqueTargetProfileIds() {
     const targetProfileIds = this.targetProfilesToAttach.split(',').map((targetProfileId) => targetProfileId.trim());
     return uniq(targetProfileIds);
   }
