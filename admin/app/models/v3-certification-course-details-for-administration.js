@@ -1,3 +1,4 @@
+import { service } from '@ember/service';
 import Model, { attr, hasMany } from '@ember-data/model';
 import { assessmentStates } from 'pix-admin/models/certification';
 
@@ -9,6 +10,8 @@ export const abortReasons = {
 };
 
 export default class V3CertificationCourseDetailsForAdministration extends Model {
+  @service intl;
+
   @attr('number') certificationCourseId;
   @attr('boolean') isRejectedForFraud;
   @attr('date') createdAt;
@@ -18,8 +21,9 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('string') assessmentState;
   @attr('string') abortReason;
   @attr('number') pixScore;
-  @attr('string') reachedLevel;
+  @attr('number') reachedMeshIndex;
   @attr('number') numberOfChallenges;
+  @attr('string') candidateSubscription;
   @hasMany('certification-challenges-for-administration', { async: true, inverse: null })
   certificationChallengesForAdministration;
   version = 3;
@@ -81,7 +85,24 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     );
   }
   get result() {
+    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
+    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
+      return `${this.pixScore} Pix`;
+    }
+    const strReachedLevel = this.intl.t(
+      `components.certifications.meshLevels.${scope}.${String(this.reachedMeshIndex)}`,
+    );
     const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return this.reachedLevel + strPixScore;
+    return strReachedLevel + strPixScore;
+  }
+
+  get title() {
+    const certificationTypeLabel = this.intl.t(
+      `pages.certifications.certification.certificationTypes.${this.candidateSubscription}`,
+    );
+    return this.intl.t('pages.certifications.certification.details.v3.general-informations.title', {
+      type: certificationTypeLabel,
+      certificationCourseId: this.certificationCourseId,
+    });
   }
 }
