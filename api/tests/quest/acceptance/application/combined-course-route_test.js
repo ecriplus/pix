@@ -125,7 +125,6 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
       });
     });
 
-    // TODO: add a test to cover importFeature == true or isManagingStudents == true
     context('when authentication is not provided', function () {
       it('should return the combined course requested by code', async function () {
         // given

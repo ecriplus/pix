@@ -23,7 +23,7 @@ const register = async function (server) {
         },
         pre: [
           {
-            method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
+            method: securityPreHandlers.checkCombinedCourseIsNotDeleted,
           },
         ],
         handler: combinedCourseController.getByCode,

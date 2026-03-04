@@ -1,4 +1,4 @@
-import * as checkDeletedOfCombinedCourse from '../../../../src/quest/application/usecases/check-deleted-of-combined-course.js';
+import * as checkCombinedCourseIsNotDeleted from '../../../../src/quest/application/usecases/check-combined-course-is-not-deleted.js';
 import { expect, sinon } from '../../../test-helper.js';
 
 describe('Unit | UseCase | check-deleted-of-combined-course', function () {
@@ -12,14 +12,14 @@ describe('Unit | UseCase | check-deleted-of-combined-course', function () {
   });
 
   it('should call getByCode if code is given into parameters', async function () {
-    await checkDeletedOfCombinedCourse.execute({
+    await checkCombinedCourseIsNotDeleted.execute({
       code: 'RANDOM',
       dependencies: { combinedCourseRepository: combinedCourseRepositoryStub },
     });
     expect(combinedCourseRepositoryStub.getByCode).to.be.calledWithExactly({ code: 'RANDOM' });
   });
   it('should call getById if id is given into parameters', async function () {
-    await checkDeletedOfCombinedCourse.execute({
+    await checkCombinedCourseIsNotDeleted.execute({
       id: 1,
       dependencies: { combinedCourseRepository: combinedCourseRepositoryStub },
     });
