@@ -4,14 +4,14 @@ export const getAttestationZipFromFilters = async ({
   divisions,
   organizationLearnerRepository,
 }) => {
-  const organizationLearners = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+  const userIds = await organizationLearnerRepository.findUserIdsFromFilters({
     organizationId,
-    divisions,
+    filters: { divisions },
   });
 
   return organizationLearnerRepository.getAttestationsForOrganizationLearnersAndKey({
     attestationKey,
-    organizationLearners,
+    userIds,
     organizationId,
   });
 };

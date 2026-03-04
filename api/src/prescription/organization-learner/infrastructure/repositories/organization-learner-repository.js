@@ -127,29 +127,27 @@ async function findPaginatedLearners({ organizationId, page, filter }) {
   return { learners, pagination };
 }
 
-async function findOrganizationLearnersByDivisions({ organizationId, divisions }) {
-  let organizationLearners;
-
+async function findUserIdsFromFilters({ organizationId, filters = {} }) {
   const knexConnection = DomainTransaction.getConnection();
-  const queryBuilder = knexConnection
-    .from('view-active-organization-learners')
-    .where({ organizationId })
-    .andWhere('isDisabled', false);
-  if (divisions.length > 0) {
-    organizationLearners = await queryBuilder.whereIn('division', divisions);
+  const queryBuilder = knexConnection('view-active-organization-learners')
+    .select('userId')
+    .where({ organizationId, isDisabled: false })
+    .whereNotNull('userId')
+    .pluck('userId');
+
+  if (filters?.divisions?.length > 0) {
+    return queryBuilder.whereIn('division', filters.divisions);
   } else {
-    organizationLearners = await queryBuilder;
+    return queryBuilder;
   }
-  return organizationLearners.map((organizationLearner) => new OrganizationLearner(organizationLearner));
 }
 
 async function getAttestationsForOrganizationLearnersAndKey({
   attestationKey,
-  organizationLearners,
+  userIds,
   organizationId,
   attestationsApi,
 }) {
-  const userIds = organizationLearners.map((learner) => learner.userId);
   return attestationsApi.generateAttestations({
     attestationKey,
     userIds,
@@ -528,9 +526,9 @@ export {
   findByOrganizationsWhichNeedToComputeCertificability,
   findByUserId,
   findIdByUserIdAndOrganizationId,
-  findOrganizationLearnersByDivisions,
   findPaginatedAttestationStatusForOrganizationLearnersAndKey,
   findPaginatedLearners,
+  findUserIdsFromFilters,
   get,
   getAttestationsForOrganizationLearnersAndKey,
   getLatestOrganizationLearner,

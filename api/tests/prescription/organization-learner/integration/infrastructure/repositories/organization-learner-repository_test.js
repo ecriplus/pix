@@ -43,7 +43,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         });
         await databaseBuilder.commit();
 
-        const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId: 1233 });
+        const organizationLearner = await organizationLearnerRepository.get({
+          organizationLearnerId: 1233,
+        });
         expect(organizationLearner.id).to.equal(1233);
         expect(organizationLearner.userId).to.equal(userId);
         expect(organizationLearner.firstName).to.equal('Dark');
@@ -67,7 +69,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         });
         await databaseBuilder.commit();
 
-        const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+        const organizationLearner = await organizationLearnerRepository.get({
+          organizationLearnerId,
+        });
         expect(organizationLearner.features).to.deep.equal(['ORALIZATION', 'BLA']);
       });
 
@@ -78,7 +82,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
         await databaseBuilder.commit();
 
-        const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId: id });
+        const organizationLearner = await organizationLearnerRepository.get({
+          organizationLearnerId: id,
+        });
 
         expect(organizationLearner.id).to.equal(id);
       });
@@ -94,7 +100,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.group).to.equal('L3');
             expect(organizationLearner.division).to.equal(null);
@@ -111,7 +119,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.division).to.equal('3B');
             expect(organizationLearner.group).to.equal(null);
@@ -128,7 +138,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.group).to.equal(null);
             expect(organizationLearner.division).to.equal(null);
@@ -140,10 +152,14 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         context('When there are no connection methods', function () {
           it('should return an empty array', async function () {
             const { id: userId } = databaseBuilder.factory.buildUser();
-            const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({ userId });
+            const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+              userId,
+            });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.authenticationMethods).to.be.empty;
           });
@@ -152,12 +168,18 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         context('When there are connection methods', function () {
           it('should return all connections method', async function () {
             const { id: userId } = databaseBuilder.factory.buildUser();
-            databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndPassword({ userId });
+            databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndPassword({
+              userId,
+            });
             databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
-            const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({ userId });
+            const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+              userId,
+            });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.authenticationMethods).to.have.members([
               NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
@@ -191,7 +213,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             await databaseBuilder.commit();
 
             // when
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             //then
             expect(organizationLearner.isCertifiable).to.be.true;
@@ -224,7 +248,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.isCertifiable).to.be.true;
             expect(organizationLearner.certifiableAt).to.deep.equal(certifiableParticipation.sharedAt);
@@ -266,7 +292,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             await databaseBuilder.commit();
 
             // when
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             //then
             expect(organizationLearner.isCertifiable).to.be.false;
@@ -287,7 +315,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             await databaseBuilder.commit();
 
             // when
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             //then
             expect(organizationLearner.isCertifiable).to.be.true;
@@ -317,7 +347,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.isCertifiable).to.be.false;
             expect(organizationLearner).to.be.an.instanceOf(OrganizationLearner);
@@ -345,7 +377,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.isCertifiable).to.be.null;
             expect(organizationLearner.certifiableAt).to.be.null;
@@ -370,7 +404,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             });
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.isCertifiable).to.be.null;
             expect(organizationLearner.certifiableAt).to.equal(null);
@@ -409,7 +445,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
             await databaseBuilder.commit();
 
-            const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+            const organizationLearner = await organizationLearnerRepository.get({
+              organizationLearnerId,
+            });
 
             expect(organizationLearner.isCertifiable).to.equal(certifiableParticipation.isCertifiable);
             expect(organizationLearner.certifiableAt).to.deep.equal(certifiableParticipation.sharedAt);
@@ -441,7 +479,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
               });
               await databaseBuilder.commit();
 
-              const organizationLearner = await organizationLearnerRepository.get({ organizationLearnerId });
+              const organizationLearner = await organizationLearnerRepository.get({
+                organizationLearnerId,
+              });
 
               expect(organizationLearner.isCertifiable).to.equal(notDeletedParticipation.isCertifiable);
               expect(organizationLearner.certifiableAt).to.deep.equal(notDeletedParticipation.sharedAt);
@@ -561,7 +601,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
         await databaseBuilder.commit();
 
-        const result = await organizationLearnerRepository.findPaginatedLearners({ organizationId });
+        const result = await organizationLearnerRepository.findPaginatedLearners({
+          organizationId,
+        });
 
         expect(result.learners).lengthOf(3);
         expect(result.learners[0].id).to.equal(secondLearner.id);
@@ -584,7 +626,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
         await databaseBuilder.commit();
 
-        const result = await organizationLearnerRepository.findPaginatedLearners({ organizationId });
+        const result = await organizationLearnerRepository.findPaginatedLearners({
+          organizationId,
+        });
 
         expect(result.learners).lengthOf(3);
         expect(result.learners[0].id).to.equal(thirdLearner.id);
@@ -665,7 +709,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
     });
   });
 
-  describe('#findOrganizationLearnersByDivisions', function () {
+  describe('#findUserIdsFromFilters', function () {
     let organizationId;
 
     beforeEach(async function () {
@@ -676,24 +720,33 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
 
     it('should return organization learners', async function () {
       // given
-      const learner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
-      const learner2 = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme B' });
+      const learner1 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        division: '6eme A',
+      });
+      const learner2 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        division: '6eme B',
+      });
 
       await databaseBuilder.commit();
 
       // when
-      const learners = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+      const learners = await organizationLearnerRepository.findUserIdsFromFilters({
         organizationId,
-        divisions: ['6eme A', '6eme B'],
+        filters: { divisions: ['6eme A', '6eme B'] },
       });
 
       // then
-      expect(learners).to.deep.equal([new OrganizationLearner(learner1), new OrganizationLearner(learner2)]);
+      expect(learners).to.deep.equal([learner1.userId, learner2.userId]);
     });
 
     it('should not return disabled organization learners', async function () {
       // given
-      const learner1 = databaseBuilder.factory.buildOrganizationLearner({ organizationId, division: '6eme A' });
+      const learner1 = databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        division: '6eme A',
+      });
       databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
         division: '6eme A',
@@ -703,9 +756,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       await databaseBuilder.commit();
 
       // when
-      const learners = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+      const learners = await organizationLearnerRepository.findUserIdsFromFilters({
         organizationId,
-        divisions: ['6eme A'],
+        filters: { divisions: ['6eme A'] },
       });
 
       // then
@@ -726,7 +779,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       // when
       const learners = await organizationLearnerRepository.findUserIdsFromFilters({
         organizationId,
-        divisions: ['6eme A'],
+        filters: { divisions: ['6eme A'] },
       });
 
       // then
@@ -744,9 +797,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         await databaseBuilder.commit();
 
         // when
-        const result = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+        const result = await organizationLearnerRepository.findUserIdsFromFilters({
           organizationId: notExistingOrganizationId,
-          divisions: ['6eme A', '6eme B'],
+          filters: { divisions: ['6eme A', '6eme B'] },
         });
 
         // then
@@ -764,9 +817,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         await databaseBuilder.commit();
 
         // when
-        const result = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+        const result = await organizationLearnerRepository.findUserIdsFromFilters({
           organizationId,
-          divisions: notExistingDivisions,
+          filters: { divisions: notExistingDivisions },
         });
 
         // then
@@ -783,9 +836,9 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         await databaseBuilder.commit();
 
         // when
-        const result = await organizationLearnerRepository.findOrganizationLearnersByDivisions({
+        const result = await organizationLearnerRepository.findUserIdsFromFilters({
           organizationId,
-          divisions: [],
+          filters: { divisions: [] },
         });
 
         // then
@@ -880,7 +933,10 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
     it('should not return learner linked to anonymous user', async function () {
       // given
       const anonymousUser = databaseBuilder.factory.buildUser({ isAnonymous: true });
-      databaseBuilder.factory.buildOrganizationLearner({ userId: anonymousUser.id, organizationId });
+      databaseBuilder.factory.buildOrganizationLearner({
+        userId: anonymousUser.id,
+        organizationId,
+      });
 
       await databaseBuilder.commit();
 
@@ -898,7 +954,10 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
     it('should not return learner linked to anonymised user', async function () {
       // given
       const anonymisedUser = databaseBuilder.factory.buildUser({ hasBeenAnonymised: true });
-      databaseBuilder.factory.buildOrganizationLearner({ userId: anonymisedUser.id, organizationId });
+      databaseBuilder.factory.buildOrganizationLearner({
+        userId: anonymisedUser.id,
+        organizationId,
+      });
 
       await databaseBuilder.commit();
 
@@ -1137,11 +1196,16 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
     it('should return existing organization learner for given id', async function () {
       const organizationId = await databaseBuilder.factory.buildOrganization().id;
       const userId = await databaseBuilder.factory.buildUser().id;
-      const organizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId })
-        .id;
+      const organizationLearnerId = await databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        userId,
+      }).id;
       await databaseBuilder.commit();
 
-      const result = await organizationLearnerRepository.findIdByUserIdAndOrganizationId({ organizationId, userId });
+      const result = await organizationLearnerRepository.findIdByUserIdAndOrganizationId({
+        organizationId,
+        userId,
+      });
       expect(result).to.equal(organizationLearnerId);
     });
   });
