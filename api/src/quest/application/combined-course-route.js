@@ -9,6 +9,7 @@ import { PayloadTooLargeError, sendJsonApiError } from '../../shared/application
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../shared/domain/constants.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
+import { jwtOptionalUserAuthenticationStrategyName } from '../../shared/infrastructure/authentication-strategy-names.js';
 import { combinedCourseController } from './combined-course-controller.js';
 
 const register = async function (server) {
@@ -17,6 +18,9 @@ const register = async function (server) {
       method: 'GET',
       path: '/api/combined-courses',
       config: {
+        auth: {
+          strategy: jwtOptionalUserAuthenticationStrategyName,
+        },
         pre: [
           {
             method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
