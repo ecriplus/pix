@@ -40,9 +40,9 @@
               "element": {
                 "id": "a5ec4920-3834-43d8-a69c-6b7525f89f84",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/envoyer-sms-intro.jpg",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_NOV/nr_datacenter_nov_img_illu_decouv.svg",
                 "alt": "",
-                "alternativeText": "",
+                "alternativeText": "<p>Illustration de deux personnes assises dans une salle, chacune regardant son smartphone. Des icônes d’enveloppes apparaissent entre les deux téléphones, montrant que les deux personnes échangent des messages.</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -53,6 +53,7 @@
                 "id": "85a09eeb-14ed-4864-b6f3-2e43ab261bcc",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, quand Killian envoie ce message à son ami assis juste à côté de lui, que se passe-t-il avec ce message ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -76,8 +77,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -121,9 +121,9 @@
               "element": {
                 "id": "19cdd46f-8dcf-4bf7-b2db-b41af0173756",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/nrdatacenternov/6741af713f0675ffa2b1ac50_61bb1321ba00415ce4ed8a76cdf6e0e8af684d29-2560x1920.jpeg",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_NOV/nr_datacenter_nov_qcu_illu_decouv_killian.svg",
                 "alt": "",
-                "alternativeText": "",
+                "alternativeText": "<p>Illustration d’une personne qui appuie sur \"J’aime\" sur une publication de réseaux sociaux.</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -134,6 +134,7 @@
                 "id": "0c6f4d09-1eb4-4b35-acf6-e82b70cefd0e",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quand Killian appuie sur «&nbsp;J’aime&nbsp;», où cette information est-elle enregistrée et traitée ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -164,8 +165,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -183,15 +183,15 @@
                     {
                       "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
                       "type": "text",
-                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> Quand vous utilisez internet, vous vous connectez à des serveurs : ils reçoivent vos demandes, traitent les informations et renvoient la réponse sur votre appareil.</p><p>Il reçoit <strong>nos demandes</strong>, fait des calculs, <strong>stocke des informations</strong>, puis envoie <strong>la réponse</strong> sur <strong>nos appareils</strong>.</p><p>Voici un exemple de salle de serveurs, à l’intérieur d’un centre de données.</p>"
+                      "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> Quand vous utilisez internet, vous vous connectez à des serveurs&nbsp;: ils reçoivent vos demandes, traitent les informations et renvoient la réponse sur votre appareil.</p><p>Voici un exemple de salle de serveurs, à l’intérieur d’un centre de données.</p>"
                     },
                     {
                       "id": "929770b6-cc52-407e-a324-30b3cc48807b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/nrdatacenternov/dessin-anime-datacenter-composition-de-travail-avec-vue-interieure-la-salle-des-rangees-d-armoires-serveur-et-l-illustration-219917678.jpg",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_NOV/nr_datacenter_nov_datacenter_int_illu.png",
                       "alt": "",
-                      "alternativeText": "",
-                      "legend": "Montrer qu’il y a plein de serveurs",
+                      "alternativeText": "<p>Illustration d’un centre de données&nbsp;: allée centrale entourée de rangées de baies de serveurs de chaque côté, avec des câbles bleus, violets et orange visibles le long des racks et au plafond. Le sol est équipé de dalles techniques avec grilles d’aération et l’éclairage provient de panneaux lumineux au plafond.</p>",
+                      "legend": "Chacune de ces pièces contient des centaines de serveurs et il y a des dizaines de pièces comme celle-ci dans un centre de données. ",
                       "licence": ""
                     }
                   ]
@@ -348,6 +348,7 @@
                 "id": "af91e3cb-2dc1-42d4-95be-92e251c54c14",
                 "type": "qcu-discovery",
                 "instruction": "<p>D’après ce que vous venez de voir, que se passe-t-il quand <strong>beaucoup de serveurs</strong> travaillent en même temps ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -378,8 +379,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -436,6 +436,7 @@
                       "id": "4f9237bf-e0d3-42ec-990c-a869600f336b",
                       "type": "qcu-discovery",
                       "instruction": "<p>Théo veut transmettre une information à son frère. Parmi les usages suivants, lequel entraîne la plus forte <strong>consommation d’énergie</strong> des serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -459,8 +460,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -470,6 +470,7 @@
                       "id": "a01a88a1-9c44-44cb-9b13-750c89592f58",
                       "type": "qcu-discovery",
                       "instruction": "<p>L’artiste préféré de Solène a sorti une nouvelle chanson. Solène veut découvrir cette chanson. Parmi les usages suivants, lequel entraîne la plus forte <strong>consommation d’énergie</strong> des serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -493,8 +494,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -504,6 +504,7 @@
                       "id": "55985477-3b47-4d7c-b7eb-f25c4b05bd7b",
                       "type": "qcu-discovery",
                       "instruction": "<p>Nathan regarde un documentaire. Parmi les usages suivants, lequel entraîne la plus forte <strong>consommation d’énergie</strong> des serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -527,8 +528,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -538,6 +538,7 @@
                       "id": "0233f94a-2697-4858-afa1-c490c3024ed5",
                       "type": "qcu-discovery",
                       "instruction": "<p>Nora a besoin d’une information pour son association de théâtre. Parmi les usages suivants, lequel entraîne la plus forte <strong>consommation d’énergie</strong> des serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -561,8 +562,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 }
@@ -713,6 +713,7 @@
                       "id": "bb6baa92-46f7-4eaa-ae9f-dcd77a32624d",
                       "type": "qcu",
                       "instruction": "<p>Vous voulez envoyer une information rapide à un ami. Quel choix est le plus léger pour les serveurs ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -739,8 +740,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -750,6 +750,7 @@
                       "id": "360a5710-c9ae-4620-b9c2-a9da9bfc603b",
                       "type": "qcu",
                       "instruction": "<p>Vous écoutez souvent la même chanson en streaming. Comment réduire le travail des serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -776,8 +777,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -787,6 +787,7 @@
                       "id": "d9b81d92-b66f-4cc5-b47a-9ceaffd40b69",
                       "type": "qcu",
                       "instruction": "<p>Vous voulez diviser une addition au restaurant. Quel choix est le plus léger pour les serveurs ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -805,8 +806,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 }
@@ -819,14 +819,6 @@
           "type": "activity",
           "title": "Activité 3",
           "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "67881400-f14b-4e8f-a773-c993c44e7404",
-                "type": "text",
-                "content": "<p>Vous voulez afficher une page internet depuis un appareil numérique. <br></p>"
-              }
-            },
             {
               "type": "element",
               "element": {
@@ -856,10 +848,12 @@
                       },
                       {
                         "id": "3",
-                        "content": "de votre appareil"
+                        "content": "de son appareil"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
@@ -875,7 +869,7 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "votre appareil"
+                        "content": "son appareil"
                       },
                       {
                         "id": "2",
@@ -886,7 +880,9 @@
                         "content": "un autre smartphone"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -913,7 +909,9 @@
                         "content": "applications"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -933,24 +931,26 @@
                       },
                       {
                         "id": "2",
-                        "content": "votre appareil"
+                        "content": "son appareil"
                       },
                       {
                         "id": "3",
                         "content": "un autre serveur"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien vu !</p>",
-                    "diagnosis": "<p>La demande part de votre appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur votre appareil.</p>"
+                    "diagnosis": "<p>La demande part de son appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur son appareil.</p>"
                   },
                   "invalid": {
                     "state": "<p>Eh non !</p>",
-                    "diagnosis": "<p>La demande part de votre appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur votre appareil.</p>"
+                    "diagnosis": "<p>La demande part de son appareil, est envoyée vers un centre de données où des serveurs la traitent, puis la réponse revient sur son appareil.</p>"
                   }
                 }
               }
@@ -982,6 +982,7 @@
                 "id": "85753fa4-13df-4941-8610-8c508233ee61",
                 "type": "qcu-declarative",
                 "instruction": "<p>Quel changement êtes-vous prêt à faire ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -1004,8 +1005,7 @@
                       "diagnosis": "<p>Parfait&nbsp;! <br> La vidéo peut être utile dans certaines situations. Quand ce n’est pas le cas, l’audio suffit souvent et demande moins de travail aux serveurs.</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]
