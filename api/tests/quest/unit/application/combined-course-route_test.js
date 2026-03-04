@@ -5,7 +5,7 @@ import { securityPreHandlers } from '../../../../src/shared/application/security
 import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Quest | Unit | Routes | combined-course-route', function () {
-  describe('GET /api/combined-course', function () {
+  describe('GET /api/combined-courses', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkCombinedCourseIsNotDeleted').returns(() => true);

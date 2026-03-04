@@ -289,9 +289,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
   });
 
   describe('when there is no userId provided', function () {
-    it('should return combined course without any details', async function () {
-      nock('https://assets.pix.org').persist().head(/^.+$/).reply(200, {});
-
+    it('should return combined course without any progress related to user', async function () {
       const organizationId = databaseBuilder.factory.buildOrganization().id;
 
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({

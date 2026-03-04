@@ -1,7 +1,7 @@
 import * as checkCombinedCourseIsNotDeleted from '../../../../src/quest/application/usecases/check-combined-course-is-not-deleted.js';
 import { expect, sinon } from '../../../test-helper.js';
 
-describe('Unit | UseCase | check-deleted-of-combined-course', function () {
+describe('Unit | UseCase | check-combined-course-is-not-deleted', function () {
   let combinedCourseRepositoryStub;
 
   beforeEach(function () {
