@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.346.0](https://github.com/1024pix/pix/compare/v5.345.0...v5.346.0) (2026-03-04)
+
+### :rocket: Amélioration
+
+- [#15311](https://github.com/1024pix/pix/pull/15311) Ajouter les instructions à un element custom interactif dans les modules (PIX-21662)(PIX-21643) 
+- [#15259](https://github.com/1024pix/pix/pull/15259) MDX-18 Integration retours edito 
+- [#15352](https://github.com/1024pix/pix/pull/15352) modifs CYPhishing_AVA suite relecture edito 
+
+### :bug: Correction
+
+- [#15345](https://github.com/1024pix/pix/pull/15345) Ajouter --env-file-if-exists=.env manquant pour exécution locale du script npm start:job 
+- [#15343](https://github.com/1024pix/pix/pull/15343) Corriger la fermeture impossible de la modale de rest de password en masse (PIX-21486). 
+
+### :building_construction: Tech
+
+- [#15327](https://github.com/1024pix/pix/pull/15327) Création des tables `networks`, `structures` et `fct_structures`  (PIX-21291). 
+- [#14861](https://github.com/1024pix/pix/pull/14861) Supprimer toutes les références au statut TO_SHARE des participations de campagne (PIX-21135)
+
 # [5.345.0](https://github.com/1024pix/pix/compare/v5.344.0...v5.345.0) (2026-03-03)
 
 ### :rocket: Amélioration
