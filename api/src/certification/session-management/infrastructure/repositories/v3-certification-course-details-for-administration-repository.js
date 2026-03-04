@@ -39,6 +39,7 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
       pixScore: 'assessment-results.pixScore',
       reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       endedAt: 'certification-courses.endedAt',
+      candidateSubscription: 'certification-candidates.subscription',
     })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -52,6 +53,8 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
     )
+    .leftJoin('certification_versions', 'certification_versions.id', 'assessment-results.versionId')
+    .leftJoin('certification-candidates', 'certification-candidates.id', 'certification-courses.candidateId')
     .where({
       'certification-courses.id': certificationCourseId,
     })

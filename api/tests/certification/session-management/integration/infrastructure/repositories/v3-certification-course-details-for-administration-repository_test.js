@@ -1,9 +1,11 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as v3CertificationCourseDetailsForAdministrationRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/v3-certification-course-details-for-administration-repository.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/constants/abort-reasons.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
@@ -24,6 +26,16 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
       const reachedMeshIndex = 1;
+      const candidateSubscription = Frameworks.DROIT;
+
+      const userId = databaseBuilder.factory.buildUser().id;
+      const sessionId = databaseBuilder.factory.buildSession().id;
+
+      const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+        userId,
+        sessionId,
+        subscription: candidateSubscription,
+      }).id;
 
       databaseBuilder.factory.buildCertificationCourse({
         id: certificationCourseId,
@@ -31,6 +43,9 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         createdAt,
         completedAt,
         abortReason,
+        userId,
+        sessionId,
+        candidateId,
       });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
@@ -50,6 +65,8 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         createdAt: new Date('2020-01-01'),
       });
 
+      const versionId = databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.PIX_PLUS_DROIT }).id;
+
       const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
         pixScore,
         reachedMeshIndex,
@@ -57,6 +74,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         assessmentId,
         assessmentResultStatus,
         createdAt: new Date('2024-01-01'),
+        versionId,
       }).id;
 
       databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
@@ -99,6 +117,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         pixScore,
         reachedMeshIndex,
         numberOfChallenges: null,
+        candidateSubscription,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
       });
 
