@@ -41,7 +41,6 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
  * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
- * @typedef {import ('../../infrastructure/repositories/pix-team-repository.js')} PixTeamRepository
  * @typedef {import ('../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
