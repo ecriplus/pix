@@ -102,6 +102,8 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
           'view-active-organization-learners.birthdate',
           'users.username',
           'users.email',
+          'user-logins.temporaryBlockedUntil',
+          'user-logins.blockedAt',
           'authentication-methods.externalIdentifier as samlId',
           'view-active-organization-learners.division',
           'view-active-organization-learners.group',
@@ -194,6 +196,9 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
         .leftJoin('users', function () {
           this.on('view-active-organization-learners.userId', 'users.id');
         })
+        .leftJoin('user-logins', function () {
+          this.on('user-logins.userId', 'users.id');
+        })
         .leftJoin('authentication-methods', function () {
           this.on('users.id', 'authentication-methods.userId').andOnVal(
             'authentication-methods.identityProvider',
@@ -211,8 +216,11 @@ const findPaginatedFilteredScoParticipants = async function ({ organizationId, f
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
   const scoOrganizationParticipants = results.map((result) => {
+    const now = new Date();
     return new ScoOrganizationParticipant({
       ...result,
+      isTemporarilyBlocked: result.temporaryBlockedUntil > now,
+      isBlocked: Boolean(result.blockedAt),
       isAuthenticatedFromGAR: !!result.samlId,
     });
   });
