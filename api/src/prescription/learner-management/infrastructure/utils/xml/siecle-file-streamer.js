@@ -18,15 +18,15 @@ const ERRORS = {
 };
 
 class SiecleFileStreamer {
-  static async create(readableStream, encoding = 'utf-8', logError = logger.error) {
-    const stream = new SiecleFileStreamer(readableStream, encoding, logError);
+  static async create(readableStream, encoding = 'utf-8', logWarn = logger.warn) {
+    const stream = new SiecleFileStreamer(readableStream, encoding, logWarn);
     return stream;
   }
 
-  constructor(readableStream, encoding, logError) {
+  constructor(readableStream, encoding, logWarn) {
     this.readableStream = readableStream;
     this.encoding = encoding;
-    this.logError = logError;
+    this.logWarn = logWarn;
   }
 
   async perform(callback) {
@@ -37,7 +37,7 @@ class SiecleFileStreamer {
 
   async _callbackAsPromise(callback) {
     return new Promise((resolve, reject) => {
-      const saxStream = _getSaxStream(this.readableStream, this.encoding, reject, this.logError);
+      const saxStream = _getSaxStream(this.readableStream, this.encoding, reject, this.logWarn);
       callback(saxStream, resolve, reject);
     });
   }
@@ -46,10 +46,10 @@ class SiecleFileStreamer {
   }
 }
 
-function _getSaxStream(inputStream, encoding, reject, logError) {
+function _getSaxStream(inputStream, encoding, reject, logWarn) {
   const decodeStream = _getDecodingStream(encoding);
   decodeStream.on('error', (err) => {
-    logError(err);
+    logWarn(err, 'Encoding not supported (decoded)');
     return reject(new FileValidationError(ERRORS.ENCODING_NOT_SUPPORTED));
   });
 
@@ -57,7 +57,7 @@ function _getSaxStream(inputStream, encoding, reject, logError) {
   saxParser.on(
     'error',
     _.once((err) => {
-      logError(err);
+      logWarn(err, 'Invalid file error');
       reject(new FileValidationError(ERRORS.INVALID_FILE));
     }),
   );
@@ -68,7 +68,7 @@ function _getDecodingStream(encoding) {
   try {
     return iconv.decodeStream(encoding);
   } catch (err) {
-    logger.error(err);
+    logger.warn(err, 'Encoding not supported (decoding)');
     throw new SiecleXmlImportError(ERRORS.ENCODING_NOT_SUPPORTED);
   }
 }
