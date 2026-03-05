@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.347.0](https://github.com/1024pix/pix/compare/v5.346.0...v5.347.0) (2026-03-05)
+
+### :rocket: Amélioration
+
+- [#15190](https://github.com/1024pix/pix/pull/15190) MDX-32 relecture MGO et intégration média 
+- [#15337](https://github.com/1024pix/pix/pull/15337) MDX-34 NR_Durabilite_IND retours experts et inte medias 
+- [#15330](https://github.com/1024pix/pix/pull/15330) modif-post-relecture-Alice 
+- [#15358](https://github.com/1024pix/pix/pull/15358) modifs relecture interne antivirus v2 
+- [#15355](https://github.com/1024pix/pix/pull/15355) modifs repondremail nov 
+- [#15313](https://github.com/1024pix/pix/pull/15313) Permettre le scoring de certifs Pix+ Edu (PIX-21565). 
+
+### :bug: Correction
+
+- [#15353](https://github.com/1024pix/pix/pull/15353) Permettre le lancement d'un Parcours Combiné pour un utilisateur non connecté (PIX-21802). 
+
+### :building_construction: Tech
+
+- [#15341](https://github.com/1024pix/pix/pull/15341) Ajoute une stratégie d'authentification de routes API qui permet un usage non authentifié tout en validant l'authentification si elle est fournie. 
+- [#15280](https://github.com/1024pix/pix/pull/15280) Ecrire un script pour remplir les trois nouvelles colonnes "capacity", "meshIndex" et "versionId" de la table "assessment-results" 
+- [#15294](https://github.com/1024pix/pix/pull/15294) Envoie les jobs asynchrones après le succès de la transaction 
+- [#15319](https://github.com/1024pix/pix/pull/15319) Retirer la colonne ownerOrganizationId sur la table des profils cibles (PIX-21605).
+
 # [5.346.0](https://github.com/1024pix/pix/compare/v5.345.0...v5.346.0) (2026-03-04)
 
 ### :rocket: Amélioration
