@@ -2,6 +2,7 @@ import {
   COMBINED_COURSE_BLUEPRINT_ITEMS,
   CombinedCourseBlueprint,
 } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import * as combinedCourseBlueprintSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-blueprint-serializer.js';
 import { domainBuilder, expect } from '../../../../test-helper.js';
 
@@ -10,6 +11,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
     // given
     const combinedCourseBlueprint = domainBuilder.buildCombinedCourseBlueprint({
       content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }, { targetProfileId: 123 }]),
+      modulesByShortId: { 'mon-module': [new Module({ id: '1' })] },
     });
 
     // when
@@ -54,7 +56,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
           'internal-name': 'Mon modèle de parcours',
           illustration: '/illustrations/image.svg',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          'success-requirements': [
+          content: [
             {
               type: 'passages',
               value: 'mon-module',
@@ -82,7 +84,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
       internalName: 'Mon modèle de parcours',
       illustration: '/illustrations/image.svg',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      successRequirements: [
+      content: [
         {
           type: 'passages',
           value: 'mon-module',
@@ -92,6 +94,8 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
           value: 123,
         },
       ],
+      quest: null,
+      organizationIds: [],
       createdAt: date,
       updatedAt: date,
     });
