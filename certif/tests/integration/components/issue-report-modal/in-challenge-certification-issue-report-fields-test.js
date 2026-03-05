@@ -156,14 +156,15 @@ module('Integration | Component | in-challenge-certification-issue-report-fields
     );
 
     // then
+    const subcategorySelect = screen.getByRole('button', {
+      name: t('pages.session-finalization.add-issue-modal.actions.select-subcategory'),
+    });
     assert
-      .dom(
-        screen.getByRole('option', {
-          name: `${subcategoryToCode[certificationIssueReportSubcategories.FILE_NOT_OPENING]} ${t(
-            subcategoryToLabel[certificationIssueReportSubcategories.FILE_NOT_OPENING],
-          )}`,
-        }),
-      )
-      .exists();
+      .dom(subcategorySelect)
+      .includesText(
+        `${subcategoryToCode[certificationIssueReportSubcategories.FILE_NOT_OPENING]} ${t(
+          subcategoryToLabel[certificationIssueReportSubcategories.FILE_NOT_OPENING],
+        )}`,
+      );
   });
 });
