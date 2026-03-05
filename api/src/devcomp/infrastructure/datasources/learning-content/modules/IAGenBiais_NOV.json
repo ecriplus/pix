@@ -43,7 +43,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Nathan et Asma",
+                  "conversationTitle": "Nathan et Asma",
                   "messages": [
                     {
                       "userName": "Nathan",

@@ -42,7 +42,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation d’introduction",
+                  "conversationTitle": "Conversation d’introduction",
                   "messages": [
                     {
                       "userName": "Yvette",
@@ -219,7 +219,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation de transition 1",
+                  "conversationTitle": "Conversation de transition 1",
                   "messages": [
                     {
                       "userName": "Yvette",
@@ -384,7 +384,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation transition 2",
+                  "conversationTitle": "Conversation transition 2",
                   "messages": [
                     {
                       "userName": "Yvette",
@@ -457,7 +457,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation transition 3",
+                  "conversationTitle": "Conversation transition 3",
                   "messages": [
                     {
                       "userName": "Yvette",
@@ -553,7 +553,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Fin de la conversation",
+                  "conversationTitle": "Fin de la conversation",
                   "messages": [
                     {
                       "userName": "Yvette",

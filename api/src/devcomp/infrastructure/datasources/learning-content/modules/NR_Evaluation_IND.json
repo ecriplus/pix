@@ -45,7 +45,7 @@
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Voici une discussion entre Fred et Ombeline",
+                  "conversationTitle": "Voici une discussion entre Fred et Ombeline",
                   "messages": [
                     {
                       "userName": "Fred",
@@ -911,7 +911,7 @@
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "🟢 Les centres de données et la neutralité carbone",
+                  "articleTitle": "🟢 Les centres de données et la neutralité carbone",
                   "author": "Rédaction spécialisée",
                   "date": "2025",
                   "paragraphs": [
