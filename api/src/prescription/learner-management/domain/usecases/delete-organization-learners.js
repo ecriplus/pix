@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../shared/domain/models/jobs/AuditLoggingJob.js';
 import { OrganizationLearnerList } from '../models/OrganizationLearnerList.js';
 
 const deleteOrganizationLearners = async function ({
@@ -12,7 +12,7 @@ const deleteOrganizationLearners = async function ({
   campaignParticipationRepositoryFromBC,
   badgeAcquisitionRepository,
   assessmentRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   userRecommendedTrainingRepository,
   organizationsProfileRewardRepository,
   keepPreviousDeletion = false,
@@ -40,7 +40,7 @@ const deleteOrganizationLearners = async function ({
 
   const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
 
-  const eventLoggingJobs = [];
+  const auditLoggingJobs = [];
 
   await DomainTransaction.execute(async () => {
     for (const organizationLearner of organizationLearnersToDelete) {
@@ -54,8 +54,8 @@ const deleteOrganizationLearners = async function ({
         await organizationsProfileRewardRepository.remove(organizationLearnerReward);
       }
 
-      eventLoggingJobs.push(
-        EventLoggingJob.forUser({
+      auditLoggingJobs.push(
+        AuditLoggingJob.forUser({
           client,
           action: organizationLearner.loggerContext,
           role: userRole,
@@ -75,8 +75,8 @@ const deleteOrganizationLearners = async function ({
         campaignParticipation.delete(userId);
         await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
 
-        eventLoggingJobs.push(
-          EventLoggingJob.forUser({
+        auditLoggingJobs.push(
+          AuditLoggingJob.forUser({
             client,
             action: campaignParticipation.loggerContext,
             role: userRole,
@@ -101,8 +101,8 @@ const deleteOrganizationLearners = async function ({
     }
   });
 
-  for (const eventLoggingJob of eventLoggingJobs) {
-    await eventLoggingJobRepository.performAsync(eventLoggingJob);
+  for (const auditLoggingJob of auditLoggingJobs) {
+    await auditLoggingJobRepository.performAsync(auditLoggingJob);
   }
 };
 

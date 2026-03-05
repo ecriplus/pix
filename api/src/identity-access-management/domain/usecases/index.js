@@ -19,7 +19,7 @@ import * as passwordValidator from '../../../shared/domain/validators/password-v
 import * as userValidator from '../../../shared/domain/validators/user-validator.js';
 import { httpAgent } from '../../../shared/infrastructure/http-agent.js';
 import { adminMemberRepository } from '../../../shared/infrastructure/repositories/admin-member.repository.js';
-import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import { auditLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/audit-logging-job.repository.js';
 import * as organizationRepository from '../../../shared/infrastructure/repositories/organization-repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import * as codeUtils from '../../../shared/infrastructure/utils/code-utils.js';
@@ -67,7 +67,7 @@ const repositories = {
   emailValidationDemandRepository,
   clientApplicationRepository,
   emailRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   lastUserApplicationConnectionsRepository,
   legalDocumentApiRepository,
   ltiPlatformRegistrationRepository,

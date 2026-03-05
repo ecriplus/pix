@@ -67,8 +67,8 @@ export class JobRepository {
     return { rowCount };
   }
 
-  async performAsync(...datas) {
-    const jobs = datas.map((payload) => {
+  async performAsync(...data) {
+    const jobs = data.map((payload) => {
       return this.#buildPayload(payload);
     });
 

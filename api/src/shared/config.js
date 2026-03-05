@@ -207,7 +207,6 @@ const configuration = (function () {
       },
     },
     auditLogger: {
-      isEnabled: toBoolean(process.env.PIX_AUDIT_LOGGER_ENABLED),
       baseUrl: process.env.PIX_AUDIT_LOGGER_BASE_URL,
       clientSecret: process.env.PIX_AUDIT_LOGGER_CLIENT_SECRET,
     },
@@ -528,7 +527,6 @@ const configuration = (function () {
       },
     };
 
-    config.auditLogger.isEnabled = true;
     config.auditLogger.baseUrl = 'http://audit-logger.local';
     config.auditLogger.clientSecret = 'client-super-secret';
 

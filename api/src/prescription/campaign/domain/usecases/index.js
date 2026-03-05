@@ -15,7 +15,7 @@ import { adminMemberRepository } from '../../../../shared/infrastructure/reposit
 import * as assessmentRepository from '../../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as badgeForCalculationRepository from '../../../../shared/infrastructure/repositories/badge-for-calculation-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
-import { eventLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import { auditLoggingJobRepository } from '../../../../shared/infrastructure/repositories/jobs/audit-logging-job.repository.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
@@ -68,7 +68,7 @@ const dependencies = {
   competenceRepository,
   improvementService,
   divisionRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   featureToggles,
   groupRepository,
   knowledgeElementRepository,

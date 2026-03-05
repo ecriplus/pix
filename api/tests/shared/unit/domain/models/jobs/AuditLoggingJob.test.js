@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () {
+describe('Unit | Shared | Domain | Model | Jobs | AuditLoggingJob', function () {
   const now = new Date(2024, 1, 1);
   let clock;
 
@@ -16,10 +16,10 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
     clock.restore();
   });
 
-  describe('EventLoggingJob.forUser', function () {
-    it('creates an EventLoggingJob instance for a user', async function () {
+  describe('AuditLoggingJob.forUser', function () {
+    it('creates an AuditLoggingJob instance for a user', async function () {
       // when
-      const eventLoggingJob = EventLoggingJob.forUser({
+      const auditLoggingJob = AuditLoggingJob.forUser({
         client: 'PIX_APP',
         action: 'EMAIL_CHANGED',
         role: 'USER',
@@ -30,20 +30,20 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       });
 
       // then
-      expect(eventLoggingJob.client).to.equal('PIX_APP');
-      expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
-      expect(eventLoggingJob.role).to.equal('USER');
-      expect(eventLoggingJob.userId).to.equal(123);
-      expect(eventLoggingJob.targetUserIds).to.deep.equal([456]);
-      expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
-      expect(eventLoggingJob.occurredAt).to.deep.equal(now);
+      expect(auditLoggingJob.client).to.equal('PIX_APP');
+      expect(auditLoggingJob.action).to.equal('EMAIL_CHANGED');
+      expect(auditLoggingJob.role).to.equal('USER');
+      expect(auditLoggingJob.userId).to.equal(123);
+      expect(auditLoggingJob.targetUserIds).to.deep.equal([456]);
+      expect(auditLoggingJob.data).to.deep.equal({ foo: 'bar' });
+      expect(auditLoggingJob.occurredAt).to.deep.equal(now);
     });
   });
 
-  describe('EventLoggingJob.forUsers', function () {
-    it('creates an EventLoggingJob instance for multiple users', async function () {
+  describe('AuditLoggingJob.forUsers', function () {
+    it('creates an AuditLoggingJob instance for multiple users', async function () {
       // when
-      const eventLoggingJob = EventLoggingJob.forUsers({
+      const auditLoggingJob = AuditLoggingJob.forUsers({
         client: 'PIX_APP',
         action: 'EMAIL_CHANGED',
         role: 'USER',
@@ -54,13 +54,13 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       });
 
       // then
-      expect(eventLoggingJob.client).to.equal('PIX_APP');
-      expect(eventLoggingJob.action).to.equal('EMAIL_CHANGED');
-      expect(eventLoggingJob.role).to.equal('USER');
-      expect(eventLoggingJob.userId).to.equal(123);
-      expect(eventLoggingJob.targetUserIds).to.deep.equal([456, 789]);
-      expect(eventLoggingJob.data).to.deep.equal({ foo: 'bar' });
-      expect(eventLoggingJob.occurredAt).to.deep.equal(now);
+      expect(auditLoggingJob.client).to.equal('PIX_APP');
+      expect(auditLoggingJob.action).to.equal('EMAIL_CHANGED');
+      expect(auditLoggingJob.role).to.equal('USER');
+      expect(auditLoggingJob.userId).to.equal(123);
+      expect(auditLoggingJob.targetUserIds).to.deep.equal([456, 789]);
+      expect(auditLoggingJob.data).to.deep.equal({ foo: 'bar' });
+      expect(auditLoggingJob.occurredAt).to.deep.equal(now);
     });
   });
 
@@ -68,7 +68,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
     context('when occurredAt is not defined', function () {
       it('set a default date for occurredAt', function () {
         // when
-        const eventLoggingJob = EventLoggingJob.forUser({
+        const auditLoggingJob = AuditLoggingJob.forUser({
           client: 'PIX_APP',
           action: 'EMAIL_CHANGED',
           role: 'USER',
@@ -77,7 +77,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
         });
 
         // then
-        expect(eventLoggingJob.occurredAt).to.deep.equal(now);
+        expect(auditLoggingJob.occurredAt).to.deep.equal(now);
       });
     });
 
@@ -85,7 +85,7 @@ describe('Unit | Shared | Domain | Model | Jobs | EventLoggingJob', function () 
       it('throws an entity validation error', function () {
         try {
           // when
-          EventLoggingJob.forUser({});
+          AuditLoggingJob.forUser({});
           assert.fail();
         } catch (error) {
           // then

@@ -65,7 +65,6 @@ export function setupWebServer(app: App, reuseExistingServer: boolean): WebServe
           DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL ?? '',
           REDIS_URL: process.env.REDIS_URL ?? '',
           START_JOB_IN_WEB_PROCESS: 'true',
-          PIX_AUDIT_LOGGER_ENABLED: 'false',
           MAILING_ENABLED: 'false',
           LCMS_API_URL: process.env.LCMS_API_URL ?? '',
           LCMS_API_KEY: process.env.LCMS_API_KEY ?? '',
