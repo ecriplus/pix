@@ -9,7 +9,7 @@
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Dans un échange par courrier électronique (mail), plusieurs personnes peuvent être concernées&nbsp;: des collègues, des proches, des administrations, etc.</p><p>Dans ce module, vous allez apprendre à répondre à un mail, transmettre et trouver une information dans un échange par mail, selon le contexte et les personnes impliquées.</p>",
     "duration": 10,
-    "level": "novice",
+    "level": "independent",
     "objectives": [
       "<p>Transférer un mail à quelqu’un d’autre    </p>",
       "<p>Répondre à un mail avec plusieurs destinataires</p>",
@@ -40,8 +40,8 @@
               "element": {
                 "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
                 "type": "expand",
-                "title": "[Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
-                "content": "<ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><p><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></p><p><em>Bonjour Gabriel,</em></p><p><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></p><p><em>À bientôt,</em></p><p><em>Alma, chargée d’organisation des Conférences Climax</em></p><ul><li><strong>Actions attendues</strong>&nbsp;: Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; “Cliquer sur Envoyer”</li><br></ul>"
+                "title": "[🕹️ Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
+                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><p><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></p><p><em>Bonjour Gabriel,</em></p><p><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></p><p><em>À bientôt,</em></p><p><em>Alma, chargée d’organisation des Conférences Climax</em></p><br><p><strong>Actions attendues</strong>&nbsp;: Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; “Cliquer sur Envoyer”</p>"
               }
             },
             {
@@ -49,7 +49,7 @@
               "element": {
                 "id": "56f56984-7711-4a3a-bf34-8dd3b44e556c",
                 "type": "text",
-                "content": "<p><strong>[Feedback]</strong></p><p>Bien joué ! Le mail a été envoyé à Alma. Pour répondre à un mail, il faut cliquer sur «&nbsp;Répondre&nbsp;». Le destinataire et l’objet du mail sont déjà remplis. Il vous reste à écrire votre message puis cliquer sur «&nbsp;Envoyer&nbsp;».</p>"
+                "content": "<p><strong>[Feedback autovalid]</strong></p><p>Bien joué ! Le mail a été envoyé à Alma. Pour répondre à un mail, il faut cliquer sur «&nbsp;Répondre&nbsp;». Le destinataire et l’objet du mail sont déjà remplis. Il vous reste à écrire votre message puis cliquer sur «&nbsp;Envoyer&nbsp;».</p>"
               }
             }
           ]
