@@ -89,6 +89,7 @@ import { archiveOrganization } from './archive-organization.usecase.js';
 import { archiveOrganizationsInBatch } from './archive-organizations-in-batch.usecase.js';
 import { attachChildOrganizationToOrganization } from './attach-child-organization-to-organization.js';
 import { createCertificationCenter } from './create-certification-center.usecase.js';
+import { createNetwork } from './create-network.usecase.js';
 import { createOrganization } from './create-organization.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizations-with-tags-and-target-profiles.usecase.js';
 import { createTag } from './create-tag.js';
@@ -119,6 +120,7 @@ const usecasesWithoutInjectedDependencies = {
   archiveOrganizationsInBatch,
   attachChildOrganizationToOrganization,
   createCertificationCenter,
+  createNetwork,
   createOrganization,
   createOrganizationsWithTagsAndTargetProfiles,
   createTag,
