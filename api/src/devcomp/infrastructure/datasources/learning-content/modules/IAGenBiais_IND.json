@@ -32,7 +32,9 @@
               "element": {
                 "id": "510015d3-8fb4-4024-8632-9b7ca6ec1187",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Conversation à propos des biais",
@@ -54,9 +56,7 @@
                       "content": "Ah oui, il y a même le drapeau américain, haha ! Tu es tombée sur un biais."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -72,6 +72,7 @@
                 "id": "ee7df126-3ebb-4bff-bbc2-98eb9cfd454c",
                 "type": "qcu-discovery",
                 "instruction": "<p>Mais, qu’est-ce qu’un biais ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -102,8 +103,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -141,7 +141,7 @@
                 "id": "bc81d8b6-5e68-42bc-85de-0c408cbdc7c6",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici ci-dessous des exemples issus du web. On les donne à l’IA générative pour s’entraîner. <br>Observez chaque document et répondez à la question.</p>"
+                "content": "<p>Les IA génératives apprennent à réaliser des tâches grâce à des exemples. Voici différents extraits de textes issus du web. On les utilise pour entrainer des IA générative à écrire/converser. Observez chaque exemple et répondez à la question.</p>"
               }
             },
             {
@@ -162,7 +162,8 @@
                     {
                       "id": "5f842916-e037-4232-aca1-ea73a63474c4",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des forums et des réseaux sociaux, ses réponses pourront-elles contenir des biais ?</p>",
+                      "instruction": "<p>À votre avis, si l’IA générative est entraînée avec des messages issus de forums en ligne et des réseaux sociaux, ses réponses pourront-elles contenir des biais ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -186,8 +187,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -206,6 +206,7 @@
                       "id": "7230c256-05dd-43be-b855-b799ca0bbe2d",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, si l’IA générative est entraînée sur Wikipédia, ses réponses pourront-elles contenir des biais ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -229,8 +230,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -249,6 +249,7 @@
                       "id": "e7221438-eda2-4b5f-a587-ec525317070d",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, si l’IA générative est entraînée sur des sources à propos des prix Nobel, comme cet article, ses réponses pourront-elles contenir des biais ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -272,8 +273,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 }
@@ -363,6 +363,7 @@
                 "id": "e99f798d-393d-4c1c-a07f-c0138b0746d6",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, que va répondre cette IA générative à la demande «&nbsp;Quel est l’ingrédient principal de la recette du taboulé&nbsp;» ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -379,8 +380,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -440,7 +440,9 @@
                     {
                       "id": "9365da9a-4ef8-4448-a6b6-d17ab0292a8b",
                       "type": "custom",
+                      "title": "",
                       "instruction": "<p>Paul interroge une IA générative sur sa boisson préférée.</p>",
+                      "functionalInstruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -457,14 +459,13 @@
                             "content": "C’est bien ce que je me disais ! Je vais aller m’en servir un verre ! "
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     },
                     {
                       "id": "54e415d3-a447-4c30-821d-75a54ecaff56",
                       "type": "qcu-discovery",
                       "instruction": "<p>Pourquoi Paul est-il d’accord avec la réponse de l’IA ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -502,8 +503,7 @@
                           }
                         }
                       ],
-                      "solution": "4",
-                      "hasShortProposals": false
+                      "solution": "4"
                     }
                   ]
                 },
@@ -528,6 +528,7 @@
                       "id": "2969727b-55aa-4661-a720-9749780b3924",
                       "type": "qcu-discovery",
                       "instruction": "<p>Pourquoi Sato est d’accord avec la réponse de l’IA ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -565,8 +566,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -575,7 +575,9 @@
                     {
                       "id": "f2254890-a209-423b-8b8e-69c282550d9a",
                       "type": "custom",
+                      "title": "",
                       "instruction": "<p>Enora s’interroge sur son avenir professionnel. Elle demande des idées à une IA générative.</p>",
+                      "functionalInstruction": "",
                       "tagName": "llm-messages",
                       "props": {
                         "messages": [
@@ -592,14 +594,13 @@
                             "content": " Bon conseil ! "
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     },
                     {
                       "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
                       "type": "qcu-discovery",
                       "instruction": "<p>Pourquoi Enora est-elle d’accord avec la réponse de l’IA ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -637,8 +638,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -829,7 +829,9 @@
               "element": {
                 "id": "cc1559a4-2f33-45b3-9c07-bdf018e9fafb",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -909,9 +911,7 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "enableLoop": true
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -920,6 +920,7 @@
                 "id": "70fe1d8d-fc25-4f6e-9d45-96b4a06c8714",
                 "type": "qcm",
                 "instruction": "<p>Parmi les exemples, lesquels comportent un biais ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -952,8 +953,10 @@
                     "diagnosis": "<p>Vous avez peut-être oublié un exemple ou vu un détail qui n’était pas forcément un biais.</p><p>Voici un indice&nbsp;: les exemples qui comportent des biais renforcent des stéréotypes. N’hésitez pas à recommencer.</p>"
                   }
                 },
-                "solutions": ["2", "4"],
-                "hasShortProposals": false
+                "solutions": [
+                  "2",
+                  "4"
+                ]
               }
             }
           ]
@@ -973,12 +976,13 @@
                       "id": "430b4a5d-d0b0-465f-97f0-64eb7f1509df",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Thaïs a envie d’investir dans le bitcoin. </p><p>Elle demande conseil à une IA générative.</p><p>Aidez-là à <strong>limiter</strong> le <strong>biais de confirmation</strong>.</p>"
+                      "content": "<p>Thaïs a envie d’investir son argent. Elle pense que c’est une bonne idée d’investir dans le bitcoin </p><p>Elle demande conseil à une IA générative.</p><p>Aidez-là à <strong>limiter</strong> le <strong>biais de confirmation</strong>.</p>"
                     },
                     {
                       "id": "b0e8366a-012c-4108-af7f-61950ce3766e",
                       "type": "qcu",
                       "instruction": "<p>Quelle requête (ou prompt) conseillez-vous à Thaïs ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -997,8 +1001,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -1008,32 +1011,32 @@
                       "id": "369adc11-3be5-4c03-adb0-583b2ddad416",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Thaïs a lu la réponse de l’IA générative.</p>"
+                      "content": "<p>Après avoir lu la réponse de l’IA, Thaïs a désormais des pistes d’investissement. Quelle attitude aide Thaïs à garder un regard critique ?</p>"
                     },
                     {
                       "id": "31d6c8d7-b110-4a87-b812-1fa710a78cde",
                       "type": "qcu",
-                      "instruction": "<p>Quelle attitude conseillez-vous à Thaïs ?</p>",
+                      "instruction": "<p>Quelle attitude pouvez vous conseiller à Thaïs pour qu’elle garde un regard critique ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Retenir les aspects positifs du bitcoin uniquement.</p>",
+                          "content": "<p>Se concentrer uniquement sur les arguments qui confirment son envie de placer son argent.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le risque pour Thaïs, qui a déjà envie d’investir dans le bitcoin, est de ne retenir que les aspects positifs, et d’ignorer les aspects négatifs. Elle risque de perdre son argent.</p>"
+                            "diagnosis": "<p>Le risque pour Thaïs, qui a déjà envie d’investir, est de ne retenir que les aspects positifs, et d’ignorer les aspects négatifs. Sans prendre de précautions, elle risque de perdre son argent.</p><p><strong>Les biais ne viennent pas seulement de l’IA</strong>.Ils peuvent aussi venir de la manière dont on pose la question ou dont on interprète la réponse.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>S’informer sur les inconvénients de l’investissement dans le bitcoin.<br></p>",
+                          "content": "<p>Vérifier aussi les risques et les avis contradictoires</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>C’est une bonne idée de s’intéresser aux avis différents du sien, pour mieux comprendre les autres arguments et les nuances.</p>"
+                            "diagnosis": "<p>C’est une bonne idée de s’intéresser aux avis différents du sien, pour mieux comprendre les autres arguments et les nuances.</p><p><strong>Les biais ne viennent pas seulement de l’IA</strong>.Ils peuvent aussi venir de la manière dont on pose la question ou dont on interprète la réponse.</p>"
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -1067,12 +1070,13 @@
                 "id": "efee2fc9-aeeb-4a32-956f-3b4b943f5491",
                 "type": "qcu-declarative",
                 "instruction": "<p>Choisissez une bonne résolution&nbsp;:</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Formuler les prompts les plus neutres possible.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre… ?»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
+                      "diagnosis": "<p>C’est une bonne idée !</p><p>Vous pouvez par exemple demander&nbsp;: «&nbsp;Quels sont les arguments pour et contre… ?»<br>Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   },
                   {
@@ -1103,8 +1107,7 @@
                       "diagnosis": "<p>C’est une bonne idée ! </p><p>Pour rappel, vous pouvez vous demander&nbsp;: «&nbsp;Est-ce que cette réponse est nuancée ?&nbsp;» , «&nbsp;Est-ce que cette réponse semble être un cliché ?&nbsp;».</p><p> Toutes les autres méthodes sont utiles aussi, n’hésitez pas à les combiner !</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]
