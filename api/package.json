@@ -64,6 +64,7 @@
     "dev": "nodemon --env-file-if-exists=.env index.js",
     "dev:maddo": "MADDO=true nodemon --env-file-if-exists=.env index.maddo.js",
     "start": "node --env-file-if-exists=.env index.js",
+    "start:inspect": "node --env-file-if-exists=.env --inspect index.js",
     "start:maddo": "MADDO=true node --env-file-if-exists=.env index.maddo.js",
     "start:watch": "npm run dev",
     "start:job": "node --env-file-if-exists=.env worker.js",
