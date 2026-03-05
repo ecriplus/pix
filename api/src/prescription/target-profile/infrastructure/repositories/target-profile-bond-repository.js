@@ -11,4 +11,9 @@ const update = async function (targetProfile) {
   return results.map(({ organizationId }) => organizationId);
 };
 
-export { update };
+const deleteByTargetProfileId = async function (targetProfileId) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('target-profile-shares').where({ targetProfileId }).del();
+};
+
+export { deleteByTargetProfileId, update };

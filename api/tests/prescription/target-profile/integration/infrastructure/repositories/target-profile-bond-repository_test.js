@@ -1,5 +1,5 @@
 import { knex } from '../../../../../../db/knex-database-connection.js';
-import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-bond-repository.js';
+import * as targetProfileBondRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-bond-repository.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Target Profile Management | Target Profile ', function () {
@@ -20,7 +20,7 @@ describe('Integration | Repository | Target Profile Management | Target Profile 
       };
 
       // when
-      await targetProfileRepository.update(targetProfile);
+      await targetProfileBondRepository.update(targetProfile);
 
       // then
       const result = await knex
@@ -49,7 +49,7 @@ describe('Integration | Repository | Target Profile Management | Target Profile 
       };
 
       // when
-      await targetProfileRepository.update(targetProfile);
+      await targetProfileBondRepository.update(targetProfile);
 
       // then
       const result = await knex
@@ -77,10 +77,38 @@ describe('Integration | Repository | Target Profile Management | Target Profile 
       };
 
       // when
-      const result = await targetProfileRepository.update(targetProfile);
+      const result = await targetProfileBondRepository.update(targetProfile);
 
       // then
       expect(result).to.deepEqualArray([organizationId, otherOrganizationId]);
+    });
+  });
+
+  describe('#deleteByTargetProfileId', function () {
+    it('should delete all target profile shares for the given target profile', async function () {
+      // given
+      const firstOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const secondOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId: firstOrganizationId });
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId: secondOrganizationId });
+      databaseBuilder.factory.buildTargetProfileShare({
+        targetProfileId: otherTargetProfileId,
+        organizationId: firstOrganizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await targetProfileBondRepository.deleteByTargetProfileId(targetProfileId);
+
+      // then
+      const deletedShares = await knex('target-profile-shares').where({ targetProfileId });
+      expect(deletedShares).to.have.lengthOf(0);
+
+      const otherShares = await knex('target-profile-shares').where({ targetProfileId: otherTargetProfileId });
+      expect(otherShares).to.have.lengthOf(1);
     });
   });
 });
