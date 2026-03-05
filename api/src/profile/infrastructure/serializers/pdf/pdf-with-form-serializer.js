@@ -1,5 +1,5 @@
-import JSZip from 'jszip';
 import { PDFDocument } from 'pdf-lib';
+import yazl from 'yazl';
 
 import { FONTS, initializeFonts } from '../../../../shared/infrastructure/serializers/pdf/utils.js';
 import { getDataBuffer } from '../../../../shared/infrastructure/utils/buffer.js';
@@ -19,14 +19,16 @@ async function serializePdf(template, entry, creationDate = new Date()) {
 }
 
 async function serializeArray(template, entries, creationDate) {
-  const zip = new JSZip();
-  await Promise.all(
-    entries.map(async (entry) => {
-      const buffer = await serializeObject(template, entry, creationDate);
-      zip.file(entry.get('filename') + '.pdf', buffer);
-    }),
-  );
-  return zip.generateAsync({ type: 'nodebuffer' });
+  const zipfile = new yazl.ZipFile();
+
+  for (const entry of entries) {
+    const buffer = await serializeObject(template, entry, creationDate);
+    zipfile.addBuffer(buffer, `${entry.get('filename')}.pdf`);
+  }
+
+  zipfile.end();
+
+  return zipfile.outputStream;
 }
 
 async function serializeObject(template, entry, creationDate) {
