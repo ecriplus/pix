@@ -169,7 +169,7 @@ describe('Integration | UseCases | get-organization-learner-with-participations'
         organizationId: organization.id,
       });
 
-      const targetProfileId = databaseBuilder.factory.buildTargetProfile({ ownerOrganizationId: organization.id }).id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
 
       databaseBuilder.factory.buildCampaignParticipation({
