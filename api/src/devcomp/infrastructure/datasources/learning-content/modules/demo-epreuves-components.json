@@ -351,98 +351,6 @@
           ]
         },
         {
-          "id": "943902a7-92dd-4bbb-bcd9-0834039d7533",
-          "type": "discovery",
-          "title": "clickable-image-without-spot",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "5e43c9be-aa95-4520-bc44-dc5bdefd2976",
-                "type": "text",
-                "content": "<p>clickable-image-without-spot</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "753de2ad-240b-4187-8787-130fd8b3e711",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "clickable-image-without-spot",
-                "props": {
-                  "image": {
-                    "src": "https://assets.pix.org/modules/salon-connecte.webp",
-                    "alt": "Salon connecté",
-                    "width": 1536,
-                    "height": 1024
-                  },
-                  "areas": [
-                    {
-                      "coords": {
-                        "x1": 390,
-                        "y1": 120,
-                        "x2": 842,
-                        "y2": 400
-                      },
-                      "info": "Pixvidéo : Vous avez aimé « Les chroniques de Flundertown », vous aimerez sûrement « Autant en emporte les fleurs »."
-                    },
-                    {
-                      "coords": {
-                        "x1": 510,
-                        "y1": 588,
-                        "x2": 702,
-                        "y2": 635
-                      },
-                      "info": "Jeu vidéo : Kart Party, le jeu s’adapte en fonction du niveau du joueur"
-                    },
-                    {
-                      "coords": {
-                        "x1": 248,
-                        "y1": 398,
-                        "x2": 325,
-                        "y2": 492
-                      },
-                      "info": "Enceinte connectée : Paramètre activé « Reconnaissance vocale »"
-                    },
-                    {
-                      "coords": {
-                        "x1": 828,
-                        "y1": 560,
-                        "x2": 1042,
-                        "y2": 725
-                      },
-                      "info": "ChatPix : « Que puis-je faire pour toi aujourd’hui ? »",
-                      "tooltipPosition": "bottom"
-                    },
-                    {
-                      "coords": {
-                        "x1": 122,
-                        "y1": 796,
-                        "x2": 318,
-                        "y2": 916
-                      },
-                      "info": "Robot aspirateur : Paramètre activé « Détection automatique des obstacles et adaptation du parcours »"
-                    },
-                    {
-                      "coords": {
-                        "x1": 986,
-                        "y1": 148,
-                        "x2": 1100,
-                        "y2": 230
-                      },
-                      "info": "Thermostat mural : Paramètre activé « Température idéale et économie d’énergie »",
-                      "tooltipPosition": "bottom"
-                    }
-                  ]
-                },
-                "title": "",
-                "functionalInstruction": ""
-              }
-            }
-          ]
-        },
-        {
           "id": "208deb8a-4580-4a33-8ca5-32205f5f07dd",
           "type": "discovery",
           "title": "complete-phrase",
@@ -1399,6 +1307,35 @@
           ]
         },
         {
+          "id": "6d0699bf-5f50-44a0-a44a-58e55b4376f9",
+          "type": "discovery",
+          "title": "pix-combinaisons",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e016cb48-9aed-41b8-a10c-d0ed86b09b2c",
+                "type": "text",
+                "content": "<p>pix-combinaisons</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1a3782d4-56e1-4d70-aebc-1deefdf72a18",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "pix-combinaisons",
+                "props": {
+                  "titleLevel": 2
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
           "id": "fc38e052-ed9f-4d68-b09f-515b7069ad00",
           "type": "discovery",
           "title": "pix-cursor",
@@ -1446,6 +1383,84 @@
                       "feedback": {
                         "type": "bad",
                         "text": "❌ C'EST NON! Et voici pourquoi : <br>Quis elit cupidatat commodo adipisicing aliqua qui commodo proident ipsum dolore culpa in. Mollit eiusmod elit sint in aute nulla enim. Sit sint in sunt esse excepteur cupidatat et adipisicing nulla excepteur consectetur reprehenderit est ipsum. Cupidatat proident est pariatur minim labore excepteur culpa aliqua consectetur laboris voluptate consectetur enim nulla laboris. Aliquip occaecat irure sunt. Laboris eiusmod eu dolor veniam minim proident. Elit consequat est occaecat."
+                      }
+                    }
+                  ]
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "a830738f-5aef-4a44-ab3c-34ceb23ca360",
+          "type": "discovery",
+          "title": "proteger-mail-spam",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d3899560-183b-4615-8179-f578cd4c03ba",
+                "type": "text",
+                "content": "<p>proteger-mail-spam</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6ba0c7bf-ecb0-43ae-a2c8-c37aa5fe4271",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "proteger-mail-spam",
+                "props": {
+                  "titleLevel": 2,
+                  "steps": [
+                    {
+                      "title": "Première situation : Se protéger",
+                      "description": "Utilisez l’interface pour ne plus recevoir de message en provenance de cette adresse mail.",
+                      "actions": {
+                        "return": "disabled",
+                        "menuActions": {
+                          "markAsUnread": "hidden",
+                          "reportSpam": "hidden"
+                        }
+                      },
+                      "goodAction": "blockSender",
+                      "mail": {
+                        "subject": "[URGENT] Votre accès sera suspendu",
+                        "sender": {
+                          "name": "Bnq secure",
+                          "address": "alert@bnq-secure.link",
+                          "avatarColor": "#2f80ed"
+                        },
+                        "body": "Bonjour, <br><br>Nous avons détecté une activité suspecte sur votre compte.Par mesure de sécurité, l’accès sera suspendu dans les 2 heures si vous ne confirmez pas vos informations.<br><br>Confirmez votre compte ici : <a href='fake'>http://securite-compte-verification.com</a><br><br>Sans confirmation, vos services seront définitivement bloqués. Support Client MaBanque",
+                        "time": {
+                          "minutes": -5
+                        }
+                      }
+                    },
+                    {
+                      "title": "Deuxième situation : Protéger les autres",
+                      "description": "Le mail suivant est aussi frauduleux. Utilisez l’interface pour signaler le message et aider à renforcer les filtres anti‑spam.",
+                      "actions": {
+                        "return": "disabled",
+                        "menuActions": {
+                          "markAsUnread": "hidden"
+                        }
+                      },
+                      "goodAction": "reportSpam",
+                      "mail": {
+                        "subject": "Mise à jour de vos données Microsoft",
+                        "sender": {
+                          "name": " Service Données Utilisateurs",
+                          "address": "donnees-gestion-utilisateurs@service-microsoft.com",
+                          "avatarColor": "#2f80ed"
+                        },
+                        "body": "Bonjour,<br><br>Dans le cadre de l’évolution de notre politique de traitement des données personnelles, une validation de vos informations est désormais obligatoire. Veuillez mettre à jour vos informations dans les 3 jours.<br><br>Merci de vérifier et compléter vos informations via le portail sécurisé : <a href='fake'>http://portail-donnees-utilisateur-microsoft.com</a><br><br>Cordialement, Service Données & Conformité Microsoft",
+                        "time": {
+                          "minutes": -10
+                        }
                       }
                     }
                   ]
