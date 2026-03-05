@@ -76,6 +76,8 @@ export class CertificationCourse {
     isRejectedForFraud = false,
     isAdjustedForAccessibility,
     lang,
+    versionId,
+    candidateId,
   } = {}) {
     this._id = id;
     this._firstName = firstName;
@@ -104,10 +106,13 @@ export class CertificationCourse {
     this._isAdjustedForAccessibility = isAdjustedForAccessibility;
     this._numberOfChallenges = numberOfChallenges;
     this._lang = lang;
+    this.versionId = versionId;
+    this.candidateId = candidateId;
   }
 
   static from({
     certificationCandidate,
+    certificationVersion,
     challenges,
     verificationCode,
     maxReachableLevelOnCertificationDate,
@@ -136,6 +141,8 @@ export class CertificationCourse {
       complementaryCertificationCourse,
       version: algorithmEngineVersion,
       lang,
+      versionId: certificationVersion.id,
+      candidateId: certificationCandidate.id,
     });
   }
 
@@ -352,6 +359,8 @@ export class CertificationCourse {
       numberOfChallenges: this._numberOfChallenges,
       version: this._version,
       lang: this._lang,
+      candidateId: this.candidateId,
+      versionId: this.versionId,
     };
   }
 }

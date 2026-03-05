@@ -9,7 +9,7 @@
  * @typedef {import('./index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
- * @typedef {import('../../../src/shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
+ * @typedef {import('../../../shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
  */
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { LanguageNotSupportedError } from '../../../../shared/domain/errors.js';
@@ -260,7 +260,7 @@ async function _startNewCertification({
  * @param {SessionId} params.sessionId
  * @returns {Promise<CertificationCourse>}
  */
-async function _getCertificationCourseIfCreatedMeanwhile(certificationCourseRepository, userId, sessionId) {
+function _getCertificationCourseIfCreatedMeanwhile(certificationCourseRepository, userId, sessionId) {
   return certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId({
     userId,
     sessionId,
@@ -294,6 +294,7 @@ async function _createCertificationCourse({
 
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
+    certificationVersion,
     maxReachableLevelOnCertificationDate,
     complementaryCertificationCourse,
     verificationCode,

@@ -465,6 +465,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 accessCode: 'accessCode',
               });
               evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
+              const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
               const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                 userId: user.id,
@@ -489,6 +490,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               // TODO: extraire jusqu'à la ligne 387 dans une fonction ?
               const certificationCourseToSave = CertificationCourse.from({
                 certificationCandidate: foundCertificationCandidate,
+                certificationVersion,
                 verificationCode,
                 maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                 algorithmEngineVersion: AlgorithmEngineVersion.V3,
@@ -593,6 +595,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   version: 3,
                 });
                 evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId,
@@ -622,6 +625,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                 const certificationCourseToSave = CertificationCourse.from({
                   certificationCandidate: foundCertificationCandidate,
+                  certificationVersion,
                   verificationCode,
                   maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                   algorithmEngineVersion: AlgorithmEngineVersion.V3,
@@ -681,6 +685,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   accessCode: 'accessCode',
                 });
                 evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
+                const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId: 2,
@@ -704,6 +709,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                 const certificationCourseToSave = CertificationCourse.from({
                   certificationCandidate: foundCertificationCandidate,
+                  certificationVersion,
                   verificationCode,
                   maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                   complementaryCertificationCourses: [],
@@ -759,6 +765,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
                     },
                   );
+                  const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
                   const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                     id: 1,
@@ -800,6 +807,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                   const certificationCourseToSave = CertificationCourse.from({
                     certificationCandidate: foundCertificationCandidate,
+                    certificationVersion,
                     verificationCode,
                     maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                     complementaryCertificationCourse,
@@ -923,6 +931,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                       key: ComplementaryCertificationKeys.CLEA,
                     });
+                    const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
                     const certifiableBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
                       badgeKey: 'CLEA_BADGE_1',
@@ -975,6 +984,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                     const certificationCourseToSave = CertificationCourse.from({
                       certificationCandidate: foundCertificationCandidate,
+                      certificationVersion,
                       verificationCode,
                       maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                       complementaryCertificationCourse,
@@ -1030,6 +1040,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                         key: ComplementaryCertificationKeys.CLEA,
                       });
+                      const certificationVersion = domainBuilder.certification.shared.buildVersion();
 
                       const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created(
                         {
@@ -1070,6 +1081,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
                       const certificationCourseToSave = CertificationCourse.from({
                         certificationCandidate: foundCertificationCandidate,
+                        certificationVersion,
                         verificationCode,
                         maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                         algorithmEngineVersion: AlgorithmEngineVersion.V3,

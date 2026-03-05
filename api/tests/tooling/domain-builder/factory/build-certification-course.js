@@ -106,6 +106,8 @@ buildCertificationCourse.unpersisted = function ({
   complementaryCertificationCourse = null,
   maxReachableLevelOnCertificationDate = 7,
   lang,
+  versionId = 123,
+  candidateId = 456,
 } = {}) {
   return new CertificationCourse({
     firstName,
@@ -133,6 +135,8 @@ buildCertificationCourse.unpersisted = function ({
     complementaryCertificationCourse,
     maxReachableLevelOnCertificationDate,
     lang,
+    versionId,
+    candidateId,
   });
 };
 
