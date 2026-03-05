@@ -9,13 +9,13 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     await databaseBuilder.commit();
 
-    const combinedCourseBlueprint = {
+    const combinedCourseBlueprint = new CombinedCourseBlueprint({
       name: 'Mon épure',
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'abc-123' }, { targetProfileId }]),
-    };
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }, { targetProfileId }]),
+    });
 
     await usecases.createCombinedCourseBlueprint({ combinedCourseBlueprint });
 
@@ -29,15 +29,33 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     expect(result[0].updatedAt).to.be.instanceOf(Date);
     expect(result[0].createdAt).to.be.instanceOf(Date);
   });
+
   it('should return error if a targetProfileId in content is not found', async function () {
     // given
-    const combinedCourseBlueprint = {
+    const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+    await databaseBuilder.commit();
+
+    const combinedCourseBlueprint = new CombinedCourseBlueprint({
       name: 'Mon épure',
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'abc-123' }, { targetProfileId: 123 }]),
-    };
+      content: CombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { targetProfileId: 123 }]),
+    });
+
+    const error = await catchErr(usecases.createCombinedCourseBlueprint)({ combinedCourseBlueprint });
+    expect(error).to.be.instanceOf(NotFoundError);
+  });
+
+  it('should return error if one of the modules in content is not found', async function () {
+    // given
+    const combinedCourseBlueprint = new CombinedCourseBlueprint({
+      name: 'Mon épure',
+      internalName: 'Une épure pour tel niveau',
+      illustration: 'illustrations/mon-epure.png',
+      description: 'Description',
+      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }, { moduleShortId: 'abc-123' }]),
+    });
 
     const error = await catchErr(usecases.createCombinedCourseBlueprint)({ combinedCourseBlueprint });
     expect(error).to.be.instanceOf(NotFoundError);
