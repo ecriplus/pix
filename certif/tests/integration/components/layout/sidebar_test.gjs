@@ -245,7 +245,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
         // then
         assert
           .dom(screen.getByRole('link', { name: t('navigation.sidebar.documentation') }))
-          .hasAttribute('href', t('common.urls.documentation.sco-managing-students'));
+          .hasAttribute('href', 'https://cloud.pix.fr/s/opiFxfjygR76S8y');
       });
     });
 
@@ -277,7 +277,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
         // then
         assert
           .dom(screen.getByRole('link', { name: t('navigation.sidebar.documentation') }))
-          .hasAttribute('href', t('common.urls.documentation.other'));
+          .hasAttribute('href', 'https://cloud.pix.fr/s/ypq3K7GmgpEdwop');
       });
     });
   });

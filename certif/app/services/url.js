@@ -36,18 +36,27 @@ export default class Url extends UrlBaseService {
   }
 
   get documentationUrl() {
-    if (this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents) {
-      return this.intl.t('common.urls.documentation.sco-managing-students');
+    if (this.locale.currentLanguage === 'fr') {
+      if (this.currentUser.currentAllowedCertificationCenterAccess.isScoManagingStudents) {
+        return 'https://cloud.pix.fr/s/opiFxfjygR76S8y';
+      }
+      return 'https://cloud.pix.fr/s/ypq3K7GmgpEdwop';
     }
-    return this.intl.t('common.urls.documentation.other');
+    return 'https://cloud.pix.fr/s/c6SmQ8iM6nGbrzw';
   }
 
   get urlToDownloadSessionIssueReportSheet() {
-    return this.intl.t('common.urls.session-issue-report-sheet');
+    if (this.locale.currentLanguage === 'fr') {
+      return 'https://cloud.pix.fr/s/B76yA8ip9Radej9/download';
+    }
+    return 'https://cloud.pix.fr/s/B6egBZnbjJFSiaN';
   }
 
   get urlToDownloadSessionV3IssueReportSheet() {
-    return this.intl.t('common.urls.session-v3-issue-report-sheet');
+    if (this.locale.currentLanguage === 'fr') {
+      return 'https://cloud.pix.fr/s/ff8sYPWPyCo3MrN/download';
+    }
+    return 'https://cloud.pix.fr/s/B6egBZnbjJFSiaN';
   }
 
   get fraudFormUrl() {
@@ -55,7 +64,10 @@ export default class Url extends UrlBaseService {
   }
 
   get fraudReportUrl() {
-    return this.intl.t('common.urls.fraud');
+    if (this.locale.currentLanguage === 'fr') {
+      return 'https://cloud.pix.fr/s/AgDytb8yHxrmjFk/download';
+    }
+    return 'https://cloud.pix.fr/s/zka5JJqpbgWZLPr';
   }
 
   get invigilatorDocumentationUrl() {

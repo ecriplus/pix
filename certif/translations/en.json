@@ -186,15 +186,6 @@
       },
       "candidates": "Candidates",
       "invigilator": "Invigilator"
-    },
-    "urls": {
-      "documentation": {
-        "other": "https://cloud.pix.fr/s/c6SmQ8iM6nGbrzw",
-        "sco-managing-students": "https://cloud.pix.fr/s/c6SmQ8iM6nGbrzw"
-      },
-      "fraud": "https://cloud.pix.fr/s/zka5JJqpbgWZLPr",
-      "session-issue-report-sheet": "https://cloud.pix.fr/s/B6egBZnbjJFSiaN",
-      "session-v3-issue-report-sheet": "https://cloud.pix.fr/s/B6egBZnbjJFSiaN"
     }
   },
   "components": {
