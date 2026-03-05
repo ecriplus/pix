@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs/promises';
 
 import { propsExamples } from '@1024pix/epreuves-components/props.examples';
+import { schema as schemas } from '@1024pix/epreuves-components/schema';
 
 import demoEpreuveComponents from '../../src/devcomp/infrastructure/datasources/learning-content/modules/demo-epreuves-components.json' with { type: 'json' };
 
@@ -25,8 +26,11 @@ const module = {
     {
       id: 'be0a544c-99bd-4fbc-99b4-a52b5456a008',
       type: 'blank',
-      grains: Object.entries(propsExamples)
-        .map(([key, value]) => generateGrain(key, value))
+      grains: Object.entries(schemas)
+        .map(([key, _]) => {
+          const props = propsExamples[key];
+          return generateGrain(key, props);
+        })
         .sort(byPOIName),
     },
   ],
