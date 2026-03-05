@@ -1,11 +1,11 @@
 import { AlreadyRegisteredEmailError } from '../../../../src/shared/domain/errors.js';
 import { UnauthorizedError } from '../../../shared/application/http-errors.js';
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createAccountCreationEmail } from '../emails/create-account-creation.email.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
 
-const upgradeToRealUser = withTransaction(async function ({
+const upgradeToRealUser = async function ({
   userId,
   userAttributes,
   password,
@@ -33,21 +33,26 @@ const upgradeToRealUser = withTransaction(async function ({
     throw new UnauthorizedError('Anonymous token is invalid', 'INVALID_ANONYMOUS_TOKEN');
   }
 
-  const realUser = anonymousUser.convertAnonymousToRealUser(userAttributes);
-  await userRepository.update(realUser.mapToDatabaseDto());
+  const { realUser, token } = await DomainTransaction.execute(async () => {
+    const realUser = anonymousUser.convertAnonymousToRealUser(userAttributes);
+    await userRepository.update(realUser.mapToDatabaseDto());
 
-  const hashedPassword = await cryptoService.hashPassword(password);
-  const authenticationMethod = new AuthenticationMethod({
-    userId,
-    identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
-    authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: hashedPassword,
-      shouldChangePassword: false,
-    }),
+    const hashedPassword = await cryptoService.hashPassword(password);
+    const authenticationMethod = new AuthenticationMethod({
+      userId,
+      identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+      authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
+        password: hashedPassword,
+        shouldChangePassword: false,
+      }),
+    });
+    await authenticationMethodRepository.create({ authenticationMethod });
+
+    const token = await emailValidationDemandRepository.save(realUser.id);
+
+    return { realUser, token };
   });
-  await authenticationMethodRepository.create({ authenticationMethod });
 
-  const token = await emailValidationDemandRepository.save(realUser.id);
   await emailRepository.sendEmailAsync(
     createAccountCreationEmail({
       locale,
@@ -57,6 +62,6 @@ const upgradeToRealUser = withTransaction(async function ({
     }),
   );
   return realUser;
-});
+};
 
 export { upgradeToRealUser };

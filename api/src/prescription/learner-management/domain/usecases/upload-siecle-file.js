@@ -20,7 +20,7 @@ const uploadSiecleFile = async function ({
   },
   dependencies = { logger },
 }) {
-  await DomainTransaction.execute(async () => {
+  const organizationImport = await DomainTransaction.execute(async () => {
     let organizationImport = OrganizationImportStatus.create({ organizationId, createdBy: userId });
 
     await organizationImportRepository.save(organizationImport);
@@ -41,9 +41,7 @@ const uploadSiecleFile = async function ({
           dependencies.logger.error(rmError);
         }
       }
-      await validateOrganizationImportFileJobRepository.performAsync(
-        new ValidateOrganizationImportFileJob({ organizationImportId: organizationImport.id }),
-      );
+      return organizationImport;
     } catch (error) {
       errors.push(error);
 
@@ -53,6 +51,10 @@ const uploadSiecleFile = async function ({
       await organizationImportRepository.save(organizationImport);
     }
   });
+
+  await validateOrganizationImportFileJobRepository.performAsync(
+    new ValidateOrganizationImportFileJob({ organizationImportId: organizationImport.id }),
+  );
 };
 
 export { uploadSiecleFile };

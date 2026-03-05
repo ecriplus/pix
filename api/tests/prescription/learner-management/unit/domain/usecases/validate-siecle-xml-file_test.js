@@ -52,6 +52,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       get: sinon.stub().withArgs(organizationId).returns({ externalId: externalIdSymbol }),
     };
 
+    readableSymbol = Symbol('readable');
     importStorageStub = {
       deleteFile: sinon.stub(),
       readFile: sinon.stub().withArgs({ filename: organizationImportStub.filename }).resolves(readableSymbol),
@@ -102,6 +103,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           filename: organizationImportStub.filename,
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save error when there is an error deleting file from S3', async function () {
@@ -120,26 +122,8 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           filename: organizationImportStub.filename,
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
       });
-    });
-
-    it('should save error when there is an error publishing event', async function () {
-      const publishError = new Error('ERROR');
-
-      importOrganizationLearnersJobRepositoryStub.performAsync.rejects(publishError);
-
-      await catchErr(validateSiecleXmlFile)({
-        organizationImportId,
-        organizationImportRepository: organizationImportRepositoryStub,
-        organizationRepository: organizationRepositoryStub,
-        importStorage: importStorageStub,
-        importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
-      });
-      expect(organizationImportStub.validate).to.have.been.calledWith({ errors: [publishError] });
-      expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
-        filename: organizationImportStub.filename,
-      });
-      expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
     });
 
     context('when there is validation errors', function () {
@@ -159,6 +143,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
         expect(error).to.be.instanceof(AggregateImportError);
         expect(organizationImportStub.validate).to.have.been.calledWith({ errors: parsingErrors });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save empty learner error', async function () {
@@ -180,6 +165,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           true,
         );
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
+        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
       });
     });
   });

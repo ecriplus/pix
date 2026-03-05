@@ -1,3 +1,4 @@
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationCompletedJob } from '../events/CertificationCompleted.js';
 
@@ -17,11 +18,13 @@ export const completeCertificationAssessment =
     if (assessmentSheet.isStarted) {
       assessmentSheet.complete();
       await assessmentSheetRepository.update(assessmentSheet);
-      await certificationCompletedJobRepository.performAsync(
-        new CertificationCompletedJob({
-          certificationCourseId,
-          locale,
-        }),
-      );
+      await DomainTransaction.addSuccessHandler(async () => {
+        await certificationCompletedJobRepository.performAsync(
+          new CertificationCompletedJob({
+            certificationCourseId,
+            locale,
+          }),
+        );
+      });
     }
   };

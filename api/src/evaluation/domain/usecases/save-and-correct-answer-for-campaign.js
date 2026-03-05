@@ -1,11 +1,11 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/KnowledgeElement.js';
 import { EmptyAnswerError } from '../errors.js';
 
-const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
+const saveAndCorrectAnswerForCampaign = async function ({
   answer,
   userId,
   assessment,
@@ -22,85 +22,88 @@ const saveAndCorrectAnswerForCampaign = withTransaction(async function ({
   correctionService,
   campaignRepository,
 } = {}) {
-  if (assessment.userId !== userId) {
-    throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
-  }
-  if (!assessment.campaignParticipationId) {
-    throw new ForbiddenAccess('Campaign does not accept any answer.');
-  }
-  if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
-    throw new ChallengeAlreadyAnsweredError();
-  }
-  if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
-    throw new ChallengeNotAskedError();
-  }
-  if (!answer.hasValue && !answer.hasTimedOut) {
-    throw new EmptyAnswerError();
-  }
+  const savedAnswer = await DomainTransaction.execute(async () => {
+    if (assessment.userId !== userId) {
+      throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
+    }
+    if (!assessment.campaignParticipationId) {
+      throw new ForbiddenAccess('Campaign does not accept any answer.');
+    }
+    if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
+      throw new ChallengeAlreadyAnsweredError();
+    }
+    if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
+      throw new ChallengeNotAskedError();
+    }
+    if (!answer.hasValue && !answer.hasTimedOut) {
+      throw new EmptyAnswerError();
+    }
 
-  const challenge = await challengeRepository.get(answer.challengeId);
-  const correctedAnswer = correctionService.evaluateAnswer({
-    challenge,
-    answer,
-    assessment,
-    accessibilityAdjustmentNeeded: false,
-    forceOKAnswer,
-  });
-  const now = new Date();
-  const lastQuestionDate = assessment.lastQuestionDate || now;
-  correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
+    const challenge = await challengeRepository.get(answer.challengeId);
+    const correctedAnswer = correctionService.evaluateAnswer({
+      challenge,
+      answer,
+      assessment,
+      accessibilityAdjustmentNeeded: false,
+      forceOKAnswer,
+    });
+    const now = new Date();
+    const lastQuestionDate = assessment.lastQuestionDate || now;
+    correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
-  let answerSaved;
-  if (assessment.isSmartRandom()) {
-    const knowledgeElementsBefore =
-      await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
-        userId,
+    let answerToBeSaved;
+    if (assessment.isSmartRandom()) {
+      const knowledgeElementsBefore =
+        await knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId({
+          userId,
+          campaignParticipationId: assessment.campaignParticipationId,
+        });
+
+      const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
         campaignParticipationId: assessment.campaignParticipationId,
       });
-
-    const targetSkills = await campaignRepository.findSkillsByCampaignParticipationId({
-      campaignParticipationId: assessment.campaignParticipationId,
-    });
-    const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(
-      assessment.campaignParticipationId,
-    );
-    const campaign = await campaignRepository.get(campaignId);
-    answerSaved = await answerRepository.save({ answer: correctedAnswer });
-    const knowledgeElementsToAdd = computeKnowledgeElements({
-      campaign,
-      assessment,
-      answer: answerSaved,
-      challenge,
-      targetSkills,
-      knowledgeElementsBefore,
-    });
-    await knowledgeElementForParticipationService.save({
-      knowledgeElements: knowledgeElementsToAdd,
-      campaignParticipationId: assessment.campaignParticipationId,
-    });
-    answerSaved.levelup = {};
-    if (!campaign.isExam) {
-      answerSaved.levelup = await computeLevelUpInformation({
-        answerSaved,
-        userId,
-        competenceId: challenge.competenceId,
-        locale,
+      const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(
+        assessment.campaignParticipationId,
+      );
+      const campaign = await campaignRepository.get(campaignId);
+      answerToBeSaved = await answerRepository.save({ answer: correctedAnswer });
+      const knowledgeElementsToAdd = computeKnowledgeElements({
+        campaign,
+        assessment,
+        answer: answerToBeSaved,
+        challenge,
+        targetSkills,
         knowledgeElementsBefore,
-        knowledgeElementsAdded: knowledgeElementsToAdd,
-        scorecardService,
-        areaRepository,
-        competenceRepository,
-        competenceEvaluationRepository,
       });
+      await knowledgeElementForParticipationService.save({
+        knowledgeElements: knowledgeElementsToAdd,
+        campaignParticipationId: assessment.campaignParticipationId,
+      });
+      answerToBeSaved.levelup = {};
+      if (!campaign.isExam) {
+        answerToBeSaved.levelup = await computeLevelUpInformation({
+          answerSaved: answerToBeSaved,
+          userId,
+          competenceId: challenge.competenceId,
+          locale,
+          knowledgeElementsBefore,
+          knowledgeElementsAdded: knowledgeElementsToAdd,
+          scorecardService,
+          areaRepository,
+          competenceRepository,
+          competenceEvaluationRepository,
+        });
+      }
+      return answerToBeSaved;
     }
-  }
+  });
 
   if (userId) {
     await answerJobRepository.performAsync(new AnswerJob({ userId }));
   }
 
-  return answerSaved;
-});
+  return savedAnswer;
+};
 
 function computeKnowledgeElements({ campaign, assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
   let knowledgeElements;

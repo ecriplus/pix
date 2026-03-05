@@ -1,8 +1,8 @@
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
 import { OrganizationLearnerList } from '../models/OrganizationLearnerList.js';
 
-const deleteOrganizationLearners = withTransaction(async function ({
+const deleteOrganizationLearners = async function ({
   organizationLearnerIds,
   userId,
   organizationId,
@@ -40,62 +40,70 @@ const deleteOrganizationLearners = withTransaction(async function ({
 
   const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
 
-  for (const organizationLearner of organizationLearnersToDelete) {
-    const organizationLearnerRewards = organizationProfileRewards.filter(
-      (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
-    );
-    organizationLearner.delete(userId, { keepPreviousDeletion });
-    await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
+  const eventLoggingJobs = [];
 
-    for (const organizationLearnerReward of organizationLearnerRewards) {
-      await organizationsProfileRewardRepository.remove(organizationLearnerReward);
-    }
+  await DomainTransaction.execute(async () => {
+    for (const organizationLearner of organizationLearnersToDelete) {
+      const organizationLearnerRewards = organizationProfileRewards.filter(
+        (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
+      );
+      organizationLearner.delete(userId, { keepPreviousDeletion });
+      await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
-    await eventLoggingJobRepository.performAsync(
-      EventLoggingJob.forUser({
-        client,
-        action: organizationLearner.loggerContext,
-        role: userRole,
-        userId: organizationLearner.id,
-        updatedByUserId: userId,
-        data: {},
-      }),
-    );
+      for (const organizationLearnerReward of organizationLearnerRewards) {
+        await organizationsProfileRewardRepository.remove(organizationLearnerReward);
+      }
 
-    const campaignParticipations =
-      await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearner({
-        organizationLearnerId: organizationLearner.id,
-        withDeletedParticipation: keepPreviousDeletion,
-      });
-
-    for (const campaignParticipation of campaignParticipations) {
-      campaignParticipation.delete(userId);
-      await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
-
-      await eventLoggingJobRepository.performAsync(
+      eventLoggingJobs.push(
         EventLoggingJob.forUser({
           client,
-          action: campaignParticipation.loggerContext,
+          action: organizationLearner.loggerContext,
           role: userRole,
-          userId: campaignParticipation.id,
+          userId: organizationLearner.id,
           updatedByUserId: userId,
           data: {},
         }),
       );
-    }
 
-    const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-      campaignParticipationIds,
-    );
-    const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
-    for (const assessment of assessments) {
-      assessment.detachCampaignParticipation();
-      await assessmentRepository.updateCampaignParticipationId(assessment);
-    }
+      const campaignParticipations =
+        await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearner({
+          organizationLearnerId: organizationLearner.id,
+          withDeletedParticipation: keepPreviousDeletion,
+        });
 
-    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
+      for (const campaignParticipation of campaignParticipations) {
+        campaignParticipation.delete(userId);
+        await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+
+        eventLoggingJobs.push(
+          EventLoggingJob.forUser({
+            client,
+            action: campaignParticipation.loggerContext,
+            role: userRole,
+            userId: campaignParticipation.id,
+            updatedByUserId: userId,
+            data: {},
+          }),
+        );
+      }
+
+      const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
+      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+        campaignParticipationIds,
+      );
+      const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
+      for (const assessment of assessments) {
+        assessment.detachCampaignParticipation();
+        await assessmentRepository.updateCampaignParticipationId(assessment);
+      }
+
+      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
+    }
+  });
+
+  for (const eventLoggingJob of eventLoggingJobs) {
+    await eventLoggingJobRepository.performAsync(eventLoggingJob);
   }
-});
+};
 
 export { deleteOrganizationLearners };

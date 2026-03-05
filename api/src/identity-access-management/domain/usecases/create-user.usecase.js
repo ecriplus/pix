@@ -1,4 +1,4 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { createAccountCreationEmail } from '../emails/create-account-creation.email.js';
 import { InvalidOrAlreadyUsedEmailError } from '../errors.js';
@@ -20,7 +20,7 @@ import { InvalidOrAlreadyUsedEmailError } from '../errors.js';
  * @property {import('../../../shared/domain/validators').PasswordValidator} passwordValidator
  * @return {Promise<User|undefined>}
  */
-const createUser = withTransaction(async function ({
+const createUser = async function ({
   locale,
   password,
   user,
@@ -42,7 +42,6 @@ const createUser = withTransaction(async function ({
     userValidator,
     passwordValidator,
   });
-
   const userHasValidatedPixTermsOfService = user.cgu === true;
   if (userHasValidatedPixTermsOfService) {
     user.lastTermsOfServiceValidatedAt = new Date();
@@ -50,15 +49,19 @@ const createUser = withTransaction(async function ({
 
   const hashedPassword = await cryptoService.hashPassword(password);
 
-  const savedUser = await userService.createUserWithPassword({
-    user,
-    locale,
-    hashedPassword,
-    userToCreateRepository,
-    authenticationMethodRepository,
-  });
+  const { savedUser, token } = await DomainTransaction.execute(async () => {
+    const savedUser = await userService.createUserWithPassword({
+      user,
+      locale,
+      hashedPassword,
+      userToCreateRepository,
+      authenticationMethodRepository,
+    });
 
-  const token = await emailValidationDemandRepository.save(savedUser.id);
+    const token = await emailValidationDemandRepository.save(savedUser.id);
+
+    return { savedUser, token };
+  });
 
   await emailRepository.sendEmailAsync(
     createAccountCreationEmail({
@@ -71,7 +74,7 @@ const createUser = withTransaction(async function ({
   );
 
   return savedUser;
-});
+};
 
 export { createUser };
 
