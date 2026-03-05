@@ -251,9 +251,9 @@ function _filterMostRecentCertificationCoursePerOrganizationLearner(DTOs) {
 }
 
 async function _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges }) {
-  const competenceMarks = _.compact(certificationCourseDTO.competenceMarks).map(
-    (competenceMark) => new CompetenceMark({ ...competenceMark }),
-  );
+  const competenceMarks = certificationCourseDTO.competenceMarks
+    .filter(Boolean)
+    .map((competenceMark) => new CompetenceMark({ ...competenceMark }));
 
   const resultCompetenceTree = ResultCompetenceTree.generateTreeFromCompetenceMarks({
     competenceTree,
@@ -282,9 +282,9 @@ function _toDomainForPrivateCertificate({ certificationCourseDTO, competenceTree
   let resultCompetenceTree = null;
 
   if (competenceTree) {
-    const competenceMarks = _.compact(certificationCourseDTO.competenceMarks).map(
-      (competenceMark) => new CompetenceMark({ ...competenceMark }),
-    );
+    const competenceMarks = certificationCourseDTO.competenceMarks
+      .filter(Boolean)
+      .map((competenceMark) => new CompetenceMark({ ...competenceMark }));
 
     resultCompetenceTree = ResultCompetenceTree.generateTreeFromCompetenceMarks({
       competenceTree,
@@ -304,7 +304,7 @@ function _toDomainForPrivateCertificate({ certificationCourseDTO, competenceTree
 function _toDomainForShareableCertificate({ shareableCertificateDTO, competenceTree, certifiedBadges }) {
   const resultCompetenceTree = ResultCompetenceTree.generateTreeFromCompetenceMarks({
     competenceTree,
-    competenceMarks: _.compact(shareableCertificateDTO.competenceMarks),
+    competenceMarks: shareableCertificateDTO.competenceMarks.filter(Boolean),
     certificationId: shareableCertificateDTO.id,
     assessmentResultId: shareableCertificateDTO.assessmentResultId,
   });

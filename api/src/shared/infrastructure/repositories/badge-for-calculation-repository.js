@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import * as campaignRepository from '../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { BadgeCriterionForCalculation } from '../../domain/models/BadgeCriterionForCalculation.js';
@@ -41,7 +39,7 @@ const findByCampaignParticipationId = async function ({ campaignParticipationId 
     );
     badges.push(badge);
   }
-  return _.compact(badges);
+  return badges.filter(Boolean);
 };
 
 const findByCampaignId = async function ({ campaignId }) {
@@ -76,7 +74,7 @@ const findByCampaignId = async function ({ campaignId }) {
     );
     badges.push(badge);
   }
-  return _.compact(badges);
+  return badges.filter(Boolean);
 };
 
 const getByCertifiableBadgeAcquisition = async function ({ certifiableBadgeAcquisition }) {

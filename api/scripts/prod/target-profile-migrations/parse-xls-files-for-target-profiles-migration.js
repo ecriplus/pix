@@ -1,8 +1,6 @@
 import perf_hooks from 'node:perf_hooks';
 import * as url from 'node:url';
 
-import _ from 'lodash';
-
 const { performance } = perf_hooks;
 
 import XLSX from 'xlsx';
@@ -131,7 +129,7 @@ function toLevel(s) {
 }
 
 async function migrateTargetProfiles(targetProfiles, multiFormData, dryRun) {
-  for (const targetProfile of _.compact(targetProfiles)) {
+  for (const targetProfile of targetProfiles.filter(Boolean)) {
     try {
       await knex.transaction(async (trx) => {
         let hasError = false;
