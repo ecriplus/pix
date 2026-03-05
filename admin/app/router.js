@@ -54,6 +54,10 @@ Router.map(function () {
       });
     });
 
+    this.route('networks', function () {
+      this.route('new');
+    });
+
     this.route('campaigns', function () {
       this.route('campaign', { path: '/:campaign_id' }, function () {
         this.route('participations');

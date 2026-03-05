@@ -616,6 +616,27 @@
         "caption": "Liste des membres appartenant au centre de certification. Contient son identifiant, nom et prénom, son adresse e-mail, son rôle, son dernier accès et sa date de rattachement à l'espace de certification. Des actions permettent de modifier son rôle ou de le supprimer du centre."
       }
     },
+    "networks": {
+      "creation": {
+        "actions": {
+          "submit": "Créer le réseau"
+        },
+        "error-messages": {
+          "name": "Le nom du réseau est requis.",
+          "organization-id": "L'ID d'organisation est requis."
+        },
+        "name": {
+          "label": "Nom du réseau :"
+        },
+        "notifications": {
+          "error": "Une erreur est survenue.",
+          "success": "Le réseau a été créé avec succès."
+        },
+        "organization-id": {
+          "label": "ID d'organisation à la tête du réseau:"
+        }
+      }
+    },
     "organization-learner-information": {
       "deletion-modal": {
         "success-message": "l'utilisateur a bien été supprimé de l'organisation.",
@@ -1319,6 +1340,9 @@
         }
       },
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
+    },
+    "networks": {
+      "title": "Créer un réseau"
     },
     "organization": {
       "get": {

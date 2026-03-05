@@ -1,0 +1,13 @@
+.network-creation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 50%;
+
+  &__input {
+    .pix-input,
+    .pix-button {
+      width: 100%;
+    }
+  }
+}
