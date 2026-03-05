@@ -43,8 +43,14 @@ async function serializeObject(template, entry, creationDate) {
     if (fieldName === 'filename') continue;
     const field = form.getTextField(fieldName);
     field.setText(value);
-    field.updateAppearances(embeddedRobotoFont);
     field.enableReadOnly();
   }
-  return Buffer.from(await pdf.save());
+
+  form.updateFieldAppearances(embeddedRobotoFont);
+
+  const bytes = await pdf.save({
+    useObjectStreams: false,
+  });
+
+  return Buffer.from(bytes);
 }

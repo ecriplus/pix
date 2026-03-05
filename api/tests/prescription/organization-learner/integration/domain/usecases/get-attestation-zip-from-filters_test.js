@@ -1,4 +1,4 @@
-import { Buffer } from 'node:buffer';
+import { PassThrough } from 'node:stream';
 
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
@@ -40,6 +40,6 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | g
     });
 
     // then
-    expect(Buffer.isBuffer(result)).to.be.true;
+    expect(result instanceof PassThrough).true;
   });
 });
