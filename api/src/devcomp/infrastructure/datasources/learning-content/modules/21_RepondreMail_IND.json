@@ -41,7 +41,7 @@
                 "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
                 "type": "expand",
                 "title": "[🕹️ Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
-                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><p><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></p><p><em>Bonjour Gabriel,</em></p><p><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></p><p><em>À bientôt,</em></p><p><em>Alma, chargée d’organisation des Conférences Climax</em></p><br><p><strong>Actions attendues</strong>&nbsp;: Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; “Cliquer sur Envoyer”</p>"
+                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><p><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></p><p><em>Bonjour Gabriel,</em></p><p><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></p><p><em>À bientôt,</em></p><p><em>Alma, chargée d’organisation des Conférences Climax</em></p><br><p><strong>Actions attendues</strong>&nbsp;: Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; Cliquer sur “Envoyer”</p>"
               }
             },
             {
@@ -93,7 +93,7 @@
               "element": {
                 "id": "402d3db7-2e25-4a7b-a1fd-8dcd04a4b4a8",
                 "type": "expand",
-                "title": "[Simulateur Pixmail : mail ouvert avec le fil de discussion visible contenant 3-4 échanges]",
+                "title": "[🕹️ Simulateur Pixmail : mail ouvert avec le fil de discussion visible contenant 3-4 échanges]",
                 "content": "<p>Message Gabriel&nbsp;: Accepté pour un choix de date et a invité Mathis – 27 avril 09:23</p><p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations. </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 20:06</p><p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p><p>Alma, chargée d’organisation des Conférences Climax</p><hr><p> Message Gabriel&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 16:32</p><p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: Invitation - Conférence Climax – 25 avril 15:00</p><p>Bonjour Gabriel, La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p><p>À bientôt,<br></p><p>Alma, chargée d’organisation des Conférences Climax</p>"
               }
             },
@@ -242,7 +242,7 @@
               "element": {
                 "id": "ebe2a5f6-df6f-46f2-a276-134869511b42",
                 "type": "expand",
-                "title": "[Simulateur Pixmail avec 4 mails non-lus ou capture d’écran ou web component]",
+                "title": "[🕹️ Simulateur Pixmail avec 4 mails non-lus ou capture d’écran ou web component]",
                 "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Mia (mamma.mia@pixmail.org) - Grande nouvelle -&nbsp;Coucou, je te mets dans la confidence, mais ça y est on attend un bébé ! 👶</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
               }
             },
@@ -613,7 +613,7 @@
               "element": {
                 "id": "8f98cc06-05c2-42f7-8f05-221fc7cd2933",
                 "type": "expand",
-                "title": "[Simulateur Pixmail : 5 personnes dont 4 ont envoyé des mails dans le fil]",
+                "title": "[🕹️ Simulateur Pixmail : 5 personnes dont 4 ont envoyé des mails dans le fil]",
                 "content": "<p>De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 21:39</p><p>Hello, </p><p>Super tout ça !</p><p>J’apporterai quelques biscuits pour compléter et je pense qu’on est bon.<br></p><p>Hâte de vous voir ! 🙂</p><p>Douglas</p><hr> De : Ahmed<br>À : moi, Douglas, Sophie, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 17:17<p></p><p>Bonjour et merci pour l’invitation Douglas </p><p>Je peux apporter une salade pour ma part.<br></p><p>Et j’ai plein de cerises cette année : ça nous fera un bon dessert après le pâté ! 🍒</p><p>À samedi,<br></p><p>Ahmed</p><p></p><hr> De : Sophie<br>À : moi, Douglas, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 20:02<p></p><p>Salut à tous !</p><p>Du pâté en croûte : j’adore ça ! De mon côté, je m’occupe des boissons si ça vous va ?</p><p>À très vite,<br></p><p>Sophie</p><hr> De : moi<br>À : Douglas, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 19:27<p></p><p>Coucou,</p><p>Bonne idée ! On devrait avoir un beau soleil.<br>J’apporterai un pâté en croûte fait avec amour. ♥️</p><p>Bonne soirée,<br></p><p>Karim</p><hr>  De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Pique-nique samedi<br>Date : Lundi 3 juin – 19:11  <p></p><p>Salut les amis !</p><p>Je vous propose un pique-nique dans le parc samedi prochain.<br>Qui peut apporter quelque chose ? (dessert, boisson, salade…)</p><p>Amicalement,</p><p>Douglas</p>"
               }
             },
@@ -859,7 +859,7 @@
               "element": {
                 "id": "ebe18094-071a-498c-a44b-1474cd0ee11f",
                 "type": "expand",
-                "title": "[Simulateur Pixmail auto-validant pour effectuer l’action “Transférer”]",
+                "title": "[🕹️ Simulateur Pixmail auto-validant pour effectuer l’action “Transférer”]",
                 "content": "<p>(cf éval : @repondremail3)</p>"
               }
             }
@@ -883,7 +883,7 @@
               "element": {
                 "id": "ad4d1822-4c32-43b3-b14f-0692459d0c12",
                 "type": "expand",
-                "title": "[Simulateur Pixmail ou template-mail avec un fil de discussion “Réunion d’équipe”]",
+                "title": "[🕹️ Simulateur Pixmail ou template-mail avec un fil de discussion “Réunion d’équipe”]",
                 "content": "<p>De&nbsp;: Rosita<br>À&nbsp;: Robert, Albertine, Djibril<br>Objet&nbsp;: Re: Réunion d’équipe – Organisation<br>Date&nbsp;: Lundi 3 juin – 10:18</p><p>Bonjour,<br>Vendredi me conviendrait aussi.<br>Rosita  </p><hr><p> De&nbsp;: Djibril</p><br><p>À&nbsp;: Robert, Albertine Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 10:02</p><p></p><p>Bonjour Robert,<br>Je ne suis pas disponible jeudi à 14h.<br>Serait-il possible de décaler à vendredi ?<br>Djibril  </p><hr><p> De&nbsp;: Albertine</p><br><p>À&nbsp;: Robert, Djibril, Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:45</p><p></p><p>Bonjour,<br>Pour moi c’est parfait.<br>Albertine  </p><hr><p> De&nbsp;: Robert</p><br><p>À&nbsp;: Albertine, Djibril, Rosita</p><br><p>Objet&nbsp;: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:12</p><p></p><p>Bonjour à tous,<br>Je propose une réunion jeudi à 14h pour faire le point sur le projet.<br>Est-ce que cela vous convient ?<br>Robert</p>"
               }
             },
