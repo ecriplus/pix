@@ -288,12 +288,21 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         it('should result an empty array of duplicated IDs ', async function () {
           const modules = await moduleDatasource.list();
           const ids = [];
+          const shortIds = [];
+
           const duplicateIds = new Set();
+          const duplicateShortIds = new Set();
+
           for (const module of modules) {
             if (ids.includes(module.id)) {
               duplicateIds.add(module.id);
             }
             ids.push(module.id);
+
+            if (shortIds.includes(module.shortId)) {
+              duplicateShortIds.add(module.shortId);
+            }
+            shortIds.push(module.shortId);
 
             for (const section of module.sections) {
               if (ids.includes(section.id)) {
@@ -348,6 +357,7 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
           }
 
           expect([...duplicateIds]).to.deep.equal([]);
+          expect([...duplicateShortIds]).to.deep.equal([]);
         });
       });
     });
