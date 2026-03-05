@@ -11,7 +11,7 @@
     "duration": 10,
     "level": "independent",
     "objectives": [
-      "<p>Transférer un mail à quelqu’un d’autre    </p>",
+      "<p>Transférer un mail à quelqu’un d’autre</p>",
       "<p>Répondre à un mail avec plusieurs destinataires</p>",
       "<p>Se repérer dans un fil de discussion de mails</p>"
     ],
@@ -32,7 +32,7 @@
               "element": {
                 "id": "7c675fd0-0530-451a-88e9-9605cea958bf",
                 "type": "text",
-                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il doit refuser l’invitation.</p><p><strong>Dans l’interface ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><p><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></p>"
+                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il doit refuser l’invitation.</p><p><strong>Dans la messagerie électronique&nbsp;ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><blockquote><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></blockquote>"
               }
             },
             {
@@ -41,7 +41,7 @@
                 "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
                 "type": "expand",
                 "title": "[🕹️ Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
-                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><p><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></p><p><em>Bonjour Gabriel,</em></p><p><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></p><p><em>À bientôt,</em></p><p><em>Alma, chargée d’organisation des Conférences Climax</em></p><br><p><strong>Actions attendues</strong>&nbsp;: Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; Cliquer sur “Envoyer”</p>"
+                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><blockquote><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></blockquote><blockquote><em>Bonjour Gabriel,</em></blockquote><blockquote><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></blockquote><blockquote><em>À bientôt,</em></blockquote><blockquote><em>Alma, chargée d’organisation des Conférences Climax</em></blockquote><br><p><strong>Actions attendues</strong>&nbsp;: Ouvrir le mail d'Alma &gt;&nbsp;Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; Cliquer sur “Envoyer”</p>"
               }
             },
             {
@@ -85,7 +85,7 @@
               "element": {
                 "id": "a44cacb3-d805-4f1f-8da9-8536bdc85ae8",
                 "type": "text",
-                "content": "<p>Depuis l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique suivante parcourez leurs échanges puis répondez aux questions ci-dessous.</strong></p>"
+                "content": "<p>Depuis l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez aux questions qui suivent.</strong></p>"
               }
             },
             {
@@ -153,28 +153,28 @@
                           "id": "0",
                           "content": "<p>Les réponses successives sont visibles sous le dernier mail.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et la réponse la plus ancienne se trouve tout en bas.</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "<p>Les réponses apparaissent dans un ordre aléatoire.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et la réponse la plus ancienne se trouve tout en bas.</p>"
+                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Seule la dernière réponse est affichée.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et la réponse la plus ancienne se trouve tout en bas.</p>"
+                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Dans un échange de mails, <strong>un fil de discussion</strong> se construit de réponse en réponse. La dernière réponse envoyée est affichée la première et la réponse la plus ancienne se trouve tout en bas.</p>"
+                            "diagnosis": "<p>Dans un échange de mails, <strong>un fil de discussion</strong> se construit de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                           }
                         }
                       ],
@@ -196,7 +196,7 @@
               "element": {
                 "id": "5dfb5863-4641-406e-ba7e-145cddd8ff20",
                 "type": "text",
-                "content": "<p>Sous le dernier mail, se trouve <strong>l’historique des échanges</strong> de mails sur ce sujet. Cela permet de conserver le contexte de l’échange.</p>"
+                "content": "<p>Sous le dernier mail, se trouve <strong>l’historique des échanges</strong> de mails sur ce sujet. Cela permet de conserver le contexte de l’échange.&nbsp;📧</p>"
               }
             },
             {
@@ -234,7 +234,7 @@
               "element": {
                 "id": "9124beb6-ecd2-444a-9757-c880b545bc6c",
                 "type": "text",
-                "content": "<p>L’option «&nbsp;Transférer&nbsp;» permet de faire suivre un mail à un nouveau destinataire sans avoir à copier ou recopier son contenu.</p><p><strong>Explorez la messagerie électronique suivante pour répondre aux questions ci-dessous.</strong></p>"
+                "content": "<p>L’option «&nbsp;Transférer&nbsp;» permet de faire suivre un mail à un nouveau destinataire sans avoir à copier ou recopier son contenu.</p><p><strong>Explorez la messagerie électronique ci-dessous pour répondre aux questions qui suivent.</strong></p>"
               }
             },
             {
@@ -293,7 +293,7 @@
                         },
                         "invalid": {
                           "state": "<p>Eh non.</p>",
-                          "diagnosis": "<p>Ce mail contient des informations qui peuvent intéresser Phil.<br>Quand un mail reçu contient une information utile pour une autre personne, il peut être utile de le transférer.</p>"
+                          "diagnosis": "<p>Ce mail contient des informations qui peuvent intéresser Phil.<br>Quand un mail reçu contient une information utile pour une autre personne, il peut être utile de le <strong>transférer</strong>.</p>"
                         }
                       }
                     }
@@ -343,7 +343,7 @@
                         },
                         "invalid": {
                           "state": "<p>Eh non.<br></p>",
-                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de ne pas le transférer.</p>"
+                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
                         }
                       }
                     }
@@ -389,11 +389,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Eh oui.</p>",
-                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais forward).</p>"
+                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais <em>forward</em>).</p>"
                         },
                         "invalid": {
                           "state": "<p>Eh non.<br></p>",
-                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un mail transféré, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais forward).</p>"
+                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais <em>forward</em>).</p>"
                         }
                       }
                     }
@@ -474,14 +474,14 @@
                           "id": "0",
                           "content": "Répondre",
                           "feedback": {
-                            "diagnosis": "<p>Exactement ! C’est une information importante pour son professeur mais pas pour les autres destinataires. Il est préférable d’utiliser l’option «&nbsp;Répondre&nbsp;».</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! C’est une information importante pour son professeur mais <strong>pas pour les autres destinataires</strong>. Il est préférable d’utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;».</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "Répondre à tous",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. C’est une information importante pour son professeur mais pas pour les autres destinataires. Il est préférable d’utiliser l’option «&nbsp;Répondre&nbsp;».</p>"
+                            "diagnosis": "<p>Eh non. C’est une information importante pour son professeur mais <strong>pas pour les autres destinataires</strong>. Il est préférable d’utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;».</p>"
                           }
                         }
                       ],
@@ -506,14 +506,14 @@
                           "id": "0",
                           "content": "Répondre",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que tout le monde ait le même niveau d’information, elle doit utiliser l’option «&nbsp;Répondre à tous&nbsp;».</p>"
+                            "diagnosis": "<p>Eh non. Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "Répondre à tous",
                           "feedback": {
-                            "diagnosis": "<p>Exactement ! Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que tout le monde ait le même niveau d’information, elle doit utiliser l’option «&nbsp;Répondre à tous&nbsp;».</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
                           }
                         }
                       ],
@@ -538,14 +538,14 @@
                           "id": "0",
                           "content": "Répondre",
                           "feedback": {
-                            "diagnosis": "<p>Exactemement ! L’information demandée est personnelle et confidentielle. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;Répondre&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! L’information demandée est <strong>personnelle et confidentielle</strong>. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "Répondre à tous",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. L’information demandée est personnelle et confidentielle. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;Répondre&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
+                            "diagnosis": "<p>Eh non. L’information demandée est <strong>personnelle et confidentielle</strong>. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
                           }
                         }
                       ],
@@ -567,7 +567,7 @@
               "element": {
                 "id": "78d47f5a-1526-4f75-ac35-8246cf4187b7",
                 "type": "text",
-                "content": "<p>Quand vous répondez à un mail qui comporte <strong>plusieurs destinataires</strong>, deux options sont possibles&nbsp;:</p><ul><li><strong>répondre </strong>(seulement à l’expéditeur) ;<strong></strong></li><li><strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires).</li></ul><p>Il est recommandé de choisir «&nbsp;Répondre à tous&nbsp;» uniquement si la réponse est utile pour tout le monde. <br></p>"
+                "content": "<p>Quand vous répondez à un mail qui comporte <strong>plusieurs destinataires</strong>, deux options sont possibles&nbsp;:</p>\n<ul>\n    <li><strong>répondre </strong>(seulement à l’expéditeur),</li>\n    <li><strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires).</li>\n</ul>\n<p>Il est recommandé de choisir «&nbsp;Répondre à tous&nbsp;» uniquement si la réponse est utile pour tout le monde. <br></p>"
               }
             },
             {
@@ -780,11 +780,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Exactement !<br></p>",
-                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial ;</li><li>parcourir tout le fil de discussion ;</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
+                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial,</li><li>parcourir tout le fil de discussion,</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
                   },
                   "invalid": {
                     "state": "<p>Eh non.<br></p>",
-                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial ;</li><li>parcourir tout le fil de discussion ;</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
+                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial,</li><li>parcourir tout le fil de discussion,</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
                   }
                 }
               }
@@ -830,7 +830,7 @@
               "element": {
                 "id": "0732c01c-0387-487c-ad6a-3897190bd4ff",
                 "type": "text",
-                "content": "<ul>    <li>Pour faire suivre à quelqu’un un mail que vous avez reçu et qui pourrait l’intéresser, vous pouvez lui <strong>transférer</strong> le mail.</li>    <li>Lorsqu’un mail comporte plusieurs destinataires, vous pouvez <strong>répondre</strong> uniquement à l’expéditeur, ou <strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires). Faites le choix qui vous semble le plus adapté en fonction du contexte et de votre besoin.</li>    <li> Quand vous répondez à un mail, le texte du précédent mail est affiché en dessous. De réponse en réponse, un <strong>fil de discussion</strong> se construit sous le mail le plus récent. Le mail tout en bas est donc le plus ancien.</li></ul>"
+                "content": "<ul>    <li>Pour faire suivre à quelqu’un un mail que vous avez reçu et qui pourrait l’intéresser, vous pouvez lui <strong>transférer</strong> le mail.&nbsp;📧</li></ul><p><br></p><ul>    <li>Lorsqu’un mail comporte plusieurs destinataires, vous pouvez <strong>répondre</strong> uniquement à l’expéditeur, ou <strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires). Faites le choix qui vous semble le plus adapté en fonction du contexte et de votre besoin.&nbsp;✒️</li></ul><p><br></p><ul>    <li> Quand vous répondez à un mail, le texte du précédent mail est affiché en dessous. De réponse en réponse, un <strong>fil de discussion</strong> se construit sous le mail le plus récent. Le mail tout en bas est donc le plus ancien.&nbsp;🧵</li></ul>"
               }
             }
           ]
@@ -851,7 +851,7 @@
               "element": {
                 "id": "dc83d812-92d7-4785-94d1-88d21c5affb8",
                 "type": "text",
-                "content": "<p>Dans la messagerie électronique ci-dessous, Angelina vous a envoyé un mail avec des recommandations de restaurant.</p><p><strong>Transférez ce courrier à andreis@pixmail.org en ajoutant le message suivant :&nbsp; </strong></p><p><em><br></em></p><p><em>Bonjour Andreis,</em></p><p><em>Mon amie Angelina me propose cette sélection de restaurants pour jeudi. Tu as une préférence ?</em></p><p><em>Bonne journée.</em></p>"
+                "content": "<p>Dans la messagerie électronique ci-dessous, Angelina vous a envoyé un mail avec des recommandations de restaurant.</p><p><strong>Transférez ce courrier à andreis@pixmail.org en ajoutant le message suivant :&nbsp; </strong></p><blockquote><em><br></em></blockquote><blockquote><em>Bonjour Andreis,</em></blockquote><blockquote><em>Mon amie Angelina me propose cette sélection de restaurants pour jeudi. Tu as une préférence ?</em></blockquote><blockquote><em>Bonne journée.</em></blockquote>"
               }
             },
             {
@@ -986,14 +986,6 @@
                         "time": {
                           "days": -14,
                           "minutes": -66
-                        },
-                        "previousMail": {
-                          "name": "Suppr",
-                          "content": "[À supprimer]",
-                          "time": {
-                            "days": -33,
-                            "minutes": -33
-                          }
                         }
                       }
                     },
@@ -1008,7 +1000,7 @@
                           "content": "Répondre",
                           "feedback": {
                             "state": "<p>Correct !</p>",
-                            "diagnosis": "<p>Même si le message est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditrice</strong>.</p>"
+                            "diagnosis": "<p>Même si le mail est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditrice</strong>.</p>"
                           }
                         },
                         {
@@ -1016,7 +1008,7 @@
                           "content": "Répondre à tous",
                           "feedback": {
                             "state": "<p>Incorrect.<br></p>",
-                            "diagnosis": "<p>Même si le message est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditrice</strong>.</p>"
+                            "diagnosis": "<p>Même si le mail est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes.</p>"
                           }
                         },
                         {
@@ -1024,7 +1016,7 @@
                           "content": "Ne pas répondre",
                           "feedback": {
                             "state": "<p>Incorrect.<br></p>",
-                            "diagnosis": "<p>Même si le message est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditrice</strong>.</p>"
+                            "diagnosis": "<p>Lucas est disponible uniquement le mardi, il faut qu’il réponde à ce mail.</p>"
                           }
                         }
                       ],
@@ -1056,14 +1048,6 @@
                         "time": {
                           "days": -229,
                           "minutes": -622
-                        },
-                        "previousMail": {
-                          "name": "Suppr",
-                          "content": "[À supprimer]",
-                          "time": {
-                            "days": -33,
-                            "minutes": -33
-                          }
                         }
                       }
                     },
@@ -1078,7 +1062,7 @@
                           "content": "Répondre",
                           "feedback": {
                             "state": "<p>Incorrect.</p>",
-                            "diagnosis": "<p>Il s’agit d’un mail d’information qui <strong>n’attend pas de réponse</strong>. L’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient « ne-pas-répondre ».</p>"
+                            "diagnosis": "<p>Avez-vous pensé à regarder l’adresse de l’expéditeur&nbsp;?</p>"
                           }
                         },
                         {
@@ -1086,7 +1070,7 @@
                           "content": "Répondre à tous",
                           "feedback": {
                             "state": "<p>Incorrect.</p>",
-                            "diagnosis": "<p>Il s’agit d’un mail d’information qui <strong>n’attend pas de réponse</strong>. L’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient « ne-pas-répondre ».</p>"
+                            "diagnosis": "<p>Ce mail n’a pas plusieurs destinataires, vous ne pouvez pas «&nbsp;Répondre à tous&nbsp;». Avez-vous pensé à regarder l’adresse de l’expéditeur&nbsp;?</p>"
                           }
                         },
                         {
@@ -1126,14 +1110,6 @@
                         "time": {
                           "days": -3,
                           "minutes": -673
-                        },
-                        "previousMail": {
-                          "name": "Suppr",
-                          "content": "[À supprimer]",
-                          "time": {
-                            "days": -33,
-                            "minutes": -33
-                          }
                         }
                       }
                     },
@@ -1148,7 +1124,7 @@
                           "content": "Répondre",
                           "feedback": {
                             "state": "<p>Incorrect.<br><br></p>",
-                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser “Répondre à tous” permet à chacun d’avoir l’information.</p>"
+                            "diagnosis": "<p>La réponse de Soumaya peut intéresser tout le groupe.</p>"
                           }
                         },
                         {
@@ -1156,7 +1132,7 @@
                           "content": "Répondre à tous",
                           "feedback": {
                             "state": "<p>Correct !</p>",
-                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser “Répondre à tous” permet à chacun d’avoir l’information.</p>"
+                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
                           }
                         },
                         {
@@ -1164,7 +1140,7 @@
                           "content": "Ne pas répondre",
                           "feedback": {
                             "state": "<p>Incorrect !</p>",
-                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser “Répondre à tous” permet à chacun d’avoir l’information.</p>"
+                            "diagnosis": "<p>Soumaya a besoin de prévenir qu’elle va apporter les boissons. Si elle ne répond pas, les autres ne le sauront pas.</p>"
                           }
                         }
                       ],
@@ -1191,39 +1167,47 @@
               "type": "element",
               "element": {
                 "id": "2ca9785e-8ab8-448e-89b7-dc8c097885c2",
-                "type": "qcu-declarative",
-                "instruction": "<p>La prochaine fois que vous répondez à un mail avec plusieurs destinataires, que ferez-vous ?</p>",
+                "type": "qcu-discovery",
+                "instruction": "<p>La prochaine fois que vous répondez à un mail avec plusieurs destinataires, que ferez-vous&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Vérifier qui est concerné par votre réponse.</p>",
+                    "content": "<p>Lire seulement le dernier mail du fil de discussion.</p>",
                     "feedback": {
-                      "diagnosis": "<p>[Feedback à rédiger]</p>"
+                      "diagnosis": "<p>Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
                     }
                   },
                   {
                     "id": "1",
-                    "content": "<p>Relire le fil avant d’envoyer votre message.</p>",
+                    "content": "<p>Lire tout fil de discussion.</p>",
                     "feedback": {
-                      "diagnosis": "<p>[Feedback à rédiger]</p>"
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Lire tout le fil de discussion permet de comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>[Distracteur à trouver]</p>",
+                    "content": "<p>Répondre à tous immédiatement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>[Feedback à rédiger]</p>"
+                      "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
                     }
                   },
                   {
                     "id": "3",
+                    "content": "<p>Vérifier qui est concerné par votre réponse.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Avant de répondre, il est utile de vérifier qui est concerné par votre réponse afin de choisir entre entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p><p>Il est aussi important de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
                     "content": "<p>Rien de spécial.</p>",
                     "feedback": {
-                      "diagnosis": "<p>[Feedback à rédiger]</p>"
+                      "diagnosis": "<p>En réalité, quelques vérifications sont utiles pour envoyer une réponse adaptée&nbsp;:</p><ul><li>Lire tout le fil de discussion pour bien comprendre la situation et ne pas manquer une information.</li><li>Vérifier les destinataires pour envoyer une réponse adaptée aux personnes concernées.</li></ul>"
                     }
                   }
-                ]
+                ],
+                "solution": "1,3"
               }
             }
           ]
