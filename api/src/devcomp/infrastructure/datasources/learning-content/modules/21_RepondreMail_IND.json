@@ -64,7 +64,7 @@
               "element": {
                 "id": "be863ac5-151e-482e-bd83-1ae4b1535b82",
                 "type": "text",
-                "content": "<p>Quand vous répondez à un mail, les échanges ne disparaissent pas. <br>Voyons ensemble comment ils s’organisent.</p>"
+                "content": "<p>Quand vous répondez à un mail, les échanges ne disparaissent pas. 📧<br>Voyons ensemble comment ils s’organisent.</p>"
               }
             }
           ]
@@ -219,7 +219,7 @@
               "element": {
                 "id": "59325b69-d108-4d69-adf1-d65925b162b3",
                 "type": "text",
-                "content": "<p>Parfois, le contenu d’un mail peut intéresser des personnes qui ne l’ont pas reçu.<br>Découvrez comment transférer un mail.</p>"
+                "content": "<p>Parfois, le contenu d’un mail peut intéresser des personnes qui ne l’ont pas reçu. 👥<br>Découvrez comment transférer un mail.</p>"
               }
             }
           ]
@@ -448,7 +448,7 @@
               "element": {
                 "id": "f3c50c6a-5f61-4123-8d6c-10cc25bfd282",
                 "type": "text",
-                "content": "<p>Un mail peut être envoyé à plusieurs destinataires en même temps. <br>Découvrons ensemble comment répondre à ce type de mail.</p>"
+                "content": "<p>Un mail peut être envoyé à plusieurs destinataires en même temps. 📨<br>Découvrons ensemble comment répondre à ce type de mail.</p>"
               }
             }
           ]
@@ -602,7 +602,7 @@
               "element": {
                 "id": "23eef4f8-6952-4cca-8718-51190d9a901a",
                 "type": "text",
-                "content": "<p>Quand beaucoup de mails sont échangés entre plusieurs personnes, le fil de discussion se complexifie.<br>Pour retrouver une information, il faut se repérer à l’intérieur du fil de discussion.</p>"
+                "content": "<p>Quand beaucoup de mails sont échangés entre plusieurs personnes, le fil de discussion se complexifie.<br>Pour retrouver une information, il faut se repérer à l’intérieur du fil de discussion. 🕵️</p>"
               }
             }
           ]
