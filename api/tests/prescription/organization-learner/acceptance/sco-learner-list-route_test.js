@@ -71,6 +71,8 @@ describe('Acceptance | Application | sco-leaner-list-route', function () {
                 'user-id': user.id,
                 username: user.username,
                 email: user.email,
+                'is-temporarily-blocked': false,
+                'is-blocked': false,
                 'is-authenticated-from-gar': true,
                 division: organizationLearner.division,
                 'participation-count': 1,

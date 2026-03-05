@@ -12,6 +12,8 @@ const serialize = function ({ scoOrganizationParticipants, meta }) {
       'username',
       'userId',
       'email',
+      'isTemporarilyBlocked',
+      'isBlocked',
       'isAuthenticatedFromGAR',
       'division',
       'participationCount',
