@@ -388,15 +388,6 @@ export const buildQuests = async (databaseBuilder) => {
       status: CampaignParticipationStatuses.SHARED,
     },
     {
-      user: successSharedUser,
-      campaignId: campaigns[0].campaignId,
-      organizationLearner: successSharedOrganizationLearner,
-      sharedAt: new Date('2024-01-13'),
-      status: CampaignParticipationStatuses.SHARED,
-      sharedAt: null,
-      status: CampaignParticipationStatuses.SHARED,
-    },
-    {
       user: failedUser,
       campaignId: campaigns[0].campaignId,
       organizationLearner: failedOrganizationLearner,
@@ -525,4 +516,54 @@ export const buildQuests = async (databaseBuilder) => {
       });
     }
   });
+
+  //create learners with participations to test download 100 attestations
+  for (let i = 0; i < 100; i++) {
+    const user = databaseBuilder.factory.buildUser.withRawPassword({
+      firstName: `attestation-success${i}`,
+      lastName: `attestation${i}`,
+      email: `attestation-success${i}@example.net`,
+    });
+
+    const organizationLearner = databaseBuilder.factory.buildOrganizationLearner({
+      ...user,
+      userId: user.id,
+      organizationId: organization.id,
+      division: '6emeC',
+    });
+
+    const stages = await databaseBuilder.knex('stages').where({ targetProfileId: TARGET_PROFILE_BADGES_STAGES_ID });
+    const stageZero = stages.find((stage) => stage.level === 0 || stage.threshold === 0);
+
+    const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+      userId: user.id,
+      campaignId: campaigns[0].campaignId,
+      masteryRate: 1,
+      organizationLearnerId: organizationLearner.id,
+      status: CampaignParticipationStatuses.SHARED,
+      sharedAt: dayjs().subtract(5, 'days').toDate(),
+    });
+
+    databaseBuilder.factory.buildAssessment({
+      userId: user.id,
+      type: Assessment.types.CAMPAIGN,
+      campaignParticipationId: participationId,
+    });
+
+    databaseBuilder.factory.buildStageAcquisition({
+      stageId: stageZero.id,
+      campaignParticipationId: participationId,
+    });
+
+    const { id: sharedProfileRewardId } = databaseBuilder.factory.buildProfileReward({
+      userId: user.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
+      rewardId,
+    });
+
+    databaseBuilder.factory.buildOrganizationsProfileRewards({
+      organizationId: organization.id,
+      profileRewardId: sharedProfileRewardId,
+    });
+  }
 };
