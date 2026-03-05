@@ -1,15 +1,18 @@
 import { faker } from '@faker-js/faker';
 
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { SCO_MANAGING_ORGANIZATION_ID } from '../../common/constants.js';
-import { CAMPAIGN_SCO_COMBINED_COURSE_ID } from '../constants.js';
+import { CAMPAIGN_SCO_COMBINED_COURSE_ID, SIXTH_GRADE_REWARD_ID } from '../constants.js';
 
 export const SCO_SIECLE_COMBINED_COURSE = {
   organizationId: SCO_MANAGING_ORGANIZATION_ID,
   quest: {
     code: 'SCOMBINIX',
     name: 'Parcours combine sco SIECLE',
+    rewardId: SIXTH_GRADE_REWARD_ID,
+    rewardType: REWARD_TYPES.ATTESTATION,
     combinedCourseContents: [
       {
         campaignId: CAMPAIGN_SCO_COMBINED_COURSE_ID,

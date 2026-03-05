@@ -8,6 +8,7 @@ describe('Certification | Course | Integration | Repository | course-assessment-
     context('when assessment result exists', function () {
       it('should return the assessment result', async function () {
         // given
+        const versionId = databaseBuilder.factory.buildCertificationVersion().id;
         const juryId = databaseBuilder.factory.buildUser().id;
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ id: 1 }).id;
         databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
@@ -58,6 +59,9 @@ describe('Certification | Course | Integration | Repository | course-assessment-
           juryId,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark2],
+          capacity: -1,
+          reachedMeshIndex: 1,
+          versionId,
         });
         const olderAssessmentResult = domainBuilder.buildAssessmentResult({
           id: 6543,
@@ -71,6 +75,9 @@ describe('Certification | Course | Integration | Repository | course-assessment-
           juryId,
           assessmentId: 2,
           competenceMarks: [competenceMark3],
+          capacity: -1,
+          reachedMeshIndex: 1,
+          versionId,
         });
         const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,

@@ -13,6 +13,9 @@ describe('Unit | Domain | Models | AssessmentResult', function () {
         assessmentId: 123,
         status: Assessment.states.STARTED,
         competenceMarks: [],
+        capacity: null,
+        reachedMeshIndex: null,
+        versionId: null,
       });
       expectedAssessmentResult.id = undefined;
       expectedAssessmentResult.commentForCandidate = undefined;

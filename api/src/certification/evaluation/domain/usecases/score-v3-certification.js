@@ -94,7 +94,7 @@ export async function scoreV3Certification({
     certificationCourseId: assessmentSheet.certificationCourseId,
   });
 
-  const { coreScoring, doubleCertificationScoring } = services.handleV3CertificationScoring({
+  const { coreAssessmentResult, doubleCertificationScoring } = services.handleV3CertificationScoring({
     event,
     candidate,
     assessmentSheet,
@@ -115,11 +115,10 @@ export async function scoreV3Certification({
   await DomainTransaction.execute(async () => {
     await certificationAssessmentHistoryRepository.save(certificationAssessmentHistory);
 
-    if (coreScoring) {
+    if (coreAssessmentResult) {
       await _saveV3Result({
-        assessmentResult: coreScoring.assessmentResult,
+        assessmentResult: coreAssessmentResult,
         certificationCourseId: assessmentSheet.certificationCourseId,
-        competenceMarks: coreScoring.competenceMarks,
         assessmentResultRepository,
         sharedCompetenceMarkRepository,
         certificationCourseRepository,
@@ -171,14 +170,13 @@ const _verifyCertificationIsScorable = async ({
  * @param {object} params
  * @param {AssessmentResult} params.assessmentResult
  * @param {number} params.certificationCourseId
- * @param {CompetenceMark} params.competenceMarks
  * @param {AssessmentResultRepository} params.assessmentResultRepository
- * @param {sharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
+ * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
  */
 async function _saveV3Result({
   assessmentResult,
   certificationCourseId,
-  competenceMarks,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
   certificationCourseRepository,
@@ -188,13 +186,13 @@ async function _saveV3Result({
     assessmentResult,
   });
 
-  for (const competenceMark of competenceMarks) {
-    const competenceMarkDomain = new CompetenceMark({
-      ...competenceMark,
-      assessmentResultId: newAssessmentResult.id,
-    });
-    await sharedCompetenceMarkRepository.save(competenceMarkDomain);
-  }
+  const competenceMarksToSave = assessmentResult.competenceMarks.map(
+    (competenceMark) => new CompetenceMark({ ...competenceMark, assessmentResultId: newAssessmentResult.id }),
+  );
+
+  await sharedCompetenceMarkRepository.saveMany({
+    competenceMarks: competenceMarksToSave,
+  });
 
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
   certificationCourse.complete({ now: new Date() });

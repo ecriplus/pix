@@ -7,6 +7,7 @@ import ENV from 'pix-admin/config/environment';
 export default class OidcAuthenticator extends BaseAuthenticator {
   @service session;
   @service oidcIdentityProviders;
+  @service requestManager;
 
   async authenticate({ code, state, iss, authenticationKey, email, identityProviderSlug }) {
     const identityProvider = this.oidcIdentityProviders.list.find((provider) => provider.id === identityProviderSlug);
@@ -65,5 +66,26 @@ export default class OidcAuthenticator extends BaseAuthenticator {
       }
       reject();
     });
+  }
+
+  /**
+   * @param {Object} data - The current authenticated session data
+   */
+  async invalidate(data) {
+    const { identityProviderCode, logoutUrlUuid } = data || {};
+
+    const response = await this.requestManager.request({
+      url: `${ENV.APP.API_HOST}/api/oidc/logout`,
+      method: 'POST',
+      body: JSON.stringify({
+        identity_provider: identityProviderCode,
+        logout_url_uuid: logoutUrlUuid,
+      }),
+    });
+
+    const { redirectLogoutUrl } = await response.content;
+    if (!redirectLogoutUrl) return;
+
+    this.session.alternativeRootURL = redirectLogoutUrl;
   }
 }

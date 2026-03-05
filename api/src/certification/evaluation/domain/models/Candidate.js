@@ -33,8 +33,8 @@ export class Candidate {
     return this.subscriptionScope === SCOPES.CORE && !this.hasCleaSubscription;
   }
 
-  get hasPixPlusSubscription() {
-    return this.subscriptionScope !== SCOPES.CORE && !this.hasCleaSubscription;
+  get isScorable() {
+    return this.subscriptionScope === SCOPES.CORE || this.subscriptionScope.includes('EDU_');
   }
 
   #validate() {

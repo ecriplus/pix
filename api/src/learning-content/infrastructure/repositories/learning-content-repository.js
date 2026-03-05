@@ -47,11 +47,7 @@ export class LearningContentRepository {
     const knex = DomainTransaction.getConnection();
     const dtos = objects.map((obj) => this.fixRawFieldValues(this.toDto(obj), (dto) => knex.raw(dto)));
     for (const chunk of chunks(dtos, this.#chunkSize)) {
-      await knex
-        .insert(chunk)
-        .into(this.#tableName)
-        .onConflict('id')
-        .merge();
+      await knex.insert(chunk).into(this.#tableName).onConflict('id').merge();
     }
   }
 
@@ -62,11 +58,7 @@ export class LearningContentRepository {
     logger.debug(`saving one item in ${this.#tableName}`);
     const knex = DomainTransaction.getConnection();
     const dto = this.fixRawFieldValues(this.toDto(object), (dto) => knex.raw(dto));
-    await knex
-      .insert(dto)
-      .into(this.#tableName)
-      .onConflict('id')
-      .merge();
+    await knex.insert(dto).into(this.#tableName).onConflict('id').merge();
   }
 
   /**

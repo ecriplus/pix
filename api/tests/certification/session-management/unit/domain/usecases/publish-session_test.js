@@ -13,10 +13,10 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
     const finalizedSessionRepository = Symbol('the finalizedSessionRepository');
     const sharedSessionRepository = Symbol('the sharedSessionRepository');
     const publishedAt = Symbol('a publication date');
-    const sessionRepository = {
+    const sessionManagementRepository = {
       get: sinon.stub(),
     };
-    sessionRepository.get.resolves(session);
+    sessionManagementRepository.get.resolves(session);
 
     const sessionPublicationService = {
       publishSession: sinon.stub(),
@@ -30,7 +30,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
       certificationRepository,
       certificationCenterRepository,
       finalizedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
       sessionPublicationService,
       publishedAt,
@@ -42,7 +42,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
       publishedAt,
       certificationRepository,
       finalizedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
     });
     expect(sessionPublicationService.manageEmails).to.have.been.calledWithExactly({
@@ -50,7 +50,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | Publi
       startedCertificationCoursesUserIds: [123],
       publishedAt,
       certificationCenterRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
     expect(result).to.equal(session);
   });

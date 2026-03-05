@@ -8,7 +8,7 @@ describe('Unit | Shared | Domain | Service | Locale', function () {
       const result = localeService.getSupportedLanguages();
 
       // then
-      expect(result).to.deep.equal(['en', 'es', 'fr', 'nl', 'it']);
+      expect(result).to.deep.equal(['de', 'en', 'es', 'fr', 'nl', 'it']);
     });
   });
 

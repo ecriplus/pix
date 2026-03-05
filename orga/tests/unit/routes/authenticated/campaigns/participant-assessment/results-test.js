@@ -7,11 +7,11 @@ module(
   function (hooks) {
     setupTest(hooks);
 
-    module('Before model', function (hooks) {
-      hooks.afterEach(function () {
-        sinon.restore();
-      });
+    hooks.afterEach(function () {
+      sinon.restore();
+    });
 
+    module('Before model', function () {
       module('When places limit is reached', function () {
         test('should redirect on main campaign page', function (assert) {
           //given
@@ -47,6 +47,56 @@ module(
 
           //then
           assert.notOk(replaceWithStub.called);
+        });
+      });
+    });
+
+    module('model', function () {
+      module('when participation is not shared', function () {
+        test('it should return an empty array without calling the API', async function (assert) {
+          //given
+          const route = this.owner.lookup('route:authenticated/campaigns/participant-assessment/results');
+
+          sinon
+            .stub(route, 'modelFor')
+            .withArgs('authenticated.campaigns.participant-assessment')
+            .returns({
+              campaignAssessmentParticipation: {
+                isShared: false,
+              },
+            });
+
+          //when
+          const result = await route.model();
+
+          //then
+          assert.deepEqual(result, []);
+        });
+      });
+
+      module('when participation is shared', function () {
+        test('it should return competence results', async function (assert) {
+          //given
+          const route = this.owner.lookup('route:authenticated/campaigns/participant-assessment/results');
+          const competenceResults = [Symbol('result1'), Symbol('result2')];
+
+          sinon
+            .stub(route, 'modelFor')
+            .withArgs('authenticated.campaigns.participant-assessment')
+            .returns({
+              campaignAssessmentParticipation: {
+                isShared: true,
+                campaignAssessmentParticipationResult: Promise.resolve({
+                  competenceResults: Promise.resolve(competenceResults),
+                }),
+              },
+            });
+
+          //when
+          const result = await route.model();
+
+          //then
+          assert.deepEqual(result, competenceResults);
         });
       });
     });

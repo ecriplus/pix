@@ -29,6 +29,9 @@ class AssessmentResult {
    * @param {Array<CompetenceMark>} competenceMarks
    * @param {number} assessmentId
    * @param {number} juryId
+   * @param {number} capacity
+   * @param {number} reachedMeshIndex
+   * @param {number} versionId
    */
   constructor({
     id,
@@ -42,6 +45,9 @@ class AssessmentResult {
     competenceMarks = [],
     assessmentId,
     juryId,
+    capacity = null,
+    reachedMeshIndex = null,
+    versionId = null,
   } = {}) {
     this.id = id;
     this.commentForCandidate = commentForCandidate;
@@ -54,6 +60,9 @@ class AssessmentResult {
     this.competenceMarks = competenceMarks;
     this.assessmentId = assessmentId;
     this.juryId = juryId;
+    this.capacity = capacity;
+    this.reachedMeshIndex = reachedMeshIndex;
+    this.versionId = versionId;
   }
 
   /**
@@ -82,6 +91,9 @@ class AssessmentResult {
       competenceMarks: this.competenceMarks,
       assessmentId: this.assessmentId,
       juryId: this.juryId,
+      capacity: this.capacity,
+      reachedMeshIndex: this.reachedMeshIndex,
+      versionId: this.versionId,
     });
   }
 

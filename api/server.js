@@ -214,7 +214,9 @@ const setupDeserialization = function (server) {
 };
 
 const setupAuthentication = function (server) {
-  server.auth.scheme(serverAuthentication.schemes.jwt.name, serverAuthentication.schemes.jwt.scheme);
+  Object.values(serverAuthentication.schemes).forEach((scheme) => {
+    server.auth.scheme(scheme.name, scheme.scheme);
+  });
   Object.values(serverAuthentication.strategies).forEach((strategy) => {
     server.auth.strategy(strategy.name, strategy.schemeName, strategy.configuration);
   });

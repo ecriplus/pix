@@ -33,7 +33,7 @@ export const createCombinedCourse = async ({
   const targetProfiles = await targetProfileRepository.findByIds({ ids: targetProfileIds });
   const campaignsToCreate = [];
   const recommendableModules = await recommendedModuleRepository.findIdsByTargetProfileIds({
-    targetProfileIds: [targetProfileIds],
+    targetProfileIds,
   });
 
   for (const targetProfile of targetProfiles) {
@@ -42,7 +42,9 @@ export const createCombinedCourse = async ({
       targetProfile,
       creatorId,
       combinedCourseCode,
-      recommendableModules,
+      recommendableModules: recommendableModules.filter((recommendableModule) =>
+        recommendableModule.targetProfileIds.includes(targetProfile.id),
+      ),
       modules,
     });
     campaignsToCreate.push(campaignForCombinedCourse);

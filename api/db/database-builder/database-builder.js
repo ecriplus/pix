@@ -235,6 +235,7 @@ export class DatabaseBuilder {
         if (!tableName || tableName === '') return;
         if (tableName === 'pgboss.version') return;
         if (tableName === 'db_type_parsing_test') return;
+        if (tableName === 'batch_update_test') return;
 
         this.#dirtyTables.add(tableName);
       }

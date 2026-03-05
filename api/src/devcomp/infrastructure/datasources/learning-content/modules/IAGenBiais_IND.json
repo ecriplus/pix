@@ -54,7 +54,9 @@
                       "content": "Ah oui, il y a même le drapeau américain, haha ! Tu es tombée sur un biais."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -443,7 +445,9 @@
                             "content": "C’est bien ce que je me disais ! Je vais aller m’en servir un verre ! "
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "54e415d3-a447-4c30-821d-75a54ecaff56",
@@ -575,7 +579,9 @@
                             "content": " Bon conseil ! "
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "a19e2a08-9044-42b6-93b6-5a0f40cf65ac",
@@ -884,7 +890,9 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "enableLoop": true
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

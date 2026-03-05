@@ -50,7 +50,7 @@ const register = async function (server) {
                     participantExternalId: Joi.string().description(
                       'Identifiant Externe rempli en début de participation',
                     ),
-                    status: Joi.string().description('Statut de la participation : STARTED, TO_SHARE, SHARED'),
+                    status: Joi.string().description('Statut de la participation : STARTED, SHARED'),
                     sharedAt: Joi.date().description('Date de participation'),
                     campaignId: Joi.number().description('ID de la campagne liée à la participation'),
                     organizationLearnerId: Joi.number().description("ID du participant au sein de l'organisation"),

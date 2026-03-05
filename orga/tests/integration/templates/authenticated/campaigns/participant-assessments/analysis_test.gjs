@@ -10,6 +10,7 @@ module('Integration | Template | Authenticated | Campaigns | Participant Assessm
   setupIntlRenderingTest(hooks);
   const model = {
     isForParticipant: true,
+    isAnalysisAvailable: true,
   };
 
   module('display analysis', function () {
@@ -29,6 +30,20 @@ module('Integration | Template | Authenticated | Campaigns | Participant Assessm
       assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.advanced')));
       assert.ok(screen.getByText(t('pages.campaign-analysis.levels-correspondence.levels.expert')));
       assert.ok(screen.getByRole('link', { name: t('pages.campaign-analysis.levels-correspondence.infos.text') }));
+    });
+  });
+
+  module('hide analysis', function () {
+    test('it should hide content', async function (assert) {
+      // given
+      model.isAnalysisAvailable = false;
+      const router = this.owner.lookup('service:router');
+      sinon.stub(router, 'currentRouteName').value('');
+
+      const screen = await render(<template><Analysis @model={{model}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.assessment-individual-results.table.empty')));
     });
   });
 });

@@ -60,4 +60,34 @@ describe('Integration | Repository | administration-team-repository', function (
       expect(result).to.be.null;
     });
   });
+
+  describe('#findExistingIds', function () {
+    it('should return the administration team ids matching the given ids', async function () {
+      // given
+      const administrationTeam1 = databaseBuilder.factory.buildAdministrationTeam();
+      const administrationTeam2 = databaseBuilder.factory.buildAdministrationTeam();
+      await databaseBuilder.commit();
+
+      // when
+      const foundAdministrationTeamIds = await administrationTeamRepository.findExistingIds({
+        ids: [administrationTeam1.id, administrationTeam2.id],
+      });
+
+      // then
+      expect(foundAdministrationTeamIds).to.deep.equal([administrationTeam1.id, administrationTeam2.id]);
+    });
+
+    it('should return an empty array if there is no matching id', async function () {
+      // given
+      const unknownIds = [456, 789];
+
+      // when
+      const foundAdministrationTeamIds = await administrationTeamRepository.findExistingIds({
+        ids: unknownIds,
+      });
+
+      // then
+      expect(foundAdministrationTeamIds).to.deep.equal([]);
+    });
+  });
 });

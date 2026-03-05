@@ -2,7 +2,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { getLatestParticipationSharedForOneLearner } from './helpers/get-latest-participation-shared-for-one-learner.js';
 
-const { TO_SHARE, SHARED, STARTED } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 const getParticipationsActivityByDate = async function (campaignId) {
   const knexConn = DomainTransaction.getConnection();
@@ -68,7 +68,7 @@ const countParticipationsByStatus = async (campaignId) => {
   const row = await knexConn('campaign-participations')
     .select([
       knexConn.raw(`sum(case when status = ? then 1 else 0 end) as shared`, SHARED),
-      knexConn.raw(`sum(case when status in (?, ?) then 1 else 0 end) as started`, [TO_SHARE, STARTED]),
+      knexConn.raw(`sum(case when status = ? then 1 else 0 end) as started`, STARTED),
     ])
     .where({ campaignId, isImproved: false, deletedAt: null })
     .groupBy('campaignId')

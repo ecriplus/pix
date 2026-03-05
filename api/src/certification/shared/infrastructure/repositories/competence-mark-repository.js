@@ -13,4 +13,16 @@ const save = async function (competenceMark) {
   return new CompetenceMark(savedCompetenceMark);
 };
 
-export { save };
+/**
+ * @param {object} params
+ * @param {CompetenceMark[]} params.competenceMarks
+ * @returns {Promise<void>}
+ */
+const saveMany = async function ({ competenceMarks }) {
+  await Promise.all(competenceMarks.map((competenceMark) => competenceMark.validate()));
+
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('competence-marks').insert(competenceMarks).returning('*');
+};
+
+export { save, saveMany };

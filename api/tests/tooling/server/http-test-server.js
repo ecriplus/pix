@@ -55,7 +55,9 @@ class HttpTestServer {
   }
 
   setupAuthentication() {
-    this.hapiServer.auth.scheme(serverAuthentication.schemes.jwt.name, serverAuthentication.schemes.jwt.scheme);
+    Object.values(serverAuthentication.schemes).forEach((scheme) => {
+      this.hapiServer.auth.scheme(scheme.name, scheme.scheme);
+    });
     Object.values(serverAuthentication.strategies).forEach((strategy) =>
       this.hapiServer.auth.strategy(strategy.name, strategy.schemeName, strategy.configuration),
     );

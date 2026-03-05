@@ -5,14 +5,12 @@ async function instantiateCombinedCourseDetails({
   combinedCourseId,
   combinedCourseRepository,
   campaignRepository,
-  questRepository,
   recommendedModuleRepository,
   moduleRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getById({ id: combinedCourseId });
-  const quest = await questRepository.findById({ questId: combinedCourse.questId });
 
-  const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, quest);
+  const combinedCourseDetails = new CombinedCourseDetails(combinedCourse, combinedCourse.quest);
   await combinedCourseDetails.setEncryptedUrl();
   const campaignIds = combinedCourseDetails.campaignIds;
   const campaigns = [];

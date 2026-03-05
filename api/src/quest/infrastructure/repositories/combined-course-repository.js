@@ -2,14 +2,12 @@ import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourse } from '../../domain/models/CombinedCourse.js';
+import { Quest } from '../../domain/models/Quest.js';
 
 const getByCode = async ({ code }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const combinedCourse = await knexConn('combined_courses')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId', 'deletedAt', 'deletedBy')
-    .where('code', code)
-    .first();
+  const combinedCourse = await _baseQuery(knexConn).where('code', code).first();
   if (!combinedCourse) {
     throw new NotFoundError(`Le parcours combiné portant le code ${code} n'existe pas`);
   }
@@ -20,9 +18,8 @@ const getByCode = async ({ code }) => {
 const getById = async ({ id }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const combinedCourse = await knexConn('combined_courses')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId', 'deletedAt', 'deletedBy')
-    .where('id', id)
+  const combinedCourse = await _baseQuery(knexConn)
+    .where('combined_courses.id', id)
     .whereNotNull('organizationId')
     .whereNotNull('code')
     .first();
@@ -36,10 +33,9 @@ const getById = async ({ id }) => {
 const findByOrganizationId = async ({ organizationId, page, size }) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const queryBuilder = knexConn('combined_courses')
-    .select('id', 'organizationId', 'code', 'name', 'description', 'illustration', 'questId')
+  const queryBuilder = _baseQuery(knexConn)
     .where('organizationId', organizationId)
-    .orderBy('createdAt', 'desc');
+    .orderBy('combined_courses.createdAt', 'desc');
 
   const { results, pagination } = await fetchPage({
     queryBuilder,
@@ -54,7 +50,15 @@ const findByOrganizationId = async ({ organizationId, page, size }) => {
 
 const findByCampaignId = async ({ campaignId }) => {
   const knexConn = DomainTransaction.getConnection();
-  const combinedCourses = await knexConn('combined_courses')
+  const combinedCourses = await _baseQuery(knexConn)
+    .where('combined_courses.organizationId', knexConn('campaigns').select('organizationId').where('id', campaignId))
+    .whereJsonSupersetOf('quests.successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
+
+  return combinedCourses.map((combinedCourse) => _toDomain(combinedCourse));
+};
+
+const _baseQuery = (knexConn) => {
+  return knexConn('combined_courses')
     .select(
       'combined_courses.id',
       'combined_courses.organizationId',
@@ -62,13 +66,20 @@ const findByCampaignId = async ({ campaignId }) => {
       'combined_courses.name',
       'combined_courses.description',
       'combined_courses.illustration',
+      'combined_courses.combinedCourseBlueprintId',
+      'combined_courses.createdAt',
+      'combined_courses.updatedAt',
+      'combined_courses.deletedAt',
+      'combined_courses.deletedBy',
       'questId',
+      'quests.createdAt as questCreatedAt',
+      'quests.updatedAt as questUpdatedAt',
+      'quests.rewardType as questRewardType',
+      'quests.eligibilityRequirements as questEligibilityRequirements',
+      'quests.successRequirements as questSuccessRequirements',
+      'quests.rewardId as questRewardId',
     )
-    .join('quests', 'quests.id', 'combined_courses.questId')
-    .where('combined_courses.organizationId', knexConn('campaigns').select('organizationId').where('id', campaignId))
-    .whereJsonSupersetOf('quests.successRequirements', [{ data: { campaignId: { data: campaignId } } }]);
-
-  return combinedCourses.map(_toDomain);
+    .join('quests', 'quests.id', 'combined_courses.questId');
 };
 
 const targetProfileIdsPartOfAnyCombinedCourse = async ({ targetProfileIds }) => {
@@ -120,18 +131,7 @@ const _toDTO = (combinedCourse) => {
 
 const findByModuleIdAndOrganizationIds = async ({ moduleId, organizationIds }) => {
   const knexConn = DomainTransaction.getConnection();
-  const combinedCourses = await knexConn('combined_courses')
-    .select(
-      'combined_courses.id',
-      'combined_courses.organizationId',
-      'combined_courses.code',
-      'combined_courses.name',
-      'combined_courses.description',
-      'combined_courses.illustration',
-      'combined_courses.questId',
-      'combined_courses.combinedCourseBlueprintId',
-    )
-    .join('quests', 'combined_courses.questId', 'quests.id')
+  const combinedCourses = await _baseQuery(knexConn)
     .whereIn('combined_courses.organizationId', organizationIds)
     .whereJsonSupersetOf('quests.successRequirements', [{ data: { moduleId: { data: moduleId } } }]);
 
@@ -161,19 +161,36 @@ const _toDomain = ({
   combinedCourseBlueprintId,
   deletedAt,
   deletedBy,
+  questCreatedAt,
+  questUpdatedAt,
+  questRewardType,
+  questEligibilityRequirements,
+  questSuccessRequirements,
+  questRewardId,
 }) => {
-  return new CombinedCourse({
-    id,
-    organizationId,
-    code,
-    name,
-    description,
-    illustration,
-    questId,
-    blueprintId: combinedCourseBlueprintId,
-    deletedAt,
-    deletedBy,
-  });
+  return new CombinedCourse(
+    {
+      id,
+      organizationId,
+      code,
+      name,
+      description,
+      illustration,
+      questId,
+      blueprintId: combinedCourseBlueprintId,
+      deletedAt,
+      deletedBy,
+    },
+    new Quest({
+      id: questId,
+      createdAt: questCreatedAt,
+      updatedAt: questUpdatedAt,
+      rewardType: questRewardType,
+      eligibilityRequirements: questEligibilityRequirements,
+      successRequirements: questSuccessRequirements,
+      rewardId: questRewardId,
+    }),
+  );
 };
 
 export {

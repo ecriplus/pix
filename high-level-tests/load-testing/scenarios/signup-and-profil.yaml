@@ -52,7 +52,7 @@ scenarios:
 
       # Fetch campaign participation overviews
       - get:
-          url: "/api/users/{{ userId }}/campaign-participation-overviews?filter[states]=ONGOING&filter[states]=TO_SHARE&page[number]=1&page[size]=9"
+          url: "/api/users/{{ userId }}/campaign-participation-overviews?filter[states]=ONGOING&filter[states]=STARTED&page[number]=1&page[size]=9"
           headers:
             Authorization: "Bearer {{ accessToken }}"
 

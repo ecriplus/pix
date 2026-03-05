@@ -341,11 +341,7 @@ describe('Evaluation | Integration | Usecase | Save and correct answer for campa
       sinon.assert.match(savedAnswer, {
         id: sinon.match.number,
         result: AnswerStatus.OK,
-        levelup: {
-          id: savedAnswer.id,
-          competenceName: 'nom de la compétence',
-          level: 3,
-        },
+        levelup: {},
       });
       expect(savedAnswer).to.be.instanceOf(Answer);
     });

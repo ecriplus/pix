@@ -35,7 +35,7 @@ test('set up base data for anonymization test : create an organization learner w
     const startCampaignPage = new StartCampaignPage(pixAppPage);
     await startCampaignPage.goToFirstChallenge(campaignCode as string);
     await test.step(` answering right or wrong according to pattern`, async () => {
-      while (!pixAppPage.url().endsWith('/checkpoint?finalCheckpoint=true')) {
+      while (!pixAppPage.url().includes('finalCheckpoint=true')) {
         const challengePage = new ChallengePage(pixAppPage);
         await challengePage.setRightOrWrongAnswer(true);
         await challengePage.validateAnswer();

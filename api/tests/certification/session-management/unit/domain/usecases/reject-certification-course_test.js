@@ -56,7 +56,7 @@ describe('Unit | UseCase | reject-certification-course', function () {
       it('should not cancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V2,
         });
@@ -68,21 +68,21 @@ describe('Unit | UseCase | reject-certification-course', function () {
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         const courseAssessmentResultRepository = {
           getLatestAssessmentResult: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
         courseAssessmentResultRepository.getLatestAssessmentResult.resolves(null);
 
         // when
         const error = await catchErr(rejectCertificationCourse)({
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
           juryId,
           courseAssessmentResultRepository,
         });

@@ -21,6 +21,9 @@ function buildAssessmentResult({
   assessmentId,
   createdAt = new Date('2020-01-01'),
   certificationCourseId,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 } = {}) {
   assessmentId = _.isUndefined(assessmentId) ? buildAssessment({ certificationCourseId }).id : assessmentId;
   juryId = _.isUndefined(juryId) ? buildUser().id : juryId;
@@ -39,6 +42,9 @@ function buildAssessmentResult({
     juryId,
     assessmentId,
     createdAt,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'assessment-results',
@@ -63,6 +69,9 @@ buildAssessmentResult.last = function ({
   juryId,
   assessmentId,
   createdAt,
+  capacity,
+  reachedMeshIndex,
+  versionId,
 }) {
   const assessmentResult = buildAssessmentResult({
     id,
@@ -79,6 +88,9 @@ buildAssessmentResult.last = function ({
     assessmentId,
     createdAt,
     certificationCourseId,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 
   buildCertificationCourseLastAssessmentResult({

@@ -175,7 +175,9 @@ export class ModuleFactory {
   static #buildCustom(element) {
     return new CustomElement({
       id: element.id,
+      title: element.title,
       instruction: element.instruction,
+      functionalInstruction: element.functionalInstruction,
       tagName: element.tagName,
       props: element.props,
     });

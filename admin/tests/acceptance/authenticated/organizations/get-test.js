@@ -245,6 +245,18 @@ module('Acceptance | Organizations | Get', function (hooks) {
           // then
           assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/target-profiles`);
         });
+
+        test('page title is set on target profiles page', async function (assert) {
+          // given
+          const orgId = ORGANIZATION_ID;
+          server.create('target-profile-summary', { id: 999, name: 'dummy' });
+
+          // when
+          await visit(`/organizations/${orgId}/target-profiles`);
+
+          const headScreen = within(document.head);
+          assert.ok(headScreen.getByText(`Orga ${orgId} | Profils cibles`, { selector: 'title' }));
+        });
       });
 
       module('Campaigns tab', function () {

@@ -76,7 +76,9 @@
                       "content": "🤦‍♀️C’est parce que c’est pas ton téléphone qui travaille !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -269,7 +271,9 @@
                   "randomSlides": false,
                   "titleLevel": 0,
                   "disableAnimation": true
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -369,7 +373,9 @@
                       "content": "Mais maintenant, je suis curieux : comment fait le centre de données pour créer les réponses ? 🤔"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -513,7 +519,9 @@
                   "randomSlides": false,
                   "titleLevel": 0,
                   "disableAnimation": true
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -567,7 +575,9 @@
                       "content": "Et si on y pense, des milliers de personnes font pareil en même temps ! 😳"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -595,7 +605,9 @@
                 "props": {
                   "titleLevel": 0,
                   "capacityImage": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -809,7 +821,9 @@
                       "content": "Tu penses à quoi par exemple ?"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

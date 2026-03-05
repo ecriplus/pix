@@ -2,7 +2,7 @@ import ApplicationSerializer from './application';
 
 export default ApplicationSerializer.extend({
   attrs: ['type'],
-  include: ['campaign', 'combined-course'],
+  include: ['campaign', 'combinedCourse'],
   links(verifiedCode) {
     return {
       campaign: {

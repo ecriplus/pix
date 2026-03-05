@@ -14,7 +14,7 @@ const finalize = async function (request, h, dependencies = { certificationRepor
   );
 
   await DomainTransaction.execute(async () => {
-    const sessionFinalized = await usecases.finalizeSession({
+    const session = await usecases.finalizeSession({
       sessionId,
       examinerGlobalComment,
       hasIncident,
@@ -22,9 +22,9 @@ const finalize = async function (request, h, dependencies = { certificationRepor
       certificationReports,
     });
 
-    await usecases.processAutoJury({ sessionId: sessionFinalized.sessionId });
+    await usecases.processAutoJury({ session });
 
-    await usecases.registerPublishableSession({ sessionFinalized });
+    await usecases.registerPublishableSession({ session });
   });
 
   return h.response().code(200);

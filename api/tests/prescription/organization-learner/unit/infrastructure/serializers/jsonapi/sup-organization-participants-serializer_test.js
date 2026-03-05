@@ -19,7 +19,7 @@ describe('Unit | Serializer | JSONAPI | sup-organization-participants-serializer
           lastParticipationDate: '2021-03-05',
           campaignName: 'King Karam',
           campaignType: 'ASSESSMENT',
-          participationStatus: campaignParticipationsStatuses.TO_SHARE,
+          participationStatus: campaignParticipationsStatuses.STARTED,
           isCertifiable: true,
           certifiableAt: new Date('2021-03-07'),
         }),

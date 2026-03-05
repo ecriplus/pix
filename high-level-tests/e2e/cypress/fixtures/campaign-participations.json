@@ -13,7 +13,7 @@
   {
     "id": 2,
     "campaignId": 1,
-    "status": "TO_SHARE",
+    "status": "STARTED",
     "participantExternalId": "Le régicide",
     "userId": 5,
     "organizationLearnerId": 6
@@ -37,7 +37,7 @@
   {
     "id": 5,
     "campaignId": 4,
-    "status": "TO_SHARE",
+    "status": "STARTED",
     "participantExternalId": "La régicide",
     "userId": 5,
     "organizationLearnerId": 6
@@ -45,7 +45,7 @@
   {
     "id": 6,
     "campaignId": 2,
-    "status": "TO_SHARE",
+    "status": "STARTED",
     "userId": 5,
     "organizationLearnerId": 6
   },

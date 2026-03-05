@@ -296,7 +296,7 @@
         "ASSESSMENT": "Campagna di valutazione",
         "CAMPAIGN": "Campagna di valutazione",
         "COMBINED_COURSE": "Percorso di apprendimento",
-        "EXAM": "Modalità di interrogazione [beta]",
+        "EXAM": "Modalità di interrogazione",
         "FORMATION": "Formazione",
         "MODULE": "Modulo",
         "PROFILES_COLLECTION": "Campagna di raccolta profili"
@@ -305,7 +305,7 @@
         "ASSESSMENT": "Valutazione",
         "CAMPAIGN": "Valutazione",
         "COMBINED_COURSE": "Percorso di apprendimento",
-        "EXAM": "Modalità di interrogazione [beta]",
+        "EXAM": "Modalità di interrogazione",
         "FORMATION": "Formazione",
         "MODULE": "Modulo",
         "PROFILES_COLLECTION": "Collezione di profili"
@@ -799,7 +799,7 @@
         "assessment": "Valutazione dei partecipanti",
         "assessment-info": "Una campagna di valutazione consente ai partecipanti di essere testati su argomenti specifici.",
         "combined-course": "Creare un percorso combinato",
-        "exam": "Modalità di interrogazione [beta]",
+        "exam": "Modalità di interrogazione",
         "exam-info": "Una campagna in \"modalità quiz\" consente di sottoporre i partecipanti a test su argomenti specifici, senza tenere conto del loro profilo utente e senza influire su di esso. I test proposti sono personalizzati per ogni partecipante, a seconda del livello di avanzamento del corso.",
         "label": "Qual è l'obiettivo della vostra campagna?",
         "profiles-collection": "Raccogliere i profili Pix dei partecipanti",
@@ -922,7 +922,7 @@
       },
       "campaign-type": {
         "assessment": "Campagna di valutazione",
-        "exam": "Campagna Quiz [beta]",
+        "exam": "Campagna Quiz",
         "profiles-collection": "Campagna di raccolta profili",
         "title": "Tipo di campagna"
       },
@@ -1911,6 +1911,7 @@
     },
     "team-invitations": {
       "cancel-invitation": "Cancellare l'invito",
+      "empty-table": "Non ci sono inviti in attesa.",
       "invitation-cancelled-succeed-message": "L'invito è stato cancellato.",
       "invitation-resent-succeed-message": "L'invito è stato restituito.",
       "resend-invitation": "Reinvio dell'invito",

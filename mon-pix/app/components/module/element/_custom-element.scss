@@ -11,7 +11,7 @@ message-conversation::part(conversation) {
   }
 
   &__container {
-    padding: var(--pix-spacing-2x);
+    padding: var(--pix-spacing-6x);
     border: 2px dashed var(--pix-primary-700);
     border-radius: var(--pix-spacing-2x);
   }
@@ -53,5 +53,21 @@ message-conversation::part(conversation) {
     background-color: var(--pix-primary-100);
     border: none;
     border-radius: 0 0 8px 8px;
+  }
+}
+
+.element-custom-container {
+  &__instruction {
+    font-weight: var(--pix-font-bold);
+  }
+
+  &__title {
+    margin-bottom: var(--pix-spacing-2x);
+  }
+
+  &__functional-instruction {
+    @extend %pix-body-s;
+
+    margin-bottom: var(--pix-spacing-6x);
   }
 }

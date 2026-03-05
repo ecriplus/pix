@@ -789,13 +789,6 @@ function routes() {
     };
   });
 
-  this.get('/oidc/redirect-logout-url', () => {
-    return {
-      redirectLogoutUrl:
-        'http://identity_provider_base_url/deconnexion?id_token_hint=ID_TOKEN&redirect_uri=http%3A%2F%2Flocalhost.fr%3A4200%2Fconnexion',
-    };
-  });
-
   this.post(
     '/oidc/user/check-reconciliation',
     {
@@ -824,5 +817,10 @@ function routes() {
         '.bbb',
       logout_url_uuid: null,
     };
+  });
+
+  this.post('/oidc/logout', () => {
+    const redirectLogoutUrl = undefined; // because shouldCloseSession == false
+    return { redirectLogoutUrl };
   });
 }

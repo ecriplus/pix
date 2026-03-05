@@ -59,7 +59,9 @@
                     }
                   ],
                   "animationSpeed": 0
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -108,7 +110,9 @@
                     "days": -128,
                     "minutes": -27
                   }
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -751,7 +755,9 @@
                     "Quitter la visioconférence.",
                     "Préparer son micro et sa caméra."
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

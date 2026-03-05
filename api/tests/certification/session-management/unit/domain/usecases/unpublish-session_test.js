@@ -4,7 +4,7 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Session-Management | Unit | Domain | Use Cases | unpublish-session', function () {
   let certificationRepository;
-  let sessionRepository;
+  let sessionManagementRepository;
   let sharedSessionRepository;
   let finalizedSessionRepository;
 
@@ -12,7 +12,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | unpub
     certificationRepository = {
       unpublishCertificationCoursesBySessionId: sinon.stub(),
     };
-    sessionRepository = {
+    sessionManagementRepository = {
       updatePublishedAt: sinon.stub(),
     };
     sharedSessionRepository = {
@@ -22,13 +22,13 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | unpub
       get: sinon.stub(),
       save: sinon.stub(),
     };
-    sessionRepository.flagResultsAsSentToPrescriber = sinon.stub();
+    sessionManagementRepository.flagResultsAsSentToPrescriber = sinon.stub();
   });
 
   it('should return the session', async function () {
     // given
     const sessionId = 123;
-    const expectedSession = domainBuilder.certification.sessionManagement.buildSession({
+    const expectedSession = domainBuilder.certification.sessionManagement.buildSessionManagement({
       id: sessionId,
       publishedAt: new Date('2020-01-01'),
     });
@@ -40,7 +40,7 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | unpub
     const actualSession = await unpublishSession({
       sessionId,
       certificationRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
       finalizedSessionRepository,
     });
@@ -49,7 +49,10 @@ describe('Certification | Session-Management | Unit | Domain | Use Cases | unpub
     expect(certificationRepository.unpublishCertificationCoursesBySessionId).to.have.been.calledWithExactly({
       sessionId,
     });
-    expect(sessionRepository.updatePublishedAt).to.have.been.calledWithExactly({ id: sessionId, publishedAt: null });
+    expect(sessionManagementRepository.updatePublishedAt).to.have.been.calledWithExactly({
+      id: sessionId,
+      publishedAt: null,
+    });
     expect(finalizedSession.publishedAt).to.be.null;
     expect(finalizedSessionRepository.save).to.be.calledWith({ finalizedSession });
     expect(actualSession).to.deep.equal({

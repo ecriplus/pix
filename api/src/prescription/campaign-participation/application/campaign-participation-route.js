@@ -297,7 +297,7 @@ const register = async function (server) {
             '- L’id demandé doit correspondre à celui de l’utilisateur authentifié' +
             '- Les aperçus des participations aux campagnes sont triés par ordre inverse de création' +
             '  (les plus récentes en premier)',
-          '- Cette liste est paginée et filtrée selon des **states** qui peuvent avoir comme valeurs: ONGOING, TO_SHARE, ENDED et ARCHIVED',
+          '- Cette liste est paginée et filtrée selon des **states** qui peuvent avoir comme valeurs: ONGOING, ENDED et ARCHIVED',
         ],
         tags: ['api'],
       },

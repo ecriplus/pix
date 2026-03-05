@@ -179,7 +179,7 @@ export const loggedPagesFixtures = sharedTest.extend<
           {
             type: 'PRO',
             externalId: `CERTIFPRO${nextUserId}`,
-            habilitations: [CERTIFICATIONS_DATA.CLEA.key],
+            habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE],
             withOrganization: {
               isManagingStudents: false,
             },
@@ -333,7 +333,7 @@ export const loggedPagesFixtures = sharedTest.extend<
           await pixApp.getByRole('link', { name: "J'ai un code" }).click();
           const startCampaignPage = new StartCampaignPage(pixApp);
           await startCampaignPage.goToFirstChallenge(campaignCode as string);
-          while (!pixApp.url().endsWith('/checkpoint?finalCheckpoint=true')) {
+          while (!pixApp.url().includes('finalCheckpoint=true')) {
             const challengePage = new ChallengePage(pixApp);
             await challengePage.setRightOrWrongAnswer(true);
             await challengePage.validateAnswer();

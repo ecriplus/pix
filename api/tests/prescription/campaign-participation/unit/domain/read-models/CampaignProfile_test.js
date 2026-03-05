@@ -2,7 +2,7 @@ import { CampaignProfile } from '../../../../../../src/prescription/campaign-par
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
-const { SHARED, TO_SHARE } = CampaignParticipationStatuses;
+const { SHARED, STARTED } = CampaignParticipationStatuses;
 
 describe('Unit | Domain | Read-Models | CampaignProfile', function () {
   describe('#isCertifiable', function () {
@@ -20,7 +20,7 @@ describe('Unit | Domain | Read-Models | CampaignProfile', function () {
       it('does not give information about certification status', function () {
         const placementProfile = { isCertifiable: () => true };
 
-        const campaignProfile = new CampaignProfile({ status: TO_SHARE, placementProfile });
+        const campaignProfile = new CampaignProfile({ status: STARTED, placementProfile });
 
         expect(campaignProfile.isCertifiable).to.equal(null);
       });
@@ -42,7 +42,7 @@ describe('Unit | Domain | Read-Models | CampaignProfile', function () {
       it('does not compute the number of certifiable competences', function () {
         const placementProfile = { getCertifiableCompetencesCount: () => 2 };
 
-        const campaignProfile = new CampaignProfile({ status: TO_SHARE, placementProfile });
+        const campaignProfile = new CampaignProfile({ status: STARTED, placementProfile });
 
         expect(campaignProfile.certifiableCompetencesCount).to.equal(null);
       });
@@ -64,7 +64,7 @@ describe('Unit | Domain | Read-Models | CampaignProfile', function () {
       it('does not compute the number of competence', function () {
         const placementProfile = { getCompetencesCount: () => 2 };
 
-        const campaignProfile = new CampaignProfile({ status: TO_SHARE, placementProfile });
+        const campaignProfile = new CampaignProfile({ status: STARTED, placementProfile });
 
         expect(campaignProfile.competencesCount).to.equal(null);
       });
@@ -104,7 +104,7 @@ describe('Unit | Domain | Read-Models | CampaignProfile', function () {
       it('does not compute the number of competence', function () {
         const placementProfile = { userCompetences: [{ name: 'competence1' }] };
 
-        const campaignProfile = new CampaignProfile({ status: TO_SHARE, placementProfile });
+        const campaignProfile = new CampaignProfile({ status: STARTED, placementProfile });
 
         expect(campaignProfile.competences).to.be.empty;
       });

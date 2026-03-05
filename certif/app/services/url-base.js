@@ -49,6 +49,7 @@ export default class UrlBaseService extends Service {
 
 // Pix website URLs for each supported locales
 export const PIX_WEBSITE_ROOT_URLS = {
+  'de-AT': 'https://pix.org/en',
   'fr-FR': 'https://pix.fr',
   'fr-BE': 'https://pix.org/fr-be',
   'nl-BE': 'https://pix.org/nl-be',
@@ -63,6 +64,7 @@ export const PIX_WEBSITE_ROOT_URLS = {
 // Pix website paths for each supported locales
 export const PIX_WEBSITE_PATHS = {
   CGU: {
+    'de-AT': 'terms-and-conditions',
     'fr-FR': 'conditions-generales-d-utilisation',
     'fr-BE': 'conditions-generales-d-utilisation',
     'nl-BE': 'algemene-gebruiksvoorwaarden',
@@ -74,6 +76,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'conditions-generales-d-utilisation',
   },
   LEGAL_NOTICE: {
+    'de-AT': 'legal-notice',
     'fr-FR': 'mentions-legales',
     'fr-BE': 'mentions-legales',
     'nl-BE': 'wettelijke-vermeldingen',
@@ -85,6 +88,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'mentions-legales',
   },
   DATA_PROTECTION_POLICY: {
+    'de-AT': 'personal-data-protection-policy',
     'fr-FR': 'politique-protection-donnees-personnelles-app',
     'fr-BE': 'politique-protection-donnees-personnelles-app',
     'nl-BE': 'beleid-inzake-de-bescherming-van-persoonsgegevens',
@@ -96,6 +100,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'politique-protection-donnees-personnelles-app',
   },
   ACCESSIBILITY: {
+    'de-AT': 'accessibility',
     'fr-FR': 'accessibilite',
     'fr-BE': 'accessibilite',
     'nl-BE': 'toegankelijkheid',
@@ -107,6 +112,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'accessibilite',
   },
   ACCESSIBILITY_ORGA: {
+    'de-AT': 'accessibility-pix-orga',
     'fr-FR': 'accessibilite-pix-orga',
     'fr-BE': 'accessibilite-pix-orga',
     'nl-BE': 'toegankelijkheid-pix-orga',
@@ -118,6 +124,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'accessibilite-pix-orga',
   },
   ACCESSIBILITY_CERTIF: {
+    'de-AT': 'accessibility-pix-certif',
     'fr-FR': 'accessibilite-pix-certif',
     'fr-BE': 'accessibilite-pix-certif',
     'nl-BE': 'toegankelijkheid-pix-certif',
@@ -129,6 +136,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'accessibilite-pix-certif',
   },
   SUPPORT: {
+    'de-AT': 'support',
     'fr-FR': 'support',
     'fr-BE': 'support',
     'nl-BE': 'support',
@@ -140,6 +148,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'support',
   },
   CERTIFICATION_RESULTS_EXPLANATION: {
+    'de-AT': 'understand-certification-results',
     'fr-FR': 'certification-comprendre-score-niveau',
     'fr-BE': 'certification-comprendre-score-niveau',
     'nl-BE': 'mijn-certificeringsresultaten-begrijpen',
@@ -151,6 +160,7 @@ export const PIX_WEBSITE_PATHS = {
     fr: 'certification-comprendre-score-niveau',
   },
   CERTIFICATION_HOW_TO: {
+    'de-AT': 'certify-my-digital-skills',
     'fr-FR': 'se-certifier',
     'fr-BE': 'se-certifier',
     'nl-BE': 'mijn-digitale-vaardigheden-certificeren',

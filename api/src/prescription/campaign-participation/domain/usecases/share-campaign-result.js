@@ -1,3 +1,4 @@
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
 import { ParticipationResultCalculationJob } from '../models/ParticipationResultCalculationJob.js';
 import { ParticipationSharedJob } from '../models/ParticipationSharedJob.js';
@@ -16,14 +17,16 @@ const shareCampaignResult = async function ({
   campaignParticipation.share();
   await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
 
-  await participationResultCalculationJobRepository.performAsync(
-    new ParticipationResultCalculationJob({ campaignParticipationId }),
-  );
-  await participationSharedJobRepository.performAsync(
-    new ParticipationSharedJob({
-      campaignParticipationId,
-    }),
-  );
+  await DomainTransaction.addSuccessHandler(async () => {
+    await participationResultCalculationJobRepository.performAsync(
+      new ParticipationResultCalculationJob({ campaignParticipationId }),
+    );
+    await participationSharedJobRepository.performAsync(
+      new ParticipationSharedJob({
+        campaignParticipationId,
+      }),
+    );
+  });
 };
 
 export { shareCampaignResult };

@@ -15,9 +15,7 @@ const findByUserId = async function (userId) {
         .select({
           campaignParticipationId: 'campaign-participations.id',
           participantExternalId: 'campaign-participations.participantExternalId',
-          status: knexConnection.raw(
-            `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`, // TODO: stop casting TO_SHARE once the migration is done
-          ),
+          status: 'campaign-participations.status',
           campaignId: 'campaigns.id',
           campaignCode: 'campaigns.code',
           createdAt: knexConnection.raw('COALESCE("campaign-participations"."createdAt", assessments."createdAt")'),
@@ -42,9 +40,7 @@ const findByUserId = async function (userId) {
           this.select({
             campaignParticipationId: 'campaign-participations.id',
             participantExternalId: 'campaign-participations.participantExternalId',
-            status: knexConnection.raw(
-              `CASE WHEN "campaign-participations"."status" = 'TO_SHARE' THEN 'STARTED' ELSE "campaign-participations"."status" END`,
-            ),
+            status: 'campaign-participations.status',
             campaignId: 'campaigns.id',
             campaignCode: 'campaigns.code',
             createdAt: 'campaign-participations.createdAt',

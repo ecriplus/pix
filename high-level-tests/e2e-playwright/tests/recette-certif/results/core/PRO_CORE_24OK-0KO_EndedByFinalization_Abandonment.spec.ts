@@ -37,13 +37,12 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber } = await enrollCandidateAndPassExam({
+    const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: Array(24).fill(true),
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });
-    let certificationNumber = '';
 
     await test.step('user stops at 25th challenge', async () => {
       await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
@@ -94,7 +93,6 @@ test(
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        certificationNumber = certificationInformationPage.getCertificationNumber();
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',

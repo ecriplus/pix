@@ -4,7 +4,7 @@ import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTra
 import { catchErr, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | unfinalize-session', function () {
-  let sessionRepository;
+  let sessionManagementRepository;
   let finalizedSessionRepository;
 
   describe('when session is not published', function () {
@@ -12,7 +12,7 @@ describe('Unit | UseCase | unfinalize-session', function () {
       // given
       sinon.stub(DomainTransaction, 'execute').callsFake((fn) => fn({}));
 
-      sessionRepository = {
+      sessionManagementRepository = {
         unfinalize: sinon.stub(),
         isPublished: sinon.stub().resolves(false),
       };
@@ -21,14 +21,14 @@ describe('Unit | UseCase | unfinalize-session', function () {
       };
 
       // when
-      await unfinalizeSession({ sessionId: 99, sessionRepository, finalizedSessionRepository });
+      await unfinalizeSession({ sessionId: 99, sessionManagementRepository, finalizedSessionRepository });
 
       // then
-      expect(sessionRepository.unfinalize).to.have.been.calledWithMatch({
+      expect(sessionManagementRepository.unfinalize).to.have.been.calledWithMatch({
         id: 99,
       });
 
-      expect(sessionRepository.isPublished).to.have.been.calledWithMatch({ id: 99 });
+      expect(sessionManagementRepository.isPublished).to.have.been.calledWithMatch({ id: 99 });
 
       expect(finalizedSessionRepository.remove).to.have.been.calledWithMatch({
         sessionId: 99,
@@ -39,12 +39,12 @@ describe('Unit | UseCase | unfinalize-session', function () {
   describe('when session is published', function () {
     it('should throw an SessionAlreadyPublishedError', async function () {
       // given
-      sessionRepository = {
+      sessionManagementRepository = {
         isPublished: sinon.stub().resolves(true),
       };
 
       // when
-      const error = await catchErr(unfinalizeSession)({ sessionId: 99, sessionRepository });
+      const error = await catchErr(unfinalizeSession)({ sessionId: 99, sessionManagementRepository });
 
       // then
       expect(error).to.be.instanceOf(SessionAlreadyPublishedError);

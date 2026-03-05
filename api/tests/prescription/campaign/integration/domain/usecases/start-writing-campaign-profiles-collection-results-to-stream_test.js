@@ -168,7 +168,7 @@ describe('Integration | Domain | Use Cases | start-writing-profiles-collection-c
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(organizationLearner, {
           createdAt,
           sharedAt: null,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
           campaignId: campaign.id,
           userId: participant.id,
           pixScore: 0,

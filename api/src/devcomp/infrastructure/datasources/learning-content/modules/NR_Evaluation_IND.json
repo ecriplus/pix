@@ -62,7 +62,9 @@
                       "content": "Bonne question. On n’y connaît pas grand-chose, mais je suis sûre qu’il existe une méthode pour évaluer nos impacts. On cherche ensemble ?"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -245,7 +247,9 @@
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:2"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -344,7 +348,9 @@
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:1"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -849,7 +855,9 @@
                   ],
                   "highlightedSentence": "Ces actions contribuent à réduire l’impact environnemental des infrastructures numériques",
                   "colorOfHighlightSentence": "#bb0101"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

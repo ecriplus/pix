@@ -112,6 +112,27 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
               },
             ],
           },
+          {
+            id: 'recCompetence4',
+            index: '1.5',
+            tubes: [
+              {
+                id: 'recTube4_0',
+                skills: [
+                  {
+                    id: 'recSkill4_0',
+                    nom: '@recSkill4_0',
+                    challenges: [{ id: 'recChallenge4_0_0', ...challengeParams }],
+                  },
+                  {
+                    id: 'recSkill4_1',
+                    nom: '@recSkill4_1',
+                    challenges: [{ id: 'recChallenge4_1_0', ...challengeParams }],
+                  },
+                ],
+              },
+            ],
+          },
         ],
       },
     ];
@@ -119,7 +140,8 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
     await mockLearningContent(learningContentObjects);
 
     certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
-      challengesConfiguration: { maximumAssessmentLength: 8 },
+      challengesConfiguration: { maximumAssessmentLength: 10 },
+      minimumAnswersRequiredToValidateACertification: 10,
     }).id;
 
     await databaseBuilder.commit();
@@ -165,52 +187,117 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       await databaseBuilder.commit();
     });
 
-    it('should score the certification', async function () {
-      // given
-      const event = new CertificationCompletedJob({
-        certificationCourseId,
-        locale: FRENCH_SPOKEN,
-      });
+    context('when pix score is not 0 (so competence marks are created)', function () {
+      it('should score the certification', async function () {
+        // given
+        _buildValidAnswersAndCertificationChallenges({
+          assessmentId: completedCertificationAssessmentId,
+          certificationCourseId,
+          versionId: certificationVersionId,
+        });
+        await databaseBuilder.commit();
+        const event = new CertificationCompletedJob({
+          certificationCourseId,
+          locale: FRENCH_SPOKEN,
+        });
 
-      // when
-      await usecases.scoreV3Certification({ certificationCourseId, event });
+        // when
+        await usecases.scoreV3Certification({ certificationCourseId, event });
 
-      // then
-      const results = await knex('assessment-results').where({ assessmentId: completedCertificationAssessmentId });
-      expect(results).to.have.lengthOf(1);
+        // then
+        const results = await knex('assessment-results').where({ assessmentId: completedCertificationAssessmentId });
+        expect(results).to.have.lengthOf(1);
 
-      const linkToCertifCourse = await knex('certification-courses-last-assessment-results')
-        .where({
+        const linkToCertifCourse = await knex('certification-courses-last-assessment-results')
+          .where({
+            lastAssessmentResultId: results[0].id,
+            certificationCourseId: certificationCourseId,
+          })
+          .first();
+        expect(linkToCertifCourse).to.deep.equal({
           lastAssessmentResultId: results[0].id,
           certificationCourseId: certificationCourseId,
-        })
-        .first();
-      expect(linkToCertifCourse).to.deep.equal({
-        lastAssessmentResultId: results[0].id,
-        certificationCourseId: certificationCourseId,
+        });
+
+        const certifCourseCompletedAt = await knex('certification-courses')
+          .select('completedAt')
+          .where({
+            id: certificationCourseId,
+          })
+          .first();
+
+        expect(certifCourseCompletedAt).not.to.be.null;
+        const competenceMarks = await knex('competence-marks').where({ assessmentResultId: results[0].id });
+        expect(competenceMarks).to.have.lengthOf(1);
+        expect(competenceMarks[0].assessmentResultId).to.equal(results[0].id);
+
+        const certificationChallengeCapacities = await knex('certification-challenge-capacities').whereIn(
+          'certificationChallengeId',
+          knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),
+        );
+        expect(certificationChallengeCapacities).to.have.lengthOf(10);
       });
+    });
 
-      const certifCourseCompletedAt = await knex('certification-courses')
-        .select('completedAt')
-        .where({
-          id: certificationCourseId,
-        })
-        .first();
+    context('when pix score is 0, thus creating no competence mark', function () {
+      it('should score a certification without competence marks when pixScore is 0', async function () {
+        // given
+        _buildInvalidAnswersAndCertificationChallenges({
+          assessmentId: completedCertificationAssessmentId,
+          certificationCourseId,
+          versionId: certificationVersionId,
+        });
+        await databaseBuilder.commit();
+        const event = new CertificationCompletedJob({
+          certificationCourseId,
+          locale: FRENCH_SPOKEN,
+        });
 
-      expect(certifCourseCompletedAt).not.to.be.null;
-      const competenceMarks = await knex('competence-marks').where({ assessmentResultId: results[0].id });
-      expect(competenceMarks).to.have.lengthOf(1);
-      expect(competenceMarks[0].assessmentResultId).to.equal(results[0].id);
+        // when
+        await usecases.scoreV3Certification({ certificationCourseId, event });
 
-      const certificationChallengeCapacities = await knex('certification-challenge-capacities').whereIn(
-        'certificationChallengeId',
-        knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),
-      );
-      expect(certificationChallengeCapacities).to.have.lengthOf(8);
+        // then
+        const results = await knex('assessment-results').where({ assessmentId: completedCertificationAssessmentId });
+        expect(results).to.have.lengthOf(1);
+
+        const linkToCertifCourse = await knex('certification-courses-last-assessment-results')
+          .where({
+            lastAssessmentResultId: results[0].id,
+            certificationCourseId: certificationCourseId,
+          })
+          .first();
+        expect(linkToCertifCourse).to.deep.equal({
+          lastAssessmentResultId: results[0].id,
+          certificationCourseId: certificationCourseId,
+        });
+
+        const certifCourseCompletedAt = await knex('certification-courses')
+          .select('completedAt')
+          .where({
+            id: certificationCourseId,
+          })
+          .first();
+
+        expect(certifCourseCompletedAt).not.to.be.null;
+        const competenceMarks = await knex('competence-marks').where({ assessmentResultId: results[0].id });
+        expect(competenceMarks).to.have.lengthOf(0);
+
+        const certificationChallengeCapacities = await knex('certification-challenge-capacities').whereIn(
+          'certificationChallengeId',
+          knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),
+        );
+        expect(certificationChallengeCapacities).to.have.lengthOf(10);
+      });
     });
 
     it('should rollback scoring if any error happens', async function () {
       // given
+      _buildValidAnswersAndCertificationChallenges({
+        assessmentId: completedCertificationAssessmentId,
+        certificationCourseId,
+        versionId: certificationVersionId,
+      });
+      await databaseBuilder.commit();
       const event = new CertificationCompletedJob({
         certificationCourseId,
         locale: FRENCH_SPOKEN,
@@ -363,7 +450,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         'certificationChallengeId',
         knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),
       );
-      expect(certificationChallengeCapacities).to.have.lengthOf(8);
+      expect(certificationChallengeCapacities).to.have.lengthOf(10);
 
       const complementaryResults = await knex('complementary-certification-course-results').where({
         complementaryCertificationCourseId,
@@ -435,7 +522,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
 });
 
 function _buildValidAnswersAndCertificationChallenges({ certificationCourseId, assessmentId, versionId }) {
-  for (let iCompetence = 0; iCompetence < 4; iCompetence++) {
+  for (let iCompetence = 0; iCompetence < 5; iCompetence++) {
     for (let i = 0; i < 2; ++i) {
       databaseBuilder.factory.buildCertificationFrameworksChallenge({
         challengeId: `recChallenge${iCompetence}_${i}_0`,
@@ -446,6 +533,30 @@ function _buildValidAnswersAndCertificationChallenges({ certificationCourseId, a
       databaseBuilder.factory.buildAnswer({
         challengeId: `recChallenge${iCompetence}_${i}_0`,
         result: 'ok',
+        assessmentId: assessmentId,
+      });
+      databaseBuilder.factory.buildCertificationChallenge({
+        challengeId: `recChallenge${iCompetence}_${i}_0`,
+        courseId: certificationCourseId,
+        discriminant: challengeParams.delta,
+        difficulty: challengeParams.alpha,
+      });
+    }
+  }
+}
+
+function _buildInvalidAnswersAndCertificationChallenges({ assessmentId, certificationCourseId, versionId }) {
+  for (let iCompetence = 0; iCompetence < 5; iCompetence++) {
+    for (let i = 0; i < 2; ++i) {
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        challengeId: `recChallenge${iCompetence}_${i}_0`,
+        versionId,
+        discriminant: -8,
+        difficulty: -8,
+      });
+      databaseBuilder.factory.buildAnswer({
+        challengeId: `recChallenge${iCompetence}_${i}_0`,
+        result: 'ko',
         assessmentId: assessmentId,
       });
       databaseBuilder.factory.buildCertificationChallenge({

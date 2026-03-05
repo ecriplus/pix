@@ -928,7 +928,7 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
       assert.dom(screen.queryByText(t('pages.campaign-creation.test-title.label'))).doesNotExist();
       assert.dom(screen.queryByText(t('pages.campaign-creation.target-profiles-list-label'))).doesNotExist();
       await fillByLabel('Nom de la campagne *', 'Mon parcours combiné');
-      await clickByName('Créer un parcours combiné');
+      await clickByName('Développer les compétences des participants (parcours apprenants)');
 
       await click(screen.getByLabelText(`${t('pages.campaign-creation.combined-course-blueprints-list-label')} *`));
       assert.ok(await screen.findByRole('option', { description: combinedCourseBlueprint.name }));

@@ -6,14 +6,19 @@ export async function getCombinedCourseByCode({
   organizationLearnerPrescriptionRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
-  const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
-    userId,
-    organizationId: combinedCourse.organizationId,
-  });
+
   const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
     combinedCourseId: combinedCourse.id,
   });
 
+  if (!userId) {
+    return combinedCourseDetails;
+  }
+
+  const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
+    userId,
+    organizationId: combinedCourse.organizationId,
+  });
   return combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
     combinedCourseDetails,

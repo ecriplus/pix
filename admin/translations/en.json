@@ -190,7 +190,7 @@
           "errors": {
             "error-in-batch": "The organizations archiving has failed. The organization ID line n°{currentLine} failed, out of {totalLines} lines."
           },
-          "success": "The organizations have been archived."
+          "success": "{ count, plural, one {One organization has been successfully archived.} other {{ count } organizations have been successfully archived.}}"
         },
         "title": "Archiving of organizations in batch",
         "upload-button": "Import a CSV file"
@@ -761,8 +761,9 @@
         "required-fields-error": "Please fill in all required fields."
       },
       "head-information": {
-        "child-organization": "Organisation fille de",
-        "parent-organization": "Organisation mère"
+        "child-organization": "Child organization of",
+        "copy-id": "Copy ID",
+        "parent-organization": "Parent organization"
       },
       "information-section-view": {
         "administration-team": "Administration team",

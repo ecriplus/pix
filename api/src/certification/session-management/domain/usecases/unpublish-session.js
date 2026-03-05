@@ -1,7 +1,7 @@
 const unpublishSession = async function ({
   sessionId,
   certificationRepository,
-  sessionRepository,
+  sessionManagementRepository,
   finalizedSessionRepository,
   sharedSessionRepository,
 }) {
@@ -11,7 +11,7 @@ const unpublishSession = async function ({
 
   session.publishedAt = null;
 
-  await sessionRepository.updatePublishedAt({ id: sessionId, publishedAt: session.publishedAt });
+  await sessionManagementRepository.updatePublishedAt({ id: sessionId, publishedAt: session.publishedAt });
 
   await _updateFinalizedSession(finalizedSessionRepository, sessionId);
 

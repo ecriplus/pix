@@ -1,5 +1,5 @@
-import { render as renderScreen } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import { render } from '@1024pix/ember-testing-library';
+import Tabs from 'pix-orga/components/participant/assessment/tabs';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
@@ -13,12 +13,12 @@ module('Integration | Component | Participant::Assessment::Tabs', function (hook
 
   test('it should display navigation links for results and analysis pages', async function (assert) {
     // given
-    this.campaignId = 1;
-    this.participationId = 2;
+    const campaignId = 1;
+    const participationId = 2;
 
     // when
-    const screen = await renderScreen(
-      hbs`<Participant::Assessment::Tabs @campaignId={{this.campaignId}} @participationId={{this.participationId}} />`,
+    const screen = await render(
+      <template><Tabs @campaignId={{campaignId}} @participationId={{participationId}} /></template>,
     );
 
     // then
@@ -28,12 +28,12 @@ module('Integration | Component | Participant::Assessment::Tabs', function (hook
 
   test('[A11Y] it should contain accessibility aria-label nav', async function (assert) {
     // given
-    this.campaignId = 1;
-    this.participationId = 2;
+    const campaignId = 1;
+    const participationId = 2;
 
     // when
-    const screen = await renderScreen(
-      hbs`<Participant::Assessment::Tabs @campaignId={{this.campaignId}} @participationId={{this.participationId}} />`,
+    const screen = await render(
+      <template><Tabs @campaignId={{campaignId}} @participationId={{participationId}} /></template>,
     );
 
     // then

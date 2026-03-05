@@ -1,5 +1,127 @@
 # Pix Changelog
 
+# [5.346.0](https://github.com/1024pix/pix/compare/v5.345.0...v5.346.0) (2026-03-04)
+
+### :rocket: Amélioration
+
+- [#15311](https://github.com/1024pix/pix/pull/15311) Ajouter les instructions à un element custom interactif dans les modules (PIX-21662)(PIX-21643) 
+- [#15259](https://github.com/1024pix/pix/pull/15259) MDX-18 Integration retours edito 
+- [#15352](https://github.com/1024pix/pix/pull/15352) modifs CYPhishing_AVA suite relecture edito 
+
+### :bug: Correction
+
+- [#15345](https://github.com/1024pix/pix/pull/15345) Ajouter --env-file-if-exists=.env manquant pour exécution locale du script npm start:job 
+- [#15343](https://github.com/1024pix/pix/pull/15343) Corriger la fermeture impossible de la modale de rest de password en masse (PIX-21486). 
+
+### :building_construction: Tech
+
+- [#15327](https://github.com/1024pix/pix/pull/15327) Création des tables `networks`, `structures` et `fct_structures`  (PIX-21291). 
+- [#14861](https://github.com/1024pix/pix/pull/14861) Supprimer toutes les références au statut TO_SHARE des participations de campagne (PIX-21135)
+
+# [5.345.0](https://github.com/1024pix/pix/compare/v5.344.0...v5.345.0) (2026-03-03)
+
+### :rocket: Amélioration
+
+- [#15306](https://github.com/1024pix/pix/pull/15306) : Coquilles IA enseignants 
+- [#15324](https://github.com/1024pix/pix/pull/15324) : travail sur description poi non créés - RangerfichiersNOV 
+- [#15309](https://github.com/1024pix/pix/pull/15309) Afficher qu'il n'y a pas d'invitations en cours (PIX-20524) 
+- [#15322](https://github.com/1024pix/pix/pull/15322) Ajout de description dans le schéma Joi de custom-element (PIX-21762) 
+- [#15328](https://github.com/1024pix/pix/pull/15328) Ajouter le feature toggle multipleLocalesForTrainingsEnabled (PIX-21773). 
+- [#15271](https://github.com/1024pix/pix/pull/15271) datacenter-mini-modif 
+- [#15269](https://github.com/1024pix/pix/pull/15269) Ne pas afficher la page d'analyse pour une participation en cours (PIX-21468) 
+- [#15130](https://github.com/1024pix/pix/pull/15130) Révoquer les tokens des utilisateurs OIDC lors de la déconnexion (PIX-20688). 
+- [#15335](https://github.com/1024pix/pix/pull/15335) travail sur description poi non créés - RangerFichiersIND 
+- [#15325](https://github.com/1024pix/pix/pull/15325) Update IADefinition_IND.json 
+- [#15323](https://github.com/1024pix/pix/pull/15323) Utiliser un wording cohérent dans la création de parcours combiné (PIX-20325). 
+
+### :building_construction: Tech
+
+- [#15320](https://github.com/1024pix/pix/pull/15320) Mettre à jour la stack des RA et la version de l'addon PG 
+- [#15338](https://github.com/1024pix/pix/pull/15338) Mettre à jour le plan de l'addon redis en starter-256 
+- [#15318](https://github.com/1024pix/pix/pull/15318) Mutualisation de la logique de vérification d'infos pour une organisation (PIX-20805). 
+- [#15326](https://github.com/1024pix/pix/pull/15326) Réparer les seeds certif 
+- [#15305](https://github.com/1024pix/pix/pull/15305) Supprimer le paramètre variant tile pour les PixCheckbox de Pix Admin 
+
+### :arrow_up: Montée de version
+
+- [#15321](https://github.com/1024pix/pix/pull/15321) Update dependency @1024pix/pix-ui to ^60.0.3 (admin)
+
+# [5.344.0](https://github.com/1024pix/pix/compare/v5.343.1...v5.344.0) (2026-03-02)
+
+### :rocket: Amélioration
+
+- [#15303](https://github.com/1024pix/pix/pull/15303) Afficher le nb d'orgas qui ont été archivés (PIX-21350) 
+- [#15227](https://github.com/1024pix/pix/pull/15227) Ajouter la locale de-AT sur Pix App et Pix Orga (pix-21668) 
+- [#15307](https://github.com/1024pix/pix/pull/15307) Retravailler le design du header de la page d'une organisation (PIX-21349) 
+- [#15291](https://github.com/1024pix/pix/pull/15291) Supprimer le wording bêta des campagne de type exam (PIX-21659) 
+
+### :bug: Correction
+
+- [#15274](https://github.com/1024pix/pix/pull/15274) Ajouter le feature toggle disabledLocalesInFrontend dans toutes les applications front 
+
+### :building_construction: Tech
+
+- [#15312](https://github.com/1024pix/pix/pull/15312) Amélioration de la performance sur le choix de prochaine épreuve en certification. Éviter de récupérer toute la ressource "certficationCourse" et ses dépendances, inutiles pour le calcul 
+- [#15277](https://github.com/1024pix/pix/pull/15277) Fix admin flaky (PIX-21772) 
+
+### :arrow_up: Montée de version
+
+- [#15317](https://github.com/1024pix/pix/pull/15317) Update dependency oxfmt to ^0.34.0 (api)
+
+## [5.343.1](https://github.com/1024pix/pix/compare/v5.343.0...v5.343.1) (2026-02-27)
+
+### :building_construction: Tech
+
+- [#15301](https://github.com/1024pix/pix/pull/15301) Amélioration du nombre de requêtes généré par le usecase process-auto-jury (PIX-21763)
+
+# [5.343.0](https://github.com/1024pix/pix/compare/v5.342.0...v5.343.0) (2026-02-27)
+
+### :rocket: Amélioration
+
+- [#15275](https://github.com/1024pix/pix/pull/15275) Ajouter les nouvelles propriétés pour la consigne des POI côté API (PIX-21661) 
+- [#15251](https://github.com/1024pix/pix/pull/15251) Créa V2 module Antitivrus 
+- [#15292](https://github.com/1024pix/pix/pull/15292) Ne pas calculer les levelup en mode exam (PIX-21731) 
+
+### :bug: Correction
+
+- [#15304](https://github.com/1024pix/pix/pull/15304) Le scoring ne marche pas quand le candidat a un score de 0 pix (PIX-21760) 
+
+### :building_construction: Tech
+
+- [#15298](https://github.com/1024pix/pix/pull/15298) :broom: Réduit l'utilisation de LODASH ... 
+- [#15201](https://github.com/1024pix/pix/pull/15201) Réduit le nombre d'appels SQL généré par le endpoint de finalisation de session - sur la première étape de finalisation (PIX-21693)
+
+# [5.342.0](https://github.com/1024pix/pix/compare/v5.341.0...v5.342.0) (2026-02-27)
+
+### :rocket: Amélioration
+
+- [#15302](https://github.com/1024pix/pix/pull/15302) ajout d'un timeout pour le client pushgateway 
+- [#15299](https://github.com/1024pix/pix/pull/15299) modifs relecture interne repondremail nov 
+- [#15289](https://github.com/1024pix/pix/pull/15289) Rajouter un wording avant de démarrer une campagne exam (PIX-21707) 
+- [#15279](https://github.com/1024pix/pix/pull/15279) Récompense l'utilisateur en fin de parcours combiné (PIX-21720). 
+- [#15260](https://github.com/1024pix/pix/pull/15260) Sauvegarder la capacité, l'index de maille et l'id de version lors du scoring (PIX-21698). 
+
+### :bug: Correction
+
+- [#15293](https://github.com/1024pix/pix/pull/15293) Corrige un bug empêchant de créer des parcours combiné avec deux campagnes depuis PixOrga (PIX-21738). 
+- [#15290](https://github.com/1024pix/pix/pull/15290) Ne pas arrêter le polling vers le endpoint de supervision de session sur l'espace surveillant lorsque il y a des erreurs sur les appels (PIX-21732) 
+
+### :building_construction: Tech
+
+- [#15296](https://github.com/1024pix/pix/pull/15296) Ajout id d'organisation dans le titre de l'onglet (PIX-21517) 
+- [#15185](https://github.com/1024pix/pix/pull/15185) Ajoute des handlers de succès dans la DomainTransaction. 
+- [#15228](https://github.com/1024pix/pix/pull/15228) Ajouter une méthode dans le knex-utils pour faire du "batch update" 
+- [#15288](https://github.com/1024pix/pix/pull/15288) Avoir la possibilité de désactiver le parsing des types JSON et JSONB dans knex via un flag dans la knex config 
+- [#15300](https://github.com/1024pix/pix/pull/15300) Limiter la flakyness des tests de certif E2E 
+- [#15268](https://github.com/1024pix/pix/pull/15268) Limiter le nombre de requêtes lors de la modification en masse d'organisation (PIX-201703) 
+- [#15204](https://github.com/1024pix/pix/pull/15204) Mettre à jour (déplacer, séparer, corriger) le script api/scripts/make-saml-env.js (PIX-21688) 
+- [#15261](https://github.com/1024pix/pix/pull/15261) Réduit le nombre de requêtes SQL généré par les repositories du scope "Certification" (PIX-21725) 
+
+### :arrow_up: Montée de version
+
+- [#15286](https://github.com/1024pix/pix/pull/15286) Update dependency eslint-plugin-cypress to v6 (e2e) 
+- [#15297](https://github.com/1024pix/pix/pull/15297) Update dependency oxfmt to ^0.33.0 (api)
+
 # [5.341.0](https://github.com/1024pix/pix/compare/v5.340.0...v5.341.0) (2026-02-26)
 
 ### :rocket: Amélioration

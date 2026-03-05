@@ -12,7 +12,7 @@ export default class UserTestsRoute extends Route {
     const user = this.currentUser.user;
     const queryParams = {
       userId: user.id,
-      'filter[states]': ['ONGOING', 'TO_SHARE', 'ENDED', 'DISABLED'],
+      'filter[states]': ['ONGOING', 'ENDED', 'DISABLED'],
     };
     const campaignParticipationOverviews = await this.store.query('campaign-participation-overview', queryParams);
 

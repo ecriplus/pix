@@ -9,7 +9,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
     it('should uncancel the certification', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V2,
       });
@@ -24,12 +24,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       const certificationEvaluationRepository = {
         rescoreV2Certification: sinon.stub(),
       };
-      const sessionRepository = {
+      const sessionManagementRepository = {
         isFinalized: sinon.stub(),
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       certificationEvaluationRepository.rescoreV2Certification.resolves();
-      sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+      sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
 
       // when
       await uncancel({
@@ -37,7 +37,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         juryId,
         certificationCourseRepository,
         certificationEvaluationRepository,
-        sessionRepository,
+        sessionManagementRepository,
       });
 
       // then
@@ -53,7 +53,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       it('should not uncancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V2,
         });
@@ -65,18 +65,18 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
 
         // when
         const error = await catchErr(uncancel)({
           juryId,
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
         });
 
         // then
@@ -89,7 +89,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
     it('should uncancel the certification', async function () {
       // given
       const juryId = 123;
-      const session = domainBuilder.certification.sessionManagement.buildSession({
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
         finalizedAt: new Date('2020-01-01'),
         version: AlgorithmEngineVersion.V3,
       });
@@ -104,12 +104,12 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       const certificationEvaluationRepository = {
         rescoreV3Certification: sinon.stub(),
       };
-      const sessionRepository = {
+      const sessionManagementRepository = {
         isFinalized: sinon.stub(),
       };
       certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
       certificationEvaluationRepository.rescoreV3Certification.resolves();
-      sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
+      sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(true);
 
       // when
       await uncancel({
@@ -117,7 +117,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         juryId,
         certificationCourseRepository,
         certificationEvaluationRepository,
-        sessionRepository,
+        sessionManagementRepository,
       });
 
       // then
@@ -133,7 +133,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
       it('should not uncancel the certification', async function () {
         // given
         const juryId = 123;
-        const session = domainBuilder.certification.sessionManagement.buildSession({
+        const session = domainBuilder.certification.sessionManagement.buildSessionManagement({
           finalizedAt: null,
           version: AlgorithmEngineVersion.V3,
         });
@@ -145,18 +145,18 @@ describe('Certification | Session-management | Unit | Domain | UseCases | uncanc
         const certificationCourseRepository = {
           get: sinon.stub(),
         };
-        const sessionRepository = {
+        const sessionManagementRepository = {
           isFinalized: sinon.stub(),
         };
         certificationCourseRepository.get.withArgs({ id: 123 }).resolves(certificationCourse);
-        sessionRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
+        sessionManagementRepository.isFinalized.withArgs({ id: certificationCourse.getSessionId() }).resolves(false);
 
         // when
         const error = await catchErr(uncancel)({
           juryId,
           certificationCourseId: 123,
           certificationCourseRepository,
-          sessionRepository,
+          sessionManagementRepository,
         });
 
         // then

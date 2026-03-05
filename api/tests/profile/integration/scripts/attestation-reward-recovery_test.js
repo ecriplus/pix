@@ -7,7 +7,7 @@ import {
 } from '../../../../src/profile/scripts/attestation-reward-recovery.js';
 import { catchErr, databaseBuilder, expect } from '../../../test-helper.js';
 
-describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', function () {
+describe('Integration | Profile | Scripts | attestation-reward-recovery', function () {
   describe('options', function () {
     it('parses dates correctly', function () {
       const startDate = '2024-01-01';
@@ -54,7 +54,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
       expect(userIds).to.contains(userId);
     });
 
-    it('should only return the user if participation status is different than started', async function () {
+    it('should only return the user if participation status is shared', async function () {
       const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({
         id: TARGET_PROFILE_IDS[0],
       });
@@ -69,15 +69,10 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
         status: CampaignParticipationStatuses.SHARED,
         createdAt: '2024-12-02',
       });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
-        createdAt: '2024-12-02',
-      });
 
       await databaseBuilder.commit();
       const userIds = await script.fetchUserIds(new Date('2024-12-01'), new Date('2024-12-06'));
-      expect(userIds).to.have.lengthOf(2);
+      expect(userIds).to.have.lengthOf(1);
       expect(userIds).to.not.contains(userId);
     });
 
@@ -138,7 +133,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
       const campaign3 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId3 });
 
       const otherParameters = {
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.SHARED,
         createdAt: '2024-12-02T15:07:57.376Z',
         userId: user.id,
       };
@@ -156,7 +151,7 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
       });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign3.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.SHARED,
         createdAt: '2024-12-02T15:07:57.376Z',
       });
 
@@ -164,50 +159,6 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
       const userIds = await script.fetchUserIds(new Date('2024-12-01'), new Date('2024-12-06'));
       expect(userIds).to.have.lengthOf(2);
       expect(userIds).to.contains(user.id);
-    });
-
-    it('should return expected users', async function () {
-      const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
-        id: TARGET_PROFILE_IDS[0],
-      });
-      const { id: targetProfileId2 } = databaseBuilder.factory.buildTargetProfile({
-        id: TARGET_PROFILE_IDS[1],
-      });
-      const { id: targetProfileId3 } = databaseBuilder.factory.buildTargetProfile({
-        id: TARGET_PROFILE_IDS[2],
-      });
-      const campaign1 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId1 });
-      const campaign2 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId2 });
-      const campaign3 = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfileId3 });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign1.id,
-        status: CampaignParticipationStatuses.SHARED,
-        createdAt: '2024-12-01T00:00:01.376Z',
-      });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign2.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
-        createdAt: '2024-12-07T15:07:57.376Z',
-      });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign3.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
-        createdAt: '2024-12-07T23:59:59.376Z',
-      });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign3.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
-        createdAt: '2024-12-31T21:22:00.001Z',
-      });
-      databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign3.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
-        createdAt: '2025-01-01T21:22:00.001Z',
-      });
-
-      await databaseBuilder.commit();
-      const userIds = await script.fetchUserIds(new Date('2024-12-01'), new Date('2024-12-31'));
-      expect(userIds).to.have.lengthOf(4);
     });
   });
 
@@ -232,12 +183,12 @@ describe('Integration | Profile | Scripts | sixth-grade-attestation-reward', fun
       });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign2.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.SHARED,
         createdAt: '2024-12-02',
       });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign3.id,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.SHARED,
         createdAt: '2024-12-03',
       });
 

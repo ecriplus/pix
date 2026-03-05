@@ -345,7 +345,9 @@
                         "userMessage": "Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ?",
                         "llmMessage": "On peut mettre du ",
                         "wordsToAdd": ["beurre", "et", "du"]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 }
@@ -437,7 +439,9 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "imageTextDisplay": "1:1"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

@@ -1,5 +1,11 @@
+@use 'pix-design-tokens/typography';
+
 .campaign-landing-page-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.campaign-landing-page-detail__exam-notice {
+  @extend %pix-body-m;
 }

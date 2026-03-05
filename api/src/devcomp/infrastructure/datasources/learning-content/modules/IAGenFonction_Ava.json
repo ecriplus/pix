@@ -69,7 +69,9 @@
                     }
                   ],
                   "animationSpeed": 0
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -270,7 +272,9 @@
                   "disableStyleAroundImage": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:1"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -290,7 +294,9 @@
                             "content": "Combien de litres de peinture est nécessaire pour peindre un salon carré, dont les murs font 2,5 m en hauteur, 5 m de longueur, pour 3 couches de peinture avec une peinture de rendement 10 m²/L/couche ?"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "5d883cf5-5796-4c14-b2ee-8c5e458b40f2",
@@ -352,7 +358,9 @@
                             "content": "Quelle est l’heure de fermeture du magasin de bricolage qui ferme le plus tard à proximité de Jolieville ?"
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     },
                     {
                       "id": "e99bf18b-14df-4e78-ae8d-8b756f704898",
@@ -535,7 +543,9 @@
                             "feedback": " Lors de la génération, le logiciel d’IA décide de faire appel ou non à un outil. L’utilisateur peut aussi explicitement demander dans son prompt l’utilisation d’un outil."
                           }
                         ]
-                      }
+                      },
+                      "title": "",
+                      "functionalInstruction": ""
                     }
                   ]
                 },
@@ -817,7 +827,9 @@
                     }
                   ],
                   "animationSpeed": 0
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

@@ -1,11 +1,14 @@
-import { OrganizationBatchUpdateDTO } from '../../../../../src/organizational-entities/domain/dtos/OrganizationBatchUpdateDTO.js';
 import { OrganizationBatchUpdateError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { updateOrganizationsInBatch } from '../../../../../src/organizational-entities/domain/usecases/update-organizations-in-batch.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { catchErr, createTempFile, domainBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {
-  let filePath, organizationForAdminRepository, administrationTeamRepository, countryRepository;
+  let filePath,
+    organizationForAdminRepository,
+    administrationTeamRepository,
+    countryRepository,
+    organizationLearnerTypeRepository;
 
   const csvHeaders =
     'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code';
@@ -21,12 +24,22 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       exist: sinon.stub(),
     };
 
+    organizationForAdminRepository.findExistingIds = sinon.stub().resolves([]);
+
     countryRepository = {
       getByCode: sinon.stub().resolves(domainBuilder.buildCountry({ code: '99100' })),
+      findExistingCodes: sinon.stub().resolves([]),
     };
 
     administrationTeamRepository = {
       getById: sinon.stub().resolves(domainBuilder.buildAdministrationTeam({ id: 1234 })),
+    };
+
+    administrationTeamRepository.findExistingIds = sinon.stub().resolves([]);
+
+    organizationLearnerTypeRepository = {
+      getById: sinon.stub().resolves(domainBuilder.acquisition.buildOrganizationLearnerType({ id: 12 })),
+      findExistingIds: sinon.stub().resolves([]),
     };
   });
 
@@ -45,96 +58,16 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       filePath = await createTempFile('test.csv', fileData);
 
       // when
-      await updateOrganizationsInBatch({ filePath, organizationForAdminRepository, administrationTeamRepository });
+      await updateOrganizationsInBatch({
+        filePath,
+        organizationForAdminRepository,
+        administrationTeamRepository,
+        organizationLearnerTypeRepository,
+      });
 
       // then
-      expect(DomainTransaction.execute).to.not.have.been.called;
       expect(organizationForAdminRepository.get).to.not.have.been.called;
       expect(organizationForAdminRepository.update).to.not.have.been.called;
-    });
-  });
-
-  context('when parsing a CSV file which contains a list of organizations to update', function () {
-    let csvData;
-
-    beforeEach(async function () {
-      const fileData = `${csvHeaders}
-      1;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234;99100
-      2;New Name;;;;;;;Cali;;5678;99100`;
-      filePath = await createTempFile('test.csv', fileData);
-      csvData = [
-        new OrganizationBatchUpdateDTO({
-          id: '1',
-          externalId: '12',
-          identityProviderForCampaigns: 'OIDC_EXAMPLE_NET',
-          documentationUrl: 'https://doc.url',
-          dataProtectionOfficerLastName: 'Troisjour',
-          dataProtectionOfficerFirstName: 'Adam',
-          dataProtectionOfficerEmail: 'foo@email.com',
-          administrationTeamId: '1234',
-          countryCode: '99100',
-        }),
-        new OrganizationBatchUpdateDTO({
-          id: '2',
-          name: 'New Name',
-          dataProtectionOfficerFirstName: 'Cali',
-          administrationTeamId: '5678',
-          countryCode: '99100',
-        }),
-      ];
-    });
-
-    it('calls n times "organizationForAdminRepository.get" to retrieve an organization', async function () {
-      // given
-      organizationForAdminRepository.exist.resolves(true);
-      organizationForAdminRepository.get.onCall(0).resolves(domainBuilder.buildOrganizationForAdmin({ id: 1 }));
-      organizationForAdminRepository.get.onCall(1).resolves(domainBuilder.buildOrganizationForAdmin({ id: 2 }));
-
-      // when
-      await updateOrganizationsInBatch({
-        filePath,
-        organizationForAdminRepository,
-        administrationTeamRepository,
-        countryRepository,
-      });
-
-      // then
-      expect(DomainTransaction.execute).to.have.been.called;
-      expect(organizationForAdminRepository.get).to.have.been.callCount(2);
-      expect(organizationForAdminRepository.get.getCall(0)).to.have.been.calledWithExactly({ organizationId: '1' });
-      expect(organizationForAdminRepository.get.getCall(1)).to.have.been.calledWithExactly({ organizationId: '2' });
-    });
-
-    it('calls n times "organizationForAdminRepository.update" to update an organization', async function () {
-      // given
-      const firstOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1 });
-      const secondOrganization = domainBuilder.buildOrganizationForAdmin({ id: 2 });
-      organizationForAdminRepository.exist.resolves(true);
-      organizationForAdminRepository.get.onCall(0).resolves(firstOrganization);
-      organizationForAdminRepository.get.onCall(1).resolves(secondOrganization);
-
-      const expectedFirstOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1 });
-      expectedFirstOrganization.updateFromOrganizationBatchUpdateDto(csvData[0]);
-      const expectedSecondOrganization = domainBuilder.buildOrganizationForAdmin({ id: 2 });
-      expectedSecondOrganization.updateFromOrganizationBatchUpdateDto(csvData[1]);
-
-      // when
-      await updateOrganizationsInBatch({
-        filePath,
-        organizationForAdminRepository,
-        administrationTeamRepository,
-        countryRepository,
-      });
-
-      // then
-      expect(DomainTransaction.execute).to.have.been.called;
-      expect(organizationForAdminRepository.update).to.have.been.callCount(2);
-      expect(organizationForAdminRepository.update.getCall(0)).to.have.been.calledWithExactly({
-        organization: expectedFirstOrganization,
-      });
-      expect(organizationForAdminRepository.update.getCall(1)).to.have.been.calledWithExactly({
-        organization: expectedSecondOrganization,
-      });
     });
   });
 
@@ -149,6 +82,10 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
         organizationForAdminRepository.exist.resolves(true);
         organizationForAdminRepository.get.onCall(0).resolves(domainBuilder.buildOrganizationForAdmin({ id: 1 }));
         organizationForAdminRepository.update.rejects('Unexpected error');
+        organizationForAdminRepository.findExistingIds.resolves(['1', '2']);
+        administrationTeamRepository.findExistingIds.resolves(['1234']);
+        countryRepository.findExistingCodes.resolves(['99100']);
+        organizationLearnerTypeRepository.findExistingIds.resolves([]);
 
         // when
         const error = await catchErr(updateOrganizationsInBatch)({
@@ -156,6 +93,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
           organizationForAdminRepository,
           administrationTeamRepository,
           countryRepository,
+          organizationLearnerTypeRepository,
         });
 
         // then

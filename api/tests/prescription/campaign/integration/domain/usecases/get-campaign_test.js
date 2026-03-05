@@ -136,7 +136,7 @@ describe('Integration | UseCase | get-campaign', function () {
         id: 3,
         campaignId: campaign.id,
         masteryRate: 0.5,
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
       });
 
       [1, 2, 3].forEach((i) => {
@@ -219,7 +219,7 @@ describe('Integration | UseCase | get-campaign', function () {
         databaseBuilder.factory.buildCampaignParticipation({
           campaignId: campaign.id,
           masteryRate: 0.5,
-          status: CampaignParticipationStatuses.TO_SHARE,
+          status: CampaignParticipationStatuses.STARTED,
         });
 
         await databaseBuilder.commit();

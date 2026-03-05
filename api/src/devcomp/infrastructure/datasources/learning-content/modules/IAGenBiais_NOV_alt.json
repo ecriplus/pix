@@ -66,7 +66,9 @@
                       "content": "C’est quand l’IA donne des réponses qui ne représentent pas bien la réalité. Ici ça donne l’impression que tous les procès ont lieu aux Etats-Unis ou que tous les juges sont vieux. Alors que ce n’est pas le cas !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -796,7 +798,9 @@
                   "titleLevel": 2,
                   "disableAnimation": false,
                   "enableLoop": true
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

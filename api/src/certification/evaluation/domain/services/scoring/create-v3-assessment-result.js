@@ -5,6 +5,9 @@ export function createV3AssessmentResult({
   allAnswers,
   assessmentId,
   pixScore,
+  capacity,
+  reachedMeshIndex,
+  versionId,
   status,
   competenceMarks,
   isRejectedForFraud,
@@ -17,6 +20,10 @@ export function createV3AssessmentResult({
       juryId,
       pixScore,
       assessmentId,
+      competenceMarks,
+      capacity,
+      reachedMeshIndex,
+      versionId,
     });
   }
   if (isRejectedForFraud) {
@@ -24,6 +31,10 @@ export function createV3AssessmentResult({
       pixScore,
       assessmentId,
       juryId,
+      competenceMarks,
+      capacity,
+      reachedMeshIndex,
+      versionId,
     });
   }
 
@@ -35,6 +46,10 @@ export function createV3AssessmentResult({
         pixScore,
         assessmentId,
         juryId,
+        competenceMarks,
+        capacity,
+        reachedMeshIndex,
+        versionId,
       });
     } else {
       return AssessmentResultFactory.buildLackOfAnswers({
@@ -42,6 +57,10 @@ export function createV3AssessmentResult({
         status,
         assessmentId,
         juryId,
+        competenceMarks,
+        capacity,
+        reachedMeshIndex,
+        versionId,
       });
     }
   }
@@ -51,7 +70,9 @@ export function createV3AssessmentResult({
       pixScore,
       assessmentId,
       juryId,
-      competenceMarks,
+      capacity,
+      reachedMeshIndex,
+      versionId,
     });
   }
 
@@ -60,6 +81,10 @@ export function createV3AssessmentResult({
     status,
     assessmentId,
     juryId,
+    competenceMarks,
+    capacity,
+    reachedMeshIndex,
+    versionId,
   });
 }
 

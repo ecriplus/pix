@@ -7,9 +7,10 @@ import {
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Prescription | Campaign participation | Usecase | get-result-levels-per-tubes-and-competences', function () {
   let campaignParticipation;
@@ -116,5 +117,22 @@ describe('Integration | Prescription | Campaign participation | Usecase | get-re
         title: 'Tube 1 fr title',
       },
     ]);
+  });
+
+  context('when participation is not shared', function () {
+    it('should throw UserNotAuthorizedToAccessEntityError', async function () {
+      const notSharedParticipation = databaseBuilder.factory.buildCampaignParticipation({
+        campaignId: campaignParticipation.campaignId,
+        status: CampaignParticipationStatuses.STARTED,
+      });
+      await databaseBuilder.commit();
+
+      const error = await catchErr(usecases.getResultLevelsPerTubesAndCompetences)({
+        campaignParticipationId: notSharedParticipation.id,
+        locale: FRENCH_SPOKEN,
+      });
+
+      expect(error).to.be.instanceOf(UserNotAuthorizedToAccessEntityError);
+    });
   });
 });

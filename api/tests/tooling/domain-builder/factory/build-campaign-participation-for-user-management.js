@@ -5,7 +5,7 @@ const buildCampaignParticipationForUserManagement = function ({
   id = 1,
   participantExternalId = 'un identifiant externe',
   campaignParticipationId,
-  status = CampaignParticipationStatuses.TO_SHARE,
+  status = CampaignParticipationStatuses.STARTED,
   campaignId = 2,
   campaignCode = 'SOMECODE0',
   createdAt = new Date(),

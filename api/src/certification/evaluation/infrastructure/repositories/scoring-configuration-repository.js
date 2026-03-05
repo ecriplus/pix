@@ -10,7 +10,7 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
   // NOTE : only works for certification of core competencies
   const competenceList = await competenceRepository.listPixCompetencesOnly({ locale });
 
-  const configuration = await knexConn('certification_versions')
+  const certificationVersion = await knexConn('certification_versions')
     .select(
       'id',
       'globalScoringConfiguration',
@@ -24,19 +24,20 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
     .first();
 
   if (
-    !configuration?.competencesScoringConfiguration ||
-    !configuration?.globalScoringConfiguration ||
-    !configuration?.minimumAnswersRequiredToValidateACertification
+    !certificationVersion?.competencesScoringConfiguration ||
+    !certificationVersion?.globalScoringConfiguration ||
+    !certificationVersion?.minimumAnswersRequiredToValidateACertification
   ) {
     throw new NotFoundError(`No certification scoring configuration found for date ${date.toISOString()}`);
   }
 
   return V3CertificationScoring.fromConfigurations({
-    competenceForScoringConfiguration: configuration.competencesScoringConfiguration,
-    certificationScoringConfiguration: configuration.globalScoringConfiguration,
+    competenceForScoringConfiguration: certificationVersion.competencesScoringConfiguration,
+    certificationScoringConfiguration: certificationVersion.globalScoringConfiguration,
     allAreas,
     competenceList,
-    minimumAnswersRequiredToValidateACertification: configuration.minimumAnswersRequiredToValidateACertification,
+    minimumAnswersRequiredToValidateACertification: certificationVersion.minimumAnswersRequiredToValidateACertification,
+    versionId: certificationVersion.id,
   });
 };
 
@@ -66,6 +67,7 @@ export const getLatestByVersion = async ({ version }) => {
     allAreas,
     competenceList,
     minimumAnswersRequiredToValidateACertification,
+    versionId: version.id,
   });
 };
 

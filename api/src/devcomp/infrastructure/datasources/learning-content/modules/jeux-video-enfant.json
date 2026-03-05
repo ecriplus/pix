@@ -819,7 +819,9 @@
                   "randomSlides": false,
                   "titleLevel": 0,
                   "disableAnimation": false
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

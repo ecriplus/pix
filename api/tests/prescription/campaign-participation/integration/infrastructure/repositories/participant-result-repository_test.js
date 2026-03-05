@@ -484,7 +484,7 @@ describe('Integration | Repository | ParticipantResultRepository', function () {
         const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
           userId,
           campaignId,
-          status: 'TO_SHARE',
+          status: 'STARTED',
           isImproved: false,
         });
         databaseBuilder.factory.buildAssessment({

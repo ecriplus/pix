@@ -11,7 +11,7 @@ describe('Unit | Domain | Read-Models | CampaignResults | CampaignParticipantAct
         firstName: 'Lidia',
         lastName: 'Aguilar',
         participantExternalId: 'Alba67',
-        status: CampaignParticipationStatuses.TO_SHARE,
+        status: CampaignParticipationStatuses.STARTED,
         participationCount: null,
       });
 

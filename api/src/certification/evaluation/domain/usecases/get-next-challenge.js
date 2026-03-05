@@ -2,7 +2,6 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
@@ -24,7 +23,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {AnswerRepository} params.answerRepository
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionRepository} params.versionRepository
@@ -38,7 +36,6 @@ const getNextChallenge = async function ({
   answerRepository,
   certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
-  certificationCourseRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
   calibratedChallengeRepository,
@@ -46,8 +43,6 @@ const getNextChallenge = async function ({
   flashAlgorithmService,
   pickChallengeService,
 }) {
-  const certificationCourse = await certificationCourseRepository.get({ id: assessment.certificationCourseId });
-
   const validatedLiveAlertChallengeIds = await _getValidatedLiveAlertChallengeIds({
     assessmentId: assessment.id,
     certificationChallengeLiveAlertRepository,
@@ -122,7 +117,7 @@ const getNextChallenge = async function ({
     associatedSkillId: challenge.skill.id,
     challengeId: challenge.id,
     competenceId: challenge.skill.competenceId,
-    courseId: certificationCourse.getId(),
+    courseId: assessment.certificationCourseId,
     isNeutralized: false,
     certifiableBadgeKey: null,
     discriminant: challenge.discriminant,
@@ -153,11 +148,7 @@ const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAler
 
   const excludedSkillIds = validatedLiveAlertChallenges.map((challenge) => challenge.skill.id);
 
-  const challengesWithoutSkillsWithAValidatedLiveAlert = challenges.filter(
-    (challenge) => !excludedSkillIds.includes(challenge.skill.id),
-  );
-
-  return challengesWithoutSkillsWithAValidatedLiveAlert;
+  return challenges.filter((challenge) => !excludedSkillIds.includes(challenge.skill.id));
 };
 
 const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationChallengeLiveAlertRepository }) => {
@@ -171,7 +162,7 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
  * Example: after LCMS release if a challenge becomes archived ('perime'), this challenge will be in
  *          `answeredCalibratedChallenges` param, but not in `currentCalibratedChallenges` param
  * @param {Array<CalibratedChallenge>} answeredCalibratedChallenges
- * @param {Array<CalibratedChallenge>} currentCalibratedChallengesproperty.
+ * @param {Array<CalibratedChallenge>} currentCalibratedChallenges.
  * @returns {Array<CalibratedChallenge>}
  */
 const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {

@@ -218,7 +218,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expectedCode = campaign.code;
       const { id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
-        status: 'TO_SHARE',
+        status: 'STARTED',
         userId: user.id,
       });
       databaseBuilder.factory.buildAssessment({

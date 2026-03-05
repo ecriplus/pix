@@ -10,10 +10,12 @@ describe('Integration | Repository | AssessmentResult', function () {
     context('when save is successful', function () {
       it('should return the saved assessment result', async function () {
         // given
-        databaseBuilder.factory.buildCertificationCourse({ id: 1 });
+        const certificationVersion = databaseBuilder.factory.buildCertificationVersion();
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse();
         databaseBuilder.factory.buildUser({ id: 100 });
-        databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
+        const assessment = databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse.id });
         await databaseBuilder.commit();
+
         const assessmentResultToSave = domainBuilder.buildAssessmentResult({
           pixScore: 33,
           reproducibilityRate: 29.1,
@@ -29,14 +31,17 @@ describe('Integration | Repository | AssessmentResult', function () {
           }),
           createdAt: new Date('2021-10-29T03:06:00Z'),
           juryId: 100,
-          assessmentId: 2,
+          assessmentId: assessment.id,
           competenceMarks: [],
+          capacity: 3.56,
+          reachedMeshIndex: 3,
+          versionId: certificationVersion.id,
         });
         assessmentResultToSave.id = undefined;
 
         // when
         const savedAssessmentResult = await assessmentResultRepository.save({
-          certificationCourseId: 1,
+          certificationCourseId: certificationCourse.id,
           assessmentResult: assessmentResultToSave,
         });
 
@@ -46,9 +51,10 @@ describe('Integration | Repository | AssessmentResult', function () {
 
       it('should persist the assessment result in DB', async function () {
         // given
-        databaseBuilder.factory.buildCertificationCourse({ id: 1 });
+        const certificationVersion = databaseBuilder.factory.buildCertificationVersion();
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse({ id: 3 });
         databaseBuilder.factory.buildUser({ id: 100 });
-        databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
+        const assessment = databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse.id });
         await databaseBuilder.commit();
         const assessmentResultToSave = domainBuilder.buildAssessmentResult({
           pixScore: 33,
@@ -65,17 +71,22 @@ describe('Integration | Repository | AssessmentResult', function () {
           }),
           createdAt: new Date('2021-10-29T03:06:00Z'),
           juryId: 100,
-          assessmentId: 2,
+          assessmentId: assessment.id,
           competenceMarks: [],
+          reachedMeshIndex: 3,
+          versionId: certificationVersion.id,
         });
         assessmentResultToSave.id = undefined;
 
         // when
-        await assessmentResultRepository.save({ certificationCourseId: 1, assessmentResult: assessmentResultToSave });
+        await assessmentResultRepository.save({
+          certificationCourseId: certificationCourse.id,
+          assessmentResult: assessmentResultToSave,
+        });
 
         // then
         const actualAssessmentResult = await assessmentResultRepository.getByCertificationCourseId({
-          certificationCourseId: 1,
+          certificationCourseId: certificationCourse.id,
         });
         expect(actualAssessmentResult).to.deepEqualInstanceOmitting(assessmentResultToSave, ['id', 'createdAt']);
         expect(actualAssessmentResult.id).to.exist;
@@ -85,10 +96,12 @@ describe('Integration | Repository | AssessmentResult', function () {
       context('when there is no assessment result for the certification course yet', function () {
         it('should persist the link between the assessment result and the certification course in DB', async function () {
           // given
-          databaseBuilder.factory.buildCertificationCourse({ id: 1 });
+          const certificationVersion = databaseBuilder.factory.buildCertificationVersion();
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse();
           databaseBuilder.factory.buildUser({ id: 100 });
-          databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
+          const assessment = databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse.id });
           await databaseBuilder.commit();
+
           const assessmentResultToSave = domainBuilder.buildAssessmentResult({
             pixScore: 33,
             reproducibilityRate: 29.1,
@@ -102,35 +115,40 @@ describe('Integration | Repository | AssessmentResult', function () {
             }),
             createdAt: new Date('2021-10-29T03:06:00Z'),
             juryId: 100,
-            assessmentId: 2,
+            assessmentId: assessment.id,
             competenceMarks: [],
+            versionId: certificationVersion.id,
           });
           assessmentResultToSave.id = undefined;
 
           // when
           const assessmentResult = await assessmentResultRepository.save({
-            certificationCourseId: 1,
+            certificationCourseId: certificationCourse.id,
             assessmentResult: assessmentResultToSave,
           });
 
           // then
           const result = await knex('certification-courses-last-assessment-results').select('*');
-          expect(result).to.deep.equal([{ lastAssessmentResultId: assessmentResult.id, certificationCourseId: 1 }]);
+          expect(result).to.deep.equal([
+            { lastAssessmentResultId: assessmentResult.id, certificationCourseId: certificationCourse.id },
+          ]);
         });
       });
 
       context('when there is already an assessment result for the certification course', function () {
         it('should update the link between the assessment result and the certification course in DB', async function () {
           // given
-          databaseBuilder.factory.buildCertificationCourse({ id: 1 });
+          const certificationVersion = databaseBuilder.factory.buildCertificationVersion();
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse();
           databaseBuilder.factory.buildUser({ id: 100 });
-          databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
-          databaseBuilder.factory.buildAssessmentResult({ id: 99, assessmentId: 2 });
+          const assessment = databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse.id });
+          databaseBuilder.factory.buildAssessmentResult({ id: 99, assessmentId: assessment.id });
           databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
-            certificationCourseId: 1,
+            certificationCourseId: certificationCourse.id,
             lastAssessmentResultId: 99,
           });
           await databaseBuilder.commit();
+
           const assessmentResultToSave = domainBuilder.buildAssessmentResult({
             pixScore: 33,
             reproducibilityRate: 29.1,
@@ -144,20 +162,23 @@ describe('Integration | Repository | AssessmentResult', function () {
             }),
             createdAt: new Date('2021-10-29T03:06:00Z'),
             juryId: 100,
-            assessmentId: 2,
+            assessmentId: assessment.id,
             competenceMarks: [],
+            versionId: certificationVersion.id,
           });
           assessmentResultToSave.id = undefined;
 
           // when
           const assessmentResult = await assessmentResultRepository.save({
-            certificationCourseId: 1,
+            certificationCourseId: certificationCourse.id,
             assessmentResult: assessmentResultToSave,
           });
 
           // then
           const result = await knex('certification-courses-last-assessment-results').select('*');
-          expect(result).to.deep.equal([{ lastAssessmentResultId: assessmentResult.id, certificationCourseId: 1 }]);
+          expect(result).to.deep.equal([
+            { lastAssessmentResultId: assessmentResult.id, certificationCourseId: certificationCourse.id },
+          ]);
         });
       });
     });
@@ -165,10 +186,11 @@ describe('Integration | Repository | AssessmentResult', function () {
     context('when assessmentId attribute is not valid', function () {
       it('should throw a MissingAssessmentId error', async function () {
         // given
-        databaseBuilder.factory.buildCertificationCourse({ id: 1 });
+        const certificationCourse = databaseBuilder.factory.buildCertificationCourse();
         databaseBuilder.factory.buildUser({ id: 100 });
-        databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
+        databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: certificationCourse.id });
         await databaseBuilder.commit();
+
         const assessmentResultToSave = domainBuilder.buildAssessmentResult({
           pixScore: 33,
           reproducibilityRate: 29.1,
@@ -315,6 +337,7 @@ describe('Integration | Repository | AssessmentResult', function () {
     context('when certification course has one assessment result', function () {
       it('should return the assessment result', async function () {
         // given
+        const version = databaseBuilder.factory.buildCertificationVersion();
         databaseBuilder.factory.buildCertificationCourse({ id: 1 });
         databaseBuilder.factory.buildUser({ id: 100 });
         databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
@@ -352,6 +375,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark2],
+          capacity: 3,
+          reachedMeshIndex: 5,
+          versionId: version.id,
         });
         databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,
@@ -421,6 +447,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           juryId: 100,
           assessmentId: 2,
           competenceMarks: [competenceMark1, competenceMark3],
+          capacity: null,
+          reachedMeshIndex: null,
+          versionId: null,
         });
         databaseBuilder.factory.buildAssessmentResult({
           ...expectedAssessmentResult,
@@ -472,6 +501,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: 2,
           status: Assessment.states.STARTED,
           competenceMarks: [],
+          capacity: null,
+          reachedMeshIndex: null,
+          versionId: null,
         });
         expectedAssessmentResult.id = undefined;
         expectedAssessmentResult.commentByJury = undefined;
@@ -500,6 +532,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           assessmentId: null,
           status: Assessment.states.STARTED,
           competenceMarks: [],
+          capacity: null,
+          reachedMeshIndex: null,
+          versionId: null,
         });
         expectedAssessmentResult.id = undefined;
         expectedAssessmentResult.commentByJury = undefined;
@@ -516,9 +551,10 @@ describe('Integration | Repository | AssessmentResult', function () {
     context('when the assessment result exists', function () {
       it('should update the assessment result', async function () {
         // given
+        const certificationVersion = databaseBuilder.factory.buildCertificationVersion();
         databaseBuilder.factory.buildCertificationCourse({ id: 1 });
         databaseBuilder.factory.buildUser({ id: 100 });
-        databaseBuilder.factory.buildAssessment({ id: 2, certificationCourseId: 1 });
+        const assessment = databaseBuilder.factory.buildAssessment({ certificationCourseId: 1 });
         const competenceMark1 = domainBuilder.buildCompetenceMark({
           id: 200,
           level: 3,
@@ -544,8 +580,9 @@ describe('Integration | Repository | AssessmentResult', function () {
           status: AssessmentResult.status.VALIDATED,
           createdAt: new Date('2021-10-29T03:06:00Z'),
           juryId: 100,
-          assessmentId: 2,
+          assessmentId: assessment.id,
           competenceMarks: [competenceMark1, competenceMark2],
+          versionId: certificationVersion.id,
         });
         databaseBuilder.factory.buildAssessmentResult(assessmentResult);
         databaseBuilder.factory.buildCompetenceMark(competenceMark1);

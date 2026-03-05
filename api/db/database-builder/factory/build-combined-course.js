@@ -16,6 +16,8 @@ const buildCombinedCourse = function ({
   createdAt = new Date(),
   updatedAt,
   combinedCourseBlueprintId,
+  rewardType = null,
+  rewardId = null,
   deletedAt = null,
   deletedBy = null,
 } = {}) {
@@ -27,6 +29,8 @@ const buildCombinedCourse = function ({
 
   const questId = buildQuestForCombinedCourse({
     successRequirements: successRequirementsFromContents,
+    rewardType,
+    rewardId,
   }).id;
 
   const values = {

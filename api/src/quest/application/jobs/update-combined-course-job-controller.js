@@ -18,7 +18,7 @@ class UpdateCombinedCourseJobController extends JobController {
     // TODO + déplacer les fichiers de test des job controller et repository
     const combinedCourses = await usecases.findCombinedCourseByModuleIdAndUserId({ moduleId, userId });
     for (const combinedCourse of combinedCourses) {
-      await usecases.updateCombinedCourse({ userId, code: combinedCourse.code });
+      await usecases.updateCombinedCourseProgress({ userId, code: combinedCourse.code });
     }
   }
 }

@@ -15,6 +15,9 @@ export default class ResultsRoute extends Route {
 
   async model() {
     const { campaignAssessmentParticipation } = this.modelFor('authenticated.campaigns.participant-assessment');
+    if (!campaignAssessmentParticipation.isShared) {
+      return [];
+    }
     const campaignAssessmentParticipationResult =
       await campaignAssessmentParticipation.campaignAssessmentParticipationResult;
     const competenceResults = await campaignAssessmentParticipationResult.competenceResults;

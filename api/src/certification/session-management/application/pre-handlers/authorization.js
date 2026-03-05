@@ -2,8 +2,8 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
 import { extractUserIdFromRequest } from '../../../../shared/infrastructure/utils/request-response-utils.js';
-import * as sessionRepository from '../../../session-management/infrastructure/repositories/session-repository.js';
 import * as invigilatorAccessRepository from '../../infrastructure/repositories/invigilator-access-repository.js';
+import * as sessionManagementRepository from '../../infrastructure/repositories/session-management-repository.js';
 
 const { Error: JSONAPIError } = jsonapiSerializer;
 
@@ -21,13 +21,17 @@ function _replyForbiddenError(h) {
   return h.response(jsonApiError).code(errorHttpStatusCode).takeover();
 }
 
-async function checkUserHaveCertificationCenterMembershipForSession(request, h, dependencies = { sessionRepository }) {
+async function checkUserHaveCertificationCenterMembershipForSession(
+  request,
+  h,
+  dependencies = { sessionManagementRepository },
+) {
   const userId = request.auth.credentials.userId;
   const sessionId = request.params.sessionId;
 
   try {
     const hasMembershipAccess =
-      await dependencies.sessionRepository.doesUserHaveCertificationCenterMembershipForSession({
+      await dependencies.sessionManagementRepository.doesUserHaveCertificationCenterMembershipForSession({
         userId,
         sessionId,
       });

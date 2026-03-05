@@ -1,7 +1,7 @@
 import { COMBINED_COURSE_ITEM_TYPES } from '../models/CombinedCourseItem.js';
 import { OrganizationLearnerParticipation } from '../models/OrganizationLearnerParticipation.js';
 
-export async function updateCombinedCourse({
+export async function updateCombinedCourseProgress({
   userId,
   code,
   combinedCourseRepository,
@@ -9,6 +9,7 @@ export async function updateCombinedCourse({
   organizationLearnerPrescriptionRepository,
   organizationLearnerParticipationRepository,
   combinedCourseDetailsService,
+  rewardRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
   const organizationLearnerId = await organizationLearnerPrescriptionRepository.findIdByUserIdAndOrganizationId({
@@ -52,6 +53,13 @@ export async function updateCombinedCourse({
       updatedCombinedCourseDetails.participation,
     );
     await combinedCourseParticipationRepository.update(organizationLearnerParticipation.fieldsForUpdate);
+    if (updatedCombinedCourseDetails.isSuccessful()) {
+      await rewardRepository.reward({
+        userId,
+        rewardId: combinedCourse.quest.rewardId,
+        rewardType: combinedCourse.quest.rewardType,
+      });
+    }
   }
 
   return updatedCombinedCourseDetails.participation;

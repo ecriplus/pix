@@ -4,6 +4,7 @@ import { config } from '../../shared/config.js';
 import { tokenService } from '../../shared/domain/services/token-service.js';
 import {
   jwtApplicationAuthenticationStrategyName,
+  jwtOptionalUserAuthenticationStrategyName,
   jwtUserAuthenticationStrategyName,
 } from '../../shared/infrastructure/authentication-strategy-names.js';
 import { logger } from '../../shared/infrastructure/utils/logger.js';
@@ -19,6 +20,14 @@ const schemes = {
       };
     },
   },
+  optionalJwt: {
+    name: 'jwt-optional-scheme',
+    scheme(_, strategyConfiguration) {
+      return {
+        authenticate: authenticateOptionalJWT(strategyConfiguration),
+      };
+    },
+  },
 };
 
 const strategies = {
@@ -28,7 +37,17 @@ const strategies = {
     configuration: {
       key: config.authentication.secret,
       validate: (decodedAccessToken, options) =>
-        validateUser(decodedAccessToken, { ...options, revokedUserAccessRepository }),
+        validateUserAccessToken(decodedAccessToken, { ...options, revokedUserAccessRepository }),
+    },
+  },
+
+  jwtOptionalUser: {
+    name: jwtOptionalUserAuthenticationStrategyName,
+    schemeName: schemes.optionalJwt.name,
+    configuration: {
+      key: config.authentication.secret,
+      validate: (decodedAccessToken, options) =>
+        validateUserAccessToken(decodedAccessToken, { ...options, revokedUserAccessRepository }),
     },
   },
 
@@ -37,12 +56,12 @@ const strategies = {
     schemeName: schemes.jwt.name,
     configuration: {
       key: config.authentication.secret,
-      validate: validateClientApplication,
+      validate: validateClientApplicationAccessToken,
     },
   },
 };
 
-async function validateUser(decodedAccessToken, { request, revokedUserAccessRepository }) {
+async function validateUserAccessToken(decodedAccessToken, { request, revokedUserAccessRepository }) {
   const userId = decodedAccessToken.user_id;
   if (!userId) {
     return { isValid: false };
@@ -72,7 +91,7 @@ async function validateUser(decodedAccessToken, { request, revokedUserAccessRepo
   return { isValid: true, credentials: { userId: decodedAccessToken.user_id } };
 }
 
-async function validateClientApplication(decodedAccessToken) {
+async function validateClientApplicationAccessToken(decodedAccessToken) {
   if (!decodedAccessToken.client_id) {
     logger.warn({
       message: 'decodedAccessToken has no client_id',
@@ -89,6 +108,17 @@ async function validateClientApplication(decodedAccessToken) {
       scope: decodedAccessToken.scope.split(/\s/g),
       source: decodedAccessToken.source,
     },
+  };
+}
+
+function authenticateOptionalJWT({ key, validate }) {
+  return async (request, h) => {
+    const authorizationHeader = request.headers.authorization;
+    if (!authorizationHeader) {
+      return h.authenticated({ credentials: { userId: null } });
+    }
+
+    return authenticateJWT({ key, validate })(request, h);
   };
 }
 
@@ -134,4 +164,4 @@ function authenticateJWT({ key, validate }) {
   };
 }
 
-export { schemes, strategies, validateClientApplication, validateUser };
+export { schemes, strategies, validateClientApplicationAccessToken, validateUserAccessToken };

@@ -39,13 +39,11 @@ describe('Unit | Serializer | JSONAPI | organization-learner-participation-seria
             campaignType: CampaignTypes.ASSESSMENT,
             shared: 0,
             started: 1,
-            to_share: 0,
             total: 1,
           },
           {
             campaignType: CampaignTypes.PROFILES_COLLECTION,
             shared: 1,
-            to_share: 0,
             total: 1,
           },
         ],

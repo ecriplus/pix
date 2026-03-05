@@ -166,14 +166,12 @@ export default class Badge extends Component {
             <div class="badge-edit-form__checkboxes">
               <PixCheckbox
                 @checked={{this.form.isCertifiable}}
-                @variant="tile"
                 {{on "change" (this.onFormCheckToggle "isCertifiable")}}
               ><:label>Certifiable</:label></PixCheckbox>
               <div>
                 <PixCheckbox
                   @type="checkbox"
                   @checked={{this.form.isAlwaysVisible}}
-                  @variant="tile"
                   {{on "change" (this.onFormCheckToggle "isAlwaysVisible")}}
                 ><:label>Lacunes</:label></PixCheckbox>
               </div>

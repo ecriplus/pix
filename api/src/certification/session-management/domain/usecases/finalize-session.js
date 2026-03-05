@@ -1,101 +1,67 @@
 /**
- * @typedef {import('../../../session-management/domain/usecases/index.js').SessionRepository} SessionRepository
- *
- * @typedef {import('../../../shared/domain/usecases/index.js').CertificationCourseRepository} CertificationCourseRepository
- *
- * @typedef {import('../../../session-management/domain/usecases/index.js').CertificationReportRepository} CertificationReportRepository
+ * @typedef {import('./index.js').SessionRepository} SessionRepository
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import {
   SessionAlreadyFinalizedError,
-  SessionWithAbortReasonOnCompletedCertificationCourseError,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,
 } from '../errors.js';
-import { SessionFinalized } from '../read-models/SessionFinalized.js';
 
-const finalizeSession = withTransaction(
-  /**
-   * @param {object} params
-   * @param {SessionRepository} params.sessionRepository
-   * @param {CertificationCourseRepository} params.certificationCourseRepository
-   * @param {CertificationReportRepository} params.certificationReportRepository
-   * @return {Promise<SessionFinalized>}
-   */
-  async function ({
-    sessionId,
+/**
+ * @param {object} params
+ * @param {SessionRepository} params.sessionRepository
+ * @param {CertificationCourseRepository} params.certificationCourseRepository
+ * @param {CertificationReportRepository} params.certificationReportRepository
+ * @return {Promise<Session>}
+ */
+const finalizeSession = withTransaction(async function ({
+  sessionId,
+  examinerGlobalComment,
+  certificationReports,
+  hasIncident,
+  hasJoiningIssue,
+  sessionRepository,
+}) {
+  const session = await sessionRepository.get({ id: sessionId });
+  if (!session) {
+    throw new NotFoundError(`Session introuvable : id ${sessionId}`);
+  }
+
+  if (session.isFinalized) {
+    throw new SessionAlreadyFinalizedError();
+  }
+
+  if (!session.hasStarted) {
+    throw new SessionWithoutStartedCertificationError();
+  }
+  certificationReports.forEach((certifReport) => certifReport.validateForFinalization());
+
+  const abortReasonCount = _countAbortReasons(certificationReports);
+
+  if (
+    _hasMissingAbortReasonForUncompletedCertificationCourse({
+      abortReasonCount,
+      uncompletedCertificationCount: session.uncompletedCertificationCount,
+    })
+  ) {
+    throw new SessionWithMissingAbortReasonError();
+  }
+
+  session.finalize({
     examinerGlobalComment,
-    certificationReports,
-    sessionRepository,
-    certificationCourseRepository,
-    certificationReportRepository,
     hasIncident,
     hasJoiningIssue,
-  }) {
-    const isSessionAlreadyFinalized = await sessionRepository.isFinalized({ id: sessionId });
+    certificationReports,
+  });
 
-    const hasNoStartedCertification = await sessionRepository.hasNoStartedCertification({ id: sessionId });
+  await sessionRepository.save({ session });
 
-    const uncompletedCertificationCount = await sessionRepository.countUncompletedCertificationsAssessment({
-      id: sessionId,
-    });
-
-    const abortReasonCount = _countAbortReasons(certificationReports);
-
-    if (isSessionAlreadyFinalized) {
-      throw new SessionAlreadyFinalizedError();
-    }
-
-    if (hasNoStartedCertification) {
-      throw new SessionWithoutStartedCertificationError();
-    }
-
-    if (_hasMissingAbortReasonForUncompletedCertificationCourse({ abortReasonCount, uncompletedCertificationCount })) {
-      throw new SessionWithMissingAbortReasonError();
-    }
-
-    if (
-      _hasAbortReasonForCompletedCertificationCourse({
-        abortReasonCount,
-        uncompletedCertificationCount,
-      })
-    ) {
-      await _removeAbortReasonFromCompletedCertificationCourses({
-        certificationCourseRepository,
-        certificationReports,
-        sessionId,
-      });
-
-      throw new SessionWithAbortReasonOnCompletedCertificationCourseError();
-    }
-
-    certificationReports.forEach((certifReport) => certifReport.validateForFinalization());
-
-    await certificationReportRepository.finalizeAll({ certificationReports });
-
-    const finalizedSession = await sessionRepository.finalize({
-      id: sessionId,
-      examinerGlobalComment,
-      hasIncident,
-      hasJoiningIssue,
-    });
-
-    return new SessionFinalized({
-      sessionId,
-      finalizedAt: finalizedSession.finalizedAt,
-      hasExaminerGlobalComment: Boolean(examinerGlobalComment),
-      certificationCenterName: finalizedSession.certificationCenter,
-      sessionDate: finalizedSession.date,
-      sessionTime: finalizedSession.time,
-    });
-  },
-);
+  return session;
+});
 
 export { finalizeSession };
-
-function _hasAbortReasonForCompletedCertificationCourse({ abortReasonCount, uncompletedCertificationCount }) {
-  return abortReasonCount > uncompletedCertificationCount;
-}
 
 function _hasMissingAbortReasonForUncompletedCertificationCourse({ abortReasonCount, uncompletedCertificationCount }) {
   return abortReasonCount < uncompletedCertificationCount;
@@ -103,31 +69,4 @@ function _hasMissingAbortReasonForUncompletedCertificationCourse({ abortReasonCo
 
 function _countAbortReasons(certificationReports) {
   return certificationReports.filter(({ abortReason }) => abortReason).length;
-}
-
-async function _removeAbortReasonFromCompletedCertificationCourses({
-  certificationCourseRepository,
-  certificationReports,
-  sessionId,
-}) {
-  const sessionCertificationCourses = await certificationCourseRepository.findCertificationCoursesBySessionId({
-    sessionId,
-  });
-  for (const sessionCertificationCourse of sessionCertificationCourses) {
-    for (const certificationReport of certificationReports) {
-      const { certificationCourseId: abortReasonCertificationCourseId, abortReason } = certificationReport;
-      if (
-        sessionCertificationCourse.getId() === abortReasonCertificationCourseId &&
-        abortReason &&
-        sessionCertificationCourse.isCompleted()
-      ) {
-        sessionCertificationCourse.unabort();
-        // do not use transaction so throwing error will not revert the session unabort
-        await certificationCourseRepository.update({
-          certificationCourse: sessionCertificationCourse,
-          noTransaction: true,
-        });
-      }
-    }
-  }
 }

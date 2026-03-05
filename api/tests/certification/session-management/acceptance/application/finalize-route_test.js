@@ -391,9 +391,13 @@ describe('Certification | Session Management | Acceptance | Application | Route 
       });
 
       context('when session is v3', function () {
+        let certificationVersionId;
+
         beforeEach(async function () {
           ({ options, session } = await _createSession({ version: 3 }));
-          databaseBuilder.factory.buildCertificationVersion({ minimumAnswersRequiredToValidateACertification: 1 });
+          certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
+            minimumAnswersRequiredToValidateACertification: 1,
+          }).id;
           await databaseBuilder.commit();
         });
 
@@ -505,7 +509,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           expect(finalizedSession.isPublishable).to.be.true;
         });
 
-        it('should mark the assessment as ended due to finalization', async function () {
+        it('should score and mark the assessment as ended due to finalization', async function () {
           // given
           const abortReason = 'candidate';
           const userId = databaseBuilder.factory.buildUser().id;
@@ -591,8 +595,21 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
           // then
           expect(response.statusCode).to.equal(200);
+
           const assessment = await knex('assessments').where({ certificationCourseId }).first();
           expect(assessment.state).to.equal('endedDueToFinalization');
+
+          const lastAssessmentResult = await knex('assessment-results')
+            .where({ assessmentId })
+            .orderBy('createdAt', 'desc')
+            .first();
+          expect(lastAssessmentResult).to.deep.include({
+            pixScore: 48,
+            capacity: -3,
+            reachedMeshIndex: 0,
+            status: AssessmentResult.status.VALIDATED,
+            versionId: certificationVersionId,
+          });
         });
 
         context('when certification is a double certification', function () {
@@ -713,6 +730,13 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
             const pixCoreResults = await knex('assessment-results').where({ assessmentId });
             expect(pixCoreResults).to.have.lengthOf(1);
+            expect(pixCoreResults[0]).to.deep.include({
+              pixScore: 48,
+              capacity: -3,
+              reachedMeshIndex: 0,
+              status: AssessmentResult.status.VALIDATED,
+              versionId: certificationVersionId,
+            });
 
             const cleaResult = await knex('complementary-certification-course-results').where({
               complementaryCertificationCourseId,
@@ -763,10 +787,13 @@ describe('Certification | Session Management | Acceptance | Application | Route 
 
           // then
           expect(response.statusCode).to.equal(200);
+
           const finalizedSession = await knex('finalized-sessions').where({ sessionId: session.id }).first();
           expect(finalizedSession.isPublishable).to.be.true;
+
           const assessmentResult = await knex('assessment-results').where({ assessmentId }).first();
           expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
+
           const assessment = await knex('assessments').where({ certificationCourseId }).first();
           expect(assessment.state).to.equal('endedDueToFinalization');
         });

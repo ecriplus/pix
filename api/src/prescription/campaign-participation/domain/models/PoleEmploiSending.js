@@ -1,6 +1,5 @@
 const TYPES = {
   CAMPAIGN_PARTICIPATION_START: 'CAMPAIGN_PARTICIPATION_START',
-  CAMPAIGN_PARTICIPATION_COMPLETION: 'CAMPAIGN_PARTICIPATION_COMPLETION',
   CAMPAIGN_PARTICIPATION_SHARING: 'CAMPAIGN_PARTICIPATION_SHARING',
 };
 
@@ -17,15 +16,6 @@ class PoleEmploiSending {
     return new PoleEmploiSending({
       campaignParticipationId,
       type: TYPES.CAMPAIGN_PARTICIPATION_START,
-      payload,
-      responseCode,
-    });
-  }
-
-  static buildForParticipationFinished({ campaignParticipationId, payload, responseCode }) {
-    return new PoleEmploiSending({
-      campaignParticipationId,
-      type: TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
       payload,
       responseCode,
     });

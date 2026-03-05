@@ -9,7 +9,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
  * @param {CertificationRepository} params.certificationRepository
  * @param {certificationCenterRepository} params.certificationCenterRepository
  * @param {FinalizedSessionRepository} params.finalizedSessionRepository
- * @param {SessionRepository} params.sessionRepository
+ * @param {SessionManagementRepository} params.sessionManagementRepository
  * @param {SharedSessionRepository} params.sharedSessionRepository
  * @param {SessionPublicationService} params.sessionPublicationService
  */
@@ -20,7 +20,7 @@ const publishSession = async function ({
   certificationCenterRepository,
   finalizedSessionRepository,
   sharedSessionRepository,
-  sessionRepository,
+  sessionManagementRepository,
   sessionPublicationService,
 }) {
   return DomainTransaction.execute(async function () {
@@ -29,7 +29,7 @@ const publishSession = async function ({
       publishedAt,
       certificationRepository,
       finalizedSessionRepository,
-      sessionRepository,
+      sessionManagementRepository,
       sharedSessionRepository,
     });
 
@@ -38,10 +38,10 @@ const publishSession = async function ({
       startedCertificationCoursesUserIds,
       publishedAt,
       certificationCenterRepository,
-      sessionRepository,
+      sessionManagementRepository,
     });
 
-    return sessionRepository.get({ id: sessionId });
+    return sessionManagementRepository.get({ id: sessionId });
   });
 };
 

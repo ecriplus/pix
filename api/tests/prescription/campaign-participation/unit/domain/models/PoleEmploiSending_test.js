@@ -34,36 +34,6 @@ describe('Unit | Domain | Models | PoleEmploiSending', function () {
     });
   });
 
-  describe('buildForParticipationFinished', function () {
-    beforeEach(function () {
-      expectedPoleEmploiSending = domainBuilder.buildPoleEmploiSending({
-        type: PoleEmploiSending.TYPES.CAMPAIGN_PARTICIPATION_COMPLETION,
-        payload: {},
-        responseCode: '18',
-      });
-    });
-
-    it('should build a PoleEmploiSending', function () {
-      // when
-      const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({});
-
-      // then
-      expect(poleEmploiSending).to.be.instanceOf(PoleEmploiSending);
-    });
-
-    it('should build PoleEmploiSending with type CAMPAIGN_PARTICIPATION_COMPLETION and given arguments', function () {
-      // when
-      const poleEmploiSending = PoleEmploiSending.buildForParticipationFinished({
-        campaignParticipationId: expectedPoleEmploiSending.campaignParticipationId,
-        payload: {},
-        responseCode: '18',
-      });
-
-      // then
-      expect(poleEmploiSending).to.deep.equal(expectedPoleEmploiSending);
-    });
-  });
-
   describe('buildForParticipationShared', function () {
     beforeEach(function () {
       expectedPoleEmploiSending = domainBuilder.buildPoleEmploiSending({

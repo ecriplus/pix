@@ -13,10 +13,10 @@ export const revokeAccessForUsers = async function ({
   authenticationMethodRepository,
 }) {
   for (const userId of userIds) {
-    // Revoke user access for access token
+    // Revoke user AccessToken
     await revokedUserAccessRepository.saveForUser({ userId, revokeUntil: new Date() });
 
-    // Revoke user access for refresh token
+    // Revoke user RefreshToken
     await refreshTokenRepository.revokeAllByUserId({ userId });
 
     // Revoke current user password

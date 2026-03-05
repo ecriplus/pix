@@ -39,7 +39,9 @@
               "element": {
                 "id": "dad28e9d-425d-4637-b848-052231cb225f",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "title": "Arthur demande à Lila comment reconnaître l’ail des ours",
@@ -165,6 +167,7 @@
                       "id": "d057728c-18fd-4891-a53c-9f6413917bd9",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -181,8 +184,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -201,6 +203,7 @@
                       "id": "bec3bcf1-0a25-49a7-a5f0-c322ccb271b3",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -217,8 +220,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -237,6 +239,7 @@
                       "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -253,8 +256,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -273,6 +275,7 @@
                       "id": "706832ba-14ae-4a7d-886a-39e562e66557",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -289,8 +292,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 }
@@ -430,18 +432,15 @@
           "title": "Découverte 3 : Ajustement des paramètres",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "e5badfae-bca4-421a-ae72-299891ef31da",
-                "type": "text",
-                "content": "<p>La photo donnée à l'IA ci-dessous&nbsp;est une photographie d’ail des ours.🌱 </p>"
-              }
-            },
-            {
               "type": "stepper",
               "steps": [
                 {
                   "elements": [
+                    {
+                      "id": "5e52b226-e3e9-4a24-8b85-1f57fa2435b1",
+                      "type": "text",
+                      "content": "<p>Voici le logiciel d'IA en plein entraînement. Une photo d'ail des ours est fourni au logiciel.&nbsp; </p><p>Le logiciel est en train de régler ses paramètres pour obtenir la prédiction \"Ail des ours\".</p>"
+                    },
                     {
                       "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
                       "type": "image",
@@ -455,6 +454,7 @@
                       "id": "6f9e6061-a524-4827-aa1e-aba8d579d91c",
                       "type": "qcu-discovery",
                       "instruction": "A votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -471,13 +471,17 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
                 {
                   "elements": [
+                    {
+                      "id": "8b0e27a0-733c-40fd-9108-d2878429fd95",
+                      "type": "text",
+                      "content": "<p>Et ensuite, que se passe-t-il ?</p><p>Le logiciel ajuste ses paramètres. Il obtient une nouvelle prédiction.<br></p>"
+                    },
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
                       "type": "image",
@@ -491,6 +495,7 @@
                       "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
                       "type": "qcu-discovery",
                       "instruction": "Et maintenant, est-ce que la prédiction est correcte ?<br>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -507,13 +512,17 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
                 {
                   "elements": [
+                    {
+                      "id": "7c41625a-cc18-4b95-bb61-4f1a110ce866",
+                      "type": "text",
+                      "content": "<p>Le logiciel ajuste de nouveau ses paramètres. Il obtient une nouvelle prédiction.</p>"
+                    },
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
                       "type": "image",
@@ -527,6 +536,7 @@
                       "id": "ecb6c63b-ec65-4339-8e19-66fed405fa04",
                       "type": "qcu-discovery",
                       "instruction": "Et maintenant, est-ce que la prédiction est correcte ?",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -543,13 +553,17 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
                 {
                   "elements": [
+                    {
+                      "id": "4aec0109-31b7-471c-96a1-bd8327a96f07",
+                      "type": "text",
+                      "content": "<p>Le logiciel a réussi à régler ses paramètres pour obtenir la prédiction \"ail des ours\" avec cette photo.&nbsp;<br></p>"
+                    },
                     {
                       "id": "f89da7a4-d84c-4213-8dcf-91712068c0b9",
                       "type": "image",
@@ -563,6 +577,7 @@
                       "id": "5f341bbe-d409-4923-a987-065977a1da50",
                       "type": "qcu-discovery",
                       "instruction": "Alors, à votre avis, maintenant, l’entraînement est terminé ?<br>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -579,8 +594,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 },
@@ -589,7 +603,7 @@
                     {
                       "id": "c921068f-9d95-410f-84e0-d00dce15b202",
                       "type": "text",
-                      "content": "L'entraînement recommence sur des milliers d’images."
+                      "content": "<p>Le logiciel  recommence son&nbsp;entraînement sur des milliers d’images. </p><p>Les paramètres sont de mieux en mieux ajustés. La prédiction est juste de plus en plus souvent.</p>"
                     },
                     {
                       "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
@@ -599,6 +613,11 @@
                       "alternativeText": "",
                       "legend": "Avec une animation en accéléré avec plein d'images qui se superpose et avec lesquelles le logiciel s'entraîne",
                       "licence": ""
+                    },
+                    {
+                      "id": "4cc6fd84-4215-4cf9-956b-de1a86de63bc",
+                      "type": "text",
+                      "content": "<p>Grâce à cet entraînement, le logiciel va être capable de dire si une photo de la base de donnée est celle d'un brin de muguet ou d'ail des ours.<br></p>"
                     }
                   ]
                 }
@@ -682,6 +701,7 @@
                       "id": "7ab7d47a-3c75-40ee-87ca-e487493f2ffc",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, pourquoi ce logiciel n’est pas capable de dire avec certitude que cette photographie est de l’ail des ours ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -698,8 +718,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -807,8 +826,8 @@
                     "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong></span>"
                   },
                   {
-                    "input": "627e8063-9059-4bd6-9492-396cfb983c48",
                     "type": "select",
+                    "input": "627e8063-9059-4bd6-9492-396cfb983c48",
                     "display": "inline",
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
@@ -823,15 +842,17 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<span><strong>Salade</strong></span>"
                   },
                   {
-                    "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
                     "type": "select",
+                    "input": "1c91ad6e-adfd-432b-9aa1-0ce28a06dda0",
                     "display": "inline",
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
@@ -846,7 +867,9 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1028,7 +1051,9 @@
               "element": {
                 "id": "c9e931ea-9eba-4cd2-b2ff-a6812c4a88f8",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -1088,6 +1113,7 @@
                 "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
                 "type": "qcu",
                 "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel d’IA à différencier les tournesols et les tulipes ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -1114,8 +1140,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -1137,6 +1162,7 @@
                 "id": "8a3c8142-e5fc-4135-9826-c4a404f4a644",
                 "type": "qcu-declarative",
                 "instruction": "<p>Et maintenant, auriez-vous confiance dans une application qui reconnaît les champignons à partir d’une image et dit s’ils sont comestibles ? 🍄‍🟫</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -1166,8 +1192,7 @@
                       "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, elle ne prend pas en compte certaines informations (odeur, goût…)</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]

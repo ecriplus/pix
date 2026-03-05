@@ -10,7 +10,7 @@ export default class UserDashboard extends Route {
     const user = this.currentUser.user;
     const queryParams = {
       userId: user.id,
-      'filter[states]': ['ONGOING', 'TO_SHARE'],
+      'filter[states]': ['ONGOING'],
     };
     const campaignParticipationOverviews = await this.store.query('campaign-participation-overview', queryParams);
 

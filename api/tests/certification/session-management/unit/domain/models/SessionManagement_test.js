@@ -122,7 +122,7 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
   context('#isPublished', function () {
     it('returns true when the session is published', function () {
       // given
-      const session = domainBuilder.certification.sessionManagement.buildSession({ publishedAt: new Date() });
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({ publishedAt: new Date() });
       // when
       const isPublished = session.isPublished();
 
@@ -132,7 +132,7 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
 
     it('returns false when the session is not published', function () {
       // given
-      const session = domainBuilder.certification.sessionManagement.buildSession({ publishedAt: null });
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement({ publishedAt: null });
       // when
       const isPublished = session.isPublished();
 
@@ -143,22 +143,22 @@ describe('Unit | Certification | Session | Domain | Models | SessionManagement',
 
   context('.isNotAccessible', function () {
     it('returns true when the session is created', function () {
-      const session = domainBuilder.certification.sessionManagement.buildSession.created();
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement.created();
       expect(session.isAccessible()).to.be.true;
     });
 
     it('returns false when the session is finalized', function () {
-      const session = domainBuilder.certification.sessionManagement.buildSession.finalized();
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement.finalized();
       expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is in process', function () {
-      const session = domainBuilder.certification.sessionManagement.buildSession.inProcess();
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement.inProcess();
       expect(session.isAccessible()).to.be.false;
     });
 
     it('returns false when the session is processed', function () {
-      const session = domainBuilder.certification.sessionManagement.buildSession.processed();
+      const session = domainBuilder.certification.sessionManagement.buildSessionManagement.processed();
       expect(session.isAccessible()).to.be.false;
     });
   });

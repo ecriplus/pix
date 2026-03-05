@@ -3,7 +3,7 @@ import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shar
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-campaign-assessment-participation-result', function () {
-  let campaignRepository, campaignAssessmentParticipationResultRepository;
+  let campaignRepository, campaignAssessmentParticipationResultRepository, campaignParticipationRepository;
   let userId, campaignId, campaign, campaignParticipationId;
   const locale = 'fr';
 
@@ -13,6 +13,9 @@ describe('Unit | UseCase | get-campaign-assessment-participation-result', functi
     };
     campaignAssessmentParticipationResultRepository = {
       getByCampaignIdAndCampaignParticipationId: sinon.stub(),
+    };
+    campaignParticipationRepository = {
+      get: sinon.stub(),
     };
   });
 
@@ -25,25 +28,50 @@ describe('Unit | UseCase | get-campaign-assessment-participation-result', functi
       campaignRepository.checkIfUserOrganizationHasAccessToCampaign.withArgs(campaignId, userId).resolves(true);
     });
 
-    it('should get the campaignAssessmentParticipationResult', async function () {
-      // given
-      const expectedResult = Symbol('Result');
-      campaignAssessmentParticipationResultRepository.getByCampaignIdAndCampaignParticipationId
-        .withArgs({ campaignId, campaignParticipationId, locale })
-        .resolves(expectedResult);
+    context('when participation is shared', function () {
+      it('should get the campaignAssessmentParticipationResult', async function () {
+        // given
+        const expectedResult = Symbol('Result');
+        campaignParticipationRepository.get.withArgs(campaignParticipationId).resolves({ isShared: true });
+        campaignAssessmentParticipationResultRepository.getByCampaignIdAndCampaignParticipationId
+          .withArgs({ campaignId, campaignParticipationId, locale })
+          .resolves(expectedResult);
 
-      // when
-      const result = await getCampaignAssessmentParticipationResult({
-        userId,
-        campaignId,
-        campaignParticipationId,
-        campaignRepository,
-        campaignAssessmentParticipationResultRepository,
-        locale,
+        // when
+        const result = await getCampaignAssessmentParticipationResult({
+          userId,
+          campaignId,
+          campaignParticipationId,
+          campaignRepository,
+          campaignAssessmentParticipationResultRepository,
+          campaignParticipationRepository,
+          locale,
+        });
+
+        // then
+        expect(result).to.equal(expectedResult);
       });
+    });
 
-      // then
-      expect(result).to.equal(expectedResult);
+    context('when participation is not shared', function () {
+      it('should throw UserNotAuthorizedToAccessEntityError', async function () {
+        // given
+        campaignParticipationRepository.get.withArgs(campaignParticipationId).resolves({ isShared: false });
+
+        // when
+        const result = await catchErr(getCampaignAssessmentParticipationResult)({
+          userId,
+          campaignId,
+          campaignParticipationId,
+          campaignRepository,
+          campaignAssessmentParticipationResultRepository,
+          campaignParticipationRepository,
+          locale,
+        });
+
+        // then
+        expect(result).to.be.instanceOf(UserNotAuthorizedToAccessEntityError);
+      });
     });
   });
 
@@ -64,6 +92,7 @@ describe('Unit | UseCase | get-campaign-assessment-participation-result', functi
         campaignParticipationId,
         campaignRepository,
         campaignAssessmentParticipationResultRepository,
+        campaignParticipationRepository,
         locale,
       });
 

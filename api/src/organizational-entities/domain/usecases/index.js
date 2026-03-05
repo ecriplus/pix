@@ -21,6 +21,7 @@ import * as organizationPlacesLotRepository from '../../infrastructure/repositor
 import * as organizationTagRepository from '../../infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../infrastructure/repositories/tag.repository.js';
 import * as targetProfileShareRepository from '../../infrastructure/repositories/target-profile-share-repository.js';
+import * as organizationVerificationService from '../services/organization-verification.service.js';
 import * as organizationCreationValidator from '../validators/organization-creation-validator.js';
 import * as organizationValidator from '../validators/organization-with-tags-and-target-profiles.js';
 
@@ -45,9 +46,10 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
  * @typedef {import ('../../../shared/infrastructure/repositories/country-repository.js')} CountryRepository
+ * @typedef {import ('../services/organization-verification.service.js')} OrganizationVerificationService
  */
 
-const repositories = {
+const dependenciesToInject = {
   administrationTeamRepository,
   adminMemberRepository,
   organizationValidator,
@@ -72,9 +74,10 @@ const repositories = {
   organizationTagRepository,
   tagRepository,
   targetProfileShareRepository,
+  organizationVerificationService,
 };
 
-const dependencies = Object.assign({}, repositories);
+const dependencies = Object.assign({}, dependenciesToInject);
 
 import { addOrganizationFeatureInBatch } from './add-organization-feature-in-batch.usecase.js';
 import { addTagsToOrganizations } from './add-tags-to-organizations.usecase.js';

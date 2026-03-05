@@ -93,4 +93,18 @@ export default {
     defaultValue: true,
     tags: ['captain', 'backend', 'db', 'pool'],
   },
+  successHandlersForDomainTransaction: {
+    type: 'boolean',
+    description: 'Enable success handlers for DomainTransaction',
+    defaultValue: true,
+    devDefaultValues: { test: true, reviewApp: true },
+    tags: ['captain', 'backend', 'transactions'],
+  },
+  multipleLocalesForTrainingsEnabled: {
+    type: 'boolean',
+    description: 'Enable trainings with multiple locales',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: true },
+    tags: ['team-devcomp', 'pix-api', 'pix-admin', 'frontend', 'backend'],
+  },
 };

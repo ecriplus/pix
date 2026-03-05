@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as challengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
@@ -12,11 +10,11 @@ async function getFrameworkReferential({ challengeIds }) {
   const challenges = await challengeRepository.getMany(challengeIds, FRENCH_FRANCE);
 
   const skillIds = challenges.map((challenge) => challenge.skill.id);
-  const uniqSkillIds = _.uniq(skillIds);
+  const uniqSkillIds = [...new Set(skillIds)];
   const skills = await skillRepository.findByRecordIds(uniqSkillIds);
 
   const tubeIds = skills.map((skill) => skill.tubeId);
-  const uniqTubeIds = _.uniq(tubeIds);
+  const uniqTubeIds = [...new Set(tubeIds)];
   const tubes = await tubeRepository.findByRecordIds(uniqTubeIds, FRENCH_SPOKEN);
   tubes.forEach((tube) => {
     tube.skills = skills.filter((skill) => {
@@ -45,7 +43,7 @@ async function getFrameworkReferential({ challengeIds }) {
   });
 
   const allAreaIds = competences.map((competence) => competence.areaId);
-  const uniqAreaIds = _.uniq(allAreaIds);
+  const uniqAreaIds = [...new Set(allAreaIds)];
   const areas = await areaRepository.findByRecordIds({
     areaIds: uniqAreaIds,
     locale: FRENCH_SPOKEN,

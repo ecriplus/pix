@@ -63,7 +63,9 @@
                       "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -144,7 +146,9 @@
                       "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_ok.svg"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]
@@ -457,7 +461,9 @@
                       "content": "Eh oui Max, il en faut bien plus pour protéger efficacement les comptes de ses services en ligne !"
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             }
           ]

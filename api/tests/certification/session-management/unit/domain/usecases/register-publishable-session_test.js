@@ -1,6 +1,5 @@
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
-import { SessionFinalized } from '../../../../../../src/certification/session-management/domain/read-models/SessionFinalized.js';
 import { registerPublishableSession } from '../../../../../../src/certification/session-management/domain/usecases/register-publishable-session.js';
 import {
   CertificationIssueReportCategory,
@@ -23,10 +22,10 @@ describe('Unit | UseCase |  register-publishable-session', function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
-    const sessionFinalized = new SessionFinalized({
-      sessionId: 1234,
+    const session = domainBuilder.certification.sessionManagement.buildSession({
+      id: 1234,
       finalizedAt: new Date(),
-      hasExaminerGlobalComment: false,
+      examinerGlobalComment: null,
       certificationCenterName: 'A certification center name',
       sessionDate: '2021-01-29',
       sessionTime: '14:00',
@@ -55,25 +54,25 @@ describe('Unit | UseCase |  register-publishable-session', function () {
     const finalizedSessionFromSpy = sinon.spy(FinalizedSession, 'from');
 
     // when
-    await registerPublishableSession({ sessionFinalized, ...dependencies });
+    await registerPublishableSession({ session, ...dependencies });
 
     // then
     expect(finalizedSessionFromSpy).to.have.been.calledOnceWithExactly({
-      sessionId: sessionFinalized.sessionId,
-      finalizedAt: sessionFinalized.finalizedAt,
-      certificationCenterName: sessionFinalized.certificationCenterName,
-      sessionDate: sessionFinalized.sessionDate,
-      sessionTime: sessionFinalized.sessionTime,
+      sessionId: session.id,
+      finalizedAt: session.finalizedAt,
+      certificationCenterName: session.certificationCenterName,
+      sessionDate: session.date,
+      sessionTime: session.time,
       hasExaminerGlobalComment: false,
       juryCertificationSummaries: [juryCertificationSummary],
     });
     expect(finalizedSessionRepository.save).to.have.been.calledWithExactly({
       finalizedSession: new FinalizedSession({
-        sessionId: sessionFinalized.sessionId,
-        finalizedAt: sessionFinalized.finalizedAt,
-        certificationCenterName: sessionFinalized.certificationCenterName,
-        sessionDate: sessionFinalized.sessionDate,
-        sessionTime: sessionFinalized.sessionTime,
+        sessionId: session.id,
+        finalizedAt: session.finalizedAt,
+        certificationCenterName: session.certificationCenterName,
+        sessionDate: session.date,
+        sessionTime: session.time,
         isPublishable: true,
         publishedAt: null,
       }),

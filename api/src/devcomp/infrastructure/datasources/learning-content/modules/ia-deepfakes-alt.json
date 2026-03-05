@@ -625,7 +625,9 @@
                   ],
                   "highlightedSentence": "« Il s’agit d’un deepfake »",
                   "colorOfHighlightSentence": "#bb0101"
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {

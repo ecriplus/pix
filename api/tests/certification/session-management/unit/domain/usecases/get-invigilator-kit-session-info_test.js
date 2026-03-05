@@ -20,14 +20,14 @@ describe('Unit | UseCase | get-invigilator-kit-info', function () {
         accessCode: '1B3DE6',
       });
       sessionForInvigilatorKitRepository.get.withArgs({ id: sessionId }).resolves(sessionForInvigilatorKit);
-      const sessionRepository = { doesUserHaveCertificationCenterMembershipForSession: sinon.stub() };
-      sessionRepository.doesUserHaveCertificationCenterMembershipForSession.resolves(true);
+      const sessionManagementRepository = { doesUserHaveCertificationCenterMembershipForSession: sinon.stub() };
+      sessionManagementRepository.doesUserHaveCertificationCenterMembershipForSession.resolves(true);
 
       // when
       const result = await getInvigilatorKitSessionInfo({
         userId,
         sessionId,
-        sessionRepository,
+        sessionManagementRepository,
         sessionForInvigilatorKitRepository,
       });
 

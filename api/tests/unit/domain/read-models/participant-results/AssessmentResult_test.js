@@ -122,7 +122,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
               knowledgeElements,
               acquiredBadgeIds: [],
               sharedAt: null,
-              status: CampaignParticipationStatuses.TO_SHARE,
+              status: CampaignParticipationStatuses.STARTED,
             };
 
             const assessmentResult = new AssessmentResult({
@@ -159,7 +159,7 @@ describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', f
               knowledgeElements,
               acquiredBadgeIds: [],
               sharedAt: null,
-              status: CampaignParticipationStatuses.TO_SHARE,
+              status: CampaignParticipationStatuses.STARTED,
             };
 
             const assessmentResult = new AssessmentResult({

@@ -1,170 +1,112 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
-import { CertificationAssessment } from '../../domain/models/CertificationAssessment.js';
-import { SessionManagement } from '../../domain/models/SessionManagement.js';
+import { batchUpdate } from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
+import { Session } from '../../domain/models/Session.js';
 
-const get = async function ({ id }) {
+export async function get({ id }) {
   const knexConn = DomainTransaction.getConnection();
-  const foundSession = await knexConn
-    .select(
-      'id',
-      'accessCode',
-      'address',
-      'certificationCenter',
-      'date',
-      'description',
-      'examiner',
-      'room',
-      'time',
-      'examinerGlobalComment',
-      'hasIncident',
-      'hasJoiningIssue',
-      'finalizedAt',
-      'resultsSentToPrescriberAt',
-      'publishedAt',
-      'certificationCenterId',
-      'assignedCertificationOfficerId',
-      'createdBy',
-    )
-    .from('sessions')
-    .where({ id })
-    .first();
-  if (!foundSession) {
-    throw new NotFoundError("La session n'existe pas ou son accès est restreint");
-  }
-  return new SessionManagement({ ...foundSession });
-};
 
-const isFinalized = async function ({ id }) {
-  const knexConn = DomainTransaction.getConnection();
-  const session = await knexConn.select('id').from('sessions').where({ id }).whereNotNull('finalizedAt').first();
-  return Boolean(session);
-};
-
-const isPublished = async function ({ id }) {
-  const knexConn = DomainTransaction.getConnection();
-  const isPublished = await knexConn.select(1).from('sessions').where({ id }).whereNotNull('publishedAt').first();
-  return Boolean(isPublished);
-};
-
-const doesUserHaveCertificationCenterMembershipForSession = async function ({ userId, sessionId }) {
-  const knexConn = DomainTransaction.getConnection();
-  const sessions = await knexConn
-    .select('sessions.id')
-    .from('sessions')
-    .where({
-      'sessions.id': sessionId,
-      'certification-center-memberships.userId': userId,
-      'certification-center-memberships.disabledAt': null,
+  const sessionData = await knexConn
+    .select({
+      id: 'sessions.id',
+      finalizedAt: 'sessions.finalizedAt',
+      examinerGlobalComment: 'sessions.examinerGlobalComment',
+      hasIncident: 'sessions.hasIncident',
+      hasJoiningIssue: 'sessions.hasJoiningIssue',
+      certificationCenterName: 'sessions.certificationCenter',
+      date: 'sessions.date',
+      time: 'sessions.time',
+      certificationCourseId: 'certification-courses.id',
+      certificationCourseVersion: 'certification-courses.version',
+      certificationCourseUpdatedAt: 'certification-courses.updatedAt',
+      certificationCourseEndedAt: 'certification-courses.endedAt',
+      certificationCourseCompletedAt: 'certification-courses.completedAt',
+      certificationCourseAbortReason: 'certification-courses.abortReason',
+      certificationCourseAssessmentId: 'assessments.id',
+      certificationCourseAssessmentState: 'assessments.state',
+      certificationCourseAssessmentUpdatedAt: 'assessments.updatedAt',
     })
-    .innerJoin('certification-centers', 'certification-centers.id', 'sessions.certificationCenterId')
-    .innerJoin(
-      'certification-center-memberships',
-      'certification-center-memberships.certificationCenterId',
-      'certification-centers.id',
-    );
-  return Boolean(sessions.length);
-};
-
-const finalize = async function ({ id, examinerGlobalComment, hasIncident, hasJoiningIssue }) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const [finalizedSession] = await knexConn('sessions')
-    .where({ id })
-    .update({
-      examinerGlobalComment,
-      hasIncident,
-      hasJoiningIssue,
-      finalizedAt: knexConn.fn.now(),
-    })
-    .returning('*');
-
-  return new SessionManagement(finalizedSession);
-};
-
-const unfinalize = async function ({ id }) {
-  const knexConn = DomainTransaction.getConnection();
-  const updates = await knexConn('sessions')
-    .where({ id })
-    .update({ finalizedAt: null, assignedCertificationOfficerId: null });
-  if (updates === 0) {
-    throw new NotFoundError("La session n'existe pas ou son accès est restreint");
-  }
-};
-
-const flagResultsAsSentToPrescriber = async function ({ id, resultsSentToPrescriberAt }) {
-  const knexConn = DomainTransaction.getConnection();
-  const [flaggedSession] = await knexConn('sessions')
-    .where({ id })
-    .update({ resultsSentToPrescriberAt })
-    .returning('*');
-  return new SessionManagement(flaggedSession);
-};
-
-const updatePublishedAt = async function ({ id, publishedAt }) {
-  const knexConn = DomainTransaction.getConnection();
-  const [publishedSession] = await knexConn('sessions').where({ id }).update({ publishedAt }).returning('*');
-  return new SessionManagement(publishedSession);
-};
-
-const hasSomeCleaAcquired = async function ({ id }) {
-  const knexConn = DomainTransaction.getConnection();
-  const result = await knexConn
-    .select(1)
     .from('sessions')
-    .innerJoin('certification-courses', 'certification-courses.sessionId', 'sessions.id')
-    .innerJoin(
-      'complementary-certification-courses',
-      'complementary-certification-courses.certificationCourseId',
-      'certification-courses.id',
-    )
-    .innerJoin(
-      'complementary-certifications',
-      'complementary-certifications.id',
-      'complementary-certification-courses.complementaryCertificationId',
-    )
-    .innerJoin(
-      'complementary-certification-course-results',
-      'complementary-certification-course-results.complementaryCertificationCourseId',
-      'complementary-certification-courses.id',
-    )
+    .leftJoin('certification-courses', 'certification-courses.sessionId', 'sessions.id')
+    .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
     .where('sessions.id', id)
-    .whereNotNull('sessions.publishedAt')
-    .where('complementary-certification-course-results.acquired', true)
-    .where('complementary-certifications.key', ComplementaryCertificationKeys.CLEA)
-    .first();
-  return Boolean(result);
-};
+    .orderBy('certification-courses.id');
 
-const hasNoStartedCertification = async function ({ id }) {
+  if (sessionData.length === 0) {
+    return null;
+  }
+
+  const certificationCourses = [];
+  for (const certificationCourseData of sessionData) {
+    if (certificationCourseData.certificationCourseId) {
+      const certificationCourse = new CertificationCourse({
+        id: certificationCourseData.certificationCourseId,
+        version: certificationCourseData.certificationCourseVersion,
+        updatedAt: certificationCourseData.certificationCourseUpdatedAt,
+        endedAt: certificationCourseData.certificationCourseEndedAt,
+        completedAt: certificationCourseData.certificationCourseCompletedAt,
+        abortReason: certificationCourseData.certificationCourseAbortReason,
+        assessmentId: certificationCourseData.certificationCourseAssessmentId,
+        assessmentState: certificationCourseData.certificationCourseAssessmentState,
+        assessmentLatestActivityAt: certificationCourseData.certificationCourseAssessmentUpdatedAt,
+      });
+      certificationCourses.push(certificationCourse);
+    }
+  }
+
+  return new Session({
+    ...sessionData[0],
+    certificationCourses,
+  });
+}
+
+export async function save({ session }) {
   const knexConn = DomainTransaction.getConnection();
-  const result = await knexConn.select(1).from('certification-courses').where('sessionId', id).first();
-  return !result;
-};
 
-const countUncompletedCertificationsAssessment = async function ({ id }) {
+  const sessionDataToUpdate = {
+    examinerGlobalComment: session.examinerGlobalComment,
+    hasIncident: session.hasIncident,
+    hasJoiningIssue: session.hasJoiningIssue,
+    finalizedAt: session.finalizedAt,
+  };
+  await knexConn('sessions').update(sessionDataToUpdate).where({ id: session.id });
+
+  const certificationCoursesDataToUpdate = session.certificationCourses.map((certificationCourse) => ({
+    id: certificationCourse.id,
+    updatedAt: certificationCourse.updatedAt,
+    endedAt: certificationCourse.endedAt,
+    abortReason: certificationCourse.abortReason,
+  }));
+  await batchUpdate({
+    tableName: 'certification-courses',
+    primaryKeyName: 'id',
+    rows: certificationCoursesDataToUpdate,
+  });
+
+  const assessmentsDataToUpdate = session.certificationCourses.map((certificationCourse) => ({
+    id: certificationCourse.assessmentId,
+    state: certificationCourse.assessmentState,
+  }));
+  await batchUpdate({
+    tableName: 'assessments',
+    primaryKeyName: 'id',
+    rows: assessmentsDataToUpdate,
+  });
+}
+
+export async function saveCertification({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
-  const { count } = await knexConn
-    .count('certification-courses.id')
-    .from('certification-courses')
-    .join('assessments', 'certification-courses.id', 'certificationCourseId')
-    .whereIn('state', CertificationAssessment.uncompletedAssessmentStates)
-    .andWhere({ sessionId: id })
-    .first();
-  return count;
-};
+  await knexConn('certification-courses')
+    .update({
+      updatedAt: certificationCourse.updatedAt,
+      endedAt: certificationCourse.endedAt,
+      abortReason: certificationCourse.abortReason,
+    })
+    .where({ id: certificationCourse.id });
 
-export {
-  countUncompletedCertificationsAssessment,
-  doesUserHaveCertificationCenterMembershipForSession,
-  finalize,
-  flagResultsAsSentToPrescriber,
-  get,
-  hasNoStartedCertification,
-  hasSomeCleaAcquired,
-  isFinalized,
-  isPublished,
-  unfinalize,
-  updatePublishedAt,
-};
+  await knexConn('assessments')
+    .update({
+      state: certificationCourse.assessmentState,
+    })
+    .where({ id: certificationCourse.assessmentId });
+}

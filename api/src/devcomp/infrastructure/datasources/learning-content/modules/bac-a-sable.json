@@ -1143,7 +1143,9 @@
                       "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
-                }
+                },
+                "title": "",
+                "functionalInstruction": ""
               }
             },
             {
@@ -1182,8 +1184,10 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae38",
                 "type": "custom",
-                "instruction": "",
                 "tagName": "image-quiz",
+                "title": "✨ Images Quiz ✨",
+                "instruction": "Sélectionner l'image qui possède un dossier jaune.",
+                "functionalInstruction": "Cliquer sur l'image qui répond à la consigne.",
                 "props": {
                   "name": "Liste d'applications",
                   "maxChoicesPerLine": 3,

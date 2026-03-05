@@ -338,7 +338,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
             databaseBuilder.factory.buildCampaignParticipation({
               organizationLearnerId,
               campaignId: profileCollectionCampaign.id,
-              status: 'TO_SHARE',
+              status: 'STARTED',
               isCertifiable: true,
               sharedAt: null,
             });

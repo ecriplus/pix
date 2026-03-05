@@ -1,8 +1,6 @@
 /**
  * @typedef {import ('./Subscription.js').Subscription} Subscription
  */
-import _ from 'lodash';
-
 import { CertificationCandidatesError } from '../../../../shared/domain/errors.js';
 import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { validate } from '../validators/candidate-validator.js';
@@ -52,7 +50,7 @@ export class Candidate {
     this.resultRecipientEmail = resultRecipientEmail;
     this.externalId = externalId;
     this.birthdate = birthdate;
-    this.extraTimePercentage = !_.isNil(extraTimePercentage) ? parseFloat(extraTimePercentage) : null;
+    this.extraTimePercentage = extraTimePercentage != null ? parseFloat(extraTimePercentage) : null;
     this.createdAt = createdAt;
     this.authorizedToStart = authorizedToStart;
     this.sessionId = sessionId;

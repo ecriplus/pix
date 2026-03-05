@@ -5,7 +5,7 @@ import {
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
-const { STARTED, TO_SHARE, SHARED } = CampaignParticipationStatuses;
+const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Participations Stats', function () {
   describe('#getParticipationsActivityByDate', function () {
@@ -326,7 +326,7 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
       it("should not count any participation regardless of it's status when participation is deleted ", async function () {
         databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: SHARED, deletedAt: '2022-03-17' });
-        databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE, deletedAt: '2022-03-17' });
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED, deletedAt: '2022-03-17' });
         databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED, deletedAt: '2022-03-17' });
         await databaseBuilder.commit();
 
@@ -365,12 +365,12 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
         });
       });
 
-      describe('Count toShare and started Participation', function () {
-        it('counts toShare and started participations', async function () {
-          databaseBuilder.factory.buildCampaignParticipation({ status: TO_SHARE });
+      describe('Count started Participation', function () {
+        it('counts started participations', async function () {
+          databaseBuilder.factory.buildCampaignParticipation({ status: STARTED });
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId,
-            status: TO_SHARE,
+            status: STARTED,
           });
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId,
@@ -390,7 +390,7 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
         it('counts the last participations completed by user', async function () {
           databaseBuilder.factory.buildCampaignParticipation({
             campaignId,
-            status: TO_SHARE,
+            status: STARTED,
             isImproved: true,
           });
           databaseBuilder.factory.buildCampaignParticipation({
@@ -434,7 +434,7 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
       it("should not count any participation regardless of it's status when participation is deleted ", async function () {
         databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: SHARED, deletedAt: '2022-03-17' });
-        databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE, deletedAt: '2022-03-17' });
+        databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED, deletedAt: '2022-03-17' });
         await databaseBuilder.commit();
 
         const result = await campaignParticipationsStatsRepository.countParticipationsByStatus(
@@ -474,8 +474,8 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
 
       describe('Count completed Participation', function () {
         it('counts participations completed', async function () {
-          databaseBuilder.factory.buildCampaignParticipation({ status: TO_SHARE });
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE });
+          databaseBuilder.factory.buildCampaignParticipation({ status: STARTED });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED });
           await databaseBuilder.commit();
 
           const result = await campaignParticipationsStatsRepository.countParticipationsByStatus(
@@ -487,8 +487,8 @@ describe('Integration | Repository | Campaign Participations Stats', function ()
         });
 
         it('counts the last participation completed by user', async function () {
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE, isImproved: true });
-          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: TO_SHARE });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED, isImproved: true });
+          databaseBuilder.factory.buildCampaignParticipation({ campaignId, status: STARTED });
           await databaseBuilder.commit();
 
           const result = await campaignParticipationsStatsRepository.countParticipationsByStatus(
