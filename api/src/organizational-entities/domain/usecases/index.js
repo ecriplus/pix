@@ -14,6 +14,7 @@ import * as certificationCenterForAdminRepository from '../../infrastructure/rep
 import * as complementaryCertificationHabilitationRepository from '../../infrastructure/repositories/complementary-certification-habilitation.repository.js';
 import * as dataProtectionOfficerRepository from '../../infrastructure/repositories/data-protection-officer.repository.js';
 import { repositories as organizationalEntitiesRepositories } from '../../infrastructure/repositories/index.js';
+import * as networkRepository from '../../infrastructure/repositories/network.repository.js';
 import * as organizationFeatureRepository from '../../infrastructure/repositories/organization-feature-repository.js';
 import * as organizationLearnerRepository from '../../infrastructure/repositories/organization-learner.repository.js';
 import * as organizationLearnerTypeRepository from '../../infrastructure/repositories/organization-learner-type-repository.js';
@@ -40,8 +41,8 @@ import * as organizationValidator from '../validators/organization-with-tags-and
  * @typedef {import ('../../infrastructure/repositories/organization-learner-type-repository.js')} OrganizationLearnerTypeRepository
  * @typedef {import ('../../infrastructure/repositories/organization-for-admin.repository.js')} OrganizationForAdminRepository
  * @typedef {import ('../../infrastructure/repositories/tag.repository.js')} TagRepository
+ * @typedef {import ('../../infrastructure/repositories/network.repository.js')} NetworkRepository
  * @typedef {import ('../../infrastructure/repositories/target-profile-share-repository.js')} TargetProfileShareRepository
- * @typedef {import ('../../infrastructure/repositories/pix-team-repository.js')} PixTeamRepository
  * @typedef {import ('../../../shared/infrastructure/repositories/organization-repository.js')} OrganizationRepository
  * @typedef {import ('../../../school/infrastructure/repositories/school-repository.js')} SchoolRepository
  * @typedef {import ('../validators/organization-creation-validator.js')} OrganizationCreationValidator
@@ -63,6 +64,7 @@ const dependenciesToInject = {
   dataProtectionOfficerRepository,
   certificationCenterApiRepository,
   complementaryCertificationHabilitationRepository,
+  networkRepository,
   organizationForAdminRepository: organizationalEntitiesRepositories.organizationForAdminRepository,
   organizationFeatureRepository,
   organizationLearnerRepository,
@@ -87,6 +89,7 @@ import { archiveOrganization } from './archive-organization.usecase.js';
 import { archiveOrganizationsInBatch } from './archive-organizations-in-batch.usecase.js';
 import { attachChildOrganizationToOrganization } from './attach-child-organization-to-organization.js';
 import { createCertificationCenter } from './create-certification-center.usecase.js';
+import { createNetwork } from './create-network.usecase.js';
 import { createOrganization } from './create-organization.js';
 import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizations-with-tags-and-target-profiles.usecase.js';
 import { createTag } from './create-tag.js';
@@ -117,6 +120,7 @@ const usecasesWithoutInjectedDependencies = {
   archiveOrganizationsInBatch,
   attachChildOrganizationToOrganization,
   createCertificationCenter,
+  createNetwork,
   createOrganization,
   createOrganizationsWithTagsAndTargetProfiles,
   createTag,

@@ -1,6 +1,7 @@
 import { organizationalEntitiesDomainErrorMappingConfiguration } from '../../../../src/organizational-entities/application/http-error-mapper-configuration.js';
 import {
   CountryNotFoundError,
+  NetworkAlreadyExistError,
   TagNotFoundError,
   UnableToDetachParentOrganizationFromChildOrganization,
 } from '../../../../src/organizational-entities/domain/errors.js';
@@ -90,6 +91,25 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
       // then
       expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
       expect(error.message).to.equal('Organization learner type does not exist');
+      expect(error.meta).to.equal(meta);
+    });
+  });
+
+  context('when mapping "NetworkAlreadyExistError"', function () {
+    it('should return a ConflictError Http Error', function () {
+      // given
+      const httpErrorMapper = organizationalEntitiesDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === NetworkAlreadyExistError.name,
+      );
+
+      const meta = { organizationLearnerTypeId: 123 };
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new NetworkAlreadyExistError({ meta }));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.ConflictError);
+      expect(error.message).to.equal('Network already exists');
       expect(error.meta).to.equal(meta);
     });
   });

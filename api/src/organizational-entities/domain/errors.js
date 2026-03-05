@@ -122,6 +122,14 @@ class UnableToDetachParentOrganizationFromChildOrganization extends DomainError 
   }
 }
 
+class NetworkAlreadyExistError extends DomainError {
+  constructor({ code = 'NETWORK_ALREADY_EXISTS', message = 'Network already exists', meta } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 export {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
@@ -131,6 +139,7 @@ export {
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
+  NetworkAlreadyExistError,
   OrganizationBatchUpdateError,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,

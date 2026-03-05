@@ -8,6 +8,7 @@ import {
   DpoEmailInvalid,
   FeatureNotFound,
   FeatureParamsNotProcessable,
+  NetworkAlreadyExistError,
   OrganizationBatchUpdateError,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
@@ -64,6 +65,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   {
     name: AdministrationTeamNotFound.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
+  },
+  {
+    name: NetworkAlreadyExistError.name,
+    httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
   },
   {
     name: CountryNotFoundError.name,

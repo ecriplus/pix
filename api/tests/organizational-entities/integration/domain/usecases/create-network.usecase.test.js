@@ -1,0 +1,49 @@
+import { knex } from '../../../../../db/knex-database-connection.js';
+import { NetworkAlreadyExistError } from '../../../../../src/organizational-entities/domain/errors.js';
+import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+
+describe('Integration | Organizational Entities | Domain | UseCase | create-network', function () {
+  describe('when the organization does not belong to a network', function () {
+    it('creates a new network', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      await databaseBuilder.commit();
+
+      // when
+      await usecases.createNetwork({
+        organizationId,
+        networkName: 'Random Network Name',
+      });
+
+      // then
+      const createdNetwork = await knex('networks').first();
+      expect(createdNetwork.name).to.equal('Random Network Name');
+    });
+  });
+
+  describe('when the organization already belongs to a network', function () {
+    it('throws an error', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const network = databaseBuilder.factory.buildNetwork();
+      const structureId = databaseBuilder.factory.buildStructure().id;
+      databaseBuilder.factory.buildFactStructure({
+        structureId,
+        networkId: network.id,
+        organizationId,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const error = await catchErr(usecases.createNetwork)({
+        organizationId,
+        networkName: 'Random Network Name',
+      });
+
+      // then
+      expect(error).to.deepEqualInstance(new NetworkAlreadyExistError());
+    });
+  });
+});
