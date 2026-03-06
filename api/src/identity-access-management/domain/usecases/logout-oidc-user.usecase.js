@@ -14,17 +14,19 @@ async function logoutOidcUser({
   requestedApplication,
   logoutUrlUUID,
   oidcAuthenticationServiceRegistry,
-  revokedUserAccessRepository,
-  refreshTokenRepository,
 }) {
   // Revoke user AccessToken
-  await revokedUserAccessRepository.saveForUser({
+  //temporarily pause revoke user access token to fix SSO bugs
+  /*await revokedUserAccessRepository.saveForUser({
     userId,
     revokeUntil: new Date(),
-  });
+  });*/
 
   // Revoke user RefreshToken
+  //temporarily pause revoke user refresh token to fix SSO bugs
+  /*
   await refreshTokenRepository.revokeAllByUserId({ userId });
+*/
 
   const oidcAuthenticationService = await oidcAuthenticationServiceRegistry.getOidcProviderServiceByCode({
     identityProviderCode: identityProvider,
