@@ -25,10 +25,10 @@ describe('Integration | Serializers | siecle-parser', function () {
 
       const siecleFileStreamer = await SiecleFileStreamer.create(readableStream, encoding);
       const parser = SiecleParser.create(siecleFileStreamer);
-      const call = () => parser.parseUAJ('123ABC');
 
-      //then
-      expect(call).to.not.throw();
+      const result = parser.parseUAJ('123ABC');
+
+      await expect(result).to.be.fulfilled;
     });
 
     describe('error cases', function () {
