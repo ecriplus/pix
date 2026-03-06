@@ -1,0 +1,1230 @@
+{
+  "id": "46fb1427-a140-4480-8660-10961f44d4d6",
+  "shortId": "da72e67b",
+  "slug": "echanger-mail-plusieurs",
+  "title": "Échanger par mail avec plusieurs interlocuteurs",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Dans un échange par courrier électronique (mail), plusieurs personnes peuvent être concernées&nbsp;: des collègues, des proches, des administrations, etc.</p><p>Dans ce module, vous allez apprendre à répondre à un mail, transmettre et trouver une information dans un échange par mail, selon le contexte et les personnes impliquées.</p>",
+    "duration": 10,
+    "level": "independent",
+    "objectives": [
+      "<p>Transférer un mail à quelqu’un d’autre</p>",
+      "<p>Répondre à un mail avec plusieurs destinataires</p>",
+      "<p>Se repérer dans un fil de discussion de mails</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "b3c19104-2913-4325-8240-7255f50d9d59",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "1944fce9-c536-4435-b1a2-11ab54f8ab34",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7c675fd0-0530-451a-88e9-9605cea958bf",
+                "type": "text",
+                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il doit refuser l’invitation.</p><p><strong>Dans la messagerie électronique&nbsp;ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><blockquote><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></blockquote>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
+                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><blockquote><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></blockquote><blockquote><em>Bonjour Gabriel,</em></blockquote><blockquote><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></blockquote><blockquote><em>À bientôt,</em></blockquote><blockquote><em>Alma, chargée d’organisation des Conférences Climax</em></blockquote><br><p><strong>Actions attendues</strong>&nbsp;: Ouvrir le mail d'Alma &gt;&nbsp;Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; Cliquer sur “Envoyer”</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "56f56984-7711-4a3a-bf34-8dd3b44e556c",
+                "type": "text",
+                "content": "<p><strong>[Feedback autovalid]</strong></p><p>Bien joué ! Le mail a été envoyé à Alma. Pour répondre à un mail, il faut cliquer sur «&nbsp;Répondre&nbsp;». Le destinataire et l’objet du mail sont déjà remplis. Il vous reste à écrire votre message puis cliquer sur «&nbsp;Envoyer&nbsp;».</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "99b0e241-c3d7-4eda-9b89-b608770680d5",
+          "type": "transition",
+          "title": "Transition Accroche > Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "be863ac5-151e-482e-bd83-1ae4b1535b82",
+                "type": "text",
+                "content": "<p>Quand vous répondez à un mail, les échanges ne disparaissent pas. 📧<br>Voyons ensemble comment ils s’organisent.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27b3d345-6aad-4b0f-8e12-f275ff4c1449",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "3f062a90-1902-49e4-b396-35f57891cb2e",
+          "type": "discovery",
+          "title": "Découverte 1 : Structure du fil de discussion",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a44cacb3-d805-4f1f-8da9-8536bdc85ae8",
+                "type": "text",
+                "content": "<p>Depuis l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez aux questions qui suivent.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "402d3db7-2e25-4a7b-a1fd-8dcd04a4b4a8",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail : mail ouvert avec le fil de discussion visible contenant 3-4 échanges]",
+                "content": "<p>Message Gabriel&nbsp;: Accepté pour un choix de date et a invité Mathis – 27 avril 09:23</p><p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations. </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 20:06</p><p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p><p>Alma, chargée d’organisation des Conférences Climax</p><hr><p> Message Gabriel&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 16:32</p><p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: Invitation - Conférence Climax – 25 avril 15:00</p><p>Bonjour Gabriel, La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p><p>À bientôt,<br></p><p>Alma, chargée d’organisation des Conférences Climax</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "c375f801-02a0-4717-ba6a-7038cfccecc6",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Lorsque Gabriel répond au mail d’Alma, que devient le mail d’Alma ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Il est remplacé par le mail de Gabriel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Il reste visible sous le mail de Gabriel.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;! Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Il est déplacé dans un autre dossier.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.<br></p>      ",
+                          "feedback": {
+                            "diagnosis": "<p>Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p> "
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5f3f1dd6-166e-4534-a06d-a2d50622379c",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Dans cet échange, comment s’affichent les mails échangés entre Alma et Gabriel ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Les réponses successives sont visibles sous le dernier mail.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;! Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Les réponses apparaissent dans un ordre aléatoire.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Seule la dernière réponse est affichée.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Je ne sais pas.</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Dans un échange de mails, <strong>un fil de discussion</strong> se construit de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "f2633e5f-c4bf-4fa3-a6e7-3b3ac6cafe25",
+          "type": "short-lesson",
+          "title": "Leçon 1 : Fil de discussion",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5dfb5863-4641-406e-ba7e-145cddd8ff20",
+                "type": "text",
+                "content": "<p>Sous le dernier mail, se trouve <strong>l’historique des échanges</strong> de mails sur ce sujet. Cela permet de conserver le contexte de l’échange.&nbsp;📧</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7c2f4e3b-7198-453f-9462-d28b6e79cf45",
+                "type": "text",
+                "content": "<p><strong>🤔 Bon à savoir</strong></p><p>En général, il est préférable de ne pas changer de sujet au cours du fil de discussion, pour respecter l’objet du mail.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "56ce02e1-acba-4eb8-9d39-5aba9a3e016f",
+          "type": "transition",
+          "title": "Transition Découverte 1 > Découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "59325b69-d108-4d69-adf1-d65925b162b3",
+                "type": "text",
+                "content": "<p>Parfois, le contenu d’un mail peut intéresser des personnes qui ne l’ont pas reçu. 👥<br>Découvrez comment transférer un mail.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d74b0420-4649-43c2-beca-a10187882ab6",
+          "type": "discovery",
+          "title": "Découverte 2 : Savoir transférer un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9124beb6-ecd2-444a-9757-c880b545bc6c",
+                "type": "text",
+                "content": "<p>L’option «&nbsp;Transférer&nbsp;» permet de faire suivre un mail à un nouveau destinataire sans avoir à copier ou recopier son contenu.</p><p><strong>Explorez la messagerie électronique ci-dessous pour répondre aux questions qui suivent.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ebe2a5f6-df6f-46f2-a276-134869511b42",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail avec 4 mails non-lus ou capture d’écran ou web component]",
+                "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Mia (mamma.mia@pixmail.org) - Grande nouvelle -&nbsp;Coucou, je te mets dans la confidence, mais ça y est on attend un bébé ! 👶</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d99a08d9-f203-4019-a929-643ff970bb73",
+                      "type": "qrocm",
+                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Le mail de «&nbsp;Scène Nationale&nbsp;» est un mail</p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "input1",
+                          "display": "inline",
+                          "placeholder": "Sélectionner une option",
+                          "ariaLabel": "Sélectionner une option",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "0",
+                              "content": "à transférer à Phil."
+                            },
+                            {
+                              "id": "1",
+                              "content": "à ne pas transférer."
+                            },
+                            {
+                              "id": "2",
+                              "content": "qui a été transféré."
+                            }
+                          ],
+                          "solutions": [
+                            "0"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Eh oui.</p>",
+                          "diagnosis": "<p>Ce mail contient des informations qui peuvent intéresser Phil.<br>Quand un mail reçu contient une information utile pour une autre personne, il peut être utile de le <strong>transférer</strong>.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non.</p>",
+                          "diagnosis": "<p>Ce mail contient des informations qui peuvent intéresser Phil.<br>Quand un mail reçu contient une information utile pour une autre personne, il peut être utile de le <strong>transférer</strong>.</p>"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "12a11ea7-6dfb-4b12-8238-fbbff8f8ab34",
+                      "type": "qrocm",
+                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Le mail de «&nbsp;Mia&nbsp;» est un mail</p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "input1",
+                          "display": "inline",
+                          "placeholder": "Sélectionner une option",
+                          "ariaLabel": "Sélectionner une option",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "0",
+                              "content": "à transférer à Phil."
+                            },
+                            {
+                              "id": "1",
+                              "content": "à ne pas transférer."
+                            },
+                            {
+                              "id": "2",
+                              "content": "qui a été transféré."
+                            }
+                          ],
+                          "solutions": [
+                            "1"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Eh oui.</p>",
+                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non.<br></p>",
+                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7fd0f24e-31b9-4870-b270-baac904f6fb6",
+                      "type": "qrocm",
+                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Le mail de «&nbsp;Rajesh&nbsp;» est un mail</p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "input1",
+                          "display": "inline",
+                          "placeholder": "Sélectionner une option",
+                          "ariaLabel": "Sélectionner une option",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "0",
+                              "content": "à transférer à Phil."
+                            },
+                            {
+                              "id": "1",
+                              "content": "à ne pas transférer."
+                            },
+                            {
+                              "id": "2",
+                              "content": "qui a été transféré."
+                            }
+                          ],
+                          "solutions": [
+                            "2"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Eh oui.</p>",
+                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais <em>forward</em>).</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non.<br></p>",
+                          "diagnosis": "<p>Ce mail a été transféré par Rajesh.<br> On reconnaît un <strong>mail transféré</strong>, car son objet est automatiquement précédé de «&nbsp;TR:&nbsp;» (pour transférer) ou «&nbsp;FWD:&nbsp;» (de l’anglais <em>forward</em>).</p>"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9c1aa00d-bdb2-4856-9fb6-cb61b7c58d88",
+          "type": "short-lesson",
+          "title": "Leçon 2 : Transférer un mail",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "de1c2d77-00da-4eeb-bde2-c3671a5fe4ae",
+                "type": "text",
+                "content": "<p>Quand vous <strong>transférez un mail</strong>, il est recommandé d’ajouter une <strong>explication</strong> au-dessus du mail pour indiquer la raison de cet envoi.</p><p><br></p><h5>Que voit le destinataire quand il reçoit un mail transféré ? </h5><p>[Schéma ? illustration ? infographie ?] </p><ul><li>D’abord l’explication ou le message que vous avez écrit pour accompagner le transfert.</li><li>Ensuite, se trouvent les informations du mail d’origine&nbsp;: son expéditeur, la date, son objet et ses destinataires d’origine.</li><li>Puis, votre destinataire voit le contenu du mail d’origine.<br></li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "5204bb21-d290-4a5c-987c-81d0fdeb3425",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/21_RepondreMail_IND/brouillon-schema-mail-transfere.jpg",
+                "alt": "Affichage d'un mail transféré",
+                "alternativeText": "<ul>\n    <li>D’abord l’explication ou le message que vous avez écrit pour accompagner le transfert.</li>\n    <li>Ensuite, se trouvent les informations du mail d’origine&nbsp;: son expéditeur, la date, son objet et ses destinataires d’origine.</li>\n    <li>Puis, votre destinataire voit le contenu du mail d’origine.<br></li>\n</ul>",
+                "legend": "",
+                "licence": ""
+              }
+            },            
+            {
+              "type": "element",
+              "element": {
+                "id": "d8e5c97c-71cb-4436-94fc-468e0833cac8",
+                "type": "text",
+                "content": "<p><strong>🤔 Bon à savoir</strong></p><p>Quand vous transférez un mail contenant tout un fil de discussion, cela transfère <strong>tout le fil de discussion</strong> à votre destinataire.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "813b2ad4-7125-43b1-ba2f-76d2eb373f20",
+          "type": "transition",
+          "title": "Transition Découverte 2 > Découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f3c50c6a-5f61-4123-8d6c-10cc25bfd282",
+                "type": "text",
+                "content": "<p>Un mail peut être envoyé à plusieurs destinataires en même temps. 📨<br>Découvrons ensemble comment répondre à ce type de mail.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e037d7d1-3674-4399-b147-5e4b718b64a9",
+          "type": "discovery",
+          "title": "Découverte 3 : Répondre/Répondre à tous",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b1a74a86-03da-4958-8ba9-b0c50adafcc5",
+                "type": "text",
+                "content": "<p>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser :</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "a9efc0f8-7b14-4b61-a19d-c72feaae7054",
+                      "type": "text",
+                      "content": "<p>Laura a reçu un mail de son professeur de judo rappelant la date et l’horaire du prochain cours. Ce mail a été envoyé à toutes les personnes inscrites au cours.</p>"
+                    },
+                    {
+                      "id": "bc78ac57-0cb2-4f79-98c2-8f4cc7f0661c",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Laura ne pourra pas venir ce jour-là. Que doit-elle faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;! C’est une information importante pour son professeur mais <strong>pas pour les autres destinataires</strong>. Il est préférable d’utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;».</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. C’est une information importante pour son professeur mais <strong>pas pour les autres destinataires</strong>. Il est préférable d’utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;».</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "aad94652-c9ee-43b9-b544-402db63e2ad2",
+                      "type": "text",
+                      "content": "<p>La fille de Manon est inscrite dans un club de foot. L’entraîneur envoie un mail aux parents pour organiser le tournoi de samedi&nbsp;: il a besoin de trois volontaires qui ont des voitures.</p>"
+                    },
+                    {
+                      "id": "00d2a236-673d-4dc4-9aa2-5da184d6deca",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Manon est disponible pour transporter les enfants dans sa voiture. Que doit-elle faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;! Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "fe1a58ee-83de-439e-a432-f314efe7946c",
+                      "type": "text",
+                      "content": "<p>Dorothea a reçu un mail de Gwendal, le responsable des ressources humaines de son entreprise. Celui-ci demande d’envoyer un justificatif de domicile. Ce mail a été envoyé à tous les employés.</p>"
+                    },
+                    {
+                      "id": "7e9a347f-4d0a-4963-9787-423ab6f60442",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Dorothea veut envoyer son justificatif de domicile à Gwendal. Que doit-elle faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;! L’information demandée est <strong>personnelle et confidentielle</strong>. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. L’information demandée est <strong>personnelle et confidentielle</strong>. Les collègues de Dorothea n’ont pas besoin de voir son document. Dorothea doit utiliser l’option «&nbsp;<strong>Répondre</strong>&nbsp;» afin que sa réponse parvienne uniquement au responsable RH.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "29f3866a-7ce7-4d37-9106-c0098dfb8241",
+          "type": "short-lesson",
+          "title": "Leçon 3 : Répondre/Répondre à tous",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "78d47f5a-1526-4f75-ac35-8246cf4187b7",
+                "type": "text",
+                "content": "<p>Quand vous répondez à un mail qui comporte <strong>plusieurs destinataires</strong>, deux options sont possibles&nbsp;:</p>\n<ul>\n    <li><strong>répondre </strong>(seulement à l’expéditeur),</li>\n    <li><strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires).</li>\n</ul>\n<p>Il est recommandé de choisir «&nbsp;Répondre à tous&nbsp;» uniquement si la réponse est utile pour tout le monde. <br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b7697e58-20ec-42b9-820d-eed068bc4024",
+                "type": "text",
+                "content": "<p><strong>🤔 Bon à savoir</strong></p><p>Certains mails d’information n’attendent pas de réponse (suivi de colis, newsletter, promotion, etc.).<br>Parfois, l’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient «&nbsp;no-reply&nbsp;» ou «&nbsp;ne-pas-répondre&nbsp;».</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a9b7b51f-7d2a-4006-98ce-20970b92e097",
+          "type": "transition",
+          "title": "Transition Découverte 3 > Découverte 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "23eef4f8-6952-4cca-8718-51190d9a901a",
+                "type": "text",
+                "content": "<p>Quand beaucoup de mails sont échangés entre plusieurs personnes, le fil de discussion se complexifie.<br>Pour retrouver une information, il faut se repérer à l’intérieur du fil de discussion. 🕵️</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fd249018-1ba8-44e8-b23c-d834f7a09362",
+          "type": "discovery",
+          "title": "Découverte 4 : Recherche d’informations dans un fil de discussion “complexe\"",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a358a907-67a8-4d1c-8ac4-0c44fe1ce06f",
+                "type": "text",
+                "content": "<p>Prenons l’exemple de Karim.</p><p>Karim a reçu un mail de son ami Douglas concernant l’organisation d’un pique-nique. Plusieurs personnes ont répondu au mail de Douglas.</p><p><br></p><p><strong>Lisez le fil de discussion suivant pour compléter le texte ci-dessous.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8f98cc06-05c2-42f7-8f05-221fc7cd2933",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail : 5 personnes dont 4 ont envoyé des mails dans le fil]",
+                "content": "<p>De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 21:39</p><p>Hello, </p><p>Super tout ça !</p><p>J’apporterai quelques biscuits pour compléter et je pense qu’on est bon.<br></p><p>Hâte de vous voir ! 🙂</p><p>Douglas</p><hr> De : Ahmed<br>À : moi, Douglas, Sophie, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 17:17<p></p><p>Bonjour et merci pour l’invitation Douglas </p><p>Je peux apporter une salade pour ma part.<br></p><p>Et j’ai plein de cerises cette année : ça nous fera un bon dessert après le pâté ! 🍒</p><p>À samedi,<br></p><p>Ahmed</p><p></p><hr> De : Sophie<br>À : moi, Douglas, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 20:02<p></p><p>Salut à tous !</p><p>Du pâté en croûte : j’adore ça ! De mon côté, je m’occupe des boissons si ça vous va ?</p><p>À très vite,<br></p><p>Sophie</p><hr> De : moi<br>À : Douglas, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 19:27<p></p><p>Coucou,</p><p>Bonne idée ! On devrait avoir un beau soleil.<br>J’apporterai un pâté en croûte fait avec amour. ♥️</p><p>Bonne soirée,<br></p><p>Karim</p><hr>  De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Pique-nique samedi<br>Date : Lundi 3 juin – 19:11  <p></p><p>Salut les amis !</p><p>Je vous propose un pique-nique dans le parc samedi prochain.<br>Qui peut apporter quelque chose ? (dessert, boisson, salade…)</p><p>Amicalement,</p><p>Douglas</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "12d57a46-51d3-4376-a250-b897364c747f",
+                "type": "qrocm",
+                "instruction": "<p>Complétez le texte suivant.<br></p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>L’invitation pour le pique-nique a été envoyée par</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "input1",
+                    "display": "inline",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "0",
+                        "content": "Karim"
+                      },
+                      {
+                        "id": "1",
+                        "content": "Ahmed"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Laura"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Sophie"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Douglas"
+                      }
+                    ],
+                    "solutions": [
+                      "4"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><br><p>Le pâté en croûte sera apporté par</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "input2",
+                    "display": "inline",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "0",
+                        "content": "Karim"
+                      },
+                      {
+                        "id": "1",
+                        "content": "Ahmed"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Laura"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Sophie"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Douglas"
+                      }
+                    ],
+                    "solutions": [
+                      "0"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>et la salade par</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "input3",
+                    "display": "inline",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "0",
+                        "content": "Karim"
+                      },
+                      {
+                        "id": "1",
+                        "content": "Ahmed"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Laura"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Sophie"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Douglas"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><br><p>Par contre,</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "input4",
+                    "display": "inline",
+                    "placeholder": "Sélectionner une option",
+                    "ariaLabel": "Sélectionner une option",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "0",
+                        "content": "Karim"
+                      },
+                      {
+                        "id": "1",
+                        "content": "Ahmed"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Laura"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Sophie"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Douglas"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>n’a pas participé à la conversation.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Exactement !<br></p>",
+                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial,</li><li>parcourir tout le fil de discussion,</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non.<br></p>",
+                    "diagnosis": "<p>Pour comprendre une situation ou retrouver une information dans un échange de mails contenant de nombreux messages et destinataires, il peut être nécessaire de&nbsp;:</p><ul><li>identifier le message initial,</li><li>parcourir tout le fil de discussion,</li><li>repérer l’expéditeur de chaque mail.</li></ul>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "c02826a3-8ea0-47f3-8f31-4f1d29f9259a",
+          "type": "short-lesson",
+          "title": "Leçon 4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9a91621e-e990-41ac-83dd-03b6509a535d",
+                "type": "text",
+                "content": "<p>Dans un fil de discussion, toutes les réponses précédentes sont affichées <strong>en dessous du mail le plus récent</strong>, chacune avec un léger décalage vers la droite.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7645476a-2266-4356-9497-e663fcc9f3f0",
+                "type": "text",
+                "content": "<p><strong>🤔 Bon à savoir</strong></p><p>Certaines interfaces n’affichent que la réponse la plus récente et cachent le fil de discussion. Il faut cliquer sur un bouton pour «&nbsp;déplier&nbsp;» tout le fil de discussion.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "21f8489e-22ae-4d1c-a012-b237f6ae8940",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "95c34905-cbdd-466f-b3d8-e66580ae3fe2",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0732c01c-0387-487c-ad6a-3897190bd4ff",
+                "type": "text",
+                "content": "<ul>    <li>Pour faire suivre à quelqu’un un mail que vous avez reçu et qui pourrait l’intéresser, vous pouvez lui <strong>transférer</strong> le mail.&nbsp;📧</li></ul><p><br></p><ul>    <li>Lorsqu’un mail comporte plusieurs destinataires, vous pouvez <strong>répondre</strong> uniquement à l’expéditeur, ou <strong>répondre à tous</strong> (à l’expéditeur et à tous les autres destinataires). Faites le choix qui vous semble le plus adapté en fonction du contexte et de votre besoin.&nbsp;✒️</li></ul><p><br></p><ul>    <li> Quand vous répondez à un mail, le texte du précédent mail est affiché en dessous. De réponse en réponse, un <strong>fil de discussion</strong> se construit sous le mail le plus récent. Le mail tout en bas est donc le plus ancien.&nbsp;🧵</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "85c091f3-61e6-4ba0-bbf4-73dd0a083d8f",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "d283a1f5-69b5-4af3-82b1-056e169bf62f",
+          "type": "activity",
+          "title": "Activité 1 : Transférer",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "dc83d812-92d7-4785-94d1-88d21c5affb8",
+                "type": "text",
+                "content": "<p>Dans la messagerie électronique ci-dessous, Angelina vous a envoyé un mail avec des recommandations de restaurant.</p><p><strong>Transférez ce courrier à andreis@pixmail.org en ajoutant le message suivant :&nbsp; </strong></p><blockquote><em><br></em></blockquote><blockquote><em>Bonjour Andreis,</em></blockquote><blockquote><em>Mon amie Angelina me propose cette sélection de restaurants pour jeudi. Tu as une préférence ?</em></blockquote><blockquote><em>Bonne journée.</em></blockquote>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ebe18094-071a-498c-a44b-1474cd0ee11f",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail auto-validant pour effectuer l’action “Transférer”]",
+                "content": "<p>(cf éval : @repondremail3)</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e1f55261-d6e3-4b46-a2f1-e5f6f0f92426",
+          "type": "activity",
+          "title": "Activité 2 : Répondre à tous/fil de discussion",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a398359a-8901-4870-ac42-e96ad087e0ac",
+                "type": "text",
+                "content": "<p>Plusieurs collègues organisent une réunion d’équipe.<br><strong>Lisez le fil de discussion suivant.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ad4d1822-4c32-43b3-b14f-0692459d0c12",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Pixmail ou template-mail avec un fil de discussion “Réunion d’équipe”]",
+                "content": "<p>De&nbsp;: Rosita<br>À&nbsp;: Robert, Albertine, Djibril<br>Objet&nbsp;: Re: Réunion d’équipe – Organisation<br>Date&nbsp;: Lundi 3 juin – 10:18</p><p>Bonjour,<br>Vendredi me conviendrait aussi.<br>Rosita  </p><hr><p> De&nbsp;: Djibril</p><br><p>À&nbsp;: Robert, Albertine Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 10:02</p><p></p><p>Bonjour Robert,<br>Je ne suis pas disponible jeudi à 14h.<br>Serait-il possible de décaler à vendredi ?<br>Djibril  </p><hr><p> De&nbsp;: Albertine</p><br><p>À&nbsp;: Robert, Djibril, Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:45</p><p></p><p>Bonjour,<br>Pour moi c’est parfait.<br>Albertine  </p><hr><p> De&nbsp;: Robert</p><br><p>À&nbsp;: Albertine, Djibril, Rosita</p><br><p>Objet&nbsp;: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:12</p><p></p><p>Bonjour à tous,<br>Je propose une réunion jeudi à 14h pour faire le point sur le projet.<br>Est-ce que cela vous convient ?<br>Robert</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3db86fdf-b0bc-4e19-bccb-1510c7739fe4",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des affirmations suivantes, indiquez si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "62976900-593b-49d9-a5d7-f9b2a0db7688",
+                    "text": "Djibril a utilisé “Répondre à tous”",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "edc765f2-9a20-48ad-b7ca-b7a9191c89da",
+                    "text": "Albertine a envoyé le premier mail",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "fd0f68cd-4801-4755-8977-18cd12eff791",
+                    "text": "Djibril n’est pas disponible à la date proposée par Robert",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "a76b1b0e-9c49-4496-90b0-b47c0b0f529a",
+                    "text": "Rosita est la dernière à avoir répondu dans cet échange",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "63f827f3-a9b1-412d-919b-a970cba3b1ba",
+          "type": "activity",
+          "title": "Activité 3 : Quelles interactions ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6975703a-94f4-4eaa-8592-a29128e0452c",
+                "type": "text",
+                "content": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "5651ab4a-bfff-4cf8-927d-5bb9796e9b6c",
+                      "type": "text",
+                      "content": "<p>Lucas a reçu un mail de la part de son responsable formation.</p>"
+                    },
+                    {
+                      "id": "96b24eab-d3ab-42b6-9bc5-89152ad188c5",
+                      "type": "custom",
+                      "title": "Mail de Jean Lotus",
+                      "instruction": "",
+                      "functionalInstruction": "",
+                      "tagName": "template-mail",
+                      "props": {
+                        "titleLevel": 0,
+                        "subject": "Disponibilités pour les entretiens de suivi",
+                        "mailAddress": "jean.lotus@pixmail.org",
+                        "avatarColor": "#79F8F8",
+                        "expeditor": "Jean Lotus",
+                        "content": "<p>Bonjour,</p> <p><br></p> <p>Afin d’organiser les entretiens individuels de suivi de la formation, merci de m’envoyer <strong>votre préférence de créneau horaire</strong> (lundi ou mardi).<br>Vous pouvez me répondre directement par retour de mail. </p> <p><br></p> <p>Cordialement,</p> <p><br></p> <p>M. Lotus, responsable de formation</p>",
+                        "time": {
+                          "days": -14,
+                          "minutes": -66
+                        }
+                      }
+                    },
+                    {
+                      "id": "41ade1ed-3876-4a7c-8d4e-6f8a05bab2a1",
+                      "type": "qcu",
+                      "instruction": "<p>Lucas est disponible uniquement le mardi. Que doit-il faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "state": "<p>Correct !</p>",
+                            "diagnosis": "<p>Même si le mail est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditrice</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "state": "<p>Incorrect.<br></p>",
+                            "diagnosis": "<p>Même si le mail est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Ne pas répondre",
+                          "feedback": {
+                            "state": "<p>Incorrect.<br></p>",
+                            "diagnosis": "<p>Lucas est disponible uniquement le mardi, il faut qu’il réponde à ce mail.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "01849b56-71ec-4450-82ba-67c496817a2a",
+                      "type": "text",
+                      "content": "<p>Pierre-Alexandre a reçu un mail d’information de Primeur Express.</p>"
+                    },
+                    {
+                      "id": "bc26fd94-63f5-467f-b730-e85a2f96c124",
+                      "type": "custom",
+                      "title": "Mail de Primeur Express",
+                      "instruction": "",
+                      "functionalInstruction": "<p><br></p>",
+                      "tagName": "template-mail",
+                      "props": {
+                        "titleLevel": 0,
+                        "subject": "Primeur Express – L’essentiel en 2 min !",
+                        "mailAddress": "ne-pas-repondre@primeur-express.org",
+                        "avatarColor": "#75D7F8",
+                        "expeditor": "Primeur Express",
+                        "content": "<p><strong>C’est quoi, un légume primeur ?</strong></p> <p>Un légume <strong>récolté avant sa saison officielle</strong> – plus tendre, plus sucré, et ultra-frais. Comme un avant-goût du printemps en plein hiver ! </p> <p><strong>Top 3 des légumes à tester maintenant</strong> : </p> <p><strong>1️⃣ Carottes \"bébés\"</strong> → Croquantes, sucrées, à manger avec la peau. </p> <p><strong>2️⃣ Radis de 18 jours</strong> → Piquants mais pas trop, parfaits en apéro. </p> <p><strong>3️⃣ Petits pois mange-tout</strong> → La cosse se mange, fondants à souhait. </p> <p><strong>🍽️ Recette express :</strong><br>Velouté de navets primeurs → Mixez navets + pomme de terre + crème, ajoutez des lardons grillés. Prêt en 20 min ! </p> <p><strong>📢 Le défi :</strong><br>Achetez un légume primeur cette semaine et partagez votre recette avec #PrimeurExpress. </p> <p><strong>👉 À la semaine prochaine pour d’autres pépites ! </strong></p> <p>L’équipe Primeur Express</p>",
+                        "time": {
+                          "days": -229,
+                          "minutes": -622
+                        }
+                      }
+                    },
+                    {
+                      "id": "5b6a34f3-05d2-44af-a48c-4f5f5035a267",
+                      "type": "qcu",
+                      "instruction": "<p>Pierre-Alexandre a envie de tester la recette proposée. Que doit-il faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "state": "<p>Incorrect.</p>",
+                            "diagnosis": "<p>Avez-vous pensé à regarder l’adresse de l’expéditeur&nbsp;?</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "state": "<p>Incorrect.</p>",
+                            "diagnosis": "<p>Ce mail n’a pas plusieurs destinataires, vous ne pouvez pas «&nbsp;Répondre à tous&nbsp;». Avez-vous pensé à regarder l’adresse de l’expéditeur&nbsp;?</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Ne pas répondre",
+                          "feedback": {
+                            "state": "<p>Correct !</p>",
+                            "diagnosis": "<p>Il s’agit d’un mail d’information qui <strong>n’attend pas de réponse</strong>. L’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient « ne-pas-répondre ».</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "84f26180-5826-4e71-ae9e-2f701dbdb554",
+                      "type": "text",
+                      "content": "<p>Soumaya a reçu un mail concernant l’organisation d’un pot de départ.</p>"
+                    },
+                    {
+                      "id": "754a1181-fd8c-480f-9d27-bd1a5d20e16c",
+                      "type": "custom",
+                      "title": "Mail d'Aline",
+                      "instruction": "",
+                      "functionalInstruction": "<p><br></p>",
+                      "tagName": "template-mail",
+                      "props": {
+                        "titleLevel": 0,
+                        "subject": "Pot de départ de Sophie",
+                        "mailAddress": "aline.bonnote@pixmail.org",
+                        "avatarColor": "#f24645",
+                        "expeditor": "Aline Bonnote",
+                        "content": "<p>Bonjour à tous,</p> <p>Concernant le <strong>pot de départ de Sophie</strong>, merci de confirmer si vous serez présents vendredi et si vous apporterez quelque chose pour le buffet afin qu’on puisse s’organiser ensemble.</p> <p>Hâte de vous voir ! 🙂</p> <p>Aline</p>",
+                        "time": {
+                          "days": -3,
+                          "minutes": -673
+                        }
+                      }
+                    },
+                    {
+                      "id": "7d969c2d-8dd0-45dd-adc5-6d40ca1b3c3d",
+                      "type": "qcu",
+                      "instruction": "<p>Soumaya prévoit d’apporter à boire. Que doit-elle faire ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Répondre",
+                          "feedback": {
+                            "state": "<p>Incorrect.<br><br></p>",
+                            "diagnosis": "<p>La réponse de Soumaya peut intéresser tout le groupe.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Répondre à tous",
+                          "feedback": {
+                            "state": "<p>Correct !</p>",
+                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Ne pas répondre",
+                          "feedback": {
+                            "state": "<p>Incorrect !</p>",
+                            "diagnosis": "<p>Soumaya a besoin de prévenir qu’elle va apporter les boissons. Si elle ne répond pas, les autres ne le sauront pas.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09d90585-58b1-46f4-9a66-6f5e55209023",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "cec5d212-99ff-4c44-89e7-ed0e456daefb",
+          "type": "activity",
+          "title": "Transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2ca9785e-8ab8-448e-89b7-dc8c097885c2",
+                "type": "qcu-discovery",
+                "instruction": "<p>La prochaine fois que vous répondez à un mail avec plusieurs destinataires, que ferez-vous&nbsp;?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Lire seulement le dernier mail du fil de discussion.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Lire tout fil de discussion.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Lire tout le fil de discussion permet de comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Répondre à tous immédiatement.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Vérifier qui est concerné par votre réponse.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Avant de répondre, il est utile de vérifier qui est concerné par votre réponse afin de choisir entre entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p><p>Il est aussi important de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Rien de spécial.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>En réalité, quelques vérifications sont utiles pour envoyer une réponse adaptée&nbsp;:</p><ul><li>Lire tout le fil de discussion pour bien comprendre la situation et ne pas manquer une information.</li><li>Vérifier les destinataires pour envoyer une réponse adaptée aux personnes concernées.</li></ul>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
