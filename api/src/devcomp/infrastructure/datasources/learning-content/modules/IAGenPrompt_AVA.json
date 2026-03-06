@@ -37,7 +37,7 @@
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Discussion entre A et B",
+                  "title": "",
                   "messages": [
                     {
                       "userName": "Lénaïg",
@@ -179,7 +179,7 @@
                       "id": "d9ae8269-f9ce-4ba7-a7af-783816d89270",
                       "type": "embed",
                       "isCompletionRequired": false,
-                      "title": "",
+                      "title": "simu 2",
                       "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdoudaa00016801am9kvgh9",
                       "instruction": "<p>Utilisez ChatPix pour construire progressivement un plan de communication cybersécurité clair.</p>",
                       "solution": "",
@@ -192,13 +192,13 @@
                       "content": "<p>Commencez par clarifier la tâche&nbsp;: demandez à l’IA d’identifier l’objectif, le public, les contraintes et ce qui manque pour faire un plan.</p>"
                     },
                     {
-                      "id": "e5f7e0b2-ca80-4e68-99e0-be0d3802bd27",
+                      "id": "edd738b9-ddab-4e3a-b628-0169b06fd943",
                       "type": "expand",
                       "title": "💡 Indice 2",
                       "content": "<p>Ensuite, demandez 3 options de communication (formats/canaux) pour sensibiliser  à la cybersécurité, avec avantages et risques.</p>"
                     },
                     {
-                      "id": "e5f7e0b2-ca80-4e68-99e0-be0d3802bd27",
+                      "id": "37a8b1c4-0097-4a35-bdc7-a3c98f00c33b",
                       "type": "expand",
                       "title": "💡 Indice 3",
                       "content": "<p>Pour finir, demande un plan d’action&nbsp;: étapes, jalons (sur 2 semaines), rôles  et un indicateur de réussite.</p>"
@@ -232,7 +232,7 @@
             {
               "type": "element",
               "element": {
-                "id": "cf6d0460-cc4d-4f23-97d1-5d81f3dd7732",
+                "id": "3b6efb1a-7896-4667-b035-f4dd9f97e107",
                 "type": "text",
                 "content": "<p>Plutôt que de découper vous-même la tâche (prompt chaining), vous pouvez aussi demander à l’IA d’expliquer sa démarche&nbsp;: voyons les avantages et les inconvénients de cette méthode.</p>"
               }
@@ -258,7 +258,7 @@
                 "id": "b557c9bc-6a74-4b94-a27a-7888549b2b02",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
+                "title": "simu 3",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdpmbsf00026801dq6o9q63",
                 "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication et demandez lui d’expliquer son raisonnement. <br></p>",
                 "solution": "",
@@ -316,7 +316,7 @@
                 "id": "7df8f971-917b-4c3f-84c6-013234190a00",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
+                "title": "simu 4",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdq55md00036801lo574bbs",
                 "instruction": "<p>Utilisez ChatPix pour lui demander de vous poser des questions afin de cadrer votre plan de communication cybersécurité, puis répondez-lui pour qu’il vous propose un plan à partir de vos réponses.</p>",
                 "solution": "",
@@ -374,7 +374,7 @@
                 "id": "0e6d696c-f24e-406c-9f80-bc721d607967",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
+                "title": "simu 5",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmexdjxx00046801lgbya6kl",
                 "instruction": "<p>Mettez en pièce jointe de votre prompt les documents pour donner des exemples de résultats attendus à ChatPix. <br><br></p>",
                 "solution": "",
@@ -513,17 +513,6 @@
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
                     "solution": "A"
-                  },
-                  {
-                    "id": "c1b2a3d4-e5f6-47a8-90b1-2c3d4e5f6a7b",
-                    "text": "En few-shot, le plus important est que l’exemple porte sur le même sujet que la demande finale.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
-                    "solution": "B"
                   }
                 ],
                 "feedback": {
