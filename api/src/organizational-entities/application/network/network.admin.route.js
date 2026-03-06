@@ -52,6 +52,7 @@ const register = async function (server) {
                 'network-name': Joi.string().required(),
                 'organization-id': identifiersType.organizationId.required(),
               }),
+              type: Joi.string(),
             }),
           }),
         },
