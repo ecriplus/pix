@@ -7,7 +7,7 @@ import {
   OrganizationLearnerLoggerContext,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
@@ -250,7 +250,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
     });
 
     // then
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayloads([
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayloads([
       {
         client: 'PIX_ORGA',
         action: OrganizationLearnerLoggerContext.DELETION,

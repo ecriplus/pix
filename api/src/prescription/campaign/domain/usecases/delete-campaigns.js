@@ -1,7 +1,7 @@
 import { CLIENTS, PIX_ORGA } from '../../../../authorization/domain/constants.js';
 import * as CombinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { EventLoggingJob } from '../../../../shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../shared/domain/models/jobs/AuditLoggingJob.js';
 import { CampaignBelongsToCombinedCourseError } from '../errors.js';
 import { CampaignsDestructor } from '../models/CampaignsDestructor.js';
 
@@ -16,7 +16,7 @@ const deleteCampaigns = async ({
   campaignAdministrationRepository,
   campaignParticipationRepository,
   userRecommendedTrainingRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   client,
   userRole,
   keepPreviousDeletion = false,
@@ -55,14 +55,14 @@ const deleteCampaigns = async ({
   });
   campaignDestructor.delete({ keepPreviousDeletion });
 
-  const eventLoggingJobs = [];
+  const auditLoggingJobs = [];
 
   await DomainTransaction.execute(async () => {
     for (const campaignParticipation of campaignDestructor.campaignParticipations) {
       await campaignParticipationRepository.update(campaignParticipation);
 
-      eventLoggingJobs.push(
-        EventLoggingJob.forUser({
+      auditLoggingJobs.push(
+        AuditLoggingJob.forUser({
           client: client ?? CLIENTS.ORGA,
           action: campaignParticipation.loggerContext,
           role: userRole ?? PIX_ORGA.ROLES.ADMIN,
@@ -94,8 +94,8 @@ const deleteCampaigns = async ({
     await campaignAdministrationRepository.remove(campaignsToDelete);
   });
 
-  for (const eventLoggingJob of eventLoggingJobs) {
-    await eventLoggingJobRepository.performAsync(eventLoggingJob);
+  for (const auditLoggingJob of auditLoggingJobs) {
+    await auditLoggingJobRepository.performAsync(auditLoggingJob);
   }
 };
 

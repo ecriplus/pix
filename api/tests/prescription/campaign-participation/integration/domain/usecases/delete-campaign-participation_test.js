@@ -2,7 +2,7 @@ import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migr
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { EventLoggingJob } from '../../../../../../src/shared/domain/models/jobs/EventLoggingJob.js';
+import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
@@ -140,7 +140,7 @@ describe('Integration | UseCases | delete-campaign-participation', function () {
     });
 
     // then
-    await expect(EventLoggingJob.name).to.have.been.performed.withJobPayload({
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
       client: 'PIX_ORGA',
       action: CampaignParticipationLoggerContext.DELETION,
       role: 'ORGA_ADMIN',

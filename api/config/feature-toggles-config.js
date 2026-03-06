@@ -107,4 +107,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: true },
     tags: ['team-devcomp', 'pix-api', 'pix-admin', 'frontend', 'backend'],
   },
+  isAuditLoggingEnabled: {
+    type: 'boolean',
+    description: 'Enable sending audit logs to audit logger application',
+    defaultValue: true,
+    devDefaultValues: { test: true, reviewApp: false },
+    tags: ['team-acces', 'audit-logger'],
+  },
 };

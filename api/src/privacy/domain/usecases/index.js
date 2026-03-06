@@ -6,7 +6,7 @@ import * as userRepository from '../../../identity-access-management/infrastruct
 import * as userAcceptanceRepository from '../../../legal-documents/infrastructure/repositories/user-acceptance.repository.js';
 import * as organizationLearnerRepository from '../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { featureToggles as featureTogglesService } from '../../../shared/infrastructure/feature-toggles/index.js';
-import { eventLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/event-logging-job.repository.js';
+import { auditLoggingJobRepository } from '../../../shared/infrastructure/repositories/jobs/audit-logging-job.repository.js';
 import * as userLoginRepository from '../../../shared/infrastructure/repositories/user-login-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
 import { certificationCenterMembershipRepository } from '../../../team/infrastructure/repositories/certification-center-membership.repository.js';
@@ -21,7 +21,7 @@ const repositories = {
   campaignParticipationsApiRepository,
   candidatesApiRepository,
   certificationCenterMembershipRepository,
-  eventLoggingJobRepository,
+  auditLoggingJobRepository,
   learnersApiRepository,
   membershipRepository,
   lastUserApplicationConnectionsRepository,
