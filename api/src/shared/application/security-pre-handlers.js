@@ -419,7 +419,8 @@ async function checkUserBelongsToScoOrganizationAndManagesStudents(
   }
 
   const userId = request.auth.credentials.userId;
-  const organizationId = request.params.id || request.payload.data.attributes['organization-id'];
+  const organizationId =
+    request.params.id || request.params.organizationId || request.payload.data.attributes['organization-id'];
 
   let belongsToScoOrganizationAndManageStudents;
   try {
