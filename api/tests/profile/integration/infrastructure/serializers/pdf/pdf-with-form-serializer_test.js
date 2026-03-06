@@ -5,6 +5,7 @@ import * as url from 'node:url';
 import JSZip from 'jszip';
 
 import { serializeStream } from '../../../../../../src/profile/infrastructure/serializers/pdf/pdf-with-form-serializer.js';
+import { getDataBuffer } from '../../../../../../src/shared/infrastructure/utils/buffer.js';
 import { expect } from '../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../tooling/binary-comparator.js';
 
@@ -25,7 +26,7 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
         // when
         const buffer = await serializeStream(stream, data, new Date('2024-10-01'));
 
-        await _writeFile({ outputFilename: expectedFilename, buffer });
+        await recreatePDFFileReferenceTest({ outputFilename: expectedFilename, buffer });
 
         // then
         expect(await isSameBinary(`${__dirname}${expectedFilename}`, buffer)).to.be.true;
@@ -46,16 +47,16 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
         data[1].set('filename', 'Sans titre 2');
 
         // when
-        const buffer = await serializeStream(stream, data, new Date('2024-10-01'));
+        const passtrough = await serializeStream(stream, data, new Date('2024-10-01'));
 
         const zip = new JSZip();
-        await zip.loadAsync(buffer);
+        await zip.loadAsync(await getDataBuffer(passtrough));
 
         const firstPdfBuffer = await zip.file(data[0].get('filename') + '.pdf').async('nodebuffer');
         const secondPdfBuffer = await zip.file(data[1].get('filename') + '.pdf').async('nodebuffer');
 
-        await _writeFile({ outputFilename: expectedFirstFilename, buffer: firstPdfBuffer });
-        await _writeFile({ outputFilename: expectedSecondFilename, buffer: secondPdfBuffer });
+        await recreatePDFFileReferenceTest({ outputFilename: expectedFirstFilename, buffer: firstPdfBuffer });
+        await recreatePDFFileReferenceTest({ outputFilename: expectedSecondFilename, buffer: secondPdfBuffer });
 
         // then
         expect(await isSameBinary(`${__dirname}${expectedFirstFilename}`, firstPdfBuffer)).to.be.true;
@@ -65,7 +66,7 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
   });
 });
 
-async function _writeFile({ buffer, outputFilename, dryRun = true }) {
+async function recreatePDFFileReferenceTest({ buffer, outputFilename, dryRun = true }) {
   // Note: to update or create the reference pdf, set dryRun to false.
   if (!dryRun) {
     await writeFile(`${__dirname}/${outputFilename}`, buffer);

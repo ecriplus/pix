@@ -10,7 +10,7 @@ describe('Prescription | Learner-Management | Unit | Infrastructure | organizati
       const userId1 = 1;
       const userId2 = 2;
       const organizationId = Symbol('organizationId');
-      const organizationLearners = [{ userId: userId1 }, { userId: userId2 }];
+      const userIds = [userId1, userId2];
 
       const expectedResult = Symbol('expectedResult');
 
@@ -21,7 +21,7 @@ describe('Prescription | Learner-Management | Unit | Infrastructure | organizati
       //when
       const result = await getAttestationsForOrganizationLearnersAndKey({
         attestationKey,
-        organizationLearners,
+        userIds,
         organizationId,
         attestationsApi: attestationApiStub,
       });
