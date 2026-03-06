@@ -15,6 +15,10 @@ const reconcileScoOrganizationLearnerAutomatically = async function ({
   const nationalStudentIdForReconcile = _.orderBy(studentOrganizationLearners, 'updatedAt', 'desc')[0]
     .nationalStudentId;
 
+  if (!nationalStudentIdForReconcile) {
+    throw new UserCouldNotBeReconciledError();
+  }
+
   return organizationLearnerRepository.reconcileUserByNationalStudentIdAndOrganizationId({
     userId,
     nationalStudentId: nationalStudentIdForReconcile,
