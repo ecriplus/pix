@@ -32,7 +32,7 @@
               "element": {
                 "id": "fc40f4f9-a728-45c3-9a69-e6a511cfb332",
                 "type": "custom",
-                "title": "",
+                "title": "Voici une discussion entre deux bretons fans de théâtre ",
                 "instruction": "",
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
@@ -495,17 +495,6 @@
                   {
                     "id": "8d0a0b3a-1d7f-4b7a-9d0c-8e5f1a2e3b4c",
                     "text": "Le métaprompting consiste à demander à l’IA de reformuler son besoin en un prompt clair et exploitable.",
-                    "image": {
-                      "url": "",
-                      "altText": ""
-                    },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
-                    "solution": "A"
-                  },
-                  {
-                    "id": "2a6c1b1e-7b4d-4e0b-8a3a-0c6d5e4f3a2b",
-                    "text": "Le few-shot prompting est particulièrement utile quand on attend une mise en forme précise (ex : tableau, structure).",
                     "image": {
                       "url": "",
                       "altText": ""
