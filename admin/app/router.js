@@ -185,6 +185,10 @@ Router.map(function () {
         this.route('organizations');
       });
     });
+
+    this.route('announcements', function () {
+      this.route('edit', { path: '/' });
+    });
   });
 
   this.route('authentication', { path: '/connexion' }, function () {

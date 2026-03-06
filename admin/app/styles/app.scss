@@ -25,6 +25,7 @@
 @use 'authenticated/users/list' as *;
 
 /* components */
+@use 'components/announcements/edit-form' as *;
 @use 'components/quests/form' as *;
 @use 'components/combined-course/form' as *;
 @use 'components/combined-course-blueprints/list' as *;
