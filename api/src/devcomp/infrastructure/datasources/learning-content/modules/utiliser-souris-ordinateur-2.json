@@ -2,12 +2,12 @@
   "id": "1f425bc6-7a35-4ceb-9634-a25da1e36233",
   "shortId": "f59200bf",
   "slug": "utiliser-souris-ordinateur-2",
-  "title": "Utiliser une souris d’ordinateur - 2",
-  "isBeta": true,
+  "title": "Utiliser une souris d’ordinateur 2/2",
+  "isBeta": false,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/1emarche-souris2/picto-1eremarche_souris2.svg",
-    "description": "<p>La souris est composée de trois boutons&nbsp;: le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous apprendrez à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
+    "description": "<p>La souris est composée de trois boutons&nbsp;: le bouton gauche, la molette et le bouton droit. Le bouton gauche permet de faire un clic gauche, c’est le plus utilisé. Mais il existe d’autres façons d’utiliser la souris.<br><br> Dans ce module, vous allez apprendre à faire d’autres clics et à utiliser les deux autres boutons de la souris. 🖱️</p>",
     "duration": 30,
     "level": "novice",
     "objectives": [
@@ -142,7 +142,7 @@
               "element": {
                 "id": "6802e654-4c8d-470c-bd51-e17f08c63784",
                 "type": "text",
-                "content": "👉 <strong>Dans la zone ci-dessous, utilisez la molette pour découvir toute l’image. Vous devrez ensuite répondre à une question&nbsp;:</strong> <br><ul><li>Étape 1: Placez le pointeur sur l’image </li><li>Étape 2&nbsp;: Faites rouler la molette de votre souris vers le haut et vers le bas. </li><li>Étape 3&nbsp;: Déplacez l’image jusqu’à trouver le balcon le plus bas de l’immeuble.</li></ul><br>"
+                "content": "👉 <strong>Dans la zone ci-dessous, utilisez la molette pour découvrir toute l’image. Vous devrez ensuite répondre à une question&nbsp;:</strong> <br><ul><li>Étape 1: Placez le pointeur sur l’image </li><li>Étape 2&nbsp;: Faites rouler la molette de votre souris vers le haut et vers le bas. </li><li>Étape 3&nbsp;: Déplacez l’image jusqu’à trouver le balcon le plus bas de l’immeuble.</li></ul><br>"
               }
             },
             {
@@ -151,7 +151,7 @@
                 "id": "c07ed0e2-b515-40c9-80ef-b7f55e6d270c",
                 "type": "custom-draft",
                 "title": "Exercice molette",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-molette/Modulix_Immeuble_souris_v2.jpg",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Souris2/Modulix_Immeuble_souris_v2.jpg",
                 "instruction": "Utilisez la molette pour découvir toute l’image.",
                 "height": 350
               }
@@ -353,7 +353,7 @@
                 "id": "be1b5866-6475-4bed-a775-e07be73f156e",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-doubleclic/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Souris2/1emarche-souris2-doubleclic/index.html",
                 "instruction": "<p>👉 <strong>Faites un double-clic sur chaque élément qui apparaît ci-dessous.</strong></p>",
                 "height": 432
               }
@@ -525,7 +525,7 @@
                 "id": "fc26348a-dea8-4010-bfa6-efd0252b9516",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-clicdroit/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Souris2/1emarche-souris2-clicdroit/index.html",
                 "instruction": "<p><strong>Dans la zone ci-dessous, entraînez-vous à faire un clic droit puis un clic gauche à la suite.</strong></p>",
                 "height": 432
               }
@@ -592,7 +592,7 @@
                 "id": "fe6818f4-ad9d-4b5e-bc58-b18cd1d6cee8",
                 "type": "custom-draft",
                 "title": "Élément interactif",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/1emarche/1emarche-souris2-3boutonrecap/index.html",
+                "url": "https://1024pix.github.io/pix-epreuves-externes/modulix/Souris2/1emarche-souris2-3boutonrecap/index.html",
                 "instruction": "<p>Récapitulons tout ce que vous venez de voir dans ce module. <br></p><p><strong>Dans l’image ci-dessous, déplacez votre pointeur sur le dessin de la souris.</strong> <br>Pour chaque bouton, suivez les consignes.</p>",
                 "height": 405
               }
@@ -609,7 +609,7 @@
               "element": {
                 "id": "3dbb4032-7150-447e-ac8c-00c1302bcc84",
                 "type": "text",
-                "content": "<p>📌 Les points à retenir&nbsp;: <br> </p><ul>    <li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li>    <li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li>    <li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/1emarche-souris2/pix-fiche-revision-premieres-marches-souris-2.pdf\" target=\"_blank\">Ouvrir votre fiche de synthèse</a>.</p>"
+                "content": "<p>📌 Les points à retenir&nbsp;: <br> </p><ul>    <li>▶️ Le bouton gauche permet de faire des clics gauche et des doubles-clics pour déclencher des actions (ouvrir, faire apparaître, sélectionner, etc).</li>    <li>📋 Le bouton droit permet d’afficher une liste d’actions possibles.</li>    <li>⬆️ La molette permet de monter ou de descendre dans une page.</li></ul><p><br><span aria-hidden=\"true\">📝</span> Vous pouvez maintenant <a href=\"https://assets.pix.org/modules/1emarche-souris2/pix-fiche-revision-premieres-marches-souris-2.pdf\" target=\"_blank\">ouvrir votre fiche de synthèse</a>.</p>"
               }
             }
           ]
