@@ -42,7 +42,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation accroche",
+                  "conversationTitle": "Conversation accroche",
                   "messages": [
                     {
                       "userName": "Max",
@@ -446,7 +446,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Fin de narration Max",
+                  "conversationTitle": "Fin de narration Max",
                   "messages": [
                     {
                       "userName": "Max",

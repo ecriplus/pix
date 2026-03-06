@@ -40,7 +40,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
             functionalInstruction: 'Lire la conversation',
             tagName: 'message-conversation',
             props: {
-              title: 'Conversation entre Naomi et Mickaël à propos d’une adresse mail',
+              conversationTitle: 'Conversation entre Naomi et Mickaël à propos d’une adresse mail',
               messages: [
                 {
                   userName: 'Naomi',

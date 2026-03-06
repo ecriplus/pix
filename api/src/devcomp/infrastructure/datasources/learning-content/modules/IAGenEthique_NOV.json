@@ -35,7 +35,7 @@
                 "instruction": "<p>Asmae discute de son usage de l’IA générative avec un ami.</p>",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation à propos de la confidentialité de l’IA",
+                  "conversationTitle": "Conversation à propos de la confidentialité de l’IA",
                   "messages": [
                     {
                       "userName": "Asmae",
@@ -355,7 +355,7 @@
                 "instruction": "Voici une discussion entre Sarah et Maëlle. Sarah remarque que l’IA a généré des informations qui ressemblent fortement à des informations réelles.",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
+                  "conversationTitle": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
                   "messages": [
                     {
                       "userName": "Sarah",
@@ -692,7 +692,7 @@
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "💻 Un logiciel d’IA générative pointé du doigt pour des fuites de mots de passe",
+                  "articleTitle": "💻 Un logiciel d’IA générative pointé du doigt pour des fuites de mots de passe",
                   "author": "Rédaction Tech",
                   "date": "6 octobre 2025",
                   "paragraphs": [

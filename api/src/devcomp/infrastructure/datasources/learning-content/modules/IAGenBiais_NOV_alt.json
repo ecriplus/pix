@@ -35,7 +35,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation à propos des biais",
+                  "conversationTitle": "Conversation à propos des biais",
                   "messages": [
                     {
                       "userName": "Léane",

@@ -35,7 +35,7 @@
                 "instruction": "<p>Voici une discussion entre Noah et Anouk au sujet de l’intelligence artificielle.</p>",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Noah rencontre la modération pour la première fois. Il en parle à Anouk qui elle n’est pas étonnée.",
+                  "conversationTitle": "Noah rencontre la modération pour la première fois. Il en parle à Anouk qui elle n’est pas étonnée.",
                   "messages": [
                     {
                       "userName": "Noah",
@@ -715,16 +715,8 @@
                     "display": "inline",
                     "placeholder": "Nom du pays",
                     "ariaLabel": "Nom du pays",
-                    "tolerances": [
-                      "t1",
-                      "t2",
-                      "t3"
-                    ],
-                    "solutions": [
-                      "la Grèce",
-                      "Grèce",
-                      "Grec"
-                    ]
+                    "tolerances": ["t1", "t2", "t3"],
+                    "solutions": ["la Grèce", "Grèce", "Grec"]
                   }
                 ],
                 "feedbacks": {
@@ -1031,10 +1023,7 @@
                         "content": "Qwen"
                       }
                     ],
-                    "solutions": [
-                      "8",
-                      "12"
-                    ]
+                    "solutions": ["8", "12"]
                   }
                 ],
                 "feedbacks": {

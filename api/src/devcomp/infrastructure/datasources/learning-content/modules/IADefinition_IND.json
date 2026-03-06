@@ -44,7 +44,7 @@
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Arthur demande à Lila comment reconnaître l’ail des ours",
+                  "conversationTitle": "Arthur demande à Lila comment reconnaître l’ail des ours",
                   "messages": [
                     {
                       "userName": "Arthur",
@@ -842,9 +842,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "type": "text",
@@ -867,9 +865,7 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {

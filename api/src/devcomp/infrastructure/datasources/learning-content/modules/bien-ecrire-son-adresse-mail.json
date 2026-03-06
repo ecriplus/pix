@@ -50,7 +50,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation entre Naomi et Mickaël à propos d’une adresse mail",
+                  "conversationTitle": "Conversation entre Naomi et Mickaël à propos d’une adresse mail",
                   "messages": [
                     {
                       "userName": "Naomi",
@@ -535,7 +535,10 @@
                     "placeholder": "",
                     "ariaLabel": "Adresse mail de Naomi",
                     "tolerances": ["t1"],
-                    "solutions": ["naomizao457@yahoo.com", "naomizao457@yahoo.fr"]
+                    "solutions": [
+                      "naomizao457@yahoo.com",
+                      "naomizao457@yahoo.fr"
+                    ]
                   }
                 ],
                 "feedbacks": {

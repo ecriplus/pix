@@ -49,7 +49,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Discussion intro",
+                  "conversationTitle": "Discussion intro",
                   "messages": [
                     {
                       "userName": "Enzo",
@@ -346,7 +346,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Discussion ressources",
+                  "conversationTitle": "Discussion ressources",
                   "messages": [
                     {
                       "userName": "Enzo",
@@ -554,7 +554,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Discussion centre de données",
+                  "conversationTitle": "Discussion centre de données",
                   "messages": [
                     {
                       "userName": "Enzo",
@@ -788,7 +788,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "transition bons usages",
+                  "conversationTitle": "transition bons usages",
                   "messages": [
                     {
                       "userName": "Enzo",

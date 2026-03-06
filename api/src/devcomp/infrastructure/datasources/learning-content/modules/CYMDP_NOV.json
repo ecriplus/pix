@@ -43,7 +43,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "conversation d’introduction",
+                  "conversationTitle": "conversation d’introduction",
                   "messages": [
                     {
                       "userName": "Emma",
@@ -179,7 +179,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Transition #1 (conversation)",
+                  "conversationTitle": "Transition #1 (conversation)",
                   "messages": [
                     {
                       "userName": "Emma",
@@ -325,7 +325,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Transition #2 (conversation)",
+                  "conversationTitle": "Transition #2 (conversation)",
                   "messages": [
                     {
                       "userName": "Emma",
@@ -460,7 +460,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Transition #3 (conversation)",
+                  "conversationTitle": "Transition #3 (conversation)",
                   "messages": [
                     {
                       "userName": "Emma",
@@ -801,7 +801,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation défi",
+                  "conversationTitle": "Conversation défi",
                   "messages": [
                     {
                       "userName": "Jennifer",

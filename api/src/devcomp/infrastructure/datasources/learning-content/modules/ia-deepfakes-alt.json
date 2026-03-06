@@ -616,7 +616,7 @@
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
-                  "title": "🔴 Une vidéo de la maire de la capitale crée la polémique",
+                  "articleTitle": "🔴 Une vidéo de la maire de la capitale crée la polémique",
                   "author": "Rédaction locale",
                   "date": "14 mai 2025",
                   "paragraphs": [

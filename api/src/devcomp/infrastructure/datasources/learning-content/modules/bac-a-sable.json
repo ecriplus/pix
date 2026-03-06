@@ -1086,7 +1086,7 @@
                 "instruction": "Extrait de conversation",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Confessions nocturnes",
+                  "conversationTitle": "Confessions nocturnes",
                   "messages": [
                     {
                       "userName": "Mel",

@@ -35,7 +35,7 @@
                 "instruction": "Yasmine et Steven emménagent ensemble. Ils ont décidé de faire des travaux.",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Début de la conversation entre Yasmine & Steven",
+                  "conversationTitle": "Début de la conversation entre Yasmine & Steven",
                   "messages": [
                     {
                       "userName": "Yasmine",
@@ -594,9 +594,7 @@
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
-                          "tolerances": [
-                            ""
-                          ],
+                          "tolerances": [""],
                           "options": [
                             {
                               "id": "1",
@@ -611,9 +609,7 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": [
-                            "1"
-                          ]
+                          "solutions": ["1"]
                         },
                         {
                           "type": "text",
@@ -640,9 +636,7 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": [
-                            "2"
-                          ]
+                          "solutions": ["2"]
                         },
                         {
                           "type": "text",
@@ -669,9 +663,7 @@
                               "content": "ce week-end"
                             }
                           ],
-                          "solutions": [
-                            "3"
-                          ]
+                          "solutions": ["3"]
                         },
                         {
                           "type": "text",
@@ -799,7 +791,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Fin de la discussion entre Yasmine et Steven",
+                  "conversationTitle": "Fin de la discussion entre Yasmine et Steven",
                   "messages": [
                     {
                       "userName": "Steven",
@@ -908,9 +900,7 @@
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [
-                      ""
-                    ],
+                    "tolerances": [""],
                     "options": [
                       {
                         "id": "1",
@@ -921,9 +911,7 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "type": "text",
@@ -946,9 +934,7 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   }
                 ],
                 "feedbacks": {
@@ -1103,9 +1089,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "1"
-                    ]
+                    "solutions": ["1"]
                   },
                   {
                     "input": "classementetape2",
@@ -1140,9 +1124,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "2"
-                    ]
+                    "solutions": ["2"]
                   },
                   {
                     "input": "classementetape3",
@@ -1177,9 +1159,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "3"
-                    ]
+                    "solutions": ["3"]
                   },
                   {
                     "input": "classementetape4",
@@ -1214,9 +1194,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "4"
-                    ]
+                    "solutions": ["4"]
                   },
                   {
                     "input": "classementetape5",
@@ -1251,9 +1229,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "5"
-                    ]
+                    "solutions": ["5"]
                   },
                   {
                     "input": "classementetape6",
@@ -1288,9 +1264,7 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": [
-                      "6"
-                    ]
+                    "solutions": ["6"]
                   }
                 ],
                 "feedbacks": {

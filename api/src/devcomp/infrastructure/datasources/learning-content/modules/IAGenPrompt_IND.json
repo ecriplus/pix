@@ -50,7 +50,7 @@
                 "instruction": "",
                 "tagName": "message-conversation",
                 "props": {
-                  "title": "Conversation d’introduction",
+                  "conversationTitle": "Conversation d’introduction",
                   "messages": [
                     {
                       "userName": "Gustave",
