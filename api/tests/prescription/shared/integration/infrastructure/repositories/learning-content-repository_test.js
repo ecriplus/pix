@@ -8,7 +8,7 @@ describe('Integration | Repository | learning-content', function () {
   let competence1Fr, competence1En, competence2Fr, competence2En, competence3Fr, competence3En;
   let thematic1Fr, thematic1En, thematic2Fr, thematic2En, thematic3Fr, thematic3En;
   let tube1Fr, tube1En, tube2Fr, tube2En, tube4Fr, tube4En;
-  let skill1Fr, skill2Fr, skill3Fr, skill8Fr;
+  let skill2Fr, skill3Fr;
 
   beforeEach(async function () {
     const framework1DB = databaseBuilder.factory.learningContent.buildFramework({
@@ -151,15 +151,7 @@ describe('Integration | Repository | learning-content', function () {
       competenceId: 'recCompetence3',
       thematicId: 'recThematic3',
     });
-    const skill1DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill1',
-      name: '@tube1_name4',
-      status: 'actif',
-      level: 4,
-      pixValue: 12,
-      version: 98,
-      tubeId: 'recTube1',
-    });
+
     const skill2DB = databaseBuilder.factory.learningContent.buildSkill({
       id: 'recSkill2',
       name: '@tube2_name1',
@@ -178,39 +170,7 @@ describe('Integration | Repository | learning-content', function () {
       version: 54,
       tubeId: 'recTube2',
     });
-    const skill4DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill4',
-      status: 'périmé',
-      tubeId: 'recTube2',
-    });
-    const skill5DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill5',
-      name: '@tube3_name5',
-      status: 'archivé',
-      level: 5,
-      pixValue: 44,
-      version: 55,
-      tubeId: 'recTube3',
-    });
-    const skill6DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill6',
-      status: 'périmé',
-      tubeId: 'recTube3',
-    });
-    const skill7DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill7',
-      status: 'périmé',
-      tubeId: 'recTube3',
-    });
-    const skill8DB = databaseBuilder.factory.learningContent.buildSkill({
-      id: 'recSkill8',
-      name: '@tube4_name8',
-      status: 'actif',
-      level: 7,
-      pixValue: 78,
-      version: 32,
-      tubeId: 'recTube4',
-    });
+
     await databaseBuilder.commit();
 
     [framework1Fr, framework2Fr] = _buildDomainFrameworksFromDB([framework1DB, framework2DB]);
@@ -235,10 +195,7 @@ describe('Integration | Repository | learning-content', function () {
     );
     [tube1Fr, tube2Fr, , tube4Fr] = _buildDomainTubesFromDB([tube1DB, tube2DB, tube3DB, tube4DB], 'fr');
     [tube1En, tube2En, , tube4En] = _buildDomainTubesFromDB([tube1DB, tube2DB, tube3DB, tube4DB], 'en');
-    [skill1Fr, skill2Fr, skill3Fr, , , , , skill8Fr] = _buildDomainSkillsFromDB(
-      [skill1DB, skill2DB, skill3DB, skill4DB, skill5DB, skill6DB, skill7DB, skill8DB],
-      'fr',
-    );
+    [skill2Fr, skill3Fr] = _buildDomainSkillsFromDB([skill2DB, skill3DB], 'fr');
   });
 
   describe('#findByCampaignId', function () {
@@ -537,67 +494,6 @@ describe('Integration | Repository | learning-content', function () {
         expect(results[0]).deep.equals(framework2En);
         expect(results[1]).deep.equals(framework1En);
       });
-    });
-  });
-
-  describe('#findByFrameworkNames', function () {
-    it('should return an active LearningContent with the frameworks designated by name', async function () {
-      // given
-      framework1Fr.areas = [area1Fr];
-      framework2Fr.areas = [area2Fr];
-      area1Fr.competences = [competence1Fr, competence2Fr];
-      area2Fr.competences = [competence3Fr];
-      competence1Fr.thematics = [thematic1Fr];
-      competence1Fr.tubes = [tube1Fr];
-      competence2Fr.thematics = [thematic2Fr];
-      competence2Fr.tubes = [tube2Fr];
-      competence3Fr.thematics = [thematic3Fr];
-      competence3Fr.tubes = [tube4Fr];
-      thematic1Fr.tubes = [tube1Fr];
-      thematic2Fr.tubes = [tube2Fr];
-      thematic3Fr.tubes = [tube4Fr];
-      tube1Fr.skills = [skill1Fr];
-      tube2Fr.skills = [skill2Fr];
-      tube4Fr.skills = [skill8Fr];
-
-      // when
-      const learningContent = await learningContentRepository.findByFrameworkNames({
-        frameworkNames: ['Mon référentiel 1', 'Pix'],
-      });
-
-      // then
-      const expectedLearningContent = domainBuilder.buildLearningContent([framework1Fr, framework2Fr]);
-      expect(learningContent).to.deepEqualInstance(expectedLearningContent);
-    });
-
-    it('should return an active LearningContent in the given language', async function () {
-      // given
-      framework1En.areas = [area1En];
-      framework2En.areas = [area2En];
-      area1En.competences = [competence1En, competence2En];
-      area2En.competences = [competence3En];
-      competence1En.thematics = [thematic1En];
-      competence1En.tubes = [tube1En];
-      competence2En.thematics = [thematic2En];
-      competence2En.tubes = [tube2En];
-      competence3En.thematics = [thematic3En];
-      competence3En.tubes = [tube4En];
-      thematic1En.tubes = [tube1En];
-      thematic2En.tubes = [tube2En];
-      thematic3En.tubes = [tube4En];
-      tube1En.skills = [skill1Fr];
-      tube2En.skills = [skill2Fr];
-      tube4En.skills = [skill8Fr];
-
-      // when
-      const learningContent = await learningContentRepository.findByFrameworkNames({
-        frameworkNames: ['Mon référentiel 1', 'Pix'],
-        locale: 'en',
-      });
-
-      // then
-      const expectedLearningContent = domainBuilder.buildLearningContent([framework1En, framework2En]);
-      expect(learningContent).to.deepEqualInstance(expectedLearningContent);
     });
   });
 });

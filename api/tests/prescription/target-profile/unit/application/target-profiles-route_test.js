@@ -5,20 +5,20 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Target Profiles | Application | Routes', function () {
   beforeEach(function () {
-    sinon.stub(securityPreHandlers, 'checkUserIsMemberOfAnOrganization');
+    sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization');
     sinon
-      .stub(targetProfileController, 'getFrameworksForTargetProfileSubmission')
+      .stub(targetProfileController, 'findLearningContentsByOrganizationId')
       .callsFake((request, h) => h.response('ok'));
   });
 
-  describe('GET /api/frameworks/for-target-profile-submission', function () {
+  describe('GET /api/organizations/{organizationId}/frameworks', function () {
     const method = 'GET';
-    const url = '/api/frameworks/for-target-profile-submission';
+    const url = '/api/organizations/123/frameworks';
     const payload = null;
 
-    it('should called controller getFrameworksForTargetProfileSubmission', async function () {
+    it('should called controller findLearningContentsByOrganizationId', async function () {
       // given
-      securityPreHandlers.checkUserIsMemberOfAnOrganization.callsFake(() => (request, h) => h.response(true));
+      securityPreHandlers.checkUserBelongsToOrganization.callsFake(() => (request, h) => h.response(true));
       const httpTestServer = new HttpTestServer();
       await httpTestServer.register(moduleUnderTest);
 
@@ -26,12 +26,12 @@ describe('Unit | Target Profiles | Application | Routes', function () {
       await httpTestServer.request(method, url, payload);
 
       // then
-      expect(targetProfileController.getFrameworksForTargetProfileSubmission.called).to.be.true;
+      expect(targetProfileController.findLearningContentsByOrganizationId.called).to.be.true;
     });
 
-    it('should not called getFrameworksForTargetProfileSubmission', async function () {
+    it('should not called findLearningContentsByOrganizationId', async function () {
       // given
-      securityPreHandlers.checkUserIsMemberOfAnOrganization.callsFake((_, h) =>
+      securityPreHandlers.checkUserBelongsToOrganization.callsFake((_, h) =>
         h
           .response({ errors: new Error('forbidden') })
           .code(403)
@@ -44,7 +44,7 @@ describe('Unit | Target Profiles | Application | Routes', function () {
       await httpTestServer.request(method, url, payload);
 
       // then
-      expect(targetProfileController.getFrameworksForTargetProfileSubmission.called).to.be.false;
+      expect(targetProfileController.findLearningContentsByOrganizationId.called).to.be.false;
     });
   });
 });
