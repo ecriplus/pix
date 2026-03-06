@@ -556,6 +556,8 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
           username: user.username,
           userId: organizationLearner.userId,
           email: user.email,
+          isTemporarilyBlocked: false,
+          isBlocked: false,
           isAuthenticatedFromGAR: false,
           division: organizationLearner.division,
           participationCount: 0,
@@ -579,6 +581,104 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
 
         // then
         expect(firstParticipant).to.deep.equal(expectedScoOrganizationParticipant);
+      });
+    });
+
+    describe('When sco participant is temporarily blocked', function () {
+      describe('When temporarily blocking is in the future', function () {
+        it('should return isTemporarilyBlocked property equal to true', async function () {
+          // given
+          const organization = databaseBuilder.factory.buildOrganization();
+          const user = databaseBuilder.factory.buildUser.withoutPixAuthenticationMethod();
+          databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+            externalIdentifier: 'samlId',
+            userId: user.id,
+          });
+          databaseBuilder.factory.buildUserLogin({
+            temporaryBlockedUntil: new Date(Date.now() + 3600 * 1000),
+            userId: user.id,
+          });
+          databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            userId: user.id,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const {
+            data: [firstParticipant],
+          } = await scoOrganizationParticipantRepository.findPaginatedFilteredScoParticipants({
+            organizationId: organization.id,
+          });
+
+          // then
+          expect(firstParticipant).to.exist;
+          expect(firstParticipant.isTemporarilyBlocked).to.deep.equal(true);
+        });
+      });
+
+      describe('When sco participant has been temporarily blocked, but is not anymore', function () {
+        it('should return isTemporarilyBlocked property equal to false', async function () {
+          // given
+          const organization = databaseBuilder.factory.buildOrganization();
+          const user = databaseBuilder.factory.buildUser.withoutPixAuthenticationMethod();
+          databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+            externalIdentifier: 'samlId',
+            userId: user.id,
+          });
+          databaseBuilder.factory.buildUserLogin({
+            temporaryBlockedUntil: new Date(Date.now() - 3600 * 1000),
+            userId: user.id,
+          });
+          databaseBuilder.factory.buildOrganizationLearner({
+            organizationId: organization.id,
+            userId: user.id,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const {
+            data: [firstParticipant],
+          } = await scoOrganizationParticipantRepository.findPaginatedFilteredScoParticipants({
+            organizationId: organization.id,
+          });
+
+          // then
+          expect(firstParticipant).to.exist;
+          expect(firstParticipant.isTemporarilyBlocked).to.equal(false);
+        });
+      });
+    });
+
+    describe('When sco participant is blocked', function () {
+      it('should return isBlocked property equal to true', async function () {
+        // given
+        const organization = databaseBuilder.factory.buildOrganization();
+        const user = databaseBuilder.factory.buildUser.withoutPixAuthenticationMethod();
+        databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+          externalIdentifier: 'samlId',
+          userId: user.id,
+        });
+        databaseBuilder.factory.buildUserLogin({
+          blockedAt: new Date(),
+          userId: user.id,
+        });
+        databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: organization.id,
+          userId: user.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const {
+          data: [firstParticipant],
+        } = await scoOrganizationParticipantRepository.findPaginatedFilteredScoParticipants({
+          organizationId: organization.id,
+        });
+
+        // then
+        expect(firstParticipant).to.exist;
+        expect(firstParticipant.isBlocked).to.equal(true);
       });
     });
 
@@ -606,6 +706,8 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
           username: null,
           email: null,
           userId: organizationLearner.userId,
+          isTemporarilyBlocked: false,
+          isBlocked: false,
           isAuthenticatedFromGAR: true,
           division: organizationLearner.division,
           participationCount: 0,
@@ -649,6 +751,8 @@ describe('Integration | Infrastructure | Repository | sco-organization-participa
           username: null,
           email: null,
           userId: organizationLearner.userId,
+          isTemporarilyBlocked: false,
+          isBlocked: false,
           isAuthenticatedFromGAR: false,
           division: organizationLearner.division,
           participationCount: 0,

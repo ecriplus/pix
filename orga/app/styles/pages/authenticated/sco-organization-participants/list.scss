@@ -1,4 +1,14 @@
 .sco-organization-participant-list-page {
+  &__user-account-temporarily-blocked {
+    margin-bottom: var(--pix-spacing-2x);
+    color: var(--pix-warning-500);
+  }
+
+  &__user-account-blocked {
+    margin-bottom: var(--pix-spacing-2x);
+    color: var(--pix-warning-500);
+  }
+
   &__authentication-methods {
     > * {
       margin: 0;

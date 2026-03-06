@@ -21,6 +21,28 @@ function _buildScoOrganizationLearnerWithAllConnectionTypes(databaseBuilder) {
     username: 'eliza.delajungle.0101',
   });
 
+  const scoTemporarilyBlockedUser = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Adrienne',
+    lastName: 'Kepoura',
+    email: 'adrienne.kepoura@example.net',
+    username: 'adrienne.kepoura.0101',
+  });
+  databaseBuilder.factory.buildUserLogin({
+    temporaryBlockedUntil: new Date(Date.now() + 12 * 31 * 24 * 3600 * 1000), // 1 year into the future
+    userId: scoTemporarilyBlockedUser.id,
+  });
+
+  const scoBlockedUser = databaseBuilder.factory.buildUser.withRawPassword({
+    firstName: 'Jacques',
+    lastName: 'Sonne',
+    email: 'jacques.sonne@example.net',
+    username: 'jacques.sonne.0101',
+  });
+  databaseBuilder.factory.buildUserLogin({
+    blockedAt: new Date(),
+    userId: scoBlockedUser.id,
+  });
+
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
     firstName: 'Kelly',
     lastName: 'Coptere',
@@ -34,6 +56,18 @@ function _buildScoOrganizationLearnerWithAllConnectionTypes(databaseBuilder) {
     nationalStudentId: '123456789ED',
     organizationId: SCO_ORGANIZATION_ID,
   };
+  const scoTemporarilyBlockedUserDetails = {
+    ...scoTemporarilyBlockedUser,
+    externalIdentifier: 'externalME',
+    nationalStudentId: '123456789ME',
+    organizationId: SCO_ORGANIZATION_ID,
+  };
+  const scoBlockedUserDetails = {
+    ...scoBlockedUser,
+    externalIdentifier: 'externalJS',
+    nationalStudentId: '123456789JS',
+    organizationId: SCO_ORGANIZATION_ID,
+  };
   const scoNoGarUserDetails = {
     ...scoNoGarUser,
     externalIdentifier: 'externalKC',
@@ -44,7 +78,7 @@ function _buildScoOrganizationLearnerWithAllConnectionTypes(databaseBuilder) {
   _buildOrganizationLearners({
     birthdate: '2011-01-01',
     databaseBuilder,
-    users: [scoUserDetails, scoNoGarUserDetails],
+    users: [scoUserDetails, scoTemporarilyBlockedUserDetails, scoBlockedUserDetails, scoNoGarUserDetails],
     withGarAuthenticationMethod: true,
   });
 }
@@ -320,7 +354,7 @@ function _buildScoOrganizationLearnersWithoutConnectionType(databaseBuilder) {
 
 function _buildScoNoGarOrganizationLearnersWithoutConnectionType(databaseBuilder) {
   databaseBuilder.factory.buildOrganizationLearner({
-    firstName: 'Maude',
+    firstName: 'Adrienne',
     lastName: 'Javel',
     birthdate: '2014-05-05',
     division: '6B',

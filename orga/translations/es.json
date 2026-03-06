@@ -1781,7 +1781,11 @@
         "description": "Tabla de alumnos ordenada por nombre. Para los estudiantes que han proporcionado un método de conexión, puede utilizar un menú en la columna \"Acciones\" para gestionar los métodos de conexión autorizados y restablecer la contraseña del estudiante.",
         "empty": "No hay estudiantes."
       },
-      "title": "{count, plural, =0 {Estudiantes} =1 {Estudiante ({count})} other {Estudiantes ({count})}}"
+      "title": "{count, plural, =0 {Estudiantes} =1 {Estudiante ({count})} other {Estudiantes ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Cuenta bloqueada",
+        "temporarily-blocked": "Cuenta bloqueada temporalmente"
+      }
     },
     "sso-selection": {
       "login": {

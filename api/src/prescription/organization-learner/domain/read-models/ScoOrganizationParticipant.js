@@ -8,6 +8,8 @@ class ScoOrganizationParticipant {
     userId,
     username,
     email,
+    isTemporarilyBlocked,
+    isBlocked,
     isAuthenticatedFromGAR,
     division,
     participationCount,
@@ -27,6 +29,8 @@ class ScoOrganizationParticipant {
     this.userId = userId;
     this.username = username;
     this.email = email;
+    this.isTemporarilyBlocked = isTemporarilyBlocked;
+    this.isBlocked = isBlocked;
     this.isAuthenticatedFromGAR = isAuthenticatedFromGAR;
     this.division = division;
     this.participationCount = participationCount;

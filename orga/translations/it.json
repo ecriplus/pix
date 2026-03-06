@@ -1781,7 +1781,11 @@
         "description": "Tabella degli studenti ordinata per nome. Per gli studenti che hanno fornito un metodo di connessione, è possibile utilizzare un menu nella colonna 'Azioni' per gestire i metodi di connessione autorizzati e reimpostare la password dello studente.",
         "empty": "Nessun studente."
       },
-      "title": "{count, plural, =0 {Studenti} =1 {Studente ({count})} other {Studenti ({count})}}"
+      "title": "{count, plural, =0 {Studenti} =1 {Studente ({count})} other {Studenti ({count})}}",
+      "user-account-blocking-types": {
+        "blocked": "Account bloccato",
+        "temporarily-blocked": "Account temporaneamente bloccato"
+      }
     },
     "sso-selection": {
       "login": {
