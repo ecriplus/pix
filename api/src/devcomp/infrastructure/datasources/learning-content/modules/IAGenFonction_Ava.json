@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles compétences&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
+    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles capacités : ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -809,7 +809,7 @@
               "element": {
                 "id": "8454a04e-e0aa-432f-97da-72c94c43e3e5",
                 "type": "text",
-                "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les fournisseurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
+                "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les développeurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
               }
             },
             {
