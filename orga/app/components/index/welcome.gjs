@@ -1,5 +1,5 @@
 import { t } from 'ember-intl';
-import ScoCommunication from 'pix-orga/components/banner/sco-communication';
+import ScoBanner from 'pix-orga/components/banner/sco-banner';
 import PageTitle from 'pix-orga/components/ui/page-title';
 
 <template>
@@ -13,7 +13,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
     </:subtitle>
 
     <:notificationAlert>
-      <ScoCommunication @forceDisplayBanner={{true}} />
+      <ScoBanner />
     </:notificationAlert>
   </PageTitle>
 </template>
