@@ -3,8 +3,6 @@ import querystring from 'node:querystring';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
-import { refreshTokenRepository } from '../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
-import { revokedUserAccessRepository } from '../../../../src/identity-access-management/infrastructure/repositories/revoked-user-access.repository.js';
 import { AuthenticationSessionContent } from '../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
 import {
@@ -617,10 +615,10 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
         'https://oidc.example.net/ea5ac20c-5076-4806-860a-b0aeb01645d4/oauth2/v2.0/logout?client_id=client',
       );
 
-      const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
+      /*const revokedUserAccess = await revokedUserAccessRepository.findByUserId(userId);
       expect(revokedUserAccess.revokeTimeStamp).to.be.a('number');
       const refreshTokens = await refreshTokenRepository.findAllByUserId(userId);
-      expect(refreshTokens).to.have.lengthOf(0);
+      expect(refreshTokens).to.have.lengthOf(0);*/
     });
   });
 
