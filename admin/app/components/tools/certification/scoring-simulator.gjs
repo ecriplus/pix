@@ -14,6 +14,7 @@ export default class ScoringSimulator extends Component {
   @tracked validationStatus = 'default';
   @tracked score = null;
   @tracked capacity = null;
+  @tracked date = new Date();
   @tracked simulatorReport = null;
   @tracked errors = [];
   @service store;
@@ -36,14 +37,15 @@ export default class ScoringSimulator extends Component {
     if (isFormInvalid) {
       return;
     }
-
     this.simulatorReport = await adapter.getSimulatorResult({
       score: this.score,
       capacity: this.capacity,
+      date: this.date,
     });
 
     this.score = null;
     this.capacity = null;
+    this.date = new Date();
   }
 
   @action
@@ -56,6 +58,11 @@ export default class ScoringSimulator extends Component {
   updateCapacity(event) {
     this._cleanErrors();
     this.capacity = event.target.value;
+  }
+
+  @action
+  updateDate(event) {
+    this.date = event.target.value;
   }
 
   checkFormValidity() {
@@ -89,6 +96,10 @@ export default class ScoringSimulator extends Component {
 
         <PixInput @id="capacity" {{on "input" this.updateCapacity}} @value={{this.capacity}} type="number">
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.capacity-input"}}</:label>
+        </PixInput>
+
+        <PixInput type="date" @value={{this.date}} {{on "change" this.updateDate}}>
+          <:label>{{t "pages.administration.certification.scoring-simulator.labels.date-input"}}</:label>
         </PixInput>
 
         <PixButton
