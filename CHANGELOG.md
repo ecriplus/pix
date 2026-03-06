@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.348.0](https://github.com/1024pix/pix/compare/v5.347.0...v5.348.0) (2026-03-06)
+
+### :rocket: Amélioration
+
+- [#15365](https://github.com/1024pix/pix/pull/15365) Ajout de la route de création d'un réseau (PIX-21295). 
+
+### :building_construction: Tech
+
+- [#15361](https://github.com/1024pix/pix/pull/15361) :recycle: Réduit l'utilisation de `Lodash` - suppression de `_.compact` 
+- [#15342](https://github.com/1024pix/pix/pull/15342) Gérer les URLs dans le service dédié (PIX-21807). 
+- [#15354](https://github.com/1024pix/pix/pull/15354) Vérifier l'unicité des shortIds lors des tests des modules (PIX21816) 
+
+### :arrow_up: Montée de version
+
+- [#15367](https://github.com/1024pix/pix/pull/15367) Met à jour les dépendances `stylelint-css-config` (ADMIN).
+
 # [5.347.0](https://github.com/1024pix/pix/compare/v5.346.0...v5.347.0) (2026-03-05)
 
 ### :rocket: Amélioration
