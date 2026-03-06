@@ -65,7 +65,7 @@ export default class ModuleQcm extends ModuleElement {
 
   @action
   getProposalState(proposalId) {
-    if (!this.selectedAnswerIds.has(proposalId)) {
+    if (!this.correction || !this.selectedAnswerIds.has(proposalId)) {
       return 'neutral';
     }
 
