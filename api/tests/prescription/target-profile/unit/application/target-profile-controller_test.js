@@ -44,7 +44,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
       frameworks = Symbol('frameworks');
       serializedFrameworks = Symbol('serializedFrameworks');
 
-      sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').returns({ frameworks });
+      sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').resolves({ frameworks });
       frameworkwithoutskillserializer = {
         serialize: sinon.stub().returns(serializedFrameworks),
       };
@@ -66,6 +66,49 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
       expect(result).to.equal(serializedFrameworks);
       expect(usecases.getLearningContentForTargetProfileSubmission).to.have.been.calledWithExactly({ locale: 'en' });
       expect(frameworkwithoutskillserializer.serialize).to.have.been.calledWithExactly(frameworks);
+    });
+  });
+
+  describe('#findLearningContentsByOrganizationId', function () {
+    let frameworks;
+    let frameworkwithoutskillserializer;
+    let organizationId;
+    let serializedFrameworks;
+
+    beforeEach(function () {
+      frameworks = Symbol('frameworks');
+      organizationId = Symbol('organizationId');
+      serializedFrameworks = Symbol('serializedFrameworks');
+
+      sinon.stub(usecases, 'findLearningContentsByOrganizationId');
+
+      frameworkwithoutskillserializer = {
+        serialize: sinon.stub(),
+      };
+    });
+
+    it('should fetch and return frameworks, serialized as JSONAPI', async function () {
+      // given
+      const locale = 'en';
+      const request = {
+        params: { organizationId },
+        state: { locale },
+      };
+
+      usecases.findLearningContentsByOrganizationId
+        .resolves([])
+        .withArgs({ organizationId, locale: 'en' })
+        .resolves(frameworks);
+
+      frameworkwithoutskillserializer.serialize.withArgs(frameworks).returns(serializedFrameworks);
+      // when
+
+      const result = await targetProfileController.findLearningContentsByOrganizationId(request, hFake, {
+        frameworkwithoutskillserializer,
+      });
+
+      // then
+      expect(result).to.equal(serializedFrameworks);
     });
   });
 });

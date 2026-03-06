@@ -19,8 +19,20 @@ const getFrameworksForTargetProfileSubmission = async function (
   return dependencies.frameworkwithoutskillserializer.serialize(learningContent.frameworks);
 };
 
+const findLearningContentsByOrganizationId = async function (
+  request,
+  _,
+  dependencies = { frameworkwithoutskillserializer },
+) {
+  const organizationId = request.params.organizationId;
+  const locale = getChallengeLocale(request);
+  const learningContents = await usecases.findLearningContentsByOrganizationId({ organizationId, locale });
+  return dependencies.frameworkwithoutskillserializer.serialize(learningContents);
+};
+
 const targetProfileController = {
   getFrameworksForTargetProfileSubmission,
+  findLearningContentsByOrganizationId,
   findTargetProfiles,
 };
 
