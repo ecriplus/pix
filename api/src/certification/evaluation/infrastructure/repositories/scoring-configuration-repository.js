@@ -2,6 +2,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
+import { SCOPES } from '../../../shared/domain/models/Scopes.js';
 import { V3CertificationScoring } from '../../domain/models/V3CertificationScoring.js';
 
 export const getLatestByDateAndLocale = async ({ locale, date }) => {
@@ -17,7 +18,8 @@ export const getLatestByDateAndLocale = async ({ locale, date }) => {
       'competencesScoringConfiguration',
       'minimumAnswersRequiredToValidateACertification',
     )
-    .where('startDate', '<=', date)
+    .where('scope', SCOPES.CORE)
+    .andWhere('startDate', '<=', date)
     .andWhere((queryBuilder) => {
       queryBuilder.whereNull('expirationDate').orWhere('expirationDate', '>', date);
     })
