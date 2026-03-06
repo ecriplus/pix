@@ -61,16 +61,6 @@ export default class TubeList extends Component {
   isTubeSelected = (tube) => {
     return this.selectedTubeIds.includes(tube.id);
   };
-
-  get sortedAreas() {
-    return this.args.frameworks
-      .map((framework) => framework.sortedAreas)
-      .flat()
-      .sort((a, b) => {
-        return a.code.localeCompare(b.code);
-      });
-  }
-
   get haveNoTubeSelected() {
     return this.selectedTubeIds.length === 0;
   }
@@ -135,58 +125,64 @@ export default class TubeList extends Component {
           </PixButtonLink>
         {{/if}}
       </div>
-      {{#each this.sortedAreas as |area|}}
-        <PixAccordions class="{{area.color}}">
-          <:title>{{area.code}} · {{area.title}}</:title>
-          <:content>
-            {{#each area.sortedCompetences as |competence|}}
-              <h2>{{competence.index}} {{competence.name}}</h2>
-              <table class="table content-text content-text--small preselect-tube-table">
-                <caption>{{t "pages.preselect-target-profile.table.caption"}}</caption>
-                <thead>
-                  <tr>
-                    <Header @size="medium" scope="col">
-                      {{t "pages.preselect-target-profile.table.column.theme-name"}}
-                    </Header>
-                    <Header @size="wide" scope="col">
-                      {{t "pages.preselect-target-profile.table.column.name"}}
-                    </Header>
-                    <Header @size="small" @align="center" scope="col">
-                      {{t "pages.preselect-target-profile.table.column.mobile"}}
-                    </Header>
-                    <Header @size="small" @align="center" scope="col">
-                      {{t "pages.preselect-target-profile.table.column.tablet"}}
-                    </Header>
-                  </tr>
-                </thead>
+      {{#each @frameworks as |framework|}}
+        <section class="framework">
+          <h2 class="framework__title">{{framework.name}}</h2>
+          <div>
+            {{#each framework.sortedAreas as |area|}}
+              <PixAccordions class="{{area.color}}">
+                <:title>{{area.code}} · {{area.title}}</:title>
+                <:content>
+                  {{#each area.sortedCompetences as |competence|}}
+                    <h3>{{competence.index}} {{competence.name}}</h3>
+                    <table class="table content-text content-text--small preselect-tube-table">
+                      <caption>{{t "pages.preselect-target-profile.table.caption"}}</caption>
+                      <thead>
+                        <tr>
+                          <Header @size="medium" scope="col">
+                            {{t "pages.preselect-target-profile.table.column.theme-name"}}
+                          </Header>
+                          <Header @size="wide" scope="col">
+                            {{t "pages.preselect-target-profile.table.column.name"}}
+                          </Header>
+                          <Header @size="small" @align="center" scope="col">
+                            {{t "pages.preselect-target-profile.table.column.mobile"}}
+                          </Header>
+                          <Header @size="small" @align="center" scope="col">
+                            {{t "pages.preselect-target-profile.table.column.tablet"}}
+                          </Header>
+                        </tr>
+                      </thead>
 
-                <tbody>
-                  {{#each competence.sortedThematics as |thematic|}}
-                    {{#each thematic.tubes as |tube index|}}
-                      <tr class="row-tube" aria-label={{t "pages.preselect-target-profile.table.row-title"}}>
-                        {{#if (eq index 0)}}
-                          <Thematic
-                            @thematic={{thematic}}
-                            @getThematicState={{this.getThematicState}}
-                            @selectThematic={{this.selectThematic}}
-                            @unselectThematic={{this.unselectThematic}}
-                          />
-                        {{/if}}
-                        <Tube
-                          @tube={{tube}}
-                          @isTubeSelected={{this.isTubeSelected}}
-                          @selectTube={{this.selectTube}}
-                          @unselectTube={{this.unselectTube}}
-                        />
-                      </tr>
-                    {{/each}}
+                      <tbody>
+                        {{#each competence.sortedThematics as |thematic|}}
+                          {{#each thematic.tubes as |tube index|}}
+                            <tr class="row-tube" aria-label={{t "pages.preselect-target-profile.table.row-title"}}>
+                              {{#if (eq index 0)}}
+                                <Thematic
+                                  @thematic={{thematic}}
+                                  @getThematicState={{this.getThematicState}}
+                                  @selectThematic={{this.selectThematic}}
+                                  @unselectThematic={{this.unselectThematic}}
+                                />
+                              {{/if}}
+                              <Tube
+                                @tube={{tube}}
+                                @isTubeSelected={{this.isTubeSelected}}
+                                @selectTube={{this.selectTube}}
+                                @unselectTube={{this.unselectTube}}
+                              />
+                            </tr>
+                          {{/each}}
+                        {{/each}}
+                      </tbody>
+                    </table>
                   {{/each}}
-                </tbody>
-              </table>
+                </:content>
+              </PixAccordions>
             {{/each}}
-          </:content>
-        </PixAccordions>
-
+          </div>
+        </section>
       {{/each}}
     </section>
   </template>

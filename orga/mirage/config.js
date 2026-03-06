@@ -566,6 +566,10 @@ function routes() {
     return schema.frameworks.all();
   });
 
+  this.get('/organizations/:organizationId/frameworks', (schema) => {
+    return schema.frameworks.all();
+  });
+
   this.delete('/campaigns/:campaignId/campaign-participations/:campaignParticipationId', (schema, request) => {
     const campaignParticipationId = request.params.campaignParticipationId;
 

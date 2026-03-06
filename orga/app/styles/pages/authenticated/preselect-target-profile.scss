@@ -119,4 +119,14 @@
       }
     }
   }
+
+  .framework {
+    margin: var(--pix-spacing-4x) 0 var(--pix-spacing-8x);
+
+    &__title {
+      @extend %pix-title-s;
+
+      margin-bottom: var(--pix-spacing-4x);
+    }
+  }
 }
