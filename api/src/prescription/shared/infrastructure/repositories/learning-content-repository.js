@@ -13,12 +13,12 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
-async function findByCampaignParticipationId(campaignParticipationId, locale) {
+export async function findByCampaignParticipationId(campaignParticipationId, locale) {
   const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
   return await findByCampaignId(campaignId, locale);
 }
 
-async function findByCampaignId(campaignId, locale) {
+export async function findByCampaignId(campaignId, locale) {
   const skills = await campaignRepository.findSkills({ campaignId });
 
   const frameworks = await _getLearningContentBySkillIds(skills, locale);
@@ -26,7 +26,7 @@ async function findByCampaignId(campaignId, locale) {
   return new CampaignLearningContent(frameworks);
 }
 
-async function findByTargetProfileId(targetProfileId, locale) {
+export async function findByTargetProfileId(targetProfileId, locale) {
   const knexConn = DomainTransaction.getConnection();
 
   const cappedTubesDTO = await knexConn('target-profile_tubes')
@@ -44,7 +44,7 @@ async function findByTargetProfileId(targetProfileId, locale) {
   return new LearningContent(frameworks);
 }
 
-async function findByFrameworkNames({ frameworkNames, locale }) {
+export async function findByFrameworkNames({ frameworkNames, locale }) {
   const baseFrameworks = [];
   for (const frameworkName of frameworkNames) {
     baseFrameworks.push(await frameworkRepository.getByName(frameworkName));
@@ -52,6 +52,32 @@ async function findByFrameworkNames({ frameworkNames, locale }) {
 
   const frameworks = await _getLearningContentByFrameworks(baseFrameworks, locale);
   return new LearningContent(frameworks);
+}
+
+export async function findByOrganizationId({ organizationId, locale }) {
+  const knexConn = DomainTransaction.getConnection();
+  const tubesWithLevel = await knexConn('target-profile-shares')
+    .join('target-profile_tubes', 'target-profile_tubes.targetProfileId', '=', 'target-profile-shares.targetProfileId')
+    .select({ id: 'tubeId' })
+    .where({ organizationId })
+    .groupBy('tubeId');
+
+  if (tubesWithLevel.length === 0) {
+    return [];
+  }
+
+  const tubes = await tubeRepository.findByRecordIds(
+    tubesWithLevel.map((dto) => dto.id),
+    locale,
+  );
+
+  const frameworks = await _getLearningContentByTubes(tubes, locale);
+
+  return frameworks.sort((frameworkA, frameworkB) => {
+    if (frameworkA.name === 'Pix') return -1;
+    if (frameworkB.name === 'Pix') return 1;
+    return frameworkA.name.localeCompare(frameworkB.name);
+  });
 }
 
 async function _getLearningContentBySkillIds(skills, locale) {
@@ -147,5 +173,3 @@ async function _getLearningContentByFrameworks(frameworks, locale) {
 
   return frameworks;
 }
-
-export { findByCampaignId, findByCampaignParticipationId, findByFrameworkNames, findByTargetProfileId };
