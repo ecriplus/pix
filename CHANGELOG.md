@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.349.0](https://github.com/1024pix/pix/compare/v5.348.0...v5.349.0) (2026-03-06)
+
+### :rocket: Amélioration
+
+- [#15363](https://github.com/1024pix/pix/pull/15363) Ajoute l'identifiant de version et de candidate au parcours de certification (PIX-21824) 
+- [#15344](https://github.com/1024pix/pix/pull/15344) creation RepondreMail-IND 
+- [#15348](https://github.com/1024pix/pix/pull/15348) MDX-57 retours eval ind 
+- [#15362](https://github.com/1024pix/pix/pull/15362) retour-experts 
+- [#15211](https://github.com/1024pix/pix/pull/15211) retours edito modules 1e marche 
+- [#15340](https://github.com/1024pix/pix/pull/15340) Update IAGenFonction_NOV.json 
+
+### :bug: Correction
+
+- [#15373](https://github.com/1024pix/pix/pull/15373) Les QCM n'affichent plus les status success/error lorsqu'on envoie sa réponse (PIX-21806). 
+
+### :building_construction: Tech
+
+- [#15308](https://github.com/1024pix/pix/pull/15308)  Ajout d'un script pour générer demo-epreuve-components (PIX-21769) 
+- [#15372](https://github.com/1024pix/pix/pull/15372) Éviter un test d'intégration certif flaky 
+- [#15364](https://github.com/1024pix/pix/pull/15364) Réduire le volume de donnée récupéré pour générer les attestations (Pix-21758). 
+
+### :arrow_up: Montée de version
+
+- [#15331](https://github.com/1024pix/pix/pull/15331) Update dependency @1024pix/pix-ui to ^60.0.3 (certif)
+
 # [5.348.0](https://github.com/1024pix/pix/compare/v5.347.0...v5.348.0) (2026-03-06)
 
 ### :rocket: Amélioration
