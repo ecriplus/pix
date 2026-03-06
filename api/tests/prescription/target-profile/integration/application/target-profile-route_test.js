@@ -67,4 +67,62 @@ describe('Integration | Application | target-profile-route', function () {
       expect(response.statusCode).to.equal(400);
     });
   });
+  describe('GET /organizations/{organizationId}/frameworks', function () {
+    const method = 'GET';
+
+    let headers, httpTestServer, organizationId, url, payload;
+
+    beforeEach(async function () {
+      sinon.stub(targetProfileController, 'findLearningContentsByOrganizationId').returns('ok');
+      httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+      httpTestServer.setupAuthentication();
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+    });
+
+    it('return a 401 status code when trying to call route unauthenticated', async function () {
+      url = '/api/organizations/2/frameworks';
+      // given
+      headers = {
+        authorization: null,
+      };
+
+      // when
+      const response = await httpTestServer.request(method, url, null, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(401);
+    });
+
+    it('return a 403 status code if authenticated user does not belong to organization', async function () {
+      const lambdaUser = databaseBuilder.factory.buildUser().id;
+      url = `/api/organizations/${organizationId}/frameworks`;
+      // given
+      headers = generateAuthenticatedUserRequestHeaders({ userId: lambdaUser });
+
+      // when
+      const response = await httpTestServer.request(method, url, null, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+    });
+
+    it('return a 400 status code when trying to call route with illegal organization id', async function () {
+      // given
+      const wrongUrl = `/api/organizations/GodZilla/frameworks`;
+      const adminUser = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildMembership({ organizationId, userId: adminUser, organizationRole: 'ADMIN' });
+      await databaseBuilder.commit();
+      headers = generateAuthenticatedUserRequestHeaders({ userId: adminUser });
+      payload = {
+        listLearners: [123],
+      };
+
+      // when
+      const response = await httpTestServer.request(method, wrongUrl, payload, null, headers);
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+  });
 });

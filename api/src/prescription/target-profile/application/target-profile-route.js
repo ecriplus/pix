@@ -47,6 +47,29 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/frameworks',
+      config: {
+        handler: targetProfileController.findLearningContentsByOrganizationId,
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToOrganization,
+            assign: 'checkUserBelongsToOrganization',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        tags: ['api', 'framework'],
+        notes: [
+          "Cette route est restreinte aux utilisateurs authentifiés membre d'une organisation",
+          'Elle permet de récupérer tous les référentiel à disposition pour formuler une demande de création de profil cible',
+        ],
+      },
+    },
   ]);
 };
 
