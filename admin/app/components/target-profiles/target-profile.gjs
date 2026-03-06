@@ -105,6 +105,9 @@ export default class TargetProfile extends Component {
     try {
       await adapter.outdate(this.args.model.id);
       this.args.model.reload();
+      if (this.router.currentRouteName.startsWith('authenticated.target-profiles.target-profile.organizations')) {
+        this.router.refresh('authenticated.target-profiles.target-profile.organizations');
+      }
       return this.pixToast.sendSuccessNotification({ message: 'Profil cible marqué comme obsolète.' });
     } catch (responseError) {
       this._handleResponseError(responseError);
