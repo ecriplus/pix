@@ -344,7 +344,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         accessibilityAdjustmentNeeded: false,
         subscriptions: [subscriptionCore, subscriptionComplementary],
         reconciledAt: null,
-        subscription: null,
       };
       databaseBuilder.factory.buildSession({ id: candidateData.sessionId });
       databaseBuilder.factory.buildComplementaryCertification({
@@ -470,7 +469,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateA.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateA.accessibilityAdjustmentNeeded,
-        subscription: null,
       });
       expect(savedCandidateAData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateAData.extraTimePercentage)).to.equal(candidateA.extraTimePercentage);
@@ -524,7 +522,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateB.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateB.accessibilityAdjustmentNeeded,
-        subscription: null,
       });
       expect(savedCandidateBData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateBData.extraTimePercentage)).to.equal(candidateB.extraTimePercentage);
@@ -570,7 +567,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateC.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateC.accessibilityAdjustmentNeeded,
-        subscription: null,
       });
       expect(savedCandidateCData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateCData.extraTimePercentage)).to.equal(candidateC.extraTimePercentage);
