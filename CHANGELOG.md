@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.349.1](https://github.com/1024pix/pix/compare/v5.349.0...v5.349.1) (2026-03-06)
+
+### :rewind: Retour en arrière
+
+- [#15381](https://github.com/1024pix/pix/pull/15381) Revert "[FEATURE] Ajoute l'identifiant de version et de candidate au parcours de certification (PIX-21824)"
+
 # [5.349.0](https://github.com/1024pix/pix/compare/v5.348.0...v5.349.0) (2026-03-06)
 
 ### :rocket: Amélioration
