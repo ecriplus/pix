@@ -13,12 +13,23 @@ class RedisClient {
     this._client.on('connect', () => logger.info({ redisClient: this._clientName }, 'Connected to server'));
     this._client.on('end', () => logger.info({ redisClient: this._clientName }, 'Disconnected from server'));
     this._client.on('error', (err) => logger.error({ redisClient: this._clientName, err }, 'Error encountered'));
+    this._client.defineCommand('releaseLock', {
+      numberOfKeys: 1,
+      lua: `
+        if redis.call("GET", KEYS[1]) == ARGV[1] then
+          return redis.call("DEL", KEYS[1])
+        else
+          return 0
+        end
+      `,
+    });
 
     this.ttl = this._wrapWithPrefix(this._client.ttl).bind(this._client);
     this.get = this._wrapWithPrefix(this._client.get).bind(this._client);
     this.incr = this._wrapWithPrefix(this._client.incr).bind(this._client);
     this.decr = this._wrapWithPrefix(this._client.decr).bind(this._client);
     this.set = this._wrapWithPrefix(this._client.set).bind(this._client);
+    this.releaseLock = this._wrapWithPrefix(this._client.releaseLock).bind(this._client);
     this.del = this._wrapWithPrefix(this._client.del).bind(this._client);
     this.expire = this._wrapWithPrefix(this._client.expire).bind(this._client);
     this.lpush = this._wrapWithPrefix(this._client.lpush).bind(this._client);
