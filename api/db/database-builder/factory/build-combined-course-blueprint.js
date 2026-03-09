@@ -1,4 +1,9 @@
+import _ from 'lodash';
+
+import { CombinedCourseBlueprint } from '../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { databaseBuffer } from '../database-buffer.js';
+import { buildQuest } from './build-quest.js';
+import { buildTargetProfile } from './build-target-profile.js';
 
 const buildCombinedCourseBlueprint = function ({
   id = databaseBuffer.getNextId(),
@@ -9,7 +14,17 @@ const buildCombinedCourseBlueprint = function ({
   createdAt = new Date(),
   updatedAt,
   content = [],
+  questId,
 } = {}) {
+  const targetProfileId = buildTargetProfile().id;
+  questId = _.isUndefined(questId)
+    ? buildQuest({
+        rewardType: null,
+        rewardId: null,
+        successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId }).toDTO()],
+      }).id
+    : questId;
+
   const values = {
     id,
     name,
@@ -19,6 +34,7 @@ const buildCombinedCourseBlueprint = function ({
     createdAt,
     updatedAt: updatedAt ?? createdAt,
     content: JSON.stringify(content),
+    questId,
   };
 
   return databaseBuffer.pushInsertable({

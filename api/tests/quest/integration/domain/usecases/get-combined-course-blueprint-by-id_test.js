@@ -37,7 +37,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
 
     //then
     expect(result).to.be.instanceOf(CombinedCourseBlueprint);
-    expect(result).deep.equal({
+    expect(result).deep.contain({
       id: 1,
       name: 'Mon parcours combiné',
       internalName: 'Mon schéma de parcours combiné',
