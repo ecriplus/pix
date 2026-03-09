@@ -597,7 +597,7 @@
                   {
                     "type": "select",
                     "input": "Un",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "Sélectionnez",
                     "tolerances": [],
@@ -625,12 +625,12 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>2 =&nbsp;</p>"
+                    "content": "</br><p>2 =&nbsp;</p>"
                   },
                   {
                     "type": "select",
                     "input": "Deux",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "Sélectionnez",
                     "tolerances": [],
@@ -658,12 +658,12 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>3 =</p>"
+                    "content": "</br><p>3 =</p>"
                   },
                   {
                     "type": "select",
                     "input": "Trois",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "Sélectionnez",
                     "tolerances": [],
@@ -691,12 +691,12 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>4 =</p>"
+                    "content": "</br><p>4 =</p>"
                   },
                   {
                     "type": "select",
                     "input": "Quatre",
-                    "display": "block",
+                    "display": "inline",
                     "placeholder": "- Sélectionnez -",
                     "ariaLabel": "Sélectionnez",
                     "tolerances": [],
