@@ -173,7 +173,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>… </p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
+                "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>, etc.</p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -341,7 +341,7 @@
                 "id": "2a32ee79-570f-447f-b0c1-b56534d4f670",
                 "type": "expand",
                 "title": "💡 L’astuce pratique",
-                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️) et Entrée </p>"
+                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️) et Entrée. </p>"
               }
             },
             {
@@ -522,7 +522,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>: un discours,&nbsp;</li><li>le <strong>ton </strong>: amusant,</li><li>et le <strong>contexte </strong>est donné par la description du pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</li></ul>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>: un discours,&nbsp;</li><li>le <strong>ton </strong>: amusant,</li><li>et le <strong>contexte </strong> qui est donné par la description du pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</li></ul>"
                         }
                       },
                       "solutions": [
@@ -555,7 +555,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte-rendu qui correspond bien</strong> aux notes de Gustave.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte rendu</strong> aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte rendu qui correspond bien</strong> aux notes de Gustave.</p>"
               }
             },
             {
@@ -576,7 +576,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p><br></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p><br></p>"
               }
             },
             {
@@ -585,7 +585,7 @@
                 "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Dans le cas où vous avez obtenu un compte-rendu, le logiciel a sûrement fait une <strong>erreur</strong>. En effet, les <strong>récompenses </strong>du tournois sont des <strong>médailles </strong>dans la prise de notes de Gustave.&nbsp;🎖️</p><p>Il faut donc demander au logiciel de corriger cette erreur.</p><p>Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Dans le cas où vous avez obtenu un compte rendu, le logiciel a sûrement fait une <strong>erreur</strong>. En effet, les <strong>récompenses </strong>du tournoi sont des <strong>médailles </strong>dans la prise de notes de Gustave.&nbsp;🎖️</p><p>Il faut donc demander au logiciel de corriger cette erreur.</p><p>Si vous avez réussi à obtenir un compte rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
@@ -606,7 +606,7 @@
               "element": {
                 "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
-                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d'au moins 4 terrains. </p>\n<p>Son budget maximal de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d'IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
+                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d'au moins 4 terrains. </p>\n<p>Son budget maximal est de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d'IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
               }
             },
             {
@@ -617,7 +617,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
-                "instruction": "<p>Utilisez le logiciel d’IA de Jolieville, ci-dessous, pour trouver le gymnase qui correspond à ses besoins🔍</p><p>Une fois que vous avez trouvé, écrivez le nom du gymnase en dessous.&nbsp;👇</p>",
+                "instruction": "<p>Utilisez le logiciel d’IA de Jolieville, ci-dessous, pour trouver le gymnase qui correspond à ses besoins.&nbsp;🔍</p><p>Une fois que vous avez trouvé, écrivez le nom du gymnase en dessous.&nbsp;👇</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -627,7 +627,7 @@
               "element": {
                 "id": "0ccbd3b1-b27d-46d7-9b8c-d2fffc76b8e3",
                 "type": "qrocm",
-                "instruction": "<p>Quel gymnase devrait contacter Gustave ?</p>",
+                "instruction": "<p>Quel gymnase Gustave devrait-il contacter ?</p>",
                 "proposals": [
                   {
                     "input": "NomGymnase",
