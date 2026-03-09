@@ -737,11 +737,6 @@ export default function routes() {
     };
   });
 
-  this.post('/oidc/logout', () => {
-    const redirectLogoutUrl = undefined; // because shouldCloseSession == false
-    return { redirectLogoutUrl };
-  });
-
   this.get('/admin/combined-course-blueprints');
   this.post('/admin/combined-course-blueprints');
   this.post(
