@@ -9,12 +9,13 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import formatDateToStandard from 'pix-admin/utils/date';
 
 export default class ScoringSimulator extends Component {
   @tracked validationStatus = 'default';
   @tracked score = null;
   @tracked capacity = null;
-  @tracked date = new Date();
+  @tracked date = formatDateToStandard(new Date());
   @tracked simulatorReport = null;
   @tracked errors = [];
   @service store;
@@ -42,10 +43,6 @@ export default class ScoringSimulator extends Component {
       capacity: this.capacity,
       date: this.date,
     });
-
-    this.score = null;
-    this.capacity = null;
-    this.date = new Date();
   }
 
   @action
@@ -90,7 +87,7 @@ export default class ScoringSimulator extends Component {
       </header>
 
       <form class="scoring-simulator-form">
-        <PixInput {{on "input" this.updateScore}} @id="score" @value={{this.score}} type="number">
+        <PixInput @id="score" {{on "input" this.updateScore}} @value={{this.score}} type="number">
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.score-input"}}</:label>
         </PixInput>
 
@@ -98,7 +95,7 @@ export default class ScoringSimulator extends Component {
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.capacity-input"}}</:label>
         </PixInput>
 
-        <PixInput type="date" @value={{this.date}} {{on "change" this.updateDate}}>
+        <PixInput @id="date" {{on "change" this.updateDate}} @value={{this.date}} type="date">
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.date-input"}}</:label>
         </PixInput>
 
