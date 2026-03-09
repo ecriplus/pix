@@ -1,8 +1,26 @@
 import { networkAdminController } from '../../../../../src/organizational-entities/application/network/network.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | Network', function () {
+  describe('#findAllNetworks', function () {
+    it('calls findAllNetworks usecase and Network serializer', async function () {
+      // given
+      const network1 = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Network 1' });
+      const network2 = domainBuilder.acquisition.buildNetwork({ id: 2, name: 'Network 2' });
+      const networks = [network1, network2];
+      sinon.stub(usecases, 'findAllNetworks').resolves(networks);
+      const networkSerializer = { serialize: sinon.stub() };
+
+      // when
+      await networkAdminController.findAllNetworks({}, hFake, { networkSerializer });
+
+      // then
+      expect(usecases.findAllNetworks).to.have.been.calledOnce;
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly(networks);
+    });
+  });
+
   describe('#create', function () {
     context('when payload contains only required fields', function () {
       it('calls "createNetwork" use case with the right parameters', async function () {
