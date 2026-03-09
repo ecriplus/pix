@@ -1,42 +1,72 @@
 import { logger } from '../../infrastructure/utils/logger.js';
-import { AssessmentEndedError, AssessmentLackOfChallengesError } from '../errors.js';
+import { AssessmentEndedError, AssessmentLackOfChallengesError, NotFoundError } from '../errors.js';
 
 export async function updateAssessmentWithNextChallenge({
-  assessment,
+  assessmentId,
   userId,
   locale,
-  assessmentRepository,
   evaluationUsecases,
+  assessmentRepository,
   certificationEvaluationRepository,
+  courseRepository,
+  competenceRepository,
+  certificationChallengeLiveAlertRepository,
+  certificationCompanionAlertRepository,
 }) {
-  if (!assessment.isStarted()) {
-    assessment.nextChallenge = null;
-    return assessment;
-  }
-  await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
-
+  const assessment = await assessmentRepository.getWithAnswers(assessmentId);
+  let globalProgression = null;
   let nextChallenge = null;
   try {
     if (assessment.isCertification()) {
-      nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+      const challengeLiveAlerts = await certificationChallengeLiveAlertRepository.getByAssessmentId({
         assessmentId: assessment.id,
-        locale,
       });
+      const companionLiveAlerts = await certificationCompanionAlertRepository.getAllByAssessmentId({
+        assessmentId: assessment.id,
+      });
+      assessment.attachLiveAlerts({ challengeLiveAlerts, companionLiveAlerts });
+      if (assessment.isStarted()) {
+        nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+          assessmentId: assessment.id,
+          locale,
+        });
+      }
     }
 
-    if (assessment.isPreview()) {
+    if (assessment.isPreview() && assessment.isStarted()) {
       nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
     }
 
     if (assessment.isDemo()) {
-      nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+      const course = await courseRepository.get(assessment.courseId);
+      if (!course.canBePlayed) {
+        throw new NotFoundError("Le test demandé n'existe pas");
+      }
+      assessment.title = course.name;
+      if (assessment.isStarted()) {
+        nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+      }
     }
 
-    if (assessment.isForCampaign()) {
+    if (assessment.isForCampaign() && assessment.isStarted()) {
+      if (assessment.isForExamCampaign()) {
+        const progression = await evaluationUsecases.getProgression({
+          progressionId: assessmentId.toString(),
+          userId,
+        });
+        globalProgression = progression.completionRate;
+      }
       nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
     }
     if (assessment.isCompetenceEvaluation()) {
-      nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({ assessment, userId, locale });
+      assessment.title = await competenceRepository.getCompetenceName({ id: assessment.competenceId, locale });
+      if (assessment.isStarted()) {
+        nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({
+          assessment,
+          userId,
+          locale,
+        });
+      }
     }
   } catch (error) {
     if (error instanceof AssessmentLackOfChallengesError) {
@@ -60,6 +90,9 @@ export async function updateAssessmentWithNextChallenge({
     }
   }
 
+  if (nextChallenge) {
+    await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
+  }
   if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {
     await assessmentRepository.updateWhenNewChallengeIsAsked({
       id: assessment.id,
@@ -68,5 +101,8 @@ export async function updateAssessmentWithNextChallenge({
   }
   assessment.nextChallenge = nextChallenge;
 
-  return assessment;
+  return {
+    assessment,
+    globalProgression,
+  };
 }

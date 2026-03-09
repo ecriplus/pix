@@ -9,7 +9,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
   let httpTestServer;
 
   beforeEach(async function () {
-    sinon.stub(sharedUsecases, 'getAssessment');
+    sinon.stub(sharedUsecases, 'updateAssessmentWithNextChallenge');
     sinon.stub(assessmentAuthorization, 'verify');
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
@@ -24,7 +24,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should resolve a 200 HTTP response', async function () {
         // given
-        sharedUsecases.getAssessment.resolves(assessment);
+        sharedUsecases.updateAssessmentWithNextChallenge.resolves({ assessment, globalProgression: null });
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');
@@ -35,7 +35,7 @@ describe('Integration | Application | Assessments | assessment-controller', func
 
       it('should return a JSON API assessment', async function () {
         // given
-        sharedUsecases.getAssessment.resolves(assessment);
+        sharedUsecases.updateAssessmentWithNextChallenge.resolves({ assessment, globalProgression: null });
 
         // when
         const response = await httpTestServer.request('GET', '/api/assessments/1234');
