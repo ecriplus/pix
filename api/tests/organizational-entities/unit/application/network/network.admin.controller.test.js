@@ -29,7 +29,7 @@ describe('Unit | Organizational Entities | Application | Network', function () {
           payload: {
             data: {
               attributes: {
-                'network-name': 'Network name',
+                name: 'Network name',
                 'organization-id': 123,
               },
             },

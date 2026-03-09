@@ -69,7 +69,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
         payload: {
           data: {
             attributes: {
-              'network-name': 'Network name',
+              name: 'Network name',
               'organization-id': organizationId,
             },
           },

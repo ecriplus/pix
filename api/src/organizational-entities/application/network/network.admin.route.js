@@ -49,7 +49,7 @@ const register = async function (server) {
           payload: Joi.object({
             data: Joi.object({
               attributes: Joi.object({
-                'network-name': Joi.string().required(),
+                name: Joi.string().required(),
                 'organization-id': identifiersType.organizationId.required(),
               }),
               type: Joi.string(),
