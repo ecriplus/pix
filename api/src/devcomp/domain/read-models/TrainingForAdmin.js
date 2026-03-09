@@ -7,6 +7,7 @@ class TrainingForAdmin {
     type,
     duration,
     locale,
+    locales,
     targetProfileIds,
     editorName,
     editorLogoUrl,
@@ -20,6 +21,7 @@ class TrainingForAdmin {
     this.type = type;
     this.duration = { ...duration }; // Prevent use of PostgresInterval object
     this.locale = locale;
+    this.locales = locales;
     this.targetProfileIds = targetProfileIds;
     this.editorName = editorName;
     this.editorLogoUrl = editorLogoUrl;

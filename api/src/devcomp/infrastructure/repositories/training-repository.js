@@ -147,6 +147,7 @@ async function create({ training }) {
     'type',
     'duration',
     'locale',
+    'locales',
     'editorName',
     'editorLogoUrl',
   ]);

@@ -142,6 +142,7 @@ export function buildTrainings(databaseBuilder) {
     title: 'Eat a croissant like the french',
     internalTitle: 'Eat a croissant like the french',
     locale: 'en',
+    locales: ['en'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
