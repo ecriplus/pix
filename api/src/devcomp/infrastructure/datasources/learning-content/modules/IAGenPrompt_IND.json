@@ -94,7 +94,7 @@
               "element": {
                 "id": "d715d4e1-fc44-4f12-98e6-48bd428e55cb",
                 "type": "text",
-                "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si  on explique les choses clairement.<br><br></p>"
+                "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si on explique les choses clairement.<br><br></p>"
               }
             }
           ]
@@ -205,7 +205,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu’à vendredi. »"
+                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! Il vous reste jusqu’à vendredi. »"
                     },
                     {
                       "direction": "inbound",
@@ -319,7 +319,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br>\n<p>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à obtenir un <strong>tableau complet</strong> avec des exercices pour les joueurs de tous niveaux.</p>"
+                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br>\n<p>Utilisez le logiciel d’IA générative ci-dessous pour l’aider à obtenir un <strong>tableau complet</strong> avec des exercices pour les joueurs de tous niveaux.</p>"
               }
             },
             {
@@ -395,7 +395,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
-                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation avec l'IA et demandez des modifications….</p>"
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation avec l’IA et demandez des modifications…</p>"
                     }
                   ]
                 }
@@ -479,7 +479,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d'un match de volley.</li></ul>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d’un match de volley.</li></ul>"
                         }
                       },
                       "solutions": [
@@ -606,7 +606,7 @@
               "element": {
                 "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
-                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d'au moins 4 terrains. </p>\n<p>Son budget maximal est de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d'IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
+                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d’au moins 4 terrains. </p>\n<p>Son budget maximal est de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d’IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
               }
             },
             {
@@ -672,7 +672,7 @@
                 "id": "abc605f3-ba2d-4ce3-a233-02a086bdf970",
                 "type": "expand",
                 "title": "🗝️ Indice 1 ",
-                "content": "Avez-vous demandé au logiciel d'IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
+                "content": "Avez-vous demandé au logiciel d’IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
               }
             },
             {
