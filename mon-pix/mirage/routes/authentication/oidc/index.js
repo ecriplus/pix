@@ -82,6 +82,13 @@ export default function (config) {
     };
   });
 
+  config.get('/oidc/redirect-logout-url', () => {
+    return {
+      redirectLogoutUrl:
+        'http://identity_provider_base_url/deconnexion?id_token_hint=ID_TOKEN&redirect_uri=http%3A%2F%2Flocalhost.fr%3A4200%2Fconnexion',
+    };
+  });
+
   config.post(
     '/oidc/user/check-reconciliation',
     {
@@ -96,9 +103,4 @@ export default function (config) {
     },
     200,
   );
-
-  config.post('/oidc/logout', () => {
-    const redirectLogoutUrl = undefined; // because shouldCloseSession == false
-    return { redirectLogoutUrl };
-  });
 }
