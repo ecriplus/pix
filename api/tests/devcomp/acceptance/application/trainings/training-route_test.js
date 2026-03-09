@@ -92,6 +92,7 @@ describe('Acceptance | Controller | training-controller', function () {
           type: trainingAttributes.type,
           link: trainingAttributes.link,
           locale: trainingAttributes.locale,
+          locales: trainingAttributes.locales,
           'is-recommendable': true,
           duration: {
             days: 0,

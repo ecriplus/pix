@@ -79,6 +79,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             'is-recommendable': true,
             link: 'https://example.net',
             locale: 'fr-fr',
+            locales: ['fr-fr'],
             title: 'Training 1',
             type: 'webinar',
           },
