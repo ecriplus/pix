@@ -479,7 +479,7 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d'un match de hockey.</li></ul>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d'un match de volley.</li></ul>"
                         }
                       },
                       "solutions": [
