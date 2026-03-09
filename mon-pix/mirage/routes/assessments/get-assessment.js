@@ -18,6 +18,7 @@ export default function (schema, request) {
       break;
     case 'CAMPAIGN':
       challengeIdStartsWith = 'recSMARPLA';
+      assessment.campaign = schema.campaigns.findBy({ code: assessment.codeCampaign });
       break;
   }
   const answers = schema.answers.where({ assessmentId: assessment.id }).models;

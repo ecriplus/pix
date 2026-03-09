@@ -231,7 +231,7 @@ module('Unit | Route | Entry Point', function (hooks) {
           await route.afterModel(campaign, transition);
 
           //then
-          sinon.assert.calledWith(route.router.replaceWith, 'campaigns.entrance');
+          sinon.assert.calledWith(route.router.replaceWith, 'campaigns.archived-error');
           assert.ok(true);
         });
       });

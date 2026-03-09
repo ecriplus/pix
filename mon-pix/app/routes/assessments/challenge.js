@@ -58,6 +58,14 @@ export default class ChallengeRoute extends Route {
     });
   }
 
+  async afterModel({ assessment }) {
+    const campaign = await assessment.campaign;
+    if (assessment.isForCampaign && !campaign.isAccessible) {
+      this.router.replaceWith('campaigns.archived-error', campaign.code);
+      return;
+    }
+  }
+
   serialize(model) {
     return {
       assessment_id: model.assessment.id,
