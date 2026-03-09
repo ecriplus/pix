@@ -37,7 +37,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
   describe('#getFrameworksForTargetProfileSubmission', function () {
     let frameworks;
-    let frameworkwithoutskillserializer;
+    let frameworkWithoutSkillSerializer;
     let serializedFrameworks;
 
     beforeEach(function () {
@@ -45,7 +45,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
       serializedFrameworks = Symbol('serializedFrameworks');
 
       sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').resolves({ frameworks });
-      frameworkwithoutskillserializer = {
+      frameworkWithoutSkillSerializer = {
         serialize: sinon.stub().returns(serializedFrameworks),
       };
     });
@@ -59,19 +59,19 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
       // when
       const result = await targetProfileController.getFrameworksForTargetProfileSubmission(request, hFake, {
-        frameworkwithoutskillserializer,
+        frameworkWithoutSkillSerializer,
       });
 
       // then
       expect(result).to.equal(serializedFrameworks);
       expect(usecases.getLearningContentForTargetProfileSubmission).to.have.been.calledWithExactly({ locale: 'en' });
-      expect(frameworkwithoutskillserializer.serialize).to.have.been.calledWithExactly(frameworks);
+      expect(frameworkWithoutSkillSerializer.serialize).to.have.been.calledWithExactly(frameworks);
     });
   });
 
   describe('#findLearningContentsByOrganizationId', function () {
     let frameworks;
-    let frameworkwithoutskillserializer;
+    let frameworkWithoutSkillSerializer;
     let organizationId;
     let serializedFrameworks;
 
@@ -82,7 +82,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
       sinon.stub(usecases, 'findLearningContentsByOrganizationId');
 
-      frameworkwithoutskillserializer = {
+      frameworkWithoutSkillSerializer = {
         serialize: sinon.stub(),
       };
     });
@@ -100,11 +100,11 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
         .withArgs({ organizationId, locale: 'en' })
         .resolves(frameworks);
 
-      frameworkwithoutskillserializer.serialize.withArgs(frameworks).returns(serializedFrameworks);
+      frameworkWithoutSkillSerializer.serialize.withArgs(frameworks).returns(serializedFrameworks);
       // when
 
       const result = await targetProfileController.findLearningContentsByOrganizationId(request, hFake, {
-        frameworkwithoutskillserializer,
+        frameworkWithoutSkillSerializer,
       });
 
       // then
