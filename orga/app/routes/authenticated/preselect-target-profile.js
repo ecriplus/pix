@@ -1,18 +1,17 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class PreselectTargetProfileRoute extends Route {
   @service currentUser;
   @service store;
 
   async model() {
-    const organization = this.currentUser.organization;
-    const frameworks = this.store.query('framework', {});
+    const organization = await this.currentUser.organization;
+    const frameworks = await this.store.findAll('framework', { adapterOptions: { organizationId: organization.id } });
 
-    return RSVP.hash({
+    return {
       organization,
       frameworks,
-    });
+    };
   }
 }

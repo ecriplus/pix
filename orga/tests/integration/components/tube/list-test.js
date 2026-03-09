@@ -12,52 +12,98 @@ module('Integration | Component | tube:list', function (hooks) {
   let dayjs;
 
   hooks.beforeEach(function () {
-    const tubes = [
+    const tubesPix = [
       {
-        id: 'tubeId1',
-        practicalTitle: 'Titre 1',
+        id: 'tubeId1Pix',
+        practicalTitle: 'Titre 1 Tube Pix',
         practicalDescription: 'Description 1',
       },
       {
-        id: 'tubeId2',
-        practicalTitle: 'Titre 2',
+        id: 'tubeId2Pix',
+        practicalTitle: 'Titre 2 Tube Pix',
         practicalDescription: 'Description 2',
       },
     ];
-    const thematics = [
+    const thematicsPix = [
       {
         id: 'thematicId',
         name: 'thematic1',
-        tubes,
+        tubes: tubesPix,
         get sortedTubes() {
-          return tubes;
+          return tubesPix;
         },
       },
     ];
-    const competences = [
+    const competencesPix = [
       {
-        thematics,
+        thematics: thematicsPix,
         get sortedThematics() {
-          return thematics;
+          return thematicsPix;
         },
       },
     ];
-    const areas = [
+    const areasPix = [
       {
-        title: 'Titre domaine',
+        title: 'Titre domaine Pix',
         code: 1,
-        competences,
+        competences: competencesPix,
         get sortedCompetences() {
-          return competences;
+          return competencesPix;
         },
       },
     ];
+
+    const tubesEdu = [
+      {
+        id: 'tubeIdEdu1',
+        practicalTitle: 'Titre 1 Tube Edu',
+        practicalDescription: 'Description 1',
+      },
+    ];
+    const thematicsEdu = [
+      {
+        id: 'thematicId',
+        name: 'thematic1',
+        tubes: tubesEdu,
+        get sortedTubes() {
+          return tubesEdu;
+        },
+      },
+    ];
+    const competencesEdu = [
+      {
+        thematics: thematicsEdu,
+        get sortedThematics() {
+          return thematicsEdu;
+        },
+      },
+    ];
+    const areasEdu = [
+      {
+        title: 'Titre domaine Edu',
+        code: 1,
+        competences: competencesEdu,
+        get sortedCompetences() {
+          return competencesEdu;
+        },
+      },
+    ];
+
     frameworks = [
       {
-        id: 'fmkId',
-        areas,
+        id: 'fmkId1',
+        name: 'Pix',
+        areas: areasPix,
         get sortedAreas() {
-          return areas;
+          return areasPix;
+        },
+      },
+      {
+        id: 'fmkId2',
+        name: 'Edu+',
+        areas: areasEdu,
+        get sortedAreas() {
+          return areasEdu;
         },
       },
     ];
@@ -69,17 +115,26 @@ module('Integration | Component | tube:list', function (hooks) {
     dayjs.self.prototype.format.restore();
   });
 
+  test('it should display frameworks title', async function (assert) {
+    // given
+    this.set('frameworks', frameworks);
+
+    // when
+    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    assert.ok(screen.getByRole('heading', { level: 2, name: 'Pix' }));
+    assert.ok(screen.getByRole('heading', { level: 2, name: 'Edu+' }));
+  });
+
   test('it should display a list of tubes', async function (assert) {
     // given
     this.set('frameworks', frameworks);
 
     // when
     const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
-    await clickByName('1 · Titre domaine');
+    await clickByName('1 · Titre domaine Pix');
     // then
-
-    assert.dom(screen.getByLabelText('Titre 1 : Description 1')).exists();
-    assert.dom(screen.getByLabelText('Titre 2 : Description 2')).exists();
+    assert.dom(screen.getByLabelText('Titre 1 Tube Pix : Description 1')).exists();
+    assert.dom(screen.getByLabelText('Titre 2 Tube Pix : Description 2')).exists();
   });
 
   test('it should disable the download button if not tube is selected', async function (assert) {
@@ -105,8 +160,8 @@ module('Integration | Component | tube:list', function (hooks) {
       hbs`<Tube::list @frameworks={{this.frameworks}} @organization={{this.organization}} />`,
     );
 
-    await clickByName('1 · Titre domaine');
-    await clickByName('Titre 1 : Description 1');
+    await clickByName('1 · Titre domaine Pix');
+    await clickByName('Titre 1 Tube Pix : Description 1');
 
     // then
     assert
@@ -125,7 +180,7 @@ module('Integration | Component | tube:list', function (hooks) {
     // when
     await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
 
-    await clickByName('1 · Titre domaine');
+    await clickByName('1 · Titre domaine Pix');
     await clickByName('thematic1');
 
     // then
@@ -139,12 +194,12 @@ module('Integration | Component | tube:list', function (hooks) {
     // when
     const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
 
-    await clickByName('1 · Titre domaine');
+    await clickByName('1 · Titre domaine Pix');
     await clickByName('thematic1');
 
     // then
-    assert.dom(screen.getByLabelText('Titre 1 : Description 1')).isChecked();
-    assert.dom(screen.getByLabelText('Titre 2 : Description 2')).isChecked();
+    assert.dom(screen.getByLabelText('Titre 1 Tube Pix : Description 1')).isChecked();
+    assert.dom(screen.getByLabelText('Titre 2 Tube Pix : Description 2')).isChecked();
   });
 
   test('Should check the thematics if all corresponding tubes are selected', async function (assert) {
@@ -154,9 +209,9 @@ module('Integration | Component | tube:list', function (hooks) {
     // when
     const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
 
-    await clickByName('1 · Titre domaine');
-    await clickByName('Titre 1 : Description 1');
-    await clickByName('Titre 2 : Description 2');
+    await clickByName('1 · Titre domaine Pix');
+    await clickByName('Titre 1 Tube Pix : Description 1');
+    await clickByName('Titre 2 Tube Pix : Description 2');
 
     // then
     assert.dom(screen.getByLabelText('thematic1')).isChecked();
