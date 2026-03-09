@@ -27,15 +27,23 @@ async function findAssessedByUserIdAndLimitDateQuery({ userId, limitDate, skillI
 }
 
 const findUniqByUserIds = async function ({ userIds }) {
-  const results = [];
-  for (const userId of userIds) {
-    const knowledgeElements = await findAssessedByUserIdAndLimitDateQuery({
-      userId,
-    });
+  if (userIds.length === 0) return [];
 
-    results.push({ userId, knowledgeElements });
+  const knexConn = DomainTransaction.getConnection();
+  const knowledgeElementRows = await knexConn(tableName).whereIn('userId', userIds);
+
+  const knowledgeElementsByUserId = new Map(userIds.map((userId) => [userId, []]));
+  for (const row of knowledgeElementRows) {
+    knowledgeElementsByUserId.get(row.userId)?.push(new KnowledgeElement(row));
   }
-  return results;
+
+  return userIds.map((userId) => {
+    const keCollection = new KnowledgeElementCollection(knowledgeElementsByUserId.get(userId));
+    return {
+      userId,
+      knowledgeElements: keCollection.latestUniqNonResetKnowledgeElements,
+    };
+  });
 };
 
 const batchSave = async function ({ knowledgeElements }) {
