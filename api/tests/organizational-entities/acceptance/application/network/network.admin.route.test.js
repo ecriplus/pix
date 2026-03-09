@@ -80,9 +80,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
       const response = await server.inject(request);
 
       // then
-      expect(response.statusCode).to.equal(201);
       const createdNetwork = await knex('networks').first();
-      expect(createdNetwork.name).to.equal('Network name');
+      expect(response.statusCode).to.equal(201);
+      expect(response.result.data.id).to.equal(createdNetwork.id.toString());
+      expect(response.result.data.attributes.name).to.equal('Network name');
     });
   });
 });

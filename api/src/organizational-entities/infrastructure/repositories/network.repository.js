@@ -38,18 +38,20 @@ async function findByOrganizationId(organizationId) {
  * @param {object} params
  * @param {number} params.organizationId
  * @param {string} params.networkName
- * @returns {Promise<void>}
+ * @returns {Promise<Network>}
  */
 async function save({ organizationId, networkName }) {
   const knexConn = DomainTransaction.getConnection();
 
   const [{ id: structureId }] = await knexConn('structures').insert({}, ['id']);
-  const [{ id: networkId }] = await knexConn('networks').insert({ name: networkName }, ['id']);
+  const [savedNetwork] = await knexConn('networks').insert({ name: networkName }, ['id', 'name']);
   await knexConn('fct_structures').insert({
     structure_id: structureId,
     organization_id: organizationId,
-    network_id: networkId,
+    network_id: savedNetwork.id,
   });
+
+  return _toDomain(savedNetwork);
 }
 
 function _toDomain(network) {
