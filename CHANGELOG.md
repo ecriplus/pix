@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.350.0](https://github.com/1024pix/pix/compare/v5.349.1...v5.350.0) (2026-03-09)
+
+### :rocket: Amélioration
+
+- [#15314](https://github.com/1024pix/pix/pull/15314) Update IAGenFonction_Ava.json 
+- [#15349](https://github.com/1024pix/pix/pull/15349) Update IAGenPrompt_IND.json 
+
+### :building_construction: Tech
+
+- [#15371](https://github.com/1024pix/pix/pull/15371) Ajouter les snapshots E2E certif edu manquants 
+
+### :arrow_up: Montée de version
+
+- [#15391](https://github.com/1024pix/pix/pull/15391) Lock file maintenance (junior) 
+- [#15374](https://github.com/1024pix/pix/pull/15374) Update dependency @1024pix/eslint-plugin to ^2.1.19 (admin) 
+- [#15386](https://github.com/1024pix/pix/pull/15386) Update dependency @1024pix/pix-ui to ^60.0.3 (junior) 
+- [#15387](https://github.com/1024pix/pix/pull/15387) Update dependency webpack to v5.105.3 (junior)
+
 ## [5.349.1](https://github.com/1024pix/pix/compare/v5.349.0...v5.349.1) (2026-03-06)
 
 ### :rewind: Retour en arrière
