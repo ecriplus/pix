@@ -2,6 +2,46 @@ import * as networkRepository from '../../../../../src/organizational-entities/i
 import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repositories | network', function () {
+  describe('#findAll', function () {
+    describe('when there are networks', function () {
+      it('returns the networks ordered by name', async function () {
+        // given
+        const secondNetwork = databaseBuilder.factory.buildNetwork({ name: 'B Réseau' });
+        const firstNetwork = databaseBuilder.factory.buildNetwork({ name: 'A Réseau' });
+
+        await databaseBuilder.commit();
+
+        // when
+        const foundNetworks = await networkRepository.findAll();
+
+        // then
+        const expectedFirstNetwork = domainBuilder.acquisition.buildNetwork({
+          id: firstNetwork.id,
+          name: firstNetwork.name,
+        });
+
+        const expectedSecondNetwork = domainBuilder.acquisition.buildNetwork({
+          id: secondNetwork.id,
+          name: secondNetwork.name,
+        });
+
+        expect(foundNetworks).to.have.lengthOf(2);
+        expect(foundNetworks[0]).to.deepEqualInstance(expectedFirstNetwork);
+        expect(foundNetworks[1]).to.deepEqualInstance(expectedSecondNetwork);
+      });
+    });
+
+    describe('when there are no networks', function () {
+      it('returns an empty array', async function () {
+        // when
+        const foundNetworks = await networkRepository.findAll();
+
+        // then
+        expect(foundNetworks).to.be.empty;
+      });
+    });
+  });
+
   describe('#findByOrganizationId', function () {
     describe('when an organization belongs to a network', function () {
       it('returns the network', async function () {
