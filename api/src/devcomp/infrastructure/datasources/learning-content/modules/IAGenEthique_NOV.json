@@ -32,7 +32,9 @@
               "element": {
                 "id": "d8b1ceea-a424-4baa-a4d6-140f1d2607b5",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Asmae discute de son usage de l’IA générative avec un ami.</p>",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Conversation à propos de la confidentialité de l’IA",
@@ -62,9 +64,7 @@
                       "content": "C’est un peu plus compliqué que ça… Mais en résumé oui."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -193,7 +193,9 @@
               "element": {
                 "id": "1c479a77-fcc8-4056-9459-6aa9ba1bc6b2",
                 "type": "custom",
+                "title": "",
                 "instruction": "Voici plusieurs prompts. Certains donnent des informations privées ou secrètes. Repérez-les et sélectionnez-les.",
+                "functionalInstruction": "",
                 "tagName": "pix-anonymisation",
                 "props": {
                   "titleLevel": 2,
@@ -272,9 +274,7 @@
                       "feedback": "Ce prompt donne des informations confidentielles (mot de passe, lien interne)."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -352,7 +352,9 @@
               "element": {
                 "id": "80ee8557-53ba-42e3-a7cf-ed977cac9a27",
                 "type": "custom",
+                "title": "",
                 "instruction": "Voici une discussion entre Sarah et Maëlle. Sarah remarque que l’IA a généré des informations qui ressemblent fortement à des informations réelles.",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Et si une simple image créée par une IA ressemblait trop à la réalité ?",
@@ -374,9 +376,7 @@
                       "content": "Je n’en sais rien mais je ne vais pas m’amuser à l’appeler."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -568,6 +568,14 @@
             {
               "type": "element",
               "element": {
+                "id": "6d78aabb-e76a-43f5-9bbb-e48fce835283",
+                "type": "text",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "23af5d9b-9a89-4338-b327-68cace934df4",
                 "type": "qcu",
                 "instruction": "<p>Pourquoi les entreprises d’intelligence artificielle enregistrent-elles les conversations ?</p>",
@@ -688,7 +696,9 @@
               "element": {
                 "id": "935a2724-84d4-4cd0-b320-9a79ab743547",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Lisez attentivement l’article suivant, puis répondez à la question.</p>",
+                "functionalInstruction": "",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 2,
@@ -701,9 +711,7 @@
                   ],
                   "highlightedSentence": "En analysant les réponses données par l’IA, ils ont réussi à obtenir plus de 2 700 mots de passe",
                   "colorOfHighlightSentence": "#bb0101"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -759,19 +767,8 @@
               "type": "element",
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
-                "type": "custom",
-                "instruction": "",
-                "tagName": "llm-messages",
-                "props": {
-                  "messages": [
-                    {
-                      "direction": "outbound",
-                      "content": "<p><strong>Nadia a un souci non résolu avec le service client de la folie du hockey, un magasin de matériel sportif.&nbsp;Elle décide de demander à un logiciel d’IA générative de lui écrire une lettre recommandée.</strong>&nbsp;</p>"
-                    }
-                  ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                "type": "text",
+                "content": "<p><strong>Nadia a un souci non résolu avec le service client de la folie du hockey, un magasin de matériel sportif.&nbsp;Elle décide de demander à un logiciel d’IA générative de lui écrire une lettre recommandée.</strong>&nbsp;</p>"
               }
             },
             {
@@ -779,7 +776,9 @@
               "element": {
                 "id": "bae27e2d-8f78-4836-bb1f-7f2a19c91b5f",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "llm-messages",
                 "props": {
                   "messages": [
@@ -788,9 +787,7 @@
                       "content": "Rédige une lettre recommandée pour une réclamation au service client de \"la folie du hockey\" avec un ton ferme et les informations suivantes : ma commande est notée comme livrée à mon domicile mais je ne l’ai jamais reçue. Mon nom est Nadia Benali, j’habite au 36 rue des Geais à Joliville et mon numéro de téléphone est le 06 39 98 44 77."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
