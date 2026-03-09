@@ -17,7 +17,7 @@ describe('Integration | Repository | learning-content', function () {
     });
     const framework2DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework2',
-      name: 'Mon référentiel 2',
+      name: 'Pix',
     });
     const area1DB = databaseBuilder.factory.learningContent.buildArea({
       id: 'recArea1',
@@ -432,6 +432,114 @@ describe('Integration | Repository | learning-content', function () {
     });
   });
 
+  describe('#findByOrganizationId', function () {
+    let organizationId;
+    beforeEach(async function () {
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 4 });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube4', level: 4 });
+
+      const secondTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId: secondTargetProfileId });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfileId,
+        tubeId: 'recTube1',
+        level: 2,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: secondTargetProfileId,
+        tubeId: 'recTube2',
+        level: 2,
+      });
+
+      const targetProfileIdFromOtherOrganization = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({
+        organizationId: otherOrganizationId,
+        targetProfileId: targetProfileIdFromOtherOrganization,
+      });
+      databaseBuilder.factory.buildTargetProfileTube({
+        targetProfileId: targetProfileIdFromOtherOrganization,
+        tubeId: 'recTube3',
+        level: 2,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return an array of LearningContents', async function () {
+      // given
+      framework1Fr.areas = [area1Fr];
+      area1Fr.competences = [competence1Fr, competence2Fr];
+      competence1Fr.thematics = [thematic1Fr];
+      competence2Fr.thematics = [thematic2Fr];
+      competence1Fr.tubes = [tube1Fr];
+      competence2Fr.tubes = [tube2Fr];
+      thematic1Fr.tubes = [tube1Fr];
+      thematic2Fr.tubes = [tube2Fr];
+      tube1Fr.skills = [];
+      tube2Fr.skills = [];
+
+      framework2Fr.areas = [area2Fr];
+      area2Fr.competences = [competence3Fr];
+      competence3Fr.thematics = [thematic3Fr];
+      competence3Fr.tubes = [tube4Fr];
+      thematic3Fr.tubes = [tube4Fr];
+      tube4Fr.skills = [];
+
+      // when
+      const results = await learningContentRepository.findByOrganizationId({ organizationId });
+
+      // then
+      expect(results).lengthOf(2);
+      expect(results[0]).deep.equals(framework2Fr);
+      expect(results[1]).deep.equals(framework1Fr);
+    });
+
+    context('when organization has no target profile shares', function () {
+      it('it should returns empty array', async function () {
+        // when
+        const frameworks = await learningContentRepository.findByOrganizationId({ organizationId: 213 });
+
+        // then
+        expect(frameworks).lengthOf(0);
+      });
+    });
+
+    context('when using a specific locale', function () {
+      it('should translate names and descriptions', async function () {
+        framework1En.areas = [area1En];
+        area1En.competences = [competence1En, competence2En];
+        competence1En.thematics = [thematic1En];
+        competence2En.thematics = [thematic2En];
+        competence1En.tubes = [tube1En];
+        competence2En.tubes = [tube2En];
+        thematic1En.tubes = [tube1En];
+        thematic2En.tubes = [tube2En];
+        tube1En.skills = [];
+        tube2En.skills = [];
+
+        framework2En.areas = [area2En];
+        area2En.competences = [competence3En];
+        competence3En.thematics = [thematic3En];
+        competence3En.tubes = [tube4En];
+        thematic3En.tubes = [tube4En];
+        tube4En.skills = [];
+
+        // when
+        const results = await learningContentRepository.findByOrganizationId({ organizationId, locale: 'en' });
+
+        // then
+        expect(results).lengthOf(2);
+        expect(results[0]).deep.equals(framework2En);
+        expect(results[1]).deep.equals(framework1En);
+      });
+    });
+  });
+
   describe('#findByFrameworkNames', function () {
     it('should return an active LearningContent with the frameworks designated by name', async function () {
       // given
@@ -454,7 +562,7 @@ describe('Integration | Repository | learning-content', function () {
 
       // when
       const learningContent = await learningContentRepository.findByFrameworkNames({
-        frameworkNames: ['Mon référentiel 1', 'Mon référentiel 2'],
+        frameworkNames: ['Mon référentiel 1', 'Pix'],
       });
 
       // then
@@ -483,7 +591,7 @@ describe('Integration | Repository | learning-content', function () {
 
       // when
       const learningContent = await learningContentRepository.findByFrameworkNames({
-        frameworkNames: ['Mon référentiel 1', 'Mon référentiel 2'],
+        frameworkNames: ['Mon référentiel 1', 'Pix'],
         locale: 'en',
       });
 

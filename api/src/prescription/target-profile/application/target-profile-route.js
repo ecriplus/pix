@@ -8,7 +8,7 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/organizations/{id}/target-profiles',
+      path: '/api/organizations/{organizationId}/target-profiles',
       config: {
         pre: [
           {
@@ -18,7 +18,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
         },
         handler: targetProfileController.findTargetProfiles,
@@ -44,6 +44,29 @@ const register = async function (server) {
         notes: [
           "Cette route est restreinte aux utilisateurs authentifiés membre d'une organisation",
           'Elle permet de récupérer tous le contenu pédagogique à disposition pour formuler une demande de création de profil cible',
+        ],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/frameworks',
+      config: {
+        handler: targetProfileController.findLearningContentsByOrganizationId,
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToOrganization,
+            assign: 'checkUserBelongsToOrganization',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        tags: ['api', 'framework'],
+        notes: [
+          "Cette route est restreinte aux utilisateurs authentifiés membre d'une organisation",
+          'Elle permet de récupérer tous les référentiel à disposition pour formuler une demande de création de profil cible',
         ],
       },
     },

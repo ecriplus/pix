@@ -11,7 +11,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
       const request = {
         auth: { credentials: { userId: connectedUserId } },
-        params: { id: organizationId },
+        params: { organizationId },
       };
 
       const foundTargetProfiles = Symbol('TargetProfile');
@@ -37,15 +37,15 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
   describe('#getFrameworksForTargetProfileSubmission', function () {
     let frameworks;
-    let frameworkwithoutskillserializer;
+    let frameworkWithoutSkillSerializer;
     let serializedFrameworks;
 
     beforeEach(function () {
       frameworks = Symbol('frameworks');
       serializedFrameworks = Symbol('serializedFrameworks');
 
-      sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').returns({ frameworks });
-      frameworkwithoutskillserializer = {
+      sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').resolves({ frameworks });
+      frameworkWithoutSkillSerializer = {
         serialize: sinon.stub().returns(serializedFrameworks),
       };
     });
@@ -59,13 +59,56 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
       // when
       const result = await targetProfileController.getFrameworksForTargetProfileSubmission(request, hFake, {
-        frameworkwithoutskillserializer,
+        frameworkWithoutSkillSerializer,
       });
 
       // then
       expect(result).to.equal(serializedFrameworks);
       expect(usecases.getLearningContentForTargetProfileSubmission).to.have.been.calledWithExactly({ locale: 'en' });
-      expect(frameworkwithoutskillserializer.serialize).to.have.been.calledWithExactly(frameworks);
+      expect(frameworkWithoutSkillSerializer.serialize).to.have.been.calledWithExactly(frameworks);
+    });
+  });
+
+  describe('#findLearningContentsByOrganizationId', function () {
+    let frameworks;
+    let frameworkWithoutSkillSerializer;
+    let organizationId;
+    let serializedFrameworks;
+
+    beforeEach(function () {
+      frameworks = Symbol('frameworks');
+      organizationId = Symbol('organizationId');
+      serializedFrameworks = Symbol('serializedFrameworks');
+
+      sinon.stub(usecases, 'findLearningContentsByOrganizationId');
+
+      frameworkWithoutSkillSerializer = {
+        serialize: sinon.stub(),
+      };
+    });
+
+    it('should fetch and return frameworks, serialized as JSONAPI', async function () {
+      // given
+      const locale = 'en';
+      const request = {
+        params: { organizationId },
+        state: { locale },
+      };
+
+      usecases.findLearningContentsByOrganizationId
+        .resolves([])
+        .withArgs({ organizationId, locale: 'en' })
+        .resolves(frameworks);
+
+      frameworkWithoutSkillSerializer.serialize.withArgs(frameworks).returns(serializedFrameworks);
+      // when
+
+      const result = await targetProfileController.findLearningContentsByOrganizationId(request, hFake, {
+        frameworkWithoutSkillSerializer,
+      });
+
+      // then
+      expect(result).to.equal(serializedFrameworks);
     });
   });
 });
