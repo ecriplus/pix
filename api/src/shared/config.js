@@ -79,7 +79,16 @@ function getSeedsConfig() {
   };
 }
 
-const SEEDS_CONTEXTS = ['prescription', 'devcomp', 'junior', 'acces', 'contenu', 'certification', 'evaluation'];
+const SEEDS_CONTEXTS = [
+  'prescription',
+  'devcomp',
+  'junior',
+  'acces',
+  'contenu',
+  'certification',
+  'evaluation',
+  'acquisition',
+];
 
 function buildSeedsContext(value) {
   const values = value && value.length ? value.toLowerCase().split('|') : SEEDS_CONTEXTS;
