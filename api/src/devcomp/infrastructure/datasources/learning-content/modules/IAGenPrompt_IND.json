@@ -205,7 +205,7 @@
                   "messages": [
                     {
                       "direction": "outbound",
-                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amical pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtemps ! Il vous reste jusqu’à vendredi. »"
+                      "content": "J’ai écrit ce message d’invitation au tournoi. Peux-tu vérifier s’il y a des fautes ?<br>« Salut à tous, <br>Petit rappel amicale pour vous dire que les inscriptions au tournoi de volley sont encore ouvertes, mais plus pour longtems ! Il vous reste jusqu’à vendredi. »"
                     },
                     {
                       "direction": "inbound",
