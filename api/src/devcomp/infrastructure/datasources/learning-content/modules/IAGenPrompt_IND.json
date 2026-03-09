@@ -47,7 +47,9 @@
               "element": {
                 "id": "f49a0fed-c65d-467e-a30d-73445381c61c",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Conversation d’introduction",
@@ -77,9 +79,7 @@
                       "content": "C’est normal, ta demande est trop floue ! L’IA ne peut pas deviner ce que tu veux. 😉"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -94,7 +94,7 @@
               "element": {
                 "id": "d715d4e1-fc44-4f12-98e6-48bd428e55cb",
                 "type": "text",
-                "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si  on explique les choses clairement.<br><br></p>"
+                "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si on explique les choses clairement.<br><br></p>"
               }
             }
           ]
@@ -124,6 +124,7 @@
                 "id": "e0c90c2f-086e-42b7-855e-a66a0a4773c6",
                 "type": "qcm",
                 "instruction": "<p>Selon vous, que faut-il ajouter au prompt de Gustave pour l’améliorer ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -152,8 +153,12 @@
                     "diagnosis": "<p>Il faut donner le plus de précisions possible. Plus l’IA a d’informations sur la situation, meilleure sera sa réponse.&nbsp;<br></p>"
                   }
                 },
-                "solutions": ["1", "2", "3", "4"],
-                "hasShortProposals": false
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
               }
             }
           ]
@@ -168,7 +173,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
-                "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>… </p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
+                "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>, etc.</p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
           ]
@@ -191,7 +196,9 @@
               "element": {
                 "id": "01fc936a-bc83-4b86-8896-6b9289560128",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Vous pouvez changer le ton de ce message avec l’aide de l’IA.</p>",
+                "functionalInstruction": "",
                 "tagName": "llm-prompt-select",
                 "props": {
                   "speed": 0,
@@ -219,9 +226,7 @@
                       "response": "🏐Tu as entendu parler du tournoi de volley ?  <br>Le soleil a sorti ses lunettes rien que pour toi. <br>Les ballons murmurent ton prénom la nuit.<br> Alors… tu viens ? 😇 <br>👉 Inscris-toi avant qu’on t’envoie un ballon par la poste."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -230,6 +235,7 @@
                 "id": "44028e11-c07a-4920-b1c1-f487f04525e9",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quel message de relance créé avec l’IA est votre préféré ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -260,8 +266,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -291,7 +296,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
-                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p><p>Pour cela, il a préparé un document d’entraînement sous la forme d’un <strong>tableau</strong>.<br></p>"
+                "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p>\n<p>Pour cela, il prépare un document d’entraînement pour travailler les <strong>manchettes</strong>,&nbsp;sous la forme d’un <strong>tableau</strong>.</p>"
               }
             },
             {
@@ -299,7 +304,7 @@
               "element": {
                 "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
-                "content": "<table>    <thead>        <tr>            <th scope=\"col\" class=\"width-15\">Niveau</th>            <th scope=\"col\">Exercice</th>            <th scope=\"col\">Description</th>        </tr>    </thead>    <tbody>        <tr>            <th>Débutant</th>            <td>Manchette contre le mur</td>            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>        </tr>        <tr>            <th>Intermédiaire</th>            <td>Triangle manchette</td>            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>        </tr>        <tr>            <th>Avancé</th>            <td>Réception de service réel</td>            <td>Un joueur reçoit des services puissants en manchette.</td>        </tr>    </tbody></table>"
+                "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\" class=\"width-15\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchette</td>\n            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>\n        </tr>\n        <tr>\n\n            <th>Avancé</th>\n            <td>Réception de service réel</td>\n            <td>Un joueur reçoit des services puissants en manchette.</td>\n        </tr>\n         <tr>\n\n            <th>Expert</th>\n            <td>...</td>\n            <td>...</td>\n        </tr>\n\n    </tbody>\n</table>"
               }
             }
           ]
@@ -314,7 +319,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
-                "content": "Quelque temps plus tard, l’équipe a bien progressé. <br>Gustave aimerait ajouter des exercices pour les joueurs de niveau expert mais n’a plus d'idée… <br>Utilisez le logiciel d'IA générative ci-dessous pour l’aider à compléter son tableau.<br>"
+                "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br>\n<p>Utilisez le logiciel d’IA générative ci-dessous pour l’aider à obtenir un <strong>tableau complet</strong> avec des exercices pour les joueurs de tous niveaux.</p>"
               }
             },
             {
@@ -336,7 +341,7 @@
                 "id": "2a32ee79-570f-447f-b0c1-b56534d4f670",
                 "type": "expand",
                 "title": "💡 L’astuce pratique",
-                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️) et Entrée </p>"
+                "content": "<p>❌ Il vous arrive d’envoyer votre prompt alors que vous vouliez juste aller à la ligne ?</p><p>✅ Quand vous voulez aller à la ligne, appuyez à la fois sur les touches Maj (ou Shift⬆️) et Entrée. </p>"
               }
             },
             {
@@ -345,7 +350,7 @@
                 "id": "52a47dfc-5c8d-49b8-a08e-c771c3a1c8d7",
                 "type": "expand",
                 "title": "🗝️ Indice 1",
-                "content": "Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?<br>"
+                "content": "<p>Avez-vous pensé à fournir à l’IA le <strong>tableau </strong>existant ?</p>\n<p>Vous pouvez le copier-coller dans votre prompt !</p>"
               }
             },
             {
@@ -390,7 +395,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
-                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation et demandez des modifications….</p>"
+                      "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation avec l’IA et demandez des modifications…</p>"
                     }
                   ]
                 }
@@ -452,6 +457,7 @@
                       "id": "c11fd7b8-645a-43b7-80cd-a1953fe4180b",
                       "type": "qcm",
                       "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -473,11 +479,13 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le <strong>format </strong>est le <strong>dialogue </strong>et le <strong>contexte</strong>, celui du <strong>match de volley.</strong></p>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>indiqué : le dialogue,</li><li>et&nbsp;le <strong>contexte </strong>: celui d’un match de volley.</li></ul>"
                         }
                       },
-                      "solutions": ["1", "2"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2"
+                      ]
                     }
                   ]
                 },
@@ -492,6 +500,7 @@
                       "id": "bf5ec9f6-31ce-44ad-b880-5694072cd0e4",
                       "type": "qcm",
                       "instruction": "<p>Quels éléments rendent ce prompt clair ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -513,11 +522,14 @@
                         },
                         "invalid": {
                           "state": "<p>Mauvaise réponse.</p>",
-                          "diagnosis": "<p>Ici, le <strong>format </strong>est un court <strong>discours</strong>, le <strong>ton </strong>est <strong>amusant</strong>. Le <strong>contexte </strong>est le <strong>pot de départ </strong>d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</p>"
+                          "diagnosis": "<p>Les éléments qui rendent ce prompt clair sont :&nbsp;</p><ul><li> le <strong>format </strong>: un discours,&nbsp;</li><li>le <strong>ton </strong>: amusant,</li><li>et le <strong>contexte </strong> qui est donné par la description du pot de départ d’un joueur de volley, décrit avec des éléments précis comme ses qualités et ses défauts.</li></ul>"
                         }
                       },
-                      "solutions": ["1", "2", "3"],
-                      "hasShortProposals": false
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
@@ -543,7 +555,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
-                "content": "<p>Gustave veut envoyer un <strong>compte-rendu </strong>aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte-rendu qui correspond bien</strong> aux notes de Gustave.</p>"
+                "content": "<p>Gustave veut envoyer un <strong>compte rendu</strong> aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte rendu qui correspond bien</strong> aux notes de Gustave.</p>"
               }
             },
             {
@@ -564,7 +576,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
-                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte-rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p>"
+                "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p><br></p>"
               }
             },
             {
@@ -573,7 +585,7 @@
                 "id": "477d5092-f4af-4fea-b4a4-7262e4007840",
                 "type": "expand",
                 "title": "🙈 Solution",
-                "content": "<p>Si le logiciel d’IA a bien produit un compte-rendu, il a sûrement fait une <strong>erreur </strong>sur les <strong>récompenses </strong>du tournoi. </p><p>Il s’agit de <strong>médailles </strong>dans la prise de note.&nbsp;🎖️</p><p> Si vous avez réussi à obtenir un compte-rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
+                "content": "<p>Dans le cas où vous avez obtenu un compte rendu, le logiciel a sûrement fait une <strong>erreur</strong>. En effet, les <strong>récompenses </strong>du tournoi sont des <strong>médailles </strong>dans la prise de notes de Gustave.&nbsp;🎖️</p><p>Il faut donc demander au logiciel de corriger cette erreur.</p><p>Si vous avez réussi à obtenir un compte rendu corrigé qui inclut les médailles, votre réponse devrait être validée.&nbsp;✅</p>"
               }
             }
           ]
@@ -594,7 +606,7 @@
               "element": {
                 "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
-                "content": "Gustave a du mal à trouver un lieu pour le tournoi de volley-ball qui approche à grands pas.<br>Pour le tournoi, Gustave recherche un endroit à Jolieville, avec au moins 4 terrains. <br>Il a un budget maximal de 300 pixmoney. Il est à la recherche d’un bon plan.<br><br>"
+                "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d’au moins 4 terrains. </p>\n<p>Son budget maximal est de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d’IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
               }
             },
             {
@@ -605,7 +617,7 @@
                 "isCompletionRequired": true,
                 "title": "Simulateur LLM",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmiytd9fw00033v01ys5n87wr",
-                "instruction": "<p>À partir des critères de recherche de Gustave, utilisez le logiciel d'IA générative ci-dessous, utilisé par Jolieville, pour trouver un lieu adapté.</p>",
+                "instruction": "<p>Utilisez le logiciel d’IA de Jolieville, ci-dessous, pour trouver le gymnase qui correspond à ses besoins.&nbsp;🔍</p><p>Une fois que vous avez trouvé, écrivez le nom du gymnase en dessous.&nbsp;👇</p>",
                 "solution": "pix-llm-success",
                 "height": 550
               }
@@ -615,7 +627,7 @@
               "element": {
                 "id": "0ccbd3b1-b27d-46d7-9b8c-d2fffc76b8e3",
                 "type": "qrocm",
-                "instruction": "Quel gymnase devrait contacter Gustave ?",
+                "instruction": "<p>Quel gymnase Gustave devrait-il contacter ?</p>",
                 "proposals": [
                   {
                     "input": "NomGymnase",
@@ -625,7 +637,11 @@
                     "display": "inline",
                     "placeholder": "Nom du gymnase",
                     "ariaLabel": "Nom du gymnase",
-                    "tolerances": ["t1", "t2", "t3"],
+                    "tolerances": [
+                      "t1",
+                      "t2",
+                      "t3"
+                    ],
                     "solutions": [
                       "Le gymnase des 3 sapins",
                       "gymnase des 3 sapins",
@@ -656,7 +672,7 @@
                 "id": "abc605f3-ba2d-4ce3-a233-02a086bdf970",
                 "type": "expand",
                 "title": "🗝️ Indice 1 ",
-                "content": "Avez-vous demandé au logiciel d'IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
+                "content": "Avez-vous demandé au logiciel d’IA générative des gymnases permettant de faire du&nbsp;<strong>volley-ball</strong> ?<br><br>"
               }
             },
             {
