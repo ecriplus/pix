@@ -95,6 +95,7 @@ import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizat
 import { createTag } from './create-tag.js';
 import { detachParentOrganizationFromOrganization } from './detach-parent-organization-from-organization.usecase.js';
 import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
+import { findAllNetworks } from './find-all-networks.usecase.js';
 import { findAllOrganizationLearnerTypes } from './find-all-organization-learner-types.refactor.js';
 import { findAllTags } from './find-all-tags.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
@@ -125,6 +126,7 @@ const usecasesWithoutInjectedDependencies = {
   createOrganizationsWithTagsAndTargetProfiles,
   createTag,
   detachParentOrganizationFromOrganization,
+  findAllNetworks,
   findAllTags,
   findChildrenOrganizations,
   findOrganizationFeatures,
@@ -154,6 +156,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {updateOrganizationsInBatch} updateOrganizationsInBatch
  * @property {updateOrganizationInformation} updateOrganizationInformation
  * @property {archiveOrganizationsInBatch} archiveOrganizationsInBatch
+ * @property {findAllNetworks} findAllNetworks
  */
 
 /**
