@@ -8,7 +8,7 @@ const register = async function (server) {
   server.route([
     {
       method: 'GET',
-      path: '/api/organizations/{id}/target-profiles',
+      path: '/api/organizations/{organizationId}/target-profiles',
       config: {
         pre: [
           {
@@ -18,7 +18,7 @@ const register = async function (server) {
         ],
         validate: {
           params: Joi.object({
-            id: identifiersType.organizationId,
+            organizationId: identifiersType.organizationId,
           }),
         },
         handler: targetProfileController.findTargetProfiles,

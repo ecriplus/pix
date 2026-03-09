@@ -9,7 +9,7 @@ import {
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | target-profile-route', function () {
-  describe('GET /organizations/{id}/target-profiles', function () {
+  describe('GET /organizations/{organizationId}/target-profiles', function () {
     const method = 'GET';
 
     let headers, httpTestServer, organizationId, url, payload;

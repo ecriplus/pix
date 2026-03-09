@@ -11,7 +11,7 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
 
       const request = {
         auth: { credentials: { userId: connectedUserId } },
-        params: { id: organizationId },
+        params: { organizationId },
       };
 
       const foundTargetProfiles = Symbol('TargetProfile');

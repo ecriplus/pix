@@ -16,7 +16,7 @@ describe('Acceptance | Route | target-profile', function () {
     await insertUserWithRoleSuperAdmin();
   });
 
-  describe('GET /api/organizations/{id}/target-profiles', function () {
+  describe('GET /api/organizations/{organizationId}/target-profiles', function () {
     context('when user is authenticated', function () {
       let user;
       let linkedOrganization;
