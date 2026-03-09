@@ -163,6 +163,7 @@ async function update({ id, attributesToUpdate }) {
     'type',
     'duration',
     'locale',
+    'locales',
     'editorName',
     'editorLogoUrl',
     'isDisabled',

@@ -661,6 +661,7 @@ describe('Integration | Repository | training-repository', function () {
         editorName: 'Mon nouvel editeur',
         editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/nouveau-logo.svg',
         isDisabled: true,
+        locales: ['fr-fr', 'fr'],
         notExistingAttribute: 'notExistingValue',
       };
 
@@ -673,6 +674,7 @@ describe('Integration | Repository | training-repository', function () {
       expect(updatedTraining.internalTitle).to.equal(attributesToUpdate.internalTitle);
       expect(updatedTraining.link).to.equal(attributesToUpdate.link);
       expect(updatedTraining.locale).to.equal(training.locale);
+      expect(updatedTraining.locales).to.deep.equal(attributesToUpdate.locales);
       expect(updatedTraining.type).to.equal(training.type);
       expect(updatedTraining.editorName).to.be.equal(attributesToUpdate.editorName);
       expect(updatedTraining.editorLogoUrl).to.be.equal(attributesToUpdate.editorLogoUrl);
