@@ -3,6 +3,7 @@ import difference from 'lodash/difference.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CombinedCourseBlueprint } from '../../domain/models/CombinedCourseBlueprint.js';
+import * as questRepository from './quest-repository.js';
 
 /**
  * @returns {Promise<import('../../domain/models/CombinedCourseBlueprint.js').CombinedCourseBlueprint[]>}
@@ -12,18 +13,28 @@ export async function findAll() {
   const knexConn = DomainTransaction.getConnection();
 
   const results = await knexConn('combined_course_blueprints');
-  return results.map(_toDomain);
+
+  const blueprints = [];
+  for (const result of results) {
+    const quest = await questRepository.findById({ questId: result.questId });
+    blueprints.push(_toDomain(result, quest));
+  }
+  return blueprints;
 }
 
 export async function save({ combinedCourseBlueprint }) {
   const knexConn = DomainTransaction.getConnection();
 
+  const questId = await questRepository.save({ quest: combinedCourseBlueprint.quest });
+
   if (!combinedCourseBlueprint.id) {
     const [insertedValues] = await knexConn('combined_course_blueprints')
-      .insert(_toDTO({ combinedCourseBlueprint }))
+      .insert(_toDTO({ combinedCourseBlueprint, questId }))
       .returning('*');
 
-    return _toDomain(insertedValues);
+    const quest = await questRepository.findById({ questId });
+
+    return _toDomain(insertedValues, quest);
   }
 
   const [updatedValues] = await knexConn('combined_course_blueprints')
@@ -84,7 +95,8 @@ export async function findById({ id }) {
   if (!result) {
     return null;
   }
-  return _toDomain(result);
+  const quest = await questRepository.findById({ questId: result.questId });
+  return _toDomain(result, quest);
 }
 
 export async function findByOrganizationId({ organizationId }) {
@@ -98,10 +110,10 @@ export async function findByOrganizationId({ organizationId }) {
     )
     .where({ organizationId })
     .groupBy('combined_course_blueprints.id');
-  return results.map(_toDomain);
+  return results.map((result) => _toDomain(result));
 }
 
-function _toDTO({ combinedCourseBlueprint }) {
+function _toDTO({ combinedCourseBlueprint, questId }) {
   return {
     id: combinedCourseBlueprint.id,
     name: combinedCourseBlueprint.name,
@@ -111,10 +123,11 @@ function _toDTO({ combinedCourseBlueprint }) {
     content: JSON.stringify(combinedCourseBlueprint.content),
     createdAt: combinedCourseBlueprint.createdAt,
     updatedAt: combinedCourseBlueprint.updatedAt,
+    questId,
   };
 }
 
-function _toDomain(rawData) {
+function _toDomain(rawData, quest) {
   return new CombinedCourseBlueprint({
     id: rawData.id,
     name: rawData.name,
@@ -125,6 +138,7 @@ function _toDomain(rawData) {
     createdAt: rawData.createdAt,
     updatedAt: rawData.updatedAt,
     organizationIds: rawData.organizationIds,
+    quest,
   });
 }
 
@@ -139,5 +153,6 @@ function _buildSelectFields(knexConn) {
     createdAt: 'combined_course_blueprints.createdAt',
     updatedAt: 'combined_course_blueprints.updatedAt',
     organizationIds: knexConn.raw(`array_remove(array_agg("combined_course_blueprint_shares"."organizationId"), NULL)`),
+    questId: 'combined_course_blueprints.questId',
   };
 }
