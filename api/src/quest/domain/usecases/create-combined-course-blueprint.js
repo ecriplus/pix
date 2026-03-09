@@ -1,4 +1,6 @@
-import { COMBINED_COURSE_BLUEPRINT_ITEMS } from '../models/CombinedCourseBlueprint.js';
+import _ from 'lodash';
+
+import { COMBINED_COURSE_BLUEPRINT_ITEMS, CombinedCourseBlueprint } from '../models/CombinedCourseBlueprint.js';
 
 export const createCombinedCourseBlueprint = async ({
   combinedCourseBlueprint,
@@ -14,7 +16,10 @@ export const createCombinedCourseBlueprint = async ({
   const moduleShortIds = combinedCourseBlueprint.content
     .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
     .map(({ value }) => value);
-  await moduleRepository.getByShortIds({ moduleShortIds });
+  const modules = await moduleRepository.getByShortIds({ moduleShortIds });
+  const modulesByShortId = _.groupBy(modules, 'shortId');
 
-  return combinedCourseBlueprintRepository.save({ combinedCourseBlueprint });
+  return combinedCourseBlueprintRepository.save({
+    combinedCourseBlueprint: CombinedCourseBlueprint.buildWithQuest({ combinedCourseBlueprint, modulesByShortId }),
+  });
 };
