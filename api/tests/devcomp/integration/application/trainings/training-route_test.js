@@ -1116,6 +1116,29 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         });
       });
 
+      describe('locales', function () {
+        it('should return bad request when locales is not an array of supported locales', async function () {
+          // given
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          const payload = {
+            data: {
+              attributes: {
+                'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
+                locales: ['not-supported-locales'],
+              },
+            },
+          };
+
+          // when
+          const result = await httpTestServer.request('PATCH', '/api/admin/trainings/12344', payload);
+
+          // then
+          expect(result.statusCode).to.equal(400);
+        });
+      });
+
       describe('when editorLogoUrl is not a valid url', function () {
         it('should return 400', async function () {
           // given
