@@ -143,6 +143,9 @@ const register = async function (server) {
                 locale: Joi.string()
                   .valid(...lowerCaseSupportedLocales)
                   .required(),
+                locales: Joi.array()
+                  .items(Joi.string().valid(...lowerCaseSupportedLocales))
+                  .default([]),
                 'editor-name': Joi.string().required(),
                 'editor-logo-url': Joi.string().regex(editorLogoUrlValidation).required(),
               }),

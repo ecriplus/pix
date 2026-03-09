@@ -608,6 +608,43 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
         expect(response.statusCode).to.equal(400);
       });
 
+      it('should return 400 if in the payload, locales is not an array of supported locales', async function () {
+        // given
+        const invalidPayload = {
+          data: {
+            attributes: {
+              title: 'ma formation',
+              link: 'http://www.example.net',
+              duration: { days: 2, hours: 2, minutes: 2 },
+              type: 'webinaire',
+              'editor-name': 'ministère',
+              'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
+              'internal-title': 'ma formation interne',
+              locale: 'fr',
+              locales: ['not-supported-locale-1', 'not-supported-locale-2'],
+            },
+          },
+        };
+        sinon.stub(trainingController, 'create').returns('ok');
+
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSupport')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon
+          .stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin')
+          .callsFake((request, h) => h.response({ errors: new Error('forbidden') }).code(403));
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleMetier').callsFake((request, h) => h.response(true));
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('POST', '/api/admin/trainings', invalidPayload);
+
+        // then
+        expect(response.statusCode).to.equal(400);
+      });
+
       it('should return 400 if in the payload there is no editor-name', async function () {
         // given
         const invalidPayload = {
