@@ -1,0 +1,796 @@
+{
+  "id": "be7b8978-b85d-4807-9d3e-2b3b2dcd9ded",
+  "shortId": "613d1c1a",
+  "slug": "ia-prompt-ava",
+  "title": "IA : arrêtez de demander, commencez à piloter.",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Converser avec une IA générative ne se limite pas à poser une question&nbsp;: la formulation d’une tâche influence fortement la qualité du résultat. Ce module aide à repérer les situations où un prompt devient complexe et à découvrir des techniques de conversation pour mieux guider l’IA.</p>",
+    "duration": 10,
+    "level": "advanced",
+    "objectives": [
+      "<p>Identifier des situations nécessitant des stratégies de conversation avec l’IA générative</p>",
+      "<p>Connaître différentes techniques de conversation (prompting) avec une IA</p>",
+      "<p>Comprendre comment ces techniques modifient la qualité de la réponse de l’IA générative</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "6417b6e2-c22a-4195-a7ee-fad8361d81eb",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "7003fe43-08a3-485f-be48-97a5735b5ca3",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fc40f4f9-a728-45c3-9a69-e6a511cfb332",
+                "type": "custom",
+                "title": "Voici une discussion entre deux bretons fans de théâtre ",
+                "instruction": "",
+                "functionalInstruction": "",
+                "tagName": "message-conversation",
+                "props": {
+     "conversationTitle": "Début de la conversation entre Yasmine & Steven",
+                  "messages": [
+                    {
+                      "userName": "Lénaïg",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Je laisse tomber l’IA, elle ne fait pas ce que je veux. J’ai demandé à une IA d’adapter une pièce flamande pour mon cours de théâtre."
+                    },
+                    {
+                      "userName": "Gwendolin",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Adapter ? Qu’est-ce que tu lui as demandé exactement ?"
+                    },
+                    {
+                      "userName": "Lénaïg",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "« Traduis la pièce depuis le flamand, conserve l’esprit et l’humour des blagues originales, supprime les références culturelles datées, remplace-les par des références compréhensibles dans un contexte international, tout en gardant un style théâtral fluide et jouable sur scène avec des rôles non genrés. »"
+                    },
+                    {
+                      "userName": "Gwendolin",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "D’accord… La demande était claire pour toi. Mais pas pour le logiciel."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "369dc90d-d020-4dcd-971e-fa199786accf",
+                "type": "qcm",
+                "instruction": "<p>Dans le prompt formulé par A, quels éléments peuvent expliquer que l’IA produise une réponse insatisfaisante&nbsp;?<em></em></p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Il formule plusieurs objectifs différents en une seule fois</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Il impose de nombreuses contraintes simultanées</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Il ne dit pas quoi prioriser quand deux contraintes entrent en conflit</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Il attend un rendu final complexe</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "Bien vu&nbsp;!",
+                    "diagnosis": "Quand une tâche est trop complexe pour un seul prompt, l’IA peut mal gérer ou mal interpréter certaines consignes. Cela peut entraîner des oublis, des incohérences ou une réponse trop générale."
+                  },
+                  "invalid": {
+                    "state": "Pas tout à fait…",
+                    "diagnosis": "Quand une tâche est trop complexe pour un seul prompt, l’IA peut mal gérer ou mal interpréter certaines consignes. Cela peut entraîner des oublis, des incohérences ou une réponse trop générale."
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "6e11ba0c-a8b5-4bc7-9b47-f75ef31e8872",
+          "type": "transition",
+          "title": "Transition 0",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e7a12788-dfd9-45c9-a6d3-ea8d9af82b54",
+                "type": "text",
+                "content": "<p><strong>Plus la tâche est complexe, plus il faut clarifier, prioriser et arbitrer.</strong> Voyons ensemble quelques techniques pour avoir de meilleurs résultats.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15ded631-82c1-41d9-8cbd-cb67fc16483e",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "ca39540b-2de8-417f-82d8-5e8db6689abd",
+          "type": "discovery",
+          "title": "Découverte 1 : Prompt chaining",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a79b122b-a19c-4e12-ac48-d7912a72aed3",
+                "type": "text",
+                "content": "<p>On vous a confié la préparation d’un plan de communication sur la cybersécurité du quotidien (arnaques, phishing, bonnes pratiques). Vous décidez d’utiliser une IA pour vous aider dans cette tâche.</p>"
+              }
+            },
+            {
+              "type": "stepper",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "507f9725-f20e-4cee-9db3-af7380391e7f",
+                      "type": "text",
+                      "content": "<p>Dans un premier temps vous essayez de générer un plan de communication avec un seul prompt.&nbsp;</p>"
+                    },
+                    {
+                      "id": "6650fac0-b68e-4146-9126-725ce1a9a0c7",
+                      "type": "embed",
+                      "isCompletionRequired": false,
+                      "title": "Vous avez un seul prompt",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdobizm00006801oq1o1w5f",
+                      "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication sur le thème de la cyber-sécurité.</p>",
+                      "solution": "",
+                      "height": 500
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "99d066ad-bd97-4825-a606-13409b3636a6",
+                      "type": "text",
+                      "content": "<p>Ce que vous venez d’obtenir ressemble à un plan… mais vous pouvez difficilement le mettre en oeuvre.</p><p>Pour avancer, ne demandez pas “tout d’un coup”. Découpez la mission en petites étapes, puis interrogez l’IA étape par étape.</p>"
+                    },
+                    {
+                      "id": "d9ae8269-f9ce-4ba7-a7af-783816d89270",
+                      "type": "embed",
+                      "isCompletionRequired": false,
+                      "title": "simu 2",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdoudaa00016801am9kvgh9",
+                      "instruction": "<p>Utilisez ChatPix pour construire progressivement un plan de communication cybersécurité clair.</p>",
+                      "solution": "",
+                      "height": 500
+                    },
+                    {
+                      "id": "e5f7e0b2-ca80-4e68-99e0-be0d3802bd27",
+                      "type": "expand",
+                      "title": "💡 Indice 1",
+                      "content": "<p>Commencez par clarifier la tâche&nbsp;: demandez à l’IA d’identifier l’objectif, le public, les contraintes et ce qui manque pour faire un plan.</p>"
+                    },
+                    {
+                      "id": "edd738b9-ddab-4e3a-b628-0169b06fd943",
+                      "type": "expand",
+                      "title": "💡 Indice 2",
+                      "content": "<p>Ensuite, demandez 3 options de communication (formats/canaux) pour sensibiliser  à la cybersécurité, avec avantages et risques.</p>"
+                    },
+                    {
+                      "id": "37a8b1c4-0097-4a35-bdc7-a3c98f00c33b",
+                      "type": "expand",
+                      "title": "💡 Indice 3",
+                      "content": "<p>Pour finir, demande un plan d’action&nbsp;: étapes, jalons (sur 2 semaines), rôles  et un indicateur de réussite.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "e5503e61-59e4-47a8-8748-7ce9f7460aa1",
+          "type": "short-lesson",
+          "title": "Leçon 1 : Découper une tâche (prompt chaining)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e7ced526-7903-4b42-878a-305acde81d24",
+                "type": "text",
+                "content": "<p>Ce que vous venez de faire s’appelle le <strong>prompt chaining</strong>. Il consiste à découper une tâche complexe en plusieurs étapes. Chaque prompt s’appuie sur le résultat obtenu à l’étape précédente.</p><h5>🤔 Que vous apporte cette approche&nbsp;?</h5><p>Avancer par étapes permet d’apporter le contexte progressivement et de valider des résultats intermédiaires. Vous pouvez superviser le raisonnement, vous limitez les oublis et vous repérez plus facilement les erreurs au lieu de déléguer toute la réflexion.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "8fc52b40-1201-4437-83fd-17091b4346a1",
+          "type": "transition",
+          "title": "Transition 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3b6efb1a-7896-4667-b035-f4dd9f97e107",
+                "type": "text",
+                "content": "<p>Plutôt que de découper vous-même la tâche (prompt chaining), vous pouvez aussi demander à l’IA d’expliquer sa démarche&nbsp;: voyons les avantages et les inconvénients de cette méthode.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f8c203b5-2912-4c0d-9a48-f471c382d733",
+          "type": "discovery",
+          "title": "Découverte 2 : Chain-of-thought",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "97035288-b60f-4090-9224-f0dc3281509e",
+                "type": "text",
+                "content": "<p>Toujours dans l’optique d’obtenir un plan de communication sur la cyber-sécurité, reprene votre prompt de demande unique et rajoutez \"explique ta démarche\" à la fin.<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b557c9bc-6a74-4b94-a27a-7888549b2b02",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "simu 3",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdpmbsf00026801dq6o9q63",
+                "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication et demandez lui d’expliquer son raisonnement. <br></p>",
+                "solution": "",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "5862ed61-4234-4715-b886-8f0aab9da15f",
+          "type": "short-lesson",
+          "title": "Leçon 2 : Laisser l’IA raisonner (chain-of-thought)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cf6d0460-cc4d-4f23-97d1-5d81f3dd7732",
+                "type": "text",
+                "content": "<p>Ce que vous venez de faire s’appelle le <strong>chain-of-thought</strong>. Ici, c’est l’IA qui enchaîne elle-même les étapes. Vous avez moins de contrôle sur le raisonnement, mais cela peut aider à repérer des erreurs.</p><h5>🤔 Pourquoi est-il utile de comprendre ce mode «&nbsp;raisonnement&nbsp;»&nbsp;?</h5><p>Beaucoup de logiciels d’IA générative activent un mode «&nbsp;raisonnement&nbsp;» automatiquement, sans toujours montrer le détail. Savoir quand et comment l’IA construit sa réponse aide à garder la maîtrise de ce qu’elle produit.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4252483b-64e4-4dc0-9c05-a4def17fbead",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6b8a0ef9-91f4-4337-8195-2505ed4f748f",
+                "type": "text",
+                "content": "<p>Parfois, le problème n’est pas la structure, mais le cadrage du besoin. Des demandes, même bien découpées, ne suffisent pas. Voyons ensemble comment y pallier.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f4640dce-3daf-4f09-bae9-eae8f4f75c2d",
+          "type": "discovery",
+          "title": "Découverte 3 : Situation réflexive",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b08be9b7-e919-4a3e-b369-7d917ef59c72",
+                "type": "text",
+                "content": "<p>Cette fois, au lieu de demander directement un plan, demandez à l’IA de vous poser quelques questions. En y répondant, vous construirez le plan avec elle, étape par étape.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7df8f971-917b-4c3f-84c6-013234190a00",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "simu 4",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdq55md00036801lo574bbs",
+                "instruction": "<p>Utilisez ChatPix pour lui demander de vous poser des questions afin de cadrer votre plan de communication cybersécurité, puis répondez-lui pour qu’il vous propose un plan à partir de vos réponses.</p>",
+                "solution": "",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "5c781843-8af0-40dd-9940-963d406e6098",
+          "type": "short-lesson",
+          "title": "Leçon 3 : Construire la demande (situation réflexive / méta-prompting)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "26c430e9-9676-453d-966d-7657f413d2f3",
+                "type": "text",
+                "content": "<p>Ce que vous venez de faire s’appelle une <strong>situation réflexive</strong>. L’IA ne produit pas immédiatement un résultat final&nbsp;: elle pose des questions, propose des pistes et vous aide à préciser votre besoin.</p><h5>Pourquoi est-ce utile&nbsp;?</h5><p>Quand l’objectif est flou ou mal cadré, le dialogue permet d’affiner progressivement la demande. Vous construisez la solution avec l’IA, au lieu de déléguer toute la réflexion en un seul prompt.</p><h5>Bon à savoir</h5><p>Si votre tâche est complexe, vous pouvez demander à l’IA de <strong>reformuler votre besoin</strong> pour qu’il soit compréhensible pour un logiciel d’intelligence artificielle. On appelle cette technique le <strong>métaprompting</strong>. Remontez dans ChatPix et testez cette approche avec votre propre demande.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2d3ea821-26cb-433e-8b9b-2b243129d246",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "e3e29f2b-1ac7-424b-a9a2-54b5852db729",
+                "type": "text",
+                "content": "<p>Une fois l’objectif clair pour l’IA, comment guider précisément le résultat attendu&nbsp;?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f7880c02-b62f-457f-abd2-471851962357",
+          "type": "discovery",
+          "title": "Découverte 4 : Few-shot prompting",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "45b9e2ba-d6e6-4cdc-95c8-0963764c1980",
+                "type": "text",
+                "content": "<p>Quand vous avez des contraites de style ou de mise ne forme précise, le mieux peut-être simplement de donner un ou des exemple à l’IA.&nbsp;</p><p>Téléchargez l’exemple ci-dessous puis utilisez ChatPix pour avoir votre plan de communication.&nbsp;</p><p><a href=\"https://assets.pix.org/draft/modules/IA_Gen_Prompt_AVA/exemple1.pdf\">Exemple1</a></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0e6d696c-f24e-406c-9f80-bc721d607967",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "simu 5",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmexdjxx00046801lgbya6kl",
+                "instruction": "<p>Mettez en pièce jointe de votre prompt les documents pour donner des exemples de résultats attendus à ChatPix. <br><br></p>",
+                "solution": "",
+                "height": 500
+              }
+            }
+          ]
+        },
+        {
+          "id": "45b41dc9-85f6-434b-82e8-0a086a8a5b20",
+          "type": "short-lesson",
+          "title": "Leçon 4 : Donner des exemples (few-shot prompting)",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "09010fa8-070c-4bcf-ab61-c47b0e46c2fa",
+                "type": "text",
+                "content": "<p>Ce que vous venez de faire s’appelle le <strong>few-shot prompting</strong>.</p><p>Cette méthode consiste à donner à l’IA un ou plusieurs exemples concrets du type de réponse attendu, avant de lui demander de produire un nouveau contenu qui respecte la structure des exemples fournis.</p><h5>🤔Quel est l’intérêt&nbsp;?</h5><p>Lorsque la consigne est abstraite ou difficile à formuler, les exemples permettent de lever les ambiguïtés&nbsp;: ils précisent le style, le ton, le niveau d’exigence ou le format attendu.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "658be232-d7ab-4c36-acc8-b1f923c3bd9f",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "52d939a0-c922-4274-badc-6a1c481b71e9",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "83e15f9b-bb14-4693-8f91-0b4bb5ea5e46",
+                "type": "text",
+                "content": "<p>Toutes ces techniques reposent sur un principe commun&nbsp;: <strong>faire avec l’IA</strong>, ne pas <strong>laisser faire l’IA</strong>.</p><table><caption class=\"sr-only\">Récapitulatif des techniques de conversation</caption><thead><tr><th scope=\"col\">Technique</th><th scope=\"col\">Quand l’utiliser</th><th scope=\"col\">Exemple de prompt</th></tr></thead><tbody><tr><th scope=\"row\">Prompt chaining</th><td>Processus en plusieurs étapes</td><td>Prompt 1&nbsp;: «&nbsp;Analyse le besoin.&nbsp;» → Prompt 2&nbsp;: «&nbsp;Propose un plan.&nbsp;» → Prompt 3&nbsp;: «&nbsp;Rédige le contenu.&nbsp;»</td></tr><tr><th scope=\"row\">Chain-of-thought</th><td>Raisonnement délicat ou incertain</td><td>«&nbsp;Explique ton raisonnement étape par étape avant de conclure.&nbsp;»</td></tr><tr><th scope=\"row\">Situation réflexive / Méta-prompting</th><td>Difficulté à formuler la demande</td><td>«&nbsp;Aide-moi à formuler un bon prompt pour demander une lettre de motivation efficace.&nbsp;»<br>«&nbsp;J’ai X besoin, pose-moi des questions pour le cadrer.&nbsp;»</td></tr><tr><th scope=\"row\">Few-shot prompting</th><td>Attente précise de style ou de format</td><td>«&nbsp;Voici deux exemples de lettres. Rédige une lettre du même type pour ce nouveau cas.&nbsp;»</td></tr></tbody></table>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "45dd1521-9372-4aad-bb4d-352a2680ee58",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "fb6c12fd-45dc-44ca-86ff-55e5462033cf",
+          "type": "activity",
+          "title": "Activité 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7c0f6c8c-5a44-4a3b-8c75-0f2fe2c91d3a",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des phrases suivantes, dites si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "b9c2a1a0-1efb-4c2b-bf21-2f4a29f5f08d",
+                    "text": "Quand une demande est trop complexe pour un seul prompt, l’IA peut oublier des consignes ou produire une réponse trop générale.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "0b2ac3e2-1b78-4b22-9c41-7c4d92f3c1d7",
+                    "text": "Dans un prompt complexe, il est inutile de préciser ce qui est prioritaire si deux contraintes se contredisent.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "0e5b2c6c-3f4b-4d7f-8e7d-3f1a7a6ddf8a",
+                    "text": "Le prompt chaining consiste à découper une tâche en plusieurs prompts qui s’appuient sur les résultats précédents.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "e0f9f2b9-4e7a-4c0b-92d4-65a2df33a7a1",
+                    "text": "Ajouter « explique ta démarche » rend souvent la réponse plus structurée, mais ne garantit pas qu’elle soit correcte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "f6c86b45-21b4-48f2-8e2f-9b2c4d1b1cc0",
+                    "text": "Dans une situation réflexive, l’IA peut commencer par poser des questions avant de proposer un plan.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "8d0a0b3a-1d7f-4b7a-9d0c-8e5f1a2e3b4c",
+                    "text": "Le métaprompting consiste à demander à l’IA de reformuler son besoin en un prompt clair et exploitable.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "Si vous avez hésité, retenez l’essentiel&nbsp;: on améliore la qualité soit en découpant (prompt chaining), soit en cadrant (questions / métaprompting), soit en imposant un format (few-shot)."
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "eb164826-c2ed-4aa6-8813-5e3c122e3688",
+          "type": "activity",
+          "title": "Activité 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fefbd4c4-6521-44f6-bd87-ee2d0670f93b",
+                "type": "qrocm",
+                "instruction": "Complétez le texte avec la bonne notion du module.",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<span>Quand une demande est trop&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "a",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "caractère de la demande",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "simple"
+                      },
+                      {
+                        "id": "2",
+                        "content": "complexe"
+                      },
+                      {
+                        "id": "3",
+                        "content": "urgente"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>, mieux vaut la découper en plusieurs étapes&nbsp;: c’est le&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "b",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "technique de découpage",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "prompt chaining"
+                      },
+                      {
+                        "id": "2",
+                        "content": "few-shot prompting"
+                      },
+                      {
+                        "id": "3",
+                        "content": "métaprompting"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>. Si je veux que l’IA rende sa réponse plus structurée, je peux activer le&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "c",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "technique de démarche",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "chain of thought"
+                      },
+                      {
+                        "id": "2",
+                        "content": "few-shot prompting"
+                      },
+                      {
+                        "id": "3",
+                        "content": "situation réflexive"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span> en lui demandant d’expliquer sa démarche. Quand mon besoin est flou, je peux demander à l’IA de me poser des&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "d",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "éléments de cadrage",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "questions"
+                      },
+                      {
+                        "id": "2",
+                        "content": "exemples"
+                      },
+                      {
+                        "id": "3",
+                        "content": "images"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>&nbsp;: c’est une situation&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "e",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "type de situation",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "automatique"
+                      },
+                      {
+                        "id": "2",
+                        "content": "réflexive"
+                      },
+                      {
+                        "id": "3",
+                        "content": "finale"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>. Et si je n’arrive pas à formuler ma demande, je peux demander à l’IA de reformuler mon besoin en un prompt clair&nbsp;: c’est le&nbsp;</span>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "f",
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "technique de reformulation",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "few-shot prompting"
+                      },
+                      {
+                        "id": "2",
+                        "content": "métaprompting"
+                      },
+                      {
+                        "id": "3",
+                        "content": "prompt chaining"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<span>.</span>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !</p>",
+                    "diagnosis": "<p>Vous avez relié chaque situation à la bonne technique&nbsp;: découper (prompt chaining), demander la démarche (chain of thought), cadrer par questions (situation réflexive) et reformuler en prompt (métaprompting).</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non !</p>",
+                    "diagnosis": "<p>Quand c’est complexe, on découpe (prompt chaining). Pour rendre la réponse plus structurée, on peut demander la démarche (chain of thought). Quand c’est flou, on passe par des questions (situation réflexive). Et si on peine à formuler, on demande un prompt clair (métaprompting).</p>"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "91eede86-d80e-46e6-93f9-f591c14890ae",
+          "type": "activity",
+          "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "223fa171-a00c-4853-83f3-0c800f03f9b7",
+                "type": "text",
+                "content": "<p>Sera un QCU tableau qui montre des prompt et demande de donner la technique associée. <br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a37d4154-3b89-4bca-910b-c6d1c0255e20",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "8006c431-b277-49ad-907e-6074ac4d9dfd",
+          "type": "challenge",
+          "title": "Transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3db037ce-03c3-482c-b82c-68bdd445ed70",
+                "type": "qcu-declarative",
+                "instruction": "<p>Quelle technique vue dans ce module avez-vous le plus envie de mettre en place la prochaine fois que vous travaillerez avec une IA générative&nbsp;?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p><strong>Prompt chaining</strong>&nbsp;: découper la tâche en plusieurs étapes.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bon choix&nbsp;! Découper une demande complexe aide à garder la main, à vérifier chaque étape et à éviter les oublis.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p><strong>Chain of thought</strong>&nbsp;: demander à l’IA d’expliciter sa démarche.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Intéressant&nbsp;! Ça peut rendre la réponse plus structurée et faire apparaître des hypothèses… mais cela ne remplace pas la vérification.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p><strong>Situation réflexive</strong>&nbsp;: demander à l’IA de poser des questions avant de proposer un plan.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bon réflexe&nbsp;! Quand le besoin est flou, les questions aident à cadrer et à construire une réponse plus adaptée.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p><strong>Métaprompting</strong>&nbsp;: demander à l’IA de reformuler votre besoin en un prompt clair.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Super utile&nbsp;! Ça vous aide à transformer une idée floue en consigne exploitable, surtout quand la tâche est complexe.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p><strong>Few-shot prompting</strong>&nbsp;: fournir un exemple pour obtenir le bon format.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Excellent choix&nbsp;! Quand vous voulez une mise en forme précise, un exemple est souvent plus efficace qu’une longue description.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
