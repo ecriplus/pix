@@ -1,5 +1,30 @@
 # Pix Changelog
 
+# [5.351.0](https://github.com/1024pix/pix/compare/v5.350.0...v5.351.0) (2026-03-10)
+
+### :rocket: Amélioration
+
+- [#15356](https://github.com/1024pix/pix/pull/15356) Ajouter la colonne "locales" à la table trainings (PIX-21774) 
+- [#15383](https://github.com/1024pix/pix/pull/15383) Ajouter le nom des référentiels dans la page de sélection de sujet (PIX-21790) 
+- [#15359](https://github.com/1024pix/pix/pull/15359) Bloquer l'accès à une campagne archivée (PIX-21652) 
+- [#15376](https://github.com/1024pix/pix/pull/15376) Créer une route pour récupérer les frameworks d'une organisation (PIX-21788) 
+- [#15382](https://github.com/1024pix/pix/pull/15382) MDX-138 IAGenPrompt_AVA premiere inte 
+- [#15392](https://github.com/1024pix/pix/pull/15392) relectures-expert 
+- [#15334](https://github.com/1024pix/pix/pull/15334) Rend l'item courant d'un parcours apprenant plus visible (PIX-21784). 
+- [#15380](https://github.com/1024pix/pix/pull/15380) Réparation et amélioration du simulateur de scoring Pix transverse  (PIX-21851) 
+
+### :bug: Correction
+
+- [#15395](https://github.com/1024pix/pix/pull/15395) Corriger la déconnexion SSO OIDC (PIX-21854) 
+
+### :building_construction: Tech
+
+- [#15402](https://github.com/1024pix/pix/pull/15402) :package: Mise à jour des libs autour d'`eslint` 
+- [#15399](https://github.com/1024pix/pix/pull/15399) Ajout de nouvelles colonnes avec une méthode "zero-downtime" pour les tables "certification-courses" et "certification-candidates" (PIX-21858) 
+- [#15315](https://github.com/1024pix/pix/pull/15315) Harmoniser la sélection de réponses en ne choisissant que la plus ancienne pour une même épreuve dans un même assessment 
+- [#15134](https://github.com/1024pix/pix/pull/15134) Refacto du code de get-next-challenge dans un seul usecase 
+- [#15396](https://github.com/1024pix/pix/pull/15396) Réparer le test E2E de recette-certif portant sur l'import ODS
+
 # [5.350.0](https://github.com/1024pix/pix/compare/v5.349.1...v5.350.0) (2026-03-09)
 
 ### :rocket: Amélioration
