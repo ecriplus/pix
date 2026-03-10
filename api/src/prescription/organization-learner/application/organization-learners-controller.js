@@ -9,7 +9,7 @@ const getAttestationPdfFromFilters = async function (request, h) {
   const divisions = request.query.divisions;
 
   try {
-    const buffer = await usecases.getAttestationZipFromFilters({
+    const buffer = await usecases.getAttestationPdfFromFilters({
       attestationKey,
       organizationId,
       divisions,
@@ -48,7 +48,7 @@ const getAttestationParticipantsStatus = async function (
 
 const organizationLearnersController = {
   getAnalysisByTubes,
-  getAttestationZipFromFilters: getAttestationPdfFromFilters,
+  getAttestationPdfFromFilters,
   getAttestationParticipantsStatus,
 };
 

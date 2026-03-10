@@ -31,7 +31,7 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | g
     await databaseBuilder.commit();
 
     // when
-    const result = await usecases.getAttestationZipFromFilters({
+    const result = await usecases.getAttestationPdfFromFilters({
       attestationKey: attestation.key,
       divisions: ['6eme A', '6eme B'],
       organizationId,

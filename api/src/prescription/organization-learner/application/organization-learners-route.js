@@ -61,7 +61,7 @@ const register = async function (server) {
             divisions: Joi.array().items(Joi.string()).default([]),
           }),
         },
-        handler: organizationLearnersController.getAttestationZipFromFilters,
+        handler: organizationLearnersController.getAttestationPdfFromFilters,
         notes: [
           '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
             "- Génération d'un zip d'attestations pour une liste de classes d'une organisation" +
