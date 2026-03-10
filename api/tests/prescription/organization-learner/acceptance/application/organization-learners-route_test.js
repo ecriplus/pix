@@ -61,7 +61,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | Organ
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.headers['content-type']).to.equal('application/zip');
+      expect(response.headers['content-type']).to.equal('application/pdf');
     });
   });
 

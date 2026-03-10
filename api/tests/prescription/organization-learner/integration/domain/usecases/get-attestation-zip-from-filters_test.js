@@ -1,10 +1,8 @@
-import { PassThrough } from 'node:stream';
-
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
 
 describe('Integration | Prescription | Learner Management | Domain | UseCase | get-attestation-zip-for-divisions', function () {
-  it('returns a zip attestation', async function () {
+  it('returns a pdf attestation', async function () {
     // given
     const templateName = 'sixth-grade-attestation-template';
     const organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -40,6 +38,6 @@ describe('Integration | Prescription | Learner Management | Domain | UseCase | g
     });
 
     // then
-    expect(result instanceof PassThrough).true;
+    expect(Buffer.isBuffer(result)).to.be.true;
   });
 });

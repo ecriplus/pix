@@ -6,7 +6,7 @@ import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
 describe('Unit | Application | Organization-Learner | organization-learners-controller', function () {
   describe('#getAttestationZipFromFilters', function () {
     describe('success case', function () {
-      it('should return buffer', async function () {
+      it('should return a pdf buffer with correct headers', async function () {
         // given
         const organizationId = 123;
         const attestationKey = Symbol('attestationKey');
@@ -34,6 +34,7 @@ describe('Unit | Application | Organization-Learner | organization-learners-cont
 
         // then
         expect(response.statusCode).to.equal(200);
+        expect(response.headers['Content-Type']).to.equal('application/pdf');
       });
     });
 
