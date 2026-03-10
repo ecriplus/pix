@@ -321,7 +321,6 @@ const configuration = (function () {
     },
     hapi: {
       options: {},
-      enableRequestMonitoring: toBoolean(process.env.ENABLE_REQUEST_MONITORING),
     },
     infra: {
       appName: process.env.APP,
