@@ -470,7 +470,7 @@
     },
     "participation-status": {
       "COMPLETED": "Abgeschlossen",
-      "LOCKED": "Zu entsperren",
+      "LOCKED": "Gesperrt",
       "NOT_STARTED": "Zu tun",
       "SHARED": "Abgeschlossen",
       "STARTED": "In Arbeit"
