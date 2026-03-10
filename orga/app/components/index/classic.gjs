@@ -16,10 +16,17 @@ import { EVENT_NAME } from '../../helpers/metrics-event-name';
 export default class IndexClassic extends Component {
   @service currentUser;
   @service intl;
+  @service locale;
   @service pixMetrics;
+  @service store;
 
   get description() {
     return this.intl.t('components.index.welcome.description.classic');
+  }
+
+  get scoBannerContent() {
+    const content = this.store.peekRecord('announcement', 'SCO')?.content;
+    return content?.[this.locale.currentLanguage] ?? null;
   }
 
   @action
@@ -32,6 +39,7 @@ export default class IndexClassic extends Component {
       @firstName={{this.currentUser.prescriber.firstName}}
       @description={{this.description}}
       @displayScoBanner={{this.currentUser.isSCOManagingStudents}}
+      @scoBannerContent={{this.scoBannerContent}}
     />
 
     <OrganizationInfo @organizationName={{this.currentUser.organization.name}} />

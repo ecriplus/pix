@@ -1,4 +1,13 @@
-.banner-list {
-  margin-left: var(--pix-spacing-4x);
-  list-style: decimal
+.sco-banner__content {
+  a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 0.85;
+    }
+  }
 }

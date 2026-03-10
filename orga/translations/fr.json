@@ -68,7 +68,6 @@
       "message": "'<strong>'Certifications :'</strong>' n’oubliez pas de '<'a href={documentationLink} class=\"{linkClasses}\" target=\"_blank\" rel=\"noopener noreferrer\"'>'finaliser les sessions dans Pix Certif'</a>' puis de télécharger les certificats via l'onglet “Certifications” avant la rentrée {year}."
     },
     "import": {
-      "ia-message": "🚀 '<'a href='https://cloud.pix.fr/s/rrkLPMS5dYGKRQ9' class='link link--banner link--bold link--underlined' '>'Nouveau : découvrez le kit de déploiement des parcours apprenants IA'</a>'",
       "message": "Les grandes étapes de l’année dans l’enseignement scolaire :",
       "step1a": "Mettre en place&nbsp;: '<'a href='https://cloud.pix.fr/s/TBF97QzSni7SWpc' title='Guide télécharger les résultats' class='link link--banner link--bold link--underlined' '>'télécharger les résultats'</a>' de certification et",
       "step1b": "importer",

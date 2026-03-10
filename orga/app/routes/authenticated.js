@@ -8,6 +8,13 @@ export default class AuthenticatedRoute extends Route {
   @service store;
   @service joinInvitation;
 
+  async model() {
+    if (this.currentUser.isSCOManagingStudents) {
+      await this.store.findRecord('announcement', 'SCO').catch(() => null);
+    }
+    return null;
+  }
+
   async beforeModel(transition) {
     this.session.requireAuthentication(transition, 'authentication.login');
     if (transition.isAborted) return;

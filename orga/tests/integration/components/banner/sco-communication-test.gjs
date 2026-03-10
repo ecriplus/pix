@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import Scommunication from 'pix-orga/components/banner/sco-communication';
+import ScoCommunication from 'pix-orga/components/banner/sco-communication';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -13,46 +13,42 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
     this.intl = this.owner.lookup('service:intl');
   });
 
+  const routesOnWhichToDisplayTheBanner = [
+    'authenticated.campaigns.combined-courses',
+    'authenticated.campaigns.list.my-campaigns',
+    'authenticated.campaigns.list.all-campaigns',
+    'authenticated.team.list.members',
+    'authenticated.sco-organization-participants.list',
+  ];
+
   module('Import Banner', function () {
     module('when prescriber’s organization is of type SCO that manages students', function () {
-      [
-        'authenticated.campaigns.list.my-campaigns',
-        'authenticated.campaigns.list.all-campaigns',
-        'authenticated.team.list.members',
-        'authenticated.sco-organization-participants.list',
-      ].forEach((route) => {
+      routesOnWhichToDisplayTheBanner.forEach((route) => {
         module(`when prescriber is on route ${route}`, function () {
           class CurrentUserStub extends Service {
             organization = { isSco: true };
             isSCOManagingStudents = true;
           }
 
-          test('should render the banner', async function (assert) {
+          test('should render the banner with the appropriate locale', async function (assert) {
             // given
             this.owner.register('service:current-user', CurrentUserStub);
 
             const router = this.owner.lookup('service:router');
             sinon.stub(router, 'currentRouteName').value(route);
+
+            const store = this.owner.lookup('service:store');
+            store.createRecord('announcement', { id: 'SCO', content: { fr: 'Contenu de la bannière' } });
+
             // when
-            const screen = await render(<template><Scommunication /></template>);
+            const screen = await render(<template><ScoCommunication /></template>);
 
             // then
-            assert.ok(screen.getByText(this.intl.t('banners.import.message')));
-
-            const downloadLink = screen.getByRole('link', { name: 'télécharger les résultats' });
-            assert.strictEqual(downloadLink.href, 'https://cloud.pix.fr/s/TBF97QzSni7SWpc');
-
-            const importLink = screen.queryByRole('link', { name: 'importer' });
-            assert.ok(importLink.href.endsWith('/import-participants'));
-
-            const createCampaignLink = screen.queryByRole('link', { name: 'Créer les campagnes' });
-            assert.strictEqual(createCampaignLink.href, 'https://cloud.pix.fr/s/d7MCSCq2RsSy5Pt');
-
-            const certifLink = screen.queryByRole('link', { name: 'En savoir plus sur la certification' });
-            assert.strictEqual(certifLink.href, 'https://cloud.pix.fr/s/nkEoMj9BtHX9EzE');
+            assert.ok(screen.getByText('Contenu de la bannière'));
           });
         });
       });
+
       module('when prescriber is on route certification', function () {
         class CurrentUserStub extends Service {
           organization = { isSco: true };
@@ -69,7 +65,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
           this.owner.register('service:router', Router);
 
           // when
-          const screen = await render(<template><Scommunication /></template>);
+          const screen = await render(<template><ScoCommunication /></template>);
           const alert = screen.queryByRole('alert');
 
           // then
@@ -79,13 +75,8 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
     });
 
     module('when prescriber’s organization is not of type SCO that manages students', function () {
-      [
-        'authenticated.campaigns.list.my-campaigns',
-        'authenticated.campaigns.list.all-campaigns',
-        'authenticated.team.list.members',
-        'authenticated.sco-organization-participants.list',
-      ].forEach((route) => {
-        test(`should not render the banner even if current route is ${route}`, async function (assert) {
+      routesOnWhichToDisplayTheBanner.forEach((route) => {
+        test(`should not render the banner on route ${route}`, async function (assert) {
           // given
           class CurrentUserStub extends Service {
             organization = { isSco: false };
@@ -99,7 +90,7 @@ module('Integration | Component | Banner::Sco-communication', function (hooks) {
           this.owner.register('service:router', Router);
 
           // when
-          const screen = await render(<template><Scommunication /></template>);
+          const screen = await render(<template><ScoCommunication /></template>);
 
           // then
           const alert = screen.queryByRole('alert');

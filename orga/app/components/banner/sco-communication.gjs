@@ -2,27 +2,34 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import ScoBanner from 'pix-orga/components/banner/sco-banner';
 
-export default class ScommunicationBanner extends Component {
+export default class ScoCommunicationBanner extends Component {
   @service currentUser;
   @service router;
+  @service store;
+  @service locale;
 
   get shouldDisplayBanner() {
     return (
       [
+        'authenticated.campaigns.combined-courses',
         'authenticated.campaigns.list.my-campaigns',
         'authenticated.campaigns.list.all-campaigns',
         'authenticated.team.list.members',
         'authenticated.sco-organization-participants.list',
-      ].includes(this.router.currentRouteName) && this.currentUser.isSCOManagingStudents
+      ].includes(this.router.currentRouteName) &&
+      this.currentUser.isSCOManagingStudents &&
+      this.scoBannerContent
     );
   }
-  get importParticipantUrl() {
-    return this.router.urlFor('authenticated.import-organization-participants');
+
+  get scoBannerContent() {
+    const content = this.store.peekRecord('announcement', 'SCO')?.content;
+    return content?.[this.locale.currentLanguage] ?? null;
   }
 
   <template>
     {{#if this.shouldDisplayBanner}}
-      <ScoBanner />
+      <ScoBanner @content={{this.scoBannerContent}} />
     {{/if}}
   </template>
 }
