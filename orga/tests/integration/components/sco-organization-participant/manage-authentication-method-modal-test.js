@@ -310,6 +310,46 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
         assert.notEqual(firstGeneratedPassword, secondGeneratedPassword);
       });
     });
+
+    module('When Student is blocked or temporarily blocked', function () {
+      test('displays blocked student message and unblock button', async function (assert) {
+        // given
+        this.blockedStudent = EmberObject.create({
+          id: '1',
+          username,
+          email,
+          firstName: 'John',
+          lastName: 'Doe',
+          birthdate: '2010-12-01',
+          isAuthenticatedFromGar: false,
+          hasUsername: true,
+          isBlockedOrTemporarilyBlocked: true,
+        });
+
+        // when
+        const screen = await render(
+          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal @student={{this.blockedStudent}} @display={{true}} />`,
+        );
+
+        // then
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: t(
+                'pages.sco-organization-participants.manage-authentication-method-modal.section.unblock.subtitle',
+              ),
+            }),
+          )
+          .exists();
+        assert
+          .dom(
+            screen.getByRole('button', {
+              name: t('pages.sco-organization-participants.manage-authentication-method-modal.section.unblock.button'),
+            }),
+          )
+          .exists();
+      });
+    });
   });
 
   module('When Student is connected with GAR method', function (hooks) {
