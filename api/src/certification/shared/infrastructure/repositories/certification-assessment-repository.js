@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Answer } from '../../../../evaluation/domain/models/Answer.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
@@ -8,37 +6,7 @@ import * as challengeRepository from '../../../../shared/infrastructure/reposito
 import { CertificationAssessment } from '../../../session-management/domain/models/CertificationAssessment.js';
 import { CertificationChallengeWithType } from '../../domain/models/CertificationChallengeWithType.js';
 
-async function _getCertificationChallenges(certificationCourseId, knexConn) {
-  const certificationChallengeRows = await knexConn('certification-challenges')
-    .where({ courseId: certificationCourseId })
-    .orderBy('challengeId', 'asc');
-
-  const challengeIds = certificationChallengeRows.map(({ challengeId }) => challengeId);
-  const challengesType = await challengeRepository.getManyTypes(challengeIds);
-
-  return _.map(certificationChallengeRows, (certificationChallengeRow) => {
-    return new CertificationChallengeWithType({
-      ...certificationChallengeRow,
-      type: challengesType[certificationChallengeRow.challengeId],
-    });
-  });
-}
-
-async function _getCertificationAnswersByDate(certificationAssessmentId, knexConn) {
-  const answerRows = await knexConn('answers').where({ assessmentId: certificationAssessmentId }).orderBy('createdAt');
-  const answerRowsWithoutDuplicate = _.uniqBy(answerRows, 'challengeId');
-
-  return _.map(
-    answerRowsWithoutDuplicate,
-    (answerRow) =>
-      new Answer({
-        ...answerRow,
-        result: answerStatusDatabaseAdapter.fromSQLString(answerRow.result),
-      }),
-  );
-}
-
-const getByCertificationCourseId = async function ({ certificationCourseId }) {
+export async function getByCertificationCourseId({ certificationCourseId }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationAssessmentRow = await knexConn('assessments')
     .join('certification-courses', 'certification-courses.id', 'assessments.certificationCourseId')
@@ -70,9 +38,9 @@ const getByCertificationCourseId = async function ({ certificationCourseId }) {
     certificationChallenges,
     certificationAnswersByDate,
   });
-};
+}
 
-const getByCertificationCandidateId = async function ({ certificationCandidateId }) {
+export async function getByCertificationCandidateId({ certificationCandidateId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationAssessmentRow = await knexConn('assessments')
@@ -112,15 +80,16 @@ const getByCertificationCandidateId = async function ({ certificationCandidateId
     certificationChallenges,
     certificationAnswersByDate,
   });
-};
+}
 
-const save = async function (certificationAssessment) {
+export async function save(certificationAssessment) {
   const knexConn = DomainTransaction.getConnection();
 
   for (const challenge of certificationAssessment.certificationChallenges) {
-    await knexConn('certification-challenges')
-      .where({ id: challenge.id })
-      .update(_.pick(challenge, ['isNeutralized', 'hasBeenSkippedAutomatically']));
+    await knexConn('certification-challenges').where({ id: challenge.id }).update({
+      isNeutralized: challenge.isNeutralized,
+      hasBeenSkippedAutomatically: challenge.hasBeenSkippedAutomatically,
+    });
   }
   for (const answer of certificationAssessment.certificationAnswersByDate) {
     await knexConn('answers')
@@ -135,6 +104,47 @@ const save = async function (certificationAssessment) {
   await knexConn('certification-courses')
     .where({ id: certificationAssessment.certificationCourseId })
     .update({ endedAt: certificationAssessment.endedAt });
-};
+}
 
-export { getByCertificationCandidateId, getByCertificationCourseId, save };
+async function _getCertificationChallenges(certificationCourseId, knexConn) {
+  const certificationChallengeRows = await knexConn('certification-challenges')
+    .where({ courseId: certificationCourseId })
+    .orderBy('challengeId', 'asc');
+
+  const challengeIds = certificationChallengeRows.map(({ challengeId }) => challengeId);
+  const challengesType = await challengeRepository.getManyTypes(challengeIds);
+
+  return certificationChallengeRows.map((certificationChallengeRow) => {
+    return new CertificationChallengeWithType({
+      ...certificationChallengeRow,
+      type: challengesType[certificationChallengeRow.challengeId],
+    });
+  });
+}
+
+async function _getCertificationAnswersByDate(certificationAssessmentId, knexConn) {
+  const answerDTOs = await knexConn
+    .select(['id', 'result', 'resultDetails', 'timeout', 'value', 'assessmentId', 'challengeId', 'timeSpent'])
+    .from('answers')
+    .where({ assessmentId: certificationAssessmentId })
+    .orderBy('createdAt', 'asc');
+  const dedupedAnswerDTOs = uniqByChallenge(answerDTOs);
+  return dedupedAnswerDTOs.map((answerDTO) => {
+    return new Answer({
+      ...answerDTO,
+      result: answerStatusDatabaseAdapter.fromSQLString(answerDTO.result),
+    });
+  });
+}
+
+function uniqByChallenge(answerDTOs) {
+  const map = new Map();
+
+  for (const a of answerDTOs) {
+    if (!map.has(a.challengeId)) {
+      map.set(a.challengeId, a);
+    }
+  }
+
+  return [...map.values()];
+}
