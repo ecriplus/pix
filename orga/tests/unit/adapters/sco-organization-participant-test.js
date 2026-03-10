@@ -73,4 +73,26 @@ module('Unit | Adapters | sco-organization-participant', function (hooks) {
       assert.ok(true);
     });
   });
+
+  module('#unblockOrganizationLearner', function () {
+    test('calls ajax with correct URL and PUT method', async function (assert) {
+      // given
+      const organizationId = 1;
+      const organizationLearnerId = 11;
+      adapter.host = 'pix.local';
+      adapter.namespace = 'api';
+
+      const expectedUrl = `${adapter.host}/${adapter.namespace}/organizations/${organizationId}/sco-organization-learners/${organizationLearnerId}/unblock`;
+
+      // when
+      await adapter.unblockOrganizationLearner({
+        organizationId,
+        organizationLearnerId,
+      });
+
+      // then
+      sinon.assert.calledWith(ajaxStub, expectedUrl, 'PUT');
+      assert.ok(true);
+    });
+  });
 });

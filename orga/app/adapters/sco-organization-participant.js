@@ -32,4 +32,11 @@ export default class ScoOrganizationParticipantAdapter extends ApplicationAdapte
 
     return fileSaver.save({ fetcher: () => request });
   }
+
+  async unblockOrganizationLearner({ organizationId, organizationLearnerId }) {
+    if (organizationId && organizationLearnerId) {
+      const url = `${this.host}/${this.namespace}/organizations/${organizationId}/sco-organization-learners/${organizationLearnerId}/unblock`;
+      return this.ajax(url, 'PUT');
+    }
+  }
 }
