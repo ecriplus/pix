@@ -45,10 +45,6 @@ export default class Header extends Component {
     ];
   }
 
-  get percentage() {
-    return Math.round(this.args.participation.masteryRate * 100);
-  }
-
   get participationsListOptions() {
     let participationNumber = this.args.allParticipations.length;
 
@@ -178,7 +174,11 @@ export default class Header extends Component {
                   @prescriberDescription={{@participation.prescriberDescription}}
                 />
               {{else}}
-                <PixProgressBar @value={{this.percentage}} @color="primary" />
+                <PixProgressBar
+                  @value={{@participation.masteryRate}}
+                  @percentageValue={{t "common.result.percentage" value=@participation.masteryRate}}
+                  @color="primary"
+                />
               {{/if}}
             </li>
           </ul>

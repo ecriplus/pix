@@ -98,6 +98,8 @@ test('Assessment campaign', async ({ page }) => {
     await expect(page.getByRole('definition').filter({ hasText: `${globalMasteryPercentage} %` })).toBeVisible();
 
     await page.getByRole('cell', { name: 'Buffy' }).click();
-    await expect(page.getByLabel('Résultat', { exact: true }).getByText(`${globalMasteryPercentage} %`)).toBeVisible();
+    await expect(
+      page.getByLabel('Résultat', { exact: true }).filter({ hasText: `${globalMasteryPercentage} %` }),
+    ).toBeVisible();
   });
 });

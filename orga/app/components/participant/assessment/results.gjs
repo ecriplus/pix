@@ -3,7 +3,6 @@ import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { t } from 'ember-intl';
 
-import multiply from '../../../helpers/multiply';
 import EmptyState from '../../ui/empty-state';
 
 function sortedCompetenceResults(results) {
@@ -47,7 +46,8 @@ function competenceCount(results) {
           </:header>
           <:cell>
             <PixProgressBar
-              @value={{multiply competenceResult.competenceMasteryRate 100}}
+              @value={{competenceResult.competenceMasteryRate}}
+              @percentageValue={{t "common.result.percentage" value=competenceResult.competenceMasteryRate}}
               @tooltipText={{t
                 "pages.assessment-individual-results.table.column.results.tooltip"
                 result=competenceResult.competenceMasteryRate
