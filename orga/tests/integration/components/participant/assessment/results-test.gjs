@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ParticipantAssessmentResult from 'pix-orga/components/participant/assessment/results';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
@@ -18,8 +18,7 @@ module('Integration | Component | Participant::Assessment::Results', function (h
     // when
     const competenceResults = [];
 
-    this.set('competenceResults', competenceResults);
-    const screen = await render(hbs`<Participant::Assessment::Results @results={{this.competenceResults}} />`);
+    const screen = await render(<template><ParticipantAssessmentResult @results={{competenceResults}} /></template>);
 
     // then
     assert.dom(screen.getByText(t('pages.assessment-individual-results.table.empty'))).exists();
@@ -36,14 +35,12 @@ module('Integration | Component | Participant::Assessment::Results', function (h
 
     const competenceResults = [competenceResult];
 
-    this.set('competenceResults', competenceResults);
-
     // when
-    const screen = await render(hbs`<Participant::Assessment::Results @results={{this.competenceResults}} />`);
+    const screen = await render(<template><ParticipantAssessmentResult @results={{competenceResults}} /></template>);
 
     // then
     assert.ok(screen.getByRole('cell', { name: 'Compétence 1' }));
     // For some reason getByRole does not work locally but is ok in CI
-    assert.ok(screen.getAllByText('50%')[0]);
+    assert.ok(screen.getAllByText('50 %')[0]);
   });
 });
