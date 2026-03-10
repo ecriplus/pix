@@ -9,11 +9,13 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import formatDateToStandard from 'pix-admin/utils/date';
 
 export default class ScoringSimulator extends Component {
   @tracked validationStatus = 'default';
   @tracked score = null;
   @tracked capacity = null;
+  @tracked date = formatDateToStandard(new Date());
   @tracked simulatorReport = null;
   @tracked errors = [];
   @service store;
@@ -36,14 +38,11 @@ export default class ScoringSimulator extends Component {
     if (isFormInvalid) {
       return;
     }
-
     this.simulatorReport = await adapter.getSimulatorResult({
       score: this.score,
       capacity: this.capacity,
+      date: this.date,
     });
-
-    this.score = null;
-    this.capacity = null;
   }
 
   @action
@@ -56,6 +55,11 @@ export default class ScoringSimulator extends Component {
   updateCapacity(event) {
     this._cleanErrors();
     this.capacity = event.target.value;
+  }
+
+  @action
+  updateDate(event) {
+    this.date = event.target.value;
   }
 
   checkFormValidity() {
@@ -83,12 +87,16 @@ export default class ScoringSimulator extends Component {
       </header>
 
       <form class="scoring-simulator-form">
-        <PixInput {{on "input" this.updateScore}} @id="score" @value={{this.score}} type="number">
+        <PixInput @id="score" {{on "input" this.updateScore}} @value={{this.score}} type="number">
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.score-input"}}</:label>
         </PixInput>
 
         <PixInput @id="capacity" {{on "input" this.updateCapacity}} @value={{this.capacity}} type="number">
           <:label>{{t "pages.administration.certification.scoring-simulator.labels.capacity-input"}}</:label>
+        </PixInput>
+
+        <PixInput @id="date" {{on "change" this.updateDate}} @value={{this.date}} type="date">
+          <:label>{{t "pages.administration.certification.scoring-simulator.labels.date-input"}}</:label>
         </PixInput>
 
         <PixButton

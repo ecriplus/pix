@@ -484,6 +484,7 @@ describe('Certification | Evaluation | Acceptance | scoring-and-capacity-simulat
               data: {
                 score: 127,
                 capacity: undefined,
+                date: new Date(),
               },
             },
           };

@@ -2,20 +2,20 @@ import { usecases } from '../domain/usecases/index.js';
 import * as serializer from '../infrastructure/serializers/scoring-and-capacity-simulator-report-serializer.js';
 
 const simulateScoringOrCapacity = async (req, h) => {
-  const { capacity, score } = req.payload.data;
+  const { capacity, score, date } = req.payload.data;
 
   let scoringAndCapacitySimulatorReport;
   if (score) {
     scoringAndCapacitySimulatorReport = await usecases.simulateCapacityFromScore({
       score,
-      date: new Date(),
+      date,
     });
   }
 
   if (capacity) {
     scoringAndCapacitySimulatorReport = await usecases.simulateScoreFromCapacity({
       capacity,
-      date: new Date(),
+      date,
     });
   }
 

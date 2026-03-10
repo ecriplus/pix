@@ -20,6 +20,7 @@ const register = async (server) => {
             data: Joi.object({
               score: Joi.number(),
               capacity: Joi.number(),
+              date: Joi.date(),
             }).xor('score', 'capacity'),
           }),
         },

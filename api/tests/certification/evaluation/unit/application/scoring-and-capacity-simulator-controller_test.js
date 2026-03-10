@@ -30,6 +30,7 @@ describe('Unit | Application | scoringAndCapacitySimulatorController', function 
             data: {
               capacity,
               score: undefined,
+              date: now,
             },
           },
         };
@@ -57,6 +58,7 @@ describe('Unit | Application | scoringAndCapacitySimulatorController', function 
             data: {
               capacity: undefined,
               score,
+              date: now,
             },
           },
         };

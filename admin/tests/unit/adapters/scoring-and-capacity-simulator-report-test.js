@@ -12,9 +12,12 @@ module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks
         const adapter = this.owner.lookup('adapter:scoring-and-capacity-simulator-report');
         sinon.stub(adapter, 'ajax');
 
+        const date = new Date();
+
         const adapterOptions = {
           score: 1,
           capacity: null,
+          date: new Date(),
         };
 
         // when
@@ -26,6 +29,7 @@ module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks
           data: {
             data: {
               score: 1,
+              date,
             },
           },
         };
@@ -40,9 +44,12 @@ module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks
         const adapter = this.owner.lookup('adapter:scoring-and-capacity-simulator-report');
         sinon.stub(adapter, 'ajax');
 
+        const date = new Date();
+
         const adapterOptions = {
           capacity: 1,
           score: null,
+          date,
         };
 
         // when
@@ -54,6 +61,7 @@ module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks
           data: {
             data: {
               capacity: 1,
+              date,
             },
           },
         };

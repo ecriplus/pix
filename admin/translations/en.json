@@ -1064,6 +1064,8 @@
           "labels": {
             "capacity": "Capacity :",
             "capacity-input": "Capacity",
+            "date": "Date :",
+            "date-input": "Start of certification date",
             "level": "Level :",
             "score": "Score :",
             "score-input": "Global score in Pix"
