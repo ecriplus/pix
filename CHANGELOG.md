@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.352.0](https://github.com/1024pix/pix/compare/v5.351.0...v5.352.0) (2026-03-11)
+
+### :rocket: Amélioration
+
+- [#15393](https://github.com/1024pix/pix/pull/15393) Ajout phrase cybermalveillance sur modules GestionMPD_IND et MDP_NOV 
+- [#15394](https://github.com/1024pix/pix/pull/15394) Gérer le contenu de la bannière SCO depuis Pix Admin (PIX-21847) 
+- [#15406](https://github.com/1024pix/pix/pull/15406) Renommer le wording du tag A verrouiler sur PixOrga dans les parcours combiné (PXI-20844). 
+
+### :building_construction: Tech
+
+- [#15404](https://github.com/1024pix/pix/pull/15404) Optimiser la récupération des knowledge elements pour la route CSV (PIX-21673) 
+- [#15417](https://github.com/1024pix/pix/pull/15417) Télécharger toutes les attestations dans un seul PDF (PIX-21846) 
+
+### :arrow_up: Montée de version
+
+- [#15419](https://github.com/1024pix/pix/pull/15419) Update dependency @1024pix/pix-ui to ^60.1.0 (admin) 
+- [#15285](https://github.com/1024pix/pix/pull/15285) Update dependency @1024pix/pix-ui to v60 (orga)
+
 # [5.351.0](https://github.com/1024pix/pix/compare/v5.350.0...v5.351.0) (2026-03-10)
 
 ### :rocket: Amélioration
