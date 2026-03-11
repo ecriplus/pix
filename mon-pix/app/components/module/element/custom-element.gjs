@@ -91,6 +91,7 @@ export default class ModulixCustomElement extends ModuleElement {
           {{/if}}
 
           <legend class="element-custom__legend">
+          <legend class="element-custom__legend" aria-hidden="true">
             <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
             <span>{{t "pages.modulix.interactiveElement.label"}}</span>
           </legend>
