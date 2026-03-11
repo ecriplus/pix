@@ -3,6 +3,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  knex,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | sco-organization-learners', function () {
@@ -183,9 +184,15 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
         databaseBuilder.factory.buildMembership({ organizationId, userId });
 
         const paul = databaseBuilder.factory.buildUser.withRawPassword({ firstName: 'Paul', username: 'paul' });
+
         const jacques = databaseBuilder.factory.buildUser.withRawPassword({
           firstName: 'Jacques',
           username: 'jacques',
+        });
+        databaseBuilder.factory.buildUserLogin({
+          userId: jacques.id,
+          failureCount: 50,
+          blockedAt: new Date(),
         });
 
         const organizationLearnersId = [
@@ -227,6 +234,12 @@ describe('Acceptance | Controller | sco-organization-learners', function () {
         const [fileHeaders, firstRow, ...unusedRows] = payload.split('\n').map((row) => row.trim());
         expect(fileHeaders).to.equal('"Classe";"Nom";"Prénom";"Identifiant";"Mot de passe"');
         expect(firstRow).to.match(/^"3A";/);
+
+        const jacquesUserLogin = await knex('user-logins').select().where({ userId: jacques.id }).first();
+        expect(jacquesUserLogin).to.deep.contain({
+          failureCount: 0,
+          blockedAt: null,
+        });
       });
     });
   });
