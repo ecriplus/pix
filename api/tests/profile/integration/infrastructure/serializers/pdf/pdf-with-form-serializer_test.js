@@ -2,10 +2,9 @@ import { createReadStream } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
-import JSZip from 'jszip';
+import { PDFDocument } from 'pdf-lib';
 
 import { serializeStream } from '../../../../../../src/profile/infrastructure/serializers/pdf/pdf-with-form-serializer.js';
-import { getDataBuffer } from '../../../../../../src/shared/infrastructure/utils/buffer.js';
 import { expect } from '../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../tooling/binary-comparator.js';
 
@@ -33,12 +32,9 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
       });
     });
 
-    context('when there are multiple objects to serialize in a zip', function () {
-      it('should return zip as a buffer', async function () {
+    context('when there are multiple objects to serialize', function () {
+      it('should return a single multi-page pdf as a buffer', async function () {
         // given
-        const expectedFirstFilename = '/expected-first.pdf';
-        const expectedSecondFilename = '/expected-second.pdf';
-
         const stream = createReadStream(`${__dirname}/template.pdf`);
         const data = [new Map(), new Map()];
         data[0].set('fullName', 'Nom complet 1');
@@ -47,20 +43,12 @@ describe('Integration | Infrastructure | Serializers | Pdf | PdfWithForm', funct
         data[1].set('filename', 'Sans titre 2');
 
         // when
-        const passtrough = await serializeStream(stream, data, new Date('2024-10-01'));
-
-        const zip = new JSZip();
-        await zip.loadAsync(await getDataBuffer(passtrough));
-
-        const firstPdfBuffer = await zip.file(data[0].get('filename') + '.pdf').async('nodebuffer');
-        const secondPdfBuffer = await zip.file(data[1].get('filename') + '.pdf').async('nodebuffer');
-
-        await recreatePDFFileReferenceTest({ outputFilename: expectedFirstFilename, buffer: firstPdfBuffer });
-        await recreatePDFFileReferenceTest({ outputFilename: expectedSecondFilename, buffer: secondPdfBuffer });
+        const buffer = await serializeStream(stream, data, new Date('2024-10-01'));
 
         // then
-        expect(await isSameBinary(`${__dirname}${expectedFirstFilename}`, firstPdfBuffer)).to.be.true;
-        expect(await isSameBinary(`${__dirname}${expectedSecondFilename}`, secondPdfBuffer)).to.be.true;
+        expect(Buffer.isBuffer(buffer)).to.be.true;
+        const pdfDoc = await PDFDocument.load(buffer);
+        expect(pdfDoc.getPageCount()).to.equal(2);
       });
     });
   });

@@ -54,7 +54,7 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
             .takeover(),
       );
       sinon
-        .stub(organizationLearnersController, 'getAttestationZipFromFilters')
+        .stub(organizationLearnersController, 'getAttestationPdfFromFilters')
         .callsFake((request, h) => h.response('ok'));
 
       const httpTestServer = new HttpTestServer();
@@ -67,7 +67,7 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
 
       // then
       expect(response.statusCode).to.equal(403);
-      expect(organizationLearnersController.getAttestationZipFromFilters).to.not.have.been.called;
+      expect(organizationLearnersController.getAttestationPdfFromFilters).to.not.have.been.called;
     });
 
     it('should throw 403 if user is not admin in organization', async function () {
@@ -82,7 +82,7 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
         .stub(securityPreHandlers, 'makeCheckOrganizationHasFeature')
         .callsFake(() => (request, h) => h.response(true));
       sinon
-        .stub(organizationLearnersController, 'getAttestationZipFromFilters')
+        .stub(organizationLearnersController, 'getAttestationPdfFromFilters')
         .callsFake((request, h) => h.response('ok'));
 
       const httpTestServer = new HttpTestServer();
@@ -95,13 +95,13 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
 
       // then
       expect(response.statusCode).to.equal(403);
-      expect(organizationLearnersController.getAttestationZipFromFilters).to.not.have.been.called;
+      expect(organizationLearnersController.getAttestationPdfFromFilters).to.not.have.been.called;
     });
 
     it('should call prehandlers before calling controller method', async function () {
       // given
       sinon
-        .stub(organizationLearnersController, 'getAttestationZipFromFilters')
+        .stub(organizationLearnersController, 'getAttestationPdfFromFilters')
         .callsFake((request, h) => h.response('ok').code(200));
       sinon.stub(securityPreHandlers, 'checkUserIsAdminInOrganization').callsFake((request, h) => h.response(true));
       sinon
@@ -119,13 +119,13 @@ describe('Prescription | Unit | Router | organization-learner-router', function 
       // then
       expect(response.statusCode).to.equal(200);
       expect(securityPreHandlers.checkUserIsAdminInOrganization).to.have.been.calledBefore(
-        organizationLearnersController.getAttestationZipFromFilters,
+        organizationLearnersController.getAttestationPdfFromFilters,
       );
       expect(securityPreHandlers.makeCheckOrganizationHasFeature).calledWithExactly(
         ORGANIZATION_FEATURE.ATTESTATIONS_MANAGEMENT.key,
       );
       expect(securityPreHandlers.makeCheckOrganizationHasFeature).to.have.been.calledBefore(
-        organizationLearnersController.getAttestationZipFromFilters,
+        organizationLearnersController.getAttestationPdfFromFilters,
       );
     });
   });

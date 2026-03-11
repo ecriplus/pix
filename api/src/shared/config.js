@@ -203,6 +203,7 @@ const configuration = (function () {
           endpoint: process.env.ATTESTATIONS_STORAGE_ENDPOINT,
           region: process.env.ATTESTATIONS_STORAGE_REGION,
           bucket: process.env.ATTESTATIONS_STORAGE_BUCKET_NAME,
+          forcePathStyle: true,
         },
       },
     },

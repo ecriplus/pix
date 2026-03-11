@@ -1,4 +1,4 @@
-export const getAttestationZipFromFilters = async ({
+export const getAttestationPdfFromFilters = async ({
   attestationKey,
   organizationId,
   divisions,
