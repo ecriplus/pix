@@ -26,6 +26,7 @@ const buildCandidate = function ({
   hasSeenCertificationInstructions = false,
   subscriptions = [],
   accessibilityAdjustmentNeeded,
+  subscription = null,
 } = {}) {
   return new Candidate({
     id,
@@ -53,6 +54,7 @@ const buildCandidate = function ({
     hasSeenCertificationInstructions,
     subscriptions,
     accessibilityAdjustmentNeeded,
+    subscription,
   });
 };
 

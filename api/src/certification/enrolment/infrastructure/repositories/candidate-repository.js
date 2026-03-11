@@ -273,6 +273,7 @@ function adaptModelToDb(candidate) {
     prepaymentCode: candidate.prepaymentCode,
     hasSeenCertificationInstructions: candidate.hasSeenCertificationInstructions,
     accessibilityAdjustmentNeeded: candidate.accessibilityAdjustmentNeeded,
+    subscription: candidate.subscription,
   };
 }
 

@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
-import sinon from 'sinon';
 
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import * as certificationCourseRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
