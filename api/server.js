@@ -5,6 +5,7 @@ import { parse } from 'neoqs';
 import { setupErrorHandling } from './config/server-setup-error-handling.js';
 import { databaseConnections } from './db/database-connections.js';
 import { knex } from './db/knex-database-connection.js';
+import { announcementRoutes } from './src/announcements/routes.js';
 import { bannerRoutes } from './src/banner/routes.js';
 import {
   attachTargetProfileRoutes,
@@ -239,6 +240,7 @@ const setupRoutesAndPlugins = async function (server) {
     ...certificationRoutes,
     ...prescriptionRoutes,
     bannerRoutes,
+    ...announcementRoutes,
     llmRoutes,
     {
       name: 'root',
