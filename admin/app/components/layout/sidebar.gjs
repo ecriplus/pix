@@ -38,6 +38,12 @@ export default class Sidebar extends Component {
           {{t "components.layout.sidebar.organizations"}}
         </PixNavigationButton>
 
+        {{#if this.currentUser.adminMember.isSuperAdmin}}
+          <PixNavigationButton class="sidebar__link" @route="authenticated.networks" @icon="accountTree">
+            {{t "components.layout.sidebar.networks"}}
+          </PixNavigationButton>
+        {{/if}}
+
         <PixNavigationButton class="sidebar__link" @route="authenticated.users" @icon="infoUser">
           {{t "components.layout.sidebar.users"}}
         </PixNavigationButton>

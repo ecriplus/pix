@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { t } from 'ember-intl/test-support';
 import Sidebar from 'pix-admin/components/layout/sidebar';
 import { module, test } from 'qunit';
 
@@ -56,6 +57,34 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
 
     // then
     assert.dom(screen.getByRole('link', { name: 'Se déconnecter' })).exists();
+  });
+
+  module('Networks tab', function () {
+    module('When the user is a super admin', function () {
+      test('should display Networks menu', async function (assert) {
+        // given
+        currentUser.adminMember = { isSuperAdmin: true };
+
+        // when
+        const screen = await render(<template><Sidebar /></template>);
+
+        // then
+        assert.dom(screen.getByRole('link', { name: t('components.layout.sidebar.networks') })).exists();
+      });
+    });
+
+    module('When the user is not a super admin', function () {
+      test('should not display Networks menu', async function (assert) {
+        // given
+        currentUser.adminMember = { isSuperAdmin: false };
+
+        // when
+        const screen = await render(<template><Sidebar /></template>);
+
+        // then
+        assert.dom(screen.queryByRole('link', { name: t('components.layout.sidebar.networks') })).doesNotExist();
+      });
+    });
   });
 
   module('Target Profiles tab', function () {
