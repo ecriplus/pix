@@ -363,10 +363,10 @@
                       "userName": "Sarah",
                       "direction": "outgoing",
                       "type": "Texte + Image",
-                      "content": " J’avais besoin d’une image de carte de visite pour un jeu que je crée. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
+                      "content": " J’avais besoin d’une image de carte de visite. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
-                        "alt": "Image draft"
+                        "alt": "Image de carte de visite d'un maçon appelé Cedric Fostabley, on y voit son numéro de téléphone et son adresse."
                       }
                     },
                     {
