@@ -30,6 +30,12 @@ const get = async function (organizationId) {
   return _toDomain(result);
 };
 
+const findAll = async function () {
+  const knex = DomainTransaction.getConnection();
+  const results = await knex('organization-learner-import-formats');
+  return results.map(_toDomain);
+};
+
 /**
  * @type {function}
  * @param {Object} params
@@ -48,4 +54,4 @@ const save = async function ({ organizationLearnerImportFormats }) {
   }
 };
 
-export { get, save };
+export { findAll, get, save };
