@@ -35,11 +35,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       expect(results).lengthOf(1);
       expect(results[0]).deep.equal(savedCombinedCourseBlueprint);
       expect(results[0]).deep.contain({ ...combinedCourseBlueprint.combinedCourseBlueprint });
-      expect(
-        results[0].quest.successRequirements.map((successRequirement) => {
-          return { ...successRequirement, data: successRequirement.data };
-        }),
-      ).deep.equal([
+      expect(results[0].quest.toDTO().successRequirements).deep.equal([
         {
           comparison: REQUIREMENT_COMPARISONS.ALL,
           data: {
@@ -193,11 +189,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       const results = await combinedCourseBluePrintRepository.findAll();
       expect(results).lengthOf(1);
       expect(results[0].name).equal('Updated Combined course IA');
-      expect(
-        results[0].quest.successRequirements.map((successRequirement) => {
-          return { ...successRequirement, data: successRequirement.data };
-        }),
-      ).deep.equal([
+      expect(results[0].quest.toDTO().successRequirements).deep.equal([
         {
           comparison: REQUIREMENT_COMPARISONS.ALL,
           requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
@@ -210,8 +202,51 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
           },
         },
       ]);
+    });
 
-      // TODO integration test for usecase (create combined course bp)
+    it('should attach a new quest to combined course blueprint when none', async function () {
+      // given
+      const combinedCourseBlueprintInDb = databaseBuilder.factory.buildCombinedCourseBlueprint({
+        questId: null,
+        content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }]),
+      });
+
+      const combinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
+        combinedCourseBlueprint: new CombinedCourseBlueprint({
+          id: combinedCourseBlueprintInDb.id,
+          name: 'Combined course IA',
+          internalName: 'Ia combined course blueprint',
+          description: "L'ia c'est magique",
+          illustration: 'illustration/ia.svg',
+          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }]),
+          organizationIds: [],
+        }),
+        modulesByShortId: { '6a68bf32': [{ id: '6282925d-4775-4bca-b513-4c3009ec5886' }] },
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await combinedCourseBluePrintRepository.save({
+        combinedCourseBlueprint,
+      });
+
+      // then
+      const results = await combinedCourseBluePrintRepository.findAll();
+      expect(results).lengthOf(1);
+      expect(results[0].quest.toDTO().successRequirements).deep.equal([
+        {
+          comparison: REQUIREMENT_COMPARISONS.ALL,
+          requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+          data: {
+            isTerminated: { comparison: CRITERION_COMPARISONS.EQUAL, data: true },
+            moduleId: {
+              comparison: CRITERION_COMPARISONS.EQUAL,
+              data: '6282925d-4775-4bca-b513-4c3009ec5886',
+            },
+          },
+        },
+      ]);
     });
   });
 
