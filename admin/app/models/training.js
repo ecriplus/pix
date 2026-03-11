@@ -28,6 +28,7 @@ export default class Training extends Model {
   @attr('string') link;
   @attr('string') type;
   @attr('string') locale;
+  @attr('array') locales;
   @attr('string') editorName;
   @attr('string') editorLogoUrl;
   @attr('boolean') isRecommendable;

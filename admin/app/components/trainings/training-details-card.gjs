@@ -8,6 +8,7 @@ import StateTag from './state-tag';
 
 export default class TrainingDetailsCard extends Component {
   @service url;
+  @service featureToggles;
 
   get formattedDuration() {
     const days = this.args.training.duration.days ? `${this.args.training.duration.days}j ` : '';
@@ -18,6 +19,10 @@ export default class TrainingDetailsCard extends Component {
 
   get formattedLocale() {
     return localeCategories[this.args.training.locale];
+  }
+
+  get formattedLocales() {
+    return this.args.training.locales.map((locale) => localeCategories[locale]).join(', ');
   }
 
   get trainingLink() {
@@ -63,9 +68,15 @@ export default class TrainingDetailsCard extends Component {
 
         <DescriptionList.Divider />
 
-        <DescriptionList.Item @label={{t "pages.trainings.training.details.localizedLanguage"}}>
-          {{this.formattedLocale}}
-        </DescriptionList.Item>
+        {{#if this.featureToggles.featureToggles.multipleLocalesForTrainingsEnabled}}
+          <DescriptionList.Item @label={{t "pages.trainings.training.details.locales" count=@training.locales.length}}>
+            {{this.formattedLocales}}
+          </DescriptionList.Item>
+        {{else}}
+          <DescriptionList.Item @label={{t "pages.trainings.training.details.localizedLanguage"}}>
+            {{this.formattedLocale}}
+          </DescriptionList.Item>
+        {{/if}}
 
         <DescriptionList.Divider />
 
