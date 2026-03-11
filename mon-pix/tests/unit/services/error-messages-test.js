@@ -111,22 +111,42 @@ module('Unit | Service | errorMessages', function (hooks) {
         });
       });
 
-      test('USER_IS_BLOCKED', function (assert) {
-        // given
-        const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr' } };
+      module('USER_IS_BLOCKED', function () {
+        test('When isLoginFailureWithUsername is false', function (assert) {
+          // given
+          const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr' }, isLoginFailureWithUsername: false };
 
-        // when
-        const errorMessages = this.owner.lookup('service:errorMessages');
-        const message = errorMessages.getAuthenticationErrorMessage(error);
+          // when
+          const errorMessages = this.owner.lookup('service:errorMessages');
+          const message = errorMessages.getAuthenticationErrorMessage(error);
 
-        // then
-        assert.deepEqual(
-          message,
-          t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-            url: 'https://support.pix.org/support/tickets/new',
-            htmlSafe: true,
-          }),
-        );
+          // then
+          assert.deepEqual(
+            message,
+            t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            }),
+          );
+        });
+
+        test('When isLoginFailureWithUsername is true', function (assert) {
+          // given
+          const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr', isLoginFailureWithUsername: true } };
+
+          // when
+          const errorMessages = this.owner.lookup('service:errorMessages');
+          const message = errorMessages.getAuthenticationErrorMessage(error);
+
+          // then
+          assert.deepEqual(
+            message,
+            t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED_WITH_USERNAME.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            }),
+          );
+        });
       });
 
       module('MISSING_OR_INVALID_CREDENTIALS', function () {

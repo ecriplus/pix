@@ -92,27 +92,55 @@ module('Unit | Component | routes/login-form', function (hooks) {
         });
       });
       module('when user is blocked', function () {
-        test('sets the correct error message', async function (assert) {
-          // given
-          sessionStub.authenticate.rejects({
-            responseJSON: {
-              errors: [
-                {
-                  code: 'USER_IS_BLOCKED',
-                },
-              ],
-            },
-          });
+        module('when user has a sco identifier/username', function () {
+          test('sets the correct error message', async function (assert) {
+            // given
+            sessionStub.authenticate.rejects({
+              responseJSON: {
+                errors: [
+                  {
+                    code: 'USER_IS_BLOCKED',
+                    meta: { isLoginFailureWithUsername: true },
+                  },
+                ],
+              },
+            });
 
-          // when
-          await component.authenticate(eventStub);
+            // when
+            await component.authenticate(eventStub);
 
-          // then
-          const expectedErrorMessage = t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-            url: 'https://support.pix.org/support/tickets/new',
-            htmlSafe: true,
+            // then
+            const expectedErrorMessage = t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED_WITH_USERNAME.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            });
+            assert.deepEqual(component.errorMessage, expectedErrorMessage);
           });
-          assert.deepEqual(component.errorMessage, expectedErrorMessage);
+        });
+        module('when user has no sco identifier/username', function () {
+          test('sets the correct error message', async function (assert) {
+            // given
+            sessionStub.authenticate.rejects({
+              responseJSON: {
+                errors: [
+                  {
+                    code: 'USER_IS_BLOCKED',
+                    meta: { isLoginFailureWithUsername: false },
+                  },
+                ],
+              },
+            });
+
+            // when
+            await component.authenticate(eventStub);
+
+            // then
+            const expectedErrorMessage = t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            });
+            assert.deepEqual(component.errorMessage, expectedErrorMessage);
+          });
         });
       });
 

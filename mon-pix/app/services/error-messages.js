@@ -33,7 +33,13 @@ const AUTHENTICATION_ERROR_CODES_MAPPING = {
     }),
   },
   USER_IS_BLOCKED: {
-    i18nKey: ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY,
+    getI18nKey: (error) => {
+      if (error.meta?.isLoginFailureWithUsername) {
+        return ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED_WITH_USERNAME.I18N_KEY;
+      }
+
+      return ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY;
+    },
     getOptions: (_error) => ({
       url: 'https://support.pix.org/support/tickets/new',
       htmlSafe: true,
