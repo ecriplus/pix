@@ -16,6 +16,7 @@ export class CombinedCourseBlueprint {
     createdAt,
     updatedAt,
     organizationIds = [],
+    quest = null,
   }) {
     this.id = id;
     this.name = name;
@@ -26,6 +27,7 @@ export class CombinedCourseBlueprint {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.organizationIds = organizationIds;
+    this.quest = quest;
   }
 
   get targetProfileIds() {
@@ -82,13 +84,57 @@ export class CombinedCourseBlueprint {
     );
   }
 
-  static buildRequirementForCombinedCourse({ campaignId, moduleId }) {
+  static buildWithQuest({ combinedCourseBlueprint, modulesByShortId }) {
+    const successRequirements = combinedCourseBlueprint.content.map((requirement) => {
+      if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
+        const requirementTargetProfileId = requirement.value;
+        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          targetProfileId: requirementTargetProfileId,
+        });
+      } else if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
+        const [module] = modulesByShortId[requirement.value];
+        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          moduleId: module.id,
+        });
+      } else {
+        return requirement;
+      }
+    });
+
+    const quest = new Quest({
+      createdAt: combinedCourseBlueprint.createdAt,
+      updatedAt: combinedCourseBlueprint.createdAt,
+      rewardType: null,
+      rewardId: null,
+      eligibilityRequirements: [],
+      successRequirements,
+    });
+
+    return new CombinedCourseBlueprint({
+      ...combinedCourseBlueprint,
+      quest,
+    });
+  }
+
+  static buildRequirementForCombinedCourse({ campaignId, moduleId, targetProfileId }) {
     if (campaignId) {
       return buildRequirement({
         requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
         comparison: REQUIREMENT_COMPARISONS.ALL,
         data: {
           campaignId: { data: campaignId, comparison: CRITERION_COMPARISONS.EQUAL },
+          status: {
+            data: CampaignParticipationStatuses.SHARED,
+            comparison: CRITERION_COMPARISONS.EQUAL,
+          },
+        },
+      });
+    } else if (targetProfileId) {
+      return buildRequirement({
+        requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+        comparison: REQUIREMENT_COMPARISONS.ALL,
+        data: {
+          targetProfileId: { data: targetProfileId, comparison: CRITERION_COMPARISONS.EQUAL },
           status: {
             data: CampaignParticipationStatuses.SHARED,
             comparison: CRITERION_COMPARISONS.EQUAL,
@@ -114,9 +160,11 @@ export class CombinedCourseBlueprint {
     });
     return Joi.attempt(data, contentSchema);
   }
+
   detachOrganization({ organizationId }) {
     this.organizationIds = this.organizationIds.filter((id) => id !== organizationId);
   }
+
   attachOrganizations({ organizationIds }) {
     const duplicatedOrganizationIds = [];
     const attachedOrganizationIds = [];

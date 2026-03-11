@@ -1,5 +1,7 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
+import { CombinedCourseBlueprint } from '../../domain/models/CombinedCourseBlueprint.js';
+
 const { Deserializer, Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourseBlueprint) {
@@ -8,10 +10,11 @@ const serialize = function (combinedCourseBlueprint) {
   }).serialize(combinedCourseBlueprint);
 };
 
-const deserialize = function (payload) {
-  return new Deserializer({
+const deserialize = async function (payload) {
+  const deserializedData = await new Deserializer({
     keyForAttribute: 'camelCase',
   }).deserialize(payload);
+  return new CombinedCourseBlueprint(deserializedData);
 };
 
 export { deserialize, serialize };

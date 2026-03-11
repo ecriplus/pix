@@ -26,6 +26,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
         createdAt: new Date('2024-01-25'),
         updatedAt: new Date('2024-01-26'),
         organizationIds: [],
+        quest: null,
       };
       // when
       const blueprint = new CombinedCourseBlueprint(values);
@@ -236,6 +237,79 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
       expect(combinedCourse.illustration).to.equal(illustration);
       expect(combinedCourse.code).to.equal(code);
       expect(combinedCourse.organizationId).to.equal(organizationId);
+    });
+  });
+
+  describe('#buildWithQuest', function () {
+    it('should return combined course blueprint with quest', async function () {
+      // given
+      const targetProfileId = 1;
+      const modulesByShortId = {
+        ecc13f55: [new Module({ id: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' })],
+      };
+      const combinedCourseContent = [
+        {
+          type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
+          value: targetProfileId,
+        },
+        {
+          type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
+          value: 'ecc13f55',
+        },
+      ];
+      const name = 'Combinix';
+      const description = 'bla bla bla';
+      const illustration = 'illu.svg';
+
+      // when
+      const combinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
+        combinedCourseBlueprint: new CombinedCourseBlueprint({
+          name,
+          content: combinedCourseContent,
+          description,
+          illustration,
+        }),
+        modulesByShortId,
+      });
+
+      // then
+      const quest = new Quest({
+        eligibilityRequirements: [],
+        successRequirements: [
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              targetProfileId: {
+                data: targetProfileId,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              status: {
+                data: 'SHARED',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+          {
+            requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
+            comparison: REQUIREMENT_COMPARISONS.ALL,
+            data: {
+              moduleId: {
+                data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+              isTerminated: {
+                data: true,
+                comparison: CRITERION_COMPARISONS.EQUAL,
+              },
+            },
+          },
+        ],
+      });
+      const questDTO = quest.toDTO();
+
+      expect(combinedCourseBlueprint.quest).to.be.instanceOf(Quest);
+      expect(combinedCourseBlueprint.quest.toDTO().successRequirements).to.deep.equal(questDTO.successRequirements);
     });
   });
 

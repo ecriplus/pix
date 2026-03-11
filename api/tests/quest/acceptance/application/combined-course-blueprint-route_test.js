@@ -57,7 +57,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
               'internal-name': 'Mon schéma de parcours combiné',
               description: 'La description combinix',
               illustration: 'illustration.svg',
-              content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'modulox' }]),
+              content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
             },
           },
         };
