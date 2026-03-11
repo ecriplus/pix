@@ -1,3 +1,4 @@
+import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { ChatForbiddenError, ChatNotFoundError, LLMApiError, PromptAlreadyOngoingError } from '../errors.js';
 import { Chat } from '../models/Chat.js';
@@ -41,7 +42,8 @@ export async function promptChat({
     throw new ChatNotFoundError('null id provided');
   }
 
-  const locked = await redisMutex.lock(chatId);
+  const owner = crypto.randomUUID();
+  const locked = await redisMutex.lock(chatId, owner, config.llm.lockChatExpirationDelayMilliseconds);
   if (!locked) {
     throw new PromptAlreadyOngoingError(chatId);
   }
@@ -65,9 +67,9 @@ export async function promptChat({
       });
     }
 
-    runFlow({ chat, chatRepository, llmResponseHandler, logger, redisMutex });
+    runFlow({ chat, owner, chatRepository, llmResponseHandler, logger, redisMutex });
   } catch (error) {
-    await redisMutex.release(chatId);
+    await redisMutex.release(chatId, owner);
     throw error;
   }
 }
@@ -78,13 +80,14 @@ export async function promptChat({
  *
  * @param {object} params
  * @param {Chat} params.chat
+ * @param {string} params.owner - redis mutex lock owner
  * @param {ChatRepository} params.chatRepository
  * @param {RedisMutex} params.redisMutex
  * @param {LLMResponseHandler} params.llmResponseHandler
  * @param {Logger=} params.logger
  * @returns {Promise<void>}
  */
-async function runFlow({ chat, chatRepository, llmResponseHandler, logger = defaultLogger, redisMutex }) {
+async function runFlow({ chat, owner, chatRepository, llmResponseHandler, logger = defaultLogger, redisMutex }) {
   /** @type {LLMResponseMetadata} */
   let llmResponseMetadata;
   try {
@@ -147,6 +150,6 @@ async function runFlow({ chat, chatRepository, llmResponseHandler, logger = defa
     );
     await llmResponseHandler.finish();
   } finally {
-    await redisMutex.release(chat.id);
+    await redisMutex.release(chat.id, owner);
   }
 }

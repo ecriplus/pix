@@ -457,7 +457,7 @@ function wait(ms) {
 }
 
 function waitForStreamFinalizationToBeDone() {
-  return wait(500);
+  return wait(300);
 }
 // eslint-disable-next-line mocha/no-exports
 export {
