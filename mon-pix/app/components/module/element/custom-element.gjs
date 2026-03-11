@@ -90,7 +90,11 @@ export default class ModulixCustomElement extends ModuleElement {
             </div>
           {{/if}}
 
-          <legend class="element-custom__legend">
+          {{#if this.hasInstruction}}
+            <legend class="sr-only">
+              {{htmlUnsafe @component.instruction}}{{htmlUnsafe @component.functionalInstruction}}</legend>
+          {{/if}}
+
           <legend class="element-custom__legend" aria-hidden="true">
             <PixIcon @name="leftClick" @plainIcon={{false}} @ariaHidden={{true}} />
             <span>{{t "pages.modulix.interactiveElement.label"}}</span>
