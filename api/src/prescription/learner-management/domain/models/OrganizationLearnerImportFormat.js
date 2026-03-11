@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 
 const organizationLearnerImportFormatSchame = Joi.object({
+  id: Joi.number(),
   name: Joi.string().required(),
   config: Joi.object().required(),
   fileType: Joi.string().valid('csv', 'xml'),
@@ -18,7 +19,8 @@ class OrganizationLearnerImportFormat {
    * @param {Object} data.createdAt
    * @param {Object} data.createdBy
    */
-  constructor({ name, fileType, config, createdAt, createdBy } = {}) {
+  constructor({ id, name, fileType, config, createdAt, createdBy } = {}) {
+    this.id = id;
     this.name = name;
     this.fileType = fileType;
     this.config = config;

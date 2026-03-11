@@ -6,6 +6,7 @@ describe('Unit | Domain | Read-Models | OrganizationToJoin', function () {
   describe('for an organization with import format', function () {
     it('should return the organization with reconciliation fields and isRestricted true', function () {
       const organizationLearnerImportFormat = new OrganizationLearnerImportFormat({
+        id: 123,
         name: 'MY_TEST_EXPORT',
         fileType: 'csv',
         config: {

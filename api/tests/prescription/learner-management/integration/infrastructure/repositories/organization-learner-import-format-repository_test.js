@@ -150,6 +150,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -157,6 +158,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           createdAt: now,
         }),
         new OrganizationLearnerImportFormat({
+          id: 456,
           name: 'SECOND_FORMAT',
           fileType: 'csv',
           config: { new_config: 'not_bad' },
@@ -191,6 +193,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -215,6 +218,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -240,6 +244,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -266,6 +271,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'NEW_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },

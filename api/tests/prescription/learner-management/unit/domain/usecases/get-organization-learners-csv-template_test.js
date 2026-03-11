@@ -25,6 +25,7 @@ describe('Unit | UseCase | get-organization-learners-csv-template', function () 
       sinon.stub(membershipRepository, 'findByUserIdAndOrganizationId').resolves([membership]);
       organizationLearnerImportFormatRepository.get.resolves(
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'GENERIC',
           filetype: 'csv',
           config: {

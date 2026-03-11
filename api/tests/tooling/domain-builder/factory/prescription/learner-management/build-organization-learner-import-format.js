@@ -1,6 +1,7 @@
 import { OrganizationLearnerImportFormat } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerImportFormat.js';
 
 export const buildOrganizationLearnerImportFormat = function ({
+  id = 1,
   name = 'GENERIC',
   fileType = 'csv',
   config = {
@@ -30,6 +31,7 @@ export const buildOrganizationLearnerImportFormat = function ({
   createdBy = 12,
 } = {}) {
   return new OrganizationLearnerImportFormat({
+    id,
     name,
     fileType,
     config,
