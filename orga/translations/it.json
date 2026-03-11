@@ -471,7 +471,7 @@
     },
     "participation-status": {
       "COMPLETED": "Completato",
-      "LOCKED": "Per sbloccare",
+      "LOCKED": "Bloccato",
       "NOT_STARTED": "Per fare",
       "SHARED": "Completato",
       "STARTED": "In corso"

@@ -470,7 +470,7 @@
     },
     "participation-status": {
       "COMPLETED": "Voltooid",
-      "LOCKED": "Te ontgrendelen",
+      "LOCKED": "Vergrendeld",
       "NOT_STARTED": "Te doen",
       "SHARED": "Voltooid",
       "STARTED": "Bezig"

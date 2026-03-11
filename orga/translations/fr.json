@@ -471,7 +471,7 @@
     },
     "participation-status": {
       "COMPLETED": "Terminé",
-      "LOCKED": "A déverrouiller",
+      "LOCKED": "Verrouillé",
       "NOT_STARTED": "A faire",
       "SHARED": "Terminé",
       "STARTED": "En cours"
