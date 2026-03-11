@@ -18,6 +18,44 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
     server = await createServer();
   });
 
+  describe('GET /api/admin/networks', function () {
+    it('returns a list of networks with 200 HTTP status code', async function () {
+      // given
+      const server = await createServer();
+      const network1 = databaseBuilder.factory.buildNetwork({ name: 'Team1' });
+      const network2 = databaseBuilder.factory.buildNetwork({ name: 'Team2' });
+      await databaseBuilder.commit();
+      const options = {
+        method: 'GET',
+        url: '/api/admin/networks',
+        headers: generateAuthenticatedUserRequestHeaders(superAdmin),
+      };
+      const expectedNetworks = [
+        {
+          attributes: {
+            name: network1.name,
+          },
+          id: network1.id.toString(),
+          type: 'networks',
+        },
+        {
+          attributes: {
+            name: network2.name,
+          },
+          id: network2.id.toString(),
+          type: 'networks',
+        },
+      ];
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.deep.equal(expectedNetworks);
+    });
+  });
+
   describe('POST /api/admin/networks', function () {
     it('creates a new network', async function () {
       // given

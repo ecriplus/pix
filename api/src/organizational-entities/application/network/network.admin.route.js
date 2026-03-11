@@ -7,6 +7,31 @@ import { networkAdminController } from './network.admin.controller.js';
 const register = async function (server) {
   server.route([
     {
+      method: 'GET',
+      path: '/api/admin/networks',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: networkAdminController.findAllNetworks,
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès Superadmin**\n" +
+            '- Renvoie tous les réseaux.',
+        ],
+        tags: ['api', 'organizational-entities', 'network'],
+      },
+    },
+  ]);
+
+  server.route([
+    {
       method: 'POST',
       path: '/api/admin/networks',
       config: {

@@ -10,6 +10,7 @@ import { organizationLearnerImportFormat } from './data/common/organization-lear
 import { tagsBuilder } from './data/common/tag-builder.js';
 import { team1dDataBuilder } from './data/team-1d/data-builder.js';
 import { teamAccesDataBuilder } from './data/team-acces/data-builder.js';
+import { teamAcquisitionDataBuilder } from './data/team-acquisition/data-builder.js';
 import { teamCertificationDataBuilder } from './data/team-certification/data-builder.js';
 import { teamContenuDataBuilder } from './data/team-contenu/data-builder.js';
 import { teamDevcompDataBuilder } from './data/team-devcomp/data-builder.js';
@@ -72,6 +73,11 @@ export async function seed(knex) {
   if (config.seeds.context.evaluation) {
     logger.info('Seeding : Evaluation');
     await teamEvaluationDataBuilder({ databaseBuilder });
+  }
+
+  if (config.seeds.context.acquisition) {
+    logger.info('Seeding : Acquisition');
+    teamAcquisitionDataBuilder({ databaseBuilder });
   }
 
   await databaseBuilder.commit();

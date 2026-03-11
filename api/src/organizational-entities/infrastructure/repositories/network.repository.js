@@ -3,6 +3,18 @@ import { Network } from '../../domain/models/Network.js';
 
 /**
  *
+ * @returns {Promise<Array<Network>>}
+ */
+async function findAll() {
+  const knexConn = DomainTransaction.getConnection();
+
+  const networks = await knexConn('networks').select('networks.id', 'networks.name').orderBy('name');
+
+  return networks.map(_toDomain);
+}
+
+/**
+ *
  * @param {number} organizationId
  * @returns {Promise<Network>}
  */
@@ -44,4 +56,4 @@ function _toDomain(network) {
   return new Network(network);
 }
 
-export { findByOrganizationId, save };
+export { findAll, findByOrganizationId, save };
