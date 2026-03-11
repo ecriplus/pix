@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.353.0](https://github.com/1024pix/pix/compare/v5.352.0...v5.353.0) (2026-03-11)
+
+### :rocket: Amélioration
+
+- [#15398](https://github.com/1024pix/pix/pull/15398) Ajouter une route pour récupérer la liste des réseaux (PIX-21298) 
+- [#15385](https://github.com/1024pix/pix/pull/15385) MDX-18 IAGenEthique_NOV correction coquille transfert 
+
+### :building_construction: Tech
+
+- [#15409](https://github.com/1024pix/pix/pull/15409) Crée une Quest lors de la création d'un CombinedCourseBlueprint (PIX-21837). 
+- [#15408](https://github.com/1024pix/pix/pull/15408) Rendre le Mutex via Redis plus générique et plus robuste
+
 # [5.352.0](https://github.com/1024pix/pix/compare/v5.351.0...v5.352.0) (2026-03-11)
 
 ### :rocket: Amélioration
