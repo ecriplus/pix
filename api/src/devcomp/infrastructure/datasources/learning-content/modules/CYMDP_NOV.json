@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYMDPNOV/picto_cyber_mdp_nov.svg",
-    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c’est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒</p>",
+    "description": "<p>Un mot de passe trop faible et donc trop simple, c’est une porte ouverte pour les pirates informatiques. Pour éviter cela, il est essentiel de choisir un mot de passe fort, c’est-à-dire difficile à deviner.<br>Dans ce module, vous allez découvrir des règles simples pour créer un mot de passe fort et protéger les comptes de vos services en ligne. 🔒<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
