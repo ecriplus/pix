@@ -8,9 +8,9 @@ import { NetworkAlreadyExistError } from '../errors.js';
  * @returns {Promise<void>}
  */
 const createNetwork = async function ({ organizationId, networkName, networkRepository }) {
-  const existingNEtwork = await networkRepository.findByOrganizationId(organizationId);
+  const existingNetwork = await networkRepository.findByOrganizationId(organizationId);
 
-  if (existingNEtwork) {
+  if (existingNetwork) {
     throw new NetworkAlreadyExistError();
   }
 
