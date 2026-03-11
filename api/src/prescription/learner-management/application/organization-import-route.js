@@ -41,20 +41,13 @@ const register = async (server) => {
         tags: ['api', 'organization-imports'],
       },
     },
-  ]);
-
-  server.route([
     {
       method: 'POST',
-      path: '/api/admin/import-organization-learners-format',
+      path: '/api/admin/organization-learner-import-formats',
       config: {
         pre: [
           {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
-                request,
-                h,
-              ),
+            method: securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
@@ -76,6 +69,29 @@ const register = async (server) => {
             "- Elle permet d'ajouter/modifier des imports à format.",
         ],
         tags: ['api', 'organization-learners'],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/admin/organization-learner-import-formats',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: organizationImportController.findAllOrganizationLearnerImportFormats,
+        notes: [
+          '- **Cette route est restreinte aux utilisateurs authentifiés en tant que superadmin, support ou métier**\n' +
+            "- Elle permet de récupérer la liste des formats d'import.",
+        ],
+        tags: ['api', 'admin', 'organization-learner-import-format'],
       },
     },
   ]);

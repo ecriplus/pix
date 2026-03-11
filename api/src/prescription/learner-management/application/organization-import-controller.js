@@ -1,5 +1,6 @@
 import { usecases } from '../domain/usecases/index.js';
 import * as organizationImportDetailSerializer from '../infrastructure/serializers/jsonapi/organization-import-detail-serializer.js';
+import * as organizationLearnerImportFormatSerializer from '../infrastructure/serializers/jsonapi/organization-learner-import-format-serializer.js';
 
 const getOrganizationImportStatus = async function (request, h, dependencies = { organizationImportDetailSerializer }) {
   const { organizationId } = request.params;
@@ -17,6 +18,19 @@ const saveOrganizationLearnerImportFormats = async function (request) {
   return null;
 };
 
-const organizationImportController = { getOrganizationImportStatus, saveOrganizationLearnerImportFormats };
+const findAllOrganizationLearnerImportFormats = async (
+  request,
+  h,
+  dependencies = { organizationLearnerImportFormatSerializer },
+) => {
+  const results = await usecases.findAllOrganizationLearnerImportFormats();
+  return h.response(dependencies.organizationLearnerImportFormatSerializer.serialize(results)).code(200);
+};
+
+const organizationImportController = {
+  getOrganizationImportStatus,
+  saveOrganizationLearnerImportFormats,
+  findAllOrganizationLearnerImportFormats,
+};
 
 export { organizationImportController };
