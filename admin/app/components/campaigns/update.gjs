@@ -11,7 +11,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
+import { not, or } from 'ember-truth-helpers';
 import Joi from 'joi';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
 import { FormValidator } from 'pix-admin/utils/form-validator';
@@ -146,7 +146,7 @@ export default class Update extends Component {
             <:label>Texte de la page d'accueil</:label>
           </PixTextarea>
 
-          {{#if @campaign.isTypeAssessment}}
+          {{#if (or @campaign.isTypeAssessment @campaign.isTypeExam)}}
             <PixTextarea
               @id="customResultPageText"
               @value={{this.form.customResultPageText}}
