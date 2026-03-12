@@ -1,4 +1,5 @@
 import { render, within } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import ListItems from 'pix-admin/components/networks/list-items';
 import { module, test } from 'qunit';
 
@@ -19,7 +20,7 @@ module('Integration | Component | Networks | ListItems', function (hooks) {
 
       // then
       const table = screen.getByRole('table', {
-        name: "Liste des réseaux. Contient le nom et l'ID.",
+        name: t('components.networks.list.table.caption'),
       });
 
       assert.dom(within(table).getByRole('cell', { name: network1.id })).exists();
@@ -41,12 +42,12 @@ module('Integration | Component | Networks | ListItems', function (hooks) {
       assert
         .dom(
           await screen.queryByRole('table', {
-            name: "Liste des réseaux. Contient le nom et l'ID.",
+            name: t('components.networks.list.table.caption'),
           }),
         )
         .doesNotExist();
 
-      assert.dom(screen.getByText('Aucun résultat')).exists();
+      assert.dom(screen.getByText(t('common.tables.empty-result'))).exists();
     });
   });
 });

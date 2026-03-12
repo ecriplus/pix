@@ -636,6 +636,11 @@
         "organization-id": {
           "label": "ID d'organisation à la tête du réseau:"
         }
+      },
+      "list": {
+        "table": {
+          "caption": "Liste des réseaux. Contient le nom et l'ID."
+        }
       }
     },
     "organization-learner-information": {

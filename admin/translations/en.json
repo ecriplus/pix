@@ -634,6 +634,11 @@
         "organization-id": {
           "label": "ID of the organization at the head of the network:"
         }
+      },
+      "list": {
+        "table": {
+          "caption": "List of networks. Contains the name and ID."
+        }
       }
     },
     "organization-learner-information": {

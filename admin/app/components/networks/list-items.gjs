@@ -1,13 +1,14 @@
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { t } from 'ember-intl';
 
 <template>
   {{#if @networks}}
-    <PixTable @variant="admin" @caption="Liste des réseaux. Contient le nom et l'ID." @data={{@networks}}>
+    <PixTable @variant="admin" @caption={{t "components.networks.list.table.caption"}} @data={{@networks}}>
       <:columns as |network context|>
         <PixTableColumn @context={{context}}>
           <:header>
-            ID
+            {{t "common.fields.id"}}
           </:header>
           <:cell>
             {{network.id}}
@@ -15,7 +16,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
         </PixTableColumn>
         <PixTableColumn @context={{context}} class="break-word">
           <:header>
-            Nom
+            {{t "common.fields.name"}}
           </:header>
           <:cell>
             {{network.name}}
@@ -24,6 +25,6 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
       </:columns>
     </PixTable>
   {{else}}
-    <div class="table__empty">Aucun résultat</div>
+    <div class="table__empty">{{t "common.tables.empty-result"}}</div>
   {{/if}}
 </template>
