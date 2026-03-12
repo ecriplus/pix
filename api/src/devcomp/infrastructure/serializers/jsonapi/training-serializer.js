@@ -17,6 +17,7 @@ const serializeForAdmin = function (training = {}, meta) {
       'duration',
       'link',
       'locale',
+      'locales',
       'title',
       'internalTitle',
       'type',

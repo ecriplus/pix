@@ -92,6 +92,7 @@ describe('Acceptance | Controller | training-controller', function () {
           type: trainingAttributes.type,
           link: trainingAttributes.link,
           locale: trainingAttributes.locale,
+          locales: trainingAttributes.locales,
           'is-recommendable': true,
           duration: {
             days: 0,
@@ -164,7 +165,7 @@ describe('Acceptance | Controller | training-controller', function () {
             minutes: 0,
           },
           locale: 'fr',
-          locales: ['fr'],
+          locales: ['fr', 'fr-fr'],
           'editor-name': 'Un ministère',
           'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
         },
@@ -186,7 +187,7 @@ describe('Acceptance | Controller | training-controller', function () {
                 hours: 6,
               },
               locale: 'fr',
-              locales: ['fr'],
+              locales: ['fr', 'fr-fr'],
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
               'editor-name': 'Un ministère',
             },
@@ -232,6 +233,7 @@ describe('Acceptance | Controller | training-controller', function () {
         const superAdmin = await insertUserWithRoleSuperAdmin();
         const training = databaseBuilder.factory.buildTraining();
         await databaseBuilder.commit();
+        const locales = ['fr', 'fr-fr'];
         const updatedTraining = {
           title: 'new title',
           internalTitle: 'new internal title',
@@ -242,6 +244,7 @@ describe('Acceptance | Controller | training-controller', function () {
             hours: 2,
             minutes: 2,
           },
+          locales,
         };
 
         options = {
@@ -262,6 +265,7 @@ describe('Acceptance | Controller | training-controller', function () {
                   minutes: 2,
                 },
                 'is-disabled': true,
+                locales,
               },
             },
           },
@@ -275,6 +279,7 @@ describe('Acceptance | Controller | training-controller', function () {
               title: updatedTraining.title,
               internalTitle: updatedTraining.internalTitle,
               link: training.link,
+              locales,
               duration: training.duration,
               editorName: updatedTraining.editorName,
               editorLogoUrl: updatedTraining.editorLogoUrl,
@@ -302,6 +307,7 @@ describe('Acceptance | Controller | training-controller', function () {
           expectedResponse.data.attributes.editorLogoUrl,
         );
         expect(response.result.data.attributes['is-disabled']).to.be.true;
+        expect(response.result.data.attributes['locales']).to.deep.equal(locales);
       });
     });
   });
