@@ -1726,6 +1726,11 @@
             "button": "Reimpostare la password",
             "warning": "Reset cancella la password corrente dello studente."
           },
+          "unblock": {
+            "button": "Sbloccare l'account",
+            "subtitle": "Se l'account dello studente è bloccato",
+            "success-notification": "L'account dello studente è stato sbloccato, ora può ricollegarsi."
+          },
           "username": {
             "copy": "Identificatore di copia",
             "label": "Identificatore"

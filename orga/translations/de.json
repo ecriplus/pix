@@ -1725,6 +1725,11 @@
             "button": "Das Passwort zurücksetzen",
             "warning": "Zurücksetzen löscht das aktuelle Schülerpasswort."
           },
+          "unblock": {
+            "button": "Konto entsperren",
+            "subtitle": "Wenn das Schülerkonto gesperrt ist",
+            "success-notification": "Das Konto des Schülers wurde entsperrt, er kann sich wieder einloggen."
+          },
           "username": {
             "copy": "Den Benutzernamen kopieren",
             "label": "Kennung"

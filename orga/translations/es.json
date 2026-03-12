@@ -1726,6 +1726,11 @@
             "button": "Restablecer contraseña",
             "warning": "Restablecer borra la contraseña actual del estudiante."
           },
+          "unblock": {
+            "button": "Desbloquear la cuenta",
+            "subtitle": "Si la cuenta del alumno está bloqueada",
+            "success-notification": "La cuenta del alumno ha sido desbloqueada, ya puede volver a conectarse."
+          },
           "username": {
             "copy": "Identificador de copia",
             "label": "Identificador"
