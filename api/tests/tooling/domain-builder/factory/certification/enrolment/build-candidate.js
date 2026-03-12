@@ -1,4 +1,6 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
+import { domainBuilder } from '../../../domain-builder.js';
 
 const buildCandidate = function ({
   id = 123,
@@ -26,6 +28,7 @@ const buildCandidate = function ({
   hasSeenCertificationInstructions = false,
   subscriptions = [],
   accessibilityAdjustmentNeeded,
+  subscription = null,
 } = {}) {
   return new Candidate({
     id,
@@ -53,6 +56,15 @@ const buildCandidate = function ({
     hasSeenCertificationInstructions,
     subscriptions,
     accessibilityAdjustmentNeeded,
+    subscription,
+  });
+};
+
+buildCandidate.withCoreSubscription = function (args) {
+  return buildCandidate({
+    ...args,
+    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
+    subscription: Frameworks.CORE,
   });
 };
 

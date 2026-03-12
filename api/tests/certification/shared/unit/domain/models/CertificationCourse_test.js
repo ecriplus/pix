@@ -19,7 +19,7 @@ describe('Unit | Domain | Models | CertificationCourse', function () {
       expect(certificationCourse.toDTO().abortReason).to.equal('technical');
     });
 
-    it('should fail if abort reason is unknown', async function () {
+    it('should fail if abort reason is unknown', function () {
       // given
       const certificationCourse = domainBuilder.buildCertificationCourse({
         abortReason: null,

@@ -145,7 +145,13 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
           const expectedSession = new SessionEnrolment({ ...temporaryCachedSessions[0], createdBy: sessionCreatorId });
           expect(sessionRepository.save).to.have.been.calledOnceWith({ session: expectedSession });
           expect(candidateRepository.save).to.have.been.calledOnceWith({
-            candidates: [domainBuilder.certification.enrolment.buildCandidate({ ...candidate, sessionId: 1234 })],
+            candidates: [
+              domainBuilder.certification.enrolment.buildCandidate({
+                ...candidate,
+                sessionId: 1234,
+                subscription: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+              }),
+            ],
           });
         });
       });
@@ -181,7 +187,13 @@ describe('Unit | UseCase | sessions-mass-import | create-sessions', function () 
           sessionId: 1234,
         });
         expect(candidateRepository.save).to.have.been.calledOnceWith({
-          candidates: [domainBuilder.certification.enrolment.buildCandidate({ ...candidate, sessionId: 1234 })],
+          candidates: [
+            domainBuilder.certification.enrolment.buildCandidate({
+              ...candidate,
+              sessionId: 1234,
+              subscription: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            }),
+          ],
         });
       });
     });

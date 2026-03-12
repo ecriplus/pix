@@ -78,6 +78,7 @@ function _scoCandidateToDTOForSession(sessionId) {
     birthINSEECode: scoCandidate.birthINSEECode,
     birthCity: scoCandidate.birthCity,
     birthCountry: scoCandidate.birthCountry,
+    subscription: scoCandidate.subscription,
     sessionId,
   });
 }

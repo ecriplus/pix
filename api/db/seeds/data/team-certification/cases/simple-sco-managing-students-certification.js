@@ -173,7 +173,7 @@ export class ScoManagingStudent {
   }
 
   async #addCandidateToSession({ organizationLearner, session }) {
-    const candidate = new Candidate({
+    const candidate = Candidate.create({
       firstName: organizationLearner.firstName,
       lastName: organizationLearner.lastName,
       sex: 'F',

@@ -29,6 +29,8 @@ const buildCertificationCourse = function ({
   isRejectedForFraud = false,
   abortReason = null,
   lang = null,
+  versionId = null,
+  candidateId = null,
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
   sessionId = _.isUndefined(sessionId) ? buildSession().id : sessionId;
@@ -56,6 +58,8 @@ const buildCertificationCourse = function ({
     isRejectedForFraud,
     abortReason,
     lang,
+    versionId,
+    candidateId,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'certification-courses',

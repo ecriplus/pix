@@ -240,19 +240,30 @@ export {
 };
 
 function _adaptModelToDb(certificationCourse) {
-  /* eslint-disable no-unused-vars */
-  const {
-    complementaryCertificationCourse,
-    certificationIssueReports,
-    assessment,
-    challenges,
-    createdAt,
-    numberOfChallenges,
-    isAdjustedForAccessibility,
-    ...rest
-  } = certificationCourse.toDTO();
-  /* eslint-enable no-unused-vars */
-  return rest;
+  const certificationCourseDTO = certificationCourse.toDTO();
+  return {
+    firstName: certificationCourseDTO.firstName,
+    lastName: certificationCourseDTO.lastName,
+    birthdate: certificationCourseDTO.birthdate,
+    birthplace: certificationCourseDTO.birthplace,
+    birthPostalCode: certificationCourseDTO.birthPostalCode,
+    birthINSEECode: certificationCourseDTO.birthINSEECode,
+    birthCountry: certificationCourseDTO.birthCountry,
+    sex: certificationCourseDTO.sex,
+    externalId: certificationCourseDTO.externalId,
+    completedAt: certificationCourseDTO.completedAt,
+    isPublished: certificationCourseDTO.isPublished,
+    isRejectedForFraud: certificationCourseDTO.isRejectedForFraud,
+    verificationCode: certificationCourseDTO.verificationCode,
+    userId: certificationCourseDTO.userId,
+    sessionId: certificationCourseDTO.sessionId,
+    maxReachableLevelOnCertificationDate: certificationCourseDTO.maxReachableLevelOnCertificationDate,
+    abortReason: certificationCourseDTO.abortReason,
+    version: certificationCourseDTO.version,
+    lang: certificationCourseDTO.lang,
+    candidateId: certificationCourseDTO.candidateId,
+    versionId: certificationCourseDTO.versionId,
+  };
 }
 
 function _extractPropertiesForUpdate(certificationCourse) {

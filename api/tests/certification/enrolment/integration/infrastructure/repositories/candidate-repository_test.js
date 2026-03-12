@@ -1,8 +1,8 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationCandidateNotFoundError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import * as candidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
@@ -19,7 +19,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
 
         const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
           id: 1,
-          key: ComplementaryCertificationKeys.CLEA,
+          key: Frameworks.CLEA,
         });
 
         databaseBuilder.factory.buildComplementaryCertificationSubscription({
@@ -71,7 +71,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         const sessionId = databaseBuilder.factory.buildSession().id;
         databaseBuilder.factory.buildComplementaryCertification({
           id: 1,
-          key: ComplementaryCertificationKeys.CLEA,
+          key: Frameworks.CLEA,
         });
         const certificationCandidate1 = databaseBuilder.factory.buildCertificationCandidate({
           sessionId,
@@ -103,7 +103,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
             subscriptions: [
               domainBuilder.certification.enrolment.buildComplementarySubscription({
                 certificationCandidateId: certificationCandidate1.id,
-                complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+                complementaryCertificationKey: Frameworks.CLEA,
               }),
               domainBuilder.certification.enrolment.buildCoreSubscription({
                 certificationCandidateId: certificationCandidate1.id,
@@ -221,11 +221,11 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         // when
         const complementaryCertificationDroit = databaseBuilder.factory.buildComplementaryCertification({
           id: 555,
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+          key: Frameworks.DROIT,
         });
         const complementaryCertificationEdu = databaseBuilder.factory.buildComplementaryCertification({
           id: 666,
-          key: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
+          key: Frameworks.EDU_1ER_DEGRE,
         });
         const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
           firstName: 'toto',
@@ -350,7 +350,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
       databaseBuilder.factory.buildComplementaryCertification({
         id: 22,
         label: 'Pix+DROIT',
-        key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        key: Frameworks.DROIT,
       });
       return databaseBuilder.commit();
     });
@@ -411,9 +411,10 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         subscriptions: [
           domainBuilder.certification.enrolment.buildCoreSubscription(),
           domainBuilder.certification.enrolment.buildComplementarySubscription({
-            complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+            complementaryCertificationKey: Frameworks.CLEA,
           }),
         ],
+        subscription: Frameworks.CLEA,
       });
       const candidateB = domainBuilder.certification.enrolment.buildCandidate({
         firstName: 'Geogeo',
@@ -421,6 +422,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         accessibilityAdjustmentNeeded: true,
         sessionId,
         subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+        subscription: Frameworks.CORE,
       });
       const candidateC = domainBuilder.certification.enrolment.buildCandidate({
         firstName: 'Loulou',
@@ -429,9 +431,10 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         accessibilityAdjustmentNeeded: false,
         subscriptions: [
           domainBuilder.certification.enrolment.buildComplementarySubscription({
-            complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            complementaryCertificationKey: Frameworks.DROIT,
           }),
         ],
+        subscription: Frameworks.DROIT,
       });
 
       // when
@@ -470,7 +473,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateA.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateA.accessibilityAdjustmentNeeded,
-        subscription: null,
+        subscription: Frameworks.CLEA,
       });
       expect(savedCandidateAData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateAData.extraTimePercentage)).to.equal(candidateA.extraTimePercentage);
@@ -524,7 +527,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateB.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateB.accessibilityAdjustmentNeeded,
-        subscription: null,
+        subscription: Frameworks.CORE,
       });
       expect(savedCandidateBData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateBData.extraTimePercentage)).to.equal(candidateB.extraTimePercentage);
@@ -570,7 +573,7 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         prepaymentCode: candidateC.prepaymentCode,
         hasSeenCertificationInstructions: false,
         accessibilityAdjustmentNeeded: candidateC.accessibilityAdjustmentNeeded,
-        subscription: null,
+        subscription: Frameworks.DROIT,
       });
       expect(savedCandidateCData.createdAt).to.be.instanceOf(Date);
       expect(parseFloat(savedCandidateCData.extraTimePercentage)).to.equal(candidateC.extraTimePercentage);

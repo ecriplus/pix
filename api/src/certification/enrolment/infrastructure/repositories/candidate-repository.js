@@ -106,61 +106,21 @@ export async function update(candidate) {
 }
 
 /**
+ * @deprecated use save instead
  * @function
  * @param {Candidate} candidate
  *
  * @returns {Promise<number>}
  */
 export async function insert(candidate) {
-  const candidateDataToSave = adaptModelToDb(candidate);
-  const knexTransaction = DomainTransaction.getConnection();
-
-  const [{ id: candidateId }] = await knexTransaction('certification-candidates')
-    .insert(candidateDataToSave)
-    .returning('id');
-
-  for (const subscription of candidate.subscriptions) {
-    if (subscription.type === SUBSCRIPTION_TYPES.CORE) {
-      await knexTransaction('certification-subscriptions').insert({
-        certificationCandidateId: candidateId,
-        type: subscription.type,
-        complementaryCertificationId: null,
-      });
-    } else {
-      const { id: complementaryCertificationId } = await knexTransaction('complementary-certifications')
-        .select('id')
-        .where({ key: subscription.complementaryCertificationKey })
-        .first();
-      await knexTransaction('certification-subscriptions').insert({
-        certificationCandidateId: candidateId,
-        type: subscription.type,
-        complementaryCertificationId: complementaryCertificationId,
-      });
-    }
-  }
-
-  return candidateId;
-}
-
-/**
- * @function
- * @param {object} params
- * @param {number} params.sessionId
- * @returns {Promise<void>}
- */
-export async function deleteBySessionId({ sessionId }) {
-  const knexConn = DomainTransaction.getConnection();
-  await knexConn('certification-subscriptions')
-    .whereIn('certificationCandidateId', knexConn.select('id').from('certification-candidates').where({ sessionId }))
-    .del();
-
-  await knexConn('certification-candidates').where({ sessionId }).del();
+  const insertedIds = await save({ candidates: [candidate] });
+  return insertedIds[0];
 }
 
 /**
  * @function
  * @param {Candidate[]} candidates
- * @returns {Promise<void>}
+ * @returns {Promise<Number[]>}
  */
 export async function save({ candidates }) {
   const knexConn = DomainTransaction.getConnection();
@@ -178,7 +138,7 @@ export async function save({ candidates }) {
       (insertedCandidateData) =>
         insertedCandidateData.firstName === candidate.firstName &&
         insertedCandidateData.lastName === candidate.lastName &&
-        dayjs(insertedCandidateData.birthdate).format('YYYY-MM-DD') === candidate.birthdate,
+        dayjs(insertedCandidateData.birthdate).format('YYYY-MM-DD') === dayjs(candidate.birthdate).format('YYYY-MM-DD'),
     ).id;
 
     subscriptionsData.push(
@@ -194,6 +154,23 @@ export async function save({ candidates }) {
     );
   }
   await knexConn('certification-subscriptions').insert(subscriptionsData);
+
+  return insertedCandidatesData.map(({ id }) => id);
+}
+
+/**
+ * @function
+ * @param {object} params
+ * @param {number} params.sessionId
+ * @returns {Promise<void>}
+ */
+export async function deleteBySessionId({ sessionId }) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-subscriptions')
+    .whereIn('certificationCandidateId', knexConn.select('id').from('certification-candidates').where({ sessionId }))
+    .del();
+
+  await knexConn('certification-candidates').where({ sessionId }).del();
 }
 
 /**
@@ -296,6 +273,7 @@ function adaptModelToDb(candidate) {
     prepaymentCode: candidate.prepaymentCode,
     hasSeenCertificationInstructions: candidate.hasSeenCertificationInstructions,
     accessibilityAdjustmentNeeded: candidate.accessibilityAdjustmentNeeded,
+    subscription: candidate.subscription,
   };
 }
 

@@ -1,7 +1,9 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { InvalidCertificationCandidate } from '../errors.js';
+import { Subscription } from '../models/Subscription.js';
 
 const scoCertificationCandidateValidationJoiSchema = Joi.object({
   firstName: Joi.string().required().empty(null),
@@ -27,7 +29,6 @@ class SCOCertificationCandidate {
     sex,
     sessionId,
     organizationLearnerId,
-    subscriptions,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -39,7 +40,8 @@ class SCOCertificationCandidate {
     this.sex = sex;
     this.sessionId = sessionId;
     this.organizationLearnerId = organizationLearnerId;
-    this.subscriptions = subscriptions;
+    this.subscriptions = [Subscription.buildCore({ certificationCandidateId: null })];
+    this.subscription = Frameworks.CORE;
     this.validate();
   }
 

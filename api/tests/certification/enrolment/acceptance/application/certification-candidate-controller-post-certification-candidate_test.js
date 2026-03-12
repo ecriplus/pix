@@ -74,6 +74,7 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         sessionId = databaseBuilder.factory.buildSession({ certificationCenterId, certificationCenter }).id;
         databaseBuilder.factory.buildCertificationCenterMembership({ userId, certificationCenterId });
         databaseBuilder.factory.buildCertificationCpfCountry({
+          commonName: 'FRANCE',
           originalName: 'FRANCE',
           code: '99100',
           matcher: 'ACEFNR',
@@ -132,6 +133,39 @@ describe('Acceptance | Controller | Certification | Enrolment | session-controll
         expect(response.statusCode).to.equal(201);
         expect(response.result.data.id).to.equal(candidateId.toString());
         expect(response.result.data.type).to.equal('certification-candidates');
+      });
+
+      it('should save the complete candidate in database', async function () {
+        // when
+        const response = await server.inject(options);
+
+        // then
+        const candidateId = parseInt(response.result.data.id);
+        const savedCandidate = await knex('certification-candidates').where({ id: candidateId }).first();
+
+        expect(savedCandidate).to.contain({
+          firstName: candidate.firstName,
+          lastName: candidate.lastName,
+          sex: candidate.sex,
+          birthdate: candidate.birthdate,
+          birthCountry: 'FRANCE',
+          birthINSEECode: '75115',
+          birthCity: 'PARIS 15',
+          birthPostalCode: null,
+          birthProvinceCode: null,
+          email: candidate.email,
+          resultRecipientEmail: candidate.resultRecipientEmail,
+          externalId: candidate.externalId,
+          extraTimePercentage: '0.30',
+          billingMode: 'FREE',
+          prepaymentCode: null,
+          sessionId,
+          userId: null,
+          organizationLearnerId: null,
+          authorizedToStart: false,
+          hasSeenCertificationInstructions: false,
+          subscription: ComplementaryCertificationKeys.CLEA,
+        });
       });
 
       it('should save subscriptions (core and complementary if any)', async function () {

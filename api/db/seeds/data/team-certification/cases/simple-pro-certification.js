@@ -147,7 +147,7 @@ export class ProSeed {
 
   async #addCandidateToSession({ pixAppUser, session }) {
     const candidateBirthdate = '2000-10-30';
-    const candidate = new Candidate({
+    const candidateDTO = {
       firstName: pixAppUser.firstName,
       lastName: pixAppUser.lastName,
       sex: 'F',
@@ -161,19 +161,19 @@ export class ProSeed {
       subscriptions: [Subscription.buildCore({ certificationCandidateId: null })],
       userId: pixAppUser.id,
       billingMode: BILLING_MODES.FREE,
-    });
+    };
 
     const candidateId = await enrolmentUseCases.addCandidateToSession({
       sessionId: session.id,
-      candidate: new Candidate(candidate), // Warning: usecase modifies the entry model...
+      candidate: Candidate.create(candidateDTO), // Warning: usecase modifies the entry model...
       normalizeStringFnc: normalize,
     });
 
     await enrolmentServices.registerCandidateParticipation({
       userId: pixAppUser.id,
       sessionId: session.id,
-      firstName: candidate.firstName,
-      lastName: candidate.lastName,
+      firstName: candidateDTO.firstName,
+      lastName: candidateDTO.lastName,
       birthdate: candidateBirthdate,
       isFrenchDomainExtension: true,
       normalizeStringFnc: normalize,

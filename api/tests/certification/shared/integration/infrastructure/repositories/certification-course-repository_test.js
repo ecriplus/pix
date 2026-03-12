@@ -8,20 +8,39 @@ import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../..
 
 describe('Certification | Shared | Integration | Repository | Certification Course', function () {
   describe('#save', function () {
-    let certificationCourse, userId, sessionId;
+    let certificationCourseData, certificationCourse, userId, sessionId, candidateId, versionId;
 
     beforeEach(function () {
       userId = databaseBuilder.factory.buildUser().id;
       sessionId = databaseBuilder.factory.buildSession({ version: 3 }).id;
-
-      databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
-      certificationCourse = domainBuilder.buildCertificationCourse.unpersisted({
+      candidateId = databaseBuilder.factory.buildCertificationCandidate({ sessionId }).id;
+      versionId = databaseBuilder.factory.buildCertificationVersion().id;
+      certificationCourseData = {
         userId,
         sessionId,
-        complementaryCertificationCourse: null,
         version: 3,
         lang: 'fr',
-      });
+        candidateId,
+        versionId,
+        firstName: 'JePasse',
+        lastName: 'MaCertif',
+        birthdate: '1990-04-01',
+        birthplace: 'MonLit',
+        birthPostalCode: '66000',
+        birthINSEECode: '66000',
+        birthCountry: 'FRANCE',
+        sex: 'F',
+        externalId: 'OUIOUITOUTAFÉ',
+        completedAt: new Date(),
+        isPublished: false,
+        isRejectedForFraud: false,
+        verificationCode: 'MONCODE',
+        maxReachableLevelOnCertificationDate: 7,
+        abortReason: null,
+      };
+
+      databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
+      certificationCourse = domainBuilder.buildCertificationCourse.unpersisted(certificationCourseData);
 
       return databaseBuilder.commit();
     });
@@ -31,11 +50,11 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
       const savedCertificationCourse = await certificationCourseRepository.save({ certificationCourse });
 
       // then
-      const retrievedCertificationCourse = await certificationCourseRepository.get({
-        id: savedCertificationCourse.getId(),
-      });
-      expect(retrievedCertificationCourse.getVersion()).to.equal(3);
-      expect(retrievedCertificationCourse.getLanguage()).to.equal('fr');
+      const savedCertifData = await knex('certification-courses')
+        .select('*')
+        .where({ id: savedCertificationCourse.getId() })
+        .first();
+      expect(savedCertifData).to.deep.include(certificationCourseData);
     });
 
     it('should return the saved certification course', async function () {
@@ -45,41 +64,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
       // then
       expect(savedCertificationCourse).to.be.an.instanceOf(CertificationCourse);
       expect(savedCertificationCourse.getId()).not.to.be.null;
-    });
-
-    context('when there is a complementary certification', function () {
-      it('should also persist the complementary certification course', async function () {
-        // given
-        const badgeId = databaseBuilder.factory.buildBadge().id;
-        const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({}).id;
-        const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
-          badgeId,
-          complementaryCertificationId,
-        }).id;
-
-        await databaseBuilder.commit();
-
-        certificationCourse = domainBuilder.buildCertificationCourse.unpersisted({
-          userId,
-          sessionId,
-          complementaryCertificationCourse: {
-            complementaryCertificationBadgeId,
-            complementaryCertificationId,
-          },
-          version: 3,
-          lang: 'fr',
-        });
-
-        // when
-        const savedCertificationCourse = await certificationCourseRepository.save({ certificationCourse });
-
-        // then
-        const retrievedCertificationCourse = await certificationCourseRepository.get({
-          id: savedCertificationCourse.getId(),
-        });
-        expect(retrievedCertificationCourse.getVersion()).to.equal(3);
-        expect(retrievedCertificationCourse.getLanguage()).to.equal('fr');
-      });
     });
   });
 
