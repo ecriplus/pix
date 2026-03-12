@@ -1,30 +1,27 @@
 import Dataloader from 'dataloader';
 
-import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
-import { createCounter, createHistogram } from '../metrics/metrics.js';
+import { createHistogram } from '../metrics/metrics.js';
 import { child, SCOPES } from '../utils/logger.js';
 
 const logger = child('learningcontent:repository', { event: SCOPES.LEARNING_CONTENT });
 
 const metrics = {
-  read: createCounter({
+  read: createHistogram({
     name: 'lc_read',
-    help: 'Total count of reads from learning content',
-    labelNames: ['type', 'table'],
+    help: 'Learning content entities read count',
+    labelNames: ['table', 'cache'],
   }),
-  loadCacheMiss: createHistogram({
-    name: 'lc_loadcachemiss',
-    help: 'Histogram of load cache misses when reading from learning content',
-    labelNames: ['table'],
-    buckets: config.metrics.prometheus.buckets.lc_loadcachemiss,
+  cacheMiss: createHistogram({
+    name: 'lc_cachemiss',
+    help: 'Learning content cache miss count',
+    labelNames: ['table', 'cache'],
   }),
-  findCacheMiss: createHistogram({
-    name: 'lc_findcachemiss',
-    help: 'Histogram of find cache misses when reading from learning content',
-    labelNames: ['table'],
-    buckets: config.metrics.prometheus.buckets.lc_findcachemiss,
+  cachePenalty: createHistogram({
+    name: 'lc_cachepenalty',
+    help: 'Learning content cache penalty',
+    labelNames: ['table', 'cache'],
   }),
 };
 
@@ -64,10 +61,12 @@ export class LearningContentRepository {
 
     const table = this.#tableName.split('.').at(-1);
     this.#metrics = {
-      loadRead: metrics.read.labels({ type: 'load', table }),
-      findRead: metrics.read.labels({ type: 'find', table }),
-      loadCacheMiss: metrics.loadCacheMiss.labels({ table }),
-      findCacheMiss: metrics.findCacheMiss.labels({ table }),
+      load: metrics.read.labels({ table, cache: 'entities' }),
+      find: metrics.read.labels({ table, cache: 'results' }),
+      loadCacheMiss: metrics.cacheMiss.labels({ table, cache: 'entities' }),
+      findCacheMiss: metrics.cacheMiss.labels({ table, cache: 'results' }),
+      loadCachePenalty: metrics.cachePenalty.labels({ table, cache: 'entities' }),
+      findCachePenalty: metrics.cachePenalty.labels({ table, cache: 'results' }),
     };
   }
 
@@ -80,23 +79,40 @@ export class LearningContentRepository {
    * @returns {Promise<object[]>}
    */
   async find(cacheKey, callback) {
-    this.#metrics.findRead.inc();
+    let dtos;
+    let stopFindCachePenaltyTimer;
 
-    let dtos = this.#findCache.get(cacheKey);
-    if (dtos) return dtos;
+    try {
+      dtos = this.#findCache.get(cacheKey);
+      if (dtos) return dtos;
 
-    dtos = this.#findCacheMiss.get(cacheKey);
-    if (dtos) return dtos;
+      let dtosPromise = this.#findCacheMiss.get(cacheKey);
+      if (dtosPromise) {
+        stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
+        dtos = await dtosPromise.finally(() => {
+          stopFindCachePenaltyTimer();
+        });
 
-    const stopFindCachemissTimer = this.#metrics.findCacheMiss.startTimer();
+        this.#metrics.findCacheMiss.observe(dtos.length);
 
-    dtos = this.#loadDtos(callback, cacheKey).finally(() => {
-      this.#findCacheMiss.delete(cacheKey);
-      stopFindCachemissTimer();
-    });
-    this.#findCacheMiss.set(cacheKey, dtos);
+        return dtos;
+      }
 
-    return dtos;
+      stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
+      dtosPromise = this.#loadDtos(callback, cacheKey).finally(() => {
+        this.#findCacheMiss.delete(cacheKey);
+        stopFindCachePenaltyTimer();
+      });
+      this.#findCacheMiss.set(cacheKey, dtosPromise);
+
+      dtos = await dtosPromise;
+
+      this.#metrics.findCacheMiss.observe(dtos.length);
+
+      return dtos;
+    } finally {
+      this.#metrics.find.observe(dtos.length);
+    }
   }
 
   /**
@@ -105,7 +121,7 @@ export class LearningContentRepository {
    * @returns {Promise<object|null>}
    */
   async load(id) {
-    this.#metrics.loadRead.inc();
+    this.#metrics.load.observe(1);
     return this.#dataloader.load(id);
   }
 
@@ -141,7 +157,7 @@ export class LearningContentRepository {
    * @returns {Promise<(object|null)[]>}
    */
   async #loadMany(ids, cacheKey) {
-    this.#metrics.loadRead.inc(ids.length);
+    this.#metrics.load.observe(ids.length);
 
     const dtos = await this.#dataloader.loadMany(ids);
 
@@ -182,7 +198,8 @@ export class LearningContentRepository {
   async #batchLoad(ids) {
     logger.debug({ tableName: this.#tableName, count: ids.length }, 'loading from PG');
 
-    const stopLoadCachemissTimer = this.#metrics.loadCacheMiss.startTimer();
+    this.#metrics.loadCacheMiss.observe(ids.length);
+    const stopLoadCachePenaltyTimer = this.#metrics.loadCachePenalty.startTimer();
 
     try {
       const knexConn = DomainTransaction.getConnection();
@@ -193,7 +210,7 @@ export class LearningContentRepository {
         .orderBy('ids.idx');
       return dtos.map((dto) => (dto.id ? dto : null));
     } finally {
-      stopLoadCachemissTimer();
+      stopLoadCachePenaltyTimer();
     }
   }
 
