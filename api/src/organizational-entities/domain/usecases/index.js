@@ -103,6 +103,7 @@ import { findOrganizationFeatures } from './find-organization-features.js';
 import { findPaginatedFilteredCertificationCenters } from './find-paginated-filtered-certification-centers.usecase.js';
 import { findPaginatedFilteredOrganizations } from './find-paginated-filtered-organizations.usecase.js';
 import { getCenterForAdmin } from './get-center-for-admin.usecase.js';
+import { getNetworkDetails } from './get-network-details.usecase.js';
 import { getOrganizationById } from './get-organization-by-id.js';
 import { getOrganizationDetails } from './get-organization-details.usecase.js';
 import { getOrganizationPlacesStatistics } from './get-organization-places-statistics.usecase.js';
@@ -135,6 +136,7 @@ const usecasesWithoutInjectedDependencies = {
   findAllAdministrationTeams,
   findAllOrganizationLearnerTypes,
   getCenterForAdmin,
+  getNetworkDetails,
   getOrganizationById,
   getOrganizationDetails,
   getOrganizationPlacesStatistics,
@@ -153,6 +155,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {detachParentOrganizationFromOrganization} detachParentOrganizationFromOrganization
  * @property {findPaginatedFilteredCertificationCenters} findPaginatedFilteredCertificationCenters
  * @property {getOrganizationDetails} getOrganizationDetails
+ * @property {getNetworkDetails} getNetworkDetails
  * @property {updateOrganizationsInBatch} updateOrganizationsInBatch
  * @property {updateOrganizationInformation} updateOrganizationInformation
  * @property {archiveOrganizationsInBatch} archiveOrganizationsInBatch
