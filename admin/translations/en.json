@@ -1345,6 +1345,10 @@
       "title": "Access to this Pix Admin space is limited to administrators."
     },
     "networks": {
+      "list": {
+        "new-button": "New network",
+        "title": "All networks"
+      },
       "title": "Create a network"
     },
     "organization": {

@@ -34,7 +34,7 @@ module('Acceptance | Networks | List', function (hooks) {
         await visit('/networks/list');
 
         // when
-        await clickByName('Nouveau réseau');
+        await clickByName(t('pages.networks.list.new-button'));
 
         // then
         assert.strictEqual(currentURL(), '/networks/new');

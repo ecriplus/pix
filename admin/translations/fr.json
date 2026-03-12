@@ -1348,6 +1348,10 @@
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },
     "networks": {
+      "list": {
+        "new-button": "Nouveau réseau",
+        "title": "Tous les réseaux"
+      },
       "title": "Créer un réseau"
     },
     "organization": {
