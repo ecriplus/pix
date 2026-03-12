@@ -7,6 +7,7 @@ import { learningContentCache } from './src/shared/infrastructure/caches/learnin
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import * as prometheusPushGateway from './src/shared/infrastructure/metrics/pushgateway.js';
 import { quitMutex } from './src/shared/infrastructure/mutex/RedisMutex.js';
+import { pgBoss } from './src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
@@ -62,14 +63,14 @@ process.on('SIGINT', () => {
   _exitOnSignal('SIGINT');
 });
 
-(async () => {
-  try {
-    await start();
-    if (config.infra.startJobInWebProcess) {
-      registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
-    }
-  } catch (error) {
-    logger.error(error);
-    throw error;
+try {
+  await start();
+  if (config.infra.startJobInWebProcess) {
+    await registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
+  } else {
+    await pgBoss.start();
   }
-})();
+} catch (error) {
+  logger.error(error);
+  throw error;
+}
