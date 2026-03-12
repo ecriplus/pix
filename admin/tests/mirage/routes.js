@@ -368,6 +368,7 @@ export default function routes() {
     return organizationMembership.update({ disabledAt: new Date() });
   });
 
+  this.get('/admin/networks');
   this.post('/admin/networks', createNetwork);
 
   this.get('/admin/organizations', findPaginatedFilteredOrganizations);
