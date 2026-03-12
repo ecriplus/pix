@@ -741,7 +741,30 @@
                     {
                       "id": "b95f2a02-12ca-4418-85cf-56097d763f3b",
                       "type": "text",
-                      "content": "Le cadre d’usage de l’IA en éducation préconise d’<strong>introduire l’usage des logiciels d’IA générative</strong> auprès des élèves de<strong> manière progressive</strong>&nbsp;:<br><br>[INFOGRAPHIE&nbsp;: <br><br><ul>    <li> École primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs.</li>    <li>Collège (à partir de la 4e)&nbsp;: usage limité en classe, toujours accompagné par l’enseignant.</li>    <li>Lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini.</li></ul><br>À tous les niveaux, trois conditions essentielles encadrent et sécurisent l’usage des logiciels d’IA générative en classe&nbsp;:<br><ul>    <li>Encadrement pédagogique explicite par l’enseignant.</li>    <li>Protection stricte des données personnelles, sans création de comptes sur des services grand public.</li>    <li>Primauté de l’apprentissage&nbsp;: l’IA ne doit jamais remplacer l’effort intellectuel de l’apprenant.]</li></ul>"
+                      "content": "<p>Le cadre d’usage de l’IA en éducation préconise d’<strong>introduire l’usage des logiciels d’IA générative</strong> auprès des élèves de<strong> manière progressive</strong>&nbsp;:</p>"
+                    },
+                    {
+                      "id": "caf64770-cbc2-445e-9815-923e6d71cf2f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/IA_Enseignants_IND/timeline.svg",
+                      "alt": "Infographie décrite dans l'alternative textuelle",
+                      "alternativeText": "<ul><li>À partir de l'école primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs </li><li>À partir de la 4e au collège&nbsp;: usage limité en classe, toujours accompagné par l’enseignant    </li><li>À partir du lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini</li></ul>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "d218458d-717c-47c7-b7d8-0ec7c613e1df",
+                      "type": "text",
+                      "content": "<p>À tous les niveaux, trois conditions essentielles encadrent et sécurisent l’usage des logiciels d’IA générative en classe&nbsp;:</p>"
+                    },
+                    {
+                      "id": "86bb793c-a258-4654-b1a2-866bdf5b98b4",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/IA_Enseignants_IND/conditions.svg",
+                      "alt": "Infographie décrite dans l'alternative textuelle",
+                      "alternativeText": "<ul><li>Encadrement pédagogique explicite par l’enseignant </li><li>   Protection stricte des données personnelles, sans création de comptes sur des services grand public </li><li>   Primauté de l’apprentissage&nbsp;: l’IA ne doit jamais remplacer l’effort intellectuel de l’apprenant</li></ul>",
+                      "legend": "",
+                      "licence": ""
                     }
                   ]
                 },
@@ -775,6 +798,18 @@
                 "id": "76081d34-b024-4409-a09a-36201ca6c91c",
                 "type": "text",
                 "content": "<p>Face au développement rapide et constant de l’IA, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de L’Éducation nationale en juin 2025, a pour objectif de promouvoir des pratiques éclairées et responsables. </p><p> [INFOGRAPHIE&nbsp;: </p><p><strong>Pour un usage éclairé et responsable de l’IA en éducation </strong>:</p><br><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et<strong> renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li><strong>Introduisez de manière progressive, encadrée et sécurisée</strong> l’usage de l’IA avec vos élèves.]</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "24867f55-87f3-4edc-8da6-8847cdeea904",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/IA_Enseignants_IND/recap.svg",
+                "alt": "Infographie décrite dans l'alternative textuelle",
+                "alternativeText": "<h4>Pour un usage éclairé et responsable de l’IA en éducation</h4><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et <strong>renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li>Introduisez de manière <strong>progressive, encadrée et sécurisée</strong> l’usage de l’IA avec vos élèves.</li></ul>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
