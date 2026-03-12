@@ -1,4 +1,4 @@
-import { NetworkAlreadyExistError } from '../errors.js';
+import { NetworkAlreadyExistError, OrganizationNotFound } from '../errors.js';
 
 /**
  * @param{object} params
@@ -7,7 +7,24 @@ import { NetworkAlreadyExistError } from '../errors.js';
  * @param{NetworkRepository} params.networkRepository
  * @returns {Promise<Network>}
  */
-const createNetwork = async function ({ organizationId, networkName, networkRepository }) {
+const createNetwork = async function ({
+  organizationId,
+  networkName,
+  networkRepository,
+  organizationForAdminRepository,
+}) {
+  const isOrganizationExisting = await organizationForAdminRepository.exist({
+    organizationId,
+  });
+
+  if (!isOrganizationExisting) {
+    throw new OrganizationNotFound({
+      meta: {
+        organizationId: Number(organizationId),
+      },
+    });
+  }
+
   const existingNetwork = await networkRepository.findByOrganizationId(organizationId);
 
   if (existingNetwork) {

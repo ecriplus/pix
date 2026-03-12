@@ -1,5 +1,8 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { NetworkAlreadyExistError } from '../../../../../src/organizational-entities/domain/errors.js';
+import {
+  NetworkAlreadyExistError,
+  OrganizationNotFound,
+} from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
@@ -45,6 +48,28 @@ describe('Integration | Organizational Entities | Domain | UseCase | create-netw
 
       // then
       expect(error).to.deepEqualInstance(new NetworkAlreadyExistError());
+    });
+  });
+
+  describe('when the organization does not exist', function () {
+    it('throw an error', async function () {
+      // given
+      const unknownOrganizationId = 123;
+
+      // when
+      const error = await catchErr(usecases.createNetwork)({
+        organizationId: unknownOrganizationId,
+        networkName: 'Random Network Name',
+      });
+
+      // then
+      expect(error).to.deepEqualInstance(
+        new OrganizationNotFound({
+          meta: {
+            organizationId: Number(unknownOrganizationId),
+          },
+        }),
+      );
     });
   });
 });
