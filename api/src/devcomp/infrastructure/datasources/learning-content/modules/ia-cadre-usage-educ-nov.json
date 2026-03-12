@@ -630,7 +630,7 @@
                       "description": "Professeur en cycle 2 (école primaire)",
                       "text": "Aurélie mène une séance de sensibilisation à l’IA (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/fenetre-femme.png",
+                        "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof1.png",
                         "alt": ""
                       }
                     },
@@ -639,7 +639,7 @@
                       "description": "Professeur en 4e – Français",
                       "text": "En classe, Vincent utilise un logiciel d’IA générative via un compte classe, pour comparer différentes reformulations d’une consigne et discuter collectivement de leur clarté et de leurs limites.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/bulle-homme.png",
+                        "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof2.png",
                         "alt": ""
                       }
                     },
@@ -648,7 +648,7 @@
                       "description": "Professeur en 3e – Histoire-Géographie",
                       "text": "Yori autorise les élèves à utiliser un logiciel d’IA générative chez eux pour préparer un exposé. Il les invite à se créer un compte personnel sur le logiciel.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_bureau.png",
+                        "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof3.png",
                         "alt": ""
                       }
                     },
@@ -657,7 +657,7 @@
                       "description": "Professeur en 2de – SES",
                       "text": "Antoine intègre l’IA dans un projet de recherche documentaire, avec des règles explicites (objectifs, limites, esprit critique), sans création de comptes personnels sur des logiciels d’IA.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/homme_fauteuil.png",
+                        "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof4.png",
                         "alt": ""
                       }
                     },
@@ -666,7 +666,7 @@
                       "description": "Professeur en Terminale – Mathématiques",
                       "text": "Edem donne un devoir maison sur les fonctions. Il autorise les élèves en difficulté à s’aider de l’IA pour faire leurs exercices.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-cadre-usage-nov/ordi-homme.png",
+                        "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof5.png",
                         "alt": ""
                       }
                     }
