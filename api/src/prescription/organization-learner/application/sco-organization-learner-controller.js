@@ -149,9 +149,17 @@ const generateUsername = async function (request, h, dependencies = { scoOrganiz
     .code(200);
 };
 
+const unblockOrganizationLearnerAccount = async function (request, h) {
+  const organizationLearnerId = request.params.organizationLearnerId;
+  const organizationId = request.params.organizationId;
+  await usecases.unblockOrganizationLearnerAccount({ organizationId, organizationLearnerId });
+  return h.response().code(204);
+};
+
 const scoOrganizationLearnerController = {
   createUserAndReconcileToOrganizationLearnerFromExternalUser,
   createAndReconcileUserToOrganizationLearner,
+  unblockOrganizationLearnerAccount,
   updatePassword,
   batchGenerateOrganizationLearnersUsernameWithTemporaryPassword,
   generateUsernameWithTemporaryPassword,

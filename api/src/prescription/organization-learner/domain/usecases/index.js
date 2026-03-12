@@ -107,6 +107,7 @@ import { getAttestationPdfFromFilters } from './get-attestation-pdf-from-filters
 import { getOrganizationLearner } from './get-organization-learner.js';
 import { getOrganizationLearnerActivity } from './get-organization-learner-activity.js';
 import { getOrganizationToJoin } from './get-organization-to-join.js';
+import { unblockOrganizationLearnerAccount } from './unblock-organization-learner-account.js';
 import { updateOrganizationLearnerDependentUserPassword } from './update-organization-learner-dependent-user-password.js';
 
 const usecasesWithoutInjectedDependencies = {
@@ -131,6 +132,7 @@ const usecasesWithoutInjectedDependencies = {
   getOrganizationLearnerActivity,
   getOrganizationLearnerStatistics: getCampaignParticipationStatistics,
   getOrganizationToJoin,
+  unblockOrganizationLearnerAccount,
   updateOrganizationLearnerDependentUserPassword,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

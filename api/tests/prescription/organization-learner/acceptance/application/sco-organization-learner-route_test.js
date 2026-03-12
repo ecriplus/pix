@@ -1,4 +1,5 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,
@@ -335,6 +336,58 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
 
       // then
       expect(response.statusCode).to.equal(403);
+    });
+  });
+
+  describe('PUT /api/organizations/{organizationId}/sco-organization-learners/{id}/unblock', function () {
+    it('unblocks the organization learner account and returns 204', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization({
+        type: 'SCO',
+        isManagingStudents: true,
+      }).id;
+      const organizationMemberId = databaseBuilder.factory.buildUser.withRawPassword().id;
+      databaseBuilder.factory.buildMembership({
+        organizationId,
+        userId: organizationMemberId,
+        organizationRole: Membership.roles.MEMBER,
+      });
+
+      const blockedUserId = databaseBuilder.factory.buildUser.withoutPixAuthenticationMethod().id;
+      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({
+        externalIdentifier: 'samlId',
+        userId: blockedUserId,
+      });
+      databaseBuilder.factory.buildUserLogin({
+        userId: blockedUserId,
+        blockedAt: new Date(Date.now() + 3600 * 1000),
+        failureCount: 10,
+      });
+      const organizationLearnerId = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+        firstName: 'TemporaryBlocked',
+        lastName: 'User',
+        userId: blockedUserId,
+        organizationId,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'PUT',
+        url: `/api/organizations/${organizationId}/sco-organization-learners/${organizationLearnerId}/unblock`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: organizationMemberId }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+
+      const userLogins = await knex('user-logins');
+      const formerlyBlockedUser = userLogins.find((userLogin) => userLogin.userId === blockedUserId);
+      expect(formerlyBlockedUser.blockedAt).to.be.null;
+      expect(formerlyBlockedUser.failureCount).to.equal(0);
     });
   });
 });

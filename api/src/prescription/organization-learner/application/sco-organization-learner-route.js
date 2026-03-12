@@ -216,6 +216,21 @@ const register = async function (server) {
         tags: ['api', 'sco-organization-learners'],
       },
     },
+    {
+      method: 'PUT',
+      path: '/api/organizations/{organizationId}/sco-organization-learners/{organizationLearnerId}/unblock',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToScoOrganizationAndManagesStudents,
+            assign: 'belongsToScoOrganizationAndManageStudents',
+          },
+        ],
+        handler: scoOrganizationLearnerController.unblockOrganizationLearnerAccount,
+        notes: ["- Permet à un membre d'une organisation de débloquer le compte d'un élève"],
+        tags: ['api', 'sco-organization-learners'],
+      },
+    },
   ]);
 };
 
