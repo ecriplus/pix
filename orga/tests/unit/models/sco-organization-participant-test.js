@@ -156,4 +156,38 @@ module('Unit | Model | sco-organization-participant', function (hooks) {
       assert.true(organizationScoParticipant.displayAddUsernameAuthentication);
     });
   });
+
+  module('#isBlockedOrTemporarilyBlocked', function (hooks) {
+    let store;
+    hooks.beforeEach(function () {
+      store = this.owner.lookup('service:store');
+    });
+
+    test('it returns false when the organization participant is not blocked or temporarily blocked', function (assert) {
+      const organizationScoParticipant = store.createRecord('sco-organization-participant', {
+        isBlocked: false,
+        isTemporarilyBlocked: false,
+      });
+
+      assert.false(organizationScoParticipant.isBlockedOrTemporarilyBlocked);
+    });
+
+    test('it returns true when the organization participant is blocked', function (assert) {
+      const organizationScoParticipant = store.createRecord('sco-organization-participant', {
+        isBlocked: true,
+        isTemporarilyBlocked: false,
+      });
+
+      assert.true(organizationScoParticipant.isBlockedOrTemporarilyBlocked);
+    });
+
+    test('it returns true when the organization participant is temporarily blocked', function (assert) {
+      const organizationScoParticipant = store.createRecord('sco-organization-participant', {
+        isBlocked: false,
+        isTemporarilyBlocked: true,
+      });
+
+      assert.true(organizationScoParticipant.isBlockedOrTemporarilyBlocked);
+    });
+  });
 });
