@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
@@ -147,8 +145,14 @@ function _toComplementaryCertificationCourseResultForJuryCertification(
   complementaryCertificationCourseResults,
   badgeIdAndLabels,
 ) {
-  const [complementaryCertificationCourseResultWithExternal, commonComplementaryCertificationCourseResult] =
-    _.partition(complementaryCertificationCourseResults, 'hasExternalJury');
+  const { complementaryCertificationCourseResultWithExternal, commonComplementaryCertificationCourseResult } =
+    complementaryCertificationCourseResults.reduce((acc, certificationCourseResult) => {
+      if (certificationCourseResult.hasExternalJury) {
+        acc.complementaryCertificationResultWithExternal.push(certificationCourseResult);
+      } else {
+        acc.commonComplementaryCourseResult.push(certificationCourseResult);
+      }
+    });
 
   const complementaryCertificationCourseResultsForJuryCertificationWithExternal =
     ComplementaryCertificationCourseResultForJuryCertificationWithExternal.from(
