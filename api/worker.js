@@ -24,14 +24,6 @@ const workerDirPath = dirname(fileURLToPath(import.meta.url));
 const metrics = new Metrics({ config });
 
 export async function startPgBoss() {
-  if (config.pgBoss.connexionPoolMaxSize === 0) {
-    logger.info(
-      'Pgboss will not be started and configured as connexionPoolMaxSize is set to 0. ' +
-        'Please set a value greater than zero on environment variable "PGBOSS_CONNECTION_POOL_MAX_SIZE" to be able to process jobs.',
-    );
-    return null;
-  }
-
   logger.info('Starting pg-boss');
 
   pgBoss.on('monitor-states', (state) => {

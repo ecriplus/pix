@@ -7,7 +7,7 @@ import { JobGroup } from '../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../src/shared/config.js';
 import { AuditLoggingJob } from '../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { JobExpireIn } from '../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { registerJobs, startPgBoss } from '../../worker.js';
+import { registerJobs } from '../../worker.js';
 import { catchErr, expect, sinon } from '../test-helper.js';
 
 describe('Unit | Worker', function () {
@@ -214,19 +214,6 @@ describe('Unit | Worker', function () {
           expect(jobQueueStub.unscheduleCronJob).to.have.been.calledWithExactly('CpfExportSenderJob');
         });
       });
-    });
-  });
-
-  context('#startPgBoss', function () {
-    it('should return null when pgboss connexionPoolMaxSize is 0', async function () {
-      //given
-      sinon.stub(config.pgBoss, 'connexionPoolMaxSize').value(0);
-
-      //when
-      const pgboss = await startPgBoss();
-
-      //then
-      expect(pgboss).to.be.null;
     });
   });
 });
