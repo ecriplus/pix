@@ -1,8 +1,7 @@
-import { fillByLabel, render, within } from '@1024pix/ember-testing-library';
+import { fillByLabel, render, waitForElementToBeRemoved, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
-import { fillIn } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import InformationSectionEdit from 'pix-admin/components/organizations/information-section-edit';
 import { module, test } from 'qunit';
@@ -12,9 +11,10 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | organizations/information-section-edit', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let findAllStub, store;
   hooks.beforeEach(function () {
-    const store = this.owner.lookup('service:store');
-    const findAllStub = sinon.stub(store, 'findAll');
+    store = this.owner.lookup('service:store');
+    findAllStub = sinon.stub(store, 'findAll');
 
     findAllStub
       .withArgs('administration-team')
@@ -35,6 +35,12 @@ module('Integration | Component | organizations/information-section-edit', funct
       .resolves([
         store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
         store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
+      ]);
+    findAllStub
+      .withArgs('organization-learner-import-format')
+      .resolves([
+        store.createRecord('organization-learner-import-format', { id: '123', name: 'GENERIC' }),
+        store.createRecord('organization-learner-import-format', { id: '456', name: 'ONDE' }),
       ]);
   });
 
@@ -664,71 +670,288 @@ module('Integration | Component | organizations/information-section-edit', funct
       );
     });
   });
-});
 
-module('Rendering', function (hooks) {
-  setupIntlRenderingTest(hooks);
-  hooks.beforeEach(function () {
-    const store = this.owner.lookup('service:store');
-    const findAllStub = sinon.stub(store, 'findAll');
+  module('Features', function () {
+    module('when Learner Import is not selected', function () {
+      test('it should hide IS_MANAGING_STUDENTS feature for non SCO organization', async function (assert) {
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          isLearnerImportEnabled: true,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: {},
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        assert.notOk(
+          screen.queryByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')}`,
+          }),
+        );
+      });
+      test('it should hide LEARNER IMPORT feature when there is no import format available', async function (assert) {
+        findAllStub.withArgs('organization-learner-import-format').resolves([]);
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: {},
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        assert.notOk(
+          screen.queryByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+      });
+      test('should display a modal when user activate learner import', async function (assert) {
+        // given
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: {},
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
 
-    findAllStub
-      .withArgs('administration-team')
-      .resolves([
-        store.createRecord('administration-team', { id: '123', name: 'Équipe 1' }),
-        store.createRecord('administration-team', { id: '456', name: 'Équipe 2' }),
-      ]);
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        await click(
+          screen.getByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+        const modale = await screen.findByRole('dialog');
 
-    findAllStub
-      .withArgs('country')
-      .resolves([
-        store.createRecord('country', { code: '99101', name: 'Danemark' }),
-        store.createRecord('country', { code: '99100', name: 'France' }),
-      ]);
+        assert.ok(
+          within(modale).getByRole('heading', {
+            level: 1,
+            name: t('components.organizations.editing.organization-learner-import-format.dialog.title'),
+          }),
+        );
+      });
 
-    findAllStub
-      .withArgs('organization-learner-type')
-      .resolves([
-        store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
-        store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
-      ]);
+      test('should unchecked import feature when user close dialog', async function (assert) {
+        // given
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: {},
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
 
-    class AccessControlStub extends Service {
-      hasAccessToOrganizationActionsScope = true;
-    }
-    this.owner.register('service:access-control', AccessControlStub);
-  });
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        await click(
+          screen.getByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+        const modale = await screen.findByRole('dialog');
+        // await this.pauseTest();
+        await click(within(modale).getByRole('button', { name: t('common.actions.close') }));
+        // await this.pauseTest();
+        await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
+        assert.ok(
+          screen.getByRole('checkbox', {
+            checked: false,
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+      });
 
-  test('it should render the organization edit form with all sections', async function (assert) {
-    // given
-    const organization = EmberObject.create({
-      id: 1,
-      name: 'Organization SCO',
-      externalId: 'VELIT',
-      provinceCode: 'h50',
-      email: 'sco.generic.account@example.net',
-      administrationTeamId: '123',
-      isOrganizationSCO: true,
-      credit: 0,
-      documentationUrl: 'https://pix.fr/',
-      features: {},
+      test('should close dialog feature and leave import feature active', async function (assert) {
+        // given
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: {},
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
+
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        await click(
+          screen.getByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+        const modale = await screen.findByRole('dialog');
+        await click(
+          within(modale).getByRole('checkbox', {
+            name: t('components.organizations.editing.organization-learner-import-format.dialog.confirmation'),
+          }),
+        );
+        await click(within(modale).getByRole('button', { name: t('common.actions.confirm') }));
+        await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
+        assert.ok(
+          screen.getByRole('checkbox', {
+            checked: true,
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+      });
     });
 
-    // when
-    const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+    module('when Learner Import is active', function () {
+      test('it should hide IS_MANAGING_STUDENTS feature for SCO organization', async function (assert) {
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: true,
+          isLearnerImportEnabled: true,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: { LEARNER_IMPORT: { active: true, params: { name: 'GENERIC' } } },
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        assert.notOk(
+          screen.queryByRole('checkbox', {
+            name: `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')}`,
+          }),
+        );
+      });
+      test('it should display selected import format', async function (assert) {
+        // given
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          isLearnerImportEnabled: true,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
 
-    // then
-    assert.dom(screen.getByText(t('components.organizations.creation.general-information'))).exists();
-    assert.dom(screen.getByText(t('components.organizations.creation.configuration'))).exists();
-    assert.dom(screen.getByText(t('components.organizations.creation.features'))).exists();
-    assert
-      .dom(
-        screen.getByText(
-          `${t('components.organizations.creation.dpo.definition')} (${t('components.organizations.creation.dpo.acronym')})`,
-        ),
-      )
-      .exists();
-    assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
-    assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        assert.ok(
+          screen.getByRole('checkbox', {
+            checked: true,
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+        const select = screen.getByRole('button', { name: /Format d'import/ });
+        assert.ok(within(select).getByText('ONDE'));
+      });
+      test('it should hide the select import format', async function (assert) {
+        // given
+        const organization = EmberObject.create({
+          id: 1,
+          name: 'Organization',
+          externalId: 'VELIT',
+          provinceCode: 'h50',
+          email: 'generic.account@example.net',
+          isOrganizationSCO: false,
+          credit: 0,
+          documentationUrl: 'https://pix.fr/',
+          features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
+          administrationTeamId: 123,
+          countryCode: 99100,
+        });
+
+        //when
+        const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+        await click(
+          screen.getByRole('checkbox', {
+            checked: true,
+            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
+          }),
+        );
+        assert.notOk(
+          screen.queryByLabelText(
+            t('components.organizations.editing.organization-learner-import-format.selector.label'),
+          ),
+        );
+      });
+    });
+  });
+
+  module('Rendering', function (hooks) {
+    hooks.beforeEach(function () {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+    });
+
+    test('it should render the organization edit form with all sections', async function (assert) {
+      // given
+      const organization = EmberObject.create({
+        id: 1,
+        name: 'Organization SCO',
+        externalId: 'VELIT',
+        provinceCode: 'h50',
+        email: 'sco.generic.account@example.net',
+        administrationTeamId: '123',
+        isOrganizationSCO: true,
+        credit: 0,
+        documentationUrl: 'https://pix.fr/',
+        features: {},
+      });
+
+      // when
+      const screen = await render(<template><InformationSectionEdit @organization={{organization}} /></template>);
+
+      // then
+      assert.dom(screen.getByText(t('components.organizations.creation.general-information'))).exists();
+      assert.dom(screen.getByText(t('components.organizations.creation.configuration'))).exists();
+      assert.dom(screen.getByText(t('components.organizations.creation.features'))).exists();
+      assert
+        .dom(
+          screen.getByText(
+            `${t('components.organizations.creation.dpo.definition')} (${t('components.organizations.creation.dpo.acronym')})`,
+          ),
+        )
+        .exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+    });
   });
 });

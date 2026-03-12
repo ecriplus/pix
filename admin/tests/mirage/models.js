@@ -47,6 +47,7 @@ import oidcIdentityProvider from './models/oidc-identity-provider';
 import organization from './models/organization';
 import organizationInvitation from './models/organization-invitation';
 import organizationLearner from './models/organization-learner';
+import organizationLearnerImportFormat from './models/organization-learner-import-format';
 import organizationMembership from './models/organization-membership';
 import organizationPlace from './models/organization-place';
 import profile from './models/profile';
@@ -121,6 +122,7 @@ export default {
   organization,
   organizationInvitation,
   organizationLearner,
+  organizationLearnerImportFormat,
   organizationMembership,
   organizationPlace,
   profile,

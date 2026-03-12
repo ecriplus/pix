@@ -741,7 +741,7 @@ export default function routes() {
       ],
     };
   });
-
+  this.get('/admin/organization-learner-import-formats');
   this.get('/admin/combined-course-blueprints');
   this.post('/admin/combined-course-blueprints');
   this.post(
