@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.354.0](https://github.com/1024pix/pix/compare/v5.353.0...v5.354.0) (2026-03-12)
+
+### :rocket: Amélioration
+
+- [#15423](https://github.com/1024pix/pix/pull/15423) : modif article CY_Phishing avancé 
+- [#15397](https://github.com/1024pix/pix/pull/15397) Créer un nouveau réseau via Pix-Admin (PIX-21296). 
+
+### :arrow_up: Montée de version
+
+- [#15435](https://github.com/1024pix/pix/pull/15435) Update dependency @1024pix/epreuves-components to ^4.0.2 (api) 
+- [#15436](https://github.com/1024pix/pix/pull/15436) Update dependency @1024pix/epreuves-components to ^4.0.2 (junior) 
+- [#15249](https://github.com/1024pix/pix/pull/15249) Update dependency @ember/optional-features to v3 (admin) 
+- [#15432](https://github.com/1024pix/pix/pull/15432) Update dependency ember-data to ~5.8.0 (admin) 
+- [#15433](https://github.com/1024pix/pix/pull/15433) Update dependency ember-data to ~5.8.0 (junior)
+
 # [5.353.0](https://github.com/1024pix/pix/compare/v5.352.0...v5.353.0) (2026-03-11)
 
 ### :rocket: Amélioration
