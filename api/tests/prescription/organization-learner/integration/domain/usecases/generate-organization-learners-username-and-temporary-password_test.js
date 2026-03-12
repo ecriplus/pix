@@ -1,13 +1,7 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { organizationLearnerIdentityRepository } from '../../../../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
-import * as userRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { OrganizationLearnerPasswordResetDTO } from '../../../../../../src/prescription/organization-learner/domain/models/OrganizationLearnerPasswordResetDTO.js';
-import { generateOrganizationLearnersUsernameAndTemporaryPassword } from '../../../../../../src/prescription/organization-learner/domain/usecases/generate-organization-learners-username-and-temporary-password.js';
+import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../../src/shared/domain/errors.js';
-import * as userReconciliationService from '../../../../../../src/shared/domain/services/user-reconciliation-service.js';
-import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import * as userLoginRepository from '../../../../../../src/shared/infrastructure/repositories/user-login-repository.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | generate organization learners username and temporary password', function () {
@@ -140,18 +134,12 @@ describe('Integration | UseCases | generate organization learners username and t
         };
 
         // when
-        const result = await generateOrganizationLearnersUsernameAndTemporaryPassword({
+        const result = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
-          userLoginRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -215,18 +203,12 @@ describe('Integration | UseCases | generate organization learners username and t
         ];
 
         // when
-        const result = await generateOrganizationLearnersUsernameAndTemporaryPassword({
+        const result = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
-          userLoginRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -302,18 +284,12 @@ describe('Integration | UseCases | generate organization learners username and t
         ];
 
         // when
-        const error = await catchErr(generateOrganizationLearnersUsernameAndTemporaryPassword)({
+        const error = await catchErr(usecases.generateOrganizationLearnersUsernameAndTemporaryPassword)({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
-          userLoginRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -345,18 +321,12 @@ describe('Integration | UseCases | generate organization learners username and t
           ];
 
           // when
-          const error = await catchErr(generateOrganizationLearnersUsernameAndTemporaryPassword)({
+          const error = await catchErr(usecases.generateOrganizationLearnersUsernameAndTemporaryPassword)({
             organizationId: organization.id,
             organizationLearnersId,
             userId,
-            authenticationMethodRepository,
-            organizationRepository,
-            organizationLearnerIdentityRepository,
-            userRepository,
-            userLoginRepository,
             cryptoService,
             passwordGenerator,
-            userReconciliationService,
           });
 
           // then
