@@ -17,6 +17,7 @@ const schema = Joi.object({
 
 class OrganizationForAdmin {
   #provinceCode;
+  shouldDeletePreviousLearners = false;
 
   constructor({
     id,
@@ -227,32 +228,38 @@ class OrganizationForAdmin {
       : features[ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key].active;
   }
 
-  updateWithDataProtectionOfficerAndTags(organization, dataProtectionOfficer = {}, tags = []) {
+  updateWithDataProtectionOfficerAndTags(newOrganization, dataProtectionOfficer = {}, tags = []) {
     const isAEFE = Boolean(tags.find((tag) => tag.name === 'AEFE'));
 
-    if (organization.name) this.name = organization.name;
-    if (organization.type) this.type = organization.type;
-    if (organization.logoUrl) this.logoUrl = organization.logoUrl;
-    this.email = isEmpty(organization.email) ? null : organization.email;
-    this.credit = organization.credit;
-    this.externalId = organization.externalId;
-    this.provinceCode = organization.provinceCode;
-    this.documentationUrl = isEmpty(organization.documentationUrl) ? null : organization.documentationUrl;
-    this.updateIsManagingStudents(organization.features);
-    this.showSkills = organization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
-    this.identityProviderForCampaigns = organization.identityProviderForCampaigns;
+    if (newOrganization.name) this.name = newOrganization.name;
+    if (newOrganization.type) this.type = newOrganization.type;
+    if (newOrganization.logoUrl) this.logoUrl = newOrganization.logoUrl;
+    this.email = isEmpty(newOrganization.email) ? null : newOrganization.email;
+    this.credit = newOrganization.credit;
+    this.externalId = newOrganization.externalId;
+    this.provinceCode = newOrganization.provinceCode;
+    this.documentationUrl = isEmpty(newOrganization.documentationUrl) ? null : newOrganization.documentationUrl;
+    this.updateIsManagingStudents(newOrganization.features);
+    this.showSkills = newOrganization.features[ORGANIZATION_FEATURE.SHOW_SKILLS.key].active;
+    this.identityProviderForCampaigns = newOrganization.identityProviderForCampaigns;
     this.dataProtectionOfficer.updateInformation(dataProtectionOfficer);
-    this.features = organization.features;
+    if (
+      !this.features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key]?.active &&
+      newOrganization.features[ORGANIZATION_FEATURE.LEARNER_IMPORT.key]?.active
+    ) {
+      this.shouldDeletePreviousLearners = true;
+    }
+    this.features = newOrganization.features;
     this.features[ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key] = {
       active: this.type === 'SCO' && (this.isManagingStudents || isAEFE),
       params: null,
     };
     this.tagsToAdd = differenceBy(tags, this.tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
     this.tagsToRemove = differenceBy(this.tags, tags, 'id').map(({ id }) => ({ tagId: id, organizationId: this.id }));
-    if (organization.administrationTeamId) this.administrationTeamId = organization.administrationTeamId;
-    if (organization.countryCode) this.countryCode = organization.countryCode;
-    if (organization.organizationLearnerType.id) {
-      this.organizationLearnerType = organization.organizationLearnerType;
+    if (newOrganization.administrationTeamId) this.administrationTeamId = newOrganization.administrationTeamId;
+    if (newOrganization.countryCode) this.countryCode = newOrganization.countryCode;
+    if (newOrganization.organizationLearnerType.id) {
+      this.organizationLearnerType = newOrganization.organizationLearnerType;
     }
   }
 
