@@ -108,7 +108,7 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
       }
     }
 
-    const candidate = new Candidate({
+    const candidate = Candidate.create({
       ...candidateData,
       birthCountry,
       birthINSEECode,

@@ -1,4 +1,6 @@
+import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { SCOCertificationCandidate } from '../../../../src/certification/enrolment/domain/models/SCOCertificationCandidate.js';
+import { domainBuilder } from '../domain-builder.js';
 
 const buildSCOCertificationCandidate = function ({
   id = 123,
@@ -9,7 +11,8 @@ const buildSCOCertificationCandidate = function ({
   birthINSEECode = '66001',
   sessionId = 456,
   organizationLearnerId = 789,
-  subscriptions = [],
+  subscriptions = [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
+  subscription = Frameworks.CORE,
 } = {}) {
   return new SCOCertificationCandidate({
     id,
@@ -21,6 +24,7 @@ const buildSCOCertificationCandidate = function ({
     sessionId,
     organizationLearnerId,
     subscriptions,
+    subscription,
   });
 };
 

@@ -2,6 +2,7 @@
  * @typedef {import ('./Subscription.js').Subscription} Subscription
  */
 import { CertificationCandidatesError } from '../../../../shared/domain/errors.js';
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { validate } from '../validators/candidate-validator.js';
 
@@ -34,6 +35,7 @@ export class Candidate {
     billingMode,
     prepaymentCode,
     hasSeenCertificationInstructions = false,
+    subscription,
     subscriptions = [],
     accessibilityAdjustmentNeeded,
   } = {}) {
@@ -59,9 +61,22 @@ export class Candidate {
     this.billingMode = billingMode;
     this.prepaymentCode = prepaymentCode;
     this.hasSeenCertificationInstructions = hasSeenCertificationInstructions;
+    this.subscription = subscription;
     this.subscriptions = subscriptions;
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
+  }
+
+  static create(candidateDTO) {
+    const complementaryKey = candidateDTO.subscriptions.find((sub) => {
+      return sub.type === SUBSCRIPTION_TYPES.COMPLEMENTARY;
+    })?.complementaryCertificationKey;
+    const mainSubscription = complementaryKey || Frameworks.CORE;
+
+    return new Candidate({
+      ...candidateDTO,
+      subscription: mainSubscription,
+    });
   }
 
   isReconciled() {

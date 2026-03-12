@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
@@ -50,6 +51,67 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
         },
       ],
     };
+  });
+
+  context('create', function () {
+    context('when the candidate subscription is registered for CORE', function () {
+      it('should create a new Candidate with a CORE subscription attribute', function () {
+        // given
+        const candidateDTO = domainBuilder.certification.enrolment.buildCandidate({
+          ...candidateData,
+          subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
+        });
+
+        // when
+        const expectedCandidate = Candidate.create(candidateDTO);
+
+        // then
+        expect(expectedCandidate.subscription).to.equal(Frameworks.CORE);
+      });
+    });
+
+    context('when the candidate is registered for a double certification', function () {
+      it('should create a new Candidate with a CORE subscription attribute', function () {
+        // given
+        const candidateDTO = domainBuilder.certification.enrolment.buildCandidate({
+          ...candidateData,
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildCoreSubscription(),
+            domainBuilder.certification.enrolment.buildComplementarySubscription({
+              certificationCandidateId: null,
+              complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+            }),
+          ],
+        });
+
+        // when
+        const expectedCandidate = Candidate.create(candidateDTO);
+
+        // then
+        expect(expectedCandidate.subscription).to.equal(Frameworks.CLEA);
+      });
+    });
+
+    context('when the candidate is registered for a Pix+ certification', function () {
+      it('should create a new Candidate with a PIX+ subscription attribute', function () {
+        // given
+        const candidateDTO = domainBuilder.certification.enrolment.buildCandidate({
+          ...candidateData,
+          subscriptions: [
+            domainBuilder.certification.enrolment.buildComplementarySubscription({
+              certificationCandidateId: null,
+              complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            }),
+          ],
+        });
+
+        // when
+        const expectedCandidate = Candidate.create(candidateDTO);
+
+        // then
+        expect(expectedCandidate.subscription).to.equal(Frameworks.DROIT);
+      });
+    });
   });
 
   context('updateBirthInformation', function () {

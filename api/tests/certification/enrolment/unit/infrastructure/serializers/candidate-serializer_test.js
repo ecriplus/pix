@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/candidate-serializer.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CertificationCandidate } from '../../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
@@ -106,6 +107,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
         domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData,
           complementaryCertificationKey: ComplementaryCertificationKeys.PIX_PLUS_PRO_SANTE,
+          subscription: Frameworks.PRO_SANTE,
           subscriptions: [
             domainBuilder.certification.enrolment.buildComplementarySubscription({
               certificationCandidateId: null,

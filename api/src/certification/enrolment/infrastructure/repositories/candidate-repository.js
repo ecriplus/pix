@@ -138,7 +138,7 @@ export async function save({ candidates }) {
       (insertedCandidateData) =>
         insertedCandidateData.firstName === candidate.firstName &&
         insertedCandidateData.lastName === candidate.lastName &&
-        dayjs(insertedCandidateData.birthdate).format('YYYY-MM-DD') === candidate.birthdate,
+        dayjs(insertedCandidateData.birthdate).format('YYYY-MM-DD') === dayjs(candidate.birthdate).format('YYYY-MM-DD'),
     ).id;
 
     subscriptionsData.push(

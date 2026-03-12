@@ -76,6 +76,8 @@ async function _deleteExistingCandidatesInSession({ candidateRepository, session
 }
 
 async function _saveCandidates({ candidates, sessionId, candidateRepository }) {
-  const candidatesToSave = candidates.map((candidate) => new Candidate({ ...candidate, sessionId }));
+  const candidatesToSave = candidates.map((candidate) => {
+    return Candidate.create({ ...candidate, sessionId });
+  });
   await candidateRepository.save({ candidates: candidatesToSave });
 }

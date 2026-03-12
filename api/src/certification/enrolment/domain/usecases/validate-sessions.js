@@ -133,7 +133,7 @@ async function _createValidCertificationCandidates({
 
     certificationCandidateErrors.push(...certificationCandidateComplementaryErrors);
 
-    const candidate = new Candidate({
+    const candidate = Candidate.create({
       ...candidateDTO,
       sessionId,
       billingMode: billingMode || candidateDTO.billingMode,

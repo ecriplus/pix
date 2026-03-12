@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
+import { Frameworks } from '../../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as certificationCandidatesOdsService from '../../../../../../../src/certification/enrolment/domain/services/certification-candidates-ods-service.js';
 import * as centerRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
@@ -204,7 +205,12 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
 
     // then
     candidateList = _buildCandidateList({ sessionId });
-    const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
+    const expectedCandidates = candidateList.map((candidate) => {
+      return domainBuilder.certification.enrolment.buildCandidate({
+        ...candidate,
+        subscription: candidate.subscriptions[0].complementaryCertificationKey || Frameworks.CORE,
+      });
+    });
     expect(actualCandidates).to.deep.equal(expectedCandidates);
   });
 
@@ -241,7 +247,12 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
           ComplementaryCertificationKeys.CLEA,
         ],
       });
-      const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
+      const expectedCandidates = candidateList.map((candidate) => {
+        return domainBuilder.certification.enrolment.buildCandidate({
+          ...candidate,
+          subscription: candidate.subscriptions[0].complementaryCertificationKey || Frameworks.CORE,
+        });
+      });
 
       // when
       const actualCandidates =
@@ -315,7 +326,12 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     const odsFilePath = `${__dirname}/attendance_sheet_extract_with_billing_ok_test.ods`;
     const odsBuffer = await readFile(odsFilePath);
     candidateList = _buildCandidateList({ billingModes: [BILLING_MODES.PAID, BILLING_MODES.FREE], sessionId });
-    const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
+    const expectedCandidates = candidateList.map((candidate) => {
+      return domainBuilder.certification.enrolment.buildCandidate({
+        ...candidate,
+        subscription: candidate.subscriptions[0].complementaryCertificationKey || Frameworks.CORE,
+      });
+    });
 
     // when
     const actualCandidates =
@@ -357,7 +373,12 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
       });
 
     // then
-    const expectedCandidates = candidateList.map(domainBuilder.certification.enrolment.buildCandidate);
+    const expectedCandidates = candidateList.map((candidate) => {
+      return domainBuilder.certification.enrolment.buildCandidate({
+        ...candidate,
+        subscription: candidate.subscriptions[0].complementaryCertificationKey || Frameworks.CORE,
+      });
+    });
     expect(actualCandidates).to.deep.equal(expectedCandidates);
   });
 });

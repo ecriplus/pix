@@ -45,16 +45,10 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
         domainBuilder.buildSCOCertificationCandidate({
           ...scoCandidateAlreadySaved1,
           organizationLearnerId: scoCandidateAlreadySaved1.organizationLearnerId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
         domainBuilder.buildSCOCertificationCandidate({
           ...scoCandidateAlreadySaved2,
           organizationLearnerId: scoCandidateAlreadySaved2.organizationLearnerId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
         domainBuilder.buildSCOCertificationCandidate({
           id: null,
@@ -65,17 +59,11 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
           birthINSEECode: '75005',
           organizationLearnerId: organizationLearnerId3,
           sessionId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
         domainBuilder.buildSCOCertificationCandidate({
           id: null,
           organizationLearnerId: organizationLearnerId4,
           sessionId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
       ];
 
@@ -94,6 +82,7 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
         'birthINSEECode',
         'organizationLearnerId',
         'sessionId',
+        'subscription',
       ]);
       const actualCandidates = candidatesToBeCompared(candidates);
       const expectedCandidates = candidatesToBeCompared(scoCandidates);
@@ -123,9 +112,6 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
         domainBuilder.buildSCOCertificationCandidate({
           ...scoCandidateAlreadySaved1,
           organizationLearnerId: scoCandidateAlreadySaved1.organizationLearnerId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
         domainBuilder.buildSCOCertificationCandidate({
           id: null,
@@ -136,20 +122,11 @@ describe('Certification | Enrolment | Integration | Repository | SCOCertificatio
           birthINSEECode: '75005',
           organizationLearnerId: organizationLearnerId2,
           sessionId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
         }),
         domainBuilder.buildSCOCertificationCandidate({
           id: null,
           organizationLearnerId: organizationLearnerId3,
           sessionId,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-            domainBuilder.certification.enrolment.buildComplementarySubscription({
-              certificationCandidateId: null,
-            }),
-          ],
         }),
       ];
 

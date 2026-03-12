@@ -19,7 +19,7 @@ export async function deserialize(json) {
       }),
   );
 
-  return new Candidate({
+  return Candidate.create({
     ...deserializedCandidate,
     id: deserializedCandidate?.id ? parseInt(deserializedCandidate?.id) : null,
     subscriptions,

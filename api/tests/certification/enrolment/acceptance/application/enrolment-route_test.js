@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
+import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
+import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
 import {
@@ -8,6 +10,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  knex,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -165,11 +168,50 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | enrolm
               type: 'subscriptions',
               id: sinon.match.string,
               attributes: {
-                type: 'CORE',
+                type: SUBSCRIPTION_TYPES.CORE,
                 'complementary-certification-key': null,
               },
             },
           ],
+        });
+
+        const savedCandidate = await knex('certification-candidates')
+          .select(
+            'firstName',
+            'lastName',
+            'birthdate',
+            'birthINSEECode',
+            'birthCity',
+            'birthCountry',
+            'sex',
+            'sessionId',
+            'organizationLearnerId',
+            'subscription',
+            'email',
+            'externalId',
+            'extraTimePercentage',
+            'billingMode',
+            'prepaymentCode',
+          )
+          .where({ sessionId, organizationLearnerId: organizationLearner.id })
+          .first();
+
+        expect(savedCandidate).to.deep.equal({
+          firstName: organizationLearner.firstName,
+          lastName: organizationLearner.lastName,
+          birthdate: organizationLearner.birthdate,
+          birthINSEECode: birthCityCode,
+          birthCity: organizationLearner.birthCity,
+          birthCountry: country.commonName,
+          sex: organizationLearner.sex,
+          sessionId,
+          organizationLearnerId: organizationLearner.id,
+          subscription: Frameworks.CORE,
+          email: null,
+          externalId: null,
+          extraTimePercentage: null,
+          billingMode: null,
+          prepaymentCode: null,
         });
       });
     });
