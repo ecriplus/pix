@@ -128,6 +128,7 @@ async function selectCertificationsToProcess(startId, chunkSize) {
     )
     .where('certification-courses.id', '>=', startId)
     .where('certification-courses.version', 3)
+    .where('certification-courses.versionId', null)
     .groupBy('certification-courses.id', 'certification-candidates.id')
     .orderBy('certification-courses.id', 'asc')
     .limit(chunkSize);

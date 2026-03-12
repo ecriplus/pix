@@ -155,6 +155,52 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
     }
   });
 
+  it('should not update certification courses and candidates that already have the informations', async function () {
+    const versionId = databaseBuilder.factory.buildCertificationVersion({
+      startDate: new Date('2026-01-01'),
+      expirationDate: null,
+      scope: SCOPES.CORE,
+    }).id;
+
+    const sessionId = databaseBuilder.factory.buildSession().id;
+
+    const userId = databaseBuilder.factory.buildUser().id;
+    const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+      sessionId,
+      reconciledAt: new Date(),
+      userId,
+    }).id;
+
+    const certificationCoursesId = databaseBuilder.factory.buildCertificationCourse({
+      sessionId,
+      userId,
+      version: AlgorithmEngineVersion.V3,
+      versionId: versionId,
+      candidateId,
+    }).id;
+
+    databaseBuilder.factory.buildCoreSubscription({
+      certificationCandidateId: candidateId,
+    });
+
+    await databaseBuilder.commit();
+
+    const certificationCourseDataBefore = await knex('certification-courses').first();
+    expect(certificationCourseDataBefore.versionId).to.equal(versionId);
+    expect(certificationCourseDataBefore.candidateId).to.equal(candidateId);
+
+    await script.handle({
+      options: { dryRun: false, startId: certificationCoursesId, chunkSize: 2 },
+      logger,
+    });
+
+    const certificationCourseDataAfter = await knex('certification-courses').first();
+    expect(certificationCourseDataAfter.versionId).to.equal(versionId);
+    expect(certificationCourseDataAfter.candidateId).to.equal(candidateId);
+    expect(logger.info.getCall(0)).to.have.been.calledWithExactly('Script execution started');
+    expect(logger.info.getCall(1)).to.have.been.calledWithExactly('No more certifications to process youpi');
+  });
+
   it('should provide appropriate logger informations', async function () {
     const startDateCurrentVersion = new Date('2026-01-01');
     const expirationDateCurrentVersion = null;
