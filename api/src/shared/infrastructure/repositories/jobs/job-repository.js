@@ -1,8 +1,17 @@
 import Joi from 'joi';
+import PgBoss from 'pg-boss';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../../domain/DomainTransaction.js';
+import { config } from '../../../config.js';
 import { EntityValidationError } from '../../../domain/errors.js';
+
+const monitorStateIntervalSeconds = config.pgBoss.monitorStateIntervalSeconds;
+
+export const pgBoss = new PgBoss({
+  connectionString: config.pgBoss.databaseUrl,
+  max: config.pgBoss.connexionPoolMaxSize,
+  ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
+  archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
+});
 
 export class JobRepository {
   #schema = Joi.object({
@@ -41,45 +50,28 @@ export class JobRepository {
     this.expireIn = config.expireIn || JobExpireIn.INFINITE;
     this.priority = config.priority || JobPriority.DEFAULT;
 
-    this.#validate();
-  }
-
-  #buildPayload(data) {
-    return {
-      name: this.name,
-      retrylimit: this.retry.retryLimit,
-      retrydelay: this.retry.retryDelay,
-      retrybackoff: this.retry.retryBackoff,
-      expirein: this.expireIn,
-      data,
-      on_complete: true,
-      priority: this.priority,
-    };
-  }
-
-  async #send(jobs) {
-    const knexConn = DomainTransaction.getConnection();
-
-    const results = await knex.batchInsert('pgboss.job', jobs).transacting(knexConn.isTransaction ? knexConn : null);
-
-    const rowCount = results.reduce((total, batchResult) => total + (batchResult.rowCount || 0), 0);
-
-    return { rowCount };
-  }
-
-  async performAsync(...data) {
-    const jobs = data.map((payload) => {
-      return this.#buildPayload(payload);
-    });
-
-    return this.#send(jobs);
-  }
-
-  #validate() {
     const { error } = this.#schema.validate(this, { allowUnknown: true });
     if (error) {
       throw EntityValidationError.fromJoiErrors(error.details);
     }
+  }
+
+  get options() {
+    return {
+      expireInSeconds: this.expireIn,
+      retryLimit: this.retry.retryLimit,
+      retryDelay: this.retry.retryDelay,
+      retryBackoff: this.retry.retryBackoff,
+      priority: this.priority,
+      onComplete: true,
+    };
+  }
+
+  async performAsync(...payloads) {
+    for (const payload of payloads) {
+      await pgBoss.send(this.name, payload, this.options);
+    }
+    return { rowCount: payloads.length };
   }
 }
 
@@ -130,7 +122,7 @@ export const JobRetry = Object.freeze({
  * @enum {string}
  */
 export const JobExpireIn = Object.freeze({
-  INFINITE: '48:00:00',
+  INFINITE: 48 * 3600,
   /*
    pg-boss n'arrête pas les jobs expirés. De plus, il empile d'autres jobs par dessus et relance le job expiré, ce qui peut provoquer des états incohérents.
    Par conséquent nous définissons 48 heures comme durée maximale, ce qui fait plus que la durée maximale d'un conteneur.
