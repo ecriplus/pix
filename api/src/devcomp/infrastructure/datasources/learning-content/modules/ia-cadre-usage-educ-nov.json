@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>L’intelligence artificielle (IA) est désormais largement présente dans la société. Elle commence à s’installer dans les pratiques professionnelles des enseignants et des personnels d’éducation. Son développement rapide suscite des interrogations légitimes au sein de la communauté éducative.</p><br><p>Pour y répondre, le ministère de l’Éducation nationale a publié en juin 2025&nbsp; le cadre d’usage de l’IA en éducation.</p><br><p>Dans ce module, vous allez découvrir les principales préconisations de ce cadre.</p>",
+    "description": "<p>L’intelligence artificielle (IA) est désormais largement présente dans la société. Elle commence à s’installer dans les pratiques professionnelles des enseignants et des personnels d’éducation. Son développement rapide suscite des interrogations légitimes au sein de la communauté éducative.</p><p>Pour y répondre, le ministère de l’Éducation nationale a publié en juin 2025&nbsp; le cadre d’usage de l’IA en éducation.</p><br><p>Dans ce module, vous allez découvrir les principales préconisations de ce cadre.</p>",
     "duration": 20,
     "level": "independent",
     "objectives": [
@@ -79,7 +79,7 @@
               "element": {
                 "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "<p>L’IA représente désormais un <strong>levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un <strong>usage éclairé et responsable</strong>.<br></p><p>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Ce cadre fournit des repères pour que&nbsp;l’usage de l’IA s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
+                "content": "<p>L’IA représente désormais un <strong>levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un <strong>usage éclairé et responsable</strong>.<br></p><p><br>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Ce cadre fournit des repères pour que&nbsp;l’usage de l’IA s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
               }
             }
           ]
@@ -527,7 +527,7 @@
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "À partir de la fiche vierge en PJ, propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement. 📎annexe_plan_accompagnement_personnalisé.pdf",
+                        "content": "À partir de la fiche vierge en PJ, propose des adaptations pédagogiques individualisées pour un élève avec des troubles du neurodéveloppement. 📎annexe_pap.pdf",
                         "isGoodAnswer": true
                       }
                     },
@@ -797,7 +797,7 @@
               "element": {
                 "id": "76081d34-b024-4409-a09a-36201ca6c91c",
                 "type": "text",
-                "content": "<p>Face au développement rapide et constant de l’IA, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de L’Éducation nationale en juin 2025, a pour objectif de promouvoir des pratiques éclairées et responsables. </p><p> [INFOGRAPHIE&nbsp;: </p><p><strong>Pour un usage éclairé et responsable de l’IA en éducation </strong>:</p><br><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et<strong> renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li><strong>Introduisez de manière progressive, encadrée et sécurisée</strong> l’usage de l’IA avec vos élèves.]</li></ul>"
+                "content": "<p>Face au développement rapide et constant de l’IA, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de L’Éducation nationale en juin 2025, a pour objectif de promouvoir des pratiques éclairées et responsables.</p>"
               }
             },
             {
@@ -1313,7 +1313,7 @@
               "element": {
                 "id": "8a352994-da21-41a3-bfb6-d87536077b2c",
                 "type": "text",
-                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫</p><p>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp; <br>Il les invite à comparer deux logiciels d’IA générative avec la même requête&nbsp;: «&nbsp;Explique-moi la méthode de la dissertation pour le bac de français et donne des exemples de sujets des années précédentes.&nbsp;»<br>Grâce à un outil proposé par leur enseignant, les élèves se rendent compte que l’énergie consommée est très importante (environ 100 wattheures).<br> </p><p>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leurs deux réponses.</p>"
+                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫</p><p><br>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp; <br>Il les invite à comparer deux logiciels d’IA générative avec la même requête&nbsp;: «&nbsp;Explique-moi la méthode de la dissertation pour le bac de français et donne des exemples de sujets des années précédentes.&nbsp;»<br>Grâce à un outil proposé par leur enseignant, les élèves se rendent compte que l’énergie consommée est très importante (environ 100 wattheures).<br> </p><p><br>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leurs deux réponses.</p>"
               }
             },
             {
