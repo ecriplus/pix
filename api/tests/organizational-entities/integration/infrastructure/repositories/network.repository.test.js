@@ -1,5 +1,6 @@
 import * as networkRepository from '../../../../../src/organizational-entities/infrastructure/repositories/network.repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repositories | network', function () {
   describe('#findAll', function () {
@@ -38,6 +39,108 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
 
         // then
         expect(foundNetworks).to.be.empty;
+      });
+    });
+  });
+
+  describe('#getById', function () {
+    describe('when the network is found', function () {
+      it('returns the network with head organization informations', async function () {
+        // given
+        const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Orga tête de réseau' });
+        const headStructureId = databaseBuilder.factory.buildStructure().id;
+
+        const network = databaseBuilder.factory.buildNetwork({ name: 'Mon super réseau' });
+
+        databaseBuilder.factory.buildFactStructure({
+          structureId: headStructureId,
+          networkId: network.id,
+          organizationId: headOrganization.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const foundNetwork = await networkRepository.getById(network.id);
+
+        // then
+        const expectedNetwork = domainBuilder.acquisition.buildNetwork({
+          id: network.id,
+          name: 'Mon super réseau',
+          organizationId: headOrganization.id,
+          organizationName: 'Orga tête de réseau',
+        });
+
+        expect(foundNetwork).to.deepEqualInstance(expectedNetwork);
+      });
+
+      context('when there are several organizations in the network', function () {
+        it('returns the network with correct head organization informations', async function () {
+          // given
+          const childOrganization = databaseBuilder.factory.buildOrganization({
+            name: 'Not head organization but still in the same network',
+          });
+          const childStructureId = databaseBuilder.factory.buildStructure().id;
+          const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Head organization' });
+          const headStructureId = databaseBuilder.factory.buildStructure().id;
+
+          const network = databaseBuilder.factory.buildNetwork({ name: 'My network' });
+
+          databaseBuilder.factory.buildFactStructure({
+            structureId: headStructureId,
+            networkId: network.id,
+            organizationId: headOrganization.id,
+          });
+
+          databaseBuilder.factory.buildFactStructure({
+            structureId: childStructureId,
+            networkId: network.id,
+            organizationId: childOrganization.id,
+            parentStructureId: headStructureId,
+          });
+
+          await databaseBuilder.commit();
+
+          // when
+          const foundNetwork = await networkRepository.getById(network.id);
+
+          // then
+          const expectedNetwork = domainBuilder.acquisition.buildNetwork({
+            id: network.id,
+            name: 'My network',
+            organizationId: headOrganization.id,
+            organizationName: 'Head organization',
+          });
+
+          expect(foundNetwork).to.deepEqualInstance(expectedNetwork);
+        });
+      });
+    });
+
+    describe('when the network is not found', function () {
+      it('throws a not found error', async function () {
+        // given
+        const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Orga tête de réseau' });
+        const headStructureId = databaseBuilder.factory.buildStructure().id;
+
+        const network = databaseBuilder.factory.buildNetwork({ id: 1, name: 'Réseau avec id 1' });
+
+        databaseBuilder.factory.buildFactStructure({
+          structureId: headStructureId,
+          networkId: network.id,
+          organizationId: headOrganization.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const nonExistingNetworkId = 2;
+
+        // when
+        const error = await catchErr(networkRepository.getById)(nonExistingNetworkId);
+
+        // then
+
+        expect(error).to.be.instanceOf(NotFoundError);
       });
     });
   });

@@ -1,4 +1,5 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Network } from '../../domain/models/Network.js';
 
 /**
@@ -11,6 +12,38 @@ async function findAll() {
   const networks = await knexConn('networks').select('networks.id', 'networks.name').orderBy('name');
 
   return networks.map(_toDomain);
+}
+
+/**
+ * @param {number} networkId
+ * @returns {Promise<Network>}
+ */
+async function getById(networkId) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const network = await knexConn('fct_structures')
+    .select(
+      'fct_structures.network_id as id',
+      'networks.name as name',
+      'organizations.name as organizationName',
+      'fct_structures.organization_id as organizationId',
+    )
+    .join('networks', 'fct_structures.network_id', 'networks.id')
+    .join('organizations', 'fct_structures.organization_id', 'organizations.id')
+    .where('fct_structures.network_id', networkId)
+    .andWhere('fct_structures.parent_structure_id', null)
+    .first();
+
+  if (!network) {
+    throw new NotFoundError();
+  }
+
+  return _toDomain({
+    id: network.id,
+    name: network.name,
+    organizationId: network.organizationId,
+    organizationName: network.organizationName,
+  });
 }
 
 /**
@@ -58,4 +91,4 @@ function _toDomain(network) {
   return new Network(network);
 }
 
-export { findAll, findByOrganizationId, save };
+export { findAll, findByOrganizationId, getById, save };
