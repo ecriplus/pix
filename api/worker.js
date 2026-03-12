@@ -38,9 +38,7 @@ export async function startPgBoss() {
   pgBoss.on('wip', (data) => {
     logger.info({ event: 'pg-boss-wip' }, data);
   });
-  if (config.pgBoss.connexionPoolMaxSize !== 0) {
-    await pgBoss.start();
-  }
+  await pgBoss.start();
   return pgBoss;
 }
 
@@ -107,7 +105,7 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss, cr
         await jobQueues.scheduleCronJob({
           name: job.jobName,
           cron: job.jobCron,
-          options: { tz: 'Europe/Paris', expireIn: job.expireIn },
+          options: { tz: 'Europe/Paris', expireInSeconds: job.expireIn },
         });
         logger.info(`Cron for job "${job.jobName}" scheduled "${job.jobCron}"`);
 
@@ -149,6 +147,7 @@ async function main() {
     await metrics.clearMetrics();
     await databaseConnections.disconnect();
     await learningContentCache.quit();
+    await pgBoss.stop();
   });
 }
 

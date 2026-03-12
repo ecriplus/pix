@@ -31,6 +31,12 @@ const start = async function () {
   server = await createServer();
   await server.start();
   prometheusPushGateway.startPushingMetrics();
+
+  if (config.infra.startJobInWebProcess) {
+    await registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
+  } else {
+    await pgBoss.start();
+  }
 };
 
 async function _exitOnSignal(signal) {
@@ -53,6 +59,7 @@ async function _exitOnSignal(signal) {
   logger.info('Closing connections to redis monitor...');
   await redisMonitor.quit();
   await prometheusPushGateway.stopPushingMetrics();
+  await pgBoss.stop();
   logger.info('Exiting process...');
 }
 
@@ -65,11 +72,6 @@ process.on('SIGINT', () => {
 
 try {
   await start();
-  if (config.infra.startJobInWebProcess) {
-    await registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
-  } else {
-    await pgBoss.start();
-  }
 } catch (error) {
   logger.error(error);
   throw error;
