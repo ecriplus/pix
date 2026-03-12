@@ -42,7 +42,7 @@ const register = async function (server) {
               type: Joi.string().required(),
               attributes: Joi.object({
                 content: Joi.object({})
-                  .pattern(Joi.string().equal(...getSupportedLocales()), Joi.string())
+                  .pattern(Joi.string().equal(...getSupportedLocales()), Joi.string().allow(''))
                   .required(),
               }).required(),
             }).required(),
