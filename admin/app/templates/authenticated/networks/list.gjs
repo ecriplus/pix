@@ -4,7 +4,7 @@ import pageTitle from 'ember-page-title/helpers/page-title';
 import ListItems from 'pix-admin/components/networks/list-items';
 
 <template>
-  {{pageTitle "Réseaux"}}
+  {{pageTitle (t "pages.networks.list.page-title")}}
   <header>
     <h1>{{t "pages.networks.list.title"}}</h1>
     <div class="page-actions">

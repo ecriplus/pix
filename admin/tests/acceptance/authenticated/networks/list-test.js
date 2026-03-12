@@ -1,5 +1,5 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { screen, visit } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
@@ -34,7 +34,8 @@ module('Acceptance | Networks | List', function (hooks) {
         await visit('/networks/list');
 
         // when
-        await clickByName(t('pages.networks.list.new-button'));
+        const networkCreationLink = screen.getByRole('link', { name: t('pages.networks.list.new-button') });
+        await click(networkCreationLink);
 
         // then
         assert.strictEqual(currentURL(), '/networks/new');

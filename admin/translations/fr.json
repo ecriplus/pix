@@ -1350,6 +1350,7 @@
     "networks": {
       "list": {
         "new-button": "Nouveau réseau",
+        "page-title": "Réseaux",
         "title": "Tous les réseaux"
       },
       "title": "Créer un réseau"

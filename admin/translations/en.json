@@ -1347,6 +1347,7 @@
     "networks": {
       "list": {
         "new-button": "New network",
+        "page-title": "Networks",
         "title": "All networks"
       },
       "title": "Create a network"
