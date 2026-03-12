@@ -9,6 +9,7 @@ import { databaseBuffer } from '../database-buffer.js';
  *  type: string,
  *  duration: string,
  *  locale: string,
+ *  locales: string[],
  *  editorName: string,
  *  editorLogoUrl: string,
  *  createdAt: Date,
