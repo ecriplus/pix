@@ -125,6 +125,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
   describe('#updateOrganizationInformation', function () {
     it('should return the serialized organization', async function () {
       // given
+      const adminUserId = Symbol('userId');
       const organizationAttributes = {
         id: 7,
         name: 'Acme',
@@ -137,6 +138,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
       };
       const tagAttributes = { id: '4', type: 'tags' };
       const request = {
+        auth: { credentials: { userId: adminUserId } },
         payload: {
           data: {
             id: organizationAttributes.id,
@@ -183,7 +185,7 @@ describe('Unit | Organizational Entities | Application | Controller | Admin | or
         .withArgs(request.payload)
         .returns(organizationDeserialized);
       usecases.updateOrganizationInformation
-        .withArgs({ organization: organizationDeserialized })
+        .withArgs({ userId: adminUserId, organization: organizationDeserialized })
         .resolves(updatedOrganization);
       dependencies.organizationForAdminSerializer.serialize
         .withArgs(updatedOrganization)

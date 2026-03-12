@@ -159,8 +159,9 @@ const updateOrganizationInformation = async function (
   },
 ) {
   const organizationDeserialized = dependencies.organizationForAdminSerializer.deserialize(request.payload);
-
+  const { userId } = request.auth.credentials;
   const organizationUpdated = await usecases.updateOrganizationInformation({
+    userId,
     organization: organizationDeserialized,
   });
   return h.response(dependencies.organizationForAdminSerializer.serialize(organizationUpdated));
