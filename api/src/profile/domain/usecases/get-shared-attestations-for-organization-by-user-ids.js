@@ -31,14 +31,29 @@ export async function getSharedAttestationsForOrganizationByUserIds({
     throw new NoProfileRewardsFoundError();
   }
 
-  const data = [];
-
   const users = await userRepository.getByIds({ userIds: filteredProfileRewards.map(({ userId }) => userId) });
+  const profileRewardByUserId = new Map(
+    filteredProfileRewards.map((profileReward) => [profileReward.userId, profileReward]),
+  );
 
-  filteredProfileRewards.forEach(({ userId, createdAt }) => {
-    const user = users.find((user) => user.id === userId);
-    if (user) data.push(user.toForm(createdAt, locale, stringUtils.normalizeAndRemoveAccents));
-  });
+  const sortByLastNameThenFirstName = (userA, userB) => {
+    const lastNameComparison = userA.lastName.localeCompare(userB.lastName, 'fr', { sensitivity: 'base' });
+    return lastNameComparison !== 0
+      ? lastNameComparison
+      : userA.firstName.localeCompare(userB.firstName, 'fr', {
+          sensitivity: 'base',
+        });
+  };
+
+  const usersToAttestationForm = (attestationForms, user) => {
+    const profileReward = profileRewardByUserId.get(user.id);
+    if (profileReward) {
+      attestationForms.push(user.toForm(profileReward.createdAt, locale, stringUtils.normalizeAndRemoveAccents));
+    }
+    return attestationForms;
+  };
+
+  const data = users.sort(sortByLastNameThenFirstName).reduce(usersToAttestationForm, []);
 
   return {
     data,

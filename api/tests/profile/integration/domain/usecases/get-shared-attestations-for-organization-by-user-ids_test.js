@@ -64,6 +64,57 @@ describe('Profile | Integration | Domain | get-shared-attestations-for-organizat
       expect(results.data[0].get('lastName')).to.equal('TERIEUR');
     });
 
+    it('should return profile rewards sorted by last name then first name', async function () {
+      const locale = 'FR-fr';
+      const attestation = databaseBuilder.factory.buildAttestation();
+      mockAttestationStorage(attestation);
+      const userZoe = new User(databaseBuilder.factory.buildUser({ firstName: 'Zoe', lastName: 'Abadie' }));
+      const userAlice = new User(databaseBuilder.factory.buildUser({ firstName: 'Alice', lastName: 'Martin' }));
+      const userBob = new User(databaseBuilder.factory.buildUser({ firstName: 'Bob', lastName: 'Abadie' }));
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: userZoe.id });
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: userAlice.id });
+      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId: userBob.id });
+
+      const profileRewardZoe = databaseBuilder.factory.buildProfileReward({
+        rewardId: attestation.id,
+        userId: userZoe.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: profileRewardZoe.id,
+      });
+      const profileRewardAlice = databaseBuilder.factory.buildProfileReward({
+        rewardId: attestation.id,
+        userId: userAlice.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: profileRewardAlice.id,
+      });
+      const profileRewardBob = databaseBuilder.factory.buildProfileReward({
+        rewardId: attestation.id,
+        userId: userBob.id,
+      });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: profileRewardBob.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const results = await usecases.getSharedAttestationsForOrganizationByUserIds({
+        attestationKey: attestation.key,
+        organizationId,
+        userIds: [userZoe.id, userAlice.id, userBob.id],
+        locale,
+      });
+
+      expect(results.data[0].get('firstName')).to.equal('Bob');
+      expect(results.data[1].get('firstName')).to.equal('Zoe');
+      expect(results.data[2].get('firstName')).to.equal('Alice');
+    });
+
     it('should not return profile rewards for anonymous userIds', async function () {
       const locale = 'FR-fr';
       const attestation = databaseBuilder.factory.buildAttestation();
