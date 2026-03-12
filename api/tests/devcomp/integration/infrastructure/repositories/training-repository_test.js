@@ -9,6 +9,7 @@ import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as trainingRepository from '../../../../../src/devcomp/infrastructure/repositories/training-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
+import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   catchErr,
   databaseBuilder,
@@ -746,115 +747,230 @@ describe('Integration | Repository | training-repository', function () {
   });
 
   describe('#findPaginatedByUserId', function () {
-    it('should return paginated trainings related to given userId', async function () {
-      // given
-      const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
-      const { id: campaignParticipationId2 } = databaseBuilder.factory.buildCampaignParticipation({ userId });
-      const { userId: anotherUserId, id: anotherCampaignParticipationId } =
-        databaseBuilder.factory.buildCampaignParticipation();
-      const training1 = databaseBuilder.factory.buildTraining();
-      const training2 = databaseBuilder.factory.buildTraining();
-      const training3 = databaseBuilder.factory.buildTraining();
-      const training4 = databaseBuilder.factory.buildTraining();
-      const trainingWithAnotherLocale = databaseBuilder.factory.buildTraining({ locale: 'en' });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training1.id,
-        campaignParticipationId,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training1.id,
-        campaignParticipationId: campaignParticipationId2,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training2.id,
-        campaignParticipationId,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training3.id,
-        campaignParticipationId,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training4.id,
-        campaignParticipationId,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: trainingWithAnotherLocale.id,
-        campaignParticipationId,
-      });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId: anotherUserId,
-        trainingId: training2.id,
-        campaignParticipationId: anotherCampaignParticipationId,
-      });
-      await databaseBuilder.commit();
-
-      const page = { size: 2, number: 2 };
-
-      // when
-      const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
-        userId,
-        locale: 'fr-fr',
-        page,
+    describe('when "multipleLocalesForTrainingsEnabled" feature toggle is true', function () {
+      beforeEach(async function () {
+        await featureToggles.set('multipleLocalesForTrainingsEnabled', true);
       });
 
-      // then
-      expect(userRecommendedTrainings).to.be.lengthOf(2);
-      expect(userRecommendedTrainings[0]).to.be.instanceOf(UserRecommendedTraining);
-      expect(userRecommendedTrainings).to.deep.equal([
-        new UserRecommendedTraining({ ...training3, duration: { hours: 6 } }),
-        new UserRecommendedTraining({ ...training4, duration: { hours: 6 } }),
-      ]);
-      expect(pagination).to.equal(pagination);
+      it('should return paginated trainings related to given userId', async function () {
+        // given
+        const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
+        const { id: campaignParticipationId2 } = databaseBuilder.factory.buildCampaignParticipation({ userId });
+        const userLocales = ['fr', 'fr-fr'];
+
+        const training1 = databaseBuilder.factory.buildTraining({
+          title: 'training1',
+          internalTitle: 'internalTitle1',
+          locales: userLocales,
+        });
+        const training2 = databaseBuilder.factory.buildTraining({
+          title: 'training2',
+          internalTitle: 'internalTitle2',
+          locales: userLocales,
+        });
+        const training3 = databaseBuilder.factory.buildTraining({
+          title: 'training3',
+          internalTitle: 'internalTitle3',
+          locales: userLocales,
+        });
+
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training1.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training2.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training3.id,
+          campaignParticipationId2,
+        });
+
+        await databaseBuilder.commit();
+
+        const page = { number: 1, size: 2 };
+
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId,
+          locale: 'fr',
+          page,
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(2);
+        expect(userRecommendedTrainings).to.deep.equal([
+          new UserRecommendedTraining({ ...training1, duration: { hours: 6 } }),
+          new UserRecommendedTraining({ ...training2, duration: { hours: 6 } }),
+        ]);
+        expect(pagination).to.deep.equal({
+          page: 1,
+          pageCount: 2,
+          pageSize: 2,
+          rowCount: 3,
+        });
+      });
+
+      it('should return an empty array when given user does not have recommended trainings', async function () {
+        // given
+        const { id: userId } = databaseBuilder.factory.buildUser();
+
+        await databaseBuilder.commit();
+
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(0);
+        expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
+      });
+
+      it('should return an empty array when user only has disabled trainings', async function () {
+        // given
+        const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
+        const locales = ['fr', 'fr-fr'];
+
+        const disabledTraining = databaseBuilder.factory.buildTraining({ isDisabled: true, locales });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: disabledTraining.id,
+          campaignParticipationId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(0);
+        expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
+      });
     });
 
-    it('should return an empty array when given user does not have recommended trainings', async function () {
-      // given
-      const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
-      const training1 = databaseBuilder.factory.buildTraining();
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training1.id,
-        campaignParticipationId,
+    describe('when "multipleLocalesForTrainingsEnabled" feature toggle is false', function () {
+      beforeEach(async function () {
+        await featureToggles.set('multipleLocalesForTrainingsEnabled', false);
       });
-      await databaseBuilder.commit();
+      it('should return paginated trainings related to given userId', async function () {
+        // given
+        const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
+        const { id: campaignParticipationId2 } = databaseBuilder.factory.buildCampaignParticipation({ userId });
+        const { userId: anotherUserId, id: anotherCampaignParticipationId } =
+          databaseBuilder.factory.buildCampaignParticipation();
+        const training1 = databaseBuilder.factory.buildTraining();
+        const training2 = databaseBuilder.factory.buildTraining();
+        const training3 = databaseBuilder.factory.buildTraining();
+        const training4 = databaseBuilder.factory.buildTraining();
+        const trainingWithAnotherLocale = databaseBuilder.factory.buildTraining({ locale: 'en' });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training1.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training1.id,
+          campaignParticipationId: campaignParticipationId2,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training2.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training3.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training4.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: trainingWithAnotherLocale.id,
+          campaignParticipationId,
+        });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId: anotherUserId,
+          trainingId: training2.id,
+          campaignParticipationId: anotherCampaignParticipationId,
+        });
+        await databaseBuilder.commit();
 
-      // when
-      const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
-        userId: '0293',
-        locale: 'fr-fr',
+        const page = { size: 2, number: 2 };
+
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId,
+          locale: 'fr-fr',
+          page,
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(2);
+        expect(userRecommendedTrainings[0]).to.be.instanceOf(UserRecommendedTraining);
+        expect(userRecommendedTrainings).to.deep.equal([
+          new UserRecommendedTraining({ ...training3, duration: { hours: 6 } }),
+          new UserRecommendedTraining({ ...training4, duration: { hours: 6 } }),
+        ]);
+        expect(pagination).to.equal(pagination);
       });
 
-      // then
-      expect(userRecommendedTrainings).to.be.lengthOf(0);
-      expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
-    });
+      it('should return an empty array when given user does not have recommended trainings', async function () {
+        // given
+        const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
+        const training1 = databaseBuilder.factory.buildTraining();
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training1.id,
+          campaignParticipationId,
+        });
+        await databaseBuilder.commit();
 
-    it('should not return disabled trainings', async function () {
-      // given
-      const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
-      const training1 = databaseBuilder.factory.buildTraining({ isDisabled: true });
-      databaseBuilder.factory.buildUserRecommendedTraining({
-        userId,
-        trainingId: training1.id,
-        campaignParticipationId,
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId: '0293',
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(0);
+        expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
       });
-      await databaseBuilder.commit();
 
-      // when
-      const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
-        userId,
-        locale: 'fr-fr',
+      it('should not return disabled trainings', async function () {
+        // given
+        const { userId, id: campaignParticipationId } = databaseBuilder.factory.buildCampaignParticipation();
+        const training1 = databaseBuilder.factory.buildTraining({ isDisabled: true });
+        databaseBuilder.factory.buildUserRecommendedTraining({
+          userId,
+          trainingId: training1.id,
+          campaignParticipationId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const { userRecommendedTrainings, pagination } = await trainingRepository.findPaginatedByUserId({
+          userId,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(userRecommendedTrainings).to.be.lengthOf(0);
+        expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
       });
-
-      // then
-      expect(userRecommendedTrainings).to.be.lengthOf(0);
-      expect(pagination).to.deep.equal({ page: 1, pageSize: 10, rowCount: 0, pageCount: 0 });
     });
   });
 
