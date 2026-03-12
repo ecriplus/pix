@@ -35,7 +35,7 @@ export class FillNewColumnsInCertificationCoursesAndCandidatesTables extends Scr
   async handle({ logger, options }) {
     const { dryRun, startId, chunkSize } = options;
     logger.info('Script execution started');
-    const certificationFrameworkVersions = await getScoringConfigurations();
+    const certificationFrameworkVersions = await getVersions();
 
     let currentStartId = startId;
     let certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
@@ -77,7 +77,7 @@ export class FillNewColumnsInCertificationCoursesAndCandidatesTables extends Scr
   }
 }
 
-async function getScoringConfigurations() {
+async function getVersions() {
   const versionsData = await knex('certification_versions')
     .select('id', 'startDate', 'expirationDate', 'scope')
     .orderByRaw('"expirationDate" ASC NULLS LAST');
@@ -103,7 +103,12 @@ async function selectCertificationsToProcess(startId, chunkSize) {
       certificationCourseVersion: 'certification-courses.version',
       candidateId: 'certification-candidates.id',
       reconciledAt: 'certification-candidates.reconciledAt',
-      subscriptionKey: 'complementary-certifications.key',
+      subscriptionKeys: knex.raw(
+        `json_agg(
+          "complementary-certifications"."key"
+          ORDER BY "complementary-certifications".key NULLS LAST
+        )`,
+      ),
     })
     .from('certification-courses')
     .join('certification-candidates', function () {
@@ -123,6 +128,7 @@ async function selectCertificationsToProcess(startId, chunkSize) {
     )
     .where('certification-courses.id', '>=', startId)
     .where('certification-courses.version', 3)
+    .groupBy('certification-courses.id', 'certification-candidates.id')
     .orderBy('certification-courses.id', 'asc')
     .limit(chunkSize);
 }
@@ -138,12 +144,12 @@ async function processCertifications(certificationsData, certificationFrameworkV
     try {
       latestCertificationIdProcessed = certificationData.certificationCourseId;
 
-      const subscription = !certificationData.subscriptionKey ? Frameworks.CORE : certificationData.subscriptionKey;
+      const subscription = certificationData.subscriptionKeys[0] || Frameworks.CORE;
       const cerficationCandidateData = { id: certificationData.candidateId, subscription };
       certificationCandidatesToUpdate.push(cerficationCandidateData);
 
       const scope = subscription == Frameworks.CLEA ? Frameworks.CORE : subscription;
-      const versionId = findCorrespondingScoringConfigurationId(
+      const versionId = findCorrespondingVersionId(
         certificationFrameworkVersions,
         certificationData.reconciledAt,
         scope,
@@ -160,13 +166,13 @@ async function processCertifications(certificationsData, certificationFrameworkV
     }
   }
   return {
-    certificationCoursesToUpdate: certificationCoursesToUpdate.filter((ar) => !!ar),
-    certificationCandidatesToUpdate: certificationCandidatesToUpdate.filter((ar) => !!ar),
+    certificationCoursesToUpdate: certificationCoursesToUpdate.filter((cco) => !!cco),
+    certificationCandidatesToUpdate: certificationCandidatesToUpdate.filter((cca) => !!cca),
     latestCertificationIdProcessed,
   };
 }
 
-function findCorrespondingScoringConfigurationId(v3CertificationFrameworkVersions, reconciledAt, scope) {
+function findCorrespondingVersionId(v3CertificationFrameworkVersions, reconciledAt, scope) {
   for (const v3CertificationFrameworkVersion of v3CertificationFrameworkVersions) {
     if (
       scope == v3CertificationFrameworkVersion.scope &&
@@ -178,7 +184,7 @@ function findCorrespondingScoringConfigurationId(v3CertificationFrameworkVersion
     }
   }
 
-  throw new Error(`No Certification Scoring found for ${reconciledAt} date.`);
+  throw new Error(`No Version found for ${reconciledAt} date.`);
 }
 
 await ScriptRunner.execute(import.meta.url, FillNewColumnsInCertificationCoursesAndCandidatesTables);

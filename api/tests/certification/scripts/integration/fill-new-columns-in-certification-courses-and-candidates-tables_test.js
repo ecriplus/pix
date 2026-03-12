@@ -91,12 +91,20 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
 
     _createCertificationCourses({
       reconciledAt: reconciledAtArchivedVersion,
-      subscriptionIds: [null, droitComplementaryCertificationId, cleaComplementaryCertificationId],
+      subscriptions: [
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.DROIT, id: droitComplementaryCertificationId },
+        { frameworkType: Frameworks.CLEA, id: cleaComplementaryCertificationId },
+      ],
       candidateIds,
     });
     _createCertificationCourses({
       reconciledAt: reconciledAtCurrentVersion,
-      subscriptionIds: [null, droitComplementaryCertificationId, cleaComplementaryCertificationId],
+      subscriptions: [
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.DROIT, id: droitComplementaryCertificationId },
+        { frameworkType: Frameworks.CLEA, id: cleaComplementaryCertificationId },
+      ],
       candidateIds,
     });
 
@@ -161,7 +169,12 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
 
     _createCertificationCourses({
       reconciledAt,
-      subscriptionIds: [null, null, null, null],
+      subscriptions: [
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.CORE, id: null },
+      ],
       certificationCourseIds,
     });
     await databaseBuilder.commit();
@@ -199,12 +212,16 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
 
     _createCertificationCourses({
       reconciledAt: reconciledAtArchivedVersion,
-      subscriptionIds: [null, null, null],
+      subscriptions: [
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.CORE, id: null },
+        { frameworkType: Frameworks.CORE, id: null },
+      ],
       certificationCourseIds,
     });
     _createCertificationCourses({
       reconciledAt: reconciledAtNonExistingVersion,
-      subscriptionIds: [null],
+      subscriptions: [{ frameworkType: Frameworks.CORE, id: null }],
       certificationCourseIds,
     });
 
@@ -236,10 +253,7 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
       `Processing certification from ${certificationCourseIds[2]} to ${certificationCourseIds[3]}...`,
     );
     expect(err).to.be.instanceOf(Error);
-    expect(err).to.have.property(
-      'message',
-      `No Certification Scoring found for ${reconciledAtNonExistingVersion} date.`,
-    );
+    expect(err).to.have.property('message', `No Version found for ${reconciledAtNonExistingVersion} date.`);
     expect(logger.error).to.have.been.calledWithExactly(
       err,
       `Certification ID ${certificationCourseIds[3]} encountered an error`,
@@ -247,15 +261,10 @@ describe('Integration | Certification | Scripts | Fill new columns in certificat
   });
 });
 
-function _createCertificationCourses({
-  reconciledAt,
-  subscriptionIds,
-  candidateIds = [],
-  certificationCourseIds = [],
-}) {
+function _createCertificationCourses({ reconciledAt, subscriptions, candidateIds = [], certificationCourseIds = [] }) {
   const sessionId = databaseBuilder.factory.buildSession().id;
 
-  for (const subscriptionId of subscriptionIds) {
+  for (const subscription of subscriptions) {
     const userId = databaseBuilder.factory.buildUser().id;
     const candidateId = databaseBuilder.factory.buildCertificationCandidate({
       sessionId,
@@ -269,10 +278,15 @@ function _createCertificationCourses({
       version: AlgorithmEngineVersion.V3,
     }).id;
 
-    if (subscriptionId) {
+    if (subscription.frameworkType == Frameworks.CORE || subscription.frameworkType == Frameworks.CLEA) {
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateId,
+      });
+    }
+    if (subscription.frameworkType != Frameworks.CORE) {
       databaseBuilder.factory.buildComplementaryCertificationSubscription({
         certificationCandidateId: candidateId,
-        complementaryCertificationId: subscriptionId,
+        complementaryCertificationId: subscription.id,
       });
     }
 
