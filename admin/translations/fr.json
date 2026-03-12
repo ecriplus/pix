@@ -1624,6 +1624,7 @@
           "editorLogo": "Url du logo de l'éditeur",
           "editorName": "Nom d'éditeur",
           "internalTitle": "Titre interne",
+          "locales": "{ count, plural, one {Langue localisée} other {Langues localisées}}",
           "localizedLanguage": "Langue localisée",
           "publishedOn": "Publié sur",
           "status": "Statut",
