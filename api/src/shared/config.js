@@ -458,6 +458,7 @@ const configuration = (function () {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
     },
     pgBoss: {
+      databaseUrl: process.env.PGBOSS_DATABASE_URL || process.env.DATABASE_URL,
       connexionPoolMaxSize: _getNumber(process.env.PGBOSS_CONNECTION_POOL_MAX_SIZE, 2),
       teamSize: _getNumber(process.env.PG_BOSS_TEAM_SIZE, 1),
       teamConcurrency: _getNumber(process.env.PG_BOSS_TEAM_CONCURRENCY, 1),
@@ -556,6 +557,8 @@ const configuration = (function () {
       postLogoutRedirectUri: 'https://app.dev.pix.local/connexion',
       redirectUri: 'https://app.dev.pix.local/connexion/oidc-example-net',
     };
+
+    config.pgBoss.databaseUrl = process.env.TEST_DATABASE_URL;
 
     config.port = 0;
 
