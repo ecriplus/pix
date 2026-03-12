@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
 
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
@@ -520,8 +521,8 @@ export const buildQuests = async (databaseBuilder) => {
   //create learners with participations to test download 100 attestations
   for (let i = 0; i < 100; i++) {
     const user = databaseBuilder.factory.buildUser.withRawPassword({
-      firstName: `attestation-success${i}`,
-      lastName: `attestation${i}`,
+      firstName: `${faker.person.firstName()}${i}`,
+      lastName: `${faker.person.lastName()}${i}`,
       email: `attestation-success${i}@example.net`,
     });
 
