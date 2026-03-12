@@ -1,3 +1,4 @@
+import http from 'node:http';
 import https from 'node:https';
 
 import { Pushgateway } from 'prom-client';
@@ -18,16 +19,24 @@ register.setDefaultLabels({
   instance: config.infra.containerName ?? 'localhost',
 });
 
+const httpAgentOptions = {
+  keepAlive: true,
+  keepAliveMsec: config.metrics.prometheus.pushgateway.keepAlive,
+  maxSockets: 1,
+};
+
+let httpAgent;
+if (URL.canParse(config.metrics.prometheus.pushgateway.url)) {
+  const { protocol } = new URL(config.metrics.prometheus.pushgateway.url);
+  httpAgent = protocol === 'https:' ? new https.Agent(httpAgentOptions) : new http.Agent(httpAgentOptions);
+}
+
 const pushgateway = new Pushgateway(
   config.metrics.prometheus.pushgateway.url,
   {
     headers,
     timeout: config.metrics.prometheus.pushgateway.timeout,
-    agent: new https.Agent({
-      keepAlive: true,
-      keepAliveMsec: config.metrics.prometheus.pushgateway.keepAlive,
-      maxSockets: 1,
-    }),
+    agent: httpAgent,
   },
   register,
 );
