@@ -5,16 +5,21 @@ import {
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import {
   catchErr,
   databaseBuilder,
   domainBuilder,
   expect,
+  insertLearnerImportFeatureForNewOrganization,
   insertMultipleSendingFeatureForNewOrganization,
+  knex,
 } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Domain | UseCases | update-organization', function () {
+  let adminUserId;
   beforeEach(async function () {
+    adminUserId = databaseBuilder.factory.buildUser().id;
     await insertMultipleSendingFeatureForNewOrganization();
   });
 
@@ -50,6 +55,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
     // when
     const updatedOrganization = await usecases.updateOrganizationInformation({
+      userId: adminUserId,
       organization: organizationNewInformation,
     });
 
@@ -59,6 +65,60 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
     expect(updatedOrganization.administrationTeamId).to.equal(newAdministrationTeamId);
     expect(updatedOrganization.countryCode).to.equal(99102);
     expect(updatedOrganization.organizationLearnerType.name).to.equal(newOrganizationLearnerType.name);
+  });
+
+  context('features', function () {
+    let organizationId;
+    beforeEach(async function () {
+      await insertLearnerImportFeatureForNewOrganization();
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      await databaseBuilder.commit();
+    });
+    context('Activating learner import format', function () {
+      it('should delete previous organization learners', async function () {
+        const learnerFromOrganization = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        const learnerFromOtherOrganization = databaseBuilder.factory.buildOrganizationLearner();
+        const newAdministrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
+
+        const newOrganizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({
+          id: 1,
+          name: 'New Type',
+        });
+
+        const newCountry = databaseBuilder.factory.buildCertificationCpfCountry({
+          code: 99102,
+          originalName: 'Islande',
+          commonName: 'Islande',
+        });
+        await databaseBuilder.commit();
+
+        const organizationNewInformation = domainBuilder.buildOrganizationForAdmin({
+          id: organizationId,
+          name: "Nouveau nom d'organization",
+          administrationTeamId: newAdministrationTeamId,
+          countryCode: newCountry.code,
+          organizationLearnerType: domainBuilder.acquisition.buildOrganizationLearnerType({
+            id: newOrganizationLearnerType.id,
+            name: undefined,
+          }),
+          features: {
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'ONDE' } },
+          },
+        });
+        await usecases.updateOrganizationInformation({
+          userId: adminUserId,
+          organization: organizationNewInformation,
+        });
+        const learnerInDB = await knex('organization-learners').where({ id: learnerFromOrganization.id }).first();
+        expect(learnerInDB.deletedAt).not.null;
+
+        const otherLearnerInDB = await knex('organization-learners')
+          .where({ id: learnerFromOtherOrganization.id })
+          .first();
+        expect(otherLearnerInDB.deletedAt).null;
+      });
+    });
   });
 
   context('when organization learner type does not exist', function () {
@@ -78,6 +138,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // when
       const error = await catchErr(usecases.updateOrganizationInformation)({
+        userId: adminUserId,
         organization: organizationNewInformations,
       });
 
@@ -107,6 +168,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // when
       const error = await catchErr(usecases.updateOrganizationInformation)({
+        userId: adminUserId,
         organization: organizationNewInformations,
       });
 
@@ -136,6 +198,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // when
       const error = await catchErr(usecases.updateOrganizationInformation)({
+        userId: adminUserId,
         organization: organizationNewInformations,
       });
 
@@ -169,6 +232,7 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
 
       // when
       const response = await usecases.updateOrganizationInformation({
+        userId: adminUserId,
         organization: organizationNewInformations,
       });
 
