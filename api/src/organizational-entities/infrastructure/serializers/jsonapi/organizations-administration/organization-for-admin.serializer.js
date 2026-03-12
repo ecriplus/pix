@@ -61,6 +61,8 @@ const serialize = function (organizations, meta) {
       'countryName',
       'organizationLearnerTypeId',
       'organizationLearnerTypeName',
+      'networkId',
+      'networkName',
     ],
     organizationMemberships: {
       ref: 'id',
