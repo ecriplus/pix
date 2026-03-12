@@ -84,14 +84,14 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
   });
 
   describe('#save', function () {
-    it('saves a new network', async function () {
+    it('saves and returns the new network', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const networkName = 'Network 1';
       await databaseBuilder.commit();
 
       // when
-      await networkRepository.save({ organizationId, networkName });
+      const savedNetwork = await networkRepository.save({ organizationId, networkName });
 
       // then
       const foundNetwork = await knex('networks').select('id', 'name').where({ name: networkName }).first();
@@ -108,6 +108,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         .where('fct_structures.organization_id', organizationId)
         .first();
       expect(createdFactStructure.network_id).to.equal(foundNetwork.id);
+      const expectedNetwork = domainBuilder.acquisition.buildNetwork(foundNetwork);
+      expect(savedNetwork).to.deep.equal(expectedNetwork);
     });
   });
 });

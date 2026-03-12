@@ -32,14 +32,14 @@ describe('Unit | Infrastructure | Serializers | JsonApi |  Network | network-ser
     it('should convert JSON API data to a Organization', function () {
       // given
       const formData = {
-        networkName: 'Some network name',
+        name: 'Some network name',
         organizationId: 123,
       };
 
       const jsonApiFormData = {
         data: {
           attributes: {
-            'network-name': formData.networkName,
+            name: formData.name,
             'organization-id': formData.organizationId,
           },
         },
@@ -50,7 +50,7 @@ describe('Unit | Infrastructure | Serializers | JsonApi |  Network | network-ser
 
       // then
       expect(deserializedData).to.deep.equal({
-        networkName: formData.networkName,
+        networkName: formData.name,
         organizationId: formData.organizationId,
       });
     });

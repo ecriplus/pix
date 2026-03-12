@@ -18,6 +18,7 @@ import { findFrameworkAreas } from './handlers/frameworks';
 import { getPaginatedJuryCertificationSummariesBySessionId } from './handlers/get-jury-certification-summaries-by-session-id';
 import { getToBePublishedSessions } from './handlers/get-to-be-published-sessions';
 import { getWithRequiredActionSessions } from './handlers/get-with-required-action-sessions';
+import { createNetwork } from './handlers/networks';
 import { createOrganizationMembership } from './handlers/organization-memberships';
 import {
   archiveOrganization,
@@ -366,6 +367,8 @@ export default function routes() {
     const organizationMembership = schema.organizationMemberships.findBy({ id: organizationMembershipId });
     return organizationMembership.update({ disabledAt: new Date() });
   });
+
+  this.post('/admin/networks', createNetwork);
 
   this.get('/admin/organizations', findPaginatedFilteredOrganizations);
   this.post('/admin/organizations', (schema, request) => {

@@ -29,16 +29,23 @@ describe('Unit | Organizational Entities | Application | Network', function () {
           payload: {
             data: {
               attributes: {
-                'network-name': 'Network name',
+                name: 'Network name',
                 'organization-id': 123,
               },
             },
           },
         };
         const createNetworkStub = sinon.stub(usecases, 'createNetwork');
+        const createdNetwork = createNetworkStub.resolves(Symbol('createdNetwork'));
+        const serializedNetwork = Symbol('serializedNetwork');
+        const networkSerializerStub = { serialize: sinon.stub() };
+        networkSerializerStub.serialize.withArgs(createdNetwork).returns(serializedNetwork);
+        const dependencies = {
+          networkSerializer: networkSerializerStub,
+        };
 
         // when
-        await networkAdminController.create(request, hFake);
+        await networkAdminController.create(request, hFake, dependencies);
 
         // then
         expect(createNetworkStub).to.have.been.calledOnceWith({

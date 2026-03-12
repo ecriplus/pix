@@ -12,7 +12,7 @@ const deserialize = function (json) {
   const attributes = json.data.attributes;
 
   return {
-    networkName: attributes['network-name'],
+    networkName: attributes['name'],
     organizationId: attributes['organization-id'],
   };
 };

@@ -42,6 +42,7 @@ import framework from './models/framework';
 import frameworkHistory from './models/framework-history';
 import juryCertificationSummary from './models/jury-certification-summary';
 import lastApplicationConnection from './models/last-application-connection';
+import network from './models/network';
 import oidcIdentityProvider from './models/oidc-identity-provider';
 import organization from './models/organization';
 import organizationInvitation from './models/organization-invitation';
@@ -115,6 +116,7 @@ export default {
   frameworkHistory,
   juryCertificationSummary,
   lastApplicationConnection,
+  network,
   oidcIdentityProvider,
   organization,
   organizationInvitation,

@@ -1,24 +1,28 @@
 import { knex } from '../../../../../db/knex-database-connection.js';
-import { NetworkAlreadyExistError } from '../../../../../src/organizational-entities/domain/errors.js';
+import {
+  NetworkAlreadyExistError,
+  OrganizationNotFound,
+} from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | create-network', function () {
   describe('when the organization does not belong to a network', function () {
-    it('creates a new network', async function () {
+    it('returns the newly created network', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       await databaseBuilder.commit();
 
       // when
-      await usecases.createNetwork({
+      const network = await usecases.createNetwork({
         organizationId,
         networkName: 'Random Network Name',
       });
 
       // then
       const createdNetwork = await knex('networks').first();
-      expect(createdNetwork.name).to.equal('Random Network Name');
+      const expectedNetwork = domainBuilder.acquisition.buildNetwork(createdNetwork);
+      expect(network).to.deep.equal(expectedNetwork);
     });
   });
 
@@ -44,6 +48,28 @@ describe('Integration | Organizational Entities | Domain | UseCase | create-netw
 
       // then
       expect(error).to.deepEqualInstance(new NetworkAlreadyExistError());
+    });
+  });
+
+  describe('when the organization does not exist', function () {
+    it('throw an error', async function () {
+      // given
+      const unknownOrganizationId = 123;
+
+      // when
+      const error = await catchErr(usecases.createNetwork)({
+        organizationId: unknownOrganizationId,
+        networkName: 'Random Network Name',
+      });
+
+      // then
+      expect(error).to.deepEqualInstance(
+        new OrganizationNotFound({
+          meta: {
+            organizationId: Number(unknownOrganizationId),
+          },
+        }),
+      );
     });
   });
 });

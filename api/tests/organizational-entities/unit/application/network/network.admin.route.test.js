@@ -60,7 +60,7 @@ describe('Unit | Application | Admin | Route | Network', function () {
           data: {
             attributes: {
               'organization-id': 123,
-              'network-name': 'Some network name',
+              name: 'Some network name',
             },
           },
         });
@@ -85,7 +85,7 @@ describe('Unit | Application | Admin | Route | Network', function () {
           data: {
             attributes: {
               'organization-id': 123,
-              'network-name': 'Some network name',
+              name: 'Some network name',
             },
           },
         });
