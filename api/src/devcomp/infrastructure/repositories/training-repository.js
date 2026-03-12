@@ -111,14 +111,19 @@ async function findPaginatedSummariesByTargetProfileId({ targetProfileId, page }
 
 async function findWithTriggersByCampaignParticipationIdAndLocale({ campaignParticipationId, locale }) {
   const knexConn = DomainTransaction.getConnection();
-  const trainingsDTO = await knexConn(TABLE_NAME)
+  const multipleLocalesForTrainingsEnabled = await featureToggles.get('multipleLocalesForTrainingsEnabled');
+
+  const baseQuery = knexConn(TABLE_NAME)
     .select('trainings.*')
     .join('target-profile-trainings', `${TABLE_NAME}.id`, 'trainingId')
     .join('campaigns', 'campaigns.targetProfileId', 'target-profile-trainings.targetProfileId')
     .join('campaign-participations', 'campaign-participations.campaignId', 'campaigns.id')
     .where({ 'campaign-participations.id': campaignParticipationId })
-    .where({ locale })
     .orderBy('trainings.id', 'asc');
+
+  const trainingsDTO = multipleLocalesForTrainingsEnabled
+    ? await baseQuery.whereRaw('? = ANY(locales)', locale)
+    : await baseQuery.where({ locale });
 
   const targetProfileTrainings = await knexConn('target-profile-trainings').whereIn(
     'trainingId',

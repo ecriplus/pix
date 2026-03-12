@@ -413,180 +413,374 @@ describe('Integration | Repository | training-repository', function () {
       await mockLearningContent(learningContent);
     });
 
-    it('should find trainings by campaignParticipationId and locale', async function () {
-      // given
-      const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
-      const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
-      const campaign = databaseBuilder.factory.buildCampaign({
-        targetProfileId: targetProfile1.id,
-      });
-      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-      });
-      const training1 = domainBuilder.buildTraining({
-        id: 1,
-        title: 'training 1',
-        targetProfileIds: [targetProfile1.id],
-        locale: 'fr-fr',
-        trainingTriggers: [],
-      });
-      const training2 = domainBuilder.buildTraining({
-        id: 2,
-        title: 'training 2',
-        targetProfileIds: [targetProfile1.id],
-        locale: 'fr-fr',
-        trainingTriggers: [],
-      });
-      const trainingWithDifferentLocale = domainBuilder.buildTraining({
-        id: 3,
-        title: 'training 3',
-        targetProfileIds: [targetProfile1.id],
-        locale: 'en',
-        trainingTriggers: [],
-      });
-      const trainingWithDifferentTargetProfile = domainBuilder.buildTraining({
-        id: 4,
-        title: 'training 4',
-        targetProfileIds: [targetProfile2.id],
-        locale: 'fr-fr',
-        trainingTriggers: [],
+    describe('when "multipleLocalesForTrainingsEnabled" feature toggle is true', function () {
+      beforeEach(async function () {
+        await featureToggles.set('multipleLocalesForTrainingsEnabled', true);
       });
 
-      databaseBuilder.factory.buildTraining({ ...training1, duration: '5h' });
-      databaseBuilder.factory.buildTraining({ ...training2, duration: '5h' });
-      databaseBuilder.factory.buildTraining({ ...trainingWithDifferentLocale, duration: '5h' });
-      databaseBuilder.factory.buildTraining({ ...trainingWithDifferentTargetProfile, duration: '5h' });
+      it('should find trainings by campaignParticipationId and locale', async function () {
+        // given
+        const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
+        const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({
+          targetProfileId: targetProfile1.id,
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+        });
+        const training1 = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'fr-fr',
+          locales: ['fr', 'fr-fr'],
+          trainingTriggers: [],
+        });
+        const training2 = domainBuilder.buildTraining({
+          id: 2,
+          title: 'training 2',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'fr-fr',
+          locales: ['fr', 'fr-fr'],
+          trainingTriggers: [],
+        });
+        const trainingWithDifferentLocale = domainBuilder.buildTraining({
+          id: 3,
+          title: 'training 3',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'en',
+          locales: ['en'],
+          trainingTriggers: [],
+        });
+        const trainingWithDifferentTargetProfile = domainBuilder.buildTraining({
+          id: 4,
+          title: 'training 4',
+          targetProfileIds: [targetProfile2.id],
+          locale: 'fr-fr',
+          locales: ['fr', 'fr-fr'],
+          trainingTriggers: [],
+        });
 
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: training1.id,
-        targetProfileId: training1.targetProfileIds[0],
+        databaseBuilder.factory.buildTraining({ ...training1, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...training2, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...trainingWithDifferentLocale, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...trainingWithDifferentTargetProfile, duration: '5h' });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training1.id,
+          targetProfileId: training1.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training2.id,
+          targetProfileId: training2.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: trainingWithDifferentLocale.id,
+          targetProfileId: trainingWithDifferentLocale.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: trainingWithDifferentTargetProfile.id,
+          targetProfileId: trainingWithDifferentTargetProfile.targetProfileIds[0],
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(2);
+        expect(trainings[0]).to.be.instanceOf(Training);
+        expect(trainings[0]).to.deep.equal(training1);
       });
 
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: training2.id,
-        targetProfileId: training2.targetProfileIds[0],
+      it('should return trainings with trainingTriggers', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+        const training = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile.id],
+          locale: 'fr-fr',
+          locales: ['fr', 'fr-fr'],
+        });
+
+        const goalTrainingTrigger = {
+          trainingId: training.id,
+          type: TrainingTrigger.types.GOAL,
+          threshold: 80,
+        };
+
+        databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training.id,
+          targetProfileId: training.targetProfileIds[0],
+        });
+
+        const expectedGoalTrainingTrigger = databaseBuilder.factory.buildTrainingTrigger(goalTrainingTrigger);
+        const expectedGoalTube = databaseBuilder.factory.buildTrainingTriggerTube({
+          trainingTriggerId: expectedGoalTrainingTrigger.id,
+          tubeId: tube.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(1);
+        expect(trainings[0]).to.be.instanceOf(Training);
+        expect(_.omit(trainings[0], 'trainingTriggers')).to.deep.equal(_.omit(training, 'trainingTriggers'));
+
+        expect(trainings[0].trainingTriggers).to.have.lengthOf(1);
+
+        const trainingTrigger0 = trainings[0].trainingTriggers[0];
+        expect(trainingTrigger0).to.be.instanceOf(TrainingTrigger);
+        expect(_.omit(trainingTrigger0, 'triggerTubes')).to.deep.equal(
+          _.omit(
+            new TrainingTrigger({
+              ...expectedGoalTrainingTrigger,
+            }),
+            'triggerTubes',
+          ),
+        );
+        expect(trainingTrigger0.triggerTubes).to.have.lengthOf(1);
+        expect(trainingTrigger0.triggerTubes[0]).to.be.instanceOf(TrainingTriggerTube);
+        expect(trainingTrigger0.triggerTubes[0].id).to.equal(expectedGoalTube.id);
+        expect(trainingTrigger0.triggerTubes[0].tube.id).to.equal(expectedGoalTube.tubeId);
+        expect(trainingTrigger0.triggerTubes[0].level).to.equal(expectedGoalTube.level);
       });
 
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: trainingWithDifferentLocale.id,
-        targetProfileId: trainingWithDifferentLocale.targetProfileIds[0],
+      it('should return an empty array when campaign has target-profile not linked to training', async function () {
+        // given
+        const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
+        const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({
+          targetProfileId: targetProfile1.id,
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+        });
+        const training = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile2.id],
+          locale: 'fr-fr',
+          locales: ['fr', 'fr-fr'],
+        });
+
+        databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training.id,
+          targetProfileId: training.targetProfileIds[0],
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(0);
       });
-
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: trainingWithDifferentTargetProfile.id,
-        targetProfileId: trainingWithDifferentTargetProfile.targetProfileIds[0],
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
-        campaignParticipationId: campaignParticipation.id,
-        locale: 'fr-fr',
-      });
-
-      // then
-      expect(trainings).to.have.lengthOf(2);
-      expect(trainings[0]).to.be.instanceOf(Training);
-      expect(trainings[0]).to.deep.equal(training1);
     });
 
-    it('should return trainings with trainingTriggers', async function () {
-      // given
-      const targetProfile = databaseBuilder.factory.buildTargetProfile();
-      const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
-      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
-      const training = domainBuilder.buildTraining({
-        id: 1,
-        title: 'training 1',
-        targetProfileIds: [targetProfile.id],
-        locale: 'fr-fr',
+    describe('when "multipleLocalesForTrainingsEnabled" feature toggle is false', function () {
+      beforeEach(async function () {
+        await featureToggles.set('multipleLocalesForTrainingsEnabled', false);
       });
 
-      const goalTrainingTrigger = {
-        trainingId: training.id,
-        type: TrainingTrigger.types.GOAL,
-        threshold: 80,
-      };
+      it('should find trainings by campaignParticipationId and locale', async function () {
+        // given
+        const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
+        const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({
+          targetProfileId: targetProfile1.id,
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+        });
+        const training1 = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'fr-fr',
+          trainingTriggers: [],
+        });
+        const training2 = domainBuilder.buildTraining({
+          id: 2,
+          title: 'training 2',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'fr-fr',
+          trainingTriggers: [],
+        });
+        const trainingWithDifferentLocale = domainBuilder.buildTraining({
+          id: 3,
+          title: 'training 3',
+          targetProfileIds: [targetProfile1.id],
+          locale: 'en',
+          trainingTriggers: [],
+        });
+        const trainingWithDifferentTargetProfile = domainBuilder.buildTraining({
+          id: 4,
+          title: 'training 4',
+          targetProfileIds: [targetProfile2.id],
+          locale: 'fr-fr',
+          trainingTriggers: [],
+        });
 
-      databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: training.id,
-        targetProfileId: training.targetProfileIds[0],
+        databaseBuilder.factory.buildTraining({ ...training1, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...training2, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...trainingWithDifferentLocale, duration: '5h' });
+        databaseBuilder.factory.buildTraining({ ...trainingWithDifferentTargetProfile, duration: '5h' });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training1.id,
+          targetProfileId: training1.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training2.id,
+          targetProfileId: training2.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: trainingWithDifferentLocale.id,
+          targetProfileId: trainingWithDifferentLocale.targetProfileIds[0],
+        });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: trainingWithDifferentTargetProfile.id,
+          targetProfileId: trainingWithDifferentTargetProfile.targetProfileIds[0],
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(2);
+        expect(trainings[0]).to.be.instanceOf(Training);
+        expect(trainings[0]).to.deep.equal(training1);
       });
 
-      const expectedGoalTrainingTrigger = databaseBuilder.factory.buildTrainingTrigger(goalTrainingTrigger);
-      const expectedGoalTube = databaseBuilder.factory.buildTrainingTriggerTube({
-        trainingTriggerId: expectedGoalTrainingTrigger.id,
-        tubeId: tube.id,
+      it('should return trainings with trainingTriggers', async function () {
+        // given
+        const targetProfile = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ campaignId: campaign.id });
+        const training = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile.id],
+          locale: 'fr-fr',
+        });
+
+        const goalTrainingTrigger = {
+          trainingId: training.id,
+          type: TrainingTrigger.types.GOAL,
+          threshold: 80,
+        };
+
+        databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training.id,
+          targetProfileId: training.targetProfileIds[0],
+        });
+
+        const expectedGoalTrainingTrigger = databaseBuilder.factory.buildTrainingTrigger(goalTrainingTrigger);
+        const expectedGoalTube = databaseBuilder.factory.buildTrainingTriggerTube({
+          trainingTriggerId: expectedGoalTrainingTrigger.id,
+          tubeId: tube.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(1);
+        expect(trainings[0]).to.be.instanceOf(Training);
+        expect(_.omit(trainings[0], 'trainingTriggers')).to.deep.equal(_.omit(training, 'trainingTriggers'));
+
+        expect(trainings[0].trainingTriggers).to.have.lengthOf(1);
+
+        const trainingTrigger0 = trainings[0].trainingTriggers[0];
+        expect(trainingTrigger0).to.be.instanceOf(TrainingTrigger);
+        expect(_.omit(trainingTrigger0, 'triggerTubes')).to.deep.equal(
+          _.omit(
+            new TrainingTrigger({
+              ...expectedGoalTrainingTrigger,
+            }),
+            'triggerTubes',
+          ),
+        );
+        expect(trainingTrigger0.triggerTubes).to.have.lengthOf(1);
+        expect(trainingTrigger0.triggerTubes[0]).to.be.instanceOf(TrainingTriggerTube);
+        expect(trainingTrigger0.triggerTubes[0].id).to.equal(expectedGoalTube.id);
+        expect(trainingTrigger0.triggerTubes[0].tube.id).to.equal(expectedGoalTube.tubeId);
+        expect(trainingTrigger0.triggerTubes[0].level).to.equal(expectedGoalTube.level);
       });
 
-      await databaseBuilder.commit();
+      it('should return an empty array when campaign has target-profile not linked to training', async function () {
+        // given
+        const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
+        const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
+        const campaign = databaseBuilder.factory.buildCampaign({
+          targetProfileId: targetProfile1.id,
+        });
+        const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId: campaign.id,
+        });
+        const training = domainBuilder.buildTraining({
+          id: 1,
+          title: 'training 1',
+          targetProfileIds: [targetProfile2.id],
+          locale: 'fr-fr',
+        });
 
-      // when
-      const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
-        campaignParticipationId: campaignParticipation.id,
-        locale: 'fr-fr',
+        databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
+
+        databaseBuilder.factory.buildTargetProfileTraining({
+          trainingId: training.id,
+          targetProfileId: training.targetProfileIds[0],
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
+          campaignParticipationId: campaignParticipation.id,
+          locale: 'fr-fr',
+        });
+
+        // then
+        expect(trainings).to.have.lengthOf(0);
       });
-
-      // then
-      expect(trainings).to.have.lengthOf(1);
-      expect(trainings[0]).to.be.instanceOf(Training);
-      expect(_.omit(trainings[0], 'trainingTriggers')).to.deep.equal(_.omit(training, 'trainingTriggers'));
-
-      expect(trainings[0].trainingTriggers).to.have.lengthOf(1);
-
-      const trainingTrigger0 = trainings[0].trainingTriggers[0];
-      expect(trainingTrigger0).to.be.instanceOf(TrainingTrigger);
-      expect(_.omit(trainingTrigger0, 'triggerTubes')).to.deep.equal(
-        _.omit(
-          new TrainingTrigger({
-            ...expectedGoalTrainingTrigger,
-          }),
-          'triggerTubes',
-        ),
-      );
-      expect(trainingTrigger0.triggerTubes).to.have.lengthOf(1);
-      expect(trainingTrigger0.triggerTubes[0]).to.be.instanceOf(TrainingTriggerTube);
-      expect(trainingTrigger0.triggerTubes[0].id).to.equal(expectedGoalTube.id);
-      expect(trainingTrigger0.triggerTubes[0].tube.id).to.equal(expectedGoalTube.tubeId);
-      expect(trainingTrigger0.triggerTubes[0].level).to.equal(expectedGoalTube.level);
-    });
-
-    it('should return an empty array when campaign has target-profile not linked to training', async function () {
-      // given
-      const targetProfile1 = databaseBuilder.factory.buildTargetProfile();
-      const targetProfile2 = databaseBuilder.factory.buildTargetProfile();
-      const campaign = databaseBuilder.factory.buildCampaign({
-        targetProfileId: targetProfile1.id,
-      });
-      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId: campaign.id,
-      });
-      const training = domainBuilder.buildTraining({
-        id: 1,
-        title: 'training 1',
-        targetProfileIds: [targetProfile2.id],
-        locale: 'fr-fr',
-      });
-
-      databaseBuilder.factory.buildTraining({ ...training, duration: '5h' });
-
-      databaseBuilder.factory.buildTargetProfileTraining({
-        trainingId: training.id,
-        targetProfileId: training.targetProfileIds[0],
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const trainings = await trainingRepository.findWithTriggersByCampaignParticipationIdAndLocale({
-        campaignParticipationId: campaignParticipation.id,
-        locale: 'fr-fr',
-      });
-
-      // then
-      expect(trainings).to.have.lengthOf(0);
     });
   });
 
