@@ -54,6 +54,8 @@ class OrganizationForAdmin {
     countryCode,
     countryName,
     organizationLearnerType,
+    networkId,
+    networkName,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -145,6 +147,8 @@ class OrganizationForAdmin {
     this.code = code;
     this.countryCode = countryCode;
     this.countryName = countryName;
+    this.networkId = networkId;
+    this.networkName = networkName;
 
     this.#validate();
   }
