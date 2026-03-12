@@ -56,6 +56,7 @@ Router.map(function () {
 
     this.route('networks', function () {
       this.route('new');
+      this.route('list');
     });
 
     this.route('campaigns', function () {
