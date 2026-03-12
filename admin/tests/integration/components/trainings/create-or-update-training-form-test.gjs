@@ -428,5 +428,20 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       // then
       assert.dom(screen.queryByLabelText('Langue localisée')).doesNotExist();
     });
+
+    test('it should set locale to "fr-fr" when no locale is selected', async function (assert) {
+      // given
+      const onSubmitStub = sinon.stub();
+      await render(
+        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
+      );
+
+      // when
+      await triggerEvent('form', 'submit');
+
+      // then
+      const submittedData = onSubmitStub.getCall(0).firstArg;
+      assert.strictEqual(submittedData.locale, 'fr-fr');
+    });
   });
 });
