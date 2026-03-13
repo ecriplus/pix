@@ -41,6 +41,7 @@ const deleteOrganizationLearners = async function ({
   const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
 
   const auditLoggingJobs = [];
+  const campaignParticipationsToDelete = [];
 
   await DomainTransaction.execute(async () => {
     const assessmentsToUpdate = [];
@@ -72,7 +73,7 @@ const deleteOrganizationLearners = async function ({
 
       for (const campaignParticipation of campaignParticipations) {
         campaignParticipation.delete(userId);
-        await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+        campaignParticipationsToDelete.push(campaignParticipation.dataToUpdateOnDeletion);
 
         auditLoggingJobs.push(
           AuditLoggingJob.forUser({
@@ -99,6 +100,7 @@ const deleteOrganizationLearners = async function ({
       await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
     }
     await assessmentRepository.batchRemoveParticipationId(assessmentsToUpdate);
+    await campaignParticipationRepositoryFromBC.updateInBatchByIds(campaignParticipationsToDelete);
   });
 
   for (const auditLoggingJob of auditLoggingJobs) {

@@ -22,11 +22,12 @@ const deleteCampaignParticipation = async function ({
     });
 
   const auditLoggingJobs = [];
+  const campaignParticipationToDelete = [];
 
   await DomainTransaction.execute(async () => {
     for (const campaignParticipation of campaignParticipations) {
       campaignParticipation.delete(userId);
-      await campaignParticipationRepository.remove(campaignParticipation.dataToUpdateOnDeletion);
+      campaignParticipationToDelete.push(campaignParticipation.dataToUpdateOnDeletion);
 
       auditLoggingJobs.push(
         AuditLoggingJob.forUser({
@@ -39,6 +40,9 @@ const deleteCampaignParticipation = async function ({
         }),
       );
     }
+
+    await campaignParticipationRepository.updateInBatchByIds(campaignParticipationToDelete);
+
     const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
     await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
       campaignParticipationIds,
