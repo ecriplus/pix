@@ -111,7 +111,7 @@ export class LearningContentRepository {
 
       return dtos;
     } finally {
-      this.#metrics.find.observe(dtos.length);
+      if (dtos) this.#metrics.find.observe(dtos.length);
     }
   }
 
