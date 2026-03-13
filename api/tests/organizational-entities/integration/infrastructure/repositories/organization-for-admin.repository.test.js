@@ -867,6 +867,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: 'Mother Of Dark Side',
         countryCode: 99100,
+        networkId: null,
+        networkName: null,
       });
       expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
     });
@@ -967,6 +969,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
           organizationLearnerType: domainOrganizationLearnerType,
+          networkId: null,
+          networkName: null,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
       });
@@ -1079,8 +1083,36 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
           organizationLearnerType: domainOrganizationLearnerType,
+          networkId: null,
+          networkName: null,
         });
         expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
+      });
+    });
+
+    describe('when the organization belongs to a network', function () {
+      it('should return the network id and name', async function () {
+        // given
+        const organization = databaseBuilder.factory.buildOrganization({
+          organizationLearnerTypeId: organizationLearnerType.id,
+        });
+        const network = databaseBuilder.factory.buildNetwork({ name: 'Réseau Académique' });
+        const structure = databaseBuilder.factory.buildStructure();
+        databaseBuilder.factory.buildFactStructure({
+          structureId: structure.id,
+          networkId: network.id,
+          organizationId: organization.id,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const foundOrganizationForAdmin = await repositories.organizationForAdminRepository.get({
+          organizationId: organization.id,
+        });
+
+        // then
+        expect(foundOrganizationForAdmin.networkId).to.equal(network.id);
+        expect(foundOrganizationForAdmin.networkName).to.equal(network.name);
       });
     });
 
@@ -1186,6 +1218,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
           administrationTeamName: administrationTeam.name,
           countryCode: 99100,
           organizationLearnerType: domainOrganizationLearnerType,
+          networkId: null,
+          networkName: null,
         });
         expect(foundOrganizationForAdmin).to.deepEqualInstance(expectedOrganizationForAdmin);
       });

@@ -115,6 +115,7 @@ const get = async function ({ organizationId }) {
       formNPSUrl: 'organizations.formNPSUrl',
       showSkills: 'organizations.showSkills',
       archivedAt: 'organizations.archivedAt',
+
       archivistFirstName: 'archivists.firstName',
       archivistLastName: 'archivists.lastName',
       dataProtectionOfficerFirstName: 'dataProtectionOfficers.firstName',
@@ -130,6 +131,8 @@ const get = async function ({ organizationId }) {
       countryCode: 'organizations.countryCode',
       organizationLearnerTypeName: 'organization_learner_types.name',
       organizationLearnerTypeId: 'organization_learner_types.id',
+      networkId: 'networks.id',
+      networkName: 'networks.name',
     })
     .leftJoin('users AS archivists', 'archivists.id', 'organizations.archivedBy')
     .leftJoin(
@@ -145,6 +148,8 @@ const get = async function ({ organizationId }) {
       'organizations.id',
     )
     .leftJoin('organizations AS parentOrganizations', 'parentOrganizations.id', 'organizations.parentOrganizationId')
+    .leftJoin('fct_structures', 'fct_structures.organization_id', 'organizations.id')
+    .leftJoin('networks', 'networks.id', 'fct_structures.network_id')
     .where('organizations.id', organizationId)
     .first();
 
@@ -499,6 +504,8 @@ function _toDomain(rawOrganization) {
       rawOrganization.organizationLearnerTypeId,
       rawOrganization.organizationLearnerTypeName,
     ),
+    networkId: rawOrganization.networkId,
+    networkName: rawOrganization.networkName,
   });
 
   return organization;
