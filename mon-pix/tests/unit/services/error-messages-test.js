@@ -70,7 +70,7 @@ module('Unit | Service | errorMessages', function (hooks) {
           // given
           const error = {
             code: 'USER_IS_TEMPORARY_BLOCKED',
-            meta: { locale: 'fr', blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: false },
+            meta: { blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: false },
           };
 
           // when
@@ -92,7 +92,7 @@ module('Unit | Service | errorMessages', function (hooks) {
           // given
           const error = {
             code: 'USER_IS_TEMPORARY_BLOCKED',
-            meta: { locale: 'fr', blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: true },
+            meta: { blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: true },
           };
 
           // when
@@ -114,7 +114,7 @@ module('Unit | Service | errorMessages', function (hooks) {
       module('USER_IS_BLOCKED', function () {
         test('When isLoginFailureWithUsername is false', function (assert) {
           // given
-          const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr' }, isLoginFailureWithUsername: false };
+          const error = { code: 'USER_IS_BLOCKED', meta: { isLoginFailureWithUsername: false } };
 
           // when
           const errorMessages = this.owner.lookup('service:errorMessages');
@@ -132,7 +132,7 @@ module('Unit | Service | errorMessages', function (hooks) {
 
         test('When isLoginFailureWithUsername is true', function (assert) {
           // given
-          const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr', isLoginFailureWithUsername: true } };
+          const error = { code: 'USER_IS_BLOCKED', meta: { isLoginFailureWithUsername: true } };
 
           // when
           const errorMessages = this.owner.lookup('service:errorMessages');
@@ -155,7 +155,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             // given
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', isLoginFailureWithUsername: false },
+              meta: { isLoginFailureWithUsername: false },
             };
 
             // when
@@ -174,7 +174,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             const remainingAttempts = 8;
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', remainingAttempts, isLoginFailureWithUsername: false },
+              meta: { remainingAttempts, isLoginFailureWithUsername: false },
             };
 
             // when
@@ -197,7 +197,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             // given
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', isLoginFailureWithUsername: true },
+              meta: { isLoginFailureWithUsername: true },
             };
 
             // when
@@ -216,7 +216,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             const remainingAttempts = 8;
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', remainingAttempts, isLoginFailureWithUsername: true },
+              meta: { remainingAttempts, isLoginFailureWithUsername: true },
             };
 
             // when
