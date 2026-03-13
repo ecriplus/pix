@@ -616,6 +616,7 @@
       }
     },
     "networks": {
+      "copy-id": "Copy ID",
       "creation": {
         "actions": {
           "submit": "Create the network"
@@ -634,6 +635,10 @@
         "organization-id": {
           "label": "ID of the organization at the head of the network:"
         }
+      },
+      "information-view": {
+        "head-organization": "Head organisation",
+        "head-organization-id": "ID of the head organisation"
       },
       "list": {
         "table": {
@@ -1345,6 +1350,12 @@
       "title": "Access to this Pix Admin space is limited to administrators."
     },
     "networks": {
+      "get": {
+        "breadcrumb": {
+          "parent-page": "All networks"
+        },
+        "page-title": "Network"
+      },
       "list": {
         "new-button": "New network",
         "page-title": "Networks",

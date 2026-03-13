@@ -1,0 +1,13 @@
+@use 'pix-design-tokens/typography';
+
+.network__information-view__head-organization-id {
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
+}
+
+.network__information-view__head-organization-id__label {
+  display: flex;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
+}
