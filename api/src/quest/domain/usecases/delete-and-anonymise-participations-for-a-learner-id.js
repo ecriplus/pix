@@ -8,7 +8,6 @@ export const deleteAndAnonymizeParticipationsForALearnerId = withTransaction(
     combinedCourseId,
     userId,
     organizationLearnerId,
-    combinedCourseDetailsService,
     campaignParticipationRepository,
   }) => {
     await organizationLearnerParticipationRepository.deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationLearnerId(
@@ -16,19 +15,6 @@ export const deleteAndAnonymizeParticipationsForALearnerId = withTransaction(
     );
     const campaignIds = await campaignRepository.getCampaignIdsByCombinedCourseIds({
       combinedCourseIds: [combinedCourseId],
-    });
-
-    const modulesIdsToDelete = [];
-
-    const { modules } = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
-      combinedCourseId,
-    });
-    modulesIdsToDelete.push(...modules.map((module) => module.id));
-
-    await organizationLearnerParticipationRepository.deletePassagesByModuleIdsAndOrganizationLearnerId({
-      moduleIds: modulesIdsToDelete,
-      organizationLearnerId,
-      userId,
     });
 
     for (const campaignId of campaignIds) {
