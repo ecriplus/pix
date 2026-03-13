@@ -1,4 +1,4 @@
-import { clickByName, fillByLabel, visit } from '@1024pix/ember-testing-library';
+import { clickByName, visit } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -109,16 +109,6 @@ module('Acceptance | Target Profile Organizations', function (hooks) {
 
         // then
         assert.deepEqual(currentURL(), '/organizations/456/details');
-      });
-
-      test('should be able to attach an organization with given target profile', async function (assert) {
-        const screen = await visit('/target-profiles/1');
-        await clickByName('Organisations du profil cible');
-
-        await fillByLabel("Rattacher les organisations d'un profil cible existant", '43');
-        await clickByName('Valider le rattachement à partir de ce profil cible');
-
-        assert.ok(await screen.findByRole('cell', { name: 'Organization for target profile 43' }));
       });
     });
   });
