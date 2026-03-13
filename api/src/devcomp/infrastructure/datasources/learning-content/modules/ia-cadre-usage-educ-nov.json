@@ -747,8 +747,8 @@
                       "id": "caf64770-cbc2-445e-9815-923e6d71cf2f",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IA_Enseignants_IND/timeline.svg",
-                      "alt": "Infographie décrite dans l'alternative textuelle",
-                      "alternativeText": "<ul><li>À partir de l'école primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs </li><li>À partir de la 4e au collège&nbsp;: usage limité en classe, toujours accompagné par l’enseignant    </li><li>À partir du lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini</li></ul>",
+                      "alt": "Infographie décrite dans l’alternative textuelle",
+                      "alternativeText": "<ul><li>À partir de l’école primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs </li><li>À partir de la 4e au collège&nbsp;: usage limité en classe, toujours accompagné par l’enseignant    </li><li>À partir du lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini</li></ul>",
                       "legend": "",
                       "licence": ""
                     },
@@ -761,7 +761,7 @@
                       "id": "86bb793c-a258-4654-b1a2-866bdf5b98b4",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IA_Enseignants_IND/conditions.svg",
-                      "alt": "Infographie décrite dans l'alternative textuelle",
+                      "alt": "Infographie décrite dans l’alternative textuelle",
                       "alternativeText": "<ul><li>Encadrement pédagogique explicite par l’enseignant </li><li>   Protection stricte des données personnelles, sans création de comptes sur des services grand public </li><li>   Primauté de l’apprentissage&nbsp;: l’IA ne doit jamais remplacer l’effort intellectuel de l’apprenant</li></ul>",
                       "legend": "",
                       "licence": ""
@@ -806,7 +806,7 @@
                 "id": "24867f55-87f3-4edc-8da6-8847cdeea904",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/IA_Enseignants_IND/recap.svg",
-                "alt": "Infographie décrite dans l'alternative textuelle",
+                "alt": "Infographie décrite dans l’alternative textuelle",
                 "alternativeText": "<h4>Pour un usage éclairé et responsable de l’IA en éducation</h4><ul><li>Vous pouvez utiliser l’IA comme <strong>assistante </strong>mais restez critique face à la pertinence de son usage et aux réponses générées.</li><li>Au vu de son coût environnemental élevé, évaluez la <strong>nécessité réelle du recours à l’IA pour chaque usage</strong>.</li><li>Dans le respect du <strong>RGPD</strong>, soyez vigilant et <strong>renoncez à l’IA</strong> dès que des <strong>données personnelles</strong>, confidentielles ou protégées par le droit d’auteur sont en jeu.</li><li>Introduisez de manière <strong>progressive, encadrée et sécurisée</strong> l’usage de l’IA avec vos élèves.</li></ul>",
                 "legend": "",
                 "licence": ""
@@ -1313,43 +1313,47 @@
               "element": {
                 "id": "8a352994-da21-41a3-bfb6-d87536077b2c",
                 "type": "text",
-                "content": "<p>Pour terminer ce module, vous allez devoir relever un défi. 💫</p><p><br>Un enseignant veut sensibiliser ses élèves aux enjeux environnementaux de l’IA générative.&nbsp; <br>Il les invite à comparer deux logiciels d’IA générative avec la même requête&nbsp;: «&nbsp;Explique-moi la méthode de la dissertation pour le bac de français et donne des exemples de sujets des années précédentes.&nbsp;»<br>Grâce à un outil proposé par leur enseignant, les élèves se rendent compte que l’énergie consommée est très importante (environ 100 wattheures).<br> </p><p><br>Testez la même activité en vous rendant sur <a href=\"https://comparia.beta.gouv.fr/\">Compar:ia</a> et en sélectionnant le modèle Gemini 3 flash. Le site ajoutera automatiquement un deuxième grand modèle de langage pour comparer leurs deux réponses.</p>"
+                "content": "<p>En classe, un enseignant propose une activité à ses élèves&nbsp;: observer comment un moteur de recherche et un logiciel d’IA générative répondent à la requête suivante&nbsp;: “Explique-moi la méthode de la dissertation pour le bac de français et donne-moi des exemples de titres”.</p><p> Les élèves constatent que le moteur de recherche se contente de pointer vers une ressource déjà disponible en ligne. À l’inverse, l’IA génère une nouvelle réponse, selon la suite de mots la plus probable.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "4f6307f5-8f02-4092-aff6-ca5b8deee2d8",
-                "type": "qcu",
-                "instruction": "<p>À combien équivaut l’énergie consommée par Gemini3 flash pour répondre à cette requête ?</p>",
+                "type": "qcu-discovery",
+                "instruction": "<p>Comment appelle-t-on les unités de texte que l’IA calcule et génère une à une pour construire sa réponse ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>À laisser une ampoule LED allumée pendant plus de 2 heures ou à 15 minutes de streaming.</p>",
+                    "content": "<p>Un token</p>",
                     "feedback": {
-                      "state": "<p>Pas tout à fait !</p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. <br>Plus globalement, la maîtrise des différents enjeux de l’IA permet aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
+                      "diagnosis": "<p>Effectivement !&nbsp;Une IA générative produit sa réponse <strong>token par token </strong>(ou jeton par jeton). Chaque unité de texte nécessite des calculs informatiques complexes, ce qui explique pourquoi l’IA a un coût environnemental si élevé. Pour une tâche comme celle proposée ci-dessus, il vaut mieux privilégier une recherche web ou un manuel scolaire !</p><p>Il est important que les enseignants aient conscience de ce fort coût environnemental. Et plus globalement, la maîtrise des divers enjeux de l’IA leur permet de construire une <strong>posture professionnelle éclairée et responsable</strong>, indispensable pour la <strong>sensibilisation de leurs élèves</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>À laisser une ampoule LED allumée pendant plus de 15 heures ou à plus d’1 heure de streaming.</p>",
+                    "content": "<p>Un pixel</p>",
                     "feedback": {
-                      "state": "<p>Effectivement !</p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience. <br>Plus globalement, la maîtrise des différents enjeux de l’IA permet aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Une IA générative produit sa réponse <strong>token par token </strong>(ou jeton par jeton). Chaque unité de texte nécessite des calculs informatiques complexes, ce qui explique pourquoi l’IA a un coût environnemental si élevé. Pour une tâche comme celle proposée ci-dessus, il vaut mieux privilégier une recherche web ou un manuel scolaire !</p><p>Il est important que les enseignants aient conscience de ce fort coût environnemental. Et plus globalement, la maîtrise des divers enjeux de l’IA leur permet de construire une <strong>posture professionnelle éclairée et responsable</strong>, indispensable pour la <strong>sensibilisation de leurs élèves</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>À laisser une ampoule LED allumée pendant plus de 35 heures ou à 4 heures de streaming.</p>",
+                    "content": "<p>Un bit</p>",
                     "feedback": {
-                      "state": "<p>Pas tout à fait !&nbsp;<br></p>",
-                      "diagnosis": "<p>L’IA générative a un coût environnemental important, ce qui impose aux enseignants d’en prendre conscience.&nbsp;<br>Plus globalement, la maîtrise des différents enjeux de l’IA permet aux enseignants de construire une posture professionnelle éclairée et responsable, indispensable pour la sensibilisation de leurs élèves.</p>"
+                      "diagnosis": "<p>Eh non !&nbsp;Une IA générative produit sa réponse <strong>token par token </strong>(ou jeton par jeton). Chaque unité de texte nécessite des calculs informatiques complexes, ce qui explique pourquoi l’IA a un coût environnemental si élevé. Pour une tâche comme celle proposée ci-dessus, il vaut mieux privilégier une recherche web ou un manuel scolaire !</p><p>Il est important que les enseignants aient conscience de ce fort coût environnemental. Et plus globalement, la maîtrise des divers enjeux de l’IA leur permet de construire une <strong>posture professionnelle éclairée et responsable</strong>, indispensable pour la <strong>sensibilisation de leurs élèves</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Une IA générative produit sa réponse <strong>token par token </strong>(ou jeton par jeton). Chaque unité de texte nécessite des calculs informatiques complexes, ce qui explique pourquoi l’IA a un coût environnemental si élevé. Pour une tâche comme celle proposée ci-dessus, il vaut mieux privilégier une recherche web ou un manuel scolaire !</p><p>Il est important que les enseignants aient conscience de ce fort coût environnemental. Et plus globalement, la maîtrise des divers enjeux de l’IA leur permet de construire une <strong>posture professionnelle éclairée et responsable</strong>, indispensable pour la <strong>sensibilisation de leurs élèves</strong>.</p>"
                     }
                   }
                 ],
-                "solution": "2"
+                "solution": "1"
               }
             }
           ]
