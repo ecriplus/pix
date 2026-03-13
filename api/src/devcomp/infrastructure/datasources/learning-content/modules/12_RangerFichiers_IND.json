@@ -120,7 +120,7 @@
               "element": {
                 "id": "72dc94ee-2e28-47f0-8605-aa4242b94961",
                 "type": "text",
-                "content": "<p>Clarisse a ouvert le dossier «&nbsp;Famille&nbsp;»&nbsp; de son ordinateur.<br>Une fenêtre s’ouvre et lui montre les fichiers qui se trouve dans le dossier «&nbsp;Famille&nbsp;» mais aussi l’organisation de ses dossiers&nbsp;:</p>"
+                "content": "<p>Clarisse a ouvert le dossier «&nbsp;Famille&nbsp;» de son ordinateur.<br>Une fenêtre s’ouvre et lui montre les fichiers qui se trouve dans le dossier «&nbsp;Famille&nbsp;» mais aussi l’organisation de ses dossiers&nbsp;:</p>"
               }
             },
             {
@@ -425,11 +425,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué.&nbsp;</p>",
-                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;:&nbsp;Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
+                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;:&nbsp;<br>Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
                   },
                   "invalid": {
                     "state": "Presque ça !",
-                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;».<br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;: Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
+                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;».<br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;:<br> Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
                   }
                 }
               }
