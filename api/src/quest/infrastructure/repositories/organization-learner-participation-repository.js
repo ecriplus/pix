@@ -45,7 +45,6 @@ export const synchronize = async ({ organizationLearnerId, moduleIds, modulesApi
 
   const learnerParticipationsByModule = await knexConn('organization_learner_participations')
     .select('organization_learner_participations.id', 'referenceId')
-    .whereNull('deletedAt')
     .where('organizationLearnerId', organizationLearnerId)
     .whereIn('referenceId', moduleIds);
 
@@ -87,17 +86,6 @@ export const deleteCombinedCourseParticipationByCombinedCourseIdAndOrganizationL
     .andWhere('referenceId', combinedCourseId.toString());
 };
 
-export const deletePassagesByModuleIdsAndOrganizationLearnerId = async ({
-  moduleIds,
-  organizationLearnerId,
-  userId,
-}) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  await baseUpdateQuery(knexConn, userId)
-    .whereIn('referenceId', moduleIds)
-    .andWhere('organizationLearnerId', organizationLearnerId);
-};
 export const deleteCombinedCourseParticipations = async ({ combinedCourseIds, userId }) => {
   const knexConn = DomainTransaction.getConnection();
 
@@ -106,12 +94,6 @@ export const deleteCombinedCourseParticipations = async ({ combinedCourseIds, us
     'organization_learner_participations.referenceId',
     stringifiedCombinedCourseIds,
   );
-};
-
-export const deletePassagesByModuleIds = async ({ moduleIds, userId }) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  await baseUpdateQuery(knexConn, userId).whereIn('organization_learner_participations.referenceId', moduleIds);
 };
 
 function baseUpdateQuery(knexConn, userId) {
