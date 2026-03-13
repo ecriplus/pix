@@ -1,39 +1,35 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import ScoBanner from 'pix-orga/components/banner/sco-banner';
-import ScoIABanner from 'pix-orga/components/banner/sco-ia-banner';
 
-export default class ScommunicationBanner extends Component {
+export default class ScoCommunicationBanner extends Component {
   @service currentUser;
   @service router;
-  @service featureToggles;
+  @service store;
+  @service locale;
 
   get shouldDisplayBanner() {
-    const isValidRoute =
-      this.args.forceDisplayBanner ||
+    return (
       [
+        'authenticated.campaigns.combined-courses',
         'authenticated.campaigns.list.my-campaigns',
         'authenticated.campaigns.list.all-campaigns',
         'authenticated.team.list.members',
         'authenticated.sco-organization-participants.list',
-      ].includes(this.router.currentRouteName);
-    return isValidRoute && this.currentUser.isSCOManagingStudents;
-  }
-  get importParticipantUrl() {
-    return this.router.urlFor('authenticated.import-organization-participants');
+      ].includes(this.router.currentRouteName) &&
+      this.currentUser.isSCOManagingStudents &&
+      this.scoBannerContent
+    );
   }
 
-  get displayIaBanner() {
-    return this.featureToggles.featureToggles?.displayIaCampaignBanner ?? false;
+  get scoBannerContent() {
+    const content = this.store.peekRecord('announcement', 'SCO')?.content;
+    return content?.[this.locale.currentLanguage] ?? null;
   }
 
   <template>
     {{#if this.shouldDisplayBanner}}
-      {{#if this.displayIaBanner}}
-        <ScoIABanner />
-      {{else}}
-        <ScoBanner />
-      {{/if}}
+      <ScoBanner @content={{this.scoBannerContent}} />
     {{/if}}
   </template>
 }

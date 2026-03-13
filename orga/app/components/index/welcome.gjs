@@ -1,9 +1,10 @@
 import { t } from 'ember-intl';
-import ScoCommunication from 'pix-orga/components/banner/sco-communication';
+import { and } from 'ember-truth-helpers';
+import ScoBanner from 'pix-orga/components/banner/sco-banner';
 import PageTitle from 'pix-orga/components/ui/page-title';
 
 <template>
-  <PageTitle class="welcome__title" @displayNotificationAlert={{@displayScoBanner}}>
+  <PageTitle class="welcome__title" @displayNotificationAlert={{and @displayScoBanner @scoBannerContent}}>
     <:title>
       {{t "components.index.welcome.title" name=@firstName}}
     </:title>
@@ -13,7 +14,7 @@ import PageTitle from 'pix-orga/components/ui/page-title';
     </:subtitle>
 
     <:notificationAlert>
-      <ScoCommunication @forceDisplayBanner={{true}} />
+      <ScoBanner @content={{@scoBannerContent}} />
     </:notificationAlert>
   </PageTitle>
 </template>

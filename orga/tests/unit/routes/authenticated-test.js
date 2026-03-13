@@ -24,6 +24,36 @@ module('Unit | Route | authenticated', function (hooks) {
     };
   });
 
+  module('model', function () {
+    test('fetches sco banner when user is SCO managing students', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      sinon.stub(currentUserService, 'isSCOManagingStudents').value(true);
+      sinon.stub(store, 'findRecord').resolves();
+
+      // when
+      await route.model();
+
+      // then
+      sinon.assert.calledWithExactly(store.findRecord, 'announcement', 'SCO');
+      assert.ok(true);
+    });
+
+    test('does not fetch sco banner when user is not SCO managing students', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      sinon.stub(currentUserService, 'isSCOManagingStudents').value(false);
+      sinon.stub(store, 'findRecord').resolves();
+
+      // when
+      await route.model();
+
+      // then
+      sinon.assert.notCalled(store.findRecord);
+      assert.ok(true);
+    });
+  });
+
   module('beforeModel', function () {
     test('aborts transition if user not logged in', async function (assert) {
       // given

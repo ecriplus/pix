@@ -16,6 +16,21 @@ module('Unit | Route | application', function (hooks) {
   hooks.afterEach(function () {
     sinon.restore();
   });
+  module('model', function () {
+    test('does not fetch sco organization banner', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      sinon.stub(store, 'findRecord').resolves({ banners: [] });
+
+      // when
+      await this.route.model();
+
+      // then
+      sinon.assert.neverCalledWith(store.findRecord, 'announcement', sinon.match.any);
+      assert.ok(true);
+    });
+  });
+
   module('beforeModel', function () {
     test('sets best locale', async function (assert) {
       // given

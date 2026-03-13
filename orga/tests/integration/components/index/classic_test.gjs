@@ -46,7 +46,7 @@ module('Integration | Component | Index::Classic', function (hooks) {
   });
 
   module('when organisation is SCO and managingStudents', function () {
-    test('should display sco banner', async function (assert) {
+    test('should display sco banner with markdown content', async function (assert) {
       class CurrentUserStub extends Service {
         isSCOManagingStudents = true;
         prescriber = {
@@ -54,15 +54,19 @@ module('Integration | Component | Index::Classic', function (hooks) {
         };
       }
       this.owner.register('service:current-user', CurrentUserStub);
+
+      const store = this.owner.lookup('service:store');
+      store.createRecord('announcement', { id: 'SCO', content: { fr: 'Contenu de la bannière SCO' } });
+
       const screen = await render(<template><IndexClassic /></template>);
 
       // then
-      assert.ok(screen.getByText(t('banners.import.message')));
+      assert.ok(screen.getByText('Contenu de la bannière SCO'));
     });
   });
 
   module('when organisation is not SCO and managingStudents', function () {
-    test('should display sco banner', async function (assert) {
+    test('should not display sco banner', async function (assert) {
       class CurrentUserStub extends Service {
         isSCOManagingStudents = false;
         prescriber = {
@@ -70,10 +74,14 @@ module('Integration | Component | Index::Classic', function (hooks) {
         };
       }
       this.owner.register('service:current-user', CurrentUserStub);
+
+      const store = this.owner.lookup('service:store');
+      store.createRecord('announcement', { id: '1', content: { fr: 'Contenu de la bannière SCO' } });
+
       const screen = await render(<template><IndexClassic /></template>);
 
       // then
-      assert.notOk(screen.queryByText(t('banners.import.message')));
+      assert.notOk(screen.queryByText('Contenu de la bannière SCO'));
     });
   });
 

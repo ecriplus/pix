@@ -51,6 +51,38 @@ describe('Acceptance | Router | announcement-route', function () {
         headers = generateAuthenticatedUserRequestHeaders({ userId: 1234 });
       });
 
+      it('should return 400 when content contains an unsupported locale key', async function () {
+        const response = await server.inject({
+          method: 'PATCH',
+          url: '/api/admin/announcements/SCO',
+          headers,
+          payload: {
+            data: {
+              type: 'announcements',
+              attributes: { content: { invalid_locale: 'some content' } },
+            },
+          },
+        });
+
+        expect(response.statusCode).to.equal(400);
+      });
+
+      it('should return 200 when content contains an empty string', async function () {
+        const response = await server.inject({
+          method: 'PATCH',
+          url: '/api/admin/announcements/SCO',
+          headers,
+          payload: {
+            data: {
+              type: 'announcements',
+              attributes: { content: { fr: '' } },
+            },
+          },
+        });
+
+        expect(response.statusCode).to.equal(200);
+      });
+
       it('should update the announcement content and return 200', async function () {
         const response = await server.inject({
           method: 'PATCH',

@@ -18,8 +18,9 @@ const showdownOptions = {
   strikethrough: true,
 };
 
+const converter = new showdown.Converter(showdownOptions);
+
 export function toHtml(markdown) {
-  const converter = new showdown.Converter(showdownOptions);
   const unsafeHtml = converter.makeHtml(markdown);
   const html = xss(unsafeHtml, {
     whiteList: xssWhitelist,
