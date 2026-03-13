@@ -23,11 +23,7 @@ describe('Unit | Service | Activity', function () {
 
       activityRepository.getLastActivity.withArgs(assessmentId).rejects(new ActivityNotFoundError());
 
-      const functionToCall = async () => {
-        await getCurrentActivity(activityRepository, assessmentId);
-      };
-
-      expect(functionToCall).to.not.throw();
+      await expect(getCurrentActivity(activityRepository, assessmentId)).not.to.be.rejected;
     });
 
     it('throws an error when the error is not a ActivityNotFoundError', async function () {
