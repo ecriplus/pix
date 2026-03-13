@@ -42,6 +42,7 @@ const deleteOrganizationLearners = async function ({
 
   const auditLoggingJobs = [];
   const campaignParticipationsToDelete = [];
+  const allCampaignParticipationIds = [];
 
   await DomainTransaction.execute(async () => {
     const assessmentsToUpdate = [];
@@ -88,18 +89,22 @@ const deleteOrganizationLearners = async function ({
       }
 
       const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-        campaignParticipationIds,
-      );
+      allCampaignParticipationIds.push(...campaignParticipationIds);
+
       const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
 
       assessments.forEach((assessment) => assessment.detachCampaignParticipation());
 
       assessmentsToUpdate.push(...assessments);
-
-      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
     }
+
     await assessmentRepository.batchRemoveParticipationId(assessmentsToUpdate);
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      allCampaignParticipationIds,
+    );
+    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
+      campaignParticipationIds: allCampaignParticipationIds,
+    });
     await campaignParticipationRepositoryFromBC.updateInBatchByIds(campaignParticipationsToDelete);
   });
 
