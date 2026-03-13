@@ -51,7 +51,6 @@ import { findPaginatedFilteredTargetProfileSummariesForAdmin } from './find-pagi
 import { findSkillsByTargetProfileIds } from './find-skills-by-target-profile-ids.js';
 import { getAvailableTargetProfilesForOrganization } from './get-available-target-profiles-for-organization.js';
 import { getLearningContentByTargetProfile } from './get-learning-content-by-target-profile.js';
-import { getLearningContentForTargetProfileSubmission } from './get-learning-content-for-target-profile-submission.js';
 import { getTargetProfile } from './get-target-profile.js';
 import { getTargetProfileContentAsJson } from './get-target-profile-content-as-json.js';
 import { getTargetProfileForAdmin } from './get-target-profile-for-admin.js';
@@ -72,7 +71,6 @@ const usecasesWithoutInjectedDependencies = {
   findSkillsByTargetProfileIds,
   getAvailableTargetProfilesForOrganization,
   getLearningContentByTargetProfile,
-  getLearningContentForTargetProfileSubmission,
   getTargetProfileContentAsJson,
   getTargetProfileForAdmin,
   getTargetProfile,

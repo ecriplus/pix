@@ -35,40 +35,6 @@ describe('Unit | Application | Target Profile | target-profile-controller', func
     });
   });
 
-  describe('#getFrameworksForTargetProfileSubmission', function () {
-    let frameworks;
-    let frameworkWithoutSkillSerializer;
-    let serializedFrameworks;
-
-    beforeEach(function () {
-      frameworks = Symbol('frameworks');
-      serializedFrameworks = Symbol('serializedFrameworks');
-
-      sinon.stub(usecases, 'getLearningContentForTargetProfileSubmission').resolves({ frameworks });
-      frameworkWithoutSkillSerializer = {
-        serialize: sinon.stub().returns(serializedFrameworks),
-      };
-    });
-
-    it('should fetch and return frameworks, serialized as JSONAPI', async function () {
-      // given
-      const locale = 'en';
-      const request = {
-        state: { locale },
-      };
-
-      // when
-      const result = await targetProfileController.getFrameworksForTargetProfileSubmission(request, hFake, {
-        frameworkWithoutSkillSerializer,
-      });
-
-      // then
-      expect(result).to.equal(serializedFrameworks);
-      expect(usecases.getLearningContentForTargetProfileSubmission).to.have.been.calledWithExactly({ locale: 'en' });
-      expect(frameworkWithoutSkillSerializer.serialize).to.have.been.calledWithExactly(frameworks);
-    });
-  });
-
   describe('#findLearningContentsByOrganizationId', function () {
     let frameworks;
     let frameworkWithoutSkillSerializer;

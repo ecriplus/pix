@@ -562,10 +562,6 @@ function routes() {
 
   this.get('/organizations/:organization_id/missions/:mission_id/learners', findPaginatedMissionLearners);
 
-  this.get('/frameworks/for-target-profile-submission', (schema) => {
-    return schema.frameworks.all();
-  });
-
   this.get('/organizations/:organizationId/frameworks', (schema) => {
     return schema.frameworks.all();
   });

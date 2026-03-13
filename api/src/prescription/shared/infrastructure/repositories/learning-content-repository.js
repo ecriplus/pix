@@ -9,7 +9,6 @@ import { LearningContent } from '../../../../shared/domain/models/LearningConten
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as frameworkRepository from '../../../../shared/infrastructure/repositories/framework-repository.js';
-import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 
@@ -41,16 +40,6 @@ export async function findByTargetProfileId(targetProfileId, locale) {
   }
 
   const frameworks = await _getLearningContentByCappedTubes(cappedTubesDTO, locale);
-  return new LearningContent(frameworks);
-}
-
-export async function findByFrameworkNames({ frameworkNames, locale }) {
-  const baseFrameworks = [];
-  for (const frameworkName of frameworkNames) {
-    baseFrameworks.push(await frameworkRepository.getByName(frameworkName));
-  }
-
-  const frameworks = await _getLearningContentByFrameworks(baseFrameworks, locale);
   return new LearningContent(frameworks);
 }
 
@@ -147,28 +136,6 @@ async function _getLearningContentByTubes(tubes, locale) {
     framework.areas = areas.filter((area) => {
       return area.frameworkId === framework.id;
     });
-  }
-
-  return frameworks;
-}
-
-async function _getLearningContentByFrameworks(frameworks, locale) {
-  for (const framework of frameworks) {
-    framework.areas = await areaRepository.findByFrameworkId({ frameworkId: framework.id, locale });
-    for (const area of framework.areas) {
-      area.competences = await competenceRepository.findByAreaId({ areaId: area.id, locale });
-      for (const competence of area.competences) {
-        competence.thematics = await thematicRepository.findByCompetenceIds([competence.id], locale);
-        for (const thematic of competence.thematics) {
-          const tubes = await tubeRepository.findActiveByRecordIds(thematic.tubeIds, locale);
-          thematic.tubes = tubes;
-          competence.tubes.push(...tubes);
-          for (const tube of thematic.tubes) {
-            tube.skills = await skillRepository.findActiveByTubeId(tube.id);
-          }
-        }
-      }
-    }
   }
 
   return frameworks;

@@ -9,16 +9,6 @@ const findTargetProfiles = async function (request, h, dependencies = { targetPr
   return dependencies.targetProfileForSpecifierSerializer.serialize(targetProfiles);
 };
 
-const getFrameworksForTargetProfileSubmission = async function (
-  request,
-  _,
-  dependencies = { frameworkWithoutSkillSerializer },
-) {
-  const locale = getChallengeLocale(request);
-  const learningContent = await usecases.getLearningContentForTargetProfileSubmission({ locale });
-  return dependencies.frameworkWithoutSkillSerializer.serialize(learningContent.frameworks);
-};
-
 const findLearningContentsByOrganizationId = async function (
   request,
   _,
@@ -31,7 +21,6 @@ const findLearningContentsByOrganizationId = async function (
 };
 
 const targetProfileController = {
-  getFrameworksForTargetProfileSubmission,
   findLearningContentsByOrganizationId,
   findTargetProfiles,
 };
