@@ -1,5 +1,48 @@
 # Pix Changelog
 
+# [5.355.0](https://github.com/1024pix/pix/compare/v5.354.0...v5.355.0) (2026-03-13)
+
+### :rocket: Amélioration
+
+- [#15443](https://github.com/1024pix/pix/pull/15443) Afficher les champs de personnalisation de fin de campagne pour le mode interro (PIX-19653) 
+- [#15424](https://github.com/1024pix/pix/pull/15424) Afficher les locales dans la page de détails d'un contenu formatif (PIX-21785). 
+- [#15444](https://github.com/1024pix/pix/pull/15444) Ajouter un bouton de création de réseau sur Pix-Admin (PIX-21305) 
+- [#15416](https://github.com/1024pix/pix/pull/15416) Ajouter un script pour copier le contenu de la colonne locale -> locales (PIX-21775) 
+- [#15377](https://github.com/1024pix/pix/pull/15377) Créer une route de déblocage d'un élève par un membre de son organisation (PIX-21566). 
+- [#15456](https://github.com/1024pix/pix/pull/15456) CYMFA_IND micro modif pour validation 
+- [#15411](https://github.com/1024pix/pix/pull/15411) Débloquer aussi les comptes élèves lors de la réinitialisation des mots de passe (PIX-21844) 
+- [#15463](https://github.com/1024pix/pix/pull/15463) modifs relecture interne RangerFichiersIND 
+- [#15440](https://github.com/1024pix/pix/pull/15440) Module Ia enseignants - medias et relecture 
+- [#15369](https://github.com/1024pix/pix/pull/15369) Renseigne la référence à la version et au candidat lié au parcours de certification (PIX-21826) 
+- [#15429](https://github.com/1024pix/pix/pull/15429) Trier les attestations PDF par nom de famille et prénom (PIX-21887) 
+- [#15410](https://github.com/1024pix/pix/pull/15410) Utiliser la table des annonces pour afficher la bannière SCO (PIX-21861) 
+- [#15420](https://github.com/1024pix/pix/pull/15420) Voir l'entrée "réseaux" dans la navbar pix-admin (PIX-21299) 
+
+### :building_construction: Tech
+
+- [#15375](https://github.com/1024pix/pix/pull/15375) Ajoute un script permettant de retro-remplir les nouvelles colonnes des certifications et des candidats (PIX-21825) 
+- [#15458](https://github.com/1024pix/pix/pull/15458) Amélioration des metrics du learning content 
+- [#15427](https://github.com/1024pix/pix/pull/15427) Améliorer l'accessibilité de l'élément custom (PIX-21794) 
+- [#15413](https://github.com/1024pix/pix/pull/15413) Mettre en import absolu les imports relatifs de l'environment 
+
+### :arrow_up: Montée de version
+
+- [#15469](https://github.com/1024pix/pix/pull/15469) Lock file maintenance (api) 
+- [#15438](https://github.com/1024pix/pix/pull/15438) Update dependency @1024pix/epreuves-components to ^4.0.2 (mon-pix) 
+- [#15439](https://github.com/1024pix/pix/pull/15439) Update dependency @1024pix/eslint-plugin to ^2.1.19 (api) 
+- [#15441](https://github.com/1024pix/pix/pull/15441) Update dependency @1024pix/eslint-plugin to ^2.1.19 (audit-logger) 
+- [#15442](https://github.com/1024pix/pix/pull/15442) Update dependency @1024pix/eslint-plugin to ^2.1.19 (certif) 
+- [#15446](https://github.com/1024pix/pix/pull/15446) Update dependency @1024pix/eslint-plugin to ^2.1.19 (dossier racine) 
+- [#15447](https://github.com/1024pix/pix/pull/15447) Update dependency @1024pix/eslint-plugin to ^2.1.19 (e2e-playwright) 
+- [#15449](https://github.com/1024pix/pix/pull/15449) Update dependency @1024pix/eslint-plugin to ^2.1.19 (junior) 
+- [#15450](https://github.com/1024pix/pix/pull/15450) Update dependency @1024pix/eslint-plugin to ^2.1.19 (mon-pix) 
+- [#15453](https://github.com/1024pix/pix/pull/15453) Update dependency @1024pix/eslint-plugin to ^2.1.19 (orga) 
+- [#15459](https://github.com/1024pix/pix/pull/15459) Update dependency @1024pix/pix-ui to ^60.2.0 (admin) 
+- [#15460](https://github.com/1024pix/pix/pull/15460) Update dependency @1024pix/pix-ui to ^60.2.0 (certif) 
+- [#15461](https://github.com/1024pix/pix/pull/15461) Update dependency @1024pix/pix-ui to ^60.2.0 (junior) 
+- [#15462](https://github.com/1024pix/pix/pull/15462) Update dependency @1024pix/pix-ui to ^60.2.0 (mon-pix) 
+- [#15454](https://github.com/1024pix/pix/pull/15454) Update dependency webpack to v5.105.4 (junior)
+
 # [5.354.0](https://github.com/1024pix/pix/compare/v5.353.0...v5.354.0) (2026-03-12)
 
 ### :rocket: Amélioration
