@@ -591,12 +591,12 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
     });
   });
 
-  describe('#updateCampaignParticipationId', function () {
-    it('should update assessment', async function () {
+  describe('#batchRemoveParticipationId', function () {
+    it('should update assessment campaign participation ID', async function () {
       // given
       const participation = databaseBuilder.factory.buildCampaignParticipation();
       const initialCreatedAt = new Date('2020-01-01');
-      const assessment = databaseBuilder.factory.buildAssessment({
+      const assessment1 = databaseBuilder.factory.buildAssessment({
         state: Assessment.states.STARTED,
         lastQuestionDate: new Date('2020-01-10'),
         lastChallengeId: 'rechallenge1',
@@ -604,36 +604,60 @@ describe('Integration | Infrastructure | Repositories | assessment-repository', 
         updatedAt: new Date('2020-01-01'),
         createdAt: initialCreatedAt,
         lastQuestionState: null,
+        isImproving: false,
       });
+
+      const assessment2 = databaseBuilder.factory.buildAssessment({
+        state: Assessment.states.STARTED,
+        lastQuestionDate: new Date('2020-01-10'),
+        lastChallengeId: 'rechallenge2',
+        campaignParticipationId: participation.id,
+        updatedAt: new Date('2020-01-01'),
+        createdAt: initialCreatedAt,
+        lastQuestionState: null,
+        isImproving: true,
+      });
+
       await databaseBuilder.commit();
 
-      assessment.campaignParticipationId = null;
-      assessment.state = Assessment.states.ABORTED;
-      assessment.updatedAt = new Date('2020-01-12');
+      assessment1.campaignParticipationId = null;
+      assessment1.state = Assessment.states.ABORTED;
+      assessment1.updatedAt = new Date('2020-01-12');
+
+      assessment2.campaignParticipationId = null;
+      assessment2.state = Assessment.states.ABORTED;
+      assessment2.updatedAt = new Date('2020-01-12');
+
       // when
-      await assessmentRepository.updateCampaignParticipationId(assessment);
+      await assessmentRepository.batchRemoveParticipationId([assessment1, assessment2]);
 
       // then
-      const assessmentInDb = await knex('assessments').where('id', assessment.id).first();
+      const assessmentInDb1 = await knex('assessments').where('id', assessment1.id).first();
+      const assessmentInDb2 = await knex('assessments').where('id', assessment2.id).first();
 
-      expect(assessmentInDb.campaignParticipationId).null;
-      expect(assessmentInDb.updatedAt).deep.equal(new Date('2020-01-12'));
-      expect(assessmentInDb.state).equal(Assessment.states.STARTED);
+      expect(assessmentInDb1.campaignParticipationId).null;
+      expect(assessmentInDb1.updatedAt).deep.equal(new Date('2020-01-12'));
+      expect(assessmentInDb1.state).equal(Assessment.states.STARTED);
+
+      expect(assessmentInDb2.campaignParticipationId).null;
+      expect(assessmentInDb2.updatedAt).deep.equal(new Date('2020-01-12'));
+      expect(assessmentInDb2.state).equal(Assessment.states.STARTED);
     });
 
     context('when assessment does not exist', function () {
-      it('should return null', async function () {
+      it('should not throw an error', async function () {
         const notExistingAssessmentId = 1;
 
-        // when
-        const result = await assessmentRepository.updateCampaignParticipationId({
-          id: notExistingAssessmentId,
-          campaingParticipationId: 123,
-          updatedAt: new Date('2020-12-02'),
-        });
-
         // then
-        expect(result).to.equal(null);
+        await expect(
+          assessmentRepository.batchRemoveParticipationId([
+            {
+              id: notExistingAssessmentId,
+              campaingParticipationId: 123,
+              updatedAt: new Date('2020-12-02'),
+            },
+          ]),
+        ).not.to.be.rejected;
       });
     });
   });
