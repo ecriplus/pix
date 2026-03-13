@@ -23,6 +23,12 @@ export const remove = async ({ organizationId, profileRewardId }) => {
 export const getByOrganizationId = async ({ attestationKey, organizationId }) => {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn('organizations-profile-rewards')
+    .select(
+      'organizations-profile-rewards.id',
+      'organizations-profile-rewards.organizationId',
+      'organizations-profile-rewards.profileRewardId',
+      'profile-rewards.userId',
+    )
     .join('profile-rewards', 'organizations-profile-rewards.profileRewardId', '=', 'profile-rewards.id')
     .where({ organizationId });
 

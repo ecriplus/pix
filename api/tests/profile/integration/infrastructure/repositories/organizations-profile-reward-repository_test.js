@@ -97,11 +97,11 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: firstProfileReward.id,
       });
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const secondOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: secondProfileReward.id,
       });
@@ -116,8 +116,18 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
       // then
       const expectedResults = [
-        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
-        { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
+        {
+          id: firstOrganizationProfileReward.id,
+          profileRewardId: firstProfileReward.id,
+          organizationId,
+          userId: firstProfileReward.userId,
+        },
+        {
+          id: secondOrganizationProfileReward.id,
+          profileRewardId: secondProfileReward.id,
+          organizationId,
+          userId: secondProfileReward.userId,
+        },
       ];
 
       expect(results).to.have.lengthOf(2);
@@ -131,7 +141,7 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: firstProfileReward.id,
       });
@@ -146,7 +156,12 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
       // then
       const expectedResults = [
-        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
+        {
+          id: firstOrganizationProfileReward.id,
+          profileRewardId: firstProfileReward.id,
+          organizationId,
+          userId: firstProfileReward.userId,
+        },
       ];
 
       expect(results).to.have.lengthOf(1);
@@ -189,11 +204,11 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
         const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
         const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        databaseBuilder.factory.buildOrganizationsProfileRewards({
+        const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
           organizationId,
           profileRewardId: firstProfileReward.id,
         });
-        databaseBuilder.factory.buildOrganizationsProfileRewards({
+        const secondOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
           organizationId,
           profileRewardId: secondProfileReward.id,
         });
@@ -208,8 +223,18 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
         // then
         const expectedResults = [
-          { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
-          { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
+          {
+            id: firstOrganizationProfileReward.id,
+            profileRewardId: firstProfileReward.id,
+            organizationId,
+            userId: firstProfileReward.userId,
+          },
+          {
+            id: secondOrganizationProfileReward.id,
+            profileRewardId: secondProfileReward.id,
+            organizationId,
+            userId: secondProfileReward.userId,
+          },
         ];
 
         expect(results).to.have.lengthOf(2);
