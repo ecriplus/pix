@@ -4,19 +4,6 @@ import { DomainTransaction } from '../../domain/DomainTransaction.js';
 
 const USER_LOGINS_TABLE_NAME = 'user-logins';
 
-function _toDomain(userLoginDTO) {
-  return new UserLogin({
-    id: userLoginDTO.id,
-    userId: userLoginDTO.userId,
-    failureCount: userLoginDTO.failureCount,
-    temporaryBlockedUntil: userLoginDTO.temporaryBlockedUntil,
-    blockedAt: userLoginDTO.blockedAt,
-    createdAt: userLoginDTO.createdAt,
-    updatedAt: userLoginDTO.updatedAt,
-    lastLoggedAt: userLoginDTO.lastLoggedAt,
-  });
-}
-
 const findByUserId = async function (userId) {
   const knexConn = DomainTransaction.getConnection();
   const userLoginDTO = await knexConn.from(USER_LOGINS_TABLE_NAME).where({ userId }).first();
@@ -78,4 +65,31 @@ const updateLastLoggedAt = async function ({ userId }) {
     .merge();
 };
 
-export { create, findByUserId, findByUsername, getByUserId, update, updateLastLoggedAt };
+const batchUnblock = async function (userIds) {
+  const now = new Date();
+
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn(USER_LOGINS_TABLE_NAME)
+    .update({
+      failureCount: 0,
+      temporaryBlockedUntil: null,
+      blockedAt: null,
+      updatedAt: now,
+    })
+    .whereIn('userId', userIds);
+};
+
+export { batchUnblock, create, findByUserId, findByUsername, getByUserId, update, updateLastLoggedAt };
+
+function _toDomain(userLoginDTO) {
+  return new UserLogin({
+    id: userLoginDTO.id,
+    userId: userLoginDTO.userId,
+    failureCount: userLoginDTO.failureCount,
+    temporaryBlockedUntil: userLoginDTO.temporaryBlockedUntil,
+    blockedAt: userLoginDTO.blockedAt,
+    createdAt: userLoginDTO.createdAt,
+    updatedAt: userLoginDTO.updatedAt,
+    lastLoggedAt: userLoginDTO.lastLoggedAt,
+  });
+}

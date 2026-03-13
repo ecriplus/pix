@@ -17,6 +17,7 @@ export const generateOrganizationLearnersUsernameAndTemporaryPassword = async fu
   organizationRepository,
   organizationLearnerIdentityRepository,
   userRepository,
+  userLoginRepository,
 }) {
   const errorMessage = `User ${userId} cannot reset passwords of some students in organization ${organizationId}`;
   const organization = await organizationRepository.get(organizationId);
@@ -42,6 +43,7 @@ export const generateOrganizationLearnersUsernameAndTemporaryPassword = async fu
     authenticationMethodRepository,
     cryptoService,
     passwordGenerator,
+    userLoginRepository,
   });
 
   return _buildOrganizationLearnerPasswordResetDTOs({
@@ -101,6 +103,7 @@ async function _generateAndUpdateUsersWithTemporaryPassword({
   authenticationMethodRepository,
   cryptoService,
   passwordGenerator,
+  userLoginRepository,
 }) {
   _assertAllUsersHasAnUsername({ errorMessage, users: organizationLearnerIdentities });
 
@@ -112,6 +115,8 @@ async function _generateAndUpdateUsersWithTemporaryPassword({
   await authenticationMethodRepository.batchUpsertPasswordThatShouldBeChanged({
     usersToUpdateWithNewPassword: userIdWithPasswords,
   });
+  const userIds = userIdWithPasswords.map((userIdWithPasswords) => userIdWithPasswords.userId);
+  await userLoginRepository.batchUnblock(userIds);
 
   return userIdWithPasswords;
 }

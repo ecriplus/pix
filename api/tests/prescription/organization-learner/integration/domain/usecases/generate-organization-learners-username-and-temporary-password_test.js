@@ -1,18 +1,16 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { organizationLearnerIdentityRepository } from '../../../../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
-import * as userRepository from '../../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { OrganizationLearnerPasswordResetDTO } from '../../../../../../src/prescription/organization-learner/domain/models/OrganizationLearnerPasswordResetDTO.js';
-import { generateOrganizationLearnersUsernameAndTemporaryPassword } from '../../../../../../src/prescription/organization-learner/domain/usecases/generate-organization-learners-username-and-temporary-password.js';
+import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../../src/shared/domain/errors.js';
-import * as userReconciliationService from '../../../../../../src/shared/domain/services/user-reconciliation-service.js';
-import * as organizationRepository from '../../../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | generate organization learners username and temporary password', function () {
   const hashedPassword = '21fedcba';
   const generatedPassword = 'abcdef12';
   let cryptoService, passwordGenerator;
+
+  let clock;
+  const now = new Date('2025-05-05');
 
   const allAuthenticationMethodUsername = 'laurent.bar';
   const division = '3B';
@@ -25,8 +23,11 @@ describe('Integration | UseCases | generate organization learners username and t
   let organizationLearnerWithGarIdentityProvider, organizationLearnerWithAllAuthenticationMethod;
 
   let userWithEmail, userWithGarIdentityProvider, userWithUsername, userWithAllAuthenticationMethod;
+  let aNotToTouchBlockedUserId;
 
   beforeEach(function () {
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+
     organization = domainBuilder.buildOrganization({ id: undefined });
     cryptoService = { hashPassword: sinon.stub().resolves(hashedPassword) };
     passwordGenerator = { generateSimplePassword: sinon.stub().returns(generatedPassword) };
@@ -56,6 +57,18 @@ describe('Integration | UseCases | generate organization learners username and t
       databaseBuilder.factory.buildUser.withRawPassword({ ...user }),
     );
 
+    databaseBuilder.factory.buildUserLogin({
+      userId: userWithAllAuthenticationMethod.id,
+      failureCount: 50,
+      blockedAt: new Date(),
+    });
+
+    aNotToTouchBlockedUserId = databaseBuilder.factory.buildUserLogin({
+      failureCount: 500,
+      blockedAt: new Date('2020-01-01'),
+      updatedAt: new Date('2020-01-01'),
+    }).userId;
+
     userWithGarIdentityProvider = databaseBuilder.factory.buildUser({
       email: '',
       firstName: 'Ray',
@@ -74,6 +87,10 @@ describe('Integration | UseCases | generate organization learners username and t
     });
 
     userId = databaseBuilder.factory.buildUser().id;
+  });
+
+  afterEach(async function () {
+    clock.restore();
   });
 
   context('When organization is of type SCO and has isManagingStudents at true', function () {
@@ -117,17 +134,12 @@ describe('Integration | UseCases | generate organization learners username and t
         };
 
         // when
-        const result = await generateOrganizationLearnersUsernameAndTemporaryPassword({
+        const result = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -149,6 +161,27 @@ describe('Integration | UseCases | generate organization learners username and t
         });
 
         expect(result).to.have.deep.members(expectedResult);
+
+        const userIds = [userWithAllAuthenticationMethod.id, aNotToTouchBlockedUserId];
+        const userLogins = await knex('user-logins').select().whereIn('userId', userIds);
+        const userWithAllAuthenticationMethodLogin = userLogins.find(
+          (userLogin) => userLogin.userId == userWithAllAuthenticationMethod.id,
+        );
+        expect(userWithAllAuthenticationMethodLogin).to.deep.contain({
+          failureCount: 0,
+          temporaryBlockedUntil: null,
+          blockedAt: null,
+          updatedAt: now,
+        });
+
+        const aNotToTouchBlockedUserLogin = userLogins.find(
+          (userLogin) => userLogin.userId == aNotToTouchBlockedUserId,
+        );
+        expect(aNotToTouchBlockedUserLogin).to.deep.contain({
+          failureCount: 500,
+          blockedAt: new Date('2020-01-01'),
+          updatedAt: new Date('2020-01-01'),
+        });
       });
     });
 
@@ -170,17 +203,12 @@ describe('Integration | UseCases | generate organization learners username and t
         ];
 
         // when
-        const result = await generateOrganizationLearnersUsernameAndTemporaryPassword({
+        const result = await usecases.generateOrganizationLearnersUsernameAndTemporaryPassword({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -202,6 +230,27 @@ describe('Integration | UseCases | generate organization learners username and t
         ];
 
         expect(result).to.deep.equal(expectedResult);
+
+        const userIds = [userWithAllAuthenticationMethod.id, aNotToTouchBlockedUserId];
+        const userLogins = await knex('user-logins').select().whereIn('userId', userIds);
+        const userWithAllAuthenticationMethodLogin = userLogins.find(
+          (userLogin) => userLogin.userId == userWithAllAuthenticationMethod.id,
+        );
+        expect(userWithAllAuthenticationMethodLogin).to.deep.contain({
+          failureCount: 0,
+          temporaryBlockedUntil: null,
+          blockedAt: null,
+          updatedAt: now,
+        });
+
+        const aNotToTouchBlockedUserLogin = userLogins.find(
+          (userLogin) => userLogin.userId == aNotToTouchBlockedUserId,
+        );
+        expect(aNotToTouchBlockedUserLogin).to.deep.contain({
+          failureCount: 500,
+          blockedAt: new Date('2020-01-01'),
+          updatedAt: new Date('2020-01-01'),
+        });
       });
     });
   });
@@ -235,17 +284,12 @@ describe('Integration | UseCases | generate organization learners username and t
         ];
 
         // when
-        const error = await catchErr(generateOrganizationLearnersUsernameAndTemporaryPassword)({
+        const error = await catchErr(usecases.generateOrganizationLearnersUsernameAndTemporaryPassword)({
           organizationId: organization.id,
           organizationLearnersId,
           userId,
-          authenticationMethodRepository,
-          organizationRepository,
-          organizationLearnerIdentityRepository,
-          userRepository,
           cryptoService,
           passwordGenerator,
-          userReconciliationService,
         });
 
         // then
@@ -277,17 +321,12 @@ describe('Integration | UseCases | generate organization learners username and t
           ];
 
           // when
-          const error = await catchErr(generateOrganizationLearnersUsernameAndTemporaryPassword)({
+          const error = await catchErr(usecases.generateOrganizationLearnersUsernameAndTemporaryPassword)({
             organizationId: organization.id,
             organizationLearnersId,
             userId,
-            authenticationMethodRepository,
-            organizationRepository,
-            organizationLearnerIdentityRepository,
-            userRepository,
             cryptoService,
             passwordGenerator,
-            userReconciliationService,
           });
 
           // then

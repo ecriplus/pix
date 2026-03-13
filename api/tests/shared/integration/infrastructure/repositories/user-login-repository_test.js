@@ -227,4 +227,84 @@ describe('Integration | Shared | Infrastructure | Repositories | UserLoginReposi
       });
     });
   });
+
+  describe('#batchUnblock', function () {
+    let clock;
+    const now = new Date('2025-05-05');
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
+    it('resets account blocking for the given accounts', async function () {
+      // given
+      const nonBlockedUserId = databaseBuilder.factory.buildUserLogin().userId;
+      const temporarilyBlockedUserId = databaseBuilder.factory.buildUserLogin({
+        failureCount: 50,
+        temporaryBlockedUntil: new Date(Date.now() + 12 * 31 * 24 * 3600 * 1000), // 1 year into the future
+      }).userId;
+      const blockedUserId = databaseBuilder.factory.buildUserLogin({
+        failureCount: 200,
+        blockedAt: now,
+      }).userId;
+
+      const aNotToTouchBlockedUserId = databaseBuilder.factory.buildUserLogin({
+        failureCount: 500,
+        blockedAt: new Date('2020-01-01'),
+        updatedAt: new Date('2020-01-01'),
+      }).userId;
+
+      await databaseBuilder.commit();
+
+      const userIdsToBatchUnblock = [nonBlockedUserId, temporarilyBlockedUserId, blockedUserId];
+      const allUserIds = userIdsToBatchUnblock.concat(aNotToTouchBlockedUserId);
+
+      // when
+      await userLoginRepository.batchUnblock(userIdsToBatchUnblock);
+
+      // then
+      const allUserLogins = await knex(USER_LOGINS_TABLE_NAME).select().whereIn('userId', allUserIds);
+
+      const nonBlockedUserLogin = allUserLogins.find((userLogin) => {
+        return userLogin.userId == nonBlockedUserId;
+      });
+      expect(nonBlockedUserLogin).to.deep.contain({
+        failureCount: 0,
+        temporaryBlockedUntil: null,
+        blockedAt: null,
+        updatedAt: now,
+      });
+
+      const temporarilyBlockedUserLogin = allUserLogins.find(
+        (userLogin) => userLogin.userId == temporarilyBlockedUserId,
+      );
+      expect(temporarilyBlockedUserLogin).to.deep.contain({
+        failureCount: 0,
+        temporaryBlockedUntil: null,
+        blockedAt: null,
+        updatedAt: now,
+      });
+
+      const blockedUserLogin = allUserLogins.find((userLogin) => userLogin.userId == blockedUserId);
+      expect(blockedUserLogin).to.deep.contain({
+        failureCount: 0,
+        temporaryBlockedUntil: null,
+        blockedAt: null,
+        updatedAt: now,
+      });
+
+      const aNotToTouchBlockedUserLogin = allUserLogins.find(
+        (userLogin) => userLogin.userId == aNotToTouchBlockedUserId,
+      );
+      expect(aNotToTouchBlockedUserLogin).to.deep.contain({
+        failureCount: 500,
+        blockedAt: new Date('2020-01-01'),
+        updatedAt: new Date('2020-01-01'),
+      });
+    });
+  });
 });
