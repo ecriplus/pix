@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import trim from 'lodash/trim';
 
 export default class AuthenticatedSessionsAllRoute extends Route {
   @service store;
@@ -21,9 +20,9 @@ export default class AuthenticatedSessionsAllRoute extends Route {
     try {
       sessions = await this.store.query('session', {
         filter: {
-          id: trim(params.id) || undefined,
-          certificationCenterName: trim(params.certificationCenterName) || undefined,
-          certificationCenterExternalId: trim(params.certificationCenterExternalId) || undefined,
+          id: params.id?.trim() || undefined,
+          certificationCenterName: params.certificationCenterName?.trim() || undefined,
+          certificationCenterExternalId: params.certificationCenterExternalId?.trim() || undefined,
           certificationCenterType: params.certificationCenterType || undefined,
           status: params.status || undefined,
           version: params.version || undefined,
