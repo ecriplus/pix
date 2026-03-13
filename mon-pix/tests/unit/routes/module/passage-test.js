@@ -78,4 +78,28 @@ module('Unit | Route | modules | passage', function (hooks) {
       passageId: 2019,
     });
   });
+
+  module('#redirect', function () {
+    test('should call replaceWith function with the right arguments', async function (assert) {
+      // given
+      const module = {
+        shortId: 'shortId',
+        slug: 'slug',
+      };
+      const model = {
+        module,
+      };
+      const router = this.owner.lookup('service:router');
+      const replaceWithStub = sinon.stub(router, 'replaceWith');
+
+      const route = this.owner.lookup('route:module.passage');
+
+      // when
+      route.redirect(model);
+
+      // then
+      sinon.assert.calledOnceWithExactly(replaceWithStub, 'module.passage', module.shortId, module.slug);
+      assert.ok(true);
+    });
+  });
 });

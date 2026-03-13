@@ -5,6 +5,7 @@ export default class ModulePassageRoute extends Route {
   @service store;
   @service passageEvents;
   @service moduleIssueReport;
+  @service router;
 
   async model() {
     const module = this.modelFor('module');
@@ -19,5 +20,9 @@ export default class ModulePassageRoute extends Route {
     this.passageEvents.initialize({ passageId: passage.id });
     this.moduleIssueReport.initialize({ passageId: passage.id, moduleId: module.id });
     return { module, passage };
+  }
+
+  redirect({ module }) {
+    this.router.replaceWith('module.passage', module.shortId, module.slug);
   }
 }
