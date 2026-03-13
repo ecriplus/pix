@@ -48,6 +48,8 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
+  logger.info('Stopping PG Boss client...');
+  await pgBoss.stop();
   logger.info('Closing connections to databases...');
   await databaseConnections.disconnect();
   logger.info('Closing connections to cache...');
@@ -59,15 +61,14 @@ async function _exitOnSignal(signal) {
   logger.info('Closing connections to redis monitor...');
   await redisMonitor.quit();
   await prometheusPushGateway.stopPushingMetrics();
-  await pgBoss.stop();
   logger.info('Exiting process...');
 }
 
-process.on('SIGTERM', () => {
-  _exitOnSignal('SIGTERM');
+process.on('SIGTERM', async () => {
+  await _exitOnSignal('SIGTERM');
 });
-process.on('SIGINT', () => {
-  _exitOnSignal('SIGINT');
+process.on('SIGINT', async () => {
+  await _exitOnSignal('SIGINT');
 });
 
 try {

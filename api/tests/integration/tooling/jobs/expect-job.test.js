@@ -195,7 +195,7 @@ describe('Integration | Tooling | Expect Job', function () {
     });
 
     afterEach(async function () {
-      await jobQueue.stop();
+      await pgBoss.stop();
     });
 
     describe('#withCronJobsCount', function () {

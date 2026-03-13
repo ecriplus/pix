@@ -42,14 +42,6 @@ export async function startPgBoss() {
   return pgBoss;
 }
 
-function createJobQueue(pgBoss) {
-  const jobQueue = new JobQueue(pgBoss);
-  process.on('SIGINT', async () => {
-    await jobQueue.stop();
-  });
-  return jobQueue;
-}
-
 function checkJobGroups(jobGroups) {
   if (!jobGroups) throw new Error('Job groups are mandatory');
   jobGroups.forEach((jobGroup) => checkJobGroup(jobGroup));
@@ -61,7 +53,7 @@ function checkJobGroup(jobGroup) {
   }
 }
 
-export async function registerJobs({ jobGroups, dependencies = { startPgBoss, createJobQueue } }) {
+export async function registerJobs({ jobGroups, dependencies = { startPgBoss } }) {
   checkJobGroups(jobGroups);
 
   const pgBoss = await dependencies.startPgBoss();
@@ -71,7 +63,7 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss, cr
     return;
   }
 
-  const jobQueues = dependencies.createJobQueue(pgBoss);
+  const jobQueues = new JobQueue(pgBoss);
 
   const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
@@ -135,19 +127,32 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss, cr
 
 const isRunningFromCli = import.meta.filename === process.argv[1];
 
+let isShuttingDown = false;
+
+async function exitOnSignal(signal) {
+  if (isShuttingDown) return;
+  isShuttingDown = true;
+
+  logger.info(`Received signal: ${signal}.`);
+  await pgBoss.stop({ graceful: false, timeout: 1000, destroy: true });
+  await databaseConnections.disconnect();
+  await metrics.clearMetrics();
+  await learningContentCache.quit();
+  await quitAllStorages();
+  await quitMutex();
+}
+
 async function main() {
   validateEnvironmentVariables(configSchema);
 
   const jobGroup = process.argv[2] ? JobGroup[process.argv[2]?.toUpperCase()] : JobGroup.DEFAULT;
   await registerJobs({ jobGroups: [jobGroup] });
 
+  process.on('SIGTERM', async () => {
+    await exitOnSignal('SIGTERM');
+  });
   process.on('SIGINT', async () => {
-    await quitAllStorages();
-    await quitMutex();
-    await metrics.clearMetrics();
-    await databaseConnections.disconnect();
-    await learningContentCache.quit();
-    await pgBoss.stop();
+    await exitOnSignal('SIGINT');
   });
 }
 
