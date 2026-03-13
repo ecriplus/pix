@@ -82,10 +82,9 @@ const deleteCampaigns = async ({
       campaignParticipationIds,
     );
     const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
-    for (const assessment of assessments) {
-      assessment.detachCampaignParticipation();
-      await assessmentRepository.updateCampaignParticipationId(assessment);
-    }
+
+    assessments.forEach((assessment) => assessment.detachCampaignParticipation());
+    await assessmentRepository.batchRemoveParticipationId(assessments);
 
     const campaignIdsToDelete = campaignDestructor.campaigns.map(({ id }) => id);
 

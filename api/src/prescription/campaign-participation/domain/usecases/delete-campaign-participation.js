@@ -46,10 +46,8 @@ const deleteCampaignParticipation = async function ({
     await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
 
     const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
-    for (const assessment of assessments) {
-      assessment.detachCampaignParticipation();
-      await assessmentRepository.updateCampaignParticipationId(assessment);
-    }
+    assessments.forEach((assessment) => assessment.detachCampaignParticipation());
+    await assessmentRepository.batchRemoveParticipationId(assessments);
   });
 
   for (const auditLoggingJob of auditLoggingJobs) {

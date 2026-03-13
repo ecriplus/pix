@@ -4,6 +4,7 @@ import * as campaignRepository from '../../../prescription/campaign/infrastructu
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Assessment } from '../../domain/models/Assessment.js';
+import { batchUpdate } from '../utils/knex-utils.js';
 
 const { omit } = lodash;
 
@@ -193,17 +194,21 @@ const getByCampaignParticipationIds = async function (campaignParticipationIds =
   return assessments.map((assessment) => new Assessment({ ...assessment }));
 };
 
-const updateCampaignParticipationId = async function (assessment) {
-  const knexConn = DomainTransaction.getConnection();
-  const [assessmentUpdated] = await knexConn('assessments')
-    .update({ campaignParticipationId: assessment.campaignParticipationId, updatedAt: assessment.updatedAt })
-    .where('id', assessment.id)
-    .returning('*');
-  if (!assessmentUpdated) return null;
+const batchRemoveParticipationId = async function (assessments) {
+  await batchUpdate({
+    tableName: 'assessments',
+    primaryKeyName: 'id',
+    rows: assessments.map((assessment) => ({
+      id: assessment.id,
+      campaignParticipationId: assessment.campaignParticipationId,
+      updatedAt: assessment.updatedAt,
+    })),
+  });
 };
 
 export {
   abortByAssessmentId,
+  batchRemoveParticipationId,
   completeByAssessmentId,
   findLastCompletedAssessmentsForEachCompetenceByUser,
   findNotAbortedCampaignAssessmentsByUserId,
@@ -215,7 +220,6 @@ export {
   ownedByUser,
   save,
   setAssessmentsAsStarted,
-  updateCampaignParticipationId,
   updateLastQuestionDate,
   updateLastQuestionState,
   updateWhenNewChallengeIsAsked,
