@@ -26,4 +26,25 @@ module('Unit | Route | modules | details', function (hooks) {
     // then
     assert.strictEqual(model, module);
   });
+
+  module('#redirect', function () {
+    test('should call replaceWith function with the right arguments', async function (assert) {
+      // given
+      const model = {
+        shortId: 'shortId',
+        slug: 'slug',
+      };
+      const router = this.owner.lookup('service:router');
+      const replaceWithStub = sinon.stub(router, 'replaceWith');
+
+      const route = this.owner.lookup('route:module.details');
+
+      // when
+      route.redirect(model);
+
+      // then
+      sinon.assert.calledOnceWithExactly(replaceWithStub, 'module.details', model.shortId, model.slug);
+      assert.ok(true);
+    });
+  });
 });
