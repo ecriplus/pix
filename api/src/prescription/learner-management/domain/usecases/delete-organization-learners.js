@@ -51,9 +51,7 @@ const deleteOrganizationLearners = async function ({
       organizationLearner.delete(userId, { keepPreviousDeletion });
       await organizationLearnerRepository.remove(organizationLearner.dataToUpdateOnDeletion);
 
-      for (const organizationLearnerReward of organizationLearnerRewards) {
-        await organizationsProfileRewardRepository.remove(organizationLearnerReward);
-      }
+      await organizationsProfileRewardRepository.removeInBatch(organizationLearnerRewards);
 
       auditLoggingJobs.push(
         AuditLoggingJob.forUser({
