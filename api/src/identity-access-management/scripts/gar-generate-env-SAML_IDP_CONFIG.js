@@ -7,9 +7,9 @@ if (!metadataIdpfilePath) {
 
 // eslint-disable-next-line no-console
 console.log(
-  `SAML_IDP_CONFIG=${JSON.stringify({
+  JSON.stringify({
     metadata: await getInlineContent(metadataIdpfilePath),
-  })}`,
+  }),
 );
 
 function getInlineContent(filePath) {

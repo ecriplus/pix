@@ -12,10 +12,10 @@ if (!privateKeyfilePath) {
 
 // eslint-disable-next-line no-console
 console.log(
-  `SAML_SP_CONFIG=${JSON.stringify({
+  JSON.stringify({
     metadata: await getInlineContent(metadataSpfilePath),
     encPrivateKey: await readFile(privateKeyfilePath, 'utf-8'),
-  })}`,
+  }),
 );
 
 function getInlineContent(filePath) {
