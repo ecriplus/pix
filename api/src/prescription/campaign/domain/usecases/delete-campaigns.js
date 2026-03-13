@@ -33,10 +33,12 @@ const deleteCampaigns = async ({
     }
   }
 
-  for (const campaignId of campaignIds) {
-    const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
-    if (combinedCourses.length > 0 && !isPartOfDeletingCombinedCourse) {
-      throw new CampaignBelongsToCombinedCourseError();
+  if (!isPartOfDeletingCombinedCourse) {
+    for (const campaignId of campaignIds) {
+      const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
+      if (combinedCourses.length > 0) {
+        throw new CampaignBelongsToCombinedCourseError();
+      }
     }
   }
 
