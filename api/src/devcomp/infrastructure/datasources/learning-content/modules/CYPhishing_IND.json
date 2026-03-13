@@ -954,20 +954,12 @@
             {
               "type": "element",
               "element": {
-                "id": "99512111-5353-4ecd-98e5-6be31c09939a",
-                "type": "text",
-                "content": "<p>[embed Pixmail avec 3 messages et fonctionalité Signaler comme indésirable]</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "b4378629-5d13-4a5d-a1a7-d512f312865c",
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Sélectionner et marquer un message malveillant comme indésirable.",
-                "url": "https://epreuves.pix.fr/pixmail-phishing.html?lang=fr&mode=a",
-                "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p><h4>⚠️L’activité suivante n’est pas jouable pour l’instant ⚠️</h4>",
+                "url": "https://epreuves.pix.fr/fr/pixmail-spam/modulix-phishing.html",
+                "instruction": "<p>Parmi les messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme spam.</p>",
                 "solution": "",
                 "height": 500
               }
