@@ -196,15 +196,13 @@ describe('Integration | Shared | Infrastructure | Utils | Ods | read-ods-utils',
         odsBuffer = await readFile(DEFAULT_ODS_FILE_PATH);
 
         // when
-        const call = async () => {
-          await validateOdsHeaders({
+        // then
+        await expect(
+          validateOdsHeaders({
             odsBuffer,
             headers: VALID_HEADERS,
-          });
-        };
-
-        // then
-        expect(call).to.not.throw();
+          }),
+        ).not.to.be.rejected;
       });
     });
 
