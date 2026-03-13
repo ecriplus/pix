@@ -8,12 +8,18 @@ describe('Unit | Infrastructure | Serializers | JsonApi |  Network | network-ser
       const network = domainBuilder.acquisition.buildNetwork({
         id: 42,
         name: 'Mon réseau',
+        organizationId: 555,
+        organizationName: 'Tête de réseau',
       });
 
       const expectedSerializedNetwork = {
         data: {
           attributes: {
             name: 'Mon réseau',
+            'head-organization': {
+              id: 555,
+              name: 'Tête de réseau',
+            },
           },
           id: '42',
           type: 'networks',
