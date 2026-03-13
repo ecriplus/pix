@@ -435,7 +435,11 @@ const configuration = (function () {
           keepAliveMsec: ms(process.env.PROMETHEUS_PUSHGATEWAY_KEEP_ALIVE ?? '1s'),
         },
         buckets: Object.assign(
-          { lc_loadcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16], lc_findcachemiss: [0.01, 0.02, 0.04, 0.08, 0.16] },
+          {
+            lc_read: [10, 100, 1000],
+            lc_cachemiss: [10, 100, 1000],
+            lc_cachepenalty: [0.001, 0.01, 0.1],
+          },
           parseJSONEnv('PROMETHEUS_METRICS_BUCKETS'),
         ),
       },
