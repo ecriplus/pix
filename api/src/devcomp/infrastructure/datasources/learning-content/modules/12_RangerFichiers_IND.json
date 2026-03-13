@@ -32,7 +32,7 @@
               "element": {
                 "id": "1101ef20-2e66-45c4-ab92-834aeda05a8d",
                 "type": "text",
-                "content": "Voici le dossier «&nbsp;Documents&nbsp;» de l’ordinateur de Marie.<br><br><strong>Observez l’image ci-dessous puis répondez à la question.</strong>"
+                "content": "<p>Voici le contenu du dossier «&nbsp;Documents&nbsp;» de l’ordinateur de Marie.</p><p><strong>Observez l’image ci-dessous puis répondez à la question.</strong></p>"
               }
             },
             {
@@ -59,28 +59,28 @@
                     "id": "1",
                     "content": "Des fichiers uniquement",
                     "feedback": {
-                      "diagnosis": "Eh non. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                      "diagnosis": "<p>Eh non. Un dossier peut contenir des <strong>fichiers et d’autres dossiers</strong>.</p><p>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Des dossiers uniquement",
                     "feedback": {
-                      "diagnosis": "Eh non. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                      "diagnosis": "<p>Eh non.Un dossier peut contenir des <strong>fichiers et d’autres dossiers</strong>.</p><p>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Des fichiers et des dossiers",
                     "feedback": {
-                      "diagnosis": "Eh oui. Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                      "diagnosis": "<p>Eh oui ! Un dossier peut contenir des <strong>fichiers et d’autres dossiers</strong>.</p><p>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "Un dossier peut contenir des fichiers <strong>et</strong> d’autres dossiers.<br>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement."
+                      "diagnosis": "<p>Un dossier peut contenir des <strong>fichiers et d’autres dossiers</strong>.</p><p>C’est ce qui permet de créer une organisation avec plusieurs niveaux de rangement.</p>"
                     }
                   }
                 ],
@@ -99,7 +99,7 @@
               "element": {
                 "id": "9835e064-096b-4daa-bb61-3174397587e9",
                 "type": "text",
-                "content": "Créer une organisation avec plusieurs niveaux de rangement peut être intéressant pour mieux ranger ses fichiers, encore faut-il s’y retrouver ! 💪 <br>Pour cela, il faut comprendre comment les dossiers sont organisés entre eux."
+                "content": "<p>Mais ça veut dire quoi une organisation avec plusieurs niveaux de rangement ? <br>Découvrons-le à l’aide d’un schéma !</p>"
               }
             }
           ]
@@ -118,9 +118,29 @@
             {
               "type": "element",
               "element": {
+                "id": "72dc94ee-2e28-47f0-8605-aa4242b94961",
+                "type": "text",
+                "content": "<p>Clarisse a ouvert le dossier «&nbsp;Famille&nbsp;»&nbsp; de son ordinateur.<br>Une fenêtre s’ouvre et lui montre les fichiers qui se trouve dans le dossier «&nbsp;Famille&nbsp;» mais aussi l’organisation de ses dossiers&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2b2673df-0fd6-4960-8af1-5ff939e32143",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/explo-decouverte1.png",
+                "alt": "Capture d’écran décrite dans l’alternative textuelle",
+                "alternativeText": "<p>à venir</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "be9ec4db-b29b-4787-ad90-33cbbaa349f7",
                 "type": "text",
-                "content": "Voici un schéma qui présente un exemple d’organisation des dossiers et des fichiers dans un ordinateur. <br><br><strong>Observez le schéma suivant puis répondez aux questions ci-dessous.</strong>"
+                "content": "<p>Maintenant, voici un schéma qui représente cette organisation.<br><strong>Observez le schéma suivant puis répondez aux questions ci-dessous.</strong></p>"
               }
             },
             {
@@ -143,42 +163,42 @@
                     {
                       "id": "6c10f52c-a507-4745-9ad1-d1e14dead1ab",
                       "type": "qcu-discovery",
-                      "instruction": "Dans ce schéma, combien y-a-t-il de dossiers dans «&nbsp;Images&nbsp;» ?",
+                      "instruction": "<p>Dans ce schéma, combien y-a-t-il de dossiers dans «&nbsp;Photos&nbsp;» ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "1",
                           "feedback": {
-                            "diagnosis": "Eh non. Le dossier «&nbsp;Images&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Famille&nbsp;» et «&nbsp;Voyage&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                            "diagnosis": "<p>Eh non. Le dossier «&nbsp;Photos&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Maison&nbsp;» et «&nbsp;Famille&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "2",
                           "feedback": {
-                            "diagnosis": "Exactement. Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                            "diagnosis": "<p>Exactement. Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "4",
                           "feedback": {
-                            "diagnosis": "Eh non. Le dossier «&nbsp;Images&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Famille&nbsp;» et «&nbsp;Voyage&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                            "diagnosis": "<p>Eh non. Le dossier «&nbsp;Photos&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Maison&nbsp;» et «&nbsp;Famille&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "5",
                           "feedback": {
-                            "diagnosis": "Eh non. Le dossier «&nbsp;Images&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Famille&nbsp;» et «&nbsp;Voyage&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                            "diagnosis": "<p>Eh non. Le dossier «&nbsp;Photos&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Maison&nbsp;» et «&nbsp;Famille&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "Eh non. Le dossier «&nbsp;Images&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Famille&nbsp;» et «&nbsp;Voyage&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers."
+                            "diagnosis": "<p>Le dossier «&nbsp;Photos&nbsp;» contient 2 dossiers&nbsp;:&nbsp; «&nbsp;Maison&nbsp;» et «&nbsp;Famille&nbsp;».<br>Lorsqu’un dossier est rangé dans un autre dossier, on parle de <strong>sous-dossiers</strong>. Cette organisation permet de regrouper les fichiers dans des dossiers, eux-mêmes rangés dans d’autres dossiers.</p>"
                           }
                         }
                       ],
@@ -369,6 +389,10 @@
                     ]
                   },
                   {
+                    "type": "text",
+                    "content": "<p>&gt;<br></p>"
+                  },
+                  {
                     "type": "select",
                     "input": "Juillet",
                     "display": "inline",
@@ -378,7 +402,7 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Mai"
+                        "content": "Photo1"
                       },
                       {
                         "id": "2",
@@ -400,12 +424,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Bien joué.&nbsp;",
-                    "diagnosis": "Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>."
+                    "state": "<p>Bien joué.&nbsp;</p>",
+                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;:&nbsp;Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
                   },
                   "invalid": {
                     "state": "Presque ça !",
-                    "diagnosis": "Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;». <br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>."
+                    "diagnosis": "<p>Pour accéder au fichier «&nbsp;Anniv2025&nbsp;», il faut ouvrir le dossier «&nbsp;Images&nbsp;», puis le dossier «&nbsp;Photos&nbsp;», puis le dossier «&nbsp;2025&nbsp;» et enfin le dossier «&nbsp;Juillet&nbsp;».<br>Cette suite de dossiers correspond au <strong>chemin d’accès du fichier</strong>&nbsp;: Mon ordinateur &gt; Images&nbsp; &gt; Photos &gt; 2025 &gt; Juillet &gt; Anniv2025.</p>"
                   }
                 }
               }
@@ -422,7 +446,7 @@
               "element": {
                 "id": "b2f32e18-08ae-4348-970f-f894d78481a1",
                 "type": "text",
-                "content": "Il faut parfois ouvrir plusieurs dossiers les uns après les autres pour accéder à un fichier. <br>📍 Le <strong>chemin d’accès à un fichier indique où il se trouve</strong> dans l’arborescence."
+                "content": "<p>Il faut parfois ouvrir plusieurs dossiers les uns après les autres pour accéder à un fichier.<br>📍 Le <strong>chemin d’accès à un fichier indique où il se trouve</strong> dans l’arborescence.</p>"
               }
             }
           ]
@@ -437,7 +461,7 @@
               "element": {
                 "id": "c34b1fac-1866-4009-8134-95c055a3c948",
                 "type": "text",
-                "content": "Maintenant que vous savez trouver un fichier grâce à son chemin d’accès, découvrez comment accéder à ce fichier depuis votre ordinateur"
+                "content": "<p>Maintenant que vous savez reconstituer le chemin d’accès d’un fichier, découvrez comment accéder à ce fichier depuis votre ordinateur.</p>"
               }
             }
           ]
@@ -452,7 +476,7 @@
               "element": {
                 "id": "6c314f13-5614-44e0-8959-14ef2ef397c3",
                 "type": "text",
-                "content": "Tous les dossiers et fichiers ne sont pas visibles depuis le bureau de l’ordinateur. Un logiciel permet d’y accéder."
+                "content": "<p>Tous les dossiers et fichiers présents sur un ordinateur ne sont pas visibles sur le bureau. Un logiciel permet d’y accéder.</p>"
               }
             },
             {
@@ -480,7 +504,7 @@
                       "response": ""
                     },
                     {
-                      "name": "Explorateur Windows",
+                      "name": "Explorateur de fichiers",
                       "image": {
                         "src": "https://assets.pix.org/draft/modules/RangerFichiers_IND/windows.png"
                       },
@@ -516,7 +540,7 @@
               "element": {
                 "id": "396abb24-bc62-458a-a051-945bfd38b658",
                 "type": "text",
-                "content": "<strong>Feedback&nbsp;:</strong> Sur un ordinateur, le gestionnaire de fichiers permet d’accéder aux dossiers et aux fichiers. Selon l’appareil, le <strong>gestionnaire de fichiers</strong> peut porter des noms différents, mais son rôle reste le même,  par exemple&nbsp;: <em>Explorateur de fichiers</em> sur Windows ou <em>Finder</em> sur Mac. "
+                "content": "<p><strong>Feedback&nbsp;:</strong> Sur un ordinateur, le <strong>gestionnaire de fichiers</strong> permet d’<strong>accéder aux dossiers et aux fichiers</strong> et aussi de <strong>les organiser</strong> (les déplacer, les supprimer, les renommer…). <br>Selon l’appareil, le gestionnaire de fichiers peut porter des <strong>noms différents</strong>, mais son rôle reste le même,  par exemple&nbsp;: <em>Explorateur de fichiers</em> sur Windows ou <em>Finder</em> sur Mac. </p>"
               }
             }
           ]
@@ -624,7 +648,7 @@
               "element": {
                 "id": "1db4a456-f71c-43c9-90b8-c9a468154260",
                 "type": "text",
-                "content": "Dans le gestionnaire de fichiers&nbsp;:&nbsp; <br><ul><li>Un volet <strong>latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li><li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li><li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li></ul><br><br><strong>🤔 Bon à savoir</strong> <br>Le gestionnaire de fichiers peut s’ouvrir de deux façons&nbsp;:&nbsp; <br><ul><li>en cliquant sur l’icône dans la barre des tâches (Windows) ou dock (Apple)</li><li>en double cliquant sur un dossier sur le bureau</li></ul>"
+                "content": "<p>Dans le gestionnaire de fichiers&nbsp;:&nbsp; </p><ul><li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li><li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li><li>Un <strong>volet latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li></ul><br><p><strong>🤔 Bon à savoir</strong><br>Le gestionnaire de fichiers peut s’ouvrir de deux façons&nbsp;:&nbsp;</p><ul><li>en cliquant sur l’icône dans la barre des tâches (Windows) ou dock (Apple)</li><li>en double cliquant sur un dossier sur le bureau</li></ul>"
               }
             }
           ]
@@ -639,7 +663,7 @@
               "element": {
                 "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
                 "type": "text",
-                "content": "<p>Marie souhaite organiser différemment ses dossiers et ses fichiers. </p><p>Elle a commencé par ranger son dossier «&nbsp;Images&nbsp;» en créant des sous dossiers par année. </p><p>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière.</p>"
+                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier «&nbsp;Images&nbsp;» en créant des sous dossiers par année.<br>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière.</p>"
               }
             },
             {
@@ -759,7 +783,7 @@
               "element": {
                 "id": "a2ef7833-34d7-4801-995e-dfa5815d2c09",
                 "type": "text",
-                "content": "<ul><li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;<br><br></li><li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence. Le gestionnaire de fichier permet de&nbsp;:&nbsp;<ul><li>Accéder aux dossiers et aux fichiers et les ranger.</li><li>Visualiser l’arborescence.</li><li>Consulter des informations sur les dossiers et les fichiers.</li><li>Modifier l’affichage.<br><br> </li></ul></li><li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
+                "content": "<ul>    <li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;<br><br></li>    <li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence.<br><br></li>    <li>Le <strong>gestionnaire de fichier </strong>permet de&nbsp;:&nbsp;<ul>            <li>Accéder aux dossiers et aux fichiers et les ranger.</li>            <li>Visualiser l’arborescence.</li>            <li>Consulter des informations sur les dossiers et les fichiers.</li>            <li>Modifier l’affichage.<br><br> </li>        </ul>    </li>    <li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
               }
             }
           ]
@@ -860,7 +884,7 @@
                   },
                   {
                     "id": "88e3951e-5d1a-4f4d-9d61-1c3ba82ec95b",
-                    "text": "Réécrire les documents textes enregistrés sur l’ordinateur.",
+                    "text": "Éditer les documents textes enregistrés sur l’ordinateur.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -887,7 +911,7 @@
               "element": {
                 "id": "1f6c6b6a-029d-44e4-bc25-a2f9ea557a1e",
                 "type": "text",
-                "content": "<p>Suivre les instructions suivantes pour ranger les photos d’Alice&nbsp;:</p> <ul><li><strong>Dans le dossier Images de l’ordinateur d’Alice, créer un dossier «&nbsp;Animaux&nbsp;».</strong></li><li><strong>Rangez-y toutes les photos avec des noms d’animaux.</strong></li><li><strong>Dans le dossiers «&nbsp;Animaux&nbsp;», créer un dossier 2022.</strong></li><li><strong>Rangez-y toutes les photos datant de 2022.</strong></li></ul>"
+                "content": "<p>Suivre les instructions suivantes pour ranger les photos d’Alice&nbsp;:</p> <ul><li><strong>Dans le dossier Images de l’ordinateur d’Alice, créer un dossier «&nbsp;Animaux&nbsp;».</strong></li><li><strong>Rangez-y toutes les photos avec des noms d’animaux.</strong></li><li><strong>Dans le dossiers «&nbsp;Animaux&nbsp;», créer un dossier 2022.</strong></li><li><strong>Rangez-y toutes les photos d’animaux datant de 2022.</strong></li></ul>"
               }
             },
             {
