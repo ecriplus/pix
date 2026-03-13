@@ -1,5 +1,4 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
-import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { fillIn } from '@ember/test-helpers';
 import Update from 'pix-admin/components/campaigns/update';
@@ -11,22 +10,24 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaigns | Update', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  const onExit = sinon.stub();
+
   hooks.beforeEach(function () {
     class AccessControlStub extends Service {
       hasAccessToCampaignIsForAbsoluteNoviceEditionScope = false;
     }
     this.owner.register('service:access-control', AccessControlStub);
-  });
 
-  const onExit = sinon.stub();
-  const campaign = EmberObject.create({
-    title: 'Ceci est un titre',
-    name: 'Ceci est un nom',
-    save: sinon.stub(),
+    this.campaignData = {
+      title: 'Ceci est un titre',
+      name: 'Ceci est un nom',
+      save: sinon.stub(),
+    };
   });
 
   test('it should display the items', async function (assert) {
     // when
+    const campaign = this.campaignData;
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
     // then
@@ -36,10 +37,19 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
   });
 
-  module('when campaign is of type assessment', function () {
+  module('when campaign is of type assessment', function (hooks) {
+    hooks.beforeEach(function () {
+      this.campaignData = {
+        title: 'Ceci est un titre',
+        name: 'Ceci est un nom',
+        isTypeAssessment: true,
+        save: sinon.stub(),
+      };
+    });
+
     test('it should display items for assessment', async function (assert) {
-      campaign.isTypeAssessment = true;
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
       // then
@@ -62,9 +72,8 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     });
 
     test('it should display an error text when the customResultPageButtonText has more than 255 characters', async function (assert) {
-      campaign.isTypeAssessment = true;
-
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
       await fillByLabel(
         'Texte du bouton de la page de fin de parcours Si un texte pour le bouton est saisi, une URL est également requise.',
@@ -76,9 +85,8 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     });
 
     test('it should display an error text when the customResultPageButtonUrl is not a valid absolute or relative url', async function (assert) {
-      campaign.isTypeAssessment = true;
-
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
       await fillByLabel(
         'URL du bouton de la page de fin de parcours Si une URL pour le bouton est saisie, le texte est également requis.',
@@ -90,9 +98,8 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     });
 
     test('should accept relative url for customResultPageButtonUrl', async function (assert) {
-      campaign.isTypeAssessment = true;
-
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
       await fillByLabel(
@@ -105,13 +112,54 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     });
   });
 
-  module('when campaign is of type profiles collection', function () {
-    campaign.isTypeAssessment = false;
+  module('when campaign is of type exam', function (hooks) {
+    hooks.beforeEach(function () {
+      this.campaignData = {
+        title: 'Ceci est un titre',
+        name: 'Ceci est un nom',
+        isTypeAssessment: false,
+        isTypeExam: true,
+        save: sinon.stub(),
+      };
+    });
+
+    test('it should display end of campaign page items', async function (assert) {
+      const campaign = this.campaignData;
+      const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
+
+      assert.dom(screen.getByRole('textbox', { name: 'Texte de la page de fin de parcours' })).exists();
+      assert
+        .dom(
+          screen.getByRole('textbox', {
+            name: 'Texte du bouton de la page de fin de parcours Si un texte pour le bouton est saisi, une URL est également requise.',
+          }),
+        )
+        .exists();
+      assert
+        .dom(
+          screen.getByRole('textbox', {
+            name: 'URL du bouton de la page de fin de parcours Si une URL pour le bouton est saisie, le texte est également requis.',
+          }),
+        )
+        .exists();
+    });
+  });
+
+  module('when campaign is of type profiles collection', function (hooks) {
+    hooks.beforeEach(function () {
+      this.campaignData = {
+        title: 'Ceci est un titre',
+        name: 'Ceci est un nom',
+        isTypeAssessment: false,
+        isTypeExam: false,
+        isProfilesCollection: true,
+        save: sinon.stub(),
+      };
+    });
 
     test('it should display items for profiles collection', async function (assert) {
-      campaign.isTypeAssessment = false;
-
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
       // then
@@ -126,6 +174,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
   test('it should display an error text when the name is empty', async function (assert) {
     // when
+    const campaign = this.campaignData;
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
     await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), '');
 
@@ -135,6 +184,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
   test('it should display an error text when the name has more than 255 characters', async function (assert) {
     // when
+    const campaign = this.campaignData;
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
     await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), 'a'.repeat(256));
 
@@ -144,6 +194,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
   test('it should call Update when form is valid', async function (assert) {
     //when
+    const campaign = this.campaignData;
     const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
     await fillIn(screen.getByLabelText('Nom de la campagne *', { exact: false }), 'Nouveau nom');
     await clickByName('Enregistrer');
@@ -154,6 +205,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
   test('it should call onCancel when form is cancel', async function (assert) {
     // when
+    const campaign = this.campaignData;
     await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
     await clickByName('Annuler');
 
@@ -161,10 +213,18 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     assert.ok(onExit.called);
   });
 
-  module('Multiple sendings checkbox', function () {
+  module('Multiple sendings checkbox', function (hooks) {
+    hooks.beforeEach(function () {
+      this.campaignData = {
+        title: 'Ceci est un titre',
+        name: 'Ceci est un nom',
+        save: sinon.stub(),
+      };
+    });
+
     test('it should display multiple sendings checkbox when campaign has no participations', async function (assert) {
       //given
-      campaign.totalParticipationsCount = 0;
+      const campaign = { ...this.campaignData, totalParticipationsCount: 0 };
 
       // when
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
@@ -175,7 +235,7 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
     test('it should not display multiple sendings checkbox when campaign has participations', async function (assert) {
       //given
-      campaign.totalParticipationsCount = 1;
+      const campaign = { ...this.campaignData, totalParticipationsCount: 1 };
 
       // when
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
@@ -186,17 +246,25 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
   });
 
   module('is for absolute novice choice', function () {
-    module('Campaign is Type Assessment', function () {
+    module('Campaign is Type Assessment', function (hooks) {
+      hooks.beforeEach(function () {
+        this.campaignData = {
+          title: 'Ceci est un titre',
+          name: 'Ceci est un nom',
+          isTypeAssessment: true,
+          save: sinon.stub(),
+        };
+      });
+
       test('should not display choice if hasAccessToCampaignIsForAbsoluteNoviceEditionScope is false', async function (assert) {
-        campaign.isTypeAssessment = true;
         // given
         class AccessControlStub extends Service {
           hasAccessToCampaignIsForAbsoluteNoviceEditionScope = false;
         }
-
         this.owner.register('service:access-control', AccessControlStub);
 
         // when
+        const campaign = this.campaignData;
         const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
         assert.notOk(
@@ -206,14 +274,13 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
 
       test('should display choice if hasAccessToCampaignIsForAbsoluteNoviceEditionScope is true', async function (assert) {
         // given
-        campaign.isTypeAssessment = true;
         class AccessControlStub extends Service {
           hasAccessToCampaignIsForAbsoluteNoviceEditionScope = true;
         }
-
         this.owner.register('service:access-control', AccessControlStub);
 
         // when
+        const campaign = this.campaignData;
         const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
         assert.ok(screen.getByRole('radiogroup', { name: 'Voulez-vous passer cette campagne en isForAbsoluteNovice' }));
@@ -221,17 +288,25 @@ module('Integration | Component | Campaigns | Update', function (hooks) {
     });
   });
 
-  module('Campaign is Type Profiles Collection', function () {
+  module('Campaign is Type Profiles Collection', function (hooks) {
+    hooks.beforeEach(function () {
+      this.campaignData = {
+        title: 'Ceci est un titre',
+        name: 'Ceci est un nom',
+        isTypeAssessment: false,
+        save: sinon.stub(),
+      };
+    });
+
     test('should not display choice if hasAccessToCampaignIsForAbsoluteNoviceEditionScope is true', async function (assert) {
       // given
-      campaign.isTypeAssessment = false;
       class AccessControlStub extends Service {
         hasAccessToCampaignIsForAbsoluteNoviceEditionScope = true;
       }
-
       this.owner.register('service:access-control', AccessControlStub);
 
       // when
+      const campaign = this.campaignData;
       const screen = await render(<template><Update @campaign={{campaign}} @onExit={{onExit}} /></template>);
 
       assert.notOk(
