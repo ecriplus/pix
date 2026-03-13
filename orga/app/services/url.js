@@ -32,6 +32,11 @@ export default class Url extends UrlBaseService {
     return `${this.pixAppUrl}/campagnes/`;
   }
 
+  get combinedCoursesRootUrl() {
+    if (ENV.APP.COMBINED_COURSES_ROOT_URL) return ENV.APP.COMBINED_COURSES_ROOT_URL;
+    return `${this.pixAppUrl}/parcours/`;
+  }
+
   get pixJuniorSchoolUrl() {
     const schoolCode = this.currentUser.organization.schoolCode;
     if (!schoolCode) return '';

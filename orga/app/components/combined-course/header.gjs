@@ -51,7 +51,39 @@ export default class CombinedCourseHeader extends Component {
       </:title>
       <:subtitle>
         <div class="combined-course-page__header">
-          <p class="combined-course-page__header-body">{{t "pages.combined-course.introduction"}}</p>
+          <div>
+            <p class="combined-course-page__header-body">{{t "pages.combined-course.introduction"}}</p>
+            <dl class="campaign-header-title__details">
+              <div class="campaign-header-title__detail-item">
+                <dt class="label-text">
+                  {{t "pages.campaign.code"}}
+                </dt>
+                <dd class="campaign-header-title__campaign-code">
+                  <span>{{@code}}</span>
+                  <CopyPasteButton
+                    @clipBoardtext={{@code}}
+                    @successMessage={{t "pages.campaign.copy.code.success"}}
+                    @defaultMessage={{t "pages.campaign.copy.code.default"}}
+                    class="hide-on-mobile"
+                  />
+                </dd>
+              </div>
+              <div class="campaign-header-title__detail-item">
+                <dt class="label-text">
+                  {{t "pages.campaign.link"}}
+                </dt>
+                <dd class="campaign-header-title__campaign-link">
+                  <a href={{this.combinedCourseUrl}}>{{this.combinedCourseUrl}}</a>
+                  <CopyPasteButton
+                    @clipBoardtext={{this.combinedCourseUrl}}
+                    @successMessage={{t "pages.campaign.copy.link.success"}}
+                    @defaultMessage={{t "pages.campaign.copy.link.default"}}
+                    class="hide-on-mobile"
+                  />
+                </dd>
+              </div>
+            </dl>
+          </div>
           {{#if @campaignIds.length}}
             <div class="combined-course-page__campaigns">
               {{#each @campaignIds as |campaignId index|}}
