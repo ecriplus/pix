@@ -1,5 +1,6 @@
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
 <template>
@@ -11,7 +12,10 @@ import { t } from 'ember-intl';
             {{t "common.fields.id"}}
           </:header>
           <:cell>
-            {{network.id}}
+            <LinkTo @route="authenticated.networks.get" @model={{network.id}}>
+              {{network.id}}
+            </LinkTo>
+
           </:cell>
         </PixTableColumn>
         <PixTableColumn @context={{context}} class="break-word">
