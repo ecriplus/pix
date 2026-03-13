@@ -360,7 +360,7 @@
               "element": {
                 "id": "0c73ed69-90b6-442f-9aa1-716b7f7a2da3",
                 "type": "text",
-                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. <br></p><h4>Comment différencier les trois types de facteurs d’authentification ? </h4><ul><li>💬 Les facteurs de connaissance, par exemple&nbsp;: un mot passe. </li><li>👜 Les facteurs de possession, par exemple&nbsp;: une adresse mail. </li><li>🙋 Les facteurs biométriques, par exemple&nbsp;: une empreinte digitale.</li></ul>"
+                "content": "<p>Un facteur d’authentification est un <strong>moyen de prouver son identité</strong>. <br></p><h5>Comment différencier les trois types de facteurs d’authentification ? </h5><ul><li>💬 Les facteurs de connaissance, par exemple&nbsp;: un mot passe. </li><li>👜 Les facteurs de possession, par exemple&nbsp;: une adresse mail. </li><li>🙋 Les facteurs biométriques, par exemple&nbsp;: une empreinte digitale.</li></ul>"
               }
             }
           ]
@@ -564,7 +564,7 @@
               "element": {
                 "id": "10d652ae-fb1f-4e20-8e2e-08686f539a7d",
                 "type": "text",
-                "content": "<p>Chaque type de facteur a des avantages et des inconvénients.<strong> Ils ont tous des limites</strong> en matière de sécurité.</p><p><br>🤔<strong>Bon à savoir</strong> </p><p>Certaines méthodes d’authentification sont <strong>complexes et coûteuses à mettre en place</strong>. Par exemple, c’est pour ça que l’authentification par iris de l’œil n’est pas répandue.&nbsp;Elle coûte très cher. 💶</p><h4><br>Malgré ces limites, comment réduire les risques d’usurpation d’identité ?&nbsp; </h4><p>Pour éviter que quelqu’un vous vole vos accès et se fasse passer pour vous, les services en ligne demandent plusieurs facteurs d’authentification <strong>de natures différentes </strong>afin d’augmenter le niveau de sécurité globale. 🔒🔒</p>"
+                "content": "<p>Chaque type de facteur a des avantages et des inconvénients.<strong> Ils ont tous des limites</strong> en matière de sécurité.</p><p><br>🤔<strong>Bon à savoir</strong> </p><p>Certaines méthodes d’authentification sont <strong>complexes et coûteuses à mettre en place</strong>. Par exemple, c’est pour ça que l’authentification par iris de l’œil n’est pas répandue.&nbsp;Elle coûte très cher. 💶</p><h5><br>Malgré ces limites, comment renforcer la sécurité des accès ?&nbsp; </h5><p>Pour éviter une <strong>usurpation d'identité</strong>, c'est-à-dire que quelqu’un vous vole vos accès et se fasse passer pour vous, les services en ligne demandent plusieurs facteurs d’authentification <strong>de natures différentes </strong>afin d’augmenter le niveau de sécurité globale.&nbsp;🔒&nbsp;🔒</p>"
               }
             }
           ]
@@ -664,7 +664,7 @@
               "element": {
                 "id": "c10935b1-81bb-41fd-b911-97d09ec4f67e",
                 "type": "text",
-                "content": "<h4>Et si l’authentification multifacteur n’est pas activée ?</h4><ul><li>⚙️Si le service <strong>propose </strong>la MFA, vous pouvez la configurer <strong>vous-même dans les paramètres</strong> de votre compte.&nbsp;</li><li>‼️Si le service <strong>impose </strong>désormais la MFA, vous serez invité à la <strong>configurer </strong>lors de votre <strong>prochaine connexion</strong>.</li><li>📅 Certains services ne proposent pas la MFA, ou pas encore.</li></ul><p><br>Activer l’authentification multifacteur soi-même ou quand elle est proposée, c’est <strong>ajouter une sécurité supplémentaire</strong>&nbsp;à votre compte et aux informations qu’il contient. 🔒</p>"
+                "content": "<h5>Et si l’authentification multifacteur n’est pas activée ?</h5><ul><li>⚙️Si le service <strong>propose </strong>la MFA, vous pouvez la configurer <strong>vous-même dans les paramètres</strong> de votre compte.&nbsp;</li><li>‼️Si le service <strong>impose </strong>désormais la MFA, vous serez invité à la <strong>configurer </strong>lors de votre <strong>prochaine connexion</strong>.</li><li>📅 Certains services ne proposent pas la MFA, ou pas encore.</li></ul><p><br>Activer l’authentification multifacteur soi-même ou quand elle est proposée, c’est <strong>ajouter une sécurité supplémentaire</strong>&nbsp;à votre compte et aux informations qu’il contient. 🔒</p>"
               }
             }
           ]
