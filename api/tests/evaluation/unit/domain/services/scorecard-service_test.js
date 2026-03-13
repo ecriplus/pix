@@ -366,8 +366,9 @@ describe('Unit | Service | ScorecardService', function () {
           .resolves([anonymizedAssessment]);
 
         // when
-        const call = async () => {
-          await scorecardService.resetScorecard({
+        // then
+        await expect(
+          scorecardService.resetScorecard({
             userId,
             competenceId,
             shouldResetCompetenceEvaluation,
@@ -376,9 +377,8 @@ describe('Unit | Service | ScorecardService', function () {
             campaignParticipationRepository,
             competenceEvaluationRepository,
             campaignRepository,
-          });
-        };
-        expect(call).not.to.throw();
+          }),
+        ).not.to.be.rejected;
       });
 
       // then
