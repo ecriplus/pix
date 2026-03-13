@@ -69,12 +69,10 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       expect(campaignParticipation.dataToUpdateOnDeletion).to.deep.equal({
         id: campaignParticipation.id,
-        attributes: {
-          userId: campaignParticipation.userId,
-          participantExternalId: campaignParticipation.participantExternalId,
-          deletedAt: campaignParticipation.deletedAt,
-          deletedBy: campaignParticipation.deletedBy,
-        },
+        userId: campaignParticipation.userId,
+        participantExternalId: campaignParticipation.participantExternalId,
+        deletedAt: campaignParticipation.deletedAt,
+        deletedBy: campaignParticipation.deletedBy,
       });
     });
   });
