@@ -77,6 +77,22 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
     });
   });
 
+  describe('dataToUpdateOnAnonymisation', function () {
+    it('should return payload to send on repository with specific field', function () {
+      const campaignParticipation = new CampaignParticipation({
+        userId: 666,
+        participantExternalId: 'thisismyemailbuddy@buddy.org',
+        deletedAt: new Date('2024-04-03'),
+        deletedBy: 777,
+      });
+
+      expect(campaignParticipation.dataToUpdateOnAnonymisation).to.deep.equal({
+        id: campaignParticipation.id,
+        userId: campaignParticipation.userId,
+      });
+    });
+  });
+
   describe('lastAssessment', function () {
     it('should retrieve the last assessment by creation date', function () {
       const campaignParticipation = new CampaignParticipation({

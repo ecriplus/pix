@@ -85,6 +85,13 @@ class CampaignParticipation {
     };
   }
 
+  get dataToUpdateOnAnonymisation() {
+    return {
+      id: this.id,
+      userId: this.userId,
+    };
+  }
+
   share() {
     this._canBeShared();
     this.sharedAt = new Date();
