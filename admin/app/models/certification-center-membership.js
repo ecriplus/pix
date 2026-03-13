@@ -9,7 +9,7 @@ export default class CertificationCenterMembership extends Model {
   @attr('date') createdAt;
   @attr() role;
   @attr('date') lastAccessedAt;
-  @belongsTo('certification-center', { async: true, inverse: null }) certificationCenter;
+  @belongsTo('certification-center', { async: true, inverse: 'certificationCenterMemberships' }) certificationCenter;
   @belongsTo('user', { async: true, inverse: 'certificationCenterMemberships' }) user;
 
   get roleLabelKey() {

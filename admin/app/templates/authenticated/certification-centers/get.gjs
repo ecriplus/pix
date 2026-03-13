@@ -20,7 +20,7 @@ import Information from 'pix-admin/components/certification-centers/information'
     {{#unless @controller.model.certificationCenter.isArchived}}
       <PixTabs @variant="primary" @ariaLabel="Navigation de la section centre de certification" class="navigation">
         <LinkTo @route="authenticated.certification-centers.get.team">
-          Équipe
+          Équipe ({{@controller.model.certificationCenter.certificationCenterMemberships.length}})
         </LinkTo>
 
         <LinkTo @route="authenticated.certification-centers.get.invitations">

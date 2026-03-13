@@ -20,6 +20,8 @@ export default class CertificationCenter extends Model {
   @attr() dataProtectionOfficerEmail;
 
   @hasMany('complementary-certification', { async: true, inverse: null }) habilitations;
+  @hasMany('certification-center-membership', { async: true, inverse: 'certificationCenter' })
+  certificationCenterMemberships;
 
   get typeLabel() {
     return types.find((type) => type.value === this.type).label;
