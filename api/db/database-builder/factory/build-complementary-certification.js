@@ -52,7 +52,7 @@ buildComplementaryCertification.droit = function ({
   minimumReproducibilityRateLowerLevel = 60,
   hasExternalJury = false,
   certificationExtraTime = 45,
-}) {
+} = {}) {
   return buildComplementaryCertification({
     id,
     label: 'Pix+ Droit',
