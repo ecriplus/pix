@@ -1,28 +1,81 @@
-import { clickByName, visit } from '@1024pix/ember-testing-library';
-import { currentURL } from '@ember/test-helpers';
+import { screen, visit } from '@1024pix/ember-testing-library';
+import { click, currentURL } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
+import setupIntl from '../../../helpers/setup-intl';
+
 module('Acceptance | Networks | List', function (hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
+  setupIntl(hooks);
 
-  module('when user has super admin role', function (hooks) {
-    hooks.beforeEach(async function () {
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-    });
-
-    test('it should redirect to network creation form on click "Nouveau réseau"', async function (assert) {
-      // given
+  module('when user is not logged in', function () {
+    test('it should not be accessible by an unauthenticated user', async function (assert) {
+      // when
       await visit('/networks/list');
 
-      // when
-      await clickByName('Nouveau réseau');
-
       // then
-      assert.strictEqual(currentURL(), '/networks/new');
+      assert.strictEqual(currentURL(), '/login');
+    });
+  });
+
+  module('when user is logged in', function () {
+    module('when user has super admin role', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+      });
+
+      test('it should redirect to network creation form on click "Nouveau réseau"', async function (assert) {
+        // given
+        await visit('/networks/list');
+
+        // when
+        const networkCreationLink = screen.getByRole('link', { name: t('pages.networks.list.new-button') });
+        await click(networkCreationLink);
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/new');
+      });
+
+      test('it should be accessible', async function (assert) {
+        // when
+        await visit('/networks/list');
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/list');
+      });
+
+      test('it should display the networks list', async function (assert) {
+        // given
+        server.create('network', { id: 1, name: 'Réseau Alpha' });
+        server.create('network', { id: 2, name: 'Réseau Beta' });
+
+        // when
+        const screen = await visit('/networks/list');
+
+        // then
+        const table = screen.getByRole('table', { name: t('components.networks.list.table.caption') });
+        assert.dom(table).exists();
+        assert.dom(screen.getByText('Réseau Alpha')).exists();
+        assert.dom(screen.getByText('Réseau Beta')).exists();
+      });
+    });
+
+    module('when user does not have super admin role', function () {
+      test('it should redirect to the organizations page', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: false })(server);
+
+        // when
+        await visit('/networks/list');
+
+        // then
+        assert.strictEqual(currentURL(), '/organizations/list');
+      });
     });
   });
 });

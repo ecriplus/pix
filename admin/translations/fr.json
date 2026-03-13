@@ -636,6 +636,11 @@
         "organization-id": {
           "label": "ID d'organisation à la tête du réseau:"
         }
+      },
+      "list": {
+        "table": {
+          "caption": "Liste des réseaux. Contient le nom et l'ID."
+        }
       }
     },
     "organization-learner-information": {
@@ -1343,6 +1348,11 @@
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },
     "networks": {
+      "list": {
+        "new-button": "Nouveau réseau",
+        "page-title": "Réseaux",
+        "title": "Tous les réseaux"
+      },
       "title": "Créer un réseau"
     },
     "organization": {
