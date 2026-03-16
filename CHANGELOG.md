@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.357.0](https://github.com/1024pix/pix/compare/v5.356.0...v5.357.0) (2026-03-16)
+
+### :rocket: Amélioration
+
+- [#15467](https://github.com/1024pix/pix/pull/15467) Ajouter une nouvelle route pour récupérer le détail d'un réseau (PIX-21337)
+
 # [5.356.0](https://github.com/1024pix/pix/compare/v5.355.0...v5.356.0) (2026-03-16)
 
 ### :rocket: Amélioration
