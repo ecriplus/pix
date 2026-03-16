@@ -21,6 +21,31 @@ describe('Unit | Organizational Entities | Application | Network', function () {
     });
   });
 
+  describe('#getNetworkDetails', function () {
+    it('calls getNetworkById usecase and Network serializer', async function () {
+      // given
+      const network = domainBuilder.acquisition.buildNetwork({
+        id: 1,
+        name: 'Mon Réseau',
+        organizationId: 555,
+        organizationName: 'Tête de réseau',
+      });
+
+      const networkId = 1;
+
+      const requestStub = { params: { networkId } };
+      sinon.stub(usecases, 'getNetworkDetails').resolves(network);
+      const networkSerializer = { serialize: sinon.stub() };
+
+      // when
+      await networkAdminController.getNetworkDetails(requestStub, hFake, { networkSerializer });
+
+      // then
+      expect(usecases.getNetworkDetails).to.have.been.calledOnce;
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly(network);
+    });
+  });
+
   describe('#create', function () {
     context('when payload contains only required fields', function () {
       it('calls "createNetwork" use case with the right parameters', async function () {

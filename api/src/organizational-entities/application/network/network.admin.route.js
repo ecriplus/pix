@@ -28,9 +28,33 @@ const register = async function (server) {
         tags: ['api', 'organizational-entities', 'network'],
       },
     },
-  ]);
-
-  server.route([
+    {
+      method: 'GET',
+      path: '/api/admin/networks/{networkId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            networkId: identifiersType.networkId,
+          }),
+        },
+        handler: (request, h) => networkAdminController.getNetworkDetails(request, h),
+        tags: ['api', 'organizational-entities', 'network'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès super admin**\n" +
+            "- Elle permet de récupérer les informations d'un réseau",
+        ],
+      },
+    },
     {
       method: 'POST',
       path: '/api/admin/networks',

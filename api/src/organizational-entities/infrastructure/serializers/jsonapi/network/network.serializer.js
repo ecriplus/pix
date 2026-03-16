@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (network) {
   return new Serializer('networks', {
-    attributes: ['name'],
+    attributes: ['name', 'headOrganization'],
   }).serialize(network);
 };
 

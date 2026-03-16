@@ -44,6 +44,45 @@ describe('Unit | Application | Admin | Route | Network', function () {
     });
   });
 
+  describe('GET /api/admin/networks/{networkId}', function () {
+    describe('when the authenticated user has super admin role', function () {
+      it('should call getNetworkById controller method', async function () {
+        // given
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+        sinon.stub(usecases, 'getNetworkDetails').returns('ok');
+        sinon.stub(networkAdminController, 'getNetworkDetails').returns('ok');
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/admin/networks/1', {});
+
+        // then
+        sinon.assert.called(networkAdminController.getNetworkDetails);
+      });
+    });
+
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(networkAdminController, 'getNetworkDetails').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('GET', '/api/admin/networks/1', {});
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(networkAdminController.getNetworkDetails);
+      });
+    });
+  });
+
   describe('POST /api/admin/networks', function () {
     describe('when the authenticated user has super admin role', function () {
       it('should call create controller method', async function () {

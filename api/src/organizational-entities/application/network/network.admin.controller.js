@@ -6,6 +6,12 @@ const findAllNetworks = async function (request, h, dependencies = { networkSeri
   return dependencies.networkSerializer.serialize(networks);
 };
 
+const getNetworkDetails = async function (request, h, dependencies = { networkSerializer }) {
+  const networkId = request.params.networkId;
+  const network = await usecases.getNetworkDetails({ networkId });
+  return dependencies.networkSerializer.serialize(network);
+};
+
 const create = async function (request, h, dependencies = { networkSerializer }) {
   const { organizationId, networkName } = networkSerializer.deserialize({
     data: request.payload.data,
@@ -24,6 +30,7 @@ const create = async function (request, h, dependencies = { networkSerializer })
 const networkAdminController = {
   create,
   findAllNetworks,
+  getNetworkDetails,
 };
 
 export { networkAdminController };
