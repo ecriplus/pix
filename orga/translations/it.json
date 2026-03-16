@@ -675,6 +675,7 @@
       "empty-state-with-copy-link": "Non ci sono ancora partecipanti! Inviate loro il seguente link per aderire alla campagna.",
       "included-in-combined-course": "Questa campagna di valutazione è inclusa nel percorso di apprendimento.",
       "included-in-combined-course-end": ".",
+      "link": "Link",
       "multiple-sendings": {
         "status": {
           "disabled": "No",

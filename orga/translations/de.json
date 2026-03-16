@@ -674,6 +674,7 @@
       "empty-state-with-copy-link": "Bisher gibt es noch keine Teilnehmer! Schicken Sie ihnen den folgenden Link, um sich Ihrer Kampagne anzuschließen.",
       "included-in-combined-course": "Diese Bewertungskampagne ist im Lernpfad enthalten",
       "included-in-combined-course-end": ".",
+      "link": "Link",
       "multiple-sendings": {
         "status": {
           "disabled": "Nicht",
