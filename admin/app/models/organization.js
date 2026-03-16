@@ -1,5 +1,5 @@
 import { service } from '@ember/service';
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import pick from 'lodash/pick';
 
 export default class Organization extends Model {
@@ -38,6 +38,8 @@ export default class Organization extends Model {
   @hasMany('tag', { async: true, inverse: null }) tags;
   @hasMany('organization', { async: true, inverse: null }) children;
   @hasMany('organization-invitation', { async: true, inverse: null }) organizationInvitations;
+
+  @belongsTo('network', { async: true, inverse: null }) network;
 
   static get featureList() {
     return {

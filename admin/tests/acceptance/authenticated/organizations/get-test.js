@@ -385,6 +385,44 @@ module('Acceptance | Organizations | Get', function (hooks) {
     });
   });
 
+  module('when the organization belongs to a network', function (hooks) {
+    hooks.beforeEach(async function () {
+      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+
+      server.create('network', { id: '42', name: 'Réseau Île-de-France' });
+
+      server.get('/admin/organizations/:id', () => ({
+        data: {
+          type: 'organizations',
+          id: '1',
+          attributes: {
+            name: 'My Organization',
+            features: { PLACES_MANAGEMENT: { active: true } },
+          },
+          relationships: {
+            network: { data: { type: 'networks', id: '42' } },
+            'organization-memberships': { links: { related: '/api/admin/organizations/1/memberships' } },
+            'target-profile-summaries': { links: { related: '/api/admin/organizations/1/target-profile-summaries' } },
+            children: { links: { related: '/api/admin/organizations/1/children' } },
+            'organization-invitations': { links: { related: '/api/admin/organizations/1/invitations' } },
+          },
+        },
+        included: [{ type: 'networks', id: '42', attributes: { name: 'Réseau Île-de-France' } }],
+      }));
+    });
+
+    test('clicking the network tag navigates to the network detail page', async function (assert) {
+      // given
+      const screen = await visit('/organizations/1/details');
+
+      // when
+      await click(screen.getByRole('link', { name: 'Réseau Île-de-France' }));
+
+      // then
+      assert.strictEqual(currentURL(), '/networks/42');
+    });
+  });
+
   module('When user is authenticated as Certif Admin', function (hooks) {
     hooks.beforeEach(async () => {
       await authenticateAdminMemberWithRole({ isCertif: true })(server);

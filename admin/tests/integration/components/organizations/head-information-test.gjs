@@ -10,6 +10,11 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | organizations/header-information', function (hooks) {
   setupIntlRenderingTest(hooks);
 
+  hooks.beforeEach(function () {
+    const currentUser = this.owner.lookup('service:currentUser');
+    currentUser.adminMember = { isSuperAdmin: true };
+  });
+
   module('when displaying organization', function () {
     test('it displays organization header information', async function (assert) {
       // given
@@ -118,6 +123,58 @@ module('Integration | Component | organizations/header-information', function (h
         assert
           .dom(screen.queryByText(t('components.organizations.head-information.parent-organization')))
           .doesNotExist();
+      });
+    });
+
+    module('when organization belongs to a network', function () {
+      module('when user is not super admin', function () {
+        test('it does not display a tag with a link to the network', async function (assert) {
+          // given
+          const currentUser = this.owner.lookup('service:currentUser');
+          currentUser.adminMember = { isSuperAdmin: false };
+          const store = this.owner.lookup('service:store');
+          const network = store.push({
+            data: { id: '42', type: 'network', attributes: { name: 'Réseau Île-de-France' } },
+          });
+          const organization = store.createRecord('organization', { network });
+
+          // when
+          const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
+
+          // then
+          assert.dom(screen.queryByRole('link', { name: 'Réseau Île-de-France' })).doesNotExist();
+        });
+      });
+
+      module('when user is super admin', function () {
+        test('it displays a tag with a link to the network', async function (assert) {
+          // given
+          const store = this.owner.lookup('service:store');
+          const network = store.push({
+            data: { id: '42', type: 'network', attributes: { name: 'Réseau Île-de-France' } },
+          });
+          const organization = store.createRecord('organization', { network });
+
+          // when
+          const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
+
+          // then
+          assert.dom(screen.getByRole('link', { name: 'Réseau Île-de-France' })).exists();
+        });
+      });
+    });
+
+    module('when organization does not belong to a network', function () {
+      test('it does not display a network tag', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const organization = store.createRecord('organization', { type: 'SCO' });
+
+        // when
+        const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
+
+        // then
+        assert.dom(screen.queryByText(t('components.organizations.head-information.network'))).doesNotExist();
       });
     });
   });
