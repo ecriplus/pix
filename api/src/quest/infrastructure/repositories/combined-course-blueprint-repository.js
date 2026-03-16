@@ -38,7 +38,7 @@ export async function save({ combinedCourseBlueprint }) {
   }
 
   const [updatedValues] = await knexConn('combined_course_blueprints')
-    .update(_toDTO({ combinedCourseBlueprint }))
+    .update(_toDTO({ combinedCourseBlueprint, questId }))
     .where({ id: combinedCourseBlueprint.id })
     .returning('*');
   await updateShares({ combinedCourseBlueprint, knexConn });
