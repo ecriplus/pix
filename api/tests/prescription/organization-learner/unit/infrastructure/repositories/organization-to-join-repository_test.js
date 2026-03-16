@@ -6,6 +6,7 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 describe('Unit | Repository | organization-to-join-repository', function () {
   it('returns organization to join', async function () {
     const organizationLearnerImportFormat = new OrganizationLearnerImportFormat({
+      id: 123,
       name: 'MY_TEST_EXPORT',
       fileType: 'csv',
       config: {

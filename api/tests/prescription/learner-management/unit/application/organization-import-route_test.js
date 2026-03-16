@@ -186,20 +186,27 @@ describe('Unit | Router | organization-import-router', function () {
     );
   });
 
-  describe('POST /api/admin/import-organization-learners-format', function () {
-    let hasAtLeastOneAccessOfStub, saveOrganizationLearnerImportFormatsStub;
+  describe('GET /api/admin/organization-learner-import-formats', function () {
+    const method = 'GET';
+    const url = '/api/admin/organization-learner-import-formats';
+
+    let hasAtLeastOneAccessOfStub, findAllOrganizationLearnerImportFormatsStub;
 
     beforeEach(function () {
       hasAtLeastOneAccessOfStub = sinon
         .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-        .withArgs([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin]);
+        .withArgs([
+          securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+          securityPreHandlers.checkAdminMemberHasRoleSupport,
+          securityPreHandlers.checkAdminMemberHasRoleMetier,
+        ]);
 
-      saveOrganizationLearnerImportFormatsStub = sinon
-        .stub(organizationImportController, 'saveOrganizationLearnerImportFormats')
+      findAllOrganizationLearnerImportFormatsStub = sinon
+        .stub(organizationImportController, 'findAllOrganizationLearnerImportFormats')
         .resolves(null);
     });
 
-    it('should not called controller when user is not super admin', async function () {
+    it('should not call controller when user is not allowed', async function () {
       hasAtLeastOneAccessOfStub.callsFake(
         () => (request, h) =>
           h
@@ -207,8 +214,53 @@ describe('Unit | Router | organization-import-router', function () {
             .code(403)
             .takeover(),
       );
+
+      const httpTestServer = new HttpTestServer(moduleUnderTest);
+      await httpTestServer.register(moduleUnderTest);
+
+      await httpTestServer.request(method, url);
+
+      expect(findAllOrganizationLearnerImportFormatsStub.notCalled).to.be.true;
+    });
+
+    it('should call controller when user is allowed', async function () {
+      hasAtLeastOneAccessOfStub.returns(() => true);
+
+      const httpTestServer = new HttpTestServer(moduleUnderTest);
+      await httpTestServer.register(moduleUnderTest);
+
+      await httpTestServer.request(method, url);
+
+      expect(findAllOrganizationLearnerImportFormatsStub.called).to.be.true;
+    });
+  });
+
+  describe('POST /api/admin/organization-learner-import-formats', function () {
+    let checkAdminMemberHasRoleSuperAdmin, saveOrganizationLearnerImportFormatsStub;
+
+    beforeEach(function () {
+      checkAdminMemberHasRoleSuperAdmin = sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin');
+
+      saveOrganizationLearnerImportFormatsStub = sinon
+        .stub(organizationImportController, 'saveOrganizationLearnerImportFormats')
+        .resolves(null);
+    });
+
+    it('should not call controller when user is not super admin', async function () {
+      checkAdminMemberHasRoleSuperAdmin.callsFake((_, h) =>
+        h
+          .response(
+            new jsonapiSerializer.Error({
+              code: 403,
+              title: 'Forbidden access',
+              detail: 'Missing or insufficient permissions.',
+            }),
+          )
+          .code(403)
+          .takeover(),
+      );
       const method = 'POST';
-      const url = '/api/admin/import-organization-learners-format';
+      const url = '/api/admin/organization-learner-import-formats';
 
       const httpTestServer = new HttpTestServer(moduleUnderTest);
       await httpTestServer.register(moduleUnderTest);
@@ -218,10 +270,10 @@ describe('Unit | Router | organization-import-router', function () {
       expect(saveOrganizationLearnerImportFormatsStub.notCalled).to.be.true;
     });
 
-    it('should called controller when user is super admin', async function () {
-      hasAtLeastOneAccessOfStub.returns(() => true);
+    it('should call controller when user is super admin', async function () {
+      checkAdminMemberHasRoleSuperAdmin.returns(() => true);
       const method = 'POST';
-      const url = '/api/admin/import-organization-learners-format';
+      const url = '/api/admin/organization-learner-import-formats';
 
       const httpTestServer = new HttpTestServer(moduleUnderTest);
       await httpTestServer.register(moduleUnderTest);

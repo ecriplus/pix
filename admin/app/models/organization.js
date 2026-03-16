@@ -61,6 +61,7 @@ export default class Organization extends Model {
       'CAMPAIGN_WITHOUT_USER_PROFILE',
       'SHOW_SKILLS',
       'PLACES_MANAGEMENT',
+      'LEARNER_IMPORT',
     );
   }
 

@@ -77,6 +77,7 @@ import { anonymizeUser } from './anonymize-user.js';
 import { computeOrganizationLearnerCertificability } from './compute-organization-learner-certificability.js';
 import { deleteOrganizationLearners } from './delete-organization-learners.js';
 import { dissociateUserFromOrganizationLearner } from './dissociate-user-from-organization-learner.js';
+import { findAllOrganizationLearnerImportFormats } from './find-all-organization-learner-import-format.js';
 import { findOrganizationLearnersBeforeImportFeature } from './find-organization-learners-before-import-feature.js';
 import { getDeltaOrganizationLearnerIds } from './get-delta-organization-learner-ids.js';
 import { getOrganizationImport } from './get-organization-import.js';
@@ -110,6 +111,7 @@ const usecasesWithoutInjectedDependencies = {
   computeOrganizationLearnerCertificability,
   deleteOrganizationLearners,
   dissociateUserFromOrganizationLearner,
+  findAllOrganizationLearnerImportFormats,
   findOrganizationLearnersBeforeImportFeature,
   getDeltaOrganizationLearnerIds,
   getOrganizationImportStatus,

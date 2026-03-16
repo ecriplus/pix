@@ -60,7 +60,53 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       expect(result).to.equal(null);
     });
   });
+  describe('#findAll', function () {
+    it('should return all import formats', async function () {
+      const scoOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const supOrganizationId = databaseBuilder.factory.buildOrganization().id;
 
+      const featureId = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+      }).id;
+
+      const scoImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({ name: 'SCO' });
+      const supImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({ name: 'SUP' });
+
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId: scoOrganizationId,
+        featureId,
+        params: {
+          organizationLearnerImportFormatId: scoImportFormat.id,
+          organizationLearnerImportFormatName: scoImportFormat.name,
+        },
+      });
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId: supOrganizationId,
+        featureId,
+        params: {
+          organizationLearnerImportFormatId: supImportFormat.id,
+          organizationLearnerImportFormatName: supImportFormat.name,
+        },
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await organizationLearnerImportFormatRepository.findAll();
+
+      // then
+      expect(result).lengthOf(2);
+      expect(result[0]).to.be.an.instanceOf(OrganizationLearnerImportFormat);
+      expect(result[0]).to.be.deep.equal(new OrganizationLearnerImportFormat(scoImportFormat));
+      expect(result[1]).to.be.deep.equal(new OrganizationLearnerImportFormat(supImportFormat));
+    });
+
+    it('should return an empty array if nothing was found', async function () {
+      const result = await organizationLearnerImportFormatRepository.findAll();
+
+      expect(result).lengthOf(0);
+    });
+  });
   describe('#save', function () {
     let clock, userId;
     const now = new Date('2022-02-02');
@@ -104,6 +150,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -111,6 +158,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
           createdAt: now,
         }),
         new OrganizationLearnerImportFormat({
+          id: 456,
           name: 'SECOND_FORMAT',
           fileType: 'csv',
           config: { new_config: 'not_bad' },
@@ -145,6 +193,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -169,6 +218,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -194,6 +244,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'FIRST_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },
@@ -220,6 +271,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const organizationLearnerImportFormats = [
         new OrganizationLearnerImportFormat({
+          id: 123,
           name: 'NEW_FORMAT',
           fileType: 'csv',
           config: { new_config: 'awesome' },

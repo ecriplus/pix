@@ -865,6 +865,78 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       // then
       expect(givenOrganization.organizationLearnerType).to.deep.equal(formerOrganizationLearnerType);
     });
+    context('when learner import feature does not exist', function () {
+      it('set shouldDeletePreviousLearner to true when activating LEARNER_IMPORT feature', function () {
+        // given
+        const givenOrganization = new OrganizationForAdmin({
+          features: {},
+        });
+
+        // when
+        givenOrganization.updateWithDataProtectionOfficerAndTags({
+          features: {
+            ...features,
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'GENERIC' } },
+          },
+          organizationLearnerType,
+        });
+
+        // then
+        expect(givenOrganization.features).to.deep.includes({
+          [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'GENERIC' } },
+        });
+        expect(givenOrganization.shouldDeletePreviousLearners).true;
+      });
+    });
+
+    context('when learner import feature exists', function () {
+      it('set shouldDeletePreviousLearner to true when activating LEARNER_IMPORT feature', function () {
+        // given
+        const givenOrganization = new OrganizationForAdmin({
+          features: {
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: false },
+          },
+        });
+
+        // when
+        givenOrganization.updateWithDataProtectionOfficerAndTags({
+          features: {
+            ...features,
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'ONDE' } },
+          },
+          organizationLearnerType,
+        });
+
+        // then
+        expect(givenOrganization.features).to.deep.includes({
+          [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'ONDE' } },
+        });
+        expect(givenOrganization.shouldDeletePreviousLearners).true;
+      });
+      it('set shouldDeletePreviousLearner to false when updating LEARNER_IMPORT format', function () {
+        // given
+        const givenOrganization = new OrganizationForAdmin({
+          features: {
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'GENERIC' } },
+          },
+        });
+
+        // when
+        givenOrganization.updateWithDataProtectionOfficerAndTags({
+          features: {
+            ...features,
+            [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'ONDE' } },
+          },
+          organizationLearnerType,
+        });
+
+        // then
+        expect(givenOrganization.features).to.deep.includes({
+          [ORGANIZATION_FEATURE.LEARNER_IMPORT.key]: { active: true, params: { name: 'ONDE' } },
+        });
+        expect(givenOrganization.shouldDeletePreviousLearners).false;
+      });
+    });
   });
 
   context('#updateParentOrganizationId', function () {

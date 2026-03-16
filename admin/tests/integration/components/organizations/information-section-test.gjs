@@ -41,6 +41,13 @@ module('Integration | Component | organizations/information-section', function (
         store.createRecord('organization-learner-type', { id: '789', name: 'Student' }),
         store.createRecord('organization-learner-type', { id: '987', name: 'Teacher' }),
       ]);
+
+    findAllStub
+      .withArgs('organization-learner-import-format')
+      .resolves([
+        store.createRecord('organization-learner-import-format', { id: '123', name: 'GENERIC' }),
+        store.createRecord('organization-learner-import-format', { id: '456', name: 'ONDE' }),
+      ]);
   });
 
   module('when editing organization', function () {

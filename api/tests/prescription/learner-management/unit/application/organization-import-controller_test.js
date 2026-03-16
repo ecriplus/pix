@@ -58,4 +58,28 @@ describe('Unit | Application | Learner Management | organization-import-controll
       });
     });
   });
+
+  describe('#findAllOrganizationLearnerImportFormats', function () {
+    const organizationId = 123;
+    const request = {
+      params: { organizationId },
+    };
+
+    beforeEach(function () {
+      sinon.stub(usecases, 'findAllOrganizationLearnerImportFormats');
+      usecaseResultSymbol = Symbol();
+      usecases.findAllOrganizationLearnerImportFormats.resolves(usecaseResultSymbol);
+      serializeStub = sinon.stub();
+      dependencies = { organizationLearnerImportFormatSerializer: { serialize: serializeStub } };
+    });
+
+    it('should get last organization import', async function () {
+      hFake.request = {
+        path: `/api/organizations/${organizationId}/import-information`,
+      };
+      await organizationImportController.findAllOrganizationLearnerImportFormats(request, hFake, dependencies);
+      expect(usecases.findAllOrganizationLearnerImportFormats).calledOnce;
+      expect(serializeStub).calledOnceWithExactly(usecaseResultSymbol);
+    });
+  });
 });

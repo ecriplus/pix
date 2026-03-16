@@ -780,6 +780,18 @@
         "name": {
           "label": "Name"
         },
+        "organization-learner-import-format": {
+          "dialog": {
+            "confirm-label": "Yes, I confirm.",
+            "confirmation": "By ticking this box, you confirm that you have the rights and authorisation from the organisation to carry out this action.",
+            "message": "You are about to activate generic import for this organisation. If the organisation already has prescriptions, they will all be deleted. This deletion cannot be undone.",
+            "title": "Enabling generic import"
+          },
+          "selector": {
+            "label": "Import format",
+            "placeholder": "Select an import format"
+          }
+        },
         "organization-learner-type": {
           "selector": {
             "error-message": "Organization learner type is required",

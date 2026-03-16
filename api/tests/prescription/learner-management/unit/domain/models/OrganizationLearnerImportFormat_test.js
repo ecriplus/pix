@@ -69,6 +69,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
     it('should initialize valid object', function () {
       //when
       const organizationLearnerImportFormat = new OrganizationLearnerImportFormat({
+        id: 123,
         name: 'SAY_MY_NAME',
         config: { basic_config: 'toto' },
         fileType: 'csv',
@@ -77,6 +78,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
       });
       // then
       expect(organizationLearnerImportFormat).to.deep.equal({
+        id: 123,
         name: 'SAY_MY_NAME',
         config: { basic_config: 'toto' },
         fileType: 'csv',
@@ -90,6 +92,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         //when
         try {
           new OrganizationLearnerImportFormat({
+            id: 123,
             name: 'SAY_MY_NAME',
             config: { basic_config: 'toto' },
             fileType: 'incalif_file_type',
@@ -107,6 +110,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         //when
         try {
           new OrganizationLearnerImportFormat({
+            id: 123,
             config: { basic_config: 'toto' },
             fileType: 'csv',
             createdAt: new Date('2025-01-01'),
@@ -123,6 +127,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         //when
         try {
           new OrganizationLearnerImportFormat({
+            id: 123,
             name: 'SAY_MY_NAME',
             fileType: 'csv',
             createdAt: new Date('2025-01-01'),
@@ -139,6 +144,7 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
         //when
         try {
           new OrganizationLearnerImportFormat({
+            id: 123,
             fileType: 'csv',
             createdAt: new Date('2025-01-01'),
             createdBy: 12,

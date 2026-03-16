@@ -7,10 +7,11 @@ describe('Integration | Organizational Entities | Application | Controller | Org
   let organization;
   let featureId;
   let administrationTeamId;
+  let adminUserId;
 
   beforeEach(async function () {
+    adminUserId = databaseBuilder.factory.buildUser().id;
     administrationTeamId = databaseBuilder.factory.buildAdministrationTeam().id;
-
     organization = databaseBuilder.factory.buildOrganization({
       name: 'organization name',
       type: 'SCO',
@@ -35,6 +36,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
     it('return updated basic organization information', async function () {
       //given && when
       const request = {
+        auth: { credentials: { userId: adminUserId } },
         payload: {
           data: {
             id: organization.id,
@@ -93,6 +95,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
 
     // when
     const request = {
+      auth: { credentials: { userId: adminUserId } },
       payload: {
         data: {
           id: organization.id,
@@ -131,6 +134,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
 
     // when
     const request = {
+      auth: { credentials: { userId: adminUserId } },
       payload: {
         data: {
           id: organization.id,
@@ -159,6 +163,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
   it('return activated feature sending multiple assessment of organization', async function () {
     // given && when
     const request = {
+      auth: { credentials: { userId: adminUserId } },
       payload: {
         data: {
           id: organization.id,
@@ -193,6 +198,7 @@ describe('Integration | Organizational Entities | Application | Controller | Org
 
     // when
     const request = {
+      auth: { credentials: { userId: adminUserId } },
       payload: {
         data: {
           id: organization.id,

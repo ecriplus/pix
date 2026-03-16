@@ -122,7 +122,7 @@ describe('Acceptance | Application | organization-import', function () {
     });
   });
 
-  describe('POST /api/admin/import-organization-learners-format', function () {
+  describe('POST /api/admin/organization-learner-import-formats', function () {
     let options, connectedUser;
 
     beforeEach(async function () {
@@ -137,7 +137,7 @@ describe('Acceptance | Application | organization-import', function () {
 
       options = {
         method: 'POST',
-        url: `/api/admin/import-organization-learners-format`,
+        url: `/api/admin/organization-learner-import-formats`,
         headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
         payload: buffer,
       };
@@ -146,6 +146,58 @@ describe('Acceptance | Application | organization-import', function () {
 
       // then
       expect(response.statusCode).to.equal(204);
+    });
+  });
+
+  describe('GET /api/admin/organization-learner-import-formats', function () {
+    let options, connectedUser;
+
+    beforeEach(async function () {
+      connectedUser = databaseBuilder.factory.buildUser.withRole({ role: PIX_ADMIN.ROLES.SUPER_ADMIN });
+      await databaseBuilder.commit();
+    });
+
+    it('should return all organization learner import formats', async function () {
+      // given
+      const scoOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const supOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const featureId = databaseBuilder.factory.buildFeature({
+        key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key,
+      }).id;
+
+      const scoImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({ name: 'SCO' });
+      const supImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({ name: 'SUP' });
+
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId: scoOrganizationId,
+        featureId,
+        params: {
+          organizationLearnerImportFormatId: scoImportFormat.id,
+          organizationLearnerImportFormatName: scoImportFormat.name,
+        },
+      });
+      databaseBuilder.factory.buildOrganizationFeature({
+        organizationId: supOrganizationId,
+        featureId,
+        params: {
+          organizationLearnerImportFormatId: supImportFormat.id,
+          organizationLearnerImportFormatName: supImportFormat.name,
+        },
+      });
+      await databaseBuilder.commit();
+
+      options = {
+        method: 'GET',
+        url: `/api/admin/organization-learner-import-formats`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: connectedUser.id }),
+      };
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data[0].type).to.equal('organization-learner-import-formats');
     });
   });
 });
