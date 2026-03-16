@@ -193,7 +193,7 @@
     "stream-to-promise": "^3.0.0"
   },
   "overrides": {
-    "@datadog/datadog-api-client": "1.52.0",
+    "@datadog/datadog-api-client": "1.53.0",
     "chai": "^6.0.0"
   },
   "engines": {
