@@ -139,7 +139,7 @@
                       "type": "video",
                       "title": "Ordinateur 1",
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur1.mp4",
-                      "poster": "",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi1.png",
                       "subtitles": "",
                       "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. </p>\n<p>Un message « Travail en cours... » s'affiche également. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
@@ -157,7 +157,7 @@
                       "type": "video",
                       "title": "Ordinateur 2",
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur2.mp4",
-                      "poster": "",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi2.png",
                       "subtitles": "",
                       "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>M$£a}=4#p~μr$£é]{s7ùe#!n^£t-a&amp;@t-</li>\n    <li>Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s</li>\n    <li>Mç_a$%ùméμ$u!§s7_i[q#~+u$£e</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » :</strong></p>\n<p>Le contenu du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » s'affiche avec des fichiers  : </p>\n<ul>\n    <li>i$|_|]u=s!t§r{a2t#i&amp;o%n.vir</li>\n    <li>l+eμ_£r5e#n]a)r[d£_μ.nor</li>\n    <li>p@o{r[t^ùr@a]i}t_ùl!a§_e.jcrr</li>\n    <li>pço#r4t%rùaμi$t£_!g§u.kkl</li><br>\n</ul>"
                     },
@@ -175,7 +175,7 @@
                       "type": "video",
                       "title": "Ordinateur 3",
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur3.mp4",
-                      "poster": "",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi3.png",
                       "subtitles": "",
                       "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n\n<p>Le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
