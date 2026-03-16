@@ -2,7 +2,7 @@ import { ORGANIZATIONS_PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migr
 import { OrganizationProfileReward } from '../../../../../src/profile/domain/models/OrganizationProfileReward.js';
 import {
   getByOrganizationId,
-  remove,
+  removeInBatch,
   save,
 } from '../../../../../src/profile/infrastructure/repositories/organizations-profile-reward-repository.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -97,11 +97,11 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: firstProfileReward.id,
       });
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const secondOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: secondProfileReward.id,
       });
@@ -116,8 +116,18 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
       // then
       const expectedResults = [
-        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
-        { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
+        {
+          id: firstOrganizationProfileReward.id,
+          profileRewardId: firstProfileReward.id,
+          organizationId,
+          userId: firstProfileReward.userId,
+        },
+        {
+          id: secondOrganizationProfileReward.id,
+          profileRewardId: secondProfileReward.id,
+          organizationId,
+          userId: secondProfileReward.userId,
+        },
       ];
 
       expect(results).to.have.lengthOf(2);
@@ -131,7 +141,7 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
       const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: firstProfileReward.id,
       });
@@ -146,7 +156,12 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
       // then
       const expectedResults = [
-        { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
+        {
+          id: firstOrganizationProfileReward.id,
+          profileRewardId: firstProfileReward.id,
+          organizationId,
+          userId: firstProfileReward.userId,
+        },
       ];
 
       expect(results).to.have.lengthOf(1);
@@ -189,11 +204,11 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
         const firstProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
         const secondProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        databaseBuilder.factory.buildOrganizationsProfileRewards({
+        const firstOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
           organizationId,
           profileRewardId: firstProfileReward.id,
         });
-        databaseBuilder.factory.buildOrganizationsProfileRewards({
+        const secondOrganizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
           organizationId,
           profileRewardId: secondProfileReward.id,
         });
@@ -208,8 +223,18 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
 
         // then
         const expectedResults = [
-          { profileRewardId: firstProfileReward.id, organizationId, userId: firstProfileReward.userId },
-          { profileRewardId: secondProfileReward.id, organizationId, userId: secondProfileReward.userId },
+          {
+            id: firstOrganizationProfileReward.id,
+            profileRewardId: firstProfileReward.id,
+            organizationId,
+            userId: firstProfileReward.userId,
+          },
+          {
+            id: secondOrganizationProfileReward.id,
+            profileRewardId: secondProfileReward.id,
+            organizationId,
+            userId: secondProfileReward.userId,
+          },
         ];
 
         expect(results).to.have.lengthOf(2);
@@ -218,30 +243,37 @@ describe('Profile | Integration | Infrastructure | Repository | organizations-pr
     });
   });
 
-  describe('#remove', function () {
-    it('should remove profile reward', async function () {
+  describe('#removeInBatch', function () {
+    it('should removeInBatch profile rewards', async function () {
       // given
       const { id: rewardId } = databaseBuilder.factory.buildAttestation();
       const profileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const otherProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
+      const thirdProfileReward = databaseBuilder.factory.buildProfileReward({ rewardId });
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationProfileReward = databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const organizationProfileReward1 = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: profileReward.id,
       });
-      databaseBuilder.factory.buildOrganizationsProfileRewards({
+      const organizationProfileReward2 = databaseBuilder.factory.buildOrganizationsProfileRewards({
         organizationId,
         profileRewardId: otherProfileReward.id,
       });
+      databaseBuilder.factory.buildOrganizationsProfileRewards({
+        organizationId,
+        profileRewardId: thirdProfileReward.id,
+      });
+
       await databaseBuilder.commit();
 
       // when
-      await remove({ organizationId, profileRewardId: profileReward.id });
+      await removeInBatch([organizationProfileReward1, organizationProfileReward2]);
 
       // then
       const results = await knex('organizations-profile-rewards').whereNull('profileRewardId');
-      expect(results).to.have.lengthOf(1);
-      expect(results[0]).to.deep.equal({ id: organizationProfileReward.id, organizationId, profileRewardId: null });
+      expect(results).to.have.lengthOf(2);
+      expect(results[0]).to.deep.equal({ id: organizationProfileReward1.id, organizationId, profileRewardId: null });
+      expect(results[1]).to.deep.equal({ id: organizationProfileReward2.id, organizationId, profileRewardId: null });
     });
   });
 });
