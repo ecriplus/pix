@@ -90,10 +90,12 @@ docker/data/
 # Claude Code documentation
 CLAUDE.md
 .claude/
+.claudeignore
 
 # Gemini Code documentation
 GEMINI.md
 .gemini/
+.geminiignore
 
 # Allow JSON files in translations directories
 !**/translations/*.json
@@ -104,4 +106,3 @@ GEMINI.md
 
 # Allow JSON files in learning-content/modules directory
 !learning-content/modules/*.json
-.geminiignore
