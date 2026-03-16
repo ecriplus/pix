@@ -31,6 +31,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
     context('when the session has some certifications', function () {
       let sessionId;
+      let userId;
       let manyAsrCertification;
       let latestAssessmentResult;
       let startedCertification;
@@ -42,9 +43,13 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
       beforeEach(function () {
         const dbf = databaseBuilder.factory;
         sessionId = dbf.buildSession().id;
-        startedCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'CCC' });
-        otherStartedCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'DDD' });
-        manyAsrCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'AAA' });
+        userId = dbf.buildUser().id;
+        dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'CCC', subscription: 'CORE' });
+        startedCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'CCC' });
+        dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'DDD', subscription: 'CLEA' });
+        otherStartedCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'DDD' });
+        dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'AAA', subscription: 'DROIT' });
+        manyAsrCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'AAA' });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
         dbf.buildAssessment({ certificationCourseId: startedCertification.id });
@@ -100,6 +105,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
             }),
           ],
           complementaryCertificationKeyObtained: null,
+          candidateSubscription: 'DROIT',
         });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);

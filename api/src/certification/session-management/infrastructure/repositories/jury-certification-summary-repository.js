@@ -58,6 +58,9 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       assessmentState: 'assessments.state',
     })
     .select({
+      candidateSubscription: 'certification-candidate.subscription',
+    })
+    .select({
       complementaryCertificationLabelObtained: 'complementary-certifications.label',
       complementaryCertificationKeyObtained: 'complementary-certifications.key',
     })
@@ -83,6 +86,11 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       'complementary-certifications.id',
       'complementary-certification-courses.complementaryCertificationId',
     )
+    .join('certification-candidates', function () {
+      this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
+        'certification-candidates.userId': 'certification-courses.userId',
+      });
+    })
     .whereIn('certification-courses.id', orderedCertificationCourseIds);
 
   return orderedCertificationCourseIds.map((orderedId) => results.find(({ id }) => id === orderedId));

@@ -16,6 +16,7 @@ const buildJuryCertificationSummary = function ({
   complementaryCertificationLabelObtained,
   complementaryCertificationKeyObtained,
   certificationIssueReports = [],
+  candidateSubscription = null,
 } = {}) {
   return new JuryCertificationSummary({
     id,
@@ -32,6 +33,7 @@ const buildJuryCertificationSummary = function ({
     complementaryCertificationLabelObtained,
     complementaryCertificationKeyObtained,
     certificationIssueReports,
+    candidateSubscription,
   });
 };
 

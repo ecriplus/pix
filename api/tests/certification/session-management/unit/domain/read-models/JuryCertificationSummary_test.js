@@ -22,6 +22,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         pixScore: 751,
         reachedMeshIndex: 6,
         status: 'started',
+        candidateSubscription: 'CORE',
         complementaryCertificationLabelObtained: null,
         complementaryCertificationKeyObtained: null,
       };
@@ -44,6 +45,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         pixScore: 751,
         reachedMeshIndex: 6,
         status: 'started',
+        candidateSubscription: 'CORE',
       });
     });
   });

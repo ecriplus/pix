@@ -18,6 +18,7 @@ export class JuryCertificationSummary {
     abortReason,
     isPublished,
     isEndedByInvigilator,
+    candidateSubscription,
     complementaryCertificationLabelObtained,
     complementaryCertificationKeyObtained,
     certificationIssueReports,
@@ -29,6 +30,7 @@ export class JuryCertificationSummary {
     this.pixScore = pixScore;
     this.reachedMeshIndex = reachedMeshIndex;
     this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
+    this.candidateSubscription = candidateSubscription;
     this.certificationObtained = _getCertificationObtained({
       complementaryCertificationLabelObtained,
       complementaryCertificationKeyObtained,
