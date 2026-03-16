@@ -100,6 +100,7 @@ function _selectJuryCertifications(knexConn) {
       commentForOrganization: 'assessment-results.commentForOrganization',
       commentByJury: 'assessment-results.commentByJury',
       commentByAutoJury: 'assessment-results.commentByAutoJury',
+      candidateSubscription: 'certification-candidates.subscription',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -113,7 +114,12 @@ function _selectJuryCertifications(knexConn) {
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
     )
-    .groupBy('certification-courses.id', 'assessments.id', 'assessment-results.id');
+    .join('certification-candidates', function () {
+      this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
+        'certification-candidates.userId': 'certification-courses.userId',
+      });
+    })
+    .groupBy('certification-courses.id', 'assessments.id', 'assessment-results.id', 'certification-candidates.id');
 }
 
 async function _toDomainWithComplementaryCertifications({

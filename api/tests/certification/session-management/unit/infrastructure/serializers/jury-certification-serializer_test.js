@@ -49,6 +49,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
           commentByJury: 'ça va',
           competenceMarks,
           version: 2,
+          candidateSubscription: 'CORE',
           certificationIssueReports,
           commonComplementaryCertificationCourseResult:
             domainBuilder.buildComplementaryCertificationCourseResultForJuryCertification({
@@ -113,6 +114,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
               'comment-by-jury': 'ça va',
               'comment-for-organization': 'comment',
               version: 2,
+              'candidate-subscription': 'CORE',
             },
             relationships: {
               'certification-issue-reports': {
@@ -227,6 +229,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
           commentByAutoJury: AutoJuryCommentKeys.FRAUD,
           competenceMarks,
           version: 2,
+          candidateSubscription: 'CORE',
           certificationIssueReports,
           commonComplementaryCertificationCourseResult:
             domainBuilder.buildComplementaryCertificationCourseResultForJuryCertification({
@@ -291,6 +294,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
               'comment-by-jury': 'ça va',
               'comment-for-organization': translate('jury.comment.FRAUD.organization'),
               version: 2,
+              'candidate-subscription': 'CORE',
             },
             relationships: {
               'certification-issue-reports': {

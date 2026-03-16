@@ -59,6 +59,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           completedAt: new Date('2020-02-01'),
           isPublished: false,
         });
+        databaseBuilder.factory.buildCertificationCandidate({ userId: 789, sessionId: 456, subscription: 'CLEA' });
 
         databaseBuilder.factory.buildComplementaryCertificationCourse({
           id: 456,
@@ -140,6 +141,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           competenceMarks: [expectedCompetenceMark],
           certificationIssueReports: [],
           version: 2,
+          candidateSubscription: 'CLEA',
           commonComplementaryCertificationCourseResult: {
             acquired: true,
             complementaryCertificationBadgeId: 3453,

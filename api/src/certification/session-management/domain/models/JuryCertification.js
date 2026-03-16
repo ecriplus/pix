@@ -60,6 +60,7 @@ class JuryCertification {
     complementaryCertificationCourseResultWithExternal,
     commonComplementaryCertificationCourseResult,
     version,
+    candidateSubscription,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.sessionId = sessionId;
@@ -89,6 +90,7 @@ class JuryCertification {
     this.complementaryCertificationCourseResultWithExternal = complementaryCertificationCourseResultWithExternal;
     this.commonComplementaryCertificationCourseResult = commonComplementaryCertificationCourseResult;
     this.version = version;
+    this.candidateSubscription = candidateSubscription;
   }
 
   static from({
@@ -150,6 +152,7 @@ class JuryCertification {
       complementaryCertificationCourseResultWithExternal,
       commonComplementaryCertificationCourseResult,
       version: juryCertificationDTO.version,
+      candidateSubscription: juryCertificationDTO.candidateSubscription,
     });
   }
 }

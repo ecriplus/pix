@@ -58,7 +58,7 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       assessmentState: 'assessments.state',
     })
     .select({
-      candidateSubscription: 'certification-candidate.subscription',
+      candidateSubscription: 'certification-candidates.subscription',
     })
     .select({
       complementaryCertificationLabelObtained: 'complementary-certifications.label',

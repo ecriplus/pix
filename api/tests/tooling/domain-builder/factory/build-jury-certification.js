@@ -34,6 +34,7 @@ const buildJuryCertification = function ({
   commonComplementaryCertificationCourseResult,
   complementaryCertificationCourseResultWithExternal,
   version = AlgorithmEngineVersion.V2,
+  candidateSubscription = null,
 } = {}) {
   return new JuryCertification({
     certificationCourseId,
@@ -72,6 +73,7 @@ const buildJuryCertification = function ({
     commonComplementaryCertificationCourseResult,
     complementaryCertificationCourseResultWithExternal,
     version,
+    candidateSubscription,
   });
 };
 

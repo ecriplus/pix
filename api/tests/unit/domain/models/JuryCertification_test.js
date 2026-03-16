@@ -34,6 +34,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: null,
         version: 2,
+        candidateSubscription: 'CLEA',
       };
       competenceMarkDTOs = [
         {
@@ -102,6 +103,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: null,
         version: 2,
+        candidateSubscription: 'CLEA',
         competenceMarks: expectedCompetenceMarks,
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,
@@ -166,6 +168,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: AutoJuryCommentKeys.FRAUD,
         version: 2,
+        candidateSubscription: 'CLEA',
         competenceMarks: expectedCompetenceMarks,
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,
