@@ -618,6 +618,7 @@
       }
     },
     "networks": {
+      "copy-id": "Copier l'ID",
       "creation": {
         "actions": {
           "submit": "Créer le réseau"
@@ -636,6 +637,10 @@
         "organization-id": {
           "label": "ID d'organisation à la tête du réseau:"
         }
+      },
+      "information-view": {
+        "head-organization": "Organisation tête de réseau",
+        "head-organization-id": "ID de l'organisation tête de réseau"
       },
       "list": {
         "table": {
@@ -1348,6 +1353,12 @@
       "title": "L'accès à Pix Admin est limité aux administrateurs de la plateforme"
     },
     "networks": {
+      "get": {
+        "breadcrumb": {
+          "parent-page": "Tous les réseaux"
+        },
+        "page-title": "Réseau"
+      },
       "list": {
         "new-button": "Nouveau réseau",
         "page-title": "Réseaux",

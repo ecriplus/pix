@@ -57,6 +57,7 @@ Router.map(function () {
     this.route('networks', function () {
       this.route('new');
       this.route('list');
+      this.route('get', { path: '/:network_id' });
     });
 
     this.route('campaigns', function () {

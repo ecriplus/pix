@@ -369,6 +369,7 @@ export default function routes() {
   });
 
   this.get('/admin/networks');
+  this.get('/admin/networks/:id');
   this.post('/admin/networks', createNetwork);
 
   this.get('/admin/organizations', findPaginatedFilteredOrganizations);

@@ -63,6 +63,20 @@ module('Acceptance | Networks | List', function (hooks) {
         assert.dom(screen.getByText('Réseau Alpha')).exists();
         assert.dom(screen.getByText('Réseau Beta')).exists();
       });
+
+      test('it should redirect to network get page when clicking on the ID', async function (assert) {
+        // given
+        server.create('network', { id: 1, name: 'Réseau Alpha' });
+
+        await visit('/networks/list');
+
+        // when
+        const networkIdLink = screen.getByRole('link', { name: 1 });
+        await click(networkIdLink);
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/1');
+      });
     });
 
     module('when user does not have super admin role', function () {

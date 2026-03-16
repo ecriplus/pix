@@ -1,0 +1,32 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
+
+.network__head-information {
+  @extend %pix-shadow-default;
+
+  padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
+  color: var(--pix-neutral-900);
+  background-color: var(--pix-neutral-0);
+  border-radius: var(--pix-spacing-4x);
+
+  .network__title-section {
+    display: flex;
+    flex-direction: column;
+
+    .network__name {
+      @extend %pix-title-s;
+    }
+
+    .network__id {
+      @extend %pix-title-xxs;
+
+      display: flex;
+      gap: var(--pix-spacing-2x);
+      align-items: center;
+
+      span {
+        font-weight: normal;
+      }
+    }
+  }
+}
