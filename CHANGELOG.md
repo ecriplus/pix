@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.358.0](https://github.com/1024pix/pix/compare/v5.357.0...v5.358.0) (2026-03-16)
+
+### :rocket: Amélioration
+
+- [#15490](https://github.com/1024pix/pix/pull/15490) Afficher le détail d'un réseau sur Pix Admin (PIX-21338) 
+- [#15472](https://github.com/1024pix/pix/pull/15472) Afficher le nombre de membres d'une équipe d'un centre de certif (PIX-21448). 
+- [#15405](https://github.com/1024pix/pix/pull/15405) Ajout POI et embed definitifs sur module Phishing_IND 
+- [#15499](https://github.com/1024pix/pix/pull/15499) Ajouter le tracking du téléchargement de la sélection de sujets (PIX-21829) 
+- [#15455](https://github.com/1024pix/pix/pull/15455) Débloquer un élève depuis Pix Orga (PIX-21567). 
+- [#15422](https://github.com/1024pix/pix/pull/15422) Gérer l'activation de l'import générique pour une orga depuis pix admin (PIX-21784) 
+- [#15428](https://github.com/1024pix/pix/pull/15428) MDX-138 IAGenPrompt_AVA passage de chatpix en prod 
+
+### :building_construction: Tech
+
+- [#15437](https://github.com/1024pix/pix/pull/15437) Mettre à jour les récupérations d'un contenu formatif à partir d'une locale (PIX-21789) 
+- [#15483](https://github.com/1024pix/pix/pull/15483) Permettre une modification des rewards en batchUpdate (PIX-21890)
+
 # [5.357.0](https://github.com/1024pix/pix/compare/v5.356.0...v5.357.0) (2026-03-16)
 
 ### :rocket: Amélioration
