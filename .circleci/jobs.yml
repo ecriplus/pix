@@ -1,0 +1,1315 @@
+# .circleci/continue_config.yml
+#
+#
+# Caching notes:
+# - cache is immutable; increment `v7-` prefix to flush it
+# - we cache `~/.npm` (not node_modules, which is erased by npm ci)
+# - cache key is based on concatenated package.json + package-lock.json checksum
+#
+# Skip logic:
+# - Each job halts early via `circleci step halt` if its parameter is false
+# - On the `dev` branch, all jobs always run (full post-merge run)
+# - The `build-and-test` gate job is the single required status check in GitHub
+
+version: 2.1
+
+parameters:
+  GHA_Actor:
+    type: string
+    default: ''
+  GHA_Action:
+    type: string
+    default: ''
+  GHA_Event:
+    type: string
+    default: ''
+  GHA_Meta:
+    type: string
+    default: ''
+  # Set by path-filtering orb based on changed files
+  run-api:
+    type: boolean
+    default: false
+  run-mon-pix:
+    type: boolean
+    default: false
+  run-orga:
+    type: boolean
+    default: false
+  run-certif:
+    type: boolean
+    default: false
+  run-admin:
+    type: boolean
+    default: false
+  run-junior:
+    type: boolean
+    default: false
+  run-audit-logger:
+    type: boolean
+    default: false
+  run-e2e-playwright:
+    type: boolean
+    default: false
+
+orbs:
+  browser-tools: circleci/browser-tools@1.5.3
+
+executors:
+  node-docker:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+    resource_class: small
+  node-docker-medium:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+    resource_class: medium
+  node-redis-postgres-s3-docker:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: redis:7.2.11-alpine
+      - image: adobe/s3mock:4.11.0
+        environment:
+          - initialBuckets=pix-import-test
+    resource_class: small
+  node-redis-postgres-s3-docker-medium:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: redis:7.2.11-alpine
+      - image: adobe/s3mock:4.11.0
+        environment:
+          - initialBuckets=pix-import-test
+    resource_class: medium
+  node-redis-postgres-s3-docker-large:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: redis:7.2.11-alpine
+      - image: adobe/s3mock:4.11.0
+        environment:
+          - initialBuckets=pix-import-test
+    resource_class: large
+  node-browsers-docker:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>-browsers
+        environment:
+          JOBS: 2
+    resource_class: small
+  node-browsers-redis-postgres-docker:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>-browsers
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: redis:7.2.11-alpine
+    resource_class: medium
+  node-postgres-docker:
+    parameters:
+      node-version:
+        # renovate datasource=node-version depName=node
+        default: 24.14.0
+        type: string
+    docker:
+      - image: cimg/node:<<parameters.node-version>>
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+    resource_class: small
+
+# ---------------------------------------------------------------------------
+# Commands (reusable step sequences)
+# ---------------------------------------------------------------------------
+
+commands:
+  npm_install_with_cache:
+    parameters:
+      cache_key:
+        type: string
+    steps:
+      - run: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+      - run: npm ci
+      - save_cache:
+          key: v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+          paths:
+            - ~/.npm
+
+  frontend_build:
+    parameters:
+      app_name:
+        type: string
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: <<parameters.app_name>>
+      - run:
+          name: Build
+          command: npm run build
+          environment:
+            BUILD_ENVIRONMENT: development
+            DEFAULT_LOCALE: fr
+            JOBS: 2
+      - persist_to_workspace:
+          root: ~/pix
+          paths:
+            - <<parameters.app_name>>
+
+  frontend_lint:
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Lint templates
+          command: npm run lint:hbs
+          when: always
+      - run:
+          name: Lint JS
+          command: npm run lint:js
+          when: always
+      - run:
+          name: Lint SCSS
+          command: npm run lint:scss
+          when: always
+      - run:
+          name: Lint translations
+          command: npm run lint:translations
+          when: always
+
+  frontend_test:
+    parameters:
+      app_name:
+        type: string
+    steps:
+      - browser-tools/install-chrome
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Test
+          command: npm run test:ci
+          environment:
+            RESULTS_PATH: ../../test-results/<<parameters.app_name>>
+          when: always
+      - store_test_results:
+          path: /home/circleci/test-results/<<parameters.app_name>>
+      - store_artifacts:
+          path: /home/circleci/test-results/<<parameters.app_name>>
+
+# ---------------------------------------------------------------------------
+# Workflows
+# ---------------------------------------------------------------------------
+
+workflows:
+  # This workflow is set to be conditionally triggered, only when
+  # the GitHub Action is triggered.
+  # It will execute job of modified folder
+  # all e2e test must be triggered if api or referred frontend modified
+  # With no other workflows, normal push events will be ignored currently.
+  build-and-test:
+    when: << pipeline.parameters.GHA_Action >>
+    jobs:
+      - checkout:
+          context: Pix
+
+      # --- API ---
+      - api_install:
+          context: Pix
+          requires:
+            - checkout
+      - api_lint:
+          context: Pix
+          requires:
+            - api_install
+      - api_unit_test:
+          context: Pix
+          requires:
+            - api_install
+      - api_integration_test:
+          context: Pix
+          requires:
+            - api_install
+      - api_acceptance_test:
+          context: Pix
+          requires:
+            - api_install
+
+      # --- Audit Logger ---
+      - audit_logger_test:
+          context: Pix
+          requires:
+            - checkout
+
+      # --- Mon Pix ---
+      - mon_pix_install:
+          context: Pix
+          requires:
+            - checkout
+      - mon_pix_lint:
+          context: Pix
+          requires:
+            - mon_pix_install
+      - mon_pix_test:
+          context: Pix
+          requires:
+            - mon_pix_install
+      - e2e_test_mon_pix:
+          context: Pix
+          requires:
+            - mon_pix_install
+
+      # --- Orga ---
+      - orga_install:
+          context: Pix
+          requires:
+            - checkout
+      - orga_lint:
+          context: Pix
+          requires:
+            - orga_install
+      - orga_test:
+          context: Pix
+          requires:
+            - orga_install
+      - e2e_test_orga:
+          context: Pix
+          requires:
+            - orga_install
+
+      # --- Certif ---
+      - certif_install:
+          context: Pix
+          requires:
+            - checkout
+      - certif_lint:
+          context: Pix
+          requires:
+            - certif_install
+      - certif_test:
+          context: Pix
+          requires:
+            - certif_install
+
+      # --- Admin ---
+      - admin_install:
+          context: Pix
+          requires:
+            - checkout
+      - admin_lint:
+          context: Pix
+          requires:
+            - admin_install
+      - admin_test:
+          context: Pix
+          requires:
+            - admin_install
+
+      # --- Junior ---
+      - junior_install:
+          context: Pix
+          requires:
+            - checkout
+      - junior_lint:
+          context: Pix
+          requires:
+            - junior_install
+      - junior_test:
+          context: Pix
+          requires:
+            - junior_install
+
+      # --- E2E Playwright ---
+      - e2e_playwright_test:
+          context: Pix
+          requires:
+            - api_install
+            - mon_pix_install
+            - orga_install
+            - certif_install
+      - e2e_playwright_test_recette_certif:
+          context: Pix
+          requires:
+            - api_install
+            - mon_pix_install
+            - orga_install
+            - certif_install
+          filters:
+            branches:
+              only: dev
+
+# ---------------------------------------------------------------------------
+# Jobs
+# ---------------------------------------------------------------------------
+
+jobs:
+  checkout:
+    executor:
+      name: node-docker
+    working_directory: ~/pix
+    steps:
+      - run:
+          name: Git clone --depth=1
+          command: |
+            #!/bin/sh
+            set -e
+            GIT_CLONE_DEPTH="1"
+            # Workaround old docker images with incorrect $HOME
+            # check https://github.com/docker/docker/issues/2968 for details
+            if [ "${HOME}" = "/" ]
+            then
+              export HOME=$(getent passwd $(id -un) | cut -d: -f6)
+            fi
+            export SSH_CONFIG_DIR=${SSH_CONFIG_DIR:-"${HOME}/.ssh"}
+            echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
+            git --version
+
+            mkdir -p "$SSH_CONFIG_DIR"
+            chmod 0700 "$SSH_CONFIG_DIR"
+
+            printf "%s" 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
+            github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+            github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+            ' >>"$SSH_CONFIG_DIR/known_hosts"
+            chmod 0600 "$SSH_CONFIG_DIR/known_hosts"
+
+            rm -f "$SSH_CONFIG_DIR/id_rsa"
+            printf "%s" "$CHECKOUT_KEY" >"$SSH_CONFIG_DIR/id_rsa"
+            chmod 0600 "$SSH_CONFIG_DIR/id_rsa"
+            if (: "${CHECKOUT_KEY_PUBLIC?}") 2>/dev/null; then
+                rm -f "$SSH_CONFIG_DIR/id_rsa.pub"
+                printf "%s" "$CHECKOUT_KEY_PUBLIC" >"$SSH_CONFIG_DIR/id_rsa.pub"
+            fi
+
+            export GIT_SSH_COMMAND="ssh -i \"$SSH_CONFIG_DIR/id_rsa\" -o UserKnownHostsFile=\"$SSH_CONFIG_DIR/known_hosts\""
+
+            # use git+ssh instead of https
+            git config --global url."ssh://git@github.com".insteadOf "https://github.com" || true
+            git config --global gc.auto 0 || true
+
+            echo 'Cloning git repository'
+            mkdir -p '/home/circleci/pix'
+            cd '/home/circleci/pix'
+            git clone --depth="$GIT_CLONE_DEPTH" --no-checkout "$CIRCLE_REPOSITORY_URL" .
+
+            echo 'Fetching from remote repository'
+            if [ -n "$CIRCLE_TAG" ]; then
+                git fetch --depth=${GIT_CLONE_DEPTH} --force --tags origin "+refs/tags/${CIRCLE_TAG}:refs/tags/${CIRCLE_TAG}"
+            else
+                git fetch --depth=${GIT_CLONE_DEPTH} --force origin "+refs/heads/${CIRCLE_BRANCH}:refs/remotes/origin/${CIRCLE_BRANCH}"
+            fi
+
+            if [ -n "$CIRCLE_TAG" ]; then
+                echo 'Checking out tag'
+                git checkout --force "$CIRCLE_TAG"
+                git reset --hard "$CIRCLE_SHA1"
+            else
+                echo 'Checking out branch'
+                git checkout --force -B "$CIRCLE_BRANCH" "$CIRCLE_SHA1"
+                git --no-pager log --no-color -n 1 --format='HEAD is now at %h %s'
+            fi
+      - npm_install_with_cache:
+          cache_key: root
+      - run:
+          name: Remove .git folder
+          command: rm -rf .git/
+      - persist_to_workspace:
+          root: ~/pix
+          paths:
+            - .
+
+  root_lint_and_test:
+    executor:
+      name: node-docker
+    working_directory: ~/pix
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Lint scripts
+          command: npm run lint:scripts
+      - run:
+          name: Lint yaml
+          command: npm run lint:yaml
+
+  # ---------------------------------------------------------------------------
+  # Gate job — seul required status check configuré dans GitHub
+  # ---------------------------------------------------------------------------
+
+  build-and-test:
+    executor:
+      name: node-docker
+    working_directory: ~/pix
+    steps:
+      - run:
+          name: All checks passed
+          command: echo "All required checks have passed"
+
+  # ---------------------------------------------------------------------------
+  # API
+  # ---------------------------------------------------------------------------
+
+  api_install:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/api
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: api
+      - persist_to_workspace:
+          root: ~/pix
+          paths:
+            - api
+
+  api_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/api
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Lint dependencies
+          command: npm run lint:dependencies
+          when: always
+      - run:
+          name: Lint filenames
+          command: npm run lint:filenames
+          when: always
+      - run:
+          name: Lint JS
+          command: npm run lint:js
+          when: always
+      - run:
+          name: Check files format
+          command: npm run lint:format
+          when: always
+
+  api_unit_test:
+    executor:
+      name: node-redis-postgres-s3-docker
+    working_directory: ~/pix/api
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Test
+          command: npm run test:api:unit
+          environment:
+            NODE_ENV: test
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci
+            TEST_REDIS_URL: redis://localhost:6379
+            TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
+            TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
+            MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
+            MOCHA_REPORTER: mocha-junit-reporter
+          when: always
+      - store_test_results:
+          path: /home/circleci/test-results
+      - store_artifacts:
+          path: /home/circleci/test-results
+
+  api_integration_test:
+    executor:
+      name: node-redis-postgres-s3-docker
+    working_directory: ~/pix/api
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Prepare database
+          command: npm run db:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
+      - run:
+          name: Prepare datawarehouse
+          command: npm run datawarehouse:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datawarehouse
+      - run:
+          name: Database schema lint
+          command: npm run db:schemalint
+          environment:
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
+      - run:
+          name: Test
+          command: npm run test:api:integration
+          environment:
+            NODE_ENV: test
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datawarehouse
+            TEST_REDIS_URL: redis://localhost:6379
+            TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
+            TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
+            MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
+            MOCHA_REPORTER: mocha-junit-reporter
+            MOCHA_RETRIES: 2
+          when: always
+      - store_test_results:
+          path: /home/circleci/test-results
+      - store_artifacts:
+          path: /home/circleci/test-results
+
+  api_acceptance_test:
+    executor:
+      name: node-redis-postgres-s3-docker
+    working_directory: ~/pix/api
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - run:
+          name: Prepare database
+          command: npm run db:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datamart
+      - run:
+          name: Prepare datawarehouse
+          command: npm run datawarehouse:prepare
+          environment:
+            NODE_ENV: test
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datawarehouse
+      - run:
+          name: Test
+          command: |
+            circleci tests glob 'tests/**/acceptance/**/*test.js' |
+            circleci tests split --split-by=filesize |
+            xargs npm run test:api:path --
+          environment:
+            NODE_ENV: test
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
+            TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datamart
+            TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datawarehouse
+            TEST_REDIS_URL: redis://localhost:6379
+            TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
+            TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
+            MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
+            MOCHA_REPORTER: mocha-junit-reporter
+            MOCHA_RETRIES: 2
+          when: always
+      - store_test_results:
+          path: /home/circleci/test-results
+      - store_artifacts:
+          path: /home/circleci/test-results
+
+  # ---------------------------------------------------------------------------
+  # Audit logger
+  # ---------------------------------------------------------------------------
+
+  audit_logger_test:
+    executor:
+      name: node-postgres-docker
+    working_directory: ~/pix/audit-logger
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-audit-logger >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: audit-logger
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Type checking
+          command: npm run tsc
+      - run:
+          name: Test
+          command: npm run test
+          environment:
+            PIX_API_CLIENT_SECRET: $2a$04$vkPRiypzeVQVG92/dCll7.5brjDQZVZc750VwKBc01icXjVIQqRVq
+            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci
+      - store_test_results:
+          path: /home/circleci/test-results
+      - store_artifacts:
+          path: /home/circleci/test-results
+
+  # ---------------------------------------------------------------------------
+  # Mon Pix
+  # ---------------------------------------------------------------------------
+
+  mon_pix_install:
+    executor:
+      name: node-docker-medium
+    working_directory: ~/pix/mon-pix
+    steps:
+      - frontend_build:
+          app_name: mon-pix
+
+  mon_pix_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/mon-pix
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_lint
+
+  mon_pix_test:
+    executor:
+      name: node-browsers-docker
+    working_directory: ~/pix/mon-pix
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_test:
+          app_name: mon_pix
+
+  # ---------------------------------------------------------------------------
+  # Orga
+  # ---------------------------------------------------------------------------
+
+  orga_install:
+    executor:
+      name: node-docker-medium
+    working_directory: ~/pix/orga
+    steps:
+      - frontend_build:
+          app_name: orga
+
+  orga_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/orga
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_lint
+
+  orga_test:
+    executor:
+      name: node-browsers-docker
+    working_directory: ~/pix/orga
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_test:
+          app_name: orga
+
+  # ---------------------------------------------------------------------------
+  # Certif
+  # ---------------------------------------------------------------------------
+
+  certif_install:
+    executor:
+      name: node-docker-medium
+    working_directory: ~/pix/certif
+    steps:
+      - frontend_build:
+          app_name: certif
+
+  certif_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/certif
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-certif >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_lint
+
+  certif_test:
+    executor:
+      name: node-browsers-docker
+    working_directory: ~/pix/certif
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-certif >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_test:
+          app_name: certif
+
+  # ---------------------------------------------------------------------------
+  # Admin
+  # ---------------------------------------------------------------------------
+
+  admin_install:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/admin
+    steps:
+      - frontend_build:
+          app_name: admin
+
+  admin_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/admin
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-admin >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_lint
+
+  admin_test:
+    executor:
+      name: node-browsers-docker
+    working_directory: ~/pix/admin
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-admin >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_test:
+          app_name: admin
+
+  # ---------------------------------------------------------------------------
+  # Junior
+  # ---------------------------------------------------------------------------
+
+  junior_install:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/junior
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-junior >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: junior
+      - persist_to_workspace:
+          root: ~/pix
+          paths:
+            - junior
+
+  junior_lint:
+    executor:
+      name: node-docker
+    working_directory: ~/pix/junior
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-junior >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_lint
+
+  junior_test:
+    executor:
+      name: node-browsers-docker
+    working_directory: ~/pix/junior
+    parallelism: 3
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-junior >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - frontend_test:
+          app_name: junior
+
+  # ---------------------------------------------------------------------------
+  # E2E (Cypress)
+  # ---------------------------------------------------------------------------
+
+  e2e_test_mon_pix:
+    executor:
+      name: node-browsers-redis-postgres-docker
+    parallelism: 4
+    working_directory: ~/pix/high-level-tests/e2e
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - browser-tools/install-chrome
+      - run:
+          name: Manual safety start of X11 server
+          command: |
+            set +e
+            Xvfb :99 -screen 0 1280x1024x24 2>/dev/null
+            if [ $? -eq 0 ]; then
+              echo "Xvfb started successfully"
+            else
+              echo "Xvfb is already running"
+            fi
+          background: true
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: e2e
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          working_directory: ~/pix/api
+          command: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+      - run:
+          name: Install Pix API
+          working_directory: ~/pix/api
+          command: npm ci
+      - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+            REDIS_URL: 'redis://localhost:6379'
+          background: true
+          command: npm start
+      - run:
+          name: Start Pix App
+          working_directory: ~/pix/mon-pix
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          command: npm run db:prepare
+      - run:
+          name: Refresh cache
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          working_directory: ~/pix/api
+          command: npm run cache:refresh
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          working_directory: ~/pix/api
+          environment:
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+      - run:
+          name: Run tests
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          command: npm run test:ci:app
+      - store_test_results:
+          path: /home/circleci/test-results
+
+  e2e_test_orga:
+    executor:
+      name: node-browsers-redis-postgres-docker
+    working_directory: ~/pix/high-level-tests/e2e
+    steps:
+      - run:
+          name: Skip if not needed
+          command: |
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+              circleci step halt
+            fi
+      - browser-tools/install-chrome
+      - run:
+          name: Manual safety start of X11 server
+          command: |
+            set +e
+            Xvfb :99 -screen 0 1280x1024x24 2>/dev/null
+            if [ $? -eq 0 ]; then
+              echo "Xvfb started successfully"
+            else
+              echo "Xvfb is already running"
+            fi
+          background: true
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: e2e
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          working_directory: ~/pix/api
+          command: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+      - run:
+          name: Install Pix API
+          working_directory: ~/pix/api
+          command: npm ci
+      - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+            REDIS_URL: 'redis://localhost:6379'
+          background: true
+          command: npm start
+      - run:
+          name: Start Pix Orga
+          working_directory: ~/pix/orga
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          command: npm run db:prepare
+      - run:
+          name: Refresh cache
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          working_directory: ~/pix/api
+          command: npm run cache:refresh
+      - run:
+          name: Prepare datamart
+          command: npm run datamart:prepare
+          working_directory: ~/pix/api
+          environment:
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+      - run:
+          name: Run tests
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+          command: npm run test:ci:orga
+      - store_test_results:
+          path: /home/circleci/test-results
+
+  # ---------------------------------------------------------------------------
+  # E2E (Playwright)
+  # ---------------------------------------------------------------------------
+
+  e2e_playwright_test:
+    executor:
+      name: node-redis-postgres-s3-docker-medium
+    working_directory: ~/pix/high-level-tests/e2e-playwright
+    parallelism: 4
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - npm_install_with_cache:
+          cache_key: playwright
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Typescript
+          command: npm run tsc
+      - run:
+          working_directory: ~/pix/api
+          command: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+      - run:
+          name: Install Playwright Browser
+          command: npx playwright install --with-deps chromium
+      - run:
+          name: Install Pix API
+          working_directory: ~/pix/api
+          command: npm ci
+      - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          command: npm start
+          background: true
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            MAILING_ENABLED: 'false'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+      - run:
+          name: Start Pix Orga
+          working_directory: ~/pix/orga
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix App
+          working_directory: ~/pix/mon-pix
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix Certif
+          working_directory: ~/pix/certif
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          command: npm run db:prepare
+      - run:
+          name: Refresh cache
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          working_directory: ~/pix/api
+          command: npm run cache:refresh
+      - run:
+          name: Run E2E tests
+          command: |
+            if [ "$CIRCLE_NODE_TOTAL" -eq 1 ]; then
+              echo "Only one shard: run both parallel and serial tests"
+              npx playwright test --grep-invert @runSerially
+              npx playwright test --grep @runSerially --workers=1
+            elif [ "$CIRCLE_NODE_INDEX" -eq 0 ]; then
+              echo "Shard 0: run serial tests"
+              npx playwright test --grep @runSerially --workers=1
+            else
+              SHARD="$((${CIRCLE_NODE_INDEX}+1))"
+              echo "Shard $SHARD of $CIRCLE_NODE_TOTAL: run parallel tests"
+              npx playwright test --grep-invert @runSerially --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+            fi
+          environment:
+            PIX_API_PORT: 3000
+            PIX_APP_URL: http://localhost:4200
+            PIX_ORGA_URL: http://localhost:4201
+            PIX_CERTIF_URL: http://localhost:4203
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            AUTH_SECRET: 'secret'
+            REDIRECTION_URL_SECRET: 'secret'
+            NODE_OPTIONS: '--no-experimental-strip-types'
+      - store_test_results:
+          path: ./node_modules/.playwright/junit
+      - store_artifacts:
+          path: ./node_modules/.playwright/output
+          destination: screenshots
+
+  e2e_playwright_test_recette_certif:
+    executor:
+      name: node-redis-postgres-s3-docker-large
+    working_directory: ~/pix/high-level-tests/e2e-playwright
+    parallelism: 4
+    steps:
+      - attach_workspace:
+          at: ~/pix
+      - run: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-playwright-npm-{{ checksum "cachekey" }}
+      - run: npm ci
+      - run:
+          working_directory: ~/pix/api
+          command: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+      - run:
+          name: Install Playwright Browser
+          command: npx playwright install --with-deps chromium
+      - run:
+          name: Install Pix API
+          working_directory: ~/pix/api
+          command: npm ci
+      - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          command: npm start
+          background: true
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            MAILING_ENABLED: 'false'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+            PIX_ADMIN_LOGIN_FROM_PASSWORD_ENABLED: 'true'
+      - run:
+          name: Start Pix Orga
+          working_directory: ~/pix/orga
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix App
+          working_directory: ~/pix/mon-pix
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix Certif
+          working_directory: ~/pix/certif
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Start Pix Admin
+          working_directory: ~/pix/admin
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          command: npm run db:prepare
+      - run:
+          name: Refresh cache
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          working_directory: ~/pix/api
+          command: npm run cache:refresh
+      - run:
+          name: Run E2E tests for certif recette
+          command: |
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"
+            echo "Shard $SHARD of $CIRCLE_NODE_TOTAL"
+            npx playwright test --config playwright.config.certif.ts --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          environment:
+            PIX_API_PORT: 3000
+            PIX_APP_URL: http://localhost:4200
+            PIX_ORGA_URL: http://localhost:4201
+            PIX_ADMIN_URL: http://localhost:4202
+            PIX_CERTIF_URL: http://localhost:4203
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            AUTH_SECRET: 'secret'
+            REDIRECTION_URL_SECRET: 'secret'
+            NODE_OPTIONS: '--no-experimental-strip-types'
+      - store_test_results:
+          path: ./node_modules/.playwright/junit
+      - store_artifacts:
+          path: ./node_modules/.playwright/output
+          destination: screenshots
