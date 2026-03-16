@@ -47,10 +47,11 @@ export default class Certification extends Model {
   @attr('string') commentForOrganization;
   @attr('string') commentByJury;
   @attr() pixScore;
-  @attr() reachedLevel;
+  @attr() reachedMeshIndex;
   @attr() competencesWithMark;
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
+  @attr('string') candidateSubscription;
 
   @belongsTo('complementary-certification-course-result-with-external', { async: true, inverse: null })
   complementaryCertificationCourseResultWithExternal;
@@ -65,6 +66,10 @@ export default class Certification extends Model {
 
   get completionDate() {
     return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
+  }
+
+  get certificationType() {
+    return this.intl.t(`pages.certifications.certification.certificationTypes.${this.candidateSubscription}`);
   }
 
   get statusLabelAndValue() {
@@ -110,8 +115,15 @@ export default class Certification extends Model {
   }
 
   get result() {
+    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
+    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
+      return `${this.pixScore} Pix`;
+    }
+    const strReachedLevel = this.intl.t(
+      `components.certifications.meshLevels.${scope}.${String(this.reachedMeshIndex)}`,
+    );
     const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return this.reachedLevel + strPixScore;
+    return strReachedLevel + strPixScore;
   }
 
   wasBornInFrance() {

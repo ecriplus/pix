@@ -16,7 +16,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() lastName;
   @attr() status;
   @attr() pixScore;
-  @attr() reachedLevel;
+  @attr() reachedMeshIndex;
   @attr() createdAt;
   @attr() completedAt;
   @attr() isPublished;
@@ -25,6 +25,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() complementaryCertificationKeyObtained;
   @attr() numberOfCertificationIssueReports;
   @attr() isFlaggedAborted;
+  @attr('string') candidateSubscription;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
 
   get creationDate() {
@@ -59,7 +60,14 @@ export default class JuryCertificationSummary extends Model {
   }
 
   get result() {
+    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
+    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
+      return `${this.pixScore} Pix`;
+    }
+    const strReachedLevel = this.intl.t(
+      `components.certifications.meshLevels.${scope}.${String(this.reachedMeshIndex)}`,
+    );
     const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return this.reachedLevel + strPixScore;
+    return strReachedLevel + strPixScore;
   }
 }
