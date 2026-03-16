@@ -78,6 +78,7 @@ export class CertificationCourse {
     lang,
     versionId,
     candidateId,
+    framework,
   } = {}) {
     this._id = id;
     this._firstName = firstName;
@@ -108,6 +109,7 @@ export class CertificationCourse {
     this._lang = lang;
     this.versionId = versionId;
     this.candidateId = candidateId;
+    this.framework = framework;
   }
 
   static from({
@@ -120,6 +122,7 @@ export class CertificationCourse {
     numberOfChallenges,
     algorithmEngineVersion,
     lang,
+    framework,
   }) {
     return new CertificationCourse({
       userId: certificationCandidate.userId,
@@ -143,6 +146,7 @@ export class CertificationCourse {
       lang,
       versionId: certificationVersion.id,
       candidateId: certificationCandidate.id,
+      framework,
     });
   }
 
@@ -361,6 +365,7 @@ export class CertificationCourse {
       lang: this._lang,
       candidateId: this.candidateId,
       versionId: this.versionId,
+      framework: this.framework,
     };
   }
 }

@@ -20,6 +20,7 @@ import {
   UnexpectedUserAccountError,
 } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { SessionNotAccessible } from '../../../session-management/domain/errors.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CenterHabilitationError } from '../../../shared/domain/errors.js';
@@ -195,8 +196,10 @@ async function _startNewCertification({
   const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId: session.id });
 
   let complementaryCertificationCourseData;
+  let framework = Frameworks.CORE;
 
   if (certificationCandidate.isEnrolledToComplementaryOnly()) {
+    framework = certificationCandidate.complementaryCertification.key;
     if (!certificationCenter.isHabilitated(certificationCandidate.complementaryCertification.key)) {
       throw new CenterHabilitationError();
     }
@@ -221,6 +224,7 @@ async function _startNewCertification({
     );
 
     if (doubleCertificationBadge) {
+      framework = Frameworks.CLEA;
       const { complementaryCertificationId, complementaryCertificationBadgeId } = doubleCertificationBadge;
       complementaryCertificationCourseData = { complementaryCertificationBadgeId, complementaryCertificationId };
     }
@@ -250,6 +254,7 @@ async function _startNewCertification({
     verifyCertificateCodeService,
     complementaryCertificationCourseData,
     lang: user.lang,
+    framework,
   });
 }
 
@@ -283,6 +288,7 @@ async function _createCertificationCourse({
   userId,
   complementaryCertificationCourseData,
   lang,
+  framework,
 }) {
   const verificationCode = await verifyCertificateCodeService.generateCertificateVerificationCode();
   const complementaryCertificationCourse = complementaryCertificationCourseData
@@ -300,6 +306,7 @@ async function _createCertificationCourse({
     verificationCode,
     algorithmEngineVersion: AlgorithmEngineVersion.V3,
     lang,
+    framework,
   });
 
   return DomainTransaction.execute(async () => {

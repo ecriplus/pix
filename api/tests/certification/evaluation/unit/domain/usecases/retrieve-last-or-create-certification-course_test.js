@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { retrieveLastOrCreateCertificationCourse } from '../../../../../../src/certification/evaluation/domain/usecases/retrieve-last-or-create-certification-course.js';
 import { SessionNotAccessible } from '../../../../../../src/certification/session-management/domain/errors.js';
 import { ComplementaryCertificationCourse } from '../../../../../../src/certification/session-management/domain/models/ComplementaryCertificationCourse.js';
@@ -496,6 +497,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 algorithmEngineVersion: AlgorithmEngineVersion.V3,
                 complementaryCertificationCourses: [],
                 lang: user.lang,
+                framework: Frameworks.CORE,
               });
               const savedCertificationCourse = domainBuilder.buildCertificationCourse(
                 certificationCourseToSave.toDTO(),
@@ -631,6 +633,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   algorithmEngineVersion: AlgorithmEngineVersion.V3,
                   lang: user.lang,
                   isAdjustedForAccessibility: foundCertificationCandidate.accessibilityAdjustmentNeeded,
+                  framework: Frameworks.CORE,
                 });
 
                 const savedCertificationCourse = domainBuilder.buildCertificationCourse(
@@ -715,6 +718,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   complementaryCertificationCourses: [],
                   algorithmEngineVersion: AlgorithmEngineVersion.V3,
                   lang: user.lang,
+                  framework: Frameworks.CORE,
                 });
 
                 const savedCertificationCourse = domainBuilder.buildCertificationCourse(
@@ -813,6 +817,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     complementaryCertificationCourse,
                     algorithmEngineVersion: AlgorithmEngineVersion.V3,
                     lang: user.lang,
+                    framework: Frameworks.DROIT,
                   });
 
                   const savedCertificationCourse = domainBuilder.buildCertificationCourse(
@@ -990,6 +995,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       complementaryCertificationCourse,
                       algorithmEngineVersion: AlgorithmEngineVersion.V3,
                       lang: user.lang,
+                      framework: Frameworks.CLEA,
                     });
 
                     const savedCertificationCourse = domainBuilder.buildCertificationCourse(
@@ -1086,6 +1092,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                         algorithmEngineVersion: AlgorithmEngineVersion.V3,
                         lang: user.lang,
+                        framework: Frameworks.CORE,
                       });
 
                       const savedCertificationCourse = domainBuilder.buildCertificationCourse(

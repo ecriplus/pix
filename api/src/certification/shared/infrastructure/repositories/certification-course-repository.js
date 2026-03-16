@@ -263,6 +263,7 @@ function _adaptModelToDb(certificationCourse) {
     lang: certificationCourseDTO.lang,
     candidateId: certificationCourseDTO.candidateId,
     versionId: certificationCourseDTO.versionId,
+    framework: certificationCourseDTO.framework,
   };
 }
 
