@@ -41,7 +41,7 @@
                 "id": "e785fb13-5a62-4814-9a7c-4aaf11591fb9",
                 "type": "qcu-declarative",
                 "instruction": "<p>Et vous, pensez-vous avoir déjà reçu des messages d’arnaque par mail ou par SMS ?</p>",
-                "hasShortProposals": false,
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
