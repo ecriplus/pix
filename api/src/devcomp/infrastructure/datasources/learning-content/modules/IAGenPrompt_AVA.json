@@ -37,7 +37,7 @@
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
-     "conversationTitle": "Début de la conversation entre Yasmine & Steven",
+                  "conversationTitle": "Début de la conversation entre Yasmine & Steven",
                   "messages": [
                     {
                       "userName": "Lénaïg",
@@ -161,7 +161,7 @@
                       "type": "embed",
                       "isCompletionRequired": false,
                       "title": "Vous avez un seul prompt",
-                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdobizm00006801oq1o1w5f",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm6spb900005d01onjeba2s",
                       "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication sur le thème de la cyber-sécurité.</p>",
                       "solution": "",
                       "height": 500
@@ -180,7 +180,7 @@
                       "type": "embed",
                       "isCompletionRequired": false,
                       "title": "simu 2",
-                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdoudaa00016801am9kvgh9",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm8mke700015d01c67cyrhd",
                       "instruction": "<p>Utilisez ChatPix pour construire progressivement un plan de communication cybersécurité clair.</p>",
                       "solution": "",
                       "height": 500
@@ -259,7 +259,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "simu 3",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdpmbsf00026801dq6o9q63",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm9wba900045d01prev4xxc",
                 "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication et demandez lui d’expliquer son raisonnement. <br></p>",
                 "solution": "",
                 "height": 500
@@ -317,7 +317,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "simu 4",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmdq55md00036801lo574bbs",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm8z3es00025d012eyao6yh",
                 "instruction": "<p>Utilisez ChatPix pour lui demander de vous poser des questions afin de cadrer votre plan de communication cybersécurité, puis répondez-lui pour qu’il vous propose un plan à partir de vos réponses.</p>",
                 "solution": "",
                 "height": 500
@@ -375,7 +375,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "simu 5",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmexdjxx00046801lgbya6kl",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm98fan00035d01ayeqnxt9",
                 "instruction": "<p>Mettez en pièce jointe de votre prompt les documents pour donner des exemples de résultats attendus à ChatPix. <br><br></p>",
                 "solution": "",
                 "height": 500
