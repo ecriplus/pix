@@ -278,8 +278,35 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
             name: 'Navigation de la section centre de certification',
           }),
         );
-        assert.dom(certificationCenterNavigation.getByRole('link', { name: 'Équipe' })).exists();
+        assert.dom(certificationCenterNavigation.getByRole('link', { name: /Équipe/ })).exists();
         assert.dom(certificationCenterNavigation.getByRole('link', { name: 'Invitations' })).exists();
+      });
+
+      test('should display the number of active members in the Équipe tab', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        const certificationCenter = server.create('certification-center', {
+          name: 'Pokemon Center',
+          externalId: 'ABCDEF',
+          type: 'PRO',
+          archivedAt: null,
+          archivistFullName: null,
+        });
+        const user1 = server.create('user');
+        const user2 = server.create('user');
+        server.create('certification-center-membership', { certificationCenter, role: 'MEMBER', user: user1 });
+        server.create('certification-center-membership', { certificationCenter, role: 'ADMIN', user: user2 });
+
+        // when
+        const screen = await visit(`/certification-centers/${certificationCenter.id}`);
+
+        // then
+        const certificationCenterNavigation = within(
+          screen.getByRole('navigation', {
+            name: 'Navigation de la section centre de certification',
+          }),
+        );
+        assert.dom(certificationCenterNavigation.getByRole('link', { name: 'Équipe (2)' })).exists();
       });
 
       test('displays invitation input and members list', async function (assert) {
