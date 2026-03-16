@@ -1091,7 +1091,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     });
 
     describe('when the organization belongs to a network', function () {
-      it('should return the network id and name', async function () {
+      it('should return the network with head organization info', async function () {
         // given
         const organization = databaseBuilder.factory.buildOrganization({
           organizationLearnerTypeId: organizationLearnerType.id,
@@ -1111,8 +1111,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         });
 
         // then
-        expect(foundOrganizationForAdmin.networkId).to.equal(network.id);
-        expect(foundOrganizationForAdmin.networkName).to.equal(network.name);
+        expect(foundOrganizationForAdmin.network.id).to.equal(network.id);
+        expect(foundOrganizationForAdmin.network.name).to.equal(network.name);
+        expect(foundOrganizationForAdmin.network.headOrganization.id).to.equal(organization.id);
+        expect(foundOrganizationForAdmin.network.headOrganization.name).to.equal(organization.name);
       });
     });
 

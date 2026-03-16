@@ -65,6 +65,8 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         organizationLearnerType: organizationLearnerType,
         networkId: 42,
         networkName: 'Réseau Île-de-France',
+        networkHeadOrganizationId: 99,
+        networkHeadOrganizationName: 'Orga tête de réseau',
       });
       const meta = { some: 'meta' };
 
@@ -108,8 +110,6 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             'country-name': organization.countryName,
             'organization-learner-type-name': organization.organizationLearnerType.name,
             'organization-learner-type-id': organization.organizationLearnerType.id,
-            'network-id': organization.networkId,
-            'network-name': organization.networkName,
           },
           relationships: {
             'organization-memberships': {
@@ -144,6 +144,12 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
                 },
               ],
             },
+            network: {
+              data: {
+                id: '42',
+                type: 'networks',
+              },
+            },
           },
         },
         included: [
@@ -162,6 +168,17 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
             },
             id: tags[1].id.toString(),
             type: 'tags',
+          },
+          {
+            attributes: {
+              name: 'Réseau Île-de-France',
+              'head-organization': {
+                id: 99,
+                name: 'Orga tête de réseau',
+              },
+            },
+            id: '42',
+            type: 'networks',
           },
         ],
         meta: {
