@@ -43,7 +43,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
@@ -52,7 +52,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
@@ -61,7 +61,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
@@ -78,7 +78,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
@@ -95,7 +95,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
@@ -112,7 +112,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>-browsers
@@ -123,7 +123,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>-browsers
@@ -137,7 +137,7 @@ executors:
     parameters:
       node-version:
         # renovate datasource=node-version depName=node
-        default: 24.11.1
+        default: 24.14.0
         type: string
     docker:
       - image: cimg/node:<<parameters.node-version>>
