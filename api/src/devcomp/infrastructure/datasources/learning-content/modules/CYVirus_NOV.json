@@ -41,9 +41,9 @@
                 "id": "78f124a1-e1aa-4f61-aac4-4e2b7a9648af",
                 "type": "video",
                 "title": "Short-video de l’accroche",
-                "url": "https://assets.pix.org/draft/modules/cy_virus_nov/video-draft-accroche.mp4",
+                "url": "https://assets.pix.org/modules/CYVirus_NOV/accroche.mp4",
                 "subtitles": "",
-                "transcription": "<p>Vidéo montrant un écran d’ordinateur qui se comporte de manière inhabituelle.</p>"
+                "transcription": "<p>L'écran montre un bureau d’ordinateur.</p><p>Une première fenêtre apparait à l'écran :&nbsp;</p><ul><li>Titre : Alerte</li><li>Message : Erreur. Activité inhabituelle détectée sur votre ordinateur</li></ul><p>Puis, d'autres fenêtres identiques apparaissent sans action de l'utilisateur. </p><p>À la fin, l'écran est rempli de nombreuses fenêtres d'alerte.</p>"
               }
             },
             {
@@ -52,6 +52,7 @@
                 "id": "fe203758-5321-4021-bea7-058dd541f616",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, qu’arrive-t-il à cet ordinateur ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -89,8 +90,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -136,15 +136,17 @@
                   "elements": [
                     {
                       "id": "52263674-7a87-4b74-9b97-4633c9d844ab",
-                      "type": "short-video",
+                      "type": "video",
                       "title": "Ordinateur 1",
-                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-lag.mp4",
-                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier est lent à réagir.</p>"
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur1.mp4",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi1.png",
+                      "subtitles": "",
+                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. </p>\n<p>Un message « Travail en cours... » s'affiche également. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
-                      "content": "<h5>Ordinateur n°1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -152,15 +154,17 @@
                   "elements": [
                     {
                       "id": "4dfa2697-c551-4a54-94e6-07f93deb2c48",
-                      "type": "short-video",
+                      "type": "video",
                       "title": "Ordinateur 2",
-                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-rename.mp4",
-                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier est rapide. Les noms des fichiers ont été remplacés par des suites de caractères. Les extensions des fichiers ont été modifiées.</p>"
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur2.mp4",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi2.png",
+                      "subtitles": "",
+                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>M$£a}=4#p~μr$£é]{s7ùe#!n^£t-a&amp;@t-</li>\n    <li>Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s</li>\n    <li>Mç_a$%ùméμ$u!§s7_i[q#~+u$£e</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » :</strong></p>\n<p>Le contenu du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » s'affiche avec des fichiers  : </p>\n<ul>\n    <li>i$|_|]u=s!t§r{a2t#i&amp;o%n.vir</li>\n    <li>l+eμ_£r5e#n]a)r[d£_μ.nor</li>\n    <li>p@o{r[t^ùr@a]i}t_ùl!a§_e.jcrr</li>\n    <li>pço#r4t%rùaμi$t£_!g§u.kkl</li><br>\n</ul>"
                     },
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
-                      "content": "<h5>Ordinateur n°2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 },
@@ -168,15 +172,17 @@
                   "elements": [
                     {
                       "id": "931dee38-a756-44f9-98f9-d5e545d34c1e",
-                      "type": "short-video",
+                      "type": "video",
                       "title": "Ordinateur 3",
-                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/explorateur-normal2.mp4",
-                      "transcription": "<p>Capture vidéo d'un écran d'ordinateur. L'explorateur de fichier semble avoir un comportement normal.</p>"
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur3.mp4",
+                      "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi3.png",
+                      "subtitles": "",
+                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n\n<p>Le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
                     {
                       "id": "e1404c05-11b5-4531-a373-ede7492d4676",
                       "type": "text",
-                      "content": "<h5>Ordinateur n°3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
                 }
@@ -195,6 +201,7 @@
                 "id": "479ea9aa-0b30-4c3b-8262-31547f1a089a",
                 "type": "qcu-discovery",
                 "instruction": "Selon ce que vous avez pu observer, un logiciel malveillant, est-ce que ça se voit toujours ?",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -218,8 +225,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -278,7 +284,7 @@
                     "id": "51f2b83b-2ebc-4b46-95f1-38330147adc4",
                     "text": "Léa clique sur une publicité qui propose de regarder un film gratuitement.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/message-lidl.png",
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_situation1-v4.png",
                       "altText": ""
                     },
                     "proposalA": "Risquée",
@@ -289,7 +295,7 @@
                     "id": "266d6fe3-ac34-4a11-b762-e1b925821b9f",
                     "text": "Alex branche sur son PC une batterie externe neuve oubliée à la bibliothèque.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/A5zShWC.jpeg",
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_situation2-v2.png",
                       "altText": ""
                     },
                     "proposalA": "Risquée",
@@ -300,7 +306,7 @@
                     "id": "3ee045e5-4531-4d6b-a7bb-367a193d1c3e",
                     "text": "Maxence télécharge sur un forum la version piratée d’un logiciel payant connu.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/fichier-draft-forum.png",
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_situation3-v4.png",
                       "altText": ""
                     },
                     "proposalA": "Risquée",
@@ -311,7 +317,7 @@
                     "id": "521d68db-6a42-4e77-9e45-6eeb0dc50945",
                     "text": "Fred utilise une prise USB en libre accès dans un lieu public pour charger son smartphone.",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/cy_virus_nov/chargeur-libre-draft.png",
+                      "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_qab_situation4-v2.png",
                       "altText": ""
                     },
                     "proposalA": "Risquée",
@@ -320,7 +326,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (sms, mail, discussion de forum) ; ✉️</li><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante ; 🌐</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance ; 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (sms, mail, discussion de forum), ✉️</li><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante, 🌐</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance, 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
                 }
               }
             }
@@ -426,29 +432,13 @@
             {
               "type": "element",
               "element": {
-                "id": "52c8900a-2705-4fbd-9c3c-644d596a9a23",
-                "type": "text",
-                "content": "<h4>Du pirate informatique à l'appareil infecté, itinéraire d’un logiciel malveillant&nbsp;:</h4>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "a6a46a0d-573d-4fb8-9fb3-f286aaeae6c5",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_virus_nov/infografie1-draft-recap.png",
-                "alt": "",
-                "alternativeText": "<h5>Qu’est-ce qu’un logiciel malveillant ?&nbsp; </h5><p> Un programme malveillant <strong>créé </strong>et<strong> diffusé</strong> par un <strong>pirate informatique </strong>pour <strong>perturber le fonctionnement normal</strong> d’un appareil. Le but est de<strong> nuire</strong> :<br>✔️Par exemple, pour récupérer des données personnelles, ou demander de l’argent. </p><h5>Comment un logiciel malveillant peut infecter un appareil ?&nbsp; </h5><p> Pour <strong>piéger</strong> les utilisateurs à leur insu, les pirates <strong>cachent</strong> des logiciels malveillants dans : des messages, pages web, des publicités, des applications ou logiciels, appareils usb.<br><br>C’est souvent <strong>une action risquée de l’utilisateur</strong> qui permet au logiciel malveillant d’infecter un appareil. </p><h5> Quels sont les effets des logiciels malveillants ?&nbsp; </h5><p> Une fois présent sur un appareil, un logiciel malveillant peut provoquer <strong>des dysfonctionnements</strong>. Certains sont <strong>visibles</strong>, d’autres passent totalement <strong>inaperçus</strong>. (Le pirate peut parfois demander de l'argent (une rançon) pour réparer les dégâts causés).</p>",
+                "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_infographies_v4.png",
+                "alt": "Récapitulatif détaillé dans l'alternative textuelle",
+                "alternativeText": "<h5>Du pirate informatique à l'appareil infecté, itinéraire d’un logiciel malveillant<br></h5><ol><li>Un pirate informatique créé et diffuse un logiciel malveillant pour perturber le fonctionnement normal d’un appareil. L'objectif est de nuire pour en tirer profit.<br></li><li>Pour piéger les utilisateurs, les pirates cachent des logiciels malveillants dans : des logiciels, des fichiers, des appareils, etc.<br></li><li>C’est souvent une action risquée de l’utilisateur qui permet au logiciel malveillant d’infecter un appareil.&nbsp;<br></li><li>Une fois présent sur un appareil, un logiciel malveillant peut provoquer des dysfonctionnements.<br></li><li>Le pirate peut ensuite récupérer des données personnelles ou demander de l'argent par exemple.</li></ol><p><br></p><h5>Comment éviter les logiciels malveillants ? </h5><ol><li> Télécharger un logiciel ou une application depuis des sites légaux et des magasins d'applications officiels.</li><li>Ne pas cliquer sur les liens, les fichiers ou les pièces jointes dans des&nbsp;messages inconnus.</li><li>Connecter uniquement des appareils de confiance  et de provenance connue (ex : clé usb).</li><li>Charger un appareil avec votre propre chargeur, en le branchant sur une prise électrique.</li></ol>",
                 "legend": "",
                 "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "142142d6-fd32-452b-9158-fe7209543865",
-                "type": "text",
-                "content": "<h4>Infographie 2&nbsp;:&nbsp;Comment éviter les logiciels malveillants ? </h4><ul><li>Télécharger un logiciel ou une application depuis des sites légaux et des magasins d'applications officiels.</li><li>Ne pas cliquer sur les liens ou les pièces jointes dans des&nbsp;messages inconnus.</li><li>Ouvrir uniquement les fichiers dont vous êtes sûrs.</li><li>Connecter uniquement des appareils de confiance (ex : clé usb) et de provenance connue.</li><li>Charger un appareil avec votre propre chargeur, en le branchant sur une prise électrique.</li></ul>"
               }
             }
           ]
@@ -545,6 +535,7 @@
                       "id": "2709b208-293c-492c-80ec-41954790512f",
                       "type": "qcu",
                       "instruction": "<p>Brancher un appareil&nbsp;: quelle action présente un risque ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -571,8 +562,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -582,6 +572,7 @@
                       "id": "929cb848-38e6-4403-8f42-abcda0898a77",
                       "type": "qcu",
                       "instruction": "<p>Regarder un film&nbsp;: quelle action présente un risque ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -608,8 +599,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -619,6 +609,7 @@
                       "id": "2e7e166a-72af-4096-adf4-8777f9556a90",
                       "type": "qcu",
                       "instruction": "<p>Télécharger un jeu&nbsp;: quelle action présente un risque ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -645,8 +636,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 }
