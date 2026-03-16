@@ -12,6 +12,7 @@ import { databaseBuffer } from '../database-buffer.js';
  *  locales: string[],
  *  editorName: string,
  *  editorLogoUrl: string,
+ *  isDisabled: boolean,
  *  createdAt: Date,
  *  updatedAt: Date
  * }} Training
