@@ -31,6 +31,7 @@ const buildCertificationCourse = function ({
   lang = null,
   versionId = null,
   candidateId = null,
+  framework = null,
 } = {}) {
   userId = _.isUndefined(userId) ? buildUser().id : userId;
   sessionId = _.isUndefined(sessionId) ? buildSession().id : sessionId;
@@ -60,6 +61,7 @@ const buildCertificationCourse = function ({
     lang,
     versionId,
     candidateId,
+    framework,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'certification-courses',
