@@ -1,6 +1,7 @@
 import PixAccordions from '@1024pix/pix-ui/components/pix-accordions';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -8,6 +9,7 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 
+import { EVENT_NAME } from '../../helpers/metrics-event-name';
 import Header from '../table/header';
 import Thematic from './thematic';
 import Tube from './tube';
@@ -15,6 +17,7 @@ import Tube from './tube';
 export default class TubeList extends Component {
   @tracked selectedTubeIds = [];
   @service dayjs;
+  @service pixMetrics;
 
   @action
   selectThematic(thematic) {
@@ -100,6 +103,11 @@ export default class TubeList extends Component {
     return URL.createObjectURL(this.file);
   }
 
+  @action
+  trackDownloadClick() {
+    this.pixMetrics.trackEvent(EVENT_NAME.TUBES_SELECTION.DOWNLOAD_JSON_CLICK);
+  }
+
   <template>
     <section>
       <div class="download-file">
@@ -116,6 +124,7 @@ export default class TubeList extends Component {
               organizationName=@organization.name
               date=this.formattedCurrentDate
             }}
+            {{on "click" this.trackDownloadClick}}
           >
             {{t
               "pages.preselect-target-profile.download"

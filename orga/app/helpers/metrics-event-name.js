@@ -9,4 +9,7 @@ export const EVENT_NAME = {
   COMBINED_COURSE: {
     VIEW_CAMPAIGN_CLICK: 'combinedCourseViewCampaignClick',
   },
+  TUBES_SELECTION: {
+    DOWNLOAD_JSON_CLICK: 'tubesSelectionDownloadJsonClick',
+  },
 };
