@@ -1714,6 +1714,11 @@
             "button": "Wachtwoord resetten",
             "warning": "De reset verwijdert het huidige wachtwoord van de leerling."
           },
+          "unblock": {
+            "button": "Account deblokkeren",
+            "subtitle": "Als het account van de leerling geblokkeerd is",
+            "success-notification": "Het account van de leerling is gedeblokkeerd, hij kan weer inloggen."
+          },
           "username": {
             "copy": "Gebruikersnaam kopiëren",
             "label": "Gebruikersnaam"

@@ -97,6 +97,42 @@ export default class ManageAuthenticationMethodModal extends Component {
   }
 
   @action
+  async unblockOrganizationLearnerAccount(event) {
+    event.preventDefault();
+
+    try {
+      await this.store.adapterFor('sco-organization-participant').unblockOrganizationLearner({
+        organizationId: this.args.organizationId,
+        organizationLearnerId: this.args.student.id,
+      });
+      this.notifications.sendSuccess(
+        this.intl.t(
+          'pages.sco-organization-participants.manage-authentication-method-modal.section.unblock.success-notification',
+        ),
+      );
+      await this.args.refreshValues();
+    } catch (fetchErrors) {
+      const error = Array.isArray(fetchErrors) && fetchErrors.length > 0 && fetchErrors[0];
+      let errorMessage;
+      switch (error?.code) {
+        case 'USER_DOES_NOT_BELONG_TO_ORGANIZATION':
+          errorMessage = this.intl.t(
+            'api-error-messages.student-password-reset.user-does-not-belong-to-organization-error',
+          );
+          break;
+        case 'ORGANIZATION_LEARNER_DOES_NOT_BELONG_TO_ORGANIZATION':
+          errorMessage = this.intl.t(
+            'api-error-messages.student-password-reset.organization-learner-does-not-belong-to-organization-error',
+          );
+          break;
+        default:
+          errorMessage = this.intl.t(this._getI18nKeyByStatus(error.status));
+      }
+      this.notifications.sendError(errorMessage);
+    }
+  }
+
+  @action
   closeModal() {
     this.isUniquePasswordVisible = false;
     this.args.onClose();
@@ -243,6 +279,22 @@ export default class ManageAuthenticationMethodModal extends Component {
                 {{/if}}
               {{/if}}
             </div>
+
+            {{#if @student.isBlockedOrTemporarilyBlocked}}
+              <div class="manage-authentication-window__box">
+                <div class="manage-authentication-window__subTitle">
+                  <h3>
+                    {{t
+                      "pages.sco-organization-participants.manage-authentication-method-modal.section.unblock.subtitle"
+                    }}
+                  </h3>
+                  <PixIcon @name="checkCircle" class="grey-icon" />
+                </div>
+                <PixButton @triggerAction={{this.unblockOrganizationLearnerAccount}}>
+                  {{t "pages.sco-organization-participants.manage-authentication-method-modal.section.unblock.button"}}
+                </PixButton>
+              </div>
+            {{/if}}
           </div>
 
           {{#unless @student.isAuthenticatedWithGarOnly}}

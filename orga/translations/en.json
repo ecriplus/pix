@@ -1733,6 +1733,11 @@
             "button": "Reset password",
             "warning": "Resetting will delete the student’s current password."
           },
+          "unblock": {
+            "button": "Unblock the account",
+            "subtitle": "If the student account is blocked",
+            "success-notification": "The student's account has been unlocked, and they can log in again."
+          },
           "username": {
             "copy": "Copy the username",
             "label": "Username"

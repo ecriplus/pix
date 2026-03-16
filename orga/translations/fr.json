@@ -1720,6 +1720,11 @@
             "button": "Réinitialiser le mot de passe",
             "warning": "Réinitialiser supprime le mot de passe actuel de l’élève."
           },
+          "unblock": {
+            "button": "Débloquer le compte",
+            "subtitle": "Si le compte de l'élève est bloqué",
+            "success-notification": "Le compte de l'élève a été débloqué, il peut à nouveau se connecter."
+          },
           "username": {
             "copy": "Copier l’identifiant",
             "label": "Identifiant"

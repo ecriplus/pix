@@ -139,6 +139,10 @@ export default class ScoList extends Component {
     this.showEditNameModal = false;
   }
 
+  @action refreshValues() {
+    this.args.refreshValues();
+  }
+
   @action
   async generateUsernamePasswordForStudents(affectedStudents, resetSelectedStudents) {
     const affectedStudentsIds = affectedStudents.map((affectedStudents) => affectedStudents.id);
@@ -298,6 +302,7 @@ export default class ScoList extends Component {
         @student={{this.student}}
         @display={{this.isShowingAuthenticationMethodModal}}
         @onClose={{this.closeAuthenticationMethodModal}}
+        @refreshValues={{this.refreshValues}}
       />
 
       <EditParticipantNameModal

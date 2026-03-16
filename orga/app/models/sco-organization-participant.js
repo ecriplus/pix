@@ -50,4 +50,8 @@ export default class ScoOrganizationParticipant extends Model {
   get displayAddUsernameAuthentication() {
     return Boolean(!this.hasUsername && (this.isAuthenticatedFromGar || this.hasEmail));
   }
+
+  get isBlockedOrTemporarilyBlocked() {
+    return Boolean(this.isBlocked || this.isTemporarilyBlocked);
+  }
 }
