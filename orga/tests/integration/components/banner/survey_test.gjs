@@ -75,7 +75,7 @@ module('Integration | Component | Banner::Survey', function (hooks) {
         assert.notOk(screen.queryByRole('link', { name: 'Accédez à l’enquête' }));
       });
 
-      test('when the environnement variable is not set', async function (assert) {
+      test('when the environment variable is not set', async function (assert) {
         // given
         ENV.APP.SURVEY_BANNER_ENABLED = false;
         ENV.APP.SURVEY_LINK = 'https://www.google.com';

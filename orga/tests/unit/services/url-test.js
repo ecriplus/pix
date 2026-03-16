@@ -123,7 +123,7 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(campaignsRootUrl, 'https://app.test.pix.fr/campagnes/');
     });
 
-    test('returns campaigns root url for current pix-app environnement', function (assert) {
+    test('returns campaigns root url for current pix-app environment', function (assert) {
       // given
       const service = this.owner.lookup('service:url');
       sinon
@@ -153,7 +153,7 @@ module('Unit | Service | url', function (hooks) {
       // then
       assert.strictEqual(combinedCoursesRootUrl, 'https://app.test.pix.fr/parcours/');
     });
-    test('returns combined courses root url for current pix-app environnement', function (assert) {
+    test('returns combined courses root url for current pix-app environment', function (assert) {
       // given
       const service = this.owner.lookup('service:url');
       sinon.stub(ENV, 'APP').value({ PIX_APP_URL_WITHOUT_EXTENSION: 'https://app.test.pix.' });
