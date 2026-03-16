@@ -45,21 +45,21 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Oui</p>",
+                    "content": "Oui",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Non</p>",
+                    "content": "Non",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je ne sais pas.</p>",
+                    "content": "Je ne sais pas.",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
