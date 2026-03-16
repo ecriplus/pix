@@ -41,30 +41,30 @@
                 "id": "e785fb13-5a62-4814-9a7c-4aaf11591fb9",
                 "type": "qcu-declarative",
                 "instruction": "<p>Et vous, pensez-vous avoir déjà reçu des messages d’arnaque par mail ou par SMS ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Oui</p>",
+                    "content": "Oui",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Non</p>",
+                    "content": "Non",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je ne sais pas.</p>",
+                    "content": "Je ne sais pas.",
                     "feedback": {
                       "diagnosis": "<p>La tentative d’arnaque par mail ou par SMS est un phénomène massif. Il y a peu de chances d’y échapper.</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]
@@ -121,6 +121,7 @@
                       "id": "ac687790-6967-46b2-b77b-8e477be78dcb",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -144,8 +145,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -164,6 +164,7 @@
                       "id": "2e030d67-cac0-4cab-9330-29e49ec1d38e",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -187,8 +188,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -207,6 +207,7 @@
                       "id": "1f343330-1692-4614-9fc5-1132354e18ea",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -230,8 +231,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -250,6 +250,7 @@
                       "id": "6b0f2e57-33e3-40b6-b0bf-781b248a3b95",
                       "type": "qcu-discovery",
                       "instruction": "<p>À votre avis, à quoi correspond le message ci-dessus ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -273,8 +274,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
@@ -307,7 +307,7 @@
               "element": {
                 "id": "2a4eb89a-feee-4e23-8fe7-77b008349e2b",
                 "type": "text",
-                "content": "<p>Le ton d’urgence ou le sujet vous fait penser à une arnaque, mais le réalisme du message vous fait douter ? </p><p>Ça arrive, c’est normal.</p><p>Voici des <strong>indices supplémentaires</strong> pour vous aider à débusquer les escrocs. 🕵️</p>"
+                "content": "<p>Le ton d’urgence ou le sujet vous fait penser à une arnaque, mais le réalisme du message vous fait douter ? </p><p>Ça arrive, c’est normal.</p><p>Découvrez comment débusquer les escrocs. 🕵️</p>"
               }
             }
           ]
@@ -321,11 +321,177 @@
               "type": "element",
               "element": {
                 "id": "b59406de-9130-4e8c-adda-850f6a901bc5",
-                "type": "custom-draft",
-                "title": "POIC découverte 2",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_Phishing_IND-POI-chasse-indice-phishing.html",
-                "instruction": "<p><strong>L’activité suivante présente trois mails d’arnaque. Pour chacun, cliquez sur la partie du message qui doit vous alerter.</strong></p><p>Si besoin, vous pouvez débloquer un indice.</p><br>",
-                "height": 550
+                "type": "custom",
+                "title": "",
+                "instruction": "<p>L’activité suivante présente trois mails d’arnaque.&nbsp;Pour chacun, identifiez la partie du message qui doit vous alerter.&nbsp;&nbsp;</p>",
+                "functionalInstruction": "<p>Cliquez sur une partie du mail.</p>",
+                "tagName": "analyse-mails-phishing",
+                "props": {
+                  "titleLevel": 0,
+                  "mails": [
+                    {
+                      "subject": "Votre nouvel avis d’imposition est disponible",
+                      "from": {
+                        "name": "Impost.g0uv",
+                        "address": "no-reply@impost.g0uv.fr"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Bonjour,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Votre avis d’imposition est désormais en ligne.",
+                            "Pour consulter rapidement,",
+                            "merci de vous connecter à votre espace particulier via le lien ci-dessous."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Accéder à mon espace particulier"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Cordialement,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Service des impôts"
+                          ]
+                        }
+                      ],
+                      "answers": [
+                        "from.name",
+                        "from.address"
+                      ],
+                      "correctFeedback": "Le nom de l’expéditeur est orthographié : « impost.g0uv » au lieu de « impots.gouv’ ». Les erreurs dans les noms ou dans les adresses mails sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien l’orthographe du nom et de l’adresse d’expéditeur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Notification de facture impayée — EDF",
+                      "from": {
+                        "name": "EDF Service Client",
+                        "address": "support.edf-client@yxztbnc85de.ru"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Bonjour,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous n’avons pas reçu le règlement de votre dernière facture.",
+                            "Veuillez consulter le détail et effectuer le paiement sécurisé",
+                            "dans les 48h pour éviter la suspension de votre abonnement."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Voir ma facture"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Merci,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "EDF — Service Client"
+                          ]
+                        }
+                      ],
+                      "answers": [
+                        "from.address"
+                      ],
+                      "correctFeedback": "La partie après l’arobase de l’adresse mail « yxztbnc85de.ru » n’a aucun lien avec EDF ou la demande, et n’est même pas compréhensible. C’est un indicateur de hameçonnage.",
+                      "incorrectFeedback": "Concentrez-vous sur l’adresse mail de l’expéditeur. Retentez votre chance !"
+                    },
+                    {
+                      "subject": "Amende impayée - Service des infractions",
+                      "from": {
+                        "name": "Service des infractions",
+                        "address": "infractions@amendes-en-retard.com"
+                      },
+                      "body": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Bonjour,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Nous vous informons que vous avez un retard de paiement d’une amende de 85€ auprès de l’Agence de Traitement Automatisé des Infractions (ANTAI).",
+                            "Référence de dossier : ML854YD9.",
+                            "Veuillez noter que si vous ne payez pas cette amende dans les prochaines 24 h,",
+                            "vous devrez payer une majoration à hauteur de 250€.",
+                            "Veuillez régulariser votre situation dans les plus brefs délais."
+                          ]
+                        },
+                        {
+                          "type": "button",
+                          "name": "Payer mon amende"
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Cordialement,"
+                          ]
+                        },
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            "Service des infractions de l’ANTAI"
+                          ]
+                        }
+                      ],
+                      "answers": [
+                        "from.address"
+                      ],
+                      "correctFeedback": "L’adresse de l’expéditeur ne correspond à aucun organisme officiel. Les incohérences dans les noms et les adresses mails sont de bons indicateurs d’arnaques.",
+                      "incorrectFeedback": "Observez bien le nom et l’adresse de l’expéditeur. Retentez votre chance ! "
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a84dcf7e-f23e-43c4-840a-1aef5f41b6bb",
+                "type": "text",
+                "content": "<p>Si vous avez besoin, aidez-vous des indices suivants :<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0a783c69-9ee5-4d8a-bc9b-bdb5f62f98da",
+                "type": "expand",
+                "title": "🗝️ Indice 1",
+                "content": "<p>Certains indicateurs de fraude se cachent dans l’orthographe. Avez-vous vérifié partout le nom de l’expéditeur ?</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "76690dd8-f111-4886-98bd-6fee8df1bb6e",
+                "type": "expand",
+                "title": "🗝️ Indice 2",
+                "content": "<p>Certains indicateurs de fraude dépendent d’aspects techniques, comme le nom de domaine. Avez-vous vérifié la deuxième partie de l’adresse mail (après le @) ?</p>"
               }
             }
           ]
@@ -410,11 +576,63 @@
               "type": "element",
               "element": {
                 "id": "227352f9-9b3a-4a60-a174-d803352ed41f",
-                "type": "custom-draft",
-                "title": "POIC bloquer et signaler",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_Phishing_IND-POI-proteger.html",
+                "type": "custom",
+                "title": "",
                 "instruction": "<p>Suivez les consignes de l’interface ci-dessous.<br></p>",
-                "height": 550
+                "functionalInstruction": "",
+                "tagName": "proteger-mail-spam",
+                "props": {
+                  "titleLevel": 0,
+                  "steps": [
+                    {
+                      "title": "Première situation : Se protéger",
+                      "description": "Utilisez l’interface pour ne plus recevoir de message en provenance de cette adresse mail.",
+                      "actions": {
+                        "return": "disabled",
+                        "menuActions": {
+                          "markAsUnread": "hidden",
+                          "reportSpam": "hidden"
+                        }
+                      },
+                      "goodAction": "blockSender",
+                      "mail": {
+                        "subject": "[URGENT] Votre accès sera suspendu",
+                        "sender": {
+                          "name": "Bnq secure",
+                          "address": "alert@bnq-secure.link",
+                          "avatarColor": "#2f80ed"
+                        },
+                        "body": "Bonjour, <br><br>Nous avons détecté une activité suspecte sur votre compte.Par mesure de sécurité, l’accès sera suspendu dans les 2 heures si vous ne confirmez pas vos informations.<br><br>Confirmez votre compte ici : <a href='fake'>http://securite-compte-verification.com</a><br><br>Sans confirmation, vos services seront définitivement bloqués. Support Client MaBanque",
+                        "time": {
+                          "minutes": -5
+                        }
+                      }
+                    },
+                    {
+                      "title": "Deuxième situation : Protéger les autres",
+                      "description": "Le mail suivant est aussi frauduleux. Utilisez l’interface pour signaler le message et aider à renforcer les filtres anti‑spam.",
+                      "actions": {
+                        "return": "disabled",
+                        "menuActions": {
+                          "markAsUnread": "hidden"
+                        }
+                      },
+                      "goodAction": "reportSpam",
+                      "mail": {
+                        "subject": "Mise à jour de vos données Microsoft",
+                        "sender": {
+                          "name": " Service Données Utilisateurs",
+                          "address": "donnees-gestion-utilisateurs@service-microsoft.com",
+                          "avatarColor": "#2f80ed"
+                        },
+                        "body": "Bonjour,<br><br>Dans le cadre de l’évolution de notre politique de traitement des données personnelles, une validation de vos informations est désormais obligatoire. Veuillez mettre à jour vos informations dans les 3 jours.<br><br>Merci de vérifier et compléter vos informations via le portail sécurisé : <a href='fake'>http://portail-donnees-utilisateur-microsoft.com</a><br><br>Cordialement, Service Données & Conformité Microsoft",
+                        "time": {
+                          "minutes": -10
+                        }
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -517,8 +735,8 @@
                     "content": "<span>Les messages de phishing</span>"
                   },
                   {
-                    "input": "action-escrocs",
                     "type": "select",
+                    "input": "action-escrocs",
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
@@ -537,15 +755,17 @@
                         "content": "imitent"
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<span>des tiers de confiance, souvent de façon imparfaite. L’objectif des&nbsp;</span>"
                   },
                   {
-                    "input": "coupable",
                     "type": "select",
+                    "input": "coupable",
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
@@ -564,15 +784,17 @@
                         "content": "techniciens"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
                     "content": "<span>est de récupérer vos </span>"
                   },
                   {
-                    "input": "objectif-escrocs",
                     "type": "select",
+                    "input": "objectif-escrocs",
                     "display": "inline",
                     "placeholder": "-Sélectionner-",
                     "ariaLabel": "-Sélectionner-",
@@ -591,7 +813,9 @@
                         "content": "mises à jour"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -636,8 +860,12 @@
                     "display": "inline",
                     "placeholder": "tapez le nom",
                     "ariaLabel": "tapez le nom",
-                    "tolerances": ["t1"],
-                    "solutions": ["hameçonnage"]
+                    "tolerances": [
+                      "t1"
+                    ],
+                    "solutions": [
+                      "hameçonnage"
+                    ]
                   },
                   {
                     "type": "text",
@@ -677,6 +905,7 @@
                 "id": "852947b8-f1dc-475d-984b-2dd379c9d0ac",
                 "type": "qcm",
                 "instruction": "<p>Parmi les expéditeurs suivants, lesquels vous semblent dignes de confiance ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -709,8 +938,10 @@
                     "diagnosis": "<p>Pour vérifier la légitimité des adresses mail, regardez bien des deux côtés de l’arobase. Vous pouvez réessayer.</p>"
                   }
                 },
-                "solutions": ["2", "3"],
-                "hasShortProposals": false
+                "solutions": [
+                  "2",
+                  "3"
+                ]
               }
             }
           ]
@@ -723,9 +954,9 @@
             {
               "type": "element",
               "element": {
-                "id": "99512111-5353-4ecd-98e5-6be31c09939a",
+                "id": "f81294a5-8ef3-4449-b60e-29d270d71fc8",
                 "type": "text",
-                "content": "<p>[embed Pixmail avec 3 messages et fonctionalité Signaler comme indésirable]</p>"
+                "content": "<p>Parmi les mails reçus dans l’application ci-dessous, l’un d’entre eux est malveillant.</p>"
               }
             },
             {
@@ -735,8 +966,8 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Sélectionner et marquer un message malveillant comme indésirable.",
-                "url": "https://epreuves.pix.fr/pixmail-phishing.html?lang=fr&mode=a",
-                "instruction": "<p>Parmi les trois messages reçus dans l’application ci-dessous, l’un d’entre eux est malveillant. </p><p>Sélectionnez-le et marquez-le comme indésirable.</p><h4>⚠️L’activité suivante n’est pas jouable pour l’instant ⚠️</h4>",
+                "url": "https://epreuves.pix.fr/fr/pixmail-spam/modulix-phishing.html",
+                "instruction": "<p>Identifiez le mail malveillant et signalez-le comme spam.</p>",
                 "solution": "",
                 "height": 500
               }
@@ -768,6 +999,7 @@
                 "id": "79554085-8e51-4d07-b39b-32010a95bb57",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quel moyen choisissez-vous pour vérifier si ce message est une arnaque ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -805,8 +1037,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
