@@ -123,7 +123,7 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(campaignsRootUrl, 'https://app.test.pix.fr/campagnes/');
     });
 
-    test('returns campaigns root url for current pix-app environement', function (assert) {
+    test('returns campaigns root url for current pix-app environment', function (assert) {
       // given
       const service = this.owner.lookup('service:url');
       sinon
@@ -138,6 +138,34 @@ module('Unit | Service | url', function (hooks) {
 
       // then
       assert.strictEqual(campaignsRootUrl, 'https://app.test.pix.org/campagnes/');
+    });
+  });
+
+  module('#combinedCoursesRootUrl', function () {
+    test('returns default combined courses root url when is defined', function (assert) {
+      // given
+      const service = this.owner.lookup('service:url');
+      sinon.stub(ENV, 'APP').value({ COMBINED_COURSES_ROOT_URL: 'https://app.test.pix.fr/parcours/' });
+
+      // when
+      const combinedCoursesRootUrl = service.combinedCoursesRootUrl;
+
+      // then
+      assert.strictEqual(combinedCoursesRootUrl, 'https://app.test.pix.fr/parcours/');
+    });
+    test('returns combined courses root url for current pix-app environment', function (assert) {
+      // given
+      const service = this.owner.lookup('service:url');
+      sinon.stub(ENV, 'APP').value({ PIX_APP_URL_WITHOUT_EXTENSION: 'https://app.test.pix.' });
+
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('org');
+
+      // when
+      const combinedCoursesRootUrl = service.combinedCoursesRootUrl;
+
+      // then
+      assert.strictEqual(combinedCoursesRootUrl, 'https://app.test.pix.org/parcours/');
     });
   });
 

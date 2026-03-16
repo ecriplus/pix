@@ -669,6 +669,7 @@
       "empty-state-with-copy-link": "No participants yet! Share with them the following link to join this campaign.",
       "included-in-combined-course": "This assessment campaign is included in the",
       "included-in-combined-course-end": "learning program.",
+      "link": "Link",
       "multiple-sendings": {
         "status": {
           "disabled": "No",

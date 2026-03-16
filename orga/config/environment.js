@@ -55,6 +55,8 @@ module.exports = function (environment) {
           minValue: 10,
         }),
       CAMPAIGNS_ROOT_URL: process.env.CAMPAIGNS_ROOT_URL,
+      COMBINED_COURSES_ROOT_URL: process.env.COMBINED_COURSES_ROOT_URL,
+
       MAX_CONCURRENT_AJAX_CALLS: _getEnvironmentVariableAsNumber({
         environmentVariableName: 'MAX_CONCURRENT_AJAX_CALLS',
         defaultValue: 8,
@@ -122,6 +124,7 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV.APP.CAMPAIGNS_ROOT_URL = 'http://localhost:4200/campagnes/';
+    ENV.APP.COMBINED_COURSES_ROOT_URL = 'http://localhost:4200/parcours/';
     ENV.APP.CERTIFICATION_BANNER_DISPLAY_DATES = '04 05 06 07';
     ENV.APP.SURVEY_LINK = 'http://localhost:4200/campagnes/';
     ENV.APP.SURVEY_BANNER_ENABLED = true;
@@ -142,6 +145,7 @@ module.exports = function (environment) {
 
     ENV.APP.CERTIFICATION_BANNER_DISPLAY_DATES = '04 05 06 07';
     ENV.APP.CAMPAIGNS_ROOT_URL = 'http://localhost:4200/campagnes/';
+    ENV.APP.COMBINED_COURSES_ROOT_URL = 'http://localhost:4200/parcours/';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

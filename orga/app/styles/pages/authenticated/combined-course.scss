@@ -16,6 +16,8 @@
 
   &__header-body {
     @extend %pix-body-s;
+
+    margin-bottom: var(--pix-spacing-4x);
   }
 
   &__campaigns {

@@ -669,6 +669,7 @@
       "empty-state-with-copy-link": "Aucun participant pour l’instant ! Envoyez-leur le lien suivant pour rejoindre votre campagne.",
       "included-in-combined-course": "Cette campagne d'évaluation est incluse dans le parcours apprenant",
       "included-in-combined-course-end": ".",
+      "link": "Lien",
       "multiple-sendings": {
         "status": {
           "disabled": "Non",
