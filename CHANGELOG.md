@@ -1,5 +1,46 @@
 # Pix Changelog
 
+# [5.356.0](https://github.com/1024pix/pix/compare/v5.355.0...v5.356.0) (2026-03-16)
+
+### :rocket: Amélioration
+
+- [#15445](https://github.com/1024pix/pix/pull/15445) Affichage des réseaux dans Pix-Admin (PIX-21300). 
+- [#15484](https://github.com/1024pix/pix/pull/15484) Ajout d'un lien vers le parcours sur l'écran des parcours combinés dans PixOrga (PIX-21252) 
+- [#15474](https://github.com/1024pix/pix/pull/15474) Cadre IA nouveau défi 
+- [#15489](https://github.com/1024pix/pix/pull/15489) modifs videos images virus nov 
+- [#15457](https://github.com/1024pix/pix/pull/15457) Remonter les informations du réseau dans les détails d'une organisation (PIX-21339). 
+- [#15430](https://github.com/1024pix/pix/pull/15430) Scripte le rattachement de quêtes aux schémas de parcours combinés (PIX-21894) 
+
+### :bug: Correction
+
+- [#15488](https://github.com/1024pix/pix/pull/15488) Éviter de provoquer des erreurs lors de la collecte de métriques du LearningContentRepository 
+- [#15493](https://github.com/1024pix/pix/pull/15493) Ne pas utiliser le bucket dans la route `/statuses` (PIX-21915) 
+- [#15464](https://github.com/1024pix/pix/pull/15464) Répare le script de suppression des parcours combinés (PIX-21908) 
+
+### :building_construction: Tech
+
+- [#15415](https://github.com/1024pix/pix/pull/15415) :package: Mise à jour de dépendance Certif 
+- [#15486](https://github.com/1024pix/pix/pull/15486) Correction de faux positifs dans les tests. 
+- [#15452](https://github.com/1024pix/pix/pull/15452) Simplifier encore la sortie des scripts pour les variables d’environnement du GAR (PIX-21897) 
+- [#15384](https://github.com/1024pix/pix/pull/15384) Supprime l'ancienne route de selection des sujets (PIX-21793) 
+- [#15470](https://github.com/1024pix/pix/pull/15470) Supprime un script obsolète de calcul des capacités des candidats Pix + (PIX-21884) 
+- [#15471](https://github.com/1024pix/pix/pull/15471) Supprimer les campaignParticipationId des assessments en batchUpdate (PIX-21888). 
+
+### :arrow_up: Montée de version
+
+- [#15479](https://github.com/1024pix/pix/pull/15479) Lock file maintenance (audit-logger) 
+- [#15480](https://github.com/1024pix/pix/pull/15480) Lock file maintenance (dossier racine) 
+- [#15465](https://github.com/1024pix/pix/pull/15465) Update dependency @1024pix/pix-ui to ^60.2.0 (orga) 
+- [#15491](https://github.com/1024pix/pix/pull/15491) Update dependency @datadog/datadog-api-client to v1.53.0 (api) 
+- [#15478](https://github.com/1024pix/pix/pull/15478) Update dependency @getbrevo/brevo to v5 (api) 
+- [#15466](https://github.com/1024pix/pix/pull/15466) Update dependency ember-eslint-parser to ^0.7.0 (admin) 
+- [#15473](https://github.com/1024pix/pix/pull/15473) Update dependency ember-eslint-parser to ^0.7.0 (certif) 
+- [#15475](https://github.com/1024pix/pix/pull/15475) Update dependency ember-eslint-parser to ^0.7.0 (junior) 
+- [#15476](https://github.com/1024pix/pix/pull/15476) Update dependency ember-eslint-parser to ^0.7.0 (mon-pix) 
+- [#15477](https://github.com/1024pix/pix/pull/15477) Update dependency ember-eslint-parser to ^0.7.0 (orga) 
+- [#15492](https://github.com/1024pix/pix/pull/15492) Update dependency oxfmt to ^0.36.0 (api) 
+- [#15495](https://github.com/1024pix/pix/pull/15495) Update node
+
 # [5.355.0](https://github.com/1024pix/pix/compare/v5.354.0...v5.355.0) (2026-03-13)
 
 ### :rocket: Amélioration
