@@ -112,7 +112,7 @@ module('Integration | Component | tube:list', function (hooks) {
   });
 
   hooks.afterEach(function () {
-    dayjs.self.prototype.format.restore();
+    sinon.restore();
   });
 
   test('it should display frameworks title', async function (assert) {
@@ -171,6 +171,28 @@ module('Integration | Component | tube:list', function (hooks) {
     assert
       .dom(screen.getByText('Télécharger la sélection des sujets (1) (JSON, 0.04ko)'))
       .hasAttribute('download', expectedAttr);
+  });
+
+  test('it should track the download event when the download button is clicked', async function (assert) {
+    // given
+    sinon.stub(URL, 'createObjectURL').returns('blob:fake-url');
+    sinon.stub(URL, 'revokeObjectURL');
+
+    this.set('frameworks', frameworks);
+    this.set('organization', { name: 'mon orga' });
+    const pixMetrics = this.owner.lookup('service:pix-metrics');
+    const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
+
+    await render(hbs`<Tube::list @frameworks={{this.frameworks}} @organization={{this.organization}} />`);
+
+    await clickByName('1 · Titre domaine Pix');
+    await clickByName('Titre 1 Tube Pix : Description 1');
+
+    // when
+    await clickByName('Télécharger la sélection des sujets (1) (JSON, 0.04ko)');
+
+    // then
+    assert.ok(trackEventStub.calledOnceWith('tubesSelectionDownloadJsonClick'));
   });
 
   test('Enable the download button if a thematic is selected', async function (assert) {
