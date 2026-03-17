@@ -47,14 +47,15 @@ const deleteOrganizationLearners = async function ({
   await DomainTransaction.execute(async () => {
     const assessmentsToUpdate = [];
     const organizationLearnersToUpdate = [];
+    const organizationProfileRewardsToUpdate = [];
+
     for (const organizationLearner of organizationLearnersToDelete) {
       const organizationLearnerRewards = organizationProfileRewards.filter(
         (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
       );
       organizationLearner.delete(userId, { keepPreviousDeletion });
       organizationLearnersToUpdate.push(organizationLearner.dataToUpdateOnDeletion);
-
-      await organizationsProfileRewardRepository.removeInBatch(organizationLearnerRewards);
+      organizationProfileRewardsToUpdate.push(...organizationLearnerRewards);
 
       auditLoggingJobs.push(
         AuditLoggingJob.forUser({
@@ -99,6 +100,7 @@ const deleteOrganizationLearners = async function ({
       assessmentsToUpdate.push(...assessments);
     }
 
+    await organizationsProfileRewardRepository.removeInBatch(organizationProfileRewardsToUpdate);
     await organizationLearnerRepository.updateInBatchByIds(organizationLearnersToUpdate);
     await assessmentRepository.batchRemoveParticipationId(assessmentsToUpdate);
     await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
