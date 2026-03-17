@@ -1298,12 +1298,12 @@
                     {
                       "id": "623a15cf-4b46-4ee2-a068-4bd0b1555022",
                       "type": "qcm",
-                      "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Quérato ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
+                      "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Querétaro ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>L’état du Quérato est une région aride et subit parfois des sécheresses.</p>"
+                          "content": "<p>L’état du Querétaro  est une région aride et subit parfois des sécheresses.</p>"
                         },
                         {
                           "id": "2",
