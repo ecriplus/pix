@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.359.0](https://github.com/1024pix/pix/compare/v5.358.0...v5.359.0) (2026-03-17)
+
+### :rocket: Amélioration
+
+- [#15500](https://github.com/1024pix/pix/pull/15500) :sparkles: Renseigne la colonne `subscription` dans la table `certification-candidates` (PIX-21917) 
+- [#15425](https://github.com/1024pix/pix/pull/15425) Modifier le message d'erreur pour les utilisateurs sco lorsque le compte est bloqué définitivement (PIX-21822) 
+- [#15448](https://github.com/1024pix/pix/pull/15448) Permettre de choisir plusieurs langues dans la page de création d'un CF sur Admin (PIX-21786) 
+
+### :building_construction: Tech
+
+- [#15494](https://github.com/1024pix/pix/pull/15494) :package: Mise à jour des lib HAPI et JOI 
+- [#15503](https://github.com/1024pix/pix/pull/15503) Ajout d'une colonne "framework" dans la table "certification-courses" pour savoir rapidement quelle certification a été passée (PIX-21937) 
+- [#15485](https://github.com/1024pix/pix/pull/15485) Eviter des appels N+1 lors de l'archivage d'une organisation (PIX-21889). 
+- [#15481](https://github.com/1024pix/pix/pull/15481) Réécrire l'url en cas d'accès à un module avec un slug personnalisé (PIX-21904)
+
 # [5.358.0](https://github.com/1024pix/pix/compare/v5.357.0...v5.358.0) (2026-03-16)
 
 ### :rocket: Amélioration
