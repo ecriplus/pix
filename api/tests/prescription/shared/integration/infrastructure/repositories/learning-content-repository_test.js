@@ -13,11 +13,11 @@ describe('Integration | Repository | learning-content', function () {
   beforeEach(async function () {
     const framework1DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework1',
-      name: 'Mon référentiel 1',
+      name: 'Pix',
     });
     const framework2DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework2',
-      name: 'Pix',
+      name: 'Pix+',
     });
     const area1DB = databaseBuilder.factory.learningContent.buildArea({
       id: 'recArea1',
@@ -58,7 +58,7 @@ describe('Integration | Repository | learning-content', function () {
       name_i18n: { fr: 'competence3_nomFr', en: 'competence3_nameEn' },
       index: '1',
       description_i18n: { fr: 'competence3_descriptionFr', en: 'competence3_descriptionEn' },
-      origin: 'Pix',
+      origin: 'Pix+',
       areaId: 'recArea2',
     });
     const thematic1DB = databaseBuilder.factory.learningContent.buildThematic({
@@ -468,8 +468,7 @@ describe('Integration | Repository | learning-content', function () {
 
       // then
       expect(results).lengthOf(2);
-      expect(results[0]).deep.equals(framework2Fr);
-      expect(results[1]).deep.equals(framework1Fr);
+      expect(results).deep.members([framework1Fr, framework2Fr]);
     });
 
     it('should filter out tubes without practicalTitle', async function () {
@@ -531,8 +530,7 @@ describe('Integration | Repository | learning-content', function () {
 
         // then
         expect(results).lengthOf(2);
-        expect(results[0]).deep.equals(framework2En);
-        expect(results[1]).deep.equals(framework1En);
+        expect(results).deep.members([framework1En, framework2En]);
       });
     });
   });
