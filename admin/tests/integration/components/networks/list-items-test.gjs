@@ -25,6 +25,38 @@ module('Integration | Component | Networks | ListItems', function (hooks) {
       assert.dom(screen.getByRole('textbox', { name: t('components.networks.list.filters.name') })).exists();
       assert.dom(screen.getByRole('textbox', { name: t('components.networks.list.filters.name') })).hasValue('réseau');
     });
+
+    test('the clear filters button is disabled when no filter is active', async function (assert) {
+      // given
+      const networks = [];
+      const name = null;
+      const triggerFiltering = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ListItems @networks={{networks}} @name={{name}} @triggerFiltering={{triggerFiltering}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('common.filters.actions.clear') })).hasAttribute('aria-disabled');
+    });
+
+    test('the clear filters button is enabled when a filter is active', async function (assert) {
+      // given
+      const networks = [];
+      const name = 'réseau';
+      const triggerFiltering = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ListItems @networks={{networks}} @name={{name}} @triggerFiltering={{triggerFiltering}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(screen.getByRole('button', { name: t('common.filters.actions.clear') }))
+        .doesNotHaveAttribute('aria-disabled');
+    });
   });
 
   module('when there are networks', function () {

@@ -16,7 +16,12 @@ import ListItems from 'pix-admin/components/networks/list-items';
 
   <main class="page-body">
     <section class="page-section networks-list">
-      <ListItems @networks={{@model}} @name={{@controller.name}} @triggerFiltering={{@controller.triggerFiltering}} />
+      <ListItems
+        @networks={{@model}}
+        @name={{@controller.name}}
+        @triggerFiltering={{@controller.triggerFiltering}}
+        @onResetFilter={{@controller.onResetFilter}}
+      />
     </section>
   </main>
 </template>

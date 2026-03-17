@@ -20,4 +20,9 @@ export default class NetworkListController extends Controller {
   triggerFiltering(fieldName, event) {
     debounceTask(this, '_updateFilter', { [fieldName]: event.target.value }, this.DEBOUNCE_MS);
   }
+
+  @action
+  onResetFilter() {
+    this.name = null;
+  }
 }
