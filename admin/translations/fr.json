@@ -1247,7 +1247,7 @@
       },
       "certification": {
         "certificationTypes": {
-          "CLEA": "Double Certification PIX / CléA Numérique",
+          "CLEA": "PIX / CléA Numérique",
           "CORE": "Pix Cœur",
           "DROIT": "Pix+ Droit",
           "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
