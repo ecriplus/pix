@@ -7,7 +7,7 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 describe('Unit | Application | Admin | Route | Network', function () {
   describe('GET /api/admin/networks', function () {
     describe('when the authenticated user has super admin role', function () {
-      it('should call findAllNetworks controller method', async function () {
+      it('should call findAllNetworks controller method without filter', async function () {
         // given
         sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
         sinon.stub(usecases, 'findAllNetworks').returns('ok');
@@ -18,6 +18,21 @@ describe('Unit | Application | Admin | Route | Network', function () {
 
         // when
         await httpTestServer.request('GET', '/api/admin/networks', {});
+
+        // then
+        sinon.assert.called(networkAdminController.findAllNetworks);
+      });
+
+      it('should call findAllNetworks controller method with filter', async function () {
+        // given
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+        sinon.stub(networkAdminController, 'findAllNetworks').returns('ok');
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/admin/networks?filter[name]=réseau', {});
 
         // then
         sinon.assert.called(networkAdminController.findAllNetworks);

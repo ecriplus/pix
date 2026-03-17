@@ -41,6 +41,55 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         expect(foundNetworks).to.be.empty;
       });
     });
+
+    describe('when a filter name is provided', function () {
+      it('returns matching networks ordered by name', async function () {
+        // given
+        const matchingNetwork1 = databaseBuilder.factory.buildNetwork({ name: 'Réseau Bretagne' });
+        const matchingNetwork2 = databaseBuilder.factory.buildNetwork({ name: 'Réseau Alsace' });
+        databaseBuilder.factory.buildNetwork({ name: 'Autre' });
+        await databaseBuilder.commit();
+
+        // when
+        const foundNetworks = await networkRepository.findAll({ filter: { name: 'Réseau' } });
+
+        // then
+        expect(foundNetworks).to.have.lengthOf(2);
+        expect(foundNetworks[0]).to.deepEqualInstance(
+          domainBuilder.acquisition.buildNetwork({ id: matchingNetwork2.id, name: matchingNetwork2.name }),
+        );
+        expect(foundNetworks[1]).to.deepEqualInstance(
+          domainBuilder.acquisition.buildNetwork({ id: matchingNetwork1.id, name: matchingNetwork1.name }),
+        );
+      });
+
+      it('filters case-insensitively', async function () {
+        // given
+        const network = databaseBuilder.factory.buildNetwork({ name: 'Réseau National' });
+        await databaseBuilder.commit();
+
+        // when
+        const foundNetworks = await networkRepository.findAll({ filter: { name: 'réseau national' } });
+
+        // then
+        expect(foundNetworks).to.have.lengthOf(1);
+        expect(foundNetworks[0]).to.deepEqualInstance(
+          domainBuilder.acquisition.buildNetwork({ id: network.id, name: network.name }),
+        );
+      });
+
+      it('returns an empty array when no network matches', async function () {
+        // given
+        databaseBuilder.factory.buildNetwork({ name: 'Réseau Bretagne' });
+        await databaseBuilder.commit();
+
+        // when
+        const foundNetworks = await networkRepository.findAll({ filter: { name: 'Introuvable' } });
+
+        // then
+        expect(foundNetworks).to.be.empty;
+      });
+    });
   });
 
   describe('#getById', function () {
