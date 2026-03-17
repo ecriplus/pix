@@ -17,7 +17,6 @@ import {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
-  removeByIds,
   saveCommonOrganizationLearners,
   update,
   updateCertificability,
@@ -59,107 +58,6 @@ describe('Integration | Repository | Organization Learner Management | Organizat
 
       // then
       expect(result).to.be.instanceOf(NotFoundError);
-    });
-  });
-
-  describe('#removeByIds', function () {
-    let clock;
-    const now = new Date('2023-02-02');
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('delete one organization learner', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdsToDelete = [organizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdsToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const organizationLearnerResult = await knex('organization-learners')
-        .select('updatedAt', 'deletedAt', 'deletedBy')
-        .where('id', organizationLearnerId)
-        .first();
-
-      expect(organizationLearnerResult.updatedAt).to.deep.equal(now);
-      expect(organizationLearnerResult.deletedAt).to.deep.equal(now);
-      expect(organizationLearnerResult.deletedBy).to.equal(userId);
-    });
-
-    it('not update organization learner already deleted', async function () {
-      // given
-      const otherUserId = databaseBuilder.factory.buildUser().id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-        deletedAt: new Date('2020-02-01'),
-        deletedBy: otherUserId,
-      }).id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdsToDelete = [organizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdsToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const organizationLearnerResult = await knex('organization-learners')
-        .select('deletedAt', 'deletedBy')
-        .where('id', organizationLearnerId)
-        .first();
-
-      expect(organizationLearnerResult.deletedAt).to.deep.equal(new Date('2020-02-01'));
-      expect(organizationLearnerResult.deletedBy).to.equal(otherUserId);
-    });
-
-    it('delete more than one organization learners at the same time', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const firstOrganizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const secondOrganizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const thirdOrganisationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdToDelete = [firstOrganizationLearnerId, secondOrganizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const learners = await knex('view-active-organization-learners').where({ organizationId });
-      expect(learners).to.have.lengthOf(1);
-      expect(learners[0].id).to.equal(thirdOrganisationLearnerId);
     });
   });
 

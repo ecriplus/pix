@@ -57,14 +57,6 @@ const getOrganizationLearnerForAdmin = async function (organizationLearnerId) {
   return new OrganizationLearnerForAdmin(organizationLearner);
 };
 
-const removeByIds = function ({ organizationLearnerIds, userId }) {
-  const knexConn = DomainTransaction.getConnection();
-  return knexConn('organization-learners')
-    .whereIn('id', organizationLearnerIds)
-    .whereNull('deletedAt')
-    .update({ updatedAt: new Date(), deletedAt: new Date(), deletedBy: userId });
-};
-
 const disableAllOrganizationLearnersInOrganization = async function ({ organizationId, nationalStudentIds }) {
   const knexConn = DomainTransaction.getConnection();
   await knexConn('organization-learners')
@@ -375,7 +367,6 @@ export {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
-  removeByIds,
   saveCommonOrganizationLearners,
   update,
   updateCertificability,
