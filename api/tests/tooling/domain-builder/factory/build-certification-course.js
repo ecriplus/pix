@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../../../src/certification/shared/domain/models/CertificationIssueReport.js';
@@ -33,6 +34,7 @@ function buildCertificationCourse({
   numberOfChallenges,
   isAdjustedForAccessibility = false,
   lang,
+  framework = Frameworks.CORE,
 } = {}) {
   const certificationIssueReports = [];
   if (examinerComment && examinerComment !== '') {
@@ -78,6 +80,7 @@ function buildCertificationCourse({
     numberOfChallenges: finalNumberOfChallenges,
     isAdjustedForAccessibility,
     lang,
+    framework,
   });
 }
 
@@ -108,6 +111,7 @@ buildCertificationCourse.unpersisted = function ({
   lang,
   versionId = 123,
   candidateId = 456,
+  framework = Frameworks.CORE,
 } = {}) {
   return new CertificationCourse({
     firstName,
@@ -137,6 +141,7 @@ buildCertificationCourse.unpersisted = function ({
     lang,
     versionId,
     candidateId,
+    framework,
   });
 };
 

@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
 
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import * as certificationCourseRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
@@ -37,6 +38,7 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         verificationCode: 'MONCODE',
         maxReachableLevelOnCertificationDate: 7,
         abortReason: null,
+        framework: Frameworks.CORE,
       };
 
       databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
