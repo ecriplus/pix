@@ -87,7 +87,15 @@ export class FillEmptySubscriptionColumnsInCertificationCandidatesTable extends 
 
 async function selectCertificationCandidatesToProcess(startId, chunkSize) {
   return await knex
-    .select('certification-candidates.id', 'certification-subscriptions.type', 'complementary-certifications.key')
+    .select({
+      id: 'certification-candidates.id',
+      keys: knex.raw(
+        `json_agg(
+          "complementary-certifications"."key"
+          ORDER BY "complementary-certifications".key NULLS LAST
+        )`,
+      ),
+    })
     .from('certification-candidates')
     .join('certification-subscriptions', function () {
       this.on({ 'certification-candidates.id': 'certification-subscriptions.certificationCandidateId' });
@@ -99,6 +107,7 @@ async function selectCertificationCandidatesToProcess(startId, chunkSize) {
     )
     .whereNull('certification-candidates.subscription')
     .where('certification-candidates.id', '>=', startId)
+    .groupBy('certification-candidates.id')
     .limit(chunkSize);
 }
 
@@ -112,7 +121,7 @@ async function processCandidates(certificationCandidatesData, logger) {
     try {
       latestCandidateIdProcessed = certificationCandidateData.id;
 
-      const subscription = certificationCandidateData.key || Frameworks.CORE;
+      const subscription = certificationCandidateData?.keys?.[0] ?? Frameworks.CORE;
       const cerficationCandidateData = { id: certificationCandidateData.id, subscription };
       certificationCandidatesToUpdate.push(cerficationCandidateData);
     } catch (error) {
