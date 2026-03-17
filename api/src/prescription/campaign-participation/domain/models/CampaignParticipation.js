@@ -78,12 +78,17 @@ class CampaignParticipation {
   get dataToUpdateOnDeletion() {
     return {
       id: this.id,
-      attributes: {
-        deletedAt: this.deletedAt,
-        deletedBy: this.deletedBy,
-        userId: this.userId,
-        participantExternalId: this.participantExternalId,
-      },
+      deletedAt: this.deletedAt,
+      deletedBy: this.deletedBy,
+      userId: this.userId,
+      participantExternalId: this.participantExternalId,
+    };
+  }
+
+  get dataToUpdateOnAnonymisation() {
+    return {
+      id: this.id,
+      userId: this.userId,
     };
   }
 

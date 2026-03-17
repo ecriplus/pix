@@ -41,6 +41,8 @@ const deleteOrganizationLearners = async function ({
   const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
 
   const auditLoggingJobs = [];
+  const campaignParticipationsToDelete = [];
+  const allCampaignParticipationIds = [];
 
   await DomainTransaction.execute(async () => {
     const assessmentsToUpdate = [];
@@ -72,7 +74,7 @@ const deleteOrganizationLearners = async function ({
 
       for (const campaignParticipation of campaignParticipations) {
         campaignParticipation.delete(userId);
-        await campaignParticipationRepositoryFromBC.remove(campaignParticipation.dataToUpdateOnDeletion);
+        campaignParticipationsToDelete.push(campaignParticipation.dataToUpdateOnDeletion);
 
         auditLoggingJobs.push(
           AuditLoggingJob.forUser({
@@ -87,18 +89,23 @@ const deleteOrganizationLearners = async function ({
       }
 
       const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-      await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
-        campaignParticipationIds,
-      );
+      allCampaignParticipationIds.push(...campaignParticipationIds);
+
       const assessments = await assessmentRepository.getByCampaignParticipationIds(campaignParticipationIds);
 
       assessments.forEach((assessment) => assessment.detachCampaignParticipation());
 
       assessmentsToUpdate.push(...assessments);
-
-      await userRecommendedTrainingRepository.deleteCampaignParticipationIds({ campaignParticipationIds });
     }
+
     await assessmentRepository.batchRemoveParticipationId(assessmentsToUpdate);
+    await badgeAcquisitionRepository.deleteUserIdOnNonCertifiableBadgesForCampaignParticipations(
+      allCampaignParticipationIds,
+    );
+    await userRecommendedTrainingRepository.deleteCampaignParticipationIds({
+      campaignParticipationIds: allCampaignParticipationIds,
+    });
+    await campaignParticipationRepositoryFromBC.updateInBatchByIds(campaignParticipationsToDelete);
   });
 
   for (const auditLoggingJob of auditLoggingJobs) {

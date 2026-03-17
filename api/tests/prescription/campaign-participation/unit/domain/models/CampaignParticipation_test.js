@@ -69,12 +69,26 @@ describe('Unit | Domain | Models | CampaignParticipation', function () {
 
       expect(campaignParticipation.dataToUpdateOnDeletion).to.deep.equal({
         id: campaignParticipation.id,
-        attributes: {
-          userId: campaignParticipation.userId,
-          participantExternalId: campaignParticipation.participantExternalId,
-          deletedAt: campaignParticipation.deletedAt,
-          deletedBy: campaignParticipation.deletedBy,
-        },
+        userId: campaignParticipation.userId,
+        participantExternalId: campaignParticipation.participantExternalId,
+        deletedAt: campaignParticipation.deletedAt,
+        deletedBy: campaignParticipation.deletedBy,
+      });
+    });
+  });
+
+  describe('dataToUpdateOnAnonymisation', function () {
+    it('should return payload to send on repository with specific field', function () {
+      const campaignParticipation = new CampaignParticipation({
+        userId: 666,
+        participantExternalId: 'thisismyemailbuddy@buddy.org',
+        deletedAt: new Date('2024-04-03'),
+        deletedBy: 777,
+      });
+
+      expect(campaignParticipation.dataToUpdateOnAnonymisation).to.deep.equal({
+        id: campaignParticipation.id,
+        userId: campaignParticipation.userId,
       });
     });
   });

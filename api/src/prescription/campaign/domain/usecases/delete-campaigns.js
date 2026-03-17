@@ -33,10 +33,12 @@ const deleteCampaigns = async ({
     }
   }
 
-  for (const campaignId of campaignIds) {
-    const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
-    if (combinedCourses.length > 0 && !isPartOfDeletingCombinedCourse) {
-      throw new CampaignBelongsToCombinedCourseError();
+  if (!isPartOfDeletingCombinedCourse) {
+    for (const campaignId of campaignIds) {
+      const combinedCourses = await CombinedCourseRepository.findByCampaignId({ campaignId });
+      if (combinedCourses.length > 0) {
+        throw new CampaignBelongsToCombinedCourseError();
+      }
     }
   }
 
@@ -56,11 +58,10 @@ const deleteCampaigns = async ({
   campaignDestructor.delete({ keepPreviousDeletion });
 
   const auditLoggingJobs = [];
+  const campaignParticipationsToUpdate = [];
 
   await DomainTransaction.execute(async () => {
     for (const campaignParticipation of campaignDestructor.campaignParticipations) {
-      await campaignParticipationRepository.update(campaignParticipation);
-
       auditLoggingJobs.push(
         AuditLoggingJob.forUser({
           client: client ?? CLIENTS.ORGA,
@@ -71,7 +72,11 @@ const deleteCampaigns = async ({
           data: {},
         }),
       );
+
+      campaignParticipationsToUpdate.push(campaignParticipation.dataToUpdateOnDeletion);
     }
+
+    await campaignParticipationRepository.updateInBatchByIds(campaignParticipationsToUpdate);
 
     const campaignParticipationIds = campaignParticipationsToDelete.map(({ id }) => id);
 

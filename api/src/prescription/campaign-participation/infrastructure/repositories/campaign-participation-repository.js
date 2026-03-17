@@ -1,12 +1,10 @@
-import lodash from 'lodash';
-
 import { OrganizationLearnerParticipationTypes } from '../../../../quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import * as knowledgeElementRepository from '../../../../shared/infrastructure/repositories/knowledge-element-repository.js';
-import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { batchUpdate, fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { Campaign } from '../../../campaign/domain/models/Campaign.js';
 import { CampaignParticipationInfo } from '../../../campaign/domain/read-models/CampaignParticipationInfo.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
@@ -18,20 +16,13 @@ import { AvailableCampaignParticipation } from '../../domain/read-models/Availab
 
 const { STARTED, SHARED } = CampaignParticipationStatuses;
 
-const { pick } = lodash;
-
-const CAMPAIGN_PARTICIPATION_ATTRIBUTES = [
-  'participantExternalId',
-  'sharedAt',
-  'status',
-  'userId',
-  'organizationLearnerId',
-  'deletedAt',
-  'deletedBy',
-];
-
 const updateWithSnapshot = async function (campaignParticipation) {
-  await update(campaignParticipation);
+  const knexConn = DomainTransaction.getConnection();
+
+  await knexConn('campaign-participations')
+    .where({ id: campaignParticipation.id })
+    .update({ sharedAt: campaignParticipation.sharedAt, status: campaignParticipation.status });
+
   const campaign = await campaignRepository.getByCampaignParticipationId(campaignParticipation.id);
   if (campaign.isExam) {
     return;
@@ -44,14 +35,6 @@ const updateWithSnapshot = async function (campaignParticipation) {
     snapshot: new KnowledgeElementCollection(knowledgeElements).toSnapshot(),
     campaignParticipationId: campaignParticipation.id,
   });
-};
-
-const update = async function (campaignParticipation) {
-  const knexConn = DomainTransaction.getConnection();
-
-  await knexConn('campaign-participations')
-    .where({ id: campaignParticipation.id })
-    .update(pick(campaignParticipation, CAMPAIGN_PARTICIPATION_ATTRIBUTES));
 };
 
 const getLocked = async function (id) {
@@ -157,9 +140,12 @@ const getAllCampaignParticipationsForOrganizationLearner = async function ({
   return campaignParticipations.map((campaignParticipation) => new CampaignParticipation(campaignParticipation));
 };
 
-const remove = async function ({ id, attributes }) {
-  const knexConn = DomainTransaction.getConnection();
-  return await knexConn('campaign-participations').where({ id }).update(attributes);
+const updateInBatchByIds = async function (campaignParticipations) {
+  return await batchUpdate({
+    tableName: 'campaign-participations',
+    primaryKeyName: 'id',
+    rows: campaignParticipations,
+  });
 };
 
 const findInfoByCampaignId = async function ({ campaignId, page, since }) {
@@ -346,7 +332,6 @@ export {
   getSharedParticipationIds,
   hasAssessmentParticipations,
   isRetrying,
-  remove,
-  update,
+  updateInBatchByIds,
   updateWithSnapshot,
 };

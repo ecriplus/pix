@@ -241,7 +241,12 @@ export const getCampaignParticipations = async function ({ campaignId, page, sin
  */
 export const deleteActiveCampaigns = withTransaction(async ({ userId, organizationId }) => {
   const campaignIdsToDelete = await usecases.findActiveCampaignIdsByOrganization({ organizationId });
-  await usecases.deleteCampaigns({ userId, organizationId, campaignIds: campaignIdsToDelete });
+  await usecases.deleteCampaigns({
+    userId,
+    organizationId,
+    campaignIds: campaignIdsToDelete,
+    isPartOfDeletingCombinedCourse: true,
+  });
 });
 
 export const deleteCampaignsInCombinedCourses = async ({

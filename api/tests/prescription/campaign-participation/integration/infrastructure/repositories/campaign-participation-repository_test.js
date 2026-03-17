@@ -52,7 +52,7 @@ describe('Integration | Repository | Campaign Participation', function () {
         clock.restore();
       });
 
-      it('persists the campaign-participation changes', async function () {
+      it('persists the campaign-participation changes shared status and date only', async function () {
         // given
         campaignParticipation.campaign = {};
         campaignParticipation.assessments = [];
@@ -73,7 +73,8 @@ describe('Integration | Repository | Campaign Participation', function () {
           .first();
         // then
         expect(updatedCampaignParticipation.status).to.equals(SHARED);
-        expect(updatedCampaignParticipation.participantExternalId).to.equals('Laura');
+        expect(updatedCampaignParticipation.sharedAt).to.deep.equals(campaignParticipation.sharedAt);
+        expect(updatedCampaignParticipation.participantExternalId).to.equals('participantExternalId');
       });
 
       it('should save a snapshot', async function () {
@@ -174,7 +175,6 @@ describe('Integration | Repository | Campaign Participation', function () {
         campaignParticipation.isShared = true;
         campaignParticipation.sharedAt = new Date('2020-01-02');
         campaignParticipation.status = SHARED;
-        campaignParticipation.participantExternalId = 'Laura';
 
         // when
         await campaignParticipationRepository.updateWithSnapshot(campaignParticipation);
@@ -183,8 +183,10 @@ describe('Integration | Repository | Campaign Participation', function () {
         const updatedCampaignParticipation = await knex('campaign-participations')
           .where({ id: campaignParticipation.id })
           .first();
+
         expect(updatedCampaignParticipation.status).to.equals(SHARED);
-        expect(updatedCampaignParticipation.participantExternalId).to.equals('Laura');
+        expect(updatedCampaignParticipation.sharedAt).to.deep.equals(campaignParticipation.sharedAt);
+        expect(updatedCampaignParticipation.participantExternalId).to.equals('participantExternalId');
       });
 
       it('should left existing snapshot untouched', async function () {
@@ -505,55 +507,7 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
-  describe('#update', function () {
-    it('save the changes of the campaignParticipation', async function () {
-      const campaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        status: STARTED,
-        sharedAt: null,
-      });
-
-      await databaseBuilder.commit();
-
-      await DomainTransaction.execute(async () => {
-        await campaignParticipationRepository.update({
-          ...campaignParticipationToUpdate,
-          sharedAt: new Date('2021-01-01'),
-          status: SHARED,
-        });
-      });
-
-      const campaignParticipation = await knex('campaign-participations')
-        .where({ id: campaignParticipationToUpdate.id })
-        .first();
-
-      expect(campaignParticipation.sharedAt).to.deep.equals(new Date('2021-01-01'));
-      expect(campaignParticipation.status).to.equals(SHARED);
-    });
-
-    it('should not update campaignId', async function () {
-      const campaignId = databaseBuilder.factory.buildCampaign().id;
-      const campaignParticipationToUpdate = databaseBuilder.factory.buildCampaignParticipation({
-        campaignId,
-        status: STARTED,
-        sharedAt: null,
-      });
-
-      await databaseBuilder.commit();
-      const participation = new CampaignParticipation(campaignParticipationToUpdate);
-
-      await DomainTransaction.execute(async () => {
-        await campaignParticipationRepository.update(participation);
-      });
-
-      const campaignParticipation = await knex('campaign-participations')
-        .where({ id: campaignParticipationToUpdate.id })
-        .first();
-
-      expect(campaignParticipation.campaignId).to.equal(campaignId);
-    });
-  });
-
-  describe('#remove', function () {
+  describe('#updateInBatchByIds', function () {
     it('should mark as deleted given participation', async function () {
       const ownerId = databaseBuilder.factory.buildUser().id;
       const participantUserId = databaseBuilder.factory.buildUser().id;
@@ -579,13 +533,13 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       const deletedAt = new Date('2022-11-01T23:00:00Z');
 
-      await campaignParticipationRepository.remove({
-        id: campaignParticipationToDelete.id,
-        attributes: {
+      await campaignParticipationRepository.updateInBatchByIds([
+        {
+          id: campaignParticipationToDelete.id,
           deletedAt,
           deletedBy: ownerId,
         },
-      });
+      ]);
 
       const deletedCampaignParticipation = await knex('campaign-participations').whereNotNull('deletedAt').first();
 
@@ -612,15 +566,15 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       const deletedAt = new Date('2022-11-01T23:00:00Z');
 
-      await campaignParticipationRepository.remove({
-        id: campaignParticipation.id,
-        attributes: {
+      await campaignParticipationRepository.updateInBatchByIds([
+        {
+          id: campaignParticipation.id,
           participantExternalId: null,
           userId: null,
           deletedAt,
           deletedBy: ownerId,
         },
-      });
+      ]);
 
       const deletedCampaignParticipation = await knex('campaign-participations').first();
 
