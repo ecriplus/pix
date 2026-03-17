@@ -47,8 +47,10 @@ const deleteOrganizationLearners = async function ({
   await DomainTransaction.execute(async () => {
     const organizationLearnersToUpdate = [];
     const organizationProfileRewardsToUpdate = [];
+    const organizationLearnerIds = [];
 
     for (const organizationLearner of organizationLearnersToDelete) {
+      organizationLearnerIds.push(organizationLearner.id);
       const organizationLearnerRewards = organizationProfileRewards.filter(
         (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
       );
@@ -66,16 +68,18 @@ const deleteOrganizationLearners = async function ({
           data: {},
         }),
       );
+    }
 
-      const campaignParticipations =
-        await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearner({
-          organizationLearnerId: organizationLearner.id,
-          withDeletedParticipation: keepPreviousDeletion,
-        });
+    const campaignParticipations =
+      await campaignParticipationRepositoryFromBC.getAllCampaignParticipationsForOrganizationLearnerIds({
+        organizationLearnerIds,
+        withDeletedParticipation: keepPreviousDeletion,
+      });
 
     for (const campaignParticipation of campaignParticipations) {
       campaignParticipation.delete(userId);
       campaignParticipationsToDelete.push(campaignParticipation.dataToUpdateOnDeletion);
+      allCampaignParticipationIds.push(campaignParticipation.id);
 
       auditLoggingJobs.push(
         AuditLoggingJob.forUser({
@@ -87,12 +91,6 @@ const deleteOrganizationLearners = async function ({
           data: {},
         }),
       );
-    }
-
-      const campaignParticipationIds = campaignParticipations.map(({ id }) => id);
-      allCampaignParticipationIds.push(...campaignParticipationIds);
-
-
     }
 
     const assessments = await assessmentRepository.getByCampaignParticipationIds(allCampaignParticipationIds);
