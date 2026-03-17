@@ -487,15 +487,17 @@
                     },
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
-                      "type": "short-video",
+                      "type": "video",
                       "title": "Le logiciel ajuste ses paramètres.",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper2_v2.mp4",
-                      "transcription": "Le logiciel ajuste ses paramètres."
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper2.mp4",
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper1.png",
+                      "subtitles": "",
+                      "transcription": "<p>Le logiciel ajuste ses paramètres.</p>"
                     },
                     {
                       "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
                       "type": "qcu-discovery",
-                      "instruction": "Et maintenant, est-ce que la prédiction est correcte ?<br>",
+                      "instruction": "<p>Et maintenant, est-ce que la prédiction est correcte ?</p><br>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -526,12 +528,12 @@
                     },
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
-                      "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.png",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Animation où l'on voit les paramètres bouger",
-                      "licence": ""
+                      "type": "video",
+                      "title": "",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.mp4",
+                      "poster": "",
+                      "subtitles": "",
+                      "transcription": ""
                     },
                     {
                       "id": "ecb6c63b-ec65-4339-8e19-66fed405fa04",
@@ -843,7 +845,9 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
@@ -866,7 +870,9 @@
                         "content": "Etiquette"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
