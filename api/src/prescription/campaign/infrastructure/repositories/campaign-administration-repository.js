@@ -4,6 +4,7 @@ import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
+import { batchUpdate } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { UnknownCampaignId } from '../../domain/errors.js';
 import { Campaign } from '../../domain/models/Campaign.js';
 
@@ -79,13 +80,12 @@ const CAMPAIGN_DELETION_ATTRIBUTES = [
   'deletedBy',
 ];
 
-const remove = async function (campaigns) {
-  const updatedCampaigns = [];
-  for (const campaign of campaigns) {
-    const updatedCampaign = await _update(campaign, CAMPAIGN_DELETION_ATTRIBUTES);
-    updatedCampaigns.push(updatedCampaign);
-  }
-  return updatedCampaigns;
+const removeInBatch = async function (campaigns) {
+  await batchUpdate({
+    tableName: 'campaigns',
+    primaryKeyName: 'id',
+    rows: campaigns.map((campaign) => ({ id: campaign.id, ..._.pick(campaign, CAMPAIGN_DELETION_ATTRIBUTES) })),
+  });
 };
 
 const _update = async function (campaign, attributes) {
@@ -194,4 +194,14 @@ export const deleteExternalIdLabelFromCampaigns = (campaignIds) => {
     .whereIn('campaign-features.campaignId', campaignIds);
 };
 
-export { archiveCampaigns, findByIds, get, getByCode, isFromSameOrganization, remove, save, swapCampaignCodes, update };
+export {
+  archiveCampaigns,
+  findByIds,
+  get,
+  getByCode,
+  isFromSameOrganization,
+  removeInBatch,
+  save,
+  swapCampaignCodes,
+  update,
+};

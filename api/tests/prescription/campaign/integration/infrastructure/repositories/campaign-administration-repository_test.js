@@ -682,15 +682,15 @@ describe('Integration | Repository | Campaign Administration', function () {
     });
   });
 
-  describe('#remove', function () {
-    let campaign, userId;
+  describe('#removeInBatch', function () {
+    let campaign1, campaign2, userId;
     let clock;
     const frozenTime = new Date('1992-07-07');
 
     beforeEach(function () {
       clock = sinon.useFakeTimers({ now: frozenTime, toFake: ['Date'] });
 
-      campaign = new Campaign(
+      campaign1 = new Campaign(
         databaseBuilder.factory.buildCampaign({
           name: 'Campaign name',
           title: 'Campaign title',
@@ -704,6 +704,7 @@ describe('Integration | Repository | Campaign Administration', function () {
           isForAbsoluteNovice: false,
         }),
       );
+      campaign2 = new Campaign(databaseBuilder.factory.buildCampaign());
       userId = databaseBuilder.factory.buildUser().id;
 
       return databaseBuilder.commit();
@@ -713,9 +714,10 @@ describe('Integration | Repository | Campaign Administration', function () {
       clock.restore();
     });
 
-    it('should remove the correct campaign', async function () {
+    it('should remove the correct campaigns', async function () {
       // given
-      campaign.delete(userId);
+      campaign1.delete(userId);
+      campaign2.delete(userId);
 
       const anotherCampaign = databaseBuilder.factory.buildCampaign({
         name: 'Another Campaign',
@@ -724,15 +726,20 @@ describe('Integration | Repository | Campaign Administration', function () {
       await databaseBuilder.commit();
 
       // when
-      await campaignAdministrationRepository.remove([campaign]);
+      await campaignAdministrationRepository.removeInBatch([campaign1, campaign2]);
 
       // then
-      const removedCampaign = await knex.from('campaigns').where({ id: campaign.id }).first();
+      const firstRemovedCampaign = await knex.from('campaigns').where({ id: campaign1.id }).first();
+      const secondRemovedCampaign = await knex.from('campaigns').where({ id: campaign2.id }).first();
       const notRemovedCampaign = await knex.from('campaigns').where({ id: anotherCampaign.id }).first();
 
-      expect(removedCampaign.name).to.equal('(anonymized)');
-      expect(removedCampaign.deletedAt).to.deep.equal(frozenTime);
-      expect(removedCampaign.deletedBy).to.equal(userId);
+      expect(firstRemovedCampaign.name).to.equal('(anonymized)');
+      expect(firstRemovedCampaign.deletedAt).to.deep.equal(frozenTime);
+      expect(firstRemovedCampaign.deletedBy).to.equal(userId);
+
+      expect(secondRemovedCampaign.name).to.equal('(anonymized)');
+      expect(secondRemovedCampaign.deletedAt).to.deep.equal(frozenTime);
+      expect(secondRemovedCampaign.deletedBy).to.equal(userId);
 
       expect(notRemovedCampaign.name).to.equal('Another Campaign');
       expect(notRemovedCampaign.title).to.equal('Another title');
@@ -742,14 +749,14 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should remove campaign deletion attributes fields', async function () {
       // given
-      campaign.delete(userId);
+      campaign1.delete(userId);
 
       // when
-      await campaignAdministrationRepository.remove([campaign]);
-      const campaignRemoved = await knex.from('campaigns').where({ id: campaign.id }).first();
+      await campaignAdministrationRepository.removeInBatch([campaign1]);
+      const campaignRemoved = await knex.from('campaigns').where({ id: campaign1.id }).first();
 
       // then
-      expect(campaignRemoved.id).to.equal(campaign.id);
+      expect(campaignRemoved.id).to.equal(campaign1.id);
       expect(campaignRemoved.name).to.equal('(anonymized)');
       expect(campaignRemoved.title).to.be.null;
       expect(campaignRemoved.customLandingPageText).to.be.null;
@@ -763,18 +770,18 @@ describe('Integration | Repository | Campaign Administration', function () {
 
     it('should not update other fields', async function () {
       // given
-      campaign.updateFields({
+      campaign1.updateFields({
         multipleSendings: false,
         type: 'PROFILE_COLLECTION',
       });
-      campaign.delete(userId);
+      campaign1.delete(userId);
 
       // when
-      await campaignAdministrationRepository.remove([campaign]);
-      const campaignRemoved = await knex.from('campaigns').where({ id: campaign.id }).first();
+      await campaignAdministrationRepository.removeInBatch([campaign1]);
+      const campaignRemoved = await knex.from('campaigns').where({ id: campaign1.id }).first();
 
       // then
-      expect(campaignRemoved.id).to.equal(campaign.id);
+      expect(campaignRemoved.id).to.equal(campaign1.id);
       expect(campaignRemoved.multipleSendings).to.be.true;
       expect(campaignRemoved.type).to.equal('ASSESSMENT');
     });
