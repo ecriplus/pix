@@ -152,6 +152,22 @@ describe('Integration | Repository | learning-content', function () {
       thematicId: 'recThematic3',
     });
 
+    databaseBuilder.factory.learningContent.buildTube({
+      id: 'recTubeNotitle',
+      name: '@recTubeNotitle_name',
+      title: 'recTubeNotitle_title',
+      description: 'recTubeNotitle_description',
+      practicalTitle_i18n: { fr: null, en: null },
+      practicalDescription_i18n: {
+        fr: null,
+        en: null,
+      },
+      isMobileCompliant: false,
+      isTabletCompliant: false,
+      competenceId: 'recCompetence3',
+      thematicId: 'recThematic3',
+    });
+
     const skill2DB = databaseBuilder.factory.learningContent.buildSkill({
       id: 'recSkill2',
       name: '@tube2_name1',
@@ -454,6 +470,30 @@ describe('Integration | Repository | learning-content', function () {
       expect(results).lengthOf(2);
       expect(results[0]).deep.equals(framework2Fr);
       expect(results[1]).deep.equals(framework1Fr);
+    });
+
+    it('should filter out tubes without practicalTitle', async function () {
+      // given
+      const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({ organizationId: anotherOrganizationId, targetProfileId });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube4', level: 4 });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTubeNotitle', level: 4 });
+      await databaseBuilder.commit();
+
+      framework2Fr.areas = [area2Fr];
+      area2Fr.competences = [competence3Fr];
+      competence3Fr.thematics = [thematic3Fr];
+      competence3Fr.tubes = [tube4Fr];
+      thematic3Fr.tubes = [tube4Fr];
+      tube4Fr.skills = [];
+
+      // when
+      const results = await learningContentRepository.findByOrganizationId({ organizationId: anotherOrganizationId });
+      // then
+      expect(results).lengthOf(1);
+      expect(results[0]).deep.equals(framework2Fr);
     });
 
     context('when organization has no target profile shares', function () {

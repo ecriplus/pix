@@ -55,10 +55,11 @@ export async function findByOrganizationId({ organizationId, locale }) {
     return [];
   }
 
-  const tubes = await tubeRepository.findByRecordIds(
+  const allTubes = await tubeRepository.findByRecordIds(
     tubesWithLevel.map((dto) => dto.id),
     locale,
   );
+  const tubes = allTubes.filter((tube) => tube.practicalTitle);
 
   const frameworks = await _getLearningContentByTubes(tubes, locale);
 
