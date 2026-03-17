@@ -1,13 +1,13 @@
-import { FillNewColumnsInCertificationCandidatesTable } from '../../../../scripts/certification/fill-new-columns-in-certification-candidates-table.js';
+import { FillEmptySubscriptionColumnsInCertificationCandidatesTable } from '../../../../scripts/certification/fill-empty-subscription-columns-in-certification-candidates-table.js';
 import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
-describe('Integration | Certification | Scripts | Fill new columns in certification candidate tables', function () {
+describe('Integration | Certification | Scripts | Fill empty subscription columns in certification candidate tables', function () {
   let logger, script;
 
   beforeEach(function () {
     logger = { info: sinon.stub(), error: sinon.stub() };
-    script = new FillNewColumnsInCertificationCandidatesTable();
+    script = new FillEmptySubscriptionColumnsInCertificationCandidatesTable();
   });
 
   it('should not commit if dryRun', async function () {
