@@ -98,6 +98,10 @@ module.exports = function (environment) {
           CODE: '403',
           I18N_KEY: 'common.api-error-messages.login-user-blocked-error',
         },
+        USER_IS_BLOCKED_WITH_USERNAME: {
+          CODE: '403',
+          I18N_KEY: 'common.api-error-messages.login-user-blocked-with-username-error',
+        },
         INTERNAL_SERVER_ERROR: {
           CODE: '500',
           I18N_KEY: 'common.api-error-messages.internal-server-error',

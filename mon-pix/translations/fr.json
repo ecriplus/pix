@@ -63,6 +63,7 @@
       "login-unauthorized-with-user-name-error": "L'identifiant et/ou le mot de passe saisis sont incorrects.'<br>'En cas d’oubli, '<strong>'contactez votre enseignant'</strong>' pour réinitialiser votre mot de passe et/ou récupérer votre identifiant.",
       "login-unexpected-error": "Impossible de se connecter. Veuillez réessayer dans quelques instants. Si le problème persiste, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'contactez-nous via le centre d’aide'</a>'.",
       "login-user-blocked-error": "Votre compte est bloqué car vous avez effectué trop de tentatives de connexion. Pour le débloquer, '<'a href=\"{url}\"'>'contactez-nous'</a>'.",
+      "login-user-blocked-with-username-error": "Votre compte est bloqué car vous avez effectué trop de tentatives de connexion. Pour le débloquer, '<strong>'contactez votre enseignant'</strong>' ; en cas d'indisponibilité, '<'a href=\"{url}\"'>'contactez-nous'</a>'.",
       "login-user-temporary-blocked-error": "Vous avez effectué trop de tentatives de connexion, votre compte Pix est bloqué temporairement pendant {blockingDurationMinutes} minutes. Réessayez plus tard ou cliquez sur '<'a href=\"{url}\"'>'mot de passe oublié'</a>' pour le réinitialiser.",
       "login-user-temporary-blocked-with-username-error": "Vous avez effectué trop de tentatives de connexion, votre compte Pix est bloqué temporairement pendant {blockingDurationMinutes} minutes.'<br>'En cas d’oubli, '<strong>'contactez votre enseignant'</strong>' pour réinitialiser votre mot de passe et/ou récupérer votre identifiant."
     },

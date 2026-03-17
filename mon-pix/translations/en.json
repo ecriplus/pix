@@ -63,6 +63,7 @@
       "login-unauthorized-with-user-name-error": "There was an error in the email address or username/password entered.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
       "login-unexpected-error": "Unable to connect. Please try again in a few moments. If the problem persists, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'please contact us via the help center'</a>'.",
       "login-user-blocked-error": "Your account has reached the maximum number of failed login attempts and has been blocked. Please '<'a href=\"{url}\"'>'contact us'</a>' to unblock it.",
+      "login-user-blocked-with-username-error": "Your account has been locked because you have made too many login attempts. To unlock it, please  '<strong>'contact your teacher'</strong>'; if they are unavailable, '<'a href=\"{url}\"'>'please contact us'</a>'.",
       "login-user-temporary-blocked-error": "You have made too many login attempts, your Pix account is temporarily blocked for {blockingDurationMinutes} minutes. Try again later or click on '<'a href=\"{url}\"'>'forgotten password'</a>' to reset it.",
       "login-user-temporary-blocked-with-username-error": "You have made too many login attempts, your Pix account is temporarily blocked for {blockingDurationMinutes} minutes.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login."
     },

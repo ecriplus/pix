@@ -63,6 +63,7 @@
       "login-unauthorized-with-user-name-error": "Il nome utente e/o la password inseriti non sono corretti.'<br>'In caso di dimenticanza, '<strong>'contatta il tuo insegnante'</strong>' per reimpostare la password e/o recuperare il nome utente.",
       "login-unexpected-error": "Impossibile connettersi. Riprovare tra qualche istante. Se il problema persiste, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'contattateci tramite il centro assistenza'</a>'.",
       "login-user-blocked-error": "Il suo account è bloccato perché ha effettuato troppi tentativi di connessione. Per sbloccarlo, '<'a href=\"{url}\"'>'contattaci'</a>'.",
+      "login-user-blocked-with-username-error": "Il tuo account è bloccato perché hai effettuato troppi tentativi di accesso. Per sbloccarlo, '<strong>'contatta il tuo insegnante'</strong>' ; se non è disponibile, '<'a href=\"{url}\"'>'contattaci'</a>'.",
       "login-user-temporary-blocked-error": "Hai effettuato troppi tentativi di accesso, il tuo account Pix è temporaneamente bloccato per {blockingDurationMinutes} minuti. Riprova più tardi o clicca su '<'a href=\"{url}\"'>'password dimenticata'</a>' per resettarla.",
       "login-user-temporary-blocked-with-username-error": "Hai effettuato troppi tentativi di accesso, il tuo account Pix è temporaneamente bloccato per {blockingDurationMinutes} minuti.'<br>'In caso di dimenticanza, '<strong>'contatta il tuo insegnante'</strong>' per reimpostare la password e/o recuperare l'accesso."
     },

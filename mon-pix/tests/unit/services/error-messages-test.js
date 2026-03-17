@@ -70,7 +70,7 @@ module('Unit | Service | errorMessages', function (hooks) {
           // given
           const error = {
             code: 'USER_IS_TEMPORARY_BLOCKED',
-            meta: { locale: 'fr', blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: false },
+            meta: { blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: false },
           };
 
           // when
@@ -92,7 +92,7 @@ module('Unit | Service | errorMessages', function (hooks) {
           // given
           const error = {
             code: 'USER_IS_TEMPORARY_BLOCKED',
-            meta: { locale: 'fr', blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: true },
+            meta: { blockingDurationMs: 60 * 1000, isLoginFailureWithUsername: true },
           };
 
           // when
@@ -111,22 +111,42 @@ module('Unit | Service | errorMessages', function (hooks) {
         });
       });
 
-      test('USER_IS_BLOCKED', function (assert) {
-        // given
-        const error = { code: 'USER_IS_BLOCKED', meta: { locale: 'fr' } };
+      module('USER_IS_BLOCKED', function () {
+        test('When isLoginFailureWithUsername is false', function (assert) {
+          // given
+          const error = { code: 'USER_IS_BLOCKED', meta: { isLoginFailureWithUsername: false } };
 
-        // when
-        const errorMessages = this.owner.lookup('service:errorMessages');
-        const message = errorMessages.getAuthenticationErrorMessage(error);
+          // when
+          const errorMessages = this.owner.lookup('service:errorMessages');
+          const message = errorMessages.getAuthenticationErrorMessage(error);
 
-        // then
-        assert.deepEqual(
-          message,
-          t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
-            url: 'https://support.pix.org/support/tickets/new',
-            htmlSafe: true,
-          }),
-        );
+          // then
+          assert.deepEqual(
+            message,
+            t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            }),
+          );
+        });
+
+        test('When isLoginFailureWithUsername is true', function (assert) {
+          // given
+          const error = { code: 'USER_IS_BLOCKED', meta: { isLoginFailureWithUsername: true } };
+
+          // when
+          const errorMessages = this.owner.lookup('service:errorMessages');
+          const message = errorMessages.getAuthenticationErrorMessage(error);
+
+          // then
+          assert.deepEqual(
+            message,
+            t(ENV.APP.API_ERROR_MESSAGES.USER_IS_BLOCKED_WITH_USERNAME.I18N_KEY, {
+              url: 'https://support.pix.org/support/tickets/new',
+              htmlSafe: true,
+            }),
+          );
+        });
       });
 
       module('MISSING_OR_INVALID_CREDENTIALS', function () {
@@ -135,7 +155,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             // given
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', isLoginFailureWithUsername: false },
+              meta: { isLoginFailureWithUsername: false },
             };
 
             // when
@@ -154,7 +174,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             const remainingAttempts = 8;
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', remainingAttempts, isLoginFailureWithUsername: false },
+              meta: { remainingAttempts, isLoginFailureWithUsername: false },
             };
 
             // when
@@ -177,7 +197,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             // given
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', isLoginFailureWithUsername: true },
+              meta: { isLoginFailureWithUsername: true },
             };
 
             // when
@@ -196,7 +216,7 @@ module('Unit | Service | errorMessages', function (hooks) {
             const remainingAttempts = 8;
             const error = {
               code: 'MISSING_OR_INVALID_CREDENTIALS',
-              meta: { locale: 'fr', remainingAttempts, isLoginFailureWithUsername: true },
+              meta: { remainingAttempts, isLoginFailureWithUsername: true },
             };
 
             // when
