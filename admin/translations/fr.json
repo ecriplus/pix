@@ -643,6 +643,9 @@
         "head-organization-id": "ID de l'organisation tête de réseau"
       },
       "list": {
+        "filters": {
+          "name": "Nom du réseau"
+        },
         "table": {
           "caption": "Liste des réseaux. Contient le nom et l'ID."
         }

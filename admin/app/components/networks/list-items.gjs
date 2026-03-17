@@ -1,9 +1,18 @@
+import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
+import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 
 <template>
+  <PixFilterBanner @title={{t "common.filters.title"}}>
+    <PixInput value={{@name}} oninput={{fn @triggerFiltering "name"}}>
+      <:label>{{t "components.networks.list.filters.name"}}</:label>
+    </PixInput>
+  </PixFilterBanner>
+
   {{#if @networks}}
     <PixTable @variant="admin" @caption={{t "components.networks.list.table.caption"}} @data={{@networks}}>
       <:columns as |network context|>
