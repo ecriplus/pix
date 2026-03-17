@@ -487,7 +487,7 @@
                     },
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
-                      "type": "image",
+                      "type": "video",
                       "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper2_v2.mp4",
                       "alt": "",
                       "alternativeText": "",
@@ -528,7 +528,7 @@
                     },
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
-                      "type": "image",
+                      "type": "video",
                       "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.png",
                       "alt": "",
                       "alternativeText": "",
