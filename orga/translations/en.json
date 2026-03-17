@@ -499,7 +499,7 @@
           "first-name": "First name",
           "last-name": "Last name"
         },
-        "label": "Udate the participant's name",
+        "label": "Update the participant's name",
         "success-message": "The participant's name has been successfully updated."
       }
     }
