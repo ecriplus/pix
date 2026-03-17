@@ -21,66 +21,56 @@ describe('Integration | Certification | Scripts | Fill empty subscription column
     const certificationCandidateDataBefore = await knex('certification-candidates').first();
     expect(certificationCandidateDataBefore.subscription).to.be.null;
 
-    await script.handle({ options: { dryRun: true, startId: 0, chunkSize: 1 }, logger });
+    await script.handle({ options: { dryRun: true, throttleDelay: 1, startId: 0, chunkSize: 1 }, logger });
 
     const certificationCandidateDataAfter = await knex('certification-candidates').first();
     expect(certificationCandidateDataAfter.subscription).to.be.null;
   });
 
   it('should fill subscription in certification candidate', async function () {
-    const reconciledAtArchivedVersion = new Date('2025-07-01');
-    const reconciledAtCurrentVersion = new Date('2026-02-01');
-    const candidateIds = [];
-
     const droitComplementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification.droit().id;
     const cleaComplementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification.clea().id;
 
-    _createCertificationCandidates({
-      reconciledAt: reconciledAtArchivedVersion,
-      subscriptions: [
-        { frameworkType: Frameworks.CORE, id: null },
-        { frameworkType: Frameworks.DROIT, id: droitComplementaryCertificationId },
-        { frameworkType: Frameworks.CLEA, id: cleaComplementaryCertificationId },
-      ],
-      candidateIds,
+    const candidateForCore = databaseBuilder.factory.buildCertificationCandidate();
+    databaseBuilder.factory.buildCoreSubscription({
+      certificationCandidateId: candidateForCore.id,
     });
-    _createCertificationCandidates({
-      reconciledAt: reconciledAtCurrentVersion,
-      subscriptions: [
-        { frameworkType: Frameworks.CORE, id: null },
-        { frameworkType: Frameworks.DROIT, id: droitComplementaryCertificationId },
-        { frameworkType: Frameworks.CLEA, id: cleaComplementaryCertificationId },
-      ],
-      candidateIds,
+
+    const candidateForDroit = databaseBuilder.factory.buildCertificationCandidate();
+    databaseBuilder.factory.buildComplementaryCertificationSubscription({
+      certificationCandidateId: candidateForDroit.id,
+      complementaryCertificationId: droitComplementaryCertificationId,
+    });
+
+    const candidateForClea = databaseBuilder.factory.buildCertificationCandidate();
+    databaseBuilder.factory.buildComplementaryCertificationSubscription({
+      certificationCandidateId: candidateForClea.id,
+      complementaryCertificationId: cleaComplementaryCertificationId,
+    });
+    databaseBuilder.factory.buildCoreSubscription({
+      certificationCandidateId: candidateForClea.id,
     });
 
     await databaseBuilder.commit();
 
     const certificationCandidateDataBefore = await knex('certification-candidates').orderBy('id');
-    expect(certificationCandidateDataBefore.length).to.equal(6);
-    for (let i = 0; i < 6; i++) {
+    expect(certificationCandidateDataBefore.length).to.equal(3);
+    for (let i = 0; i < 3; i++) {
       expect(certificationCandidateDataBefore[i].subscription).to.be.null;
     }
 
-    const expectedSubscriptions = [
-      Frameworks.CORE,
-      Frameworks.DROIT,
-      Frameworks.CLEA,
-      Frameworks.CORE,
-      Frameworks.DROIT,
-      Frameworks.CLEA,
-    ];
+    const expectedSubscriptions = [Frameworks.CORE, Frameworks.DROIT, Frameworks.CLEA];
 
     await script.handle({
-      options: { dryRun: false, startId: certificationCandidateDataBefore[0].id, chunkSize: 2 },
+      options: { dryRun: false, throttleDelay: 1, startId: certificationCandidateDataBefore[0].id, chunkSize: 2 },
       logger,
     });
 
     const certificationCandidateDataAfter = await knex('certification-candidates').orderBy('id');
 
-    expect(certificationCandidateDataAfter.length).to.equal(6);
+    expect(certificationCandidateDataAfter.length).to.equal(3);
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 3; i++) {
       expect(certificationCandidateDataAfter[i].subscription).to.equal(expectedSubscriptions[i]);
     }
   });
@@ -100,7 +90,7 @@ describe('Integration | Certification | Scripts | Fill empty subscription column
     expect(certificationCandidateDataBefore.subscription).to.equal('CORE');
 
     await script.handle({
-      options: { dryRun: false, startId: candidateId, chunkSize: 2 },
+      options: { dryRun: false, throttleDelay: 1, startId: candidateId, chunkSize: 2 },
       logger,
     });
 
@@ -113,18 +103,21 @@ describe('Integration | Certification | Scripts | Fill empty subscription column
   it('should provide appropriate logger informations', async function () {
     const candidateIds = [];
 
-    _createCertificationCandidates({
-      subscriptions: [
-        { frameworkType: Frameworks.CORE, id: null },
-        { frameworkType: Frameworks.CORE, id: null },
-        { frameworkType: Frameworks.CORE, id: null },
-        { frameworkType: Frameworks.CORE, id: null },
-      ],
-      candidateIds,
-    });
+    let candidateForCore;
+    for (let i = 0; i < 4; i++) {
+      candidateForCore = databaseBuilder.factory.buildCertificationCandidate();
+      databaseBuilder.factory.buildCoreSubscription({
+        certificationCandidateId: candidateForCore.id,
+      });
+      candidateIds.push(candidateForCore.id);
+    }
+
     await databaseBuilder.commit();
 
-    await script.handle({ options: { dryRun: false, startId: candidateIds[0], chunkSize: 2 }, logger });
+    await script.handle({
+      options: { dryRun: false, throttleDelay: 1, startId: candidateIds[0], chunkSize: 2 },
+      logger,
+    });
 
     expect(logger.info.getCall(0)).to.have.been.calledWithExactly('Script execution started');
     expect(logger.info.getCall(1)).to.have.been.calledWithExactly(
@@ -144,30 +137,3 @@ describe('Integration | Certification | Scripts | Fill empty subscription column
     );
   });
 });
-
-function _createCertificationCandidates({ reconciledAt, subscriptions, candidateIds = [] }) {
-  const sessionId = databaseBuilder.factory.buildSession().id;
-
-  for (const subscription of subscriptions) {
-    const userId = databaseBuilder.factory.buildUser().id;
-    const candidateId = databaseBuilder.factory.buildCertificationCandidate({
-      sessionId,
-      reconciledAt,
-      userId,
-    }).id;
-
-    if (subscription.frameworkType == Frameworks.CORE || subscription.frameworkType == Frameworks.CLEA) {
-      databaseBuilder.factory.buildCoreSubscription({
-        certificationCandidateId: candidateId,
-      });
-    }
-    if (subscription.frameworkType != Frameworks.CORE) {
-      databaseBuilder.factory.buildComplementaryCertificationSubscription({
-        certificationCandidateId: candidateId,
-        complementaryCertificationId: subscription.id,
-      });
-    }
-
-    candidateIds.push(candidateId);
-  }
-}
