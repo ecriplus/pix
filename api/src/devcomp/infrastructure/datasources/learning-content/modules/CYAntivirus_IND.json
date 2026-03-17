@@ -6,8 +6,8 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants. Un logiciel antivirus peut renforcer la protection de vos appareils, à condition d’être bien utilisé.<br>Découvrez comment fonctionne ce type de logiciel, comment l’utiliser efficacement et pourquoi le garder à jour est essentiel pour rester protégé.  🛡️</p>",
+    "image": "https://assets.pix.org/modules/CYAntivirus_IND/picto_cyber_antivirus_ind.svg",
+    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants. Un logiciel antivirus peut renforcer la protection de vos appareils, à condition d’être bien utilisé.<br>Découvrez comment fonctionne ce type de logiciel, comment l’utiliser efficacement et pourquoi le garder à jour est essentiel pour rester protégé.  🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
