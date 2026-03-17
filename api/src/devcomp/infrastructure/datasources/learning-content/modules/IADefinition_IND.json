@@ -172,14 +172,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Vous aurez peut-être plus de chance avec la prochaine !</p>"
                           }
@@ -208,14 +208,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non, plus de chance avec la prochaine ?</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p>"
                           }
@@ -244,14 +244,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
@@ -280,14 +280,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
