@@ -1679,6 +1679,12 @@
         "error-messages": {
           "incorrect-editor-logo-url-format": "The url format of the editor's logo is incorrect."
         },
+        "form": {
+          "locales": {
+            "label": "Localized languages",
+            "placeholder": "-- Select one or more languages --"
+          }
+        },
         "list": {
           "caption": "Trainings list",
           "goalThreshold": "Goal Threshold",
