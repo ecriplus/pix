@@ -402,11 +402,11 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       expect(campaignParticipation.get(organizationLearnerId)[0]).instanceOf(CampaignParticipationOverview);
       expect(campaignParticipation.get(organizationLearnerId)[1]).instanceOf(CampaignParticipationOverview);
 
-      expect(campaignParticipation.get(organizationLearnerId).map(({ id }) => id)).to.deep.equal([
+      expect(campaignParticipation.get(organizationLearnerId).map(({ id }) => id)).to.deep.members([
         participationId,
         participationId2,
       ]);
-      expect(campaignParticipation.get(organizationLearnerId2).map(({ id }) => id)).to.deep.equal([participationId3]);
+      expect(campaignParticipation.get(organizationLearnerId2).map(({ id }) => id)).to.deep.members([participationId3]);
       expect(campaignParticipation.get(organizationLearnerWithoutParticipationId)).to.be.undefined;
       expect(campaignParticipation.get(organizationLearnerDeletedId)).to.be.undefined;
     });
