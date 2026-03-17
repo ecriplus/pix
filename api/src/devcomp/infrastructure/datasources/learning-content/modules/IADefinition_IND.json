@@ -168,7 +168,7 @@
                       "id": "d057728c-18fd-4891-a53c-9f6413917bd9",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?<br></p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -204,7 +204,7 @@
                       "id": "bec3bcf1-0a25-49a7-a5f0-c322ccb271b3",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -240,7 +240,7 @@
                       "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -276,7 +276,7 @@
                       "id": "706832ba-14ae-4a7d-886a-39e562e66557",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -457,7 +457,7 @@
                       "id": "6f9e6061-a524-4827-aa1e-aba8d579d91c",
                       "type": "qcu-discovery",
                       "instruction": "A votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -498,7 +498,7 @@
                       "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
                       "type": "qcu-discovery",
                       "instruction": "Et maintenant, est-ce que la prédiction est correcte ?<br>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -539,7 +539,7 @@
                       "id": "ecb6c63b-ec65-4339-8e19-66fed405fa04",
                       "type": "qcu-discovery",
                       "instruction": "Et maintenant, est-ce que la prédiction est correcte ?",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -580,7 +580,7 @@
                       "id": "5f341bbe-d409-4923-a987-065977a1da50",
                       "type": "qcu-discovery",
                       "instruction": "Alors, à votre avis, maintenant, l’entraînement est terminé ?<br>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
