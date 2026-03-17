@@ -78,6 +78,7 @@ function buildBaseReadQuery(knexConn) {
             'complementaryCertificationKey', "complementary-certifications"."key",
             'certificationCandidateId', "certification-candidates"."id"
           )
+          ORDER BY "complementary-certifications"."key" ASC NULLS FIRST
       )`,
       ),
     })
