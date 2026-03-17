@@ -46,8 +46,10 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         userId = dbf.buildUser().id;
         dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'CCC', subscription: 'CORE' });
         startedCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'CCC' });
+        userId = dbf.buildUser().id;
         dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'DDD', subscription: 'CLEA' });
         otherStartedCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'DDD' });
+        userId = dbf.buildUser().id;
         dbf.buildCertificationCandidate({ sessionId, userId, lastName: 'AAA', subscription: 'DROIT' });
         manyAsrCertification = dbf.buildCertificationCourse({ sessionId, userId, lastName: 'AAA' });
 

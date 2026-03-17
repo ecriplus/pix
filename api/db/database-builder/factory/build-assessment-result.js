@@ -22,7 +22,7 @@ function buildAssessmentResult({
   createdAt = new Date('2020-01-01'),
   certificationCourseId,
   capacity,
-  reachedMeshIndex = 4,
+  reachedMeshIndex = null,
   versionId,
 } = {}) {
   assessmentId = _.isUndefined(assessmentId) ? buildAssessment({ certificationCourseId }).id : assessmentId;

@@ -61,7 +61,13 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           label: 'CléA Numérique',
         }).id;
 
-        const certificationCourse1 = databaseBuilder.factory.buildCertificationCourse({ sessionId, lastName: 'AAA' });
+        let userId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId, subscription: 'CLEA' });
+        const certificationCourse1 = databaseBuilder.factory.buildCertificationCourse({
+          userId,
+          sessionId,
+          lastName: 'AAA',
+        });
         const { id } = databaseBuilder.factory.buildComplementaryCertificationCourse({
           certificationCourseId: certificationCourse1.id,
           name: ComplementaryCertificationKeys.CLEA,
@@ -78,7 +84,13 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           createdAt: new Date('2018-04-15T00:00:00Z'),
         });
 
-        const certificationCourse2 = databaseBuilder.factory.buildCertificationCourse({ sessionId, lastName: 'CCC' });
+        userId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId, subscription: 'CLEA' });
+        const certificationCourse2 = databaseBuilder.factory.buildCertificationCourse({
+          userId,
+          sessionId,
+          lastName: 'CCC',
+        });
         databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse2.id });
         await databaseBuilder.commit();
 
@@ -108,6 +120,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'complementary-certification-key-obtained': 'CLEA',
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
+          'candidate-subscription': 'CLEA',
         };
         const expectedJuryCertificationSummary2 = {
           'first-name': certificationCourse2.firstName,
@@ -124,6 +137,7 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'completed-at': certificationCourse2.completedAt,
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
+          'candidate-subscription': 'CLEA',
         };
 
         expect(response.statusCode).to.equal(200);

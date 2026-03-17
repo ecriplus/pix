@@ -114,7 +114,7 @@ function _selectJuryCertifications(knexConn) {
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
     )
-    .join('certification-candidates', function () {
+    .leftJoin('certification-candidates', function () {
       this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
         'certification-candidates.userId': 'certification-courses.userId',
       });

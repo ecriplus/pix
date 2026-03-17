@@ -86,7 +86,7 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       'complementary-certifications.id',
       'complementary-certification-courses.complementaryCertificationId',
     )
-    .join('certification-candidates', function () {
+    .leftJoin('certification-candidates', function () {
       this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
         'certification-candidates.userId': 'certification-courses.userId',
       });

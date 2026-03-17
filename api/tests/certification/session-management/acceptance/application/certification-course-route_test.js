@@ -406,6 +406,11 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         sessionId: session.id,
         userId: user.id,
       });
+      databaseBuilder.factory.buildCertificationCandidate({
+        subscription: 'CORE',
+        sessionId: session.id,
+        userId: user.id,
+      });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,
         userId: user.id,
@@ -452,6 +457,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'number-of-challenges': 10,
           'assessment-state': 'completed',
           'assessment-result-status': 'validated',
+          'candidate-subscription': 'CORE',
         },
         id: certificationCourse.id.toString(),
         relationships: {
