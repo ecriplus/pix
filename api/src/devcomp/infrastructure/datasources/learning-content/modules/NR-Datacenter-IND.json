@@ -40,7 +40,7 @@
               "element": {
                 "id": "46a80de7-3d49-465c-9d0a-fd5b6ad6666c",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/ovh-feu.jpeg",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_feu_illu_v2.svg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "                                                                               L’incendie du centre de données OVH à Strasbourg",
@@ -414,7 +414,9 @@
               "element": {
                 "id": "45cb2415-2402-4be7-9130-b7f94f6e4b11",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Observez le cycle de refroidissement suivant puis répondez à la question ci-dessous.</p>",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -424,7 +426,7 @@
                       "description": "Dans la salle des serveurs, il fait chaud. Les serveurs sont équipés de milliers de ventilateurs qui servent à faire circuler l’air pour les refroidir. ",
                       "displayWidth": 600,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/les-serveurs-chauffent.png",
+                        "src": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_cycle_refroidiss_v2_1.png",
                         "alt": "les serveurs chauffent sur l’effet des calculs"
                       },
                       "license": {
@@ -438,8 +440,8 @@
                       "description": "La ventilation à elle seule ne suffit pas, il faut expulser cet air chaud et amener de l’air froid. C’est le rôle des climatiseurs. Les climatiseurs consomment beaucoup d’énergie. ",
                       "displayWidth": 600,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation-serveurs.png",
-                        "alt": "la climatisation dans la salle des serveurs"
+                        "src": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_cycle_refroidiss_v2_2.png",
+                        "alt": "la climatisation aspire l'air chaud et souffle l'air froid dans la salle des serveurs"
                       },
                       "license": {
                         "name": "",
@@ -452,8 +454,8 @@
                       "description": "Pour refroidir l’air, les climatiseurs fonctionnent souvent avec des systèmes de refroidissement par eau. De façon très simplifiée, l’eau capte la chaleur des climatiseurs. Cette eau est ensuite refroidie puis renvoyée vers le climatiseur.",
                       "displayWidth": 600,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/eau-refroidit-clim.png",
-                        "alt": "l’eau circule dans les tuyaux pour refroidir l’air"
+                        "src": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_cycle_refroidiss_v2_3.png",
+                        "alt": "l’air est refroidi grâce à des systèmes de refroidissement par eau"
                       },
                       "license": {
                         "name": "",
@@ -466,8 +468,8 @@
                       "description": "On a donc une chaîne de refroidissement en plusieurs étapes. Produire du froid nécessite de l’énergie et généralement de l’eau !",
                       "displayWidth": 600,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/NR_datacenter_IND/8le-systeme-refroidissement-resume.png",
-                        "alt": "chaîne refroidissement résumée"
+                        "src": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_cycle_refroidiss_v2_4.png",
+                        "alt": "chaîne refroidissement résumée reprenant l'ensemble des étapes précédentes"
                       },
                       "license": {
                         "name": "",
@@ -481,9 +483,7 @@
                   "disableAnimation": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:1"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -553,7 +553,7 @@
               "element": {
                 "id": "5ce93311-9049-4136-b799-194134a0fb36",
                 "type": "text",
-                "content": "<p>Les centres de données ont donc un impact environnemental important. Mais comme nos activités deviennent de plus en plus numériques, la demande en centres de données ne cesse d’augmenter.</p>"
+                "content": "<p>Les centres de données ont donc un impact environnemental important. Mais comme nos activités deviennent de plus en plus numériques, le nombre de centres de données ne cesse d’augmenter.</p>"
               }
             }
           ]
@@ -568,7 +568,9 @@
               "element": {
                 "id": "e392985c-2dee-4202-9880-facc0be57f30",
                 "type": "custom",
-                "instruction": "<p>Depuis plusieurs années, des nouvelles technologies ont pris de plus en plus de place dans notre quotidien. Prenez le temps de lire chaque carte puis répondez à la question ci-dessous.</p>",
+                "title": "",
+                "instruction": "<p>Depuis plusieurs années, des nouvelles technologies ont pris de plus en plus de place dans notre quotidien. Prenez le temps de lire chaque carte puis répondez à la question ci-dessous.<br><br></p>",
+                "functionalInstruction": "",
                 "tagName": "flip-cards",
                 "props": {
                   "titleLevel": 1,
@@ -577,31 +579,29 @@
                     {
                       "name": "Les objets connectés",
                       "description": "Chaque objet envoie en permanence des données vers Internet. Ces flux massifs doivent être stockés, analysés et sécurisés.",
-                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/objet-connecte.png",
-                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/objet-connecte.png"
+                      "icon": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_obj_connectes_v2.svg",
+                      "image": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_obj_connectes_v2.svg"
                     },
                     {
                       "name": "La cryptomonnaie",
                       "description": "Les milliers de transactions en continue demandent énormément de puissance de calcul, donc beaucoup de centres de données.",
-                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/crypto.png",
-                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/crypto.png"
+                      "icon": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_cryptom_v2.svg",
+                      "image": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_cryptom_v2.svg"
                     },
                     {
                       "name": "Le streaming",
                       "description": "Les vidéos et musiques sont hébergées dans des serveurs qui doivent être accessibles en continu. ",
-                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/streaming.png",
-                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/streaming.png"
+                      "icon": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_streaming_v2.svg",
+                      "image": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_streaming_v2.svg"
                     },
                     {
                       "name": "L’IA générative ",
                       "description": "Pour produire ses réponses, l’IA générative fait de nombreux calculs qui mobilisent les serveurs des centres de données.",
-                      "icon": "https://assets.pix.org/draft/modules/NR_datacenter_IND/iag.png",
-                      "image": "https://assets.pix.org/draft/modules/NR_datacenter_IND/iag.png"
+                      "icon": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_ia_v2.svg",
+                      "image": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_flashcard_ia_v2.svg"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
