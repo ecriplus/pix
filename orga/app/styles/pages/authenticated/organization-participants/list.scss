@@ -52,8 +52,8 @@ $margin-right: 32px;
   }
 
   &__dropdown-content {
-    right: $margin-right;
-    width: 200px;
+    right: 0;
+    width: max-content;
   }
 
   &__tag {

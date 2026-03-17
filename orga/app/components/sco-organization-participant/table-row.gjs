@@ -139,8 +139,8 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
     <:cell>{{#if @student.isAssociated}}
         <IconTrigger
           @icon="moreVert"
-          @dropdownButtonClass="organization-participant-list-page__dropdown-button"
-          @dropdownContentClass="organization-participant-list-page__dropdown-content"
+          @dropdownButtonClass="organization-participant__dropdown-button"
+          @dropdownContentClass="organization-participant__dropdown-content"
           @ariaLabel={{t "pages.sco-organization-participants.actions.show-actions"}}
         >
           <Item @onClick={{fn @openAuthenticationMethodModal @student}}>
