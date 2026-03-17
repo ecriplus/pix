@@ -7,6 +7,7 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
   UserCouldNotBeReconciledError,
 } from '../../../../shared/domain/errors.js';
+import { batchUpdate } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/errors.js';
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
@@ -340,44 +341,12 @@ async function getLearnerInfo(organizationLearnerId) {
   return new OrganizationLearner(organizationLearner);
 }
 
-const remove = async (organizationLearner) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  return knexConn('organization-learners').where('id', organizationLearner.id).update(_toInfra(organizationLearner));
+const updateInBatchByIds = async (organizationLearners) => {
+  return batchUpdate({ tableName: 'organization-learners', primaryKeyName: 'id', rows: organizationLearners });
 };
 
 function _toDomain(result) {
   return new OrganizationLearner(result);
-}
-
-function _toInfra(organizationLearner) {
-  return {
-    lastName: organizationLearner.lastName,
-    preferredLastName: organizationLearner.preferredLastName,
-    firstName: organizationLearner.firstName,
-    middleName: organizationLearner.middleName,
-    thirdName: organizationLearner.thirdName,
-    sex: organizationLearner.sex,
-    birthdate: organizationLearner.birthdate,
-    birthCity: organizationLearner.birthCity,
-    birthCityCode: organizationLearner.birthCityCode,
-    birthProvinceCode: organizationLearner.birthProvinceCode,
-    birthCountryCode: organizationLearner.birthCountryCode,
-    status: organizationLearner.status,
-    nationalStudentId: organizationLearner.nationalStudentId,
-    division: organizationLearner.division,
-    updatedAt: organizationLearner.updatedAt,
-    userId: organizationLearner.userId,
-    email: organizationLearner.email,
-    studentNumber: organizationLearner.studentNumber,
-    department: organizationLearner.department,
-    educationalTeam: organizationLearner.educationalTeam,
-    group: organizationLearner.group,
-    diploma: organizationLearner.diploma,
-    nationalApprenticeId: organizationLearner.nationalApprenticeId,
-    deletedAt: organizationLearner.deletedAt,
-    deletedBy: organizationLearner.deletedBy,
-  };
 }
 
 /**
@@ -406,9 +375,9 @@ export {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
-  remove,
   removeByIds,
   saveCommonOrganizationLearners,
   update,
   updateCertificability,
+  updateInBatchByIds,
 };
