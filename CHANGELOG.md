@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.360.0](https://github.com/1024pix/pix/compare/v5.359.0...v5.360.0) (2026-03-18)
+
+### :rocket: Amélioration
+
+- [#15510](https://github.com/1024pix/pix/pull/15510) ajout mention cybermalveillance + picto Antivirus_Ind 
+- [#15523](https://github.com/1024pix/pix/pull/15523) Amélioration de diverses traductions NL de Pix App 
+- [#15518](https://github.com/1024pix/pix/pull/15518) datacenter-IND-ajout-images 
+- [#15511](https://github.com/1024pix/pix/pull/15511) Update NR_Datacenter_AVA.json 
+
+### :bug: Correction
+
+- [#15496](https://github.com/1024pix/pix/pull/15496) Filtrer les tubes sans nom dans le sélecteur de sujets (PIX-21916) 
+
+### :building_construction: Tech
+
+- [#15516](https://github.com/1024pix/pix/pull/15516) :recycle: Reusine le script de remplissage de l'attribut `subscription` des `certification-candidates` pour les souscriptions multiple 
+- [#15524](https://github.com/1024pix/pix/pull/15524) Ajouter des logs en cas d'erreurs lors de la création d'un Passage event (PIX-21972) 
+- [#15515](https://github.com/1024pix/pix/pull/15515) Corriger la dropdown des élèves dans Orga 
+- [#15504](https://github.com/1024pix/pix/pull/15504) Remplissage de la nouvelle colonne "framework" : au moment de la création du test de certification, ainsi que rétro-remplissage par script (PIX-21938) 
+- [#15513](https://github.com/1024pix/pix/pull/15513) Utiliser le batchUpdate pour supprimer les campaigns (PIX-21948) 
+- [#15507](https://github.com/1024pix/pix/pull/15507) Utiliser le batchUpdate pour supprimer les learners (Pix-21891) 
+
+### :arrow_up: Montée de version
+
+- [#15519](https://github.com/1024pix/pix/pull/15519) Update dependency oxfmt to ^0.37.0 (api)
+
 # [5.359.0](https://github.com/1024pix/pix/compare/v5.358.0...v5.359.0) (2026-03-17)
 
 ### :rocket: Amélioration
