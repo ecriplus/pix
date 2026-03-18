@@ -95,9 +95,10 @@
       }
     }
 
+
     li {
       display: inline-flex;
-      flex-wrap: flex-start;
+      flex-wrap: wrap;
       gap: var(--pix-spacing-2x);
       align-items: center;
 
@@ -115,4 +116,22 @@
 
 .organization-information__actions {
   margin-top: var(--pix-spacing-6x);
+}
+
+.features-section__feature-item {
+  &:not(:last-child) {
+    padding-bottom: var(--pix-spacing-3x);
+    border-bottom: 1px solid var(--pix-neutral-100);
+  }
+
+  .form-field {
+    &:has(input[type='checkbox']:disabled) label {
+      color: var(--pix-neutral-500);
+    }
+
+    &:has(input[type='checkbox']:checked) label {
+      color: var(--pix-primary-700);
+    }
+
+  }
 }
