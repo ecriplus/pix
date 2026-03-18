@@ -704,6 +704,23 @@
           "label": "ID d'organisation à la tête du réseau:"
         }
       },
+      "editing": {
+        "actions": {
+          "edit-tooltip": "Modifier le nom du réseau"
+        },
+        "error-messages": {
+          "name": "Le nom du réseau est requis.",
+          "name-max-length": "Le nom du réseau ne peut pas dépasser 50 caractères."
+        },
+        "name": {
+          "label": "Nom du réseau :"
+        },
+        "notifications": {
+          "error": "Une erreur est survenue lors de la modification du réseau.",
+          "success": "Le réseau a été modifié avec succès.",
+          "validation-error": "Le formulaire contient des erreurs."
+        }
+      },
       "information-view": {
         "head-organization": "Organisation tête de réseau",
         "head-organization-id": "ID de l'organisation tête de réseau"

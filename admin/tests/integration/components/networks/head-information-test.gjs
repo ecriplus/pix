@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
+import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import HeadInformation from 'pix-admin/components/networks/head-information';
 import { module, test } from 'qunit';
@@ -22,5 +23,32 @@ module('Integration | Component | Networks | head-information', function (hooks)
       assert.dom(screen.getByText((_, element) => element.textContent === 'ID : 1')).exists();
       assert.dom(screen.getByRole('button', { name: t('components.networks.copy-id') })).exists();
     });
+  });
+
+  test('clicking the edit button shows the edit form', async function (assert) {
+    // given
+    const network = EmberObject.create({ id: 1, name: 'Mon réseau' });
+    const screen = await render(<template><HeadInformation @network={{network}} /></template>);
+
+    // when
+    await click(screen.getByRole('button', { name: t('common.actions.edit') }));
+
+    // then
+    assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+    assert.dom(screen.queryByRole('heading', { name: 'Mon réseau' })).doesNotExist();
+  });
+
+  test('clicking the cancel button hides the form and shows the title view', async function (assert) {
+    // given
+    const network = EmberObject.create({ id: 1, name: 'Mon réseau' });
+    const screen = await render(<template><HeadInformation @network={{network}} /></template>);
+    await click(screen.getByRole('button', { name: t('common.actions.edit') }));
+
+    // when
+    await click(screen.getByRole('button', { name: t('common.actions.cancel') }));
+
+    // then
+    assert.dom(screen.getByRole('heading', { name: 'Mon réseau' })).exists();
+    assert.dom(screen.queryByRole('button', { name: t('common.actions.cancel') })).doesNotExist();
   });
 });

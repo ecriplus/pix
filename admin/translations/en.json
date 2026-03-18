@@ -702,6 +702,23 @@
           "label": "ID of the organization at the head of the network:"
         }
       },
+      "editing": {
+        "actions": {
+          "edit-tooltip": "Edit network name"
+        },
+        "error-messages": {
+          "name": "The network name is required.",
+          "name-max-length": "The network name cannot exceed 50 characters."
+        },
+        "name": {
+          "label": "Network name:"
+        },
+        "notifications": {
+          "error": "An error occurred while updating the network.",
+          "success": "The network was successfully updated.",
+          "validation-error": "The form contains errors."
+        }
+      },
       "information-view": {
         "head-organization": "Head organisation",
         "head-organization-id": "ID of the head organisation"
