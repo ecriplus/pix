@@ -271,7 +271,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Oui, ils peuvent ne pas prendre en compte les mêmes phases</p>",
+                    "content": "<p>Oui, ils peuvent ne pas prendre en compte les mêmes étapes</p>",
                     "feedback": {
                       "diagnosis": "<p>Bien vu !&nbsp;</p><p>Les chiffres peuvent varier si les études ne prennent pas en compte les mêmes phases de la vie de l’appareil.&nbsp;Certaines analyses se concentrent surtout sur l’usage, d’autres intègrent aussi la fabrication ou la fin de vie. Pour comparer des résultats, il faut donc vérifier ce qui a été inclus dans l’étude.</p>"
                     }
@@ -493,7 +493,7 @@
                           "id": "2",
                           "content": "Les centres de données concentrent à eux seuls la majorité des impacts environnementaux du numérique.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Les graphiques montrent que les équipements des utilisateurs concentrent souvent la plus grande part des impacts, sans pour autant rendre négligeables les réseaux et les centres de données.</p>es.<p></p>"
+                            "diagnosis": "<p>Eh non !</p><p>Les graphiques montrent que les équipements des utilisateurs concentrent souvent la plus grande part des impacts, sans pour autant rendre négligeables les réseaux et les centres de données.</p>"
                           }
                         },
                         {
