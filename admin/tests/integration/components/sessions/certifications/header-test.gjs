@@ -202,15 +202,12 @@ module('Integration | Component | certifications/header', function (hooks) {
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'PIX_PLUS_DROIT',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: null,
               status: 'validated',
             }),
           ];
@@ -234,11 +231,9 @@ module('Integration | Component | certifications/header', function (hooks) {
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: null,
               status: 'validated',
             }),
           ];

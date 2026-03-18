@@ -1246,7 +1246,16 @@
         "unpublish-session": "Dépublier la session"
       },
       "certification": {
-        "certificationTypes": {
+        "certificationTypesV2": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Cœur",
+          "DROIT": "PIX / Pix+ Droit",
+          "EDU_1ER_DEGRE": "PIX / Pix+ Édu 1er degré",
+          "EDU_2ND_DEGRE": "PIX / Pix+ Édu 2nd degré",
+          "EDU_CPE": "PIX / Pix+ Édu CPE",
+          "PRO_SANTE": "PIX / Pix+ Pro Santé"
+        },
+        "certificationTypesV3": {
           "CLEA": "PIX / CléA Numérique",
           "CORE": "Pix Cœur",
           "DROIT": "Pix+ Droit",

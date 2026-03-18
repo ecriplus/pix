@@ -51,7 +51,7 @@ export default class Certification extends Model {
   @attr() competencesWithMark;
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
-  @attr('string') candidateSubscription;
+  @attr('string') certificationFramework;
 
   @belongsTo('complementary-certification-course-result-with-external', { async: true, inverse: null })
   complementaryCertificationCourseResultWithExternal;
@@ -69,7 +69,10 @@ export default class Certification extends Model {
   }
 
   get certificationType() {
-    return this.intl.t(`pages.certifications.certification.certificationTypes.${this.candidateSubscription}`);
+    if (this.version == 2) {
+      return this.intl.t(`pages.certifications.certification.certificationTypesV2.${this.certificationFramework}`);
+    }
+    return this.intl.t(`pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`);
   }
 
   get statusLabelAndValue() {
@@ -115,7 +118,7 @@ export default class Certification extends Model {
   }
 
   get result() {
-    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
+    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
     if (this.version != 3 || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
       return `${this.pixScore} Pix`;
     }

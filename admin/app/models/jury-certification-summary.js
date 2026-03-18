@@ -21,11 +21,9 @@ export default class JuryCertificationSummary extends Model {
   @attr() completedAt;
   @attr() isPublished;
   @attr() examinerComment;
-  @attr() certificationObtained;
-  @attr() complementaryCertificationKeyObtained;
   @attr() numberOfCertificationIssueReports;
   @attr() isFlaggedAborted;
-  @attr('string') candidateSubscription;
+  @attr('string') certificationFramework;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
 
   get creationDate() {
@@ -56,12 +54,19 @@ export default class JuryCertificationSummary extends Model {
   }
 
   get isCertificationWithCoreScope() {
-    return !this.complementaryCertificationKeyObtained || this.complementaryCertificationKeyObtained == 'CLEA';
+    return this.certificationFramework == 'CORE' || this.certificationFramework == 'CLEA';
+  }
+
+  get certificationObtained() {
+    if (!this.reachedMeshIndex) {
+      return this.intl.t(`pages.certifications.certification.certificationTypesV2.${this.certificationFramework}`);
+    }
+    return this.intl.t(`pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`);
   }
 
   get result() {
-    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
-    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
+    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
+    if (!this.reachedMeshIndex || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
       return `${this.pixScore} Pix`;
     }
     const strReachedLevel = this.intl.t(

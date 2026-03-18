@@ -25,7 +25,7 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
       <DescriptionList.Divider />
 
-      {{#if @certification.candidateSubscription}}
+      {{#if @certification.certificationFramework}}
         <DescriptionList.Item @label="Certification">
           {{@certification.certificationType}}
         </DescriptionList.Item>

@@ -23,7 +23,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('number') pixScore;
   @attr('number') reachedMeshIndex;
   @attr('number') numberOfChallenges;
-  @attr('string') candidateSubscription;
+  @attr('string') certificationFramework;
   @hasMany('certification-challenges-for-administration', { async: true, inverse: null })
   certificationChallengesForAdministration;
   version = 3;
@@ -85,7 +85,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     );
   }
   get result() {
-    const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
+    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
     if (scope == 'CORE' && this.reachedMeshIndex == 0) {
       return `${this.pixScore} Pix`;
     }
@@ -98,7 +98,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
 
   get title() {
     const certificationTypeLabel = this.intl.t(
-      `pages.certifications.certification.certificationTypes.${this.candidateSubscription}`,
+      `pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`,
     );
     return this.intl.t('pages.certifications.certification.details.v3.general-informations.title', {
       type: certificationTypeLabel,
