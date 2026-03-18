@@ -136,7 +136,7 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
     });
 
-    test('it does not show IS_MANAGING_STUDENTS checkbox for non SCO/SUP organization', async function (assert) {
+    test('it shows a disabled IS_MANAGING_STUDENTS checkbox for non SCO/SUP organization', async function (assert) {
       // given
       const onSubmit = onSubmitStub;
       const organization = EmberObject.create({
@@ -154,11 +154,11 @@ module('Integration | Component | organizations/features-section', function (hoo
       // then
       assert
         .dom(
-          screen.queryByRole('checkbox', {
+          screen.getByRole('checkbox', {
             name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
           }),
         )
-        .doesNotExist();
+        .isDisabled();
     });
   });
 
@@ -489,7 +489,7 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
     });
 
-    test('it hides IS_MANAGING_STUDENTS for non-SCO organization', async function (assert) {
+    test('it shows a disabled IS_MANAGING_STUDENTS checkbox for non-SCO organization', async function (assert) {
       // given
       const onSubmit = onSubmitStub;
       const organization = EmberObject.create({
@@ -504,11 +504,13 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
 
       // then
-      assert.notOk(
-        screen.queryByRole('checkbox', {
-          name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
-        }),
-      );
+      assert
+        .dom(
+          screen.getByRole('checkbox', {
+            name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
+          }),
+        )
+        .isDisabled();
     });
 
     test('it shows checked checkbox with format select when learner import is active', async function (assert) {

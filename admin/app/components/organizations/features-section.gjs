@@ -198,62 +198,66 @@ const FeaturesForm = <template>
       as |organizationFeature featureLabel isEditable|
     }}
       {{#if isEditable}}
-        {{#if (or @isManagingStudentAvailable (notEq feature "IS_MANAGING_STUDENTS"))}}
-          {{#if
-            (or
-              (notEq feature "LEARNER_IMPORT")
-              (and (eq feature "LEARNER_IMPORT") (notEq (get @importFormatOptions "length") 0))
-            )
-          }}
-            <div class="features-section__feature-item">
-              <div class="form-field">
-                <PixCheckbox
-                  @checked={{organizationFeature.active}}
-                  disabled={{or (not @canEdit) (and (eq feature "IS_MANAGING_STUDENTS") @isManagingStudentDisabled)}}
-                  {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
+        {{#if
+          (or
+            (notEq feature "LEARNER_IMPORT")
+            (and (eq feature "LEARNER_IMPORT") (notEq (get @importFormatOptions "length") 0))
+          )
+        }}
+          <div class="features-section__feature-item">
+            <div class="form-field">
+              <PixCheckbox
+                @checked={{organizationFeature.active}}
+                disabled={{or
+                  (not @canEdit)
+                  (and
+                    (eq feature "IS_MANAGING_STUDENTS")
+                    (or @isManagingStudentDisabled (not @isManagingStudentAvailable))
+                  )
+                }}
+                {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
+              >
+                <:label>
+                  {{t featureLabel}}
+                </:label>
+              </PixCheckbox>
+              {{#if (and (eq feature "LEARNER_IMPORT") (get organizationFeature "active"))}}
+                <PixSelect
+                  required
+                  @aria-required={{true}}
+                  @requiredLabel={{t "common.forms.mandatory"}}
+                  @options={{@importFormatOptions}}
+                  @value={{organizationFeature.params.name}}
+                  @onChange={{fn @updateValue "features.LEARNER_IMPORT.params.name"}}
+                  @hideDefaultOption={{true}}
+                  @isFullWidth={{false}}
+                  @placeholder={{t
+                    "components.organizations.editing.organization-learner-import-format.selector.placeholder"
+                  }}
                 >
                   <:label>
-                    {{t featureLabel}}
+                    {{t "components.organizations.editing.organization-learner-import-format.selector.label"}}
                   </:label>
-                </PixCheckbox>
-                {{#if (and (eq feature "LEARNER_IMPORT") (get organizationFeature "active"))}}
-                  <PixSelect
-                    required
-                    @aria-required={{true}}
-                    @requiredLabel={{t "common.forms.mandatory"}}
-                    @options={{@importFormatOptions}}
-                    @value={{organizationFeature.params.name}}
-                    @onChange={{fn @updateValue "features.LEARNER_IMPORT.params.name"}}
-                    @hideDefaultOption={{true}}
-                    @isFullWidth={{false}}
-                    @placeholder={{t
-                      "components.organizations.editing.organization-learner-import-format.selector.placeholder"
-                    }}
-                  >
-                    <:label>
-                      {{t "components.organizations.editing.organization-learner-import-format.selector.label"}}
-                    </:label>
-                  </PixSelect>
-                {{/if}}
-              </div>
-              {{#if (eq feature "PLACES_MANAGEMENT")}}
-                <div class="form-field">
-                  <PixCheckbox
-                    @checked={{organizationFeature.params.enableMaximumPlacesLimit}}
-                    disabled={{not (and @canEdit (get organizationFeature "active"))}}
-                    {{on
-                      "change"
-                      (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
-                    }}
-                  >
-                    <:label>
-                      {{t "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label"}}
-                    </:label>
-                  </PixCheckbox>
-                </div>
+                </PixSelect>
               {{/if}}
             </div>
-          {{/if}}
+            {{#if (eq feature "PLACES_MANAGEMENT")}}
+              <div class="form-field">
+                <PixCheckbox
+                  @checked={{organizationFeature.params.enableMaximumPlacesLimit}}
+                  disabled={{not (and @canEdit (get organizationFeature "active"))}}
+                  {{on
+                    "change"
+                    (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
+                  }}
+                >
+                  <:label>
+                    {{t "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label"}}
+                  </:label>
+                </PixCheckbox>
+              </div>
+            {{/if}}
+          </div>
         {{/if}}
       {{else}}
         <div class="features-section__feature-item">
