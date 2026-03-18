@@ -445,7 +445,7 @@ module('Integration | Component | organizations/features-section', function (hoo
       this.owner.register('service:access-control', AccessControlStub);
     });
 
-    test('it hides LEARNER_IMPORT checkbox when no import formats are available', async function (assert) {
+    test('it shows a disabled LEARNER_IMPORT checkbox when no import formats are available', async function (assert) {
       // given
       findAllStub.withArgs('organization-learner-import-format').resolves([]);
       const onSubmit = onSubmitStub;
@@ -460,11 +460,13 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
 
       // then
-      assert.notOk(
-        screen.queryByRole('checkbox', {
-          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
-        }),
-      );
+      assert
+        .dom(
+          screen.getByRole('checkbox', {
+            name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+          }),
+        )
+        .isDisabled();
     });
 
     test('it disables IS_MANAGING_STUDENTS for SCO when learner import is active', async function (assert) {
