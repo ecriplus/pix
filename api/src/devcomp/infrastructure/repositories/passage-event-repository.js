@@ -1,7 +1,10 @@
 import { PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR } from '../../../../db/pgsql-errors.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainError } from '../../../shared/domain/errors.js';
+import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { PassageEventFactory } from '../../domain/factories/passage-event-factory.js';
+
+const logger = child('devcomp:passage-event-repository', { event: SCOPES.DEVCOMP });
 
 async function record(event) {
   const knexConn = DomainTransaction.getConnection();
@@ -15,8 +18,11 @@ async function record(event) {
     });
   } catch (error) {
     if (error.code === PGSQL_UNIQUE_CONSTRAINT_VIOLATION_ERROR) {
+      logger.error(event, 'There is already an existing event for this passageId and sequenceNumber');
       throw new DomainError('There is already an existing event for this passageId and sequenceNumber');
     }
+
+    logger.error({ data: event, error }, 'Error when inserting passage event');
 
     throw error;
   }
