@@ -99,6 +99,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -248,6 +249,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -427,7 +429,7 @@
                 "legend": "",
                 "licence": ""
               }
-            },            
+            },
             {
               "type": "element",
               "element": {
@@ -468,6 +470,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -973,6 +976,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [

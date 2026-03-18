@@ -242,6 +242,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -326,6 +327,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [

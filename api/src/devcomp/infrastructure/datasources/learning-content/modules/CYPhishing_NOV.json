@@ -706,6 +706,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
