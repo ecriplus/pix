@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import * as learningContentConversionService from '../../../../../lib/domain/services/learning-content/learning-content-conversion-service.js';
 import * as campaignRepository from '../../../../prescription/campaign/infrastructure/repositories/campaign-repository.js';
+import { PIX_ORIGIN } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NoSkillsInCampaignError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { CampaignLearningContent } from '../../../../shared/domain/models/CampaignLearningContent.js';
@@ -45,27 +46,30 @@ export async function findByTargetProfileId(targetProfileId, locale) {
 
 export async function findByOrganizationId({ organizationId, locale }) {
   const knexConn = DomainTransaction.getConnection();
-  const tubesWithLevel = await knexConn('target-profile-shares')
+  const tubesIdsFromTargetProfile = await knexConn('target-profile-shares')
     .join('target-profile_tubes', 'target-profile_tubes.targetProfileId', '=', 'target-profile-shares.targetProfileId')
     .select({ id: 'tubeId' })
     .where({ organizationId })
-    .groupBy('tubeId');
+    .pluck('tubeId');
 
-  if (tubesWithLevel.length === 0) {
+  const pixCompetences = await competenceRepository.listPixCompetencesOnly({ locale });
+  const pixCompetenceIds = pixCompetences.map(({ id: competenceId }) => competenceId);
+
+  const thematics = await thematicRepository.findByCompetenceIds(pixCompetenceIds, locale);
+
+  const tubeIds = thematics.flatMap((thematic) => thematic.tubeIds).concat(tubesIdsFromTargetProfile);
+
+  const tubes = await tubeRepository.findActiveByRecordIds(tubeIds, locale);
+
+  if (tubes.length === 0) {
     return [];
   }
-
-  const allTubes = await tubeRepository.findByRecordIds(
-    tubesWithLevel.map((dto) => dto.id),
-    locale,
-  );
-  const tubes = allTubes.filter((tube) => tube.practicalTitle);
 
   const frameworks = await _getLearningContentByTubes(tubes, locale);
 
   return frameworks.sort((frameworkA, frameworkB) => {
-    if (frameworkA.name === 'Pix') return -1;
-    if (frameworkB.name === 'Pix') return 1;
+    if (frameworkA.name === PIX_ORIGIN) return -1;
+    if (frameworkB.name === PIX_ORIGIN) return 1;
     return frameworkA.name.localeCompare(frameworkB.name);
   });
 }

@@ -1,4 +1,5 @@
 import * as learningContentRepository from '../../../../../../src/prescription/shared/infrastructure/repositories/learning-content-repository.js';
+import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NoSkillsInCampaignError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -13,7 +14,7 @@ describe('Integration | Repository | learning-content', function () {
   beforeEach(async function () {
     const framework1DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework1',
-      name: 'Pix',
+      name: PIX_ORIGIN,
     });
     const framework2DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework2',
@@ -42,7 +43,7 @@ describe('Integration | Repository | learning-content', function () {
       name_i18n: { fr: 'competence1_nomFr', en: 'competence1_nameEn' },
       index: '1',
       description_i18n: { fr: 'competence1_descriptionFr', en: 'competence1_descriptionEn' },
-      origin: 'Pix',
+      origin: PIX_ORIGIN,
       areaId: 'recArea1',
     });
     const competence2DB = databaseBuilder.factory.learningContent.buildCompetence({
@@ -50,7 +51,7 @@ describe('Integration | Repository | learning-content', function () {
       name_i18n: { fr: 'competence2_nomFr', en: 'competence2_nameEn' },
       index: '2',
       description_i18n: { fr: 'competence2_descriptionFr', en: 'competence2_descriptionEn' },
-      origin: 'Pix',
+      origin: PIX_ORIGIN,
       areaId: 'recArea1',
     });
     const competence3DB = databaseBuilder.factory.learningContent.buildCompetence({
@@ -168,6 +169,16 @@ describe('Integration | Repository | learning-content', function () {
       thematicId: 'recThematic3',
     });
 
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: 'recSkill1',
+      name: 'tube1_name1',
+      status: 'actif',
+      level: 2,
+      pixValue: 16,
+      version: 14,
+      tubeId: 'recTube1',
+    });
+
     const skill2DB = databaseBuilder.factory.learningContent.buildSkill({
       id: 'recSkill2',
       name: '@tube2_name1',
@@ -185,6 +196,16 @@ describe('Integration | Repository | learning-content', function () {
       pixValue: 56,
       version: 54,
       tubeId: 'recTube2',
+    });
+
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: 'recSkill4',
+      name: 'tube4_name1',
+      status: 'actif',
+      level: 2,
+      pixValue: 56,
+      version: 54,
+      tubeId: 'recTube4',
     });
 
     await databaseBuilder.commit();
@@ -265,7 +286,7 @@ describe('Integration | Repository | learning-content', function () {
     it('should throw a NoSkillsInCampaignError when there are no more operative skills', async function () {
       // given
       campaignId = databaseBuilder.factory.buildCampaign().id;
-      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkill4' });
+      databaseBuilder.factory.buildCampaignSkill({ campaignId, skillId: 'recSkillUnknown' });
       await databaseBuilder.commit();
 
       // when
@@ -326,7 +347,7 @@ describe('Integration | Repository | learning-content', function () {
       const otherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation();
       databaseBuilder.factory.buildCampaignSkill({
         campaignId: otherCampaignParticipation.campaignId,
-        skillId: 'recSkill4',
+        skillId: 'recSkillUnknown',
       });
       await databaseBuilder.commit();
 
@@ -409,26 +430,12 @@ describe('Integration | Repository | learning-content', function () {
     let organizationId;
     beforeEach(async function () {
       organizationId = databaseBuilder.factory.buildOrganization().id;
-      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
 
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId });
-      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 4 });
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube4', level: 4 });
 
-      const secondTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-      databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId: secondTargetProfileId });
-      databaseBuilder.factory.buildTargetProfileTube({
-        targetProfileId: secondTargetProfileId,
-        tubeId: 'recTube1',
-        level: 2,
-      });
-      databaseBuilder.factory.buildTargetProfileTube({
-        targetProfileId: secondTargetProfileId,
-        tubeId: 'recTube2',
-        level: 2,
-      });
-
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfileIdFromOtherOrganization = databaseBuilder.factory.buildTargetProfile().id;
       databaseBuilder.factory.buildTargetProfileShare({
         organizationId: otherOrganizationId,
@@ -443,7 +450,7 @@ describe('Integration | Repository | learning-content', function () {
       await databaseBuilder.commit();
     });
 
-    it('should return an array of LearningContents', async function () {
+    it('should return an array of LearningContents with complete Pix frameworks', async function () {
       // given
       framework1Fr.areas = [area1Fr];
       area1Fr.competences = [competence1Fr, competence2Fr];
@@ -471,37 +478,13 @@ describe('Integration | Repository | learning-content', function () {
       expect(results).deep.members([framework1Fr, framework2Fr]);
     });
 
-    it('should filter out tubes without practicalTitle', async function () {
-      // given
-      const anotherOrganizationId = databaseBuilder.factory.buildOrganization().id;
-
-      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-      databaseBuilder.factory.buildTargetProfileShare({ organizationId: anotherOrganizationId, targetProfileId });
-      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube4', level: 4 });
-      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTubeNotitle', level: 4 });
-      await databaseBuilder.commit();
-
-      framework2Fr.areas = [area2Fr];
-      area2Fr.competences = [competence3Fr];
-      competence3Fr.thematics = [thematic3Fr];
-      competence3Fr.tubes = [tube4Fr];
-      thematic3Fr.tubes = [tube4Fr];
-      tube4Fr.skills = [];
-
-      // when
-      const results = await learningContentRepository.findByOrganizationId({ organizationId: anotherOrganizationId });
-      // then
-      expect(results).lengthOf(1);
-      expect(results[0]).deep.equals(framework2Fr);
-    });
-
     context('when organization has no target profile shares', function () {
-      it('it should returns empty array', async function () {
+      it('it should returns Pix frameworks', async function () {
         // when
         const frameworks = await learningContentRepository.findByOrganizationId({ organizationId: 213 });
 
         // then
-        expect(frameworks).lengthOf(0);
+        expect(frameworks).lengthOf(1);
       });
     });
 

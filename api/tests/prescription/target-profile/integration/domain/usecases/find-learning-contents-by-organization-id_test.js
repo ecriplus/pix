@@ -1,4 +1,5 @@
 import { usecases } from '../../../../../../src/prescription/target-profile/domain/usecases/index.js';
+import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | find-learning-contents-by-organization-id', function () {
@@ -12,11 +13,11 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
   beforeEach(async function () {
     const framework1DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework1',
-      name: 'Mon référentiel 1',
+      name: PIX_ORIGIN,
     });
     const framework2DB = databaseBuilder.factory.learningContent.buildFramework({
       id: 'recFramework2',
-      name: 'Mon référentiel 2',
+      name: 'Pix+',
     });
     const area1DB = databaseBuilder.factory.learningContent.buildArea({
       id: 'recArea1',
@@ -41,7 +42,7 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
       name_i18n: { fr: 'competence1_nomFr', en: 'competence1_nameEn' },
       index: '1',
       description_i18n: { fr: 'competence1_descriptionFr', en: 'competence1_descriptionEn' },
-      origin: 'Pix',
+      origin: PIX_ORIGIN,
       areaId: 'recArea1',
     });
     const competence2DB = databaseBuilder.factory.learningContent.buildCompetence({
@@ -49,7 +50,7 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
       name_i18n: { fr: 'competence2_nomFr', en: 'competence2_nameEn' },
       index: '2',
       description_i18n: { fr: 'competence2_descriptionFr', en: 'competence2_descriptionEn' },
-      origin: 'Pix',
+      origin: PIX_ORIGIN,
       areaId: 'recArea1',
     });
     const competence3DB = databaseBuilder.factory.learningContent.buildCompetence({
@@ -57,7 +58,7 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
       name_i18n: { fr: 'competence3_nomFr', en: 'competence3_nameEn' },
       index: '1',
       description_i18n: { fr: 'competence3_descriptionFr', en: 'competence3_descriptionEn' },
-      origin: 'Pix',
+      origin: 'Pix+',
       areaId: 'recArea2',
     });
     const thematic1DB = databaseBuilder.factory.learningContent.buildThematic({
@@ -151,24 +152,48 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
       thematicId: 'recThematic3',
     });
 
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: `recSkill1`,
+      name: `@tube1_name1`,
+      status: 'actif',
+      level: 1,
+      pixValue: 2,
+      version: 1,
+      tubeId: `recTube1`,
+    });
+
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: `recSkill2`,
+      name: `@tube2_name1`,
+      status: 'actif',
+      level: 1,
+      pixValue: 3,
+      version: 1,
+      tubeId: `recTube2`,
+    });
+
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: `recSkill4`,
+      name: `@tube4_name1`,
+      status: 'actif',
+      level: 1,
+      pixValue: 4,
+      version: 1,
+      tubeId: `recTube4`,
+    });
+
     organizationId = databaseBuilder.factory.buildOrganization().id;
     const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId });
     databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 4 });
-    databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube4', level: 4 });
 
     const secondTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     databaseBuilder.factory.buildTargetProfileShare({ organizationId, targetProfileId: secondTargetProfileId });
     databaseBuilder.factory.buildTargetProfileTube({
       targetProfileId: secondTargetProfileId,
-      tubeId: 'recTube1',
-      level: 2,
-    });
-    databaseBuilder.factory.buildTargetProfileTube({
-      targetProfileId: secondTargetProfileId,
-      tubeId: 'recTube2',
+      tubeId: 'recTube4',
       level: 2,
     });
 
@@ -225,8 +250,7 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
 
     // then
     expect(frameworks).lengthOf(2);
-    expect(frameworks[0]).deep.equal(framework1Fr);
-    expect(frameworks[1]).deep.equal(framework2Fr);
+    expect(frameworks).deep.members([framework1Fr, framework2Fr]);
   });
 
   context('when organization has no target profile shares', function () {
@@ -235,7 +259,8 @@ describe('Integration | UseCases | find-learning-contents-by-organization-id', f
       const frameworks = await usecases.findLearningContentsByOrganizationId({ organizationId: 213 });
 
       // then
-      expect(frameworks).lengthOf(0);
+      expect(frameworks).lengthOf(1);
+      expect(frameworks).deep.members([framework1Fr]);
     });
   });
 });
