@@ -863,6 +863,41 @@ module('Integration | Component | Module | Stepper', function (hooks) {
         });
       });
     });
+
+    module('when instruction exists', function () {
+      test('should not display instruction', async function (assert) {
+        // given
+        const instruction = 'Ceci est une instruction';
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @steps={{steps}} @direction="vertical" @instruction={{instruction}} /></template>,
+        );
+
+        // then
+        assert.dom(screen.queryByText(instruction)).doesNotExist();
+      });
+    });
   });
 
   module('When stepper is horizontal', function () {
@@ -2494,6 +2529,41 @@ module('Integration | Component | Module | Stepper', function (hooks) {
           assert.strictEqual(screen.getAllByRole('group', { name: '1 sur 2' }).length, 1);
           assert.strictEqual(screen.getAllByRole('group', { name: '2 sur 2' }).length, 1);
         });
+      });
+    });
+
+    module('when instruction exists', function () {
+      test('should display instruction', async function (assert) {
+        // given
+        const instruction = 'Ceci est une instruction';
+        const steps = [
+          {
+            elements: [
+              {
+                id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
+                type: 'text',
+                content: '<p>Text 1</p>',
+              },
+            ],
+          },
+          {
+            elements: [
+              {
+                id: '768441a5-a7d6-4987-ada9-7253adafd842',
+                type: 'text',
+                content: '<p>Text 2</p>',
+              },
+            ],
+          },
+        ];
+
+        // when
+        const screen = await render(
+          <template><ModulixStepper @steps={{steps}} @direction="horizontal" @instruction={{instruction}} /></template>,
+        );
+
+        // then
+        assert.dom(screen.getByText(instruction)).exists();
       });
     });
   });

@@ -241,6 +241,11 @@ export default class ModulixStepper extends Component {
             {{/each}}
           </div>
         </div>
+        {{#if @instruction}}
+          <div class="stepper__instruction">
+            {{htmlUnsafe @instruction}}
+          </div>
+        {{/if}}
         <div
           id={{this.id}}
           class="stepper__steps"

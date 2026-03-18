@@ -18,6 +18,10 @@
   &__steps {
     display: flex;
   }
+
+  &__instruction {
+    padding-bottom: var(--pix-spacing-2x);
+  }
 }
 
 .stepper-controls {
