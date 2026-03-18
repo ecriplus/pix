@@ -20,6 +20,8 @@ export default class ModulePassage extends Component {
   @service featureToggles;
   @service modulixNavigationProgress;
 
+  @tracked grainsToDisplay = this.computeGrainsToDisplay();
+
   get enrichedSections() {
     return this.args.module.sections.map((section, index) => {
       return {
@@ -58,7 +60,20 @@ export default class ModulePassage extends Component {
   }
 
   displayableGrains = this.flatGrains.filter((grain) => ModuleGrain.getSupportedComponents(grain).length > 0);
-  @tracked grainsToDisplay = this.displayableGrains.length > 0 ? [this.displayableGrains[0]] : [];
+
+  computeGrainsToDisplay() {
+    if (this.displayableGrains.length <= 0) {
+      return [];
+    }
+
+    const grainIndex = Number(this.args.grainIndex);
+    const isGrainIndexValid = grainIndex && grainIndex > 0 && grainIndex < this.displayableGrains.length;
+    if (isGrainIndexValid && !this.args.module.redirectionUrl) {
+      return this.displayableGrains.slice(0, grainIndex + 1);
+    }
+
+    return [this.displayableGrains[0]];
+  }
 
   @action
   hasGrainJustAppeared(index) {

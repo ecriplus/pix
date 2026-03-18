@@ -1,4 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { click, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ApplicationAdapter from 'mon-pix/adapters/application';
@@ -1462,6 +1463,107 @@ module('Integration | Component | Module | Passage', function (hooks) {
         },
       });
       assert.ok(true);
+    });
+  });
+
+  module('when grainIndex is provided', function () {
+    function buildModuleWithGrains(count) {
+      const textElement = { content: 'content', type: 'text' };
+      const grains = Array.from({ length: count }, () => ({
+        components: [{ type: 'element', element: textElement }],
+      }));
+      const section = { id: 'section1', type: 'blank', grains };
+      return { title: 'Module title', sections: [section] };
+    }
+
+    test('when grainIndex is valid, should display grains up to and including grainIndex', async function (assert) {
+      // given
+      const module = buildModuleWithGrains(4);
+      const passage = { id: '1' };
+      const grainIndex = '2';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 3);
+    });
+
+    test('when grainIndex is "0", should display only the first grain', async function (assert) {
+      // given
+      const module = buildModuleWithGrains(4);
+      const passage = { id: '1' };
+      const grainIndex = '0';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 1);
+    });
+
+    test('when grainIndex equals the total number of grains, should display only the first grain', async function (assert) {
+      // given
+      const module = buildModuleWithGrains(4);
+      const passage = { id: '1' };
+      const grainIndex = '4';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 1);
+    });
+
+    test('when grainIndex is negative, should display only the first grain', async function (assert) {
+      // given
+      const module = buildModuleWithGrains(4);
+      const passage = { id: '1' };
+      const grainIndex = '-1';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 1);
+    });
+
+    test('when grainIndex is non-numeric, should display only the first grain', async function (assert) {
+      // given
+      const module = buildModuleWithGrains(4);
+      const passage = { id: '1' };
+      const grainIndex = 'abc';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 1);
+    });
+
+    test('when grainIndex is valid but module has a redirectionUrl, should display only the first grain', async function (assert) {
+      // given
+      const module = { ...buildModuleWithGrains(4), redirectionUrl: 'https://example.com' };
+      const passage = { id: '1' };
+      const grainIndex = '2';
+
+      // when
+      const screen = await render(
+        <template><ModulePassage @module={{module}} @passage={{passage}} @grainIndex={{grainIndex}} /></template>,
+      );
+
+      // then
+      assert.strictEqual(screen.getAllByRole('article').length, 1);
     });
   });
 
