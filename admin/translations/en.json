@@ -1244,7 +1244,7 @@
       },
       "certification": {
         "certificationTypes": {
-          "CLEA": "Double Certification PIX / CléA Numérique",
+          "CLEA": "PIX / CléA Numérique",
           "CORE": "Pix Core",
           "DROIT": "Pix+ Law",
           "EDU_1ER_DEGRE": "Pix+ Edu Primary School",
@@ -1717,12 +1717,6 @@
         },
         "error-messages": {
           "incorrect-editor-logo-url-format": "The url format of the editor's logo is incorrect."
-        },
-        "form": {
-          "locales": {
-            "label": "Localized languages",
-            "placeholder": "-- Select one or more languages --"
-          }
         },
         "list": {
           "caption": "Trainings list",

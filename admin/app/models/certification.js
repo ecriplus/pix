@@ -116,7 +116,7 @@ export default class Certification extends Model {
 
   get result() {
     const scope = this.candidateSubscription == 'CLEA' ? 'CORE' : this.candidateSubscription;
-    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
+    if (this.version != 3 || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
       return `${this.pixScore} Pix`;
     }
     const strReachedLevel = this.intl.t(
