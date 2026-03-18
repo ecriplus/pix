@@ -50,10 +50,11 @@ export default class OrganizationFeaturesSection extends Component {
   }
 
   get isManagingStudentAvailable() {
-    return (
-      !this.args.organization.isLearnerImportEnabled &&
-      (this.args.organization.isOrganizationSCO || this.args.organization.isOrganizationSUP)
-    );
+    return this.args.organization.isOrganizationSCO || this.args.organization.isOrganizationSUP;
+  }
+
+  get isManagingStudentDisabled() {
+    return this.args.organization.isLearnerImportEnabled;
   }
 
   get editableFeatureList() {
@@ -131,6 +132,7 @@ export default class OrganizationFeaturesSection extends Component {
               @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
               @updateValue={{this.updateValue}}
               @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
+              @isManagingStudentDisabled={{this.isManagingStudentDisabled}}
               @editableFeatureList={{this.editableFeatureList}}
               @canEdit={{this.accessControl.hasAccessToOrganizationActionsScope}}
             />
@@ -207,7 +209,7 @@ const FeaturesForm = <template>
               <div class="form-field">
                 <PixCheckbox
                   @checked={{organizationFeature.active}}
-                  disabled={{not @canEdit}}
+                  disabled={{or (not @canEdit) (and (eq feature "IS_MANAGING_STUDENTS") @isManagingStudentDisabled)}}
                   {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
                 >
                   <:label>

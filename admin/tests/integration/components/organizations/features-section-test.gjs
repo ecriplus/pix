@@ -467,7 +467,7 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
     });
 
-    test('it hides IS_MANAGING_STUDENTS for SCO when learner import is active', async function (assert) {
+    test('it disables IS_MANAGING_STUDENTS for SCO when learner import is active', async function (assert) {
       // given
       const onSubmit = onSubmitStub;
       const organization = EmberObject.create({
@@ -482,10 +482,10 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
 
       // then
-      assert.notOk(
-        screen.queryByRole('checkbox', {
+      assert.true(
+        screen.getByRole('checkbox', {
           name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
-        }),
+        }).disabled,
       );
     });
 
