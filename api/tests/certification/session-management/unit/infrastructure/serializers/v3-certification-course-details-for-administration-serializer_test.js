@@ -31,7 +31,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
       const reachedMeshIndex = 1;
-      const candidateSubscription = Frameworks.CORE;
+      const certificationFramework = Frameworks.CORE;
 
       const certificationChallenge = new V3CertificationChallengeForAdministration({
         challengeId,
@@ -68,7 +68,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
             'pix-score': pixScore,
             'reached-mesh-index': reachedMeshIndex,
             'number-of-challenges': 20,
-            'candidate-subscription': candidateSubscription,
+            'certification-framework': certificationFramework,
           },
         },
         included: [
@@ -104,7 +104,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
         reachedMeshIndex,
         numberOfChallenges,
         certificationChallengesForAdministration: [certificationChallenge],
-        candidateSubscription,
+        certificationFramework,
       });
 
       // when

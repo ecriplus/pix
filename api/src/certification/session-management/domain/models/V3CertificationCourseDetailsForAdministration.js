@@ -12,7 +12,7 @@ export class V3CertificationCourseDetailsForAdministration {
     pixScore,
     reachedMeshIndex,
     numberOfChallenges,
-    candidateSubscription,
+    certificationFramework,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.isRejectedForFraud = isRejectedForFraud;
@@ -26,7 +26,7 @@ export class V3CertificationCourseDetailsForAdministration {
     this.reachedMeshIndex = reachedMeshIndex;
     this.numberOfChallenges = numberOfChallenges;
     this.endedAt = endedAt;
-    this.candidateSubscription = candidateSubscription;
+    this.certificationFramework = certificationFramework;
   }
 
   setCompetencesDetails(competenceList) {

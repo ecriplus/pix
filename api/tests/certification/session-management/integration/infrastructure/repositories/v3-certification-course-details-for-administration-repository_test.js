@@ -26,16 +26,10 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
       const reachedMeshIndex = 1;
-      const candidateSubscription = Frameworks.DROIT;
+      const certificationFramework = Frameworks.DROIT;
 
       const userId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
-
-      const candidateId = databaseBuilder.factory.buildCertificationCandidate({
-        userId,
-        sessionId,
-        subscription: candidateSubscription,
-      }).id;
 
       databaseBuilder.factory.buildCertificationCourse({
         id: certificationCourseId,
@@ -45,7 +39,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         abortReason,
         userId,
         sessionId,
-        candidateId,
+        framework: certificationFramework,
       });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
@@ -117,7 +111,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         pixScore,
         reachedMeshIndex,
         numberOfChallenges: null,
-        candidateSubscription,
+        certificationFramework,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
       });
 

@@ -1,6 +1,6 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import * as serializer from '../../../../../../src/certification/session-management/infrastructure/serializers/jury-certification-summary-serializer.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -30,9 +30,7 @@ describe('Unit | Serializer | JSONAPI | jury-certification-summary-serializer', 
         isPublished: true,
         certificationIssueReports: [issueReport],
         isFlaggedAborted: false,
-        candidateSubscription: 'DROIT',
-        complementaryCertificationLabelObtained: 'Pix+ Droit',
-        complementaryCertificationKeyObtained: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+        certificationFramework: Frameworks.DROIT,
       });
 
       expectedJsonApi = {
@@ -52,9 +50,7 @@ describe('Unit | Serializer | JSONAPI | jury-certification-summary-serializer', 
             'number-of-certification-issue-reports': 1,
             'number-of-certification-issue-reports-with-required-action': 1,
             'is-flagged-aborted': false,
-            'candidate-subscription': 'DROIT',
-            'certification-obtained': 'Pix+ Droit',
-            'complementary-certification-key-obtained': ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+            'certification-framework': Frameworks.DROIT,
           },
         },
         meta: {},
@@ -66,33 +62,6 @@ describe('Unit | Serializer | JSONAPI | jury-certification-summary-serializer', 
 
       // then
       expect(json).to.deep.equal(expectedJsonApi);
-    });
-
-    it('should translate the certification taken label', function () {
-      // given
-      modelJuryCertifSummary = new JuryCertificationSummary({
-        id: 1,
-        firstName: 'someFirstName',
-        lastName: 'someLastName',
-        status: 'someStatus',
-        pixScore: 123,
-        createdAt: new Date('2020-04-20T04:05:06Z'),
-        completedAt: new Date('2020-04-25T04:05:06Z'),
-        isPublished: true,
-        certificationIssueReports: [],
-        isFlaggedAborted: false,
-        complementaryCertificationLabelObtained: 'CléA Numérique',
-        complementaryCertificationKeyObtained: ComplementaryCertificationKeys.CLEA,
-      });
-
-      // when
-      const meta = {};
-      const json = serializer.serialize(modelJuryCertifSummary, meta, { translate });
-
-      // then
-      expect(json.data.attributes['certification-obtained']).to.equal(
-        translate('jury-certification-summary.comment.DOUBLE_CORE_CLEA'),
-      );
     });
   });
 });

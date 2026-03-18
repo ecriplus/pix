@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as juryCertificationRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-repository.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
@@ -58,8 +59,8 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           createdAt: new Date('2020-01-01'),
           completedAt: new Date('2020-02-01'),
           isPublished: false,
+          framework: Frameworks.CLEA,
         });
-        databaseBuilder.factory.buildCertificationCandidate({ userId: 789, sessionId: 456, subscription: 'CLEA' });
 
         databaseBuilder.factory.buildComplementaryCertificationCourse({
           id: 456,
@@ -141,7 +142,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           competenceMarks: [expectedCompetenceMark],
           certificationIssueReports: [],
           version: 2,
-          candidateSubscription: 'CLEA',
+          certificationFramework: Frameworks.CLEA,
           commonComplementaryCertificationCourseResult: {
             acquired: true,
             complementaryCertificationBadgeId: 3453,

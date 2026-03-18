@@ -13,10 +13,8 @@ const buildJuryCertificationSummary = function ({
   abortReason = null,
   isPublished = true,
   isEndedByInvigilator = false,
-  complementaryCertificationLabelObtained,
-  complementaryCertificationKeyObtained,
   certificationIssueReports = [],
-  candidateSubscription = null,
+  certificationFramework = null,
 } = {}) {
   return new JuryCertificationSummary({
     id,
@@ -30,10 +28,8 @@ const buildJuryCertificationSummary = function ({
     abortReason,
     isPublished,
     isEndedByInvigilator,
-    complementaryCertificationLabelObtained,
-    complementaryCertificationKeyObtained,
     certificationIssueReports,
-    candidateSubscription,
+    certificationFramework,
   });
 };
 

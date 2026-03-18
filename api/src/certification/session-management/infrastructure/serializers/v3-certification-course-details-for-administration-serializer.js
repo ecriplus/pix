@@ -16,7 +16,7 @@ const serialize = function ({ certificationDetails }) {
     'pixScore',
     'reachedMeshIndex',
     'numberOfChallenges',
-    'candidateSubscription',
+    'certificationFramework',
   ];
 
   return new Serializer('v3-certification-course-details-for-administration', {

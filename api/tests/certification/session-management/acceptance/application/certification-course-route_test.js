@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -406,11 +407,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         sessionId: session.id,
         userId: user.id,
       });
-      databaseBuilder.factory.buildCertificationCandidate({
-        subscription: 'CORE',
-        sessionId: session.id,
-        userId: user.id,
-      });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,
         userId: user.id,
@@ -457,7 +453,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'number-of-challenges': 10,
           'assessment-state': 'completed',
           'assessment-result-status': 'validated',
-          'candidate-subscription': 'CORE',
+          'certification-framework': Frameworks.CORE,
         },
         id: certificationCourse.id.toString(),
         relationships: {

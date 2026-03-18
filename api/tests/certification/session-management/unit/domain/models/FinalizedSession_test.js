@@ -1,7 +1,7 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -268,6 +268,7 @@ function _noneWithRequiredActionNorError() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -289,6 +290,7 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -305,6 +307,7 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -326,6 +329,7 @@ function _noneWithRequiredActionButSomeErrorStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.SIGNATURE_ISSUE,
@@ -346,6 +350,7 @@ function _noneWithRequiredActionButSomeStartedStatus() {
       createdAt: new Date(),
       completedAt: null,
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.SIGNATURE_ISSUE,
@@ -366,6 +371,7 @@ function _someWithUnresolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -388,6 +394,7 @@ function _someWithResolvedRequiredActionButNoErrorOrStartedStatus() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -411,6 +418,7 @@ function _someWhichAreUnfinishedButHaveNoAbortReason() {
       completedAt: null,
       isPublished: false,
       abortReason: null,
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.FRAUD,
@@ -434,6 +442,7 @@ function _noneWithRequiredActionButHasNoScore() {
       completedAt: new Date(),
       isPublished: false,
       certificationIssueReports: [],
+      certificationFramework: Frameworks.CORE,
     }),
   ];
 }
@@ -449,7 +458,7 @@ function _someWithPixPlusScopeCertification() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      complementaryCertificationKeyObtained: null,
+      certificationFramework: Frameworks.CLEA,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',
@@ -466,7 +475,7 @@ function _someWithPixPlusScopeCertification() {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      complementaryCertificationKeyObtained: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
+      certificationFramework: Frameworks.DROIT,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: 'NON_IMPACTFUL_CATEGORY',

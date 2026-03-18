@@ -1,8 +1,7 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | JuryCertificationSummary', function () {
@@ -22,9 +21,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         pixScore: 751,
         reachedMeshIndex: 6,
         status: 'started',
-        candidateSubscription: 'CORE',
-        complementaryCertificationLabelObtained: null,
-        complementaryCertificationKeyObtained: null,
+        certificationFramework: Frameworks.CORE,
       };
 
       // when
@@ -33,8 +30,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       // then
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
-        certificationObtained: 'CORE',
-        complementaryCertificationKeyObtained: null,
         completedAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -45,7 +40,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         pixScore: 751,
         reachedMeshIndex: 6,
         status: 'started',
-        candidateSubscription: 'CORE',
+        certificationFramework: Frameworks.CORE,
       });
     });
   });
@@ -245,59 +240,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
           // then
           expect(hasCompletedAssessment).to.be.false;
         });
-      });
-    });
-  });
-
-  describe('#getCertificationLabel', function () {
-    context('when the certification taken is core', function () {
-      it('should return the translated comment matching the key', function () {
-        // given
-        const translate = getI18n().__;
-        const juryCertificationSummary = new JuryCertificationSummary({
-          complementaryCertificationLabelObtained: null,
-          complementaryCertificationKeyObtained: null,
-        });
-
-        // when
-        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
-
-        // then
-        expect(certificationLabel).to.equal(translate('jury-certification-summary.comment.CORE'));
-      });
-    });
-
-    context('when the certification taken is a double certification', function () {
-      it('should return the translated comment matching the key', function () {
-        // given
-        const translate = getI18n().__;
-        const juryCertificationSummary = new JuryCertificationSummary({
-          complementaryCertificationLabelObtained: 'CléA Numérique',
-          complementaryCertificationKeyObtained: ComplementaryCertificationKeys.CLEA,
-        });
-
-        // when
-        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
-
-        // then
-        expect(certificationLabel).to.equal(translate('jury-certification-summary.comment.DOUBLE_CORE_CLEA'));
-      });
-    });
-
-    context('when the certification taken is complementary', function () {
-      it('should return the label', function () {
-        // given
-        const translate = getI18n().__;
-        const juryCertificationSummary = new JuryCertificationSummary({
-          complementaryCertificationLabelObtained: 'Pix+ Droit',
-          complementaryCertificationKeyObtained: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-        });
-
-        // when
-        const certificationLabel = juryCertificationSummary.getCertificationLabel(translate);
-
-        // then
-        expect(certificationLabel).to.equal(translate('Pix+ Droit'));
       });
     });
   });

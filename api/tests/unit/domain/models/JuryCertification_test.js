@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { JuryCertification } from '../../../../src/certification/session-management/domain/models/JuryCertification.js';
 import { AutoJuryCommentKeys } from '../../../../src/certification/shared/domain/models/JuryComment.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
@@ -34,7 +35,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: null,
         version: 2,
-        candidateSubscription: 'CLEA',
+        certificationFramework: Frameworks.CLEA,
       };
       competenceMarkDTOs = [
         {
@@ -103,7 +104,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: null,
         version: 2,
-        candidateSubscription: 'CLEA',
+        certificationFramework: Frameworks.CLEA,
         competenceMarks: expectedCompetenceMarks,
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,
@@ -168,7 +169,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByJury: 'ça va',
         commentByAutoJury: AutoJuryCommentKeys.FRAUD,
         version: 2,
-        candidateSubscription: 'CLEA',
+        certificationFramework: Frameworks.CLEA,
         competenceMarks: expectedCompetenceMarks,
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,

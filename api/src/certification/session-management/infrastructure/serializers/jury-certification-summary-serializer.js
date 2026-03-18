@@ -33,9 +33,7 @@ const serialize = function (juryCertificationSummary, meta, { translate }) {
       'numberOfCertificationIssueReports',
       'numberOfCertificationIssueReportsWithRequiredAction',
       'isFlaggedAborted',
-      'candidateSubscription',
-      'certificationObtained',
-      'complementaryCertificationKeyObtained',
+      'certificationFramework',
     ],
     meta,
   }).serialize(juryCertificationSummary);

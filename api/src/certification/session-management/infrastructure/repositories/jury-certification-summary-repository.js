@@ -57,13 +57,6 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       assessmentResultStatus: 'assessment-results.status',
       assessmentState: 'assessments.state',
     })
-    .select({
-      candidateSubscription: 'certification-candidates.subscription',
-    })
-    .select({
-      complementaryCertificationLabelObtained: 'complementary-certifications.label',
-      complementaryCertificationKeyObtained: 'complementary-certifications.key',
-    })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
     .leftJoin(
@@ -76,21 +69,6 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
     )
-    .leftJoin(
-      'complementary-certification-courses',
-      'complementary-certification-courses.certificationCourseId',
-      'certification-courses.id',
-    )
-    .leftJoin(
-      'complementary-certifications',
-      'complementary-certifications.id',
-      'complementary-certification-courses.complementaryCertificationId',
-    )
-    .leftJoin('certification-candidates', function () {
-      this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
-        'certification-candidates.userId': 'certification-courses.userId',
-      });
-    })
     .whereIn('certification-courses.id', orderedCertificationCourseIds);
 
   return orderedCertificationCourseIds.map((orderedId) => results.find(({ id }) => id === orderedId));
@@ -143,11 +121,11 @@ function _toDomain(juryCertificationSummaryDTO) {
       return new CertificationIssueReport(certificationIssueReportDTO);
     },
   );
-
   return new JuryCertificationSummary({
     ...juryCertificationSummaryDTO,
     status: juryCertificationSummaryDTO.assessmentResultStatus,
     isEndedByInvigilator: juryCertificationSummaryDTO.assessmentState === Assessment.states.ENDED_BY_INVIGILATOR,
+    certificationFramework: juryCertificationSummaryDTO.framework,
     certificationIssueReports,
   });
 }
