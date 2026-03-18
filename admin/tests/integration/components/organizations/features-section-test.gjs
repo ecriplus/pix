@@ -31,373 +31,259 @@ module('Integration | Component | organizations/features-section', function (hoo
     this.owner.register('service:access-control', AccessControlStub);
   });
 
-  module('view mode', function () {
-    module('When organization is SCO or SUP', function () {
-      const organization = EmberObject.create({ type: 'SCO', isOrganizationSCO: true });
+  module('access control', function () {
+    test('it shows save and cancel buttons when user has access', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
       const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({ features: {} });
 
-      test('it should display "Oui" if it is managing students', async function (assert) {
-        // given
-        organization.features = {
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+    });
+
+    test('it hides save and cancel buttons when user has no access', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({ features: {} });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('common.actions.save') })).doesNotExist();
+      assert.dom(screen.queryByRole('button', { name: t('common.actions.cancel') })).doesNotExist();
+    });
+
+    test('it disables all checkboxes when user has no access', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: true,
+        features: {
+          PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: false } },
+          CAMPAIGN_WITHOUT_USER_PROFILE: { active: true },
           IS_MANAGING_STUDENTS: { active: true },
-        };
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-
-        assert
-          .dom(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
-                'common.words.yes',
-              )}`,
-            ),
-          )
-          .exists();
+        },
       });
 
-      test('it should display "Non" if managing students is false', async function (assert) {
-        // given
-        organization.features = {
-          IS_MANAGING_STUDENTS: { active: false },
-        };
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-
-        // then
-        assert
-          .dom(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
-                'common.words.no',
-              )}`,
-            ),
-          )
-          .exists();
-      });
-    });
-
-    module('When organization is not SCO', function () {
-      const organization = EmberObject.create({ type: 'PRO', isOrganizationSCO: false, isOrganizationSUP: false });
-
-      test('it should not display a checkbox for IS_MANAGING_STUDENTS', async function (assert) {
-        // given
-        organization.features = {
-          IS_MANAGING_STUDENTS: { active: false },
-        };
-        const onSubmit = onSubmitStub;
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-
-        // then
-        assert
-          .dom(
-            screen.queryByRole('checkbox', {
-              name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
-            }),
-          )
-          .doesNotExist();
-      });
-    });
-
-    module('Compute certificability', function () {
-      module('when compute certificability is true', function () {
-        test('should display text with yes', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: true },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t(
-                'components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
-              )} : ${t('common.words.yes')}`,
-            ),
-          );
-        });
-      });
-
-      module('when compute certificability is false', function () {
-        test('should display text with no', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t(
-                'components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY',
-              )} : ${t('common.words.no')}`,
-            ),
-          );
-        });
-      });
-    });
-
-    module('Attestations', function () {
-      module('when attestations is enabled', function () {
-        test('should display text with which attestation is activated', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
-                'common.words.yes',
-              )}`,
-            ),
-          );
-
-          assert.ok(
-            screen.getByText(
-              `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
-                'components.organizations.information-section-view.features.attestation-list.PARENTHOOD',
-              )}`,
-            ),
-          );
-        });
-      });
-
-      module('when attestations is not enabled', function () {
-        test('should display text with no', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              ATTESTATIONS_MANAGEMENT: { active: false },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT')} : ${t(
-                'common.words.no',
-              )}`,
-            ),
-          );
-        });
-      });
-    });
-
-    module('Places', function () {
-      module('when places in pixOrga is enabled', function () {
-        test('should display block enabled message, if this features is enabled', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: true } },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByText(
-              `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
-                'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.enabled',
-              )}`,
-            ),
-          );
-        });
-        test('should display block disabled message, if this features is not enabled', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: false } },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByText(
-              `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
-                'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.disabled',
-              )}`,
-            ),
-          );
-        });
-      });
-
-      module('when places in pixOrga is not enabled', function () {
-        test('should display label with no', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const organization = EmberObject.create({
-            features: {
-              PLACES_MANAGEMENT: { active: false },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
-                'common.words.no',
-              )}`,
-            ),
-          );
-        });
-      });
-    });
-
-    module('CAMPAIGN_WITHOUT_USER_PROFILE', function () {
-      test('should display block enabled message, if this features is enabled', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          features: {
-            CAMPAIGN_WITHOUT_USER_PROFILE: { active: true, params: null },
-          },
-        });
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        // then
-        assert.ok(
-          screen.getByText(
-            t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
-          ),
-        );
-      });
-
-      test('should display block disabled message, if this features is not enabled', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          features: {
-            CAMPAIGN_WITHOUT_USER_PROFILE: { active: false },
-          },
-        });
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-
-        // then
-        assert.ok(
-          screen.getByLabelText(
-            `${t(
-              'components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE',
-            )} : ${t('common.words.no')}`,
-          ),
-        );
-      });
-    });
-
-    module('Net Promoter Score', function () {
-      module('when NPS is enabled', function () {
-        test('should display a link to formNPSUrl', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const NPSUrl = 'http://example.net';
-          const organization = EmberObject.create({
-            features: {
-              SHOW_NPS: { active: true, params: { formNPSUrl: NPSUrl } },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.SHOW_NPS')} : ${t('common.words.yes')}`,
-            ),
-          );
-          assert.ok(screen.getByRole('link', { name: NPSUrl }));
-        });
-      });
-
-      module('when NPS is not enabled', function () {
-        test('should display text with no and not the link', async function (assert) {
-          // given
-          const onSubmit = onSubmitStub;
-          const NPSUrl = 'http://example.net';
-          const organization = EmberObject.create({
-            features: {
-              SHOW_NPS: { active: false, params: { formNPSUrl: NPSUrl } },
-            },
-          });
-
-          // when
-          const screen = await render(
-            <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-          );
-
-          // then
-          assert.ok(
-            screen.getByLabelText(
-              `${t('components.organizations.information-section-view.features.SHOW_NPS')} : ${t('common.words.no')}`,
-            ),
-          );
-          assert.notOk(screen.queryByRole('link', { name: NPSUrl }));
-        });
-      });
+      // then
+      const checkboxes = screen.getAllByRole('checkbox');
+      assert.true(checkboxes.length > 0);
+      for (const checkbox of checkboxes) {
+        assert.true(checkbox.disabled, `checkbox "${checkbox.labels?.[0]?.textContent?.trim()}" should be disabled`);
+      }
     });
   });
 
-  module('edit mode', function (hooks) {
+  module('IS_MANAGING_STUDENTS', function () {
+    test('it shows checked checkbox for SCO organization with active feature', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        type: 'SCO',
+        isOrganizationSCO: true,
+        features: { IS_MANAGING_STUDENTS: { active: true } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.true(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'))
+          .checked,
+      );
+    });
+
+    test('it shows unchecked checkbox for SCO organization with inactive feature', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        type: 'SCO',
+        isOrganizationSCO: true,
+        features: { IS_MANAGING_STUDENTS: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.false(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'))
+          .checked,
+      );
+    });
+
+    test('it does not show IS_MANAGING_STUDENTS checkbox for non SCO/SUP organization', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        type: 'PRO',
+        isOrganizationSCO: false,
+        isOrganizationSUP: false,
+        features: { IS_MANAGING_STUDENTS: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(
+          screen.queryByRole('checkbox', {
+            name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
+          }),
+        )
+        .doesNotExist();
+    });
+  });
+
+  module('COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY', function () {
+    test('it shows a disabled checked checkbox when feature is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: true } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(
+        t('components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY'),
+      );
+      assert.true(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+
+    test('it shows a disabled unchecked checkbox when feature is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(
+        t('components.organizations.information-section-view.features.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY'),
+      );
+      assert.false(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+  });
+
+  module('ATTESTATIONS_MANAGEMENT', function () {
+    test('it shows a disabled checked checkbox when feature is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(
+        t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+      );
+      assert.true(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+
+    test('it shows a disabled unchecked checkbox when feature is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(
+        t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+      );
+      assert.false(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+  });
+
+  module('SHOW_NPS', function () {
+    test('it shows a disabled checked checkbox when NPS is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { SHOW_NPS: { active: true, params: { formNPSUrl: 'http://example.net' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(t('components.organizations.information-section-view.features.SHOW_NPS'));
+      assert.true(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+
+    test('it shows a disabled unchecked checkbox when NPS is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { SHOW_NPS: { active: false, params: { formNPSUrl: 'http://example.net' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      const checkbox = screen.getByLabelText(t('components.organizations.information-section-view.features.SHOW_NPS'));
+      assert.false(checkbox.checked);
+      assert.true(checkbox.disabled);
+    });
+  });
+
+  module('PLACES_MANAGEMENT', function (hooks) {
     hooks.beforeEach(function () {
       class AccessControlStub extends Service {
         hasAccessToOrganizationActionsScope = true;
@@ -405,358 +291,345 @@ module('Integration | Component | organizations/features-section', function (hoo
       this.owner.register('service:access-control', AccessControlStub);
     });
 
-    module('PLACES_MANAGEMENT', function () {
-      test('should display features as deactivated', async function (assert) {
-        //given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          features: {
-            PLACES_MANAGEMENT: { active: false, params: null },
-          },
-        });
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // then
-        assert.false(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.notOk(
-          screen.queryByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ),
-        );
+    test('it shows unchecked checkbox and no sub-checkbox when feature is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { PLACES_MANAGEMENT: { active: false, params: null } },
       });
 
-      test('should display features as activated and lockThreshold deactivated', async function (assert) {
-        const onSubmit = onSubmitStub;
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        const organization = EmberObject.create({
-          features: {
-            PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: false } },
-          },
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        assert.true(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.false(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ).checked,
-        );
-      });
-
-      test('should display features as activated and lockThreshold activated', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          features: {
-            PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: true } },
-          },
-        });
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // then
-        assert.true(
-          screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
-            .checked,
-        );
-        assert.true(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-          ).checked,
-        );
-      });
+      // then
+      assert.false(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+          .checked,
+      );
+      assert.notOk(
+        screen.queryByLabelText(
+          t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+        ),
+      );
     });
 
-    module('CAMPAIGN_WITHOUT_USER_PROFILE', function () {
-      test('should display features as deactivated', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-
-        const organization = EmberObject.create({
-          features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: false, params: null } },
-        });
-
-        // when
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // then
-        assert.false(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
-          ).checked,
-        );
+    test('it shows checked checkbox and unchecked sub-checkbox when feature is active without limit', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: false } } },
       });
 
-      test('should display features as activated', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        const organization = EmberObject.create({
-          features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: true, params: null } },
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        assert.true(
-          screen.getByLabelText(
-            t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
-          ).checked,
-        );
-      });
+      // then
+      assert.true(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+          .checked,
+      );
+      assert.false(
+        screen.getByLabelText(
+          t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+        ).checked,
+      );
     });
 
-    module('when Learner Import is not selected', function () {
-      test('it should hide IS_MANAGING_STUDENTS feature for non SCO organization', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          isLearnerImportEnabled: true,
-          features: {},
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        assert.notOk(
-          screen.queryByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')}`,
-          }),
-        );
+    test('it shows checked checkbox and checked sub-checkbox when feature is active with limit', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: true } } },
       });
 
-      test('it should hide LEARNER IMPORT feature when there is no import format available', async function (assert) {
-        findAllStub.withArgs('organization-learner-import-format').resolves([]);
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          features: {},
-        });
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
+      // then
+      assert.true(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
+          .checked,
+      );
+      assert.true(
+        screen.getByLabelText(
+          t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+        ).checked,
+      );
+    });
+  });
 
-        assert.notOk(
-          screen.queryByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-      });
-
-      test('should display a modal when user activate learner import', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          features: {},
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // when
-        await click(
-          screen.getByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-        const modale = await screen.findByRole('dialog');
-
-        assert.ok(
-          within(modale).getByRole('heading', {
-            level: 1,
-            name: t('components.organizations.editing.organization-learner-import-format.dialog.title'),
-          }),
-        );
-      });
-
-      test('should unchecked import feature when user close dialog', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          features: {},
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // when
-        await click(
-          screen.getByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-        const modale = await screen.findByRole('dialog');
-        await click(within(modale).getByRole('button', { name: t('common.actions.close') }));
-        await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
-
-        assert.ok(
-          screen.getByRole('checkbox', {
-            checked: false,
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-      });
-
-      test('should close dialog feature and leave import feature active', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          features: {},
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        // when
-        await click(
-          screen.getByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-        const modale = await screen.findByRole('dialog');
-        await click(
-          within(modale).getByRole('checkbox', {
-            name: t('components.organizations.editing.organization-learner-import-format.dialog.confirmation'),
-          }),
-        );
-        await click(within(modale).getByRole('button', { name: t('common.actions.confirm') }));
-        await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
-
-        assert.ok(
-          screen.getByRole('checkbox', {
-            checked: true,
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-      });
+  module('CAMPAIGN_WITHOUT_USER_PROFILE', function (hooks) {
+    hooks.beforeEach(function () {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
     });
 
-    module('when Learner Import is active', function () {
-      test('it should hide IS_MANAGING_STUDENTS feature for SCO organization', async function (assert) {
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: true,
-          isLearnerImportEnabled: true,
-          features: { LEARNER_IMPORT: { active: true, params: { name: 'GENERIC' } } },
-        });
-
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
-
-        assert.notOk(
-          screen.queryByRole('checkbox', {
-            name: `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')}`,
-          }),
-        );
+    test('it shows unchecked checkbox when feature is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: false, params: null } },
       });
 
-      test('it should display selected import format', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          isLearnerImportEnabled: true,
-          features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
-        });
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
+      // then
+      assert.false(
+        screen.getByLabelText(
+          t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
+        ).checked,
+      );
+    });
 
-        assert.ok(
-          screen.getByRole('checkbox', {
-            checked: true,
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-        const select = screen.getByRole('button', { name: /Format d'import/ });
-        assert.ok(within(select).getByText('ONDE'));
+    test('it shows checked checkbox when feature is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: true, params: null } },
       });
 
-      test('it should hide the select import format', async function (assert) {
-        // given
-        const onSubmit = onSubmitStub;
-        const organization = EmberObject.create({
-          id: 1,
-          name: 'Organization',
-          isOrganizationSCO: false,
-          features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
-        });
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
 
-        const screen = await render(
-          <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-        );
-        await click(screen.getByRole('button', { name: t('common.actions.edit') }));
+      // then
+      assert.true(
+        screen.getByLabelText(
+          t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
+        ).checked,
+      );
+    });
+  });
 
-        // when
-        await click(
-          screen.getByRole('checkbox', {
-            checked: true,
-            name: `${t('components.organizations.information-section-view.features.LEARNER_IMPORT')}`,
-          }),
-        );
-        assert.notOk(
-          screen.queryByLabelText(
-            t('components.organizations.editing.organization-learner-import-format.selector.label'),
-          ),
-        );
+  module('LEARNER_IMPORT', function (hooks) {
+    hooks.beforeEach(function () {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+    });
+
+    test('it hides LEARNER_IMPORT checkbox when no import formats are available', async function (assert) {
+      // given
+      findAllStub.withArgs('organization-learner-import-format').resolves([]);
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: {},
       });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.notOk(
+        screen.queryByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+    });
+
+    test('it hides IS_MANAGING_STUDENTS for SCO when learner import is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: true,
+        isLearnerImportEnabled: true,
+        features: { LEARNER_IMPORT: { active: true, params: { name: 'GENERIC' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.notOk(
+        screen.queryByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
+        }),
+      );
+    });
+
+    test('it hides IS_MANAGING_STUDENTS for non-SCO organization', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        isLearnerImportEnabled: true,
+        features: {},
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.notOk(
+        screen.queryByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'),
+        }),
+      );
+    });
+
+    test('it shows checked checkbox with format select when learner import is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        isLearnerImportEnabled: true,
+        features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.true(
+        screen.getByRole('checkbox', {
+          checked: true,
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }).checked,
+      );
+      const select = screen.getByRole('button', { name: /Format d'import/ });
+      assert.ok(within(select).getByText('ONDE'));
+    });
+
+    test('it hides the format select when learner import is unchecked', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: { LEARNER_IMPORT: { active: true, params: { name: 'ONDE' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          checked: true,
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+
+      // then
+      assert.notOk(
+        screen.queryByLabelText(
+          t('components.organizations.editing.organization-learner-import-format.selector.label'),
+        ),
+      );
+    });
+
+    test('it displays a modal when user activates learner import', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: {},
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+      const modale = await screen.findByRole('dialog');
+
+      // then
+      assert.ok(
+        within(modale).getByRole('heading', {
+          level: 1,
+          name: t('components.organizations.editing.organization-learner-import-format.dialog.title'),
+        }),
+      );
+    });
+
+    test('it unchecks learner import when user closes the modal', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: {},
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+      const modale = await screen.findByRole('dialog');
+      await click(within(modale).getByRole('button', { name: t('common.actions.close') }));
+      await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
+
+      // then
+      assert.ok(
+        screen.getByRole('checkbox', {
+          checked: false,
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+    });
+
+    test('it keeps learner import checked when user confirms in the modal', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: {},
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+      const modale = await screen.findByRole('dialog');
+      await click(
+        within(modale).getByRole('checkbox', {
+          name: t('components.organizations.editing.organization-learner-import-format.dialog.confirmation'),
+        }),
+      );
+      await click(within(modale).getByRole('button', { name: t('common.actions.confirm') }));
+      await waitForElementToBeRemoved(() => screen.queryByRole('dialog'));
+
+      // then
+      assert.ok(
+        screen.getByRole('checkbox', {
+          checked: true,
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
     });
   });
 });
