@@ -380,7 +380,7 @@
               "element": {
                 "id": "24580343-0718-4c50-9683-6047f0ee2e10",
                 "type": "text",
-                "content": "<p><strong>Dans l’interface ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Renommer la photo «&nbsp;DCIM2115&nbsp;» avec le nom «&nbsp;Portugal&nbsp;».</strong></li><li><strong>Ranger la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;».</strong></li></ul>"
+                "content": "<p><strong>Dans l’interface ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Renommez la photo «&nbsp;DCIM2115&nbsp;» avec le nom «&nbsp;Portugal&nbsp;».</strong></li><li><strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;».</strong></li></ul>"
               }
             },
             {
@@ -542,7 +542,7 @@
               "element": {
                 "id": "aa2945b0-cec7-4b40-8ce7-82d97b37a451",
                 "type": "text",
-                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile&nbsp;:&nbsp;</p><ul><li>Faites un clic droit dessus puis cliquez sur «&nbsp;<strong>Supprimer </strong>» (Windows) ou «&nbsp;<strong>Placer dans la corbeille </strong>» (Mac). Le fichier est alors <strong>déplacé dans la corbeille</strong>. 🗑️</li><li><strong>Videz la corbeille </strong>pour <strong>supprimer définitivement</strong> les fichiers et dossiers qui s’y trouvent.&nbsp;❌</li></ul><p>[ avec image ou short video  ]</p><p><strong>🤔 Bon à savoir<br></strong>Certaines Corbeilles ne gardent les fichiers et dossiers que pendant 30 à 60 jours. Ils sont ensuite supprimés automatiquement.<br></p>"
+                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile&nbsp;:&nbsp;</p><ul><li>Faites un clic droit dessus puis cliquez sur «&nbsp;<strong>Supprimer </strong>» (Windows) ou «&nbsp;<strong>Placer dans la corbeille </strong>» (Mac). Le fichier est alors <strong>déplacé dans la corbeille</strong>. 🗑️</li><li><strong>Videz la corbeille </strong>pour <strong>supprimer définitivement</strong> les fichiers et dossiers qui s’y trouvent.&nbsp;❌</li></ul><p>[ avec image ou short video  ]</p><p><br><strong>🤔 Bon à savoir<br></strong>Certaines corbeilles ne gardent les fichiers et dossiers que pendant 30 à 60 jours. Ils sont ensuite supprimés automatiquement.<br></p>"
               }
             }
           ]
@@ -563,7 +563,7 @@
               "element": {
                 "id": "f9e7d7b2-b97e-4e43-a43b-32c592be79e9",
                 "type": "text",
-                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><br><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><br><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><br><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la Corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la Corbeille. 🗑️</li></ul>"
+                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><br><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><br><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><br><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la corbeille. 🗑️</li></ul>"
               }
             }
           ]
@@ -729,7 +729,7 @@
               "element": {
                 "id": "7efd6a00-11a9-4dd9-b8ee-0ff3c9bd18fa",
                 "type": "text",
-                "content": "<p><strong>Dans l’application ci-dessous&nbsp;: </strong></p><p><strong><br></strong></p><ul><li><strong>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;».</strong></li><li><strong>Créez un dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</strong></li></ul>"
+                "content": "<p><strong>Dans l’application ci-dessous&nbsp;: </strong></p><p><strong><br></strong></p><ul><li><strong>Supprimez le fichier&nbsp;«&nbsp;image4&nbsp;».</strong></li><li><strong>Créez un dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</strong></li></ul>"
               }
             },
             {
@@ -811,7 +811,7 @@
                   },
                   "invalid": {
                     "state": "Mauvaise réponse.",
-                    "diagnosis": "<p>Pour trouver le nom du fichier, suivez ces deux étapes&nbsp;:</p><ul><li>Récupérer le dossier «&nbsp;Administratif&nbsp;» depuis la Corbeille.</li><li>Ouvrir le dossier «&nbsp;Administratif&nbsp;» depuis le bureau de l’ordinateur.</li></ul>"
+                    "diagnosis": "<p>Pour trouver le nom du fichier, suivez ces deux étapes&nbsp;:</p><ul><li>Récupérer le dossier «&nbsp;Administratif&nbsp;» depuis la corbeille.</li><li>Ouvrir le dossier «&nbsp;Administratif&nbsp;» depuis le bureau de l’ordinateur.</li></ul>"
                   }
                 }
               }
