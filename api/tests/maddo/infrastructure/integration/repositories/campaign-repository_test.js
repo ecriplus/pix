@@ -83,6 +83,7 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
           targetProfileName: targetProfile.name,
           code: campaign1.code,
           createdAt: campaign1.createdAt,
+          archivedAt: campaign1.archivedAt,
           tubes: [
             {
               competenceId: competence.id,
@@ -100,6 +101,7 @@ describe('Maddo | Infrastructure | Repositories | Integration | campaign', funct
           type: campaign2.type,
           targetProfileName: targetProfile.name,
           code: campaign2.code,
+          archivedAt: campaign2.archivedAt,
           createdAt: campaign2.createdAt,
           tubes: [
             {

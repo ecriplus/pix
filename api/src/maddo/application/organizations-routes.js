@@ -87,6 +87,7 @@ const register = async function (server) {
                     ),
                     code: Joi.string().description('Code campagne'),
                     createdAt: Joi.date().description('Date de création de la campagne'),
+                    archivedAt: Joi.date().description("Date d'archivage de la campagne"),
                     tubes: Joi.array()
                       .items(
                         Joi.object({
