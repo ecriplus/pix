@@ -793,7 +793,7 @@ describe('Integration | Repository | Campaign-Report', function () {
         });
       });
 
-      context('when some campaigns matched the archived filter', function () {
+      context('when there is both ongoing and archived campaign', function () {
         it('should be able to retrieve only campaigns that are archived', async function () {
           // given
           organizationId = databaseBuilder.factory.buildOrganization().id;
@@ -816,6 +816,61 @@ describe('Integration | Repository | Campaign-Report', function () {
           expect(archivedCampaigns).to.have.lengthOf(1);
           expect(archivedCampaigns[0].id).to.equal(archivedCampaign.id);
           expect(archivedCampaigns[0].archivedAt).to.deep.equal(archivedCampaign.archivedAt);
+        });
+
+        it('should be able to retrieve only ongoing campaigns by default', async function () {
+          // given
+          organizationId = databaseBuilder.factory.buildOrganization().id;
+          databaseBuilder.factory.buildCampaign({
+            organizationId,
+            archivedAt: new Date('2010-07-30T09:35:45Z'),
+          });
+          const ongoingCampaign = databaseBuilder.factory.buildCampaign({ organizationId, archivedAt: null });
+          filter = {};
+
+          await databaseBuilder.commit();
+          // when
+          const { models: campaigns } = await campaignReportRepository.findPaginatedFilteredByOrganizationId({
+            organizationId,
+            filter,
+            page,
+          });
+
+          // then
+          expect(campaigns).to.have.lengthOf(1);
+          expect(campaigns[0].id).to.equal(ongoingCampaign.id);
+          expect(campaigns[0].archivedAt).to.deep.equal(ongoingCampaign.archivedAt);
+        });
+
+        it('should be able to return all campaigns', async function () {
+          // given
+          organizationId = databaseBuilder.factory.buildOrganization().id;
+          const archivedCampaign = databaseBuilder.factory.buildCampaign({
+            organizationId,
+            createdAt: new Date('2010-07-01T09:35:45Z'),
+            archivedAt: new Date('2010-07-30T09:35:45Z'),
+          });
+          const ongoingCampaign = databaseBuilder.factory.buildCampaign({
+            organizationId,
+            createdAt: new Date('2012-07-01T09:35:45Z'),
+            archivedAt: null,
+          });
+          filter.ongoing = false;
+
+          await databaseBuilder.commit();
+          // when
+          const { models: campaigns } = await campaignReportRepository.findPaginatedFilteredByOrganizationId({
+            organizationId,
+            filter: undefined,
+            page,
+          });
+
+          // then
+          expect(campaigns).to.have.lengthOf(2);
+          expect(campaigns[0].id).to.equal(ongoingCampaign.id);
+          expect(campaigns[0].archivedAt).to.deep.equal(ongoingCampaign.archivedAt);
+          expect(campaigns[1].id).to.equal(archivedCampaign.id);
+          expect(campaigns[1].archivedAt).to.deep.equal(archivedCampaign.archivedAt);
         });
       });
 

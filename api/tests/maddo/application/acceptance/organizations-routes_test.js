@@ -153,6 +153,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
           targetProfileName: targetProfile.name,
           code: campaign1InJurisdiction.code,
           createdAt: campaign1InJurisdiction.createdAt,
+          archivedAt: campaign1InJurisdiction.archivedAt,
           tubes: [
             {
               id: tube.id,
@@ -197,6 +198,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
             targetProfileName: null,
             code: campaign1InJurisdiction.code,
             createdAt: campaign1InJurisdiction.createdAt,
+            archivedAt: campaign1InJurisdiction.archivedAt,
             tubes: null,
           }),
         ]);
@@ -264,6 +266,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
             targetProfileName: targetProfile.name,
             code: campaign1InJurisdiction.code,
             createdAt: campaign1InJurisdiction.createdAt,
+            archivedAt: campaign1InJurisdiction.archivedAt,
             tubes: [
               {
                 id: tube.id,
@@ -338,6 +341,7 @@ describe('Acceptance | Maddo | Route | Organizations', function () {
             targetProfileName: targetProfile.name,
             code: campaignInJurisdiction.code,
             createdAt: campaignInJurisdiction.createdAt,
+            archivedAt: campaignInJurisdiction.archivedAt,
             tubes: [
               {
                 id: tube.id,

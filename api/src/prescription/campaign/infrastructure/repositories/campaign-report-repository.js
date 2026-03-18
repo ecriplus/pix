@@ -104,7 +104,7 @@ const findMasteryRates = async (campaignId) => {
 
 const findPaginatedFilteredByOrganizationId = async function ({
   organizationId,
-  filter = {},
+  filter,
   page,
   userId,
   combinedCourseDetailsRepository = injectedCombinedCourseDetailRepository,
@@ -140,8 +140,11 @@ const findPaginatedFilteredByOrganizationId = async function ({
     .where('campaigns.organizationId', organizationId)
     .whereNull('campaigns.deletedAt')
     .whereNotIn('campaigns.id', campaignIdsToExclude)
-    .modify(_setSearchFiltersForQueryBuilder, filter, userId)
     .orderBy('campaigns.createdAt', 'DESC');
+
+  if (filter) {
+    query.modify(_setSearchFiltersForQueryBuilder, filter, userId);
+  }
 
   const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
   const atLeastOneCampaign = await knexConn('campaigns')
