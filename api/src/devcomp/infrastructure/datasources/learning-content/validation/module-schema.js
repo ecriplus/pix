@@ -86,6 +86,10 @@ const componentElementSchema = Joi.object({
 
 const componentStepperSchema = Joi.object({
   type: Joi.string().valid('stepper').required(),
+  instruction: htmlSchema
+    .allow('')
+    .required()
+    .description("Instruction du stepper. S'affiche uniquement pour le stepper horizontal."),
   steps: Joi.array()
     .items(
       Joi.object({
@@ -165,4 +169,4 @@ const moduleSchema = Joi.object({
   sections: Joi.array().items(moduleSectionSchema).required(),
 }).required();
 
-export { grainSchema, moduleSchema };
+export { componentStepperSchema, grainSchema, moduleSchema };

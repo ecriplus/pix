@@ -92,6 +92,7 @@ export class ModuleFactory {
                                         });
                                       }),
                                     ),
+                                    instruction: component.instruction,
                                   });
                                 default:
                                   logger.warn({

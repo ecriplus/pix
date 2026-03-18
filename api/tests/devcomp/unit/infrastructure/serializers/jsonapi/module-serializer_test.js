@@ -355,6 +355,7 @@ function getComponents() {
   });
   return [
     new ComponentStepper({
+      instruction: '',
       steps: [
         {
           elements: [qrocmElement],
@@ -543,6 +544,7 @@ function getAttributesComponents() {
   return [
     {
       type: 'stepper',
+      instruction: '',
       steps: [
         {
           elements: [expectedQrocm],

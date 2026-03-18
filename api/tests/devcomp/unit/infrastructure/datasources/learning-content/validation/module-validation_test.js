@@ -21,6 +21,7 @@ import { shortVideoElementSchema } from '../../../../../../../src/devcomp/infras
 import { textElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/text-schema.js';
 import { videoElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/video-schema.js';
 import {
+  componentStepperSchema,
   grainSchema,
   moduleSchema,
 } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/module-schema.js';
@@ -522,6 +523,42 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         };
 
         await audioElementSchema.validateAsync(sample, {
+          abortEarly: false,
+        });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
+
+    it('should validate stepper structure', async function () {
+      try {
+        const sample = {
+          type: 'stepper',
+          instruction: 'Ceci est une instruction pour un stepper',
+          steps: [
+            {
+              elements: [
+                {
+                  id: '1cf5b276-9ce0-4b38-a56b-4d4447b34d8a',
+                  type: 'text',
+                  content: '<p>Cool</p>',
+                },
+              ],
+            },
+            {
+              elements: [
+                {
+                  id: '185881f1-6217-4306-8e89-070281a3e20a',
+                  type: 'text',
+                  content: '<p>Gang</p>',
+                },
+              ],
+            },
+          ],
+        };
+
+        await componentStepperSchema.validateAsync(sample, {
           abortEarly: false,
         });
       } catch (joiError) {
