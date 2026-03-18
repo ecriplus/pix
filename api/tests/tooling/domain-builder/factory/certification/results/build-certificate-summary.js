@@ -1,6 +1,7 @@
 import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
+  CERTIFICATE_TYPES,
   CertificateSummary,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
@@ -16,6 +17,7 @@ export function buildCertificateSummary({
   juryComment = buildJuryComment(),
   status = CERTIFICATE_STATUSES.VALIDATED,
   extraCertificationStatus = EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
+  certificateType = CERTIFICATE_TYPES.CERTIFICATE,
 } = {}) {
   return new CertificateSummary({
     id,
@@ -27,5 +29,6 @@ export function buildCertificateSummary({
     juryComment,
     status,
     extraCertificationStatus,
+    certificateType,
   });
 }

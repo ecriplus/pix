@@ -4,6 +4,7 @@ import { Frameworks } from '../../../../../src/certification/configuration/domai
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import {
   CERTIFICATE_STATUSES,
+  CERTIFICATE_TYPES,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -519,6 +520,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
           verificationCode: 'ABC123',
           createdAt: new Date('2025-05-05'),
           userId,
+          version: AlgorithmEngineVersion.V3,
         }).id;
         const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
           pixScore: 777,
@@ -593,6 +595,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'certification-started-at': new Date('2025-05-05'),
               comment: 'COUCOU C MOI',
               'pix-score': 777,
+              'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             },
@@ -606,6 +609,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'certification-framework': Frameworks.EDU_1ER_DEGRE,
               'certification-started-at': new Date('2025-06-06'),
               comment: 'Bravo',
+              'certificate-type': CERTIFICATE_TYPES.ATTESTATION,
               'pix-score': 555,
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_ACQUIRED,

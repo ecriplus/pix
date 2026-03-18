@@ -19,6 +19,7 @@ const serialize = function (certificateSummaries, { translate }) {
       'comment',
       'status',
       'extraCertificationStatus',
+      'certificateType',
     ],
   }).serialize(certificateSummaries);
 };

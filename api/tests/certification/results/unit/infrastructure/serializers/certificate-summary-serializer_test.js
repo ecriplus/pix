@@ -1,6 +1,7 @@
 import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
+  CERTIFICATE_TYPES,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-summary-serializer.js';
@@ -24,6 +25,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
       pixScore: 123,
       isExtraCertificationAcquired: true,
       status: CERTIFICATE_STATUSES.REJECTED,
+      certificateType: CERTIFICATE_TYPES.CERTIFICATE,
     };
   });
 
@@ -53,6 +55,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             'certification-framework': Frameworks.CORE,
             'certification-started-at': new Date('2021-10-29'),
             'pix-score': 123,
+            'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
             status: CERTIFICATE_STATUSES.REJECTED,
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment:
@@ -70,6 +73,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             'certification-framework': Frameworks.CORE,
             'certification-started-at': new Date('2021-10-29'),
             'pix-score': 123,
+            'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
             status: CERTIFICATE_STATUSES.REJECTED,
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment:
@@ -103,6 +107,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             'certification-framework': Frameworks.CORE,
             'certification-started-at': new Date('2021-10-29'),
             'pix-score': 123,
+            'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
             status: CERTIFICATE_STATUSES.REJECTED,
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment: 'Message à tous les habitants de la galaxie, because it is la fiesta',
