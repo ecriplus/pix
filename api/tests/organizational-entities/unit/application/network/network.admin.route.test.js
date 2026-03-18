@@ -98,6 +98,53 @@ describe('Unit | Application | Admin | Route | Network', function () {
     });
   });
 
+  describe('PATCH /api/admin/networks/{networkId}', function () {
+    describe('when the authenticated user has super admin role', function () {
+      it('should call update controller method', async function () {
+        // given
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+        sinon.stub(usecases, 'updateNetwork').returns('ok');
+        sinon.stub(networkAdminController, 'update').returns('ok');
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('PATCH', '/api/admin/networks/1', {
+          data: {
+            attributes: { name: 'Nouveau nom' },
+          },
+        });
+
+        // then
+        sinon.assert.called(networkAdminController.update);
+      });
+    });
+
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(networkAdminController, 'update').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('PATCH', '/api/admin/networks/1', {
+          data: {
+            attributes: { name: 'Nouveau nom' },
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(networkAdminController.update);
+      });
+    });
+  });
+
   describe('POST /api/admin/networks', function () {
     describe('when the authenticated user has super admin role', function () {
       it('should call create controller method', async function () {

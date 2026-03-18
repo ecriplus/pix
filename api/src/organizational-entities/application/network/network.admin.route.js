@@ -70,6 +70,42 @@ const register = async function (server) {
       },
     },
     {
+      method: 'PATCH',
+      path: '/api/admin/networks/{networkId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            networkId: identifiersType.networkId,
+          }),
+          payload: Joi.object({
+            data: Joi.object({
+              id: Joi.string(),
+              attributes: Joi.object({
+                name: Joi.string().required(),
+              }),
+              type: Joi.string(),
+            }),
+          }),
+        },
+        handler: (request, h) => networkAdminController.update(request, h),
+        tags: ['api', 'organizational-entities', 'network'],
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès Superadmin**\n" +
+            "- Modification du nom d'un réseau.",
+        ],
+      },
+    },
+    {
       method: 'POST',
       path: '/api/admin/networks',
       config: {

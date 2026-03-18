@@ -63,6 +63,32 @@ describe('Unit | Organizational Entities | Application | Network', function () {
     });
   });
 
+  describe('#update', function () {
+    it('calls "updateNetwork" use case with the right parameters', async function () {
+      // given
+      const networkId = 1;
+      const networkName = 'Nouveau nom';
+      const request = {
+        params: { networkId },
+        payload: {
+          data: {
+            attributes: { name: networkName },
+          },
+        },
+      };
+      const updatedNetwork = domainBuilder.acquisition.buildNetwork({ id: networkId, name: networkName });
+      sinon.stub(usecases, 'updateNetwork').resolves(updatedNetwork);
+      const networkSerializer = { serialize: sinon.stub(), deserialize: sinon.stub().returns({ networkName }) };
+
+      // when
+      await networkAdminController.update(request, hFake, { networkSerializer });
+
+      // then
+      expect(usecases.updateNetwork).to.have.been.calledOnceWith({ networkId, networkName });
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly(updatedNetwork);
+    });
+  });
+
   describe('#create', function () {
     context('when payload contains only required fields', function () {
       it('calls "createNetwork" use case with the right parameters', async function () {

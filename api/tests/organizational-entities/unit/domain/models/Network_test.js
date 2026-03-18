@@ -38,4 +38,17 @@ describe('Unit | Organizational Entities | Domain | Model | Network', function (
       });
     });
   });
+
+  describe('#updateName', function () {
+    it('should update the network name', function () {
+      // given
+      const network = new Network({ id: 1, name: 'Ancien nom' });
+
+      // when
+      network.updateName('Nouveau nom');
+
+      // then
+      expect(network.name).to.equal('Nouveau nom');
+    });
+  });
 });

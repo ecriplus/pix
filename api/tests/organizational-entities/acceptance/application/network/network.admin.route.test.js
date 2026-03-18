@@ -93,6 +93,34 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
     });
   });
 
+  describe('PATCH /api/admin/networks/{networkId}', function () {
+    it('updates the network name and returns 200', async function () {
+      // given
+      const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Ancien nom' });
+      await databaseBuilder.commit();
+
+      const request = {
+        method: 'PATCH',
+        url: `/api/admin/networks/${network.id}`,
+        headers: generateAuthenticatedUserRequestHeaders(superAdmin),
+        payload: {
+          data: {
+            attributes: {
+              name: 'Nouveau nom',
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(request);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data.attributes.name).to.equal('Nouveau nom');
+    });
+  });
+
   describe('GET /api/admin/networks with filter', function () {
     it('returns filtered networks by name with 200 HTTP status code', async function () {
       // given
