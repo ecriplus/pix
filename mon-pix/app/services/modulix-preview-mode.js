@@ -14,7 +14,7 @@ export default class ModulixPreviewModeService extends Service {
     return this.isEnabled && this.isElementsIdButtonEnabled;
   }
 
-  @action enableElementsIdButton() {
+  @action toggleElementIdButton() {
     this.isElementsIdButtonEnabled = !this.isElementsIdButtonEnabled;
   }
 }
