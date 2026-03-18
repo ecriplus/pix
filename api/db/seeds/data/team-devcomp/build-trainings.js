@@ -6,7 +6,7 @@ export function buildTrainings(databaseBuilder) {
     id: trainingId++,
     title: 'Apprendre à manger un croissant comme les français',
     internalTitle: 'Apprendre à manger un croissant comme les français',
-    locale: 'fr',
+    locales: ['fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -35,7 +35,7 @@ export function buildTrainings(databaseBuilder) {
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
-    locale: 'fr',
+    locales: ['fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -64,7 +64,7 @@ export function buildTrainings(databaseBuilder) {
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
-    locale: 'fr',
+    locales: ['fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -88,7 +88,7 @@ export function buildTrainings(databaseBuilder) {
     id: trainingId++,
     title: 'Apprendre à peindre comme Monet',
     internalTitle: 'Apprendre à peindre comme Monet',
-    locale: 'fr-fr',
+    locales: ['fr-fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -117,7 +117,7 @@ export function buildTrainings(databaseBuilder) {
     editorName: 'Pix',
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
-    locale: 'fr-fr',
+    locales: ['fr-fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -141,7 +141,6 @@ export function buildTrainings(databaseBuilder) {
     id: trainingId++,
     title: 'Eat a croissant like the french',
     internalTitle: 'Eat a croissant like the french',
-    locale: 'en',
     locales: ['en'],
   }).id;
 
