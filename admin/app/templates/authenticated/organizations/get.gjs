@@ -33,6 +33,10 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
         {{t "pages.organization.navbar.details"}}
       </LinkTo>
 
+      <LinkTo @route="authenticated.organizations.get.features" @model={{@model}}>
+        {{t "pages.organization.navbar.features"}}
+      </LinkTo>
+
       {{#unless @model.isArchived}}
         <LinkTo @route="authenticated.organizations.get.team" @model={{@model}}>
           {{t "pages.organization.navbar.team"}}

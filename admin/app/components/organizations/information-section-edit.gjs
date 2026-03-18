@@ -1,26 +1,21 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
-import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
-import { concat, fn, get } from '@ember/helper';
+import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import { and, eq, notEq, or } from 'ember-truth-helpers';
 import Joi from 'joi';
 import lodashGet from 'lodash/get';
 import lodashSet from 'lodash/set';
-import Organization from 'pix-admin/models/organization';
 import { FormValidator } from 'pix-admin/utils/form-validator';
 
 import Card from '../card';
 
 export default class OrganizationInformationSectionEditionMode extends Component {
-  @service accessControl;
   @service store;
   @service oidcIdentityProviders;
   @service intl;
@@ -31,11 +26,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
   @tracked form = {};
   @tracked showArchivingConfirmationModal = false;
   @tracked administrationTeams = [];
-  @tracked importFormats = [];
   @tracked organizationLearnerTypes = [];
   @tracked countries = [];
-  @tracked displayLearnerImportActivationDialog = false;
-  @tracked learnerImportActivationConfirmed = false;
 
   noIdentityProviderOption = { label: this.intl.t('common.words.none'), value: 'None' };
   garIdentityProviderOption = { label: 'GAR', value: 'GAR' };
@@ -50,16 +42,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
 
   async #loadAsyncData() {
     this.administrationTeams = await this.store.findAll('administration-team');
-    this.importFormats = await this.store.findAll('organization-learner-import-format');
     this.organizationLearnerTypes = await this.store.findAll('organization-learner-type');
     this.countries = await this.store.findAll('country');
-  }
-
-  get importFormatOptions() {
-    return this.importFormats.map((importFormats) => ({
-      value: importFormats.name,
-      label: importFormats.name,
-    }));
   }
 
   #initForm() {
@@ -75,7 +59,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
       documentationUrl: this.args.organization.documentationUrl,
       identityProviderForCampaigns:
         this.args.organization.identityProviderForCampaigns ?? this.noIdentityProviderOption.value,
-      features: structuredClone(this.args.organization.features),
       administrationTeamId: this.args.organization.administrationTeamId
         ? `${this.args.organization.administrationTeamId}`
         : null,
@@ -84,13 +67,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
         ? `${this.args.organization.organizationLearnerTypeId}`
         : null,
     };
-  }
-
-  get isManagingStudentAvailable() {
-    return (
-      !this.args.organization.isLearnerImportEnabled &&
-      (this.args.organization.isOrganizationSCO || this.args.organization.isOrganizationSUP)
-    );
   }
 
   get identityProviderOptions() {
@@ -135,49 +111,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
   closeAndResetForm() {
     this.args.toggleEditMode();
     this.#initForm();
-  }
-
-  @action
-  updateFormCheckBoxValue(key) {
-    if (key === 'features.LEARNER_IMPORT.active') {
-      this.form = lodashSet(
-        this.form,
-        'features.LEARNER_IMPORT',
-        this.form.features?.LEARNER_IMPORT?.active
-          ? {
-              active: false,
-            }
-          : {
-              active: true,
-              params: {
-                name: this.importFormatOptions[0].label,
-              },
-            },
-      );
-      if (this.form.features.LEARNER_IMPORT.active && !this.args.organization.features?.LEARNER_IMPORT?.active) {
-        this.displayLearnerImportActivationDialog = true;
-        this.learnerImportActivationConfirmed = false;
-      }
-    } else {
-      this.form = lodashSet(this.form, key, !lodashGet(this.form, key));
-    }
-  }
-
-  @action
-  closeLearnerImportActivationDialog() {
-    this.displayLearnerImportActivationDialog = false;
-    this.updateFormCheckBoxValue('features.LEARNER_IMPORT.active');
-  }
-  @action
-  toggleConfirmLearnerImportActivation() {
-    this.learnerImportActivationConfirmed = !this.learnerImportActivationConfirmed;
-  }
-
-  @action
-  confirmLearnerImportActivation() {
-    if (this.learnerImportActivationConfirmed) {
-      this.displayLearnerImportActivationDialog = false;
-    }
   }
 
   @action
@@ -228,7 +161,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
     this.args.organization.set('credit', this.form.credit);
     this.args.organization.set('documentationUrl', this.form.documentationUrl);
     this.args.organization.set('identityProviderForCampaigns', this.form.identityProviderForCampaigns);
-    this.args.organization.set('features', this.form.features);
     this.args.organization.set('administrationTeamId', this.form.administrationTeamId);
     this.args.organization.set('administrationTeamName', administrationTeamName);
     this.args.organization.set('countryCode', this.form.countryCode);
@@ -378,19 +310,6 @@ export default class OrganizationInformationSectionEditionMode extends Component
           ><:label>{{t "components.organizations.information-section-view.credits"}}</:label></PixInput>
         </Card>
 
-        <Card
-          class="admin-form__card organization-creation-form__card"
-          @title={{t "components.organizations.creation.features"}}
-        >
-          <FeaturesForm
-            @form={{this.form}}
-            @importFormatOptions={{this.importFormatOptions}}
-            @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
-            @updateValue={{this.updateValue}}
-            @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
-          />
-        </Card>
-
         <Card class="admin-form__card organization-creation-form__card" @title={{this.dpoSectionTitle}}>
           <PixInput
             @errorMessage={{this.validator.errors.dataProtectionOfficerLastName}}
@@ -427,102 +346,8 @@ export default class OrganizationInformationSectionEditionMode extends Component
         </PixButton>
       </section>
     </form>
-
-    <PixModal
-      @title={{t "components.organizations.editing.organization-learner-import-format.dialog.title"}}
-      @onCloseButtonClick={{this.closeLearnerImportActivationDialog}}
-      @showModal={{this.displayLearnerImportActivationDialog}}
-    >
-      <:content>
-        <p>
-          {{t "components.organizations.editing.organization-learner-import-format.dialog.message"}}
-        </p>
-        <p>
-          <PixCheckbox
-            @checked={{this.learnerImportActivationConfirmed}}
-            {{on "change" this.toggleConfirmLearnerImportActivation}}
-          ><:label>
-              <strong>
-                {{t "components.organizations.editing.organization-learner-import-format.dialog.confirmation"}}
-              </strong>
-            </:label>
-          </PixCheckbox>
-        </p>
-      </:content>
-      <:footer>
-        <PixButton @variant="secondary" @triggerAction={{this.closeLearnerImportActivationDialog}}>
-          {{t "common.actions.cancel"}}
-        </PixButton>
-        <PixButton @variant="error" @triggerAction={{this.confirmLearnerImportActivation}}>{{t
-            "common.actions.confirm"
-          }}</PixButton>
-      </:footer>
-    </PixModal>
   </template>
 }
-
-function keys(obj) {
-  return Object.keys(obj);
-}
-
-const FeaturesForm = <template>
-  {{#each (keys Organization.editableFeatureList) as |feature|}}
-    {{#let
-      (get @form.features feature) (concat "components.organizations.information-section-view.features." feature)
-      as |organizationFeature featureLabel|
-    }}
-      {{#if (or @isManagingStudentAvailable (notEq feature "IS_MANAGING_STUDENTS"))}}
-        {{#if
-          (or
-            (notEq feature "LEARNER_IMPORT")
-            (and (eq feature "LEARNER_IMPORT") (notEq (get @importFormatOptions "length") 0))
-          )
-        }}
-          <div class="form-field">
-            <PixCheckbox
-              @checked={{organizationFeature.active}}
-              {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
-            ><:label>{{t featureLabel}}</:label></PixCheckbox>
-            {{#if (and (eq feature "LEARNER_IMPORT") (get organizationFeature "active"))}}
-              <PixSelect
-                required
-                @aria-required={{true}}
-                @requiredLabel={{t "common.forms.mandatory"}}
-                @options={{@importFormatOptions}}
-                @value={{organizationFeature.params.name}}
-                @onChange={{fn @updateValue "features.LEARNER_IMPORT.params.name"}}
-                @hideDefaultOption={{true}}
-                @isFullWidth={{false}}
-                @placeholder={{t
-                  "components.organizations.editing.organization-learner-import-format.selector.placeholder"
-                }}
-              >
-
-                <:label>{{t
-                    "components.organizations.editing.organization-learner-import-format.selector.label"
-                  }}</:label>
-              </PixSelect>
-            {{/if}}
-          </div>
-        {{/if}}
-      {{/if}}
-
-      {{#if (and (eq feature "PLACES_MANAGEMENT") (get organizationFeature "active"))}}
-        <div class="form-field">
-          <PixCheckbox
-            @checked={{organizationFeature.params.enableMaximumPlacesLimit}}
-            {{on
-              "change"
-              (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
-            }}
-          ><:label>{{t
-                "components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label"
-              }}</:label></PixCheckbox>
-        </div>
-      {{/if}}
-    {{/let}}
-  {{/each}}
-</template>;
 
 const ORGANIZATION_FORM_VALIDATION_SCHEMA = Joi.object({
   name: Joi.string().min(1).max(255).empty(['', null]).required().messages({
