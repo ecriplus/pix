@@ -105,13 +105,10 @@ module('Integration | Component | organizations/information-section', function (
 
       await fillByLabel(t('components.organizations.information-section-view.external-id'), 'new externalId');
       await fillByLabel(t('components.organizations.editing.province-code.label'), 'new provinceCode');
-      await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
       await fillByLabel(
         t('components.organizations.information-section-view.documentation-link'),
         'new documentationUrl',
       );
-      await clickByName(t('components.organizations.information-section-view.features.SHOW_SKILLS'));
-      await clickByName(t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT'));
 
       // when
       await clickByName(t('common.actions.cancel'));
@@ -124,31 +121,6 @@ module('Integration | Component | organizations/information-section', function (
         .dom(screen.getByText(t('components.organizations.information-section-view.province-code')).nextElementSibling)
         .hasText(organization.provinceCode);
       assert.dom(screen.getByRole('link', { name: organization.documentationUrl })).exists();
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
-              'common.words.no',
-            )}`,
-          ),
-        )
-        .exists();
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.SHOW_SKILLS')} : ${t('common.words.no')}`,
-          ),
-        )
-        .exists();
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
-              'common.words.no',
-            )}`,
-          ),
-        )
-        .exists();
     });
 
     test('it should submit the form if there is no error', async function (assert) {
@@ -199,17 +171,12 @@ module('Integration | Component | organizations/information-section', function (
       await click(danemarkOption);
 
       await fillByLabel(t('components.organizations.information-section-view.credits'), 50);
-      await clickByName(t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS'));
       await fillByLabel(t('components.organizations.information-section-view.documentation-link'), 'https://pix.fr/');
 
       await clickByName(t('components.organizations.information-section-view.sso'));
       await screen.findByRole('listbox');
       const ssoOption = await screen.findByRole('option', { name: 'organization 2' });
       await click(ssoOption);
-
-      await clickByName(t('components.organizations.information-section-view.features.SHOW_SKILLS'));
-      await clickByName(t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT'));
-      await clickByName(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'));
 
       // when
       await clickByName(t('common.actions.save'));
@@ -233,37 +200,10 @@ module('Integration | Component | organizations/information-section', function (
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.credits')).nextElementSibling)
         .hasText('50');
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.IS_MANAGING_STUDENTS')} : ${t(
-              'common.words.yes',
-            )}`,
-          ),
-        )
-        .exists();
       assert.dom(screen.getByRole('link', { name: 'https://pix.fr/' })).exists();
       assert
         .dom(screen.getByText(t('components.organizations.information-section-view.sso')).nextElementSibling)
         .hasText('organization 2');
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.MULTIPLE_SENDING_ASSESSMENT')} : ${t(
-              'common.words.yes',
-            )}`,
-          ),
-        )
-        .exists();
-      assert
-        .dom(
-          screen.getByLabelText(
-            `${t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')} : ${t(
-              'common.words.yes',
-            )}`,
-          ),
-        )
-        .exists();
     });
 
     test('it should not submit the form if there is an error', async function (assert) {
