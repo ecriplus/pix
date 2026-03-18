@@ -4,6 +4,24 @@ import { FRENCH_FRANCE } from '../../../../src/shared/domain/services/locale-ser
 import { expect, hFake, sinon } from '../../../test-helper.js';
 
 describe('Profile | Unit | Controller | attestation-controller', function () {
+  describe('#getAll', function () {
+    it('should call the expected usecase and serializer', async function () {
+      // given
+      const attestations = Symbol('attestations');
+      const serializerResult = Symbol('serializerResult');
+      const attestationAdminSerializer = { serialize: sinon.stub().withArgs(attestations).returns(serializerResult) };
+      sinon.stub(usecases, 'getAllAttestations').resolves(attestations);
+
+      // when
+      const result = await attestationController.getAll({}, hFake, { attestationAdminSerializer });
+
+      // then
+      expect(usecases.getAllAttestations).to.have.been.calledOnce;
+      expect(attestationAdminSerializer.serialize).to.have.been.calledWithExactly(attestations);
+      expect(result).to.equal(serializerResult);
+    });
+  });
+
   describe('#getUserAttestation', function () {
     it('should call the expected usecase and serializer', async function () {
       // given

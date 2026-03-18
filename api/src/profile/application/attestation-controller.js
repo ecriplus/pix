@@ -1,6 +1,7 @@
 import { FRENCH_FRANCE } from '../../shared/domain/services/locale-service.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as attestationSerializer from '../infrastructure/serializers/jsonapi/attestation-detail-serializer.js';
+import * as attestationAdminSerializer from '../infrastructure/serializers/jsonapi/attestation-serializer.js';
 import * as pdfWithFormSerializer from '../infrastructure/serializers/pdf/pdf-with-form-serializer.js';
 
 const getUserAttestation = async function (request, h, dependencies = { pdfWithFormSerializer }) {
@@ -27,7 +28,13 @@ const getUserAttestationsDetails = async function (request, _, dependencies = { 
   return usecases.getAttestationDetails({ profileRewards }).then(dependencies.attestationSerializer.serialize);
 };
 
+const getAll = async function (request, _, dependencies = { attestationAdminSerializer }) {
+  const attestations = await usecases.getAllAttestations();
+  return dependencies.attestationAdminSerializer.serialize(attestations);
+};
+
 const attestationController = {
+  getAll,
   getUserAttestation,
   getUserAttestationsDetails,
 };

@@ -5,6 +5,32 @@ import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { attestationController } from './attestation-controller.js';
 
 const register = async function (server) {
+  const adminRoutes = [
+    {
+      method: 'GET',
+      path: '/api/admin/attestations',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        handler: attestationController.getAll,
+        notes: [
+          '- **Cette route est restreinte aux membres admin**\n- Récupération de la liste de toutes les attestations',
+        ],
+        tags: ['api', 'admin', 'attestations', 'profile'],
+      },
+    },
+  ];
+
   const userRoutes = [
     {
       method: 'GET',
@@ -57,7 +83,7 @@ const register = async function (server) {
     },
   ];
 
-  server.route([...userRoutes]);
+  server.route([...adminRoutes, ...userRoutes]);
 };
 
 const name = 'profile/attestation-api';

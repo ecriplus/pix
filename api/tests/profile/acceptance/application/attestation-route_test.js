@@ -3,6 +3,7 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
+  insertUserWithRoleSuperAdmin,
   mockAttestationStorage,
 } from '../../../test-helper.js';
 
@@ -11,6 +12,33 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
 
   beforeEach(async function () {
     server = await createServer();
+  });
+
+  describe('GET /api/admin/attestations', function () {
+    it('should return 200 with the list of attestations', async function () {
+      // given
+      const adminUser = await insertUserWithRoleSuperAdmin();
+      databaseBuilder.factory.buildAttestation({ key: 'PARENTHOOD' });
+      databaseBuilder.factory.buildAttestation({ key: 'SIXTH_GRADE' });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+        url: '/api/admin/attestations',
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.have.lengthOf(2);
+      expect(response.result.data.map(({ attributes }) => attributes.key)).to.include.members([
+        'PARENTHOOD',
+        'SIXTH_GRADE',
+      ]);
+    });
   });
 
   describe('GET /api/users/{userId}/attestations/{attestationKey}', function () {
