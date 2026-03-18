@@ -95,7 +95,7 @@ const deleteCampaigns = async ({
 
     await campaignAdministrationRepository.deleteExternalIdLabelFromCampaigns(campaignIdsToDelete);
 
-    await campaignAdministrationRepository.remove(campaignsToDelete);
+    await campaignAdministrationRepository.removeInBatch(campaignsToDelete);
   });
 
   for (const auditLoggingJob of auditLoggingJobs) {
