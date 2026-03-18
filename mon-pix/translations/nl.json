@@ -1085,7 +1085,7 @@
       },
       "has-focused-out-of-window": {
         "certification": "We hebben een paginawissel geconstateerd. Je antwoord wordt als fout gerekend. Als je gedwongen werd om van pagina te wisselen, informeer dan je toezichthouder en beantwoord de vraag in zijn of haar aanwezigheid.",
-        "default": "We hebben een paginawijziging gedetecteerd. In certificering zou uw antwoord niet worden gevalideerd.",
+        "default": "We hebben gemerkt dat u een nieuw venster hebt geopend. In geval van certificering zou dit antwoord niet meegerekend worden.",
         "v3-accessible-certification": "We hebben een paginawissel gedetecteerd. Als je van pagina moest veranderen om een hulpmiddel voor digitale toegankelijkheid (zoals een schermlezer of virtueel toetsenbord) te gebruiken, beantwoord de vraag dan toch.",
         "v3-certification": "We hebben een paginawijziging gedetecteerd. Je antwoord wordt als fout geteld. Als je gedwongen werd om van pagina te veranderen, vertel dit dan aan je toezichthouder zodat hij of zij dit kan zien en rapporteren, indien nodig."
       },
@@ -1095,8 +1095,8 @@
       "is-focused-challenge": {
         "info-alert": {
           "adjusted-course-title": "Beantwoord deze vraag zonder gebruik te maken van internet of andere applicaties.",
-          "subtitle": "Bij certificering wordt je antwoord niet gevalideerd als je van pagina verandert.",
-          "title": "Beantwoord deze vraag zonder op internet te zoeken of software te gebruiken."
+          "subtitle": "In geval van certificering wordt je antwoord niet gevalideerd als je van pagina verandert.",
+          "title": "Beantwoord deze vraag zonder op internet te zoeken of externe software te gebruiken."
         }
       },
       "live-alerts": {
@@ -1128,7 +1128,7 @@
         "qcm": "Selecteer ten minste twee antwoorden om te bevestigen. Zo niet, sla dan over.",
         "qcu": "Selecteer een antwoord om te bevestigen. Sla anders over.",
         "qroc": "Vul het tekstveld in om te valideren. Sla anders over.",
-        "qroc-auto-reply": "\"U kunt valideren\" wordt weergegeven wanneer de proef is geslaagd. Probeer het opnieuw of ga verder.",
+        "qroc-auto-reply": "U kan op \"Bevestigen\"  klikken wanneer de proef geslaagd is. Probeer het opnieuw of kies \"Overslaan\".",
         "qroc-positive-number": "Voer om te valideren een getal in dat groter is dan of gelijk is aan 0, sla anders over.",
         "qrocm": "Vul alle antwoordvelden in om te valideren. Zo niet, sla dan over."
       },
@@ -1162,11 +1162,11 @@
           "aria-label": "Geef de indicatie op het bewijs weer.",
           "close": "Ik snap het.",
           "focused": {
-            "content": "'<p class=\"tooltip-tag-information__title--focused\">'Blijf op deze pagina om te reageren!'</p>' Gebruik geen internet of een app om te reageren. Elke activiteit buiten de zone wordt gedetecteerd.",
+            "content": "'<p class=\"tooltip-tag-information__title--focused\">'Blijf op deze pagina om te reageren!'</p>' Gebruik geen internet of een app. Elke activiteit buiten de zone wordt gedetecteerd.",
             "title": "Scherpstelmodus"
           },
           "other": {
-            "content": "Je bent vrij om het internet of applicaties te gebruiken om deze vraag te beantwoorden.",
+            "content": "Je mag het internet of andere applicaties gebruiken om deze vraag te beantwoorden.",
             "title": "Vrije modus"
           }
         }
@@ -1272,15 +1272,15 @@
           "tooltip": "Mislukte test"
         },
         "ko": {
-          "title": "Je hebt niet het juiste antwoord",
-          "tooltip": "Onjuist antwoord"
+          "title": "Fout antwoord !",
+          "tooltip": "Onjuist fout"
         },
         "koAutoReply": {
           "title": "Je bent niet geslaagd voor de test",
           "tooltip": "Test zonder succes"
         },
         "ok": {
-          "title": "Je hebt het juiste antwoord!",
+          "title": "Correct antwoord !",
           "tooltip": "Juist antwoord"
         },
         "okAutoReply": {
