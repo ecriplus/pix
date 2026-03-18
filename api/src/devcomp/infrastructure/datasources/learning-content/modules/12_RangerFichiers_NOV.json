@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "Photos, documents écrits, musiques… Sur votre ordinateur de nombreux fichiers sont stockés, rangés dans des dossiers.<br>Ce module vous aide à reconnaître et manipuler les fichiers, les dossiers et la corbeille pour organiser votre ordinateur simplement.",
+    "description": "<p>Photos, documents écrits, musiques… de nombreux éléments sont stockés sur votre ordinateur.<br>Ce module vous aide à manipuler les fichiers, les dossiers et la corbeille pour organiser votre ordinateur simplement.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -67,28 +67,28 @@
                     "id": "1",
                     "content": "Regrouper certains éléments ensemble.",
                     "feedback": {
-                      "diagnosis": "Effectivement, regrouper des fichiers dans des dossiers est un bon moyen pour s’y retrouver plus facilement. <br>Mais il existe plusieurs autres options&nbsp;: supprimer des fichiers et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur."
+                      "diagnosis": "<p>Effectivement, regrouper des éléments est un bon moyen pour s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: supprimer des éléments et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Supprimer ce qui ne sert plus.",
                     "feedback": {
-                      "diagnosis": "Effectivement, penser à supprimer des fichiers et des dossiers quand ils ne sont plus utiles peut aider à s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper des éléments et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur."
+                      "diagnosis": "<p>Effectivement, penser à supprimer des éléments quand ils ne sont plus utiles peut aider à s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper des éléments et choisir des noms compréhensibles peut aussi permettre de mieux s’organiser sur un ordinateur.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Donner des noms plus clairs.",
                     "feedback": {
-                      "diagnosis": "Effectivement, choisir des noms compréhensibles pour ses fichiers et ses dossiers permet de s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper des éléments et supprimer des fichiers peut aussi permettre de mieux s’organiser sur un ordinateur."
+                      "diagnosis": "<p>Effectivement, choisir des noms compréhensibles permet de s’y retrouver plus facilement.<br>Mais il existe plusieurs autres options&nbsp;: regrouper ou supprimer des éléments peut aussi permettre de mieux s’organiser sur un ordinateur.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "Il existe des moyens simples pour mieux s’organiser sur un ordinateur&nbsp;: choisir des noms compréhensibles pour ses fichiers, les ranger dans des dossiers ou encore supprimer les fichiers et les dossiers quand ils ne sont plus utiles."
+                      "diagnosis": "<p>Il existe des moyens simples pour mieux s’organiser sur un ordinateur&nbsp;: choisir des noms compréhensibles, regrouper des éléments dans des dossiers ou encore supprimer les éléments quand ils ne sont plus utiles.</p>"
                     }
                   }
                 ],
@@ -186,7 +186,7 @@
                       "feedbacks": {
                         "valid": {
                           "state": "",
-                          "diagnosis": "Effectivement, «&nbsp;Janvier&nbsp;»&nbsp;est bien un <strong>dossier</strong>, il <strong>contient des fichiers</strong>. Les dossiers sont représentés par une icône spécifique, souvent sous forme d’une pochette. 📂"
+                          "diagnosis": "<p>Effectivement, «&nbsp;Janvier&nbsp;»&nbsp;est bien un <strong>dossier</strong>, il peut<strong> contenir&nbsp;des fichiers</strong>. Les dossiers sont représentés par une icône spécifique, souvent sous forme d’une pochette. 📂</p>"
                         },
                         "invalid": {
                           "state": "",
@@ -298,7 +298,7 @@
               "element": {
                 "id": "617bda78-d613-4dbd-9b18-84dd86bb89d5",
                 "type": "text",
-                "content": "<p><strong>Dans l’interface ci-dessous, créez un dossier “Photos” sur le bureau de Maëva.</strong></p>"
+                "content": "<p>Dans l’interface ci-dessous&nbsp;:&nbsp;</p><ul><li>Créez un nouveau dossier sur le bureau de Maëva.&nbsp;</li><li>Nommez-le «&nbsp;Photos&nbsp;».</li></ul>"
               }
             },
             {
@@ -327,7 +327,7 @@
               "element": {
                 "id": "e1b19308-d5d9-414f-b2fc-b8a13e6f8bb9",
                 "type": "text",
-                "content": "<p>Feedback:&nbsp;Lors de la<strong> création d’un dossier</strong>, il est possible de lui<strong> donner un nom</strong>. Le choix du nom peut aider à <strong>mieux s’organiser</strong>, par exemple un dossier Photos pour ranger ses photos.</p>"
+                "content": "<p>Feedback:&nbsp;Lors de la<strong> création d’un dossier</strong>, il est possible de lui<strong> donner un nom</strong>. Un nom court et clair peut aider à <strong>mieux s’organiser</strong>, par exemple un dossier «&nbsp;Photos&nbsp;» pour ranger ses photos.<br>Si vous ne lui donnez pas de nom, un nom automatique lui est donné comme «&nbsp;Nouveau dossier&nbsp;».</p>"
               }
             }
           ]
@@ -380,7 +380,7 @@
               "element": {
                 "id": "24580343-0718-4c50-9683-6047f0ee2e10",
                 "type": "text",
-                "content": "<p><strong>Dans l’interface ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Renommer la photo «&nbsp;Portugal&nbsp;»&nbsp;.</strong></li><li><strong>Ranger la photo dans le dossier «&nbsp;Photos&nbsp;».</strong></li></ul>"
+                "content": "<p><strong>Dans l’interface ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Renommez la photo «&nbsp;DCIM2115&nbsp;» avec le nom «&nbsp;Portugal&nbsp;».</strong></li><li><strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;».</strong></li></ul>"
               }
             },
             {
@@ -398,7 +398,7 @@
                 "id": "e59ce079-a0bb-4610-9403-59984ec3582e",
                 "type": "expand",
                 "title": "[ Simulateur d’interface de bureau d’ordinateur - Step2]",
-                "content": "<p>STEP 2 </p><ul><li> <strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»</strong> </li><li> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ] </li><li><strong>Feedback step 2&nbsp;</strong>: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger selon la logique qui vous convient.</li></ul>"
+                "content": "<p>STEP 2 </p><ul><li> <strong>Rangez la photo «&nbsp;Portugal&nbsp;» dans le dossier «&nbsp;Photos&nbsp;»</strong> </li><li> Actions&nbsp;: clic droit → Couper sur le fichier puis clic droit → coller sur le dossier ] </li><li><strong>Feedback step 2&nbsp;</strong>: Vous pouvez déplacer un fichier d’un dossier à un autre pour ranger comme il vous convient.</li></ul>"
               }
             }
           ]
@@ -413,7 +413,7 @@
               "element": {
                 "id": "8c2acdd0-84cb-4c7f-9915-7a5f126796df",
                 "type": "text",
-                "content": "Le <strong>nom du fichier</strong> est parfois créé automatiquement ou choisi par quelqu’un d’autre. De la même manière, vous n’avez peut-être pas choisi <strong>le dossier où un fichier est placé</strong>.<br> <br>Vous pouvez <strong>renommer </strong>et <strong>déplacer </strong>vos fichiers selon votre préférence.<br> <br><strong>🤔 Le saviez-vous ?</strong><br>Un dossier peut contenir autant de fichiers que l’on souhaite. <br><br><strong>Astuce&nbsp;</strong><br>Si vous savez utiliser le glisser-déposer, vous pouvez l’utiliser pour déplacer des fichiers dans des dossiers."
+                "content": "<p>Le <strong>nom du fichier</strong> est parfois créé automatiquement ou choisi par quelqu’un d’autre. De la même manière, parfois un fichier est <strong>placé automatiquement dans un dossier</strong>, le dossier téléchargement par exemple.</p><p>Vous pouvez <strong>renommer </strong>et <strong>déplacer </strong>vos fichiers selon votre préférence.</p><p><strong>🤔 Le saviez-vous  ?<br></strong>Un dossier peut contenir autant de fichiers que l’on souhaite. </p><p><strong>Astuce&nbsp;<br></strong>Si vous savez utiliser le glisser-déposer, vous pouvez l’utiliser pour déplacer des fichiers dans des dossiers.</p>"
               }
             }
           ]
@@ -443,7 +443,7 @@
               "element": {
                 "id": "2145a637-adf8-4142-af2a-178021994a0d",
                 "type": "text",
-                "content": "Maëva a supprimé par erreur le fichier «&nbsp;contact&nbsp;» de son bureau.<br>[+ short vidéo de la suppression]"
+                "content": "<p>Maëva a supprimé par erreur le fichier «&nbsp;Lettre&nbsp;» de son bureau.</p><p>[+ short vidéo de la suppression]</p>"
               }
             },
             {
@@ -498,7 +498,7 @@
               "element": {
                 "id": "6e117fc1-f985-474b-aa35-8829d7c94c46",
                 "type": "text",
-                "content": "<p><strong>Aidez Maëva à récupérer son fichier «&nbsp;contact&nbsp;» dans la corbeille.</strong></p>"
+                "content": "<p><strong>Aidez Maëva à récupérer son fichier «&nbsp;Lettre&nbsp;» dans la corbeille.</strong></p>"
               }
             },
             {
@@ -527,7 +527,7 @@
               "element": {
                 "id": "a453471b-b9b3-4aed-970f-768caab74d70",
                 "type": "text",
-                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier « Lettre » est de nouveau stocké sur le bureau de Maëva.</p>"
+                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier «&nbsp;Lettre&nbsp;» est de nouveau stocké sur le bureau de Maëva.</p>"
               }
             }
           ]
@@ -542,7 +542,7 @@
               "element": {
                 "id": "aa2945b0-cec7-4b40-8ce7-82d97b37a451",
                 "type": "text",
-                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile, faites un clic droit dessus puis cliquez sur « Supprimer » (Windows) ou « Placer dans la corbeille » (Mac).</p><p><br><strong>🤔 Bon à savoir</strong><br>Vider la corbeille permet de supprimer définitivement les fichiers qui s’y trouvent.<br>[ avec image ? ou short video ? ]</p>"
+                "content": "<h5>Comment supprimer un fichier ou un dossier ?</h5><p>Pour supprimer un fichier ou un dossier inutile&nbsp;:&nbsp;</p><ul><li>Faites un clic droit dessus puis cliquez sur «&nbsp;<strong>Supprimer </strong>» (Windows) ou «&nbsp;<strong>Placer dans la corbeille </strong>» (Mac). Le fichier est alors <strong>déplacé dans la corbeille</strong>. 🗑️</li><li><strong>Videz la corbeille </strong>pour <strong>supprimer définitivement</strong> les fichiers et dossiers qui s’y trouvent.&nbsp;❌</li></ul><p>[ avec image ou short video  ]</p><p><br><strong>🤔 Bon à savoir<br></strong>Certaines corbeilles ne gardent les fichiers et dossiers que pendant 30 à 60 jours. Ils sont ensuite supprimés automatiquement.<br></p>"
               }
             }
           ]
@@ -563,7 +563,7 @@
               "element": {
                 "id": "f9e7d7b2-b97e-4e43-a43b-32c592be79e9",
                 "type": "text",
-                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><br><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><br><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><br><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la Corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la Corbeille. 🗑️</li></ul>"
+                "content": "<ul><li>Sur un ordinateur, il y a des <strong>fichiers </strong>(images, documents, vidéos, musiques, etc.) et des <strong>dossiers pour ranger les fichiers</strong>. </li><br><li>Pour vous y retrouver, vous pouvez facilement <strong>renommer </strong>vos fichiers et les <strong>placer dans des dossiers</strong>. </li><br><li>Vous pouvez créer autant de dossiers que nécessaire et les nommer comme vous le souhaitez. 📂 </li><br><li>Quand des fichiers ou des dossiers sont supprimés, ils sont <strong>mis dans la corbeille</strong>. Vous pouvez <strong>récupérer </strong>ceux qui se trouvent dans la corbeille. 🗑️</li></ul>"
               }
             }
           ]
@@ -712,7 +712,7 @@
                   },
                   "invalid": {
                     "state": "Mauvaise réponse.",
-                    "diagnosis": "Pour savoir combien il y a de dossiers et de fichiers sur ce bureau, regardez l’icône qui les représentent."
+                    "diagnosis": "<p>Pour différencier les dossiers et les fichiers sur ce bureau, observez leurs icônes. Tous les dossiers ont la même icône.</p>"
                   }
                 }
               }
@@ -729,7 +729,7 @@
               "element": {
                 "id": "7efd6a00-11a9-4dd9-b8ee-0ff3c9bd18fa",
                 "type": "text",
-                "content": "<p><strong>Dans l’application ci-dessous&nbsp;: </strong></p><p><strong><br></strong></p><ul><li><strong>Supprimer le fichier&nbsp;«&nbsp;image4&nbsp;».</strong></li><li><strong>Créez un dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</strong></li></ul>"
+                "content": "<p><strong>Dans l’application ci-dessous&nbsp;: </strong></p><p><strong><br></strong></p><ul><li><strong>Supprimez le fichier&nbsp;«&nbsp;image4&nbsp;».</strong></li><li><strong>Créez un dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacez les fichiers «&nbsp;image1», «&nbsp;image2&nbsp;»,&nbsp;«&nbsp;image3&nbsp;» dans le dossier «&nbsp;Images&nbsp;» que vous avez créé.</strong></li></ul>"
               }
             },
             {
@@ -770,7 +770,7 @@
                 "content": "<p><strong>Récupérez le dossier « Administratif » dans l’application ci-dessous puis répondez à la question.</strong> </p><br>"
               }
             },
-                        {
+            {
               "type": "element",
               "element": {
                 "id": "22c43fcc-950e-461f-9214-15369213a206",
@@ -807,11 +807,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "Bonne réponse ! ",
-                    "diagnosis": "Feedback à rédiger"
+                    "diagnosis": "<p>Vous avez bien récupéré le dossier «&nbsp;Administratif&nbsp;» depuis la Corbeille.<br></p>"
                   },
                   "invalid": {
                     "state": "Mauvaise réponse.",
-                    "diagnosis": "Feedback à rédiger"
+                    "diagnosis": "<p>Pour trouver le nom du fichier, suivez ces deux étapes&nbsp;:</p><ul><li>Récupérer le dossier «&nbsp;Administratif&nbsp;» depuis la corbeille.</li><li>Ouvrir le dossier «&nbsp;Administratif&nbsp;» depuis le bureau de l’ordinateur.</li></ul>"
                   }
                 }
               }
