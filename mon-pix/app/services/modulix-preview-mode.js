@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ModulixPreviewModeService extends Service {
   isEnabled = false;
-  @tracked isElementsIdButtonEnabled = false;
+  @tracked isElementsIdButtonEnabled = true;
 
   enable() {
     this.isEnabled = true;

@@ -24,13 +24,14 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
   });
 
   module('isElementsIdButtonEnabled', function () {
-    test('it should be disabled by default', function (assert) {
+    test('it should be enabled by default', function (assert) {
       // when
       const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
       // then
-      assert.false(previewMode.isElementsIdButtonEnabled);
+      assert.true(previewMode.isElementsIdButtonEnabled);
     });
+  });
 
   module('toggleElementIdButton', function () {
     test('it switches elements id button state', function (assert) {
@@ -38,10 +39,10 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
       const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
       // when
-      previewMode.enableElementsIdButton();
+      previewMode.toggleElementIdButton();
 
       // then
-      assert.true(previewMode.isElementsIdButtonEnabled);
+      assert.false(previewMode.isElementsIdButtonEnabled);
     });
   });
 
@@ -64,8 +65,9 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
         // given
         const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-          // when
-          previewMode.enable();
+        // when
+        previewMode.toggleElementIdButton();
+        previewMode.enable();
 
         // then
         assert.false(previewMode.isPreviewAndElementsIdButtonEnabled);
@@ -77,9 +79,8 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
         // given
         const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-          // when
-          previewMode.enable();
-          previewMode.enableElementsIdButton();
+        // when
+        previewMode.enable();
 
         // then
         assert.true(previewMode.isPreviewAndElementsIdButtonEnabled);
