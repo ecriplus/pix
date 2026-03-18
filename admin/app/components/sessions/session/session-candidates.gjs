@@ -9,18 +9,6 @@ import formatDate from 'ember-intl/helpers/format-date';
 export default class SessionCandidates extends Component {
   @service intl;
 
-  computeSubscriptionsText = (candidate) => {
-    const subscription = candidate.subscriptions[0];
-
-    if (subscription.isCore) {
-      return this.intl.t('pages.sessions.candidates.subscriptions.core');
-    }
-
-    return this.intl.t('pages.sessions.candidates.subscriptions.complementary', {
-      complementaryCertificationKey: subscription.complementaryCertificationKey,
-    });
-  };
-
   <template>
     {{#if @certificationCandidates}}
       <PixTable @data={{@certificationCandidates}} @variant="admin" @caption={{t "pages.sessions.candidates.caption"}}>
@@ -68,7 +56,7 @@ export default class SessionCandidates extends Component {
               </span>
             </:header>
             <:cell>
-              {{this.computeSubscriptionsText candidate}}
+              {{candidate.subscriptionLabel}}
             </:cell>
           </PixTableColumn>
         </:columns>

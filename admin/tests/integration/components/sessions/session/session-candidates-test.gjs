@@ -38,15 +38,17 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
       .exists();
   });
 
-  test('it should display candidate with only a complementary subscription', async function (assert) {
+  test('it should display candidate with a v2 complementary subscription', async function (assert) {
     // given
-    const complementaryCertificationKey = 'pix-certif-1';
+    const coreSubscription = store.createRecord('subscription', {
+      type: SUBSCRIPTION_TYPES.CORE,
+    });
     const complementarySubscription = store.createRecord('subscription', {
       type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-      complementaryCertificationKey,
+      complementaryCertificationKey: 'DROIT',
     });
     const candidate = _buildCertificationCandidate({
-      subscriptions: [complementarySubscription],
+      subscriptions: [coreSubscription, complementarySubscription],
     });
     const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
 
@@ -60,7 +62,35 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
       .dom(
         screen.getByRole('cell', {
           name: this.intl.t('pages.sessions.candidates.subscriptions.complementary', {
-            complementaryCertificationKey,
+            complementaryCertificationKey: 'DROIT',
+          }),
+        }),
+      )
+      .exists();
+  });
+
+  test('it should display candidate with a v3 pix plus subscription', async function (assert) {
+    // given
+    const droitSubscription = store.createRecord('subscription', {
+      type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
+      complementaryCertificationKey: 'DROIT',
+    });
+    const candidate = _buildCertificationCandidate({
+      subscriptions: [droitSubscription],
+    });
+    const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
+
+    // when
+    const screen = await render(
+      <template><SessionCandidates @certificationCandidates={{certificationCandidates}} /></template>,
+    );
+
+    // then
+    assert
+      .dom(
+        screen.getByRole('cell', {
+          name: this.intl.t('pages.sessions.candidates.subscriptions.pix-plus', {
+            complementaryCertificationKey: 'DROIT',
           }),
         }),
       )
@@ -69,16 +99,15 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
 
   test('it should display candidate with a double subscription', async function (assert) {
     // given
-    const complementaryCertificationKey = 'pix-certif-1';
-    const complementarySubscription = store.createRecord('subscription', {
+    const cleaSubscription = store.createRecord('subscription', {
       type: SUBSCRIPTION_TYPES.COMPLEMENTARY,
-      complementaryCertificationKey,
+      complementaryCertificationKey: 'CLEA',
     });
     const coreSubscription = store.createRecord('subscription', {
       type: SUBSCRIPTION_TYPES.CORE,
     });
     const candidate = _buildCertificationCandidate({
-      subscriptions: [complementarySubscription, coreSubscription],
+      subscriptions: [cleaSubscription, coreSubscription],
     });
 
     const certificationCandidates = [store.createRecord('certification-candidate', candidate)];
@@ -92,9 +121,7 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
     assert
       .dom(
         screen.getByRole('cell', {
-          name: this.intl.t('pages.sessions.candidates.subscriptions.complementary', {
-            complementaryCertificationKey,
-          }),
+          name: this.intl.t('pages.sessions.candidates.subscriptions.dual-core-clea'),
         }),
       )
       .exists();
