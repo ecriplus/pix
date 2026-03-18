@@ -138,4 +138,50 @@ module('Unit | Controller | user-account | connection-methods', function (hooks)
       });
     });
   });
+
+  module('#canAddEmailConnectionMethod', function () {
+    module('when feature toggle is enabled and canAddEmailConnectionMethod is true', function () {
+      test('returns true', function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { addEmailConnectionMethodEnabled: true };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        const controller = this.owner.lookup('controller:authenticated/user-account/connection-methods');
+        const model = {
+          user: {},
+          accountInfo: { canAddEmailConnectionMethod: true },
+        };
+        controller.set('model', model);
+
+        // when
+        const result = controller.canAddEmailConnectionMethod;
+
+        // then
+        assert.true(result);
+      });
+    });
+
+    module('when feature toggle is enabled and canAddEmailConnectionMethod is false', function () {
+      test('returns false', function (assert) {
+        // given
+        class FeatureTogglesStub extends Service {
+          featureToggles = { addEmailConnectionMethodEnabled: true };
+        }
+        this.owner.register('service:featureToggles', FeatureTogglesStub);
+        const controller = this.owner.lookup('controller:authenticated/user-account/connection-methods');
+        const model = {
+          user: {},
+          accountInfo: { canAddEmailConnectionMethod: false },
+        };
+        controller.set('model', model);
+
+        // when
+        const result = controller.canAddEmailConnectionMethod;
+
+        // then
+        assert.false(result);
+      });
+    });
+  });
 });

@@ -38,6 +38,10 @@ export default class ConnectionMethodsController extends Controller {
     );
   }
 
+  get canAddEmailConnectionMethod() {
+    return this.model.accountInfo.canAddEmailConnectionMethod;
+  }
+
   @action
   enableEmailEditionMode() {
     this.isEmailEditionMode = true;

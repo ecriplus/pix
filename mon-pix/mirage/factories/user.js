@@ -428,6 +428,15 @@ export default Factory.extend({
       });
     },
   }),
+  withCanAddEmailConnectionMethod: trait({
+    afterCreate(user, server) {
+      user.update({
+        accountInfo: server.create('accountInfo', {
+          canAddEmailConnectionMethod: true,
+        }),
+      });
+    },
+  }),
   afterCreate(user, server) {
     _addDefaultIsCertifiable(user, server);
     _addDefaultScorecards(user, server);
