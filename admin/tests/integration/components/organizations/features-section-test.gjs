@@ -86,9 +86,10 @@ module('Integration | Component | organizations/features-section', function (hoo
       // then
       const checkboxes = screen.getAllByRole('checkbox');
       assert.true(checkboxes.length > 0);
-      for (const checkbox of checkboxes) {
-        assert.true(checkbox.disabled, `checkbox "${checkbox.labels?.[0]?.textContent?.trim()}" should be disabled`);
-      }
+      assert.true(
+        checkboxes.every((checkbox) => checkbox.disabled),
+        'all checkboxes should be disabled',
+      );
     });
   });
 
@@ -308,11 +309,10 @@ module('Integration | Component | organizations/features-section', function (hoo
         screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT'))
           .checked,
       );
-      assert.notOk(
-        screen.queryByLabelText(
-          t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
-        ),
+      const subCheckbox = screen.getByLabelText(
+        t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
       );
+      assert.true(subCheckbox.disabled);
     });
 
     test('it shows checked checkbox and unchecked sub-checkbox when feature is active without limit', async function (assert) {

@@ -158,7 +158,8 @@ export default class OrganizationFeaturesSection extends Component {
             <PixCheckbox
               @checked={{this.learnerImportActivationConfirmed}}
               {{on "change" this.toggleConfirmLearnerImportActivation}}
-            ><:label>
+            >
+              <:label>
                 <strong>
                   {{t "components.organizations.editing.organization-learner-import-format.dialog.confirmation"}}
                 </strong>
@@ -204,7 +205,11 @@ const FeaturesForm = <template>
                 @checked={{organizationFeature.active}}
                 disabled={{not @canEdit}}
                 {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
-              ><:label>{{t featureLabel}}</:label></PixCheckbox>
+              >
+                <:label>
+                  {{t featureLabel}}
+                </:label>
+              </PixCheckbox>
               {{#if (and (eq feature "LEARNER_IMPORT") (get organizationFeature "active"))}}
                 <PixSelect
                   required
@@ -219,20 +224,20 @@ const FeaturesForm = <template>
                     "components.organizations.editing.organization-learner-import-format.selector.placeholder"
                   }}
                 >
-                  <:label>{{t
-                      "components.organizations.editing.organization-learner-import-format.selector.label"
-                    }}</:label>
+                  <:label>
+                    {{t "components.organizations.editing.organization-learner-import-format.selector.label"}}
+                  </:label>
                 </PixSelect>
               {{/if}}
             </div>
           {{/if}}
         {{/if}}
 
-        {{#if (and (eq feature "PLACES_MANAGEMENT") (get organizationFeature "active"))}}
+        {{#if (eq feature "PLACES_MANAGEMENT")}}
           <div class="form-field">
             <PixCheckbox
               @checked={{organizationFeature.params.enableMaximumPlacesLimit}}
-              disabled={{not @canEdit}}
+              disabled={{not (and @canEdit (get organizationFeature "active"))}}
               {{on
                 "change"
                 (fn @updateFormCheckBoxValue (concat "features." feature ".params.enableMaximumPlacesLimit"))
@@ -246,9 +251,11 @@ const FeaturesForm = <template>
         {{/if}}
       {{else}}
         <div class="form-field">
-          <PixCheckbox @checked={{organizationFeature.active}} disabled><:label>{{t
-                featureLabel
-              }}</:label></PixCheckbox>
+          <PixCheckbox @checked={{organizationFeature.active}} disabled>
+            <:label>
+              {{t featureLabel}}
+            </:label>
+          </PixCheckbox>
         </div>
       {{/if}}
     {{/let}}
