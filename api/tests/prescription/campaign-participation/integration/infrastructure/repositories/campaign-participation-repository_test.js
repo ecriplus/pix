@@ -852,7 +852,7 @@ describe('Integration | Repository | Campaign Participation', function () {
     });
   });
 
-  describe('#getAllCampaignParticipationsForOrganizationLearner', function () {
+  describe('#getAllCampaignParticipationsForOrganizationLearnerIds', function () {
     let organizationLearnerId;
     let organizationId;
 
@@ -872,11 +872,10 @@ describe('Integration | Repository | Campaign Participation', function () {
 
         await databaseBuilder.commit();
 
-        const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner(
-          {
-            organizationLearnerId,
-          },
-        );
+        const participations =
+          await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearnerIds({
+            organizationLearnerIds: [organizationLearnerId],
+          });
 
         expect(participations).lengthOf(0);
       });
@@ -887,11 +886,10 @@ describe('Integration | Repository | Campaign Participation', function () {
 
         await databaseBuilder.commit();
 
-        const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner(
-          {
-            organizationLearnerId,
-          },
-        );
+        const participations =
+          await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearnerIds({
+            organizationLearnerIds: [organizationLearnerId],
+          });
 
         expect(participations).to.lengthOf(0);
       });
@@ -906,9 +904,10 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       await databaseBuilder.commit();
 
-      const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner({
-        organizationLearnerId,
-      });
+      const participations =
+        await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearnerIds({
+          organizationLearnerIds: [organizationLearnerId],
+        });
 
       expect(participations[0]).instanceOf(CampaignParticipation);
       const { id, sharedAt, status } = participations[0];
@@ -927,10 +926,11 @@ describe('Integration | Repository | Campaign Participation', function () {
 
       await databaseBuilder.commit();
 
-      const participations = await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearner({
-        organizationLearnerId,
-        withDeletedParticipation: true,
-      });
+      const participations =
+        await campaignParticipationRepository.getAllCampaignParticipationsForOrganizationLearnerIds({
+          organizationLearnerIds: [organizationLearnerId],
+          withDeletedParticipation: true,
+        });
 
       expect(participations).lengthOf(1);
     });

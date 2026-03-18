@@ -17,11 +17,10 @@ import {
   getOrganizationLearnerForAdmin,
   reconcileUserByNationalStudentIdAndOrganizationId,
   reconcileUserToOrganizationLearner,
-  remove,
-  removeByIds,
   saveCommonOrganizationLearners,
   update,
   updateCertificability,
+  updateInBatchByIds,
 } from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
@@ -62,108 +61,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     });
   });
 
-  describe('#removeByIds', function () {
-    let clock;
-    const now = new Date('2023-02-02');
-
-    beforeEach(function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
-    });
-
-    it('delete one organization learner', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdsToDelete = [organizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdsToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const organizationLearnerResult = await knex('organization-learners')
-        .select('updatedAt', 'deletedAt', 'deletedBy')
-        .where('id', organizationLearnerId)
-        .first();
-
-      expect(organizationLearnerResult.updatedAt).to.deep.equal(now);
-      expect(organizationLearnerResult.deletedAt).to.deep.equal(now);
-      expect(organizationLearnerResult.deletedBy).to.equal(userId);
-    });
-
-    it('not update organization learner already deleted', async function () {
-      // given
-      const otherUserId = databaseBuilder.factory.buildUser().id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-        deletedAt: new Date('2020-02-01'),
-        deletedBy: otherUserId,
-      }).id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdsToDelete = [organizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdsToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const organizationLearnerResult = await knex('organization-learners')
-        .select('deletedAt', 'deletedBy')
-        .where('id', organizationLearnerId)
-        .first();
-
-      expect(organizationLearnerResult.deletedAt).to.deep.equal(new Date('2020-02-01'));
-      expect(organizationLearnerResult.deletedBy).to.equal(otherUserId);
-    });
-
-    it('delete more than one organization learners at the same time', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const firstOrganizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const secondOrganizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const thirdOrganisationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
-        organizationId,
-      }).id;
-      const userId = databaseBuilder.factory.buildUser().id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const organizationLearnersIdToDelete = [firstOrganizationLearnerId, secondOrganizationLearnerId];
-
-      await DomainTransaction.execute(async (domainTransaction) => {
-        await removeByIds({ organizationLearnerIds: organizationLearnersIdToDelete, userId, domainTransaction });
-      });
-
-      // then
-      const learners = await knex('view-active-organization-learners').where({ organizationId });
-      expect(learners).to.have.lengthOf(1);
-      expect(learners[0].id).to.equal(thirdOrganisationLearnerId);
-    });
-  });
-
-  describe('#remove', function () {
+  describe('#updateInBatchByIds', function () {
     let clock;
     const now = new Date('2023-02-02');
 
@@ -179,6 +77,34 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       // given
       const adminUserId = databaseBuilder.factory.buildUser().id;
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const anotherOrganizationLearnerFromDB = databaseBuilder.factory.buildOrganizationLearner({
+        lastName: 'Steve',
+        preferredLastName: 'Mc',
+        firstName: 'Chicken',
+        middleName: 'Fry',
+        thirdName: 'BBQ',
+        sex: 'F',
+        MEFCode: '14',
+        birthdate: '2001-05-08',
+        birthCity: 'Mans',
+        birthCityCode: '546789',
+        birthProvinceCode: '50',
+        birthCountryCode: '19',
+        status: 'AM/PM',
+        nationalStudentId: '45679721',
+        division: '6eme RAINBOW',
+        updatedAt: new Date('1999-01-01'),
+        email: 'littlecat@animal.org',
+        studentNumber: '4987644',
+        department: '52',
+        educationalTeam: 'CoreTex',
+        group: 'C',
+        diploma: 'pujze, peozaeza; pzaezae',
+        nationalApprenticeId: '489798485',
+        deletedBy: null,
+        deletedAt: null,
+      });
+
       const organizationLearnerFromDB = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
         lastName: 'Richard',
@@ -214,38 +140,70 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const organizationLearner = domainBuilder.buildOrganizationLearner(organizationLearnerFromDB);
       organizationLearner.delete(adminUserId);
 
-      await remove(organizationLearner.dataToUpdateOnDeletion);
+      await updateInBatchByIds([organizationLearner.dataToUpdateOnDeletion]);
 
       // then
-      const organizationLearnerResult = await knex('organization-learners')
+      const organizationAnonymizedLearner = await knex('organization-learners')
         .where({ id: organizationLearner.id })
         .first();
 
-      expect(organizationLearnerResult.MEFCode).equal('12');
-      expect(organizationLearnerResult.lastName).equal('(anonymized)');
-      expect(organizationLearnerResult.firstName).equal('(anonymized)');
-      expect(organizationLearnerResult.preferredLastName).null;
-      expect(organizationLearnerResult.middleName).null;
-      expect(organizationLearnerResult.thirdName).null;
-      expect(organizationLearnerResult.sex).null;
-      expect(organizationLearnerResult.birthdate).deep.equal('2001-01-01');
-      expect(organizationLearnerResult.birthCity).null;
-      expect(organizationLearnerResult.birthCityCode).null;
-      expect(organizationLearnerResult.birthProvinceCode).null;
-      expect(organizationLearnerResult.birthCountryCode).null;
-      expect(organizationLearnerResult.status).null;
-      expect(organizationLearnerResult.nationalStudentId).null;
-      expect(organizationLearnerResult.division).null;
-      expect(organizationLearnerResult.updatedAt).deep.equal(now);
-      expect(organizationLearnerResult.email).null;
-      expect(organizationLearnerResult.studentNumber).null;
-      expect(organizationLearnerResult.department).null;
-      expect(organizationLearnerResult.educationalTeam).null;
-      expect(organizationLearnerResult.group).null;
-      expect(organizationLearnerResult.diploma).null;
-      expect(organizationLearnerResult.nationalApprenticeId).null;
-      expect(organizationLearnerResult.deletedBy).equal(adminUserId);
-      expect(organizationLearnerResult.deletedAt).deep.equal(now);
+      expect(organizationAnonymizedLearner.MEFCode).equal('12');
+      expect(organizationAnonymizedLearner.lastName).equal('(anonymized)');
+      expect(organizationAnonymizedLearner.firstName).equal('(anonymized)');
+      expect(organizationAnonymizedLearner.preferredLastName).null;
+      expect(organizationAnonymizedLearner.middleName).null;
+      expect(organizationAnonymizedLearner.thirdName).null;
+      expect(organizationAnonymizedLearner.sex).null;
+      expect(organizationAnonymizedLearner.birthdate).deep.equal('2001-01-01');
+      expect(organizationAnonymizedLearner.birthCity).null;
+      expect(organizationAnonymizedLearner.birthCityCode).null;
+      expect(organizationAnonymizedLearner.birthProvinceCode).null;
+      expect(organizationAnonymizedLearner.birthCountryCode).null;
+      expect(organizationAnonymizedLearner.status).null;
+      expect(organizationAnonymizedLearner.nationalStudentId).null;
+      expect(organizationAnonymizedLearner.division).null;
+      expect(organizationAnonymizedLearner.updatedAt).deep.equal(now);
+      expect(organizationAnonymizedLearner.email).null;
+      expect(organizationAnonymizedLearner.studentNumber).null;
+      expect(organizationAnonymizedLearner.department).null;
+      expect(organizationAnonymizedLearner.educationalTeam).null;
+      expect(organizationAnonymizedLearner.group).null;
+      expect(organizationAnonymizedLearner.diploma).null;
+      expect(organizationAnonymizedLearner.nationalApprenticeId).null;
+      expect(organizationAnonymizedLearner.deletedBy).equal(adminUserId);
+      expect(organizationAnonymizedLearner.deletedAt).deep.equal(now);
+
+      const organizationLearnerActive = await knex('organization-learners')
+        .where({ id: anotherOrganizationLearnerFromDB.id })
+        .first();
+
+      expect(organizationLearnerActive.MEFCode).equal(anotherOrganizationLearnerFromDB.MEFCode);
+      expect(organizationLearnerActive.lastName).equal(anotherOrganizationLearnerFromDB.lastName);
+      expect(organizationLearnerActive.firstName).equal(anotherOrganizationLearnerFromDB.firstName);
+      expect(organizationLearnerActive.preferredLastName).equal(anotherOrganizationLearnerFromDB.preferredLastName);
+      expect(organizationLearnerActive.middleName).equal(anotherOrganizationLearnerFromDB.middleName);
+      expect(organizationLearnerActive.thirdName).equal(anotherOrganizationLearnerFromDB.thirdName);
+      expect(organizationLearnerActive.sex).equal(anotherOrganizationLearnerFromDB.sex);
+      expect(organizationLearnerActive.birthdate).equal(anotherOrganizationLearnerFromDB.birthdate);
+      expect(organizationLearnerActive.birthCity).equal(anotherOrganizationLearnerFromDB.birthCity);
+      expect(organizationLearnerActive.birthCityCode).equal(anotherOrganizationLearnerFromDB.birthCityCode);
+      expect(organizationLearnerActive.birthProvinceCode).equal(anotherOrganizationLearnerFromDB.birthProvinceCode);
+      expect(organizationLearnerActive.birthCountryCode).equal(anotherOrganizationLearnerFromDB.birthCountryCode);
+      expect(organizationLearnerActive.status).equal(anotherOrganizationLearnerFromDB.status);
+      expect(organizationLearnerActive.nationalStudentId).equal(anotherOrganizationLearnerFromDB.nationalStudentId);
+      expect(organizationLearnerActive.division).equal(anotherOrganizationLearnerFromDB.division);
+      expect(organizationLearnerActive.updatedAt).deep.equal(anotherOrganizationLearnerFromDB.updatedAt);
+      expect(organizationLearnerActive.email).equal(anotherOrganizationLearnerFromDB.email);
+      expect(organizationLearnerActive.studentNumber).equal(anotherOrganizationLearnerFromDB.studentNumber);
+      expect(organizationLearnerActive.department).equal(anotherOrganizationLearnerFromDB.department);
+      expect(organizationLearnerActive.educationalTeam).equal(anotherOrganizationLearnerFromDB.educationalTeam);
+      expect(organizationLearnerActive.group).equal(anotherOrganizationLearnerFromDB.group);
+      expect(organizationLearnerActive.diploma).equal(anotherOrganizationLearnerFromDB.diploma);
+      expect(organizationLearnerActive.nationalApprenticeId).equal(
+        anotherOrganizationLearnerFromDB.nationalApprenticeId,
+      );
+      expect(organizationLearnerActive.deletedBy).null;
+      expect(organizationLearnerActive.deletedAt).null;
     });
   });
 

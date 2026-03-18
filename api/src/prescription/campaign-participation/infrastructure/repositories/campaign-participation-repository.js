@@ -122,15 +122,13 @@ const getCampaignParticipationsForOrganizationLearner = async function ({ organi
   );
 };
 
-const getAllCampaignParticipationsForOrganizationLearner = async function ({
-  organizationLearnerId,
+const getAllCampaignParticipationsForOrganizationLearnerIds = async function ({
+  organizationLearnerIds,
   withDeletedParticipation = false,
 } = {}) {
   const knexConn = DomainTransaction.getConnection();
   const queryBuilder = knexConn('campaign-participations')
-    .where({
-      organizationLearnerId,
-    })
+    .whereIn('organizationLearnerId', organizationLearnerIds)
     .orderBy('createdAt', 'desc');
 
   if (!withDeletedParticipation) queryBuilder.whereNull('deletedAt');
@@ -322,7 +320,7 @@ export {
   findInfoByCampaignId,
   findOneByCampaignIdAndUserId,
   get,
-  getAllCampaignParticipationsForOrganizationLearner,
+  getAllCampaignParticipationsForOrganizationLearnerIds,
   getAllCampaignParticipationsInCampaignForASameLearner,
   getByCampaignIds,
   getCampaignParticipationsCountByUserId,
