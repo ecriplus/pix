@@ -16,7 +16,6 @@ const serializeForAdmin = function (training = {}, meta) {
       'id',
       'duration',
       'link',
-      'locale',
       'locales',
       'title',
       'internalTitle',
@@ -88,7 +87,6 @@ const serialize = function (training = {}, meta) {
     attributes: [
       'duration',
       'link',
-      'locale',
       'locales',
       'title',
       'internalTitle',
