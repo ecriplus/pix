@@ -45,7 +45,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
       // then
       expect(serializedDataFr).to.deep.equal({
         data: {
-          type: 'certification-summaries',
+          type: 'certificate-summaries',
           id: '123',
           attributes: {
             'verification-code': 'some verification code',
@@ -62,7 +62,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
       });
       expect(serializedDataEn).to.deep.equal({
         data: {
-          type: 'certification-summaries',
+          type: 'certificate-summaries',
           id: '123',
           attributes: {
             'verification-code': 'some verification code',
@@ -95,7 +95,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
       // then
       expect(serializedDataFr).to.deep.equal({
         data: {
-          type: 'certification-summaries',
+          type: 'certificate-summaries',
           id: '123',
           attributes: {
             'verification-code': 'some verification code',
