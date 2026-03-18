@@ -9,7 +9,6 @@ const buildTraining = function ({
   duration = {
     hours: 5,
   },
-  locale = 'fr-fr',
   locales = ['fr-fr'],
   targetProfileIds = [1],
   editorName = 'Ministère education nationale',
@@ -23,7 +22,6 @@ const buildTraining = function ({
     link,
     type,
     duration,
-    locale,
     locales,
     targetProfileIds,
     editorName,

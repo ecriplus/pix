@@ -79,7 +79,7 @@ describe('Integration | Repository | user-recommended-training-repository', func
       };
       const userRecommendedTrainingWithAnotherLocale = {
         userId,
-        trainingId: databaseBuilder.factory.buildTraining({ locale: 'en' }).id,
+        trainingId: databaseBuilder.factory.buildTraining({ locales: ['en'] }).id,
         campaignParticipationId,
       };
       const anotherCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation();

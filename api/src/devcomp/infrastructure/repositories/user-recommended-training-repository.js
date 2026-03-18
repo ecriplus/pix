@@ -15,7 +15,8 @@ const findByCampaignParticipationId = async function ({ campaignParticipationId,
   const trainings = await knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
     .select('trainings.*')
     .innerJoin('trainings', 'trainings.id', `${USER_RECOMMENDED_TRAININGS_TABLE_NAME}.trainingId`)
-    .where({ campaignParticipationId, locale, isDisabled: false })
+    .where({ campaignParticipationId, isDisabled: false })
+    .whereRaw('? = ANY(locales)', locale)
     .orderBy('id', 'asc');
   return trainings.map(_toDomain);
 };

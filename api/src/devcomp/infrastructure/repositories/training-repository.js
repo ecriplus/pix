@@ -3,7 +3,6 @@ import lodash from 'lodash';
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { Training } from '../../domain/models/Training.js';
 import { TrainingTrigger } from '../../domain/models/TrainingTrigger.js';
@@ -111,7 +110,6 @@ async function findPaginatedSummariesByTargetProfileId({ targetProfileId, page }
 
 async function findWithTriggersByCampaignParticipationIdAndLocale({ campaignParticipationId, locale }) {
   const knexConn = DomainTransaction.getConnection();
-  const multipleLocalesForTrainingsEnabled = await featureToggles.get('multipleLocalesForTrainingsEnabled');
 
   const baseQuery = knexConn(TABLE_NAME)
     .select('trainings.*')
@@ -119,12 +117,10 @@ async function findWithTriggersByCampaignParticipationIdAndLocale({ campaignPart
     .join('campaigns', 'campaigns.targetProfileId', 'target-profile-trainings.targetProfileId')
     .join('campaign-participations', 'campaign-participations.campaignId', 'campaigns.id')
     .where({ 'campaign-participations.id': campaignParticipationId })
-    .orderBy('trainings.id', 'asc');
+    .orderBy('trainings.id', 'asc')
+    .whereRaw('? = ANY(locales)', locale);
 
-  const trainingsDTO = multipleLocalesForTrainingsEnabled
-    ? await baseQuery.whereRaw('? = ANY(locales)', locale)
-    : await baseQuery.where({ locale });
-
+  const trainingsDTO = await baseQuery;
   const targetProfileTrainings = await knexConn('target-profile-trainings').whereIn(
     'trainingId',
     trainingsDTO.map(({ id }) => id),
@@ -152,7 +148,6 @@ async function create({ training }) {
     'link',
     'type',
     'duration',
-    'locale',
     'locales',
     'editorName',
     'editorLogoUrl',
@@ -168,7 +163,6 @@ async function update({ id, attributesToUpdate }) {
     'link',
     'type',
     'duration',
-    'locale',
     'locales',
     'editorName',
     'editorLogoUrl',
@@ -188,20 +182,15 @@ async function update({ id, attributesToUpdate }) {
 async function findPaginatedByUserId({ userId, locale, page }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const multipleLocalesForTrainingsEnabled = await featureToggles.get('multipleLocalesForTrainingsEnabled');
-
   const baseQuery = knexConn(TABLE_NAME)
     .select('trainings.*')
     .distinct('trainings.id')
     .join(USER_RECOMMENDED_TRAININGS_TABLE_NAME, 'trainings.id', 'trainingId')
     .where({ userId, isDisabled: false })
+    .whereRaw('? = ANY(locales)', locale)
     .orderBy('id', 'asc');
 
-  const query = multipleLocalesForTrainingsEnabled
-    ? baseQuery.whereRaw('? = ANY(locales)', locale)
-    : baseQuery.where({ locale });
-
-  const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
+  const { results, pagination } = await fetchPage({ queryBuilder: baseQuery, paginationParams: page });
 
   const userRecommendedTrainings = results.map(
     (userRecommendedTraining) => new UserRecommendedTraining(userRecommendedTraining),
