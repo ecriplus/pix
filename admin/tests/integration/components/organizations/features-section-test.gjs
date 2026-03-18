@@ -362,6 +362,30 @@ module('Integration | Component | organizations/features-section', function (hoo
         ).checked,
       );
     });
+
+    test('it unchecks the limit sub-checkbox when PLACES_MANAGEMENT is unchecked', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { PLACES_MANAGEMENT: { active: true, params: { enableMaximumPlacesLimit: true } } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // when
+      await click(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.PLACES_MANAGEMENT')),
+      );
+
+      // then
+      assert.false(
+        screen.getByLabelText(
+          t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.label'),
+        ).checked,
+      );
+    });
   });
 
   module('CAMPAIGN_WITHOUT_USER_PROFILE', function (hooks) {
