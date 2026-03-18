@@ -54,7 +54,11 @@ export default class OrganizationFeaturesSection extends Component {
   }
 
   get isManagingStudentDisabled() {
-    return this.args.organization.isLearnerImportEnabled;
+    return this.form.features?.LEARNER_IMPORT?.active;
+  }
+
+  get isLearnerImportDisabled() {
+    return this.form.features?.IS_MANAGING_STUDENTS?.active;
   }
 
   get editableFeatureList() {
@@ -133,6 +137,7 @@ export default class OrganizationFeaturesSection extends Component {
               @updateValue={{this.updateValue}}
               @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
               @isManagingStudentDisabled={{this.isManagingStudentDisabled}}
+              @isLearnerImportDisabled={{this.isLearnerImportDisabled}}
               @editableFeatureList={{this.editableFeatureList}}
               @canEdit={{this.accessControl.hasAccessToOrganizationActionsScope}}
             />
@@ -207,7 +212,9 @@ const FeaturesForm = <template>
                 (and
                   (eq feature "IS_MANAGING_STUDENTS") (or @isManagingStudentDisabled (not @isManagingStudentAvailable))
                 )
-                (and (eq feature "LEARNER_IMPORT") (eq (get @importFormatOptions "length") 0))
+                (and
+                  (eq feature "LEARNER_IMPORT") (or @isLearnerImportDisabled (eq (get @importFormatOptions "length") 0))
+                )
               }}
               {{on "change" (fn @updateFormCheckBoxValue (concat "features." feature ".active"))}}
             >

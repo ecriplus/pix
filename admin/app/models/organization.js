@@ -73,10 +73,6 @@ export default class Organization extends Model {
     return this.type === 'SUP';
   }
 
-  get isLearnerImportEnabled() {
-    return this.features[Organization.featureList.LEARNER_IMPORT].active;
-  }
-
   async hasMember(userId) {
     const memberships = await this.organizationMemberships;
     return memberships.some((membership) => membership.user?.id === userId);
