@@ -2333,10 +2333,12 @@
         "title": "Cambio de la dirección de correo electrónico"
       },
       "connexion-methods": {
+        "add-email": "Añadir una dirección de correo electrónico",
         "authentication-methods": {
-          "gar": "a través de ENT/Mediacentre",
+          "connection-via": "Conexión a través de {identityProviderOrganizationName}",
+          "gar": "Conexión a través de ENT/Mediacentre",
           "label": "Conexión externa",
-          "via": "a través de {identityProviderOrganizationName}"
+          "other-authentication-label": "Otro método de conexión"
         },
         "edit-button": "Modificar",
         "email": "Dirección de correo electrónico",

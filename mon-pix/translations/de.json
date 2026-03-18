@@ -2346,10 +2346,12 @@
         "title": "Ändern Ihrer E-Mail-Adresse"
       },
       "connexion-methods": {
+        "add-email": "E-Mail-Adresse hinzufügen",
         "authentication-methods": {
-          "gar": "über ENT/Mediacentre",
+          "connection-via": "Verbindung über {identityProviderOrganizationName}",
+          "gar": "Verbindung über ENT/Mediacentre",
           "label": "Externe Verbindung",
-          "via": "über {identityProviderOrganizationName}"
+          "other-authentication-label": "Eine andere Verbindungsmethode"
         },
         "edit-button": "Bearbeiten",
         "email": "E-Mail-Adresse",

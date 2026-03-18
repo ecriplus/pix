@@ -2339,10 +2339,12 @@
         "title": "Modifica dell'indirizzo e-mail"
       },
       "connexion-methods": {
+        "add-email": "Aggiungi un indirizzo e-mail",
         "authentication-methods": {
-          "gar": "via ENT/Mediacentre",
+          "connection-via": "Connessione tramite {identityProviderOrganizationName}",
+          "gar": "Connessione tramite ENT/Mediacentre",
           "label": "Collegamento esterno",
-          "via": "via {identityProviderOrganizationName}"
+          "other-authentication-label": "Un altro metodo di connessione"
         },
         "edit-button": "Modificare",
         "email": "Indirizzo e-mail",
