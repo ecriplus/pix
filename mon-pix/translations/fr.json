@@ -732,6 +732,15 @@
         "title": "Comment consulter et partager mes résultats de certification ?"
       }
     },
+    "certification-frameworks": {
+      "CLEA": "CLéA Numérique",
+      "CORE": "Certification Pix",
+      "DROIT": "Pix+ Droit",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Professionnels de Santé"
+    },
     "certification-instructions": {
       "buttons": {
         "continuous": {
@@ -1355,13 +1364,6 @@
         "you-have-reached-level": "Vous avez atteint"
       },
       "title": "Résultats de votre compétence"
-    },
-    "complementary-certification-names": {
-      "DROIT": "Pix+ Droit",
-      "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
-      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
-      "EDU_CPE": "Pix+ Édu CPE",
-      "PRO_SANTE": "Pix+ Professionnels de Santé"
     },
     "course": {
       "errors": {

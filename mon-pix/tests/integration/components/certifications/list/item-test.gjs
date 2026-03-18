@@ -6,31 +6,219 @@ import Item from 'mon-pix/components/certifications/list/item';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import { stubCurrentUserService } from '../../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | item', function (hooks) {
+module('Integration | Component | User certifications | List item', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when the certification is not published', function () {
-    test('should display specific information', async function (assert) {
-      //given
+  module('when status is WAITING_FOR_RESULTS', function () {
+    test('displays card with a specific tag, details, no action and empty score hexagon', async function (assert) {
+      // given
       const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        date: new Date('2018-02-15T15:15:52Z'),
-        deliveredAt: new Date('2018-02-17T15:15:52Z'),
-        certificationCenter: 'Université de Lyon',
-        isPublished: false,
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Université de Lyon',
+        certificationFramework: 'CORE',
         pixScore: 654,
-        status: 'validated',
-        commentForCandidate: null,
+        status: 'WAITING_FOR_RESULTS',
+        comment: null,
+        verificationCode: null,
+        extraCertificationStatus: null,
+        certificateType: null,
       });
 
       // when
-      const screen = await render(<template><Item @certification={{certification}} /></template>);
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.not-published')));
+      assert.dom(screen.getByText('-')).exists();
+      assert.dom(screen.queryByText(t('pages.certificate.verification-code.title'), { exact: false })).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
+        .doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-certificate') }))
+        .doesNotExist();
+    });
+  });
+
+  module('when status is VALIDATED', function () {
+    test('displays validated tag, pix score, details, verification code and actions', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Université de Lyon',
+        certificationFramework: 'CORE',
+        pixScore: 654,
+        status: 'VALIDATED',
+        comment: null,
+        verificationCode: 'P-ABC123',
+        extraCertificationStatus: null,
+        certificateType: 'ATTESTATION',
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.validated')));
+      assert.ok(screen.getByText('654'));
+      assert.ok(screen.getByText(/Université de Lyon/));
+      assert.ok(screen.getByText(/15\/01\/2024/));
+      assert.ok(screen.getByText(/P-ABC123/));
+      assert.ok(screen.getByText(t('pages.certifications-list.buttons.details')));
+      assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
+    });
+
+    test('displays "download-attestation" when certificateType is ATTESTATION', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Centre',
+        certificationFramework: 'CORE',
+        pixScore: 500,
+        status: 'VALIDATED',
+        verificationCode: 'P-XYZ',
+        certificateType: 'ATTESTATION',
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
+    });
+
+    test('displays "download-certificate" when certificateType is CERTIFICATE', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Centre',
+        certificationFramework: 'CORE',
+        pixScore: 500,
+        status: 'VALIDATED',
+        verificationCode: 'P-XYZ',
+        certificateType: 'CERTIFICATE',
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-certificate') }));
+    });
+
+    module('when there is an error during download', function () {
+      test('displays error message', async function (assert) {
+        // given
+        const fileSaverSaveStub = sinon.stub().rejects(new Error('an error'));
+
+        class FileSaverStub extends Service {
+          save = fileSaverSaveStub;
+        }
+
+        this.owner.register('service:fileSaver', FileSaverStub);
+
+        const store = this.owner.lookup('service:store');
+        const certificateSummary = store.createRecord('certificate-summary', {
+          certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+          certificationCenterName: 'Centre',
+          certificationFramework: 'CORE',
+          pixScore: 500,
+          status: 'VALIDATED',
+          verificationCode: 'P-XYZ',
+          certificateType: 'ATTESTATION',
+        });
+
+        const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
+
+        // then
+        assert.ok(screen.getByText(t('common.error')));
+      });
+    });
+  });
+
+  module('when status is REJECTED', function () {
+    test('displays rejected tag, details, comment, no pix score and no actions', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Université de Lyon',
+        certificationFramework: 'CORE',
+        pixScore: 34,
+        status: 'REJECTED',
+        comment: 'Vous avez échoué',
+        verificationCode: null,
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
+      assert.ok(screen.getByText(t('pages.certifications-list.comment'), { exact: false }));
+      assert.dom(screen.queryByText('34')).doesNotExist();
+      assert.ok(screen.getByText(/Université de Lyon/));
+      assert.ok(screen.getByText(/15\/01\/2024/));
+      assert.dom(screen.queryByText(t('pages.certificate.verification-code.title'), { exact: false })).doesNotExist();
+      assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
+      assert
+        .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
+        .doesNotExist();
+    });
+
+    test('does not display comment section when there is no comment', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Université de Lyon',
+        certificationFramework: 'CORE',
+        pixScore: 34,
+        status: 'REJECTED',
+        comment: null,
+        verificationCode: null,
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
+      assert.dom(screen.queryByText(t('pages.certifications-list.comment'), { exact: false })).doesNotExist();
+    });
+  });
+
+  module('when status is CANCELLED', function () {
+    test('displays cancelled tag with comment and no actions', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Université de Lyon',
+        certificationFramework: 'CORE',
+        pixScore: 365,
+        status: 'CANCELLED',
+        comment: 'Votre certification a été annulée',
+        verificationCode: null,
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.cancelled')));
+      assert.ok(screen.getByText(t('pages.certifications-list.comment'), { exact: false }));
+      assert.dom(screen.queryByText(t('pages.certificate.verification-code.title'), { exact: false })).doesNotExist();
       assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
       assert
         .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
@@ -38,196 +226,72 @@ module('Integration | Component | item', function (hooks) {
     });
   });
 
-  module('when the certification is published', function () {
-    module('when the certification is rejected', function () {
-      test('should display specific information', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const certification = store.createRecord('certification', {
-          date: new Date('2018-02-15T15:15:52Z'),
-          deliveredAt: new Date('2018-02-17T15:15:52Z'),
-          certificationCenter: 'Université de Lyon',
-          isPublished: true,
-          pixScore: 34,
-          status: 'rejected',
-          commentForCandidate: 'Vous avez échoué',
-        });
-
-        // when
-        const screen = await render(<template><Item @certification={{certification}} /></template>);
-
-        // then
-        assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
-        assert.ok(screen.getByText('Commentaire : Vous avez échoué'));
-        assert.dom(screen.queryByText('34')).doesNotExist();
-        assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
-        assert
-          .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
-          .doesNotExist();
-      });
-    });
-
-    module('when the certification is validated', function () {
-      test('should display specific information', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const certification = store.createRecord('certification', {
-          date: new Date('2018-02-15T15:15:52Z'),
-          deliveredAt: new Date('2018-02-17T15:15:52Z'),
-          certificationCenter: 'Université de Lyon',
-          isPublished: true,
-          pixScore: 654,
-          status: 'validated',
-          commentForCandidate: null,
-        });
-
-        // when
-        const screen = await render(<template><Item @certification={{certification}} /></template>);
-
-        // then
-        assert.ok(screen.getByText(t('pages.certifications-list.statuses.validated')));
-        assert.ok(screen.getByText('654'));
-        assert.ok(screen.getByText(t('pages.certifications-list.buttons.details')));
-        assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
-      });
-
-      module('when there is an error during the download of the attestation', function () {
-        test('should show the common error message', async function (assert) {
-          // given
-          stubCurrentUserService(this.owner);
-          const fileSaverSaveStub = sinon.stub();
-
-          class FileSaverStub extends Service {
-            save = fileSaverSaveStub;
-          }
-
-          this.owner.register('service:fileSaver', FileSaverStub);
-
-          fileSaverSaveStub.rejects(new Error('an error message'));
-
-          const store = this.owner.lookup('service:store');
-          const certification = store.createRecord('certification', {
-            date: new Date('2018-02-15T15:15:52Z'),
-            deliveredAt: new Date('2018-02-17T15:15:52Z'),
-            certificationCenter: 'Université de Lyon',
-            isPublished: true,
-            pixScore: 654,
-            status: 'validated',
-            commentForCandidate: null,
-          });
-          this.set('certification', certification);
-          const screen = await render(<template><Item @certification={{certification}} /></template>);
-
-          // when
-          await click(
-            screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }),
-          );
-
-          // then
-          assert.ok(screen.getByText(t('common.error')));
-        });
-      });
-    });
-
-    module('when the certification is cancelled', function () {
-      test('should display specific information', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const certification = store.createRecord('certification', {
-          date: new Date('2018-02-15T15:15:52Z'),
-          deliveredAt: new Date('2018-02-17T15:15:52Z'),
-          certificationCenter: 'Université de Lyon',
-          isPublished: true,
-          pixScore: 365,
-          status: 'cancelled',
-          commentForCandidate: 'Votre certification a été annulée',
-        });
-
-        // when
-        const screen = await render(<template><Item @certification={{certification}} /></template>);
-
-        // then
-        assert.ok(screen.getByText(t('pages.certifications-list.statuses.cancelled')));
-        assert.ok(screen.getByText('Commentaire : Votre certification a été annulée'));
-        assert.dom(screen.queryByText('365')).doesNotExist();
-        assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
-        assert
-          .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
-          .doesNotExist();
-      });
-    });
-
-    module('when the certification is rejected or cancelled without comment', function () {
-      test('should not display the details and download button', async function (assert) {
-        //given
-        const store = this.owner.lookup('service:store');
-        const certification = store.createRecord('certification', {
-          date: new Date('2018-02-15T15:15:52Z'),
-          deliveredAt: new Date('2018-02-17T15:15:52Z'),
-          certificationCenter: 'Université de Lyon',
-          isPublished: true,
-          pixScore: 34,
-          status: 'rejected',
-          commentForCandidate: null,
-        });
-
-        // when
-        const screen = await render(<template><Item @certification={{certification}} /></template>);
-
-        // then
-        assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
-        assert.dom(screen.queryByText(t('pages.certifications-list.comment'))).doesNotExist();
-        assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
-        assert
-          .dom(screen.queryByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }))
-          .doesNotExist();
-      });
-    });
-  });
-
-  module('when algorithm engine version is v2', function () {
-    test('should display a download button with attestation word', async function (assert) {
-      //given
+  module('when there is an extra certification status', function () {
+    test('displays two tags when extra status is ACQUIRED', async function (assert) {
+      // given
       const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        date: new Date('2018-02-15T15:15:52Z'),
-        deliveredAt: new Date('2018-02-17T15:15:52Z'),
-        certificationCenter: 'Université de Lyon',
-        isPublished: true,
-        pixScore: 654,
-        status: 'validated',
-        commentForCandidate: null,
-        algorithmEngineVersion: 2,
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Centre',
+        certificationFramework: 'CLEA',
+        pixScore: 500,
+        status: 'VALIDATED',
+        verificationCode: 'P-XYZ',
+        extraCertificationStatus: 'ACQUIRED',
+        certificateType: 'ATTESTATION',
       });
 
       // when
-      const screen = await render(<template><Item @certification={{certification}} /></template>);
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
 
       // then
-      assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
+      const tags = screen.getAllByText(t('pages.certifications-list.statuses.validated'));
+      assert.strictEqual(tags.length, 2);
     });
-  });
 
-  module('when algorithm engine version is v3', function () {
-    test('should display a download button with certificate word', async function (assert) {
-      //given
+    test('does not display score for a validated Pix+ certification', async function (assert) {
+      // given
       const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        date: new Date('2018-02-15T15:15:52Z'),
-        deliveredAt: new Date('2018-02-17T15:15:52Z'),
-        certificationCenter: 'Université de Lyon',
-        isPublished: true,
-        pixScore: 654,
-        status: 'validated',
-        commentForCandidate: null,
-        algorithmEngineVersion: 3,
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Centre',
+        certificationFramework: 'DROIT',
+        pixScore: 500,
+        status: 'VALIDATED',
+        verificationCode: 'P-XYZ',
+        extraCertificationStatus: 'ACQUIRED',
+        certificateType: 'ATTESTATION',
       });
 
       // when
-      const screen = await render(<template><Item @certification={{certification}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
-      assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-certificate') }));
+      assert.dom(screen.queryByText('500')).doesNotExist();
+      assert.dom(screen.queryByText(t('common.pix'))).doesNotExist();
+      assert.dom(screen.getByText('-')).exists();
+    });
+
+    test('displays rejected tag for extra status NOT_ACQUIRED', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certificateSummary = store.createRecord('certificate-summary', {
+        certificationStartedAt: new Date('2024-01-15T10:00:00Z'),
+        certificationCenterName: 'Centre',
+        certificationFramework: 'CLEA',
+        pixScore: 500,
+        status: 'VALIDATED',
+        verificationCode: 'P-XYZ',
+        extraCertificationStatus: 'NOT_ACQUIRED',
+        certificateType: 'ATTESTATION',
+      });
+
+      // when
+      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+
+      // then
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.validated')));
+      assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
     });
   });
 });

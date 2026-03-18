@@ -5,11 +5,22 @@ export default class GetRoute extends Route {
   @service store;
   @service router;
 
-  async model(params) {
-    const certification = await this.store.findRecord('certification', params.id, { reload: true });
-    if (!certification.isPublished || certification.status !== 'validated') {
-      return this.router.replaceWith('/mes-certifications');
+  /**
+   * @param {Transition} transition
+   */
+  beforeModel(transition) {
+    const certificateId = transition.to.params.id;
+    const certificateSummaries = this.modelFor('authenticated.user-certifications');
+    const certificateSummary = certificateSummaries.find(
+      (certificateSummary) => certificateSummary.id === certificateId,
+    );
+    if (!certificateSummary || !certificateSummary.isValidated) {
+      transition.abort();
+      this.router.transitionTo('authenticated.user-certifications');
     }
-    return certification;
+  }
+
+  model(params) {
+    return this.store.findRecord('certification', params.id, { reload: true });
   }
 }
