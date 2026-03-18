@@ -89,9 +89,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     if (scope == 'CORE' && this.reachedMeshIndex == 0) {
       return `${this.pixScore} Pix`;
     }
-    const strReachedLevel = this.intl.t(
-      `components.certifications.meshLevels.${scope}.${String(this.reachedMeshIndex)}`,
-    );
+    const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
     const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
     return strReachedLevel + strPixScore;
   }

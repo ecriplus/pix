@@ -26,6 +26,32 @@
       "organization-not-found-error": "L’organisation \"{organizationId}\" n’existe pas.",
       "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
+    "certification": {
+      "meshLevels": {
+        "CORE": {
+          "1": "Novice 1",
+          "2": "Novice 2",
+          "3": "Indépendant 1",
+          "4": "Indépendant 2",
+          "5": "Avancé 1",
+          "6": "Avancé 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        },
+        "EDU_CPE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        }
+      }
+    },
     "fields": {
       "actions": "Actions",
       "createdAt": "Date de création",
@@ -459,30 +485,6 @@
           "modal-title": "Confirmer l'annulation du rejet de la certification"
         },
         "user-details-link": "Voir les détails de l'utilisateur"
-      },
-      "meshLevels": {
-        "CORE": {
-          "1": "Novice 1",
-          "2": "Novice 2",
-          "3": "Indépendant 1",
-          "4": "Indépendant 2",
-          "5": "Avancé 1",
-          "6": "Avancé 2",
-          "7": "Expert 1",
-          "8": "Expert 2"
-        },
-        "EDU_1ER_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        },
-        "EDU_2ND_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        },
-        "EDU_CPE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        }
       },
       "search-form": {
         "ariaLabel": "Rechercher une certification avec un identifiant",

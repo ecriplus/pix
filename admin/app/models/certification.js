@@ -122,9 +122,7 @@ export default class Certification extends Model {
     if (this.version != 3 || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
       return `${this.pixScore} Pix`;
     }
-    const strReachedLevel = this.intl.t(
-      `components.certifications.meshLevels.${scope}.${String(this.reachedMeshIndex)}`,
-    );
+    const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
     const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
     return strReachedLevel + strPixScore;
   }

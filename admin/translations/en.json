@@ -26,6 +26,32 @@
       "organization-not-found-error": "The organization \"{organizationId}\" does not exist.",
       "pix-admin-login-from-password-disabled-error": "Email and password login is disabled. Please use SSO to log in."
     },
+    "certification": {
+      "meshLevels": {
+        "CORE": {
+          "1": "Beginner 1",
+          "2": "Beginner 2",
+          "3": "Independent 1",
+          "4": "Independent 2",
+          "5": "Advanced 1",
+          "6": "Advanced 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        },
+        "EDU_CPE": {
+          "0": "Non-admissible",
+          "1": "Admissible"
+        }
+      }
+    },
     "fields": {
       "createdAt": "Creation date",
       "id": "Id",
@@ -458,30 +484,6 @@
           "modal-title": "Confirm certification unrejection"
         },
         "user-details-link": "See user details"
-      },
-      "meshLevels": {
-        "CORE": {
-          "1": "Beginner 1",
-          "2": "Beginner 2",
-          "3": "Independent 1",
-          "4": "Independent 2",
-          "5": "Advanced 1",
-          "6": "Advanced 2",
-          "7": "Expert 1",
-          "8": "Expert 2"
-        },
-        "EDU_1ER_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        },
-        "EDU_2ND_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        },
-        "EDU_CPE": {
-          "0": "Non-admissible",
-          "1": "Admissible"
-        }
       },
       "search-form": {
         "ariaLabel": "Search for a certification with an identifier",

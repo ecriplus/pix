@@ -625,7 +625,7 @@ function createCertificationCourseDetailsRecord({ certificationChallengesForAdmi
     completedAt: new Date('2023-01-13T09:05:00'),
     assessmentResultStatus: 'validated',
     numberOfChallenges: 15,
-    candidateSubscription: 'CORE',
+    certificationFramework: 'CORE',
     reachedMeshIndex: 5,
     certificationChallengesForAdministration,
     ...params,
