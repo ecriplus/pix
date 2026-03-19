@@ -566,6 +566,33 @@ module('Integration | Component | organizations/features-section', function (hoo
       assert.ok(within(select).getByText('ONDE'));
     });
 
+    test('it disables the import format select when user has no access', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        isOrganizationSCO: false,
+        features: { LEARNER_IMPORT: { active: true, params: { name: 'GENERIC' } } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: new RegExp(t('components.organizations.editing.organization-learner-import-format.selector.label')),
+          }),
+        )
+        .hasAttribute('aria-disabled');
+    });
+
     test('it hides the format select when learner import is unchecked', async function (assert) {
       // given
       const onSubmit = onSubmitStub;

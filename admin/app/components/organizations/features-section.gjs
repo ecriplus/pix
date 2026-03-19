@@ -233,6 +233,7 @@ const FeaturesForm = <template>
                 @onChange={{fn @updateValue "features.LEARNER_IMPORT.params.name"}}
                 @hideDefaultOption={{true}}
                 @isFullWidth={{false}}
+                @isDisabled={{not @canEdit}}
                 @placeholder={{t
                   "components.organizations.editing.organization-learner-import-format.selector.placeholder"
                 }}
