@@ -91,7 +91,6 @@ describe('Acceptance | Controller | training-controller', function () {
           'internal-title': trainingAttributes.internalTitle,
           type: trainingAttributes.type,
           link: trainingAttributes.link,
-          locale: trainingAttributes.locale,
           locales: trainingAttributes.locales,
           'is-recommendable': true,
           duration: {
@@ -164,7 +163,6 @@ describe('Acceptance | Controller | training-controller', function () {
             hours: 6,
             minutes: 0,
           },
-          locale: 'fr',
           locales: ['fr', 'fr-fr'],
           'editor-name': 'Un ministère',
           'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
@@ -186,7 +184,6 @@ describe('Acceptance | Controller | training-controller', function () {
               duration: {
                 hours: 6,
               },
-              locale: 'fr',
               locales: ['fr', 'fr-fr'],
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
               'editor-name': 'Un ministère',

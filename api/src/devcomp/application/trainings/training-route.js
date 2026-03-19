@@ -140,9 +140,6 @@ const register = async function (server) {
                 type: Joi.string()
                   .valid('autoformation', 'e-learning', 'hybrid-training', 'in-person-training', 'modulix', 'webinaire')
                   .required(),
-                locale: Joi.string()
-                  .valid(...lowerCaseSupportedLocales)
-                  .required(),
                 locales: Joi.array()
                   .items(Joi.string().valid(...lowerCaseSupportedLocales))
                   .default([]),
@@ -214,9 +211,6 @@ const register = async function (server) {
                 }).allow(null),
                 type: Joi.string()
                   .valid('autoformation', 'e-learning', 'hybrid-training', 'in-person-training', 'modulix', 'webinaire')
-                  .allow(null),
-                locale: Joi.string()
-                  .valid(...lowerCaseSupportedLocales)
                   .allow(null),
                 locales: Joi.array().items(Joi.string().valid(...lowerCaseSupportedLocales)),
                 'editor-name': Joi.string().allow(null),
