@@ -1,6 +1,5 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import isEmpty from 'lodash/isEmpty';
-import trim from 'lodash/trim';
 
 export const CREATED = 'created';
 export const FINALIZED = 'finalized';
@@ -50,7 +49,7 @@ export default class Session extends Model {
   }
 
   get hasExaminerGlobalComment() {
-    return !isEmpty(trim(this.examinerGlobalComment));
+    return !isEmpty(this.examinerGlobalComment?.trim() ?? '');
   }
 
   get hasComplementaryInfo() {

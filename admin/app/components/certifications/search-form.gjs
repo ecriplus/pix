@@ -6,7 +6,6 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
-import trim from 'lodash/trim';
 
 export default class CertificationsSearchForm extends Component {
   @service router;
@@ -21,7 +20,7 @@ export default class CertificationsSearchForm extends Component {
   @action
   loadCertification(event) {
     event.preventDefault();
-    const certifId = trim(this.inputId);
+    const certifId = this.inputId?.trim() ?? '';
     this.router.transitionTo('authenticated.sessions.certification', certifId);
   }
 
