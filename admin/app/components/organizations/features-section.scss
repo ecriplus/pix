@@ -1,0 +1,34 @@
+@use 'pix-design-tokens/typography';
+
+
+.organization-features-form {
+  &__card {
+    .card__content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--pix-spacing-6x) var(--pix-spacing-6x);
+    }
+
+    .card__content > * + * {
+      margin-top: 0;
+    }
+  }
+}
+
+.features-section__feature-item {
+  &:not(:last-child) {
+    padding-bottom: var(--pix-spacing-3x);
+    border-bottom: 1px solid var(--pix-neutral-100);
+  }
+
+  .form-field {
+    &:has(input[type='checkbox']:disabled) label {
+      color: var(--pix-neutral-500);
+    }
+
+    &:has(input[type='checkbox']:checked) label {
+      color: var(--pix-primary-700);
+      font-weight: 600;
+    }
+  }
+}

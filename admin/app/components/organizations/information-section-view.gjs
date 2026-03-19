@@ -1,24 +1,12 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
-import PixIcon from '@1024pix/pix-ui/components/pix-icon';
-import { concat, get } from '@ember/helper';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { formatList, t } from 'ember-intl';
-import { and, eq } from 'ember-truth-helpers';
-import Organization from 'pix-admin/models/organization';
+import { t } from 'ember-intl';
 
 import Card from '../card';
 
 export default class OrganizationInformationSection extends Component {
   @service accessControl;
-  @service intl;
-
-  get isManagingStudentAvailable() {
-    return (
-      !this.args.organization.isLearnerImportEnabled &&
-      (this.args.organization.isOrganizationSCO || this.args.organization.isOrganizationSUP)
-    );
-  }
 
   <template>
     <div class="organization__data">
@@ -207,95 +195,6 @@ class OrganizationDescription extends Component {
           </div>
         </Card>
       </div>
-
-      <Card
-        class="admin-form__card organization-information-section__card"
-        @title={{t "components.organizations.creation.features"}}
-      >
-        <div class="organization-information-section__field">
-          <span class="organization-information-section__value">
-            <FeaturesSection @features={{@organization.features}} />
-          </span>
-        </div>
-      </Card>
     </section>
   </template>
 }
-
-function keys(obj) {
-  return Object.keys(obj);
-}
-
-class FeaturesSection extends Component {
-  @service intl;
-
-  attestationLabels = (attestations) => {
-    return attestations?.map((name) =>
-      this.intl.t(`components.organizations.information-section-view.features.attestation-list.${name}`),
-    );
-  };
-
-  getOrganizationPlacesLimitText = (isActive) => {
-    if (isActive)
-      return this.intl.t(
-        'components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.enabled',
-      );
-    return this.intl.t('components.organizations.information-section-view.features.ORGANIZATION_PLACES_LIMIT.disabled');
-  };
-
-  <template>
-    <ul class="organization-information-section__features">
-      {{#each (keys Organization.featureList) as |feature|}}
-        {{#let
-          (get @features feature) (concat "components.organizations.information-section-view.features." feature)
-          as |organizationFeature featureLabel|
-        }}
-          {{#if (eq feature "SHOW_NPS")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              <a
-                rel="noopener noreferrer"
-                href={{organizationFeature.params.formNPSUrl}}
-                target="_blank"
-              >{{organizationFeature.params.formNPSUrl}}</a>
-            </Feature>
-          {{else if (eq feature "LEARNER_IMPORT")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              {{organizationFeature.params.name}}
-            </Feature>
-          {{else if (eq feature "ATTESTATIONS_MANAGEMENT")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              {{formatList (this.attestationLabels organizationFeature.params)}}
-            </Feature>
-          {{else if (eq feature "PLACES_MANAGEMENT")}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}}>
-              {{this.getOrganizationPlacesLimitText organizationFeature.params.enableMaximumPlacesLimit}}
-            </Feature>
-          {{else}}
-            <Feature @label={{t featureLabel}} @value={{organizationFeature.active}} />
-          {{/if}}
-        {{/let}}
-      {{/each}}
-    </ul>
-  </template>
-}
-
-const Feature = <template>
-  <li
-    class={{if
-      @value
-      "organization-information-section__features--enabled"
-      "organization-information-section__features--disabled"
-    }}
-  >
-    {{#if @value}}
-      <PixIcon @name="checkCircle" aria-label={{concat @label " : " (t "common.words.yes")}} />
-    {{else}}
-      <PixIcon @name="cancel" aria-label={{concat @label " : " (t "common.words.no")}} />
-    {{/if}}
-    {{@label}}
-    {{#if (and @value (has-block))}}
-      :
-      {{yield}}
-    {{/if}}
-  </li>
-</template>;

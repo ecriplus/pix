@@ -95,9 +95,10 @@
       }
     }
 
+
     li {
       display: inline-flex;
-      flex-wrap: flex-start;
+      flex-wrap: wrap;
       gap: var(--pix-spacing-2x);
       align-items: center;
 

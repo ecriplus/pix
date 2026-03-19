@@ -41,6 +41,7 @@ Router.map(function () {
       this.route('list');
       this.route('get', { path: '/:organization_id' }, function () {
         this.route('details');
+        this.route('features');
         this.route('team');
         this.route('target-profiles');
         this.route('campaigns');
