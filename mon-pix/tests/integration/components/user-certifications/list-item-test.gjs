@@ -2,11 +2,11 @@ import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
-import Item from 'mon-pix/components/certifications/list/item';
+import ListItem from 'mon-pix/components/user-certifications/list-item';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | User certifications | List item', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -28,7 +28,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.not-published')));
@@ -61,7 +61,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.validated')));
@@ -87,7 +87,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
@@ -107,7 +107,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-certificate') }));
@@ -135,7 +135,7 @@ module('Integration | Component | User certifications | List item', function (ho
           certificateType: 'ATTESTATION',
         });
 
-        const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+        const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
         // when
         await click(screen.getByRole('button', { name: t('pages.certifications-list.buttons.download-attestation') }));
@@ -161,7 +161,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
@@ -190,7 +190,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.rejected')));
@@ -213,7 +213,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.cancelled')));
@@ -242,7 +242,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       const tags = screen.getAllByText(t('pages.certifications-list.statuses.validated'));
@@ -287,7 +287,7 @@ module('Integration | Component | User certifications | List item', function (ho
       });
 
       // when
-      const screen = await render(<template><Item @certificateSummary={{certificateSummary}} /></template>);
+      const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.validated')));

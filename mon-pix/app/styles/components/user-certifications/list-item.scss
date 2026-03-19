@@ -54,8 +54,8 @@ $small-media-width: 500px;
     height: 110px;
     margin: -10px -10px 0 0;
     background: url('/images/certificate/pix-score-hexagon.svg') no-repeat;
-    background-size: contain;
     background-position: center center;
+    background-size: contain;
 
     @media (max-width: $small-media-width) {
       margin: 0 auto;
@@ -76,8 +76,8 @@ $small-media-width: 500px;
       position: absolute;
       top: 22%;
       left: 50%;
-      transform: translateX(-50%);
       text-transform: uppercase;
+      transform: translateX(-50%);
     }
   }
 }
@@ -88,15 +88,15 @@ $small-media-width: 500px;
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: var(--pix-spacing-1x) var(--pix-spacing-2x) var(--pix-spacing-1x) var(--pix-spacing-3x);
   margin-bottom: var(--pix-spacing-4x);
-  border-radius: var(--pix-spacing-1x);
+  padding: var(--pix-spacing-1x) var(--pix-spacing-2x) var(--pix-spacing-1x) var(--pix-spacing-3x);
   background-color: var(--pix-neutral-20);
+  border-radius: var(--pix-spacing-1x);
 
   .copy-btn {
     margin-left: var(--pix-spacing-1x);
+    color: currentcolor;
     vertical-align: text-bottom;
-    color: currentColor;
   }
 }
 

@@ -13,7 +13,7 @@ import { not } from 'ember-truth-helpers';
 import CopyPasteButton from 'mon-pix/components/copy-paste-button';
 import { CERTIFICATE_STATUSES, EXTRA_CERTIFICATE_STATUSES } from 'mon-pix/models/certificate-summary';
 
-export default class Item extends Component {
+export default class ListItem extends Component {
   @service intl;
   @service session;
   @service fileSaver;
@@ -123,7 +123,11 @@ export default class Item extends Component {
             </div>
           </PixTag>
           {{#if this.extraStatusTagData}}
-            <PixTag @color={{this.extraStatusTagData.color}} class="tag">
+            <PixTag
+
+              @color={{this.extraStatusTagData.color}}
+              class="tag"
+            >
               <div>
                 <strong>{{this.frameworkName}}&nbsp;:</strong>
                 {{this.extraStatusTagData.content}}

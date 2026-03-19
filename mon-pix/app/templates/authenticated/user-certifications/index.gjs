@@ -1,8 +1,8 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
-import Item from 'mon-pix/components/certifications/list/item';
 import PageTitle from 'mon-pix/components/ui/page-title';
+import ListItem from 'mon-pix/components/user-certifications/list-item';
 
 export default class CertificationEnder extends Component {
   get certificateSummariesSortedByDate() {
@@ -24,7 +24,7 @@ export default class CertificationEnder extends Component {
         <ol class="user-certifications-list">
           {{#each this.certificateSummariesSortedByDate as |certificateSummary|}}
             <li>
-              <Item
+              <ListItem
                 data-testid="pw-certification-card-{{certificateSummary.id}}"
                 @certificateSummary={{certificateSummary}}
               />
