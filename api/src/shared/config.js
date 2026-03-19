@@ -458,7 +458,6 @@ const configuration = (function () {
       fetchTimeOut: ms(process.env.FETCH_TIMEOUT_MILLISECONDS || '20s'),
     },
     pgBoss: {
-      connexionPoolMaxSize: _getNumber(process.env.PGBOSS_CONNECTION_POOL_MAX_SIZE, 2),
       teamSize: _getNumber(process.env.PG_BOSS_TEAM_SIZE, 1),
       teamConcurrency: _getNumber(process.env.PG_BOSS_TEAM_CONCURRENCY, 1),
       monitorStateIntervalSeconds: _getNumber(process.env.PGBOSS_MONITOR_STATE_INTERVAL_SECONDS, undefined),
