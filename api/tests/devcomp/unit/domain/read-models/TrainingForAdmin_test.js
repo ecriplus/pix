@@ -12,7 +12,7 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
         link: 'https://example.net',
         type: 'webinar',
         duration: { hours: 5 },
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         targetProfileIds: [1, 2, 3],
         editorName: 'Editor name',
         editorLogoUrl: 'https://editor.logo.url',
@@ -26,7 +26,7 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
       expect(training.link).to.equal('https://example.net');
       expect(training.type).to.equal('webinar');
       expect(training.duration).to.deep.equal({ hours: 5 });
-      expect(training.locale).to.equal('fr-fr');
+      expect(training.locales).to.deep.equal(['fr-fr']);
       expect(training.targetProfileIds).to.deep.equal([1, 2, 3]);
       expect(training.editorName).to.equal('Editor name');
       expect(training.editorLogoUrl).to.equal('https://editor.logo.url');
