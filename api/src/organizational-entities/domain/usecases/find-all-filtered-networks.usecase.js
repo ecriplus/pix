@@ -5,8 +5,8 @@
  * @param {NetworkRepository} params.networkRepository
  * @returns {Promise<Array<Network>>}
  */
-const findAllNetworks = async function ({ filter, networkRepository }) {
+const findAllFilteredNetworks = async function ({ filter, networkRepository }) {
   return networkRepository.findAll({ filter });
 };
 
-export { findAllNetworks };
+export { findAllFilteredNetworks };

@@ -34,7 +34,7 @@ const register = async function (server) {
             return sendJsonApiError(new BadRequestError('Un des champs de recherche saisis est invalide.'), h);
           },
         },
-        handler: networkAdminController.findAllNetworks,
+        handler: networkAdminController.findAllFilteredNetworks,
         notes: [
           "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès Superadmin**\n" +
             '- Renvoie les réseaux, filtrés par nom si le paramètre filter[name] est fourni.',
