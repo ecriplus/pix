@@ -58,7 +58,7 @@ export default class JuryCertificationSummary extends Model {
   }
 
   get certificationObtained() {
-    if (!this.reachedMeshIndex) {
+    if (this.reachedMeshIndex == null) {
       return this.intl.t(`pages.certifications.certification.certificationTypesV2.${this.certificationFramework}`);
     }
     return this.intl.t(`pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`);
@@ -66,7 +66,7 @@ export default class JuryCertificationSummary extends Model {
 
   get result() {
     const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
-    if (!this.reachedMeshIndex || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
+    if (this.reachedMeshIndex == null || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
       return `${this.pixScore} Pix`;
     }
     const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
