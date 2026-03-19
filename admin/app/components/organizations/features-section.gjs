@@ -119,7 +119,8 @@ export default class OrganizationFeaturesSection extends Component {
   async saveFeatures(event) {
     event.preventDefault();
     this.args.organization.set('features', this.form.features);
-    return this.args.onSubmit();
+    await this.args.onSubmit();
+    this.#initForm();
   }
 
   <template>
