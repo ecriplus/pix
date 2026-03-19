@@ -7,9 +7,9 @@ const DEFAULT_VALUE_FIRST_SKILL = -1;
 class StageCollectionUpdate {
   constructor({ stagesDTO, stageCollection }) {
     this._stagesDTO = stagesDTO.map((stageDTO) => ({
-      id: _.isNil(stageDTO.id) ? null : parseInt(stageDTO.id),
-      threshold: _.isNil(stageDTO.threshold) ? null : parseInt(stageDTO.threshold),
-      level: _.isNil(stageDTO.level) ? null : parseInt(stageDTO.level),
+      id: stageDTO.id == null ? null : parseInt(stageDTO.id),
+      threshold: stageDTO.threshold == null ? null : parseInt(stageDTO.threshold),
+      level: stageDTO.level == null ? null : parseInt(stageDTO.level),
       isFirstSkill: Boolean(stageDTO.isFirstSkill),
       title: _.isEmpty(stageDTO.title) ? '' : stageDTO.title,
       message: _.isEmpty(stageDTO.message) ? '' : stageDTO.message,

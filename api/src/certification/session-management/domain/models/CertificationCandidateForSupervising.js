@@ -1,7 +1,4 @@
-import lodash from 'lodash';
-
-const { isNil } = lodash;
-class CertificationCandidateForSupervising {
+export class CertificationCandidateForSupervising {
   constructor({
     id,
     userId,
@@ -25,7 +22,7 @@ class CertificationCandidateForSupervising {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthdate = birthdate;
-    this.extraTimePercentage = !isNil(extraTimePercentage) ? parseFloat(extraTimePercentage) : extraTimePercentage;
+    this.extraTimePercentage = extraTimePercentage != null ? parseFloat(extraTimePercentage) : extraTimePercentage;
     this.authorizedToStart = authorizedToStart;
     this.assessmentStatus = assessmentStatus;
     this.startDateTime = startDateTime;
@@ -49,5 +46,3 @@ class CertificationCandidateForSupervising {
     );
   }
 }
-
-export { CertificationCandidateForSupervising };

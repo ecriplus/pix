@@ -1,7 +1,6 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
-import _ from 'lodash';
 
 import { validateEntity } from '../../../../shared/domain/validators/entity-validator.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
@@ -27,7 +26,7 @@ const validationSchema = Joi.object({
   pixScore: Joi.number().default(null).allow(null),
 });
 
-class CampaignParticipationInfo {
+export class CampaignParticipationInfo {
   constructor({
     participantFirstName,
     participantLastName,
@@ -58,8 +57,8 @@ class CampaignParticipationInfo {
     this.sharedAt = sharedAt;
     this.division = division;
     this.group = group;
-    this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
-    this.validatedSkillsCount = !_.isNil(validatedSkillsCount) ? Number(validatedSkillsCount) : null;
+    this.masteryRate = masteryRate != null ? Number(masteryRate) : null;
+    this.validatedSkillsCount = validatedSkillsCount != null ? Number(validatedSkillsCount) : null;
     this.status = status;
     this.pixScore = pixScore;
     validateEntity(validationSchema, this);
@@ -73,5 +72,3 @@ class CampaignParticipationInfo {
     return Boolean(this.sharedAt);
   }
 }
-
-export { CampaignParticipationInfo };

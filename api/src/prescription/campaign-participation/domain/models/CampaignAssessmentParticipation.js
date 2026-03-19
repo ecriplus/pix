@@ -1,10 +1,8 @@
-import _ from 'lodash';
-
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 
-class CampaignAssessmentParticipation {
+export class CampaignAssessmentParticipation {
   constructor({
     userId,
     firstName,
@@ -37,7 +35,7 @@ class CampaignAssessmentParticipation {
     this.createdAt = createdAt;
     this.progression = progression;
     this.badges = badges ?? [];
-    this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
+    this.masteryRate = masteryRate != null ? Number(masteryRate) : null;
     this.validatedSkillsCount = validatedSkillsCount;
     this.reachedStage = reachedStage;
     this.totalStage = totalStage;
@@ -60,5 +58,3 @@ class CampaignAssessmentParticipation {
     this.prescriberDescription = reachedStage.prescriberDescription;
   }
 }
-
-export { CampaignAssessmentParticipation };

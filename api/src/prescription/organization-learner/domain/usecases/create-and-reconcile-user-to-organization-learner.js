@@ -1,6 +1,3 @@
-import lodash from 'lodash';
-const { isNil } = lodash;
-
 import { createAccountCreationEmail } from '../../../../identity-access-management/domain/emails/create-account-creation.email.js';
 import { User } from '../../../../identity-access-management/domain/models/User.js';
 import { STUDENT_RECONCILIATION_ERRORS } from '../../../../shared/domain/constants.js';
@@ -11,7 +8,7 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../shared/domain/errors.js';
 
-const createAndReconcileUserToOrganizationLearner = async function ({
+export async function createAndReconcileUserToOrganizationLearner({
   organizationId,
   redirectionUrl,
   locale,
@@ -39,7 +36,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
       obfuscationService,
     });
 
-  const organizationLearnerFound = !isNil(matchedOrganizationLearner.userId);
+  const organizationLearnerFound = matchedOrganizationLearner.userId != null;
   if (organizationLearnerFound) {
     const detail = 'Un compte existe déjà pour l‘élève dans le même établissement.';
     const error = STUDENT_RECONCILIATION_ERRORS.LOGIN_OR_REGISTER.IN_SAME_ORGANIZATION.username;
@@ -89,7 +86,7 @@ const createAndReconcileUserToOrganizationLearner = async function ({
     );
   }
   return createdUser;
-};
+}
 
 function _encryptPassword(userPassword, cryptoService) {
   const encryptedPassword = cryptoService.hashPassword(userPassword);
@@ -190,5 +187,3 @@ async function _validateData({
     throw EntityValidationError.fromMultipleEntityValidationErrors(relevantErrors);
   }
 }
-
-export { createAndReconcileUserToOrganizationLearner };

@@ -1,16 +1,13 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
-import lodash from 'lodash';
 
 import { PIX_ADMIN } from '../../../authorization/domain/constants.js';
 import { validateEntity } from '../../../shared/domain/validators/entity-validator.js';
 
-const { isNil } = lodash;
-
 const { ROLES } = PIX_ADMIN;
 
-class AdminMember {
+export class AdminMember {
   constructor({ id, userId, firstName, lastName, email, role, createdAt, updatedAt, disabledAt }) {
     this.id = id;
     this.userId = userId;
@@ -39,28 +36,26 @@ class AdminMember {
   }
 
   get hasAccessToAdminScope() {
-    return this.role in ROLES && isNil(this.disabledAt);
+    return this.role in ROLES && this.disabledAt == null;
   }
 
   get isSuperAdmin() {
-    return this.role === ROLES.SUPER_ADMIN && isNil(this.disabledAt);
+    return this.role === ROLES.SUPER_ADMIN && this.disabledAt == null;
   }
 
   get isCertif() {
-    return this.role === ROLES.CERTIF && isNil(this.disabledAt);
+    return this.role === ROLES.CERTIF && this.disabledAt == null;
   }
 
   get isMetier() {
-    return this.role === ROLES.METIER && isNil(this.disabledAt);
+    return this.role === ROLES.METIER && this.disabledAt == null;
   }
 
   get isSupport() {
-    return this.role === ROLES.SUPPORT && isNil(this.disabledAt);
+    return this.role === ROLES.SUPPORT && this.disabledAt == null;
   }
 
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 }
-
-export { AdminMember };
