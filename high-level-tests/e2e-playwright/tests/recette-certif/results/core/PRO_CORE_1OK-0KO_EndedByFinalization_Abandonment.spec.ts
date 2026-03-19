@@ -85,9 +85,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Rejetée',
-          Score: '55',
+          Résultats: '55 Pix',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Certification Pix',
+          'Certification passée': 'Pix Cœur',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,

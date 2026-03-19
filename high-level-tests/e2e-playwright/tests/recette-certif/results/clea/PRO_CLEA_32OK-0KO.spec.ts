@@ -93,9 +93,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Validée',
-          Score: '895',
+          Résultats: 'Expert 1 (895 Pix)',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Double Certification Pix/CléA Numérique',
+          'Certification passée': 'PIX / CléA Numérique',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -103,7 +103,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: '895 Pix',
+          score: 'Expert 1 (895 Pix)',
         });
         const cleaResult = await certificationInformationPage.getCleaResult();
         expect(cleaResult).toBe('Validée');

@@ -86,9 +86,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Validée',
-          Score: '862',
+          Résultats: 'Expert 1 (862 Pix)',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Certification Pix',
+          'Certification passée': 'Pix Cœur',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -96,7 +96,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: '862 Pix',
+          score: 'Expert 1 (862 Pix)',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           nbAnsweredQuestionsOverTotal: '24/32',

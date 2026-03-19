@@ -21,7 +21,7 @@ export class CertificationInformationPage {
         'Session',
       ),
       status: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Statut'),
-      score: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Score'),
+      score: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Résultat'),
     };
   }
 

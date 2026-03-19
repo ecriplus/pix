@@ -151,17 +151,17 @@ test(`${testRef} - Enroll candidates through importing ODS file`, async ({
         Prénom: userDataCoreSubscription.firstName,
         Nom: userDataCoreSubscription.lastName,
         Statut: 'Annulée',
-        Score: '55',
+        Résultats: '55 Pix',
         'Signalements impactants non résolus': '',
-        'Certification passée': 'Certification Pix',
+        'Certification passée': 'Pix Cœur',
       });
       expect(certificationData[1]).toMatchObject({
         Prénom: userDataCleaSubscription.firstName,
         Nom: userDataCleaSubscription.lastName,
         Statut: 'Annulée',
-        Score: '55',
+        Résultats: '55 Pix',
         'Signalements impactants non résolus': '',
-        'Certification passée': 'Double Certification Pix/CléA Numérique',
+        'Certification passée': 'PIX / CléA Numérique',
       });
     });
   });

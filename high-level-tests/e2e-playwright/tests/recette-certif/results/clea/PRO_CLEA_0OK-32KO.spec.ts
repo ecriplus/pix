@@ -92,9 +92,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Rejetée',
-          Score: '0',
+          Résultats: '0 Pix',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Double Certification Pix/CléA Numérique',
+          'Certification passée': 'PIX / CléA Numérique',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,

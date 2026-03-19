@@ -92,9 +92,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Validée',
-          Score: '895',
+          Résultats: 'Expert 1 (895 Pix)',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Certification Pix',
+          'Certification passée': 'Pix Cœur',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -102,7 +102,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: '895 Pix',
+          score: 'Expert 1 (895 Pix)',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           nbAnsweredQuestionsOverTotal: '32/32',
@@ -124,7 +124,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Validée',
-            score: '806 Pix',
+            score: 'Expert 1 (806 Pix)',
           });
         });
       });

@@ -82,9 +82,9 @@ test(`${testRef} - User test is being ended by invigilator. User should be able 
         Prénom: certifiableUserData.firstName,
         Nom: certifiableUserData.lastName,
         Statut: 'Terminée par le surveillant',
-        Score: '895',
+        Résultats: 'Expert 1 (895 Pix)',
         'Signalements impactants non résolus': '',
-        'Certification passée': 'Certification Pix',
+        'Certification passée': 'Pix Cœur',
       });
       const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
         certifiableUserData.firstName,
@@ -92,7 +92,7 @@ test(`${testRef} - User test is being ended by invigilator. User should be able 
       await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
         sessionNumber,
         status: 'Validée',
-        score: '895 Pix',
+        score: 'Expert 1 (895 Pix)',
       });
       await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
         nbAnsweredQuestionsOverTotal: '24/32',
