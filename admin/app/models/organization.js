@@ -52,6 +52,7 @@ export default class Organization extends Model {
       CAMPAIGN_WITHOUT_USER_PROFILE: 'CAMPAIGN_WITHOUT_USER_PROFILE',
       SHOW_SKILLS: 'SHOW_SKILLS',
       ATTESTATIONS_MANAGEMENT: 'ATTESTATIONS_MANAGEMENT',
+      COVER_RATE: 'COVER_RATE',
     };
   }
 
@@ -64,6 +65,7 @@ export default class Organization extends Model {
       'SHOW_SKILLS',
       'PLACES_MANAGEMENT',
       'LEARNER_IMPORT',
+      'COVER_RATE',
     );
   }
 

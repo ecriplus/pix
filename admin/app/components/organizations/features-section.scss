@@ -16,10 +16,8 @@
 }
 
 .features-section__feature-item {
-  &:not(:last-child) {
-    padding-bottom: var(--pix-spacing-3x);
-    border-bottom: 1px solid var(--pix-neutral-100);
-  }
+  padding-bottom: var(--pix-spacing-3x);
+  border-bottom: 1px solid var(--pix-neutral-100);
 
   .form-field {
     &:has(input[type='checkbox']:disabled) label {
