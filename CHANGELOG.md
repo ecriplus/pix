@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.361.0](https://github.com/1024pix/pix/compare/v5.360.0...v5.361.0) (2026-03-19)
+
+### :rocket: Amélioration
+
+- [#15527](https://github.com/1024pix/pix/pull/15527) Ajouter la date d'archivage des campagnes dans l'api Maddo (PIX-21881) 
+- [#15529](https://github.com/1024pix/pix/pull/15529) Ajouter le feature toggle addEmailConnectionMethodEnabled (PIX-21978) 
+- [#15502](https://github.com/1024pix/pix/pull/15502) MDX-138 IAGenPrompt_AVA correctifs ortho/typo 
+- [#15531](https://github.com/1024pix/pix/pull/15531) Modifs relecture - RangerFichiersNov 
+
+### :bug: Correction
+
+- [#15487](https://github.com/1024pix/pix/pull/15487) Flaky sur organizations target profiles dans Admin 
+
+### :building_construction: Tech
+
+- [#15526](https://github.com/1024pix/pix/pull/15526) Suppression du script locales (PIX-21942). 
+
+### :arrow_up: Montée de version
+
+- [#15539](https://github.com/1024pix/pix/pull/15539) @1024pix/epreuves-components 4.1.0
+
 # [5.360.0](https://github.com/1024pix/pix/compare/v5.359.0...v5.360.0) (2026-03-18)
 
 ### :rocket: Amélioration
