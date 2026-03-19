@@ -65,6 +65,10 @@ export default class OrganizationFeaturesSection extends Component {
     return Organization.editableFeatureList;
   }
 
+  get hasFormChanged() {
+    return JSON.stringify(this.form.features) !== JSON.stringify(this.args.organization.features);
+  }
+
   @action
   cancelChanges() {
     this.#initForm();
@@ -146,10 +150,15 @@ export default class OrganizationFeaturesSection extends Component {
         </section>
         {{#if this.accessControl.hasAccessToOrganizationActionsScope}}
           <section class="admin-form__actions">
-            <PixButton @size="small" @variant="secondary" @triggerAction={{this.cancelChanges}}>
+            <PixButton
+              @size="small"
+              @variant="secondary"
+              @triggerAction={{this.cancelChanges}}
+              @isDisabled={{not this.hasFormChanged}}
+            >
               {{t "common.actions.cancel"}}
             </PixButton>
-            <PixButton @type="submit" @size="small" @variant="success">
+            <PixButton @type="submit" @size="small" @variant="success" @isDisabled={{not this.hasFormChanged}}>
               {{t "common.actions.save"}}
             </PixButton>
           </section>

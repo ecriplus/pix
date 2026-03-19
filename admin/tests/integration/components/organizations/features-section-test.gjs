@@ -51,6 +51,56 @@ module('Integration | Component | organizations/features-section', function (hoo
       assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
     });
 
+    test('it disables save and cancel buttons when form has not changed', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).hasAttribute('aria-disabled');
+      assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).hasAttribute('aria-disabled');
+    });
+
+    test('it enables save and cancel buttons when form has changed', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { CAMPAIGN_WITHOUT_USER_PROFILE: { active: false } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.CAMPAIGN_WITHOUT_USER_PROFILE'),
+        }),
+      );
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).doesNotHaveAttribute('aria-disabled');
+      assert
+        .dom(screen.getByRole('button', { name: t('common.actions.cancel') }))
+        .doesNotHaveAttribute('aria-disabled');
+    });
+
     test('it hides save and cancel buttons when user has no access', async function (assert) {
       // given
       const onSubmit = onSubmitStub;
