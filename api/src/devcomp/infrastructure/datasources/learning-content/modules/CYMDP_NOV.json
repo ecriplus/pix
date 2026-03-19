@@ -125,8 +125,14 @@
                     "user": "emma_vtr"
                   },
                   "feedback": {
-                    "success": "Quelqu’un qui vous connaît ou un pirate informatique qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe.",
-                    "failed": "Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat."
+                    "success": {
+                      "title": "Connexion réussie",
+                      "content": "Quelqu’un qui vous connaît ou un pirate informatique qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe."
+                    },
+                    "failed": {
+                      "title": "Mauvaise réponse",
+                      "content": "Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat."
+                    }
                   },
                   "userProfile": {
                     "userName": "Emma_VTR",
@@ -289,7 +295,17 @@
                     "doudou",
                     "12345"
                   ],
-                  "expectedPassword": "marseille"
+                  "expectedPassword": "marseille",
+                  "feedback": {
+                    "success": {
+                      "title": "Vous avez trouvé le mot de passe d’Ulysse",
+                      "content": "Les pirates ont des listes contenant les mots de passe les plus fréquents, tous les mots du dictionnaire, des prénoms.\nIls utilisent des programmes informatiques qui permettent de tester des millions de mots en quelques secondes : on appelle ça une attaque par dictionnaire."
+                    },
+                    "failed": {
+                      "title": "Eh non !",
+                      "content": "Mot de passe incorrect. Réessayez avec un autre mot de passe."
+                    }
+                  }
                 },
                 "title": "",
                 "functionalInstruction": ""
