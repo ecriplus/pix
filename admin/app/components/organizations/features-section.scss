@@ -1,11 +1,10 @@
 @use 'pix-design-tokens/typography';
 
-
 .organization-features-form {
   &__card {
     .card__content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: var(--pix-spacing-6x) var(--pix-spacing-6x);
     }
 
@@ -13,6 +12,20 @@
       margin-top: 0;
     }
   }
+}
+
+.features-section__attestations-select {
+  width: 100%;
+
+  &--error .pix-multi-select-main-input {
+    border: 2px solid var(--pix-error-700);
+  }
+}
+
+.features-section__attestations-error {
+  margin-top: var(--pix-spacing-1x);
+  color: var(--pix-error-700);
+  font-size: 0.75rem;
 }
 
 .features-section__feature-item {

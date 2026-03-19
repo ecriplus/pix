@@ -858,6 +858,13 @@
             "placeholder": "Sélectionner une équipe en charge"
           }
         },
+        "attestations": {
+          "selector": {
+            "error": "Veuillez sélectionner au moins une attestation",
+            "label": "Attestations disponibles",
+            "placeholder": "Sélectionner les attestations"
+          }
+        },
         "country": {
           "selector": {
             "error-message": "Le pays est requis",
@@ -873,11 +880,11 @@
             "confirm-label": "Oui, je confirme",
             "confirmation": "En cochant cette case vous affirmez avoir les droits et l’autorisation de l’organisation pour effectuer cette action",
             "message": "Vous êtes sur le point d’activer l’import générique pour cette organisation. Si l’organisation a déjà des prescrits, ceux-ci seront tous supprimés. Cette suppression est irréversible.",
-            "title": "Activation de l'import générique"
+            "title": "Activation de l’import générique"
           },
           "selector": {
-            "label": "Format d'import",
-            "placeholder": "Sélectionner un format d'import"
+            "label": "Format d’import",
+            "placeholder": "Sélectionner un format d’import"
           }
         },
         "organization-learner-type": {

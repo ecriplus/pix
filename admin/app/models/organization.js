@@ -66,6 +66,7 @@ export default class Organization extends Model {
       'PLACES_MANAGEMENT',
       'LEARNER_IMPORT',
       'COVER_RATE',
+      'ATTESTATIONS_MANAGEMENT',
     );
   }
 

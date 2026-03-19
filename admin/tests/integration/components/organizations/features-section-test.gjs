@@ -24,6 +24,12 @@ module('Integration | Component | organizations/features-section', function (hoo
         store.createRecord('organization-learner-import-format', { id: '123', name: 'GENERIC' }),
         store.createRecord('organization-learner-import-format', { id: '456', name: 'ONDE' }),
       ]);
+    findAllStub
+      .withArgs('attestation')
+      .resolves([
+        store.createRecord('attestation', { id: '1', key: 'PARENTHOOD' }),
+        store.createRecord('attestation', { id: '2', key: 'SIXTH_GRADE' }),
+      ]);
 
     class AccessControlStub extends Service {
       hasAccessToOrganizationActionsScope = false;
@@ -281,29 +287,20 @@ module('Integration | Component | organizations/features-section', function (hoo
     });
   });
 
-  module('ATTESTATIONS_MANAGEMENT', function () {
-    test('it shows a disabled checked checkbox when feature is active', async function (assert) {
-      // given
-      const onSubmit = onSubmitStub;
-      const organization = EmberObject.create({
-        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
-      });
-
-      // when
-      const screen = await render(
-        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
-      );
-
-      // then
-      const checkbox = screen.getByLabelText(
-        t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
-      );
-      assert.true(checkbox.checked);
-      assert.true(checkbox.disabled);
+  module('ATTESTATIONS_MANAGEMENT', function (hooks) {
+    hooks.beforeEach(function () {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
     });
 
-    test('it shows a disabled unchecked checkbox when feature is inactive', async function (assert) {
+    test('it shows a disabled unchecked checkbox when feature is inactive and user has no access', async function (assert) {
       // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
       const onSubmit = onSubmitStub;
       const organization = EmberObject.create({
         features: { ATTESTATIONS_MANAGEMENT: { active: false } },
@@ -320,6 +317,126 @@ module('Integration | Component | organizations/features-section', function (hoo
       );
       assert.false(checkbox.checked);
       assert.true(checkbox.disabled);
+    });
+
+    test('it shows a PixMultiSelect when feature is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: new RegExp(t('components.organizations.editing.attestations.selector.label')),
+          }),
+        )
+        .exists();
+    });
+
+    test('it disables the PixMultiSelect when user has no access', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: new RegExp(t('components.organizations.editing.attestations.selector.label')),
+          }),
+        )
+        .isDisabled();
+    });
+
+    test('it hides the PixMultiSelect when feature is unchecked', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+        }),
+      );
+
+      // then
+      assert.notOk(
+        screen.queryByRole('button', {
+          name: new RegExp(t('components.organizations.editing.attestations.selector.label')),
+        }),
+      );
+    });
+
+    test('it shows an error and disables save when feature is active with no attestation selected', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: false } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+        }),
+      );
+
+      // then
+      assert.dom(screen.getByText(t('components.organizations.editing.attestations.selector.error'))).exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).hasAttribute('aria-disabled');
+    });
+
+    test('it does not submit the form when feature is active with no attestation selected', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: false } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+        }),
+      );
+
+      // when
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
+
+      // then
+      assert.false(onSubmit.called);
     });
   });
 
@@ -657,7 +774,9 @@ module('Integration | Component | organizations/features-section', function (hoo
           name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
         }).checked,
       );
-      const select = screen.getByRole('button', { name: /Format d'import/ });
+      const select = screen.getByRole('button', {
+        name: new RegExp(t('components.organizations.editing.organization-learner-import-format.selector.label')),
+      });
       assert.ok(within(select).getByText('ONDE'));
     });
 
