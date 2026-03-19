@@ -202,12 +202,15 @@ module('Integration | Component | certifications/header', function (hooks) {
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
+              certificationFramework: 'DROIT',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
+              certificationFramework: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
+              certificationFramework: 'CORE',
               status: 'validated',
             }),
           ];
@@ -231,9 +234,11 @@ module('Integration | Component | certifications/header', function (hooks) {
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
+              certificationFramework: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
+              certificationFramework: 'CORE',
               status: 'validated',
             }),
           ];
@@ -255,7 +260,7 @@ module('Integration | Component | certifications/header', function (hooks) {
           const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
 
           const juryCertificationSummaries = [
-            store.createRecord('jury-certification-summary', { status: 'validated' }),
+            store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
           ];
 
           // when
@@ -276,7 +281,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
 
             const juryCertificationSummaries = [
-              store.createRecord('jury-certification-summary', { status: 'validated' }),
+              store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
             ];
 
             // when
@@ -305,7 +310,7 @@ module('Integration | Component | certifications/header', function (hooks) {
             const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
 
             const juryCertificationSummaries = [
-              store.createRecord('jury-certification-summary', { status: 'validated' }),
+              store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
             ];
 
             // when

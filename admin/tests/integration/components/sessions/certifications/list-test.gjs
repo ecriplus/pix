@@ -46,7 +46,7 @@ module('Integration | Component | certifications/list', function (hooks) {
 
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
-        certificationObtained: 'Pix+ Droit',
+        certificationFramework: 'DROIT',
       }),
     ];
     const pagination = {};
