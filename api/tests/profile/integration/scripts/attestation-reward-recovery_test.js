@@ -76,6 +76,25 @@ describe('Integration | Profile | Scripts | attestation-reward-recovery', functi
       expect(userIds).to.not.contains(userId);
     });
 
+    it('should not return deleted participation even status is shared', async function () {
+      const { id: targetProfileId } = databaseBuilder.factory.buildTargetProfile({
+        id: TARGET_PROFILE_IDS[0],
+      });
+      const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId });
+
+      databaseBuilder.factory.buildCampaignParticipation({
+        userId: null,
+        campaignId: campaign.id,
+        status: CampaignParticipationStatuses.SHARED,
+        createdAt: '2024-12-02',
+        deletedAt: new Date('2026-01-01'),
+      });
+
+      await databaseBuilder.commit();
+      const userIds = await script.fetchUserIds(new Date('2024-12-01'), new Date('2024-12-06'));
+      expect(userIds).to.have.lengthOf(0);
+    });
+
     it('should not return the user if the campaign target profile is not included in targeted target profiles', async function () {
       const { id: targetProfileId1 } = databaseBuilder.factory.buildTargetProfile({
         id: TARGET_PROFILE_IDS[0],

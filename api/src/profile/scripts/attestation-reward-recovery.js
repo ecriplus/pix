@@ -85,16 +85,18 @@ export class AttestationRewardRecoveryScript extends Script {
     endDate.setDate(endDate.getDate() + 1);
     const formatedEndDate = endDate.toISOString().split('T')[0];
 
-    const users = await knexConnection('campaign-participations')
-      .distinct('campaign-participations.userId')
+    return await knexConnection('campaign-participations')
+      .select('campaign-participations.userId')
       .join('campaigns', 'campaign-participations.campaignId', 'campaigns.id')
       .join('target-profiles', 'campaigns.targetProfileId', 'target-profiles.id')
       .where('campaign-participations.createdAt', '>=', formatedStartDate)
       .where('campaign-participations.createdAt', '<=', formatedEndDate)
       .where('campaign-participations.status', '<>', CampaignParticipationStatuses.STARTED)
-      .whereIn('campaigns.targetProfileId', TARGET_PROFILE_IDS);
-
-    return users.map(({ userId }) => userId);
+      .whereNotNull('campaign-participations.userId')
+      .whereNull('campaign-participations.deletedAt')
+      .whereIn('campaigns.targetProfileId', TARGET_PROFILE_IDS)
+      .groupBy('userId')
+      .pluck('userId');
   }
 
   /**
