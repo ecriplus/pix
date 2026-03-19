@@ -1710,7 +1710,17 @@
                     "doudou",
                     "12345"
                   ],
-                  "expectedPassword": "marseille"
+                  "expectedPassword": "marseille",
+                  "feedback": {
+                    "success": {
+                      "title": "Vous avez trouvé le mot de passe <b>d’Ulysse</b>",
+                      "content": "Les <i>pirates</i> ont des listes contenant les mots de passe les plus fréquents, tous les mots du dictionnaire, des prénoms.<br>Ils utilisent des programmes informatiques qui permettent de tester des millions de mots en quelques secondes : on appelle ça une attaque par dictionnaire."
+                    },
+                    "failed": {
+                      "title": "Eh non !",
+                      "content": "Mot de passe incorrect. Réessayez avec un autre mot de passe."
+                    }
+                  }
                 },
                 "title": "",
                 "functionalInstruction": ""
@@ -1739,14 +1749,19 @@
                 "instruction": "",
                 "tagName": "trouver-mdp-rs",
                 "props": {
-                  "titleLevel": 2,
                   "validations": {
                     "password": "Timeo2014",
                     "user": "emma_vtr"
                   },
                   "feedback": {
-                    "success": "Quelqu’un qui vous connaît ou un pirate informatique qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe.",
-                    "failed": "Astuce : Comme Emma l’a dit à Jennifer, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat. Réessayer en saisissant le bon mot de passe à l’aide de ces informations en complétant le champ adéquat."
+                    "success": {
+                      "title": "Connexion réussie",
+                      "content": "Quelqu’un qui vous connaît ou un <b>pirate informatique</b> qui cherche des informations personnelles à votre sujet peut facilement deviner ce type de mot de passe."
+                    },
+                    "failed": {
+                      "title": "Mauvaise réponse",
+                      "content": "Astuce : Comme Emma l’a dit à <i>Jennifer</i>, son mot de passe est composé du prénom de son fils et l’année de naissance de son chat. Réessayer en saisissant le bon mot de passe à l’aide de ces informations en complétant le champ adéquat."
+                    }
                   },
                   "userProfile": {
                     "userName": "Emma_VTR",
