@@ -695,8 +695,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               'country-name': country.commonName,
               'organization-learner-type-name': organizationLearnerType.name,
               'organization-learner-type-id': organizationLearnerType.id,
-              'network-id': network.id,
-              'network-name': network.name,
               features: {
                 [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
                   active: false,
@@ -740,6 +738,12 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   },
                 ],
               },
+              network: {
+                data: {
+                  id: network.id.toString(),
+                  type: 'networks',
+                },
+              },
               'target-profile-summaries': {
                 links: {
                   related: `/api/admin/organizations/${organization.id}/target-profile-summaries`,
@@ -761,6 +765,17 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               },
               id: tag.id.toString(),
               type: 'tags',
+            },
+            {
+              attributes: {
+                name: network.name,
+                'head-organization': {
+                  id: organization.id,
+                  name: organization.name,
+                },
+              },
+              id: network.id.toString(),
+              type: 'networks',
             },
           ],
         });

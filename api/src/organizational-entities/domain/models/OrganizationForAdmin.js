@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty.js';
 
 import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DataProtectionOfficer } from './DataProtectionOfficer.js';
+import { Network } from './Network.js';
 
 const PAD_TARGET_LENGTH = 3;
 const PAD_STRING = '0';
@@ -57,6 +58,8 @@ class OrganizationForAdmin {
     organizationLearnerType,
     networkId,
     networkName,
+    networkHeadOrganizationId,
+    networkHeadOrganizationName,
   } = {}) {
     this.id = id;
     this.name = name;
@@ -148,8 +151,16 @@ class OrganizationForAdmin {
     this.code = code;
     this.countryCode = countryCode;
     this.countryName = countryName;
-    this.networkId = networkId;
-    this.networkName = networkName;
+    if (networkId) {
+      this.network = new Network({
+        id: networkId,
+        name: networkName,
+        organizationId: networkHeadOrganizationId,
+        organizationName: networkHeadOrganizationName,
+      });
+    } else {
+      this.network = undefined;
+    }
 
     this.#validate();
   }

@@ -3,12 +3,14 @@ import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
 import CopyButton from 'pix-admin/components/ui/copy-button';
 import ENV from 'pix-admin/config/environment';
 
 export default class HeadInformation extends Component {
+  @service currentUser;
   @action
   onLogoUpload(event) {
     const file = event.target.files?.[0];
@@ -30,6 +32,10 @@ export default class HeadInformation extends Component {
   get hasChildren() {
     const children = this.args.organization.children;
     return children?.length > 0;
+  }
+
+  get belongsToNetwork() {
+    return this.args.organization?.network;
   }
 
   get externalURL() {
@@ -76,6 +82,16 @@ export default class HeadInformation extends Component {
                 {{t "components.organizations.head-information.parent-organization"}}
               </PixTag>
             </li>
+          {{/if}}
+          {{#if this.belongsToNetwork}}
+            {{#if this.currentUser.adminMember.isSuperAdmin}}
+              <PixTag class="organization__child-tag" @color="success">
+                {{t "components.organizations.head-information.network"}}
+                <LinkTo @route="authenticated.networks.get" @model={{@organization.network.id}}>
+                  {{@organization.network.name}}
+                </LinkTo>
+              </PixTag>
+            {{/if}}
           {{/if}}
           {{#if @organization.parentOrganizationId}}
             <li>

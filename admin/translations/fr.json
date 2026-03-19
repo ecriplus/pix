@@ -807,8 +807,9 @@
         "required-fields-error": "Veuillez remplir tous les champs obligatoires."
       },
       "head-information": {
-        "child-organization": "Organisation fille de",
+        "child-organization": "Parent :",
         "copy-id": "Copier l'ID",
+        "network": "Réseau :",
         "parent-organization": "Organisation mère"
       },
       "information-section-view": {

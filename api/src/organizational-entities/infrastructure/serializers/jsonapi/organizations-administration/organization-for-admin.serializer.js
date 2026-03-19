@@ -61,9 +61,12 @@ const serialize = function (organizations, meta) {
       'countryName',
       'organizationLearnerTypeId',
       'organizationLearnerTypeName',
-      'networkId',
-      'networkName',
+      'network',
     ],
+    network: {
+      ref: 'id',
+      attributes: ['name', 'headOrganization'],
+    },
     organizationMemberships: {
       ref: 'id',
       ignoreRelationshipData: true,
