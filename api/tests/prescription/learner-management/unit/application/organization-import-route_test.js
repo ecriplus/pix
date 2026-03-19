@@ -196,6 +196,7 @@ describe('Unit | Router | organization-import-router', function () {
       hasAtLeastOneAccessOfStub = sinon
         .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
         .withArgs([
+          securityPreHandlers.checkAdminMemberHasRoleCertif,
           securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
           securityPreHandlers.checkAdminMemberHasRoleSupport,
           securityPreHandlers.checkAdminMemberHasRoleMetier,
