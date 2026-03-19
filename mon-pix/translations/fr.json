@@ -1650,6 +1650,12 @@
         "intro": "Choisissez le format de fichier que vous voulez utiliser.",
         "label": "Télécharger le fichier au format {format}"
       },
+      "elements": {
+        "short-video": {
+          "consult-transcription": "Consultez la transcription pour en connaître le contenu.",
+          "missing-content": "Une erreur est survenue lors de l'affichage de la vidéo."
+        }
+      },
       "flashcards": {
         "answerDirection": "Vous aviez la réponse ?",
         "completed": "Terminé",

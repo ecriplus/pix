@@ -1649,6 +1649,12 @@
         "intro": "Choose the file format you would like to use.",
         "label": "Download file in {format} format"
       },
+      "elements": {
+        "short-video": {
+          "consult-transcription": "Please consult the transcription to view its content.",
+          "missing-content": "An error occurred while displaying the video."
+        }
+      },
       "flashcards": {
         "answerDirection": "Did you have the answer?",
         "completed": "Completed",

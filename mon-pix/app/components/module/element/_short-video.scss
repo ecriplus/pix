@@ -1,7 +1,21 @@
-.element-short-video {
+@use 'pix-design-tokens/typography';
 
+.element-short-video {
   &__video {
     width: 100%;
     border-radius: var(--pix-spacing-2x);
+  }
+
+  &__missing-content {
+    @extend %pix-body-s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--pix-neutral-800);
+    text-align: center;
+    background-color: var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+    aspect-ratio: 16 / 9;
   }
 }
