@@ -125,9 +125,9 @@ export default class OrganizationFeaturesSection extends Component {
   <template>
     <div class="organization__data">
       <form class="admin-form" {{on "submit" this.saveFeatures}}>
-        <section class="admin-form__content organization-creation-form">
+        <section class="admin-form__content">
           <Card
-            class="admin-form__card organization-creation-form__card"
+            class="admin-form__card organization-features-form__card"
             @title={{t "components.organizations.creation.features"}}
           >
             <FeaturesForm
