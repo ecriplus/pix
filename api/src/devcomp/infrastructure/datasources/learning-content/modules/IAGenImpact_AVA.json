@@ -2,7 +2,7 @@
   "id": "1137b471-e347-4601-abd7-bc82ce587d7e",
   "shortId": "f4a3d9ed",
   "slug": "ia-gen-impacts",
-  "title": "Les IA génératives : quels impacts sur l’environnement ?",
+  "title": "Les IA génératives : quels impacts sur l’environnement ?",
   "isBeta": true,
   "visibility": "public",
   "details": {
@@ -11,11 +11,73 @@
     "duration": 10,
     "level": "advanced",
     "objectives": [
-      "<p>Identifier les besoins matériels des logiciels d'intelligence artificielle générative</p>",
-      "<p>Comprendre l'impact environnemental des phases d'entraînement et d'utilisation des logiciels d'intelligence artificielle générative</p>",
-      "<p>Identifier des pistes pour réduire l'impact environnemental des logiciels d'intelligence artificielle générative</p>"
+      "<p>Identifier les besoins matériels des logiciels d’intelligence artificielle générative</p>",
+      "<p>Comprendre l’impact environnemental des phases d’entraînement et d’utilisation des logiciels d’intelligence artificielle générative</p>",
+      "<p>Identifier des pistes pour réduire l’impact environnemental des logiciels d’intelligence artificielle générative</p>"
     ],
     "tabletSupport": "comfortable"
   },
-  "sections": []
+  "sections": [
+    {
+      "id": "a645bd9e-c19c-4815-bb75-99a87c960cff",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "697d32ed-43e0-4471-978b-1c065d0a1f85",
+          "type": "discovery",
+          "title": "Qu’est-ce que c’est ?",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d629b072-8cae-4484-82e2-25766a9e27cc",
+                "type": "text",
+                "content": "<p>Charlie vient de recevoir cet objet.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1d281c04-2639-4bf8-a3da-7bda4de2f3e1",
+                "type": "qcu-discovery",
+                "instruction": "<p>À votre avis, qu’est-ce que c’est ?&nbsp;</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Une carte mère</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Eh non !</strong></p><p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Une carte graphique ou GPU</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! </p><p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Un disque dur SSD</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p>"
+                    }
+                  }
+                ],
+                "solution": "2"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
