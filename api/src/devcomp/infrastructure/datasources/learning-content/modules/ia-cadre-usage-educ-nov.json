@@ -126,7 +126,7 @@
                     {
                       "id": "e5281293-5b04-41bb-8577-636c924ceadd",
                       "type": "text",
-                      "content": "Nathalie, professeure de SVT&nbsp;: <br><blockquote>«&nbsp;Je demande à l’IA de corriger les copies de mes élèves. J’obtiens une note et une appréciation. Les retours sont précis et pertinents. Je me dis que la machine est peut-être plus objective que moi pour évaluer.&nbsp;»</blockquote>"
+                      "content": "<p>Nathalie, professeure de SVT&nbsp;: </p><blockquote>«&nbsp;Je demande à l’IA de corriger les copies de mes élèves. J’obtiens une note et une appréciation. Les retours sont précis et pertinents. Je me dis que la machine est peut-être plus objective que moi pour évaluer.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "84c9a87f-202a-49df-8240-7d6bd8b3e4af",
@@ -204,7 +204,7 @@
                     {
                       "id": "58fb3eec-434e-4f3f-a76a-ae39acacf511",
                       "type": "text",
-                      "content": "<p>José, professeur principal&nbsp;: <br>«&nbsp;J’utilise une IA pour analyser les résultats et les profils de mes élèves afin de leur proposer des orientations possibles. Je fais confiance à ses recommandations, car elles reposent sur des données et des statistiques&nbsp;: ça me paraît plus neutre et plus objectif que nos impressions humaines.&nbsp;»</p>"
+                      "content": "<p>José, professeur principal&nbsp;:</p><blockquote>«&nbsp;J’utilise une IA pour analyser les résultats et les profils de mes élèves afin de leur proposer des orientations possibles. Je fais confiance à ses recommandations, car elles reposent sur des données et des statistiques&nbsp;: ça me paraît plus neutre et plus objectif que nos impressions humaines.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "37d7eed7-64d8-4305-b285-1261f7eeca30",
@@ -243,7 +243,7 @@
                     {
                       "id": "1496390f-8824-471f-a6d1-e678fa039634",
                       "type": "text",
-                      "content": "<p>Daphné, professeure des écoles&nbsp;: <br>«&nbsp;Ma classe est très hétérogène. J’utilise l’IA pour différencier&nbsp;: à partir d’une consigne que j’ai rédigée, je génère trois versions de consignes avec des degrés de difficulté adaptés à mes groupes de niveau.&nbsp;»</p>"
+                      "content": "<p>Daphné, professeure des écoles&nbsp;: </p><blockquote>«&nbsp;Ma classe est très hétérogène. J’utilise l’IA pour différencier&nbsp;: à partir d’une consigne que j’ai rédigée, je génère trois versions de consignes avec des degrés de difficulté adaptés à mes groupes de niveau.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "f58d29f7-8adf-49e0-8d1d-280962f198c7",
@@ -282,7 +282,7 @@
                     {
                       "id": "83ae49b1-9f8f-447d-ade8-c524e4f8f1ce",
                       "type": "text",
-                      "content": "<blockquote>Imani, professeure d’espagnol&nbsp;:<br>«&nbsp;J’ai demandé à l’IA de générer mon cours sur la Guerre civile. La progression pédagogique était cohérente et les activités bien enchaînées ; les supports intéressants. En quelques minutes, tout était prêt&nbsp;: je n’ai eu qu’à copier-coller, imprimer et distribuer à mes élèves.&nbsp;»</blockquote>"
+                      "content": "<p>Imani, professeure d’espagnol&nbsp;:</p><blockquote>«&nbsp;J’ai demandé à l’IA de générer mon cours sur la Guerre civile. La progression pédagogique était cohérente et les activités bien enchaînées ; les supports intéressants. En quelques minutes, tout était prêt&nbsp;: je n’ai eu qu’à copier-coller, imprimer et distribuer à mes élèves.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "bfe395b3-7b7a-4c65-a96a-640cadcdfbe8",
