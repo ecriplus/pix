@@ -163,6 +163,7 @@ export const findPaginatedCombinedCourseParticipationById = async function ({ co
       referenceId: combinedCourseId.toString(),
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
     })
+    .whereNull('organization_learner_participations.deletedAt')
     .orderBy(['lastName', 'firstName']);
 
   queryBuilder.modify(addSearchFilters, filters);
