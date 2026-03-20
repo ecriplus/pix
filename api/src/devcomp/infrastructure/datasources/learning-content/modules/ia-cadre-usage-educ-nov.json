@@ -255,21 +255,21 @@
                           "id": "1",
                           "content": "L’IA est utilisée comme assistante.",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, l’<strong>IA est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
+                            "diagnosis": "<p>Effectivement, l’<strong>IA générative est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "L’IA est utilisée comme remplaçante.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Ici, l’<strong>IA est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Ici, l’<strong>IA générative est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "<p>Ici, l’<strong>IA est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
+                            "diagnosis": "<p>Ici, l’<strong>IA générative est utilisée comme une aide</strong> qui permet à l’enseignant de<strong> mieux gérer l’hétérogénéité d’une classe et de personnaliser les apprentissages</strong>.</p>"
                           }
                         }
                       ],
@@ -294,21 +294,21 @@
                           "id": "1",
                           "content": "L’IA est utilisée comme assistante.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, confier à l’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
+                            "diagnosis": "<p>Eh non, confier à un logiciel d’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "L’IA est utilisée comme remplaçante.",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement ! Confier à l’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
+                            "diagnosis": "<p>Effectivement ! Confier à un logiciel d’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "<p>Confier à l’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
+                            "diagnosis": "<p>Confier à un logiciel d’IA la conception complète d’un cours revient à lui déléguer votre jugement professionnel. L’<strong>IA</strong> est une machine construite sur un modèle statistique&nbsp;: elle <strong>n’a pas l’expertise pédagogique d’un enseignant</strong>, ne connaît pas vos élèves et <strong>peut produire des erreurs</strong>. </p>"
                           }
                         }
                       ],
@@ -333,7 +333,7 @@
                     {
                       "id": "14742bf6-d4cc-410c-a497-a1cb0a9b292e",
                       "type": "text",
-                      "content": "<p>L’IA peut devenir un <strong>outil puissant au service du «&nbsp;geste enseignant&nbsp;»</strong>.</p><p>Notamment, les logiciels d’IA générative peuvent au quotidien vous aider dans la réalisation de tâches pédagogiques (préparation de cours, évaluation, personnalisation des apprentissages). Mais ils ne doivent<strong> jamais remplacer</strong> votre<strong> expertise professionnelle</strong>.</p>"
+                      "content": "<p>Les logiciels d’IA générative peuvent devenir <strong>des outils puissants au service du «&nbsp;geste enseignant&nbsp;»</strong>, pour vous aider au quotidien dans la réalisation de tâches pédagogiques telles que la préparation de cours, l’évaluation, la personnalisation des apprentissages.  Mais ils ne doivent<strong> jamais remplacer</strong> votre<strong> expertise professionnelle</strong>.</p>"
                     }
                   ]
                 },
@@ -360,7 +360,7 @@
               "element": {
                 "id": "aa092ff3-d3e2-4701-b6f1-c27961f7056b",
                 "type": "text",
-                "content": "<p>Nous avons vu que l’IA pouvait soutenir le geste enseignant. Néanmoins, avant de choisir de l’utiliser, il y a d’autres questions importantes à se poser…</p>"
+                "content": "<p>Nous avons vu que l’IA générative pouvait soutenir le geste enseignant. Néanmoins, avant de choisir de l’utiliser, il y a d’autres questions importantes à se poser…</p>"
               }
             }
           ]
@@ -458,7 +458,7 @@
               "element": {
                 "id": "30ff1b8b-0d83-4dcc-9b73-7b0163d8ac03",
                 "type": "text",
-                "content": "<p>Même si l’IA est utilisée en tant qu’assistante, dans une démarche frugale, il est primordial de se questionner quant aux données qu’on lui transmet.</p>"
+                "content": "<p>Même si l’IA générative est utilisée en tant qu’assistante, dans une démarche frugale, il est primordial de se questionner quant aux données qu’on lui transmet.</p>"
               }
             }
           ]
@@ -576,7 +576,7 @@
                     {
                       "id": "9f089ee6-7894-4f09-b65b-8206eade35f5",
                       "type": "text",
-                      "content": "<p><strong>Les principes clés </strong>:</p><ul><li>Les logiciels d’IA génératives accessibles au grand public<strong> ne garantissent pas la non-réutilisation des données</strong> transmises par les utilisateurs. Ne transmettez donc jamais de données concernant une personne physique ou morale (élève, collègue, établissement).</li><li>Dans les logiciels d’IA génératives accessibles au grand public, vous pouvez exploiter des données autorisées&nbsp;:<ul><li>des <strong>textes officiels</strong> (programmes, référentiels),</li><li>des <strong>ressources éducatives libres</strong>,</li><li>des <strong>données statistiques anonymisées</strong>,</li><li>des <strong>œuvres du domaine public</strong>.</li></ul></li></ul>"
+                      "content": "<p><strong>Les principes clés </strong>:</p><ul><li>Les logiciels d’IA génératives accessibles au grand public<strong> ne garantissent pas la non-réutilisation des données</strong> transmises par les utilisateurs. Ne transmettez donc jamais des données permettant d’identifier une personne physique ou morale (élève, collègue, établissement).</li><li>Dans les logiciels d’IA génératives accessibles au grand public, vous pouvez exploiter des données autorisées&nbsp;:<ul><li>des <strong>textes officiels</strong> (programmes, référentiels),</li><li>des <strong>ressources éducatives libres</strong>,</li><li>des <strong>données statistiques anonymisées</strong>,</li><li>des <strong>œuvres du domaine public</strong>.</li></ul></li></ul>"
                     }
                   ]
                 },
@@ -797,7 +797,7 @@
               "element": {
                 "id": "76081d34-b024-4409-a09a-36201ca6c91c",
                 "type": "text",
-                "content": "<p>Face au développement rapide et constant de l’IA générative, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de l’Éducation Nationale en juin 2025, a pour objectif de promouvoir des usages éclairées et responsables.</p>"
+                "content": "<p>Face au développement rapide et constant de l’IA générative, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de l’Éducation nationale en juin 2025, a pour objectif de promouvoir des usages éclairées et responsables.</p>"
               }
             },
             {
