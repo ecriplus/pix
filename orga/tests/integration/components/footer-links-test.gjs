@@ -16,5 +16,6 @@ module('Integration | Component | Authentication-layout | footer-links', functio
     assert.ok(screen.getByRole('link', { name: t('navigation.footer.legal-notice') }));
     assert.ok(screen.getByRole('link', { name: t('navigation.footer.a11y') }));
     assert.ok(screen.getByRole('link', { name: t('navigation.footer.server-status') }));
+    assert.ok(screen.getByRole('link', { name: t('navigation.footer.help-center') }));
   });
 });
