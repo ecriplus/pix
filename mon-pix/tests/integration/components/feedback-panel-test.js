@@ -7,7 +7,7 @@ import { module, test } from 'qunit';
 import { resolve } from 'rsvp';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
-import { waitForDialog } from '../../helpers/wait-for';
+import { waitForDialog, waitForDialogClose } from '../../helpers/wait-for';
 
 module('Integration | Component | feedback-panel', function (hooks) {
   setupIntlRenderingTest(hooks);
@@ -76,6 +76,8 @@ module('Integration | Component | feedback-panel', function (hooks) {
         // when
         await click(screen.getByRole('button', { name: 'Envoyer mon message de signalement' }));
         await click(screen.getByText(t('common.actions.cancel')));
+
+        await waitForDialogClose();
 
         // then
         assert.dom(screen.queryByRole('dialog', { name: 'Confirmation du signalement' })).doesNotExist();
