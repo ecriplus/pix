@@ -2,18 +2,18 @@
   "id": "bbc48a68-6bef-4261-89f0-86459413c10c",
   "shortId": "0426c3c5",
   "slug": "ia-cadre-usage-educ-nov",
-  "title": " IA et éducation : découverte du cadre d’usage",
+  "title": "IA et éducation : découverte du cadre d’usage",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IA_Enseignants_IND/picto_ia_edu_vector.svg",
-    "description": "<p>L’intelligence artificielle (IA) générative est désormais largement présente dans la société. Elle commence à s’installer dans les pratiques professionnelles des enseignants et des personnels d’éducation. Son développement rapide suscite des interrogations légitimes au sein de la communauté éducative.</p><p>Pour y répondre, le ministère de l’Éducation nationale a publié en juin 2025&nbsp; le cadre d’usage de l’IA en éducation.</p><br><p>Dans ce module, vous allez découvrir les principales préconisations de ce cadre.</p>",
+    "description": "<p>L’intelligence artificielle (IA) générative est désormais largement présente dans la société. Elle commence à s’installer dans les pratiques professionnelles des enseignants et des personnels d’éducation. Son développement rapide suscite des interrogations légitimes au sein de la communauté éducative.</p><p>Pour y répondre, le ministère de l’Éducation nationale a publié en juin 2025 le cadre d’usage de l’IA en éducation.</p><br><p>Dans ce module, vous allez découvrir les principales préconisations de ce cadre.</p>",
     "duration": 20,
     "level": "independent",
     "objectives": [
       "Connaître les finalités du cadre d’usage de l’IA en éducation",
       "Identifier les repères essentiels proposés par ce cadre",
-      "<p>Développer un usage des IA génératives éclairé et conforme aux préconisations officielles</p>"
+      "Développer un usage des IA génératives éclairé et conforme aux préconisations officielles"
     ],
     "tabletSupport": "comfortable"
   },
@@ -58,7 +58,7 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je ne souhaite pas répondre.<br></p>",
+                    "content": "<p>Je ne souhaite pas répondre.</p>",
                     "feedback": {
                       "diagnosis": "<p>Selon une <a href=\"https://www.vie-publique.fr/rapport/299222-lintelligence-artificielle-dans-les-etablissements-scolaires\" target=\"_blank\">enquête menée par l’Inspection générale de l’Éducation, du Sport et de la Recherche (IGÉSR)</a>,<strong> 36 % des enseignants utilisent des logiciels d’IA générative à des fins professionnelles</strong>. 73 % des cadres de l’Éducation nationale déclarent également y avoir recours.</p>"
                     }
@@ -79,7 +79,7 @@
               "element": {
                 "id": "983aaf01-8e57-4643-b6d9-70f4bb9ac00c",
                 "type": "text",
-                "content": "<p>L’IA générative représente désormais un <strong>levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un <strong>usage éclairé et responsable</strong>.<br></p><p><br>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Ce cadre fournit des repères pour que&nbsp;l’usage de l’IA générative s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
+                "content": "<p>L’IA générative représente désormais un <strong>levier pédagogique</strong> capable de libérer du temps pour l’humain. Cependant son déploiement rapide soulève l’urgence d’un <strong>cadre éthique rigoureux</strong> pour en garantir un <strong>usage éclairé et responsable</strong>.</p><p><br>Face à un paysage éducatif en pleine transformation, le ministère de l’Éducation nationale a publié en juin 2025 le <a href=\"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647\" target=\"_blank\">cadre d’usage de l’IA en éducation</a>. Ce cadre fournit des repères pour que&nbsp;l’usage de l’IA générative s’effectue <strong>au service des apprentissages et des pratiques professionnelles, dans le respect des valeurs de l’École de la République.</strong></p>"
               }
             }
           ]
@@ -138,7 +138,7 @@
                           "id": "1",
                           "content": "L’IA est utilisée comme assistante.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Ici, Nathalie utilise l’IA comme remplaçante.&nbsp;<strong> Un enseignant ne peut pas déléguer à l’IA l’évaluation, la notation ou les appréciations</strong>. Ces décisions ont un impact direct sur le parcours des élèves et doivent <strong>rester sous responsabilité humaine</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Ici, Nathalie utilise l’IA comme remplaçante.&nbsp;<strong>Un enseignant ne peut pas déléguer à l’IA l’évaluation, la notation ou les appréciations</strong>. Ces décisions ont un impact direct sur le parcours des élèves et doivent <strong>rester sous responsabilité humaine</strong>.</p>"
                           }
                         },
                         {
@@ -243,7 +243,7 @@
                     {
                       "id": "1496390f-8824-471f-a6d1-e678fa039634",
                       "type": "text",
-                      "content": "<p>Daphné, professeure des écoles&nbsp;: <br>«&nbsp;Ma classe est très hétérogène. J’utilise l’IA pour différencier&nbsp;: à partir d’une consigne que j’ai rédigée, je génère trois versions de consignes avec des degrés de difficultés adaptés à mes groupes de niveau.&nbsp;»</p>"
+                      "content": "<p>Daphné, professeure des écoles&nbsp;: <br>«&nbsp;Ma classe est très hétérogène. J’utilise l’IA pour différencier&nbsp;: à partir d’une consigne que j’ai rédigée, je génère trois versions de consignes avec des degrés de difficulté adaptés à mes groupes de niveau.&nbsp;»</p>"
                     },
                     {
                       "id": "f58d29f7-8adf-49e0-8d1d-280962f198c7",
@@ -282,7 +282,7 @@
                     {
                       "id": "83ae49b1-9f8f-447d-ade8-c524e4f8f1ce",
                       "type": "text",
-                      "content": "<blockquote>Imani, professeure d’espagnol&nbsp;:<br>«&nbsp;J’ai demandé à l’IA de générer mon cours sur la Guerre civile. La progression pédagogique était cohérente et les activités bien enchaînées ; les supports intéressants. En quelques minutes, tout était prêt&nbsp;: je n’ai eu qu’à copier-coller, imprimer et distribuer à mes élèves&nbsp;».</blockquote>"
+                      "content": "<blockquote>Imani, professeure d’espagnol&nbsp;:<br>«&nbsp;J’ai demandé à l’IA de générer mon cours sur la Guerre civile. La progression pédagogique était cohérente et les activités bien enchaînées ; les supports intéressants. En quelques minutes, tout était prêt&nbsp;: je n’ai eu qu’à copier-coller, imprimer et distribuer à mes élèves.&nbsp;»</blockquote>"
                     },
                     {
                       "id": "bfe395b3-7b7a-4c65-a96a-640cadcdfbe8",
@@ -333,7 +333,7 @@
                     {
                       "id": "14742bf6-d4cc-410c-a497-a1cb0a9b292e",
                       "type": "text",
-                      "content": "<p>Les logiciels d’IA générative peuvent devenir <strong>des outils puissants au service du «&nbsp;geste enseignant&nbsp;»</strong>, pour vous aider au quotidien dans la réalisation de tâches pédagogiques telles que la préparation de cours, l’évaluation, la personnalisation des apprentissages.  Mais ils ne doivent<strong> jamais remplacer</strong> votre<strong> expertise professionnelle</strong>.</p>"
+                      "content": "<p>Les logiciels d’IA générative peuvent devenir <strong>des outils puissants au service du «&nbsp;geste enseignant&nbsp;»</strong>, pour vous aider au quotidien dans la réalisation de tâches pédagogiques telles que la préparation de cours, l’évaluation, la personnalisation des apprentissages. Mais ils ne doivent<strong> jamais remplacer</strong> votre<strong> expertise professionnelle</strong>.</p>"
                     }
                   ]
                 },
@@ -440,7 +440,7 @@
                     {
                       "id": "84604d94-c694-43f5-83ff-1731a57168c2",
                       "type": "text",
-                      "content": "⚠️ Développez au quotidien un <strong>réflexe de sobriété numérique</strong>&nbsp;: il ne s’agit pas de se priver de l’IA générative, mais de faire un choix éclairé et raisonné, en faveur de l’outil le <strong>plus pertinent et le moins impactant sur le plan écologique</strong>.<br> <br>🤔 <strong>Bon à savoir<br> </strong>La sensibilisation aux enjeux environnementaux liés à l’intelligence artificielle et, plus largement, au numérique s’intègre pleinement dans le cadre de l’<strong>éducation au développement durable (EDD) </strong>des élèves.<br>"
+                      "content": "⚠️ Développez au quotidien un <strong>réflexe de sobriété numérique</strong>&nbsp;: il ne s’agit pas de se priver de l’IA générative, mais de faire un choix éclairé et raisonné, en faveur de l’outil le <strong>plus pertinent et le moins impactant sur le plan écologique</strong>.<br><br>🤔 <strong>Bon à savoir<br></strong>La sensibilisation aux enjeux environnementaux liés à l’intelligence artificielle et, plus largement, au numérique s’intègre pleinement dans le cadre de l’<strong>éducation au développement durable (EDD) </strong>des élèves.<br>"
                     }
                   ]
                 }
@@ -466,7 +466,7 @@
         {
           "id": "e404f0b1-9637-47c0-ba43-c394bb9dcf7d",
           "type": "discovery",
-          "title": "Découverte - 3 ",
+          "title": "Découverte - 3",
           "components": [
             {
               "type": "element",
@@ -505,12 +505,12 @@
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe_4eme_anonymisée.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎classe_4e_anonymisée.xls",
                         "isGoodAnswer": true
                       },
                       "choice2": {
                         "title": "Requête 2",
-                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎export_ENT_4emeC.xls",
+                        "content": "Analyse le tableau joint pour repérer les réussites et difficultés de la classe. 📎export_ENT_4eC.xls",
                         "isGoodAnswer": false
                       }
                     },
@@ -522,7 +522,7 @@
                       },
                       "choice1": {
                         "title": "Requête 1",
-                        "content": " À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées. 📎PAP+CRM-AliceNguyen.pdf",
+                        "content": "À partir du Programme d’Accompagnement Personnalisé (PAP) et du compte rendu médical de mon élève, propose des adaptations pédagogiques individualisées. 📎PAP+CRM-AliceNguyen.pdf",
                         "isGoodAnswer": false
                       },
                       "choice2": {
@@ -567,7 +567,7 @@
                     {
                       "id": "8394516b-6525-41ce-862e-b668b3adac8a",
                       "type": "text",
-                      "content": "Le cadre d’usage de l’IA en éducation (juin 2025) rappelle que la<strong> protection des données personnelles est une obligation légale, fondée sur le RGPD</strong> (Le règlement général sur la protection des données)."
+                      "content": "Le cadre d’usage de l’IA en éducation (juin 2025) rappelle que la<strong> protection des données personnelles est une obligation légale, fondée sur le RGPD</strong> (le règlement général sur la protection des données)."
                     }
                   ]
                 },
@@ -576,7 +576,7 @@
                     {
                       "id": "9f089ee6-7894-4f09-b65b-8206eade35f5",
                       "type": "text",
-                      "content": "<p><strong>Les principes clés </strong>:</p><ul><li>Les logiciels d’IA génératives accessibles au grand public<strong> ne garantissent pas la non-réutilisation des données</strong> transmises par les utilisateurs. Ne transmettez donc jamais des données permettant d’identifier une personne physique ou morale (élève, collègue, établissement).</li><li>Dans les logiciels d’IA génératives accessibles au grand public, vous pouvez exploiter des données autorisées&nbsp;:<ul><li>des <strong>textes officiels</strong> (programmes, référentiels),</li><li>des <strong>ressources éducatives libres</strong>,</li><li>des <strong>données statistiques anonymisées</strong>,</li><li>des <strong>œuvres du domaine public</strong>.</li></ul></li></ul>"
+                      "content": "<p><strong>Les principes clés </strong>:</p><ul><li>Les logiciels d’IA générative accessibles au grand public<strong> ne garantissent pas la non-réutilisation des données</strong> transmises par les utilisateurs. Ne transmettez donc jamais des données permettant d’identifier une personne physique ou morale (élève, collègue, établissement).</li><li>Dans les logiciels d’IA générative accessibles au grand public, vous pouvez exploiter des données autorisées&nbsp;:<ul><li>des <strong>textes officiels</strong> (programmes, référentiels),</li><li>des <strong>ressources éducatives libres</strong>,</li><li>des <strong>données statistiques anonymisées</strong>,</li><li>des <strong>œuvres du domaine public</strong>.</li></ul></li></ul>"
                     }
                   ]
                 },
@@ -628,7 +628,7 @@
                     {
                       "title": "Aurélie",
                       "description": "Professeur en cycle 2 (école primaire)",
-                      "text": "Aurélie mène une séance de sensibilisation à l’IA (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique).  Les élèves ne manipulent aucun service d’IA générative.",
+                      "text": "Aurélie mène une séance de sensibilisation à l’IA (exemples du quotidien, discussion sur ce qu’est une IA, sans outil numérique). Les élèves ne manipulent aucun service d’IA générative.",
                       "image": {
                         "src": "https://assets.pix.org/modules/IA_Enseignants_IND/ia_edu_prof1.png",
                         "alt": ""
@@ -712,7 +712,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "Bien joué !&nbsp;🎉",
-                    "diagnosis": "<p>Le cadre impose une<strong> progressivité par âge</strong>, un <strong>encadrement pédagogique clair</strong> et <strong>interdit la création de comptes personnels</strong> sur des logiciels d’IA générative. Elle ne doit jamais remplacer l’effort intellectuel de l’apprenant.</p>"
+                    "diagnosis": "<p>Le cadre impose une<strong> progressivité par âge</strong>, un <strong>encadrement pédagogique clair</strong> et <strong>interdit la création de comptes personnels</strong> sur des logiciels d’IA générative. Les IA génératives ne doivent jamais remplacer l’effort intellectuel de l’apprenant.</p>"
                   },
                   "invalid": {
                     "state": "Pas tout à fait !&nbsp;",
@@ -748,7 +748,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IA_Enseignants_IND/timeline.svg",
                       "alt": "Infographie décrite dans l’alternative textuelle",
-                      "alternativeText": "<ul><li>À partir de l’école primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs </li><li>À partir de la 4e au collège&nbsp;: usage limité en classe, toujours accompagné par l’enseignant    </li><li>À partir du lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini</li></ul>",
+                      "alternativeText": "<ul><li>À partir de l’école primaire&nbsp;: simple sensibilisation à l’IA, sans manipulation d’outils génératifs</li><li>À partir de la 4e au collège&nbsp;: usage limité en classe, toujours accompagné par l’enseignant</li><li>À partir du lycée&nbsp;: usage plus autonome, mais dans un cadre pédagogique défini</li></ul>",
                       "legend": "",
                       "licence": ""
                     },
@@ -762,7 +762,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/IA_Enseignants_IND/conditions.svg",
                       "alt": "Infographie décrite dans l’alternative textuelle",
-                      "alternativeText": "<ul><li>Encadrement pédagogique explicite par l’enseignant </li><li>   Protection stricte des données personnelles, sans création de comptes sur des services grand public </li><li>   Primauté de l’apprentissage&nbsp;: l’IA ne doit jamais remplacer l’effort intellectuel de l’apprenant</li></ul>",
+                      "alternativeText": "<ul><li>Encadrement pédagogique explicite par l’enseignant</li><li>   Protection stricte des données personnelles, sans création de comptes sur des services grand public</li><li>   Primauté de l’apprentissage&nbsp;: l’IA ne doit jamais remplacer l’effort intellectuel de l’apprenant</li></ul>",
                       "legend": "",
                       "licence": ""
                     }
@@ -773,7 +773,7 @@
                     {
                       "id": "b45766d4-5135-492b-8dba-faf05c202f62",
                       "type": "text",
-                      "content": "<p><strong>💡Bon à savoir</strong><br> Intégrer l’usage de l’IA générative dans les apprentissages permet&nbsp;:&nbsp; </p><ul><li>d’<strong>accompagner les apprentissages</strong> des élèves dans les différentes disciplines.</li><li>de <strong>donner </strong>aux élèves les<strong> clés pour comprendre</strong> cette technologie, en appréhender les <strong>opportunités </strong>et les <strong>limites</strong>.</li></ul>"
+                      "content": "<p><strong>💡 Bon à savoir</strong><br> Intégrer l’usage de l’IA générative dans les apprentissages permet&nbsp;:&nbsp; </p><ul><li>d’<strong>accompagner les apprentissages</strong> des élèves dans les différentes disciplines.</li><li>de <strong>donner </strong>aux élèves les<strong> clés pour comprendre</strong> cette technologie, en appréhender les <strong>opportunités </strong>et les <strong>limites</strong>.</li></ul>"
                     }
                   ]
                 }
@@ -797,7 +797,7 @@
               "element": {
                 "id": "76081d34-b024-4409-a09a-36201ca6c91c",
                 "type": "text",
-                "content": "<p>Face au développement rapide et constant de l’IA générative, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de l’Éducation nationale en juin 2025, a pour objectif de promouvoir des usages éclairées et responsables.</p>"
+                "content": "<p>Face au développement rapide et constant de l’IA générative, le <strong>cadre d’usage de l’IA&nbsp;en éducation</strong>, publié par le ministère de l’Éducation nationale en juin 2025, a pour objectif de promouvoir des usages éclairés et responsables.</p>"
               }
             },
             {
@@ -901,7 +901,7 @@
                           "content": "<p>Parce que l’IA générative n’indique jamais ses sources.</p>",
                           "feedback": {
                             "state": "Mauvaise réponse.",
-                            "diagnosis": "<p>Certaines IA génératives indiquent des sources, mais ça ne les empêchent pas de se tromper parfois.&nbsp;Il faut plutôt penser à aux risques liés à son fonctionnement…</p>"
+                            "diagnosis": "<p>Certaines IA génératives indiquent des sources, mais ça ne les empêche pas de se tromper parfois.&nbsp;Il faut plutôt penser aux risques liés à son fonctionnement…</p>"
                           }
                         },
                         {
@@ -1148,7 +1148,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<ul><li>Copier le texte officiel de la Constitution de 1958 dans un logiciel d’IA générative pour lui demander de créer un QCM de révision pour ses élèves, dans le cadre d’un cours sur la Vème République.</li></ul>"
+                    "content": "<ul><li>Copier le texte officiel de la Constitution de 1958 dans un logiciel d’IA générative pour lui demander de créer un QCM de révision pour ses élèves, dans le cadre d’un cours sur la Ve République.</li></ul>"
                   },
                   {
                     "type": "select",
@@ -1225,7 +1225,7 @@
                 "cards": [
                   {
                     "id": "ddd890fb-27d4-4782-a991-5bbb7520c2e1",
-                    "text": " À l’école élémentaire, les élèves peuvent utiliser les outils d’IA générative de manière autonome.",
+                    "text": "À l’école élémentaire, les élèves peuvent utiliser les outils d’IA générative de manière autonome.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1247,7 +1247,7 @@
                   },
                   {
                     "id": "be3406d8-f6d2-405c-9f44-a1d16d6c6d8b",
-                    "text": " Au lycée, les élèves peuvent utiliser des outils d’IA générative de manière plus autonome, dans un cadre strict défini par l’enseignant.",
+                    "text": "Au lycée, les élèves peuvent utiliser des outils d’IA générative de manière plus autonome, dans un cadre strict défini par l’enseignant.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1258,7 +1258,7 @@
                   },
                   {
                     "id": "22106f04-38ae-4912-9ca3-a45089550158",
-                    "text": " Quel que soit le niveau scolaire, l’enseignant doit expliciter les objectifs, les règles et les limites de l’usage de l’IA.",
+                    "text": "Quel que soit le niveau scolaire, l’enseignant doit expliciter les objectifs, les règles et les limites de l’usage de l’IA.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1269,7 +1269,7 @@
                   },
                   {
                     "id": "2c6050e4-5620-4915-bc44-da53a94e0348",
-                    "text": " Si besoin, un compte personnel élève peut être créé sur des outils d’IA grand public.",
+                    "text": "Si besoin, un compte personnel élève peut être créé sur des outils d’IA grand public.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1280,7 +1280,7 @@
                   },
                   {
                     "id": "70ec2d3e-633f-4ab6-8803-5d163243ff03",
-                    "text": " L’IA ne doit jamais se substituer à l’effort intellectuel ni aux apprentissages des élèves.",
+                    "text": "L’IA ne doit jamais se substituer à l’effort intellectuel ni aux apprentissages des élèves.",
                     "image": {
                       "url": "",
                       "altText": ""
