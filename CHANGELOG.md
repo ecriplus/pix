@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.362.0](https://github.com/1024pix/pix/compare/v5.361.0...v5.362.0) (2026-03-20)
+
+### :rocket: Amélioration
+
+- [#15512](https://github.com/1024pix/pix/pull/15512) Affichage du réseau dans le détail d'une organisation (PIX-21341). 
+- [#15528](https://github.com/1024pix/pix/pull/15528) Améliorer le formulaire des fonctionnalités dans Pix Admin (PIX-21977) 
+- [#15550](https://github.com/1024pix/pix/pull/15550) CYPhishing_AVA modif adresse audio 
+- [#15517](https://github.com/1024pix/pix/pull/15517) Recherche des réseaux par nom (PIX-21953). 
+
+### :building_construction: Tech
+
+- [#15545](https://github.com/1024pix/pix/pull/15545) :recycle: Remplace l'utilisation de `lodash.isNill`par `== null` 
+- [#15482](https://github.com/1024pix/pix/pull/15482) :recycle: Remplace les appels à la fonction `trim` de `lodash` pour la fonction native dans pixAdmin 
+- [#15565](https://github.com/1024pix/pix/pull/15565) Set saml config
+- [#15451](https://github.com/1024pix/pix/pull/15451) Utiliser le SDK PgBoss au lieu de Knex 
+
+### :arrow_up: Montée de version
+
+- [#15540](https://github.com/1024pix/pix/pull/15540) Update dependency eslint to v10 (e2e) 
+- [#15541](https://github.com/1024pix/pix/pull/15541) Update dependency eslint to v10 (load-testing) 
+- [#15546](https://github.com/1024pix/pix/pull/15546) Update dependency eslint-plugin-chai-expect to v4 (api) 
+- [#15547](https://github.com/1024pix/pix/pull/15547) Update dependency eslint-plugin-chai-expect to v4 (audit-logger) 
+- [#15551](https://github.com/1024pix/pix/pull/15551) Update dependency eslint-plugin-chai-expect to v4 (certif) 
+- [#15552](https://github.com/1024pix/pix/pull/15552) Update dependency eslint-plugin-chai-expect to v4 (dossier racine) 
+- [#15538](https://github.com/1024pix/pix/pull/15538) Update dependency oxfmt to ^0.39.0 (api) 
+- [#15557](https://github.com/1024pix/pix/pull/15557) Update dependency oxfmt to ^0.40.0 (api) 
+- [#15562](https://github.com/1024pix/pix/pull/15562) Update dependency stylelint-order to v8 (junior) 
+- [#15563](https://github.com/1024pix/pix/pull/15563) Update dependency stylelint-order to v8 (mon-pix)
+
 # [5.361.0](https://github.com/1024pix/pix/compare/v5.360.0...v5.361.0) (2026-03-19)
 
 ### :rocket: Amélioration
