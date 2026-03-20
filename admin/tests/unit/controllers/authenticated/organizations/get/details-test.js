@@ -10,7 +10,7 @@ module('Unit | Controller | authenticated/organizations/get/details', function (
   setupIntl(hooks);
 
   module('#updateOrganizationInformation', function () {
-    module('when the size of the payload is lower than 2.5 Mo limit', function () {
+    module('when there is no error', function () {
       test('displays a success notification', async function (assert) {
         // Given
         const controller = this.owner.lookup('controller:authenticated.organizations.get.details');
@@ -37,7 +37,7 @@ module('Unit | Controller | authenticated/organizations/get/details', function (
       });
     });
 
-    module('when the size of the payload is greater than 2.5 Mo limit', function () {
+    module('when there is an error', function () {
       test('displays an error notification', async function (assert) {
         // Given
         const controller = this.owner.lookup('controller:authenticated.organizations.get.details');
@@ -49,7 +49,7 @@ module('Unit | Controller | authenticated/organizations/get/details', function (
         controller.pixToast = {
           sendErrorNotification: sinon.stub(),
         };
-        controller.model.save.rejects({ errors: [{ status: '413', meta: { maxSizeInMegaBytes: '2.5' } }] });
+        controller.model.save.rejects();
 
         // When
         await controller.updateOrganizationInformation();
@@ -58,9 +58,7 @@ module('Unit | Controller | authenticated/organizations/get/details', function (
         sinon.assert.calledOnce(controller.model.save);
         sinon.assert.calledOnce(controller.model.rollbackAttributes);
         sinon.assert.calledWith(controller.pixToast.sendErrorNotification, {
-          message: t('pages.organizations.notifications.errors.payload-too-large', {
-            maxSizeInMegaBytes: '2.5',
-          }),
+          message: t('common.notifications.generic-error'),
         });
         assert.ok(true);
       });

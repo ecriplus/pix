@@ -17,20 +17,9 @@ export default class DetailsController extends Controller {
         message: this.intl.t('components.organizations.information-section-view.update.notifications.success'),
       });
       this.router.transitionTo('authenticated.organizations.get');
-    } catch (responseError) {
+    } catch {
       this.model.rollbackAttributes();
-      const error = get(responseError, 'errors[0]');
-      let message;
-      switch (error?.status) {
-        case '413':
-          message = this.intl.t(I18N_KEY_ERROR_MESSAGES[error?.status], {
-            maxSizeInMegaBytes: error?.meta?.maxSizeInMegaBytes,
-          });
-          break;
-        default:
-          message = this.intl.t(I18N_KEY_ERROR_MESSAGES['default']);
-      }
-      this.pixToast.sendErrorNotification({ message });
+      this.pixToast.sendErrorNotification({ message: this.intl.t('common.notifications.generic-error') });
     }
   }
 
@@ -64,8 +53,3 @@ export default class DetailsController extends Controller {
     }
   }
 }
-
-const I18N_KEY_ERROR_MESSAGES = {
-  413: 'pages.organizations.notifications.errors.payload-too-large',
-  default: 'common.notifications.generic-error',
-};
