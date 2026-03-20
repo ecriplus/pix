@@ -96,9 +96,10 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: 'Expert 1 (862 Pix)',
+          result: 'Expert 1 (862 Pix)',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Validée',
           nbAnsweredQuestionsOverTotal: '24/32',
           nbQuestionsOK: 24,
           nbQuestionsKO: 0,
@@ -106,6 +107,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
+          result: 'Expert 1 (862 Pix)',
         });
       });
     });

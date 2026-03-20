@@ -5,12 +5,6 @@ import { getNumberValueFromDescriptionList, getStringValueFromDescriptionList } 
 export class CertificationInformationPage {
   constructor(public readonly page: Page) {}
 
-  getCertificationNumber() {
-    const match = this.page.url().match(/\/sessions\/certification\/(\d+)/);
-    if (!match) throw new Error('Certification id not found in URL');
-    return match[1];
-  }
-
   async getGeneralInfo() {
     await this.page.getByRole('link', { name: 'Informations', exact: true }).click();
     await this.page.waitForURL(/\/sessions\/certification\/\d+$/);
@@ -21,13 +15,14 @@ export class CertificationInformationPage {
         'Session',
       ),
       status: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Statut'),
-      score: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Résultat'),
+      result: await getStringValueFromDescriptionList(this.page, 'pw-certification-state-description-list', 'Résultat'),
     };
   }
 
   async getDetails() {
     await this.page.getByRole('link', { name: 'Détails', exact: true }).click();
     await this.page.waitForURL(/\/sessions\/certification\/\d+\/details$/);
+    const status = await this.page.getByTestId('pw-certification-general-information-status-tag').innerText();
     return {
       nbAnsweredQuestionsOverTotal: await getStringValueFromDescriptionList(
         this.page,
@@ -66,6 +61,12 @@ export class CertificationInformationPage {
         "Raison de l'abandon :",
         { optional: true },
       ),
+      result: await getStringValueFromDescriptionList(
+        this.page,
+        'pw-certification-general-information-description-list',
+        'Résultat :',
+      ),
+      status,
     };
   }
 

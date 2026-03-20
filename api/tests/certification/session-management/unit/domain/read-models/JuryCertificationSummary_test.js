@@ -1,5 +1,6 @@
 import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
@@ -15,6 +16,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
         lastName: 'Martigan',
+        algorithmVersion: AlgorithmEngineVersion.V3,
         id: 100001,
         isFlaggedAborted: false,
         isPublished: false,
@@ -37,6 +39,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         id: 100001,
         isFlaggedAborted: false,
         isPublished: false,
+        algorithmVersion: AlgorithmEngineVersion.V3,
         pixScore: 751,
         reachedMeshIndex: 6,
         status: 'started',

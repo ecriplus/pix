@@ -84,19 +84,17 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
       this.assessmentState,
     );
   }
+
   get result() {
-    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
-    if (scope == 'CORE' && this.reachedMeshIndex == 0) {
-      return `${this.pixScore} Pix`;
-    }
-    const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
-    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return strReachedLevel + strPixScore;
+    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+      pixScore: this.pixScore,
+    });
   }
 
   get title() {
     const certificationTypeLabel = this.intl.t(
-      `pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`,
+      `pages.certifications.certification.certification-types-v3.${this.certificationFramework}`,
     );
     return this.intl.t('pages.certifications.certification.details.v3.general-informations.title', {
       type: certificationTypeLabel,

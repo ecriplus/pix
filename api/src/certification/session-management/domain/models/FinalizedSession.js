@@ -81,9 +81,7 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
 }
 
 function _hasOnlyCoreScopeCertifications(juryCertificationSummaries) {
-  return juryCertificationSummaries.every((certification) => {
-    return (
-      certification.certificationFramework == Frameworks.CORE || certification.certificationFramework == Frameworks.CLEA
-    );
+  return juryCertificationSummaries.every(({ certificationFramework }) => {
+    return [Frameworks.CORE, Frameworks.CLEA].includes(certificationFramework);
   });
 }

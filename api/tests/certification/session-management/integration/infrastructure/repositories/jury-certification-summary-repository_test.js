@@ -1,5 +1,6 @@
 import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as juryCertificationSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
@@ -47,11 +48,13 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           sessionId,
           lastName: 'DDD',
           framework: Frameworks.CLEA,
+          version: AlgorithmEngineVersion.V2,
         });
         manyAsrCertification = dbf.buildCertificationCourse({
           sessionId,
           lastName: 'AAA',
           framework: Frameworks.DROIT,
+          version: AlgorithmEngineVersion.V2,
         });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
@@ -93,6 +96,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           id: manyAsrCertification.id,
           isPublished: manyAsrCertification.isPublished,
           lastName: 'AAA',
+          algorithmVersion: AlgorithmEngineVersion.V2,
           pixScore: latestAssessmentResult.pixScore,
           reachedMeshIndex: latestAssessmentResult.reachedMeshIndex,
           status: latestAssessmentResult.status,

@@ -102,16 +102,18 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Rejetée',
-          score: '0 Pix',
+          result: '0 Pix',
         });
         const cleaResult = await certificationInformationPage.getCleaResult();
         expect(cleaResult).toBe('Rejetée');
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Rejetée',
           nbAnsweredQuestionsOverTotal: '32/32',
           nbQuestionsOK: 0,
           nbQuestionsKO: 32,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
+          result: '0 Pix',
         });
       });
     });

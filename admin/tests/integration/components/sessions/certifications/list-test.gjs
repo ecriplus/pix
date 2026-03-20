@@ -47,6 +47,7 @@ module('Integration | Component | certifications/list', function (hooks) {
     const juryCertificationSummaries = [
       store.createRecord('jury-certification-summary', {
         certificationFramework: 'DROIT',
+        algorithmVersion: 3,
       }),
     ];
     const pagination = {};

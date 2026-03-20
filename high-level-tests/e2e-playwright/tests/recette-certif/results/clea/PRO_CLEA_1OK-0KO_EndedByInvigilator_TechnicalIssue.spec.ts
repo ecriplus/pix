@@ -101,11 +101,12 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          score: '55 Pix',
+          result: '55 Pix',
         });
         const cleaResult = await certificationInformationPage.getCleaResult();
-        expect(cleaResult).toBe('Rejetée'); // todo verifier si c'est bon
+        expect(cleaResult).toBe('Rejetée');
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Annulée',
           nbAnsweredQuestionsOverTotal: '1/32',
           nbQuestionsOK: 1,
           nbQuestionsKO: 0,
@@ -113,6 +114,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Problème technique',
+          result: '55 Pix',
         });
       });
     });

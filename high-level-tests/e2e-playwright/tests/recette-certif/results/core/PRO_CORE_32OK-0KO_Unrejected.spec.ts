@@ -102,14 +102,16 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: 'Expert 1 (895 Pix)',
+          result: 'Expert 1 (895 Pix)',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Validée',
           nbAnsweredQuestionsOverTotal: '32/32',
           nbQuestionsOK: 32,
           nbQuestionsKO: 0,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
+          result: 'Expert 1 (895 Pix)',
         });
         return certificationInformationPage;
       });
@@ -119,7 +121,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Rejetée',
-            score: 'Expert 1 (895 Pix)',
+            result: 'Expert 1 (895 Pix)',
           });
         });
 
@@ -133,7 +135,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Validée',
-            score: 'Expert 1 (806 Pix)',
+            result: 'Expert 1 (806 Pix)',
           });
         });
       });

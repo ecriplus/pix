@@ -62,7 +62,7 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
       .dom(
         screen.getByRole('cell', {
           name: this.intl.t('pages.sessions.candidates.subscriptions.complementary', {
-            certificationLabel: 'Pix+ Droit',
+            pixPlusLabel: 'Pix+ Droit',
           }),
         }),
       )
@@ -90,7 +90,7 @@ module('Integration | Component | Sessions | Session | SessionCandidates', funct
       .dom(
         screen.getByRole('cell', {
           name: this.intl.t('pages.sessions.candidates.subscriptions.pix-plus', {
-            certificationLabel: 'Pix+ Droit',
+            pixPlusLabel: 'Pix+ Droit',
           }),
         }),
       )

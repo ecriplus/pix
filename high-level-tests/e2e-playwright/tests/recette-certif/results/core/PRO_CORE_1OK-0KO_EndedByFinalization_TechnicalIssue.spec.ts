@@ -95,9 +95,10 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          score: '55 Pix',
+          result: '55 Pix',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Annulée',
           nbAnsweredQuestionsOverTotal: '1/32',
           nbQuestionsOK: 1,
           nbQuestionsKO: 0,
@@ -105,6 +106,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Problème technique',
+          result: '55 Pix',
         });
       });
     });

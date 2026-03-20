@@ -32,30 +32,34 @@ export async function checkCertificationGeneralInformationAndExpectSuccess(
   data: {
     sessionNumber: string;
     status: string;
-    score: string;
+    result: string;
   },
 ) {
   const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
 
   expect(data.sessionNumber).toBe(certificationGeneralInfo.sessionNumber);
   expect(data.status).toBe(certificationGeneralInfo.status);
-  expect(data.score).toBe(certificationGeneralInfo.score);
+  expect(data.result).toBe(certificationGeneralInfo.result);
 }
 
 export async function checkCertificationDetailsAndExpectSuccess(
   certificationInformationPage: CertificationInformationPage,
   data: {
+    status: string;
     nbAnsweredQuestionsOverTotal: string;
     nbQuestionsOK: number;
     nbQuestionsKO: number;
     nbQuestionsAband: number;
     nbValidatedTechnicalIssues: number;
+    result: string;
     testEndedBy?: string;
     abortReason?: string;
   },
 ) {
   const certificationDetails = await certificationInformationPage.getDetails();
 
+  expect(data.status).toBe(certificationDetails.status);
+  expect(data.result).toBe(certificationDetails.result);
   expect(data.nbAnsweredQuestionsOverTotal).toBe(certificationDetails.nbAnsweredQuestionsOverTotal);
   expect(data.nbQuestionsOK).toBe(certificationDetails.nbQuestionsOK);
   expect(data.nbQuestionsKO).toBe(certificationDetails.nbQuestionsKO);

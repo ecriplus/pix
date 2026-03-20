@@ -102,14 +102,16 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Validée',
-          score: 'Non-admissible',
+          result: 'Non-admissible',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Validée',
           nbAnsweredQuestionsOverTotal: '32/32',
           nbQuestionsOK: 0,
           nbQuestionsKO: 32,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
+          result: 'Non-admissible',
         });
       });
     });

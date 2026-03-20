@@ -69,10 +69,9 @@ export default class Certification extends Model {
   }
 
   get certificationType() {
-    if (this.version == 2) {
-      return this.intl.t(`pages.certifications.certification.certificationTypesV2.${this.certificationFramework}`);
-    }
-    return this.intl.t(`pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`);
+    return this.intl.t(
+      `pages.certifications.certification.certification-types-v${this.version}.${this.certificationFramework}`,
+    );
   }
 
   get statusLabelAndValue() {
@@ -118,13 +117,10 @@ export default class Certification extends Model {
   }
 
   get result() {
-    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
-    if (this.version != 3 || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
-      return `${this.pixScore} Pix`;
-    }
-    const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
-    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return strReachedLevel + strPixScore;
+    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+      pixScore: this.pixScore,
+    });
   }
 
   wasBornInFrance() {

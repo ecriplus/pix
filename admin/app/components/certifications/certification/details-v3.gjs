@@ -204,7 +204,9 @@ export default class DetailsV3 extends Component {
             {{@details.title}}
           </h2>
           {{#if @details.assessmentResultStatus}}
-            <PixTag @color={{this.detailStatusColor}}>{{t this.detailStatusLabel}}</PixTag>
+            <PixTag data-testid="pw-certification-general-information-status-tag" @color={{this.detailStatusColor}}>{{t
+                this.detailStatusLabel
+              }}</PixTag>
           {{/if}}
         </div>
         <dl

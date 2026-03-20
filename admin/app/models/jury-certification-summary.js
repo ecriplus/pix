@@ -2,7 +2,7 @@ import { service } from '@ember/service';
 import Model, { attr } from '@ember-data/model';
 import find from 'lodash/find';
 
-import { assessmentStates, certificationStatuses } from './certification';
+import { assessmentResultStatus, assessmentStates, certificationStatuses } from './certification';
 
 export const juryCertificationSummaryStatuses = [
   { value: assessmentStates.ENDED_BY_INVIGILATOR, label: 'Terminée par le surveillant' },
@@ -15,6 +15,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() firstName;
   @attr() lastName;
   @attr() status;
+  @attr() algorithmVersion;
   @attr() pixScore;
   @attr() reachedMeshIndex;
   @attr() createdAt;
@@ -53,24 +54,20 @@ export default class JuryCertificationSummary extends Model {
     return this.status === 'error';
   }
 
-  get isCertificationWithCoreScope() {
-    return this.certificationFramework == 'CORE' || this.certificationFramework == 'CLEA';
+  get canPublish() {
+    return this.status !== assessmentResultStatus.ERROR && ['CORE', 'CLEA'].includes(this.certificationFramework);
   }
 
   get certificationObtained() {
-    if (this.reachedMeshIndex == null) {
-      return this.intl.t(`pages.certifications.certification.certificationTypesV2.${this.certificationFramework}`);
-    }
-    return this.intl.t(`pages.certifications.certification.certificationTypesV3.${this.certificationFramework}`);
+    return this.intl.t(
+      `pages.certifications.certification.certification-types-v${this.algorithmVersion}.${this.certificationFramework}`,
+    );
   }
 
   get result() {
-    const scope = this.certificationFramework == 'CLEA' ? 'CORE' : this.certificationFramework;
-    if (this.reachedMeshIndex == null || (scope == 'CORE' && this.reachedMeshIndex == 0)) {
-      return `${this.pixScore} Pix`;
-    }
-    const strReachedLevel = this.intl.t(`common.certification.meshLevels.${scope}.${String(this.reachedMeshIndex)}`);
-    const strPixScore = this.pixScore ? ` (${this.pixScore} Pix)` : '';
-    return strReachedLevel + strPixScore;
+    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+      pixScore: this.pixScore,
+    });
   }
 }

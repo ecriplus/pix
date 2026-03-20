@@ -100,10 +100,11 @@ test(
         );
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
-          status: 'Terminée par le surveillant',
-          score: 'Non-admissible',
+          status: 'Annulée',
+          result: 'Non-admissible',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Annulée',
           nbAnsweredQuestionsOverTotal: '1/32',
           nbQuestionsOK: 1,
           nbQuestionsKO: 0,
@@ -111,6 +112,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Problème technique',
+          result: 'Non-admissible',
         });
       });
     });
