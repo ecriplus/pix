@@ -1,5 +1,6 @@
 import { CertificationResult } from '../../../../../../src/certification/results/domain/models/CertificationResult.js';
 import * as certificationResultRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-result-repository.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
@@ -19,6 +20,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         externalId: 'VAMPIRES_SUCK',
         createdAt: new Date('2020-01-01'),
         sessionId,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseId2 = databaseBuilder.factory.buildCertificationCourse({
         firstName: 'Rupert',
@@ -29,6 +31,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         externalId: 'RIPPER',
         createdAt: new Date('2021-06-06'),
         sessionId,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseId3 = databaseBuilder.factory.buildCertificationCourse({
         firstName: 'Auffy',
@@ -39,6 +42,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         externalId: 'WITCH',
         createdAt: new Date('2020-10-10'),
         sessionId,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseIdNotInSession = databaseBuilder.factory.buildCertificationCourse().id;
       databaseBuilder.factory.buildAssessment({
@@ -80,6 +84,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         externalId: 'RIPPER',
         createdAt: new Date('2021-06-06'),
         sessionId,
+        reachedMeshIndex: null,
         status: CertificationResult.status.REJECTED,
         pixScore: 0,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
@@ -98,6 +103,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2020-10-10'),
         sessionId,
         status: CertificationResult.status.STARTED,
+        reachedMeshIndex: null,
         pixScore: null,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
           fallbackComment: null,
@@ -113,6 +119,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         birthplace: 'Torreilles',
         externalId: 'VAMPIRES_SUCK',
         createdAt: new Date('2020-01-01'),
+        reachedMeshIndex: null,
         sessionId,
         status: CertificationResult.status.VALIDATED,
         pixScore: 123,
@@ -156,6 +163,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         certificationCourseId,
       }).id;
       const assessmentResultId = databaseBuilder.factory.buildAssessmentResult({
+        certificationCourseId,
         assessmentId,
         pixScore: 123,
         status: AssessmentResult.status.VALIDATED,
@@ -182,8 +190,21 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
     it(`should return complementary certifications linked to the certifications`, async function () {
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
-      const { certificationCourseId, assessmentResultId, competenceMarkId } =
-        await _buildCertificationResultInSession(sessionId);
+      const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        sessionId,
+        isPublished: true,
+        version: AlgorithmEngineVersion.V3,
+      }).id;
+
+      const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId,
+        reachedMeshIndex: 6,
+      }).id;
+
+      const competenceMarkId = databaseBuilder.factory.buildCompetenceMark({
+        assessmentResultId,
+      }).id;
+
       const oneBadgeId = databaseBuilder.factory.buildBadge({ key: 'PARTNER_KEY' }).id;
       const oneComplementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
         key: 'PARTNER_KEY',
@@ -207,11 +228,20 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         source: ComplementaryCertificationCourseResult.sources.PIX,
       });
 
-      const {
+      const otherDegreCertificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        sessionId,
+        isPublished: true,
+        version: AlgorithmEngineVersion.V3,
+      }).id;
+      const otherAssessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: otherDegreCertificationCourseId,
+        reachedMeshIndex: 6,
+      }).id;
+
+      const otherCompetenceMarkId = databaseBuilder.factory.buildCompetenceMark({
         assessmentResultId: otherAssessmentResultId,
-        competenceMarkId: otherCompetenceMarkId,
-      } = await _buildCertificationResultInSession(sessionId);
+      }).id;
+
       const otherComplementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification().id;
       databaseBuilder.factory.buildBadge({ id: 12345, key: 'OTHER_PARTNER_KEY' });
       const otherComplementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
@@ -246,6 +276,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
           lastName: 'last-name',
           externalId: 'externalId',
           pixScore: 456,
+          reachedMeshIndex: 6,
           sessionId,
           status: 'validated',
           birthdate: '2001-05-21',
@@ -281,6 +312,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
           lastName: 'last-name',
           externalId: 'externalId',
           pixScore: 456,
+          reachedMeshIndex: 6,
           sessionId,
           status: 'validated',
           birthdate: '2001-05-21',
@@ -317,17 +349,27 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
     it(`should return only complementary certifications of Pix source`, async function () {
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
-      const {
-        certificationCourseId: oneCertificationCourseId,
-        assessmentResultId: oneAssessmentResultId,
-        competenceMarkId: oneCompetenceMarkId,
-      } = await _buildCertificationResultInSession(sessionId);
+
+      const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        sessionId,
+        isPublished: true,
+        version: AlgorithmEngineVersion.V3,
+      }).id;
+      const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId,
+        reachedMeshIndex: 6,
+      }).id;
+
+      const competenceMarkId = databaseBuilder.factory.buildCompetenceMark({
+        assessmentResultId,
+      }).id;
+
       const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({ key: 'A' }).id;
       databaseBuilder.factory.buildBadge({ id: 12345, key: 'PARTNER_KEY_PIX' });
       databaseBuilder.factory.buildBadge({ id: 12346, key: 'PARTNER_KEY_EXTERNAL' });
       databaseBuilder.factory.buildComplementaryCertificationCourse({
         id: 997,
-        certificationCourseId: oneCertificationCourseId,
+        certificationCourseId: certificationCourseId,
       });
       databaseBuilder.factory.buildComplementaryCertificationBadge({
         id: 100,
@@ -362,11 +404,12 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       // then
       const expectedResult = [
         domainBuilder.buildCertificationResult({
-          id: oneCertificationCourseId,
+          id: certificationCourseId,
           firstName: 'first-name',
           lastName: 'last-name',
           externalId: 'externalId',
           pixScore: 456,
+          reachedMeshIndex: 6,
           sessionId,
           status: 'validated',
           birthdate: '2001-05-21',
@@ -377,13 +420,13 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
           }),
           competencesWithMark: [
             domainBuilder.buildCompetenceMark({
-              id: oneCompetenceMarkId,
+              id: competenceMarkId,
               score: 42,
               level: 5,
               competence_code: '1.1',
               area_code: '1',
               competenceId: 'recABC123',
-              assessmentResultId: oneAssessmentResultId,
+              assessmentResultId: assessmentResultId,
             }),
           ],
           complementaryCertificationCourseResults: [
@@ -502,6 +545,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2020-01-01'),
         sessionId,
         userId: userId1,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseId2 = databaseBuilder.factory.buildCertificationCourse({
         firstName: 'Rupert',
@@ -513,6 +557,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2021-06-06'),
         sessionId,
         userId: userId2,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const certificationCourseId3 = databaseBuilder.factory.buildCertificationCourse({
         firstName: 'Auffy',
@@ -524,11 +569,13 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2020-10-10'),
         sessionId,
         userId: userId3,
+        version: AlgorithmEngineVersion.V3,
       }).id;
 
       const assessmentResultId1 = databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId1,
         pixScore: 123,
+        reachedMeshIndex: 2,
         status: CertificationResult.status.VALIDATED,
         commentForOrganization: 'Un commentaire orga 1',
         commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
@@ -536,12 +583,14 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId2,
         pixScore: 0,
+        reachedMeshIndex: null,
         status: AssessmentResult.status.REJECTED,
         commentForOrganization: 'Un commentaire orga 2',
       }).id;
       databaseBuilder.factory.buildAssessmentResult.last({
         certificationCourseId: certificationCourseId3,
         pixScore: 0,
+        reachedMeshIndex: null,
         status: AssessmentResult.status.CANCELLED,
         commentForOrganization: 'Un commentaire orga',
       }).id;
@@ -605,9 +654,11 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         birthplace: 'Saint-Ouen',
         externalId: 'RIPPER',
         createdAt: new Date('2021-06-06'),
+        framework: 'CORE',
         sessionId,
         status: CertificationResult.status.REJECTED,
         pixScore: 0,
+        reachedMeshIndex: null,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
           fallbackComment: 'Un commentaire orga 2',
         }),
@@ -623,6 +674,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         externalId: 'WITCH',
         createdAt: new Date('2020-10-10'),
         sessionId,
+        reachedMeshIndex: null,
         status: CertificationResult.status.CANCELLED,
         pixScore: 0,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
@@ -642,6 +694,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         sessionId,
         status: CertificationResult.status.VALIDATED,
         pixScore: 123,
+        reachedMeshIndex: 2,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
           fallbackComment: 'Un commentaire orga 1',
           commentByAutoJury: AutoJuryCommentKeys.CANCELLED_DUE_TO_NEUTRALIZATION,
@@ -680,11 +733,13 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
         createdAt: new Date('2020-01-01'),
         sessionId,
         userId,
+        version: AlgorithmEngineVersion.V3,
       }).id;
       const assessmentId = databaseBuilder.factory.buildAssessment({
         certificationCourseId,
       }).id;
       const assessmentResultId = databaseBuilder.factory.buildAssessmentResult({
+        certificationCourseId,
         assessmentId,
         pixScore: 123,
         status: AssessmentResult.status.VALIDATED,
@@ -769,12 +824,26 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
     it(`should return complementary certification linked to the candidates`, async function () {
       // given
       const sessionId = databaseBuilder.factory.buildSession().id;
-      const {
-        certificationCandidateId: oneCertificationCandidateId,
-        certificationCourseId: oneCertificationCourseId,
-        assessmentResultId: assessmentResultId,
-        competenceMarkId: competenceMarkId,
-      } = await _buildCertificationResultWithCandidate(sessionId);
+      const userId = databaseBuilder.factory.buildUser().id;
+      const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        sessionId,
+        userId,
+        isPublished: true,
+        version: AlgorithmEngineVersion.V3,
+      }).id;
+
+      const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId,
+        reachedMeshIndex: 6,
+      }).id;
+      const competenceMarkId = databaseBuilder.factory.buildCompetenceMark({
+        assessmentResultId,
+      }).id;
+      const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId,
+        userId,
+      }).id;
+
       databaseBuilder.factory.buildComplementaryCertification({ id: 333 });
       databaseBuilder.factory.buildBadge({ id: 12345, key: 'PARTNER_KEY' });
       databaseBuilder.factory.buildComplementaryCertificationBadge({
@@ -785,7 +854,7 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
       });
       databaseBuilder.factory.buildComplementaryCertificationCourse({
         id: 998,
-        certificationCourseId: oneCertificationCourseId,
+        certificationCourseId: certificationCourseId,
         complementaryCertificationBadgeId: 100,
         complementaryCertificationId: 333,
       });
@@ -800,17 +869,18 @@ describe('Certification | Results | Integration | Infrastructure | Repository | 
 
       // when
       const certificationResults = await certificationResultRepository.findByCertificationCandidateIds({
-        certificationCandidateIds: [oneCertificationCandidateId],
+        certificationCandidateIds: [certificationCandidateId],
       });
 
       // then
       const expectedResult = [
         domainBuilder.buildCertificationResult({
-          id: oneCertificationCourseId,
+          id: certificationCourseId,
           firstName: 'first-name',
           lastName: 'last-name',
           externalId: 'externalId',
           pixScore: 456,
+          reachedMeshIndex: 6,
           sessionId,
           status: 'validated',
           birthdate: '2001-05-21',
@@ -851,6 +921,7 @@ async function _buildCertificationResultInSession(sessionId, userId) {
     sessionId,
     userId,
     isPublished: true,
+    version: AlgorithmEngineVersion.V3,
   }).id;
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId,
@@ -861,26 +932,4 @@ async function _buildCertificationResultInSession(sessionId, userId) {
   }).id;
   await databaseBuilder.commit();
   return { certificationCourseId, assessmentResultId, competenceMarkId };
-}
-
-async function _buildCertificationResultWithCandidate(sessionId) {
-  const userId = databaseBuilder.factory.buildUser().id;
-  const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-    sessionId,
-    userId,
-    isPublished: true,
-  }).id;
-
-  const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
-    certificationCourseId,
-  }).id;
-  const competenceMarkId = databaseBuilder.factory.buildCompetenceMark({
-    assessmentResultId,
-  }).id;
-  const certificationCandidateId = databaseBuilder.factory.buildCertificationCandidate({
-    sessionId,
-    userId,
-  }).id;
-  await databaseBuilder.commit();
-  return { certificationCourseId, certificationCandidateId, assessmentResultId, competenceMarkId };
 }

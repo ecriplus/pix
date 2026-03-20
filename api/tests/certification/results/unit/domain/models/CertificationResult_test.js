@@ -1,4 +1,6 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationResult } from '../../../../../../src/certification/results/domain/models/CertificationResult.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 
@@ -28,6 +30,8 @@ describe('Unit | Domain | Models | CertificationResult', function () {
         assessmentId: 789,
         resultCreatedAt: new Date('2020-01-03'),
         pixScore: 123,
+        reachedMeshIndex: 2,
+        framework: 'CORE',
         commentForOrganization: 'Un commentaire orga 1',
         juryId: 159,
         competenceMarks: [
@@ -65,7 +69,6 @@ describe('Unit | Domain | Models | CertificationResult', function () {
         birthdate: '1981-01-19',
         birthplace: 'Torreilles',
         isPublished: true,
-        version: 2,
         externalId: 'VAMPIRES_SUCK',
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-01-02'),
@@ -73,6 +76,9 @@ describe('Unit | Domain | Models | CertificationResult', function () {
         assessmentId: 789,
         resultCreatedAt: new Date('2020-01-03'),
         pixScore: 123,
+        version: AlgorithmEngineVersion.V2,
+        reachedMeshIndex: 2,
+        framework: 'CORE',
         status: CERTIFICATION_RESULT_STATUS_VALIDATED,
         commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
           fallbackComment: certificationResultData.commentForOrganization,
@@ -373,6 +379,21 @@ describe('Unit | Domain | Models | CertificationResult', function () {
 
       // then
       expect(result).to.deep.equal(expectedComplementaryCertificationCourseLabels);
+    });
+  });
+
+  context('#isCoreFramework', function () {
+    it('return true if framework is CORE', function () {
+      const certificationResult = new CertificationResult({
+        framework: Frameworks.CORE,
+      });
+      expect(certificationResult.isCoreFramework()).to.be.true;
+    });
+    it('return false if framework is PIX PLUS DROIT', function () {
+      const certificationResult = new CertificationResult({
+        framework: Frameworks.DROIT,
+      });
+      expect(certificationResult.isCoreFramework()).to.be.false;
     });
   });
 });

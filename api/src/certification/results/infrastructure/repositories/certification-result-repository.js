@@ -2,7 +2,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { CertificationResult } from '../../domain/models/CertificationResult.js';
 
-const findBySessionId = async function ({ sessionId }) {
+export async function findBySessionId({ sessionId }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationResultDTOs = await _selectCertificationResults()
     .where('certification-courses.sessionId', sessionId)
@@ -18,9 +18,9 @@ const findBySessionId = async function ({ sessionId }) {
   return certificationResultDTOs.map((certificationResultDTO) =>
     _toDomain({ certificationResultDTO, complementaryCertificationCourseResultsByCertificationCourseId }),
   );
-};
+}
 
-const findByCertificationCandidateIds = async function ({ certificationCandidateIds }) {
+export async function findByCertificationCandidateIds({ certificationCandidateIds }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationResultDTOs = await _selectCertificationResults()
     .join('certification-candidates', function () {
@@ -45,9 +45,7 @@ const findByCertificationCandidateIds = async function ({ certificationCandidate
   return certificationResultDTOs.map((certificationResultDTO) =>
     _toDomain({ certificationResultDTO, complementaryCertificationCourseResultsByCertificationCourseId }),
   );
-};
-
-export { findByCertificationCandidateIds, findBySessionId };
+}
 
 function _selectCertificationResults() {
   const knexConn = DomainTransaction.getConnection();
@@ -61,7 +59,10 @@ function _selectCertificationResults() {
       externalId: 'certification-courses.externalId',
       createdAt: 'certification-courses.createdAt',
       sessionId: 'certification-courses.sessionId',
+      framework: 'certification-courses.framework',
+      version: 'certification-courses.version',
       pixScore: 'assessment-results.pixScore',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       assessmentResultStatus: 'assessment-results.status',
       commentByAutoJury: 'assessment-results.commentByAutoJury',
       commentForOrganization: 'assessment-results.commentForOrganization',

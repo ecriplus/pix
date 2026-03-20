@@ -11,6 +11,7 @@ class CertificationResultsCsvValues {
     CERTIFICATION_STARTED: `${I18N_VALUES_PREFIX}.CERTIFICATION_STARTED`,
     CERTIFICATION_VALIDATED: `${I18N_VALUES_PREFIX}.CERTIFICATION_VALIDATED`,
     COMPLEMENTARY_CERTIFICATION_CANCELLED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_CANCELLED`,
+    COMPLEMENTARY_CERTIFICATION_IN_ERROR: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_IN_ERROR`,
     COMPLEMENTARY_CERTIFICATION_NOT_DONE: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_NOT_DONE`,
     COMPLEMENTARY_CERTIFICATION_REJECTED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_REJECTED`,
     COMPLEMENTARY_CERTIFICATION_VALIDATED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_VALIDATED`,
@@ -44,16 +45,6 @@ class CertificationResultsCsvValues {
     if (certificationResult.isStarted()) {
       return this.getTranslation(CertificationResultsCsvValues.VALUES.CERTIFICATION_STARTED);
     }
-  }
-
-  formatPixScore(certificationResult) {
-    if (certificationResult.isCancelled() || certificationResult.isInError()) {
-      return '-';
-    }
-    if (certificationResult.isRejected()) {
-      return '0';
-    }
-    return certificationResult.pixScore;
   }
 
   #isCompetenceFailed(competence) {
@@ -90,6 +81,9 @@ class CertificationResultsCsvValues {
   getComplementaryCertificationStatus({ certificationResult, sessionComplementaryCertificationsLabel }) {
     if (certificationResult.isCancelled()) {
       return this.getTranslation(CertificationResultsCsvValues.VALUES.COMPLEMENTARY_CERTIFICATION_CANCELLED);
+    }
+    if (certificationResult.isInError()) {
+      return this.getTranslation(CertificationResultsCsvValues.VALUES.COMPLEMENTARY_CERTIFICATION_IN_ERROR);
     }
     const complementaryCertificationCourseResult = certificationResult.complementaryCertificationCourseResults.find(
       ({ label }) => label === sessionComplementaryCertificationsLabel,
