@@ -86,7 +86,7 @@ async function createDataForCombinedCourse() {
       link: '/modules/demo-combinix-1',
       type: 'modulix',
       duration: 1,
-      locale: 'fr',
+      locales: ['fr'],
       editorName: 'demo',
       editorLogoUrl: 'demo',
     })
