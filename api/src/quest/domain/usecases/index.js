@@ -22,6 +22,7 @@ const { combinedCourseDetailsService: injectedCombinedCourseDetailsService } = i
 
 const dependencies = {
   accessCodeRepository: repositories.accessCodeRepository,
+  attestationRepository: repositories.attestationRepository,
   eligibilityRepository: repositories.eligibilityRepository,
   rewardRepository: repositories.rewardRepository,
   successRepository: repositories.successRepository,
@@ -46,6 +47,7 @@ const dependencies = {
 
 import { attachOrganizationsToCombinedCourseBlueprint } from './attach-organizations-to-combined-course-blueprint.js';
 import { checkUserQuest } from './check-user-quest-success.js';
+import { createAttestation } from './create-attestation.js';
 import { createCombinedCourse } from './create-combined-course.js';
 import { createCombinedCourseBlueprint } from './create-combined-course-blueprint.js';
 import { createCombinedCourses } from './create-combined-courses.js';
@@ -92,6 +94,7 @@ const usecasesWithoutInjectedDependencies = {
   rewardUser,
   startCombinedCourse,
   updateCombinedCourseProgress,
+  createAttestation,
   createCombinedCourses,
   createCombinedCourseBlueprint,
   createCombinedCourse,
