@@ -150,7 +150,69 @@
               "type": "element",
               "element": {
                 "id": "6cb38410-cbfd-4c62-a926-205420c5d3f6",
-                "type": "text"
+                "type": "text",
+                "content": "<p>Dans un premier temps, vous essayez de générer un plan de communication avec un seul prompt.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "eb9e1f23-fb51-4750-842d-2dc1312e6ec3",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Vous avez un seul prompt",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm6spb900005d01onjeba2s",
+                "instruction": "<p>Utilisez ChatPix pour obtenir un plan de communication sur le thème de la cyber-sécurité.</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b68821d0-4b81-4a37-9975-ae42387a0184",
+                "type": "text",
+                "content": "<p>Ce que vous venez d’obtenir ressemble à un plan… mais vous pouvez difficilement le mettre en oeuvre.</p><p>Pour avancer, découpez la mission en petites étapes, puis interrogez l’IA étape par étape.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "18f9c582-d0fb-4ec8-858a-d512e7459668",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Simu 2",
+                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmmm8mke700015d01c67cyrhd",
+                "instruction": "<p>Utilisez ChatPix pour construire progressivement un plan de communication cyber-sécurité clair.</p>",
+                "solution": "",
+                "height": 500
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "27a110c8-0cd2-462f-b4c0-31794a5b51d3",
+                "type": "expand",
+                "title": "💡 Indice 1",
+                "content": "<p>Commencez par clarifier la tâche&nbsp;: demandez à l’IA d’identifier l’objectif et les contraintes (durée, type d'utilisateurs, etc.).</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2c2bacd6-1beb-472d-a3e7-2fbe7e98b37a",
+                "type": "expand",
+                "title": "💡 Indice 2",
+                "content": "<p>Ensuite, demandez 3 options de communication (formats/canaux) pour sensibiliser  à la cyber-sécurité, avec avantages et risques.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c3617312-f6b4-4e3e-ae91-1e31f9f25863",
+                "type": "expand",
+                "title": "💡 Indice 3",
+                "content": "<p>Pour finir, demandez un plan d’action&nbsp;: étapes, jalons (sur 2 semaines), rôles et un indicateur de réussite.</p>"
               }
             }
           ]
