@@ -249,7 +249,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_img_clim.png",
                       "alt": "photo d’un système de refroidissement extérieur ",
-                      "alternativeText": "<p><br></p>",
+                      "alternativeText": "",
                       "legend": "",
                       "licence": ""
                     },
