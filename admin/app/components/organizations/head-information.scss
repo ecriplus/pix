@@ -1,18 +1,16 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
 
 .organization__head-information {
+  @extend %pix-shadow-default;
+
   display: flex;
   gap: var(--pix-spacing-4x);
   align-items: center;
-  max-width: 1400px;
   padding: var(--pix-spacing-4x) var(--pix-spacing-6x);
   color: var(--pix-neutral-900);
   background-color: var(--pix-neutral-0);
-
-  // TODO: replace border and shadow by new shadow design-token once available
-  border: 1.2px var(--pix-neutral-100) solid;
   border-radius: var(--pix-spacing-4x);
-  box-shadow: 5px 4px 10px 2px rgb(0 0 0 / 10%);
 
   .organization__logo {
     width: 83px;
