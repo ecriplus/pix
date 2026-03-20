@@ -38,6 +38,18 @@
             {
               "type": "element",
               "element": {
+                "id": "6eda4aca-d3e7-4800-a6af-f10e479b997e",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/IAGenImpact_AVA/image-provisoire.png",
+                "alt": "Un homme tient un objet dans sa main.",
+                "alternativeText": "",
+                "legend": "",
+                "licence": "Image provisoire - nous n'avons pas les droits"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "1d281c04-2639-4bf8-a3da-7bda4de2f3e1",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, qu’est-ce que c’est ?&nbsp;</p>",
@@ -54,25 +66,332 @@
                     "id": "2",
                     "content": "<p>Une carte graphique ou GPU</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p><p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;<br><br></p>"
+                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Un disque dur SSD</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;<br><br></p>"
+                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>Je ne sais pas.<br></p>",
+                    "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p>"
                     }
                   }
                 ],
                 "solution": "2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "8ab724f6-114c-4307-a0f9-37144c8c59a4",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b2582fac-a970-4816-a870-d41380e4912e",
+                "type": "text",
+                "content": "<p>Initialement utilisées pour des calculs graphiques (modélisation 3D, jeux vidéos, etc.), les cartes graphiques sont aujourd'hui aussi très utilisées pour l'entraînement des logiciels d'intelligence artificielle. </p>\n<p>Cela nous donne un indice sur ce que veut faire Charlie…</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7bd763e1-3bb6-4fc1-9f9d-66150eb09a1a",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "23e30460-5905-4e21-b32c-55042713eeaf",
+          "type": "transition",
+          "title": "Présentation de la situation",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b984fed2-3e75-479e-848b-d9d82780b742",
+                "type": "text",
+                "content": "<p>Charlie veut entraîne une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "70454e6e-4c38-4291-a73c-49d9bd5aabfe",
+          "type": "discovery",
+          "title": "L'entraînement et le matériel (GPU)",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "<p>Charlie veut entraîne une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "86ca396e-2a5e-493f-88f9-648d76ce1437",
+                      "type": "custom",
+                      "title": "Estimer le nombre de GPU",
+                      "instruction": "<p>À votre avis, combien de GPU ont été mobilisé pour l’entraînement de GPT-4 ?<br></p>",
+                      "functionalInstruction": "<p><br></p>",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "25",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "100",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "2 500",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "10 000",
+                            "feedback": {
+                              "type": "close",
+                              "text": "On s'approche ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "25 000",
+                            "feedback": {
+                              "type": "good",
+                              "text": "Bien vu ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          },
+                          {
+                            "label": "100 000",
+                            "feedback": {
+                              "type": "close",
+                              "text": "C'était moins ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "e054fb2e-6bcc-4c70-b1b0-89926c9f5ba0",
+                      "type": "custom",
+                      "title": "Estimer la durée de vie d'un GPU",
+                      "instruction": "<p>À votre avis, quelle est la durée de vie d’un GPU ?&nbsp;</p>",
+                      "functionalInstruction": "",
+                      "tagName": "pix-cursor",
+                      "props": {
+                        "options": [
+                          {
+                            "label": "1 an",
+                            "feedback": {
+                              "type": "close",
+                              "text": "Un peu plus... <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          },
+                          {
+                            "label": "5 ans",
+                            "feedback": {
+                              "type": "good",
+                              "text": "Bien vu ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          },
+                          {
+                            "label": "10 ans",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "C'était moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          },
+                          {
+                            "label": "15 ans",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          },
+                          {
+                            "label": "20 ans",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          },
+                          {
+                            "label": "25 ans",
+                            "feedback": {
+                              "type": "bad",
+                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b8ffb7b0-fcf5-46e5-b7eb-34079b86f6b1",
+          "type": "short-lesson",
+          "title": "L'impact environnemental des GPU",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b9694946-e4c2-4808-8d37-4da5da289474",
+                "type": "text",
+                "content": "<p>Les GPU sont des pièces maîtresses des centres de données dédiés à l'intelligence artificielle.</p><p><br></p><h5>Et quel est l’impact des GPU sur l’environnement ? </h5><p>La fabrication des GPU nécessite beaucoup de matières premières (métaux, terres rares, pétrole …), et leur utilisation consomme énormément d'électricité. Les GPU ont donc un fort impact négatif sur l'environnement, d’autant qu’il faut les renouveler souvent et que les services d'intelligence artificielle modernes nécessitent énormément de GPU pour fonctionner.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cc12db94-bbed-49bb-bce3-6cc5db06cd59",
+          "type": "transition",
+          "title": "Transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "4d216976-f4a0-484c-8758-8984e25f14c7",
+                "type": "text",
+                "content": "<p>Mais pourquoi a-t-on besoin de GPU pour entraîner l'IA ?</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "959fd22d-b5fa-4fae-bd74-17f78867fea0",
+          "type": "discovery",
+          "title": "L’énergie consommée par l'entraînement des IA",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "286099b2-22c1-405e-b6d0-ade39745c27e",
+                "type": "text",
+                "content": "<p>Maintenant qu’il a acheté des cartes graphiques, Charlie veut entraîner ChatPix 4.0. </p>\n<p>Pour cela, les cartes graphiques doivent faire un grand nombre de calculs, ce qui demande de l’énergie. &nbsp;</p>\n<p>Charlie fait attention à sa facture d’électricité : il se demande combien cela va consommer d’énergie. </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c2ce2d31-5df4-4d06-87aa-8d35f4ab881e",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/IAGenImpact_AVA/futur-poi.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "à l'avenir ce sera un POI",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "52e4defe-8d35-4ceb-b8a8-b7a8f16a859b",
+                "type": "qrocm",
+                "instruction": "<p>D'après vos observations, que peut-on dire ?</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Si le nombre de paramètres du modèle augmente, la consommation</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "parametre",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "diminue."
+                      },
+                      {
+                        "id": "2",
+                        "content": "reste stable."
+                      },
+                      {
+                        "id": "3",
+                        "content": "augmente."
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><br></p><p>Si la taille du jeu de données d'entraînement augmente, la consommation</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "jeudedonnée",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez -",
+                    "ariaLabel": "- Sélectionnez -",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "diminue."
+                      },
+                      {
+                        "id": "2",
+                        "content": "reste stable."
+                      },
+                      {
+                        "id": "3",
+                        "content": "augmente."
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !<br></p>",
+                    "diagnosis": "<p>Par exemple, l'entraînement du modèle<strong> GPT-4</strong> d'OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p>\n<p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d'électricité qu'une ville française de 30000 habitants.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non !</p><p>Plus un modèle d'IA a un grand nombre de paramètres, et plus on l'entraîne sur de grandes quantités de données, plus son entraînement consomme.</p>",
+                    "diagnosis": "<p>Par exemple, l'entraînement du modèle<strong> GPT-4</strong> d'OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p>\n<p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d'électricité qu'une ville française de 30000 habitants.</p>"
+                  }
+                }
               }
             }
           ]
