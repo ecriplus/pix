@@ -40,7 +40,7 @@ class CampaignParticipationOverview {
     this.campaignCode = campaignCode;
     this.campaignTitle = campaignTitle;
     this.campaignName = campaignName;
-    this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
+    this.masteryRate = masteryRate != null ? Number(masteryRate) : null;
     this.validatedSkillsCount = validatedSkillsCount;
     const dates = [deletedAt, campaignArchivedAt].filter((a) => a != null);
     this.totalStagesCount = totalStagesCount;

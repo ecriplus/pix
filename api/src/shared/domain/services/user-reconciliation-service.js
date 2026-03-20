@@ -55,7 +55,7 @@ export async function findMatchingSupOrganizationLearnerIdForGivenOrganizationId
     throw new NotFoundError('Found no organization learner matching organization and names');
   }
 
-  if (!lodash.isNil(organizationLearner.userId)) {
+  if (organizationLearner.userId != null) {
     throw new OrganizationLearnerAlreadyLinkedToUserError();
   }
   return organizationLearner;
@@ -89,7 +89,7 @@ export async function assertStudentHasAnAlreadyReconciledAccount(
   obfuscationService,
   studentRepository,
 ) {
-  if (!lodash.isNil(organizationLearner.userId)) {
+  if (organizationLearner.userId != null) {
     await _buildStudentReconciliationError(
       organizationLearner.userId,
       'IN_SAME_ORGANIZATION',

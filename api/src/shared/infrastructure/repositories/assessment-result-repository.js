@@ -56,7 +56,7 @@ const save = async function ({ certificationCourseId, assessmentResult }) {
   } = assessmentResult;
   const commentByAutoJury = _getCommentByAutoJury(assessmentResult);
 
-  if (_.isNil(assessmentId)) {
+  if (assessmentId == null) {
     throw new MissingAssessmentId();
   }
 

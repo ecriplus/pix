@@ -1,9 +1,6 @@
-import lodash from 'lodash';
-const { isNil } = lodash;
-
 const UPDATABLE_PROPERTIES = ['message', 'altMessage', 'key', 'title', 'imageUrl', 'isCertifiable', 'isAlwaysVisible'];
 
-class Badge {
+export class Badge {
   constructor({
     id,
     key,
@@ -30,7 +27,7 @@ class Badge {
 
   updateBadgeProperties(badgeToUpdate) {
     UPDATABLE_PROPERTIES.forEach((property) => {
-      if (!isNil(badgeToUpdate[property])) this[property] = badgeToUpdate[property];
+      if (badgeToUpdate[property] != null) this[property] = badgeToUpdate[property];
     });
   }
 
@@ -49,5 +46,3 @@ class Badge {
     });
   }
 }
-
-export { Badge };

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-class CampaignAssessmentParticipationResultMinimal {
+export class CampaignAssessmentParticipationResultMinimal {
   #previousMasteryRate;
   constructor({
     campaignParticipationId,
@@ -20,8 +20,8 @@ class CampaignAssessmentParticipationResultMinimal {
     this.firstName = firstName;
     this.lastName = lastName;
     this.participantExternalId = participantExternalId;
-    this.masteryRate = !_.isNil(masteryRate) ? Number(masteryRate) : null;
-    this.#previousMasteryRate = !_.isNil(previousMasteryRate) ? Number(previousMasteryRate) : null;
+    this.masteryRate = masteryRate != null ? Number(masteryRate) : null;
+    this.#previousMasteryRate = previousMasteryRate != null ? Number(previousMasteryRate) : null;
     this.reachedStage = reachedStage;
     this.totalStage = totalStage;
     this.prescriberTitle = prescriberTitle;
@@ -39,5 +39,3 @@ class CampaignAssessmentParticipationResultMinimal {
     if (this.masteryRate === this.#previousMasteryRate) return 'stable';
   }
 }
-
-export { CampaignAssessmentParticipationResultMinimal };

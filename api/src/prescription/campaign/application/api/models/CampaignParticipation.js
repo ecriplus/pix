@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 class CampaignParticipation {
   /**
    * @typedef {Object} CampaignParticipationArgs
@@ -61,7 +59,7 @@ class AssessmentCampaignParticipation extends CampaignParticipation {
    */
   constructor(args) {
     super(args);
-    this.masteryRate = !_.isNil(args.masteryRate) ? Number(args.masteryRate) : null;
+    this.masteryRate = args.masteryRate != null ? Number(args.masteryRate) : null;
     this.tubes = args.tubes?.map((tube) => new TubeCoverage(tube));
     this.stages = args.stages;
     this.badges = args.badges;

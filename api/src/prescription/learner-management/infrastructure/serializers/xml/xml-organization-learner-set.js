@@ -3,7 +3,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat.js';
 dayjs.extend(customParseFormat);
 
 import lodash from 'lodash';
-const { isEmpty, isNil, each } = lodash;
+const { isEmpty, each } = lodash;
 
 import { SIECLE_ERRORS } from '../../../../../shared/domain/errors.js';
 import { isValidDate } from '../../../../../shared/infrastructure/utils/date-utils.js';
@@ -134,7 +134,7 @@ function _convertSexCode(obj) {
 }
 
 function _getValueFromParsedElement(obj) {
-  if (isNil(obj)) return null;
+  if (obj == null) return null;
   return Array.isArray(obj) && !isEmpty(obj) ? obj[0] : obj;
 }
 

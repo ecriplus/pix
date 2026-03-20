@@ -4,7 +4,7 @@ const { runInContext } = pkg;
 const _ = runInContext();
 
 const isBlank = (string) => {
-  return _.isNil(string) || (_.isString(string) && string.trim().length === 0);
+  return string == null || (_.isString(string) && string.trim().length === 0);
 };
 
 _.mixin({

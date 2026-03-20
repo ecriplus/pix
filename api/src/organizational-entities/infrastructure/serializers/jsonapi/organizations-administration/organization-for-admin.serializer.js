@@ -1,5 +1,4 @@
 import { Serializer } from 'jsonapi-serializer';
-import _ from 'lodash';
 
 import { OrganizationForAdmin } from '../../../../domain/models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../../../../domain/models/OrganizationLearnerType.js';
@@ -128,7 +127,7 @@ const deserialize = function (json) {
   }
 
   const organization = new OrganizationForAdmin({
-    id: _.isNil(json.data.id) ? null : parseInt(json.data.id),
+    id: json.data.id == null ? null : parseInt(json.data.id),
     name: attributes.name,
     type: attributes.type,
     email: attributes.email,

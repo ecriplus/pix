@@ -150,13 +150,13 @@ async function extractCertificationCandidatesFromCandidatesImportSheet({
 function _filterOutEmptyCandidateData(certificationCandidatesData) {
   return _(certificationCandidatesData)
     .mapValues(_nullifyObjectWithOnlyNilValues)
-    .pickBy((value) => !_.isNull(value))
+    .pickBy((value) => value !== null)
     .value();
 }
 
 function _nullifyObjectWithOnlyNilValues(data) {
   for (const propName in data) {
-    if (!_.isNil(data[propName])) {
+    if (data[propName] != null) {
       return data;
     }
   }

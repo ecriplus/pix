@@ -1,8 +1,4 @@
-import lodash from 'lodash';
-
 import { BILLING_MODES } from '../constants.js';
-
-const { isNil } = lodash;
 
 class CertificationCandidate {
   /**
@@ -50,7 +46,7 @@ class CertificationCandidate {
     this.resultRecipientEmail = resultRecipientEmail;
     this.externalId = externalId;
     this.birthdate = birthdate;
-    this.extraTimePercentage = !isNil(extraTimePercentage) ? parseFloat(extraTimePercentage) : extraTimePercentage;
+    this.extraTimePercentage = extraTimePercentage != null ? parseFloat(extraTimePercentage) : extraTimePercentage;
     this.createdAt = createdAt;
     this.authorizedToStart = authorizedToStart;
     this.sessionId = sessionId;
