@@ -2,6 +2,7 @@ export function createNetwork(schema, request) {
   const params = JSON.parse(request.requestBody);
 
   return schema.create('network', {
+    id: 10,
     name: params.data.attributes.name,
     organizationId: params.data.attributes['organization-id'],
   });

@@ -22,6 +22,9 @@ module('Integration | Component | networks/creation-form', function (hooks) {
     pixToast = this.owner.lookup('service:pixToast');
     sinon.stub(pixToast, 'sendSuccessNotification');
     sinon.stub(pixToast, 'sendErrorNotification');
+
+    const router = this.owner.lookup('service:router');
+    sinon.stub(router, 'transitionTo');
   });
 
   test('it renders the form fields and submit button', async function (assert) {
