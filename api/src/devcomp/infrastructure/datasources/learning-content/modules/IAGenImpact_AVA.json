@@ -1,0 +1,21 @@
+{
+  "id": "1137b471-e347-4601-abd7-bc82ce587d7e",
+  "shortId": "f4a3d9ed",
+  "slug": "ia-gen-impacts",
+  "title": "Les IA génératives : quels impacts sur l’environnement ?",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Les logiciels d’intelligence artificielle génératives sont de plus en plus utilisés, mais leur entraînement et leur utilisation a un impact considérable sur l’environnement.&nbsp; <br> Avec ce module, vous allez comprendre pourquoi les intelligences artificielles ont un impact sur l’environnement et découvrir quelques pistes pour limiter cet impact.<br><br></p>",
+    "duration": 10,
+    "level": "advanced",
+    "objectives": [
+      "<p>Identifier les besoins matériels des logiciels d'intelligence artificielle générative</p>",
+      "<p>Comprendre l'impact environnemental des phases d'entraînement et d'utilisation des logiciels d'intelligence artificielle générative</p>",
+      "<p>Identifier des pistes pour réduire l'impact environnemental des logiciels d'intelligence artificielle générative</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": []
+}
