@@ -102,6 +102,7 @@ export default async function initUser(databaseBuilder) {
   const frTrainingId = databaseBuilder.factory.buildTraining({
     title: 'Apprendre à manger un pain au chocolat comme les français',
     locale: 'fr',
+    locales: ['fr-fr', 'fr'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
