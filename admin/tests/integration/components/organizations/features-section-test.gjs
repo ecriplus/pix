@@ -514,6 +514,51 @@ module('Integration | Component | organizations/features-section', function (hoo
     });
   });
 
+  module('COVER_RATE', function (hooks) {
+    hooks.beforeEach(function () {
+      class AccessControlStub extends Service {
+        hasAccessToOrganizationActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+    });
+
+    test('it shows unchecked checkbox when feature is inactive', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { COVER_RATE: { active: false } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.false(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.COVER_RATE')).checked,
+      );
+    });
+
+    test('it shows checked checkbox when feature is active', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { COVER_RATE: { active: true } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // then
+      assert.true(
+        screen.getByLabelText(t('components.organizations.information-section-view.features.COVER_RATE')).checked,
+      );
+    });
+  });
+
   module('LEARNER_IMPORT', function (hooks) {
     hooks.beforeEach(function () {
       class AccessControlStub extends Service {

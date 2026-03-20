@@ -848,6 +848,7 @@
           "ATTESTATIONS_MANAGEMENT": "Attestations",
           "CAMPAIGN_WITHOUT_USER_PROFILE": "interro mode (temporary name)",
           "COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY": "Automatic certificability",
+          "COVER_RATE": "Pix Orga Statistics",
           "IS_MANAGING_STUDENTS": "Managing students",
           "LEARNER_IMPORT": "Import",
           "MULTIPLE_SENDING_ASSESSMENT": "Multiple sending on assessment campaigns",
