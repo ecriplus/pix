@@ -641,6 +641,9 @@
         "head-organization-id": "ID of the head organisation"
       },
       "list": {
+        "filters": {
+          "name": "Network name"
+        },
         "table": {
           "caption": "List of networks. Contains the name and ID."
         }

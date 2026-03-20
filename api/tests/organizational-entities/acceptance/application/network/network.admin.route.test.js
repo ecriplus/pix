@@ -93,6 +93,30 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
     });
   });
 
+  describe('GET /api/admin/networks with filter', function () {
+    it('returns filtered networks by name with 200 HTTP status code', async function () {
+      // given
+      const matchingNetwork = databaseBuilder.factory.buildNetwork({ name: 'Réseau Bretagne' });
+      databaseBuilder.factory.buildNetwork({ name: 'Autre réseau' });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: '/api/admin/networks?filter[name]=Bretagne',
+        headers: generateAuthenticatedUserRequestHeaders(superAdmin),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.have.lengthOf(1);
+      expect(response.result.data[0].id).to.equal(matchingNetwork.id.toString());
+      expect(response.result.data[0].attributes.name).to.equal(matchingNetwork.name);
+    });
+  });
+
   describe('POST /api/admin/networks', function () {
     it('creates a new network', async function () {
       // given

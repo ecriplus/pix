@@ -1,8 +1,9 @@
 import { usecases } from '../../domain/usecases/index.js';
 import * as networkSerializer from '../../infrastructure/serializers/jsonapi/network/network.serializer.js';
 
-const findAllNetworks = async function (request, h, dependencies = { networkSerializer }) {
-  const networks = await usecases.findAllNetworks();
+const findAllFilteredNetworks = async function (request, h, dependencies = { networkSerializer }) {
+  const { filter } = request.query;
+  const networks = await usecases.findAllFilteredNetworks({ filter });
   return dependencies.networkSerializer.serialize(networks);
 };
 
@@ -29,7 +30,7 @@ const create = async function (request, h, dependencies = { networkSerializer })
 
 const networkAdminController = {
   create,
-  findAllNetworks,
+  findAllFilteredNetworks,
   getNetworkDetails,
 };
 

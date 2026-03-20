@@ -7,11 +7,11 @@ import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
 describe('Unit | Application | Admin | Route | Network', function () {
   describe('GET /api/admin/networks', function () {
     describe('when the authenticated user has super admin role', function () {
-      it('should call findAllNetworks controller method', async function () {
+      it('should call findAllFilteredNetworks controller method without filter', async function () {
         // given
         sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-        sinon.stub(usecases, 'findAllNetworks').returns('ok');
-        sinon.stub(networkAdminController, 'findAllNetworks').returns('ok');
+        sinon.stub(usecases, 'findAllFilteredNetworks').returns('ok');
+        sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
 
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
@@ -20,7 +20,22 @@ describe('Unit | Application | Admin | Route | Network', function () {
         await httpTestServer.request('GET', '/api/admin/networks', {});
 
         // then
-        sinon.assert.called(networkAdminController.findAllNetworks);
+        sinon.assert.called(networkAdminController.findAllFilteredNetworks);
+      });
+
+      it('should call findAllFilteredNetworks controller method with filter', async function () {
+        // given
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+        sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
+
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        await httpTestServer.request('GET', '/api/admin/networks?filter[name]=réseau', {});
+
+        // then
+        sinon.assert.called(networkAdminController.findAllFilteredNetworks);
       });
     });
 
@@ -30,7 +45,7 @@ describe('Unit | Application | Admin | Route | Network', function () {
         sinon
           .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
           .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(networkAdminController, 'findAllNetworks').returns('ok');
+        sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
         const httpTestServer = new HttpTestServer();
         await httpTestServer.register(moduleUnderTest);
 
@@ -39,7 +54,7 @@ describe('Unit | Application | Admin | Route | Network', function () {
 
         // then
         expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(networkAdminController.findAllNetworks);
+        sinon.assert.notCalled(networkAdminController.findAllFilteredNetworks);
       });
     });
   });

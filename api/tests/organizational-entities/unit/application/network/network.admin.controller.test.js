@@ -3,20 +3,37 @@ import { usecases } from '../../../../../src/organizational-entities/domain/usec
 import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | Network', function () {
-  describe('#findAllNetworks', function () {
-    it('calls findAllNetworks usecase and Network serializer', async function () {
+  describe('#findAllFilteredNetworks', function () {
+    it('calls findAllFilteredNetworks usecase with empty filter and serializes the result', async function () {
       // given
       const network1 = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Network 1' });
       const network2 = domainBuilder.acquisition.buildNetwork({ id: 2, name: 'Network 2' });
       const networks = [network1, network2];
-      sinon.stub(usecases, 'findAllNetworks').resolves(networks);
+      sinon.stub(usecases, 'findAllFilteredNetworks').resolves(networks);
       const networkSerializer = { serialize: sinon.stub() };
+      const request = { query: { filter: {} } };
 
       // when
-      await networkAdminController.findAllNetworks({}, hFake, { networkSerializer });
+      await networkAdminController.findAllFilteredNetworks(request, hFake, { networkSerializer });
 
       // then
-      expect(usecases.findAllNetworks).to.have.been.calledOnce;
+      expect(usecases.findAllFilteredNetworks).to.have.been.calledOnceWith({ filter: {} });
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly(networks);
+    });
+
+    it('calls findAllFilteredNetworks usecase with filter and serializes the result', async function () {
+      // given
+      const network1 = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Mon réseau' });
+      const networks = [network1];
+      sinon.stub(usecases, 'findAllFilteredNetworks').resolves(networks);
+      const networkSerializer = { serialize: sinon.stub() };
+      const request = { query: { filter: { name: 'Mon' } } };
+
+      // when
+      await networkAdminController.findAllFilteredNetworks(request, hFake, { networkSerializer });
+
+      // then
+      expect(usecases.findAllFilteredNetworks).to.have.been.calledOnceWith({ filter: { name: 'Mon' } });
       expect(networkSerializer.serialize).to.have.been.calledWithExactly(networks);
     });
   });

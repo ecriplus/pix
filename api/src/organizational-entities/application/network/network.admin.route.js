@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { networkAdminController } from './network.admin.controller.js';
@@ -20,10 +21,23 @@ const register = async function (server) {
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
-        handler: networkAdminController.findAllNetworks,
+        validate: {
+          options: {
+            allowUnknown: true,
+          },
+          query: Joi.object({
+            filter: Joi.object({
+              name: Joi.string().empty('').allow(null).optional(),
+            }).default({}),
+          }),
+          failAction: (request, h) => {
+            return sendJsonApiError(new BadRequestError('Un des champs de recherche saisis est invalide.'), h);
+          },
+        },
+        handler: networkAdminController.findAllFilteredNetworks,
         notes: [
           "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès Superadmin**\n" +
-            '- Renvoie tous les réseaux.',
+            '- Renvoie les réseaux, filtrés par nom si le paramètre filter[name] est fourni.',
         ],
         tags: ['api', 'organizational-entities', 'network'],
       },

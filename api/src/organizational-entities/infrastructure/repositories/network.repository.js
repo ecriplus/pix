@@ -3,13 +3,30 @@ import { NotFoundError } from '../../../shared/domain/errors.js';
 import { Network } from '../../domain/models/Network.js';
 
 /**
- *
+ * @param {object} [params]
+ * @param {object} [params.filter]
+ * @param {string} [params.filter.name]
  * @returns {Promise<Array<Network>>}
  */
-async function findAll() {
+async function findAll({ filter } = {}) {
   const knexConn = DomainTransaction.getConnection();
 
-  const networks = await knexConn('networks').select('networks.id', 'networks.name').orderBy('name');
+  const query = knexConn('networks').select('networks.id', 'networks.name').orderBy('name');
+
+  if (filter?.name) {
+    query.where(
+      knexConn.raw(
+        `
+      regexp_replace(unaccent(networks.name), '[^[:alnum:]]', '', 'g')
+      ILIKE
+      '%' || regexp_replace(unaccent(?), '[^[:alnum:]]', '', 'g') || '%'
+      `,
+        [filter.name],
+      ),
+    );
+  }
+
+  const networks = await query;
 
   return networks.map(_toDomain);
 }

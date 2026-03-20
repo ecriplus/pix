@@ -1,4 +1,4 @@
-import { screen, visit } from '@1024pix/ember-testing-library';
+import { fillByLabel, screen, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -62,6 +62,36 @@ module('Acceptance | Networks | List', function (hooks) {
         assert.dom(table).exists();
         assert.dom(screen.getByText('Réseau Alpha')).exists();
         assert.dom(screen.getByText('Réseau Beta')).exists();
+      });
+
+      test('it should filter networks by name when typing in the search field', async function (assert) {
+        // given
+        server.create('network', { id: 1, name: 'Réseau Bretagne' });
+        server.create('network', { id: 2, name: 'Autre réseau' });
+
+        await visit('/networks/list');
+
+        // when
+        await fillByLabel(t('components.networks.list.filters.name'), 'Bretagne');
+
+        // then
+        assert.dom(screen.getByText('Réseau Bretagne')).exists();
+        assert.dom(screen.queryByText('Autre réseau')).doesNotExist();
+      });
+
+      test('it should reset the name filter when clicking the clear filters button', async function (assert) {
+        // given
+        server.create('network', { id: 1, name: 'Réseau Bretagne' });
+        server.create('network', { id: 2, name: 'Autre réseau' });
+
+        const screen = await visit('/networks/list');
+        await fillByLabel(t('components.networks.list.filters.name'), 'Bretagne');
+
+        // when
+        await click(screen.getByRole('button', { name: t('common.filters.actions.clear') }));
+
+        // then
+        assert.dom(screen.getByRole('textbox', { name: t('components.networks.list.filters.name') })).hasValue('');
       });
 
       test('it should redirect to network get page when clicking on the ID', async function (assert) {
