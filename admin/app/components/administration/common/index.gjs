@@ -1,4 +1,5 @@
 import AddOrganizationFeaturesInBatch from './add-organization-features-in-batch';
+import CreateAttestations from './create-attestations';
 import CreateCombinedCourses from './create-combined-courses';
 import LearningContent from './learning-content';
 import UpsertQuestsInBatch from './upsert-quests-in-batch';
@@ -10,4 +11,5 @@ import UserQuestChecker from './user-quest-checker';
   <UpsertQuestsInBatch />
   <UserQuestChecker />
   <CreateCombinedCourses />
+  <CreateAttestations />
 </template>

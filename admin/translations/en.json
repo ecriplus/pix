@@ -198,6 +198,23 @@
         "title": "Archiving of certification centers in batch",
         "upload-button": "Import a CSV file"
       },
+      "create-attestations": {
+        "description": "Ask for expert help if needed",
+        "notifications": {
+          "error": {
+            "S3-upload-error": "File import error.",
+            "duplicate-attestation-key": "An attestation with this key already exists.",
+            "payload-too-large": "The PDF file must not be larger than 1 MB.",
+            "wrong-file-format": "Incorrect file format."
+          },
+          "success": "The attestation has been successfully created."
+        },
+        "submit-button": "Create attestation",
+        "template-key": "Template key",
+        "template-name": "Template name",
+        "title": "Create attestation",
+        "upload-button": "Import PDF file"
+      },
       "create-combined-courses": {
         "description": "Ask for expert help if needed",
         "notifications": {

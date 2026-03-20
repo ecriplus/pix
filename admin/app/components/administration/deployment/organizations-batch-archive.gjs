@@ -23,7 +23,6 @@ export default class OrganizationsBatchArchive extends Component {
 
     const formData = new FormData();
     formData.append('file', files[0]);
-
     const numberOfDataLines = await _getCsvDataLinesCount(files);
 
     try {
