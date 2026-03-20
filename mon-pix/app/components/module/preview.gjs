@@ -134,8 +134,8 @@ export default class ModulixPreview extends Component {
   noop() {}
 
   @action
-  enableElementsIdButton() {
-    this.modulixPreviewMode.enableElementsIdButton();
+  toggleElementIdButton() {
+    this.modulixPreviewMode.toggleElementIdButton();
   }
 
   @action
@@ -187,7 +187,7 @@ export default class ModulixPreview extends Component {
     {{/unless}}
 
     <div class="modulix-preview__elements-id-button" {{didInsert this.setHTMLElementOffset}}>
-      <PixSegmentedControl @onChange={{this.enableElementsIdButton}} @variant="primary" @toggled={{true}}>
+      <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
         <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
         <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
         <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>

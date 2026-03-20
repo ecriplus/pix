@@ -24,64 +24,66 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
   });
 
   module('isElementsIdButtonEnabled', function () {
-    test('it should be disabled by default', function (assert) {
+    test('it should be enabled by default', function (assert) {
       // when
       const previewMode = this.owner.lookup('service:modulix-preview-mode');
-
-      // then
-      assert.false(previewMode.isElementsIdButtonEnabled);
-    });
-
-    test('it enables elements id button', function (assert) {
-      // given
-      const previewMode = this.owner.lookup('service:modulix-preview-mode');
-
-      // when
-      previewMode.enableElementsIdButton();
 
       // then
       assert.true(previewMode.isElementsIdButtonEnabled);
     });
+  });
 
-    module('get isPreviewAndElementsIdButtonEnabled', function () {
-      module('when preview mode is not enabled', function () {
-        test('it returns false', function (assert) {
-          // given
-          const previewMode = this.owner.lookup('service:modulix-preview-mode');
+  module('toggleElementIdButton', function () {
+    test('it switches elements id button state', function (assert) {
+      // given
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-          // when
-          previewMode.enableElementsIdButton();
+      // when
+      previewMode.toggleElementIdButton();
 
-          // then
-          assert.false(previewMode.isPreviewAndElementsIdButtonEnabled);
-        });
+      // then
+      assert.false(previewMode.isElementsIdButtonEnabled);
+    });
+  });
+
+  module('get isPreviewAndElementsIdButtonEnabled', function () {
+    module('when preview mode is not enabled', function () {
+      test('it returns false', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+        // when
+        previewMode.toggleElementIdButton();
+
+        // then
+        assert.false(previewMode.isPreviewAndElementsIdButtonEnabled);
       });
+    });
 
-      module('when elements id button is not enabled', function () {
-        test('it returns false', function (assert) {
-          // given
-          const previewMode = this.owner.lookup('service:modulix-preview-mode');
+    module('when elements id button is not enabled', function () {
+      test('it returns false', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-          // when
-          previewMode.enable();
+        // when
+        previewMode.toggleElementIdButton();
+        previewMode.enable();
 
-          // then
-          assert.false(previewMode.isPreviewAndElementsIdButtonEnabled);
-        });
+        // then
+        assert.false(previewMode.isPreviewAndElementsIdButtonEnabled);
       });
+    });
 
-      module('when both are enabled', function () {
-        test('it returns true', function (assert) {
-          // given
-          const previewMode = this.owner.lookup('service:modulix-preview-mode');
+    module('when both are enabled', function () {
+      test('it returns true', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-          // when
-          previewMode.enable();
-          previewMode.enableElementsIdButton();
+        // when
+        previewMode.enable();
 
-          // then
-          assert.true(previewMode.isPreviewAndElementsIdButtonEnabled);
-        });
+        // then
+        assert.true(previewMode.isPreviewAndElementsIdButtonEnabled);
       });
     });
   });
