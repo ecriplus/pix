@@ -242,7 +242,7 @@
                     {
                       "id": "522aaa2f-023b-49c2-8ead-ffd9040c03c0",
                       "type": "text",
-                      "content": "<p>Anna montre le système de refroidissement&nbsp;: l’air passe par des grilles derrière les serveurs et des installations de climatisation sont visibles à l’extérieur du bâtiment.</p>"
+                      "content": "<p>Anna montre le système de refroidissement&nbsp;: une partie des installations de climatisation sont visibles à l’extérieur du bâtiment.</p>"
                     },
                     {
                       "id": "3120d30a-4fa0-46f3-a567-6871dcf740fb",
@@ -905,7 +905,7 @@
               "element": {
                 "id": "68cc1630-2c34-4f79-aff0-818dc8ff5b87",
                 "type": "qcm",
-                "instruction": "<p>Maintenant que vous comprenez mieux le fonctionnement des centres de données, voici quelques situations du quotidien.&nbsp;Lesquelles font travailler un centre de données ?</p>",
+                "instruction": "<p>Maintenant que vous comprenez mieux le fonctionnement des centres de données, voici quelques situations du quotidien.&nbsp;Selon vous, lesquelles font travailler un centre de données ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
