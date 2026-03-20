@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.365.0](https://github.com/1024pix/pix/compare/v5.364.0...v5.365.0) (2026-03-20)
+
+### :rocket: Amélioration
+
+- [#15561](https://github.com/1024pix/pix/pull/15561) Ajouter la feature COVER_RATE dans le formulaire admin (PIX-21765) 
+- [#15532](https://github.com/1024pix/pix/pull/15532) Ajouter le paramètre instruction pour les stepper horizontaux (PIX-21921). 
+
+### :bug: Correction
+
+- [#15578](https://github.com/1024pix/pix/pull/15578) Réparer la page de détail des parcours combinés dans Pix Orga 
+
+### :building_construction: Tech
+
+- [#15549](https://github.com/1024pix/pix/pull/15549) Exclure les participations supprimées du script d'attribution des rewards (PIX-22007). 
+- [#15555](https://github.com/1024pix/pix/pull/15555) Supprimer les scripts liés à la prescription qui ne sont plus utilisé (Pix-16355). 
+
+### :arrow_up: Montée de version
+
+- [#15576](https://github.com/1024pix/pix/pull/15576) Lock file maintenance (orga)
+
 # [5.364.0](https://github.com/1024pix/pix/compare/v5.363.0...v5.364.0) (2026-03-20)
 
 ### :rocket: Amélioration
