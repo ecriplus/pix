@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.364.0](https://github.com/1024pix/pix/compare/v5.363.0...v5.364.0) (2026-03-20)
+
+### :rocket: Amélioration
+
+- [#15566](https://github.com/1024pix/pix/pull/15566) Modif IA cadre enseignants - relecture FTO 
+
+### :building_construction: Tech
+
+- [#15554](https://github.com/1024pix/pix/pull/15554) Répare les seeds des parcours combinés suite aux travaux de DevComp sur les contenus formatifs multilocales (PIX-21980) 
+
+### :arrow_up: Montée de version
+
+- [#15570](https://github.com/1024pix/pix/pull/15570) Lock file maintenance (junior)
+
 # [5.363.0](https://github.com/1024pix/pix/compare/v5.362.0...v5.363.0) (2026-03-20)
 
 ### :rocket: Amélioration
