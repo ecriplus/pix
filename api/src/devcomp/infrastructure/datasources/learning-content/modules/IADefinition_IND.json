@@ -115,6 +115,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -337,6 +338,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -433,6 +435,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -662,6 +665,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -733,6 +737,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -904,6 +909,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [

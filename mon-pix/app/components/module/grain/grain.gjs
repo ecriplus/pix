@@ -321,6 +321,7 @@ export default class ModuleGrain extends Component {
                   @preventInitialFocusAndScroll={{this.preventStepperInitialScrollAndFocus index}}
                   @direction={{this.stepperDirection}}
                   @updateSkipButton={{this.updateSkipButton}}
+                  @instruction={{component.instruction}}
                 />
               </div>
             {{/if}}

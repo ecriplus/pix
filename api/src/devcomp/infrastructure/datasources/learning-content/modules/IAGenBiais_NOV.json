@@ -119,6 +119,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -516,6 +517,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -693,6 +695,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -927,6 +930,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [

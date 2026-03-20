@@ -45,6 +45,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "<p>Cette instruction permet d'avoir un texte commun à tous les steps du stepper horizontal</p>",
               "steps": [
                 {
                   "elements": [
@@ -251,6 +252,7 @@
           "components": [
             {
               "type": "stepper",
+              "instruction": "<p>😎COOL GANG 😎. Cette instruction ne sera pas visible dans le module.</p>",
               "steps": [
                 {
                   "elements": [

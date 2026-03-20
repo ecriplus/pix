@@ -348,6 +348,7 @@
             },
             {
               "type": "stepper",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
