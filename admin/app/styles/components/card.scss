@@ -1,10 +1,11 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
 
 .card {
+  @extend %pix-shadow-default;
+
   background: var(--pix-neutral-0);
-  border: 1.2px var(--pix-neutral-100) solid;
   border-radius: 8px;
-  box-shadow: 5px 4px 10px 2px rgb(0 0 0 / 10%);
 
   &__title {
     @extend %pix-title-xs;
