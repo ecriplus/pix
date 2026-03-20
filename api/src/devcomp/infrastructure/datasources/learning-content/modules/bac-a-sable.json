@@ -247,7 +247,7 @@
         },
         {
           "id": "1dc50ca6-355c-4d7f-941b-608788faa4db",
-          "type": "lesson",
+          "type": "short-lesson",
           "title": "Exemple de stepper leçon",
           "components": [
             {
