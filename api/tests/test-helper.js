@@ -40,7 +40,6 @@ import * as challengeRepository from '../src/shared/infrastructure/repositories/
 import * as competenceRepository from '../src/shared/infrastructure/repositories/competence-repository.js';
 import * as courseRepository from '../src/shared/infrastructure/repositories/course-repository.js';
 import * as frameworkRepository from '../src/shared/infrastructure/repositories/framework-repository.js';
-import { pgBoss } from '../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import * as skillRepository from '../src/shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../src/shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
@@ -62,7 +61,7 @@ chaiUse(sinonChai);
 
 _.each(customChaiHelpers, chaiUse);
 
-chaiUse(jobChai(pgBoss));
+chaiUse(jobChai(knex));
 
 const databaseBuilder = await DatabaseBuilder.create({
   knex,
@@ -88,14 +87,6 @@ const { ROLES } = PIX_ADMIN;
 
 /* eslint-disable mocha/no-top-level-hooks */
 
-before(async function () {
-  try {
-    await pgBoss.start();
-  } catch {
-    // pgBoss is not available on unit tests
-  }
-});
-
 afterEach(async function () {
   sinon.restore();
   nock.cleanAll();
@@ -112,21 +103,11 @@ afterEach(async function () {
   await featureToggles.resetDefaults();
   await datamartBuilder.clean();
   await clearMutex();
-  try {
-    await pgBoss.clearStorage();
-  } catch {
-    // pgBoss is not available on unit tests
-  }
   return databaseBuilder.clean();
 });
 
 after(async function () {
   await quitMutex();
-  try {
-    await pgBoss.stop();
-  } catch {
-    // pgBoss is not available on unit tests
-  }
   return await disconnect();
 });
 

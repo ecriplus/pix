@@ -6,20 +6,21 @@ import { AuditLoggingJobController } from '../../src/shared/application/jobs/aud
 import { JobGroup } from '../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../src/shared/config.js';
 import { AuditLoggingJob } from '../../src/shared/domain/models/jobs/AuditLoggingJob.js';
-import { JobQueue } from '../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobExpireIn } from '../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { registerJobs } from '../../worker.js';
+import { registerJobs, startPgBoss } from '../../worker.js';
 import { catchErr, expect, sinon } from '../test-helper.js';
 
 describe('Unit | Worker', function () {
   context('#registerJobs', function () {
-    let startPgBossStub;
+    let startPgBossStub, createJobQueueStub, jobQueueStub;
 
     beforeEach(function () {
-      startPgBossStub = sinon.stub().resolves(Symbol('pgBoss'));
-      sinon.stub(JobQueue.prototype, 'register');
-      sinon.stub(JobQueue.prototype, 'scheduleCronJob');
-      sinon.stub(JobQueue.prototype, 'unscheduleCronJob');
+      const pgBossStub = Symbol('pgBoss');
+      jobQueueStub = { register: sinon.stub(), scheduleCronJob: sinon.stub(), unscheduleCronJob: sinon.stub() };
+      startPgBossStub = sinon.stub();
+      startPgBossStub.resolves(pgBossStub);
+      createJobQueueStub = sinon.stub();
+      createJobQueueStub.withArgs(pgBossStub).returns(jobQueueStub);
     });
 
     afterEach(function () {
@@ -32,11 +33,12 @@ describe('Unit | Worker', function () {
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
       // then
-      expect(JobQueue.prototype.register).to.have.been.calledWithExactly(
+      expect(jobQueueStub.register).to.have.been.calledWithExactly(
         new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         AuditLoggingJob.name,
         AuditLoggingJobController,
@@ -50,11 +52,12 @@ describe('Unit | Worker', function () {
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
       // then
-      expect(JobQueue.prototype.register).to.have.been.calledWithExactly(
+      expect(jobQueueStub.register).to.have.been.calledWithExactly(
         new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         'legacyNameForAuditLoggingJobController',
         AuditLoggingJobController,
@@ -70,11 +73,12 @@ describe('Unit | Worker', function () {
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
       // then
-      expect(JobQueue.prototype.register).to.have.been.calledWithExactly(
+      expect(jobQueueStub.register).to.have.been.calledWithExactly(
         new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }),
         ValidateOrganizationImportFileJob.name,
         ValidateOrganizationLearnersImportFileJobController,
@@ -90,11 +94,12 @@ describe('Unit | Worker', function () {
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
       // then
-      expect(JobQueue.prototype.register).to.not.have.been.calledWithExactly(
+      expect(jobQueueStub.register).to.not.have.been.calledWithExactly(
         ValidateOrganizationImportFileJob.name,
         ValidateOrganizationLearnersImportFileJobController,
       );
@@ -109,12 +114,14 @@ describe('Unit | Worker', function () {
         jobGroups: [JobGroup.DEFAULT],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
       // then
-      expect(JobQueue.prototype.register).to.not.have.been.called;
-      expect(JobQueue.prototype.scheduleCronJob).to.not.have.been.called;
+      expect(createJobQueueStub).to.not.have.been.called;
+      expect(jobQueueStub.register).to.not.have.been.called;
+      expect(jobQueueStub.scheduleCronJob).to.not.have.been.called;
     });
 
     it('should throws an error when no groups is invalid', async function () {
@@ -122,6 +129,7 @@ describe('Unit | Worker', function () {
       const error = await catchErr(registerJobs)({
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
@@ -136,6 +144,7 @@ describe('Unit | Worker', function () {
         jobGroups: ['pouet'],
         dependencies: {
           startPgBoss: startPgBossStub,
+          createJobQueue: createJobQueueStub,
         },
       });
 
@@ -153,14 +162,15 @@ describe('Unit | Worker', function () {
           jobGroups: [JobGroup.DEFAULT],
           dependencies: {
             startPgBoss: startPgBossStub,
+            createJobQueue: createJobQueueStub,
           },
         });
 
         // then
-        expect(JobQueue.prototype.scheduleCronJob).to.have.been.calledWithExactly({
+        expect(jobQueueStub.scheduleCronJob).to.have.been.calledWithExactly({
           name: 'ScheduleComputeOrganizationLearnersCertificabilityJob',
           cron: '0 21 * * *',
-          options: { tz: 'Europe/Paris', expireInSeconds: JobExpireIn.INFINITE },
+          options: { tz: 'Europe/Paris', expireIn: JobExpireIn.INFINITE },
         });
       });
 
@@ -176,11 +186,12 @@ describe('Unit | Worker', function () {
           jobGroups: [JobGroup.DEFAULT],
           dependencies: {
             startPgBoss: startPgBossStub,
+            createJobQueue: createJobQueueStub,
           },
         });
 
         // then
-        expect(JobQueue.prototype.unscheduleCronJob).to.have.been.calledWithExactly(
+        expect(jobQueueStub.unscheduleCronJob).to.have.been.calledWithExactly(
           'legyNameForScheduleComputeOrganizationLearnersCertificabilityJobController',
         );
       });
@@ -195,13 +206,27 @@ describe('Unit | Worker', function () {
             jobGroups: [JobGroup.DEFAULT],
             dependencies: {
               startPgBoss: startPgBossStub,
+              createJobQueue: createJobQueueStub,
             },
           });
 
           // then
-          expect(JobQueue.prototype.unscheduleCronJob).to.have.been.calledWithExactly('CpfExportSenderJob');
+          expect(jobQueueStub.unscheduleCronJob).to.have.been.calledWithExactly('CpfExportSenderJob');
         });
       });
+    });
+  });
+
+  context('#startPgBoss', function () {
+    it('should return null when pgboss connexionPoolMaxSize is 0', async function () {
+      //given
+      sinon.stub(config.pgBoss, 'connexionPoolMaxSize').value(0);
+
+      //when
+      const pgboss = await startPgBoss();
+
+      //then
+      expect(pgboss).to.be.null;
     });
   });
 });

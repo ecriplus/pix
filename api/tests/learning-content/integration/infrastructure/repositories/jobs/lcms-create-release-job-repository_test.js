@@ -10,9 +10,9 @@ describe('Learning Content | Integration | Repository | Jobs | LcmsCreateRelease
 
       // then
       await expect(LcmsCreateReleaseJob.name).to.have.been.performed.withJob({
-        retryLimit: 0,
-        retryDelay: 0,
-        retryBackoff: false,
+        retrylimit: 0,
+        retrydelay: 0,
+        retrybackoff: false,
         data: { userId: 123 },
       });
     });
