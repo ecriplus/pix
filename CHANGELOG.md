@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.363.0](https://github.com/1024pix/pix/compare/v5.362.0...v5.363.0) (2026-03-20)
+
+### :rocket: Amélioration
+
+- [#15525](https://github.com/1024pix/pix/pull/15525) Remonter le référentiel Pix par défaut dans la sélection de sujet (PIX-21935) 
+
+### :rewind: Retour en arrière
+
+- [#15573](https://github.com/1024pix/pix/pull/15573) Revert "[TECH] Utiliser le SDK PgBoss au lieu de Knex"
+
+### :building_construction: Tech
+
+- [#15534](https://github.com/1024pix/pix/pull/15534) Afficher les éléments ids d'un module lors de l'arrivée sur la preview (PIX-21990) 
+- [#15509](https://github.com/1024pix/pix/pull/15509) Ajouter des certifs v2 dans les seeds (PIX-21944). 
+- [#15530](https://github.com/1024pix/pix/pull/15530) Suppression des warnings lors du lint dans Admin. 
+
+### :arrow_up: Montée de version
+
+- [#15568](https://github.com/1024pix/pix/pull/15568) Lock file maintenance (audit-logger) 
+- [#15572](https://github.com/1024pix/pix/pull/15572) Lock file maintenance (certif) 
+- [#15569](https://github.com/1024pix/pix/pull/15569) Lock file maintenance (dossier racine) 
+- [#15571](https://github.com/1024pix/pix/pull/15571) Lock file maintenance (load-testing)
+
 # [5.362.0](https://github.com/1024pix/pix/compare/v5.361.0...v5.362.0) (2026-03-20)
 
 ### :rocket: Amélioration
