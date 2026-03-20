@@ -6,11 +6,15 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
+import get from 'lodash/get';
 import CopyButton from 'pix-admin/components/ui/copy-button';
 import ENV from 'pix-admin/config/environment';
 
 export default class HeadInformation extends Component {
   @service currentUser;
+  @service intl;
+  @service pixToast;
+
   @action
   onLogoUpload(event) {
     const file = event.target.files?.[0];
@@ -18,11 +22,34 @@ export default class HeadInformation extends Component {
 
     const reader = new FileReader();
     reader.onload = () => {
-      this.args.organization.logoUrl = reader.result;
-      this.args.onLogoUpdated();
+      this.updateLogo(reader.result);
     };
     reader.readAsDataURL(file);
   }
+
+  updateLogo = async (logoUrl) => {
+    this.args.organization.logoUrl = logoUrl;
+    try {
+      await this.args.organization.save();
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.organizations.head-information.notifications.logo-update-success'),
+      });
+    } catch (responseError) {
+      this.args.organization.rollbackAttributes();
+      const error = get(responseError, 'errors[0]');
+      let message;
+      switch (error?.status) {
+        case '413':
+          message = this.intl.t('pages.organizations.notifications.errors.payload-too-large', {
+            maxSizeInMegaBytes: error?.meta?.maxSizeInMegaBytes,
+          });
+          break;
+        default:
+          message = this.intl.t('common.notifications.generic-error');
+      }
+      this.pixToast.sendErrorNotification({ message });
+    }
+  };
 
   get hasTags() {
     const tags = this.args.organization.tags;
