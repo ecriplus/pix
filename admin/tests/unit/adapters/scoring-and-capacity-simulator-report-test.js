@@ -3,7 +3,17 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks) {
+  let clock;
   setupTest(hooks);
+
+  hooks.beforeEach(function () {
+    const now = new Date('2023-02-02');
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+  });
+
+  hooks.afterEach(function () {
+    clock.restore();
+  });
 
   module('#getSimulatorResult', function () {
     module('when a score is given', function () {
@@ -17,7 +27,7 @@ module('Unit | Adapter | scoring-and-capacity-simulator-report', function (hooks
         const adapterOptions = {
           score: 1,
           capacity: null,
-          date: new Date(),
+          date,
         };
 
         // when
