@@ -382,6 +382,7 @@ workflows:
             - mon_pix_install
             - orga_install
             - certif_install
+            - admin_install
           filters:
             branches:
               only: dev
