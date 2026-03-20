@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (userAccountInfo, meta) {
   return new Serializer('account-info', {
-    attributes: ['email', 'username', 'canSelfDeleteAccount'],
+    attributes: ['email', 'username', 'canSelfDeleteAccount', 'canAddEmailConnectionMethod'],
     meta,
   }).serialize(userAccountInfo);
 };

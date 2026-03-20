@@ -9,6 +9,7 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
         email: 'user@email.com',
         username: 'my-username',
         canSelfDeleteAccount: true,
+        canAddEmailConnectionMethod: true,
       };
 
       // when
@@ -22,6 +23,7 @@ describe('Unit | Identity Access Management | Infrastructure | Serializer | JSON
             email: 'user@email.com',
             username: 'my-username',
             'can-self-delete-account': true,
+            'can-add-email-connection-method': true,
           },
         },
       });

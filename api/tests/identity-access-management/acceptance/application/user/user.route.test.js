@@ -335,6 +335,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             'can-self-delete-account': false,
             email: user.email,
             username: user.username,
+            'can-add-email-connection-method': false,
           },
         },
       });
