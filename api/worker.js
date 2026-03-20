@@ -3,6 +3,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import _ from 'lodash';
+import PgBoss from 'pg-boss';
 
 import { databaseConnections } from './db/database-connections.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
@@ -12,7 +13,6 @@ import { learningContentCache } from './src/shared/infrastructure/caches/learnin
 import { JobQueue } from './src/shared/infrastructure/jobs/JobQueue.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
 import { quitMutex } from './src/shared/infrastructure/mutex/RedisMutex.js';
-import { pgBoss } from './src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { importNamedExportFromFile } from './src/shared/infrastructure/utils/import-named-exports-from-directory.js';
 import { child } from './src/shared/infrastructure/utils/logger.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
@@ -24,8 +24,22 @@ const workerDirPath = dirname(fileURLToPath(import.meta.url));
 const metrics = new Metrics({ config });
 
 export async function startPgBoss() {
-  logger.info('Starting pg-boss');
+  if (config.pgBoss.connexionPoolMaxSize === 0) {
+    logger.info(
+      'Pgboss will not be started and configured as connexionPoolMaxSize is set to 0. ' +
+        'Please set a value greater than zero on environment variable "PGBOSS_CONNECTION_POOL_MAX_SIZE" to be able to process jobs.',
+    );
+    return null;
+  }
 
+  logger.info('Starting pg-boss');
+  const monitorStateIntervalSeconds = config.pgBoss.monitorStateIntervalSeconds;
+  const pgBoss = new PgBoss({
+    connectionString: process.env.DATABASE_URL,
+    max: config.pgBoss.connexionPoolMaxSize,
+    ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
+    archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
+  });
   pgBoss.on('monitor-states', (state) => {
     logger.info({ event: 'pg-boss-state', name: 'global' }, { ...state, queues: undefined });
     _.each(state.queues, (queueState, queueName) => {
@@ -38,8 +52,18 @@ export async function startPgBoss() {
   pgBoss.on('wip', (data) => {
     logger.info({ event: 'pg-boss-wip' }, data);
   });
-  await pgBoss.start();
+  if (config.pgBoss.connexionPoolMaxSize !== 0) {
+    await pgBoss.start();
+  }
   return pgBoss;
+}
+
+function createJobQueue(pgBoss) {
+  const jobQueue = new JobQueue(pgBoss);
+  process.on('SIGINT', async () => {
+    await jobQueue.stop();
+  });
+  return jobQueue;
 }
 
 function checkJobGroups(jobGroups) {
@@ -53,7 +77,7 @@ function checkJobGroup(jobGroup) {
   }
 }
 
-export async function registerJobs({ jobGroups, dependencies = { startPgBoss } }) {
+export async function registerJobs({ jobGroups, dependencies = { startPgBoss, createJobQueue } }) {
   checkJobGroups(jobGroups);
 
   const pgBoss = await dependencies.startPgBoss();
@@ -63,7 +87,7 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss } }
     return;
   }
 
-  const jobQueues = new JobQueue(pgBoss);
+  const jobQueues = dependencies.createJobQueue(pgBoss);
 
   const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
@@ -97,7 +121,7 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss } }
         await jobQueues.scheduleCronJob({
           name: job.jobName,
           cron: job.jobCron,
-          options: { tz: 'Europe/Paris', expireInSeconds: job.expireIn },
+          options: { tz: 'Europe/Paris', expireIn: job.expireIn },
         });
         logger.info(`Cron for job "${job.jobName}" scheduled "${job.jobCron}"`);
 
@@ -127,32 +151,18 @@ export async function registerJobs({ jobGroups, dependencies = { startPgBoss } }
 
 const isRunningFromCli = import.meta.filename === process.argv[1];
 
-let isShuttingDown = false;
-
-async function exitOnSignal(signal) {
-  if (isShuttingDown) return;
-  isShuttingDown = true;
-
-  logger.info(`Received signal: ${signal}.`);
-  await pgBoss.stop({ graceful: false, timeout: 1000, destroy: true });
-  await databaseConnections.disconnect();
-  await metrics.clearMetrics();
-  await learningContentCache.quit();
-  await quitAllStorages();
-  await quitMutex();
-}
-
 async function main() {
   validateEnvironmentVariables(configSchema);
 
   const jobGroup = process.argv[2] ? JobGroup[process.argv[2]?.toUpperCase()] : JobGroup.DEFAULT;
   await registerJobs({ jobGroups: [jobGroup] });
 
-  process.on('SIGTERM', async () => {
-    await exitOnSignal('SIGTERM');
-  });
   process.on('SIGINT', async () => {
-    await exitOnSignal('SIGINT');
+    await quitAllStorages();
+    await quitMutex();
+    await metrics.clearMetrics();
+    await databaseConnections.disconnect();
+    await learningContentCache.quit();
   });
 }
 
