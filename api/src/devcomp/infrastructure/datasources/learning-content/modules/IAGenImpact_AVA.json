@@ -108,7 +108,7 @@
     },
     {
       "id": "7bd763e1-3bb6-4fc1-9f9d-66150eb09a1a",
-      "type": "question-yourself",
+      "type": "explore-to-understand",
       "grains": [
         {
           "id": "23e30460-5905-4e21-b32c-55042713eeaf",
@@ -438,6 +438,217 @@
                 "id": "69b48f4c-a274-42ca-b7c3-77098bbcb574",
                 "type": "text",
                 "content": "<p>Donc ce n’est pas prêt de s’arrêter… Voyons pourquoi.<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "810809d9-dd02-42db-8951-7e33c5fdcff6",
+          "type": "discovery",
+          "title": "Quels leviers du côté des entreprises d'IA ?",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "<p>Les dirigeants des entreprises d'IA génératives, beaucoup plus célèbres et puissants que Charlie, accordent parfois des interviews. </p>\n<p>Examinez ces citations et dites si, d’après vous, elles sont vraie ou fausse ?</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "d3016051-7665-4f96-ba28-8bcf7fb6982d",
+                      "type": "text",
+                      "content": "<blockquote>« L’IA accroît si fortement la demande en énergie que le système actuel ne peut pas totalement gérer cette augmentation. Mais cela stimule d’importants investissements dans l’énergie solaire, nucléaire, les batteries, etc. C’est pourquoi, en tant que spécialiste des nouvelles technologies, je suis optimiste quant à l’abondance des sources d’énergie renouvelables à l’avenir. »</blockquote><p>Sundar Pichai, PDG de Google, novembre 2025</p>"
+                    },
+                    {
+                      "id": "4901c36d-6247-4a82-b8d7-61b5b208cc6d",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vraie",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Elle est issue d'<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture<strong> techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Fausse",
+                          "feedback": {
+                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p>\n<p>Elle est issue d'<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture <strong>techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "661c6598-89a7-4205-a7dc-fde03fe70566",
+                      "type": "text",
+                      "content": "<blockquote>« Je pense que l'open source est nécessaire pour un futur positif avec l'IA. [...] L'open source va garantir un accès aux bénéfices et aux opportunités de l'IA à plus de personnes dans le monde, que ce pouvoir ne soit pas concentré entre les mains d'une poignée d'entreprises, et que cette technologie puisse être déployée de façon plus équilibrée et sécurisée au sein de la société. » </blockquote><p>Mark Zuckerberg, dirigeant de Meta, juillet 2024<br></p>"
+                    },
+                    {
+                      "id": "6f836928-8c45-4326-8dc5-8d23d829d9eb",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vraie",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p><p>Elle est issue d'un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p> Beaucoup d'entreprises d'IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent des modèles présentés comme “ouvert”, mais ni le code d'entraînement ni les données d'entraînement ne le sont.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Fausse",
+                          "feedback": {
+                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p>\n<p>Elle est issue d'un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p>\n<p> Beaucoup d'entreprises d'IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent des modèles présentés comme “ouvert”, mais ni le code d'entraînement ni les données d'entraînement ne le sont.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    },
+                    {
+                      "id": "a4a3eb56-162b-417e-a764-c381edbc8cb5",
+                      "type": "text",
+                      "content": "<blockquote>« Nous avons mené une étude inédite afin de quantifier les impacts environnementaux de nos grands modèles de langage (LLM). Notre ambition : fournir une analyse claire de l’empreinte environnementale de l’IA et contribuer à établir un nouveau standard pour notre industrie. »</blockquote><p>Article de blog de Mistral AI, 22 juillet 2025</p>"
+                    },
+                    {
+                      "id": "770eba88-d331-436c-9b00-c810e0705023",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Vraie",
+                          "feedback": {
+                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p><p>La plupart des entreprises conceptrices de logiciels d'IA générative ne publient aucune étude sur leurs impacts environnementaux. À l'heure actuelle, Mistral AI est l'une des seules à avoir publié une étude, et seulement partiellement.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Fausse",
+                          "feedback": {
+                            "diagnosis": "<p>Et pourtant,</p><p>La plupart des entreprises conceptrices de logiciels d'IA générative ne publient aucune étude sur leurs impacts environnementaux. À l'heure actuelle, Mistral AI est l'une des seules à avoir publié une étude, et seulement partiellement.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "0ec7d0c2-0f68-4d34-b515-ea7f8ddcea68",
+          "type": "short-lesson",
+          "title": "Leçon : quelle piste pour réduire l'impact",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "974d179b-fa0b-4312-a156-e0521cb95089",
+                "type": "text",
+                "content": "<p>[à venir]</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "43d17bc6-52a1-4b38-bf50-f677c452598d",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "7336e586-dec1-41bf-b351-4b53cdce98fd",
+          "type": "summary",
+          "title": "Récap'",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8bffed0c-54c0-4440-b231-eb24fb471735",
+                "type": "text",
+                "content": "<p>[à venir]<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "969b16bd-563f-4ef3-b28a-497971ca44be",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "f64657a2-e6a3-453b-a3c9-f0f0c910e1ba",
+          "type": "activity",
+          "title": " Comprendre l'impact environnemental des phases d'entraînement ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6bc20886-2cd1-490b-b328-0708ed8406ed",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des affirmations suivantes, indiquez si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "9de053d0-cec9-4244-abfd-74fd40d06a79",
+                    "text": "L’impact environnemental de l’entraînement des IA est plus important que l’impact de leur usages.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vraie",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "7c69acdc-df03-4b70-b042-e7a5c011408f",
+                    "text": "L’entraînement de ChatGPT-4 a mobilisé des centres de données pendant des semaines en continu. ",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vraie",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "1f0f0a62-66a8-4aba-9008-d8cc7b0881e6",
+                    "text": "L’entraînement de ChatGPT a nécessité une centaine de GPU.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vraie",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "7b692bdd-72b1-4513-a40d-0e692264dd65",
+                    "text": "Les GPU nécessitent l’extraction de nombreux minerais.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>En résumé :&nbsp;</p><ul><li> Du fait de l'essor des usages, l’impact <strong>environnemental des usages</strong> est désormais <strong>plus important</strong>&nbsp;que celui de l’entraînement des IA.</li><li>L’entraînement de ChatGPT-4 a bien mobilisé des centres de données pendant des semaines en continu.</li><li>L’entraînement de ChatGPT a nécessité bien plus d'une centaine de GPU, cela se compte en milliers.</li><li>Les GPU nécessitent bien l’extraction de nombreux minerais, comme la plupart de notre matériel informatique.</li></ul>"
+                }
               }
             }
           ]
