@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -10,8 +11,19 @@ import { resizeImage } from '../../../utils/resize-image';
 
 export default class ModulixImageElement extends Component {
   @tracked modalIsOpen = false;
+  @tracked imageHasError = false;
 
   static MAX_WIDTH = 700;
+
+  get shouldShowFallback() {
+    return !this.args.image?.url || this.imageHasError;
+  }
+
+  @action
+  onImageError(event) {
+    event.stopPropagation();
+    this.imageHasError = true;
+  }
 
   get hasAlternativeText() {
     return this.args.image.alternativeText.length > 0;
@@ -38,20 +50,30 @@ export default class ModulixImageElement extends Component {
 
   <template>
     <div class="element-image">
-      <figure class="element-image__container">
-        <img
-          class="element-image-container__image"
-          alt={{@image.alt}}
-          src={{@image.url}}
-          width={{this.dimensions.width}}
-          height={{this.dimensions.height}}
-        />
-        {{#if this.hasCaption}}
-          <figcaption class="element-image-container__caption">{{@image.legend}}<span
-              class="element-image-container__licence"
-            >{{@image.licence}}</span></figcaption>
-        {{/if}}
-      </figure>
+      {{#if this.shouldShowFallback}}
+        <div class="element-image__missing-content" role="status">
+          <p>{{t "pages.modulix.elements.image.missing-content"}}</p>
+          {{#if this.hasAlternativeText}}
+            <p>{{t "pages.modulix.elements.image.consult-alternative-text"}}</p>
+          {{/if}}
+        </div>
+      {{else}}
+        <figure class="element-image__container">
+          <img
+            class="element-image-container__image"
+            alt={{@image.alt}}
+            src={{@image.url}}
+            width={{this.dimensions.width}}
+            height={{this.dimensions.height}}
+            {{on "error" this.onImageError}}
+          />
+          {{#if this.hasCaption}}
+            <figcaption class="element-image-container__caption">{{@image.legend}}<span
+                class="element-image-container__licence"
+              >{{@image.licence}}</span></figcaption>
+          {{/if}}
+        </figure>
+      {{/if}}
       {{#if this.hasAlternativeText}}
         <PixButton class="element-image__button" @variant="tertiary" @triggerAction={{this.showModal}}>
           {{t "pages.modulix.buttons.element.alternativeText"}}

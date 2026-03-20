@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click, findAll } from '@ember/test-helpers';
+import { click, findAll, triggerEvent } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import ModulixImageElement from 'mon-pix/components/module/element/image';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -113,5 +114,87 @@ module('Integration | Component | Module | Image', function (hooks) {
     // then
     const alternativeTextButton = await screen.queryByRole('button', { name: "Afficher l'alternative textuelle" });
     assert.dom(alternativeTextButton).doesNotExist();
+  });
+
+  module('when the image url is missing', function () {
+    test('it should not display the image and display a fallback message', async function (assert) {
+      // given
+      const imageElement = {
+        url: null,
+        alt: 'alt text',
+        alternativeText: '',
+      };
+
+      // when
+      const screen = await render(<template><ModulixImageElement @image={{imageElement}} /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('img')).doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.image.missing-content'))).exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.image.consult-alternative-text'))).doesNotExist();
+    });
+
+    module('when there is an alternative text', function () {
+      test('it should display an alternative text message', async function (assert) {
+        // given
+        const imageElement = {
+          url: null,
+          alt: 'alt text',
+          alternativeText: 'alternative instruction',
+        };
+
+        // when
+        const screen = await render(<template><ModulixImageElement @image={{imageElement}} /></template>);
+
+        // then
+        assert.dom(screen.getByText(t('pages.modulix.elements.image.consult-alternative-text'))).exists();
+      });
+    });
+  });
+
+  module('when the image fails to load', function () {
+    test('it should hide the image and display a fallback message', async function (assert) {
+      // given
+      const imageElement = {
+        url: 'https://assets.pix.org/draft/flamingo.jpg',
+        alt: 'alt text',
+        alternativeText: '',
+      };
+
+      // when
+      const screen = await render(<template><ModulixImageElement @image={{imageElement}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('img')).exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.image.missing-content'))).doesNotExist();
+
+      // when
+      await triggerEvent('img', 'error');
+
+      // then
+      assert.dom(screen.queryByRole('img')).doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.image.missing-content'))).exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.image.consult-alternative-text'))).doesNotExist();
+    });
+
+    module('when there is an alternative text', function () {
+      test('it should display an alternative text message', async function (assert) {
+        // given
+        const imageElement = {
+          url: 'https://assets.pix.org/draft/flamingo.jpg',
+          alt: 'alt text',
+          alternativeText: 'alternative instruction',
+        };
+
+        // when
+        const screen = await render(<template><ModulixImageElement @image={{imageElement}} /></template>);
+        await triggerEvent('img', 'error');
+
+        // then
+        assert.dom(screen.queryByRole('img')).doesNotExist();
+        assert.dom(screen.getByText(t('pages.modulix.elements.image.missing-content'))).exists();
+        assert.dom(screen.getByText(t('pages.modulix.elements.image.consult-alternative-text'))).exists();
+      });
+    });
   });
 });

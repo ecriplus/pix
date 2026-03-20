@@ -1651,6 +1651,10 @@
         "label": "Télécharger le fichier au format {format}"
       },
       "elements": {
+        "image": {
+          "consult-alternative-text": "Consultez l'alternative textuelle pour en connaître le contenu.",
+          "missing-content": "Une erreur est survenue lors de l'affichage de l'image."
+        },
         "short-video": {
           "consult-transcription": "Consultez la transcription pour en connaître le contenu.",
           "missing-content": "Une erreur est survenue lors de l'affichage de la vidéo."

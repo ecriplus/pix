@@ -1650,6 +1650,10 @@
         "label": "Download file in {format} format"
       },
       "elements": {
+        "image": {
+          "consult-alternative-text": "Please consult the alternative text to view its content.",
+          "missing-content": "An error occurred while displaying the image."
+        },
         "short-video": {
           "consult-transcription": "Please consult the transcription to view its content.",
           "missing-content": "An error occurred while displaying the video."
