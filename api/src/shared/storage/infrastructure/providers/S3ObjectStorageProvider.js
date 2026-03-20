@@ -10,17 +10,22 @@ class S3ObjectStorageProvider {
   #bucket;
 
   constructor({
-    credentials,
+    accessKeyId,
+    secretAccessKey,
     endpoint,
     region,
     bucket,
     dependencies = { clientS3, libStorage, s3RequestPresigner, logger },
     forcePathStyle = false,
   }) {
+    if ([accessKeyId, secretAccessKey, endpoint, region, bucket].some((prop) => prop === undefined)) {
+      logger.warn('Invalid S3 configuration provided');
+    }
+
     this.#dependencies = dependencies;
 
     this.#s3Client = new dependencies.clientS3.S3Client({
-      credentials,
+      credentials: { accessKeyId, secretAccessKey },
       endpoint,
       region,
       forcePathStyle,
@@ -38,12 +43,9 @@ class S3ObjectStorageProvider {
     dependencies = { clientS3, libStorage, s3RequestPresigner },
     forcePathStyle,
   }) {
-    if ([accessKeyId, secretAccessKey, endpoint, region, bucket].some((prop) => prop === undefined)) {
-      logger.warn('Invalid S3 configuration provided');
-    }
-
     return new S3ObjectStorageProvider({
-      credentials: { accessKeyId, secretAccessKey },
+      accessKeyId,
+      secretAccessKey,
       endpoint,
       region,
       bucket,
