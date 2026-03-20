@@ -1,4 +1,3 @@
-import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -8,104 +7,96 @@ module('Unit | Route | user certifications/get', function (hooks) {
   setupTest(hooks);
 
   let route;
-  let storeStub;
   let findRecordStub;
   const certificationId = 'certification_id';
 
   hooks.beforeEach(function () {
-    // define stubs
     findRecordStub = sinon.stub();
-    storeStub = Service.create({
+    const storeStub = Service.create({
       findRecord: findRecordStub,
     });
 
     route = this.owner.lookup('route:authenticated/user-certifications/get');
     route.set('store', storeStub);
-    route.router.replaceWith = sinon.stub().resolves();
-  });
-
-  test('exists', function (assert) {
-    assert.ok(route);
+    route.router.transitionTo = sinon.stub().resolves();
   });
 
   module('#model', function () {
     test('should get the certification', async function (assert) {
       // given
       const params = { id: certificationId };
-      const retreivedCertification = [EmberObject.create({ id: certificationId })];
-      findRecordStub.resolves(retreivedCertification);
+      findRecordStub.resolves({});
 
       // when
       await route.model(params);
 
       // then
-
       sinon.assert.calledOnce(findRecordStub);
       sinon.assert.calledWith(findRecordStub, 'certification', certificationId);
       assert.ok(true);
     });
+  });
 
-    test('should not return to /mes-certifications when the certification is published and validated', async function (assert) {
+  module('#beforeModel', function () {
+    test('should not redirect when the certificate summary is validated', function (assert) {
       // given
-      const params = { id: certificationId };
-      const retrievedCertification = EmberObject.create({
-        id: '2',
-        date: '2018-02-15T15:15:52.504Z',
-        status: 'validated',
-        certificationCenter: 'Université de Lyon',
-        isPublished: true,
-        pixScore: 231,
-      });
-      findRecordStub.resolves(retrievedCertification);
+      const certificateSummaries = [{ id: '2', isValidated: true }];
+      sinon.stub(route, 'modelFor').withArgs('authenticated.user-certifications').returns(certificateSummaries);
+      const transition = { to: { params: { id: '2' } }, abort: sinon.stub() };
 
       // when
-      await route.model(params);
+      route.beforeModel(transition);
 
       // then
-      assert.true(route.router.replaceWith.notCalled);
+      assert.true(transition.abort.notCalled);
+      assert.true(route.router.transitionTo.notCalled);
     });
 
-    test('should return to /mes-certifications when the certification is not published', async function (assert) {
+    test('should return to /mes-certifications when the certification is not published', function (assert) {
       // given
-      const params = { id: certificationId };
-      const retreivedCertification = EmberObject.create({
-        id: '2',
-        date: '2018-02-15T15:15:52.504Z',
-        status: 'validated',
-        certificationCenter: 'Université de Lyon',
-        isPublished: false,
-        pixScore: 231,
-      });
-      findRecordStub.resolves(retreivedCertification);
+      const certificateSummaries = [{ id: '2', isValidated: false }];
+      sinon.stub(route, 'modelFor').withArgs('authenticated.user-certifications').returns(certificateSummaries);
+      const transition = { to: { params: { id: '2' } }, abort: sinon.stub() };
 
       // when
-      await route.model(params);
+      route.beforeModel(transition);
 
       // then
-      sinon.assert.calledOnce(route.router.replaceWith);
-      sinon.assert.calledWith(route.router.replaceWith, '/mes-certifications');
+      sinon.assert.calledOnce(transition.abort);
+      sinon.assert.calledOnce(route.router.transitionTo);
+      sinon.assert.calledWith(route.router.transitionTo, 'authenticated.user-certifications');
       assert.ok(true);
     });
 
-    test('should return to /mes-certifications when the certification is not validated', async function (assert) {
+    test('should return to /mes-certifications when the certification is not validated', function (assert) {
       // given
-      const params = { id: certificationId };
-      const retreivedCertification = EmberObject.create({
-        id: '3',
-        date: '2018-02-15T15:15:52.504Z',
-        status: 'rejected',
-        certificationCenter: 'Université de Lyon',
-        isPublished: true,
-        pixScore: 231,
-      });
-      findRecordStub.resolves(retreivedCertification);
+      const certificateSummaries = [{ id: '3', isValidated: false }];
+      sinon.stub(route, 'modelFor').withArgs('authenticated.user-certifications').returns(certificateSummaries);
+      const transition = { to: { params: { id: '3' } }, abort: sinon.stub() };
 
       // when
-      await route.model(params);
+      route.beforeModel(transition);
 
       // then
-      sinon.assert.calledOnce(route.router.replaceWith);
-      sinon.assert.calledWith(route.router.replaceWith, '/mes-certifications');
+      sinon.assert.calledOnce(transition.abort);
+      sinon.assert.calledOnce(route.router.transitionTo);
+      sinon.assert.calledWith(route.router.transitionTo, 'authenticated.user-certifications');
+      assert.ok(true);
+    });
+
+    test('should return to /mes-certifications when the certificate summary is not found', function (assert) {
+      // given
+      const certificateSummaries = [{ id: '2', isValidated: true }];
+      sinon.stub(route, 'modelFor').withArgs('authenticated.user-certifications').returns(certificateSummaries);
+      const transition = { to: { params: { id: '999' } }, abort: sinon.stub() };
+
+      // when
+      route.beforeModel(transition);
+
+      // then
+      sinon.assert.calledOnce(transition.abort);
+      sinon.assert.calledOnce(route.router.transitionTo);
+      sinon.assert.calledWith(route.router.transitionTo, 'authenticated.user-certifications');
       assert.ok(true);
     });
   });

@@ -377,6 +377,21 @@ export default Factory.extend({
       });
       const certificates = [rejectedCertificate, validatedCertificate];
       user.update({ certifications: certificates });
+
+      server.create('certificate-summary', {
+        id: rejectedCertificate.id,
+        certificationCenterName: 'Université de Pix',
+        certificationStartedAt: new Date('2018-07-20T14:23:56Z'),
+        status: 'REJECTED',
+        pixScore: 50,
+      });
+      server.create('certificate-summary', {
+        id: validatedCertificate.id,
+        certificationCenterName: 'Université de Pix',
+        certificationStartedAt: new Date('2018-07-20T14:33:56Z'),
+        status: 'VALIDATED',
+        pixScore: 777,
+      });
     },
   }),
   withSomeTrainings: trait({

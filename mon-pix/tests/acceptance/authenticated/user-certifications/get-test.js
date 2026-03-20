@@ -77,7 +77,7 @@ module('Acceptance | Authenticated | User certifications | get', function (hooks
 });
 
 function _getV2Certificate({ user, server }) {
-  return server.create('certification', {
+  const certificate = server.create('certification', {
     firstName: user.firstName,
     lastName: user.lastName,
     birthdate: '2000-01-01',
@@ -92,10 +92,18 @@ function _getV2Certificate({ user, server }) {
     user,
     resultCompetenceTree: _getResultCompetenceTree({ server }),
   });
+  server.create('certificate-summary', {
+    id: certificate.id,
+    certificationCenterName: 'Université de Pix',
+    certificationStartedAt: new Date('2018-07-20T14:33:56Z'),
+    status: 'VALIDATED',
+    pixScore: 777,
+  });
+  return certificate;
 }
 
 function _getV3Certificate({ user, server }) {
-  return server.create('certification', {
+  const certificate = server.create('certification', {
     firstName: user.firstName,
     lastName: user.lastName,
     birthdate: '2000-01-01',
@@ -111,6 +119,14 @@ function _getV3Certificate({ user, server }) {
     level: '7',
     resultCompetenceTree: _getResultCompetenceTree({ server }),
   });
+  server.create('certificate-summary', {
+    id: certificate.id,
+    certificationCenterName: 'Université de Pix',
+    certificationStartedAt: new Date('2018-07-20T14:33:56Z'),
+    status: 'VALIDATED',
+    pixScore: 777,
+  });
+  return certificate;
 }
 
 function _getResultCompetenceTree({ server }) {

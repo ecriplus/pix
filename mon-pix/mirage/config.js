@@ -12,6 +12,7 @@ import loadCourseRoutes from './routes/courses/index';
 import deleteUserSavedTutorial from './routes/delete-user-saved-tutorial';
 import getAreas from './routes/get-areas';
 import getCampaigns from './routes/get-campaigns';
+import getCertificateSummaries from './routes/get-certificate-summaries';
 import getCertification from './routes/get-certification';
 import getCertificationCandidate from './routes/get-certification-candidate';
 import getCertificationCandidatesSubscriptions from './routes/get-certification-candidates-subscriptions';
@@ -89,6 +90,7 @@ function routes() {
 
   this.get('/campaigns', getCampaigns);
 
+  this.get('/certificate-summaries', getCertificateSummaries);
   this.get('/certifications', getCertifications);
   this.get('/certifications/:id', getCertification);
 
