@@ -425,7 +425,7 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
   describe('#findPaginatedCombinedCourseParticipationById', function () {
     let combinedCourseId;
-    let organizationLearner1, organizationLearner2, organizationLearner3;
+    let organizationLearner1, organizationLearner2, organizationLearner3, organizationLearner4;
 
     beforeEach(async function () {
       //given
@@ -450,6 +450,15 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         userId: null,
         firstName: 'Nour',
         lastName: 'Aresto',
+        division: null,
+        group: 'A',
+        organizationId: combinedCourse.organizationId,
+      });
+
+      organizationLearner4 = databaseBuilder.factory.buildOrganizationLearner({
+        userId: null,
+        firstName: 'Abc',
+        lastName: 'Def',
         division: null,
         group: 'A',
         organizationId: combinedCourse.organizationId,
@@ -485,6 +494,14 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
       });
 
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId: organizationLearner4.id,
+        combinedCourseId,
+        status: CombinedCourseParticipationStatuses.COMPLETED,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        deletedAt: new Date(),
+      });
+
       await databaseBuilder.commit();
     });
 
@@ -512,6 +529,12 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
         });
       // then
       expect(organizationLearnerIds).deep.equal([organizationLearner1.id]);
+    });
+
+    it('should not return deleted participations to combined course', async function () {
+      const { organizationLearnerIds } =
+        await combinedCourseParticipationRepository.findPaginatedCombinedCourseParticipationById({ combinedCourseId });
+      expect(organizationLearnerIds).to.not.include(organizationLearner4.id);
     });
 
     describe('filters', function () {
