@@ -1015,6 +1015,13 @@ class CertificationRescoringNotAllowedError extends DomainError {
   }
 }
 
+class S3UploadError extends DomainError {
+  constructor(message = "Erreur lors de l'import du fichier sur le S3.", code = 'S3_UPLOAD_ERROR') {
+    super(message);
+    this.code = code;
+  }
+}
+
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1120,6 +1127,7 @@ export {
   OrganizationNotFoundError,
   OrganizationTagNotFound,
   OrganizationWithoutEmailError,
+  S3UploadError,
   SendingEmailError,
   SendingEmailToInvalidDomainError,
   SendingEmailToInvalidEmailAddressError,
