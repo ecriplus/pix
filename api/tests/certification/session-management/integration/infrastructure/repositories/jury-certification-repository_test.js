@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as juryCertificationRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-repository.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
@@ -58,6 +59,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           createdAt: new Date('2020-01-01'),
           completedAt: new Date('2020-02-01'),
           isPublished: false,
+          framework: Frameworks.CLEA,
         });
 
         databaseBuilder.factory.buildComplementaryCertificationCourse({
@@ -80,6 +82,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           certificationCourseId: 1,
           assessmentId: 159,
           pixScore: 123,
+          reachedMeshIndex: 2,
           status: 'validated',
           commentForOrganization: 'Un commentaire orga',
           commentForCandidate: 'Un commentaire candidat',
@@ -131,6 +134,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           isRejectedForFraud: false,
           juryId: 22,
           pixScore: 123,
+          reachedMeshIndex: 2,
           commentForOrganization: 'Un commentaire orga',
           commentForCandidate: 'Un commentaire candidat',
           commentByJury: 'Un commentaire jury',
@@ -138,6 +142,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           competenceMarks: [expectedCompetenceMark],
           certificationIssueReports: [],
           version: 2,
+          certificationFramework: Frameworks.CLEA,
           commonComplementaryCertificationCourseResult: {
             acquired: true,
             complementaryCertificationBadgeId: 3453,

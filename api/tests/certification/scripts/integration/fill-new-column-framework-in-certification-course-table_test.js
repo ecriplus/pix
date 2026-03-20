@@ -20,6 +20,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       sessionId,
       userId,
+      framework: null,
     }).id;
 
     await databaseBuilder.commit();
@@ -44,6 +45,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       sessionId,
       userId,
+      framework: null,
     }).id;
 
     await databaseBuilder.commit();
@@ -72,6 +74,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       sessionId,
       userId,
+      framework: null,
     }).id;
 
     await databaseBuilder.commit();
@@ -103,6 +106,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       sessionId,
       userId,
+      framework: null,
     }).id;
     databaseBuilder.factory.buildComplementaryCertificationCourse({
       certificationCourseId,
@@ -165,6 +169,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId1 = databaseBuilder.factory.buildCertificationCourse({
       sessionId: sessionId1,
       userId: userId1,
+      framework: null,
     }).id;
     const sessionId2 = databaseBuilder.factory.buildSession().id;
     const userId2 = databaseBuilder.factory.buildUser().id;
@@ -175,6 +180,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId2 = databaseBuilder.factory.buildCertificationCourse({
       sessionId: sessionId2,
       userId: userId2,
+      framework: null,
     }).id;
     const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
       key: Frameworks.EDU_1ER_DEGRE,
@@ -188,6 +194,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
     const certificationCourseId3 = databaseBuilder.factory.buildCertificationCourse({
       sessionId: sessionId3,
       userId: userId3,
+      framework: null,
     }).id;
     databaseBuilder.factory.buildComplementaryCertificationCourse({
       certificationCourseId: certificationCourseId3,
@@ -249,6 +256,7 @@ describe('Integration | Certification | Scripts | Fill new column framework in c
       const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
         sessionId,
         userId,
+        framework: null,
       }).id;
       certificationCourseIds.push(certificationCourseId);
     }

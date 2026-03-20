@@ -89,9 +89,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Terminée par le surveillant',
-          Score: '55',
+          Résultats: '55 Pix',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Certification Pix',
+          'Certification passée': 'Pix Cœur',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -99,9 +99,10 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Rejetée',
-          score: '55 Pix',
+          result: '55 Pix',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Rejetée',
           nbAnsweredQuestionsOverTotal: '1/32',
           nbQuestionsOK: 1,
           nbQuestionsKO: 0,
@@ -109,6 +110,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
+          result: '55 Pix',
         });
       });
     });

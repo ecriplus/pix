@@ -1,6 +1,7 @@
 import { expect, test } from '../../../../../fixtures/certification/index.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
+  checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
@@ -86,14 +87,20 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Rejetée',
-          Score: '',
+          Résultats: 'Non-admissible',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
+        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
+          sessionNumber,
+          status: 'Rejetée',
+          result: 'Non-admissible',
+        });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
+          status: 'Rejetée',
           nbAnsweredQuestionsOverTotal: '1/32',
           nbQuestionsOK: 1,
           nbQuestionsKO: 0,
@@ -101,6 +108,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
+          result: 'Non-admissible',
         });
       });
     });

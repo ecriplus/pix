@@ -1,4 +1,4 @@
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 
 class FinalizedSession {
   constructor({
@@ -81,10 +81,7 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
 }
 
 function _hasOnlyCoreScopeCertifications(juryCertificationSummaries) {
-  return juryCertificationSummaries.every((certification) => {
-    return (
-      !certification.complementaryCertificationKeyObtained ||
-      certification.complementaryCertificationKeyObtained == ComplementaryCertificationKeys.CLEA
-    );
+  return juryCertificationSummaries.every(({ certificationFramework }) => {
+    return [Frameworks.CORE, Frameworks.CLEA].includes(certificationFramework);
   });
 }

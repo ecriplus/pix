@@ -1,4 +1,4 @@
-import { ComplementaryCertificationKeys } from '../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   createServer,
   databaseBuilder,
@@ -49,36 +49,22 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
         // given
         const superAdminId = databaseBuilder.factory.buildUser.withRole().id;
         sessionId = databaseBuilder.factory.buildSession().id;
-        const badge = databaseBuilder.factory.buildBadge();
 
-        const complementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
-          label: 'CléA Numérique',
-          key: ComplementaryCertificationKeys.CLEA,
-        }).id;
-        const complementaryCertificationBadgeId = databaseBuilder.factory.buildComplementaryCertificationBadge({
-          badgeId: badge.id,
-          complementaryCertificationId,
-          label: 'CléA Numérique',
-        }).id;
-
-        const certificationCourse1 = databaseBuilder.factory.buildCertificationCourse({ sessionId, lastName: 'AAA' });
-        const { id } = databaseBuilder.factory.buildComplementaryCertificationCourse({
-          certificationCourseId: certificationCourse1.id,
-          name: ComplementaryCertificationKeys.CLEA,
-          complementaryCertificationId,
-          complementaryCertificationBadgeId,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationCourseResult({
-          complementaryCertificationCourseId: id,
-          complementaryCertificationBadgeId,
-          acquired: true,
+        const certificationCourse1 = databaseBuilder.factory.buildCertificationCourse({
+          sessionId,
+          lastName: 'AAA',
+          framework: Frameworks.CLEA,
         });
         const asr1 = databaseBuilder.factory.buildAssessmentResult.last({
           certificationCourseId: certificationCourse1.id,
           createdAt: new Date('2018-04-15T00:00:00Z'),
         });
 
-        const certificationCourse2 = databaseBuilder.factory.buildCertificationCourse({ sessionId, lastName: 'CCC' });
+        const certificationCourse2 = databaseBuilder.factory.buildCertificationCourse({
+          sessionId,
+          lastName: 'CCC',
+          framework: Frameworks.CLEA,
+        });
         databaseBuilder.factory.buildAssessment({ certificationCourseId: certificationCourse2.id });
         await databaseBuilder.commit();
 
@@ -98,30 +84,32 @@ describe('Acceptance | Controller | session-controller-get-jury-certification-su
           'last-name': certificationCourse1.lastName,
           status: asr1.status,
           'pix-score': asr1.pixScore,
+          'algorithm-version': certificationCourse1.version,
+          'reached-mesh-index': asr1.reachedMeshIndex,
           'is-published': certificationCourse1.isPublished,
           'created-at': certificationCourse1.createdAt,
           'completed-at': certificationCourse1.completedAt,
           'number-of-certification-issue-reports': 0,
           'number-of-certification-issue-reports-with-required-action': 0,
-          'certification-obtained': 'Double Certification Pix/CléA Numérique',
-          'complementary-certification-key-obtained': 'CLEA',
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
+          'certification-framework': Frameworks.CLEA,
         };
         const expectedJuryCertificationSummary2 = {
           'first-name': certificationCourse2.firstName,
           'last-name': certificationCourse2.lastName,
           status: 'started',
           'pix-score': null,
+          'algorithm-version': certificationCourse2.version,
+          'reached-mesh-index': null,
           'is-published': certificationCourse2.isPublished,
           'created-at': certificationCourse2.createdAt,
           'number-of-certification-issue-reports': 0,
           'number-of-certification-issue-reports-with-required-action': 0,
-          'certification-obtained': 'Certification Pix',
-          'complementary-certification-key-obtained': null,
           'completed-at': certificationCourse2.completedAt,
           'examiner-comment': undefined,
           'is-flagged-aborted': false,
+          'certification-framework': Frameworks.CLEA,
         };
 
         expect(response.statusCode).to.equal(200);

@@ -21,6 +21,7 @@ class JuryCertification {
    * @param {boolean} props.isRejectedForFraud
    * @param {number} props.juryId
    * @param {number} props.pixScore
+   * @param {number} props.reachedMeshIndex
    * @param {Array<CompetenceMark>} props.competenceMarks
    * @param {JuryComment} props.commentForCandidate
    * @param {JuryComment} props.commentForOrganization
@@ -50,6 +51,7 @@ class JuryCertification {
     isRejectedForFraud,
     juryId,
     pixScore,
+    reachedMeshIndex,
     competenceMarks,
     commentForCandidate,
     commentForOrganization,
@@ -58,6 +60,7 @@ class JuryCertification {
     complementaryCertificationCourseResultWithExternal,
     commonComplementaryCertificationCourseResult,
     version,
+    certificationFramework,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.sessionId = sessionId;
@@ -78,6 +81,7 @@ class JuryCertification {
     this.isRejectedForFraud = isRejectedForFraud;
     this.juryId = juryId;
     this.pixScore = pixScore;
+    this.reachedMeshIndex = reachedMeshIndex;
     this.competenceMarks = competenceMarks;
     this.commentForCandidate = commentForCandidate;
     this.commentForOrganization = commentForOrganization;
@@ -86,6 +90,7 @@ class JuryCertification {
     this.complementaryCertificationCourseResultWithExternal = complementaryCertificationCourseResultWithExternal;
     this.commonComplementaryCertificationCourseResult = commonComplementaryCertificationCourseResult;
     this.version = version;
+    this.certificationFramework = certificationFramework;
   }
 
   static from({
@@ -138,6 +143,7 @@ class JuryCertification {
       isRejectedForFraud: juryCertificationDTO.isRejectedForFraud,
       juryId: juryCertificationDTO.juryId,
       pixScore: juryCertificationDTO.pixScore,
+      reachedMeshIndex: juryCertificationDTO.reachedMeshIndex,
       competenceMarks,
       commentForCandidate,
       commentForOrganization,
@@ -146,6 +152,7 @@ class JuryCertification {
       complementaryCertificationCourseResultWithExternal,
       commonComplementaryCertificationCourseResult,
       version: juryCertificationDTO.version,
+      certificationFramework: juryCertificationDTO.certificationFramework,
     });
   }
 }

@@ -1,10 +1,11 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as juryCertificationSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
@@ -43,8 +44,18 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         const dbf = databaseBuilder.factory;
         sessionId = dbf.buildSession().id;
         startedCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'CCC' });
-        otherStartedCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'DDD' });
-        manyAsrCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'AAA' });
+        otherStartedCertification = dbf.buildCertificationCourse({
+          sessionId,
+          lastName: 'DDD',
+          framework: Frameworks.CLEA,
+          version: AlgorithmEngineVersion.V2,
+        });
+        manyAsrCertification = dbf.buildCertificationCourse({
+          sessionId,
+          lastName: 'AAA',
+          framework: Frameworks.DROIT,
+          version: AlgorithmEngineVersion.V2,
+        });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
         dbf.buildAssessment({ certificationCourseId: startedCertification.id });
@@ -85,7 +96,9 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           id: manyAsrCertification.id,
           isPublished: manyAsrCertification.isPublished,
           lastName: 'AAA',
+          algorithmVersion: AlgorithmEngineVersion.V2,
           pixScore: latestAssessmentResult.pixScore,
+          reachedMeshIndex: latestAssessmentResult.reachedMeshIndex,
           status: latestAssessmentResult.status,
           certificationIssueReports: [
             domainBuilder.buildCertificationIssueReport({
@@ -98,7 +111,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
               hasBeenAutomaticallyResolved: null,
             }),
           ],
-          complementaryCertificationKeyObtained: null,
+          certificationFramework: Frameworks.DROIT,
         });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);
@@ -112,6 +125,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
           // then
           expect(juryCertificationSummaries[0].pixScore).to.equal(latestAssessmentResult.pixScore);
+          expect(juryCertificationSummaries[0].reachedMeshIndex).to.equal(latestAssessmentResult.reachedMeshIndex);
           expect(juryCertificationSummaries[0].status).to.equal(AssessmentResult.status.VALIDATED);
           expect(juryCertificationSummaries[0].firstName).to.equal(manyAsrCertification.firstName);
           expect(juryCertificationSummaries[0].lastName).to.equal(manyAsrCertification.lastName);
@@ -229,106 +243,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         ]);
       });
     });
-
-    describe('when complementary certification is taken', function () {
-      it(`should return the complementary certification label`, async function () {
-        // given
-        const dbf = databaseBuilder.factory;
-        const sessionId = dbf.buildSession().id;
-        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
-        const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
-        databaseBuilder.factory.buildComplementaryCertification({
-          id: 101,
-          label: 'Pix+ Droit',
-          key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationBadge({
-          id: 11,
-          label: 'PARTNER_LABEL',
-          badgeId,
-          complementaryCertificationId: 101,
-        });
-        dbf.buildComplementaryCertificationCourse({
-          id: 998,
-          complementaryCertificationId: 101,
-          certificationCourseId,
-          complementaryCertificationBadgeId: 11,
-        });
-        dbf.buildComplementaryCertificationCourseResult({
-          complementaryCertificationCourseId: 998,
-          complementaryCertificationBadgeId: 11,
-          acquired: true,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
-
-        // then
-        expect(juryCertificationSummaries).to.have.lengthOf(1);
-        expect(juryCertificationSummaries[0].certificationObtained).to.equal('Pix+ Droit');
-      });
-    });
-
-    describe('when double certification is taken', function () {
-      it(`should return a specific label`, async function () {
-        // given
-        const dbf = databaseBuilder.factory;
-        const sessionId = dbf.buildSession().id;
-        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
-        const badgeId = dbf.buildBadge({ key: 'PARTNER_KEY' }).id;
-        databaseBuilder.factory.buildComplementaryCertification({
-          id: 101,
-          label: 'CléA Numérique',
-          key: ComplementaryCertificationKeys.CLEA,
-        });
-        databaseBuilder.factory.buildComplementaryCertificationBadge({
-          id: 11,
-          label: 'PARTNER_LABEL',
-          badgeId,
-          complementaryCertificationId: 101,
-        });
-        dbf.buildComplementaryCertificationCourse({
-          id: 998,
-          complementaryCertificationId: 101,
-          certificationCourseId,
-          complementaryCertificationBadgeId: 11,
-        });
-        dbf.buildComplementaryCertificationCourseResult({
-          complementaryCertificationCourseId: 998,
-          complementaryCertificationBadgeId: 11,
-          acquired: true,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
-
-        // then
-        expect(juryCertificationSummaries).to.have.lengthOf(1);
-        expect(juryCertificationSummaries[0].certificationObtained).to.equal('DOUBLE_CORE_CLEA');
-      });
-    });
-
-    describe('when the taken certification is core', function () {
-      it(`should return a specific label`, async function () {
-        // given
-        const dbf = databaseBuilder.factory;
-        const sessionId = dbf.buildSession().id;
-        const certificationCourseId = dbf.buildCertificationCourse({ sessionId }).id;
-        dbf.buildAssessmentResult({
-          certificationCourseId,
-        });
-        await databaseBuilder.commit();
-
-        // when
-        const juryCertificationSummaries = await juryCertificationSummaryRepository.findBySessionId({ sessionId });
-
-        // then
-        expect(juryCertificationSummaries).to.have.lengthOf(1);
-        expect(juryCertificationSummaries[0].certificationObtained).to.equal('CORE');
-      });
-    });
   });
 
   describe('#findBySessionIdPaginated', function () {
@@ -356,8 +270,16 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         const label = 'label';
         const dbf = databaseBuilder.factory;
         const sessionId = dbf.buildSession().id;
-        const manyAsrCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'AAA' });
-        const startedCertification = dbf.buildCertificationCourse({ sessionId, lastName: 'CCC' });
+        const manyAsrCertification = dbf.buildCertificationCourse({
+          sessionId,
+          lastName: 'AAA',
+          framework: Frameworks.DROIT,
+        });
+        const startedCertification = dbf.buildCertificationCourse({
+          sessionId,
+          lastName: 'CCC',
+          framework: Frameworks.CORE,
+        });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
         dbf.buildAssessment({ certificationCourseId: startedCertification.id });
@@ -421,13 +343,14 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
 
         // then
         expect(juryCertificationSummary.pixScore).to.equal(latestAssessmentResult.pixScore);
+        expect(juryCertificationSummary.reachedMeshIndex).to.equal(latestAssessmentResult.reachedMeshIndex);
         expect(juryCertificationSummary.status).to.equal(AssessmentResult.status.VALIDATED);
         expect(juryCertificationSummary.firstName).to.equal(manyAsrCertification.firstName);
         expect(juryCertificationSummary.lastName).to.equal(manyAsrCertification.lastName);
         expect(juryCertificationSummary.createdAt).to.deep.equal(manyAsrCertification.createdAt);
         expect(juryCertificationSummary.completedAt).to.deep.equal(manyAsrCertification.completedAt);
         expect(juryCertificationSummary.isPublished).to.equal(manyAsrCertification.isPublished);
-        expect(juryCertificationSummary.certificationObtained).to.equal('Pix+ Droit');
+        expect(juryCertificationSummary.certificationFramework).to.equal(manyAsrCertification.framework);
         expect(juryCertificationSummary.certificationIssueReports).to.deep.equal([
           domainBuilder.buildCertificationIssueReport({
             id: issueReport1.id,

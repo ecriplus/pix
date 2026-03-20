@@ -26,6 +26,55 @@
       "organization-not-found-error": "The organization \"{organizationId}\" does not exist.",
       "pix-admin-login-from-password-disabled-error": "Email and password login is disabled. Please use SSO to log in."
     },
+    "certification": {
+      "meshLevels": {
+        "CLEA": {
+          "0": "{pixScore} Pix",
+          "1": "Beginner 1 ({pixScore} Pix)",
+          "2": "Beginner 2 ({pixScore} Pix)",
+          "3": "Independent 1 ({pixScore} Pix)",
+          "4": "Independent 2 ({pixScore} Pix)",
+          "5": "Advanced 1 ({pixScore} Pix)",
+          "6": "Advanced 2 ({pixScore} Pix)",
+          "7": "Expert 1 ({pixScore} Pix)",
+          "8": "Expert 2 ({pixScore} Pix)",
+          "NONE": "{pixScore} Pix"
+        },
+        "CORE": {
+          "0": "{pixScore} Pix",
+          "1": "Beginner 1 ({pixScore} Pix)",
+          "2": "Beginner 2 ({pixScore} Pix)",
+          "3": "Independent 1 ({pixScore} Pix)",
+          "4": "Independent 2 ({pixScore} Pix)",
+          "5": "Advanced 1 ({pixScore} Pix)",
+          "6": "Advanced 2 ({pixScore} Pix)",
+          "7": "Expert 1 ({pixScore} Pix)",
+          "8": "Expert 2 ({pixScore} Pix)",
+          "NONE": "{pixScore} Pix"
+        },
+        "DROIT": {
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_CPE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "PRO_SANTE": {
+          "NONE": "{pixScore} Pix"
+        }
+      }
+    },
     "fields": {
       "createdAt": "Creation date",
       "id": "Id",
@@ -1219,6 +1268,33 @@
         "unpublish-session": "Unpublish the session"
       },
       "certification": {
+        "certification-types-v1": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Core",
+          "DROIT": "Pix / Pix+ Law",
+          "EDU_1ER_DEGRE": "Pix / Pix+ Edu Primary School",
+          "EDU_2ND_DEGRE": "Pix / Pix+ Edu Secondary School",
+          "EDU_CPE": "Pix / Pix+ Edu CPE",
+          "PRO_SANTE": "Pix / Pix+ Pro Health"
+        },
+        "certification-types-v2": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Core",
+          "DROIT": "Pix / Pix+ Law",
+          "EDU_1ER_DEGRE": "Pix / Pix+ Edu Primary School",
+          "EDU_2ND_DEGRE": "Pix / Pix+ Edu Secondary School",
+          "EDU_CPE": "Pix / Pix+ Edu CPE",
+          "PRO_SANTE": "Pix / Pix+ Pro Health"
+        },
+        "certification-types-v3": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Core",
+          "DROIT": "Pix+ Law",
+          "EDU_1ER_DEGRE": "Pix+ Edu Primary School",
+          "EDU_2ND_DEGRE": "Pix+ Edu Secondary School",
+          "EDU_CPE": "Pix+ Edu CPE",
+          "PRO_SANTE": "Pix+ Pro Health"
+        },
         "details": {
           "title": "Details",
           "v3": {
@@ -1256,9 +1332,9 @@
                 "created-at": "Created on",
                 "ended-at": "Completed on",
                 "ended-by": "Certification completed by",
-                "pix-score": "Score (in pix)"
+                "result": "Result"
               },
-              "title": "Certification N°{certificationCourseId}"
+              "title": "Certification {type} N°{certificationCourseId}"
             },
             "live-alert-modal": {
               "title": {
@@ -1342,7 +1418,7 @@
           "id": "ID",
           "last-name": "Last name",
           "other-certification": "Certification passed",
-          "pix-score": "Score",
+          "results": "Results",
           "started-certification-date": "Start",
           "status": "Status",
           "unresolved-reports": "Unresolved reports"
@@ -1443,9 +1519,17 @@
         "caption": "Candidats",
         "empty-result": "No result",
         "subscriptions": {
-          "complementary": "Complementary ({complementaryCertificationKey})",
+          "complementary": "PIX certification / {pixPlusLabel} complementary",
           "core": "Pix Certification",
-          "dual-core-clea": "Double Certification CléA Numérique"
+          "dual-core-clea": "Double Certification PIX/CléA Numérique",
+          "pix-plus": "{pixPlusLabel} certification",
+          "pix-plus-label": {
+            "DROIT": "Pix+ Law",
+            "EDU_1ER_DEGRE": "Pix+ Edu Primary School",
+            "EDU_2ND_DEGRE": "Pix+ Edu Secondary School",
+            "EDU_CPE": "Pix+ Edu CPE",
+            "PRO_SANTE": "Pix+ Pro Health"
+          }
         }
       },
       "informations": {
@@ -1684,12 +1768,6 @@
         },
         "error-messages": {
           "incorrect-editor-logo-url-format": "The url format of the editor's logo is incorrect."
-        },
-        "form": {
-          "locales": {
-            "label": "Localized languages",
-            "placeholder": "-- Select one or more languages --"
-          }
         },
         "list": {
           "caption": "Trainings list",

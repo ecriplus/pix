@@ -3,7 +3,8 @@ import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CertificationsHeader from 'pix-admin/components/sessions/certifications/header';
-import { FINALIZED, PROCESSED } from 'pix-admin/models/session';
+import { assessmentResultStatus } from 'pix-admin/models/certification';
+import { CREATED, FINALIZED, PROCESSED } from 'pix-admin/models/session';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -115,7 +116,7 @@ module('Integration | Component | certifications/header', function (hooks) {
       module('when the session is not finalized', function () {
         test('should display a disabled publication button with a tooltip', async function (assert) {
           // given
-          const session = store.createRecord('session', { status: 'created', publishedAt: null });
+          const session = store.createRecord('session', { status: CREATED, publishedAt: null });
 
           const juryCertificationSummaries = [];
 
@@ -137,7 +138,7 @@ module('Integration | Component | certifications/header', function (hooks) {
       module('when there are no jury certification summaries', function () {
         test('should display a disabled publication button', async function (assert) {
           // given
-          const session = store.createRecord('session', { publishedAt: null });
+          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
           const juryCertificationSummaries = [];
 
@@ -154,33 +155,14 @@ module('Integration | Component | certifications/header', function (hooks) {
       });
 
       module('when there is only invalid jury certification summaries', function () {
-        module('when the jury certification summary is cancelled', function () {
-          test('should display a disabled publication button', async function (assert) {
-            // given
-            const session = store.createRecord('session', { publishedAt: null });
-
-            const juryCertificationSummaries = [
-              store.createRecord('jury-certification-summary', { status: 'cancelled' }),
-            ];
-
-            // when
-            const screen = await render(
-              <template>
-                <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
-              </template>,
-            );
-
-            // then
-            assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
-          });
-        });
-
         module('when the jury certification summary is on error', function () {
           test('should display a disabled publication button', async function (assert) {
             // given
-            const session = store.createRecord('session', { publishedAt: null });
+            const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
-            const juryCertificationSummaries = [store.createRecord('jury-certification-summary', { status: 'error' })];
+            const juryCertificationSummaries = [
+              store.createRecord('jury-certification-summary', { status: assessmentResultStatus.ERROR }),
+            ];
 
             // when
             const screen = await render(
@@ -198,19 +180,19 @@ module('Integration | Component | certifications/header', function (hooks) {
       module('when a certification the jury certification summaries is not with a Core scope', function () {
         test('should display a disabled publication button', async function (assert) {
           // given
-          const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'PIX_PLUS_DROIT',
+              certificationFramework: 'DROIT',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'CLEA',
+              certificationFramework: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: null,
+              certificationFramework: 'CORE',
               status: 'validated',
             }),
           ];
@@ -230,15 +212,15 @@ module('Integration | Component | certifications/header', function (hooks) {
       module('when every certification in the jury certification summaries is scope CORE', function () {
         test('should display a disabled publication button', async function (assert) {
           // given
-          const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
           const juryCertificationSummaries = [
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: 'CLEA',
+              certificationFramework: 'CLEA',
               status: 'validated',
             }),
             store.createRecord('jury-certification-summary', {
-              complementaryCertificationKeyObtained: null,
+              certificationFramework: 'CORE',
               status: 'validated',
             }),
           ];
@@ -257,10 +239,10 @@ module('Integration | Component | certifications/header', function (hooks) {
       module('when there is only valid jury certification summaries', function () {
         test('should display an enabled publication button', async function (assert) {
           // given
-          const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
           const juryCertificationSummaries = [
-            store.createRecord('jury-certification-summary', { status: 'validated' }),
+            store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
           ];
 
           // when
@@ -278,10 +260,10 @@ module('Integration | Component | certifications/header', function (hooks) {
           test('can cancel publication', async function (assert) {
             // given
             const publishSession = sinon.stub();
-            const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+            const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
             const juryCertificationSummaries = [
-              store.createRecord('jury-certification-summary', { status: 'validated' }),
+              store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
             ];
 
             // when
@@ -307,10 +289,10 @@ module('Integration | Component | certifications/header', function (hooks) {
           test('can confirm publication', async function (assert) {
             // given
             const publishSession = sinon.stub();
-            const session = store.createRecord('session', { publishedAt: null, status: 'finalized' });
+            const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
 
             const juryCertificationSummaries = [
-              store.createRecord('jury-certification-summary', { status: 'validated' }),
+              store.createRecord('jury-certification-summary', { status: 'validated', certificationFramework: 'CORE' }),
             ];
 
             // when

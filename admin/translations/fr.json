@@ -26,6 +26,55 @@
       "organization-not-found-error": "L’organisation \"{organizationId}\" n’existe pas.",
       "pix-admin-login-from-password-disabled-error": "La connexion par email et mot de passe est désactivée. Utilisez un SSO pour vous connecter."
     },
+    "certification": {
+      "meshLevels": {
+        "CLEA": {
+          "0": "{pixScore} Pix",
+          "1": "Novice 1 ({pixScore} Pix)",
+          "2": "Novice 2 ({pixScore} Pix)",
+          "3": "Indépendant 1 ({pixScore} Pix)",
+          "4": "Indépendant 2 ({pixScore} Pix)",
+          "5": "Avancé 1 ({pixScore} Pix)",
+          "6": "Avancé 2 ({pixScore} Pix)",
+          "7": "Expert 1 ({pixScore} Pix)",
+          "8": "Expert 2 ({pixScore} Pix)",
+          "NONE": "{pixScore} Pix"
+        },
+        "CORE": {
+          "0": "{pixScore} Pix",
+          "1": "Novice 1 ({pixScore} Pix)",
+          "2": "Novice 2 ({pixScore} Pix)",
+          "3": "Indépendant 1 ({pixScore} Pix)",
+          "4": "Indépendant 2 ({pixScore} Pix)",
+          "5": "Avancé 1 ({pixScore} Pix)",
+          "6": "Avancé 2 ({pixScore} Pix)",
+          "7": "Expert 1 ({pixScore} Pix)",
+          "8": "Expert 2 ({pixScore} Pix)",
+          "NONE": "{pixScore} Pix"
+        },
+        "DROIT": {
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "EDU_CPE": {
+          "0": "Non-admissible",
+          "1": "Admissible",
+          "NONE": "{pixScore} Pix"
+        },
+        "PRO_SANTE": {
+          "NONE": "{pixScore} Pix"
+        }
+      }
+    },
     "fields": {
       "actions": "Actions",
       "createdAt": "Date de création",
@@ -1222,6 +1271,33 @@
         "unpublish-session": "Dépublier la session"
       },
       "certification": {
+        "certification-types-v1": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Cœur",
+          "DROIT": "PIX / Pix+ Droit",
+          "EDU_1ER_DEGRE": "PIX / Pix+ Édu 1er degré",
+          "EDU_2ND_DEGRE": "PIX / Pix+ Édu 2nd degré",
+          "EDU_CPE": "PIX / Pix+ Édu CPE",
+          "PRO_SANTE": "PIX / Pix+ Pro Santé"
+        },
+        "certification-types-v2": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Cœur",
+          "DROIT": "PIX / Pix+ Droit",
+          "EDU_1ER_DEGRE": "PIX / Pix+ Édu 1er degré",
+          "EDU_2ND_DEGRE": "PIX / Pix+ Édu 2nd degré",
+          "EDU_CPE": "PIX / Pix+ Édu CPE",
+          "PRO_SANTE": "PIX / Pix+ Pro Santé"
+        },
+        "certification-types-v3": {
+          "CLEA": "PIX / CléA Numérique",
+          "CORE": "Pix Cœur",
+          "DROIT": "Pix+ Droit",
+          "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+          "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+          "EDU_CPE": "Pix+ Édu CPE",
+          "PRO_SANTE": "Pix+ Pro Santé"
+        },
         "details": {
           "title": "Détails",
           "v3": {
@@ -1259,9 +1335,9 @@
                 "created-at": "Créée le",
                 "ended-at": "Terminée le",
                 "ended-by": "Certification terminée par",
-                "pix-score": "Score (en pix)"
+                "result": "Résultat"
               },
-              "title": "Certification N°{certificationCourseId}"
+              "title": "Certification {type} N°{certificationCourseId}"
             },
             "live-alert-modal": {
               "title": {
@@ -1345,7 +1421,7 @@
           "id": "ID",
           "last-name": "Nom",
           "other-certification": "Certification passée",
-          "pix-score": "Score",
+          "results": "Résultats",
           "started-certification-date": "Début",
           "status": "Statut",
           "unresolved-reports": "Signalements impactants non résolus"
@@ -1446,9 +1522,17 @@
         "caption": "Candidats",
         "empty-result": "Aucun résultat",
         "subscriptions": {
-          "complementary": "Complémentaire ({complementaryCertificationKey})",
+          "complementary": "Certification PIX / Complémentaire {pixPlusLabel}",
           "core": "Certification Pix",
-          "dual-core-clea": "Double Certification CléA Numérique"
+          "dual-core-clea": "Double Certification PIX/CléA Numérique",
+          "pix-plus": "Certification {pixPlusLabel}",
+          "pix-plus-label": {
+            "DROIT": "Pix+ Droit",
+            "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+            "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+            "EDU_CPE": "Pix+ Édu CPE",
+            "PRO_SANTE": "Pix+ Pro Santé"
+          }
         }
       },
       "informations": {

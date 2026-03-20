@@ -1,12 +1,10 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
 import { JuryCertificationSummary } from '../../domain/read-models/JuryCertificationSummary.js';
 
-const findBySessionId = async function ({ sessionId }) {
+export async function findBySessionId({ sessionId }) {
   const certificationCourseIds =
     await _getCertificationCoursesIdBySessionIdQuery(sessionId).pluck('certification-courses.id');
   const orderResults = await _getByCertificationCourseIds(certificationCourseIds);
@@ -14,9 +12,9 @@ const findBySessionId = async function ({ sessionId }) {
   const juryCertificationSummaryDTOs = await _getJuryCertificationSummaries(orderResults);
 
   return juryCertificationSummaryDTOs.map(_toDomain);
-};
+}
 
-const findBySessionIdPaginated = async function ({ page, sessionId }) {
+export async function findBySessionIdPaginated({ page, sessionId }) {
   const query = _getCertificationCoursesIdBySessionIdQuery(sessionId);
 
   const { results: orderedCertificationCourseIdsInObjects, pagination } = await fetchPage({
@@ -33,9 +31,7 @@ const findBySessionIdPaginated = async function ({ page, sessionId }) {
     pagination,
     juryCertificationSummaries,
   };
-};
-
-export { findBySessionId, findBySessionIdPaginated };
+}
 
 async function _getJuryCertificationSummaries(results) {
   const knexConn = DomainTransaction.getConnection();
@@ -45,21 +41,16 @@ async function _getJuryCertificationSummaries(results) {
     certificationCourseIds,
   );
 
-  const juryCertificationSummaryDTOs = _buildJuryCertificationSummaryDTOs(results, certificationIssueReportRows);
-  return juryCertificationSummaryDTOs;
+  return _buildJuryCertificationSummaryDTOs(results, certificationIssueReportRows);
 }
 
 async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
   const knexConn = DomainTransaction.getConnection();
   const results = await knexConn
-    .select('certification-courses.*', 'assessment-results.pixScore')
+    .select('certification-courses.*', 'assessment-results.pixScore', 'assessment-results.reachedMeshIndex')
     .select({
       assessmentResultStatus: 'assessment-results.status',
       assessmentState: 'assessments.state',
-    })
-    .select({
-      complementaryCertificationLabelObtained: 'complementary-certifications.label',
-      complementaryCertificationKeyObtained: 'complementary-certifications.key',
     })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -72,16 +63,6 @@ async function _getByCertificationCourseIds(orderedCertificationCourseIds) {
       'assessment-results',
       'assessment-results.id',
       'certification-courses-last-assessment-results.lastAssessmentResultId',
-    )
-    .leftJoin(
-      'complementary-certification-courses',
-      'complementary-certification-courses.certificationCourseId',
-      'certification-courses.id',
-    )
-    .leftJoin(
-      'complementary-certifications',
-      'complementary-certifications.id',
-      'complementary-certification-courses.complementaryCertificationId',
     )
     .whereIn('certification-courses.id', orderedCertificationCourseIds);
 
@@ -118,9 +99,9 @@ function _getCertificationCoursesIdBySessionIdQuery(sessionId) {
 
 function _buildJuryCertificationSummaryDTOs(juryCertificationSummaryRows, certificationIssueReportRows) {
   return juryCertificationSummaryRows.map((juryCertificationSummaryRow) => {
-    const certificationIssueReports = _.filter(certificationIssueReportRows, {
-      certificationCourseId: juryCertificationSummaryRow.id,
-    });
+    const certificationIssueReports = certificationIssueReportRows.filter(
+      ({ certificationCourseId }) => certificationCourseId === juryCertificationSummaryRow.id,
+    );
 
     return {
       ...juryCertificationSummaryRow,
@@ -135,11 +116,12 @@ function _toDomain(juryCertificationSummaryDTO) {
       return new CertificationIssueReport(certificationIssueReportDTO);
     },
   );
-
   return new JuryCertificationSummary({
     ...juryCertificationSummaryDTO,
+    algorithmVersion: juryCertificationSummaryDTO.version,
     status: juryCertificationSummaryDTO.assessmentResultStatus,
     isEndedByInvigilator: juryCertificationSummaryDTO.assessmentState === Assessment.states.ENDED_BY_INVIGILATOR,
+    certificationFramework: juryCertificationSummaryDTO.framework,
     certificationIssueReports,
   });
 }

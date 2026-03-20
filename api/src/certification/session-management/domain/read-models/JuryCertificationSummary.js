@@ -1,5 +1,4 @@
 import { status as assessmentResultStatuses } from '../../../../shared/domain/models/AssessmentResult.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 const STARTED = 'started';
 const ENDED_BY_INVIGILATOR = 'endedByInvigilator';
 const CORE_CERTIFICATION = 'CORE';
@@ -12,26 +11,25 @@ export class JuryCertificationSummary {
     lastName,
     status,
     pixScore,
+    algorithmVersion,
+    reachedMeshIndex,
     createdAt,
     completedAt,
     abortReason,
     isPublished,
     isEndedByInvigilator,
-    complementaryCertificationLabelObtained,
-    complementaryCertificationKeyObtained,
+    certificationFramework,
     certificationIssueReports,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.status = _getStatus({ status, isEndedByInvigilator });
+    this.algorithmVersion = algorithmVersion;
     this.pixScore = pixScore;
+    this.reachedMeshIndex = reachedMeshIndex;
     this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
-    this.certificationObtained = _getCertificationObtained({
-      complementaryCertificationLabelObtained,
-      complementaryCertificationKeyObtained,
-    });
-    this.complementaryCertificationKeyObtained = complementaryCertificationKeyObtained;
+    this.certificationFramework = certificationFramework;
     this.createdAt = createdAt;
     this.completedAt = completedAt;
     this.isPublished = isPublished;
@@ -75,14 +73,4 @@ function _getStatus({ status, isEndedByInvigilator }) {
   }
 
   return status;
-}
-
-function _getCertificationObtained({ complementaryCertificationLabelObtained, complementaryCertificationKeyObtained }) {
-  if (!complementaryCertificationLabelObtained) {
-    return CORE_CERTIFICATION;
-  }
-  if (complementaryCertificationKeyObtained === ComplementaryCertificationKeys.CLEA) {
-    return DOUBLE_CORE_CLEA_CERTIFICATION;
-  }
-  return complementaryCertificationLabelObtained;
 }

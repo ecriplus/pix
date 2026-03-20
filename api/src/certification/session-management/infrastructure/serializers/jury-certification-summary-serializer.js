@@ -25,6 +25,8 @@ const serialize = function (juryCertificationSummary, meta, { translate }) {
       'lastName',
       'status',
       'pixScore',
+      'algorithmVersion',
+      'reachedMeshIndex',
       'createdAt',
       'completedAt',
       'isPublished',
@@ -32,8 +34,7 @@ const serialize = function (juryCertificationSummary, meta, { translate }) {
       'numberOfCertificationIssueReports',
       'numberOfCertificationIssueReportsWithRequiredAction',
       'isFlaggedAborted',
-      'certificationObtained',
-      'complementaryCertificationKeyObtained',
+      'certificationFramework',
     ],
     meta,
   }).serialize(juryCertificationSummary);

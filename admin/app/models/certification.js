@@ -47,9 +47,11 @@ export default class Certification extends Model {
   @attr('string') commentForOrganization;
   @attr('string') commentByJury;
   @attr() pixScore;
+  @attr() reachedMeshIndex;
   @attr() competencesWithMark;
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
+  @attr('string') certificationFramework;
 
   @belongsTo('complementary-certification-course-result-with-external', { async: true, inverse: null })
   complementaryCertificationCourseResultWithExternal;
@@ -64,6 +66,12 @@ export default class Certification extends Model {
 
   get completionDate() {
     return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
+  }
+
+  get certificationType() {
+    return this.intl.t(
+      `pages.certifications.certification.certification-types-v${this.version}.${this.certificationFramework}`,
+    );
   }
 
   get statusLabelAndValue() {
@@ -106,6 +114,13 @@ export default class Certification extends Model {
 
   get isV3() {
     return this.version === 3;
+  }
+
+  get result() {
+    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+      pixScore: this.pixScore,
+    });
   }
 
   wasBornInFrance() {

@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -448,9 +449,11 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'ended-at': null,
           'is-rejected-for-fraud': false,
           'pix-score': assessmentResult.pixScore,
+          'reached-mesh-index': assessmentResult.reachedMeshIndex,
           'number-of-challenges': 10,
           'assessment-state': 'completed',
           'assessment-result-status': 'validated',
+          'certification-framework': Frameworks.CORE,
         },
         id: certificationCourse.id.toString(),
         relationships: {

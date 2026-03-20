@@ -129,9 +129,16 @@ module('Integration | Component | Certifications | certification > details v3', 
         const creationDate = await screen.getByLabelText('Créée le :').innerText;
 
         // then
-        const pixScoreLabel = t('pages.certifications.certification.details.v3.general-informations.labels.pix-score');
+        const pixScoreLabel = t('pages.certifications.certification.details.v3.general-informations.labels.result');
 
-        assert.dom(screen.getByRole('heading', { name: 'Certification N°123456', level: 2 })).exists();
+        assert
+          .dom(
+            screen.getByRole('heading', {
+              name: 'Certification Pix Cœur N°123456',
+              level: 2,
+            }),
+          )
+          .exists();
         assert.dom(screen.getByLabelText(`${pixScoreLabel} :`)).exists();
         assert.strictEqual(creationDate, '13/01/2023 08:00:00');
       });
@@ -618,6 +625,8 @@ function createCertificationCourseDetailsRecord({ certificationChallengesForAdmi
     completedAt: new Date('2023-01-13T09:05:00'),
     assessmentResultStatus: 'validated',
     numberOfChallenges: 15,
+    certificationFramework: 'CORE',
+    reachedMeshIndex: 5,
     certificationChallengesForAdministration,
     ...params,
   });

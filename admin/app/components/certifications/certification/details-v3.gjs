@@ -201,13 +201,12 @@ export default class DetailsV3 extends Component {
       <section class="page-section">
         <div class="certification-details-v3-header" id="general-informations">
           <h2 class="certification-details-v3__title">
-            {{t
-              "pages.certifications.certification.details.v3.general-informations.title"
-              certificationCourseId=@details.certificationCourseId
-            }}
+            {{@details.title}}
           </h2>
           {{#if @details.assessmentResultStatus}}
-            <PixTag @color={{this.detailStatusColor}}>{{t this.detailStatusLabel}}</PixTag>
+            <PixTag data-testid="pw-certification-general-information-status-tag" @color={{this.detailStatusColor}}>{{t
+                this.detailStatusLabel
+              }}</PixTag>
           {{/if}}
         </div>
         <dl
@@ -266,11 +265,11 @@ export default class DetailsV3 extends Component {
             <dd aria-labelledby="abort-reason">{{t this.abortReasonLabel}}</dd>
           {{/if}}
 
-          <dt id="pix-score">
-            {{t "pages.certifications.certification.details.v3.general-informations.labels.pix-score"}}
+          <dt id="results">
+            {{t "pages.certifications.certification.details.v3.general-informations.labels.result"}}
             :
           </dt>
-          <dd aria-labelledby="pix-score">{{@details.pixScore}}</dd>
+          <dd aria-labelledby="results">{{@details.result}}</dd>
         </dl>
       </section>
       <section class="page-section">

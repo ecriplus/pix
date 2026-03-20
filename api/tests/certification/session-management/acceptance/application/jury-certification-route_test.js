@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
 import {
@@ -30,6 +31,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         isPublished: true,
         createdAt: new Date('2020-01-01'),
         completedAt: new Date('2020-02-01'),
+        framework: Frameworks.CLEA,
       });
 
       const pixBoxeComplementaryCertificationId = databaseBuilder.factory.buildComplementaryCertification({
@@ -98,6 +100,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         id: 456,
         assessmentId: 159,
         pixScore: 55,
+        reachedMeshIndex: 1,
         juryId: 66,
         commentByAutoJury: AutoJuryCommentKeys.FRAUD,
         commentByJury: 'comment jury',
@@ -146,6 +149,8 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'created-at': new Date('2020-01-01'),
           'completed-at': new Date('2020-02-01'),
           'pix-score': 55,
+          'reached-mesh-index': 1,
+          'certification-framework': 'CLEA',
           'jury-id': 66,
           'comment-for-candidate':
             "Les conditions de passation du test de certification n'ayant pas été respectées et ayant fait l'objet d'un signalement pour fraude, votre certification a été invalidée en conséquence.",

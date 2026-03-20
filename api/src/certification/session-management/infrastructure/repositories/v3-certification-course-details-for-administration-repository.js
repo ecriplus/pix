@@ -37,7 +37,9 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
       assessmentState: 'assessments.state',
       assessmentResultStatus: 'assessment-results.status',
       pixScore: 'assessment-results.pixScore',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       endedAt: 'certification-courses.endedAt',
+      certificationFramework: 'certification-courses.framework',
     })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

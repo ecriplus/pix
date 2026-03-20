@@ -93,12 +93,14 @@ function _selectJuryCertifications(knexConn) {
       assessmentId: 'assessments.id',
       assessmentResultId: 'assessment-results.id',
       pixScore: 'assessment-results.pixScore',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       juryId: 'assessment-results.juryId',
       assessmentResultStatus: 'assessment-results.status',
       commentForCandidate: 'assessment-results.commentForCandidate',
       commentForOrganization: 'assessment-results.commentForOrganization',
       commentByJury: 'assessment-results.commentByJury',
       commentByAutoJury: 'assessment-results.commentByAutoJury',
+      certificationFramework: 'certification-courses.framework',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

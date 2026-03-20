@@ -23,6 +23,7 @@ const buildJuryCertification = function ({
   createdAt = new Date('2020-01-01'),
   completedAt = new Date('2020-02-01'),
   pixScore = 55,
+  reachedMeshIndex = 5,
   juryId = 66,
   commentForCandidate = 'comment candidate',
   commentForOrganization = 'comment organization',
@@ -33,6 +34,7 @@ const buildJuryCertification = function ({
   commonComplementaryCertificationCourseResult,
   complementaryCertificationCourseResultWithExternal,
   version = AlgorithmEngineVersion.V2,
+  certificationFramework = null,
 } = {}) {
   return new JuryCertification({
     certificationCourseId,
@@ -53,6 +55,7 @@ const buildJuryCertification = function ({
     createdAt,
     completedAt,
     pixScore,
+    reachedMeshIndex,
     juryId,
     commentForCandidate: new JuryComment({
       commentByAutoJury,
@@ -70,6 +73,7 @@ const buildJuryCertification = function ({
     commonComplementaryCertificationCourseResult,
     complementaryCertificationCourseResultWithExternal,
     version,
+    certificationFramework,
   });
 };
 

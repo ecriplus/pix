@@ -8,7 +8,6 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
-import { assessmentResultStatus } from '../../../models/certification';
 import ConfirmPopup from '../../confirm-popup';
 
 export default class CertificationsHeader extends Component {
@@ -20,11 +19,9 @@ export default class CertificationsHeader extends Component {
 
   get canPublish() {
     return (
-      !this.args.juryCertificationSummaries.some((certification) => {
-        const certificationOnError = certification.status === assessmentResultStatus.ERROR;
-
-        return certificationOnError || !certification.isCertificationWithCoreScope;
-      }) && this.args.session.isFinalized
+      this.args.juryCertificationSummaries.length > 0 &&
+      this.args.juryCertificationSummaries.every((certification) => certification.canPublish) &&
+      this.args.session.isFinalized
     );
   }
 

@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { registerPublishableSession } from '../../../../../../src/certification/session-management/domain/usecases/register-publishable-session.js';
@@ -39,7 +40,7 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       createdAt: new Date(),
       completedAt: new Date(),
       isPublished: false,
-      cleaCertificationStatus: 'not_passed',
+      certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
         domainBuilder.buildCertificationIssueReport({
           category: CertificationIssueReportCategory.NON_BLOCKING_TECHNICAL_ISSUE,

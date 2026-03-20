@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as serializer from '../../../../../../src/certification/session-management/infrastructure/serializers/jury-certification-serializer.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -43,11 +44,13 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
           isRejectedForFraud: false,
           juryId: 1,
           pixScore: 555,
+          reachedMeshIndex: 5,
           commentForCandidate: 'coucou',
           commentForOrganization: 'comment',
           commentByJury: 'ça va',
           competenceMarks,
           version: 2,
+          certificationFramework: Frameworks.CORE,
           certificationIssueReports,
           commonComplementaryCertificationCourseResult:
             domainBuilder.buildComplementaryCertificationCourseResultForJuryCertification({
@@ -106,11 +109,13 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
               'is-rejected-for-fraud': false,
               'jury-id': 1,
               'pix-score': 555,
+              'reached-mesh-index': 5,
               'competences-with-mark': juryCertification.competenceMarks,
               'comment-for-candidate': 'coucou',
               'comment-by-jury': 'ça va',
               'comment-for-organization': 'comment',
               version: 2,
+              'certification-framework': Frameworks.CORE,
             },
             relationships: {
               'certification-issue-reports': {
@@ -218,12 +223,14 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
           isRejectedForFraud: false,
           juryId: 1,
           pixScore: 555,
+          reachedMeshIndex: 5,
           commentForCandidate: 'coucou',
           commentForOrganization: 'comment',
           commentByJury: 'ça va',
           commentByAutoJury: AutoJuryCommentKeys.FRAUD,
           competenceMarks,
           version: 2,
+          certificationFramework: Frameworks.CORE,
           certificationIssueReports,
           commonComplementaryCertificationCourseResult:
             domainBuilder.buildComplementaryCertificationCourseResultForJuryCertification({
@@ -282,11 +289,13 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
               'is-rejected-for-fraud': false,
               'jury-id': 1,
               'pix-score': 555,
+              'reached-mesh-index': 5,
               'competences-with-mark': juryCertification.competenceMarks,
               'comment-for-candidate': translate('jury.comment.FRAUD.candidate'),
               'comment-by-jury': 'ça va',
               'comment-for-organization': translate('jury.comment.FRAUD.organization'),
               version: 2,
+              'certification-framework': Frameworks.CORE,
             },
             relationships: {
               'certification-issue-reports': {

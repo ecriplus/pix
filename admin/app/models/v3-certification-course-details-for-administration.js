@@ -1,3 +1,4 @@
+import { service } from '@ember/service';
 import Model, { attr, hasMany } from '@ember-data/model';
 import { assessmentStates } from 'pix-admin/models/certification';
 
@@ -9,6 +10,8 @@ export const abortReasons = {
 };
 
 export default class V3CertificationCourseDetailsForAdministration extends Model {
+  @service intl;
+
   @attr('number') certificationCourseId;
   @attr('boolean') isRejectedForFraud;
   @attr('date') createdAt;
@@ -18,7 +21,9 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('string') assessmentState;
   @attr('string') abortReason;
   @attr('number') pixScore;
+  @attr('number') reachedMeshIndex;
   @attr('number') numberOfChallenges;
+  @attr('string') certificationFramework;
   @hasMany('certification-challenges-for-administration', { async: true, inverse: null })
   certificationChallengesForAdministration;
   version = 3;
@@ -78,5 +83,22 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
     return [assessmentStates.ENDED_BY_INVIGILATOR, assessmentStates.ENDED_DUE_TO_FINALIZATION].includes(
       this.assessmentState,
     );
+  }
+
+  get result() {
+    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+      pixScore: this.pixScore,
+    });
+  }
+
+  get title() {
+    const certificationTypeLabel = this.intl.t(
+      `pages.certifications.certification.certification-types-v3.${this.certificationFramework}`,
+    );
+    return this.intl.t('pages.certifications.certification.details.v3.general-informations.title', {
+      type: certificationTypeLabel,
+      certificationCourseId: this.certificationCourseId,
+    });
   }
 }

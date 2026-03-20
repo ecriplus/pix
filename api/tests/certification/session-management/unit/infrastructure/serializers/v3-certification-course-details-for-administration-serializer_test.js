@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { V3CertificationChallengeForAdministration } from '../../../../../../src/certification/session-management/domain/models/V3CertificationChallengeForAdministration.js';
 import { V3CertificationChallengeLiveAlertForAdministration } from '../../../../../../src/certification/session-management/domain/models/V3CertificationChallengeLiveAlertForAdministration.js';
 import { V3CertificationCourseDetailsForAdministration } from '../../../../../../src/certification/session-management/domain/models/V3CertificationCourseDetailsForAdministration.js';
@@ -29,6 +30,8 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
       const abortReason = ABORT_REASONS.CANDIDATE;
       const pixScore = 60;
+      const reachedMeshIndex = 1;
+      const certificationFramework = Frameworks.CORE;
 
       const certificationChallenge = new V3CertificationChallengeForAdministration({
         challengeId,
@@ -63,7 +66,9 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
             'assessment-result-status': assessmentResultStatus,
             'abort-reason': abortReason,
             'pix-score': pixScore,
+            'reached-mesh-index': reachedMeshIndex,
             'number-of-challenges': 20,
+            'certification-framework': certificationFramework,
           },
         },
         included: [
@@ -96,8 +101,10 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
         assessmentResultStatus,
         abortReason,
         pixScore,
+        reachedMeshIndex,
         numberOfChallenges,
         certificationChallengesForAdministration: [certificationChallenge],
+        certificationFramework,
       });
 
       // when
