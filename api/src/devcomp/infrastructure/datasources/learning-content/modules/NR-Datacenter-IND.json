@@ -99,7 +99,7 @@
               "element": {
                 "id": "7c644dba-eb4a-479e-b826-bf63696092ee",
                 "type": "text",
-                "content": "<p>Bien qu’exceptionnel, cet incendie  a rappelé à quel point nos usages numériques reposent sur des <strong>infrastructures physiques</strong>, qu’il est nécessaire de contrôler et de surveiller&nbsp;: les <strong>centres de données</strong>. Voyons concrètement à quoi ressemble un centre de données et comment tout est mis en place pour éviter ce type d’incident.</p>"
+                "content": "<p>Bien qu’exceptionnel, cet incendie a rappelé à quel point nos usages numériques reposent sur des <strong>infrastructures physiques</strong>, qu’il est nécessaire de contrôler et de surveiller&nbsp;: les <strong>centres de données</strong>. Voyons concrètement à quoi ressemble un centre de données et comment tout est mis en place pour éviter ce type d’incident.</p>"
               }
             }
           ]
@@ -146,7 +146,7 @@
                     {
                       "id": "16ed595e-51f0-4286-8862-fb34019be450",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Pourquoi y a-t-il  des systèmes de sécurité aussi poussés dans un centre de données ?</p>",
+                      "instruction": "<p>Pourquoi y a-t-il des systèmes de sécurité aussi poussés dans un centre de données ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -318,7 +318,7 @@
                           "id": "1",
                           "content": "<p>Pour fournir de l’électricité aux habitations à proximité.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non  ! Ce générateur électrique permet de prendre le relais du réseau électrique en cas de coupure de courant. En effet, un centre de données <strong>ne doit pas s’arrêter de fonctionner</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Ce générateur électrique permet de prendre le relais du réseau électrique en cas de coupure de courant. En effet, un centre de données <strong>ne doit pas s’arrêter de fonctionner</strong>.</p>"
                           }
                         },
                         {
@@ -365,7 +365,7 @@
                     {
                       "id": "aa4ceb37-21c7-42be-a322-09262f76ab48",
                       "type": "text",
-                      "content": "<p>Vous l’aurez compris, tout est  mis en place dans un centre de données pour que les serveurs tournent 24 heures sur 24, 7 jours sur 7.</p>"
+                      "content": "<p>Vous l’aurez compris, tout est mis en place dans un centre de données pour que les serveurs tournent 24 heures sur 24, 7 jours sur 7.</p>"
                     }
                   ]
                 },
@@ -671,7 +671,7 @@
                     {
                       "id": "069b9b8e-43d0-43d3-bd38-18c57e2f0fc2",
                       "type": "text",
-                      "content": "<p><strong>Et cette consommation d’énergie augmente  ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. Selon l’Agence internationale de l’énergie,&nbsp;en 2030, ces besoins auront <strong>doublé </strong>par rapport à 2025. <br></p>"
+                      "content": "<p><strong>Et cette consommation d’énergie augmente ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. Selon l’Agence internationale de l’énergie,&nbsp;en 2030, ces besoins auront <strong>doublé </strong>par rapport à 2025. <br></p>"
                     }
                   ]
                 },
@@ -829,7 +829,7 @@
                     "content": "<p>Les climatiseurs rejettent des gaz toxiques dans l’environnement.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse !<br></p>",
-                      "diagnosis": "<p>Les climatiseurs&nbsp;ne rejettent pas  de gaz toxiques en fonctionnement normal.</p>"
+                      "diagnosis": "<p>Les climatiseurs&nbsp;ne rejettent pas de gaz toxiques en fonctionnement normal.</p>"
                     }
                   }
                 ],
