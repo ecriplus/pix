@@ -395,6 +395,52 @@
               }
             }
           ]
+        },
+        {
+          "id": "c4035d28-df59-4d17-aea2-8e50560d5bf6",
+          "type": "short-lesson",
+          "title": "L'impact de l'utilisation de l'IA",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "<p>L’entraînement d’un nouveau modèle d’IA est donc très coûteux en énergie.</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "2c1c5be2-a58d-475d-afec-dc7b6ad88e8e",
+                      "type": "text",
+                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des IA : ils sont nécessaires pour effectuer des calculs et stocker des informations pour de la génération des réponses. Du fait de l’explosion des usages en IA, l’impact de l’utilisation des IA dépasse maintenant celui de leur entraînement.<br><br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5878e032-208b-4e28-94d2-9fb5e1b47884",
+                      "type": "text",
+                      "content": "<h5>Alors, quel est l’impact si l’on prend en compte l’entraînement et l’utilisation des IA ?&nbsp; </h5>\n<p>Difficile à dire mais à titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023).&nbsp; Cette massification résulte notamment d'une volonté des acteurs du numérique d'imposer l'usage de l'IA dans les outils numériques existants, et dans leurs entreprises.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5a8135d7-51c9-4a21-ad67-e85c9db3b280",
+          "type": "transition",
+          "title": "transition",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "69b48f4c-a274-42ca-b7c3-77098bbcb574",
+                "type": "text",
+                "content": "<p>Donc ce n’est pas prêt de s’arrêter… Voyons pourquoi.<br></p>"
+              }
+            }
+          ]
         }
       ]
     }
