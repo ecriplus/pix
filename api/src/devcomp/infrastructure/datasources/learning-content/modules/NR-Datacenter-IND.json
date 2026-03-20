@@ -43,7 +43,7 @@
                 "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_feu_illu_v2.svg",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "                                                                               L’incendie du centre de données OVH à Strasbourg",
+                "legend": "",
                 "licence": ""
               }
             },
@@ -137,8 +137,8 @@
                     {
                       "id": "e77af6ae-057c-47f1-82e0-5b6ca6f47ec0",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/systeme-securite.png",
-                      "alt": "photos de système de sécurité",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_img_secu_1000x800px.psd",
+                      "alt": "photos de système de sécurité à code et empreinte digitale",
                       "alternativeText": "",
                       "legend": "",
                       "licence": ""
@@ -192,7 +192,7 @@
                     {
                       "id": "e140a09f-0778-4bd3-acc8-ccd478161658",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/salle-serveurs.png",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_img_serveurs.png",
                       "alt": "salle des serveurs d’un centre de données. ",
                       "alternativeText": "",
                       "legend": "",
@@ -247,9 +247,9 @@
                     {
                       "id": "3120d30a-4fa0-46f3-a567-6871dcf740fb",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_datacenter_IND/climatisation.png",
-                      "alt": "photo d’un système de refroidissement",
-                      "alternativeText": "",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_IND/nr_datacenter_ind_img_clim.png",
+                      "alt": "photo d’un système de refroidissement extérieur ",
+                      "alternativeText": "<p><br></p>",
                       "legend": "",
                       "licence": ""
                     },
