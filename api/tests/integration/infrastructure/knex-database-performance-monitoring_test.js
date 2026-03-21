@@ -1,6 +1,6 @@
 import { knex } from '../../../db/knex-database-connection.js';
 import { config } from '../../../src/shared/config.js';
-import { executeInContext, getContext } from '../../../src/shared/infrastructure/execution-context-manager.js';
+import { executeInContext, getInContext } from '../../../src/shared/infrastructure/execution-context-manager.js';
 import { expect, sinon } from '../../test-helper.js';
 const selectQuery = knex.raw('SELECT 1 as value');
 
@@ -12,14 +12,14 @@ describe('Integration | Infrastructure | knex-database-performance-monitoring', 
 
     it('should store query count in context, but not the total time spent', async function () {
       // when
-      const store = await executeInContext({}, async () => {
+      const metrics = await executeInContext({}, async () => {
         await selectQuery;
-        return getContext();
+        return getInContext('metrics');
       });
 
       // then
-      expect(store.metrics.knexQueryCount).to.equal(1);
-      expect(store.metrics.knexTotalTimeSpent).to.not.exist;
+      expect(metrics.knexQueryCount).to.equal(1);
+      expect(metrics.knexTotalTimeSpent).to.not.exist;
     });
   });
 
@@ -30,14 +30,14 @@ describe('Integration | Infrastructure | knex-database-performance-monitoring', 
 
     it('should store query count and total time spent in context', async function () {
       // when
-      const store = await executeInContext({}, async () => {
+      const metrics = await executeInContext({}, async () => {
         await selectQuery;
-        return getContext();
+        return getInContext('metrics');
       });
 
       // then
-      expect(store.metrics.knexQueryCount).to.equal(1);
-      expect(store.metrics.knexTotalTimeSpent).to.be.above(0);
+      expect(metrics.knexQueryCount).to.equal(1);
+      expect(metrics.knexTotalTimeSpent).to.be.above(0);
     });
   });
 });

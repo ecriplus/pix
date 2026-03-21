@@ -5,6 +5,7 @@ import {
   executeInContext,
   EXECUTORS,
   getContext,
+  getCorrelationInfo,
 } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobQueue } from '../../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
@@ -81,9 +82,9 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
 
             handle(_) {
               try {
-                const currentContext = getContext();
-                sinon.assert.match(currentContext, {
-                  user_id: null, // put by getCorrelationContext() call in performAsync, default value
+                const correlationInfo = getCorrelationInfo();
+                sinon.assert.match(correlationInfo, {
+                  user_id: null,
                   request_id: null,
                   scriptName: null,
                   jobId: sinon.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/),
