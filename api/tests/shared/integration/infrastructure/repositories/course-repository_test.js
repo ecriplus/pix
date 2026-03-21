@@ -1,6 +1,7 @@
+import { config } from '../../../../../src/shared/config.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as courseRepository from '../../../../../src/shared/infrastructure/repositories/course-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | course-repository', function () {
   const courseData0 = {
@@ -27,25 +28,33 @@ describe('Integration | Repository | course-repository', function () {
     await databaseBuilder.commit();
   });
 
-  describe('#get', function () {
-    context('when course found for given id', function () {
-      it('should return the course', async function () {
-        // when
-        const course = await courseRepository.get('courseId1');
-
-        // then
-        expect(course).to.deepEqualInstance(domainBuilder.buildCourse(courseData1));
+  [false, true].forEach((cacheResultIds) =>
+    describe(`when cacheResultIds is ${cacheResultIds}`, function () {
+      beforeEach(function () {
+        sinon.stub(config.lcms, 'cacheResultIds').value(cacheResultIds);
       });
-    });
 
-    context('when no course found', function () {
-      it('should throw a NotFound error', async function () {
-        // when
-        const err = await catchErr(courseRepository.get, courseRepository)('coucouLoulou');
+      describe('#get', function () {
+        context('when course found for given id', function () {
+          it('should return the course', async function () {
+            // when
+            const course = await courseRepository.get('courseId1');
 
-        // then
-        expect(err).to.be.instanceOf(NotFoundError);
+            // then
+            expect(course).to.deepEqualInstance(domainBuilder.buildCourse(courseData1));
+          });
+        });
+
+        context('when no course found', function () {
+          it('should throw a NotFound error', async function () {
+            // when
+            const err = await catchErr(courseRepository.get, courseRepository)('coucouLoulou');
+
+            // then
+            expect(err).to.be.instanceOf(NotFoundError);
+          });
+        });
       });
-    });
-  });
+    }),
+  );
 });

@@ -1,5 +1,6 @@
 import Dataloader from 'dataloader';
 
+import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
 import { createHistogram } from '../metrics/metrics.js';
@@ -79,6 +80,57 @@ export class LearningContentRepository {
    * @returns {Promise<object[]>}
    */
   async find(cacheKey, callback) {
+    if (!config.lcms.cacheResultIds) return this.#findDtos(cacheKey, callback);
+
+    const ids = await this.#findIds(cacheKey, callback);
+
+    return this.#loadMany(ids);
+  }
+
+  /**
+   * Finds several entity ids using a request and caches results.
+   * @param {string} cacheKey
+   * @param {QueryBuilderCallback} callback
+   * @returns {Promise<string[]|number[]>}
+   */
+  async #findIds(cacheKey, callback) {
+    let ids;
+    let stopFindCachePenaltyTimer;
+
+    try {
+      ids = this.#findCache.get(cacheKey);
+      if (ids) return ids;
+
+      let idsPromise = this.#findCacheMiss.get(cacheKey);
+      if (idsPromise) {
+        stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
+        ids = await idsPromise.finally(() => {
+          stopFindCachePenaltyTimer();
+        });
+
+        this.#metrics.findCacheMiss.observe(ids.length);
+
+        return ids;
+      }
+
+      stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
+      idsPromise = this.#loadIds(callback, cacheKey).finally(() => {
+        this.#findCacheMiss.delete(cacheKey);
+        stopFindCachePenaltyTimer();
+      });
+      this.#findCacheMiss.set(cacheKey, idsPromise);
+
+      ids = await idsPromise;
+
+      this.#metrics.findCacheMiss.observe(ids.length);
+
+      return ids;
+    } finally {
+      if (ids) this.#metrics.find.observe(ids.length);
+    }
+  }
+
+  async #findDtos(cacheKey, callback) {
     let dtos;
     let stopFindCachePenaltyTimer;
 
@@ -168,6 +220,22 @@ export class LearningContentRepository {
     }
 
     return dtos;
+  }
+
+  /**
+   * Loads entity ids from database using a request and writes result to cache.
+   * @param {string} cacheKey
+   * @param {QueryBuilderCallback} callback
+   * @returns {Promise<string[]|number[]>}
+   */
+  async #loadIds(callback, cacheKey) {
+    const knexConn = DomainTransaction.getConnection();
+    const ids = await callback(knexConn.pluck(`${this.#tableName}.id`).from(this.#tableName));
+
+    logger.debug({ tableName: this.#tableName, cacheKey }, 'caching find result');
+    this.#findCache.set(cacheKey, ids);
+
+    return ids;
   }
 
   /**
