@@ -5,7 +5,7 @@ import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 
 import { databaseConnections } from '../../../../db/database-connections.js';
-import { executeInContext } from '../../infrastructure/async-local-storage.js';
+import { executeInContext } from '../../infrastructure/execution-context-manager.js';
 import { quitAllStorages } from '../../infrastructure/key-value-storages/index.js';
 import { quitMutex } from '../../infrastructure/mutex/RedisMutex.js';
 import { close as closePubSub } from '../../infrastructure/pubsub.js';
