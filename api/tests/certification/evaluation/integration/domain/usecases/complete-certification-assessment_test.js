@@ -65,6 +65,9 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
           locale,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

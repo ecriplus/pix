@@ -54,6 +54,9 @@ describe('Integration | Tooling | Expect Job', function () {
           foo: 'bar',
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
         retrylimit: job.retry.retryLimit,
@@ -110,12 +113,18 @@ describe('Integration | Tooling | Expect Job', function () {
           foo: 'bar',
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
         {
           bar: 'baz',
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       ]);
@@ -170,12 +179,18 @@ describe('Integration | Tooling | Expect Job', function () {
         foo: 'bar',
         correlationContext: {
           user_id: null,
+          request_id: null,
+          jobId: null,
+          scriptName: null,
         },
       });
       await expect('JobTest2').to.have.been.performed.withJobPayload({
         bar: 'baz',
         correlationContext: {
           user_id: null,
+          request_id: null,
+          jobId: null,
+          scriptName: null,
         },
       });
     });

@@ -22,6 +22,9 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | vali
           locale: 'fr',
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

@@ -6,6 +6,14 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { tokenService } from '../domain/services/token-service.js';
 
 /**
+ * @typedef {Object} CorrelationInfo
+ * @property {string|null} user_id
+ * @property {string|null} request_id - Can represent either current request_id or an inherited request_id (say when a job is triggered by a request, then the request_id will hold the parent.request_id)
+ * @property {string|null} scriptName - Can represent either current scriptName or an inherited scriptName (say when a job is triggered by a script, then the scriptName will hold the parent.scriptName)
+ * @property {string|null} jobId
+ */
+
+/**
  * Execution context uses AsyncLocalStorage
  * @type {AsyncLocalStorage<Object>}
  */
@@ -33,7 +41,7 @@ export const EXECUTORS = Object.freeze({
  */
 export function getInContext(path, defaultValue) {
   const store = executionContextManager.getStore();
-  if (!store) return;
+  if (!store) return defaultValue;
   return get(store, path, defaultValue);
 }
 
@@ -100,14 +108,19 @@ export function incrementInContext(path, increment = 1) {
 
 /**
  * Get all information from the context that are relevant for helping in logging (called correlation info)
- * @returns {Object}
+ * @returns {CorrelationInfo}
  */
 export function getCorrelationInfo() {
-  const request = getInContext('request', null);
+  let request_id = getInContext('request_id', null);
+  let user_id = getInContext('user_id', null);
   const scriptName = getInContext('scriptName', null);
   const jobId = getInContext('jobId', null);
-  const request_id = get(request, 'headers.x-request-id', getInContext('default_request_id', null));
-  const user_id = extractUserIdFromRequest(request);
+
+  if (getInContext('executor', null) === EXECUTORS.REQUEST) {
+    const request = getInContext('request', null);
+    request_id = get(request, 'headers.x-request-id', getInContext('default_request_id', request_id));
+    user_id = extractUserIdFromRequest(request) ?? user_id;
+  }
 
   return {
     user_id,

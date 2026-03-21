@@ -373,6 +373,9 @@ describe('Integration | UseCases | delete-campaign', function () {
           data: {},
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         });
       });

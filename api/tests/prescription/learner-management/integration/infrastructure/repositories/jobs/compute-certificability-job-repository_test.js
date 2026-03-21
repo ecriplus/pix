@@ -17,6 +17,9 @@ describe('Integration | Prescription | Application | Jobs | computeCertificabili
           organizationLearnerId: 4123132,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

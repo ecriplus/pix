@@ -19,6 +19,9 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | part
           campaignParticipationId: 3,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

@@ -17,6 +17,9 @@ describe('Learning Content | Integration | Repository | Jobs | LcmsCreateRelease
           userId: 123,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

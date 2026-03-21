@@ -22,6 +22,9 @@ describe('Integration | Prescription | Application | Jobs | updateCombinedCourse
           moduleId,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

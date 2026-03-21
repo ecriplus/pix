@@ -55,6 +55,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       occurredAt: '2024-12-25T00:00:00.000Z',
       correlationContext: {
         user_id: null,
+        request_id: null,
+        jobId: null,
+        scriptName: null,
       },
     });
   });

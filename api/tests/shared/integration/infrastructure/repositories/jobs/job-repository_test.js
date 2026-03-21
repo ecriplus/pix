@@ -1,6 +1,6 @@
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { executeInContext } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
+import { executeInContext, EXECUTORS } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import {
   JobExpireIn,
   JobPriority,
@@ -13,7 +13,12 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
   it('create one job db with given config', async function () {
     // given
     const name = 'JobTest';
-    const expectedCorrelationContext = { user_id: null };
+    const expectedCorrelationContext = {
+      user_id: null,
+      request_id: null,
+      jobId: null,
+      scriptName: null,
+    };
     const expectedParams = { jobParam: 1, correlationContext: expectedCorrelationContext };
     const retry = JobRetry.STANDARD_RETRY;
     const priority = JobPriority.HIGH;
@@ -37,7 +42,12 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
   it('create jobs db with given config', async function () {
     // given
     const name = 'JobTest';
-    const expectedCorrelationContext = { user_id: null };
+    const expectedCorrelationContext = {
+      user_id: null,
+      request_id: null,
+      jobId: null,
+      scriptName: null,
+    };
     const expectedParams = [
       { jobParam: 1, correlationContext: expectedCorrelationContext },
       { jobParam: 2, correlationContext: expectedCorrelationContext },
@@ -77,9 +87,13 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
     const job = new JobRepository({ name, retry, priority });
 
     // when
-    await executeInContext(context, async () => {
-      return await job.performAsync(expectedParams);
-    });
+    await executeInContext(
+      context,
+      async () => {
+        return await job.performAsync(expectedParams);
+      },
+      EXECUTORS.REQUEST,
+    );
 
     await expect(name).to.have.been.performed.withJob({
       name,

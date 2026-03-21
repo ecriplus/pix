@@ -12,34 +12,130 @@ import { expect, sinon } from '../../../test-helper.js';
 describe('Shared | Unit | Infrastructure | execution-context-manager', function () {
   describe('#getCorrelationContext', function () {
     context('when an execution context is ongoing', function () {
-      it('should return an object filled with correlation context info', async function () {
-        const context = {
-          request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-          scriptName: 'myScriptName',
-          jobId: 'myJobId',
-        };
-        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
+      context('request_id and user_id computing', function () {
+        context('when executor is a JOB', function () {
+          it('should not interpret request_id and user_id from a request object', async function () {
+            const context = {
+              request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              default_request_id: 'fallbackRequestId',
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.JOB);
 
-        expect(correlationContext).to.deep.equal({
-          user_id: 123,
-          request_id: 'myRequestId',
-          scriptName: 'myScriptName',
-          jobId: 'myJobId',
+            expect(correlationContext).to.deep.equal({
+              user_id: null,
+              request_id: null,
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
+
+          it('should add request_id and user_id when already in context', async function () {
+            const context = {
+              request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              request_id: 'myContextRequestId',
+              user_id: 456,
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.JOB);
+
+            expect(correlationContext).to.deep.equal({
+              user_id: 456,
+              request_id: 'myContextRequestId',
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
         });
-      });
+        context('when executor is a SCRIPT', function () {
+          it('should not interpret request_id and user_id from a request object and ignore default_request_id value', async function () {
+            const context = {
+              request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              default_request_id: 'fallbackRequestId',
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.SCRIPT);
 
-      it('should read fallback value for request_id when primary value is missing', async function () {
-        const context = {
-          some: 'noCorrelationInfo',
-          default_request_id: 'fallbackRequestId',
-        };
-        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
+            expect(correlationContext).to.deep.equal({
+              user_id: null,
+              request_id: null,
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
 
-        sinon.assert.match(correlationContext, {
-          user_id: null,
-          request_id: 'fallbackRequestId',
-          scriptName: null,
-          jobId: null,
+          it('should add request_id and user_id when already in context', async function () {
+            const context = {
+              request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              request_id: 'myContextRequestId',
+              user_id: 456,
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.SCRIPT);
+
+            expect(correlationContext).to.deep.equal({
+              user_id: 456,
+              request_id: 'myContextRequestId',
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
+        });
+        context('when executor is a REQUEST', function () {
+          it('should interpret request_id and user_id from a request object, overriding values already in context', async function () {
+            const context = {
+              request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              request_id: 'myContextRequestId',
+              user_id: 456,
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.REQUEST);
+
+            expect(correlationContext).to.deep.equal({
+              user_id: 123,
+              request_id: 'myRequestId',
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
+
+          it('should read fallback value for request_id when primary value is missing', async function () {
+            const context = {
+              some: 'noCorrelationInfo',
+              default_request_id: 'fallbackRequestId',
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.REQUEST);
+
+            sinon.assert.match(correlationContext, {
+              user_id: null,
+              request_id: 'fallbackRequestId',
+              scriptName: null,
+              jobId: null,
+            });
+          });
+
+          it('should add request_id and user_id already in context when nothing found in request object nor default_request_id found', async function () {
+            const context = {
+              request: { headers: { foo: 'bar' }, auth: { credentials: { foo: 'bar' } } },
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+              request_id: 'myRequestId',
+              user_id: 'myUserId',
+            };
+            const correlationContext = await executeInContext(context, () => getCorrelationInfo(), EXECUTORS.REQUEST);
+
+            expect(correlationContext).to.deep.equal({
+              user_id: 'myUserId',
+              request_id: 'myRequestId',
+              scriptName: 'myScriptName',
+              jobId: 'myJobId',
+            });
+          });
         });
       });
 

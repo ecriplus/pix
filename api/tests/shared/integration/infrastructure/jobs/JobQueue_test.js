@@ -1,7 +1,11 @@
 import PgBoss from 'pg-boss';
 
 import { Metrics } from '../../../../../src/monitoring/infrastructure/metrics.js';
-import { executeInContext, getContext } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
+import {
+  executeInContext,
+  EXECUTORS,
+  getContext,
+} from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobQueue } from '../../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect, sinon } from '../../../../test-helper.js';
@@ -111,9 +115,13 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
           scriptName: 'someScriptName',
           irrelevantDataForCorrelation: 'coucou',
         };
-        await executeInContext(context, async () => {
-          return await job.performAsync({ jobParam: 1 });
-        });
+        await executeInContext(
+          context,
+          async () => {
+            return await job.performAsync({ jobParam: 1 });
+          },
+          EXECUTORS.REQUEST,
+        );
 
         // then
         const promise = new Promise((resolve, reject) => {

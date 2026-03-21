@@ -105,6 +105,9 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       targetUserIds: [userId],
       correlationContext: {
         user_id: null,
+        request_id: null,
+        jobId: null,
+        scriptName: null,
       },
     });
 

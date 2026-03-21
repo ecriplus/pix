@@ -26,6 +26,9 @@ describe('Integration | Repository | Jobs | CertificationCompletedJobRepository'
           ...data,
           correlationContext: {
             user_id: null,
+            request_id: null,
+            jobId: null,
+            scriptName: null,
           },
         },
       });

@@ -10,6 +10,9 @@ describe('Learning Content | Integration | Domain | Use case | scheduleCreateLea
       userId: 123,
       correlationContext: {
         user_id: null,
+        request_id: null,
+        jobId: null,
+        scriptName: null,
       },
     });
   });

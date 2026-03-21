@@ -261,6 +261,9 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         data: {},
         correlationContext: {
           user_id: null,
+          request_id: null,
+          jobId: null,
+          scriptName: null,
         },
       },
       {
@@ -273,6 +276,9 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         data: {},
         correlationContext: {
           user_id: null,
+          request_id: null,
+          jobId: null,
+          scriptName: null,
         },
       },
     ]);

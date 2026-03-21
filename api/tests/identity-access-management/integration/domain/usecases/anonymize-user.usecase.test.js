@@ -72,6 +72,9 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       targetUserIds: [userId],
       correlationContext: {
         user_id: null,
+        request_id: null,
+        jobId: null,
+        scriptName: null,
       },
     });
 
