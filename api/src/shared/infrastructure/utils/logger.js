@@ -104,6 +104,7 @@ export const SCOPES = {
   IAM: 'iam',
   LLM: 'llm',
   DEVCOMP: 'devcomp',
+  CERTIFICATION: 'certification',
 };
 
 function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
