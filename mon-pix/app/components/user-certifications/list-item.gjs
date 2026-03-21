@@ -48,8 +48,6 @@ export default class ListItem extends Component {
   }
 
   get extraStatusTagData() {
-    if (!this.args.certificateSummary.extraCertificationStatus) return null;
-
     const tagMap = {
       [EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE]: null,
       [EXTRA_CERTIFICATE_STATUSES.ACQUIRED]: {
@@ -111,10 +109,10 @@ export default class ListItem extends Component {
   }
 
   <template>
-    <PixBlock class="certification-item">
+    <PixBlock class="certification-item" ...attributes>
       <div class="certification-item__details">
         <div>
-          <PixTag @color={{this.statusTagData.color}} class="tag">
+          <PixTag data-testid="pw-certification-card-main-status" @color={{this.statusTagData.color}} class="tag">
             <div>
               {{#if this.extraStatusTagData}}
                 <strong>{{t "pages.certification-frameworks.CORE"}}&nbsp;:</strong>
@@ -126,7 +124,7 @@ export default class ListItem extends Component {
           </PixTag>
           {{#if this.extraStatusTagData}}
             <PixTag
-
+              data-testid="pw-certification-card-extra-status"
               @color={{this.extraStatusTagData.color}}
               class="tag"
             >
@@ -141,16 +139,16 @@ export default class ListItem extends Component {
               <strong>{{this.frameworkName}}</strong>
             </p>
           {{/if}}
-          <p class="info">
+          <p data-testid="pw-certification-card-certification-center" class="info">
             {{t "pages.certifications-list.information.certification-center"}}
             {{@certificateSummary.certificationCenterName}}
           </p>
-          <p class="info">
+          <p data-testid="pw-certification-card-exam-date" class="info">
             {{t "pages.certifications-list.information.date"}}
             {{dayjsFormat @certificateSummary.certificationStartedAt "DD/MM/YYYY"}}
           </p>
         </div>
-        <div class="certification-item__hexagon">
+        <div data-testid="pw-certification-card-result" class="certification-item__hexagon">
           <strong class="score">{{this.pixScore}}</strong>
           {{#if @certificateSummary.isValidated}}
             <span class="pix">{{t "common.pix"}}</span>
@@ -158,7 +156,7 @@ export default class ListItem extends Component {
         </div>
       </div>
       {{#if this.notObtainedCertificationWithComment}}
-        <p class="certification-item-comment">
+        <p data-testid="pw-certification-card-comment" class="certification-item-comment">
           {{t "pages.certifications-list.comment"}}
           {{@certificateSummary.comment}}
         </p>

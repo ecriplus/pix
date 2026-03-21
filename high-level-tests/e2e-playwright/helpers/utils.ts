@@ -103,3 +103,16 @@ export async function waitForVisibleWithReload(
 
   throw new Error('Element did not appear before timeout');
 }
+
+export async function getInnerTextOrDefault(locator: Locator, text: string | null) {
+  let innerText = text;
+
+  if ((await locator.count()) > 0) {
+    innerText = await locator.innerText();
+  }
+  return innerText;
+}
+
+export function getNowAsDDMMYYYY() {
+  return new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
+}
