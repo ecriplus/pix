@@ -1,5 +1,6 @@
 import {
   executeInContext,
+  EXECUTORS,
   getContext,
   getCorrelationContext,
   getInContext,
@@ -80,7 +81,10 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
       const result = executeInContext(expectedResult, () => getContext());
 
       // then
-      expect(result).to.deep.equal(expectedResult);
+      expect(result).to.deep.equal({
+        ...expectedResult,
+        executor: null,
+      });
     });
   });
 
@@ -130,20 +134,29 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
 
   describe('#executeInContext', function () {
     context('when a context already exists', function () {
-      it('should merge context information and run the function', async function () {
+      it('should merge context information except for executor and run the function', async function () {
         const context = { foo: 'bar', bubu: 'wowo' };
 
-        const res = await executeInContext(context, () => {
-          const newContext = { foo: 'bar1', fuu: 'baz' };
-          return executeInContext(newContext, () => {
-            return getContext();
-          });
-        });
+        const res = await executeInContext(
+          context,
+          () => {
+            const newContext = { foo: 'bar1', fuu: 'baz' };
+            return executeInContext(
+              newContext,
+              () => {
+                return getContext();
+              },
+              EXECUTORS.SCRIPT,
+            );
+          },
+          EXECUTORS.JOB,
+        );
 
         expect(res).to.deep.equal({
           foo: 'bar1',
           fuu: 'baz',
           bubu: 'wowo',
+          executor: EXECUTORS.JOB,
         });
       });
     });
@@ -152,12 +165,12 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
       it('should run the function in a dedicated context', async function () {
         const context = { foo: 'bar' };
 
-        const res = await executeInContext(context, () => {
-          const currentContext = getContext();
-          return currentContext.foo;
-        });
+        const res = await executeInContext(context, () => getContext(), EXECUTORS.JOB);
 
-        expect(res).to.equal('bar');
+        expect(res).to.deep.equal({
+          foo: 'bar',
+          executor: EXECUTORS.JOB,
+        });
       });
     });
   });
