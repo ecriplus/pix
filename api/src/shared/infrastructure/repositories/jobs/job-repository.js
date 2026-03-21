@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { DomainTransaction } from '../../../domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../domain/errors.js';
-import { getCorrelationContext } from '../../execution-context-manager.js';
+import { getCorrelationInfo } from '../../execution-context-manager.js';
 
 export class JobRepository {
   #schema = Joi.object({
@@ -47,7 +47,7 @@ export class JobRepository {
 
   #buildPayload(data) {
     const dataWithCorrelationContext = structuredClone(data);
-    dataWithCorrelationContext.correlationContext = getCorrelationContext();
+    dataWithCorrelationContext.correlationContext = getCorrelationInfo();
     return {
       name: this.name,
       retrylimit: this.retry.retryLimit,

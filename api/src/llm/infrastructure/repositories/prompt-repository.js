@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import { config } from '../../../shared/config.js';
-import { getCorrelationContext } from '../../../shared/infrastructure/execution-context-manager.js';
+import { getCorrelationInfo } from '../../../shared/infrastructure/execution-context-manager.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { LLMApiError } from '../../domain/errors.js';
 
@@ -48,7 +48,7 @@ export async function prompt({ messages, configuration, chatId }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Request-ID': getCorrelationContext().request_id,
+          'X-Request-ID': getCorrelationInfo().request_id,
           authorization: `Bearer ${jwt.sign(
             {
               client_id: 'pix-api',

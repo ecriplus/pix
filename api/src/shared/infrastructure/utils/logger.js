@@ -5,7 +5,7 @@ import pino from 'pino';
 import pretty from 'pino-pretty';
 
 import { config } from '../../config.js';
-import { getCorrelationContext } from '../execution-context-manager.js';
+import { getCorrelationInfo } from '../execution-context-manager.js';
 
 const { logging } = config;
 
@@ -32,7 +32,7 @@ export const loggerPino = pino(
 );
 
 function buildLogWrapper(context, mergingObject, message, extraBindings = {}, extraOptions = undefined) {
-  const loggerChild = loggerPino.child({ ...getCorrelationContext(), ...extraBindings }, extraOptions);
+  const loggerChild = loggerPino.child({ ...getCorrelationInfo(), ...extraBindings }, extraOptions);
   loggerChild[context](mergingObject, message);
 }
 

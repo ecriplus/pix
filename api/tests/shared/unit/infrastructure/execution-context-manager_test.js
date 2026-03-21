@@ -2,7 +2,7 @@ import {
   executeInContext,
   EXECUTORS,
   getContext,
-  getCorrelationContext,
+  getCorrelationInfo,
   getInContext,
   getRequestId,
   setInContext,
@@ -18,7 +18,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           scriptName: 'myScriptName',
           jobId: 'myJobId',
         };
-        const correlationContext = await executeInContext(context, () => getCorrelationContext());
+        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
 
         expect(correlationContext).to.deep.equal({
           user_id: 123,
@@ -33,7 +33,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           some: 'noCorrelationInfo',
           default_request_id: 'fallbackRequestId',
         };
-        const correlationContext = await executeInContext(context, () => getCorrelationContext());
+        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
 
         sinon.assert.match(correlationContext, {
           user_id: null,
@@ -47,7 +47,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         const context = {
           some: 'noCorrelationInfo',
         };
-        const correlationContext = await executeInContext(context, () => getCorrelationContext());
+        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
 
         sinon.assert.match(correlationContext, {
           user_id: null,

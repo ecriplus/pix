@@ -102,7 +102,7 @@ export function incrementInContext(path, increment = 1) {
  * Get all information from the context that are relevant for helping in logging (called correlation info)
  * @returns {Object}
  */
-export function getCorrelationContext() {
+export function getCorrelationInfo() {
   const request = getInContext('request', null);
   const scriptName = getInContext('scriptName', null);
   const jobId = getInContext('jobId', null);
