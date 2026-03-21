@@ -109,7 +109,8 @@ export async function findByOrganizationId({ organizationId }) {
       'combined_course_blueprint_shares.combinedCourseBlueprintId',
     )
     .where({ organizationId })
-    .groupBy('combined_course_blueprints.id');
+    .groupBy('combined_course_blueprints.id')
+    .orderBy('combined_course_blueprints.id');
   return results.map((result) => _toDomain(result));
 }
 

@@ -1,7 +1,7 @@
 import * as campaignRepository from '../../../../../src/quest/infrastructure/repositories/campaign-repository.js';
 import { databaseBuilder, expect } from '../../../../test-helper.js';
 
-describe('Quest | Integration | Repository | combined-course-blueprint', function () {
+describe('Quest | Integration | Repository | campaign', function () {
   describe('#getCampaignIdsByCombinedCourseIds', function () {
     it('should return correct campaign ids', async function () {
       const { id: campaignId } = databaseBuilder.factory.buildCampaign();
