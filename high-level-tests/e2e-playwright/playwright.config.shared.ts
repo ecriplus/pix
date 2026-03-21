@@ -69,6 +69,7 @@ export function setupWebServer(app: App, reuseExistingServer: boolean): WebServe
           LCMS_API_URL: process.env.LCMS_API_URL ?? '',
           LCMS_API_KEY: process.env.LCMS_API_KEY ?? '',
           LCMS_API_RELEASE_ID: process.env.LCMS_API_RELEASE_ID ?? '',
+          LCMS_CACHE_RESULT_IDS_MODULO: '1',
         },
       };
     }
