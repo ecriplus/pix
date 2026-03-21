@@ -9,7 +9,7 @@ import { evaluationUsecases } from '../../domain/usecases/index.js';
 import * as answerSerializer from '../../infrastructure/serializers/jsonapi/answer-serializer.js';
 import * as correctionSerializer from '../../infrastructure/serializers/jsonapi/correction-serializer.js';
 
-const save = async function (request, h, dependencies = { answerSerializer, assessmentRepository }) {
+async function save(request, h, dependencies = { answerSerializer, assessmentRepository }) {
   const answer = dependencies.answerSerializer.deserialize(request.payload);
   const userId = extractUserIdFromRequest(request);
   const locale = getChallengeLocale(request);
@@ -49,25 +49,25 @@ const save = async function (request, h, dependencies = { answerSerializer, asse
   // }
 
   return h.response(dependencies.answerSerializer.serialize(correctedAnswer)).created();
-};
+}
 
-const get = async function (request) {
+async function get(request) {
   const userId = extractUserIdFromRequest(request);
   const answerId = request.params.id;
   const answer = await evaluationUsecases.getAnswer({ answerId, userId });
 
   return answerSerializer.serialize(answer);
-};
+}
 
-const update = async function (request) {
+async function update(request) {
   const userId = extractUserIdFromRequest(request);
   const answerId = request.params.id;
   const answer = await evaluationUsecases.getAnswer({ answerId, userId });
 
   return answerSerializer.serialize(answer);
-};
+}
 
-const find = async function (request) {
+async function find(request) {
   const userId = extractUserIdFromRequest(request);
   const challengeId = request.query.challengeId;
   const assessmentId = request.query.assessmentId;
@@ -80,9 +80,9 @@ const find = async function (request) {
   }
 
   return answerSerializer.serialize(answers);
-};
+}
 
-const getCorrection = async function (request, _h, dependencies = { correctionSerializer }) {
+async function getCorrection(request, _h, dependencies = { correctionSerializer }) {
   const userId = extractUserIdFromRequest(request);
   const locale = getChallengeLocale(request);
   const answerId = request.params.id;
@@ -94,7 +94,7 @@ const getCorrection = async function (request, _h, dependencies = { correctionSe
   });
 
   return dependencies.correctionSerializer.serialize(correction);
-};
+}
 
 const answerController = { save, get, update, find, getCorrection };
 

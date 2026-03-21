@@ -1,12 +1,11 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/KnowledgeElement.js';
 import { EmptyAnswerError } from '../errors.js';
 
-const saveAndCorrectAnswerForCompetenceEvaluation = withTransaction(async function ({
+export async function saveAndCorrectAnswerForCompetenceEvaluation({
   answer,
   userId,
   assessment,
@@ -22,35 +21,35 @@ const saveAndCorrectAnswerForCompetenceEvaluation = withTransaction(async functi
   skillRepository,
   knowledgeElementRepository,
   correctionService,
-} = {}) {
+}) {
+  if (assessment.userId !== userId) {
+    throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
+  }
+  if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
+    throw new ChallengeAlreadyAnsweredError();
+  }
+  if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
+    throw new ChallengeNotAskedError();
+  }
+  if (!answer.hasValue && !answer.hasTimedOut) {
+    throw new EmptyAnswerError();
+  }
+
+  const challenge = await challengeRepository.get(answer.challengeId);
+  const correctedAnswer = correctionService.evaluateAnswer({
+    challenge,
+    answer,
+    assessment,
+    accessibilityAdjustmentNeeded: false,
+    forceOKAnswer,
+  });
+  const now = new Date();
+  const lastQuestionDate = assessment.lastQuestionDate || now;
+  correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
+
+  const targetSkills = await skillRepository.findActiveByCompetenceId(assessment.competenceId);
+  const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
   const savedAnswer = await DomainTransaction.execute(async () => {
-    if (assessment.userId !== userId) {
-      throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
-    }
-    if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
-      throw new ChallengeAlreadyAnsweredError();
-    }
-    if (assessment.lastChallengeId && assessment.lastChallengeId !== answer.challengeId) {
-      throw new ChallengeNotAskedError();
-    }
-    if (!answer.hasValue && !answer.hasTimedOut) {
-      throw new EmptyAnswerError();
-    }
-
-    const challenge = await challengeRepository.get(answer.challengeId);
-    const correctedAnswer = correctionService.evaluateAnswer({
-      challenge,
-      answer,
-      assessment,
-      accessibilityAdjustmentNeeded: false,
-      forceOKAnswer,
-    });
-    const now = new Date();
-    const lastQuestionDate = assessment.lastQuestionDate || now;
-    correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
-
-    const targetSkills = await skillRepository.findActiveByCompetenceId(assessment.competenceId);
-    const knowledgeElementsBefore = await knowledgeElementRepository.findUniqByUserId({ userId });
     const answerToBeSaved = await answerRepository.save({ answer: correctedAnswer });
     const knowledgeElementsToAdd = computeKnowledgeElements({
       assessment,
@@ -80,7 +79,7 @@ const saveAndCorrectAnswerForCompetenceEvaluation = withTransaction(async functi
   }
 
   return savedAnswer;
-});
+}
 
 function computeKnowledgeElements({ assessment, answer, challenge, targetSkills, knowledgeElementsBefore }) {
   const knowledgeElements = knowledgeElementsBefore.filter(
@@ -155,5 +154,3 @@ async function computeLevelUpInformation({
     knowledgeElementsForCompetenceAfter: uniqKnowledgeElementsForCompetenceAfter,
   });
 }
-
-export { saveAndCorrectAnswerForCompetenceEvaluation };
