@@ -8,6 +8,7 @@ import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
@@ -371,12 +372,7 @@ describe('Integration | UseCases | delete-campaign', function () {
           occurredAt: now.toISOString(),
           targetUserIds: [campaignParticipationId],
           data: {},
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         });
       });
 

@@ -1,6 +1,11 @@
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { executeInContext, EXECUTORS } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
+import {
+  EMPTY_CORRELATION_INFO,
+  executeInContext,
+  EXECUTORS,
+  EXTRA_CORRELATION_INFO_KEY,
+} from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import {
   JobExpireIn,
   JobPriority,
@@ -13,13 +18,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
   it('create one job db with given config', async function () {
     // given
     const name = 'JobTest';
-    const expectedCorrelationContext = {
-      user_id: null,
-      request_id: null,
-      jobId: null,
-      scriptName: null,
-    };
-    const expectedParams = { jobParam: 1, correlationContext: expectedCorrelationContext };
+    const expectedParams = { jobParam: 1, correlationContext: EMPTY_CORRELATION_INFO };
     const retry = JobRetry.STANDARD_RETRY;
     const priority = JobPriority.HIGH;
 
@@ -42,15 +41,9 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
   it('create jobs db with given config', async function () {
     // given
     const name = 'JobTest';
-    const expectedCorrelationContext = {
-      user_id: null,
-      request_id: null,
-      jobId: null,
-      scriptName: null,
-    };
     const expectedParams = [
-      { jobParam: 1, correlationContext: expectedCorrelationContext },
-      { jobParam: 2, correlationContext: expectedCorrelationContext },
+      { jobParam: 1, correlationContext: EMPTY_CORRELATION_INFO },
+      { jobParam: 2, correlationContext: EMPTY_CORRELATION_INFO },
     ];
     const priority = JobPriority.HIGH;
 
@@ -71,7 +64,9 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
         auth: { credentials: { userId: 456 } },
       },
       scriptName: 'someScriptName',
-      irrelevantDataForCorrelation: 'coucou',
+      [EXTRA_CORRELATION_INFO_KEY]: {
+        foo: 'bar',
+      },
     };
     const name = 'JobTest';
     const expectedCorrelationContext = {
@@ -79,6 +74,9 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
       request_id: 'someRequestId',
       scriptName: 'someScriptName',
       jobId: null,
+      [EXTRA_CORRELATION_INFO_KEY]: {
+        foo: 'bar',
+      },
     };
     const expectedParams = { jobParam: 1, correlationContext: expectedCorrelationContext };
     const retry = JobRetry.STANDARD_RETRY;

@@ -1,5 +1,6 @@
 import { ImportSupOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportSupOrganizationLearnersJob.js';
 import { importSupOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -20,12 +21,7 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | impo
           organizationImportId: 4123132,
           type: 'REPLACE',
           locale: 'fr',
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         },
       });
     });

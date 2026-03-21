@@ -1,5 +1,6 @@
 import PgBoss from 'pg-boss';
 
+import { EMPTY_CORRELATION_INFO } from '../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobQueue } from '../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { catchErr, expect, knex } from '../../../test-helper.js';
@@ -52,12 +53,7 @@ describe('Integration | Tooling | Expect Job', function () {
         name: 'JobTest',
         data: {
           foo: 'bar',
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         },
         retrylimit: job.retry.retryLimit,
         retrydelay: job.retry.retryDelay,
@@ -111,21 +107,11 @@ describe('Integration | Tooling | Expect Job', function () {
       await expect('JobTest').to.have.been.performed.withJobPayloads([
         {
           foo: 'bar',
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         },
         {
           bar: 'baz',
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         },
       ]);
     });
@@ -177,21 +163,11 @@ describe('Integration | Tooling | Expect Job', function () {
       // then
       await expect('JobTest').to.have.been.performed.withJobPayload({
         foo: 'bar',
-        correlationContext: {
-          user_id: null,
-          request_id: null,
-          jobId: null,
-          scriptName: null,
-        },
+        correlationContext: EMPTY_CORRELATION_INFO,
       });
       await expect('JobTest2').to.have.been.performed.withJobPayload({
         bar: 'baz',
-        correlationContext: {
-          user_id: null,
-          request_id: null,
-          jobId: null,
-          scriptName: null,
-        },
+        correlationContext: EMPTY_CORRELATION_INFO,
       });
     });
 

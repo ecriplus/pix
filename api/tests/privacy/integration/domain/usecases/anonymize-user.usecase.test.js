@@ -6,6 +6,7 @@ import { LegalDocumentType } from '../../../../../src/legal-documents/domain/mod
 import { usecases } from '../../../../../src/privacy/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
@@ -103,12 +104,7 @@ describe('Integration | Privacy | Domain | UseCase | anonymize-user', function (
       occurredAt: now.toISOString(),
       userId: anonymizedByUserId,
       targetUserIds: [userId],
-      correlationContext: {
-        user_id: null,
-        request_id: null,
-        jobId: null,
-        scriptName: null,
-      },
+      correlationContext: EMPTY_CORRELATION_INFO,
     });
 
     const authenticationMethods = await knex('authentication-methods').where({ userId });

@@ -1,6 +1,8 @@
 import {
+  addCorrelationInfo,
   executeInContext,
   EXECUTORS,
+  EXTRA_CORRELATION_INFO_KEY,
   getContext,
   getCorrelationInfo,
   getInContext,
@@ -28,6 +30,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: null,
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
 
@@ -46,6 +49,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myContextRequestId',
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
         });
@@ -64,6 +68,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: null,
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
 
@@ -82,6 +87,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myContextRequestId',
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
         });
@@ -101,6 +107,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myRequestId',
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
 
@@ -116,6 +123,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'fallbackRequestId',
               scriptName: null,
               jobId: null,
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
 
@@ -134,6 +142,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myRequestId',
               scriptName: 'myScriptName',
               jobId: 'myJobId',
+              [EXTRA_CORRELATION_INFO_KEY]: null,
             });
           });
         });
@@ -150,7 +159,101 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           request_id: null,
           scriptName: null,
           jobId: null,
+          [EXTRA_CORRELATION_INFO_KEY]: null,
         });
+      });
+
+      it('should add any extra correlation info', async function () {
+        const context = {
+          scriptName: 'myScriptName',
+          jobId: 'myJobId',
+          request_id: 'myContextRequestId',
+          user_id: 456,
+          [EXTRA_CORRELATION_INFO_KEY]: {
+            sessionId: 789,
+          },
+        };
+        const correlationContext = await executeInContext(context, () => getCorrelationInfo());
+
+        sinon.assert.match(correlationContext, {
+          user_id: 456,
+          request_id: 'myContextRequestId',
+          scriptName: 'myScriptName',
+          jobId: 'myJobId',
+          [EXTRA_CORRELATION_INFO_KEY]: {
+            sessionId: 789,
+          },
+        });
+      });
+    });
+  });
+
+  describe('#addCorrelationInfo', function () {
+    it('should add value in given path destined to be available in correlation info', function () {
+      // given
+      const context = {};
+
+      // when
+      const result = executeInContext(context, () => {
+        setInContext('irrelevant', 'info');
+        addCorrelationInfo('sessionId', 456);
+        return getCorrelationInfo();
+      });
+
+      // then
+      expect(result).to.deep.equal({
+        request_id: null,
+        user_id: null,
+        jobId: null,
+        scriptName: null,
+        [EXTRA_CORRELATION_INFO_KEY]: {
+          sessionId: 456,
+        },
+      });
+    });
+
+    it('should overwrite value in given path destined to be available in correlation info', function () {
+      // given
+      const context = {};
+
+      // when
+      const result = executeInContext(context, () => {
+        setInContext('irrelevant', 'info');
+        addCorrelationInfo('sessionId', 456);
+        addCorrelationInfo('sessionId', 789);
+        return getCorrelationInfo();
+      });
+
+      // then
+      expect(result).to.deep.equal({
+        request_id: null,
+        user_id: null,
+        jobId: null,
+        scriptName: null,
+        [EXTRA_CORRELATION_INFO_KEY]: {
+          sessionId: 789,
+        },
+      });
+    });
+
+    it('should ignore info added outside of the context', function () {
+      // given
+      const context = {};
+
+      // when
+      addCorrelationInfo('sessionId', 456);
+      const result = executeInContext(context, () => {
+        setInContext('irrelevant', 'info');
+        return getCorrelationInfo();
+      });
+
+      // then
+      expect(result).to.deep.equal({
+        request_id: null,
+        user_id: null,
+        jobId: null,
+        scriptName: null,
+        [EXTRA_CORRELATION_INFO_KEY]: null,
       });
     });
   });

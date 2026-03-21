@@ -16,6 +16,7 @@ import {
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
+import { EXTRA_CORRELATION_INFO_KEY } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   createServer,
@@ -707,6 +708,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
                 scriptName: null,
                 user_id: certifiableUserId,
                 request_id: sinon.match.string,
+                [EXTRA_CORRELATION_INFO_KEY]: null,
               },
             });
           });

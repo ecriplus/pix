@@ -13,6 +13,15 @@ import { tokenService } from '../domain/services/token-service.js';
  * @property {string|null} jobId
  */
 
+export const EXTRA_CORRELATION_INFO_KEY = 'extra-correlation-info';
+export const EMPTY_CORRELATION_INFO = {
+  user_id: null,
+  request_id: null,
+  scriptName: null,
+  jobId: null,
+  [EXTRA_CORRELATION_INFO_KEY]: null,
+};
+
 /**
  * Execution context uses AsyncLocalStorage
  * @type {AsyncLocalStorage<Object>}
@@ -127,6 +136,7 @@ export function getCorrelationInfo() {
     request_id,
     scriptName,
     jobId,
+    [EXTRA_CORRELATION_INFO_KEY]: getInContext(EXTRA_CORRELATION_INFO_KEY, null),
   };
 }
 
@@ -139,6 +149,17 @@ function extractUserIdFromRequest(request) {
   }
 
   return userId ?? null;
+}
+
+/**
+ * Adds or overwrites a value in the current execution context using a lodash path. (ex: 'foo.bar')
+ * This value will be added in a dedicated object where extra correlation information are stored.
+ * Works even if intermediate keys in path does not currently exist in context
+ * @param {string} path
+ * @param {*} value
+ */
+export function addCorrelationInfo(path, value) {
+  setInContext(EXTRA_CORRELATION_INFO_KEY + '.' + path, value);
 }
 
 /**

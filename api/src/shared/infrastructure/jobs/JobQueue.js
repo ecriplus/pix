@@ -50,11 +50,10 @@ class JobQueue {
 }
 
 function initContext(job) {
+  const inheritedContext = job.data?.correlationContext ?? {};
   return {
+    ...inheritedContext,
     jobId: job.id,
-    scriptName: job.data?.correlationContext?.scriptName ?? null,
-    user_id: job.data?.correlationContext?.user_id ?? null,
-    request_id: job.data?.correlationContext?.request_id ?? null,
   };
 }
 

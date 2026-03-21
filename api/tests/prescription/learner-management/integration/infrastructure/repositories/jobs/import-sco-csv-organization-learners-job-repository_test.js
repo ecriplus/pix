@@ -1,5 +1,6 @@
 import { ImportScoCsvOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportScoCsvOrganizationLearnersJob.js';
 import { importScoCsvOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -19,12 +20,7 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | impo
         data: {
           organizationImportId: 4123132,
           locale: 'fr',
-          correlationContext: {
-            user_id: null,
-            request_id: null,
-            jobId: null,
-            scriptName: null,
-          },
+          correlationContext: EMPTY_CORRELATION_INFO,
         },
       });
     });
