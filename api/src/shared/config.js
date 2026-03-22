@@ -561,6 +561,7 @@ const configuration = (function () {
 
     config.lcms.apiKey = 'test-api-key';
     config.lcms.url = 'https://lcms-test.pix.fr/api';
+    config.lcms.cacheResultIds = true;
 
     config.llm.configurationEditorApi.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
     config.llm.inferenceApi.postPromptUrl = 'https://llm-test.pix.fr/api/chat';
