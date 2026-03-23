@@ -1,6 +1,4 @@
 import samlify from 'samlify';
-
-import samlIdpConfig from './saml-idp-config.json' with { type: 'json' };
 samlify.setSchemaValidator({
   validate: () => {
     return true;
@@ -29,7 +27,7 @@ function _getServiceProvider() {
 function _getIdentityProvider() {
   if (!_identityProvider) {
     try {
-      _identityProvider = samlify.IdentityProvider(samlIdpConfig);
+      _identityProvider = samlify.IdentityProvider(samlSettings.idpConfig);
       logger.info('Initialized SAML identity provider');
     } catch (err) {
       err.message = 'Error initializing SAML identity provider: ' + err.message;
