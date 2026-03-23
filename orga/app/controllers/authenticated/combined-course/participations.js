@@ -2,9 +2,13 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
+const DEFAULT_PAGE_NUMBER = 1;
+
 export default class ParticipationsController extends Controller {
   queryParams = ['fullName', 'statuses', 'divisions', 'groups'];
 
+  @tracked pageNumber = DEFAULT_PAGE_NUMBER;
+  @tracked pageSize = 50;
   @tracked fullName = '';
   @tracked statuses = [];
   @tracked divisions = [];
@@ -19,6 +23,7 @@ export default class ParticipationsController extends Controller {
   @action
   triggerFiltering(fieldName, value) {
     this[fieldName] = value;
+    this.pageNumber = null;
   }
 
   @action
