@@ -1,7 +1,6 @@
-import { config } from '../../../../../src/shared/config.js';
 import { LearningContentResourceNotFound } from '../../../../../src/shared/domain/errors.js';
 import * as tubeRepository from '../../../../../src/shared/infrastructure/repositories/tube-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Repository | tube-repository', function () {
   const tubeData0 = {
@@ -72,45 +71,72 @@ describe('Integration | Repository | tube-repository', function () {
     await databaseBuilder.commit();
   });
 
-  [false, true].forEach((cacheResultIds) =>
-    describe(`when cacheResultIds is ${cacheResultIds}`, function () {
-      beforeEach(function () {
-        sinon.stub(config.lcms, 'cacheResultIds').value(cacheResultIds);
+  describe('#get', function () {
+    context('when tube found for given id', function () {
+      it('should return the tube translated with default locale FR', async function () {
+        // when
+        const tube = await tubeRepository.get('tubeId0');
+
+        // then
+        expect(tube).to.deepEqualInstance(
+          domainBuilder.buildTube({
+            ...tubeData0,
+            practicalTitle: tubeData0.practicalTitle_i18n.fr,
+            practicalDescription: tubeData0.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+        );
       });
+    });
 
-      describe('#get', function () {
-        context('when tube found for given id', function () {
-          it('should return the tube translated with default locale FR', async function () {
-            // when
-            const tube = await tubeRepository.get('tubeId0');
+    context('when no tube found', function () {
+      it('should throw a LearningContentResourceNotFound error', async function () {
+        // when
+        const err = await catchErr(tubeRepository.get, tubeRepository)('recCoucouZouZou');
 
-            // then
-            expect(tube).to.deepEqualInstance(
-              domainBuilder.buildTube({
-                ...tubeData0,
-                practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-            );
-          });
-        });
-
-        context('when no tube found', function () {
-          it('should throw a LearningContentResourceNotFound error', async function () {
-            // when
-            const err = await catchErr(tubeRepository.get, tubeRepository)('recCoucouZouZou');
-
-            // then
-            expect(err).to.be.instanceOf(LearningContentResourceNotFound);
-          });
-        });
+        // then
+        expect(err).to.be.instanceOf(LearningContentResourceNotFound);
       });
+    });
+  });
 
-      describe('#list', function () {
-        it('should return all tubes translated by default locale FR ordered by name', async function () {
+  describe('#list', function () {
+    it('should return all tubes translated by default locale FR ordered by name', async function () {
+      // when
+      const tubes = await tubeRepository.list();
+
+      // then
+      expect(tubes).to.deepEqualArray([
+        domainBuilder.buildTube({
+          ...tubeData0,
+          practicalTitle: tubeData0.practicalTitle_i18n.fr,
+          practicalDescription: tubeData0.practicalDescription_i18n.fr,
+          skills: [],
+        }),
+        domainBuilder.buildTube({
+          ...tubeData1,
+          practicalTitle: tubeData1.practicalTitle_i18n.fr,
+          practicalDescription: tubeData1.practicalDescription_i18n.fr,
+          skills: [],
+        }),
+        domainBuilder.buildTube({
+          ...tubeData2,
+          practicalTitle: tubeData2.practicalTitle_i18n.fr,
+          practicalDescription: tubeData2.practicalDescription_i18n.fr,
+          skills: [],
+        }),
+      ]);
+    });
+  });
+
+  describe('#findByNames', function () {
+    context('when tubes found by names', function () {
+      context('when no locale provided', function () {
+        it('should return all tubes found translated in default locale FR given by their name', async function () {
           // when
-          const tubes = await tubeRepository.list();
+          const tubes = await tubeRepository.findByNames({
+            tubeNames: ['name Tube 2', 'name Tube 0', 'non existant mais on sen fiche'],
+          });
 
           // then
           expect(tubes).to.deepEqualArray([
@@ -118,12 +144,6 @@ describe('Integration | Repository | tube-repository', function () {
               ...tubeData0,
               practicalTitle: tubeData0.practicalTitle_i18n.fr,
               practicalDescription: tubeData0.practicalDescription_i18n.fr,
-              skills: [],
-            }),
-            domainBuilder.buildTube({
-              ...tubeData1,
-              practicalTitle: tubeData1.practicalTitle_i18n.fr,
-              practicalDescription: tubeData1.practicalDescription_i18n.fr,
               skills: [],
             }),
             domainBuilder.buildTube({
@@ -136,295 +156,262 @@ describe('Integration | Repository | tube-repository', function () {
         });
       });
 
-      describe('#findByNames', function () {
-        context('when tubes found by names', function () {
-          context('when no locale provided', function () {
-            it('should return all tubes found translated in default locale FR given by their name', async function () {
-              // when
-              const tubes = await tubeRepository.findByNames({
-                tubeNames: ['name Tube 2', 'name Tube 0', 'non existant mais on sen fiche'],
-              });
-
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-              ]);
-            });
+      context('when a locale is provided', function () {
+        it('should return all tubes found translated in default locale FR given by their name', async function () {
+          // when
+          const tubes = await tubeRepository.findByNames({
+            tubeNames: ['name Tube 2', 'name Tube 0'],
+            locale: 'en',
           });
 
-          context('when a locale is provided', function () {
-            it('should return all tubes found translated in default locale FR given by their name', async function () {
-              // when
-              const tubes = await tubeRepository.findByNames({
-                tubeNames: ['name Tube 2', 'name Tube 0'],
-                locale: 'en',
-              });
-
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.en,
-                  practicalDescription: tubeData0.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-              ]);
-            });
-          });
-
-          it('should ingore dupes and nulls', async function () {
-            // when
-            const tubes = await tubeRepository.findByNames({
-              tubeNames: ['name Tube 2', 'name Tube 0', 'non existant mais on sen fiche', 'name Tube 0'],
-            });
-
-            // then
-            expect(tubes).to.deepEqualArray([
-              domainBuilder.buildTube({
-                ...tubeData0,
-                practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-              domainBuilder.buildTube({
-                ...tubeData2,
-                practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-            ]);
-          });
-        });
-
-        context('when no tubes found for given names', function () {
-          it('should return an empty array', async function () {
-            // when
-            const tubes = await tubeRepository.findByNames({ tubeNames: ['name Tube 888888'] });
-
-            // then
-            expect(tubes).to.deep.equal([]);
-          });
-        });
-
-        context('when invalid value provided for tubeNames argument', function () {
-          it('should return an empty array', async function () {
-            // when
-            const tubes1 = await tubeRepository.findByNames({ tubeNames: null });
-            const tubes2 = await tubeRepository.findByNames({ tubeNames: undefined });
-            const tubes3 = await tubeRepository.findByNames({ tubeNames: [] });
-
-            // then
-            expect(tubes1).to.deep.equal([]);
-            expect(tubes2).to.deep.equal([]);
-            expect(tubes3).to.deep.equal([]);
-          });
+          // then
+          expect(tubes).to.deepEqualArray([
+            domainBuilder.buildTube({
+              ...tubeData0,
+              practicalTitle: tubeData0.practicalTitle_i18n.en,
+              practicalDescription: tubeData0.practicalDescription_i18n.en,
+              skills: [],
+            }),
+            domainBuilder.buildTube({
+              ...tubeData2,
+              practicalTitle: tubeData2.practicalTitle_i18n.fr,
+              practicalDescription: tubeData2.practicalDescription_i18n.en,
+              skills: [],
+            }),
+          ]);
         });
       });
 
-      describe('#findByRecordIds', function () {
-        context('when tubes found by ids', function () {
-          context('when no locale provided', function () {
-            it('should return all tubes found translated in default locale FR given by their name', async function () {
-              // when
-              const tubes = await tubeRepository.findByRecordIds([
-                'tubeId2',
-                'tubeId0',
-                'non existant mais on sen fiche',
-              ]);
-
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-              ]);
-            });
-          });
-
-          context('when a locale is provided', function () {
-            it('should return all tubes found translated in default locale FR given by their name', async function () {
-              // when
-              const tubes = await tubeRepository.findByRecordIds(
-                ['tubeId2', 'tubeId0', 'non existant mais on sen fiche'],
-                'en',
-              );
-
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.en,
-                  practicalDescription: tubeData0.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-              ]);
-            });
-          });
-
-          it('should ignore dupes and nulls', async function () {
-            // when
-            const tubes = await tubeRepository.findByRecordIds([
-              'tubeId2',
-              'tubeId0',
-              'non existant mais on sen fiche',
-              'tubeId0',
-            ]);
-
-            // then
-            expect(tubes).to.deepEqualArray([
-              domainBuilder.buildTube({
-                ...tubeData0,
-                practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-              domainBuilder.buildTube({
-                ...tubeData2,
-                practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-            ]);
-          });
+      it('should ingore dupes and nulls', async function () {
+        // when
+        const tubes = await tubeRepository.findByNames({
+          tubeNames: ['name Tube 2', 'name Tube 0', 'non existant mais on sen fiche', 'name Tube 0'],
         });
 
-        context('when no tubes found for given ids', function () {
-          it('should return an empty array', async function () {
-            // when
-            const tubes = await tubeRepository.findByRecordIds(['name Tube 888888']);
+        // then
+        expect(tubes).to.deepEqualArray([
+          domainBuilder.buildTube({
+            ...tubeData0,
+            practicalTitle: tubeData0.practicalTitle_i18n.fr,
+            practicalDescription: tubeData0.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+          domainBuilder.buildTube({
+            ...tubeData2,
+            practicalTitle: tubeData2.practicalTitle_i18n.fr,
+            practicalDescription: tubeData2.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+        ]);
+      });
+    });
 
-            // then
-            expect(tubes).to.deep.equal([]);
-          });
+    context('when no tubes found for given names', function () {
+      it('should return an empty array', async function () {
+        // when
+        const tubes = await tubeRepository.findByNames({ tubeNames: ['name Tube 888888'] });
+
+        // then
+        expect(tubes).to.deep.equal([]);
+      });
+    });
+
+    context('when invalid value provided for tubeNames argument', function () {
+      it('should return an empty array', async function () {
+        // when
+        const tubes1 = await tubeRepository.findByNames({ tubeNames: null });
+        const tubes2 = await tubeRepository.findByNames({ tubeNames: undefined });
+        const tubes3 = await tubeRepository.findByNames({ tubeNames: [] });
+
+        // then
+        expect(tubes1).to.deep.equal([]);
+        expect(tubes2).to.deep.equal([]);
+        expect(tubes3).to.deep.equal([]);
+      });
+    });
+  });
+
+  describe('#findByRecordIds', function () {
+    context('when tubes found by ids', function () {
+      context('when no locale provided', function () {
+        it('should return all tubes found translated in default locale FR given by their name', async function () {
+          // when
+          const tubes = await tubeRepository.findByRecordIds(['tubeId2', 'tubeId0', 'non existant mais on sen fiche']);
+
+          // then
+          expect(tubes).to.deepEqualArray([
+            domainBuilder.buildTube({
+              ...tubeData0,
+              practicalTitle: tubeData0.practicalTitle_i18n.fr,
+              practicalDescription: tubeData0.practicalDescription_i18n.fr,
+              skills: [],
+            }),
+            domainBuilder.buildTube({
+              ...tubeData2,
+              practicalTitle: tubeData2.practicalTitle_i18n.fr,
+              practicalDescription: tubeData2.practicalDescription_i18n.fr,
+              skills: [],
+            }),
+          ]);
         });
       });
 
-      describe('#findActiveByRecordIds', function () {
-        context('when active tubes found by ids', function () {
-          context('when no locale provided', function () {
-            it('should return all tubes that have at least one active skill found translated in default locale FR given by their ids', async function () {
-              // when
-              const tubes = await tubeRepository.findActiveByRecordIds([
-                'tubeId2',
-                'tubeId0',
-                'tubeId1',
-                'non existant mais on sen fiche',
-              ]);
+      context('when a locale is provided', function () {
+        it('should return all tubes found translated in default locale FR given by their name', async function () {
+          // when
+          const tubes = await tubeRepository.findByRecordIds(
+            ['tubeId2', 'tubeId0', 'non existant mais on sen fiche'],
+            'en',
+          );
 
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                  skills: [],
-                }),
-              ]);
-            });
-          });
-
-          context('when a locale is provided', function () {
-            it('should return all tubes found translated in default locale FR given by their name', async function () {
-              // when
-              const tubes = await tubeRepository.findActiveByRecordIds(
-                ['tubeId2', 'tubeId0', 'tubeId1', 'non existant mais on sen fiche'],
-                'en',
-              );
-
-              // then
-              expect(tubes).to.deepEqualArray([
-                domainBuilder.buildTube({
-                  ...tubeData0,
-                  practicalTitle: tubeData0.practicalTitle_i18n.en,
-                  practicalDescription: tubeData0.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-                domainBuilder.buildTube({
-                  ...tubeData2,
-                  practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                  practicalDescription: tubeData2.practicalDescription_i18n.en,
-                  skills: [],
-                }),
-              ]);
-            });
-          });
-
-          it('should ignore duplicates and nulls', async function () {
-            // when
-            const tubes = await tubeRepository.findActiveByRecordIds([
-              'tubeId2',
-              'tubeId0',
-              'tubeId1',
-              'non existant mais on sen fiche',
-              'tubeId0',
-            ]);
-
-            // then
-            expect(tubes).to.deepEqualArray([
-              domainBuilder.buildTube({
-                ...tubeData0,
-                practicalTitle: tubeData0.practicalTitle_i18n.fr,
-                practicalDescription: tubeData0.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-              domainBuilder.buildTube({
-                ...tubeData2,
-                practicalTitle: tubeData2.practicalTitle_i18n.fr,
-                practicalDescription: tubeData2.practicalDescription_i18n.fr,
-                skills: [],
-              }),
-            ]);
-          });
-        });
-
-        context('when no active tubes found for given ids', function () {
-          it('should return an empty array', async function () {
-            // when
-            const tubes = await tubeRepository.findActiveByRecordIds(['tubeId1']);
-
-            // then
-            expect(tubes).to.deep.equal([]);
-          });
+          // then
+          expect(tubes).to.deepEqualArray([
+            domainBuilder.buildTube({
+              ...tubeData0,
+              practicalTitle: tubeData0.practicalTitle_i18n.en,
+              practicalDescription: tubeData0.practicalDescription_i18n.en,
+              skills: [],
+            }),
+            domainBuilder.buildTube({
+              ...tubeData2,
+              practicalTitle: tubeData2.practicalTitle_i18n.fr,
+              practicalDescription: tubeData2.practicalDescription_i18n.en,
+              skills: [],
+            }),
+          ]);
         });
       });
-    }),
-  );
+
+      it('should ignore dupes and nulls', async function () {
+        // when
+        const tubes = await tubeRepository.findByRecordIds([
+          'tubeId2',
+          'tubeId0',
+          'non existant mais on sen fiche',
+          'tubeId0',
+        ]);
+
+        // then
+        expect(tubes).to.deepEqualArray([
+          domainBuilder.buildTube({
+            ...tubeData0,
+            practicalTitle: tubeData0.practicalTitle_i18n.fr,
+            practicalDescription: tubeData0.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+          domainBuilder.buildTube({
+            ...tubeData2,
+            practicalTitle: tubeData2.practicalTitle_i18n.fr,
+            practicalDescription: tubeData2.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+        ]);
+      });
+    });
+
+    context('when no tubes found for given ids', function () {
+      it('should return an empty array', async function () {
+        // when
+        const tubes = await tubeRepository.findByRecordIds(['name Tube 888888']);
+
+        // then
+        expect(tubes).to.deep.equal([]);
+      });
+    });
+  });
+
+  describe('#findActiveByRecordIds', function () {
+    context('when active tubes found by ids', function () {
+      context('when no locale provided', function () {
+        it('should return all tubes that have at least one active skill found translated in default locale FR given by their ids', async function () {
+          // when
+          const tubes = await tubeRepository.findActiveByRecordIds([
+            'tubeId2',
+            'tubeId0',
+            'tubeId1',
+            'non existant mais on sen fiche',
+          ]);
+
+          // then
+          expect(tubes).to.deepEqualArray([
+            domainBuilder.buildTube({
+              ...tubeData0,
+              practicalTitle: tubeData0.practicalTitle_i18n.fr,
+              practicalDescription: tubeData0.practicalDescription_i18n.fr,
+              skills: [],
+            }),
+            domainBuilder.buildTube({
+              ...tubeData2,
+              practicalTitle: tubeData2.practicalTitle_i18n.fr,
+              practicalDescription: tubeData2.practicalDescription_i18n.fr,
+              skills: [],
+            }),
+          ]);
+        });
+      });
+
+      context('when a locale is provided', function () {
+        it('should return all tubes found translated in default locale FR given by their name', async function () {
+          // when
+          const tubes = await tubeRepository.findActiveByRecordIds(
+            ['tubeId2', 'tubeId0', 'tubeId1', 'non existant mais on sen fiche'],
+            'en',
+          );
+
+          // then
+          expect(tubes).to.deepEqualArray([
+            domainBuilder.buildTube({
+              ...tubeData0,
+              practicalTitle: tubeData0.practicalTitle_i18n.en,
+              practicalDescription: tubeData0.practicalDescription_i18n.en,
+              skills: [],
+            }),
+            domainBuilder.buildTube({
+              ...tubeData2,
+              practicalTitle: tubeData2.practicalTitle_i18n.fr,
+              practicalDescription: tubeData2.practicalDescription_i18n.en,
+              skills: [],
+            }),
+          ]);
+        });
+      });
+
+      it('should ignore duplicates and nulls', async function () {
+        // when
+        const tubes = await tubeRepository.findActiveByRecordIds([
+          'tubeId2',
+          'tubeId0',
+          'tubeId1',
+          'non existant mais on sen fiche',
+          'tubeId0',
+        ]);
+
+        // then
+        expect(tubes).to.deepEqualArray([
+          domainBuilder.buildTube({
+            ...tubeData0,
+            practicalTitle: tubeData0.practicalTitle_i18n.fr,
+            practicalDescription: tubeData0.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+          domainBuilder.buildTube({
+            ...tubeData2,
+            practicalTitle: tubeData2.practicalTitle_i18n.fr,
+            practicalDescription: tubeData2.practicalDescription_i18n.fr,
+            skills: [],
+          }),
+        ]);
+      });
+    });
+
+    context('when no active tubes found for given ids', function () {
+      it('should return an empty array', async function () {
+        // when
+        const tubes = await tubeRepository.findActiveByRecordIds(['tubeId1']);
+
+        // then
+        expect(tubes).to.deep.equal([]);
+      });
+    });
+  });
 });

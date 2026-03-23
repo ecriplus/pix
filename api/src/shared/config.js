@@ -48,6 +48,7 @@ function _getLogForHumans() {
 
 // Can be useful for A/B testing, leaving it here
 // while we think on how we can do better
+// eslint-disable-next-line no-unused-vars
 function isEnabledByContainerModulo(envVarValue) {
   const modulo = _getNumber(envVarValue, 0);
   if (modulo === 0) return false;
@@ -354,7 +355,6 @@ const configuration = (function () {
         process.env.CYPRESS_LCMS_API_KEY ||
         process.env.LCMS_API_KEY,
       releaseId: process.env.LCMS_API_RELEASE_ID || null,
-      cacheResultIds: isEnabledByContainerModulo(process.env.LCMS_CACHE_RESULT_IDS_MODULO),
     },
     llm: {
       temporaryStorage: {
@@ -560,7 +560,6 @@ const configuration = (function () {
 
     config.lcms.apiKey = 'test-api-key';
     config.lcms.url = 'https://lcms-test.pix.fr/api';
-    config.lcms.cacheResultIds = true;
 
     config.llm.configurationEditorApi.getConfigurationUrl = 'https://llm-test.pix.fr/api/configurations';
     config.llm.inferenceApi.postPromptUrl = 'https://llm-test.pix.fr/api/chat';

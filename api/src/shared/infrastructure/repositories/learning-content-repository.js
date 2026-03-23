@@ -1,6 +1,5 @@
 import Dataloader from 'dataloader';
 
-import { config } from '../../config.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { LearningContentCache } from '../caches/learning-content-cache.js';
 import { createHistogram } from '../metrics/metrics.js';
@@ -80,8 +79,6 @@ export class LearningContentRepository {
    * @returns {Promise<object[]>}
    */
   async find(cacheKey, callback) {
-    if (!config.lcms.cacheResultIds) return this.#findDtos(cacheKey, callback);
-
     const ids = await this.#findIds(cacheKey, callback);
 
     return this.#loadMany(ids);
@@ -127,43 +124,6 @@ export class LearningContentRepository {
       return ids;
     } finally {
       if (ids) this.#metrics.find.observe(ids.length);
-    }
-  }
-
-  async #findDtos(cacheKey, callback) {
-    let dtos;
-    let stopFindCachePenaltyTimer;
-
-    try {
-      dtos = this.#findCache.get(cacheKey);
-      if (dtos) return dtos;
-
-      let dtosPromise = this.#findCacheMiss.get(cacheKey);
-      if (dtosPromise) {
-        stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
-        dtos = await dtosPromise.finally(() => {
-          stopFindCachePenaltyTimer();
-        });
-
-        this.#metrics.findCacheMiss.observe(dtos.length);
-
-        return dtos;
-      }
-
-      stopFindCachePenaltyTimer = this.#metrics.findCachePenalty.startTimer();
-      dtosPromise = this.#loadDtos(callback, cacheKey).finally(() => {
-        this.#findCacheMiss.delete(cacheKey);
-        stopFindCachePenaltyTimer();
-      });
-      this.#findCacheMiss.set(cacheKey, dtosPromise);
-
-      dtos = await dtosPromise;
-
-      this.#metrics.findCacheMiss.observe(dtos.length);
-
-      return dtos;
-    } finally {
-      if (dtos) this.#metrics.find.observe(dtos.length);
     }
   }
 
@@ -236,24 +196,6 @@ export class LearningContentRepository {
     this.#findCache.set(cacheKey, ids);
 
     return ids;
-  }
-
-  /**
-   * Loads entities from database using a request and writes result to cache.
-   * @param {string} cacheKey
-   * @param {QueryBuilderCallback} callback
-   * @returns {Promise<object[]>}
-   */
-  async #loadDtos(callback, cacheKey) {
-    const knexConn = DomainTransaction.getConnection();
-    const ids = await callback(knexConn.pluck(`${this.#tableName}.id`).from(this.#tableName));
-
-    const dtos = await this.#loadMany(ids, cacheKey);
-
-    logger.debug({ tableName: this.#tableName, cacheKey }, 'caching find result');
-    this.#findCache.set(cacheKey, dtos);
-
-    return dtos;
   }
 
   /**
