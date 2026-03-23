@@ -25,6 +25,7 @@ export default class CreationForm extends Component {
   @service pixToast;
   @service intl;
   @service store;
+  @service router;
 
   @tracked form = {
     name: '',
@@ -55,7 +56,10 @@ export default class CreationForm extends Component {
       this.focusOnFirstFieldInError();
       return;
     }
-    await this.createNetwork(this.form);
+    const network = await this.createNetwork(this.form);
+    if (network) {
+      this.router.transitionTo('authenticated.networks.get', network.id);
+    }
   };
 
   @action
@@ -67,18 +71,11 @@ export default class CreationForm extends Component {
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('components.networks.creation.notifications.success'),
       });
-      this._resetForm();
+      return network;
     } catch {
       this.pixToast.sendErrorNotification({ message: this.intl.t('components.networks.creation.notifications.error') });
       network.rollbackAttributes();
     }
-  }
-
-  _resetForm() {
-    this.form = {
-      name: '',
-      organizationId: '',
-    };
   }
 
   <template>

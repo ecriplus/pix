@@ -56,6 +56,19 @@ module('Acceptance | Networks | Create', function (hooks) {
         // then
         assert.ok(await screen.findByText(t('components.networks.creation.notifications.success')));
       });
+
+      test('it redirects to created network details page', async function (assert) {
+        // given
+        const screen = await visit('/networks/new');
+
+        // when
+        await fillByLabel(`${t('components.networks.creation.name.label')} *`, 'Nouveau réseau');
+        await fillByLabel(`${t('components.networks.creation.organization-id.label')} *`, '1');
+        await click(screen.getByRole('button', { name: t('components.networks.creation.actions.submit') }));
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/10');
+      });
     });
   });
 });
