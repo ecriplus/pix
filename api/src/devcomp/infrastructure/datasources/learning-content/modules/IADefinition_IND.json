@@ -828,7 +828,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong></span>"
+                    "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong> est </span>"
                   },
                   {
                     "type": "select",
@@ -837,14 +837,14 @@
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
                     "tolerances": [],
-                    "options": [
+                    "options": 
                       {
                         "id": "1",
-                        "content": "Donnée"
+                        "content": "une donnée"
                       },
                       {
                         "id": "2",
-                        "content": "Etiquette"
+                        "content": "une étiquette"
                       }
                     ],
                     "solutions": [
@@ -853,7 +853,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span><strong>Salade</strong></span>"
+                    "content": "<br><span><strong>Salade</strong> est </span>"
                   },
                   {
                     "type": "select",
@@ -865,11 +865,11 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Donnée"
+                        "content": "une donnée"
                       },
                       {
                         "id": "2",
-                        "content": "Etiquette"
+                        "content": "une étiquette"
                       }
                     ],
                     "solutions": [
