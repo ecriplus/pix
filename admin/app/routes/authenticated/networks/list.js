@@ -14,10 +14,7 @@ export default class ListRoute extends Route {
   }
 
   model(params) {
-    if (params.name) {
-      return this.store.query('network', { filter: { name: params.name.trim() } });
-    }
-    return this.store.findAll('network');
+    return this.store.query('network', { filter: { name: params.name ? params.name.trim() : '' } });
   }
 
   resetController(controller, isExiting) {
