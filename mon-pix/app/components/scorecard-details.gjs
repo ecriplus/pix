@@ -261,11 +261,13 @@ export default class ScorecardDetails extends Component {
       </:footer>
     </PixModal>
   </template>
+
   @service currentUser;
   @service store;
   @service router;
   @service competenceEvaluation;
   @service featureToggles;
+  @service pixMetrics;
 
   @tracked showResetModal = false;
 
@@ -335,6 +337,7 @@ export default class ScorecardDetails extends Component {
         competenceId: this.args.scorecard.competenceId,
       },
     });
+    this.pixMetrics.trackEvent('resetCompetence', { competenceId: this.args.scorecard.competenceId });
 
     this.showResetModal = false;
   }
@@ -344,6 +347,7 @@ export default class ScorecardDetails extends Component {
     const userId = this.currentUser.user.id;
     const competenceId = this.args.scorecard.competenceId;
     const scorecardId = this.args.scorecard.id;
+    this.pixMetrics.trackEvent('improveCompetence', { competenceId: this.args.scorecard.competenceId });
     return this.competenceEvaluation.improve({ userId, competenceId, scorecardId });
   }
 }
