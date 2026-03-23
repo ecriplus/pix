@@ -1651,6 +1651,10 @@
         "label": "Scaricare il file in formato {format}."
       },
       "elements": {
+        "audio": {
+          "consult-transcription": "Consultare la trascrizione per conoscerne il contenuto.",
+          "missing-content": "Si è verificato un errore durante la riproduzione dell'audio."
+        },
         "image": {
           "consult-alternative-text": "Consultare il testo alternativo per conoscerne il contenuto.",
           "missing-content": "Si è verificato un errore durante la visualizzazione dell'immagine."

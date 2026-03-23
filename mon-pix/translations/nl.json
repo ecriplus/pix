@@ -1650,6 +1650,10 @@
         "label": "Download het bestand in {format}"
       },
       "elements": {
+        "audio": {
+          "consult-transcription": "Raadpleeg de transcriptie om de inhoud te bekijken.",
+          "missing-content": "Er is een fout opgetreden bij het weergeven van de audio."
+        },
         "image": {
           "consult-alternative-text": "Raadpleeg de alternatieve tekst om de inhoud te bekijken.",
           "missing-content": "Er is een fout opgetreden bij het weergeven van de afbeelding."

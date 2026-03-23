@@ -1650,6 +1650,10 @@
         "label": "Datei im Format {format} herunterladen"
       },
       "elements": {
+        "audio": {
+          "consult-transcription": "Lesen Sie die Transkription, um den Inhalt zu erfahren.",
+          "missing-content": "Beim Anzeigen des Audios ist ein Fehler aufgetreten."
+        },
         "image": {
           "consult-alternative-text": "Lesen Sie den alternativen Text, um den Inhalt zu erfahren.",
           "missing-content": "Beim Anzeigen des Bildes ist ein Fehler aufgetreten."
