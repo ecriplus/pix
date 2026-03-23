@@ -1264,6 +1264,45 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(savedOrganization.organizationLearnerType.id).to.equal(organizationLearnerType.id);
     });
 
+    it('creates a structure and fct_structure associated to the created organization', async function () {
+      // given
+      const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+      databaseBuilder.factory.buildCertificationCpfCountry({
+        code: 99100,
+      });
+      await insertMultipleSendingFeatureForNewOrganization();
+
+      await databaseBuilder.commit();
+
+      const organization = new OrganizationForAdmin({
+        name: 'Organization SCO',
+        type: 'SCO',
+        createdBy: superAdminUserId,
+        administrationTeamId: administrationTeam.id,
+        countryCode: 99100,
+        organizationLearnerType: new OrganizationLearnerType({
+          id: organizationLearnerType.id,
+          name: organizationLearnerType.name,
+        }),
+      });
+
+      // when
+      const savedOrganization = await repositories.organizationForAdminRepository.save({
+        organization,
+      });
+
+      // then
+      const fct_structure = await knex('fct_structures').where({ organization_id: savedOrganization.id }).first();
+      const structure = await knex('structures').where({ id: fct_structure.structure_id }).first();
+      expect(fct_structure).to.deep.equal({
+        child_structure_id: null,
+        network_id: null,
+        organization_id: savedOrganization.id,
+        parent_structure_id: null,
+        structure_id: structure.id,
+      });
+    });
+
     context('when the organization type is SCO-1D', function () {
       it('adds mission_management, oralization and learner_import features to the organization', async function () {
         const superAdminUserId = databaseBuilder.factory.buildUser().id;
