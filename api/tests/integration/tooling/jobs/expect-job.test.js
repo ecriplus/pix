@@ -51,14 +51,11 @@ describe('Integration | Tooling | Expect Job', function () {
       // then
       await expect('JobTest').to.have.been.performed.withJob({
         name: 'JobTest',
-        data: {
-          foo: 'bar',
-          correlationContext: EMPTY_CORRELATION_INFO,
-        },
-        retrylimit: job.retry.retryLimit,
-        retrydelay: job.retry.retryDelay,
-        retrybackoff: job.retry.retryBackoff,
-        expirein: job.expireIn,
+        data: { foo: 'bar', correlationContext: EMPTY_CORRELATION_INFO },
+        retryLimit: job.retry.retryLimit,
+        retryDelay: job.retry.retryDelay,
+        retryBackoff: job.retry.retryBackoff,
+        expireIn: job.expireIn,
       });
     });
 
@@ -214,7 +211,7 @@ describe('Integration | Tooling | Expect Job', function () {
     });
 
     afterEach(async function () {
-      await jobQueue.stop();
+      await pgBoss.stop();
     });
 
     describe('#withCronJobsCount', function () {
@@ -224,6 +221,12 @@ describe('Integration | Tooling | Expect Job', function () {
         // when
         await jobQueue.scheduleCronJob({
           name: jobName,
+          cron: '*/5 * * * *',
+          data: { my_data: 'awesome_data' },
+          options: { tz: 'Europe/Paris' },
+        });
+        await jobQueue.scheduleCronJob({
+          name: 'otherJob',
           cron: '*/5 * * * *',
           data: { my_data: 'awesome_data' },
           options: { tz: 'Europe/Paris' },

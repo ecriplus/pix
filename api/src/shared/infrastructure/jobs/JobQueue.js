@@ -43,10 +43,6 @@ class JobQueue {
   unscheduleCronJob(name) {
     return this.pgBoss.unschedule(name);
   }
-
-  async stop() {
-    await this.pgBoss.stop({ graceful: false, timeout: 1000, destroy: true });
-  }
 }
 
 function initContext(job) {

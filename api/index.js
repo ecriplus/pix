@@ -7,6 +7,7 @@ import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/
 import * as prometheusPushGateway from './src/shared/infrastructure/metrics/pushgateway.js';
 import { quitMutex } from './src/shared/infrastructure/mutex/RedisMutex.js';
 import { close as closePubSub } from './src/shared/infrastructure/pubsub.js';
+import { pgBoss } from './src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
@@ -30,6 +31,12 @@ const start = async function () {
   server = await createServer();
   await server.start();
   prometheusPushGateway.startPushingMetrics();
+
+  if (config.infra.startJobInWebProcess) {
+    await registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
+  } else {
+    await pgBoss.start();
+  }
 };
 
 async function _exitOnSignal(signal) {
@@ -41,6 +48,8 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
+  logger.info('Stopping PG Boss client...');
+  await pgBoss.stop();
   logger.info('Closing connections to databases...');
   await databaseConnections.disconnect();
   logger.info('Closing connections to pubsub...');
@@ -55,21 +64,16 @@ async function _exitOnSignal(signal) {
   logger.info('Exiting process...');
 }
 
-process.on('SIGTERM', () => {
-  _exitOnSignal('SIGTERM');
+process.on('SIGTERM', async () => {
+  await _exitOnSignal('SIGTERM');
 });
-process.on('SIGINT', () => {
-  _exitOnSignal('SIGINT');
+process.on('SIGINT', async () => {
+  await _exitOnSignal('SIGINT');
 });
 
-(async () => {
-  try {
-    await start();
-    if (config.infra.startJobInWebProcess) {
-      registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
-    }
-  } catch (error) {
-    logger.error(error);
-    throw error;
-  }
-})();
+try {
+  await start();
+} catch (error) {
+  logger.error(error);
+  throw error;
+}
