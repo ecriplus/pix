@@ -18,7 +18,7 @@ let frameworkNames;
  * @param link{string}
  * @param type{string}
  * @param duration{string}
- * @param locale{string}
+ * @param locales{Array<string>}
  * @param editorName{string}
  * @param editorLogoUrl{string}
  * @param attachedTargetProfileIds{Array<number>}
@@ -46,7 +46,7 @@ async function createTraining({
   link,
   type,
   duration,
-  locale,
+  locales,
   editorName,
   editorLogoUrl,
   attachedTargetProfileIds = [],
@@ -75,7 +75,7 @@ async function createTraining({
     link,
     type,
     duration,
-    locale,
+    locales,
     editorName,
     editorLogoUrl,
   });
