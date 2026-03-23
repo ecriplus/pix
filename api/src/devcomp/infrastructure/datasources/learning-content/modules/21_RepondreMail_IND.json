@@ -97,7 +97,7 @@
               "element": {
                 "id": "402d3db7-2e25-4a7b-a1fd-8dcd04a4b4a8",
                 "type": "expand",
-                "title": "[🕹️ Embed template-mail ouvert avec le fil de discussion visible contenant 4 échanges indentés]",
+                "title": "[🕹️ Template-mail avec le fil de discussion visible contenant 4 échanges indentés]",
                 "content": "<p>Message Gabriel&nbsp;: Accepté pour un choix de date et a invité Mathis – 27 avril 09:23</p><p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations. </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 20:06</p><p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p><p>Alma, chargée d’organisation des Conférences Climax</p><hr><p> Message Gabriel&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 16:32</p><p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: Invitation - Conférence Climax – 25 avril 15:00</p><p>Bonjour Gabriel, La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p><p>À bientôt,<br></p><p>Alma, chargée d’organisation des Conférences Climax</p>"
               }
             },
@@ -922,7 +922,7 @@
               "element": {
                 "id": "ad4d1822-4c32-43b3-b14f-0692459d0c12",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail ou template-mail avec un fil de discussion “Réunion d’équipe”]",
+                "title": "[🕹️ Template-mail avec un fil de discussion “Réunion d’équipe”]",
                 "content": "<p>De&nbsp;: Rosita<br>À&nbsp;: Robert, Albertine, Djibril<br>Objet&nbsp;: Re: Réunion d’équipe – Organisation<br>Date&nbsp;: Lundi 3 juin – 10:18</p><p>Bonjour,<br>Vendredi me conviendrait aussi.<br>Rosita  </p><hr><p> De&nbsp;: Djibril</p><br><p>À&nbsp;: Robert, Albertine Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 10:02</p><p></p><p>Bonjour Robert,<br>Je ne suis pas disponible jeudi à 14h.<br>Serait-il possible de décaler à vendredi ?<br>Djibril  </p><hr><p> De&nbsp;: Albertine</p><br><p>À&nbsp;: Robert, Djibril, Rosita</p><br><p>Objet&nbsp;: Re: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:45</p><p></p><p>Bonjour,<br>Pour moi c’est parfait.<br>Albertine  </p><hr><p> De&nbsp;: Robert</p><br><p>À&nbsp;: Albertine, Djibril, Rosita</p><br><p>Objet&nbsp;: Réunion d’équipe – Organisation</p><br><p>Date&nbsp;: Lundi 3 juin – 09:12</p><p></p><p>Bonjour à tous,<br>Je propose une réunion jeudi à 14h pour faire le point sur le projet.<br>Est-ce que cela vous convient ?<br>Robert</p>"
               }
             },
