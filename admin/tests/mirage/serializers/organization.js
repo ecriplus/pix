@@ -17,4 +17,8 @@ export default ApplicationSerializer.extend({
       },
     };
   },
+
+  shouldIncludeLinkageData(relationshipKey) {
+    return relationshipKey === 'network';
+  },
 });

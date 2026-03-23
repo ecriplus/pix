@@ -125,10 +125,12 @@ module('Acceptance | Organizations | Children', function (hooks) {
     module('when creating child organization from parent page', function () {
       test('it should redirect to New organization page, with parent id in query params', async function (assert) {
         // given
+        const network = this.server.create('network', { name: 'Test Network' });
         const parentOrganization = this.server.create('organization', {
           id: 1,
           name: 'Parent Organization Name',
           features: { PLACES_MANAGEMENT: { active: true } },
+          network,
         });
         const screen = await visit(`/organizations/${parentOrganization.id}/children`);
 
@@ -160,13 +162,13 @@ module('Acceptance | Organizations | Children', function (hooks) {
         }).id;
       });
 
-      test('it displays actions section with create child organization button', async function (assert) {
+      test('it does not display create child organization button', async function (assert) {
         // when
         const screen = await visit(`/organizations/${parentOrganizationId}/children`);
 
         // then
-        assert.ok(
-          screen.getByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        assert.notOk(
+          screen.queryByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
         );
       });
     });
