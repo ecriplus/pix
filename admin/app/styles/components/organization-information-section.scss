@@ -1,7 +1,6 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 
-/* stylelint-disable color-no-hex */
 .organization-information-section {
   &__card {
     &--general {
@@ -94,7 +93,6 @@
         color: var(--pix-error-500);
       }
     }
-
 
     li {
       display: inline-flex;
