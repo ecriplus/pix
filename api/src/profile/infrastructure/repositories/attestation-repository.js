@@ -1,6 +1,12 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { Attestation } from '../../domain/models/Attestation.js';
 
+export const findAll = async () => {
+  const knexConnection = DomainTransaction.getConnection();
+  const rows = await knexConnection('attestations').select('*');
+  return rows.map((row) => new Attestation(row));
+};
+
 export const getByKey = async ({ attestationKey }) => {
   const knexConnection = DomainTransaction.getConnection();
   const attestation = await knexConnection('attestations').where({ key: attestationKey }).first();

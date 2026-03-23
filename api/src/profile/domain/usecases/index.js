@@ -31,6 +31,7 @@ const dependencies = {
   attestationStorage,
 };
 
+import { getAllAttestations } from './get-all-attestations.js';
 import { getAttestationDataForUsers } from './get-attestation-data-for-users.js';
 import { getAttestationDetails } from './get-attestation-details.js';
 import { getProfileRewardsByUserId } from './get-profile-rewards-by-user-id.js';
@@ -42,6 +43,7 @@ import { rewardUser } from './reward-user.js';
 import { shareProfileReward } from './share-profile-reward.js';
 
 const usecasesWithoutInjectedDependencies = {
+  getAllAttestations,
   getAttestationDataForUsers,
   getAttestationDetails,
   getProfileRewardsByUserId,

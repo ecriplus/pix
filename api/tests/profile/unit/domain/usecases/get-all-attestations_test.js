@@ -1,0 +1,16 @@
+import { getAllAttestations } from '../../../../../src/profile/domain/usecases/get-all-attestations.js';
+import { expect, sinon } from '../../../../test-helper.js';
+
+describe('Profile | Unit | Domain | Usecases | get-all-attestations', function () {
+  it('should return all attestations from repository', async function () {
+    // given
+    const attestations = Symbol('attestations');
+    const attestationRepository = { findAll: sinon.stub().resolves(attestations) };
+
+    // when
+    const result = await getAllAttestations({ attestationRepository });
+
+    // then
+    expect(result).to.equal(attestations);
+  });
+});

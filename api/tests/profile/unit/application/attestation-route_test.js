@@ -4,6 +4,49 @@ import { securityPreHandlers } from '../../../../src/shared/application/security
 import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
 
 describe('Unit | Router | user-router', function () {
+  describe('GET /api/admin/attestations', function () {
+    it('should call hasAtLeastOneAccessOf with the correct prehandlers', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      sinon.stub(attestationController, 'getAll').returns('ok');
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('GET', '/api/admin/attestations');
+
+      // then
+      expect(securityPreHandlers.hasAtLeastOneAccessOf).to.have.been.calledOnceWithExactly([
+        securityPreHandlers.checkAdminMemberHasRoleCertif,
+        securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+        securityPreHandlers.checkAdminMemberHasRoleMetier,
+        securityPreHandlers.checkAdminMemberHasRoleSupport,
+      ]);
+    });
+
+    describe('when the user has no admin role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns((request, h) =>
+          h
+            .response({ errors: new Error('forbidden') })
+            .code(403)
+            .takeover(),
+        );
+        sinon.stub(attestationController, 'getAll').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('GET', '/api/admin/attestations');
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        expect(attestationController.getAll.called).to.be.false;
+      });
+    });
+  });
+
   describe('GET /api/users/{userId}/attestations-details', function () {
     const method = 'GET';
     const url = '/api/users/12/attestation-details';

@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { concat, fn, get } from '@ember/helper';
 import { on } from '@ember/modifier';
@@ -18,11 +19,13 @@ import Card from '../card';
 
 export default class OrganizationFeaturesSection extends Component {
   @service accessControl;
+  @service intl;
   @service store;
   @service pixToast;
 
   @tracked form = {};
   @tracked importFormats = [];
+  @tracked attestations = [];
   @tracked displayLearnerImportActivationDialog = false;
   @tracked learnerImportActivationConfirmed = false;
 
@@ -34,6 +37,7 @@ export default class OrganizationFeaturesSection extends Component {
 
   async #loadAsyncData() {
     this.importFormats = await this.store.findAll('organization-learner-import-format');
+    this.attestations = await this.store.findAll('attestation');
   }
 
   #initForm() {
@@ -46,6 +50,15 @@ export default class OrganizationFeaturesSection extends Component {
     return this.importFormats.map((importFormat) => ({
       value: importFormat.name,
       label: importFormat.name,
+    }));
+  }
+
+  get attestationOptions() {
+    return this.attestations.map((attestation) => ({
+      value: attestation.key,
+      label: this.intl.t(
+        `components.organizations.information-section-view.features.attestation-list.${attestation.key}`,
+      ),
     }));
   }
 
@@ -67,6 +80,19 @@ export default class OrganizationFeaturesSection extends Component {
 
   get hasFormChanged() {
     return JSON.stringify(this.form.features) !== JSON.stringify(this.args.organization.features);
+  }
+
+  get isFormValid() {
+    const attestations = this.form.features?.ATTESTATIONS_MANAGEMENT;
+    if (attestations?.active) {
+      return attestations.params?.length;
+    }
+    return true;
+  }
+
+  get isAttestationsInvalid() {
+    const attestations = this.form.features?.ATTESTATIONS_MANAGEMENT;
+    return attestations?.active && !(attestations.params?.length > 0);
   }
 
   @action
@@ -122,6 +148,7 @@ export default class OrganizationFeaturesSection extends Component {
   @action
   async saveFeatures(event) {
     event.preventDefault();
+    if (!this.hasFormChanged || !this.isFormValid) return;
     this.args.organization.set('features', this.form.features);
     await this.args.onSubmit();
     this.#initForm();
@@ -138,6 +165,8 @@ export default class OrganizationFeaturesSection extends Component {
             <FeaturesForm
               @form={{this.form}}
               @importFormatOptions={{this.importFormatOptions}}
+              @attestationOptions={{this.attestationOptions}}
+              @isAttestationsInvalid={{this.isAttestationsInvalid}}
               @updateFormCheckBoxValue={{this.updateFormCheckBoxValue}}
               @updateValue={{this.updateValue}}
               @isManagingStudentAvailable={{this.isManagingStudentAvailable}}
@@ -158,7 +187,12 @@ export default class OrganizationFeaturesSection extends Component {
             >
               {{t "common.actions.cancel"}}
             </PixButton>
-            <PixButton @type="submit" @size="small" @variant="success" @isDisabled={{not this.hasFormChanged}}>
+            <PixButton
+              @type="submit"
+              @size="small"
+              @variant="success"
+              @isDisabled={{or (not this.hasFormChanged) (not this.isFormValid)}}
+            >
               {{t "common.actions.save"}}
             </PixButton>
           </section>
@@ -235,6 +269,7 @@ const FeaturesForm = <template>
             {{#if (and (eq feature "LEARNER_IMPORT") (get organizationFeature "active"))}}
               <PixSelect
                 required
+                size="small"
                 @aria-required={{true}}
                 @requiredLabel={{t "common.forms.mandatory"}}
                 @options={{@importFormatOptions}}
@@ -251,6 +286,32 @@ const FeaturesForm = <template>
                   {{t "components.organizations.editing.organization-learner-import-format.selector.label"}}
                 </:label>
               </PixSelect>
+            {{/if}}
+
+            {{#if (and (eq feature "ATTESTATIONS_MANAGEMENT") (get organizationFeature "active"))}}
+              <PixMultiSelect
+                class="features-section__attestations-select
+                  {{if @isAttestationsInvalid 'features-section__attestations-select--error'}}"
+                size="small"
+                @isSearchable={{true}}
+                @values={{get organizationFeature "params"}}
+                @options={{@attestationOptions}}
+                @onChange={{fn @updateValue "features.ATTESTATIONS_MANAGEMENT.params"}}
+                @isDisabled={{not @canEdit}}
+                @placeholder={{t "components.organizations.editing.attestations.selector.placeholder"}}
+              >
+                <:label>
+                  {{t "components.organizations.editing.attestations.selector.label"}}
+                </:label>
+                <:default as |option|>
+                  {{option.label}}
+                </:default>
+              </PixMultiSelect>
+              {{#if @isAttestationsInvalid}}
+                <p class="features-section__attestations-error">
+                  {{t "components.organizations.editing.attestations.selector.error"}}
+                </p>
+              {{/if}}
             {{/if}}
           </div>
           {{#if (eq feature "PLACES_MANAGEMENT")}}
