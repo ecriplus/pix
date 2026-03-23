@@ -13,6 +13,13 @@ const getNetworkDetails = async function (request, h, dependencies = { networkSe
   return dependencies.networkSerializer.serialize(network);
 };
 
+const update = async function (request, h, dependencies = { networkSerializer }) {
+  const networkId = request.params.networkId;
+  const { networkName } = networkSerializer.deserialize({ data: request.payload.data });
+  const network = await usecases.updateNetwork({ networkId, networkName });
+  return dependencies.networkSerializer.serialize(network);
+};
+
 const create = async function (request, h, dependencies = { networkSerializer }) {
   const { organizationId, networkName } = networkSerializer.deserialize({
     data: request.payload.data,
@@ -32,6 +39,7 @@ const networkAdminController = {
   create,
   findAllFilteredNetworks,
   getNetworkDetails,
+  update,
 };
 
 export { networkAdminController };

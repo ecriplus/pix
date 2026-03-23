@@ -8,6 +8,10 @@ class Network {
       this.headOrganization = new NetworkHeadOrganization({ id: organizationId, name: organizationName });
     }
   }
+
+  updateName(name) {
+    this.name = name;
+  }
 }
 
 export { Network };

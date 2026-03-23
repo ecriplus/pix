@@ -18,7 +18,7 @@ import { findFrameworkAreas } from './handlers/frameworks';
 import { getPaginatedJuryCertificationSummariesBySessionId } from './handlers/get-jury-certification-summaries-by-session-id';
 import { getToBePublishedSessions } from './handlers/get-to-be-published-sessions';
 import { getWithRequiredActionSessions } from './handlers/get-with-required-action-sessions';
-import { createNetwork, findAllFilteredNetworks } from './handlers/networks';
+import { createNetwork, findAllFilteredNetworks, updateNetwork } from './handlers/networks';
 import { createOrganizationMembership } from './handlers/organization-memberships';
 import {
   archiveOrganization,
@@ -371,6 +371,7 @@ export default function routes() {
   this.get('/admin/networks', findAllFilteredNetworks);
   this.get('/admin/networks/:id');
   this.post('/admin/networks', createNetwork);
+  this.patch('/admin/networks/:id', updateNetwork);
 
   this.get('/admin/organizations', findPaginatedFilteredOrganizations);
   this.post('/admin/organizations', (schema, request) => {

@@ -8,6 +8,14 @@ export function createNetwork(schema, request) {
   });
 }
 
+export function updateNetwork(schema, request) {
+  const networkId = request.params.id;
+  const params = JSON.parse(request.requestBody);
+
+  const network = schema.find('network', networkId);
+  return network.update({ name: params.data.attributes.name });
+}
+
 export function findAllFilteredNetworks(schema, request) {
   const name = request.queryParams['filter[name]'];
   let networks = schema.networks.all().models;

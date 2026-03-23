@@ -235,6 +235,40 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
     });
   });
 
+  describe('#update', function () {
+    describe('when the network exists', function () {
+      it('updates and returns the network with the new name', async function () {
+        // given
+        const persistedNetwork = databaseBuilder.factory.buildNetwork({ name: 'Ancien nom' });
+        await databaseBuilder.commit();
+        const network = domainBuilder.acquisition.buildNetwork({ id: persistedNetwork.id, name: 'Nouveau nom' });
+
+        // when
+        const updatedNetwork = await networkRepository.update(network);
+
+        // then
+        const foundNetwork = await knex('networks').select('id', 'name').where({ id: persistedNetwork.id }).first();
+        expect(foundNetwork.name).to.equal('Nouveau nom');
+        expect(updatedNetwork).to.deep.equal(
+          domainBuilder.acquisition.buildNetwork({ id: persistedNetwork.id, name: 'Nouveau nom' }),
+        );
+      });
+    });
+
+    describe('when the network does not exist', function () {
+      it('throws a NotFoundError', async function () {
+        // given
+        const network = domainBuilder.acquisition.buildNetwork({ id: 99999, name: 'Nom' });
+
+        // when
+        const error = await catchErr(networkRepository.update)(network);
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+    });
+  });
+
   describe('#save', function () {
     it('saves and returns the new network', async function () {
       // given

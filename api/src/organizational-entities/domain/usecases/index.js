@@ -110,6 +110,7 @@ import { getOrganizationPlacesStatistics } from './get-organization-places-stati
 import { getRecentlyUsedTags } from './get-recently-used-tags.usecase.js';
 import { updateCertificationCenter } from './update-certification-center.usecase.js';
 import { updateCertificationCenterDataProtectionOfficerInformation } from './update-certification-center-data-protection-officer-information.usecase.js';
+import { updateNetwork } from './update-network.usecase.js';
 import { updateOrganizationInformation } from './update-organization-information.usecase.js';
 import { updateOrganizationsInBatch } from './update-organizations-in-batch.usecase.js';
 
@@ -143,6 +144,7 @@ const usecasesWithoutInjectedDependencies = {
   getRecentlyUsedTags,
   updateCertificationCenterDataProtectionOfficerInformation,
   updateCertificationCenter,
+  updateNetwork,
   updateOrganizationInformation,
   updateOrganizationsInBatch,
 };

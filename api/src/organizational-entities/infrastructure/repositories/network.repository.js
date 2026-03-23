@@ -104,8 +104,26 @@ async function save({ organizationId, networkName }) {
   return _toDomain(savedNetwork);
 }
 
+/**
+ * @param {Network} network
+ * @returns {Promise<Network>}
+ */
+async function update(network) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const [updatedNetwork] = await knexConn('networks')
+    .where({ id: network.id })
+    .update({ name: network.name }, ['id', 'name']);
+
+  if (!updatedNetwork) {
+    throw new NotFoundError();
+  }
+
+  return _toDomain(updatedNetwork);
+}
+
 function _toDomain(network) {
   return new Network(network);
 }
 
-export { findAll, findByOrganizationId, getById, save };
+export { findAll, findByOrganizationId, getById, save, update };
