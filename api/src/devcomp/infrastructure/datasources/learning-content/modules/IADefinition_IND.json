@@ -824,7 +824,7 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Dans ce cas&nbsp;: quel serait un exemple de donnée d’entrée ? et l’exemple d’étiquette associé ?</p>",
+                "instruction": "<p>Dans ce cas&nbsp, quel est l'exemple de donnée d’entrée ? Et l’exemple d’étiquette associée ?</p>",
                 "proposals": [
                   {
                     "type": "text",
