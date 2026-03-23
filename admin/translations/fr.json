@@ -896,6 +896,9 @@
         "child-organization": "Parent :",
         "copy-id": "Copier l'ID",
         "network": "Réseau :",
+        "notifications": {
+          "logo-update-success": "Le logo de l'organisation a bien été mis à jour."
+        },
         "parent-organization": "Organisation mère"
       },
       "information-section-view": {
