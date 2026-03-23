@@ -4,14 +4,36 @@ import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | UserEmailRepository', function () {
   describe('#saveEmailModificationDemand', function () {
-    it('should save an email modification demand', async function () {
+    it('saves an email modification demand', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
+      const action = 'update-email';
       const newEmail = 'user@example.net';
       const code = '999999';
 
       // when
-      const key = await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail });
+      const key = await userEmailRepository.saveEmailModificationDemand({ userId, action, code, newEmail });
+
+      // then
+      expect(key).to.equal(userId);
+    });
+
+    it('saves an email creation demand', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const action = 'add-email';
+      const newEmail = 'user@example.net';
+      const passwordHash = 'hashed-password';
+      const code = '999999';
+
+      // when
+      const key = await userEmailRepository.saveEmailModificationDemand({
+        userId,
+        action,
+        code,
+        newEmail,
+        passwordHash,
+      });
 
       // then
       expect(key).to.equal(userId);
@@ -19,7 +41,7 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
   });
 
   describe('#getEmailModificationDemandByUserId', function () {
-    it('should retrieve the email modification demand if it exists', async function () {
+    it('retrieves the email modification demand if it exists', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
       const newEmail = 'user@example.net';

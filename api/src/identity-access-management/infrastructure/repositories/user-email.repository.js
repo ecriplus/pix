@@ -9,15 +9,17 @@ const EXPIRATION_DELAY_SECONDS = config.temporaryStorage.expirationDelaySeconds;
  *
  * @param {Object} params
  * @param {string} params.userId
+ * @param {'update-email'|'add-email'} params.action
  * @param {string} params.code
  * @param {string} params.newEmail
+ * @param {string} params.passwordHash
  */
-const saveEmailModificationDemand = function ({ userId, code, newEmail }) {
+const saveEmailModificationDemand = function ({ userId, action, code, newEmail, passwordHash }) {
   const key = userId;
 
   return verifyEmailTemporaryStorage.save({
     key,
-    value: { code, newEmail },
+    value: { action, code, newEmail, passwordHash },
     expirationDelaySeconds: EXPIRATION_DELAY_SECONDS,
   });
 };
