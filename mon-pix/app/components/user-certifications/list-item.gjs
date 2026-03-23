@@ -9,7 +9,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { not } from 'ember-truth-helpers';
 import CopyPasteButton from 'mon-pix/components/copy-paste-button';
 import { CERTIFICATE_STATUSES, EXTRA_CERTIFICATE_STATUSES } from 'mon-pix/models/certificate-summary';
 
@@ -27,18 +26,22 @@ export default class ListItem extends Component {
       [CERTIFICATE_STATUSES.VALIDATED]: {
         color: 'green',
         content: this.intl.t('pages.certifications-list.statuses.validated'),
+        displayFramework: true,
       },
       [CERTIFICATE_STATUSES.REJECTED]: {
         color: 'error',
         content: this.intl.t('pages.certifications-list.statuses.rejected'),
+        displayFramework: true,
       },
       [CERTIFICATE_STATUSES.CANCELLED]: {
         color: 'error',
         content: this.intl.t('pages.certifications-list.statuses.cancelled'),
+        displayFramework: false,
       },
       [CERTIFICATE_STATUSES.WAITING_FOR_RESULTS]: {
         color: 'primary',
         content: this.intl.t('pages.certifications-list.statuses.not-published'),
+        displayFramework: false,
       },
     };
     return tagMap[this.args.certificateSummary.status];
@@ -61,8 +64,12 @@ export default class ListItem extends Component {
     return tagMap[this.args.certificateSummary.extraCertificationStatus];
   }
 
-  get isWaitingForResult() {
-    return this.args.certificateSummary.status === CERTIFICATE_STATUSES.WAITING_FOR_RESULTS;
+  get isPublished() {
+    return this.args.certificateSummary.status !== CERTIFICATE_STATUSES.WAITING_FOR_RESULTS;
+  }
+
+  get shouldDisplayFramework() {
+    return !this.isPublished || this.args.certificateSummary.status === CERTIFICATE_STATUSES.CANCELLED;
   }
 
   get frameworkName() {
@@ -76,13 +83,8 @@ export default class ListItem extends Component {
     );
   }
 
-  get shouldDisplayScore() {
-    const hasCoreScope = ['CORE', 'CLEA'].includes(this.args.certificateSummary.certificationFramework);
-    return hasCoreScope && this.args.certificateSummary.isValidated;
-  }
-
   get pixScore() {
-    return this.shouldDisplayScore ? this.args.certificateSummary.pixScore : '-';
+    return this.args.certificateSummary.isValidated ? this.args.certificateSummary.pixScore : '-';
   }
 
   get downloadLabel() {
@@ -116,7 +118,7 @@ export default class ListItem extends Component {
             <div>
               {{#if this.extraStatusTagData}}
                 <strong>{{t "pages.certification-frameworks.CORE"}}&nbsp;:</strong>
-              {{else if (not this.isWaitingForResult)}}
+              {{else if this.statusTagData.displayFramework}}
                 <strong>{{this.frameworkName}}&nbsp;:</strong>
               {{/if}}
               {{this.statusTagData.content}}
@@ -134,8 +136,8 @@ export default class ListItem extends Component {
               </div>
             </PixTag>
           {{/if}}
-          {{#if this.isWaitingForResult}}
-            <p class="info">
+          {{#if this.shouldDisplayFramework}}
+            <p data-testid="pw-certification-card-details-framework" class="info">
               <strong>{{this.frameworkName}}</strong>
             </p>
           {{/if}}
@@ -150,7 +152,7 @@ export default class ListItem extends Component {
         </div>
         <div class="certification-item__hexagon">
           <strong class="score">{{this.pixScore}}</strong>
-          {{#if this.shouldDisplayScore}}
+          {{#if @certificateSummary.isValidated}}
             <span class="pix">{{t "common.pix"}}</span>
           {{/if}}
         </div>
@@ -161,6 +163,7 @@ export default class ListItem extends Component {
           {{@certificateSummary.comment}}
         </p>
       {{/if}}
+
       {{#if @certificateSummary.isValidated}}
         {{#if this.errorMessage}}
           <PixNotificationAlert @type="error" @withIcon={{true}} class="certification-item-error">

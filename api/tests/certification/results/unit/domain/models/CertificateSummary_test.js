@@ -64,16 +64,19 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           {
             assessmentResultStatus: AssessmentResult.status.REJECTED,
             status: CERTIFICATE_STATUSES.REJECTED,
+            extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
           },
           {
             assessmentResultStatus: AssessmentResult.status.CANCELLED,
             status: CERTIFICATE_STATUSES.CANCELLED,
+            extraStatus: null,
           },
           {
             assessmentResultStatus: AssessmentResult.status.VALIDATED,
             status: CERTIFICATE_STATUSES.VALIDATED,
+            extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
           },
-        ].forEach(({ assessmentResultStatus, status }) => {
+        ].forEach(({ assessmentResultStatus, status, extraStatus }) => {
           it(`should set the status of the certificate as ${status} when assessment result status is ${assessmentResultStatus}`, function () {
             const actualCertificateSummary = CertificateSummary.buildFrom({
               ...baseData,
@@ -90,8 +93,8 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
                 context: JuryCommentContexts.CANDIDATE,
               }),
               status,
-              extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              extraCertificationStatus: extraStatus,
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);

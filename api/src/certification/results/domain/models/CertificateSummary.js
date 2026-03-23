@@ -74,12 +74,15 @@ export class CertificateSummary {
       [null]: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
     };
 
-    if (!isPublished) {
+    const isWaitingForResult = !isPublished;
+    const isCancelled = assessmentResultStatus === AssessmentResult.status.CANCELLED;
+
+    if (isWaitingForResult) {
       status = CERTIFICATE_STATUSES.WAITING_FOR_RESULTS;
       extraCertificationStatus = null;
     } else {
       status = mappingAssessmentResultStatuses[assessmentResultStatus];
-      extraCertificationStatus = mappingExtraCertificationStatus[isExtraCertificationAcquired];
+      extraCertificationStatus = isCancelled ? null : mappingExtraCertificationStatus[isExtraCertificationAcquired];
     }
 
     const juryComment = new JuryComment({

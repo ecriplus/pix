@@ -32,6 +32,7 @@ module('Integration | Component | User certifications | List item', function (ho
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.not-published')));
+      assert.ok(screen.getByText(t('pages.certification-frameworks.CORE')));
       assert.dom(screen.getByText('-')).exists();
       assert.dom(screen.queryByText(t('pages.certificate.verification-code.title'), { exact: false })).doesNotExist();
       assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
@@ -217,6 +218,7 @@ module('Integration | Component | User certifications | List item', function (ho
 
       // then
       assert.ok(screen.getByText(t('pages.certifications-list.statuses.cancelled')));
+      assert.ok(screen.getByText(t('pages.certification-frameworks.CORE')));
       assert.ok(screen.getByText(t('pages.certifications-list.comment'), { exact: false }));
       assert.dom(screen.queryByText(t('pages.certificate.verification-code.title'), { exact: false })).doesNotExist();
       assert.dom(screen.queryByText(t('pages.certifications-list.buttons.details'))).doesNotExist();
@@ -249,7 +251,7 @@ module('Integration | Component | User certifications | List item', function (ho
       assert.strictEqual(tags.length, 2);
     });
 
-    test('does not display score for a validated Pix+ certification', async function (assert) {
+    test('does display score for a validated Pix+ certification', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const certificateSummary = store.createRecord('certificate-summary', {
@@ -267,9 +269,8 @@ module('Integration | Component | User certifications | List item', function (ho
       const screen = await render(<template><ListItem @certificateSummary={{certificateSummary}} /></template>);
 
       // then
-      assert.dom(screen.queryByText('500')).doesNotExist();
-      assert.dom(screen.queryByText(t('common.pix'))).doesNotExist();
-      assert.dom(screen.getByText('-')).exists();
+      assert.dom(screen.getByText('500')).exists();
+      assert.dom(screen.getByText(t('common.pix'))).exists();
     });
 
     test('displays rejected tag for extra status NOT_ACQUIRED', async function (assert) {
