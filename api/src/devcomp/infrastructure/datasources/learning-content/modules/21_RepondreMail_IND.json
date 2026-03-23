@@ -41,8 +41,8 @@
               "element": {
                 "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail avec 2-3 mails dont le mail d’Alma]",
-                "content": "<p><strong>Description :</strong></p><ul><li>Simulateur auto-validant</li><li>Rappel de la procédure pour répondre à un mail (RépondreMail_Nov)</li><li>Commencer directement depuis l’interface de messagerie ouverte&nbsp;: version smartphone ou ordi ? (à voir selon répondremail_nov)</li><li>Un mail présent&nbsp;:</li></ul><blockquote><em>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</em></blockquote><blockquote><em>Bonjour Gabriel,</em></blockquote><blockquote><em>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants.</em></blockquote><blockquote><em>À bientôt,</em></blockquote><blockquote><em>Alma, chargée d’organisation des Conférences Climax</em></blockquote><br><p><strong>Actions attendues</strong>&nbsp;: Ouvrir le mail d'Alma &gt;&nbsp;Cliquer sur “Répondre” &gt; copier-coller la réponse (avec aide au besoin pour écrire le message) &gt; Cliquer sur “Envoyer”</p>"
+                "title": "[🕹️ Simulateur Pixmail auto-validant pour effectuer l’action “Répondre”]",
+                "content": "<p><strong>Début</strong> : PixMail ouvert sur la boîte de réception avec 3 mails présents dont celui d'Alma.</p><p><em><br></em></p><p><em><code>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</code></em></p><p><em><code><br></code></em></p><p><em><code>Bonjour Gabriel,</code></em></p><p><em><code>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants ?\n</code></em></p><p><em><code>À bientôt,\n</code></em></p><p><em><code>Alma, chargée d’organisation des Conférences Climax</code></em></p><p><em><br></em></p>\n<p><strong>Actions attendues</strong></p>\n<ol>\n    <li>Ouvrir le mail d’Alma</li>\n    <li>Cliquer sur \"Répondre\"</li>\n    <li>Copier-coller la réponse (avec aide au besoin pour écrire le message ?)</li>\n    <li>Cliquer sur \"Envoyer\"</li>\n</ol>"
               }
             },
             {
@@ -97,7 +97,7 @@
               "element": {
                 "id": "402d3db7-2e25-4a7b-a1fd-8dcd04a4b4a8",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail : mail ouvert avec le fil de discussion visible contenant 3-4 échanges]",
+                "title": "[🕹️ Embed template-mail ouvert avec le fil de discussion visible contenant 4 échanges indentés]",
                 "content": "<p>Message Gabriel&nbsp;: Accepté pour un choix de date et a invité Mathis – 27 avril 09:23</p><p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations. </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 20:06</p><p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p><p>Alma, chargée d’organisation des Conférences Climax</p><hr><p> Message Gabriel&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 16:32</p><p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: Invitation - Conférence Climax – 25 avril 15:00</p><p>Bonjour Gabriel, La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p><p>À bientôt,<br></p><p>Alma, chargée d’organisation des Conférences Climax</p>"
               }
             },
@@ -251,7 +251,7 @@
               "element": {
                 "id": "ebe2a5f6-df6f-46f2-a276-134869511b42",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail avec 4 mails non-lus ou capture d’écran ou web component]",
+                "title": "[🕹️ Capture d'écran basée sur Pixmail avec 4 mails : objet + aperçu du mail]",
                 "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Mia (mamma.mia@pixmail.org) - Grande nouvelle -&nbsp;Coucou, je te mets dans la confidence, mais ça y est on attend un bébé ! 👶</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
               }
             },
@@ -647,7 +647,7 @@
               "element": {
                 "id": "8f98cc06-05c2-42f7-8f05-221fc7cd2933",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail : 5 personnes dont 4 ont envoyé des mails dans le fil]",
+                "title": "[🕹️ TemplateMail avec un (long) fil de discussion : 5 personnes dont 4 ont envoyé des mails dans le fil]",
                 "content": "<p>De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 21:39</p><p>Hello, </p><p>Super tout ça !</p><p>J’apporterai quelques biscuits pour compléter et je pense qu’on est bon.<br></p><p>Hâte de vous voir ! 🙂</p><p>Douglas</p><hr> De : Ahmed<br>À : moi, Douglas, Sophie, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 17:17<p></p><p>Bonjour et merci pour l’invitation Douglas </p><p>Je peux apporter une salade pour ma part.<br></p><p>Et j’ai plein de cerises cette année : ça nous fera un bon dessert après le pâté ! 🍒</p><p>À samedi,<br></p><p>Ahmed</p><p></p><hr> De : Sophie<br>À : moi, Douglas, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 20:02<p></p><p>Salut à tous !</p><p>Du pâté en croûte : j’adore ça ! De mon côté, je m’occupe des boissons si ça vous va ?</p><p>À très vite,<br></p><p>Sophie</p><hr> De : moi<br>À : Douglas, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 19:27<p></p><p>Coucou,</p><p>Bonne idée ! On devrait avoir un beau soleil.<br>J’apporterai un pâté en croûte fait avec amour. ♥️</p><p>Bonne soirée,<br></p><p>Karim</p><hr>  De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Pique-nique samedi<br>Date : Lundi 3 juin – 19:11  <p></p><p>Salut les amis !</p><p>Je vous propose un pique-nique dans le parc samedi prochain.<br>Qui peut apporter quelque chose ? (dessert, boisson, salade…)</p><p>Amicalement,</p><p>Douglas</p>"
               }
             },
@@ -889,7 +889,7 @@
                 "id": "dc83d812-92d7-4785-94d1-88d21c5affb8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans la messagerie électronique ci-dessous, Angelina vous a envoyé un mail avec des recommandations de restaurant.</p><p><strong>Transférez ce courrier à andreis@pixmail.org en ajoutant le message suivant :&nbsp; </strong></p><blockquote><em><br></em></blockquote><blockquote><em>Bonjour Andreis,</em></blockquote><blockquote><em>Mon amie Angelina me propose cette sélection de restaurants pour jeudi. Tu as une préférence ?</em></blockquote><blockquote><em>Bonne journée.</em></blockquote>"
+                "content": "<p>Dans la messagerie électronique ci-dessous, Angelina vous a envoyé un mail avec des recommandations de restaurant.</p><p><strong>Transférez ce mail à andreis@pixmail.org en ajoutant le message suivant :&nbsp; </strong></p><blockquote><em><br></em></blockquote><blockquote><em>Bonjour Andreis,</em></blockquote><blockquote><em>Mon amie Angelina me propose cette sélection de restaurants pour jeudi. Tu as une préférence ?</em></blockquote><blockquote><em>Bonne journée.</em></blockquote>"
               }
             },
             {
@@ -898,7 +898,7 @@
                 "id": "ebe18094-071a-498c-a44b-1474cd0ee11f",
                 "type": "expand",
                 "title": "[🕹️ Simulateur Pixmail auto-validant pour effectuer l’action “Transférer”]",
-                "content": "<p>(cf éval : @repondremail3)</p>"
+                "content": "<p>(cf éval : <a href=\"https://app.recette.pix.fr/assessments/100354897/challenges/0?challengeId=challengeYceJLfHCA4rxH\" target=\"_blank\">@repondremail3</a>)</p>\n<p><br></p>\n\n<p><strong>Actions attendues</strong></p>\n<ol>\n\n    <li>Cliquer sur \"Transférer\"</li>\n    <li>Copier-coller le message</li>\n    <li>Cliquer sur \"Envoyer\"</li>\n</ol>"
               }
             }
           ]
