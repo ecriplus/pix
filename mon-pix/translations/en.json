@@ -732,6 +732,15 @@
         "title": "How can I view and share my certification results?"
       }
     },
+    "certification-frameworks": {
+      "CLEA": "CLéA Numérique",
+      "CORE": "Pix certification",
+      "DROIT": "Pix+ Droit",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1st degree",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degree",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Health Professionals"
+    },
     "certification-instructions": {
       "buttons": {
         "continuous": {

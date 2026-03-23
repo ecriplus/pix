@@ -4,6 +4,7 @@ import * as sharedCertificationCourseRepository from '../../../shared/infrastruc
 import * as certificationReportRepository from '../../../shared/infrastructure/repositories/certification-report-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
 import * as certificateRepository from '../../infrastructure/repositories/certificate-repository.js';
+import * as certificateSummaryRepository from '../../infrastructure/repositories/certificate-summary-repository.js';
 import * as certificationCourseRepository from '../../infrastructure/repositories/certification-course-repository.js';
 import * as certificationLivretScolaireRepository from '../../infrastructure/repositories/certification-livret-scolaire-repository.js';
 import * as certificationParcoursupRepository from '../../infrastructure/repositories/certification-parcoursup-repository.js';
@@ -27,6 +28,7 @@ import * as scoCertificationCandidateRepository from '../../infrastructure/repos
  * @typedef {sharedSessionRepository} SharedSessionRepository
  * @typedef {certificationLivretScolaireRepository} CertificationLivretScolaireRepository
  * @typedef {competenceTreeRepository} CompetenceTreeRepository
+ * @typedef {certificateSummaryRepository} CertificateSummaryRepository
  **/
 
 const dependencies = {
@@ -42,10 +44,12 @@ const dependencies = {
   sharedSessionRepository,
   competenceTreeRepository,
   certificationLivretScolaireRepository,
+  certificateSummaryRepository,
 };
 
 import { findCertificatesForDivision } from './find-certificates-for-division.js';
 import { findCertificationAttestationsForDivision } from './find-certification-attestations-for-division.js';
+import { findUserCertificateSummaries } from './find-user-certificate-summaries.js';
 import { findUserCertificationCourses } from './find-user-certification-courses.js';
 import { findUserPrivateCertificates } from './find-user-private-certificates.js';
 import { getCertificate } from './get-certificate.js';
@@ -65,6 +69,7 @@ import { getShareableCertificate } from './get-shareable-certificate.js';
 const usecasesWithoutInjectedDependencies = {
   findCertificatesForDivision,
   findCertificationAttestationsForDivision,
+  findUserCertificateSummaries,
   findUserCertificationCourses,
   findUserPrivateCertificates,
   getCertificate,

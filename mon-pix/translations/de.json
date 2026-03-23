@@ -731,6 +731,15 @@
         "title": "Wie kann ich meine Zertifizierungsergebnisse einsehen und weitergeben?"
       }
     },
+    "certification-frameworks": {
+      "CLEA": "CLéA Numérique",
+      "CORE": "Pix certification",
+      "DROIT": "Pix+ Recht",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1. Stufe",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Gesundheitsberufe"
+    },
     "certification-instructions": {
       "buttons": {
         "continuous": {
@@ -1354,13 +1363,6 @@
         "you-have-reached-level": "Sie haben erreicht"
       },
       "title": "Ergebnisse Ihrer Kompetenz"
-    },
-    "complementary-certification-names": {
-      "DROIT": "Pix+ Recht",
-      "EDU_1ER_DEGRE": "Pix+ Édu 1. Stufe",
-      "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
-      "EDU_CPE": "Pix+ Édu CPE",
-      "PRO_SANTE": "Pix+ Gesundheitsberufe"
     },
     "course": {
       "errors": {

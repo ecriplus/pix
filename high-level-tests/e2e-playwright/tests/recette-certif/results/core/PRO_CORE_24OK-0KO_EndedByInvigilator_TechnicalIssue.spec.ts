@@ -4,6 +4,7 @@ import {
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
+import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
@@ -37,12 +38,13 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, invigilatorOverviewPage, certificationNumber } = await enrollCandidateAndPassExam({
-      testRef,
-      rightWrongAnswersSequence: Array(24).fill(true),
-      pixAppPage: pixAppCertifiablePage,
-      certifiableUserData,
-    });
+    const { sessionNumber, invigilatorOverviewPage, certificationNumber, certificationCenterName } =
+      await enrollCandidateAndPassExam({
+        testRef,
+        rightWrongAnswersSequence: Array(24).fill(true),
+        pixAppPage: pixAppCertifiablePage,
+        certifiableUserData,
+      });
 
     await test.step('user stops at 25th challenge', async () => {
       await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('25 / 32');
@@ -124,10 +126,17 @@ test(
     await test.step('User checks their certification result', async () => {
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
-      const certificationsListPage = await homePage.goToMyCertifications();
-      const status = await certificationsListPage.getCertificationStatus(certificationNumber);
-      expect(status).toBe('Obtenue');
-      const certificationResultPage = await certificationsListPage.goToCertificationResult(certificationNumber);
+      const certificateListPage = await homePage.goToMyCertificates();
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+        await certificateListPage.getCertificateData(certificationNumber);
+      expect(mainStatus).toBe('Certification Pix : Obtenue');
+      expect(extraStatus).toBe(null);
+      expect(detailsFramework).toBe(null);
+      expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
+      expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
+      expect(result).toBe('895 PIX');
+      expect(comment).toBe(null);
+      const certificationResultPage = await certificateListPage.goToCertificateDetails(certificationNumber);
       const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
       expect(pixScoreObtained).toEqual('PIX 895 CERTIFIÉS');
       expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');

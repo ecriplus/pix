@@ -17,6 +17,7 @@ type EnrollCandidateResult = {
   sessionNumber: string;
   accessCode: string;
   invigilatorCode: string;
+  certificationCenterName: string;
 };
 
 type PassCertificationExamParams = {
@@ -62,6 +63,7 @@ type EnrollCandidateAndPassExamParams = {
 type EnrollCandidateAndPassExamResult = {
   sessionNumber: string;
   certificationNumber: string;
+  certificationCenterName: string;
   invigilatorOverviewPage: InvigilatorOverviewPage;
 };
 
@@ -80,13 +82,15 @@ export const certifSetupFixtures = baseCertifTest.extend<{
     }: EnrollCandidateParams) => {
       let sessionNumber = '',
         accessCode = '',
-        invigilatorCode = '';
+        invigilatorCode = '',
+        certificationCenterName = '';
 
       await certifSetupFixtures.step('Enrollment', async () => {
         await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
         const sessionManagementPage = await certifSetupFixtures.step('Create session', async () => {
           const sessionListPage = new SessionListPage(pixCertifProPage);
+          certificationCenterName = await sessionListPage.getCertificationCenterName();
           const sessionCreationPage = await sessionListPage.goToCreateSession();
           const sessionManagementPage = await sessionCreationPage.createSession({
             address: `address ${testRef}`,
@@ -116,6 +120,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
         sessionNumber,
         accessCode,
         invigilatorCode,
+        certificationCenterName,
       };
     };
     await use(enrollCandidate);
@@ -268,7 +273,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       rightWrongAnswersSequence,
       pixAppPage,
     }: EnrollCandidateAndPassExamParams) => {
-      const { sessionNumber, accessCode, invigilatorCode } = await enrollCandidate({
+      const { sessionNumber, accessCode, invigilatorCode, certificationCenterName } = await enrollCandidate({
         testRef,
         certificationKey,
         certifiableUserData,
@@ -283,7 +288,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
         pixAppPage,
       });
 
-      return { sessionNumber, invigilatorOverviewPage, certificationNumber };
+      return { sessionNumber, invigilatorOverviewPage, certificationNumber, certificationCenterName };
     };
     await use(enrollCandidateAndPassExam);
   },

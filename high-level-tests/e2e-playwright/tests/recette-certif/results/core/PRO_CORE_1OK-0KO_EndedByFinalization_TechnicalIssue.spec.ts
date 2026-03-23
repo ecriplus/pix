@@ -4,6 +4,7 @@ import {
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
+import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
@@ -36,7 +37,7 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
+    const { sessionNumber, certificationNumber, certificationCenterName } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: [true],
       pixAppPage: pixAppCertifiablePage,
@@ -119,9 +120,18 @@ test(
     await test.step('User checks their certification result', async () => {
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
-      const certificationsListPage = await homePage.goToMyCertifications();
-      const status = await certificationsListPage.getCertificationStatus(certificationNumber);
-      expect(status).toBe('Annulée');
+      const certificateListPage = await homePage.goToMyCertificates();
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+        await certificateListPage.getCertificateData(certificationNumber);
+      expect(mainStatus).toBe('Annulée');
+      expect(extraStatus).toBe(null);
+      expect(detailsFramework).toBe('Certification Pix');
+      expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
+      expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
+      expect(result).toBe('-');
+      expect(comment).toBe(
+        "Commentaire : Un ou plusieurs problème(s) technique(s), signalé(s) à votre surveillant pendant la session de certification, a/ont affecté la qualité du test de certification. En raison du trop grand nombre de questions auxquelles vous n'avez pas pu répondre dans de bonnes conditions, nous ne sommes malheureusement pas en mesure de calculer un score fiable et de fournir un certificat. La certification est annulée, le prescripteur de votre certification (le cas échéant), en est informé.",
+      );
     });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },

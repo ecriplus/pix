@@ -1,10 +1,17 @@
 import dayjs from 'dayjs';
 
+import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
+import {
+  CERTIFICATE_STATUSES,
+  CERTIFICATE_TYPES,
+  EXTRA_CERTIFICATE_STATUSES,
+} from '../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
+import * as AssesmentResult from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
@@ -468,6 +475,144 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'result-competence-tree': {
                 data: null,
               },
+            },
+          },
+        ]);
+      });
+    });
+  });
+
+  describe('GET /api/certificate-summaries', function () {
+    let certificationCenterId;
+    beforeEach(async function () {
+      server = await createServer();
+      userId = databaseBuilder.factory.buildUser().id;
+      certificationCenterId = databaseBuilder.factory.buildCertificationCenter({ name: 'SunnydaleHigh' }).id;
+    });
+
+    context('when user is not authenticated', function () {
+      it('should return 401 HTTP status code', async function () {
+        // given
+        const options = {
+          method: 'GET',
+          url: '/api/certificate-summaries',
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(401);
+      });
+    });
+
+    context('when user is authenticated', function () {
+      it('should return 200 HTTP status code along with all the user certifications', async function () {
+        // given
+        const sessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          certificationCenter: 'SunnydaleHigh',
+        }).id;
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          sessionId: sessionId,
+          isPublished: true,
+          framework: Frameworks.CORE,
+          verificationCode: 'ABC123',
+          createdAt: new Date('2025-05-05'),
+          userId,
+          version: AlgorithmEngineVersion.V3,
+        }).id;
+        const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
+          pixScore: 777,
+          status: AssesmentResult.status.VALIDATED,
+          commentForCandidate: 'COUCOU C MOI',
+        }).id;
+        databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+          certificationCourseId,
+          lastAssessmentResultId,
+        });
+
+        const eduSessionId = databaseBuilder.factory.buildSession({
+          certificationCenterId,
+          certificationCenter: 'SunnydaleHigh',
+        }).id;
+        const eduCertificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          sessionId: eduSessionId,
+          isPublished: true,
+          framework: Frameworks.EDU_1ER_DEGRE,
+          verificationCode: 'DEF456',
+          createdAt: new Date('2025-06-06'),
+          userId,
+          version: AlgorithmEngineVersion.V2,
+        }).id;
+        const eduLastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
+          pixScore: 555,
+          status: AssesmentResult.status.VALIDATED,
+          commentForCandidate: 'Bravo',
+        }).id;
+        databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+          certificationCourseId: eduCertificationCourseId,
+          lastAssessmentResultId: eduLastAssessmentResultId,
+        });
+        const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+          key: 'EDU_1ER_DEGRE',
+        });
+        const complementaryCertificationBadge = databaseBuilder.factory.buildComplementaryCertificationBadge({
+          complementaryCertificationId: complementaryCertification.id,
+          badgeId: databaseBuilder.factory.buildBadge({ key: 'pix_edu_1er_degre' }).id,
+        });
+        const complementaryCertificationCourse = databaseBuilder.factory.buildComplementaryCertificationCourse({
+          certificationCourseId: eduCertificationCourseId,
+          complementaryCertificationId: complementaryCertification.id,
+          complementaryCertificationBadgeId: complementaryCertificationBadge.id,
+        });
+        databaseBuilder.factory.buildComplementaryCertificationCourseResult({
+          complementaryCertificationCourseId: complementaryCertificationCourse.id,
+          complementaryCertificationBadgeId: complementaryCertificationBadge.id,
+          acquired: false,
+        });
+
+        await databaseBuilder.commit();
+        options = {
+          method: 'GET',
+          url: '/api/certificate-summaries',
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data).to.deep.equal([
+          {
+            type: 'certificate-summaries',
+            id: `${certificationCourseId}`,
+            attributes: {
+              'verification-code': 'ABC123',
+              'certification-center-name': 'SunnydaleHigh',
+              'certification-framework': Frameworks.CORE,
+              'certification-started-at': new Date('2025-05-05'),
+              comment: 'COUCOU C MOI',
+              'pix-score': 777,
+              'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
+              status: CERTIFICATE_STATUSES.VALIDATED,
+              'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
+            },
+          },
+          {
+            type: 'certificate-summaries',
+            id: `${eduCertificationCourseId}`,
+            attributes: {
+              'verification-code': 'DEF456',
+              'certification-center-name': 'SunnydaleHigh',
+              'certification-framework': Frameworks.EDU_1ER_DEGRE,
+              'certification-started-at': new Date('2025-06-06'),
+              comment: 'Bravo',
+              'certificate-type': CERTIFICATE_TYPES.ATTESTATION,
+              'pix-score': 555,
+              status: CERTIFICATE_STATUSES.VALIDATED,
+              'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_ACQUIRED,
             },
           },
         ]);

@@ -1,16 +1,17 @@
 import dayjs from 'dayjs';
 
-import { getChallengeLocale } from '../../../../src/shared/infrastructure/utils/request-response-utils.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
+import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { Certificate } from '../domain/models/v3/Certificate.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
+import * as certificateSummarySerializer from '../infrastructure/serializers/certificate-summary-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
 import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-pdf-certificate.js';
 import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
 
-const getCertificateByVerificationCode = async function (request, h, dependencies = { certificateSerializer }) {
+async function getCertificateByVerificationCode(request, h, dependencies = { certificateSerializer }) {
   const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
@@ -31,13 +32,9 @@ const getCertificateByVerificationCode = async function (request, h, dependencie
     });
   }
   return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
-};
+}
 
-const getCertificate = async function (
-  request,
-  h,
-  dependencies = { certificateSerializer, privateCertificateSerializer },
-) {
+async function getCertificate(request, h, dependencies = { certificateSerializer, privateCertificateSerializer }) {
   const locale = getChallengeLocale(request);
   const i18n = getI18nFromRequest(request);
 
@@ -59,18 +56,26 @@ const getCertificate = async function (
     });
     return dependencies.privateCertificateSerializer.serialize(certificate, { translate: i18n.__ });
   }
-};
+}
 
-const findUserCertificates = async function (request) {
+async function findUserCertificates(request) {
   const i18n = getI18nFromRequest(request);
 
   const userId = request.auth.credentials.userId;
 
   const privateCertificates = await usecases.findUserPrivateCertificates({ userId });
   return privateCertificateSerializer.serialize(privateCertificates, { translate: i18n.__ });
-};
+}
 
-const getPDFCertificate = async function (
+async function findUserCertificateSummaries(request) {
+  const i18n = getI18nFromRequest(request);
+  const userId = request.auth.credentials.userId;
+
+  const certificateSummaries = await usecases.findUserCertificateSummaries({ userId });
+  return certificateSummarySerializer.serialize(certificateSummaries, { translate: i18n.__ });
+}
+
+async function getPDFCertificate(
   request,
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
@@ -109,9 +114,9 @@ const getPDFCertificate = async function (
     .code(200)
     .header('Content-Disposition', `attachment; filename=${fileName}`)
     .header('Content-Type', 'application/pdf');
-};
+}
 
-const getSessionCertificates = async function (
+async function getSessionCertificates(
   request,
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
@@ -151,9 +156,9 @@ const getSessionCertificates = async function (
     )
     .header('Content-Disposition', `attachment; filename=session-${sessionId}-${translatedFileName}`)
     .header('Content-Type', 'application/pdf');
-};
+}
 
-const downloadDivisionCertificates = async function (
+async function downloadDivisionCertificates(
   request,
   h,
   dependencies = { v2CertificationAttestationPdf, v3CertificationAttestationPdf },
@@ -202,7 +207,7 @@ const downloadDivisionCertificates = async function (
     )
     .header('Content-Disposition', `attachment; filename=${fileName}`)
     .header('Content-Type', 'application/pdf');
-};
+}
 
 const certificateController = {
   getCertificate,
@@ -211,6 +216,7 @@ const certificateController = {
   getPDFCertificate,
   getSessionCertificates,
   downloadDivisionCertificates,
+  findUserCertificateSummaries,
 };
 
 export { certificateController };

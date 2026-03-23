@@ -5,6 +5,7 @@ import {
   checkSessionInformationAndExpectSuccess,
 } from '../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../helpers/db-data.ts';
+import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
@@ -37,7 +38,7 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, certificationNumber } = await enrollCandidateAndPassExam({
+    const { sessionNumber, certificationNumber, certificationCenterName } = await enrollCandidateAndPassExam({
       testRef,
       rightWrongAnswersSequence: [true],
       certificationKey: CERTIFICATIONS_DATA.CLEA,
@@ -123,9 +124,18 @@ test(
     await test.step('User checks their certification result', async () => {
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
-      const certificationsListPage = await homePage.goToMyCertifications();
-      const status = await certificationsListPage.getCertificationStatus(certificationNumber);
-      expect(status).toBe('Non-obtenue');
+      const certificateListPage = await homePage.goToMyCertificates();
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+        await certificateListPage.getCertificateData(certificationNumber);
+      expect(mainStatus).toBe('Certification Pix : Non-obtenue');
+      expect(extraStatus).toBe('CLéA Numérique : Non-obtenue');
+      expect(detailsFramework).toBe(null);
+      expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
+      expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
+      expect(result).toBe('-');
+      expect(comment).toBe(
+        'Commentaire : Le nombre de questions répondues pendant votre test de certification est insuffisant et ne nous permet pas de vous délivrer une certification Pix.',
+      );
     });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },

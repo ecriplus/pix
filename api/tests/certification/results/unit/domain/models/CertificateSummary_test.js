@@ -1,0 +1,216 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
+import {
+  CERTIFICATE_STATUSES,
+  CERTIFICATE_TYPES,
+  CertificateSummary,
+  EXTRA_CERTIFICATE_STATUSES,
+} from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import {
+  JuryComment,
+  JuryCommentContexts,
+} from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+
+describe('Unit | Domain | Models | CertificationSummary', function () {
+  context('#static buildFrom', function () {
+    const baseData = {
+      id: 123,
+      verificationCode: 'some verification code',
+      certificationStartedAt: new Date(),
+      certificationFramework: Frameworks.CORE,
+      certificationCenterName: 'some certification center',
+      pixScore: 123,
+      commentForCandidate: 'some comment for candidate',
+      commentByAutoJury: 'some comment for auto jury',
+      algorithmVersion: AlgorithmEngineVersion.V3,
+    };
+
+    context('status computation', function () {
+      context('when certification is not published', function () {
+        [
+          AssessmentResult.status.REJECTED,
+          AssessmentResult.status.VALIDATED,
+          AssessmentResult.status.CANCELLED,
+        ].forEach((assessmentResultStatus) => {
+          it(`should set the status of the certificate as WAIT_FOR_RESULTS when assessment result status is ${assessmentResultStatus}`, function () {
+            const actualCertificateSummary = CertificateSummary.buildFrom({
+              ...baseData,
+              assessmentResultStatus,
+              isPublished: false,
+              isExtraCertificationAcquired: true,
+            });
+
+            const expectedCertificateSummary = domainBuilder.certification.results.buildCertificateSummary({
+              ...baseData,
+              juryComment: new JuryComment({
+                commentByAutoJury: baseData.commentByAutoJury,
+                fallbackComment: baseData.commentForCandidate,
+                context: JuryCommentContexts.CANDIDATE,
+              }),
+              status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
+              extraCertificationStatus: null,
+              certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+            });
+
+            expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
+          });
+        });
+      });
+
+      context('when certification is published', function () {
+        [
+          {
+            assessmentResultStatus: AssessmentResult.status.REJECTED,
+            status: CERTIFICATE_STATUSES.REJECTED,
+            extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
+          },
+          {
+            assessmentResultStatus: AssessmentResult.status.CANCELLED,
+            status: CERTIFICATE_STATUSES.CANCELLED,
+            extraStatus: null,
+          },
+          {
+            assessmentResultStatus: AssessmentResult.status.VALIDATED,
+            status: CERTIFICATE_STATUSES.VALIDATED,
+            extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
+          },
+        ].forEach(({ assessmentResultStatus, status, extraStatus }) => {
+          it(`should set the status of the certificate as ${status} when assessment result status is ${assessmentResultStatus}`, function () {
+            const actualCertificateSummary = CertificateSummary.buildFrom({
+              ...baseData,
+              assessmentResultStatus,
+              isPublished: true,
+              isExtraCertificationAcquired: true,
+            });
+
+            const expectedCertificateSummary = domainBuilder.certification.results.buildCertificateSummary({
+              ...baseData,
+              juryComment: new JuryComment({
+                commentByAutoJury: baseData.commentByAutoJury,
+                fallbackComment: baseData.commentForCandidate,
+                context: JuryCommentContexts.CANDIDATE,
+              }),
+              status,
+              certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              extraCertificationStatus: extraStatus,
+            });
+
+            expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
+          });
+        });
+      });
+    });
+
+    context('extra status computation', function () {
+      context('when certification is not published', function () {
+        [true, false, null].forEach((isExtraCertificationAcquired) => {
+          it(`should set the extra certification status of the certificate as WAIT_FOR_RESULTS when "isExtraCertificationAcquired" is ${isExtraCertificationAcquired}`, function () {
+            const actualCertificateSummary = CertificateSummary.buildFrom({
+              ...baseData,
+              isExtraCertificationAcquired,
+              assessmentResultStatus: null,
+              isPublished: false,
+            });
+
+            const expectedCertificateSummary = domainBuilder.certification.results.buildCertificateSummary({
+              ...baseData,
+              juryComment: new JuryComment({
+                commentByAutoJury: baseData.commentByAutoJury,
+                fallbackComment: baseData.commentForCandidate,
+                context: JuryCommentContexts.CANDIDATE,
+              }),
+              status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
+              extraCertificationStatus: null,
+              certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+            });
+
+            expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
+          });
+        });
+      });
+
+      context('when certification is published', function () {
+        [
+          {
+            isExtraCertificationAcquired: true,
+            extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
+          },
+          {
+            isExtraCertificationAcquired: false,
+            extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_ACQUIRED,
+          },
+          {
+            isExtraCertificationAcquired: null,
+            extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
+          },
+        ].forEach(({ isExtraCertificationAcquired, extraCertificationStatus }) => {
+          it(`should set the extra certification status of the certificate as ${extraCertificationStatus} when "isExtraCertificationAcquired" is ${isExtraCertificationAcquired}`, function () {
+            const actualCertificateSummary = CertificateSummary.buildFrom({
+              ...baseData,
+              assessmentResultStatus: AssessmentResult.status.VALIDATED,
+              isPublished: true,
+              isExtraCertificationAcquired,
+            });
+
+            const expectedCertificateSummary = domainBuilder.certification.results.buildCertificateSummary({
+              ...baseData,
+              juryComment: new JuryComment({
+                commentByAutoJury: baseData.commentByAutoJury,
+                fallbackComment: baseData.commentForCandidate,
+                context: JuryCommentContexts.CANDIDATE,
+              }),
+              status: CERTIFICATE_STATUSES.VALIDATED,
+              extraCertificationStatus,
+              certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+            });
+
+            expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
+          });
+        });
+      });
+    });
+
+    context('certificate type computation', function () {
+      [
+        {
+          algorithmVersion: AlgorithmEngineVersion.V1,
+          certificateType: CERTIFICATE_TYPES.ATTESTATION,
+        },
+        {
+          algorithmVersion: AlgorithmEngineVersion.V2,
+          certificateType: CERTIFICATE_TYPES.ATTESTATION,
+        },
+        {
+          algorithmVersion: AlgorithmEngineVersion.V3,
+          certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+        },
+      ].forEach(({ algorithmVersion, certificateType }) => {
+        it(`should be a certificate of type ${certificateType} when algorithmVersion is ${algorithmVersion}`, function () {
+          const actualCertificateSummary = CertificateSummary.buildFrom({
+            ...baseData,
+            assessmentResultStatus: AssessmentResult.status.VALIDATED,
+            isPublished: true,
+            isExtraCertificationAcquired: null,
+            algorithmVersion,
+          });
+
+          const expectedCertificateSummary = domainBuilder.certification.results.buildCertificateSummary({
+            ...baseData,
+            juryComment: new JuryComment({
+              commentByAutoJury: baseData.commentByAutoJury,
+              fallbackComment: baseData.commentForCandidate,
+              context: JuryCommentContexts.CANDIDATE,
+            }),
+            status: CERTIFICATE_STATUSES.VALIDATED,
+            extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
+            certificateType,
+          });
+
+          expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
+        });
+      });
+    });
+  });
+});

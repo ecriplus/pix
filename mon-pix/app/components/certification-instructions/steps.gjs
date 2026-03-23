@@ -54,7 +54,7 @@ export default class Steps extends Component {
   get certificationName() {
     const complementaryKey = this.args.candidate?.complementaryCertificationKey;
     if (this._isPixPlus()) {
-      return this.intl.t(`pages.complementary-certification-names.${complementaryKey}`);
+      return this.intl.t(`pages.certification-frameworks.${complementaryKey}`);
     }
     return 'Pix';
   }

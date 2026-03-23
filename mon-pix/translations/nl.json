@@ -730,6 +730,15 @@
         "title": "Mijn certificeringsresultaten raadplegen en delen?"
       }
     },
+    "certification-frameworks": {
+      "CLEA": "CLéA Numérique",
+      "CORE": "Pix certification",
+      "DROIT": "Pix+ Recht",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1e graad",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2e graad",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Gezondheidsprofessionals"
+    },
     "certification-instructions": {
       "buttons": {
         "continuous": {

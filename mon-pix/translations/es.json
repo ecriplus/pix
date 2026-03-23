@@ -727,6 +727,15 @@
         "title": "¿Consultar y compartir mis resultados de certificación?"
       }
     },
+    "certification-frameworks": {
+      "CLEA": "CLéA Numérique",
+      "CORE": "Pix certification",
+      "DROIT": "Pix+ Derecho",
+      "EDU_1ER_DEGRE": "Pix+ Édu 1er grado",
+      "EDU_2ND_DEGRE": "Pix+ Édu 2do grado",
+      "EDU_CPE": "Pix+ Édu CPE",
+      "PRO_SANTE": "Pix+ Profesionales de Salud"
+    },
     "certification-instructions": {
       "buttons": {
         "continuous": {

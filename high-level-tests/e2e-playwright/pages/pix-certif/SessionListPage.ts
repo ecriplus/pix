@@ -29,4 +29,9 @@ export class SessionListPage {
 
     return new SessionManagementPage(this.page);
   }
+
+  async getCertificationCenterName() {
+    const nameAndExternalId = await this.page.locator('.sidebar-footer__full-name + p').innerText();
+    return nameAndExternalId.split(' (')[0].trim();
+  }
 }

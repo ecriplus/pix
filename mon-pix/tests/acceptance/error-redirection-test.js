@@ -18,7 +18,7 @@ module('Acceptance | Error page', function (hooks) {
   test('should display the error page when the api returned an error which is not 401', async function (assert) {
     // given
     await authenticate(user);
-    this.server.get('/certifications', { errors: [{ code: 500 }] }, 500);
+    this.server.get('/certificate-summaries', { errors: [{ code: 500 }] }, 500);
 
     // when
     await visit('/mes-certifications');
