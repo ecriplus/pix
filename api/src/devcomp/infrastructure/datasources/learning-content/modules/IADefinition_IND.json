@@ -767,7 +767,7 @@
                     {
                       "id": "fdc063a3-de25-43e4-ab22-007339ad8d68",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema-prediction-v3.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema_prediction_v4.png",
                       "alt": "Un schéma ",
                       "alternativeText": "<p>Un schéma représentant le fait que le logiciel ne peut pas prédire \"Tournesol\" s’il n’a été entrainé qu’avec des étiquettes \"ail des ours\" ou \"muguet\".</p>",
                       "legend": "Si le logiciel ne connaît que les étiquettes “ail des ours” et “muguet” et qu’on lui présente une image de “tournesol”, il ne peut pas prédire que c’est un tournesol. Il va seulement donner une prédiction qui s’approche des étiquettes qu’il connaît.",
