@@ -478,7 +478,7 @@
                       "hasShortProposals": false,
                       "proposals": [
                         {
-                          "id": "1",
+                          "id": "0",
                           "content": "<p>Ouvrir le document qu’il doit présenter et fermer les autres fenêtres.</p>",
                           "feedback": {
                             "diagnosis": "<p>Bien vu&nbsp;! Avant de partager son écran, il est recommandé de <strong>préparer les contenus que vous souhaitez présenter</strong> et de <strong>fermer les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
