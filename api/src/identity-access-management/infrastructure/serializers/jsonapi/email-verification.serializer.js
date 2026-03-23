@@ -5,6 +5,7 @@ const { Deserializer } = jsonapiSerializer;
 const deserialize = function (payload) {
   return new Deserializer().deserialize(payload).then((record) => {
     return {
+      action: record['action']?.toLowerCase(),
       newEmail: record['new-email'].trim()?.toLowerCase(),
       password: record['password'],
     };

@@ -410,6 +410,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       usecases.sendVerificationCode.resolves();
       const userId = 1;
       const locale = 'fr-FR';
+      const action = 'update-email';
       const newEmail = 'user@example.net';
       const password = 'Password123';
 
@@ -419,7 +420,7 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
         payload: {
           data: {
             type: 'users',
-            attributes: { newEmail, password },
+            attributes: { newEmail, password, action },
           },
         },
       };
@@ -428,7 +429,13 @@ describe('Unit | Identity Access Management | Application | Controller | User', 
       await userController.sendVerificationCode(request, hFake);
 
       // then
-      expect(usecases.sendVerificationCode).to.have.been.calledWithExactly({ locale, newEmail, password, userId });
+      expect(usecases.sendVerificationCode).to.have.been.calledWithExactly({
+        locale,
+        newEmail,
+        password,
+        action,
+        userId,
+      });
     });
   });
 
