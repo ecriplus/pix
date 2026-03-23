@@ -159,7 +159,7 @@
               "element": {
                 "id": "62102d5c-c369-4d64-89e0-64970d526b13",
                 "type": "text",
-                "content": "<p>Gaby propose de réserver le foodtruck de son cousin. Il ajoute&nbsp;: «&nbsp;Regardez les photos sur leur compte, c'est vraiment super bon&nbsp;!&nbsp;».</p>"
+                "content": "<p>Gaby propose de réserver le foodtruck de son cousin. Il ajoute&nbsp;: «&nbsp;Regardez les photos sur leur compte, c’est vraiment super bon&nbsp;!&nbsp;».</p>"
               }
             },
             {
@@ -406,11 +406,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Exactement&nbsp;!</p>",
-                    "diagnosis": "<p>Quand quelqu’un utilise la fonctionnalité de «&nbsp;<strong>partage d’écran</strong>&nbsp;», tous les participants voient alors son écran. L’outil de visioconférence <strong>affiche le contenu de l’écran du présentateur</strong> en grand. <br>Les vignettes des autres participants sont alors réduites et parfois partiellement masquées. Mais il est toujours <strong>possible d'intervenir</strong> (micro, chat, réactions).</p>"
+                    "diagnosis": "<p>Quand quelqu’un utilise la fonctionnalité de «&nbsp;<strong>partage d’écran</strong>&nbsp;», tous les participants voient alors son écran. L’outil de visioconférence <strong>affiche le contenu de l’écran du présentateur</strong> en grand. <br>Les vignettes des autres participants sont alors réduites et parfois partiellement masquées. Mais il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait&nbsp;!</p>",
-                    "diagnosis": "<p>Quand quelqu’un utilise la fonctionnalité de «&nbsp;<strong>partage d’écran</strong>&nbsp;», tous les participants voient alors son écran. L’outil de visioconférence <strong>affiche le contenu de l’écran du présentateur</strong> en grand. <br>Les vignettes des autres participants sont alors réduites et parfois partiellement masquées. Mais il est toujours <strong>possible d'intervenir</strong> (micro, chat, réactions).</p>"
+                    "diagnosis": "<p>Quand quelqu’un utilise la fonctionnalité de «&nbsp;<strong>partage d’écran</strong>&nbsp;», tous les participants voient alors son écran. L’outil de visioconférence <strong>affiche le contenu de l’écran du présentateur</strong> en grand. <br>Les vignettes des autres participants sont alors réduites et parfois partiellement masquées. Mais il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
                   }
                 }
               }
@@ -488,7 +488,7 @@
                           "id": "1",
                           "content": "<p>Garder toutes les fenêtres ouvertes pour accéder rapidement à tout.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Multiplier les fenêtres ouvertes augmente le risque de partager le mauvais contenu par erreur. Cela peut aussi ralentir votre ordinateur pendant la présentation. Mieux vaut ne garder que l'essentiel <strong>en préparant à l’avance les contenus que vous souhaitez présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
+                            "diagnosis": "<p>Eh non. Multiplier les fenêtres ouvertes augmente le risque de partager le mauvais contenu par erreur. Cela peut aussi ralentir votre ordinateur pendant la présentation. Mieux vaut ne garder que l’essentiel <strong>en préparant à l’avance les contenus que vous souhaitez présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
                           }
                         },
                         {
@@ -630,7 +630,7 @@
               "element": {
                 "id": "2d3a41de-ac67-4ca1-923a-37c48d780a37",
                 "type": "text",
-                "content": "<ul>\n    <li>Pour interagir avec les participants lors d’une visioconférence, il y a plusieurs possibilités&nbsp;:<ul>\n            <li><strong>Parler&nbsp;🗣️</strong></li>\n            <li><strong>Lever la main&nbsp;✋</strong></li>\n            <li><strong>Écrire dans le chat&nbsp;💬</strong></li>\n            <li><strong>Réagir avec des émojis&nbsp;👍</strong><br></li>\n        </ul>\n    </li>\n    <li>La fonctionnalité de <strong>partage d’écran</strong> permet de montrer tout ou une partie de son écran aux autres participants. Cela permet d'échanger autour d'un support visuel commun comme un diaporama ou un logiciel.&nbsp;💻<br></li>\n    <li>Selon la situation, il est possible de partager <strong>un onglet de son navigateur</strong>, <strong>une fenêtre de son ordinateur&nbsp;</strong>ou bien <strong>tout son écran</strong>.</li>\n</ul>"
+                "content": "<ul>\n    <li>Pour interagir avec les participants lors d’une visioconférence, il y a plusieurs possibilités&nbsp;:<ul>\n            <li><strong>Parler&nbsp;🗣️</strong></li>\n            <li><strong>Lever la main&nbsp;✋</strong></li>\n            <li><strong>Écrire dans le chat&nbsp;💬</strong></li>\n            <li><strong>Réagir avec des émojis&nbsp;👍</strong><br></li>\n        </ul>\n    </li>\n    <li>La fonctionnalité de <strong>partage d’écran</strong> permet de montrer tout ou une partie de son écran aux autres participants. Cela permet d’échanger autour d’un support visuel commun comme un diaporama ou un logiciel.&nbsp;💻<br></li>\n    <li>Selon la situation, il est possible de partager <strong>un onglet de son navigateur</strong>, <strong>une fenêtre de son ordinateur&nbsp;</strong>ou bien <strong>tout son écran</strong>.</li>\n</ul>"
               }
             }
           ]
