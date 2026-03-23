@@ -456,7 +456,7 @@
                     {
                       "id": "6f9e6061-a524-4827-aa1e-aba8d579d91c",
                       "type": "qcu-discovery",
-                      "instruction": "A votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
+                      "instruction": "À votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -483,7 +483,7 @@
                     {
                       "id": "8b0e27a0-733c-40fd-9108-d2878429fd95",
                       "type": "text",
-                      "content": "<p>Et ensuite, que se passe-t-il ?</p><p>Le logiciel ajuste ses paramètres. Il obtient une nouvelle prédiction.<br></p>"
+                      "content": "<p>Et ensuite, que se passe-t-il ?</p><p>Le logiciel ajuste ses paramètres. Lancez la vidéo pour voir sa prédiction.<br></p>"
                     },
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
@@ -524,14 +524,14 @@
                     {
                       "id": "7c41625a-cc18-4b95-bb61-4f1a110ce866",
                       "type": "text",
-                      "content": "<p>Le logiciel ajuste de nouveau ses paramètres. Il obtient une nouvelle prédiction.</p>"
+                      "content": "<p>Le logiciel ajuste de nouveau ses paramètres. <br> Lancez la vidéo pour voir sa nouvelle prédiction.</p>"
                     },
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
                       "type": "video",
-                      "title": "",
+                      "title": "L'ajustement des paramètres donne une nouvelle prédiction",
                       "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.mp4",
-                      "poster": "",
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.png",
                       "subtitles": "",
                       "transcription": ""
                     },
@@ -565,7 +565,7 @@
                     {
                       "id": "4aec0109-31b7-471c-96a1-bd8327a96f07",
                       "type": "text",
-                      "content": "<p>Le logiciel a réussi à régler ses paramètres pour obtenir la prédiction \"ail des ours\" avec cette photo.&nbsp;<br></p>"
+                      "content": "<p>Le logiciel a réussi à régler ses paramètres pour obtenir la prédiction \"ail des ours\" sur cette photo.&nbsp;<br></p>"
                     },
                     {
                       "id": "f89da7a4-d84c-4213-8dcf-91712068c0b9",
@@ -579,7 +579,7 @@
                     {
                       "id": "5f341bbe-d409-4923-a987-065977a1da50",
                       "type": "qcu-discovery",
-                      "instruction": "Alors, à votre avis, maintenant, l’entraînement est terminé ?<br>",
+                      "instruction": "À votre avis, l’entraînement est-il maintenant terminé ?<br>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -610,10 +610,12 @@
                     },
                     {
                       "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
-                      "type": "short-video",
+                      "type": "video",
                       "title": "Le logiciel  recommence son&nbsp;entraînement sur des milliers d’images.",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper5.mp4",
-                      "transcription": "Les paramètres sont de mieux en mieux ajustés."
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper5_v2.mp4",                  
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper4.png",
+                      "subtitles": "",
+                      "transcription": "Les paramètres sont de mieux en mieux ajustés, sur des milliers d'images"
                     },
                     {
                       "id": "4cc6fd84-4215-4cf9-956b-de1a86de63bc",
