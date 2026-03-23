@@ -1,6 +1,6 @@
 import { getI18n } from '../../infrastructure/i18n/i18n.js';
 import { mailer } from '../../mail/infrastructure/services/mailer.js';
-import { FRENCH_FRANCE, isFranceLocale } from '../services/locale-service.js';
+import { FRENCH_FRANCE } from '../services/locale-service.js';
 import {
   getPixAppUrl,
   getPixCertifUrl,
@@ -11,7 +11,6 @@ import {
 } from './url-service.js';
 
 const EMAIL_ADDRESS_NO_RESPONSE = 'ne-pas-repondre@pix.fr';
-const EMAIL_VERIFICATION_CODE_TAG = 'EMAIL_VERIFICATION_CODE';
 const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
 
 /**
@@ -187,41 +186,6 @@ function sendAccountRecoveryEmail({ email, firstName, temporaryKey }) {
   });
 }
 
-/**
- * @param code
- * @param email
- * @param locale
- * @returns {Promise<EmailingAttempt>}
- */
-function sendVerificationCodeEmail({ code, email, locale = FRENCH_FRANCE }) {
-  const i18n = getI18n(locale);
-
-  const options = {
-    from: EMAIL_ADDRESS_NO_RESPONSE,
-    fromName: i18n.__('email-sender-name.pix-app'),
-    to: email,
-    template: mailer.emailVerificationCodeTemplateId,
-    tags: [EMAIL_VERIFICATION_CODE_TAG],
-    subject: i18n.__('verification-code-email.subject', { code }),
-    variables: {
-      code,
-      homeName: getPixWebsiteDomain(locale),
-      homeUrl: getPixWebsiteUrl(locale),
-      displayNationalLogo: isFranceLocale(locale),
-      context: i18n.__('verification-code-email.body.context'),
-      doNotAnswer: i18n.__('verification-code-email.body.doNotAnswer'),
-      greeting: i18n.__('verification-code-email.body.greeting'),
-      moreOn: i18n.__('verification-code-email.body.moreOn'),
-      pixPresentation: i18n.__('verification-code-email.body.pixPresentation'),
-      seeYouSoon: i18n.__('verification-code-email.body.seeYouSoon'),
-      signing: i18n.__('verification-code-email.body.signing'),
-      warningMessage: i18n.__('verification-code-email.body.warningMessage'),
-    },
-  };
-
-  return mailer.sendEmail(options);
-}
-
 function sendCpfEmail({ email, generatedFiles }) {
   const i18nFr = getI18n(FRENCH_FRANCE);
 
@@ -239,7 +203,6 @@ const mailService = {
   sendOrganizationInvitationEmail,
   sendScoOrganizationInvitationEmail,
   sendCertificationCenterInvitationEmail,
-  sendVerificationCodeEmail,
   sendCpfEmail,
 };
 
@@ -259,5 +222,4 @@ export {
   sendCpfEmail,
   sendOrganizationInvitationEmail,
   sendScoOrganizationInvitationEmail,
-  sendVerificationCodeEmail,
 };
