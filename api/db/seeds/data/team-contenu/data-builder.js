@@ -363,7 +363,7 @@ async function _createTraining(databaseBuilder) {
     link: 'https://www.youtube.com/watch?v=qq09UkPRdFY',
     type: 'webinaire',
     duration: '00:04:08',
-    locale: 'fr-fr',
+    locales: ['fr-fr'],
     editorName: 'Mariah Carey',
     editorLogoUrl: 'some-butterfly-logo.svg',
     attachedTargetProfileIds: [TARGET_PROFILE_PIX_ID],

@@ -43,7 +43,7 @@ describe('Acceptance | Routes | UserTrainingsRoute', function () {
           attributes: {
             duration: { days: 0, hours: 6, minutes: 0 },
             link: 'http://mon-link.com',
-            locale: 'fr-fr',
+            locales: ['fr-fr'],
             title: 'title',
             type: 'webinaire',
             'editor-name': "Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",

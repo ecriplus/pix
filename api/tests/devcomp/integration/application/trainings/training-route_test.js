@@ -121,7 +121,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
             'internal-title': 'Ma formation',
             duration: { days: 2, hours: 2, minutes: 2 },
             type: 'webinaire',
-            locale: 'fr-fr',
+            locales: ['fr-fr'],
             'editor-name': 'ministère',
             'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
           },
@@ -256,7 +256,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               'internal-title': 'Ma formation',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
               'editor-logo-url': 'image.svg',
             },
@@ -296,7 +296,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 'internal-title': 'Ma formation',
                 duration: { days: 2, hours: 2, minutes: 2 },
                 type: 'modulix',
-                locale: 'fr-fr',
+                locales: ['fr-fr'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
@@ -338,7 +338,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 'internal-title': 'Ma formation',
                 duration: { days: 2, hours: 2, minutes: 2 },
                 type: 'webinaire',
-                locale: 'fr-fr',
+                locales: ['fr-fr'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
@@ -376,7 +376,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               'internal-title': 'Ma formation',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
@@ -411,7 +411,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
@@ -446,7 +446,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
@@ -481,7 +481,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 title: 'ma formation',
                 link: 'http://www.example.net',
                 type: 'webinaire',
-                locale: 'fr-fr',
+                locales: ['fr-fr'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
@@ -548,7 +548,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               title: 'ma formation',
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
@@ -620,7 +620,6 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               'editor-name': 'ministère',
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               'internal-title': 'ma formation interne',
-              locale: 'fr',
               locales: ['not-supported-locale-1', 'not-supported-locale-2'],
             },
           },
@@ -654,7 +653,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
             },
           },
@@ -688,7 +687,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
               link: 'http://www.example.net',
               duration: { days: 2, hours: 2, minutes: 2 },
               type: 'webinaire',
-              locale: 'fr-fr',
+              locales: ['fr-fr'],
               'editor-name': 'ministère',
             },
           },
@@ -723,7 +722,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 title: 'ma formation',
                 duration: { days: 2, hours: 2, minutes: 2 },
                 type: 'webinaire',
-                locale: 'fr-BE',
+                locales: ['fr-BE'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
@@ -758,7 +757,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 title: 'ma formation',
                 duration: { days: 2, hours: 2, minutes: 2 },
                 type: 'webinaire',
-                locale: 'ja-Jpan-JP-u-ca-japanese-hc-h12',
+                locales: ['ja-Jpan-JP-u-ca-japanese-hc-h12'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/image.svg',
               },
@@ -1086,7 +1085,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
           const httpTestServer = new HttpTestServer();
           await httpTestServer.register(moduleUnderTest);
 
-          const payload = { data: { attributes: { locale: 'fr-BE' } } };
+          const payload = { data: { attributes: { locales: ['fr-BE'] } } };
 
           // when
           const result = await httpTestServer.request('PATCH', '/api/admin/trainings/12344', payload);
@@ -1106,7 +1105,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
           const httpTestServer = new HttpTestServer();
           await httpTestServer.register(moduleUnderTest);
 
-          const payload = { data: { attributes: { locale: 'ja-Jpan-JP-u-ca-japanese-hc-h12' } } };
+          const payload = { data: { attributes: { locales: ['ja-Jpan-JP-u-ca-japanese-hc-h12'] } } };
 
           // when
           const result = await httpTestServer.request('PATCH', '/api/admin/trainings/12344', payload);
@@ -1150,7 +1149,7 @@ describe('Integration | Devcomp | Application | Trainings | Router | training-ro
                 'internal-title': 'Ma formation',
                 duration: { days: 2, hours: 2, minutes: 2 },
                 type: 'webinaire',
-                locale: 'fr-fr',
+                locales: ['fr-fr'],
                 'editor-name': 'ministère',
                 'editor-logo-url': 'image.svg',
               },

@@ -102,7 +102,7 @@ describe('Unit | Devcomp | Application | Trainings | Controller | training-contr
           attributes: {
             title: 'A new training',
             internalTitle: 'A new internal training title',
-            locale: 'fr',
+            locales: ['fr'],
             duration: {
               days: 2,
               hours: 2,

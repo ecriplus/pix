@@ -41,7 +41,7 @@ describe('Acceptance | API | Campaign Participations', function () {
       expect(response.result.data[0].attributes).to.deep.equal({
         duration: { days: 0, hours: 6, minutes: 0 },
         link: training.link,
-        locale: training.locale,
+        locales: training.locales,
         title: training.title,
         type: training.type,
         'editor-name': training.editorName,
