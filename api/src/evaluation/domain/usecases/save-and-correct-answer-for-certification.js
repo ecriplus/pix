@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
@@ -63,9 +62,7 @@ export async function saveAndCorrectAnswerForCertification({
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
-  return DomainTransaction.execute(async () => {
-    const answerSaved = await answerRepository.save({ answer: correctedAnswer });
-    answerSaved.levelup = {};
-    return answerSaved;
-  });
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
+  answerSaved.levelup = {};
+  return answerSaved;
 }

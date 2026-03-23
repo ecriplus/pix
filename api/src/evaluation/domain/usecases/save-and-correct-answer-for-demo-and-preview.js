@@ -1,4 +1,3 @@
-import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { EmptyAnswerError } from '../errors.js';
 
@@ -32,9 +31,7 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
   const lastQuestionDate = assessment.lastQuestionDate || now;
   correctedAnswer.setTimeSpentFrom({ now, lastQuestionDate });
 
-  return DomainTransaction.execute(async () => {
-    const answerSaved = await answerRepository.save({ answer: correctedAnswer });
-    answerSaved.levelup = {};
-    return answerSaved;
-  });
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
+  answerSaved.levelup = {};
+  return answerSaved;
 }
