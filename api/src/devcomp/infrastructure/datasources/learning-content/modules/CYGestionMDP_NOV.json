@@ -39,7 +39,9 @@
               "element": {
                 "id": "32d159e2-e2fd-41aa-8cd0-9a82f0bf178d",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Conversation accroche",
@@ -63,9 +65,7 @@
                       "content": "Bah oui, pourquoi ? Comme ça, je ne risque pas de l’oublier. 😎"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -109,7 +109,9 @@
               "element": {
                 "id": "f529dc80-5cef-42be-8f09-9515cf33c208",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Cliquez sur chacune des cartes ci-dessous pour découvrir si les comptes de Max ont été piratés&nbsp;:</p>",
+                "functionalInstruction": "",
                 "tagName": "flip-cards",
                 "props": {
                   "titleLevel": 0,
@@ -146,9 +148,7 @@
                       "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_ok.svg"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -164,6 +164,7 @@
                 "id": "92c5432c-16b7-46a5-b4b9-4b36783d2883",
                 "type": "qcu-discovery",
                 "instruction": "<p>Plusieurs comptes de Max ont donc été piratés. À votre avis, comment Max aurait pu éviter cela ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -194,8 +195,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -352,20 +352,13 @@
               "type": "element",
               "element": {
                 "id": "939937a9-ff12-40cd-9259-9b4e066eabd2",
-                "type": "custom-draft",
+                "type": "embed",
+                "isCompletionRequired": false,
                 "title": "récupération de mot de passe #3",
-                "url": "https://1024pix.github.io/atelier-contenus/MCU/recupmdp1.html",
-                "instruction": "<p>Explorez la page de connexion ci-dessous. Trouvez où cliquer pour aidez Max à retrouver l’accès à son compte<br></p>",
+                "url": "https://epreuves.pix.fr/fr/mdp-oublie/modulix-gestionmdpnov.html",
+                "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte</p>",
+                "solution": "",
                 "height": 550
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "db860658-8dd8-47e5-ba2a-0316f65c275c",
-                "type": "expand",
-                "title": "🗝️ Indice",
-                "content": "<p>L’adresse mail de Max utilisée pour ce compte est&nbsp;: max@pixmail.fr</p>"
               }
             },
             {
@@ -382,6 +375,7 @@
                 "id": "974b520d-8c5d-4f24-b9e5-7986ce597ea3",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, que va pourra faire Max grâce à ce message ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -412,8 +406,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
+                "solution": "1"
               }
             }
           ]
@@ -443,7 +436,9 @@
               "element": {
                 "id": "c2d3c220-9031-4357-b78c-69d8740a0db9",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Fin de narration Max",
@@ -461,9 +456,7 @@
                       "content": "Eh oui Max, il en faut bien plus pour protéger efficacement les comptes de ses services en ligne !"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -587,6 +580,7 @@
                       "id": "3c921fa2-051d-41f4-aef2-5d025e5a17a7",
                       "type": "qcu",
                       "instruction": "<p>Que doit-elle faire en priorité pour retrouver l’accès à son compte ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -613,8 +607,7 @@
                           }
                         }
                       ],
-                      "solution": "3",
-                      "hasShortProposals": false
+                      "solution": "3"
                     }
                   ]
                 },
@@ -629,6 +622,7 @@
                       "id": "b4cbcc23-7f79-4afd-95b4-2be06ef5784d",
                       "type": "qcu",
                       "instruction": "<p>Que veut dire «&nbsp;réinitialiser un mot de passe&nbsp;»  ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -655,8 +649,7 @@
                           }
                         }
                       ],
-                      "solution": "2",
-                      "hasShortProposals": false
+                      "solution": "2"
                     }
                   ]
                 }
