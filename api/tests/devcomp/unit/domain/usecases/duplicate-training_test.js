@@ -60,7 +60,7 @@ describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () 
       link: 'https://example.net',
       type: 'webinar',
       duration: { hours: 5 },
-      locale: 'fr-fr',
+      locales: ['fr-fr'],
       targetProfileIds: [1, 2, 3],
       editorName: 'Editor name',
       editorLogoUrl: 'https://editor.logo.url',
