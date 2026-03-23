@@ -60,7 +60,7 @@
                     "input": "input0",
                     "display": "inline",
                     "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "",
+                    "ariaLabel": "Sélectionnez une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -89,7 +89,7 @@
                     "input": "input1",
                     "display": "inline",
                     "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "",
+                    "ariaLabel": "Sélectionnez une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -324,7 +324,7 @@
                     "input": "0",
                     "display": "inline",
                     "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "",
+                    "ariaLabel": "Sélectionnez une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -353,7 +353,7 @@
                     "input": "1",
                     "display": "inline",
                     "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "",
+                    "ariaLabel": "Sélectionnez une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -382,7 +382,7 @@
                     "input": "2",
                     "display": "inline",
                     "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "",
+                    "ariaLabel": "Sélectionnez une option",
                     "tolerances": [],
                     "options": [
                       {
@@ -584,12 +584,33 @@
           "title": "Leçon 3 : Comment partager son écran ?",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "57ae594f-18b0-4bb2-8a03-6ebc961ad0cb",
-                "type": "text",
-                "content": ""
-              }
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "c9e05731-9b73-4b66-9fbe-fe917a4a9d94",
+                      "type": "text",
+                      "content": "<p>Les logiciels de visioconférence proposent plusieurs modalités de partage d’écran. Vous pouvez généralement partager&nbsp;: un <strong>onglet de votre navigateur</strong>, une <strong>fenêtre de votre ordinateur</strong>, ou <strong>tout votre écran</strong>.</p>"
+                    },
+                    {
+                      "id": "701e9b88-c1ad-4306-bf3b-9c1c4e5dffcc",
+                      "type": "text",
+                      "content": "<p><strong>🤔&nbsp;Bon à savoir</strong></p>\n<p>Si vous souhaitez partager une vidéo, il est parfois nécessaire d’activer un bouton pour le partage du son de votre ordinateur avec les autres participants.&nbsp;🔊</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f654f574-d005-4198-b338-9787d016cd81",
+                      "type": "text",
+                      "content": "<p>Avant de commencer à présenter, vérifiez que <strong>les participants voient bien l’écran partagé</strong> et que <strong>les contenus sont lisibles</strong>. Cela permet de s’assurer que tout le monde peut suivre la présentation.&nbsp;👀</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
