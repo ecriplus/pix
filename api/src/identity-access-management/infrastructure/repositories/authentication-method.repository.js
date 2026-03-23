@@ -128,6 +128,17 @@ const hasIdentityProviderPIX = async function ({ userId }) {
   return Boolean(authenticationMethodDTO);
 };
 
+const findAllOidcAuthenticationMethodsByUser = async function ({ userId }) {
+  const knexConn = DomainTransaction.getConnection();
+  const oidcAuthenticationMethods = await knexConn
+    .select(COLUMNS)
+    .from(AUTHENTICATION_METHODS_TABLE)
+    .where({ userId })
+    .whereNotIn('identityProvider', [NON_OIDC_IDENTITY_PROVIDERS.PIX.code, NON_OIDC_IDENTITY_PROVIDERS.GAR.code]);
+
+  return oidcAuthenticationMethods;
+};
+
 const hasIdentityProviderGar = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
   const authenticationMethodDTO = await knexConn
@@ -299,6 +310,7 @@ const findByUserIdsAndIdentityProvider = async ({ userIds, identityProvider }) =
  * @property {function} hasIdentityProviderGar
  * @property {function} removeAllAuthenticationMethodsByUserId
  * @property {function} removeByUserIdAndIdentityProvider
+ * @property {function} findAllOidcAuthenticationMethodsByUser
  * @property {function} findByUserIdsAndIdentityProvider
  * @property {function} update
  * @property {function} updateAuthenticationComplementByUserIdAndIdentityProvider
@@ -311,6 +323,7 @@ export {
   batchUpsertPasswordThatShouldBeChanged,
   create,
   createPasswordThatShouldBeChanged,
+  findAllOidcAuthenticationMethodsByUser,
   findByUserId,
   findByUserIdsAndIdentityProvider,
   findOneByExternalIdentifierAndIdentityProvider,
