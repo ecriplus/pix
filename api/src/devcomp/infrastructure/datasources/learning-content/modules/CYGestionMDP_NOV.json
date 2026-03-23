@@ -355,8 +355,8 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "récupération de mot de passe #3",
-                "url": "https://epreuves.pix.fr/fr/mdp-oublie/example.html",
-                "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte<br></p>",
+                "url": "https://epreuves.pix.fr/fr/mdp-oublie/modulix-gestionmdpnov.html",
+                "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte</p>",
                 "solution": "",
                 "height": 550
               }
