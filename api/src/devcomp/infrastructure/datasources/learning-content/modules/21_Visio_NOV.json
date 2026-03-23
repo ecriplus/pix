@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Vous avez reçu une invitation pour une visioconférence et vous ne savez pas exactement quoi faire ?</p><p>Dans ce module, apprenez à rejoindre une réunion en visioconférence, préparer votre entrée et interagir simplement avec les autres participants.</p><br>",
+    "description": "<p>Vous avez reçu une invitation pour une visioconférence et vous ne savez pas exactement quoi faire ?</p><p>Dans ce module, apprenez à rejoindre une réunion en visioconférence, préparer votre entrée et interagir simplement avec les autres participants.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -32,7 +32,7 @@
               "element": {
                 "id": "95d8312d-c6b2-4ee7-9024-aa0a62215fae",
                 "type": "text",
-                "content": "<p>Sadie s’inquiète de son entretien d’embauche, elle en parle à son ami Juan.</p>"
+                "content": "<p>Sadie s’inquiète de son entretien d’embauche. Elle en parle à son ami Juan.</p>"
               }
             },
             {
@@ -98,7 +98,7 @@
                 "id": "d901b8f9-8851-4166-aeeb-5a2c90ff1f0d",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Observez le mail que Sadie a reçu pour sa visioconférence puis répondez à la question. </p>",
+                "instruction": "<p>Observez le mail que Sadie a reçu pour sa visioconférence puis répondez à la question.</p>",
                 "functionalInstruction": "",
                 "tagName": "template-mail",
                 "props": {
@@ -124,19 +124,19 @@
                     {
                       "id": "35410526-4e16-44e7-8bd8-3092120826e5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, quel élément de ce mail permet d’accéder à la visioconférence ? </p>",
+                      "instruction": "<p>À votre avis, quel élément de ce mail permet d’accéder à la visioconférence ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>distracteur</p>",
+                          "content": "<p>Le bouton «&nbsp;Répondre&nbsp;»</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>distracteur<br></p>",
+                          "content": "<p>Le bouton «&nbsp;Transférer&nbsp;»</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
                           }
@@ -308,7 +308,7 @@
         {
           "id": "14ed9d49-ddec-46c5-a8fd-d47f5abd2926",
           "type": "transition",
-          "title": "Transition3",
+          "title": "Transition 3",
           "components": [
             {
               "type": "element",
@@ -396,12 +396,12 @@
                     {
                       "id": "8125ff27-43f6-4f83-a4de-e2adab7365f2",
                       "type": "text",
-                      "content": "<p>Sadie souhaite dire quelque chose pour répondre à Julian, mais elle a peur de l’interrompre. </p>"
+                      "content": "<p>Sadie souhaite dire quelque chose pour répondre à Julian, mais elle a peur de l’interrompre.</p>"
                     },
                     {
                       "id": "bf9d93c2-7d2b-4dc3-89c4-a0c6b0d55e6c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel est le nom du bouton qui lui permet de signaler aux autres participants qu’elle souhaite parler ? </p>",
+                      "instruction": "<p>Quel est le nom du bouton qui lui permet de signaler aux autres participants qu’elle souhaite parler ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
