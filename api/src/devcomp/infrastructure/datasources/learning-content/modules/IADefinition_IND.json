@@ -168,18 +168,18 @@
                       "id": "d057728c-18fd-4891-a53c-9f6413917bd9",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?<br></p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Vous aurez peut-être plus de chance avec la prochaine !</p>"
                           }
@@ -204,18 +204,18 @@
                       "id": "bec3bcf1-0a25-49a7-a5f0-c322ccb271b3",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non, plus de chance avec la prochaine ?</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p>"
                           }
@@ -240,18 +240,18 @@
                       "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
@@ -276,18 +276,18 @@
                       "id": "706832ba-14ae-4a7d-886a-39e562e66557",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Ail des ours</p>",
+                          "content": "Ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Muguet</p>",
+                          "content": "Muguet",
                           "feedback": {
                             "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
@@ -447,17 +447,17 @@
                     {
                       "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step1-v2.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper1.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "statique",
+                      "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "6f9e6061-a524-4827-aa1e-aba8d579d91c",
                       "type": "qcu-discovery",
-                      "instruction": "A votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
-                      "hasShortProposals": false,
+                      "instruction": "À votre avis, d’après cet exemple, est-ce que les paramètres du logiciel sont bien réglés ?<br>",
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -483,22 +483,22 @@
                     {
                       "id": "8b0e27a0-733c-40fd-9108-d2878429fd95",
                       "type": "text",
-                      "content": "<p>Et ensuite, que se passe-t-il ?</p><p>Le logiciel ajuste ses paramètres. Il obtient une nouvelle prédiction.<br></p>"
+                      "content": "<p>Et ensuite, que se passe-t-il ?</p><p>Le logiciel ajuste ses paramètres. Lancez la vidéo pour voir sa prédiction.<br></p>"
                     },
                     {
                       "id": "5ed5c6b2-0f8f-473a-9245-005e153d64be",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step2-v2.png",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Animation où l'on voit les paramètres bouger",
-                      "licence": ""
+                      "type": "video",
+                      "title": "Le logiciel ajuste ses paramètres.",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper2.mp4",
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper1.png",
+                      "subtitles": "",
+                      "transcription": "<p>Le logiciel ajuste ses paramètres.</p>"
                     },
                     {
                       "id": "a51c26a2-2f15-4695-9e43-5a7afdd09190",
                       "type": "qcu-discovery",
-                      "instruction": "Et maintenant, est-ce que la prédiction est correcte ?<br>",
-                      "hasShortProposals": false,
+                      "instruction": "<p>Et maintenant, est-ce que la prédiction est correcte ?</p><br>",
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -524,22 +524,22 @@
                     {
                       "id": "7c41625a-cc18-4b95-bb61-4f1a110ce866",
                       "type": "text",
-                      "content": "<p>Le logiciel ajuste de nouveau ses paramètres. Il obtient une nouvelle prédiction.</p>"
+                      "content": "<p>Le logiciel ajuste de nouveau ses paramètres. <br> Lancez la vidéo pour voir sa nouvelle prédiction.</p>"
                     },
                     {
                       "id": "5945d819-75d1-46eb-b802-1370d31f79de",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Animation où l'on voit les paramètres bouger",
-                      "licence": ""
+                      "type": "video",
+                      "title": "L'ajustement des paramètres donne une nouvelle prédiction",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.mp4",
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper3.png",
+                      "subtitles": "",
+                      "transcription": ""
                     },
                     {
                       "id": "ecb6c63b-ec65-4339-8e19-66fed405fa04",
                       "type": "qcu-discovery",
                       "instruction": "Et maintenant, est-ce que la prédiction est correcte ?",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -565,22 +565,22 @@
                     {
                       "id": "4aec0109-31b7-471c-96a1-bd8327a96f07",
                       "type": "text",
-                      "content": "<p>Le logiciel a réussi à régler ses paramètres pour obtenir la prédiction \"ail des ours\" avec cette photo.&nbsp;<br></p>"
+                      "content": "<p>Le logiciel a réussi à régler ses paramètres pour obtenir la prédiction \"ail des ours\" sur cette photo.&nbsp;<br></p>"
                     },
                     {
                       "id": "f89da7a4-d84c-4213-8dcf-91712068c0b9",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseauneuronne-step3-v2.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper4.png",
                       "alt": "",
                       "alternativeText": "",
-                      "legend": "Statique",
+                      "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "5f341bbe-d409-4923-a987-065977a1da50",
                       "type": "qcu-discovery",
-                      "instruction": "Alors, à votre avis, maintenant, l’entraînement est terminé ?<br>",
-                      "hasShortProposals": false,
+                      "instruction": "À votre avis, l’entraînement est-il maintenant terminé ?<br>",
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
@@ -591,7 +591,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "Pas si vite !<br>",
+                          "content": "Pas si vite !",
                           "feedback": {
                             "diagnosis": "Bien vu !<br>L'entraînement est terminé sur cette image mais il faut maintenant recommencer ce processus sur des milliers d’ images d’entraînement.<br>"
                           }
@@ -610,12 +610,12 @@
                     },
                     {
                       "id": "c3757d4e-1aa5-4315-9369-0dc53db024f9",
-                      "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/ia-def-ind/reseau-neuronne-step4.png",
-                      "alt": "",
-                      "alternativeText": "",
-                      "legend": "Avec une animation en accéléré avec plein d'images qui se superpose et avec lesquelles le logiciel s'entraîne",
-                      "licence": ""
+                      "type": "video",
+                      "title": "Le logiciel  recommence son&nbsp;entraînement sur des milliers d’images.",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/stepper5_v2.mp4",                  
+                      "poster": "https://assets.pix.org/modules/IAGenDef_IND/stepper4.png",
+                      "subtitles": "",
+                      "transcription": "Les paramètres sont de mieux en mieux ajustés, sur des milliers d'images"
                     },
                     {
                       "id": "4cc6fd84-4215-4cf9-956b-de1a86de63bc",
@@ -767,7 +767,7 @@
                     {
                       "id": "fdc063a3-de25-43e4-ab22-007339ad8d68",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema-prediction-v3.png",
+                      "url": "https://assets.pix.org/modules/IAGenDef_IND/schema_prediction_v4.png",
                       "alt": "Un schéma ",
                       "alternativeText": "<p>Un schéma représentant le fait que le logiciel ne peut pas prédire \"Tournesol\" s’il n’a été entrainé qu’avec des étiquettes \"ail des ours\" ou \"muguet\".</p>",
                       "legend": "Si le logiciel ne connaît que les étiquettes “ail des ours” et “muguet” et qu’on lui présente une image de “tournesol”, il ne peut pas prédire que c’est un tournesol. Il va seulement donner une prédiction qui s’approche des étiquettes qu’il connaît.",
@@ -812,7 +812,7 @@
               "element": {
                 "id": "8b0f4458-2e22-4bae-a328-aacea4151d65",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/ia-def-ind/generalisation-au-texte-activite-4.png",
+                "url": "https://assets.pix.org/modules/IAGenDef_IND/dec5_salade.png",
                 "alt": "Un réseau de neurone ",
                 "alternativeText": "On voit le morceau de phrase \"L’ail des ours peut se manger en ____\"<br>Puis le réseau de neuronne, puis en résultat : \"salade\" (0.2) et \"plantation\" (0.8)",
                 "legend": "",
@@ -824,11 +824,11 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Dans ce cas&nbsp;: quel serait un exemple de donnée d’entrée ? et l’exemple d’étiquette associé ?</p>",
+                "instruction": "<p>Dans ce cas&nbsp, quel est l'exemple de donnée d’entrée ? Et l’exemple d’étiquette associée ?</p>",
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong></span>"
+                    "content": "<span><strong>\"L’ail des ours peut se manger en ____\" </strong> est </span>"
                   },
                   {
                     "type": "select",
@@ -840,18 +840,20 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Donnée"
+                        "content": "une donnée"
                       },
                       {
                         "id": "2",
-                        "content": "Etiquette"
+                        "content": "une étiquette"
                       }
                     ],
-                    "solutions": ["1"]
+                    "solutions": [
+                      "1"
+                    ]
                   },
                   {
                     "type": "text",
-                    "content": "<span><strong>Salade</strong></span>"
+                    "content": "<br><span><strong>Salade</strong> est </span>"
                   },
                   {
                     "type": "select",
@@ -863,14 +865,16 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "Donnée"
+                        "content": "une donnée"
                       },
                       {
                         "id": "2",
-                        "content": "Etiquette"
+                        "content": "une étiquette"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
