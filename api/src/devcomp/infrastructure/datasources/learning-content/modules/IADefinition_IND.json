@@ -837,7 +837,7 @@
                     "placeholder": "Sélectionner",
                     "ariaLabel": "Sélectionner",
                     "tolerances": [],
-                    "options": 
+                    "options": [
                       {
                         "id": "1",
                         "content": "une donnée"
