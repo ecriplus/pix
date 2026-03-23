@@ -677,7 +677,7 @@
                   },
                   {
                     "id": "20aa8657-c0cf-4d79-94d1-d227fee3c3b8",
-                    "text": "La fonction « lever la main » est disponible à tout moment, même quand quelqu’un partage son écran",
+                    "text": "La fonction « lever la main » est disponible à tout moment, même quand quelqu’un partage son écran.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -744,7 +744,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Écrire un message dans le chat</p>",
+                    "content": "<p>Écrire un message dans le chat.</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse&nbsp;!</p>",
                       "diagnosis": "<p>Si on envoie un message dans le chat pendant un partage d’écran, il est possible que le présentateur ne le voit pas. Il est préférable de <strong>trouver un moyen d’attirer l’attention</strong> du présentateur afin qu’il vous donne la parole</p>"
@@ -790,7 +790,7 @@
                   "passwords": [
                     "Cliquer sur la fonctionnalité « Partage d’écran »",
                     "Ouvrir l’outil de visioconférence",
-                    "Ouvrir son montage photo dans une nouvelle fenêtre",
+                    "Ouvrir son montage-photo dans une nouvelle fenêtre",
                     "Choisir la fenêtre avec son montage-photo parmi les modes de partage d’écran",
                     "Arrêter le partage d’écran",
                     "Demander aux participants si tout le monde voit bien le dessin"
