@@ -63,7 +63,6 @@ const MODULIX_EDITOR_LOGO_URL = 'https://assets.pix.org/contenu-formatif/editeur
 const MODULIX_EDITOR_NAME = 'Pix';
 
 export default class CreateOrUpdateTrainingForm extends Component {
-  @service featureToggles;
   @service store;
 
   @tracked submitting = false;
@@ -255,32 +254,18 @@ export default class CreateOrUpdateTrainingForm extends Component {
               <:label>Minutes (MM)</:label>
             </PixInput>
           </div>
-          {{#if this.featureToggles.featureToggles.multipleLocalesForTrainingsEnabled}}
-            <PixMultiSelect
-              @id="trainingLocales"
-              @placeholder={{t "pages.trainings.training.form.locales.placeholder"}}
-              @options={{this.optionsLocaleList}}
-              @values={{this.form.locales}}
-              @onChange={{fn this.updateSelect "locales"}}
-              required={{true}}
-              aria-required={{true}}
-            >
-              <:label>{{t "pages.trainings.training.form.locales.label"}}</:label>
-              <:default as |option|>{{option.label}}</:default>
-            </PixMultiSelect>
-          {{else}}
-            <PixSelect
-              @id="trainingLocale"
-              @placeholder="-- Sélectionnez une langue --"
-              @options={{this.optionsLocaleList}}
-              @value={{this.form.locale}}
-              @onChange={{fn this.updateSelect "locale"}}
-              required={{true}}
-              aria-required={{true}}
-            >
-              <:label>Langue localisée</:label>
-            </PixSelect>
-          {{/if}}
+          <PixMultiSelect
+            @id="trainingLocales"
+            @placeholder={{t "pages.trainings.training.form.locales.placeholder"}}
+            @options={{this.optionsLocaleList}}
+            @values={{this.form.locales}}
+            @onChange={{fn this.updateSelect "locales"}}
+            required={{true}}
+            aria-required={{true}}
+          >
+            <:label>{{t "pages.trainings.training.form.locales.label"}}</:label>
+            <:default as |option|>{{option.label}}</:default>
+          </PixMultiSelect>
           <PixInput
             @id="trainingEditorLogoUrl"
             @subLabel="Exemple : {{MODULIX_EDITOR_LOGO_URL}}"
