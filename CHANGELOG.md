@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.366.0](https://github.com/1024pix/pix/compare/v5.365.0...v5.366.0) (2026-03-23)
+
+### :rocket: Amélioration
+
+- [#15548](https://github.com/1024pix/pix/pull/15548) Ajout d'un formulaire de création d'attestation sur Pix Admin (PIX-21596) 
+- [#15577](https://github.com/1024pix/pix/pull/15577) ajout-images 
+- [#15592](https://github.com/1024pix/pix/pull/15592) Ajuster le style de la page d'une organisation (PIX-21873) 
+- [#15589](https://github.com/1024pix/pix/pull/15589) MDX-138 IAGenPrompt_AVA modification contexte 
+- [#15522](https://github.com/1024pix/pix/pull/15522) MDX-57 retours elise NR_Evaluation_IND 
+- [#15590](https://github.com/1024pix/pix/pull/15590) Modifs Visio_NOV relectures interne equipe socle 
+- [#15586](https://github.com/1024pix/pix/pull/15586) Rediriger vers la page de détails d'un réseau après sa création (PIX-22029). 
+
+### :bug: Correction
+
+- [#15593](https://github.com/1024pix/pix/pull/15593) Les tests E2E de la recette de certification sont rouges car pix-admin est lancé avant d'être installé 
+
+### :building_construction: Tech
+
+- [#15581](https://github.com/1024pix/pix/pull/15581) :package: Mise à jour de paquets pour pix Orga 
+- [#15582](https://github.com/1024pix/pix/pull/15582) Corriger un flaky sur PixApp (PIX-YAPA2). 
+- [#15580](https://github.com/1024pix/pix/pull/15580) Corriger un test Flaky sur PixAdmin rendant la CI instable (PIX-YAPA). 
+- [#15421](https://github.com/1024pix/pix/pull/15421) Permettre de n'executer que le code modifié lors de la validation de la PR (PIX-21907). 
+- [#15594](https://github.com/1024pix/pix/pull/15594) Résolution de test flaky sur le test d'intégration du "combined-course-blueprint-repository.js" 
+- [#15595](https://github.com/1024pix/pix/pull/15595) Utiliser des identifiants dans le cache de résultats du learning content 
+
+### :coffee: Autre
+
+- [#15591](https://github.com/1024pix/pix/pull/15591) creation Visio-IND
+
 # [5.365.0](https://github.com/1024pix/pix/compare/v5.364.0...v5.365.0) (2026-03-20)
 
 ### :rocket: Amélioration
