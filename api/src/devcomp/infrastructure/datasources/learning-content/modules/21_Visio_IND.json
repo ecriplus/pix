@@ -481,21 +481,21 @@
                           "id": "0",
                           "content": "<p>Ouvrir le document qu’il doit présenter et fermer les autres fenêtres.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu&nbsp;! Avant de partager son écran, il est recommandé de <strong>préparer les contenus que vous souhaitez présenter</strong> et de <strong>fermer les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
+                            "diagnosis": "<p>Bien vu&nbsp;! Avant de partager son écran, il est recommandé de <strong>préparer les contenus que l’on souhaite présenter</strong> et de <strong>fermer les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>Garder toutes les fenêtres ouvertes pour accéder rapidement à tout.</p>",
+                          "content": "<p>Garder toutes ses fenêtres ouvertes pour accéder rapidement à tout.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Multiplier les fenêtres ouvertes augmente le risque de partager le mauvais contenu par erreur. Cela peut aussi ralentir votre ordinateur pendant la présentation. Mieux vaut ne garder que l’essentiel <strong>en préparant à l’avance les contenus que vous souhaitez présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
+                            "diagnosis": "<p>Eh non. Multiplier les fenêtres ouvertes augmente le risque de partager le mauvais contenu par erreur. Cela peut aussi ralentir l’ordinateur pendant la présentation. Mieux vaut ne garder que l’essentiel <strong>en préparant à l’avance les contenus que l’on souhaite présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Ouvrir uniquement la visioconférence pour garantir la fluidité de la connexion internet.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Il devra alors chercher des documents pendant la réunion ce qui peut générer du stress. C’est pourquoi il est recommandé d’anticiper <strong>en préparant les contenus que vous souhaitez présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
+                            "diagnosis": "<p>Eh non. Il devra alors chercher des documents pendant la réunion ce qui peut générer du stress. C’est pourquoi il est recommandé d’anticiper <strong>en préparant les contenus que l’on souhaite présenter</strong> et <strong>en fermant les fenêtres inutiles</strong>. Il peut aussi être utile de <strong>désactiver les notifications</strong>, afin qu’elles n’apparaissent pas pendant la présentation.</p>"
                           }
                         }
                       ],
