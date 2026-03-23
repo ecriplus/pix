@@ -48,6 +48,21 @@ module('Unit | Controller | authenticated/combined-course/participations', funct
         assert.deepEqual(controller.divisions, ['6eme']);
         assert.deepEqual(controller.groups, ['A']);
       });
+      test('when at least one filter is filled in, should take user back to page 1 of results', async function (assert) {
+        //given
+        controller.fullName = 'nom1';
+        controller.statuses = [];
+        controller.divisions = [];
+        controller.groups = [];
+        controller.pageSize = 10;
+        controller.pageNumber = 2;
+
+        //when
+        controller.triggerFiltering('fullName', 'nom2');
+
+        //then
+        assert.strictEqual(controller.pageNumber, null);
+      });
     });
   });
 });
