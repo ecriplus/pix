@@ -881,6 +881,7 @@
             "title": "Enabling generic import"
           },
           "selector": {
+            "error": "Please select an import format",
             "label": "Import format",
             "placeholder": "Select an import format"
           }
