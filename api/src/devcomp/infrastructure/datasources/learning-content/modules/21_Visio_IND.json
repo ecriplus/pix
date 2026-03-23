@@ -387,15 +387,15 @@
                     "options": [
                       {
                         "id": "0",
-                        "content": "restent grandes et bien visibles"
+                        "content": "restent grandes et bien visibles."
                       },
                       {
                         "id": "1",
-                        "content": "sont réduites en taille"
+                        "content": "sont réduites en taille."
                       },
                       {
                         "id": "2",
-                        "content": "disparaissent complètement"
+                        "content": "disparaissent complètement."
                       }
                     ],
                     "solutions": [
