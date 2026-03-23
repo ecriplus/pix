@@ -447,6 +447,17 @@ function mockAttestationStorage(attestation) {
   return template;
 }
 
+function mockAttestationStorageUpload({ attestation, isFailed = false }) {
+  return nock('http://attestations.fake.endpoint.example.net:80')
+    .put(`/attestations.bucket/${attestation.templateName}.pdf?x-id=PutObject`)
+    .reply(isFailed ? 500 : 200)
+    .persist();
+}
+
+function getFakeAttestationTemplate() {
+  return fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
+}
+
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
   for (const stub of stubs) {
     stub.rejects(
@@ -487,6 +498,7 @@ export {
   generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
+  getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
   insertLearnerImportFeatureForNewOrganization,
@@ -498,6 +510,7 @@ export {
   knex,
   learningContentBuilder,
   mockAttestationStorage,
+  mockAttestationStorageUpload,
   MockDate,
   mockLearningContent,
   nock,

@@ -13,6 +13,8 @@ import * as rewardApi from '../../../profile/application/api/reward-api.js';
 import { temporaryStorage } from '../../../shared/infrastructure/key-value-storages/index.js';
 import * as accessCodeRepository from '../../../shared/infrastructure/repositories/access-code-repository.js';
 import { injectDependencies } from '../../../shared/infrastructure/utils/dependency-injection.js';
+import { AttestationStorage } from '../storage/attestation-storage.js';
+import * as attestationRepository from './attestation-repository.js';
 import * as campaignParticipationRepository from './campaign-participation-repository.js';
 import * as campaignRepository from './campaign-repository.js';
 import * as combinedCourseDetailsRepository from './combined-course-details-repository.js';
@@ -48,6 +50,7 @@ const repositoriesWithoutInjectedDependencies = {
   recommendedModuleRepository,
   targetProfileRepository,
   campaignParticipationRepository,
+  attestationRepository,
 };
 
 const dependencies = {
@@ -64,6 +67,7 @@ const dependencies = {
   rewardApi,
   userApi,
   recommendedModulesApi,
+  attestationStorage: AttestationStorage.createClient(),
 };
 
 const repositories = injectDependencies(repositoriesWithoutInjectedDependencies, dependencies);

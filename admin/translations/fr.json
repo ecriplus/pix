@@ -199,6 +199,23 @@
         "title": "Archivage des centres de certification en masse",
         "upload-button": "Importer un fichier CSV"
       },
+      "create-attestations": {
+        "description": "Sollicitez un spécialiste des attestations",
+        "notifications": {
+          "error": {
+            "duplicate-attestation-key": "Une attestation avec cette clé existe déjà.",
+            "payload-too-large": "Le fichier PDF doit avoir une taille maximum de 1 Mb.",
+            "s3-upload-error": "Erreur lors de l'import du fichier.",
+            "wrong-file-format": "Le format du fichier est incorrect."
+          },
+          "success": "L'attestation a été créée avec succès."
+        },
+        "submit-button": "Créer l'attestation",
+        "template-key": "Template key",
+        "template-name": "Template name",
+        "title": "Création d'attestation",
+        "upload-button": "Importer un fichier PDF"
+      },
       "create-combined-courses": {
         "description": "Sollicitez un spécialiste des parcours combinés",
         "notifications": {
