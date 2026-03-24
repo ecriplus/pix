@@ -1,7 +1,7 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Header from 'pix-orga/components/organization-participant/header';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -12,7 +12,7 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
   module('title cases', function () {
     test('it should show only title when participant count = 0', async function (assert) {
       //given
-      this.set('participantCount', 0);
+      const participantCount = 0;
       class CurrentUserStub extends Service {
         hasLearnerImportFeature = false;
         isAdminInOrganization = false;
@@ -20,9 +20,7 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
       this.owner.register('service:current-user', CurrentUserStub);
 
       // when
-      const screen = await renderScreen(
-        hbs`<OrganizationParticipant::Header @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await renderScreen(<template><Header @participantCount={{participantCount}} /></template>);
 
       // then
       assert.ok(
@@ -40,12 +38,10 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
         isAdminInOrganization = false;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('participantCount', 5);
+      const participantCount = 5;
 
       // when
-      const screen = await renderScreen(
-        hbs`<OrganizationParticipant::Header @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await renderScreen(<template><Header @participantCount={{participantCount}} /></template>);
 
       // then
       assert.ok(
@@ -64,12 +60,10 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
         isAdminInOrganization = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('participantCount', 0);
+      const participantCount = 0;
 
       // when
-      const screen = await renderScreen(
-        hbs`<OrganizationParticipant::Header @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await renderScreen(<template><Header @participantCount={{participantCount}} /></template>);
 
       assert.notOk(
         screen.queryByRole('link', {
@@ -84,12 +78,10 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
         isAdminInOrganization = false;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('participantCount', 0);
+      const participantCount = 0;
 
       // when
-      const screen = await renderScreen(
-        hbs`<OrganizationParticipant::Header @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await renderScreen(<template><Header @participantCount={{participantCount}} /></template>);
 
       assert.notOk(
         screen.queryByRole('link', {
@@ -106,12 +98,10 @@ module('Integration | Component | OrganizationParticipant::header', function (ho
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('participantCount', 0);
+      const participantCount = 0;
 
       // when
-      const screen = await renderScreen(
-        hbs`<OrganizationParticipant::Header @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await renderScreen(<template><Header @participantCount={{participantCount}} /></template>);
 
       assert.ok(screen.getByRole('link', { name: t('components.organization-participants-header.import-button') }));
     });

@@ -1,6 +1,6 @@
 import { render as renderScreen } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Footer from 'pix-orga/components/layout/footer';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -14,7 +14,7 @@ module('Integration | Component | Layout::Footer', function (hooks) {
     const expectedYear = date.getFullYear().toString();
 
     // when
-    const screen = await renderScreen(hbs`<Layout::Footer />}`);
+    const screen = await renderScreen(<template><Footer /></template>);
 
     // then
     assert.dom(screen.getByText(`© ${expectedYear} Pix`)).exists();
@@ -26,7 +26,7 @@ module('Integration | Component | Layout::Footer', function (hooks) {
     service.currentDomain = { isFranceDomain: false };
 
     // when
-    const screen = await renderScreen(hbs`<Layout::Footer />}`);
+    const screen = await renderScreen(<template><Footer /></template>);
 
     // then
     const link = screen.getByRole('link', { name: t('navigation.footer.legal-notice') });
@@ -39,7 +39,7 @@ module('Integration | Component | Layout::Footer', function (hooks) {
     service.currentDomain = { isFranceDomain: true };
 
     // when
-    const screen = await renderScreen(hbs`<Layout::Footer />}`);
+    const screen = await renderScreen(<template><Footer /></template>);
 
     // then
     const link = screen.getByRole('link', { name: t('navigation.footer.a11y') });
@@ -48,7 +48,7 @@ module('Integration | Component | Layout::Footer', function (hooks) {
 
   test('should display pix status link', async function (assert) {
     // when
-    const screen = await renderScreen(hbs`<Layout::Footer />}`);
+    const screen = await renderScreen(<template><Footer /></template>);
 
     // then
     const link = screen.getByRole('link', { name: t('navigation.footer.server-status') });

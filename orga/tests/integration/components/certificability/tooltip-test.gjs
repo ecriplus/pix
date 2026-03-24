@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Tooltip from 'pix-orga/components/certificability/tooltip';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -10,13 +10,15 @@ module('Integration | Component | Certificability::Tooltip', function (hooks) {
 
   module("when organization's has certificability feature enabled", function () {
     test('should display certificability information banner', async function (assert) {
-      this.set('hasComputeOrganizationLearnerCertificabilityEnabled', true);
+      const hasComputeOrganizationLearnerCertificabilityEnabled = true;
 
       // when
       const screen = await render(
-        hbs`<Certificability::Tooltip
-  @hasComputeOrganizationLearnerCertificabilityEnabled={{this.hasComputeOrganizationLearnerCertificabilityEnabled}}
-/>`,
+        <template>
+          <Tooltip
+            @hasComputeOrganizationLearnerCertificabilityEnabled={{hasComputeOrganizationLearnerCertificabilityEnabled}}
+          />
+        </template>,
       );
 
       // then
@@ -28,13 +30,15 @@ module('Integration | Component | Certificability::Tooltip', function (hooks) {
 
   module("when organization's has certificability feature disabled", function () {
     test('should not display certificability information banner', async function (assert) {
-      this.set('hasComputeOrganizationLearnerCertificabilityEnabled', false);
+      const hasComputeOrganizationLearnerCertificabilityEnabled = false;
 
       // when
       const screen = await render(
-        hbs`<Certificability::Tooltip
-  @hasComputeOrganizationLearnerCertificabilityEnabled={{this.hasComputeOrganizationLearnerCertificabilityEnabled}}
-/>`,
+        <template>
+          <Tooltip
+            @hasComputeOrganizationLearnerCertificabilityEnabled={{hasComputeOrganizationLearnerCertificabilityEnabled}}
+          />
+        </template>,
       );
 
       // then
