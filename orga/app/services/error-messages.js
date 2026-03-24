@@ -11,7 +11,7 @@ const CAMPAIGN_CREATION_ERRORS = {
   MISSING_ID_PIX_TYPE: 'api-error-messages.campaign-creation.id-pix-type-required',
 };
 
-const CSV_IMPORT_ERRORS = {
+export const CSV_IMPORT_ERRORS = {
   ENCODING_NOT_SUPPORTED: 'api-error-messages.student-csv-import.encoding-not-supported',
   BAD_CSV_FORMAT: 'api-error-messages.student-csv-import.bad-csv-format',
   HEADER_REQUIRED: 'api-error-messages.student-csv-import.header-required',
@@ -20,6 +20,10 @@ const CSV_IMPORT_ERRORS = {
   FIELD_MAX_LENGTH: 'api-error-messages.student-csv-import.field-max-length',
   FIELD_LENGTH: 'api-error-messages.student-csv-import.field-length',
   FIELD_DATE_FORMAT: 'api-error-messages.student-csv-import.field-date-format',
+  FIELD_STRING_MIN: 'api-error-messages.student-csv-import.field-min-length',
+  FIELD_STRING_MAX: 'api-error-messages.student-csv-import.field-max-length',
+  FIELD_STRING_LENGTH: 'api-error-messages.student-csv-import.field-length',
+  FIELD_STRING_PATTERN: 'api-error-messages.student-csv-import.field-pattern',
   FIELD_EMAIL_FORMAT: 'api-error-messages.student-csv-import.field-email-format',
   FIELD_REQUIRED: 'api-error-messages.student-csv-import.field-required',
   FIELD_BAD_VALUES: 'api-error-messages.student-csv-import.field-bad-values',

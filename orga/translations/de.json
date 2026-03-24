@@ -28,6 +28,7 @@
       "field-length": "Zeile {line}: Das Feld \"{field}\" muss {limit} Zeichen lang sein.",
       "field-max-length": "Zeile {line}: Das Feld \"{field}\" muss kleiner als {limit} Zeichen sein.",
       "field-min-length": "Zeile {line}: Das Feld \"{field}\" muss mindestens {limit} Zeichen lang sein.",
+      "field-pattern": "Zeile {line} : The field “{field}” enthält keinen gültigen Wert.",
       "field-required": "Zeile {line}: Das Feld \"{field}\" ist obligatorisch.",
       "header-required": "Die Spalte \"{field}\" ist obligatorisch.",
       "header-unknown": "Die Spaltenüberschriften müssen mit denen der Vorlage übereinstimmen.",
