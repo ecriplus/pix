@@ -96,15 +96,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
     describe('when the network is found', function () {
       it('returns the network with head organization informations', async function () {
         // given
-        const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Orga tête de réseau' });
-        const headStructureId = databaseBuilder.factory.buildStructure().id;
-
-        const network = databaseBuilder.factory.buildNetwork({ name: 'Mon super réseau' });
-
-        databaseBuilder.factory.buildFactStructure({
-          structureId: headStructureId,
-          networkId: network.id,
-          organizationId: headOrganization.id,
+        const headOrganizationId = 999;
+        const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          name: 'Mon super réseau',
+          headOrganization: { id: headOrganizationId, name: 'Orga tête de réseau' },
         });
 
         await databaseBuilder.commit();
@@ -116,7 +111,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         const expectedNetwork = domainBuilder.acquisition.buildNetwork({
           id: network.id,
           name: 'Mon super réseau',
-          organizationId: headOrganization.id,
+          organizationId: headOrganizationId,
           organizationName: 'Orga tête de réseau',
         });
 
@@ -126,26 +121,9 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
       context('when there are several organizations in the network', function () {
         it('returns the network with correct head organization informations', async function () {
           // given
-          const childOrganization = databaseBuilder.factory.buildOrganization({
-            name: 'Not head organization but still in the same network',
-          });
-          const childStructureId = databaseBuilder.factory.buildStructure().id;
-          const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Head organization' });
-          const headStructureId = databaseBuilder.factory.buildStructure().id;
-
-          const network = databaseBuilder.factory.buildNetwork({ name: 'My network' });
-
-          databaseBuilder.factory.buildFactStructure({
-            structureId: headStructureId,
-            networkId: network.id,
-            organizationId: headOrganization.id,
-          });
-
-          databaseBuilder.factory.buildFactStructure({
-            structureId: childStructureId,
-            networkId: network.id,
-            organizationId: childOrganization.id,
-            parentStructureId: headStructureId,
+          const { network, head } = databaseBuilder.factory.buildNetworkWithMultipleLevels({
+            name: 'My network',
+            numberOfLevels: 2,
           });
 
           await databaseBuilder.commit();
@@ -157,8 +135,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
           const expectedNetwork = domainBuilder.acquisition.buildNetwork({
             id: network.id,
             name: 'My network',
-            organizationId: headOrganization.id,
-            organizationName: 'Head organization',
+            organizationId: head.organization.id,
+            organizationName: head.organization.name,
           });
 
           expect(foundNetwork).to.deepEqualInstance(expectedNetwork);
@@ -169,16 +147,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
     describe('when the network is not found', function () {
       it('throws a not found error', async function () {
         // given
-        const headOrganization = databaseBuilder.factory.buildOrganization({ name: 'Orga tête de réseau' });
-        const headStructureId = databaseBuilder.factory.buildStructure().id;
-
-        const network = databaseBuilder.factory.buildNetwork({ id: 1, name: 'Réseau avec id 1' });
-
-        databaseBuilder.factory.buildFactStructure({
-          structureId: headStructureId,
-          networkId: network.id,
-          organizationId: headOrganization.id,
-        });
+        databaseBuilder.factory.buildNetworkAndHeadOrganization({ id: 1, name: 'Réseau avec id 1' });
 
         await databaseBuilder.commit();
 

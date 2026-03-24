@@ -63,8 +63,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
       const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({
         id: 1,
         name: 'Mon réseau',
-        organizationId: 555,
-        organizationName: 'Tête de réseau',
+        headOrganization: { id: 555, name: 'Tête de réseau' },
       });
       await databaseBuilder.commit();
       const options = {

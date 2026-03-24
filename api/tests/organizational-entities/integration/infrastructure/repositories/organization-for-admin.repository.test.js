@@ -1093,15 +1093,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
     describe('when the organization belongs to a network', function () {
       it('should return the network with head organization info', async function () {
         // given
-        const organization = databaseBuilder.factory.buildOrganization({
-          organizationLearnerTypeId: organizationLearnerType.id,
-        });
         const network = databaseBuilder.factory.buildNetwork({ name: 'Réseau Académique' });
-        const structure = databaseBuilder.factory.buildStructure();
-        databaseBuilder.factory.buildFactStructure({
-          structureId: structure.id,
+        const { organization } = databaseBuilder.factory.buildOrganizationInNetwork({
           networkId: network.id,
-          organizationId: organization.id,
+          organizationData: { organizationLearnerTypeId: organizationLearnerType.id },
         });
         await databaseBuilder.commit();
 
