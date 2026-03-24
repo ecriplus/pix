@@ -62,3 +62,4 @@ workflows:
             junior/.*                           run-junior            true
             audit-logger/.*                     run-audit-logger      true
             high-level-tests/e2e-playwright/.*  run-e2e-playwright    true
+            high-level-tests/e2e/.*             run-e2e-cypress       true
