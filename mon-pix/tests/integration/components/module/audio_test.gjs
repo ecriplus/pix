@@ -1,6 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 // eslint-disable-next-line no-restricted-imports
-import { click, find, findAll } from '@ember/test-helpers';
+import { click, find, findAll, triggerEvent } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import ModulixAudioElement from 'mon-pix/components/module/element/audio';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -101,5 +102,80 @@ module('Integration | Component | Module | Audio', function (hooks) {
       },
     });
     assert.ok(true);
+  });
+
+  module('when the audio url is missing', function () {
+    test('it should not display the audio element and display a fallback message', async function (assert) {
+      // given
+      const audioElement = { url: null, title: 'title', transcription: '' };
+
+      // when
+      const screen = await render(<template><ModulixAudioElement @audio={{audioElement}} /></template>);
+
+      // then
+      assert.dom('audio').doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.audio.missing-content'))).exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.audio.consult-transcription'))).doesNotExist();
+    });
+
+    module('when there is a transcription', function () {
+      test('it should also suggest to consult it', async function (assert) {
+        // given
+        const audioElement = { url: null, title: 'title', transcription: 'transcription' };
+
+        // when
+        const screen = await render(<template><ModulixAudioElement @audio={{audioElement}} /></template>);
+
+        // then
+        assert.dom(screen.getByText(t('pages.modulix.elements.audio.missing-content'))).exists();
+        assert.dom(screen.getByText(t('pages.modulix.elements.audio.consult-transcription'))).exists();
+      });
+    });
+  });
+
+  module('when the audio fails to load', function () {
+    test('it should hide the audio element and display a fallback message', async function (assert) {
+      // given
+      const audioElement = {
+        url: 'https://assets.pix.fr/modulix/placeholder-audio.mp3',
+        title: 'title',
+        transcription: '',
+      };
+
+      // when
+      const screen = await render(<template><ModulixAudioElement @audio={{audioElement}} /></template>);
+
+      // then
+      assert.dom('audio').exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.audio.missing-content'))).doesNotExist();
+
+      // when
+      await triggerEvent('audio', 'error');
+
+      // then
+      assert.dom('audio').doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.audio.missing-content'))).exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.audio.consult-transcription'))).doesNotExist();
+    });
+
+    module('when there is a transcription', function () {
+      test('it should also suggest to consult it', async function (assert) {
+        // given
+        const audioElement = {
+          url: 'https://assets.pix.fr/modulix/placeholder-audio.mp3',
+          title: 'title',
+          transcription: 'transcription',
+        };
+
+        // when
+        const screen = await render(<template><ModulixAudioElement @audio={{audioElement}} /></template>);
+        await triggerEvent(find('audio'), 'error');
+
+        // then
+        assert.dom('audio').doesNotExist();
+        assert.dom(screen.getByText(t('pages.modulix.elements.audio.missing-content'))).exists();
+        assert.dom(screen.getByText(t('pages.modulix.elements.audio.consult-transcription'))).exists();
+      });
+    });
   });
 });

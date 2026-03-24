@@ -1,4 +1,18 @@
-.element-audio{
+@use 'pix-design-tokens/typography';
+
+.element-audio {
+  &__missing-content {
+    @extend %pix-body-s;
+
+    display: flex;
+    flex-direction: column;
+    padding: var(--pix-spacing-6x) 0;
+    color: var(--pix-neutral-800);
+    text-align: center;
+    background-color: var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+  }
+
   &__container {
     padding: var(--pix-spacing-4x);
     border: 1px solid var(--pix-neutral-100);

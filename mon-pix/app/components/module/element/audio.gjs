@@ -10,9 +10,20 @@ import { htmlUnsafe } from 'mon-pix/helpers/html-unsafe';
 
 export default class ModulixAudio extends Component {
   @tracked modalIsOpen = false;
+  @tracked audioHasError = false;
 
   @service passageEvents;
   @service pixMetrics;
+
+  get shouldShowFallback() {
+    return !this.args.audio?.url || this.audioHasError;
+  }
+
+  @action
+  onAudioError(event) {
+    event.stopPropagation();
+    this.audioHasError = true;
+  }
 
   @action
   onPlay() {
@@ -53,17 +64,26 @@ export default class ModulixAudio extends Component {
   <template>
     <div class="element-audio">
       <div class="element-audio__container">
-        <p class="element-audio__container__title">{{@audio.title}}</p>
-        {{! template-lint-disable require-media-caption }}
-        <audio
-          id={{@audio.id}}
-          ref="audio"
-          class="pix-audio-player"
-          controls
-          src="{{@audio.url}}"
-          {{on "play" this.onPlay}}
-        ></audio>
-
+        {{#if this.shouldShowFallback}}
+          <div class="element-audio__missing-content" role="status">
+            <p>{{t "pages.modulix.elements.audio.missing-content"}}</p>
+            {{#if this.hasTranscription}}
+              <p>{{t "pages.modulix.elements.audio.consult-transcription"}}</p>
+            {{/if}}
+          </div>
+        {{else}}
+          <p class="element-audio__container__title">{{@audio.title}}</p>
+          {{! template-lint-disable require-media-caption }}
+          <audio
+            id={{@audio.id}}
+            ref="audio"
+            class="pix-audio-player"
+            controls
+            src="{{@audio.url}}"
+            {{on "play" this.onPlay}}
+            {{on "error" this.onAudioError}}
+          ></audio>
+        {{/if}}
         {{#if this.hasTranscription}}
           <PixButton @variant="tertiary" @triggerAction={{this.showModal}}>
             {{t "pages.modulix.buttons.element.transcription"}}
@@ -78,7 +98,6 @@ export default class ModulixAudio extends Component {
             </:content>
           </PixModal>
         {{/if}}
-
       </div>
     </div>
   </template>

@@ -1,5 +1,6 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
@@ -10,8 +11,19 @@ import ModuleElement from './module-element';
 
 export default class ModulixShortVideoElement extends ModuleElement {
   @tracked modalIsOpen = false;
+  @tracked videoHasError = false;
   @service passageEvents;
   @service pixMetrics;
+
+  get shouldShowFallback() {
+    return !this.args.element?.url || this.videoHasError;
+  }
+
+  @action
+  onVideoError(event) {
+    event.stopPropagation();
+    this.videoHasError = true;
+  }
 
   @action
   showModal() {
@@ -37,7 +49,21 @@ export default class ModulixShortVideoElement extends ModuleElement {
 
   <template>
     <div class="element-short-video">
-      <video class="element-short-video__video" autoplay loop muted={{true}} src={{@element.url}}></video>
+      {{#if this.shouldShowFallback}}
+        <div class="element-short-video__missing-content" role="status">
+          <p>{{t "pages.modulix.elements.short-video.missing-content"}}</p>
+          <p>{{t "pages.modulix.elements.short-video.consult-transcription"}}</p>
+        </div>
+      {{else}}
+        <video
+          class="element-short-video__video"
+          autoplay
+          loop
+          muted={{true}}
+          src={{@element.url}}
+          {{on "error" this.onVideoError}}
+        ></video>
+      {{/if}}
       <PixButton @variant="tertiary" @triggerAction={{this.showModal}}>
         {{t "pages.modulix.buttons.element.transcription"}}
       </PixButton>

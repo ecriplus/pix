@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
+import { click, triggerEvent } from '@ember/test-helpers';
+import { t } from 'ember-intl/test-support';
 import ModulixShortVideo from 'mon-pix/components/module/element/short-video';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -10,8 +11,11 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it should display a video element with autoplay and loop attribute', async function (assert) {
+    // given
+    const element = { url: 'https://assets.pix.org/modules/placeholder-video.mp4' };
+
     // when
-    await render(<template><ModulixShortVideo /></template>);
+    await render(<template><ModulixShortVideo @element={{element}} /></template>);
 
     // then
     assert.dom('video').hasAttribute('autoplay');
@@ -29,6 +33,43 @@ module('Integration | Component | Module | ShortVideo', function (hooks) {
     await render(<template><ModulixShortVideo @element={{element}} /></template>);
     // then
     assert.dom('video').hasAttribute('src', 'https://assets.pix.org/modules/placeholder-video.mp4');
+  });
+
+  module('when the video url is missing', function () {
+    test('it should not display the video and display a fallback message', async function (assert) {
+      // given
+      const element = { url: null, transcription: 'transcription' };
+
+      // when
+      const screen = await render(<template><ModulixShortVideo @element={{element}} /></template>);
+
+      // then
+      assert.dom('video').doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.short-video.missing-content'))).exists();
+      assert.dom(screen.getByText(t('pages.modulix.elements.short-video.consult-transcription'))).exists();
+    });
+  });
+
+  module('when the video fails to load', function () {
+    test('it should hide the video and display a fallback message', async function (assert) {
+      // given
+      const element = { url: 'https://assets.pix.org/modules/placeholder-video.mp4', transcription: 'transcription' };
+
+      // when
+      const screen = await render(<template><ModulixShortVideo @element={{element}} /></template>);
+
+      // then
+      assert.dom('video').exists();
+      assert.dom(screen.queryByText(t('pages.modulix.elements.short-video.missing-content'))).doesNotExist();
+
+      // when
+      await triggerEvent('video', 'error');
+
+      // then
+      assert.dom('video').doesNotExist();
+      assert.dom(screen.getByText(t('pages.modulix.elements.short-video.missing-content'))).exists();
+      assert.dom(screen.getByText(t('pages.modulix.elements.short-video.consult-transcription'))).exists();
+    });
   });
 
   test('should be able to use the modal for transcription', async function (assert) {

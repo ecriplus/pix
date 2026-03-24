@@ -4,6 +4,21 @@
   &__container {
     margin: 0 auto;
   }
+
+  &__missing-content {
+    @extend %pix-body-s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 700px;
+    min-height: 400px;
+    margin: auto;
+    color: var(--pix-neutral-800);
+    text-align: center;
+    background-color: var(--pix-neutral-20);
+    border-radius: var(--pix-spacing-2x);
+  }
 }
 
 .element-image-container {

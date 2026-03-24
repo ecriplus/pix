@@ -1649,6 +1649,20 @@
         "intro": "Wählen Sie das Dateiformat, das Sie verwenden möchten.",
         "label": "Datei im Format {format} herunterladen"
       },
+      "elements": {
+        "audio": {
+          "consult-transcription": "Lesen Sie die Transkription, um den Inhalt zu erfahren.",
+          "missing-content": "Beim Anzeigen des Audios ist ein Fehler aufgetreten."
+        },
+        "image": {
+          "consult-alternative-text": "Lesen Sie den alternativen Text, um den Inhalt zu erfahren.",
+          "missing-content": "Beim Anzeigen des Bildes ist ein Fehler aufgetreten."
+        },
+        "short-video": {
+          "consult-transcription": "Lesen Sie die Transkription, um den Inhalt zu erfahren.",
+          "missing-content": "Beim Anzeigen des Videos ist ein Fehler aufgetreten."
+        }
+      },
       "flashcards": {
         "answerDirection": "Hatten Sie die Antwort?",
         "completed": "Abgeschlossen",
