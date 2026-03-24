@@ -926,5 +926,55 @@ module('Integration | Component | organizations/features-section', function (hoo
         }),
       );
     });
+
+    test('it shows an error and disables save when feature is active with no format selected', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { LEARNER_IMPORT: { active: false } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      // when
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.LEARNER_IMPORT'),
+        }),
+      );
+      const dialog = await screen.findByRole('dialog');
+      await click(within(dialog).getByRole('button', { name: t('common.actions.confirm') }));
+
+      // then
+      assert
+        .dom(screen.getByText(t('components.organizations.editing.organization-learner-import-format.selector.error')))
+        .exists();
+      assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).hasAttribute('aria-disabled');
+    });
+
+    test('it does not submit the form when feature is active with no attestation selected', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: false } },
+      });
+
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+      await click(
+        screen.getByRole('checkbox', {
+          name: t('components.organizations.information-section-view.features.ATTESTATIONS_MANAGEMENT'),
+        }),
+      );
+
+      // when
+      await click(screen.getByRole('button', { name: t('common.actions.save') }));
+
+      // then
+      assert.false(onSubmit.called);
+    });
   });
 });

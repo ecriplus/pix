@@ -883,6 +883,7 @@
             "title": "Activation de l’import générique"
           },
           "selector": {
+            "error": "Veuillez sélectionner un format d'import",
             "label": "Format d’import",
             "placeholder": "Sélectionner un format d’import"
           }

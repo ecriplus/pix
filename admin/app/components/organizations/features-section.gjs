@@ -84,8 +84,12 @@ export default class OrganizationFeaturesSection extends Component {
 
   get isFormValid() {
     const attestations = this.form.features?.ATTESTATIONS_MANAGEMENT;
-    if (attestations?.active) {
-      return attestations.params?.length;
+    if (attestations?.active && !attestations.params?.length) {
+      return false;
+    }
+    const importFormat = this.form.features?.LEARNER_IMPORT;
+    if (importFormat?.active && !importFormat.params?.name) {
+      return false;
     }
     return true;
   }
@@ -93,6 +97,14 @@ export default class OrganizationFeaturesSection extends Component {
   get isAttestationsInvalid() {
     const attestations = this.form.features?.ATTESTATIONS_MANAGEMENT;
     return attestations?.active && !(attestations.params?.length > 0);
+  }
+
+  get learnerImportError() {
+    const importFormat = this.form.features?.LEARNER_IMPORT;
+    if (importFormat?.active && !importFormat.params?.name) {
+      return this.intl.t('components.organizations.editing.organization-learner-import-format.selector.error');
+    }
+    return null;
   }
 
   @action
@@ -103,13 +115,9 @@ export default class OrganizationFeaturesSection extends Component {
   @action
   updateFormCheckBoxValue(key) {
     if (key === 'features.LEARNER_IMPORT.active') {
-      this.form = lodashSet(
-        this.form,
-        'features.LEARNER_IMPORT',
-        this.form.features?.LEARNER_IMPORT?.active
-          ? { active: false }
-          : { active: true, params: { name: this.importFormatOptions[0].label } },
-      );
+      this.form = lodashSet(this.form, 'features.LEARNER_IMPORT', {
+        active: !this.form.features?.LEARNER_IMPORT?.active,
+      });
       if (this.form.features.LEARNER_IMPORT.active && !this.args.organization.features?.LEARNER_IMPORT?.active) {
         this.displayLearnerImportActivationDialog = true;
         this.learnerImportActivationConfirmed = false;
@@ -173,6 +181,7 @@ export default class OrganizationFeaturesSection extends Component {
               @isManagingStudentDisabled={{this.isManagingStudentDisabled}}
               @isLearnerImportDisabled={{this.isLearnerImportDisabled}}
               @editableFeatureList={{this.editableFeatureList}}
+              @learnerImportError={{this.learnerImportError}}
               @canEdit={{this.accessControl.hasAccessToOrganizationActionsScope}}
             />
           </Card>
@@ -281,6 +290,7 @@ const FeaturesForm = <template>
                 @placeholder={{t
                   "components.organizations.editing.organization-learner-import-format.selector.placeholder"
                 }}
+                @errorMessage={{@learnerImportError}}
               >
                 <:label>
                   {{t "components.organizations.editing.organization-learner-import-format.selector.label"}}
