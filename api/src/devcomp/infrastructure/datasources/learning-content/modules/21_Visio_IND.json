@@ -77,7 +77,7 @@
                       }
                     ],
                     "solutions": [
-                      "2"
+                      "1"
                     ]
                   },
                   {
@@ -106,7 +106,7 @@
                       }
                     ],
                     "solutions": [
-                      "1"
+                      "2"
                     ]
                   },
                   {
@@ -266,7 +266,7 @@
               "element": {
                 "id": "d0390b02-3457-4d44-90cd-52338dde1849",
                 "type": "text",
-                "content": "<p>[Possible aussi en infographie ou avec une illustration complémentaire]</p>\n<br>\n<h5>Quels sont les différents moyens pour intervenir en visioconférence&nbsp;?<br></h5>\n<p>Les outils de visioconférence proposent les options suivantes&nbsp;:</p>\n<ul>\n    <li>La fonctionnalité «&nbsp; <strong>lever la main</strong>&nbsp;» permet de signaler qu’on souhaite intervenir à l’oral, sans couper la parole de quelqu’un.&nbsp;✋</li>\n    <li>La fonctionnalité de <strong>dialogue en ligne</strong> ou «&nbsp;<strong>chat</strong> &nbsp;» de la visioconférence permet de communiquer par écrit. Il permet également de partager des liens ou des documents.&nbsp;💬</li>\n    <li>(V1 si on l’a vu en découverte) On peut aussi <strong>réagir avec un émoji</strong>, pour s’exprimer sans prendre la parole.&nbsp;👍</li>\n    <li>(V2 si on ne l’a pas vu en découverte) Sur certains outils, il existe une fonctionnalité pour <strong>réagir avec un émoji</strong> à ce qui est dit à l’oral sans prendre la parole.&nbsp;👍</li>\n</ul>"
+                "content": "<p>[Possible aussi en infographie ou avec une illustration complémentaire]</p>\n<br>\n<h5>Quels sont les différents moyens pour intervenir en visioconférence&nbsp;?<br></h5>\n<p>Les outils de visioconférence proposent les fonctionnalités suivantes&nbsp;:</p>\n<ul>\n    <li>La fonctionnalité «&nbsp;<strong>lever la main</strong>&nbsp;» permet de signaler qu’on souhaite intervenir à l’oral, sans couper la parole de quelqu’un.&nbsp;✋</li>\n    <li>La fonctionnalité de <strong>dialogue en ligne</strong> ou «&nbsp;<strong>chat</strong>&nbsp;» permet de communiquer par écrit. Cela permet également de partager des liens ou des documents.&nbsp;💬</li>\n    <li>On peut aussi <strong>réagir à ce qui est dit à l'oral avec un émoji</strong>. Cela permet de s’exprimer sans prendre la parole.&nbsp;👍</li>\n  </ul>"
               }
             }
           ]
@@ -387,15 +387,15 @@
                     "options": [
                       {
                         "id": "0",
-                        "content": "restent grandes et bien visibles"
+                        "content": "restent grandes et bien visibles."
                       },
                       {
                         "id": "1",
-                        "content": "sont réduites en taille"
+                        "content": "sont réduites en taille."
                       },
                       {
                         "id": "2",
-                        "content": "disparaissent complètement"
+                        "content": "disparaissent complètement."
                       }
                     ],
                     "solutions": [
