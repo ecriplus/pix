@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import ParticipantsByStage from 'pix-orga/components/campaign/charts/participants-by-stage';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,19 +9,17 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign::Charts::ParticipantsByStage', function (hooks) {
   setupIntlRenderingTest(hooks);
   const campaignId = 1;
-  let onSelectStage, dataFetcher, screen;
-
+  let screen;
+  const stubs = {};
   hooks.beforeEach(async function () {
     // given
-    onSelectStage = sinon.stub();
-    this.set('onSelectStage', onSelectStage);
-    this.set('campaignId', campaignId);
+    stubs.onSelectStage = sinon.stub();
 
     const store = this.owner.lookup('service:store');
     const adapter = store.adapterFor('campaign-stats');
-    dataFetcher = sinon.stub(adapter, 'getParticipationsByStage');
+    stubs.dataFetcher = sinon.stub(adapter, 'getParticipationsByStage');
 
-    dataFetcher.withArgs(campaignId).resolves({
+    stubs.dataFetcher.withArgs(campaignId).resolves({
       data: {
         attributes: {
           data: [
@@ -34,7 +32,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
 
     // when
     screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByStage @campaignId={{this.campaignId}} @onSelectStage={{this.onSelectStage}} />`,
+      <template><ParticipantsByStage @campaignId={{campaignId}} @onSelectStage={{stubs.onSelectStage}} /></template>,
     );
   });
 
@@ -75,7 +73,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
     await click(screen.getAllByRole('button')[0]);
 
     // then
-    sinon.assert.calledWith(onSelectStage, 100498);
+    sinon.assert.calledWith(stubs.onSelectStage, 100498);
     assert.ok(true);
   });
 
@@ -83,7 +81,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
     module('when there is title and description', function () {
       test('it should contains tooltip info', async function (assert) {
         // given
-        dataFetcher.withArgs(campaignId).resolves({
+        stubs.dataFetcher.withArgs(campaignId).resolves({
           data: {
             attributes: {
               data: [
@@ -96,7 +94,9 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
 
         // when
         const screen = await render(
-          hbs`<Campaign::Charts::ParticipantsByStage @campaignId={{this.campaignId}} @onSelectStage={{this.onSelectStage}} />`,
+          <template>
+            <ParticipantsByStage @campaignId={{campaignId}} @onSelectStage={{stubs.onSelectStage}} />
+          </template>,
         );
 
         // then
@@ -111,7 +111,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
     module('when there is only title', function () {
       test('tooltip should contains title', async function (assert) {
         // given
-        dataFetcher.withArgs(campaignId).resolves({
+        stubs.dataFetcher.withArgs(campaignId).resolves({
           data: {
             attributes: {
               data: [{ id: 100498, value: 0, title: 'title1' }],
@@ -121,7 +121,9 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
 
         // when
         const screen = await render(
-          hbs`<Campaign::Charts::ParticipantsByStage @campaignId={{this.campaignId}} @onSelectStage={{this.onSelectStage}} />`,
+          <template>
+            <ParticipantsByStage @campaignId={{campaignId}} @onSelectStage={{stubs.onSelectStage}} />
+          </template>,
         );
 
         // then
@@ -133,7 +135,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
     module('when there is only description', function () {
       test('tooltip should contains description', async function (assert) {
         // given
-        dataFetcher.withArgs(campaignId).resolves({
+        stubs.dataFetcher.withArgs(campaignId).resolves({
           data: {
             attributes: {
               data: [{ id: 100498, value: 0, description: 'description1' }],
@@ -143,7 +145,9 @@ module('Integration | Component | Campaign::Charts::ParticipantsByStage', functi
 
         // when
         await render(
-          hbs`<Campaign::Charts::ParticipantsByStage @campaignId={{this.campaignId}} @onSelectStage={{this.onSelectStage}} />`,
+          <template>
+            <ParticipantsByStage @campaignId={{campaignId}} @onSelectStage={{stubs.onSelectStage}} />
+          </template>,
         );
 
         // then
