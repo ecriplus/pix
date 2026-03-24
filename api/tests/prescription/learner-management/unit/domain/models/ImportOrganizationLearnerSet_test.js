@@ -134,6 +134,14 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
 
         expect(learners.list).to.lengthOf(2);
       });
+
+      it('should return null for an attribute that is an empty string', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        learnerSet.addLearners([{ ...learnerAttributes, group: '' }]);
+
+        expect(learnerSet.learners.list[0].attributes.group).to.be.null;
+      });
     });
 
     describe('update learner context', function () {
@@ -273,6 +281,15 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           },
         ]);
         expect(learners.existinglearnerIds).to.deep.equals([777]);
+      });
+
+      it('should default existingLearners to empty array when setExistingLearners is called without argument', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        learnerSet.addLearners([learnerAttributes]);
+        learnerSet.setExistingLearners();
+
+        expect(learnerSet.learners.existinglearnerIds).to.be.empty;
       });
     });
 
@@ -423,6 +440,20 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
 
           expect(() => learnerSet.addLearners([learnerAttributes, secondLearnerAttributes])).to.not.throw();
         });
+
+        it('should falsely detect duplicates when column values contain the separator "-" (known limitation)', async function () {
+          importFormat.config.unicityColumns = ['prénom', 'group'];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const learner1 = { ...learnerAttributes, prénom: 'a-b', group: 'c' };
+          const learner2 = { ...learnerAttributes, prénom: 'a', group: 'b-c' };
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([learner1, learner2]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.PROPERTY_NOT_UNIQ);
+        });
       });
 
       context('checkDateRule', function () {
@@ -471,6 +502,18 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[0].meta.field).to.equal('birthdate');
           expect(errors[0].meta.line).to.equal(2);
           expect(errors[0].meta.acceptedFormat).to.equal('YYYY-MM-DD');
+        });
+
+        it('should throw a field_required error when a required field is missing', async function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([{ ...learnerAttributes }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_REQUIRED);
+          expect(errors[0].meta.field).to.equal('birthdate');
+          expect(errors[0].meta.line).to.equal(2);
         });
       });
 
@@ -636,6 +679,34 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
         expect(learners.list[0].attributes.birthdate).to.equal('2010-03-06');
         expect(learners.list[0].attributes.marriage).to.equal('2027-06-09');
       });
+    });
+
+    context('edge cases', function () {
+      it('should do nothing and not throw when called with an empty array', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        expect(() => learnerSet.addLearners([])).to.not.throw();
+        expect(learnerSet.learners.list).to.be.empty;
+      });
+
+      it('should accumulate learners across multiple addLearners calls', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+        const learner2 = { ...learnerAttributes, prénom: 'Mieto', nom: 'Nataka' };
+
+        learnerSet.addLearners([learnerAttributes]);
+        learnerSet.addLearners([learner2]);
+
+        expect(learnerSet.learners.list).to.have.lengthOf(2);
+      });
+    });
+  });
+
+  describe('learners getter', function () {
+    it('should return empty list and existinglearnerIds before any addLearners call', function () {
+      const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+      expect(learnerSet.learners.list).to.be.empty;
+      expect(learnerSet.learners.existinglearnerIds).to.be.empty;
     });
   });
 });
