@@ -51,6 +51,9 @@ parameters:
   run-e2e-playwright:
     type: boolean
     default: false
+  run-e2e-cypress:
+    type: boolean
+    default: false
 
 orbs:
   browser-tools: circleci/browser-tools@1.5.3
@@ -944,7 +947,7 @@ jobs:
       - run:
           name: Skip if not needed
           command: |
-            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
       - browser-tools/install-chrome
@@ -1024,7 +1027,7 @@ jobs:
       - run:
           name: Skip if not needed
           command: |
-            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]]; then
+            if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
       - browser-tools/install-chrome
