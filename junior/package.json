@@ -67,7 +67,7 @@
     "ember-cli-mirage": "^3.0.4",
     "ember-cli-sass": "^11.0.1",
     "ember-data": "~5.8.0",
-    "ember-eslint-parser": "^0.7.0",
+    "ember-eslint-parser": "^0.8.0",
     "ember-exam": "10.1.0",
     "ember-intl": "^8.0.3",
     "ember-load-initializers": "^3.0.0",
