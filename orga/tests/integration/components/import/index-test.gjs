@@ -1,8 +1,8 @@
 import { render, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click, triggerEvent } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Import from 'pix-orga/components/import/index';
 import ENV from 'pix-orga/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -11,13 +11,15 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Import', function (hooks) {
   setupIntlRenderingTest(hooks);
-  let organizationImportDetail;
+  let store;
 
   hooks.beforeEach(function () {
-    this.set('onImportSupStudents', sinon.stub());
-    this.set('onImportScoStudents', sinon.stub());
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onImportLearners', sinon.stub());
+    store = this.owner.lookup('service:store');
+
+    this.onImportSupStudents = sinon.stub();
+    this.onImportScoStudents = sinon.stub();
+    this.onReplaceStudents = sinon.stub();
+    this.onImportLearners = sinon.stub();
   });
 
   module('when there is a import template', function () {
@@ -35,16 +37,21 @@ module('Integration | Component | Import', function (hooks) {
       }
 
       this.owner.register('service:session', SessionStub);
-      this.set('organizationImportDetail', null);
+      const organizationImportDetailVal = null;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @organizationImportDetail={{this.organizationImportDetail}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @organizationImportDetail={{organizationImportDetailVal}}
+          />
+        </template>,
       );
 
       // then
@@ -70,16 +77,21 @@ module('Integration | Component | Import', function (hooks) {
       }
 
       this.owner.register('service:session', SessionStub);
-      this.set('organizationImportDetail', null);
+      const organizationImportDetailVal = null;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @organizationImportDetail={{this.organizationImportDetail}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @organizationImportDetail={{organizationImportDetailVal}}
+          />
+        </template>,
       );
 
       // then
@@ -93,20 +105,17 @@ module('Integration | Component | Import', function (hooks) {
     });
   });
 
-  module('when import is in progress', function (hooks) {
-    hooks.beforeEach(function () {
-      const store = this.owner.lookup('service:store');
-      organizationImportDetail = store.createRecord('organization-import-detail', {
+  module('when import is in progress', function () {
+    test('sco upload button is disabled', async function (assert) {
+      // given
+      const organizationImportDetail = store.createRecord('organization-import-detail', {
         status: 'UPLOADED',
         createdAt: new Date(2020, 10, 1),
         createdBy: { firstName: 'Richard', lastName: 'Aldana' },
         updatedAt: new Date(2020, 10, 2),
         errors: [{ code: 'UAI_MISMATCHED', meta: {} }],
       });
-    });
 
-    test('sco upload button is disabled', async function (assert) {
-      // given
       class CurrentUserStub extends Service {
         isAdminInOrganization = true;
         isSCOManagingStudents = true;
@@ -114,16 +123,20 @@ module('Integration | Component | Import', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('organizationImportDetail', organizationImportDetail);
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @organizationImportDetail={{this.organizationImportDetail}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @organizationImportDetail={{organizationImportDetail}}
+          />
+        </template>,
       );
 
       // then
@@ -134,6 +147,14 @@ module('Integration | Component | Import', function (hooks) {
     });
     test('sup uploads buttons are disabled', async function (assert) {
       // given
+      const organizationImportDetail = store.createRecord('organization-import-detail', {
+        status: 'UPLOADED',
+        createdAt: new Date(2020, 10, 1),
+        createdBy: { firstName: 'Richard', lastName: 'Aldana' },
+        updatedAt: new Date(2020, 10, 2),
+        errors: [{ code: 'UAI_MISMATCHED', meta: {} }],
+      });
+
       class CurrentUserStub extends Service {
         isAdminInOrganization = true;
         isSUPManagingStudents = true;
@@ -141,16 +162,20 @@ module('Integration | Component | Import', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
-      this.set('organizationImportDetail', organizationImportDetail);
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @organizationImportDetail={{this.organizationImportDetail}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @organizationImportDetail={{organizationImportDetail}}
+          />
+        </template>,
       );
 
       // then
@@ -174,26 +199,30 @@ module('Integration | Component | Import', function (hooks) {
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
+    });
 
-      const store = this.owner.lookup('service:store');
-      organizationImportDetail = store.createRecord('organization-import-detail', {
+    test('display error heading information', async function (assert) {
+      // given
+      const organizationImportDetail = store.createRecord('organization-import-detail', {
         status: 'VALIDATION_ERROR',
         createdAt: new Date(2020, 10, 1),
         createdBy: { firstName: 'Richard', lastName: 'Aldana' },
         updatedAt: new Date(2020, 10, 2),
         errors: [{ code: 'UAI_MISMATCHED', meta: {} }],
       });
-    });
 
-    test('display error heading information', async function (assert) {
-      this.set('organizationImportDetail', organizationImportDetail);
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @organizationImportDetail={{this.organizationImportDetail}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @organizationImportDetail={{organizationImportDetail}}
+          />
+        </template>,
       );
 
       assert.ok(screen.getByRole('heading', { name: t('pages.organization-participants-import.error-panel.title') }));
@@ -202,29 +231,34 @@ module('Integration | Component | Import', function (hooks) {
   });
 
   module('when user is from sup', function (hooks) {
-    class CurrentUserStub extends Service {
+    class CurrentUserSupStub extends Service {
       isAdminInOrganization = true;
       isSUPManagingStudents = true;
       organization = {};
     }
 
     hooks.beforeEach(function () {
-      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:current-user', CurrentUserSupStub);
     });
 
     test('it should display Import/Replace Component', async function (assert) {
       // given
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       // then
@@ -245,17 +279,22 @@ module('Integration | Component | Import', function (hooks) {
     module('replaceStudents', function () {
       test('it should open the modal on replace button click', async function (assert) {
         // given
-        this.set('isLoading', false);
+        const isLoading = false;
+        const onImportSupStudents = this.onImportSupStudents;
+        const onImportScoStudents = this.onImportScoStudents;
+        const onReplaceStudents = this.onReplaceStudents;
 
         // when
         const screen = await render(
-          hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+          <template>
+            <Import
+              @onImportSupStudents={{onImportSupStudents}}
+              @onImportScoStudents={{onImportScoStudents}}
+              @onReplaceStudents={{onReplaceStudents}}
+              @isLoading={{isLoading}}
+              @organizatioImport={{null}}
+            />
+          </template>,
         );
 
         const replaceButton = screen.getByRole('button', {
@@ -275,17 +314,22 @@ module('Integration | Component | Import', function (hooks) {
 
       test('it should close the modal if the action is canceled', async function (assert) {
         // given
-        this.set('isLoading', false);
+        const isLoading = false;
+        const onImportSupStudents = this.onImportSupStudents;
+        const onImportScoStudents = this.onImportScoStudents;
+        const onReplaceStudents = this.onReplaceStudents;
 
         // when
         const screen = await render(
-          hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+          <template>
+            <Import
+              @onImportSupStudents={{onImportSupStudents}}
+              @onImportScoStudents={{onImportScoStudents}}
+              @onReplaceStudents={{onReplaceStudents}}
+              @isLoading={{isLoading}}
+              @organizatioImport={{null}}
+            />
+          </template>,
         );
 
         const replaceButton = screen.getByRole('button', {
@@ -311,17 +355,22 @@ module('Integration | Component | Import', function (hooks) {
     module('importSupStudents', function () {
       test('it should import by confirming and clicking on import button', async function (assert) {
         // given
-        this.set('isLoading', false);
+        const isLoading = false;
+        const onImportSupStudents = this.onImportSupStudents;
+        const onImportScoStudents = this.onImportScoStudents;
+        const onReplaceStudents = this.onReplaceStudents;
 
         // when
         const screen = await render(
-          hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+          <template>
+            <Import
+              @onImportSupStudents={{onImportSupStudents}}
+              @onImportScoStudents={{onImportScoStudents}}
+              @onReplaceStudents={{onReplaceStudents}}
+              @isLoading={{isLoading}}
+              @organizatioImport={{null}}
+            />
+          </template>,
         );
 
         const file = new Blob(['foo'], { type: 'valid-file' });
@@ -331,36 +380,41 @@ module('Integration | Component | Import', function (hooks) {
         await triggerEvent(addButton, 'change', { files: [file] });
 
         // then
-        assert.ok(this.onImportSupStudents.calledWithExactly([file]));
-        assert.notOk(this.onReplaceStudents.called);
+        assert.ok(onImportSupStudents.calledWithExactly([file]));
+        assert.notOk(onReplaceStudents.called);
       });
     });
   });
 
   module('when user is from sco', (hooks) => {
-    class CurrentUserStub extends Service {
+    class CurrentUserScoStub extends Service {
       isAdminInOrganization = true;
       isSCOManagingStudents = true;
       organization = {};
     }
 
     hooks.beforeEach(async function () {
-      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:current-user', CurrentUserScoStub);
     });
 
     test('it should display title and not the loading state', async function (assert) {
       // given
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       // then
@@ -376,17 +430,22 @@ module('Integration | Component | Import', function (hooks) {
 
     test('it specify that it require the right file type', async function (assert) {
       // given
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       // when
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       // then
@@ -396,16 +455,21 @@ module('Integration | Component | Import', function (hooks) {
     });
 
     test('it trigger importStudentsSpy when clicking on the import button', async function (assert) {
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       const file = new Blob(['foo'], { type: 'valid-file' });
@@ -413,7 +477,7 @@ module('Integration | Component | Import', function (hooks) {
 
       await triggerEvent(input, 'change', { files: [file] });
 
-      assert.ok(this.onImportScoStudents.called);
+      assert.ok(onImportScoStudents.called);
     });
   });
 
@@ -430,16 +494,21 @@ module('Integration | Component | Import', function (hooks) {
     });
 
     test('it trigger importStudentsSpy when clicking on the import button', async function (assert) {
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
 
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       const file = new Blob(['foo'], { type: 'valid-file' });
@@ -447,19 +516,24 @@ module('Integration | Component | Import', function (hooks) {
 
       await triggerEvent(input, 'change', { files: [file] });
 
-      assert.ok(this.onImportScoStudents.called);
+      assert.ok(onImportScoStudents.called);
     });
 
     test('it specify that it require the right file type', async function (assert) {
-      this.set('isLoading', false);
+      const isLoading = false;
+      const onImportSupStudents = this.onImportSupStudents;
+      const onImportScoStudents = this.onImportScoStudents;
+      const onReplaceStudents = this.onReplaceStudents;
       const screen = await render(
-        hbs`<Import
-  @onImportSupStudents={{this.onImportSupStudents}}
-  @onImportScoStudents={{this.onImportScoStudents}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @isLoading={{this.isLoading}}
-  @organizatioImport={{null}}
-/>`,
+        <template>
+          <Import
+            @onImportSupStudents={{onImportSupStudents}}
+            @onImportScoStudents={{onImportScoStudents}}
+            @onReplaceStudents={{onReplaceStudents}}
+            @isLoading={{isLoading}}
+            @organizatioImport={{null}}
+          />
+        </template>,
       );
 
       assert.ok(
@@ -469,26 +543,29 @@ module('Integration | Component | Import', function (hooks) {
   });
 
   module('when user has import feature', function (hooks) {
-    class CurrentUserStub extends Service {
+    class CurrentUserImportFeatureStub extends Service {
       isAdminInOrganization = true;
       hasLearnerImportFeature = true;
       organization = {};
     }
 
     hooks.beforeEach(function () {
-      this.owner.register('service:current-user', CurrentUserStub);
+      this.owner.register('service:current-user', CurrentUserImportFeatureStub);
     });
 
     test('it trigger the importOrganizationLearners spy when clicking import button', async function (assert) {
+      const onImportLearners = this.onImportLearners;
       const screen = await render(
-        hbs`<Import @onImportLearners={{this.onImportLearners}} @isLoading={{false}} @organizatioImport={{null}} />`,
+        <template>
+          <Import @onImportLearners={{onImportLearners}} @isLoading={{false}} @organizatioImport={{null}} />
+        </template>,
       );
 
       const file = new Blob(['foo'], { type: 'valid-file' });
       const input = screen.getByLabelText(t('pages.organization-participants-import.actions.participants.label'));
 
       await triggerEvent(input, 'change', { files: [file] });
-      assert.ok(this.onImportLearners.calledWithExactly([file]));
+      assert.ok(onImportLearners.calledWithExactly([file]));
     });
   });
 });

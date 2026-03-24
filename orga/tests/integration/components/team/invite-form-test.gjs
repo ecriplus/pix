@@ -1,7 +1,7 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import TeamInviteForm from 'pix-orga/components/team/invite-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -11,16 +11,17 @@ import { waitForDialog } from '../../../helpers/wait-for';
 module('Integration | Component | Team::InviteForm', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    this.set('inviteSpy', () => {});
-    this.set('cancelSpy', () => {});
-    this.set('updateEmail', sinon.spy());
-  });
-
   test('it should contain email input and validation button', async function (assert) {
+    // given
+    const inviteSpy = () => {};
+    const cancelSpy = () => {};
+    const updateEmail = sinon.spy();
+
     // when
     const screen = await render(
-      hbs`<Team::InviteForm @onSubmit={{this.inviteSpy}} @onCancel={{this.cancelSpy}} @onUpdateEmail={{this.updateEmail}} />`,
+      <template>
+        <TeamInviteForm @onSubmit={{inviteSpy}} @onCancel={{cancelSpy}} @onUpdateEmail={{updateEmail}} />
+      </template>,
     );
 
     // then
@@ -29,16 +30,22 @@ module('Integration | Component | Team::InviteForm', function (hooks) {
     assert.ok(screen.getByText(t('pages.team-new-item.invite-button')));
     assert.dom(screen.queryByRole('dialog')).doesNotExist();
   });
+
   test('it should bind organizationInvitation properties with email form input', async function (assert) {
     // given
-    this.set('email', 'toto@org.fr');
+    const inviteSpy = () => {};
+    const cancelSpy = () => {};
+    const updateEmail = sinon.spy();
+    const email = 'toto@org.fr';
     await render(
-      hbs`<Team::InviteForm
-  @email={{this.email}}
-  @onSubmit={{this.inviteSpy}}
-  @onCancel={{this.cancelSpy}}
-  @onUpdateEmail={{this.updateEmail}}
-/>`,
+      <template>
+        <TeamInviteForm
+          @email={{email}}
+          @onSubmit={{inviteSpy}}
+          @onCancel={{cancelSpy}}
+          @onUpdateEmail={{updateEmail}}
+        />
+      </template>,
     );
 
     // when
@@ -46,18 +53,24 @@ module('Integration | Component | Team::InviteForm', function (hooks) {
     await fillByLabel(inputLabel, 'dev@example.net');
 
     // then
-    assert.ok(this.updateEmail.called);
+    assert.ok(updateEmail.called);
   });
+
   test('it should open confirmation modal when invite button is clicked', async function (assert) {
     // given
-    this.set('email', 'toto@org.fr');
+    const inviteSpy = () => {};
+    const cancelSpy = () => {};
+    const updateEmail = sinon.spy();
+    const email = 'toto@org.fr';
     const screen = await render(
-      hbs`<Team::InviteForm
-  @email={{this.email}}
-  @onSubmit={{this.inviteSpy}}
-  @onCancel={{this.cancelSpy}}
-  @onUpdateEmail={{this.updateEmail}}
-/>`,
+      <template>
+        <TeamInviteForm
+          @email={{email}}
+          @onSubmit={{inviteSpy}}
+          @onCancel={{cancelSpy}}
+          @onUpdateEmail={{updateEmail}}
+        />
+      </template>,
     );
 
     // when
@@ -73,17 +86,23 @@ module('Integration | Component | Team::InviteForm', function (hooks) {
     // then
     assert.dom(screen.getByRole('dialog')).isVisible();
   });
+
   test('it should display error message when no email is in input and invite button is clicked', async function (assert) {
     // given
-    this.set('email', '');
+    const inviteSpy = () => {};
+    const cancelSpy = () => {};
+    const updateEmail = sinon.spy();
+    const email = '';
     const errorMessage = t('pages.team-new.errors.mandatory-email-field');
     const screen = await render(
-      hbs`<Team::InviteForm
-  @email={{this.email}}
-  @onSubmit={{this.inviteSpy}}
-  @onCancel={{this.cancelSpy}}
-  @onUpdateEmail={{this.updateEmail}}
-/>`,
+      <template>
+        <TeamInviteForm
+          @email={{email}}
+          @onSubmit={{inviteSpy}}
+          @onCancel={{cancelSpy}}
+          @onUpdateEmail={{updateEmail}}
+        />
+      </template>,
     );
 
     // when
@@ -99,17 +118,23 @@ module('Integration | Component | Team::InviteForm', function (hooks) {
     assert.dom(await screen.findByText(errorMessage)).exists();
     assert.dom(screen.queryByRole('dialog')).doesNotExist();
   });
+
   test('it should display error message when email format is not correct', async function (assert) {
     // given
-    this.set('email', 'toto@org.fr;alex-mail.incorrect');
+    const inviteSpy = () => {};
+    const cancelSpy = () => {};
+    const updateEmail = sinon.spy();
+    const email = 'toto@org.fr;alex-mail.incorrect';
     const errorMessage = t('pages.team-new.errors.invalid-input');
     const screen = await render(
-      hbs`<Team::InviteForm
-  @email={{this.email}}
-  @onSubmit={{this.inviteSpy}}
-  @onCancel={{this.cancelSpy}}
-  @onUpdateEmail={{this.updateEmail}}
-/>`,
+      <template>
+        <TeamInviteForm
+          @email={{email}}
+          @onSubmit={{inviteSpy}}
+          @onCancel={{cancelSpy}}
+          @onUpdateEmail={{updateEmail}}
+        />
+      </template>,
     );
 
     // when

@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import BannerCommunication from 'pix-orga/components/banner/communication';
 import ENV from 'pix-orga/config/environment';
 import { module, test } from 'qunit';
 
@@ -22,7 +22,7 @@ module('Integration | Component | Banner::Communication', function (hooks) {
     ENV.APP.BANNER_TYPE = '';
 
     // when
-    await render(hbs`<Banner::Communication />`);
+    await render(<template><BannerCommunication /></template>);
 
     // then
     assert.dom('.pix-banner-alert').doesNotExist();
@@ -34,7 +34,7 @@ module('Integration | Component | Banner::Communication', function (hooks) {
     ENV.APP.BANNER_TYPE = 'information';
 
     // when
-    const screen = await render(hbs`<Banner::Communication />`);
+    const screen = await render(<template><BannerCommunication /></template>);
 
     // then
     assert.dom('.pix-banner-alert--information').exists();

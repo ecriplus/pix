@@ -1,7 +1,7 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import TeamInvitationsList from 'pix-orga/components/team/invitations-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -16,7 +16,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
 
   test('it should list the pending team invitations', async function (assert) {
     // given
-    this.set('invitations', [
+    const invitations = [
       {
         email: 'gigi@example.net',
         isPending: true,
@@ -27,10 +27,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
         isPending: true,
         updatedAt: '2019-10-08T10:50:00Z',
       },
-    ]);
+    ];
 
     // when
-    const screen = await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
+    const screen = await render(<template><TeamInvitationsList @invitations={{invitations}} /></template>);
 
     // then
     assert.strictEqual(screen.getAllByRole('row').length, 3);
@@ -41,10 +41,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     const dayjsService = this.owner.lookup('service:dayjs');
     const pendingInvitationDate = '2023-12-05T09:00:00Z';
 
-    this.set('invitations', [{ email: 'gigi@example.net', isPending: true, updatedAt: pendingInvitationDate }]);
+    const invitations = [{ email: 'gigi@example.net', isPending: true, updatedAt: pendingInvitationDate }];
 
     // when
-    const component = await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
+    const component = await render(<template><TeamInvitationsList @invitations={{invitations}} /></template>);
 
     // then
     const formattedPendingInvitationDate = dayjsService.self(pendingInvitationDate).format('DD/MM/YYYY [-] HH:mm');
@@ -69,10 +69,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     this.owner.register('service:current-user', CurrentUserStub);
     sinon.stub(notifications, 'success');
 
-    this.set('invitations', [invitation]);
+    const invitations = [invitation];
 
     // when
-    await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
+    await render(<template><TeamInvitationsList @invitations={{invitations}} /></template>);
 
     await clickByName(t('pages.team-invitations.cancel-invitation'));
 
@@ -98,10 +98,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     invitation.save.rejects();
     sinon.stub(notifications, 'error');
 
-    this.set('invitations', [invitation]);
+    const invitations = [invitation];
 
     // when
-    await render(hbs`<Team::InvitationsList @invitations={{this.invitations}} />`);
+    await render(<template><TeamInvitationsList @invitations={{invitations}} /></template>);
     await clickByName(t('pages.team-invitations.cancel-invitation'));
 
     // then

@@ -1,5 +1,5 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import TubeList from 'pix-orga/components/tube/list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -7,7 +7,7 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | tube:list', function (hooks) {
   setupIntlRenderingTest(hooks);
-  let frameworks;
+  let allFrameworks;
   const MOCK_TODAY = '2020-08-05-1152';
   let dayjs;
 
@@ -89,7 +89,7 @@ module('Integration | Component | tube:list', function (hooks) {
       },
     ];
 
-    frameworks = [
+    allFrameworks = [
       {
         id: 'fmkId1',
         name: 'Pix',
@@ -117,20 +117,20 @@ module('Integration | Component | tube:list', function (hooks) {
 
   test('it should display frameworks title', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    const screen = await render(<template><TubeList @frameworks={{frameworks}} /></template>);
     assert.ok(screen.getByRole('heading', { level: 2, name: 'Pix' }));
     assert.ok(screen.getByRole('heading', { level: 2, name: 'Edu+' }));
   });
 
   test('it should display a list of tubes', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    const screen = await render(<template><TubeList @frameworks={{frameworks}} /></template>);
     await clickByName('1 · Titre domaine Pix');
     // then
     assert.dom(screen.getByLabelText('Titre 1 Tube Pix : Description 1')).exists();
@@ -139,10 +139,10 @@ module('Integration | Component | tube:list', function (hooks) {
 
   test('it should disable the download button if not tube is selected', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    const screen = await render(<template><TubeList @frameworks={{frameworks}} /></template>);
 
     // then
     assert
@@ -151,13 +151,13 @@ module('Integration | Component | tube:list', function (hooks) {
   });
 
   test('it should enable the download button if a tube is selected', async function (assert) {
+    // given
     const expectedAttr = `selection-sujets-mon orga-${MOCK_TODAY}.json`;
-    this.set('frameworks', frameworks);
-    this.set('organization', { name: 'mon orga' });
+    const organization = { name: 'mon orga' };
+    const frameworks = allFrameworks.slice();
 
-    // when
     const screen = await render(
-      hbs`<Tube::list @frameworks={{this.frameworks}} @organization={{this.organization}} />`,
+      <template><TubeList @frameworks={{frameworks}} @organization={{organization}} /></template>,
     );
 
     await clickByName('1 · Titre domaine Pix');
@@ -178,12 +178,12 @@ module('Integration | Component | tube:list', function (hooks) {
     sinon.stub(URL, 'createObjectURL').returns('blob:fake-url');
     sinon.stub(URL, 'revokeObjectURL');
 
-    this.set('frameworks', frameworks);
-    this.set('organization', { name: 'mon orga' });
+    const frameworks = allFrameworks.slice();
+    const organization = { name: 'mon orga' };
     const pixMetrics = this.owner.lookup('service:pix-metrics');
     const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
 
-    await render(hbs`<Tube::list @frameworks={{this.frameworks}} @organization={{this.organization}} />`);
+    await render(<template><TubeList @frameworks={{frameworks}} @organization={{organization}} /></template>);
 
     await clickByName('1 · Titre domaine Pix');
     await clickByName('Titre 1 Tube Pix : Description 1');
@@ -197,10 +197,10 @@ module('Integration | Component | tube:list', function (hooks) {
 
   test('Enable the download button if a thematic is selected', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    await render(<template><TubeList @frameworks={{frameworks}} /></template>);
 
     await clickByName('1 · Titre domaine Pix');
     await clickByName('thematic1');
@@ -211,10 +211,10 @@ module('Integration | Component | tube:list', function (hooks) {
 
   test('Should check all tubes corresponding to the thematics if a thematic is selected', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    const screen = await render(<template><TubeList @frameworks={{frameworks}} /></template>);
 
     await clickByName('1 · Titre domaine Pix');
     await clickByName('thematic1');
@@ -226,10 +226,10 @@ module('Integration | Component | tube:list', function (hooks) {
 
   test('Should check the thematics if all corresponding tubes are selected', async function (assert) {
     // given
-    this.set('frameworks', frameworks);
+    const frameworks = allFrameworks.slice();
 
     // when
-    const screen = await render(hbs`<Tube::list @frameworks={{this.frameworks}} />`);
+    const screen = await render(<template><TubeList @frameworks={{frameworks}} /></template>);
 
     await clickByName('1 · Titre domaine Pix');
     await clickByName('Titre 1 Tube Pix : Description 1');

@@ -1,6 +1,6 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import OrganizationLearnerActivity from 'pix-orga/components/organization-learner/activity';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -13,18 +13,17 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
       // given
       const participations = [];
       const statistics = [];
-
-      this.set('participations', participations);
-      this.set('statistics', statistics);
-      this.set('learner', { lastName: 'dylan', firstName: 'bob' });
+      const learner = { lastName: 'dylan', firstName: 'bob' };
 
       // when
       const screen = await render(
-        hbs`<OrganizationLearner::Activity
-  @participations={{this.participations}}
-  @statistics={{this.statistics}}
-  @learner={{this.learner}}
-/>`,
+        <template>
+          <OrganizationLearnerActivity
+            @participations={{participations}}
+            @statistics={{statistics}}
+            @learner={{learner}}
+          />
+        </template>,
       );
 
       // then
@@ -53,17 +52,17 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
       },
     ];
     const statistics = [];
-    this.set('participations', participations);
-    this.set('statistics', statistics);
-    this.set('learner', { lastName: 'Dylan', firstName: 'Bob' });
+    const learner = { lastName: 'Dylan', firstName: 'Bob' };
 
     // when
     const screen = await render(
-      hbs`<OrganizationLearner::Activity
-  @participations={{this.participations}}
-  @statistics={{this.statistics}}
-  @learner={{this.learner}}
-/>`,
+      <template>
+        <OrganizationLearnerActivity
+          @participations={{participations}}
+          @statistics={{statistics}}
+          @learner={{learner}}
+        />
+      </template>,
     );
 
     // then
@@ -78,6 +77,7 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
       )
       .doesNotExist();
   });
+
   test('it should display assessment participations statistics when there are participations', async function (assert) {
     // given
     const participations = [
@@ -97,17 +97,17 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
         total: 3,
       },
     ];
-    this.set('participations', participations);
-    this.set('statistics', statistics);
-    this.set('learner', { lastName: 'Dylan', firstName: 'Bob' });
+    const learner = { lastName: 'Dylan', firstName: 'Bob' };
 
     // when
     const screen = await render(
-      hbs`<OrganizationLearner::Activity
-  @participations={{this.participations}}
-  @statistics={{this.statistics}}
-  @learner={{this.learner}}
-/>`,
+      <template>
+        <OrganizationLearnerActivity
+          @participations={{participations}}
+          @statistics={{statistics}}
+          @learner={{learner}}
+        />
+      </template>,
     );
 
     // then
@@ -120,6 +120,7 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
     assert.dom(assessmentCard.getByText(t('pages.organization-learner.activity.cards.started', { count: 2 }))).exists();
     assert.dom(assessmentCard.getByText(t('pages.organization-learner.activity.cards.shared', { count: 1 }))).exists();
   });
+
   test('it should display profile collection participations statistics when there is participations', async function (assert) {
     // given
     const participations = [
@@ -139,17 +140,17 @@ module('Integration | Component | OrganizationLearner::Activity', function (hook
         total: 4,
       },
     ];
-    this.set('participations', participations);
-    this.set('statistics', statistics);
-    this.set('learner', { lastName: 'Dylan', firstName: 'Bob' });
+    const learner = { lastName: 'Dylan', firstName: 'Bob' };
 
     // when
     const screen = await render(
-      hbs`<OrganizationLearner::Activity
-  @participations={{this.participations}}
-  @statistics={{this.statistics}}
-  @learner={{this.learner}}
-/>`,
+      <template>
+        <OrganizationLearnerActivity
+          @participations={{participations}}
+          @statistics={{statistics}}
+          @learner={{learner}}
+        />
+      </template>,
     );
 
     // then

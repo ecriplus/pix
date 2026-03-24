@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import OrganizationLearnerActivityParticipationList from 'pix-orga/components/organization-learner/activity/participation-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -11,7 +11,7 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
   setupIntlRenderingTest(hooks);
 
   test('it should display participations details of Assessment', async function (assert) {
-    this.set('participations', [
+    const participations = [
       {
         campaignType: 'ASSESSMENT',
         campaignName: 'Ma 1ère campagne',
@@ -20,10 +20,10 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
         status: 'SHARED',
         participationCount: '2',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+      <template><OrganizationLearnerActivityParticipationList @participations={{participations}} /></template>,
     );
 
     assert.ok(screen.getByText('Ma 1ère campagne'));
@@ -35,7 +35,7 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
   });
 
   test('it should display participations details of Profiles collection', async function (assert) {
-    this.set('participations', [
+    const participations = [
       {
         campaignType: 'PROFILES_COLLECTION',
         campaignName: 'Ma 1ère campagne',
@@ -44,10 +44,10 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
         status: 'SHARED',
         participationCount: '1',
       },
-    ]);
+    ];
 
     const screen = await render(
-      hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+      <template><OrganizationLearnerActivityParticipationList @participations={{participations}} /></template>,
     );
 
     assert.ok(screen.getByText('Ma 1ère campagne'));
@@ -70,7 +70,7 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
       const router = this.owner.lookup('service:router');
       router.transitionTo = sinon.stub();
       // given
-      this.set('participations', [
+      const participations = [
         {
           id: '125',
           campaignId: 789,
@@ -81,11 +81,11 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
           status: 'SHARED',
           lastCampaignParticipationId: 345,
         },
-      ]);
-      this.route = 'authenticated.campaigns.participant-profile';
+      ];
+      const route = 'authenticated.campaigns.participant-profile';
 
       const screen = await render(
-        hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+        <template><OrganizationLearnerActivityParticipationList @participations={{participations}} /></template>,
       );
 
       // when
@@ -94,16 +94,16 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
       // then
       assert.ok(
         router.transitionTo.calledWith(
-          this.route,
-          this.participations[0].campaignId,
-          this.participations[0].lastCampaignParticipationId,
+          route,
+          participations[0].campaignId,
+          participations[0].lastCampaignParticipationId,
         ),
       );
     });
 
     test('it should transition to assessment detail when campaignType is ASSESSMENT', async function (assert) {
       // given
-      this.set('participations', [
+      const participations = [
         {
           id: '123',
           campaignId: '456',
@@ -114,11 +114,11 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
           status: 'SHARED',
           lastCampaignParticipationId: 345,
         },
-      ]);
-      this.route = 'authenticated.campaigns.participant-assessment';
+      ];
+      const route = 'authenticated.campaigns.participant-assessment';
 
       const screen = await render(
-        hbs`<OrganizationLearner::Activity::ParticipationList @participations={{this.participations}} />`,
+        <template><OrganizationLearnerActivityParticipationList @participations={{participations}} /></template>,
       );
 
       // when
@@ -127,9 +127,9 @@ module('Integration | Component | OrganizationLearner::Activity::ParticipationLi
       // then
       assert.ok(
         router.transitionTo.calledWith(
-          this.route,
-          this.participations[0].campaignId,
-          this.participations[0].lastCampaignParticipationId,
+          route,
+          participations[0].campaignId,
+          participations[0].lastCampaignParticipationId,
         ),
       );
     });

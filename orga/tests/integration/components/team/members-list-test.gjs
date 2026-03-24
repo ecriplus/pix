@@ -1,15 +1,15 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import TeamMembersList from 'pix-orga/components/team/members-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Team::MembersList', function (hooks) {
-  let members;
+  let memberList;
 
   setupIntlRenderingTest(hooks);
 
@@ -42,7 +42,7 @@ module('Integration | Component | Team::MembersList', function (hooks) {
       }),
     ];
 
-    members = [
+    memberList = [
       store.createRecord('membership', {
         id: '1',
         displayRole: t('pages.team-members.actions.select-role.options.admin'),
@@ -64,11 +64,11 @@ module('Integration | Component | Team::MembersList', function (hooks) {
 
   test('it lists the team members', async function (assert) {
     //given
+    const members = memberList.slice();
     members.meta = { rowCount: 2 };
-    this.set('members', members);
 
     // when
-    const screen = await render(hbs`<Team::MembersList @members={{this.members}} />`);
+    const screen = await render(<template><TeamMembersList @members={{members}} /></template>);
 
     // then
     assert.ok(screen.getByText('Gigi'));
@@ -77,10 +77,10 @@ module('Integration | Component | Team::MembersList', function (hooks) {
 
   test('it displays a message when there are no members', async function (assert) {
     //given
-    this.set('members', []);
+    const emptyMembers = [];
 
     // when
-    const screen = await render(hbs`<Team::MembersList @members={{this.members}} />`);
+    const screen = await render(<template><TeamMembersList @members={{emptyMembers}} /></template>);
 
     // then
     assert.ok(screen.getByText(t('pages.team-members.table.empty')));
@@ -89,11 +89,11 @@ module('Integration | Component | Team::MembersList', function (hooks) {
   module('when updating a team member role to "ADMIN"', function () {
     test('it does not display dropdown icon on the admin member before confirming update', async function (assert) {
       // given
+      const members = memberList.slice();
       members.meta = { rowCount: 2 };
-      this.set('members', members);
 
       // when
-      const screen = await render(hbs`<Team::MembersList @members={{this.members}} />`);
+      const screen = await render(<template><TeamMembersList @members={{members}} /></template>);
 
       await clickByName(t('pages.team-members.actions.manage'));
       await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));

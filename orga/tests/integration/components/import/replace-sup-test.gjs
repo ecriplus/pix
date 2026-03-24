@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ImportReplaceSup from 'pix-orga/components/import/replace-sup';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -11,10 +11,10 @@ module('Integration | Component | Import::ReplaceSup', function (hooks) {
   module('upload button', function () {
     test('should be disable', async function (assert) {
       // given
-      this.supportedFormats = ['.csv'];
+      const supportedFormats = ['.csv'];
       // when
       const screen = await render(
-        hbs`<Import::ReplaceSup @disabled={{true}} @supportedFormats={{this.supportedFormats}} />`,
+        <template><ImportReplaceSup @disabled={{true}} @supportedFormats={{supportedFormats}} /></template>,
       );
 
       // then
@@ -26,11 +26,11 @@ module('Integration | Component | Import::ReplaceSup', function (hooks) {
 
     test('should be enable', async function (assert) {
       // given
-      this.supportedFormats = ['.csv'];
+      const supportedFormats = ['.csv'];
 
       // when
       const screen = await render(
-        hbs`<Import::ReplaceSup @disabled={{false}} @supportedFormats={{this.supportedFormats}} />`,
+        <template><ImportReplaceSup @disabled={{false}} @supportedFormats={{supportedFormats}} /></template>,
       );
 
       // then

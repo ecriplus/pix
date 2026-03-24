@@ -3,8 +3,8 @@ import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { faker } from '@faker-js/faker';
 import { triggerCopySuccess } from 'ember-cli-clipboard/test-support';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ScoOrganizationParticipantManageAuthenticationMethodModal from 'pix-orga/components/sco-organization-participant/manage-authentication-method-modal';
 import { module, test } from 'qunit';
 import { resolve } from 'rsvp';
 
@@ -13,46 +13,44 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticationMethodModal', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('When Student is not connected with GAR method', function (hooks) {
+  module('When Student is not connected with GAR method', function () {
     const username = 'john.doe0112';
     const email = 'john.doe0112@example.net';
-
-    hooks.beforeEach(function () {
-      this.studentWithUsernameAndEmail = EmberObject.create({
-        id: '1',
-        username,
-        email,
-        firstName: 'John',
-        lastName: 'Doe',
-        birthdate: '2010-12-01',
-        isAuthenticatedFromGar: false,
-        hasUsername: true,
-        hasEmail: true,
-      });
-      this.studentWithEmailOnly = EmberObject.create({
-        id: '1',
-        username,
-        email,
-        firstName: 'John',
-        lastName: 'Doe',
-        birthdate: '2010-12-01',
-        isAuthenticatedFromGar: false,
-        hasUsername: false,
-        hasEmail: true,
-        displayAddUsernameAuthentication: true,
-      });
-
-      this.display = true;
+    const studentWithUsernameAndEmail = EmberObject.create({
+      id: '1',
+      username,
+      email,
+      firstName: 'John',
+      lastName: 'Doe',
+      birthdate: '2010-12-01',
+      isAuthenticatedFromGar: false,
+      hasUsername: true,
+      hasEmail: true,
     });
+    const studentWithEmailOnly = EmberObject.create({
+      id: '1',
+      username,
+      email,
+      firstName: 'John',
+      lastName: 'Doe',
+      birthdate: '2010-12-01',
+      isAuthenticatedFromGar: false,
+      hasUsername: false,
+      hasEmail: true,
+      displayAddUsernameAuthentication: true,
+    });
+    const display = true;
 
     module('When Student is connected with username method', function () {
       test('should render component with username field', async function (assert) {
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -68,10 +66,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should render clipboard to copy username', async function (assert) {
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -87,10 +87,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should display tooltip when username copy button is clicked', async function (assert) {
         // given
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // when
@@ -109,10 +111,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should render component with email field', async function (assert) {
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -127,10 +131,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should render clipboard to copy email', async function (assert) {
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -146,10 +152,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should display tooltip when email copy button is clicked', async function (assert) {
         // given
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // when
@@ -168,10 +176,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should render add username authentication method', async function (assert) {
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithEmailOnly}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithEmailOnly}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -215,10 +225,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should display unique password input when reset password button is clicked', async function (assert) {
         // given
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // when
@@ -237,10 +249,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should render clipboard to copy unique password', async function (assert) {
         // given
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // when
@@ -261,10 +275,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should display tooltip when generated password copy button is clicked', async function (assert) {
         // given
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // when
@@ -284,10 +300,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
       test('should generate unique password each time the modal is used', async function (assert) {
         // given
         await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
         await clickByName(
           t('pages.sco-organization-participants.manage-authentication-method-modal.section.reset-password.button'),
@@ -296,10 +314,12 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
 
         // when
         await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal
-  @student={{this.studentWithUsernameAndEmail}}
-  @display={{this.display}}
-/>`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{studentWithUsernameAndEmail}}
+              @display={{display}}
+            />
+          </template>,
         );
         await clickByName(
           t('pages.sco-organization-participants.manage-authentication-method-modal.section.reset-password.button'),
@@ -314,7 +334,7 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
     module('When Student is blocked or temporarily blocked', function () {
       test('displays blocked student message and unblock button', async function (assert) {
         // given
-        this.blockedStudent = EmberObject.create({
+        const blockedStudent = EmberObject.create({
           id: '1',
           username,
           email,
@@ -325,10 +345,16 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
           hasUsername: true,
           isBlockedOrTemporarilyBlocked: true,
         });
+        const display = true;
 
         // when
         const screen = await render(
-          hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal @student={{this.blockedStudent}} @display={{true}} />`,
+          <template>
+            <ScoOrganizationParticipantManageAuthenticationMethodModal
+              @student={{blockedStudent}}
+              @display={{display}}
+            />
+          </template>,
         );
 
         // then
@@ -352,20 +378,19 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
     });
   });
 
-  module('When Student is connected with GAR method', function (hooks) {
-    hooks.beforeEach(function () {
-      this.studentGAR = EmberObject.create({
-        id: '2',
-        isAuthenticatedFromGar: true,
-        displayAddUsernameAuthentication: true,
-      });
-      this.display = true;
+  module('When Student is connected with GAR method', function () {
+    const studentGAR = EmberObject.create({
+      id: '2',
+      isAuthenticatedFromGar: true,
+      displayAddUsernameAuthentication: true,
     });
 
     test('should render component with GAR connection method', async function (assert) {
       // when
       const screen = await render(
-        hbs`<ScoOrganizationParticipant::ManageAuthenticationMethodModal @student={{this.studentGAR}} @display={{this.display}} />`,
+        <template>
+          <ScoOrganizationParticipantManageAuthenticationMethodModal @student={{studentGAR}} @display={{true}} />
+        </template>,
       );
 
       // then

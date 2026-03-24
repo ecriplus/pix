@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click, triggerEvent } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ImportReplaceStudentsModal from 'pix-orga/components/import/replace-students-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,17 +12,19 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
 
   test('it should not display modal', async function (assert) {
     // given
-    this.set('display', false);
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onClose', sinon.stub());
+    const display = false;
+    const onReplaceStudents = sinon.stub();
+    const onClose = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Import::ReplaceStudentsModal
-  @display={{this.display}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @onClose={{this.onClose}}
-/>`,
+      <template>
+        <ImportReplaceStudentsModal
+          @display={{display}}
+          @onReplaceStudents={{onReplaceStudents}}
+          @onClose={{onClose}}
+        />
+      </template>,
     );
 
     // then
@@ -38,17 +40,19 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
 
   test('it should display modal', async function (assert) {
     // given
-    this.set('display', true);
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onClose', sinon.stub());
+    const display = true;
+    const onReplaceStudents = sinon.stub();
+    const onClose = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Import::ReplaceStudentsModal
-  @display={{this.display}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @onClose={{this.onClose}}
-/>`,
+      <template>
+        <ImportReplaceStudentsModal
+          @display={{display}}
+          @onReplaceStudents={{onReplaceStudents}}
+          @onClose={{onClose}}
+        />
+      </template>,
     );
 
     // then
@@ -74,17 +78,19 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
 
   test('it should not be able to replace student if confirmation is not checked', async function (assert) {
     // given
-    this.set('display', true);
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onClose', sinon.stub());
+    const display = true;
+    const onReplaceStudents = sinon.stub();
+    const onClose = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Import::ReplaceStudentsModal
-  @display={{this.display}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @onClose={{this.onClose}}
-/>`,
+      <template>
+        <ImportReplaceStudentsModal
+          @display={{display}}
+          @onReplaceStudents={{onReplaceStudents}}
+          @onClose={{onClose}}
+        />
+      </template>,
     );
 
     // then
@@ -99,17 +105,19 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
 
   test('it should be able to replace student if confirmation is checked', async function (assert) {
     // given
-    this.set('display', true);
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onClose', sinon.stub());
+    const display = true;
+    const onReplaceStudents = sinon.stub();
+    const onClose = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Import::ReplaceStudentsModal
-  @display={{this.display}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @onClose={{this.onClose}}
-/>`,
+      <template>
+        <ImportReplaceStudentsModal
+          @display={{display}}
+          @onReplaceStudents={{onReplaceStudents}}
+          @onClose={{onClose}}
+        />
+      </template>,
     );
 
     const confirmation = await screen.getByRole('checkbox', {
@@ -126,17 +134,19 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
 
   test('it should replace by confirming and clicking on replace button', async function (assert) {
     // given
-    this.set('display', true);
-    this.set('onReplaceStudents', sinon.stub());
-    this.set('onClose', sinon.stub());
+    const display = true;
+    const onReplaceStudents = sinon.stub();
+    const onClose = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Import::ReplaceStudentsModal
-  @display={{this.display}}
-  @onReplaceStudents={{this.onReplaceStudents}}
-  @onClose={{this.onClose}}
-/>`,
+      <template>
+        <ImportReplaceStudentsModal
+          @display={{display}}
+          @onReplaceStudents={{onReplaceStudents}}
+          @onClose={{onClose}}
+        />
+      </template>,
     );
 
     const confirmation = await screen.getByRole('checkbox', {
@@ -152,6 +162,6 @@ module('Integration | Component | Import::ReplaceStudentsModal', function (hooks
     await triggerEvent(uploadButton, 'change', { files: [file] });
 
     // then
-    assert.ok(this.onReplaceStudents.calledWithExactly([file]));
+    assert.ok(onReplaceStudents.calledWithExactly([file]));
   });
 });

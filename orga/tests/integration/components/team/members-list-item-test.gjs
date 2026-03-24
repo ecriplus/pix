@@ -1,8 +1,8 @@
 import { clickByName, render, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import TeamMembersListItem from 'pix-orga/components/team/members-list-item';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -18,7 +18,7 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
   let prescriber;
 
   hooks.beforeEach(function () {
-    this.set('noop', sinon.stub());
+    this.noop = sinon.stub();
 
     store = this.owner.lookup('service:store');
 
@@ -67,11 +67,11 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
     test('it should display a member, firstName, lastName and role', async function (assert) {
       // given
-      this.set('membership', memberMembership);
+      const membership = memberMembership;
 
       // when
       const screen = await render(
-        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
       );
 
       // then
@@ -82,11 +82,11 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
     test('it should not display the edit button', async function (assert) {
       // given
-      this.set('membership', memberMembership);
+      const membership = memberMembership;
 
       // when
       const screen = await render(
-        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
       );
 
       // then
@@ -107,11 +107,11 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
     test('it should display a member firstName, lastName, role and edit button', async function (assert) {
       // given
-      this.set('membership', memberMembership);
+      const membership = memberMembership;
 
       // when
       const screen = await render(
-        hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+        <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
       );
 
       // then
@@ -125,10 +125,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
     module('When edit organization role button is clicked', function () {
       test('it should show update and save button, and show the drop down to select role to update', async function (assert) {
         // given
-        this.set('membership', adminMembership);
+        const membership = adminMembership;
 
         const screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
         );
 
         // when
@@ -141,9 +141,11 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
       test('it should cancel the update if using the cancel button', async function (assert) {
         // given
-        this.set('membership', adminMembership);
+        const membership = adminMembership;
 
-        await render(hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`);
+        await render(
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
+        );
 
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -159,10 +161,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
       test('it should change the value of the drop down to Administrateur and display the modified role', async function (assert) {
         // given
-        this.set('membership', memberMembership);
+        const membership = memberMembership;
 
         const screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
         );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -189,10 +191,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
       test('it should change the value of the drop down to Membre and display the modified role', async function (assert) {
         // given
-        this.set('membership', adminMembership);
+        const membership = adminMembership;
 
         const screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
         );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -212,10 +214,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         // given
         const notifications = this.owner.lookup('service:notifications');
         sinon.stub(notifications, 'success');
-        this.set('membership', adminMembership);
+        const membership = adminMembership;
 
         const screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
         );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -236,12 +238,12 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
       test('it should display error message when updating a member role fails', async function (assert) {
         // given
         adminMembership.save.rejects();
-        this.set('membership', adminMembership);
+        const membership = adminMembership;
         const notifications = this.owner.lookup('service:notifications');
         sinon.stub(notifications, 'error');
 
         const screen = await render(
-          hbs`<Team::MembersListItem @membership={{this.membership}} @displayManagingColumn={{true}} />`,
+          <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
         );
         await clickByName(t('pages.team-members.actions.manage'));
         await clickByName(t('pages.team-members.actions.edit-organization-membership-role'));
@@ -265,16 +267,18 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         // given
         removeMembershipStub = sinon.stub();
 
-        this.set('membership', memberMembership);
-        this.set('removeMembership', removeMembershipStub);
+        const membership = memberMembership;
+        const removeMembership = removeMembershipStub;
 
         // when
         screen = await render(
-          hbs`<Team::MembersListItem
-  @membership={{this.membership}}
-  @onRemoveMember={{this.removeMembership}}
-  @displayManagingColumn={{true}}
-/>`,
+          <template>
+            <TeamMembersListItem
+              @membership={{membership}}
+              @onRemoveMember={{removeMembership}}
+              @displayManagingColumn={{true}}
+            />
+          </template>,
         );
 
         await clickByName(t('pages.team-members.actions.manage'));
@@ -362,9 +366,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         });
         const onLeaveOrganizationStub = sinon.stub().resolves();
 
-        this.set('membership', leavingAdminMembership);
-        this.set('isMultipleAdminsAvailable', true);
-        this.set('onLeaveOrganization', onLeaveOrganizationStub);
+        const membership = leavingAdminMembership;
+        const isMultipleAdminsAvailable = true;
+        const onLeaveOrganization = onLeaveOrganizationStub;
+        const noop = this.noop;
 
         sinon.stub(notificationsService, 'sendSuccess');
         sinon.stub(sessionService, 'waitBeforeInvalidation');
@@ -372,13 +377,15 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
         // when
         const screen = await render(
-          hbs`<Team::MembersListItem
-  @membership={{this.membership}}
-  @isMultipleAdminsAvailable={{this.isMultipleAdminsAvailable}}
-  @onRemoveMember={{this.noop}}
-  @onLeaveOrganization={{this.onLeaveOrganization}}
-  @displayManagingColumn={{true}}
-/>`,
+          <template>
+            <TeamMembersListItem
+              @membership={{membership}}
+              @isMultipleAdminsAvailable={{isMultipleAdminsAvailable}}
+              @onRemoveMember={{noop}}
+              @onLeaveOrganization={{onLeaveOrganization}}
+              @displayManagingColumn={{true}}
+            />
+          </template>,
         );
         await clickByName(t('pages.team-members.actions.manage'));
         await click(screen.getByRole('button', { name: t('pages.team-members.actions.leave-organization') }));

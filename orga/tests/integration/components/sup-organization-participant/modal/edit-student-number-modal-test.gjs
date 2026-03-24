@@ -1,7 +1,7 @@
 import { clickByName, fillByLabel, getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import SupOrganizationParticipantModalEditStudentNumberModal from 'pix-orga/components/sup-organization-participant/modal/edit-student-number-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,48 +9,41 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | SupOrganizationParticipant::Modal::EditStudentNumberModal', function (hooks) {
   setupIntlRenderingTest(hooks);
-  let closeStub;
-  let notificationsStub;
-  let onSaveStudentNumberStub;
+
+  const stubs = {};
+  const student = EmberObject.create({
+    id: '123',
+    firstName: 'Lyanna',
+    lastName: 'Mormont',
+    studentNumber: '1234',
+  });
 
   hooks.beforeEach(function () {
-    this.student = EmberObject.create({
-      id: '123',
-      firstName: 'Lyanna',
-      lastName: 'Mormont',
-      studentNumber: '1234',
-    });
-
-    onSaveStudentNumberStub = sinon.stub();
-
-    notificationsStub = this.owner.lookup('service:notifications');
-
-    closeStub = sinon.stub();
-
-    sinon.stub(notificationsStub, 'sendSuccess');
-
-    this.set('display', true);
-    this.set('close', closeStub);
-    this.set('onSaveStudentNumber', onSaveStudentNumberStub);
+    stubs.onSaveStudentNumberStub = sinon.stub();
+    stubs.closeStub = sinon.stub();
+    const notifications = this.owner.lookup('service:notifications');
+    stubs.sendSuccess = sinon.stub(notifications, 'sendSuccess');
   });
 
   module('when the edit student number modal is open', function () {
     module('when there is student number', function () {
       test('should render component with student number text', async function (assert) {
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         assert.ok(
           screen.getByText(
             t('pages.sup-organization-participants.edit-student-number-modal.form.student-number', {
-              firstName: this.student.firstName,
-              lastName: this.student.lastName,
+              firstName: student.firstName,
+              lastName: student.lastName,
             }),
             // WARNING : nous avons ici un problème de rupture de la séparation des responsabilité
             // ce pourquoi nous sommes obligés de renseigner `normalizer: getDefaultNormalizer({ trim: false })z.
@@ -58,27 +51,29 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
             { exact: false, normalizer: getDefaultNormalizer({ trim: false }) },
           ),
         );
-        assert.ok(screen.getByText(this.student.studentNumber));
+        assert.ok(screen.getByText(student.studentNumber));
       });
     });
 
     module('when there is no student number yet', function () {
       test('should not render component with student number text', async function (assert) {
-        this.student.set('studentNumber', null);
+        student.set('studentNumber', null);
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         assert.notOk(
           screen.queryByText(
             t('pages.sup-organization-participants.edit-student-number-modal.form.student-number', {
-              firstName: this.student.firstName,
-              lastName: this.student.lastName,
+              firstName: student.firstName,
+              lastName: student.lastName,
             }),
             // WARNING : nous avons ici un problème de rupture de la séparation des responsabilité
             // ce pourquoi nous sommes obligés de renseigner `normalizer: getDefaultNormalizer({ trim: false })z.
@@ -92,18 +87,20 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
     module('When a student number is entered', function () {
       test('should have the update button enable', async function (assert) {
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         // when
         await fillByLabel(
           t('pages.sup-organization-participants.edit-student-number-modal.form.new-student-number-label'),
-          this.student.studentNumber,
+          '1234',
         );
 
         const submitButton = screen.getByText(
@@ -118,12 +115,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
     module('when a student number is not entered yet', function () {
       test('should have the update button disable', async function (assert) {
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         // when
@@ -145,15 +144,17 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
     module('when the update button is clicked and a good student number is entered', function () {
       test('it display success notification', async function (assert) {
         await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
         // given
-        onSaveStudentNumberStub.withArgs(123456).resolves();
+        stubs.onSaveStudentNumberStub.withArgs(123456).resolves();
 
         // when
         await fillByLabel(
@@ -164,12 +165,12 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
 
         // then
         assert.dom('.error-message').hasText('');
-        sinon.assert.calledOnce(closeStub);
+        sinon.assert.calledOnce(stubs.closeStub);
         assert.ok(
-          notificationsStub.sendSuccess.calledWith(
+          stubs.sendSuccess.calledWith(
             t('pages.sup-organization-participants.edit-student-number-modal.form.success', {
-              firstName: this.student.firstName,
-              lastName: this.student.lastName,
+              firstName: student.firstName,
+              lastName: student.lastName,
             }),
           ),
         );
@@ -179,12 +180,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
     module('when the update button is clicked and a wrong student number is entered', function () {
       test('it display error message', async function (assert) {
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         // when
@@ -205,12 +208,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         test('it display an error under student number input', async function (assert) {
           // given
           const screen = await render(
-            hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+            <template>
+              <SupOrganizationParticipantModalEditStudentNumberModal
+                @display={{true}}
+                @onClose={{stubs.closeStub}}
+                @student={{student}}
+                @onSubmit={{stubs.onSaveStudentNumberStub}}
+              />
+            </template>,
           );
 
           const error = {
@@ -221,7 +226,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
               },
             ],
           };
-          onSaveStudentNumberStub.rejects(error);
+          stubs.onSaveStudentNumberStub.rejects(error);
 
           // when
           await fillByLabel(
@@ -234,8 +239,8 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
           assert.ok(
             screen.getByText(
               t('api-error-messages.edit-student-number.student-number-exists', {
-                firstName: this.student.firstName,
-                lastName: this.student.lastName,
+                firstName: student.firstName,
+                lastName: student.lastName,
               }),
             ),
           );
@@ -244,12 +249,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         test('it remove errors when submitting is a success', async function (assert) {
           // given
           const screen = await render(
-            hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+            <template>
+              <SupOrganizationParticipantModalEditStudentNumberModal
+                @display={{true}}
+                @onClose={{stubs.closeStub}}
+                @student={{student}}
+                @onSubmit={{stubs.onSaveStudentNumberStub}}
+              />
+            </template>,
           );
 
           const error = {
@@ -260,7 +267,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
               },
             ],
           };
-          onSaveStudentNumberStub.onFirstCall().rejects(error).onSecondCall().resolves();
+          stubs.onSaveStudentNumberStub.onFirstCall().rejects(error).onSecondCall().resolves();
 
           // when
           await fillByLabel('Nouveau numéro étudiant', '77107');
@@ -272,8 +279,8 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
           assert.notOk(
             screen.queryByText(
               t('api-error-messages.edit-student-number.student-number-exists', {
-                firstName: this.student.firstName,
-                lastName: this.student.lastName,
+                firstName: student.firstName,
+                lastName: student.lastName,
               }),
             ),
           );
@@ -285,12 +292,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
       test('it remove errors and student number value', async function (assert) {
         // given
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         const error = {
@@ -303,7 +312,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         };
 
         // when
-        onSaveStudentNumberStub.rejects(error);
+        stubs.onSaveStudentNumberStub.rejects(error);
         await clickByName(t('common.actions.close'));
 
         // then
@@ -313,7 +322,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
 
         assert.dom(submitButton).hasValue('');
         assert.dom('.error-message').hasText('');
-        sinon.assert.calledOnce(closeStub);
+        sinon.assert.calledOnce(stubs.closeStub);
       });
     });
 
@@ -321,12 +330,14 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
       test('it remove errors and student number value too', async function (assert) {
         // given
         const screen = await render(
-          hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-  @onSubmit={{this.onSaveStudentNumber}}
-/>`,
+          <template>
+            <SupOrganizationParticipantModalEditStudentNumberModal
+              @display={{true}}
+              @onClose={{stubs.closeStub}}
+              @student={{student}}
+              @onSubmit={{stubs.onSaveStudentNumberStub}}
+            />
+          </template>,
         );
 
         const error = {
@@ -339,7 +350,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         };
 
         // when
-        onSaveStudentNumberStub.rejects(error);
+        stubs.onSaveStudentNumberStub.rejects(error);
         await clickByName('Annuler');
 
         // then
@@ -350,7 +361,7 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
         assert.dom(submitButton).hasValue('');
 
         assert.dom('.error-message').hasText('');
-        sinon.assert.calledOnce(closeStub);
+        sinon.assert.calledOnce(stubs.closeStub);
       });
     });
   });
@@ -358,14 +369,16 @@ module('Integration | Component | SupOrganizationParticipant::Modal::EditStudent
   module('when the edit student number modal is not open', function () {
     test('should not render component', async function (assert) {
       // given
-      this.set('display', false);
+      const display = false;
 
       const screen = await render(
-        hbs`<SupOrganizationParticipant::Modal::EditStudentNumberModal
-  @display={{this.display}}
-  @onClose={{this.close}}
-  @student={{this.student}}
-/>`,
+        <template>
+          <SupOrganizationParticipantModalEditStudentNumberModal
+            @display={{display}}
+            @onClose={{stubs.closeStub}}
+            @student={{student}}
+          />
+        </template>,
       );
 
       // then

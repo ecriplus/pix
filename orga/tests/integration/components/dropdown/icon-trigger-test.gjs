@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import DropdownIconTrigger from 'pix-orga/components/dropdown/icon-trigger';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -10,7 +10,7 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
 
   test('should display actions menu', async function (assert) {
     // when
-    const screen = await render(hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions' />`);
+    const screen = await render(<template><DropdownIconTrigger @ariaLabel="Afficher les actions" /></template>);
 
     // then
     assert.ok(screen.getByRole('button', { name: 'Afficher les actions' }));
@@ -19,7 +19,9 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
   test('should display actions on click', async function (assert) {
     // when
     const screen = await render(
-      hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions'>Something</Dropdown::IconTrigger>`,
+      <template>
+        <DropdownIconTrigger @ariaLabel="Afficher les actions">Something</DropdownIconTrigger>
+      </template>,
     );
     await click(screen.getByRole('button', { name: 'Afficher les actions' }));
 
@@ -30,7 +32,9 @@ module('Integration | Component | Dropdown | icon-trigger', function (hooks) {
   test('should hide actions on click again', async function (assert) {
     // when
     const screen = await render(
-      hbs`<Dropdown::IconTrigger @ariaLabel='Afficher les actions'>Something</Dropdown::IconTrigger>`,
+      <template>
+        <DropdownIconTrigger @ariaLabel="Afficher les actions">Something</DropdownIconTrigger>
+      </template>,
     );
     await click(screen.getByRole('button', { name: 'Afficher les actions' }));
     await click(screen.getByRole('button', { name: 'Afficher les actions' }));
