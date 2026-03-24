@@ -1,34 +1,60 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/fonts';
 
-.footer-links__list {
-  &--small {
-    @extend %pix-body-s;
-  }
 
-  &--extra-small {
-    @extend %pix-body-xs;
-  }
-
-  li {
-    display: inline-block;
-    padding-block: 0.25em;
-    margin-inline: 0 2ch;
-  }
-
-  a {
-    color: var(--pix-neutral-800);
-    text-decoration: underline;
-
-    &:hover,
-    &:focus {
-      color: var(--pix-primary-500);
+.footer-links{
+  &__list {
+    &--small {
+      @extend %pix-body-s;
     }
+
+    &--extra-small {
+      @extend %pix-body-xs;
+    }
+
+    li {
+      display: inline-block;
+      padding-block: 0.25em;
+      margin-inline: 0 2ch;
+    }
+
+    a {
+      color: var(--pix-neutral-800);
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        color: var(--pix-primary-500);
+      }
+    }
+  }
+
+  &__list--align-right {
+    @include breakpoints.device-is('tablet') {
+      text-align: right;
+    }
+  }
+
+  &__copyrights {
+    color: var(--pix-neutral-500);
+    font-size: 0.75rem;
+    font-family: fonts.$font-roboto;
+    white-space: nowrap;
+    cursor: default;
   }
 }
 
-.footer-links__list--align-right {
-  @include breakpoints.device-is('tablet') {
-    text-align: right;
+.footer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--pix-spacing-4x);
+  line-height: 1;
+
+  @include breakpoints.device-is('desktop') {
+    flex-direction: row;
   }
 }
