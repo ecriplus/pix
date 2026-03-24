@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import AssessmentCards from 'pix-orga/components/campaign/results/assessment-cards';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
@@ -11,10 +11,10 @@ module('Integration | Component | Campaign::Results::AssessmentCards', function 
   module('When the campaign has no stages', function () {
     test('It should display average result card', async function (assert) {
       // given
-      this.averageResult = 0.9;
+      const averageResult = 0.9;
 
       //when
-      const screen = await render(hbs`<Campaign::Results::AssessmentCards @averageResult={{this.averageResult}} />`);
+      const screen = await render(<template><AssessmentCards @averageResult={{averageResult}} /></template>);
 
       //then
       assert.dom(screen.getByText(t('cards.participants-average-results.title'))).exists();
@@ -24,17 +24,15 @@ module('Integration | Component | Campaign::Results::AssessmentCards', function 
   module('When the campaign has stages', function () {
     test('It should display average stage card', async function (assert) {
       // given
-      this.hasStages = true;
-      this.stages = [{ threshold: 20 }, { threshold: 70 }];
-      this.averageResult = 0.5;
+      const hasStages = true;
+      const stages = [{ threshold: 20 }, { threshold: 70 }];
+      const averageResult = 0.5;
 
       //when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentCards
-  @averageResult={{this.averageResult}}
-  @hasStages={{this.hasStages}}
-  @stages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentCards @averageResult={{averageResult}} @hasStages={{hasStages}} @stages={{stages}} />
+        </template>,
       );
 
       //then
@@ -44,11 +42,11 @@ module('Integration | Component | Campaign::Results::AssessmentCards', function 
 
   test('It should display shared participation card', async function (assert) {
     // given
-    this.sharedParticipationsCount = 10;
+    const sharedParticipationsCount = 10;
 
     // when
     const screen = await render(
-      hbs`<Campaign::Results::AssessmentCards @sharedParticipationsCount={{this.sharedParticipationsCount}} />`,
+      <template><AssessmentCards @sharedParticipationsCount={{sharedParticipationsCount}} /></template>,
     );
 
     //then

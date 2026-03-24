@@ -1,8 +1,8 @@
 import { clickByName, render as renderScreen } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ArchivedBanner from 'pix-orga/components/campaign/header/archived-banner';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -24,13 +24,13 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
         prescriber = { isAdminOfTheCurrentOrganization: true };
       }
       this.owner.register('service:currentUser', CurrentUserStub);
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         isArchived: false,
       });
 
       // when
-      const screen = await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+      const screen = await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
 
       // then
       assert.dom(screen.queryByText(t('pages.campaign.archived'))).doesNotExist();
@@ -46,13 +46,13 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = { isAdminOfTheCurrentOrganization: true };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
         });
 
         // when
-        const screen = await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        const screen = await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign.archived'))).exists();
@@ -65,18 +65,18 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = { isAdminOfTheCurrentOrganization: true };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
           unarchive: sinon.stub(),
         });
 
         // when
-        await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
         await clickByName('Désarchiver la campagne');
 
         // then
-        assert.ok(this.campaign.unarchive.calledOnce);
+        assert.ok(campaign.unarchive.calledOnce);
       });
     });
 
@@ -87,14 +87,14 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = EmberObject.create({ isAdminOfTheCurrentOrganization: false, id: 109 });
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
           ownerId: 109,
         });
 
         // when
-        const screen = await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        const screen = await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign.archived'))).exists();
@@ -107,7 +107,7 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = EmberObject.create({ isAdminOfTheCurrentOrganization: false, id: 109 });
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
           ownerId: 109,
@@ -115,11 +115,11 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
         });
 
         // when
-        await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
         await clickByName('Désarchiver la campagne');
 
         // then
-        assert.ok(this.campaign.unarchive.calledOnce);
+        assert.ok(campaign.unarchive.calledOnce);
       });
     });
 
@@ -130,13 +130,13 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = { isAdminOfTheCurrentOrganization: false };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
         });
 
         // when
-        const screen = await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        const screen = await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign.archived'))).exists();
@@ -148,13 +148,13 @@ module('Integration | Component | Campaign::Header::ArchivedBanner', function (h
           prescriber = { isAdminOfTheCurrentOrganization: false };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           id: '1',
           isArchived: true,
         });
 
         // when
-        const screen = await renderScreen(hbs`<Campaign::Header::ArchivedBanner @campaign={{this.campaign}} />`);
+        const screen = await renderScreen(<template><ArchivedBanner @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByText(t('pages.campaign.actions.unarchive'))).doesNotExist();
