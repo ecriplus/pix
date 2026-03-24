@@ -106,6 +106,68 @@ describe('Unit | Domain | Common Organization Learner Validator', function () {
       });
     });
 
+    context('length', function () {
+      it('when length matches, not throws', async function () {
+        const errors = validateCommonOrganizationLearner({ nom: 'ABC' }, [
+          {
+            name: 'nom',
+            type: 'string',
+            length: 3,
+            required: false,
+          },
+        ]);
+
+        expect(errors).to.lengthOf(0);
+      });
+
+      it('when length does not match, throws', async function () {
+        const errors = validateCommonOrganizationLearner({ nom: 'AB' }, [
+          {
+            name: 'nom',
+            type: 'string',
+            length: 3,
+            required: false,
+          },
+        ]);
+
+        expect(errors).to.lengthOf(1);
+        expect(errors[0]).to.be.an.instanceOf(ModelValidationError);
+        expect(errors[0].code).to.equal('FIELD_STRING_LENGTH');
+        expect(errors[0].key).to.equal('nom');
+      });
+    });
+
+    context('regexp', function () {
+      it('when value matches pattern, not throws', async function () {
+        const errors = validateCommonOrganizationLearner({ nom: 'ABC123' }, [
+          {
+            name: 'nom',
+            type: 'string',
+            regexp: '/^[A-Z0-9]+$/',
+            required: false,
+          },
+        ]);
+
+        expect(errors).to.lengthOf(0);
+      });
+
+      it('when value does not match pattern, throws', async function () {
+        const errors = validateCommonOrganizationLearner({ nom: 'abc!' }, [
+          {
+            name: 'nom',
+            type: 'string',
+            regexp: '/^[A-Z0-9]+$/',
+            required: false,
+          },
+        ]);
+
+        expect(errors).to.lengthOf(1);
+        expect(errors[0]).to.be.an.instanceOf(ModelValidationError);
+        expect(errors[0].code).to.equal('FIELD_STRING_PATTERN');
+        expect(errors[0].key).to.equal('nom');
+      });
+    });
+
     context('When a specific value is required', function () {
       it('Should throw an error if the value do not corresponding to the expected value', async function () {
         const expectedValues = ['Theotime', 'Theo-a-pas-le-time'];
@@ -136,6 +198,45 @@ describe('Unit | Domain | Common Organization Learner Validator', function () {
         ]);
         expect(errors).to.lengthOf(0);
       });
+    });
+  });
+
+  context('When attribute has a conditional rule', function () {
+    it('when condition is met, applies then schema', async function () {
+      const errors = validateCommonOrganizationLearner({ type: 'pro', nom: '' }, [
+        {
+          name: 'nom',
+          type: 'string',
+          conditional: {
+            when: 'type',
+            is: 'pro',
+            then: { required: true },
+            otherwise: { required: false },
+          },
+        },
+      ]);
+
+      expect(errors).to.lengthOf(1);
+      expect(errors[0]).to.be.an.instanceOf(ModelValidationError);
+      expect(errors[0].code).to.equal('FIELD_REQUIRED');
+      expect(errors[0].key).to.equal('nom');
+    });
+
+    it('when condition is not met, applies otherwise schema', async function () {
+      const errors = validateCommonOrganizationLearner({ type: 'student', nom: '' }, [
+        {
+          name: 'nom',
+          type: 'string',
+          conditional: {
+            when: 'type',
+            is: 'pro',
+            then: { required: true },
+            otherwise: { required: false },
+          },
+        },
+      ]);
+
+      expect(errors).to.lengthOf(0);
     });
   });
 

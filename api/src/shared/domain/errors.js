@@ -306,6 +306,15 @@ class ModelValidationError extends DomainError {
       this.acceptedFormat = format;
     }
 
+    if (code === VALIDATION_ERRORS.FIELD_STRING_LENGTH) {
+      this.why = 'string_wrong_length';
+      this.acceptedFormat = format;
+    }
+
+    if (code === VALIDATION_ERRORS.FIELD_STRING_PATTERN) {
+      this.why = 'string_wrong_pattern';
+    }
+
     this.key = key;
     this.code = code;
   }
@@ -322,7 +331,12 @@ class ModelValidationError extends DomainError {
       format = joiError.context.format;
     }
 
-    if (joiError.type === 'any.required') {
+    if (/.required/.test(joiError.type)) {
+      code = VALIDATION_ERRORS.FIELD_REQUIRED;
+      key = joiError.context.key;
+    }
+
+    if (/.empty/.test(joiError.type)) {
       code = VALIDATION_ERRORS.FIELD_REQUIRED;
       key = joiError.context.key;
     }
@@ -348,6 +362,17 @@ class ModelValidationError extends DomainError {
       code = VALIDATION_ERRORS.FIELD_STRING_MAX;
       key = joiError.context.key;
       format = joiError.context.limit;
+    }
+
+    if (joiError.type === 'string.length') {
+      code = VALIDATION_ERRORS.FIELD_STRING_LENGTH;
+      key = joiError.context.key;
+      format = joiError.context.limit;
+    }
+
+    if (joiError.type === 'string.pattern.base') {
+      code = VALIDATION_ERRORS.FIELD_STRING_PATTERN;
+      key = joiError.context.key;
     }
 
     return new ModelValidationError({ code, key, format, valids });

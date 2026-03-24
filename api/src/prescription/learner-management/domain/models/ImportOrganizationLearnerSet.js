@@ -187,6 +187,22 @@ class ImportOrganizationLearnerSet {
       if (error.why === 'field_bad_values') {
         this.#errors.push(new CsvImportError(error.code, { line, field, valids: error.valids }));
       }
+
+      if (error.why === 'string_too_short') {
+        this.#errors.push(new CsvImportError(error.code, { line, field, acceptedFormat: error.acceptedFormat }));
+      }
+
+      if (error.why === 'string_too_long') {
+        this.#errors.push(new CsvImportError(error.code, { line, field, acceptedFormat: error.acceptedFormat }));
+      }
+
+      if (error.why === 'string_wrong_length') {
+        this.#errors.push(new CsvImportError(error.code, { line, field, acceptedFormat: error.acceptedFormat }));
+      }
+
+      if (error.why === 'string_wrong_pattern') {
+        this.#errors.push(new CsvImportError(error.code, { line, field }));
+      }
     });
   }
 
