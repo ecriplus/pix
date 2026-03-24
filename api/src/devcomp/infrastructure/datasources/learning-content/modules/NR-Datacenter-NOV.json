@@ -32,6 +32,7 @@
               "element": {
                 "id": "363fc96a-2479-43be-ac96-26c015882591",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Killian est dans la salle d’attente d’un médecin. Il y a plusieurs personnes autour de lui et l’ambiance est silencieuse. Pour rester discret, il&nbsp;envoie un message via une messagerie en ligne à son ami qui l’accompagne, assis juste à côté.</p>"
               }
             },
@@ -92,6 +93,7 @@
               "element": {
                 "id": "440d43e3-0b21-4116-91d4-25fad4bdd354",
                 "type": "text",
+                "tag": " ",
                 "content": "Maintenant, suivez le trajet des informations&nbsp;: où vont-elles, où sont-elles stockées, et comment sont-elles traitées ?"
               }
             }
@@ -113,6 +115,7 @@
               "element": {
                 "id": "7f4902af-d533-4031-88aa-c2f2c01f196b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Killian est sur un réseau social. Il voit une publication qui lui plaît et appuie sur «&nbsp;J’aime&nbsp;». </p>"
               }
             },
@@ -184,6 +187,7 @@
                     {
                       "id": "d4368ba7-6bee-4cea-9a29-da36e934dbe1",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Dans les <strong>centres de données</strong>, on trouve des <strong>serveurs</strong>.</p><h5>🤔 Mais c’est quoi un serveur ?</h5><p><strong>Un serveur est un ordinateur très puissant.</strong> Quand vous utilisez internet, vous vous connectez à des serveurs&nbsp;: ils reçoivent vos demandes, traitent les informations et renvoient la réponse sur votre appareil.</p><p>Voici un exemple de salle de serveurs, à l’intérieur d’un centre de données.</p>"
                     },
                     {
@@ -202,6 +206,7 @@
                     {
                       "id": "01a90945-8314-4fcd-9a06-013424c40d99",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Pourquoi a-t-on besoin de centres de données aussi grands ?</h5><p>Sur internet, il y a <strong>énormément  d’informations échangées</strong>. Des millions de personnes <strong>utilisent les serveurs en même temps</strong>, partout dans le monde. </p>"
                     }
                   ]
@@ -220,6 +225,7 @@
               "element": {
                 "id": "0f1152d5-7aca-44d0-9515-1816c4991258",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons ce qu’il se passe du côté du <strong>centre de données et des serveurs</strong> lorsqu’ils travaillent.</p>"
               }
             }
@@ -235,6 +241,7 @@
               "element": {
                 "id": "76cc3aac-e370-4ce2-a6cd-cc6dcc007c5a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les serveurs répondent aux demandes des utilisateurs connectés à internet.<br>Cliquez sur les icônes de température et d’énergie pour voir leur évolution en fonction du nombre de serveurs.</p>"
               }
             },
@@ -396,6 +403,7 @@
               "element": {
                 "id": "6d057f84-d3aa-4965-8552-9c6b55710c17",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les serveurs sont nombreux et <strong>rangés au même endroit</strong>. Quand ils travaillent en continu, <strong>la chaleur s’accumule très vite</strong>. Sans refroidissement, ils peuvent s’abîmer voire être détruits. <strong>Ils doivent donc être refroidis en permanence</strong>. </p><h5>🤔 Le refroidissement consomme-t-il de l’énergie ? </h5><p>Oui. Le refroidissement utilise <strong>beaucoup d’électricité</strong>. Et certains systèmes utilisent aussi <strong>beaucoup d’eau</strong>.<br>Faire fonctionner les serveurs et les refroidir demande <strong>beaucoup d’énergie</strong>.</p>"
               }
             }
@@ -411,6 +419,7 @@
               "element": {
                 "id": "be64a075-5cfa-493d-be0b-6cdb99698cc3",
                 "type": "text",
+                "tag": " ",
                 "content": "Maintenant, <strong>comparons différents usages</strong>&nbsp;: lesquels font le plus travailler les serveurs, et pourquoi ?"
               }
             }
@@ -426,6 +435,7 @@
               "element": {
                 "id": "8b07744b-4b36-4bf0-9c39-d806a6987b64",
                 "type": "text",
+                "tag": " ",
                 "content": "Comme pour n’importe quel appareil électrique, certaines actions consomment plus d’énergie que d’autres. Sur internet, cela dépend de l’usage.<br>Pour chaque situation, indiquez l’action qui consomme le plus d’énergie côté serveurs."
               }
             },
@@ -587,6 +597,7 @@
                     {
                       "id": "a91021ec-28c2-47b3-97b0-aec23096593e",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Pourquoi certains usages font consommer davantage d’énergie aux serveurs ?<br></h5>Parce que ce qui est envoyé ou demandé (son, calculs, texte, vidéo...), ne demande pas la même quantité de travail au serveur."
                     }
                   ]
@@ -596,6 +607,7 @@
                     {
                       "id": "4e583f9f-7e9d-4951-9e5a-8ec19b014a4a",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 On peut faire quelque chose pour faire moins consommer les serveurs ?</h5><p>Oui. Quand c’est possible, choisissez des usages qui <strong>consomment moins d’énergie</strong>.</p><p>Par exemple&nbsp;:&nbsp; </p><ul>    <li><strong>télécharger une musique</strong> que l’on écoute souvent <strong>au lieu de l’écouter en ligne</strong> à chaque fois ;</li>    <li>et parfois&nbsp;: <strong>se déconnecter </strong>quand on n’a plus besoin d’être en ligne.</li></ul>"
                     }
                   ]
@@ -620,6 +632,7 @@
               "element": {
                 "id": "065ea5c0-8fc9-4014-9c87-49133966943d",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>🗄️ Les informations consultées en ligne sont stockées, calculées et envoyées par des <strong>serveurs</strong>, eux-mêmes situés dans de grands bâtiments appelés <strong>centres de données</strong>.</li>    <li>⚡ <strong>Les serveurs consomment beaucoup d’énergie</strong>&nbsp;: ils sont toujours allumés, ils chauffent et il faut les refroidir en permanence.</li>    <li><strong>🔋Les serveurs consomment plus ou moins selon les usages en ligne</strong>&nbsp;: envoyer du texte demande peu de données et peu de calcul ; une vidéo ou une demande à une IA demandent beaucoup plus de travail.</li>    <li> <strong>🔌Il est possible d’agir</strong>&nbsp;: choisir des usages qui demandent moins de calculs et de données, ou se déconnecter, permet de réduire l’énergie utilisée.</li>    </ul>"
               }
             }
@@ -641,6 +654,7 @@
               "element": {
                 "id": "a266c379-06be-400f-b5b0-78e1bfd5c0d0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
@@ -978,6 +992,7 @@
               "element": {
                 "id": "b1145aa8-b189-4da7-98a3-59a06ef6401e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il existe des gestes très simples pour alléger la consommation électrique des serveurs, sans changer complètement vos habitudes.</p><p>   Voici trois idées faciles à tester cette semaine.</p>"
               }
             },

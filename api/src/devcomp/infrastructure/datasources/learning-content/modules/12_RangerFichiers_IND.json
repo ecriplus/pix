@@ -32,6 +32,7 @@
               "element": {
                 "id": "1101ef20-2e66-45c4-ab92-834aeda05a8d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici le contenu du dossier «&nbsp;Documents&nbsp;» de l’ordinateur de Marie.</p><p><strong>Observez l’image ci-dessous puis répondez à la question.</strong></p>"
               }
             },
@@ -99,6 +100,7 @@
               "element": {
                 "id": "9835e064-096b-4daa-bb61-3174397587e9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais ça veut dire quoi une organisation avec plusieurs niveaux de rangement ? <br>Découvrons-le à l’aide d’un schéma !</p>"
               }
             }
@@ -120,6 +122,7 @@
               "element": {
                 "id": "72dc94ee-2e28-47f0-8605-aa4242b94961",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Clarisse a ouvert le dossier «&nbsp;Famille&nbsp;» de son ordinateur.<br>Une fenêtre s’ouvre et lui montre les fichiers qui se trouve dans le dossier «&nbsp;Famille&nbsp;» mais aussi l’organisation de ses dossiers&nbsp;:</p>"
               }
             },
@@ -140,6 +143,7 @@
               "element": {
                 "id": "be9ec4db-b29b-4787-ad90-33cbbaa349f7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant, voici un schéma qui représente cette organisation.<br><strong>Observez le schéma suivant puis répondez aux questions ci-dessous.</strong></p>"
               }
             },
@@ -262,6 +266,7 @@
               "element": {
                 "id": "073ac979-06a6-4be3-896b-781923f214ac",
                 "type": "text",
+                "tag": " ",
                 "content": "Cette organisation de dossiers et de fichiers forme une <strong>arborescence</strong>, dans laquelle les <strong>dossiers</strong> (et sous dossiers) sont des niveaux intermédiaires de rangement. 📁"
               }
             }
@@ -277,6 +282,7 @@
               "element": {
                 "id": "5958b280-ca47-4af4-b723-d7253e3724a5",
                 "type": "text",
+                "tag": " ",
                 "content": "Dans cette arborescence, tous les dossiers ne donnent pas accès aux mêmes fichiers . Pour accéder à un fichier précis, il faut suivre le bon chemin ! 🗺️ <br>Voyons cela ensemble."
               }
             }
@@ -292,6 +298,7 @@
               "element": {
                 "id": "fb2f5ae0-2aec-4b38-b94a-adfde8da70e0",
                 "type": "text",
+                "tag": " ",
                 "content": "<strong>Observez l’arborescence suivante puis répondez à la question ci-dessous.</strong>"
               }
             },
@@ -447,6 +454,7 @@
               "element": {
                 "id": "b2f32e18-08ae-4348-970f-f894d78481a1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il faut parfois ouvrir plusieurs dossiers les uns après les autres pour accéder à un fichier.<br>📍 Le <strong>chemin d’accès à un fichier indique où il se trouve</strong> dans l’arborescence.</p>"
               }
             }
@@ -462,6 +470,7 @@
               "element": {
                 "id": "c34b1fac-1866-4009-8134-95c055a3c948",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous savez reconstituer le chemin d’accès d’un fichier, découvrez comment accéder à ce fichier depuis votre ordinateur.</p>"
               }
             }
@@ -477,6 +486,7 @@
               "element": {
                 "id": "6c314f13-5614-44e0-8959-14ef2ef397c3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Tous les dossiers et fichiers présents sur un ordinateur ne sont pas visibles sur le bureau. Un logiciel permet d’y accéder.</p>"
               }
             },
@@ -541,6 +551,7 @@
               "element": {
                 "id": "396abb24-bc62-458a-a051-945bfd38b658",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Feedback&nbsp;:</strong> Sur un ordinateur, le <strong>gestionnaire de fichiers</strong> permet d’<strong>accéder aux dossiers et aux fichiers</strong> et aussi de <strong>les organiser</strong> (les déplacer, les supprimer, les renommer…). <br>Selon l’appareil, le gestionnaire de fichiers peut porter des <strong>noms différents</strong>, mais son rôle reste le même,  par exemple&nbsp;: <em>Explorateur de fichiers</em> sur Windows ou <em>Finder</em> sur Mac. </p>"
               }
             }
@@ -556,6 +567,7 @@
               "element": {
                 "id": "5b418658-4e48-4d5e-ba23-4b9a9674b54f",
                 "type": "text",
+                "tag": " ",
                 "content": "Une fois le gestionnaire de fichiers ouvert, il est possible d’afficher les dossiers et fichiers de différentes manières selon ce que l’on cherche à voir."
               }
             },
@@ -564,6 +576,7 @@
               "element": {
                 "id": "ef4de526-525d-4f86-be17-350b5586afdb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Accédez au gestionnaire de fichiers puis&nbsp;: </strong></p><ul><li><strong>Retrouvez la photo «&nbsp;Cousinade&nbsp;» rangée dans le dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Modifiez l’affichage pour retrouver la date de modification de la photo «&nbsp;Cousinade&nbsp;».<br></strong><br></li></ul>"
               }
             },
@@ -649,6 +662,7 @@
               "element": {
                 "id": "1db4a456-f71c-43c9-90b8-c9a468154260",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans le gestionnaire de fichiers&nbsp;:&nbsp; </p><ul><li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li><li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li><li>Un <strong>volet latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li></ul><br><p><strong>🤔 Bon à savoir</strong><br>Le gestionnaire de fichiers peut s’ouvrir de deux façons&nbsp;:&nbsp;</p><ul><li>en cliquant sur l’icône dans la barre des tâches (Windows) ou dock (Apple)</li><li>en double cliquant sur un dossier sur le bureau</li></ul>"
               }
             }
@@ -664,6 +678,7 @@
               "element": {
                 "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier «&nbsp;Images&nbsp;» en créant des sous dossiers par année.<br>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière.</p>"
               }
             },
@@ -672,6 +687,7 @@
               "element": {
                 "id": "a940f5e1-66ee-4c43-975d-35c955b48138",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Dans le gestionnaire de fichiers ci-dessous&nbsp;:&nbsp;</strong></p><ul><li><strong>Rangez le dossier «&nbsp;Documents&nbsp;», en suivant la même organisation que pour le dossier «&nbsp;Images&nbsp;».</strong></li><li><strong>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier plus «&nbsp;Musique&nbsp;».</strong></li></ul>"
               }
             },
@@ -728,6 +744,7 @@
               "element": {
                 "id": "baf117c9-647e-4715-8b1f-5d4f07182e88",
                 "type": "text",
+                "tag": " ",
                 "content": "<strong>Feedback&nbsp;: </strong>Pour organiser ses fichiers, on peut créer des dossiers et des sous-dossiers, puis y déplacer des fichiers ou des dossiers avec leur contenu. <br>Le <strong>gestionnaire de fichiers</strong> permet de <strong>modifier l’organisation à tout moment</strong>."
               }
             }
@@ -743,6 +760,7 @@
               "element": {
                 "id": "878db1df-9959-48b5-906a-fc6c6141e2c1",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><br>Il y a plusieurs manières de s’organiser. <strong>Chacun peut choisir de s’organiser en fonction des ses usages</strong>, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement. <br>On peut par exemple organiser ses fichiers par&nbsp;: projet, année, types de fichiers etc."
               }
             },
@@ -763,6 +781,7 @@
               "element": {
                 "id": "60223c63-944a-4e07-9cd2-a7b558696954",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>💡 Astuce</h5>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous dossiers."
               }
             }
@@ -784,6 +803,7 @@
               "element": {
                 "id": "a2ef7833-34d7-4801-995e-dfa5815d2c09",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;<br><br></li>    <li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence.<br><br></li>    <li>Le <strong>gestionnaire de fichier </strong>permet de&nbsp;:&nbsp;<ul>            <li>Accéder aux dossiers et aux fichiers et les ranger.</li>            <li>Visualiser l’arborescence.</li>            <li>Consulter des informations sur les dossiers et les fichiers.</li>            <li>Modifier l’affichage.<br><br> </li>        </ul>    </li>    <li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
               }
             }
@@ -805,6 +825,7 @@
               "element": {
                 "id": "13074d41-8e00-4339-9376-b22829ec706f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici le chemin du fichier «&nbsp;Baguette&nbsp;»&nbsp;: Mon ordinateur &gt; Documents &gt; Recettes &gt; Pains &gt; Baguette.</p><p><strong>Trouver le fichier dans l’interface de gestionnaire de fichiers ci-dessous, puis double cliquer dessus pour l’ouvrir&nbsp;:</strong><br></p>"
               }
             },
@@ -822,6 +843,7 @@
               "element": {
                 "id": "4ef0651e-e59c-4893-9fa2-d82d8944653a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Feedback </strong>:&nbsp;Bravo ! Vous avez trouvé le fichier «&nbsp;Baguette&nbsp;». En suivant le chemin d’accès dossier par dossier (dans le gestionnaire de fichiers), il est possible de retrouver précisément un fichier.</p>"
               }
             }
@@ -912,6 +934,7 @@
               "element": {
                 "id": "1f6c6b6a-029d-44e4-bc25-a2f9ea557a1e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Suivre les instructions suivantes pour ranger les photos d’Alice&nbsp;:</p> <ul><li><strong>Dans le dossier Images de l’ordinateur d’Alice, créer un dossier «&nbsp;Animaux&nbsp;».</strong></li><li><strong>Rangez-y toutes les photos avec des noms d’animaux.</strong></li><li><strong>Dans le dossiers «&nbsp;Animaux&nbsp;», créer un dossier 2022.</strong></li><li><strong>Rangez-y toutes les photos d’animaux datant de 2022.</strong></li></ul>"
               }
             },
@@ -942,6 +965,7 @@
               "element": {
                 "id": "4944ea11-b895-4100-afc4-b43eac782324",
                 "type": "text",
+                "tag": " ",
                 "content": "Vous l’aurez compris, il n’existe pas une seule bonne façon d’organiser ses fichiers."
               }
             },

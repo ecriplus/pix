@@ -201,6 +201,7 @@
                     {
                       "id": "7fb4c1c6-46f8-49a4-9547-f9febf545447",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Voici des photographies de chiens et de bagels.</p>"
                     },
                     {
@@ -259,6 +260,7 @@
                     {
                       "id": "868a2c39-d70b-45ba-847d-76d11a83a6fd",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Pour apprendre à une IA générative à produire du texte, on lui fait analyser des milliards de textes variés. 📚</p>"
                     }
                   ]
@@ -268,6 +270,7 @@
                     {
                       "id": "3875f579-e152-4309-a630-cd91196381f5",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>L’IA générative s’entraîne à masquer puis&nbsp;deviner&nbsp;des mots au hasard parmi tous ces textes. 🙈</p><p>Petit à petit elle s'améliore&nbsp;: elle apprend quels mots apparaissent&nbsp;souvent&nbsp;ensemble. 🐈 🐁</p>"
                     }
                   ]
@@ -277,6 +280,7 @@
                     {
                       "id": "7b58e24b-b751-4000-b3b6-554e548b9dd9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ainsi à partir d'un début de phrase, l'IA générative&nbsp;prédit le mot suivant&nbsp;📝.<br>Puis elle recommence depuis le début de la phrase pour trouver le mot qui suit.<br>Et ... elle recommence encore et encore ! 🔁</p>"
                     }
                   ]
@@ -286,6 +290,7 @@
                     {
                       "id": "1687e720-8346-4821-b60a-79937bdda1cb",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>À la fin de cette étape, l'IA générative est capable de prolonger ou compléter des débuts de texte. 😮</p>"
                     }
                   ]
@@ -351,6 +356,7 @@
               "element": {
                 "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Section <strong>Réponses Courtes</strong> (QCM, QCU (+ découverte et déclaratif))</p>"
               }
             }
@@ -642,6 +648,7 @@
               "element": {
                 "id": "774c4c4e-f170-4e2c-ba7a-d2fe40d053c3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un tableau :</p> <table>\n  <tbody>\n <tr>\n    <th scope=\"col\">Player</th>\n    <th scope=\"col\">Gloobles</th>\n    <th scope=\"col\">Za'taak</th>\n  </tr>\n  <tr>\n    <th scope=\"row\">TR-7</th>\n    <td>7</td>\n    <td>4,569</td>\n  </tr>\n  <tr>\n    <th scope=\"row\">Khiresh Odo</th>\n    <td>7</td>\n    <td>7,223</td>\n  </tr>\n  <tr>\n    <th scope=\"row\">Mia Oolong</th>\n    <td>9</td>\n    <td>6,219</td>\n  </tr>\n </tbody>\n </table>\n"
               }
             }
@@ -832,6 +839,7 @@
               "element": {
                 "id": "5da6a142-c66b-42d4-9afd-86d369ebd2b5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Chaque leçon a un objectif pédagogique précis.</p><p>Dans la prochaine leçon, nous vous proposons de découvrir Pix avec une courte vidéo&nbsp;<span aria-hidden=\"true\">📺</span></p>"
               }
             }
@@ -847,6 +855,7 @@
               "element": {
                 "id": "342183f7-af51-4e4e-ab4c-ebed1e195063",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>"
               }
             },
@@ -874,6 +883,7 @@
               "element": {
                 "id": "1df5f2eb-f8f9-4a07-ab56-2c001541306b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous allez faire votre première activité. Les activités servent à vérifier que vous avez compris l'essentiel des leçons.<br>Dans les activités Modulix, vous avez votre résultat immédiatement. À vous de jouer&nbsp;<span aria-hidden=\"true\">🚀</span></p>"
               }
             }
@@ -889,6 +899,7 @@
               "element": {
                 "id": "41186193-1c38-4827-84b7-e70848367d42",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous l’aurez compris, on aime varier les plaisirs et proposer différents types d’activité, après le questionnaire à choix unique on vous laisse découvrir le QCM&#8239;!</p>"
               }
             }
@@ -976,6 +987,7 @@
               "element": {
                 "id": "52af6cab-07df-4962-abc5-20cf95d5eb5a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un Petit Objet Interactif expérimental :</p>"
               }
             },
@@ -995,6 +1007,7 @@
               "element": {
                 "id": "e32c01a8-7ae1-4c6d-9a16-6487c7c504d2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ils ne sont autorisés qu'en béta.</p>"
               }
             }
@@ -1019,6 +1032,7 @@
               "element": {
                 "id": "e9aef60c-f18a-471e-85c7-e50b4731b86b",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Pour afficher mon texte sur plusieurs colonnes, je peux utiliser la classe <em>modulix-two-columns</em>.</h4><p>Des noms d'artistes de musique très sympas:</p><ol class=\"modulix-two-columns\"> <li>Dylan</li> <li>The Beatles</li> <li>The Who</li><li>Blondie</li><li>Joan Baez</li><li>Supertramp</li><li>Kraftwerk</li> <li>Queen</li><li>David Bowie</li><li>Céline Dion</li></ol>"
               }
             },
@@ -1027,6 +1041,7 @@
               "element": {
                 "id": "84726001-1665-457d-8f13-4a74dc4768ea",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>On commence avec les leçons.<br>Les leçons sont des textes, des images ou des vidéos. Les leçons sont là pour vous expliquer des concepts ou des méthodes.</h4>"
               }
             },
@@ -1042,6 +1057,7 @@
               "element": {
                 "id": "a2372bf4-86a4-4ecc-a188-b51f4f98bca2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden=\"true\">📚</span>.</p>"
               }
             },
@@ -1050,6 +1066,7 @@
               "element": {
                 "id": "4cfd27d5-0947-47af-bfb6-52467143c38b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Et là, voici une image&#8239;!</p>"
               }
             },
@@ -1077,6 +1094,7 @@
               "element": {
                 "id": "96e2457d-54d3-461a-97e4-69180a30bfb7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un web component :</p>"
               }
             },
@@ -1155,6 +1173,7 @@
               "element": {
                 "id": "5e77afeb-78a8-4733-a451-fbe5fa2f360c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comme vous pouvez le voir l'expérience utilisateur n'est pas du tout la même.</p><p><em>Notamment pour les utilisateurs de lecteur d'écran</em></p>"
               }
             },
@@ -1163,6 +1182,7 @@
               "element": {
                 "id": "298518dc-9ad0-4709-92c0-c0a1fb1a1a2a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un avantage est que la configuration peut être précisée directement dans le contenu du module et pas côté pix-epreuves</p>"
               }
             }
@@ -1178,6 +1198,7 @@
               "element": {
                 "id": "5415e701-d81a-4f5e-b0e4-a0db67d83e18",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un autre exemple de web component, le Quiz Image :</p>"
               }
             },
@@ -1244,6 +1265,7 @@
               "element": {
                 "id": "73e4676d-fcc9-4ef2-b6de-b33e71922c04",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour comparer du comparable voici la même chose en version embed :</p>"
               }
             },
@@ -1326,6 +1348,7 @@
               "element": {
                 "id": "35ae00c5-9d46-4f53-83f1-3724ce39b53d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous l'avez peut-être remarqué&nbsp;: dans un module, vous pouvez voir tous les contenus en remontant la page&nbsp;<span aria-hidden=\"true\">👆</span></p>"
               }
             }
@@ -1515,6 +1538,7 @@
               "element": {
                 "id": "72fee40a-7279-4372-acf5-aaf508b1c145",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous arrivez à la fin de ce module. Une dernière activité et vous serez prêt à explorer tous les modules que vous souhaitez&#8239;!<span aria-hidden=\"true\">🌟</span> </p>"
               }
             }

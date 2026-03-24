@@ -74,6 +74,7 @@
               "element": {
                 "id": "45c54a3a-f5d5-48b4-b408-2efc1370dce4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’appel à des outils.</p><p>Regardons ça de plus près.</p>"
               }
             }
@@ -95,6 +96,7 @@
               "element": {
                 "id": "540b867d-1e06-496c-a9e9-425c2012fef8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Yasmine a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
               }
             },
@@ -159,6 +161,7 @@
                     {
                       "id": "e7fcc562-2f50-4e49-8c20-9297175e15e3",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un grand<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle utilisent désormais des <strong>outils </strong>complémentaires (tool calling, en anglais) qui leur permettent d’effectuer d’autres tâches.</p>"
                     }
                   ]
@@ -168,6 +171,7 @@
                     {
                       "id": "7df2eef2-779e-4dca-a954-c4ca258994da",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire des images ou un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅…</li></ul>"
                     },
                     {
@@ -192,6 +196,7 @@
               "element": {
                 "id": "98d8e691-8ef1-441e-a8a2-19030ab56cf8",
                 "type": "text",
+                "tag": " ",
                 "content": "Mais au fait, comment les IA génératives font-elles appel à des outils ?"
               }
             }
@@ -207,6 +212,7 @@
               "element": {
                 "id": "d8c78172-4027-44f7-abe4-c316d4da0925",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0.</p><p> Le<strong> prompt système</strong> est l’instruction  donnée au logiciel d’IA pour définir son comportement et les outils qu’il peut mobiliser. Il n’est pas visible des utilisateurs.</p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants&nbsp;: <br>- generate_image&nbsp;: pour générer des images <br>- calculator&nbsp;: pour effectuer des calculs numériques<br> <br> Règles d’utilisation&nbsp;: <br>1. Si l’utilisateur demande explicitement la création ou la génération d’une image, tu DOIS appeler l’outil `generate_image`. <br>2. Si la demande peut être résolue par un calcul mathématique exact,&nbsp;tu DOIS appeler l’outil `calculator`. <br>3. Si aucun outil n’est approprié, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil&nbsp;: <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid<br><br><br></code><br></blockquote>"
               }
             },
@@ -360,6 +366,7 @@
                     {
                       "id": "582588be-aeba-495e-9eaf-fb4b703ade17",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Les développeurs configurent les logiciels d’IA pour faire appel à des outils. Pour cela, ils définissent les <strong>paramètres </strong>de l’outil dans le prompt système&nbsp;: ils décrivent pour chaque outil&nbsp;: son nom, son contexte d’utilisation (objectif, finalité), ses valeurs d’entrées, le format de la réponse attendue, etc.&nbsp;</p>"
                     }
                   ]
@@ -369,6 +376,7 @@
                     {
                       "id": "116f00ef-b0ee-4df5-ab5e-eadd4be5a31b",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Mais que peut faire l’utilisateur dans la configuration de ces outils ?</h5><br><p> ✅ Dans certains cas, des <strong>accès </strong>doivent être autorisés par l’utilisateur (ex.&nbsp;: autoriser l’accès à la boîte mail, à un agenda, un cloud, etc.)&nbsp;</p>"
                     }
                   ]
@@ -378,6 +386,7 @@
                     {
                       "id": "44b2fa86-5471-4083-ae6e-6ccad3ce6db1",
                       "type": "text",
+                      "tag": " ",
                       "content": "⚙️Dans certaines IA conversationnelles, l’utilisateur peut choisir d’<strong>activer des outils disponibles</strong> pour une conversation."
                     },
                     {
@@ -396,6 +405,7 @@
                     {
                       "id": "c80fea48-c2fd-4eee-900f-9acf88be2fee",
                       "type": "text",
+                      "tag": " ",
                       "content": "🔧 De plus, un utilisateur expérimenté peut également <strong>ajouter des outils </strong>supplémentaires, par lui-même."
                     },
                     {
@@ -423,6 +433,7 @@
               "element": {
                 "id": "7831fafa-8342-49ad-b93d-8c46106966ab",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une fois les outils définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l’IA ?</p><p>C’est que nous allons voir dans cette dernière partie.</p>"
               }
             }
@@ -465,6 +476,7 @@
                     {
                       "id": "ec963e6e-ecdf-437a-a973-2d9f8976edb1",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><em>[Ce sera une variante du POI -&gt; à imaginer sans la consigne et le titre]</em></p>"
                     },
                     {
@@ -513,6 +525,7 @@
                     {
                       "id": "838dd2fd-5a2c-462c-b93a-b230dadc4e62",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p>"
                     },
                     {
@@ -527,6 +540,7 @@
                     {
                       "id": "35b5a582-ff1f-4561-bba3-00635e4f88a8",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Et ensuite, que se passe-t-il ?<br></p>"
                     }
                   ]
@@ -536,6 +550,7 @@
                     {
                       "id": "021d4850-4231-4811-8a2c-d0c3a14265ff",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Le logiciel fait appel à l’outil identifié, sous la forme d’une requête.</p>"
                     },
                     {
@@ -651,6 +666,7 @@
                     {
                       "id": "8d039074-9bcf-4c83-bcb8-e277963d5ba3",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>L’outil traite la requête et renvoie la réponse.<br></p>"
                     },
                     {
@@ -669,6 +685,7 @@
                     {
                       "id": "f9fe4d5a-1c3d-41d4-8c6c-5ca58f8912f0",
                       "type": "text",
+                      "tag": " ",
                       "content": "Voici la réponse que renvoie l’outil Météo au logiciel d’IA générative.<br><blockquote><code>{ &nbsp;<br>&nbsp;\"condition\": \"ensoleillé\", &nbsp;&nbsp;<br>\"temperature\": 30 <br>}</code></blockquote><br>"
                     },
                     {
@@ -724,6 +741,7 @@
               "element": {
                 "id": "18c439bf-63ae-4ddb-9fa7-82c2b4db17c3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>En résumé, voici un schéma montrant comment un logiciel d’IA génère une réponse en faisant appel à un outil.</p>"
               }
             },
@@ -744,6 +762,7 @@
               "element": {
                 "id": "b88d46da-1c84-442c-a481-b3b9998e58a2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>⚠️Point de vigilance&nbsp;:&nbsp;</strong></p><p>Ce n’est pas parce qu’un logiciel fait appel à un outil qu’il devient infaillible&nbsp;: il peut toujours halluciner, se tromper d’outils ou d’informations à lui envoyer. Restez vigilant avec les résultats obtenus.</p>"
               }
             }
@@ -813,6 +832,7 @@
               "element": {
                 "id": "8454a04e-e0aa-432f-97da-72c94c43e3e5",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les développeurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
               }
             },
@@ -1250,6 +1270,7 @@
               "element": {
                 "id": "9ff41ea1-9020-4bdc-a273-eb43e1f42ffe",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Steven utilise un logiciel d’IA conversationnelle.&nbsp;</p><p>Il a donné accès à son agenda.</p><p>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l’<strong>agenda</strong>.&nbsp;</p>"
               }
             },

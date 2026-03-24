@@ -32,6 +32,7 @@
               "element": {
                 "id": "d629b072-8cae-4484-82e2-25766a9e27cc",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Charlie vient de recevoir cet objet.&nbsp;</p>"
               }
             },
@@ -99,6 +100,7 @@
               "element": {
                 "id": "b2582fac-a970-4816-a870-d41380e4912e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Initialement utilisées pour des calculs graphiques (modélisation 3D, jeux vidéos, etc.), les cartes graphiques sont aujourd'hui aussi très utilisées pour l'entraînement des logiciels d'intelligence artificielle. </p>\n<p>Cela nous donne un indice sur ce que veut faire Charlie…</p>"
               }
             }
@@ -120,6 +122,7 @@
               "element": {
                 "id": "b984fed2-3e75-479e-848b-d9d82780b742",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Charlie veut entraîner une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
               }
             }
@@ -271,6 +274,7 @@
               "element": {
                 "id": "b9694946-e4c2-4808-8d37-4da5da289474",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les GPU sont des pièces maîtresses des centres de données dédiés à l'intelligence artificielle.</p><p><br></p><h5>Et quel est l’impact des GPU sur l’environnement ? </h5><p>La fabrication des GPU nécessite beaucoup de matières premières (métaux, terres rares, pétrole …), et leur utilisation consomme énormément d'électricité. Les GPU ont donc un fort impact négatif sur l'environnement, d’autant qu’il faut les renouveler souvent et que les services d'intelligence artificielle modernes nécessitent énormément de GPU pour fonctionner.</p>"
               }
             }
@@ -286,6 +290,7 @@
               "element": {
                 "id": "4d216976-f4a0-484c-8758-8984e25f14c7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais pourquoi a-t-on besoin de GPU pour entraîner l'IA ?</p>"
               }
             }
@@ -301,6 +306,7 @@
               "element": {
                 "id": "286099b2-22c1-405e-b6d0-ade39745c27e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant qu’il a acheté des cartes graphiques, Charlie veut entraîner ChatPix 4.0. </p>\n<p>Pour cela, les cartes graphiques doivent faire un grand nombre de calculs, ce qui demande de l’énergie. &nbsp;</p>\n<p>Charlie fait attention à sa facture d’électricité : il se demande combien cela va consommer d’énergie. </p>"
               }
             },
@@ -410,6 +416,7 @@
                     {
                       "id": "cd1e0ee5-4378-4996-abc4-99b774160840",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>L’entraînement d’un nouveau modèle d’IA est donc très coûteux en énergie.</p>"
                     }
                   ]
@@ -419,6 +426,7 @@
                     {
                       "id": "2c1c5be2-a58d-475d-afec-dc7b6ad88e8e",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d'IA : ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d'IA génératives, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</strong></strong></p>"
                     }
                   ]
@@ -428,6 +436,7 @@
                     {
                       "id": "5878e032-208b-4e28-94d2-9fb5e1b47884",
                       "type": "text",
+                      "tag": " ",
                       "content": "À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d'IA génératives.<p></p>"
                     }
                   ]
@@ -437,6 +446,7 @@
                     {
                       "id": "7bce7710-e3e0-4626-a366-c341bc7661aa",
                       "type": "text",
+                      "tag": " ",
                       "content": "Cette massification résulte notamment d'une volonté des acteurs du numérique d'<strong>imposer l'usage des logiciels d'IA</strong> dans les outils numériques existants, et dans leurs entreprises.<p></p>"
                     }
                   ]
@@ -455,6 +465,7 @@
               "element": {
                 "id": "69b48f4c-a274-42ca-b7c3-77098bbcb574",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Donc ce n’est pas prêt de s’arrêter… Voyons pourquoi.<br></p>"
               }
             }
@@ -474,6 +485,7 @@
                     {
                       "id": "d3016051-7665-4f96-ba28-8bcf7fb6982d",
                       "type": "text",
+                      "tag": " ",
                       "content": "<blockquote>« L’IA accroît si fortement la demande en énergie que le système actuel ne peut pas totalement gérer cette augmentation. Mais cela stimule d’importants investissements dans l’énergie solaire, nucléaire, les batteries, etc. C’est pourquoi, en tant que spécialiste des nouvelles technologies, je suis optimiste quant à l’abondance des sources d’énergie renouvelables à l’avenir. »</blockquote><p>Sundar Pichai, PDG de Google, novembre 2025</p>"
                     },
                     {
@@ -506,6 +518,7 @@
                     {
                       "id": "661c6598-89a7-4205-a7dc-fde03fe70566",
                       "type": "text",
+                      "tag": " ",
                       "content": "<blockquote>« Je pense que l'open source est nécessaire pour un futur positif avec l'IA. [...] L'open source va garantir un accès aux bénéfices et aux opportunités de l'IA à plus de personnes dans le monde, que ce pouvoir ne soit pas concentré entre les mains d'une poignée d'entreprises, et que cette technologie puisse être déployée de façon plus équilibrée et sécurisée au sein de la société. » </blockquote><p>Mark Zuckerberg, dirigeant de Meta, juillet 2024<br></p>"
                     },
                     {
@@ -538,6 +551,7 @@
                     {
                       "id": "a4a3eb56-162b-417e-a764-c381edbc8cb5",
                       "type": "text",
+                      "tag": " ",
                       "content": "<blockquote>« Nous avons mené une étude inédite afin de quantifier les impacts environnementaux de nos grands modèles de langage (LLM). Notre ambition : fournir une analyse claire de l’empreinte environnementale de l’IA et contribuer à établir un nouveau standard pour notre industrie. »</blockquote><p>Article de blog de Mistral AI, 22 juillet 2025</p>"
                     },
                     {
@@ -583,6 +597,7 @@
                     {
                       "id": "974d179b-fa0b-4312-a156-e0521cb95089",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>En théorie, <strong>les concepteurs d'IA générative disposent de plusieurs moyens d'action pour réduire leur impact sur l'environnement</strong> : faire des études d'impact et les publier, entraîner moins de nouveaux modèles, améliorer leurs logiciels et leurs infrastructures pour qu'elles consomment moins d'énergie…</p>"
                     }
                   ]
@@ -592,6 +607,7 @@
                     {
                       "id": "8519af0e-fb12-4bbf-8435-62c853decfdb",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>… mais généralement <strong>ils n'en font rien</strong>. L'économie de l'intelligence artificielle est très concurrentielle et vise principalement à faire des profits. La réduction des impacts environnementaux est donc rarement une priorité pour les concepteurs.</p>"
                     }
                   ]
@@ -601,6 +617,7 @@
                     {
                       "id": "71326633-9b59-4fc5-a33a-c5ac633daac9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>En tant qu'utilisateur, que pouvons-nous faire ?</h5>On peut adopter une démarche de <strong>sobriété</strong> et réduire autant que possible notre utilisation des logiciels d'intelligence artificielle.<p></p>"
                     }
                   ]
@@ -625,6 +642,7 @@
               "element": {
                 "id": "280fa165-c7a5-44f2-b82e-bdcc6a28c16a",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li><strong>Entraîner</strong> et <strong>faire fonctionner</strong> un modèle d'intelligence artificielle nécessite de faire énormément de <strong>calculs</strong>.</li><li>Ces calculs sont faits dans des centres de données avec du matériel spécialisé, comme des <strong>cartes graphiques (GPU)</strong>, qui nécessitent <strong>beaucoup de ressources pour être fabriquées</strong>, <strong>beaucoup d'électricité pour fonctionner</strong>, et ont une <strong>durée de vie courte</strong>. Tout cela a un fort impact négatif sur l'environnement.</li><li>Pour limiter ces impacts, les concepteurs d'intelligence artificielle pourraient :<ul><li>mener des <strong>études scientifiques</strong> sur leurs impacts, et les rendre <strong>publiques</strong></li><li>entraîner moins de nouveaux modèles</li><li>améliorer leurs techniques afin de réduire leur impact.</li></ul></li><li>Malheureusement, la plupart des concepteurs ne mènent pas ces actions car elles ne <strong>s'inscrivent pas dans leur modèle économique</strong>.</li><li>À titre individuel, on peut essayer de <strong>réduire autant que possible notre utilisation</strong> des logiciels d'intelligence artificielle pour limiter ses impacts environnementaux</li></ul>"
               }
             }
@@ -957,6 +975,7 @@
                     {
                       "id": "54e226c3-30bb-4f57-b697-94903e1a3cb3",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce chiffre est plutôt encourageant, mais attention : la médiane ne prend pas en compte les valeurs extrêmes&nbsp;!La consommation d'énergie <strong>moyenne</strong> pourrait être bien <strong>plus élevée</strong>.</p><p>De plus G<strong>oogle ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes</strong>, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
                     }
                   ]

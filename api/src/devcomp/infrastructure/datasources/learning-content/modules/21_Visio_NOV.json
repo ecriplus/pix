@@ -32,6 +32,7 @@
               "element": {
                 "id": "95d8312d-c6b2-4ee7-9024-aa0a62215fae",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sadie s’inquiète de son entretien d’embauche. Elle en parle à son ami Juan.</p>"
               }
             },
@@ -76,6 +77,7 @@
               "element": {
                 "id": "a718fa64-e9ea-40e3-a903-3403f426e525",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sadie accepte de faire l’entretien d’embauche en visioconférence. Elle reçoit une invitation par mail.</p>"
               }
             }
@@ -215,6 +217,7 @@
               "element": {
                 "id": "fb2d9d56-682e-42d8-b175-7e5b1ec32d5e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un outil de visioconférence permet à des personnes de se réunir et de communiquer de manière fluide, même à distance.</p><p><br>🤔 <strong>Bon à savoir</strong> <br>L’<strong>outil de visioconférence</strong> en ligne est <strong>choisi par l’organisateur</strong> de la réunion.</p>"
               }
             }
@@ -230,6 +233,7 @@
               "element": {
                 "id": "044cd949-ffc9-4d28-9d16-ed8d4f009e55",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ça y est, c’est l’heure de l’entretien de Sadie. Elle est prête à commencer son entretien en visioconférence.</p><p>Découvrez les 2 réglages disponibles avant de rejoindre une visioconférence.</p>"
               }
             }
@@ -245,6 +249,7 @@
               "element": {
                 "id": "3bf7c798-9b12-4b76-bd17-4a064471556e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sadie a cliqué sur le lien dans le mail. La page qui s’affiche permet de se préparer à rejoindre la visioconférence.</p><br><p>Pour passer son entretien d’embauche, Sadie a besoin d’être <strong>vue et entendue </strong>par les recruteurs.</p>"
               }
             },
@@ -264,6 +269,7 @@
               "element": {
                 "id": "aa9cf9cb-1d4a-49b3-b325-86429d148890",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Si besoin, aidez-vous d’un indice&nbsp;:</p>"
               }
             },
@@ -288,6 +294,7 @@
               "element": {
                 "id": "37de7c8f-dd4f-4752-b421-cea0d969c401",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans certains cas, c’est l’organisateur qui autorise l’entrée des participants dans la visioconférence.<br>Quand vous vous connectez, vous êtes placé dans une <strong>salle d’attente virtuelle</strong> puis l’organisateur vous fait entrer lorsqu’il est prêt.</p><p><br>💡<strong> Astuce</strong><br>Pendant la visioconférence, quand votre caméra est ouverte, les autres participants voient ce qui se trouve derrière vous. Avant de rejoindre la visioconférence, pensez donc à vérifier ce qui est visible derrière vous.<br><br>🤔 <strong>Bon à savoir</strong><br>Lors de la première utilisation dans un navigateur, une demande d’accès au micro et à la caméra apparaît. Il faut <strong>autoriser l’accès</strong> pour pouvoir utiliser le micro et la caméra pendant la visioconférence.</p>"
               }
             },
@@ -315,6 +322,7 @@
               "element": {
                 "id": "03539b67-bf3b-49f0-a11e-e19471043284",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que Sadie a réglé sa caméra et son micro, elle rejoint son entretien en visioconférence.</p>"
               }
             }
@@ -330,6 +338,7 @@
               "element": {
                 "id": "aa1d2356-2380-4820-8e8b-ec4fa450c114",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sadie commence son entretien avec plusieurs interlocuteurs.</p>"
               }
             },
@@ -396,6 +405,7 @@
                     {
                       "id": "8125ff27-43f6-4f83-a4de-e2adab7365f2",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Sadie souhaite dire quelque chose pour répondre à Julian, mais elle a peur de l’interrompre.</p>"
                     },
                     {
@@ -455,6 +465,7 @@
                     {
                       "id": "cd6ab226-2bf5-41bb-ab6b-5d6ed08dcb4e",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>La barre de boutons permet de faire des réglages ou des actions pendant une visioconférence.</p>"
                     },
                     {
@@ -469,6 +480,7 @@
                     {
                       "id": "e348c101-e8f4-45a2-81c3-d563d83bd945",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>🤔 <strong>Bon à savoir</strong><br><strong>Quand vous ne parlez pas</strong>, il est recommandé de <strong>fermer votre micro</strong>&nbsp;: les bruits autour de vous peuvent gêner les autres participants.</p>"
                     }
                   ]
@@ -478,6 +490,7 @@
                     {
                       "id": "90f92ba8-173d-480f-8c05-8913ba7aba24",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>S’il y a «&nbsp;beaucoup&nbsp;» de participants lors d’une visioconférence, il ne sont pas forcément tous affichés sur l’écran central. Il faut alors ouvrir <strong>la liste des participants</strong> pour voir leurs noms, comme dans l’image suivante.</p>"
                     },
                     {
@@ -505,6 +518,7 @@
               "element": {
                 "id": "e8ab10a9-4db7-4adc-9316-1224bc89366a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’entretien de Sadie est terminé, tout s’est bien passé. <br>Sadie veut maintenant se déconnecter.</p>"
               }
             }
@@ -540,6 +554,7 @@
               "element": {
                 "id": "bdee250d-109a-474b-8e60-ba91cd13ca80",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour <strong>se déconnecter d’une visioconférence</strong>, vous avez <strong>deux possibilités</strong>&nbsp;:</p><ul>    <li>cliquer sur le<strong> bouton «&nbsp;quitter&nbsp;»</strong>,</li>    <li><strong>fermer la fenêtre</strong> du navigateur.</li></ul><p>⚠️ Il est important de penser à quitter la visioconférence une fois la réunion terminée. Tant que vous n’avez pas quitté, les autres participants peuvent vous entendre ou vous voir, si vos micro et caméra sont ouverts.</p><p><br>💡<strong>Astuce</strong><br>Si vous vous déconnectez par erreur d’une visioconférence, pas de panique ! Pour vous connecter de nouveau, cliquez sur le lien que vous avez reçu par mail.</p>"
               }
             }
@@ -561,6 +576,7 @@
               "element": {
                 "id": "58c40d26-8729-46ba-8c2a-48a00351931a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>[En infographie]</p><ul><li><strong>Avant la visioconférence</strong>&nbsp;: <ul><li>Pour accéder à la visioconférence, cliquez sur le <strong>lien reçu</strong> par mail.</li><li><strong>Préparez votre entrée </strong>dans la visioconférence en ouvrant ou fermant votre micro et  votre caméra.</li></ul></li><li><strong>Pendant la visioconférence</strong>&nbsp;: <ul><li>Les participants peuvent être visibles à l’écran ou via <strong>une liste</strong>.</li><li>Pour <strong>prendre la parole</strong>&nbsp;: levez la main et ouvrez votre micro.</li></ul></li><li><strong>À la fin de la visioconférence</strong>&nbsp;: quittez la visioconférence en cliquant sur le bouton ou en fermant la fenêtre du navigateur.</li></ul>"
               }
             }
@@ -646,6 +662,7 @@
               "element": {
                 "id": "5d48ac9a-038d-43c2-83ff-14cd53a210ed",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous participez à une visioconférence.</p>"
               }
             },
@@ -707,6 +724,7 @@
               "element": {
                 "id": "905b7f06-1891-489f-a9a7-6127b23aeea6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous participez à une visioconférence. </p>"
               }
             },
@@ -741,6 +759,7 @@
               "element": {
                 "id": "07b1468a-1a52-4544-a30e-39e598c2ccb3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous allez faire une visioconférence avec vos amis pour planifier vos prochaines vacances au soleil.&nbsp;⛱️</p>"
               }
             },

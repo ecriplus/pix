@@ -32,6 +32,7 @@
               "element": {
                 "id": "7cd92f4e-8c09-4339-9b61-352f11a8b343",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Philomène est la nouvelle présidente de l’association Pattes de velours, une association de protection animale.&nbsp;🐾<br>Elle doit reprendre l’utilisation de la boîte mail de l’association.</p>"
               }
             },
@@ -87,6 +88,7 @@
               "element": {
                 "id": "5a44d403-1c9e-4f3b-8ca6-e09ba42dfb77",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons à quoi servent l’identifiant et le mot de passe lors d’une connexion à un service en ligne.</p>"
               }
             }
@@ -126,6 +128,7 @@
               "element": {
                 "id": "a66d621e-344c-485e-bee0-139650302d47",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour accéder à un service en ligne, il faut&nbsp;:&nbsp; </p><ol>    <li><strong>S’identifier</strong>, c’est indiquer qui l’on est. 👤<br> ✔️Par exemple&nbsp;: un pseudonyme ou une adresse mail.</li>    <li><strong> S’authentifier</strong>, c’est prouver que c’est bien nous. 🔑<br> ✔️Par exemple&nbsp;: un mot de passe.</li></ol>"
               }
             }
@@ -141,6 +144,7 @@
               "element": {
                 "id": "2afec4e6-acd9-4719-badf-877a49253e4f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Parfois, en plus du mot de passe, une étape supplémentaire est demandée pour valider la connexion. Voyons ça ensemble avec le cas de Philomène et de la boîte mail de son association.</p>"
               }
             }
@@ -156,6 +160,7 @@
               "element": {
                 "id": "6c6416ff-196c-4bb5-bc13-7a7400b360f9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Philomène vient de récupérer l’adresse mail et&nbsp;le mot de passe de&nbsp;la boîte mail de l’association.&nbsp;📧<br>Mais au moment de se connecter, impossible ! Philomène est bloquée.<br>Voici l’écran qui s’affiche&nbsp;:&nbsp;</p>"
               }
             },
@@ -223,6 +228,7 @@
               "element": {
                 "id": "33c65867-a99d-4ee8-88df-9c9d3d368fb4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La double authentification n’est pas toujours un code reçu par SMS.</p>"
               }
             },
@@ -249,6 +255,7 @@
               "element": {
                 "id": "219b3c9e-33f9-4ce7-9b4a-5eaed1af77ec",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Certains services en ligne demandent une double authentification à chaque <strong>nouvelle connexion</strong>.&nbsp;🔐<br>D’autres services la demandent uniquement lors de la <strong>connexion depuis un nouvel appareil</strong>.&nbsp;🖥️📱</p>"
               }
             }
@@ -264,6 +271,7 @@
               "element": {
                 "id": "6feb5e9a-884f-416d-8c6c-65a76430e8a6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avoir une étape de vérification en plus pour se connecter peut sembler long. Mais alors à quoi sert la double authentification ?</p>"
               }
             }
@@ -279,6 +287,7 @@
               "element": {
                 "id": "c4060b9a-1bd7-4e63-8cb7-42ac0d335f4e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il existe de plus en plus de<strong> vols d’identifiants et de mots de passe</strong>.</p><p>Par exemple, le site internet Toutélectro a subi une attaque par des pirates informatiques. <br>Les pirates ont réussi à récupérer des données enregistrées sur le site&nbsp;: les identifiants et les mots de passe qui vont avec.<br><br>Richard et Sabrina font partie des utilisateurs dont les identifiants et mots de passe ont été volés.</p>"
               }
             },
@@ -374,6 +383,7 @@
               "element": {
                 "id": "4835a35e-7f73-4774-9bf3-a6fb6c1ed873",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>⚠️ Que faire si vous recevez une demande d’authentification alors que vous n’essayez pas de vous connecter ?</h4><p>C’est peut-être qu’une personne tente d’accéder à votre compte sur un service en ligne. Si c’est le cas, réagissez vite&nbsp;: </p><ul><li><strong>Ne validez pas la demande d’authentification.&nbsp;</strong></li><li><strong>Changez immédiatement votre mot de passe.</strong></li></ul>"
               }
             }
@@ -389,6 +399,7 @@
               "element": {
                 "id": "7ae52344-ccb6-4dfa-b6df-a04b757dc30a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La double authentification n’est pas automatiquement activée sur tous les services en ligne. Pour être mieux protégé, activez-la dès que c’est possible !</p>"
               }
             }
@@ -435,6 +446,7 @@
               "element": {
                 "id": "a1a81751-c328-4813-91c4-a5e1408045a9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Voyons si vous avez retenu l’essentiel.</strong></p>"
               }
             },
@@ -567,6 +579,7 @@
               "element": {
                 "id": "7f0ec015-51f8-4e17-a61e-2c2b777d6818",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque situation suivante, indiquez si elle correspond à une&nbsp;double authentification.</p>"
               }
             },
@@ -579,6 +592,7 @@
                     {
                       "id": "d74b7749-466e-4b1f-b631-7985050f79f0",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Lucie se connecte à son compte de messagerie depuis un ordinateur de la bibliothèque.<br>Après avoir tapé son mot de passe, une fenêtre lui indique qu’une notification vient d’être envoyée sur son téléphone.</p>"
                     },
                     {
@@ -613,6 +627,7 @@
                     {
                       "id": "444a5114-9d77-4e5b-ac64-3beae20a6114",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Lilian se connecte à son espace client sur un site de vente en ligne depuis le smartphone qu’il utilise tous les jours. Il entre son mot de passe et accède directement à son espace client.</p>"
                     },
                     {
@@ -647,6 +662,7 @@
                     {
                       "id": "0b153c7a-a61b-4bbf-aef3-07f6e157e8de",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Pour accéder à un service administratif en ligne, Binta entre son identifiant et son mot de passe. Elle doit ensuite saisir un code que le service administratif lui envoie par e-mail.</p>"
                     },
                     {
@@ -696,6 +712,7 @@
               "element": {
                 "id": "ea9dfc1a-89c1-4d04-a807-5213a6cf9df9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Grâce à Tao, l’ancien président de l’association, Philomène a rattaché son numéro de téléphone à la boîte mail de l’association.<br>C’est maintenant Philomène qui recevra le code de vérification quand elle se connectera.<br><br>Voici les informations pour se connecter à la boîte mail&nbsp;:</p><ul><li> lassociation@pixmail.org</li><li>mdp&nbsp;: Asso12Aniw0!</li></ul>"
               }
             },
@@ -704,6 +721,7 @@
               "element": {
                 "id": "f8318c1c-996e-4a1e-8fe4-305aba23d3fa",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Aidez-la à se connecter à la boîte mail de l’association&nbsp;:<br><a href=\"https://epreuves.pix.fr/papotix/papotix.html?lang=fr&amp;mode=example\" target=\"_blank\">Simulateur à venir à partir de celui de l’évaluation</a>.<br>(à tester avec \"se connecter à papotix\", \"email\": \"a\",    \"password\": \"pix123\")<br><br>[Feedback dans le simulateur]<br>Bravo ! Philomène est connectée à la boîte mail de l’association.</p>"
               }
             },
@@ -712,6 +730,7 @@
               "element": {
                 "id": "2f7cd547-07b2-4134-a827-5025359d7fe1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
               }
             },

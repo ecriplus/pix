@@ -32,6 +32,7 @@
               "element": {
                 "id": "40401525-ac7b-401d-ace7-0afa3cdeb2fc",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Léna et Elias discutent par SMS des Jeux asiatiques de 2029. 🏅 Léna cherche à savoir si l’information donnée par Elias est vraie ou fausse.</p>"
               }
             }
@@ -51,6 +52,7 @@
                     {
                       "id": "70598c0e-6292-48a2-8729-401978cc7003",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Lancez la vidéo pour voir le début de leur discussion.<br>En regardant cette vidéo, posez-vous la question suivante&nbsp;: <strong>est-ce que l'information donnée par Elias est plutôt vraie ou plutôt fausse&nbsp;?</strong></p>"
                     },
                     {
@@ -68,6 +70,7 @@
                     {
                       "id": "a2f57d43-a8a1-4659-8730-f5cd39c350e0",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><span aria-hidden=\"true\">👉</span> C'est assez dur de savoir si cette information est plutôt vraie ou fausse. On ne sait pas encore comment Sandy a obtenu cette information.</p><p>Voici la suite de la discussion entre Elias et Léna. Après la vidéo, vous devrez choisir si l’information d’Elias est plutôt vraie ou plutôt fausse.</p>"
                     },
                     {
@@ -119,6 +122,7 @@
               "element": {
                 "id": "6616dc41-0667-45f3-9326-841f29b72b62",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Léna a posé plusieurs questions à Elias pour trouver l’origine de l’information. C’est ce qu’on appelle la <strong>source d’une information. </strong>&nbsp;ℹ️<br>On vous explique tout dans la leçon suivante.</p>"
               }
             }
@@ -134,6 +138,7 @@
               "element": {
                 "id": "35d79e83-1d3c-4da1-aaed-37dd8e5eae03",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de cette leçon, une question sera posée sur la définition d'une source d'information.</p>"
               }
             },
@@ -142,6 +147,7 @@
               "element": {
                 "id": "e9d8230a-f3bf-49d1-a533-6c74d22e4de6",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -150,6 +156,7 @@
               "element": {
                 "id": "81f2c1af-aeef-4d68-93a9-f4dd3cf1f8bc",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>C'est quoi une source d'information&#8239;?</h4><p><span aria-hidden=\"true\">👉</span> La source est l’origine de l’information. C’est quelqu’un qui donne des détails sur une information.</p><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: si ma voisine Madame Sarah me dit qu'il y a une soucoupe volante dans le ciel, c'est elle la source de cette information.</p>"
               }
             },
@@ -158,6 +165,7 @@
               "element": {
                 "id": "a91f12e7-a297-4dc0-9f81-2a0ccbaba3f8",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -166,6 +174,7 @@
               "element": {
                 "id": "e3ebd36a-c8b9-4990-af63-061329824708",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Comment savoir si on peut croire une source&#8239;?</h4><span aria-hidden=\"true\">👉</span> Il faut se poser quelques questions sur cette source&nbsp;: <ul><li>la source est-elle experte du sujet&#8239;?</li><li>la source est-elle influencée par ses émotions ou ses intérêts&#8239;?</li></ul><p><span aria-hidden=\"true\">✅</span> Exemple&nbsp;: Madame Sarah a l'impression d'avoir vu une soucoupe dans le ciel. Elle a interprété ce qu'elle a vu. Ce n'est peut-être pas une source fiable.</p>"
               }
             }
@@ -181,6 +190,7 @@
               "element": {
                 "id": "5fc304fc-5fc6-49f3-8170-a921b3fd8f67",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous en savez maintenant plus sur ce qu'est une source d'information. Vérifions que vous avez compris l'essentiel.&nbsp;🎯</p>"
               }
             }
@@ -239,6 +249,7 @@
               "element": {
                 "id": "6fd96c29-72a2-4b26-aecd-5cb16115e6a0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous connaissez la définition d'une source d'information, voyons un exemple.</p>"
               }
             }
@@ -254,6 +265,7 @@
               "element": {
                 "id": "96cf39cd-88df-4104-a155-0fff0b40ac31",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une radio a publié une interview pour expliquer l’origine de la soucoupe volante vue par Madame Sarah.&nbsp;<span aria-hidden=\"true\">👽</span>&nbsp;<span aria-hidden=\"true\">🛸</span><br>Vous devrez par la suite choisir qui est la source d'information dans cette interview.</p>"
               }
             },
@@ -273,6 +285,7 @@
               "element": {
                 "id": "fa0b94f1-5139-4c55-a8bb-c7a4257c1a40",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>Dans l'interview, on entend que Madame Sarah a sûrement vu une aurore boréale et non une soucoupe volante."
               }
             },
@@ -324,6 +337,7 @@
               "element": {
                 "id": "bcfc36a3-15e1-4097-8ca5-e8c62b08d2d5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la radio ou sur internet, une information peut être partagée pour plusieurs raisons, par différentes sources. <br>Regardons ça de plus près.</p>"
               }
             }
@@ -339,6 +353,7 @@
               "element": {
                 "id": "d0a2bb58-be8e-4f75-a626-8ac387771dfe",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Après cette leçon, des publications vous seront présentées. Vous devrez choisir pour chaque publication le type de source correspondant.</p>"
               }
             },
@@ -347,6 +362,7 @@
               "element": {
                 "id": "bb24db79-0624-4d43-b1bb-a5510ba12c40",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -355,6 +371,7 @@
               "element": {
                 "id": "9723333b-6378-4dbd-84a2-92a8fc1cc41a",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Certaines sources d'information sont <strong>fiables</strong>.&nbsp;<span aria-hidden=\"true\">👍</span></h4><p>Le but de ces sources est d'informer et de partager des informations vérifiées, qui ont donc beaucoup de chances d'être vraies.</p>"
               }
             },
@@ -363,6 +380,7 @@
               "element": {
                 "id": "2fe6bf3f-c77c-4e21-a57e-8be804171e00",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -371,6 +389,7 @@
               "element": {
                 "id": "0c5bf4bb-989c-4c60-a54c-ae1f842bc8fe",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Certaines sources d'information sont <strong>humoristiques</strong>.&nbsp;<span aria-hidden=\"true\">🤹</span></h4><p>Le but de ces sources est de faire rire et de partager des informations qui ont beaucoup de chances d'être fausses.</p>"
               }
             },
@@ -379,6 +398,7 @@
               "element": {
                 "id": "783421ea-d3eb-437d-9eac-7b51bade7fdb",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -387,6 +407,7 @@
               "element": {
                 "id": "e22b6b68-a154-4b5a-a896-5b36eb6127a3",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Certaines sources d'information sont <strong>contestables</strong>.&nbsp;<span aria-hidden=\"true\">🤨</span></h4><p>Le but de ces sources est d'influencer ou de manipuler les gens. Mais le partage de ces informations a pour principal objectif de gagner de l'argent ou du pouvoir. Ces informations peuvent donc être remises en question.</p>"
               }
             }
@@ -402,6 +423,7 @@
               "element": {
                 "id": "bd9bf91d-bb84-4529-a212-06c2db761b15",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À vous de jouer sur des exemples concrets.</p>"
               }
             }
@@ -417,6 +439,7 @@
               "element": {
                 "id": "714fd0bb-9252-4c53-a1a2-ce4168e76a1b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque publication, choisissez si elle est fiable, humoristique ou contestable.</p>"
               }
             },

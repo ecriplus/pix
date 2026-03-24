@@ -32,6 +32,7 @@
               "element": {
                 "id": "474c3482-deb8-44ca-91f0-15575c0f1f37",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Max va bientôt faire sa rentrée en 4e. <br>Ses parents souhaitent lui offrir son premier smartphone, mais ils ont peur que Max voie des contenus choquants. <br>Sa mère, Nina, demande conseil à des amis. <br>Lancez la vidéo pour voir leur discussion.&nbsp;📺</p>"
               }
             }
@@ -112,6 +113,7 @@
               "element": {
                 "id": "fa615c0d-1d9f-46fc-bf1c-1605130491e5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner les usages en ligne de Max sur son premier smartphone.&nbsp;📱</p><p>Découvrons ensemble des situations où il peut être utile d'utiliser un outil de contrôle parental.</p>"
               }
             }
@@ -127,6 +129,7 @@
               "element": {
                 "id": "5d6e01ea-2ad0-4261-bca3-5711b105f796",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chacune des situations suivantes, indiquez si un outil de contrôle parental vous semble être une solution adaptée.</p>"
               }
             },
@@ -256,6 +259,7 @@
               "element": {
                 "id": "fe57ddca-0827-45b1-ab8a-59a92ca48ce9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans la vidéo suivante, apprenez-en plus sur les principales fonctionnalités des outils de contrôle parental.</p>"
               }
             },
@@ -283,6 +287,7 @@
               "element": {
                 "id": "301d0040-a548-44b0-8b83-281d6ee2c60b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous en savez plus sur le contrôle parental, aidez Nina à l’activer sur le smartphone de son fils, Max.</p>"
               }
             }
@@ -298,6 +303,7 @@
               "element": {
                 "id": "04eff902-3513-432e-b9a5-764c8563dd17",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Essayez d'activer le contrôle parental dans le simulateur de smartphone ci-dessous.</strong>&nbsp;👇</p><p>🧘 Ne vous inquiétez pas ! Les réglages de votre propre smartphone ne seront pas modifiés.</p>"
               }
             },
@@ -326,6 +332,7 @@
               "element": {
                 "id": "5432d74b-3bcd-44f6-a031-8e0ba0cdceda",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>\n<p><br></p>\n<p>\n</p><p></p><details open=\"\">\n    <summary>Indice 1</summary>\n    <p>Le contrôle parental fait partie des paramètres de l’appareil. ⚙️</p>\n</details>\n<details open=\"\">\n    <summary>Indice 2</summary>\n    <p>Ici, le contrôle parental s’active sur l’appareil de l’enfant</p>\n</details>\n<p></p><p></p>"
               }
             },
@@ -341,6 +348,7 @@
               "element": {
                 "id": "e1930046-29d3-4a0d-a88c-fdb9f7dbbe29",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une fois le contrôle parental activé, Nina va pouvoir le paramétrer avec Max.</p><p><br>💡 <strong>Bon à savoir</strong><br>En fonction du smartphone, le nom du paramètre à activer pour le contrôle parental n’est pas toujours le même.</p>"
               }
             }
@@ -356,6 +364,7 @@
               "element": {
                 "id": "feba82d9-0c9d-4d7b-8f66-474416edd792",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il n’y a pas que sur les smartphones qu’il y a du contrôle parental !&nbsp;Partons à la découverte des appareils et des plateformes qui proposent des options de contrôle parental.</p>"
               }
             }
@@ -381,6 +390,7 @@
               "element": {
                 "id": "693544c4-d186-45b2-8ade-525ad981787d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>💡 <strong>Bon à savoir</strong>&nbsp;: </p><p>Depuis juillet 2024,<strong> tous les nouveaux appareils connectés vendus en France doivent obligatoirement être équipés d’un contrôle parental</strong> pré-installé, activable facilement dès le premier démarrage.</p>"
               }
             }
@@ -402,6 +412,7 @@
               "element": {
                 "id": "2b03d03b-39fd-433a-8895-1144aa69d766",
                 "type": "text",
+                "tag": " ",
                 "content": "<p> Voici les principaux points à retenir sur le contrôle parental&nbsp;: </p><ul>    <li>C'est un <strong>outil numérique pour protéger les enfants et encadrer leurs usages numériques.</strong>&nbsp;🛡️</li>    <li>Il ne<strong> remplace pas les échanges parents-enfants</strong>, il les complète !&nbsp;🗣️</li>    <li>Il a de nombreuses fonctionnalités&nbsp;: <strong>gestion du temps en ligne, filtrage des contenus et suivi des activités</strong>.&nbsp;⏳</li><li>Il est possible d'activer du contrôle parental <strong>sur tous les appareils connectés</strong> vendus en France depuis 2024.&nbsp;🌐</li>    <li>Pour l’activer et le paramétrer, rendez-vous dans les <strong>paramètres</strong> de l'appareil ou du service en ligne.&nbsp;⚙️</li></ul>"
               }
             }
@@ -476,6 +487,7 @@
               "element": {
                 "id": "510822a9-aba9-43e0-8ef7-cd5f377ae78d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chacune des situations suivantes, sélectionnez la fonctionnalité de contrôle parental adaptée.</p>"
               }
             },
@@ -488,6 +500,7 @@
                     {
                       "id": "c9540007-19f4-456e-8137-5b85f81d2854",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Rachel veut éviter que son fils de 13 ans télécharge des jeux déconseillés au moins de 16 ans sur sa console.</p>"
                     },
                     {
@@ -530,6 +543,7 @@
                     {
                       "id": "e45eb37c-86b0-4643-ae61-39582618d6f1",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Thibault trouve que son fils utilise son smartphone trop tard les soirs de semaine. Il souhaite verrouiller l’appareil à partir de 20h.</p>"
                     },
                     {
@@ -572,6 +586,7 @@
                     {
                       "id": "7196fed5-37d9-4e5c-8d47-4baf6702129b",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Nassira souhaite connaître le temps passé par son fils sur les réseaux sociaux.</p>"
                     },
                     {
@@ -629,6 +644,7 @@
               "element": {
                 "id": "4efaa439-2698-4ef9-b61e-a60f88e1a9fb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Grâce au contrôle parental, Nina va pouvoir accompagner Max dans ses usages numériques plus sereinement. 👏</p>"
               }
             }
@@ -683,6 +699,7 @@
               "element": {
                 "id": "14e1e0c3-b521-41bf-af4a-2757912262c1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour en apprendre plus sur le contrôle parental, rendez-vous sur la page <a href=\"https://e-enfance.org/informer/controle-parental/\" target=\"_blank\">Activer, installer et configurer un contrôle parental</a> de l’association e-Enfance.</p>"
               }
             }

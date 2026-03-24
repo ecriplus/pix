@@ -32,6 +32,7 @@
               "element": {
                 "id": "339e443a-9eb7-476c-8689-9a7714c31607",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave organise un tournoi de volley-ball dans un club sportif. 🏐</p><p>Il veut gagner du temps et demande à un logiciel d’IA générative de l’aider à organiser le tournoi.  </p><p>Mais il est déçu du résultat… </p>"
               }
             }
@@ -94,6 +95,7 @@
               "element": {
                 "id": "d715d4e1-fc44-4f12-98e6-48bd428e55cb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Eh oui, on peut améliorer le résultat donné par le logiciel en étant plus précis. Comme lorsqu’on parle à quelqu’un&nbsp;: on est mieux compris si on explique les choses clairement.<br><br></p>"
               }
             }
@@ -115,6 +117,7 @@
               "element": {
                 "id": "3f36edd3-42cd-4cf3-9063-1ad75166871c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le prompt de Gustave était&nbsp;: «&nbsp;Aide-moi à organiser le tournoi.&nbsp;»</p>"
               }
             },
@@ -173,6 +176,7 @@
               "element": {
                 "id": "504fb0c6-f40a-403c-9471-e4fb0512e9cd",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>🤔Mais alors, quelles précisions faut-il donner dans son prompt ? </h5><p>Tout ce qui donne du contexte&nbsp;: l’<strong>objectif</strong>, le <strong>public</strong>, le <strong>lieu</strong>, le <strong>moment</strong>, etc.</p><p>Cela donne du sens à la demande. </p><p>Sans ce contexte, l’IA risque de répondre de façon vague ou hors sujet.&nbsp;🕳️</p>"
               }
             }
@@ -188,6 +192,7 @@
               "element": {
                 "id": "d0929d7f-98c7-4922-a3ab-5397de53bef1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave a écrit un message d’invitation au tournoi et a demandé à l’IA de le corriger.</p>"
               }
             },
@@ -281,6 +286,7 @@
               "element": {
                 "id": "ae043fb4-a580-4c82-b6ef-041739c01870",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>🤔Comment obtenir une réponse vraiment adaptée à nos besoins ?</h5><p>Pour obtenir un résultat adapté, on peut préciser&nbsp;:<br></p><ul><li><strong>à qui</strong> on s’adresse (un enfant de 7 ans, un expert du sujet, etc.), 👥<br></li><li><strong>de quelle manière</strong> (de manière brève, pédagogue, professionnelle, etc.),💬<br></li><li><strong>un rôle</strong> à jouer («&nbsp;en tant que coach sportif&nbsp;», «&nbsp;comme si tu étais Jules César&nbsp;», etc.).🎭</li></ul>"
               }
             }
@@ -296,6 +302,7 @@
               "element": {
                 "id": "544cc85d-cd6c-4906-8594-fd4296133cf0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave veut entraîner les joueurs de son club en vue du tournoi de volley. </p>\n<p>Pour cela, il prépare un document d’entraînement pour travailler les <strong>manchettes</strong>,&nbsp;sous la forme d’un <strong>tableau</strong>.</p>"
               }
             },
@@ -304,6 +311,7 @@
               "element": {
                 "id": "d31c6893-5ee7-4917-a1a1-42d9297d9032",
                 "type": "text",
+                "tag": " ",
                 "content": "<table>\n    <thead>\n        <tr>\n            <th scope=\"col\" class=\"width-15\">Niveau</th>\n            <th scope=\"col\">Exercice</th>\n            <th scope=\"col\">Description</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th>Débutant</th>\n            <td>Manchette contre le mur</td>\n            <td>Le joueur fait des manchettes seul contre le mur, en gardant le ballon régulier.</td>\n        </tr>\n        <tr>\n            <th>Intermédiaire</th>\n            <td>Triangle manchette</td>\n            <td>Trois joueurs forment un triangle et se passent le ballon en manchette.</td>\n        </tr>\n        <tr>\n\n            <th>Avancé</th>\n            <td>Réception de service réel</td>\n            <td>Un joueur reçoit des services puissants en manchette.</td>\n        </tr>\n         <tr>\n\n            <th>Expert</th>\n            <td>...</td>\n            <td>...</td>\n        </tr>\n\n    </tbody>\n</table>"
               }
             }
@@ -319,6 +327,7 @@
               "element": {
                 "id": "71cd4b0e-7e15-45b4-a304-06952561f986",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il manque d'inspiration pour des exercices à destination de joueurs experts.</p><br>\n<p>Utilisez le logiciel d’IA générative ci-dessous pour l’aider à obtenir un <strong>tableau complet</strong> avec des exercices pour les joueurs de tous niveaux.</p>"
               }
             },
@@ -387,6 +396,7 @@
                     {
                       "id": "41bf9155-0b09-45e4-99fd-872c7a751614",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Comment être efficace lorsqu’on utilise un logiciel d’IA générative ? <br></h5><ul><li>Précisez le <strong>format </strong>voulu, par exemple&nbsp;: un <strong>texte</strong>, un <strong>tableau</strong>, une <strong>liste</strong>, une <strong>carte mentale</strong>, etc.</li><li>Ajoutez des <strong>contraintes </strong>comme la <strong>longueur </strong>(«&nbsp;en moins de 10 lignes&nbsp;») ou la <strong>structure </strong>(«&nbsp;fais 2 parties et 2 sous-parties»).</li></ul><p>On peut aussi demander à l’IA de <strong>partir d’un exemple </strong>et de le reproduire.</p>"
                     }
                   ]
@@ -396,6 +406,7 @@
                     {
                       "id": "8c64c0a9-4c6b-4622-bcd8-052ede34ba8f",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Et si la réponse de l’IA ne correspond pas à nos attentes ? <br></h5><p>Pas de problème, poursuivez la conversation avec l’IA et demandez des modifications…</p>"
                     }
                   ]
@@ -420,6 +431,7 @@
               "element": {
                 "id": "17178f53-901f-4547-9f8a-bfc40990214d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quelques conseils pour écrire un prompt efficace&nbsp;:</p><ul>    <li> Utilisez un verbe d’<strong>action.</strong></li>    <li> Donnez du <strong>contexte.</strong></li><li>Précisez éventuellement le<strong> ton.</strong></li><li>Attribuez si nécessaire une<strong> identité</strong> ou un <strong>rôle </strong>à l’IA.</li>    <li>Précisez le <strong>format attendu.</strong></li>        </ul><p>🔄Après chaque réponse, vous pouvez ajuster ou préciser votre prompt pour obtenir un meilleur résultat.</p><p><strong>⚠️&nbsp;</strong>Une réponse peut paraître claire et bien formulée mais contenir des résultats qui<strong> ne correspondent pas à ce qu’on attend&nbsp;</strong>ou être partiellement <strong>fausse. <br></strong></p><p><strong>🔍&nbsp;Relire&nbsp;</strong>la réponse de l’IA est essentiel avant de l’utiliser ou de la présenter à quelqu’un.</p>"
               }
             }
@@ -441,6 +453,7 @@
               "element": {
                 "id": "bfd964cd-dcb6-4bf6-8bde-182a05b75795",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave a précisé ses prompts et a amélioré sa manière de parler avec le logiciel d’IA générative.&nbsp;</p><p>Pour chaque prompt, sélectionnez tous les éléments qui le rendent&nbsp;clair.</p>"
               }
             },
@@ -453,6 +466,7 @@
                     {
                       "id": "40644c94-0cfe-407d-98d3-bf6b10a605dc",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;Écris un dialogue entre des spectateurs d’un match de volley.&nbsp;»</p>"
                     },
                     {
@@ -496,6 +510,7 @@
                     {
                       "id": "5176e4d0-394a-4e27-a754-f675ee325595",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;En tant qu’humoriste, propose un court discours amusant (2 à 3 minutes) pour le pot de départ d’un joueur de volley de ton équipe qui déménage dans une autre ville. Inclus ses grandes qualités (humour, adresse, franchise) et ses petits défauts (impatient et bavard).&nbsp;»</p>"
                     },
                     {
@@ -549,6 +564,7 @@
               "element": {
                 "id": "e90e7470-54a6-444d-bc77-39cfc9b0fad1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave a pris des notes lors de la réunion d’organisation du tournoi&nbsp;:&nbsp;</p><p><em>- max 12 équipes. équipes mixtes → tout le monde ok</em></p><p><em>- récompenses ? médailles → à chiffrer</em></p><p><em> - arbitres → bénévoles, relancer ceux du dernier tournoi </em></p><p><em>- musique&nbsp;: demander mairie pour sono </em></p><p><em>- si pluie → gymnase dispo ? ok !&nbsp;:-) </em></p><p><em>- buvette&nbsp;: jus, sandwichs, fruits → pas de chaud </em></p>"
               }
             },
@@ -557,6 +573,7 @@
               "element": {
                 "id": "e0f68d47-e46e-4ec7-b368-a95b1972151c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Gustave veut envoyer un <strong>compte rendu</strong> aux personnes qui n’ont pas pu être présentes à la réunion.</p><p>Discutez avec le logiciel d’IA générative ci-dessous jusqu’à obtenir un <strong>compte rendu qui correspond bien</strong> aux notes de Gustave.</p>"
               }
             },
@@ -578,6 +595,7 @@
               "element": {
                 "id": "6df04b1d-5b20-4d74-ade1-bebfe4384c5c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><p><br></p><p></p><details><summary>Indice 1</summary><p>Avez-vous vérifié le résultat proposé par l’IA  ?</p></details><details><summary>Indice 2</summary><p> Avez-vous vérifié les récompenses dans le compte rendu ? </p></details><details><summary>Indice 3</summary><p>Avez-vous demandé à l’IA de corriger sa réponse ?</p></details><p></p><p><br></p>"
               }
             },
@@ -608,6 +626,7 @@
               "element": {
                 "id": "71a67f7a-5d01-405e-84bf-8c69517ebcf5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>🎯<strong>Mission : trouver un lieu pour le tournoi de Jolieville !</strong></p><p>Gustave cherche un lieu pouvant accueillir le tournoi de volley-ball. Il a besoin d’au moins 4 terrains. </p>\n<p>Son budget maximal est de 300 pixmoney.&nbsp;Mais, il est bien sûr à la recherche d’un bon plan.💸</p><p>La mairie de Jolieville a créé un logiciel d’IA pour répondre aux questions sur ses équipements sportifs.&nbsp;🥅</p>\n\n"
               }
             },

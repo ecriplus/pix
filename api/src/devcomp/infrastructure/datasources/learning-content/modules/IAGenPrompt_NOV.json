@@ -85,6 +85,7 @@
               "element": {
                 "id": "f30fee84-9b24-4f58-b216-375817170298",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Agnès a suivi le conseil de Maëlle. Elle a demandé à un logiciel d’IA générative par où commencer pour créer son association. Voici sa discussion avec le logiciel.</p>"
               }
             }
@@ -191,6 +192,7 @@
               "element": {
                 "id": "6080355f-69c8-4803-a7e2-b301556ac9e3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les <strong>réponses</strong> d’un logiciel d’IA générative s’affichent comme dans une <strong>conversation de messagerie instantanée</strong>.</p><p>Pour continuer la conversation, on saisit le <strong>prochain prompt</strong> dans la <strong>zone située juste en dessous</strong>.</p>"
               }
             }
@@ -206,6 +208,7 @@
               "element": {
                 "id": "7f1f3b24-7160-405c-8e88-fdd69b131ddf",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous savez vous repérer dans une conversation avec un logiciel d’IA générative, nous allons voir comment rédiger un prompt !📝</p>"
               }
             }
@@ -221,6 +224,7 @@
               "element": {
                 "id": "4f730efe-b5ff-4d66-ba0d-b0105d347dc4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Cliquez sur chaque prompt et observez la réponse du logiciel d’IA générative.</p>"
               }
             },
@@ -302,6 +306,7 @@
               "element": {
                 "id": "90cd34bf-4182-4c72-ab1a-22ea98ab9c46",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>En revanche, pour que le logiciel d’IA générative réponde vraiment à ce que vous voulez, il faut être <strong>précis</strong>.</p><p><br>📌 <strong>Bon à savoir</strong></p><p>Une bonne façon d’être précis est d’utiliser des <strong>verbes d’action</strong> comme : « lister », « traduire », « résumer », etc.</p>"
               }
             }
@@ -317,6 +322,7 @@
               "element": {
                 "id": "1ad822c8-cf06-43b8-adf4-9acc12f22fff",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans certains cas, utiliser un verbe adapté ne suffit pas.😅 Il faut aussi donner des éléments qui décrivent le résultat que l’on veut obtenir. Voyons cela ensemble !</p>"
               }
             }
@@ -332,6 +338,7 @@
               "element": {
                 "id": "0a0f1cf5-3f03-448c-b551-93d51482ab33",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Cette fois-ci, Agnès organise un week-end yoga.</p><p> Elle veut épater les participants avec des plats végétariens mais elle ne sait pas quoi cuisiner.</p><p>Cliquez sur chaque prompt et observez la réponse du logiciel d’IA générative.</p>"
               }
             },
@@ -413,6 +420,7 @@
               "element": {
                 "id": "29fbfaf4-e1f9-4f19-9bbb-38f8a712e352",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>📌Une autre façon d’être précis est de donner au logiciel d’IA générative autant d’<strong>informations</strong> que possible. Cela donne du contexte.</p>"
               }
             }
@@ -491,6 +499,7 @@
               "element": {
                 "id": "ebd5d937-c04e-47da-98b2-7ddde874cb50",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Même si le prompt est clair et précis, et que la réponse paraît bien rédigée, un<strong> logiciel d’IA générative </strong>peut <strong>se tromper</strong>.😓 Il faut <strong>toujours&nbsp;</strong><strong>relire et vérifier la réponse</strong>.</p><p><br>💡<strong>Astuce</strong></p><p>On peut continuer la conversation avec un logiciel d’IA générative en lui envoyant un nouveau message pour <strong>ajuster ou corriger</strong> la réponse.</p>"
               }
             }
@@ -512,6 +521,7 @@
               "element": {
                 "id": "33210c11-0e87-4d93-9190-089654d57ee4",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>Un <strong>prompt </strong>(« instruction » ou « requête » en français) est une <strong>question</strong> que l’on pose ou une <strong>consigne</strong> que l’on donne au logiciel d’IA générative pour qu’il produise une réponse.</li><li>Un prompt s’écrit en <strong>langage courant.</strong>💬</li><li>Plus la <strong>demande </strong>est <strong>claire et précise</strong>, plus la <strong>réponse </strong>du logiciel d’IA générative sera <strong>adaptée et pertinente</strong>.🤓<br></li><li>Il est important de toujours <strong>relire la réponse</strong> <strong>du logiciel d’IA générative</strong>.🕵️</li><li>Si la réponse du logiciel d’IA générative ne convient pas, il faut <strong>reformuler</strong> <strong>son prompt</strong>.</li></ul>"
               }
             }
@@ -533,6 +543,7 @@
               "element": {
                 "id": "ae11054b-571a-4577-8554-c2731f729647",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous connaissez maintenant les règles de base pour formuler un prompt. À vous d’appliquer ces règles !🙌</p>"
               }
             }
@@ -548,6 +559,7 @@
               "element": {
                 "id": "3fe45d3e-1c1b-46f0-845d-0c2233d9e340",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Lisez attentivement les affirmations suivantes et indiquez, pour chacune d’elles, si elle est vraie ou fausse.</p>"
               }
             },
@@ -777,6 +789,7 @@
               "element": {
                 "id": "8508c24d-493a-499d-b336-6e8f61680b32",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez appris à parler avec un logiciel d’IA générative.👏 Maintenant, place à la pratique : voyons si vous pouvez obtenir la réponse souhaitée !</p>"
               }
             }

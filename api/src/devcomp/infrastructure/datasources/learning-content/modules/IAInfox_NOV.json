@@ -32,6 +32,7 @@
               "element": {
                 "id": "07a6146e-c775-42f2-9d20-fbbfa7a37a32",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans la vidéo suivante, on peut voir un scientifique célèbre faire une annonce importante.</p>"
               }
             },
@@ -150,6 +151,7 @@
               "element": {
                 "id": "11c33b08-c95a-4cee-8026-e83dc7332913",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les <strong>deepfakes</strong>, <strong>hypertrucages</strong> en français, sont créés grâce à <strong>l’intelligence artificielle, pour tromper.</strong> Ils sont réalistes.&nbsp;Pourtant, ils ne montrent pas la réalité.<strong>🤥 </strong></p><p>Comme les intelligences artificielles s'améliorent chaque jour, il est de <strong>plus en plus difficile de reconnaître un deepfake</strong> !😱</p>"
               }
             }
@@ -165,6 +167,7 @@
               "element": {
                 "id": "b49f6773-b8cc-48e9-92cd-12821f442dc4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour être si réaliste, un deepfake doit demander beaucoup de compétences et de matériel à son créateur, non ? 🤔</p>"
               }
             }
@@ -180,6 +183,7 @@
               "element": {
                 "id": "42d51784-c0d0-4c68-953b-059ea9052e33",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avec un logiciel d'intelligence artificielle, Caroline a créé une vidéo où elle chante une chanson à la manière de sa chanteuse préférée. 🎶</p><p> Caroline est étonnée&nbsp;: elle a donné<strong> seulement 3 éléments au logiciel d’intelligence artificielle</strong> pour créer la chanson.</p>"
               }
             },
@@ -213,6 +217,7 @@
               "element": {
                 "id": "cbe6027b-3113-4772-a81f-c44d381f9585",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un <strong>deepfake</strong> peut être créé avec <strong>très peu de données</strong>&nbsp;: une photo et quelques phrases suffisent pour fabriquer une vidéo réaliste. 🗣️</p><p> ⚠️ Comme ils sont faciles à fabriquer, beaucoup de <strong>deepfakes circulent en ligne</strong>.</p><p>Facile à faire, ne veut pas dire permis : un deepfake peut être illégal.</p>"
               }
             }
@@ -228,6 +233,7 @@
               "element": {
                 "id": "346c8e4f-3e0c-4fdd-bd0a-be0ed2daa02d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour quelles raisons les deepfakes sont-ils créés ? Découvrons-le ensemble.</p>"
               }
             }
@@ -243,6 +249,7 @@
               "element": {
                 "id": "b5da21e5-f012-4248-94a8-de57dadfd515",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque exemple de deepfake, choisissez la bonne réponse.</p>"
               }
             },
@@ -387,6 +394,7 @@
               "element": {
                 "id": "d0540829-7feb-48c7-b621-fb99765d6720",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>😱 <strong>Les deepfakes</strong> peuvent servir à manipuler la population, arnaquer ou harceler : ces <strong>usages </strong>sont <strong>illégaux</strong> et <strong>dangereux</strong>.</p><p><br></p><p>Cependant, ils peuvent aussi être utilisés dans l’art ou le divertissement sans intention malveillante.</p><p>⚖️ Bon à savoir : même dans un cadre créatif ou humoristique, toute <strong>utilisation de l'image d'une personne sans son accord</strong> est <strong>interdite </strong>par la loi.</p>"
               }
             }
@@ -402,6 +410,7 @@
               "element": {
                 "id": "548e5653-0607-4020-be54-f318fd0aa092",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les deepfakes sont difficiles à reconnaître et ils peuvent être créés dans un but malveillant. Mais, comment réagir quand on reçoit une vidéo, une image ou un son et qu’on a des doutes ?</p>"
               }
             }
@@ -417,6 +426,7 @@
               "element": {
                 "id": "46999db8-c96c-42e8-93ac-a558c72a55f2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Djibril a reçu un message de Brian sur le groupe de parents de l'équipe de rugby de Jolieville. <br>Consultez le message puis répondez à la question.</p>"
               }
             },
@@ -495,6 +505,7 @@
                     {
                       "id": "d047d05c-d77c-490d-9dc6-d0fcc5252ba6",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🧐Que faire si vous recevez un média trop beau pour être vrai, choquant ou inquiétant ?</h5><p><strong>N’agissez pas trop vite : </strong>ne likez pas, ne partagez pas immédiatement. </p><p>C’est peut-être un <strong>deepfake !</strong></p>"
                     }
                   ]
@@ -504,6 +515,7 @@
                     {
                       "id": "7a82f038-3a9d-4b02-84c0-d48b7aed4a20",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>⚠️<strong>Partager un deepfake malveillant</strong> peut propager de&nbsp;<strong>fausses informations</strong>&nbsp;ou contribuer au&nbsp;<strong>cyberharcèlement</strong>&nbsp;d’une personne. </p><p>Cela peut aussi <strong>violer le droit à l’image</strong> et entraîner une <strong>plainte </strong><strong>contre vous</strong>.</p><p>🔎&nbsp;<strong>En cas de doute, ne partagez pas</strong> : vérifiez d’abord l’information et sa source.</p>"
                     }
                   ]
@@ -528,6 +540,7 @@
               "element": {
                 "id": "de260e53-8fc3-482c-94ba-7c43560306d9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un <strong>deepfake</strong> est un média hyperréaliste mais faux&nbsp;: il est créé grâce à l’intelligence artificielle.</p><ul><li>Il est souvent <strong>difficile à détecter.</strong> 🔎</li><li>Il demande peu de matériel et de compétences pour être créé. Voilà pourquoi <strong>beaucoup de deepfakes circulent en ligne.</strong> ⚠️</li><li>La plupart du temps, un deepfake est créé avec une <strong>intention malveillante</strong>&nbsp;: diffuser de fausses informations, cyberharceler, arnaquer ou manipuler. 🧠</li><li>Au moindre doute face à un média, il ne faut pas le partager immédiatement. <strong>Vérifiez</strong> d'abord sa source et sa fiabilité. ℹ️</li></ul>"
               }
             }
@@ -613,6 +626,7 @@
               "element": {
                 "id": "7c57b98b-0c92-4a53-a169-d83b453da813",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Et pour finir, voyons un cas pratique.</p>"
               }
             }
@@ -628,6 +642,7 @@
               "element": {
                 "id": "8bc86555-dd8a-4148-a37a-35e311c1c024",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Lisez l’article ci-dessous, puis répondez aux questions.</strong><br></p>"
               }
             },

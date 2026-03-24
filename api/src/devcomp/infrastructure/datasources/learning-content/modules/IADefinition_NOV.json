@@ -32,6 +32,7 @@
               "element": {
                 "id": "e0a5a488-113c-4c30-89e0-354e874aa534",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Peut-être avez vous vu ces dernières années de nombreux articles parlant d’<strong>IA</strong> ?</p>"
               }
             },
@@ -40,6 +41,7 @@
               "element": {
                 "id": "f9de3bea-9094-4773-9e03-d72127d8f313",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Derrière ces deux lettres, «&nbsp;I&nbsp;» et «&nbsp;A&nbsp;», se cache l’expression <strong>«&nbsp;Intelligence Artificielle&nbsp;»</strong>.</p>"
               }
             },
@@ -48,6 +50,7 @@
               "element": {
                 "id": "a27b96cf-a0a7-45df-866a-313a1bd6caaf",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>À votre avis, de quand date l’expression «&nbsp;intelligence artificielle&nbsp;» ?&nbsp;⌛</strong></p>"
               }
             },
@@ -134,6 +137,7 @@
               "element": {
                 "id": "3c870d58-e8dd-4129-9348-159975b1fc69",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avec la popularité de ChatGPT et d’autres logiciels d’IA générative, on a l’impression que l’IA, c’est nouveau. Mais pas du tout !&nbsp; L’IA, ça date ! ⌛</p>"
               }
             }
@@ -155,6 +159,7 @@
               "element": {
                 "id": "937b62e7-c4f5-479a-8e1f-afbe7881fa92",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Et si on regardait plus précisément ce qu’est l’IA ? Pour cela, partons de l’ordinateur !</p>"
               }
             },
@@ -231,6 +236,7 @@
                     {
                       "id": "53537649-ddc5-4971-a5a4-7998646fd2e9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Aujourd’hui, les <strong>ordinateurs </strong>peuvent <strong>réaliser toutes sortes de tâches</strong>&nbsp;:<br></p><ul><li>Des tâches que nous faisons sans y penser comme reconnaître un chien dans une image. 👀<br></li><li>Et des tâches qui nous demandent plus de concentration comme, par exemple, analyser de grandes quantités de données. 🧠<br></li></ul>"
                     }
                   ]
@@ -240,6 +246,7 @@
                     {
                       "id": "35c0b9f8-c09e-49f3-9408-25073a69bea5",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Le <strong>domaine scientifique </strong>qui a permis ces <strong>progrès</strong> est celui de&nbsp;l’<strong>intelligence artificielle</strong>. Les chercheurs en intelligence artificielle étudient comment permettre à des machines d’imiter les mécanismes de l’intelligence humaine.&nbsp;🔬</p>"
                     }
                   ]
@@ -258,6 +265,7 @@
               "element": {
                 "id": "6405e82a-354c-4faf-935b-c81953cf9a2c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Regardons plus en détail les tâches que réalisent les logiciels d’IA aujourd’hui, et dans quels cas on utilise ces logiciels.</p>"
               }
             }
@@ -273,6 +281,7 @@
               "element": {
                 "id": "8dba133c-906f-4793-939f-015df7d2acce",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mariam est équipée de nombreux appareils électroniques.&nbsp;</p><p><strong>Explorez son salon en survolant l’image. Parmi les appareils et les services, identifiez lesquels utilisent des logiciels d’intelligence artificielle.</strong></p>"
               }
             },
@@ -462,6 +471,7 @@
               "element": {
                 "id": "bfe6d7e1-8282-4a34-a659-c189ea396feb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ces exemples ne sont pas rares&nbsp;: aujourd’hui, de nombreux <strong>appareils et services du quotidien</strong> utilisent des <strong>logiciels d’intelligence artificielle</strong>.</p><p>Certains logiciels sont <strong>spécialisés </strong><strong>dans </strong><strong>un type de tâche</strong>&nbsp;: reconnaître des images ou des sons, recommander des contenus adaptés à des besoins, prédire des tendances dans des données, etc.&nbsp;🔮</p><p><br>Des logiciels à base d’<strong>IA générative</strong>, comme Le Chat, Gemini ou ChatGPT, sont capables de <strong>réaliser des tâches</strong><strong> diverses</strong>&nbsp;: traduire des textes, tenir une conversation, résumer des articles, créer une image, programmer, résoudre des problèmes, etc.&nbsp;📝</p><p>Mais attention&nbsp;: même ces logiciels peuvent <strong>se tromper</strong> !</p>"
               }
             }
@@ -477,6 +487,7 @@
               "element": {
                 "id": "a2b1291d-6043-4582-ac69-337835330c07",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’IA est aussi utilisée dans des secteurs d’activité professionnelle.<br>Voyons l’exemple de<strong> la reconnaissance d’image</strong>.&nbsp;🔎🖼️</p>"
               }
             },
@@ -538,6 +549,7 @@
               "element": {
                 "id": "1bf335c7-a606-4e65-aa36-07adf42d3b6f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’intelligence artificielle est utilisée dans <strong>tous les secteurs d’activité</strong>&nbsp;: l’agriculture, la culture, l’éducation, la finance, l’industrie, les loisirs, la santé, la science, la sécurité, le transport, etc.</p><p><br><strong>💡 </strong>Parfois, l’utilisation de l’intelligence artificielle permet de faire des <strong>découvertes </strong>ou des <strong>progrès </strong>importants. Par exemple&nbsp;:&nbsp;</p><ul>    <li>Les médecins l’utilisent pour améliorer le diagnostic de maladies, comme les cancers.</li>    <li>Les scientifiques s’en servent pour améliorer les simulations du changement climatique.</li></ul>"
               }
             }
@@ -559,6 +571,7 @@
               "element": {
                 "id": "715a385e-dcfb-4001-9e5d-5b00ab365221",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>L’<strong>intelligence artificielle</strong> est un <strong>domaine scientifique</strong> qui étudie comment les machines peuvent <strong>imiter </strong>certains mécanismes de l<strong>’i</strong><strong>ntelligence humaine</strong>.<br><br></li>    <li>Certains logiciels d’IA sont<strong> spécialisés </strong>dans un type de tâche. D’autres peuvent&nbsp;réaliser plusieurs<strong> tâches différentes</strong>.&nbsp;👩‍💻<br><br></li>    <li>Les logiciels d’IA sont utilisés dans de nombreux<strong> appareils et services de notre quotidien</strong>.&nbsp;📱<br><br></li>    <li>L’utilisation de l’IA permet de faire de nombreux <strong>progrès </strong>dans des domaines très variés.&nbsp;📈</li></ul>"
               }
             }
@@ -580,6 +593,7 @@
               "element": {
                 "id": "0fea05ff-8378-40b9-b078-ee55015dc1e6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
@@ -652,6 +666,7 @@
               "element": {
                 "id": "b2dc8d40-47cd-4f67-af34-b66ef6506b57",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Identifiez dans quel type de tâche sont spécialisées les IA utilisées dans les situations suivantes.</p>"
               }
             },

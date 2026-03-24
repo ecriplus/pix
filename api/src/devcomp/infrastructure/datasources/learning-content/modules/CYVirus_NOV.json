@@ -32,6 +32,7 @@
               "element": {
                 "id": "d6b16bfc-5fc9-4b7b-b15e-235644643afa",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Parfois, il arrive qu’un ordinateur se comporte de manière inhabituelle.</p><p><strong>Lancez la vidéo ci-dessous et observez ce qui se passe sur l’écran d’ordinateur.</strong></p>"
               }
             },
@@ -105,6 +106,7 @@
               "element": {
                 "id": "ab1ca7db-aa26-49fe-8a04-2bf7817957bc",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quand un logiciel malveillant est présent sur un appareil, il peut parfois causer des problèmes de fonctionnement.</p>"
               }
             }
@@ -126,6 +128,7 @@
               "element": {
                 "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Trois ordinateurs</strong> ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leurs écrans ci-dessous puis répondez à la question.</p>"
               }
             },
@@ -147,6 +150,7 @@
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Ordinateur 1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
@@ -165,6 +169,7 @@
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Ordinateur 2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
@@ -183,6 +188,7 @@
                     {
                       "id": "e1404c05-11b5-4531-a373-ede7492d4676",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Ordinateur 3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
                     }
                   ]
@@ -241,6 +247,7 @@
               "element": {
                 "id": "3255ed2b-a635-4a59-a9ba-b30e1da38c3b",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l'utilisateur s’en rende compte.</p><br><h5>🤔 Bon à savoir</h5><p><strong>Un virus informatique</strong> est <strong>un type</strong> de logiciel malveillant parmi d’autres.</p>"
               }
             }
@@ -256,6 +263,7 @@
               "element": {
                 "id": "95d323ed-02d2-41cd-ade6-14898ffb9b9f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais alors, si certains logiciels malveillants ne se voient pas toujours, est-ce qu’on doit s’inquiéter tout le temps d’en avoir un sur son appareil ? 😱</p><p>Pas forcément, car cela dépend surtout de ce que vous faites sur votre appareil.</p>"
               }
             }
@@ -271,6 +279,7 @@
               "element": {
                 "id": "50b2a382-b5d3-4105-a54b-10265376af41",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La plupart du temps, un logiciel malveillant ne s’installe pas tout seul. Dans certaines situations, certains de vos gestes peuvent être risqués.</p>"
               }
             },
@@ -343,6 +352,7 @@
               "element": {
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Pour éviter d'installer un logiciel malveillant</strong>, il faut être vigilant et adopter des gestes sûrs&nbsp;:</p><ul><li>Téléchargez des logiciels ou des applications sur <strong>des sites légaux et dans les magasins d’applications officiels</strong>.</li><li>Faites attention <strong>aux liens sur lesquels vous cliquez</strong> ainsi qu’<strong>aux fichiers ou pièces jointes que vous ouvrez</strong>.</li><li>Connectez seulement <strong>des appareils de confiance</strong>.</li></ul><br><h5>🤔 Bon à savoir</h5><p>Pour recharger votre appareil en toute sécurité, il est préférable d’utiliser votre propre chargeur (secteur) branché sur une prise électrique. 🔌</p>"
               }
             }
@@ -358,6 +368,7 @@
               "element": {
                 "id": "f13c6d5e-220d-48f4-8fc5-8b07ce0a7f31",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Derrière ces <strong>pièges</strong>, il y a des <strong>pirates informatiques</strong>. </p><p>Les pirates <strong>cachent</strong> des logiciels malveillants dans des contenus ou des supports attirants.&nbsp;</p><p>Mais pourquoi les pirates veulent-ils vous piéger ?</p>"
               }
             }
@@ -373,6 +384,7 @@
               "element": {
                 "id": "3a24782c-14d5-4c2f-baf2-5da35f32694b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sans le savoir, vous avez peut-être des informations qui intéressent <strong>les pirates informatiques.</strong></p><p><strong></strong> Voyons cela ensemble.</p>"
               }
             },
@@ -399,6 +411,7 @@
               "element": {
                 "id": "e7efa1be-03f5-4844-830c-249636f8e122",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les logiciels malveillants sont <strong>créés </strong>et<strong> diffusés</strong> par des <strong>pirates informatiques.</strong> En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit.</strong></p>"
               }
             }
@@ -414,6 +427,7 @@
               "element": {
                 "id": "b6b4fd71-8578-4d75-a513-e0ce629bdd78",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Tout le monde peut être la cible des pirates informatiques. C’est pourquoi il est essentiel d’adopter les bons réflexes pour protéger son appareil des logiciels malveillants.</p>"
               }
             }
@@ -524,6 +538,7 @@
               "element": {
                 "id": "8d1432e8-c548-410b-9c20-8ac58c465e9d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque situation, choisissez quelle action présente un risque d’installer un logiciel malveillant.</p>"
               }
             },
@@ -662,6 +677,7 @@
               "element": {
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
+                "tag": " ",
                 "content": "Vous avez vu qu’il est important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur son appareil.<br>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils."
               }
             },

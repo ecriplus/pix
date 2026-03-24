@@ -32,6 +32,7 @@
               "element": {
                 "id": "6395f495-5219-445d-9976-53710245da39",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ces dernières années, le nombre de centres de données n’a fait qu’augmenter, et avec lui l’électricité consommée.</p><p><em>[A venir GIF - l’apparition de points pour les centres de données dans le temps]</em></p>"
               }
             },
@@ -105,6 +106,7 @@
               "element": {
                 "id": "1ec87fee-69c4-4062-8a25-89da3a479c2f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La <strong>construction </strong>d’un<strong> centre de données</strong> nécessite l’extraction de grandes quantités de <strong>métaux</strong> et&nbsp;de<strong> terres rares</strong>. Elle participe également à l’<strong>artificialisation des sols</strong>.</p><br><p>De plus, le centre de données consomme une grande quantité d’<strong>énergie</strong>&nbsp;et <strong>d’eau </strong>(pour son refroidissement) et génère de nombreux <strong>déchets</strong> toxiques.</p>"
               }
             },
@@ -232,6 +234,7 @@
                     {
                       "id": "755cd426-f67f-4d3c-b54f-9921d19a3d20",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>En plus de la consommation d’eau et de métaux, les centres de données consomment aussi de l’énergie et participent à l’artificialisaiton des sols.</p>"
                     },
                     {
@@ -294,6 +297,7 @@
               "element": {
                 "id": "16b59faf-6643-4a22-a2e2-55a664a2702d",
                 "type": "text",
+                "tag": " ",
                 "content": "La construction&nbsp;des<strong> centres de données</strong>&nbsp;et leur fonctionnement produisent des conséquences en cascade, qui contribuent au <strong>dérèglement climatique </strong>et à la <strong>dégradation</strong> de la <strong>biodiversité</strong>, des <strong>habitats </strong>et de la <strong>santé humaine</strong>."
               }
             },
@@ -321,6 +325,7 @@
               "element": {
                 "id": "b3276727-321b-4cb2-baa8-fa8483d36bc6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Que peuvent faire les entreprises du numérique pour limiter ces impacts ?<br></p>"
               }
             }
@@ -336,6 +341,7 @@
               "element": {
                 "id": "27e0d4c8-ee6a-4b80-949e-1ca319d81a82",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Prenons l’exemple de Malo, concepteur de site web dans une entreprise.&nbsp;Il est en train d’améliorer un site existant.</p><p>Pour chaque action de Malo, quelle va être la conséquence sur la sollication des serveurs, et donc sur la consommation d’énergie des centres de données ?&nbsp;🤔</p>"
               }
             },
@@ -348,6 +354,7 @@
                     {
                       "id": "0ac5c76d-8698-40bf-9b6c-fd815931686c",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Malo choisit d’illustrer la page d’accueil avec une vidéo plutôt qu’avec une photo.</p>"
                     },
                     {
@@ -390,6 +397,7 @@
                     {
                       "id": "74fcdfad-ef31-48c6-be27-03c06cbc28f2",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Malo choisit de compresser les images présentes sur le site.</p>"
                     },
                     {
@@ -432,6 +440,7 @@
                     {
                       "id": "523a1d70-ea60-498a-be0a-554d14e2907c",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Malo choisit d’activer la lecture automatique des vidéos, c’est-à-dire qu’à la fin d’une vidéo, une autre est lancée automatiquement sans action de l’utilisateur.</p>"
                     },
                     {
@@ -474,6 +483,7 @@
                     {
                       "id": "420482f8-f04b-441a-a8ed-9146b4787a71",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Malo se rend compte que le forum du site web a très peu d’activité.<br>Comme le forum est peu utilisé, il décide de le supprimer.</p>"
                     },
                     {
@@ -529,6 +539,7 @@
                     {
                       "id": "b56c9059-13a2-4357-b80d-63614674f3b9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Malo a donc parfois contribué à solliciter davantage les serveurs, mais parfois il a permis de réduire leur charge.<br></p>"
                     }
                   ]
@@ -538,6 +549,7 @@
                     {
                       "id": "d6f9a801-28d5-4b2e-80c5-95e1ab4abaa1",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>On appelle pratiques d’<strong>éco-conception</strong> l’ensemble des pratiques visant à <strong>réduire l’empreinte environnementale</strong>&nbsp;tout au long du cycle de vie d’un logiciel ou d’un produit&nbsp;: conception, développement, utilisation et fin de vie.</p>"
                     }
                   ]
@@ -547,6 +559,7 @@
                     {
                       "id": "b2328855-4a62-4909-b3cd-dd89682f43c2",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Mais ces pratiques d’éco-conception sont-elles appliquées ?</h5><p> Elles sont encore peu utilisées. Cependant, la prise de conscience progresse&nbsp;: de récents labels et référentiels poussent les entreprises à s’y intéresser.<br></p>"
                     }
                   ]
@@ -565,6 +578,7 @@
               "element": {
                 "id": "6379f16a-320d-4217-8b85-e5190f6bc29b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais, il n’y a pas que les concepteurs de site web qui peuvent agir.&nbsp;Il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
               }
             }
@@ -580,6 +594,7 @@
               "element": {
                 "id": "f1f75637-b690-46b1-b8c9-dde14fe6ae09",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dona travaille dans une entreprise qui conçoit des centres de données. <br>Elle anime une réunion avec son équipe pour trouver des pistes de solutions pour réduire les impacts environnementaux des futurs centres de données.<br></p>"
               }
             },
@@ -836,6 +851,7 @@
                     {
                       "id": "f7ede699-b068-472c-8c35-dd9ea5049edf",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Il existe donc plusieurs<strong> pistes de solutions techniques</strong> pour améliorer le coût environnemental des centres de données.</p><h5><br>Donc, le problème va bientôt être résolu ?</h5><p>\tCe n’est pas si simple. <br>Il est très <strong>difficile d’évaluer les apports</strong> de certaines solutions du fait de la multitude d’impacts. Une solution plus économe en énergie peut être plus coûteuse en eau.&nbsp;Aucune solution n’est parfaite.&nbsp;🤔<br>Et une conception <strong>plus responsable</strong> peut entraîner des <strong>coûts économiques</strong> importants. 💶<br></p>"
                     }
                   ]
@@ -845,6 +861,7 @@
                     {
                       "id": "75e9088f-97d4-45de-8631-5a84e7399b08",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Alors, comment inciter les acteurs du numérique à adopter des pratiques plus vertueuses ?</h5><p>La <strong>loi </strong>joue un rôle important pour encourager ces changements de pratiques.&nbsp;<br>Depuis 2019, un <strong>règlement de l’Union européenne</strong> définit des exigences d’<strong>éco-conception</strong> applicables aux exploitants de <strong>centres de données</strong>.&nbsp;♻️</p>"
                     },
                     {
@@ -875,6 +892,7 @@
               "element": {
                 "id": "8dde623f-d573-4782-925b-f3c0e50bf780",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li><strong>📈L’essor continu des usages numériques</strong>, amplifié par l’IA générative, entraîne une forte <strong>croissance des centres de données</strong> et de leurs<strong> impacts environnementaux</strong>. <br></li><li>📉En tant que concepteur de services numériques, <strong>réduire la sollicitation des centres de données</strong> est un geste efficace. <br></li><li>💡Il existe des <strong>pistes de solutions techniques </strong>pour réduire les impacts environnementaux des centres comme l’optimisation du fonctionnement des systèmes de refroidissement ou l’adoption d’énergie renouvelable.<br></li><li>⚖️ La <strong>législation </strong>joue un rôle important pour <strong>encourager </strong>les différents acteurs du numérique à adopter des <strong>pratiques plus vertueuses. </strong></li></ul>"
               }
             }
@@ -896,6 +914,7 @@
               "element": {
                 "id": "39d231e6-08e4-4db5-8acc-601dc4a0c8e1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons voir si vous avez retenu l’essentiel.</p><p><br></p>"
               }
             }

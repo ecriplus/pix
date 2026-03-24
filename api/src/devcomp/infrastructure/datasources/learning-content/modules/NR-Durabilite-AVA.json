@@ -32,6 +32,7 @@
               "element": {
                 "id": "0f94e969-ccc9-40fb-9357-fc7db47aca4a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Chaque année, plus d’un milliard de smartphones sont vendus dans le monde.</p>"
               }
             },
@@ -87,6 +88,7 @@
               "element": {
                 "id": "b463d10b-7b0e-403a-9ba2-d7fb5a4e9ef0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Changer son matériel informatique a un impact environnemental fort. Voyons pourquoi.</p>"
               }
             }
@@ -108,6 +110,7 @@
               "element": {
                 "id": "5b3d3352-284f-4520-80a2-fecf99a6fc14",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Du minerai à la sortie d’usine, un appareil informatique traverse plusieurs phases successives&nbsp;: l’extraction des matières premières, la production des composants électroniques et l’assemblage final. Ces étapes s’appellent la <strong>fabrication</strong>.</p>"
               }
             },
@@ -261,6 +264,7 @@
               "element": {
                 "id": "80b90a55-683b-4627-8538-5da724524046",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’étape de fabrication des appareils numériques est très polluante. Elle consomme beaucoup de ressources, d’<strong>énergie</strong> et d’<strong>eau</strong>, tout en générant de <strong>fortes pollutions</strong> et des <strong>déchets industriels</strong>.<br><br>Fabriquer toujours plus de nouveaux appareils numériques contribue à accentuer un phénomène déjà présent&nbsp;: nous utilisons aujourd’hui <strong>plus de ressources naturelles</strong> que ce que la terre peut <strong>régénérer</strong>, <strong>fournir</strong> ou <strong>absorber</strong>.🌍</p>"
               }
             }
@@ -276,6 +280,7 @@
               "element": {
                 "id": "8773c280-9e0e-423d-a698-9043db500dd0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Même si l’on est conscient de l’impact environnemental de la fabrication d’un nouvel appareil, garder ses appareils numériques plus longtemps n’est pas sans difficulté.</p>"
               }
             }
@@ -291,6 +296,7 @@
               "element": {
                 "id": "3c4e7e34-d4e4-43f9-ba12-386d413a7e56",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici Jeff. Il travaille dans une enseigne de vente de matériel informatique. Ce matin, plusieurs clients viennent demander conseil. </p>"
               }
             },
@@ -303,6 +309,7 @@
                     {
                       "id": "9d1ebcab-8f6d-475a-be06-6d388214c8de",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;Depuis la dernière mise à jour du système d’exploitation, mon téléphone rame et la batterie se vide vite. Avant, tout allait bien !&nbsp;»</p>"
                     },
                     {
@@ -358,6 +365,7 @@
                     {
                       "id": "1dc7dcad-7cd0-439b-97bd-85a2fbb9d127",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;Mon imprimante refuse d’imprimer. Elle affiche le message «&nbsp;cartouche vide&nbsp;» alors qu’il reste clairement de l’encre.&nbsp;»</p>"
                     },
                     {
@@ -413,6 +421,7 @@
                     {
                       "id": "d60b233d-a77e-4f31-bdef-dc12422d1741",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;J’ai voulu changer la batterie de mon ordinateur, mais je me suis aperçu qu’elle est collée et je suis incapable de le faire. Pourquoi ?&nbsp;»</p>"
                     },
                     {
@@ -461,6 +470,7 @@
                     {
                       "id": "6b2a37f6-d0e0-4e15-81e5-13708f76a024",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>«&nbsp;J’ai un ancien modèle PixPhone44 acheté l’an dernier, il marche encore très bien, mais leur nouveau modèle a un nouvel écran bord à bord et un assistant vocal “plus intelligent”. À votre avis, ça vaut le coup de changer ?&nbsp;»&nbsp;</p>"
                     },
                     {
@@ -529,6 +539,7 @@
                     {
                       "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile. Ce phénomène est puni par la loi.</p>"
                     }
                   ]
@@ -538,6 +549,7 @@
                     {
                       "id": "dd7638c3-1e9e-4d37-8deb-96b03c33aab5",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Comment font les fabricants pour réduire la durée d'usage des produits ?</h5><p>Ils utilisent différentes stratégies&nbsp;:</p><ul><li>L’<strong>obsolescence technique</strong>.</li><li>L’<strong>obsolescence logicielle</strong>.</li><li>L’<strong>obsolescence psychologique (ou par effet de mode)</strong>. Cette stratégie est très puissante. 🧠</li></ul>"
                     }
                   ]
@@ -556,6 +568,7 @@
               "element": {
                 "id": "b2b94d0c-976d-4326-b5d4-b2fcd916f89b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Alors, comment sortir du modèle «&nbsp;extraire, produire, consommer, jeter&nbsp;», également appelé système linéaire ?<br><br>En changeant de réflexe. Découvrons les autres gestes possibles.</p>"
               }
             }
@@ -571,6 +584,7 @@
               "element": {
                 "id": "8975a87a-3103-4b3c-ab41-3b9d585d619a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un schéma représentant différentes étapes de vie d’un produit. Quatre verbes ont été volontairement effacés et remplacés par les chiffres 1, 2, 3, 4.</p>"
               }
             },
@@ -754,6 +768,7 @@
                     {
                       "id": "12f35076-ff72-40f7-b41f-14a680bcb313",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>L’économie classique fonctionne de <strong>manière linéaire</strong>&nbsp;: on extrait, on produit, on consomme, puis on <strong>jette</strong>. 🚮 Chaque année, de nombreux appareils encore utilisables finissent à la poubelle. Ce sont autant d’occasions manquées de les réutiliser; autant de “trésors dans la poubelle”.</p>"
                     }
                   ]
@@ -763,6 +778,7 @@
                     {
                       "id": "967c7ce3-bb66-4b23-a3a1-c8ccf5f1ea00",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Alors, comment encourager des modèles plus durables ?</h5><p><strong>🔄 Réutiliser</strong>, <strong>réparer</strong>, <strong>réemployer</strong> et <strong>recycler</strong> sont des actions essentielles pour allonger la durée de vie des objets. Elles jouent un rôle clé dans une transition plus durable. </p><p>Mais l’économie circulaire ne suffit pas à elle seule. Certaines étapes, comme le recyclage, restent encore difficiles à mettre en œuvre à grande échelle et sont elles-mêmes énergivores. C’est pourquoi la priorité reste de <strong>réduire</strong> le nombre d’appareils numériques fabriqués&nbsp;: le meilleur déchet est celui que l’on ne produit pas.</p>"
                     }
                   ]
@@ -772,6 +788,7 @@
                     {
                       "id": "81d82353-d909-48c0-8791-732999302eab",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Y a-t-il des pistes de solution ?</h5><p>Oui&nbsp;: l’<strong>évolution de la loi</strong> est un levier important pour accompagner ce changement. De nombreux pays adoptent progressivement des règles pour encourager des produits plus durables et sanctionner les pratiques abusives. En France, par exemple, l’obsolescence programmée (technique ou logicielle) est <strong>interdite</strong> et un<strong> indice de réparabilité</strong> est désormais obligatoire sur les ordinateurs portables, afin d’aider les consommateurs à faire des choix plus responsables.</p>"
                     }
                   ]
@@ -796,6 +813,7 @@
               "element": {
                 "id": "fcffe15b-8162-4f23-bee7-aa81594b6e62",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>🌍 La <strong>fabrication des appareils numériques</strong> a des impacts environnementaux&nbsp;: émission de gaz à effet de serre, raréfaction des ressources métalliques précieuses, raréfaction de l’eau, pollution.<br><br></li><li>⏳ Les pratiques d’<strong>obsolescence</strong>, qu’elles soient technique, logicielle ou psychologique, <strong>raccourcissent la durée de vie réelle des appareils</strong>, ce qui augmente la demande en nouveaux équipements.<br><br></li><li>🔄 Réduire, réemployer, réparer et recycler à la place de jeter sont la base de l’<strong>économie circulaire</strong>, promouvant un modèle plus durable. <br><br></li><li>⚖️ Aujourd’hui, plusieurs pays mettent en place des <strong>dispositifs législatifs</strong> visant à encourager ces pratiques.</li></ul>"
               }
             }
@@ -872,6 +890,7 @@
                     {
                       "id": "784e5111-2234-4730-8cf4-c68b38dfb4ec",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Sélectionnez le <strong>type de stratégie </strong>mise en place pour réduire la durée de vie d’un appareil pour chacun des cas ci-dessous.</p>"
                     },
                     {
@@ -1034,6 +1053,7 @@
               "element": {
                 "id": "fcf77703-3fad-45ba-bf97-2ebd6e49c672",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez besoin d’un ordinateur portable. En consommateur averti, vous souhaitez réduire autant que possible votre empreinte écologique pour vous équiper. </p>"
               }
             },
@@ -1112,6 +1132,7 @@
               "element": {
                 "id": "5baa2fa9-a281-4e00-bf0f-008790c17132",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur les appareils numériques vendus en Europe, on peut voir des étiquettes “Energy” (sur les tablettes et smartphones) ou des étiquettes “indice de réparabilité” pour les ordinateurs portables. </p><p>Vous souhaitez acheter une nouvelle tablette et vous souhaitez comparer leurs caractéristiques.</p><p>Voici deux tablettes&nbsp;:</p>"
               }
             },

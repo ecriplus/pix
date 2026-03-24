@@ -31,6 +31,7 @@
               "element": {
                 "id": "dc2857df-3922-4355-b0f3-76f240e66ef8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce matin, Yvette a reçu un message surprenant. Elle en parle à Enzo.</p>"
               }
             },
@@ -126,6 +127,7 @@
               "element": {
                 "id": "9074de8f-e4df-47b0-bc96-46b6e08f058a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comme Yvette et Enzo, vous pouvez recevoir des messages qui proviennent d’inconnus.<br>Lisez le message ci-dessous.&nbsp;</p>"
               }
             },
@@ -146,6 +148,7 @@
               "element": {
                 "id": "e8b781ab-0765-4314-89e5-1ca621ad0d43",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce message est une tentative d’arnaque. La personne qui l’a écrit ne cherche pas à livrer un colis.</p>"
               }
             },
@@ -201,6 +204,7 @@
               "element": {
                 "id": "4c853dca-4711-4bb0-8bca-1480ee237245",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les tentatives d’arnaque par message sont des <strong>messages trompeurs</strong> envoyés à <strong>un très grand nombre de personnes</strong> par des escrocs, pour obtenir des informations personnelles.&nbsp;</p><p><br><strong>🤔 Bon à savoir</strong><br>On appelle cela de l’hameçonnage (ou phishing en anglais).</p>"
               }
             }
@@ -267,6 +271,7 @@
               "element": {
                 "id": "c22766bc-ff57-4f2b-a457-952ed34f4adc",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici plusieurs&nbsp;<strong>tentatives d’arnaque par message</strong>.</p>"
               }
             },
@@ -366,6 +371,7 @@
               "element": {
                 "id": "732eb744-d3f5-42b5-9d80-786b22f0e661",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>📌 À retenir</strong> <br>Un service public ou une entreprise commerciale sérieuse <strong>ne vous demandera pas vos données</strong> bancaires ou vos mots de passe par message ou par téléphone.</p>"
               }
             }
@@ -535,6 +541,7 @@
               "element": {
                 "id": "56b11acd-0a06-4ca7-8872-9da44dd4fc30",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir&nbsp;: ne communiquez pas d’informations personnelles et ignorez le message.</p><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaque sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
               }
             }
@@ -597,6 +604,7 @@
               "element": {
                 "id": "4ea0043a-48ca-4421-870a-ff0d3d7ba54e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les tentatives d’<strong>arnaque par message</strong> sont des <strong>messages trompeurs</strong> envoyés dans le but de <strong>collecter des informations personnelles</strong>. 📝</p>"
               }
             },
@@ -630,6 +638,7 @@
               "element": {
                 "id": "778b6439-3779-4f82-ab08-0f670c3fd281",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             }
@@ -713,6 +722,7 @@
                     {
                       "id": "97e21eda-86fd-46ce-82fb-0b5f321acf38",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Pour chacun des messages ci-dessous, indiquez s’il s’agit d’une tentative d’arnaque ou d’un message sûr.</p>"
                     },
                     {
@@ -923,6 +933,7 @@
               "element": {
                 "id": "d99fa99d-4e91-44e0-b9c2-f73fe71c0eff",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur Instagram, vous recevez un message de votre chanteur préféré.<br>Il vous envoie un lien pour  un super concours&nbsp;: gagner une rencontre avec lui après un de ses concerts.&nbsp;✨✨✨</p>"
               }
             },

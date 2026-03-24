@@ -32,6 +32,7 @@
               "element": {
                 "id": "d14837d6-8c5c-4071-931e-8cccc99aca2e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ava vient de finir sa première semaine au collège.<span aria-hidden=\"true\">🎒</span></p><p>À la maison, elle raconte sa journée à son père, Martin.</p><p>Lancez la vidéo pour voir leur discussion. ▶️ </p>"
               }
             },
@@ -65,6 +66,7 @@
               "element": {
                 "id": "9b36dc6e-8765-4c3d-bb9a-4eb6b9b12454",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le professeur d’Ava a mis des devoirs en ligne.</p><p>Son père, Martin, veut les regarder.</p>"
               }
             },
@@ -120,6 +122,7 @@
               "element": {
                 "id": "45accc21-d421-4444-9547-5905afa54cf6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Grâce à l'ENT, Martin peut suivre en ligne la scolarité d'Ava. Voyons cela ensemble !<br></p>"
               }
             }
@@ -148,6 +151,7 @@
                     {
                       "id": "90c81b47-b175-4f42-b5aa-914ec83025b8",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h4>L’espace numérique de travail (ENT) est le service en ligne proposé par l’établissement scolaire.</h4><p><br>L’ENT est utilisé par les élèves, les enseignants, les parents et les personnels d’éducation (CPE, principal...).</p><p>Il est accessible sur ordinateur, smartphone et tablette.</p><p><br><strong><span aria-hidden=\"true\">💡</span>&nbsp;Bon à savoir</strong> <br>L’ENT est sécurisé et il protège l’accès aux données personnelles des parents et des enfants.</p>"
                     }
                   ]
@@ -157,6 +161,7 @@
                     {
                       "id": "52089ff2-4c01-4047-a188-dbd5537caf18",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h4>La plupart des collèges et des lycées et certaines écoles primaire ont un ENT mais ce n'est pas obligatoire.</h4><p>Les ENT peuvent être différents d’un département ou d’une région à l’autre.</p><p><span aria-hidden=\"true\">✔️</span> Par exemple, en Corse les élèves utilisent l’ENT Leia et, en Occitanie, les élèves utilisent MonENTOccitanie.</p>"
                     }
                   ]
@@ -228,6 +233,7 @@
               "element": {
                 "id": "63803887-ac1c-4385-b9bc-65877d649134",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>L’ENT permet aux parents de suivre au quotidien la scolarité de leurs enfants&nbsp;:</h4><ul>    <li>voir l’emploi du temps</li>    <li>communiquer avec l’établissement scolaire</li>    <li>consulter le cahier de textes numérique</li></ul><p><span aria-hidden=\"true\">👉</span> En début d’année, l’établissement scolaire donne les informations pour se connecter à l’ENT&nbsp;: le lien vers l’ENT, un identifiant et un mot de passe. Il faut conserver ces informations tout au long de l'année.<br>Souvent, le compte Educonnect permet de se connecter à l'ENT.</p><p><br><strong><span aria-hidden=\"true\">💡</span>&nbsp;Bon à savoir</strong> <br>L’ENT n’est pas mis à jour la nuit (20h à 7h) ni le week-end, sauf en cas d’urgence décidé par l’établissement.<br>Par exemple, si un message est envoyé un samedi soir, son destinataire le recevra seulement à partir du lundi matin.</p>"
               }
             }
@@ -243,6 +249,7 @@
               "element": {
                 "id": "caf7638d-71d4-47d5-955f-a628eb12d756",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Aidez Martin à utiliser 3 fonctionnalités auxquelles il a accès depuis son compte parent sur l'ENT.</p>"
               }
             }
@@ -258,6 +265,7 @@
               "element": {
                 "id": "1e8e1448-5373-4272-9240-4b378dffcffb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Martin est connecté à l’ENT du collège d’Ava.</p><p>Répondez à chacune des questions ci-dessous.</p>"
               }
             },
@@ -437,6 +445,7 @@
               "element": {
                 "id": "cb612f94-310d-4b99-af47-3f0bf2b481ee",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À présent, revenons en vidéo sur les différents comptes qui existent sur l'ENT et plus particulièrement sur le compte parent et ses fonctionnalités.</p>"
               }
             },
@@ -470,6 +479,7 @@
               "element": {
                 "id": "0468f3c9-f946-4309-9768-4fda3f28a4b2",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>L’espace numérique de travail (ENT) est un&nbsp;<strong>service en ligne sécurisé  proposé par l’établissement scolaire</strong>.</li><li>Il est utilisé par<strong> les parents, les élèves, les professeurs et les personnels d’éducation</strong> pour accéder aux informations et outils<strong> liés à la vie scolaire</strong>.</li><li><strong>En fonction de son rôle</strong>, chaque utilisateur a accès à des <strong>fonctionnalités différentes</strong>. </li><li>L’ENT permet aux parents de<strong> suivre au quotidien la scolarité</strong> de leurs enfants.</li><li>Chaque utilisateur se connecte avec un<strong> identifiant</strong> et un <strong>mot de passe</strong>, fournis par l'établissement scolaire.</li></ul>"
               }
             }
@@ -555,6 +565,7 @@
               "element": {
                 "id": "7764df35-720c-4532-ac31-c8c7614017ba",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Regardons si vous avez bien retenu les usages conseillés du compte parent.</p>"
               }
             }
@@ -570,6 +581,7 @@
               "element": {
                 "id": "d4ac45bf-ba4d-4720-aa14-e8bae452956f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque situation, choisissez si l’utilisation du compte parent sur l'ENT est adaptée ou non.</p>"
               }
             },
@@ -684,6 +696,7 @@
               "element": {
                 "id": "5a4495bc-22f5-4a9a-aad5-531071bf33c9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant, testez votre mémoire. 🎯</p>"
               }
             },

@@ -101,6 +101,7 @@
               "element": {
                 "id": "d55e6ae8-8bb5-40e3-b256-1568a51ebe95",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons ensemble pourquoi <strong>autant de matières premières sont nécessaires</strong> pour un si petit objet.&nbsp;<br><br></p>"
               }
             }
@@ -326,6 +327,7 @@
                     {
                       "id": "fd4686e7-d519-425e-a6f0-f8b14c5d18f9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Aujourd’hui, la production d’appareils augmente partout dans le monde.</p><h5>🤔 Que provoque cette hausse continue ?</h5><p>La demande en métaux et en terres rares <strong>explose</strong>. Le numérique <strong>mobilise</strong> maintenant <strong>une grande part des réserves mondiales</strong> de matériaux comme le germanium ou l’indium.</p>"
                     }
                   ]
@@ -335,6 +337,7 @@
                     {
                       "id": "843b69d0-3f09-4c93-adb4-f57ffe20b587",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>💡Bon à savoir</strong></p><p>Les <strong>terres rares&nbsp;</strong>(néodyme, europium, yttrium, etc) sont des métaux <strong>essentiels aux appareils numériques&nbsp;</strong>(les ordinateurs, tablettes, smartphones, etc). Présentes en très faible concentration dans la terre, leur extraction demande beaucoup d’énergie, d’eau et de produits chimiques polluants.</p>"
                     }
                   ]
@@ -353,6 +356,7 @@
               "element": {
                 "id": "149fd62a-f59a-4534-8a74-30f7bcebc934",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que nous savons de quoi sont faits nos appareils, voyons <strong>ce que leur fabrication implique</strong> pour <strong>l’environnement et les populations</strong>.</p>"
               }
             }
@@ -372,6 +376,7 @@
                     {
                       "id": "ce66cf46-2ea1-4536-bfe6-506736e41df5",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Observez l’évolution de cette mine de Mongolie intérieure au fil des années. Répondez ensuite à la question ci-dessous.</p>"
                     },
                     {
@@ -425,6 +430,7 @@
                     {
                       "id": "3b059d97-625c-4010-a64f-7499e113a6bb",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Découvrez les étapes de création des batteries et répondez à la question ci-dessous.</p>"
                     },
                     {
@@ -567,6 +573,7 @@
                     {
                       "id": "4aa32b42-e1e5-42e6-bda8-259a57f04e19",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Lisez l’article et répondez à la question ci-dessous.&nbsp;</p>"
                     },
                     {
@@ -631,6 +638,7 @@
               "element": {
                 "id": "5d37b812-b5a9-4ebc-af92-260c6ede361e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’extraction des métaux nécessaires aux smartphones, ordinateurs et batteries a des <strong>impacts environnementaux et humains importants</strong>&nbsp;:</p><ul>    <li>une forte consommation d’eau</li>    <li>la pollution des sols</li>    <li>des risques pour la santé et les droits des populations locales</li></ul><h5>🤔 Tout cela, pour fabriquer nos smartphones et ordinateurs ?</h5><p>Oui. Ces métaux sont essentiels au fonctionnement des appareils numériques. Leur demande croissante pour fabriquer toujours plus d’appareils pèse fortement sur l’environnement et les droits humains.</p>"
               }
             }
@@ -646,6 +654,7 @@
               "element": {
                 "id": "138eea6b-49c9-449c-993d-0440fdf59a0b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez vu les impacts de l’extraction. Passons aux décisions du quotidien.</p>"
               }
             }
@@ -665,6 +674,7 @@
                     {
                       "id": "1a7e6933-9fd4-42ce-a844-44547efcd603",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Amandine a un souci d’ordinateur portable.</strong><br>Au bout de quelques années, son appareil commence à avoir <strong>des problèmes d’affichage</strong> et la batterie tient de moins en moins longtemps. Il fonctionne encore, mais est de plus en plus<strong> inconfortable à utiliser</strong>.</p>"
                     },
                     {
@@ -711,6 +721,7 @@
                     {
                       "id": "685e2165-8a4c-426c-b43d-5e48b6ce67ea",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Deux ans plus tard</strong>, Amandine commence une formation de graphiste.<br><strong>Son ordinateur</strong> réparé <strong>fonctionne toujours</strong>, mais il n’est <strong>plus assez puissant</strong> pour utiliser les logiciels de création dont elle a <strong>besoin</strong> (retouche photo, modélisation 3D, etc).<br><br></p>"
                     },
                     {
@@ -770,6 +781,7 @@
                     {
                       "id": "db56ae01-3e09-4601-83bf-338c6520d013",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Réparer ou prolonger l’utilisation</strong> d’un appareil permet d’éviter d’en fabriquer un nouveau.&nbsp; </p><h5>🤔 Et si j’ai besoin d’en changer ?</h5><p>Dans ce cas,<strong> choisir un appareil reconditionné</strong> est la meilleure option&nbsp;: il a déjà été fabriqué, puis <strong>testé, réparé et remis en état</strong>; ce qui lui donne une seconde vie et limite son impact. </p><h5><br></h5>"
                     }
                   ]
@@ -779,11 +791,13 @@
                     {
                       "id": "0612b141-3b5d-4ba9-9a12-cfc99392e67d",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Le reconditionné, c’est donc mieux pour la planète ?</h5><p>Pas toujours. Ces gestes sont efficaces <strong>seulement</strong> <strong>s’ils remplacent vraiment l’achat d’un produit neuf</strong>, pas s’ils viennent s’y ajouter.</p>"
                     },
                     {
                       "id": "5aafa8f3-3e00-416f-92e9-17d052c50516",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>💡Astuce</strong></p><p>Pensez à <strong>protéger</strong> vos appareils (coques, écrans, antivirus, etc) afin de les faire <strong>durer plus longtemps</strong> !&nbsp;</p>"
                     }
                   ]
@@ -808,6 +822,7 @@
               "element": {
                 "id": "b413213a-8e21-4985-8b39-80c70fa042f5",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>⛏️ Un ordinateur ou un téléphone contient plus de 50 métaux, dont plusieurs terres rares, extraits au prix d’une <strong>forte consommation d’eau</strong> douce, de <strong>pollution</strong> et de <strong>conditions de travail difficiles</strong>.</li>    <li>🔧 <strong>Faire durer</strong> ou <strong>réparer ses appareils</strong>, c’est éviter la production de nouveaux appareils, limiter l’extraction de métaux et la consommation d’eau.</li>    <li>♻️ Dans le cas d’un achat, <strong>choisir le reconditionné</strong> reste la solution la plus économe en ressources et la plus responsable.</li>    <li>🌍 <strong>Chaque geste compte.</strong> Remplacer une batterie, réparer un écran ou garder votre téléphone plus longtemps permet <strong>de produire moins</strong> et donc <strong>d’extraire moins de ressources</strong>.</li></ul>"
               }
             }

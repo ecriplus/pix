@@ -118,6 +118,7 @@
               "element": {
                 "id": "1fa1fc4c-90c4-456c-bd19-f2b83ff07856",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les<strong> biais de l’IA</strong> peuvent donc <strong>renforcer des stéréotypes</strong> (c’est-à-dire des clichés ou des idées toutes faites) et donc des discriminations.<br></p><p>Mais alors, d’où viennent les biais dans les réponses d’une IA générative ?</p>"
               }
             }
@@ -139,6 +140,7 @@
               "element": {
                 "id": "bc81d8b6-5e68-42bc-85de-0c408cbdc7c6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici ci-dessous des exemples issus du web. On les donne à l’IA générative pour s’entraîner. <br>Observez chaque document et répondez à la question.</p>"
               }
             },
@@ -293,6 +295,7 @@
                     {
                       "id": "2a3475d8-2ab7-4187-af90-1e9461c59dd3",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Vous l’avez vu&nbsp;: les <strong>IA génératives apprennent à partir des données trouvées sur internet</strong>. Ces données sont très nombreuses et diverses (articles Wikipédia, forums, banque d’images, etc.). 🌐</p><h5>🤔Mais ces données sont-elles neutres ?</h5><p>💡 Pas vraiment&nbsp;: elles reflètent souvent la <strong>culture </strong>ou les <strong>opinions </strong>des personnes qui les ont produites.<br>🌍 Par exemple, certains pays, langues ou points de vue sont plus présents que d’autres en ligne.</p>"
                     }
                   ]
@@ -302,6 +305,7 @@
                     {
                       "id": "f0e8bc19-f703-4a0d-a127-748e7767e67f",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>Résultat ?&nbsp; </h5><p>⚠️ Les réponses de l’IA peuvent reproduire ces <strong>biais </strong>sans s’en rendre compte. </p><p>Les réponses peuvent aussi refléter des <strong>discriminations </strong>existantes, au sein de la société.<br><br></p>"
                     }
                   ]
@@ -320,6 +324,7 @@
               "element": {
                 "id": "7aa3b4e6-abfb-4878-bef9-1eb88e601bfa",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais alors, comment ces données influencent-elles les réponses des IA génératives ?</p>"
               }
             }
@@ -335,6 +340,7 @@
               "element": {
                 "id": "99ea3082-9f59-435a-9da5-9cca98021669",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour comprendre, vous allez observer les données utilisées par une IA générative à partir d’un exemple&nbsp;: la recette du taboulé.</p>"
               }
             },
@@ -389,6 +395,7 @@
               "element": {
                 "id": "aba8fd9b-a0fd-42db-abfc-89ebc37fa983",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur internet, certains sujets ou points de vue sont beaucoup plus visibles que d’autres, ils sont parfois sur-représentés. 🌐</p><h5>🤔 Que se passe-t-il alors quand une IA apprend surtout à partir de ces contenus ? </h5><p>Le plus souvent, cette méthode a de très bons résultats. C’est pour cela qu’on l’utilise. </p><p>Cependant,&nbsp; l’IA risque de présenter plus souvent les idées <strong>sur-représentées</strong> dans ses réponses. &nbsp;</p><p>Et ce déséquilibre ne vient pas seulement d’internet ; les personnes qui conçoivent les IA font aussi des choix. En sélectionnant certaines langues ou sources, elles peuvent renforcer des <strong>biais ou des stéréotypes</strong>. ⚠️</p>"
               }
             }
@@ -404,6 +411,7 @@
               "element": {
                 "id": "f363fc36-1c2e-4cc0-b915-5afc4357db2b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les utilisateurs voient-ils les biais dans les réponses des logiciels d’IA générative ?</p>"
               }
             }
@@ -419,6 +427,7 @@
               "element": {
                 "id": "733394bb-1755-4f0e-a450-f1d3edb87c42",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Étudiez chacun des cas ci-dessous et répondez à la question.</p>"
               }
             },
@@ -503,6 +512,7 @@
                     {
                       "id": "286f56ef-fce5-4f34-a322-462fea5a7e75",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Sato n’a jamais été en France. Il pense que les Français portent souvent des bérets.</p>"
                     },
                     {
@@ -650,6 +660,7 @@
                     {
                       "id": "0e59aacb-120f-45eb-92f4-d53bbe983d7e",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Un biais dans une réponse d’IA peut être évident… ou passer complètement inaperçu. 👀</p><h5>🤔Savez-vous pourquoi nous tombons parfois dans le piège ?<br></h5><p>Parce que nous croyons plus facilement ce qui va dans le sens de nos idées. C’est ce qu’on appelle le <strong>biais de confirmation</strong>.<br> <br>Et souvent, si notre question contient une opinion,  l’<strong>IA a tendance à la confirmer plutôt qu’à la contredire.</strong></p>"
                     }
                   ]
@@ -659,6 +670,7 @@
                     {
                       "id": "93bac79a-191d-4cb2-9add-c2b464bffd85",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔Mais alors… que faire ? <br></h5><p>Il faut rester vigilant, garder un <strong>esprit critique</strong> et toujours <strong>vérifier les réponses</strong> de l’IA. </p><h5>Quelques astuces pour détecter des biais&nbsp;: <br></h5><p>Posez-vous les questions suivantes (si la réponse est «&nbsp;oui&nbsp;», attention 👀)&nbsp;:<br></p><ul><li>Y a-t-il des clichés ou stéréotypes ? 😕<br></li><li>Est-ce qu’un seul point de vue est présenté ? 🙈<br></li><li>Est-ce surtout des opinions plutôt que des faits ? 💭<br></li><li>Les exemples sont-ils tous trop semblables ? 🌍<br><br></li></ul>"
                     }
                   ]
@@ -683,6 +695,7 @@
               "element": {
                 "id": "32fa1627-38dc-4699-9a71-c14e8e6412df",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>Les <strong>données d’entraînement</strong> d’une IA générative peuvent contenir des opinions, des stéréotypes, des <strong>biais</strong>. Certaines préférences linguistiques ou culturelles y sont parfois <strong>sur-représentées</strong>. 📊</li><li>Comme l’IA produit ses réponses à partir de ce qui revient le plus souvent dans ses données, sans esprit critique, elle peut reproduire ces <strong>biais</strong>. 🔄</li><li>Les réponses de l’IA générative peuvent renforcer des idées toutes faites, des <strong>stéréotypes </strong>ou des <strong>situations discriminantes.</strong> ⚠️</li><li>Il faut aussi garder à l’esprit que nos propres <strong>biais de confirmation</strong> nous poussent à croire ce que nous pensons déjà. 🧠</li></ul>"
               }
             },
@@ -716,6 +729,7 @@
               "element": {
                 "id": "c7f36d45-34f2-44bd-b77b-543782c79884",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             }
@@ -806,6 +820,7 @@
               "element": {
                 "id": "b5a2256e-17da-4d27-93df-6ccc6defc85e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Observez les exemples de réponses obtenues avec une IA générative, puis répondez à la question ci-dessous.</p>"
               }
             },
@@ -957,6 +972,7 @@
                     {
                       "id": "430b4a5d-d0b0-465f-97f0-64eb7f1509df",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Thaïs a envie d’investir dans le bitcoin. </p><p>Elle demande conseil à une IA générative.</p><p>Aidez-là à <strong>limiter</strong> le <strong>biais de confirmation</strong>.</p>"
                     },
                     {
@@ -991,6 +1007,7 @@
                     {
                       "id": "369adc11-3be5-4c03-adb0-583b2ddad416",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Thaïs a lu la réponse de l’IA générative.</p>"
                     },
                     {
@@ -1040,6 +1057,7 @@
               "element": {
                 "id": "dedd40de-89dd-479e-a79e-ea1ba6b98646",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Après en avoir appris davantage sur les biais des IA, quelle résolution pourriez-vous prendre ?</p>"
               }
             },

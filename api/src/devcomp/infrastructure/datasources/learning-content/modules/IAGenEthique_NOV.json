@@ -79,6 +79,7 @@
               "element": {
                 "id": "7dc81673-0539-407f-a85b-a2d527ea2591",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les échanges avec une IA générative ne sont pas <strong>totalement privés</strong>. Voyons ensemble pourquoi et quelles peuvent être les <strong>conséquences</strong>.</p>"
               }
             }
@@ -100,6 +101,7 @@
               "element": {
                 "id": "058e0986-fc66-4e19-a470-614e4d47eacb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Lisez l’extrait suivant sur les conditions d’utilisation du logiciel d’IA générative ChatGPT. Ensuite, répondez à la question.</strong></p>"
               }
             },
@@ -108,6 +110,7 @@
               "element": {
                 "id": "0599e61c-c78e-4018-841f-0ac051284bb7",
                 "type": "text",
+                "tag": " ",
                 "content": "<blockquote>«&nbsp;<strong>Notre utilisation du contenu.</strong>&nbsp;Nous pouvons utiliser votre Contenu dans le monde entier pour fournir, maintenir, développer et améliorer nos Services, nous conformer à la législation applicable, faire respecter nos conditions et politiques et assurer la sécurité de nos Services. [...]&nbsp;Nous nous appuyons sur des systèmes automatisés et des contrôles humains pour identifier et traiter les contenus qui enfreignent nos Conditions, y compris nos Politiques d’utilisation.&nbsp;»</blockquote><p>Source&nbsp;: Conditions d’utilisation de ChatGPT<br><br></p>"
               }
             },
@@ -163,6 +166,7 @@
               "element": {
                 "id": "c580172e-4367-43c6-b292-fff75821621b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les messages envoyés à un logiciel d’IA <strong>sont enregistrés</strong>. Ils servent à <strong>améliorer le logiciel</strong> ou à <strong>produire des statistiques</strong>.</p><h5>🤔 Mais, les contenus des conversations peuvent-ils être partagés à d’autres ?</h5><p>Oui. Le fabricant d’une IA peut être contraint de partager vos conversations à la justice ou aux services de renseignement d’un pays.</p>"
               }
             }
@@ -178,6 +182,7 @@
               "element": {
                 "id": "5f0b926f-aadb-4d87-a9d1-f95424766291",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous savez que vos prompts sont conservés et pourquoi, voyons ce qu’il vaut mieux éviter d’écrire dans un prompt.</p>"
               }
             }
@@ -322,6 +327,7 @@
               "element": {
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ces exemples montrent qu’un prompt peut <strong>contenir des informations personnelles</strong> sans qu’on s’en rende compte. </p><p>Pour éviter ce problème, il faut se rappeler la règle suivante&nbsp;: un prompt doit rester précis tout en <strong>évitant d’inclure des informations personnelles, sensibles ou confidentielles</strong>.</p>"
               }
             }
@@ -337,6 +343,7 @@
               "element": {
                 "id": "cdb5615e-b4b2-4c39-b3be-655db6596bac",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous connaissez maintenant les informations à ne pas partager. Voyons quels effets cela peut produire lorsqu’on les donne malgré tout à une IA.</p>"
               }
             }
@@ -431,6 +438,7 @@
               "element": {
                 "id": "d0544bda-383f-4f85-9780-388b2a1c9d47",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Des informations personnelles (nom, adresse, etc.) peuvent réapparaître dans des réponses générées pour d’autres utilisateurs.<br><br></p><h5>🤔 L’IA copie-t-elle exactement vos données ?</h5><p>Dans la majorité des cas, l’IA ne recopie pas mot pour mot vos données. Mais certaines réponses peuvent s’appuyer sur des données réelles.</p><br>"
               }
             }
@@ -446,6 +454,7 @@
               "element": {
                 "id": "0a0f2f7a-655e-42d1-9fcb-68e3b88fa7f4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Des fabricants d’IA générative affirment que, dans certains cas, vos données sont protégées. Voyons cela de plus près.</p>"
               }
             }
@@ -461,6 +470,7 @@
               "element": {
                 "id": "766ba047-efd1-4dfa-9c2d-9eefa40e2454",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Claude</strong> est un logiciel d’intelligence artificielle (IA) générative.</p><p><strong>Claude for Work</strong> est la version payante de Claude <strong>pour les entreprises</strong>. L’extrait suivant figure sur la page officielle d’Anthropic, le fabricant du logiciel Claude for Work. </p><blockquote>«&nbsp;Par défaut, nous n’utilisons pas vos données Claude for Work pour entraîner nos modèles.&nbsp;»<br>Source&nbsp;: FAQ Anthropic</blockquote>"
               }
             },
@@ -516,6 +526,7 @@
               "element": {
                 "id": "3c84fd47-1f21-44df-9e62-910b444b0348",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La réutilisation de vos conversations par l’IA <strong>varie selon le type d’accès</strong>&nbsp;: gratuit, individuel payant ou entreprise. Vos données ne sont donc <strong>pas protégées de la même façon</strong>.</p>"
               }
             },
@@ -549,6 +560,7 @@
               "element": {
                 "id": "9cbfbaae-17ab-4316-ba32-2f8ca4531632",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li><strong>Les conversations avec un logiciel&nbsp;d’IA générative</strong> ne sont pas privées. Des informations peuvent être <strong>réutilisées</strong> pour améliorer l’IA et apparaître dans les résultats d’autres utilisateurs.</li><li>Un prompt doit décrire une <strong>situation générale</strong>, <strong>sans</strong> contenir de <strong>données personnelles</strong>, sensibles ou confidentielles.</li><li>Le type d’accès (gratuit, payant, etc.) change la façon dont vos données sont utilisées, mais <strong>la règle de prudence reste la même.</strong></li></ul>"
               }
             }
@@ -570,6 +582,7 @@
               "element": {
                 "id": "6d78aabb-e76a-43f5-9bbb-e48fce835283",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
@@ -768,6 +781,7 @@
               "element": {
                 "id": "f84b3777-ea6b-43ac-a49a-08207fbdc26b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Nadia a un souci non résolu avec le service client de la folie du hockey, un magasin de matériel sportif.&nbsp;Elle décide de demander à un logiciel d’IA générative de lui écrire une lettre recommandée.</strong>&nbsp;</p>"
               }
             },

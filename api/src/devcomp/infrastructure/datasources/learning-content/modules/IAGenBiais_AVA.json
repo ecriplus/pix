@@ -88,6 +88,7 @@
               "element": {
                 "id": "d1d4724c-aadc-4409-a0f5-fd8392e909e8",
                 "type": "text",
+                "tag": " ",
                 "content": "La plupart des logiciels d’intelligence artificielle appliquent des règles de sécurité qui peuvent bloquer certaines réponses. Mais ces règles ne sont pas les seules à influencer la manière dont l’IA répond. Voyons ensemble quelles directives l’IA suit et qui les définit."
               }
             }
@@ -109,6 +110,7 @@
               "element": {
                 "id": "b4adfe84-0c6c-4699-b1e3-5e1bbd27b5a4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une équipe de chercheurs déploie un logiciel d’IA générative dans une université afin d’observer les usages des étudiants.</p><p>Dans un premier temps, ils décident de laisser les étudiants l’utiliser librement. En analysant les premières demandes, l’une d’elles attire immédiatement leur attention&nbsp;:</p><blockquote>«&nbsp;Comment faire pour perdre 10 kilos très vite ?&nbsp;»</blockquote>"
               }
             },
@@ -164,6 +166,7 @@
               "element": {
                 "id": "6e9d0896-95ac-4c33-9c85-5116c318f35e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p> <strong>Les IA génératives sont entraînées sur de vastes ensembles de contenus</strong>, parfois biaisés ou problématiques. Sans <strong>règles de sécurité</strong>, elles peuvent produire des réponses <strong>injurieuses, discriminatoires</strong> ou faisant <strong>l’apologie de la violence et d’actes illégaux</strong>.&nbsp;🚫🤔 Comment réduire le risque que cela arrive ?</p><p>Pour limiter les risques, les éditeurs ajoutent des <strong>règles de sécurité</strong>.&nbsp;Cet encadrement du comportement de l’IA s’appelle<strong> l’alignement.</strong> </p><br><h5>🤔 Donc les éditeurs d’IA veulent toujours protéger les utilisateurs ?&nbsp;</h5><p>C’est dans leur intérêt, ces règles protègent les utilisateurs et évitent aux éditeurs d’éventuels problèmes juridiques. Mais on peut également imaginer une IA configurée pour être très permissive&nbsp;: tout dépend des choix faits par les éditeurs de l’IA.</p>"
               }
             }
@@ -179,6 +182,7 @@
               "element": {
                 "id": "11925a64-942e-4cb4-8266-a4f20bdd12b4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Nous avons vu les règles de sécurité, mais ce ne sont pas les seules règles qu’une IA doit suivre. Voyons maintenant <strong>comment ces règles influencent les réponses données par le logiciel d’IA générative</strong>.</p>"
               }
             }
@@ -194,6 +198,7 @@
               "element": {
                 "id": "b34d027f-877e-4156-9031-85c22d9e3c26",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les IA génératives ne répondent pas toutes de la même manière&nbsp;: leur comportement dépend des <strong>règles</strong> qui leur sont imposées. </p><p>Dans l’activité suivante, vous allez <strong>observer comment une même question peut produire des réponses différentes</strong> selon la règle imposée à l’IA.</p>"
               }
             },
@@ -352,6 +357,7 @@
               "element": {
                 "id": "eeb0f0fc-b7e7-462e-a64f-2a82ece8da94",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce que vous venez de voir est ce que l’on appelle l’<strong>alignement par prompt système</strong>&nbsp;: l’éditeur ajoute des consignes que l’IA doit suivre dans toutes ses réponses.</p><h5><br>🤔 Existe-t-il d’autres méthodes d’alignement ?</h5><p>Oui. Voici un tableau présentant les <strong>méthodes d’alignement les plus courantes</strong> d’un logiciel d’IA générative.<br><br></p><table> </table><table>    <caption class=\"sr-only\">Résumé des trois méthodes d’alignement</caption>    <thead>        <tr>            <th scope=\"col\"><br></th>            <th scope=\"col\">Prompt système</th>            <th scope=\"col\">Feedback humain</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">C’est quoi ?</th>            <td>Règle interne définie par l’éditeur&nbsp;: fixe le comportement par défaut de l’IA.</td>            <td>Des personnes évaluent les réponses données par le logiciel d’intelligence artificielle. Leurs jugements ajustent le comportement de l’IA.</td>        </tr>        <tr>            <th scope=\"row\">Qui le fait ?</th>            <td>Éditeurs de logiciels d’IA</td>            <td>Évaluateurs humains (souvent sur demande de l’éditeur)</td>        </tr>        <tr>            <th scope=\"row\">Visible par l’utilisateur ?</th>            <td>Non</td>            <td>Non</td>        </tr>    </tbody></table><p><strong><br></strong></p><p><strong>💡 Bon à savoir</strong></p><p>Le pré-prompt est une consigne comme le prompt système mais écrite par l’utilisateur. Cette consigne modifie le ton et la posture de l’IA. Il agit seulement pour la session en cours et ne modifie pas les règles internes du modèle.</p>"
               }
             }
@@ -367,6 +373,7 @@
               "element": {
                 "id": "0ca2a077-38b3-4ef6-a85a-9faa0627de4d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Que se passe-t-il lorsque <strong>les règles d’alignement</strong> entrent en conflit avec <strong>les demandes des utilisateurs</strong>&nbsp;?</p>"
               }
             }
@@ -382,6 +389,7 @@
               "element": {
                 "id": "32e1a18c-7185-46dc-a7ac-eb2a34c530f9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Imaginons qu’un logiciel d’IA générative utilise le&nbsp;<strong>prompt système</strong> suivant&nbsp;: </p><blockquote>«&nbsp;Si une demande implique un risque de blessure, tu dois privilégier la sécurité absolue, même si cela contredit l’objectif de l’utilisateur.&nbsp;»</blockquote>"
               }
             },
@@ -461,6 +469,7 @@
               "element": {
                 "id": "44697282-092b-4a1e-8f1e-8204bf7e6807",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quand le prompt système contredit la demande de l’utilisateur, l’IA peut avoir du mal à choisir quoi suivre.</p><h5><br>🤔 Et qu’est-ce que cela provoque&nbsp;?</h5><p>Des réponses incohérentes&nbsp;: hésitations, prudence excessive ou des erreurs. Même bien réglée, une IA ne réagit pas toujours de façon prévisible.</p>"
               }
             }
@@ -476,6 +485,7 @@
               "element": {
                 "id": "dcf7cd2b-9e49-4553-bea9-379511ddbcee",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Si l’alignement sert à contrôler le comportement d’une IA, <strong>observons ce qui se passe avec des alignements différents.</strong></p>"
               }
             }
@@ -576,6 +586,7 @@
               "element": {
                 "id": "c0782230-c4d9-4f63-bcce-49091b1bff42",
                 "type": "text",
+                "tag": " ",
                 "content": "<h5>🤔Qui décide des règles suivies par une IA générative&nbsp;?</h5><p>Ce sont <strong>les éditeurs de logiciels d’IA</strong> qui <strong>définissent les règles internes</strong> et les consignes de comportement. Ces éléments que l’utilisateur ne voit pas orientent la façon dont l’IA répond. 🔒</p><h5><br>🤔Pourquoi est-ce important&nbsp;?</h5><p>Parce que ces règles traduisent des façons différentes de concevoir ce qui est prudent, acceptable ou souhaitable dans une réponse. <strong>Les priorités varient selon les entreprises et les pays</strong>&nbsp;: certains insistent davantage sur la sécurité, d’autres sur la liberté d’expression, la neutralité ou le contrôle.</p><p><strong>Les IA actuelles sont conçues dans des contextes variés</strong>  <strong>ce qui influence leur manière d’aborder certains sujets. </strong>🌍</p>"
               }
             }
@@ -597,6 +608,7 @@
               "element": {
                 "id": "cb07c8fc-1cd8-4bb9-988c-0cf2bb7a855a",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li><strong>Les réponses d’une IA générative sont encadrées&nbsp;:</strong> leurs créateurs ajoutent un <strong>prompt système</strong>, un texte caché qui oriente toutes leurs réponses.</li>    <li><strong>Ce prompt système fait&nbsp;partie de l’«&nbsp;alignement&nbsp;»&nbsp;:</strong> un ensemble de techniques (dont le prompt système) qui vise notamment à limiter les contenus risqués.</li>    <li><strong>Cet alignement n’est pas parfait&nbsp;:</strong> lorsqu’un prompt système entre en conflit avec la demande de l’utilisateur ou avec ce que l’IA a appris, cela peut provoquer des <strong>erreurs</strong>, des <strong>hallucinations</strong> ou des <strong>réponses incohérentes</strong>.</li>    <li><strong>Les choix derrière ces règles ne sont pas neutres&nbsp;:</strong> ils reflètent les priorités d’entreprises ou d’institutions avec des<strong>&nbsp;visions du monde différentes</strong>.</li>    </ul>"
               }
             }
@@ -780,6 +792,7 @@
               "element": {
                 "id": "c686320b-b974-4974-8148-70b7fc86ff1b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous savez interpréter ce qui influence les réponses d’une IA.</p><p>Pour chaque discussion, donnez la raison pour laquelle la réponse du logiciel d’IA générative est orientée de cette façon.&nbsp;</p>"
               }
             },
@@ -978,6 +991,7 @@
               "element": {
                 "id": "52f3e50d-8fa0-4d7c-bde8-fb9af9e6016e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le site <a href=\"https://comparia.beta.gouv.fr/\" target=\"_blank\">compar:IA</a>&nbsp;vous permet d’envoyer un prompt à deux logiciels d’intelligence artificielle en même temps.&nbsp;</p><p>Allez sur le site et essayez le prompt suivant.&nbsp;</p><blockquote>\"Que s’est-il passé le 4 juin 1989 ?\"</blockquote><p>Observez les réponses de l’IA en comparant deux logiciels d’IA puis répondez à la question ci-dessous.</p>"
               }
             },

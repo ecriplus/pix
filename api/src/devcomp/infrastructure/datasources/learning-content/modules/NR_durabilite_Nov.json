@@ -31,6 +31,7 @@
               "element": {
                 "id": "c10b8f57-a99c-4af0-8515-838ad3eae5d1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Qu’est-ce que vous avez dans la main quand vous tenez votre smartphone ?</p><p>Survolez l’image pour découvrir les matériaux qui composent un smartphone.</p>"
               }
             },
@@ -64,6 +65,7 @@
               "element": {
                 "id": "fcd9b050-fd47-4fb3-ac15-5ace364815c3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un smartphone se compose de <strong>plus de 70 matériaux différents</strong>, et plus de la moitié sont des <strong>métaux</strong> ! Voyons ça de plus près.</p>"
               }
             }
@@ -145,6 +147,7 @@
               "element": {
                 "id": "49b9c73e-e2d7-45f7-8d4c-cbe33219ebdb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Certains métaux utilisés pour fabriquer les smartphones sont précieux, comme l’or et l’argent. On les trouve en très petite quantité dans le sol. Il faut donc extraire des tonnes de roche pour les récupérer, ce qui pose plusieurs problèmes :</p><ul> <li> Leur <strong>extraction pollue beaucoup</strong> dans les mines et aux alentours. </li> <li> Leur extraction nécessite <strong>beaucoup d’eau douce</strong>, qui n'est donc plus disponible pour l’agriculture et les populations locales. </li> <li> Les <strong>conditions de travail</strong> dans les mines sont souvent difficiles. </li> </ul> "
               }
             }
@@ -160,6 +163,7 @@
               "element": {
                 "id": "065435d0-7dca-4a4b-9c0e-7c9fce5ff797",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>On sait désormais d’où viennent certains matériaux. Mais où vont-ils avant d’arriver dans nos mains ? Découvrons-le ensemble.</p>"
               }
             }
@@ -331,6 +335,7 @@
               "element": {
                 "id": "678c96f8-8acc-46eb-97b0-3dc610bb5d8e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les différentes étapes de fabrication d’un smartphone se font dans <strong>plusieurs pays</strong>, souvent très éloignés. Les matériaux doivent donc être <strong>transportés par camion, train ou avion</strong>. Ces transports polluent et consomment beaucoup d’énergie, ce qui libère des gaz à effet de serre.</p>"
               }
             }
@@ -346,6 +351,7 @@
               "element": {
                 "id": "7532844f-4f8c-46bb-a3cf-ccbf7ef63e9d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La fabrication d’un smartphone est donc polluante. Mais que peut-on faire, à notre échelle, pour réduire ces impacts ?</p>"
               }
             }
@@ -447,6 +453,7 @@
               "element": {
                 "id": "c08cdadc-1fbc-4e9e-bf46-ebef6e73a2d7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (protéger l’écran, éviter la surchauffe, le débrancher une fois chargé, le recharger avant que la batterie soit trop faible).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
               }
             }
@@ -462,6 +469,7 @@
               "element": {
                 "id": "63b608dc-ce5b-468d-8c37-b9eaa9b3d469",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Parfois, le smartphone ne répond plus à nos besoins. Quels gestes adopter si on achète un nouveau modèle ?</p>"
               }
             }
@@ -481,6 +489,7 @@
                     {
                       "id": "f8126634-8250-49d3-b599-07e380e0c1a2",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ? </p>"
                     }
                   ]
@@ -557,6 +566,7 @@
                     {
                       "id": "da5b7905-7192-43d5-a7e5-7a196ea69a48",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Parfois, vous pouvez être <strong>obligés de changer de téléphone</strong> car il ne permet plus de faire ce dont vous avez besoin, ou qu'il est cassé mais impossible à réparer.</p>"
                     }
                   ]
@@ -566,6 +576,7 @@
                     {
                       "id": "2cb2eb55-f652-4003-9706-5a79cb427db0",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Si votre ancien smartphone fonctionne encore, il pourrait servir à quelqu'un d'autre. Pensez donc à <strong>le donner</strong> ou <strong>le vendre</strong>, ne le gardez pas dans un tiroir !</p>"
                     }
                   ]
@@ -575,11 +586,13 @@
                     {
                       "id": "d96098f4-08a5-4317-b1f4-7b79fd1b45a0",
                       "type": "text",
+                      "tag": " ",
                       "content": "Si votre ancien smartphone ne <strong>fonctionne plus</strong>, alors ne le jetez pas dans une poubelle quelconque !"
                     },
                     {
                       "id": "f1b636f3-4a9a-41df-adb4-7d3120b7fdb7",
                       "type": "text",
+                      "tag": " ",
                       "content": "Sur les smartphones, et la plupart des appareils électroniques, on trouve <strong>ce logo</strong> :"
                     },
                     {
@@ -598,11 +611,13 @@
                     {
                       "id": "697ffc30-66c1-4169-ae5b-305e1a26109e",
                       "type": "text",
+                      "tag": " ",
                       "content": "Il indique qu'ils ne doivent <strong>pas être jetés dans une poubelle classique</strong>. En effet, certains composants dégagent des fumées toxiques s'ils sont incinérés comme les déchets classiques."
                     },
                     {
                       "id": "46925f16-03eb-4911-93f4-7ddc7e6af4ee",
                       "type": "text",
+                      "tag": " ",
                       "content": "La bonne chose à faire est donc de <strong>déposer votre smartphone dans un point de collecte spécialisé</strong> pour que les composants soient récupérés ou recyclés."
                     }
                   ]
@@ -621,6 +636,7 @@
               "element": {
                 "id": "a38ed311-0b93-4b45-a1d7-94390e2b6c93",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Désormais, vous savez qu’utiliser un smartphone a des impacts, mais aussi qu’il est possible de les réduire avec de bons gestes.</p>"
               }
             }
@@ -642,6 +658,7 @@
               "element": {
                 "id": "84230031-3337-4598-9a01-971e1b8c8c47",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent très polluante et réalisée dans de <strong>très mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les étapes de fabrication d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>\n    <li>💡 Pour limiter l’impact d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
               }
             }
