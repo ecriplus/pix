@@ -1,23 +1,21 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
-import { setupRenderingTest } from 'ember-qunit';
+import Chevron from 'pix-orga/components/ui/chevron';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
+import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
+
 module('Integration | Component | Ui::Chevron', function (hooks) {
-  setupRenderingTest(hooks);
-
-  hooks.beforeEach(function () {
-    const onClick = sinon.stub();
-    this.set('isOpen', false);
-    this.set('click', onClick);
-    this.set('label', 'mon-label');
-  });
-
+  setupIntlRenderingTest(hooks);
   test('it renders', async function (assert) {
+    // given
+    const isOpen = false;
+    const onClick = sinon.stub();
+    const label = 'mon-label';
+
     // when
     const screen = await render(
-      hbs`<Ui::Chevron @isOpen={{this.isOpen}} @onClick={{this.click}} @ariaLabel={{this.label}} />`,
+      <template><Chevron @isOpen={{isOpen}} @onClick={{onClick}} @ariaLabel={{label}} /></template>,
     );
 
     // then
@@ -28,10 +26,10 @@ module('Integration | Component | Ui::Chevron', function (hooks) {
 
   test('it should open the accordion when it is closed', async function (assert) {
     // given
-    await render(hbs`<Ui::Chevron @isOpen={{this.isOpen}} @onClick={{this.click}} />`);
+    const onClick = sinon.stub();
 
     // when
-    this.set('isOpen', true);
+    await render(<template><Chevron @isOpen={{true}} @onClick={{onClick}} /></template>);
 
     // then
     assert.dom('[aria-expanded="true"]').exists();
@@ -39,11 +37,10 @@ module('Integration | Component | Ui::Chevron', function (hooks) {
 
   test('it should close the accordion when it already open', async function (assert) {
     // given
-    await render(hbs`<Ui::Chevron @isOpen={{this.isOpen}} @onClick={{this.click}} />`);
-    this.set('isOpen', true);
+    const onClick = sinon.stub();
 
     // when
-    this.set('isOpen', false);
+    await render(<template><Chevron @isOpen={{false}} @onClick={{onClick}} /></template>);
 
     // then
     assert.dom('[aria-expanded="false"]').exists();

@@ -1,7 +1,10 @@
 import { render } from '@1024pix/ember-testing-library';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
+import { on } from '@ember/modifier';
 import { click } from '@ember/test-helpers';
-import { module, test } from 'qunit';
+import { not } from 'ember-truth-helpers';
 import SelectableList from 'pix-orga/components/selectable-list';
+import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -16,18 +19,22 @@ module('Integration | Component | Selectable List', function (hooks) {
         { id: '2', label: 'Item 2' },
       ];
 
-      const screen = await render(<template><SelectableList @items={{items}}>
-  <:manager as |allSelected someSelected|>
-    <PixCheckbox @checked={{someSelected}} @isIndeterminate={{not allSelected}}>
-      <:label>Main checkbox</:label>
-    </PixCheckbox>
-  </:manager>
-  <:item as |checkboxItem toggleCheckboxItem isSelected|>
-    <PixCheckbox @id={{checkboxItem.id}} @checked={{isSelected}} {{on 'click' toggleCheckboxItem}}>
-      <:label>{{checkboxItem.label}}</:label>
-    </PixCheckbox>
-  </:item>
-</SelectableList></template>);
+      const screen = await render(
+        <template>
+          <SelectableList @items={{items}}>
+            <:manager as |allSelected someSelected|>
+              <PixCheckbox @checked={{someSelected}} @isIndeterminate={{not allSelected}}>
+                <:label>Main checkbox</:label>
+              </PixCheckbox>
+            </:manager>
+            <:item as |checkboxItem toggleCheckboxItem isSelected|>
+              <PixCheckbox @id={{checkboxItem.id}} @checked={{isSelected}} {{on "click" toggleCheckboxItem}}>
+                <:label>{{checkboxItem.label}}</:label>
+              </PixCheckbox>
+            </:item>
+          </SelectableList>
+        </template>,
+      );
 
       // when
       await click(screen.getByLabelText('Item 2'));

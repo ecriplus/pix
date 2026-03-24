@@ -1,6 +1,6 @@
 import { getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import LastParticipationDateTooltip from 'pix-orga/components/ui/last-participation-date-tooltip';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -9,7 +9,7 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
   setupIntlRenderingTest(hooks);
 
   test('should render the aria label of the component', async function (assert) {
-    const screen = await render(hbs`<Ui::LastParticipationDateTooltip />`);
+    const screen = await render(<template><LastParticipationDateTooltip /></template>);
 
     // then
     assert.ok(screen.getByLabelText(t('pages.participants-list.latest-participation-information-tooltip.aria-label')));
@@ -17,12 +17,10 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
 
   test('it should display campaign name', async function (assert) {
     // given
-    this.participant = { campaignName: 'Campagne annuelle' };
+    const campaignName = 'Campagne annuelle';
 
     // when
-    const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @campaignName={{this.participant.campaignName}} />`,
-    );
+    const screen = await render(<template><LastParticipationDateTooltip @campaignName={{campaignName}} /></template>);
 
     // then
     assert.ok(
@@ -36,12 +34,10 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
 
   test('it should display campaign type with ASSESSMENT type', async function (assert) {
     // given
-    this.participant = { campaignType: 'ASSESSMENT' };
+    const campaignType = 'ASSESSMENT';
 
     // when
-    const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @campaignType={{this.participant.campaignType}} />`,
-    );
+    const screen = await render(<template><LastParticipationDateTooltip @campaignType={{campaignType}} /></template>);
 
     // then
     assert.ok(
@@ -57,12 +53,10 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
 
   test('it should display campaign type with PROFILES_COLLECTION type', async function (assert) {
     // given
-    this.participant = { campaignType: 'PROFILES_COLLECTION' };
+    const campaignType = 'PROFILES_COLLECTION';
 
     // when
-    const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @campaignType={{this.participant.campaignType}} />`,
-    );
+    const screen = await render(<template><LastParticipationDateTooltip @campaignType={{campaignType}} /></template>);
 
     // then
     assert.ok(
@@ -80,11 +74,11 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
 
   test('it should display participation status with SHARED status', async function (assert) {
     // given
-    this.participant = { participationStatus: 'SHARED' };
+    const participationStatus = 'SHARED';
 
     // when
     const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @participationStatus={{this.participant.participationStatus}} />`,
+      <template><LastParticipationDateTooltip @participationStatus={{participationStatus}} /></template>,
     );
 
     // then
@@ -106,11 +100,11 @@ module('Integration | Component | Ui::LastParticipationDateTooltip', function (h
 
   test('it should display participation status with STARTED status', async function (assert) {
     // given
-    this.participant = { participationStatus: 'STARTED' };
+    const participationStatus = 'STARTED';
 
     // when
     const screen = await render(
-      hbs`<Ui::LastParticipationDateTooltip @participationStatus={{this.participant.participationStatus}} />`,
+      <template><LastParticipationDateTooltip @participationStatus={{participationStatus}} /></template>,
     );
 
     // then
