@@ -142,17 +142,19 @@ async function _toDomainWithComplementaryCertifications({
 }
 
 function _toComplementaryCertificationCourseResultForJuryCertification(
-  complementaryCertificationCourseResults,
+  complementaryCertificationCourseResults = [],
   badgeIdAndLabels,
 ) {
-  const { complementaryCertificationCourseResultWithExternal, commonComplementaryCertificationCourseResult } =
-    complementaryCertificationCourseResults.reduce((acc, certificationCourseResult) => {
-      if (certificationCourseResult.hasExternalJury) {
-        acc.complementaryCertificationResultWithExternal.push(certificationCourseResult);
-      } else {
-        acc.commonComplementaryCourseResult.push(certificationCourseResult);
-      }
-    });
+  const complementaryCertificationCourseResultWithExternal = [];
+  const commonComplementaryCertificationCourseResult = [];
+
+  complementaryCertificationCourseResults.forEach((certificationCourseResult) => {
+    if (certificationCourseResult.hasExternalJury) {
+      complementaryCertificationCourseResultWithExternal.push(certificationCourseResult);
+    } else {
+      commonComplementaryCertificationCourseResult.push(certificationCourseResult);
+    }
+  });
 
   const complementaryCertificationCourseResultsForJuryCertificationWithExternal =
     ComplementaryCertificationCourseResultForJuryCertificationWithExternal.from(

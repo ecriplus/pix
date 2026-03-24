@@ -36,5 +36,21 @@ describe('Unit | Serializer | JSONAPI | jury-comment-serializer', function () {
       const expectedCommentByJury = 'mon texte avec des espaces avant et après';
       expect(deserializedJuryComment).to.equal(expectedCommentByJury);
     });
+
+    it('should sanitize a null jury comment  to undefined', async function () {
+      const payload = {
+        data: {
+          attributes: {
+            'comment-by-jury': null,
+          },
+        },
+      };
+
+      // when
+      const deserializedJuryComment = await serializer.deserialize(payload);
+
+      // then
+      expect(deserializedJuryComment).to.equal(undefined);
+    });
   });
 });
