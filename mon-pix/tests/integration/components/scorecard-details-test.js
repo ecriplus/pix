@@ -1,8 +1,11 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { A } from '@ember/array';
+import Service from '@ember/service';
+import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -82,7 +85,15 @@ module('Integration | Component | scorecard-details', function (hooks) {
           level: 3,
           isFinished: true,
           tutorials: [],
+          save: sinon.stub().resolves(),
         });
+
+        this.owner.register(
+          'service:current-user',
+          class UserService extends Service {
+            user = { id: 123 };
+          },
+        );
       });
 
       test('should not display remainingPixToNextLevel', async function (assert) {
@@ -120,6 +131,48 @@ module('Integration | Component | scorecard-details', function (hooks) {
 
         // then
         assert.ok(screen.getByRole('button', t('pages.competence-details.actions.improve.label')));
+      });
+
+      test('should track improve competence button click', async function (assert) {
+        // given
+        const pixMetrics = this.owner.lookup('service:pix-metrics');
+        const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
+        const competenceEvaluation = this.owner.lookup('service:competence-evaluation');
+        sinon.stub(competenceEvaluation, 'improve').resolves();
+
+        scorecard.isImprovable = true;
+        scorecard.remainingDaysBeforeImproving = 0;
+        scorecard.pixScoreAheadOfNextLevel = 8;
+        this.set('scorecard', scorecard);
+        const screen = await render(hbs`<ScorecardDetails @scorecard={{this.scorecard}} />`);
+
+        // when
+        await click(
+          screen.getByRole('button', { name: new RegExp(t('pages.competence-details.actions.improve.label')) }),
+        );
+
+        // then
+        assert.ok(trackEventStub.calledWithExactly('improveCompetence', { competenceId: scorecard.competenceId }));
+      });
+
+      test('should track reset competence button click', async function (assert) {
+        // given
+        const pixMetrics = this.owner.lookup('service:pix-metrics');
+        const trackEventStub = sinon.stub(pixMetrics, 'trackEvent');
+
+        scorecard.isResettable = true;
+        scorecard.remainingDaysBeforeReset = 0;
+        this.set('scorecard', scorecard);
+        const screen = await render(hbs`<ScorecardDetails @scorecard={{this.scorecard}} />`);
+
+        // when
+        await click(
+          screen.getByRole('button', { name: new RegExp(t('pages.competence-details.actions.reset.label')) }),
+        );
+        const dialog = await screen.findByRole('dialog');
+        await click(within(dialog).getByRole('button', { name: t('pages.competence-details.actions.reset.label') }));
+        // then
+        assert.ok(trackEventStub.calledWithExactly('resetCompetence', { competenceId: scorecard.competenceId }));
       });
 
       test('should show the improving countdown if the remaining days before improving are different than 0', async function (assert) {

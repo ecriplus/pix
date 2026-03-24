@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import createGlimmerComponent from '../../helpers/create-glimmer-component';
 
-module('Unit | Component | scorecard-details ', function (hooks) {
+module('Unit | Component | scorecard-details', function (hooks) {
   setupTest(hooks);
 
   module('#tutorialsGroupedByTubeName', function () {
