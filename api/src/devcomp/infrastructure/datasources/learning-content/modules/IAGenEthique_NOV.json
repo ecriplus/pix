@@ -248,7 +248,7 @@
                         }
                       ],
                       "rephrase": "Peux-tu écrire une lettre pour un collègue médecin lui demandant de prendre en charge une patiente que je suis pour son diabète depuis 5 ans déjà ?",
-                      "feedback": "Ce prompt partage des données sensibles (identité, santé) : on anonymise les personnes et on reste volontairement général."
+                      "feedback": "Ce prompt partage des données personnelles (l'identité) et sensibles (de santé): il vaut mieux ne pas nommer les personnes individuellement."
                     },
                     {
                       "fullSentence": [
