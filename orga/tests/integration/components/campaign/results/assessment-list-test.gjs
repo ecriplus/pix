@@ -1,6 +1,6 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import AssessmentList from 'pix-orga/components/campaign/results/assessment-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -8,21 +8,22 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Campaign::Results::AssessmentList', function (hooks) {
   setupIntlRenderingTest(hooks);
-
   let store;
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
-    this.set('noop', sinon.stub());
-    this.set('groups', []);
-    this.set('badges', []);
-    this.set('stages', []);
-    this.set('divisions', []);
   });
+
+  const noop = sinon.stub();
+  const groups = [];
+  const badges = [];
+  const stages = [];
+  const divisions = [];
 
   test('it should display a link to access to result page', async function (assert) {
     // given
     this.owner.setupRouter();
+    const store = this.owner.lookup('service:store');
     const campaign = store.createRecord('campaign', { id: '1' });
 
     const participations = [
@@ -33,48 +34,41 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       },
     ];
 
-    this.set('campaign', campaign);
-    this.set('participations', participations);
-
     // when
     const screen = await render(
-      hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+      <template>
+        <AssessmentList
+          @campaign={{campaign}}
+          @participations={{participations}}
+          @onClickParticipant={{noop}}
+          @onFilter={{noop}}
+          @selectedDivisions={{divisions}}
+          @selectedGroups={{groups}}
+          @selectedBadges={{badges}}
+          @selectedStages={{stages}}
+        />
+      </template>,
     );
 
     // then
     assert.ok(screen.getByRole('link', { href: '/campagnes/1/evaluations/5' }));
   });
 
-  module('table informations', function (hooks) {
-    let campaign;
-
-    hooks.beforeEach(function () {
-      campaign = store.createRecord('campaign', {
+  module('table informations', function () {
+    test('it should display caption', async function (assert) {
+      //given
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         badges: [],
       });
-      this.set('campaign', campaign);
-    });
 
-    test('it should display caption', async function (assert) {
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @caption='Some caption for this table.'
-  @campaign={{this.campaign}}
-  @onFilter={{this.noop}}
-/>`,
+        <template>
+          <AssessmentList @caption="Some caption for this table." @campaign={{campaign}} @onFilter={{noop}} />
+        </template>,
       );
 
       // then
@@ -82,10 +76,16 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
     });
 
     test('it should display only basic headers', async function (assert) {
+      //given
+      const campaign = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+        participationsCount: 1,
+        badges: [],
+      });
+
       // when
-      const screen = await render(
-        hbs`<Campaign::Results::AssessmentList @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
-      );
+      const screen = await render(<template><AssessmentList @campaign={{campaign}} @onFilter={{noop}} /></template>);
 
       // then
       assert.ok(screen.getByRole('columnheader', { name: t('pages.campaign-results.table.column.last-name') }));
@@ -100,7 +100,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
   });
 
   module('when a participant has shared his results', function () {
-    test('it should display the participant’s results', async function (assert) {
+    test('it should display the participant\u2019s results', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
         id: '1',
@@ -120,21 +120,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
         rowCount: 1,
       };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -159,21 +158,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       const participations = [{ badges: [badge], isShared: true }];
       participations.meta = { rowCount: 1 };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -187,21 +185,22 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
           multipleSendings: true,
         });
 
-        this.set('campaign', campaign);
-        this.set('participations', []);
+        const participations = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+          <template>
+            <AssessmentList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+              @selectedDivisions={{divisions}}
+              @selectedGroups={{groups}}
+              @selectedBadges={{badges}}
+              @selectedStages={{stages}}
+            />
+          </template>,
         );
         // then
         assert.ok(
@@ -220,21 +219,21 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
             sharedResultCount: 77,
           },
         ];
-        this.set('campaign', campaign);
-        this.set('participations', participations);
 
         // when
         const screen = await render(
-          hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+          <template>
+            <AssessmentList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+              @selectedDivisions={{divisions}}
+              @selectedGroups={{groups}}
+              @selectedBadges={{badges}}
+              @selectedStages={{stages}}
+            />
+          </template>,
         );
 
         // then
@@ -250,12 +249,9 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
           participationsCount: 1,
           multipleSendings: true,
         });
-        this.set('campaign', campaign);
 
         // when
-        const screen = await render(
-          hbs`<Campaign::Results::AssessmentList @campaign={{this.campaign}} @onFilter={{this.noop}} />`,
-        );
+        const screen = await render(<template><AssessmentList @campaign={{campaign}} @onFilter={{noop}} /></template>);
 
         // then
         const evolutionHeader = screen.getByRole('columnheader', {
@@ -272,21 +268,22 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
           multipleSendings: false,
         });
 
-        this.set('campaign', campaign);
-        this.set('participations', []);
+        const participations = [];
 
         // when
         const screen = await render(
-          hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+          <template>
+            <AssessmentList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+              @selectedDivisions={{divisions}}
+              @selectedGroups={{groups}}
+              @selectedBadges={{badges}}
+              @selectedStages={{stages}}
+            />
+          </template>,
         );
         // then
         assert.notOk(screen.queryByText(t('pages.campaign-results.table.column.sharedResultCount')));
@@ -303,21 +300,21 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
             sharedResultCount: 77,
           },
         ];
-        this.set('campaign', campaign);
-        this.set('participations', participations);
 
         // when
         const screen = await render(
-          hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+          <template>
+            <AssessmentList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+              @selectedDivisions={{divisions}}
+              @selectedGroups={{groups}}
+              @selectedBadges={{badges}}
+              @selectedStages={{stages}}
+            />
+          </template>,
         );
 
         // then
@@ -335,21 +332,21 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
             sharedResultCount: 1,
           },
         ];
-        this.set('campaign', campaign);
-        this.set('participations', participations);
 
         // when
         const screen = await render(
-          hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+          <template>
+            <AssessmentList
+              @campaign={{campaign}}
+              @participations={{participations}}
+              @onClickParticipant={{noop}}
+              @onFilter={{noop}}
+              @selectedDivisions={{divisions}}
+              @selectedGroups={{groups}}
+              @selectedBadges={{badges}}
+              @selectedStages={{stages}}
+            />
+          </template>,
         );
 
         // then
@@ -374,21 +371,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
         rowCount: 1,
       };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -409,20 +405,19 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
         rowCount: 0,
       };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -430,7 +425,7 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
     });
   });
 
-  module('when the campaign doesn‘t have thematic results', function () {
+  module('when the campaign doesn\u2019t have thematic results', function () {
     test('it should not display thematic results column', async function (assert) {
       // given
       const campaign = store.createRecord('campaign', {
@@ -441,21 +436,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       const participations = [{}];
       participations.meta = { rowCount: 1 };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -475,21 +469,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       const participations = [];
       participations.meta = { rowCount: 1 };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then
@@ -509,21 +502,20 @@ module('Integration | Component | Campaign::Results::AssessmentList', function (
       const participations = [{ masteryRate: 0.6, isShared: true, reachedStage: 2, totalStage: 2 }];
       participations.meta = { rowCount: 1 };
 
-      this.set('campaign', campaign);
-      this.set('participations', participations);
-
       // when
       const screen = await render(
-        hbs`<Campaign::Results::AssessmentList
-  @campaign={{this.campaign}}
-  @participations={{this.participations}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-  @selectedBadges={{this.badges}}
-  @selectedStages={{this.stages}}
-/>`,
+        <template>
+          <AssessmentList
+            @campaign={{campaign}}
+            @participations={{participations}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+            @selectedBadges={{badges}}
+            @selectedStages={{stages}}
+          />
+        </template>,
       );
 
       // then

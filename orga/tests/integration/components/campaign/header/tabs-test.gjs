@@ -1,8 +1,8 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Tabs from 'pix-orga/components/campaign/header/tabs';
 import ENV from 'pix-orga/config/environment';
 import { EVENT_NAME } from 'pix-orga/helpers/metrics-event-name';
 import { module, test } from 'qunit';
@@ -19,7 +19,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     ENV.APP.API_HOST = originalAppHost;
   });
 
-  let store, screen, fileSaver, notifications, access_token, currentUser;
+  let screen, fileSaver, notifications, access_token, currentUser;
 
   hooks.beforeEach(function () {
     currentUser = this.owner.lookup('service:current-user');
@@ -38,7 +38,7 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
 
     ENV.APP.API_HOST = 'https://myapp.com';
     access_token = Symbol('ACCESS_TOKEN');
-    store = this.owner.lookup('service:store');
+
     fileSaver = this.owner.lookup('service:file-saver');
     notifications = this.owner.lookup('service:notifications');
     this.owner.setupRouter();
@@ -52,16 +52,18 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
   module('Common campaign navigation', function () {
     module('settings item', function () {
       test('it should display campaign settings item', async function (assert) {
-        this.campaign = store.createRecord('campaign', { id: '12' });
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', { id: '12' });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const settingsLink = screen.getByRole('link', { name: t('pages.campaign.tab.settings') });
 
         assert.dom(settingsLink).hasAttribute('href', '/campagnes/12/parametres');
       });
 
       test('should not display campaign settings item on combined course', async function (assert) {
-        this.campaign = store.createRecord('campaign', { id: '12', isFromCombinedCourse: true });
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', { id: '12', isFromCombinedCourse: true });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const settingsLink = screen.queryByRole('link', { name: t('pages.campaign.tab.settings') });
 
         assert.dom(settingsLink).doesNotExist();
@@ -69,23 +71,26 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     });
 
     test('it should display activity item', async function (assert) {
-      this.campaign = store.createRecord('campaign', { id: '12' });
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
 
       const activityLink = screen.getByRole('link', { name: t('pages.campaign.tab.activity') });
       assert.dom(activityLink).hasAttribute('href', '/campagnes/12');
     });
 
     test('it should display export button result', async function (assert) {
-      this.campaign = store.createRecord('campaign', { id: '12' });
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
 
       assert.ok(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
     });
 
     test('dipslay notification error on data export', async function (assert) {
-      this.campaign = store.createRecord('campaign', { id: '12' });
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', { id: '12' });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
 
       fileSaver.save.rejects();
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
@@ -94,31 +99,41 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     });
   });
 
-  module('When campaign type is ASSESSMENT', function (hooks) {
-    hooks.beforeEach(async function () {
-      this.campaign = store.createRecord('campaign', {
+  module('When campaign type is ASSESSMENT', function () {
+    test('it should display evaluation results item', async function (assert) {
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
         id: '13',
         sharedParticipationsCount: 10,
         type: 'ASSESSMENT',
       });
-    });
-
-    test('it should display evaluation results item', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 10 }) });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/resultats-evaluation');
     });
 
     test('it should display campaign analyse item', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        id: '13',
+        sharedParticipationsCount: 10,
+        type: 'ASSESSMENT',
+      });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.review') });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/analyse');
     });
 
     test('it should call export result with right context', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        id: '13',
+        sharedParticipationsCount: 10,
+        type: 'ASSESSMENT',
+      });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
       assert.ok(notifications.sendError.notCalled);
@@ -136,7 +151,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       });
 
       test('it should display disabled evaluation results item', async function (assert) {
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '13',
+          sharedParticipationsCount: 10,
+          type: 'ASSESSMENT',
+        });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 10 }) });
 
         assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/resultats-evaluation');
@@ -144,7 +165,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       });
 
       test('it should display disabled campaign analyse item', async function (assert) {
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '13',
+          sharedParticipationsCount: 10,
+          type: 'ASSESSMENT',
+        });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.review') });
 
         assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/analyse');
@@ -152,7 +179,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       });
 
       test('it should disable download campaign result button', async function (assert) {
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '13',
+          sharedParticipationsCount: 10,
+          type: 'ASSESSMENT',
+        });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const downloadResultButton = screen.getByRole('button', { name: t('pages.campaign.actions.export-results') });
 
         assert.dom(downloadResultButton).hasAttribute('aria-disabled', 'true');
@@ -160,30 +193,39 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     });
   });
 
-  module('When campaign type is PROFILES_COLLECTION', function (hooks) {
-    hooks.beforeEach(async function () {
-      // given
-      this.campaign = store.createRecord('campaign', {
+  module('When campaign type is PROFILES_COLLECTION', function () {
+    test('it should display  profile results item', async function (assert) {
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
         id: '13',
         type: 'PROFILES_COLLECTION',
         sharedParticipationsCount: 6,
       });
-    });
-
-    test('it should display  profile results item', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 6 }) });
 
       assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/profils');
     });
 
     test('it should not display analyse item', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        id: '13',
+        type: 'PROFILES_COLLECTION',
+        sharedParticipationsCount: 6,
+      });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       assert.notOk(screen.queryByRole('link', { name: t('pages.campaign.tab.review') }));
     });
 
     test('it should call export result with right context', async function (assert) {
-      screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        id: '13',
+        type: 'PROFILES_COLLECTION',
+        sharedParticipationsCount: 6,
+      });
+      screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
 
       assert.ok(notifications.sendError.notCalled);
@@ -198,7 +240,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
     test('it should push analytic event when user clicks on export button', async function (assert) {
       const pixMetrics = this.owner.lookup('service:pix-metrics');
 
-      const screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+      const store = this.owner.lookup('service:store');
+      const campaign = store.createRecord('campaign', {
+        id: '13',
+        type: 'PROFILES_COLLECTION',
+        sharedParticipationsCount: 6,
+      });
+      const screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
 
       // when
       await click(screen.getByRole('button', { name: t('pages.campaign.actions.export-results') }));
@@ -213,7 +261,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       });
 
       test('it should display disabled profile results item', async function (assert) {
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '13',
+          type: 'PROFILES_COLLECTION',
+          sharedParticipationsCount: 6,
+        });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const resultsLink = screen.getByRole('link', { name: t('pages.campaign.tab.results', { count: 6 }) });
 
         assert.dom(resultsLink).hasAttribute('href', '/campagnes/13/profils');
@@ -221,7 +275,13 @@ module('Integration | Component | Campaign::Header::Tabs', function (hooks) {
       });
 
       test('it should display a disabled download campaign result button', async function (assert) {
-        screen = await render(hbs`<Campaign::Header::Tabs @campaign={{this.campaign}} />`);
+        const store = this.owner.lookup('service:store');
+        const campaign = store.createRecord('campaign', {
+          id: '13',
+          type: 'PROFILES_COLLECTION',
+          sharedParticipationsCount: 6,
+        });
+        screen = await render(<template><Tabs @campaign={{campaign}} /></template>);
         const downloadResultButton = screen.getByRole('button', { name: t('pages.campaign.actions.export-results') });
 
         assert.dom(downloadResultButton).hasAttribute('aria-disabled', 'true');

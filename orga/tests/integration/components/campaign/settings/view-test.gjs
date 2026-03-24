@@ -1,7 +1,7 @@
 import { render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import View from 'pix-orga/components/campaign/settings/view';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
@@ -28,12 +28,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is ASSESSMENT', function () {
       test('it should display assessment type', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.campaign-type.assessment'))).exists();
@@ -42,12 +42,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
     module('when type is PROFILES_COLLECTION', function () {
       test('it should display profile collection campaign', async function (assert) {
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILES_COLLECTION',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.campaign-type.profiles-collection'))).exists();
@@ -56,12 +56,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
     module('when type is EXAM', function () {
       test('it should display profile collection campaign', async function (assert) {
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'EXAM',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.campaign-type.exam'))).exists();
@@ -73,13 +73,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is ASSESSMENT', function () {
       test('it should display target profile related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           targetProfileName: 'profil cible de la campagne 1',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('profil cible de la campagne 1')).exists();
@@ -87,13 +87,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
       test('it should display target profile description related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           targetProfileDescription: 'Description du profile cible',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('Description du profile cible')).exists();
@@ -101,27 +101,25 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
       test('it should display target profile tubes count related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           targetProfileTubesCount: 3,
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert
           .dom(
-            screen.getByText(
-              t('common.target-profile-details.subjects', { value: this.campaign.targetProfileTubesCount }),
-            ),
+            screen.getByText(t('common.target-profile-details.subjects', { value: campaign.targetProfileTubesCount })),
           )
           .exists();
       });
 
       test('it should display with account when simplified access is false', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           targetProfile: store.createRecord('target-profile', {
             isSimplifiedAccess: false,
@@ -129,7 +127,7 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.with-account')));
@@ -137,7 +135,7 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
       test('it should display without account when simplified access is true', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           targetProfile: store.createRecord('target-profile', {
             isSimplifiedAccess: true,
@@ -145,7 +143,7 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.ok(screen.getByText(t('common.target-profile-details.simplified-access.without-account')));
@@ -154,20 +152,20 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('Badge context', function () {
         test('it should not display target profile thematic result when empty related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             targetProfileThematicResultCount: 0,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert
             .dom(
               screen.queryByText(
                 t('common.target-profile-details.thematic-results', {
-                  value: this.campaign.targetProfileThematicResultCount,
+                  value: campaign.targetProfileThematicResultCount,
                 }),
               ),
             )
@@ -176,20 +174,20 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display target profile thematic result related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             targetProfileThematicResultCount: 1,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert
             .dom(
               screen.getByText(
                 t('common.target-profile-details.thematic-results', {
-                  value: this.campaign.targetProfileThematicResultCount,
+                  value: campaign.targetProfileThematicResultCount,
                 }),
               ),
             )
@@ -200,13 +198,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('Display Result', function () {
         test('it should display target profile result with stars when stages related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             targetProfileHasStage: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByLabelText(t('common.target-profile-details.results.star'))).exists();
@@ -214,13 +212,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display target profile result with percentage when no stages related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             targetProfileHasStage: false,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByLabelText(t('common.target-profile-details.results.percent'))).exists();
@@ -231,13 +229,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is EXAM', function () {
       test('it should display target profile related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'EXAM',
           targetProfileName: 'profil cible de la campagne 1',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('profil cible de la campagne 1')).exists();
@@ -245,13 +243,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
       test('it should display target profile description related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'EXAM',
           targetProfileDescription: 'Description du profile cible',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('Description du profile cible')).exists();
@@ -259,20 +257,18 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
       test('it should display target profile tubes count related to campaign', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'EXAM',
           targetProfileTubesCount: 3,
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert
           .dom(
-            screen.getByText(
-              t('common.target-profile-details.subjects', { value: this.campaign.targetProfileTubesCount }),
-            ),
+            screen.getByText(t('common.target-profile-details.subjects', { value: campaign.targetProfileTubesCount })),
           )
           .exists();
       });
@@ -280,20 +276,20 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('Badge context', function () {
         test('it should not display target profile thematic result when empty related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             targetProfileThematicResultCount: 0,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert
             .dom(
               screen.queryByText(
                 t('common.target-profile-details.thematic-results', {
-                  value: this.campaign.targetProfileThematicResultCount,
+                  value: campaign.targetProfileThematicResultCount,
                 }),
               ),
             )
@@ -302,20 +298,20 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display target profile thematic result related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             targetProfileThematicResultCount: 1,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert
             .dom(
               screen.getByText(
                 t('common.target-profile-details.thematic-results', {
-                  value: this.campaign.targetProfileThematicResultCount,
+                  value: campaign.targetProfileThematicResultCount,
                 }),
               ),
             )
@@ -326,13 +322,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('Display Result', function () {
         test('it should display target profile result with stars when stages related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             targetProfileHasStage: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByLabelText(t('common.target-profile-details.results.star'))).exists();
@@ -340,13 +336,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display target profile result with percentage when no stages related to campaign', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             targetProfileHasStage: false,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByLabelText(t('common.target-profile-details.results.percent'))).exists();
@@ -356,13 +352,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
     module('when type is PROFILES_COLLECTION', function () {
       test('it should not display target profile', async function (assert) {
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILE_COLLECTION',
           targetProfileName: 'profil cible inexistant',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByText('profil cible inexistant')).doesNotExist();
@@ -374,12 +370,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when externalIdLabel is set', function () {
       test('it should display the externalIdLabel', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           externalIdLabel: 'externalIdLabel',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('externalIdLabel')).exists();
@@ -389,12 +385,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when externalIdLabel is not set', function () {
       test('it should not display the externalIdLabel', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           externalIdLabel: null,
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByText(t('pages.campaign-settings.external-user-id-label'))).doesNotExist();
@@ -418,10 +414,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
           prescriber = prescriber;
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', { code: '1234' });
+        const campaign = store.createRecord('campaign', { code: '1234' });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('root-url/1234')).exists();
@@ -445,10 +441,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         }
         this.owner.register('service:currentUser', CurrentUserStub);
 
-        this.campaign = store.createRecord('campaign', { code: '1234' });
+        const campaign = store.createRecord('campaign', { code: '1234' });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByText('root-url/1234')).doesNotExist();
@@ -460,13 +456,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is ASSESSMENT', function () {
       test('it should display the campaign title', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'ASSESSMENT',
           title: 'Mon titre de Campagne',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('Mon titre de Campagne')).exists();
@@ -476,13 +472,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is EXAM', function () {
       test('it should display the campaign title', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'EXAM',
           title: 'Mon titre de Campagne',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText('Mon titre de Campagne')).exists();
@@ -492,13 +488,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is PROFILES_COLLECTION', function () {
       test('it should not display the campaign title', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILES_COLLECTION',
           title: 'Mon titre de Campagne',
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByText('Mon titre de Campagne')).doesNotExist();
@@ -509,10 +505,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
   module('on Archived action display', function () {
     test('it should display the button archived', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', { isArchived: false });
+      const campaign = store.createRecord('campaign', { isArchived: false });
 
       // when
-      const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+      const screen = await render(<template><View @campaign={{campaign}} /></template>);
       // then
       assert.dom(screen.getByRole('button', { name: t('pages.campaign-settings.actions.archive') })).exists();
     });
@@ -526,10 +522,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
           prescriber = { isAdminOfTheCurrentOrganization: false };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', { isArchived: false, ownerId: 1 });
+        const campaign = store.createRecord('campaign', { isArchived: false, ownerId: 1 });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.queryByRole('button', { name: t('pages.campaign-settings.actions.edit') })).doesNotExist();
@@ -543,10 +539,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
           prescriber = { isAdminOfTheCurrentOrganization: true };
         }
         this.owner.register('service:currentUser', CurrentUserStub);
-        this.campaign = store.createRecord('campaign', { isArchived: false });
+        const campaign = store.createRecord('campaign', { isArchived: false });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.actions.edit'))).exists();
@@ -556,10 +552,10 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when the campaign is archived', function () {
       test('it should not display the button modify', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', { isArchived: true });
+        const campaign = store.createRecord('campaign', { isArchived: true });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert
@@ -573,24 +569,24 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
     module('when type is PROFILES_COLLECTION', function () {
       test('it should display multiple sendings label', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILES_COLLECTION',
         });
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.title'))).exists();
       });
 
       test('it should display tooltip with multiple sendings explanatory text', async function (assert) {
         // given
-        this.campaign = store.createRecord('campaign', {
+        const campaign = store.createRecord('campaign', {
           type: 'PROFILES_COLLECTION',
           multipleSendings: true,
         });
 
         // when
-        const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+        const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
         // then
         assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.tooltip.text'))).exists();
@@ -599,13 +595,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('when multiple sendings is true', function () {
         test("it should display 'oui'", async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'PROFILES_COLLECTION',
             multipleSendings: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.status.enabled'))).exists();
@@ -615,13 +611,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('when multiple sendings is false', function () {
         test("it should display 'Non'", async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'PROFILES_COLLECTION',
             multipleSendings: false,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.status.disabled'))).exists();
@@ -633,12 +629,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('when organization feature enableMultipleSending is false', function () {
         test('it should not display multiple sendings label or tooltip', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.multiple-sendings.title'))).doesNotExist();
@@ -649,13 +645,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should not display reset to zero label or tooltip', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             targetProfileAreKnowledgeElementsResettable: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
@@ -674,22 +670,22 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display multiple sendings label', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.title'))).exists();
         });
 
         test('it should display tooltip with multiple sendings explanatory text', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.tooltip.text'))).exists();
@@ -705,13 +701,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
         test('it should display reset to zero label as enabled when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             multipleSendings: true,
             targetProfileAreKnowledgeElementsResettable: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
             .parentNode;
@@ -722,13 +718,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display the reset to zero label as disabled when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             multipleSendings: true,
             targetProfileAreKnowledgeElementsResettable: false,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
             .parentNode;
@@ -739,12 +735,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display tooltip with reset to zero explanatory text', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             multipleSendings: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.reset-to-zero.tooltip.text'))).exists();
@@ -760,26 +756,26 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
         test('it should not display reset to zero label when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             multipleSendings: false,
             targetProfileAreKnowledgeElementsResettable: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
         });
 
         test('it should not display the reset to zero label when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'ASSESSMENT',
             multipleSendings: false,
             targetProfileAreKnowledgeElementsResettable: false,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
         });
@@ -790,12 +786,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
       module('when organization feature enableMultipleSending is false', function () {
         test('it should not display multiple sendings label or tooltip', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.multiple-sendings.title'))).doesNotExist();
@@ -806,13 +802,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should not display reset to zero label or tooltip', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             targetProfileAreKnowledgeElementsResettable: true,
           });
 
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
@@ -831,22 +827,22 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display multiple sendings label', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.title'))).exists();
         });
 
         test('it should display tooltip with multiple sendings explanatory text', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.multiple-sendings.tooltip.text'))).exists();
@@ -862,13 +858,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
         test('it should display reset to zero label as enabled when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             multipleSendings: true,
             targetProfileAreKnowledgeElementsResettable: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
             .parentNode;
@@ -879,13 +875,13 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display the reset to zero label as disabled when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             multipleSendings: true,
             targetProfileAreKnowledgeElementsResettable: false,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           const resetToZeroNode = screen.getByText(t('pages.campaign-settings.reset-to-zero.title')).parentNode
             .parentNode;
@@ -896,12 +892,12 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
 
         test('it should display tooltip with reset to zero explanatory text', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             multipleSendings: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
 
           // then
           assert.dom(screen.getByText(t('pages.campaign-settings.reset-to-zero.tooltip.text'))).exists();
@@ -917,26 +913,26 @@ module('Integration | Component | Campaign::Settings::View', function (hooks) {
         });
         test('it should not display reset to zero label when targetProfileAreKnowledgeElementsResettable is true', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             multipleSendings: false,
             targetProfileAreKnowledgeElementsResettable: true,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
         });
 
         test('it should not display the reset to zero label when targetProfileAreKnowledgeElementsResettable is false', async function (assert) {
           // given
-          this.campaign = store.createRecord('campaign', {
+          const campaign = store.createRecord('campaign', {
             type: 'EXAM',
             multipleSendings: false,
             targetProfileAreKnowledgeElementsResettable: false,
           });
           // when
-          const screen = await render(hbs`<Campaign::Settings::View @campaign={{this.campaign}} />`);
+          const screen = await render(<template><View @campaign={{campaign}} /></template>);
           // then
           assert.dom(screen.queryByText(t('pages.campaign-settings.reset-to-zero.title'))).doesNotExist();
         });

@@ -1,6 +1,6 @@
 import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import CampaignFilters from 'pix-orga/components/campaign/filter/campaign-filters';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,19 +9,19 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign::Filter::CampaignFilters', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    this.set('triggerFilteringSpy', () => {});
-    this.set('onClickClearFiltersSpy', sinon.stub());
-  });
+  const triggerFilteringSpy = () => {};
+  const onClickClearFiltersSpy = sinon.stub();
 
   test('it should display filters', async function (assert) {
     // when
     const screen = await render(
-      hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFilteringSpy}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-/>`,
+      <template>
+        <CampaignFilters
+          @onFilter={{triggerFilteringSpy}}
+          @onClearFilters={{onClickClearFiltersSpy}}
+          @numResults={{1}}
+        />
+      </template>,
     );
 
     // then
@@ -34,23 +34,25 @@ module('Integration | Component | Campaign::Filter::CampaignFilters', function (
 
   module('With clear all filters button', function () {
     test('it should reset all filters on button clear filters click', async function (assert) {
-      //giver
-      this.set('nameFilter', 'toto');
+      //given
+      const nameFilter = 'toto';
       // when
       await render(
-        hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFilteringSpy}}
-  @nameFilter={{this.nameFilter}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-/>`,
+        <template>
+          <CampaignFilters
+            @onFilter={{triggerFilteringSpy}}
+            @nameFilter={{nameFilter}}
+            @onClearFilters={{onClickClearFiltersSpy}}
+            @numResults={{1}}
+          />
+        </template>,
       );
 
       // When
       await clickByName(t('common.filters.actions.clear'));
 
       // then
-      sinon.assert.called(this.onClickClearFiltersSpy);
+      sinon.assert.called(onClickClearFiltersSpy);
       assert.ok(true);
     });
   });
@@ -59,12 +61,14 @@ module('Integration | Component | Campaign::Filter::CampaignFilters', function (
     test('it should not show creator input', async function (assert) {
       // given / when
       const screen = await render(
-        hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFilteringSpy}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-  @listOnlyCampaignsOfCurrentUser={{true}}
-/>`,
+        <template>
+          <CampaignFilters
+            @onFilter={{triggerFilteringSpy}}
+            @onClearFilters={{onClickClearFiltersSpy}}
+            @numResults={{1}}
+            @listOnlyCampaignsOfCurrentUser={{true}}
+          />
+        </template>,
       );
 
       // then
@@ -75,15 +79,12 @@ module('Integration | Component | Campaign::Filter::CampaignFilters', function (
   test('it triggers the filter when a text is searched for campaign name', async function (assert) {
     // given
     const triggerFiltering = sinon.stub();
-    this.set('triggerFiltering', triggerFiltering);
 
     // when
     await render(
-      hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFiltering}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-/>`,
+      <template>
+        <CampaignFilters @onFilter={{triggerFiltering}} @onClearFilters={{onClickClearFiltersSpy}} @numResults={{1}} />
+      </template>,
     );
 
     await fillByLabel(t('pages.campaigns-list.filter.by-name'), 'Sal');
@@ -95,15 +96,12 @@ module('Integration | Component | Campaign::Filter::CampaignFilters', function (
   test('it triggers the filter when a text is searched for owner', async function (assert) {
     // given
     const triggerFiltering = sinon.stub();
-    this.set('triggerFiltering', triggerFiltering);
 
     // when
     await render(
-      hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFiltering}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-/>`,
+      <template>
+        <CampaignFilters @onFilter={{triggerFiltering}} @onClearFilters={{onClickClearFiltersSpy}} @numResults={{1}} />
+      </template>,
     );
 
     await fillByLabel(t('pages.campaigns-list.filter.by-owner'), 'Sal');
@@ -115,11 +113,13 @@ module('Integration | Component | Campaign::Filter::CampaignFilters', function (
   test('[A11Y] it should make filters container accessible', async function (assert) {
     // when
     const screen = await render(
-      hbs`<Campaign::Filter::CampaignFilters
-  @onFilter={{this.triggerFilteringSpy}}
-  @onClearFilters={{this.onClickClearFiltersSpy}}
-  @numResults={{1}}
-/>`,
+      <template>
+        <CampaignFilters
+          @onFilter={{triggerFilteringSpy}}
+          @onClearFilters={{onClickClearFiltersSpy}}
+          @numResults={{1}}
+        />
+      </template>,
     );
 
     // then

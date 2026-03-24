@@ -1,6 +1,6 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ProfileList from 'pix-orga/components/campaign/results/profile-list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -10,35 +10,37 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
   setupIntlRenderingTest(hooks);
 
   let store;
+  const noop = sinon.stub();
+  const divisions = [];
+  const groups = [];
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
-    this.set('noop', sinon.stub());
-    this.set('divisions', []);
-    this.set('groups', []);
   });
 
   module('table informations', function () {
     test('it should display table caption', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
       });
-      this.profiles = [];
-      this.profiles.meta = { rowCount: 0 };
+      const profiles = [];
+      profiles.meta = { rowCount: 0 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -49,25 +51,27 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
   module('table headers', function () {
     test('it should display evolution header with tooltip and shared profile count when campaign is multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         multipleSendings: true,
       });
-      this.profiles = [];
-      this.profiles.meta = { rowCount: 0 };
+      const profiles = [];
+      profiles.meta = { rowCount: 0 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -82,25 +86,27 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should not display evolution header or shared profile count if campaign is not multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         multipleSendings: false,
       });
-      this.profiles = [];
-      this.profiles.meta = { rowCount: 0 };
+      const profiles = [];
+      profiles.meta = { rowCount: 0 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -114,12 +120,12 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
   module('when there are profiles', function () {
     test('it should display the profile list', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'John',
           lastName: 'Doe',
@@ -133,18 +139,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           sharedAt: null,
         },
       ];
-      this.profiles.meta = { rowCount: 2 };
+      profiles.meta = { rowCount: 2 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -159,13 +167,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should not display evolution if campaign is not multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         multipleSendings: false,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'Alice',
           lastName: 'Red',
@@ -174,18 +182,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           sharedAt: new Date(2020, 1, 1),
         },
       ];
-      this.profiles.meta = { rowCount: 1 };
+      profiles.meta = { rowCount: 1 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -194,13 +204,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should display correct evolution if campaign is multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 4,
         multipleSendings: true,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'John',
           lastName: 'Doe',
@@ -230,18 +240,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           sharedAt: new Date(2020, 1, 1),
         },
       ];
-      this.profiles.meta = { rowCount: 4 };
+      profiles.meta = { rowCount: 4 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       const rows = screen.getAllByRole('row');
@@ -255,13 +267,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should display number of profiles shares if campaign is multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         multipleSendings: true,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'John',
           lastName: 'Doe',
@@ -271,18 +283,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           sharedAt: new Date(2020, 1, 1),
         },
       ];
-      this.profiles.meta = { rowCount: 1 };
+      profiles.meta = { rowCount: 1 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -291,13 +305,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should not display number of profiles shares if campaign is not multiple sendings', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
         multipleSendings: false,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'John',
           lastName: 'Doe',
@@ -306,18 +320,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           sharedAt: new Date(2020, 1, 1),
         },
       ];
-      this.profiles.meta = { rowCount: 1 };
+      profiles.meta = { rowCount: 1 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -326,25 +342,27 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should display the profile list with external id', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         externalIdLabel: 'identifiant externe',
         participationsCount: 1,
       });
-      this.profiles = [{ participantExternalId: '123' }];
-      this.profiles.meta = { rowCount: 1 };
+      const profiles = [{ participantExternalId: '123' }];
+      profiles.meta = { rowCount: 1 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -354,13 +372,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
     test('it should display participant certification profile info when shared', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         externalIdLabel: 'identifiant externe',
         participationsCount: 1,
       });
-      this.profiles = [
+      const profiles = [
         {
           firstName: 'Jane',
           lastName: 'Doe',
@@ -370,18 +388,20 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
           certifiableCompetencesCount: 5,
         },
       ];
-      this.profiles.meta = { rowCount: 1 };
+      profiles.meta = { rowCount: 1 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -394,13 +414,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
     test('it should display a link to access participant profile', async function (assert) {
       // given
       this.owner.setupRouter();
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         code: 'AAAAAA111',
         participationsCount: 1,
       });
-      this.profiles = [
+      const profiles = [
         {
           id: 7,
           lastName: 'Todori',
@@ -410,14 +430,16 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -429,13 +451,13 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
       locale.setCurrentLocale('en');
 
       this.owner.setupRouter();
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         code: 'AAAAAA111',
         participationsCount: 1,
       });
-      this.profiles = [
+      const profiles = [
         {
           id: 7,
           lastName: 'Todori',
@@ -445,14 +467,16 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then
@@ -463,24 +487,26 @@ module('Integration | Component | Campaign::Results::ProfileList', function (hoo
   module('when there is no profile', function () {
     test('it should display no profil when hasParticipations filtered', async function (assert) {
       // given
-      this.campaign = store.createRecord('campaign', {
+      const campaign = store.createRecord('campaign', {
         id: '1',
         name: 'campagne 1',
         participationsCount: 1,
       });
-      this.profiles = [];
-      this.profiles.meta = { rowCount: 0 };
+      const profiles = [];
+      profiles.meta = { rowCount: 0 };
 
       // when
       const screen = await render(
-        hbs`<Campaign::Results::ProfileList
-  @campaign={{this.campaign}}
-  @profiles={{this.profiles}}
-  @onClickParticipant={{this.noop}}
-  @onFilter={{this.noop}}
-  @selectedDivisions={{this.divisions}}
-  @selectedGroups={{this.groups}}
-/>`,
+        <template>
+          <ProfileList
+            @campaign={{campaign}}
+            @profiles={{profiles}}
+            @onClickParticipant={{noop}}
+            @onFilter={{noop}}
+            @selectedDivisions={{divisions}}
+            @selectedGroups={{groups}}
+          />
+        </template>,
       );
 
       // then

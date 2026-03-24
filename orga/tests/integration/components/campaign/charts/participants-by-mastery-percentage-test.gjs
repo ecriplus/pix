@@ -1,6 +1,6 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ParticipantsByMasteryPercentage from 'pix-orga/components/campaign/charts/participants-by-mastery-percentage';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -24,8 +24,6 @@ module('Integration | Component | Campaign::Charts::ParticipantsByMasteryPercent
       { masteryRate: '1.00', count: 5 },
     ];
 
-    this.set('campaignId', campaignId);
-
     const store = this.owner.lookup('service:store');
     const adapter = store.adapterFor('campaign-stats');
     dataFetcher = sinon.stub(adapter, 'getParticipationsByMasteryRate');
@@ -41,9 +39,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByMasteryPercent
 
   test('it should display chart for participation distribution', async function (assert) {
     // given && when
-    const screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByMasteryPercentage @campaignId={{this.campaignId}} />`,
-    );
+    const screen = await render(<template><ParticipantsByMasteryPercentage @campaignId={{campaignId}} /></template>);
 
     // then
     assert.ok(screen.getByText(t('charts.participants-by-mastery-percentage.title')));
@@ -51,9 +47,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByMasteryPercent
 
   test('it should display repartition on list', async function (assert) {
     // given && when
-    const screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByMasteryPercentage @campaignId={{this.campaignId}} />`,
-    );
+    const screen = await render(<template><ParticipantsByMasteryPercentage @campaignId={{campaignId}} /></template>);
 
     // then
     const list = screen.getByRole('list');

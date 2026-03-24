@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import Dashboard from 'pix-orga/components/campaign/activity/dashboard';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -36,9 +36,9 @@ module('Integration | Component | Campaign::Activity::Dashboard', (hooks) => {
   });
 
   test('it displays right data', async function (assert) {
-    this.set('campaign', { id: '1' });
+    const campaign = { id: '1' };
 
-    const screen = await render(hbs`<Campaign::Activity::Dashboard @campaign={{this.campaign}} />`);
+    const screen = await render(<template><Dashboard @campaign={{campaign}} /></template>);
 
     assert.ok(screen.getByText('4'));
   });

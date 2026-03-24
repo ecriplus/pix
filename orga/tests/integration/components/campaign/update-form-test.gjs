@@ -1,6 +1,6 @@
 import { clickByName, fillByLabel, render as renderScreen } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import UpdateForm from 'pix-orga/components/campaign/update-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -9,20 +9,22 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign::UpdateForm', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
+  const cancelSpy = () => {};
+  const updateCampaignSpy = (event) => event.preventDefault();
 
   hooks.beforeEach(async function () {
     store = this.owner.lookup('service:store');
-
-    this.campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
-
-    this.set('cancelSpy', () => {});
-    this.set('updateCampaignSpy', (event) => event.preventDefault());
   });
 
   test('[a11y] it should display a message that some inputs are required', async function (assert) {
+    // given
+    const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
     // when
     const screen = await renderScreen(
-      hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+      <template>
+        <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+      </template>,
     );
 
     // then
@@ -31,9 +33,14 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
 
   module('When campaign type is ASSESSMENT', function () {
     test('it should display campaign title input', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       // when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // then
@@ -42,9 +49,14 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
     });
 
     test('it should contain inputs, attributes, information block, validation and cancel buttons', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       // when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // then
@@ -58,7 +70,7 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
 
     test('it should send campaign update action when submitted', async function (assert) {
       // given
-      this.campaign = await store.createRecord('campaign', {
+      const campaign = await store.createRecord('campaign', {
         name: 'campaign',
         type: 'ASSESSMENT',
         ownerFirstName: 'Jon',
@@ -66,10 +78,12 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
         ownerId: 666,
       });
 
-      this.updateCampaignSpy = sinon.stub();
+      const updateCampaignSpy = sinon.stub();
 
       await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // when
@@ -77,14 +91,19 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       await clickByName('Modifier');
 
       //then
-      sinon.assert.called(this.updateCampaignSpy);
+      sinon.assert.called(updateCampaignSpy);
       assert.ok(true);
     });
 
     test('it should display campaign custom landing page input', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       //when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       //then
@@ -94,9 +113,14 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
     });
 
     test('it should explain which informations will be visible to organization-learners', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       //when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       //then
@@ -118,15 +142,16 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
     });
   });
 
-  module('When campaign type is EXAM', function (hooks) {
-    hooks.beforeEach(async function () {
-      this.campaign = await store.createRecord('campaign', { name: 'campaign', type: 'EXAM', ownerId: 666 });
-    });
-
+  module('When campaign type is EXAM', function () {
     test('it should display campaign title input', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       // when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // then
@@ -135,9 +160,14 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
     });
 
     test('it should contain inputs, attributes, information block, validation and cancel buttons', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       // when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // then
@@ -151,7 +181,7 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
 
     test('it should send campaign update action when submitted', async function (assert) {
       // given
-      this.campaign = await store.createRecord('campaign', {
+      const campaign = await store.createRecord('campaign', {
         name: 'campaign',
         type: 'ASSESSMENT',
         ownerFirstName: 'Jon',
@@ -159,10 +189,12 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
         ownerId: 666,
       });
 
-      this.updateCampaignSpy = sinon.stub();
+      const updateCampaignSpy = sinon.stub();
 
       await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // when
@@ -170,14 +202,19 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
       await clickByName('Modifier');
 
       //then
-      sinon.assert.called(this.updateCampaignSpy);
+      sinon.assert.called(updateCampaignSpy);
       assert.ok(true);
     });
 
     test('it should display campaign custom landing page input', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       //when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       //then
@@ -187,9 +224,14 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
     });
 
     test('it should explain which informations will be visible to organization-learners', async function (assert) {
+      // given
+      const campaign = await store.createRecord('campaign', { name: 'campaign', type: 'ASSESSMENT', ownerId: 666 });
+
       //when
       const screen = await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       //then
@@ -214,7 +256,7 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
   module('When campaign type is PROFILES_COLLECTION', function () {
     test('it should not display campaign title input', async function (assert) {
       // given
-      this.campaign = await store.createRecord('campaign', {
+      const campaign = await store.createRecord('campaign', {
         name: 'campaign',
         type: 'PROFILES_COLLECTION',
         ownerId: 666,
@@ -222,7 +264,9 @@ module('Integration | Component | Campaign::UpdateForm', function (hooks) {
 
       // when
       await renderScreen(
-        hbs`<Campaign::UpdateForm @campaign={{this.campaign}} @onSubmit={{this.updateCampaignSpy}} @onCancel={{this.cancelSpy}} />`,
+        <template>
+          <UpdateForm @campaign={{campaign}} @onSubmit={{updateCampaignSpy}} @onCancel={{cancelSpy}} />
+        </template>,
       );
 
       // then

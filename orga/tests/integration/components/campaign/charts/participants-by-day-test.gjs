@@ -1,6 +1,6 @@
 import { render, within } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ParticipantsByDay from 'pix-orga/components/campaign/charts/participants-by-day';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -12,9 +12,6 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
   let dataFetcher;
 
   hooks.beforeEach(async function () {
-    // given
-    this.set('campaignId', campaignId);
-
     const store = this.owner.lookup('service:store');
     const adapter = store.adapterFor('campaign-stats');
     dataFetcher = sinon.stub(adapter, 'getParticipationsByDay');
@@ -33,7 +30,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
 
     // when
     const screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByDay @campaignId={{this.campaignId}} @shouldDisplayAssessmentLabels={{true}} />`,
+      <template><ParticipantsByDay @campaignId={{campaignId}} @shouldDisplayAssessmentLabels={{true}} /></template>,
     );
 
     assert.strictEqual(screen.getAllByText(t('charts.participants-by-day.labels-a11y.date')).length, 2);
@@ -54,7 +51,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
 
     // when
     const screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByDay @campaignId={{this.campaignId}} @shouldDisplayAssessmentLabels={{true}} />`,
+      <template><ParticipantsByDay @campaignId={{campaignId}} @shouldDisplayAssessmentLabels={{true}} /></template>,
     );
 
     const { startedTable, sharedTable } = getTables(screen);
@@ -76,7 +73,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
 
     // when
     const screen = await render(
-      hbs`<Campaign::Charts::ParticipantsByDay @campaignId={{this.campaignId}} @shouldDisplayAssessmentLabels={{true}} />`,
+      <template><ParticipantsByDay @campaignId={{campaignId}} @shouldDisplayAssessmentLabels={{true}} /></template>,
     );
 
     const { sharedTable } = getTables(screen);
@@ -102,7 +99,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
 
       // when
       const screen = await render(
-        hbs`<Campaign::Charts::ParticipantsByDay @campaignId={{this.campaignId}} @shouldDisplayAssessmentLabels={{true}} />`,
+        <template><ParticipantsByDay @campaignId={{campaignId}} @shouldDisplayAssessmentLabels={{true}} /></template>,
       );
 
       const { sharedTable } = getTables(screen);
@@ -129,7 +126,7 @@ module('Integration | Component | Campaign::Charts::ParticipantsByDay', function
 
       // when
       const screen = await render(
-        hbs`<Campaign::Charts::ParticipantsByDay @campaignId={{this.campaignId}} @shouldDisplayAssessmentLabels={{true}} />`,
+        <template><ParticipantsByDay @campaignId={{campaignId}} @shouldDisplayAssessmentLabels={{true}} /></template>,
       );
 
       const { startedTable } = getTables(screen);

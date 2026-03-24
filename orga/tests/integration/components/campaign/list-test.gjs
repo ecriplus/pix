@@ -1,7 +1,7 @@
 import { fillByLabel, render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import List from 'pix-orga/components/campaign/list';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -10,20 +10,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Campaign::List', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    this.set('noop', sinon.stub());
-  });
+  const noop = sinon.stub();
 
   module('When there are no campaigns to display', function () {
     test('it should display an empty list message', async function (assert) {
       // given
       const campaigns = [];
       campaigns.meta = { rowCount: 0 };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -35,11 +32,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
     test('should display filter banner', async function (assert) {
       const campaigns = [];
       campaigns.meta = { rowCount: 0 };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -49,7 +45,7 @@ module('Integration | Component | Campaign::List', function (hooks) {
 
   module('When there are campaigns to display', function () {
     module('@showCampaignOwnerFilter', function (hooks) {
-      let campaigns = [];
+      const campaigns = [];
 
       hooks.beforeEach(function () {
         const store = this.owner.lookup('service:store');
@@ -59,20 +55,21 @@ module('Integration | Component | Campaign::List', function (hooks) {
           code: 'AAAAAA111',
           type: 'PROFILES_COLLECTION',
         });
-        campaigns = [campaign];
+        campaigns.push(campaign);
         campaigns.meta = { rowCount: campaigns.length };
-        this.set('campaigns', campaigns);
       });
 
       test('it should show the owner filter ', async function (assert) {
         // when
         const screen = await render(
-          hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @hideCampaignOwnerFilter={{false}}
-/>`,
+          <template>
+            <List
+              @campaigns={{campaigns}}
+              @onFilter={{noop}}
+              @onClickCampaign={{noop}}
+              @hideCampaignOwnerFilter={{false}}
+            />
+          </template>,
         );
 
         // then
@@ -81,12 +78,14 @@ module('Integration | Component | Campaign::List', function (hooks) {
       test('it should hide the owner filter ', async function (assert) {
         // when
         const screen = await render(
-          hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @hideCampaignOwnerFilter={{true}}
-/>`,
+          <template>
+            <List
+              @campaigns={{campaigns}}
+              @onFilter={{noop}}
+              @onClickCampaign={{noop}}
+              @hideCampaignOwnerFilter={{true}}
+            />
+          </template>,
         );
 
         // then
@@ -105,11 +104,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       });
       const campaigns = [campaign1];
       campaigns.meta = { rowCount: 1 };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -136,11 +134,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -171,11 +168,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -198,12 +194,9 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 1,
       };
-      this.set('campaigns', campaigns);
 
       // when
-      await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
-      );
+      await render(<template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>);
 
       // then
       assert.dom('a[href="/campagnes/1"]').exists();
@@ -228,11 +221,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -259,11 +251,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -291,11 +282,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -319,11 +309,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 1,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -354,16 +343,12 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @showCampaignOwner={{true}}
-/>`,
+        <template>
+          <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @showCampaignOwner={{true}} />
+        </template>,
       );
 
       // then
@@ -392,11 +377,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 2,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -415,11 +399,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 1,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -438,11 +421,10 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 1,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
@@ -459,17 +441,13 @@ module('Integration | Component | Campaign::List', function (hooks) {
         campaigns.meta = {
           rowCount: 2,
         };
-        this.set('campaigns', campaigns);
-        this.set('canDelete', true);
+        const canDelete = true;
 
         // when
         const screen = await render(
-          hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{this.canDelete}}
-/>`,
+          <template>
+            <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @canDelete={{canDelete}} />
+          </template>,
         );
 
         // then
@@ -483,17 +461,18 @@ module('Integration | Component | Campaign::List', function (hooks) {
     // given
     const campaigns = [];
     campaigns.meta = { rowCount: 0 };
-    this.set('campaigns', campaigns);
 
     // when
     const screen = await render(
-      hbs`<Campaign::List
-  @caption='Something'
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-/>`,
+      <template>
+        <List
+          @caption="Something"
+          @campaigns={{campaigns}}
+          @onFilter={{noop}}
+          @onClickCampaign={{noop}}
+          @canDelete={{true}}
+        />
+      </template>,
     );
 
     // then
@@ -515,20 +494,15 @@ module('Integration | Component | Campaign::List', function (hooks) {
       campaigns.meta = {
         rowCount: 1,
       };
-      this.set('campaigns', campaigns);
 
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-/>`,
+        <template>
+          <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @canDelete={{true}} />
+        </template>,
       );
 
       // then
-
       assert.strictEqual(screen.queryAllByRole('checkbox').length, 2);
     });
 
@@ -547,20 +521,19 @@ module('Integration | Component | Campaign::List', function (hooks) {
         rowCount: 1,
       };
 
-      this.set('campaigns', campaigns);
-
       // when
       const screen = await render(
-        hbs`<Campaign::List @campaigns={{this.campaigns}} @onFilter={{this.noop}} @onClickCampaign={{this.noop}} />`,
+        <template><List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} /></template>,
       );
 
       // then
-
       assert.dom(screen.queryByRole('checkbox')).doesNotExist();
     });
   });
 
   module('When there are only campaigns owned by current user', function (hooks) {
+    const campaigns = [];
+
     hooks.beforeEach(function () {
       const routerService = this.owner.lookup('service:router');
       sinon.stub(routerService, 'replaceWith');
@@ -578,19 +551,15 @@ module('Integration | Component | Campaign::List', function (hooks) {
         code: 'BBBBBB222',
         type: 'ASSESSMENT',
       });
-      const campaigns = [campaign1, campaign2];
+      campaigns.push(campaign1, campaign2);
       campaigns.meta = { page: 1, pageSize: 1, rowCount: 2, pageCount: 2 };
-      this.set('campaigns', campaigns);
     });
     test('should display checkboxes', async function (assert) {
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-/>`,
+        <template>
+          <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @canDelete={{true}} />
+        </template>,
       );
 
       // then
@@ -600,12 +569,9 @@ module('Integration | Component | Campaign::List', function (hooks) {
     test('should reset selected campaigns when using pagination', async function (assert) {
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-/>`,
+        <template>
+          <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @canDelete={{true}} />
+        </template>,
       );
 
       const firstCampaignCheckbox = screen.getAllByRole('checkbox')[1];
@@ -621,12 +587,9 @@ module('Integration | Component | Campaign::List', function (hooks) {
     test('should reset selected campaigns when using filters', async function (assert) {
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-/>`,
+        <template>
+          <List @campaigns={{campaigns}} @onFilter={{noop}} @onClickCampaign={{noop}} @canDelete={{true}} />
+        </template>,
       );
 
       const firstCampaignCheckbox = screen.getAllByRole('checkbox')[1];
@@ -639,16 +602,19 @@ module('Integration | Component | Campaign::List', function (hooks) {
     });
 
     test('should reset selected campaigns when resetting filters', async function (assert) {
+      const nameFilter = '1';
       // when
       const screen = await render(
-        hbs`<Campaign::List
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-  @nameFilter='1'
-  @onClear={{this.noop}}
-/>`,
+        <template>
+          <List
+            @campaigns={{campaigns}}
+            @onFilter={{noop}}
+            @onClickCampaign={{noop}}
+            @canDelete={{true}}
+            @nameFilter={{nameFilter}}
+            @onClear={{noop}}
+          />
+        </template>,
       );
 
       const firstCampaignCheckbox = screen.getAllByRole('checkbox')[1];
@@ -670,17 +636,18 @@ module('Integration | Component | Campaign::List', function (hooks) {
       store.adapterFor.callsFake(() => ({ delete: deleteStub }));
       // when
       const onDeleteCampaignsStub = sinon.stub();
-      this.set('onDeleteCampaigns', onDeleteCampaignsStub);
 
       const screen = await render(
-        hbs`<Campaign::List
-  @organizationId='1'
-  @campaigns={{this.campaigns}}
-  @onFilter={{this.noop}}
-  @onClickCampaign={{this.noop}}
-  @canDelete={{true}}
-  @onDeleteCampaigns={{this.onDeleteCampaigns}}
-/>`,
+        <template>
+          <List
+            @organizationId="1"
+            @campaigns={{campaigns}}
+            @onFilter={{noop}}
+            @onClickCampaign={{noop}}
+            @canDelete={{true}}
+            @onDeleteCampaigns={{onDeleteCampaignsStub}}
+          />
+        </template>,
       );
 
       await click(screen.getAllByRole('checkbox')[1]);

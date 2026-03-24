@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import ResultDistribution from 'pix-orga/components/campaign/charts/result-distribution';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -26,10 +26,10 @@ module('Integration | Component | Campaign::Charts::ResultDistribution', functio
     });
 
     test('it should display chart for participation distribution', async function (assert) {
-      this.campaign = { id: '12', hasStages: false };
+      const campaign = { id: '12', hasStages: false };
       dataFetcher.resolves({ data: { attributes: { 'result-distribution': [] } } });
 
-      const screen = await render(hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} />`);
+      const screen = await render(<template><ResultDistribution @campaign={{campaign}} /></template>);
 
       assert.dom(screen.getByRole('heading', { name: t('charts.participants-by-mastery-percentage.title') })).exists();
     });
@@ -41,12 +41,12 @@ module('Integration | Component | Campaign::Charts::ResultDistribution', functio
     });
 
     test('it should display chart for participation distribution by status', async function (assert) {
-      this.campaign = { id: '12', hasStages: true };
-      this.onSelectStage = () => {};
+      const campaign = { id: '12', hasStages: true };
+      const onSelectStage = () => {};
       dataFetcher.resolves({ data: { attributes: { data: [{ id: 100498, value: 0 }] } } });
 
       const screen = await render(
-        hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} @onSelectStage={{this.onSelectStage}} />`,
+        <template><ResultDistribution @campaign={{campaign}} @onSelectStage={{onSelectStage}} /></template>,
       );
       assert.dom(screen.getByRole('heading', { name: t('charts.participants-by-stage.title') })).exists();
     });
@@ -60,9 +60,9 @@ module('Integration | Component | Campaign::Charts::ResultDistribution', functio
     });
     test('it should display chart for campaign badges acquisitions', async function (assert) {
       dataFetcher.resolves({ data: { attributes: { data: [] } } });
-      this.campaign = { id: '12', hasStages: true, hasBadges: true };
+      const campaign = { id: '12', hasStages: true, hasBadges: true };
 
-      const screen = await render(hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} />`);
+      const screen = await render(<template><ResultDistribution @campaign={{campaign}} /></template>);
       assert.ok(screen.queryByText(t('cards.badges-acquisitions.title')));
     });
   });
@@ -71,11 +71,13 @@ module('Integration | Component | Campaign::Charts::ResultDistribution', functio
       dataFetcher = sinon.stub(adapter, 'getParticipationsByStage');
     });
     test('it should not display chart for campaign badges acquisitions', async function (assert) {
-      this.onSelectStage = () => {};
+      const onSelectStage = () => {};
       dataFetcher.resolves({ data: { attributes: { data: [{ id: 100498, value: 0 }] } } });
-      this.campaign = { id: '12', hasStages: true, hasBadges: false };
+      const campaign = { id: '12', hasStages: true, hasBadges: false };
 
-      const screen = await render(hbs`<Campaign::Charts::ResultDistribution @campaign={{this.campaign}} />`);
+      const screen = await render(
+        <template><ResultDistribution @campaign={{campaign}} @onSelectStage={{onSelectStage}} /></template>,
+      );
       assert.notOk(screen.queryByText(t('cards.badges-acquisitions.title')));
     });
   });
