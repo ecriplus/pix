@@ -1,7 +1,7 @@
 {
   "id": "8266f923-4255-46ba-97c5-61cbdbe18986",
   "shortId": "e71a9bdd",
-  "slug": "iagenethiquenov",
+  "slug": "iagenethiqueind",
   "title": "Ce qu’il faut éviter de dire à une IA générative",
   "isBeta": true,
   "visibility": "public",
@@ -248,7 +248,7 @@
                         }
                       ],
                       "rephrase": "Peux-tu écrire une lettre pour un collègue médecin lui demandant de prendre en charge une patiente que je suis pour son diabète depuis 5 ans déjà ?",
-                      "feedback": "Ce prompt partage des données sensibles (identité, santé) : on anonymise les personnes et on reste volontairement général."
+                      "feedback": "Ce prompt partage des données personnelles (l’identité) et sensibles (de santé): il vaut mieux ne pas nommer les personnes individuellement."
                     },
                     {
                       "fullSentence": [
@@ -366,7 +366,7 @@
                       "content": " J’avais besoin d’une image de carte de visite. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
-                        "alt": "Image de carte de visite d'un maçon appelé Cedric Fostabley, on y voit son numéro de téléphone et son adresse."
+                        "alt": "Image de carte de visite d’un maçon appelé Cedric Fostabley, on y voit son numéro de téléphone et son adresse."
                       }
                     },
                     {
