@@ -164,9 +164,9 @@
               "element": {
                 "id": "21de2b19-c6cb-472f-a487-8ea582aba05f",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/CY_MFA_NOV/notifasso.png",
+                "url": "https://assets.pix.org/modules/CYMFANOV/dec2_code.svg",
                 "alt": "Capture d’écran décrite en détail dans l’alternative textuelle.",
-                "alternativeText": "<p>Page de vérification de connexion demandant un code à six chiffres envoyé par SMS à un numéro se terminant par 60 pour se connecter au compte lassociation@gmail.com. Champ de saisie du code et bouton «&nbsp;Suivant&nbsp;».</p>",
+                "alternativeText": "<p>Page de vérification de connexion demandant un code à six chiffres envoyé par SMS à un numéro se terminant par 60 pour se connecter au compte lassociation@gmail.com. Champ de saisie du code et bouton «&nbsp;Connexion&nbsp;».</p>",
                 "legend": "",
                 "licence": ""
               }
@@ -297,8 +297,8 @@
                       "description": "",
                       "text": "La double authentification est activée sur le compte de Richard. Quand il se connecte à son compte Toutélectro, il entre son identifiant, son mot de passe puis un code (à usage unique) envoyé sur son téléphone.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/richard.png",
-                        "alt": "Illustration montrant une connexion : un utilisateur saisit son identifiant, son mot de passe sur un ordinateur et valide la connexion avec un code affiché sur son téléphone."
+                        "src": "https://assets.pix.org/modules/CYMFANOV/dec3_situation1_code.png",
+                        "alt": "Illustration montrant une connexion : un utilisateur consulte un code affiché sur son téléphone. Sur l’écran de son ordinateur, un code lui est demandé pour se connecter."
                       }
                     },
                     {
@@ -306,7 +306,7 @@
                       "description": "",
                       "text": "La double authentification n’est pas activée sur le compte de Sabrina. Quand elle se connecte à son compte Toutélectro, elle entre son identifiant et son mot de passe.",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/CY_MFA_NOV/sabrina.png",
+                        "src": "https://assets.pix.org/modules/CYMFANOV/dec3_situation2.png",
                         "alt": "Illustration montrant une connexion : un utilisateur saisi son identifiant et son mot de passe sur un ordinateur et valide sa connexion."
                       }
                     }
