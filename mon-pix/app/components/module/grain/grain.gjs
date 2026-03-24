@@ -235,6 +235,10 @@ export default class ModuleGrain extends Component {
     return this.args.grain.type === 'activity';
   }
 
+  get isGrainTypeShortLesson() {
+    return this.args.grain.type === 'short-lesson';
+  }
+
   get grainTitle() {
     switch (this.args.grain.type) {
       case 'lesson':
@@ -277,6 +281,9 @@ export default class ModuleGrain extends Component {
           total=@totalSteps
         }}</h3>
       <div class="grain__card grain-card--{{this.grainType}}">
+        {{#if this.isGrainTypeShortLesson}}
+          <img src="/images/modulix-point-cles.png" class="grain-card__illustration" alt="" />
+        {{/if}}
         {{#if this.isGrainTypeActivity}}
           <PixTag class="grain-card-tag" @color="grey">
             {{t "pages.modulix.grain.tag.activity"}}
@@ -287,7 +294,6 @@ export default class ModuleGrain extends Component {
             {{this.grainTitle}}</h3>
         {{/if}}
         <div class="grain-card__content">
-
           {{#each this.displayableComponents as |component index|}}
             {{#if (eq component.type "element")}}
               <div class="grain-card-content__element">

@@ -1,5 +1,7 @@
 @use '../passage';
+@use 'pix-design-tokens/shadows';
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/breakpoints';
 
 $grain-card-border-radius: var(--pix-spacing-4x);
 
@@ -60,6 +62,22 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 }
 
 .grain-card {
+
+
+  &__illustration {
+    position: absolute;
+    top: -25px;
+    right: -18px;
+    width: 55px;
+    transform: rotate(-8.8deg);
+
+    @include breakpoints.device-is('desktop') {
+      top: -30px;
+      right: -35px;
+      width: 75px;
+    }
+  }
+
   &__footer {
     padding: var(--pix-spacing-2x) 0;
   }
@@ -72,6 +90,13 @@ $grain-card-border-radius: var(--pix-spacing-4x);
   &--lesson {
     padding: var(--pix-spacing-6x);
     background: var(--pix-primary-10);
+  }
+
+  &--short-lesson {
+    @extend %pix-shadow-default;
+
+    position: relative;
+    padding: var(--pix-spacing-6x);
   }
 }
 
