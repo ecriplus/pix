@@ -120,7 +120,7 @@
               "element": {
                 "id": "b984fed2-3e75-479e-848b-d9d82780b742",
                 "type": "text",
-                "content": "<p>Charlie veut entraîne une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
+                "content": "<p>Charlie veut entraîner une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
               }
             }
           ]
@@ -132,7 +132,7 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>Charlie veut entraîne une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.</p>",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -403,8 +403,17 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>L’entraînement d’un nouveau modèle d’IA est donc très coûteux en énergie.</p>",
+              "instruction": "",
               "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "cd1e0ee5-4378-4996-abc4-99b774160840",
+                      "type": "text",
+                      "content": "<p>L’entraînement d’un nouveau modèle d’IA est donc très coûteux en énergie.</p>"
+                    }
+                  ]
+                },
                 {
                   "elements": [
                     {
@@ -869,7 +878,7 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Développer de nouveaux modèles plus puissants capables d'optimiser leur consommation d'électricité de façon autonome</p>"
+                    "content": "<p>Développer de nouveaux modèles plus puissants</p>"
                   }
                 ],
                 "feedbacks": {
@@ -948,7 +957,7 @@
                     {
                       "id": "54e226c3-30bb-4f57-b697-94903e1a3cb3",
                       "type": "text",
-                      "content": "<p>Ce chiffre est plutôt encourageant, mais attention : la médiane ne prend pas en compte les valeurs très extrêmes !&nbsp;La consommation d'énergie <strong>moyenne</strong> pourrait être bien <strong>plus élevée</strong>.</p><p>De plus G<strong>oogle ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes</strong>, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
+                      "content": "<p>Ce chiffre est plutôt encourageant, mais attention : la médiane ne prend pas en compte les valeurs extrêmes&nbsp;!La consommation d'énergie <strong>moyenne</strong> pourrait être bien <strong>plus élevée</strong>.</p><p>De plus G<strong>oogle ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes</strong>, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
                     }
                   ]
                 },
@@ -978,7 +987,11 @@
                         }
                       ],
                       "solution": "0"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "elements": [
                     {
                       "id": "a6404aac-9164-4e80-93b6-1288130f064e",
                       "type": "qcu",
