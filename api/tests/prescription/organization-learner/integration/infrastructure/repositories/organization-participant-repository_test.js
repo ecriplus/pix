@@ -2370,6 +2370,65 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
             expect(organizationParticipants[2].id).to.equal(eminemLearnerId);
           });
         });
+
+        context('sort by division', function () {
+          let cm1LearnerId, cm2LearnerId, cpLearnerId;
+
+          beforeEach(async function () {
+            organizationId = databaseBuilder.factory.buildOrganization().id;
+
+            const cm1 = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { Classe: 'CM1' },
+            });
+            const cm2 = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { Classe: 'CM2' },
+            });
+            const cp = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { Classe: 'CP' },
+            });
+
+            cm1LearnerId = cm1.id;
+            cm2LearnerId = cm2.id;
+            cpLearnerId = cp.id;
+
+            await databaseBuilder.commit();
+          });
+
+          it('should return participants sorted by ascendant division', async function () {
+            // when
+            const { organizationParticipants } =
+              await organizationParticipantRepository.findPaginatedFilteredImportedParticipants({
+                organizationId,
+                extraColumns: [{ key: 'Classe', name: 'COMMON_DIVISION' }],
+                sort: { divisionSort: 'asc' },
+              });
+
+            // then
+            expect(organizationParticipants).to.have.lengthOf(3);
+            expect(organizationParticipants[0].id).to.equal(cm1LearnerId);
+            expect(organizationParticipants[1].id).to.equal(cm2LearnerId);
+            expect(organizationParticipants[2].id).to.equal(cpLearnerId);
+          });
+
+          it('should return participants sorted by descendant division', async function () {
+            // when
+            const { organizationParticipants } =
+              await organizationParticipantRepository.findPaginatedFilteredImportedParticipants({
+                organizationId,
+                extraColumns: [{ key: 'Classe', name: 'COMMON_DIVISION' }],
+                sort: { divisionSort: 'desc' },
+              });
+
+            // then
+            expect(organizationParticipants).to.have.lengthOf(3);
+            expect(organizationParticipants[0].id).to.equal(cpLearnerId);
+            expect(organizationParticipants[1].id).to.equal(cm2LearnerId);
+            expect(organizationParticipants[2].id).to.equal(cm1LearnerId);
+          });
+        });
       });
     });
 
