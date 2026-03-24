@@ -248,7 +248,7 @@
                         }
                       ],
                       "rephrase": "Peux-tu écrire une lettre pour un collègue médecin lui demandant de prendre en charge une patiente que je suis pour son diabète depuis 5 ans déjà ?",
-                      "feedback": "Ce prompt partage des données personnelles (l'identité) et sensibles (de santé): il vaut mieux ne pas nommer les personnes individuellement."
+                      "feedback": "Ce prompt partage des données personnelles (l’identité) et sensibles (de santé): il vaut mieux ne pas nommer les personnes individuellement."
                     },
                     {
                       "fullSentence": [
@@ -366,7 +366,7 @@
                       "content": " J’avais besoin d’une image de carte de visite. J’ai demandé à une IA de me la faire et j’ai eu ça. Tu penses que le numéro et l’adresse sont vrais ?",
                       "image": {
                         "src": "https://assets.pix.org/modules/IAGenEthique_NOV/carte-visite.png",
-                        "alt": "Image de carte de visite d'un maçon appelé Cedric Fostabley, on y voit son numéro de téléphone et son adresse."
+                        "alt": "Image de carte de visite d’un maçon appelé Cedric Fostabley, on y voit son numéro de téléphone et son adresse."
                       }
                     },
                     {
@@ -707,7 +707,7 @@
                   "date": "6 octobre 2025",
                   "paragraphs": [
                     "Une équipe de chercheurs en sécurité informatique a trouvé un défaut inquiétant dans GitHub Copilot, un logiciel d’IA qui aide à programmer. {{highlightedSentence}}, dont certains étaient encore actifs et utilisables.",
-                    "Ces mots de passe provenaient de morceaux de code informatique réutilisé par le logiciel Copilot lors de ses réponses aux chercheurs. L'entreprise GitHub assure avoir renforcé sa sécurité pour limiter ces risques, mais les spécialistes préviennent : le risque de fuites accidentelles demeure bien réel. Cette affaire souligne la nécessité d’une vigilance accrue face aux outils d’IA générative."
+                    "Ces mots de passe provenaient de morceaux de code informatique réutilisé par le logiciel Copilot lors de ses réponses aux chercheurs. L’entreprise GitHub assure avoir renforcé sa sécurité pour limiter ces risques, mais les spécialistes préviennent : le risque de fuites accidentelles demeure bien réel. Cette affaire souligne la nécessité d’une vigilance accrue face aux outils d’IA générative."
                   ],
                   "highlightedSentence": "En analysant les réponses données par l’IA, ils ont réussi à obtenir plus de 2 700 mots de passe",
                   "colorOfHighlightSentence": "#bb0101"
