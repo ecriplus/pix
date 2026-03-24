@@ -1,5 +1,46 @@
 # Pix Changelog
 
+# [5.367.0](https://github.com/1024pix/pix/compare/v5.366.0...v5.367.0) (2026-03-24)
+
+### :rocket: Amélioration
+
+- [#15599](https://github.com/1024pix/pix/pull/15599) Afficher un message lorsqu'un contenu est manquant dans les modules (PIX-21813). 
+- [#15588](https://github.com/1024pix/pix/pull/15588) Ajout du lien vers le centre d'aide dans le footer de PixOrga (pix-22031) 
+- [#15553](https://github.com/1024pix/pix/pull/15553) Gérer les attestations depuis la section features des organisations (PIX-21765) 
+- [#15556](https://github.com/1024pix/pix/pull/15556) Mettre à jour le design de la liste des certifications d'un utilisateur (PIX-21928). 
+- [#15584](https://github.com/1024pix/pix/pull/15584) module GestionMDP_NOV ajout embed mdp-oublie et correction coquille 
+- [#15583](https://github.com/1024pix/pix/pull/15583) Module Phishing_IND modification short video 
+- [#15533](https://github.com/1024pix/pix/pull/15533) Pouvoir modifier le nom d'un réseau (PIX-21949) 
+- [#15501](https://github.com/1024pix/pix/pull/15501) Redesign du grain de type leçon courte (PIX-21919) 
+- [#15603](https://github.com/1024pix/pix/pull/15603) Suivre l'utilisation de la remise à zéro et de l'amélioration des compétences (PIX-21882) 
+- [#15544](https://github.com/1024pix/pix/pull/15544) Supprimer l'utilisation de la propriété locale dans le code et la table training en DB (PIX-21791)(PIX-21792) 
+- [#15514](https://github.com/1024pix/pix/pull/15514) Update IADefinition_IND.json 
+- [#15602](https://github.com/1024pix/pix/pull/15602) Update Visio_IND 
+
+### :bug: Correction
+
+- [#15600](https://github.com/1024pix/pix/pull/15600) Classer les réseaux dans le bon ordre après une création (PIX-22050) 
+- [#15597](https://github.com/1024pix/pix/pull/15597) Répare la pagination sur les participations aux parcours combinés (PIX-22034) 
+- [#15585](https://github.com/1024pix/pix/pull/15585) Réparer la mise à jour du logo d'une organisation (PIX-21772) 
+
+### :rewind: Retour en arrière
+
+- [#15610](https://github.com/1024pix/pix/pull/15610) Revert "[BUMP] Lock file maintenance (e2e)"
+
+### :building_construction: Tech
+
+- [#15612](https://github.com/1024pix/pix/pull/15612) Lancer les tests e2e cypress lorsque le dossier a été modifié (PIX-FIX). 
+
+### :arrow_up: Montée de version
+
+- [#15575](https://github.com/1024pix/pix/pull/15575) Lock file maintenance (e2e) 
+- [#15608](https://github.com/1024pix/pix/pull/15608) Update dependency ember-eslint-parser to ^0.8.0 (certif) 
+- [#15613](https://github.com/1024pix/pix/pull/15613) Update dependency ember-eslint-parser to ^0.8.0 (junior) 
+- [#15614](https://github.com/1024pix/pix/pull/15614) Update dependency ember-eslint-parser to ^0.8.0 (mon-pix) 
+- [#15615](https://github.com/1024pix/pix/pull/15615) Update dependency ember-eslint-parser to ^0.8.0 (orga) 
+- [#15616](https://github.com/1024pix/pix/pull/15616) Update dependency oxfmt to ^0.41.0 (api) 
+- [#15619](https://github.com/1024pix/pix/pull/15619) Update slackapi/slack-github-action action to v3 (workflows)
+
 # [5.366.0](https://github.com/1024pix/pix/compare/v5.365.0...v5.366.0) (2026-03-23)
 
 ### :rocket: Amélioration
