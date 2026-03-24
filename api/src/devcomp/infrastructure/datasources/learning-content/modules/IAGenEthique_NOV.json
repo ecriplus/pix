@@ -707,7 +707,7 @@
                   "date": "6 octobre 2025",
                   "paragraphs": [
                     "Une équipe de chercheurs en sécurité informatique a trouvé un défaut inquiétant dans GitHub Copilot, un logiciel d’IA qui aide à programmer. {{highlightedSentence}}, dont certains étaient encore actifs et utilisables.",
-                    "Ces mots de passe provenaient de morceaux de code informatique réutilisé par le logiciel Copilot lors de ses réponses aux chercheurs. L’entreprise GitHub assure avoir renforcé sa sécurité pour limiter ces risques, mais les spécialistes préviennent : le risque de fuites accidentelles demeure bien réel. Cette affaire souligne la nécessité d’une vigilance accrue face aux outils d’IA générative."
+                    "Ces mots de passe provenaient de morceaux de code informatique réutilisé par le logiciel Copilot lors de ses réponses aux chercheurs. L'entreprise GitHub assure avoir renforcé sa sécurité pour limiter ces risques, mais les spécialistes préviennent : le risque de fuites accidentelles demeure bien réel. Cette affaire souligne la nécessité d’une vigilance accrue face aux outils d’IA générative."
                   ],
                   "highlightedSentence": "En analysant les réponses données par l’IA, ils ont réussi à obtenir plus de 2 700 mots de passe",
                   "colorOfHighlightSentence": "#bb0101"
