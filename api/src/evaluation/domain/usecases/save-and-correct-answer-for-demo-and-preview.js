@@ -1,15 +1,14 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { EmptyAnswerError } from '../errors.js';
 
-const saveAndCorrectAnswerForDemoAndPreview = withTransaction(async function ({
+export async function saveAndCorrectAnswerForDemoAndPreview({
   answer,
   assessment,
   forceOKAnswer = false,
   answerRepository,
   challengeRepository,
   correctionService,
-} = {}) {
+}) {
   if (assessment.answers.some((existingAnswer) => existingAnswer.challengeId === answer.challengeId)) {
     throw new ChallengeAlreadyAnsweredError();
   }
@@ -35,6 +34,4 @@ const saveAndCorrectAnswerForDemoAndPreview = withTransaction(async function ({
   const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   answerSaved.levelup = {};
   return answerSaved;
-});
-
-export { saveAndCorrectAnswerForDemoAndPreview };
+}

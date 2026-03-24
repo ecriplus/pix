@@ -1,14 +1,13 @@
-import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
   ChallengeAlreadyAnsweredError,
+  ChallengeNotAskedError,
   ForbiddenAccess,
 } from '../../../shared/domain/errors.js';
-import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { EmptyAnswerError } from '../errors.js';
 
-const saveAndCorrectAnswerForCertification = withTransaction(async function ({
+export async function saveAndCorrectAnswerForCertification({
   answer,
   userId,
   assessment,
@@ -18,7 +17,7 @@ const saveAndCorrectAnswerForCertification = withTransaction(async function ({
   certificationChallengeLiveAlertRepository,
   certificationEvaluationCandidateRepository,
   correctionService,
-} = {}) {
+}) {
   if (assessment.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this assessment.');
   }
@@ -65,8 +64,5 @@ const saveAndCorrectAnswerForCertification = withTransaction(async function ({
 
   const answerSaved = await answerRepository.save({ answer: correctedAnswer });
   answerSaved.levelup = {};
-
   return answerSaved;
-});
-
-export { saveAndCorrectAnswerForCertification };
+}
