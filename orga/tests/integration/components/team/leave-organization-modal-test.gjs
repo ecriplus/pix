@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import LeaveOrganizationModal from 'pix-orga/components/team/leave-organization-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -10,18 +10,20 @@ module('Integration | Components | Team::LeaveOrganizationModal', function (hook
 
   test('displays modal content', async function (assert) {
     // given
-    this.set('currentUserOrganizationName', 'Cola Corp');
-    this.set('isLeaveOrganizationModalDisplayed', true);
-    this.set('noop', sinon.stub());
+    const currentUserOrganizationName = 'Cola Corp';
+    const isLeaveOrganizationModalDisplayed = true;
+    const noop = sinon.stub();
 
     // when
     const screen = await render(
-      hbs`<Team::LeaveOrganizationModal
-  @organizationName={{this.currentUserOrganizationName}}
-  @isOpen={{this.isLeaveOrganizationModalDisplayed}}
-  @onSubmit={{this.noop}}
-  @onClose={{this.noop}}
-/>`,
+      <template>
+        <LeaveOrganizationModal
+          @organizationName={{currentUserOrganizationName}}
+          @isOpen={{isLeaveOrganizationModalDisplayed}}
+          @onSubmit={{noop}}
+          @onClose={{noop}}
+        />
+      </template>,
     );
 
     // then

@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import HeaderActions from 'pix-orga/components/sup-organization-participant/header-actions';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -12,12 +12,10 @@ module('Integration | Component | SupOrganizationParticipant::HeaderActions', fu
   module('Title', () => {
     test('it should show only title when participant count = 0', async function (assert) {
       //given
-      this.set('participantCount', 0);
+      const participantCount = 0;
 
       // when
-      const screen = await render(
-        hbs`<SupOrganizationParticipant::HeaderActions @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await render(<template><HeaderActions @participantCount={{participantCount}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.sup-organization-participants.title', { count: 0 })));
@@ -25,12 +23,10 @@ module('Integration | Component | SupOrganizationParticipant::HeaderActions', fu
 
     test('it should show title with participant count when count > 0', async function (assert) {
       //given
-      this.set('participantCount', 5);
+      const participantCount = 5;
 
       // when
-      const screen = await render(
-        hbs`<SupOrganizationParticipant::HeaderActions @participantCount={{this.participantCount}} />`,
-      );
+      const screen = await render(<template><HeaderActions @participantCount={{participantCount}} /></template>);
 
       // then
       assert.ok(screen.getByText(t('pages.sup-organization-participants.title', { count: 5 })));
@@ -51,7 +47,7 @@ module('Integration | Component | SupOrganizationParticipant::HeaderActions', fu
 
     test('it displays the import button', async function (assert) {
       // when
-      const screen = await render(hbs`<SupOrganizationParticipant::HeaderActions />`);
+      const screen = await render(<template><HeaderActions /></template>);
 
       // then
       assert.ok(screen.getByText(t('components.organization-participants-header.import-button')));
@@ -68,7 +64,7 @@ module('Integration | Component | SupOrganizationParticipant::HeaderActions', fu
 
     test('it should not display download template button', async function (assert) {
       // when
-      const screen = await render(hbs`<SupOrganizationParticipant::HeaderActions />`);
+      const screen = await render(<template><HeaderActions /></template>);
 
       // then
       assert.notOk(screen.queryByText(t('pages.sup-organization-participants.actions.download-template')));
@@ -76,7 +72,7 @@ module('Integration | Component | SupOrganizationParticipant::HeaderActions', fu
 
     test('it should not display import button', async function (assert) {
       // when
-      const screen = await render(hbs`<SupOrganizationParticipant::HeaderActions />`);
+      const screen = await render(<template><HeaderActions /></template>);
 
       // then
       assert.notOk(screen.queryByText('Importer (.csv)'));

@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import dayjs from 'dayjs';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import Title from 'pix-orga/components/places/title';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -25,7 +25,7 @@ module('Integration | Component | Places::Title', function (hooks) {
     const today = dayjs();
 
     // when
-    const screen = await render(hbs`<Places::Title />`);
+    const screen = await render(<template><Title /></template>);
 
     // then
     assert.ok(screen.getByText(t('pages.places.title')));

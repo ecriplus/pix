@@ -1,7 +1,7 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import InvitationsListItem from 'pix-orga/components/team/invitations-list-item';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -22,18 +22,18 @@ module('Integration | Component | Team::InvitationsListItem', function (hooks) {
 
     const saveStub = sinon.stub();
     const cancelInvitationStub = sinon.stub();
-    this.set('invitation', {
+    const invitation = {
       id: 777,
       email: 'fifi@example.net',
       isPending: true,
       updatedAt: '2019-10-08T10:50:00Z',
       save: saveStub,
-    });
-    this.set('cancelInvitation', cancelInvitationStub);
+    };
+    const cancelInvitation = cancelInvitationStub;
 
     // when
     await render(
-      hbs`<Team::InvitationsListItem @invitation={{this.invitation}} @cancelInvitation={{this.cancelInvitation}} />`,
+      <template><InvitationsListItem @invitation={{invitation}} @cancelInvitation={{cancelInvitation}} /></template>,
     );
     await clickByName(t('pages.team-invitations.resend-invitation'));
 
