@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { hbs } from 'ember-cli-htmlbars';
+import Breadcrumb from 'pix-orga/components/ui/breadcrumb';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -20,7 +20,7 @@ module('Integration | Component | Ui | Breadcrumb', function (hooks) {
   });
 
   test('it should display breadcrumbs with given item', async function (assert) {
-    this.set('links', [
+    const links = [
       {
         route: 'authenticated.campaigns',
         label: 'Campagnes',
@@ -35,10 +35,10 @@ module('Integration | Component | Ui | Breadcrumb', function (hooks) {
         label: 'Participation de Luna Akajoua',
         models: [1, 4],
       },
-    ]);
+    ];
 
     // when
-    const screen = await render(hbs`<Ui::Breadcrumb @links={{this.links}} />`);
+    const screen = await render(<template><Breadcrumb @links={{links}} /></template>);
 
     // then
     assert.dom(screen.getByRole('link', { name: 'Campagnes', current: false })).exists();

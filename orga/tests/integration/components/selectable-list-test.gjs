@@ -1,7 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
+import SelectableList from 'pix-orga/components/selectable-list';
 
 import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
@@ -15,9 +15,8 @@ module('Integration | Component | Selectable List', function (hooks) {
         { id: '1', label: 'Item 1' },
         { id: '2', label: 'Item 2' },
       ];
-      this.set('items', items);
 
-      const screen = await render(hbs`<SelectableList @items={{this.items}}>
+      const screen = await render(<template><SelectableList @items={{items}}>
   <:manager as |allSelected someSelected|>
     <PixCheckbox @checked={{someSelected}} @isIndeterminate={{not allSelected}}>
       <:label>Main checkbox</:label>
@@ -28,7 +27,7 @@ module('Integration | Component | Selectable List', function (hooks) {
       <:label>{{checkboxItem.label}}</:label>
     </PixCheckbox>
   </:item>
-</SelectableList>`);
+</SelectableList></template>);
 
       // when
       await click(screen.getByLabelText('Item 2'));

@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
+import LearnerHeaderInfo from 'pix-orga/components/ui/learner-header-info';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -13,23 +13,17 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
       const groupName = t('components.group.SCO');
       const group = '3E';
 
-      this.set('groupName', groupName);
-      this.set('group', group);
+      const screen = await render(<template><LearnerHeaderInfo @group={{group}} @groupName={{groupName}} /></template>);
 
-      const screen = await render(hbs`<Ui::LearnerHeaderInfo @group={{this.group}} @groupName={{this.groupName}} />`);
-
-      assert.strictEqual(screen.getByRole('term').textContent.trim(), this.groupName);
-      assert.strictEqual(screen.getByRole('definition').textContent.trim(), this.group);
+      assert.strictEqual(screen.getByRole('term').textContent.trim(), groupName);
+      assert.strictEqual(screen.getByRole('definition').textContent.trim(), group);
     });
 
     test('it does not render learner division header information when there is no group', async function (assert) {
       const groupName = t('components.group.SCO');
       const group = '';
 
-      this.set('groupName', groupName);
-      this.set('group', group);
-
-      const screen = await render(hbs`<Ui::LearnerHeaderInfo @groupName={{this.groupName}} @group={{this.group}} />`);
+      const screen = await render(<template><LearnerHeaderInfo @groupName={{groupName}} @group={{group}} /></template>);
 
       assert.strictEqual(screen.queryByText(groupName), null);
     });
@@ -39,9 +33,9 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
     test('it renders learner header information when there is a connection method', async function (assert) {
       const authenticationMethods = ['email'];
 
-      this.set('authenticationMethods', authenticationMethods);
-
-      const screen = await render(hbs`<Ui::LearnerHeaderInfo @authenticationMethods={{this.authenticationMethods}} />`);
+      const screen = await render(
+        <template><LearnerHeaderInfo @authenticationMethods={{authenticationMethods}} /></template>,
+      );
 
       assert.strictEqual(
         screen.getByRole('term').textContent.trim(),
@@ -56,9 +50,9 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
     test('it renders learner header information when there is several connection method', async function (assert) {
       const authenticationMethods = ['email', 'identifiant'];
 
-      this.set('authenticationMethods', authenticationMethods);
-
-      const screen = await render(hbs`<Ui::LearnerHeaderInfo @authenticationMethods={{this.authenticationMethods}} />`);
+      const screen = await render(
+        <template><LearnerHeaderInfo @authenticationMethods={{authenticationMethods}} /></template>,
+      );
 
       assert.strictEqual(
         screen.getByRole('term').textContent.trim(),
@@ -76,7 +70,7 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
     });
 
     test('it does not renders learner header information when there is no connection method', async function (assert) {
-      const screen = await render(hbs`<Ui::LearnerHeaderInfo @authenticationMethods={{this.authenticationMethods}} />`);
+      const screen = await render(<template><LearnerHeaderInfo /></template>);
 
       assert.strictEqual(screen.queryByText(t('pages.sco-organization-participants.table.column.login-method')), null);
       assert.strictEqual(screen.queryByText(t('pages.sco-organization-participants.connection-types.email')), null);
@@ -88,11 +82,8 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
       const isCertifiable = true;
       const certifiableAt = '2023-01-01';
 
-      this.set('isCertifiable', isCertifiable);
-      this.set('certifiableAt', certifiableAt);
-
       const screen = await render(
-        hbs`<Ui::LearnerHeaderInfo @isCertifiable={{this.isCertifiable}} @certifiableAt={{this.certifiableAt}} />`,
+        <template><LearnerHeaderInfo @isCertifiable={{isCertifiable}} @certifiableAt={{certifiableAt}} /></template>,
       );
 
       assert.strictEqual(
@@ -106,11 +97,8 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
       const isCertifiable = false;
       const certifiableAt = null;
 
-      this.set('isCertifiable', isCertifiable);
-      this.set('certifiableAt', certifiableAt);
-
       const screen = await render(
-        hbs`<Ui::LearnerHeaderInfo @isCertifiable={{this.isCertifiable}} @certifiableAt={{this.certifiableAt}} />`,
+        <template><LearnerHeaderInfo @isCertifiable={{isCertifiable}} @certifiableAt={{certifiableAt}} /></template>,
       );
 
       assert.strictEqual(
@@ -125,16 +113,14 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
       const certifiableAt = '01/01/2023';
       const hideCertifiableAt = true;
 
-      this.set('isCertifiable', isCertifiable);
-      this.set('certifiableAt', certifiableAt);
-      this.set('hideCertifiableAt', hideCertifiableAt);
-
       const screen = await render(
-        hbs`<Ui::LearnerHeaderInfo
-  @isCertifiable={{this.isCertifiable}}
-  @certifiableAt={{this.certifiableAt}}
-  @hideCertifiableAt={{this.hideCertifiableAt}}
-/>`,
+        <template>
+          <LearnerHeaderInfo
+            @isCertifiable={{isCertifiable}}
+            @certifiableAt={{certifiableAt}}
+            @hideCertifiableAt={{hideCertifiableAt}}
+          />
+        </template>,
       );
       assert.strictEqual(screen.queryByText(certifiableAt), null);
     });
@@ -144,16 +130,14 @@ module('Integration | Component | Ui::LearnerHeaderInfo', function (hooks) {
       const certifiableAt = '01/01/2023';
       const hideCertifiableAt = false;
 
-      this.set('isCertifiable', isCertifiable);
-      this.set('certifiableAt', certifiableAt);
-      this.set('hideCertifiableAt', hideCertifiableAt);
-
       const screen = await render(
-        hbs`<Ui::LearnerHeaderInfo
-  @isCertifiable={{this.isCertifiable}}
-  @certifiableAt={{this.certifiableAt}}
-  @hideCertifiableAt={{this.hideCertifiableAt}}
-/>`,
+        <template>
+          <LearnerHeaderInfo
+            @isCertifiable={{isCertifiable}}
+            @certifiableAt={{certifiableAt}}
+            @hideCertifiableAt={{hideCertifiableAt}}
+          />
+        </template>,
       );
       assert.strictEqual(screen.getByRole('definition').textContent.trim(), certifiableAt);
     });

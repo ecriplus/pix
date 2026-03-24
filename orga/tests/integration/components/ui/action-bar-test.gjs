@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { hbs } from 'ember-cli-htmlbars';
+import ActionBar from 'pix-orga/components/ui/action-bar';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -9,12 +9,14 @@ module('Integration | Component | Ui | Action Bar', function (hooks) {
 
   test('it renders', async function (assert) {
     //given
-    this.information = "Je s'appelle groot";
-    this.actions = 'Je suis une action';
+    const information = "Je s'appelle groot";
+    const actions = 'Je suis une action';
 
     //when
     const screen = await render(
-      hbs`<Ui::ActionBar><:information>{{this.information}}</:information><:actions>{{this.actions}}</:actions></Ui::ActionBar>`,
+      <template>
+        <ActionBar><:information>{{information}}</:information><:actions>{{actions}}</:actions></ActionBar>
+      </template>,
     );
     //then
     assert.dom(screen.getByText("Je s'appelle groot")).exists();
