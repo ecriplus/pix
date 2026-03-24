@@ -1,4 +1,4 @@
-import { GlobalCertificationLevel } from '../../models/v3/GlobalCertificationLevel.js';
+import { ParcoursupCertificationLevel } from './ParcoursupCertificationLevel.js';
 
 export class CertificationResult {
   /**
@@ -34,7 +34,7 @@ export class CertificationResult {
     this.status = status;
     this.pixScore = pixScore;
     this.certificationDate = certificationDate;
-    this.globalLevel = new GlobalCertificationLevel({ score: pixScore, maxReachableLevel });
+    this.globalLevel = new ParcoursupCertificationLevel({ score: pixScore, maxReachableLevel });
     this.competences = competences;
   }
 }

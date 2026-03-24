@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as certificateRepository from '../../../../../../src/certification/results/infrastructure/repositories/certificate-repository.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
@@ -508,11 +509,12 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           userId: 456,
           date: new Date('2020-01-01'),
           verificationCode: 'P-SOMECODE',
-          maxReachableLevelOnCertificationDate: 5,
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
-          pixScore: 51,
+          pixScore: 123,
+          reachedMeshIndex: 1,
           sessionId: 789,
+          framework: Frameworks.CORE,
         };
         const version = _buildSession({
           userId: certificationAttestationData.userId,
@@ -602,7 +604,56 @@ describe('Integration | Infrastructure | Repository | Certification', function (
         expect(certificationAttestation).to.deepEqualInstance(expectedCertificationAttestation);
       });
 
-      context('when a complementary certification is acquired', function () {
+      context('when certificationFramework is EDU', function () {
+        it('should return a V3Certificate with EDU globalLevel', async function () {
+          // given
+          const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
+          await mockLearningContent(learningContentObjects);
+
+          const certificationAttestationData = {
+            id: 123,
+            firstName: 'Sarah Mi',
+            lastName: 'Gell',
+            birthdate: '1977-04-14',
+            birthplace: 'Saint-Ouen',
+            isPublished: true,
+            userId: 456,
+            date: new Date('2020-01-01'),
+            verificationCode: 'P-SOMECODE',
+            deliveredAt: new Date('2021-05-05'),
+            certificationCenter: 'Centre des poules bien dodues',
+            pixScore: null,
+            reachedMeshIndex: 1,
+            framework: Frameworks.EDU_1ER_DEGRE,
+            sessionId: 789,
+          };
+          const version = _buildSession({
+            userId: certificationAttestationData.userId,
+            sessionId: certificationAttestationData.sessionId,
+            publishedAt: certificationAttestationData.deliveredAt,
+            certificationCenter: certificationAttestationData.certificationCenter,
+          });
+          _buildValidCertificationAttestation(certificationAttestationData, true, version);
+          await databaseBuilder.commit();
+
+          // when
+          const certificationAttestation = await certificateRepository.getCertificate({
+            certificationCourseId: 123,
+          });
+
+          // then
+          const expectedCertificationAttestation = domainBuilder.certification.results.buildCertificate({
+            ...certificationAttestationData,
+            certificationFramework: certificationAttestationData.framework,
+            certificationDate: certificationAttestationData.date,
+          });
+          expect(certificationAttestation).to.deepEqualInstanceOmitting(expectedCertificationAttestation, [
+            'resultCompetenceTree',
+          ]);
+        });
+      });
+
+      context('when a double certification is acquired', function () {
         it('should return a V3Certificate with complementary', async function () {
           // given
           const locale = 'en';
@@ -613,7 +664,9 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             userId: 456,
             date: new Date('2020-01-01'),
             deliveredAt: new Date('2021-05-05'),
-            pixScore: 51,
+            pixScore: 123,
+            reachedMeshIndex: 1,
+            framework: Frameworks.CLEA,
             sessionId: 789,
           };
           const version = _buildSession({
@@ -627,11 +680,13 @@ describe('Integration | Infrastructure | Repository | Certification', function (
             createdAt: certificationAttestationData.date,
             sessionId: certificationAttestationData.sessionId,
             userId: certificationAttestationData.userId,
+            framework: certificationAttestationData.framework,
             version,
           }).id;
           databaseBuilder.factory.buildAssessmentResult.last({
             certificationCourseId,
             pixScore: certificationAttestationData.pixScore,
+            reachedMeshIndex: certificationAttestationData.reachedMeshIndex,
             status: AssessmentResult.status.VALIDATED,
           }).id;
 
@@ -693,7 +748,9 @@ describe('Integration | Infrastructure | Repository | Certification', function (
           maxReachableLevelOnCertificationDate: 5,
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
-          pixScore: 51,
+          pixScore: 123,
+          reachedMeshIndex: 1,
+          framework: Frameworks.CORE,
           sessionId: 789,
         };
         const version = _buildSession({
@@ -3051,10 +3108,12 @@ function _buildValidCertificationAttestation(
     sessionId: certificationAttestationData.sessionId,
     userId: certificationAttestationData.userId,
     version,
+    framework: certificationAttestationData.framework,
   });
   const assessmentResultId = databaseBuilder.factory.buildAssessmentResult.last({
     certificationCourseId: certificationAttestationData.id,
     pixScore: certificationAttestationData.pixScore,
+    reachedMeshIndex: certificationAttestationData.reachedMeshIndex,
     status: AssessmentResult.status.VALIDATED,
     createdAt: new Date('2020-01-02'),
   }).id;

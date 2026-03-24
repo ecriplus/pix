@@ -211,6 +211,7 @@ import { buildGlobalCertificationLevel } from './certification/results/build-glo
 import { buildCertificate } from './certification/results/build-v3-certification-attestation.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
+import { buildParcoursupCertificationLevel } from './certification/results/parcoursup/build-parcoursup-certification-level.js';
 import { buildCertificationDetails } from './certification/session-management/build-certification-details.js';
 import { builders as sessionManagementBuilders } from './certification/session-management/index.js';
 import { buildCompetenceForScoring } from './certification/shared/build-competence-for-scoring.js';
@@ -309,6 +310,7 @@ const certification = {
     parcoursup: {
       buildCertificationResult: parcoursupCertificationResult,
       buildCompetence: parcoursupCompetence,
+      buildParcoursupCertificationLevel,
     },
   },
 };

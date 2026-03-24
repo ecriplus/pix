@@ -221,6 +221,11 @@
     },
     "global": {
       "meshlevel": {
+        "LEVEL_ADMISSIBLE": {
+          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\n À l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).Rapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "label": "Admissible",
+          "summary": "Le candidat est admissible à la certification Pix+ Edu."
+        },
         "LEVEL_ADVANCED_5": {
           "description": "You are able to use specialist tools to search for reliable information, manage social networks and edit images and videos. You know how to produce data analyses and appropriate graphic representations. You know how to set up a digital environment (installation and configuration). You are familiar with the issues surrounding tracking and data collection. You understand the environmental and societal impacts of digital usage and know how to adapt your practices",
           "label": "Advanced 1",

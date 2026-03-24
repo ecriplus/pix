@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { ResultCompetence } from '../../../../../../src/certification/results/domain/models/ResultCompetence.js';
 import { ResultCompetenceTree } from '../../../../../../src/certification/results/domain/models/ResultCompetenceTree.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-serializer.js';
@@ -210,6 +211,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             level: '1',
             'certification-date': new Date('2015-10-03T01:02:03Z'),
             'acquired-complementary-certification': 'http://example.com/',
+            'certification-framework': Frameworks.CORE,
           },
           relationships: {
             'result-competence-tree': {
