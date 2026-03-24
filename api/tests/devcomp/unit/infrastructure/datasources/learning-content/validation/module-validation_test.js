@@ -461,6 +461,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         const sample = {
           id: randomUUID(),
           type: 'text',
+          tag: 'key-points',
           content: "<p>Ceci est un texte qui accepte de l'HTML.</p>",
         };
 
@@ -471,6 +472,30 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         const formattedError = joiErrorParser.format(joiError);
         expect(joiError).to.equal(undefined, formattedError);
       }
+    });
+
+    describe('for text element', function () {
+      it('should validate all tag values', async function () {
+        const validTags = [' ', 'context', 'did-you-know', 'further-information', 'key-points', 'tip'];
+
+        for (const tag of validTags) {
+          try {
+            const sample = {
+              id: randomUUID(),
+              type: 'text',
+              tag,
+              content: "<p>Ceci est un texte qui accepte de l'HTML.</p>",
+            };
+
+            await textElementSchema.validateAsync(sample, {
+              abortEarly: false,
+            });
+          } catch (joiError) {
+            const formattedError = joiErrorParser.format(joiError);
+            expect(joiError).to.equal(undefined, formattedError);
+          }
+        }
+      });
     });
 
     it('should validate sample video structure', async function () {
@@ -542,6 +567,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
                 {
                   id: '1cf5b276-9ce0-4b38-a56b-4d4447b34d8a',
                   type: 'text',
+                  tag: ' ',
                   content: '<p>Cool</p>',
                 },
               ],
@@ -551,6 +577,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
                 {
                   id: '185881f1-6217-4306-8e89-070281a3e20a',
                   type: 'text',
+                  tag: ' ',
                   content: '<p>Gang</p>',
                 },
               ],
@@ -728,6 +755,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
       const invalidTextElement = {
         id: '774c4c4e-f170-4e2c-ba7a-d2fe40d053c3',
         type: 'text',
+        tag: ' ',
         content: '<style>p { color: indianred; }</style> <p>Stylé !</p>',
       };
 
@@ -776,6 +804,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
                     element: {
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
+                      tag: ' ',
                       content: '<h4>Content.</h4>',
                     },
                   },
