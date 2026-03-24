@@ -13,13 +13,11 @@ class ImportOrganizationLearnerSet {
   #existingLearners;
   #organizationId;
 
-  #hasValidationFormats;
   #validationRuleList;
 
   #columnMapping;
 
   #unicityKeys;
-  #unicityKeysObject;
 
   #unicityColumns;
   #unicityColumnMapping;
@@ -31,7 +29,6 @@ class ImportOrganizationLearnerSet {
 
     this.#unicityColumns = importFormat.config.unicityColumns;
 
-    this.#hasValidationFormats = Boolean(importFormat.config.headers.find((header) => header.config?.validate));
     this.#validationRuleList = importFormat.config.headers.flatMap((header) => {
       return header.config?.validate ? { name: header.name, ...header.config?.validate } : [];
     });
@@ -42,7 +39,6 @@ class ImportOrganizationLearnerSet {
     this.#existingLearners = [];
 
     this.#unicityKeys = [];
-    this.#unicityKeysObject = [];
     this.#errors = [];
     this.#constructorValidation();
 
@@ -127,7 +123,7 @@ class ImportOrganizationLearnerSet {
   #formatLearnerAttribute({ attribute, columnName }) {
     if (!attribute) return null;
 
-    if (this.#hasValidationFormats) {
+    if (this.#validationRuleList.length > 0) {
       const dateFormat = this.#columnMapping.find(
         (header) => header.config?.validate?.type === 'date' && header.name === columnName,
       );
@@ -214,8 +210,6 @@ class ImportOrganizationLearnerSet {
 
   #checkUnicityRule(learner) {
     const learnerUnicityObject = this.#getLearnerUnicityObject(learner);
-    this.#unicityKeysObject.push(learnerUnicityObject);
-
     const aggregateUnicityKeys = Object.values(learnerUnicityObject).join('-');
 
     if (!this.#unicityKeys.includes(aggregateUnicityKeys)) {
@@ -245,8 +239,8 @@ class ImportOrganizationLearnerSet {
       errors.push(unicityError);
     }
 
-    if (this.#hasValidationFormats) {
-      const validationErrors = this.#checkValidations(learner);
+    if (this.#validationRuleList.length > 0) {
+      const validationErrors = validateCommonOrganizationLearner(learner, this.#validationRuleList);
 
       if (validationErrors) {
         errors.push(...validationErrors);
@@ -256,10 +250,6 @@ class ImportOrganizationLearnerSet {
     if (errors.length > 0) {
       throw errors;
     }
-  }
-
-  #checkValidations(learner) {
-    return validateCommonOrganizationLearner(learner, this.#validationRuleList);
   }
 
   get learners() {
