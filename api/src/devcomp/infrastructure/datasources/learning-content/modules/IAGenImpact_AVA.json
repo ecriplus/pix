@@ -1,7 +1,7 @@
 {
   "id": "1137b471-e347-4601-abd7-bc82ce587d7e",
   "shortId": "f4a3d9ed",
-  "slug": "ia-gen-impacts",
+  "slug": "ia-gen-impacts-ava",
   "title": "Les IA génératives : quels impacts sur l’environnement ?",
   "isBeta": true,
   "visibility": "public",
@@ -410,7 +410,7 @@
                     {
                       "id": "2c1c5be2-a58d-475d-afec-dc7b6ad88e8e",
                       "type": "text",
-                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des IA : ils sont nécessaires pour effectuer des calculs et stocker des informations pour de la génération des réponses. Du fait de l’explosion des usages en IA, l’impact de l’utilisation des IA dépasse maintenant celui de leur entraînement.<br><br></p>"
+                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d'IA : ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d'IA génératives, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</p>"
                     }
                   ]
                 },
@@ -419,7 +419,16 @@
                     {
                       "id": "5878e032-208b-4e28-94d2-9fb5e1b47884",
                       "type": "text",
-                      "content": "<h5>Alors, quel est l’impact si l’on prend en compte l’entraînement et l’utilisation des IA ?&nbsp; </h5>\n<p>Difficile à dire mais à titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023).&nbsp; Cette massification résulte notamment d'une volonté des acteurs du numérique d'imposer l'usage de l'IA dans les outils numériques existants, et dans leurs entreprises.</p>"
+                      "content": "À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d'IA génératives.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7bce7710-e3e0-4626-a366-c341bc7661aa",
+                      "type": "text",
+                      "content": "Cette massification résulte notamment d'une volonté des acteurs du numérique d'<strong>imposer l'usage des logiciels d'IA</strong> dans les outils numériques existants, et dans leurs entreprises.</p>"
                     }
                   ]
                 }
@@ -512,7 +521,11 @@
                         }
                       ],
                       "solution": "1"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "elements": [
                     {
                       "id": "a4a3eb56-162b-417e-a764-c381edbc8cb5",
                       "type": "text",
@@ -553,12 +566,37 @@
           "title": "Leçon : quelle piste pour réduire l'impact",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "974d179b-fa0b-4312-a156-e0521cb95089",
-                "type": "text",
-                "content": "<p>[à venir]</p>"
-              }
+              "type": "stepper",
+              "instruction": "feur",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "974d179b-fa0b-4312-a156-e0521cb95089",
+                      "type": "text",
+                      "content": "<p>En théorie, <strong>les concepteurs d'IA générative disposent de plusieurs moyens d'action pour réduire leur impact sur l'environnement</strong> : faire des études d'impact et les publier, entraîner moins de nouveaux modèles, améliorer leurs logiciels et leurs infrastructures pour qu'elles consomment moins d'énergie…</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8519af0e-fb12-4bbf-8435-62c853decfdb",
+                      "type": "text",
+                      "content": "<p>… mais généralement <strong>ils n'en font rien</strong>. L'économie de l'intelligence artificielle est très concurrentielle et vise principalement à faire des profits. La réduction des impacts environnementaux est donc rarement une priorité pour les concepteurs.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "71326633-9b59-4fc5-a33a-c5ac633daac9",
+                      "type": "text",
+                      "content": "<h5>En tant qu'utilisateur, que pouvons-nous faire ?</h5>On peut adopter une démarche de <strong>sobriété</strong> et réduire autant que possible notre utilisation des logiciels d'intelligence artificielle.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -576,9 +614,9 @@
             {
               "type": "element",
               "element": {
-                "id": "8bffed0c-54c0-4440-b231-eb24fb471735",
+                "id": "280fa165-c7a5-44f2-b82e-bdcc6a28c16a",
                 "type": "text",
-                "content": "<p>[à venir]<br></p>"
+                "content": "<ul><li><strong>Entraîner</strong> et <strong>faire fonctionner</strong> un modèle d'intelligence artificielle nécessite de faire énormément de <strong>calculs</strong>.</li><li>Ces calculs sont faits dans des centres de données avec du matériel spécialisé, comme des <strong>cartes graphiques (GPU)</strong>, qui nécessitent <strong>beaucoup de ressources pour être fabriquées</strong>, <strong>beaucoup d'électricité pour fonctionner</strong>, et ont une <strong>durée de vie courte</strong>. Tout cela a un fort impact négatif sur l'environnement.</li><li>Pour limiter ces impacts, les concepteurs d'intelligence artificielle pourraient :<ul><li>mener des <strong>études scientifiques</strong> sur leurs impacts, et les rendre <strong>publiques</strong></li><li>entraîner moins de nouveaux modèles</li><li>améliorer leurs techniques afin de réduire leur impact.</li></ul><li>Malheureusement, la plupart des concepteurs ne mènent pas ces actions car elles ne <strong>s'inscrivent pas dans leur modèle économique</strong>.</li><li>À titre individuel, on peut essayer de <strong>réduire autant que possible notre utilisation</strong> des logiciels d'intelligence artificielle pour limiter ses impacts environnementaux</li></ul>"
               }
             }
           ]
