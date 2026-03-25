@@ -9,11 +9,14 @@ export default class EmbeddedWebComponent extends Component {
 
   @action
   mountCustomElement(container) {
-    this.#customElement = document.createElement(this.args.tagName);
-    Object.assign(this.#customElement, this.args.props);
-    this.#customElement.addEventListener('answer', this.#handleAnswer);
-    this.#customElement.dataset.testid = this.args.tagName;
-    container.append(this.#customElement);
+    if (!this.#customElement) {
+      this.#customElement = document.createElement(this.args.tagName);
+      Object.assign(this.#customElement, this.args.props);
+      this.#customElement.addEventListener('answer', this.#handleAnswer);
+      this.#customElement.dataset.testid = this.args.tagName;
+      container.append(this.#customElement);
+    }
+    this.#customElement.readonly = !!this.args.isDisabled;
   }
 
   willDestroy(...args) {

@@ -38,4 +38,18 @@ module('Acceptance | Displaying a QCM Image challenge', function (hooks) {
     // then
     assert.dom(screen.getByText(t('pages.challenge.messages.wrong-answer'))).exists();
   });
+
+  test('should have readonly mode after submit response', async function (assert) {
+    // when
+    const screen = await visit(`/assessments/${assessment.id}/challenges`);
+    const imageQuiz = within(find('image-quiz').shadowRoot);
+
+    assert.strictEqual(imageQuiz.getByRole('option', { name: 'bad-answer' }).getAttribute('readonly'), null);
+
+    await click(imageQuiz.getByRole('option', { name: 'bad-answer' }));
+    await click(screen.getByRole('button', { name: t('pages.challenge.actions.check') }));
+
+    assert.strictEqual(imageQuiz.getByRole('option', { name: 'bad-answer' }).getAttribute('readonly'), '');
+    assert.strictEqual(imageQuiz.getByRole('option', { name: 'Choix1' }).getAttribute('readonly'), '');
+  });
 });

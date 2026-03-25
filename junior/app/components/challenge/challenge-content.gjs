@@ -83,6 +83,7 @@ export default class ChallengeContent extends Component {
           @tagName={{@challenge.webComponentTagName}}
           @props={{@challenge.webComponentProps}}
           @setAnswerValue={{@setAnswerValue}}
+          @isDisabled={{@isDisabled}}
         />
       {{/if}}
       {{#if @challenge.hasForm}}
