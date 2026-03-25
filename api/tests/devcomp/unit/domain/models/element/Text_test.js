@@ -6,19 +6,29 @@ describe('Unit | Devcomp | Domain | Models | Element | Text', function () {
   describe('#constructor', function () {
     it('should create a text and keep attributes', function () {
       // when
-      const text = new Text({ id: 'id', content: 'content' });
+      const text = new Text({ id: 'id', content: 'content', tag: ' ' });
 
       // then
       expect(text.id).to.equal('id');
       expect(text.content).to.equal('content');
       expect(text.type).to.equal('text');
+      expect(text.tag).to.equal(' ');
+    });
+
+    it('should accept all valid tag values', function () {
+      const validTags = [' ', 'context', 'did-you-know', 'further-information', 'key-points', 'tip'];
+
+      for (const tag of validTags) {
+        const text = new Text({ id: 'id', content: 'content', tag });
+        expect(text.tag).to.equal(tag);
+      }
     });
   });
 
   describe('A text without id', function () {
     it('should throw an error', function () {
       // when
-      const error = catchErrSync(() => new Text({ content: 'content' }))();
+      const error = catchErrSync(() => new Text({ content: 'content', tag: ' ' }))();
 
       // then
       expect(error).to.be.instanceOf(DomainError);
@@ -29,11 +39,34 @@ describe('Unit | Devcomp | Domain | Models | Element | Text', function () {
   describe('A text without content', function () {
     it('should throw an error', function () {
       // when
-      const error = catchErrSync(() => new Text({ id: '1' }))();
+      const error = catchErrSync(() => new Text({ id: '1', tag: ' ' }))();
 
       // then
       expect(error).to.be.instanceOf(DomainError);
       expect(error.message).to.equal('The content is required for a text');
+    });
+  });
+
+  describe('A text with an invalid tag', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(() => new Text({ id: '1', content: 'content', tag: 'invalid-tag' }))();
+
+      // then
+      expect(error).to.be.instanceOf(TypeError);
+      expect(error.message).to.equal(
+        "The tag value must be one of: ' ', 'context', 'did-you-know', 'further-information', 'key-points', 'tip'",
+      );
+    });
+  });
+
+  describe('A text without tag', function () {
+    it('should throw an error', function () {
+      // when
+      const error = catchErrSync(() => new Text({ id: '1', content: 'content' }))();
+
+      // then
+      expect(error).to.be.instanceOf(TypeError);
     });
   });
 });
