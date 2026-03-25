@@ -27,30 +27,17 @@ class Form {
     hours: 0,
     minutes: 0,
   };
-  @tracked locale;
   @tracked locales;
   @tracked editorLogoUrl;
   @tracked editorName;
   @tracked isDisabled;
 
-  constructor({
-    title,
-    internalTitle,
-    link,
-    type,
-    duration,
-    locale,
-    locales,
-    editorLogoUrl,
-    editorName,
-    isDisabled,
-  } = {}) {
+  constructor({ title, internalTitle, link, type, duration, locales, editorLogoUrl, editorName, isDisabled } = {}) {
     this.title = title || null;
     this.internalTitle = internalTitle || null;
     this.link = link || null;
     this.type = type || null;
     this.duration = duration ? { ...duration } : { days: 0, hours: 0, minutes: 0 };
-    this.locale = locale || null;
     this.locales = locales || [];
     this.editorLogoUrl = editorLogoUrl || null;
     this.editorName = editorName || null;
@@ -135,7 +122,6 @@ export default class CreateOrUpdateTrainingForm extends Component {
       link: this.form.link,
       type: this.form.type,
       duration: this.form.duration,
-      locale: this.form.locale ?? 'fr-fr',
       locales: this.form.locales,
       editorName: this.form.editorName,
       isDisabled: this.form.isDisabled,

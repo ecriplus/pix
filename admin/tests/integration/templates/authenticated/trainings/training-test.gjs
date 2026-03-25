@@ -23,7 +23,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       internalTitle: 'internalTitle',
       link: 'my-training-link',
       type: 'type',
-      locale: 'fr-fr',
+      locales: ['fr-fr'],
       editorName: 'Albert',
       editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
       isRecommendable: true,

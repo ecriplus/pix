@@ -16,10 +16,6 @@ export default class TrainingDetailsCard extends Component {
     return `${days}${hours}${minutes}`.trim();
   }
 
-  get formattedLocale() {
-    return localeCategories[this.args.training.locale];
-  }
-
   get formattedLocales() {
     return this.args.training.locales.map((locale) => localeCategories[locale]).join(', ');
   }

@@ -1,7 +1,6 @@
 import { clickByName, fillByLabel, screen, visit } from '@1024pix/ember-testing-library';
 import { click, currentURL, fillIn } from '@ember/test-helpers';
-import { t } from 'ember-intl/test-support';
-import { setupIntl } from 'ember-intl/test-support';
+import { setupIntl, t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-init';
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
@@ -38,7 +37,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         link: 'http://www.example2.net',
         type: 'autoformation',
         duration: { days: 0, hours: 10, minutes: 0 },
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
         editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         prerequisiteThreshold: null,
@@ -52,7 +51,7 @@ module('Acceptance | Trainings | Training', function (hooks) {
         link: 'http://www.example2.net',
         type: 'webinaire',
         duration: { days: 0, hours: 10, minutes: 0 },
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
         editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         prerequisiteThreshold: null,

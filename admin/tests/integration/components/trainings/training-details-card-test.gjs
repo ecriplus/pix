@@ -14,7 +14,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     internalTitle: 'Mon titre interne',
     link: 'https://un-contenu-formatif',
     type: 'webinaire',
-    locale: 'fr-fr',
+    locales: ['fr-fr'],
     editorName: 'Un éditeur de contenu formatif',
     editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
     duration: {
@@ -92,7 +92,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
           internalTitle: 'Mon titre interne',
           link: 'https://un-contenu-formatif',
           type: 'webinaire',
-          locale: 'fr-fr',
+          locales: ['fr-fr'],
           editorName: 'Un éditeur de contenu formatif',
           editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
           duration,
@@ -113,24 +113,24 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
       // given
       const trainingWithOneLocale = { ...training, locales: ['fr'] };
 
-        // when
-        const screen = await render(<template><TrainingDetailsCard @training={{trainingWithOneLocale}} /></template>);
+      // when
+      const screen = await render(<template><TrainingDetailsCard @training={{trainingWithOneLocale}} /></template>);
 
-        // then
-        assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 1 }))).exists();
-        assert.dom(screen.getByText('Francophone (fr)')).exists();
-      });
+      // then
+      assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 1 }))).exists();
+      assert.dom(screen.getByText('Francophone (fr)')).exists();
     });
+  });
 
-    module('when there are multiple value in locales', function () {
-      test('it should display locales with a plural label', async function (assert) {
-        // given
-        const trainingWithMultipleLocales = { ...training, locales: ['fr', 'en'] };
+  module('when there are multiple value in locales', function () {
+    test('it should display locales with a plural label', async function (assert) {
+      // given
+      const trainingWithMultipleLocales = { ...training, locales: ['fr', 'en'] };
 
-        // when
-        const screen = await render(
-          <template><TrainingDetailsCard @training={{trainingWithMultipleLocales}} /></template>,
-        );
+      // when
+      const screen = await render(
+        <template><TrainingDetailsCard @training={{trainingWithMultipleLocales}} /></template>,
+      );
 
       // then
       assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 2 }))).exists();
@@ -149,7 +149,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
         internalTitle: 'Mon titre interne',
         link: '/modules/123/soleil',
         type: 'modulix',
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: 'Un éditeur de contenu formatif',
         editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         duration: {
