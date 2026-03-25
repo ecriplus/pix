@@ -198,7 +198,7 @@
               "element": {
                 "id": "1c479a77-fcc8-4056-9459-6aa9ba1bc6b2",
                 "type": "custom",
-                "title": "Exercice d'anonymisation",
+                "title": "",
                 "instruction": "Voici plusieurs prompts. Certains donnent des informations privées ou secrètes. Repérez-les et sélectionnez-les.",
                 "functionalInstruction": "Cliquez sur les morceaux de phrase contenant des données qu’il ne faut pas donner à une IA. Une fois toutes ces données sélectionnées, cliquez sur \"Suivant\" pour vérifier votre réponse.",
                 "tagName": "pix-anonymisation",
