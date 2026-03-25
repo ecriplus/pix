@@ -52,6 +52,7 @@ export default class ModulixPreview extends Component {
             "element": {
               "id": "2222222a-2222-2bcd-e222-2f2222gh2222",
               "type": "text",
+              "tag": " ",
               "content": "<h4>Voici une leçon</h4>"
             }
           },
@@ -60,6 +61,7 @@ export default class ModulixPreview extends Component {
             "element": {
               "id": "3333333a-3333-3bcd-e333-3f3333gh3333",
               "type": "text",
+              "tag": " ",
               "content": "<p>Voici un texte de leçon. Parfois, il y a des émojis pour aider à la lecture&nbsp;<span aria-hidden='true'>📚</span>.<br>Et là, voici une image&#8239;!</p>"
             }
           },
@@ -78,6 +80,7 @@ export default class ModulixPreview extends Component {
             "element": {
               "id": "5555555a-5555-5bcd-e555-5f5555gh5555",
               "type": "text",
+              "tag": " ",
               "content": "<p>Quelques objets sont visibles dans l'image :</p><ul><li>Un ordinateur</li><li>Un satellite</li><li>Des étoiles</li></ul>"
             }
           }

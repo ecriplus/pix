@@ -1661,6 +1661,15 @@
         "short-video": {
           "consult-transcription": "Please consult the transcription to view its content.",
           "missing-content": "An error occurred while displaying the video."
+        },
+        "text": {
+          "tag": {
+            "context": "Context",
+            "did-you-know": "Did you know?",
+            "further-information": "Further information",
+            "key-points": "Key points",
+            "tip": "Tip"
+          }
         }
       },
       "flashcards": {

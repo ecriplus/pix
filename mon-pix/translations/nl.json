@@ -1661,6 +1661,15 @@
         "short-video": {
           "consult-transcription": "Raadpleeg de transcriptie om de inhoud te bekijken.",
           "missing-content": "Er is een fout opgetreden bij het weergeven van de video."
+        },
+        "text": {
+          "tag": {
+            "context": "Context",
+            "did-you-know": "Wist je dat?",
+            "further-information": "Meer informatie",
+            "key-points": "Kernpunten",
+            "tip": "Tip"
+          }
         }
       },
       "flashcards": {
