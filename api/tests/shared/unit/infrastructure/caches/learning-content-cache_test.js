@@ -2,10 +2,10 @@ import { LearningContentCache } from '../../../../../src/shared/infrastructure/c
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
-  let pubSub, map, learningContentCache;
+  let topic, map, learningContentCache;
 
   beforeEach(function () {
-    pubSub = {
+    topic = {
       subscribe: sinon.stub(),
       publish: sinon.stub(),
     };
@@ -18,7 +18,7 @@ describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
       size: 0,
     };
 
-    learningContentCache = new LearningContentCache({ name: 'test', pubSub, map });
+    learningContentCache = new LearningContentCache({ name: 'test', topic, map });
   });
 
   describe('#get', function () {
@@ -60,7 +60,7 @@ describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
       learningContentCache.delete(key);
 
       // then
-      expect(pubSub.publish).to.have.been.calledOnceWithExactly('test', { type: 'delete', key });
+      expect(topic.publish).to.have.been.calledOnceWithExactly({ type: 'delete', key });
     });
   });
 
@@ -70,7 +70,45 @@ describe('Unit | Infrastructure | Caches | LearningContentCache', function () {
       learningContentCache.clear();
 
       // then
-      expect(pubSub.publish).to.have.been.calledOnceWithExactly('test', { type: 'clear' });
+      expect(topic.publish).to.have.been.calledOnceWithExactly({ type: 'clear' });
+    });
+  });
+
+  describe('subscription callback', function () {
+    let callback;
+
+    beforeEach(function () {
+      expect(topic.subscribe).to.have.been.calledOnce;
+      expect(topic.subscribe.firstCall.args).to.have.lengthOf(1);
+      expect(topic.subscribe.firstCall.firstArg).to.be.instanceOf(Function);
+
+      callback = topic.subscribe.firstCall.firstArg;
+    });
+
+    describe('when message type is clear', function () {
+      it('clears the map', function () {
+        // given
+        const message = { type: 'clear' };
+
+        // when
+        callback(message);
+
+        // then
+        expect(map.clear).to.have.been.calledOnceWithExactly();
+      });
+    });
+
+    describe('when message type is delete', function () {
+      it('deletes the key', function () {
+        // given
+        const message = { type: 'delete', key: 'qwertz' };
+
+        // when
+        callback(message);
+
+        // then
+        expect(map.delete).to.have.been.calledOnceWithExactly('qwertz');
+      });
     });
   });
 });
