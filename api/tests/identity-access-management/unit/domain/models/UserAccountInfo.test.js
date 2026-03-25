@@ -1,13 +1,8 @@
-import {
-  RESTRICTED_OIDC_PROVIDERS,
-  UserAccountInfo,
-} from '../../../../../src/identity-access-management/domain/models/UserAccountInfo.js';
+import { UserAccountInfo } from '../../../../../src/identity-access-management/domain/models/UserAccountInfo.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | UserAccountInfo', function () {
-  beforeEach(function () {
-    RESTRICTED_OIDC_PROVIDERS.list = ['RESTRICTED_OIDC_PARTNER_1', 'RESTRICTED_OIDC_PARTNER_2'];
-  });
+  const restrictedOidcProvidersForEmailCreation = ['RESTRICTED_OIDC_PROVIDER_1'];
 
   describe('constructor', function () {
     it('creates a user account info with required properties and sets default values for optional properties', function () {
@@ -17,6 +12,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
         email: 'user@example.net',
         username: 'user123',
         canSelfDeleteAccount: true,
+        restrictedOidcProvidersForEmailCreation,
       };
 
       // when
@@ -41,6 +37,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
           username: 'user123',
           canSelfDeleteAccount: true,
           addEmailConnectionMethodEnabled: false,
+          restrictedOidcProvidersForEmailCreation,
           oidcAuthenticationMethods: [{ identityProvider: 'OIDC_PARTNER' }],
         });
 
@@ -59,6 +56,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
             username: 'user123',
             canSelfDeleteAccount: true,
             addEmailConnectionMethodEnabled: true,
+            restrictedOidcProvidersForEmailCreation,
             oidcAuthenticationMethods: [{ identityProvider: 'AUTHORIZED_OIDC_PARTNER' }],
           });
 
@@ -77,6 +75,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
               username: 'user123',
               canSelfDeleteAccount: true,
               addEmailConnectionMethodEnabled: true,
+              restrictedOidcProvidersForEmailCreation,
               oidcAuthenticationMethods: [],
             });
 
@@ -85,7 +84,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
           });
         });
 
-        context('when all oidcAuthenticationMethods are restricted SSO providers', function () {
+        context('when user has one oidcAuthenticationMethod from a restricted provider', function () {
           it('canAddEmailConnectionMethod returns false', function () {
             // given
             const userAccountInfo = new UserAccountInfo({
@@ -94,10 +93,8 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
               username: 'user123',
               canSelfDeleteAccount: true,
               addEmailConnectionMethodEnabled: true,
-              oidcAuthenticationMethods: [
-                { identityProvider: 'RESTRICTED_OIDC_PARTNER_1' },
-                { identityProvider: 'RESTRICTED_OIDC_PARTNER_2' },
-              ],
+              restrictedOidcProvidersForEmailCreation,
+              oidcAuthenticationMethods: [{ identityProvider: 'RESTRICTED_OIDC_PROVIDER_1' }],
             });
 
             // when / then
@@ -114,6 +111,7 @@ describe('Unit | Domain | Models | UserAccountInfo', function () {
               username: 'user123',
               canSelfDeleteAccount: true,
               addEmailConnectionMethodEnabled: true,
+              restrictedOidcProvidersForEmailCreation,
               oidcAuthenticationMethods: [
                 { identityProvider: 'OIDC_PARTNER' },
                 { identityProvider: 'RESTRICTED_OIDC_PARTNER_1' },
