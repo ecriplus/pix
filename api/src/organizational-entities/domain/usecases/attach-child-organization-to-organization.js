@@ -18,11 +18,9 @@ const attachChildOrganizationToOrganization = withTransaction(
 
       _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin);
 
-      const parentOrganizationForAdmin = await organizationForAdminRepository.get({
+      await organizationForAdminRepository.get({
         organizationId: parentOrganizationId,
       });
-
-      _assertParentOrganizationIsNotChildOrganization(parentOrganizationForAdmin);
 
       childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
 
@@ -53,19 +51,6 @@ function _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin) {
       message: 'Unable to attach already attached child organization',
       meta: {
         childOrganizationId: childOrganizationForAdmin.id,
-      },
-    });
-  }
-}
-
-function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
-  if (parentOrganization.parentOrganizationId) {
-    throw new UnableToAttachChildOrganizationToParentOrganizationError({
-      code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-      message: 'Unable to attach child organization to parent organization which is also a child organization',
-      meta: {
-        grandParentOrganizationId: parentOrganization.parentOrganizationId,
-        parentOrganizationId: parentOrganization.id,
       },
     });
   }

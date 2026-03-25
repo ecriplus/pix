@@ -73,50 +73,6 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
       });
     });
 
-    context('when parent organization is already child of an organization', function () {
-      it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
-        // given
-        const childOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 123,
-          name: 'Child SCO Organization',
-          type: 'PRO',
-        });
-        const grandParentOrganizationId = 23;
-        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 1,
-          name: 'Parent PRO Organization',
-          type: 'PRO',
-          parentOrganizationId: grandParentOrganizationId,
-        });
-
-        const parentOrganizationId = parentOrganization.id;
-
-        organizationForAdminRepository.get.onCall(0).resolves(childOrganization);
-        organizationForAdminRepository.get.onCall(1).resolves(parentOrganization);
-        organizationForAdminRepository.findChildrenByParentOrganizationId.resolves([]);
-
-        // when
-        const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationIds: '123',
-          parentOrganizationId,
-          organizationForAdminRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.get).to.have.been.calledTwice;
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.message).to.equal(
-          'Unable to attach child organization to parent organization which is also a child organization',
-        );
-        expect(error.code).to.equal('UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION');
-        expect(error.meta).to.deep.equal({
-          grandParentOrganizationId,
-          parentOrganizationId,
-        });
-      });
-    });
-
     context('when the child organization is already parent', function () {
       it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
         // given
