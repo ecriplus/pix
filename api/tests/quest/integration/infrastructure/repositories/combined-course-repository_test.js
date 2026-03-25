@@ -149,6 +149,34 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(result.combinedCourses).to.have.lengthOf(1);
       expect(result.combinedCourses[0].organizationId).to.equal(organization1Id);
     });
+
+    it('should not return deleted combined courses', async function () {
+      // given
+      const organization1Id = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'COURSE1',
+        name: 'Parcours 1',
+        organizationId: organization1Id,
+      });
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'COURSE2',
+        name: 'Parcours 2',
+        organizationId: organization1Id,
+        deletedAt: new Date(),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseRepository.findByOrganizationId({
+        organizationId: organization1Id,
+        page: 1,
+        size: 10,
+      });
+
+      // then
+      expect(result.combinedCourses).to.have.lengthOf(1);
+      expect(result.combinedCourses[0].organizationId).to.equal(organization1Id);
+    });
   });
 
   describe('#findByCampaignId', function () {

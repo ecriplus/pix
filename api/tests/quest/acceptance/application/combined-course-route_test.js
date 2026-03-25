@@ -167,7 +167,7 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
       expect(response.statusCode).to.equal(404);
     });
 
-    it('should return 403 when combined course is deleted', async function () {
+    it('should return 404 when combined course is deleted', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
 
@@ -188,7 +188,7 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
       const response = await server.inject(options);
 
       // then
-      expect(response.statusCode).to.equal(403);
+      expect(response.statusCode).to.equal(404);
     });
   });
 

@@ -81,23 +81,4 @@ describe('Integration | Application | Usecases | checkAuthorizationToAccessCombi
       expect(authorized).to.be.false;
     });
   });
-
-  context('when combined course is deleted', function () {
-    it('should return authorized false', async function () {
-      // given
-      const code = 'COMBINIX1';
-      const userId = databaseBuilder.factory.buildUser().id;
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-
-      databaseBuilder.factory.buildCombinedCourse({ code, organizationId, deletedAt: now });
-
-      await databaseBuilder.commit();
-
-      // when
-      const authorized = await checkAuthorizationToAccessCombinedCourse.execute({ code, userId });
-
-      // then
-      expect(authorized).to.be.false;
-    });
-  });
 });

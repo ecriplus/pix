@@ -79,7 +79,8 @@ const _baseQuery = (knexConn) => {
       'quests.successRequirements as questSuccessRequirements',
       'quests.rewardId as questRewardId',
     )
-    .join('quests', 'quests.id', 'combined_courses.questId');
+    .join('quests', 'quests.id', 'combined_courses.questId')
+    .whereNull('deletedAt');
 };
 
 const targetProfileIdsPartOfAnyCombinedCourse = async ({ targetProfileIds }) => {
