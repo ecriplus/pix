@@ -63,7 +63,7 @@ export default class ChallengeContent extends Component {
     return this.isRebootable && !this.args.isDisabled;
   }
 
-  get computedEmbedHeight() {
+  get embedHeight() {
     const height = this.args.challenge.embedHeight || this.heightFromPostMessage;
     return height + 'px';
   }
@@ -80,7 +80,7 @@ export default class ChallengeContent extends Component {
           <EmbeddedSimulator
             @url={{@challenge.embedUrl}}
             @title={{@challenge.embedTitle}}
-            @computedEmbedHeight={{this.computedEmbedHeight}}
+            @embedHeight={{this.embedHeight}}
             @isGDevelop={{@challenge.isEmbedGDevelop}}
             @hideSimulator={{@isDisabled}}
             @isMediaWithForm={{this.isMediaWithForm}}

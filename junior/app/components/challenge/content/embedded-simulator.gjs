@@ -10,7 +10,7 @@ export default class EmbeddedSimulator extends Component {
   setIframeHtmlElement(htmlElement) {
     this.iframe = htmlElement;
 
-    this.iframe.style.height = this.args.computedEmbedHeight;
+    this.iframe.style.height = this.args.embedHeight;
 
     if (this.args.isGDevelop) {
       this.iframe.style.aspectRatio = '860/680';
