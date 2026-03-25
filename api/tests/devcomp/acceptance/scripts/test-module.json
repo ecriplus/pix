@@ -28,7 +28,8 @@
               "element": {
                 "id": "08a8b1ea-4771-48ef-a5a5-665c664ba673",
                 "type": "text",
-                "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>"
+                "content": "<p>Bonjour et bienvenue dans le bac à sable de Modulix. Vous allez pouvoir facilement découvrir comment fonctionne ce nouveau produit Pix.<br>C'est partix !</p>",
+                "tag": " "
               }
             }
           ]
@@ -96,7 +97,8 @@
               "element": {
                 "id": "e9aef60c-f18a-471e-85c7-e50b4731b86b",
                 "type": "text",
-                "content": "<h4>Pour afficher mon texte sur plusieurs colonnes, je peux utiliser la classe <em>modulix-two-columns</em>.</h4>\n <p>Des noms d'artistes de musique très sympas:</p>\n<ol class=\"modulix-two-columns\">\n    <li>Dylan</li>\n    <li>The Beatles</li>\n    <li>The Who</li>\n    <li>Blondie</li>\n    <li>Joan Baez</li>\n    <li>Supertramp</li>\n    <li>Kraftwerk</li>\n    <li>Queen</li>\n    <li>David Bowie</li>\n    <li>Céline Dion</li>\n</ol>"
+                "content": "<h4>Pour afficher mon texte sur plusieurs colonnes, je peux utiliser la classe <em>modulix-two-columns</em>.</h4>\n <p>Des noms d'artistes de musique très sympas:</p>\n<ol class=\"modulix-two-columns\">\n    <li>Dylan</li>\n    <li>The Beatles</li>\n    <li>The Who</li>\n    <li>Blondie</li>\n    <li>Joan Baez</li>\n    <li>Supertramp</li>\n    <li>Kraftwerk</li>\n    <li>Queen</li>\n    <li>David Bowie</li>\n    <li>Céline Dion</li>\n</ol>",
+                "tag": " "
               }
             },
             {
