@@ -607,13 +607,13 @@
               "element": {
                 "id": "c0e5914e-2508-4b40-aae1-2797c0247b8c",
                 "type": "custom",
-                "instruction": "",
+                "instruction": "Choisissez le type et le nombre de requêtes, puis observez ce qui se passe.",
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 0,
                   "capacityImage": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg"
                 },
-                "title": "",
+                "title": "L’impact des requêtes à l’IA générative",
                 "functionalInstruction": ""
               }
             },
