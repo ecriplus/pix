@@ -1,10 +1,7 @@
-import lodash from 'lodash';
-
 import { normalizeAndSortChars } from '../../../../shared/infrastructure/utils/string-utils.js';
-
-const { isEmpty } = lodash;
-
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../constants/certification-candidates-errors.js';
+
+const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
 
 const CpfValidationStatus = {
   FAILURE: 'FAILURE',

@@ -1,14 +1,12 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
-import { _ } from '../../../../shared/infrastructure/utils/lodash-utils.js';
 import { BILLING_MODES, SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 
-const COMPLEMENTARY_CERTIFICATIONS_EXCEPTED_DOUBLE_CERTIFICATION = _.omit(ComplementaryCertificationKeys, [
-  ComplementaryCertificationKeys.CLEA,
-]);
+// eslint-disable-next-line no-unused-vars
+const { CLEA, ...COMPLEMENTARY_CERTIFICATIONS_EXCEPTED_DOUBLE_CERTIFICATION } = ComplementaryCertificationKeys;
 
 const alternativeCoreOnly = Joi.array()
   .length(1)
