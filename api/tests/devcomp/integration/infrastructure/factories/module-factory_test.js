@@ -563,6 +563,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                         id: '84726001-1665-457d-8f13-4a74dc4768ea',
                         type: 'text',
                         content: '<h4>Content</h4>',
+                        tag: ' ',
                       },
                     },
                   ],
@@ -1617,6 +1618,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             {
                               id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
                               type: 'text',
+                              tag: ' ',
                               content:
                                 '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
                             },
@@ -2333,6 +2335,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             {
                               id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
                               type: 'text',
+                              tag: ' ',
                               content:
                                 '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
                             },
@@ -2397,6 +2400,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                             {
                               id: '342183f7-af51-4e4e-ab4c-ebed1e195063',
                               type: 'text',
+                              tag: ' ',
                               content:
                                 '<p>À la fin de cette vidéo, une question sera posée sur les compétences Pix.</p>',
                             },
@@ -2518,6 +2522,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
                       content: '<h4>Content</h4>',
+                      tag: ' ',
                     },
                   },
                   {
@@ -2578,6 +2583,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                       id: '84726001-1665-457d-8f13-4a74dc4768ea',
                       type: 'text',
                       content: '<h4>Content</h4>',
+                      tag: ' ',
                     },
                   },
                   {
