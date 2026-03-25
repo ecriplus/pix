@@ -249,7 +249,7 @@ const GLOBAL_SCORING_CONFIGURATION = [
   {
     meshLevel: 0,
     bounds: {
-      min: -8,
+      min: -4.67,
       max: -1.4,
     },
   },

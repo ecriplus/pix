@@ -96,7 +96,7 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
       expect(result.versionId).to.be.a('number');
       expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
       expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
-      expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-8);
+      expect(result._certificationScoringConfiguration[0].bounds.min).to.be.equal(-4.6);
       expect(result._certificationScoringConfiguration[7].bounds.max).to.be.equal(8);
     });
   });
