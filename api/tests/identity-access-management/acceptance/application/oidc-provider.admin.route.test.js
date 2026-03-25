@@ -78,13 +78,11 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
   });
 
   describe('GET /api/admin/oidc/identity-providers', function () {
-    beforeEach(async function () {
-      await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
-      server = await createServer();
-    });
-
     it('returns the list of all oidc providers with an HTTP status code 200', async function () {
       // given
+      await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
+      server = await createServer();
+
       const superAdmin = await insertUserWithRoleSuperAdmin();
       const options = {
         method: 'GET',
@@ -111,6 +109,45 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
           },
         },
       ]);
+    });
+
+    context('when there is a provider referencing another one with connectionMethodCode setting', function () {
+      it('returns only the referenced oidc provider', async function () {
+        // given
+        await createMockedTestOidcProviders([
+          {
+            identityProvider: 'IDP_1',
+            slug: 'idp-1',
+            source: 'IDP_1',
+            application: 'app',
+            applicationTld: '.fr',
+          },
+          {
+            identityProvider: 'IDP_2',
+            slug: 'idp-2',
+            source: 'IDP_2',
+            application: 'app',
+            applicationTld: '.fr',
+            connectionMethodCode: 'IDP_1',
+          },
+        ]);
+        server = await createServer();
+
+        const superAdmin = await insertUserWithRoleSuperAdmin();
+        const options = {
+          method: 'GET',
+          url: '/api/admin/oidc/identity-providers',
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        };
+
+        // when
+        const response = await server.inject(options);
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        expect(response.result.data.length).to.equal(1);
+        expect(response.result.data.at(0).id).to.equal('idp-1');
+      });
     });
   });
 
