@@ -637,7 +637,7 @@
       "type": "practise",
       "grains": [
         {
-          "id": "9f18a88a-3259-48da-ade7-a0f5650bb1ef",
+          "id": "fd28e9e3-a822-4223-99bd-c0e04b3f2fc3",
           "type": "activity",
           "title": "activity-1",
           "components": [
@@ -971,7 +971,7 @@
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "<p>Oui</p>",
+                          "content": "Oui",
                           "feedback": {
                             "state": "<p>Eh non ! Cette estimation ne prend pas en compte l'entraînement du modèle.</p>",
                             "diagnosis": "<p>Or, on a vu que l’entraînement était extrêmement coûteux en énergie.</p>"
