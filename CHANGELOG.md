@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.368.0](https://github.com/1024pix/pix/compare/v5.367.0...v5.368.0) (2026-03-25)
+
+### :rocket: Amélioration
+
+- [#15624](https://github.com/1024pix/pix/pull/15624) Ajout médias définitifs CY_MFA_NOV 
+- [#15606](https://github.com/1024pix/pix/pull/15606) Ajouter un placeholder dans la liste des formats d'import (PIX-21925) 
+- [#15621](https://github.com/1024pix/pix/pull/15621) MDX-18 GenEthique_IND 
+
+### :rewind: Retour en arrière
+
+- [#15607](https://github.com/1024pix/pix/pull/15607) Revert "[TECH] Set saml config"
+
+### :building_construction: Tech
+
+- [#15596](https://github.com/1024pix/pix/pull/15596) Réduire la durée de la transaction dans le endpoint POST /api/answers pour la positionner seulement autour de l'insertion en BDD de la réponse et des KE
+
 # [5.367.0](https://github.com/1024pix/pix/compare/v5.366.0...v5.367.0) (2026-03-24)
 
 ### :rocket: Amélioration
