@@ -239,6 +239,7 @@ const save = async function ({ organization }) {
     'parentOrganizationId',
     'countryCode',
   ]);
+
   const [organizationCreated] = await knexConn(ORGANIZATIONS_TABLE_NAME)
     .returning('*')
     .insert({
@@ -246,6 +247,13 @@ const save = async function ({ organization }) {
       organizationLearnerTypeId: organization.organizationLearnerType.id,
     });
   const savedOrganization = _toDomain(organizationCreated);
+
+  const [structure] = await knexConn('structures').returning('*').insert({});
+
+  await knexConn('fct_structures').insert({
+    structure_id: structure.id,
+    organization_id: savedOrganization.id,
+  });
 
   if (!_.isEmpty(savedOrganization.features)) {
     await _enableFeatures(knexConn, savedOrganization.features, savedOrganization.id);
