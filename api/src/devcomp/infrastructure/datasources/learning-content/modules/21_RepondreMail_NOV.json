@@ -704,28 +704,28 @@
                           "id": "1",
                           "content": "<p>Le mail envoyé par «&nbsp;École de danse&nbsp;».</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. </p>"
+                            "diagnosis": "<p>Eh non. Le mail envoyé par «&nbsp;PromoSports&nbsp;» le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. </p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Le mail envoyé par «&nbsp;Promosport&nbsp;».</p>",
+                          "content": "<p>Le mail envoyé par «&nbsp;PromoSports&nbsp;».</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
+                            "diagnosis": "<p>Bien vu ! Le mail envoyé par «&nbsp;PromoSports&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Le mail envoyé par «&nbsp;Biochoux&nbsp;».</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. </p>"
+                            "diagnosis": "<p>Eh non. Le mail envoyé par «&nbsp;PromoSports&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement. </p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
+                            "diagnosis": "<p>Le mail envoyé par «&nbsp;PromoSports&nbsp;» le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
                           }
                         }
                       ],
