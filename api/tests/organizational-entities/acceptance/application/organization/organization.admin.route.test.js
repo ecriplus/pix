@@ -1405,46 +1405,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           });
         });
       });
-
-      context('when child organization is already parent', function () {
-        it('returns a 409 HTTP status code with detailed error info', async function () {
-          // given
-          const parentOrganizationId = databaseBuilder.factory.buildOrganization({ type: 'PRO' }).id;
-          const childOrganizationId = databaseBuilder.factory.buildOrganization({ type: 'PRO' }).id;
-          databaseBuilder.factory.buildOrganization({
-            type: 'PRO',
-            parentOrganizationId: childOrganizationId,
-          });
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({
-              userId: superAdmin.id,
-            }),
-            payload: {
-              childOrganizationIds: `${childOrganizationId}`,
-            },
-          };
-
-          // when
-          const { result, statusCode } = await server.inject(options);
-
-          // then
-          const error = result.errors[0];
-          expect(statusCode).to.equal(409);
-          expect(error).to.deep.equal({
-            status: '409',
-            code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION',
-            title: 'Conflict',
-            detail: 'Unable to attach child organization because it is already parent of organizations',
-            meta: {
-              childOrganizationId,
-            },
-          });
-        });
-      });
     });
   });
 

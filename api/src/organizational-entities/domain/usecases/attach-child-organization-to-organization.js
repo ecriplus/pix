@@ -14,7 +14,6 @@ const attachChildOrganizationToOrganization = withTransaction(
         childOrganizationId,
         parentOrganizationId,
       });
-      await _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository });
 
       const childOrganizationForAdmin = await organizationForAdminRepository.get({
         organizationId: childOrganizationId,
@@ -51,22 +50,6 @@ function _assertChildOrganizationNotAlreadyPartOfANetwork(childOrganizationForAd
       message: 'Unable to attach organization already belonging to a network',
       meta: {
         childOrganizationId: childOrganizationForAdmin.id,
-      },
-    });
-  }
-}
-
-async function _assertChildOrganizationDoesNotHaveChildren({ childOrganizationId, organizationForAdminRepository }) {
-  const children = await organizationForAdminRepository.findChildrenByParentOrganizationId({
-    parentOrganizationId: childOrganizationId,
-  });
-
-  if (children.length) {
-    throw new UnableToAttachChildOrganizationToParentOrganizationError({
-      code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION',
-      message: 'Unable to attach child organization because it is already parent of organizations',
-      meta: {
-        childOrganizationId,
       },
     });
   }

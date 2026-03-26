@@ -81,53 +81,6 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         expect(error.meta).to.deep.equal({ childOrganizationId: 123 });
       });
     });
-
-    context('when the child organization is already parent', function () {
-      it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
-        // given
-        const childOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 123,
-          name: 'Child SCO Organization',
-          type: 'SCO',
-        });
-        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 1,
-          name: 'Parent PRO Organization',
-          type: 'PRO',
-        });
-        const childOfParentOrganization = domainBuilder.buildOrganizationForAdmin({
-          id: 456,
-          name: 'Child of Parent PRO Organization',
-          type: 'PRO',
-        });
-        const childOrganizationId = childOrganization.id;
-        const parentOrganizationId = parentOrganization.id;
-
-        organizationForAdminRepository.get.resolves(childOrganization);
-        organizationForAdminRepository.findChildrenByParentOrganizationId.resolves([childOfParentOrganization]);
-
-        // when
-        const error = await catchErr(attachChildOrganizationToOrganization)({
-          childOrganizationIds: '123,5',
-          parentOrganizationId,
-          organizationForAdminRepository,
-        });
-
-        // then
-        expect(organizationForAdminRepository.findChildrenByParentOrganizationId).to.have.been.calledOnceWithExactly({
-          parentOrganizationId: childOrganizationId,
-        });
-        expect(organizationForAdminRepository.update).to.not.have.been.called;
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.message).to.equal(
-          'Unable to attach child organization because it is already parent of organizations',
-        );
-        expect(error.code).to.equal('UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION');
-        expect(error.meta).to.deep.equal({
-          childOrganizationId,
-        });
-      });
-    });
   });
 
   context('success cases', function () {
