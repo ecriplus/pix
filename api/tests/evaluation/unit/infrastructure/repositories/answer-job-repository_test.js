@@ -1,13 +1,11 @@
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { pgBoss } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Evaluation | Unit | Infrastructure | Repositories | AnswerJobRepository', function () {
   beforeEach(async function () {
     sinon.stub(config, 'featureToggles');
-    sinon.stub(pgBoss, 'send').resolves([]);
     await featureToggles.set('isQuestEnabled', true);
     await featureToggles.set('isAsyncQuestRewardingCalculationEnabled', true);
   });
