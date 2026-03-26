@@ -132,7 +132,7 @@
                 "id": "f522ab24-0d04-4548-9dc7-6b82acc5cf87",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par une icône en forme d’enveloppe. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>Eh non. Cette application ne permet pas de consulter ses mails. [...]</li><br></ul>"
+                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par une icône en forme d’enveloppe. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>Eh non. Cette application ne permet pas de consulter ses mails. [...]</li></ul>"
               }
             }
           ]
@@ -551,7 +551,7 @@
                 "id": "0b89b707-67be-4a00-a9be-68abcda63164",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>[Feedback autovalid]</strong> </p><p>Bien joué ! Votre réponse a été envoyée. <br>Quand vous répondez à un mail, un nouveau mail est créé. Il est ensuite rangé dans les «&nbsp;Messages envoyés&nbsp;», juste en dessous de la «&nbsp;Boite de réception&nbsp;».<br></p>"
+                "content": "<p><strong>[Feedback autovalid]</strong> </p><p>Bien joué ! Votre réponse a été envoyée. <br>Quand vous répondez à un mail, un nouveau mail est créé. Il est ensuite rangé dans les «&nbsp;Messages envoyés&nbsp;», juste en dessous de la «&nbsp;Boite de réception&nbsp;».</p>"
               }
             }
           ]
@@ -628,7 +628,7 @@
               "element": {
                 "id": "944ae840-1837-47f7-bf2d-a59b45188519",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte4-v2.png",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte4-v3.png",
                 "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
                 "alternativeText": "<p>Messagerie électronique ouverte </p><p>Dans le menu&nbsp;: «&nbsp;Boite de réception (3)&nbsp;» sélectionnée</p><p>Quatre mails présents&nbsp; </p><ul><li>Mail «&nbsp;PromoSports&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: PromoSports</li><li>Objet&nbsp;: Soldes d’hiver</li><li>Date&nbsp;: 6 mars</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Bienvenue chez BioChoux</li><li>Date&nbsp;: 3 février</li></ul></li><li>Mail «&nbsp;École de danse&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: École de danse</li><li>Objet&nbsp;: Cours annulé</li><li>Date&nbsp;: 25 janvier</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;»<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ul></li></ul>",
                 "legend": "",
@@ -800,7 +800,7 @@
               "element": {
                 "id": "71121e18-b556-48e8-8d6f-4da90bf4f75b",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite1-v2.png",
+                "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite1-v3.png",
                 "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
                 "alternativeText": "<p>Messagerie électronique ouverte </p><p> Dans le menu&nbsp;: «&nbsp;Boite de réception (2)&nbsp;» sélectionnée </p><p>Trois mails présents&nbsp; </p><ul><li> Mail «&nbsp;Sophie&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: Sophie</li><li>Objet&nbsp;: Projet annuel</li><li>Date&nbsp;: 15 février</li></ul></li><li>Mail&nbsp;«&nbsp;Espaces verts&nbsp;»<ul><li>Expéditeur&nbsp;: Espaces verts</li><li>Objet&nbsp;: Lettre d’information</li><li>Date&nbsp;: 5 novembre</li></ul></li><li>Mail «&nbsp;Naïma&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: Naïma</li><li>Objet&nbsp;: Photos</li><li>Date&nbsp;: 5 novembre</li></ul></li></ul>",
                 "legend": "",
