@@ -9,7 +9,7 @@ import { tokenService } from '../domain/services/token-service.js';
  * @typedef {Object} CorrelationInfo
  * @property {string|null} user_id
  * @property {string|null} request_id - Can represent either current request_id or an inherited request_id (say when a job is triggered by a request, then the request_id will hold the parent.request_id)
- * @property {string|null} scriptName - Can represent either current scriptName or an inherited scriptName (say when a job is triggered by a script, then the scriptName will hold the parent.scriptName)
+ * @property {string|null} scriptId - Can represent either current scriptId or an inherited scriptId (say when a job is triggered by a script, then the scriptId will hold the parent.scriptId)
  * @property {string|null} jobId
  */
 
@@ -17,7 +17,7 @@ export const EXTRA_CORRELATION_INFO_KEY = 'extra-correlation-info';
 export const EMPTY_CORRELATION_INFO = {
   user_id: null,
   request_id: null,
-  scriptName: null,
+  scriptId: null,
   jobId: null,
   [EXTRA_CORRELATION_INFO_KEY]: null,
 };
@@ -122,7 +122,7 @@ export function incrementInContext(path, increment = 1) {
 export function getCorrelationInfo() {
   let request_id = getInContext('request_id', null);
   let user_id = getInContext('user_id', null);
-  const scriptName = getInContext('scriptName', null);
+  const scriptId = getInContext('scriptId', null);
   const jobId = getInContext('jobId', null);
 
   if (getInContext('executor', null) === EXECUTORS.REQUEST) {
@@ -134,7 +134,7 @@ export function getCorrelationInfo() {
   return {
     user_id,
     request_id,
-    scriptName,
+    scriptId,
     jobId,
     [EXTRA_CORRELATION_INFO_KEY]: getInContext(EXTRA_CORRELATION_INFO_KEY, null),
   };

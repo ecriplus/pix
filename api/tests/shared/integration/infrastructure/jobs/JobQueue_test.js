@@ -86,7 +86,7 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
                 sinon.assert.match(correlationInfo, {
                   user_id: null,
                   request_id: null,
-                  scriptName: null,
+                  scriptId: null,
                   jobId: sinon.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/),
                 });
               } catch (err) {
@@ -113,7 +113,7 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
             headers: { 'x-request-id': 'someRequestId' },
             auth: { credentials: { userId: 456 } },
           },
-          scriptName: 'someScriptName',
+          scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
           irrelevantDataForCorrelation: 'coucou',
         };
         await executeInContext(
@@ -141,7 +141,7 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
                 sinon.assert.match(currentContext, {
                   user_id: 456,
                   request_id: 'someRequestId',
-                  scriptName: 'someScriptName',
+                  scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
                   jobId: sinon.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/),
                 });
               } catch (err) {

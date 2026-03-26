@@ -132,7 +132,7 @@ function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
       JSON.stringify({
         user_id: req.user_id,
         request_id: req.request_id,
-        scriptName: req.scriptName,
+        scriptId: req.scriptId,
         jobId: req.jobId,
       }),
     );

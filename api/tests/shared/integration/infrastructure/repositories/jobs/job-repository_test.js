@@ -63,7 +63,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
         headers: { 'x-request-id': 'someRequestId' },
         auth: { credentials: { userId: 456 } },
       },
-      scriptName: 'someScriptName',
+      scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02 ',
       [EXTRA_CORRELATION_INFO_KEY]: {
         foo: 'bar',
       },
@@ -72,7 +72,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
     const expectedCorrelationContext = {
       user_id: 456,
       request_id: 'someRequestId',
-      scriptName: 'someScriptName',
+      scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02 ',
       jobId: null,
       [EXTRA_CORRELATION_INFO_KEY]: {
         foo: 'bar',

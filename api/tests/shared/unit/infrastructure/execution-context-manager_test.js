@@ -19,7 +19,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should not interpret request_id and user_id from a request object', async function () {
             const context = {
               request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               default_request_id: 'fallbackRequestId',
             };
@@ -28,7 +28,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: null,
               request_id: null,
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -37,7 +37,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should add request_id and user_id when already in context', async function () {
             const context = {
               request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               request_id: 'myContextRequestId',
               user_id: 456,
@@ -47,7 +47,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: 456,
               request_id: 'myContextRequestId',
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -57,7 +57,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should not interpret request_id and user_id from a request object and ignore default_request_id value', async function () {
             const context = {
               request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               default_request_id: 'fallbackRequestId',
             };
@@ -66,7 +66,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: null,
               request_id: null,
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -75,7 +75,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should add request_id and user_id when already in context', async function () {
             const context = {
               request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               request_id: 'myContextRequestId',
               user_id: 456,
@@ -85,7 +85,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: 456,
               request_id: 'myContextRequestId',
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -95,7 +95,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should interpret request_id and user_id from a request object, overriding values already in context', async function () {
             const context = {
               request: { headers: { 'x-request-id': 'myRequestId' }, auth: { credentials: { userId: 123 } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               request_id: 'myContextRequestId',
               user_id: 456,
@@ -105,7 +105,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: 123,
               request_id: 'myRequestId',
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -121,7 +121,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             sinon.assert.match(correlationContext, {
               user_id: null,
               request_id: 'fallbackRequestId',
-              scriptName: null,
+              scriptId: null,
               jobId: null,
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -130,7 +130,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           it('should add request_id and user_id already in context when nothing found in request object nor default_request_id found', async function () {
             const context = {
               request: { headers: { foo: 'bar' }, auth: { credentials: { foo: 'bar' } } },
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               request_id: 'myRequestId',
               user_id: 'myUserId',
@@ -140,7 +140,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
             expect(correlationContext).to.deep.equal({
               user_id: 'myUserId',
               request_id: 'myRequestId',
-              scriptName: 'myScriptName',
+              scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
               [EXTRA_CORRELATION_INFO_KEY]: null,
             });
@@ -157,7 +157,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         sinon.assert.match(correlationContext, {
           user_id: null,
           request_id: null,
-          scriptName: null,
+          scriptId: null,
           jobId: null,
           [EXTRA_CORRELATION_INFO_KEY]: null,
         });
@@ -165,7 +165,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
 
       it('should add any extra correlation info', async function () {
         const context = {
-          scriptName: 'myScriptName',
+          scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
           jobId: 'myJobId',
           request_id: 'myContextRequestId',
           user_id: 456,
@@ -178,7 +178,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         sinon.assert.match(correlationContext, {
           user_id: 456,
           request_id: 'myContextRequestId',
-          scriptName: 'myScriptName',
+          scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
           jobId: 'myJobId',
           [EXTRA_CORRELATION_INFO_KEY]: {
             sessionId: 789,
@@ -205,7 +205,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         request_id: null,
         user_id: null,
         jobId: null,
-        scriptName: null,
+        scriptId: null,
         [EXTRA_CORRELATION_INFO_KEY]: {
           sessionId: 456,
         },
@@ -229,7 +229,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         request_id: null,
         user_id: null,
         jobId: null,
-        scriptName: null,
+        scriptId: null,
         [EXTRA_CORRELATION_INFO_KEY]: {
           sessionId: 789,
         },
@@ -252,7 +252,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         request_id: null,
         user_id: null,
         jobId: null,
-        scriptName: null,
+        scriptId: null,
         [EXTRA_CORRELATION_INFO_KEY]: null,
       });
     });

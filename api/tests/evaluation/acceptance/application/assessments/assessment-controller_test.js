@@ -706,7 +706,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
               locale: FRENCH_FRANCE,
               correlationContext: {
                 jobId: null,
-                scriptName: null,
+                scriptId: null,
                 user_id: certifiableUserId,
                 request_id: sinon.match.string,
                 [EXTRA_CORRELATION_INFO_KEY]: {

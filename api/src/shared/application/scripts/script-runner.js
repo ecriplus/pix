@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import * as url from 'node:url';
 
 import pick from 'lodash/pick.js';
@@ -42,7 +43,7 @@ export class ScriptRunner {
     },
   ) {
     const { isRunningFromCli, getProcessArgs } = dependencies;
-    const context = { event: ScriptClass.name, scriptName: ScriptClass.name };
+    const context = { event: ScriptClass.name, scriptId: randomUUID() };
     await executeInContext(
       context,
       async () => {

@@ -57,7 +57,7 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
     expect(
       loggerPinoChildSpy.calledWithMatch(
         sinon.match({
-          scriptName: 'MyTestScript',
+          scriptId: sinon.match.string,
         }),
       ),
     ).to.be.true;
