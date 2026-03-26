@@ -7,6 +7,10 @@ export default Factory.extend({
     return 'Un contenu très formatif';
   },
 
+  locales() {
+    return ['fr-fr'];
+  },
+
   withFramework: trait({
     afterCreate(training, server) {
       createLearningContent(server);

@@ -5,7 +5,7 @@ export default class Training extends Model {
   @attr('string') title;
   @attr('string') link;
   @attr('string') type;
-  @attr('string') locale;
+  @attr() locales;
   @attr('string') editorName;
   @attr('string') editorLogoUrl;
   @attr() duration;

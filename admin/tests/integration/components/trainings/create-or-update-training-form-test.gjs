@@ -41,7 +41,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
     assert.dom(screen.getByLabelText('Jours (JJ)')).exists();
     assert.dom(screen.getByLabelText('Heures (HH)')).exists();
     assert.dom(screen.getByLabelText('Minutes (MM)')).exists();
-    assert.dom(screen.getByLabelText('Langue localisée')).exists();
+    assert.dom(screen.getByLabelText('Langues localisées')).exists();
     assert
       .dom(
         screen.getByRole('textbox', {
@@ -92,7 +92,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         internalTitle: 'Mon titre interne',
         link: 'https://un-contenu-formatif',
         type: 'webinaire',
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: 'Un éditeur de contenu formatif',
         editorLogoUrl: `http://localhost:4202/logo-placeholder.png`,
         duration: { days: 0, hours: 0, minutes: 0 },
@@ -116,7 +116,8 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
       assert.dom(screen.getByLabelText('Jours (JJ)')).hasValue(model.duration.days.toString());
       assert.dom(screen.getByLabelText('Heures (HH)')).hasValue(model.duration.hours.toString());
       assert.dom(screen.getByLabelText('Minutes (MM)')).hasValue(model.duration.minutes.toString());
-      assert.strictEqual(screen.getByLabelText('Langue localisée').innerText, localeCategories[model.locale]);
+      assert.strictEqual(screen.getByLabelText('Langues localisées').innerText, localeCategories[model.locales[0]]);
+
       assert
         .dom(
           screen.getByRole('textbox', {
@@ -184,7 +185,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
         internalTitle: 'Mon titre interne',
         link: 'https://un-contenu-formatif',
         type: 'webinaire',
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: 'Un éditeur de contenu formatif',
         editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         duration: { days: 0, hours: 0, minutes: 0 },
@@ -340,7 +341,7 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
           link: '/modules/k2000tro/use-llm',
           type: 'modulix',
           duration: { days: 0, hours: 0, minutes: 0 },
-          locale: 'fr-fr',
+          locales: ['fr-fr'],
           editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
           editorName: 'Pix',
           isDisabled: false,
@@ -373,75 +374,6 @@ module('Integration | Component | trainings | CreateOrUpdateTrainingForm', funct
 
       // then
       assert.dom(screen.getByRole('textbox', { name: 'Lien' })).exists();
-    });
-  });
-
-  module('when multipleLocalesForTrainingsEnabled feature toggle is disabled', function (hooks) {
-    hooks.beforeEach(function () {
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ multipleLocalesForTrainingsEnabled: false });
-    });
-
-    test('it should display the locale select', async function (assert) {
-      // when
-      const screen = await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-      );
-
-      // then
-      assert.dom(screen.getByLabelText('Langue localisée')).exists();
-    });
-
-    test('it should not display the locales multi-select', async function (assert) {
-      // when
-      const screen = await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-      );
-
-      // then
-      assert.dom(screen.queryByText(t('pages.trainings.training.form.locales.label'))).doesNotExist();
-    });
-  });
-
-  module('when multipleLocalesForTrainingsEnabled feature toggle is enabled', function (hooks) {
-    hooks.beforeEach(function () {
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ multipleLocalesForTrainingsEnabled: true });
-    });
-
-    test('it should display the locales multi-select', async function (assert) {
-      // when
-      const screen = await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-      );
-
-      // then
-      assert.dom(screen.getByText(t('pages.trainings.training.form.locales.label'))).exists();
-    });
-
-    test('it should not display the locale select', async function (assert) {
-      // when
-      const screen = await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmit}} @onCancel={{onCancel}} /></template>,
-      );
-
-      // then
-      assert.dom(screen.queryByLabelText('Langue localisée')).doesNotExist();
-    });
-
-    test('it should set locale to "fr-fr" when no locale is selected', async function (assert) {
-      // given
-      const onSubmitStub = sinon.stub();
-      await render(
-        <template><CreateOrUpdateTrainingForm @onSubmit={{onSubmitStub}} @onCancel={{onCancel}} /></template>,
-      );
-
-      // when
-      await triggerEvent('form', 'submit');
-
-      // then
-      const submittedData = onSubmitStub.getCall(0).firstArg;
-      assert.strictEqual(submittedData.locale, 'fr-fr');
     });
   });
 });

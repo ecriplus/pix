@@ -14,7 +14,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     internalTitle: 'Mon titre interne',
     link: 'https://un-contenu-formatif',
     type: 'webinaire',
-    locale: 'fr-fr',
+    locales: ['fr-fr'],
     editorName: 'Un éditeur de contenu formatif',
     editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
     duration: {
@@ -92,7 +92,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
           internalTitle: 'Mon titre interne',
           link: 'https://un-contenu-formatif',
           type: 'webinaire',
-          locale: 'fr-fr',
+          locales: ['fr-fr'],
           editorName: 'Un éditeur de contenu formatif',
           editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
           duration,
@@ -108,68 +108,33 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     });
   });
 
-  module('when multipleLocalesForTrainingsEnabled feature toggle is enabled', function (hooks) {
-    hooks.beforeEach(function () {
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ multipleLocalesForTrainingsEnabled: true });
-    });
-
-    test('it should not display locale information', async function (assert) {
+  module('when there is one value in locales', function () {
+    test('it should display locales with a singular label', async function (assert) {
       // given
-      const trainingWithOneLocale = { ...training, locales: ['fr', 'en'] };
+      const trainingWithOneLocale = { ...training, locales: ['fr'] };
 
       // when
       const screen = await render(<template><TrainingDetailsCard @training={{trainingWithOneLocale}} /></template>);
 
       // then
-      assert.dom(screen.queryByText('Langue localisée')).doesNotExist();
-      assert.dom(screen.queryByText('Franco-français (fr-fr)')).doesNotExist();
-    });
-
-    module('when there is one value in locales', function () {
-      test('it should display locales with a singular label', async function (assert) {
-        // given
-        const trainingWithOneLocale = { ...training, locales: ['fr'] };
-
-        // when
-        const screen = await render(<template><TrainingDetailsCard @training={{trainingWithOneLocale}} /></template>);
-
-        // then
-        assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 1 }))).exists();
-        assert.dom(screen.getByText('Francophone (fr)')).exists();
-      });
-    });
-
-    module('when there are multiple value in locales', function () {
-      test('it should display locales with a plural label', async function (assert) {
-        // given
-        const trainingWithMultipleLocales = { ...training, locales: ['fr', 'en'] };
-
-        // when
-        const screen = await render(
-          <template><TrainingDetailsCard @training={{trainingWithMultipleLocales}} /></template>,
-        );
-
-        // then
-        assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 2 }))).exists();
-        assert.dom(screen.getByText('Francophone (fr), Anglophone (en)')).exists();
-      });
+      assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 1 }))).exists();
+      assert.dom(screen.getByText('Francophone (fr)')).exists();
     });
   });
 
-  module('when multipleLocalesForTrainingsEnabled feature toggle is disabled', function () {
-    test('it should not display locales and continue to display locale label', async function (assert) {
+  module('when there are multiple value in locales', function () {
+    test('it should display locales with a plural label', async function (assert) {
       // given
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ multipleLocalesForTrainingsEnabled: false });
-      const trainingWithLocales = { ...training, locales: ['fr', 'en'] };
+      const trainingWithMultipleLocales = { ...training, locales: ['fr', 'en'] };
 
       // when
-      const screen = await render(<template><TrainingDetailsCard @training={{trainingWithLocales}} /></template>);
+      const screen = await render(
+        <template><TrainingDetailsCard @training={{trainingWithMultipleLocales}} /></template>,
+      );
 
       // then
-      assert.dom(screen.queryByText(t('pages.trainings.training.details.locales', { count: 2 }))).doesNotExist();
-      assert.dom(screen.getByText(t('pages.trainings.training.details.localizedLanguage'))).exists();
+      assert.dom(screen.getByText(t('pages.trainings.training.details.locales', { count: 2 }))).exists();
+      assert.dom(screen.getByText('Francophone (fr), Anglophone (en)')).exists();
     });
   });
 
@@ -184,7 +149,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
         internalTitle: 'Mon titre interne',
         link: '/modules/123/soleil',
         type: 'modulix',
-        locale: 'fr-fr',
+        locales: ['fr-fr'],
         editorName: 'Un éditeur de contenu formatif',
         editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
         duration: {

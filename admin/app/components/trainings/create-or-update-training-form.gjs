@@ -27,30 +27,17 @@ class Form {
     hours: 0,
     minutes: 0,
   };
-  @tracked locale;
   @tracked locales;
   @tracked editorLogoUrl;
   @tracked editorName;
   @tracked isDisabled;
 
-  constructor({
-    title,
-    internalTitle,
-    link,
-    type,
-    duration,
-    locale,
-    locales,
-    editorLogoUrl,
-    editorName,
-    isDisabled,
-  } = {}) {
+  constructor({ title, internalTitle, link, type, duration, locales, editorLogoUrl, editorName, isDisabled } = {}) {
     this.title = title || null;
     this.internalTitle = internalTitle || null;
     this.link = link || null;
     this.type = type || null;
     this.duration = duration ? { ...duration } : { days: 0, hours: 0, minutes: 0 };
-    this.locale = locale || null;
     this.locales = locales || [];
     this.editorLogoUrl = editorLogoUrl || null;
     this.editorName = editorName || null;
@@ -63,7 +50,6 @@ const MODULIX_EDITOR_LOGO_URL = 'https://assets.pix.org/contenu-formatif/editeur
 const MODULIX_EDITOR_NAME = 'Pix';
 
 export default class CreateOrUpdateTrainingForm extends Component {
-  @service featureToggles;
   @service store;
 
   @tracked submitting = false;
@@ -136,7 +122,6 @@ export default class CreateOrUpdateTrainingForm extends Component {
       link: this.form.link,
       type: this.form.type,
       duration: this.form.duration,
-      locale: this.form.locale ?? 'fr-fr',
       locales: this.form.locales,
       editorName: this.form.editorName,
       isDisabled: this.form.isDisabled,
@@ -255,32 +240,18 @@ export default class CreateOrUpdateTrainingForm extends Component {
               <:label>Minutes (MM)</:label>
             </PixInput>
           </div>
-          {{#if this.featureToggles.featureToggles.multipleLocalesForTrainingsEnabled}}
-            <PixMultiSelect
-              @id="trainingLocales"
-              @placeholder={{t "pages.trainings.training.form.locales.placeholder"}}
-              @options={{this.optionsLocaleList}}
-              @values={{this.form.locales}}
-              @onChange={{fn this.updateSelect "locales"}}
-              required={{true}}
-              aria-required={{true}}
-            >
-              <:label>{{t "pages.trainings.training.form.locales.label"}}</:label>
-              <:default as |option|>{{option.label}}</:default>
-            </PixMultiSelect>
-          {{else}}
-            <PixSelect
-              @id="trainingLocale"
-              @placeholder="-- Sélectionnez une langue --"
-              @options={{this.optionsLocaleList}}
-              @value={{this.form.locale}}
-              @onChange={{fn this.updateSelect "locale"}}
-              required={{true}}
-              aria-required={{true}}
-            >
-              <:label>Langue localisée</:label>
-            </PixSelect>
-          {{/if}}
+          <PixMultiSelect
+            @id="trainingLocales"
+            @placeholder={{t "pages.trainings.training.form.locales.placeholder"}}
+            @options={{this.optionsLocaleList}}
+            @values={{this.form.locales}}
+            @onChange={{fn this.updateSelect "locales"}}
+            required={{true}}
+            aria-required={{true}}
+          >
+            <:label>{{t "pages.trainings.training.form.locales.label"}}</:label>
+            <:default as |option|>{{option.label}}</:default>
+          </PixMultiSelect>
           <PixInput
             @id="trainingEditorLogoUrl"
             @subLabel="Exemple : {{MODULIX_EDITOR_LOGO_URL}}"
