@@ -134,6 +134,7 @@ function _getCombinedCoursesParticipations({ userId }) {
         })
         .join('organizations', 'combined_courses.organizationId', 'organizations.id')
         .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE)
+        .whereNull('organization_learner_participations.deletedAt')
         .whereIn('organization_learner_participations.organizationLearnerId', function () {
           this.select('id').from('organization-learners').where('userId', userId);
         });
