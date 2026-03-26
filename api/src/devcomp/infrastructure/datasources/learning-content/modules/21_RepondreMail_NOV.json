@@ -33,7 +33,7 @@
                 "id": "c98b3261-a4a0-408b-9b6c-95248f95aed1",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Vous avez envoyé votre candidature pour un stage de «&nbsp;Responsable de vente » chez BioChoux 🥬. Quelques jours plus tard, le recruteur vous laisse un message vocal.</p><br><p><strong>Écoutez le message vocal.</strong></p>"
+                "content": "<p>Vous avez envoyé votre candidature pour un stage de «&nbsp;Responsable de vente&nbsp;» chez BioChoux 🥬. Quelques jours plus tard, le recruteur vous laisse un message vocal.</p><br><p><strong>Écoutez le message vocal.</strong></p>"
               }
             },
             {
@@ -43,7 +43,7 @@
                 "type": "audio",
                 "title": "Message vocal du recruteur",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/bonjour-c-est-stefan.mp4",
-                "transcription": "<p>Bonjour, c’est Stefan de l’entreprise BioChoux, Je vous appelle pour vous dire que nous avons bien reçu votre candidature pour le stage de « Responsable de vente ». Je viens de vous envoyer une réponse par mail. À très bientôt.</p>"
+                "transcription": "<p>Bonjour, c’est Stefan de l’entreprise BioChoux, Je vous appelle pour vous dire que nous avons bien reçu votre candidature pour le stage de «&nbsp;Responsable de vente&nbsp;». Je viens de vous envoyer une réponse par mail. À très bientôt.</p>"
               }
             }
           ]
@@ -132,7 +132,7 @@
                 "id": "f522ab24-0d04-4548-9dc7-6b82acc5cf87",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par une icône en forme d’enveloppe. <br>Il en existe plusieurs, par exemple : Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>Eh non. Cette application ne permet pas de consulter ses mails. [...]</li><br></ul>"
+                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par une icône en forme d’enveloppe. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>Eh non. Cette application ne permet pas de consulter ses mails. [...]</li><br></ul>"
               }
             }
           ]
@@ -170,7 +170,7 @@
                 "id": "da94bec1-5d25-4c93-bf5a-05ab2fc52c56",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Regardons plus en détail le mail que vous avez reçu&nbsp;:&nbsp;certaines informations s’affichent avant même de l’ouvrir.</p><p><br></p>\n<p>Dans la messagerie électronique ci-dessous, observez les informations du mail affiché puis répondez aux questions qui suivent.</p>"
+                "content": "<p>Regardons plus en détail le mail que vous avez reçu&nbsp;:&nbsp;certaines informations s’affichent avant même de l’ouvrir.</p><p>Dans la messagerie électronique ci-dessous, observez les informations du mail affiché puis répondez aux questions qui suivent.</p>"
               }
             },
             {
@@ -178,8 +178,8 @@
               "element": {
                 "id": "c7e48acc-7640-4c07-883a-2e976e0048df",
                 "type": "expand",
-                "title": "[Capture d'écran basée sur le nouveau simulateur Pixmail]",
-                "content": "<p><strong><br></strong></p><p><strong>Description :</strong></p><ul><li><em>en novice, juste afficher : Boite de réception, Messages envoyés et Corbeille</em></li><li><em>dev : voir pour fixer la date  : 22 janvier 15:00 (juste l'année qui évolue ?)</em></li></ul>"
+                "title": "[Capture d’écran basée sur le nouveau simulateur Pixmail]",
+                "content": "<p><strong><br></strong></p><p><strong>Description&nbsp;:</strong></p><ul><li><em>en novice, juste afficher&nbsp;: Boite de réception, Messages envoyés et Corbeille</em></li><li><em>dev&nbsp;: voir pour fixer la date &nbsp;: 22 janvier 15:00 (juste l’année qui évolue ?)</em></li></ul>"
               }
             },
             {
@@ -188,15 +188,15 @@
                 "id": "dc65d916-1df5-44a0-8eed-3d1665705bd0",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte1-v2.png",
-                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l'alternative textuelle.",
-                "alternativeText": "<p>Messagerie électronique ouverte</p><p>Un seul mail présent</p><p>Informations du mail :</p><ul><li>Expéditeur : BioChoux</li><li>Objet : Réponse à votre candidature de stage</li><li>Date : 22 janvier</li><br></ul>",
+                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle.",
+                "alternativeText": "<p>Messagerie électronique ouverte</p><p>Un seul mail présent</p><p>Informations du mail&nbsp;:</p><ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ul>",
                 "legend": "",
                 "licence": ""
               }
             },
             {
               "type": "stepper",
-              "instruction": "<p>D’après ce que vous observez, quelles informations pouvez vous déjà lire ?</p>",
+              "instruction": "<p><strong>D’après ce que vous observez, quelles informations pouvez vous déjà lire ?</strong></p>",
               "steps": [
                 {
                   "elements": [
@@ -237,14 +237,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui. Le titre indique de <strong>quoi va parler le mail</strong> : ici, «&nbsp;Réponse à votre candidature de stage&nbsp;».</p>"
+                            "diagnosis": "<p>Eh oui. Le titre indique de <strong>quoi va parler le mail</strong>&nbsp;: ici, «&nbsp;Réponse à votre candidature de stage&nbsp;».</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Eh si. Le titre du mail est affiché sans avoir besoin d’ouvrir le mail. Il indique de <strong>quoi va parler le mail</strong> : ici, «&nbsp;Réponse à votre candidature de stage&nbsp;».</p>"
+                            "diagnosis": "<p>Eh si. Le titre du mail est affiché sans avoir besoin d’ouvrir le mail. Il indique de <strong>quoi va parler le mail</strong>&nbsp;: ici, «&nbsp;Réponse à votre candidature de stage&nbsp;».</p>"
                           }
                         }
                       ],
@@ -271,7 +271,7 @@
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement. Le contenu complet du mail n'apparaît pas encore. Il faut ouvrir le mail pour consulter son contenu complet avec la réponse de Biochoux.</p>"
+                            "diagnosis": "<p>Effectivement. Le contenu complet du mail n’apparaît pas encore. Il faut ouvrir le mail pour consulter son contenu complet avec la réponse de Biochoux.</p>"
                           }
                         }
                       ],
@@ -291,14 +291,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui. La date indique <strong>quand le mail a été reçu</strong> : ici, le 22 janvier.</p>"
+                            "diagnosis": "<p>Eh oui. La date indique <strong>quand le mail a été reçu</strong>&nbsp;: ici, le 22 janvier.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Eh si. La date de réception du mail est affichée sans avoir besoin d’ouvrir le mail. Elle indique <strong>quand le mail a été reçu</strong> : ici, le 22 janvier.</p>"
+                            "diagnosis": "<p>Eh si. La date de réception du mail est affichée sans avoir besoin d’ouvrir le mail. Elle indique <strong>quand le mail a été reçu</strong>&nbsp;: ici, le 22 janvier.</p>"
                           }
                         }
                       ],
@@ -330,7 +330,7 @@
                 "id": "101482af-931f-45c6-bdde-e978a82de621",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon1-v2.png",
-                "alt": "Capture d'écran illustrée d'une messagerie électronique décrite dans l'alternative textuelle.",
+                "alt": "Capture d’écran illustrée d’une messagerie électronique décrite dans l’alternative textuelle.",
                 "alternativeText": "<p>À rédiger en fonction du media défintitif et du texte de la leçon.</p>",
                 "legend": "",
                 "licence": ""
@@ -378,7 +378,7 @@
                 "id": "8bffea28-668a-4e8a-8922-51ddca805eee",
                 "type": "expand",
                 "title": "🕹️[Simulateur \"guidé\" pixmail d’interface de messagerie ouverte → ouvrir un mail]",
-                "content": "<p><strong><br></strong></p><p><strong>🚀 Début : </strong><em>Dans l’interface de messagerie déjà ouverte</em> </p><p><strong>🕹️Actions attendues : </strong><em>cliquer pour ouvrir le mail puis lire son contenu</em></p><p><em><br></em></p><p><strong>Description :&nbsp;</strong></p><ul><li><em>pas besoin de validation</em></li><li><em>besoin de fixer la date au 22 janvier pour cohérence avec découverte 1 et pour le qcu suivant</em></li><li><em>bouton \"répondre\" pas encore accessible</em></li><li><em>⚠️à trancher : seulement avoir le bouton “répondre” ? ou laisser \"transférer\" pour du réalisme ?</em></li></ul>"
+                "content": "<p><strong><br></strong></p><p><strong>🚀 Début&nbsp;: </strong><em>Dans l’interface de messagerie déjà ouverte</em> </p><p><strong>🕹️Actions attendues&nbsp;: </strong><em>cliquer pour ouvrir le mail puis lire son contenu</em></p><p><em><br></em></p><p><strong>Description&nbsp;:&nbsp;</strong></p><ul><li><em>pas besoin de validation</em></li><li><em>besoin de fixer la date au 22 janvier pour cohérence avec découverte 1 et pour le qcu suivant</em></li><li><em>bouton \"répondre\" pas encore accessible</em></li><li><em>⚠️à trancher&nbsp;: seulement avoir le bouton “répondre” ? ou laisser \"transférer\" pour du réalisme ?</em></li></ul>"
               }
             },
             {
@@ -468,7 +468,7 @@
                 "id": "04126443-b74d-42a5-aa10-bb7f6a4a350e",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon2-v2.png",
-                "alt": "Capture d’écran illustrée d'un mail ouvert décrite dans l'alternative textuelle",
+                "alt": "Capture d’écran illustrée d’un mail ouvert décrite dans l’alternative textuelle",
                 "alternativeText": "<p>À rédiger en fonction du media définitif et du texte de la leçon.</p>",
                 "legend": "",
                 "licence": ""
@@ -512,7 +512,7 @@
                 "id": "7ed9ce41-7f5c-4ba2-bdfa-1fb524bbad9c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>Pour cela, suivez les instructions suivantes&nbsp;:&nbsp; </strong></p>\n<ul>\n    <li><strong>cliquez sur le bouton qui permet de répondre au mail,&nbsp;</strong></li>\n    <li><strong>écrivez la réponse suivante :&nbsp;</strong></li>\n</ul>\n<blockquote><em>Bonjour, <br>Je vous remercie de votre proposition. <br>Je vous confirme ma présence à l’entretien. <br>Cordialement</em></blockquote>\n<ul>\n    <li><strong>puis cliquez sur le bouton pour envoyer votre réponse.</strong></li>\n</ul>"
+                "content": "<p><strong>Pour cela, suivez les instructions suivantes&nbsp;:&nbsp; </strong></p><ul>    <li><strong>cliquez sur le bouton qui permet de répondre au mail,&nbsp;</strong></li>    <li><strong>écrivez la réponse suivante&nbsp;:&nbsp;</strong></li></ul><blockquote><em>Bonjour, <br>Je vous remercie de votre proposition. <br>Je vous confirme ma présence à l’entretien. <br>Cordialement</em></blockquote><ul>    <li><strong>puis cliquez sur le bouton pour envoyer votre réponse.</strong></li></ul>"
               }
             },
             {
@@ -520,8 +520,8 @@
               "element": {
                 "id": "6751ecdb-300a-4076-928b-02336f5e99bf",
                 "type": "expand",
-                "title": "🕹️[Simulateur autovalidant et \"guidé\" pixmail à venir avec le mail déjà ouvert → répondre à un mail ]",
-                "content": "<p><br></p><p>[capture d'écran brouillon basée sur l'ancien simulateur pixmail]</p><p><br></p><p><strong>🚀 Début : </strong><em>Dans l’interface avec le mail déjà ouvert</em></p><p><strong>🕹️ Actions attendues : </strong><em>trouver le bouton répondre, écrire le message (on indique quoi écrire), bouton&nbsp; envoyer</em></p><p><strong><br></strong></p><p><strong>Description :</strong> </p><ul><li><em>cf@<a href=\"https://editor.pix.fr/api/challenges/recS3ahSTnMWktjaz/preview\">répondreMail2</a>&nbsp;(on recommence pas depuis le début)</em></li><li><em>Le mail est déjà ouvert (suite découverte 2)</em></li><li><em>simulateur autovalidant</em></li><li><em>afficher le mail auquel on répond (pas plié)</em></li><li><em>seulement avoir la zone d’édition accessible :</em><ul><li><em>Ne pas pouvoir effacer le mail d’avant&nbsp;</em></li><li><em>Verrouiller les autres champs et boutons</em></li></ul></li></ul><p>⚠️Pour écrire le message dans la zone : </p><ul><li> l’apprenant peut copier-coller ou écrire directement le message</li><li>dev : ajouter un bouton qui permet de compléter la réponse ou proposer une réponse pré-formatée (comme c’est le cas parfois) si possible.</li><li><strong>à trancher :</strong> appliquer une tolérance (majuscule/accents /saut de ligne?) </li></ul><p>⇒ Rédiger une réponse = un peu complexe, mais choix péda de faire rédiger une réponse à un mail correctement</p>"
+                "title": "🕹️[Simulateur autovalidant et \"guidé\" pixmail à venir avec le mail déjà ouvert → répondre à un mail ]",
+                "content": "<p>[capture d’écran brouillon basée sur l’ancien simulateur pixmail]</p><p><strong>🚀 Début&nbsp;: </strong><em>Dans l’interface avec le mail déjà ouvert</em></p><p><strong>🕹️ Actions attendues&nbsp;: </strong><em>trouver le bouton répondre, écrire le message (on indique quoi écrire), bouton&nbsp; envoyer</em></p><p><strong><br></strong></p><p><strong>Description&nbsp;:</strong> </p><ul><li><em>cf@<a href=\"https://editor.pix.fr/api/challenges/recS3ahSTnMWktjaz/preview\">répondreMail2</a>&nbsp;(on recommence pas depuis le début)</em></li><li><em>Le mail est déjà ouvert (suite découverte 2)</em></li><li><em>simulateur autovalidant</em></li><li><em>afficher le mail auquel on répond (pas plié)</em></li><li><em>seulement avoir la zone d’édition accessible&nbsp;:</em><ul><li><em>Ne pas pouvoir effacer le mail d’avant&nbsp;</em></li><li><em>Verrouiller les autres champs et boutons</em></li></ul></li></ul><p>⚠️Pour écrire le message dans la zone&nbsp;: </p><ul><li> l’apprenant peut copier-coller ou écrire directement le message</li><li>dev&nbsp;: ajouter un bouton qui permet de compléter la réponse ou proposer une réponse pré-formatée (comme c’est le cas parfois) si possible.</li><li><strong>à trancher&nbsp;:</strong> appliquer une tolérance (majuscule/accents /saut de ligne?) </li></ul><p>⇒ Rédiger une réponse = un peu complexe, mais choix péda de faire rédiger une réponse à un mail correctement</p>"
               }
             },
             {
@@ -542,7 +542,7 @@
                 "id": "75166d79-fb2f-4d10-9d24-8964a2f48305",
                 "type": "expand",
                 "title": "🗝️Indices",
-                "content": "<ul><li>Pour répondre au mail, cliquez sur le bouton « Répondre ». Il est indiqué par le mot « Répondre » et/ou par une flèche vers la gauche.<br><br></li><li>Après avoir cliqué sur « Répondre », une zone vide pour saisir du texte apparaît. Vous pouvez copier-coller la réponse dans cette zone ou taper la réponse directement dedans.<br><br></li><li>Pour envoyer votre réponse, cliquez sur le bouton « Envoyer ». Il est indiqué par le mot « Envoyer » et/ou une flèche.</li></ul>"
+                "content": "<ul><li>Pour répondre au mail, cliquez sur le bouton «&nbsp;Répondre&nbsp;». Il est indiqué par le mot «&nbsp;Répondre&nbsp;» et/ou par une flèche vers la gauche.<br><br></li><li>Après avoir cliqué sur «&nbsp;Répondre&nbsp;», une zone vide pour saisir du texte apparaît. Vous pouvez copier-coller la réponse dans cette zone ou taper la réponse directement dedans.<br><br></li><li>Pour envoyer votre réponse, cliquez sur le bouton «&nbsp;Envoyer&nbsp;». Il est indiqué par le mot «&nbsp;Envoyer&nbsp;» et/ou une flèche.</li></ul>"
               }
             },
             {
@@ -551,7 +551,7 @@
                 "id": "0b89b707-67be-4a00-a9be-68abcda63164",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>[Feedback autovalid]</strong> </p><p>Bien joué ! Votre réponse a été envoyée. <br>Quand vous répondez à un mail, un nouveau mail est créé. Il est ensuite rangé dans les « Messages envoyés », juste en dessous de la « Boîte de réception ».<br></p>"
+                "content": "<p><strong>[Feedback autovalid]</strong> </p><p>Bien joué ! Votre réponse a été envoyée. <br>Quand vous répondez à un mail, un nouveau mail est créé. Il est ensuite rangé dans les «&nbsp;Messages envoyés&nbsp;», juste en dessous de la «&nbsp;Boîte de réception&nbsp;».<br></p>"
               }
             }
           ]
@@ -567,7 +567,7 @@
                 "id": "f2f8cb14-b6e9-4c82-80f5-eb6d2cc97aa5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand vous répondez à un mail : </p><ol><li>Le <strong>destinataire</strong> et l’<strong>objet</strong> sont déjà <strong>remplis automatiquement</strong>.&nbsp;</li><li>Le <strong>mail auquel vous répondez reste affiché</strong>.</li><li>Il vous reste à <strong>écrire votre réponse juste au-dessus.</strong></li><li>Puis cliquer sur « <strong>Envoyer</strong> » pour envoyer votre réponse.</li></ol>"
+                "content": "<p>Quand vous répondez à un mail&nbsp;: </p><ol><li>Le <strong>destinataire</strong> et l’<strong>objet</strong> sont déjà <strong>remplis automatiquement</strong>.&nbsp;</li><li>Le <strong>mail auquel vous répondez reste affiché</strong>.</li><li>Il vous reste à <strong>écrire votre réponse juste au-dessus.</strong></li><li>Puis cliquer sur «&nbsp;<strong>Envoyer</strong>&nbsp;» pour envoyer votre réponse.</li></ol>"
               }
             },
             {
@@ -629,8 +629,8 @@
                 "id": "944ae840-1837-47f7-bf2d-a59b45188519",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte4-v2.png",
-                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l'alternative textuelle",
-                "alternativeText": "<p>Messagerie électronique ouverte </p><p>Dans le menu : « Boite de réception (3) » sélectionnée</p><p>Quatre mails présents&nbsp; </p><ul><li>Mail « PromoSports » affiché en gras<ul><li>Expéditeur : PromoSports</li><li>Objet : Soldes d'hiver</li><li>Date : 6 mars</li></ul></li><li>Mail « BioChoux » affiché en gras<ul><li>Expéditeur : BioChoux</li><li>Objet : Bienvenue chez BioChoux</li><li>Date : 3 février</li></ul></li><li>Mail « École de danse »&nbsp;affiché en gras<ul><li>Expéditeur : École de danse</li><li>Objet : Cours annulé</li><li>Date : 25 janvier</li></ul></li><li>Mail « BioChoux »<ul><li>Expéditeur : BioChoux</li><li>Objet : Réponse à votre candidature de stage</li><li>Date : 22 janvier</li></ul></li></ul>",
+                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
+                "alternativeText": "<p>Messagerie électronique ouverte </p><p>Dans le menu&nbsp;: «&nbsp;Boite de réception (3)&nbsp;» sélectionnée</p><p>Quatre mails présents&nbsp; </p><ul><li>Mail «&nbsp;PromoSports&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: PromoSports</li><li>Objet&nbsp;: Soldes d’hiver</li><li>Date&nbsp;: 6 mars</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Bienvenue chez BioChoux</li><li>Date&nbsp;: 3 février</li></ul></li><li>Mail «&nbsp;École de danse&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: École de danse</li><li>Objet&nbsp;: Cours annulé</li><li>Date&nbsp;: 25 janvier</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;»<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ul></li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -711,7 +711,7 @@
                           "id": "2",
                           "content": "<p>Le mail envoyé par «&nbsp;Promosport&nbsp;».</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
+                            "diagnosis": "<p>Bien vu ! Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars  est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
                           }
                         },
                         {
@@ -725,7 +725,7 @@
                           "id": "4",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le mail envoyé par «&nbsp;Promosport » le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
+                            "diagnosis": "<p>Le mail envoyé par «&nbsp;Promosport&nbsp;» le 06 mars est le dernier mail que vous avez reçu.<br>Quand <strong>un nouveau mail</strong> arrive, il est placé <strong>en haut de la liste</strong> automatiquement.</p>"
                           }
                         }
                       ],
@@ -801,8 +801,8 @@
                 "id": "71121e18-b556-48e8-8d6f-4da90bf4f75b",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite1-v2.png",
-                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l'alternative textuelle",
-                "alternativeText": "<p>Messagerie électronique ouverte </p><p> Dans le menu : « Boite de réception (2) » sélectionnée </p><p>Trois mails présents&nbsp; </p><ul><li> Mail « Sophie » affiché en gras<ul><li>Expéditeur : Sophie</li><li>Objet : Projet annuel</li><li>Date : 15 février</li></ul></li><li>Mail&nbsp;« Espaces verts »<ul><li>Expéditeur : Espaces verts</li><li>Objet : Lettre d'information</li><li>Date : 5 novembre</li></ul></li><li>Mail « Naïma »&nbsp;affiché en gras<ul><li>Expéditeur : Naïma</li><li>Objet : Photos</li><li>Date : 5 novembre</li></ul></li></ul>",
+                "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
+                "alternativeText": "<p>Messagerie électronique ouverte </p><p> Dans le menu&nbsp;: «&nbsp;Boite de réception (2)&nbsp;» sélectionnée </p><p>Trois mails présents&nbsp; </p><ul><li> Mail «&nbsp;Sophie&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: Sophie</li><li>Objet&nbsp;: Projet annuel</li><li>Date&nbsp;: 15 février</li></ul></li><li>Mail&nbsp;«&nbsp;Espaces verts&nbsp;»<ul><li>Expéditeur&nbsp;: Espaces verts</li><li>Objet&nbsp;: Lettre d’information</li><li>Date&nbsp;: 5 novembre</li></ul></li><li>Mail «&nbsp;Naïma&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: Naïma</li><li>Objet&nbsp;: Photos</li><li>Date&nbsp;: 5 novembre</li></ul></li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -958,7 +958,7 @@
                 "id": "5d4faa96-d342-45c1-9076-59f3049933db",
                 "type": "expand",
                 "title": "🕹️[Simulateur autovalidant pixmail d’interface de messagerie ouverte → ouvrir puis répondre à un mail]",
-                "content": "<p><strong><br></strong></p><p><strong>🕹️Actions attendues :&nbsp;</strong><em>ouvrir un mail spécifique, puis y répondre</em></p><p><strong><br></strong></p><p><strong>Description :</strong><br></p><ul><li><em>cf <a href=\"https://editor.pix.fr/api/challenges/recS3ahSTnMWktjaz/preview\">@répondreMail2</a></em></li><li><em>Simulateur autovalidant</em></li></ul>"
+                "content": "<p><strong><br></strong></p><p><strong>🕹️Actions attendues&nbsp;:&nbsp;</strong><em>ouvrir un mail spécifique, puis y répondre</em></p><p><strong><br></strong></p><p><strong>Description&nbsp;:</strong><br></p><ul><li><em>cf <a href=\"https://editor.pix.fr/api/challenges/recS3ahSTnMWktjaz/preview\">@répondreMail2</a></em></li><li><em>Simulateur autovalidant</em></li></ul>"
               }
             }
           ]
@@ -993,7 +993,7 @@
                       "id": "6ff6b7ef-a4f1-46df-8282-c69e095f8b0a",
                       "type": "text",
                       "tag": " ",
-                      "content": "\n<blockquote>Coucou Mr Flament&nbsp; </blockquote>\n<blockquote>JE NE SUIS PAS DISPONIBLE !!! DÉSOLÉ 😬 </blockquote>\n<blockquote>Flora</blockquote>"
+                      "content": "<blockquote>Coucou Mr Flament&nbsp; </blockquote><blockquote>JE NE SUIS PAS DISPONIBLE !!! DÉSOLÉ 😬 </blockquote><blockquote>Flora</blockquote>"
                     },
                     {
                       "id": "afc4e202-48a7-45a1-970f-3978af70b845",
@@ -1038,14 +1038,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Pas vraiment. Cette réponse est trop courte et contient une abréviation. Il manque aussi une formule de politesse au début et à la fin ainsi qu'une signature.</p>"
+                            "diagnosis": "<p>Pas vraiment. Cette réponse est trop courte et contient une abréviation. Il manque aussi une formule de politesse au début et à la fin ainsi qu’une signature.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement. Cette réponse est trop courte et contient une abréviation. Il manque aussi une formule de politesse au début et à la fin ainsi qu'une signature.</p>"
+                            "diagnosis": "<p>Effectivement. Cette réponse est trop courte et contient une abréviation. Il manque aussi une formule de politesse au début et à la fin ainsi qu’une signature.</p>"
                           }
                         }
                       ],
@@ -1059,7 +1059,7 @@
                       "id": "ebe01e69-3ab7-4684-add2-aeb2b4923ce7",
                       "type": "text",
                       "tag": " ",
-                      "content": "<blockquote>Bonjour Monsieur Flament, </blockquote><blockquote>Je vous remercie pour votre invitation, mais je ne pourrai pas y participer.&nbsp; </blockquote><blockquote>Je vous prie de m'excuser.&nbsp;</blockquote><blockquote> Cordialement, </blockquote><blockquote>Flora</blockquote>"
+                      "content": "<blockquote>Bonjour Monsieur Flament, </blockquote><blockquote>Je vous remercie pour votre invitation, mais je ne pourrai pas y participer.&nbsp; </blockquote><blockquote>Je vous prie de m’excuser.&nbsp;</blockquote><blockquote> Cordialement, </blockquote><blockquote>Flora</blockquote>"
                     },
                     {
                       "id": "7b5e2a1c-020b-4cf8-ad61-51b3a60fa587",
@@ -1071,14 +1071,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui. Cette réponse par mail respecte les règles de politesse et de conduite sur internet :&nbsp;</p><ul><li>Elle <strong>commence et se termine par</strong> <strong>une formule de politesse</strong>.</li><li>Elle se termine aussi par un prénom en guise de <strong>signature</strong>.</li><li>Le<strong> ton est respectueux</strong> et il n’y a <strong>pas de fautes</strong> <strong>d'orthographes.</strong></li></ul>"
+                            "diagnosis": "<p>Eh oui. Cette réponse par mail respecte les règles de politesse et de conduite sur internet&nbsp;:&nbsp;</p><ul><li>Elle <strong>commence et se termine par</strong> <strong>une formule de politesse</strong>.</li><li>Elle se termine aussi par un prénom en guise de <strong>signature</strong>.</li><li>Le<strong> ton est respectueux</strong> et il n’y a <strong>pas de fautes</strong> <strong>d’orthographes.</strong></li></ul>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui. Cette réponse par mail respecte les règles de politesse et de conduite sur internet :&nbsp;</p><ul>    <li>Elle <strong>commence et se termine par</strong> <strong>une formule de politesse</strong>.</li><li>Elle se termine aussi par un prénom en guise de <strong>signature</strong>.</li>    <li>Le<strong> ton est respectueux</strong> et il n’y a <strong>pas de fautes&nbsp;</strong><strong>d'orthographes.</strong></li>    </ul>"
+                            "diagnosis": "<p>Eh oui. Cette réponse par mail respecte les règles de politesse et de conduite sur internet&nbsp;:&nbsp;</p><ul>    <li>Elle <strong>commence et se termine par</strong> <strong>une formule de politesse</strong>.</li><li>Elle se termine aussi par un prénom en guise de <strong>signature</strong>.</li>    <li>Le<strong> ton est respectueux</strong> et il n’y a <strong>pas de fautes&nbsp;</strong><strong>d’orthographes.</strong></li>    </ul>"
                           }
                         }
                       ],
