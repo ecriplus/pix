@@ -80,7 +80,7 @@ const _baseQuery = (knexConn) => {
       'quests.rewardId as questRewardId',
     )
     .join('quests', 'quests.id', 'combined_courses.questId')
-    .whereNull('deletedAt');
+    .whereNull('combined_courses.deletedAt');
 };
 
 const targetProfileIdsPartOfAnyCombinedCourse = async ({ targetProfileIds }) => {
