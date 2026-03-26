@@ -38,6 +38,7 @@
           "6": "Avancé 2 ({pixScore} Pix)",
           "7": "Expert 1 ({pixScore} Pix)",
           "8": "Expert 2 ({pixScore} Pix)",
+          "BELOW_MINIMUM": "{pixScore} Pix",
           "NONE": "{pixScore} Pix"
         },
         "CORE": {
@@ -50,27 +51,32 @@
           "6": "Avancé 2 ({pixScore} Pix)",
           "7": "Expert 1 ({pixScore} Pix)",
           "8": "Expert 2 ({pixScore} Pix)",
+          "BELOW_MINIMUM": "{pixScore} Pix",
           "NONE": "{pixScore} Pix"
         },
         "DROIT": {
+          "0": "Obtenue",
+          "BELOW_MINIMUM": "Non obtenue",
           "NONE": "{pixScore} Pix"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible",
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible",
           "NONE": "{pixScore} Pix"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Non-admissible",
-          "1": "Admissible",
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible",
           "NONE": "{pixScore} Pix"
         },
         "EDU_CPE": {
-          "0": "Non-admissible",
-          "1": "Admissible",
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible",
           "NONE": "{pixScore} Pix"
         },
         "PRO_SANTE": {
+          "0": "Obtenue",
+          "BELOW_MINIMUM": "Non obtenue",
           "NONE": "{pixScore} Pix"
         }
       }
