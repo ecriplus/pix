@@ -217,7 +217,7 @@ export class AssessmentResultFactory {
     });
   }
 
-  static buildRejectedDueToZeroPixScore({
+  static buildRejectedDueToBelowMinimumMesh({
     pixScore,
     reproducibilityRate,
     assessmentId,
@@ -228,7 +228,7 @@ export class AssessmentResultFactory {
     versionId,
   }) {
     return this.#buildWithAutoJuryComment({
-      autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+      autoJuryCommentKey: pixScore === 0 ? AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE : null,
       status: AssessmentResult.status.REJECTED,
       pixScore,
       reproducibilityRate,

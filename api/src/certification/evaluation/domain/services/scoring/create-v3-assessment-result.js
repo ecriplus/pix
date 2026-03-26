@@ -14,6 +14,7 @@ export function createV3AssessmentResult({
   isAbortReasonTechnical,
   juryId,
   minimumAnswersRequiredToValidateACertification,
+  isBelowMinimumMesh = false,
 }) {
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
@@ -65,8 +66,8 @@ export function createV3AssessmentResult({
     }
   }
 
-  if (pixScore === 0) {
-    return AssessmentResultFactory.buildRejectedDueToZeroPixScore({
+  if (isBelowMinimumMesh) {
+    return AssessmentResultFactory.buildRejectedDueToBelowMinimumMesh({
       pixScore,
       assessmentId,
       juryId,

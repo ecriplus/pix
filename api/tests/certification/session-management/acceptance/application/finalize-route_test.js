@@ -604,7 +604,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             .orderBy('createdAt', 'desc')
             .first();
           expect(lastAssessmentResult).to.deep.include({
-            pixScore: 48,
+            pixScore: 31,
             capacity: -3,
             reachedMeshIndex: 0,
             status: AssessmentResult.status.VALIDATED,
@@ -731,7 +731,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             const pixCoreResults = await knex('assessment-results').where({ assessmentId });
             expect(pixCoreResults).to.have.lengthOf(1);
             expect(pixCoreResults[0]).to.deep.include({
-              pixScore: 48,
+              pixScore: 31,
               capacity: -3,
               reachedMeshIndex: 0,
               status: AssessmentResult.status.VALIDATED,

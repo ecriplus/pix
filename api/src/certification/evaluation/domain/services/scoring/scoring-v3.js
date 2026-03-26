@@ -21,6 +21,7 @@ import { status as CertificationStatus } from '../../../../../shared/domain/mode
 import { ABORT_REASONS } from '../../../../shared/domain/constants/abort-reasons.js';
 import { SCOPES } from '../../../../shared/domain/models/Scopes.js';
 import { DoubleCertificationScoring } from '../../models/DoubleCertificationScoring.js';
+import { Intervals } from '../../models/Intervals.js';
 import { ScoringV3Algorithm } from '../../models/ScoringV3Algorithm.js';
 import { createV3AssessmentResult } from './create-v3-assessment-result.js';
 
@@ -124,13 +125,18 @@ function scoreCertification({
     certificationScope === SCOPES.CORE ? scoringV3Algorithm.computePixScoreFromCapacity({ capacity }) : null;
   const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
-  const status = isCertificationRejected({
-    answers: assessmentSheet.answers,
-    abortReason: assessmentSheet.abortReason,
-    minimumAnswersRequiredToValidateACertification,
-  })
-    ? CertificationStatus.REJECTED
-    : CertificationStatus.VALIDATED;
+
+  const scoringIntervals = new Intervals({ intervals: scoringV3Algorithm.v3CertificationScoring.intervals });
+  const isBelowMinimumMesh = scoringIntervals.isCapacityBelowMinimum(capacity);
+
+  const status =
+    hasNotEnoughAnswers({
+      answers: assessmentSheet.answers,
+      abortReason: assessmentSheet.abortReason,
+      minimumAnswersRequiredToValidateACertification,
+    }) || isBelowMinimumMesh
+      ? CertificationStatus.REJECTED
+      : CertificationStatus.VALIDATED;
 
   const toBeCancelled = event instanceof CertificationCancelled;
   const assessmentResult = createV3AssessmentResult({
@@ -147,6 +153,7 @@ function scoreCertification({
     isAbortReasonTechnical: assessmentSheet.isAbortReasonTechnical,
     juryId: event?.juryId,
     minimumAnswersRequiredToValidateACertification,
+    isBelowMinimumMesh,
   });
   return assessmentResult;
 }
@@ -185,7 +192,7 @@ function shouldDowngradeCapacity({
   );
 }
 
-function isCertificationRejected({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) {
+function hasNotEnoughAnswers({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) {
   // Dans la vraie vie, en cas de nombre de réponses insuffisant, la certif est rejetée seulement si l'abortReason est "candidate"
   // ici on ne regarde pas la valeur de abortReason ce qui n'est pas très clair. Le coup est rattrapé plus tard dans createV3AssessmentResult ( et c'est moche )
   return answers.length < minimumAnswersRequiredToValidateACertification && abortReason;
