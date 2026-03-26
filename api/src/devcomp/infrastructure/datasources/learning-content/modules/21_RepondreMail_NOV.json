@@ -418,28 +418,28 @@
                     "id": "1",
                     "content": "<p>Le 22 janvier</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaître toutes les informations qu’il contient.</p>"
+                      "diagnosis": "<p>Eh non. La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaitre toutes les informations qu’il contient.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le 3 février</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaître toutes les informations qu’il contient.</p>"
+                      "diagnosis": "<p>Bien vu ! La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de <strong>lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaitre toutes les informations qu’il contient.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Le 20 mars</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaître toutes les informations qu’il contient.</p>"
+                      "diagnosis": "<p>Eh non. La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaitre toutes les informations qu’il contient.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaître toutes les informations qu’il contient.</p>"
+                      "diagnosis": "<p>La date proposée pour l’entretien est le 3 février.<br>Ouvrir un mail permet de<strong> lire l’ensemble de son contenu</strong>. Il est important de lire le texte du mail en entier pour connaitre toutes les informations qu’il contient.</p>"
                     }
                   }
                 ],
