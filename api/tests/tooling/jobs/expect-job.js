@@ -1,7 +1,9 @@
 import { assert, Assertion } from 'chai';
 import sinon from 'sinon';
 
-export const jobChai = (pgBoss) => (_chai, utils) => {
+import { JobClient } from '../../../src/shared/infrastructure/jobs/JobClient.js';
+
+export const jobChai = () => (_chai, utils) => {
   utils.addProperty(Assertion.prototype, 'performed', function () {
     return this;
   });
@@ -12,7 +14,7 @@ export const jobChai = (pgBoss) => (_chai, utils) => {
 
   Assertion.addMethod('withJobsCount', async function (expectedCount) {
     const jobName = this._obj;
-    const jobs = await pgBoss.fetch(jobName, expectedCount + 1, { includeMetadata: true });
+    const jobs = await JobClient.instance.fetch(jobName, expectedCount + 1, { includeMetadata: true });
     const actualCount = jobs?.length ?? 0;
     assert.strictEqual(
       actualCount,
@@ -46,7 +48,7 @@ export const jobChai = (pgBoss) => (_chai, utils) => {
 
   Assertion.addMethod('withCronJobsCount', async function (expectedCount) {
     const jobName = this._obj;
-    const allJobs = (await pgBoss.getSchedules()) ?? [];
+    const allJobs = (await JobClient.instance.getSchedules()) ?? [];
     const jobs = allJobs.filter(({ name }) => name === jobName);
     assert.strictEqual(
       jobs.length,

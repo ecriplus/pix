@@ -5,6 +5,7 @@ import { knex } from '../../../../../db/knex-database-connection.js';
 import { config } from '../../../config.js';
 import { EntityValidationError } from '../../../domain/errors.js';
 import { getCorrelationInfo } from '../../execution-context-manager.js';
+import { JobClient } from '../../jobs/JobClient.js';
 
 const monitorStateIntervalSeconds = config.pgBoss.monitorStateIntervalSeconds;
 
@@ -88,7 +89,7 @@ export class JobRepository {
       // TODO: try with spread operator
       const payloadWithCorrelationContext = structuredClone(payload);
       payloadWithCorrelationContext.correlationContext = correlationContext;
-      await pgBoss.send(this.name, payloadWithCorrelationContext, this.options);
+      await JobClient.instance.send(this.name, payloadWithCorrelationContext, this.options);
     }
     return { rowCount: payloads.length };
   }
