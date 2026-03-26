@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/nr_durabilite-nov/picto_nr_durabilite_nov.svg",
-    "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication entraîne une forte pollution, des impacts écologiques importants et même des conditions humaines difficiles. </p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts.</p>",
+    "description": "<p>On a presque tous un portable aujourd’hui, mais sait-on vraiment comment a-t-il été fabriqué ?&nbsp; </p><p>Sa fabrication a des impacts importants sur l'environnement, et sur les personnes qui le fabriquent.</p><p>Connaître ce qu’il y a derrière toute la chaîne de production, c’est aussi comprendre l’importance d’adopter les bons gestes pour réduire ces impacts négatifs.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -46,6 +46,29 @@
                 "legend": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "licence": ""
               }
+            },
+            {
+              "id": "a125f592-862b-4e55-8769-38cd70339c39",
+              "type": "qcu-discovery",
+              "instruction": "<p>Un smartphone contient, entre autres, du cobalt.</p>",
+              "hasShortProposals": true,
+              "proposals": [
+                {
+                  "id": "1",
+                  "content": "<p>Vrai.</p>",
+                  "feedback": {
+                    "diagnosis": "<p>Eh oui ! Un smartphone contient bien du cobalt.</p>"
+                  }
+                },
+                {
+                  "id": "2",
+                  "content": "<p>Faux.</p>",
+                  "feedback": {
+                    "diagnosis": "<p>Eh non ! Un smartphone contient bien du cobalt.</p>"
+                  }
+                }
+              ],
+              "solution": "1"
             }
           ]
         }
@@ -66,7 +89,7 @@
                 "id": "fcd9b050-fd47-4fb3-ac15-5ace364815c3",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Un smartphone se compose de <strong>plus de 70 matériaux différents</strong>, et plus de la moitié sont des <strong>métaux</strong> ! Voyons ça de plus près.</p>"
+                "content": "<p>Un smartphone se compose de plus de <strong>70 matériaux différents</strong> ! Parmi eux, plus de la moitié sont des métaux, qui peuvent être particulièrement difficiles à obtenir. Voyons ça de plus près.</p>"
               }
             }
           ]
@@ -148,7 +171,7 @@
                 "id": "49b9c73e-e2d7-45f7-8d4c-cbe33219ebdb",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Certains métaux utilisés pour fabriquer les smartphones sont précieux, comme l’or et l’argent. On les trouve en très petite quantité dans le sol. Il faut donc extraire des tonnes de roche pour les récupérer, ce qui pose plusieurs problèmes :</p><ul> <li> Leur <strong>extraction pollue beaucoup</strong> dans les mines et aux alentours. </li> <li> Leur extraction nécessite <strong>beaucoup d’eau douce</strong>, qui n'est donc plus disponible pour l’agriculture et les populations locales. </li> <li> Les <strong>conditions de travail</strong> dans les mines sont souvent difficiles. </li> </ul> "
+                "content": "<p>Certains de ces métaux se trouvent en très petite quantité dans le sol. Il faut donc <strong>extraire des tonnes de roche</strong> puis utiliser beaucoup de <strong>produits chimiques</strong> pour les récupérer, ce qui pose plusieurs problèmes :</p><ul><li>L'extraction des roches <strong>abîme l'environnement</strong> alentour</li><li>Les traitements avec les produits chimiques peuvent polluer l'environnement</li><li>Les traitements avec les produits chimiques nécessitent <strong>beaucoup d’eau douce</strong>, qui n'est donc plus disponible pour l’agriculture et les populations locales.</li><li>Les <strong>conditions de travail</strong> dans les mines sont souvent <strong>difficiles</strong>.</li></ul>"
               }
             }
           ]
@@ -164,7 +187,7 @@
                 "id": "065435d0-7dca-4a4b-9c0e-7c9fce5ff797",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>On sait désormais d’où viennent certains matériaux. Mais où vont-ils avant d’arriver dans nos mains ? Découvrons-le ensemble.</p>"
+                "content": "<p>On sait désormais d’où viennent certains matériaux. Mais où sont-ils transportés pour être transformés en smartphone ? Découvrons-le ensemble.</p>"
               }
             }
           ]
@@ -269,9 +292,18 @@
             {
               "type": "element",
               "element": {
+                "id": "e59c0a43-80c4-4cc2-b0d5-c8f4243b6e22",
+                "type": "text",
+                "tag": "",
+                "content": "<p>Entre la conception et la distribution, les éléments d'un smartphone ont donc parcouru de très longues distances.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
                 "type": "custom",
-                "instruction": "<p>Combien de tours de la Terre pour la fabrication d’un smartphone ?</p>",
+                "instruction": "<p>Combien de tours du monde ont parcouru les éléments d'un smartphone entre sa conception et sa distribution ?</p>",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
@@ -279,21 +311,21 @@
                       "label": "1",
                       "feedback": {
                         "type": "bad",
-                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
                       }
                     },
                     {
                       "label": "2",
                       "feedback": {
                         "type": "bad",
-                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
                       }
                     },
                     {
                       "label": "3",
                       "feedback": {
                         "type": "close",
-                        "text": "Presque ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
+                        "text": "Presque !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
                       }
                     },
                     {
@@ -336,7 +368,7 @@
                 "id": "678c96f8-8acc-46eb-97b0-3dc610bb5d8e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les différentes étapes de fabrication d’un smartphone se font dans <strong>plusieurs pays</strong>, souvent très éloignés. Les matériaux doivent donc être <strong>transportés par camion, train ou avion</strong>. Ces transports polluent et consomment beaucoup d’énergie, ce qui libère des gaz à effet de serre.</p>"
+                "content": "<p>Les différentes étapes de fabrication d’un smartphone se font dans <strong>plusieurs pays</strong>, souvent très éloignés. Les matériaux doivent donc être <strong>transportés par camion, bateau, train ou avion</strong>. Ces transports polluent et consomment beaucoup d’énergie, ce qui libère des gaz à effet de serre.</p>"
               }
             }
           ]
@@ -352,7 +384,7 @@
                 "id": "7532844f-4f8c-46bb-a3cf-ccbf7ef63e9d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La fabrication d’un smartphone est donc polluante. Mais que peut-on faire, à notre échelle, pour réduire ces impacts ?</p>"
+                "content": "<p>Avec l'extraction des matériaux, leur transport et leur transformation, la fabrication d’un smartphone est donc polluante. Mais que peut-on faire, à notre échelle, pour réduire ces impacts ?</p>"
               }
             }
           ]
@@ -367,7 +399,7 @@
               "element": {
                 "id": "cb955e5a-9c04-4e41-b95f-6e1d89cc20fd",
                 "type": "qab",
-                "instruction": "<p>Guillaume s’est acheté un Smartphone Univers 12. Il est impeccable et il veut le protéger pour le faire durer longtemps. Parmi ces options, que lui conseillez vous de faire ?</p>",
+                "instruction": "<p>Guillaume s’est acheté un Smartphone Univers 12 et il veut le protéger pour le faire durer longtemps. Il est impeccable et il veut le protéger pour le faire durer longtemps. Parmi ces options, que lui conseillez vous de faire ?</p>",
                 "cards": [
                   {
                     "id": "4cbc176e-d10f-480a-ba7a-2f54352d512b",
@@ -376,19 +408,19 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Bonne idée !",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "A"
                   },
                   {
                     "id": "9f2d0d1a-0655-4728-aa7e-10e2013f088a",
-                    "text": "Laisser le téléphone en plein soleil ou près d’une source de chaleur",
+                    "text": "Mettre le téléphone près d’une source de chaleur",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Bonne idée !",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "B"
                   },
                   {
@@ -398,8 +430,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Bonne idée !",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "B"
                   },
                   {
@@ -409,19 +441,19 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Bonne idée !",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "A"
                   },
                   {
                     "id": "b78fa095-e37e-411b-b6cf-9fa1d30cbaaf",
-                    "text": "Poser un film de protection",
+                    "text": "Poser un film de protection sur l'écran",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Bonne idée !",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "A"
                   },
                   {
@@ -431,7 +463,7 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
+                    "proposalA": "Bonne idée !",
                     "proposalB": "Faux",
                     "solution": "B"
                   }
@@ -454,7 +486,7 @@
                 "id": "c08cdadc-1fbc-4e9e-bf46-ebef6e73a2d7",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (protéger l’écran, éviter la surchauffe, le débrancher une fois chargé, le recharger avant que la batterie soit trop faible).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
+                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (le protéger des chocs, protéger l'écran et la batterie&nbsp...).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
               }
             }
           ]
@@ -482,18 +514,8 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "",
+              "instruction": "Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ?",
               "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "f8126634-8250-49d3-b599-07e380e0c1a2",
-                      "type": "text",
-                      "tag": " ",
-                      "content": "<p>Jane a un modèle d’il y a 5 ans. Elle décide d’acheter le smartphone Univers 13. Que doit-elle&nbsp; faire avec son ancien portable ? </p>"
-                    }
-                  ]
-                },
                 {
                   "elements": [
                     {
@@ -533,7 +555,7 @@
                           "id": "1",
                           "content": "<p>Le jeter à la poubelle</p>",
                           "feedback": {
-                            "diagnosis": "<p>La plupart des appareils électroniques ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes. Il&nbsp; faut donc déposer un vieux smartphone dans un point de collecte.</p>"
+                            "diagnosis": "<p>La plupart des appareils électroniques ne se jettent pas avec les autres déchets. Ils&nbsp;risquent d’être brûlés et cela provoquerait des fumées polluantes. Il&nbsp; faut donc déposer un vieux smartphone dans un point de collecte spécialisé.</p>"
                           }
                         },
                         {
@@ -618,7 +640,7 @@
                       "id": "46925f16-03eb-4911-93f4-7ddc7e6af4ee",
                       "type": "text",
                       "tag": " ",
-                      "content": "La bonne chose à faire est donc de <strong>déposer votre smartphone dans un point de collecte spécialisé</strong> pour que les composants soient récupérés ou recyclés."
+                      "content": "La bonne chose à faire est donc de <strong>déposer votre smartphone dans un point de collecte spécialisé</strong> pour que les composants soient récupérés ou recyclés. On trouve souvent des points de collecte dans les magasins d'électroménager, par exemple."
                     }
                   ]
                 }
@@ -637,7 +659,7 @@
                 "id": "a38ed311-0b93-4b45-a1d7-94390e2b6c93",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Désormais, vous savez qu’utiliser un smartphone a des impacts, mais aussi qu’il est possible de les réduire avec de bons gestes.</p>"
+                "content": "<p>Désormais, vous savez qu’utiliser un smartphone a des impacts importants sur l'environnement, mais aussi qu’il est possible de les réduire avec de bons gestes.</p>"
               }
             }
           ]
@@ -659,7 +681,7 @@
                 "id": "84230031-3337-4598-9a01-971e1b8c8c47",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent très polluante et réalisée dans de <strong>très mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les étapes de fabrication d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>\n    <li>💡 Pour limiter l’impact d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
+                "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent <strong>très polluante</strong> et réalisée dans de <strong>mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les  étapes de conception, fabrication et distribution d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strongetransports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>n    <li>💡 Pour limiter l’impact environnemental d’un smartphone, le plus important est qu'isoit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte spécialisé</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
               }
             }
           ]
@@ -771,7 +793,7 @@
                     {
                       "id": "e5843ff0-84ad-49e2-9882-23590f57b700",
                       "type": "qcu",
-                      "instruction": "Les personnes qui travaillent dans les mines pour extraire les métaux pour fabriquer les smartphones sont toujours bien protégées.",
+                      "instruction": "Les personnes qui travaillent dans les mines pour extraire les métaux pour fabriquer les smartphones travaillent dans de bonnes conditions.",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -915,11 +937,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "Bonne réponse !",
-                    "diagnosis": ""
+                    "diagnosis": "<p>Pour limiter l'impact environnemental des smartphones il faut <strong>essayer de les conserver le plus longtemps possible</strong>. Pour cela il faut <strong>les protéger et les réparer</strong>.</p><p>Et si on doit vraiment en changer, il vaut mieux <strong>les vendre ou les donner</strong>.</p><p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut <strong>les déposer dans des points de collecte pour qu'ils soient recyclés</strong>.</p>"
                   },
                   "invalid": {
                     "state": "Mauvaise réponse !",
-                    "diagnosis": "<p>Pour limiter l'impact environnemental des smartphones il faut <strong>essayer de les conserver le plus longtemps possible</strong>. Pour cela il faut <strong>les protéger et les réparer</strong>.</p><p>Et si on doit vraiment en changer, il vaut mieux <strong>les vendre ou les donner</strong>.</p><p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut <strong>les déposer dans des points de collecte pour qu'ils soient recycler</strong>.</p>"
+                    "diagnosis": "<p>Pour limiter l'impact environnemental des smartphones il faut <strong>essayer de les conserver le plus longtemps possible</strong>. Pour cela il faut <strong>les protéger et les réparer</strong>.</p><p>Et si on doit vraiment en changer, il vaut mieux <strong>les vendre ou les donner</strong>.</p><p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut <strong>les déposer dans des points de collecte pour qu'ils soient recyclés</strong>.</p>"
                   }
                 }
               }
