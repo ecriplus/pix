@@ -28,12 +28,15 @@ export class RescoreV3Certifications extends Script {
 
   async handle({ logger, options }) {
     const { dryRun, ids } = options;
-    logger.info('Script execution started');
+    logger.info(`Script execution started, about to process ${ids.length} certifications`);
+    const failedIds = [];
+    let successfulIdsProcessedCnt = 0;
     for (const certificationCourseId of ids) {
       try {
         await DomainTransaction.execute(async () => {
           const event = new CertificationRescored({ certificationCourseId });
           await usecases.scoreV3Certification({ event, certificationCourseId });
+          successfulIdsProcessedCnt++;
           if (dryRun) {
             throw new Error('dryRun');
           }
@@ -41,11 +44,15 @@ export class RescoreV3Certifications extends Script {
       } catch (err) {
         if (err.message !== 'dryRun') {
           logger.error({ err }, `Error encountered while rescoring certification ${certificationCourseId}`);
+          failedIds.push(certificationCourseId);
         }
       }
     }
 
-    logger.info('No more certifications to process youpi');
+    if (failedIds.length > 0) {
+      logger.info(`Rescoring failed for following ids : ${failedIds.join(',')}`);
+    }
+    logger.info(`${successfulIdsProcessedCnt} certifications processed with success youpi`);
   }
 }
 
