@@ -105,6 +105,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           components: [{ type: 'element', element: textElement }],
@@ -705,7 +706,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
     test('should call onGrainContinue pass in argument', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const element = { type: 'text', isAnswerable: false };
+      const element = { type: 'text', isAnswerable: false, tag: ' ' };
       const grain = {
         components: [{ type: 'element', element }],
       };
@@ -830,6 +831,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'activity',
@@ -851,6 +853,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'discovery',
@@ -872,6 +875,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'challenge',
@@ -893,6 +897,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'lesson',
@@ -914,6 +919,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'summary',
@@ -935,6 +941,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
           content: 'element content',
           type: 'text',
           isAnswerable: false,
+          tag: ' ',
         };
         const grain = {
           type: 'transition',
@@ -955,6 +962,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         content: 'element content',
         type: 'text',
         isAnswerable: false,
+        tag: ' ',
       };
       const grain = {
         components: [{ type: 'stepper', steps: [{ elements: [textElement] }] }],
@@ -1002,6 +1010,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 type: 'text',
                 content: '<p>Text 2</p>',
                 isAnswerable: false,
+                tag: ' ',
               },
             ],
           },
@@ -1078,6 +1087,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                 type: 'text',
                 content: '<p>Text 2</p>',
                 isAnswerable: false,
+                tag: ' ',
               },
             ],
           },
@@ -1130,6 +1140,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 1</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1140,6 +1151,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 2</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1180,6 +1192,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 1</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1190,6 +1203,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 2</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1245,6 +1259,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 1</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1255,6 +1270,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 2</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1295,6 +1311,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 1</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1305,6 +1322,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 2</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1375,6 +1393,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                     type: 'text',
                     content: '<p>Text 2</p>',
                     isAnswerable: false,
+                    tag: ' ',
                   },
                 ],
               },
@@ -1425,6 +1444,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                     type: 'text',
                     content: '<p>Text 2</p>',
                     isAnswerable: false,
+                    tag: ' ',
                   },
                 ],
               },
@@ -1469,6 +1489,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                       type: 'text',
                       content: '<p>Text 2</p>',
                       isAnswerable: false,
+                      tag: ' ',
                     },
                   ],
                 },
@@ -1520,6 +1541,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                       type: 'text',
                       content: '<p>Text 2</p>',
                       isAnswerable: false,
+                      tag: ' ',
                     },
                   ],
                 },
@@ -1592,6 +1614,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                     type: 'text',
                     content: '<p>Text 2</p>',
                     isAnswerable: false,
+                    tag: ' ',
                   },
                 ],
               },
@@ -1655,6 +1678,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                     type: 'text',
                     content: '<p>Text 2</p>',
                     isAnswerable: false,
+                    tag: ' ',
                   },
                 ],
               },
@@ -1721,6 +1745,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                       type: 'text',
                       content: '<p>Text 2</p>',
                       isAnswerable: false,
+                      tag: ' ',
                     },
                   ],
                 },
@@ -1787,6 +1812,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                       type: 'text',
                       content: '<p>Text 2</p>',
                       isAnswerable: false,
+                      tag: ' ',
                     },
                   ],
                 },
@@ -1895,6 +1921,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
                   type: 'text',
                   content: '<p>Text 2</p>',
                   isAnswerable: false,
+                  tag: ' ',
                 },
               ],
             },
@@ -1935,6 +1962,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         content: 'element content',
         type: 'text',
         isAnswerable: false,
+        tag: ' ',
       };
       const grain = {
         id: '12345-abcdef',
@@ -1959,6 +1987,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         content: 'element content',
         type: 'text',
         isAnswerable: false,
+        tag: ' ',
       };
       const grain = {
         id: '12345-abcdef',
@@ -1982,6 +2011,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         content: contentText,
         type: 'text',
         isAnswerable: false,
+        tag: ' ',
       };
       const grain = {
         id: '12345-abcdef',
@@ -2005,6 +2035,7 @@ module('Integration | Component | Module | Grain', function (hooks) {
         content: 'element content',
         type: 'text',
         isAnswerable: false,
+        tag: ' ',
       };
       const grain = {
         id: '12345-abcdef',

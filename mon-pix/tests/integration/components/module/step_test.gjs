@@ -17,6 +17,7 @@ module('Integration | Component | Module | Step', function (hooks) {
         id: '768441a5-a7d6-4987-ada9-7253adafd842',
         type: 'text',
         content: 'content',
+        tag: ' ',
       };
       const step = {
         elements: [element],
@@ -70,6 +71,7 @@ module('Integration | Component | Module | Step', function (hooks) {
           id: 'd0690f26-978c-41c3-9a21-da931857739c',
           content: '<button type="button">Mon bouton</button>',
           type: 'text',
+          tag: ' ',
         };
         const step = {
           elements: [element],
@@ -88,6 +90,7 @@ module('Integration | Component | Module | Step', function (hooks) {
           id: 'd0690f26-978c-41c3-9a21-da931857739c',
           content: '<button type="button">Mon bouton</button>',
           type: 'text',
+          tag: ' ',
         };
         const step = {
           elements: [element],
@@ -112,6 +115,7 @@ module('Integration | Component | Module | Step', function (hooks) {
             id: 'd0690f26-978c-41c3-9a21-da931857739c',
             content: '<button type="button">Mon bouton</button>',
             type: 'text',
+            tag: ' ',
           };
           const step = {
             elements: [element],
@@ -182,6 +186,7 @@ module('Integration | Component | Module | Step', function (hooks) {
           id: 'd0690f26-978c-41c3-9a21-da931857739c',
           content: 'Instruction',
           type: 'text',
+          tag: ' ',
         };
         const step = {
           elements: [unknownElement, textElement],
