@@ -613,8 +613,8 @@
                   "titleLevel": 0,
                   "capacityImage": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg"
                 },
-                "title": "L’impact des requêtes à l’IA générative",
-                "functionalInstruction": ""
+                "title": "",
+                "functionalInstruction": "Quelle est la demande à l’IA ?"
               }
             },
             {
