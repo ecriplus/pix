@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.369.0](https://github.com/1024pix/pix/compare/v5.368.0...v5.369.0) (2026-03-26)
+
+### :rocket: Amélioration
+
+- [#15641](https://github.com/1024pix/pix/pull/15641) Ajout d'un mode readOnly pour les webcomponents de junior (pix-22080) 
+- [#15627](https://github.com/1024pix/pix/pull/15627) Ajout du paramètre tag dans les éléments text des modules (PIX-22061). 
+- [#15605](https://github.com/1024pix/pix/pull/15605) Création d'une structure lors de la création d'une organisation (PIX-22037). 
+- [#15622](https://github.com/1024pix/pix/pull/15622) Enlever l'utilisation de locale et du FT multipleLocalesForTrainingsEnabled dans Admin et PixApp (PIX-22063) 
+- [#15634](https://github.com/1024pix/pix/pull/15634) Masquage du bouton de création d'organisation fille (PIX-22040). 
+- [#15587](https://github.com/1024pix/pix/pull/15587) Tmp iagenimpac ava new 
+- [#15604](https://github.com/1024pix/pix/pull/15604) Update RepondreMail_IND 
+
+### :building_construction: Tech
+
+- [#15623](https://github.com/1024pix/pix/pull/15623) :recycle:Remplace l'utilisation de `lodash` par du JavaScript à la vanille 
+- [#15635](https://github.com/1024pix/pix/pull/15635) Ajouter un script pour créer des structures (PIX-22038) 
+- [#15620](https://github.com/1024pix/pix/pull/15620) Mise à jour des builders des réseaux, structures, organisations (PIX-22039) 
+- [#15617](https://github.com/1024pix/pix/pull/15617) Réduit l'utilisation de Lodash dans le code de certif
+
 # [5.368.0](https://github.com/1024pix/pix/compare/v5.367.0...v5.368.0) (2026-03-25)
 
 ### :rocket: Amélioration
