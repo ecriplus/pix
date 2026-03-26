@@ -1,17 +1,12 @@
-import PgBoss from 'pg-boss';
-
-import { Metrics } from '../../../../../src/monitoring/infrastructure/metrics.js';
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
-import { ValidateOrganizationLearnersImportFileJobController } from '../../../../../src/prescription/learner-management/application/jobs/validate-organization-learners-import-file-job-controller.js';
 import { ValidateOrganizationImportFileJob } from '../../../../../src/prescription/learner-management/domain/models/ValidateOrganizationImportFileJob.js';
 import { AuditLoggingJobController } from '../../../../../src/shared/application/jobs/audit-logging.job-controller.js';
 import { JobGroup } from '../../../../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../../../../src/shared/config.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { JobClient } from '../../../../../src/shared/infrastructure/jobs/JobClient.js';
-import { JobQueue } from '../../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobExpireIn } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 class FakePgBoss {
   start() {

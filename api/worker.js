@@ -1,6 +1,6 @@
 import { databaseConnections } from './db/database-connections.js';
 import { Metrics } from './src/monitoring/infrastructure/metrics.js';
-import { JobGroup } from './src/shared/application/jobs/job-controller.js';
+import { checkJobGroups, JobGroup } from './src/shared/application/jobs/job-controller.js';
 import { config, schema as configSchema } from './src/shared/config.js';
 import { JobClient } from './src/shared/infrastructure/jobs/JobClient.js';
 import { quitAllStorages } from './src/shared/infrastructure/key-value-storages/index.js';
@@ -32,17 +32,6 @@ async function main() {
   process.on('SIGINT', async () => {
     await exitOnSignal('SIGINT');
   });
-}
-
-function checkJobGroups(jobGroups) {
-  if (!jobGroups) throw new Error('Job groups are mandatory');
-  jobGroups.forEach((jobGroup) => checkJobGroup(jobGroup));
-}
-
-function checkJobGroup(jobGroup) {
-  if (!Object.values(JobGroup).includes(jobGroup)) {
-    throw new Error(`Job group invalid, allowed Job groups are [${Object.values(JobGroup)}]`);
-  }
 }
 
 async function exitOnSignal(signal) {

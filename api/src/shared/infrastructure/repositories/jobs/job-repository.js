@@ -1,32 +1,8 @@
 import Joi from 'joi';
-import PgBoss from 'pg-boss';
 
-import { knex } from '../../../../../db/knex-database-connection.js';
-import { config } from '../../../config.js';
 import { EntityValidationError } from '../../../domain/errors.js';
 import { getCorrelationInfo } from '../../execution-context-manager.js';
 import { JobClient } from '../../jobs/JobClient.js';
-
-const monitorStateIntervalSeconds = config.pgBoss.monitorStateIntervalSeconds;
-
-export const pgBoss = new PgBoss({
-  ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
-  archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
-  db: {
-    // temporary code to reuse connection pool from knex one
-    // shall be deleted when using a dedicated pgboss database
-    executeSql: (query, values) => {
-      const remapped = [];
-      const converted = query.replace(/\$(\d+)/g, (_, index) => {
-        const value = values[parseInt(index, 10) - 1];
-        remapped.push(value ?? null);
-        return '?';
-      });
-      // eslint-disable-next-line knex/avoid-injections
-      return knex.raw(converted, remapped);
-    },
-  },
-});
 
 export class JobRepository {
   #schema = Joi.object({

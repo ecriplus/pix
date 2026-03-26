@@ -105,7 +105,7 @@ export class JobClient {
         }
 
         if (job.jobCron) {
-          await this.#scheduleCronJob({
+          await this.scheduleCronJob({
             name: job.jobName,
             cron: job.jobCron,
             options: { tz: 'Europe/Paris', expireInSeconds: job.expireIn },
@@ -150,7 +150,7 @@ export class JobClient {
     });
   }
 
-  async #scheduleCronJob({ name, cron, data, options }) {
+  async scheduleCronJob({ name, cron, data, options }) {
     return this.#pgBoss.schedule(name, cron, data, options);
   }
 
