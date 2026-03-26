@@ -26,6 +26,7 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         const parentOrganizationId = 1;
         const parentOrganization = domainBuilder.buildOrganizationForAdmin({
           id: parentOrganizationId,
+          networkId: 456,
         });
         organizationForAdminRepository.get.resolves(parentOrganization);
 
@@ -81,6 +82,35 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         expect(error.meta).to.deep.equal({ childOrganizationId: 123 });
       });
     });
+
+    context('when attaching an organization to an organization that does not belong to a network', function () {
+      it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
+        // given
+        const childOrganizationIds = '123';
+        const parentOrganizationId = 1;
+        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
+          id: parentOrganizationId,
+          networkId: null,
+        });
+        organizationForAdminRepository.get.resolves(parentOrganization);
+
+        // when
+        const error = await catchErr(attachChildOrganizationToOrganization)({
+          childOrganizationIds,
+          parentOrganizationId,
+          organizationForAdminRepository,
+        });
+
+        // then
+        expect(organizationForAdminRepository.update).to.not.have.been.called;
+        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
+        expect(error.message).to.equal(
+          'Unable to attach organization to an organization that does not belong to a network',
+        );
+        expect(error.code).to.equal('UNABLE_TO_ATTACH_TO_ORGANIZATION_NOT_IN_NETWORK');
+        expect(error.meta).to.deep.equal({ parentOrganizationId: 1 });
+      });
+    });
   });
 
   context('success cases', function () {
@@ -89,6 +119,7 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
       const parentOrganizationId = 12;
       const parentOrganization = domainBuilder.buildOrganizationForAdmin({
         id: parentOrganizationId,
+        networkId: 456,
       });
       organizationForAdminRepository.get.resolves(parentOrganization);
 

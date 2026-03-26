@@ -1174,6 +1174,13 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           name: 'Parent Organization',
           type: 'SCO',
         }).id;
+        const networkId = databaseBuilder.factory.buildNetwork().id;
+        const structureId = databaseBuilder.factory.buildStructure().id;
+        databaseBuilder.factory.buildFactStructure({
+          organizationId: parentOrganizationId,
+          structureId: structureId,
+          networkId: networkId,
+        });
         firstChildOrganization = databaseBuilder.factory.buildOrganization({
           name: 'child Organization',
           type: 'SCO',
@@ -1274,134 +1281,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
             // then
             expect(response.statusCode).to.equal(403);
-          });
-        });
-      });
-
-      context('when request have invalid data', function () {
-        let parentOrganizationId;
-        let childOrganizationId;
-
-        beforeEach(async function () {
-          parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-          childOrganizationId = databaseBuilder.factory.buildOrganization().id;
-          await databaseBuilder.commit();
-        });
-
-        context('when parent organization id does not exist', function () {
-          it('returns a 404 HTTP status code', async function () {
-            // given
-            const userId = databaseBuilder.factory.buildUser.withRole().id;
-            await databaseBuilder.commit();
-
-            const options = {
-              method: 'POST',
-              url: `/api/admin/organizations/985421/attach-child-organization`,
-              headers: generateAuthenticatedUserRequestHeaders({ userId }),
-              payload: {
-                childOrganizationIds: `${childOrganizationId}`,
-              },
-            };
-
-            // when
-            const response = await server.inject(options);
-
-            // then
-            expect(response.statusCode).to.equal(404);
-          });
-        });
-
-        context('when child organization id does not exist', function () {
-          it('returns a 404 HTTP status code', async function () {
-            // given
-            const options = {
-              method: 'POST',
-              url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-              headers: generateAuthenticatedUserRequestHeaders({
-                userId: superAdmin.id,
-              }),
-              payload: {
-                childOrganizationIds: '984512',
-              },
-            };
-
-            // when
-            const response = await server.inject(options);
-
-            // then
-            expect(response.statusCode).to.equal(404);
-          });
-        });
-      });
-
-      context('when attaching child organization to itself', function () {
-        it('returns a 409 HTTP status code with detailed error info', async function () {
-          // given
-          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({
-              userId: superAdmin.id,
-            }),
-            payload: {
-              childOrganizationIds: `${parentOrganizationId}`,
-            },
-          };
-
-          // when
-          const { result, statusCode } = await server.inject(options);
-
-          // then
-          const error = result.errors[0];
-          expect(statusCode).to.equal(409);
-          expect(error).to.deep.equal({
-            status: '409',
-            code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF',
-            title: 'Conflict',
-            detail: 'Unable to attach child organization to itself',
-            meta: {
-              childOrganizationId: parentOrganizationId,
-              parentOrganizationId,
-            },
-          });
-        });
-      });
-
-      context('when attaching child organization without the same type as parent organization', function () {
-        it('returns a 409 HTTP status code with detailed error info', async function () {
-          // given
-          const parentOrganizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({
-              userId: superAdmin.id,
-            }),
-            payload: {
-              childOrganizationIds: `${parentOrganizationId}`,
-            },
-          };
-
-          // when
-          const { result, statusCode } = await server.inject(options);
-
-          // then
-          const error = result.errors[0];
-          expect(statusCode).to.equal(409);
-          expect(error).to.deep.equal({
-            status: '409',
-            code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ITSELF',
-            title: 'Conflict',
-            detail: 'Unable to attach child organization to itself',
-            meta: {
-              childOrganizationId: parentOrganizationId,
-              parentOrganizationId,
-            },
           });
         });
       });

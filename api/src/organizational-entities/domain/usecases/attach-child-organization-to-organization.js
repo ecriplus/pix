@@ -3,9 +3,11 @@ import { UnableToAttachChildOrganizationToParentOrganizationError } from '../err
 
 const attachChildOrganizationToOrganization = withTransaction(
   async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository }) => {
-    await organizationForAdminRepository.get({
+    const parentOrganization = await organizationForAdminRepository.get({
       organizationId: parentOrganizationId,
     });
+
+    _assertParentOrganizationIsPartOfANetwork(parentOrganization);
 
     const childOrganizationIdsArray = childOrganizationIds.split(',').map(Number);
 
@@ -50,6 +52,18 @@ function _assertChildOrganizationNotAlreadyPartOfANetwork(childOrganizationForAd
       message: 'Unable to attach organization already belonging to a network',
       meta: {
         childOrganizationId: childOrganizationForAdmin.id,
+      },
+    });
+  }
+}
+
+function _assertParentOrganizationIsPartOfANetwork(parentOrganization) {
+  if (!parentOrganization.network) {
+    throw new UnableToAttachChildOrganizationToParentOrganizationError({
+      code: 'UNABLE_TO_ATTACH_TO_ORGANIZATION_NOT_IN_NETWORK',
+      message: 'Unable to attach organization to an organization that does not belong to a network',
+      meta: {
+        parentOrganizationId: parentOrganization.id,
       },
     });
   }
