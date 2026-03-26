@@ -11,7 +11,6 @@ import { close as closePubSub } from './src/shared/infrastructure/pubsub.js';
 import { logger } from './src/shared/infrastructure/utils/logger.js';
 import { redisMonitor } from './src/shared/infrastructure/utils/redis-monitor.js';
 import { validateEnvironmentVariables } from './src/shared/infrastructure/validate-environment-variables.js';
-import { registerJobs } from './worker.js';
 
 validateEnvironmentVariables(configSchema);
 
@@ -32,11 +31,10 @@ const start = async function () {
   await server.start();
   prometheusPushGateway.startPushingMetrics();
 
-  await JobClient.instance.initialize();
-
-  if (config.infra.startJobInWebProcess) {
-    await registerJobs({ jobGroups: [JobGroup.DEFAULT, JobGroup.FAST] });
-  }
+  await JobClient.instance.initialize({
+    worker: config.infra.startJobInWebProcess,
+    jobGroups: [JobGroup.DEFAULT, JobGroup.FAST],
+  });
 };
 
 async function _exitOnSignal(signal) {
