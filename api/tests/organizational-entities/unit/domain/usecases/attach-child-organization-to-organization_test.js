@@ -24,6 +24,10 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         // given
         const childOrganizationIds = '1,2,3';
         const parentOrganizationId = 1;
+        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
+          id: parentOrganizationId,
+        });
+        organizationForAdminRepository.get.resolves(parentOrganization);
 
         // when
         const error = await catchErr(attachChildOrganizationToOrganization)({
@@ -50,6 +54,10 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         });
         const childOrganizationIds = `${childOrganization.id}`;
         const parentOrganizationId = 1;
+        const parentOrganization = domainBuilder.buildOrganizationForAdmin({
+          id: parentOrganizationId,
+        });
+        organizationForAdminRepository.get.resolves(parentOrganization);
 
         organizationForAdminRepository.get.resolves(childOrganization);
         organizationForAdminRepository.findChildrenByParentOrganizationId.resolves([]);
@@ -62,7 +70,7 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         });
 
         // then
-        expect(organizationForAdminRepository.get).to.have.been.calledOnceWithExactly({
+        expect(organizationForAdminRepository.get.getCall(1)).to.have.been.calledWithExactly({
           organizationId: childOrganization.id,
         });
         expect(organizationForAdminRepository.update).to.not.have.been.called;
@@ -108,7 +116,6 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         expect(organizationForAdminRepository.findChildrenByParentOrganizationId).to.have.been.calledOnceWithExactly({
           parentOrganizationId: childOrganizationId,
         });
-        expect(organizationForAdminRepository.get).to.not.have.been.called;
         expect(organizationForAdminRepository.update).to.not.have.been.called;
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
         expect(error.message).to.equal(
@@ -126,15 +133,16 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
     it('attach each child organization to parent organization', async function () {
       // given
       const parentOrganizationId = 12;
-      const parentOrganization = domainBuilder.buildOrganizationForAdmin({ id: parentOrganizationId });
+      const parentOrganization = domainBuilder.buildOrganizationForAdmin({
+        id: parentOrganizationId,
+      });
+      organizationForAdminRepository.get.resolves(parentOrganization);
+
       const firstChildOrganization = domainBuilder.buildOrganizationForAdmin({ id: 1234 });
       const secondChildOrganization = domainBuilder.buildOrganizationForAdmin({ id: 567 });
 
-      organizationForAdminRepository.get.onCall(0).resolves(firstChildOrganization);
-      organizationForAdminRepository.get.onCall(1).resolves(parentOrganization);
-
+      organizationForAdminRepository.get.onCall(1).resolves(firstChildOrganization);
       organizationForAdminRepository.get.onCall(2).resolves(secondChildOrganization);
-      organizationForAdminRepository.get.onCall(3).resolves(parentOrganization);
 
       organizationForAdminRepository.findChildrenByParentOrganizationId.onCall(0).resolves([]);
       organizationForAdminRepository.findChildrenByParentOrganizationId.onCall(1).resolves([]);

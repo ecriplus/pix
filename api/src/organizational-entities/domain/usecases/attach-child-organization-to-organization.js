@@ -3,6 +3,10 @@ import { UnableToAttachChildOrganizationToParentOrganizationError } from '../err
 
 const attachChildOrganizationToOrganization = withTransaction(
   async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository }) => {
+    await organizationForAdminRepository.get({
+      organizationId: parentOrganizationId,
+    });
+
     const childOrganizationIdsArray = childOrganizationIds.split(',').map(Number);
 
     for (const childOrganizationId of childOrganizationIdsArray) {
@@ -17,10 +21,6 @@ const attachChildOrganizationToOrganization = withTransaction(
       });
 
       _assertChildOrganizationNotAlreadyAttached(childOrganizationForAdmin);
-
-      await organizationForAdminRepository.get({
-        organizationId: parentOrganizationId,
-      });
 
       childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
 
