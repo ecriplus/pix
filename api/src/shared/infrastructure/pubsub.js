@@ -31,7 +31,10 @@ export function getPubSub() {
     }
 
     publishClient = new Redis(config.caching.redisUrl);
+    publishClient.on('error', (err) => logger.error({ err }, 'PubSub : error in Publish client'));
+
     subscribeClient = new Redis(config.caching.redisUrl);
+    subscribeClient.on('error', (err) => logger.error({ err }, 'PubSub : error in Subscribe client'));
 
     pubSub = createPubSub({
       eventTarget: createRedisEventTarget({
