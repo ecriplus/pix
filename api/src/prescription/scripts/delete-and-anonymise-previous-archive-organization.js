@@ -1,8 +1,8 @@
-import { usecases as campaignUsecases } from '../../src/prescription/campaign/domain/usecases/index.js';
-import { usecases as learnerManagementUsecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
+import { usecases as campaignUsecases } from '../campaign/domain/usecases/index.js';
+import { usecases as learnerManagementUsecases } from '../learner-management/domain/usecases/index.js';
 
 export class DeleteAndAnonymisePreviousOrganizationScript extends Script {
   constructor() {

@@ -2,20 +2,20 @@ import * as url from 'node:url';
 
 import dayjs from 'dayjs';
 
-import { disconnect, knex } from '../../db/knex-database-connection.js';
-import * as badgeAcquisitionRepository from '../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
-import * as badgeRepository from '../../src/evaluation/infrastructure/repositories/badge-repository.js';
-import * as userRepository from '../../src/identity-access-management/infrastructure/repositories/user.repository.js';
-import * as campaignRepository from '../../src/prescription/campaign/infrastructure/repositories/campaign-repository.js';
-import { PoleEmploiSending } from '../../src/prescription/campaign-participation/domain/models/PoleEmploiSending.js';
-import { PoleEmploiPayload } from '../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
-import * as campaignParticipationRepository from '../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
-import { campaignParticipationResultRepository } from '../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-result-repository.js';
-import * as poleEmploiSendingRepository from '../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
-import { CampaignParticipationStatuses } from '../../src/prescription/shared/domain/constants.js';
-import * as targetProfileRepository from '../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
-import * as organizationRepository from '../../src/shared/infrastructure/repositories/organization-repository.js';
-import { logger } from '../../src/shared/infrastructure/utils/logger.js';
+import { disconnect, knex } from '../../../db/knex-database-connection.js';
+import * as badgeAcquisitionRepository from '../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
+import * as badgeRepository from '../../evaluation/infrastructure/repositories/badge-repository.js';
+import * as userRepository from '../../identity-access-management/infrastructure/repositories/user.repository.js';
+import * as organizationRepository from '../../shared/infrastructure/repositories/organization-repository.js';
+import { logger } from '../../shared/infrastructure/utils/logger.js';
+import * as campaignRepository from '../campaign/infrastructure/repositories/campaign-repository.js';
+import { PoleEmploiSending } from '../campaign-participation/domain/models/PoleEmploiSending.js';
+import { PoleEmploiPayload } from '../campaign-participation/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
+import * as campaignParticipationRepository from '../campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
+import { campaignParticipationResultRepository } from '../campaign-participation/infrastructure/repositories/campaign-participation-result-repository.js';
+import * as poleEmploiSendingRepository from '../campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
+import { CampaignParticipationStatuses } from '../shared/domain/constants.js';
+import * as targetProfileRepository from '../target-profile/infrastructure/repositories/target-profile-repository.js';
 
 async function insertMissingPoleEmploiSendingFromDate(startDate, endDate = new Date(), campaignCode = 'YOURCODE') {
   const start = dayjs(startDate, 'YYYY-MM-DD');
@@ -93,8 +93,10 @@ const isLaunchedFromCommandLine = process.argv[1] === modulePath;
   if (isLaunchedFromCommandLine) {
     try {
       await insertMissingPoleEmploiSendingFromDate(process.argv[2], process.argv[3], process.argv[4]);
+      // eslint-disable-next-line no-console
       console.log('done');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       process.exitCode = 1;
     } finally {

@@ -1,7 +1,7 @@
-import { usecases } from '../../src/quest/domain/usecases/index.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { usecases } from '../../quest/domain/usecases/index.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 
 // Définition du script
 export class DeleteAndAnonymizeOrganizationLearnerParticipationsScript extends Script {

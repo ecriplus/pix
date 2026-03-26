@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { DeleteAndAnonymiseOrganizationLearnerScript } from '../../../../scripts/prod/delete-and-anonymise-organization-learners.js';
+import { DeleteAndAnonymiseOrganizationLearnerScript } from '../../../../src/prescription/scripts/delete-and-anonymise-organization-learners.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
 describe('DeleteAndAnonymiseOrganizationLearnerScript', function () {

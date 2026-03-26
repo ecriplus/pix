@@ -1,9 +1,9 @@
-import { knex } from '../../db/knex-database-connection.js';
-import { CLIENTS, PIX_ADMIN } from '../../src/authorization/domain/constants.js';
-import { usecases } from '../../src/prescription/campaign-participation/domain/usecases/index.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { knex } from '../../../db/knex-database-connection.js';
+import { CLIENTS, PIX_ADMIN } from '../../authorization/domain/constants.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
+import { usecases } from '../campaign-participation/domain/usecases/index.js';
 
 export class DeleteAndAnonymisePreviousCampaignParticipationsScript extends Script {
   constructor() {

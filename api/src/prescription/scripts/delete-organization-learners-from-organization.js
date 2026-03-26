@@ -1,8 +1,8 @@
-import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
+import { usecases } from '../learner-management/domain/usecases/index.js';
 
 export class DeleteOrganizationLearnersFromOrganizationScript extends Script {
   constructor() {
