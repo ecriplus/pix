@@ -30,7 +30,6 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
             'use-pix-orga-new-auth-design': false,
             'is-pix-plus-candidate-a11y-enabled': false,
             'are-module-short-id-urls-enabled': false,
-            'multiple-locales-for-trainings-enabled': false,
             'add-email-connection-method-enabled': false,
           },
         },
