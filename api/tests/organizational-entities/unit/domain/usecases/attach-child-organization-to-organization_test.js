@@ -44,13 +44,14 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
       });
     });
 
-    context('when attaching an already attached child organization', function () {
+    context('when attaching an organization already belonging to a network', function () {
       it('throws an UnableToAttachChildOrganizationToParentOrganization error', async function () {
         // given
         const childOrganization = domainBuilder.buildOrganizationForAdmin({
           id: 123,
           name: 'Child Organization',
           parentOrganizationId: 321,
+          networkId: 456,
         });
         const childOrganizationIds = `${childOrganization.id}`;
         const parentOrganizationId = 1;
@@ -75,7 +76,7 @@ describe('Unit | Organizational Entities | Domain | UseCases | attach-child-orga
         });
         expect(organizationForAdminRepository.update).to.not.have.been.called;
         expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.message).to.equal('Unable to attach already attached child organization');
+        expect(error.message).to.equal('Unable to attach organization already belonging to a network');
         expect(error.code).to.equal('UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION');
         expect(error.meta).to.deep.equal({ childOrganizationId: 123 });
       });

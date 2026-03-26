@@ -1370,43 +1370,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         });
       });
 
-      context('when attaching an already attached child organization', function () {
-        it('returns a 409 HTTP status code with detailed error info', async function () {
-          // given
-          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-          const anotherParentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-          const childOrganizationId = databaseBuilder.factory.buildOrganization({
-            parentOrganizationId: anotherParentOrganizationId,
-          }).id;
-          await databaseBuilder.commit();
-
-          const options = {
-            method: 'POST',
-            url: `/api/admin/organizations/${parentOrganizationId}/attach-child-organization`,
-            headers: generateAuthenticatedUserRequestHeaders({
-              userId: superAdmin.id,
-            }),
-            payload: {
-              childOrganizationIds: `${childOrganizationId}`,
-            },
-          };
-
-          // when
-          const { result, statusCode } = await server.inject(options);
-
-          // then
-          const error = result.errors[0];
-          expect(statusCode).to.equal(409);
-          expect(error).to.deep.equal({
-            status: '409',
-            code: 'UNABLE_TO_ATTACH_ALREADY_ATTACHED_CHILD_ORGANIZATION',
-            title: 'Conflict',
-            detail: 'Unable to attach already attached child organization',
-            meta: { childOrganizationId },
-          });
-        });
-      });
-
       context('when attaching child organization without the same type as parent organization', function () {
         it('returns a 409 HTTP status code with detailed error info', async function () {
           // given
