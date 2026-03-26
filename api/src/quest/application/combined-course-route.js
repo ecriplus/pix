@@ -21,11 +21,6 @@ const register = async function (server) {
         auth: {
           strategy: jwtOptionalUserAuthenticationStrategyName,
         },
-        pre: [
-          {
-            method: securityPreHandlers.checkCombinedCourseIsNotDeleted,
-          },
-        ],
         handler: combinedCourseController.getByCode,
         validate: {
           query: Joi.object({

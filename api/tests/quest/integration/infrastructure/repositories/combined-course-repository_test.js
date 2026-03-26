@@ -13,7 +13,7 @@ import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper
 
 describe('Quest | Integration | Repository | combined-course', function () {
   describe('#getByCode', function () {
-    it('should return a quest if code exists', async function () {
+    it('should return a combined course if code exists', async function () {
       // given
       const code = 'SOMETHING';
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
@@ -28,9 +28,24 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(combinedCourseResult).to.deep.equal(new CombinedCourse(combinedCourse));
     });
 
-    it('should throw NotFoundError if quest does not exist', async function () {
+    it('should throw NotFoundError if combined course does not exist', async function () {
       // given
       const code = 'NOTHINGTT';
+
+      // when
+      const error = await catchErr(combinedCourseRepository.getByCode)({ code });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error.message).to.equal(`Le parcours combiné portant le code ${code} n'existe pas`);
+    });
+
+    it('should throw NotFoundError if combined course is deleted', async function () {
+      // given
+      const code = 'SOMETHING';
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization();
+      databaseBuilder.factory.buildCombinedCourse({ code, organizationId, deletedAt: new Date() });
+      await databaseBuilder.commit();
 
       // when
       const error = await catchErr(combinedCourseRepository.getByCode)({ code });
@@ -42,7 +57,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#getById', function () {
-    it('should return a quest if quest id exists', async function () {
+    it('should return a combined course if exists', async function () {
       // given
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
       const combinedCourse = databaseBuilder.factory.buildCombinedCourse({ code: 'COMBINIX1', organizationId });
@@ -56,7 +71,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(combinedCourseResult).to.deep.equal(new CombinedCourse(combinedCourse));
     });
 
-    it('should throw NotFoundError if quest does not exist', async function () {
+    it('should throw NotFoundError if combined course does not exist', async function () {
       // given
       const id = 1;
 
@@ -66,6 +81,24 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // then
       expect(error).to.be.instanceOf(NotFoundError);
       expect(error.message).to.equal(`Le parcours combiné pour l'id ${id} n'existe pas`);
+    });
+
+    it('should throw NotFoundError if combined course is deleted', async function () {
+      // given
+      const { id: organizationId } = databaseBuilder.factory.buildOrganization();
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBINIX1',
+        organizationId,
+        deletedAt: new Date(),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const error = await catchErr(combinedCourseRepository.getById)({ id: combinedCourse.id });
+
+      // then
+      expect(error).to.be.instanceOf(NotFoundError);
+      expect(error.message).to.equal(`Le parcours combiné pour l'id ${combinedCourse.id} n'existe pas`);
     });
   });
 
@@ -149,6 +182,34 @@ describe('Quest | Integration | Repository | combined-course', function () {
       expect(result.combinedCourses).to.have.lengthOf(1);
       expect(result.combinedCourses[0].organizationId).to.equal(organization1Id);
     });
+
+    it('should not return deleted combined courses', async function () {
+      // given
+      const organization1Id = databaseBuilder.factory.buildOrganization().id;
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'COURSE1',
+        name: 'Parcours 1',
+        organizationId: organization1Id,
+      });
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'COURSE2',
+        name: 'Parcours 2',
+        organizationId: organization1Id,
+        deletedAt: new Date(),
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await combinedCourseRepository.findByOrganizationId({
+        organizationId: organization1Id,
+        page: 1,
+        size: 10,
+      });
+
+      // then
+      expect(result.combinedCourses).to.have.lengthOf(1);
+      expect(result.combinedCourses[0].organizationId).to.equal(organization1Id);
+    });
   });
 
   describe('#findByCampaignId', function () {
@@ -158,22 +219,21 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // given
       organizationId = databaseBuilder.factory.buildOrganization().id;
       campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
-      const code = 'ABCDE1234';
-      const name = 'Mon parcours Combiné';
-      const description = 'Le but de ma quête';
-      const illustration = 'images/illustration.svg';
       combinedCourse = databaseBuilder.factory.buildCombinedCourse({
-        code,
-        name,
         organizationId,
-        description,
-        illustration,
         combinedCourseContents: [{ campaignId }],
       });
       await databaseBuilder.commit();
     });
 
-    it('should return a combinedCourse that include a given campaignId', async function () {
+    it('should return not deleted combined courses that include a given campaignId', async function () {
+      // given
+      databaseBuilder.factory.buildCombinedCourse({
+        organizationId,
+        combinedCourseContents: [{ campaignId }],
+        deletedAt: new Date(),
+      });
+
       // when
       const combinedCourseResult = await combinedCourseRepository.findByCampaignId({ campaignId });
 
@@ -465,27 +525,23 @@ describe('Quest | Integration | Repository | combined-course', function () {
   });
 
   describe('#findByModuleIdAndOrganizationIds', function () {
-    it('should return combined course for a given module id and organization ids', async function () {
-      //given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationId2 = databaseBuilder.factory.buildOrganization().id;
-      const moduleId = 'module-abc';
+    let organizationId, organizationId2, moduleId;
+    let combinedCourseWithModule, combinedCourseWithModuleAndOtherOrga;
 
-      const combinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
+    beforeEach(async function () {
+      //given
+      organizationId = databaseBuilder.factory.buildOrganization().id;
+      organizationId2 = databaseBuilder.factory.buildOrganization().id;
+      moduleId = 'module-abc';
+
+      combinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
         code: 'QWERTY123',
         name: 'name1',
         organizationId,
         combinedCourseContents: [{ moduleId }],
       });
 
-      const otherCombinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
-        code: 'AZERTY123',
-        name: 'name2',
-        organizationId,
-        combinedCourseContents: [{ moduleId }],
-      });
-
-      databaseBuilder.factory.buildCombinedCourse({
+      combinedCourseWithModuleAndOtherOrga = databaseBuilder.factory.buildCombinedCourse({
         code: 'AZERTY456',
         name: 'name3',
         organizationId: organizationId2,
@@ -494,9 +550,29 @@ describe('Quest | Integration | Repository | combined-course', function () {
 
       databaseBuilder.factory.buildCombinedCourse({
         code: 'QWERTY456',
-        name: 'name3',
-        organizationId: organizationId,
+        name: 'name4',
+        organizationId,
         combinedCourseContents: [{ moduleId: 'module-cde' }],
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code: 'QWERTY789',
+        name: 'name5',
+        organizationId,
+        combinedCourseContents: [{ moduleId }],
+        deletedAt: new Date(),
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should return not deleted combined course for a given module id and organization ids', async function () {
+      // given
+      const otherCombinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
+        code: 'AZERTY123',
+        name: 'name2',
+        organizationId,
+        combinedCourseContents: [{ moduleId }],
       });
 
       await databaseBuilder.commit();
@@ -541,35 +617,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
       ]);
     });
 
-    it('should return combined course for a same moduleId and multiple organizationIds', async function () {
-      //given
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const organizationId2 = databaseBuilder.factory.buildOrganization().id;
-      const moduleId = 'module-abc';
-
-      const combinedCourseWithModule = databaseBuilder.factory.buildCombinedCourse({
-        code: 'QWERTY123',
-        name: 'name1',
-        organizationId,
-        combinedCourseContents: [{ moduleId }],
-      });
-
-      const combinedCourseWithModuleAndOtherOrga = databaseBuilder.factory.buildCombinedCourse({
-        code: 'AZERTY123',
-        name: 'name2',
-        organizationId: organizationId2,
-        combinedCourseContents: [{ moduleId }],
-      });
-
-      databaseBuilder.factory.buildCombinedCourse({
-        code: 'AZERTY456',
-        name: 'name3',
-        organizationId,
-        combinedCourseContents: [{ moduleId: 'module-cde' }],
-      });
-
-      await databaseBuilder.commit();
-
+    it('should return not deleted combined course for a same moduleId and multiple organizationIds', async function () {
       //when
       const result = await combinedCourseRepository.findByModuleIdAndOrganizationIds({
         moduleId,

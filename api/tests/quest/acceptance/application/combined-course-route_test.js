@@ -152,44 +152,6 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
         expect(response.result.data.attributes.name).to.equal('Mon parcours');
       });
     });
-
-    it('should return 404 when combined course with this code does not exist', async function () {
-      // given
-      const options = {
-        method: 'GET',
-        url: `/api/combined-courses/?filter[code]=NOTHINGTT`,
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(404);
-    });
-
-    it('should return 403 when combined course is deleted', async function () {
-      // given
-      const organizationId = databaseBuilder.factory.buildOrganization({ type: 'SCO' }).id;
-
-      databaseBuilder.factory.buildCombinedCourse({
-        code: 'SOMETHING',
-        name: 'Mon parcours',
-        organizationId,
-        deletedAt: new Date(),
-      });
-      await databaseBuilder.commit();
-
-      const options = {
-        method: 'GET',
-        url: `/api/combined-courses/?filter[code]=SOMETHING`,
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(403);
-    });
   });
 
   describe('PUT /api/combined-course/{code}/start', function () {

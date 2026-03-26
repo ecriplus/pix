@@ -13,6 +13,7 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
   afterEach(function () {
     clock.restore();
   });
+
   context('when user has membership in combined course organization', function () {
     it('should return true', async function () {
       // given
@@ -46,7 +47,7 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
     });
   });
 
-  context('when quest is not a combined course', function () {
+  context('when combined course does not exist', function () {
     it('should throw NotFoundError', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
@@ -73,24 +74,6 @@ describe('Integration | Application | Usecases | checkUserCanManageCombinedCours
 
       // then
       expect(canManage).to.be.false;
-    });
-  });
-  context('when combined course is deleted', function () {
-    it('should return authorized false', async function () {
-      // given
-      const code = 'COMBINIX1';
-      const userId = databaseBuilder.factory.buildUser().id;
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-
-      const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({ code, organizationId, deletedAt: now }).id;
-
-      await databaseBuilder.commit();
-
-      // when
-      const authorized = await checkUserCanManageCombinedCourse.execute({ combinedCourseId, userId });
-
-      // then
-      expect(authorized).to.be.false;
     });
   });
 });

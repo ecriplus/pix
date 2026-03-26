@@ -8,7 +8,6 @@ import { Organization } from '../../organizational-entities/domain/models/Organi
 import * as checkCampaignBelongsToCombinedCourseUsecase from '../../prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import * as checkCampaignParticipationBelongsToUserUsecase from '../../prescription/campaign/application/usecases/checkCampaignParticipationBelongsToUser.js';
 import * as checkAuthorizationToAccessCombinedCourseUsecase from '../../quest/application/usecases/check-authorization-to-access-combined-course.js';
-import * as checkCombinedCourseIsNotDeletedUsecase from '../../quest/application/usecases/check-combined-course-is-not-deleted.js';
 import * as checkParticipationBelongsToCombinedCourseUsecase from '../../quest/application/usecases/check-participation-belongs-to-combined-course.js';
 import * as checkUserCanManageCombinedCourseUsecase from '../../quest/application/usecases/check-user-can-manage-combined-course.js';
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
@@ -690,14 +689,6 @@ async function checkAuthorizationToAccessCombinedCourse(
   return _replyForbiddenError(h);
 }
 
-async function checkCombinedCourseIsNotDeleted(request, h, dependencies = { checkCombinedCourseIsNotDeletedUsecase }) {
-  const code = request.query?.filter?.code || request.params.code;
-  const isNotDeleted = await dependencies.checkCombinedCourseIsNotDeletedUsecase.execute({ code });
-
-  if (isNotDeleted) return h.response(true);
-  return _replyForbiddenError(h);
-}
-
 async function checkUserCanManageCombinedCourse(
   request,
   h,
@@ -966,7 +957,6 @@ const securityPreHandlers = {
   checkUserCanManageCombinedCourse,
   checkCampaignBelongsToCombinedCourse,
   checkCertificationCenterIsNotScoManagingStudents,
-  checkCombinedCourseIsNotDeleted,
   checkIfUserIsBlocked,
   checkOrganizationHasFeature,
   checkRequestedUserIsAuthenticatedUser,

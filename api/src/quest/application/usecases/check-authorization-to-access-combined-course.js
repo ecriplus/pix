@@ -3,16 +3,9 @@ import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import * as organizationFeatureRepository from '../../../shared/infrastructure/repositories/organization-feature-repository.js';
 import * as combinedCourseParticipantRepository from '../../infrastructure/repositories/combined-course-participant-repository.js';
 import * as combinedCourseRepository from '../../infrastructure/repositories/combined-course-repository.js';
-import * as checkCombinedCourseIsNotDeleted from './check-combined-course-is-not-deleted.js';
 
 const execute = async function ({ userId, code }) {
   const { organizationId } = await combinedCourseRepository.getByCode({ code });
-
-  const authorized = await checkCombinedCourseIsNotDeleted.execute({ code });
-
-  if (!authorized) {
-    return false;
-  }
 
   const hasImportFeature = await organizationFeatureRepository.isFeatureEnabledForOrganization({
     organizationId,

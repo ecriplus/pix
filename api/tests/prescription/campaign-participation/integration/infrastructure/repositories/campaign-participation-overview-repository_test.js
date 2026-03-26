@@ -1277,62 +1277,107 @@ describe('Integration | Repository | Campaign Participation Overview', function 
     });
 
     context('when there are combined course participations', function () {
-      it('retrieves information about combined course participation and organization', async function () {
-        const organizationId = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' }).id;
-        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+      let organizationId, organizationLearnerId, combinedCourse, expectedFirstParticipation, secondCombinedCourse;
+
+      beforeEach(async function () {
+        organizationId = databaseBuilder.factory.buildOrganization({ name: 'Organization ABCD' }).id;
+        organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
           userId,
           organizationId,
         }).id;
-        const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        combinedCourse = databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix1',
           code: 'ABCD',
           organizationId,
         });
-        const secondCombinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        expectedFirstParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          organizationLearnerId,
+          updatedAt: new Date('2022-01-01'),
+          status: OrganizationLearnerParticipationStatuses.COMPLETED,
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          combinedCourseId: combinedCourse.id,
+        });
+
+        secondCombinedCourse = databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix2',
           code: 'EFGH',
           organizationId,
         });
-        const expectedFirstParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
-          organizationLearnerId,
-          updatedAt: new Date('2022-01-01'),
-          status: OrganizationLearnerParticipationStatuses.STARTED,
-          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-          combinedCourseId: combinedCourse.id,
-        });
+
+        await databaseBuilder.commit();
+      });
+      it('retrieves participation when there are participations on several combined courses, ordered by status', async function () {
         const expectedSecondParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
           organizationLearnerId,
-          updatedAt: new Date('2022-02-02'),
-          status: OrganizationLearnerParticipationStatuses.COMPLETED,
+          updatedAt: new Date('2021-01-01'),
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
           combinedCourseId: secondCombinedCourse.id,
         });
 
         await databaseBuilder.commit();
 
-        const [firstParticipation, secondParticipation] =
-          await campaignParticipationOverviewRepository.findByUserIdWithFilters({
-            userId,
-          });
-
-        expect(firstParticipation).to.deep.include({
-          id: expectedFirstParticipation.id,
-          campaignCode: combinedCourse.code,
-          campaignTitle: combinedCourse.name,
-          status: 'STARTED',
-          organizationName: 'Organization ABCD',
-          createdAt: expectedFirstParticipation.createdAt,
-          updatedAt: expectedFirstParticipation.updatedAt,
+        const results = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
         });
-        expect(secondParticipation).to.deep.include({
+
+        expect(results.length).to.equal(2);
+        expect(results[0]).to.deep.include({
           id: expectedSecondParticipation.id,
           campaignCode: secondCombinedCourse.code,
           campaignTitle: secondCombinedCourse.name,
-          status: 'COMPLETED',
+          status: OrganizationLearnerParticipationStatuses.STARTED,
           organizationName: 'Organization ABCD',
           createdAt: expectedSecondParticipation.createdAt,
           updatedAt: expectedSecondParticipation.updatedAt,
         });
+        expect(results[1]).to.deep.include({
+          id: expectedFirstParticipation.id,
+          campaignCode: combinedCourse.code,
+          campaignTitle: combinedCourse.name,
+          status: OrganizationLearnerParticipationStatuses.COMPLETED,
+          organizationName: 'Organization ABCD',
+          createdAt: expectedFirstParticipation.createdAt,
+          updatedAt: expectedFirstParticipation.updatedAt,
+        });
+      });
+      it('does not return deleted participations', async function () {
+        databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          organizationLearnerId,
+          updatedAt: new Date('2021-01-01'),
+          status: OrganizationLearnerParticipationStatuses.STARTED,
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          combinedCourseId: secondCombinedCourse.id,
+          deletedAt: new Date(),
+        });
+
+        await databaseBuilder.commit();
+
+        const results = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
+
+        expect(results.length).to.equal(1);
+        expect(results[0].id).to.equal(expectedFirstParticipation.id);
+      });
+      it('does not return participations of another learner', async function () {
+        const anotherLearner = databaseBuilder.factory.buildOrganizationLearner({ organizationId });
+        databaseBuilder.factory.buildOrganizationLearnerParticipation({
+          organizationLearnerId: anotherLearner.id,
+          updatedAt: new Date('2021-01-01'),
+          status: OrganizationLearnerParticipationStatuses.STARTED,
+          type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+          combinedCourseId: secondCombinedCourse.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const results = await campaignParticipationOverviewRepository.findByUserIdWithFilters({
+          userId,
+        });
+
+        expect(results.length).to.equal(1);
+        expect(results[0].id).to.equal(expectedFirstParticipation.id);
       });
     });
   });
