@@ -24,18 +24,20 @@ export class JobClient {
   #pgBoss = null;
   #isInitialized = false;
 
-  async initialize({ worker, jobGroups } = { worker: false, jobGroups: [] }) {
+  async initialize({ worker, jobGroups } = { worker: false, jobGroups: [] }, pgBossFactory) {
     if (this.#isInitialized) return;
 
     const connectionString = process.env.NODE_ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
 
     if (worker) {
-      this.#pgBoss = new PgBoss({
-        connectionString,
-        max: 2, // TODO: add environment variable
-        ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
-        archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
-      });
+      this.#pgBoss = pgBossFactory
+        ? pgBossFactory()
+        : new PgBoss({
+            connectionString,
+            max: 2, // TODO: add environment variable
+            ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
+            archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
+          });
 
       this.#pgBoss.on('monitor-states', (state) => {
         logger.info({ event: 'pg-boss-state', name: 'global' }, { ...state, queues: undefined });
@@ -51,14 +53,16 @@ export class JobClient {
       });
 
       await this.#pgBoss.start();
-      await this.registerJobs(jobGroups);
+      await this.#registerJobs(jobGroups);
     } else {
-      this.#pgBoss = new PgBoss({
-        connectionString,
-        max: 2, // TODO: add environment variable
-        noSupervisor: true,
-        noScheduling: true,
-      });
+      this.#pgBoss = pgBossFactory
+        ? pgBossFactory()
+        : new PgBoss({
+            connectionString,
+            max: 2, // TODO: add environment variable
+            noSupervisor: true,
+            noScheduling: true,
+          });
       await this.#pgBoss.start();
     }
 
@@ -71,7 +75,7 @@ export class JobClient {
     }
   }
 
-  async registerJobs(jobGroups) {
+  async #registerJobs(jobGroups) {
     const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
     logger.info(`Search for job handlers in ${globPattern}`);
