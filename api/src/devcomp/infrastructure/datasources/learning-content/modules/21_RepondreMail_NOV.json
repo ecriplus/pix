@@ -897,16 +897,16 @@
                           "id": "1",
                           "content": "Un mail",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Avez-vous remarqué que certains mails sont en gras, et d’autres non ?</p>"
+                            "state": "<p>Bonne réponse ! 🎉</p>",
+                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras&nbsp;: ici un seul mail n'est pas en gras.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Deux mails",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! 🎉</p>",
-                            "diagnosis": "<p>Les mails déjà lus n’apparaissent plus en gras&nbsp;: ici deux mails ne sont pas en gras.</p>"
+                            "state": "<p>Mauvaise réponse</p>",
+                            "diagnosis": "<p>Avez-vous remarqué que certains mails sont en gras, et d’autres non&nbsp;?</p>"
                           }
                         },
                         {
@@ -914,11 +914,11 @@
                           "content": "Trois mails",
                           "feedback": {
                             "state": "<p>Mauvaise réponse</p>",
-                            "diagnosis": "<p>Avez-vous remarqué que certains mails sont en gras, et d’autres non ?</p>"
+                            "diagnosis": "<p>Avez-vous remarqué que certains mails sont en gras, et d’autres non&nbsp;?</p>"
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "1"
                     }
                   ]
                 }
