@@ -231,44 +231,71 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
     });
   });
 
-  describe('#buildRejectedDueToZeroPixScore', function () {
-    it('should return a rejected AssessmentResult due to zero pix score', function () {
-      // given
-      const competenceMarks = [domainBuilder.buildCompetenceMark()];
+  describe('#buildRejectedDueToBelowMinimumMesh', function () {
+    context('when pixScore is 0 (CORE scope)', function () {
+      it('should return a rejected AssessmentResult with auto-jury comment', function () {
+        // given
+        const competenceMarks = [domainBuilder.buildCompetenceMark()];
 
-      // when
-      const actualAssessmentResult = AssessmentResultFactory.buildRejectedDueToZeroPixScore({
-        pixScore: 0,
-        reproducibilityRate: 25,
-        assessmentId: 123,
-        juryId: 456,
-        competenceMarks,
-        capacity: -3.94,
-        reachedMeshIndex: 0,
-        versionId: 10,
-      });
+        // when
+        const actualAssessmentResult = AssessmentResultFactory.buildRejectedDueToBelowMinimumMesh({
+          pixScore: 0,
+          reproducibilityRate: 25,
+          assessmentId: 123,
+          juryId: 456,
+          competenceMarks,
+          capacity: -3.94,
+          reachedMeshIndex: 0,
+          versionId: 10,
+        });
 
-      // then
-      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
-        status: AssessmentResult.status.REJECTED,
-        pixScore: 0,
-        reproducibilityRate: 25,
-        assessmentId: 123,
-        juryId: 456,
-        competenceMarks,
-        capacity: -3.94,
-        reachedMeshIndex: 0,
-        versionId: 10,
-        commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
-          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
-        }),
-        commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
-          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
-        }),
+        // then
+        const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+          status: AssessmentResult.status.REJECTED,
+          pixScore: 0,
+          reproducibilityRate: 25,
+          assessmentId: 123,
+          juryId: 456,
+          competenceMarks,
+          capacity: -3.94,
+          reachedMeshIndex: 0,
+          versionId: 10,
+          commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+            commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+          }),
+          commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+            commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+          }),
+        });
+        expectedAssessmentResult.id = undefined;
+        expectedAssessmentResult.createdAt = undefined;
+        expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
       });
-      expectedAssessmentResult.id = undefined;
-      expectedAssessmentResult.createdAt = undefined;
-      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+
+    context('when pixScore is null (non-CORE scope)', function () {
+      it('should return a rejected AssessmentResult without auto-jury comment', function () {
+        // given
+        const competenceMarks = [domainBuilder.buildCompetenceMark()];
+
+        // when
+        const actualAssessmentResult = AssessmentResultFactory.buildRejectedDueToBelowMinimumMesh({
+          pixScore: null,
+          reproducibilityRate: 25,
+          assessmentId: 123,
+          juryId: 456,
+          competenceMarks,
+          capacity: -3.94,
+          reachedMeshIndex: 0,
+          versionId: 10,
+        });
+
+        // then
+        expect(actualAssessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+        expect(actualAssessmentResult.pixScore).to.be.null;
+        expect(actualAssessmentResult.commentForCandidate.commentByAutoJury).to.be.undefined;
+        expect(actualAssessmentResult.commentForOrganization.commentByAutoJury).to.be.undefined;
+      });
     });
   });
 

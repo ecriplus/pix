@@ -16,7 +16,7 @@ const defaultGlobalScoringConfiguration = [
   {
     meshLevel: 0,
     bounds: {
-      min: -8,
+      min: -4.6,
       max: -1.4,
     },
   },

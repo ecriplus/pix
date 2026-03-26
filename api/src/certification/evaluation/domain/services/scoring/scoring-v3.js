@@ -124,13 +124,15 @@ function scoreCertification({
     certificationScope === SCOPES.CORE ? scoringV3Algorithm.computePixScoreFromCapacity({ capacity }) : null;
   const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
-  const status = isCertificationRejected({
-    answers: assessmentSheet.answers,
-    abortReason: assessmentSheet.abortReason,
-    minimumAnswersRequiredToValidateACertification,
-  })
-    ? CertificationStatus.REJECTED
-    : CertificationStatus.VALIDATED;
+
+  const status =
+    hasNotEnoughAnswers({
+      answers: assessmentSheet.answers,
+      abortReason: assessmentSheet.abortReason,
+      minimumAnswersRequiredToValidateACertification,
+    }) || reachedMeshIndex === null
+      ? CertificationStatus.REJECTED
+      : CertificationStatus.VALIDATED;
 
   const toBeCancelled = event instanceof CertificationCancelled;
   const assessmentResult = createV3AssessmentResult({
@@ -185,7 +187,7 @@ function shouldDowngradeCapacity({
   );
 }
 
-function isCertificationRejected({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) {
+function hasNotEnoughAnswers({ answers, abortReason, minimumAnswersRequiredToValidateACertification }) {
   // Dans la vraie vie, en cas de nombre de réponses insuffisant, la certif est rejetée seulement si l'abortReason est "candidate"
   // ici on ne regarde pas la valeur de abortReason ce qui n'est pas très clair. Le coup est rattrapé plus tard dans createV3AssessmentResult ( et c'est moche )
   return answers.length < minimumAnswersRequiredToValidateACertification && abortReason;

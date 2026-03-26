@@ -91,8 +91,8 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Validée',
-          Résultats: 'Non-admissible',
+          Statut: 'Rejetée',
+          Résultats: 'Non admissible',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
         });
@@ -101,17 +101,17 @@ test(
         );
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
-          status: 'Validée',
-          result: 'Non-admissible',
+          status: 'Rejetée',
+          result: 'Non admissible',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
+          status: 'Rejetée',
           nbAnsweredQuestionsOverTotal: '32/32',
           nbQuestionsOK: 0,
           nbQuestionsKO: 32,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
-          result: 'Non-admissible',
+          result: 'Non admissible',
         });
       });
     });

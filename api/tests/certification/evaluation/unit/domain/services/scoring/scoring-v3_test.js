@@ -42,7 +42,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
       clock.restore();
     });
 
-    context('when scoring a unique CORE scoped certification', function () {
+    context('when scoring a CORE certification', function () {
       it('should return an AssessmentResult with a pixScore', function () {
         // given
         const assessmentId = 1214;
@@ -90,6 +90,56 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
         expect(score.coreAssessmentResult.pixScore).to.equal(880);
         expect(score.doubleCertificationScoring).to.be.null;
+      });
+
+      context('when capacity does not belong to any mesh', function () {
+        it('should return a REJECTED AssessmentResult', function () {
+          // given
+          const assessmentId = 1214;
+          const certificationCourseId = 1234;
+
+          const candidate = domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: SCOPES.CORE,
+            hasCleaSubscription: false,
+            reconciledAt: new Date('2025-01-01'),
+          });
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            assessmentId,
+            certificationCourseId,
+          });
+
+          const event = new CertificationCompletedJob({
+            certificationCourseId,
+          });
+
+          const v3CertificationScoring = domainBuilder.buildV3CertificationScoring({
+            competencesForScoring: [domainBuilder.buildCompetenceForScoring()],
+            certificationScoringConfiguration: [{ bounds: { max: 8, min: 7 }, meshLevel: 0 }],
+          });
+          const challenges = generateChallengeList({
+            length: maximumAssessmentLength,
+          });
+          const { answers } = _buildDataFromAnsweredChallenges(challenges);
+
+          assessmentSheet.answers = answers;
+
+          // when
+          const score = handleV3CertificationScoring({
+            event,
+            assessmentSheet,
+            candidate,
+            allChallenges: challenges,
+            askedChallengesWithoutLiveAlerts: challenges,
+            algorithm,
+            v3CertificationScoring,
+            cleaScoringCriteria: null,
+            scoringDegradationService,
+          });
+
+          // then
+          expect(score.coreAssessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+          expect(score.coreAssessmentResult.pixScore).to.equal(0);
+        });
       });
     });
 
@@ -192,6 +242,55 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           expect(score.coreAssessmentResult.competenceMarks).to.have.lengthOf(0);
           expect(score.coreAssessmentResult.pixScore).to.be.null;
           expect(score.doubleCertificationScoring).to.be.null;
+        });
+
+        it('should return a REJECTED AssessmentResult when capacity is not included in any mesh', function () {
+          // given
+          const assessmentId = 1214;
+          const certificationCourseId = 1234;
+
+          const candidate = domainBuilder.certification.evaluation.buildCandidate({
+            subscriptionScope: SCOPES.PIX_PLUS_EDU_1ER_DEGRE,
+            hasCleaSubscription: false,
+            reconciledAt: new Date('2021-01-01'),
+          });
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            assessmentId,
+            certificationCourseId,
+          });
+
+          const event = new CertificationCompletedJob({
+            certificationCourseId,
+          });
+
+          const v3CertificationScoring = domainBuilder.buildV3CertificationScoring({
+            certificationScoringConfiguration: [
+              { bounds: { max: 20, min: 10 }, meshLevel: 0 },
+              { bounds: { max: 30, min: 20 }, meshLevel: 1 },
+            ],
+          });
+          const challenges = generateChallengeList({
+            length: maximumAssessmentLength,
+          });
+          const { answers } = _buildDataFromAnsweredChallenges(challenges);
+
+          assessmentSheet.answers = answers;
+
+          // when
+          const score = handleV3CertificationScoring({
+            event,
+            assessmentSheet,
+            candidate,
+            allChallenges: challenges,
+            askedChallengesWithoutLiveAlerts: challenges,
+            algorithm,
+            v3CertificationScoring,
+            cleaScoringCriteria: null,
+            scoringDegradationService,
+          });
+
+          // then
+          expect(score.coreAssessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
         });
       });
 

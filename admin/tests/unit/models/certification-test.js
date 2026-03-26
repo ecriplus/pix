@@ -319,6 +319,56 @@ module('Unit | Model | certification', function (hooks) {
     });
   });
 
+  module('#result', function () {
+    test('it should return "Non admissible" for a v3 EDU certification without reachedMeshIndex', function (assert) {
+      // given
+      const certification = store.createRecord('certification', {
+        version: 3,
+        certificationFramework: 'EDU_1ER_DEGRE',
+        reachedMeshIndex: null,
+        pixScore: 0,
+      });
+
+      // when
+      const result = certification.result;
+
+      // then
+      assert.strictEqual(result, 'Non admissible');
+    });
+
+    test('it should return "Admissible" for a v3 EDU certification with a reachedMeshIndex', function (assert) {
+      // given
+      const certification = store.createRecord('certification', {
+        version: 3,
+        certificationFramework: 'EDU_1ER_DEGRE',
+        reachedMeshIndex: 0,
+        pixScore: 100,
+      });
+
+      // when
+      const result = certification.result;
+
+      // then
+      assert.strictEqual(result, 'Admissible');
+    });
+
+    test('it should return pixScore for a v2 certification', function (assert) {
+      // given
+      const certification = store.createRecord('certification', {
+        version: 2,
+        certificationFramework: 'CORE',
+        reachedMeshIndex: null,
+        pixScore: 450,
+      });
+
+      // when
+      const result = certification.result;
+
+      // then
+      assert.strictEqual(result, '450 Pix');
+    });
+  });
+
   module('#wasBornInFrance', function () {
     test('it should return true when candidate was born in France', function (assert) {
       // given

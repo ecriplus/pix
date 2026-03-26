@@ -14,65 +14,69 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
   const versionId = 7;
 
   describe('createV3AssessmentResult', function () {
-    it('it should return cancelled AssessmentResult if toBeCancelled is true', function () {
-      //when
-      const assessmentResult = createV3AssessmentResult({
-        toBeCancelled: true,
-        allAnswers: [],
-        assessmentId: 123,
-        pixScore,
-        capacity,
-        reachedMeshIndex,
-        versionId,
-        status: AssessmentResult.status.CANCELLED,
-        competenceMarks,
-        isRejectedForFraud: false,
-        isAbortReasonTechnical: false,
-        juryId: 123,
-        minimumAnswersRequiredToValidateACertification,
-      });
+    context('when assessment is going to be cancelled', function () {
+      it('it should return cancelled AssessmentResult', function () {
+        //when
+        const assessmentResult = createV3AssessmentResult({
+          toBeCancelled: true,
+          allAnswers: [],
+          assessmentId: 123,
+          pixScore,
+          capacity,
+          reachedMeshIndex,
+          versionId,
+          status: AssessmentResult.status.CANCELLED,
+          competenceMarks,
+          isRejectedForFraud: false,
+          isAbortReasonTechnical: false,
+          juryId: 123,
+          minimumAnswersRequiredToValidateACertification,
+        });
 
-      //then
-      expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
-      expect(assessmentResult.pixScore).to.equal(pixScore);
-      expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-      expect(assessmentResult.capacity).to.equal(capacity);
-      expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
-      expect(assessmentResult.versionId).to.equal(versionId);
+        //then
+        expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
+        expect(assessmentResult.pixScore).to.equal(pixScore);
+        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
+        expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.versionId).to.equal(versionId);
+      });
     });
 
-    it('it should return a rejected for fraud AssessmentResult if isRejectedForFraud is true', function () {
-      //when
-      const assessmentResult = createV3AssessmentResult({
-        toBeCancelled: false,
-        allAnswers: [],
-        pixScore,
-        capacity,
-        reachedMeshIndex,
-        versionId,
-        status: AssessmentResult.status.REJECTED,
-        competenceMarks,
-        assessmentId: 123,
-        isRejectedForFraud: true,
-        isAbortReasonTechnical: false,
-        juryId: 123,
-        minimumAnswersRequiredToValidateACertification,
-      });
+    context('when assessment is rejected for fraud', function () {
+      it('it should return a rejected for fraud AssessmentResult', function () {
+        //when
+        const assessmentResult = createV3AssessmentResult({
+          toBeCancelled: false,
+          allAnswers: [],
+          pixScore,
+          capacity,
+          reachedMeshIndex,
+          versionId,
+          status: AssessmentResult.status.REJECTED,
+          competenceMarks,
+          assessmentId: 123,
+          isRejectedForFraud: true,
+          isAbortReasonTechnical: false,
+          juryId: 123,
+          minimumAnswersRequiredToValidateACertification,
+        });
 
-      //then
-      const juryComment = domainBuilder.certification.shared.buildJuryComment.organization({
-        commentByAutoJury: AutoJuryCommentKeys.FRAUD,
+        //then
+        const juryComment = domainBuilder.certification.shared.buildJuryComment.organization({
+          commentByAutoJury: AutoJuryCommentKeys.FRAUD,
+        });
+        expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+        expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+        expect(assessmentResult.pixScore).to.equal(pixScore);
+        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
+        expect(assessmentResult.capacity).to.equal(capacity);
+        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.versionId).to.equal(versionId);
       });
-      expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
-      expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
-      expect(assessmentResult.pixScore).to.equal(pixScore);
-      expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-      expect(assessmentResult.capacity).to.equal(capacity);
-      expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
-      expect(assessmentResult.versionId).to.equal(versionId);
     });
 
-    context('when there is an insuffisant number of answer', function () {
+    context('when assessment has an insuffisant number of answers', function () {
       it('should return a cancelled AssessmentResult if the cause is technical', function () {
         //when
         const assessmentResult = createV3AssessmentResult({
@@ -135,7 +139,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
-    context('when there is a sufficient number of answers', function () {
+
+    context('when assessment has a sufficient number of answers', function () {
       let allChallenges, answeredChallenges, answers;
       beforeEach(function () {
         allChallenges = generateChallengeList({ length: minimumAnswersRequiredToValidateACertification + 1 });
@@ -144,62 +149,98 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         answers = _buildDataFromAnsweredChallenges(answeredChallenges).answers;
       });
 
-      it('should return a rejected AssessmentResult if pix score is 0', function () {
-        //when
-        const assessmentResult = createV3AssessmentResult({
-          toBeCancelled: false,
-          allAnswers: answers,
-          assessmentId: 123,
-          pixScore: 0,
-          capacity,
-          reachedMeshIndex,
-          versionId,
-          status: AssessmentResult.status.VALIDATED,
-          competenceMarks,
-          isRejectedForFraud: false,
-          isAbortReasonTechnical: false,
-          juryId: 123,
-          minimumAnswersRequiredToValidateACertification,
+      context('when capacity does not belong to any mesh', function () {
+        context('there is a score equal to 0', function () {
+          it('should return a rejected AssessmentResult with auto-jury comment', function () {
+            //when
+            const assessmentResult = createV3AssessmentResult({
+              toBeCancelled: false,
+              allAnswers: answers,
+              assessmentId: 123,
+              pixScore: 0,
+              capacity,
+              reachedMeshIndex: null,
+              versionId,
+              status: AssessmentResult.status.REJECTED,
+              competenceMarks,
+              isRejectedForFraud: false,
+              isAbortReasonTechnical: false,
+              juryId: 123,
+              minimumAnswersRequiredToValidateACertification,
+            });
+
+            //then
+            const juryComment = domainBuilder.certification.shared.buildJuryComment.organization({
+              commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+            });
+            expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+            expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
+            expect(assessmentResult.pixScore).to.equal(0);
+            expect(assessmentResult.competenceMarks).to.deep.equal([]);
+            expect(assessmentResult.capacity).to.equal(capacity);
+            expect(assessmentResult.reachedMeshIndex).to.equal(null);
+            expect(assessmentResult.versionId).to.equal(versionId);
+          });
         });
 
-        //then
-        const juryComment = domainBuilder.certification.shared.buildJuryComment.organization({
-          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_ZERO_PIX_SCORE,
+        context('when there is no score', function () {
+          it('should return a rejected AssessmentResult without auto-jury comment', function () {
+            //when
+            const assessmentResult = createV3AssessmentResult({
+              toBeCancelled: false,
+              allAnswers: answers,
+              assessmentId: 123,
+              pixScore: null,
+              capacity,
+              reachedMeshIndex: null,
+              versionId,
+              status: AssessmentResult.status.REJECTED,
+              competenceMarks,
+              isRejectedForFraud: false,
+              isAbortReasonTechnical: false,
+              juryId: 123,
+              minimumAnswersRequiredToValidateACertification,
+            });
+
+            //then
+            expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+            expect(assessmentResult.commentForOrganization).to.deep.equal(
+              domainBuilder.certification.shared.buildJuryComment.organization({
+                commentByAutoJury: null,
+              }),
+            );
+            expect(assessmentResult.pixScore).to.be.null;
+          });
         });
-        expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
-        expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
-        expect(assessmentResult.pixScore).to.equal(0);
-        expect(assessmentResult.competenceMarks).to.deep.equal([]);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
-        expect(assessmentResult.versionId).to.equal(versionId);
       });
 
-      it('should return a standard AssessmentResult if pix score is not 0', function () {
-        //when
-        const assessmentResult = createV3AssessmentResult({
-          toBeCancelled: false,
-          allAnswers: answers,
-          assessmentId: 123,
-          pixScore,
-          capacity,
-          reachedMeshIndex,
-          versionId,
-          status: AssessmentResult.status.VALIDATED,
-          competenceMarks,
-          isRejectedForFraud: false,
-          isAbortReasonTechnical: false,
-          juryId: 123,
-          minimumAnswersRequiredToValidateACertification,
-        });
+      context('when at least minimum mesh is reached', function () {
+        it('should return a standard AssessmentResult', function () {
+          //when
+          const assessmentResult = createV3AssessmentResult({
+            toBeCancelled: false,
+            allAnswers: answers,
+            assessmentId: 123,
+            pixScore,
+            capacity,
+            reachedMeshIndex,
+            versionId,
+            status: AssessmentResult.status.VALIDATED,
+            competenceMarks,
+            isRejectedForFraud: false,
+            isAbortReasonTechnical: false,
+            juryId: 123,
+            minimumAnswersRequiredToValidateACertification,
+          });
 
-        //then
-        expect(assessmentResult.status).to.equal(AssessmentResult.status.VALIDATED);
-        expect(assessmentResult.pixScore).to.equal(pixScore);
-        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
-        expect(assessmentResult.versionId).to.equal(versionId);
+          //then
+          expect(assessmentResult.status).to.equal(AssessmentResult.status.VALIDATED);
+          expect(assessmentResult.pixScore).to.equal(pixScore);
+          expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
+          expect(assessmentResult.capacity).to.equal(capacity);
+          expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+          expect(assessmentResult.versionId).to.equal(versionId);
+        });
       });
     });
   });

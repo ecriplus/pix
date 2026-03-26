@@ -10,10 +10,7 @@ export async function buildPixPlusEduData(knex: Knex) {
       expirationDate: null,
       assessmentDuration: 120,
       minimumAnswersRequiredToValidateACertification: 20,
-      globalScoringConfiguration: JSON.stringify([
-        { bounds: { max: 1, min: -8 }, meshLevel: 0 },
-        { bounds: { max: 8, min: 1 }, meshLevel: 1 },
-      ]),
+      globalScoringConfiguration: JSON.stringify([{ bounds: { max: 8, min: 1 }, meshLevel: 0 }]),
       competencesScoringConfiguration: JSON.stringify([]),
       challengesConfiguration: JSON.stringify({
         variationPercent: 0.3,

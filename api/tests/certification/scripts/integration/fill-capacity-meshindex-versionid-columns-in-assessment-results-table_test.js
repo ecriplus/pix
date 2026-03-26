@@ -88,7 +88,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
-    expect(Math.ceil(assessmentResultData[0].capacity)).to.equal(-8);
+    expect(Math.ceil(assessmentResultData[0].capacity)).to.equal(-4);
     expect(assessmentResultData[0].reachedMeshIndex).to.equal(0);
     expect(assessmentResultData[0].versionId).to.equal(versionId);
     expect(Math.ceil(assessmentResultData[1].capacity)).to.equal(8);
@@ -129,7 +129,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
-    expect(Math.ceil(assessmentResultData[0].capacity)).to.equal(-8);
+    expect(Math.ceil(assessmentResultData[0].capacity)).to.equal(-4);
     expect(assessmentResultData[0].reachedMeshIndex).to.equal(0);
     expect(assessmentResultData[0].versionId).to.equal(versionId);
     expect(Math.ceil(assessmentResultData[1].capacity)).to.equal(8);

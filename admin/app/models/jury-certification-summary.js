@@ -65,8 +65,15 @@ export default class JuryCertificationSummary extends Model {
   }
 
   get result() {
-    const reachedMeshIndex = this.reachedMeshIndex?.toString() ?? 'NONE';
-    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${reachedMeshIndex}`, {
+    if (this.algorithmVersion === 3) {
+      const meshKey = this.reachedMeshIndex ?? 'BELOW_MINIMUM';
+
+      return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${meshKey}`, {
+        pixScore: this.pixScore,
+      });
+    }
+
+    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.NONE`, {
       pixScore: this.pixScore,
     });
   }

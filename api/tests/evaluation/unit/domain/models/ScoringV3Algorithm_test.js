@@ -99,5 +99,13 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringV3Algorit
 
       expect(reachedMeshIndex).to.equal(4);
     });
+
+    context('when capacity is below the minimum mesh', function () {
+      it('should return null', function () {
+        const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity: -8 });
+
+        expect(reachedMeshIndex).to.be.null;
+      });
+    });
   });
 });
