@@ -92,7 +92,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         expect(score.doubleCertificationScoring).to.be.null;
       });
 
-      context('when capacity is below minimum mesh', function () {
+      context('when capacity does not belong to any mesh', function () {
         it('should return a REJECTED AssessmentResult', function () {
           // given
           const assessmentId = 1214;
@@ -244,7 +244,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           expect(score.doubleCertificationScoring).to.be.null;
         });
 
-        it('should return a REJECTED AssessmentResult when capacity is below minimum mesh', function () {
+        it('should return a REJECTED AssessmentResult when capacity is not included in any mesh', function () {
           // given
           const assessmentId = 1214;
           const certificationCourseId = 1234;

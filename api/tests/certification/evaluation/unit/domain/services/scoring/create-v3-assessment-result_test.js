@@ -149,7 +149,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         answers = _buildDataFromAnsweredChallenges(answeredChallenges).answers;
       });
 
-      context('when the capacity is below minimum mesh', function () {
+      context('when capacity does not belong to any mesh', function () {
         context('there is a score equal to 0', function () {
           it('should return a rejected AssessmentResult with auto-jury comment', function () {
             //when
@@ -159,7 +159,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               assessmentId: 123,
               pixScore: 0,
               capacity,
-              reachedMeshIndex,
+              reachedMeshIndex: null,
               versionId,
               status: AssessmentResult.status.REJECTED,
               competenceMarks,
@@ -167,7 +167,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              isBelowMinimumMesh: true,
             });
 
             //then
@@ -179,7 +178,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
             expect(assessmentResult.pixScore).to.equal(0);
             expect(assessmentResult.competenceMarks).to.deep.equal([]);
             expect(assessmentResult.capacity).to.equal(capacity);
-            expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+            expect(assessmentResult.reachedMeshIndex).to.equal(null);
             expect(assessmentResult.versionId).to.equal(versionId);
           });
         });
@@ -193,7 +192,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               assessmentId: 123,
               pixScore: null,
               capacity,
-              reachedMeshIndex,
+              reachedMeshIndex: null,
               versionId,
               status: AssessmentResult.status.REJECTED,
               competenceMarks,
@@ -201,7 +200,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              isBelowMinimumMesh: true,
             });
 
             //then
