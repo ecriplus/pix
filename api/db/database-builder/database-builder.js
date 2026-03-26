@@ -15,6 +15,13 @@ const READONLY_TABLES = [
 const CHUNK_SIZE = 1000;
 
 /**
+ * @typedef {object} Factory
+ * @property {typeof import('./factory/build-network.js').buildNetworkAndHeadOrganization} buildNetworkAndHeadOrganization
+ * @property {typeof import('./factory/build-network.js').buildNetworkWithMultipleLevels} buildNetworkWithMultipleLevels
+ * @property {typeof import('./factory/build-organization.js').buildOrganizationInNetwork} buildOrganizationInNetwork
+ */
+
+/**
  * @class DatabaseBuilder
  * @property {Factory} factory
  */
@@ -32,6 +39,7 @@ export class DatabaseBuilder {
 
   constructor({ knex, emptyFirst = true, databaseBuffer = defaultDatabaseBuffer, beforeEmptyDatabase }) {
     this.knex = knex;
+    /** @type {Factory} */
     this.factory = factory;
     this.#databaseBuffer = databaseBuffer;
     this.#emptyFirst = emptyFirst;

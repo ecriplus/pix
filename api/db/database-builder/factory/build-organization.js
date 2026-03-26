@@ -1,7 +1,9 @@
 import { COUNTRY_FRANCE_CODE } from '../../seeds/data/common/constants.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildAdministrationTeam } from './build-administration-team.js';
+import { buildFactStructure } from './build-fact-structure.js';
 import { buildOrganizationLearnerType } from './build-organization-learner-type.js';
+import { buildStructure } from './build-structure.js';
 
 const buildOrganization = function buildOrganization({
   id = databaseBuffer.getNextId(),
@@ -68,4 +70,20 @@ const buildOrganization = function buildOrganization({
   });
 };
 
-export { buildOrganization };
+/**
+ * Creates an organization attached to an existing network (organization + structure + fct_structure).
+ *
+ * @param {object} options
+ * @param {number} options.networkId - Id of the network to attach the organization to
+ * @param {number} [options.parentStructureId] - Id of the parent structure (null for a head organization)
+ * @param {object} [options.organizationData] - Any parameter accepted by buildOrganization
+ * @returns {{ organization: object, structure: object }}
+ */
+const buildOrganizationInNetwork = function ({ networkId, parentStructureId = null, organizationData = {} } = {}) {
+  const organization = buildOrganization(organizationData);
+  const structure = buildStructure();
+  buildFactStructure({ structureId: structure.id, networkId, organizationId: organization.id, parentStructureId });
+  return { organization, structure };
+};
+
+export { buildOrganization, buildOrganizationInNetwork };

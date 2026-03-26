@@ -20,17 +20,104 @@ const buildNetwork = function ({
     values,
   });
 };
+
+/**
+ * Creates a network with its head organization (organization + structure + fct_structure).
+ *
+ * @param {object} [options]
+ * @param {number} [options.id] - Network id
+ * @param {string} [options.name] - Network name
+ * @param {Parameters<typeof buildOrganization>[0]} [options.headOrganization] - Any parameter accepted by buildOrganization
+ * @returns {{ id: number, name: string }} The created network
+ */
 const buildNetworkAndHeadOrganization = function ({
   id = databaseBuffer.getNextId(),
   name = 'Network',
-  organizationId,
-  organizationName = 'Head Organization',
+  headOrganization = {},
 } = {}) {
   const network = buildNetwork({ id, name });
-  const organization = buildOrganization({ id: organizationId, name: organizationName });
+  const organization = buildOrganization({ name: 'Head Organization', ...headOrganization });
   const structure = buildStructure();
   buildFactStructure({ structureId: structure.id, networkId: network.id, organizationId: organization.id });
   return network;
 };
 
-export { buildNetwork, buildNetworkAndHeadOrganization };
+/**
+ * Creates a network with a multi-level organization hierarchy.
+ *
+ * @param {object} [options]
+ * @param {number} [options.id] - Network id
+ * @param {string} [options.name] - Network name
+ * @param {number} [options.numberOfLevels=3] - Total number of levels, head included
+ * @param {number} [options.childrenPerNode=1] - Number of children per node at each level
+ * @returns {{ network: object, head: { organization: object, structure: object }, levels: Array<Array<{ organization: object, structure: object }>> }}
+ *   - `network`: the created network
+ *   - `head`: the head node `{ organization, structure }`
+ *   - `levels`: array starting at level 1, each entry is an array of `{ organization, structure }`
+ *
+ * @example
+ * const { network, head, levels } = buildNetworkWithMultipleLevels({ numberOfLevels: 3, childrenPerNode: 2 });
+ * // network  → { id, name }
+ * //
+ * // head     → { organization: { name: 'Head Organization', ... }, structure: { ... } }
+ * //
+ * // levels[0] → level 1 : 2 nodes (direct children of head)
+ * //   [
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: head.structure.id } },
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: head.structure.id } },
+ * //   ]
+ * //
+ * // levels[1] → level 2 : 4 nodes (2 children per level-1 node)
+ * //   [
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: levels[0][0].structure.id } },
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: levels[0][0].structure.id } },
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: levels[0][1].structure.id } },
+ * //     { organization: { name: 'Organization' }, structure: { parentStructureId: levels[0][1].structure.id } },
+ * //   ]
+ */
+const buildNetworkWithMultipleLevels = function ({
+  id = databaseBuffer.getNextId(),
+  name = 'Network',
+  numberOfLevels = 3,
+  childrenPerNode = 1,
+} = {}) {
+  const network = buildNetwork({ id, name });
+
+  const headStructure = buildStructure();
+  const headOrganization = buildOrganization({ name: 'Head Organization' });
+  buildFactStructure({
+    structureId: headStructure.id,
+    networkId: network.id,
+    organizationId: headOrganization.id,
+  });
+
+  const levels = [];
+  let parentNodes = [{ organization: headOrganization, structure: headStructure }];
+
+  for (let level = 1; level < numberOfLevels; level++) {
+    const currentLevel = [];
+    for (const { structure } of parentNodes) {
+      for (let i = 0; i < childrenPerNode; i++) {
+        currentLevel.push(_createChildNode(structure, level));
+      }
+    }
+    levels.push(currentLevel);
+    parentNodes = currentLevel;
+  }
+
+  return { network, head: { organization: headOrganization, structure: headStructure }, levels };
+};
+
+export { buildNetwork, buildNetworkAndHeadOrganization, buildNetworkWithMultipleLevels };
+
+function _createChildNode(parentStructure, level) {
+  const structure = buildStructure();
+  const organization = buildOrganization({ name: `Organization L${level}` });
+  buildFactStructure({
+    structureId: structure.id,
+    networkId: parentStructure.networkId,
+    organizationId: organization.id,
+    parentStructureId: parentStructure.id,
+  });
+  return { organization, structure };
+}
