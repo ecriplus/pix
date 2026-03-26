@@ -91,7 +91,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Terminée par le surveillant',
-          Résultats: 'Non-admissible',
+          Résultats: 'Non admissible',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
         });
@@ -101,7 +101,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          result: 'Non-admissible',
+          result: 'Non admissible',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           status: 'Annulée',
@@ -112,7 +112,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Problème technique',
-          result: 'Non-admissible',
+          result: 'Non admissible',
         });
       });
     });
