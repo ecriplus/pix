@@ -1,4 +1,4 @@
-import { hasMany, Model } from 'miragejs';
+import { belongsTo, hasMany, Model } from 'miragejs';
 
 export default Model.extend({
   organizationMemberships: hasMany('organizationMembership'),
@@ -6,4 +6,5 @@ export default Model.extend({
   tags: hasMany('tag'),
   children: hasMany('organization'),
   organizationInvitations: hasMany('organizationInvitation'),
+  network: belongsTo('network'),
 });

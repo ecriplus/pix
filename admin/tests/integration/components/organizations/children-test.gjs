@@ -13,6 +13,7 @@ module('Integration | Component | organizations/children', function (hooks) {
     hooks.beforeEach(function () {
       class AccessControlStub extends Service {
         hasAccessToOrganizationActionsScope = true;
+        hasAccessToAttachChildOrganizationActionsScope = true;
       }
       this.owner.register('service:access-control', AccessControlStub);
     });
@@ -20,7 +21,8 @@ module('Integration | Component | organizations/children', function (hooks) {
     test('it should display children list and actions section', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const organization = store.createRecord('organization', { id: '1', name: 'Parent' });
+      const network = store.push({ data: { id: '10', type: 'network', attributes: { name: 'Réseau Test' } } });
+      const organization = store.createRecord('organization', { id: '1', name: 'Parent', network });
       const child1 = store.createRecord('organization', { id: '2', name: 'Child 1' });
       const child2 = store.createRecord('organization', { id: '3', name: 'Child 2' });
       const children = [child1, child2];
