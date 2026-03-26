@@ -784,6 +784,63 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
+  describe('#findAllOidcAuthenticationMethodsByUser', function () {
+    it('returns all OIDC authentication methods for a user', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndPassword({ userId });
+      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
+      const oidcAuthMethod1 = databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
+        userId,
+        identityProvider: 'firstOidcProvider',
+      });
+      const oidcAuthMethod2 = databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
+        userId,
+        identityProvider: 'secondOidcProvider',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await authenticationMethodRepository.findAllOidcAuthenticationMethodsByUser({
+        userId,
+      });
+
+      // then
+      expect(result).to.have.lengthOf(2);
+      expect(result.map((method) => method.id)).to.have.members([oidcAuthMethod1.id, oidcAuthMethod2.id]);
+    });
+
+    it('returns an empty array if user has only non-OIDC authentication methods', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      databaseBuilder.factory.buildAuthenticationMethod.withPixAsIdentityProviderAndPassword({ userId });
+      databaseBuilder.factory.buildAuthenticationMethod.withGarAsIdentityProvider({ userId });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await authenticationMethodRepository.findAllOidcAuthenticationMethodsByUser({
+        userId,
+      });
+
+      // then
+      expect(result).to.be.empty;
+    });
+
+    it('returns an empty array if user has no authentication methods', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+
+      // when
+      const result = await authenticationMethodRepository.findAllOidcAuthenticationMethodsByUser({
+        userId,
+      });
+
+      // then
+      expect(result).to.be.empty;
+    });
+  });
+
   describe('#removeByUserIdAndIdentityProvider', function () {
     it('deletes from database the authentication method by userId and identityProvider', async function () {
       // given

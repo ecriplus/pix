@@ -108,4 +108,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: false },
     tags: ['team-acces', 'pix-api', 'mon-pix', 'frontend', 'backend'],
   },
+  restrictedOidcProvidersForEmailCreation: {
+    type: 'array',
+    description:
+      'Forbid email connexion method creation for user which has only one oidc provider and included in this list',
+    defaultValue: [],
+    tags: ['team-acces', 'iam', 'backend'],
+  },
 };
