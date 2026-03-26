@@ -242,6 +242,7 @@ export class ModuleFactory {
     return new Text({
       id: element.id,
       content: element.content,
+      tag: element.tag,
     });
   }
 

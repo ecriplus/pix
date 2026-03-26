@@ -32,6 +32,7 @@
               "element": {
                 "id": "5fd179ed-e09d-496e-adbd-47cda8b2b1c6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Philippe est très prudent sur internet&nbsp;: il évite les sites peu fiables, il est vigilant avant de cliquer sur un lien ou d’ouvrir une pièce jointe et il ne branche jamais d’appareils inconnus.&nbsp;🤔</p><p><br>Pourtant, il a peur que son ordinateur soit infecté par un logiciel malveillant. C’est arrivé à un de ses amis récemment, alors que lui aussi était prudent.</p>"
               }
             },
@@ -94,6 +95,7 @@
               "element": {
                 "id": "8397b72b-fdce-4d9a-9071-868df800532e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais que fait un logiciel antivirus exactement ? </p>"
               }
             }
@@ -115,6 +117,7 @@
               "element": {
                 "id": "ae2cfed2-9fde-45d3-bded-8ceb6feb7f99",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Même si l’ordinateur de Philippe intègre déjà certaines protections, il décide&nbsp;d’<strong>installer un logiciel antivirus</strong>.</p>"
               }
             },
@@ -177,6 +180,7 @@
               "element": {
                 "id": "911286d9-f015-40a7-8150-c0a961f329cd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour détecter la présence des logiciels malveillants, l’antivirus va surveiller les fichiers programmes de l’ordinateur de Philippe.</p>"
               }
             },
@@ -260,6 +264,7 @@
               "element": {
                 "id": "09624e99-41b4-4988-b697-5339222362cd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, McAfee, Trend, CyRadar, Avira, AVG, Bitdefender, ReasonLabs, ClamAV.<br><strong>Un seul antivirus suffit.</strong></p><p><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p><p><br><strong>🤔 Bon à savoir</strong> <br>Certains appareils intègrent déjà des systèmes de protection contre les logiciels malveillants. Il est tout de même recommandé d’installer un logiciel antivirus.</p>"
               }
             }
@@ -275,6 +280,7 @@
               "element": {
                 "id": "024ea3ae-548b-4f85-8d3f-c09f0f6c8d37",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais comment un antivirus sait qu’un logiciel est malveillant ?</p>"
               }
             }
@@ -344,6 +350,7 @@
               "element": {
                 "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La base de signatures est une liste des signatures des logiciels malveillants déjà connus par l’antivirus.<br>🚨 Lorsque l’antivirus détecte une correspondance entre une des signatures connues et les caractéristiques d'un fichier ou un programme, il peut&nbsp;:</p><ul><li>le <strong>bloquer</strong>, c'est-à-dire l'empêcher de s'installer ou de fonctionner sur l'appareil,</li><li>ou <strong>le supprimer</strong> de l'appareil.</li></ul><p><br>Ce mécanisme permet de détecter rapidement les logiciels malveillants déjà recensés.</p>"
               }
             }
@@ -359,6 +366,7 @@
               "element": {
                 "id": "48474476-a292-4856-8dca-637fd8110be9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une fois le logiciel antivirus installé, l’utilisateur n’a-t-il vraiment plus rien à faire ? </p>"
               }
             }
@@ -374,6 +382,7 @@
               "element": {
                 "id": "009744f7-8b6e-4fab-918c-bc162f870bf9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Philippe a reçu plusieurs notifications de la part de son antivirus. <br>Il ne sait pas lesquelles nécessitent une action de sa part.</p>"
               }
             },
@@ -400,6 +409,7 @@
               "element": {
                 "id": "0fee0aa5-3408-47c2-81a6-1fce8b187903",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>En cas de doute (après le téléchargement d’un fichier ou l’utilisation d’un support externe par exemple), il est possible de<strong> lancer une analyse manuelle</strong>.&nbsp;</p><br><p>Lancer une analyse manuelle consiste à demander explicitement à l’antivirus d’examiner&nbsp;:</p><ul>    <li>l’ensemble de l’appareil,</li>    <li>ou un élément précis (dossier, disque dur, clé USB).</li></ul><p>Cela permet de vérifier qu’aucun logiciel malveillant ne s’est installé.&nbsp;🕵️‍♀️</p>"
               }
             }
@@ -415,6 +425,7 @@
               "element": {
                 "id": "4b268a76-cae4-43b1-bde4-cb9df881c581",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais de nouveaux logiciels malveillants apparaissent chaque jour, comment rester protégé ?</p>"
               }
             }
@@ -430,6 +441,7 @@
               "element": {
                 "id": "80c40811-99a5-4560-8443-e1787ff83a33",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Philippe a installé un antivirus sur son ordinateur depuis une semaine.<br>Son antivirus lui signale qu’il est temps de mettre à jour sa base de signatures.</p>"
               }
             },
@@ -485,6 +497,7 @@
               "element": {
                 "id": "26bfccda-f421-4250-b6f1-1bb5215fd4b1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour pouvoir détecter les logiciels malveillants, la base de signatures de l’antivirus doit régulièrement être <strong>mise à jour</strong>.&nbsp;⚙️</p><p>Les éditeurs d’antivirus proposent donc des <strong>mises à jour régulières</strong>.<br>Il est <strong>impératif d’accepter ces mises à jour </strong>pour rester protégé dans la durée.</p>"
               }
             }
@@ -506,6 +519,7 @@
               "element": {
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège les appareils contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus pour renforcer la <strong>protection </strong>des appareils. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Il compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis vous en informe via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
               }
             }

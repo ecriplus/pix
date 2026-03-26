@@ -32,6 +32,7 @@
               "element": {
                 "id": "5bfffb2d-05bb-4497-a9ad-7a5402a5108f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans ce module, vous allez apprendre à utiliser les touches du clavier qui ont plusieurs caractères (lettres, chiffres, caractères spéciaux).</p>"
               }
             }
@@ -47,6 +48,7 @@
               "element": {
                 "id": "9de6b2ff-3e7c-4a96-88ff-d0bc3f7c4bf1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour commencer, révisons les touches de base du clavier pour taper du texte.</p>"
               }
             },
@@ -98,6 +100,7 @@
               "element": {
                 "id": "0b771dad-3e31-4e0a-809e-6abd65653adb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p>"
               }
             },
@@ -131,6 +134,7 @@
               "element": {
                 "id": "5cd44b4e-0534-4181-9478-101073d3a9b1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Bravo ! <span aria-hidden=\"true\">🎉</span> </p><p>Vous êtes prêt. Voyons comment taper des lettres majuscules.</p>"
               }
             }
@@ -146,6 +150,7 @@
               "element": {
                 "id": "c176da55-aad3-4dc2-a7fa-e680abd27ebd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour taper certains caractères, il faut <strong>appuyer sur plusieurs touches en même temps</strong>. </p> <p>C’est le cas pour taper des lettres majuscules.</p>"
               }
             },
@@ -173,6 +178,7 @@
               "element": {
                 "id": "6764fe09-6a2f-47a1-b368-f9083a9e0a26",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La <strong>touche majuscule ⇧</strong> du clavier permet de taper des lettres majuscules.</p><p><br><strong><span aria-hidden=\"true\">💡</span>&nbsp;Astuce</strong><br>Sur la touche majuscule ⇧ il y a souvent une flèche vers le haut. On peut dire que c’est la touche qui fait grandir les lettres.</p>"
               }
             },
@@ -188,6 +194,7 @@
               "element": {
                 "id": "00987892-9248-401d-94a2-f9418c8ff5e6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Par exemple, pour taper un P, gardez un doigt appuyé sur la <strong>touche majuscule ⇧</strong> et appuyez brièvement sur la touche P avec un autre doigt.</p><p><br>Dès que vous relâchez la touche majuscule ⇧, les lettres que vous tapez sont en minuscules.</p>"
               }
             },
@@ -208,6 +215,7 @@
               "element": {
                 "id": "04fe4d77-15c4-475d-915f-ba04f69f9674",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">💡</span><strong> Astuce</strong><br>Pour taper plusieurs majuscules à la suite, restez appuyé sur la touche majuscule ⇧ et tapez la première lettre, puis la deuxième, etc.</p>"
               }
             }
@@ -223,6 +231,7 @@
               "element": {
                 "id": "f27292d8-b444-41ca-ad80-165307e201d6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Passons à la pratique ! <span aria-hidden=\"true\">⌨️</span></p>"
               }
             }
@@ -256,6 +265,7 @@
               "element": {
                 "id": "0d51136f-1054-4185-bce9-6abb15d10abd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous savez maintenant que la touche majuscule sert à taper des lettres en majuscules. Elle peut aussi servir à taper d’autres caractères.</p>"
               }
             }
@@ -271,6 +281,7 @@
               "element": {
                 "id": "422c00a6-3220-4e15-9f2b-f045298eaf0c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur certaines touches, il n’y a qu’un seul caractère. <br>Sur d’autres touches, il peut y avoir 2 ou même 3 caractères. <br>La<strong> touche majuscule&nbsp;⇧</strong> permet de taper le <strong>caractère situé en haut des touches</strong>, comme par exemple les chiffres.</p>"
               }
             },
@@ -291,6 +302,7 @@
               "element": {
                 "id": "02d17109-d2df-4b5f-83a0-dde1f1fd4e8b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comme pour les lettres majuscules, pour taper le caractère du haut d’une touche, restez appuyé sur la<strong> touche majuscule ⇧ </strong>et appuyez sur la touche du caractère.</p>"
               }
             },
@@ -327,6 +339,7 @@
               "element": {
                 "id": "4bbe20be-c9b0-41f3-bf95-fce480aa8348",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Grâce à la touche majuscule ⇧ , vous pouvez donc taper des caractères spéciaux, de la ponctuation et des chiffres. À vous d’essayer !</p>"
               }
             }
@@ -392,6 +405,7 @@
               "element": {
                 "id": "75652d09-9acc-4e3d-9af8-2c12b63fba2a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur certaines touches, il y a 3 caractères. Pour taper le 3e caractère, apprenez à utiliser la touche <strong>Alt Gr</strong>.</p>"
               }
             }
@@ -419,6 +433,7 @@
               "element": {
                 "id": "2852b780-a88f-4142-84b4-c575ef63201d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>La <strong>touche Alt&nbsp;Gr</strong> permet de faire apparaître les caractères situés en bas à droite des touches. Elle s’utilise de la même manière que la touche majuscule.</p>"
               }
             },
@@ -439,6 +454,7 @@
               "element": {
                 "id": "423d899e-e24d-4666-8f74-17c137279122",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour taper le caractère situé en bas à droite sur une touche, maintenez appuyée la <strong>touche Alt&nbsp;Gr</strong> et appuyez sur la touche du caractère.</p>"
               }
             },
@@ -466,6 +482,7 @@
               "element": {
                 "id": "69e777c2-9c22-462a-aefd-b159c060b6a1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Entraînez-vous à utiliser la touche Alt Gr.</p>"
               }
             }
@@ -499,6 +516,7 @@
               "element": {
                 "id": "baef48f2-8a7f-4f65-a5bc-d66c6846968a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À vous de mettre en pratique tout ce que vous avez vu dans ce module.</p>"
               }
             }
@@ -514,6 +532,7 @@
               "element": {
                 "id": "ba5be535-ee02-4cc9-bc1b-1fdcbc2ccbb3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Observez la carte d’identité suivante.</p>"
               }
             },
@@ -554,6 +573,7 @@
               "element": {
                 "id": "e9e14b7b-9ef5-442d-9f30-e10cda3ec5c7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Résumons l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
               }
             }
@@ -569,6 +589,7 @@
               "element": {
                 "id": "185a37d3-64dd-48e0-92b0-470bd34b4e9f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">📌</span> Pour savoir comment taper un caractère, il faut connaître <strong>sa position sur la touche</strong>&nbsp;:</p>"
               }
             },
@@ -589,6 +610,7 @@
               "element": {
                 "id": "e51added-60dc-453b-98ed-b3230711155e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>📝&nbsp;Vous pouvez maintenant&nbsp;<a href=\"https://assets.pix.org/modules/1emarche-clavier2/pix-fiche-revision-premieres-marches-clavier-2.pdf\" target=\"_blank\">ouvrir votre fiche de synthèse</a></p>"
               }
             }
@@ -604,6 +626,7 @@
               "element": {
                 "id": "17b65b49-03cf-4626-a651-dc6372c107ba",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour explorer les différentes touches, testez-vous dans le mini-jeu suivant.</p>"
               }
             }

@@ -32,6 +32,7 @@
               "element": {
                 "id": "5885e265-8553-4619-91af-c0274f4719ef",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce matin, en essayant de se connecter sur un réseau social, Emma découvre que son compte a été piraté. Elle en parle à son amie Jennifer.</p>"
               }
             },
@@ -87,6 +88,7 @@
               "element": {
                 "id": "c4a70e3a-9786-4461-b067-0b7d040a7356",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour accéder à l’un de vos services en ligne, un pirate informatique peut utiliser plusieurs techniques pour trouver votre mot de passe. Découvrons cela ensemble.</p>"
               }
             }
@@ -108,6 +110,7 @@
               "element": {
                 "id": "e84a038e-66cd-4f74-9fdb-86f5c7332921",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour comprendre comment le compte d’Emma a été piraté, explorons son profil Snapgram.</p>"
               }
             },
@@ -167,6 +170,7 @@
               "element": {
                 "id": "c888f762-4b0c-401a-bfa4-2816af13d1f2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour empêcher qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>évitez d’utiliser des informations personnelles ou publiques</strong> dans vos mots de passe. 🤫</p>"
               }
             }
@@ -223,6 +227,7 @@
               "element": {
                 "id": "82342ed1-2ebc-4e8b-9c47-470a18fa5dc8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Prenons le cas d’Ulysse. Il a un compte sur un site de vente en ligne. Il n’a <strong>pas</strong> utilisé d’<strong>informations personnelles</strong> dans son mot de passe.</p>"
               }
             },
@@ -271,6 +276,7 @@
               "element": {
                 "id": "315ac5d0-67c8-4a2d-b908-3790261af2fe",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Trouver le mot de passe d’Ulysse sera plus facile avec l’information suivante&nbsp;: son mot de passe fait partie&nbsp;<strong>des mots de passe les plus utilisés</strong> en France.</p>"
               }
             },
@@ -323,6 +329,7 @@
               "element": {
                 "id": "76208ca2-fb64-4350-92e2-96d6bec5ab8c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour rendre la tâche plus difficile aux pirates, <strong>n’utilisez pas de prénoms, de noms, de mots du dictionnaire ou de mots de passe courants</strong>.</p>"
               }
             }
@@ -385,6 +392,7 @@
               "element": {
                 "id": "77eb96e5-a823-48f0-99f8-64d33a6b1717",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Combien de mots de passe différents peut-on former en mélangeant quelques lettres ? Découvrons cela ensemble.</p>"
               }
             },
@@ -458,6 +466,7 @@
               "element": {
                 "id": "0490f920-e6fb-4af2-9148-7284f29df9e8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères en les mélangeant&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez énormément le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
               }
             }
@@ -582,6 +591,7 @@
               "element": {
                 "id": "6b7541c8-d7ba-4f81-a770-d4cedd7e6c21",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Observez chacun des mots de passe et sélectionnez pour quelle raison il s’agit d’un mot de passe faible et non d’un mot de passe fort.</p>"
               }
             },
@@ -874,6 +884,7 @@
               "element": {
                 "id": "e2f7c052-02eb-40e0-9ada-6f9a5bf6f738",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À vous de créer un mot de passe fort en utilisant la même méthode que Jennifer.<br>Transformez la phrase suivante&nbsp;: </p><blockquote><strong>L</strong>e <strong>s</strong>oir<strong>,</strong> <strong>j</strong>’aime <strong>b</strong>oire <strong>d</strong>e <strong>l</strong>a <strong>s</strong>oupe <strong>a</strong>vec <strong>d</strong>es <strong>c</strong>roûtons <strong>e</strong>t <strong>m</strong>anger <strong>3</strong> <strong>t</strong>artines&nbsp;<strong>!</strong></blockquote>"
               }
             },

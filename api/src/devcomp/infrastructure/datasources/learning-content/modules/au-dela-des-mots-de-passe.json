@@ -31,6 +31,7 @@
               "element": {
                 "id": "f977e884-9c43-48f2-bc15-f47df200aac8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur internet, les sites vous demandent toujours de prouver votre identité pour accéder à vos comptes.</p>"
               }
             }
@@ -97,6 +98,7 @@
               "element": {
                 "id": "fa687ee1-8f0b-4787-8582-4c12a4597beb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sylvie et Quentin ont du mal à se connecter à leurs services numériques.&nbsp;Vous allez les aider !</p>"
               }
             }
@@ -112,6 +114,7 @@
               "element": {
                 "id": "70ac0971-48f3-4d26-81c1-2df452852319",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sylvie veut se connecter à son journal en ligne préféré. Elle vous transmet ses informations :&nbsp; </p>\n<ul>\n    <li>identifiant : <code>sylvie.girard</code></li>\n    <li>mot de passe : <code>Gmléso6+</code></li>\n</ul>\n<p>👉 Aidez Sylvie à se connecter en écrivant ses identifiants.</p>"
               }
             },
@@ -189,6 +192,7 @@
               "element": {
                 "id": "2836c787-28e8-4146-9ad9-345625b49a4a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quand il y a <strong>une seule étape</strong> pour prouver son identité, on appelle cela une <strong>authentification simple</strong>. </p>\n<p>✔️ Par exemple :&nbsp; </p>\n<ul>\n    <li>un mot de passe pour un compte,</li>\n    <li>un code PIN sur un téléphone</li></ul>"
               }
             }
@@ -204,6 +208,7 @@
               "element": {
                 "id": "8f87b786-7f5c-4b97-9d29-8944b2909c0b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez aidé Sylvie à se connecter. Maintenant, aidez Quentin. 👇</p>"
               }
             }
@@ -219,6 +224,7 @@
               "element": {
                 "id": "b0a6d0e7-3047-4bc9-a9f8-8578cc16641d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quentin veut se connecter à sa boîte mail. Il vous transmet ses informations :&nbsp; </p><ul><li>identifiant : <code>Quentin</code></li><li>mot de passe : <code>M0tD3p4s53F0rt#$</code><br></li></ul><p>Ecrivez ces identifiants pour aider Quentin à se connecter.</p>"
               }
             },
@@ -296,6 +302,7 @@
               "element": {
                 "id": "3c327379-4354-4c99-805f-cbc519deb937",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quand il y a <strong>deux étapes</strong> pour prouver son identité, on appelle cela une <strong>double authentification</strong>.&nbsp; <br>✔️ Par exemple :&nbsp; </p>\n<ul>\n    <li>un mot de passe puis un code par SMS pour un compte,</li>\n    <li>un code PIN puis une empreinte digitale sur un téléphone</li>\n</ul>\n<p>De plus en plus de sites internet proposent cette fonctionnalité.</p>"
               }
             }
@@ -362,6 +369,7 @@
               "element": {
                 "id": "1a6e0f45-7f7d-4e6e-8470-04bf9e0f6035",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Il arrive aussi que des identifiants et des mots de passe fuitent sur internet.</p><p>Des pirates peuvent utiliser ces informations pour se connecter à la place des gens.&nbsp;</p>"
               }
             }
@@ -377,6 +385,7 @@
               "element": {
                 "id": "16f3da9e-0393-49f9-b3b9-7ee3415d0e2c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Michel vient de recevoir le SMS ci-dessous sur son portable :&nbsp;</p>"
               }
             },
@@ -397,6 +406,7 @@
               "element": {
                 "id": "7d35ae45-7ba8-42af-a566-c09b4de83542",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pourtant, cela fait longtemps qu’il ne s’est pas connecté à ce compte.</p>"
               }
             },
@@ -455,6 +465,7 @@
               "element": {
                 "id": "9c5a186f-1055-4752-83b2-c76f0ced9364",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avec la <strong>double authentification</strong>, une <strong>personne mal intentionnée</strong> qui a seulement votre mot de passe <strong>est bloquée</strong>.&nbsp; </p>\n<p>🤔 <strong>Bon à savoir</strong> </p>\n<p>Si vous recevez un code de confirmation par SMS mais que vous n’êtes pas en train de vous connecter à un site, changez rapidement le mot de passe de votre compte. </p>"
               }
             }
@@ -470,6 +481,7 @@
               "element": {
                 "id": "1826117c-67bb-4773-83ec-72adae3d516e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>📌 Résumons l’essentiel avant de passer à la suite :</p><ul><li>Sur ses comptes en ligne, il est plus sécurisé de <strong>prouver son identité de deux manières différentes</strong>. C’est la <strong>double authentification</strong>.</li><li>On peut par exemple utiliser un <strong>code PIN</strong> ou une <strong>empreinte digitale</strong>, en plus d’<strong>un identifiant et d’un mot de passe</strong>.</li><li>Si vous avez <strong>un doute sur la sécurité </strong>d’un compte, <strong>changez votre mot de passe</strong> rapidement.</li></ul>"
               }
             }
@@ -485,6 +497,7 @@
               "element": {
                 "id": "7ea0f6c4-eef2-463f-8eea-e11d4fc17b5e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant, entraînez-vous sur des exemples concrets !</p>"
               }
             }
@@ -500,6 +513,7 @@
               "element": {
                 "id": "cd14a6ca-819f-4667-9afb-457fd7c1cb5f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque exemple, choisissez s’il s’agit d’une simple authentification, d’une double authentification ou aucun des deux.</p>"
               }
             },
@@ -669,6 +683,7 @@
               "element": {
                 "id": "c46b2ffd-b340-42e1-b8fb-a1a830338e7b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>À vous de jouer ! 🕹️&nbsp;</strong></p><p>Pour finir, vous allez faire une double authentification en pratique.</p>"
               }
             }
@@ -684,6 +699,7 @@
               "element": {
                 "id": "67dc5b98-8365-4407-bc7f-f7e2336e464d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quentin vous demande de l’aide pour se connecter sur son compte de l’application Papotix. 💬 </p><p>Il vous prête son portable et vous transmet ses informations : </p><ul><li>identifiant : a</li><li>mot de passe : pix123</li></ul>"
               }
             },

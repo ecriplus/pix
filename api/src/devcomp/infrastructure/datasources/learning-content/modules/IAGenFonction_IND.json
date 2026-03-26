@@ -31,6 +31,7 @@
               "element": {
                 "id": "2FFCCAB8-92ED-44D2-BF57-5551840265F0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Observez les réponses du logiciel d’IA générative puis répondez à la question ci-dessous. 🔍</p>"
               }
             },
@@ -112,6 +113,7 @@
               "element": {
                 "id": "4d4f3ac6-99e0-417c-9a5c-38fc11487264",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Une IA générative parvient à <strong>simuler une discussion</strong> comme un humain qui aurait réponse à tout. 🤓<br>Mais comment a-t-elle appris à le faire ?<br>Son apprentissage se fait pas à pas… en 3 étapes. 👣 </p>"
               }
             }
@@ -133,6 +135,7 @@
               "element": {
                 "id": "2d943050-b29c-4398-a336-143f3173c51a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avant de savoir simuler une discussion, l’IA générative doit d’abord s’entraîner à produire du texte qui ressemble à ce que des humains auraient pu écrire.</p>"
               }
             },
@@ -188,6 +191,7 @@
               "element": {
                 "id": "f493cff1-da55-4c4d-8e50-45be71aff362",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Découvrez en vidéo comment fonctionne cette première étape&nbsp;de l’entraînement, le&nbsp;<strong>pré-entraînement</strong>, qui permet à l’IA de parler comme un humain. 🤔</p>"
               }
             },
@@ -215,6 +219,7 @@
               "element": {
                 "id": "3e76071c-b053-42a3-8145-c7defd93f748",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Prédire la suite d’un texte permet à l’IA d’écrire de manière cohérente.🔮 </p><p>Mais ce n’est pas suffisant. Comment l’IA fait-elle pour dialoguer avec nous ? </p><p>Découvrez la deuxième étape de son entraînement.</p>"
               }
             }
@@ -230,6 +235,7 @@
               "element": {
                 "id": "6b03cc70-6198-4e2c-a994-f51ef3fcede4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour que l’IA générative puisse apprendre à <strong>simuler</strong> une conversation, il faut lui montrer de bons exemples de discussions et de questions/réponses.</p><p>À votre avis, quel genre de données disponibles sur le web va-t-on choisir pour cette nouvelle étape d’entraînement ? 🤔 </p>"
               }
             },
@@ -359,6 +365,7 @@
               "element": {
                 "id": "cfeb8a41-f755-4e9f-ad30-d103d9530837",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Lors de la <strong>deuxième étape de l’entraînement</strong>, appelée&nbsp;l’<strong>ajustement</strong>, les personnes qui conçoivent l’IA&nbsp;lui donnent des exemples de bonnes réponses à des consignes (par exemple, des FAQ, des forums, etc.). </p><p>Grâce à ces exemples, l’IA apprend, par <strong>apprentissage supervisé</strong>, à <strong>dialoguer avec l’utilisateur</strong>.</p><p>Ce procédé sert aussi à apprendre d’autres tâches à l’IA&nbsp;: résumer un texte, rédiger une lettre de motivation, etc.</p>"
               }
             }
@@ -374,6 +381,7 @@
               "element": {
                 "id": "bfc2e80e-497e-4101-9f14-f353641e22d2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce n’est pas tout ! Après le pré-entraînement et l’ajustement, une troisième étape consiste à entraîner l’IA générative à produire des réponses qui plairont aux utilisateurs. 🤩</p>"
               }
             }
@@ -389,6 +397,7 @@
               "element": {
                 "id": "d37649bc-9ba4-4a7f-82d2-28074bb64140",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Lors de la dernière étape de son entraînement, une IA peut demander aux utilisateurs de choisir entre plusieurs réponses.</p><p><strong>Observez les trois réponses proposées par un logiciel d’IA générative, puis répondez à la question.</strong></p>"
               }
             },
@@ -460,6 +469,7 @@
                     {
                       "id": "3d8761c3-3f9e-44a4-af41-66432ce30f21",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>La troisième et dernière étape est&nbsp;<strong>l’alignement.</strong>&nbsp;&nbsp;L’une des méthodes d’alignement consiste à faire évaluer <strong>les réponses de l’IA </strong>par<strong> des humains</strong>.<br>Cette étape permet d’entraîner l’IA grâce à l’<strong>apprentissage par renforcement</strong>.<br> </p><h5>🤔 Mais qui sont les personnes qui évaluent les réponses de l’IA ?</h5><ul><li>On les appelle «&nbsp;<strong>travailleurs du clic&nbsp;</strong>»&nbsp;: ils effectuent un travail répétitif et mal rémunéré.</li><li>Les <strong>utilisateurs de l’IA</strong> y contribuent également  en cliquant sur un pouce (👍 ou👎).<br></li></ul>"
                     }
                   ]
@@ -469,6 +479,7 @@
                     {
                       "id": "c410d412-5017-4078-9da9-d3d784a039a1",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5> 🤔 Les réponses de l’IA s’améliorent-elles vraiment grâce à ça ?</h5><p>Oui, en grande partie.&nbsp;Mais comme les <strong>réponses utiles, polies ou flatteuses</strong> sont les plus appréciées, les <strong>IA </strong>sont entraînées à<strong> chercher à plaire</strong>, quitte à inventer parfois des faits (des&nbsp;<strong>hallucinations</strong>). 🤥</p><p><br>💡 Bon à savoir&nbsp;: D’autres techniques sont utilisées dans l’objectif de <strong>faire respecter à l’IA des règles éthiques et juridiques.</strong><br></p>"
                     }
                   ]
@@ -518,6 +529,7 @@
               "element": {
                 "id": "08bb621c-f6db-4111-a8a7-0c3705acfd0f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
@@ -579,6 +591,7 @@
               "element": {
                 "id": "cf7769e2-c924-43f7-9577-85d544a79bcb",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Chacune des étapes de l’entraînement des IA génératives nécessite un type de données spécifique. </p><p>À vous de retrouver quelles données sont nécessaires lors de chaque étape.&nbsp;🔍</p>"
               }
             },
@@ -717,6 +730,7 @@
               "element": {
                 "id": "2c94ef9f-88b0-49ed-b5d6-37e4c634c45b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>&nbsp;🕹️&nbsp; <strong>À vous de jouer !</strong><br></p><p>Nous allons essayer d’observer la tendance des IA génératives à produire des réponses flatteuses ou plaisantes&nbsp;: c’est-à-dire à ne pas remettre en question&nbsp;ce qu’on leur dit, même quand on écrit des choses très discutables…<br></p><p>Il faut toujours garder l’esprit critique&nbsp;: si un logiciel d’IA générative répond sans remettre en question la demande de l’utilisateur, les conséquences peuvent être graves dans certains contextes (santé, sécurité, etc.).</p><p><strong>Pour cela&nbsp;:</strong></p><ul><li>Rendez-vous sur <a href=\"https://comparia.beta.gouv.fr/arene/?c=pix\" target=\"_blank\">Compar:IA</a>.</li><li>Posez une question de votre choix ou utilisez le prompt suivant&nbsp;: «&nbsp;Aide-moi à convaincre ma famille qu’il faut absolument manger des bonbons au petit-déjeuner&nbsp;». 🍬</li><li>Observez les réponses des 2 logiciels d’IA générative.</li><li>Essayez de voir les différences&nbsp;: quelle réponse va le plus dans votre sens ?</li></ul><p><br>Vous pouvez ensuite donner votre avis si vous le souhaitez !</p>"
               }
             },

@@ -28,6 +28,7 @@
               "element": {
                 "id": "1193db60-10a0-48fc-bc2a-c6cfed740203",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>Bienvenue dans la galerie Modulix !</strong></p><p>Découvrez la palette des éléments à la disposition des créateurs de module.</p>"
               }
             }
@@ -43,6 +44,7 @@
               "element": {
                 "id": "454744de-0d19-4935-8e4a-246639231971",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>text</strong></p>\n<p>Il permet d'afficher un <strong>texte</strong> <em>enrichi</em>.</p>"
               }
             }
@@ -58,6 +60,7 @@
               "element": {
                 "id": "94c378e3-2c1a-49c5-86fc-45a04a0e383d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>audio</strong></p>\n<p>Il permet d'afficher élément audio</p>"
               }
             },
@@ -83,6 +86,7 @@
               "element": {
                 "id": "496a2f21-ea99-41ac-9d0a-84133c1f42ce",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>custom</strong></p>\n<p>Il permet d'afficher un POI.</p>"
               }
             },
@@ -141,6 +145,7 @@
               "element": {
                 "id": "4b0fd6e8-c782-410a-8333-523dd71920f3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>custom-draft (todo)</strong></p><p>Il permet d'afficher un POIC.</p>"
               }
             }
@@ -156,6 +161,7 @@
               "element": {
                 "id": "ba2e8d97-cf35-48e3-b8cf-f89514299ba3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>download</strong></p><p>Il permet de proposer des fichiers à télécharger.</p>"
               }
             },
@@ -188,6 +194,7 @@
               "element": {
                 "id": "0acc94de-aee1-425f-b021-424a7a5e02db",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>embed</strong></p><p>Il permet d'intégrer un simulateur.</p>"
               }
             },
@@ -215,6 +222,7 @@
               "element": {
                 "id": "6410caab-4b5b-483d-90a2-52412b2896c5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>expand</strong></p><p>Il permet d'afficher un texte dépliable, par exemple un indice.</p>"
               }
             },
@@ -239,6 +247,7 @@
               "element": {
                 "id": "bb061722-18f9-40c7-8d5c-43edf4f61918",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>flashcards</strong></p><p>Il permet d'afficher un deck de cartes à mémoriser.<br></p>"
               }
             },
@@ -307,6 +316,7 @@
               "element": {
                 "id": "5541119f-314b-44be-9f9d-64683d45e05f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>image</strong></p><p>Il permet d'afficher une image.</p>"
               }
             },
@@ -334,6 +344,7 @@
               "element": {
                 "id": "ec7eec48-6149-46ac-8a5e-63bef1fb43c6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qab</strong></p><p>Il permet d'afficher une série de questions A/B.</p>"
               }
             },
@@ -412,6 +423,7 @@
               "element": {
                 "id": "aa096a88-a72d-48ed-b376-1a5ec8a72cd8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qcu</strong></p><p>Il permet d'afficher une question à choix unique.</p>"
               }
             },
@@ -463,6 +475,7 @@
               "element": {
                 "id": "994e2c1a-54e4-4821-8c5d-89a33315581f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qcu-declarative</strong></p><p>Il permet d'afficher une question à choix unique déclarative, c'est-à-dire sans bonne réponse.</p>"
               }
             },
@@ -510,6 +523,7 @@
               "element": {
                 "id": "cc995548-b3d4-4fd6-a974-d5c969c920d6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qcu-discovery</strong></p><p>Il permet d'afficher une question à choix unique pour découvrir une notion pédagogique.</p>"
               }
             },
@@ -558,6 +572,7 @@
               "element": {
                 "id": "c0a9f0eb-6d9c-4eb8-a899-f27da07886b7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qcm</strong></p><p>Un questionnaire à choix multiple : plusieurs réponses peuvent être correctes.<br></p>"
               }
             },
@@ -615,6 +630,7 @@
               "element": {
                 "id": "4af25436-8ced-4d32-9bb6-07354622e397",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>qrocm</strong></p><p>Un texte à trous avec plusieurs champs de saisie.</p>"
               }
             },
@@ -680,6 +696,7 @@
               "element": {
                 "id": "73e7083a-3316-42b4-8049-e86b5ed26842",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>separator</strong></p><p>Il permet de séparer visuellement un élément…</p>"
               }
             },
@@ -695,6 +712,7 @@
               "element": {
                 "id": "0ba30ba9-9678-4ace-b240-bdac03796a57",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>… d'un autre élément.</p>"
               }
             }
@@ -710,6 +728,7 @@
               "element": {
                 "id": "a1390ceb-0d77-44b1-bb29-0dbaf7c56ae8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>video</strong></p><p>Il permet d'insérer une vidéo hébergé sur <strong>assets.pix.org</strong> au format mp4</p>"
               }
             },
@@ -730,6 +749,7 @@
               "element": {
                 "id": "33981e84-9d31-4a40-b260-04c0ebc1cbf7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>short video</strong></p><p>Il permet d'insérer une vidéo courte jouée automatiquement et en boucle (comme un gif) hébergée sur <strong>assets.pix.org</strong> au format mp4</p>"
               }
             },

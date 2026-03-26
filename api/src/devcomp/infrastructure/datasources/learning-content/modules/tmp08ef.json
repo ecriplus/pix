@@ -32,6 +32,7 @@
               "element": {
                 "id": "3cea7d3c-052c-4def-8e09-00003d56dd68",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez peut-être déjà créé du contenu à l’aide d’un système d'IA générative.</p><p>La plupart du temps, les résultats sont crédibles. C’est d’ailleurs leur objectif principal.</p><p>Pourtant, ces résultats peuvent être parfois étranges. Voyons cela dans un exemple. 👇</p>"
               }
             }
@@ -47,6 +48,7 @@
               "element": {
                 "id": "d9e554e5-8d76-42a6-ada4-fc7689a6dad6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L'une de ces trois images de plage a été générée par un système d'IA générative. Laquelle ?</p>"
               }
             },
@@ -128,6 +130,7 @@
               "element": {
                 "id": "478343db-2840-49c6-951c-39b45a88c50b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les productions des systèmes d’IA peuvent donc contenir des choses incohérentes voire farfelues : des mains à trois doigts, des arbres volants, ou des recettes à base d'œufs de vache.&nbsp;</p><p>Malgré tout, ces systèmes d’IA sont de plus en plus utilisés… mais de quoi s’agit-il ?</p>"
               }
             }
@@ -147,6 +150,7 @@
                     {
                       "id": "99004131-38da-4d88-92b0-f5263d2016cb",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Commençons par une définition <span aria-hidden=\"true\">📚 </span></strong> </p><p>L'intelligence artificielle générative ou IA générative est un type de système d'intelligence artificielle (IA) capable de générer du texte, des images, des vidéos ou d'autres médias en réponse à des <em>requêtes</em>, ou en anglais <em>prompts</em>.</p><p>Les systèmes d’IA qui ne sont pas <em>génératifs</em> sont aussi des systèmes automatisés, mais dédiés à des tâches bien définies. En effet, ils ne produisent pas de contenu nouveau ou créatif. Il s’agit par exemple de fonctionnalités de recommandation de musique en fonction des écoutes des utilisateurs.</p>"
                     }
                   ]
@@ -156,6 +160,7 @@
                     {
                       "id": "52e3bd53-2008-4630-b7c5-4e90236ba33b",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>L'IA générative dans les outils du quotidien</strong> </p><p> Avez-vous déjà aperçu le symbole ✨ sur l’interface de certains de vos logiciels ? Souvent, cela signifie qu’un logiciel intègre et utilise de l’IA pour produire certains contenus. En voici quelques exemples :&nbsp;&nbsp;<br><br></p>"
                     },
                     {
@@ -185,6 +190,7 @@
                     {
                       "id": "e5ea66d1-699d-4d02-943e-1441a18200e6",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Le point commun des IA génératives : le <em>prompt</em> ou la <em>requête</em></strong></p><p>Pour qu’une IA génère un résultat (texte, image, son, etc.), il faut que l’utilisateur saisisse une requête. C’est une instruction en langage naturel qui décrit la tâche que doit réaliser le système d’IA générative.</p><p>À partir de cette requête, le système va répondre, compléter ou illustrer la demande de l’utilisateur.</p>"
                     }
                   ]
@@ -203,6 +209,7 @@
               "element": {
                 "id": "0a09b520-f5d2-4926-bc98-6fdf90e2af7a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous en savez désormais plus sur les systèmes d'IA générative.</p><p> Mais avez-vous déjà écrit un prompt ? Et si on essayait ?</p>"
               }
             }
@@ -218,6 +225,7 @@
               "element": {
                 "id": "95c4d552-c7d7-4745-ba58-7990db7ccf94",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">1️⃣</span><span class=\"sr-only\">1</span> Rendez-vous sur le comparateur d'IA conversationnelles <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a>&nbsp;et proposez le prompt suivant :&nbsp; </p><blockquote><em>Invente un poème de 8 lignes qui devra contenir les mots \"pharaon\", \"éclair\", \"boucle\" et \"haricot\". La thématique du texte devra concerner l'hiver.</em></blockquote>"
               }
             },
@@ -233,6 +241,7 @@
               "element": {
                 "id": "e2775c21-b269-4512-929c-e0b346c653f7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">2️⃣</span><span class=\"sr-only\">2</span> Demandez maintenant de réécrire le poème avec le style de votre auteur préféré. <span aria-hidden=\"true\">🪶</span><br></p>"
               }
             },
@@ -257,6 +266,7 @@
               "element": {
                 "id": "8a2296bd-10e5-4a24-8aea-a2123427d3b6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">3️⃣</span><span class=\"sr-only\">3</span> Continuez à demander de réécrire ce texte jusqu’à ce qu'il vous plaise.<span aria-hidden=\"true\">🥰</span></p>"
               }
             },
@@ -300,6 +310,7 @@
               "element": {
                 "id": "357bde39-a26c-442a-a546-c67ad7760574",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les IA génératives sont impressionnantes… mais que se passe-t-il réellement quand on les utilise ?</p><p>On vous explique tout en vidéo&nbsp;! 📺</p>"
               }
             }
@@ -315,6 +326,7 @@
               "element": {
                 "id": "9306a3f5-4475-4e9c-a2ff-40db303e4007",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de cette vidéo, vous devrez utiliser le vocabulaire de l'IA générative dans un exemple concret.</p>"
               }
             },
@@ -342,6 +354,7 @@
               "element": {
                 "id": "3fafe614-19eb-4ecf-b1a8-bdf5307ca84c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Hier, Nadia a fait découvrir à son amie Alba les IA génératives.</p>"
               }
             },
@@ -462,6 +475,7 @@
               "element": {
                 "id": "5c072fb2-0baf-48dc-8b80-23c7b49d53f8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">📌 </span>Résumons avant de passer à la suite.</p><ul><li>Pour interagir avec les systèmes d'IA génératives, les utilisateurs décrivent leur demande en lanagage naturel. C’est le <em>prompt </em>ou<em> requête </em>en français.<br><br></li><li>Les systèmes d’IA générative utilisent des algorithmes qui cherchent à <em>prédire</em> la suite du texte ou la forme d’image la plus probable.<br><br></li><li>Quand un système d’IA générative produit un résultat farfelu, c'est une <em>hallucination</em>. Ces phénomènes sont normaux et nous rappellent que ce sont des machines qui les ont générés, et non des humains !<br><br></li></ul>"
               }
             }
@@ -477,6 +491,7 @@
               "element": {
                 "id": "e3821cb3-8166-44e2-9540-225d33ea5883",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À vous de jouer&nbsp;! Dans le défi suivant, vous allez faire halluciner des IA génératives. 🥸 🦄</p>"
               }
             }
@@ -492,6 +507,7 @@
               "element": {
                 "id": "014ce746-f31d-424e-975c-0b5b90b2d9f5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À l'aide de <a href=\"https://www.comparia.beta.gouv.fr/\" target=\"_blank\">Compar:IA</a>, écrivez des prompts qui amènent à des hallucinations pour au moins une des deux IA génératives de texte proposées.</p>"
               }
             },
@@ -528,6 +544,7 @@
               "element": {
                 "id": "a16433b1-c9bc-4510-a527-5f52fd6e5917",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️ </span>Si vous avez besoin d'aide, vous pouvez cliquer sur les astuces ci-dessous.</p>"
               }
             },

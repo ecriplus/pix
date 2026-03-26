@@ -31,6 +31,7 @@
               "element": {
                 "id": "2476fe57-7696-4368-a657-7a0ccf392d7b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’entreprise AgroDélices a été victime d’une arnaque.<br>Lisez l’article suivant puis répondez à la question ci-dessous.&nbsp;</p>"
               }
             },
@@ -104,6 +105,7 @@
               "element": {
                 "id": "0252575f-bb33-4972-9b22-b23cd6b8b345",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comment les failles humaines sont-elles exploitées ? Découvrons-le ensemble.</p>"
               }
             }
@@ -125,6 +127,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme faisant partie du service sécurité de la Banque Nationale.📲<br>Écoutez la conversation et observez la manière dont l’homme formule sa demande.</p>"
               }
             },
@@ -306,6 +309,7 @@
               "element": {
                 "id": "37c91342-5737-434c-89d1-ad0012d56cfd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Ces attaques sont appelées des <strong>attaques</strong> par <strong>ingénierie sociale</strong>. <br>🥸 Il s’agit d’<strong>escroqueries</strong> ayant pour but de<strong> manipuler une personne</strong> afin d’obtenir de l’<strong>argent</strong> ou des<strong> informations confidentielles</strong> pour commettre une infraction.</p>"
               }
             }
@@ -321,6 +325,7 @@
               "element": {
                 "id": "ccb78000-0b6b-41b3-86ea-f4f0b5d8b76a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur quoi s’appuient les cyberattaquants pour obtenir la réaction qu’ils souhaitent ?</p>"
               }
             }
@@ -410,6 +415,7 @@
               "element": {
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans les attaques reposant sur l’ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par les attaquants. 🧠</p><p> </p><br><p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance, etc.</p>"
               }
             }
@@ -425,6 +431,7 @@
               "element": {
                 "id": "9cabbbb0-6973-4453-a99b-2fc1ba39a2be",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À quoi ressemblent ces arnaques reposant sur l’ingénierie sociale ?</p>"
               }
             }
@@ -440,6 +447,7 @@
               "element": {
                 "id": "96f89456-39ce-492f-b64e-cb93844b4071",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les messages d’arnaque suivants n’ont été ni préparés, ni diffusés de la même façon.</p><p>Lisez-les et répondez ensuite aux questions.</p>"
               }
             },
@@ -652,6 +660,7 @@
               "element": {
                 "id": "af215ff5-1482-4681-95c0-96d22b0c75f0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><strong>💡 Le saviez-vous ?</strong> <br>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer. Même des experts en cybersécurité tombent parfois dans le piège.</p>"
               }
             }
@@ -673,6 +682,7 @@
               "element": {
                 "id": "97dbd631-143c-4904-8ecd-785b5b7384c1",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>Les <strong>attaques reposant sur l’ingénierie sociale</strong> exploitent les <strong>faiblesses humaines </strong>pour obtenir des <strong>informations </strong>ou de l’<strong>argent</strong>.</li><br>    <li>Le cyberattaquant <strong>trompe ou manipule la victime</strong> afin de la faire <strong>agir volontairement</strong> contre son propre intérêt. </li><br>    <li>Dans certains cas, l’attaquant <strong>manipule</strong> <strong>une seule personne</strong> pour atteindre l’<strong>ensemble d’une organisation</strong>.</li><br>    <li>Ces attaques reposent sur des mécanismes de <strong>manipulation psychologique</strong> qui exploitent des <strong>biais cognitifs</strong> pour influencer les décisions de la victime.<br></li><br>    <li>Ces attaques peuvent prendre <strong>plusieurs formes</strong>&nbsp;: hameçonnage de masse, hameçonnage ciblé, arnaque à la confiance.</li></ul>"
               }
             }
@@ -694,6 +704,7 @@
               "element": {
                 "id": "6c450994-a384-4e91-bea1-65d6215a97d7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             }

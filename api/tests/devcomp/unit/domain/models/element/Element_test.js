@@ -43,7 +43,7 @@ describe('Unit | Devcomp | Domain | Models | Element', function () {
 
     it('should instanciate non answerable elements', function () {
       // Given
-      const text = new Text({ id: 'id', content: 'content' });
+      const text = new Text({ id: 'id', content: 'content', tag: ' ' });
       const image = new Image({
         id: 'id',
         url: 'https://assets.pix.org/modules/placeholder-details.svg',

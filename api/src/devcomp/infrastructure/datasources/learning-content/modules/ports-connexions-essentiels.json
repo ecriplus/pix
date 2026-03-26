@@ -31,6 +31,7 @@
               "element": {
                 "id": "f7038b18-cf54-4db5-aba1-462ddbbbbda6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur votre ordinateur, vous pouvez brancher plusieurs appareils, comme une souris ou un clavier.&nbsp;🖱️&nbsp;⌨️</p><p>Pour les brancher, il y a des prises de différentes formes : ce sont les ports de connexion. Commençons avec un exemple.</p>"
               }
             }
@@ -46,6 +47,7 @@
               "element": {
                 "id": "f76ed857-626c-4980-8635-89d5a66f3f3b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maxime a reçu un ordinateur portable pour son anniversaire. </p><p>Pour le démarrer, il doit d’abord le mettre à charger.<span aria-hidden=\"true\">🔌</span> </p>"
               }
             },
@@ -107,6 +109,7 @@
               "element": {
                 "id": "c0642e02-74b1-4b42-a09d-3a6f7b714775",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous avez aidé Maxime à charger son ordinateur, découvrez les autres ports de connexion.&nbsp;💻<br></p>"
               }
             }
@@ -122,6 +125,7 @@
               "element": {
                 "id": "e6730d81-c115-4821-a415-4f719a252746",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Découvrez les 6 ports de connexions principaux de l'ordinateur ci-dessous.</p>"
               }
             },
@@ -140,6 +144,7 @@
               "element": {
                 "id": "623628e4-2ea8-4753-911b-c946725280c4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de ces explications, vous devrez retrouver certains de ces ports dans des exemples concrets.</p>"
               }
             },
@@ -159,6 +164,7 @@
                     {
                       "id": "df4b59c7-b4d8-450c-985a-dc9bc9735f26",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un <strong>port d’alimentation électrique</strong>.</p><p> Il sert à recharger un ordinateur et à le connecter au réseau électrique.&nbsp;<span aria-hidden=\"true\">🔌</span> </p><p>Sur les ordinateurs portables, il existe de nombreuses variantes. Sur un ordinateur fixe, ce port est plus gros.</p>"
                     }
                   ]
@@ -175,6 +181,7 @@
                     {
                       "id": "706f1c55-3009-4cff-affe-6548076d65ac",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un <strong>port USB</strong>. </p><p>Il sert à connecter différents appareils externes à l’ordinateur.</p><p> Par exemple : une souris, un clavier, une clé USB, etc.&nbsp;&nbsp;<span aria-hidden=\"true\">🖱️</span>&nbsp;<span aria-hidden=\"true\">🎮</span></p>"
                     }
                   ]
@@ -191,6 +198,7 @@
                     {
                       "id": "c75612ca-f9c2-4453-88db-725bb817151b",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un port <strong>USB Type C</strong> ou <strong>USB-C</strong>. </p><p>Ce port est souvent présent sur les téléphones portables. Sur un ordinateur, il&nbsp;sert à connecter différents appareils externes : téléphone portable, chargeur, écran, etc.  </p>"
                     }
                   ]
@@ -207,6 +215,7 @@
                     {
                       "id": "86851d7d-0ce8-48a3-b8ac-433da8134dec",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un <strong>port HDMI</strong>. </p><p>On peut le reconnaître grâce à sa forme. Il porte souvent l'inscription \"HDMI\" juste à côté.</p><p>Ce port sert principalement à connecter un écran ou un vidéoprojecteur à l’ordinateur, comme le port VGA.&nbsp;<span aria-hidden=\"true\">📽️</span></p>"
                     }
                   ]
@@ -223,6 +232,7 @@
                     {
                       "id": "be359a9d-19d2-49a7-8699-8921156e554c",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un <strong>port Ethernet</strong>. On l'appelle aussi RJ45.  </p><p>Il est utilisé pour connecter l’ordinateur à la box internet grâce à un câble Ethernet.&nbsp;<span aria-hidden=\"true\">🌐</span></p>"
                     }
                   ]
@@ -239,6 +249,7 @@
                     {
                       "id": "12ac3b9a-286c-4587-9a0d-6dc56e13caf9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Ce port est un <strong>port jack</strong> ou <strong>mini-jack</strong>. </p><p>Il est petit et rond. Il est souvent accompagné d’une image de casque.&nbsp;<span aria-hidden=\"true\">🎧</span> </p><p>Il sert à connecter des appareils audios à l’ordinateur&nbsp;: des écouteurs, un casque, un micro, etc.</p>"
                     }
                   ]
@@ -257,6 +268,7 @@
               "element": {
                 "id": "23617f5e-3001-4562-937a-dac1adf32c07",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous en savez plus sur les ports de connexion, vous allez  pouvoir aider Maxime.&nbsp;🙋‍♂️<br></p>"
               }
             }
@@ -272,6 +284,7 @@
               "element": {
                 "id": "efda82dc-1a96-488c-9d8d-a1bd5a8f1241",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maxime veut brancher son clavier USB ⌨️ à son ordinateur.&nbsp;<br>Voici ci-dessous l'ordinateur de Maxime&nbsp;:</p>"
               }
             },
@@ -357,6 +370,7 @@
               "element": {
                 "id": "2a99722d-7860-4835-bc96-5625f645c673",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le clavier de Maxime se branche en USB. <br>D'autres objets se branchent aussi sur le port USB.&nbsp;Découvrez-les.&nbsp;</p>"
               }
             }
@@ -376,6 +390,7 @@
                     {
                       "id": "7930251f-b89b-48f2-a67e-dfecfef8e446",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Le port USB est très utilisé. Il permet de brancher à son ordinateur des appareils avec des fonctionnalités très différentes.<br>On le reconnait de deux façons :</p><ul><li>le port est rectangulaire, avec une barre à l'intérieur,</li><li>il a un symbole : une flèche avec des ronds et des carrés.<br></li></ul>"
                     },
                     {
@@ -388,6 +403,7 @@
                     {
                       "id": "597e5a9a-e924-45d6-9b37-806d0e5c1578",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Découvrez quelques exemples d'appareils qui se branchant en USB. <br>Vous devrez ensuite identifier en image quels appareils se branchent au port USB.</p>"
                     }
                   ]
@@ -397,6 +413,7 @@
                     {
                       "id": "fdbfa739-e38f-41d6-ba98-6660fe729e16",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h4>Une clé USB ou un clavier sans-fil (avec récepteur USB)</h4>"
                     },
                     {
@@ -413,6 +430,7 @@
                     {
                       "id": "b91728f4-a8f2-403b-81bc-520db8b8cbf0",
                       "type": "text",
+                      "tag": " ",
                       "content": "\n<h4>Une souris filaire ou une manette de jeux vidéos</h4>"
                     },
                     {
@@ -429,6 +447,7 @@
                     {
                       "id": "07bc0dd7-c121-4f6d-8e3a-ba45faffc93c",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h4>Un cable de chargeur de téléphone portable ou une webcam</h4>"
                     },
                     {
@@ -454,6 +473,7 @@
               "element": {
                 "id": "124501e8-1100-44a2-a210-a3da56a6d11e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Passons à la pratique avec quelques exemples.</p>"
               }
             }
@@ -469,6 +489,7 @@
               "element": {
                 "id": "270b0408-be92-484a-b9b2-5d302f01eecf",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque affirmation ci-dessous, choisissez si elle est vraie ou fausse.</p>"
               }
             },
@@ -598,6 +619,7 @@
               "element": {
                 "id": "f357712f-ff2f-4a72-ba76-f31bcc7faa50",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Testez vos connaissances sur tous les ports de connexion.&nbsp;🕹️</p>"
               }
             }
@@ -694,6 +716,7 @@
               "element": {
                 "id": "22047103-8c88-42ae-8c51-e168e7b3f035",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour finir ce module, vous allez devoir explorer les ports de connexion de votre propre ordinateur.&nbsp;💻<br>À vous de jouer !</p>"
               }
             }
@@ -709,6 +732,7 @@
               "element": {
                 "id": "029cdc04-5fc3-4d1a-8127-6d5ad9084002",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Cherchez et nommez tous les ports de connexion de votre ordinateur.</p>"
               }
             },

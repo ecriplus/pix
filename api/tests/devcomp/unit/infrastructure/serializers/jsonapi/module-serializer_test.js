@@ -362,7 +362,7 @@ function getComponents() {
         },
       ],
     }),
-    new ComponentElement({ element: new Text({ id: '1', content: 'toto' }) }),
+    new ComponentElement({ element: new Text({ id: '1', content: 'toto', tag: ' ' }) }),
     new ComponentElement({
       element: new QCU({
         id: '2',
@@ -558,6 +558,7 @@ function getAttributesComponents() {
         id: '1',
         isAnswerable: false,
         type: 'text',
+        tag: ' ',
       },
     },
     {

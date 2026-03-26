@@ -31,6 +31,7 @@
               "element": {
                 "id": "8c6953c7-1ab8-4722-875f-f16556040f0f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Cette année, Rayan veut prendre des cours de théâtre. <span aria-hidden=\"true\">🎭</span></p><p>Il est allé voir plusieurs écoles de théâtre à côté de chez lui.</p><p>Il a donné son numéro de téléphone et son adresse mail pour être contacté.</p>"
               }
             }
@@ -46,6 +47,7 @@
               "element": {
                 "id": "b787f04d-4cb8-459c-a2f4-abc040aae7d7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Rayan a reçu les 3 propositions de cours de théâtre suivantes :<span aria-hidden=\"true\">👇</span></p>"
               }
             },
@@ -109,6 +111,7 @@
               "element": {
                 "id": "d2bc6890-bae8-4930-b865-c13c68685cf9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Rayan a choisi de s'inscrire au cours du <strong>Théâtre Lumière</strong>. Il doit envoyer un mail pour le premier cours.</p><p>Dans la vidéo suivante, voyons ensemble comment envoyer un mail ! <span aria-hidden=\"true\">📺</span></p>"
               }
             }
@@ -124,6 +127,7 @@
               "element": {
                 "id": "2e2a41b6-5818-4b3b-b537-1aec1921aac3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de cette vidéo, vous devrez</p><ul><li>suivre les étapes pour envoyer un mail,</li><li>répondre à des questions sur les champs <code>À</code> et <code>Objet</code> d’un mail.</li></ul>"
               }
             },
@@ -151,6 +155,7 @@
               "element": {
                 "id": "0d3b0a93-c832-483e-ac94-f8d6154d5d6d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous savez maintenant comment envoyer un mail.</p><p>Vous allez pouvoir aider Rayan à contacter Michel, son nouveau professeur de théâtre. <span aria-hidden=\"true\">📩</span></p>"
               }
             }
@@ -166,6 +171,7 @@
               "element": {
                 "id": "e67e0363-7de1-4408-9336-d2604895dcff",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Rayan utilise l'application ci-dessous comme boîte mail.<br>Aidez Rayan à envoyer un nouveau mail : </p><ul><li>à : <strong>michel@pixmail.org</strong></li><li>avec l’objet : <strong>Heure prochain cours débutant</strong></li><li>avec le message :<strong>Bonjour Michel,<br>à quelle heure est le prochain cours ?<br>Merci, Rayan</strong></li></ul>"
               }
             },
@@ -186,6 +192,7 @@
               "element": {
                 "id": "f7429e02-e27c-4f12-ba79-80785ad66925",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>🗝️ Si vous avez besoin d’aide, vous pouvez cliquer sur les indices ci-dessous :&nbsp;</p><details><summary>Indice 1</summary>Cliquez sur Nouveau message en haut à gauche pour créer un mail.</details><details><summary>Indice 2</summary>Complétez les 3 champs avec les textes écrits dans la consigne.</details><details><summary>Solution</summary><p>Voici les étapes à suivre : </p><img src=\"https://assets.pix.org/draft/modules/1738339954456303332.gif\" alt=\"\" /></details>"
               }
             }
@@ -201,6 +208,7 @@
               "element": {
                 "id": "be3d03c0-6679-4c38-9f64-cc19b04a6580",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans un mail, chaque champ a un rôle bien précis. </p><p>Voyons si vous avez retenu l’essentiel. <span aria-hidden=\"true\">🎯</span></p>"
               }
             }
@@ -216,6 +224,7 @@
               "element": {
                 "id": "30a8cbf6-1e08-4cd4-96e5-e006655aca83",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque affirmation, choisissez si elle est vraie ou fausse.</p>"
               }
             },
@@ -324,6 +333,7 @@
               "element": {
                 "id": "97e1108c-34ef-4772-a3ca-e385d6319bc6",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite :</h4><p>Pour envoyer un mail, il faut remplir ses différents champs avec les bonnes informations :</p>"
               }
             },
@@ -349,6 +359,7 @@
               "element": {
                 "id": "27281e03-bec3-43e3-985d-38b2eaec4c20",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Rayan vient de recevoir une réponse : le prochain cours est à 20 heures. <span aria-hidden=\"true\">✨</span></p><p>Maintenant, vous allez devoir analyser un autre mail.</p>"
               }
             }
@@ -364,6 +375,7 @@
               "element": {
                 "id": "e7288030-487b-4eb1-b256-7296fcd5c38b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici un mail qui a été envoyé pour préparer les costumes du spectacle. </p>"
               }
             },
@@ -502,6 +514,7 @@
               "element": {
                 "id": "41c881bd-3195-459e-b1bc-c3a21b349384",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour finir ce module, nous vous proposons d’envoyer un mail avec une vraie adresse à l'un de vos proches ! <span aria-hidden=\"true\">💫</span></p>"
               }
             }
@@ -517,6 +530,7 @@
               "element": {
                 "id": "e2eda86f-fcd2-4eba-922f-bf299ebddabd",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Envoyez un mail à une personne que vous connaissez avec votre adresse mail.</p>"
               }
             },

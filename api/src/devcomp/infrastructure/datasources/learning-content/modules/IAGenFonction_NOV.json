@@ -31,6 +31,7 @@
               "element": {
                 "id": "bf7e524d-cef5-4cbf-b15d-7a03cfb4195d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Bob utilise ChatGPT pour organiser ses prochaines vacances.<br>Voici sa demande&nbsp;:</p>"
               }
             },
@@ -144,6 +145,7 @@
               "element": {
                 "id": "898ab86a-15d3-468f-a0fd-eb1644e7aef6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un logiciel d’<strong>Intelligence Artificielle générative</strong> est capable de <strong>répondre de façon pertinente</strong> à des demandes écrites sur des <strong>sujets très variés</strong> (transports, visites, cuisine, etc.).</p>"
               }
             },
@@ -152,6 +154,7 @@
               "element": {
                 "id": "984bbfce-c558-432a-9746-22fee645e643",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>💡 Bon à savoir<br>Certains logiciels d’IA générative sont capables de générer des images, des vidéos ou des sons.</p>"
               }
             }
@@ -167,6 +170,7 @@
               "element": {
                 "id": "9a7f547c-7d63-4ece-b93e-96c92e48ae5a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais comment fonctionne un logiciel d’IA générative ? Comment fait-il pour construire sa réponse ?</p>"
               }
             }
@@ -186,6 +190,7 @@
                     {
                       "id": "9facc0e9-5624-46c1-bf61-1dd4c3cdf35a",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Voici ci-dessous un texte incomplet&nbsp;: il manque le dernier mot.<code><br>« Avec quoi peut-on tartiner une crêpe pour qu’elle soit bonne ? On peut mettre du&nbsp;...&nbsp;»</code></p>"
                     },
                     {
@@ -290,6 +295,7 @@
                     {
                       "id": "eb7f4031-119d-452b-8789-06f9fd19f56c",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Un logiciel d’IA générative construit sa réponse en complétant un texte, mot après mot, en choisissant des mots très probables <strong>selon le contexte de la conversation.</strong></p><p> Voyons ce que cela donne sur notre exemple.&nbsp;👇</p>"
                     },
                     {
@@ -392,6 +398,7 @@
               "element": {
                 "id": "7d0771bd-5a31-45ab-8cad-1f6bbda5d3a9",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour répondre, un logiciel d’<strong>IA générative </strong>complète la phrase de l’utilisateur.</p><p> Il cherche <strong>la suite la plus probable</strong>, en tenant compte de toute la conversation, pas seulement du dernier mot. Puis il recommence, étape par étape, jusqu’à former une réponse entière.</p>"
               }
             },
@@ -476,6 +483,7 @@
               "element": {
                 "id": "2bb5feaf-d938-4340-be65-c57b44162aba",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>⚠️ Cette méthode a des <strong>limites</strong>. L’IA génère simplement la suite de mots la plus probable. </p><p>Le texte créé peut donc être <strong>trompeur</strong>, <strong>faux </strong>ou même <strong>illogique</strong>.</p><p>    🔍 Il faut donc <strong>toujours vérifier</strong> si le texte produit a du sens et correspond à la réalité.</p>"
               }
             }
@@ -491,6 +499,7 @@
               "element": {
                 "id": "4b21d13f-d359-4d81-8884-327703eea94c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Mais comment&nbsp;le logiciel d’IA générative détermine-t-il quels mots sont les plus probables pour la suite d’une phrase ?</p>"
               }
             }
@@ -506,6 +515,7 @@
               "element": {
                 "id": "af3739f4-b77e-4d2b-8795-947da458b59b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le secret&nbsp;: <strong>l’entraînement.</strong>🏋️‍♀️</p><p>Pour s’entraîner à écrire, l’IA a besoin de beaucoup d’exemples de textes. 📚📄</p>"
               }
             },
@@ -572,6 +582,7 @@
                     {
                       "id": "030ae07a-741d-4a4e-b164-366865ca1b54",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Pourquoi faut-il autant de textes différents et variés ?</h5><p>En s’entraînant sur des milliards de textes variés, le <strong>logiciel d’IA générative</strong> repère quels mots sont souvent utilisés ensemble... Ainsi, il peut <strong>produire des phrases pertinentes</strong> pour répondre aux demandes.</p>"
                     }
                   ]
@@ -581,6 +592,7 @@
                     {
                       "id": "a7513ccb-063d-473c-8282-6297533ca409",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔Tous ces textes sont-ils fiables ?</h5><p>⚠️ Non, certains textes contiennent des erreurs, sont incomplets ou trompeurs.</p><p> Comme <strong>le logiciel d’IA générative ne comprend pas les textes sur lesquels il s’entraîne</strong>, il peut reproduire <strong>ces erreurs</strong> dans ses réponses.<br>🔍 Il faut donc <strong>toujours vérifier les informations</strong> avant de les utiliser. </p><p>Pour cela, on peut poursuivre la conversation avec l'IA, mais aussi croiser les informations avec d’autres sources&nbsp;: livres, articles, sites fiables, etc.</p>"
                     }
                   ]
@@ -605,6 +617,7 @@
               "element": {
                 "id": "ed8509d2-d62f-49a8-baa6-acc699562193",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>Un logiciel d’IA générative est <strong>capable de discuter</strong>  avec un utilisateur, sur des sujets très variés. 💬</li><li>Il est<strong> entraîné sur une grande quantité de textes </strong>disponibles sur internet (livres, articles, sites web, etc.). Cela  lui permet de répondre précisément aux demandes, sans avoir préparé ses réponses à l’avance. 📚</li><li>Un logiciel d’IA générative ne répond pas comme le ferait un humain&nbsp;:&nbsp;il <strong>produit son texte étape par étape</strong>, en choisissant la suite la plus probable selon le contexte de la phrase . 🧩</li><li>Il faut toujours <strong>vérifier </strong>les réponses qu’il nous donne. 🔍</li></ul>"
               }
             }
@@ -626,6 +639,7 @@
               "element": {
                 "id": "8befd8fa-8fea-42f2-b8b9-a284f62e84f0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez compris l’essentiel avec quelques questions !</p>"
               }
             }
@@ -745,6 +759,7 @@
               "element": {
                 "id": "de48659c-5799-4a9f-9d74-3676e78c094b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour finir ce module, voyons quelle sera votre bonne résolution pour votre prochaine utilisation de ChatGPT, Gemini, Le Chat ou d’un autre logiciel d’IA générative&nbsp;! 💫</p>"
               }
             }

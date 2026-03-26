@@ -32,6 +32,7 @@
               "element": {
                 "id": "1c3814f8-60f5-4024-86a8-6d0c270eceb1",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un mot de passe sert à protéger vos informations et vos données. Il faut qu’il soit <strong>solide</strong>, c'est-à-dire difficile à trouver.&nbsp;🔐<br>Sinon, on peut le deviner facilement et lire vos mails, voir vos photos ou envoyer des messages à votre place.</p>"
               }
             }
@@ -110,6 +111,7 @@
               "element": {
                 "id": "598a96f0-4628-4879-9cfd-5ff8982c1da3",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Choisir un mot de passe très utilisé est risqué. Regardons ensemble les risques dont il faut se protéger.</p>"
               }
             }
@@ -125,6 +127,7 @@
               "element": {
                 "id": "826281e7-865f-462d-abc0-77537c42a2b4",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4><span aria-hidden=\"true\">🧑‍💻&nbsp;🔮&nbsp;</span>Une personne peut deviner votre mot de passe.</h4><p>Si vous utilisez des informations privées dans votre mot de passe, il est possible qu’une personne de votre entourage le devine facilement.</p><p><span aria-hidden=\"true\">⚠️</span> Elle pourra alors accéder à vos données personnelles et privées. Et ce n’est peut-être pas pour vous faire un cadeau d’anniversaire surprise, malheureusement.</p>"
               }
             },
@@ -133,6 +136,7 @@
               "element": {
                 "id": "aae5ea61-68b7-4089-90a1-6ecc707664c9",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -141,6 +145,7 @@
               "element": {
                 "id": "9d0b7aff-a9da-453f-a6ba-c61fbaa7bb25",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4><span aria-hidden=\"true\">🤖&nbsp;🏴‍☠️&nbsp;</span>Un logiciel informatique peut pirater votre mot de passe.</h4><p>Les ordinateurs sont capables de trouver des mots de passe en testant très rapidement différentes combinaisons possibles.<br>En 2023, un mot de passe court comme <code>$0Leil@?</code> peut être piraté en 5 minutes seulement. Mais avec un mot de passe plus long, comme <code>$0Leil@1504</code>, cette durée passe à 226 ans.</p> <p><span aria-hidden=\"true\">⚠️</span> En général, le pirate ne vous connaît pas. Il cherche certainement à revendre vos informations ou à vous voler de l’argent.</p>"
               }
             }
@@ -156,6 +161,7 @@
               "element": {
                 "id": "f300766c-5fa3-4dbe-8922-00dc73304c7b",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Un exemple&nbsp;: Austin a utilisé des informations personnelles pour créer son mot de passe. Vous allez pouvoir le deviner facilement. À vous de jouer.&nbsp;🕵🏻‍♂️&nbsp;🕵🏿‍♀️</p>"
               }
             }
@@ -171,6 +177,7 @@
               "element": {
                 "id": "7ef31e68-e798-4a92-86a0-ad61ebd9b915",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Austin est producteur de miel dans les Vosges.<br>Il a utilisé les deux informations suivantes pour créer son mot de passe&nbsp;:</p><ul><li>Il est né le <strong>15 novembre 1984</strong>.</li><li>Il a un enfant qui s’appelle <strong>Bill</strong>.</li></ul>"
               }
             },
@@ -266,6 +273,7 @@
               "element": {
                 "id": "b975bec3-4fef-42ca-8b40-ce9b59836b4c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour créer un mot de passe solide, il y a certaines règles à suivre. Regardons de plus près&#8239;!</p>"
               }
             }
@@ -281,6 +289,7 @@
               "element": {
                 "id": "02bb0017-a74d-4c78-8502-3c57d9f12209",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Règle n°1&nbsp;: créez un mot de passe long.&nbsp;<span aria-hidden=\"true\">📝</span></h4><p>Un mot de passe long sera dur à deviner ou à pirater. Mais gardez une longueur raisonnable&nbsp;: à partir de 12 caractères, le mot de passe est assez long.</p>"
               }
             },
@@ -289,6 +298,7 @@
               "element": {
                 "id": "7f89a519-a5ce-4484-9952-eb6869b94291",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -297,6 +307,7 @@
               "element": {
                 "id": "52f4050d-7ab9-41da-987b-d9172d5b3cb0",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Règle n°2&nbsp;: variez les caractères utilisés.&nbsp;<span aria-hidden=\"true\">🔣</span></h4><p>Un bon mot de passe contient différents caractères&#8239;; ce qui augmente le nombre de combinaisons possibles. On peut utiliser des minuscules, des majuscules, des chiffres, des caractères spéciaux&nbsp;: <code>=</code> <code>@</code> <code>$</code> <code>#</code> <code>!</code> <code>?</code>.</p>"
               }
             },
@@ -305,6 +316,7 @@
               "element": {
                 "id": "2895432c-72a3-44be-ae0e-52041f5b847e",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -313,6 +325,7 @@
               "element": {
                 "id": "c4505a09-864c-48f8-8077-013fae2db291",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Règle n°3&nbsp;: n'utilisez pas d’informations personnelles.&nbsp;<span aria-hidden=\"true\">🤫</span></h4><p>De cette manière, il y a moins de chance que quelqu'un le devine. N'utilisez donc pas de dates de naissance et de numéros de téléphone. Un mot de passe doit être secret&#8239;!</p>"
               }
             }
@@ -328,6 +341,7 @@
               "element": {
                 "id": "f3d1330a-31f0-4252-8a89-db95905b6f09",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vérifions que vous avez compris l'essentiel avec quelques exemples.</p>"
               }
             }
@@ -343,6 +357,7 @@
               "element": {
                 "id": "a3730b39-ff34-4744-a5dc-5d4687def82d",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque affimation, choisissez si elle est vraie ou fausse.</p>"
               }
             },
@@ -451,6 +466,7 @@
               "element": {
                 "id": "ec48b813-4f04-45ac-9515-eb6e559e354c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>En plus des règles que vous venez de voir, voici aussi quelques astuces pour vous aider à créer vos mots de passe.&nbsp;💡</p>"
               }
             }
@@ -466,6 +482,7 @@
               "element": {
                 "id": "6eda6d92-1147-4c19-a7e5-f61a2228e33c",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Astuce n°1&nbsp;: n'utilisez pas le même mot de passe partout&#8239;!</h4><p>Utiliser toujours le même mot de passe est risqué. C'est comme utiliser la même clé pour toutes ses portes. C'est très pratique, mais si votre mot de passe est piraté, toutes les portes sont ouvertes&#8239;!&nbsp;<span aria-hidden=\"true\">☠️</span></p>"
               }
             },
@@ -474,6 +491,7 @@
               "element": {
                 "id": "b8bc3e1e-bf21-4b3b-8dce-0a0213aefb1b",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -482,6 +500,7 @@
               "element": {
                 "id": "f6edeae6-fbfb-4dce-b556-1bb7928d5ff5",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Astuce n°2&nbsp;: utilisez une phrase qui vous plaît et gardez certains caractères. </h4><p>Par exemple&nbsp;: la phrase \"<strong>J'a</strong>i <strong>2 c</strong>hats<strong>, 3 p</strong>oissons <strong>e</strong>xotiques <strong>e</strong>t <strong>j'a</strong>dore <strong>l</strong>a <strong>p</strong>longée <strong>!</strong>\" vous donne le mot de passe&nbsp;: <strong>Ja2c3peejalp!</strong></p>"
               }
             },
@@ -490,6 +509,7 @@
               "element": {
                 "id": "95098e06-e113-46ba-afa0-b7890d5cf467",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -498,6 +518,7 @@
               "element": {
                 "id": "dadd152e-350c-4710-8609-af5f92e69b2c",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Astuce n°3&nbsp;: créez un nouveau mot de passe si vous l'avez oublié.</h4><p>Oublier son mot de passe, ce n'est pas grave. Au moment de votre connexion, les sites internet permettent de changer votre mot de passe si vous l'avez oublié.<br>Tous les mots de passe ne sont pas égaux. Par exemple, mémorisez bien celui de votre boîte mail car il permet de changer tous les autres.&nbsp;<span aria-hidden=\"true\">💡</span></p>"
               }
             }
@@ -513,6 +534,7 @@
               "element": {
                 "id": "3d582ec1-c82d-488e-9e2d-0208cfd29871",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Maintenant que vous en savez plus, vous allez pouvoir aider Austin.&nbsp;🧑🏻‍💼<br> Austin veut créer un mot de passe qui est solide.</p>"
               }
             }
@@ -573,6 +595,7 @@
               "element": {
                 "id": "b1ae2c3c-e383-4f82-b6d0-deda5b24eaa4",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Créer des mots de passe solides n'est pas simple. Mais cette étape est nécessaire pour se protéger.</p><p>Voici ci-dessous une synthèse des informations à retenir de ce module.</p>"
               }
             }
@@ -588,6 +611,7 @@
               "element": {
                 "id": "2e695244-52c5-4277-8414-d18777d0d242",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Ce qu’il faut retenir</h4><ul><li>Tous les mots de passe ne sont pas égaux&nbsp;: l'accès à votre boîte mail permet de contrôler de nombreux autres services. Ce mot de passe est donc très important.&nbsp;<span aria-hidden=\"true\">🚨</span></li><li>Un mot de passe solide est unique, long et composé de différents caractères. Il ne contient pas d'informations personnelles et doit rester secret.&nbsp;<span aria-hidden=\"true\">🎯</span></li><li>Pour avoir un mot de passe solide et facile à retenir, on peut choisir une phrase et garder certains caractères.&nbsp;<span aria-hidden=\"true\">💡</span></li></ul>"
               }
             }

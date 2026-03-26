@@ -32,6 +32,7 @@
               "element": {
                 "id": "7576ec94-72fd-49e6-b4ba-c3f106e8154e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voici une discussion entre Fred et Ombeline qui cherchent à savoir si leur utilisation du numérique est responsable.</p>"
               }
             },
@@ -87,6 +88,7 @@
               "element": {
                 "id": "b4e9a6c2-7d1f-4b3e-8a5c-0f9d2e6c1b88",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour s’y retrouver, le plus simple est de comprendre d’abord ce que recouvre exactement <strong>«&nbsp;le numérique&nbsp;»</strong>. Découvrons de quoi il se compose dans notre quotidien.</p>"
               }
             }
@@ -108,6 +110,7 @@
               "element": {
                 "id": "1e4b7c8a-9f0d-4a3e-b2c5-6d1f9e8a0b99",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Avant de mesurer les impacts environnementaux du numérique, il faut savoir de quoi l’on parle.</p><p>On distingue généralement&nbsp;<strong>trois grandes familles&nbsp;: les équipements des utilisateurs, les réseaux et les centres de données.</strong></p><p>Dans l’activité suivante, classez chaque élément selon <strong>son rôle principal</strong> dans le fonctionnement du numérique.</p>"
               }
             },
@@ -138,6 +141,7 @@
                     {
                       "id": "a1400c7a-2e2e-470c-8a5e-8ea34441d423",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>On vient d’identifier ce qui compose le numérique&nbsp;: <strong>les équipements, les réseaux et les centres de données</strong>. <br>Les chiffres que vous pouvez voir sur les impacts environnementaux du numérique proviennent d’<strong>études scientifiques</strong>. Pour bien les comprendre, <strong>il faut savoir précisément ce que ces études prennent en compte</strong>.</p><h5><strong>🤔</strong> Pourquoi faut-il définir précisément le périmètre d’une étude&nbsp;?</h5><p>Parce qu’une étude doit dire clairement <strong>ce qu’elle prend en compte</strong> et <strong>ce qu’elle ne prend pas en compte</strong>. On ne peut pas tout mesurer. Sans connaître précisément ce qui est étudié, les résultats sont difficiles à comprendre ou à comparer.</p>"
                     }
                   ]
@@ -147,6 +151,7 @@
                     {
                       "id": "e4841527-8dc3-45de-b59d-84795cb7912b",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Un exemple dans le numérique&nbsp;?</h5><p>Deux études peuvent donner des résultats différents si elles ne prennent pas en compte le même périmètre. Par exemple, l’une peut étudier seulement les équipements des utilisateurs, tandis qu’une autre inclut aussi les réseaux et les centres de données.</p><p><strong>Les résultats varient donc selon ce qui est inclus dans l’étude.</strong></p>"
                     }
                   ]
@@ -165,6 +170,7 @@
               "element": {
                 "id": "67c0f575-419e-4d3f-b872-ebc3aa9ba9ea",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les différents éléments qui composent le numérique n’ont pas le même poids et ne produisent pas les mêmes effets sur l’environnement. Pour mieux les comparer, examinons maintenant <strong>la méthode la plus utilisée pour évaluer ces effets</strong>.</p>"
               }
             }
@@ -180,6 +186,7 @@
               "element": {
                 "id": "7262fc2e-baa1-451c-b039-2c64a7ac8376",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Quand vous utilisez un appareil numérique, vous ne voyez qu’une petite partie de ses impacts sur l’environnement. Une grande partie de ces impacts se produit avant et après l’usage&nbsp;: extraction de ressources, fabrication, transports…</p>"
               }
             },
@@ -313,6 +320,7 @@
               "element": {
                 "id": "5523c5df-0559-42e0-a7c2-d8a695962c10",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Cette méthode d’analyse oblige à regarder toutes les étapes de la vie d’un appareil&nbsp;: fabrication, usage, transport, fin de vie… même si certaines sont peu documentées. Elle est appelée l’<strong>Analyse du Cycle de Vie (ACV)</strong>.<br><br></p><h5>🤔 Pourquoi cette méthode est-elle importante ?</h5><p>Parce qu’elle suit des règles internationales&nbsp;: même protocole, mêmes indicateurs. Cela aide à repérer <strong>les étapes qui contribuent le plus à l’impact environnemental</strong>, et donc où des améliorations sont possibles.</p>"
               }
             }
@@ -328,6 +336,7 @@
               "element": {
                 "id": "b4c10c8f-76f9-4e09-b64a-d049bef9c047",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L’analyse du cycle de vie (ACV) est la méthode utilisée pour étudier un équipement de manière cohérente, à chaque étape de sa vie. Reste une question centrale&nbsp;: quels impacts mesurer ? Les indicateurs sont multiples&nbsp;: climat, ressources, santé… Ils ne renvoient pas aux mêmes effets sur l’environnement.</p>"
               }
             }
@@ -533,6 +542,7 @@
                     {
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔 Pourquoi les études ne se contentent-elles pas d’un seul indicateur ?</h5>Parce que le numérique a divers impacts sur l’environnement.<br>"
                     }
                   ]
@@ -542,6 +552,7 @@
                     {
                       "id": "ad88b67b-755d-4a36-b480-e479146811fb",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Voici un tableau récapitulatif des principaux indicateurs utilisés pour évaluer les impacts environnementaux du numérique.</p><table>    <caption class=\"sr-only\">Résumé simplifié des indicateurs d’impact environnemental</caption>    <thead>        <tr>            <th scope=\"col\">Indicateur mesuré</th>            <th scope=\"col\">Ce qui est quantifié</th>            <th scope=\"col\">Effet environnemental associé</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Émissions de gaz à effet de serre </th>            <td>Quantité totale de gaz à effet de serre émise</td>            <td>Contribution au réchauffement climatique</td>        </tr>        <tr>            <th scope=\"row\">Consommation de ressources minérales et métalliques </th>            <td>Quantité de métaux et minerais non renouvelables extraits pour fabriquer les équipements</td>            <td>Épuisement des ressources naturelles</td>        </tr>        <tr>            <th scope=\"row\">Émissions de particules fines </th>            <td>Quantité de particules fines émises dans l’air </td>            <td>Impacts sur la santé respiratoire et cardiovasculaire</td>        </tr>    </tbody></table>"
                     }
                   ]
@@ -551,6 +562,7 @@
                     {
                       "id": "93427470-f189-47b7-bfa6-d2ad80ac9686",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h5>🤔Ces résultats prédisent-ils l’avenir ?</h5><p>Non. Ils décrivent une situation à un instant donné. Les indicateurs peuvent évoluer, mais <strong>sans action</strong>, les impacts du numérique vont continuer d’augmenter.</p>"
                     }
                   ]
@@ -575,6 +587,7 @@
               "element": {
                 "id": "ed97ea10-9ed8-4c2d-ad35-35c528d3d08d",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul>    <li>Le numérique s’appuie sur <strong>trois grandes composantes</strong>&nbsp;: les équipements des utilisateurs, les réseaux et les centres de données. 🧩</li>    <li>Pour mesurer les impacts, on utilise l’<strong>Analyse du Cycle de Vie (ACV)</strong>, qui prend en compte <strong>la fabrication, le transport, l’utilisation et la fin de vie</strong>. 🔍</li>    <li>Pour comparer les impacts, il faut définir un <strong>périmètre</strong> clair et lire les résultats en précisant <strong>l’indicateur choisi</strong>, car chaque indicateur renvoie à un <strong>type d’impact</strong> (climat, ressources, santé…). 📏</li>    <li>La mesure de ces impacts varie selon l’indicateur, le périmètre et les usages&nbsp;: <strong>les équipements concentrent souvent la plus grande part des impacts</strong>, mais <strong>les réseaux et les centres de données</strong> comptent aussi (et peuvent être sous-estimés). 🔄</li>    </ul>"
               }
             }
@@ -596,6 +609,7 @@
               "element": {
                 "id": "00a60201-eed2-47cc-89c9-625a92b64d41",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
@@ -668,6 +682,7 @@
               "element": {
                 "id": "f0ee88fb-f1d9-4c04-afed-01ddc6e76ab2",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Le chiffre ci-dessous est souvent repris dans les médias&nbsp;:</p><blockquote>«&nbsp;Le numérique représente environ 4 % des émissions mondiales de gaz à effet de serre.&nbsp;»</blockquote>"
               }
             },

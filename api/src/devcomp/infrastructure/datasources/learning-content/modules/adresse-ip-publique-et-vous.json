@@ -32,6 +32,7 @@
               "element": {
                 "id": "771ff16f-3476-4e3d-88c2-e24c799b2e9c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Lorsque vous naviguez sur internet, un site peut connaître la ville où vous vous trouvez même si vous ne lui avez pas partagé votre localisation.<span aria-hidden=\"true\">📍</span><br>Mystère ? Pas vraiment. Commençons par un exemple.</p>"
               }
             }
@@ -47,6 +48,7 @@
               "element": {
                 "id": "67b68f2a-349d-4df7-90a5-c9f5dc930a1a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p> Voici la page de résultats d'une recherche en ligne de Mélanie, qui adore cuisiner. <span aria-hidden=\"true\">🥗</span><br>Observez cette image pour répondre aux questions suivantes.</p>"
               }
             },
@@ -152,6 +154,7 @@
               "element": {
                 "id": "affd2fb6-035d-4a41-a736-235cb8e9367a",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>L'adresse IP de Mélanie est donc connue et utilisée par son moteur de recherche.</p><p>Dans la vidéo suivante, vous allez découvrir ce qu'est précisément une adresse IP publique et à quoi elle sert.&nbsp;<span aria-hidden=\"true\">📺</span></p>"
               }
             }
@@ -167,6 +170,7 @@
               "element": {
                 "id": "783dccd4-38ee-41a0-b10d-203a3cdb748f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de cette vidéo, une question vous sera posée sur le rôle de l'adresse IP publique.</p>"
               }
             },
@@ -194,6 +198,7 @@
               "element": {
                 "id": "566ec1c9-7b75-493c-be01-6deb61a42296",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous en savez désormais plus sur les adresses IP publiques.&nbsp;<span aria-hidden=\"true\">👩‍💻</span><span aria-hidden=\"true\">👨🏿‍💻</span></p><p>Voyons si vous avez compris l'essentiel avec une question. <span aria-hidden=\"true\">&nbsp;🎯</span></p>"
               }
             }
@@ -252,6 +257,7 @@
               "element": {
                 "id": "5775745c-a8f4-44d7-aea2-b14575720fd5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comme Mélanie, quand vous êtes sur internet, votre adresse IP publique est partagée et utilisée. Mais savez-vous quelles informations cette adresse donne sur vous ?&nbsp;<span aria-hidden=\"true\">👁️‍🗨️</span></p>"
               }
             }
@@ -267,6 +273,7 @@
               "element": {
                 "id": "3f4354a6-3243-4b5a-a459-58b3f3d1ecb8",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour chaque affirmation, répondez par vrai ou par faux.<br><i>Remarque : certaines personnes utilisent des VPN pour modifier leur adresse IP.<br>Dans les exemples suivants, aucun VPN n'est utilisé.</i></p>"
               }
             },
@@ -404,6 +411,7 @@
               "element": {
                 "id": "27fc867a-7258-4f85-b8cc-bdd1ab2d26a5",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4><span aria-hidden=\"true\">📌</span> Résumons avant de passer à la suite</h4><ul><li>Votre adresse IP publique est celle de votre box internet.</li><li>Les personnes connectées à la même box internet ont la même adresse IP publique.</li><li>L’adresse IP publique donne une information sur la zone géographique de connexion : le pays, voire la ville.</li></ul>"
               }
             }
@@ -419,6 +427,7 @@
               "element": {
                 "id": "7538af4c-c729-49e9-8bc5-a16ad52bf493",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Sur internet, tout le monde partage son adresse IP publique et donc sa zone géographique. Vous êtes localisé et vous pouvez localiser les autres en retour.</p><p>Ça peut donner envie d'essayer. À vous de jouer !&nbsp;<span aria-hidden=\"true\">🌍</span></p>"
               }
             }
@@ -469,6 +478,7 @@
               "element": {
                 "id": "0856af53-1060-478f-8416-ddbc5ed3940c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice n°1&nbsp;:</summary><p>Vous pouvez faire une recherche en ligne : des sites internet existent pour cela.</p></details><details><summary>Indice n°2&nbsp;:</summary><p>Pour votre recherche, utilisez les mots-clés \"localisation\" et \"adresse IP\".</p></details>"
               }
             }
@@ -484,6 +494,7 @@
               "element": {
                 "id": "f34a216f-54fb-4cde-b634-71df19991211",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous l’avez sûrement remarqué, nous avons parlé jusqu'ici uniquement d’adresses IP publiques.<br>Il existe un autre type d’adresse IP&nbsp;: les adresses IP privées, aussi appelées IP locales.</p><p>Découvez leurs différences en image ! <span aria-hidden=\"true\">🔍</span></p>"
               }
             }
@@ -499,6 +510,7 @@
               "element": {
                 "id": "9814961b-3134-468d-a918-9b98a1775395",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Analysez le schéma ci-dessous qui présente les deux types d'adresses IP.<br>Par la suite, vous devrez trouver quel est le type d'adresse IP (privée ou publique) dans des situations concrètes.</p>"
               }
             },
@@ -517,6 +529,7 @@
               "element": {
                 "id": "1b524302-7175-4923-8810-835201d3d443",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🏠</span> Sur le <strong>réseau local</strong>, les appareils (ordinateur, imprimante, etc.) utilisent des adresses IP <strong>privées</strong> (ou locales) pour communiquer.</p><p><span aria-hidden=\"true\">🌐</span> Sur <strong>internet</strong>, ce sont des adresses IP <strong>publiques</strong> qui permettent aux sites et aux box internet de communiquer des informations.</p><p><span aria-hidden=\"true\">🛜</span> Une box internet a <strong>deux adresses IP</strong> : une privée et une publique.</p>"
               }
             }
@@ -536,6 +549,7 @@
                     {
                       "id": "9bc62c21-dfd4-40a8-9497-680a7e1c13d9",
                       "type": "text",
+                      "tag": " ",
                       "content": "<h4><span aria-hidden=\"true\">🕹️</span> À vous de jouer !</h4><p>À l'aide du schéma ci-dessus, trouvez pour chaque question si elle correspond à une IP privée ou à une IP publique.</p>"
                     }
                   ]
@@ -641,6 +655,7 @@
               "element": {
                 "id": "6e87277b-ea7d-4f71-82cb-c490364a1a75",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Pour finir ce module, vous allez relever un défi.<br>En ce moment-même, nous connaissons et utilisons votre adresse IP publique pour vous envoyez les contenus de ce module.<br>Mais connaissez-vous votre propre IP publique ❓</p>"
               }
             }
@@ -684,6 +699,7 @@
               "element": {
                 "id": "dc49fa68-dcdf-4a3e-ac3a-475d027fc789",
                 "type": "text",
+                "tag": " ",
                 "content": "<p><span aria-hidden=\"true\">🗝️</span> Si vous avez besoin d'aide, vous pouvez cliquer sur les indices ci-dessous&nbsp;:</p><details><summary>Indice n°1&nbsp;:</summary><p>Vous pouvez faire une recherche en ligne : des sites internet existent pour cela.</p></details><details><summary>Indice n°2&nbsp;:</summary><p>Pour votre recherche, utilisez les mots-clés \"trouver\" et \"mon adresse IP\".</p></details>"
               }
             }

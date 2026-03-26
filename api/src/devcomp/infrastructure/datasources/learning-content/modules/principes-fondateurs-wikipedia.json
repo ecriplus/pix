@@ -32,6 +32,7 @@
               "element": {
                 "id": "383aad97-ff24-4cbb-844e-1d2346fe75b6",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Vous avez probablement déjà utilisé Wikipédia. Mais connaissez-vous la signification de son logo ?&nbsp;🌎&nbsp;🧩</p>"
               }
             }
@@ -47,6 +48,7 @@
               "element": {
                 "id": "30b9ada4-a87a-4dfb-baa2-d97925b0bba5",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Depuis sa création en 2001, Wikipédia a fait évoluer son logo à trois reprises.<br> Aujourd'hui, le logo représente un globe composé de pièces de puzzle avec différents symboles.</p>"
               }
             },
@@ -110,6 +112,7 @@
               "element": {
                 "id": "80813968-7b81-4859-8ed0-71c158c80e63",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Wikipédia repose sur 5 principes fondateurs qui font son identité et sa particularité en tant que site internet.</p>"
               }
             }
@@ -125,6 +128,7 @@
               "element": {
                 "id": "afc8b60f-c2c1-405b-a6a4-a0e08e23ccc3",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>1 - Wikipédia est une encyclopédie en ligne.&nbsp;<span aria-hidden=\"true\">📖</span></h4><p>Des connaissances du monde entier y sont rassemblées, classées et exposées méthodiquement. Wikipédia n'est donc ni un journal ni un réseau social.</p>"
               }
             },
@@ -133,6 +137,7 @@
               "element": {
                 "id": "3bbf40bb-acd0-466f-a1ce-5c4bf9ccee8e",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -141,6 +146,7 @@
               "element": {
                 "id": "81710de7-1311-4980-81f5-87944e56de28",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>2 - Wikipédia propose des contenus les plus neutres possible.&nbsp;<span aria-hidden=\"true\">⚖️</span></h4><p>Une opinion ou un point de vue unique n’ont pas leur place. Si besoin, les divers points de vue sont présentés, sans jugement de valeur.</p>"
               }
             },
@@ -149,6 +155,7 @@
               "element": {
                 "id": "20ed0b8b-a858-440e-a587-4856f96ef5be",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -157,6 +164,7 @@
               "element": {
                 "id": "78385472-07b0-4229-bfb8-a10636690300",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>3 - Wikipédia est publié sous licence libre.&nbsp;<span aria-hidden=\"true\">🪁</span></h4><p>En résumé, chacun peut créer, copier, modifier et partager le contenu qui se trouve sur Wikipédia. Certaines conditions doivent tout de même être respectées.</p>"
               }
             },
@@ -165,6 +173,7 @@
               "element": {
                 "id": "929661f0-ca4c-40fb-9df2-7832e97192e3",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -173,6 +182,7 @@
               "element": {
                 "id": "df11aa2c-1ebf-4a60-99a3-533dfc06756d",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>4 - Wikipédia est un projet collaboratif.&nbsp;<span aria-hidden=\"true\">🙋🏽‍♂️</span><span aria-hidden=\"true\">🙋🏻‍♀️</span><span aria-hidden=\"true\">🙋🏿‍♀️</span><span aria-hidden=\"true\">🙋‍♂️</span></h4><p>C’est probablement sa caractéristique la plus remarquable. Tout le monde peut améliorer les contenus de Wikipédia&#8239;! Des règles claires de savoir-vivre sont à respecter.</p>"
               }
             },
@@ -181,6 +191,7 @@
               "element": {
                 "id": "1edb38ba-7542-4198-a5de-c260ef6b95ea",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -189,6 +200,7 @@
               "element": {
                 "id": "ca62ac2d-950d-4c00-b14d-2ac9e7d509f2",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>5 - Wikipédia n’a pas d’autres principes fixes que ceux présentés ci-dessus.&nbsp;<span aria-hidden=\"true\">📜</span></h4><p>Il est toutefois possible de proposer et de créer des règles pour améliorer continuellement Wikipédia, en accord avec ses principes.</p>"
               }
             }
@@ -204,6 +216,7 @@
               "element": {
                 "id": "d3825882-f259-454f-ace8-8b983a25357f",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>On l'a vu, Wikipédia a une philosophie unique. Répondez à cette question pour vérifier que vous avez compris l'essentiel.</p>"
               }
             }
@@ -268,6 +281,7 @@
               "element": {
                 "id": "d2327666-368c-4735-94e0-ba7b7b8325a7",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Des personnes du monde entier utilisent Wikipédia et y contribuent. De cette manière, les articles sont fréquemment disponibles dans plusieurs langues.<br>Un petit jeu&nbsp;: saurez-vous dans combien de langues&#8239;?</p>"
               }
             }
@@ -334,6 +348,7 @@
               "element": {
                 "id": "06c2a27a-ce5c-4242-b053-3b5dd1ab891c",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Comme tout site internet, Wikipédia a besoin d’argent pour fonctionner.&nbsp;💰</p>"
               }
             }
@@ -392,6 +407,7 @@
               "element": {
                 "id": "87823339-0045-4db4-88a5-ec1154f73330",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans la vidéo suivante, vous allez découvrir différentes méthodes pour trouver des informations sur Wikipédia et évaluer leur qualité.</p>"
               }
             }
@@ -407,6 +423,7 @@
               "element": {
                 "id": "10e352a0-0c46-4348-b392-dedc22a32960",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>À la suite de cette vidéo, vous passerez à la pratique. Vous devrez naviguer dans le sommaire d'un article Wikipédia et en identifier la qualité.</p>"
               }
             },
@@ -433,6 +450,7 @@
               "element": {
                 "id": "01eb319e-8219-425a-b66f-00f8f73a4842",
                 "type": "text",
+                "tag": " ",
                 "content": "<h4>Répondez aux questions ci-dessous en naviguant dans  <a href=\"https://fr.wikipedia.org/wiki/Inca_(Majorque)\" target=\"blank\">l'article Wikipédia de la commune d'Inca.</a></h4>"
               }
             },
@@ -441,6 +459,7 @@
               "element": {
                 "id": "cfcd33f1-3544-491d-95b4-0d028084ff32",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -484,6 +503,7 @@
               "element": {
                 "id": "c6526e70-ac27-47d3-9794-3e1e2d243334",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },
@@ -527,6 +547,7 @@
               "element": {
                 "id": "7c1830cb-1f48-4050-98c1-6ae34d14ee51",
                 "type": "text",
+                "tag": " ",
                 "content": "<hr>"
               }
             },

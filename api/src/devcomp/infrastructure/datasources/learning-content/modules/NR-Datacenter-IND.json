@@ -32,6 +32,7 @@
               "element": {
                 "id": "3d7daa4f-885d-48eb-b20f-2c6be5b9c46e",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>En 2021, un centre de données à Strasbourg a pris feu en pleine nuit. </p>"
               }
             },
@@ -99,6 +100,7 @@
               "element": {
                 "id": "7c644dba-eb4a-479e-b826-bf63696092ee",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Bien qu’exceptionnel, cet incendie a rappelé à quel point nos usages numériques reposent sur des <strong>infrastructures physiques</strong>, qu’il est nécessaire de contrôler et de surveiller&nbsp;: les <strong>centres de données</strong>. Voyons concrètement à quoi ressemble un centre de données et comment tout est mis en place pour éviter ce type d’incident.</p>"
               }
             }
@@ -120,6 +122,7 @@
               "element": {
                 "id": "d24a7253-3d4d-4190-a093-57f82dfb4bbf",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Anna est directrice d’un centre de données et assure une visite exceptionnelle de ce lieu hautement sécurisé. </p>"
               }
             },
@@ -132,6 +135,7 @@
                     {
                       "id": "1f700f7f-c2ed-44ba-9266-c321c57bdcd0",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Pour rentrer dans le centre de données, on doit traverser des sas de sécurité, des portes blindées, des systèmes d’ouverture par empreinte digitale...&nbsp;</p><br>"
                     },
                     {
@@ -187,6 +191,7 @@
                     {
                       "id": "ec6c8d21-e7f2-4af0-a817-5aeab73ca6e7",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>On arrive dans la salle des serveurs.&nbsp;Ces armoires (également appelées «&nbsp;baies&nbsp;» ou «&nbsp;rack&nbsp;») contiennent les serveurs.</p>"
                     },
                     {
@@ -242,6 +247,7 @@
                     {
                       "id": "522aaa2f-023b-49c2-8ead-ffd9040c03c0",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Anna montre le système de refroidissement&nbsp;: une partie des installations de climatisation sont visibles à l’extérieur du bâtiment.</p>"
                     },
                     {
@@ -297,6 +303,7 @@
                     {
                       "id": "7b6d1a06-ab74-4839-8496-eca9e66a1b98",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Enfin, la visite se termine par la présentation du groupe électrogène.</p>"
                     },
                     {
@@ -365,6 +372,7 @@
                     {
                       "id": "aa4ceb37-21c7-42be-a322-09262f76ab48",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>Vous l’aurez compris, tout est mis en place dans un centre de données pour que les serveurs tournent 24 heures sur 24, 7 jours sur 7.</p>"
                     }
                   ]
@@ -374,6 +382,7 @@
                     {
                       "id": "8f6df0cc-e134-405b-96ea-ae13a3599b1a",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Et si, malgré toutes ces précautions, il y a une interruption de service ?</strong>&nbsp; </p><p>C’est peu probable. Pour garantir une disponibilité totale, le système est <strong>surdimensionné</strong>, c’est-à-dire qu’il est volontairement plus puissant que nécessaire. Cela permet d’anticiper les dysfonctionnements, les pannes ou les fortes demandes, appelées pics de charge.</p>"
                     }
                   ]
@@ -383,6 +392,7 @@
                     {
                       "id": "dfea77ef-d7c9-4b1d-a69d-320686efdfef",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Malin, mais très consommateur d’énergie, non ?&nbsp;</strong> </p><p>Exactement. Surdimensionner le système signifie plus de matériel et donc plus d’énergie. ⚡<br><br></p>"
                     }
                   ]
@@ -401,6 +411,7 @@
               "element": {
                 "id": "729553c0-42a0-4a65-8453-878882b83f85",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Dans un centre de données, un élément est particulièrement gourmand en ressources&nbsp;: le système de refroidissement. Voyons pourquoi.<br></p>"
               }
             }
@@ -540,6 +551,7 @@
               "element": {
                 "id": "edbc9c1f-616e-4702-82c2-b282c887d5f0",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Nous l’avons vu, les systèmes de refroidissement consomment beaucoup d’électricité et beaucoup d’eau.&nbsp;<br><br></p><p><strong>De l’eau douce ?&nbsp;🚰</strong><br>Tout à fait, à l’échelle mondiale, ces milliards de litres d’eau prélevés ne sont alors plus disponibles pour les <strong>populations locales</strong> ou pour l’agriculture. Et comme certains centres de données sont construits dans des endroits du monde où l’eau est déjà rare, cela aggrave encore plus la situation. </p>"
               }
             }
@@ -555,6 +567,7 @@
               "element": {
                 "id": "5ce93311-9049-4136-b799-194134a0fb36",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Les centres de données ont donc un impact environnemental important. Mais comme nos activités deviennent de plus en plus numériques, le nombre de centres de données ne cesse d’augmenter.</p>"
               }
             }
@@ -662,6 +675,7 @@
                     {
                       "id": "c85af1e9-6a85-4541-9e3e-858ce12466c8",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p>En 2025, on comptait plus de 12 000 centres de données dans le monde, ce qui représente 25% de la consommation d’énergie du numérique dans le monde. ⚡</p>"
                     }
                   ]
@@ -671,6 +685,7 @@
                     {
                       "id": "069b9b8e-43d0-43d3-bd38-18c57e2f0fc2",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Et cette consommation d’énergie augmente ?&nbsp;</strong><br>Tout à fait ! L’usage grand public de l’IA générative est en train de faire <strong>exploser les besoins en énergie</strong> consommée par les centres de données. Selon l’Agence internationale de l’énergie,&nbsp;en 2030, ces besoins auront <strong>doublé </strong>par rapport à 2025. <br></p>"
                     }
                   ]
@@ -680,6 +695,7 @@
                     {
                       "id": "bdc0cdd2-c802-4a07-a3c4-fb08673c1ad4",
                       "type": "text",
+                      "tag": " ",
                       "content": "<p><strong>Concrètement, face à cette accélération, des solutions sont possibles ?&nbsp;</strong> <br>Il est possible de limiter les impacts. En tant qu’utilisateur, il est important de garder en mémoire que certaines technologies sont bien plus gourmandes que d’autres, notamment l’intelligence artificielle générative en tête. Avoir un <strong>usage raisonné</strong> de ces technologies est un enjeu majeur. </p>"
                     }
                   ]
@@ -704,6 +720,7 @@
               "element": {
                 "id": "8c366312-52a5-4a3e-9db2-2174cb0745a5",
                 "type": "text",
+                "tag": " ",
                 "content": "<ul><li>Les centres de données sont des <strong>infrastructures</strong> complexes&nbsp;: équipements informatiques, systèmes de refroidissement, sécurisation, etc.&nbsp;🛡️<br><br></li><li>Afin d’assurer un service continu aux internautes, ils sont <strong>surdimensionnés</strong> pour anticiper certains dysfonctionnements ou pics de charge.&nbsp;⬆️<br><br></li><li>Le <strong>refroidissement</strong> des centres de données consomme de l’électricité et des milliards de litres d’eau à l’échelle mondiale.&nbsp;❄️<br><br></li><li>Les évolutions technologiques successives (streaming, stockage cloud, cryptomonnaie, objets connectés, IA générative) amènent à des <strong>usages toujours plus consommateurs d’énergie</strong>.&nbsp;⚡⚡</li></ul>"
               }
             }
@@ -725,6 +742,7 @@
               "element": {
                 "id": "51611126-0e12-40b1-a5ef-66db705a3b97",
                 "type": "text",
+                "tag": " ",
                 "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
