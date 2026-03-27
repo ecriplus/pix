@@ -1539,7 +1539,6 @@
           "unable-to-attach-already-attached-child-organization": "L'organisation fille {childOrganizationId} appartient déjà à un réseau.",
           "unable-to-attach-child-organization-to-another-child-organization": "Impossible d'attacher l'organisation fille à une autre organisation fille.",
           "unable-to-attach-child-organization-to-itself": "Impossible d'attacher l'organisation {childOrganizationId} à elle-même",
-          "unable-to-attach-parent-organization-as-child-organization": "Impossible d'attacher l'organisation mère {childOrganizationId} en tant qu'organisation fille.",
           "unable-to-detach-child-organization": "Une erreur est survenue lors du détachement de l'organisation fille."
         },
         "success": {

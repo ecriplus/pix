@@ -42,12 +42,6 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
             { childOrganizationId },
           );
           break;
-        case 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION':
-          message = this.intl.t(
-            'pages.organization-children.notifications.error.unable-to-attach-parent-organization-as-child-organization',
-            { childOrganizationId },
-          );
-          break;
         default:
           message = this.intl.t('common.notifications.generic-error');
       }

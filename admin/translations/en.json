@@ -1536,7 +1536,6 @@
           "unable-to-attach-already-attached-child-organization": "Child organization {childOrganizationId} already belonging to a network",
           "unable-to-attach-child-organization-to-another-child-organization": "Unable to attach the child organization to another child organization",
           "unable-to-attach-child-organization-to-itself": "Unable to attach organization {childOrganizationId} to itself",
-          "unable-to-attach-parent-organization-as-child-organization": "Unable to attach the parent organization {childOrganizationId} as child organization",
           "unable-to-detach-child-organization": "An error occurred while detaching the child organization."
         },
         "success": {
