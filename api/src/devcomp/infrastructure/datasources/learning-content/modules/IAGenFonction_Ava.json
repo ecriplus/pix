@@ -75,7 +75,7 @@
                 "id": "45c54a3a-f5d5-48b4-b408-2efc1370dce4",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’appel à des outils, c'est-à-dire l'utilisation de logiciels externes, pour réaliser une tâche spécifique.</p><p>Regardons ça de plus près.</p>"
+                "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’<strong>appel à des outils</strong>, c'est-à-dire l'utilisation de logiciels externes pour réaliser des tâches spécifiques.</p><p>Regardons ça de plus près.</p>"
               }
             }
           ]
@@ -172,13 +172,17 @@
                       "id": "7df2eef2-779e-4dca-a954-c4ca258994da",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire des images ou un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅…</li></ul>"
-                    },
+                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire  un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅</li><li>faire une réservation  ou une commande sur internet …&nbsp;🛒</li></ul>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
                     {
-                      "id": "c097beb6-b3cb-40ea-ac4a-028107c6e541",
-                      "type": "expand",
-                      "title": "💡Bon à savoir",
-                      "content": "<p>En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être connectés à des systèmes du monde physique. 🔌</p><br><br><p> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾</p>"
+                      "id": "564e660c-e65c-43d0-a77c-fffdd39106ec",
+                      "type": "text",
+                      "tag": "did-you-know",
+                      "content": "<p>En plus de réaliser de nouvelles tâches dans le monde numérique, dans certains cas, les logiciels d’IA conversationnelle peuvent être connectés à des systèmes du monde physique. 🔌 <br> Ainsi, le logiciel d’IA peut devenir une interface pour allumer une lumière, mettre en route le chauffage, actionner un bras robotisé, etc. 🦾</p>"
                     }
                   ]
                 }
@@ -572,7 +576,9 @@
                           "display": "inline",
                           "placeholder": "- Sélectionner -",
                           "ariaLabel": "- Sélectionner -",
-                          "tolerances": [""],
+                          "tolerances": [
+                            ""
+                          ],
                           "options": [
                             {
                               "id": "1",
@@ -587,7 +593,9 @@
                               "content": "\"ce week-end\","
                             }
                           ],
-                          "solutions": ["1"]
+                          "solutions": [
+                            "1"
+                          ]
                         },
                         {
                           "type": "text",
@@ -614,7 +622,9 @@
                               "content": "\"ce week-end\","
                             }
                           ],
-                          "solutions": ["2"]
+                          "solutions": [
+                            "2"
+                          ]
                         },
                         {
                           "type": "text",
@@ -641,7 +651,9 @@
                               "content": "\"ce week-end\""
                             }
                           ],
-                          "solutions": ["3"]
+                          "solutions": [
+                            "3"
+                          ]
                         },
                         {
                           "type": "text",
@@ -891,7 +903,9 @@
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
-                    "tolerances": [""],
+                    "tolerances": [
+                      ""
+                    ],
                     "options": [
                       {
                         "id": "1",
@@ -902,7 +916,9 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "text",
@@ -925,7 +941,9 @@
                         "content": "Non"
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1031,41 +1049,6 @@
                 "proposals": [
                   {
                     "type": "select",
-                    "input": "classementetape1",
-                    "display": "inline",
-                    "placeholder": "- Sélectionnez -",
-                    "ariaLabel": "- Sélectionnez -",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "3",
-                        "content": "Une requête est envoyée à un outil tiers."
-                      },
-                      {
-                        "id": "5",
-                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur;"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
-                      },
-                      {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
-                        "id": "6",
-                        "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
-                      },
-                      {
-                        "id": "4",
-                        "content": "L’outil tiers envoie la réponse à la requête."
-                      }
-                    ],
-                    "solutions": ["1"]
-                  },
-                  {
-                    "type": "select",
                     "input": "classementetape2",
                     "display": "inline",
                     "placeholder": "- Sélectionnez -",
@@ -1085,10 +1068,6 @@
                         "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
                         "id": "6",
                         "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
                       },
@@ -1097,7 +1076,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["2"]
+                    "solutions": [
+                      "2"
+                    ]
                   },
                   {
                     "type": "select",
@@ -1120,10 +1101,6 @@
                         "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
                         "id": "6",
                         "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
                       },
@@ -1132,7 +1109,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["3"]
+                    "solutions": [
+                      "3"
+                    ]
                   },
                   {
                     "type": "select",
@@ -1155,10 +1134,6 @@
                         "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
                         "id": "6",
                         "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
                       },
@@ -1167,7 +1142,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["4"]
+                    "solutions": [
+                      "4"
+                    ]
                   },
                   {
                     "type": "select",
@@ -1190,10 +1167,6 @@
                         "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
                         "id": "6",
                         "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
                       },
@@ -1202,7 +1175,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["5"]
+                    "solutions": [
+                      "5"
+                    ]
                   },
                   {
                     "type": "select",
@@ -1225,10 +1200,6 @@
                         "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
                       },
                       {
-                        "id": "1",
-                        "content": "L’utilisateur envoie un prompt."
-                      },
-                      {
                         "id": "6",
                         "content": "La réponse du logiciel d’IA est générée et affichée à l’utilisateur."
                       },
@@ -1237,7 +1208,9 @@
                         "content": "L’outil tiers envoie la réponse à la requête."
                       }
                     ],
-                    "solutions": ["6"]
+                    "solutions": [
+                      "6"
+                    ]
                   }
                 ],
                 "feedbacks": {
@@ -1250,59 +1223,6 @@
                     "diagnosis": "<p>Vous pouvez remonter voir le schéma si vous avez un doute.&nbsp;☝️</p>"
                   }
                 }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "719c6a45-d2f9-45e6-8390-bbb7c2af69cd",
-      "type": "go-further",
-      "grains": [
-        {
-          "id": "06dff54c-699a-4e5f-8dbf-430ef11ffe42",
-          "type": "challenge",
-          "title": "Appeler plusieurs outils dans un prompt",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "9ff41ea1-9020-4bdc-a273-eb43e1f42ffe",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Steven utilise un logiciel d’IA conversationnelle.&nbsp;</p><p>Il a donné accès à son agenda.</p><p>Utilisez le logiciel d’IA conversationnelle de Steven ci-dessous pour écrire un <strong>prompt&nbsp;</strong>nécessitant une recherche sur <strong>internet </strong>et un appel à l’<strong>agenda</strong>.&nbsp;</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "fcb21011-e302-45b3-83ba-ffe819f8f4c4",
-                "type": "embed",
-                "isCompletionRequired": false,
-                "title": "ChatPix configuration appel 2 outils",
-                "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmljomhkk00024z0167vunpga",
-                "instruction": "<p>À&nbsp;vous de jouer !</p>",
-                "solution": "",
-                "height": 500
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "2dee621b-251b-4ef0-8f5f-ee03fc833c14",
-                "type": "expand",
-                "title": "🔑 Indice",
-                "content": "<p>Avez-vous vérifié que votre prompt faisait bien appel à l’<strong>agenda</strong> et la <strong>recherche sur internet</strong> dans le<strong> même prompt&nbsp;</strong>?</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c136506a-5fa1-4903-9476-d8a1700e964b",
-                "type": "expand",
-                "title": "🙈 Solution",
-                "content": "<p>Si votre prompt nécessite l’appel à la recherche <strong>internet </strong>et l’accès à l’<strong>agenda</strong>, votre réponse devrait être validée.</p><br><br><p> Voici quelques exemples&nbsp;:&nbsp;</p><br><ul><li> Recherche les dates de vacances scolaires pour la ville de Montpellier (zone C) de cette année et ajoute-les à mon agenda. 🏖️</li><li>Recherche dans mon agenda quand a lieu l’après-midi prévu avec mes neveux&nbsp;et recherche les évènements gratuits à faire à Bruxelles ce jour-là.&nbsp;🧇</li><li>Recherche les horaires auxquels des matchs de hockey ont lieu et ajoute des créneaux “ne pas déranger” dans mon agenda sur ces créneaux.&nbsp;🏒</li></ul>"
               }
             }
           ]
