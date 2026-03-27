@@ -254,48 +254,48 @@
                     {
                       "id": "658685c7-1758-4608-b5b4-11fcb73d80d6",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Le centre de données est en construction, il n’héberge que quelques serveurs pour l’instant.&nbsp;",
+                      "functionalInstruction": "",
                       "tagName": "clickable-image",
                       "props": {
                         "image": {
-                          "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-15-janv-2026-15_39_34.png",
+                          "src": "https://assets.pix.org/modules/NR_Datacenter_NOV/nr_datacenter_nov_img_cliq1_v2.png",
                           "alt": "a",
-                          "width": 500,
+                          "width": 625,
                           "height": 500
                         },
                         "areas": [
                           {
                             "coords": {
-                              "x1": 790,
-                              "y1": 30,
-                              "x2": 415,
-                              "y2": 165
+                              "x1": 360,
+                              "y1": 43,
+                              "x2": 96,
+                              "y2": 97
                             },
                             "spot": {
-                              "x": 388,
-                              "y": 98
+                              "x": 308,
+                              "y": 92
                             },
                             "info": "Même en petit nombre, les serveurs chauffent quand ils travaillent.",
                             "tooltipPosition": "bottom"
                           },
                           {
                             "coords": {
-                              "x1": 880,
-                              "y1": 25,
-                              "x2": 495,
-                              "y2": 170
+                              "x1": 476,
+                              "y1": 43,
+                              "x2": 98,
+                              "y2": 97
                             },
                             "spot": {
-                              "x": 458,
-                              "y": 98
+                              "x": 400,
+                              "y": 92
                             },
                             "info": "Ils consomment bien sûr de l’électricité pour fonctionner…",
                             "tooltipPosition": "bottom"
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 },
@@ -304,48 +304,48 @@
                     {
                       "id": "819d2a60-1e7c-414e-9bf7-76f08fe477cf",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Une fois terminé, le centre de données abrite un très grand nombre de serveurs.&nbsp;",
+                      "functionalInstruction": "",
                       "tagName": "clickable-image",
                       "props": {
                         "image": {
-                          "src": "https://assets.pix.org/draft/modules/nrdatacenternov/chat-gpt-image-15-janv-2026-15_48_06.png",
+                          "src": "https://assets.pix.org/modules/NR_Datacenter_NOV/nr_datacenter_nov_img_cliq2_v2.png",
                           "alt": "aa",
-                          "width": 500,
+                          "width": 625,
                           "height": 500
                         },
                         "areas": [
                           {
                             "coords": {
-                              "x1": 790,
-                              "y1": 20,
-                              "x2": 420,
-                              "y2": 190
+                              "x1": 360,
+                              "y1": 43,
+                              "x2": 96,
+                              "y2": 97
                             },
                             "spot": {
-                              "x": 385,
-                              "y": 105
+                              "x": 308,
+                              "y": 92
                             },
                             "info": "Quand il y a beaucoup de serveurs, la chaleur s’accumule très vite : ils tournent en continu et “chauffent” la pièce. Sans refroidissement permanent, le matériel risque de s’abîmer.",
                             "tooltipPosition": "bottom"
                           },
                           {
                             "coords": {
-                              "x1": 880,
-                              "y1": 15,
-                              "x2": 500,
-                              "y2": 195
+                              "x1": 476,
+                              "y1": 43,
+                              "x2": 98,
+                              "y2": 97
                             },
                             "spot": {
-                              "x": 460,
-                              "y": 105
+                              "x": 400,
+                              "y": 92
                             },
                             "info": "Plus il y a de serveurs, plus il faut d’électricité pour les faire fonctionner… et plus il en faut aussi pour les refroidir. Résultat : la “facture énergie” peut grimper très fortement.",
                             "tooltipPosition": "bottom"
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 }
@@ -850,8 +850,8 @@
                     "content": "<span>La demande d’information part&nbsp;</span>"
                   },
                   {
-                    "input": "a",
                     "type": "select",
+                    "input": "a",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "départ de la demande",
@@ -879,8 +879,8 @@
                     "content": "<span>pour aller dans&nbsp;</span>"
                   },
                   {
-                    "input": "b",
                     "type": "select",
+                    "input": "b",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "lieu de traitement",
@@ -908,8 +908,8 @@
                     "content": "<span>où se trouvent des&nbsp;</span>"
                   },
                   {
-                    "input": "c",
                     "type": "select",
+                    "input": "c",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "éléments de traitement",
@@ -937,8 +937,8 @@
                     "content": "<span>. Une fois la demande traitée, la réponse revient vers&nbsp;</span>"
                   },
                   {
-                    "input": "d",
                     "type": "select",
+                    "input": "d",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "retour de la réponse",
