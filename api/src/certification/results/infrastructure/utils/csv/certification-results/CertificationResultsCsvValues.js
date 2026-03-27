@@ -11,6 +11,7 @@ class CertificationResultsCsvValues {
     CERTIFICATION_STARTED: `${I18N_VALUES_PREFIX}.CERTIFICATION_STARTED`,
     CERTIFICATION_VALIDATED: `${I18N_VALUES_PREFIX}.CERTIFICATION_VALIDATED`,
     COMPLEMENTARY_CERTIFICATION_CANCELLED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_CANCELLED`,
+    COMPLEMENTARY_CERTIFICATION_IN_ERROR: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_IN_ERROR`,
     COMPLEMENTARY_CERTIFICATION_NOT_DONE: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_NOT_DONE`,
     COMPLEMENTARY_CERTIFICATION_REJECTED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_REJECTED`,
     COMPLEMENTARY_CERTIFICATION_VALIDATED: `${I18N_VALUES_PREFIX}.COMPLEMENTARY_CERTIFICATION_VALIDATED`,
@@ -46,20 +47,6 @@ class CertificationResultsCsvValues {
     }
   }
 
-  formatPixScore(certificationResult) {
-    if (certificationResult.isCancelled() || certificationResult.isInError()) {
-      return '-';
-    }
-    if (certificationResult.isRejected()) {
-      return '0';
-    }
-    return certificationResult.pixScore;
-  }
-
-  #isCompetenceFailed(competence) {
-    return competence.level <= 0;
-  }
-
   #getLevelByCompetenceCode({ competencesWithMark }) {
     return competencesWithMark.reduce((result, competence) => {
       const competenceCode = competence.competence_code;
@@ -74,13 +61,16 @@ class CertificationResultsCsvValues {
     const competence = levelByCompetenceCode[competenceIndex];
     const notTestedCompetence = !competence;
 
-    if (notTestedCompetence || certificationResult.isCancelled() || certificationResult.isInError()) {
+    if (
+      notTestedCompetence ||
+      certificationResult.isCancelled() ||
+      certificationResult.isInError() ||
+      certificationResult.isRejected()
+    ) {
       return '-';
     }
-    if (certificationResult.isRejected() || this.#isCompetenceFailed(competence)) {
-      return 0;
-    }
-    return competence.level;
+
+    return Math.max(competence.level, 0);
   }
 
   getCommentForOrganization(certificationResult) {
@@ -90,6 +80,9 @@ class CertificationResultsCsvValues {
   getComplementaryCertificationStatus({ certificationResult, sessionComplementaryCertificationsLabel }) {
     if (certificationResult.isCancelled()) {
       return this.getTranslation(CertificationResultsCsvValues.VALUES.COMPLEMENTARY_CERTIFICATION_CANCELLED);
+    }
+    if (certificationResult.isInError()) {
+      return this.getTranslation(CertificationResultsCsvValues.VALUES.COMPLEMENTARY_CERTIFICATION_IN_ERROR);
     }
     const complementaryCertificationCourseResult = certificationResult.complementaryCertificationCourseResults.find(
       ({ label }) => label === sessionComplementaryCertificationsLabel,

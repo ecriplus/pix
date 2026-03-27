@@ -1,13 +1,14 @@
 import { CertificationResultsCsvHeaders } from './CertificationResultsCsvHeaders.js';
 import { CertificationResultsCsvValues } from './CertificationResultsCsvValues.js';
 
-class SessionCertificationResultsCsvBuilder {
+export class SessionCertificationResultsCsvBuilder {
   #session = {};
   #certificationResults = [];
   #csvHeaders;
   #csvValues;
 
   constructor({ i18n, session = {}, certificationResults = [] }) {
+    this.translate = i18n.__;
     this.#session = session;
     this.#certificationResults = certificationResults;
     this.#csvHeaders = new CertificationResultsCsvHeaders(i18n);
@@ -28,9 +29,16 @@ class SessionCertificationResultsCsvBuilder {
     const headersGenerator = this.#csvHeaders.generateHeaders();
     headersGenerator.next();
 
-    ['CERTIFICATION_NUMBER', 'FIRSTNAME', 'LASTNAME', 'BIRTHDATE', 'BIRTHPLACE', 'EXTERNAL_ID', 'STATUS'].forEach(
-      (headerKey) => headersGenerator.next({ headerKey }),
-    );
+    [
+      'CERTIFICATION_NUMBER',
+      'FIRSTNAME',
+      'LASTNAME',
+      'BIRTHDATE',
+      'BIRTHPLACE',
+      'EXTERNAL_ID',
+      'TYPE',
+      'STATUS',
+    ].forEach((headerKey) => headersGenerator.next({ headerKey }));
 
     this.#getComplementaryCertificationResultsLabels().forEach((label) =>
       headersGenerator.next({
@@ -39,14 +47,16 @@ class SessionCertificationResultsCsvBuilder {
       }),
     );
 
-    headersGenerator.next({ headerKey: 'PIX_SCORE' });
+    headersGenerator.next({ headerKey: 'RESULT' });
 
-    CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
-      headersGenerator.next({
-        headerKey: 'SKILL_LABEL',
-        headerParams: { skillIndex },
-      }),
-    );
+    if (this.showCompetencesColumns()) {
+      CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
+        headersGenerator.next({
+          headerKey: 'SKILL_LABEL',
+          headerParams: { skillIndex },
+        }),
+      );
+    }
 
     ['JURY_COMMENT_FOR_ORGANIZATION', 'SESSION_ID', 'CERTIFICATION_CENTER', 'CERTIFICATION_DATE'].forEach((headerKey) =>
       headersGenerator.next({ headerKey }),
@@ -68,6 +78,7 @@ class SessionCertificationResultsCsvBuilder {
       rowGenerator.next({ value: this.#csvValues.formatDate(certificationResult.birthdate) });
       rowGenerator.next({ value: certificationResult.birthplace });
       rowGenerator.next({ value: certificationResult.externalId });
+      rowGenerator.next({ value: this.translate(`certification.labels.${certificationResult.framework}`) });
       rowGenerator.next({ value: this.#csvValues.formatStatus(certificationResult) });
 
       complementaryCertificationResultsLabels.forEach((sessionComplementaryCertificationsLabel) =>
@@ -79,16 +90,18 @@ class SessionCertificationResultsCsvBuilder {
         }),
       );
 
-      rowGenerator.next({ value: this.#csvValues.formatPixScore(certificationResult) });
+      rowGenerator.next({ value: this.formatResult(certificationResult) });
 
-      CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
-        rowGenerator.next({
-          value: this.#csvValues.getCompetenceLevel({
-            competenceIndex,
-            certificationResult,
+      if (this.showCompetencesColumns()) {
+        CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
+          rowGenerator.next({
+            value: this.#csvValues.getCompetenceLevel({
+              competenceIndex,
+              certificationResult,
+            }),
           }),
-        }),
-      );
+        );
+      }
 
       rowGenerator.next({ value: this.#csvValues.getCommentForOrganization(certificationResult) });
       rowGenerator.next({ value: this.#session.id });
@@ -99,12 +112,35 @@ class SessionCertificationResultsCsvBuilder {
     });
   }
 
+  showCompetencesColumns() {
+    return this.#certificationResults.some(
+      (certificationResult) => certificationResult.isCoreFramework() || certificationResult.isCleaFramework(),
+    );
+  }
+
   build() {
     return {
       fileHeaders: this.#buildFileHeaders(),
       data: this.#buildData(),
     };
   }
-}
 
-export { SessionCertificationResultsCsvBuilder };
+  formatResult(certificationResult) {
+    if (certificationResult.isCancelled() || certificationResult.isInError()) {
+      return '-';
+    }
+    if (certificationResult.isV3) {
+      const meshKey = certificationResult.isRejected() ? 'BELOW_MINIMUM' : certificationResult.reachedMeshIndex;
+      const pixScore = certificationResult.isRejected() ? 0 : certificationResult.pixScore;
+
+      return this.translate(`certification.meshLevels.${certificationResult.framework}.${meshKey}`, {
+        pixScore,
+      });
+    }
+
+    if (certificationResult.isRejected()) {
+      return 0;
+    }
+    return certificationResult.pixScore;
+  }
+}

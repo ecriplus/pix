@@ -11,7 +11,8 @@ import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
 const testRef = 'PRO_CLEA_0OK-32KO';
-const snapshotPath = `recette-certif/${testRef}.json`;
+const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
+const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
   `${testRef} - User takes a certification test for a PRO certification center, CLEA subscription. 32 wrong answers`,
@@ -24,6 +25,7 @@ test(
          Reasons why a snapshot could be re-generated :
          - Reference Release has changed
          - Next challenge algorithm has changed
+         - CSV results file layout has changed
          - Scoring algorithm or configuration has changed`,
       },
     ],
@@ -135,10 +137,22 @@ test(
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('-');
+      expect(result).toBe('- PIX');
       expect(comment).toBe(
         "Commentaire : Les résultats obtenus ne permettent pas encore la délivrance de la certification Pix. Vous avez besoin de progresser pour être plus à l'aise avec votre environnement numérique et pouvoir valoriser vos compétences.",
       );
+    });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
     });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },

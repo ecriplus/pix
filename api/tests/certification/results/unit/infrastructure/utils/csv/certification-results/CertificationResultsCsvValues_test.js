@@ -12,74 +12,6 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
     translate = i18n.__;
   });
 
-  describe('#formatPixScore', function () {
-    const aCertificationResultData = {
-      id: 123,
-      lastName: 'Oxford',
-      firstName: 'Lili',
-      birthdate: '1990-01-04',
-      birthplace: 'Torreilles',
-      externalId: 'LOLORD',
-      createdAt: new Date('2020-01-01'),
-      pixScore: 55,
-      commentForOrganization: 'RAS',
-      competencesWithMark: [],
-      complementaryCertificationCourseResults: [],
-    };
-
-    context('when complementary certification has been passed', function () {
-      it('should return the pix score', function () {
-        // given
-        const certifResult = domainBuilder.buildCertificationResult.validated(aCertificationResultData);
-
-        // when
-        const result = new CertificationResultsCsvValues(i18n).formatPixScore(certifResult);
-
-        // then
-        expect(result).to.equal(55);
-      });
-    });
-
-    context('when complementary certification is rejected', function () {
-      it('should return "0"', function () {
-        // given
-        const certifResult = domainBuilder.buildCertificationResult.rejected(aCertificationResultData);
-
-        // when
-        const result = new CertificationResultsCsvValues(i18n).formatPixScore(certifResult);
-
-        // then
-        expect(result).to.equal('0');
-      });
-    });
-
-    context('when certification result is in error', function () {
-      it('should return "-"', function () {
-        // given
-        const certifResult = domainBuilder.buildCertificationResult.error(aCertificationResultData);
-
-        // when
-        const result = new CertificationResultsCsvValues(i18n).formatPixScore(certifResult);
-
-        // then
-        expect(result).to.equal('-');
-      });
-    });
-
-    context('when certification result is cancelled', function () {
-      it('should return "-"', function () {
-        // given
-        const certifResult = domainBuilder.buildCertificationResult.cancelled(aCertificationResultData);
-
-        // when
-        const result = new CertificationResultsCsvValues(i18n).formatPixScore(certifResult);
-
-        // then
-        expect(result).to.equal('-');
-      });
-    });
-  });
-
   describe('#formatStatus', function () {
     const aCertificationResultData = {
       id: 123,
@@ -95,7 +27,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       complementaryCertificationCourseResults: [],
     };
 
-    context('when complementary certification is cancelled', function () {
+    context('when certification is cancelled', function () {
       it('should return the cancelled translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.cancelled(aCertificationResultData);
@@ -108,7 +40,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification has been passed', function () {
+    context('when certification has been passed', function () {
       it('should return the validated translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.validated(aCertificationResultData);
@@ -121,7 +53,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification is rejected', function () {
+    context('when certification is rejected', function () {
       it('should return the rejected translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.rejected(aCertificationResultData);
@@ -130,11 +62,11 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
         const result = new CertificationResultsCsvValues(i18n).formatStatus(certifResult);
 
         // then
-        expect(result).to.equal('Rejetée');
+        expect(result).to.equal('Non obtenue');
       });
     });
 
-    context('when complementary certification is in error', function () {
+    context('when certification is in error', function () {
       it('should return the error translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.error(aCertificationResultData);
@@ -147,7 +79,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification is in progress', function () {
+    context('when certification is in progress', function () {
       it('should return the started translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.started(aCertificationResultData);
@@ -206,7 +138,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
     });
 
     context('when complementary certification is rejected', function () {
-      it('should return "0"', function () {
+      it('should return "-"', function () {
         // given
         const certificationResult = domainBuilder.buildCertificationResult.rejected({
           ...aCertificationResultData,
@@ -230,7 +162,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
         });
 
         // then
-        expect(result).to.equal(0);
+        expect(result).to.equal('-');
       });
     });
 
@@ -398,7 +330,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
         });
 
         // then
-        expect(result).to.equal('Rejetée');
+        expect(result).to.equal('Non obtenue');
       });
     });
 

@@ -1,22 +1,12 @@
 import _ from 'lodash';
 
+import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
-/**
- * @readonly
- * @enum {string}
- */
-const status = {
-  REJECTED: 'rejected',
-  VALIDATED: 'validated',
-  ERROR: 'error',
-  CANCELLED: 'cancelled',
-  STARTED: 'started',
-};
-
-class CertificationResult {
+export class CertificationResult {
   /**
    * @param {object} props
    * @param {number} props.id
@@ -27,7 +17,10 @@ class CertificationResult {
    * @param {Date} props.createdAt
    * @param {number} props.sessionId
    * @param {status} props.status
+   * @param {string} props.framework
+   * @param {number} props.reachedMeshIndex
    * @param {number} props.pixScore
+   * @param {number} props.version
    * @param {JuryComment} props.commentForOrganization
    * @param {Array<CompetenceMark>} props.competencesWithMark
    * @param {Array<ComplementaryCertificationCourseResult>} props.complementaryCertificationCourseResults
@@ -42,7 +35,10 @@ class CertificationResult {
     createdAt,
     sessionId,
     status,
+    framework,
+    reachedMeshIndex,
     pixScore,
+    version,
     commentForOrganization,
     competencesWithMark,
     complementaryCertificationCourseResults,
@@ -56,14 +52,17 @@ class CertificationResult {
     this.createdAt = createdAt;
     this.sessionId = sessionId;
     this.status = status;
+    this.framework = framework;
+    this.reachedMeshIndex = reachedMeshIndex;
     this.pixScore = pixScore;
+    this.version = version;
     this.commentForOrganization = commentForOrganization;
     this.competencesWithMark = competencesWithMark;
     this.complementaryCertificationCourseResults = complementaryCertificationCourseResults;
   }
 
   static from({ certificationResultDTO }) {
-    const certificationStatus = certificationResultDTO?.assessmentResultStatus ?? status.STARTED;
+    const certificationStatus = certificationResultDTO?.assessmentResultStatus ?? CertificationResult.status.STARTED;
     const competenceMarkDTOs = certificationResultDTO.competenceMarks.filter(Boolean);
     const competencesWithMark = _.map(
       competenceMarkDTOs,
@@ -97,7 +96,10 @@ class CertificationResult {
       createdAt: certificationResultDTO.createdAt,
       sessionId: certificationResultDTO.sessionId,
       status: certificationStatus,
+      framework: certificationResultDTO.framework,
+      reachedMeshIndex: certificationResultDTO.reachedMeshIndex,
       pixScore: certificationResultDTO.pixScore,
+      version: certificationResultDTO.version,
       commentForOrganization,
       competencesWithMark,
       complementaryCertificationCourseResults,
@@ -105,23 +107,31 @@ class CertificationResult {
   }
 
   isCancelled() {
-    return this.status === status.CANCELLED;
+    return this.status === CertificationResult.status.CANCELLED;
   }
 
   isValidated() {
-    return this.status === status.VALIDATED;
+    return this.status === CertificationResult.status.VALIDATED;
   }
 
   isRejected() {
-    return this.status === status.REJECTED;
+    return this.status === CertificationResult.status.REJECTED;
   }
 
   isInError() {
-    return this.status === status.ERROR;
+    return this.status === CertificationResult.status.ERROR;
   }
 
   isStarted() {
-    return this.status === status.STARTED;
+    return this.status === CertificationResult.status.STARTED;
+  }
+
+  isCleaFramework() {
+    return this.framework === Frameworks.CLEA;
+  }
+
+  isCoreFramework() {
+    return this.framework === Frameworks.CORE;
   }
 
   getUniqComplementaryCertificationCourseResultLabels() {
@@ -134,7 +144,20 @@ class CertificationResult {
       ),
     ];
   }
+
+  get isV3() {
+    return this.version === AlgorithmEngineVersion.V3;
+  }
 }
 
-CertificationResult.status = status;
-export { CertificationResult };
+/**
+ * @readonly
+ * @enum {string}
+ */
+CertificationResult.status = {
+  REJECTED: 'rejected',
+  VALIDATED: 'validated',
+  ERROR: 'error',
+  CANCELLED: 'cancelled',
+  STARTED: 'started',
+};

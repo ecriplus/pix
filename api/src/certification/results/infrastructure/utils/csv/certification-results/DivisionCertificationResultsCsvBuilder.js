@@ -1,12 +1,13 @@
 import { CertificationResultsCsvHeaders } from './CertificationResultsCsvHeaders.js';
 import { CertificationResultsCsvValues } from './CertificationResultsCsvValues.js';
 
-class DivisionCertificationResultsCsvBuilder {
+export class DivisionCertificationResultsCsvBuilder {
   #certificationResults = [];
   #csvHeaders;
   #csvValues;
 
   constructor({ i18n, certificationResults = [] }) {
+    this.translate = i18n.__;
     this.#certificationResults = certificationResults;
     this.#csvHeaders = new CertificationResultsCsvHeaders(i18n);
     this.#csvValues = new CertificationResultsCsvValues(i18n);
@@ -23,8 +24,9 @@ class DivisionCertificationResultsCsvBuilder {
       'BIRTHDATE',
       'BIRTHPLACE',
       'EXTERNAL_ID',
+      'TYPE',
       'STATUS',
-      'PIX_SCORE',
+      'RESULT',
     ].forEach((headerKey) => headersGenerator.next({ headerKey }));
 
     CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
@@ -52,8 +54,9 @@ class DivisionCertificationResultsCsvBuilder {
       rowGenerator.next({ value: this.#csvValues.formatDate(certificationResult.birthdate) });
       rowGenerator.next({ value: certificationResult.birthplace });
       rowGenerator.next({ value: certificationResult.externalId });
+      rowGenerator.next({ value: this.translate(`certification.labels.${certificationResult.framework}`) });
       rowGenerator.next({ value: this.#csvValues.formatStatus(certificationResult) });
-      rowGenerator.next({ value: this.#csvValues.formatPixScore(certificationResult) });
+      rowGenerator.next({ value: this.formatResult(certificationResult) });
       CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
         rowGenerator.next({
           value: this.#csvValues.getCompetenceLevel({
@@ -76,6 +79,14 @@ class DivisionCertificationResultsCsvBuilder {
       data: this.#buildData(),
     };
   }
-}
 
-export { DivisionCertificationResultsCsvBuilder };
+  formatResult(certificationResult) {
+    if (certificationResult.isCancelled() || certificationResult.isInError()) {
+      return '-';
+    }
+    if (certificationResult.isRejected()) {
+      return 0;
+    }
+    return certificationResult.pixScore;
+  }
+}

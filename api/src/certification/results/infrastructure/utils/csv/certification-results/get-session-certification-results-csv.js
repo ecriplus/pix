@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { getCsvContent } from '../../../../../../shared/infrastructure/utils/csv/write-csv-utils.js';
 import { SessionCertificationResultsCsvBuilder } from './SessionCertificationResultsCsvBuilder.js';
 
-const getSessionCertificationResultsCsv = async function ({ session, certificationResults, i18n }) {
+export async function getSessionCertificationResultsCsv({ session, certificationResults, i18n }) {
   const certificationResultsCsvBuilder = new SessionCertificationResultsCsvBuilder({
     session,
     certificationResults,
@@ -18,6 +18,4 @@ const getSessionCertificationResultsCsv = async function ({ session, certificati
   });
 
   return { filename, content };
-};
-
-export { getSessionCertificationResultsCsv };
+}

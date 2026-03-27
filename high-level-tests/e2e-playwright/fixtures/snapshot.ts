@@ -2,6 +2,7 @@ import { glob, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { expect, test as base } from '@playwright/test';
+import { parse } from 'csv-parse/sync';
 import * as fs from 'fs/promises';
 import { PDFParse } from 'pdf-parse';
 import pixelmatch from 'pixelmatch';
@@ -75,6 +76,29 @@ class SnapshotHandler {
         // data différente entre deux runs : code de vérification du certificat et date de délivrance
         expect(diffRatio).toBeLessThan(0.0015); // < 0.15% pixels différents
       }
+    }
+  }
+
+  async compareCsvOrRecord(csvBuffer: Buffer, fileName: string, ignoredColumns: string[] = []) {
+    const resultDir = path.resolve(import.meta.dirname, '../snapshots');
+    const resultFilePath = path.join(resultDir, fileName as string);
+    const parsedCsvData = parse(csvBuffer.toString('utf-8'), {
+      columns: true,
+      delimiter: ';',
+      skip_empty_lines: true,
+      trim: true,
+      bom: true,
+    }) as Record<string, unknown>[];
+    for (const ignoredColumn of ignoredColumns) {
+      for (const row of parsedCsvData) {
+        delete row[ignoredColumn];
+      }
+    }
+    if (this.shouldUpdateSnapshots) {
+      await writeFile(resultFilePath, JSON.stringify(parsedCsvData));
+    } else {
+      const refData = JSON.parse(await readFile(resultFilePath, 'utf8'));
+      expect(parsedCsvData).toEqual(refData);
     }
   }
 

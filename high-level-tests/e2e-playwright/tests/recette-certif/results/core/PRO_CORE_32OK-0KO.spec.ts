@@ -10,8 +10,9 @@ import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
 const testRef = 'PRO_CORE_32OK-0KO';
-const snapshotPath = `recette-certif/${testRef}.json`;
-const certificateBasePath = `recette-certif/${testRef}.certificat`;
+const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
+const certificateBasePath = `recette-certif/${testRef}/${testRef}.certificat`;
+const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
   `${testRef} - User takes a certification test for a PRO certification center, only CORE subscription. 32 right answers`,
@@ -24,6 +25,7 @@ test(
          Reasons why a snapshot could be re-generated :
          - Reference Release has changed
          - Next challenge algorithm has changed
+         - CSV results file layout has changed
          - Scoring algorithm or configuration has changed`,
       },
     ],
@@ -142,6 +144,19 @@ test(
 
       await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
     });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
+    });
+
     await snapshotHandler.expectOrRecord(snapshotPath);
   },
 );

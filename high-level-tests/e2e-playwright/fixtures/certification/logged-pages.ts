@@ -366,5 +366,9 @@ async function setupContext(browser: Browser, credentials: Credentials) {
         content: 'omit' as const,
       }
     : undefined;
-  return browser.newContext({ storageState: authFilePath, recordHar });
+  return browser.newContext({
+    storageState: authFilePath,
+    recordHar,
+    permissions: ['clipboard-read', 'clipboard-write'],
+  });
 }
