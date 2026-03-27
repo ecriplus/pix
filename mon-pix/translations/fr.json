@@ -651,7 +651,7 @@
         "download-certificate": "Télécharger mon certificat"
       },
       "back-link": "Retour à mes certifications",
-      "candidate": "Candidat :",
+      "candidate": "Candidat(e) :",
       "candidate-birth": "Né(e) le {birthdate}",
       "candidate-birth-complete": "Né(e) le {birthdate} à {birthplace}",
       "certification-center": "Centre de certification :",
@@ -689,9 +689,10 @@
       },
       "frameworks": {
         "EDU": {
-          "results-infos": "'<p>'La certification se déroule en deux étapes&nbsp;:'</p><ol><li>'Épreuve Pix&nbsp;: il/elle vient de la passer.'</li><li>'Épreuve orale&nbsp;: organisée en dehors de Pix devant un jury.'</li></ol><p>'A l'issue de cet oral, le niveau de certification définitif du/de la candidat(e) sera attribué (Avancé ou Expert).'</p>'",
+          "results-infos": "'<p>'La certification se déroule en deux étapes&nbsp;:'</p><ol><li>'Volet Pix&nbsp;: il/elle vient de le passer.'</li><li>'Volet de pratique professionnelle&nbsp;: organisé en dehors de Pix devant un jury.'</li></ol><p>'À l'issue de ce 2'<sup>'ème'</sup>' volet, le niveau de la certification Pix+ Edu  du/de la candidat(e) sera attribué (Avancé ou Expert).'</p>'",
+          "results-sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle de la certification Pix+ Édu !",
           "status": "Certificat valide",
-          "sub-title": "Le/la candidat(e) est admissible pour la 2ème étape !"
+          "sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !"
         }
       },
       "global": {

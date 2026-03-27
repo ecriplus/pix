@@ -30,6 +30,7 @@
 @use 'components/certification-banner' as *;
 @use 'components/certification-not-certifiable' as *;
 @use 'components/user-certifications/list-item' as *;
+@use 'components/user-certifications/v3-pix-plus-certificate' as *;
 @use 'components/certifications/candidate-certificate/v3-certificate' as *;
 @use 'components/certifications/candidate-certificate/v2-certificate' as *;
 @use 'components/certifications/certificate-information/candidate-information' as *;
