@@ -534,8 +534,7 @@
                       "id": "8dc882bc-14f6-4fda-8c19-a509abe141b8",
                       "type": "short-video",
                       "title": "survol lien phishing",
-                      "url": "https://assets.pix.org/modules/CYPhishingInd/screencast-url-phishing.mp4",
-                      "transcription": ""
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/screencast-url-phishing.mp4"
                     }
                   ]
                 },
@@ -1010,7 +1009,10 @@
                 "title": "",
                 "instruction": "",
                 "functionalInstruction": "",
-                "tagName": "mdp-classement"
+                "tagName": "mdp-classement",
+                "props": {
+                  "passwords": []
+                }
               }
             },
             {
