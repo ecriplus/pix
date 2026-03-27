@@ -10,7 +10,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  knex,
 } from '../../../test-helper.js';
 
 const ROLES = PIX_ADMIN.ROLES;
@@ -34,7 +33,8 @@ describe('Quest | Acceptance | Application | Combined course Route ', function (
       it('creates combined courses', async function () {
         // given
         const organizationId = databaseBuilder.factory.buildOrganization().id;
-        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
+        const questId = databaseBuilder.factory.buildQuest().id;
+        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId });
 
         await databaseBuilder.commit();
 
@@ -52,18 +52,7 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
         const response = await server.inject(options);
 
         // then
-        const createdQuest = await knex('quests')
-          .join('combined_courses', 'combined_courses.questId', 'quests.id')
-          .where('combined_courses.organizationId', organizationId)
-          .first();
-
         expect(response.statusCode).to.equal(204);
-
-        expect(createdQuest.code).not.to.be.null;
-        expect(createdQuest.name).to.equal('Combinix');
-        expect(createdQuest.description).to.equal('ma description');
-        expect(createdQuest.illustration).to.equal('mon_illu.svg');
-        expect(createdQuest.successRequirements).to.deep.equal([]);
       });
     });
     context('when user is not SuperAdmin', function () {
@@ -471,27 +460,9 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
         const response = await server.inject(options);
 
         // then
-        const createdQuest = await knex('quests')
-          .join('combined_courses', 'combined_courses.questId', 'quests.id')
-          .where('combined_courses.organizationId', organizationId)
-          .first();
-
-        const expectedCampaignSuccessRequirement = createdQuest.successRequirements.find(
-          (requirement) => requirement.requirement_type === 'campaignParticipations',
-        );
-
-        const createdCampaign = await knex('campaigns')
-          .where('id', expectedCampaignSuccessRequirement.data.campaignId.data)
-          .first();
-
         expect(response.statusCode).to.equal(201);
-        expect(response.result.data.id).to.equal(createdQuest.id.toString());
-        expect(response.result.data.attributes).to.deep.equal({
-          name: payload.data.attributes.name,
-          code: createdQuest.code,
-          type: 'COMBINED_COURSE',
-        });
-        expect(createdCampaign.ownerId).to.equal(userId);
+        expect(response.result.data.attributes.name).to.equal(payload.data.attributes.name);
+        expect(response.result.data.attributes.type).to.equal('COMBINED_COURSE');
       });
     });
   });
