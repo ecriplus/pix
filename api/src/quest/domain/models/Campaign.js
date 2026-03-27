@@ -33,9 +33,10 @@ export class Campaign {
   }) {
     let hasRecommendableModulesInTargetProfile;
     if (recommendableModules) {
-      hasRecommendableModulesInTargetProfile =
-        recommendableModules.length > 0 &&
-        Boolean(recommendableModules.filter(({ moduleId }) => modules.map(({ id }) => id).includes(moduleId)));
+      const matchingRecommendableModules = recommendableModules.filter(({ moduleId }) =>
+        modules.map(({ id }) => id).includes(moduleId),
+      );
+      hasRecommendableModulesInTargetProfile = matchingRecommendableModules.length > 0;
     }
 
     let combinedCourseUrl = '/parcours/' + combinedCourseCode;
