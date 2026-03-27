@@ -2,12 +2,12 @@
   "id": "4b3e2191-b9e6-4539-90bb-ef438895c157",
   "shortId": "a0bf86e9",
   "slug": "outils-ia",
-  "title": "Appeler des outils : la botte secrète des IA génératives",
+  "title": "Utiliser des outils : la botte secrète des IA génératives",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques ou encore du code !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles capacités&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
+    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques, du code ou encore interagir avec d'autres logiciels !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles capacités&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -75,7 +75,7 @@
                 "id": "45c54a3a-f5d5-48b4-b408-2efc1370dce4",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’appel à des outils.</p><p>Regardons ça de plus près.</p>"
+                "content": "<p>Les capacités des IA génératives ont été améliorées grâce à l’appel à des outils, c'est-à-dire l'utilisation de logiciels externes, pour réaliser une tâche spécifique.</p><p>Regardons ça de plus près.</p>"
               }
             }
           ]
@@ -312,21 +312,21 @@
                           "id": "1",
                           "content": "<p>la recherche sur internet</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas configuré&nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini&nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "La génération d’image.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas configuré </strong> dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini </strong> dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "La calculatrice.",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas configuré&nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini &nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
