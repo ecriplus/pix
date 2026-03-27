@@ -1,6 +1,6 @@
 {
-  "id": "28e7efc3-5fc9-48df-9f3a-aea5d2c5685e",
-  "shortId": "b9e32cb2",
+  "id": "80ee367d-8e31-4e41-babd-a28940652f47",
+  "shortId": "82920553",
   "slug": "partie1-anatomie-message-arnaque",
   "title": "Anatomie d’un message d’arnaque [Partie 1]",
   "isBeta": true,
@@ -609,18 +609,18 @@
       ]
     },
     {
-      "id": "707f4f33-9016-4a15-923f-da07c9900489",
+      "id": "39833260-4eec-459d-b04e-35b02915e38d",
       "type": "practise",
       "grains": [
         {
-          "id": "767fccb5-7d5e-4c95-ba27-f8208ccd21fe",
+          "id": "a9e32041-4af0-46fb-ad43-fea72348231b",
           "type": "activity",
           "title": "Texte à trous",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "ec05630f-ab20-4262-87b4-ef1556b0a005",
+                "id": "a44e7289-4341-41b8-9385-f2e3949fd891",
                 "type": "qrocm",
                 "instruction": "<p>Complétez le texte suivant&nbsp;:</p>",
                 "proposals": [
