@@ -47,10 +47,6 @@ class CertificationResultsCsvValues {
     }
   }
 
-  #isCompetenceFailed(competence) {
-    return competence.level <= 0;
-  }
-
   #getLevelByCompetenceCode({ competencesWithMark }) {
     return competencesWithMark.reduce((result, competence) => {
       const competenceCode = competence.competence_code;
@@ -65,13 +61,16 @@ class CertificationResultsCsvValues {
     const competence = levelByCompetenceCode[competenceIndex];
     const notTestedCompetence = !competence;
 
-    if (notTestedCompetence || certificationResult.isCancelled() || certificationResult.isInError()) {
+    if (
+      notTestedCompetence ||
+      certificationResult.isCancelled() ||
+      certificationResult.isInError() ||
+      certificationResult.isRejected()
+    ) {
       return '-';
     }
-    if (certificationResult.isRejected() || this.#isCompetenceFailed(competence)) {
-      return 0;
-    }
-    return competence.level;
+
+    return Math.max(competence.level, 0);
   }
 
   getCommentForOrganization(certificationResult) {

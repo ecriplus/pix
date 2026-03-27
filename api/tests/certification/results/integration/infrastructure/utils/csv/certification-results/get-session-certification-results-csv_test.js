@@ -97,7 +97,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               const expectedContent =
                 '\uFEFF' +
                 '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-                `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
+                `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
               expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
             });
           });
@@ -142,7 +142,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
             const expectedContent =
               '\uFEFF' +
               '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-              `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
+              `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
         });
@@ -386,11 +386,11 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
         });
 
         context('when certification is rejected', function () {
-          it('writes the appropriate certification in the csv', async function () {
+          it('forces pixScore to 0 and write no competence marks result', async function () {
             // given
             const certificationResult = domainBuilder.buildCertificationResult.rejected({
               ...baseCertificationData,
-              pixScore: 0,
+              pixScore: 55,
               reachedMeshIndex: null,
             });
 
@@ -407,7 +407,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"Pix";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0' +
+              ';"Pix";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -521,11 +521,11 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
         });
 
         context('when certification is rejected', function () {
-          it('writes the appropriate certification in the csv', async function () {
+          it('forces pixScore to 0 and write no competence marks result', async function () {
             // given
             const certificationResult = domainBuilder.buildCertificationResult.rejected({
               ...baseCertificationData,
-              pixScore: 0,
+              pixScore: 55,
               reachedMeshIndex: null,
               complementaryCertificationCourseResults: [
                 domainBuilder.buildComplementaryCertificationCourseResult({ acquired: false, label: 'CléA' }),
@@ -545,7 +545,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"CléA Numérique by Pix";"Non obtenue";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0' +
+              ';"CléA Numérique by Pix";"Non obtenue";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -652,11 +652,11 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
         });
 
         context('when certification is rejected', function () {
-          it('writes the appropriate certification in the csv', async function () {
+          it('forces a below the minimum mesh result', async function () {
             // given
             const certificationResult = domainBuilder.buildCertificationResult.rejected({
               ...baseCertificationData,
-              reachedMeshIndex: null,
+              reachedMeshIndex: 0,
             });
 
             // when

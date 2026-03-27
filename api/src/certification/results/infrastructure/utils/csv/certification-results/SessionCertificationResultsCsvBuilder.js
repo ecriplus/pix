@@ -130,10 +130,11 @@ export class SessionCertificationResultsCsvBuilder {
       return '-';
     }
     if (certificationResult.isV3) {
-      const meshKey = certificationResult.reachedMeshIndex ?? 'BELOW_MINIMUM';
+      const meshKey = certificationResult.isRejected() ? 'BELOW_MINIMUM' : certificationResult.reachedMeshIndex;
+      const pixScore = certificationResult.isRejected() ? 0 : certificationResult.pixScore;
 
       return this.translate(`certification.meshLevels.${certificationResult.framework}.${meshKey}`, {
-        pixScore: certificationResult.pixScore,
+        pixScore,
       });
     }
 

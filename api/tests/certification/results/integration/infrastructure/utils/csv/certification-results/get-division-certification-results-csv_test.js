@@ -93,7 +93,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedContent =
             '\uFEFF' +
             '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Date de passage de la certification"\n' +
-            `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"02/02/2020"`;
+            `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"02/02/2020"`;
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
       });
@@ -133,7 +133,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedContent =
             '\uFEFF' +
             '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Date de passage de la certification"\n' +
-            `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"02/02/2020"`;
+            `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"02/02/2020"`;
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
       });

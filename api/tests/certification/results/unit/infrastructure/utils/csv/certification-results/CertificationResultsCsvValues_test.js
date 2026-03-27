@@ -27,7 +27,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       complementaryCertificationCourseResults: [],
     };
 
-    context('when complementary certification is cancelled', function () {
+    context('when certification is cancelled', function () {
       it('should return the cancelled translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.cancelled(aCertificationResultData);
@@ -40,7 +40,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification has been passed', function () {
+    context('when certification has been passed', function () {
       it('should return the validated translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.validated(aCertificationResultData);
@@ -53,7 +53,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification is rejected', function () {
+    context('when certification is rejected', function () {
       it('should return the rejected translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.rejected(aCertificationResultData);
@@ -66,7 +66,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification is in error', function () {
+    context('when certification is in error', function () {
       it('should return the error translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.error(aCertificationResultData);
@@ -79,7 +79,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       });
     });
 
-    context('when complementary certification is in progress', function () {
+    context('when certification is in progress', function () {
       it('should return the started translation', function () {
         // given
         const certifResult = domainBuilder.buildCertificationResult.started(aCertificationResultData);
@@ -138,7 +138,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
     });
 
     context('when complementary certification is rejected', function () {
-      it('should return "0"', function () {
+      it('should return "-"', function () {
         // given
         const certificationResult = domainBuilder.buildCertificationResult.rejected({
           ...aCertificationResultData,
@@ -162,7 +162,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
         });
 
         // then
-        expect(result).to.equal(0);
+        expect(result).to.equal('-');
       });
     });
 
