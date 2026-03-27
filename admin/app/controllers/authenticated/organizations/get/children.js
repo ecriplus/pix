@@ -42,6 +42,11 @@ export default class AuthenticatedOrganizationsGetChildrenController extends Con
             { childOrganizationId },
           );
           break;
+        case 'UNABLE_TO_ATTACH_TO_ORGANIZATION_NOT_IN_NETWORK':
+          message = this.intl.t(
+            'pages.organization-children.notifications.error.unable-to-attach-to-organization-not-in-network',
+          );
+          break;
         default:
           message = this.intl.t('common.notifications.generic-error');
       }
