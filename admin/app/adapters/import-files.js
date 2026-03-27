@@ -13,7 +13,7 @@ export default class ImportFilesAdapter extends ApplicationAdapter {
   updateOrganizationImportFormat(files) {
     if (!files || files.length === 0) return;
 
-    const url = `${this.host}/${this.namespace}/import-organization-learners-format`;
+    const url = `${this.host}/${this.namespace}/organization-learner-import-formats`;
     return this.ajax(url, 'POST', { data: files[0] });
   }
 

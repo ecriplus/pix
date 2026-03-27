@@ -28,6 +28,7 @@
       "field-length": "Riga {line}: il campo \"{field}\" deve essere lungo {limit} caratteri.",
       "field-max-length": "Riga {line}: il campo \"{field}\" deve essere inferiore a {limit} caratteri.",
       "field-min-length": "Riga {line}: il campo \"{field}\" deve essere lungo almeno {limit} caratteri.",
+      "field-pattern": "Riga {line} : il campo “{field}” non contiene un valore valido.",
       "field-required": "Riga {line}: il campo \"{field}\" è obbligatorio.",
       "header-required": "La colonna \"{field}\" è obbligatoria.",
       "header-unknown": "Le intestazioni delle colonne devono essere identiche a quelle del modello.",

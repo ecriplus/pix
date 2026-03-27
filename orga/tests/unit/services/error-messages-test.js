@@ -1,5 +1,6 @@
 import { t } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
+import { CSV_IMPORT_ERRORS } from 'pix-orga/services/error-messages';
 import { module, test } from 'qunit';
 
 import setupIntl, { setCurrentLocale } from '../../helpers/setup-intl';
@@ -118,53 +119,41 @@ module('Unit | Service | Error messages', function (hooks) {
     });
   });
 
-  test('should return the message with parameters', function (assert) {
-    // Given
-    const errorMessages = this.owner.lookup('service:errorMessages');
-    // When
-    const message = errorMessages.getErrorMessage('FIELD_MIN_LENGTH', { line: 1, field: 'Boo', limit: 2 });
-    // Then
-    assert.strictEqual(
-      message,
-      t('api-error-messages.student-csv-import.field-min-length', { line: 1, field: 'Boo', limit: 2 }),
-    );
-  });
-
-  test('should concatenate "valids" parameters', function (assert) {
-    // Given
-    const errorMessages = this.owner.lookup('service:errorMessages');
-    // When
-    const message = errorMessages.getErrorMessage('FIELD_BAD_VALUES', { line: 1, field: 'Boo', valids: ['A', 'B'] });
-    // Then
-    assert.strictEqual(
-      message,
-      t('api-error-messages.student-csv-import.field-bad-values', {
-        line: 1,
-        field: 'Boo',
-        valids: `A${t('api-error-messages.or-separator')}B`,
-      }),
-    );
-  });
-
   module('csv format error', function () {
-    module('FIELD_DATE_FORMAT', function () {
-      test('should return the message when error code is found without acceptedFormat', function (assert) {
+    [
+      { errorKey: 'FIELD_BAD_VALUES', meta: { line: 1, field: 'Boo', valids: ['A', 'B'] } },
+      {
+        errorKey: 'FIELD_DATE_FORMAT',
+        meta: {
+          line: 2,
+          field: 'toto',
+          acceptedFormat: 'jj/mm/aaaa',
+        },
+      },
+      { errorKey: 'ENCODING_NOT_SUPPORTED', meta: undefined },
+      { errorKey: 'BAD_CSV_FORMAT', meta: undefined },
+      { errorKey: 'HEADER_REQUIRED', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'HEADER_UNKNOWN', meta: { field: 'Boo' } },
+      { errorKey: 'FIELD_MAX_LENGTH', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'FIELD_LENGTH', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'FIELD_STRING_MIN', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'FIELD_STRING_MAX', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'FIELD_STRING_LENGTH', meta: { line: 1, field: 'Boo', acceptedFormat: 2 } },
+      { errorKey: 'FIELD_STRING_PATTERN', meta: { line: 1, field: 'Boo' } },
+      { errorKey: 'FIELD_EMAIL_FORMAT', meta: { line: 1, field: 'Boo' } },
+      { errorKey: 'FIELD_REQUIRED', meta: { line: 1, field: 'Boo' } },
+    ].forEach(({ errorKey, meta }) => {
+      test(`should return the message ${CSV_IMPORT_ERRORS[errorKey]} with parameters`, function (assert) {
         // Given
         const errorMessages = this.owner.lookup('service:errorMessages');
-
         // When
-        const message = errorMessages.getErrorMessage('FIELD_DATE_FORMAT', { line: 2, field: 'toto' });
+        const message = errorMessages.getErrorMessage(errorKey, meta);
         // Then
-        assert.strictEqual(
-          message,
-          t('api-error-messages.student-csv-import.field-date-format', {
-            line: 2,
-            field: 'toto',
-            acceptedFormat: 'jj/mm/aaaa',
-          }),
-        );
+        assert.strictEqual(message, t(CSV_IMPORT_ERRORS[errorKey], meta));
       });
+    });
 
+    module('FIELD_DATE_FORMAT', function () {
       test('should return the en message when error code is found without acceptedFormat', async function (assert) {
         // Given
         await setCurrentLocale('en');
@@ -179,27 +168,6 @@ module('Unit | Service | Error messages', function (hooks) {
             line: 2,
             field: 'toto',
             acceptedFormat: 'dd/mm/yyyy',
-          }),
-        );
-      });
-
-      test('should return the message when error code is found given acceptedFormat', function (assert) {
-        // Given
-        const errorMessages = this.owner.lookup('service:errorMessages');
-
-        // When
-        const message = errorMessages.getErrorMessage('FIELD_DATE_FORMAT', {
-          line: 2,
-          field: 'toto',
-          acceptedFormat: 'withthisformat',
-        });
-        // Then
-        assert.strictEqual(
-          message,
-          t('api-error-messages.student-csv-import.field-date-format', {
-            line: 2,
-            field: 'toto',
-            acceptedFormat: 'withthisformat',
           }),
         );
       });

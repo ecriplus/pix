@@ -134,6 +134,14 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
 
         expect(learners.list).to.lengthOf(2);
       });
+
+      it('should return null for an attribute that is an empty string', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        learnerSet.addLearners([{ ...learnerAttributes, group: '' }]);
+
+        expect(learnerSet.learners.list[0].attributes.group).to.be.null;
+      });
     });
 
     describe('update learner context', function () {
@@ -273,6 +281,15 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           },
         ]);
         expect(learners.existinglearnerIds).to.deep.equals([777]);
+      });
+
+      it('should default existingLearners to empty array when setExistingLearners is called without argument', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        learnerSet.addLearners([learnerAttributes]);
+        learnerSet.setExistingLearners();
+
+        expect(learnerSet.learners.existinglearnerIds).to.be.empty;
       });
     });
 
@@ -423,6 +440,20 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
 
           expect(() => learnerSet.addLearners([learnerAttributes, secondLearnerAttributes])).to.not.throw();
         });
+
+        it('should falsely detect duplicates when column values contain the separator "-" (known limitation)', async function () {
+          importFormat.config.unicityColumns = ['prénom', 'group'];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const learner1 = { ...learnerAttributes, prénom: 'a-b', group: 'c' };
+          const learner2 = { ...learnerAttributes, prénom: 'a', group: 'b-c' };
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([learner1, learner2]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.PROPERTY_NOT_UNIQ);
+        });
       });
 
       context('checkDateRule', function () {
@@ -472,6 +503,18 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[0].meta.line).to.equal(2);
           expect(errors[0].meta.acceptedFormat).to.equal('YYYY-MM-DD');
         });
+
+        it('should throw a field_required error when a required field is missing', async function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([{ ...learnerAttributes }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_REQUIRED);
+          expect(errors[0].meta.field).to.equal('birthdate');
+          expect(errors[0].meta.line).to.equal(2);
+        });
       });
 
       context('When there are expectedValues', function () {
@@ -512,6 +555,235 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
           expect(errors[1].meta.field).to.equal('Niveau');
           expect(errors[1].meta.line).to.equal(2);
           expect(errors[1].meta.valids).to.deep.equal(['CM1', 'CM2']);
+        });
+      });
+
+      context('checkMinMaxRule', function () {
+        it('when the value is above the min, should not throw an error', function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'code', config: { validate: { type: 'string', min: 2, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() => learnerSet.addLearners([{ ...learnerAttributes, code: 'ABC' }])).to.not.throw();
+        });
+
+        it('when the value is below the min, should throw a FIELD_STRING_MIN error', async function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'code', config: { validate: { type: 'string', min: 3, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([{ ...learnerAttributes, code: 'AB' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_MIN);
+          expect(errors[0].meta.field).to.equal('code');
+          expect(errors[0].meta.line).to.equal(2);
+          expect(errors[0].meta.acceptedFormat).to.equal(3);
+        });
+
+        it('when the value is below the max, should not throw an error', function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'code', config: { validate: { type: 'string', max: 5, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() => learnerSet.addLearners([{ ...learnerAttributes, code: 'ABC' }])).to.not.throw();
+        });
+
+        it('when the value exceeds the max, should throw a FIELD_STRING_MAX error', async function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'code', config: { validate: { type: 'string', max: 3, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(learnerSet.addLearners, learnerSet)([{ ...learnerAttributes, code: 'ABCDE' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_MAX);
+          expect(errors[0].meta.field).to.equal('code');
+          expect(errors[0].meta.line).to.equal(2);
+          expect(errors[0].meta.acceptedFormat).to.equal(3);
+        });
+      });
+
+      context('checkLengthRule', function () {
+        it('when the value has the correct length, should not throw an error', function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'codePays', config: { validate: { type: 'string', length: 5, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() => learnerSet.addLearners([{ ...learnerAttributes, codePays: '99100' }])).to.not.throw();
+        });
+
+        it('when the value does not have the correct length, should throw a FIELD_STRING_LENGTH error', async function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'codePays', config: { validate: { type: 'string', length: 5, required: true } } },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(
+            learnerSet.addLearners,
+            learnerSet,
+          )([{ ...learnerAttributes, codePays: '991' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_LENGTH);
+          expect(errors[0].meta.field).to.equal('codePays');
+          expect(errors[0].meta.line).to.equal(2);
+          expect(errors[0].meta.acceptedFormat).to.equal(5);
+        });
+      });
+
+      context('checkRegexpRule', function () {
+        it('when the value matches the regexp, should not throw an error', function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            {
+              name: 'codePays',
+              config: { validate: { type: 'string', regexp: '/9{2}[1-5]{1}[0-9]{2}/', required: true } },
+            },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() => learnerSet.addLearners([{ ...learnerAttributes, codePays: '99100' }])).to.not.throw();
+        });
+
+        it('when the value does not match the regexp, should throw a FIELD_STRING_PATTERN error', async function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            {
+              name: 'codePays',
+              config: { validate: { type: 'string', regexp: '/9{2}[1-5]{1}[0-9]{2}/', required: true } },
+            },
+          ];
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(
+            learnerSet.addLearners,
+            learnerSet,
+          )([{ ...learnerAttributes, codePays: 'ABCDE' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_PATTERN);
+          expect(errors[0].meta.field).to.equal('codePays');
+          expect(errors[0].meta.line).to.equal(2);
+        });
+      });
+
+      context('checkConditionalRule', function () {
+        beforeEach(function () {
+          importFormat.config.headers = [
+            ...importFormat.config.headers,
+            { name: 'codePays', config: { validate: { type: 'string', required: true } } },
+            {
+              name: 'codeCommune',
+              config: {
+                validate: {
+                  type: 'string',
+                  required: false,
+                  conditional: {
+                    when: 'codePays',
+                    is: '99100',
+                    then: { required: true, length: 5 },
+                    otherwise: { required: false, max: 255 },
+                  },
+                },
+              },
+            },
+          ];
+        });
+
+        it('when the condition matches and the then-required field is present and valid, should not throw', function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() =>
+            learnerSet.addLearners([{ ...learnerAttributes, codePays: '99100', codeCommune: '75056' }]),
+          ).to.not.throw();
+        });
+
+        it('when the condition does not match and codeCommune is absent, should not throw', function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          expect(() =>
+            learnerSet.addLearners([{ ...learnerAttributes, codePays: '99200', codeCommune: undefined }]),
+          ).to.not.throw();
+        });
+
+        it('when the condition matches and the then-required field is absent, should throw FIELD_REQUIRED', async function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(
+            learnerSet.addLearners,
+            learnerSet,
+          )([{ ...learnerAttributes, codePays: '99100', codeCommune: undefined }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_REQUIRED);
+          expect(errors[0].meta.field).to.equal('codeCommune');
+          expect(errors[0].meta.line).to.equal(2);
+        });
+
+        it('when the condition matches and the then-required field fails length, should throw FIELD_STRING_LENGTH', async function () {
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(
+            learnerSet.addLearners,
+            learnerSet,
+          )([{ ...learnerAttributes, codePays: '99100', codeCommune: '750' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_LENGTH);
+          expect(errors[0].meta.field).to.equal('codeCommune');
+          expect(errors[0].meta.line).to.equal(2);
+          expect(errors[0].meta.acceptedFormat).to.equal(5);
+        });
+
+        it('when the condition matches and the value fails the regexp, should throw FIELD_STRING_PATTERN', async function () {
+          importFormat.config.headers = importFormat.config.headers.map((header) => {
+            if (header.name !== 'codeCommune') return header;
+            return {
+              ...header,
+              config: {
+                validate: {
+                  type: 'string',
+                  required: false,
+                  conditional: {
+                    when: 'codePays',
+                    is: '99100',
+                    then: { required: true, length: 5, regexp: '/[0-9]{5}/' },
+                    otherwise: { required: false, max: 255 },
+                  },
+                },
+              },
+            };
+          });
+          const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+          const errors = await catchErr(
+            learnerSet.addLearners,
+            learnerSet,
+          )([{ ...learnerAttributes, codePays: '99100', codeCommune: 'ABCDE' }]);
+
+          expect(errors).lengthOf(1);
+          expect(errors[0]).instanceOf(CsvImportError);
+          expect(errors[0].code).to.equal(VALIDATION_ERRORS.FIELD_STRING_PATTERN);
+          expect(errors[0].meta.field).to.equal('codeCommune');
+          expect(errors[0].meta.line).to.equal(2);
         });
       });
 
@@ -636,6 +908,34 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
         expect(learners.list[0].attributes.birthdate).to.equal('2010-03-06');
         expect(learners.list[0].attributes.marriage).to.equal('2027-06-09');
       });
+    });
+
+    context('edge cases', function () {
+      it('should do nothing and not throw when called with an empty array', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+        expect(() => learnerSet.addLearners([])).to.not.throw();
+        expect(learnerSet.learners.list).to.be.empty;
+      });
+
+      it('should accumulate learners across multiple addLearners calls', function () {
+        const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+        const learner2 = { ...learnerAttributes, prénom: 'Mieto', nom: 'Nataka' };
+
+        learnerSet.addLearners([learnerAttributes]);
+        learnerSet.addLearners([learner2]);
+
+        expect(learnerSet.learners.list).to.have.lengthOf(2);
+      });
+    });
+  });
+
+  describe('learners getter', function () {
+    it('should return empty list and existinglearnerIds before any addLearners call', function () {
+      const learnerSet = ImportOrganizationLearnerSet.buildSet({ organizationId, importFormat });
+
+      expect(learnerSet.learners.list).to.be.empty;
+      expect(learnerSet.learners.existinglearnerIds).to.be.empty;
     });
   });
 });

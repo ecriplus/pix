@@ -27,7 +27,7 @@ module('Unit | Adapter | ImportFiles', function (hooks) {
       await adapter.updateOrganizationImportFormat([Symbol()]);
 
       // then
-      assert.ok(adapter.ajax.calledWith('http://localhost:3000/api/admin/import-organization-learners-format', 'POST'));
+      assert.ok(adapter.ajax.calledWith('http://localhost:3000/api/admin/organization-learner-import-formats', 'POST'));
     });
   });
 
