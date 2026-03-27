@@ -166,6 +166,48 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       expect(finalizedSession.isPublishable).to.be.true;
     });
 
+    [
+      { framework: Frameworks.CORE, isPublishable: true },
+      { framework: Frameworks.CLEA, isPublishable: true },
+      { framework: Frameworks.EDU_1ER_DEGRE, isPublishable: false },
+      { framework: Frameworks.EDU_2ND_DEGRE, isPublishable: false },
+      { framework: Frameworks.EDU_CPE, isPublishable: false },
+      { framework: Frameworks.DROIT, isPublishable: false },
+      { framework: Frameworks.PRO_SANTE, isPublishable: false },
+    ].forEach(({ framework, isPublishable }) => {
+      it(`session should be ${isPublishable ? 'publishable' : 'not publishable'} for certification ${framework}}`, function () {
+        const juryCertificationSummary = new JuryCertificationSummary({
+          id: 1,
+          firstName: 'firstName',
+          lastName: 'lastName',
+          status: assessmentResultStatuses.VALIDATED,
+          pixScore: 120,
+          createdAt: new Date(),
+          completedAt: new Date(),
+          isPublished: false,
+          certificationFramework: framework,
+          certificationIssueReports: [
+            domainBuilder.buildCertificationIssueReport({
+              category: 'NON_IMPACTFUL_CATEGORY',
+              subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
+            }),
+          ],
+        });
+        const finalizedSession = FinalizedSession.from({
+          sessionId: 1234,
+          certificationCenterName: 'a certification center',
+          sessionDate: '2021-01-29',
+          sessionTime: '16:00',
+          hasExaminerGlobalComment: false,
+          juryCertificationSummaries: [juryCertificationSummary],
+          finalizedAt: new Date('2020-01-01T00:00:00Z'),
+        });
+
+        // then
+        expect(finalizedSession.isPublishable).to.equal(isPublishable);
+      });
+    });
+
     it('is not publishable when session has some Pix Plus scope certification', function () {
       // given / when
       const finalizedSession = FinalizedSession.from({
