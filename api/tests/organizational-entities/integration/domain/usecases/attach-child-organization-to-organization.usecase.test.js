@@ -1,9 +1,71 @@
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | attach-child-organization-to-organization', function () {
+  describe('success case', function () {
+    it('attaches children organizations to parent organization', async function () {
+      // given
+      const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
+      const parentStructure = databaseBuilder.factory.buildStructure();
+      const network = databaseBuilder.factory.buildNetwork();
+      databaseBuilder.factory.buildFactStructure({
+        organizationId: parentOrganization.id,
+        structureId: parentStructure.id,
+        networkId: network.id,
+      });
+
+      const firstChildOrganization = await databaseBuilder.factory.buildOrganization({ id: 456 });
+      const firstChildStructure = databaseBuilder.factory.buildStructure();
+      databaseBuilder.factory.buildFactStructure({
+        organizationId: firstChildOrganization.id,
+        structureId: firstChildStructure.id,
+        networkId: null,
+      });
+
+      const secondChildOrganization = await databaseBuilder.factory.buildOrganization({ id: 789 });
+      const secondChildStructure = databaseBuilder.factory.buildStructure();
+      databaseBuilder.factory.buildFactStructure({
+        organizationId: secondChildOrganization.id,
+        structureId: secondChildStructure.id,
+        networkId: null,
+      });
+
+      await databaseBuilder.commit();
+
+      const childOrganizationIds = `${firstChildOrganization.id},${secondChildOrganization.id}`;
+
+      // when
+      await usecases.attachChildOrganizationToOrganization({
+        parentOrganizationId: parentOrganization.id,
+        childOrganizationIds,
+      });
+
+      // then
+      const childrenOrganizationFactStructures = await knex('fct_structures').whereIn('organization_id', [
+        firstChildOrganization.id,
+        secondChildOrganization.id,
+      ]);
+      expect(childrenOrganizationFactStructures).to.have.deep.members([
+        {
+          organization_id: firstChildOrganization.id,
+          structure_id: firstChildStructure.id,
+          network_id: network.id,
+          parent_structure_id: parentStructure.id,
+          child_structure_id: null,
+        },
+        {
+          organization_id: secondChildOrganization.id,
+          structure_id: secondChildStructure.id,
+          parent_structure_id: parentStructure.id,
+          network_id: network.id,
+          child_structure_id: null,
+        },
+      ]);
+    });
+  });
+
   describe('error cases', function () {
     context('when parent organization does not exist', function () {
       it('throws an error', async function () {

@@ -2,7 +2,7 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 
 const attachChildOrganizationToOrganization = withTransaction(
-  async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository }) => {
+  async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository, networkRepository }) => {
     const parentOrganization = await organizationForAdminRepository.get({
       organizationId: parentOrganizationId,
     });
@@ -23,9 +23,10 @@ const attachChildOrganizationToOrganization = withTransaction(
 
       _assertChildOrganizationNotAlreadyPartOfANetwork(childOrganizationForAdmin);
 
-      childOrganizationForAdmin.updateParentOrganizationId(parentOrganizationId);
-
-      await organizationForAdminRepository.update({ organization: childOrganizationForAdmin });
+      await networkRepository.attachOrganization({
+        childOrganizationId: childOrganizationForAdmin.id,
+        parentOrganizationId,
+      });
     }
   },
 );

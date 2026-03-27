@@ -1168,32 +1168,48 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       let parentOrganizationId;
       let firstChildOrganization;
       let secondChildOrganization;
+      let firstChildStructure;
+      let secondChildStructure;
+      let parentStructure;
+      let network;
 
       beforeEach(async function () {
         parentOrganizationId = databaseBuilder.factory.buildOrganization({
           name: 'Parent Organization',
           type: 'SCO',
         }).id;
-        const networkId = databaseBuilder.factory.buildNetwork().id;
-        const structureId = databaseBuilder.factory.buildStructure().id;
+        network = databaseBuilder.factory.buildNetwork();
+        parentStructure = databaseBuilder.factory.buildStructure();
         databaseBuilder.factory.buildFactStructure({
           organizationId: parentOrganizationId,
-          structureId: structureId,
-          networkId: networkId,
+          structureId: parentStructure.id,
+          networkId: network.id,
         });
         firstChildOrganization = databaseBuilder.factory.buildOrganization({
           name: 'child Organization',
           type: 'SCO',
         });
+        firstChildStructure = databaseBuilder.factory.buildStructure();
+        databaseBuilder.factory.buildFactStructure({
+          organizationId: firstChildOrganization.id,
+          structureId: firstChildStructure.id,
+          networkId: null,
+        });
         secondChildOrganization = databaseBuilder.factory.buildOrganization({
           name: 'child Organization',
           type: 'SCO',
+        });
+        secondChildStructure = databaseBuilder.factory.buildStructure();
+        databaseBuilder.factory.buildFactStructure({
+          organizationId: secondChildOrganization.id,
+          structureId: secondChildStructure.id,
+          networkId: null,
         });
         await databaseBuilder.commit();
       });
 
       context('when user has "SUPER_ADMIN" role', function () {
-        it('attach child organization', async function () {
+        it('attaches child organization', async function () {
           // given
           const options = {
             method: 'POST',
@@ -1210,15 +1226,28 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           const response = await server.inject(options);
 
           // then
-          const updatedFirstChildOrganization = await knex('organizations')
-            .where({ id: firstChildOrganization.id })
-            .first();
-          const updatedSecondChildOrganization = await knex('organizations')
-            .where({ id: secondChildOrganization.id })
-            .first();
           expect(response.statusCode).to.equal(204);
-          expect(updatedFirstChildOrganization.parentOrganizationId).to.equal(parentOrganizationId);
-          expect(updatedSecondChildOrganization.parentOrganizationId).to.equal(parentOrganizationId);
+
+          const childrenOrganizationFactStructures = await knex('fct_structures').whereIn('organization_id', [
+            firstChildOrganization.id,
+            secondChildOrganization.id,
+          ]);
+          expect(childrenOrganizationFactStructures).to.have.deep.members([
+            {
+              organization_id: firstChildOrganization.id,
+              structure_id: firstChildStructure.id,
+              network_id: network.id,
+              parent_structure_id: parentStructure.id,
+              child_structure_id: null,
+            },
+            {
+              organization_id: secondChildOrganization.id,
+              structure_id: secondChildStructure.id,
+              parent_structure_id: parentStructure.id,
+              network_id: network.id,
+              child_structure_id: null,
+            },
+          ]);
         });
       });
     });
