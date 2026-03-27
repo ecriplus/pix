@@ -1,5 +1,40 @@
 # Pix Changelog
 
+# [5.370.0](https://github.com/1024pix/pix/compare/v5.369.0...v5.370.0) (2026-03-27)
+
+### :rocket: Amélioration
+
+- [#15564](https://github.com/1024pix/pix/pull/15564) Ajouter l'information "canAddEmailConnectionMethod" dans la route /me (PIX-21983) 
+- [#15625](https://github.com/1024pix/pix/pull/15625) Ajouter les conditions de validations supplémentaire pour les Import à format (PIX-22009). 
+- [#15653](https://github.com/1024pix/pix/pull/15653) CYPhishing_IND Modifs lecons suite modifs design 
+- [#15631](https://github.com/1024pix/pix/pull/15631) MDX-32, inte médias NRDatacenter_NOV 
+- [#15649](https://github.com/1024pix/pix/pull/15649) modifs repondremail non relecture eval, ia-nr, faisabilité 
+- [#15640](https://github.com/1024pix/pix/pull/15640) Rejeter une certification v3 qui n'atteint pas la maille minimum  (PIX-22084). 
+
+### :bug: Correction
+
+- [#15650](https://github.com/1024pix/pix/pull/15650) N'affiche pas les parcours apprenants supprimés dans Pix-Orga et leurs participations dans PixApp. 
+
+### :building_construction: Tech
+
+- [#15658](https://github.com/1024pix/pix/pull/15658) Ajout d'un script pour redéclencher le scoring d'une liste de certifications 
+- [#15645](https://github.com/1024pix/pix/pull/15645) Enlever le FT multipleLocalesForTrainingsEnabled de l'API (PIX-22002)(PIX-21691) 
+- [#15633](https://github.com/1024pix/pix/pull/15633) migrer les tests d'intégration d'orga  en gjs 
+
+### :arrow_up: Montée de version
+
+- [#15659](https://github.com/1024pix/pix/pull/15659) Update adobe/s3mock Docker tag to v4.12.2 (.circleci) 
+- [#15660](https://github.com/1024pix/pix/pull/15660) Update adobe/s3mock Docker tag to v4.12.2 (docker) 
+- [#15661](https://github.com/1024pix/pix/pull/15661) Update adobe/s3mock Docker tag to v4.12.2 (dossier racine) 
+- [#15663](https://github.com/1024pix/pix/pull/15663) Update dependency ember-eslint-parser to ^0.9.0 (certif) 
+- [#15664](https://github.com/1024pix/pix/pull/15664) Update dependency ember-eslint-parser to ^0.9.0 (junior) 
+- [#15665](https://github.com/1024pix/pix/pull/15665) Update dependency ember-eslint-parser to ^0.9.0 (mon-pix) 
+- [#15666](https://github.com/1024pix/pix/pull/15666) Update dependency ember-eslint-parser to ^0.9.0 (orga) 
+- [#15618](https://github.com/1024pix/pix/pull/15618) Update dependency joi to v18 (api) 
+- [#15667](https://github.com/1024pix/pix/pull/15667) Update dependency knip to v6 (api) 
+
+### :coffee: Autre
+
 # [5.369.0](https://github.com/1024pix/pix/compare/v5.368.0...v5.369.0) (2026-03-26)
 
 ### :rocket: Amélioration
