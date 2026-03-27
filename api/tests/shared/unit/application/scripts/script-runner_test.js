@@ -1,7 +1,7 @@
 import { databaseConnections } from '../../../../../db/database-connections.js';
 import { Script } from '../../../../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../../../../src/shared/application/scripts/script-runner.js';
-import { learningContentCache } from '../../../../../src/shared/infrastructure/caches/learning-content-cache.js';
+import { close as closePubSub } from '../../../../../src/shared/infrastructure/pubsub.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Shared | Unit | Application | ScriptRunner', function () {
@@ -38,7 +38,7 @@ describe('Shared | Unit | Application | ScriptRunner', function () {
     };
 
     sinon.spy(databaseConnections.disconnect);
-    sinon.stub(learningContentCache, 'quit');
+    sinon.spy(closePubSub);
   });
 
   context('when not running from CLI', function () {

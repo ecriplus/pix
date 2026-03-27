@@ -1,5 +1,5 @@
-import * as learningContentPubSub from '../caches/learning-content-pubsub.js';
 import { createGauge } from '../metrics/metrics.js';
+import { getTopic } from '../pubsub.js';
 import { child, SCOPES } from '../utils/logger.js';
 
 const logger = child('learningcontent:cache', { event: SCOPES.LEARNING_CONTENT });
@@ -14,21 +14,21 @@ const metrics = {
 
 export class LearningContentCache {
   #map;
-  #pubSub;
+  #topic;
   #name;
   #metrics;
 
   /**
    * @param {{
    *   name: string
-   *   pubSub: import('../caches/learning-content-pubsub.js').LearningContentPubSub
+   *   topic: import('../pubsub.js').Topic
    *   map: Map
    * }} config
    * @returns
    */
-  constructor({ name, pubSub = learningContentPubSub.getPubSub(), map = new Map() }) {
+  constructor({ name, topic = getTopic(name), map = new Map() }) {
     this.#name = name;
-    this.#pubSub = pubSub;
+    this.#topic = topic;
     this.#map = map;
 
     const [tableName, cache] = name.split(':');
@@ -40,7 +40,7 @@ export class LearningContentCache {
       }),
     };
 
-    this.#subscribe();
+    this.#topic.subscribe((message) => this.#onMessage(message));
   }
 
   get(key) {
@@ -56,39 +56,23 @@ export class LearningContentCache {
   }
 
   delete(key) {
-    return this.#pubSub.publish(this.#name, { type: 'delete', key });
+    return this.#topic.publish({ type: 'delete', key });
   }
 
   clear() {
-    return this.#pubSub.publish(this.#name, { type: 'clear' });
+    return this.#topic.publish({ type: 'clear' });
   }
 
-  async #subscribe() {
-    try {
-      for await (const message of this.#pubSub.subscribe(this.#name)) {
-        if (message.type === 'clear') {
-          logger.debug({ cacheName: this.#name }, 'clearing cache');
-          this.#map.clear();
-          this.#metrics.cacheSize.set(0);
-        }
-        if (message.type === 'delete') {
-          logger.debug({ cacheName: this.#name, key: message.key }, 'deleting cache key');
-          this.#map.delete(message.key);
-          this.#metrics.cacheSize.set(this.#map.size);
-        }
-      }
-    } catch (err) {
-      logger.err(
-        { cacheName: this.#name, err },
-        'Error when subscribing to events for managing Learning Content Cache',
-      );
-      throw err;
+  #onMessage(message) {
+    if (message.type === 'clear') {
+      logger.debug({ cacheName: this.#name }, 'clearing cache');
+      this.#map.clear();
+      this.#metrics.cacheSize.set(0);
+    }
+    if (message.type === 'delete') {
+      logger.debug({ cacheName: this.#name, key: message.key }, 'deleting cache key');
+      this.#map.delete(message.key);
+      this.#metrics.cacheSize.set(this.#map.size);
     }
   }
 }
-
-export const learningContentCache = {
-  async quit() {
-    return learningContentPubSub.quit();
-  },
-};
