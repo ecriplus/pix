@@ -1,6 +1,11 @@
 import type { Page } from '@playwright/test';
 
-import { CertificationSessionsMainPage, OrganizationsListPage, UsersListPage } from './index.ts';
+import {
+  CertificationSessionPage,
+  CertificationSessionsMainPage,
+  OrganizationsListPage,
+  UsersListPage,
+} from './index.ts';
 
 export class HomePage {
   constructor(public readonly page: Page) {}
@@ -24,5 +29,11 @@ export class HomePage {
     await this.page.waitForURL(/\/organizations\/list$/);
 
     return new OrganizationsListPage(this.page);
+  }
+
+  async goToSession(sessionNumber: string) {
+    await this.page.goto(process.env.PIX_ADMIN_URL + '/sessions/' + sessionNumber);
+    await this.page.getByText('Lien de téléchargement des résultats').waitFor({ state: 'visible' });
+    return new CertificationSessionPage(this.page);
   }
 }

@@ -2,6 +2,8 @@ import { glob, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { expect, test as base } from '@playwright/test';
+import { parse } from 'csv-parse/sync';
+import { stringify } from 'csv-stringify/sync';
 import * as fs from 'fs/promises';
 import { PDFParse } from 'pdf-parse';
 import pixelmatch from 'pixelmatch';
@@ -75,6 +77,39 @@ class SnapshotHandler {
         // data différente entre deux runs : code de vérification du certificat et date de délivrance
         expect(diffRatio).toBeLessThan(0.0015); // < 0.15% pixels différents
       }
+    }
+  }
+
+  async compareCsvOrRecord(csvBuffer: Buffer, fileName: string, ignoredColumns: string[] = []) {
+    const resultDir = path.resolve(import.meta.dirname, '../snapshots');
+    const resultFilePath = path.join(resultDir, fileName as string);
+    const parsedCsvData = parse(csvBuffer.toString('utf-8'), {
+      columns: true,
+      delimiter: ';',
+      skip_empty_lines: true,
+      trim: true,
+      bom: true,
+    });
+    if (this.shouldUpdateSnapshots) {
+      await writeFile(resultFilePath, stringify(parsedCsvData, { header: true, delimiter: ';' }));
+    } else {
+      const refBuffer = await readFile(resultFilePath);
+      const refCsvData = parse(refBuffer, {
+        columns: true,
+        delimiter: ';',
+        skip_empty_lines: true,
+        trim: true,
+        bom: true,
+      });
+      const removeIgnoredColumns = (data: any[]) =>
+        data.map((row) => {
+          const newRow = { ...row };
+          ignoredColumns.forEach((col) => delete newRow[col]);
+          return newRow;
+        });
+      const cleanCurrent = removeIgnoredColumns(parsedCsvData);
+      const cleanRef = removeIgnoredColumns(refCsvData);
+      expect(cleanCurrent).toEqual(cleanRef);
     }
   }
 
