@@ -11,7 +11,8 @@ import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
 const testRef = 'PRO_CLEA_1OK-0KO_EndedByFinalization_Abandonment';
-const snapshotPath = `recette-certif/${testRef}.json`;
+const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
+const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
   `${testRef} - User takes a certification test for a PRO certification center, CLEA subscription. one challenge only answered. Ended by finalization for abandonment`,
@@ -24,6 +25,7 @@ test(
          Reasons why a snapshot could be re-generated :
          - Reference Release has changed
          - Next challenge algorithm has changed
+         - CSV results file layout has changed
          - Scoring algorithm or configuration has changed`,
       },
     ],
@@ -132,10 +134,22 @@ test(
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('-');
+      expect(result).toBe('- PIX');
       expect(comment).toBe(
         'Commentaire : Le nombre de questions répondues pendant votre test de certification est insuffisant et ne nous permet pas de vous délivrer une certification Pix.',
       );
+    });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
     });
     await snapshotHandler.expectOrRecord(snapshotPath);
   },

@@ -10,7 +10,8 @@ import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
 const testRef = 'PRO_CORE_1OK-0KO_EndedByFinalization_TechnicalIssue';
-const snapshotPath = `recette-certif/${testRef}.json`;
+const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
+const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
   `${testRef} - User takes a certification test for a PRO certification center, only CORE subscription. one challenge only answered. Ended by finalization for technical issue`,
@@ -23,6 +24,7 @@ test(
          Reasons why a snapshot could be re-generated :
          - Reference Release has changed
          - Next challenge algorithm has changed
+         - CSV results file layout has changed
          - Scoring algorithm or configuration has changed`,
       },
     ],
@@ -128,11 +130,24 @@ test(
       expect(detailsFramework).toBe('Certification Pix');
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('-');
+      expect(result).toBe('- PIX');
       expect(comment).toBe(
         "Commentaire : Un ou plusieurs problème(s) technique(s), signalé(s) à votre surveillant pendant la session de certification, a/ont affecté la qualité du test de certification. En raison du trop grand nombre de questions auxquelles vous n'avez pas pu répondre dans de bonnes conditions, nous ne sommes malheureusement pas en mesure de calculer un score fiable et de fournir un certificat. La certification est annulée, le prescripteur de votre certification (le cas échéant), en est informé.",
       );
     });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
+    });
+
     await snapshotHandler.expectOrRecord(snapshotPath);
   },
 );

@@ -9,7 +9,7 @@ import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
 const testRef = 'EDU_1OK-0KO_EndedByFinalization_Abandonment';
-const snapshotPath = `recette-certif/${testRef}.json`;
+const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
 
 test(
   `${testRef} - User takes a certification test for a Pix+ Edu subscription. One challenge only answered. Ended by finalization for abandonment`,

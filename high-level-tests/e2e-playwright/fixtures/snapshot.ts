@@ -3,7 +3,6 @@ import path from 'node:path';
 
 import { expect, test as base } from '@playwright/test';
 import { parse } from 'csv-parse/sync';
-import { stringify } from 'csv-stringify/sync';
 import * as fs from 'fs/promises';
 import { PDFParse } from 'pdf-parse';
 import pixelmatch from 'pixelmatch';
@@ -89,27 +88,17 @@ class SnapshotHandler {
       skip_empty_lines: true,
       trim: true,
       bom: true,
-    });
+    }) as Record<string, unknown>[];
+    for (const ignoredColumn of ignoredColumns) {
+      for (const row of parsedCsvData) {
+        delete row[ignoredColumn];
+      }
+    }
     if (this.shouldUpdateSnapshots) {
-      await writeFile(resultFilePath, stringify(parsedCsvData, { header: true, delimiter: ';' }));
+      await writeFile(resultFilePath, JSON.stringify(parsedCsvData));
     } else {
-      const refBuffer = await readFile(resultFilePath);
-      const refCsvData = parse(refBuffer, {
-        columns: true,
-        delimiter: ';',
-        skip_empty_lines: true,
-        trim: true,
-        bom: true,
-      });
-      const removeIgnoredColumns = (data: any[]) =>
-        data.map((row) => {
-          const newRow = { ...row };
-          ignoredColumns.forEach((col) => delete newRow[col]);
-          return newRow;
-        });
-      const cleanCurrent = removeIgnoredColumns(parsedCsvData);
-      const cleanRef = removeIgnoredColumns(refCsvData);
-      expect(cleanCurrent).toEqual(cleanRef);
+      const refData = JSON.parse(await readFile(resultFilePath, 'utf8'));
+      expect(parsedCsvData).toEqual(refData);
     }
   }
 
