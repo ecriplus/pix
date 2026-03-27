@@ -65,7 +65,11 @@ export class CertificationSessionPage {
     await this.page.getByRole('button', { name: 'Lien de téléchargement des résultats' }).click();
     await generateCsvLinkPromise;
     const link = await this.page.evaluate(() => navigator.clipboard.readText());
-    await this.page.goto(link);
+    const linkUrl = new URL(link);
+    const appPixUrl = new URL(process.env.PIX_APP_URL!);
+    linkUrl.protocol = appPixUrl.protocol;
+    linkUrl.host = appPixUrl.host;
+    await this.page.goto(linkUrl.toString());
 
     await this.page.getByText('Télécharger les résultats de session').waitFor({ state: 'visible' });
     const downloadTrigger = this.page.getByRole('button', { name: 'Télécharger les résultats', exact: true }).click();
