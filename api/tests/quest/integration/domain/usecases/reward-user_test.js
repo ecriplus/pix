@@ -1,4 +1,5 @@
 import { PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migrations/20240820101213_add-profile-rewards-table.js';
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
@@ -73,6 +74,7 @@ const setupContextWithProfileSkillQuest = async ({
   ];
 
   const quest = databaseBuilder.factory.buildQuest({
+    rewardType: REWARD_TYPES.ATTESTATION,
     eligibilityRequirements: [
       {
         requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
@@ -182,6 +184,7 @@ const setupContextWithCappedTubesQuest = async ({
   }
 
   const quest = databaseBuilder.factory.buildQuest({
+    rewardType: REWARD_TYPES.ATTESTATION,
     eligibilityRequirements: [
       {
         requirement_type: REQUIREMENT_TYPES.OBJECT.ORGANIZATION,
@@ -318,6 +321,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         const rewardId = databaseBuilder.factory.buildAttestation().id;
 
         databaseBuilder.factory.buildQuest({
+          rewardType: REWARD_TYPES.ATTESTATION,
           rewardId,
           eligibilityRequirements: [
             {
@@ -406,6 +410,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         const rewardId = databaseBuilder.factory.buildAttestation().id;
 
         databaseBuilder.factory.buildQuest({
+          rewardType: REWARD_TYPES.ATTESTATION,
           rewardId,
           eligibilityRequirements: [
             {
@@ -430,6 +435,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
           ],
         });
         databaseBuilder.factory.buildQuest({
+          rewardType: REWARD_TYPES.ATTESTATION,
           rewardId,
           eligibilityRequirements: [
             {
@@ -597,6 +603,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
         const rewardId = databaseBuilder.factory.buildAttestation().id;
 
         databaseBuilder.factory.buildQuest({
+          rewardType: REWARD_TYPES.ATTESTATION,
           rewardId,
           eligibilityRequirements: [
             {
@@ -621,6 +628,7 @@ describe('Quest | Integration | Domain | Usecases | RewardUser', function () {
           ],
         });
         databaseBuilder.factory.buildQuest({
+          rewardType: REWARD_TYPES.ATTESTATION,
           rewardId,
           eligibilityRequirements: [
             {

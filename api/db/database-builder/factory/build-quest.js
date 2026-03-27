@@ -8,7 +8,7 @@ const buildQuest = function ({
   id = databaseBuffer.getNextId(),
   createdAt = new Date(),
   updatedAt,
-  rewardType = REWARD_TYPES.ATTESTATION,
+  rewardType,
   rewardId,
   eligibilityRequirements = [],
   successRequirements = [],
@@ -38,8 +38,9 @@ const buildQuest = function ({
   };
 };
 
-const buildQuestForCombinedCourse = function ({ successRequirements = [], rewardId, rewardType } = {}) {
+const buildQuestForCombinedCourse = function ({ successRequirements = [], rewardId = null, rewardType = null } = {}) {
   return buildQuest({
+    eligibilityRequirements: [],
     successRequirements,
     rewardId,
     rewardType,
