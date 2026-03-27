@@ -169,9 +169,9 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
     [
       { framework: Frameworks.CORE, isPublishable: true },
       { framework: Frameworks.CLEA, isPublishable: true },
-      { framework: Frameworks.EDU_1ER_DEGRE, isPublishable: false },
-      { framework: Frameworks.EDU_2ND_DEGRE, isPublishable: false },
-      { framework: Frameworks.EDU_CPE, isPublishable: false },
+      { framework: Frameworks.EDU_1ER_DEGRE, isPublishable: true },
+      { framework: Frameworks.EDU_2ND_DEGRE, isPublishable: true },
+      { framework: Frameworks.EDU_CPE, isPublishable: true },
       { framework: Frameworks.DROIT, isPublishable: false },
       { framework: Frameworks.PRO_SANTE, isPublishable: false },
     ].forEach(({ framework, isPublishable }) => {
