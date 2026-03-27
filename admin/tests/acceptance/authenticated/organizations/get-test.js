@@ -27,6 +27,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
     const ORGANIZATION_ID = 1;
     const ARCHIVED_ORGANIZATION_ID = 2;
     const ORGANIZATION_WITHOUT_PLACES_MANAGEMENT_ID = 3;
+    const ORGANIZATION_IN_NETWORK_ID = 4;
 
     hooks.beforeEach(async () => {
       await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -382,6 +383,71 @@ module('Acceptance | Organizations | Get', function (hooks) {
           assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_ID}/children`);
         });
       });
+
+      module('Network tab', function () {
+        module('when organization is part of a network', function (hooks) {
+          hooks.beforeEach(() => {
+            const network = server.create('network', { name: 'Réseau Pro' });
+
+            server.create('organization', {
+              id: ORGANIZATION_IN_NETWORK_ID,
+              name: 'My Organization In Network',
+              features: { PLACES_MANAGEMENT: { active: true } },
+              network: network,
+            });
+
+            server.create('organization', {
+              parentOrganizationId: ORGANIZATION_IN_NETWORK_ID,
+              name: 'Child of My Organization In Network',
+              features: { PLACES_MANAGEMENT: { active: false } },
+            });
+          });
+
+          test('it should display Network tab, with number of sub-level organizations', async function (assert) {
+            // when
+            const screen = await visit(`/organizations/${ORGANIZATION_IN_NETWORK_ID}`);
+
+            // then
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+            assert.ok(
+              within(navigationTabs).getByRole('link', {
+                name: t('pages.organization.navbar.network', { nbrOfChildren: 1 }),
+              }),
+            );
+          });
+
+          test('it should navigate to organization network page when clicking tab', async function (assert) {
+            // given
+            const screen = await visit(`/organizations/${ORGANIZATION_IN_NETWORK_ID}`);
+
+            // when
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+
+            const networkTab = within(navigationTabs).getByRole('link', {
+              name: t('pages.organization.navbar.network', { nbrOfChildren: 1 }),
+            });
+            await click(networkTab);
+
+            // then
+            assert.strictEqual(currentURL(), `/organizations/${ORGANIZATION_IN_NETWORK_ID}/network`);
+          });
+        });
+
+        module('when organization is not part of a network', function () {
+          test('it should not display Network tab', async function (assert) {
+            // when
+            const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
+
+            // then
+            const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+            assert.notOk(
+              within(navigationTabs).queryByRole('link', {
+                name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
+              }),
+            );
+          });
+        });
+      });
     });
   });
 
@@ -440,6 +506,63 @@ module('Acceptance | Organizations | Get', function (hooks) {
       // then
       const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
       assert.notOk(within(navigationTabs).queryByRole('link', { name: t('pages.organization.navbar.tags') }));
+    });
+  });
+
+  module('Network tab Access control (temporary tests, to be deleted at the end of epix PIX-21277)', function (hooks) {
+    hooks.beforeEach(() => {
+      server.create('organization', {
+        id: 99,
+        name: 'My Organization',
+        features: { PLACES_MANAGEMENT: { active: true } },
+      });
+    });
+    test('should not be visible for Certif member', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isCertif: true })(server);
+
+      // when
+      const screen = await visit('/organizations/99');
+
+      // then
+      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+      assert.notOk(
+        within(navigationTabs).queryByRole('link', {
+          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
+        }),
+      );
+    });
+
+    test('should not be visible for Support member', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isSupport: true })(server);
+
+      //when
+      const screen = await visit('/organizations/99');
+
+      // then
+      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+      assert.notOk(
+        within(navigationTabs).queryByRole('link', {
+          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
+        }),
+      );
+    });
+
+    test('should not be visible for Metier member', async function (assert) {
+      // given
+      await authenticateAdminMemberWithRole({ isMetier: true })(server);
+
+      // when
+      const screen = await visit('/organizations/99');
+
+      // then
+      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
+      assert.notOk(
+        within(navigationTabs).queryByRole('link', {
+          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
+        }),
+      );
     });
   });
 });
