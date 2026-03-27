@@ -679,6 +679,20 @@
         }
       },
       "exam-date": "Datum der Passage :",
+      "framework-title": {
+        "CLEA": "Pix-Zertifikat",
+        "CORE": "Pix-Zertifikat",
+        "EDU_1ER_DEGRE": "Pix+ Edu Zertifikat 1. Stufe",
+        "EDU_2ND_DEGRE": "Pix+ Edu Zertifikat 2. Stufe",
+        "EDU_CPE": "Pix+ Edu CPE-Zertifikat"
+      },
+      "frameworks": {
+        "EDU": {
+          "results-infos": "'<p>'Die Zertifizierung erfolgt in zwei Stufen:'</p><ol><li>'Pix-Prüfung: gerade abgeschlossen.'</li><li>'Mündliche Prüfung: außerhalb von Pix vor einer Jury organisiert.'</li></ol><p>'Am Ende der mündlichen Prüfung wird Ihr endgültiges Zertifizierungsniveau vergeben (Experte, Fortgeschritten usw.).'<br/>'Wenden Sie sich an Ihr Zertifizierungszentrum, um die mündliche Prüfung zu organisieren.'</p>'",
+          "status": "Gültiges Zertifikat",
+          "sub-title": "Der Kandidat ist für die 2. Stufe zugelassen!"
+        }
+      },
       "global": {
         "explanation": {
           "default": "Sie haben die Stufe {globalLevelLabel} der Pix-Zertifizierung erreicht!",
@@ -704,6 +718,10 @@
       "jury-title": "Bemerkungen der Jury",
       "learn-about-certification-results": "Wie sind die Ergebnisse zu interpretieren?",
       "professionalizing-warning": "Das Pix-Zertifikat wird von France compétences ab einer Mindestpunktzahl von 120 Pix als berufsqualifizierend anerkannt.",
+      "results": {
+        "sub-title": "Der Kandidat ist für die Zertifizierung {framework} zugelassen.",
+        "title": "Ergebnis lesen:"
+      },
       "title": "Pix-Zertifikat",
       "verification-code": {
         "alt": "Kopieren",
@@ -2390,16 +2408,16 @@
     "user-certifications": {
       "meshes": {
         "EDU_1ER_DEGRE": {
-          "BELOW_MINIMUM": "Nicht zulässig",
-          "0": "Zulässig"
+          "0": "Zulässig",
+          "BELOW_MINIMUM": "Nicht zulässig"
         },
         "EDU_2ND_DEGRE": {
-          "BELOW_MINIMUM": "Nicht zulässig",
-          "0": "Zulässig"
+          "0": "Zulässig",
+          "BELOW_MINIMUM": "Nicht zulässig"
         },
         "EDU_CPE": {
-          "BELOW_MINIMUM": "Nicht zulässig",
-          "0": "Zulässig"
+          "0": "Zulässig",
+          "BELOW_MINIMUM": "Nicht zulässig"
         }
       }
     },

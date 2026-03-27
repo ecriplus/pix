@@ -1,9 +1,11 @@
+import { setupIntl } from 'ember-intl/test-support';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 module('Unit | Model | certification', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks, 'fr');
 
   let store;
 
@@ -20,6 +22,31 @@ module('Unit | Model | certification', function (hooks) {
     test('should be false when certification has no certified badge image', function (assert) {
       const model = store.createRecord('certification', { certifiedBadgeImages: [] });
       assert.false(model.hasAcquiredComplementaryCertifications);
+    });
+
+    test('should be false when certifiedBadgeImages is undefined', function (assert) {
+      const model = store.createRecord('certification', {});
+      assert.false(model.hasAcquiredComplementaryCertifications);
+    });
+  });
+
+  module('#title', function () {
+    test('should return CORE framework title when certificationFramework is not set', function (assert) {
+      // given
+      const model = store.createRecord('certification', {});
+      const intl = this.owner.lookup('service:intl');
+
+      // when / then
+      assert.strictEqual(model.title, intl.t('pages.certificate.framework-title.CORE'));
+    });
+
+    test('should return the framework-specific title when certificationFramework is set', function (assert) {
+      // given
+      const model = store.createRecord('certification', { certificationFramework: 'EDU_1ER_DEGRE' });
+      const intl = this.owner.lookup('service:intl');
+
+      // when / then
+      assert.strictEqual(model.title, intl.t('pages.certificate.framework-title.EDU_1ER_DEGRE'));
     });
   });
 

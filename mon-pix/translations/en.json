@@ -680,6 +680,20 @@
         }
       },
       "exam-date": "Completion date:",
+      "framework-title": {
+        "CLEA": "Pix Certificate",
+        "CORE": "Pix Certificate",
+        "EDU_1ER_DEGRE": "Pix+ Edu 1st Degree Certificate",
+        "EDU_2ND_DEGRE": "Pix+ Edu 2nd Degree Certificate",
+        "EDU_CPE": "Pix+ Edu CPE Certificate"
+      },
+      "frameworks": {
+        "EDU": {
+          "results-infos": "'<p>'The certification takes place in two stages:'</p><ol><li>'Pix assessment: just completed.'</li><li>'Oral assessment: organised outside of Pix before a panel.'</li></ol><p>'At the end of the oral, your final certification level will be awarded (Expert, Advanced, etc.).'<br/>'Contact your certification centre to organise the oral assessment.'</p>'",
+          "status": "Valid certificate",
+          "sub-title": "The candidate is eligible for the 2nd stage!"
+        }
+      },
       "global": {
         "explanation": {
           "default": "You've reached {globalLevelLabel} level of Pix Certification!",
@@ -705,6 +719,10 @@
       "jury-title": "Notes from the examining body",
       "learn-about-certification-results": "How to interpret the results?",
       "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
+      "results": {
+        "sub-title": "The candidate is eligible for {framework} certification.",
+        "title": "Reading the result:"
+      },
       "title": "Pix Certificate",
       "verification-code": {
         "alt": "Copy",
@@ -2390,16 +2408,16 @@
     "user-certifications": {
       "meshes": {
         "EDU_1ER_DEGRE": {
-          "BELOW_MINIMUM": "Not eligible",
-          "0": "Eligible"
+          "0": "Eligible",
+          "BELOW_MINIMUM": "Not eligible"
         },
         "EDU_2ND_DEGRE": {
-          "BELOW_MINIMUM": "Not eligible",
-          "0": "Eligible"
+          "0": "Eligible",
+          "BELOW_MINIMUM": "Not eligible"
         },
         "EDU_CPE": {
-          "BELOW_MINIMUM": "Not eligible",
-          "0": "Eligible"
+          "0": "Eligible",
+          "BELOW_MINIMUM": "Not eligible"
         }
       }
     },
