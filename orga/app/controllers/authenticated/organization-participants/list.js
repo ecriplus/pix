@@ -20,6 +20,7 @@ export default class ListController extends Controller {
   @tracked participationCountOrder = null;
   @tracked latestParticipationOrder = null;
   @tracked lastnameSort = 'asc';
+  @tracked divisionSort = null;
 
   get hasComputeOrganizationLearnerCertificabilityEnabled() {
     return this.currentUser.prescriber.computeOrganizationLearnerCertificability;
@@ -54,6 +55,7 @@ export default class ListController extends Controller {
     this.pageNumber = null;
     this.latestParticipationOrder = null;
     this.lastnameSort = null;
+    this.divisionSort = null;
   }
 
   @action
@@ -64,6 +66,7 @@ export default class ListController extends Controller {
     this.pageNumber = null;
     this.participationCountOrder = null;
     this.lastnameSort = null;
+    this.divisionSort = null;
   }
 
   @action
@@ -74,6 +77,18 @@ export default class ListController extends Controller {
     this.pageNumber = null;
     this.participationCountOrder = null;
     this.latestParticipationOrder = null;
+    this.divisionSort = null;
+  }
+
+  @action
+  sortByDivision() {
+    if (!this.divisionSort) this.divisionSort = 'asc';
+    else this.divisionSort = this.divisionSort === 'asc' ? 'desc' : 'asc';
+
+    this.pageNumber = null;
+    this.participationCountOrder = null;
+    this.latestParticipationOrder = null;
+    this.lastnameSort = null;
   }
 
   @action

@@ -251,34 +251,54 @@ export default class List extends Component {
             </PixTableColumn>
 
             {{#each this.customColumns as |heading|}}
-              <PixTableColumn @context={{context}}>
-                <:header>
-                  <div class="organization-participant__align-element">
+              {{#if (eq heading "COMMON_DIVISION")}}
+                <PixTableColumn
+                  @context={{context}}
+                  @onSort={{fn this.addResetOnFunction @sortByDivision reset}}
+                  @sortOrder={{@divisionSort}}
+                  @ariaLabelDefaultSort={{t
+                    "pages.organization-participants.table.column.division.ariaLabelDefaultSort"
+                  }}
+                  @ariaLabelSortAsc={{t "pages.organization-participants.table.column.division.ariaLabelSortUp"}}
+                  @ariaLabelSortDesc={{t "pages.organization-participants.table.column.division.ariaLabelSortDown"}}
+                >
+                  <:header>
                     {{t (getColumnName heading)}}
-                    {{#if (eq heading "ORALIZATION")}}
-                      <PixTooltip @id="organization-participants-oralization-tooltip" @isWide="true">
-                        <:triggerElement>
-                          <PixIcon
-                            @name="help"
-                            @plainIcon="true"
-                            aria-label={{t
-                              "pages.organization-participants.table.oralization-header-tooltip-aria-label"
-                            }}
-                            aria-describedby="organization-participants-oralization-tooltip"
-                          />
-                        </:triggerElement>
+                  </:header>
+                  <:cell>
+                    {{this.getExtraColumnRowValue heading participant}}
+                  </:cell>
+                </PixTableColumn>
+              {{else}}
+                <PixTableColumn @context={{context}}>
+                  <:header>
+                    <div class="organization-participant__align-element">
+                      {{t (getColumnName heading)}}
+                      {{#if (eq heading "ORALIZATION")}}
+                        <PixTooltip @id="organization-participants-oralization-tooltip" @isWide="true">
+                          <:triggerElement>
+                            <PixIcon
+                              @name="help"
+                              @plainIcon="true"
+                              aria-label={{t
+                                "pages.organization-participants.table.oralization-header-tooltip-aria-label"
+                              }}
+                              aria-describedby="organization-participants-oralization-tooltip"
+                            />
+                          </:triggerElement>
 
-                        <:tooltip>
-                          {{t "pages.organization-participants.table.oralization-header-tooltip"}}
-                        </:tooltip>
-                      </PixTooltip>
-                    {{/if}}
-                  </div>
-                </:header>
-                <:cell>
-                  {{this.getExtraColumnRowValue heading participant}}
-                </:cell>
-              </PixTableColumn>
+                          <:tooltip>
+                            {{t "pages.organization-participants.table.oralization-header-tooltip"}}
+                          </:tooltip>
+                        </PixTooltip>
+                      {{/if}}
+                    </div>
+                  </:header>
+                  <:cell>
+                    {{this.getExtraColumnRowValue heading participant}}
+                  </:cell>
+                </PixTableColumn>
+              {{/if}}
             {{/each}}
 
             {{#unless this.currentUser.canAccessMissionsPage}}

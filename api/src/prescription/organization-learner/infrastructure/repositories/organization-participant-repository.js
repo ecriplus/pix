@@ -5,6 +5,7 @@ import {
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { IMPORT_KEY_FIELD } from '../../../learner-management/domain/constants.js';
 import { OrganizationParticipant } from '../../domain/read-models/OrganizationParticipant.js';
 
 async function findPaginatedFilteredParticipants({ organizationId, page, filters = {}, sort = {} }) {
@@ -55,7 +56,7 @@ function _organizationLearnerParticipantsQuery({
 }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const orderByClause = _getOrderClause(sort);
+  const orderByClause = _getOrderClause(sort, extraColumns);
 
   const withQuery = _buildWithQuery({ organizationId, extraColumns, withImport, knexConn });
 
@@ -74,7 +75,7 @@ function _organizationLearnerParticipantsQuery({
   return query;
 }
 
-function _getOrderClause(sort) {
+function _getOrderClause(sort, extraColumns = []) {
   const orderByClause = ['lastName', 'firstName', 'id'];
   if (sort.participationCount) {
     orderByClause.unshift({
@@ -94,6 +95,16 @@ function _getOrderClause(sort) {
       column: 'lastParticipationDate',
       order: sort.latestParticipationOrder === 'desc' ? 'desc' : 'asc',
     });
+  }
+
+  if (sort.divisionSort) {
+    const divisionColumn = extraColumns.find(({ name }) => name === IMPORT_KEY_FIELD.COMMON_DIVISION);
+    if (divisionColumn) {
+      orderByClause.unshift({
+        column: divisionColumn.name,
+        order: sort.divisionSort === 'desc' ? 'desc' : 'asc',
+      });
+    }
   }
 
   return orderByClause;

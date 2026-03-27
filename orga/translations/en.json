@@ -1460,6 +1460,11 @@
         },
         "column": {
           "checkbox": "Select/Unselect {firstname} {lastname}",
+          "division": {
+            "ariaLabelDefaultSort": "The table is currently not sorted by class. Click to sort by alphabetical order.",
+            "ariaLabelSortDown": "The table is sorted by class, in reverse alphabetical order. Click to sort by alphabetical order.",
+            "ariaLabelSortUp": "The table is sorted by class, in alphabetical order. Click to sort by reverse alphabetical order."
+          },
           "first-name": "First name",
           "is-certifiable": {
             "label": "Eligibility for certification"

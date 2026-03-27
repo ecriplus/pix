@@ -1447,6 +1447,11 @@
         },
         "column": {
           "checkbox": "Sélectionner/Désélectionner {firstname} {lastname}",
+          "division": {
+            "ariaLabelDefaultSort": "Le tableau n'est actuellement pas trié par classe. Cliquez pour trier par ordre alphabétique.",
+            "ariaLabelSortDown": "Le tableau est trié par classe, dans l'ordre alphabétique inverse. Cliquez pour trier par ordre alphabétique.",
+            "ariaLabelSortUp": "Le tableau est trié par classe, dans l'ordre alphabétique. Cliquez pour trier par ordre alphabétique inverse."
+          },
           "first-name": "Prénom",
           "is-certifiable": {
             "label": "Certificabilité"

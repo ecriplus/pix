@@ -24,6 +24,8 @@ import NoParticipantPanel from 'pix-orga/components/organization-participant/no-
         @sortByLastname={{@controller.sortByLastname}}
         @lastnameSort={{@controller.lastnameSort}}
         @latestParticipationOrder={{@controller.latestParticipationOrder}}
+        @divisionSort={{@controller.divisionSort}}
+        @sortByDivision={{@controller.sortByDivision}}
         @deleteParticipants={{@controller.deleteOrganizationLearners}}
         @hasComputeOrganizationLearnerCertificabilityEnabled={{@controller.hasComputeOrganizationLearnerCertificabilityEnabled}}
         @hasOrganizationParticipantPage={{@controller.hasOrganizationParticipantPage}}

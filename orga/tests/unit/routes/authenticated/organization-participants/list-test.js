@@ -17,6 +17,7 @@ module('Unit | Route | authenticated/organization-participants/list', function (
   const participationCountOrderSymbol = Symbol('participationCountOrder');
   const latestParticipationOrderSymbol = Symbol('latestParticipationOrder');
   const lastnameSortSymbol = Symbol('lastnameSort');
+  const divisionSortSymbol = Symbol('divisionSort');
   const pageNumberSymbol = Symbol('pageNumber');
   const pageSizeSymbol = Symbol('pageSize');
 
@@ -26,6 +27,7 @@ module('Unit | Route | authenticated/organization-participants/list', function (
     extraFilters: extraFiltersSymbol,
     participationCountOrder: participationCountOrderSymbol,
     latestParticipationOrder: latestParticipationOrderSymbol,
+    divisionSort: divisionSortSymbol,
     lastnameSort: lastnameSortSymbol,
     pageNumber: pageNumberSymbol,
     pageSize: pageSizeSymbol,
@@ -56,6 +58,7 @@ module('Unit | Route | authenticated/organization-participants/list', function (
           participationCount: participationCountOrderSymbol,
           latestParticipationOrder: latestParticipationOrderSymbol,
           lastnameSort: lastnameSortSymbol,
+          divisionSort: divisionSortSymbol,
         },
         page: {
           number: pageNumberSymbol,
@@ -89,6 +92,7 @@ module('Unit | Route | authenticated/organization-participants/list', function (
       participationCountOrder: null,
       latestParticipationOrder: null,
       lastnameSort: 'asc',
+      divisionSort: null,
     });
   });
 });
