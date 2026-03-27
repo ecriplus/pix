@@ -1,7 +1,7 @@
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
 
-const attachChildOrganizationToOrganization = withTransaction(
+const attachChildOrganizationToOrganizationUsecase = withTransaction(
   async ({ childOrganizationIds, parentOrganizationId, organizationForAdminRepository, networkRepository }) => {
     const parentOrganization = await organizationForAdminRepository.get({
       organizationId: parentOrganizationId,
@@ -31,7 +31,7 @@ const attachChildOrganizationToOrganization = withTransaction(
   },
 );
 
-export { attachChildOrganizationToOrganization };
+export { attachChildOrganizationToOrganizationUsecase };
 
 function _assertChildAndParentOrganizationIdsAreDifferent({ childOrganizationId, parentOrganizationId }) {
   if (childOrganizationId === parentOrganizationId) {
