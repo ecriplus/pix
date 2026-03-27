@@ -66,6 +66,7 @@ export default class ModulixStep extends Component {
               @onFileDownload={{@onFileDownload}}
               @onExpandToggle={{@onExpandToggle}}
               @updateSkipButton={{@updateSkipButton}}
+              @passageId={{@passageId}}
             />
           </div>
         {{/each}}

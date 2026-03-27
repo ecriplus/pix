@@ -32,8 +32,8 @@
                 "title": "ChatPix",
                 "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmetxlll80000vr019lhpwzmg",
                 "instruction": "<p>Demander un poème sur votre animal préféré à ChatPix. C’est mieux si c’est le chien. Vous avez droits à 5 prompts.</p>",
-                "height": 600,
-                "solution": "pix-llm-success"
+                "solution": "pix-llm-success",
+                "height": 600
               }
             }
           ]
@@ -54,6 +54,46 @@
                 "instruction": "<p>Vous pouvez discuter avec ChatPix :</p>",
                 "height": 600
               }
+            }
+          ]
+        },
+        {
+          "id": "3d8af320-4371-4444-b04c-918ea73c5538",
+          "type": "short-lesson",
+          "title": "démo stepper LLM",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "87eaa3f7-267d-4806-84ef-06abf6562e21",
+                      "type": "embed",
+                      "isCompletionRequired": false,
+                      "title": "ChatPix",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmbeufuv30000wa013ztfk809",
+                      "instruction": "<p>Vous pouvez discuter avec ChatPix :</p>",
+                      "height": 600
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7f9495c4-dca1-4150-b4a7-a113e5b49d1d",
+                      "type": "embed",
+                      "isCompletionRequired": true,
+                      "title": "ChatPix",
+                      "url": "https://epreuves.pix.fr/pix-llm/pix-llm.html?mode=cmetxlll80000vr019lhpwzmg",
+                      "instruction": "<p>Demander un poème sur votre animal préféré à ChatPix. C’est mieux si c’est le chien. Vous avez droits à 5 prompts.</p>",
+                      "solution": "pix-llm-success",
+                      "height": 600
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
