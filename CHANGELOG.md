@@ -1,5 +1,11 @@
 # Pix Changelog
 
+# [5.371.0](https://github.com/1024pix/pix/compare/v5.370.0...v5.371.0) (2026-03-27)
+
+### :rocket: Amélioration
+
+- [#15670](https://github.com/1024pix/pix/pull/15670) modif-finales-ortho-typo-datacenter-ind
+
 # [5.370.0](https://github.com/1024pix/pix/compare/v5.369.0...v5.370.0) (2026-03-27)
 
 ### :rocket: Amélioration
