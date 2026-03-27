@@ -175,7 +175,7 @@
             {
               "type": "element",
               "element": {
-                "id": "37ebaede-8006-4876-a44b-0e2c79dcd882",
+                "id": "b4df6ea2-c933-47cb-8ee8-24852985d6c3",
                 "type": "text",
                 "tag": " ",
                 "content": "<p>Aujourd’hui, de nombreux services en ligne demandent une <strong>étape supplémentaire pour vérifier l’identité</strong> de la personne qui se connecte. 🪪 <br>C’est la <strong>double authentification</strong>.</p>"
@@ -425,7 +425,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0917f552-c110-4874-af21-0ff7f099c4b1",
+                "id": "80c5c3d9-5d42-4249-87ea-a3e8f8c0f359",
                 "type": "qcu",
                 "instruction": "<p>À quoi sert la double authentification ?</p>",
                 "hasShortProposals": false,
