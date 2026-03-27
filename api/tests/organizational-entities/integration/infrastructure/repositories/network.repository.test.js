@@ -268,4 +268,46 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
       expect(savedNetwork).to.deep.equal(expectedNetwork);
     });
   });
+
+  describe('#attachOrganization', function () {
+    it('attaches an organization to the network through its parent', async function () {
+      // given
+      const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
+      const parentStructure = databaseBuilder.factory.buildStructure();
+      const network = databaseBuilder.factory.buildNetwork();
+      databaseBuilder.factory.buildFactStructure({
+        organizationId: parentOrganization.id,
+        structureId: parentStructure.id,
+        networkId: network.id,
+      });
+
+      const childOrganization = await databaseBuilder.factory.buildOrganization({ id: 456 });
+      const childStructure = databaseBuilder.factory.buildStructure();
+      databaseBuilder.factory.buildFactStructure({
+        organizationId: childOrganization.id,
+        structureId: childStructure.id,
+        networkId: null,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      await networkRepository.attachOrganization({
+        childOrganizationId: childOrganization.id,
+        parentOrganizationId: parentOrganization.id,
+      });
+
+      // then
+      const updatedFactStructure = await knex('fct_structures')
+        .where({ organization_id: childOrganization.id })
+        .first();
+      expect(updatedFactStructure).to.deep.equal({
+        organization_id: childOrganization.id,
+        structure_id: childStructure.id,
+        network_id: network.id,
+        parent_structure_id: parentStructure.id,
+        child_structure_id: null,
+      });
+    });
+  });
 });
