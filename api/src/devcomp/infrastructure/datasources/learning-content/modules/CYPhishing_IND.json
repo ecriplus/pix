@@ -33,7 +33,7 @@
                 "id": "f9a9eca3-9b86-4c44-9651-02c61a0a445c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>En 2024, selon le rapport annuel de l’organisation internationale APWG (Anti-Phishing Working Group), plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde.&nbsp; </p><p>Des escrocs diffusent massivement des <strong>messages d’arnaque </strong><strong>qui incitent</strong> les internautes à se rendre sur ces sites où ils vont se faire piéger . </p><p>Et <strong>personne n’est épargné</strong>&nbsp;: particuliers, organisations… même les professionnels du numérique peuvent tomber dans le piège.</p>"
+                "content": "<p>En 2024, selon le rapport annuel de l’organisation internationale APWG (Anti-Phishing Working Group), plus de <strong>3,7 millions de sites frauduleux</strong> ont été détectés dans le monde.&nbsp; </p><p>Des escrocs diffusent massivement des <strong>messages d’arnaque </strong><strong>qui incitent</strong> les internautes à se rendre sur ces sites où ils vont se faire piéger. </p><p>Et <strong>personne n’est épargné</strong>&nbsp;: particuliers, organisations… même les professionnels du numérique peuvent tomber dans le piège.</p>"
               }
             },
             {
@@ -145,7 +145,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>C’est un faux meesage de la banque !</p><p>Dans ce message, <strong>l’escroc se fait passer pour une personne ou une organisation de confiance</strong>. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
+                            "diagnosis": "<p>C’est un faux message de la banque !</p><p>Dans ce message, <strong>l’escroc se fait passer pour une personne ou une organisation de confiance</strong>. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
                           }
                         }
                       ],
@@ -504,52 +504,56 @@
           ]
         },
         {
-          "id": "161db7c1-4ec3-4bed-9309-2638677a6700",
+          "id": "e331f1c1-895b-4bc4-b4e5-398cb2f7da24",
           "type": "short-lesson",
           "title": "Deuxième leçon",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "77909d47-54bc-4fc6-8b36-bb1816894d44",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Dans les mails d’hameçonnage, l’escroc <strong>imite de façon presque parfaite</strong> une personne ou un organisme de confiance. 👺</p><p>Ayez l’œil pour repérer les imperfections !<br></p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "d6993f31-86f6-4544-84ac-d5ead738615e",
-                "type": "text",
-                "tag": " ",
-                "content": "🤔<strong> Bon à savoir</strong><br>Des indices se cachent parfois dans les URL. Sur ordinateur, <strong>le survol permet de voir l’URL</strong> vers lequel un bouton veut vous rediriger. Si cette URL comporte des fautes ou n’a rien à voir avec l’expediteur ou sa demande, il est possible que le mail soit du phishing."
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "d0726e19-cab8-4d42-a59d-41508b57dbc5",
-                "type": "short-video",
-                "title": "survol lien phishing",
-                "url": "https://assets.pix.org/draft/modules/cy_phishing_ind/screencast-url-phishing.mp4"
-              }
-            }
-          ]
-        },
-        {
-          "id": "e331f1c1-895b-4bc4-b4e5-398cb2f7da24",
-          "type": "short-lesson",
-          "title": "Suite deuxième leçon",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "12c491de-ff71-4bdc-9c60-d147953210a7",
-                "type": "text",
-                "tag": " ",
-                "content": "<h4>Et pour les messages reçus par SMS ou sur les réseaux sociaux ?</h4><p>Posez-vous les mêmes questions&nbsp;: L’expéditeur est-il connu et bien orthographié ? Le compte est-il vérifié ? L’adresse du lien semble-t-elle correcte ?<br></p>"
-              }
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "bb3e8ff7-2dd5-4287-aff5-fd0ba0d0c4c7",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Dans les mails d’hameçonnage, l’escroc&nbsp;<strong>imite de façon presque parfaite</strong>&nbsp;une personne ou un organisme de confiance. 👺 </p><p>Ayez l’œil pour repérer les imperfections !</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "01292ef8-33f2-4efc-b599-5bb58af5cc7e",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p><strong>🤔&nbsp;Bon à savoir</strong><br>Des indices se cachent parfois dans les URL. Sur ordinateur,&nbsp;<strong>le survol permet de voir l’URL</strong>&nbsp;vers lequel un bouton veut vous rediriger. Si cette URL comporte des fautes ou n’a rien à voir avec l’expediteur ou sa demande, il est possible que le mail soit du phishing.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "95ada864-7be8-40d6-b8c7-688af65bf294",
+                      "type": "short-video",
+                      "title": "survol lien phishing",
+                      "url": "https://assets.pix.org/modules/CYPhishingInd/screencast-url-phishing.mp4",
+                      "transcription": "<p>Vidéo qui montre qu'au survol du lien contenu dans un mail, l'url de la cible apparaît en bas de l'écran.<br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "ed11d383-8c10-4b33-bc93-7d3fdfe55eee",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<h4>Et pour les messages reçus par SMS ou sur les réseaux sociaux ? </h4><p>Posez-vous les mêmes questions&nbsp;: L’expéditeur est-il connu et bien orthographié ? Le compte est-il vérifié ? L’adresse du lien semble-t-elle correcte ?</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -654,29 +658,30 @@
           "title": "Troisième leçon",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "70cadc99-643a-4257-b711-72a76f194da3",
-                "type": "text",
-                "tag": " ",
-                "content": "<h4>Comment se protéger de l’hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;: <strong>bloquer</strong> un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part.</p><p>Protégez les autres&nbsp;: <strong>marquer comme indésirable</strong> (spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p>"
-              }
-            }
-          ]
-        },
-        {
-          "id": "fffbac4f-8c2e-40df-a668-3100c35f6991",
-          "type": "short-lesson",
-          "title": "Suite leçon 3",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "cb32bbb8-1d16-4a0b-ab88-ba8b7b15afe3",
-                "type": "text",
-                "tag": " ",
-                "content": "<h4>Vous avez encore un doute ? 🕵️</h4><p>N’hésitez pas à demander de l’aide à un proche ou un professionnel en qui vous avez confiance.<br></p>"
-              }
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "702e7b1f-a198-4fb7-a97d-edf6162322a6",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<h4>Comment se protéger de l’hameçonnage ? 🛡️</h4><p>Se protéger&nbsp;:&nbsp;<strong>bloquer</strong>&nbsp;un expéditeur malveillant empêche de recevoir de nouveaux messages de sa part. </p><p>Protégez les autres&nbsp;:&nbsp;<strong>marquer comme indésirable</strong>&nbsp;(spam) contribue à améliorer les filtres anti‑spam de tous les utilisateurs.</p><p><br></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "39c2b0c2-659e-4830-b5b3-13908c90ea6f",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<h4>Vous avez encore un doute ? 🕵️ </h4><p>N’hésitez pas à demander de l’aide à un proche ou un professionnel en qui vous avez confiance.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
