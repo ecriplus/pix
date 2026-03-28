@@ -1,6 +1,7 @@
 import { CertificationCompletedJob } from '../../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { certificationCompletedJobRepository } from '../../../../../../../src/certification/evaluation/infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import { FRENCH_SPOKEN } from '../../../../../../../src/shared/domain/services/locale-service.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobPriority } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -22,7 +23,10 @@ describe('Integration | Repository | Jobs | CertificationCompletedJobRepository'
         retrydelay: 30,
         retrybackoff: true,
         priority: JobPriority.HIGH,
-        data,
+        data: {
+          ...data,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });

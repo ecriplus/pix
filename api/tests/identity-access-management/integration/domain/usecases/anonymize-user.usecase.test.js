@@ -4,6 +4,7 @@ import { usecases } from '../../../../../src/identity-access-management/domain/u
 import { refreshTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/refresh-token.repository.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | anonymize-user', function () {
@@ -70,6 +71,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | anonymiz
       occurredAt: now.toISOString(),
       userId: anonymizedByUserId,
       targetUserIds: [userId],
+      correlationContext: EMPTY_CORRELATION_INFO,
     });
 
     const authenticationMethods = await knex('authentication-methods').where({ userId });

@@ -1,5 +1,6 @@
 import { ParticipationSharedJob } from '../../../../../../../src/prescription/campaign-participation/domain/models/ParticipationSharedJob.js';
 import { participationSharedJobRepository } from '../../../../../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-shared-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { expect } from '../../../../../../test-helper.js';
 
 describe('Integration | Prescription | Infrastructure | Repository | Jobs | participationSharedJobRepository', function () {
@@ -15,7 +16,10 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | part
         retrylimit: 0,
         retrydelay: 0,
         retrybackoff: false,
-        data: { campaignParticipationId: 2 },
+        data: {
+          campaignParticipationId: 2,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });

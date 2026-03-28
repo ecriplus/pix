@@ -1,5 +1,6 @@
 import { ComputeCertificabilityJob } from '../../../../../../../src/prescription/learner-management/domain/models/ComputeCertificabilityJob.js';
 import { computeCertificabilityJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/compute-certificability-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { expect } from '../../../../../../test-helper.js';
 
 describe('Integration | Prescription | Application | Jobs | computeCertificabilityJobRepository', function () {
@@ -13,7 +14,10 @@ describe('Integration | Prescription | Application | Jobs | computeCertificabili
         retrylimit: 0,
         retrydelay: 0,
         retrybackoff: false,
-        data: { organizationLearnerId: 4123132 },
+        data: {
+          organizationLearnerId: 4123132,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });

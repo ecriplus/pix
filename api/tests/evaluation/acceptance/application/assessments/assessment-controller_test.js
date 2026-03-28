@@ -16,7 +16,9 @@ import {
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
+import { CORRELATION_METADATA } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
+import { SCOPES } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import {
   createServer,
   databaseBuilder,
@@ -702,6 +704,16 @@ describe('Acceptance | Controller | assessment-controller', function () {
             await expect(CertificationCompletedJob.name).to.have.been.performed.withJobPayload({
               certificationCourseId,
               locale: FRENCH_FRANCE,
+              correlationContext: {
+                jobId: null,
+                scriptId: null,
+                user_id: certifiableUserId,
+                request_id: sinon.match.string,
+                [CORRELATION_METADATA]: {
+                  certificationId: certificationCourseId,
+                  scope: SCOPES.CERTIFICATION,
+                },
+              },
             });
           });
         });

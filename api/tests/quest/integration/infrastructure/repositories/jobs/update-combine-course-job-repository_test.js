@@ -1,5 +1,6 @@
 import { UpdateCombineCourseJob } from '../../../../../../src/quest/domain/models/UpdateCombinedCourseJob.js';
 import { updateCombinedCourseJobRepository } from '../../../../../../src/quest/infrastructure/repositories/jobs/update-combined-course-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Integration | Prescription | Application | Jobs | updateCombinedCourseJobRepository', function () {
@@ -17,7 +18,11 @@ describe('Integration | Prescription | Application | Jobs | updateCombinedCourse
         retrylimit: 0,
         retrydelay: 0,
         retrybackoff: false,
-        data: { userId, moduleId },
+        data: {
+          userId,
+          moduleId,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });

@@ -1,5 +1,6 @@
 import PgBoss from 'pg-boss';
 
+import { EMPTY_CORRELATION_INFO } from '../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobQueue } from '../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { catchErr, expect, knex } from '../../../test-helper.js';
@@ -50,7 +51,10 @@ describe('Integration | Tooling | Expect Job', function () {
       // then
       await expect('JobTest').to.have.been.performed.withJob({
         name: 'JobTest',
-        data: { foo: 'bar' },
+        data: {
+          foo: 'bar',
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
         retrylimit: job.retry.retryLimit,
         retrydelay: job.retry.retryDelay,
         retrybackoff: job.retry.retryBackoff,
@@ -100,7 +104,16 @@ describe('Integration | Tooling | Expect Job', function () {
       await job.performAsync({ bar: 'baz' });
 
       // then
-      await expect('JobTest').to.have.been.performed.withJobPayloads([{ foo: 'bar' }, { bar: 'baz' }]);
+      await expect('JobTest').to.have.been.performed.withJobPayloads([
+        {
+          foo: 'bar',
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
+        {
+          bar: 'baz',
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
+      ]);
     });
 
     it('fails when not all job payloads are correct', async function () {
@@ -148,8 +161,14 @@ describe('Integration | Tooling | Expect Job', function () {
       await job2.performAsync({ bar: 'baz' });
 
       // then
-      await expect('JobTest').to.have.been.performed.withJobPayload({ foo: 'bar' });
-      await expect('JobTest2').to.have.been.performed.withJobPayload({ bar: 'baz' });
+      await expect('JobTest').to.have.been.performed.withJobPayload({
+        foo: 'bar',
+        correlationContext: EMPTY_CORRELATION_INFO,
+      });
+      await expect('JobTest2').to.have.been.performed.withJobPayload({
+        bar: 'baz',
+        correlationContext: EMPTY_CORRELATION_INFO,
+      });
     });
 
     it('fails when the job payload is not correct', async function () {

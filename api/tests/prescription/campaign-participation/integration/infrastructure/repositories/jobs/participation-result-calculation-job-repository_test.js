@@ -1,5 +1,6 @@
 import { ParticipationResultCalculationJob } from '../../../../../../../src/prescription/campaign-participation/domain/models/ParticipationResultCalculationJob.js';
 import { participationResultCalculationJobRepository } from '../../../../../../../src/prescription/campaign-participation/infrastructure/repositories/jobs/participation-result-calculation-job-repository.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -15,7 +16,10 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | part
         retrylimit: JobRetry.FEW_RETRY.retryLimit,
         retrydelay: JobRetry.FEW_RETRY.retryDelay,
         retrybackoff: JobRetry.FEW_RETRY.retryBackoff,
-        data: { campaignParticipationId: 3 },
+        data: {
+          campaignParticipationId: 3,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });

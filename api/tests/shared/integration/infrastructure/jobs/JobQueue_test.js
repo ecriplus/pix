@@ -1,9 +1,15 @@
 import PgBoss from 'pg-boss';
 
 import { Metrics } from '../../../../../src/monitoring/infrastructure/metrics.js';
+import {
+  executeInContext,
+  EXECUTORS,
+  getContext,
+  getCorrelationInfo,
+} from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobQueue } from '../../../../../src/shared/infrastructure/jobs/JobQueue.js';
 import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { expect } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Jobs | JobQueue', function () {
   let pgBoss, jobQueue;
@@ -38,7 +44,9 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
 
           handle(params) {
             try {
-              expect(params).to.deep.contains({ data: expectedParams });
+              // eslint-disable-next-line no-unused-vars
+              const { correlationContext, ...paramsWithoutCorrelationContext } = params.data;
+              expect(paramsWithoutCorrelationContext).to.deep.equal(expectedParams);
             } catch (err) {
               reject(err);
             }
@@ -50,6 +58,104 @@ describe('Integration | Infrastructure | Jobs | JobQueue', function () {
       });
 
       return promise;
+    });
+
+    context('execution context', function () {
+      it('runs the job within an execution context with empty values set when no correlation context existed when pushing the job', async function () {
+        // given
+        const name = 'JobTest';
+        const job = new JobRepository({ name });
+
+        // when
+        await job.performAsync({ jobParam: 1 });
+
+        // then
+        const promise = new Promise((resolve, reject) => {
+          const handler = class {
+            get teamConcurrency() {
+              return 1;
+            }
+
+            get teamSize() {
+              return 2;
+            }
+
+            handle(_) {
+              try {
+                const correlationInfo = getCorrelationInfo();
+                sinon.assert.match(correlationInfo, {
+                  user_id: null,
+                  request_id: null,
+                  scriptId: null,
+                  jobId: sinon.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/),
+                });
+              } catch (err) {
+                reject(err);
+              }
+              resolve();
+            }
+          };
+
+          jobQueue.register(new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }), name, handler);
+        });
+
+        return promise;
+      });
+
+      it('runs the job within an execution context filled when a correlation context existed when pushing the job', async function () {
+        // given
+        const name = 'JobTest';
+        const job = new JobRepository({ name });
+
+        // when
+        const context = {
+          request: {
+            headers: { 'x-request-id': 'someRequestId' },
+            auth: { credentials: { userId: 456 } },
+          },
+          scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
+          irrelevantDataForCorrelation: 'coucou',
+        };
+        await executeInContext(
+          context,
+          async () => {
+            return await job.performAsync({ jobParam: 1 });
+          },
+          EXECUTORS.REQUEST,
+        );
+
+        // then
+        const promise = new Promise((resolve, reject) => {
+          const handler = class {
+            get teamConcurrency() {
+              return 1;
+            }
+
+            get teamSize() {
+              return 2;
+            }
+
+            handle(_) {
+              try {
+                const currentContext = getContext();
+                sinon.assert.match(currentContext, {
+                  user_id: 456,
+                  request_id: 'someRequestId',
+                  scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
+                  jobId: sinon.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/),
+                });
+              } catch (err) {
+                reject(err);
+              }
+              resolve();
+            }
+          };
+
+          jobQueue.register(new Metrics({ config: { metrics: { isDirectMetricsEnabled: false } } }), name, handler);
+        });
+
+        return promise;
+      });
     });
   });
 

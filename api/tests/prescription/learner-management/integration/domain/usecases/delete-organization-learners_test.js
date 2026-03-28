@@ -8,6 +8,7 @@ import {
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const {
@@ -259,6 +260,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         occurredAt: now.toISOString(),
         targetUserIds: [organizationLearner1.id],
         data: {},
+        correlationContext: EMPTY_CORRELATION_INFO,
       },
       {
         client: 'PIX_ORGA',
@@ -268,6 +270,7 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
         occurredAt: now.toISOString(),
         targetUserIds: [campaignParticipation1.id],
         data: {},
+        correlationContext: EMPTY_CORRELATION_INFO,
       },
     ]);
   });

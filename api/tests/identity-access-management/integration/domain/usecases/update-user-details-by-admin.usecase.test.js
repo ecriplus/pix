@@ -8,6 +8,7 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { roles } from '../../../../../src/shared/domain/models/Membership.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | updateUserDetailsByAdmin', function () {
@@ -62,6 +63,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       targetUserIds: [userId],
       data: { oldEmail: 'email@example.net', newEmail: userDetailsToUpdate.email },
       occurredAt: '2024-12-25T00:00:00.000Z',
+      correlationContext: EMPTY_CORRELATION_INFO,
     });
   });
 

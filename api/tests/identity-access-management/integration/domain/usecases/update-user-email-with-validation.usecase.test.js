@@ -9,6 +9,7 @@ import {
   UserNotAuthorizedToUpdateEmailError,
 } from '../../../../../src/shared/domain/errors.js';
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
 import { catchErr, databaseBuilder, knex, sinon } from '../../../../test-helper.js';
 
@@ -53,6 +54,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       targetUserIds: [user.id],
       data: { oldEmail: 'email@example.net', newEmail: 'new.email@example.net' },
       occurredAt: '2024-12-25T00:00:00.000Z',
+      correlationContext: EMPTY_CORRELATION_INFO,
     });
   });
 

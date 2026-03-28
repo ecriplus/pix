@@ -1,9 +1,9 @@
 import { stdSerializers } from 'pino';
 
-import { monitoringTools } from '../../../../src/shared/infrastructure/monitoring-tools.js';
 import { generateHash } from '../../../identity-access-management/infrastructure/utils/crypto.js';
 import { getForwardedOrigin } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../config.js';
+import { getCorrelationInfo, getInContext } from '../execution-context-manager.js';
 import { loggerPino } from '../utils/logger.js';
 
 const serializersSym = Symbol.for('pino.serializers');
@@ -16,15 +16,13 @@ function requestSerializer(req) {
     clientVersionMismatched: config.version !== req.headers['x-app-version'],
   };
 
-  if (!config.hapi.enableRequestMonitoring) return enhancedReq;
-
   // monitor api token route
-  const context = monitoringTools.getContext();
-  if (context?.request?.route?.path === '/api/token') {
-    const { username, refresh_token, grant_type } = context.request.payload || {};
+  const request = getInContext('request', null);
+  if (request?.route?.path === '/api/token') {
+    const { username, refresh_token, grant_type } = request.payload || {};
     let origin;
     try {
-      origin = getForwardedOrigin(context.request.headers);
+      origin = getForwardedOrigin(request.headers);
     } catch {
       origin = '-';
     }
@@ -34,12 +32,13 @@ function requestSerializer(req) {
     enhancedReq.refreshTokenHash = generateHash(refresh_token) || '-';
   }
 
+  const metrics = getInContext('metrics', null);
   return {
     ...enhancedReq,
-    user_id: monitoringTools.extractUserIdFromRequest(req),
-    metrics: context?.metrics,
-    route: context?.request?.route?.path,
-    routeDomain: context?.request?.route?.realm?.plugin,
+    ...getCorrelationInfo(),
+    metrics: metrics,
+    route: request?.route?.path,
+    routeDomain: request?.route?.realm?.plugin,
   };
 }
 

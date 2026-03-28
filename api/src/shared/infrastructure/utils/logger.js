@@ -5,7 +5,7 @@ import pino from 'pino';
 import pretty from 'pino-pretty';
 
 import { config } from '../../config.js';
-import { getCorrelationContext } from '../monitoring-tools.js';
+import { getCorrelationInfo } from '../execution-context-manager.js';
 
 const { logging } = config;
 
@@ -32,7 +32,7 @@ export const loggerPino = pino(
 );
 
 function buildLogWrapper(context, mergingObject, message, extraBindings = {}, extraOptions = undefined) {
-  const loggerChild = loggerPino.child({ ...getCorrelationContext(), ...extraBindings }, extraOptions);
+  const loggerChild = loggerPino.child({ ...getCorrelationInfo(), ...extraBindings }, extraOptions);
   loggerChild[context](mergingObject, message);
 }
 
@@ -104,6 +104,7 @@ export const SCOPES = {
   IAM: 'iam',
   LLM: 'llm',
   DEVCOMP: 'devcomp',
+  CERTIFICATION: 'certification',
 };
 
 function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
@@ -127,8 +128,16 @@ function messageFormatCompact(log, messageKey, _logLevel, { colors }) {
     const request = colors.magentaBright([method, req.url].filter(Boolean).join(' '));
     const details = colors.yellow([queries, queriesTime].filter(Boolean).join(' '));
     const time = colors.gray(`(${responseTime}ms)`);
+    const correlationInfo = colors.gray(
+      JSON.stringify({
+        user_id: req.user_id,
+        request_id: req.request_id,
+        scriptId: req.scriptId,
+        jobId: req.jobId,
+      }),
+    );
 
-    return [statusCode, request, details, time].filter(Boolean).join(' - ');
+    return [statusCode, request, details, time, correlationInfo].filter(Boolean).join(' - ');
   }
 
   // compact log by default

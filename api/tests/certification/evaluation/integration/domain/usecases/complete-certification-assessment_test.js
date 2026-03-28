@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 const { completeCertificationAssessment } = usecases;
@@ -60,7 +61,11 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
         .first();
       expect(assessmentStateAndUpdatedAt).to.deep.equal({ state: Assessment.states.COMPLETED, updatedAt: now });
       await expect('CertificationCompletedJob').to.have.been.schedule.withJob({
-        data: { certificationCourseId, locale },
+        data: {
+          certificationCourseId,
+          locale,
+          correlationContext: EMPTY_CORRELATION_INFO,
+        },
       });
     });
   });
