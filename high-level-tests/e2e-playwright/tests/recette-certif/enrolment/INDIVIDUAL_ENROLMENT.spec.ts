@@ -16,6 +16,7 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
   test.slow();
   const userDataCoreSubscription = await getCertifiableUserData(0);
   const userDataCleaSubscription = await getCertifiableUserData(1);
+  const userDataEduSubscription = await getCertifiableUserData(2);
   await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
   let sessionNumber = '',
@@ -95,36 +96,67 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
       ...userDataCleaSubscription,
       enrollFor: CERTIFICATIONS_DATA.CLEA,
     });
+  });
+
+  await test.step('Enroll third candidate to Pix+ Édu 1er degré exam', async () => {
+    await sessionManagementPage.goToEnrollCandidateForm();
+    await sessionManagementPage.addCandidate({
+      ...userDataEduSubscription,
+      enrollFor: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+    });
+  });
+
+  await test.step('Check all enrolled candidates', async () => {
     const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
-    expect(enrolledCandidatesSoFar).toMatchObject([
-      {
-        'Nom de naissance': userDataCleaSubscription.lastName,
-        Prénom: userDataCleaSubscription.firstName,
-        'Date de naissance':
-          userDataCleaSubscription.birthDay +
-          '/' +
-          userDataCleaSubscription.birthMonth +
-          '/' +
-          userDataCleaSubscription.birthYear,
-        'Certification sélectionnée': 'Double Certification Pix-CléA Numérique',
-      },
-      {
-        'Nom de naissance': userDataCoreSubscription.lastName,
-        Prénom: userDataCoreSubscription.firstName,
-        'Date de naissance':
-          userDataCoreSubscription.birthDay +
-          '/' +
-          userDataCoreSubscription.birthMonth +
-          '/' +
-          userDataCoreSubscription.birthYear,
-        'Certification sélectionnée': 'Certification Pix',
-      },
-    ]);
+    expect(enrolledCandidatesSoFar).toHaveLength(3);
+    const coreEnrolled = enrolledCandidatesSoFar.find(
+      (enrolled) => enrolled['Prénom'] === userDataCoreSubscription.firstName,
+    );
+    expect(coreEnrolled).toMatchObject({
+      'Nom de naissance': userDataCoreSubscription.lastName,
+      Prénom: userDataCoreSubscription.firstName,
+      'Date de naissance':
+        userDataCoreSubscription.birthDay +
+        '/' +
+        userDataCoreSubscription.birthMonth +
+        '/' +
+        userDataCoreSubscription.birthYear,
+      'Certification sélectionnée': 'Certification Pix',
+    });
+    const cleaEnrolled = enrolledCandidatesSoFar.find(
+      (enrolled) => enrolled['Prénom'] === userDataCleaSubscription.firstName,
+    );
+    expect(cleaEnrolled).toMatchObject({
+      'Nom de naissance': userDataCleaSubscription.lastName,
+      Prénom: userDataCleaSubscription.firstName,
+      'Date de naissance':
+        userDataCleaSubscription.birthDay +
+        '/' +
+        userDataCleaSubscription.birthMonth +
+        '/' +
+        userDataCleaSubscription.birthYear,
+      'Certification sélectionnée': 'Double Certification Pix-CléA Numérique',
+    });
+    const eduEnrolled = enrolledCandidatesSoFar.find(
+      (enrolled) => enrolled['Prénom'] === userDataEduSubscription.firstName,
+    );
+    expect(eduEnrolled).toMatchObject({
+      'Nom de naissance': userDataEduSubscription.lastName,
+      Prénom: userDataEduSubscription.firstName,
+      'Date de naissance':
+        userDataEduSubscription.birthDay +
+        '/' +
+        userDataEduSubscription.birthMonth +
+        '/' +
+        userDataEduSubscription.birthYear,
+      'Certification sélectionnée': 'Pix+ Édu 1er degré',
+    });
   });
 
   const pixAppCorePage = await pixAppCertifiableUserPage(userDataCoreSubscription);
   const pixAppCleaPage = await pixAppCertifiableUserPage(userDataCleaSubscription);
-  await test.step('Both candidates pass the exam', async () => {
+  const pixAppEduPage = await pixAppCertifiableUserPage(userDataEduSubscription);
+  await test.step('All candidates pass the exam', async () => {
     await passManyCertificationExams({
       examsData: [
         {
@@ -137,6 +169,11 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
           rightWrongAnswersSequence: [true],
           pixAppPage: pixAppCleaPage,
         },
+        {
+          certifiableUserData: userDataEduSubscription,
+          rightWrongAnswersSequence: [true],
+          pixAppPage: pixAppEduPage,
+        },
       ],
       sessionNumber,
       accessCode,
@@ -144,13 +181,15 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
     });
   });
 
-  await test.step('Finalization by marking technical issues on both candidates', async () => {
+  await test.step('Finalization by marking technical issues on all candidates', async () => {
     const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
     const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
     await expect(pixCertifProPage.getByText(userDataCoreSubscription.firstName)).toBeVisible();
     await sessionFinalizationPage.markTechnicalIssueFor(userDataCoreSubscription.lastName);
     await expect(pixCertifProPage.getByText(userDataCleaSubscription.firstName)).toBeVisible();
     await sessionFinalizationPage.markTechnicalIssueFor(userDataCleaSubscription.lastName);
+    await expect(pixCertifProPage.getByText(userDataEduSubscription.firstName)).toBeVisible();
+    await sessionFinalizationPage.markTechnicalIssueFor(userDataEduSubscription.lastName);
 
     await sessionFinalizationPage.finalizeSession();
   });
@@ -179,8 +218,9 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
     await test.step('Check certification information', async () => {
       const certificationListPage = await sessionPage.goToCertificationListPage();
       const certificationData = await certificationListPage.getCertificationData();
-      expect(certificationData.length).toBe(2);
-      expect(certificationData[0]).toMatchObject({
+      expect(certificationData.length).toBe(3);
+      const coreData = certificationData.find((data) => data['Prénom'] === userDataCoreSubscription.firstName);
+      expect(coreData).toMatchObject({
         Prénom: userDataCoreSubscription.firstName,
         Nom: userDataCoreSubscription.lastName,
         Statut: 'Annulée',
@@ -188,13 +228,23 @@ test(`${testRef} - Enroll candidates through individual enrolment modal`, async 
         'Signalements impactants non résolus': '',
         'Certification passée': 'Pix Cœur',
       });
-      expect(certificationData[1]).toMatchObject({
+      const cleaData = certificationData.find((data) => data['Prénom'] === userDataCleaSubscription.firstName);
+      expect(cleaData).toMatchObject({
         Prénom: userDataCleaSubscription.firstName,
         Nom: userDataCleaSubscription.lastName,
         Statut: 'Annulée',
         Résultats: '55 Pix',
         'Signalements impactants non résolus': '',
         'Certification passée': 'PIX / CléA Numérique',
+      });
+      const eduData = certificationData.find((data) => data['Prénom'] === userDataEduSubscription.firstName);
+      expect(eduData).toMatchObject({
+        Prénom: userDataEduSubscription.firstName,
+        Nom: userDataEduSubscription.lastName,
+        Statut: 'Annulée',
+        Résultats: 'Non admissible',
+        'Signalements impactants non résolus': '',
+        'Certification passée': 'Pix+ Édu 1er degré',
       });
     });
   });
