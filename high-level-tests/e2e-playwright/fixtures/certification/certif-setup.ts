@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-import { PixCertifiableUserData } from '../../helpers/certification/builders/types.ts';
+import { PixCertifiableUserData } from '../../helpers/certification/types.ts';
 import { knex } from '../../helpers/db.ts';
 import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { HomePage } from '../../pages/pix-app/index.ts';
