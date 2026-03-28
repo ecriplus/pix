@@ -1,8 +1,8 @@
 import {
   addCorrelationInfo,
+  CORRELATION_METADATA,
   executeInContext,
   EXECUTORS,
-  EXTRA_CORRELATION_INFO_KEY,
   getContext,
   getCorrelationInfo,
   getInContext,
@@ -30,7 +30,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: null,
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
 
@@ -49,7 +49,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myContextRequestId',
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
         });
@@ -68,7 +68,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: null,
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
 
@@ -87,7 +87,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myContextRequestId',
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
         });
@@ -107,7 +107,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myRequestId',
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
 
@@ -123,7 +123,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'fallbackRequestId',
               scriptId: null,
               jobId: null,
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
 
@@ -142,7 +142,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
               request_id: 'myRequestId',
               scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
               jobId: 'myJobId',
-              [EXTRA_CORRELATION_INFO_KEY]: null,
+              [CORRELATION_METADATA]: null,
             });
           });
         });
@@ -159,7 +159,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           request_id: null,
           scriptId: null,
           jobId: null,
-          [EXTRA_CORRELATION_INFO_KEY]: null,
+          [CORRELATION_METADATA]: null,
         });
       });
 
@@ -169,7 +169,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           jobId: 'myJobId',
           request_id: 'myContextRequestId',
           user_id: 456,
-          [EXTRA_CORRELATION_INFO_KEY]: {
+          [CORRELATION_METADATA]: {
             sessionId: 789,
           },
         };
@@ -180,7 +180,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
           request_id: 'myContextRequestId',
           scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02',
           jobId: 'myJobId',
-          [EXTRA_CORRELATION_INFO_KEY]: {
+          [CORRELATION_METADATA]: {
             sessionId: 789,
           },
         });
@@ -206,7 +206,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         user_id: null,
         jobId: null,
         scriptId: null,
-        [EXTRA_CORRELATION_INFO_KEY]: {
+        [CORRELATION_METADATA]: {
           sessionId: 456,
         },
       });
@@ -230,7 +230,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         user_id: null,
         jobId: null,
         scriptId: null,
-        [EXTRA_CORRELATION_INFO_KEY]: {
+        [CORRELATION_METADATA]: {
           sessionId: 789,
         },
       });
@@ -253,7 +253,7 @@ describe('Shared | Unit | Infrastructure | execution-context-manager', function 
         user_id: null,
         jobId: null,
         scriptId: null,
-        [EXTRA_CORRELATION_INFO_KEY]: null,
+        [CORRELATION_METADATA]: null,
       });
     });
   });

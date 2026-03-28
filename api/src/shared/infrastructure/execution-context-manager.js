@@ -13,13 +13,13 @@ import { tokenService } from '../domain/services/token-service.js';
  * @property {string|null} jobId
  */
 
-export const EXTRA_CORRELATION_INFO_KEY = 'extra-correlation-info';
+export const CORRELATION_METADATA = 'pix-metadata';
 export const EMPTY_CORRELATION_INFO = {
   user_id: null,
   request_id: null,
   scriptId: null,
   jobId: null,
-  [EXTRA_CORRELATION_INFO_KEY]: null,
+  [CORRELATION_METADATA]: null,
 };
 
 /**
@@ -136,7 +136,7 @@ export function getCorrelationInfo() {
     request_id,
     scriptId,
     jobId,
-    [EXTRA_CORRELATION_INFO_KEY]: getInContext(EXTRA_CORRELATION_INFO_KEY, null),
+    [CORRELATION_METADATA]: getInContext(CORRELATION_METADATA, null),
   };
 }
 
@@ -159,7 +159,7 @@ function extractUserIdFromRequest(request) {
  * @param {*} value
  */
 export function addCorrelationInfo(path, value) {
-  setInContext(EXTRA_CORRELATION_INFO_KEY + '.' + path, value);
+  setInContext(CORRELATION_METADATA + '.' + path, value);
 }
 
 /**

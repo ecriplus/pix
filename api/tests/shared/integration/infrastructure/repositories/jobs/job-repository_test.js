@@ -1,10 +1,10 @@
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import {
+  CORRELATION_METADATA,
   EMPTY_CORRELATION_INFO,
   executeInContext,
   EXECUTORS,
-  EXTRA_CORRELATION_INFO_KEY,
 } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import {
   JobExpireIn,
@@ -64,7 +64,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
         auth: { credentials: { userId: 456 } },
       },
       scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02 ',
-      [EXTRA_CORRELATION_INFO_KEY]: {
+      [CORRELATION_METADATA]: {
         foo: 'bar',
       },
     };
@@ -74,7 +74,7 @@ describe('Integration | Infrastructure | Repositories | Jobs | job-repository', 
       request_id: 'someRequestId',
       scriptId: 'efcde830-e562-41d6-a721-4157ba9a9b02 ',
       jobId: null,
-      [EXTRA_CORRELATION_INFO_KEY]: {
+      [CORRELATION_METADATA]: {
         foo: 'bar',
       },
     };
