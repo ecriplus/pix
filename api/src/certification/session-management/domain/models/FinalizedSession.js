@@ -67,11 +67,7 @@ function _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) {
 }
 
 function _hasNoScoringError(juryCertificationSummaries) {
-  return (
-    !juryCertificationSummaries.some((summary) => {
-      return summary.hasScoringError();
-    }) && juryCertificationSummaries.every((summary) => summary.pixScore !== null)
-  );
+  return juryCertificationSummaries.every((summary) => !summary.hasScoringError());
 }
 
 function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
