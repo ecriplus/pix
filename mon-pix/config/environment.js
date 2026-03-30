@@ -139,6 +139,7 @@ module.exports = function (environment) {
       COMBINIX_SURVEY_LINK:
         process.env.COMBINIX_SURVEY_LINK ||
         'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms',
+      ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST: process.env.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST || '1005',
       MODULIX_VERIFICATION_RESPONSE_DELAY: 500,
     },
 
@@ -223,6 +224,7 @@ module.exports = function (environment) {
     ENV.APP.AUTO_SHARE_AFTER_DATE = '2025-07-18';
     ENV.APP.COMBINIX_SURVEY_LINK =
       'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms';
+    ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = '1005';
 
     ENV.companion.disabled = true;
 
