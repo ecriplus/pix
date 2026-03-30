@@ -44,10 +44,10 @@ const importOrganizationLearnerFromFeature = async function (request, h) {
 
 const reconcileCommonOrganizationLearner = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
-  const { code, reconciliationInfos } = request.deserializedPayload;
+  const { organizationId, reconciliationInfos } = request.deserializedPayload;
 
   await usecases.reconcileCommonOrganizationLearner({
-    code,
+    organizationId,
     userId: authenticatedUserId,
     reconciliationInfos,
   });
