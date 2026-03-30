@@ -828,5 +828,38 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
       // then
       expect(combinedCourseParticipations).to.deep.equal([]);
     });
+
+    it('should not return deleted participations', async function () {
+      // given
+      const { id: combinedCourseId, organizationId } = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBI1',
+      });
+
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Alice',
+        lastName: 'Azerty',
+        division: '6eme',
+        group: 'Groupe 2',
+        organizationId,
+      });
+
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        deletedAt: new Date(),
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourseParticipations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+        combinedCourseIds: [combinedCourseId],
+      });
+
+      // then
+      expect(combinedCourseParticipations.length).to.equal(0);
+    });
   });
 });

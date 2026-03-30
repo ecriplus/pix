@@ -215,7 +215,8 @@ export const findByCombinedCourseIds = async ({ combinedCourseIds }) => {
       'organization_learner_participations.referenceId',
       combinedCourseIds.map((combinedCourseId) => combinedCourseId.toString()),
     )
-    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE);
+    .where('organization_learner_participations.type', OrganizationLearnerParticipationTypes.COMBINED_COURSE)
+    .whereNull('organization_learner_participations.deletedAt');
 
   return results.map((participation) => new CombinedCourseParticipation(participation));
 };
