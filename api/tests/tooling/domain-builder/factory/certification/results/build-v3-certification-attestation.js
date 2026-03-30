@@ -1,3 +1,4 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { Certificate } from '../../../../../../src/certification/results/domain/models/v3/Certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 
@@ -10,12 +11,13 @@ const buildCertificate = function ({
   certificationCenter = 'L’université du Pix',
   deliveredAt = new Date('2018-10-03T01:02:03Z'),
   pixScore = 123,
+  reachedMeshIndex = 1,
   verificationCode = 'P-SOMECODE',
   resultCompetenceTree = null,
   algorithmEngineVersion = AlgorithmEngineVersion.V3,
   certificationDate = new Date('2015-10-03T01:02:03Z'),
   acquiredComplementaryCertification = null,
-  maxReachableLevelOnCertificationDate = 7,
+  certificationFramework = Frameworks.CORE,
 } = {}) {
   return new Certificate({
     id,
@@ -26,12 +28,13 @@ const buildCertificate = function ({
     certificationCenter,
     deliveredAt,
     pixScore,
+    reachedMeshIndex,
     verificationCode,
     resultCompetenceTree,
     algorithmEngineVersion,
     certificationDate,
     acquiredComplementaryCertification,
-    maxReachableLevelOnCertificationDate,
+    certificationFramework,
   });
 };
 

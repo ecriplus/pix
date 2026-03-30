@@ -651,7 +651,7 @@
         "download-certificate": "Télécharger mon certificat"
       },
       "back-link": "Retour à mes certifications",
-      "candidate": "Candidat :",
+      "candidate": "Candidat(e) :",
       "candidate-birth": "Né(e) le {birthdate}",
       "candidate-birth-complete": "Né(e) le {birthdate} à {birthplace}",
       "certification-center": "Centre de certification :",
@@ -680,6 +680,21 @@
         }
       },
       "exam-date": "Date de passage :",
+      "framework-title": {
+        "CLEA": "Certificat Pix",
+        "CORE": "Certificat Pix",
+        "EDU_1ER_DEGRE": "Certificat Pix+ Édu 1er degré",
+        "EDU_2ND_DEGRE": "Certificat Pix+ Édu 2nd degré",
+        "EDU_CPE": "Certificat Pix+ Édu CPE"
+      },
+      "frameworks": {
+        "EDU": {
+          "results-infos": "'<p>'La certification se déroule en deux étapes&nbsp;:'</p><ol><li>'Volet Pix&nbsp;: il/elle vient de le passer.'</li><li>'Volet de pratique professionnelle&nbsp;: organisé en dehors de Pix devant un jury.'</li></ol><p>'À l'issue de ce 2'<sup>'ème'</sup>' volet, le niveau de la certification Pix+ Edu  du/de la candidat(e) sera attribué (Avancé ou Expert).'</p>'",
+          "results-sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle de la certification Pix+ Édu !",
+          "status": "Certificat valide",
+          "sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !"
+        }
+      },
       "global": {
         "explanation": {
           "default": "Vous avez atteint le niveau {globalLevelLabel} de la Certification Pix !",
@@ -705,6 +720,10 @@
       "jury-title": "Observations du jury",
       "learn-about-certification-results": "Comment interpréter les résultats ?",
       "professionalizing-warning": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 pix",
+      "results": {
+        "sub-title": "Le/la candidat(e) est admissible à la certification {framework}.",
+        "title": "Lecture du résultat :"
+      },
       "title": "Certificat Pix",
       "verification-code": {
         "alt": "Copier",
@@ -2391,16 +2410,16 @@
     "user-certifications": {
       "meshes": {
         "EDU_1ER_DEGRE": {
-          "BELOW_MINIMUM": "Non admissible",
-          "0": "Admissible"
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
         },
         "EDU_2ND_DEGRE": {
-          "BELOW_MINIMUM": "Non admissible",
-          "0": "Admissible"
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
         },
         "EDU_CPE": {
-          "BELOW_MINIMUM": "Non admissible",
-          "0": "Admissible"
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
         }
       }
     },

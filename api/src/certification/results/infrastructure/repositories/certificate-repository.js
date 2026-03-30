@@ -151,7 +151,9 @@ function _selectCertificationCourseDTOs(knexConn) {
       certificationCenter: 'sessions.certificationCenter',
       maxReachableLevelOnCertificationDate: 'certification-courses.maxReachableLevelOnCertificationDate',
       algorithmEngineVersion: 'certification-courses.version',
+      certificationFramework: 'certification-courses.framework',
       pixScore: 'assessment-results.pixScore',
+      reachedMeshIndex: 'assessment-results.reachedMeshIndex',
       assessmentResultId: 'assessment-results.id',
       competenceMarks: knexConn.raw(`
         json_agg(

@@ -1,8 +1,12 @@
+import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { GlobalCertificationLevel } from '../../../../../../src/certification/results/domain/models/v3/GlobalCertificationLevel.js';
 
-export const buildGlobalCertificationLevel = function ({ score = 1, maxReachableLevel = 7 } = {}) {
+export const buildGlobalCertificationLevel = function ({
+  reachedMeshIndex = 1,
+  certificationFramework = Frameworks.CORE,
+} = {}) {
   return new GlobalCertificationLevel({
-    score,
-    maxReachableLevel,
+    reachedMeshIndex,
+    certificationFramework,
   });
 };

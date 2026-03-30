@@ -49,6 +49,7 @@ const attributes = [
   'globalSummaryLabel',
   'globalDescriptionLabel',
   'level',
+  'certificationFramework',
   'certificationDate',
   'verificationCode',
   'acquiredComplementaryCertification',

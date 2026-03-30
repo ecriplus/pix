@@ -680,6 +680,20 @@
         }
       },
       "exam-date": "Data della visita :",
+      "framework-title": {
+        "CLEA": "Certificato Pix",
+        "CORE": "Certificato Pix",
+        "EDU_1ER_DEGRE": "Certificato Pix+ Edu 1° livello",
+        "EDU_2ND_DEGRE": "Certificato Pix+ Edu 2° livello",
+        "EDU_CPE": "Certificato Pix+ Edu CPE"
+      },
+      "frameworks": {
+        "EDU": {
+          "results-infos": "'<p>'La certificazione si svolge in due fasi:'</p><ol><li>'Prova Pix: appena completata.'</li><li>'Prova orale: organizzata al di fuori di Pix davanti a una giuria.'</li></ol><p>'Al termine dell'orale, verrà assegnato il livello di certificazione definitivo (Esperto, Avanzato, ecc.).'<br/>'Contattate il vostro centro di certificazione per organizzare la prova orale.'</p>'",
+          "status": "Certificato valido",
+          "sub-title": "Il candidato è ammesso alla 2ª fase!"
+        }
+      },
       "global": {
         "explanation": {
           "default": "Avete raggiunto il livello {globalLevelLabel} della Certificazione Pix!",
@@ -705,6 +719,10 @@
       "jury-title": "Commenti della giuria",
       "learn-about-certification-results": "Come vanno interpretati i risultati?",
       "professionalizing-warning": "Il certificato Pix è riconosciuto come qualifica professionale da France Compétences una volta raggiunto un punteggio minimo di 120 pix.",
+      "results": {
+        "sub-title": "Il candidato è ammissibile alla certificazione {framework}.",
+        "title": "Lettura del risultato:"
+      },
       "title": "Certificato Pix",
       "verification-code": {
         "alt": "Copia",
@@ -2383,16 +2401,16 @@
     "user-certifications": {
       "meshes": {
         "EDU_1ER_DEGRE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "0": "Ammissibile"
+          "0": "Ammissibile",
+          "BELOW_MINIMUM": "Non ammissibile"
         },
         "EDU_2ND_DEGRE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "0": "Ammissibile"
+          "0": "Ammissibile",
+          "BELOW_MINIMUM": "Non ammissibile"
         },
         "EDU_CPE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "0": "Ammissibile"
+          "0": "Ammissibile",
+          "BELOW_MINIMUM": "Non ammissibile"
         }
       }
     },

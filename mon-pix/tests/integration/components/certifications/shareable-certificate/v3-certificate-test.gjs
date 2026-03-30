@@ -30,7 +30,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.CORE') })).exists();
       assert
         .dom(
           within(screen.getByRole('navigation')).getByRole('link', {
@@ -71,7 +71,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
+      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.CORE') })).exists();
       assert
         .dom(
           within(screen.getByRole('navigation')).getByRole('link', {
@@ -81,6 +81,37 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         .exists();
       const globalLevelLabels = screen.getAllByText(certification.globalLevelLabel);
       assert.strictEqual(globalLevelLabels.length, 2);
+    });
+  });
+
+  module('when the certification framework is Pix Plus EDU', function () {
+    test('it displays the Pix Plus certificate component', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Bon',
+        certificationDate: new Date('2024-06-15T10:00:00Z'),
+        deliveredAt: new Date('2024-06-20T10:00:00Z'),
+        certificationCenter: 'Université de Lyon',
+        certificationFramework: 'EDU_1ER_DEGRE',
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await render(hbs`
+        <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
+
+      // then
+      assert
+        .dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.EDU_1ER_DEGRE') }))
+        .exists();
+      assert.dom(screen.getAllByText(t('pages.certificate.frameworks.EDU.status'))[0]).exists();
+      assert
+        .dom(screen.queryByRole('heading', { name: t('pages.certificate.details.competences.title') }))
+        .doesNotExist();
     });
   });
 

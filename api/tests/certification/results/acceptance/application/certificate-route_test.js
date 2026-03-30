@@ -790,7 +790,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
             certificationCourseId: certificationCourse.id,
             assessmentId: assessment.id,
             level: 1,
-            pixScore: 23,
+            pixScore: 123,
+            reachedMeshIndex: 1,
             status: AssessmentResult.status.VALIDATED,
           });
 
@@ -965,6 +966,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
           certificationCourseId: certificationCourse.id,
           assessmentId: assessment.id,
           status: AssessmentResult.status.VALIDATED,
+          pixScore: 123,
+          reachedMeshIndex: 1,
         });
 
         await databaseBuilder.commit();

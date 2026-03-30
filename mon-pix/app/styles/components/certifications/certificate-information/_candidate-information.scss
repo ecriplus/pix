@@ -52,7 +52,9 @@
     justify-content: center;
     width: 11rem;
     height: 12rem;
-    background: url('/images/certificate/pix-score-hexagon.svg') no-repeat center center;
+    background-image: url('/images/certificate/pix-score-hexagon.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
 
     @include breakpoints.device-is('tablet') {
       gap: 0;

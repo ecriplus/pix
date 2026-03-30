@@ -14,6 +14,7 @@ const professionalizingDate = new Date('2022-01-01');
 
 export default class Certification extends Model {
   @service currentDomain;
+  @service intl;
 
   // attributes
   @attr('string') firstName;
@@ -38,6 +39,7 @@ export default class Certification extends Model {
   @attr('date') certificationDate;
   @attr('string') level;
   @attr('string') acquiredComplementaryCertification;
+  @attr('string') certificationFramework;
 
   // includes
   @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;
@@ -45,7 +47,7 @@ export default class Certification extends Model {
 
   @computed('certifiedBadgeImages.length')
   get hasAcquiredComplementaryCertifications() {
-    return this.certifiedBadgeImages.length > 0;
+    return this.certifiedBadgeImages?.length > 0;
   }
 
   @computed('firstName', 'lastName')
@@ -67,5 +69,10 @@ export default class Certification extends Model {
 
   get maxReachablePixCountOnCertificationDate() {
     return this.maxReachableLevelOnCertificationDate * 8 * 16;
+  }
+
+  get title() {
+    const framework = this.certificationFramework || 'CORE';
+    return this.intl.t(`pages.certificate.framework-title.${framework}`);
   }
 }

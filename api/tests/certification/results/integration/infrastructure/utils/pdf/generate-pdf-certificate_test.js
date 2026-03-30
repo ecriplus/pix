@@ -65,10 +65,10 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         userId: 456,
         date: new Date('2020-01-01'),
         verificationCode: 'P-SOMECODE',
-        maxReachableLevelOnCertificationDate: 5,
         deliveredAt: new Date('2021-05-05'),
         certificationCenter: 'Centre des poules bien dodues',
         pixScore: 256,
+        reachedMeshIndex: 3,
         sessionId: 789,
       }),
       domainBuilder.certification.results.buildCertificate({
@@ -85,6 +85,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         deliveredAt: new Date('2020-05-05'),
         certificationCenter: 'Centre des centres',
         pixScore: 256,
+        reachedMeshIndex: 3,
         sessionId: 789,
       }),
     ];
@@ -136,10 +137,10 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
         userId: 456,
         date: new Date('2020-01-01'),
         verificationCode: 'P-SOMECODE',
-        maxReachableLevelOnCertificationDate: 5,
         deliveredAt: new Date('2021-05-05'),
         certificationCenter: "L'université du Pix /",
         pixScore: 256,
+        reachedMeshIndex: 3,
         sessionId: 789,
       }),
     ];
@@ -192,6 +193,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
           deliveredAt: new Date('2021-05-05'),
           certificationCenter: 'Centre des poules bien dodues',
           pixScore: 50,
+          reachedMeshIndex: 0,
           sessionId: 789,
         }),
       ];
