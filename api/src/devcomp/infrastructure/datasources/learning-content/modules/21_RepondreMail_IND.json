@@ -473,7 +473,7 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il faut utiliser&nbsp;:</p>",
+              "instruction": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>",
               "steps": [
                 {
                   "elements": [
@@ -982,17 +982,8 @@
           "title": "Activité 3 : Quelles interactions ?",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "6975703a-94f4-4eaa-8592-a29128e0452c",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>"
-              }
-            },
-            {
               "type": "stepper",
-              "instruction": "",
+              "instruction": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>",
               "steps": [
                 {
                   "elements": [
@@ -1006,7 +997,7 @@
                       "id": "96b24eab-d3ab-42b6-9bc5-89152ad188c5",
                       "type": "custom",
                       "title": "Mail de Jean Lotus",
-                      "instruction": "",
+                      "instruction": "<p><br></p>",
                       "functionalInstruction": "",
                       "tagName": "template-mail",
                       "props": {
@@ -1141,7 +1132,7 @@
                         "mailAddress": "aline.bonnote@pixmail.org",
                         "avatarColor": "#f24645",
                         "expeditor": "Aline Bonnote",
-                        "content": "<p>Bonjour à tous,</p> <p>Concernant le <strong>pot de départ de Sophie</strong>, merci de confirmer si vous serez présents vendredi et si vous apporterez quelque chose pour le buffet afin qu’on puisse s’organiser ensemble.</p> <p>Hâte de vous voir ! 🙂</p> <p>Aline</p>",
+                        "content": "<p>Bonjour à tous,</p> <p>Avec Soumaya, nous organisons le pot de départ de Sophie.<br>Le pot de départ aura lieu vendredi et prendra la forme d’un buffet.<br>Venez nombreux&nbsp;!</p> <p>Hâte de vous voir&nbsp;!&nbsp;🙂</p> <p>Aline</p>",
                         "time": {
                           "days": -3,
                           "minutes": -673
@@ -1159,7 +1150,7 @@
                           "content": "Répondre",
                           "feedback": {
                             "state": "<p>Incorrect.<br><br></p>",
-                            "diagnosis": "<p>La réponse de Soumaya peut intéresser tout le groupe.</p>"
+                            "diagnosis": "<p>L’information de Soumaya concerne tous les invités.</p>"
                           }
                         },
                         {
@@ -1167,7 +1158,7 @@
                           "content": "Répondre à tous",
                           "feedback": {
                             "state": "<p>Correct !</p>",
-                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
+                            "diagnosis": "<p>La réponse de Soumaya concerne tous les invités. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
                           }
                         },
                         {
@@ -1175,7 +1166,7 @@
                           "content": "Ne pas répondre",
                           "feedback": {
                             "state": "<p>Incorrect !</p>",
-                            "diagnosis": "<p>Soumaya a besoin de prévenir qu’elle va apporter les boissons. Si elle ne répond pas, les autres ne le sauront pas.</p>"
+                            "diagnosis": "<p>Soumaya souhaite apporter une information complémentaire Si elle ne répond pas, les autres invités ne seront pas mis au courant.</p>"
                           }
                         }
                       ],
