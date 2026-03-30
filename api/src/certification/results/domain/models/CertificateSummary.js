@@ -98,6 +98,9 @@ export class CertificateSummary {
       ? CERTIFICATE_TYPES.CERTIFICATE
       : CERTIFICATE_TYPES.ATTESTATION;
 
+    const isRejectedV3 =
+      AlgorithmEngineVersion.isV3(algorithmVersion) && assessmentResultStatus === AssessmentResult.status.REJECTED;
+
     return new CertificateSummary({
       id,
       verificationCode,
@@ -109,7 +112,7 @@ export class CertificateSummary {
       status,
       extraCertificationStatus,
       certificateType,
-      reachedMeshIndex,
+      reachedMeshIndex: isRejectedV3 ? null : reachedMeshIndex,
     });
   }
 }
