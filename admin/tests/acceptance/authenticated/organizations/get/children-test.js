@@ -7,8 +7,6 @@ import { authenticateAdminMemberWithRole } from 'pix-admin/tests/helpers/test-in
 import { setupMirage } from 'pix-admin/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
-import { waitForDialogClose } from '../../../../helpers/wait-for';
-
 module('Acceptance | Organizations | Children', function (hooks) {
   setupApplicationTest(hooks);
   setupIntl(hooks);
@@ -85,40 +83,6 @@ module('Acceptance | Organizations | Children', function (hooks) {
         // then
         assert.dom(await screen.findByRole('cell', { name: 'Child Organization Name' })).exists();
         assert.dom(screen.getByText(`L'organisation fille a bien été liée à l'organisation mère`)).exists();
-      });
-    });
-
-    module('when detaching child organization', function () {
-      test('it should display success notification and remove child organization from list', async function (assert) {
-        // given
-        const parentOrganization = this.server.create('organization', {
-          id: 1,
-          name: 'Parent Organization Name',
-          features: { PLACES_MANAGEMENT: { active: true } },
-        });
-        this.server.create('organization', {
-          id: 2,
-          name: 'Child Organization Name',
-          parentOrganizationId: parentOrganization.id,
-        });
-        const screen = await visit(`/organizations/${parentOrganization.id}/children`);
-
-        // when
-        await click(
-          screen.getByRole('button', {
-            name: t('components.organizations.children-list.actions.detach.button'),
-          }),
-        );
-
-        const modal = await screen.findByRole('dialog');
-        await click(within(modal).getByRole('button', { name: t('common.actions.confirm') }));
-
-        await waitForDialogClose();
-
-        // then
-        assert.ok(
-          await screen.findByText(t('pages.organization-children.notifications.success.detach-child-organization')),
-        );
       });
     });
 

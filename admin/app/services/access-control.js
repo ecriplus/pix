@@ -76,10 +76,6 @@ export default class AccessControlService extends Service {
     );
   }
 
-  get hasAccessToDetachChildOrganizationScope() {
-    return !!this.currentUser.adminMember.isSuperAdmin;
-  }
-
   get hasAccessToCertificationDetailLinks() {
     return !!(
       this.currentUser.adminMember.isSuperAdmin ||
