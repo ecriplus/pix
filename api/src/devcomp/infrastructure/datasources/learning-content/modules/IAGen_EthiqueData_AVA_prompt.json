@@ -245,7 +245,7 @@
                 {
                   "elements": [
                     {
-                      "id": "fcee8b02-ef1a-46f9-b387-22e6bb0295e0",
+                      "id": "c4ebb448-441b-4084-87db-d89fea56dc79",
                       "type": "text",
                       "tag": " ",
                       "content": "<p>⚠️ Attention, ce sujet est <strong>complexe</strong>. Aujourd’hui, <strong>plusieurs pays ne partagent pas ces lois</strong>. Par exemple, Le tribunal de Prague a jugé qu’une image générée par IA n’est pas une œuvre de l’esprit et ne peut donc pas bénéficier d’une protection par le droit d’auteur même si le prompt est complexe.</p>"
@@ -465,8 +465,8 @@
                 "id": "a58a7de1-2de5-4482-8731-6ed51793f5c9",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/chat-gpt-image-30-mars-2026-12_15_43.png",
-                "alt": "",
-                "alternativeText": "",
+                "alt": "Image d'un salon généré intégralement par IA",
+                "alternativeText": "<p><br></p>",
                 "legend": "Image type Pinterest",
                 "licence": ""
               }
@@ -483,14 +483,14 @@
                     "id": "1",
                     "content": "Oui",
                     "feedback": {
-                      "diagnosis": ""
+                      "diagnosis": "<p>Bien joué ! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l'IA a été utilisée pour créer une image.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Non",
                     "feedback": {
-                      "diagnosis": ""
+                      "diagnosis": "<p>Eh non ! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l'IA a été utilisée pour créer une image.&nbsp;</p>"
                     }
                   }
                 ],
