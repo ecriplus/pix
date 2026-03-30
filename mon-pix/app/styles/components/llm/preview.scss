@@ -6,7 +6,7 @@
 
 .modulix-preview {
   &__panel {
-    position: sticky;
+    position: fixed;
     top: var(--pix-spacing-6x);
     z-index: 200;
     display: inline-block;
