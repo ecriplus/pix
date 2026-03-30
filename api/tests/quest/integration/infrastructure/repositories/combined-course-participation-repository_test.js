@@ -7,8 +7,7 @@ import {
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import * as combinedCourseParticipationRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-participation-repository.js';
-import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Infrastructure | repositories | Combined-Course-Participation', function () {
   describe('#save', function () {
@@ -222,51 +221,6 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
       // then
       expect(result).false;
-    });
-  });
-
-  describe('#getByUserId', function () {
-    it('should return combinedCourse participation for given user and combinedCourse ids', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser().id;
-      const {
-        firstName,
-        lastName,
-        id: organizationLearnerId,
-      } = databaseBuilder.factory.buildOrganizationLearner({ userId });
-      const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse();
-      databaseBuilder.factory.buildOrganizationLearnerParticipation({
-        organizationLearnerId,
-        status: OrganizationLearnerParticipationStatuses.COMPLETED,
-        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-        combinedCourseId,
-      });
-      await databaseBuilder.commit();
-
-      // when
-      const result = await combinedCourseParticipationRepository.getByUserId({ userId, combinedCourseId });
-
-      // then
-      expect(result.combinedCourseId).to.deep.equal(combinedCourseId);
-      expect(result.organizationLearnerId).to.deep.equal(organizationLearnerId);
-      expect(result.firstName).equal(firstName);
-      expect(result.lastName).equal(lastName);
-      expect(result.status).to.deep.equal(OrganizationLearnerParticipationStatuses.COMPLETED);
-    });
-
-    it('should throw NotFound error when combinedCourse participation does not exist for given user and combinedCourse ids', async function () {
-      // given
-      const userId = 1;
-      const combinedCourseId = 2;
-
-      // when
-      const error = await catchErr(combinedCourseParticipationRepository.getByUserId)({ userId, combinedCourseId });
-
-      // then
-      expect(error).to.be.instanceof(NotFoundError);
-      expect(error.message).to.equal(
-        `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et au parcours d'id ${combinedCourseId}`,
-      );
     });
   });
 
@@ -827,6 +781,39 @@ describe('Quest | Integration | Infrastructure | repositories | Combined-Course-
 
       // then
       expect(combinedCourseParticipations).to.deep.equal([]);
+    });
+
+    it('should not return deleted participations', async function () {
+      // given
+      const { id: combinedCourseId, organizationId } = databaseBuilder.factory.buildCombinedCourse({
+        code: 'COMBI1',
+      });
+
+      const { id: organizationLearnerId } = databaseBuilder.factory.buildOrganizationLearner({
+        firstName: 'Alice',
+        lastName: 'Azerty',
+        division: '6eme',
+        group: 'Groupe 2',
+        organizationId,
+      });
+
+      databaseBuilder.factory.buildOrganizationLearnerParticipation({
+        organizationLearnerId,
+        status: OrganizationLearnerParticipationStatuses.COMPLETED,
+        combinedCourseId,
+        type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
+        deletedAt: new Date(),
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const combinedCourseParticipations = await combinedCourseParticipationRepository.findByCombinedCourseIds({
+        combinedCourseIds: [combinedCourseId],
+      });
+
+      // then
+      expect(combinedCourseParticipations.length).to.equal(0);
     });
   });
 });
