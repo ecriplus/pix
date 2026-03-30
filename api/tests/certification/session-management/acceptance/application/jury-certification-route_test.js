@@ -1,5 +1,5 @@
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
 import {
   createServer,

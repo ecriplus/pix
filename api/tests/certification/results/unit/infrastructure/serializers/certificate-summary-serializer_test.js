@@ -1,10 +1,10 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
   CERTIFICATE_TYPES,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-summary-serializer.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';

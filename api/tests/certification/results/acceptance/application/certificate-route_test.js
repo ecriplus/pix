@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import {
   CERTIFICATE_STATUSES,
@@ -8,6 +7,7 @@ import {
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';

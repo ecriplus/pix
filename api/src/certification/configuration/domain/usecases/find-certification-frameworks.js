@@ -1,4 +1,4 @@
-import { Frameworks } from '../models/Frameworks.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 /**
  * @param {object} params

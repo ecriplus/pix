@@ -1,8 +1,8 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationCandidateNotFoundError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import * as candidateRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/candidate-repository.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 

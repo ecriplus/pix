@@ -1,4 +1,4 @@
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 const IMPORT_CANDIDATES_SESSION_TEMPLATE_HEADERS = [
   'headers.birthcity',

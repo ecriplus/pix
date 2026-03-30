@@ -1,8 +1,8 @@
-import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../../../src/certification/shared/domain/models/CertificationIssueReport.js';
 import { CertificationIssueReportCategory } from '../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import { buildAssessment } from './build-assessment.js';
 
 function buildCertificationCourse({

@@ -1,5 +1,5 @@
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../src/certification/shared/domain/constants.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import {
   createServer,

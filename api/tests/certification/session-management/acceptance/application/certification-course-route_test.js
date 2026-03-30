@@ -1,5 +1,5 @@
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,

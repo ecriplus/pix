@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
 import {
   createServer,

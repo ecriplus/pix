@@ -1,5 +1,5 @@
-import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { SCOCertificationCandidate } from '../../../../src/certification/enrolment/domain/models/SCOCertificationCandidate.js';
+import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import { domainBuilder } from '../domain-builder.js';
 
 const buildSCOCertificationCandidate = function ({

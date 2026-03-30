@@ -1,6 +1,6 @@
-import { Frameworks } from '../../../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationResult } from '../../../../../../../../src/certification/results/domain/models/CertificationResult.js';
 import { SessionCertificationResultsCsvBuilder } from '../../../../../../../../src/certification/results/infrastructure/utils/csv/certification-results/SessionCertificationResultsCsvBuilder.js';
+import { Frameworks } from '../../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { getI18n } from '../../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../../test-helper.js';
 
