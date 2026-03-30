@@ -3,7 +3,7 @@ import { ReconcileCommonOrganizationLearnerError } from '../errors.js';
 /**
  * La réconciliation se passe en 2 étapes :
  *  1. On récupère les utilisateurs qui correspondent aux données de l'import hors nom prénom.
- *  2. On identifie le bon préscrit sur la base du nom prénom en utilisant le service de réconciliation
+ *  2. On identifie le bon prescrit sur la base du nom prénom en utilisant le service de réconciliation
  *     Cela nous permet d'éviter les coquilles typographiques (prénom accentué ou caractère autres qu'alphanumérique...)
 
  * @name reconcileCommonOrganizationLearner
@@ -15,26 +15,20 @@ import { ReconcileCommonOrganizationLearnerError } from '../errors.js';
  * @returns {Promise<void>}
  */
 const reconcileCommonOrganizationLearner = async function ({
-  code,
+  organizationId,
   userId,
   reconciliationInfos,
-  campaignRepository,
   organizationFeatureApi,
   organizationLearnerImportFormatRepository,
   organizationLearnerRepository,
   userReconciliationService,
 }) {
-  const campaign = await campaignRepository.getByCode(code);
-  if (!campaign) {
-    throw new ReconcileCommonOrganizationLearnerError('CAMPAIGN_NOT_FOUND');
-  }
-
-  const features = await organizationFeatureApi.getAllFeaturesFromOrganization(campaign.organizationId);
+  const features = await organizationFeatureApi.getAllFeaturesFromOrganization(organizationId);
   if (!features.hasLearnersImportFeature) {
     throw new ReconcileCommonOrganizationLearnerError('MISSING_IMPORT_FEATURE');
   }
 
-  const importFormat = await organizationLearnerImportFormatRepository.get(campaign.organizationId);
+  const importFormat = await organizationLearnerImportFormatRepository.get(organizationId);
 
   if (!importFormat) {
     throw new ReconcileCommonOrganizationLearnerError('IMPORT_FORMAT_NOT_FOUND');
@@ -43,7 +37,7 @@ const reconcileCommonOrganizationLearner = async function ({
   const transformedReconciliationData = importFormat.transformReconciliationData(reconciliationInfos);
 
   const matchingLearners = await organizationLearnerRepository.findAllCommonOrganizationLearnerByReconciliationInfos({
-    organizationId: campaign.organizationId,
+    organizationId,
     reconciliationInformations: transformedReconciliationData.attributes,
   });
 
@@ -55,6 +49,7 @@ const reconcileCommonOrganizationLearner = async function ({
     matchingLearners,
     transformedReconciliationData,
   );
+
   if (!learnerId) {
     throw new ReconcileCommonOrganizationLearnerError('NO_MATCH');
   }

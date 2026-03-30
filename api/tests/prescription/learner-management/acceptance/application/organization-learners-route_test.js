@@ -167,7 +167,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
     it('reconcile connected user given parameter', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const campaign = databaseBuilder.factory.buildCampaign({ code: 'RECONCILIATION', organizationId });
+      databaseBuilder.factory.buildCampaign({ organizationId });
       const featureId = databaseBuilder.factory.buildFeature({ key: ORGANIZATION_FEATURE.LEARNER_IMPORT.key }).id;
       const organizationLearnerImportFormatId = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
         name: 'GENERIC',
@@ -231,7 +231,7 @@ describe('Acceptance | Prescription | learner management | Application | organiz
         payload: {
           data: {
             attributes: {
-              code: campaign.code,
+              'organization-id': organizationId,
               'reconciliation-infos': {
                 reconcileField1: 'Aheurfix',
                 reconcileField2: 'Edgar',

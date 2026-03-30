@@ -22,6 +22,6 @@ async function _createSupLearners(databasebuilder) {
   });
 }
 
-export function buildOrganizationLearners(databaseBuilder) {
-  return _createSupLearners(databaseBuilder);
+export async function buildOrganizationLearners(databaseBuilder) {
+  await _createSupLearners(databaseBuilder);
 }
