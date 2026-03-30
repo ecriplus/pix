@@ -804,7 +804,7 @@
                 "id": "a2ef7833-34d7-4801-995e-dfa5815d2c09",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>    <li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;<br><br></li>    <li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence.<br><br></li>    <li>Le <strong>gestionnaire de fichier </strong>permet de&nbsp;:&nbsp;<ul>            <li>Accéder aux dossiers et aux fichiers et les ranger.</li>            <li>Visualiser l’arborescence.</li>            <li>Consulter des informations sur les dossiers et les fichiers.</li>            <li>Modifier l’affichage.<br><br> </li>        </ul>    </li>    <li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
+                "content": "<ul>    <li>Sur un ordinateur, les fichiers sont organisés dans une <strong>arborescence</strong> de dossiers.&nbsp;</li>    <li>Le <strong>chemin d’accès </strong>indique l’<strong>emplacement d’un fichier</strong> dans cette arborescence.</li>    <li>Le <strong>gestionnaire de fichier </strong>permet de&nbsp;:&nbsp;<ul>            <li>Accéder aux dossiers et aux fichiers et les ranger.</li>            <li>Visualiser l’arborescence.</li>            <li>Consulter des informations sur les dossiers et les fichiers.</li>            <li>Modifier l’affichage. </li>        </ul>    </li>    <li>Une bonne <strong>organisation</strong> pour vous est une organisation qui vous permet de <strong>retrouver facilement vos fichiers</strong>.</li></ul>"
               }
             }
           ]
