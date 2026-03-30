@@ -31,10 +31,19 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
     context('status computation', function () {
       context('when certification is not published', function () {
         [
-          AssessmentResult.status.REJECTED,
-          AssessmentResult.status.VALIDATED,
-          AssessmentResult.status.CANCELLED,
-        ].forEach((assessmentResultStatus) => {
+          {
+            assessmentResultStatus: AssessmentResult.status.REJECTED,
+            expectedReachedMeshIndex: null,
+          },
+          {
+            assessmentResultStatus: AssessmentResult.status.VALIDATED,
+            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+          },
+          {
+            assessmentResultStatus: AssessmentResult.status.CANCELLED,
+            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+          },
+        ].forEach(({ assessmentResultStatus, expectedReachedMeshIndex }) => {
           it(`should set the status of the certificate as WAIT_FOR_RESULTS when assessment result status is ${assessmentResultStatus}`, function () {
             const actualCertificateSummary = CertificateSummary.buildFrom({
               ...baseData,
@@ -53,6 +62,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
               extraCertificationStatus: null,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshIndex: expectedReachedMeshIndex,
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -66,18 +76,21 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
             assessmentResultStatus: AssessmentResult.status.REJECTED,
             status: CERTIFICATE_STATUSES.REJECTED,
             extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
+            expectedReachedMeshIndex: null,
           },
           {
             assessmentResultStatus: AssessmentResult.status.CANCELLED,
             status: CERTIFICATE_STATUSES.CANCELLED,
             extraStatus: null,
+            expectedReachedMeshIndex: baseData.reachedMeshIndex,
           },
           {
             assessmentResultStatus: AssessmentResult.status.VALIDATED,
             status: CERTIFICATE_STATUSES.VALIDATED,
             extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
+            expectedReachedMeshIndex: baseData.reachedMeshIndex,
           },
-        ].forEach(({ assessmentResultStatus, status, extraStatus }) => {
+        ].forEach(({ assessmentResultStatus, status, extraStatus, expectedReachedMeshIndex }) => {
           it(`should set the status of the certificate as ${status} when assessment result status is ${assessmentResultStatus}`, function () {
             const actualCertificateSummary = CertificateSummary.buildFrom({
               ...baseData,
@@ -96,6 +109,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
               extraCertificationStatus: extraStatus,
+              reachedMeshIndex: expectedReachedMeshIndex,
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -169,6 +183,59 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
           });
+        });
+      });
+    });
+
+    context('reachedMeshIndex computation', function () {
+      context('when certification is V3 and rejected', function () {
+        it('should set reachedMeshIndex to null', function () {
+          // when
+          const actualCertificateSummary = CertificateSummary.buildFrom({
+            ...baseData,
+            algorithmVersion: AlgorithmEngineVersion.V3,
+            assessmentResultStatus: AssessmentResult.status.REJECTED,
+            isPublished: true,
+            isExtraCertificationAcquired: false,
+            reachedMeshIndex: 0,
+          });
+
+          // then
+          expect(actualCertificateSummary.reachedMeshIndex).to.be.null;
+        });
+      });
+
+      context('when certification is V3 and validated', function () {
+        it('should keep the reachedMeshIndex', function () {
+          // when
+          const actualCertificateSummary = CertificateSummary.buildFrom({
+            ...baseData,
+            algorithmVersion: AlgorithmEngineVersion.V3,
+            assessmentResultStatus: AssessmentResult.status.VALIDATED,
+            isPublished: true,
+            isExtraCertificationAcquired: false,
+            reachedMeshIndex: 0,
+          });
+
+          // then
+          expect(actualCertificateSummary.reachedMeshIndex).to.equal(0);
+        });
+      });
+
+      context('when certification is not V3', function () {
+        it('should keep the reachedMeshIndex regardless of status', function () {
+          // when
+          const actualCertificateSummary = CertificateSummary.buildFrom({
+            ...baseData,
+            algorithmVersion: AlgorithmEngineVersion.V2,
+            assessmentResultStatus: AssessmentResult.status.REJECTED,
+            isPublished: true,
+            isExtraCertificationAcquired: false,
+            reachedMeshIndex: 3,
+          });
+
+          // then
+          expect(actualCertificateSummary.reachedMeshIndex).to.equal(3);
         });
       });
     });
