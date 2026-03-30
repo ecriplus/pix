@@ -1525,6 +1525,7 @@
         "details": "Détails",
         "features": "Fonctionnalités",
         "invitations": "Invitations",
+        "network": "Réseau {nbrOfChildren, plural, =1 {({nbrOfChildren} fille)} other {({nbrOfChildren} filles)}}",
         "places": "Places",
         "tags": "Tags",
         "target-profiles": "Profils cibles",
