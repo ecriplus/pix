@@ -51,7 +51,6 @@ import { findCertificatesForDivision } from './find-certificates-for-division.js
 import { findCertificationAttestationsForDivision } from './find-certification-attestations-for-division.js';
 import { findUserCertificateSummaries } from './find-user-certificate-summaries.js';
 import { findUserCertificationCourses } from './find-user-certification-courses.js';
-import { findUserPrivateCertificates } from './find-user-private-certificates.js';
 import { getCertificate } from './get-certificate.js';
 import { getCertificatesForSession } from './get-certificates-for-session.js';
 import { getCertificationCourseByVerificationCode } from './get-certification-course-by-verification-code.js';
@@ -71,7 +70,6 @@ const usecasesWithoutInjectedDependencies = {
   findCertificationAttestationsForDivision,
   findUserCertificateSummaries,
   findUserCertificationCourses,
-  findUserPrivateCertificates,
   getCertificate,
   getCertificatesForSession,
   getCertificationCourseByVerificationCode,

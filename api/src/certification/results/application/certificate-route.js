@@ -143,21 +143,6 @@ const register = async function (server) {
       },
     },
     {
-      /*
-        @deprecated : to delete after new route is running in production
-       */
-      method: 'GET',
-      path: '/api/certifications',
-      config: {
-        handler: certificateController.findUserCertificates,
-        notes: [
-          '- **Route DÉPRÉCIÉE nécessitant une authentification**\n' +
-            '- Récupération de toutes les certifications complétées de l’utilisateur courant',
-        ],
-        tags: ['api', 'certifications'],
-      },
-    },
-    {
       method: 'GET',
       path: '/api/certificate-summaries',
       config: {

@@ -70,20 +70,6 @@ const getCertificate = async function ({ certificationCourseId, locale }) {
   return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges });
 };
 
-const findPrivateCertificatesByUserId = async function ({ userId }) {
-  const knexConn = DomainTransaction.getConnection();
-  const certificationCourseDTOs = await _selectPrivateCertificates(knexConn)
-    .where('certification-courses.userId', '=', userId)
-    .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
-    .orderBy('certification-courses.createdAt', 'DESC');
-
-  return certificationCourseDTOs.map((certificationCourseDTO) =>
-    _toDomainForPrivateCertificate({
-      certificationCourseDTO,
-    }),
-  );
-};
-
 const getPrivateCertificate = async function (id, { locale } = {}) {
   const knexConn = DomainTransaction.getConnection();
   const certificationCourseDTO = await _selectPrivateCertificates(knexConn)
@@ -128,7 +114,6 @@ const getShareableCertificate = async function ({ certificationCourseId, locale 
 
 export {
   findByDivisionForScoIsManagingStudentsOrganization,
-  findPrivateCertificatesByUserId,
   getCertificate,
   getPrivateCertificate,
   getShareableCertificate,

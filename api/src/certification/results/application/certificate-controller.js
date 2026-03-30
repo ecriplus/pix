@@ -58,15 +58,6 @@ async function getCertificate(request, h, dependencies = { certificateSerializer
   }
 }
 
-async function findUserCertificates(request) {
-  const i18n = getI18nFromRequest(request);
-
-  const userId = request.auth.credentials.userId;
-
-  const privateCertificates = await usecases.findUserPrivateCertificates({ userId });
-  return privateCertificateSerializer.serialize(privateCertificates, { translate: i18n.__ });
-}
-
 async function findUserCertificateSummaries(request) {
   const i18n = getI18nFromRequest(request);
   const userId = request.auth.credentials.userId;
@@ -211,7 +202,6 @@ async function downloadDivisionCertificates(
 
 const certificateController = {
   getCertificate,
-  findUserCertificates,
   getCertificateByVerificationCode,
   getPDFCertificate,
   getSessionCertificates,
