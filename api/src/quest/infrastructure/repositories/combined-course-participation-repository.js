@@ -1,5 +1,4 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../shared/domain/errors.js';
 import { filterByFullName } from '../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { CombinedCourseParticipation } from '../../domain/models/CombinedCourseParticipation.js';
@@ -71,41 +70,6 @@ export const isParticipationOnCombinedCourse = async function ({ combinedCourseI
     })
     .first();
   return Boolean(count);
-};
-
-export const getByUserId = async function ({ userId, combinedCourseId }) {
-  const knexConnection = DomainTransaction.getConnection();
-
-  const combinedCourseParticipations = await knexConnection('organization_learner_participations')
-    .select(
-      'organization_learner_participations.id',
-      'organizationLearnerId',
-      'view-active-organization-learners.firstName',
-      'view-active-organization-learners.lastName',
-      'view-active-organization-learners.division',
-      'view-active-organization-learners.group',
-      'organization_learner_participations.status',
-      'organization_learner_participations.createdAt',
-      'organization_learner_participations.updatedAt',
-      'organization_learner_participations.referenceId',
-    )
-    .join(
-      'view-active-organization-learners',
-      'view-active-organization-learners.id',
-      '=',
-      'organization_learner_participations.organizationLearnerId',
-    )
-    .where({
-      'view-active-organization-learners.userId': userId,
-      'organization_learner_participations.referenceId': combinedCourseId.toString(),
-      'organization_learner_participations.type': OrganizationLearnerParticipationTypes.COMBINED_COURSE,
-    });
-  if (combinedCourseParticipations.length === 0) {
-    throw new NotFoundError(
-      `CombinedCourseParticipation introuvable pour l'utilisateur d'id ${userId} et au parcours d'id ${combinedCourseId}`,
-    );
-  }
-  return new CombinedCourseParticipation(combinedCourseParticipations[0]);
 };
 
 export const findByLearnerId = async function ({ organizationLearnerId, combinedCourseId }) {
