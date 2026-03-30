@@ -133,4 +133,69 @@ module('Unit | Services | Module | ModulixNavigationProgress', function (hooks) 
       });
     });
   });
+
+  module('#computeCurrentSectionByGrainIndex', function () {
+    const module = {
+      sections: [
+        { grains: [{ id: 'grain-0' }, { id: 'grain-1' }] },
+        { grains: [{ id: 'grain-2' }, { id: 'grain-3' }] },
+        { grains: [{ id: 'grain-4' }] },
+      ],
+    };
+
+    test('should set currentSectionIndex based on a valid grainIndex', function (assert) {
+      // given
+      const service = this.owner.lookup('service:modulix-navigation-progress');
+
+      // when
+      service.computeCurrentSectionByGrainIndex(module, 2);
+
+      // then
+      assert.strictEqual(service.currentSectionIndex, 1);
+    });
+
+    test('should set currentSectionIndex to 0 when grainIndex is 0', function (assert) {
+      // given
+      const service = this.owner.lookup('service:modulix-navigation-progress');
+
+      // when
+      service.computeCurrentSectionByGrainIndex(module, 0);
+
+      // then
+      assert.strictEqual(service.currentSectionIndex, 0);
+    });
+
+    test('should set currentSectionIndex to 0 when grainIndex is negative', function (assert) {
+      // given
+      const service = this.owner.lookup('service:modulix-navigation-progress');
+
+      // when
+      service.computeCurrentSectionByGrainIndex(module, -1);
+
+      // then
+      assert.strictEqual(service.currentSectionIndex, 0);
+    });
+
+    test('should set currentSectionIndex to 0 when grainIndex is out of bounds', function (assert) {
+      // given
+      const service = this.owner.lookup('service:modulix-navigation-progress');
+
+      // when
+      service.computeCurrentSectionByGrainIndex(module, 5);
+
+      // then
+      assert.strictEqual(service.currentSectionIndex, 0);
+    });
+
+    test('should set currentSectionIndex to 0 when grainIndex is NaN', function (assert) {
+      // given
+      const service = this.owner.lookup('service:modulix-navigation-progress');
+
+      // when
+      service.computeCurrentSectionByGrainIndex(module, NaN);
+
+      // then
+      assert.strictEqual(service.currentSectionIndex, 0);
+    });
+  });
 });

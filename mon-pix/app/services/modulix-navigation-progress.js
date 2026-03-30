@@ -23,4 +23,18 @@ export default class ModulixNavigationProgress extends Service {
       }
     }
   }
+
+  computeCurrentSectionByGrainIndex(module, grainIndex) {
+    const grains = module.sections.flatMap((section, index) => {
+      return section.grains.map((grain) => ({
+        ...grain,
+        sectionIndex: index,
+      }));
+    });
+
+    const isGrainIndexValid = !Number.isNaN(grainIndex) && grainIndex > 0 && grainIndex < grains.length;
+    const index = isGrainIndexValid ? grainIndex : 0;
+
+    this.currentSectionIndex = grains[index].sectionIndex;
+  }
 }
