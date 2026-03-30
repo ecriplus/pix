@@ -57,10 +57,10 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
   });
 
   describe('GET /api/admin/networks/1', function () {
-    it('returns a list of networks with 200 HTTP status code', async function () {
+    it('returns a specific network with 200 HTTP status code', async function () {
       // given
       const server = await createServer();
-      const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+      const { network } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
         id: 1,
         name: 'Mon réseau',
         headOrganization: { id: 555, name: 'Tête de réseau' },
@@ -95,7 +95,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
   describe('PATCH /api/admin/networks/{networkId}', function () {
     it('updates the network name and returns 200', async function () {
       // given
-      const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Ancien nom' });
+      const { network } = databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Ancien nom' });
       await databaseBuilder.commit();
 
       const request = {

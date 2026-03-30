@@ -97,7 +97,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
       it('returns the network with head organization informations', async function () {
         // given
         const headOrganizationId = 999;
-        const network = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+        const { network } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
           name: 'Mon super réseau',
           headOrganization: { id: headOrganizationId, name: 'Orga tête de réseau' },
         });

@@ -28,7 +28,7 @@ const buildNetwork = function ({
  * @param {number} [options.id] - Network id
  * @param {string} [options.name] - Network name
  * @param {Parameters<typeof buildOrganization>[0]} [options.headOrganization] - Any parameter accepted by buildOrganization
- * @returns {{ id: number, name: string }} The created network
+ * @returns {{ network: {id: number, name: string }, structure: {id: number}}} The created network
  */
 const buildNetworkAndHeadOrganization = function ({
   id = databaseBuffer.getNextId(),
@@ -39,7 +39,7 @@ const buildNetworkAndHeadOrganization = function ({
   const organization = buildOrganization({ name: 'Head Organization', ...headOrganization });
   const structure = buildStructure();
   buildFactStructure({ structureId: structure.id, networkId: network.id, organizationId: organization.id });
-  return network;
+  return { network, structure };
 };
 
 /**
