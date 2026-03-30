@@ -12,7 +12,7 @@ export default class ModulixAppLayout extends Component {
   @service router;
 
   get currentModule() {
-    const moduleSlug = this.router.currentRoute.parent.params.slug;
+    const moduleSlug = this.router.currentRoute.parent.params.slug || this.router.currentRoute.attributes.module?.slug;
     const modules = this.store.peekAll('module');
     return modules.find((module) => module.slug === moduleSlug);
   }

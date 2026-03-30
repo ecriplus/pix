@@ -175,6 +175,11 @@ export default class ModulixPreview extends Component {
 
   @action
   goToModuleGrain() {
+    this.router.transitionTo('module.passage', this.args.module, {
+      queryParams: {
+        grainIndex: this.selectedGrainIndex,
+      },
+    });
   }
 
   @action
