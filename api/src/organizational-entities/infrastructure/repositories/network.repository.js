@@ -93,13 +93,13 @@ async function findByOrganizationId(organizationId) {
 async function save({ organizationId, networkName }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const [{ id: structureId }] = await knexConn('structures').insert({}, ['id']);
   const [savedNetwork] = await knexConn('networks').insert({ name: networkName }, ['id', 'name']);
-  await knexConn('fct_structures').insert({
-    structure_id: structureId,
-    organization_id: organizationId,
-    network_id: savedNetwork.id,
-  });
+
+  await knexConn('fct_structures')
+    .update({
+      network_id: savedNetwork.id,
+    })
+    .where({ organization_id: organizationId });
 
   return _toDomain(savedNetwork);
 }

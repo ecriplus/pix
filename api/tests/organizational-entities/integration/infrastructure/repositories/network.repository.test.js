@@ -242,6 +242,12 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
     it('saves and returns the new network', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const structure = databaseBuilder.factory.buildStructure();
+      databaseBuilder.factory.buildFactStructure({
+        structureId: structure.id,
+        networkId: null,
+        organizationId: organizationId,
+      });
       const networkName = 'Network 1';
       await databaseBuilder.commit();
 
@@ -254,15 +260,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         id: foundNetwork.id,
         name: networkName,
       });
-      const createdStructure = await knex('structures')
-        .join('fct_structures', 'structures.id', 'fct_structures.structure_id')
+      const updatedFactStructure = await knex('fct_structures')
         .where('fct_structures.organization_id', organizationId)
         .first();
-      expect(createdStructure).to.exist;
-      const createdFactStructure = await knex('fct_structures')
-        .where('fct_structures.organization_id', organizationId)
-        .first();
-      expect(createdFactStructure.network_id).to.equal(foundNetwork.id);
+      expect(updatedFactStructure.network_id).to.equal(foundNetwork.id);
       const expectedNetwork = domainBuilder.acquisition.buildNetwork(foundNetwork);
       expect(savedNetwork).to.deep.equal(expectedNetwork);
     });
