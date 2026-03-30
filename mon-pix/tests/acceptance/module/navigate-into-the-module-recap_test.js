@@ -22,6 +22,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModuleRecap', function (ho
         id: '84726001-1665-457d-8f13-4a74dc4768ea',
         type: 'text',
         content: '<h4>content</h4>',
+        tag: ' ',
       };
       user = server.create('user', 'withEmail');
 

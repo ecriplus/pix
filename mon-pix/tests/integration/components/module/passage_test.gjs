@@ -27,7 +27,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display given module', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const qcuElement = {
         instruction: 'instruction',
         proposals: ['radio1', 'radio2'],
@@ -101,7 +101,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should not display the non existing elements but display the existing ones', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const existingElement = { content: '<h4>existing element content</h4>', type: 'text' };
+      const existingElement = { content: '<h4>existing element content</h4>', type: 'text', tag: ' ' };
       const nonExistingElement1 = { type: 'non-existing-element-type' };
       const nonExistingElement2 = {
         type: 'non-existing-element-type',
@@ -142,7 +142,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display a banner at the top of the screen for a passage', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -170,7 +170,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should not display a banner at the top of the screen for a passage', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -198,7 +198,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display given module', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const qcuElement = {
         instruction: 'instruction',
         proposals: ['radio1', 'radio2'],
@@ -233,7 +233,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display next grain', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const qcuElement = {
         instruction: 'instruction',
         proposals: ['radio1', 'radio2'],
@@ -270,7 +270,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should send an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const qcuElement = {
         instruction: 'instruction',
         proposals: ['radio1', 'radio2'],
@@ -319,8 +319,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display next grain', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
+      const text1Element = { content: 'content', type: 'text', tag: ' ' };
+      const text2Element = { content: 'content 2', type: 'text', tag: ' ' };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -353,9 +353,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should give focus on the last grain when appearing', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
-      const text3Element = { content: 'content 3', type: 'text' };
+      const text1Element = { content: 'content', type: 'text', tag: ' ' };
+      const text2Element = { content: 'content 2', type: 'text', tag: ' ' };
+      const text3Element = { content: 'content 3', type: 'text', tag: ' ' };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -401,8 +401,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should send an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
+      const text1Element = { content: 'content', type: 'text', tag: ' ' };
+      const text2Element = { content: 'content 2', type: 'text', tag: ' ' };
       const grain1 = { components: [{ type: 'element', element: text1Element }] };
       const section = store.createRecord('section', {
         id: 'section1',
@@ -805,8 +805,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should push metrics event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
+      const text1Element = { content: 'content', type: 'text', tag: ' ' };
+      const text2Element = { content: 'content 2', type: 'text', tag: ' ' };
       const step1 = { elements: [text1Element] };
       const step2 = { elements: [text2Element] };
       const grain = {
@@ -849,9 +849,9 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should send an event', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const text1Element = { content: 'content', type: 'text' };
-      const text2Element = { content: 'content 2', type: 'text' };
-      const text3Element = { content: 'content 3', type: 'text' };
+      const text1Element = { content: 'content', type: 'text', tag: ' ' };
+      const text2Element = { content: 'content 2', type: 'text', tag: ' ' };
+      const text3Element = { content: 'content 3', type: 'text', tag: ' ' };
       const step1 = { elements: [text1Element] };
       const step2 = { elements: [text2Element] };
       const step3 = { elements: [text3Element] };
@@ -899,7 +899,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
     test('should display the terminate button', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const element = { type: 'text', isAnswerable: false };
+      const element = { type: 'text', isAnswerable: false, tag: ' ' };
       const section = store.createRecord('section', {
         id: 'section1',
         type: 'blank',
@@ -993,7 +993,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
         test('should display the terminate button', async function (assert) {
           // given
           const store = this.owner.lookup('service:store');
-          const textElement = { type: 'text', isAnswerable: false };
+          const textElement = { type: 'text', isAnswerable: false, tag: ' ' };
           const qcuElement = {
             instruction: 'instruction',
             proposals: ['radio1', 'radio2'],
@@ -1029,8 +1029,8 @@ module('Integration | Component | Module | Passage', function (hooks) {
         test('should display the terminate button', async function (assert) {
           // given
           const store = this.owner.lookup('service:store');
-          const text1Element = { type: 'text', isAnswerable: false };
-          const text2Element = { type: 'text', isAnswerable: false };
+          const text1Element = { type: 'text', isAnswerable: false, tag: ' ' };
+          const text2Element = { type: 'text', isAnswerable: false, tag: ' ' };
           const section = store.createRecord('section', {
             id: 'section1',
             type: 'blank',
@@ -1468,7 +1468,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
   test('should inform user at which step it is', async function (assert) {
     // given
     const store = this.owner.lookup('service:store');
-    const textElement = { content: 'content', type: 'text' };
+    const textElement = { content: 'content', type: 'text', tag: ' ' };
     const section = store.createRecord('section', {
       id: 'section1',
       type: 'blank',

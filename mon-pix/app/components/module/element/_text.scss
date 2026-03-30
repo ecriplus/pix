@@ -57,4 +57,9 @@
     padding: 0 var(--pix-spacing-2x);
     color: var(--pix-primary-700);
   }
+
+
+  &--with-tag {
+    margin-bottom: var(--pix-spacing-2x);
+  }
 }

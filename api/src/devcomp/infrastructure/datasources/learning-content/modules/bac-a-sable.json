@@ -19,6 +19,58 @@
       "type": "question-yourself",
       "grains": [
         {
+          "id": "9de10c46-df0e-41f5-a709-81637f0d5cc3",
+          "type": "challenge",
+          "title": "Element text avec tags",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ffc22686-e788-415b-a456-a5a691687b2c",
+                "type": "text",
+                "tag": "key-points",
+                "content": "<p>Ceci&nbsp;est un contenu avec le tag \"Points clés\".</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d5e369ec-2a5e-4692-ac46-5be5a49f2acd",
+                "type": "text",
+                "tag": "context",
+                "content": "<p>Ceci&nbsp;est un contenu avec le tag \"Contexte\".</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "fd90e4e1-5836-448c-91b4-8577e42efd09",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>Ceci&nbsp;est un contenu avec le tag \"Le saviez-vous ?\".</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d199f893-42e4-40f9-b6db-70b7e6bb69b1",
+                "type": "text",
+                "tag": "tip",
+                "content": "<p>Ceci&nbsp;est un contenu avec le tag \"Astuce\".</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6112afd2-db04-4172-964a-61239d451b38",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Ceci&nbsp;est un contenu avec le tag \"L’info en plus\".</p>"
+              }
+            }
+          ]
+        },
+        {
           "id": "533c69b8-a836-41be-8ffc-8d4636e31224",
           "type": "activity",
           "title": "Voici un vrai-faux",

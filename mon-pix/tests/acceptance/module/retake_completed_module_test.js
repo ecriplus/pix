@@ -42,6 +42,7 @@ module('Acceptance | Module | Routes | retakeCompletedModule', function (hooks) 
       type: 'text',
       content: 'content-1',
       isAnswerable: false,
+      tag: ' ',
     };
 
     const grain2 = {

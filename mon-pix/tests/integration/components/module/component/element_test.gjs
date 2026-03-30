@@ -98,6 +98,7 @@ module('Integration | Component | Module | Element', function (hooks) {
       id: '768441a5-a7d6-4987-ada9-7253adafd842',
       type: 'text',
       content: 'content',
+      tag: ' ',
     };
 
     // when

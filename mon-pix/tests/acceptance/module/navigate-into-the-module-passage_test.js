@@ -125,6 +125,7 @@ module('Acceptance | Module | Routes | navigateIntoTheModulePassage', function (
         id: 'elementId-1',
         type: 'text',
         content: 'content-1',
+        tag: ' ',
       };
       const section1 = server.create('section', {
         id: 'sectionId-1',
@@ -228,18 +229,21 @@ const text1 = {
   id: 'elementId-1',
   type: 'text',
   content: 'content-1',
+  tag: ' ',
 };
 
 const text2 = {
   id: 'elementId-2',
   type: 'text',
   content: 'content-2',
+  tag: ' ',
 };
 
 const text3 = {
   id: 'elementId-3',
   type: 'text',
   content: 'content-3',
+  tag: ' ',
 };
 
 function _createSections(server) {

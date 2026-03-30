@@ -1662,6 +1662,15 @@
         "short-video": {
           "consult-transcription": "Consultare la trascrizione per conoscerne il contenuto.",
           "missing-content": "Si è verificato un errore durante la visualizzazione del video."
+        },
+        "text": {
+          "tag": {
+            "context": "Contesto",
+            "did-you-know": "Lo sapevi?",
+            "further-information": "Per saperne di più",
+            "key-points": "Punti chiave",
+            "tip": "Consiglio"
+          }
         }
       },
       "flashcards": {
