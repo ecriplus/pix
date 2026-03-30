@@ -1,6 +1,7 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -16,8 +17,10 @@ import ModulixSectionTitle from 'mon-pix/components/module/section-title';
 import didInsert from '../../modifiers/modifier-did-insert';
 
 export default class ModulixPreview extends Component {
+  @service router;
   @service store;
   @service modulixPreviewMode;
+  @service modulixNavigationProgress;
   @service intl;
 
   @tracked moduleCodeDisplayed = false;
@@ -90,6 +93,8 @@ export default class ModulixPreview extends Component {
   }]
 }`;
   @tracked errorMessage = null;
+  @tracked selectedGrainIndex =
+    this.formattedGrainListWithLabel.length > 0 ? this.formattedGrainListWithLabel[0].value : 1;
 
   constructor(owner, args) {
     super(owner, args);
@@ -110,6 +115,19 @@ export default class ModulixPreview extends Component {
 
   get previewingExistingModule() {
     return this.args.module !== undefined;
+  }
+
+  get formattedGrainListWithLabel() {
+    return this.moduleGrains.map((grain, index) => ({
+      label: this.intl.t('pages.modulix.preview.grain-select.grain-label', { index, title: grain.title }),
+      value: `${index}`,
+    }));
+  }
+
+  get moduleGrains() {
+    if (!this.args.module?.sections) return [];
+
+    return this.args.module.sections.flatMap((section) => section.grains);
   }
 
   get passage() {
@@ -156,8 +174,17 @@ export default class ModulixPreview extends Component {
   }
 
   @action
+  goToModuleGrain() {
+  }
+
+  @action
   toggleModuleCodeEditor() {
     this.moduleCodeDisplayed = !this.moduleCodeDisplayed;
+  }
+
+  @action
+  onGrainSelectedChange(value) {
+    this.selectedGrainIndex = value;
   }
 
   @action
@@ -189,12 +216,29 @@ export default class ModulixPreview extends Component {
       </div>
     {{/unless}}
 
-    <div class="modulix-preview__elements-id-button" {{didInsert this.setHTMLElementOffset}}>
+    <div class="modulix-preview__panel" {{didInsert this.setHTMLElementOffset}}>
       <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
         <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
         <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
         <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>
       </PixSegmentedControl>
+      {{#if this.previewingExistingModule}}
+        <hr />
+        <form class="modulix-preview-panel__grain-form">
+          <PixSelect
+            @isComputeWidthDisabled={{true}}
+            @hideDefaultOption={{true}}
+            @options={{this.formattedGrainListWithLabel}}
+            @onChange={{this.onGrainSelectedChange}}
+            @value={{this.selectedGrainIndex}}
+          >
+            <:label>{{t "pages.modulix.preview.grain-select.label"}}</:label>
+          </PixSelect>
+          <PixButton @triggerAction={{this.goToModuleGrain}}>{{t
+              "pages.modulix.preview.grain-select.button"
+            }}</PixButton>
+        </form>
+      {{/if}}
     </div>
 
     <div class="module-preview {{if this.moduleCodeDisplayed 'module-preview--with-editor'}}">

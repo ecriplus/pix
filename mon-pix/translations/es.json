@@ -1777,6 +1777,11 @@
           },
           "label": "Mostrar ID de los elementos"
         },
+        "grain-select": {
+          "button": "Probar el grain",
+          "grain-label": "Grain {index} : {title}",
+          "label": "Elige el grain a probar"
+        },
         "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",

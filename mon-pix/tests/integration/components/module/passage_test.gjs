@@ -1,5 +1,4 @@
 import { clickByName, render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click, findAll } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ApplicationAdapter from 'mon-pix/adapters/application';

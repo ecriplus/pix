@@ -1775,6 +1775,11 @@
         }
       },
       "preview": {
+        "grain-select": {
+          "button": "Testare il grain",
+          "grain-label": "Grain {index} : {title}",
+          "label": "Scegli il grain da testare"
+        },
         "showJson": "Visualizzare JSON",
         "stepper": "Anteprima: stepper {direction}",
         "textarea-label": "Contenuto del modulo"

@@ -5,11 +5,12 @@
 }
 
 .modulix-preview {
-  &__elements-id-button {
+  &__panel {
     position: sticky;
     top: var(--pix-spacing-6x);
     z-index: 200;
     display: inline-block;
+    width: 15rem;
     margin-left: var(--pix-spacing-6x);
     padding: var(--pix-spacing-4x);
     background-color: var(--pix-neutral-0);
@@ -19,5 +20,13 @@
 
   &__elements-id-tag {
     margin: var(--pix-spacing-2x) 0;
+  }
+}
+
+.modulix-preview-panel {
+  &__grain-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
   }
 }
