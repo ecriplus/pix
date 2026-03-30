@@ -10,7 +10,7 @@ import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.
 import { HomePage } from '../../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'EDU_32OK-0KO_Rescore';
+const testRef = 'EDU_32OK-0KO';
 const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
 const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 

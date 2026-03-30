@@ -41,7 +41,7 @@ class FinalizedSession {
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
         _hasNoScoringError(juryCertificationSummaries) &&
         _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) &&
-        _hasPassedOnlyPublishableCertificationFramework(juryCertificationSummaries),
+        _containsOnlyPublishableFrameworks(juryCertificationSummaries),
       publishedAt: null,
     });
   }
@@ -76,7 +76,7 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
     .every((unfinishedCertificationSummary) => unfinishedCertificationSummary.isFlaggedAborted);
 }
 
-function _hasPassedOnlyPublishableCertificationFramework(juryCertificationSummaries) {
+function _containsOnlyPublishableFrameworks(juryCertificationSummaries) {
   const publishableFrameworks = [
     Frameworks.CORE,
     Frameworks.CLEA,

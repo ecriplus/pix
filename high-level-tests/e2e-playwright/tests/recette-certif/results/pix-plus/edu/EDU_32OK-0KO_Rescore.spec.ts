@@ -11,7 +11,7 @@ import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.
 import { HomePage } from '../../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'EDU_32OK-0KO';
+const testRef = 'EDU_32OK-0KO_Rescore';
 const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
 const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
@@ -119,17 +119,17 @@ test(
           result: 'Admissible',
         });
         await test.step('Rescore certification and check for scoring', async () => {
-          await test.step('Alter candidate answers directly in BDD to have half right, half wrong, to demonstrate re-scoring', async () => {
-            const alternateRightWrongSequence = Array.from(Array(32).fill(true), (_, i) => i % 2 === 0);
-            await changeCandidateAnswers(parseInt(certificationNumber), alternateRightWrongSequence);
+          await test.step('Alter candidate answers directly in BDD to have all answers wrong, to demonstrate re-scoring', async () => {
+            const wrongAnswersSequence = Array(32).fill(false);
+            await changeCandidateAnswers(parseInt(certificationNumber), wrongAnswersSequence);
           });
 
           await test.step('Rescore certification', async () => {
             await certificationInformationPage.rescoreCertification();
             await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
               sessionNumber,
-              status: 'Validée',
-              result: 'Admissible',
+              status: 'Rejetée',
+              result: 'Non admissible',
             });
           });
         });
@@ -147,12 +147,12 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Pix+ Édu 1er degré : Admissible');
+      expect(mainStatus).toBe('Pix+ Édu 1er degré : Non admissible');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('');
+      expect(result).toBe('-');
       expect(comment).toBe(null);
     });
 

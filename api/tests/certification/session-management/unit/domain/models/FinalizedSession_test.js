@@ -170,12 +170,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
           completedAt: new Date(),
           isPublished: false,
           certificationFramework: framework,
-          certificationIssueReports: [
-            domainBuilder.buildCertificationIssueReport({
-              category: 'NON_IMPACTFUL_CATEGORY',
-              subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
-            }),
-          ],
+          certificationIssueReports: [],
         });
         const finalizedSession = FinalizedSession.from({
           sessionId: 1234,
