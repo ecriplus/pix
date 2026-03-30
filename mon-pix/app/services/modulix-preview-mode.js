@@ -10,6 +10,10 @@ export default class ModulixPreviewModeService extends Service {
     this.isEnabled = true;
   }
 
+  disable() {
+    this.isEnabled = false;
+  }
+
   get isPreviewAndElementsIdButtonEnabled() {
     return this.isEnabled && this.isElementsIdButtonEnabled;
   }
