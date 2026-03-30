@@ -176,6 +176,75 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
     });
   });
 
+  module('#canPublish', function () {
+    test('it should return false when the status is "error"', function (assert) {
+      // given
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', { status: 'error' });
+
+      // when
+      const canPublish = juryCertificationSummary.canPublish;
+
+      // then
+      assert.false(canPublish);
+    });
+
+    test('it should return false when certificationFramework is "PRO_SANTE"', function (assert) {
+      // given
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', {
+        status: 'validated',
+        certificationFramework: 'PRO_SANTE',
+      });
+
+      // when
+      const canPublish = juryCertificationSummary.canPublish;
+
+      // then
+      assert.false(canPublish);
+    });
+
+    test('it should return false when certificationFramework is "DROIT"', function (assert) {
+      // given
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', {
+        status: 'validated',
+        certificationFramework: 'DROIT',
+      });
+
+      // when
+      const canPublish = juryCertificationSummary.canPublish;
+
+      // then
+      assert.false(canPublish);
+    });
+
+    test('it should return true when the status is validated and certificationFramework is CORE', function (assert) {
+      // given
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', {
+        status: 'validated',
+        certificationFramework: 'CORE',
+      });
+
+      // when
+      const canPublish = juryCertificationSummary.canPublish;
+
+      // then
+      assert.true(canPublish);
+    });
+
+    test('it should return true when the status is rejected and certificationFramework is CORE', function (assert) {
+      // given
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', {
+        status: 'rejected',
+        certificationFramework: 'CORE',
+      });
+
+      // when
+      const canPublish = juryCertificationSummary.canPublish;
+
+      // then
+      assert.true(canPublish);
+    });
+  });
+
   module('#get completionDate', function () {
     test('it should return null if completedAt is null', function (assert) {
       // given

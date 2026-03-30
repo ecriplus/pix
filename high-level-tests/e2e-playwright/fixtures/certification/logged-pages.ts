@@ -4,11 +4,8 @@ import { Browser, type BrowserContext, Page } from '@playwright/test';
 
 import { AUTH_DIR, Credentials, HAR_DIR, saveStorageState, shouldRecordHAR } from '../../helpers/auth.ts';
 import { buildPixAdminUser, buildPixCertifUser } from '../../helpers/certification/builders/index.ts';
-import {
-  PixAdminUserData,
-  PixCertifiableUserData,
-  PixCertifUserData,
-} from '../../helpers/certification/builders/types.ts';
+import { pixCertifiableUserData } from '../../helpers/certification/data.ts';
+import { PixAdminUserData, PixCertifiableUserData, PixCertifUserData } from '../../helpers/certification/types.ts';
 import { knex } from '../../helpers/db.ts';
 import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
 import { createUserInDB } from '../../helpers/db-utils.ts';
@@ -100,67 +97,23 @@ export const loggedPagesFixtures = sharedTest.extend<
     async ({ nextId }, use) => {
       const userDatas = [];
       let nextUserId = nextId();
-      userDatas.push({
-        id: nextUserId,
-        firstName: 'Buffy',
-        lastName: 'Summers',
-        email: `pix-app-user-${nextUserId}-0@example.net`,
-        rawPassword: 'pix123',
-        sex: 'F',
-        birthdate: '1981-01-19',
-        birthDay: '19',
-        birthMonth: '01',
-        birthYear: '1981',
-        birthCountry: 'FRANCE',
-        birthCity: 'Perpignan',
-        postalCode: '66000',
-      });
-      nextUserId = nextId();
-      userDatas.push({
-        id: nextUserId,
-        firstName: 'Rupert',
-        lastName: 'Giles',
-        email: `pix-app-user-${nextUserId}-0@example.net`,
-        rawPassword: 'pix123',
-        sex: 'M',
-        birthdate: '1955-02-22',
-        birthDay: '22',
-        birthMonth: '02',
-        birthYear: '1955',
-        birthCountry: 'FRANCE',
-        birthCity: 'Perpignan',
-        postalCode: '66000',
-      });
-      nextUserId = nextId();
-      userDatas.push({
-        id: nextUserId,
-        firstName: 'Cordelia',
-        lastName: 'Chase',
-        email: `pix-app-user-${nextUserId}-0@example.net`,
-        rawPassword: 'pix123',
-        sex: 'F',
-        birthdate: '1981-08-05',
-        birthDay: '05',
-        birthMonth: '08',
-        birthYear: '1981',
-        birthCountry: 'FRANCE',
-        birthCity: 'Perpignan',
-        postalCode: '66000',
-      });
-      for (const userData of userDatas) {
+      for (const userData of pixCertifiableUserData) {
+        const finalUserData = {
+          ...userData,
+          id: nextUserId,
+          email: `pix-app-user-${nextUserId}-0@example.net`,
+        };
+        userDatas.push(finalUserData);
         await createUserInDB(
           {
-            id: userData.id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.email,
-            rawPassword: userData.rawPassword,
+            ...finalUserData,
             cgu: true,
             pixCertifTermsOfServiceAccepted: true,
             mustValidateTermsOfService: false,
           },
           knex,
         );
+        nextUserId = nextId();
       }
       await use(userDatas);
     },

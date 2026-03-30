@@ -5,11 +5,14 @@ import {
   checkSessionInformationAndExpectSuccess,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
+import { getNowAsDDMMYYYY } from '../../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
+import { HomePage } from '../../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
 const testRef = 'EDU_1OK-0KO_EndedByFinalization_TechnicalIssue';
 const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
+const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
   `${testRef} - User takes a certification test for a Pix+ Edu subscription. One challenge only answered. Ended by finalization for technical issue`,
@@ -22,6 +25,7 @@ test(
          Reasons why a snapshot could be re-generated :
          - Reference Release has changed
          - Next challenge algorithm has changed
+         - CSV results file layout has changed
          - Scoring algorithm or configuration has changed`,
       },
     ],
@@ -36,7 +40,7 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber } = await enrollCandidateAndPassExam({
+    const { sessionNumber, certificationCenterName, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
       certificationKey: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
       rightWrongAnswersSequence: [true],
@@ -60,7 +64,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -111,6 +115,40 @@ test(
           result: 'Non admissible',
         });
       });
+    });
+
+    await test.step('Publish session', async () => {
+      const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
+      await sessionsMainPage.publishSession(sessionNumber);
+    });
+
+    await test.step('User checks their certification result', async () => {
+      await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
+      const homePage = new HomePage(pixAppCertifiablePage);
+      const certificateListPage = await homePage.goToMyCertificates();
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+        await certificateListPage.getCertificateData(certificationNumber);
+      expect(mainStatus).toBe('Annulée');
+      expect(extraStatus).toBe(null);
+      expect(detailsFramework).toBe('Pix+ Édu 1er degré');
+      expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
+      expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
+      expect(result).toBe('-');
+      expect(comment).toBe(
+        "Commentaire : Un ou plusieurs problème(s) technique(s), signalé(s) à votre surveillant pendant la session de certification, a/ont affecté la qualité du test de certification. En raison du trop grand nombre de questions auxquelles vous n'avez pas pu répondre dans de bonnes conditions, nous ne sommes malheureusement pas en mesure de calculer un score fiable et de fournir un certificat. La certification est annulée, le prescripteur de votre certification (le cas échéant), en est informé.",
+      );
+    });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
     });
 
     await snapshotHandler.expectOrRecord(snapshotPath);

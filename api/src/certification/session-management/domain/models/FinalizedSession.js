@@ -41,7 +41,7 @@ class FinalizedSession {
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
         _hasNoScoringError(juryCertificationSummaries) &&
         _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) &&
-        _hasOnlyCoreScopeCertifications(juryCertificationSummaries),
+        _containsOnlyPublishableFrameworks(juryCertificationSummaries),
       publishedAt: null,
     });
   }
@@ -67,11 +67,7 @@ function _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) {
 }
 
 function _hasNoScoringError(juryCertificationSummaries) {
-  return (
-    !juryCertificationSummaries.some((summary) => {
-      return summary.hasScoringError();
-    }) && juryCertificationSummaries.every((summary) => summary.pixScore !== null)
-  );
+  return juryCertificationSummaries.every((summary) => !summary.hasScoringError());
 }
 
 function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
@@ -80,8 +76,15 @@ function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
     .every((unfinishedCertificationSummary) => unfinishedCertificationSummary.isFlaggedAborted);
 }
 
-function _hasOnlyCoreScopeCertifications(juryCertificationSummaries) {
+function _containsOnlyPublishableFrameworks(juryCertificationSummaries) {
+  const publishableFrameworks = [
+    Frameworks.CORE,
+    Frameworks.CLEA,
+    Frameworks.EDU_CPE,
+    Frameworks.EDU_1ER_DEGRE,
+    Frameworks.EDU_2ND_DEGRE,
+  ];
   return juryCertificationSummaries.every(({ certificationFramework }) => {
-    return [Frameworks.CORE, Frameworks.CLEA].includes(certificationFramework);
+    return publishableFrameworks.includes(certificationFramework);
   });
 }

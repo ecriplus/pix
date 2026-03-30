@@ -103,22 +103,6 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       expect(finalizedSession.isPublishable).to.be.false;
     });
 
-    it('is not publishable when there is no score', function () {
-      // given / when
-      const finalizedSession = FinalizedSession.from({
-        sessionId: 1234,
-        certificationCenterName: 'a certification center',
-        sessionDate: '2021-01-29',
-        sessionTime: '16:00',
-        hasExaminerGlobalComment: false,
-        juryCertificationSummaries: _noneWithRequiredActionButHasNoScore(),
-        finalizedAt: new Date('2020-01-01T00:00:00Z'),
-      });
-
-      // then
-      expect(finalizedSession.isPublishable).to.be.false;
-    });
-
     it('is not publishable when at least one assessment has not been completed', function () {
       // given / when
       const finalizedSession = FinalizedSession.from({
@@ -164,6 +148,43 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       });
       // then
       expect(finalizedSession.isPublishable).to.be.true;
+    });
+
+    [
+      { framework: Frameworks.CORE, isPublishable: true },
+      { framework: Frameworks.CLEA, isPublishable: true },
+      { framework: Frameworks.EDU_1ER_DEGRE, isPublishable: true },
+      { framework: Frameworks.EDU_2ND_DEGRE, isPublishable: true },
+      { framework: Frameworks.EDU_CPE, isPublishable: true },
+      { framework: Frameworks.DROIT, isPublishable: false },
+      { framework: Frameworks.PRO_SANTE, isPublishable: false },
+    ].forEach(({ framework, isPublishable }) => {
+      it(`session should be ${isPublishable ? 'publishable' : 'not publishable'} for certification ${framework}}`, function () {
+        const juryCertificationSummary = new JuryCertificationSummary({
+          id: 1,
+          firstName: 'firstName',
+          lastName: 'lastName',
+          status: assessmentResultStatuses.VALIDATED,
+          pixScore: 120,
+          createdAt: new Date(),
+          completedAt: new Date(),
+          isPublished: false,
+          certificationFramework: framework,
+          certificationIssueReports: [],
+        });
+        const finalizedSession = FinalizedSession.from({
+          sessionId: 1234,
+          certificationCenterName: 'a certification center',
+          sessionDate: '2021-01-29',
+          sessionTime: '16:00',
+          hasExaminerGlobalComment: false,
+          juryCertificationSummaries: [juryCertificationSummary],
+          finalizedAt: new Date('2020-01-01T00:00:00Z'),
+        });
+
+        // then
+        expect(finalizedSession.isPublishable).to.equal(isPublishable);
+      });
     });
 
     it('is not publishable when session has some Pix Plus scope certification', function () {
@@ -426,23 +447,6 @@ function _someWhichAreUnfinishedButHaveNoAbortReason() {
           resolution: 'des points gratos offerts',
         }),
       ],
-    }),
-  ];
-}
-
-function _noneWithRequiredActionButHasNoScore() {
-  return [
-    new JuryCertificationSummary({
-      id: 1,
-      firstName: 'firstName',
-      lastName: 'lastName',
-      status: assessmentResultStatuses.VALIDATED,
-      pixScore: null,
-      createdAt: new Date(),
-      completedAt: new Date(),
-      isPublished: false,
-      certificationIssueReports: [],
-      certificationFramework: Frameworks.CORE,
     }),
   ];
 }

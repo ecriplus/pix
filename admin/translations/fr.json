@@ -1317,7 +1317,7 @@
         },
         "publish-session": {
           "label": "Publier la session",
-          "warning-information": "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée, qu'il reste des certifications en erreur, ou qu'elle contient des certifications Pix Plus."
+          "warning-information": "Vous ne pouvez pas publier la session tant qu'elle n'est pas finalisée, qu'il reste des certifications en erreur, ou qu'elle contient des certifications Pix Plus hors Édu."
         },
         "unpublish-session": "Dépublier la session"
       },

@@ -7,7 +7,7 @@ import {
   createCertificationCenterMembershipInDB,
   createUserInDB,
 } from '../../db-utils.ts';
-import { PixCertifUserData } from './types.ts';
+import { PixCertifUserData } from '../types.ts';
 
 export async function buildPixCertifUser(knex: Knex, userData: PixCertifUserData) {
   const certificationUserId = await createUserInDB(

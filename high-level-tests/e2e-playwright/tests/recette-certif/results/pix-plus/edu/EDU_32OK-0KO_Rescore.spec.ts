@@ -1,4 +1,5 @@
 import { expect, test } from '../../../../../fixtures/certification/index.ts';
+import { changeCandidateAnswers } from '../../../../../helpers/certification/db.ts';
 import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
@@ -10,12 +11,12 @@ import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.
 import { HomePage } from '../../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'EDU_0OK-32KO';
+const testRef = 'EDU_32OK-0KO_Rescore';
 const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
 const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
 
 test(
-  `${testRef} - User takes a certification test for a Pix+ Edu subscription. 32 wrong answers`,
+  `${testRef} - User takes a certification test for a Pix+ Edu subscription. 32 right answers`,
   {
     tag: ['@snapshot'],
     annotation: [
@@ -44,7 +45,7 @@ test(
     const { sessionNumber, certificationNumber, certificationCenterName } = await enrollCandidateAndPassExam({
       testRef,
       certificationKey: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
-      rightWrongAnswersSequence: Array(32).fill(false),
+      rightWrongAnswersSequence: Array(32).fill(true),
       pixAppPage: pixAppCertifiablePage,
       certifiableUserData,
     });
@@ -95,8 +96,8 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Rejetée',
-          Résultats: 'Non admissible',
+          Statut: 'Validée',
+          Résultats: 'Admissible',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
         });
@@ -105,17 +106,32 @@ test(
         );
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
-          status: 'Rejetée',
-          result: 'Non admissible',
+          status: 'Validée',
+          result: 'Admissible',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Rejetée',
+          status: 'Validée',
           nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 0,
-          nbQuestionsKO: 32,
+          nbQuestionsOK: 32,
+          nbQuestionsKO: 0,
           nbQuestionsAband: 0,
           nbValidatedTechnicalIssues: 0,
-          result: 'Non admissible',
+          result: 'Admissible',
+        });
+        await test.step('Rescore certification and check for scoring', async () => {
+          await test.step('Alter candidate answers directly in BDD to have all answers wrong, to demonstrate re-scoring', async () => {
+            const wrongAnswersSequence = Array(32).fill(false);
+            await changeCandidateAnswers(parseInt(certificationNumber), wrongAnswersSequence);
+          });
+
+          await test.step('Rescore certification', async () => {
+            await certificationInformationPage.rescoreCertification();
+            await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
+              sessionNumber,
+              status: 'Rejetée',
+              result: 'Non admissible',
+            });
+          });
         });
       });
     });
