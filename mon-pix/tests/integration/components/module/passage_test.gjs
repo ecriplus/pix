@@ -1466,6 +1466,25 @@ module('Integration | Component | Module | Passage', function (hooks) {
     });
   });
 
+  module('when passage is initialized', function () {
+    test('should disable preview mode', async function (assert) {
+      // given
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+      const textElement = { content: 'content', type: 'text' };
+      const grain = { components: [{ type: 'element', element: textElement }] };
+      const section = { id: 'section1', type: 'blank', grains: [grain] };
+      const module = { title: 'Module title', sections: [section] };
+      const passage = { id: '1' };
+
+      // when
+      await render(<template><ModulePassage @module={{module}} @passage={{passage}} /></template>);
+
+      // then
+      assert.false(previewMode.isEnabled);
+    });
+  });
+
   module('when grainIndex is provided', function () {
     function buildModuleWithGrains(count) {
       const textElement = { content: 'content', type: 'text' };

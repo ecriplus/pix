@@ -19,8 +19,15 @@ export default class ModulePassage extends Component {
   @service passageEvents;
   @service featureToggles;
   @service modulixNavigationProgress;
+  @service modulixPreviewMode;
 
   @tracked grainsToDisplay = this.computeGrainsToDisplay();
+
+  constructor(...args) {
+    super(...args);
+
+    this.modulixPreviewMode.disable();
+  }
 
   get enrichedSections() {
     return this.args.module.sections.map((section, index) => {
