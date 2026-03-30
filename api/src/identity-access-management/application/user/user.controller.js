@@ -213,9 +213,9 @@ const sendVerificationCode = async function (request, h, dependencies = { emailV
   const locale = getUserLocale(request);
 
   const userId = request.auth.credentials.userId;
-  const { newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
+  const { action, newEmail, password } = await dependencies.emailVerificationSerializer.deserialize(request.payload);
 
-  await usecases.sendVerificationCode({ locale, newEmail, password, userId });
+  await usecases.sendVerificationCode({ locale, action, newEmail, password, userId });
   return h.response().code(204);
 };
 

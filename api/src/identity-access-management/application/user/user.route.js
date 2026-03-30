@@ -24,6 +24,7 @@ export const userRoutes = [
           data: {
             type: Joi.string().valid('email-verification-codes').required(),
             attributes: {
+              action: Joi.string().valid('add-email', 'update-email').optional(),
               'new-email': Joi.string().email().required(),
               password: Joi.string().required(),
             },
@@ -40,7 +41,7 @@ export const userRoutes = [
         },
       ],
       handler: (request, h) => userController.sendVerificationCode(request, h),
-      notes: ['- Permet à un utilisateur de recevoir un code de vérification pour la validation de son adresse mail.'],
+      notes: ["Permet à un utilisateur de recevoir un code de vérification lors de l'ajout ou modification d'email."],
       tags: ['api', 'user', 'verification-code'],
     },
   },

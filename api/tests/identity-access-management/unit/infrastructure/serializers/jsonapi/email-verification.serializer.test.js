@@ -9,6 +9,7 @@ describe('Unit | Serializer | JSONAPI | email-verification-serializer', function
         data: {
           type: 'email-verification-code',
           attributes: {
+            action: 'update-email',
             'new-email': '   EMAIL@example.net   ',
             password: 'myPassword',
           },
@@ -20,6 +21,7 @@ describe('Unit | Serializer | JSONAPI | email-verification-serializer', function
 
       // then
       const expectedJsonApi = {
+        action: 'update-email',
         password: 'myPassword',
         newEmail: 'email@example.net',
       };
