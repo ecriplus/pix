@@ -8,7 +8,6 @@ import * as competenceEvaluationSerializer from '../../../evaluation/infrastruct
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
 import { sharedUsecases } from '../../domain/usecases/index.js';
-import { featureToggles } from '../../infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import { extractUserIdFromRequest, getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
@@ -29,19 +28,6 @@ const getAssessmentWithNextChallenge = async function (
   const assessmentId = request.params.id;
   const locale = getChallengeLocale(request);
   const userId = dependencies.extractUserIdFromRequest(request);
-
-  const enableTransactionForGetNext = await featureToggles.get('enableTransactionForGetNext');
-  if (enableTransactionForGetNext) {
-    const { assessment, globalProgression } = await DomainTransaction.execute(async () => {
-      return sharedUsecases.updateAssessmentWithNextChallenge({
-        assessmentId,
-        userId,
-        locale,
-      });
-    });
-
-    return dependencies.assessmentSerializer.serialize(assessment.toDto(globalProgression));
-  }
 
   const { assessment, globalProgression } = await sharedUsecases.updateAssessmentWithNextChallenge({
     assessmentId,
