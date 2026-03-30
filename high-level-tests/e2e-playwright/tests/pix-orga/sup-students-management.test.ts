@@ -43,6 +43,7 @@ test('Managing sup students', async ({ page }) => {
     await orgaPage.waitForTheImportToComplete(page);
   });
   await test.step('show learners', async () => {
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByRole('link', { name: 'Étudiants' }).click();
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
