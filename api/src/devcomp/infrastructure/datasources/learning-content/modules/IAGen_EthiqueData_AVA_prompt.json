@@ -245,7 +245,7 @@
                 {
                   "elements": [
                     {
-                      "id": "c4ebb448-441b-4084-87db-d89fea56dc79",
+                      "id": "fcee8b02-ef1a-46f9-b387-22e6bb0295e0",
                       "type": "text",
                       "tag": " ",
                       "content": "<p>⚠️ Attention, ce sujet est <strong>complexe</strong>. Aujourd’hui, <strong>plusieurs pays ne partagent pas ces lois</strong>. Par exemple, Le tribunal de Prague a jugé qu’une image générée par IA n’est pas une œuvre de l’esprit et ne peut donc pas bénéficier d’une protection par le droit d’auteur même si le prompt est complexe.</p>"
@@ -411,9 +411,6 @@
                       "content": "<p>Les IA génératives peuvent produire des contenus très proches d’<strong>œuvres existantes</strong> sur lesquelles elles ont été <strong>entraînées</strong>. Il est donc important d’être attentif aux r<strong>isques de contrefaçon ou de plagiat</strong>.</p>"
                     }
                   ]
-                },
-                {
-                  "elements": []
                 },
                 {
                   "elements": [
