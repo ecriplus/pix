@@ -1142,7 +1142,7 @@
                     {
                       "id": "7d969c2d-8dd0-45dd-adc5-6d40ca1b3c3d",
                       "type": "qcu",
-                      "instruction": "<p>Soumaya prévoit d’apporter à boire. Que doit-elle faire ?</p>",
+                      "instruction": "<p>Soumaya souhaite préciser à tous les invités que chacun doit apporter quelque chose à manger. Que doit-elle faire ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -1166,7 +1166,7 @@
                           "content": "Ne pas répondre",
                           "feedback": {
                             "state": "<p>Incorrect !</p>",
-                            "diagnosis": "<p>Soumaya souhaite apporter une information complémentaire Si elle ne répond pas, les autres invités ne seront pas mis au courant.</p>"
+                            "diagnosis": "<p>Soumaya souhaite apporter une information complémentaire. Si elle ne répond pas, les autres invités ne seront pas mis au courant.</p>"
                           }
                         }
                       ],
