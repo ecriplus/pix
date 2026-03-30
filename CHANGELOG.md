@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.372.0](https://github.com/1024pix/pix/compare/v5.371.0...v5.372.0) (2026-03-30)
+
+### :rocket: Amélioration
+
+- [#15637](https://github.com/1024pix/pix/pull/15637) Afficher les tags dans les modules (PIX-22062) (PIX-21920). 
+- [#15680](https://github.com/1024pix/pix/pull/15680) Afficher un nouvel onglet Réseau sur la page d'une organisation (PIX-22042) 
+- [#15687](https://github.com/1024pix/pix/pull/15687) Ajout POI Combinaisons + gras feedback 
+- [#15567](https://github.com/1024pix/pix/pull/15567) Ajoute la prise en compte de pix plus dans l'export CSV de résultat (PIX-21819) 
+- [#15559](https://github.com/1024pix/pix/pull/15559) Ajouter la creation d'email lors de la generation de code de verification (PIX-21982) 
+- [#15636](https://github.com/1024pix/pix/pull/15636) Ajuster les marges des listes pour les modules (PIX-22070) 
+- [#15671](https://github.com/1024pix/pix/pull/15671) Faire fonctionner ChatPix dans les steppers modulix (PIX-22026) 
+- [#15639](https://github.com/1024pix/pix/pull/15639) MAJ de la `fct_structure` lors de la création d'un réseau (PIX-22067) 
+- [#15630](https://github.com/1024pix/pix/pull/15630) Modification MVP de l'affichage de la page vérificateur sur Pix App (PIX-22074) 
+- [#15678](https://github.com/1024pix/pix/pull/15678) Ouvre la publication des certifications de type Pix+ Édu (PIX-21555) 
+- [#15626](https://github.com/1024pix/pix/pull/15626) Permettre le tri par classe pour les imports génériques (PIX-22011) 
+- [#15654](https://github.com/1024pix/pix/pull/15654) Retirer le bouton de détachement d'organisation fille (PIX-22114) 
+- [#15688](https://github.com/1024pix/pix/pull/15688) Ultime relecture MFA NOV 
+
+### :bug: Correction
+
+- [#15673](https://github.com/1024pix/pix/pull/15673) Modifier l'illustration clé pour les grains short-lesson (PIX-22108) 
+
+### :building_construction: Tech
+
+- [#15656](https://github.com/1024pix/pix/pull/15656) Ajouter des seeds pour avoir des réseaux sur plusieurs niveaux (PIX-22041) 
+- [#15683](https://github.com/1024pix/pix/pull/15683) Corriger les tests de téléchargement de résultats CSV sur les E2E de certification 
+- [#15643](https://github.com/1024pix/pix/pull/15643) Mutualiser le système PubSub du Learning Content 
+- [#15598](https://github.com/1024pix/pix/pull/15598) Permettre l'ajout d'informations supplémentaires de corrélation
+
 # [5.371.0](https://github.com/1024pix/pix/compare/v5.370.0...v5.371.0) (2026-03-27)
 
 ### :rocket: Amélioration
