@@ -14,6 +14,7 @@ import { PRO_COMBINED_COURSE } from './fixtures/pro-combined-course.js';
 import { COMBINED_COURSE_WITHOUT_CAMPAIGN } from './fixtures/pro-combined-course-without-campaign.js';
 import { COMBINED_COURSE_WITHOUT_MODULES } from './fixtures/pro-combined-course-without-modules.js';
 import { MAXI_COMBINED_COURSE } from './fixtures/pro-complete-combined-course.js';
+import { PRO_MANAGING_COMBINED_COURSE } from './fixtures/pro-managing-combined-course.js';
 import { SCO_SIECLE_COMBINED_COURSE } from './fixtures/sco-siecle-combined-course.js';
 import { SUP_IMPORT_COMBINED_COURSE } from './fixtures/sup-import-combined-course.js';
 
@@ -215,6 +216,7 @@ export const buildCombinedCourses = (databaseBuilder) => {
     MAXI_COMBINED_COURSE,
     SCO_SIECLE_COMBINED_COURSE,
     SUP_IMPORT_COMBINED_COURSE,
+    PRO_MANAGING_COMBINED_COURSE,
   ].forEach((config) => {
     buildCombinixQuest(databaseBuilder, config);
   });
