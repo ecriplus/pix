@@ -86,4 +86,18 @@ const buildOrganizationInNetwork = function ({ networkId, parentStructureId = nu
   return { organization, structure };
 };
 
-export { buildOrganization, buildOrganizationInNetwork };
+/**
+ * Creates an organization with a structure attached (organization + structure + fct_structure).
+ *
+ * @param {object} options
+ * @param {object} [options.organizationData] - Any parameter accepted by buildOrganization
+ * @returns {{ organization: object, structure: object }}
+ */
+const buildOrganizationWithStructure = function ({ organizationData } = {}) {
+  const organization = buildOrganization(organizationData);
+  const structure = buildStructure();
+  buildFactStructure({ structureId: structure.id, organizationId: organization.id });
+  return { organization, structure };
+};
+
+export { buildOrganization, buildOrganizationInNetwork, buildOrganizationWithStructure };
