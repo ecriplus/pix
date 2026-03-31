@@ -20,13 +20,13 @@ import {
   UnexpectedUserAccountError,
 } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { SessionNotAccessible } from '../../../session-management/domain/errors.js';
 import { ComplementaryCertificationCourse } from '../../../session-management/domain/models/ComplementaryCertificationCourse.js';
 import { CenterHabilitationError } from '../../../shared/domain/errors.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../shared/domain/models/CertificationCourse.js';
 import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../shared/domain/models/Scopes.js';
 
 /**

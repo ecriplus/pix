@@ -1,6 +1,6 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { CertificationResult } from '../../../../../../src/certification/results/domain/models/CertificationResult.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { domainBuilder, expect } from '../../../../../test-helper.js';
 

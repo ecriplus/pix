@@ -1,4 +1,3 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as juryCertificationSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/jury-certification-summary-repository.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
@@ -6,6 +5,7 @@ import {
   CertificationIssueReportSubcategories,
   ImpactfulSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';

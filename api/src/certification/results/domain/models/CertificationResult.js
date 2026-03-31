@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
 export class CertificationResult {

@@ -1,9 +1,9 @@
-import { Frameworks } from '../../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CORE_LEVELS,
   EDU_LEVELS,
   GlobalCertificationLevel,
 } from '../../../../../../../src/certification/results/domain/models/v3/GlobalCertificationLevel.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 

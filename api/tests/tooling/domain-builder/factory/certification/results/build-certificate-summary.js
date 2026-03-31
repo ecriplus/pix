@@ -1,10 +1,10 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
   CERTIFICATE_TYPES,
   CertificateSummary,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { buildJuryComment } from '../shared/build-jury-comment.js';
 
 export function buildCertificateSummary({

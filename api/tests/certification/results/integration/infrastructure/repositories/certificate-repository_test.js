@@ -1,7 +1,7 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as certificateRepository from '../../../../../../src/certification/results/infrastructure/repositories/certificate-repository.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';

@@ -4,7 +4,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../../shared/domain/errors.js';
-import { Frameworks } from '../../../../configuration/domain/models/Frameworks.js';
+import { Frameworks } from '../../../../shared/domain/models/Frameworks.js';
 
 export const CORE_LEVELS = {
   0: 'LEVEL_PRE_BEGINNER',

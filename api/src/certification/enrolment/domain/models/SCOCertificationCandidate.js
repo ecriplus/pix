@@ -1,7 +1,7 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { InvalidCertificationCandidate } from '../errors.js';
 import { Subscription } from '../models/Subscription.js';
 

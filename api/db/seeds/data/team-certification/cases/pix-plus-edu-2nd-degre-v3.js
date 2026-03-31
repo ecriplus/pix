@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { Frameworks } from '../../../../../src/certification/configuration/domain/models/Frameworks.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { PIX_EDU_2ND_DEGRE_COMPLEMENTARY_CERTIFICATION_ID } from '../../common/complementary-certification-builder.js';
 import { CommonCertifiableUser } from '../shared/common-certifiable-user.js';

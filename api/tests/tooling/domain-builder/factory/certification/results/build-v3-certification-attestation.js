@@ -1,6 +1,6 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { Certificate } from '../../../../../../src/certification/results/domain/models/v3/Certificate.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 
 const buildCertificate = function ({
   id = 1,

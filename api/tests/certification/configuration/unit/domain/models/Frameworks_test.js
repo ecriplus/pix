@@ -1,4 +1,4 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Configuration | Domain | Models | Frameworks', function () {

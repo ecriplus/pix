@@ -1,8 +1,8 @@
 import { knex } from '../../db/knex-database-connection.js';
-import { Frameworks } from '../../src/certification/configuration/domain/models/Frameworks.js';
 import { CapacitySimulator } from '../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { Intervals } from '../../src/certification/evaluation/domain/models/Intervals.js';
 import { V3CertificationScoring } from '../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
+import { Frameworks } from '../../src/certification/shared/domain/models/Frameworks.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import * as areaRepository from '../../src/shared/infrastructure/repositories/area-repository.js';

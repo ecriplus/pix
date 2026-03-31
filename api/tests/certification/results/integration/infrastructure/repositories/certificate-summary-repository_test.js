@@ -1,4 +1,3 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
   CERTIFICATE_TYPES,
@@ -7,6 +6,7 @@ import {
 import * as certificateSummaryRepository from '../../../../../../src/certification/results/infrastructure/repositories/certificate-summary-repository.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 

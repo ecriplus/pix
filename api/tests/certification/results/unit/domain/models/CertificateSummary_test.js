@@ -1,4 +1,3 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import {
   CERTIFICATE_STATUSES,
   CERTIFICATE_TYPES,
@@ -6,6 +5,7 @@ import {
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import {
   JuryComment,
   JuryCommentContexts,

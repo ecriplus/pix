@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
-import { Frameworks } from '../../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as certificationCandidatesOdsService from '../../../../../../../src/certification/enrolment/domain/services/certification-candidates-ods-service.js';
 import * as centerRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
@@ -9,6 +8,7 @@ import * as certificationCpfCountryRepository from '../../../../../../../src/cer
 import { BILLING_MODES } from '../../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import * as certificationCpfService from '../../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { CertificationCandidatesError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';

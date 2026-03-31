@@ -1,5 +1,5 @@
-import { Frameworks } from '../../../../src/certification/configuration/domain/models/Frameworks.js';
 import { JuryCertification } from '../../../../src/certification/session-management/domain/models/JuryCertification.js';
+import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../src/certification/shared/domain/models/JuryComment.js';
 import { domainBuilder, expect } from '../../../test-helper.js';
 

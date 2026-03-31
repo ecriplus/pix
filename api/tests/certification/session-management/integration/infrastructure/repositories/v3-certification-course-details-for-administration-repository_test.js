@@ -1,10 +1,10 @@
-import { Frameworks } from '../../../../../../src/certification/configuration/domain/models/Frameworks.js';
 import * as v3CertificationCourseDetailsForAdministrationRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/v3-certification-course-details-for-administration-repository.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/constants/abort-reasons.js';
 import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';

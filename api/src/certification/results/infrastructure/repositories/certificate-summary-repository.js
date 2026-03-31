@@ -1,6 +1,6 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { CertificateSummary } from '../../domain/models/CertificateSummary.js';
 
 /**

@@ -5,8 +5,8 @@
  */
 import dayjs from 'dayjs';
 
-import { Frameworks } from '../../../configuration/domain/models/Frameworks.js';
 import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 const FRANCE_COUNTRY_CODE = '99100';
 
