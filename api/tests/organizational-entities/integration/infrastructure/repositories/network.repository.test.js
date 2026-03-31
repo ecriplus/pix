@@ -272,22 +272,16 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
   describe('#attachOrganization', function () {
     it('attaches an organization to the network through its parent', async function () {
       // given
-      const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
-      const parentStructure = databaseBuilder.factory.buildStructure();
-      const network = databaseBuilder.factory.buildNetwork();
-      databaseBuilder.factory.buildFactStructure({
-        organizationId: parentOrganization.id,
-        structureId: parentStructure.id,
-        networkId: network.id,
+      const {
+        network,
+        organization: parentOrganization,
+        structure: parentStructure,
+      } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+        headOrganization: { id: 123, name: 'Head Organization of network' },
       });
 
-      const childOrganization = await databaseBuilder.factory.buildOrganization({ id: 456 });
-      const childStructure = databaseBuilder.factory.buildStructure();
-      databaseBuilder.factory.buildFactStructure({
-        organizationId: childOrganization.id,
-        structureId: childStructure.id,
-        networkId: null,
-      });
+      const { organization: childOrganization, structure: childStructure } =
+        databaseBuilder.factory.buildOrganizationWithStructure({ id: 456 });
 
       await databaseBuilder.commit();
 
