@@ -750,8 +750,8 @@
         "create": "De campagne maken",
         "delete": "Wissen"
       },
-      "combined-course-blueprints-label": "Selecteer een gecombineerd cursusontwerp",
-      "combined-course-blueprints-list-label": "Selecteer een gecombineerd cursusontwerp",
+      "combined-course-blueprints-label": "Selecteer een leerprogramma",
+      "combined-course-blueprints-list-label": "Selecteer een leerprogramma",
       "copy-of": "Kopie van",
       "external-id-label": {
         "label": "Type externe user-ID",
@@ -793,7 +793,8 @@
       "purpose": {
         "assessment": "Deelnemers evalueren",
         "assessment-info": "Een beoordelingscampagne stelt deelnemers in staat om getest te worden op specifieke onderwerpen.",
-        "combined-course": "De vaardigheden van de deelnemers ontwikkelen (leerprogramma)",
+        "combined-course": "De vaardigheden van de deelnemers ontwikkelen",
+        "combined-course-info": "Een leerprogramma helpt deelnemers om nieuwe vaardigheden te verwerven.",
         "exam": "Vraagmodus",
         "exam-info": "Met een campagne in de “quizmodus” kunnen deelnemers worden getest op specifieke onderwerpen, zonder rekening te houden met hun gebruikersprofiel of er invloed op te hebben. De aangeboden tests zijn gepersonaliseerd voor elke deelnemer, afhankelijk van hoe ver ze gevorderd zijn in het traject.",
         "label": "Wat is het doel van je campagne?",

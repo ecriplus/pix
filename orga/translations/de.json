@@ -756,8 +756,8 @@
         "create": "Kampagne erstellen",
         "delete": "Löschen"
       },
-      "combined-course-blueprints-label": "Auswählen eines Streckenschemas",
-      "combined-course-blueprints-list-label": "Wählen Sie ein Streckenschema",
+      "combined-course-blueprints-label": "Einen Lernpfad auswählen",
+      "combined-course-blueprints-list-label": "Einen Lernpfad auswählen",
       "copy-of": "Kopieren von",
       "external-id-label": {
         "label": "Bezeichnung der Kennung",
@@ -799,7 +799,8 @@
       "purpose": {
         "assessment": "Bewerten Sie die Teilnehmer",
         "assessment-info": "Bei einer Evaluierungskampagne werden die Teilnehmer zu bestimmten Themen getestet.",
-        "combined-course": "Erstellen einer kombinierten Strecke",
+        "combined-course": "Kompetenzen der Teilnehmer entwickeln",
+        "combined-course-info": "Ein Lernpfad hilft den Teilnehmern, neue Kompetenzen zu erwerben.",
         "exam": "Testmodus [beta]",
         "exam-info": "Eine Kampagne vom Typ \"Testmodus\" ermöglicht es, die Teilnehmer zu bestimmten Themen zu testen, ohne das Nutzerprofil zu berücksichtigen oder zu beeinflussen. Die vorgeschlagenen Tests werden für jeden Teilnehmer entsprechend seinem Fortschritt auf der Strecke angepasst.",
         "label": "Was ist das Ziel Ihrer Kampagne?",
