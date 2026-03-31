@@ -122,6 +122,10 @@ export default class Certification extends Model {
     });
   }
 
+  get isPixPlusEduV3() {
+    return ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].includes(this.certificationFramework) && this.isV3;
+  }
+
   wasBornInFrance() {
     return this.birthCountry === 'FRANCE';
   }

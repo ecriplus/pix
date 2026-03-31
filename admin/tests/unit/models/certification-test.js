@@ -365,4 +365,42 @@ module('Unit | Model | certification', function (hooks) {
       assert.false(wasBornInFrance);
     });
   });
+
+  module('#isPixPlusV3', function () {
+    test('returns true when certification is v3 and pix plus Édu 1er degré', function (assert) {
+      const certification = store.createRecord('certification', {
+        version: 3,
+        certificationFramework: 'EDU_1ER_DEGRE',
+      });
+
+      assert.true(certification.isPixPlusEduV3);
+    });
+
+    test('returns true when certification is v3 and pix plus Édu 2er degré', function (assert) {
+      const certification = store.createRecord('certification', {
+        version: 3,
+        certificationFramework: 'EDU_2ND_DEGRE',
+      });
+
+      assert.true(certification.isPixPlusEduV3);
+    });
+
+    test('returns true when certification is v3 and pix plus Édu CPE', function (assert) {
+      const certification = store.createRecord('certification', { version: 3, certificationFramework: 'EDU_CPE' });
+
+      assert.true(certification.isPixPlusEduV3);
+    });
+
+    test('returns false when certification is not v3', function (assert) {
+      const certification = store.createRecord('certification', { version: 2, certificationFramework: 'EDU_CPE' });
+
+      assert.false(certification.isPixPlusEduV3);
+    });
+
+    test('returns false when certification is v3 and NOT pix plus Édu 1er degré', function (assert) {
+      const certification = store.createRecord('certification', { version: 3, certificationFramework: 'DROIT' });
+
+      assert.false(certification.isPixPlusEduV3);
+    });
+  });
 });
