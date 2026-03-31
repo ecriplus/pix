@@ -9,41 +9,156 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
-import _get from 'lodash/get';
-
-function _pad(num, size) {
-  let s = num + '';
-  while (s.length < size) s = '0' + s;
-  return s;
-}
-
-function _isMatchingReconciledStudentNotFoundError(error) {
-  return error.code === 'MATCHING_RECONCILED_STUDENT_NOT_FOUND';
-}
-
-function _isWrongAccount(error) {
-  return error.status === '409' && error.code === 'UNEXPECTED_USER_ACCOUNT';
-}
-
-function _isSessionNotAccessibleError(error) {
-  return error.status === '412';
-}
-
-function _isLanguageNotSupported(error) {
-  return error.code === 'LANGUAGE_NOT_SUPPORTED';
-}
-
-function _isWrongDomainForPixPlus(error) {
-  return error.code === 'WRONG_PIX_PLUS_CANDIDATE_DOMAIN';
-}
-
-function _isCenterHasHabilitationToHoldTheSession(error) {
-  return error.status === '403' && error.code === 'CENTER_HABILITATION_ERROR';
-}
 
 export default class CertificationJoiner extends Component {
+  @service store;
+  @service intl;
+
+  SESSION_ID_VALIDATION_PATTERN = '^[0-9]*$';
+
+  @tracked errorMessage = null;
+  @tracked errorDetailList = [];
+  @tracked errorMessageLink = null;
+  @tracked sessionIdIsNotANumberMessage = null;
+  @tracked sessionIdStatus = 'default';
+  @tracked sessionId = null;
+  @tracked firstName = null;
+  @tracked lastName = null;
+  @tracked dayOfBirth = null;
+  @tracked monthOfBirth = null;
+  @tracked yearOfBirth = null;
+
+  get birthdate() {
+    const monthOfBirth = String(this.monthOfBirth).padStart(2, '0');
+    const dayOfBirth = String(this.dayOfBirth).padStart(2, '0');
+    return [this.yearOfBirth, monthOfBirth, dayOfBirth].join('-');
+  }
+
+  _isANumber(value) {
+    return new RegExp(this.SESSION_ID_VALIDATION_PATTERN).test(value);
+  }
+
+  _resetErrorMessages() {
+    this.errorMessage = null;
+    this.errorDetailList = [];
+    this.errorMessageLink = null;
+  }
+
+  _handleSaveError(error) {
+    const errorDetails = error.errors?.[0];
+    if (!errorDetails) return;
+
+    const handler = ERROR_HANDLERS.find(({ match }) => match(errorDetails));
+
+    if (handler) {
+      handler.handle(this, errorDetails);
+    } else {
+      this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.generic.disclaimer');
+      this.errorDetailList = [
+        this.intl.t('pages.certification-joiner.error-messages.generic.check-session-number'),
+        this.intl.t('pages.certification-joiner.error-messages.generic.check-personal-info'),
+      ];
+    }
+  }
+
+  @action
+  checkSessionIdIsValid(event) {
+    const { value } = event.target;
+
+    this.sessionIdIsNotANumberMessage = null;
+    this.sessionIdStatus = 'default';
+
+    if (value && !this._isANumber(value)) {
+      this.sessionIdIsNotANumberMessage = this.intl.t(
+        'pages.certification-joiner.form.fields-validation.session-number-error',
+      );
+      this.sessionIdStatus = 'error';
+    }
+  }
+
+  @action
+  setSessionId(event) {
+    this.sessionId = event.target.value;
+  }
+
+  @action
+  setFirstName(event) {
+    this.firstName = event.target.value;
+  }
+
+  @action
+  setLastName(event) {
+    this.lastName = event.target.value;
+  }
+
+  @action
+  setDayOfBirth(event) {
+    this.dayOfBirth = event.target.value;
+  }
+
+  @action
+  setMonthOfBirth(event) {
+    this.monthOfBirth = event.target.value;
+  }
+
+  @action
+  setYearOfBirth(event) {
+    this.yearOfBirth = event.target.value;
+  }
+
+  @action
+  async attemptNext(e) {
+    e.preventDefault();
+    this._resetErrorMessages();
+
+    if (this.sessionId && !this._isANumber(this.sessionId)) {
+      this.sessionIdIsNotANumberMessage = this.intl.t(
+        'pages.certification-joiner.form.fields-validation.session-number-error',
+      );
+      document.querySelector('#certificationJoinerSessionId').focus();
+      return;
+    }
+
+    let currentCertificationCandidate = null;
+    try {
+      currentCertificationCandidate = this.store.createRecord('certification-candidate', {
+        sessionId: this.sessionId,
+        birthdate: this.birthdate,
+        firstName: this.firstName?.trim() ?? null,
+        lastName: this.lastName?.trim() ?? null,
+      });
+      await currentCertificationCandidate.save({ adapterOptions: { joinSession: true, sessionId: this.sessionId } });
+      this.args.onStepChange(currentCertificationCandidate.id);
+    } catch (error) {
+      currentCertificationCandidate?.deleteRecord();
+      this._handleSaveError(error);
+    }
+  }
+
+  @action
+  handleDayInputChange(event) {
+    const { value } = event.target;
+
+    if (value.length === 2) {
+      document.getElementById('certificationJoinerMonthOfBirth').focus();
+    }
+  }
+
+  @action
+  handleMonthInputChange(event) {
+    const { value } = event.target;
+
+    if (value.length === 2) {
+      document.getElementById('certificationJoinerYearOfBirth').focus();
+    }
+  }
+
+  @action
+  handleInputFocus(value, event) {
+    event.target.select();
+  }
+
   <template>
-    {{! template-lint-disable require-input-label no-bare-strings }}
     <section class="certification-joiner">
       <h1 class="certification-joiner__title">{{t "pages.certification-joiner.first-title"}}</h1>
       <form {{on "submit" this.attemptNext}}>
@@ -159,190 +274,72 @@ export default class CertificationJoiner extends Component {
             </PixNotificationAlert>
           </div>
         {{/if}}
-        <PixButton @id="certificationJoinerSubmitButton" @type="submit">{{t
-            "pages.certification-joiner.form.actions.submit"
-          }}
+        <PixButton @id="certificationJoinerSubmitButton" @type="submit">
+          {{t "pages.certification-joiner.form.actions.submit"}}
         </PixButton>
       </form>
     </section>
   </template>
-  @service store;
-  @service intl;
-
-  V3_CERTIFICATION_SUPPORTED_LANGUAGES = ['en', 'fr'];
-
-  @tracked errorMessage = null;
-  @tracked errorDetailList = [];
-  @tracked errorMessageLink = null;
-  @tracked sessionIdIsNotANumberMessage = null;
-  @tracked sessionIdStatus = 'default';
-  @tracked validationClassName = '';
-  @tracked sessionId = null;
-  @tracked firstName = null;
-  @tracked lastName = null;
-  @tracked dayOfBirth = null;
-  @tracked monthOfBirth = null;
-  @tracked yearOfBirth = null;
-
-  get birthdate() {
-    const monthOfBirth = _pad(this.monthOfBirth, 2);
-    const dayOfBirth = _pad(this.dayOfBirth, 2);
-    return [this.yearOfBirth, monthOfBirth, dayOfBirth].join('-');
-  }
-
-  createCertificationCandidate() {
-    const { firstName, lastName, birthdate, sessionId } = this;
-
-    return this.store.createRecord('certification-candidate', {
-      sessionId,
-      birthdate,
-      firstName: firstName ? firstName.trim() : null,
-      lastName: lastName ? lastName.trim() : null,
-    });
-  }
-
-  _isANumber(value) {
-    return new RegExp(this.SESSION_ID_VALIDATION_PATTERN).test(value);
-  }
-
-  @action
-  checkSessionIdIsValid(event) {
-    const { value } = event.target;
-
-    this.sessionIdIsNotANumberMessage = null;
-    this.sessionIdStatus = 'default';
-
-    if (value && !this._isANumber(value)) {
-      this.sessionIdIsNotANumberMessage = this.intl.t(
-        'pages.certification-joiner.form.fields-validation.session-number-error',
-      );
-      this.sessionIdStatus = 'error';
-    }
-  }
-
-  @action
-  setSessionId(event) {
-    this.sessionId = event.target.value;
-  }
-
-  @action
-  setFirstName(event) {
-    this.firstName = event.target.value;
-  }
-
-  @action
-  setLastName(event) {
-    this.lastName = event.target.value;
-  }
-
-  @action
-  async attemptNext(e) {
-    e.preventDefault();
-    this._resetErrorMessages();
-    let currentCertificationCandidate = null;
-    if (this.sessionId && !this._isANumber(this.sessionId)) {
-      this.sessionIdIsNotANumberError = this.intl.t(
-        'pages.certification-joiner.form.fields-validation.session-number-error',
-      );
-      document.querySelector('#certificationJoinerSessionId').focus();
-      return;
-    }
-    try {
-      currentCertificationCandidate = this.createCertificationCandidate();
-      await currentCertificationCandidate.save({ adapterOptions: { joinSession: true, sessionId: this.sessionId } });
-      this.args.onStepChange(currentCertificationCandidate.id);
-    } catch (error) {
-      if (currentCertificationCandidate) {
-        currentCertificationCandidate.deleteRecord();
-      }
-
-      const errorDetails = _get(error, 'errors[0]');
-
-      if (_isLanguageNotSupported(errorDetails)) {
-        const [currentError] = error.errors;
-        const { languageCode } = currentError.meta;
-        const userLanguage = this.intl.t(`common.languages.${languageCode}`);
-        const NO_BREAK_SPACE = String.fromCharCode(160);
-        const availableLanguages = this.V3_CERTIFICATION_SUPPORTED_LANGUAGES.map((code) =>
-          this.intl.t(`common.languages.${code}`),
-        ).join(`, ${NO_BREAK_SPACE}`);
-
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.language-not-supported', {
-          userLanguage,
-          availableLanguages,
-          htmlSafe: true,
-        });
-        this.errorMessageLink = {
-          label: this.intl.t('pages.certification-joiner.error-messages.language-not-supported-link'),
-          url: 'https://app.pix.org/mon-compte/langue',
-        };
-      } else if (_isMatchingReconciledStudentNotFoundError(errorDetails)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.wrong-account-sco');
-        this.errorMessageLink = {
-          label: this.intl.t('pages.certification-joiner.error-messages.wrong-account-sco-link.label'),
-          url: this.intl.t('pages.certification-joiner.error-messages.wrong-account-sco-link.url'),
-        };
-      } else if (_isWrongAccount(errorDetails)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.wrong-account');
-      } else if (_isSessionNotAccessibleError(errorDetails)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.session-not-accessible');
-      } else if (_isCenterHasHabilitationToHoldTheSession(errorDetails)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.missing-center-habilitation');
-      } else if (_isWrongDomainForPixPlus(errorDetails)) {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.wrong-domain-for-pix-plus', {
-          htmlSafe: true,
-        });
-      } else {
-        this.errorMessage = this.intl.t('pages.certification-joiner.error-messages.generic.disclaimer');
-        this.errorDetailList = [
-          this.intl.t('pages.certification-joiner.error-messages.generic.check-session-number'),
-          this.intl.t('pages.certification-joiner.error-messages.generic.check-personal-info'),
-        ];
-      }
-    }
-  }
-
-  @action
-  handleDayInputChange(event) {
-    const { value } = event.target;
-
-    if (value.length === 2) {
-      document.getElementById('certificationJoinerMonthOfBirth').focus();
-    }
-  }
-
-  @action
-  setDayOfBirth(event) {
-    this.dayOfBirth = event.target.value;
-  }
-
-  @action
-  setMonthOfBirth(event) {
-    this.monthOfBirth = event.target.value;
-  }
-
-  @action
-  setYearOfBirth(event) {
-    this.yearOfBirth = event.target.value;
-  }
-
-  @action
-  handleMonthInputChange(event) {
-    const { value } = event.target;
-
-    if (value.length === 2) {
-      document.getElementById('certificationJoinerYearOfBirth').focus();
-    }
-  }
-
-  @action
-  handleInputFocus(value, event) {
-    event.target.select();
-  }
-
-  _resetErrorMessages() {
-    this.errorMessage = null;
-    this.errorDetailList = [];
-    this.errorMessageLink = null;
-  }
 }
+
+const ERROR_HANDLERS = [
+  {
+    match: (error) => error.code === 'LANGUAGE_NOT_SUPPORTED',
+    handle(component, error) {
+      const { languageCode } = error.meta;
+      const userLanguage = component.intl.t(`common.languages.${languageCode}`);
+      const NO_BREAK_SPACE = String.fromCharCode(160);
+      const availableLanguages = ['en', 'fr']
+        .map((code) => component.intl.t(`common.languages.${code}`))
+        .join(`, ${NO_BREAK_SPACE}`);
+
+      component.errorMessage = component.intl.t('pages.certification-joiner.error-messages.language-not-supported', {
+        userLanguage,
+        availableLanguages,
+        htmlSafe: true,
+      });
+      component.errorMessageLink = {
+        label: component.intl.t('pages.certification-joiner.error-messages.language-not-supported-link'),
+        url: 'https://app.pix.org/mon-compte/langue',
+      };
+    },
+  },
+  {
+    match: (error) => error.code === 'MATCHING_RECONCILED_STUDENT_NOT_FOUND',
+    handle(component) {
+      component.errorMessage = component.intl.t('pages.certification-joiner.error-messages.wrong-account-sco');
+      component.errorMessageLink = {
+        label: component.intl.t('pages.certification-joiner.error-messages.wrong-account-sco-link.label'),
+        url: component.intl.t('pages.certification-joiner.error-messages.wrong-account-sco-link.url'),
+      };
+    },
+  },
+  {
+    match: (error) => error.status === '409' && error.code === 'UNEXPECTED_USER_ACCOUNT',
+    handle(component) {
+      component.errorMessage = component.intl.t('pages.certification-joiner.error-messages.wrong-account');
+    },
+  },
+  {
+    match: (error) => error.status === '412',
+    handle(component) {
+      component.errorMessage = component.intl.t('pages.certification-joiner.error-messages.session-not-accessible');
+    },
+  },
+  {
+    match: (error) => error.status === '403' && error.code === 'CENTER_HABILITATION_ERROR',
+    handle(component) {
+      component.errorMessage = component.intl.t(
+        'pages.certification-joiner.error-messages.missing-center-habilitation',
+      );
+    },
+  },
+  {
+    match: (error) => error.code === 'WRONG_PIX_PLUS_CANDIDATE_DOMAIN',
+    handle(component) {
+      component.errorMessage = component.intl.t('pages.certification-joiner.error-messages.wrong-domain-for-pix-plus', {
+        htmlSafe: true,
+      });
+    },
+  },
+];
