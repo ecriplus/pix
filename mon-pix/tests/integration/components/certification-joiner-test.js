@@ -278,6 +278,28 @@ module('Integration | Component | certification-joiner', function (hooks) {
       });
     });
 
+    test('should not call save again if form is already being submitted', async function (assert) {
+      // given
+      this.set('onStepChange', sinon.stub());
+      const screen = await render(hbs`<CertificationJoiner @onStepChange={{this.onStepChange}} />`);
+
+      await _fillInputsToJoinSession({ screen, t });
+
+      const store = this.owner.lookup('service:store');
+      const saveStub = sinon.stub().returns(new Promise(() => {}));
+      const createRecordMock = sinon.stub().returns({ save: saveStub });
+      store.createRecord = createRecordMock;
+
+      const submitButton = screen.getByRole('button', { name: t('pages.certification-joiner.form.actions.submit') });
+
+      // when
+      await click(submitButton);
+      await click(submitButton);
+
+      // then
+      assert.strictEqual(saveStub.callCount, 1);
+    });
+
     module('when candidate has a complementary subscription and is on wrong domain', function () {
       test('should display an error message', async function (assert) {
         // given
