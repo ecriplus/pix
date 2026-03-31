@@ -191,7 +191,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             const version = domainBuilder.certification.shared.buildVersion();
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
               sessionId: 1,
@@ -282,7 +281,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
               sessionId: 1,
@@ -342,7 +340,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
-
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -407,7 +404,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               const version = domainBuilder.certification.shared.buildVersion();
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-
               // when
               const result = await retrieveLastOrCreateCertificationCourse({
                 sessionId: foundSession.id,
@@ -439,7 +435,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
-
             });
 
             it('should return it with flag created marked as true with related resources', async function () {
