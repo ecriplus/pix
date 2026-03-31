@@ -7,30 +7,17 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
   describe('success case', function () {
     it('attaches children organizations to parent organization', async function () {
       // given
-      const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
-      const parentStructure = databaseBuilder.factory.buildStructure();
-      const network = databaseBuilder.factory.buildNetwork();
-      databaseBuilder.factory.buildFactStructure({
-        organizationId: parentOrganization.id,
-        structureId: parentStructure.id,
-        networkId: network.id,
-      });
+      const {
+        network,
+        structure: parentStructure,
+        organization: parentOrganization,
+      } = databaseBuilder.factory.buildNetworkAndHeadOrganization({ headOrganization: { id: 123 } });
 
-      const firstChildOrganization = await databaseBuilder.factory.buildOrganization({ id: 456 });
-      const firstChildStructure = databaseBuilder.factory.buildStructure();
-      databaseBuilder.factory.buildFactStructure({
-        organizationId: firstChildOrganization.id,
-        structureId: firstChildStructure.id,
-        networkId: null,
-      });
+      const { organization: firstChildOrganization, structure: firstChildStructure } =
+        databaseBuilder.factory.buildOrganizationWithStructure({ id: 456 });
 
-      const secondChildOrganization = await databaseBuilder.factory.buildOrganization({ id: 789 });
-      const secondChildStructure = databaseBuilder.factory.buildStructure();
-      databaseBuilder.factory.buildFactStructure({
-        organizationId: secondChildOrganization.id,
-        structureId: secondChildStructure.id,
-        networkId: null,
-      });
+      const { organization: secondChildOrganization, structure: secondChildStructure } =
+        databaseBuilder.factory.buildOrganizationWithStructure({ id: 789 });
 
       await databaseBuilder.commit();
 
@@ -85,7 +72,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
     context('when parent organization is not part of a network', function () {
       it('throws an error', async function () {
         // given
-        const parentOrganization = await databaseBuilder.factory.buildOrganization();
+        const { organization: parentOrganization } = await databaseBuilder.factory.buildOrganizationWithStructure();
         await databaseBuilder.commit();
 
         // when
@@ -109,14 +96,10 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
     context('when at least one of children organization ids is equal to parent organization id', function () {
       it('throws an error', async function () {
         // given
-        const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
-        const structure = databaseBuilder.factory.buildStructure();
-        const network = databaseBuilder.factory.buildNetwork();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: parentOrganization.id,
-          structureId: structure.id,
-          networkId: network.id,
+        const { organization: parentOrganization } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          headOrganization: { id: 123 },
         });
+
         await databaseBuilder.commit();
 
         const childOrganizationIds = `${parentOrganization.id},456`;
@@ -144,22 +127,15 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
     context('when at least one of children organization is already part of a network', function () {
       it('throws an error', async function () {
         // given
-        const parentOrganization = await databaseBuilder.factory.buildOrganization({ id: 123 });
-        const structure = databaseBuilder.factory.buildStructure();
-        const network = databaseBuilder.factory.buildNetwork();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: parentOrganization.id,
-          structureId: structure.id,
-          networkId: network.id,
+        const { organization: parentOrganization } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          network: { name: 'First Network' },
+          headOrganization: { id: 123 },
         });
 
-        const childOrganization = await databaseBuilder.factory.buildOrganization({ id: 456 });
-        const childStructure = databaseBuilder.factory.buildStructure();
-        const otherNetwork = databaseBuilder.factory.buildNetwork();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: childOrganization.id,
-          structureId: childStructure.id,
+        const otherNetwork = databaseBuilder.factory.buildNetwork({ name: 'Other Network' });
+        const { organization: childOrganization } = databaseBuilder.factory.buildOrganizationInNetwork({
           networkId: otherNetwork.id,
+          oorganizationData: { id: 456 },
         });
 
         await databaseBuilder.commit();

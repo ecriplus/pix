@@ -1174,37 +1174,26 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       let network;
 
       beforeEach(async function () {
-        parentOrganizationId = databaseBuilder.factory.buildOrganization({
-          name: 'Parent Organization',
-          type: 'SCO',
-        }).id;
-        network = databaseBuilder.factory.buildNetwork();
-        parentStructure = databaseBuilder.factory.buildStructure();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: parentOrganizationId,
-          structureId: parentStructure.id,
-          networkId: network.id,
+        const networkWithHeadOrganization = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          headOrganization: { name: 'Parent Organization', type: 'SCO' },
         });
-        firstChildOrganization = databaseBuilder.factory.buildOrganization({
-          name: 'child Organization',
-          type: 'SCO',
-        });
-        firstChildStructure = databaseBuilder.factory.buildStructure();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: firstChildOrganization.id,
-          structureId: firstChildStructure.id,
-          networkId: null,
-        });
-        secondChildOrganization = databaseBuilder.factory.buildOrganization({
-          name: 'child Organization',
-          type: 'SCO',
-        });
-        secondChildStructure = databaseBuilder.factory.buildStructure();
-        databaseBuilder.factory.buildFactStructure({
-          organizationId: secondChildOrganization.id,
-          structureId: secondChildStructure.id,
-          networkId: null,
-        });
+
+        ({ network, structure: parentStructure } = networkWithHeadOrganization);
+
+        parentOrganizationId = networkWithHeadOrganization.organization.id;
+
+        ({ organization: firstChildOrganization, structure: firstChildStructure } =
+          databaseBuilder.factory.buildOrganizationWithStructure({
+            name: 'First Child Organization',
+            type: 'SCO',
+          }));
+
+        ({ organization: secondChildOrganization, structure: secondChildStructure } =
+          databaseBuilder.factory.buildOrganizationWithStructure({
+            name: 'Second Child Organization',
+            type: 'SCO',
+          }));
+
         await databaseBuilder.commit();
       });
 
@@ -1232,6 +1221,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             firstChildOrganization.id,
             secondChildOrganization.id,
           ]);
+
           expect(childrenOrganizationFactStructures).to.have.deep.members([
             {
               organization_id: firstChildOrganization.id,
