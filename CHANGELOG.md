@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.373.0](https://github.com/1024pix/pix/compare/v5.372.0...v5.373.0) (2026-03-31)
+
+### :rocket: Amélioration
+
+- [#15695](https://github.com/1024pix/pix/pull/15695) Désactiver la locale es sur Pix Orga temporairement (PIX-22121) 
+- [#15677](https://github.com/1024pix/pix/pull/15677) Mise à jour du feedback du robot lors de la réalisation d'un challenge (PIX-22053) 
+- [#15697](https://github.com/1024pix/pix/pull/15697) Ne pas donner la maille atteinte pour une certif v3 rejetée (PIX-22156). 
+- [#15699](https://github.com/1024pix/pix/pull/15699) RepondreMail_IND Corrections Relecture interne 
+
+### :bug: Correction
+
+- [#15694](https://github.com/1024pix/pix/pull/15694) Ne pas remonter les participations d'un parcours supprimé dans les statistiques du parcours (PIX-22139) 
+- [#15693](https://github.com/1024pix/pix/pull/15693) Répare un bug sur la réconciliation des organisations à import générique lors de l'accès à un parcours combiné (PIX-22143) 
+
+### :building_construction: Tech
+
+- [#15689](https://github.com/1024pix/pix/pull/15689) Corriger le test e2e flaky sur la gestion des étudiants SUP (PIX-22145) 
+- [#15698](https://github.com/1024pix/pix/pull/15698) Déplacer le modèle Frameworks dans le contexte partagé de certification 
+- [#15696](https://github.com/1024pix/pix/pull/15696) Retiret le tiret noir au milieu de l'hexagone affiché sur la page des certificats pour les certifications PixPlus (PIX-22157) 
+- [#15684](https://github.com/1024pix/pix/pull/15684) Supprime la route dépréciée pour récupérer la liste des certificats d'un utilisateur (PIX-22059)
+
 # [5.372.0](https://github.com/1024pix/pix/compare/v5.371.0...v5.372.0) (2026-03-30)
 
 ### :rocket: Amélioration
