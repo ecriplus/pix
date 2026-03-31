@@ -28,10 +28,17 @@ const findModulesByCampaignParticipationIds = async function ({ campaignParticip
     .innerJoin('trainings', 'trainings.id', `${USER_RECOMMENDED_TRAININGS_TABLE_NAME}.trainingId`)
     .where({ isDisabled: false, type: 'modulix' })
     .whereIn('campaignParticipationId', campaignParticipationIds)
-    .distinct('trainings.id')
     .orderBy('trainings.id', 'asc');
 
-  return moduleLinks.map(_toDomain);
+  // We removed the distinct because it was extremely costly in CPU
+  const seen = new Set();
+  const uniqueModuleLinks = moduleLinks.filter((moduleLink) => {
+    if (seen.has(moduleLink.id)) return false;
+    seen.add(moduleLink.id);
+    return true;
+  });
+
+  return uniqueModuleLinks.map(_toDomain);
 };
 
 const hasRecommendedTrainings = async function ({ userId }) {
