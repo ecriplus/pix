@@ -7,12 +7,12 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Dans un échange par courrier électronique (mail), plusieurs personnes peuvent être concernées&nbsp;: des collègues, des proches, des administrations, etc.</p><p>Dans ce module, vous allez apprendre à répondre à un mail, transmettre et trouver une information dans un échange par mail, selon le contexte et les personnes impliquées.</p>",
+    "description": "<p>Dans la vie quotidienne ou professionnelle, il arrive souvent d’échanger des courriers électroniques (mails) avec plusieurs personnes à la fois.</p><p>Pour bien communiquer dans ces situations, il faut savoir répondre à un mail, transmettre et trouver une information dans un échange par mail, selon le contexte et les personnes impliquées.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
       "<p>Transférer un mail à quelqu’un d’autre</p>",
-      "<p>Répondre à un mail avec plusieurs destinataires</p>",
+      "<p>Savoir quand répondre à tous les destinataires d’un mail</p>",
       "<p>Se repérer dans un fil de discussion de mails</p>"
     ],
     "tabletSupport": "comfortable"
@@ -33,7 +33,7 @@
                 "id": "7c675fd0-0530-451a-88e9-9605cea958bf",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il doit refuser l’invitation.</p><p><strong>Dans la messagerie électronique&nbsp;ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><blockquote><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></blockquote>"
+                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il souhaite refuser l’invitation.</p><p><strong>Dans la messagerie électronique&nbsp;ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><blockquote><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></blockquote>"
               }
             },
             {
@@ -89,7 +89,7 @@
                 "id": "a44cacb3-d805-4f1f-8da9-8536bdc85ae8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Depuis l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez aux questions qui suivent.</strong></p>"
+                "content": "<p>Suite à l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez aux questions qui suivent.</strong></p>"
               }
             },
             {
@@ -110,28 +110,28 @@
                     {
                       "id": "c375f801-02a0-4717-ba6a-7038cfccecc6",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Lorsque Gabriel répond au mail d’Alma, que devient le mail d’Alma ?</p>",
+                      "instruction": "<p>Dans l’interface ci-dessus, lorsque Gabriel répond au mail d’Alma, que devient le mail d’Alma&nbsp;?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "<p>Il est remplacé par le mail de Gabriel</p>",
+                          "content": "<p>Il est remplacé par le mail de Gabriel.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "<p>Il reste visible sous le mail de Gabriel.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Il est déplacé dans un autre dossier.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
                           }
                         },
                         {
@@ -252,7 +252,7 @@
                 "id": "ebe2a5f6-df6f-46f2-a276-134869511b42",
                 "type": "expand",
                 "title": "[🕹️ Capture d'écran basée sur Pixmail avec 4 mails : objet + aperçu du mail]",
-                "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Mia (mamma.mia@pixmail.org) - Grande nouvelle -&nbsp;Coucou, je te mets dans la confidence, mais ça y est on attend un bébé ! 👶</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
+                "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Laboratoire BioSanté (contact@biosante.fr) - Résultats d’analyse - Vos résultats d’analyse sanguine sont disponibles…</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
               }
             },
             {
@@ -268,11 +268,11 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<p>Le mail de «&nbsp;Scène Nationale&nbsp;» est un mail</p>"
+                          "content": "<p>Le mail de «&nbsp;Scène Nationale&nbsp;» est un mail qui...</p>"
                         },
                         {
                           "type": "select",
-                          "input": "input1",
+                          "input": "input0",
                           "display": "inline",
                           "placeholder": "Sélectionner une option",
                           "ariaLabel": "Sélectionner une option",
@@ -280,15 +280,15 @@
                           "options": [
                             {
                               "id": "0",
-                              "content": "à transférer à Phil."
+                              "content": "peut être transféré à Phil."
                             },
                             {
                               "id": "1",
-                              "content": "à ne pas transférer."
+                              "content": "ne devrait pas être transféré."
                             },
                             {
                               "id": "2",
-                              "content": "qui a été transféré."
+                              "content": "a été transféré."
                             }
                           ],
                           "solutions": [
@@ -318,7 +318,7 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<p>Le mail de «&nbsp;Mia&nbsp;» est un mail</p>"
+                          "content": "<p>Le mail de «&nbsp;BioSanté&nbsp;» est un mail qui...</p>"
                         },
                         {
                           "type": "select",
@@ -330,15 +330,15 @@
                           "options": [
                             {
                               "id": "0",
-                              "content": "à transférer à Phil."
+                              "content": "peut être transféré à Phil."
                             },
                             {
                               "id": "1",
-                              "content": "à ne pas transférer."
+                              "content": "ne devrait pas être transféré."
                             },
                             {
                               "id": "2",
-                              "content": "qui a été transféré."
+                              "content": "a été transféré."
                             }
                           ],
                           "solutions": [
@@ -349,11 +349,11 @@
                       "feedbacks": {
                         "valid": {
                           "state": "<p>Eh oui.</p>",
-                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
+                          "diagnosis": "<p>Ce mail contient une information personnelle (médicale).<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
                         },
                         "invalid": {
                           "state": "<p>Eh non.<br></p>",
-                          "diagnosis": "<p>Ce mail contient une information sur la vie privée de Mia.<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
+                          "diagnosis": "<p>Ce mail contient une information personnelle (médicale).<br>⚠️ Si un mail contient des éléments personnels (vie privée, salutations familières, etc.) il est conseillé de <strong>ne pas le transférer</strong>.</p>"
                         }
                       }
                     }
@@ -368,11 +368,11 @@
                       "proposals": [
                         {
                           "type": "text",
-                          "content": "<p>Le mail de «&nbsp;Rajesh&nbsp;» est un mail</p>"
+                          "content": "<p>Le mail de «&nbsp;Rajesh&nbsp;» est un mail qui</p>"
                         },
                         {
                           "type": "select",
-                          "input": "input1",
+                          "input": "input2",
                           "display": "inline",
                           "placeholder": "Sélectionner une option",
                           "ariaLabel": "Sélectionner une option",
@@ -380,15 +380,15 @@
                           "options": [
                             {
                               "id": "0",
-                              "content": "à transférer à Phil."
+                              "content": "peut être transféré à Phil."
                             },
                             {
                               "id": "1",
-                              "content": "à ne pas transférer."
+                              "content": "ne devrait pas être transféré."
                             },
                             {
                               "id": "2",
-                              "content": "qui a été transféré."
+                              "content": "a été transféré."
                             }
                           ],
                           "solutions": [
@@ -424,7 +424,7 @@
                 "id": "de1c2d77-00da-4eeb-bde2-c3671a5fe4ae",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand vous <strong>transférez un mail</strong>, il est recommandé d’ajouter une <strong>explication</strong> au-dessus du mail pour indiquer la raison de cet envoi.</p><p><br></p><h5>Que voit le destinataire quand il reçoit un mail transféré ? </h5><p>[Schéma ? illustration ? infographie ?] </p><ul><li>D’abord l’explication ou le message que vous avez écrit pour accompagner le transfert.</li><li>Ensuite, se trouvent les informations du mail d’origine&nbsp;: son expéditeur, la date, son objet et ses destinataires d’origine.</li><li>Puis, votre destinataire voit le contenu du mail d’origine.<br></li></ul>"
+                "content": "<p>Quand vous <strong>transférez un mail</strong>, il est recommandé d’ajouter une <strong>explication</strong> au-dessus du mail pour indiquer la raison de cet envoi.</p>\n<p><br></p>\n<h5>Que voit le destinataire quand il reçoit un mail transféré&nbsp;? </h5>\n<p>[Schéma ? illustration ? infographie ?] </p>\n<ul>\n    <li>D’abord l’explication ou le message que vous avez écrit pour accompagner le transfert.</li>\n    <li>Ensuite, se trouvent les informations du mail d’origine&nbsp;: son expéditeur, la date, son objet et ses destinataires d’origine.</li>\n    <li>Puis, votre destinataire voit le contenu du mail d’origine.<br></li>\n</ul>"
               }
             },
             {
@@ -472,17 +472,8 @@
           "title": "Découverte 3 : Répondre/Répondre à tous",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "b1a74a86-03da-4958-8ba9-b0c50adafcc5",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser :</p>"
-              }
-            },
-            {
               "type": "stepper",
-              "instruction": "",
+              "instruction": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>",
               "steps": [
                 {
                   "elements": [
@@ -495,7 +486,7 @@
                     {
                       "id": "bc78ac57-0cb2-4f79-98c2-8f4cc7f0661c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Laura ne pourra pas venir ce jour-là. Que doit-elle faire ?</p>",
+                      "instruction": "<p>Laura ne pourra pas venir ce jour-là. Que doit-elle faire&nbsp;?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -523,26 +514,26 @@
                       "id": "aad94652-c9ee-43b9-b544-402db63e2ad2",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>La fille de Manon est inscrite dans un club de foot. L’entraîneur envoie un mail aux parents pour organiser le tournoi de samedi&nbsp;: il a besoin de trois volontaires qui ont des voitures.</p>"
+                      "content": "<p>Thomas fait partie d’un groupe de travail pour un projet universitaire. Un camarade propose une répartition des tâches.</p>"
                     },
                     {
                       "id": "00d2a236-673d-4dc4-9aa2-5da184d6deca",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Manon est disponible pour transporter les enfants dans sa voiture. Que doit-elle faire ?</p>",
+                      "instruction": "<p>Thomas n’est pas d’accord avec la répartition et souhaite proposer une autre organisation. Que doit-il faire&nbsp;?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "0",
                           "content": "Répondre",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
+                            "diagnosis": "<p>Eh non. En répondant uniquement à l’expéditeur, les autres membres du groupe ne sauront pas que Thomas a fait une contre-proposition. Pour que <strong>tout le monde ait le même niveau d’information</strong>, il doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "Répondre à tous",
                           "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Si Manon répond seulement à l’entraîneur, les autres parents ne sauront pas qu’elle est disponible. Pour que <strong>tout le monde ait le même niveau d’information</strong>, elle doit utiliser l’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;».</p>"
+                            "diagnosis": "<p>Exactement&nbsp;! Comme la réponse concerne l’ensemble du groupe, il est important que tous les destinataires soient informés. L’option «&nbsp;<strong>Répondre à tous</strong>&nbsp;» est donc la plus appropriée pour que <strong>tout le monde ait le même niveau d’information</strong>.</p>"
                           }
                         }
                       ],
@@ -623,7 +614,7 @@
                 "id": "23eef4f8-6952-4cca-8718-51190d9a901a",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand beaucoup de mails sont échangés entre plusieurs personnes, le fil de discussion se complexifie.<br>Pour retrouver une information, il faut se repérer à l’intérieur du fil de discussion. 🕵️</p>"
+                "content": "<p>Quand beaucoup de mails sont échangés entre plusieurs personnes, le fil de discussion peut devenir complexe.<br>Pour retrouver une information, il faut se repérer à l’intérieur du fil de discussion. 🕵️</p>"
               }
             }
           ]
@@ -991,17 +982,8 @@
           "title": "Activité 3 : Quelles interactions ?",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "6975703a-94f4-4eaa-8592-a29128e0452c",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>"
-              }
-            },
-            {
               "type": "stepper",
-              "instruction": "",
+              "instruction": "<p><strong>Pour chacune des situations suivantes, identifiez l’option de la boîte de messagerie qu’il convient d’utiliser.</strong></p>",
               "steps": [
                 {
                   "elements": [
@@ -1015,7 +997,7 @@
                       "id": "96b24eab-d3ab-42b6-9bc5-89152ad188c5",
                       "type": "custom",
                       "title": "Mail de Jean Lotus",
-                      "instruction": "",
+                      "instruction": "<p><br></p>",
                       "functionalInstruction": "",
                       "tagName": "template-mail",
                       "props": {
@@ -1150,7 +1132,7 @@
                         "mailAddress": "aline.bonnote@pixmail.org",
                         "avatarColor": "#f24645",
                         "expeditor": "Aline Bonnote",
-                        "content": "<p>Bonjour à tous,</p> <p>Concernant le <strong>pot de départ de Sophie</strong>, merci de confirmer si vous serez présents vendredi et si vous apporterez quelque chose pour le buffet afin qu’on puisse s’organiser ensemble.</p> <p>Hâte de vous voir ! 🙂</p> <p>Aline</p>",
+                        "content": "<p>Bonjour à tous,</p> <p>Avec Soumaya, nous organisons le pot de départ de Sophie.<br>Le pot de départ aura lieu vendredi et prendra la forme d’un buffet.<br>Venez nombreux&nbsp;!</p> <p>Hâte de vous voir&nbsp;!&nbsp;🙂</p> <p>Aline</p>",
                         "time": {
                           "days": -3,
                           "minutes": -673
@@ -1160,7 +1142,7 @@
                     {
                       "id": "7d969c2d-8dd0-45dd-adc5-6d40ca1b3c3d",
                       "type": "qcu",
-                      "instruction": "<p>Soumaya prévoit d’apporter à boire. Que doit-elle faire ?</p>",
+                      "instruction": "<p>Soumaya souhaite préciser à tous les invités que chacun doit apporter quelque chose à manger. Que doit-elle faire ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -1168,7 +1150,7 @@
                           "content": "Répondre",
                           "feedback": {
                             "state": "<p>Incorrect.<br><br></p>",
-                            "diagnosis": "<p>La réponse de Soumaya peut intéresser tout le groupe.</p>"
+                            "diagnosis": "<p>L’information de Soumaya concerne tous les invités.</p>"
                           }
                         },
                         {
@@ -1176,7 +1158,7 @@
                           "content": "Répondre à tous",
                           "feedback": {
                             "state": "<p>Correct !</p>",
-                            "diagnosis": "<p>La réponse de Soumaya intéresse tout le groupe. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
+                            "diagnosis": "<p>La réponse de Soumaya concerne tous les invités. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
                           }
                         },
                         {
@@ -1184,7 +1166,7 @@
                           "content": "Ne pas répondre",
                           "feedback": {
                             "state": "<p>Incorrect !</p>",
-                            "diagnosis": "<p>Soumaya a besoin de prévenir qu’elle va apporter les boissons. Si elle ne répond pas, les autres ne le sauront pas.</p>"
+                            "diagnosis": "<p>Soumaya souhaite apporter une information complémentaire. Si elle ne répond pas, les autres invités ne seront pas mis au courant.</p>"
                           }
                         }
                       ],
@@ -1212,7 +1194,7 @@
               "element": {
                 "id": "2ca9785e-8ab8-448e-89b7-dc8c097885c2",
                 "type": "qcu-discovery",
-                "instruction": "<p>La prochaine fois que vous répondez à un mail avec plusieurs destinataires, que ferez-vous&nbsp;?</p>",
+                "instruction": "<p>La prochaine fois, avant de répondre à un mail avec plusieurs destinataires, que ferez-vous&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
