@@ -1,7 +1,9 @@
-import { Counter, Gauge, Histogram, Summary } from 'prom-client';
+import { collectDefaultMetrics, Counter, Gauge, Histogram, Summary } from 'prom-client';
 
 import { config } from '../../config.js';
 import { register } from './register.js';
+
+collectDefaultMetrics({ register });
 
 /**
  * @param {Omit<ConstructorParameters<typeof Counter>[0], 'registers'>} configuration
