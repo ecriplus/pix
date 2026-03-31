@@ -1,4 +1,7 @@
-import { IMPORT_KEY_FIELD } from '../../../../src/prescription/learner-management/domain/constants.js';
+import {
+  ANONYMIZATION_RULE,
+  IMPORT_KEY_FIELD,
+} from '../../../../src/prescription/learner-management/domain/constants.js';
 import { IMPORT_FORMAT_GENERIC_ID, IMPORT_FORMAT_ONDE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
 
 export const organizationLearnerImportFormat = async function ({ databaseBuilder }) {
@@ -33,6 +36,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
         {
           name: 'INE',
           config: {
+            anonymize: ANONYMIZATION_RULE.CLEAR,
             validate: {
               type: 'string',
               required: true,
@@ -43,6 +47,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
         {
           name: 'Cycle',
           config: {
+            anonymize: ANONYMIZATION_RULE.KEEP,
             validate: {
               type: 'string',
               required: true,
@@ -54,6 +59,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
         {
           name: 'Niveau',
           config: {
+            anonymize: ANONYMIZATION_RULE.KEEP,
             validate: {
               type: 'string',
               required: true,
@@ -65,6 +71,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
         {
           name: 'Libellé classe',
           config: {
+            anonymize: ANONYMIZATION_RULE.CLEAR,
             validate: {
               type: 'string',
               required: true,
@@ -82,6 +89,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
         {
           name: 'Date naissance',
           config: {
+            anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE,
             validate: {
               type: 'date',
               format: 'YYYY-MM-DD',
@@ -133,6 +141,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
           name: 'Classe',
           required: true,
           config: {
+            anonymize: ANONYMIZATION_RULE.CLEAR,
             exportable: true,
             validate: { type: 'string', required: true },
             displayable: {
@@ -148,6 +157,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
           name: 'Date de naissance',
           required: true,
           config: {
+            anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE,
             reconcile: {
               fieldId: 'reconcileField3',
               name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE,
@@ -199,6 +209,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
           name: 'Divisions',
           required: true,
           config: {
+            anonymize: ANONYMIZATION_RULE.CLEAR,
             exportable: true,
             validate: { type: 'string', required: true },
             mappingColumn: 'Classe',
@@ -220,6 +231,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
           name: 'Date de naissance',
           required: true,
           config: {
+            anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE,
             reconcile: {
               fieldId: 'reconcileField3',
               name: IMPORT_KEY_FIELD.COMMON_BIRTHDATE,

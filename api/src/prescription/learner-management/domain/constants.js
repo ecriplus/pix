@@ -14,3 +14,9 @@ export const IMPORT_KEY_FIELD = {
   COMMON_BIRTHDATE: 'COMMON_BIRTHDATE',
   COMMON_DIVISION: 'COMMON_DIVISION',
 };
+
+export const ANONYMIZATION_RULE = {
+  KEEP: 'keep',
+  CLEAR: 'clear',
+  GENERALIZE_DATE: 'generalize_date',
+};
