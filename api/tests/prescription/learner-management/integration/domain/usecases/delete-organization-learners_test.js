@@ -1,11 +1,13 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CLIENTS, PIX_ORGA } from '../../../../../../src/authorization/domain/constants.js';
+import { ANONYMIZATION_RULE } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import {
   CampaignParticipationLoggerContext,
   CampaignTypes,
   OrganizationLearnerLoggerContext,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
@@ -148,6 +150,77 @@ describe('Integration | UseCase | Organization Learners Management | Delete Orga
     const otherParticipationFromDB = await knex('campaign-participations').where({ id: otherParticipation.id }).first();
     expect(otherParticipationFromDB.participantExternalId).not.null;
     expect(otherParticipationFromDB.userId).not.null;
+  });
+
+  it('should selectively anonymize attributes when organization has an import format configured', async function () {
+    // given
+    const learner = buildOrganizationLearner({
+      organizationId,
+      attributes: { Classe: '3A', 'Date de naissance': '2005-10-03' },
+    });
+    const importFeature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
+    const importFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
+      name: 'test-delete-anonymize',
+      fileType: 'csv',
+      config: {
+        headers: [
+          {
+            name: 'Classe',
+            required: true,
+            config: { anonymize: ANONYMIZATION_RULE.CLEAR, validate: { type: 'string', required: true } },
+          },
+          {
+            name: 'Date de naissance',
+            required: true,
+            config: {
+              anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE,
+              validate: { type: 'date', format: 'YYYY-MM-DD', required: true },
+            },
+          },
+        ],
+      },
+    });
+    databaseBuilder.factory.buildOrganizationFeature({
+      featureId: importFeature.id,
+      organizationId,
+      params: { organizationLearnerImportFormatId: importFormat.id },
+    });
+    await databaseBuilder.commit();
+
+    // when
+    await usecases.deleteOrganizationLearners({
+      userId: adminUserId,
+      organizationLearnerIds: [learner.id],
+      organizationId,
+      userRole: 'ORGA_ADMIN',
+      client: 'PIX_ORGA',
+    });
+
+    // then
+    const deletedLearner = await knex('organization-learners').where({ id: learner.id }).first();
+    expect(deletedLearner.attributes).to.deep.equal({ 'Date de naissance': '2005-01-01' });
+  });
+
+  it('should clear attributes when organization has no import format configured', async function () {
+    // given
+    const learner = buildOrganizationLearner({
+      organizationId,
+      attributes: { Classe: '3A', 'Date de naissance': '2005-10-03' },
+    });
+    await databaseBuilder.commit();
+
+    // when
+    await usecases.deleteOrganizationLearners({
+      userId: adminUserId,
+      organizationLearnerIds: [learner.id],
+      organizationId,
+      userRole: 'ORGA_ADMIN',
+      client: 'PIX_ORGA',
+    });
+
+    // then
+    const deletedLearner = await knex('organization-learners').where({ id: learner.id }).first();
+    expect(deletedLearner.attributes).to.be.null;
   });
 
   it('should detach assessments given campaignParticipations', async function () {

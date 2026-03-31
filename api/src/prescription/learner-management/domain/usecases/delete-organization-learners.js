@@ -9,6 +9,7 @@ const deleteOrganizationLearners = async function ({
   userRole,
   client,
   organizationLearnerRepository,
+  organizationLearnerImportFormatRepository,
   campaignParticipationRepositoryFromBC,
   badgeAcquisitionRepository,
   assessmentRepository,
@@ -38,6 +39,7 @@ const deleteOrganizationLearners = async function ({
     userId,
   );
 
+  const importFormat = await organizationLearnerImportFormatRepository.get(organizationId);
   const organizationProfileRewards = await organizationsProfileRewardRepository.getByOrganizationId({ organizationId });
 
   const auditLoggingJobs = [];
@@ -54,7 +56,7 @@ const deleteOrganizationLearners = async function ({
       const organizationLearnerRewards = organizationProfileRewards.filter(
         (organizationProfileReward) => organizationProfileReward.userId === organizationLearner.userId,
       );
-      organizationLearner.delete(userId, { keepPreviousDeletion });
+      organizationLearner.delete(userId, importFormat);
       organizationLearnersToUpdate.push(organizationLearner.dataToUpdateOnDeletion);
       organizationProfileRewardsToUpdate.push(...organizationLearnerRewards);
 
