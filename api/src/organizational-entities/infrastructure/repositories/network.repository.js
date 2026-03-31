@@ -136,11 +136,7 @@ async function attachOrganization({ childOrganizationId, parentOrganizationId })
     .where({ organization_id: parentOrganizationId })
     .first();
 
-  await knexConn('fct_structures').where({
-    organization_id: childOrganizationId,
-  });
-
-  return knexConn('fct_structures').where({ organization_id: childOrganizationId }).update({
+  await knexConn('fct_structures').where({ organization_id: childOrganizationId }).update({
     network_id: parentFactStructure.network_id,
     parent_structure_id: parentFactStructure.structure_id,
   });
