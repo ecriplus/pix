@@ -1,6 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click, fillIn } from '@ember/test-helpers';
+import { click, fillIn, triggerEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -104,7 +104,7 @@ module('Integration | Component | certification-starter', function (hooks) {
         );
 
         // when
-        await clickByLabel(t('pages.certification-start.actions.submit'));
+        await triggerEvent('.certification-start-page__form', 'submit');
 
         // then
         assert.dom(screen.getByText(t('pages.certification-start.error-messages.missing-code'))).exists();
@@ -122,24 +122,30 @@ module('Integration | Component | certification-starter', function (hooks) {
           };
 
           const createRecordStub = sinon.stub();
+
           class StoreServiceStub extends Service {
             createRecord = createRecordStub;
           }
+
           this.owner.register('service:store', StoreServiceStub);
           createRecordStub.returns(certificationCourse);
 
           const resetStub = sinon.stub();
+
           class FocusedCertificationChallengeWarningManagerStub extends Service {
             reset = resetStub;
           }
+
           this.owner.register(
             'service:focused-certification-challenge-warning-manager',
             FocusedCertificationChallengeWarningManagerStub,
           );
           const startCertificationStub = sinon.stub();
+
           class PixCompanionServiceStub extends Service {
             startCertification = startCertificationStub;
           }
+
           this.owner.register('service:pix-companion', PixCompanionServiceStub);
 
           const routerObserver = this.owner.lookup('service:router');
@@ -175,14 +181,48 @@ module('Integration | Component | certification-starter', function (hooks) {
         });
       });
 
+      test('should not submit the form again while the first submission is pending', async function (assert) {
+        // given
+        const certificationCourse = {
+          id: '456',
+          save: sinon.stub().returns(new Promise(() => {})),
+          deleteRecord: sinon.stub(),
+        };
+
+        class StoreServiceStub extends Service {
+          createRecord = sinon.stub().returns(certificationCourse);
+        }
+        this.owner.register('service:store', StoreServiceStub);
+
+        this.set('candidateSubscription', { sessionId: 123 });
+
+        // when
+        const screen = await render(
+          hbs`<CertificationStarter @certificationCandidateSubscription={{this.candidateSubscription}} />`,
+        );
+        await fillIn(
+          screen.getByRole('textbox', { name: `${t('pages.certification-start.access-code')} *` }),
+          'ABC123',
+        );
+
+        const submitButton = screen.getByRole('button', { name: t('pages.certification-start.actions.submit') });
+        await click(submitButton);
+        await click(submitButton);
+
+        // then
+        assert.ok(certificationCourse.save.calledOnce);
+      });
+
       module('when the creation of certification course is in error', function () {
         test('should not notify pix companion', async function (assert) {
           // given
           const replaceWithStub = sinon.stub();
           const startCertificationStub = sinon.stub();
+
           class PixCompanionServiceStub extends Service {
             startCertification = startCertificationStub;
           }
+
           this.owner.register('service:pix-companion', PixCompanionServiceStub);
 
           class RouterServiceStub extends Service {

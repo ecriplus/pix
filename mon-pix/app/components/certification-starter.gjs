@@ -11,6 +11,107 @@ import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 
 export default class CertificationStarter extends Component {
+  @service store;
+  @service router;
+  @service currentUser;
+  @service intl;
+  @service focusedCertificationChallengeWarningManager;
+  @service pixCompanion;
+
+  @tracked inputAccessCode = '';
+  @tracked apiErrorMessage = null;
+  @tracked validationErrorMessage = null;
+  @tracked technicalErrorInformation = null;
+  @tracked classNames = [];
+  @tracked certificationCourse = null;
+  @tracked validationStatus = 'default';
+  @tracked isFormLoading = false;
+
+  get accessCode() {
+    return this.inputAccessCode.toUpperCase();
+  }
+
+  get complementarySubscriptionLabel() {
+    return this.args.certificationCandidateSubscription.enrolledDoubleCertificationLabel;
+  }
+
+  get eligibilityState() {
+    return this.args.certificationCandidateSubscription.isEligibleToDoubleCertification ? 'eligible' : 'non-eligible';
+  }
+
+  @action
+  handleAccessCodeInput(event) {
+    this.inputAccessCode = event.target.value;
+  }
+
+  @action
+  clearErrorMessage() {
+    this.apiErrorMessage = null;
+    this.validationStatus = 'default';
+    this.validationErrorMessage = null;
+    this.technicalErrorInformation = null;
+  }
+
+  @action
+  async submit(e) {
+    e.preventDefault();
+
+    if (this.isFormLoading) return;
+
+    this.isFormLoading = true;
+    this.clearErrorMessage();
+
+    if (!this.accessCode) {
+      this.validationStatus = 'error';
+      this.validationErrorMessage = this.intl.t('pages.certification-start.error-messages.missing-code');
+      this.isFormLoading = false;
+      return;
+    }
+
+    const newCertificationCourse = this.store.createRecord('certification-course', {
+      accessCode: this.accessCode,
+      sessionId: this.args.certificationCandidateSubscription.sessionId,
+    });
+    try {
+      await newCertificationCourse.save();
+      this.focusedCertificationChallengeWarningManager.reset();
+      this.router.replaceWith('authenticated.certifications.resume', newCertificationCourse.id);
+      this.pixCompanion.startCertification();
+    } catch (error) {
+      newCertificationCourse.deleteRecord();
+      this.#handleSubmitError(error);
+    } finally {
+      this.isFormLoading = false;
+    }
+  }
+
+  #handleSubmitError(error) {
+    const statusCode = error.errors?.[0]?.status;
+    const errorCode = error.errors?.[0]?.code;
+
+    const ERROR_MESSAGE_KEYS = {
+      404: 'pages.certification-start.error-messages.access-code-error',
+      412: 'pages.certification-start.error-messages.session-not-accessible',
+    };
+
+    const FORBIDDEN_ERROR_MESSAGE_KEYS = {
+      CANDIDATE_NOT_AUTHORIZED_TO_JOIN_SESSION:
+        'pages.certification-start.error-messages.candidate-not-authorized-to-start',
+      CANDIDATE_NOT_AUTHORIZED_TO_RESUME_SESSION:
+        'pages.certification-start.error-messages.candidate-not-authorized-to-resume',
+      CENTER_HABILITATION_ERROR: 'pages.certification-joiner.error-messages.missing-center-habilitation',
+    };
+
+    if (ERROR_MESSAGE_KEYS[statusCode]) {
+      this.apiErrorMessage = this.intl.t(ERROR_MESSAGE_KEYS[statusCode]);
+    } else if (statusCode === '403' && FORBIDDEN_ERROR_MESSAGE_KEYS[errorCode]) {
+      this.apiErrorMessage = this.intl.t(FORBIDDEN_ERROR_MESSAGE_KEYS[errorCode]);
+    } else {
+      this.technicalErrorInformation = `${error.message} ${error.stack}`;
+      this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.generic');
+    }
+  }
+
   <template>
     <section class="certification-starter">
       <h1 class="certification-start-page__title">{{t "pages.certification-start.first-title"}}</h1>
@@ -42,7 +143,7 @@ export default class CertificationStarter extends Component {
         </div>
       {{/if}}
 
-      <form class="certification-start-page__form" autocomplete="off">
+      <form class="certification-start-page__form" onSubmit={{this.submit}} autocomplete="off">
         <PixLabel for="certificationStarterSessionCode" @requiredLabel={{t "common.form.mandatory"}}>
           {{t "pages.certification-start.access-code"}}
         </PixLabel>
@@ -69,7 +170,7 @@ export default class CertificationStarter extends Component {
           </details>
         {{/if}}
 
-        <PixButton @type="submit" @triggerAction={{this.submit}} class="certification-start-page__field-button">
+        <PixButton @type="submit" @isLoading={{this.isFormLoading}} class="certification-start-page__field-button">
           {{t "pages.certification-start.actions.submit"}}
         </PixButton>
       </form>
@@ -87,91 +188,4 @@ export default class CertificationStarter extends Component {
       </div>
     </section>
   </template>
-  @service store;
-  @service router;
-  @service currentUser;
-  @service intl;
-  @service focusedCertificationChallengeWarningManager;
-  @service pixCompanion;
-
-  @tracked inputAccessCode = '';
-  @tracked apiErrorMessage = null;
-  @tracked validationErrorMessage = null;
-  @tracked technicalErrorInformation = null;
-  @tracked classNames = [];
-  @tracked certificationCourse = null;
-  @tracked validationStatus = 'default';
-
-  get accessCode() {
-    return this.inputAccessCode.toUpperCase();
-  }
-
-  get complementarySubscriptionLabel() {
-    return this.args.certificationCandidateSubscription.enrolledDoubleCertificationLabel;
-  }
-
-  get eligibilityState() {
-    return this.args.certificationCandidateSubscription.isEligibleToDoubleCertification ? 'eligible' : 'non-eligible';
-  }
-
-  @action
-  handleAccessCodeInput(event) {
-    this.inputAccessCode = event.target.value;
-  }
-
-  @action
-  clearErrorMessage() {
-    this.apiErrorMessage = null;
-    this.validationStatus = 'default';
-    this.validationErrorMessage = null;
-    this.technicalErrorInformation = null;
-  }
-
-  @action
-  async submit(e) {
-    e.preventDefault();
-    this.clearErrorMessage();
-
-    if (!this.accessCode) {
-      this.validationStatus = 'error';
-      this.validationErrorMessage = this.intl.t('pages.certification-start.error-messages.missing-code');
-      return;
-    }
-
-    const newCertificationCourse = this.store.createRecord('certification-course', {
-      accessCode: this.accessCode,
-      sessionId: this.args.certificationCandidateSubscription.sessionId,
-    });
-    try {
-      await newCertificationCourse.save();
-      this.focusedCertificationChallengeWarningManager.reset();
-      this.router.replaceWith('authenticated.certifications.resume', newCertificationCourse.id);
-      this.pixCompanion.startCertification();
-    } catch (error) {
-      newCertificationCourse.deleteRecord();
-      const statusCode = error.errors?.[0]?.status;
-      if (statusCode === '404') {
-        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.access-code-error');
-      } else if (statusCode === '412') {
-        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.session-not-accessible');
-      } else if (statusCode === '403') {
-        const errorCode = error.errors?.[0]?.code;
-        if (errorCode === 'CANDIDATE_NOT_AUTHORIZED_TO_JOIN_SESSION') {
-          this.apiErrorMessage = this.intl.t(
-            'pages.certification-start.error-messages.candidate-not-authorized-to-start',
-          );
-        } else if (errorCode === 'CANDIDATE_NOT_AUTHORIZED_TO_RESUME_SESSION') {
-          this.apiErrorMessage = this.intl.t(
-            'pages.certification-start.error-messages.candidate-not-authorized-to-resume',
-          );
-        } else if (errorCode === 'CENTER_HABILITATION_ERROR') {
-          this.apiErrorMessage = this.intl.t('pages.certification-joiner.error-messages.missing-center-habilitation');
-        }
-      } else {
-        // This should not happen, but in case it does, let give as much info as possible
-        this.technicalErrorInformation = `${error.message} ${error.stack}`;
-        this.apiErrorMessage = this.intl.t('pages.certification-start.error-messages.generic');
-      }
-    }
-  }
 }
