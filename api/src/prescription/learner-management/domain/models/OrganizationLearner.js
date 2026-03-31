@@ -88,7 +88,7 @@ class OrganizationLearner {
     this.isCertifiable = placementProfile.isCertifiable();
   }
 
-  anonymize() {
+  anonymize(importFormat = null) {
     this.#loggerContext = OrganizationLearnerLoggerContext.ANONYMIZATION;
     this.firstName = '(anonymized)';
     this.lastName = '(anonymized)';
@@ -115,6 +115,7 @@ class OrganizationLearner {
     this.educationalTeam = null;
     this.group = null;
     this.diploma = null;
+    this.attributes = importFormat ? importFormat.anonymizeAttributes(this.attributes) : null;
     this.detachUser();
   }
 
@@ -128,9 +129,9 @@ class OrganizationLearner {
     this.lastName = lastName;
   }
 
-  delete(userId) {
+  delete(userId, importFormat = null) {
     const date = new Date();
-    this.anonymize();
+    this.anonymize(importFormat);
     this.#loggerContext = OrganizationLearnerLoggerContext.DELETION;
 
     if (!this.deletedAt) {
@@ -165,6 +166,7 @@ class OrganizationLearner {
       educationalTeam: this.educationalTeam,
       group: this.group,
       diploma: this.diploma,
+      attributes: this.attributes,
       userId: this.userId,
       isDisabled: this.isDisabled,
       updatedAt: this.updatedAt,
