@@ -51,6 +51,57 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
         },
       ]);
     });
+
+    it('attaches children organizations to parent organization even if parent is already a child', async function () {
+      const { network, structure: headStructure } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+        headOrganization: { id: 123, name: 'Head Organization of network' },
+      });
+
+      const { organization: level1ChildOrganization, structure: level1ChildStructure } =
+        databaseBuilder.factory.buildOrganizationInNetwork({
+          networkId: network.id,
+          parentStructureId: headStructure.id,
+          organizationData: { id: 456, name: 'Level 1 Child' },
+        });
+
+      const { organization: level2ChildOrganization, structure: level2ChildStructure } =
+        databaseBuilder.factory.buildOrganizationWithStructure({
+          id: 789,
+          name: 'Level 2 Child',
+        });
+
+      await databaseBuilder.commit();
+
+      const childOrganizationIds = `${level2ChildOrganization.id}`;
+
+      // when
+      await usecases.attachChildOrganizationToOrganization({
+        parentOrganizationId: level1ChildOrganization.id,
+        childOrganizationIds,
+      });
+
+      // then
+      const childrenOrganizationFactStructures = await knex('fct_structures').whereIn('organization_id', [
+        level1ChildOrganization.id,
+        level2ChildOrganization.id,
+      ]);
+      expect(childrenOrganizationFactStructures).to.have.deep.members([
+        {
+          organization_id: level1ChildOrganization.id,
+          structure_id: level1ChildStructure.id,
+          network_id: network.id,
+          parent_structure_id: headStructure.id,
+          child_structure_id: null,
+        },
+        {
+          organization_id: level2ChildOrganization.id,
+          structure_id: level2ChildStructure.id,
+          parent_structure_id: level1ChildStructure.id,
+          network_id: network.id,
+          child_structure_id: null,
+        },
+      ]);
+    });
   });
 
   describe('error cases', function () {
