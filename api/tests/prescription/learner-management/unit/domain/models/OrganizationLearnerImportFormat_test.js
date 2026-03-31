@@ -1,4 +1,7 @@
-import { IMPORT_KEY_FIELD } from '../../../../../../src/prescription/learner-management/domain/constants.js';
+import {
+  ANONYMIZATION_RULE,
+  IMPORT_KEY_FIELD,
+} from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationLearnerImportFormat } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerImportFormat.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
@@ -375,6 +378,72 @@ describe('Unit | Models | OrganizationLearnerImportFormat', function () {
           'Date de naissance': 'value3',
         },
       });
+    });
+  });
+
+  describe('#anonymizeAttributes', function () {
+    let importFormat;
+
+    beforeEach(function () {
+      importFormat = new OrganizationLearnerImportFormat({
+        name: 'TEST',
+        fileType: 'csv',
+        config: {
+          unicityColumns: ['Identifiant'],
+          headers: [
+            { name: 'Identifiant', config: { anonymize: ANONYMIZATION_RULE.CLEAR } },
+            { name: 'Date de naissance', config: { anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE } },
+            { name: 'Niveau', config: { anonymize: ANONYMIZATION_RULE.KEEP } },
+            { name: 'Cycle' },
+          ],
+        },
+        createdAt: new Date(),
+        createdBy: 1,
+      });
+    });
+
+    it('should return null when attributes is null', function () {
+      expect(importFormat.anonymizeAttributes(null)).to.be.null;
+    });
+
+    it('should delete key for CLEAR rule', function () {
+      const result = importFormat.anonymizeAttributes({ Identifiant: 'ABC123' });
+      expect(result.Identifiant).to.be.undefined;
+    });
+
+    it('should generalize date to January 1st for GENERALIZE_DATE rule', function () {
+      const result = importFormat.anonymizeAttributes({ 'Date de naissance': '2005-10-03' });
+      expect(result['Date de naissance']).to.equal('2005-01-01');
+    });
+
+    it('should return null for GENERALIZE_DATE rule when value is null', function () {
+      const result = importFormat.anonymizeAttributes({ 'Date de naissance': null });
+      expect(result['Date de naissance']).to.be.null;
+    });
+
+    it('should leave value unchanged for KEEP rule', function () {
+      const result = importFormat.anonymizeAttributes({ Niveau: '3ème' });
+      expect(result.Niveau).to.equal('3ème');
+    });
+
+    it('should leave value unchanged when no anonymize rule is defined (defaults to KEEP)', function () {
+      const result = importFormat.anonymizeAttributes({ Cycle: 'cycle3' });
+      expect(result.Cycle).to.equal('cycle3');
+    });
+
+    it('should use mappingColumn as the key when defined', function () {
+      const formatWithMapping = new OrganizationLearnerImportFormat({
+        name: 'TEST_MAPPING',
+        fileType: 'csv',
+        config: {
+          unicityColumns: ['Divisions'],
+          headers: [{ name: 'Divisions', config: { mappingColumn: 'Classe', anonymize: ANONYMIZATION_RULE.CLEAR } }],
+        },
+        createdAt: new Date(),
+        createdBy: 1,
+      });
+      const result = formatWithMapping.anonymizeAttributes({ Classe: '3A' });
+      expect(result.Classe).to.be.undefined;
     });
   });
 

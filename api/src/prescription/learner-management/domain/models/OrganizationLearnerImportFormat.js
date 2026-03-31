@@ -1,6 +1,8 @@
+import dayjs from 'dayjs';
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { ANONYMIZATION_RULE } from '../constants.js';
 
 const organizationLearnerImportFormatSchame = Joi.object({
   id: Joi.number(),
@@ -98,6 +100,37 @@ class OrganizationLearnerImportFormat {
         key,
       };
     });
+  }
+
+  anonymizeAttributes(attributes) {
+    if (!attributes) return null;
+
+    const result = { ...attributes };
+
+    for (const header of this.config.headers) {
+      if (header.config?.property) continue;
+
+      const key = header.config?.mappingColumn ?? header.name;
+
+      if (!(key in result)) continue;
+
+      const rule = header.config?.anonymize ?? ANONYMIZATION_RULE.KEEP;
+
+      switch (rule) {
+        case ANONYMIZATION_RULE.CLEAR:
+          delete result[key];
+          break;
+        case ANONYMIZATION_RULE.GENERALIZE_DATE:
+          result[key] = result[key] ? this.#setDateToFirstJanuary(result[key]) : null;
+          break;
+      }
+    }
+
+    return result;
+  }
+
+  #setDateToFirstJanuary(date) {
+    return dayjs(date).set('date', 1).set('month', 0).format('YYYY-MM-DD');
   }
 
   get exportableColumns() {
