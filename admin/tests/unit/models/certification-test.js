@@ -168,6 +168,16 @@ module('Unit | Model | certification', function (hooks) {
         assert.true(certification.hasComplementaryCertifications);
       });
     });
+
+    module('when certification is about pix plus edu v3', function () {
+      test('returns true', function (assert) {
+        const certification = store.createRecord('certification', {
+          version: 3,
+          certificationFramework: 'EDU_1ER_DEGRE',
+        });
+        assert.true(certification.hasComplementaryCertifications);
+      });
+    });
   });
 
   module('when there is only a common complementary certification result', function () {

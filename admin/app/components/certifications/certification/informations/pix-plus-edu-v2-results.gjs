@@ -27,18 +27,10 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
               <:label>Sélectionner un niveau</:label>
             </PixSelect>
             <div>
-              <PixButton
-                @variant="secondary"
-                @size="small"
-                @triggerAction={{@onCancelJuryLevelEditButtonClick}}
-              >
+              <PixButton @variant="secondary" @size="small" @triggerAction={{@onCancelJuryLevelEditButtonClick}}>
                 Annuler
               </PixButton>
-              <PixButton
-                @size="small"
-                @triggerAction={{@onEditJuryLevelSave}}
-                aria-label="Modifier le niveau du jury"
-              >
+              <PixButton @size="small" @triggerAction={{@onEditJuryLevelSave}} aria-label="Modifier le niveau du jury">
                 Enregistrer
               </PixButton>
             </div>
@@ -49,11 +41,7 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
               {{@certification.complementaryCertificationCourseResultWithExternal.externalResult}}
             </p>
             {{#if @shouldDisplayJuryLevelEditButton}}
-              <PixIconButton
-                @ariaLabel="Modifier le volet jury"
-                @triggerAction={{@editJury}}
-                @iconName="edit"
-              />
+              <PixIconButton @ariaLabel="Modifier le volet jury" @triggerAction={{@editJury}} @iconName="edit" />
             {{/if}}
           </div>
         {{/if}}
