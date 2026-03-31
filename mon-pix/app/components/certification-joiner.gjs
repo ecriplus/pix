@@ -16,6 +16,7 @@ export default class CertificationJoiner extends Component {
 
   SESSION_ID_VALIDATION_PATTERN = '^[0-9]*$';
 
+  @tracked isFormLoading = false;
   @tracked errorMessage = null;
   @tracked errorDetailList = [];
   @tracked errorMessageLink = null;
@@ -107,8 +108,11 @@ export default class CertificationJoiner extends Component {
   }
 
   @action
-  async attemptNext(e) {
+  async handleSubmit(e) {
     e.preventDefault();
+
+    if (this.isFormLoading) return;
+
     this._resetErrorMessages();
 
     if (this.sessionId && !this._isANumber(this.sessionId)) {
@@ -121,6 +125,8 @@ export default class CertificationJoiner extends Component {
 
     let currentCertificationCandidate = null;
     try {
+      this.isFormLoading = true;
+
       currentCertificationCandidate = this.store.createRecord('certification-candidate', {
         sessionId: this.sessionId,
         birthdate: this.birthdate,
@@ -132,6 +138,8 @@ export default class CertificationJoiner extends Component {
     } catch (error) {
       currentCertificationCandidate?.deleteRecord();
       this._handleSaveError(error);
+    } finally {
+      this.isFormLoading = false;
     }
   }
 
@@ -161,7 +169,7 @@ export default class CertificationJoiner extends Component {
   <template>
     <section class="certification-joiner">
       <h1 class="certification-joiner__title">{{t "pages.certification-joiner.first-title"}}</h1>
-      <form {{on "submit" this.attemptNext}}>
+      <form {{on "submit" this.handleSubmit}}>
         <p class="certification-joiner__mandatory">{{t "common.form.mandatory-all-fields"}}</p>
 
         <PixInput
@@ -274,7 +282,7 @@ export default class CertificationJoiner extends Component {
             </PixNotificationAlert>
           </div>
         {{/if}}
-        <PixButton @id="certificationJoinerSubmitButton" @type="submit">
+        <PixButton @id="certificationJoinerSubmitButton" @type="submit" @isLoading={{this.isFormLoading}}>
           {{t "pages.certification-joiner.form.actions.submit"}}
         </PixButton>
       </form>
