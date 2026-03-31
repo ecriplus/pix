@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.373.1](https://github.com/1024pix/pix/compare/v5.373.0...v5.373.1) (2026-03-31)
+
+### :building_construction: Tech
+
+- [#15690](https://github.com/1024pix/pix/pull/15690) Retirer le feature toggle "enableTransactionForGetNext" qui permettait d'exécuter le code de "getNextChallenge" dans une transaction BDD
+
 # [5.373.0](https://github.com/1024pix/pix/compare/v5.372.0...v5.373.0) (2026-03-31)
 
 ### :rocket: Amélioration
