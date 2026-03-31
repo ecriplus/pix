@@ -21,9 +21,9 @@ export const createCombinedCourse = async ({
 
   let modules = [];
 
-  if (combinedCourseBlueprint.moduleShortIds) {
-    modules = await moduleRepository.getByShortIds({
-      moduleShortIds: combinedCourseBlueprint.moduleShortIds,
+  if (combinedCourseBlueprint.moduleIds) {
+    modules = await moduleRepository.getByIds({
+      moduleIds: combinedCourseBlueprint.moduleIds,
     });
   }
 
@@ -61,7 +61,6 @@ export const createCombinedCourse = async ({
     code: combinedCourseCode,
     organizationId,
     campaigns: createdCampaigns,
-    modulesByShortId: Object.groupBy(modules, ({ shortId }) => shortId),
   });
 
   return combinedCourseRepository.save({ combinedCourse, questRepository });

@@ -31,29 +31,28 @@ export class CombinedCourseBlueprint {
   }
 
   get targetProfileIds() {
-    return this.content
-      .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION)
-      .map(({ value }) => parseInt(value));
+    return this.quest.successRequirements
+      .filter((item) => item.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)
+      .map(({ data }) => parseInt(data.targetProfileId.data));
   }
 
-  get moduleShortIds() {
-    return this.content
-      .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
-      .map(({ value }) => value);
+  get moduleIds() {
+    return this.quest.successRequirements
+      .filter((item) => item.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES)
+      .map(({ data }) => data.moduleId.data);
   }
 
-  toCombinedCourse({ code, organizationId, campaigns, modulesByShortId, name, illustration, description }) {
-    const successRequirements = this.content.map((requirement) => {
-      if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
-        const requirementTargetProfileId = requirement.value;
+  toCombinedCourse({ code, organizationId, campaigns, name, illustration, description }) {
+    const successRequirements = this.quest.successRequirements.map((requirement) => {
+      if (requirement.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
+        const requirementTargetProfileId = requirement.data.targetProfileId.data;
         const campaignId = campaigns.find(({ targetProfileId }) => targetProfileId === requirementTargetProfileId).id;
         return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
           campaignId,
         });
-      } else if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
-        const [module] = modulesByShortId[requirement.value];
+      } else if (requirement.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES) {
         return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
-          moduleId: module.id,
+          moduleId: requirement.data.moduleId.data,
         });
       } else {
         return requirement;

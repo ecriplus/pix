@@ -14,6 +14,7 @@ function buildCombinedCourseBlueprint({
   content = [{ type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: 'module-123' }],
   organizationIds = [],
   modulesByShortId,
+  quest,
 } = {}) {
   return CombinedCourseBlueprint.buildWithQuest({
     combinedCourseBlueprint: {
@@ -26,6 +27,7 @@ function buildCombinedCourseBlueprint({
       createdAt,
       updatedAt,
       organizationIds,
+      quest,
     },
     modulesByShortId,
   });

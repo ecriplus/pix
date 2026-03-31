@@ -300,7 +300,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
 
   describe('#findById', function () {
     it('should return combined course blueprint by its id with shared organization ids', async function () {
-      const quest = databaseBuilder.factory.buildQuest();
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse();
       const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: quest.id });
       const combinedCourseBlueprintShare = databaseBuilder.factory.buildCombinedCourseBlueprintShare({
         combinedCourseBlueprintId: combinedCourseBlueprint.id,
@@ -314,6 +314,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       });
 
       const result = await combinedCourseBluePrintRepository.findById({ id: expectedCombinedCourseBlueprint.id });
+
       expect(result.organizationIds).to.deep.equal([combinedCourseBlueprintShare.organizationId]);
       expect(result).to.be.instanceOf(CombinedCourseBlueprint);
       expect(result).to.deep.contain({
@@ -331,7 +332,7 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
     });
 
     it('should return combined course blueprint by its id when it is not shared', async function () {
-      const quest = databaseBuilder.factory.buildQuest();
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse();
       const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: quest.id });
       await databaseBuilder.commit();
 

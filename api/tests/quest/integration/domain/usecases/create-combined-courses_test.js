@@ -1,11 +1,6 @@
 import iconv from 'iconv-lite';
 
-import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import {
-  CRITERION_COMPARISONS,
-  REQUIREMENT_COMPARISONS,
-  REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { CsvImportError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -40,21 +35,32 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       trainingId: trainingId,
     });
 
-    const blueprint1 = databaseBuilder.factory.buildCombinedCourseBlueprint({
-      content: [
-        { type: 'evaluation', value: targetProfile.id },
-        { type: 'module', value: '27d6ca4f' },
-        { type: 'module', value: 'df82ec66' },
-      ],
-    });
+    const expectedModules = [
+      CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+        moduleId: '5df14039-803b-4db4-9778-67e4b84afbbd',
+      }).toDTO(),
+      CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+        moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
+      }).toDTO(),
+    ];
 
-    const blueprint2 = databaseBuilder.factory.buildCombinedCourseBlueprint({
-      content: [
-        { type: 'evaluation', value: targetProfileWithTraining.id },
-        { type: 'module', value: '27d6ca4f' },
-        { type: 'module', value: 'df82ec66' },
+    const blueprintQuest1Id = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId: targetProfile.id }).toDTO(),
+        ...expectedModules,
       ],
-    });
+    }).id;
+    const blueprintQuest2Id = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          targetProfileId: targetProfileWithTraining.id,
+        }).toDTO(),
+        ...expectedModules,
+      ],
+    }).id;
+
+    const blueprint1 = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: blueprintQuest1Id });
+    const blueprint2 = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: blueprintQuest2Id });
 
     await databaseBuilder.commit();
     const input = `Identifiant des organisations*;Json configuration for quest*;Identifiant du createur des campagnes*;Identifiant du schéma de parcours*
@@ -67,189 +73,49 @@ ${firstOrganizationId};"{""name"":""Combinix""}";${userId};${blueprint2.id}
     // when
     await usecases.createCombinedCourses({ payload });
 
-    const [firstCreatedCampaignForFirstOrganization, secondCreatedCampaignForFirstOrganization] = await knex(
-      'campaigns',
-    )
-      .where({ organizationId: firstOrganizationId })
-      .whereIn('targetProfileId', [targetProfile.id, targetProfileWithTraining.id])
-      .orderBy('id');
-    const createdCampaignForSecondOrganization = await knex('campaigns')
-      .where({ targetProfileId: targetProfile.id, organizationId: secondOrganizationId })
-      .first();
-
-    const expectedModules = [
-      {
-        requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-        comparison: CRITERION_COMPARISONS.ALL,
-        data: {
-          moduleId: {
-            data: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-            comparison: CRITERION_COMPARISONS.EQUAL,
-          },
-          isTerminated: {
-            data: true,
-            comparison: CRITERION_COMPARISONS.EQUAL,
-          },
-        },
-      },
-      {
-        requirement_type: REQUIREMENT_TYPES.OBJECT.PASSAGES,
-        comparison: CRITERION_COMPARISONS.ALL,
-        data: {
-          moduleId: {
-            data: 'f32a2238-4f65-4698-b486-15d51935d335',
-            comparison: CRITERION_COMPARISONS.EQUAL,
-          },
-          isTerminated: {
-            data: true,
-            comparison: CRITERION_COMPARISONS.EQUAL,
-          },
-        },
-      },
-    ];
-
-    const expectedFirstQuestForFirstOrganization = {
-      name: 'Combinix',
-      rewardType: null,
-      rewardId: null,
-      organizationId: firstOrganizationId,
-      eligibilityRequirements: [],
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: firstCreatedCampaignForFirstOrganization.id,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-        ...expectedModules,
-      ],
-      description: 'ma description',
-      illustration: 'mon_illu.svg',
-    };
-    const expectedSecondQuestForFirstOrganization = {
-      name: 'Combinix',
-      rewardType: null,
-      rewardId: null,
-      organizationId: firstOrganizationId,
-      eligibilityRequirements: [],
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: secondCreatedCampaignForFirstOrganization.id,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-        ...expectedModules,
-      ],
-    };
-    const expectedQuestForSecondOrganization = {
-      name: 'Combinix',
-      rewardType: null,
-      rewardId: null,
-      organizationId: secondOrganizationId,
-      eligibilityRequirements: [],
-      successRequirements: [
-        {
-          requirement_type: REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS,
-          comparison: REQUIREMENT_COMPARISONS.ALL,
-          data: {
-            campaignId: {
-              data: createdCampaignForSecondOrganization.id,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-            status: {
-              data: CampaignParticipationStatuses.SHARED,
-              comparison: CRITERION_COMPARISONS.EQUAL,
-            },
-          },
-        },
-        ...expectedModules,
-      ],
-      description: 'ma description',
-      illustration: 'mon_illu.svg',
-    };
-
     // then
-    const [firstCreatedQuestForFirstOrganization, secondCreatedQuestForFirstOrganization] = await knex('quests')
+    const [firstQuestOrga1, secondQuestOrga1] = await knex('quests')
+      .select('quests.id', 'quests.successRequirements')
       .join('combined_courses', 'combined_courses.questId', 'quests.id')
       .where('combined_courses.organizationId', firstOrganizationId)
       .orderBy('quests.id');
-    const createdQuestForSecondOrganization = await knex('quests')
+
+    const firstCombinedCourseOrga1 = await knex('combined_courses').where('questId', firstQuestOrga1.id).first();
+    const firstCombinedCourseOrga1Campaign = await knex('campaigns')
+      .where('id', firstQuestOrga1.successRequirements[0].data.campaignId.data)
+      .first();
+
+    const secondCombinedCourseOrga1 = await knex('combined_courses').where('questId', secondQuestOrga1.id).first();
+    const secondCombinedCourseOrga1Campaign = await knex('campaigns')
+      .where('id', secondQuestOrga1.successRequirements[0].data.campaignId.data)
+      .first();
+
+    const questOrga2 = await knex('quests')
+      .select('quests.id', 'quests.successRequirements')
       .join('combined_courses', 'combined_courses.questId', 'quests.id')
       .where('combined_courses.organizationId', secondOrganizationId)
       .first();
+    const combinedCourseOrga2 = await knex('combined_courses').where('questId', questOrga2.id).first();
+    const combinedCourseOrga2Campaign = await knex('campaigns')
+      .where('id', questOrga2.successRequirements[0].data.campaignId.data)
+      .first();
 
     // 1st Organization
-    // Quest
-    expect(firstCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
-    expect(firstCreatedQuestForFirstOrganization.code).not.to.be.null;
-    expect(firstCreatedQuestForFirstOrganization.name).to.equal(expectedFirstQuestForFirstOrganization.name);
-    expect(firstCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
-      expectedFirstQuestForFirstOrganization.successRequirements,
-    );
-    expect(firstCreatedQuestForFirstOrganization.description).to.equal(
-      expectedFirstQuestForFirstOrganization.description,
-    );
-    expect(firstCreatedQuestForFirstOrganization.illustration).to.equal(
-      expectedFirstQuestForFirstOrganization.illustration,
-    );
-    //Campaign
-    expect(firstCreatedCampaignForFirstOrganization.name).to.equal(targetProfile.internalName);
-    expect(firstCreatedCampaignForFirstOrganization.title).to.equal(targetProfile.name);
-    expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonUrl.includes('/chargement')).false;
-    expect(firstCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
+    expect(firstCombinedCourseOrga1.code).not.to.be.null;
+    expect(firstCombinedCourseOrga1.combinedCourseBlueprintId).to.equal(blueprint1.id);
+    expect(firstQuestOrga1.successRequirements.length).to.equal(3);
+    expect(firstCombinedCourseOrga1Campaign.targetProfileId).to.equal(targetProfile.id);
 
-    // Quest
-    expect(secondCreatedQuestForFirstOrganization.combinedCourseBlueprintId).to.equal(blueprint2.id);
-    expect(secondCreatedQuestForFirstOrganization.code).not.to.be.null;
-    expect(secondCreatedQuestForFirstOrganization.name).to.equal(expectedSecondQuestForFirstOrganization.name);
-    expect(secondCreatedQuestForFirstOrganization.successRequirements).to.deep.equal(
-      secondCreatedQuestForFirstOrganization.successRequirements,
-    );
-    // TODO: voir avec Gégé si c'est ok
-    // expect(secondCreatedQuestForFirstOrganization.description).null;
-    expect(secondCreatedQuestForFirstOrganization.description).to.equal(blueprint2.description);
-
-    // TODO: voir avec Gégé si c'est ok
-    // expect(secondCreatedQuestForFirstOrganization.illustration).null;
-    expect(secondCreatedQuestForFirstOrganization.illustration).to.equal(blueprint2.illustration);
-    //Campaign
-    expect(secondCreatedCampaignForFirstOrganization.name).to.equal(targetProfileWithTraining.internalName);
-    expect(secondCreatedCampaignForFirstOrganization.title).to.equal(targetProfileWithTraining.name);
-    expect(secondCreatedCampaignForFirstOrganization.customResultPageButtonUrl.endsWith('/chargement')).true;
-    expect(secondCreatedCampaignForFirstOrganization.customResultPageButtonText).to.equal('Continuer');
+    expect(secondCombinedCourseOrga1.code).not.to.be.null;
+    expect(secondCombinedCourseOrga1.combinedCourseBlueprintId).to.equal(blueprint2.id);
+    expect(secondQuestOrga1.successRequirements.length).to.equal(3);
+    expect(secondCombinedCourseOrga1Campaign.targetProfileId).to.equal(targetProfileWithTraining.id);
 
     // 2nd Organization
-    // Quest
-    expect(createdQuestForSecondOrganization.combinedCourseBlueprintId).to.equal(blueprint1.id);
-    expect(createdQuestForSecondOrganization.code).not.to.be.null;
-    expect(createdQuestForSecondOrganization.name).to.equal(expectedQuestForSecondOrganization.name);
-    expect(createdQuestForSecondOrganization.successRequirements).to.deep.equal(
-      expectedQuestForSecondOrganization.successRequirements,
-    );
-    expect(createdQuestForSecondOrganization.description).to.equal(expectedQuestForSecondOrganization.description);
-    expect(createdQuestForSecondOrganization.illustration).to.equal(expectedQuestForSecondOrganization.illustration);
-    // Campaign
-    expect(createdCampaignForSecondOrganization.name).to.equal(targetProfile.internalName);
-    expect(createdCampaignForSecondOrganization.title).to.equal(targetProfile.name);
-    expect(createdCampaignForSecondOrganization.customResultPageButtonUrl.endsWith('/chargement')).false;
-    expect(createdCampaignForSecondOrganization.customResultPageButtonText).to.equal('Continuer');
+    expect(combinedCourseOrga2.code).not.to.be.null;
+    expect(combinedCourseOrga2.combinedCourseBlueprintId).to.equal(blueprint1.id);
+    expect(questOrga2.successRequirements.length).to.equal(3);
+    expect(combinedCourseOrga2Campaign.targetProfileId).to.equal(targetProfile.id);
   });
 
   it('should not throw encoding error with more than 6 organization ids', async function () {

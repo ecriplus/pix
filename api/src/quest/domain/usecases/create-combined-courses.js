@@ -36,9 +36,9 @@ export const createCombinedCourses = withTransaction(
 
         let modules = [];
 
-        if (combinedCourseBlueprint.moduleShortIds) {
-          modules = await moduleRepository.getByShortIds({
-            moduleShortIds: combinedCourseBlueprint.moduleShortIds,
+        if (combinedCourseBlueprint.moduleIds) {
+          modules = await moduleRepository.getByIds({
+            moduleIds: combinedCourseBlueprint.moduleIds,
           });
         }
 
@@ -73,7 +73,6 @@ export const createCombinedCourses = withTransaction(
           code: combinedCourseCode,
           organizationId,
           campaigns: createdCampaigns,
-          modulesByShortId: Object.groupBy(modules, ({ shortId }) => shortId),
         });
         combinedCourses.push(combinedCourse);
       }

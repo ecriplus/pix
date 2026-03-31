@@ -8,6 +8,7 @@ export const createCombinedCourseBlueprint = async ({
   targetProfileRepository,
   moduleRepository,
 }) => {
+  // We are using content from the front-end before building quests
   const targetProfileIds = combinedCourseBlueprint.content
     .filter((item) => item.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION)
     .map(({ value }) => value);
