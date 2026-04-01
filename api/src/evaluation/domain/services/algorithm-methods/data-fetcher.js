@@ -27,7 +27,6 @@ async function fetchForCampaigns({
     isRetrying,
     isFromCampaign: true,
     isImproving: true,
-    campaignParticipationRepository,
     knowledgeElementForParticipationService,
     knowledgeElementRepository,
     improvementService,
