@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les logiciels d’intelligence artificielle génératives sont de plus en plus utilisés, mais leur entraînement et leur utilisation a un impact considérable sur l’environnement.&nbsp; <br> Avec ce module, vous allez comprendre pourquoi les intelligences artificielles ont un impact sur l’environnement et découvrir quelques pistes pour limiter cet impact.<br><br></p>",
+    "description": "<p>Les logiciels d’intelligence artificielle générative sont de plus en plus utilisés, mais leur entraînement et leur utilisation ont un impact considérable sur l’environnement.&nbsp; <br> Avec ce module, vous allez comprendre pourquoi les intelligences artificielles ont un impact sur l’environnement et découvrir quelques pistes pour limiter cet impact.<br><br></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -143,7 +143,7 @@
                       "id": "86ca396e-2a5e-493f-88f9-648d76ce1437",
                       "type": "custom",
                       "title": "Estimer le nombre de GPU",
-                      "instruction": "<p>À votre avis, combien de GPU ont été mobilisé pour l’entraînement de GPT-4 ?<br></p>",
+                      "instruction": "<p>À votre avis, combien de GPU ont été mobilisés pour l’entraînement de GPT-4 ?<br></p>",
                       "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
@@ -427,7 +427,7 @@
                       "id": "2c1c5be2-a58d-475d-afec-dc7b6ad88e8e",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d’IA&nbsp;: ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d’IA génératives, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</strong></strong></p>"
+                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d’IA&nbsp;: ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d’IA générative, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</strong></strong></p>"
                     }
                   ]
                 },
@@ -437,7 +437,7 @@
                       "id": "5878e032-208b-4e28-94d2-9fb5e1b47884",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d’IA génératives&nbsp;et de l’expansion de ses centres de données.</p>"
+                      "content": "<p>À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d’IA générative&nbsp;et de l’expansion de ses centres de données.</p>"
                     }
                   ]
                 },
@@ -478,7 +478,7 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>Les dirigeants des entreprises d’IA génératives, beaucoup plus célèbres et puissants que Charlie, accordent parfois des interviews. </p><p>Examinez ces citations et dites si, d’après vous, elles sont vraie ou fausse ?</p>",
+              "instruction": "<p>Les dirigeants des entreprises d’IA générative, beaucoup plus célèbres et puissants que Charlie, accordent parfois des interviews. </p><p>Examinez ces citations et dites si, d’après vous, elles sont vraies ou fausses ?</p>",
               "steps": [
                 {
                   "elements": [
@@ -531,14 +531,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>Elle est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p> Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouvert”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>Elle est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p> Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouverts”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Et pourtant si !</p><p>La cituation est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p>Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouvert”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
+                            "diagnosis": "<p>Et pourtant si !</p><p>La cituation est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p>Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouverts”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
                           }
                         }
                       ],
@@ -668,14 +668,14 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>L’entraînement des logiciels d’intelligence artificielle nécessitent des&nbsp;</p>"
+                    "content": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des&nbsp;</p>"
                   },
                   {
                     "type": "select",
                     "input": "choice1",
                     "display": "inline",
-                    "placeholder": "Séctionnez une réponse",
-                    "ariaLabel": "Séctionnez une réponse",
+                    "placeholder": "Sélectionnez une réponse",
+                    "ariaLabel": "Sélectionnez une réponse",
                     "tolerances": [],
                     "options": [
                       {
@@ -720,11 +720,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse !<br></p>",
-                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessitent des <strong>centres de données</strong> spécialisés, équipés de <strong>cartes graphiques (GPU)</strong>.</p>"
+                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des <strong>centres de données</strong> spécialisés, équipés de <strong>cartes graphiques (GPU)</strong>.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas vraiment ...<br></p>",
-                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessitent des centres de données spécialisés, équipés de cartes graphiques (GPU).</p>"
+                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des centres de données spécialisés, équipés de cartes graphiques (GPU).</p>"
                   }
                 }
               }
@@ -938,7 +938,7 @@
                     {
                       "id": "6ff2f836-1331-46c0-8e8b-373d55f69ed8",
                       "type": "qcu",
-                      "instruction": "<p>D’après l’étude, quelle est l’impact d’une requête à Gemini ?</p>",
+                      "instruction": "<p>D’après l’étude, quel est l’impact d’une requête à Gemini ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
