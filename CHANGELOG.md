@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.374.0](https://github.com/1024pix/pix/compare/v5.373.1...v5.374.0) (2026-04-01)
+
+### :rocket: Amélioration
+
+- [#15642](https://github.com/1024pix/pix/pull/15642) "Ajouter une adresse e-mail" aux méthodes de connexion pour les utilisateurs uniquement SSO (PIX-21984). 
+- [#15692](https://github.com/1024pix/pix/pull/15692) crea-nouveau-module-iagen-ethiquedata 
+- [#15700](https://github.com/1024pix/pix/pull/15700) Exclure certaines organisations du questionnaire de satisfaction Combinix 
+- [#15676](https://github.com/1024pix/pix/pull/15676) MAJ du rattachement d'organisations à un réseau (PIX-22100). 
+- [#15368](https://github.com/1024pix/pix/pull/15368) MDX-16 Retours qualité 
+- [#15647](https://github.com/1024pix/pix/pull/15647) Update IADefinition_IND.json - modif coquilles 
+- [#15712](https://github.com/1024pix/pix/pull/15712) Update IAGenImpact_AVA.json retours PYO 
+
+### :bug: Correction
+
+- [#15710](https://github.com/1024pix/pix/pull/15710) Ajuster les marges pour les listes des grains recap (PIX-22180) 
+- [#15707](https://github.com/1024pix/pix/pull/15707) Éviter de spam la soumission du form de réconciliation (PIX-22172). 
+- [#15703](https://github.com/1024pix/pix/pull/15703) Éviter les soumissions multiples dans le form d'entrée en session (PIX-22165). 
+- [#15706](https://github.com/1024pix/pix/pull/15706) Supprime une clause distinct très coûteuse en CPU lors de la récupération de contenus recommandés  
+
+### :building_construction: Tech
+
+- [#15691](https://github.com/1024pix/pix/pull/15691) Correction d'un test e2e flaky côté modulix-a11y (PIX-22147) 
+- [#15669](https://github.com/1024pix/pix/pull/15669) Utiliser la quête du schéma pour créer un parcours combiné (PIX-22054)
+
 ## [5.373.1](https://github.com/1024pix/pix/compare/v5.373.0...v5.373.1) (2026-03-31)
 
 ### :building_construction: Tech
