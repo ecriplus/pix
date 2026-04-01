@@ -581,5 +581,12 @@
         }
       ]
     }
+  ],
+  "glossary": [
+    {
+      "id": "446044cb-ed65-46b8-84b9-f1f8f8c2d9b9",
+      "word": "Pix",
+      "definition": "Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques."
+    }
   ]
 }
