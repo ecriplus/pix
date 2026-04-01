@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 

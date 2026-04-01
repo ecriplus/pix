@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import { on } from '@ember/modifier';

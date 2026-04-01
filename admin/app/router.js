@@ -51,6 +51,7 @@ Router.map(function () {
           this.route('new');
         });
         this.route('invitations');
+        // TODO: delete children route at the end of EPIX PIX-21277
         this.route('children');
         this.route('network');
       });

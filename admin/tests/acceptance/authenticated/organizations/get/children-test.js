@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import { clickByName, fillByLabel, visit, within } from '@1024pix/ember-testing-library';
 import { click, currentURL } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';

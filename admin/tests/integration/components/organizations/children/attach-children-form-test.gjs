@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import { render } from '@1024pix/ember-testing-library';
 import { click, fillIn, triggerEvent } from '@ember/test-helpers';
 import AttachChildForm from 'pix-admin/components/organizations/children/attach-child-form';

@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';

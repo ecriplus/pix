@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 

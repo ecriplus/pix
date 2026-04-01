@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';

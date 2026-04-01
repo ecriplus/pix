@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import { t } from 'ember-intl';
 
