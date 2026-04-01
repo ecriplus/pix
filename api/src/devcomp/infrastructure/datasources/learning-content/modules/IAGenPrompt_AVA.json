@@ -352,7 +352,16 @@
                 "id": "26c430e9-9676-453d-966d-7657f413d2f3",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ce que vous venez de faire s’appelle une <strong>situation réflexive</strong>. L’IA ne produit pas immédiatement un résultat final&nbsp;: elle pose des questions, propose des pistes et vous aide à préciser votre besoin.</p><h5>🤔 Pourquoi est-ce utile&nbsp;?</h5><p>Quand l’objectif est flou ou mal cadré, le dialogue permet d’affiner progressivement la demande. Vous construisez la solution avec l’IA, au lieu de déléguer toute la réflexion en un seul prompt.</p><h5>💡 Bon à savoir</h5><p>Si votre tâche est complexe, vous pouvez demander à l’IA de <strong>reformuler votre besoin</strong> pour qu’il soit compréhensible pour un logiciel d’intelligence artificielle. On appelle cette technique le <strong>méta-prompting</strong>. Remontez dans ChatPix et testez cette approche avec votre propre demande.</p>"
+                "content": "<p>Ce que vous venez de faire s’appelle une <strong>situation réflexive</strong>. L’IA ne produit pas immédiatement un résultat final&nbsp;: elle pose des questions, propose des pistes et vous aide à préciser votre besoin.</p><h5>🤔 Pourquoi est-ce utile&nbsp;?</h5><p>Quand l’objectif est flou ou mal cadré, le dialogue permet d’affiner progressivement la demande. Vous construisez la solution avec l’IA, au lieu de déléguer toute la réflexion en un seul prompt.</p><p><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "5048a28a-fbba-4b7c-9431-0490d65e540c",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p> Si votre tâche est complexe, vous pouvez demander à l’IA de reformuler votre besoin pour qu’il soit compréhensible pour un logiciel d’intelligence artificielle. On appelle cette technique le méta-prompting. Remontez dans ChatPix et testez cette approche avec votre propre demande.</p>"
               }
             }
           ]
