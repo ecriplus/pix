@@ -10,8 +10,7 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 import ActivityType from 'pix-orga/components/activity-type';
 
@@ -151,7 +150,7 @@ export default class List extends Component {
                 {{t "pages.campaigns-list.table.column.created-on"}}
               </:header>
               <:cell>
-                {{dayjsFormat campaign.createdAt "DD/MM/YYYY" allow-empty=true}}
+                {{formatDate campaign.createdAt}}
               </:cell>
             </PixTableColumn>
 

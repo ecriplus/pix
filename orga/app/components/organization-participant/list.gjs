@@ -12,7 +12,6 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 import { eq, not } from 'ember-truth-helpers';
 
@@ -48,7 +47,7 @@ export default class List extends Component {
   @service locale;
 
   displayDate(date) {
-    return dayjs(date).format('DD/MM/YYYY');
+    return this.intl.formatDate(date);
   }
 
   @action
@@ -60,7 +59,7 @@ export default class List extends Component {
     }
     if (!extraColumnValue) return '';
 
-    if (dayjs(extraColumnValue).isValid()) {
+    if (!isNaN(new Date(extraColumnValue).getTime())) {
       return this.displayDate(extraColumnValue);
     }
 

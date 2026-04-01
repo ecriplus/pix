@@ -1,8 +1,7 @@
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import ActivityType from 'pix-orga/components/activity-type';
 
 import CopyPasteButton from '../../copy-paste-button';
@@ -72,7 +71,7 @@ export default class Header extends Component {
               {{t "pages.campaign.created-on"}}
             </dt>
             <dd>
-              {{dayjsFormat @campaign.createdAt "DD/MM/YYYY" allow-empty=true}}
+              {{formatDate @campaign.createdAt}}
             </dd>
           </div>
           <div class="campaign-header-title__detail-item">

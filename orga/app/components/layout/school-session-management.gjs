@@ -4,12 +4,9 @@ import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { t } from 'ember-intl';
 
 import CopyPasteButton from '../copy-paste-button';
-dayjs.extend(LocalizedFormat);
 
 export default class SchoolSessionManagement extends Component {
   @service currentUser;
@@ -36,7 +33,9 @@ export default class SchoolSessionManagement extends Component {
 
   get expirationDateParameter() {
     return {
-      sessionExpirationDate: dayjs(this.currentUser.organization.sessionExpirationDate).format('LT'),
+      sessionExpirationDate: this.intl.formatTime(this.currentUser.organization.sessionExpirationDate, {
+        format: 'hhmm',
+      }),
     };
   }
 

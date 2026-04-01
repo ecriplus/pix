@@ -6,8 +6,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import ENV from 'pix-orga/config/environment';
 
 export default class InvitationsListItem extends Component {
@@ -58,7 +57,7 @@ export default class InvitationsListItem extends Component {
         {{t "pages.team-invitations.table.column.pending-invitation"}}
       </:header>
       <:cell>
-        {{dayjsFormat @invitation.updatedAt "DD/MM/YYYY [-] HH:mm"}}
+        {{formatDate @invitation.updatedAt format="medium"}}
       </:cell>
     </PixTableColumn>
 

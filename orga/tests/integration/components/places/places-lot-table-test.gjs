@@ -65,12 +65,12 @@ module('Integration | Component | Places | PlacesLotTable', function (hooks) {
       }),
     ];
     const screen = await render(<template><PlacesLotTable @placesLots={{placesLots}} /></template>);
-
+    const cells = screen.getAllByRole('cell');
     // then
-    assert.ok(screen.getByRole('cell', { name: '-' }));
-    assert.ok(screen.getByRole('cell', { name: '23/09/2021' }));
-    assert.ok(screen.getByRole('cell', { name: '-' }));
-    assert.ok(screen.getByRole('cell', { name: t('pages.places.places-lots.statuses.pending') }));
+    assert.strictEqual(cells[0].innerText, '-');
+    assert.strictEqual(cells[1].innerText, '23/09/2021');
+    assert.strictEqual(cells[2].innerText, '-');
+    assert.strictEqual(cells[3].innerText, t('pages.places.places-lots.statuses.pending'));
   });
   test('it should render an emty state if there is no places lots', async function (assert) {
     // when

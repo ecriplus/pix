@@ -38,7 +38,7 @@ module('Integration | Component | Participant::Profile::Header', function (hooks
     );
 
     assert.strictEqual(screen.getByRole('term').textContent.trim(), t('pages.campaign-individual-results.start-date'));
-    assert.strictEqual(screen.getByRole('definition').textContent.trim(), '01 janv. 2020');
+    assert.strictEqual(screen.getByRole('definition').textContent.trim(), '1 janv. 2020');
   });
 
   module('is shared', function () {
@@ -58,7 +58,7 @@ module('Integration | Component | Participant::Profile::Header', function (hooks
           screen.getAllByRole('term')[1].textContent.trim(),
           t('pages.campaign-individual-results.shared-date'),
         );
-        assert.strictEqual(screen.getAllByRole('definition')[1].textContent.trim(), '02 janv. 2020');
+        assert.strictEqual(screen.getAllByRole('definition')[1].textContent.trim(), '2 janv. 2020');
       });
     });
     module('when participant has not shared results', function () {

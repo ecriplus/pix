@@ -3,8 +3,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { LinkTo } from '@ember/routing';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { not } from 'ember-truth-helpers';
 
 import Cell from '../certificability/cell';
@@ -65,7 +64,7 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
   </PixTableColumn>
   <PixTableColumn @context={{@context}}>
     <:header>{{t "pages.sup-organization-participants.table.column.date-of-birth"}}</:header>
-    <:cell>{{dayjsFormat @student.birthdate "DD/MM/YYYY"}}</:cell>
+    <:cell>{{formatDate @student.birthdate}}</:cell>
   </PixTableColumn>
   <PixTableColumn @context={{@context}}>
     <:header>{{t "pages.sup-organization-participants.table.column.group"}}</:header>
@@ -89,7 +88,7 @@ import LastParticipationDateTooltip from '../ui/last-participation-date-tooltip'
     <:header>{{t "pages.sup-organization-participants.table.column.last-participation-date"}}</:header>
     <:cell>{{#if @student.lastParticipationDate}}
         <div class="organization-participant__align-element">
-          <span>{{dayjsFormat @student.lastParticipationDate "DD/MM/YYYY" allow-empty=true}}</span>
+          <span>{{formatDate @student.lastParticipationDate}}</span>
           <LastParticipationDateTooltip
             @id={{@index}}
             @campaignName={{@student.campaignName}}

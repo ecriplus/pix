@@ -161,7 +161,7 @@ module('Integration | Component | ParticipantAssessmentHeader', function (hooks)
       <template><ParticipantAssessmentHeader @participation={{participation}} @campaign={{campaign}} /></template>,
     );
 
-    assert.ok(screen.getByText('01 janv. 2020'));
+    assert.ok(screen.getByText('1 janv. 2020'));
   });
 
   module('progression', function () {
@@ -205,7 +205,7 @@ module('Integration | Component | ParticipantAssessmentHeader', function (hooks)
         );
 
         assert.ok(screen.getByText(t('pages.campaign-individual-results.shared-date')));
-        assert.ok(screen.getByText('02 janv. 2020'));
+        assert.ok(screen.getByText('2 janv. 2020'));
       });
     });
 
