@@ -990,12 +990,12 @@
                           "id": "1",
                           "content": "Non",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! Cette estimation ne prend pas en compte l’entraînement du modèle.</p>",
+                            "state": "<p> Bonne réponse ! Cette estimation ne prend pas en compte l’entraînement du modèle.</p>",
                             "diagnosis": "<p>Or, on a vu que l’entraînement était extrêmement coûteux en énergie.</p>"
                           }
                         }
                       ],
-                      "solution": "0"
+                      "solution": "1"
                     }
                   ]
                 },
@@ -1004,7 +1004,7 @@
                     {
                       "id": "a6404aac-9164-4e80-93b6-1288130f064e",
                       "type": "qcu",
-                      "instruction": "<p>Est-ce que cette étude a été relue et validée par des scientifiques indépendants? ?</p>",
+                      "instruction": "<p>Est-ce que cette étude a été relue et validée par des scientifiques indépendants ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
