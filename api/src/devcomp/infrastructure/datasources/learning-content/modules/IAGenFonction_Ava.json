@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, générer des images, produire des graphiques, du code ou encore interagir avec d'autres logiciels !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles capacités&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
+    "description": "<p>À leurs débuts, les IA génératives ne savaient que générer du texte.&nbsp;Elles peuvent maintenant calculer, produire des graphiques, du code ou encore interagir avec d'autres logiciels !</p><br><p>Dans ce module, vous allez découvrir le secret qui se cache derrière ces nouvelles capacités&nbsp;: ces logiciels d’IA font appel à des outils.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -97,19 +97,45 @@
                 "id": "540b867d-1e06-496c-a9e9-425c2012fef8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Yasmine a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
+                "content": "<p>Yasmine aimerait chiner de nouveaux objets pour décorer une fois les travaux terminés.</p><p>Elle a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "a8337d52-1539-4853-b377-ef3368ad83e7",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/IAGenFonctionAva/comparaison.png",
-                "alt": "à venir en POI",
-                "alternativeText": "",
-                "legend": "à terme, ce sera un POI",
-                "licence": ""
+                "id": "c829b624-f3b1-466b-b4a4-a5fc63708f1e",
+                "type": "custom",
+                "title": "",
+                "instruction": "<p><br></p>",
+                "functionalInstruction": "",
+                "tagName": "llm-compare-messages",
+                "props": {
+                  "conversation1": {
+                    "title": "Exemple 1",
+                    "llmName": ""
+                  },
+                  "conversation2": {
+                    "title": "Exemple 2",
+                    "llmName": ""
+                  },
+                  "userName": "Yasmine",
+                  "messages": [
+                    {
+                      "direction": "outbound",
+                      "content": "Quand aura lieu la prochaine brocante à Jolieville ?"
+                    },
+                    [
+                      {
+                        "direction": "inbound",
+                        "content": "👉 Pour connaître la date de la prochaine brocante à Jolieville, je vous suggère de visiter le site officiel de la mairie de Jolieville. Les informations sur les événements locaux, y compris les brocantes, y sont généralement publiées."
+                      },
+                      {
+                        "direction": "inbound",
+                        "content": "🗓️ Prochaine brocante : Dimanche 19 avril   <br>📍 Cours Azurville (centre-ville)   <br>👉 C’est le marché d’antiquités-brocante mensuel, organisé l’avant-dernier dimanche de chaque mois  <br> <br>🧺 Grand vide-grenier : Dimanche 28 juin    <br>📍 Port BeauxRivages   <br> 👉 Grand vide-grenier avec environ 120 exposants"
+                      }
+                    ]
+                  ]
+                }
               }
             },
             {
@@ -124,21 +150,21 @@
                     "id": "1",
                     "content": "L’exemple 1",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu&nbsp;!</p><p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Eh non  ! Cette réponse est moins précise que l’autre.</p><p> Les réponses données par les IA génératives se sont améliorées grâce aux <strong>appels d’outils</strong>, par exemple ici, la <strong>recherche sur internet</strong>, utilisée dans l’exemple 2.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "L’exemple 2",
                     "feedback": {
-                      "diagnosis": "<p>Eh non !</p><p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Bien vu ! </p><p>Les réponses données par les IA génératives se sont améliorées grâce aux <strong>appels d’outils</strong>, par exemple ici, la <strong>recherche sur internet</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p>Les réponses données par les IA génératives se sont améliorées grâce aux appels d’outils, par exemple ici, le générateur d’image. Mais cela peut aussi être l’appel à une calculatrice, la recherche sur internet, etc.</p>"
+                      "diagnosis": "<p>Les réponses données par les IA génératives se sont améliorées grâce aux <strong>appels d’outils,</strong>&nbsp;comme dans l'exemple 2 avec <strong>la recherche sur internet.</strong></p>"
                     }
                   }
                 ],
@@ -162,7 +188,7 @@
                       "id": "e7fcc562-2f50-4e49-8c20-9297175e15e3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Un logiciel d’IA générative conversationnelle s’appuie sur un grand<strong> modèle de langage</strong> (Large Language Models ou LLM) qui lui donne la capacité de <strong>générer du texte</strong>.</p><br><br><p> Afin d’élargir leurs capacités, les logiciels d’IA conversationnelle utilisent désormais des <strong>outils </strong>complémentaires (tool calling, en anglais) qui leur permettent d’effectuer d’autres tâches.</p>"
+                      "content": "<p>En faisant <strong>appel à des outils</strong>, autrement dit des <strong>logiciels externes</strong>, les logiciels d’IA étendent leurs capacités au-delà de leur propre environnement et peuvent réaliser d’<strong>autres actions</strong> sur l’ordinateur ou dans le monde réel.</p><p> En anglais, on appelle cette capacité le “ tool calling “ ou “fonction calling”.<br></p>"
                     }
                   ]
                 },
@@ -172,7 +198,7 @@
                       "id": "7df2eef2-779e-4dca-a954-c4ca258994da",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><br><ul><li>    réaliser des calculs exacts, 🔢<br>    </li><li>chercher sur internet, 🌐&nbsp;</li><li>produire  un diaporama, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅</li><li>faire une réservation  ou une commande sur internet …&nbsp;🛒</li></ul>"
+                      "content": "<h5>Quelles tâches peuvent maintenant faire les IA conversationnelles grâce à ces outils ?</h5><br><p> Par exemple, elles peuvent&nbsp;: </p><ul><li>chercher sur internet, 🌐&nbsp;</li><li>réaliser des calculs exacts, 🔢</li><li>produire  un support de présentation, 🖼️    <br></li><li>générer et exécuter du code informatique, 🧑‍💻    <br></li><li>envoyer des mails, 📧    <br></li><li>ajouter un événement à un agenda 📅</li><li>faire une réservation  ou une commande sur internet …&nbsp;🛒</li></ul>"
                     }
                   ]
                 },
