@@ -431,7 +431,7 @@
                 "id": "eb52f337-184a-4422-ad7b-5c9b04f930b9",
                 "type": "text",
                 "tag": "did-you-know",
-                "content": "<p>Vous pouvez mettre des exemples sous forme de documents en pièce jointe de votre prompt mais également en tant que texte dans votre prompt en mettrant les exemples en guillemets ou entres des balise &lt;exemple&gt; pour que le logiciel les interprète bien comme tel.&nbsp;<br></p>"
+                "content": "<p>Vous pouvez mettre des exemples sous forme de documents en pièce jointe de votre prompt mais également en tant que texte dans votre prompt en mettrant les exemples en guillemets ou entres des balises &lt;exemple&gt; pour que le logiciel les interprète bien comme tel.&nbsp;<br></p>"
               }
             }
           ]
