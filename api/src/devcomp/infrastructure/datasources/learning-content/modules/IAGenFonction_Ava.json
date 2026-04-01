@@ -556,7 +556,7 @@
                       "id": "838dd2fd-5a2c-462c-b93a-b230dadc4e62",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p>"
+                      "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p><p>L’outil pertinent identifié ici est un logiciel qui se connecte aux informations d’un service fiable de météo (Météo France, AEMET, National Weather Service, etc. )</p>"
                     },
                     {
                       "id": "d81c2f6a-7811-4ed5-8959-70fd4ed60bd2",
@@ -736,28 +736,28 @@
                           "id": "1",
                           "content": "condition&nbsp;: ensoleillé ; temperature&nbsp;: 30",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans le contexte de son prompt pour générer sa réponse.</p>"
+                            "diagnosis": "<p><strong>Non , cette proposition n’est que l’information envoyée par l’outil Météo.</strong> </p>\n<p>L’objectif de Yasmine était de vérifier si la météo permettrait de refaire sa terrasse ce week-end. Une fois les données de l’outil Météo transmises au logiciel d’IA générative, celui-ci les utilise pour générer sa réponse. </p>\n<p>Donc, la bonne réponse était :&nbsp; “Il va faire chaud et sec à Jolieville ce week-end, c’est donc plutôt un bon moment.&nbsp; Si les travaux de votre terrasse nécessitent du béton, il va sécher très rapidement. Prévoyez de bétonner tôt le matin et humidifiez les coffrages.”</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Ce week-end à Jolieville, le soleil sera au rendez-vous avec une température autour de 30°.",
                           "feedback": {
-                            "diagnosis": "Eh non ! <br>Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans son contexte de prompt pour générer sa réponse."
+                            "diagnosis": "<p><strong>Non , cette proposition ne répond pas à la question de Yasmine.</strong> </p>\n<p>L’objectif de Yasmine était de vérifier si la météo permettrait de refaire sa terrasse ce week-end. Une fois les données de l’outil Météo transmises au logiciel d’IA générative, celui-ci les utilise pour générer sa réponse. </p>\n<p>Donc, la bonne réponse était :&nbsp; “Il va faire chaud et sec à Jolieville ce week-end, c’est donc plutôt un bon moment.&nbsp; Si les travaux de votre terrasse nécessitent du béton, il va sécher très rapidement. Prévoyez de bétonner tôt le matin et humidifiez les coffrages.”</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Il va faire chaud et sec à Jolieville ce week-end, c’est donc plutôt un bon moment.&nbsp; Si les travaux de votre terrasse nécessitent du béton, il va sécher très rapidement. Prévoyez de bétonner tôt le matin et humidifiez les coffrages.</p>",
                           "feedback": {
-                            "diagnosis": "Bien vu !<br>Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans son contexte de prompt pour générer sa réponse."
+                            "diagnosis": "<p>Bien vu !</p>\n<p>L’objectif de Yasmine était de vérifier si la météo permettrait de refaire sa terrasse ce week-end. Une fois les données de l’outil Météo transmises au logiciel d’IA générative, celui-ci les utilise pour générer sa réponse.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "Un programme dédié va récupérer les résultats de l’outil (ici, l’outil Météo), le transmettre au modèle de langage (LLM) qui va l’intégrer dans son contexte de prompt pour générer sa réponse."
+                            "diagnosis": "<p>L’objectif de Yasmine était de vérifier si la météo permettrait de refaire sa terrasse ce week-end. Une fois les données de l’outil Météo transmises au logiciel d’IA générative, celui-ci les utilise pour générer sa réponse.</p><p>Donc, la bonne réponse était : “Il va faire chaud et sec à Jolieville ce week-end, c’est donc plutôt un bon moment.&nbsp; Si les travaux de votre terrasse nécessitent du béton, il va sécher très rapidement. Prévoyez de bétonner tôt le matin et humidifiez les coffrages.”</p>"
                           }
                         }
                       ],
@@ -801,7 +801,7 @@
                 "id": "b88d46da-1c84-442c-a481-b3b9998e58a2",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>⚠️Point de vigilance&nbsp;:&nbsp;</strong></p><p>Ce n’est pas parce qu’un logiciel fait appel à un outil qu’il devient infaillible&nbsp;: il peut toujours halluciner, se tromper d’outils ou d’informations à lui envoyer. Restez vigilant avec les résultats obtenus.</p>"
+                "content": "<p><strong>⚠️Point de vigilance&nbsp;:&nbsp;</strong></p><p>Ce n’est pas parce qu’un logiciel d'IA générative fait appel à un outil qu’il devient infaillible&nbsp;: il peut toujours halluciner, se tromper d’outils ou d’informations à lui envoyer. Restez vigilant avec les résultats obtenus.</p>"
               }
             }
           ]
