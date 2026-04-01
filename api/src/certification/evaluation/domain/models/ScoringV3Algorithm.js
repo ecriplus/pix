@@ -17,7 +17,6 @@ export class ScoringV3Algorithm {
    *  @param {Answer[]} params.allAnswers
    *  @param {CalibratedChallenge[]} params.allChallenges
    *  @param {CalibratedChallenge[]} params.askedChallenges
-   *  @param {number} params.maxReachableLevelOnCertificationDate
    *  @param {V3CertificationScoring} params.v3CertificationScoring
    *  @param {Function} params.downgradeCapacityFunction
    */
@@ -26,7 +25,6 @@ export class ScoringV3Algorithm {
     allAnswers,
     allChallenges,
     askedChallenges,
-    maxReachableLevelOnCertificationDate,
     v3CertificationScoring,
     downgradeCapacityFunction,
   }) {
@@ -34,7 +32,6 @@ export class ScoringV3Algorithm {
     this.allAnswers = allAnswers;
     this.allChallenges = allChallenges;
     this.askedChallenges = askedChallenges;
-    this.maxReachableLevelOnCertificationDate = maxReachableLevelOnCertificationDate;
     this.v3CertificationScoring = v3CertificationScoring;
     this.downgradeCapacityFunction = downgradeCapacityFunction;
   }

@@ -6,7 +6,6 @@
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').UserRepository} UserRepository
  * @typedef {import('./index.js').VersionsRepository} VersionsRepository
- * @typedef {import('./index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {import('../../../shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
@@ -38,7 +37,6 @@ import { SCOPES } from '../../../shared/domain/models/Scopes.js';
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  * @param {UserRepository} params.userRepository
  * @param {VersionsRepository} params.versionRepository
- * @param {ScoringConfigurationRepository} params.scoringConfigurationRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
  */
@@ -53,7 +51,6 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   certificationCenterRepository,
   userRepository,
   versionRepository,
-  scoringConfigurationRepository,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
@@ -77,11 +74,6 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
     scope: certificationScope,
     reconciliationDate: certificationCandidate.reconciledAt,
   });
-
-  const scoringConfiguration = await scoringConfigurationRepository.getLatestByVersion({
-    version: certificationVersion,
-  });
-  const maxReachableLevelOnCertificationDate = scoringConfiguration.maxReachableLevel;
 
   const existingCertificationCourse =
     await certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId({
@@ -113,7 +105,6 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
     userId,
     certificationCandidate,
     certificationVersion,
-    maxReachableLevelOnCertificationDate,
     assessmentRepository,
     certificationCourseRepository,
     certificationCenterRepository,
@@ -182,7 +173,6 @@ async function _startNewCertification({
   userId,
   certificationCandidate,
   certificationVersion,
-  maxReachableLevelOnCertificationDate,
   assessmentRepository,
   certificationCourseRepository,
   certificationCenterRepository,
@@ -247,7 +237,6 @@ async function _startNewCertification({
   return _createCertificationCourse({
     certificationCandidate,
     certificationVersion,
-    maxReachableLevelOnCertificationDate,
     certificationCourseRepository,
     assessmentRepository,
     userId,
@@ -281,7 +270,6 @@ function _getCertificationCourseIfCreatedMeanwhile(certificationCourseRepository
 async function _createCertificationCourse({
   certificationCandidate,
   certificationVersion,
-  maxReachableLevelOnCertificationDate,
   certificationCourseRepository,
   assessmentRepository,
   verifyCertificateCodeService,
@@ -301,7 +289,6 @@ async function _createCertificationCourse({
   const newCertificationCourse = CertificationCourse.from({
     certificationCandidate,
     certificationVersion,
-    maxReachableLevelOnCertificationDate,
     complementaryCertificationCourse,
     verificationCode,
     algorithmEngineVersion: AlgorithmEngineVersion.V3,

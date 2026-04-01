@@ -33,7 +33,6 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
         certificationCourseId: 123,
         assessmentId: 456,
         abortReason: 'candidate',
-        maxReachableLevelOnCertificationDate: 6,
         isRejectedForFraud: true,
         answers: [domainBuilder.buildAnswer()],
       };

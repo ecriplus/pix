@@ -22,7 +22,6 @@ describe('Certification | Evaluation | Unit | Domain | Models | ScoringV3Algorit
       allAnswers,
       allChallenges,
       askedChallenges,
-      maxReachableLevelOnCertificationDate: 'we do not seem to care ?',
       v3CertificationScoring,
       downgradeCapacityFunction: downgradeCapacityStub,
     });

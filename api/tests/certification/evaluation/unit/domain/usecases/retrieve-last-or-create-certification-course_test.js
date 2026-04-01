@@ -34,9 +34,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const verifyCertificateCodeService = {};
   const userRepository = {};
   const versionRepository = {};
-  const scoringConfigurationRepository = {};
-
-  const MAX_REACHABLE_LEVEL = 7;
 
   const injectables = {
     assessmentRepository,
@@ -50,7 +47,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     verifyCertificateCodeService,
     userRepository,
     versionRepository,
-    scoringConfigurationRepository,
   };
 
   beforeEach(function () {
@@ -71,7 +67,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
     versionRepository.getByScopeAndReconciliationDate = sinon.stub();
-    scoringConfigurationRepository.getLatestByVersion = sinon.stub();
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
@@ -154,8 +149,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
             const version = domainBuilder.certification.shared.buildVersion();
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
-            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -197,9 +190,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
             const version = domainBuilder.certification.shared.buildVersion();
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
-
-            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -291,9 +281,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
-
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
               sessionId: 1,
@@ -353,9 +340,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
             versionRepository.getByScopeAndReconciliationDate.resolves(version);
-
-            const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-            scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -420,9 +404,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               const version = domainBuilder.certification.shared.buildVersion();
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
 
-              const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-              scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
-
               // when
               const result = await retrieveLastOrCreateCertificationCourse({
                 sessionId: foundSession.id,
@@ -454,9 +435,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
               versionRepository.getByScopeAndReconciliationDate.resolves(version);
-
-              const scoringConfiguration = domainBuilder.buildV3CertificationScoring();
-              scoringConfigurationRepository.getLatestByVersion.resolves(scoringConfiguration);
             });
 
             it('should return it with flag created marked as true with related resources', async function () {
@@ -493,7 +471,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 certificationCandidate: foundCertificationCandidate,
                 certificationVersion,
                 verificationCode,
-                maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                 algorithmEngineVersion: AlgorithmEngineVersion.V3,
                 complementaryCertificationCourses: [],
                 lang: user.lang,
@@ -629,7 +606,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   certificationCandidate: foundCertificationCandidate,
                   certificationVersion,
                   verificationCode,
-                  maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                   algorithmEngineVersion: AlgorithmEngineVersion.V3,
                   lang: user.lang,
                   isAdjustedForAccessibility: foundCertificationCandidate.accessibilityAdjustmentNeeded,
@@ -714,7 +690,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   certificationCandidate: foundCertificationCandidate,
                   certificationVersion,
                   verificationCode,
-                  maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                   complementaryCertificationCourses: [],
                   algorithmEngineVersion: AlgorithmEngineVersion.V3,
                   lang: user.lang,
@@ -813,7 +788,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     certificationCandidate: foundCertificationCandidate,
                     certificationVersion,
                     verificationCode,
-                    maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                     complementaryCertificationCourse,
                     algorithmEngineVersion: AlgorithmEngineVersion.V3,
                     lang: user.lang,
@@ -991,7 +965,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       certificationCandidate: foundCertificationCandidate,
                       certificationVersion,
                       verificationCode,
-                      maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                       complementaryCertificationCourse,
                       algorithmEngineVersion: AlgorithmEngineVersion.V3,
                       lang: user.lang,
@@ -1089,7 +1062,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                         certificationCandidate: foundCertificationCandidate,
                         certificationVersion,
                         verificationCode,
-                        maxReachableLevelOnCertificationDate: MAX_REACHABLE_LEVEL,
                         algorithmEngineVersion: AlgorithmEngineVersion.V3,
                         lang: user.lang,
                         framework: Frameworks.CORE,
