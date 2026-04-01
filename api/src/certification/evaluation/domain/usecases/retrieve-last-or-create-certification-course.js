@@ -6,7 +6,6 @@
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').UserRepository} UserRepository
  * @typedef {import('./index.js').VersionsRepository} VersionsRepository
- * @typedef {import('./index.js').ScoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {import('../../../shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
@@ -282,9 +281,9 @@ async function _createCertificationCourse({
   const verificationCode = await verifyCertificateCodeService.generateCertificateVerificationCode();
   const complementaryCertificationCourse = complementaryCertificationCourseData
     ? new ComplementaryCertificationCourse({
-        complementaryCertificationBadgeId: complementaryCertificationCourseData.complementaryCertificationBadgeId,
-        complementaryCertificationId: complementaryCertificationCourseData.complementaryCertificationId,
-      })
+      complementaryCertificationBadgeId: complementaryCertificationCourseData.complementaryCertificationBadgeId,
+      complementaryCertificationId: complementaryCertificationCourseData.complementaryCertificationId,
+    })
     : null;
 
   const newCertificationCourse = CertificationCourse.from({
