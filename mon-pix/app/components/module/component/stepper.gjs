@@ -201,9 +201,14 @@ export default class ModulixStepper extends Component {
       <PixTag @color="dark">
         {{t "pages.modulix.preview.stepper" direction=@direction}}
       </PixTag>
+      {{#if this.isHorizontalDirection}}
+        <div class="stepper-instruction--preview-mode">
+          {{htmlUnsafe @instruction}}
+        </div>
+      {{/if}}
     {{/if}}
     <div
-      class="stepper stepper--{{this.direction}}"
+      class="stepper stepper--{{this.direction}}{{if this.modulixPreviewMode.isEnabled ' stepper--preview-mode' ''}}"
       aria-live="{{if (eq @direction 'vertical') 'polite'}}"
       aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}

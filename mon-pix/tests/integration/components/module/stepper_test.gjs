@@ -2496,10 +2496,18 @@ module('Integration | Component | Module | Stepper', function (hooks) {
 
         // when
         const screen = await render(
-          <template><ModulixStepper @id="stepper-container-id-1" @steps={{steps}} @direction="horizontal" /></template>,
+          <template>
+            <ModulixStepper
+              @id="stepper-container-id-1"
+              @steps={{steps}}
+              @direction="horizontal"
+              @instruction="<p>Voici l'instruction de mon stepper horizontal</p>"
+            />
+          </template>,
         );
 
         // then
+        assert.dom(screen.getByText("Voici l'instruction de mon stepper horizontal")).exists();
         assert.dom(screen.getByText('Text 1')).exists();
         assert.dom(screen.getByText('Text 2')).exists();
         assert.dom(find('.stepper--vertical')).exists();
