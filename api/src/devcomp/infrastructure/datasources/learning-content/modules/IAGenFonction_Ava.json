@@ -168,7 +168,7 @@
                     }
                   }
                 ],
-                "solution": "1"
+                "solution": "2"
               }
             }
           ]
@@ -188,7 +188,7 @@
                       "id": "e7fcc562-2f50-4e49-8c20-9297175e15e3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>En faisant <strong>appel à des outils</strong>, autrement dit des <strong>logiciels externes</strong>, les logiciels d’IA étendent leurs capacités au-delà de leur propre environnement et peuvent réaliser d’<strong>autres actions</strong> sur l’ordinateur ou dans le monde réel.</p><p> En anglais, on appelle cette capacité le “ tool calling “ ou “fonction calling”.<br></p>"
+                      "content": "<p>En faisant <strong>appel à des outils</strong>, autrement dit des <strong>logiciels externes</strong>, les logiciels d’IA étendent leurs capacités au-delà de leur propre environnement et peuvent réaliser d’<strong>autres actions</strong> sur l’ordinateur ou dans le monde réel.</p><p> En anglais, on appelle cette capacité le « tool calling » ou « fonction calling ».<br></p>"
                     }
                   ]
                 },
