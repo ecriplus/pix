@@ -148,7 +148,7 @@
             {
               "type": "element",
               "element": {
-                "id": "073ac979-06a6-4be3-896b-781923f214ac",
+                "id": "dc5d5e33-e512-4abb-b331-4076d0439b57",
                 "type": "text",
                 "tag": " ",
                 "content": "<p>Maintenant, voici un schéma qui représente cette organisation.<br><strong>Observez le schéma suivant puis répondez aux questions ci-dessous.</strong></p>"
@@ -619,7 +619,7 @@
             {
               "type": "element",
               "element": {
-                "id": "6c4d391a-460d-4289-b3e2-7a78e00b2c67",
+                "id": "e1a2a940-b7c7-48a8-b6df-e8e28a1e64e5",
                 "type": "expand",
                 "title": "🗝️Indice 2",
                 "content": "<p>Dans le gestionnaire de fichiers, les options d’affichage se trouvent dans la barre d’outils. Vous pouvez notamment changer l’affichage en passant de la vue <strong>icônes</strong> à la vue <strong>liste</strong>.</p><br>"
@@ -980,7 +980,7 @@
             {
               "type": "element",
               "element": {
-                "id": "3111d526-b1bb-4790-9611-7a805bcfbfad",
+                "id": "f183019c-102f-47c1-a46e-94daded05388",
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "simulateur gestionnaire de fichiers",
