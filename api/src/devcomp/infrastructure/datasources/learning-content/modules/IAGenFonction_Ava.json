@@ -871,7 +871,7 @@
                 "id": "8454a04e-e0aa-432f-97da-72c94c43e3e5",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>🤔À leur lancement, les IA génératives conversationnelles grand public avaient beaucoup de <strong>limites </strong>: des erreurs dans les <strong>calculs</strong>, pas d’accès aux informations en <strong>temps réel</strong>, etc.<br></li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les IA peuvent appeler pour faire davantage d’<strong>actions </strong>: calculer, exécuter du <strong>code informatique</strong>, générer une <strong>image</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les développeurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
+                "content": "<ul><li>🤔À leur lancement, les logiciels IA générative conversationnelles grand public avaient beaucoup de <strong>limites </strong>: ils généraient principalement du texte, faisaient des erreurs dans les calculs, n’avaient pas d’accès aux informations en temps réel, etc.</li><li>🧰Pour dépasser ces limites, les développeurs ont mis en place des <strong>outils </strong>que les logciels d'IA peuvent appeler pour faire davantage d’<strong>actions&nbsp;</strong>en interagissant avec d'autres logiciels : calculer, exécuter du <strong>code informatique</strong>, générer un support de <strong>présentation</strong>, etc.<br></li><li>⚙️Ce mécanisme, appelé<strong> appel d’outils</strong> (tool calling), repose sur une liste d’outils définis à l’avance par les développeurs.</li><li>🎯 Pour traiter une demande, le logiciel d’IA identifie les <strong>outils </strong> utiles, leur adresse des <strong>requêtes </strong>et intègre les résultats dans le prompt pour générer une réponse adaptée.</li></ul><br>"
               }
             },
             {
@@ -948,11 +948,11 @@
                   },
                   {
                     "type": "text",
-                    "content": "<br>La génération d’image&nbsp;:&nbsp;"
+                    "content": "<br><p>La production de graphique&nbsp;:&nbsp;</p>"
                   },
                   {
                     "type": "select",
-                    "input": "generationImage",
+                    "input": "productionGraphique",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
                     "ariaLabel": "- Sélectionner -",
@@ -979,7 +979,7 @@
                   },
                   "invalid": {
                     "state": "Mauvaise réponse !",
-                    "diagnosis": "<p> Avez-vous testé avec un prompt pour chaque situation ?</p><ul><li>Pour la recherche sur internet&nbsp;: avez-vous posé à l’IA une question d’actualité ?  <br>Par exemple&nbsp;: qui a gagné le dernier match de hockey à Montréal ?</li><li>Pour la génération d’image&nbsp;: avez-vous demandé à l’IA de faire une image ?  <br>Par exemple&nbsp;: dessine une cuisine moderne où pourrait vivre une marmotte.</li></ul>"
+                    "diagnosis": "<p> Avez-vous testé avec un prompt pour chaque situation ?</p><ul><li>Pour la recherche sur internet&nbsp;: avez-vous posé à l’IA une question d’actualité ?<ul><li>Par exemple, quelle équipe a remporté le dernier championnat du monde de water-polo  ?</li></ul></li><li>Pour la production de graphique : avez-vous demandé à l’IA de représenter des données chiffrées sous une forme visuelle ?<ul><li>Par exemple : Fais un graphique comparant les températures de Kinshasa et Montréal.</li></ul></li></ul>"
                   }
                 }
               }
@@ -1011,7 +1011,7 @@
                   },
                   {
                     "id": "4b030a4b-bf10-4da1-b480-f055cac3eb67",
-                    "text": "Ajoute à mon agenda un rendez-vous samedi à 10h avec le cuisiniste. ",
+                    "text": "Commande un escabeau et deux rouleaux à peinture premier prix sur le site Bricoramix.",
                     "image": {
                       "url": "",
                       "altText": ""
