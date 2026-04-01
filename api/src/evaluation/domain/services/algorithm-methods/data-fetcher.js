@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { fallbackChallengeLocales } from '../../../../shared/domain/services/locale-service.js';
 
 async function fetchForCampaigns({
   assessment,
@@ -76,8 +77,9 @@ async function _fetchKnowledgeElements({
   });
 }
 
-async function _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale }) {
-  const challenges = await challengeRepository.findOperativeBySkills(campaignSkills, locale);
+export async function _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale }) {
+  const locales = fallbackChallengeLocales(locale);
+  const challenges = await challengeRepository.findOperativeBySkillsAndLocales(campaignSkills, locales);
   return [campaignSkills, challenges];
 }
 
