@@ -79,6 +79,42 @@ module('Unit | Route | modules | passage', function (hooks) {
     });
   });
 
+  module('#afterModel', function () {
+    test('should call computeCurrentSectionByGrainIndex when grainIndex is present in query params', function (assert) {
+      // given
+      const route = this.owner.lookup('route:module.passage');
+      const modulixNavigationProgress = this.owner.lookup('service:modulix-navigation-progress');
+      modulixNavigationProgress.computeCurrentSectionByGrainIndex = sinon.stub();
+
+      const module = { id: 'module-id' };
+      const transition = { to: { queryParams: { grainIndex: '3' } } };
+
+      // when
+      route.afterModel({ module }, transition);
+
+      // then
+      sinon.assert.calledOnceWithExactly(modulixNavigationProgress.computeCurrentSectionByGrainIndex, module, 3);
+      assert.ok(true);
+    });
+
+    test('should not call computeCurrentSectionByGrainIndex when grainIndex is absent from query params', function (assert) {
+      // given
+      const route = this.owner.lookup('route:module.passage');
+      const modulixNavigationProgress = this.owner.lookup('service:modulix-navigation-progress');
+      modulixNavigationProgress.computeCurrentSectionByGrainIndex = sinon.stub();
+
+      const module = { id: 'module-id' };
+      const transition = { to: { queryParams: {} } };
+
+      // when
+      route.afterModel({ module }, transition);
+
+      // then
+      sinon.assert.notCalled(modulixNavigationProgress.computeCurrentSectionByGrainIndex);
+      assert.ok(true);
+    });
+  });
+
   module('#redirect', function () {
     test('should call replaceWith function with the right arguments', async function (assert) {
       // given

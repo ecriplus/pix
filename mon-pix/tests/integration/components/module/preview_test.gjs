@@ -82,11 +82,58 @@ module('Integration | Component | Module | Preview', function (hooks) {
       assert.dom(displayJsonButton).doesNotExist();
     });
 
+    test('should display the grain navigation form', async function (assert) {
+      // given
+      const moduleData = {
+        title: 'Existing module',
+        sections: [{ type: 'blank', grains: [{ title: 'Grain 1', components: [] }] }],
+      };
+
+      // when
+      const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('pages.modulix.preview.grain-select.button') })).exists();
+    });
+
+    module('#goToModuleGrain', function () {
+      test('should transition to module.passage with the selected grain index', async function (assert) {
+        // given
+        const router = this.owner.lookup('service:router');
+        const transitionToStub = sinon.stub(router, 'transitionTo');
+        const navigationProgress = this.owner.lookup('service:modulix-navigation-progress');
+        sinon.stub(navigationProgress, 'setCurrentSectionIndex');
+
+        const moduleData = {
+          title: 'Existing module',
+          sections: [
+            {
+              type: 'blank',
+              grains: [
+                { title: 'Grain 1', components: [] },
+                { title: 'Grain 2', components: [] },
+              ],
+            },
+          ],
+        };
+        const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.modulix.preview.grain-select.button') }));
+
+        // then
+        sinon.assert.calledOnceWithExactly(transitionToStub, 'module.passage', moduleData, {
+          queryParams: { grainIndex: '0' },
+        });
+        assert.ok(true);
+      });
+    });
+
     module('when has a section', function () {
       module('when section is type "blank"', function () {
         test('should not display section title', async function (assert) {
           // given
-          const moduleData = { title: 'Existing module', sections: [{ type: 'blank' }] };
+          const moduleData = { title: 'Existing module', sections: [{ type: 'blank', grains: [] }] };
           const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
 
           // then
@@ -100,7 +147,7 @@ module('Integration | Component | Module | Preview', function (hooks) {
           // given
           const moduleData = {
             title: 'Existing module',
-            sections: [{ type: 'question-yourself' }],
+            sections: [{ type: 'question-yourself', grains: [] }],
           };
           const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
 
@@ -118,7 +165,7 @@ module('Integration | Component | Module | Preview', function (hooks) {
           // given
           const moduleData = {
             title: 'Existing module',
-            sections: [{ type: 'practise' }],
+            sections: [{ type: 'practise', grains: [] }],
           };
           const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
 
@@ -131,6 +178,14 @@ module('Integration | Component | Module | Preview', function (hooks) {
         });
       });
     });
+  });
+
+  test('should not display grain navigation form when no module is provided', async function (assert) {
+    // when
+    const screen = await render(<template><ModulixPreview /></template>);
+
+    // then
+    assert.dom(screen.queryByRole('button', { name: t('pages.modulix.preview.grain-select.button') })).doesNotExist();
   });
 
   test('should display a button display elements id', async function (assert) {

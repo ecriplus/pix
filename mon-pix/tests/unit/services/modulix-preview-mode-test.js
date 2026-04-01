@@ -23,6 +23,20 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
     assert.true(previewMode.isEnabled);
   });
 
+  module('disable', function () {
+    test('it disables preview mode', function (assert) {
+      // given
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
+      previewMode.enable();
+
+      // when
+      previewMode.disable();
+
+      // then
+      assert.false(previewMode.isEnabled);
+    });
+  });
+
   module('isElementsIdButtonEnabled', function () {
     test('it should be enabled by default', function (assert) {
       // when

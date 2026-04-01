@@ -1781,6 +1781,11 @@
           },
           "label": "De ID's van de elementen weergeven"
         },
+        "grain-select": {
+          "button": "Grain testen",
+          "grain-label": "Grain {index} : {title}",
+          "label": "Kies het te testen grain"
+        },
         "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",
         "stepper": "Preview : stepper {direction}",
