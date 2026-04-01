@@ -54,6 +54,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         isBeta,
         version,
         visibility,
+        glossary: [],
       });
       moduleFromDomain.setRedirectionUrl(redirectionUrl);
       const expectedJson = {
@@ -68,6 +69,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             'is-beta': isBeta,
             details,
             version,
+            glossary: [],
           },
           relationships: {
             sections: {
@@ -115,6 +117,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         isBeta,
         version,
         visibility,
+        glossary: [],
       });
       const expectedJson = {
         data: {
@@ -127,6 +130,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             'is-beta': isBeta,
             details,
             version,
+            glossary: [],
           },
           relationships: {
             sections: {
@@ -174,6 +178,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
         isBeta,
         version,
         visibility,
+        glossary: [],
       });
       const expectedJson = {
         data: {
@@ -186,6 +191,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             'is-beta': isBeta,
             details,
             version,
+            glossary: [],
           },
           relationships: {
             sections: {
@@ -261,6 +267,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             ],
           },
         ],
+        glossary: [],
       });
 
       // when
@@ -276,6 +283,7 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | ModuleSerial
             'is-beta': isBeta,
             version,
             details,
+            glossary: [],
           },
           id: 'id',
           relationships: {
