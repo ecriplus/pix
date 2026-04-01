@@ -757,8 +757,8 @@
         "create": "Creare la campagna",
         "delete": "Cancellare"
       },
-      "combined-course-blueprints-label": "Selezionare un piano di percorso",
-      "combined-course-blueprints-list-label": "Selezionare un piano di percorso",
+      "combined-course-blueprints-label": "Seleziona un percorso di apprendimento",
+      "combined-course-blueprints-list-label": "Seleziona un percorso di apprendimento",
       "copy-of": "Copia di",
       "external-id-label": {
         "label": "Formulazione dell'identificatore",
@@ -800,7 +800,8 @@
       "purpose": {
         "assessment": "Valutazione dei partecipanti",
         "assessment-info": "Una campagna di valutazione consente ai partecipanti di essere testati su argomenti specifici.",
-        "combined-course": "Creare un percorso combinato",
+        "combined-course": "Sviluppare le competenze dei partecipanti",
+        "combined-course-info": "Un percorso di apprendimento aiuta i partecipanti ad acquisire nuove competenze.",
         "exam": "Modalità di interrogazione",
         "exam-info": "Una campagna in \"modalità quiz\" consente di sottoporre i partecipanti a test su argomenti specifici, senza tenere conto del loro profilo utente e senza influire su di esso. I test proposti sono personalizzati per ogni partecipante, a seconda del livello di avanzamento del corso.",
         "label": "Qual è l'obiettivo della vostra campagna?",

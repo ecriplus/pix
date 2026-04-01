@@ -757,8 +757,8 @@
         "create": "Crear la campaña",
         "delete": "Borrar"
       },
-      "combined-course-blueprints-label": "Seleccione un plan de ruta",
-      "combined-course-blueprints-list-label": "Seleccione un plan de ruta",
+      "combined-course-blueprints-label": "Seleccionar una vía de aprendizaje",
+      "combined-course-blueprints-list-label": "Seleccionar una vía de aprendizaje",
       "copy-of": "Copia de",
       "external-id-label": {
         "label": "Texto del identificador",
@@ -800,7 +800,8 @@
       "purpose": {
         "assessment": "Evaluación de los participantes",
         "assessment-info": "Una campaña de evaluación permite poner a prueba a los participantes sobre temas concretos.",
-        "combined-course": "Crear una ruta combinada",
+        "combined-course": "Desarrollar las competencias de los participantes",
+        "combined-course-info": "Una vía de aprendizaje ayuda a los participantes a adquirir nuevas competencias.",
         "exam": "Modo de consulta",
         "exam-info": "Una campaña en \"modo test\" permite examinar a los participantes sobre temas específicos, sin tener en cuenta su perfil de usuario ni influir en él. Los tests propuestos son personalizados para cada participante, en función de lo avanzado que esté en el curso.",
         "label": "¿Cuál es el objetivo de su campaña?",

@@ -259,15 +259,17 @@ export default class CreateForm extends Component {
                 <:label>{{t "pages.campaign-creation.purpose.assessment"}}</:label>
               </PixRadioButton>
 
-              <PixRadioButton
-                name="campaign-goal"
-                @value="collect-participants-profile"
-                {{on "change" this.setCampaignGoal}}
-                aria-describedby="campaign-goal-profiles-collection-info"
-                checked={{this.isCampaignGoalProfileCollection}}
-              >
-                <:label>{{t "pages.campaign-creation.purpose.profiles-collection"}}</:label>
-              </PixRadioButton>
+              {{#if this.hasCombinedCourseBlueprintShares}}
+                <PixRadioButton
+                  name="campaign-goal"
+                  @value="combined-course"
+                  {{on "change" this.setCampaignGoal}}
+                  aria-describedby="combined-course-info"
+                  checked={{this.isCombinedCourseGoal}}
+                >
+                  <:label>{{t "pages.campaign-creation.purpose.combined-course"}}</:label>
+                </PixRadioButton>
+              {{/if}}
 
               {{#if this.isCreateCampaignOftypeExamEnabled}}
                 <PixRadioButton
@@ -281,17 +283,15 @@ export default class CreateForm extends Component {
                 </PixRadioButton>
               {{/if}}
 
-              {{#if this.hasCombinedCourseBlueprintShares}}
-                <PixRadioButton
-                  name="campaign-goal"
-                  @value="combined-course"
-                  {{on "change" this.setCampaignGoal}}
-                  aria-describedby="combined-course-info"
-                  checked={{this.isCombinedCourseGoal}}
-                >
-                  <:label>{{t "pages.campaign-creation.purpose.combined-course"}}</:label>
-                </PixRadioButton>
-              {{/if}}
+              <PixRadioButton
+                name="campaign-goal"
+                @value="collect-participants-profile"
+                {{on "change" this.setCampaignGoal}}
+                aria-describedby="campaign-goal-profiles-collection-info"
+                checked={{this.isCampaignGoalProfileCollection}}
+              >
+                <:label>{{t "pages.campaign-creation.purpose.profiles-collection"}}</:label>
+              </PixRadioButton>
 
               {{#if @errors.type}}
                 <div class="form__error error-message">
@@ -313,6 +313,12 @@ export default class CreateForm extends Component {
               <:title>{{t "pages.campaign-creation.purpose.assessment"}}</:title>
 
               <:message>{{t "pages.campaign-creation.purpose.assessment-info"}}</:message>
+            </ExplanationCard>
+          {{else if this.isCombinedCourseGoal}}
+            <ExplanationCard id="combined-course-info">
+              <:title>{{t "pages.campaign-creation.purpose.combined-course"}}</:title>
+
+              <:message>{{t "pages.campaign-creation.purpose.combined-course-info"}}</:message>
             </ExplanationCard>
           {{else if this.isCampaignGoalProfileCollection}}
             <ExplanationCard id="campaign-goal-profiles-collection-info">
