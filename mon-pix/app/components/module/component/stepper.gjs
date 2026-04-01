@@ -152,7 +152,7 @@ export default class ModulixStepper extends Component {
   }
 
   get isHorizontalDirection() {
-    return this.args.direction === ModuleGrain.STEPPER_DIRECTION.HORIZONTAL && !this.modulixPreviewMode.isEnabled;
+    return this.args.direction === ModuleGrain.STEPPER_DIRECTION.HORIZONTAL;
   }
 
   get isPreviousButtonControlDisabled() {
@@ -168,9 +168,13 @@ export default class ModulixStepper extends Component {
   }
 
   get direction() {
-    return this.isHorizontalDirection
+    return this.canUseHorizontalStepperDesign
       ? ModuleGrain.STEPPER_DIRECTION.HORIZONTAL
       : ModuleGrain.STEPPER_DIRECTION.VERTICAL;
+  }
+
+  get canUseHorizontalStepperDesign() {
+    return this.isHorizontalDirection && !this.modulixPreviewMode.isEnabled;
   }
 
   @action
@@ -204,7 +208,7 @@ export default class ModulixStepper extends Component {
       aria-roledescription="{{t 'pages.modulix.stepper.aria-role-description'}}"
       {{didInsert this.modulixAutoScroll.setHTMLElementScrollOffsetCssProperty}}
     >
-      {{#if this.isHorizontalDirection}}
+      {{#if this.canUseHorizontalStepperDesign}}
         <div class="stepper__controls">
           <PixIconButton
             @ariaLabel={{t "pages.modulix.buttons.stepper.controls.previous.ariaLabel"}}
