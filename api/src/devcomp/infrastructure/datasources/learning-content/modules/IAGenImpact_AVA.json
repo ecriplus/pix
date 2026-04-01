@@ -60,28 +60,28 @@
                     "id": "1",
                     "content": "<p>Une carte mère</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non !</strong></p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
+                      "diagnosis": "<p><strong>Eh non !</strong></p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Une carte graphique ou GPU</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
+                      "diagnosis": "<p>Bien vu ! </p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Un disque dur SSD</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il s'agit d'une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
+                      "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   }
                 ],
