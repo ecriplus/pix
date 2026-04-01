@@ -112,11 +112,11 @@
                 "props": {
                   "conversation1": {
                     "title": "Exemple 1",
-                    "llmName": ""
+                    "llmName": "ChatPix"
                   },
                   "conversation2": {
                     "title": "Exemple 2",
-                    "llmName": ""
+                    "llmName": "ChatPix"
                   },
                   "userName": "Yasmine",
                   "messages": [
@@ -141,7 +141,7 @@
             {
               "type": "element",
               "element": {
-                "id": "c829b624-f3b1-466b-b4a4-a5fc63708f1e",
+                "id": "d0207bf0-7267-4877-a80d-adfda8f6d7e5",
                 "type": "qcu-discovery",
                 "instruction": "À votre avis, dans quel exemple le logiciel d’IA conversationnelle a-t-il fait appel à un outil ?",
                 "hasShortProposals": false,
