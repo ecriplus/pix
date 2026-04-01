@@ -131,7 +131,16 @@ export default class CombinedCoursePresentation extends Component {
   }
 
   get isSurveyEnabled() {
-    return this.featureToggles.featureToggles?.isSurveyEnabledForCombinedCourses;
+    const surveyEnabledForCombinedCourses = this.featureToggles.featureToggles?.isSurveyEnabledForCombinedCourses;
+
+    if (!ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST) return surveyEnabledForCombinedCourses;
+
+    const organizationsToExclude = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST.split(',');
+
+    return (
+      surveyEnabledForCombinedCourses &&
+      !organizationsToExclude.includes(this.args.combinedCourse.organizationId.toString())
+    );
   }
 
   get surveyLink() {

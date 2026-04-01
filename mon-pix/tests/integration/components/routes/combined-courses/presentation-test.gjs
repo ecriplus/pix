@@ -2,6 +2,7 @@ import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CombinedCoursesPresentation from 'mon-pix/components/routes/combined-courses/presentation';
+import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -431,6 +432,7 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
         id: 1,
         status: CombinedCourseStatuses.COMPLETED,
         code: 'COMBINIX9',
+        organizationId: 123,
       });
 
       // when
@@ -448,6 +450,60 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
         );
       assert.dom(link).hasAttribute('target', '_blank');
       assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
+    });
+
+    test('should not display survey cta when organization is in the exclusion list', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: true });
+
+      const originalExcluded = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST;
+      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = '123,456';
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+        organizationId: 123,
+      });
+
+      // when
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
+
+      // then
+      assert.notOk(screen.queryByRole('link', { name: t('pages.combined-courses.completed.survey-button') }));
+
+      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = originalExcluded;
+    });
+
+    test('should display survey cta when organization is not in the exclusion list', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: true });
+
+      const originalExcluded = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST;
+      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = '456,789';
+
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+        organizationId: 123,
+      });
+
+      // when
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
+
+      // then
+      assert.ok(screen.queryByRole('link', { name: t('pages.combined-courses.completed.survey-button') }));
+
+      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = originalExcluded;
     });
     test('should display retry text for modules if there are any in the course', async function (assert) {
       // given
