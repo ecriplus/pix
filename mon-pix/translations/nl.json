@@ -2337,10 +2337,12 @@
         "title": "Je e-mailadres wijzigen"
       },
       "connexion-methods": {
+        "add-email": "Een e-mailadres toevoegen",
         "authentication-methods": {
-          "gar": "via ENT/Mediacentre",
+          "connection-via": "Inloggen via {identityProviderOrganizationName}",
+          "gar": "Inloggen via ENT/Mediacentre",
           "label": "Externe aansluiting",
-          "via": "via {identityProviderOrganizationName}"
+          "other-authentication-label": "Een andere manier om verbinding te maken"
         },
         "edit-button": "Bewerk",
         "email": "E-mailadres",

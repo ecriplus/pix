@@ -2348,10 +2348,12 @@
         "title": "Modification de votre adresse e-mail"
       },
       "connexion-methods": {
+        "add-email": "Ajouter une adresse e-mail",
         "authentication-methods": {
-          "gar": "via ENT/Mediacentre",
+          "connection-via": "Connexion via {identityProviderOrganizationName}",
+          "gar": "Connexion via ENT/Mediacentre",
           "label": "Connexion externe",
-          "via": "via {identityProviderOrganizationName}"
+          "other-authentication-label": "Autre méthode de connexion"
         },
         "edit-button": "Modifier",
         "email": "Adresse e-mail",

@@ -68,21 +68,38 @@ import UpdateEmailWithValidation from 'mon-pix/components/user-account/update-em
         </div>
       {{/if}}
 
+      {{#if @controller.canAddEmailConnectionMethod}}
+        <div class="user-account-panel__item">
+          <div class="user-account-panel-item__text">
+            <p class="form-textfield__label user-account-panel-item__label">{{t
+                "pages.user-account.connexion-methods.email"
+              }}</p>
+            <p class="user-account-panel-item__value">
+              —
+            </p>
+          </div>
+          <PixButton class="user-account-panel-item__add-email-button" @size="small">
+            {{t "pages.user-account.connexion-methods.add-email"}}
+          </PixButton>
+        </div>
+      {{/if}}
+
       {{#each @controller.oidcAuthenticationMethodOrganizationNames as |organizationName|}}
         <div class="user-account-panel__item">
           <div class="user-account-panel-item__text">
             <p class="form-textfield__label user-account-panel-item__label">
-              {{t "pages.user-account.connexion-methods.authentication-methods.label"}}
+              {{t "pages.user-account.connexion-methods.authentication-methods.other-authentication-label"}}
             </p>
             <p class="user-account-panel-item__value">
               {{t
-                "pages.user-account.connexion-methods.authentication-methods.via"
+                "pages.user-account.connexion-methods.authentication-methods.connection-via"
                 identityProviderOrganizationName=organizationName
               }}
             </p>
           </div>
         </div>
       {{/each}}
+
     {{/if}}
   </div>
 </template>

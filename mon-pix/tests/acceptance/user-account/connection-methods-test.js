@@ -72,8 +72,10 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
       const screen = await visit('/mon-compte/methodes-de-connexion');
 
       // then
-      assert.ok(screen.getByText(t('pages.user-account.connexion-methods.authentication-methods.label')));
-      assert.ok(screen.getByText('via Partenaire OIDC'));
+      assert.ok(
+        screen.getByText(t('pages.user-account.connexion-methods.authentication-methods.other-authentication-label')),
+      );
+      assert.ok(screen.getByText('Connexion via Partenaire OIDC'));
     });
 
     module('e-mail address', function () {
@@ -113,6 +115,36 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
           // then
           assert.dom(screen.queryByText(t('pages.user-account.email-confirmed'))).doesNotExist();
         });
+      });
+    });
+
+    module('when canAddEmailConnectionMethod conditions are true', function () {
+      test('displays empty email label and add email button', async function (assert) {
+        // given
+        server.create('feature-toggle', { id: '0', addEmailConnectionMethodEnabled: true });
+
+        const userDetails = {
+          email: 'only.sso@example.net',
+        };
+        const user = server.create('user', 'withCanAddEmailConnectionMethod', userDetails);
+        server.create('authentication-method', 'withGenericOidcIdentityProvider', { user });
+
+        // when
+        await authenticate(user);
+        const screen = await visit('/mon-compte/methodes-de-connexion');
+
+        // then
+        assert.dom(screen.getByText(t('pages.user-account.connexion-methods.email'))).exists();
+        assert.dom(screen.getByText('—')).exists();
+        assert.dom(screen.getByRole('button', { name: t('pages.user-account.connexion-methods.add-email') })).exists();
+        // other connection methods
+        assert
+          .dom(
+            screen.getByText(
+              t('pages.user-account.connexion-methods.authentication-methods.other-authentication-label'),
+            ),
+          )
+          .exists();
       });
     });
   });
