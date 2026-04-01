@@ -1470,7 +1470,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
       // given
       const previewMode = this.owner.lookup('service:modulix-preview-mode');
 
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const grain = { components: [{ type: 'element', element: textElement }] };
       const section = { id: 'section1', type: 'blank', grains: [grain] };
       const module = { title: 'Module title', sections: [section] };
@@ -1486,7 +1486,7 @@ module('Integration | Component | Module | Passage', function (hooks) {
 
   module('when grainIndex is provided', function () {
     function buildModuleWithGrains(count) {
-      const textElement = { content: 'content', type: 'text' };
+      const textElement = { content: 'content', type: 'text', tag: ' ' };
       const grains = Array.from({ length: count }, () => ({
         components: [{ type: 'element', element: textElement }],
       }));
