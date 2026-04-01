@@ -243,7 +243,7 @@
                 "id": "d8c78172-4027-44f7-abe4-c316d4da0925",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0.</p><p> Le<strong> prompt système</strong> est l’instruction  donnée au logiciel d’IA pour définir son comportement et les outils qu’il peut mobiliser. Il n’est pas visible des utilisateurs.</p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants&nbsp;: <br>- l’application de musique&nbsp;: pour lancer ou arrêter une musique, <br>- la calculatrice: pour effectuer des calculs numériques.<br> <br> Règles d’utilisation&nbsp;: <br>1. Si l’utilisateur demande explicitement le&nbsp; lancement ou l’arrêt d’une musique, tu DOIS appeler l’outil `application de musique`.<br> <br>2. Si la demande peut être résolue par un calcul mathématique,&nbsp;tu DOIS appeler l’outil `calculatrice`. <br>3. Si aucun outil n’est approprié, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil&nbsp;: <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid<br><br><br></code><br></blockquote>"
+                "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0.</p><p> Le<strong> prompt système</strong> est l’instruction  donnée au logiciel d’IA pour définir son comportement et les outils qu’il peut mobiliser. Il n’est pas visible des utilisateurs.</p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants&nbsp;: <br>- l’application de musique&nbsp;: pour lancer ou arrêter une musique, <br>- la calculatrice : pour effectuer des calculs numériques.<br> <br> Règles d’utilisation&nbsp;: <br>1. Si l’utilisateur demande explicitement le&nbsp; lancement ou l’arrêt d’une musique, tu DOIS appeler l’outil `application de musique`.<br> <br>2. Si la demande peut être résolue par un calcul mathématique,&nbsp;tu DOIS appeler l’outil `calculatrice`. <br>3. Si aucun outil n’est approprié, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil&nbsp;: <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid<br><br><br></code><br></blockquote>"
               }
             },
             {
@@ -397,7 +397,7 @@
                       "id": "582588be-aeba-495e-9eaf-fb4b703ade17",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Les développeurs configurent les logiciels d’IA pour faire appel à des outils. Pour cela, ils définissent les <strong>paramètres </strong>de l’outil dans le prompt système&nbsp;: ils décrivent pour chaque outil&nbsp;: son nom, son contexte d’utilisation (objectif, finalité), ses valeurs d’entrées, le format de la réponse attendue, etc.&nbsp;</p>"
+                      "content": "<p>Les développeurs configurent les logiciels d’IA pour faire appel à des outils. Pour cela, ils définissent les <strong>paramètres </strong>de l’outil dans le prompt système&nbsp;. Ils décrivent pour chaque outil&nbsp;: son nom, son contexte d’utilisation (objectif, finalité), ses valeurs d’entrées, le format de la réponse attendue, etc.&nbsp;</p>"
                     }
                   ]
                 },
@@ -464,7 +464,7 @@
                 "id": "7831fafa-8342-49ad-b93d-8c46106966ab",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Une fois les outils définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l’IA ?</p><p>C’est que nous allons voir dans cette dernière partie.</p>"
+                "content": "<p>Une fois les outils définis,&nbsp;que se passe-t-il exactement lorsque nous faisons une demande à l’IA ?</p><p>C’est ce que nous allons voir dans cette dernière partie.</p>"
               }
             }
           ]
@@ -600,8 +600,8 @@
                           "type": "select",
                           "input": "tool",
                           "display": "inline",
-                          "placeholder": "- Sélectionner -",
-                          "ariaLabel": "- Sélectionner -",
+                          "placeholder": "- Sélectionnez -",
+                          "ariaLabel": "- Sélectionnez -",
                           "tolerances": [
                             ""
                           ],
@@ -631,8 +631,8 @@
                           "type": "select",
                           "input": "location",
                           "display": "inline",
-                          "placeholder": "- Sélectionner -",
-                          "ariaLabel": "- Sélectionner -",
+                          "placeholder": "- Sélectionnez -",
+                          "ariaLabel": "- Sélectionnez -",
                           "tolerances": [],
                           "options": [
                             {
@@ -661,7 +661,7 @@
                           "input": "date",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
-                          "ariaLabel": "- Sélectionner -",
+                          "ariaLabel": "- Sélectionnez -",
                           "tolerances": [],
                           "options": [
                             {
@@ -928,7 +928,7 @@
                     "input": "rechercheImage",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
-                    "ariaLabel": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionnez -",
                     "tolerances": [
                       ""
                     ],
@@ -955,7 +955,7 @@
                     "input": "productionGraphique",
                     "display": "inline",
                     "placeholder": "- Sélectionnez - ",
-                    "ariaLabel": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionnez -",
                     "tolerances": [],
                     "options": [
                       {
