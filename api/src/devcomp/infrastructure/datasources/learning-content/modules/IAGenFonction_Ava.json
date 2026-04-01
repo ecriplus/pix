@@ -1055,7 +1055,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Le logiciel d’IA conversationnelle va avoir besoin de faire appel à des outils&nbsp;:</p><ul><li> l’<strong>agenda </strong>pour le rendez-vous avec le cuisiniste,</li><li>la <strong>recherche sur internet</strong> pour donner des sources,&nbsp;</li><li> et la <strong>calculatrice </strong>pour l’estimation du nombre de lames pour la terrasse.</li></ul>"
+                  "diagnosis": "<p>Le logiciel d’IA conversationnelle va avoir besoin de faire appel à des outils&nbsp;:</p><ul><li> la <strong>commande en ligne </strong>pour l'achat de l'escabeau et des rouleaux de peinture,</li><li>la <strong>recherche sur internet</strong> pour donner des sources,&nbsp;</li><li> et la <strong>calculatrice </strong>pour l’estimation du nombre de lames pour la terrasse.</li></ul>"
                 }
               }
             }
@@ -1087,11 +1087,11 @@
                       },
                       {
                         "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur."
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
                       },
                       {
                         "id": "6",
@@ -1120,11 +1120,11 @@
                       },
                       {
                         "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur."
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
                       },
                       {
                         "id": "6",
@@ -1153,11 +1153,11 @@
                       },
                       {
                         "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur."
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
                       },
                       {
                         "id": "6",
@@ -1186,11 +1186,11 @@
                       },
                       {
                         "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur."
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
                       },
                       {
                         "id": "6",
@@ -1219,11 +1219,11 @@
                       },
                       {
                         "id": "5",
-                        "content": "La réponse de l’outil est intégré au contexte du prompt de l’utilisateur."
+                        "content": "La réponse de l’outil est intégrée au contexte du prompt de l’utilisateur."
                       },
                       {
                         "id": "2",
-                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un est utile pour répondre à la demande."
+                        "content": "Le logiciel d’IA analyse le prompt et détermine qu’un outil est utile pour répondre à la demande."
                       },
                       {
                         "id": "6",
@@ -1269,7 +1269,7 @@
               "element": {
                 "id": "65220197-b2bf-4f2d-ad5d-7d6ef8d11070",
                 "type": "qcu-declarative",
-                "instruction": "<p>Vous en savez maintenant davantage sur les appel d’outils.</p><p>Que pouvez-vous dire de leurs usages&nbsp; dans votre utilisation de l’IA ?<br></p>",
+                "instruction": "<p>Vous en savez maintenant davantage sur les appels à des outils.</p><p>Que pouvez-vous dire de leurs usages&nbsp; dans votre utilisation de l’IA ?<br></p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
