@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les logiciels d’intelligence artificielle génératives sont de plus en plus utilisés, mais leur entraînement et leur utilisation a un impact considérable sur l’environnement.&nbsp; <br> Avec ce module, vous allez comprendre pourquoi les intelligences artificielles ont un impact sur l’environnement et découvrir quelques pistes pour limiter cet impact.<br><br></p>",
+    "description": "<p>Les logiciels d’intelligence artificielle générative sont de plus en plus utilisés, mais leur entraînement et leur utilisation ont un impact considérable sur l’environnement.&nbsp; <br> Avec ce module, vous allez comprendre pourquoi les intelligences artificielles ont un impact sur l’environnement et découvrir quelques pistes pour limiter cet impact.<br><br></p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -45,7 +45,7 @@
                 "alt": "Un homme tient un objet dans sa main.",
                 "alternativeText": "",
                 "legend": "",
-                "licence": "Image provisoire - nous n'avons pas les droits"
+                "licence": "Image provisoire - nous n’avons pas les droits"
               }
             },
             {
@@ -53,35 +53,35 @@
               "element": {
                 "id": "1d281c04-2639-4bf8-a3da-7bda4de2f3e1",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, qu’est-ce que c’est ?&nbsp;</p>",
+                "instruction": "<p>À votre avis, qu’est-ce que c’est ?&nbsp;</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Une carte mère</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Eh non !</strong></p><p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p>"
+                      "diagnosis": "<p><strong>Eh non !</strong></p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Une carte graphique ou GPU</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;</p>"
+                      "diagnosis": "<p>Bien vu ! </p><p>C’est une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Un disque dur SSD</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p>\n<p>C'est une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong>&nbsp;</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il s'agit d'une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphical Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p>"
+                      "diagnosis": "<p>Il s’agit d’une carte graphique, <strong>GPU </strong>en anglais (Graphics Processing Unit), un composant qui peut être ajouté dans un ordinateur pour pouvoir <strong>faire très rapidement certains types de calcul.</strong></p><p>Quand il calcule, le GPU chauffe et doit être refroidi, d’où les <strong>ventilateurs </strong>visibles sur la photo.</p>"
                     }
                   }
                 ],
@@ -101,7 +101,7 @@
                 "id": "b2582fac-a970-4816-a870-d41380e4912e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Initialement utilisées pour des calculs graphiques (modélisation 3D, jeux vidéos, etc.), les cartes graphiques sont aujourd'hui aussi très utilisées pour l'entraînement des logiciels d'intelligence artificielle. </p>\n<p>Cela nous donne un indice sur ce que veut faire Charlie…</p>"
+                "content": "<p>Initialement utilisées pour des calculs graphiques (modélisation 3D, jeux vidéos, etc.), les cartes graphiques sont aujourd’hui aussi très utilisées pour l’entraînement des logiciels d’intelligence artificielle. </p><p>Cela nous donne un indice sur ce que veut faire Charlie…</p>"
               }
             }
           ]
@@ -123,7 +123,7 @@
                 "id": "b984fed2-3e75-479e-848b-d9d82780b742",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Charlie veut entraîner une IA générative : ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
+                "content": "<p>Charlie veut entraîner une IA générative&nbsp;: ChatPix 4.0. Il se demande de combien de GPU il a besoin.<br></p>"
               }
             }
           ]
@@ -131,7 +131,7 @@
         {
           "id": "70454e6e-4c38-4291-a73c-49d9bd5aabfe",
           "type": "discovery",
-          "title": "L'entraînement et le matériel (GPU)",
+          "title": "L’entraînement et le matériel (GPU)",
           "components": [
             {
               "type": "stepper",
@@ -143,8 +143,8 @@
                       "id": "86ca396e-2a5e-493f-88f9-648d76ce1437",
                       "type": "custom",
                       "title": "Estimer le nombre de GPU",
-                      "instruction": "<p>À votre avis, combien de GPU ont été mobilisé pour l’entraînement de GPT-4 ?<br></p>",
-                      "functionalInstruction": "<p><br></p>",
+                      "instruction": "<p>À votre avis, combien de GPU ont été mobilisés pour l’entraînement de GPT-4 ?<br></p>",
+                      "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -152,49 +152,49 @@
                             "label": "1",
                             "feedback": {
                               "type": "bad",
-                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "25",
                             "feedback": {
                               "type": "bad",
-                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "100",
                             "feedback": {
                               "type": "bad",
-                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "2 500",
                             "feedback": {
                               "type": "bad",
-                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "Beaucoup plus ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "10 000",
                             "feedback": {
                               "type": "close",
-                              "text": "On s'approche ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "On s’approche ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "25 000",
                             "feedback": {
                               "type": "good",
-                              "text": "Bien vu ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "Bien vu ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           },
                           {
                             "label": "100 000",
                             "feedback": {
                               "type": "close",
-                              "text": "C'était moins ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
+                              "text": "C’était moins ! <br> L’entraînement de GPT-4 a mobilisé 25 000 GPU. <br> L’un des fournisseurs le plus connu de GPU est NVIDIA."
                             }
                           }
                         ]
@@ -207,8 +207,8 @@
                     {
                       "id": "e054fb2e-6bcc-4c70-b1b0-89926c9f5ba0",
                       "type": "custom",
-                      "title": "Estimer la durée de vie d'un GPU",
-                      "instruction": "<p>À votre avis, quelle est la durée de vie d’un GPU ?&nbsp;</p>",
+                      "title": "Estimer la durée de vie d’un GPU",
+                      "instruction": "<p>À votre avis, quelle est la durée de vie d’un GPU ?&nbsp;</p>",
                       "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
@@ -224,35 +224,35 @@
                             "label": "5 ans",
                             "feedback": {
                               "type": "good",
-                              "text": "Bien vu ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                              "text": "Bien vu ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
                             }
                           },
                           {
                             "label": "10 ans",
                             "feedback": {
                               "type": "bad",
-                              "text": "C'était moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                              "text": "C’était moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
                             }
                           },
                           {
                             "label": "15 ans",
                             "feedback": {
                               "type": "bad",
-                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                              "text": "C’était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
                             }
                           },
                           {
                             "label": "20 ans",
                             "feedback": {
                               "type": "bad",
-                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                              "text": "C’était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
                             }
                           },
                           {
                             "label": "25 ans",
                             "feedback": {
                               "type": "bad",
-                              "text": "C'était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
+                              "text": "C’était beaucoup moins ! <br> Les cartes GPU ont une durée de vie estimée à 5 ans environ.  Cette durée de vie est courte. Le renouvellement de ces cartes nécessitera d’extraire à nouveau des métaux et des terres rares."
                             }
                           }
                         ]
@@ -267,7 +267,7 @@
         {
           "id": "b8ffb7b0-fcf5-46e5-b7eb-34079b86f6b1",
           "type": "short-lesson",
-          "title": "L'impact environnemental des GPU",
+          "title": "L’impact environnemental des GPU",
           "components": [
             {
               "type": "element",
@@ -275,7 +275,7 @@
                 "id": "b9694946-e4c2-4808-8d37-4da5da289474",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les GPU sont des pièces maîtresses des centres de données dédiés à l'intelligence artificielle.</p><p><br></p><h5>Et quel est l’impact des GPU sur l’environnement ? </h5><p>La fabrication des GPU nécessite beaucoup de matières premières (métaux, terres rares, pétrole …), et leur utilisation consomme énormément d'électricité. Les GPU ont donc un fort impact négatif sur l'environnement, d’autant qu’il faut les renouveler souvent et que les services d'intelligence artificielle modernes nécessitent énormément de GPU pour fonctionner.</p>"
+                "content": "<p>Les GPU sont des pièces maîtresses des centres de données dédiés à l’intelligence artificielle.</p><h5>Et quel est l’impact des GPU sur l’environnement ? </h5><p>La fabrication des GPU nécessite beaucoup de <strong>matières premières </strong>(métaux, terres rares, pétrole …), et leur utilisation consomme énormément d’<strong>électricité</strong>. </p><p>Les GPU ont donc un fort impact négatif sur l’environnement, d’autant qu’il faut les <strong>renouveler souvent</strong> et que les services d’intelligence artificielle modernes nécessitent énormément de GPU pour fonctionner. Cela génère beaucoup de <strong>déchets électroniques</strong>, dont une grande partie n’est pas recyclable</p>"
               }
             }
           ]
@@ -291,7 +291,7 @@
                 "id": "4d216976-f4a0-484c-8758-8984e25f14c7",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Mais pourquoi a-t-on besoin de GPU pour entraîner l'IA ?</p>"
+                "content": "<p>Mais pourquoi a-t-on besoin de GPU pour entraîner l’IA ?</p>"
               }
             }
           ]
@@ -299,7 +299,7 @@
         {
           "id": "959fd22d-b5fa-4fae-bd74-17f78867fea0",
           "type": "discovery",
-          "title": "L’énergie consommée par l'entraînement des IA",
+          "title": "L’énergie consommée par l’entraînement des IA",
           "components": [
             {
               "type": "element",
@@ -307,7 +307,7 @@
                 "id": "286099b2-22c1-405e-b6d0-ade39745c27e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Maintenant qu’il a acheté des cartes graphiques, Charlie veut entraîner ChatPix 4.0. </p>\n<p>Pour cela, les cartes graphiques doivent faire un grand nombre de calculs, ce qui demande de l’énergie. &nbsp;</p>\n<p>Charlie fait attention à sa facture d’électricité : il se demande combien cela va consommer d’énergie. </p>"
+                "content": "<p>Maintenant qu’il a acheté des cartes graphiques, Charlie veut entraîner ChatPix 4.0. </p><p>Pour cela, les cartes graphiques doivent faire un grand nombre de calculs, ce qui demande de l’énergie. &nbsp;</p><p>Charlie fait attention à sa facture d’électricité&nbsp;: il se demande combien cela va consommer d’énergie. </p>"
               }
             },
             {
@@ -318,7 +318,7 @@
                 "url": "https://assets.pix.org/draft/modules/IAGenImpact_AVA/futur-poi.png",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "à l'avenir ce sera un POI",
+                "legend": "à l’avenir ce sera un POI",
                 "licence": ""
               }
             },
@@ -327,7 +327,7 @@
               "element": {
                 "id": "52e4defe-8d35-4ceb-b8a8-b7a8f16a859b",
                 "type": "qrocm",
-                "instruction": "<p>D'après vos observations, que peut-on dire ?</p>",
+                "instruction": "<p>D’après vos observations, que peut-on dire ?</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -360,7 +360,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br></p><p>Si la taille du jeu de données d'entraînement augmente, la consommation</p>"
+                    "content": "<p>Si la taille du jeu de données d’entraînement augmente, la consommation</p>"
                   },
                   {
                     "type": "select",
@@ -390,12 +390,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bien vu !<br></p>",
-                    "diagnosis": "<p>Par exemple, l'entraînement du modèle<strong> GPT-4</strong> d'OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p>\n<p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d'électricité qu'une ville française de 30000 habitants.</p>"
+                    "state": "<p>Bien vu !<br></p>",
+                    "diagnosis": "<p>Par exemple, l’entraînement du modèle<strong> GPT-4</strong> d’OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p><p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d’électricité qu’une ville française de 30000 habitants.</p>"
                   },
                   "invalid": {
-                    "state": "<p>Eh non !</p><p>Plus un modèle d'IA a un grand nombre de paramètres, et plus on l'entraîne sur de grandes quantités de données, plus son entraînement consomme.</p>",
-                    "diagnosis": "<p>Par exemple, l'entraînement du modèle<strong> GPT-4</strong> d'OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p>\n<p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d'électricité qu'une ville française de 30000 habitants.</p>"
+                    "state": "<p>Eh non !</p><p>Plus un modèle d’IA a un grand nombre de paramètres, et plus on l’entraîne sur de grandes quantités de données, plus son entraînement consomme.</p>",
+                    "diagnosis": "<p>Par exemple, l’entraînement du modèle<strong> GPT-4</strong> d’OpenAI, sorti en 2023, avait plusieurs <strong>centaines de milliards de paramètres.</strong> </p><p>Son entraînement a nécessité <strong>14 semaines de calculs en continu</strong>, en consommant quotidiennement autant d’électricité qu’une ville française de 30000 habitants.</p>"
                   }
                 }
               }
@@ -405,7 +405,7 @@
         {
           "id": "c4035d28-df59-4d17-aea2-8e50560d5bf6",
           "type": "short-lesson",
-          "title": "L'impact de l'utilisation de l'IA",
+          "title": "L’impact de l’utilisation de l’IA",
           "components": [
             {
               "type": "stepper",
@@ -427,7 +427,7 @@
                       "id": "2c1c5be2-a58d-475d-afec-dc7b6ad88e8e",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d'IA : ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d'IA génératives, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</strong></strong></p>"
+                      "content": "<h5>Et une fois le modèle entraîné ? </h5><p>Les centres données sont également sollicités au moment de l’utilisation des logiciels d’IA&nbsp;: ils sont nécessaires pour effectuer des calculs et stocker des informations pour générer des réponses. Du fait de l’explosion des usages des logiciels d’IA générative, <strong>l’impact de leur utilisation dépasse maintenant celui de leur entraînement<strong> et va probablement encore augmenter.</strong></strong></p>"
                     }
                   ]
                 },
@@ -437,7 +437,7 @@
                       "id": "5878e032-208b-4e28-94d2-9fb5e1b47884",
                       "type": "text",
                       "tag": " ",
-                      "content": "À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d'IA génératives.<p></p>"
+                      "content": "<p>À titre d’exemple, les émissions de GES de Google ont augmenté de 50% entre 2019 et 2023, ainsi que sa consommation d’eau (+20 à 30% de 2021 à 2023), principalement en raison du développement des logiciels d’IA générative&nbsp;et de l’expansion de ses centres de données.</p>"
                     }
                   ]
                 },
@@ -447,7 +447,7 @@
                       "id": "7bce7710-e3e0-4626-a366-c341bc7661aa",
                       "type": "text",
                       "tag": " ",
-                      "content": "Cette massification résulte notamment d'une volonté des acteurs du numérique d'<strong>imposer l'usage des logiciels d'IA</strong> dans les outils numériques existants, et dans leurs entreprises.<p></p>"
+                      "content": "Cette massification résulte notamment d’une volonté des acteurs du numérique d’<strong>imposer l’usage des logiciels d’IA</strong> dans les outils numériques existants, et dans leurs entreprises.<p></p>"
                     }
                   ]
                 }
@@ -474,11 +474,11 @@
         {
           "id": "810809d9-dd02-42db-8951-7e33c5fdcff6",
           "type": "discovery",
-          "title": "Quels leviers du côté des entreprises d'IA ?",
+          "title": "Quels leviers du côté des entreprises d’IA ?",
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>Les dirigeants des entreprises d'IA génératives, beaucoup plus célèbres et puissants que Charlie, accordent parfois des interviews. </p>\n<p>Examinez ces citations et dites si, d’après vous, elles sont vraie ou fausse ?</p>",
+              "instruction": "<p>Les dirigeants des entreprises d’IA générative, beaucoup plus célèbres et puissants que Charlie, accordent parfois des interviews. </p><p>Examinez ces citations et dites si, d’après vous, elles sont vraies ou fausses ?</p>",
               "steps": [
                 {
                   "elements": [
@@ -486,26 +486,26 @@
                       "id": "d3016051-7665-4f96-ba28-8bcf7fb6982d",
                       "type": "text",
                       "tag": " ",
-                      "content": "<blockquote>« L’IA accroît si fortement la demande en énergie que le système actuel ne peut pas totalement gérer cette augmentation. Mais cela stimule d’importants investissements dans l’énergie solaire, nucléaire, les batteries, etc. C’est pourquoi, en tant que spécialiste des nouvelles technologies, je suis optimiste quant à l’abondance des sources d’énergie renouvelables à l’avenir. »</blockquote><p>Sundar Pichai, PDG de Google, novembre 2025</p>"
+                      "content": "<blockquote>«&nbsp;L’IA accroît si fortement la demande en énergie que le système actuel ne peut pas totalement gérer cette augmentation. Mais cela stimule d’importants investissements dans l’énergie solaire, nucléaire, les batteries, etc. C’est pourquoi, en tant que spécialiste des nouvelles technologies, je suis optimiste quant à l’abondance des sources d’énergie renouvelables à l’avenir.&nbsp;»</blockquote><p>Sundar Pichai, PDG de Google, novembre 2025</p>"
                     },
                     {
                       "id": "4901c36d-6247-4a82-b8d7-61b5b208cc6d",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "instruction": "<p>Selon vous, le PDG de Google a-t-il vraiment dit cela ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vraie",
+                          "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Elle est issue d'<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture<strong> techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>La citation est issue d’<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture<strong> techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Fausse",
+                          "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p>\n<p>Elle est issue d'<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture <strong>techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
+                            "diagnosis": "<p>Et pourtant, si !</p><p>La citation est issue d’<a href=\"https://www.youtube.com/watch?v=BYx63PKKPvg\" target=\"_blank\">une interview réalisée par la BBC</a>. </p><p>Elle illustre une posture <strong>techno-solutionniste</strong> qui ne prend pas en compte l’effet rebond ni les limites planétaires.</p>"
                           }
                         }
                       ],
@@ -519,26 +519,26 @@
                       "id": "661c6598-89a7-4205-a7dc-fde03fe70566",
                       "type": "text",
                       "tag": " ",
-                      "content": "<blockquote>« Je pense que l'open source est nécessaire pour un futur positif avec l'IA. [...] L'open source va garantir un accès aux bénéfices et aux opportunités de l'IA à plus de personnes dans le monde, que ce pouvoir ne soit pas concentré entre les mains d'une poignée d'entreprises, et que cette technologie puisse être déployée de façon plus équilibrée et sécurisée au sein de la société. » </blockquote><p>Mark Zuckerberg, dirigeant de Meta, juillet 2024<br></p>"
+                      "content": "<blockquote>«&nbsp;Je pense que l’open source est nécessaire pour un futur positif avec l’IA. [...] L’open source va garantir un accès aux bénéfices et aux opportunités de l’IA à plus de personnes dans le monde, que ce pouvoir ne soit pas concentré entre les mains d’une poignée d’entreprises, et que cette technologie puisse être déployée de façon plus équilibrée et sécurisée au sein de la société.&nbsp;» </blockquote><p>Mark Zuckerberg, dirigeant de Meta, juillet 2024<br></p>"
                     },
                     {
                       "id": "6f836928-8c45-4326-8dc5-8d23d829d9eb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "instruction": "<p>Selon vous, le dirigeant de Meta a-t-il&nbsp; vraiment dit cela ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vraie",
+                          "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p><p>Elle est issue d'un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p> Beaucoup d'entreprises d'IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent des modèles présentés comme “ouvert”, mais ni le code d'entraînement ni les données d'entraînement ne le sont.</p>"
+                            "diagnosis": "<p>Bien vu !</p><p>Elle est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p> Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouverts”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Fausse",
+                          "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p>\n<p>Elle est issue d'un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p>\n<p> Beaucoup d'entreprises d'IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent des modèles présentés comme “ouvert”, mais ni le code d'entraînement ni les données d'entraînement ne le sont.</p>"
+                            "diagnosis": "<p>Et pourtant si !</p><p>La cituation est issue d’un article du <a href=\"https://www.theguardian.com/technology/article/2024/jul/23/meta-launches-open-source-ai-app-competitive-with-closed-rivals?utm_source=chatgpt.com\" target=\"_blank\">journal britannique The Guardian</a>.</p><p>Beaucoup d’entreprises d’IA générative proposent des modèles complètement fermés. Certaines, comme Meta, proposent certains modèles présentés comme “ouverts”, mais ni le code d’entraînement ni les données d’entraînement ne sont accessibles.</p>"
                           }
                         }
                       ],
@@ -552,26 +552,26 @@
                       "id": "a4a3eb56-162b-417e-a764-c381edbc8cb5",
                       "type": "text",
                       "tag": " ",
-                      "content": "<blockquote>« Nous avons mené une étude inédite afin de quantifier les impacts environnementaux de nos grands modèles de langage (LLM). Notre ambition : fournir une analyse claire de l’empreinte environnementale de l’IA et contribuer à établir un nouveau standard pour notre industrie. »</blockquote><p>Article de blog de Mistral AI, 22 juillet 2025</p>"
+                      "content": "<blockquote>«&nbsp;Nous avons mené une étude inédite afin de quantifier les impacts environnementaux de nos grands modèles de langage (LLM). Notre ambition&nbsp;: fournir une analyse claire de l’empreinte environnementale de l’IA et contribuer à établir un nouveau standard pour notre industrie.&nbsp;»</blockquote><p>Article de blog de Mistral AI, 22 juillet 2025</p>"
                     },
                     {
                       "id": "770eba88-d331-436c-9b00-c810e0705023",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Cette citation est-elle vraie ou fausse ?</p>",
+                      "instruction": "<p>Selon vous, le blog de Mistral a-t-il vraiment affirmé cela ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Vraie",
+                          "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Et pourtant, c'est une vraie citation !</p><p>La plupart des entreprises conceptrices de logiciels d'IA générative ne publient aucune étude sur leurs impacts environnementaux. À l'heure actuelle, Mistral AI est l'une des seules à avoir publié une étude, et seulement partiellement.</p>"
+                            "diagnosis": "<p>Et pourtant, c’est une vraie citation !</p><p>La plupart des entreprises conceptrices de logiciels d’IA générative ne publient aucune étude sur leurs impacts environnementaux. À l’heure actuelle, Mistral AI est l’une des seules à avoir publié une étude.&nbsp;Cependant, cette étude est partielle et seule une synthèse a été publiée.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Fausse",
+                          "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Et pourtant,</p><p>La plupart des entreprises conceptrices de logiciels d'IA générative ne publient aucune étude sur leurs impacts environnementaux. À l'heure actuelle, Mistral AI est l'une des seules à avoir publié une étude, et seulement partiellement.</p>"
+                            "diagnosis": "<p>Et pourtant, si !</p><p>La plupart des entreprises conceptrices de logiciels d’IA générative ne publient aucune étude sur leurs impacts environnementaux. À l’heure actuelle, Mistral AI est l’une des seules à avoir publié une étude.&nbsp;Cependant, cette étude est partielle et seule une synthèse a été publiée.</p>"
                           }
                         }
                       ],
@@ -586,7 +586,7 @@
         {
           "id": "0ec7d0c2-0f68-4d34-b515-ea7f8ddcea68",
           "type": "short-lesson",
-          "title": "Leçon : quelle piste pour réduire l'impact",
+          "title": "Leçon : quelle piste pour réduire l’impact",
           "components": [
             {
               "type": "stepper",
@@ -598,7 +598,7 @@
                       "id": "974d179b-fa0b-4312-a156-e0521cb95089",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>En théorie, <strong>les concepteurs d'IA générative disposent de plusieurs moyens d'action pour réduire leur impact sur l'environnement</strong> : faire des études d'impact et les publier, entraîner moins de nouveaux modèles, améliorer leurs logiciels et leurs infrastructures pour qu'elles consomment moins d'énergie…</p>"
+                      "content": "<p>En théorie, <strong>les concepteurs d’IA générative disposent de plusieurs moyens d’action pour réduire leur impact sur l’environnement</strong>&nbsp;: </p><ul><li>faire des études d’impact et les publier, </li><li>entraîner moins de nouveaux modèles, </li><li>améliorer leurs logiciels et leurs infrastructures pour qu’elles consomment moins d’énergie,</li><li>inciter leurs utilisateurs à n’utiliser l’IA générative que pour des usages pertinents, etc.</li></ul>"
                     }
                   ]
                 },
@@ -608,7 +608,7 @@
                       "id": "8519af0e-fb12-4bbf-8435-62c853decfdb",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>… mais généralement <strong>ils n'en font rien</strong>. L'économie de l'intelligence artificielle est très concurrentielle et vise principalement à faire des profits. La réduction des impacts environnementaux est donc rarement une priorité pour les concepteurs.</p>"
+                      "content": "<p>… mais généralement <strong>ils n’en font rien</strong>. L’économie de l’intelligence artificielle est très concurrentielle et vise principalement à faire des profits. La réduction des impacts environnementaux est donc rarement une priorité pour les concepteurs.</p>"
                     }
                   ]
                 },
@@ -618,7 +618,7 @@
                       "id": "71326633-9b59-4fc5-a33a-c5ac633daac9",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>En tant qu'utilisateur, que pouvons-nous faire ?</h5>On peut adopter une démarche de <strong>sobriété</strong> et réduire autant que possible notre utilisation des logiciels d'intelligence artificielle.<p></p>"
+                      "content": "<h5>En tant qu’utilisateur, que pouvons-nous faire ?</h5>On peut adopter une démarche de <strong>sobriété</strong> et réduire autant que possible notre utilisation des logiciels d’intelligence artificielle.<p></p>"
                     }
                   ]
                 }
@@ -635,7 +635,7 @@
         {
           "id": "7336e586-dec1-41bf-b351-4b53cdce98fd",
           "type": "summary",
-          "title": "Récap'",
+          "title": "Récap’",
           "components": [
             {
               "type": "element",
@@ -643,7 +643,7 @@
                 "id": "280fa165-c7a5-44f2-b82e-bdcc6a28c16a",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li><strong>Entraîner</strong> et <strong>faire fonctionner</strong> un modèle d'intelligence artificielle nécessite de faire énormément de <strong>calculs</strong>.</li><li>Ces calculs sont faits dans des centres de données avec du matériel spécialisé, comme des <strong>cartes graphiques (GPU)</strong>, qui nécessitent <strong>beaucoup de ressources pour être fabriquées</strong>, <strong>beaucoup d'électricité pour fonctionner</strong>, et ont une <strong>durée de vie courte</strong>. Tout cela a un fort impact négatif sur l'environnement.</li><li>Pour limiter ces impacts, les concepteurs d'intelligence artificielle pourraient :<ul><li>mener des <strong>études scientifiques</strong> sur leurs impacts, et les rendre <strong>publiques</strong></li><li>entraîner moins de nouveaux modèles</li><li>améliorer leurs techniques afin de réduire leur impact.</li></ul></li><li>Malheureusement, la plupart des concepteurs ne mènent pas ces actions car elles ne <strong>s'inscrivent pas dans leur modèle économique</strong>.</li><li>À titre individuel, on peut essayer de <strong>réduire autant que possible notre utilisation</strong> des logiciels d'intelligence artificielle pour limiter ses impacts environnementaux</li></ul>"
+                "content": "<ul><li><strong>Entraîner</strong> et <strong>faire fonctionner</strong> un modèle d’intelligence artificielle nécessite de faire énormément de <strong>calculs</strong>.</li><li>Ces calculs sont faits dans des centres de données avec du matériel spécialisé, comme des <strong>cartes graphiques (GPU)</strong>, qui nécessitent <strong>beaucoup de ressources pour être fabriquées</strong>, <strong>beaucoup d’électricité pour fonctionner</strong>, et ont une <strong>durée de vie courte</strong>. Tout cela a un fort impact négatif sur l’environnement.</li><li>Pour limiter ces impacts, les concepteurs d’intelligence artificielle pourraient davantage&nbsp;:<ul><li>mener des <strong>études scientifiques</strong> sur leurs impacts, et les rendre <strong>publiques</strong></li><li>entraîner moins de nouveaux modèles</li><li>améliorer leurs techniques afin de réduire leur impact.</li></ul></li><li>Malheureusement, la plupart des concepteurs ne mènent pas ces actions car elles ne <strong>s’inscrivent pas dans leur modèle économique</strong>.</li><li>À titre individuel, on peut essayer de <strong>réduire autant que possible notre utilisation</strong> des logiciels d’intelligence artificielle pour limiter ses impacts environnementaux</li></ul>"
               }
             }
           ]
@@ -668,14 +668,14 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>L'entraînement des logiciels d'intelligence artificielle nécessitent des&nbsp;</p>"
+                    "content": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des&nbsp;</p>"
                   },
                   {
                     "type": "select",
                     "input": "choice1",
                     "display": "inline",
-                    "placeholder": "Séctionnez une réponse",
-                    "ariaLabel": "Séctionnez une réponse",
+                    "placeholder": "Sélectionnez une réponse",
+                    "ariaLabel": "Sélectionnez une réponse",
                     "tolerances": [],
                     "options": [
                       {
@@ -719,12 +719,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonne réponse !<br></p>",
-                    "diagnosis": "<p>L'entraînement des logiciels d'intelligence artificielle nécessitent des <strong>centres de données</strong> spécialisés, équipés de <strong>cartes graphiques (GPU)</strong>.</p>"
+                    "state": "<p>Bonne réponse !<br></p>",
+                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des <strong>centres de données</strong> spécialisés, équipés de <strong>cartes graphiques (GPU)</strong>.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas vraiment ...<br></p>",
-                    "diagnosis": "<p>L'entraînement des logiciels d'intelligence artificielle nécessitent des centres de données spécialisés, équipés de cartes graphiques (GPU).</p>"
+                    "diagnosis": "<p>L’entraînement des logiciels d’intelligence artificielle nécessite des centres de données spécialisés, équipés de cartes graphiques (GPU).</p>"
                   }
                 }
               }
@@ -750,11 +750,11 @@
                     "options": [
                       {
                         "id": "1",
-                        "content": "un fort impact sur l'environnement"
+                        "content": "un fort impact sur l’environnement"
                       },
                       {
                         "id": "2",
-                        "content": "un impact réduit sur l'environnement"
+                        "content": "un impact réduit sur l’environnement"
                       }
                     ],
                     "solutions": [
@@ -763,7 +763,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p> d'autant plus qu'il a &nbsp;<br></p>"
+                    "content": "<p> d’autant plus qu’il a &nbsp;<br></p>"
                   },
                   {
                     "type": "select",
@@ -789,12 +789,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonne réponse !<br></p>",
-                    "diagnosis": "<p>Ce matériel a <strong>un fort impact sur l'environnement</strong> d'autant plus qu'il a <strong>une durée de vie courte</strong>.</p>"
+                    "state": "<p>Bonne réponse !<br></p>",
+                    "diagnosis": "<p>Ce matériel a <strong>un fort impact sur l’environnement</strong> d’autant plus qu’il a <strong>une durée de vie courte</strong>.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas vraiment ...<br></p>",
-                    "diagnosis": "<p>Ce matériel a <strong>un fort impact sur l'environnement</strong> d'autant plus qu'il a <strong>une durée de vie courte</strong>.</p>"
+                    "diagnosis": "<p>Ce matériel a <strong>un fort impact sur l’environnement</strong> d’autant plus qu’il a <strong>une durée de vie courte</strong>.</p>"
                   }
                 }
               }
@@ -815,7 +815,7 @@
                 "cards": [
                   {
                     "id": "9de053d0-cec9-4244-abfd-74fd40d06a79",
-                    "text": "L’impact environnemental de l’entraînement des IA est plus important que l’impact de leur usages.",
+                    "text": "L’impact environnemental de l’entraînement des IA est plus important que l’impact de leurs usages.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -859,7 +859,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>En résumé :&nbsp;</p><ul><li> Du fait de l'essor des usages, l’impact <strong>environnemental des usages</strong> est désormais <strong>plus important</strong>&nbsp;que celui de l’entraînement des IA.</li><li>L’entraînement de ChatGPT-4 a bien mobilisé des centres de données pendant des semaines en continu.</li><li>L’entraînement de ChatGPT a nécessité bien plus d'une centaine de GPU, cela se compte en milliers.</li><li>Les GPU nécessitent bien l’extraction de nombreux minerais, comme la plupart de notre matériel informatique.</li></ul>"
+                  "diagnosis": "<p>En résumé&nbsp;:&nbsp;</p><ul><li> Du fait de l’essor des usages, l’impact <strong>environnemental des usages</strong> est désormais <strong>plus important</strong>&nbsp;que celui de l’entraînement des IA.</li><li>L’entraînement de ChatGPT-4 a bien mobilisé des centres de données pendant des semaines en continu.</li><li>L’entraînement de ChatGPT a nécessité bien plus d’une centaine de GPU, cela se compte en milliers.</li><li>Les GPU nécessitent bien l’extraction de nombreux minerais, comme la plupart de notre matériel informatique.</li></ul>"
                 }
               }
             }
@@ -875,7 +875,7 @@
               "element": {
                 "id": "b6105600-ded6-45dc-b0c4-5879aec035fc",
                 "type": "qcm",
-                "instruction": "<p>Sélectionnez les actions que pourraient mener les concepteurs de logiciels d'intelligence artificielle pour réduire leur impact sur l'environnement.</p>",
+                "instruction": "<p>Sélectionnez les actions que pourraient mener les concepteurs de logiciels d’intelligence artificielle pour réduire leur impact sur l’environnement.</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -884,7 +884,7 @@
                   },
                   {
                     "id": "1",
-                    "content": "<p>Augmenter les prix de leurs logiciels pour financer des plantations d'arbres</p>"
+                    "content": "<p>Augmenter les prix de leurs logiciels pour financer des plantations d’arbres</p>"
                   },
                   {
                     "id": "2",
@@ -901,12 +901,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonnes réponses !<br></p>",
-                    "diagnosis": "<p>Pour réduire leur impact sur l'environnement, les concepteurs de logiciels d'intelligence artificielles pourraient, par exemple :</p>\n<ul>\n    <li>Entraîner moins de nouveaux modèles</li>\n    <li>Utiliser en priorité des énergies renouvelables</li>\n    <li>Publier des études scientifiques rigoureuses sur leurs impacts</li>\n</ul>"
+                    "state": "<p>Bonnes réponses !<br></p>",
+                    "diagnosis": "<p>Pour réduire leur impact sur l’environnement, les concepteurs de logiciels d’intelligence artificielles pourraient, par exemple&nbsp;:</p><ul>    <li>Entraîner moins de nouveaux modèles</li>    <li>Utiliser en priorité des énergies renouvelables</li>    <li>Publier des études scientifiques rigoureuses sur leurs impacts</li></ul>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait ...<br></p>",
-                    "diagnosis": "<p>Pour réduire leur impact sur l'environnement, les concepteurs de logiciels d'intelligence artificielles pourraient, par exemple :</p>\n<ul>\n    <li>Entraîner moins de nouveaux modèles</li>\n    <li>Utiliser en priorité des énergies renouvelables</li>\n    <li>Publier des études scientifiques rigoureuses sur leurs impacts</li>\n</ul>"
+                    "diagnosis": "<p>Pour réduire leur impact sur l’environnement, les concepteurs de logiciels d’intelligence artificielles pourraient, par exemple&nbsp;:</p><ul>    <li>Entraîner moins de nouveaux modèles</li>    <li>Utiliser en priorité des énergies renouvelables</li>    <li>Publier des études scientifiques rigoureuses sur leurs impacts</li></ul>"
                   }
                 },
                 "solutions": [
@@ -931,38 +931,38 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p>En août 2025, Google a publié une <a href=\"https://blog.google/intl/fr-fr/nouveautes-produits/dans-le-cloud/quelle-consommation-energetique-pour-lia-de-google-nous-avons-fait-le-calcul/\">étude des impacts environnementaux de ses logiciels d'intelligence artificielle</a>.</p><p>Répondez aux questions suivantes à propos de cette étude.</p>",
+              "instruction": "<p>En août 2025, Google a publié une <a href=\"https://blog.google/intl/fr-fr/nouveautes-produits/dans-le-cloud/quelle-consommation-energetique-pour-lia-de-google-nous-avons-fait-le-calcul/\">étude des impacts environnementaux de ses logiciels d’intelligence artificielle</a>.</p><p>Répondez aux questions suivantes à propos de cette étude.</p>",
               "steps": [
                 {
                   "elements": [
                     {
                       "id": "6ff2f836-1331-46c0-8e8b-373d55f69ed8",
                       "type": "qcu",
-                      "instruction": "<p>D'après l'étude, quelle est l'impact d'une requête à Gemini ?</p>",
+                      "instruction": "<p>D’après l’étude, quel est l’impact d’une requête à Gemini ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "<p>0,024&nbsp;wattheure (Wh) d'énergie</p>",
+                          "content": "<p>0,024&nbsp;wattheure (Wh) d’énergie</p>",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>D'après l'étude de Google, la consommation d'énergie médiane d'une requête à Gemini est de&nbsp;<strong>0,24&nbsp;wattheure (Wh)</strong>.</p>"
+                            "state": "<p>Eh non ! La réponse était 0,24&nbsp;wattheure (Wh).</p>",
+                            "diagnosis": "<p>Ce chiffre est plutôt encourageant, mais attention&nbsp;: la médiane ne prend pas en compte les valeurs extrêmes&nbsp;!&nbsp; La consommation d’énergie <strong>moyenne </strong>pourrait être bien <strong>plus élevée</strong>.</p><p>De plus Google ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>24&nbsp;wattheure (Wh) d'énergie</p>",
+                          "content": "<p>24&nbsp;wattheure (Wh) d’énergie</p>",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>D'après l'étude de Google, la consommation d'énergie médiane d'une requête à Gemini est de&nbsp;<strong>0,24&nbsp;wattheure (Wh)</strong>.</p>"
+                            "state": "<p>Eh non !&nbsp;La réponse était 0,24&nbsp;wattheure (Wh).</p>",
+                            "diagnosis": "<p>Ce chiffre est plutôt encourageant, mais attention&nbsp;: la médiane ne prend pas en compte les valeurs extrêmes&nbsp;!&nbsp; La consommation d’énergie <strong>moyenne </strong>pourrait être bien<strong> plus élevé</strong><strong>e</strong>. </p><p>De plus Google ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>0,24&nbsp;wattheure (Wh) d'énergie</p>",
+                          "content": "<p>0,24&nbsp;wattheure (Wh) d’énergie</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>D'après l'étude de Google, la consommation d'énergie médiane d'une requête à Gemini est de&nbsp;<strong>0,24&nbsp;wattheure (Wh)</strong>.</p>"
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Ce chiffre est plutôt encourageant, mais attention&nbsp;: la médiane ne prend pas en compte les valeurs extrêmes&nbsp;! La consommation d’énergie <strong>moyenne </strong>pourrait être bien <strong>plus élevée</strong>. </p><p> De plus Google ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
                           }
                         }
                       ],
@@ -973,26 +973,16 @@
                 {
                   "elements": [
                     {
-                      "id": "54e226c3-30bb-4f57-b697-94903e1a3cb3",
-                      "type": "text",
-                      "tag": " ",
-                      "content": "<p>Ce chiffre est plutôt encourageant, mais attention : la médiane ne prend pas en compte les valeurs extrêmes&nbsp;!La consommation d'énergie <strong>moyenne</strong> pourrait être bien <strong>plus élevée</strong>.</p><p>De plus G<strong>oogle ne communique pas sur le nombre&nbsp;total de&nbsp;requêtes</strong>, notamment les requêtes non sollicitées, par exemple celles pour résumer une réponse dans la page du moteur de recherche Google.</p>"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
                       "id": "b8c93cd6-27d2-42de-8b4f-350b7521986e",
                       "type": "qcu",
-                      "instruction": "<p>Est-ce que l'estimation de Google prend en compte l’entraînement du modèle ?</p>",
+                      "instruction": "<p>Est-ce que l’estimation de Google prend en compte l’entraînement du modèle ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "0",
                           "content": "Oui",
                           "feedback": {
-                            "state": "<p>Eh non ! Cette estimation ne prend pas en compte l'entraînement du modèle.</p>",
+                            "state": "<p>Eh non ! Cette estimation ne prend pas en compte l’entraînement du modèle.</p>",
                             "diagnosis": "<p>Or, on a vu que l’entraînement était extrêmement coûteux en énergie.</p>"
                           }
                         },
@@ -1000,12 +990,12 @@
                           "id": "1",
                           "content": "Non",
                           "feedback": {
-                            "state": "<p>Bonne réponse ! Cette estimation ne prend pas en compte l'entraînement du modèle.</p>",
+                            "state": "<p> Bonne réponse ! Cette estimation ne prend pas en compte l’entraînement du modèle.</p>",
                             "diagnosis": "<p>Or, on a vu que l’entraînement était extrêmement coûteux en énergie.</p>"
                           }
                         }
                       ],
-                      "solution": "0"
+                      "solution": "1"
                     }
                   ]
                 },
@@ -1014,14 +1004,14 @@
                     {
                       "id": "a6404aac-9164-4e80-93b6-1288130f064e",
                       "type": "qcu",
-                      "instruction": "<p>Est-ce que cette étude a été revue par des chercheurs externes ?</p>",
+                      "instruction": "<p>Est-ce que cette étude a été relue et validée par des scientifiques indépendants ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "0",
                           "content": "Oui",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
+                            "state": "<p>Eh non !</p>",
                             "diagnosis": "<p>Même si cette étude a une apparence d’un article de recherche, elle n’a pas été revue par une autorité ou des chercheurs externes à Google. On peut donc questionner son impartialité.</p>"
                           }
                         },
@@ -1029,7 +1019,7 @@
                           "id": "1",
                           "content": "Non",
                           "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
+                            "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Même si cette étude a une apparence d’un article de recherche, elle n’a pas été revue par une autorité ou des chercheurs externes à Google. On peut donc questionner son impartialité.</p>"
                           }
                         }
