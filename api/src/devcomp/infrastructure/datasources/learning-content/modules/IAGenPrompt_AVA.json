@@ -415,6 +415,15 @@
                 "tag": " ",
                 "content": "<p>Ce que vous venez de faire s’appelle le <strong>few-shot prompting</strong>.</p><p>Cette méthode consiste à donner à l’IA un ou plusieurs exemples concrets du type de réponse attendu, avant de lui demander de produire un nouveau contenu qui respecte la structure des exemples fournis.</p><h5>🤔 Quel est l’intérêt de cette méthode ?</h5><p>Lorsque la consigne est abstraite ou difficile à formuler, les exemples permettent de lever les ambiguïtés&nbsp;: ils précisent le style, le ton, le niveau d’exigence ou le format attendu.</p>"
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "eb52f337-184a-4422-ad7b-5c9b04f930b9",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>Vous pouvez mettre des exemples sous forme de documents en pièce jointe de votre prompt mais également en tant que texte dans votre prompt en mettrant les exemples en guillemets ou entres des balise &lt;exemple&gt; pour que le logiciel les interprète bien comme tel.&nbsp;<br></p>"
+              }
             }
           ]
         }
@@ -613,7 +622,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>. Si je veux que l’IA rende sa réponse plus structurée, je peux activer le&nbsp;</span>"
+                    "content": "<p><span>. <br>Si je veux que l’IA rende sa réponse plus structurée, je peux activer le&nbsp;</span></p>"
                   },
                   {
                     "type": "select",
@@ -642,7 +651,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span> en lui demandant d’expliquer sa démarche. Quand mon besoin est flou, je peux demander à l’IA de me poser des&nbsp;</span>"
+                    "content": "<p><span> en lui demandant d’expliquer sa démarche. <br> Quand mon besoin est flou, je peux demander à l’IA de me poser des&nbsp;</span></p>"
                   },
                   {
                     "type": "select",
@@ -700,7 +709,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<span>. Et si je n’arrive pas à formuler ma demande, je peux demander à l’IA de reformuler mon besoin en un prompt clair&nbsp;: c’est le&nbsp;</span>"
+                    "content": "<p><span>. <br>Et si je n’arrive pas à formuler ma demande, je peux demander à l’IA de reformuler mon besoin en un prompt clair&nbsp;: c’est le&nbsp;</span></p>"
                   },
                   {
                     "type": "select",
@@ -745,22 +754,6 @@
               }
             }
           ]
-        },
-        {
-          "id": "91eede86-d80e-46e6-93f9-f591c14890ae",
-          "type": "activity",
-          "title": "Activité 3",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "223fa171-a00c-4853-83f3-0c800f03f9b7",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Sera un QCU tableau qui montre des prompt et demande de donner la technique associée. <br></p>"
-              }
-            }
-          ]
         }
       ]
     },
@@ -778,40 +771,40 @@
               "element": {
                 "id": "3db037ce-03c3-482c-b82c-68bdd445ed70",
                 "type": "qcu-declarative",
-                "instruction": "<p>Quelle technique vue dans ce module allez-vous utiliser la prochaine fois que vous travaillerez avec un logiciel&nbsp;d’IA générative&nbsp;?</p>",
+                "instruction": "<p>Quelle technique vue dans ce module avez-vous hâte d'essayer ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p><strong>Prompt chaining</strong>&nbsp;: découper la tâche en plusieurs étapes.</p>",
+                    "content": "<p><strong>Ddécouper la tâche en plusieurs étapes. (Prompt chaining)</strong></p>",
                     "feedback": {
                       "diagnosis": "<p>Bon choix&nbsp;! Découper une demande complexe aide à garder la main, à vérifier chaque étape et à éviter les oublis.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p><strong>Chain-of-thought</strong>&nbsp;: demander à l’IA d’expliciter sa démarche.</p>",
+                    "content": "<p>Demander à l’IA d’expliciter sa démarche. (Chain-of-thought)</p>",
                     "feedback": {
                       "diagnosis": "<p>Intéressant&nbsp;! Ça peut rendre la réponse plus structurée et faire apparaître des hypothèses… mais cela ne remplace pas la vérification.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p><strong>Situation réflexive</strong>&nbsp;: demander à l’IA de poser des questions avant de proposer un plan.</p>",
+                    "content": "<p>Demander à l’IA de poser des questions avant de proposer un plan. (Situation réflexive)</p>",
                     "feedback": {
                       "diagnosis": "<p>Très bon réflexe&nbsp;! Quand le besoin est flou, les questions aident à cadrer et à construire une réponse plus adaptée.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p><strong>Métaprompting</strong>&nbsp;: demander à l’IA de reformuler votre besoin en un prompt clair.</p>",
+                    "content": "<p>Demander à l’IA de reformuler votre besoin en un prompt clair. (Métaprompting)</p>",
                     "feedback": {
                       "diagnosis": "<p>Super utile&nbsp;! Ça vous aide à transformer une idée floue en consigne exploitable, surtout quand la tâche est complexe.</p>"
                     }
                   },
                   {
                     "id": "5",
-                    "content": "<p><strong>Few-shot prompting</strong>&nbsp;: fournir un exemple pour obtenir le bon format.</p>",
+                    "content": "<p>Ffournir un exemple pour obtenir le bon format. (Few-shot prompting)</p>",
                     "feedback": {
                       "diagnosis": "<p>Excellent choix&nbsp;! Quand vous voulez une mise en forme précise, un exemple est souvent plus efficace qu’une longue description.</p>"
                     }
