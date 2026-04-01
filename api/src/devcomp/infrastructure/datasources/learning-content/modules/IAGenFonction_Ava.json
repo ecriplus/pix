@@ -243,7 +243,7 @@
                 "id": "d8c78172-4027-44f7-abe4-c316d4da0925",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0.</p><p> Le<strong> prompt système</strong> est l’instruction  donnée au logiciel d’IA pour définir son comportement et les outils qu’il peut mobiliser. Il n’est pas visible des utilisateurs.</p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants&nbsp;: <br>- generate_image&nbsp;: pour générer des images <br>- calculator&nbsp;: pour effectuer des calculs numériques<br> <br> Règles d’utilisation&nbsp;: <br>1. Si l’utilisateur demande explicitement la création ou la génération d’une image, tu DOIS appeler l’outil `generate_image`. <br>2. Si la demande peut être résolue par un calcul mathématique exact,&nbsp;tu DOIS appeler l’outil `calculator`. <br>3. Si aucun outil n’est approprié, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil&nbsp;: <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid<br><br><br></code><br></blockquote>"
+                "content": "<p>Yasmine utilise un logiciel d’IA&nbsp;: ChatPix 3.0.</p><p> Le<strong> prompt système</strong> est l’instruction  donnée au logiciel d’IA pour définir son comportement et les outils qu’il peut mobiliser. Il n’est pas visible des utilisateurs.</p><p><strong>Analysez&nbsp;le prompt système de ChatPix 3.0 ci-dessous puis répondez aux questions.</strong></p><blockquote><code>Tu es un assistant doté de plusieurs outils externes. <br>Tu disposes des outils suivants&nbsp;: <br>- l’application de musique : pour lancer ou arrêter une musique, <br>- la calculatrice: pour effectuer des calculs numériques.<br> <br> Règles d’utilisation&nbsp;: <br>1. Si l’utilisateur demande explicitement le&nbsp; lancement ou l’arrêt d’une musique, tu DOIS appeler l’outil `application de musique`.<br> <br>2. Si la demande peut être résolue par un calcul mathématique,&nbsp;tu DOIS appeler l’outil `calculatrice`. <br>3. Si aucun outil n’est approprié, réponds normalement en texte.<br> <br> Lorsque tu appelles un outil&nbsp;: <br>- Ne produis aucun texte explicatif <br>- Retourne uniquement l’appel d’outil au format JSON valid<br><br><br></code><br></blockquote>"
               }
             },
             {
@@ -276,23 +276,23 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la recherche sur internet</p>",
+                          "content": "<p>l'application de musique</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p><p> Le logiciel d’IA doit mobiliser la <strong>calculatrice </strong>pour répondre à cette demande. </p><p>Cet outil est justement défini dans son prompt système.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>la génération d’image</p>",
+                          "content": "<p>la calculatrice</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p> Le logiciel d’IA doit mobiliser la <strong>calculatrice </strong>pour répondre à cette demande. </p><p>Cet outil est justement défini dans son prompt système.</p>"
+                            "diagnosis": "<p>Bien vu ! </p><p> Le logiciel d’IA doit mobiliser <strong>la calculatrice</strong> pour répondre à cette demande.  Cet outil est justement défini dans son prompt système.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>la calculatrice</p>",
+                          "content": "<p>l'agenda</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu ! </p><p>Le logiciel d’IA doit mobiliser la <strong>calculatrice </strong>pour répondre à cette demande. </p><p>Cet outil est justement défini dans son prompt système.</p>"
+                            "diagnosis": "<p>Eh non ! </p>\n<p>Le logiciel d’IA doit mobiliser la <strong>calculatrice </strong>pour répondre à cette demande. Cet outil est justement défini dans son prompt système.</p>"
                           }
                         },
                         {
@@ -310,7 +310,7 @@
                           }
                         }
                       ],
-                      "solution": "3"
+                      "solution": "2"
                     }
                   ]
                 },
@@ -327,7 +327,7 @@
                         "messages": [
                           {
                             "direction": "outbound",
-                            "content": "Quelle est l’heure de fermeture du magasin de bricolage qui ferme le plus tard à proximité de Jolieville ?"
+                            "content": "Ajoute à mon agenda le rendez-vous avec le cuisiniste qui aura lieu samedi prochain à 10h."
                           }
                         ]
                       }
@@ -340,37 +340,37 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>la recherche sur internet</p>",
+                          "content": "<p>la calculatrice</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini&nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise l'agenda pour répondre à la demande, mais <strong>cet outil n’est pas défini&nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "La génération d’image.",
+                          "content": "<p>l'application de musique<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini </strong> dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise l'agenda pour répondre à la demande, mais <strong>cet outil n’est pas défini </strong> dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "La calculatrice.",
+                          "content": "<p>l'agenda<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas défini &nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Eh non, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise l'agenda pour répondre à la demande, mais <strong>cet outil n’est pas défini &nbsp;</strong>dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Aucun outil ne va être utilisé.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>c</strong><strong>et outil n’est pas configuré </strong> dans le prompt système de ChatPix 3.0.</p>"
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Il aurait fallu que le logiciel d’IA utilise l'agenda pour répondre à la demande, mais <strong>c</strong><strong>et outil n’est pas configuré </strong> dans le prompt système de ChatPix 3.0.</p>"
                           }
                         },
                         {
                           "id": "5",
                           "content": "Je ne sais pas.",
                           "feedback": {
-                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise la recherche sur internet pour répondre à la demande, mais <strong>cet outil n’est pas configuré </strong> dans le prompt système ChatPix 3.0.</p>"
+                            "diagnosis": "<p>En fait, aucun outil ne va être utilisé !</p><p>Il aurait fallu que le logiciel d’IA utilise l'agenda pour répondre à la demande, mais <strong>cet outil n’est pas configuré </strong> dans le prompt système ChatPix 3.0.</p>"
                           }
                         }
                       ],
