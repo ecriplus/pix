@@ -1,9 +1,7 @@
-import _ from 'lodash';
-
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { fallbackChallengeLocales } from '../../../../shared/domain/services/locale-service.js';
 
-async function fetchForCampaigns({
+export async function fetchForCampaigns({
   assessment,
   answerRepository,
   campaignRepository,
@@ -39,7 +37,7 @@ async function fetchForCampaigns({
 
   return {
     allAnswers,
-    lastAnswer: _.isEmpty(allAnswers) ? null : _.last(allAnswers),
+    lastAnswer: allAnswers?.at(-1) ?? null,
     targetSkills: skills,
     challenges,
     knowledgeElements,
@@ -82,7 +80,7 @@ export async function _fetchSkillsAndChallenges({ campaignSkills, challengeRepos
   return [campaignSkills, challenges];
 }
 
-async function fetchForCompetenceEvaluations({
+export async function fetchForCompetenceEvaluations({
   assessment,
   answerRepository,
   challengeRepository,
@@ -102,11 +100,9 @@ async function fetchForCompetenceEvaluations({
 
   return {
     allAnswers,
-    lastAnswer: _.isEmpty(allAnswers) ? null : _.last(allAnswers),
+    lastAnswer: allAnswers?.at(-1) ?? null,
     targetSkills,
     challenges,
     knowledgeElements,
   };
 }
-
-export { fetchForCampaigns, fetchForCompetenceEvaluations };
