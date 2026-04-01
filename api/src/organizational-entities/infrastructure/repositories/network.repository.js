@@ -122,8 +122,28 @@ async function update(network) {
   return _toDomain(updatedNetwork);
 }
 
+/**
+ * @param {object} params
+ * @param {number} params.childOrganizationId
+ * @param {number} params.parentOrganizationId
+ * @returns {Promise<void>}
+ */
+async function attachOrganization({ childOrganizationId, parentOrganizationId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const parentFactStructure = await knexConn('id, structure_id')
+    .from('fct_structures')
+    .where({ organization_id: parentOrganizationId })
+    .first();
+
+  await knexConn('fct_structures').where({ organization_id: childOrganizationId }).update({
+    network_id: parentFactStructure.network_id,
+    parent_structure_id: parentFactStructure.structure_id,
+  });
+}
+
 function _toDomain(network) {
   return new Network(network);
 }
 
-export { findAll, findByOrganizationId, getById, save, update };
+export { attachOrganization, findAll, findByOrganizationId, getById, save, update };

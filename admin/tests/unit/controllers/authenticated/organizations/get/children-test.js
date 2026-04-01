@@ -117,16 +117,11 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
         assert.true(controller.model.organizations.reload.notCalled);
       });
 
-      test('calls notification service error for UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION error', async function (assert) {
+      test('calls notification service error for UNABLE_TO_ATTACH_TO_ORGANIZATION_NOT_IN_NETWORK error', async function (assert) {
         // given
         const childOrganizationId = '1234';
         organizationAdapter.attachChildOrganization.rejects({
-          errors: [
-            {
-              code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-              meta: {},
-            },
-          ],
+          errors: [{ code: 'UNABLE_TO_ATTACH_TO_ORGANIZATION_NOT_IN_NETWORK', meta: { childOrganizationId } }],
         });
 
         // when
@@ -136,31 +131,7 @@ module('Unit | Controller | authenticated/organizations/get/children', function 
         assert.true(
           notifications.sendErrorNotification.calledWithExactly({
             message: this.intl.t(
-              'pages.organization-children.notifications.error.unable-to-attach-child-organization-to-another-child-organization',
-            ),
-          }),
-        );
-        assert.true(controller.model.organizations.reload.notCalled);
-      });
-
-      test('calls notification service error for UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION error', async function (assert) {
-        // given
-        const childOrganizationId = '1234';
-        organizationAdapter.attachChildOrganization.rejects({
-          errors: [
-            { code: 'UNABLE_TO_ATTACH_PARENT_ORGANIZATION_AS_CHILD_ORGANIZATION', meta: { childOrganizationId } },
-          ],
-        });
-
-        // when
-        await controller.handleFormSubmitted(childOrganizationId);
-
-        // then
-        assert.true(
-          notifications.sendErrorNotification.calledWithExactly({
-            message: this.intl.t(
-              'pages.organization-children.notifications.error.unable-to-attach-parent-organization-as-child-organization',
-              { childOrganizationId },
+              'pages.organization-children.notifications.error.unable-to-attach-to-organization-not-in-network',
             ),
           }),
         );
