@@ -1,5 +1,12 @@
 # Pix Changelog
 
+# [5.375.0](https://github.com/1024pix/pix/compare/v5.374.0...v5.375.0) (2026-04-01)
+
+### :rocket: Amélioration
+
+- [#15702](https://github.com/1024pix/pix/pull/15702) Améliorer le formulaire de création de campagne pour les parcours apprenants (PIX-22160) 
+- [#15704](https://github.com/1024pix/pix/pull/15704) Anonymiser les attributs d'un prescrit lors de son anonymisation (PIX-22012)
+
 # [5.374.0](https://github.com/1024pix/pix/compare/v5.373.1...v5.374.0) (2026-04-01)
 
 ### :rocket: Amélioration
