@@ -281,9 +281,9 @@ async function _createCertificationCourse({
   const verificationCode = await verifyCertificateCodeService.generateCertificateVerificationCode();
   const complementaryCertificationCourse = complementaryCertificationCourseData
     ? new ComplementaryCertificationCourse({
-      complementaryCertificationBadgeId: complementaryCertificationCourseData.complementaryCertificationBadgeId,
-      complementaryCertificationId: complementaryCertificationCourseData.complementaryCertificationId,
-    })
+        complementaryCertificationBadgeId: complementaryCertificationCourseData.complementaryCertificationBadgeId,
+        complementaryCertificationId: complementaryCertificationCourseData.complementaryCertificationId,
+      })
     : null;
 
   const newCertificationCourse = CertificationCourse.from({
