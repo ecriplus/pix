@@ -44,7 +44,7 @@
                 "isCompletionRequired": false,
                 "title": "Simulateur Accroche",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio23",
-                "instruction": "<p>Explorez le simulateur de visioconférence ci-dessous pour compléter le texte qui suit.</p>",
+                "instruction": "<p>Observez le simulateur de visioconférence ci-dessous pour compléter le texte qui suit.</p>",
                 "solution": "",
                 "height": 550
               }
