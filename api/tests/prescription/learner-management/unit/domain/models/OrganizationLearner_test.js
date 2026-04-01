@@ -1,6 +1,8 @@
 import range from 'lodash/range.js';
 
+import { ANONYMIZATION_RULE } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
+import { OrganizationLearnerImportFormat } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerImportFormat.js';
 import { MINIMUM_CERTIFIABLE_COMPETENCES_FOR_CERTIFIABILITY } from '../../../../../../src/shared/domain/constants.js';
 import { PlacementProfile } from '../../../../../../src/shared/domain/models/PlacementProfile.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
@@ -58,6 +60,72 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
 
     afterEach(function () {
       clock.restore();
+    });
+
+    it('should anonymize attributes using importFormat rules', function () {
+      // given
+      const adminUserId = 123;
+      const organizationLearner = domainBuilder.buildOrganizationLearner({
+        attributes: { Classe: '3A', 'Date de naissance': '2005-10-03', "Planete d'origine": 'XV3290ZB' },
+      });
+      const importFormat = new OrganizationLearnerImportFormat({
+        name: 'test',
+        fileType: 'csv',
+        config: {
+          headers: [
+            {
+              name: 'Classe',
+              config: {
+                anonymize: ANONYMIZATION_RULE.CLEAR,
+                validate: { type: 'string', required: true },
+              },
+            },
+            {
+              name: "Planete d'origine",
+              config: {
+                anonymize: ANONYMIZATION_RULE.KEEP,
+                validate: { type: 'string', required: true },
+              },
+            },
+            {
+              name: 'Date de naissance',
+              config: {
+                anonymize: ANONYMIZATION_RULE.GENERALIZE_DATE,
+                validate: {
+                  type: 'date',
+                  format: 'YYYY-MM-DD',
+                  required: true,
+                },
+              },
+            },
+          ],
+        },
+        createdAt: new Date(),
+        createdBy: 1,
+      });
+
+      // when
+      organizationLearner.delete(adminUserId, importFormat);
+
+      // then
+      expect(organizationLearner.attributes).to.deep.equal({
+        'Date de naissance': '2005-01-01',
+        "Planete d'origine": 'XV3290ZB',
+      });
+    });
+
+    it('should clear attributes when no importFormat is provided', function () {
+      // given
+      const adminUserId = 123;
+      const organizationLearner = domainBuilder.buildOrganizationLearner({
+        attributes: { Classe: '3A' },
+      });
+
+      // when
+      organizationLearner.delete(adminUserId);
+
+      // then
+      expect(organizationLearner.attributes).to.be.null;
     });
 
     it('should update updatedAt, deteledAt, deletedBy and anonymised fields', function () {
@@ -139,6 +207,7 @@ describe('Unit | Domain | Models | OrganizationLearner', function () {
         educationalTeam: organizationLearner.educationalTeam,
         group: organizationLearner.group,
         diploma: organizationLearner.diploma,
+        attributes: organizationLearner.attributes,
         userId: organizationLearner.userId,
         isDisabled: organizationLearner.isDisabled,
         updatedAt: organizationLearner.updatedAt,
