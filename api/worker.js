@@ -39,7 +39,7 @@ async function exitOnSignal(signal) {
   isShuttingDown = true;
 
   logger.info(`Received signal: ${signal}.`);
-  await JobClient.instance.stop({ graceful: false, timeout: 1000, destroy: true });
+  await JobClient.instance.stop();
   await databaseConnections.disconnect();
   await metrics.clearMetrics();
   await closePubsub();

@@ -8,5 +8,5 @@ try {
   logger.error(error);
   process.exitCode = 1;
 } finally {
-  await JobClient.instance.stop({ destroy: true });
+  await JobClient.instance.stop();
 }

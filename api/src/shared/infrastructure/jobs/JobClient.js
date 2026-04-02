@@ -178,7 +178,7 @@ export class JobClient {
     await this.#pgBoss.clearStorage();
   }
 
-  async stop(options) {
+  async stop(options = { graceful: false, timeout: 1000, destroy: true }) {
     this.#assertIsInitialized();
     await this.#pgBoss.stop(options);
     this.#isInitialized = false;
