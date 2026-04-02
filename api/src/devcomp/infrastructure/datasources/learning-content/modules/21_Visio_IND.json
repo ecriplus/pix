@@ -51,7 +51,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "<p><br></p>",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
