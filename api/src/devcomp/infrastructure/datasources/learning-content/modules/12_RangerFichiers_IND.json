@@ -717,7 +717,7 @@
                 "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><br><p>Elle a commencé par ranger son dossier «&nbsp;Images&nbsp;» en créant des sous dossiers par année.<br>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière.</p>"
+                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier « Images » en créant des sous dossiers thématiques.<br>Elle souhaite maintenant ranger son dossier « Documents » de la même manière.</p>"
               }
             },
             {
@@ -737,7 +737,7 @@
                 "isCompletionRequired": false,
                 "title": "simulateur gestionnaire de fichiers",
                 "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=example&lang=fr",
-                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous&nbsp;:&nbsp; </p><ul><li>Rangez le dossier «&nbsp;Documents&nbsp;», en suivant la même organisation que pour le dossier «&nbsp;Images&nbsp;».</li><li>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier plus «&nbsp;Musique&nbsp;».</li></ul>",
+                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous : </p><ol><li> Dans le dossier « Documents », créer 2 sous-dossiers :&nbsp; « Factures »,&nbsp; « Notes ».</li><li>Ranger les fichiers du dossier&nbsp; « Documents » dans les bons sous dossiers.</li><li>Déplacer le dossier « Playlist fêtes » dans le dossier plus « Musique ».</li></ol>",
                 "solution": "",
                 "height": 500
               }
@@ -745,18 +745,9 @@
             {
               "type": "element",
               "element": {
-                "id": "349b6092-9221-4578-80ae-45177e93747b",
-                "type": "expand",
-                "title": "🗝️Indice 1",
-                "content": "<p>Pour ranger le dossier «&nbsp;Documents&nbsp;» comme le dossier «&nbsp;Images&nbsp;», commencez par créer des sous dossiers par catégorie&nbsp;: «&nbsp;Factures&nbsp;» et «&nbsp;Notes&nbsp;».</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "d542bfe9-7fc2-4a18-88d7-d6406f62956a",
                 "type": "expand",
-                "title": "🗝️Indice 2",
+                "title": "🗝️Indice 1",
                 "content": "<p>Une fois les sous-dossiers&nbsp;«&nbsp;Factures&nbsp;» et «&nbsp;Notes&nbsp;» créés, rangez-y les fichiers en fonction de leur noms. </p>"
               }
             },
@@ -765,7 +756,7 @@
               "element": {
                 "id": "0de4339c-c273-4f16-b1b3-3c148c531a93",
                 "type": "expand",
-                "title": "🗝️Indice 3",
+                "title": "🗝️Indice 2",
                 "content": "<p>Le dossier «&nbsp;Playlist fête&nbsp;» contient des fichiers de type audio. Ce dossier sera plus à sa place en le rangeant dans le dossier «&nbsp;Musique&nbsp;».</p><p>Le dossier «&nbsp;Musique&nbsp;» est visible dans le volet latéral du gestionnaire.</p>"
               }
             },
