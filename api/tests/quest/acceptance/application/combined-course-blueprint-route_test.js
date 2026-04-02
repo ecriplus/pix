@@ -1,3 +1,4 @@
+import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   createServer,
@@ -48,7 +49,11 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should create a combined course blueprint', async function () {
         // given
+        databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.SIXTH_GRADE });
         const adminUser = await insertUserWithRoleSuperAdmin();
+
+        await databaseBuilder.commit();
+
         const payload = {
           data: {
             type: 'combined-course-blueprints',
@@ -57,6 +62,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
               'internal-name': 'Mon schéma de parcours combiné',
               description: 'La description combinix',
               illustration: 'illustration.svg',
+              'attestation-key': ATTESTATIONS.SIXTH_GRADE,
               content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
             },
           },

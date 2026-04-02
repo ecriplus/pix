@@ -53,6 +53,7 @@ const register = async function (server) {
                 'internal-name': Joi.string().required(),
                 illustration: Joi.string().allow(null),
                 description: Joi.string().allow(null),
+                'attestation-key': Joi.string().allow(null),
                 content: contentSchema,
                 createdAt: Joi.date(),
               },

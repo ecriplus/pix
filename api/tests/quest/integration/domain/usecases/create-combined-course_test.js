@@ -1,3 +1,4 @@
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
@@ -25,7 +26,11 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
       trainingId: trainingId,
     });
 
+    const attestation = databaseBuilder.factory.buildAttestation();
+
     const quest = databaseBuilder.factory.buildQuest({
+      rewardId: attestation.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
       successRequirements: [
         CombinedCourseBlueprint.buildRequirementForCombinedCourse({
           targetProfileId: targetProfileWithTraining.id,
@@ -65,6 +70,8 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     expect(createdQuest.combinedCourseBlueprintId).to.equal(combinedCourseBlueprintId);
     expect(createdQuest.code).not.to.be.null;
     expect(createdQuest.name).to.equal(nameInput);
+    expect(createdQuest.rewardId).to.equal(attestation.id);
+    expect(createdQuest.rewardType).to.equal(REWARD_TYPES.ATTESTATION);
 
     //Campaign 1
     expect(campaigns[0].name).to.equal(targetProfileWithTraining.internalName);

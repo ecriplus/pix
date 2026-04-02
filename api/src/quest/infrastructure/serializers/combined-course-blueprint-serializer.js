@@ -14,7 +14,10 @@ const deserialize = async function (payload) {
   const deserializedData = await new Deserializer({
     keyForAttribute: 'camelCase',
   }).deserialize(payload);
-  return new CombinedCourseBlueprint(deserializedData);
+  return {
+    combinedCourseBlueprint: new CombinedCourseBlueprint(deserializedData),
+    attestationKey: deserializedData.attestationKey,
+  };
 };
 
 export { deserialize, serialize };
