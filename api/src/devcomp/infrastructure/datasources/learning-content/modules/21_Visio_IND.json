@@ -44,117 +44,118 @@
                 "isCompletionRequired": false,
                 "title": "Simulateur Accroche",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio23",
-                "instruction": "<p>Observez le simulateur de visioconférence ci-dessous pour compléter le texte qui suit.</p>",
+                "instruction": "<p>Observez le simulateur de visioconférence ci-dessous pour répondre aux questions qui suivent.</p>",
                 "solution": "",
                 "height": 550
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "1896938e-5f6c-4fc5-98af-594e9b203c12",
-                "type": "qrocm",
-                "instruction": "<p>Complétez le texte suivant :</p>",
-                "proposals": [
-                  {
-                    "type": "select",
-                    "input": "input0",
-                    "display": "inline",
-                    "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "Sélectionnez une option",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "0",
-                        "content": "Inès"
-                      },
-                      {
-                        "id": "1",
-                        "content": "Samuel"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Gaby"
-                      }
-                    ],
-                    "solutions": [
-                      "1"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>est en train de parler.</p><br>"
-                  },
-                  {
-                    "type": "select",
-                    "input": "input1",
-                    "display": "inline",
-                    "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "Sélectionnez une option",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "0",
-                        "content": "Inès"
-                      },
-                      {
-                        "id": "1",
-                        "content": "Samuel"
-                      },
-                      {
-                        "id": "2",
-                        "content": "Gaby"
-                      }
-                    ],
-                    "solutions": [
-                      "2"
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>a le micro coupé.</p><br>"
-                  },
-                  {
-                    "type": "text",
-                    "content": "<p>Pour donner son avis, Roy peut</p>"
-                  },
-                  {
-                    "type": "select",
-                    "input": "input2",
-                    "display": "inline",
-                    "placeholder": "Sélectionnez une option",
-                    "ariaLabel": "Sélectionnez une option",
-                    "tolerances": [],
-                    "options": [
-                      {
-                        "id": "0",
-                        "content": "lever la main."
-                      },
-                      {
-                        "id": "1",
-                        "content": "ouvrir les paramètres."
-                      },
-                      {
-                        "id": "2",
-                        "content": "couper son micro."
-                      }
-                    ],
-                    "solutions": [
-                      "0"
-                    ]
-                  }
-                ],
-                "feedbacks": {
-                  "valid": {
-                    "state": "<p>Exactement&nbsp;!</p>",
-                    "diagnosis": "<p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro coupé et un<strong> encadré</strong> signale la personne qui parle. Vous pouvez <strong>lever la main</strong> avant de prendre la parole.</p>"
-                  },
-                  "invalid": {
-                    "state": "<p>Eh non&nbsp;!</p>",
-                    "diagnosis": "<p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro coupé et un<strong> encadré</strong> signale la personne qui parle. Vous pouvez <strong>lever la main</strong> avant de prendre la parole.</p>"
-                  }
+              "type": "stepper",
+              "instruction": "<p><br></p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "679de881-a390-48d1-8cb4-c26faa5652b1",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Qui est en train de parler&nbsp;?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Inès",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, <strong>un encadré </strong>signale la personne qui parle.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Samuel",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;!</p>\n<p>Pendant une visioconférence, <strong>un encadré </strong>signale la personne qui parle.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Gaby",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, <strong>un encadré </strong>signale la personne qui parle.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "38093c3b-2fd1-422f-b4e4-a5d6fe8f0810",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Qui a le micro fermé&nbsp;?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Inès",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Samuel",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Gaby",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;!</p>\n<p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "176fdf66-11b9-4e5d-bf41-c0187d26ee26",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Comment Roy peut-il faire pour donner son avis&nbsp;?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Lever la main",
+                          "feedback": {
+                            "diagnosis": "<p>Exactement&nbsp;!</p>\n<p>Pendant une visioconférence, vous pouvez <strong>lever la main</strong> avant de prendre la parole.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Ouvrir sa caméra",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, vous pouvez <strong>lever la main</strong> avant de prendre la parole.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Fermer son micro",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;!</p>\n<p>Pendant une visioconférence, vous pouvez <strong>lever la main</strong> avant de prendre la parole.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
                 }
-              }
+              ]
             }
           ]
         },
@@ -373,6 +374,15 @@
                 "instruction": "<p>Observez le simulateur de visioconférence ci-dessous pour compléter le texte qui suit.</p>",
                 "solution": "",
                 "height": 550
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "65529006-fcdd-4b15-8dfc-7797cd1d3a0f",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Visio : noms des personnages à modifier]",
+                "content": "<ul><li>Inès partage son écran sur lequel on voit un tableur avec le budget.</li><br></ul>"
               }
             },
             {
@@ -624,25 +634,25 @@
                       "id": "02967bc7-0880-4ff4-b7ad-a3e77f197d82",
                       "type": "qcu-discovery",
                       "instruction": "<p>Quel bouton peut-il utiliser&nbsp;?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "<p>Le bouton 1</p>",
+                          "content": "Le bouton 1",
                           "feedback": {
                             "diagnosis": "<p>Eh non&nbsp;! Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;Partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>Le bouton 2<br></p>",
+                          "content": "Le bouton 2",
                           "feedback": {
                             "diagnosis": "<p>En effet !&nbsp;Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;Partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Le bouton 3<br></p>",
+                          "content": "Le bouton 3",
                           "feedback": {
                             "diagnosis": "<p>Eh non&nbsp;! Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;Partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
                           }
@@ -848,6 +858,15 @@
             {
               "type": "element",
               "element": {
+                "id": "54e1c1d0-4d23-428e-898b-f58377eae536",
+                "type": "expand",
+                "title": "[🕹️ Simulateur Visio amélioré avec chat lisible]",
+                "content": "<ul><li>1 messages dans le chat de Steven</li><li>Ambre a la main levée</li></ul><p>Action attendue : l'utilisateur doit ouvrir le chat pour lire le message.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
                 "id": "db72e634-4a87-4293-b7ad-069dae07b6d3",
                 "type": "qrocm",
                 "instruction": "<p>Complétez le texte suivant&nbsp;:</p>",
@@ -870,14 +889,10 @@
                       },
                       {
                         "id": "2",
-                        "content": "Roger"
+                        "content": "Steven"
                       },
                       {
                         "id": "3",
-                        "content": "Stéphane"
-                      },
-                      {
-                        "id": "4",
                         "content": "Il n’y a personne qui"
                       }
                     ],
@@ -907,19 +922,15 @@
                       },
                       {
                         "id": "2",
-                        "content": "Roger"
+                        "content": "Steven"
                       },
                       {
                         "id": "3",
-                        "content": "Stéphane"
-                      },
-                      {
-                        "id": "4",
                         "content": "Il n’y a personne qui"
                       }
                     ],
                     "solutions": [
-                      "3"
+                      "2"
                     ]
                   },
                   {
@@ -944,14 +955,10 @@
                       },
                       {
                         "id": "2",
-                        "content": "Roger"
+                        "content": "Steven"
                       },
                       {
                         "id": "3",
-                        "content": "Stéphane"
-                      },
-                      {
-                        "id": "4",
                         "content": "Il n’y a personne qui"
                       }
                     ],
@@ -981,19 +988,15 @@
                       },
                       {
                         "id": "2",
-                        "content": "Roger"
+                        "content": "Steven"
                       },
                       {
                         "id": "3",
-                        "content": "Stéphane"
-                      },
-                      {
-                        "id": "4",
                         "content": "Il n’y a personne qui"
                       }
                     ],
                     "solutions": [
-                      "4"
+                      "3"
                     ]
                   },
                   {
