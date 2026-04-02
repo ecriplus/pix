@@ -171,4 +171,28 @@ describe('Unit | Shared | Domain | Service | Locale', function () {
       });
     });
   });
+
+  describe('#fallbackChallengeLocales', function () {
+    it('should return corresponding array of locales', function () {
+      // given
+      const locale = 'fr';
+
+      // when
+      const result = localeService.fallbackChallengeLocales(locale);
+
+      // then
+      expect(result).to.deep.equal(['fr']);
+    });
+
+    it('returns an array of two locales', function () {
+      // given
+      const locale = 'fr-FR';
+
+      // when
+      const result = localeService.fallbackChallengeLocales(locale);
+
+      // then
+      expect(result).to.deep.equal(['fr-FR', 'fr']);
+    });
+  });
 });

@@ -1,8 +1,7 @@
-import _ from 'lodash';
-
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
+import { fallbackChallengeLocales } from '../../../../shared/domain/services/locale-service.js';
 
-async function fetchForCampaigns({
+export async function fetchForCampaigns({
   assessment,
   answerRepository,
   campaignRepository,
@@ -26,7 +25,6 @@ async function fetchForCampaigns({
     isRetrying,
     isFromCampaign: true,
     isImproving: true,
-    campaignParticipationRepository,
     knowledgeElementForParticipationService,
     knowledgeElementRepository,
     improvementService,
@@ -39,7 +37,7 @@ async function fetchForCampaigns({
 
   return {
     allAnswers,
-    lastAnswer: _.isEmpty(allAnswers) ? null : _.last(allAnswers),
+    lastAnswer: allAnswers?.at(-1) ?? null,
     targetSkills: skills,
     challenges,
     knowledgeElements,
@@ -76,12 +74,13 @@ async function _fetchKnowledgeElements({
   });
 }
 
-async function _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale }) {
-  const challenges = await challengeRepository.findOperativeBySkills(campaignSkills, locale);
+export async function _fetchSkillsAndChallenges({ campaignSkills, challengeRepository, locale }) {
+  const locales = fallbackChallengeLocales(locale);
+  const challenges = await challengeRepository.findOperativeBySkillsAndLocales(campaignSkills, locales);
   return [campaignSkills, challenges];
 }
 
-async function fetchForCompetenceEvaluations({
+export async function fetchForCompetenceEvaluations({
   assessment,
   answerRepository,
   challengeRepository,
@@ -101,11 +100,9 @@ async function fetchForCompetenceEvaluations({
 
   return {
     allAnswers,
-    lastAnswer: _.isEmpty(allAnswers) ? null : _.last(allAnswers),
+    lastAnswer: allAnswers?.at(-1) ?? null,
     targetSkills,
     challenges,
     knowledgeElements,
   };
 }
-
-export { fetchForCampaigns, fetchForCompetenceEvaluations };

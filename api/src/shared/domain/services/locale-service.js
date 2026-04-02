@@ -127,9 +127,25 @@ function getNearestChallengeLocale(locale) {
   }
 }
 
+/**
+ * Given a challenge locale, returns an array of compatible challenge locales.
+ * Exemples :
+ * For `en` returns [`en`]
+ * For `fr-BE` returns [`fr-BE`, `fr`]
+ *
+ * @param {string} locale
+ * @returns {string[]}
+ */
+function fallbackChallengeLocales(locale) {
+  const localeInstance = new Intl.Locale(locale);
+  if (localeInstance.toString() === localeInstance.language) return [locale];
+  return [locale, localeInstance.language];
+}
+
 export {
   coerceLanguage,
   ENGLISH_SPOKEN,
+  fallbackChallengeLocales,
   FRENCH_FRANCE,
   FRENCH_SPOKEN,
   getBaseLocale,

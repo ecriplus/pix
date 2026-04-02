@@ -19,7 +19,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         findSkillsByCampaignParticipationId: sinon.stub(),
       };
       challengeRepository = {
-        findOperativeBySkills: sinon.stub(),
+        findOperativeBySkillsAndLocales: sinon.stub(),
       };
       knowledgeElementForParticipationService = {
         findUniqByUserOrCampaignParticipationId: sinon.stub(),
@@ -56,7 +56,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
+      challengeRepository.findOperativeBySkillsAndLocales.resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -88,12 +88,17 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         knowledgeElementRepository,
         campaignParticipationRepository,
         improvementService,
+        locale: 'fr-fr',
       });
 
       // then
       expect(data.allAnswers).to.deep.equal([answer]);
       expect(data.lastAnswer).to.deep.equal(answer);
       expect(data.targetSkills).to.deep.equal(skills);
+      expect(challengeRepository.findOperativeBySkillsAndLocales).to.have.been.calledOnceWithExactly(skills, [
+        'fr-fr',
+        'fr',
+      ]);
       expect(data.challenges).to.deep.equal(challenges);
       expect(data.knowledgeElements).to.deep.equal(filteredKnowledgeElements);
     });
@@ -119,7 +124,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkills.withArgs(skills).resolves(challenges);
+      challengeRepository.findOperativeBySkillsAndLocales.withArgs(skills).resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -151,6 +156,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         knowledgeElementRepository,
         campaignParticipationRepository,
         improvementService,
+        locale: 'fr-fr',
       });
 
       // then
