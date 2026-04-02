@@ -64,8 +64,8 @@ export class CombinedCourseBlueprint {
     const quest = new Quest({
       createdAt: createdAt,
       updatedAt: createdAt,
-      rewardType: null,
-      rewardId: null,
+      rewardType: this.quest.rewardType,
+      rewardId: this.quest.rewardId,
       eligibilityRequirements: [],
       successRequirements,
     });
@@ -83,7 +83,7 @@ export class CombinedCourseBlueprint {
     );
   }
 
-  static buildWithQuest({ combinedCourseBlueprint, modulesByShortId }) {
+  static buildWithQuest({ combinedCourseBlueprint, modulesByShortId, rewardId, rewardType }) {
     const successRequirements = combinedCourseBlueprint.content.map((requirement) => {
       if (requirement.type === COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
         const requirementTargetProfileId = requirement.value;
@@ -103,8 +103,8 @@ export class CombinedCourseBlueprint {
     const quest = new Quest({
       createdAt: combinedCourseBlueprint.createdAt,
       updatedAt: combinedCourseBlueprint.createdAt,
-      rewardType: null,
-      rewardId: null,
+      rewardType,
+      rewardId,
       eligibilityRequirements: [],
       successRequirements,
     });

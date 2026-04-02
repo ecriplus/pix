@@ -1,7 +1,11 @@
+import { ATTESTATIONS } from '../../../../../src/profile/domain/constants.js';
 import { RewardTypeDoesNotExistError } from '../../../../../src/profile/domain/errors.js';
 import { Attestation } from '../../../../../src/profile/domain/models/Attestation.js';
+import { Reward } from '../../../../../src/profile/domain/models/Reward.js';
 import { getByIdAndType } from '../../../../../src/profile/infrastructure/repositories/reward-repository.js';
+import { getByAttestationKey } from '../../../../../src/profile/infrastructure/repositories/reward-repository.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Infrastructure | Repository | Reward', function () {
@@ -26,6 +30,33 @@ describe('Profile | Integration | Infrastructure | Repository | Reward', functio
 
       // then
       expect(error).to.be.an.instanceof(RewardTypeDoesNotExistError);
+    });
+  });
+  describe('#getByAttestationKey', function () {
+    it('should return the correct attestation for a given key', async function () {
+      //given
+      const attestation = await databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.PARENTHOOD });
+
+      await databaseBuilder.commit();
+
+      //when
+      const result = await getByAttestationKey({ key: attestation.key });
+
+      //then
+      expect(result).to.deep.equal(new Reward({ id: attestation.id, type: REWARD_TYPES.ATTESTATION }));
+    });
+
+    it('should throw not found error if no attestation match given key', async function () {
+      //given
+      await databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.PARENTHOOD });
+      await databaseBuilder.commit();
+
+      //when
+      const error = await catchErr(getByAttestationKey)({ key: 'unknown_key' });
+
+      //then
+      expect(error).to.instanceOf(NotFoundError);
+      expect(error.message).to.equal('Attestation not found.');
     });
   });
 });

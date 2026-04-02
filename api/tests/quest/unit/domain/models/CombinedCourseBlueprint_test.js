@@ -1,3 +1,4 @@
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   COMBINED_COURSE_BLUEPRINT_ITEMS,
@@ -240,8 +241,12 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
 
       const description = 'bla bla bla';
       const illustration = 'illu.svg';
+      const rewardId = 1;
+      const rewardType = REWARD_TYPES.ATTESTATION;
 
       const combinedCourseBlueprintQuest = new Quest({
+        rewardId,
+        rewardType,
         eligibilityRequirements: [],
         successRequirements: [
           {
@@ -304,6 +309,8 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
 
       // then
       const expectedQuest = new Quest({
+        rewardId,
+        rewardType,
         eligibilityRequirements: [],
         successRequirements: [
           {

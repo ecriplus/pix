@@ -27,12 +27,12 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
     const findRecordStub = sinon.stub(store, 'findRecord');
+    const attestations = [{ key: 'PARENTHOOD' }, { key: 'SIXTH_GRADE' }];
     findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
     findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
 
     //when
-
-    const screen = await render(<template><CombinedCourseBlueprintForm /></template>);
+    const screen = await render(<template><CombinedCourseBlueprintForm @attestations={{attestations}} /></template>);
 
     await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.itemId'), { exact: false }), 1);
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.addItemButton') }));
@@ -58,6 +58,14 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.description')), 'description');
 
+    await click(
+      screen.getByRole('button', { name: t('components.combined-course-blueprints.attestation.select-label') }),
+    );
+
+    await screen.findByRole('listbox');
+
+    await click(screen.getByRole('option', { name: 'PARENTHOOD' }));
+
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 
     //then
@@ -71,6 +79,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     ]);
     assert.strictEqual(blueprintStub.illustration, 'illustrations/hello.svg');
     assert.strictEqual(blueprintStub.description, 'description');
+    assert.strictEqual(blueprintStub.attestationKey, 'PARENTHOOD');
     assert.ok(
       pixToastSuccessStub.calledOnceWith({
         message: t('components.combined-course-blueprints.create.notifications.success'),
@@ -132,7 +141,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       );
     });
 
-    test('it should display mutliple validation error messages from API', async function (assert) {
+    test('it should display multiple validation error messages from API', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const pixToast = this.owner.lookup('service:pixToast');

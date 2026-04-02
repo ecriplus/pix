@@ -538,6 +538,10 @@
       }
     },
     "combined-course-blueprints": {
+      "attestation": {
+        "select-label": "Add an attestation",
+        "select-placeholder": "Select an attestation"
+      },
       "create": {
         "addItemButton": "Add",
         "contentFeedback": "Your course does not have any items yet.",

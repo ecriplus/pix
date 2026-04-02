@@ -3,10 +3,12 @@ import _ from 'lodash';
 import { COMBINED_COURSE_BLUEPRINT_ITEMS, CombinedCourseBlueprint } from '../models/CombinedCourseBlueprint.js';
 
 export const createCombinedCourseBlueprint = async ({
+  attestationKey,
   combinedCourseBlueprint,
   combinedCourseBlueprintRepository,
   targetProfileRepository,
   moduleRepository,
+  rewardRepository,
 }) => {
   // We are using content from the front-end before building quests
   const targetProfileIds = combinedCourseBlueprint.content
@@ -20,7 +22,14 @@ export const createCombinedCourseBlueprint = async ({
   const modules = await moduleRepository.getByShortIds({ moduleShortIds });
   const modulesByShortId = _.groupBy(modules, 'shortId');
 
+  const reward = attestationKey ? await rewardRepository.getByAttestationKey({ key: attestationKey }) : null;
+
   return combinedCourseBlueprintRepository.save({
-    combinedCourseBlueprint: CombinedCourseBlueprint.buildWithQuest({ combinedCourseBlueprint, modulesByShortId }),
+    combinedCourseBlueprint: CombinedCourseBlueprint.buildWithQuest({
+      combinedCourseBlueprint,
+      modulesByShortId,
+      rewardId: reward?.id,
+      rewardType: reward?.type,
+    }),
   });
 };

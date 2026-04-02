@@ -56,6 +56,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
           'internal-name': 'Mon modèle de parcours',
           illustration: '/illustrations/image.svg',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          'attestation-key': 'SIXTH_GRADE',
           content: [
             {
               type: 'passages',
@@ -75,10 +76,11 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
     };
 
     // when
-    const deserializedBlueprint = await combinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
+    const deserialize = await combinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
 
     // then
-    expect(deserializedBlueprint).deep.equal({
+    expect(deserialize.attestationKey).to.equal('SIXTH_GRADE');
+    expect(deserialize.combinedCourseBlueprint).deep.equal({
       id: '1',
       name: 'Mon parcours',
       internalName: 'Mon modèle de parcours',

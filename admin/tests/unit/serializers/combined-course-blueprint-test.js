@@ -16,6 +16,7 @@ module('Unit | Serializer | combined-course-blueprint', function (hooks) {
           label: 'Profil cilble 1',
         },
       ],
+      attestationKey: 'attestationKey',
     });
 
     const serializedRecord = record.serialize();
@@ -36,6 +37,7 @@ module('Unit | Serializer | combined-course-blueprint', function (hooks) {
                 value: 1,
               },
             ],
+            'attestation-key': 'attestationKey',
           },
         },
       },

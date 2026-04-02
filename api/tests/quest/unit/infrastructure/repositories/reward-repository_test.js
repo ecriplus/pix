@@ -1,5 +1,9 @@
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { QuestResult } from '../../../../../src/quest/domain/models/QuestResult.js';
-import { getByQuestAndUserId } from '../../../../../src/quest/infrastructure/repositories/reward-repository.js';
+import {
+  getByAttestationKey,
+  getByQuestAndUserId,
+} from '../../../../../src/quest/infrastructure/repositories/reward-repository.js';
 import { expect, sinon } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Repositories | Reward', function () {
@@ -102,6 +106,24 @@ describe('Quest | Unit | Infrastructure | Repositories | Reward', function () {
       expect(result.reward).to.equal(reward);
       expect(result.profileRewardId).to.be.null;
       expect(result.obtained).to.be.null;
+    });
+  });
+  describe('#getByAttestationKey', function () {
+    let rewardApiStub;
+    beforeEach(function () {
+      rewardApiStub = {
+        getByAttestationKey: sinon.stub(),
+      };
+
+      rewardApiStub.getByAttestationKey
+        .withArgs({ key: 'PARENTHOOD' })
+        .resolves({ id: 1, type: REWARD_TYPES.ATTESTATION });
+    });
+
+    it('should return a reward for given attestation key', async function () {
+      const result = await getByAttestationKey({ key: 'PARENTHOOD', rewardApi: rewardApiStub });
+
+      expect(result.id).to.equal(1);
     });
   });
 });
