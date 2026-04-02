@@ -7,6 +7,7 @@ import PgBoss from 'pg-boss';
 
 import { Metrics } from '../../../monitoring/infrastructure/metrics.js';
 import { config } from '../../config.js';
+import { executeInContext, EXECUTORS } from '../execution-context-manager.js';
 import { importNamedExportFromFile } from '../utils/import-named-exports-from-directory.js';
 import { child } from '../utils/logger.js';
 import { MonitoredJobHandler } from './monitoring/MonitoredJobHandler.js';
@@ -140,14 +141,36 @@ export class JobClient {
     const { teamConcurrency, teamSize } = jobHandler;
 
     this.#pgBoss.work(name, { teamSize, teamConcurrency }, async (job) => {
-      const monitoredJobHandler = new MonitoredJobHandler(metrics, jobHandler, logger);
-      return monitoredJobHandler.handle({ data: job.data, jobName: name, jobId: job.id });
+      const context = this.#initLogContext(job);
+      return executeInContext(
+        context,
+        async () => {
+          const monitoredJobHandler = new MonitoredJobHandler(metrics, jobHandler, logger);
+          return monitoredJobHandler.handle({ data: job.data, jobName: name, jobId: job.id });
+        },
+        EXECUTORS.JOB,
+      );
     });
 
     this.#pgBoss.onComplete(name, { teamSize, teamConcurrency }, (job) => {
-      const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
-      monitoringJobHandler.handle(job);
+      const context = this.#initLogContext(job);
+      return executeInContext(
+        context,
+        async () => {
+          const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
+          return monitoringJobHandler.handle(job);
+        },
+        EXECUTORS.JOB,
+      );
     });
+  }
+
+  #initLogContext(job) {
+    const inheritedContext = job.data?.correlationContext ?? {};
+    return {
+      ...inheritedContext,
+      jobId: job.id,
+    };
   }
 
   async scheduleCronJob({ name, cron, data, options }) {
