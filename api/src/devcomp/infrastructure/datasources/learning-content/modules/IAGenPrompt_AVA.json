@@ -230,7 +230,7 @@
                 "id": "e7ced526-7903-4b42-878a-305acde81d24",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ce que vous venez de faire s’appelle le <strong>prompt chaining</strong>. Il consiste à découper une tâche complexe en plusieurs étapes. Chaque prompt s’appuie sur le résultat obtenu à l’étape précédente.</p><h5>🤔 Que vous apporte cette approche&nbsp;?</h5><p>Avancer par étapes permet d’apporter le contexte progressivement et de valider des résultats intermédiaires. Vous pouvez superviser le raisonnement, vous limitez les oublis et vous repérez plus facilement les erreurs au lieu de déléguer toute la réflexion.</p>"
+                "content": "<p>Ce que vous venez de faire s’appelle le <strong>prompt chaining</strong>. Il consiste à découper une tâche complexe en plusieurs étapes. Chaque prompt s’appuie sur le résultat obtenu à l’étape précédente.<br></p><h5>🤔 Que vous apporte cette approche&nbsp;?</h5><p>Avancer par étapes permet d’apporter le contexte progressivement et de valider des résultats intermédiaires. Vous pouvez superviser le raisonnement, vous limitez les oublis et vous repérez plus facilement les erreurs au lieu de déléguer toute la réflexion.</p>"
               }
             }
           ]
