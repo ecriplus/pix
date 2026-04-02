@@ -153,15 +153,8 @@ export class JobClient {
     });
 
     this.#pgBoss.onComplete(name, { teamSize, teamConcurrency }, (job) => {
-      const context = this.#initLogContext(job);
-      return executeInContext(
-        context,
-        async () => {
-          const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
-          return monitoringJobHandler.handle(job);
-        },
-        EXECUTORS.JOB,
-      );
+      const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
+      return monitoringJobHandler.handle(job);
     });
   }
 
