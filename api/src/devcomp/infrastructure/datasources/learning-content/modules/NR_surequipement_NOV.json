@@ -125,7 +125,7 @@
                           "id": "2",
                           "content": "<p>L’ordinateur ne se recycle pas, il vaut mieux le garder chez soi.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Au contrainte ! Il existe des bornes de collecte pour déposer ses appareils numériques cassés et pouvoir les recycler. </p>"
+                            "diagnosis": "<p>Au contraire ! Il existe des bornes de collecte pour déposer ses appareils numériques cassés et pouvoir les recycler. </p>"
                           }
                         },
                         {
@@ -230,7 +230,7 @@
                           "id": "1",
                           "content": "<p>Changer de smartphone pour profiter de cette nouvelle fonctionnalité.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette fonction est-elle vraiment utile pour Thelma ? Elle risque  de renouveler un appareil qui correspond encore à ses besoins.&nbsp;<br></p>"
+                            "diagnosis": "<p>Cette fonction est-elle vraiment utile pour Thelma ? Elle risque de renouveler un appareil qui correspond encore à ses besoins.&nbsp;<br></p>"
                           }
                         },
                         {
@@ -557,7 +557,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le meilleur réflexe est d’éteindre un appreil numérique quand on ne l’utilise pas.</p>"
+                            "diagnosis": "<p>Le meilleur réflexe est d’éteindre un appareil numérique quand on ne l’utilise pas.</p>"
                           }
                         }
                       ],
@@ -570,14 +570,14 @@
                     {
                       "id": "4ec51b96-64ee-4989-8caf-08d8e845a3cb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même si il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
+                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même s'il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
                           "content": "<p>Laisser les chargeurs branchés&nbsp;: sans appareil connecté, ils ne consomment pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, même si ces chargeurs ne chargent pas d’appareils, quand ils sont&nbsp; branchés, ils consomment.</p>"
+                            "diagnosis": "<p>Eh non, même si ces chargeurs ne chargent pas d’appareils, quand ils sont&nbsp;branchés, ils consomment.</p>"
                           }
                         },
                         {
@@ -653,7 +653,7 @@
                 "id": "a60794da-ef3b-4850-b058-2717382e1a08",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><em>À noter à la relecture&nbsp;: sera (sûrement) transformé en infographie.<br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. De nombreux foyers achètent et stockent plus d’appareils numériques qu’ils n’en ont vraiment besoin.</li><li> Fabriquer et utiliser autant d’appareils numériques a un coût environnemental fort.&nbsp;🌍</li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille&nbsp;</strong>notamment crée une consommation électrique souvent&nbsp;<strong>sous-estimée</strong>. ⚡</li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
+                "content": "<ul><em>À noter à la relecture&nbsp;: sera (sûrement) transformé en infographie.<br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. De nombreux foyers achètent et stockent plus d’appareils numériques qu’ils n’en ont vraiment besoin.</li><li>Fabriquer et utiliser autant d’appareils numériques a un coût environnemental fort.&nbsp;🌍</li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille&nbsp;</strong>notamment crée une consommation électrique souvent&nbsp;<strong>sous-estimée</strong>. ⚡</li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
               }
             },
             {
