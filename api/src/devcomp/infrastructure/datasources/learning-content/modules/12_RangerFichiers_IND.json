@@ -281,7 +281,7 @@
                 "id": "073ac979-06a6-4be3-896b-781923f214ac",
                 "type": "text",
                 "tag": " ",
-                "content": "Cette organisation de dossiers et de fichiers forme une <strong>arborescence</strong>, dans laquelle les <strong>dossiers</strong> (et sous dossiers) sont des niveaux intermédiaires de rangement. 📁"
+                "content": "Cette organisation de dossiers et de fichiers forme une <strong>arborescence</strong>, dans laquelle les <strong>dossiers</strong> (et sous-dossiers) sont des niveaux intermédiaires de rangement. 📁"
               }
             }
           ]
@@ -717,7 +717,7 @@
                 "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier « Images » en créant des sous dossiers thématiques.<br>Elle souhaite maintenant ranger son dossier « Documents » de la même manière.</p>"
+                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier « Images » en créant des sous-dossiers thématiques.<br>Elle souhaite maintenant ranger son dossier « Documents » de la même manière.</p>"
               }
             },
             {
@@ -737,7 +737,7 @@
                 "isCompletionRequired": false,
                 "title": "simulateur gestionnaire de fichiers",
                 "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=example&lang=fr",
-                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous : </p><ol><li> Dans le dossier « Documents », créer 2 sous-dossiers :&nbsp; « Factures »,&nbsp; « Notes ».</li><li>Ranger les fichiers du dossier&nbsp; « Documents » dans les bons sous dossiers.</li><li>Déplacer le dossier « Playlist fêtes » dans le dossier plus « Musique ».</li></ol>",
+                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous : </p><ol><li> Dans le dossier « Documents », créer 2 sous-dossiers :&nbsp; « Factures »,&nbsp; « Notes ».</li><li>Ranger les fichiers du dossier&nbsp; « Documents » dans les bons sous-dossiers.</li><li>Déplacer le dossier « Playlist fêtes » dans le dossier plus « Musique ».</li></ol>",
                 "solution": "",
                 "height": 500
               }
@@ -782,7 +782,7 @@
                 "id": "878db1df-9959-48b5-906a-fc6c6141e2c1",
                 "type": "text",
                 "tag": " ",
-                "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><br><p>Il y a plusieurs manières de s’organiser. <strong>Chacun peut choisir de s’organiser en fonction des ses usages</strong>, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement.</p><br><p>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous dossiers.</p>"
+                "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><br><p>Il y a plusieurs manières de s’organiser. <strong>Chacun peut choisir de s’organiser en fonction des ses usages</strong>, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement.</p><br><p>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous-dossiers.</p>"
               }
             },
             {
@@ -803,7 +803,7 @@
                 "id": "60223c63-944a-4e07-9cd2-a7b558696954",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>💡 Astuce</strong></p><p>On peut par exemple organiser ses fichiers par&nbsp;: projet ou catégorie, année, type de fichiers etc.</p>"
+                "content": "<p><strong>💡 Astuce</strong></p><p>On peut par exemple organiser ses fichiers par&nbsp;: projet, année, type de fichiers etc.</p>"
               }
             }
           ]
