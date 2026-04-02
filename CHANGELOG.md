@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.376.0](https://github.com/1024pix/pix/compare/v5.375.0...v5.376.0) (2026-04-02)
+
+### :rocket: Amélioration
+
+- [#15719](https://github.com/1024pix/pix/pull/15719) Ajoute la sélection d'une attestation dans un modèle de Parcours Combiné (PIX-22159). 
+- [#15672](https://github.com/1024pix/pix/pull/15672) MDX-138 IAGenPrompt_AVA modification D1 
+- [#15724](https://github.com/1024pix/pix/pull/15724) modifs rangerfichiers ind relecture eval,  ia-nr, ajout config 
+- [#15713](https://github.com/1024pix/pix/pull/15713) Prometheus : Activer la collecte des metrics par défaut 
+- [#15720](https://github.com/1024pix/pix/pull/15720) Récuperer les épreuves pour le fallback de locale (PIX-22176) 
+- [#15682](https://github.com/1024pix/pix/pull/15682) Update IAGenFonction_Ava.json 
+- [#15714](https://github.com/1024pix/pix/pull/15714) Visio_IND Corrections Relecture interne 
+
+### :building_construction: Tech
+
+- [#15611](https://github.com/1024pix/pix/pull/15611) Accéder facilement à un grain spécifique d'un module (PIX-21992) 
+- [#15723](https://github.com/1024pix/pix/pull/15723) Figer la version de la librairie "axios" dans l'API 
+- [#15708](https://github.com/1024pix/pix/pull/15708) Rendre la colonne maxReachableLevelOnCertificationDate de la table certification-courses nullable (PIX-22169)  
+- [#15709](https://github.com/1024pix/pix/pull/15709) Retirer maxReachableLevelOnCertificationDate du code des certifications V3 (PIX-22170)
+
 # [5.375.0](https://github.com/1024pix/pix/compare/v5.374.0...v5.375.0) (2026-04-01)
 
 ### :rocket: Amélioration
