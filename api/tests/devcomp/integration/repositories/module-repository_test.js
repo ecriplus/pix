@@ -91,6 +91,13 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
             ],
           },
         ],
+        glossary: [
+          {
+            word: 'Pix',
+            definition:
+              'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
+          },
+        ],
       };
       const moduleDatasourceStub = {
         getById: sinon.stub(),
@@ -248,6 +255,13 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
                 ],
               },
             ],
+          },
+        ],
+        glossary: [
+          {
+            word: 'Pix',
+            definition:
+              'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
           },
         ],
       };
@@ -409,6 +423,13 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
                 ],
               },
             ],
+          },
+        ],
+        glossary: [
+          {
+            word: 'Pix',
+            definition:
+              'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
           },
         ],
       };

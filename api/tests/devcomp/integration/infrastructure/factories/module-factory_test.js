@@ -18,6 +18,7 @@ import { ShortVideo } from '../../../../../src/devcomp/domain/models/element/Sho
 import { Text } from '../../../../../src/devcomp/domain/models/element/Text.js';
 import { Video } from '../../../../../src/devcomp/domain/models/element/Video.js';
 import { Grain } from '../../../../../src/devcomp/domain/models/Grain.js';
+import { GlossaryEntry } from '../../../../../src/devcomp/domain/models/module/GlossaryEntry.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factories/module-factory.js';
 import { PixAssetImageInfos } from '../../../../../src/shared/domain/models/PixAssetImageInfos.js';
@@ -72,6 +73,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                 ],
               },
             ],
+            glossary: [],
           };
           sinon.stub(logger, 'warn').returns();
 
@@ -129,6 +131,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                 ],
               },
             ],
+            glossary: [],
           };
           sinon.stub(logger, 'warn').returns();
 
@@ -196,6 +199,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
                 ],
               },
             ],
+            glossary: [],
           };
           sinon.stub(logger, 'warn').returns();
 
@@ -253,6 +257,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             ],
           },
         ],
+        glossary: [],
       };
 
       // when
@@ -362,6 +367,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -414,6 +420,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -468,6 +475,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -516,6 +524,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -571,6 +580,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -622,6 +632,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -683,6 +694,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -744,6 +756,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -806,6 +819,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -858,6 +872,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -922,6 +937,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -995,6 +1011,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1080,6 +1097,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1158,6 +1176,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1248,6 +1267,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1319,6 +1339,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1371,6 +1392,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1452,6 +1474,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1516,6 +1539,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1572,6 +1596,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1631,6 +1656,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1692,6 +1718,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1751,6 +1778,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1813,6 +1841,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1874,6 +1903,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -1947,6 +1977,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2028,6 +2059,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2114,6 +2146,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2208,6 +2241,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2289,6 +2323,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2353,6 +2388,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2422,6 +2458,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2478,6 +2515,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
               ],
             },
           ],
+          glossary: [],
         };
 
         // when
@@ -2538,6 +2576,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             ],
           },
         ],
+        glossary: [],
       };
 
       // when
@@ -2599,6 +2638,7 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
             ],
           },
         ],
+        glossary: [],
       };
 
       // when
@@ -2609,6 +2649,75 @@ describe('Integration | Devcomp | Infrastructure | Factories | Module ', functio
       expect(module.sections[0].grains).not.to.be.empty;
       expect(module.sections[0].grains[0].components).to.have.lengthOf(1);
       expect(module.sections[0].grains[0].components[0].element).not.to.be.empty;
+    });
+
+    describe('With glossary', function () {
+      const minimalModuleData = {
+        id: '6282925d-4775-4bca-b513-4c3009ec5886',
+        shortId: 'giedjc7f3',
+        slug: 'title',
+        title: 'title',
+        isBeta: true,
+        visibility: 'public',
+        details: {
+          image: 'https://assets.pix.org/modules/placeholder-details.svg',
+          description: 'Description',
+          duration: 5,
+          level: 'novice',
+          tabletSupport: 'comfortable',
+          objectives: ['Objective 1'],
+        },
+        sections: [
+          {
+            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+            type: 'practise',
+            grains: [
+              {
+                id: 'f312c33d-e7c9-4a69-9ba0-913957b8f7dd',
+                type: 'lesson',
+                title: 'title',
+                components: [
+                  { type: 'element', element: { id: '11f382f1-d36a-48d2-a99d-4aa052ab7841', type: 'separator' } },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+
+      it('should instantiate Glossary entries', async function () {
+        // given
+        const moduleData = {
+          ...minimalModuleData,
+          glossary: [
+            { word: 'chat', definition: '<p>Animal très mignon</p>' },
+            { word: 'ronron', definition: '<p>Son du chat</p>' },
+          ],
+        };
+
+        // when
+        const module = await ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.glossary).to.have.lengthOf(2);
+        expect(module.glossary[0]).to.be.an.instanceOf(GlossaryEntry);
+        expect(module.glossary[0].word).to.equal('chat');
+        expect(module.glossary[0].definition).to.equal('<p>Animal très mignon</p>');
+        expect(module.glossary[1]).to.be.an.instanceOf(GlossaryEntry);
+        expect(module.glossary[1].word).to.equal('ronron');
+        expect(module.glossary[1].definition).to.equal('<p>Son du chat</p>');
+      });
+
+      it('should build a module with an empty glossary', async function () {
+        // given
+        const moduleData = { ...minimalModuleData, glossary: [] };
+
+        // when
+        const module = await ModuleFactory.build(moduleData);
+
+        // then
+        expect(module.glossary).to.deep.equal([]);
+      });
     });
 
     describe('#getAssetMetadata', function () {

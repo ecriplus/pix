@@ -813,6 +813,7 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
             ],
           },
         ],
+        glossary: [],
       };
 
       try {
@@ -992,6 +993,13 @@ function _createModuleWithElement(element) {
             components: [{ type: 'element', element }],
           },
         ],
+      },
+    ],
+    glossary: [
+      {
+        word: 'Pix',
+        definition:
+          'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
       },
     ],
   };

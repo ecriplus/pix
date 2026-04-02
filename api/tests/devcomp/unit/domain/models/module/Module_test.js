@@ -15,9 +15,10 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       const details = Symbol('details');
       const version = Symbol('version');
       const visibility = Symbol('visibility');
+      const glossary = [Symbol('glossaryEntry')];
 
       // when
-      const module = new Module({ id, shortId, slug, title, isBeta, sections, details, version, visibility });
+      const module = new Module({ id, shortId, slug, title, isBeta, sections, details, version, visibility, glossary });
 
       // then
       expect(module.id).to.equal(id);
@@ -29,6 +30,7 @@ describe('Unit | Devcomp | Domain | Models | Module | Module', function () {
       expect(module.details).to.deep.equal(details);
       expect(module.version).to.deep.equal(version);
       expect(module.visibility).to.deep.equal(visibility);
+      expect(module.glossary).to.deep.equal(glossary);
     });
 
     describe('if a module does not have an id', function () {
