@@ -12,7 +12,6 @@ import { on } from '@ember/modifier';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import { COMPLEMENTARY_KEYS, SUBSCRIPTION_TYPES } from '../../../../models/subscription';
@@ -127,8 +126,7 @@ export default class CandidateCreationModal extends Component {
   };
 
   updateBirthdate = (event) => {
-    const birthdate = dayjs(event.target.value).format('YYYY-MM-DD');
-    this.args.updateCandidateDataFromValue(this.args.candidateData, 'birthdate', birthdate);
+    this.args.updateCandidateDataFromValue(this.args.candidateData, 'birthdate', event.target.value);
   };
 
   updateBillingMode = (billingMode) => {

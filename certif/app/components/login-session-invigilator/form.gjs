@@ -7,11 +7,9 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { t } from 'ember-intl';
 
-dayjs.extend(LocalizedFormat);
+import { dayjsUtcFormat } from '../../helpers/dayjs-utc-format';
 
 export default class LoginSessionInvigilator extends Component {
   @service intl;
@@ -52,7 +50,7 @@ export default class LoginSessionInvigilator extends Component {
           break;
         case 'SESSION_NOT_ACCESSIBLE':
           this.formError = this.intl.t('pages.session-supervising.login.form.errors.session-not-accessible', {
-            date: dayjs(error.meta?.blockedAccessDate).format('L'),
+            date: dayjsUtcFormat([error.meta?.blockedAccessDate, 'DD/MM/YYYY'], {}),
           });
           break;
         default:
