@@ -2,7 +2,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
-class JuryCertification {
+export class JuryCertification {
   /**
    * @param {object} props
    * @param {number} props.certificationCourseId
@@ -171,5 +171,3 @@ class JuryCertification {
     });
   }
 }
-
-export { JuryCertification };

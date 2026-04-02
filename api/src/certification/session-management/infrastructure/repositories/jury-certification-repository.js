@@ -5,7 +5,7 @@ import { JuryCertification } from '../../domain/models/JuryCertification.js';
 import { ComplementaryCertificationCourseResultForJuryCertification } from '../../domain/read-models/ComplementaryCertificationCourseResultForJuryCertification.js';
 import { ComplementaryCertificationCourseResultForJuryCertificationWithExternal } from '../../domain/read-models/ComplementaryCertificationCourseResultForJuryCertificationWithExternal.js';
 
-const get = async function ({ certificationCourseId }) {
+export async function get({ certificationCourseId }) {
   const knexConn = DomainTransaction.getConnection();
   const juryCertificationDTO = await _selectJuryCertifications(knexConn)
     .where('certification-courses.id', certificationCourseId)
@@ -66,8 +66,6 @@ const get = async function ({ certificationCourseId }) {
     badgeIdAndLabels,
   });
 };
-
-export { get };
 
 function _selectJuryCertifications(knexConn) {
   return knexConn
