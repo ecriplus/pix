@@ -14,6 +14,7 @@ import { eq, gt } from 'ember-truth-helpers';
 import PixFieldset from 'pix-admin/components/ui/pix-fieldset';
 
 import RequirementTag from '../common/combined-courses/requirement-tag';
+import SelectAttestation from './select-attestation';
 
 export default class CombineCourseBluePrintForm extends Component {
   @service pixToast;
@@ -111,6 +112,11 @@ export default class CombineCourseBluePrintForm extends Component {
   @action
   setData(key, e) {
     this.blueprint[key] = e.target.value;
+  }
+
+  @action
+  setAttestationKey(value) {
+    this.blueprint.attestationKey = value;
   }
 
   @action
@@ -236,6 +242,12 @@ export default class CombineCourseBluePrintForm extends Component {
 
           </:label>
         </PixTextarea>
+
+        <SelectAttestation
+          @attestations={{@attestations}}
+          @value={{this.blueprint.attestationKey}}
+          @onChange={{this.setAttestationKey}}
+        />
 
       </form>
 

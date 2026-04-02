@@ -771,6 +771,7 @@ export default function routes() {
   });
 
   this.get('/admin/combined-course-blueprints/:id');
+  this.get('/admin/attestations');
   _configureOrganizationsRoutes(this);
 }
 

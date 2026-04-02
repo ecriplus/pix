@@ -539,6 +539,10 @@
       }
     },
     "combined-course-blueprints": {
+      "attestation": {
+        "select-label": "Ajouter une attestation",
+        "select-placeholder": "Sélectionner une attestation"
+      },
       "create": {
         "addItemButton": "Ajouter",
         "contentFeedback": "Votre parcours n'a aucun élément ajouté.",
