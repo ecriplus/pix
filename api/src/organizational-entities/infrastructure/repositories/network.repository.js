@@ -1,5 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import { StructureNotFoundError } from '../../domain/errors.js';
 import { Network } from '../../domain/models/Network.js';
 
 /**
@@ -135,6 +137,33 @@ async function attachOrganization({ childOrganizationId, parentOrganizationId })
     .from('fct_structures')
     .where({ organization_id: parentOrganizationId })
     .first();
+
+  const childFactStructure = await knexConn('id, structure_id')
+    .from('fct_structures')
+    .where({ organization_id: childOrganizationId })
+    .first();
+
+  if (!parentFactStructure) {
+    logger.error({
+      event: 'Not_found_structure',
+      message: `Not found structure for organization ${parentOrganizationId}`,
+    });
+    throw new StructureNotFoundError({
+      message: `Structure not found for organization ${parentOrganizationId}`,
+      meta: { organizationId: parentOrganizationId },
+    });
+  }
+
+  if (!childFactStructure) {
+    logger.error({
+      event: 'Not_found_structure',
+      message: `Not found structure for organization ${childOrganizationId}`,
+    });
+    throw new StructureNotFoundError({
+      message: `Structure not found for organization ${childOrganizationId}`,
+      meta: { organizationId: childOrganizationId },
+    });
+  }
 
   await knexConn('fct_structures').where({ organization_id: childOrganizationId }).update({
     network_id: parentFactStructure.network_id,
