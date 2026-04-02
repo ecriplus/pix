@@ -97,7 +97,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "<p>Cette instruction permet d'avoir un texte commun à tous les steps du stepper horizontal</p>",
+              "instruction": "<p>Ce texte s'affiche uniquement pour ce stepper car il est horizontal.</p>",
               "steps": [
                 {
                   "elements": [
