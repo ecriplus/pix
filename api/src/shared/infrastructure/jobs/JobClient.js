@@ -34,7 +34,7 @@ export class JobClient {
         ? pgBossFactory()
         : new PgBoss({
             connectionString,
-            max: 2, // TODO: add environment variable
+            max: config.pgBoss.workerConnexionPoolMaxSize,
             ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
             archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
           });
@@ -59,7 +59,7 @@ export class JobClient {
         ? pgBossFactory()
         : new PgBoss({
             connectionString,
-            max: 2, // TODO: add environment variable
+            max: config.pgBoss.clientConnexionPoolMaxSize,
             noSupervisor: true,
             noScheduling: true,
           });
