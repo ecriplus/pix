@@ -62,10 +62,7 @@ export class JobRepository {
     const correlationContext = getCorrelationInfo();
 
     for (const payload of payloads) {
-      // TODO: try with spread operator
-      const payloadWithCorrelationContext = structuredClone(payload);
-      payloadWithCorrelationContext.correlationContext = correlationContext;
-      await JobClient.instance.send(this.name, payloadWithCorrelationContext, this.options);
+      await JobClient.instance.send(this.name, { ...payload, correlationContext }, this.options);
     }
     return { rowCount: payloads.length };
   }
