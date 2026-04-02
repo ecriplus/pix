@@ -1,4 +1,6 @@
 import { knex } from '../../db/knex-database-connection.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
 import { CapacitySimulator } from '../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { Intervals } from '../../src/certification/evaluation/domain/models/Intervals.js';
 import { V3CertificationScoring } from '../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
@@ -25,6 +27,11 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
           describe: 'Define the id of the certification-courses from which we start doing the process',
           default: 5906059,
         },
+        endId: {
+          type: 'number',
+          describe: 'Define the id of the certification-courses at which we stop doing the process (inclusive)',
+          default: null,
+        },
         chunkSize: {
           type: 'number',
           describe:
@@ -36,35 +43,39 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
   }
 
   async handle({ logger, options }) {
-    const { dryRun, startId, chunkSize } = options;
+    const { dryRun, startId, endId, chunkSize } = options;
     logger.info('Script execution started');
     const coreScoringConfigurations = await getCoreScoringConfigurations();
 
     let currentStartId = startId;
-    let certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
+    let certificationsData = await selectCertificationsToProcess(currentStartId, endId, chunkSize);
     while (certificationsData.length > 0) {
-      const { assessmentResultsToUpdate, latestCertificationIdProcessed } = await processCertifications(
-        certificationsData,
-        coreScoringConfigurations,
-        logger,
-      );
+      const { assessmentResultsToUpdate, certificationCoursesToUpdate, latestCertificationIdProcessed } =
+        await processCertifications(certificationsData, coreScoringConfigurations, logger);
 
-      const trx = await knex.transaction();
-      try {
-        await trx('assessment-results').insert(assessmentResultsToUpdate).onConflict('id').merge();
-        logger.info(`Certifications up until ID ${latestCertificationIdProcessed} DONE`);
-        if (dryRun) {
+      await DomainTransaction.execute(async () => {
+        const trx = DomainTransaction.getConnection();
+        try {
+          await trx('assessment-results').insert(assessmentResultsToUpdate).onConflict('id').merge();
+          await batchUpdate({
+            tableName: 'certification-courses',
+            primaryKeyName: 'id',
+            rows: certificationCoursesToUpdate,
+          });
+          logger.info(`Certifications up until ID ${latestCertificationIdProcessed} DONE`);
+          if (dryRun) {
+            await trx.rollback();
+          } else {
+            await trx.commit();
+          }
+        } catch (error) {
           await trx.rollback();
-        } else {
-          await trx.commit();
+          throw error;
         }
-      } catch (error) {
-        await trx.rollback();
-        throw error;
-      }
+      });
 
       currentStartId = latestCertificationIdProcessed + 1;
-      certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
+      certificationsData = await selectCertificationsToProcess(currentStartId, endId, chunkSize);
     }
 
     logger.info('No more certifications to process youpi');
@@ -110,8 +121,8 @@ async function getCoreScoringConfigurations() {
   return v3CertificationScorings;
 }
 
-async function selectCertificationsToProcess(startId, chunkSize) {
-  return await knex
+async function selectCertificationsToProcess(startId, endId, chunkSize) {
+  const query = knex
     .select({
       certificationCourseId: 'certification-courses.id',
       reconciledAt: 'certification-candidates.reconciledAt',
@@ -126,26 +137,34 @@ async function selectCertificationsToProcess(startId, chunkSize) {
     .where('certification-courses.id', '>=', startId)
     .orderBy('certification-courses.id', 'asc')
     .limit(chunkSize);
+
+  if (endId != null) {
+    query.where('certification-courses.id', '<=', endId);
+  }
+
+  return query;
 }
 
 async function processCertifications(certificationsData, coreScoringConfigurations, logger) {
   let latestCertificationIdProcessed;
-  const assessmentResultsToUpdate = [];
+  const results = [];
   logger.info(
     `Processing certification from ${certificationsData[0].certificationCourseId} to ${certificationsData.at(-1).certificationCourseId}...`,
   );
   for (const certificationData of certificationsData) {
     try {
       latestCertificationIdProcessed = certificationData.certificationCourseId;
-      const assessmentResultData = await processCertification(coreScoringConfigurations, certificationData);
-      assessmentResultsToUpdate.push(assessmentResultData);
+      const result = await processCertification(coreScoringConfigurations, certificationData);
+      results.push(result);
     } catch (error) {
       logger.error(error, `Certification ID ${latestCertificationIdProcessed} encountered an error`);
       throw error;
     }
   }
+  const filtered = results.filter((r) => !!r);
   return {
-    assessmentResultsToUpdate: assessmentResultsToUpdate.filter((ar) => !!ar),
+    assessmentResultsToUpdate: filtered.map((r) => r.assessmentResult),
+    certificationCoursesToUpdate: filtered.map((r) => ({ id: r.certificationCourseId, versionId: r.versionId })),
     latestCertificationIdProcessed,
   };
 }
@@ -181,10 +200,14 @@ async function processCertification(v3CertificationScorings, certificationData) 
   const versionId = coreScoringConfiguration.id;
 
   return {
-    ...assessmentResultData,
-    capacity,
-    reachedMeshIndex,
+    certificationCourseId: certificationData.certificationCourseId,
     versionId,
+    assessmentResult: {
+      ...assessmentResultData,
+      capacity,
+      reachedMeshIndex,
+      versionId,
+    },
   };
 }
 
