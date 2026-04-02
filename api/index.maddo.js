@@ -24,6 +24,8 @@ async function _exitOnSignal(signal) {
     logger.info('Stopping HAPI Oppsy server...');
     await server.oppsy.stop();
   }
+  logger.info('Stopping PG Boss client...');
+  await JobClient.instance.stop();
   logger.info('Closing connections to databases...');
   await databaseConnections.disconnect();
   logger.info('Exiting process...');
