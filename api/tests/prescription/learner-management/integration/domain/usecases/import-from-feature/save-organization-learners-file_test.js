@@ -29,6 +29,13 @@ describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJob
           { name: 'Prénom', config: { property: 'firstName' }, required: true },
           {
             name: 'Classe',
+            config: {
+              displayable: {
+                filterable: {
+                  type: 'list',
+                },
+              },
+            },
             required: true,
           },
           {
@@ -72,5 +79,25 @@ O-Ren;Ishii;5B;01/02/1980`,
       .where({ organizationId });
 
     expect(learners).lengthOf(2);
+  });
+
+  it('keep only configured organization learner filter', async function () {
+    // given
+    databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearnerFilter({
+      organizationId,
+      attributeName: 'TOTO',
+      values: ['zero', 'plus', '0', 'égal'],
+    });
+
+    await databaseBuilder.commit();
+
+    // when
+    await usecases.saveOrganizationLearnersFile({ organizationImportId: organizationImport.id });
+
+    const filters = await knex('organization_learner_filters').where('organization_id', organizationId);
+
+    expect(filters).lengthOf(1);
+    expect(filters[0].attribute_name).equal('Classe');
+    expect(filters[0].values).deep.equal(['5B', '6A']);
   });
 });
