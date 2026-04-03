@@ -1,8 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { maxBy, minBy } from 'pix-orga/utils/collection';
 
 import TableHeader from '../../table/header';
@@ -170,7 +169,7 @@ export default class ParticipantsByDay extends Component {
             <tbody>
               {{#each dataset.entries as |entry|}}
                 <tr>
-                  <td>{{dayjsFormat entry.day "DD/MM/YYYY"}}</td>
+                  <td>{{formatDate entry.day}}</td>
                   <td>{{entry.count}}</td>
                 </tr>
               {{/each}}

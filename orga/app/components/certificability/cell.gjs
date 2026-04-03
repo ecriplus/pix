@@ -1,4 +1,4 @@
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
+import { formatDate } from 'ember-intl';
 
 import IsCertifiable from '../ui/is-certifiable';
 
@@ -9,6 +9,6 @@ function displayCertificabilityDate(hideCertifiableDate, isCertifiable) {
 <template>
   <IsCertifiable @isCertifiable={{@isCertifiable}} />
   {{#if (displayCertificabilityDate @hideCertifiableDate @isCertifiable)}}
-    <span>{{dayjsFormat @certifiableAt "DD/MM/YYYY" allow-empty=true}}</span>
+    <span>{{formatDate @certifiableAt}}</span>
   {{/if}}
 </template>

@@ -7,7 +7,6 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 
 import PageTitle from '../ui/page-title';
@@ -15,6 +14,7 @@ import CoverRateGauge from './cover-rate-gauge';
 import TagLevel from './tag-level';
 
 export default class Statistics extends Component {
+  @service intl;
   @service router;
   @service locale;
 
@@ -88,7 +88,7 @@ export default class Statistics extends Component {
   };
 
   get extractedDate() {
-    return dayjs(this.analysisByTubes[0]?.extraction_date).format('D MMM YYYY');
+    return this.intl.formatDate(this.analysisByTubes[0]?.extraction_date, { format: 'LLL' });
   }
 
   get hasDataToDisplay() {

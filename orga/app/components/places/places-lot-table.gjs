@@ -1,16 +1,11 @@
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
-import dayjs from 'dayjs';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { eq, gt } from 'ember-truth-helpers';
 
 import { STATUSES } from '../../models/organization-places-lot';
 import EmptyState from '../ui/empty-state.js';
-
-function displayDate(date) {
-  return dayjs(date).format('DD/MM/YYYY');
-}
 
 function emptyCell(value) {
   return value ? value : '-';
@@ -42,7 +37,7 @@ function emptyCell(value) {
             {{t "pages.places.places-lots.table.headers.activation-date"}}
           </:header>
           <:cell>
-            {{displayDate placesLot.activationDate}}
+            {{formatDate placesLot.activationDate}}
           </:cell>
         </PixTableColumn>
 
@@ -51,7 +46,7 @@ function emptyCell(value) {
             {{t "pages.places.places-lots.table.headers.expiration-date"}}
           </:header>
           <:cell>
-            {{emptyCell (displayDate placesLot.expirationDate)}}
+            {{emptyCell (formatDate placesLot.expirationDate)}}
           </:cell>
         </PixTableColumn>
 

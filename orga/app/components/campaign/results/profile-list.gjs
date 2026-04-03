@@ -4,8 +4,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { array, fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { gt } from 'ember-truth-helpers';
 import getService from 'pix-orga/helpers/get-service';
 
@@ -77,7 +76,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
           </:header>
           <:cell>
             {{#if participation.sharedAt}}
-              {{dayjsFormat participation.sharedAt "DD/MM/YYYY"}}
+              {{formatDate participation.sharedAt}}
             {{else}}
               <span class="table__column--highlight">{{t
                   "pages.profiles-list.table.column.sending-date.on-hold"

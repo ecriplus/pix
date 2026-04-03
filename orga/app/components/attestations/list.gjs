@@ -6,8 +6,7 @@ import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import MultiSelectFilter from 'pix-orga/components/ui/multi-select-filter';
 import ENV from 'pix-orga/config/environment';
 
@@ -104,10 +103,7 @@ export default class AttestationList extends Component {
           <:cell>
             {{#if participantStatus.obtainedAt}}
               <PixTag @color="green">
-                {{t
-                  "pages.attestations.table.status.obtained"
-                  date=(dayjsFormat participantStatus.obtainedAt "DD/MM/YYYY")
-                }}
+                {{t "pages.attestations.table.status.obtained" date=(formatDate participantStatus.obtainedAt)}}
               </PixTag>
             {{else}}
               <PixTag @color="yellow">

@@ -3,8 +3,7 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { and } from 'ember-truth-helpers';
 
 import Breadcrumb from '../../ui/breadcrumb';
@@ -79,12 +78,12 @@ export default class Header extends Component {
           {{/if}}
           <Information>
             <:title>{{t "pages.campaign-individual-results.start-date"}}</:title>
-            <:content>{{dayjsFormat @campaignProfile.createdAt "DD MMM YYYY"}}</:content>
+            <:content>{{formatDate @campaignProfile.createdAt format="LLL"}}</:content>
           </Information>
           {{#if @campaignProfile.isShared}}
             <Information>
               <:title>{{t "pages.campaign-individual-results.shared-date"}}</:title>
-              <:content>{{dayjsFormat @campaignProfile.sharedAt "DD MMM YYYY"}}</:content>
+              <:content>{{formatDate @campaignProfile.sharedAt format="LLL"}}</:content>
             </Information>
           {{/if}}
         </InformationWrapper>

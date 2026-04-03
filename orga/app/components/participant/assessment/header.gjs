@@ -5,9 +5,7 @@ import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjs from 'dayjs';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
-import { t } from 'ember-intl';
+import { formatDate, t } from 'ember-intl';
 import { and } from 'ember-truth-helpers';
 
 import Badges from '../../campaign/badges';
@@ -53,7 +51,7 @@ export default class Header extends Component {
       let label = this.intl.t('pages.assessment-individual-results.participation-label', { participationNumber });
 
       if (participation.sharedAt) {
-        const participationDate = dayjs(participation.sharedAt).format('DD/MM/YYYY');
+        const participationDate = this.intl.formatDate(participation.sharedAt);
         label = `${label} - ${participationDate}`;
       }
 
@@ -134,7 +132,7 @@ export default class Header extends Component {
           {{/if}}
           <Information>
             <:title>{{t "pages.campaign-individual-results.start-date"}}</:title>
-            <:content>{{dayjsFormat @participation.createdAt "DD MMM YYYY"}}</:content>
+            <:content>{{formatDate @participation.createdAt format="LLL"}}</:content>
           </Information>
           {{#if this.displayProgression}}
             <Information>
@@ -145,7 +143,7 @@ export default class Header extends Component {
           {{#if @participation.isShared}}
             <Information>
               <:title>{{t "pages.campaign-individual-results.shared-date"}}</:title>
-              <:content>{{dayjsFormat @participation.sharedAt "DD MMM YYYY"}}</:content>
+              <:content>{{formatDate @participation.sharedAt format="LLL"}}</:content>
             </Information>
           {{/if}}
         </InformationWrapper>
