@@ -1,14 +1,14 @@
 import { knex } from '../../db/knex-database-connection.js';
-import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
-import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
 import { CapacitySimulator } from '../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { Intervals } from '../../src/certification/evaluation/domain/models/Intervals.js';
 import { V3CertificationScoring } from '../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
 import { Frameworks } from '../../src/certification/shared/domain/models/Frameworks.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 import * as areaRepository from '../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
+import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
 
 export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable extends Script {
   constructor() {
@@ -56,7 +56,11 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
       await DomainTransaction.execute(async () => {
         const trx = DomainTransaction.getConnection();
         try {
-          await trx('assessment-results').insert(assessmentResultsToUpdate).onConflict('id').merge();
+          await batchUpdate({
+            tableName: 'assessment-results',
+            primaryKeyName: 'id',
+            rows: assessmentResultsToUpdate,
+          });
           await batchUpdate({
             tableName: 'certification-courses',
             primaryKeyName: 'id',
@@ -128,11 +132,7 @@ async function selectCertificationsToProcess(startId, endId, chunkSize) {
       reconciledAt: 'certification-candidates.reconciledAt',
     })
     .from('certification-courses')
-    .join('certification-candidates', function () {
-      this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
-        'certification-candidates.userId': 'certification-courses.userId',
-      });
-    })
+    .join('certification-candidates', 'certification-candidates.id', 'certification-courses.candidateId')
     .where('certification-courses.version', 3)
     .where('certification-courses.id', '>=', startId)
     .orderBy('certification-courses.id', 'asc')
@@ -163,7 +163,7 @@ async function processCertifications(certificationsData, coreScoringConfiguratio
   }
   const filtered = results.filter((r) => !!r);
   return {
-    assessmentResultsToUpdate: filtered.map((r) => r.assessmentResult),
+    assessmentResultsToUpdate: filtered.filter((r) => r.assessmentResult).map((r) => r.assessmentResult),
     certificationCoursesToUpdate: filtered.map((r) => ({ id: r.certificationCourseId, versionId: r.versionId })),
     latestCertificationIdProcessed,
   };
@@ -188,8 +188,15 @@ async function processCertification(v3CertificationScorings, certificationData) 
       certificationData.certificationCourseId,
     )
     .first();
+
+  const versionId = coreScoringConfiguration.id;
+
   if (!assessmentResultData) {
-    return null;
+    return {
+      certificationCourseId: certificationData.certificationCourseId,
+      versionId,
+      assessmentResult: null,
+    };
   }
 
   const capacity = computeCapacityFromPixScore(
@@ -197,7 +204,6 @@ async function processCertification(v3CertificationScorings, certificationData) 
     coreScoringConfiguration.scoringConfiguration,
   );
   const reachedMeshIndex = computeMeshIndexFromCapacity(capacity, coreScoringConfiguration.scoringConfiguration);
-  const versionId = coreScoringConfiguration.id;
 
   return {
     certificationCourseId: certificationData.certificationCourseId,
