@@ -1,10 +1,10 @@
 {
   "id": "80ee367d-8e31-4e41-babd-a28940652f47",
   "shortId": "b9e32cb2",
-  "slug": "partie1-anatomie-message-arnaque",
-  "title": "Anatomie d’un message d’arnaque [Partie 1]",
+  "slug": "reconnaitre-message-arnaque",
+  "title": "Reconnaître un message d’arnaque",
   "isBeta": true,
-  "visibility": "public",
+  "visibility": "private",
   "details": {
     "image": "https://assets.pix.org/modules/CYPhishingInd/picto_cyber_phishing_ind.svg",
     "description": "<p>Les messages et mails d’arnaque sont très courants et ressemblent à des messages sûrs.&nbsp;</p><p> Dans ce module, découvrez des indices et techniques qui permettent de vérifier vos messages. <br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr.</em></p>",
