@@ -20,7 +20,7 @@ import {
   HttpTestServer,
   sinon,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 
@@ -264,11 +264,13 @@ describe('Integration | Identity Access Management | Application | Route | oidc-
         };
 
         const identityProvider = 'OIDC_LOGOUT_EXAMPLE_NET';
-        const openIdClientMock = await createMockedTestOidcProvider({
-          application: 'orga',
-          applicationTld: '.org',
-          identityProvider,
-        });
+        const [openIdClientMock] = await createMockedTestOidcProviders([
+          {
+            application: 'orga',
+            applicationTld: '.org',
+            identityProvider,
+          },
+        ]);
 
         openIdClientMock.buildEndSessionUrl.throws(new Error('Client Error: Wrong token hint'));
 

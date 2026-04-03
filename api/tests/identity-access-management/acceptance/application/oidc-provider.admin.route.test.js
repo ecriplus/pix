@@ -10,7 +10,7 @@ import {
   insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | oidc-provider', function () {
   let server;
@@ -79,7 +79,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
 
   describe('GET /api/admin/oidc/identity-providers', function () {
     beforeEach(async function () {
-      await createMockedTestOidcProvider({ application: 'admin', applicationTld: '.fr' });
+      await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
       server = await createServer();
     });
 
@@ -116,7 +116,7 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
 
   describe('POST /api/admin/oidc/user/reconcile', function () {
     beforeEach(async function () {
-      await createMockedTestOidcProvider({ application: 'admin', applicationTld: '.fr' });
+      await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
       server = await createServer();
     });
 
@@ -193,18 +193,20 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
 
   context('when the OIDC provider has a connectionMethodCode', function () {
     beforeEach(async function () {
-      await createMockedTestOidcProvider({ application: 'admin', applicationTld: '.fr' });
+      await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
       server = await createServer();
     });
 
     describe('POST /api/admin/oidc/user/reconcile', function () {
       beforeEach(async function () {
-        await createMockedTestOidcProvider({
-          application: 'admin',
-          applicationTld: '.fr',
-          identityProvider: 'OIDC_EXAMPLE_NET-ADMIN',
-          connectionMethodCode: 'OIDC_EXAMPLE_NET',
-        });
+        await createMockedTestOidcProviders([
+          {
+            application: 'admin',
+            applicationTld: '.fr',
+            identityProvider: 'OIDC_EXAMPLE_NET-ADMIN',
+            connectionMethodCode: 'OIDC_EXAMPLE_NET',
+          },
+        ]);
         server = await createServer();
       });
 

@@ -12,7 +12,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProvider } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
 
 const UUID_PATTERN = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 
@@ -890,13 +890,17 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
     connectionMethodCode,
     postLogoutRedirectUri,
   }) {
-    openidClientMock = await createMockedTestOidcProvider({
-      application,
-      applicationTld,
-      identityProvider,
-      connectionMethodCode,
-      postLogoutRedirectUri,
-    });
+    const openidClientMocks = await createMockedTestOidcProviders([
+      {
+        application,
+        applicationTld,
+        identityProvider,
+        connectionMethodCode,
+        postLogoutRedirectUri,
+      },
+    ]);
+
+    openidClientMock = openidClientMocks.at(0);
     server = await createServer();
   }
 });

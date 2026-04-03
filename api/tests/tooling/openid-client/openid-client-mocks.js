@@ -50,49 +50,61 @@ function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig'
   };
 }
 
-async function createMockedTestOidcProvider({
-  application,
-  applicationTld,
-  connectionMethodCode,
-  identityProvider = 'OIDC_EXAMPLE_NET',
-  postLogoutRedirectUri,
-}) {
-  const openidClientMock = createOpenIdClientMock(openIdConfigurationResponse);
+async function createMockedTestOidcProviders(mockedProviders) {
+  const openidClientMocks = [];
+  const oidcAuthenticationServices = [];
 
-  const redirectUri = `https://${application}.dev.pix${applicationTld}/connexion/oidc-example-net`;
+  for (const mockedProvider of mockedProviders) {
+    const {
+      application,
+      applicationTld,
+      connectionMethodCode,
+      identityProvider = 'OIDC_EXAMPLE_NET',
+      slug = 'oidc-example-net',
+      source = 'oidcexamplenet',
+      postLogoutRedirectUri,
+    } = mockedProvider;
 
-  const authorizationUrl = `${openIdConfigurationResponse.authorization_endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=state&nonce=nonce`;
-  openidClientMock.buildAuthorizationUrl.returns(authorizationUrl);
+    const openidClientMock = createOpenIdClientMock(openIdConfigurationResponse);
 
-  const endSessionUrl = `${openIdConfigurationResponse.end_session_endpoint}?client_id=${clientId}`;
-  openidClientMock.buildEndSessionUrl.returns(endSessionUrl);
+    const redirectUri = `https://${application}.dev.pix${applicationTld}/connexion/oidc-example-net`;
 
-  await oidcAuthenticationServiceRegistry.testOnly_reset([
-    new OidcAuthenticationService(
-      {
-        accessTokenLifespanMs: 60000,
-        application,
-        applicationTld,
-        clientId,
-        clientSecret: 'secret',
-        connectionMethodCode,
-        enabled: true,
-        enabledForPixAdmin: true,
-        configKey: 'oidcExampleNet',
-        shouldCloseSession: true,
-        identityProvider,
-        openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
-        organizationName: 'OIDC Example',
-        redirectUri,
-        slug: 'oidc-example-net',
-        source: 'oidcexamplenet',
-        postLogoutRedirectUri,
-      },
-      { openidClient: openidClientMock },
-    ),
-  ]);
+    const authorizationUrl = `${openIdConfigurationResponse.authorization_endpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&state=state&nonce=nonce`;
+    openidClientMock.buildAuthorizationUrl.returns(authorizationUrl);
 
-  return openidClientMock;
+    const endSessionUrl = `${openIdConfigurationResponse.end_session_endpoint}?client_id=${clientId}`;
+    openidClientMock.buildEndSessionUrl.returns(endSessionUrl);
+
+    openidClientMocks.push(openidClientMock);
+    oidcAuthenticationServices.push(
+      new OidcAuthenticationService(
+        {
+          accessTokenLifespanMs: 60000,
+          application,
+          applicationTld,
+          clientId,
+          clientSecret: 'secret',
+          connectionMethodCode,
+          enabled: true,
+          enabledForPixAdmin: true,
+          configKey: 'oidcExampleNet',
+          shouldCloseSession: true,
+          identityProvider,
+          openidConfigurationUrl: 'https://oidc.example.net/.well-known/openid-configuration',
+          organizationName: 'OIDC Example',
+          redirectUri,
+          slug,
+          source,
+          postLogoutRedirectUri,
+        },
+        { openidClient: openidClientMock },
+      ),
+    );
+  }
+
+  await oidcAuthenticationServiceRegistry.testOnly_reset(oidcAuthenticationServices);
+
+  return openidClientMocks;
 }
 
-export { createMockedTestOidcProvider, createOpenIdClientMock };
+export { createMockedTestOidcProviders, createOpenIdClientMock };
