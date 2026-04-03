@@ -1,5 +1,3 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { hash } from '@ember/helper';
 import { service } from '@ember/service';
@@ -20,7 +18,7 @@ export default class ActionsSection extends Component {
 
   <template>
     <section class="page-section">
-      <div class="content-text content-text--small organization-children__actions-section">
+      <div class="content-text content-text--small organization-network__actions-section">
         {{#if this.canCreateChildOrganization}}
           {{#unless @organization.parentOrganizationId}}
             <PixButtonLink
@@ -28,7 +26,7 @@ export default class ActionsSection extends Component {
               @variant="secondary"
               @route="authenticated.organizations.new"
               @query={{hash parentOrganizationId=@organization.id parentOrganizationName=@organization.name}}
-            >{{t "components.organizations.children.create-child-organization-button"}}</PixButtonLink>
+            >{{t "components.organizations.network.create-child-organization-button"}}</PixButtonLink>
           {{/unless}}
         {{/if}}
 

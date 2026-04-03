@@ -130,6 +130,14 @@ class NetworkAlreadyExistError extends DomainError {
   }
 }
 
+class StructureNotFoundError extends DomainError {
+  constructor({ code = 'STRUCTURE_NOT_FOUND', message = 'Structure not found', meta } = {}) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+  }
+}
+
 export {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
@@ -143,6 +151,7 @@ export {
   OrganizationBatchUpdateError,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
+  StructureNotFoundError,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
   UnableToDetachParentOrganizationFromChildOrganization,

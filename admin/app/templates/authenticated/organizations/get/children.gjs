@@ -1,3 +1,5 @@
+// TODO: delete file at the end of EPIX PIX-21277
+
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Children from 'pix-admin/components/organizations/children';
 

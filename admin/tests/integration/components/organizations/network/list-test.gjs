@@ -1,13 +1,11 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import { render as renderScreen } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import List from 'pix-admin/components/organizations/children/list';
+import List from 'pix-admin/components/organizations/network/list';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | organizations/children/list', function (hooks) {
+module('Integration | Component | organizations/network/list', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('display children organizations list', async function (assert) {
@@ -29,7 +27,9 @@ module('Integration | Component | organizations/children/list', function (hooks)
     const screen = await renderScreen(<template><List @childOrganizations={{organizations}} /></template>);
 
     // then
-    assert.dom(screen.getByRole('table', { name: t('components.organizations.children-list.table-name') })).exists();
+    assert
+      .dom(screen.getByRole('table', { name: t('components.organizations.network.children-list.table-name') }))
+      .exists();
 
     assert.dom(screen.getByRole('columnheader', { name: 'ID' })).exists();
     assert.dom(screen.getByRole('columnheader', { name: 'Nom' })).exists();

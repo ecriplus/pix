@@ -1,13 +1,11 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import ListItem from 'pix-admin/components/organizations/children/list-item';
+import ListItem from 'pix-admin/components/organizations/network/list-item';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | organizations/children/list-item', function (hooks) {
+module('Integration | Component | organizations/network/list-item', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('displays child organization items', async function (assert) {
@@ -27,7 +25,7 @@ module('Integration | Component | organizations/children/list-item', function (h
     assert.ok(screen.getByRole('cell', { name: 'Collège The Night Watch' }));
     assert.ok(screen.getByRole('cell', { name: 'UA123456' }));
     assert.notOk(
-      screen.queryByRole('button', { name: t('components.organizations.children-list.actions.detach.button') }),
+      screen.queryByRole('button', { name: t('components.organizations.network.children-list.actions.detach.button') }),
     );
   });
 });

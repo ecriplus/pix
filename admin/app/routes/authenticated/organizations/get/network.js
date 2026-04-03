@@ -14,4 +14,12 @@ export default class Network extends Route {
       this.router.replaceWith('authenticated.organizations.get.details');
     }
   }
+
+  async model() {
+    const organization = this.modelFor('authenticated.organizations.get');
+    return {
+      organization,
+      children: organization.children,
+    };
+  }
 }

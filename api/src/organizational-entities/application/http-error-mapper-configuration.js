@@ -12,6 +12,7 @@ import {
   OrganizationBatchUpdateError,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
+  StructureNotFoundError,
   TagNotFoundError,
   UnableToAttachChildOrganizationToParentOrganizationError,
   UnableToDetachParentOrganizationFromChildOrganization,
@@ -73,6 +74,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   {
     name: CountryNotFoundError.name,
     httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code, error.meta),
+  },
+  {
+    name: StructureNotFoundError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
 

@@ -1,15 +1,13 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
-import ActionsSection from 'pix-admin/components/organizations/children/actions-section';
+import ActionsSection from 'pix-admin/components/organizations/network/actions-section';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | organizations/children/actions-section', function (hooks) {
+module('Integration | Component | organizations/network/actions-section', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
 
@@ -44,7 +42,7 @@ module('Integration | Component | organizations/children/actions-section', funct
       );
 
       assert.ok(
-        screen.getByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        screen.getByRole('link', { name: t('components.organizations.network.create-child-organization-button') }),
       );
     });
 
@@ -71,7 +69,7 @@ module('Integration | Component | organizations/children/actions-section', funct
       );
 
       assert.notOk(
-        screen.queryByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        screen.queryByRole('link', { name: t('components.organizations.network.create-child-organization-button') }),
       );
     });
 
@@ -99,7 +97,7 @@ module('Integration | Component | organizations/children/actions-section', funct
       );
 
       assert.notOk(
-        screen.queryByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        screen.queryByRole('link', { name: t('components.organizations.network.create-child-organization-button') }),
       );
     });
 
@@ -120,7 +118,7 @@ module('Integration | Component | organizations/children/actions-section', funct
       );
 
       assert.notOk(
-        screen.queryByRole('link', { name: t('components.organizations.children.create-child-organization-button') }),
+        screen.queryByRole('link', { name: t('components.organizations.network.create-child-organization-button') }),
       );
     });
   });
@@ -147,7 +145,7 @@ module('Integration | Component | organizations/children/actions-section', funct
         </template>,
       );
 
-      assert.ok(screen.getByRole('form', { name: t('components.organizations.children.attach-child-form.name') }));
+      assert.ok(screen.getByRole('form', { name: t('components.organizations.network.attach-child-form.name') }));
     });
 
     module('when user does not have access to attach child organization actions scope', function () {
@@ -173,7 +171,7 @@ module('Integration | Component | organizations/children/actions-section', funct
         );
 
         assert.notOk(
-          screen.queryByRole('form', { name: t('components.organizations.children.attach-child-form.name') }),
+          screen.queryByRole('form', { name: t('components.organizations.network.attach-child-form.name') }),
         );
       });
     });

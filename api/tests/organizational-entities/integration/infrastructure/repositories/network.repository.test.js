@@ -1,3 +1,4 @@
+import { StructureNotFoundError } from '../../../../../src/organizational-entities/domain/errors.js';
 import * as networkRepository from '../../../../../src/organizational-entities/infrastructure/repositories/network.repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
@@ -301,6 +302,51 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         network_id: network.id,
         parent_structure_id: parentStructure.id,
         child_structure_id: null,
+      });
+    });
+
+    context('error handling', function () {
+      it('throws when parent organization does not have a structure', async function () {
+        const parentOrganization = databaseBuilder.factory.buildOrganization({ name: 'Parent organization' });
+
+        const { organization: childOrganization } = databaseBuilder.factory.buildOrganizationWithStructure({
+          name: 'Child Organization',
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(networkRepository.attachOrganization)({
+          childOrganizationId: childOrganization.id,
+          parentOrganizationId: parentOrganization.id,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(StructureNotFoundError);
+        expect(error.meta).to.deep.equal({ organizationId: parentOrganization.id });
+      });
+
+      it('throws when child organization does not have a structure', async function () {
+        const { organization: parentOrganization } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          name: 'My network',
+          headOrganization: { name: 'Parent organization' },
+        });
+
+        const childOrganization = databaseBuilder.factory.buildOrganization({
+          name: 'Child Organization without structure',
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const error = await catchErr(networkRepository.attachOrganization)({
+          childOrganizationId: childOrganization.id,
+          parentOrganizationId: parentOrganization.id,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(StructureNotFoundError);
+        expect(error.meta).to.deep.equal({ organizationId: childOrganization.id });
       });
     });
   });

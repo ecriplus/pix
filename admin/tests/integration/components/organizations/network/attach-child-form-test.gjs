@@ -1,14 +1,12 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import { render } from '@1024pix/ember-testing-library';
 import { click, fillIn, triggerEvent } from '@ember/test-helpers';
-import AttachChildForm from 'pix-admin/components/organizations/children/attach-child-form';
+import AttachChildForm from 'pix-admin/components/organizations/network/attach-child-form';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | organizations/children/attach-child-form', function (hooks) {
+module('Integration | Component | organizations/network/attach-child-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('should update input value when typing', async function (assert) {

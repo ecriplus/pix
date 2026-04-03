@@ -1,5 +1,3 @@
-// TODO: delete file at the end of EPIX PIX-21277
-
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
@@ -7,7 +5,7 @@ import { t } from 'ember-intl';
 <template>
   <PixTableColumn @context={{@context}}>
     <:header>
-      {{t "components.organizations.children-list.table-headers.id"}}
+      {{t "components.organizations.network.children-list.table-headers.id"}}
     </:header>
     <:cell>
       <LinkTo @route="authenticated.organizations.get" @model={{@childOrganization.id}}>
@@ -17,7 +15,7 @@ import { t } from 'ember-intl';
   </PixTableColumn>
   <PixTableColumn @context={{@context}} class="break-word">
     <:header>
-      {{t "components.organizations.children-list.table-headers.name"}}
+      {{t "components.organizations.network.children-list.table-headers.name"}}
     </:header>
     <:cell>
       {{@childOrganization.name}}
@@ -25,7 +23,7 @@ import { t } from 'ember-intl';
   </PixTableColumn>
   <PixTableColumn @context={{@context}} class="break-word">
     <:header>
-      {{t "components.organizations.children-list.table-headers.external-id"}}
+      {{t "components.organizations.network.children-list.table-headers.external-id"}}
     </:header>
     <:cell>
       {{@childOrganization.externalId}}
