@@ -38,7 +38,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
 
   test('it should display email and creation date of invitation', async function (assert) {
     // given
-    const dayjsService = this.owner.lookup('service:dayjs');
+    const intl = this.owner.lookup('service:intl');
     const pendingInvitationDate = '2023-12-05T09:00:00Z';
 
     const invitations = [{ email: 'gigi@example.net', isPending: true, updatedAt: pendingInvitationDate }];
@@ -47,7 +47,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     const component = await render(<template><TeamInvitationsList @invitations={{invitations}} /></template>);
 
     // then
-    const formattedPendingInvitationDate = dayjsService.self(pendingInvitationDate).format('DD/MM/YYYY [-] HH:mm');
+    const formattedPendingInvitationDate = intl.formatDate(pendingInvitationDate, { format: 'medium' });
 
     assert.dom(component.getByRole('cell', { name: 'gigi@example.net' })).exists();
     assert.dom(component.getByRole('cell', { name: formattedPendingInvitationDate })).exists();
