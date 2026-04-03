@@ -4,13 +4,12 @@
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { LearningContentRepository } from '../../../../shared/infrastructure/repositories/learning-content-repository.js';
+import { getInstance } from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { CalibratedChallenge } from '../../domain/models/CalibratedChallenge.js';
 import { CalibratedChallengeSkill } from '../../domain/models/CalibratedChallengeSkill.js';
 
-const TABLE_NAME = 'learningcontent.challenges';
 const VALIDATED_STATUS = 'validé';
 
 /**
@@ -19,13 +18,7 @@ const VALIDATED_STATUS = 'validé';
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>} challenges with validated LCMS status
  */
-export async function findActiveFlashCompatible({
-  locale,
-  version,
-  dependencies = {
-    getInstance,
-  },
-} = {}) {
+export async function findActiveFlashCompatible({ locale, version }) {
   const knexConn = DomainTransaction.getConnection();
   _assertLocaleIsDefined(locale);
   const cacheKey = `findActiveFlashCompatible({ versionId: ${version?.id}, locale: ${locale} })`;
@@ -48,7 +41,7 @@ export async function findActiveFlashCompatible({
       .orderBy('id');
   };
 
-  const validChallengeDtos = await dependencies.getInstance().find(cacheKey, findCallback);
+  const validChallengeDtos = await getInstance().find(cacheKey, findCallback);
 
   const challengeDtos = decorateWithCertificationCalibration({
     validChallengeDtos,
@@ -65,13 +58,7 @@ export async function findActiveFlashCompatible({
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
  */
-export async function getMany({
-  ids,
-  version,
-  dependencies = {
-    getInstance,
-  },
-} = {}) {
+export async function getMany({ ids, version }) {
   const knexConn = DomainTransaction.getConnection();
   const calibrations = await knexConn
     .select('difficulty', 'discriminant', 'challengeId')
@@ -86,7 +73,7 @@ export async function getMany({
     throw new NotFoundError('Some challenges do not exist in certification version');
   }
 
-  const lcmsChallenges = await dependencies.getInstance().loadMany(ids);
+  const lcmsChallenges = await getInstance().loadMany(ids);
   lcmsChallenges.forEach((challengeDto, index) => {
     if (challengeDto) return;
     logger.error({ challengeId: ids[index] }, 'Some challenges do not exist in LCMS');
@@ -109,12 +96,7 @@ export async function getMany({
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
  */
-export async function getAllCalibratedChallenges({
-  version,
-  dependencies = {
-    getInstance,
-  },
-}) {
+export async function getAllCalibratedChallenges({ version }) {
   const knexConn = DomainTransaction.getConnection();
 
   const calibrationForThisVersion = await knexConn
@@ -127,7 +109,7 @@ export async function getAllCalibratedChallenges({
 
   const challengesIds = calibrationForThisVersion.map(({ challengeId }) => challengeId);
 
-  const lcmsChallenges = await dependencies.getInstance().loadMany(challengesIds);
+  const lcmsChallenges = await getInstance().loadMany(challengesIds);
   lcmsChallenges.forEach((challengeDto, index) => {
     if (challengeDto) return;
     logger.error({ challengeId: challengesIds[index] }, 'Some challenges do not exist in LCMS');
@@ -192,13 +174,4 @@ function _toDomain({ challengeDto, skill }) {
       tubeId: skill.tubeId,
     }),
   });
-}
-
-let instance;
-
-function getInstance() {
-  if (!instance) {
-    instance = new LearningContentRepository({ tableName: TABLE_NAME });
-  }
-  return instance;
 }
