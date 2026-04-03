@@ -48,14 +48,20 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     await databaseBuilder.commit();
 
     const assessmentResultDataBefore = await knex('assessment-results').orderBy('id');
+    const certificationCourseDataBefore = await knex('certification-courses').orderBy('id');
 
-    await script.handle({ options: { dryRun: true, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({
+      options: { dryRun: true, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 },
+      logger,
+    });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
+    const certificationCourseData = await knex('certification-courses').orderBy('id');
     expect(assessmentResultData).to.deep.equal(assessmentResultDataBefore);
+    expect(certificationCourseData).to.deep.equal(certificationCourseDataBefore);
   });
 
-  it('should fill capacity, meshindex and versionid in assessment results for current version', async function () {
+  it('should fill capacity, meshindex and versionid in assessment results and versionid in certification courses for current version', async function () {
     const startDate = new Date('2025-10-01');
     const expirationDate = null;
 
@@ -83,8 +89,15 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(assessmentResultDataBefore[1].capacity).to.be.null;
     expect(assessmentResultDataBefore[1].reachedMeshIndex).to.be.null;
     expect(assessmentResultDataBefore[1].versionId).to.be.null;
+    const certificationCourseDataBefore = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseDataBefore).to.have.lengthOf(pixScores.length);
+    expect(certificationCourseDataBefore[0].versionId).to.be.null;
+    expect(certificationCourseDataBefore[1].versionId).to.be.null;
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({
+      options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 },
+      logger,
+    });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
@@ -94,9 +107,13 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(Math.ceil(assessmentResultData[1].capacity)).to.equal(8);
     expect(assessmentResultData[1].reachedMeshIndex).to.equal(7);
     expect(assessmentResultData[1].versionId).to.equal(versionId);
+    const certificationCourseData = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseData).to.have.lengthOf(pixScores.length);
+    expect(certificationCourseData[0].versionId).to.equal(versionId);
+    expect(certificationCourseData[1].versionId).to.equal(versionId);
   });
 
-  it('should fill capacity, meshindex and versionid in assessment results for expired version', async function () {
+  it('should fill capacity, meshindex and versionid in assessment results and versionid in certification courses for expired version', async function () {
     const startDate = new Date('2025-10-01');
     const expirationDate = new Date('2026-01-01');
 
@@ -124,8 +141,15 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(assessmentResultDataBefore[1].capacity).to.be.null;
     expect(assessmentResultDataBefore[1].reachedMeshIndex).to.be.null;
     expect(assessmentResultDataBefore[1].versionId).to.be.null;
+    const certificationCourseDataBefore = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseDataBefore).to.have.lengthOf(pixScores.length);
+    expect(certificationCourseDataBefore[0].versionId).to.be.null;
+    expect(certificationCourseDataBefore[1].versionId).to.be.null;
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({
+      options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 },
+      logger,
+    });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
@@ -135,6 +159,46 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(Math.ceil(assessmentResultData[1].capacity)).to.equal(8);
     expect(assessmentResultData[1].reachedMeshIndex).to.equal(7);
     expect(assessmentResultData[1].versionId).to.equal(versionId);
+    const certificationCourseData = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseData).to.have.lengthOf(pixScores.length);
+    expect(certificationCourseData[0].versionId).to.equal(versionId);
+    expect(certificationCourseData[1].versionId).to.equal(versionId);
+  });
+
+  it('should fill versionid in certification courses even when there is no assessment result found', async function () {
+    const startDate = new Date('2025-10-01');
+    const expirationDate = null;
+
+    const versionId = databaseBuilder.factory.buildCertificationVersion({
+      startDate,
+      expirationDate,
+    }).id;
+
+    const candidateId = databaseBuilder.factory.buildCertificationCandidate({ reconciledAt: new Date() }).id;
+    const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+      candidateId,
+      version: AlgorithmEngineVersion.V3,
+    }).id;
+
+    await databaseBuilder.commit();
+
+    const assessmentResultDataBefore = await knex('assessment-results').orderBy('id');
+    expect(assessmentResultDataBefore).to.have.lengthOf(0);
+
+    const certificationCourseDataBefore = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseDataBefore).to.have.lengthOf(1);
+    expect(certificationCourseDataBefore[0].versionId).to.be.null;
+
+    await script.handle({
+      options: { dryRun: false, startId: certificationCourseId, chunkSize: 1, throttleDelay: 0 },
+      logger,
+    });
+
+    const assessmentResultData = await knex('assessment-results').orderBy('id');
+    expect(assessmentResultData).to.have.lengthOf(0);
+
+    const certificationCourseData = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseData[0].versionId).to.equal(versionId);
   });
 
   it('should correctly process certification from two different versions with appropriate logger informations', async function () {
@@ -169,12 +233,19 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
 
     await databaseBuilder.commit();
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 2 }, logger });
+    await script.handle({
+      options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 2, throttleDelay: 0 },
+      logger,
+    });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(6);
     expect(assessmentResultData[0].versionId).to.equal(versionIdArchivedVersion);
     expect(assessmentResultData[3].versionId).to.equal(versionIdCurrentVersion);
+    const certificationCourseData = await knex('assessment-results').orderBy('id');
+    expect(certificationCourseData).to.have.lengthOf(6);
+    expect(certificationCourseData[0].versionId).to.equal(versionIdArchivedVersion);
+    expect(certificationCourseData[3].versionId).to.equal(versionIdCurrentVersion);
     expect(logger.info.getCall(0)).to.have.been.calledWithExactly('Script execution started');
     expect(logger.info.getCall(1)).to.have.been.calledWithExactly(
       `Processing certification from ${certificationCourseIds[0]} to ${certificationCourseIds[1]}...`,
@@ -233,6 +304,9 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(assessmentResultData).to.have.lengthOf(4);
     expect(assessmentResultData[0].versionId).to.equal(versionId);
     expect(assessmentResultData[2].versionId).to.equal(null);
+    const certificationCourseData = await knex('certification-courses').select('id', 'versionId').orderBy('id');
+    expect(certificationCourseData[0].versionId).to.equal(versionId);
+    expect(certificationCourseData[2].versionId).to.equal(null);
     expect(logger.info.getCall(0)).to.have.been.calledWithExactly('Script execution started');
     expect(logger.info.getCall(1)).to.have.been.calledWithExactly(
       `Processing certification from ${certificationCourseIds[0]} to ${certificationCourseIds[1]}...`,
@@ -254,12 +328,9 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
 
 function _createBatchAssessmentResults({ reconciledAt, pixScores, certificationCourseIds }) {
   for (const pixScore of pixScores) {
-    const sessionId = databaseBuilder.factory.buildSession().id;
-    const userId = databaseBuilder.factory.buildUser().id;
-    databaseBuilder.factory.buildCertificationCandidate({ sessionId, reconciledAt: reconciledAt, userId });
+    const candidateId = databaseBuilder.factory.buildCertificationCandidate({ reconciledAt: reconciledAt }).id;
     const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-      sessionId,
-      userId,
+      candidateId,
       version: AlgorithmEngineVersion.V3,
     }).id;
     certificationCourseIds.push(certificationCourseId);

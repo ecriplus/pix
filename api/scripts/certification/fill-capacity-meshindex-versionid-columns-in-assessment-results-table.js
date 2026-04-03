@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 import { knex } from '../../db/knex-database-connection.js';
 import { CapacitySimulator } from '../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { Intervals } from '../../src/certification/evaluation/domain/models/Intervals.js';
@@ -5,8 +7,10 @@ import { V3CertificationScoring } from '../../src/certification/evaluation/domai
 import { Frameworks } from '../../src/certification/shared/domain/models/Frameworks.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
 import * as areaRepository from '../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
+import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
 
 export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable extends Script {
   constructor() {
@@ -25,46 +29,64 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
           describe: 'Define the id of the certification-courses from which we start doing the process',
           default: 5906059,
         },
+        endId: {
+          type: 'number',
+          describe: 'Define the id of the certification-courses at which we stop doing the process (inclusive)',
+          default: null,
+        },
         chunkSize: {
           type: 'number',
           describe:
             'Define the number of certifications processed in a chunk (chunks determined how many certifications are updated and committed at the same time)',
           default: 1000,
         },
+        throttleDelay: {
+          type: 'number',
+          describe: 'The throttle delay',
+          default: 250,
+        },
       },
     });
   }
 
   async handle({ logger, options }) {
-    const { dryRun, startId, chunkSize } = options;
+    const { dryRun, startId, endId, chunkSize, throttleDelay } = options;
     logger.info('Script execution started');
     const coreScoringConfigurations = await getCoreScoringConfigurations();
 
     let currentStartId = startId;
-    let certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
+    let certificationsData = await selectCertificationsToProcess(currentStartId, endId, chunkSize);
     while (certificationsData.length > 0) {
-      const { assessmentResultsToUpdate, latestCertificationIdProcessed } = await processCertifications(
-        certificationsData,
-        coreScoringConfigurations,
-        logger,
-      );
+      const { assessmentResultsToUpdate, certificationCoursesToUpdate, latestCertificationIdProcessed } =
+        await processCertifications(certificationsData, coreScoringConfigurations, logger);
 
-      const trx = await knex.transaction();
-      try {
-        await trx('assessment-results').insert(assessmentResultsToUpdate).onConflict('id').merge();
-        logger.info(`Certifications up until ID ${latestCertificationIdProcessed} DONE`);
-        if (dryRun) {
+      await DomainTransaction.execute(async () => {
+        const trx = DomainTransaction.getConnection();
+        try {
+          await batchUpdate({
+            tableName: 'assessment-results',
+            primaryKeyName: 'id',
+            rows: assessmentResultsToUpdate,
+          });
+          await batchUpdate({
+            tableName: 'certification-courses',
+            primaryKeyName: 'id',
+            rows: certificationCoursesToUpdate,
+          });
+          logger.info(`Certifications up until ID ${latestCertificationIdProcessed} DONE`);
+          if (dryRun) {
+            await trx.rollback();
+          } else {
+            await trx.commit();
+          }
+        } catch (error) {
           await trx.rollback();
-        } else {
-          await trx.commit();
+          throw error;
         }
-      } catch (error) {
-        await trx.rollback();
-        throw error;
-      }
-
+      });
+      await setTimeout(throttleDelay);
       currentStartId = latestCertificationIdProcessed + 1;
-      certificationsData = await selectCertificationsToProcess(currentStartId, chunkSize);
+      certificationsData = await selectCertificationsToProcess(currentStartId, endId, chunkSize);
     }
 
     logger.info('No more certifications to process youpi');
@@ -110,42 +132,46 @@ async function getCoreScoringConfigurations() {
   return v3CertificationScorings;
 }
 
-async function selectCertificationsToProcess(startId, chunkSize) {
-  return await knex
+async function selectCertificationsToProcess(startId, endId, chunkSize) {
+  const query = knex
     .select({
       certificationCourseId: 'certification-courses.id',
       reconciledAt: 'certification-candidates.reconciledAt',
     })
     .from('certification-courses')
-    .join('certification-candidates', function () {
-      this.on({ 'certification-candidates.sessionId': 'certification-courses.sessionId' }).andOn({
-        'certification-candidates.userId': 'certification-courses.userId',
-      });
-    })
+    .join('certification-candidates', 'certification-candidates.id', 'certification-courses.candidateId')
     .where('certification-courses.version', 3)
     .where('certification-courses.id', '>=', startId)
     .orderBy('certification-courses.id', 'asc')
     .limit(chunkSize);
+
+  if (endId != null) {
+    query.where('certification-courses.id', '<=', endId);
+  }
+
+  return query;
 }
 
 async function processCertifications(certificationsData, coreScoringConfigurations, logger) {
   let latestCertificationIdProcessed;
-  const assessmentResultsToUpdate = [];
+  const results = [];
   logger.info(
     `Processing certification from ${certificationsData[0].certificationCourseId} to ${certificationsData.at(-1).certificationCourseId}...`,
   );
   for (const certificationData of certificationsData) {
     try {
       latestCertificationIdProcessed = certificationData.certificationCourseId;
-      const assessmentResultData = await processCertification(coreScoringConfigurations, certificationData);
-      assessmentResultsToUpdate.push(assessmentResultData);
+      const result = await processCertification(coreScoringConfigurations, certificationData);
+      results.push(result);
     } catch (error) {
       logger.error(error, `Certification ID ${latestCertificationIdProcessed} encountered an error`);
       throw error;
     }
   }
+  const filtered = results.filter((r) => !!r);
   return {
-    assessmentResultsToUpdate: assessmentResultsToUpdate.filter((ar) => !!ar),
+    assessmentResultsToUpdate: filtered.filter((r) => r.assessmentResult).map((r) => r.assessmentResult),
+    certificationCoursesToUpdate: filtered.map((r) => ({ id: r.certificationCourseId, versionId: r.versionId })),
     latestCertificationIdProcessed,
   };
 }
@@ -169,8 +195,15 @@ async function processCertification(v3CertificationScorings, certificationData) 
       certificationData.certificationCourseId,
     )
     .first();
+
+  const versionId = coreScoringConfiguration.id;
+
   if (!assessmentResultData) {
-    return null;
+    return {
+      certificationCourseId: certificationData.certificationCourseId,
+      versionId,
+      assessmentResult: null,
+    };
   }
 
   const capacity = computeCapacityFromPixScore(
@@ -178,13 +211,16 @@ async function processCertification(v3CertificationScorings, certificationData) 
     coreScoringConfiguration.scoringConfiguration,
   );
   const reachedMeshIndex = computeMeshIndexFromCapacity(capacity, coreScoringConfiguration.scoringConfiguration);
-  const versionId = coreScoringConfiguration.id;
 
   return {
-    ...assessmentResultData,
-    capacity,
-    reachedMeshIndex,
+    certificationCourseId: certificationData.certificationCourseId,
     versionId,
+    assessmentResult: {
+      ...assessmentResultData,
+      capacity,
+      reachedMeshIndex,
+      versionId,
+    },
   };
 }
 
