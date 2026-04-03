@@ -588,20 +588,11 @@
             {
               "type": "element",
               "element": {
-                "id": "7b54d2e0-2bd8-4522-9f13-ea801afd245d",
-                "type": "expand",
-                "title": "🕹️[Simulateur d’interface gestionnaire de fichiers \"filemanager-visu\"] --> LIEN EMBED À AJOUTER",
-                "content": "<p><strong>arborescence </strong>:&nbsp;</p><ul><li>Mon ordinateur<ul><li>Documents (avec fichiers doc dedans)</li><li>Images<ul><li>Dossier Anniversaire&nbsp;: vide</li><li>Fichier image Cousinade</li><li>Fichier image 80 ans Mamie</li><li>Fichier image été1</li><li>Fichier image été2</li></ul></li><li>Musique&nbsp;: vide</li><li>Vidéos&nbsp;: vide</li><li>Téléchargements&nbsp;: vide</li></ul></li></ul><p></p><p><strong>Interface</strong> comme dans filemanager-visu (<a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager-visu&amp;mode=junior_gerer_gerer_di3&amp;locale=fr\" target=\"_blank\">config junior gerer</a>)</p><ul><li><strong>🚀Début&nbsp;:&nbsp;</strong>dans le dossier Documents</li><li><strong>🕹️Actions </strong>: <ul><li>double clic dossier Images</li><li>clic sur bouton Liste</li></ul></li></ul><p>Rien à valider.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "8e03b63b-1bca-43c7-894f-edc94a6afdb7",
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "simulateur gestionnaire de fichiers",
-                "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=example&lang=fr",
+                "url": "https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=modulix_rangerfichiers_ind_decouverte3&lang=fr",
                 "instruction": "<p>Dans le gestionnaire ci-dessous&nbsp;: </p><ul>    <li> Ouvrez le dossier «&nbsp;Images&nbsp;».</li>    <li>Modifiez l’affichage pour retrouver les dates de modification des différents fichiers.</li></ul>",
                 "solution": "",
                 "height": 500
@@ -622,7 +613,7 @@
                 "id": "e1a2a940-b7c7-48a8-b6df-e8e28a1e64e5",
                 "type": "expand",
                 "title": "🗝️Indice 2",
-                "content": "<p>Dans le gestionnaire de fichiers, les options d’affichage se trouvent dans la barre d’outils. Vous pouvez notamment changer l’affichage en passant de la vue <strong>icônes</strong> à la vue <strong>liste</strong>.</p><br>"
+                "content": "<p>Dans le gestionnaire de fichiers, les options d’affichage se trouvent dans la barre d’outils. Vous pouvez notamment changer l’affichage en passant de la vue <strong>icônes</strong> à la vue <strong>liste</strong>.</p>"
               }
             },
             {
@@ -685,7 +676,16 @@
                 "id": "1db4a456-f71c-43c9-90b8-c9a468154260",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans le gestionnaire de fichiers&nbsp;:&nbsp; </p><ul>    <li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li>    <li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li>    <li>Un <strong>volet latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li></ul><br><p><strong>🤔 Bon à savoir</strong><br>Voici deux manières d’ouvrir le gestionaire de fichiers&nbsp;:</p><ul>    <li>cliquer sur l’icône dans la barre des tâches (Windows) ou dock (Mas OS).</li>    <li>double cliquer sur un dossier sur le bureau.</li></ul>"
+                "content": "<p>Dans le gestionnaire de fichiers&nbsp;:&nbsp; </p><ul>    <li>La vue <strong>icônes </strong>montre un aperçu du contenu de chaque fichier ou dossier, ou une icône qui varie selon le type d’élément.&nbsp;</li>    <li>La vue <strong>liste</strong> ou <strong>détails</strong> permet de voir davantage d’informations sur les fichiers (date, type, taille du fichier).</li>    <li>Un <strong>volet latéral</strong> (à gauche) permet de se repérer et de naviguer dans l’arborescence des dossiers.</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "5b96f537-0742-46d3-88f2-ae11fb01b0bd",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>Voici deux manières d’ouvrir le gestionaire de fichiers&nbsp;:</p><ul>    <li>cliquer sur l’icône dans la barre des tâches (Windows) ou dock (Mas OS).</li>    <li>double cliquer sur un dossier sur le bureau.</li></ul>"
               }
             }
           ]
@@ -717,16 +717,7 @@
                 "id": "e2952509-2806-41c0-bbb9-f46202beb57e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier « Images » en créant des sous-dossiers thématiques.<br>Elle souhaite maintenant ranger son dossier « Documents » de la même manière.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "a03ddc52-819a-458c-8e92-af208a347ae6",
-                "type": "expand",
-                "title": "🕹️[Simulateur de gestionnaire de fichiers] --> LIEN EMBED À AJOUTER",
-                "content": "<p><strong>Arborescence (même que dans l’accroche avec Images rangés)&nbsp;</strong>:&nbsp;</p><ul><li>Mon ordinateur<ul><li>Documents&nbsp;<ul><li>Dossier Playlist fête</li><li>fichier “facture 2025”</li><li>fichier “facture 2024”</li><li>fichier “notes1”</li><li>fichier “notes2”</li><li>fichier “notes3”</li></ul></li><li>Images<ul><li>Dossier Hiver (hiver1, hiver2)</li><li>Dossier Été (été1, été2)</li></ul></li><li>Musique (avec fichiers mp3 dedans)</li><li>Vidéos (vide)</li><li>Téléchargements (vide)</li></ul></li></ul><p><strong>Interface </strong>comme dans filemanager</p><p>@<a href=\"https://editor.pix.fr/api/challenges/challenge1t6AdXVTwH7jGo/preview\">organiser3 </a></p><p><strong>🕹️Actions </strong>: Création de sous-dossiers (clic droit nouveau dossier + nommage) + Déplacements de fichiers (clic droit, copier coller)</p>"
+                "content": "<p>Marie souhaite organiser ses dossiers et ses fichiers.</p><p>Elle a commencé par ranger son dossier «&nbsp;Images&nbsp;» en créant des sous-dossiers thématiques.<br>Elle souhaite maintenant ranger son dossier «&nbsp;Documents&nbsp;» de la même manière.</p>"
               }
             },
             {
@@ -734,10 +725,10 @@
               "element": {
                 "id": "59d2e281-a445-424d-9690-a0e08b8a6e80",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "simulateur gestionnaire de fichiers",
-                "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=example&lang=fr",
-                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous : </p><ol><li> Dans le dossier « Documents », créer 2 sous-dossiers :&nbsp; « Factures »,&nbsp; « Notes ».</li><li>Ranger les fichiers du dossier&nbsp; « Documents » dans les bons sous-dossiers.</li><li>Déplacer le dossier « Playlist fêtes » dans le dossier plus « Musique ».</li></ol>",
+                "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=modulix_rangerfichiers_ind_decouverte4&lang=fr",
+                "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous&nbsp;: </p><ol><li> Dans le dossier «&nbsp;Documents&nbsp;», créer 2 sous-dossiers&nbsp;:&nbsp; «&nbsp;Factures&nbsp;» et «&nbsp;Notes&nbsp;».</li><li>Ranger les fichiers du dossier «&nbsp;Documents&nbsp;» dans les bons sous-dossiers.</li><li>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier «&nbsp;Musique&nbsp;».</li></ol>",
                 "solution": "",
                 "height": 500
               }
@@ -759,15 +750,6 @@
                 "title": "🗝️Indice 2",
                 "content": "<p>Le dossier «&nbsp;Playlist fête&nbsp;» contient des fichiers de type audio. Ce dossier sera plus à sa place en le rangeant dans le dossier «&nbsp;Musique&nbsp;».</p><p>Le dossier «&nbsp;Musique&nbsp;» est visible dans le volet latéral du gestionnaire.</p>"
               }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "baf117c9-647e-4715-8b1f-5d4f07182e88",
-                "type": "text",
-                "tag": " ",
-                "content": "<strong>Feedback&nbsp;: </strong>Pour organiser ses fichiers, on peut créer des dossiers et des sous-dossiers, puis y déplacer des fichiers ou des dossiers avec leur contenu. <br>Le <strong>gestionnaire de fichiers</strong> permet de <strong>modifier l’organisation à tout moment</strong>."
-              }
             }
           ]
         },
@@ -777,34 +759,45 @@
           "title": "Leçon #4",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "878db1df-9959-48b5-906a-fc6c6141e2c1",
-                "type": "text",
-                "tag": " ",
-                "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><br><p>Il y a plusieurs manières de s’organiser. <strong>Chacun peut choisir de s’organiser en fonction des ses usages</strong>, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement.</p><br><p>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous-dossiers.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "8a3d8b71-d0f8-48aa-b9ab-4083e2cffbe0",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/arbo-lecon3.png",
-                "alt": "",
-                "alternativeText": "à écrire",
-                "legend": "",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "60223c63-944a-4e07-9cd2-a7b558696954",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><strong>💡 Astuce</strong></p><p>On peut par exemple organiser ses fichiers par&nbsp;: projet, année, type de fichiers etc.</p>"
-              }
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "9660ab42-0df0-4ca9-8db4-c08cf1bacb87",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Pour organiser ses fichiers, on peut créer des dossiers et des sous-dossiers, puis y déplacer des fichiers ou des dossiers avec leur contenu. </p><p>Le <strong>gestionnaire de fichiers</strong> permet de <strong>modifier l’organisation à tout moment</strong>.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "53e81fd8-96af-4847-9fd5-909eec7ce1a9",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<h5>Comment choisir son organisation ?&nbsp; </h5><p>Il y a plusieurs manières de s’organiser. <strong>Chacun peut choisir de s’organiser en fonction des ses usages</strong>, de la quantité de fichiers, de ce qu’il cherche à retrouver facilement.</p><p>Certains vont préférer une organisation avec peu de dossiers, d’autres seront plus à l’aise avec de nombreux dossiers et sous-dossiers.</p>"
+                    },
+                    {
+                      "id": "172b04f1-7f1a-427c-959f-e1af692d7f5a",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/RangerFichiers_IND/arbo-lecon3.png",
+                      "alt": "à écrire",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "7e4f9ea7-7d8d-430d-8cfb-4adc8b51f5a6",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>On peut par exemple organiser ses fichiers par&nbsp;: projet, année, type de fichiers etc.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -856,7 +849,7 @@
                 "id": "79d7564d-d775-4f56-855e-15f33eabed00",
                 "type": "expand",
                 "title": "[Simulateur interface de gestionnaire de fichiers avec autovalidation]",
-                "content": "<p><strong>Arborescence&nbsp;:&nbsp;</strong><br>pas besoin de lien avec les arbo précédentes</p><p><strong>Interface</strong> comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>Actions&nbsp;: </strong>Naivguer dans le gestionnaire puis double cliquer sur le fichier baguette -&gt; déclenchement de la validation.</p>"
+                "content": "<p><strong>Arborescence&nbsp;:&nbsp;</strong><br>pas besoin de lien avec les arbo précédentes</p><p><strong>Interface</strong> comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>Actions&nbsp;: </strong>Naviguer dans le gestionnaire puis double cliquer sur le fichier baguette -&gt; déclenchement de la validation.</p>"
               }
             },
             {
@@ -962,21 +955,12 @@
             {
               "type": "element",
               "element": {
-                "id": "b39ab6e2-31e0-4aef-96fc-692b9de1d5bd",
-                "type": "expand",
-                "title": "🕹️[Simulateur interface de gestionnaire de fichiers avec autovalidation] --> CONFIG À FAIRE",
-                "content": "<p><strong>arborescence&nbsp;:</strong></p><ul><li>Mon ordinateur<ul><li>Documents (avec fichiers doc dedans)</li><li>Images&nbsp;:<ul><li>Fichier image1 - Victor</li><li>Fichier image2 - Victor</li><li>Fichier image3 - Shaïna</li><li>Fichier mouton - Shaïna</li><li>Fichier chien - Shaïna</li><li>Fichier chat - Shaïna</li></ul></li><li>Musique (avec fichiers mp3 dedans)</li><li>Vidéos (avec fichiers vidéo dedans)</li></ul></li></ul><p><strong>Interface </strong>comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>🕹️Actions</strong>&nbsp;:&nbsp;</p><ul><li>Création de dossiers</li><li>Déplacement de fichiers</li><li>Affichage mode liste (auteur)</li><br></ul>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "f183019c-102f-47c1-a46e-94daded05388",
                 "type": "embed",
-                "isCompletionRequired": false,
+                "isCompletionRequired": true,
                 "title": "simulateur gestionnaire de fichiers",
-                "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=example&lang=fr",
-                "instruction": "<p>Suivez les instructions suivantes pour ranger les photos du dossier «&nbsp;Images&nbsp;»&nbsp;: </p><ul>    <li>Dans le dossier «&nbsp;Images&nbsp;», créez un dossier «&nbsp;Shaïna&nbsp;».</li>    <li>Rangez-y toutes les photos dont l’auteur est Shaïna.</li>    <li>Dans le dossiers «&nbsp;Shaïna&nbsp;», créez un sous-dossier «&nbsp;Animaux&nbsp;».</li>    <li>Rangez-y toutes les photos avec un nom d’animaux.</li></ul>",
+                "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=modulix_rangerfichiers_ind_activite3&lang=fr",
+                "instruction": "<p>Suivez les instructions suivantes pour ranger les photos du dossier «&nbsp;Images&nbsp;»&nbsp;: </p><ul>    <li>Dans le dossier «&nbsp;Images&nbsp;», créez un dossier «&nbsp;Shaïna&nbsp;».</li>    <li>Rangez-y toutes les photos dont l’auteur est Shaïna.</li>    </ul>",
                 "solution": "",
                 "height": 500
               }
