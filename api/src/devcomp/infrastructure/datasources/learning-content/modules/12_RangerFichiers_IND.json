@@ -849,7 +849,7 @@
                 "id": "79d7564d-d775-4f56-855e-15f33eabed00",
                 "type": "expand",
                 "title": "[Simulateur interface de gestionnaire de fichiers avec autovalidation]",
-                "content": "<p><strong>Arborescence&nbsp;:&nbsp;</strong><br>pas besoin de lien avec les arbo précédentes</p><p><strong>Interface</strong> comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>Actions&nbsp;: </strong>Naivguer dans le gestionnaire puis double cliquer sur le fichier baguette -&gt; déclenchement de la validation.</p>"
+                "content": "<p><strong>Arborescence&nbsp;:&nbsp;</strong><br>pas besoin de lien avec les arbo précédentes</p><p><strong>Interface</strong> comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>Actions&nbsp;: </strong>Naviguer dans le gestionnaire puis double cliquer sur le fichier baguette -&gt; déclenchement de la validation.</p>"
               }
             },
             {
