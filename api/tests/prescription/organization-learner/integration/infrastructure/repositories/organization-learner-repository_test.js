@@ -858,15 +858,15 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
       secondUser = new User(databaseBuilder.factory.buildUser({ firstName: 'theo', lastName: 'Courant' }));
       organizationLearner1 = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
-        firstName: 'firstName1',
-        lastName: 'lastName1',
+        firstName: 'xandri',
+        lastName: 'Alek',
         division: '6eme A',
         userId: firstUser.id,
       });
       organizationLearner2 = databaseBuilder.factory.buildOrganizationLearner({
         organizationId,
-        firstName: 'firstName2',
-        lastName: 'lastName2',
+        firstName: 'xandra',
+        lastName: 'Balek',
         division: '6eme B',
         userId: secondUser.id,
       });
@@ -1067,7 +1067,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
     });
 
     context('ordered learners without case sensitive', function () {
-      it('orders by firstName', async function () {
+      it('orders by lastName', async function () {
         const { attestationParticipantsStatus: result } =
           await organizationLearnerRepository.findPaginatedAttestationStatusForOrganizationLearnersAndKey({
             organizationId,
@@ -1079,17 +1079,17 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
         expect(result[1].organizationLearnerId).to.equal(organizationLearner2.id);
       });
 
-      it('orders by lastName when firstName are identical', async function () {
+      it('orders by firstName when lastName are identical', async function () {
         const secondLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
           organizationId,
           firstName: 'Toto',
-          lastName: 'Auberto',
+          lastName: 'Quberto',
         });
 
         const thirdLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
           organizationId,
-          firstName: 'Toto',
-          lastName: 'auberti',
+          firstName: 'Tota',
+          lastName: 'Quberto',
         });
 
         await databaseBuilder.commit();
@@ -1141,7 +1141,7 @@ describe('Integration | Infrastructure | Repository | Organization Learner', fun
                 size: 1,
                 number: 1,
               },
-              filter: { name: 'firstName', divisions: ['6eme A'] },
+              filter: { name: 'xandri', divisions: ['6eme A'] },
             });
 
           expect(result.pagination).to.deep.equal({
