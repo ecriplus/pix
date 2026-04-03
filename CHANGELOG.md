@@ -1,5 +1,31 @@
 # Pix Changelog
 
+# [5.377.0](https://github.com/1024pix/pix/compare/v5.376.0...v5.377.0) (2026-04-03)
+
+### :rocket: Amélioration
+
+- [#15722](https://github.com/1024pix/pix/pull/15722) Afficher les boutons d'action sur l'onglet Réseau d'une organisation (PIX-22135) 
+- [#15718](https://github.com/1024pix/pix/pull/15718) Ajouter un glossaire pour les modules (PIX-21997). 
+- [#15727](https://github.com/1024pix/pix/pull/15727) Visio_IND Corrections 
+
+### :bug: Correction
+
+- [#15646](https://github.com/1024pix/pix/pull/15646) Certaines methodes de connexion SSO non visibles dans Pix Admin (PIX-22071) 
+- [#15717](https://github.com/1024pix/pix/pull/15717) En Mode Preview, l'instruction des Stepper horizontaux ne s'affiche pas (PIX-22188) 
+- [#15728](https://github.com/1024pix/pix/pull/15728) Éviter les problématiques de timezone des dates de PixCertif (PIX-22206). 
+
+### :building_construction: Tech
+
+- [#15705](https://github.com/1024pix/pix/pull/15705) Ajouter une migration sur la colonne campaignParticipationId de la table user-recommended-trainings (PIX-22166) 
+- [#15736](https://github.com/1024pix/pix/pull/15736) Rendre la colonne content de combined_course_blueprints nullable (PIX-22212) 
+
+### :arrow_up: Montée de version
+
+- [#15737](https://github.com/1024pix/pix/pull/15737) Update dependency file-type to v22 (api) 
+- [#15732](https://github.com/1024pix/pix/pull/15732) Update dependency oxfmt to ^0.42.0 (api) 
+- [#15730](https://github.com/1024pix/pix/pull/15730) Update nginx Docker tag to v1.29.7 
+- [#15731](https://github.com/1024pix/pix/pull/15731) Update node
+
 # [5.376.0](https://github.com/1024pix/pix/compare/v5.375.0...v5.376.0) (2026-04-02)
 
 ### :rocket: Amélioration
