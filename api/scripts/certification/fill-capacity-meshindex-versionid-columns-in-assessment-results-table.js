@@ -9,6 +9,7 @@ import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js'
 import * as areaRepository from '../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
 import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
+import { setTimeout } from 'node:timers/promises';
 
 export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable extends Script {
   constructor() {
@@ -38,12 +39,17 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
             'Define the number of certifications processed in a chunk (chunks determined how many certifications are updated and committed at the same time)',
           default: 1000,
         },
+        throttleDelay: {
+          type: 'number',
+          describe: 'The throttle delay',
+          default: 250,
+        },
       },
     });
   }
 
   async handle({ logger, options }) {
-    const { dryRun, startId, endId, chunkSize } = options;
+    const { dryRun, startId, endId, chunkSize, throttleDelay } = options;
     logger.info('Script execution started');
     const coreScoringConfigurations = await getCoreScoringConfigurations();
 
@@ -77,7 +83,7 @@ export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable exten
           throw error;
         }
       });
-
+      await setTimeout(throttleDelay);
       currentStartId = latestCertificationIdProcessed + 1;
       certificationsData = await selectCertificationsToProcess(currentStartId, endId, chunkSize);
     }

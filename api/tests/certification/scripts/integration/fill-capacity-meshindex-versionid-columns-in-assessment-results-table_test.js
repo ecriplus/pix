@@ -50,7 +50,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     const assessmentResultDataBefore = await knex('assessment-results').orderBy('id');
     const certificationCourseDataBefore = await knex('certification-courses').orderBy('id');
 
-    await script.handle({ options: { dryRun: true, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({ options: { dryRun: true, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 }, logger });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     const certificationCourseData = await knex('certification-courses').orderBy('id');
@@ -91,7 +91,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(certificationCourseDataBefore[0].versionId).to.be.null;
     expect(certificationCourseDataBefore[1].versionId).to.be.null;
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 }, logger });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
@@ -140,7 +140,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(certificationCourseDataBefore[0].versionId).to.be.null;
     expect(certificationCourseDataBefore[1].versionId).to.be.null;
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1 }, logger });
+    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 1, throttleDelay: 0 }, logger });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(pixScores.length);
@@ -180,7 +180,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
     expect(certificationCourseDataBefore).to.have.lengthOf(1);
     expect(certificationCourseDataBefore[0].versionId).to.be.null;
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseId, chunkSize: 1 }, logger });
+    await script.handle({ options: { dryRun: false, startId: certificationCourseId, chunkSize: 1, throttleDelay: 0 }, logger });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(0);
@@ -222,7 +222,7 @@ describe('Integration | Certification | Scripts | Fill capacity, meshindex, vers
 
     await databaseBuilder.commit();
 
-    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 2 }, logger });
+    await script.handle({ options: { dryRun: false, startId: certificationCourseIds[0], chunkSize: 2, throttleDelay: 0 }, logger });
 
     const assessmentResultData = await knex('assessment-results').orderBy('id');
     expect(assessmentResultData).to.have.lengthOf(6);
