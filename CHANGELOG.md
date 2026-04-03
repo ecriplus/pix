@@ -1,5 +1,12 @@
 # Pix Changelog
 
+## [5.377.1](https://github.com/1024pix/pix/compare/v5.377.0...v5.377.1) (2026-04-03)
+
+### :building_construction: Tech
+
+- [#15740](https://github.com/1024pix/pix/pull/15740) :card_file_box: Ajoute une colonne `eduV3ExternalJuryResult` à la table `assessment-results` (PIX-22236) 
+- [#15735](https://github.com/1024pix/pix/pull/15735) Mise à jour du script de remplissage des nouvelles colonnes de la table "assessment-results" pour gérer le cas des premières certifications V3 non gérées (PIX-22205)
+
 # [5.377.0](https://github.com/1024pix/pix/compare/v5.376.0...v5.377.0) (2026-04-03)
 
 ### :rocket: Amélioration
