@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 import { knex } from '../../db/knex-database-connection.js';
 import { CapacitySimulator } from '../../src/certification/evaluation/domain/models/CapacitySimulator.js';
 import { Intervals } from '../../src/certification/evaluation/domain/models/Intervals.js';
@@ -9,7 +11,6 @@ import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js'
 import * as areaRepository from '../../src/shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../src/shared/infrastructure/repositories/competence-repository.js';
 import { batchUpdate } from '../../src/shared/infrastructure/utils/knex-utils.js';
-import { setTimeout } from 'node:timers/promises';
 
 export class FillCapacityMeshindexVersionidColumnsInAssessmentResultsTable extends Script {
   constructor() {
