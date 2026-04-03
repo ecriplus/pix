@@ -109,12 +109,12 @@ export async function getMany({
  * @param {Version} params.version
  * @returns {Promise<CalibratedChallenge[]>}
  */
-export const getAllCalibratedChallenges = async ({
+export async function getAllCalibratedChallenges({
   version,
   dependencies = {
     getInstance,
   },
-}) => {
+}) {
   const knexConn = DomainTransaction.getConnection();
 
   const calibrationForThisVersion = await knexConn
@@ -143,11 +143,11 @@ export const getAllCalibratedChallenges = async ({
 
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengesWithCalibration);
   return challengesDtosWithSkills.map(([challengeDto, skill]) => _toDomain({ challengeDto, skill }));
-};
+}
 
-const _byId = (challenge1, challenge2) => {
+function _byId(challenge1, challenge2) {
   return challenge1.id < challenge2.id ? -1 : 1;
-};
+}
 
 async function loadChallengeDtosSkills(challengeDtos) {
   return Promise.all(
