@@ -49,7 +49,7 @@ import CertificationInformationState from './informations/state';
               @editJury={{@editJury}}
             />
           {{else if @certification.isPixPlusEduV3}}
-            <PixPlusEduV3Results />
+            <PixPlusEduV3Results @certification={{@certification}} />
           {{/if}}
         </div>
       </PixBlock>

@@ -501,10 +501,6 @@
       "page-title": "Référentiels de certification"
     },
     "certifications": {
-      "external-jury-select-options": {
-        "REJECTED": "Rejetée",
-        "UNSET": "En attente"
-      },
       "global-actions": {
         "cancel": {
           "button": "Annuler la certification",
@@ -542,6 +538,19 @@
         "ariaLabel": "Rechercher une certification avec un identifiant",
         "label": "Trouver une certification",
         "placeholder": "ID de la certification"
+      },
+      "v2": {
+        "external-jury-select-options": {
+          "REJECTED": "Rejetée",
+          "UNSET": "En attente"
+        }
+      },
+      "v3": {
+        "external-jury-select-options": {
+          "ADVANCED": "Avancé",
+          "EXPERT": "Expert",
+          "UNSET": "En attente"
+        }
       }
     },
     "combined-course-blueprints": {
