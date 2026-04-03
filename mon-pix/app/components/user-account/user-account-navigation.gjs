@@ -5,7 +5,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-export default class UserAccountNavigationSection extends Component {
+export default class UserAccountNavigation extends Component {
   @service currentDomain;
 
   get isOrgDomain() {
