@@ -1,5 +1,5 @@
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
-import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import {
   createServer,
   databaseBuilder,
@@ -21,12 +21,8 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         // given
         const adminUser = await insertUserWithRoleSuperAdmin();
 
-        databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }]),
-        });
-        databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module-abc' }]),
-        });
+        databaseBuilder.factory.buildCombinedCourseBlueprint();
+        databaseBuilder.factory.buildCombinedCourseBlueprint();
         await databaseBuilder.commit();
 
         const options = {
@@ -63,7 +59,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
               description: 'La description combinix',
               illustration: 'illustration.svg',
               'attestation-key': ATTESTATIONS.SIXTH_GRADE,
-              content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
+              content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
             },
           },
         };
@@ -90,9 +86,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         // given
         const adminUser = await insertUserWithRoleSuperAdmin();
 
-        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
-          content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
-        });
+        const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint();
         await databaseBuilder.commit();
 
         const options = {
@@ -136,6 +130,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+
   describe('POST /api/admin/combined-course-blueprints/:blueprintId/organizations', function () {
     context('when user is admin ', function () {
       it('should attach a combined course blueprint to one or several organizations', async function () {
@@ -182,6 +177,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       });
     });
   });
+
   describe('GET /api/organizations/:id/combined-course-blueprints', function () {
     context('when user is authenticated', function () {
       let user;
