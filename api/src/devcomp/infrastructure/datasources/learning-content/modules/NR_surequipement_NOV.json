@@ -118,7 +118,7 @@
                     {
                       "id": "61649840-71c7-4a75-b3b7-27f30e069bd5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Que doit-elle faire de son  ordinateur ?&nbsp;</p>",
+                      "instruction": "<p>Que doit-elle faire de son ordinateur ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
