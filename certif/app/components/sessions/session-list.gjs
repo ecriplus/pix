@@ -9,10 +9,10 @@ import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
 
+import dayjsUtcFormat from '../../helpers/dayjs-utc-format';
 import { CREATED, FINALIZED, PROCESSED } from '../../models/session-management';
 import SessionDeleteConfirmModal from './session-delete-confirm-modal';
 
@@ -130,7 +130,7 @@ export default class SessionList extends Component {
               {{t 'common.forms.session-labels.date'}}
             </:header>
             <:cell>
-              {{dayjsFormat sessionSummary.date 'DD/MM/YYYY' allow-empty=true}}
+              {{dayjsUtcFormat sessionSummary.date 'DD/MM/YYYY' allowEmpty=true}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}} class='table__column--small'>
@@ -138,7 +138,7 @@ export default class SessionList extends Component {
               {{t 'common.forms.session-labels.time'}}
             </:header>
             <:cell>
-              {{dayjsFormat sessionSummary.time 'HH:mm' inputFormat='HH:mm:ss' allow-empty=true}}
+              {{dayjsUtcFormat sessionSummary.time 'HH:mm' inputFormat='HH:mm:ss' allowEmpty=true}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

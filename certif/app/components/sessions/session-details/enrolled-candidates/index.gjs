@@ -10,12 +10,12 @@ import EmberObject, { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import get from 'lodash/get';
 import toNumber from 'lodash/toNumber';
 import { SUBSCRIPTION_TYPES } from 'pix-certif/models/subscription';
 
+import dayjsUtcFormat from '../../../../helpers/dayjs-utc-format';
 import { formatPercentage } from '../../../../helpers/format-percentage';
 import CandidateCreationModal from './candidate-creation-modal';
 import CandidateDetailsModal from './candidate-details-modal';
@@ -361,7 +361,7 @@ export default class EnrolledCandidates extends Component {
               {{t 'common.labels.candidate.birth-date'}}
             </:header>
             <:cell>
-              {{dayjsFormat candidate.birthdate 'DD/MM/YYYY'}}
+              {{dayjsUtcFormat candidate.birthdate 'DD/MM/YYYY'}}
             </:cell>
           </PixTableColumn>
           {{#if @shouldDisplayScoStudentRegistration}}

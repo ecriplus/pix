@@ -9,9 +9,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import utc from 'dayjs/plugin/utc';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
 import Content from 'pix-certif/components/dropdown/content';
 import Item from 'pix-certif/components/dropdown/item';
@@ -21,7 +19,9 @@ import HandleLiveAlertModal from 'pix-certif/components/session-supervising/hand
 import LiveAlertHandledModal from 'pix-certif/components/session-supervising/live-alert-handled-modal';
 import formatPercentage from 'pix-certif/helpers/format-percentage';
 
-dayjs.extend(LocalizedFormat);
+import dayjsUtcFormatHelper from '../../helpers/dayjs-utc-format';
+import { dayjsUtcFormat } from '../../helpers/dayjs-utc-format';
+
 dayjs.extend(utc);
 
 const Modals = {
@@ -56,9 +56,7 @@ export default class CandidateInList extends Component {
   }
 
   get formattedBirthdate() {
-    if (!this.args.candidate.birthdate) return '';
-
-    return dayjs.utc(this.args.candidate.birthdate).format('L');
+    return dayjsUtcFormat([this.args.candidate.birthdate, 'DD/MM/YYYY'], { allowEmpty: true });
   }
 
   get isConfirmButtonToBeDisplayed() {
@@ -134,20 +132,17 @@ export default class CandidateInList extends Component {
   }
 
   get candidateStartTime() {
-    const startTime = dayjs(this.args.candidate.startDateTime).format('HH:mm');
-    return startTime;
+    return dayjsUtcFormat([this.args.candidate.startDateTime, 'HH:mm'], {});
   }
 
   get candidateTheoricalEndDateTime() {
     const pixPlusDuration = this._getPixPlusDurationInMinutes();
 
     if (pixPlusDuration !== null) {
-      const endTime = dayjs(this.args.candidate.startDateTime).add(pixPlusDuration, 'minute').format('HH:mm');
-      return endTime;
+      return dayjs.utc(this.args.candidate.startDateTime).add(pixPlusDuration, 'minute').format('HH:mm');
     }
 
-    const theoricalEndDateTime = dayjs(this.args.candidate.theoricalEndDateTime).format('HH:mm');
-    return theoricalEndDateTime;
+    return dayjsUtcFormat([this.args.candidate.theoricalEndDateTime, 'HH:mm'], {});
   }
 
   get currentLiveAlertLabel() {
@@ -406,7 +401,7 @@ export default class CandidateInList extends Component {
           </div>
 
           <div class='session-supervising-candidate-in-list__middle-information'>
-            <p>{{dayjsFormat @candidate.birthdate 'DD/MM/YYYY'}}</p>
+            <p>{{dayjsUtcFormatHelper @candidate.birthdate 'DD/MM/YYYY'}}</p>
             {{#if this.shouldDisplayEnrolledComplementaryCertification}}
               <p class='session-supervising-candidate-in-list-details__enrolment'>
                 <PixIcon

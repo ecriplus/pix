@@ -1,5 +1,6 @@
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+
+import dayjsUtcFormat from '../../../helpers/dayjs-utc-format';
 
 <template>
   <div class='session-details__header'>
@@ -11,14 +12,14 @@ import { t } from 'ember-intl';
       <div class='session-details-header-datetime__date'>
         <h2 class='label-text session-details-content__label'>{{t 'common.forms.session-labels.date'}}</h2>
         <span class='content-text content-text--big session-details-header-datetime__text'>
-          {{dayjsFormat @sessionDate 'dddd DD MMM YYYY' allow-empty=true}}
+          {{dayjsUtcFormat @sessionDate 'dddd DD MMM YYYY' allowEmpty=true}}
         </span>
       </div>
 
       <div>
         <h2 class='label-text session-details-content__label'>{{t 'common.forms.session-labels.time-start'}}</h2>
         <span class='content-text content-text--big session-details-header-datetime__text'>
-          {{dayjsFormat @sessionTime 'HH:mm' inputFormat='HH:mm:ss' allow-empty=true}}
+          {{dayjsUtcFormat @sessionTime 'HH:mm' inputFormat='HH:mm:ss' allowEmpty=true}}
         </span>
       </div>
     </div>

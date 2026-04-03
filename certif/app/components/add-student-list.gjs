@@ -11,10 +11,11 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
 import or from 'ember-truth-helpers/helpers/or';
 import some from 'lodash/some';
+
+import dayjsUtcFormat from '../helpers/dayjs-utc-format';
 
 export default class AddStudentList extends Component {
   @service pixToast;
@@ -204,7 +205,7 @@ export default class AddStudentList extends Component {
               {{t 'pages.sco.enrol-candidates-in-session.list.table.birthdate'}}
             </:header>
             <:cell>
-              {{dayjsFormat student.birthdate 'DD/MM/YYYY'}}
+              {{dayjsUtcFormat student.birthdate 'DD/MM/YYYY'}}
             </:cell>
           </PixTableColumn>
         </:columns>

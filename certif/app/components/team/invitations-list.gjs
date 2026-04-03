@@ -3,8 +3,9 @@ import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { fn } from '@ember/helper';
-import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import t from 'ember-intl/helpers/t';
+
+import dayjsUtcFormat from '../../helpers/dayjs-utc-format';
 
 <template>
   {{#if @invitations}}
@@ -23,7 +24,7 @@ import t from 'ember-intl/helpers/t';
             {{t 'pages.team-invitations.table.labels.last-sending-date'}}
           </:header>
           <:cell>
-            {{dayjsFormat invitation.updatedAt 'DD/MM/YYYY [-] HH:mm'}}
+            {{dayjsUtcFormat invitation.updatedAt 'DD/MM/YYYY [-] HH:mm'}}
           </:cell>
         </PixTableColumn>
         <PixTableColumn @context={{context}}>

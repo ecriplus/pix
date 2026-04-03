@@ -122,7 +122,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
           sessionId: sessionWithCandidates.id,
           isLinked: false,
           resultRecipientEmail: 'cendy@example.com',
-          birthdate: '10-10-2000',
+          birthdate: '2000-10-10',
           externalId: 'EXTERNAL-ID',
           subscriptions: [coreSubscription],
         });
@@ -149,8 +149,6 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
 
       test('it should display the list of certification candidates', async function (assert) {
         // given
-        const dayjs = this.owner.lookup('service:dayjs');
-
         // when
         const screen = await visit(`/sessions/${sessionWithCandidates.id}/candidats`);
 
@@ -164,9 +162,7 @@ module('Acceptance | Session Details Certification Candidates', function (hooks)
         assert.dom(within(rows[1]).getByRole('cell', { name: 'Cendy' })).exists();
         assert.dom(within(rows[1]).getByRole('cell', { name: 'Alin' })).exists();
         assert.dom(within(rows[1]).getByRole('cell', { name: 'cendy@example.com' })).exists();
-        assert
-          .dom(within(rows[1]).getByRole('cell', { name: dayjs.self('10-10-2000', 'YYYY-MM-DD').format('DD/MM/YYYY') }))
-          .exists();
+        assert.dom(within(rows[1]).getByRole('cell', { name: '10/10/2000' })).exists();
         assert.dom(within(rows[1]).getByRole('cell', { name: '30 %' })).exists();
         assert.dom(within(rows[1]).getByRole('cell', { name: 'Certification Pix' })).exists();
         assert.dom(within(rows[2]).getByRole('cell', { name: 'Pix+Droit' })).exists();

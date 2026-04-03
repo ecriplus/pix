@@ -3,10 +3,10 @@ import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl';
 import { formatPercentage } from 'pix-certif/helpers/format-percentage';
 
+import { dayjsUtcFormat } from '../../../../helpers/dayjs-utc-format';
 import CandidateDetailsModalRow from './candidate-details-modal-row';
 
 const TRANSLATE_PREFIX = 'pages.sessions.detail.candidates';
@@ -22,7 +22,7 @@ const FIELDS = [
   {
     label: 'labels.candidate.birth-date',
     value: 'birthdate',
-    transform: (value) => (value ? dayjs(value).format('DD/MM/YYYY') : undefined),
+    transform: (value) => (value ? dayjsUtcFormat([value, 'DD/MM/YYYY'], {}) : undefined),
   },
   {
     label: 'labels.candidate.gender.title',
