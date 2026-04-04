@@ -8,7 +8,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
   describe('#fetchForCampaigns', function () {
     let answerRepository;
     let campaignRepository;
-    let challengeRepository;
+    let smartRandomChallengeRepository;
     let knowledgeElementForParticipationService;
     let knowledgeElementRepository;
     let campaignParticipationRepository;
@@ -21,7 +21,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
       campaignRepository = {
         findSkillsByCampaignParticipationId: sinon.stub(),
       };
-      challengeRepository = {
+      smartRandomChallengeRepository = {
         findOperativeBySkillsAndLocales: sinon.stub(),
       };
       knowledgeElementForParticipationService = {
@@ -59,7 +59,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkillsAndLocales.resolves(challenges);
+      smartRandomChallengeRepository.findOperativeBySkillsAndLocales.resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -86,7 +86,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
         assessment,
         answerRepository,
         campaignRepository,
-        challengeRepository,
+        smartRandomChallengeRepository,
         knowledgeElementForParticipationService,
         knowledgeElementRepository,
         campaignParticipationRepository,
@@ -98,10 +98,10 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
       expect(data.allAnswers).to.deep.equal([answer]);
       expect(data.lastAnswer).to.deep.equal(answer);
       expect(data.targetSkills).to.deep.equal(skills);
-      expect(challengeRepository.findOperativeBySkillsAndLocales).to.have.been.calledOnceWithExactly(skills, [
-        'fr-fr',
-        'fr',
-      ]);
+      expect(smartRandomChallengeRepository.findOperativeBySkillsAndLocales).to.have.been.calledOnceWithExactly(
+        skills,
+        ['fr-fr', 'fr'],
+      );
       expect(data.challenges).to.deep.equal(challenges);
       expect(data.knowledgeElements).to.deep.equal(filteredKnowledgeElements);
     });
@@ -127,7 +127,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkillsAndLocales.withArgs(skills).resolves(challenges);
+      smartRandomChallengeRepository.findOperativeBySkillsAndLocales.withArgs(skills).resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -154,7 +154,7 @@ describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', f
         assessment,
         answerRepository,
         campaignRepository,
-        challengeRepository,
+        smartRandomChallengeRepository,
         knowledgeElementForParticipationService,
         knowledgeElementRepository,
         campaignParticipationRepository,
