@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.378.0](https://github.com/1024pix/pix/compare/v5.377.1...v5.378.0) (2026-04-06)
+
+### :rocket: Amélioration
+
+- [#15742](https://github.com/1024pix/pix/pull/15742) : inté embed ref dans RangerFichiersIND 
+- [#15674](https://github.com/1024pix/pix/pull/15674) FRI decoupe module phishing IND partie 1 
+
+### :bug: Correction
+
+- [#15741](https://github.com/1024pix/pix/pull/15741) Éviter la double mise en cache de certaines épreuves (PIX-22238) 
+
+### :building_construction: Tech
+
+- [#15716](https://github.com/1024pix/pix/pull/15716) replace ember-dayjs with ember-intl (PIX-22241).
+
 ## [5.377.1](https://github.com/1024pix/pix/compare/v5.377.0...v5.377.1) (2026-04-03)
 
 ### :building_construction: Tech
