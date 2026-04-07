@@ -1842,7 +1842,7 @@
           "editorLogo": "Editor logo url",
           "editorName": "Editor name",
           "internalTitle": "Internal title",
-          "locales": "{ count, plural, one {Localized language} other {Localized languages}}",
+          "locales": "{ count, plural, one {Locale} other {Locales}}",
           "localizedLanguage": "Localized language",
           "publishedOn": "Published on",
           "status": "Status",
