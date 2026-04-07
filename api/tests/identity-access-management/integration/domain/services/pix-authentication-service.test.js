@@ -183,7 +183,7 @@ describe('Integration | Identity Access Management | Domain | Services | pix-aut
 
               // then
               expect(error).to.be.an.instanceof(PasswordNotMatching);
-              expect(error.meta.remainingAttempts).to.be.equal(9);
+              expect(error.meta.remainingAttempts).to.be.equal(8); // 30 - (21 + 1) = 8
             });
           });
         });

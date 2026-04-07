@@ -26,12 +26,13 @@ class UserLogin {
     if (this.failureCount > config.login.blockingLimitFailureCount) {
       return 0;
     }
-    return config.login.blockingLimitFailureCount - this.failureCount + 1;
+
+    return config.login.blockingLimitFailureCount - this.failureCount;
   }
 
   get shouldWarnRemainingAttempts() {
     const warnLimit = config.login.temporaryBlockingThresholdFailureCount;
-    return this.remainingAttempts >= 0 && this.remainingAttempts <= warnLimit;
+    return this.remainingAttempts > 0 && this.remainingAttempts <= warnLimit;
   }
 
   incrementFailureCount() {
