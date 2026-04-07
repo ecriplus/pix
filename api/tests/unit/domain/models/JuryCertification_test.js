@@ -30,6 +30,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         juryId: 1,
         pixScore: 555,
         reachedMeshIndex: 5,
+        eduV3ExternalJuryResult: null,
         commentForCandidate: 'coucou',
         commentForOrganization: 'comment',
         commentByJury: 'ça va',

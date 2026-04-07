@@ -3,6 +3,7 @@ import { buildCertificationCandidate } from './build-certification-candidate.js'
 import { buildCertificationCourse } from './build-certification-course.js';
 import { buildCertificationDetails } from './build-certification-details.js';
 import { buildCertificationSessionComplementaryCertification } from './build-certification-session-complementary-certification.js';
+import { buildJuryCertificationSummary } from './build-jury-certification-summary.js';
 import { buildJurySessionCounters } from './build-jury-session-counters.js';
 import { buildSession } from './build-session.js';
 import { buildSessionManagement } from './build-session-management.js';
@@ -16,4 +17,5 @@ export const builders = {
   buildJurySessionCounters,
   buildSessionManagement,
   buildSession,
+  buildJuryCertificationSummary,
 };

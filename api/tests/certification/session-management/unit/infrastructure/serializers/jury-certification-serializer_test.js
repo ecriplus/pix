@@ -289,7 +289,7 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
               'is-rejected-for-fraud': false,
               'jury-id': 1,
               'pix-score': 555,
-              'reached-mesh-index': 5,
+              'reached-result-key': 'CORE.NONE',
               'competences-with-mark': juryCertification.competenceMarks,
               'comment-for-candidate': translate('jury.comment.FRAUD.candidate'),
               'comment-by-jury': 'ça va',

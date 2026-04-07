@@ -1,5 +1,5 @@
-import { JuryCertificationSummary } from '../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
-import { AssessmentResult } from '../../../../src/shared/domain/models/AssessmentResult.js';
+import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
+import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 
 const buildJuryCertificationSummary = function ({
   id = 123,
@@ -14,6 +14,7 @@ const buildJuryCertificationSummary = function ({
   abortReason = null,
   isPublished = true,
   isEndedByInvigilator = false,
+  eduV3ExternalJuryResult = null,
   certificationIssueReports = [],
   certificationFramework = null,
 } = {}) {
@@ -30,6 +31,7 @@ const buildJuryCertificationSummary = function ({
     abortReason,
     isPublished,
     isEndedByInvigilator,
+    eduV3ExternalJuryResult,
     certificationIssueReports,
     certificationFramework,
   });
