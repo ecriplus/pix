@@ -1,9 +1,9 @@
-import { JuryCertification } from '../../../../src/certification/session-management/domain/models/JuryCertification.js';
-import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../src/certification/shared/domain/constants/mesh-configuration.js';
-import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
-import { AutoJuryCommentKeys } from '../../../../src/certification/shared/domain/models/JuryComment.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { JuryCertification } from '../../../../../../src/certification/session-management/domain/models/JuryCertification.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | JuryCertification', function () {
   describe('#from', function () {
