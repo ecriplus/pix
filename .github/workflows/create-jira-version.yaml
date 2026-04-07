@@ -11,10 +11,9 @@ jobs:
     steps:
       - name: Create version in Jira
         run: |
-          AUTH_HEADER=$(echo -n "${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" | base64)
           curl -X POST \
-            -H "Authorization: Basic $AUTH_HEADER" \
             -H "Content-Type: application/json" \
+            --user "${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/version" \
             -d "{
               \"name\": \"${{ github.event.release.tag_name }}\",
