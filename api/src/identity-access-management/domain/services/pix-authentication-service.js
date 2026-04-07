@@ -52,7 +52,7 @@ async function getUserByUsernameAndPassword({
       }
 
       throw new PasswordNotMatching({
-        remainingAttempts: userLogin.shouldWarnRemainingAttempts ? userLogin.remainingAttempts : null,
+        remainingAttempts: userLogin.shouldWarnRemainingAttempts && userLogin.remainingAttempts,
         isLoginFailureWithUsername,
       });
     }
