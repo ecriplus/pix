@@ -40,17 +40,17 @@ export async function startPgBoss() {
     ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
     archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
   });
-  pgBoss.on('monitor-states', (state) => {
-    logger.info({ event: 'pg-boss-state', name: 'global' }, { ...state, queues: undefined });
-    _.each(state.queues, (queueState, queueName) => {
-      logger.info({ event: 'pg-boss-state', name: queueName }, queueState);
+  pgBoss.on('monitor-states', ({ queues, ...state }) => {
+    logger.info({ event: 'pg-boss-state', name: 'global', queue: state }, 'PGBOSS MONITOR-STATES');
+    _.each(queues, (queue, name) => {
+      logger.info({ event: 'pg-boss-state', name, queue }, 'PGBOSS MONITOR-STATES');
     });
   });
   pgBoss.on('error', (err) => {
-    logger.error({ event: 'pg-boss-error' }, err);
+    logger.info({ err, event: 'pg-boss-error' }, 'PGBOSS ERROR');
   });
   pgBoss.on('wip', (data) => {
-    logger.info({ event: 'pg-boss-wip' }, data);
+    logger.info({ data, event: 'pg-boss-wip' }, 'PGBOSS WIP');
   });
   if (config.pgBoss.connexionPoolMaxSize !== 0) {
     await pgBoss.start();
