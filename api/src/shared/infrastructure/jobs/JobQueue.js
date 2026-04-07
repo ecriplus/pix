@@ -23,13 +23,13 @@ class JobQueue {
       );
     });
 
-    this.pgBoss.onComplete(name, { teamSize, teamConcurrency }, (job) => {
-      const context = initContext(job);
+    this.pgBoss.onComplete(name, { teamSize, teamConcurrency }, (completedJob) => {
+      const context = initContext(completedJob.data.request);
       return executeInContext(
         context,
         async () => {
           const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
-          return monitoringJobHandler.handle(job);
+          return monitoringJobHandler.handle(completedJob);
         },
         EXECUTORS.JOB,
       );
