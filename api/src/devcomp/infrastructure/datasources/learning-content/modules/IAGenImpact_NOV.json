@@ -607,14 +607,14 @@
               "element": {
                 "id": "c0e5914e-2508-4b40-aae1-2797c0247b8c",
                 "type": "custom",
-                "instruction": "Choisissez le type et le nombre de requêtes, puis observez ce qui se passe.",
+                "instruction": "",
                 "tagName": "capacity-calculation",
                 "props": {
                   "titleLevel": 0,
                   "capacityImage": "https://assets.pix.org/modules/les-ia-consomment/poi-requetes-multiples/supercalculator_capacity1.svg"
                 },
                 "title": "",
-                "functionalInstruction": "Quelle est la demande à l’IA ?"
+                "functionalInstruction": "Choisissez le type et le nombre de requêtes, puis observez ce qui se passe."
               }
             },
             {
