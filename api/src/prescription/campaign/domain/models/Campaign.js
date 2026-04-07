@@ -7,6 +7,7 @@ import {
   IsForAbsoluteNoviceUpdateError,
   MultipleSendingsUpdateError,
 } from '../errors.js';
+import * as campaignUpdateValidator from '../validators/campaign-update-validator.js';
 
 class Campaign {
   constructor({
@@ -145,7 +146,7 @@ class Campaign {
     if (
       fields.multipleSendings !== undefined &&
       fields.multipleSendings !== this.multipleSendings &&
-      this.hasParticipation > 0
+      this.hasParticipation
     ) {
       throw new MultipleSendingsUpdateError();
     }
@@ -165,6 +166,8 @@ class Campaign {
         this[key] = value;
       }
     });
+
+    campaignUpdateValidator.validate(this);
   }
 }
 
