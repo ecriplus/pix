@@ -44,7 +44,8 @@
   "overrides": {
     "ember-dayjs": {
       "ember-source": "$ember-source"
-    }
+    },
+    "handlebars": ">=4.7.9"
   },
   "devDependencies": {
     "@1024pix/ember-api-actions": "^1.1.0",
