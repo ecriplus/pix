@@ -546,6 +546,13 @@ const configuration = (function () {
 
     config.baseUrl = 'https://api.test.pix.fr';
 
+    config.login = {
+      temporaryBlockingThresholdFailureCount: 10,
+      temporaryBlockingBaseTimeMs: ms('2m'),
+      blockingLimitFailureCount: 30,
+      emailConnectionWarningPeriod: ms('1y'),
+    };
+
     config.oidcExampleNet = {
       clientId: 'client',
       clientSecret: 'secret',
