@@ -1,8 +1,11 @@
-import { JuryCertification } from '../../../../src/certification/session-management/domain/models/JuryCertification.js';
-import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { JuryComment, JuryCommentContexts } from '../../../../src/certification/shared/domain/models/JuryComment.js';
-import { buildCertificationIssueReport } from './build-certification-issue-report.js';
-import { buildCompetenceMark } from './build-competence-mark.js';
+import { JuryCertification } from '../../../../../../src/certification/session-management/domain/models/JuryCertification.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import {
+  JuryComment,
+  JuryCommentContexts,
+} from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { buildCertificationIssueReport } from '../../build-certification-issue-report.js';
+import { buildCompetenceMark } from '../../build-competence-mark.js';
 
 const buildJuryCertification = function ({
   certificationCourseId = 123,
@@ -24,6 +27,7 @@ const buildJuryCertification = function ({
   completedAt = new Date('2020-02-01'),
   pixScore = 55,
   reachedMeshIndex = 5,
+  eduV3ExternalJuryResult = null,
   juryId = 66,
   commentForCandidate = 'comment candidate',
   commentForOrganization = 'comment organization',
@@ -56,6 +60,7 @@ const buildJuryCertification = function ({
     completedAt,
     pixScore,
     reachedMeshIndex,
+    eduV3ExternalJuryResult,
     juryId,
     commentForCandidate: new JuryComment({
       commentByAutoJury,

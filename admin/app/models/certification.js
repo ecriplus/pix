@@ -47,7 +47,7 @@ export default class Certification extends Model {
   @attr('string') commentForOrganization;
   @attr('string') commentByJury;
   @attr() pixScore;
-  @attr() reachedMeshIndex;
+  @attr() reachedResultKey;
   @attr() competencesWithMark;
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
@@ -117,15 +117,7 @@ export default class Certification extends Model {
   }
 
   get result() {
-    if (this.isV3) {
-      const meshKey = this.reachedMeshIndex ?? 'BELOW_MINIMUM';
-
-      return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.${meshKey}`, {
-        pixScore: this.pixScore,
-      });
-    }
-
-    return this.intl.t(`common.certification.meshLevels.${this.certificationFramework}.NONE`, {
+    return this.intl.t(`common.certification.meshLevels.${this.reachedResultKey}`, {
       pixScore: this.pixScore,
     });
   }

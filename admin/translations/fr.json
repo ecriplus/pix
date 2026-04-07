@@ -62,22 +62,22 @@
         "EDU_1ER_DEGRE": {
           "0": "Admissible",
           "ADVANCED": "Avancé",
-          "EXPERT": "Expert",
           "BELOW_MINIMUM": "Non admissible",
+          "EXPERT": "Expert",
           "NONE": "{pixScore} Pix"
         },
         "EDU_2ND_DEGRE": {
           "0": "Admissible",
           "ADVANCED": "Avancé",
-          "EXPERT": "Expert",
           "BELOW_MINIMUM": "Non admissible",
+          "EXPERT": "Expert",
           "NONE": "{pixScore} Pix"
         },
         "EDU_CPE": {
           "0": "Admissible",
           "ADVANCED": "Avancé",
-          "EXPERT": "Expert",
           "BELOW_MINIMUM": "Non admissible",
+          "EXPERT": "Expert",
           "NONE": "{pixScore} Pix"
         },
         "PRO_SANTE": {
