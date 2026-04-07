@@ -103,6 +103,9 @@
     "webpack": "5.105.4",
     "xss": "^1.0.14"
   },
+  "overrides": {
+    "handlebars": ">=4.7.9"
+  },
   "ember": {
     "edition": "octane"
   }

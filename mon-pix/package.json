@@ -136,7 +136,8 @@
   "overrides": {
     "ember-dayjs": {
       "ember-source": "$ember-source"
-    }
+    },
+    "handlebars": ">=4.7.9"
   },
   "engines": {
     "node": "^24.14.1"

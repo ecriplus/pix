@@ -112,6 +112,9 @@
     "webpack": "^5.103.0",
     "xss": "^1.0.15"
   },
+  "overrides": {
+    "handlebars": ">=4.7.9"
+  },
   "exports": {
     "./tests/*": "./tests/*",
     "./*": "./app/*"
