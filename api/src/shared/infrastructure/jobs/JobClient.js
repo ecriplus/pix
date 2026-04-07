@@ -40,17 +40,17 @@ export class JobClient {
             archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
           });
 
-      this.#pgBoss.on('monitor-states', (state) => {
-        logger.info({ event: 'pg-boss-state', name: 'global' }, { ...state, queues: undefined });
-        _.each(state.queues, (queueState, queueName) => {
-          logger.info({ event: 'pg-boss-state', name: queueName }, queueState);
+      this.#pgBoss.on('monitor-states', ({ queues, ...state }) => {
+        logger.info({ event: 'pg-boss-state', name: 'global', queue: state }, 'PGBOSS MONITOR-STATES');
+        _.each(queues, (queue, name) => {
+          logger.info({ event: 'pg-boss-state', name, queue }, 'PGBOSS MONITOR-STATES');
         });
       });
       this.#pgBoss.on('error', (err) => {
-        logger.error({ event: 'pg-boss-error' }, err);
+        logger.error({ err, event: 'pg-boss-error' }, 'PGBOSS ERROR');
       });
       this.#pgBoss.on('wip', (data) => {
-        logger.info({ event: 'pg-boss-wip' }, data);
+        logger.info({ data, event: 'pg-boss-wip' }, 'PGBOSS WIP');
       });
 
       await this.#pgBoss.start();
@@ -152,9 +152,16 @@ export class JobClient {
       );
     });
 
-    this.#pgBoss.onComplete(name, { teamSize, teamConcurrency }, (job) => {
-      const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
-      return monitoringJobHandler.handle(job);
+    this.#pgBoss.onComplete(name, { teamSize, teamConcurrency }, (completedJob) => {
+      const context = this.#initLogContext(completedJob.data.request);
+      return executeInContext(
+        context,
+        async () => {
+          const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
+          return monitoringJobHandler.handle(completedJob);
+        },
+        EXECUTORS.JOB,
+      );
     });
   }
 
