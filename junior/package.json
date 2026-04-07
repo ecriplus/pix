@@ -108,5 +108,8 @@
   },
   "ember": {
     "edition": "octane"
-  }
+  },
+  "overrides": {
+    "flatted": ">=3.4.2"  
+}
 }
