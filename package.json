@@ -49,8 +49,6 @@
     "clean:junior": "cd junior && npm run clean",
     "clean:root": "rm -rf node_modules && rm -rf tmp",
     "configure": "./scripts/configure.sh",
-    "install:components": "cd api && npm i @1024pix/epreuves-components@latest && cd ../mon-pix && npm i @1024pix/epreuves-components@latest && cd ../junior && npm i @1024pix/epreuves-components@latest",
-    "postinstall:components": "node api/scripts/modulix/generate-demo-epreuve-component.js",
     "lint": "run-p --print-label lint:*",
     "lint:admin": "cd admin && npm run lint",
     "lint:api": "cd api && npm run lint",
@@ -89,7 +87,8 @@
     "domains:start": "cd ./scripts/local-domains/ && docker compose up -d",
     "domains:stop": "cd ./scripts/local-domains/ && docker compose down",
     "domains:trust-self-signed-certificate:mac": "cd ./scripts/local-domains/ && docker compose cp caddy:/data/caddy/pki/authorities/local/root.crt /tmp/root.crt && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/root.crt",
-    "domains:trust-self-signed-certificate:linux": "cd ./scripts/local-domains/ && sudo docker cp caddy:/data/caddy/pki/authorities/local/root.crt /usr/local/share/ca-certificates/root.crt && sudo update-ca-certificates --fresh"
+    "domains:trust-self-signed-certificate:linux": "cd ./scripts/local-domains/ && sudo docker cp caddy:/data/caddy/pki/authorities/local/root.crt /usr/local/share/ca-certificates/root.crt && sudo update-ca-certificates --fresh",
+    "demo-epreuves:update": "./scripts/update-demo-epreuves.sh"
   },
   "dependencies": {
     "npm-run-all2": "^8.0.0"
