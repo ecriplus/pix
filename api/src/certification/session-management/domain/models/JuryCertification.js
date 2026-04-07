@@ -1,3 +1,4 @@
+import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
@@ -22,6 +23,7 @@ class JuryCertification {
    * @param {number} props.juryId
    * @param {number} props.pixScore
    * @param {number} props.reachedMeshIndex
+   * @param {string} props.eduV3ExternalJuryResult
    * @param {Array<CompetenceMark>} props.competenceMarks
    * @param {JuryComment} props.commentForCandidate
    * @param {JuryComment} props.commentForOrganization
@@ -52,6 +54,7 @@ class JuryCertification {
     juryId,
     pixScore,
     reachedMeshIndex,
+    eduV3ExternalJuryResult,
     competenceMarks,
     commentForCandidate,
     commentForOrganization,
@@ -82,6 +85,7 @@ class JuryCertification {
     this.juryId = juryId;
     this.pixScore = pixScore;
     this.reachedMeshIndex = reachedMeshIndex;
+    this.eduV3ExternalJuryResult = eduV3ExternalJuryResult;
     this.competenceMarks = competenceMarks;
     this.commentForCandidate = commentForCandidate;
     this.commentForOrganization = commentForOrganization;
@@ -91,6 +95,16 @@ class JuryCertification {
     this.commonComplementaryCertificationCourseResult = commonComplementaryCertificationCourseResult;
     this.version = version;
     this.certificationFramework = certificationFramework;
+  }
+
+  get reachedResultKey() {
+    if (this.version !== AlgorithmEngineVersion.V3) {
+      return `${this.certificationFramework}.NONE`;
+    }
+
+    const resultKey = this.eduV3ExternalJuryResult || (this.reachedMeshIndex ?? 'BELOW_MINIMUM');
+
+    return `${this.certificationFramework}.${resultKey}`;
   }
 
   static from({
@@ -144,6 +158,7 @@ class JuryCertification {
       juryId: juryCertificationDTO.juryId,
       pixScore: juryCertificationDTO.pixScore,
       reachedMeshIndex: juryCertificationDTO.reachedMeshIndex,
+      eduV3ExternalJuryResult: juryCertificationDTO.eduV3ExternalJuryResult,
       competenceMarks,
       commentForCandidate,
       commentForOrganization,

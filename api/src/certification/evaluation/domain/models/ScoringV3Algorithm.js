@@ -7,7 +7,7 @@
  */
 
 import { COMPETENCES_COUNT, PIX_COUNT_BY_LEVEL } from '../../../../shared/domain/constants.js';
-import { MESH_CONFIGURATION } from '../../../shared/domain/constants/mesh-configuration.js';
+import { CORE_MESH_CONFIGURATION } from '../../../shared/domain/constants/mesh-configuration.js';
 import { Intervals } from './Intervals.js';
 
 export class ScoringV3Algorithm {
@@ -85,7 +85,7 @@ export class ScoringV3Algorithm {
     const intervalIndex = scoringIntervals.findIntervalIndexFromCapacity(capacity);
     const intervalMaximum = scoringIntervals.max(intervalIndex);
     const intervalMinimum = scoringIntervals.min(intervalIndex);
-    const meshes = Array.from(MESH_CONFIGURATION.values());
+    const meshes = Array.from(CORE_MESH_CONFIGURATION.values());
     const intervalWeight = meshes[intervalIndex].weight;
     const intervalCoefficient = meshes[intervalIndex].coefficient;
     const progressionPercentage = 1 - (intervalMaximum - capacity) / (intervalMaximum - intervalMinimum);
