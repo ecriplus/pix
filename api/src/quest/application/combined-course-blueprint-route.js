@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { contentSchema } from '../domain/models/AdminCombinedCourseBlueprint.js';
-import * as combinedCourseBlueprintController from './combined-course-blueprint-controller.js';
+import { combinedCourseBlueprintController } from './combined-course-blueprint-controller.js';
 
 const register = async function (server) {
   server.route([

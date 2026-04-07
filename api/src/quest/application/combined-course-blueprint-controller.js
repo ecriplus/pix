@@ -3,12 +3,12 @@ import * as adminCombinedCourseBlueprintSerializer from '../infrastructure/seria
 import * as combinedCourseBlueprintOrganizationSerializer from '../infrastructure/serializers/combined-course-blueprint-organization-serializer.js';
 import * as combinedCourseBlueprintSerializer from '../infrastructure/serializers/combined-course-blueprint-serializer.js';
 
-export const findAll = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
+const findAll = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
   const combinedCourseBlueprints = await usecases.findCombinedCourseBlueprints();
   return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprints);
 };
 
-export const save = async (request, h, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
+const save = async (request, h, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
   const adminCombinedCourseBlueprint = await dependencies.adminCombinedCourseBlueprintSerializer.deserialize(
     request.payload,
   );
@@ -18,12 +18,12 @@ export const save = async (request, h, dependencies = { adminCombinedCourseBluep
   return h.response(dependencies.adminCombinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint)).created();
 };
 
-export const getById = async (request, _, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
+const getById = async (request, _, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
   const combinedCourseBlueprint = await usecases.getCombinedCourseBlueprintById({ id: request.params.blueprintId });
   return dependencies.adminCombinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
 };
 
-export const detachOrganization = async (request, h) => {
+const detachOrganization = async (request, h) => {
   await usecases.detachOrganizationFromCombinedCourseBlueprint({
     combinedCourseBlueprintId: request.params.blueprintId,
     organizationId: request.params.organizationId,
@@ -31,11 +31,7 @@ export const detachOrganization = async (request, h) => {
   return h.response().code(204);
 };
 
-export const attachOrganizations = async (
-  request,
-  h,
-  dependencies = { combinedCourseBlueprintOrganizationSerializer },
-) => {
+const attachOrganizations = async (request, h, dependencies = { combinedCourseBlueprintOrganizationSerializer }) => {
   const combinedCourseBlueprintId = request.params.blueprintId;
   const results = await usecases.attachOrganizationsToCombinedCourseBlueprint({
     combinedCourseBlueprintId,
@@ -48,9 +44,20 @@ export const attachOrganizations = async (
     .code(201);
 };
 
-export const findByOrganizationId = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
+const findByOrganizationId = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
   const combinedCourseBlueprint = await usecases.findByOrganizationId({
     organizationId: request.params.organizationId,
   });
   return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
 };
+
+const combinedCourseBlueprintController = {
+  findAll,
+  save,
+  getById,
+  detachOrganization,
+  attachOrganizations,
+  findByOrganizationId,
+};
+
+export { combinedCourseBlueprintController };
