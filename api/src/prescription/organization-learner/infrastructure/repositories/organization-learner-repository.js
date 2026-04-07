@@ -177,8 +177,8 @@ async function findPaginatedAttestationStatusForOrganizationLearnersAndKey({
     .from('view-active-organization-learners')
     .join('users', 'users.id', 'view-active-organization-learners.userId')
     .where({ isDisabled: false, organizationId, isAnonymous: false, hasBeenAnonymised: false })
-    .orderByRaw('LOWER("view-active-organization-learners"."firstName") ASC')
-    .orderByRaw('LOWER("view-active-organization-learners"."lastName") ASC');
+    .orderByRaw('LOWER("view-active-organization-learners"."lastName") ASC')
+    .orderByRaw('LOWER("view-active-organization-learners"."firstName") ASC');
 
   if (filter) {
     const { name, divisions } = filter;
