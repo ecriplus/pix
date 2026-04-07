@@ -1,4 +1,5 @@
 import { usecases } from '../domain/usecases/index.js';
+import * as adminCombinedCourseBlueprintSerializer from '../infrastructure/serializers/admin-combined-course-blueprint-serializer.js';
 import * as combinedCourseBlueprintOrganizationSerializer from '../infrastructure/serializers/combined-course-blueprint-organization-serializer.js';
 import * as combinedCourseBlueprintSerializer from '../infrastructure/serializers/combined-course-blueprint-serializer.js';
 
@@ -7,19 +8,19 @@ export const findAll = async (request, _, dependencies = { combinedCourseBluepri
   return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprints);
 };
 
-export const save = async (request, h, dependencies = { combinedCourseBlueprintSerializer }) => {
-  const adminCombinedCourseBlueprint = await dependencies.combinedCourseBlueprintSerializer.deserialize(
+export const save = async (request, h, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
+  const adminCombinedCourseBlueprint = await dependencies.adminCombinedCourseBlueprintSerializer.deserialize(
     request.payload,
   );
   const combinedCourseBlueprint = await usecases.createCombinedCourseBlueprint({
     adminCombinedCourseBlueprint,
   });
-  return h.response(dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint)).created();
+  return h.response(dependencies.adminCombinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint)).created();
 };
 
-export const getById = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
+export const getById = async (request, _, dependencies = { adminCombinedCourseBlueprintSerializer }) => {
   const combinedCourseBlueprint = await usecases.getCombinedCourseBlueprintById({ id: request.params.blueprintId });
-  return dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
+  return dependencies.adminCombinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint);
 };
 
 export const detachOrganization = async (request, h) => {
