@@ -8,11 +8,13 @@ export const findAll = async (request, _, dependencies = { combinedCourseBluepri
 };
 
 export const save = async (request, h, dependencies = { combinedCourseBlueprintSerializer }) => {
-  const { combinedCourseBlueprint, attestationKey } = await dependencies.combinedCourseBlueprintSerializer.deserialize(
+  const adminCombinedCourseBlueprint = await dependencies.combinedCourseBlueprintSerializer.deserialize(
     request.payload,
   );
-  const createdBlueprint = await usecases.createCombinedCourseBlueprint({ combinedCourseBlueprint, attestationKey });
-  return h.response(dependencies.combinedCourseBlueprintSerializer.serialize(createdBlueprint)).created();
+  const combinedCourseBlueprint = await usecases.createCombinedCourseBlueprint({
+    adminCombinedCourseBlueprint,
+  });
+  return h.response(dependencies.combinedCourseBlueprintSerializer.serialize(combinedCourseBlueprint)).created();
 };
 
 export const getById = async (request, _, dependencies = { combinedCourseBlueprintSerializer }) => {
