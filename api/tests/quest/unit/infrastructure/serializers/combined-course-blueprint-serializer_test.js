@@ -1,17 +1,28 @@
 import {
-  COMBINED_COURSE_BLUEPRINT_ITEMS,
-  CombinedCourseBlueprint,
-} from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
-import { Module } from '../../../../../src/quest/domain/models/Module.js';
+  ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS,
+  AdminCombinedCourseBlueprint,
+} from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import * as combinedCourseBlueprintSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-blueprint-serializer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprint', function () {
   it('#serialize', function () {
     // given
-    const combinedCourseBlueprint = domainBuilder.buildCombinedCourseBlueprint({
-      content: CombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'mon-module' }, { targetProfileId: 123 }]),
-      modulesByShortId: { 'mon-module': [new Module({ id: '1' })] },
+    const combinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
+      adminCombinedCourseBlueprint: new AdminCombinedCourseBlueprint({
+        id: 1,
+        name: 'Mon parcours',
+        internalName: 'Mon modèle de parcours',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        illustration: '/illustrations/image.svg',
+        content: AdminCombinedCourseBlueprint.buildContentItems([
+          { moduleShortId: 'mon-module' },
+          { targetProfileId: 123 },
+        ]),
+        attestationKey: 'PARENTHOOD',
+        organizationIds: [],
+      }),
     });
 
     // when
@@ -28,16 +39,17 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             content: [
               {
-                type: COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
+                type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
                 value: 'mon-module',
               },
               {
-                type: COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
+                type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
                 value: 123,
               },
             ],
             'created-at': combinedCourseBlueprint.createdAt,
             'updated-at': combinedCourseBlueprint.updatedAt,
+            'attestation-key': 'PARENTHOOD',
           },
           type: 'combined-course-blueprints',
           id: '1',
@@ -79,8 +91,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
     const deserialize = await combinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
 
     // then
-    expect(deserialize.attestationKey).to.equal('SIXTH_GRADE');
-    expect(deserialize.combinedCourseBlueprint).deep.equal({
+    expect(deserialize).deep.equal({
       id: '1',
       name: 'Mon parcours',
       internalName: 'Mon modèle de parcours',
@@ -96,7 +107,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course-blueprin
           value: 123,
         },
       ],
-      quest: null,
+      attestationKey: 'SIXTH_GRADE',
       organizationIds: [],
       createdAt: date,
       updatedAt: date,
