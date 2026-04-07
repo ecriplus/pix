@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.379.0](https://github.com/1024pix/pix/compare/v5.378.0...v5.379.0) (2026-04-07)
+
+### :rocket: Amélioration
+
+- [#15675](https://github.com/1024pix/pix/pull/15675) créa d'un module MFA_Nov B 
+- [#15743](https://github.com/1024pix/pix/pull/15743) Trier par nom de famille au lieu du prénom en premier dans la page attestations (PIX-22243). 
+
+### :building_construction: Tech
+
+- [#15601](https://github.com/1024pix/pix/pull/15601) Learning content : Suppression de l’ancienne mise en cache 
+- [#15755](https://github.com/1024pix/pix/pull/15755) Modifier la façon d'envoyer les credentials dans l'action create-jira-version.yaml 
+
+### :arrow_up: Montée de version
+
+- [#15747](https://github.com/1024pix/pix/pull/15747) Update dependency axios to v1.14.0 (api) 
+- [#15748](https://github.com/1024pix/pix/pull/15748) Update dependency eslint-plugin-unicorn to v64 (api) 
+- [#15749](https://github.com/1024pix/pix/pull/15749) Update dependency eslint-plugin-unicorn to v64 (audit-logger) 
+- [#15750](https://github.com/1024pix/pix/pull/15750) Update dependency eslint-plugin-unicorn to v64 (certif) 
+- [#15751](https://github.com/1024pix/pix/pull/15751) Update dependency eslint-plugin-unicorn to v64 (dossier racine) 
+- [#15753](https://github.com/1024pix/pix/pull/15753) Update dependency oxfmt to ^0.43.0 (api)
+
 # [5.378.0](https://github.com/1024pix/pix/compare/v5.377.1...v5.378.0) (2026-04-06)
 
 ### :rocket: Amélioration
