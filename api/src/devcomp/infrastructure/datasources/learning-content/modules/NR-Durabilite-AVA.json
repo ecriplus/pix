@@ -168,7 +168,7 @@
                       "id": "10dbae70-c3ba-4cd6-a3a2-adf81cb60eba",
                       "type": "custom",
                       "title": "",
-                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et 1,5 tonne d’eau.</p>",
+                      "instruction": "<p>À votre avis, pour fabriquer un ordinateur portable, combien faut-il d’eau ?<br>Déplacez la jauge entre 1 litre et 1 500 litres d’eau.</p>",
                       "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
@@ -177,28 +177,28 @@
                             "label": "1 litre",
                             "feedback": {
                               "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1 500 litres d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
                             }
                           },
                           {
                             "label": "500 litres",
                             "feedback": {
                               "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1 500 litres d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
                             }
                           },
                           {
                             "label": "1 000 litres",
                             "feedback": {
                               "type": "bad",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1 500 litres d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
                             }
                           },
                           {
                             "label": "1 500 litres",
                             "feedback": {
                               "type": "good",
-                              "text": "La fabrication d’un ordinateur portable nécessite environ 1,5 tonne d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
+                              "text": "La fabrication d’un ordinateur portable nécessite environ 1 500 litres d’eau, puisée dans les ressources d’eau douce, souvent prélevée dans des régions où cette ressource manque. Stockée dans des bassins industriels, elle se charge en substances toxiques puis s’infiltre dans l’environnement, contaminant les cours d’eau et menaçant la faune et la flore locales."
                             }
                           }
                         ]
