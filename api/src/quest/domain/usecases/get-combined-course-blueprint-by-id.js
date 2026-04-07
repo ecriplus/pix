@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { AdminCombinedCourseBlueprint } from '../models/AdminCombinedCourseBlueprint.js';
 import { REQUIREMENT_TYPES } from '../models/Quest.js';
@@ -20,7 +18,7 @@ export const getCombinedCourseBlueprintById = async ({
     .map((requirement) => requirement.data.moduleId.data);
 
   const modules = await moduleRepository.getByIds({ moduleIds });
-  const modulesById = _.groupBy(modules, 'id');
+  const modulesById = Object.groupBy(modules, ({ id }) => id);
 
   const attestation = await attestationRepository.getByRewardId({ rewardId: combinedCourseBlueprint.quest.rewardId });
 
