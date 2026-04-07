@@ -388,7 +388,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "<p>Philippe a reçu plusieurs notifications de la part de son antivirus. <br>Il ne sait pas lesquelles nécessitent une action de sa part.<br><br>Pour chacune des notifications suivantes, indiquez ce que doit faire Philippe.</p>",
+              "instruction": "<p>Pour chacune des notifications suivantes, indiquez ce que doit faire Philippe.</p>",
               "steps": [
                 {
                   "elements": [
