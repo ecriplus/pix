@@ -449,7 +449,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'ended-at': null,
           'is-rejected-for-fraud': false,
           'pix-score': assessmentResult.pixScore,
-          'reached-mesh-index': assessmentResult.reachedMeshIndex,
+          'reached-result-key': 'CORE.BELOW_MINIMUM',
           'number-of-challenges': 10,
           'assessment-state': 'completed',
           'assessment-result-status': 'validated',
