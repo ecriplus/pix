@@ -38,7 +38,6 @@
     "ci:mon-pix": "cd mon-pix && npm ci",
     "ci:orga": "cd orga && npm ci",
     "ci:junior": "cd junior && npm ci",
-    "compute-lead-times": "node ./scripts/compute-lead-times",
     "clean": "run-p --print-label clean:api clean:audit-logger clean:mon-pix clean:orga clean:certif clean:admin clean:junior && npm run clean:root",
     "clean:admin": "cd admin && npm run clean",
     "clean:api": "cd api && npm run clean",
