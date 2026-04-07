@@ -1852,7 +1852,6 @@
           "editorName": "Nom d'éditeur",
           "internalTitle": "Titre interne",
           "locales": "{ count, plural, one {Locale} other {Locales}}",
-          "localizedLanguage": "Langue localisée",
           "publishedOn": "Publié sur",
           "status": "Statut",
           "status-label": {
