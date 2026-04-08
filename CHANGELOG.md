@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.380.0](https://github.com/1024pix/pix/compare/v5.379.0...v5.380.0) (2026-04-08)
+
+### :rocket: Amélioration
+
+- [#15746](https://github.com/1024pix/pix/pull/15746) Afficher le résultat d'un volet jury externe dans PixAdmin (PIX-22240) 
+- [#14328](https://github.com/1024pix/pix/pull/14328) Ajout de la lecture du postMessage des embed coté junior(PIX-19497) 
+- [#15638](https://github.com/1024pix/pix/pull/15638) Custom 5 modules - Ajouts title, instruction, functional instruction 
+- [#15774](https://github.com/1024pix/pix/pull/15774) datacenter-coquille 
+- [#15766](https://github.com/1024pix/pix/pull/15766) durabilite-ava-corrections-post-relecture 
+- [#15764](https://github.com/1024pix/pix/pull/15764) Feature toggles : Lecture synchrone et observabilité 
+- [#14935](https://github.com/1024pix/pix/pull/14935) intégration NR_Evaluation_AVA base 
+- [#15767](https://github.com/1024pix/pix/pull/15767) MDX-16 Modification media 
+- [#15739](https://github.com/1024pix/pix/pull/15739) Supprimer le logo national des emails FR (PIX-22197) 
+
+### :bug: Correction
+
+- [#15769](https://github.com/1024pix/pix/pull/15769) Réparer les timezones de 2 dates de PixCertif (PIX-22272). 
+
+### :building_construction: Tech
+
+- [#15758](https://github.com/1024pix/pix/pull/15758) :lock: Forcer la montée de version de `handlebars` 
+- [#15771](https://github.com/1024pix/pix/pull/15771) Ajoute le domaine de la route dans les logs SQL. 
+- [#15761](https://github.com/1024pix/pix/pull/15761) Corriger l'utilisation du logger dans le code de PgBoss 
+- [#15734](https://github.com/1024pix/pix/pull/15734) Réecrire des tests de usecases en unitaire vers un test integration (PIX-22242). 
+- [#15754](https://github.com/1024pix/pix/pull/15754) Utilise la quête du blueprint plutôt que son attribut `content` (PIX-22204). 
+- [#15609](https://github.com/1024pix/pix/pull/15609) Utiliser le SDK PgBoss au lieu de Knex 
+
+### :arrow_up: Montée de version
+
+- [#15772](https://github.com/1024pix/pix/pull/15772) Update dependency ember-source to ~6.12.0 (admin) 
+- [#15773](https://github.com/1024pix/pix/pull/15773) Update dependency ember-source to ~6.12.0 (junior)
+
 # [5.379.0](https://github.com/1024pix/pix/compare/v5.378.0...v5.379.0) (2026-04-07)
 
 ### :rocket: Amélioration
