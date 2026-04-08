@@ -275,6 +275,57 @@ describe('Integration | Identity Access Management | Application | Route | User'
     });
   });
 
+  describe('POST /api/users/{id}/add-email-connection-method', function () {
+    it('returns 403 if requested user is not the same as authenticated user', async function () {
+      // given
+      const currentUserId = databaseBuilder.factory.buildUser().id;
+      const otherUserId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+      const headers = generateAuthenticatedUserRequestHeaders({ userId: currentUserId });
+
+      const url = `/api/users/${otherUserId}/add-email-connection-method`;
+
+      const payload = {
+        data: {
+          type: 'email-verification-codes',
+          attributes: {
+            code: '999999',
+          },
+        },
+      };
+
+      // when
+      const result = await httpTestServer.request('POST', url, payload, null, headers);
+
+      // then
+      expect(result.statusCode).to.equal(403);
+      expect(result.result.errors[0].detail).to.equal('Missing or insufficient permissions.');
+    });
+
+    it('returns EXPIRED_OR_NULL_EMAIL_MODIFICATION_DEMAND when code is not found', async function () {
+      // given
+      const headers = generateAuthenticatedUserRequestHeaders();
+
+      const url = '/api/users/1234/add-email-connection-method';
+
+      const payload = {
+        data: {
+          type: 'email-verification-codes',
+          attributes: {
+            code: '999999',
+          },
+        },
+      };
+
+      // when
+      const result = await httpTestServer.request('POST', url, payload, null, headers);
+
+      // then
+      expect(result.statusCode).to.equal(403);
+      expect(result.result.errors[0].code).to.equal('EXPIRED_OR_NULL_EMAIL_MODIFICATION_DEMAND');
+    });
+  });
+
   describe('DELETE /api/users/me', function () {
     context('when user is not authenticated', function () {
       it('returns a 401 HTTP status code', async function () {
