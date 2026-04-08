@@ -187,6 +187,22 @@ commands:
           paths:
             - ~/.npm
 
+  npm_install_cypress_with_cache:
+    parameters:
+      cache_key:
+        type: string
+    steps:
+      - run: cat package*.json > cachekey
+      - restore_cache:
+          keys:
+            - v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+      - run: npm ci
+      - run: npx cypress install
+      - save_cache:
+          key: v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+          paths:
+            - ~/.npm
+
   frontend_build:
     parameters:
       app_name:
@@ -964,7 +980,7 @@ jobs:
           background: true
       - attach_workspace:
           at: ~/pix
-      - npm_install_with_cache:
+      - npm_install_cypress_with_cache:
           cache_key: e2e
       - run:
           name: Lint
@@ -1044,7 +1060,7 @@ jobs:
           background: true
       - attach_workspace:
           at: ~/pix
-      - npm_install_with_cache:
+      - npm_install_cypress_with_cache:
           cache_key: e2e
       - run:
           name: Lint
