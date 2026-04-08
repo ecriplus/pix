@@ -31,8 +31,8 @@ class UserLogin {
   }
 
   get shouldWarnRemainingAttempts() {
-    const warnLimit = config.login.temporaryBlockingThresholdFailureCount;
-    return this.remainingAttempts > 0 && this.remainingAttempts <= warnLimit;
+    const warningThreshold = config.login.temporaryBlockingThresholdFailureCount;
+    return this.remainingAttempts > 0 && this.remainingAttempts <= warningThreshold;
   }
 
   incrementFailureCount() {
