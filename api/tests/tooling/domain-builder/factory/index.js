@@ -119,6 +119,7 @@ import { buildPrescriber } from './build-prescriber.js';
 import { buildPrivateCertificate } from './build-private-certificate.js';
 import { buildPrivateCertificate as buildPrivateCertificateWithCompetenceTree } from './build-private-certificate-with-competence-tree.js';
 import { buildProgression } from './build-progression.js';
+import { buildQuest } from './build-quest.js';
 import { buildReproducibilityRate } from './build-reproducibility-rate.js';
 import { buildResultCompetenceTree } from './build-result-competence-tree.js';
 import { buildSchoolAssessment } from './build-school-assessment.js';
@@ -480,6 +481,7 @@ export {
   buildPrivateCertificate,
   buildPrivateCertificateWithCompetenceTree,
   buildProgression,
+  buildQuest,
   buildReproducibilityRate,
   buildResultCompetenceTree,
   buildSchoolAssessment,

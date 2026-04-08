@@ -562,6 +562,7 @@
         "targetProfile": "Target profile"
       },
       "labels": {
+        "attestation": "Attestation",
         "created-at": "Date de création",
         "description": " Description",
         "illustration": "Illustration",
