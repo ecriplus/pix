@@ -45,6 +45,8 @@ const addUserEmailWithValidation = async function ({
     });
   });
 
+  await userEmailRepository.deleteEmailModificationDemandByUserId(userId);
+
   return { email: emailModificationDemand.newEmail };
 };
 

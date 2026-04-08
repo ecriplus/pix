@@ -24,9 +24,7 @@ const saveEmailModificationDemand = function ({ userId, action, code, newEmail, 
   });
 };
 /**
- *
  * @param {string} userId
- *
  */
 const getEmailModificationDemandByUserId = async function (userId) {
   const key = userId;
@@ -42,9 +40,21 @@ const getEmailModificationDemandByUserId = async function (userId) {
   });
 };
 /**
+ * @param {string} userId
+ */
+const deleteEmailModificationDemandByUserId = function (userId) {
+  return verifyEmailTemporaryStorage.delete(userId);
+};
+
+/**
  * @typedef {Object} UserEmailRepository
  * @property {function} saveEmailModificationDemand
  * @property {function} getEmailModificationDemandByUserId
  */
-const userEmailRepository = { getEmailModificationDemandByUserId, saveEmailModificationDemand };
+
+const userEmailRepository = {
+  getEmailModificationDemandByUserId,
+  saveEmailModificationDemand,
+  deleteEmailModificationDemandByUserId,
+};
 export { userEmailRepository };
