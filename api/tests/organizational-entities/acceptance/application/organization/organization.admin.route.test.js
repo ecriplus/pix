@@ -199,34 +199,38 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         context(`when user has role ${role}`, function () {
           it('returns child organizations list with a 200 HTTP status code', async function () {
             // given
-            const userId = databaseBuilder.factory.buildUser.withRole({
-              role,
-            }).id;
-            const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+            const userId = databaseBuilder.factory.buildUser.withRole({ role }).id;
 
-            const firstChildId =
-              databaseBuilder.factory.buildOrganization({
-                parentOrganizationId,
-              }).id + '';
-            const secondChildId =
-              databaseBuilder.factory.buildOrganization({
-                parentOrganizationId,
-              }).id + '';
+            const {
+              organization: parentOrganization,
+              structure: parentStructure,
+              network,
+            } = databaseBuilder.factory.buildNetworkAndHeadOrganization();
+
+            const { organization: firstChild } = databaseBuilder.factory.buildOrganizationInNetwork({
+              networkId: network.id,
+              parentStructureId: parentStructure.id,
+            });
+            const { organization: secondChild } = databaseBuilder.factory.buildOrganizationInNetwork({
+              networkId: network.id,
+              parentStructureId: parentStructure.id,
+            });
 
             await databaseBuilder.commit();
 
             const request = {
               method: 'GET',
-              url: `/api/admin/organizations/${parentOrganizationId}/children`,
+              url: `/api/admin/organizations/${parentOrganization.id}/children`,
               headers: generateAuthenticatedUserRequestHeaders({ userId }),
             };
+
             // when
             const response = await server.inject(request);
 
             // then
             expect(response.statusCode).to.equal(200);
             expect(response.result.data).to.have.lengthOf(2);
-            expect(_map(response.result.data, 'id')).to.have.members([firstChildId, secondChildId]);
+            expect(_map(response.result.data, 'id')).to.have.members([`${firstChild.id}`, `${secondChild.id}`]);
           });
         });
       });
