@@ -29,6 +29,10 @@ export default class Certification extends ApplicationAdapter {
     return `${this.host}/${this.namespace}/admin/certification-courses/${certificationCourseId}/unreject`;
   }
 
+  urlForEduExternalJuryResult(certificationCourseId) {
+    return `${this.host}/${this.namespace}/admin/certification-courses/${certificationCourseId}/edu-external-jury-result`;
+  }
+
   urlForEditJuryLevel() {
     return `${this.host}/${this.namespace}/admin/complementary-certification-course-results`;
   }
@@ -51,6 +55,8 @@ export default class Certification extends ApplicationAdapter {
         },
       };
       return this.ajax(this.urlForUpdateJuryComment(snapshot.id), 'POST', { data: payload });
+    } else if (snapshot.adapterOptions.updateEduExternalJuryResult) {
+      return this.ajax(this.urlForEduExternalJuryResult(snapshot.id), 'PATCH');
     } else if (snapshot.adapterOptions.isCertificationCancel) {
       return this.ajax(this.urlForCancelCertification(snapshot.id), 'PATCH');
     } else if (snapshot.adapterOptions.isCertificationUncancel) {

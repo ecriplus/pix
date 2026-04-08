@@ -133,70 +133,6 @@ module('Unit | Model | certification', function (hooks) {
     });
   });
 
-  module('#hasComplementaryCertifications', function () {
-    module('when there are no complementary certification results', function () {
-      test('should return false', function (assert) {
-        // given
-        const complementaryCertificationCourseResultWithExternal = null;
-        const commonComplementaryCertificationCourseResult = null;
-        const certification = store.createRecord('certification', {
-          complementaryCertificationCourseResultWithExternal,
-          commonComplementaryCertificationCourseResult,
-        });
-
-        //when / then
-        assert.false(certification.hasComplementaryCertifications);
-      });
-    });
-
-    module('when there is only an external complementary certification result', function () {
-      test('should return true', function (assert) {
-        // given
-        const complementaryCertificationCourseResultWithExternal = store.createRecord(
-          'complementary-certification-course-result-with-external',
-          {
-            pixResult: 'TOTO',
-          },
-        );
-        const commonComplementaryCertificationCourseResult = null;
-        const certification = store.createRecord('certification', {
-          complementaryCertificationCourseResultWithExternal,
-          commonComplementaryCertificationCourseResult,
-        });
-
-        //when / then
-        assert.true(certification.hasComplementaryCertifications);
-      });
-    });
-
-    module('when certification is about pix plus edu v3', function () {
-      test('returns true', function (assert) {
-        const certification = store.createRecord('certification', {
-          version: 3,
-          certificationFramework: 'EDU_1ER_DEGRE',
-        });
-        assert.true(certification.hasComplementaryCertifications);
-      });
-    });
-  });
-
-  module('when there is only a common complementary certification result', function () {
-    test('should return true', function (assert) {
-      // given
-      const complementaryCertificationCourseResultWithExternal = null;
-      const commonComplementaryCertificationCourseResult = store.createRecord(
-        'common-complementary-certification-course-result',
-      );
-      const certification = store.createRecord('certification', {
-        complementaryCertificationCourseResultWithExternal,
-        commonComplementaryCertificationCourseResult,
-      });
-
-      //when / then
-      assert.true(certification.hasComplementaryCertifications);
-    });
-  });
-
   module('#statusLabelAndValue', function () {
     [
       { value: assessmentStates.STARTED, label: 'Démarrée' },
@@ -373,44 +309,6 @@ module('Unit | Model | certification', function (hooks) {
 
       // then
       assert.false(wasBornInFrance);
-    });
-  });
-
-  module('#isPixPlusV3', function () {
-    test('returns true when certification is v3 and pix plus Édu 1er degré', function (assert) {
-      const certification = store.createRecord('certification', {
-        version: 3,
-        certificationFramework: 'EDU_1ER_DEGRE',
-      });
-
-      assert.true(certification.isPixPlusEduV3);
-    });
-
-    test('returns true when certification is v3 and pix plus Édu 2er degré', function (assert) {
-      const certification = store.createRecord('certification', {
-        version: 3,
-        certificationFramework: 'EDU_2ND_DEGRE',
-      });
-
-      assert.true(certification.isPixPlusEduV3);
-    });
-
-    test('returns true when certification is v3 and pix plus Édu CPE', function (assert) {
-      const certification = store.createRecord('certification', { version: 3, certificationFramework: 'EDU_CPE' });
-
-      assert.true(certification.isPixPlusEduV3);
-    });
-
-    test('returns false when certification is not v3', function (assert) {
-      const certification = store.createRecord('certification', { version: 2, certificationFramework: 'EDU_CPE' });
-
-      assert.false(certification.isPixPlusEduV3);
-    });
-
-    test('returns false when certification is v3 and NOT pix plus Édu 1er degré', function (assert) {
-      const certification = store.createRecord('certification', { version: 3, certificationFramework: 'DROIT' });
-
-      assert.false(certification.isPixPlusEduV3);
     });
   });
 });

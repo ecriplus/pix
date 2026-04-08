@@ -1,45 +1,75 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
 
 export default class PixPlusEduV3Results extends Component {
+  @service intl;
+  @service pixToast;
+
   @tracked displayJurySelect = false;
-  @tracked selectedJuryLevel = this.args.certification.externalJuryResultKey;
+  @tracked selectedJuryLevel = this.args.certification.reachedResultKey.split('.').at(-1);
+
+  get hasExternalJuryResult() {
+    return this.args.certification.reachedResultKey.includes('0');
+  }
+
+  get externalJuryResult() {
+    if (this.hasExternalJuryResult) {
+      return this.intl.t('components.certifications.edu-results.v3.waiting');
+    }
+    return this.intl.t(`common.certification.meshLevels.${this.args.certification.reachedResultKey}`);
+  }
+
+  get externalJuryResultOptions() {
+    return ['UNSET', 'ADVANCED', 'EXPERT'].map((optionKey) => ({
+      value: optionKey,
+      label: this.intl.t(`components.certifications.edu-results.v3.external-jury-select-options.${optionKey}`),
+    }));
+  }
 
   @action
   changeJurySelect(value) {
-    console.log(value);
     this.selectedJuryLevel = value;
   }
 
   @action
   toggleJurySelect() {
-    console.log('la ?');
     this.displayJurySelect = !this.displayJurySelect;
   }
 
   @action
-  updateExternalJuryResult(event) {
-    console.log('call update external jury result', this.selectedJuryLevel);
+  async updateExternalJuryResult(event) {
     event.preventDefault();
+    try {
+      await this.args.certification.save({ adapterOptions: { updateEduExternalJuryResult: true } });
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t('components.certifications.edu-results.v3.success'),
+      });
+      this.toggleJurySelect();
+    } catch {
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t('components.certifications.edu-results.v3.error'),
+      });
+    }
   }
 
   <template>
     <div class="certification-information-pix-edu">
-      <h2 class="certification-information__title">Résultats de la certification complémentaire Pix+ Edu</h2>
+      <h2 class="certification-information__title">{{t "components.certifications.edu-results.v3.title"}}</h2>
       <div class="certification-information-pix-edu__container">
         <div class="certification-information-pix-edu__card">
-          <h3>Volet Pix</h3>
-          <p>
-            {{@certification.result}}
-          </p>
+          <h3 class="title">{{t "components.certifications.edu-results.v3.internal-jury"}}</h3>
+          <p class="level">{{t "components.certifications.edu-results.v3.admissible"}}</p>
         </div>
         <div class="certification-information-pix-edu__card">
-          <h3>Volet jury externe</h3>
+          <h3 class="title">{{t "components.certifications.edu-results.v3.external-jury"}}</h3>
           {{#if this.displayJurySelect}}
             <form
               {{on "submit" this.updateExternalJuryResult}}
@@ -48,15 +78,15 @@ export default class PixPlusEduV3Results extends Component {
             >
               <PixSelect
                 @screenReaderOnly={{true}}
-                @options={{@certification.externalJuryResultOptions}}
+                @options={{this.externalJuryResultOptions}}
                 @value={{this.selectedJuryLevel}}
                 @hideDefaultOption={{true}}
                 @onChange={{this.changeJurySelect}}
-                @placeholder="Choisir un niveau"
+                @placeholder={{t "components.certifications.edu-results.v3.waiting"}}
               >
-                <:label>Sélectionner un niveau</:label>
+                <:label>{{t "components.certifications.edu-results.v3.select"}}</:label>
               </PixSelect>
-              <div>
+              <div class="actions">
                 <PixButton @variant="secondary" @size="small" @type="reset">
                   Annuler
                 </PixButton>
@@ -67,14 +97,23 @@ export default class PixPlusEduV3Results extends Component {
             </form>
           {{else}}
             <div class="certification-information-pix-edu__jury-level">
-              <p>
-                {{@certification.externalJuryResult}}
+              <p class="level">
+                {{this.externalJuryResult}}
               </p>
-              <PixIconButton
-                @ariaLabel="Modifier le volet jury"
-                @triggerAction={{this.toggleJurySelect}}
-                @iconName="edit"
-              />
+              <PixTooltip>
+                <:triggerElement>
+                  <PixIconButton
+                    @size="xsmall"
+                    @ariaLabel="Modifier le volet jury"
+                    @triggerAction={{this.toggleJurySelect}}
+                    @iconName="edit"
+                  />
+                </:triggerElement>
+
+                <:tooltip>
+                  {{t "common.actions.edit"}}
+                </:tooltip>
+              </PixTooltip>
             </div>
           {{/if}}
         </div>

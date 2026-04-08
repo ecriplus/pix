@@ -52,7 +52,6 @@ export default class Certification extends Model {
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
   @attr('string') certificationFramework;
-  @attr('string') eduV3ExternalJuryResult;
 
   @belongsTo('complementary-certification-course-result-with-external', { async: true, inverse: null })
   complementaryCertificationCourseResultWithExternal;
@@ -63,18 +62,6 @@ export default class Certification extends Model {
 
   get creationDate() {
     return this.intl.formatDate(this.createdAt, { format: 'long' });
-  }
-
-  get externalJuryResult() {
-    const externalJuryResult = this.eduV3ExternalJuryResult || 'UNSET';
-    return this.intl.t(`components.certifications.v3.external-jury-select-options.${externalJuryResult}`);
-  }
-
-  get externalJuryResultOptions() {
-    return ['UNSET', 'ADVANCED', 'EXPERT'].map((optionKey) => ({
-      value: optionKey,
-      label: this.intl.t(`components.certifications.v3.external-jury-select-options.${optionKey}`),
-    }));
   }
 
   get completionDate() {
@@ -98,14 +85,6 @@ export default class Certification extends Model {
 
   get isCertificationCancelled() {
     return this.status === assessmentResultStatus.CANCELLED;
-  }
-
-  get hasComplementaryCertifications() {
-    return (
-      this.isPixPlusEduV3 ||
-      Boolean(this.commonComplementaryCertificationCourseResult.content) ||
-      Boolean(this.complementaryCertificationCourseResultWithExternal.get('pixResult'))
-    );
   }
 
   get indexedCompetences() {
@@ -136,8 +115,8 @@ export default class Certification extends Model {
     });
   }
 
-  get isPixPlusEduV3() {
-    return ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].includes(this.certificationFramework) && this.isV3;
+  get isPixPlusEdu() {
+    return ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].includes(this.certificationFramework);
   }
 
   wasBornInFrance() {
