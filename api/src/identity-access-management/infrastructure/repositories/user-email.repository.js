@@ -37,6 +37,8 @@ const getEmailModificationDemandByUserId = async function (userId) {
   return new EmailModificationDemand({
     newEmail: emailModificationDemand.newEmail,
     code: emailModificationDemand.code,
+    action: emailModificationDemand.action,
+    password: emailModificationDemand.passwordHash,
   });
 };
 /**
