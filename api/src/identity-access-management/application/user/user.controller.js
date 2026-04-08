@@ -179,6 +179,18 @@ const updateUserEmailWithValidation = async function (request, h, dependencies =
   return dependencies.updateEmailSerializer.serialize(updatedUserAttributes);
 };
 
+const addUserEmailWithValidation = async function (request, h, dependencies = { updateEmailSerializer }) {
+  const userId = request.params.id;
+  const code = request.payload.data.attributes.code;
+
+  const updatedUserAttributes = await usecases.addUserEmailWithValidation({
+    userId,
+    code,
+  });
+
+  return dependencies.updateEmailSerializer.serialize(updatedUserAttributes);
+};
+
 /**
  * @param request
  * @param h
@@ -293,6 +305,7 @@ export const userController = {
   sendVerificationCode,
   updatePassword,
   updateUserEmailWithValidation,
+  addUserEmailWithValidation,
   upgradeToRealUser,
   validateUserAccountEmail,
 };
