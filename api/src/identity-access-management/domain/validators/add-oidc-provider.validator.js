@@ -51,8 +51,17 @@ function validate(oidcProvider) {
 }
 
 /**
+ * @returns {string}
+ */
+function getImportTemplate() {
+  const schemaForSingleOidcProvider = Object.fromEntries(Object.keys(schema.describe().keys).map((key) => [key, null]));
+  const schemaForMultipleOidcProvider = [schemaForSingleOidcProvider];
+  return JSON.stringify(schemaForMultipleOidcProvider, null, 2);
+}
+
+/**
  * @typedef AddOidcProviderValidator
  * @type {object}
  * @property validate
  */
-export const addOidcProviderValidator = { validate };
+export const addOidcProviderValidator = { validate, getImportTemplate };
