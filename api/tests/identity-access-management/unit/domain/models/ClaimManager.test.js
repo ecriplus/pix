@@ -5,16 +5,16 @@ describe('Unit | Identity Access Management | Domain | Model | ClaimManager', fu
   describe('#mapClaims', function () {
     it('maps all claims from userInfo', async function () {
       // given
-      const claimMapping = { firstName: ['given_name'], lastName: ['last_name'] };
+      const claimMapping = { firstName: ['given_name'], lastName: ['last_name'], externalIdentityId: ['sub'] };
       const additionalClaims = ['foo'];
-      const userInfo = { given_name: 'Bob', last_name: 'Uncle', foo: 'foo' };
+      const userInfo = { given_name: 'Bob', last_name: 'Uncle', sub: '12345abcde', foo: 'foo' };
 
       // when
       const claimManager = new ClaimManager({ claimMapping, additionalClaims });
       const result = claimManager.mapClaims(userInfo);
 
       // then
-      expect(result).to.deep.equal({ firstName: 'Bob', lastName: 'Uncle' });
+      expect(result).to.deep.equal({ firstName: 'Bob', lastName: 'Uncle', externalIdentityId: '12345abcde' });
     });
 
     it('maps claims from userInfo with multiple possible claims', async function () {
