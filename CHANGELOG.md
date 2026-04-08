@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.381.0](https://github.com/1024pix/pix/compare/v5.380.0...v5.381.0) (2026-04-08)
+
+### :rocket: Amélioration
+
+- [#15768](https://github.com/1024pix/pix/pull/15768) Ajout du champ application_name dans le knexfile (PIX-22248) 
+
+### :bug: Correction
+
+- [#15779](https://github.com/1024pix/pix/pull/15779) Corriger l'affichage de la liste des participants pour les organisations non SUP/SCO (PIX-22275). 
+
+### :arrow_up: Montée de version
+
+- [#15778](https://github.com/1024pix/pix/pull/15778) Update dependency @1024pix/pix-ui to ^60.3.0 (admin)
+
 # [5.380.0](https://github.com/1024pix/pix/compare/v5.379.0...v5.380.0) (2026-04-08)
 
 ### :rocket: Amélioration
