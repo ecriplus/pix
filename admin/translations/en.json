@@ -1842,8 +1842,7 @@
           "editorLogo": "Editor logo url",
           "editorName": "Editor name",
           "internalTitle": "Internal title",
-          "locales": "{ count, plural, one {Localized language} other {Localized languages}}",
-          "localizedLanguage": "Localized language",
+          "locales": "{ count, plural, one {Locale} other {Locales}}",
           "publishedOn": "Published on",
           "status": "Status",
           "status-label": {
@@ -1866,6 +1865,12 @@
         },
         "error-messages": {
           "incorrect-editor-logo-url-format": "The url format of the editor's logo is incorrect."
+        },
+        "form": {
+          "locales": {
+            "label": "Locales",
+            "placeholder": "-- Select one or more locales --"
+          }
         },
         "list": {
           "caption": "Trainings list",
