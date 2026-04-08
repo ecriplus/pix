@@ -10,7 +10,7 @@ const baseConfiguration = {
   seedsDirectory: './seeds/',
   connection: {
     connectionString: process.env.DATABASE_URL,
-    application_name: config.infra.hostname || 'api',
+    application_name: config.infra.hostname,
     statement_timeout: parseInt(process.env.DATABASE_STATEMENT_TIMEOUT_MS, 10) || undefined,
     query_timeout: parseInt(process.env.DATABASE_QUERY_TIMEOUT_MS, 10) || undefined,
     idle_in_transaction_session_timeout:
