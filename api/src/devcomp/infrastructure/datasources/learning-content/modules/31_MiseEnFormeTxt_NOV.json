@@ -773,7 +773,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Annie veut mettre en avant un mot dans son texte.<br><strong>Qu’est-ce qu’Annie doit faire ?&nbsp;</strong></p>"
+                    "content": "<p>Annie veut mettre en avant un mot dans son texte.<br><strong>Qu’est-ce qu’Annie doit faire&nbsp;?</strong></p>"
                   },
                   {
                     "type": "select",
@@ -802,7 +802,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br>Idriss trouve que son texte est écrit trop petit.<br><strong>Qu’est-ce qu’Idriss doit faire ?</strong></p>"
+                    "content": "<p><br>Idriss trouve que son texte est écrit trop petit.<br><strong>Qu’est-ce qu’Idriss doit faire&nbsp;?</strong></p>"
                   },
                   {
                     "type": "select",
@@ -831,7 +831,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>&lt;br&gt;Jan écrit un article avec des mots en anglais dedans, il veut signaler qu’il s’agit de mots dans une autre langue. <br><strong>Qu’est-ce que Jan doit faire ?</strong></p>"
+                    "content": "<br><p>Jan écrit un article avec des mots en anglais dedans, il veut signaler qu’il s’agit de mots dans une autre langue.<br><strong>Qu’est-ce que Jan doit faire&nbsp;?</strong></p>"
                   },
                   {
                     "type": "select",
