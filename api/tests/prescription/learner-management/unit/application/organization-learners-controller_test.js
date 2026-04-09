@@ -61,6 +61,30 @@ describe('Unit | Prescription | Learner Management | Application | organization-
     });
   });
 
+  describe('#getOrganizationLearnerFilters', function () {
+    it('should call usecase and serialize result', async function () {
+      // given
+      const organizationId = Symbol('organizationId');
+      const filters = Symbol('filters');
+      const serialized = Symbol('serialized');
+
+      sinon.stub(usecases, 'getOrganizationLearnerFilters').resolves(filters);
+      const organizationLearnerFilterSerializer = { serialize: sinon.stub().returns(serialized) };
+
+      const request = { params: { organizationId } };
+
+      // when
+      const response = await organizationLearnersController.getOrganizationLearnerFilters(request, hFake, {
+        organizationLearnerFilterSerializer,
+      });
+
+      // then
+      expect(usecases.getOrganizationLearnerFilters).to.have.been.calledWithExactly({ organizationId });
+      expect(organizationLearnerFilterSerializer.serialize).to.have.been.calledWithExactly(filters);
+      expect(response).to.equal(serialized);
+    });
+  });
+
   describe('#deleteOrganizationLearnerFromAdmin', function () {
     let deleteOrganizationLearnersStub;
 
