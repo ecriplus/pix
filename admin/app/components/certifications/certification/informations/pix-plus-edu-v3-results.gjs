@@ -64,8 +64,7 @@ export default class PixPlusEduV3Results extends Component {
       this.toggleJurySelect();
     } catch (responseError) {
       const errorMessage =
-        responseError?.errors?.[0]?.detail ??
-        this.intl.t('components.certifications.edu-results.v3.error');
+        responseError?.errors?.[0]?.detail ?? this.intl.t('components.certifications.edu-results.v3.error');
       this.pixToast.sendErrorNotification({ message: errorMessage });
     }
   }
@@ -116,18 +115,23 @@ export default class PixPlusEduV3Results extends Component {
               <p class="level">
                 {{this.externalJuryResult}}
               </p>
-              <PixTooltip>
+              <PixTooltip @isWide={{true}}>
                 <:triggerElement>
                   <PixIconButton
                     @size="xsmall"
                     @ariaLabel="Modifier le volet jury"
                     @triggerAction={{this.toggleJurySelect}}
                     @iconName="edit"
+                    @isDisabled={{if @certification.isPublished false true}}
                   />
                 </:triggerElement>
 
                 <:tooltip>
-                  {{t "common.actions.edit"}}
+                  {{#if @certification.isPublished}}
+                    {{t "common.actions.edit"}}
+                  {{else}}
+                    {{t "components.certifications.edu-results.v3.edit-disabled"}}
+                  {{/if}}
                 </:tooltip>
               </PixTooltip>
             </div>

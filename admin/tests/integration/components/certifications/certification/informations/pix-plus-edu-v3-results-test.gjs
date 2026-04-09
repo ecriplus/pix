@@ -57,6 +57,22 @@ module(
       });
     });
 
+    module('when certification is not published', function () {
+      test('should disable the edit button', async function (assert) {
+        // given
+        const certification = store.createRecord('certification', {
+          reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: false,
+        });
+
+        // when
+        const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
+
+        // then
+        assert.dom(screen.getByRole('button', { name: 'Modifier le volet jury' })).isDisabled();
+      });
+    });
+
     module('jury level edition', function (hooks) {
       let successNotificationStub, errorNotificationStub;
 
@@ -76,6 +92,7 @@ module(
         // given
         const certification = store.createRecord('certification', {
           reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: true,
         });
 
         const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
@@ -92,6 +109,7 @@ module(
         // given
         const certification = store.createRecord('certification', {
           reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: true,
         });
 
         const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
@@ -112,6 +130,7 @@ module(
         const certification = store.createRecord('certification', {
           id: '1',
           reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: true,
         });
 
         const currentCertification = store.peekRecord('certification', 1);
@@ -142,6 +161,7 @@ module(
         const certification = store.createRecord('certification', {
           id: '2',
           reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: true,
         });
 
         const currentCertification = store.peekRecord('certification', 2);
@@ -167,6 +187,7 @@ module(
         const certification = store.createRecord('certification', {
           id: '3',
           reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
+          isPublished: true,
         });
 
         const currentCertification = store.peekRecord('certification', 3);

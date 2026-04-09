@@ -503,6 +503,7 @@
         },
         "v3": {
           "admissible": "Admissible",
+          "edit-disabled": "Cannot be edited because the session is not published",
           "error": "An error occurred",
           "external-jury": "External jury section",
           "external-jury-select-options": {
