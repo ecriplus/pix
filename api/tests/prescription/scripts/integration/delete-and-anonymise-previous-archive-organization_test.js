@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { DeleteAndAnonymisePreviousOrganizationScript } from '../../../../scripts/prod/delete-and-anonymise-previous-archive-organization.js';
+import { DeleteAndAnonymisePreviousOrganizationScript } from '../../../../src/prescription/scripts/delete-and-anonymise-previous-archive-organization.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
 describe('DeleteAndAnonymisePreviousOrganizationScript', function () {

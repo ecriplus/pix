@@ -1,5 +1,5 @@
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
-import { DeleteOrganizationLearnersFromOrganizationScript } from '../../../../scripts/prod/delete-organization-learners-from-organization.js';
+import { DeleteOrganizationLearnersFromOrganizationScript } from '../../../../src/prescription/scripts/delete-organization-learners-from-organization.js';
 import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
 
 describe('Script | Prod | Delete Organization Learners From Organization', function () {

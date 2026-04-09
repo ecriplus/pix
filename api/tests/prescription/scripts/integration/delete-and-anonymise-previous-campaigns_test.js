@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { DeleteAndAnonymisePreviousCampaignParticipationsScript } from '../../../../scripts/prod/delete-and-anonymise-previous-participations.js';
+import { DeleteAndAnonymisePreviousCampaignsScript } from '../../../../src/prescription/scripts/delete-and-anonymise-previous-campaigns.js';
 import { databaseBuilder, knex } from '../../../test-helper.js';
 
-describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
+describe('DeleteAndAnonymisePreviousCampaignsScript', function () {
   describe('Options', function () {
     it('has the correct options', function () {
-      const script = new DeleteAndAnonymisePreviousCampaignParticipationsScript();
+      const script = new DeleteAndAnonymisePreviousCampaignsScript();
       const { options } = script.metaInfo;
 
       expect(options.startArchiveDate).to.deep.include({
@@ -52,7 +52,7 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
     };
 
     beforeEach(async function () {
-      script = new DeleteAndAnonymisePreviousCampaignParticipationsScript();
+      script = new DeleteAndAnonymisePreviousCampaignsScript();
       logger = { info: sinon.spy(), error: sinon.spy() };
       sinon.stub(process, 'env').value({ ENGINEERING_USER_ID });
       now = new Date(startArchiveDate);
@@ -116,6 +116,21 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
           deletedBy: userId,
           archivedAt: null,
         });
+        archivedOrganizationAtDate.campaignDeletedAtDate = databaseBuilder.factory.buildCampaign({
+          targetProfileId,
+          name: 'campaignDeletedAtDate name',
+          title: 'campaignDeletedAtDate title',
+          customLandingPageText: 'campaignDeletedAtDate landing',
+          externalIdHelpImageUrl: 'campaignDeletedAtDate help',
+          alternativeTextToExternalIdHelpImage: 'campaignDeletedAtDate alt help',
+          customResultPageText: 'campaignDeletedAtDate custom text',
+          customResultPageButtonText: 'campaignDeletedAtDate custom button',
+          customResultPageButtonUrl: 'campaignDeletedAtDate custom url',
+          organizationId: archivedOrganizationAtDate.organization.id,
+          deletedAt: now,
+          deletedBy: userId,
+          archivedAt: null,
+        });
 
         // 3
         activeOrganization.campaignDeleted = databaseBuilder.factory.buildCampaign({
@@ -152,6 +167,200 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
         await databaseBuilder.commit();
       });
 
+      describe('#archivedOrganizationBeforeDate', function () {
+        it('should not anonymize deleted campaigns of archived organization before date', async function () {
+          // when
+          await script.handle({ options: { startArchiveDate }, logger });
+
+          const campaignDeleted = await knex('campaigns')
+            .select(
+              'name',
+              'title',
+              'customLandingPageText',
+              'externalIdHelpImageUrl',
+              'alternativeTextToExternalIdHelpImage',
+              'customResultPageText',
+              'customResultPageButtonText',
+              'customResultPageButtonUrl',
+              'deletedAt',
+              'deletedBy',
+              'archivedAt',
+            )
+            .where('id', archivedOrganizationBeforeDate.campaignDeleted.id)
+            .first();
+
+          // then
+          expect(campaignDeleted).deep.equal({
+            name: archivedOrganizationBeforeDate.campaignDeleted.name,
+            title: archivedOrganizationBeforeDate.campaignDeleted.title,
+            customLandingPageText: archivedOrganizationBeforeDate.campaignDeleted.customLandingPageText,
+            externalIdHelpImageUrl: archivedOrganizationBeforeDate.campaignDeleted.externalIdHelpImageUrl,
+            alternativeTextToExternalIdHelpImage:
+              archivedOrganizationBeforeDate.campaignDeleted.alternativeTextToExternalIdHelpImage,
+            customResultPageText: archivedOrganizationBeforeDate.campaignDeleted.customResultPageText,
+            customResultPageButtonText: archivedOrganizationBeforeDate.campaignDeleted.customResultPageButtonText,
+            customResultPageButtonUrl: archivedOrganizationBeforeDate.campaignDeleted.customResultPageButtonUrl,
+            deletedAt: archivedOrganizationBeforeDate.campaignDeleted.deletedAt,
+            deletedBy: archivedOrganizationBeforeDate.campaignDeleted.deletedBy,
+            archivedAt: archivedOrganizationBeforeDate.campaignDeleted.archivedAt,
+          });
+        });
+      });
+
+      describe('#archivedOrganizationAtDate', function () {
+        it('should anonymise deleted campaigns before date of archived organization at date', async function () {
+          // when
+          await script.handle({ options: { startArchiveDate }, logger });
+
+          const campaignDeleted = await knex('campaigns')
+            .select(
+              'name',
+              'title',
+              'customLandingPageText',
+              'externalIdHelpImageUrl',
+              'alternativeTextToExternalIdHelpImage',
+              'customResultPageText',
+              'customResultPageButtonText',
+              'customResultPageButtonUrl',
+              'deletedAt',
+              'deletedBy',
+              'archivedAt',
+            )
+            .where('id', archivedOrganizationAtDate.campaignDeleted.id)
+            .first();
+
+          // then
+          expect(campaignDeleted).deep.equal({
+            name: '(anonymized)',
+            title: null,
+            customLandingPageText: null,
+            externalIdHelpImageUrl: null,
+            alternativeTextToExternalIdHelpImage: null,
+            customResultPageText: null,
+            customResultPageButtonText: null,
+            customResultPageButtonUrl: null,
+            deletedAt: archivedOrganizationAtDate.campaignDeleted.deletedAt,
+            deletedBy: archivedOrganizationAtDate.campaignDeleted.deletedBy,
+            archivedAt: null,
+          });
+        });
+
+        it('should not anonymise deleted campaigns at date of archived organization at date', async function () {
+          // when
+          await script.handle({ options: { startArchiveDate }, logger });
+
+          const campaignDeleted = await knex('campaigns')
+            .select(
+              'name',
+              'title',
+              'customLandingPageText',
+              'externalIdHelpImageUrl',
+              'alternativeTextToExternalIdHelpImage',
+              'customResultPageText',
+              'customResultPageButtonText',
+              'customResultPageButtonUrl',
+              'deletedAt',
+              'deletedBy',
+              'archivedAt',
+            )
+            .where('id', archivedOrganizationAtDate.campaignDeletedAtDate.id)
+            .first();
+
+          // then
+          expect(campaignDeleted).deep.equal({
+            name: archivedOrganizationAtDate.campaignDeletedAtDate.name,
+            title: archivedOrganizationAtDate.campaignDeletedAtDate.title,
+            customLandingPageText: archivedOrganizationAtDate.campaignDeletedAtDate.customLandingPageText,
+            externalIdHelpImageUrl: archivedOrganizationAtDate.campaignDeletedAtDate.externalIdHelpImageUrl,
+            alternativeTextToExternalIdHelpImage:
+              archivedOrganizationAtDate.campaignDeletedAtDate.alternativeTextToExternalIdHelpImage,
+            customResultPageText: archivedOrganizationAtDate.campaignDeletedAtDate.customResultPageText,
+            customResultPageButtonText: archivedOrganizationAtDate.campaignDeletedAtDate.customResultPageButtonText,
+            customResultPageButtonUrl: archivedOrganizationAtDate.campaignDeletedAtDate.customResultPageButtonUrl,
+            deletedAt: archivedOrganizationAtDate.campaignDeletedAtDate.deletedAt,
+            deletedBy: archivedOrganizationAtDate.campaignDeletedAtDate.deletedBy,
+            archivedAt: archivedOrganizationAtDate.campaignDeletedAtDate.archivedAt,
+          });
+        });
+      });
+
+      describe('#activeOrganization', function () {
+        it('should not anonymise active campaigns of active organization', async function () {
+          // when
+          await script.handle({ options: { startArchiveDate }, logger });
+
+          const campaignActive = await knex('campaigns')
+            .select(
+              'name',
+              'title',
+              'customLandingPageText',
+              'externalIdHelpImageUrl',
+              'alternativeTextToExternalIdHelpImage',
+              'customResultPageText',
+              'customResultPageButtonText',
+              'customResultPageButtonUrl',
+              'deletedAt',
+              'deletedBy',
+              'archivedAt',
+            )
+            .where('id', activeOrganization.campaignActive.id)
+            .first();
+
+          // then
+          expect(campaignActive).deep.equal({
+            name: activeOrganization.campaignActive.name,
+            title: activeOrganization.campaignActive.title,
+            customLandingPageText: activeOrganization.campaignActive.customLandingPageText,
+            externalIdHelpImageUrl: activeOrganization.campaignActive.externalIdHelpImageUrl,
+            alternativeTextToExternalIdHelpImage:
+              activeOrganization.campaignActive.alternativeTextToExternalIdHelpImage,
+            customResultPageText: activeOrganization.campaignActive.customResultPageText,
+            customResultPageButtonText: activeOrganization.campaignActive.customResultPageButtonText,
+            customResultPageButtonUrl: activeOrganization.campaignActive.customResultPageButtonUrl,
+            deletedAt: activeOrganization.campaignActive.deletedAt,
+            deletedBy: activeOrganization.campaignActive.deletedBy,
+            archivedAt: activeOrganization.campaignActive.archivedAt,
+          });
+        });
+
+        it('should anonymise deleted campaigns of active organization', async function () {
+          // when
+          await script.handle({ options: { startArchiveDate }, logger });
+
+          const campaignDeleted = await knex('campaigns')
+            .select(
+              'name',
+              'title',
+              'customLandingPageText',
+              'externalIdHelpImageUrl',
+              'alternativeTextToExternalIdHelpImage',
+              'customResultPageText',
+              'customResultPageButtonText',
+              'customResultPageButtonUrl',
+              'deletedAt',
+              'deletedBy',
+              'archivedAt',
+            )
+            .where('id', activeOrganization.campaignDeleted.id)
+            .first();
+
+          // then
+          expect(campaignDeleted).deep.equal({
+            name: '(anonymized)',
+            title: null,
+            customLandingPageText: null,
+            externalIdHelpImageUrl: null,
+            alternativeTextToExternalIdHelpImage: null,
+            customResultPageText: null,
+            customResultPageButtonText: null,
+            customResultPageButtonUrl: null,
+            deletedAt: archivedOrganizationAtDate.campaignDeleted.deletedAt,
+            deletedBy: archivedOrganizationAtDate.campaignDeleted.deletedBy,
+            archivedAt: null,
+          });
+        });
+      });
+
       describe('#participations', function () {
         beforeEach(async function () {
           // 1
@@ -182,8 +391,6 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
               firstName: 'johnny',
               lastName: 'be good',
               organizationId: activeOrganization.organization.id,
-              deletedAt: null,
-              deletedBy: null,
             });
 
           await databaseBuilder.commit();
@@ -216,7 +423,6 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
               userId: activeOrganization.activeLearner.userId,
               organizationLearnerId: activeOrganization.activeLearner.id,
               participantExternalId: 'second',
-              isImproved: true,
               campaignId: activeOrganization.campaignActive.id,
               deletedAt: null,
               deletedBy: null,
@@ -236,7 +442,7 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
 
           describe('#participations', function () {
             describe('#archivedOrganizationBeforeDate', function () {
-              it('should not update delete participation of deleted campaign on archived organization before date', async function () {
+              it('should not update delete participation of archived organization before date', async function () {
                 // when
                 await script.handle({
                   options: { startArchiveDate },
@@ -259,7 +465,7 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
             });
 
             describe('#archivedOrganizationAtDate', function () {
-              it('should not update deleted participation of deleted campaigns on archived organization at date', async function () {
+              it('anonymize deleted participation of archived organization at date', async function () {
                 // when
                 await script.handle({
                   options: { startArchiveDate },
@@ -273,8 +479,8 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
 
                 // then
                 expect(deletedParticipation).deep.equal({
-                  userId: archivedOrganizationAtDate.deletedParticipation.userId,
-                  participantExternalId: archivedOrganizationAtDate.deletedParticipation.participantExternalId,
+                  userId: null,
+                  participantExternalId: null,
                   deletedAt: archivedOrganizationAtDate.deletedParticipation.deletedAt,
                   deletedBy: archivedOrganizationAtDate.deletedParticipation.deletedBy,
                 });
@@ -282,7 +488,7 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
             });
 
             describe('#activeOrganization', function () {
-              it('should not anonymise deleted participation of deleted campaign on active organization', async function () {
+              it('should anonymise deleted participation of active organization', async function () {
                 // when
                 await script.handle({
                   options: { startArchiveDate },
@@ -296,14 +502,14 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
 
                 // then
                 expect(deleteParticipation).deep.equal({
-                  userId: activeOrganization.deletedParticipation.userId,
-                  participantExternalId: activeOrganization.deletedParticipation.participantExternalId,
+                  userId: null,
+                  participantExternalId: null,
                   deletedAt: activeOrganization.deletedParticipation.deletedAt,
                   deletedBy: userId,
                 });
               });
 
-              it('should not anonymise of active participation of active organization', async function () {
+              it('should not anonymise or active participation of active organization', async function () {
                 // when
                 await script.handle({
                   options: { startArchiveDate },
@@ -323,68 +529,17 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                   deletedBy: null,
                 });
               });
-
-              it('should anonymise of deleted participation only of active campaign on active organization', async function () {
-                // when
-                const deletedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                  userId: activeOrganization.activeLearner.userId,
-                  organizationLearnerId: activeOrganization.activeLearner.id,
-                  participantExternalId: 'second',
-                  campaignId: activeOrganization.campaignActive.id,
-                  deletedAt: new Date('2024-01-01'),
-                  deletedBy: userId,
-                  isImproved: true,
-                });
-
-                const deletedImprovedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                  userId: activeOrganization.activeLearner.userId,
-                  organizationLearnerId: activeOrganization.activeLearner.id,
-                  participantExternalId: 'second',
-                  isImproved: false,
-                  campaignId: activeOrganization.campaignActive.id,
-                  deletedAt: new Date('2024-02-01'),
-                  deletedBy: userId,
-                });
-
-                await databaseBuilder.commit();
-                await script.handle({
-                  options: { startArchiveDate },
-                  logger,
-                });
-
-                const activeParticipation = await knex('campaign-participations')
-                  .select('id', 'userId', 'participantExternalId', 'deletedAt', 'deletedBy')
-                  .whereNull('userId');
-
-                // then
-                expect(activeParticipation).deep.members([
-                  {
-                    id: deletedParticipationActiveCampaign.id,
-                    userId: null,
-                    participantExternalId: null,
-                    deletedAt: deletedParticipationActiveCampaign.deletedAt,
-                    deletedBy: deletedParticipationActiveCampaign.deletedBy,
-                  },
-                  {
-                    id: deletedImprovedParticipationActiveCampaign.id,
-                    userId: null,
-                    participantExternalId: null,
-                    deletedAt: deletedImprovedParticipationActiveCampaign.deletedAt,
-                    deletedBy: deletedImprovedParticipationActiveCampaign.deletedBy,
-                  },
-                ]);
-              });
             });
           });
 
           describe('#assessments', function () {
-            it('should detach assessments and update updatedAt column only on deleted participations on active campaign', async function () {
+            it('should detach assessments and update updatedAt column only on archived organization before date', async function () {
               // given
               // 1
               const assessmentFromDeletedParticipationOnArchivedOrganizationBeforeDate =
                 databaseBuilder.factory.buildAssessment({
                   userId: archivedOrganizationBeforeDate.deletedLearner.userId,
-                  campaignParticipationId: archivedOrganizationBeforeDate.deletedParticipation.id,
+                  campaignParticipationId: null,
                   updatedAt: new Date('2024-01-01'),
                 });
 
@@ -397,19 +552,9 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 });
 
               // 3
-              const deletedImprovedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                userId: activeOrganization.activeLearner.userId,
-                organizationLearnerId: activeOrganization.activeLearner.id,
-                participantExternalId: 'second',
-                isImproved: false,
-                campaignId: activeOrganization.campaignActive.id,
-                deletedAt: new Date('2024-02-01'),
-                deletedBy: userId,
-              });
-
               const assessmentFromDActiveParticipationOnActiveOrganization = databaseBuilder.factory.buildAssessment({
                 userId: activeOrganization.activeLearner.userId,
-                campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
+                campaignParticipationId: activeOrganization.activeParticipation.id,
                 updatedAt: new Date('2024-01-01'),
               });
 
@@ -430,6 +575,12 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 .whereNull('campaignParticipationId')
                 .pluck('id');
 
+              const previousAnonymuzedAssessments = await knex('assessments')
+                .select('id')
+                .whereNot({ updatedAt: now })
+                .whereNull('campaignParticipationId')
+                .pluck('id');
+
               const activeAssessments = await knex('assessments')
                 .select('id')
                 .whereNot({ updatedAt: now })
@@ -437,15 +588,19 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 .pluck('id');
 
               // then
-              expect(activeAssessments).lengthOf(3);
-              expect(activeAssessments).deep.members([
-                assessmentFromDDeletedParticipationOnActiveOrganization.id,
-                assessmentFromDeletedParticipationOnArchivedOrganizationAtDate.id,
+              expect(activeAssessments).lengthOf(1);
+              expect(activeAssessments).deep.members([assessmentFromDActiveParticipationOnActiveOrganization.id]);
+
+              expect(previousAnonymuzedAssessments).lengthOf(1);
+              expect(previousAnonymuzedAssessments).deep.members([
                 assessmentFromDeletedParticipationOnArchivedOrganizationBeforeDate.id,
               ]);
 
-              expect(anonymizedAssessments).lengthOf(1);
-              expect(anonymizedAssessments).deep.members([assessmentFromDActiveParticipationOnActiveOrganization.id]);
+              expect(anonymizedAssessments).lengthOf(2);
+              expect(anonymizedAssessments).deep.members([
+                assessmentFromDeletedParticipationOnArchivedOrganizationAtDate.id,
+                assessmentFromDDeletedParticipationOnActiveOrganization.id,
+              ]);
             });
           });
 
@@ -482,28 +637,11 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 campaignParticipationId: activeOrganization.activeParticipation.id,
                 trainingId: training2.id,
                 userId: activeOrganization.activeLearner.userId,
-                updatedAt: new Date('2022-01-01'),
+                updatedAt: new Date('2023-01-01'),
               });
 
               databaseBuilder.factory.buildUserRecommendedTraining({
                 campaignParticipationId: activeOrganization.deletedParticipation.id,
-                trainingId: training2.id,
-                userId: activeOrganization.activeLearner.userId,
-                updatedAt: new Date('2023-01-01'),
-              });
-
-              const deletedImprovedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                userId: activeOrganization.activeLearner.userId,
-                organizationLearnerId: activeOrganization.activeLearner.id,
-                participantExternalId: 'second',
-                isImproved: false,
-                campaignId: activeOrganization.campaignActive.id,
-                deletedAt: new Date('2024-02-01'),
-                deletedBy: userId,
-              });
-
-              databaseBuilder.factory.buildUserRecommendedTraining({
-                campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
                 trainingId: training2.id,
                 userId: activeOrganization.activeLearner.userId,
                 updatedAt: new Date('2023-01-01'),
@@ -524,28 +662,22 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 .whereNotNull('campaignParticipationId');
 
               // then
-              expect(anonymizedRecommendedTrainingResults).lengthOf(1);
+              expect(anonymizedRecommendedTrainingResults).lengthOf(2);
               expect(anonymizedRecommendedTrainingResults).deep.members([
                 {
                   campaignParticipationId: null,
-                  userId: activeOrganization.activeLearner.userId,
+                  userId: archivedOrganizationAtDate.deletedParticipation.userId,
+                },
+                {
+                  campaignParticipationId: null,
+                  userId: activeOrganization.deletedParticipation.userId,
                 },
               ]);
-              expect(activeRecommendedTrainings).lengthOf(3);
+              expect(activeRecommendedTrainings).lengthOf(1);
               expect(activeRecommendedTrainings).deep.members([
-                {
-                  campaignParticipationId: archivedOrganizationAtDate.deletedParticipation.id,
-                  userId: archivedOrganizationAtDate.deletedParticipation.userId,
-                  updatedAt: new Date('2024-01-01'),
-                },
                 {
                   campaignParticipationId: activeOrganization.activeParticipation.id,
                   userId: activeOrganization.activeParticipation.userId,
-                  updatedAt: new Date('2022-01-01'),
-                },
-                {
-                  campaignParticipationId: activeOrganization.deletedParticipation.id,
-                  userId: activeOrganization.deletedParticipation.userId,
                   updatedAt: new Date('2023-01-01'),
                 },
               ]);
@@ -602,22 +734,6 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 campaignParticipationId: activeOrganization.deletedParticipation.id,
               });
 
-              const deletedImprovedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                userId: activeOrganization.activeLearner.userId,
-                organizationLearnerId: activeOrganization.activeLearner.id,
-                participantExternalId: 'second',
-                isImproved: false,
-                campaignId: activeOrganization.campaignActive.id,
-                deletedAt: new Date('2024-02-01'),
-                deletedBy: userId,
-              });
-
-              databaseBuilder.factory.buildBadgeAcquisition({
-                userId: deletedImprovedParticipationActiveCampaign.userId,
-                badgeId: nonCertifiableBadge.id,
-                campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
-              });
-
               await databaseBuilder.commit();
 
               // when
@@ -628,11 +744,15 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 .whereNull('userId');
 
               // then
-              expect(detachBadges).lengthOf(1);
+              expect(detachBadges).lengthOf(2);
               expect(detachBadges).deep.members([
                 {
                   badgeId: nonCertifiableBadge.id,
-                  campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
+                  campaignParticipationId: archivedOrganizationAtDate.deletedParticipation.id,
+                },
+                {
+                  badgeId: nonCertifiableBadge.id,
+                  campaignParticipationId: activeOrganization.deletedParticipation.id,
                 },
               ]);
             });
@@ -644,21 +764,10 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 badgeId: certifiableBadge.id,
                 campaignParticipationId: archivedOrganizationBeforeDate.deletedParticipation.id,
               });
-
-              const deletedImprovedParticipationActiveCampaign = databaseBuilder.factory.buildCampaignParticipation({
-                userId: activeOrganization.activeLearner.userId,
-                organizationLearnerId: activeOrganization.activeLearner.id,
-                participantExternalId: 'second',
-                isImproved: false,
-                campaignId: activeOrganization.campaignActive.id,
-                deletedAt: new Date('2024-02-01'),
-                deletedBy: userId,
-              });
-
               databaseBuilder.factory.buildBadgeAcquisition({
-                userId: deletedImprovedParticipationActiveCampaign.userId,
+                userId: activeOrganization.activeLearner.userId,
                 badgeId: certifiableBadge.id,
-                campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
+                campaignParticipationId: activeOrganization.deletedParticipation.id,
               });
 
               await databaseBuilder.commit();
@@ -682,8 +791,8 @@ describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
                 },
                 {
                   badgeId: certifiableBadge.id,
-                  campaignParticipationId: deletedImprovedParticipationActiveCampaign.id,
-                  userId: deletedImprovedParticipationActiveCampaign.userId,
+                  campaignParticipationId: activeOrganization.deletedParticipation.id,
+                  userId: activeOrganization.activeLearner.userId,
                 },
               ]);
             });

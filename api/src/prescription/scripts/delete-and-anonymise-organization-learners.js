@@ -1,9 +1,9 @@
-import { knex } from '../../db/knex-database-connection.js';
-import { CLIENTS, PIX_ADMIN } from '../../src/authorization/domain/constants.js';
-import { usecases } from '../../src/prescription/learner-management/domain/usecases/index.js';
-import { commaSeparatedNumberParser } from '../../src/shared/application/scripts/parsers.js';
-import { Script } from '../../src/shared/application/scripts/script.js';
-import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
+import { knex } from '../../../db/knex-database-connection.js';
+import { CLIENTS, PIX_ADMIN } from '../../authorization/domain/constants.js';
+import { commaSeparatedNumberParser } from '../../shared/application/scripts/parsers.js';
+import { Script } from '../../shared/application/scripts/script.js';
+import { ScriptRunner } from '../../shared/application/scripts/script-runner.js';
+import { usecases } from '../learner-management/domain/usecases/index.js';
 // Définition du script
 export class DeleteAndAnonymiseOrganizationLearnerScript extends Script {
   constructor() {
