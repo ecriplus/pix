@@ -25,6 +25,8 @@ describe('Unit | Identity Access Management | Domain | Validator | AddOidcProvid
         enabledForPixAdmin: true,
         openidConfigurationUrl: 'https://accounts.google.com/.well-known/openid-configuration',
         redirectUri: 'https://admin.dev.pix.fr/connexion/google',
+        application: 'admin',
+        applicationTld: '.fr',
       };
 
       // when
