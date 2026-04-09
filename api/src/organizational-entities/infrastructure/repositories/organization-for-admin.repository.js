@@ -85,8 +85,11 @@ const findExistingIds = async function ({ ids } = {}) {
 const findChildrenByParentOrganizationId = async function ({ parentOrganizationId }) {
   const knexConnection = DomainTransaction.getConnection();
   const children = await knexConnection(ORGANIZATIONS_TABLE_NAME)
-    .where({ parentOrganizationId })
-    .orderBy('name', 'ASC');
+    .join('fct_structures AS child_fs', 'child_fs.organization_id', `${ORGANIZATIONS_TABLE_NAME}.id`)
+    .join('fct_structures AS parent_fs', 'parent_fs.structure_id', 'child_fs.parent_structure_id')
+    .where('parent_fs.organization_id', parentOrganizationId)
+    .select(`${ORGANIZATIONS_TABLE_NAME}.*`)
+    .orderBy(`${ORGANIZATIONS_TABLE_NAME}.name`, 'ASC');
   return children.map(_toDomain);
 };
 

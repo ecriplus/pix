@@ -715,36 +715,47 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
   });
 
   describe('#findChildrenByParentOrganizationId', function () {
-    let parentOrganizationId;
+    let parentOrganizationId, parentStructureId, networkId;
 
-    beforeEach(function () {
-      parentOrganizationId = databaseBuilder.factory.buildOrganization({
-        name: 'name_ok_1',
-        type: 'SCO',
-        externalId: '1234567A',
-      }).id;
+    beforeEach(async function () {
+      const {
+        organization: parentOrganization,
+        structure: parentStructure,
+        network,
+      } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+        headOrganization: { name: 'Parent Org', type: 'SCO', externalId: '1234567A' },
+      });
+      parentOrganizationId = parentOrganization.id;
+      parentStructureId = parentStructure.id;
+      networkId = network.id;
+      await databaseBuilder.commit();
     });
 
     context('when there is no child organization', function () {
       it('returns an empty array', async function () {
-        //given
-        //when
+        // given
+        // when
         const children = await repositories.organizationForAdminRepository.findChildrenByParentOrganizationId({
           parentOrganizationId,
         });
 
-        //then
+        // then
         expect(children).to.have.lengthOf(0);
       });
     });
 
     context('when there is at least one child organization', function () {
-      it('returns an array of organizations', async function () {
+      it('returns an array of OrganizationForAdmin instances ordered by name', async function () {
         // given
-        databaseBuilder.factory.buildOrganization({
-          name: 'First Child',
-          type: 'SCO',
-          parentOrganizationId,
+        databaseBuilder.factory.buildOrganizationInNetwork({
+          networkId,
+          parentStructureId,
+          organizationData: { name: 'Second Child', type: 'SCO' },
+        });
+        databaseBuilder.factory.buildOrganizationInNetwork({
+          networkId,
+          parentStructureId,
+          organizationData: { name: 'First Child', type: 'SCO' },
         });
 
         await databaseBuilder.commit();
@@ -755,9 +766,27 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         });
 
         // then
-        expect(children.length).to.be.greaterThanOrEqual(1);
+        expect(children).to.have.lengthOf(2);
         expect(children[0]).to.be.instanceOf(OrganizationForAdmin);
-        expect(_.map(children, 'name')).to.have.members(['First Child']);
+        expect(_.map(children, 'name')).to.deep.equal(['First Child', 'Second Child']);
+      });
+    });
+
+    context('when an organization has a structure but no parent', function () {
+      it('does not return it', async function () {
+        // given
+        databaseBuilder.factory.buildOrganizationWithStructure({
+          organizationData: { name: 'Unrelated Org', type: 'SCO' },
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const children = await repositories.organizationForAdminRepository.findChildrenByParentOrganizationId({
+          parentOrganizationId,
+        });
+
+        // then
+        expect(children).to.have.lengthOf(0);
       });
     });
   });

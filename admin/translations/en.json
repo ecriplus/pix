@@ -1527,7 +1527,7 @@
         "details": "Details",
         "features": "Features",
         "invitations": "Invitations",
-        "network": "Network {nbrOfChildren, plural, =1 {({nbrOfChildren} child)} other {({nbrOfChildren} children)}}",
+        "network": "Network {nbrOfChildren, plural, =0 {({nbrOfChildren} child)} =1 {({nbrOfChildren} child)} other {({nbrOfChildren} children)}}",
         "places": "Places",
         "tags": "Tags",
         "target-profiles": "Target profiles",
