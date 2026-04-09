@@ -785,30 +785,6 @@
       "all-tags": {
         "recently-used-tags": "Liste de tags récemment utilisés avec {tagName}"
       },
-      "children": {
-        "attach-child-form": {
-          "input-information": "ID d'organisation(s) à ajouter",
-          "input-label": "Ajouter une ou plusieurs organisations filles",
-          "name": "Formulaire d'ajout d'organisation(s) fille(s)"
-        },
-        "create-child-organization-button": "Créer une organisation fille"
-      },
-      "children-list": {
-        "actions": {
-          "detach": {
-            "button": "Détacher",
-            "confirm-modal-message": "Êtes-vous sûr de vouloir détacher l'Orga ID {organizationId} ?",
-            "confirm-modal-title": "Détacher une organisation"
-          }
-        },
-        "table-headers": {
-          "actions": "Actions",
-          "external-id": "Identifiant externe",
-          "id": "ID",
-          "name": "Nom"
-        },
-        "table-name": "Liste des organisations filles"
-      },
       "creation": {
         "actions": {
           "add-child-organization": "Ajouter une organisation fille"
@@ -1557,7 +1533,6 @@
       "navbar": {
         "aria-label": "Navigation de la section organisation",
         "campaigns": "Campagnes",
-        "children": "Organisations filles",
         "details": "Détails",
         "features": "Fonctionnalités",
         "invitations": "Invitations",
@@ -1568,30 +1543,11 @@
         "team": "Équipe"
       }
     },
-    "organization-children": {
-      "empty-table": "Aucune organisation fille",
-      "notifications": {
-        "error": {
-          "unable-to-attach-already-attached-child-organization": "L'organisation fille {childOrganizationId} appartient déjà à un réseau.",
-          "unable-to-attach-child-organization-to-another-child-organization": "Impossible d'attacher l'organisation fille à une autre organisation fille.",
-          "unable-to-attach-child-organization-to-itself": "Impossible d'attacher l'organisation {childOrganizationId} à elle-même",
-          "unable-to-attach-to-organization-not-in-network": "Impossible de rattacher l'organisation fille à une organisation hors réseau.",
-          "unable-to-detach-child-organization": "Une erreur est survenue lors du détachement de l'organisation fille."
-        },
-        "success": {
-          "attach-child-organization": "{count, plural, =1 {L'organisation fille a bien été liée à l'organisation mère} other {Les {count} organisations filles ont bien été liées à l'organisation mère}}",
-          "detach-child-organization": "L'organisation fille a été détachée avec succès."
-        }
-      },
-      "title": "Organisations filles"
-    },
     "organization-network": {
       "notifications": {
         "error": {
           "unable-to-attach-already-attached-child-organization": "L'organisation fille {childOrganizationId} appartient déjà à un réseau.",
-          "unable-to-attach-child-organization-to-another-child-organization": "Impossible d'attacher l'organisation fille à une autre organisation fille.",
           "unable-to-attach-child-organization-to-itself": "Impossible d'attacher l'organisation {childOrganizationId} à elle-même",
-          "unable-to-attach-to-organization-not-in-network": "Impossible de rattacher l'organisation fille à une organisation hors réseau.",
           "unable-to-detach-child-organization": "Une erreur est survenue lors du détachement de l'organisation fille."
         },
         "success": {
