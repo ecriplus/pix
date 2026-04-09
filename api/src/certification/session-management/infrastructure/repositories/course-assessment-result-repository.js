@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
@@ -7,7 +5,7 @@ import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/
 
 function _toDomain({ assessmentResultDTO, competencesMarksDTO }) {
   const competenceMarks = competencesMarksDTO.map((competenceMark) => new CompetenceMark(competenceMark));
-  const reproducibilityRateAsNumber = _.toNumber(assessmentResultDTO.reproducibilityRate) ?? null;
+  const reproducibilityRateAsNumber = Number(assessmentResultDTO.reproducibilityRate);
   const commentForOrganization = new JuryComment({
     commentByAutoJury: assessmentResultDTO.commentByAutoJury,
     fallbackComment: assessmentResultDTO.commentForOrganization,

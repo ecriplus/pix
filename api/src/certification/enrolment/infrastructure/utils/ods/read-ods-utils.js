@@ -15,7 +15,7 @@ async function getContentXml({ odsFilePath }) {
 
 async function extractTableDataFromOdsFile({ odsBuffer, tableHeaderTargetPropertyMap }) {
   const sheetDataRows = await getSheetDataRowsFromOdsBuffer({ odsBuffer });
-  const tableHeaders = _.map(tableHeaderTargetPropertyMap, 'header');
+  const tableHeaders = tableHeaderTargetPropertyMap.map((tt) => tt.header);
   const sheetHeaderRow = _findHeaderRow(sheetDataRows, tableHeaders);
   if (!sheetHeaderRow) {
     throw new UnprocessableEntityError('Table headers not found');
@@ -69,8 +69,8 @@ function _findHeaderRow(sheetDataRows, tableHeaders) {
 
 function _allHeadersValuesAreInTheRow(row, headers) {
   const cellValuesInRow = _.values(row);
-  const strippedCellValuesInRow = _.map(cellValuesInRow, _removeNewlineCharacters);
-  const strippedHeaders = _.map(headers, _removeNewlineCharacters);
+  const strippedCellValuesInRow = cellValuesInRow.map(_removeNewlineCharacters);
+  const strippedHeaders = headers.map(_removeNewlineCharacters);
   const headersInRow = _.intersection(strippedCellValuesInRow, strippedHeaders);
   return headersInRow.length === headers.length;
 }
@@ -84,7 +84,7 @@ function _mapSheetHeadersWithProperties(sheetHeaderRow, tableHeaderTargetPropert
 }
 
 function _findTargetPropertiesByHeader(tableHeaderTargetPropertyMap, header) {
-  const mapWithSanitizedHeaders = _.map(tableHeaderTargetPropertyMap, (obj) => ({
+  const mapWithSanitizedHeaders = tableHeaderTargetPropertyMap.map((obj) => ({
     ...obj,
     header: _removeNewlineCharacters(obj.header),
   }));

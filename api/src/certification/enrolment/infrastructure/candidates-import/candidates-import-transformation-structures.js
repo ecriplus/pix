@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { convertDateValue } from '../../../../shared/infrastructure/utils/date-utils.js';
 
 // These are transformation structures. They provide all the necessary info
@@ -75,8 +73,7 @@ const _getTransformationsStruct = (translate) => [
   },
 ];
 
-// ALL
-function getTransformationStructsForPixCertifCandidatesImport({ i18n, habilitations, isSco }) {
+export function getTransformationStructsForPixCertifCandidatesImport({ i18n, habilitations, isSco }) {
   const translate = i18n.__;
   const transformationStruct = _getTransformationsStruct(translate);
 
@@ -115,19 +112,23 @@ function _includeBillingColumns({ transformationStruct, translate }) {
   });
 }
 
+function _isEmpty(obj) {
+  return [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
+}
+
 function _toNotEmptyTrimmedStringOrNull(val) {
-  const value = _.toString(val);
-  const trimmedValue = _.trim(value);
-  return _.isEmpty(trimmedValue) ? null : trimmedValue;
+  const value = String(val ?? '');
+  const trimmedValue = value.trim();
+  return _isEmpty(trimmedValue) ? null : trimmedValue;
 }
 
 function _toNonZeroValueOrNull(val) {
-  const value = _.toNumber(val);
-  return _.isNaN(value) ? null : value === 0 ? null : value;
+  const value = Number(val);
+  return Number.isNaN(value) ? null : value === 0 ? null : value;
 }
 
 function _getHeadersFromTransformationStruct(transformationStruct) {
-  return _.map(transformationStruct, 'header');
+  return transformationStruct.map((ts) => ts.header);
 }
 
 function _toBooleanIfValueEqualsOuiOrNull({ val, translate }) {
@@ -135,5 +136,3 @@ function _toBooleanIfValueEqualsOuiOrNull({ val, translate }) {
 
   return val?.toUpperCase() === yesTranslation.toUpperCase() ? true : null;
 }
-
-export { getTransformationStructsForPixCertifCandidatesImport };
