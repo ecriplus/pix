@@ -13,6 +13,7 @@ describe('Shared | Integration | Config', function () {
           DATABASE_URL: 'postgres://plop:plop@localhost:1234/foo',
           DATAMART_DATABASE_URL: 'postgres://plop:plop@localhost:5678/bar',
           DATAWAREHOUSE_DATABASE_URL: 'postgres://plop:plop@localhost:8910/bar',
+          JOBS_DATABASE_URL: 'postgres://plop:plop@localhost:1234/jobs',
         };
 
         // when

@@ -134,6 +134,7 @@ const schema = Joi.object({
   DATABASE_URL: Joi.string().uri().required(),
   DATAMART_DATABASE_URL: Joi.string().uri().required(),
   DATAWAREHOUSE_DATABASE_URL: Joi.string().uri().requiredForMaddo(),
+  JOBS_DATABASE_URL: Joi.string().uri().required(),
   DOMAIN_PIX: Joi.string().optional(),
   DOMAIN_PIX_APP: Joi.string().optional(),
   DOMAIN_PIX_ORGA: Joi.string().optional(),

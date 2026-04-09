@@ -28,7 +28,8 @@ export class JobClient {
   async initialize({ worker, jobGroups } = { worker: false, jobGroups: [] }, pgBossFactory) {
     if (this.#isInitialized) return;
 
-    const connectionString = process.env.NODE_ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
+    const connectionString =
+      process.env.NODE_ENV === 'test' ? process.env.TEST_JOBS_DATABASE_URL : process.env.JOBS_DATABASE_URL;
 
     if (worker) {
       this.#pgBoss = pgBossFactory
