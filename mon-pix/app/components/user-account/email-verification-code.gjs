@@ -76,6 +76,7 @@ export default class EmailVerificationCode extends Component {
       const emailVerificationCode = this.store.createRecord('email-verification-code', {
         password: this.args.password,
         newEmail: this.args.email.trim().toLowerCase(),
+        action: this.args.action,
       });
       await emailVerificationCode.sendNewEmail();
       this.isEmailSent = true;

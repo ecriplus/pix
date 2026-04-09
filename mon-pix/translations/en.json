@@ -2305,42 +2305,24 @@
       "validation": "Your password has been updated."
     },
     "user-account": {
-      "account-update-email": {
-        "email-information": "Please provide a valid email address: it will be used to reset your password if you forget it. '<br>'This will change the email address you use to log in.",
+      "account-add-or-update-email-with-validation": {
+        "code-reception-information": "Once you have confirmed your request to add an email address, you will receive a code by email.",
         "fields": {
-          "errors": {
-            "empty-password": "Your password can't be empty.",
-            "invalid-password": "There was an error in the password entered.",
-            "mismatching-email": "The email addresses you entered do not match. Please check your entry for spelling errors.",
-            "new-email-already-exist": "This email address is already in use.",
-            "unknown-error": "An error has occurred. Please try again or contact the support.",
-            "wrong-email-format": "Your email address is invalid."
+          "email": {
+            "add-email": {
+              "label": "Email address"
+            },
+            "update-email": {
+              "label": "New email address"
+            }
           },
-          "new-email": {
-            "label": "New email address"
-          },
-          "new-email-confirmation": {
-            "label": "Confirm your email address"
-          },
-          "password": {
-            "label": "Password"
-          }
-        },
-        "password-information": "Enter your password to confirm",
-        "save-button": "Confirm",
-        "title": "Change your email address"
-      },
-      "account-update-email-with-validation": {
-        "fields": {
           "errors": {
             "empty-password": "Your password can't be empty.",
             "invalid-email": "Your email address is invalid.",
             "invalid-or-already-used-email": "Invalid or already used e-mail address",
             "invalid-password": "There was an error in the password entered.",
-            "new-email-already-exist": "This email address is already in use."
-          },
-          "new-email": {
-            "label": "New email address"
+            "new-email-already-exist": "This email address is already in use.",
+            "unknown-error": "An error has occurred. Please try again or contact the support."
           },
           "password": {
             "label": "Password",
@@ -2348,10 +2330,12 @@
           }
         },
         "save-button": "Get a verification code",
-        "title": "Change your email address"
+        "title": {
+          "add-email": "Add an email address",
+          "update-email": "Change your email address"
+        }
       },
       "connexion-methods": {
-        "add-email": "Add an email address",
         "authentication-methods": {
           "connection-via": "Login via {identityProviderOrganizationName}",
           "gar": "Login via ENT/Mediacentre",

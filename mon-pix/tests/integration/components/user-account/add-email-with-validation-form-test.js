@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click, fillIn, triggerEvent } from '@ember/test-helpers';
+import { click, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -7,13 +7,13 @@ import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | user-account | email-with-validation-form', function (hooks) {
+module('Integration | Component | user-account | add-email-with-validation-form', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when editing e-mail', function () {
-    test('should display save and cancel button, and security information', async function (assert) {
+  module('when the user opens the add email form', function () {
+    test('displays save and cancel button, and information message', async function (assert) {
       // when
-      const screen = await render(hbs`<UserAccount::EmailWithValidationForm />`);
+      const screen = await render(hbs`<UserAccount::AddEmailWithValidationForm />`);
 
       // then
       assert.ok(screen.getByRole('button', { name: t('common.actions.cancel') }));
@@ -22,20 +22,20 @@ module('Integration | Component | user-account | email-with-validation-form', fu
           name: t('pages.user-account.account-add-or-update-email-with-validation.save-button'),
         }),
       );
-      const securityInformation = t(
-        'pages.user-account.account-add-or-update-email-with-validation.fields.password.security-information',
+      const codeReceptionInformation = t(
+        'pages.user-account.account-add-or-update-email-with-validation.code-reception-information',
       );
-      assert.ok(screen.getByText(securityInformation));
+      assert.ok(screen.getByText(codeReceptionInformation));
     });
 
-    module('when the user cancel edition', function () {
-      test('should call disableEmailEditionMode', async function (assert) {
+    module('when the user cancels edition', function () {
+      test('calls disableEmailEditionMode', async function (assert) {
         // given
         const disableEmailEditionMode = sinon.stub();
         this.set('disableEmailEditionMode', disableEmailEditionMode);
 
         const screen = await render(
-          hbs`<UserAccount::EmailWithValidationForm @disableEmailEditionMode={{this.disableEmailEditionMode}} />`,
+          hbs`<UserAccount::AddEmailWithValidationForm @disableEmailEditionMode={{this.disableEmailEditionMode}} />`,
         );
 
         // when
@@ -49,17 +49,16 @@ module('Integration | Component | user-account | email-with-validation-form', fu
 
     module('when the user fills inputs with errors', function () {
       module('in new email input', function () {
-        test('should display an invalid error message when focus-out', async function (assert) {
+        test('displays an invalid error message when invalid email is entered', async function (assert) {
           // given
           const invalidEmail = 'invalidEmail';
           const expectedInvalidEmailError = 'Votre adresse e-mail n’est pas valide.';
 
-          const screen = await render(hbs`<UserAccount::EmailWithValidationForm />`);
-          const emailInput = screen.getByRole('textbox', { name: 'Nouvelle adresse e-mail' });
+          const screen = await render(hbs`<UserAccount::AddEmailWithValidationForm />`);
+          const emailInput = screen.getByRole('textbox', { name: 'Adresse e-mail' });
 
           // when
           await fillIn(emailInput, invalidEmail);
-          await triggerEvent(emailInput, 'focusout');
 
           // then
           assert.dom(screen.getByText(expectedInvalidEmailError)).exists();
@@ -75,39 +74,39 @@ module('Integration | Component | user-account | email-with-validation-form', fu
       store = this.owner.lookup('service:store');
     });
 
-    test('should call the show verification code method only once', async function (assert) {
+    test('calls the show verification code method only once', async function (assert) {
       // given
-      const newEmail = 'newEmail@example.net';
-      const password = 'password';
+      const email = 'email@example.net';
+      const password = 'Password123';
       this.set('showVerificationCode', sinon.stub());
       store.createRecord = () => ({ sendNewEmail: sinon.stub() });
 
       const screen = await render(
-        hbs`<UserAccount::EmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
+        hbs`<UserAccount::AddEmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
       );
 
       // when
-      await _fillInputsAndValidateNewEmail({ screen, t, email: newEmail, password });
+      await _fillInputsAndValidateNewEmail({ screen, t, email: email, password });
 
       // then
       sinon.assert.calledOnce(this.showVerificationCode);
       assert.ok(true);
     });
 
-    test('should display error message from server if response status is 400 or 403', async function (assert) {
+    test('displays error message from server if response status is 400 or 403', async function (assert) {
       // given
-      const newEmail = 'newEmail@example.net';
-      const password = 'password';
+      const email = 'email@example.net';
+      const password = 'Password123';
       store.createRecord = () => ({
         sendNewEmail: sinon.stub().throws({ errors: [{ status: '400' }] }),
       });
 
       const screen = await render(
-        hbs`<UserAccount::EmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
+        hbs`<UserAccount::AddEmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
       );
 
       // when
-      await _fillInputsAndValidateNewEmail({ screen, t, email: newEmail, password });
+      await _fillInputsAndValidateNewEmail({ screen, t, email: email, password });
 
       // then
       assert.ok(
@@ -117,20 +116,20 @@ module('Integration | Component | user-account | email-with-validation-form', fu
       );
     });
 
-    test('should display invalid or already used email error if response status is 422', async function (assert) {
+    test('displays invalid or already used email error if response status is 422', async function (assert) {
       // given
-      const newEmail = 'newEmail@example.net';
-      const password = 'password';
+      const email = 'email@example.net';
+      const password = 'Password123';
       store.createRecord = () => ({
         sendNewEmail: sinon.stub().throws({ errors: [{ status: '422', source: { pointer: 'attributes/email' } }] }),
       });
 
       const screen = await render(
-        hbs`<UserAccount::EmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
+        hbs`<UserAccount::AddEmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
       );
 
       // when
-      await _fillInputsAndValidateNewEmail({ screen, t, email: newEmail, password });
+      await _fillInputsAndValidateNewEmail({ screen, t, email: email, password });
 
       // then
       assert.ok(
@@ -142,20 +141,20 @@ module('Integration | Component | user-account | email-with-validation-form', fu
       );
     });
 
-    test('should display empty password error if response status is 422', async function (assert) {
+    test('displays empty password error if response status is 422', async function (assert) {
       // given
-      const newEmail = 'newEmail@example.net';
-      const password = 'password';
+      const email = 'email@example.net';
+      const password = 'Password123';
       store.createRecord = () => ({
         sendNewEmail: sinon.stub().throws({ errors: [{ status: '422', source: { pointer: 'attributes/password' } }] }),
       });
 
       const screen = await render(
-        hbs`<UserAccount::EmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
+        hbs`<UserAccount::AddEmailWithValidationForm @showVerificationCode={{this.showVerificationCode}} />`,
       );
 
       // when
-      await _fillInputsAndValidateNewEmail({ screen, t, email: newEmail, password });
+      await _fillInputsAndValidateNewEmail({ screen, t, email: email, password });
 
       // then
       assert.ok(
@@ -167,7 +166,7 @@ module('Integration | Component | user-account | email-with-validation-form', fu
   });
 
   async function _fillInputsAndValidateNewEmail({ screen, t, email, password }) {
-    await fillIn(screen.getByRole('textbox', { name: 'Nouvelle adresse e-mail' }), email);
+    await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), email);
     await fillIn(screen.getByLabelText('Mot de passe'), password);
     await click(
       screen.getByRole('button', {

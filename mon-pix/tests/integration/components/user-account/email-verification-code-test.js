@@ -15,9 +15,12 @@ module('Integration | Component | user-account | email-verification-code', funct
     test('should not display resend code message at the beginning', async function (assert) {
       // given
       this.set('email', 'toto@example.net');
+      this.set('action', 'update-email');
 
       // when
-      const screen = await render(hbs`<UserAccount::EmailVerificationCode @email={{this.email}} />`);
+      const screen = await render(
+        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @action={{this.action}} />`,
+      );
 
       // then
       const resendCodeMessage = screen.getByText(t('pages.user-account.email-verification.did-not-receive'));
@@ -28,12 +31,14 @@ module('Integration | Component | user-account | email-verification-code', funct
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
+      const action = 'update-email';
       this.set('email', email);
       this.set('password', password);
+      this.set('action', action);
 
       // when
       const screen = await render(
-        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} />`,
+        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} @action={{this.action}} />`,
       );
 
       // then
@@ -49,18 +54,20 @@ module('Integration | Component | user-account | email-verification-code', funct
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
+      const action = 'update-email';
       this.set('email', email);
       this.set('password', password);
+      this.set('action', action);
 
       const store = this.owner.lookup('service:store');
       store.createRecord = sinon.stub();
-      store.createRecord.withArgs('email-verification-code', { password, newEmail: email }).returns({
+      store.createRecord.withArgs('email-verification-code', { password, newEmail: email, action: action }).returns({
         sendNewEmail: () => new Promise(() => {}),
       });
 
       // when
       const screen = await render(
-        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} />`,
+        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} @action={{this.action}} />`,
       );
 
       await click(
@@ -82,19 +89,21 @@ module('Integration | Component | user-account | email-verification-code', funct
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
+      const action = 'update-email';
       this.set('email', email);
       this.set('password', password);
+      this.set('action', action);
 
       const store = this.owner.lookup('service:store');
       const sendNewEmailStub = sinon.stub();
       store.createRecord = sinon.stub();
       store.createRecord
-        .withArgs('email-verification-code', { password, newEmail: email })
+        .withArgs('email-verification-code', { password, newEmail: email, action: action })
         .returns({ sendNewEmail: sendNewEmailStub });
 
       // when
       const screen = await render(
-        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} />`,
+        hbs`<UserAccount::EmailVerificationCode @email={{this.email}} @password={{this.password}} @action={{this.action}} />`,
       );
 
       await click(
