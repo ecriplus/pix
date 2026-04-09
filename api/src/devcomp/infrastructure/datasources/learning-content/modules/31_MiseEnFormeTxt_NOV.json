@@ -2,7 +2,7 @@
   "id": "ac3df212-103b-4730-83ad-858751026b7d",
   "shortId": "9d80c829",
   "slug": "bases-forme-texte",
-  "title": " Les bases de la mise en forme de texte",
+  "title": "Les bases de la mise en forme de texte",
   "isBeta": true,
   "visibility": "public",
   "details": {
@@ -12,7 +12,7 @@
     "level": "novice",
     "objectives": [
       "<p>Sélectionner du texte (mot, paragraphe)</p>",
-      "<p>Appliquer des mises en forme simple</p>",
+      "<p>Appliquer des mises en forme simples</p>",
       "<p>Connaître des règles de mises en forme</p>"
     ],
     "tabletSupport": "comfortable"
@@ -140,14 +140,14 @@
               "element": {
                 "id": "363b57fc-ccab-4207-91dd-20f2a9396623",
                 "type": "qcu-discovery",
-                "instruction": "<p>Selon vous, quel texte est le plus facile à lire et à comprendre ?</p>",
+                "instruction": "<p>Selon vous, quel texte est le plus facile à lire et à comprendre&nbsp;?</p>",
                 "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "Texte A",
                     "feedback": {
-                      "diagnosis": "<p>He non ! Le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
+                      "diagnosis": "<p>Eh non&nbsp;! Le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
                     }
                   },
                   {
@@ -402,7 +402,7 @@
                 "id": "ef9edbbb-dabe-4837-aa48-543ad4e7de09",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ces modifications permettent de&nbsp;: </p><p>Rendre un texte <strong>plus facile à lire</strong>.</p><p>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</p>"
+                "content": "<p>Ces modifications permettent de&nbsp;: </p><ul>    <li>Rendre un texte <strong>plus facile à lire</strong>.</li><li>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</li></ul>"
               }
             }
           ]
