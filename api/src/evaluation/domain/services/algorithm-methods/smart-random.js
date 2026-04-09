@@ -87,7 +87,7 @@ const getSkillsWithAddedInformations = ({ targetSkills, filteredChallenges, loca
 
   return targetSkills.map((skill) => {
     const challenges = filteredChallenges.filter((challenge) => {
-      return challenge.skill.id === skill.id && challenge.locales.some(locale => locales.includes(locale));
+      return challenge.skill.id === skill.id && challenge.locales.some((locale) => locales.includes(locale));
     });
     const [firstChallenge] = challenges;
 
