@@ -511,6 +511,7 @@
         "v3": {
           "admissible": "Admissible",
           "edit-disabled": "Non modifiable car la session n'est pas publiée",
+          "edit-external-jury": "Modifier le volet jury",
           "error": "Une erreur est survenue",
           "external-jury": "Volet jury externe",
           "external-jury-select-options": {

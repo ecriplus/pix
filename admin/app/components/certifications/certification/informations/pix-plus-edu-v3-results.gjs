@@ -8,6 +8,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
+import { not } from 'ember-truth-helpers';
 
 export default class PixPlusEduV3Results extends Component {
   @service intl;
@@ -17,15 +18,16 @@ export default class PixPlusEduV3Results extends Component {
   @tracked selectedJuryLevel = this.initialJuryLevel;
 
   get initialJuryLevel() {
-    return this.args.certification.reachedResultKey.split('.').at(-1);
+    const level = this.args.certification.reachedResultKey.split('.').at(-1);
+    return level === '0' ? 'UNSET' : level;
   }
 
-  get hasExternalJuryResult() {
-    return this.args.certification.reachedResultKey.includes('0');
+  get isExternalJuryResultPending() {
+    return this.initialJuryLevel === 'UNSET';
   }
 
   get externalJuryResult() {
-    if (this.hasExternalJuryResult) {
+    if (this.isExternalJuryResultPending) {
       return this.intl.t('components.certifications.edu-results.v3.waiting');
     }
     return this.intl.t(`common.certification.meshLevels.${this.args.certification.reachedResultKey}`);
@@ -55,7 +57,7 @@ export default class PixPlusEduV3Results extends Component {
       await this.args.certification.save({
         adapterOptions: {
           updateEduExternalJuryResult: true,
-          eduV3ExternalJuryResult: this.selectedJuryLevel,
+          eduV3ExternalJuryResult: this.selectedJuryLevel === 'UNSET' ? null : this.selectedJuryLevel,
         },
       });
       this.pixToast.sendSuccessNotification({
@@ -103,10 +105,10 @@ export default class PixPlusEduV3Results extends Component {
               </PixSelect>
               <div class="actions">
                 <PixButton @variant="secondary" @size="small" type="reset">
-                  Annuler
+                  {{t "common.actions.cancel"}}
                 </PixButton>
-                <PixButton @type="submit" @size="small" @aria-label="Modifier le niveau du jury">
-                  Enregistrer
+                <PixButton @type="submit" @size="small">
+                  {{t "common.actions.save"}}
                 </PixButton>
               </div>
             </form>
@@ -119,10 +121,10 @@ export default class PixPlusEduV3Results extends Component {
                 <:triggerElement>
                   <PixIconButton
                     @size="xsmall"
-                    @ariaLabel="Modifier le volet jury"
+                    @ariaLabel={{t "components.certifications.edu-results.v3.edit-external-jury"}}
                     @triggerAction={{this.toggleJurySelect}}
                     @iconName="edit"
-                    @isDisabled={{if @certification.isPublished false true}}
+                    @isDisabled={{not @certification.isPublished}}
                   />
                 </:triggerElement>
 

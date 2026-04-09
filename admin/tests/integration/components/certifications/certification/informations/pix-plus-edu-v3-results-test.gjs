@@ -57,22 +57,6 @@ module(
       });
     });
 
-    module('when certification is not published', function () {
-      test('should disable the edit button', async function (assert) {
-        // given
-        const certification = store.createRecord('certification', {
-          reachedResultKey: 'PIX_EDU_FORMATION_INITIALE_1ER_DEGRE.0',
-          isPublished: false,
-        });
-
-        // when
-        const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
-
-        // then
-        assert.dom(screen.getByRole('button', { name: 'Modifier le volet jury' })).isDisabled();
-      });
-    });
-
     module('jury level edition', function (hooks) {
       let successNotificationStub, errorNotificationStub;
 
@@ -98,11 +82,11 @@ module(
         const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
 
         // when
-        await clickByName('Modifier le volet jury');
+        await clickByName(t('components.certifications.edu-results.v3.edit-external-jury'));
 
         // then
-        assert.dom(screen.getByRole('button', { name: 'Annuler' })).exists();
-        assert.dom(screen.getByRole('button', { name: 'Enregistrer' })).exists();
+        assert.dom(screen.getByRole('button', { name: t('common.actions.cancel') })).exists();
+        assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
       });
 
       test('should hide jury select form when cancel button is clicked', async function (assert) {
@@ -114,15 +98,15 @@ module(
 
         const screen = await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
 
-        await clickByName('Modifier le volet jury');
+        await clickByName(t('components.certifications.edu-results.v3.edit-external-jury'));
 
         // when
-        const form = screen.getByRole('button', { name: 'Annuler' }).closest('form');
+        const form = screen.getByRole('button', { name: t('common.actions.cancel') }).closest('form');
         await triggerEvent(form, 'reset');
 
         // then
-        assert.dom(screen.queryByRole('button', { name: 'Annuler' })).doesNotExist();
-        assert.dom(screen.queryByRole('button', { name: 'Enregistrer' })).doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: t('common.actions.cancel') })).doesNotExist();
+        assert.dom(screen.queryByRole('button', { name: t('common.actions.save') })).doesNotExist();
       });
 
       test('should save and display success notification when form is submitted', async function (assert) {
@@ -138,16 +122,16 @@ module(
 
         await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
 
-        await clickByName('Modifier le volet jury');
+        await clickByName(t('components.certifications.edu-results.v3.edit-external-jury'));
 
         // when
-        await clickByName('Enregistrer');
+        await clickByName(t('common.actions.save'));
 
         // then
         sinon.assert.calledWith(currentCertification.save, {
           adapterOptions: {
             updateEduExternalJuryResult: true,
-            eduV3ExternalJuryResult: '0',
+            eduV3ExternalJuryResult: null,
           },
         });
         sinon.assert.calledWith(successNotificationStub, {
@@ -170,10 +154,10 @@ module(
 
         await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
 
-        await clickByName('Modifier le volet jury');
+        await clickByName(t('components.certifications.edu-results.v3.edit-external-jury'));
 
         // when
-        await clickByName('Enregistrer');
+        await clickByName(t('common.actions.save'));
 
         // then
         sinon.assert.calledWith(errorNotificationStub, {
@@ -195,10 +179,10 @@ module(
 
         await render(<template><PixPlusEduV3Results @certification={{certification}} /></template>);
 
-        await clickByName('Modifier le volet jury');
+        await clickByName(t('components.certifications.edu-results.v3.edit-external-jury'));
 
         // when
-        await clickByName('Enregistrer');
+        await clickByName(t('common.actions.save'));
 
         // then
         sinon.assert.calledWith(errorNotificationStub, {

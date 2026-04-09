@@ -504,6 +504,7 @@
         "v3": {
           "admissible": "Admissible",
           "edit-disabled": "Cannot be edited because the session is not published",
+          "edit-external-jury": "Edit external jury section",
           "error": "An error occurred",
           "external-jury": "External jury section",
           "external-jury-select-options": {
@@ -517,10 +518,6 @@
           "title": "Pix+ Edu certification results",
           "waiting": "Pending"
         }
-      },
-      "external-jury-select-options": {
-        "REJECTED": "Rejected",
-        "UNSET": "Waiting"
       },
       "global-actions": {
         "cancel": {
