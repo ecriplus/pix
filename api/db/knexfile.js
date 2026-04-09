@@ -1,4 +1,3 @@
-import { config } from '../src/shared/config.js';
 import { loadEnvFileIfExists } from '../src/shared/load-env-file-if-exists.js';
 import { buildPostgresEnvironment } from './utils/build-postgres-environment.js';
 
@@ -10,7 +9,7 @@ const baseConfiguration = {
   seedsDirectory: './seeds/',
   connection: {
     connectionString: process.env.DATABASE_URL,
-    application_name: config.infra.hostname,
+    application_name: process.env.HOSTNAME ?? 'pix-api',
     statement_timeout: parseInt(process.env.DATABASE_STATEMENT_TIMEOUT_MS, 10) || undefined,
     query_timeout: parseInt(process.env.DATABASE_QUERY_TIMEOUT_MS, 10) || undefined,
     idle_in_transaction_session_timeout:
