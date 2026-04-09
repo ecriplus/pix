@@ -473,9 +473,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       });
 
       context('when a parent organization id is provided', function () {
-        //TODO: this test is currently broken because of the parent organization verification in the createOrganization use case. We need to fix this test and the use case.
-        // eslint-disable-next-line mocha/no-pending-tests
-        xit('returns 200 HTTP status code with the created child organization', async function () {
+        it('returns 200 HTTP status code with the created child organization', async function () {
           // given
           const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
           databaseBuilder.factory.buildAdministrationTeam({
@@ -488,7 +486,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
             commonName: 'France',
             originalName: 'France',
           });
-          const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+          const { organization: parentOrganization } = databaseBuilder.factory.buildNetworkAndHeadOrganization();
           await databaseBuilder.commit();
 
           // when
@@ -504,7 +502,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   'documentation-url': 'https://kingArthur.com',
                   'data-protection-officer-email': 'justin.ptipeu@example.net',
                   'administration-team-id': 1234,
-                  'parent-organization-id': parentOrganizationId,
+                  'parent-organization-id': parentOrganization.id,
                   'country-code': 99100,
                   'organization-learner-type-id': 5678,
                 },
@@ -524,7 +522,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           expect(createdOrganization['documentation-url']).to.equal('https://kingArthur.com');
           expect(createdOrganization['data-protection-officer-email']).to.equal('justin.ptipeu@example.net');
           expect(createdOrganization['created-by']).to.equal(superAdminUserId);
-          expect(createdOrganization['parent-organization-id']).to.equal(parentOrganizationId);
+          expect(createdOrganization['parent-organization-id']).to.equal(parentOrganization.id);
         });
       });
     });
