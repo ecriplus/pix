@@ -320,4 +320,104 @@ describe('Unit | Domain | Models | JuryCertification', function () {
       });
     });
   });
+
+  describe('#updateEduV3ExternalJuryResult', function () {
+    context('when certification is not published', function () {
+      it('throws an error', function () {
+        const juryCertificationSummary = domainBuilder.certification.sessionManagement.buildJuryCertification({
+          version: AlgorithmEngineVersion.V3,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+          isPublished: false,
+          reachedMeshIndex: 0,
+        });
+
+        expect(() =>
+          juryCertificationSummary.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED),
+        ).to.throw('Impossible de définir le résultat du volet externe pour une certification non publiée');
+      });
+    });
+
+    context('when certification is not v3', function () {
+      it('throws an error', function () {
+        const juryCertificationSummaryV1 = domainBuilder.certification.sessionManagement.buildJuryCertification({
+          version: AlgorithmEngineVersion.V2,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+          isPublished: true,
+          reachedMeshIndex: 0,
+        });
+        const juryCertificationSummaryV2 = domainBuilder.certification.sessionManagement.buildJuryCertification({
+          version: AlgorithmEngineVersion.V2,
+          certificationFramework: Frameworks.EDU_CPE,
+          isPublished: true,
+          reachedMeshIndex: 0,
+        });
+
+        expect(() =>
+          juryCertificationSummaryV1.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED),
+        ).to.throw('Impossible de définir le résultat du volet externe pour une certification non V3');
+
+        expect(() =>
+          juryCertificationSummaryV2.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED),
+        ).to.throw('Impossible de définir le résultat du volet externe pour une certification non V3');
+      });
+    });
+
+    context('when certification is not "EDU"', function () {
+      [Frameworks.CORE, Frameworks.CLEA, Frameworks.DROIT, Frameworks.PRO_SANTE].forEach(function (framework) {
+        it(`throws an error when certification is ${framework}`, function () {
+          const juryCertificationSummary = domainBuilder.certification.sessionManagement.buildJuryCertification({
+            version: AlgorithmEngineVersion.V3,
+            certificationFramework: framework,
+            isPublished: true,
+            reachedMeshIndex: 0,
+          });
+
+          expect(() =>
+            juryCertificationSummary.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED),
+          ).to.throw('Impossible de définir le résultat du volet externe pour une certification non "EDU"');
+        });
+      });
+    });
+
+    context('when certification is "Non admissible"', function () {
+      it('throws an error', function () {
+        const juryCertificationSummary = domainBuilder.certification.sessionManagement.buildJuryCertification({
+          version: AlgorithmEngineVersion.V3,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+          isPublished: true,
+          reachedMeshIndex: null,
+        });
+
+        expect(() =>
+          juryCertificationSummary.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED),
+        ).to.throw('Impossible de définir le résultat du volet externe pour une certification EDU non admissible');
+      });
+    });
+
+    context('when all conditions are reunited', function () {
+      [Frameworks.EDU_CPE, Frameworks.EDU_1ER_DEGRE, Frameworks.EDU_2ND_DEGRE].forEach(function (framework) {
+        it(`update the edu v3 external jury result value when certification is ${framework}`, function () {
+          const juryCertificationSummary = domainBuilder.certification.sessionManagement.buildJuryCertification({
+            version: AlgorithmEngineVersion.V3,
+            certificationFramework: framework,
+            isPublished: true,
+            reachedMeshIndex: 0,
+            eduV3ExternalJuryResult: null,
+          });
+
+          juryCertificationSummary.updateEduV3ExternalJuryResult(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED);
+
+          expect(juryCertificationSummary).to.deepEqualInstance(
+            domainBuilder.certification.sessionManagement.buildJuryCertification({
+              version: AlgorithmEngineVersion.V3,
+              certificationFramework: framework,
+              isPublished: true,
+              reachedMeshIndex: 0,
+              eduV3ExternalJuryResult: PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+            }),
+          );
+        });
+      });
+    });
+  });
 });
