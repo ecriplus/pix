@@ -11,48 +11,6 @@ import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
 
 export default class EmailVerificationCode extends Component {
-  <template>
-    <div class="email-verification-code">
-      <h2 class="email-verification-code__title">{{t "pages.user-account.email-verification.title"}}</h2>
-
-      <p class="email-verification-code__description">{{t "pages.user-account.email-verification.description"}}</p>
-      <p class="email-verification-code__email">{{@email}}</p>
-      <p class="email-verification-code__time-code-validation">{{t
-          "pages.user-account.email-verification.time-code-validation"
-        }}</p>
-      <div class="email-verification-code__input-code">
-        <PixInputCode
-          @ariaLabel={{t "pages.user-account.email-verification.code-label"}}
-          @legend={{t "pages.user-account.email-verification.code-legend"}}
-          @explanationOfUse={{t "pages.user-account.email-verification.code-explanation-of-use"}}
-          @numInputs={{6}}
-          @onAllInputsFilled={{this.onSubmitCode}}
-        />
-      </div>
-
-      {{#if this.errorMessage}}
-        <PixNotificationAlert @type="error" class="email-verification-code__error">
-          {{this.errorMessage}}
-        </PixNotificationAlert>
-      {{/if}}
-
-      {{#if this.isEmailSent}}
-        <PixNotificationAlert @type="success" class="email-verification-code__resend-confirmation-message">
-          {{t "pages.user-account.email-verification.confirmation-message"}}
-        </PixNotificationAlert>
-      {{else}}
-        <div class="email-verification-code__resend {{if this.showResendCode 'visible'}}">
-          <p>{{t "pages.user-account.email-verification.did-not-receive"}}</p>
-          <button type="button" disabled={{this.isResending}} {{on "click" this.resendVerificationCodeByEmail}}>
-            {{t "pages.user-account.email-verification.send-back-the-code"}}
-          </button>
-        </div>
-      {{/if}}
-      <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
-        {{t "common.actions.cancel"}}
-      </PixButton>
-    </div>
-  </template>
   @service currentUser;
   @service store;
   @service intl;
@@ -118,4 +76,47 @@ export default class EmailVerificationCode extends Component {
       }
     }
   }
+
+  <template>
+    <div class="email-verification-code">
+      <h2 class="email-verification-code__title">{{t "pages.user-account.email-verification.title"}}</h2>
+
+      <p class="email-verification-code__description">{{t "pages.user-account.email-verification.description"}}</p>
+      <p class="email-verification-code__email">{{@email}}</p>
+      <p class="email-verification-code__time-code-validation">{{t
+          "pages.user-account.email-verification.time-code-validation"
+        }}</p>
+      <div class="email-verification-code__input-code">
+        <PixInputCode
+          @ariaLabel={{t "pages.user-account.email-verification.code-label"}}
+          @legend={{t "pages.user-account.email-verification.code-legend"}}
+          @explanationOfUse={{t "pages.user-account.email-verification.code-explanation-of-use"}}
+          @numInputs={{6}}
+          @onAllInputsFilled={{this.onSubmitCode}}
+        />
+      </div>
+
+      {{#if this.errorMessage}}
+        <PixNotificationAlert @type="error" class="email-verification-code__error">
+          {{this.errorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+
+      {{#if this.isEmailSent}}
+        <PixNotificationAlert @type="success" class="email-verification-code__resend-confirmation-message">
+          {{t "pages.user-account.email-verification.confirmation-message"}}
+        </PixNotificationAlert>
+      {{else}}
+        <div class="email-verification-code__resend {{if this.showResendCode 'visible'}}">
+          <p>{{t "pages.user-account.email-verification.did-not-receive"}}</p>
+          <button type="button" disabled={{this.isResending}} {{on "click" this.resendVerificationCodeByEmail}}>
+            {{t "pages.user-account.email-verification.send-back-the-code"}}
+          </button>
+        </div>
+      {{/if}}
+      <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
+        {{t "common.actions.cancel"}}
+      </PixButton>
+    </div>
+  </template>
 }
