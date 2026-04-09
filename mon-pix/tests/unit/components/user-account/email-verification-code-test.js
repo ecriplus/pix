@@ -15,10 +15,12 @@ module('Unit | Component | user-account | email-verification-code', function (ho
       component.store = { createRecord: () => ({ verifyCode }) };
       component.args.disableEmailEditionMode = sinon.stub();
       component.args.displayEmailUpdateMessage = sinon.stub();
+      component.code = code;
+      component.numInputs = 6;
       sinon.spy(component.store, 'createRecord');
 
       // when
-      await component.onSubmitCode(code);
+      await component.onSubmitCode();
 
       // then
       sinon.assert.calledWith(component.store.createRecord, 'email-verification-code', { code });
@@ -38,10 +40,12 @@ module('Unit | Component | user-account | email-verification-code', function (ho
       component.currentUser = { user: { email: 'old-email@example.net' } };
       component.args.disableEmailEditionMode = sinon.stub();
       component.args.displayEmailUpdateMessage = sinon.stub();
+      component.numInputs = 6;
+      component.code = code;
       sinon.spy(component.store, 'createRecord');
 
       // when
-      await component.onSubmitCode(code);
+      await component.onSubmitCode();
 
       // then
       assert.strictEqual(component.currentUser.user.email, newEmail);

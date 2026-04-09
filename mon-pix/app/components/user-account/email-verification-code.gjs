@@ -11,6 +11,8 @@ import get from 'lodash/get';
 import ENV from 'mon-pix/config/environment';
 
 export default class EmailVerificationCode extends Component {
+  numInputs = 6;
+
   @service currentUser;
   @service store;
   @service intl;
@@ -18,6 +20,7 @@ export default class EmailVerificationCode extends Component {
   @tracked isResending = false;
   @tracked isEmailSent = false;
   @tracked errorMessage = null;
+  @tracked code = null;
 
   constructor() {
     super(...arguments);
@@ -25,6 +28,11 @@ export default class EmailVerificationCode extends Component {
     setTimeout(() => {
       this.showResendCode = true;
     }, ENV.APP.MILLISECONDS_BEFORE_MAIL_RESEND);
+  }
+
+  @action
+  setCode(code) {
+    this.code = code;
   }
 
   @action
@@ -38,6 +46,7 @@ export default class EmailVerificationCode extends Component {
       });
       await emailVerificationCode.sendNewEmail();
       this.isEmailSent = true;
+      this.code = null;
     } finally {
       this.isResending = false;
       setTimeout(() => {
@@ -47,7 +56,15 @@ export default class EmailVerificationCode extends Component {
   }
 
   @action
-  async onSubmitCode(code) {
+  async onSubmitCode() {
+    if (this.code?.length !== this.numInputs) {
+      this.errorMessage = this.intl.t('pages.user-account.email-verification.errors.no-code', {
+        numInputs: this.numInputs,
+      });
+      return;
+    }
+    const code = this.code;
+    this.code = null;
     const emailVerificationCode = this.store.createRecord('email-verification-code', { code });
     try {
       const email = await emailVerificationCode.verifyCode();
@@ -91,8 +108,8 @@ export default class EmailVerificationCode extends Component {
           @ariaLabel={{t "pages.user-account.email-verification.code-label"}}
           @legend={{t "pages.user-account.email-verification.code-legend"}}
           @explanationOfUse={{t "pages.user-account.email-verification.code-explanation-of-use"}}
-          @numInputs={{6}}
-          @onAllInputsFilled={{this.onSubmitCode}}
+          @numInputs={{this.numInputs}}
+          @onAllInputsFilled={{this.setCode}}
         />
       </div>
 
@@ -114,9 +131,14 @@ export default class EmailVerificationCode extends Component {
           </button>
         </div>
       {{/if}}
-      <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
-        {{t "common.actions.cancel"}}
-      </PixButton>
+      <div class="email-verification-code__actions">
+        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
+          {{t "common.actions.cancel"}}
+        </PixButton>
+        <PixButton @triggerAction={{this.onSubmitCode}} @variant="primary">
+          {{t "pages.user-account.email-verification.validate-new-email"}}
+        </PixButton>
+      </div>
     </div>
   </template>
 }

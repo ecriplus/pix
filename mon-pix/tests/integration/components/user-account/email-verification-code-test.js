@@ -122,131 +122,174 @@ module('Integration | Component | user-account | email-verification-code', funct
     });
   });
 
-  module('after entering code', function () {
-    test('should show invalid code message when receiving 403', async function (assert) {
+  module('on validate button click', function () {
+    test('when no code has been entered', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
-      const disableEmailEditionMode = sinon.stub();
-      const displayEmailUpdateMessage = sinon.stub();
-      this.set('disableEmailEditionMode', disableEmailEditionMode);
-      this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
+      store.createRecord = sinon.stub();
       this.set('email', 'toto@example.net');
-      const verifyCode = sinon.stub().throws({ errors: [{ status: '403', code: 'INVALID_VERIFICATION_CODE' }] });
-      store.createRecord = () => ({ verifyCode });
-
-      const screen = await render(hbs`<UserAccount::EmailVerificationCode
-  @email={{this.email}}
-  @disableEmailEditionMode={{this.disableEmailEditionMode}}
-  @displayEmailUpdateMessage={{this.displayEmailUpdateMessage}}
-/>`);
+      const screen = await render(hbs`<UserAccount::EmailVerificationCode @email={{this.email}} />`);
 
       // when
-      await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
-        clipboardData: { getData: () => '123456' },
-      });
+      await click(
+        screen.getByRole('button', {
+          name: t('pages.user-account.email-verification.validate-new-email'),
+        }),
+      );
 
       // then
-      sinon.assert.notCalled(disableEmailEditionMode);
-      sinon.assert.notCalled(displayEmailUpdateMessage);
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.incorrect-code')));
+      assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.no-code', { numInputs: 6 })));
+      sinon.assert.notCalled(store.createRecord);
     });
 
-    test('should show demand expired message when receiving 403', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const disableEmailEditionMode = sinon.stub();
-      const displayEmailUpdateMessage = sinon.stub();
-      this.set('disableEmailEditionMode', disableEmailEditionMode);
-      this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
-      this.set('email', 'toto@example.net');
-      const verifyCode = sinon.stub().throws({
-        errors: [
-          {
-            status: '403',
-            code: 'EXPIRED_OR_NULL_EMAIL_MODIFICATION_DEMAND',
-          },
-        ],
-      });
-      store.createRecord = () => ({ verifyCode });
+    module('after entering code', function () {
+      test('shows invalid code message when receiving 403', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const disableEmailEditionMode = sinon.stub();
+        const displayEmailUpdateMessage = sinon.stub();
+        this.set('disableEmailEditionMode', disableEmailEditionMode);
+        this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
+        this.set('email', 'toto@example.net');
+        const verifyCode = sinon.stub().throws({ errors: [{ status: '403', code: 'INVALID_VERIFICATION_CODE' }] });
+        store.createRecord = () => ({ verifyCode });
 
-      const screen = await render(hbs`<UserAccount::EmailVerificationCode
+        const screen = await render(hbs`<UserAccount::EmailVerificationCode
   @email={{this.email}}
   @disableEmailEditionMode={{this.disableEmailEditionMode}}
   @displayEmailUpdateMessage={{this.displayEmailUpdateMessage}}
 />`);
 
-      // when
-      await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
-        clipboardData: { getData: () => '123456' },
+        // when
+        await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
+          clipboardData: { getData: () => '123456' },
+        });
+        await click(
+          screen.getByRole('button', {
+            name: t('pages.user-account.email-verification.validate-new-email'),
+          }),
+        );
+
+        // then
+        sinon.assert.notCalled(disableEmailEditionMode);
+        sinon.assert.notCalled(displayEmailUpdateMessage);
+        assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.incorrect-code')));
       });
 
-      // then
-      sinon.assert.notCalled(disableEmailEditionMode);
-      sinon.assert.notCalled(displayEmailUpdateMessage);
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.email-modification-demand-expired')));
-    });
+      test('shows demand expired message when receiving 403', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const disableEmailEditionMode = sinon.stub();
+        const displayEmailUpdateMessage = sinon.stub();
+        this.set('disableEmailEditionMode', disableEmailEditionMode);
+        this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
+        this.set('email', 'toto@example.net');
+        const verifyCode = sinon.stub().throws({
+          errors: [
+            {
+              status: '403',
+              code: 'EXPIRED_OR_NULL_EMAIL_MODIFICATION_DEMAND',
+            },
+          ],
+        });
+        store.createRecord = () => ({ verifyCode });
 
-    test('should show email already exists message when receiving 400', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const disableEmailEditionMode = sinon.stub();
-      const displayEmailUpdateMessage = sinon.stub();
-      this.set('disableEmailEditionMode', disableEmailEditionMode);
-      this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
-      this.set('email', 'toto@example.net');
-      const verifyCode = sinon.stub().throws({
-        errors: [
-          {
-            status: '400',
-            code: 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS',
-          },
-        ],
-      });
-      store.createRecord = () => ({ verifyCode });
-
-      const screen = await render(hbs`<UserAccount::EmailVerificationCode
+        const screen = await render(hbs`<UserAccount::EmailVerificationCode
   @email={{this.email}}
   @disableEmailEditionMode={{this.disableEmailEditionMode}}
   @displayEmailUpdateMessage={{this.displayEmailUpdateMessage}}
 />`);
 
-      // when
-      await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
-        clipboardData: { getData: () => '123456' },
+        // when
+        await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
+          clipboardData: { getData: () => '123456' },
+        });
+        await click(
+          screen.getByRole('button', {
+            name: t('pages.user-account.email-verification.validate-new-email'),
+          }),
+        );
+
+        // then
+        sinon.assert.notCalled(disableEmailEditionMode);
+        sinon.assert.notCalled(displayEmailUpdateMessage);
+        assert.ok(
+          screen.getByText(t('pages.user-account.email-verification.errors.email-modification-demand-expired')),
+        );
       });
 
-      // then
-      sinon.assert.notCalled(disableEmailEditionMode);
-      sinon.assert.notCalled(displayEmailUpdateMessage);
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.new-email-already-exist')));
-    });
+      test('shows email already exists message when receiving 400', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const disableEmailEditionMode = sinon.stub();
+        const displayEmailUpdateMessage = sinon.stub();
+        this.set('disableEmailEditionMode', disableEmailEditionMode);
+        this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
+        this.set('email', 'toto@example.net');
+        const verifyCode = sinon.stub().throws({
+          errors: [
+            {
+              status: '400',
+              code: 'ACCOUNT_WITH_EMAIL_ALREADY_EXISTS',
+            },
+          ],
+        });
+        store.createRecord = () => ({ verifyCode });
 
-    test('should show error message when receiving 500', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const disableEmailEditionMode = sinon.stub();
-      const displayEmailUpdateMessage = sinon.stub();
-      this.set('disableEmailEditionMode', disableEmailEditionMode);
-      this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
-      this.set('email', 'toto@example.net');
-      const verifyCode = sinon.stub().throws({ errors: [{ status: '500' }] });
-      store.createRecord = () => ({ verifyCode });
-
-      const screen = await render(hbs`<UserAccount::EmailVerificationCode
+        const screen = await render(hbs`<UserAccount::EmailVerificationCode
   @email={{this.email}}
   @disableEmailEditionMode={{this.disableEmailEditionMode}}
   @displayEmailUpdateMessage={{this.displayEmailUpdateMessage}}
 />`);
 
-      // when
-      await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
-        clipboardData: { getData: () => '123456' },
+        // when
+        await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
+          clipboardData: { getData: () => '123456' },
+        });
+        await click(
+          screen.getByRole('button', {
+            name: t('pages.user-account.email-verification.validate-new-email'),
+          }),
+        );
+
+        // then
+        sinon.assert.notCalled(disableEmailEditionMode);
+        sinon.assert.notCalled(displayEmailUpdateMessage);
+        assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.new-email-already-exist')));
       });
 
-      // then
-      sinon.assert.notCalled(disableEmailEditionMode);
-      sinon.assert.notCalled(displayEmailUpdateMessage);
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.unknown-error')));
+      test('shows error message when receiving 500', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const disableEmailEditionMode = sinon.stub();
+        const displayEmailUpdateMessage = sinon.stub();
+        this.set('disableEmailEditionMode', disableEmailEditionMode);
+        this.set('displayEmailUpdateMessage', displayEmailUpdateMessage);
+        this.set('email', 'toto@example.net');
+        const verifyCode = sinon.stub().throws({ errors: [{ status: '500' }] });
+        store.createRecord = () => ({ verifyCode });
+
+        const screen = await render(hbs`<UserAccount::EmailVerificationCode
+  @email={{this.email}}
+  @disableEmailEditionMode={{this.disableEmailEditionMode}}
+  @displayEmailUpdateMessage={{this.displayEmailUpdateMessage}}
+/>`);
+
+        // when
+        await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
+          clipboardData: { getData: () => '123456' },
+        });
+        await click(
+          screen.getByRole('button', {
+            name: t('pages.user-account.email-verification.validate-new-email'),
+          }),
+        );
+
+        // then
+        sinon.assert.notCalled(disableEmailEditionMode);
+        sinon.assert.notCalled(displayEmailUpdateMessage);
+        assert.ok(screen.getByText(t('pages.user-account.email-verification.errors.unknown-error')));
+      });
     });
   });
 });
