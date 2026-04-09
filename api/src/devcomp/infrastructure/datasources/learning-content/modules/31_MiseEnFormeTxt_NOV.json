@@ -132,7 +132,7 @@
                 "id": "e15c4222-c710-4e57-a50c-d7178437ccbf",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici deux versions d’un même texte. 🤨<br>Lisez-les puis répondez à la question.</p><p>Texte A&nbsp;:&nbsp;</p><p>Réunion d’équipe. Demain, une réunion est prévue à 10h dans la salle principale pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer. La réunion durera environ une heure. Merci d’arriver quelques minutes en avance pour faciliter l’organisation.</p><p>Texte B&nbsp;: </p><h5>Réunion d’équipe </h5><p>Demain, une réunion est prévue à <strong>10h</strong> dans la<strong> salle principale</strong> pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer.<br>La réunion durera environ <strong>une heure</strong>. </p><p>Merci d’arriver quelques minutes en avance pour faciliter l’organisation.<br><br>[élément intéractif à venir]</p>"
+                "content": "<p>Voici deux versions d’un même texte. 🤨<br>Lisez-les puis répondez à la question.</p><p><br>Texte A&nbsp;:&nbsp;</p><p>Réunion d’équipe. Demain, une réunion est prévue à 10h dans la salle principale pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer. La réunion durera environ une heure. Merci d’arriver quelques minutes en avance pour faciliter l’organisation.</p><p><br>Texte B&nbsp;: </p><h5>Réunion d’équipe </h5><p>Demain, une réunion est prévue à <strong>10h</strong> dans la<strong> salle principale</strong> pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer.<br>La réunion durera environ <strong>une heure</strong>. </p><p>Merci d’arriver quelques minutes en avance pour faciliter l’organisation.<br><br>[élément interactif à venir]</p>"
               }
             },
             {
@@ -181,7 +181,7 @@
                 "id": "1c699376-03f5-4e73-9bf2-7e8a656aef41",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand vous écrivez dans un logiciel de traitement de texte, il y a des options pour <strong>mettre en forme votre texte</strong>, c’est-à-dire pour <strong>modifier sa présentation</strong>. <br><br> Ces options se trouvent dans la<strong> barre d’outils</strong>&nbsp;:</p>"
+                "content": "<p>Quand vous écrivez dans un logiciel de traitement de texte, il y a des options pour <strong>mettre en forme votre texte</strong>, c’est-à-dire pour <strong>modifier sa présentation</strong>. <br><br> Ces options se trouvent dans la<strong> barre d’outils</strong>&nbsp;:<br><br>[infographie de la barre d’outil avec le nom de chaque bouton&nbsp;: gras, italique, souligné, couleur, surlignage = à chaque fois l’étiquette montre la mise en forme]</p>"
               }
             },
             {
@@ -191,7 +191,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV/barreoutils.png",
                 "alt": "à rédiger",
-                "alternativeText": "<p>[infographie de la barre d’outil avec le nom de chaque bouton&nbsp;: gras, italique, souligné, couleur, surlignage = à chaque fois l’étiquette montre la mise en forme]</p>",
+                "alternativeText": "",
                 "legend": "",
                 "licence": ""
               }
@@ -447,7 +447,7 @@
                       "id": "7fa5c82f-4e7d-4317-a73d-fad4ba83f0d8",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Vous écrivez un document et vous voulez faire ressortir une information importante.<br></p>"
+                      "content": "<p>Vous écrivez un document à afficher et vous voulez<strong> faire ressortir une information</strong> importante.</p>"
                     },
                     {
                       "id": "a637e835-eb28-4900-8be9-5e30ff48236e",
@@ -464,16 +464,16 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Mettre uniquement les mots importants en gras.</p>",
+                          "content": "<p>Changer la couleur de certaines phrases.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, le gras sert à attirer l’attention sur une information précise.<br>Il faut<strong> mettre en gras uniquement les mots importants</strong>. Si tout est en gras, plus rien ne ressort.</p>"
+                            "diagnosis": "<p>Eh non ! Le gras sert à attirer l’attention sur une information précise.<br>Il faut<strong> mettre en gras uniquement les mots importants</strong>. Si tout est en gras, plus rien ne ressort.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Changer la couleur de certaines phrases.</p>",
+                          "content": "<p>Mettre uniquement les mots importants en gras.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Le gras sert à attirer l’attention sur une information précise.<br>Il faut<strong> mettre en gras uniquement les mots importants</strong>. Si tout est en gras, plus rien ne ressort.</p>"
+                            "diagnosis": "<p>Effectivement, le gras sert à attirer l’attention sur une information précise.<br>Il faut<strong> mettre en gras uniquement les mots importants</strong>. Si tout est en gras, plus rien ne ressort.</p>"
                           }
                         },
                         {
@@ -484,7 +484,7 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "3"
                     }
                   ]
                 },
@@ -494,7 +494,7 @@
                       "id": "e3d31027-657e-4823-be10-adf1c3bedc69",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Vous rédigez un texte et vous utilisez un mot en anglais&nbsp;: deadline.</p>"
+                      "content": "<p>Vous rédigez un texte et vous utilisez <strong>un mot en anglais</strong>&nbsp;: deadline.</p>"
                     },
                     {
                       "id": "cc1a7d74-e78e-4a22-9cb1-309176c308f2",
@@ -541,7 +541,7 @@
                       "id": "85810399-b0ef-4ab7-91ff-5c6e34e63d9a",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Vous prenez des notes pendant une formation et vous voulez repérer rapidement une idée importante plus tard.</p>"
+                      "content": "<p>Vous prenez <strong>des notes pendant une formation </strong>et vous voulez <strong>repérer rapidement une idée</strong> importante plus tard.</p>"
                     },
                     {
                       "id": "bf1fb93a-bee8-4b6c-a83d-2efc7cde91fe",
@@ -551,16 +551,16 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Écrire tout en majuscules.</p>",
+                          "content": "<p>Surligner l’information.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Le<strong> surlignage permet de retrouver rapidement une information</strong> importante dans vos notes.<br>Mais attention, si vous surlignez trop d’informations, vous risquez d’avoir plus de mal à vous y retrouver !</p>"
+                            "diagnosis": "<p>Effectivement, le<strong> surlignage permet de retrouver rapidement une information</strong> importante dans vos notes.<br>Mais attention, si vous surlignez trop d’informations, vous risquez d’avoir plus de mal à vous y retrouver !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Surligner l’information.</p>",
+                          "content": "<p>Écrire tout en majuscules.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, le<strong> surlignage permet de retrouver rapidement une information</strong> importante dans vos notes.<br>Mais attention, si vous surlignez trop d’informations, vous risquez d’avoir plus de mal à vous y retrouver !</p>"
+                            "diagnosis": "<p>Eh non ! Le<strong> surlignage permet de retrouver rapidement une information</strong> importante dans vos notes.<br>Mais attention, si vous surlignez trop d’informations, vous risquez d’avoir plus de mal à vous y retrouver !</p>"
                           }
                         },
                         {
@@ -578,7 +578,7 @@
                           }
                         }
                       ],
-                      "solution": "2"
+                      "solution": "1"
                     }
                   ]
                 }
@@ -616,6 +616,290 @@
                 "type": "text",
                 "tag": "did-you-know",
                 "content": "<p>Ces usages existent depuis longtemps, notamment dans l’imprimerie. On les retrouve aujourd’hui dans les documents, les sites web et les emails.<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c1b41018-7932-400c-8f87-28ff00e9ceb2",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "7a11e888-e953-4603-a8ff-a09e903a189e",
+          "type": "summary",
+          "title": "Récapitulatif",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2b73b2d9-a836-4f3a-aa3a-fc532395a2c3",
+                "type": "text",
+                "tag": " ",
+                "content": "<ul><li>La mise en forme permet de rendre un texte <strong>plus facile à lire</strong> et de <strong>mettre en avant les informations importantes</strong>. 👀 </li><li>Pour mettre en forme un texte, il faut toujours <strong>sélectionner</strong>, puis <strong>choisir une option dans la barre d’outils</strong>. 🖱️ </li><li>La mise en forme peut s’appliquer à un <strong>mot </strong>ou à un <strong>paragraphe </strong>(taille, police…). ↔️ </li><li>La mise en forme suit des <strong>règles </strong>simples&nbsp;: utilisez-la pour mettre en valeur les informations importantes, sans en abuser. ✨</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "292db153-795f-4924-b8ae-6ed072ace6cc",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "dc329d53-5e91-4bd3-8799-c99959142182",
+          "type": "transition",
+          "title": "Transition s’exercer",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3d414841-40dc-49f1-b95f-949a85417700",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "148b7cba-91ff-4bc1-a399-d3a4322441a0",
+          "type": "activity",
+          "title": "Activité #1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "3d414841-40dc-49f1-b95f-949a85417700",
+                "type": "qab",
+                "instruction": "<p>Quelles options de mise en forme sont possibles avec la barre d’outils ?</p>",
+                "cards": [
+                  {
+                    "id": "17bde533-9872-4fbd-9a8b-08094d1915ba",
+                    "text": "Mettre en gras un mot.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "10dbf21e-1374-47f5-ad53-67b272a5632f",
+                    "text": "Souligner une phrase.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "b85d2e1a-c797-46f9-8fcd-55678e47b88a",
+                    "text": "Aller à la ligne.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "b3ca7f63-36ae-432f-96ce-6d0fe830554b",
+                    "text": "Écrire du texte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "002c8c53-0387-4419-a33b-8c3b5ddd86ce",
+                    "text": "Changer la taille du texte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "e5146272-d1ff-427b-9bf4-2afce3e4adde",
+          "type": "activity",
+          "title": "Activité #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0b0dbd3b-63aa-4108-b1ed-7dfbe386c3ea",
+                "type": "embed",
+                "isCompletionRequired": true,
+                "title": "Mise en pratique",
+                "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-ex2",
+                "instruction": "<p>Dans l’interface de traitement de texte ci-dessous, mettez le texte en forme en suivant les instructions&nbsp;:&nbsp; </p><ul><li>Mettez l’ensemble du texte en police Arial.</li><li>Mettez en gras l’heure du rendez-vous.</li></ul>",
+                "solution": "",
+                "height": 550
+              }
+            }
+          ]
+        },
+        {
+          "id": "b803594c-dfe3-468b-aef7-40ef7a2baa9f",
+          "type": "activity",
+          "title": "Activité #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "db0d9066-c9ce-44c6-827a-11432e682303",
+                "type": "qrocm",
+                "instruction": "<p>Pour chacune des situations ci-dessous, sélectionnez l’option de mise en forme la plus adaptée.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Annie veut mettre en avant un mot dans son texte.<br><strong>Qu’est-ce qu’Annie doit faire ?&nbsp;</strong></p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "1",
+                    "display": "block",
+                    "placeholder": "Sélectionnez l’option la plus adaptée",
+                    "ariaLabel": "Sélectionnez l’option la plus adaptée",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Mettre en gras"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Utiliser l’italique"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Changer la taille de police"
+                      }
+                    ],
+                    "solutions": [
+                      "1"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p><br>Idriss trouve que son texte est écrit trop petit.<br><strong>Qu’est-ce qu’Idriss doit faire ?</strong></p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "2",
+                    "display": "block",
+                    "placeholder": "Sélectionnez l’option la plus adaptée",
+                    "ariaLabel": "Sélectionnez l’option la plus adaptée",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Mettre en gras"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Utiliser l’italique"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Changer la taille de la police"
+                      }
+                    ],
+                    "solutions": [
+                      "3"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>&lt;br&gt;Jan écrit un article avec des mots en anglais dedans, il veut signaler qu’il s’agit de mots dans une autre langue. <br><strong>Qu’est-ce que Jan doit faire ?</strong></p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "3",
+                    "display": "block",
+                    "placeholder": "Sélectionnez l’option la plus adaptée",
+                    "ariaLabel": "Sélectionnez l’option la plus adaptée",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "1",
+                        "content": "Mettre en gras"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Utiliser l’italique"
+                      },
+                      {
+                        "id": "3",
+                        "content": "Changer la taille de la police"
+                      }
+                    ],
+                    "solutions": [
+                      "2"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse ! 🎉</p>",
+                    "diagnosis": "<p>Chaque mise en forme correspond à un usage précis. Les utiliser correctement rend le texte plus clair.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.<br></p>",
+                    "diagnosis": "<p>Chaque mise en forme correspond à un usage précis. L’objectif est de rendre la lecture plus facile.</p>"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "58edea04-ded9-4a7c-ade2-94241c3c27dc",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "81c09a8a-3cef-46ae-93cf-6fc85c4d9fb6",
+          "type": "challenge",
+          "title": "Défi",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5581184e-ad5f-4d67-8229-6f84b4fa16d8",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Clément doit envoyer un mail pour informer son professeur de son absence. <br>Pour que son mail soit plus clair, il doit le structurer et le mettre en forme.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4e8ea665-dc4f-4db4-b272-a96f4dff1a58",
+                "type": "text",
+                "tag": " ",
+                "content": "<p><strong>Dans l’interface ci-dessous&nbsp;: </strong></p><ul><li><strong>Agrandissez tout le texte en taille de police 14</strong></li><li><strong>Séparez le texte en 3 paragraphes</strong></li><li><strong>Soulignez&nbsp;: «&nbsp;absence du 12 au 14 mars&nbsp;»</strong></li></ul><p>[Simulateur Pixmail en autovalidation à venir &nbsp;-&nbsp;texte à mettre en forme&nbsp;:&nbsp;<br>Bonjour, Je vous informe de mon absence du 12 au 14 mars. Merci de votre compréhension. Cordialement, Clément ]</p>"
               }
             }
           ]
