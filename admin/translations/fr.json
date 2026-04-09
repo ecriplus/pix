@@ -501,6 +501,29 @@
       "page-title": "Référentiels de certification"
     },
     "certifications": {
+      "edu-results": {
+        "v2": {
+          "external-jury-select-options": {
+            "REJECTED": "Rejetée",
+            "UNSET": "En attente"
+          }
+        },
+        "v3": {
+          "admissible": "Admissible",
+          "error": "Une erreur est survenue",
+          "external-jury": "Volet jury externe",
+          "external-jury-select-options": {
+            "ADVANCED": "Avancé",
+            "EXPERT": "Expert",
+            "UNSET": "En attente"
+          },
+          "internal-jury": "Volet Pix",
+          "select": "Sélectionner un niveau",
+          "success": "Le résultat du volet jury externe a bien été enregistré",
+          "title": "Résultats de la certification Pix+ Edu",
+          "waiting": "En attente"
+        }
+      },
       "global-actions": {
         "cancel": {
           "button": "Annuler la certification",
@@ -538,29 +561,6 @@
         "ariaLabel": "Rechercher une certification avec un identifiant",
         "label": "Trouver une certification",
         "placeholder": "ID de la certification"
-      },
-      "edu-results": {
-        "v2": {
-          "external-jury-select-options": {
-            "REJECTED": "Rejetée",
-            "UNSET": "En attente"
-          }
-        },
-        "v3": {
-          "admissible": "Admissible",
-          "title": "Résultats de la certification Pix+ Edu",
-          "internal-jury": "Volet Pix",
-          "external-jury": "Volet jury externe",
-          "select": "Sélectionner un niveau",
-          "external-jury-select-options": {
-            "UNSET": "En attente",
-            "ADVANCED": "Avancé",
-            "EXPERT": "Expert"
-          },
-          "waiting": "En attente",
-          "error": "Une erreur est survenue",
-          "success": "LE résultat du volet jury externe a bien été enregistré"
-        }
       }
     },
     "combined-course-blueprints": {

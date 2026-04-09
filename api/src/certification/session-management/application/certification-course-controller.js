@@ -1,5 +1,7 @@
+import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificationSerializer from '../infrastructure/serializers/certification-serializer.js';
+import * as juryCertificationSerializer from '../infrastructure/serializers/jury-certification-serializer.js';
 import * as juryCommentSerializer from '../infrastructure/serializers/jury-comment-serializer.js';
 import * as v3CertificationDetailsForAdministrationSerializer from '../infrastructure/serializers/v3-certification-course-details-for-administration-serializer.js';
 
@@ -66,13 +68,20 @@ const update = async function (request, h, dependencies = { certificationSeriali
   return dependencies.certificationSerializer.serializeFromCertificationCourse(updatedCertificationCourse);
 };
 
-const updateEduV3ExternalJuryResult = async function (request, h) {
+const updateEduV3ExternalJuryResult = async function (request, h, dependencies = { juryCertificationSerializer }) {
+  const i18n = getI18nFromRequest(request);
+
   const eduV3ExternalJuryResult = request.payload.data.attributes['edu-v3-external-jury-result'];
   const certificationCourseId = request.params.certificationCourseId;
 
-  await usecases.updateEduV3ExternalJuryResult({ certificationCourseId, eduV3ExternalJuryResult });
+  const juryCertification = await usecases.updateEduV3ExternalJuryResult({
+    certificationCourseId,
+    eduV3ExternalJuryResult,
+  });
 
-  return h.response().code(200);
+  return h
+    .response(dependencies.juryCertificationSerializer.serialize(juryCertification, { translate: i18n.__ }))
+    .code(200);
 };
 
 export const certificationCourseController = {

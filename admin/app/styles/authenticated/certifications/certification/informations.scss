@@ -79,17 +79,17 @@
 
   &__jury-level {
     display: flex;
+    gap: var(--pix-spacing-2x);
     align-items: center;
     justify-content: center;
-    gap: var(--pix-spacing-2x);
   }
 
   &__jury-level-editor {
     .actions {
       display: flex;
-      justify-content: center;
-      align-items: center;
       gap: var(--pix-spacing-2x);
+      align-items: center;
+      justify-content: center;
       margin-top: var(--pix-spacing-4x);
     }
   }

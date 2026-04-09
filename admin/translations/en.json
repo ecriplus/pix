@@ -494,6 +494,29 @@
       "page-title": "Certification Frameworks"
     },
     "certifications": {
+      "edu-results": {
+        "v2": {
+          "external-jury-select-options": {
+            "REJECTED": "Rejected",
+            "UNSET": "Pending"
+          }
+        },
+        "v3": {
+          "admissible": "Admissible",
+          "error": "An error occurred",
+          "external-jury": "External jury section",
+          "external-jury-select-options": {
+            "ADVANCED": "Advanced",
+            "EXPERT": "Expert",
+            "UNSET": "Pending"
+          },
+          "internal-jury": "Pix section",
+          "select": "Select a level",
+          "success": "The external jury section result has been saved",
+          "title": "Pix+ Edu certification results",
+          "waiting": "Pending"
+        }
+      },
       "external-jury-select-options": {
         "REJECTED": "Rejected",
         "UNSET": "Waiting"
@@ -535,29 +558,6 @@
         "ariaLabel": "Search for a certification with an identifier",
         "label": "Find a certification",
         "placeholder": "Certification ID"
-      },
-      "edu-results": {
-        "v2": {
-          "external-jury-select-options": {
-            "REJECTED": "Rejected",
-            "UNSET": "Pending"
-          }
-        },
-        "v3": {
-          "admissible": "Admissible",
-          "title": "Pix+ Edu certification results",
-          "internal-jury": "Pix section",
-          "external-jury": "External jury section",
-          "select": "Select a level",
-          "external-jury-select-options": {
-            "UNSET": "Pending",
-            "ADVANCED": "Advanced",
-            "EXPERT": "Expert"
-          },
-          "waiting": "Pending",
-          "error": "An error occurred",
-          "success": "The external jury section result has been saved"
-        }
       }
     },
     "combined-course-blueprints": {
