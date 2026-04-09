@@ -74,15 +74,14 @@ export class ScoringV3Algorithm {
 
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
 
-    if (scoringIntervals.isCapacityBelowMinimum(capacity)) {
-      return 0;
-    }
-
     if (scoringIntervals.isCapacityAboveMaximum(capacity)) {
       return maximumReachableScore;
     }
 
     const intervalIndex = scoringIntervals.findIntervalIndexFromCapacity(capacity);
+    if (intervalIndex === null) {
+      return 0;
+    }
     const intervalMaximum = scoringIntervals.max(intervalIndex);
     const intervalMinimum = scoringIntervals.min(intervalIndex);
     const meshes = Array.from(CORE_MESH_CONFIGURATION.values());
@@ -102,9 +101,6 @@ export class ScoringV3Algorithm {
   computeReachedMeshIndex({ capacity }) {
     const certificationScoringIntervals = this.v3CertificationScoring.intervals;
     const scoringIntervals = new Intervals({ intervals: certificationScoringIntervals });
-    if (scoringIntervals.isCapacityBelowMinimum(capacity)) {
-      return null;
-    }
     return scoringIntervals.findIntervalIndexFromCapacity(capacity);
   }
 
