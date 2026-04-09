@@ -2370,12 +2370,14 @@
           "email-modification-demand-expired": "Questo codice è scaduto. Si prega di rinnovare la richiesta.",
           "incorrect-code": "Il codice inserito non è corretto.",
           "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
+          "no-code": "Inserisci il codice a {numInputs} cifre ricevuto via e-mail.",
           "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza."
         },
         "send-back-the-code": "inviami il codice",
         "time-code-validation": "Il codice ricevuto è valido per 10 minuti",
         "title": "Controllo dell'indirizzo e-mail",
-        "update-successful": "Il tuo indirizzo e-mail è stato modificato!"
+        "update-successful": "Il tuo indirizzo e-mail è stato modificato!",
+        "validate-new-email": "Conferma nuovo indirizzo e-mail"
       },
       "language": {
         "lang": "Lingua",
