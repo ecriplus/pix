@@ -31,6 +31,7 @@ describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJob
             name: 'Classe',
             config: {
               displayable: {
+                name: 'MY_KEY',
                 filterable: {
                   type: 'list',
                 },
@@ -97,7 +98,7 @@ O-Ren;Ishii;5B;01/02/1980`,
     const filters = await knex('organization_learner_filters').where('organization_id', organizationId);
 
     expect(filters).lengthOf(1);
-    expect(filters[0].attribute_name).equal('Classe');
+    expect(filters[0].attribute_name).equal('MY_KEY');
     expect(filters[0].values).deep.equal(['5B', '6A']);
   });
 });
