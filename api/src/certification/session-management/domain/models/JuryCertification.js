@@ -1,4 +1,5 @@
 import { DomainError } from '../../../../shared/domain/errors.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
@@ -175,6 +176,9 @@ export class JuryCertification {
   updateEduV3ExternalJuryResult(eduV3ExternalJuryResult) {
     if (!this.isPublished) {
       throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non publiée');
+    }
+    if (this.status !== AssessmentResult.status.VALIDATED) {
+      throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non validée');
     }
     if (this.version !== AlgorithmEngineVersion.V3) {
       throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non V3');
