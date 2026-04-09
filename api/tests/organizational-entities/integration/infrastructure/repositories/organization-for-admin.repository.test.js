@@ -796,39 +796,48 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       // given
       const superAdminUser = databaseBuilder.factory.buildUser({ firstName: 'Cécile', lastName: 'Encieux' });
       const organizationLearnerType = databaseBuilder.factory.buildOrganizationLearnerType({ name: 'Type Toto' });
-      const parentOrganization = databaseBuilder.factory.buildOrganization({
-        type: 'SCO',
-        name: 'Mother Of Dark Side',
-        logoUrl: 'another logo url',
-        externalId: 'DEF456',
-        provinceCode: '45',
-        isManagingStudents: true,
-        credit: 666,
-        email: 'sco.generic.account@example.net',
-        createdBy: superAdminUser.id,
-        documentationUrl: 'https://pix.fr/',
-        organizationLearnerTypeId: organizationLearnerType.id,
+      const {
+        network,
+        structure: parentStructure,
+        organization: parentOrganization,
+      } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+        headOrganization: {
+          type: 'SCO',
+          name: 'Mother Of Dark Side',
+          logoUrl: 'another logo url',
+          externalId: 'DEF456',
+          provinceCode: '45',
+          isManagingStudents: true,
+          credit: 666,
+          email: 'sco.generic.account@example.net',
+          createdBy: superAdminUser.id,
+          documentationUrl: 'https://pix.fr/',
+          organizationLearnerTypeId: organizationLearnerType.id,
+        },
       });
-      const organization = databaseBuilder.factory.buildOrganization({
-        type: 'SCO',
-        name: 'Organization of the dark side',
-        logoUrl: 'some logo url',
-        credit: 154,
-        externalId: '100',
-        provinceCode: '75',
-        isManagingStudents: 'true',
-        email: 'sco.generic.account@example.net',
-        documentationUrl: 'https://pix.fr/',
-        createdBy: superAdminUser.id,
-        createdAt: now,
-        showNPS: true,
-        formNPSUrl: 'https://pix.fr/',
-        showSkills: false,
-        identityProviderForCampaigns: 'genericOidcProviderCode',
-        parentOrganizationId: parentOrganization.id,
-        administrationTeamId: administrationTeam.id,
-        countryCode: 99100,
-        organizationLearnerTypeId: organizationLearnerType.id,
+      const { organization } = databaseBuilder.factory.buildOrganizationInNetwork({
+        networkId: network.id,
+        parentStructureId: parentStructure.id,
+        organizationData: {
+          type: 'SCO',
+          name: 'Organization of the dark side',
+          logoUrl: 'some logo url',
+          credit: 154,
+          externalId: '100',
+          provinceCode: '75',
+          isManagingStudents: 'true',
+          email: 'sco.generic.account@example.net',
+          documentationUrl: 'https://pix.fr/',
+          createdBy: superAdminUser.id,
+          createdAt: now,
+          showNPS: true,
+          formNPSUrl: 'https://pix.fr/',
+          showSkills: false,
+          identityProviderForCampaigns: 'genericOidcProviderCode',
+          administrationTeamId: administrationTeam.id,
+          countryCode: 99100,
+          organizationLearnerTypeId: organizationLearnerType.id,
+        },
       });
 
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
@@ -896,8 +905,10 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: 'Mother Of Dark Side',
         countryCode: 99100,
-        networkId: null,
-        networkName: null,
+        networkId: network.id,
+        networkName: network.name,
+        networkHeadOrganizationId: parentOrganization.id,
+        networkHeadOrganizationName: 'Mother Of Dark Side',
       });
       expect(foundOrganizationForAdmin).to.deep.equal(expectedOrganizationForAdmin);
     });

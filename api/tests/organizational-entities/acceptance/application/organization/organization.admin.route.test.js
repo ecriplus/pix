@@ -1312,17 +1312,17 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
   describe('POST /api/admin/organizations/{childOrganizationId}/detach-parent-organization', function () {
     context('success cases', function () {
-      let parentOrganization;
       let childOrganization;
 
       beforeEach(async function () {
-        parentOrganization = databaseBuilder.factory.buildOrganization({
-          name: 'Parent Organization',
+        const { network, structure: parentStructure } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          headOrganization: { name: 'Parent Organization' },
         });
-        childOrganization = databaseBuilder.factory.buildOrganization({
-          name: 'Child Organization',
-          parentOrganizationId: parentOrganization.id,
-        });
+        ({ organization: childOrganization } = databaseBuilder.factory.buildOrganizationInNetwork({
+          networkId: network.id,
+          parentStructureId: parentStructure.id,
+          organizationData: { name: 'Child Organization' },
+        }));
         await databaseBuilder.commit();
       });
 
