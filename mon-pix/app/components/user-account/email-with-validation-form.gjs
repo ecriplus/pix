@@ -123,6 +123,7 @@ export default class EmailWithValidationForm extends Component {
           const emailVerificationCode = this.store.createRecord('email-verification-code', {
             password: this.password,
             newEmail: this.newEmail,
+            action: 'update-email',
           });
           await emailVerificationCode.sendNewEmail();
 
