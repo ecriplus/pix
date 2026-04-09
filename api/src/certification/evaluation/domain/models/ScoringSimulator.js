@@ -31,12 +31,12 @@ function _calculateScore({ certificationScoringIntervals, capacity, intervalInde
   const MIN_PIX_SCORE = 0;
   const maximumReachableScore = MAX_REACHABLE_LEVEL * COMPETENCES_COUNT * PIX_COUNT_BY_LEVEL - 1;
 
-  if (certificationScoringIntervals.isCapacityBelowMinimum(capacity)) {
-    return MIN_PIX_SCORE;
-  }
-
   if (certificationScoringIntervals.isCapacityAboveMaximum(capacity)) {
     return maximumReachableScore;
+  }
+
+  if (intervalIndex === null) {
+    return MIN_PIX_SCORE;
   }
 
   const intervalMaximum = certificationScoringIntervals.max(intervalIndex);
@@ -53,9 +53,10 @@ function _calculateScore({ certificationScoringIntervals, capacity, intervalInde
 function _computeCompetences({ competencesForScoring, capacity }) {
   return competencesForScoring.map(({ intervals, competenceCode }) => {
     const competenceIntervals = new Intervals({ intervals });
+    const intervalForCompetence = competenceIntervals.findIntervalIndexFromCapacity(capacity);
     return {
       competenceCode,
-      level: intervals[competenceIntervals.findIntervalIndexFromCapacity(capacity)].competenceLevel,
+      level: intervalForCompetence ? intervals[intervalForCompetence].competenceLevel : 0,
     };
   });
 }
