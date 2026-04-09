@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.382.0](https://github.com/1024pix/pix/compare/v5.381.0...v5.382.0) (2026-04-09)
+
+### :rocket: Amélioration
+
+- [#15782](https://github.com/1024pix/pix/pull/15782) Ajutement de la longueur des input phrase (PIX-22051) 
+- [#15756](https://github.com/1024pix/pix/pull/15756) Renommer "langues localisées" en "locales" (PIX-22184) 
+- [#15777](https://github.com/1024pix/pix/pull/15777) RepondreMail_NOV Retours experts 
+- [#15784](https://github.com/1024pix/pix/pull/15784) WIP MiseEnFormeTxt_NOV 
+
+### :bug: Correction
+
+- [#15783](https://github.com/1024pix/pix/pull/15783) Corrige la mise à jour de campagnes dans le cadre des Parcours Apprenants (PIX-22033). 
+- [#15790](https://github.com/1024pix/pix/pull/15790) S'assurer qu'un score de 0 a bien pour conséquence une certification rejetée pour cause de score trop bas 
+
+### :building_construction: Tech
+
+- [#15765](https://github.com/1024pix/pix/pull/15765) Crée une nouvelle méthode sur CombinedCourseDetails pour éviter d'appeler deux fois les requêtes du CombinedCourseDetailsService 
+- [#15762](https://github.com/1024pix/pix/pull/15762) Désactiver les post-install npm
+
 # [5.381.0](https://github.com/1024pix/pix/compare/v5.380.0...v5.381.0) (2026-04-08)
 
 ### :rocket: Amélioration
