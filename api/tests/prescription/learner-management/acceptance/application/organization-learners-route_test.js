@@ -17,6 +17,35 @@ describe('Acceptance | Prescription | learner management | Application | organiz
     server = await createServer();
   });
 
+  describe('GET /api/organizations/{organizationId}/organization-learners/filters', function () {
+    it('should return 200 with filters when user is a member of the organization', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const user = databaseBuilder.factory.buildUser();
+      databaseBuilder.factory.buildMembership({ organizationId: organization.id, userId: user.id });
+      databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearnerFilter({
+        organizationId: organization.id,
+        attributeName: 'division',
+        values: ['6A', '6B'],
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/organizations/${organization.id}/organization-learners/filters`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data[0].type).to.equal('organization-learner-filters');
+    });
+  });
+
   describe('DELETE /api/admin/organization-learners/{id}/association', function () {
     context('When user has the role SUPER_ADMIN and organization learner can be dissociated', function () {
       it('should return an 204 status after having successfully dissociated user from organizationLearner', async function () {

@@ -4,6 +4,37 @@ import { securityPreHandlers } from '../../../../../src/shared/application/secur
 import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | learner management | Application | Router | organization-learner-router', function () {
+  describe('GET /api/organizations/{organizationId}/organization-learners/filters', function () {
+    it('should call checkUserBelongsToOrganization and the controller', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkUserBelongsToOrganization').callsFake((request, h) => h.response(true));
+      sinon
+        .stub(organizationLearnersController, 'getOrganizationLearnerFilters')
+        .callsFake((request, h) => h.response('ok').code(200));
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('GET', '/api/organizations/1/organization-learners/filters');
+
+      // then
+      sinon.assert.calledOnce(securityPreHandlers.checkUserBelongsToOrganization);
+      sinon.assert.calledOnce(organizationLearnersController.getOrganizationLearnerFilters);
+    });
+
+    it('should return 400 when organizationId is not a number', async function () {
+      // given
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('GET', '/api/organizations/ABC/organization-learners/filters');
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+  });
+
   describe('DELETE /api/admin/organizations/{organizationId}/organization-learners/{organizationLearnerId}', function () {
     it('should call right handler before calling controller', async function () {
       // given

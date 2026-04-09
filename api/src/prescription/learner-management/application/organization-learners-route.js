@@ -10,6 +10,28 @@ import { organizationLearnersController } from './organization-learners-controll
 const register = async (server) => {
   server.route([
     {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/organization-learners/filters',
+      config: {
+        pre: [
+          {
+            method: securityPreHandlers.checkUserBelongsToOrganization,
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        handler: organizationLearnersController.getOrganizationLearnerFilters,
+        notes: [
+          "- **Cette route est restreinte aux utilisateurs authentifiés membres de l'organisation**\n" +
+            "- Elle retourne les filtres disponibles pour les participants de l'organisation.",
+        ],
+        tags: ['api', 'organization-learners'],
+      },
+    },
+    {
       method: 'DELETE',
       path: '/api/organizations/{organizationId}/organization-learners',
       config: {
