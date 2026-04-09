@@ -1,3 +1,4 @@
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
@@ -382,7 +383,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     });
   });
 
-  describe('POST /api/admin/certification-courses-v3/{certificationCourseId}/details', function () {
+  describe('GET /api/admin/certification-courses-v3/{certificationCourseId}/details', function () {
     let certificationCourse;
     let certificationChallenges;
     let assessmentResult;
@@ -486,6 +487,53 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           type: 'certification-challenges-for-administration',
         },
       ]);
+    });
+  });
+
+  describe('POST /api/admin/certification-courses/{certificationCourseId}/edu-v3-external-jury-result', function () {
+    let certificationCourseId;
+    let options;
+    let server;
+
+    beforeEach(async function () {
+      certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        isPublished: true,
+        framework: Frameworks.EDU_1ER_DEGRE,
+        version: AlgorithmEngineVersion.V3,
+      }).id;
+      databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId,
+        reachedMeshIndex: 0,
+        eduV3ExternalJuryResult: null,
+      });
+      await databaseBuilder.commit();
+
+      server = await createServer();
+
+      options = {
+        method: 'POST',
+        url: `/api/admin/certification-courses/${certificationCourseId}/edu-v3-external-jury-result`,
+        headers: generateAuthenticatedUserRequestHeaders(),
+        payload: {
+          data: {
+            attributes: {
+              'edu-v3-external-jury-result': PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+            },
+          },
+        },
+      };
+      return insertUserWithRoleSuperAdmin();
+    });
+
+    it('should save edu v3 external jury result in database and return the refreshed certification', async function () {
+      // when
+      const response = await server.inject(options);
+
+      // then
+      const assessmentResults = await knex('assessment-results').orderBy('createdAt', 'desc');
+      expect(assessmentResults).to.have.lengthOf(1);
+      expect(assessmentResults[0].eduV3ExternalJuryResult).to.equal(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED);
+      expect(response.statusCode).to.equal(200);
     });
   });
 });
