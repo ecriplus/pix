@@ -71,16 +71,21 @@ export async function update(juryCertification) {
   const knexConn = DomainTransaction.getConnection();
 
   await knexConn('assessment-results')
-    .where({
-      'assessment-results.assessmentId': juryCertification.assessmentId,
-    })
-    .join(
-      { cclar: 'certification-courses-last-assessment-results' },
-      'cclar.lastAssessmentResultId',
-      'assessment-results.id',
-    )
     .update({
       eduV3ExternalJuryResult: juryCertification.eduV3ExternalJuryResult,
+    })
+    .where('assessment-results.id', '=', function (qb) {
+      qb.select('certification-courses-last-assessment-results.lastAssessmentResultId')
+        .from('certification-courses-last-assessment-results')
+        .join(
+          'assessment-results',
+          'assessment-results.id',
+          'certification-courses-last-assessment-results.lastAssessmentResultId',
+        )
+        .where(
+          'certification-courses-last-assessment-results.certificationCourseId',
+          juryCertification.certificationCourseId,
+        );
     });
 }
 

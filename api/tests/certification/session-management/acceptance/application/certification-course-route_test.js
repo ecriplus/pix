@@ -491,20 +491,23 @@ describe('Certification | Session Management | Acceptance | Application | Routes
   });
 
   describe('POST /api/admin/certification-courses/{certificationCourseId}/edu-v3-external-jury-result', function () {
-    let certificationCourseId;
+    let certificationCourseFromDB;
+    let assessmentResultFromDB;
     let options;
     let server;
 
     beforeEach(async function () {
-      certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+      certificationCourseFromDB = databaseBuilder.factory.buildCertificationCourse({
         isPublished: true,
         framework: Frameworks.EDU_1ER_DEGRE,
         version: AlgorithmEngineVersion.V3,
-      }).id;
-      databaseBuilder.factory.buildAssessmentResult.last({
-        certificationCourseId,
+        birthINSEECode: '12345',
+      });
+      assessmentResultFromDB = databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId: certificationCourseFromDB.id,
         reachedMeshIndex: 0,
         eduV3ExternalJuryResult: null,
+        commentByJury: null,
       });
       await databaseBuilder.commit();
 
@@ -512,7 +515,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       options = {
         method: 'POST',
-        url: `/api/admin/certification-courses/${certificationCourseId}/edu-v3-external-jury-result`,
+        url: `/api/admin/certification-courses/${certificationCourseFromDB.id}/edu-v3-external-jury-result`,
         headers: generateAuthenticatedUserRequestHeaders(),
         payload: {
           data: {
@@ -534,6 +537,35 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       expect(assessmentResults).to.have.lengthOf(1);
       expect(assessmentResults[0].eduV3ExternalJuryResult).to.equal(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED);
       expect(response.statusCode).to.equal(200);
+      expect(response.result.data.type).to.equal('certifications');
+      expect(response.result.data.id).to.equal(certificationCourseFromDB.id.toString());
+      expect(response.result.data.attributes).to.deep.equal({
+        'first-name': certificationCourseFromDB.firstName,
+        'last-name': certificationCourseFromDB.lastName,
+        sex: certificationCourseFromDB.sex,
+        'birth-country': certificationCourseFromDB.birthCountry,
+        'birth-insee-code': certificationCourseFromDB.birthINSEECode,
+        'birth-postal-code': certificationCourseFromDB.birthPostalCode,
+        birthdate: certificationCourseFromDB.birthdate,
+        birthplace: certificationCourseFromDB.birthplace,
+        'created-at': certificationCourseFromDB.createdAt,
+        'user-id': certificationCourseFromDB.userId,
+        'session-id': certificationCourseFromDB.sessionId,
+        version: certificationCourseFromDB.version,
+        'certification-framework': certificationCourseFromDB.framework,
+        'completed-at': certificationCourseFromDB.completedAt,
+        'is-published': certificationCourseFromDB.isPublished,
+        'assessment-id': assessmentResultFromDB.assessmentId,
+        'is-rejected-for-fraud': certificationCourseFromDB.isRejectedForFraud,
+        status: assessmentResultFromDB.status,
+        'pix-score': assessmentResultFromDB.pixScore,
+        'reached-result-key': Frameworks.EDU_1ER_DEGRE + '.' + PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+        'comment-by-jury': assessmentResultFromDB.commentByJury,
+        'comment-for-candidate': assessmentResultFromDB.commentForCandidate,
+        'comment-for-organization': assessmentResultFromDB.commentForOrganization,
+        'jury-id': assessmentResultFromDB.juryId,
+        'competences-with-mark': [],
+      });
     });
   });
 });
