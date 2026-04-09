@@ -20,7 +20,7 @@ export default class CertificationInformations extends Component {
     return (
       this.args.certification.isPixPlusEdu &&
       this.args.certification.isV3 &&
-      this.args.certification.reachedResultKey !== 'BELOW_MINIMUM'
+      this.args.certification.status === 'validated'
     );
   }
 
