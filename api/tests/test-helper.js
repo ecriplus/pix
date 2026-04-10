@@ -6,7 +6,7 @@ import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
 import * as url from 'node:url';
 
-import { Assertion, AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
+import { AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
@@ -385,27 +385,6 @@ function catchErrSync(fn, ctx) {
     throw new Error('Expected an error, but none was thrown.');
   };
 }
-
-chaiUse(function () {
-  Assertion.addMethod('equalWithGetter', function (expectedElement) {
-    if (Array.isArray(expectedElement)) {
-      expectedElement.forEach((element, index) => {
-        expect(this._obj[index]).equalWithGetter(element);
-      });
-    } else {
-      Object.keys(expectedElement).forEach((property) => {
-        if (Array.isArray(expectedElement[property])) {
-          expectedElement[property].forEach((subelement, index) => {
-            expect(this._obj[property][index]).equalWithGetter(subelement);
-          });
-        } else {
-          const errorMessage = `expect ${this._obj} with key ${property} to equal ${expectedElement[property]} (found ${this._obj[property]})`;
-          new Assertion(this._obj[property], errorMessage).to.deep.equal(expectedElement[property]);
-        }
-      });
-    }
-  });
-});
 
 async function mockLearningContent(learningContent) {
   const scope = databaseBuilder.factory.learningContent.build(learningContent);
