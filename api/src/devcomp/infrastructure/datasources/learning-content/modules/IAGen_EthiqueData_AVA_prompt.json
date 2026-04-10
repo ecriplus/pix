@@ -295,14 +295,14 @@
                           "id": "1",
                           "content": "Respecte",
                           "feedback": {
-                            "diagnosis": "<p>Et bien non. Ici on demande <strong>d’imiter</strong> le style d’une autrice identifiable. L’univers d’Harry Potter est également <strong>protégé</strong> par le drit d’auteur. Le texte généré risque d’être trop proche d’une œuvre protégée, ce qui peut être qualifié de <strong>contrefaçon</strong>.</p>"
+                            "diagnosis": "<p>Eh bien non. Ici on demande <strong>d’imiter</strong> le style d’une autrice identifiable. L’univers d’Harry Potter est également <strong>protégé</strong> par le drit d’auteur. Le texte généré risque d’être trop proche d’une œuvre protégée, ce qui peut être qualifié de <strong>contrefaçon</strong>.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Ne respecte pas",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui ! Ici on demande <strong>d’imiter</strong> le style d’une autrice identifiable. L’univers d’Harry Potter est également <strong>protégé</strong> par le drit d’auteur. Le texte généré risque d’être trop proche d’une œuvre protégée, ce qui peut être qualifié de contrefaçon.</p>"
+                            "diagnosis": "<p>Eh oui&nbsp;! Ici on demande <strong>d’imiter</strong> le style d’une autrice identifiable. L’univers d’Harry Potter est également <strong>protégé</strong> par le drit d’auteur. Le texte généré risque d’être trop proche d’une œuvre protégée, ce qui peut être qualifié de contrefaçon.</p>"
                           }
                         }
                       ],
@@ -322,7 +322,7 @@
                           "id": "1",
                           "content": "Respecte",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !&nbsp;La demande vise une <strong>reproduction quasi identique d’une photographie protégée</strong>, ce qui porte atteinte aux droits d’auteur.</p>"
+                            "diagnosis": "<p>Eh non&nbsp;! La demande vise une <strong>reproduction quasi identique d’une photographie protégée</strong>, ce qui porte atteinte aux droits d’auteur.</p>"
                           }
                         },
                         {
@@ -356,7 +356,7 @@
                           "id": "2",
                           "content": "Ne respecte pas",
                           "feedback": {
-                            "diagnosis": "<p>Bien joué !&nbsp;En effet, le code informatique est une œuvre <strong>protégée par le droit d’auteur</strong>. Son utilisation est encadrée par une <strong>licence</strong>. L’utilisateur doit respecter les conditions prévues par la licence (auteur, conditions, etc.), sous peine de violation du droit d’auteur.</p>"
+                            "diagnosis": "<p>Bien joué&nbsp;! En effet, le code informatique est une œuvre <strong>protégée par le droit d’auteur</strong>. Son utilisation est encadrée par une <strong>licence</strong>. L’utilisateur doit respecter les conditions prévues par la licence (auteur, conditions, etc.), sous peine de violation du droit d’auteur.</p>"
                           }
                         }
                       ],
@@ -383,7 +383,7 @@
                       "id": "7e9d3516-cf35-4975-825d-1c9bb85bba75",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Les IA génératives peuvent produire des contenus très proches d’<strong>œuvres existantes</strong> sur lesquelles elles ont été <strong>entraînées</strong>. Il est donc important d’être attentif aux r<strong>isques de contrefaçon ou de plagiat</strong>.</p>"
+                      "content": "<p>Les IA génératives peuvent produire des contenus très proches d’<strong>œuvres existantes</strong> sur lesquelles elles ont été <strong>entraînées</strong>. Il est donc important d’être attentif aux <strong>risques de contrefaçon ou de plagiat</strong>.</p>"
                     }
                   ]
                 },
@@ -455,14 +455,14 @@
                     "id": "1",
                     "content": "Oui",
                     "feedback": {
-                      "diagnosis": "<p>Bien joué ! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.<br></p>"
+                      "diagnosis": "<p>Bien joué&nbsp;! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Non",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.&nbsp;</p>"
+                      "diagnosis": "<p>Eh non&nbsp;! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.</p>"
                     }
                   }
                 ],
@@ -543,7 +543,7 @@
                 "id": "bab77fab-6da3-4382-af64-b21057a449a0",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voyons si vous avez retenu l’essentiel.&nbsp;<br></p>"
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             },
             {
@@ -634,7 +634,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Il est important de garder en mémoire que certains verbes comme \"recopie\", \"reproduis\", \"duplique\" etc font une demande<strong> à risque</strong> vis-à-vis du droit d’auteur.</p>"
+                  "diagnosis": "<p>Il est important de garder en mémoire que certains verbes comme \"recopie\", \"reproduis\", \"duplique\" etc. font une demande<strong> à risque</strong> vis-à-vis du droit d’auteur.</p>"
                 }
               }
             }
@@ -676,7 +676,7 @@
                           "content": "<p>Non<br></p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>En y regardant de plus près, on voit&nbsp;que l’utilisation de l’IA est clairement mentionnéau début de l’article.</p>"
+                            "diagnosis": "<p>En y regardant de plus près, on voit que l’utilisation de l’IA est clairement mentionnéau début de l’article.</p>"
                           }
                         },
                         {
@@ -684,7 +684,7 @@
                           "content": "<p>Je ne peux pas me prononcer.<br></p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.<br></p>",
-                            "diagnosis": "<p>En y regardant de plus près, on voit&nbsp;que l’utilisation de l’IA est clairement mentionné  au début de l’article.</p>"
+                            "diagnosis": "<p>En y regardant de plus près, on voit que l’utilisation de l’IA est clairement mentionné  au début de l’article.</p>"
                           }
                         }
                       ],
@@ -807,7 +807,7 @@
               "element": {
                 "id": "4d226842-13a8-4546-8917-a3216b18ee39",
                 "type": "qcu-declarative",
-                "instruction": "<p>Les connaissiez-vous ?&nbsp;<br></p>",
+                "instruction": "<p>Les connaissiez-vous ?</p>",
                 "hasShortProposals": true,
                 "proposals": [
                   {
