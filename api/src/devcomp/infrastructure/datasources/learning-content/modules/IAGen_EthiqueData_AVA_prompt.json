@@ -91,7 +91,7 @@
             {
               "type": "element",
               "element": {
-                "id": "469a2f43-5a8a-430e-a764-427949416a95",
+                "id": "037553cd-861e-4707-913a-d6b52d04e38d",
                 "type": "text",
                 "tag": " ",
                 "content": "<p>Comme nous l’avons vu, la notion \"d’auteur\" lorsqu’on utilise l’IA peut être débattu. Voyons pourquoi.</p>"
@@ -122,7 +122,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0cdcab2e-95e3-4f07-99f4-cba40648acd5",
+                "id": "6d4351bf-5401-405a-910a-f854bce05117",
                 "type": "custom",
                 "title": "Prompts",
                 "instruction": "<p>Pour chacune des requêtes ou situations suivantes, sélectionnez celle où on voit un effort créatif de la part de l’utilisateur. </p>",
