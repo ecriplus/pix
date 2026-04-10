@@ -9,17 +9,10 @@ import AttachChildForm from './attach-child-form';
 export default class ActionsSection extends Component {
   @service accessControl;
 
-  get canCreateChildOrganization() {
-    return (
-      this.accessControl.hasAccessToAttachChildOrganizationActionsScope &&
-      !!this.args.organization.belongsTo('network').id()
-    );
-  }
-
   <template>
     <section class="page-section">
       <div class="content-text content-text--small organization-network__actions-section">
-        {{#if this.canCreateChildOrganization}}
+        {{#if this.accessControl.hasAccessToAttachChildOrganizationActionsScope}}
           <PixButtonLink
             @iconBefore="add"
             @variant="secondary"
