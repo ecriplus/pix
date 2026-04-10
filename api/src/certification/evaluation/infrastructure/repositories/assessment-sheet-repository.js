@@ -12,10 +12,12 @@ export async function findByCertificationCourseId(certificationCourseId) {
       lastChallengeId: 'assessments.lastChallengeId',
       lastQuestionDate: 'assessments.lastQuestionDate',
       lastQuestionState: 'assessments.lastQuestionState',
+      lastAnswerAt: 'certification-courses.lastAnswerAt',
       abortReason: 'certification-courses.abortReason',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       state: 'assessments.state',
       assessmentUpdatedAt: 'assessments.updatedAt',
+      certificationCourseUpdatedAt: 'certification-courses.updatedAt',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

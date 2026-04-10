@@ -17,6 +17,8 @@ export class AssessmentSheet {
    * @param {boolean} params.isRejectedForFraud
    * @param {Assessment.states} params.state
    * @param {Date} params.assessmentUpdatedAt
+   * @param {Date} params.certificationCourseUpdatedAt
+   * @param {Date} params.lastAnswerAt
    * @param {Answer[]} params.answers
    */
   constructor({
@@ -30,6 +32,8 @@ export class AssessmentSheet {
     isRejectedForFraud,
     state,
     assessmentUpdatedAt,
+    certificationCourseUpdatedAt,
+    lastAnswerAt,
     answers,
   }) {
     this.certificationCourseId = certificationCourseId;
@@ -42,6 +46,8 @@ export class AssessmentSheet {
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
     this.assessmentUpdatedAt = assessmentUpdatedAt;
+    this.certificationCourseUpdatedAt = certificationCourseUpdatedAt;
+    this.lastAnswerAt = lastAnswerAt;
     this.answers = answers;
   }
 

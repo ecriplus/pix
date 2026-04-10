@@ -14,6 +14,8 @@ export const buildAssessmentSheet = function ({
   state = STATES.COMPLETED,
   lastQuestionState = STATES_OF_LAST_QUESTION.ASKED,
   assessmentUpdatedAt = new Date(),
+  certificationCourseUpdatedAt = new Date(),
+  lastAnswerAt = new Date(),
   lastQuestionDate = new Date(),
   answers = [],
 } = {}) {
@@ -27,6 +29,8 @@ export const buildAssessmentSheet = function ({
     state,
     lastQuestionState,
     assessmentUpdatedAt,
+    certificationCourseUpdatedAt,
+    lastAnswerAt,
     lastQuestionDate,
     answers,
   });

@@ -12,6 +12,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       maxReachableLevelOnCertificationDate: 6,
       isRejectedForFraud: true,
       userId,
+      updatedAt: new Date('2022-02-22'),
+      lastAnswerAt: new Date('2022-01-11'),
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
@@ -45,6 +47,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
+            certificationCourseUpdatedAt: new Date('2022-02-22'),
+            lastAnswerAt: new Date('2022-01-11'),
           }),
         );
       });
@@ -72,6 +76,11 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         state: Assessment.states.STARTED,
         assessmentUpdatedAt: new Date('2024-05-11'),
         answers: [],
+        lastChallengeId: 'somethingElse',
+        lastQuestionDate: new Date('2033-10-07'),
+        lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
+        certificationCourseUpdatedAt: new Date('2044-02-22'),
+        lastAnswerAt: new Date('2044-01-11'),
       });
 
       // when
@@ -92,6 +101,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           lastChallengeId: 'nextChallengeIdToAnswer',
           lastQuestionDate: new Date('2024-11-07'),
           lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
+          certificationCourseUpdatedAt: new Date('2022-02-22'),
+          lastAnswerAt: new Date('2022-01-11'),
         }),
       );
     });
