@@ -133,60 +133,6 @@ module('Unit | Model | certification', function (hooks) {
     });
   });
 
-  module('#hasComplementaryCertifications', function () {
-    module('when there are no complementary certification results', function () {
-      test('should return false', function (assert) {
-        // given
-        const complementaryCertificationCourseResultWithExternal = null;
-        const commonComplementaryCertificationCourseResult = null;
-        const certification = store.createRecord('certification', {
-          complementaryCertificationCourseResultWithExternal,
-          commonComplementaryCertificationCourseResult,
-        });
-
-        //when / then
-        assert.false(certification.hasComplementaryCertifications);
-      });
-    });
-
-    module('when there is only an external complementary certification result', function () {
-      test('should return true', function (assert) {
-        // given
-        const complementaryCertificationCourseResultWithExternal = store.createRecord(
-          'complementary-certification-course-result-with-external',
-          {
-            pixResult: 'TOTO',
-          },
-        );
-        const commonComplementaryCertificationCourseResult = null;
-        const certification = store.createRecord('certification', {
-          complementaryCertificationCourseResultWithExternal,
-          commonComplementaryCertificationCourseResult,
-        });
-
-        //when / then
-        assert.true(certification.hasComplementaryCertifications);
-      });
-    });
-  });
-
-  module('when there is only a common complementary certification result', function () {
-    test('should return true', function (assert) {
-      // given
-      const complementaryCertificationCourseResultWithExternal = null;
-      const commonComplementaryCertificationCourseResult = store.createRecord(
-        'common-complementary-certification-course-result',
-      );
-      const certification = store.createRecord('certification', {
-        complementaryCertificationCourseResultWithExternal,
-        commonComplementaryCertificationCourseResult,
-      });
-
-      //when / then
-      assert.true(certification.hasComplementaryCertifications);
-    });
-  });
-
   module('#statusLabelAndValue', function () {
     [
       { value: assessmentStates.STARTED, label: 'Démarrée' },

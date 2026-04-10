@@ -87,13 +87,6 @@ export default class Certification extends Model {
     return this.status === assessmentResultStatus.CANCELLED;
   }
 
-  get hasComplementaryCertifications() {
-    return (
-      Boolean(this.commonComplementaryCertificationCourseResult.content) ||
-      Boolean(this.complementaryCertificationCourseResultWithExternal.get('pixResult'))
-    );
-  }
-
   get indexedCompetences() {
     const competencesWithMarks = this.competencesWithMark;
     return competencesWithMarks.reduce((result, value) => {
@@ -120,6 +113,10 @@ export default class Certification extends Model {
     return this.intl.t(`common.certification.meshLevels.${this.reachedResultKey}`, {
       pixScore: this.pixScore,
     });
+  }
+
+  get isPixPlusEdu() {
+    return ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].includes(this.certificationFramework);
   }
 
   wasBornInFrance() {

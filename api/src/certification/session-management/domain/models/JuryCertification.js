@@ -1,8 +1,10 @@
+import { DomainError } from '../../../../shared/domain/errors.js';
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
-class JuryCertification {
+export class JuryCertification {
   /**
    * @param {object} props
    * @param {number} props.certificationCourseId
@@ -170,6 +172,28 @@ class JuryCertification {
       certificationFramework: juryCertificationDTO.certificationFramework,
     });
   }
-}
 
-export { JuryCertification };
+  updateEduV3ExternalJuryResult(eduV3ExternalJuryResult) {
+    if (!this.isPublished) {
+      throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non publiée');
+    }
+    if (this.status !== AssessmentResult.status.VALIDATED) {
+      throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non validée');
+    }
+    if (this.version !== AlgorithmEngineVersion.V3) {
+      throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non V3');
+    }
+
+    if (!this.certificationFramework.startsWith('EDU_')) {
+      throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non "EDU"');
+    }
+
+    if (this.reachedMeshIndex === null) {
+      throw new DomainError(
+        'Impossible de définir le résultat du volet externe pour une certification EDU non admissible',
+      );
+    }
+
+    this.eduV3ExternalJuryResult = eduV3ExternalJuryResult;
+  }
+}

@@ -1,3 +1,4 @@
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
@@ -382,7 +383,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     });
   });
 
-  describe('POST /api/admin/certification-courses-v3/{certificationCourseId}/details', function () {
+  describe('GET /api/admin/certification-courses-v3/{certificationCourseId}/details', function () {
     let certificationCourse;
     let certificationChallenges;
     let assessmentResult;
@@ -486,6 +487,85 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           type: 'certification-challenges-for-administration',
         },
       ]);
+    });
+  });
+
+  describe('POST /api/admin/certification-courses/{certificationCourseId}/edu-v3-external-jury-result', function () {
+    let certificationCourseFromDB;
+    let assessmentResultFromDB;
+    let options;
+    let server;
+
+    beforeEach(async function () {
+      certificationCourseFromDB = databaseBuilder.factory.buildCertificationCourse({
+        isPublished: true,
+        framework: Frameworks.EDU_1ER_DEGRE,
+        version: AlgorithmEngineVersion.V3,
+        birthINSEECode: '12345',
+      });
+      assessmentResultFromDB = databaseBuilder.factory.buildAssessmentResult.last({
+        certificationCourseId: certificationCourseFromDB.id,
+        reachedMeshIndex: 0,
+        eduV3ExternalJuryResult: null,
+        commentByJury: null,
+      });
+      await databaseBuilder.commit();
+
+      server = await createServer();
+
+      options = {
+        method: 'POST',
+        url: `/api/admin/certification-courses/${certificationCourseFromDB.id}/edu-v3-external-jury-result`,
+        headers: generateAuthenticatedUserRequestHeaders(),
+        payload: {
+          data: {
+            attributes: {
+              'edu-v3-external-jury-result': PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+            },
+          },
+        },
+      };
+      return insertUserWithRoleSuperAdmin();
+    });
+
+    it('should save edu v3 external jury result in database and return the refreshed certification', async function () {
+      // when
+      const response = await server.inject(options);
+
+      // then
+      const assessmentResults = await knex('assessment-results').orderBy('createdAt', 'desc');
+      expect(assessmentResults).to.have.lengthOf(1);
+      expect(assessmentResults[0].eduV3ExternalJuryResult).to.equal(PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED);
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data.type).to.equal('certifications');
+      expect(response.result.data.id).to.equal(certificationCourseFromDB.id.toString());
+      expect(response.result.data.attributes).to.deep.equal({
+        'first-name': certificationCourseFromDB.firstName,
+        'last-name': certificationCourseFromDB.lastName,
+        sex: certificationCourseFromDB.sex,
+        'birth-country': certificationCourseFromDB.birthCountry,
+        'birth-insee-code': certificationCourseFromDB.birthINSEECode,
+        'birth-postal-code': certificationCourseFromDB.birthPostalCode,
+        birthdate: certificationCourseFromDB.birthdate,
+        birthplace: certificationCourseFromDB.birthplace,
+        'created-at': certificationCourseFromDB.createdAt,
+        'user-id': certificationCourseFromDB.userId,
+        'session-id': certificationCourseFromDB.sessionId,
+        version: certificationCourseFromDB.version,
+        'certification-framework': certificationCourseFromDB.framework,
+        'completed-at': certificationCourseFromDB.completedAt,
+        'is-published': certificationCourseFromDB.isPublished,
+        'assessment-id': assessmentResultFromDB.assessmentId,
+        'is-rejected-for-fraud': certificationCourseFromDB.isRejectedForFraud,
+        status: assessmentResultFromDB.status,
+        'pix-score': assessmentResultFromDB.pixScore,
+        'reached-result-key': Frameworks.EDU_1ER_DEGRE + '.' + PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+        'comment-by-jury': assessmentResultFromDB.commentByJury,
+        'comment-for-candidate': assessmentResultFromDB.commentForCandidate,
+        'comment-for-organization': assessmentResultFromDB.commentForOrganization,
+        'jury-id': assessmentResultFromDB.juryId,
+        'competences-with-mark': [],
+      });
     });
   });
 });
