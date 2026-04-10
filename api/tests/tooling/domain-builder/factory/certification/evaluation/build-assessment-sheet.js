@@ -1,6 +1,7 @@
 import {
   AssessmentSheet,
   STATES,
+  STATES_OF_LAST_QUESTION,
 } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSheet.js';
 
 export const buildAssessmentSheet = function ({
@@ -11,7 +12,9 @@ export const buildAssessmentSheet = function ({
   abortReason = null,
   isRejectedForFraud = false,
   state = STATES.COMPLETED,
+  lastQuestionState = STATES_OF_LAST_QUESTION.ASKED,
   updatedAt = new Date(),
+  lastQuestionDate = new Date(),
   answers = [],
 } = {}) {
   return new AssessmentSheet({
@@ -22,9 +25,12 @@ export const buildAssessmentSheet = function ({
     abortReason,
     isRejectedForFraud,
     state,
+    lastQuestionState,
     updatedAt,
+    lastQuestionDate,
     answers,
   });
 };
 
 buildAssessmentSheet.STATES = STATES;
+buildAssessmentSheet.STATES_OF_LAST_QUESTION = STATES_OF_LAST_QUESTION;

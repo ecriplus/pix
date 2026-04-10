@@ -13,7 +13,10 @@ export async function evaluateAndSaveAnswer({
   userId,
   certificationCourseId,
   forceOKAnswer,
+  answerRepository,
   assessmentSheetRepository,
+  correctionApi,
+  certificationCandidateRepository,
   certificationChallengeLiveAlertRepository,
   sharedChallengeRepository,
 }) {
@@ -34,7 +37,22 @@ export async function evaluateAndSaveAnswer({
     throw new ForbiddenAccess('An alert has been set.');
   }
 
-  return 'coucou';
+  const certificationCandidate = await certificationCandidateRepository.findByAssessmentId({
+    assessmentId: assessmentSheet.assessmentId,
+  });
+  const correctedAnswer = correctionApi.correctAnswer({
+    challenge,
+    answer,
+    challengeSubmittedAt: assessmentSheet.lastQuestionDate,
+    hasChallengeBeenFocusedOut: assessmentSheet.hasLastQuestionBeenFocusedOut(),
+    isCertificationEvaluation: true,
+    accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
+    forceOKAnswer,
+  });
+
+  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
+  answerSaved.levelup = {};
+  return answerSaved;
 }
 
 function checkIfAnswerIsAdmissible({ assessmentSheet, answer, userId }) {

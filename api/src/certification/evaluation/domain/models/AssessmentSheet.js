@@ -2,6 +2,7 @@ import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
 
 export const STATES = Assessment.states;
+export const STATES_OF_LAST_QUESTION = Assessment.statesOfLastQuestion;
 export class AssessmentSheet {
   constructor({
     certificationCourseId,
@@ -11,7 +12,9 @@ export class AssessmentSheet {
     abortReason,
     isRejectedForFraud,
     state,
+    lastQuestionState,
     updatedAt,
+    lastQuestionDate,
     answers,
   }) {
     this.certificationCourseId = certificationCourseId;
@@ -21,7 +24,9 @@ export class AssessmentSheet {
     this.abortReason = abortReason;
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
+    this.lastQuestionState = lastQuestionState;
     this.updatedAt = updatedAt;
+    this.lastQuestionDate = lastQuestionDate;
     this.answers = answers;
   }
 
@@ -54,5 +59,9 @@ export class AssessmentSheet {
 
   isChallengeExpectedToBeAnsweredNext(challengeId) {
     return Boolean(!this.lastChallengeId || this.lastChallengeId === challengeId);
+  }
+
+  hasLastQuestionBeenFocusedOut() {
+    return this.lastQuestionState === STATES_OF_LAST_QUESTION.FOCUSEDOUT;
   }
 }

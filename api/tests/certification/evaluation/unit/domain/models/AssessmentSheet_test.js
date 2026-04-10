@@ -3,6 +3,7 @@ import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet', function () {
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
+  const STATES_OF_LAST_QUESTION = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES_OF_LAST_QUESTION;
 
   context('#get isAbortReasonTechnical', function () {
     it('should return false when abort reason is null', function () {
@@ -199,5 +200,27 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
 
       expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.false;
     });
+  });
+
+  context('#hasLastQuestionBeenFocusedOut', function () {
+    it(`returns true when state of last question is ${STATES_OF_LAST_QUESTION.FOCUSEDOUT}`, function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        lastQuestionState: STATES_OF_LAST_QUESTION.FOCUSEDOUT,
+      });
+
+      expect(assessmentSheet.hasLastQuestionBeenFocusedOut()).to.be.true;
+    });
+
+    Object.values(STATES_OF_LAST_QUESTION)
+      .filter((lastQuestionState) => lastQuestionState !== STATES_OF_LAST_QUESTION.FOCUSEDOUT)
+      .forEach((lastQuestionState) => {
+        it(`return false when state of last question is ${lastQuestionState}`, async function () {
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            lastQuestionState,
+          });
+
+          expect(assessmentSheet.hasLastQuestionBeenFocusedOut()).to.be.false;
+        });
+      });
   });
 });

@@ -9,12 +9,13 @@ import {
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const { evaluateAndSaveAnswer } = usecases;
 
 describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate-and-save-answer', function () {
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
+  const STATES_OF_LAST_QUESTION = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES_OF_LAST_QUESTION;
 
   beforeEach(function () {
     databaseBuilder.factory.learningContent.buildSkill({
@@ -108,13 +109,16 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
         let assessmentId;
 
         beforeEach(function () {
-          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          const sessionId = databaseBuilder.factory.buildSession().id;
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId, sessionId }).id;
           assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId,
             userId,
             state: STATES.STARTED,
             lastChallengeId: 'myFavoriteChallengeId',
+            lastQuestionState: STATES_OF_LAST_QUESTION.ASKED,
           }).id;
+          databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
           return databaseBuilder.commit();
         });
 
@@ -167,6 +171,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
             currentAnswer = domainBuilder.buildAnswer({
               challengeId: 'myFavoriteChallengeId',
               value: 'The answer is 42',
+              assessmentId,
             });
             databaseBuilder.factory.buildAnswer({
               assessmentId,
@@ -194,14 +199,24 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
             });
           });
 
-          it('returns coucou', async function () {
-            const evaluatedAnswer = await evaluateAndSaveAnswer({
-              certificationCourseId,
-              userId,
-              answer: currentAnswer,
-            });
+          context('when there are no live alerts on the challenge', function () {
+            it('saves the corrected answer and returns it with no level up and no KE creation', async function () {
+              const evaluatedAnswer = await evaluateAndSaveAnswer({
+                certificationCourseId,
+                userId,
+                answer: currentAnswer,
+              });
 
-            expect(evaluatedAnswer).to.equal('coucou');
+              expect(evaluatedAnswer.assessmentId).to.equal(assessmentId);
+              expect(evaluatedAnswer.challengeId).to.equal('myFavoriteChallengeId');
+              expect(evaluatedAnswer.isFocusedOut).to.be.false;
+              expect(evaluatedAnswer.levelup).to.deep.equal({});
+              expect(evaluatedAnswer.isOk()).to.be.true;
+              const answerExistsInDB = await knex('answers').select('*').where({ id: evaluatedAnswer.id }).first();
+              expect(Boolean(answerExistsInDB)).to.be.true;
+              const keInDB = await knex('knowledge-elements').pluck('id');
+              expect(keInDB).to.have.length(0);
+            });
           });
         });
       });

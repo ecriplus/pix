@@ -10,6 +10,8 @@ export async function findByCertificationCourseId(certificationCourseId) {
       userId: 'certification-courses.userId',
       assessmentId: 'assessments.id',
       lastChallengeId: 'assessments.lastChallengeId',
+      lastQuestionDate: 'assessments.lastQuestionDate',
+      lastQuestionState: 'assessments.lastQuestionState',
       abortReason: 'certification-courses.abortReason',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       state: 'assessments.state',
