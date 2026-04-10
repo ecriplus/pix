@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.383.0](https://github.com/1024pix/pix/compare/v5.382.0...v5.383.0) (2026-04-10)
+
+### :rocket: Amélioration
+
+- [#15738](https://github.com/1024pix/pix/pull/15738) Ajouter la table organization_learner_filters (PIX-22220). 
+- [#15655](https://github.com/1024pix/pix/pull/15655) Ajouter un composant pour permettre à un utilisateur d'ajouter à son compte une connexion par email (PIX-21985) 
+- [#15796](https://github.com/1024pix/pix/pull/15796) Autoriser le scoring des certification Pix + Droit et Pro santé (PIX-22315) 
+- [#15652](https://github.com/1024pix/pix/pull/15652) Créer un script pour migrer les données des apprenants avec imports dans attributes (Pix-22015). 
+- [#15744](https://github.com/1024pix/pix/pull/15744) Insérer les configuration de filtres de l'organisation à l'insertion des learners en BDD (Pix-22222). 
+- [#15780](https://github.com/1024pix/pix/pull/15780) Récupération des organisations de niveau N-1 d'une organisation parent (PIX-22043) 
+- [#15760](https://github.com/1024pix/pix/pull/15760) Supprimer l'onglet Organisations filles sur la page d'une organisation 
+
+### :building_construction: Tech
+
+- [#15795](https://github.com/1024pix/pix/pull/15795) Ajouter un petit temps de pause entre chaque certification traitée dans le script de rescoring 
+- [#15791](https://github.com/1024pix/pix/pull/15791) Corriger le chargement des seeds 
+- [#15789](https://github.com/1024pix/pix/pull/15789) Suppression d'un script obsolète 
+- [#15807](https://github.com/1024pix/pix/pull/15807) Utilise un exécuteur sans infra pour les tests unitaires de la CI. 
+
+### :arrow_up: Montée de version
+
+- [#15781](https://github.com/1024pix/pix/pull/15781) Update dependency @1024pix/pix-ui to ^60.3.0 (certif)
+
 # [5.382.0](https://github.com/1024pix/pix/compare/v5.381.0...v5.382.0) (2026-04-09)
 
 ### :rocket: Amélioration
