@@ -6,13 +6,12 @@ import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
 import * as url from 'node:url';
 
-import { Assertion, AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
+import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import iconv from 'iconv-lite';
-import _ from 'lodash';
 import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
@@ -54,16 +53,17 @@ import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+// Init Dayjs configuration
 dayjs.extend(localizedFormat);
 
+// Extends Chai helpers
 chaiUse(chaiAsPromised);
 chaiUse(chaiSorted);
 chaiUse(sinonChai);
-
-_.each(customChaiHelpers, chaiUse);
-
 chaiUse(jobChai());
+Object.values(customChaiHelpers).forEach(chaiUse);
 
+// Init Database builders
 const databaseBuilder = await DatabaseBuilder.create({
   knex,
   beforeEmptyDatabase: () => {
@@ -83,8 +83,6 @@ databaseBuilder.factory.learningContent.injectNock(nock);
 nock.disableNetConnect();
 nock.enableNetConnect('localhost:9090');
 const EMPTY_BLANK_AND_NULL = ['', '\t \n', null];
-
-const { ROLES } = PIX_ADMIN;
 
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
@@ -249,7 +247,7 @@ async function insertUserWithRoleCertif() {
     lastName: 'Power',
     email: 'certif.power@example.net',
     password: 'Pix123',
-    role: ROLES.CERTIF,
+    role: PIX_ADMIN.ROLES.CERTIF,
   });
 
   await databaseBuilder.commit();
@@ -386,74 +384,11 @@ function catchErrSync(fn, ctx) {
   };
 }
 
-chaiUse(function () {
-  Assertion.addMethod('exactlyContain', function (expectedElements) {
-    const errorMessage = `expect [${this._obj}] to exactly contain [${expectedElements}]`;
-    new Assertion(this._obj, errorMessage).to.deep.have.members(expectedElements);
-  });
-});
-
-chaiUse(function () {
-  Assertion.addMethod('exactlyContainInOrder', function (expectedElements) {
-    const errorMessage = `expect [${this._obj}] to exactly contain in order [${expectedElements}]`;
-
-    new Assertion(this._obj, errorMessage).to.deep.equal(expectedElements);
-  });
-});
-
-chaiUse(function () {
-  Assertion.addMethod('equalWithGetter', function (expectedElement) {
-    if (Array.isArray(expectedElement)) {
-      expectedElement.forEach((element, index) => {
-        expect(this._obj[index]).equalWithGetter(element);
-      });
-    } else {
-      Object.keys(expectedElement).forEach((property) => {
-        if (Array.isArray(expectedElement[property])) {
-          expectedElement[property].forEach((subelement, index) => {
-            expect(this._obj[property][index]).equalWithGetter(subelement);
-          });
-        } else {
-          const errorMessage = `expect ${this._obj} with key ${property} to equal ${expectedElement[property]} (found ${this._obj[property]})`;
-          new Assertion(this._obj[property], errorMessage).to.deep.equal(expectedElement[property]);
-        }
-      });
-    }
-  });
-});
-
 async function mockLearningContent(learningContent) {
   const scope = databaseBuilder.factory.learningContent.build(learningContent);
   await databaseBuilder.commit();
   return scope;
 }
-
-// Inspired by what is done within chai project itself to test assertions
-// https://github.com/chaijs/chai/blob/main/test/bootstrap/index.js
-global.chaiErr = function globalErr(fn, val) {
-  if (chaiUtil.type(fn) !== 'Function') throw new AssertionError('Invalid fn');
-
-  try {
-    fn();
-  } catch (err) {
-    switch (chaiUtil.type(val).toLowerCase()) {
-      case 'undefined':
-        return;
-      case 'string':
-        return expect(err.message).to.equal(val);
-      case 'regexp':
-        return expect(err.message).to.match(val);
-      case 'object':
-        return Object.keys(val).forEach(function (key) {
-          expect(err).to.have.property(key).and.to.deep.equal(val[key]);
-        });
-    }
-
-    throw new AssertionError('Invalid val');
-  }
-
-  throw new AssertionError('Expected an error');
-};
 
 function mockAttestationStorage(attestation) {
   const template = fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
