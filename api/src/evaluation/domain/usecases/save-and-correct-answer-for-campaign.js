@@ -44,7 +44,7 @@ export async function saveAndCorrectAnswerForCampaign({
     answer,
     challengeSubmittedAt: assessment.lastQuestionDate,
     hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
-    isCertificationEvaluation: assessment.isCertification(),
+    isCertificationEvaluation: false,
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });

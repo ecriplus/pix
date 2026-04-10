@@ -25,8 +25,7 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
     answer,
     challengeSubmittedAt: assessment.lastQuestionDate,
     hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
-    isCertificationEvaluation: assessment.isCertification(),
-    assessment,
+    isCertificationEvaluation: false,
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });

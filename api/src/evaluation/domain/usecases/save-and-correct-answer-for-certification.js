@@ -56,7 +56,7 @@ export async function saveAndCorrectAnswerForCertification({
     answer,
     challengeSubmittedAt: assessment.lastQuestionDate,
     hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
-    isCertificationEvaluation: assessment.isCertification(),
+    isCertificationEvaluation: true,
     accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
     forceOKAnswer,
   });
