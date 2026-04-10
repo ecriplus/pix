@@ -5,7 +5,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertOrganizationUserWithRoleAdmin,
 } from '../../../../../tests/test-helper.js';
 
 describe('Acceptance | Team | Route | Admin | organization-invitation', function () {
@@ -78,7 +77,7 @@ describe('Acceptance | Team | Route | Admin | organization-invitation', function
       const server = await createServer();
 
       const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
-      const { organization } = await insertOrganizationUserWithRoleAdmin();
+      const organization = databaseBuilder.factory.buildOrganization();
       const invitation = databaseBuilder.factory.buildOrganizationInvitation({
         organizationId: organization.id,
         status: OrganizationInvitation.StatusType.PENDING,

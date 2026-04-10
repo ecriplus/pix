@@ -30,7 +30,6 @@ import { UserAccessToken } from '../src/identity-access-management/domain/models
 import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
-import { Membership } from '../src/shared/domain/models/Membership.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
 import { clearMutex, quitMutex } from '../src/shared/infrastructure/mutex/RedisMutex.js';
@@ -225,20 +224,6 @@ function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
 }
 
-async function insertOrganizationUserWithRoleAdmin() {
-  const adminUser = databaseBuilder.factory.buildUser();
-  const organization = databaseBuilder.factory.buildOrganization();
-  databaseBuilder.factory.buildMembership({
-    userId: adminUser.id,
-    organizationId: organization.id,
-    organizationRole: Membership.roles.ADMIN,
-  });
-
-  await databaseBuilder.commit();
-
-  return { adminUser, organization };
-}
-
 // We insert a multiple sending feature by default for each new organization created.
 // It is under feature for now because we want to be able to deactivate it when asked.
 async function insertMultipleSendingFeatureForNewOrganization() {
@@ -426,7 +411,6 @@ export {
   HttpTestServer,
   insertLearnerImportFeatureForNewOrganization,
   insertMultipleSendingFeatureForNewOrganization,
-  insertOrganizationUserWithRoleAdmin,
   insertPixJuniorFeatureForNewOrganization,
   knex,
   learningContentBuilder,
