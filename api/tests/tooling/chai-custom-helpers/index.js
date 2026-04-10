@@ -2,5 +2,6 @@ import { deepEqualArray } from './deep-equal-array.js';
 import { deepEqualInstance } from './deep-equal-instance.js';
 import { deepEqualInstanceOmitting } from './deep-equal-instance-omitting.js';
 import { exactlyContain } from './exactly-contain.js';
+import { exactlyContainInOrder } from './exactly-contain-in-order.js';
 
-export { deepEqualArray, deepEqualInstance, deepEqualInstanceOmitting, exactlyContain };
+export { deepEqualArray, deepEqualInstance, deepEqualInstanceOmitting, exactlyContain, exactlyContainInOrder };

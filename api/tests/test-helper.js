@@ -387,14 +387,6 @@ function catchErrSync(fn, ctx) {
 }
 
 chaiUse(function () {
-  Assertion.addMethod('exactlyContainInOrder', function (expectedElements) {
-    const errorMessage = `expect [${this._obj}] to exactly contain in order [${expectedElements}]`;
-
-    new Assertion(this._obj, errorMessage).to.deep.equal(expectedElements);
-  });
-});
-
-chaiUse(function () {
   Assertion.addMethod('equalWithGetter', function (expectedElement) {
     if (Array.isArray(expectedElement)) {
       expectedElement.forEach((element, index) => {
