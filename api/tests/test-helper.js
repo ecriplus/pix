@@ -6,7 +6,7 @@ import querystring from 'node:querystring';
 import { Readable } from 'node:stream';
 import * as url from 'node:url';
 
-import { AssertionError, expect, use as chaiUse, util as chaiUtil } from 'chai';
+import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
@@ -391,33 +391,6 @@ async function mockLearningContent(learningContent) {
   await databaseBuilder.commit();
   return scope;
 }
-
-// Inspired by what is done within chai project itself to test assertions
-// https://github.com/chaijs/chai/blob/main/test/bootstrap/index.js
-global.chaiErr = function globalErr(fn, val) {
-  if (chaiUtil.type(fn) !== 'Function') throw new AssertionError('Invalid fn');
-
-  try {
-    fn();
-  } catch (err) {
-    switch (chaiUtil.type(val).toLowerCase()) {
-      case 'undefined':
-        return;
-      case 'string':
-        return expect(err.message).to.equal(val);
-      case 'regexp':
-        return expect(err.message).to.match(val);
-      case 'object':
-        return Object.keys(val).forEach(function (key) {
-          expect(err).to.have.property(key).and.to.deep.equal(val[key]);
-        });
-    }
-
-    throw new AssertionError('Invalid val');
-  }
-
-  throw new AssertionError('Expected an error');
-};
 
 function mockAttestationStorage(attestation) {
   const template = fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
