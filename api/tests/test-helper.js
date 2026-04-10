@@ -12,7 +12,6 @@ import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import iconv from 'iconv-lite';
-import _ from 'lodash';
 import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
@@ -54,16 +53,17 @@ import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+// Init Dayjs configuration
 dayjs.extend(localizedFormat);
 
+// Extends Chai helpers
 chaiUse(chaiAsPromised);
 chaiUse(chaiSorted);
 chaiUse(sinonChai);
-
-_.each(customChaiHelpers, chaiUse);
-
 chaiUse(jobChai());
+Object.values(customChaiHelpers).forEach(chaiUse);
 
+// Init Database builders
 const databaseBuilder = await DatabaseBuilder.create({
   knex,
   beforeEmptyDatabase: () => {
@@ -83,8 +83,6 @@ databaseBuilder.factory.learningContent.injectNock(nock);
 nock.disableNetConnect();
 nock.enableNetConnect('localhost:9090');
 const EMPTY_BLANK_AND_NULL = ['', '\t \n', null];
-
-const { ROLES } = PIX_ADMIN;
 
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
@@ -249,7 +247,7 @@ async function insertUserWithRoleCertif() {
     lastName: 'Power',
     email: 'certif.power@example.net',
     password: 'Pix123',
-    role: ROLES.CERTIF,
+    role: PIX_ADMIN.ROLES.CERTIF,
   });
 
   await databaseBuilder.commit();
