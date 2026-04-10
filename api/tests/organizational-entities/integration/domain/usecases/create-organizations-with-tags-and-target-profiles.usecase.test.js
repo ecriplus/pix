@@ -16,13 +16,7 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  insertMultipleSendingFeatureForNewOrganization,
-  knex,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 const { omit } = lodash;
 
@@ -52,7 +46,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
     ondeImportFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
       name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
     });
-    byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
+    byDefaultFeatureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
 
     userId = databaseBuilder.factory.buildUser().id;
     await databaseBuilder.commit();

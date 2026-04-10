@@ -29,7 +29,6 @@ import { ApplicationAccessToken } from '../src/identity-access-management/domain
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
 import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
-import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
 import { clearMutex, quitMutex } from '../src/shared/infrastructure/mutex/RedisMutex.js';
@@ -224,14 +223,6 @@ function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
 }
 
-// We insert a multiple sending feature by default for each new organization created.
-// It is under feature for now because we want to be able to deactivate it when asked.
-async function insertMultipleSendingFeatureForNewOrganization() {
-  const feature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
-  await databaseBuilder.commit();
-  return feature.id;
-}
-
 // Hapi
 const hFake = {
   response(source) {
@@ -390,7 +381,6 @@ export {
   getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
-  insertMultipleSendingFeatureForNewOrganization,
   knex,
   learningContentBuilder,
   mockAttestationStorage,

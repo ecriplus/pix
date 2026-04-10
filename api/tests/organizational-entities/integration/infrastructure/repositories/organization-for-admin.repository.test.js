@@ -6,15 +6,7 @@ import { repositories } from '../../../../../src/organizational-entities/infrast
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  insertMultipleSendingFeatureForNewOrganization,
-  knex,
-  sinon,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | organization-for-admin', function () {
   let clock, byDefaultFeatureId, administrationTeam, organizationLearnerType, domainOrganizationLearnerType;
@@ -1270,7 +1262,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       databaseBuilder.factory.buildCertificationCpfCountry({
         code: 99100,
       });
-      await insertMultipleSendingFeatureForNewOrganization();
+      databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
 
       await databaseBuilder.commit();
 
@@ -1305,7 +1297,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       databaseBuilder.factory.buildCertificationCpfCountry({
         code: 99100,
       });
-      await insertMultipleSendingFeatureForNewOrganization();
+      databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
 
       await databaseBuilder.commit();
 
@@ -1343,7 +1335,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         // given
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
         databaseBuilder.factory.buildCertificationCpfCountry({ code: 99100 });
-        await insertMultipleSendingFeatureForNewOrganization();
+        databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
 
         const {
           network,
@@ -1391,7 +1383,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const organizationLearnerImportOndeFormat = databaseBuilder.factory.buildOrganizationLearnerImportFormat({
           name: 'ONDE',
         });
-        byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
+        byDefaultFeatureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
 
         await databaseBuilder.commit();
 
@@ -1407,9 +1399,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         const savedOrganization = await repositories.organizationForAdminRepository.save({ organization });
 
         const savedOrganizationFeatures = await knex('organization-features')
-          .where({
-            organizationId: savedOrganization.id,
-          })
+          .where({ organizationId: savedOrganization.id })
           .whereNot({ featureId: byDefaultFeatureId });
 
         expect(savedOrganizationFeatures).to.have.lengthOf(3);
@@ -1433,7 +1423,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
   describe('#update', function () {
     beforeEach(async function () {
-      byDefaultFeatureId = await insertMultipleSendingFeatureForNewOrganization();
+      byDefaultFeatureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT).id;
     });
 
     it('updates organization detail', async function () {

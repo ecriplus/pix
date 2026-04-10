@@ -6,20 +6,13 @@ import {
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  insertMultipleSendingFeatureForNewOrganization,
-  knex,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Domain | UseCases | update-organization', function () {
   let adminUserId;
   beforeEach(async function () {
     adminUserId = databaseBuilder.factory.buildUser().id;
-    await insertMultipleSendingFeatureForNewOrganization();
+    databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
   });
 
   it('updates organization information', async function () {

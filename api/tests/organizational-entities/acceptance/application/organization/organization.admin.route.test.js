@@ -10,7 +10,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertMultipleSendingFeatureForNewOrganization,
   knex,
 } from '../../../../test-helper.js';
 
@@ -23,7 +22,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
   beforeEach(async function () {
     superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
-    await insertMultipleSendingFeatureForNewOrganization();
+    databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
     await databaseBuilder.commit();
 
     server = await createServer();
