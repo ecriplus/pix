@@ -14,7 +14,6 @@ import {
   databaseBuilder,
   expect,
   insertMultipleSendingFeatureForNewOrganization,
-  insertPixJuniorFeatureForNewOrganization,
 } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-organization', function () {
@@ -243,7 +242,8 @@ describe('Integration | UseCases | create-organization', function () {
   describe('junior organization', function () {
     it('returns newly created organization', async function () {
       // given
-      await insertPixJuniorFeatureForNewOrganization();
+      databaseBuilder.factory.buildFeature.pixJuniorFeatures();
+      await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
         name: 'ACME',

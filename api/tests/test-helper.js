@@ -232,25 +232,6 @@ async function insertMultipleSendingFeatureForNewOrganization() {
   return feature.id;
 }
 
-async function insertLearnerImportFeatureForNewOrganization() {
-  const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT).id;
-  databaseBuilder.factory.buildOrganizationLearnerImportFormat({
-    name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
-  });
-  await databaseBuilder.commit();
-  return featureId;
-}
-
-async function insertPixJuniorFeatureForNewOrganization() {
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT);
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER);
-  databaseBuilder.factory.buildOrganizationLearnerImportFormat({
-    name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
-  });
-  await databaseBuilder.commit();
-}
-
 // Hapi
 const hFake = {
   response(source) {
@@ -409,9 +390,7 @@ export {
   getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
-  insertLearnerImportFeatureForNewOrganization,
   insertMultipleSendingFeatureForNewOrganization,
-  insertPixJuniorFeatureForNewOrganization,
   knex,
   learningContentBuilder,
   mockAttestationStorage,

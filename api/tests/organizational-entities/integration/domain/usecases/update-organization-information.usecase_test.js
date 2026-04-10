@@ -11,7 +11,6 @@ import {
   databaseBuilder,
   domainBuilder,
   expect,
-  insertLearnerImportFeatureForNewOrganization,
   insertMultipleSendingFeatureForNewOrganization,
   knex,
 } from '../../../../test-helper.js';
@@ -70,9 +69,8 @@ describe('Integration | Organizational Entities | Domain | UseCases | update-org
   context('features', function () {
     let organizationId;
     beforeEach(async function () {
-      await insertLearnerImportFeatureForNewOrganization();
+      databaseBuilder.factory.buildFeature.pixJuniorFeatures();
       organizationId = databaseBuilder.factory.buildOrganization().id;
-
       await databaseBuilder.commit();
     });
     context('Activating learner import format', function () {
