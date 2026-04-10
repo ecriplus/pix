@@ -127,7 +127,7 @@ const get = async function ({ organizationId }) {
       creatorFirstName: 'creators.firstName',
       creatorLastName: 'creators.lastName',
       identityProviderForCampaigns: 'organizations.identityProviderForCampaigns',
-      parentOrganizationId: 'organizations.parentOrganizationId',
+      parentOrganizationId: 'parentOrganizations.id',
       parentOrganizationName: 'parentOrganizations.name',
       administrationTeamId: 'organizations.administrationTeamId',
       administrationTeamName: 'administrationTeams.name',
@@ -152,8 +152,13 @@ const get = async function ({ organizationId }) {
       'dataProtectionOfficers.organizationId',
       'organizations.id',
     )
-    .leftJoin('organizations AS parentOrganizations', 'parentOrganizations.id', 'organizations.parentOrganizationId')
     .leftJoin('fct_structures', 'fct_structures.organization_id', 'organizations.id')
+    .leftJoin(
+      'fct_structures AS parentFctStructures',
+      'parentFctStructures.structure_id',
+      'fct_structures.parent_structure_id',
+    )
+    .leftJoin('organizations AS parentOrganizations', 'parentOrganizations.id', 'parentFctStructures.organization_id')
     .leftJoin('networks', 'networks.id', 'fct_structures.network_id')
     .leftJoin('fct_structures as headFctStructures', function () {
       this.on('headFctStructures.network_id', 'networks.id').andOnNull('headFctStructures.parent_structure_id');
