@@ -1,4 +1,5 @@
 import {
+  CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
   ForbiddenAccess,
   NotFoundError,
@@ -20,6 +21,9 @@ export async function evaluateAndSaveAnswer({
   }
   if (assessmentSheet.isEndedByInvigilator()) {
     throw new CertificationEndedByInvigilatorError();
+  }
+  if (assessmentSheet.hasBeenEndedDueToFinalization()) {
+    throw new CertificationEndedByFinalizationError();
   }
 
   return 'coucou';

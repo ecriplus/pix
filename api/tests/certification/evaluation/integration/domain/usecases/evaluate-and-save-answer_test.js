@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import {
+  CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
   ForbiddenAccess,
   NotFoundError,
@@ -65,6 +66,25 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           });
 
           expect(err).to.deepEqualInstance(new CertificationEndedByInvigilatorError());
+        });
+      });
+
+      context('when certification test has been ended by session finalization', function () {
+        it('throws a CertificationEndedByFinalizationError error', async function () {
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          databaseBuilder.factory.buildAssessment({
+            certificationCourseId,
+            userId,
+            state: STATES.ENDED_DUE_TO_FINALIZATION,
+          });
+          await databaseBuilder.commit();
+
+          const err = await catchErr(evaluateAndSaveAnswer)({
+            certificationCourseId,
+            userId,
+          });
+
+          expect(err).to.deepEqualInstance(new CertificationEndedByFinalizationError());
         });
       });
 

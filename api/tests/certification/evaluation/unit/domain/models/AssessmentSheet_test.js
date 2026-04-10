@@ -126,4 +126,26 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         });
       });
   });
+
+  context('#hasBeenEndedDueToFinalization', function () {
+    it(`returns true when state is ${STATES.ENDED_DUE_TO_FINALIZATION}`, function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        state: STATES.ENDED_DUE_TO_FINALIZATION,
+      });
+
+      expect(assessmentSheet.hasBeenEndedDueToFinalization()).to.be.true;
+    });
+
+    Object.values(STATES)
+      .filter((state) => state !== STATES.ENDED_DUE_TO_FINALIZATION)
+      .forEach((state) => {
+        it(`return false when state is ${state}`, async function () {
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            state,
+          });
+
+          expect(assessmentSheet.hasBeenEndedDueToFinalization()).to.be.false;
+        });
+      });
+  });
 });

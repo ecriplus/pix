@@ -41,4 +41,8 @@ export class AssessmentSheet {
   isEndedByInvigilator() {
     return this.state === STATES.ENDED_BY_INVIGILATOR;
   }
+
+  hasBeenEndedDueToFinalization() {
+    return this.state === STATES.ENDED_DUE_TO_FINALIZATION;
+  }
 }

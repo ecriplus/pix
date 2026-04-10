@@ -108,6 +108,7 @@ class Assessment {
     return this.state === Assessment.states.ENDED_BY_INVIGILATOR;
   }
 
+  // todo delete me
   hasBeenEndedDueToFinalization() {
     return this.state === Assessment.states.ENDED_DUE_TO_FINALIZATION;
   }
