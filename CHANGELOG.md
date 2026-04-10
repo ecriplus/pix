@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.384.0](https://github.com/1024pix/pix/compare/v5.383.0...v5.384.0) (2026-04-10)
+
+### :rocket: Amélioration
+
+- [#15787](https://github.com/1024pix/pix/pull/15787) Ajoute une colonne "label" à la table attestations et la remplit (PIX-22280) 
+- [#15799](https://github.com/1024pix/pix/pull/15799) Cocher automatiquement le blocage lorsqu'on coche la gestion des places (PIX-22163) 
+- [#15792](https://github.com/1024pix/pix/pull/15792) Récupération des informations de l'organisation parente via le reseau (PIX-22115) 
+
+### :building_construction: Tech
+
+- [#15794](https://github.com/1024pix/pix/pull/15794) Ne plus remonter de 500 lors d'une réponse à un assessment sur une participation supprimée (PIX-22314).
+
 # [5.383.0](https://github.com/1024pix/pix/compare/v5.382.0...v5.383.0) (2026-04-10)
 
 ### :rocket: Amélioration
