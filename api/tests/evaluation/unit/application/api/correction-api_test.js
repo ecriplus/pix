@@ -1,9 +1,20 @@
 import * as correctionApi from '../../../../../src/evaluation/application/api/correction-api.js';
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
 
 describe('Evaluation | Unit | Application | API | correction-api', function () {
   describe('#correctAnswer', function () {
+    const now = new Date('2025-06-15T12:00:00Z');
+    let clock;
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(function () {
+      clock.restore();
+    });
+
     it('corrects the answer and return the corrected versions of the answer', async function () {
       // given
       const challenge = domainBuilder.buildChallenge();
@@ -13,16 +24,18 @@ describe('Evaluation | Unit | Application | API | correction-api', function () {
       const accessibilityAdjustmentNeeded = false;
 
       // when
-      const a = correctionApi.correctAnswer({
+      const correctedAnswer = correctionApi.correctAnswer({
         challenge,
         answer,
+        challengeSubmittedAt: new Date('2025-06-15T11:30:00Z'),
         hasChallengeBeenFocusedOut,
         isCertificationEvaluation,
         accessibilityAdjustmentNeeded,
       });
 
       // then
-      expect(a).to.be.an.instanceOf(Answer);
+      expect(correctedAnswer).to.be.an.instanceOf(Answer);
+      expect(correctedAnswer.timeSpent).to.equal(1800); // 30 minutes
     });
   });
 });

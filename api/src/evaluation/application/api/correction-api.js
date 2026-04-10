@@ -7,6 +7,7 @@ import * as correctionService from '../../domain/services/correction-service.js'
  * @param {Object} params
  * @param {Challenge} params.challenge
  * @param {Answer} params.answer
+ * @param {boolean} params.challengeSubmittedAt
  * @param {boolean} params.hasChallengeBeenFocusedOut
  * @param {boolean} params.isCertificationEvaluation
  * @param {boolean} [params.accessibilityAdjustmentNeeded=false]
@@ -17,6 +18,7 @@ export function correctAnswer({
   challenge,
   answer,
   hasChallengeBeenFocusedOut,
+  challengeSubmittedAt,
   isCertificationEvaluation,
   accessibilityAdjustmentNeeded = false,
   forceOKAnswer = false,
@@ -24,6 +26,7 @@ export function correctAnswer({
   return correctionService.evaluateAnswer({
     challenge,
     answer,
+    challengeSubmittedAt,
     hasChallengeBeenFocusedOut,
     isCertificationEvaluation,
     accessibilityAdjustmentNeeded,
