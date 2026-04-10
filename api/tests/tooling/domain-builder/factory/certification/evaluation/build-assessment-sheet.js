@@ -1,5 +1,7 @@
-import { AssessmentSheet } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSheet.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import {
+  AssessmentSheet,
+  STATES,
+} from '../../../../../../src/certification/evaluation/domain/models/AssessmentSheet.js';
 
 export const buildAssessmentSheet = function ({
   certificationCourseId = 1,
@@ -7,7 +9,7 @@ export const buildAssessmentSheet = function ({
   userId = 3,
   abortReason = null,
   isRejectedForFraud = false,
-  state = Assessment.states.COMPLETED,
+  state = STATES.COMPLETED,
   updatedAt = new Date(),
   answers = [],
 } = {}) {
@@ -22,3 +24,5 @@ export const buildAssessmentSheet = function ({
     answers,
   });
 };
+
+buildAssessmentSheet.STATES = STATES;

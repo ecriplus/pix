@@ -1,4 +1,8 @@
-import { ForbiddenAccess, NotFoundError } from '../../../../shared/domain/errors.js';
+import {
+  CertificationEndedByInvigilatorError,
+  ForbiddenAccess,
+  NotFoundError,
+} from '../../../../shared/domain/errors.js';
 
 export async function evaluateAndSaveAnswer({
   answer,
@@ -13,6 +17,9 @@ export async function evaluateAndSaveAnswer({
   }
   if (assessmentSheet.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this certification test.');
+  }
+  if (assessmentSheet.isEndedByInvigilator()) {
+    throw new CertificationEndedByInvigilatorError();
   }
 
   return 'coucou';

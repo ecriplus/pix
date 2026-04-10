@@ -1,9 +1,10 @@
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/constants/abort-reasons.js';
-import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
-describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet', function () {
-  context('get isAbortReasonTechnical', function () {
+describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet', function () {
+  const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
+
+  context('#get isAbortReasonTechnical', function () {
     it('should return false when abort reason is null', function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         abortReason: null,
@@ -24,7 +25,7 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
     });
   });
 
-  context('complete', function () {
+  context('#complete', function () {
     let clock, assessmentSheetBaseData;
     const now = new Date();
 
@@ -43,10 +44,10 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
       clock.restore();
     });
 
-    it(`should update state and updatedAt when assessment sheet is in state ${Assessment.states.STARTED}`, function () {
+    it(`should update state and updatedAt when assessment sheet is in state ${STATES.STARTED}`, function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         ...assessmentSheetBaseData,
-        state: Assessment.states.STARTED,
+        state: STATES.STARTED,
         updatedAt: new Date('2021-10-29'),
       });
       assessmentSheet.complete();
@@ -54,14 +55,14 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
       expect(assessmentSheet).to.deepEqualInstance(
         domainBuilder.certification.evaluation.buildAssessmentSheet({
           ...assessmentSheetBaseData,
-          state: Assessment.states.COMPLETED,
+          state: STATES.COMPLETED,
           updatedAt: now,
         }),
       );
     });
 
-    Object.values(Assessment.states)
-      .filter((state) => state !== Assessment.states.STARTED)
+    Object.values(STATES)
+      .filter((state) => state !== STATES.STARTED)
       .forEach((state) => {
         it(`should do nothing state is ${state}`, async function () {
           const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
@@ -82,17 +83,17 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
       });
   });
 
-  context('get isStarted', function () {
-    it(`returns true when state is ${Assessment.states.STARTED}`, function () {
+  context('#get isStarted', function () {
+    it(`returns true when state is ${STATES.STARTED}`, function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
-        state: Assessment.states.STARTED,
+        state: STATES.STARTED,
       });
 
       expect(assessmentSheet.isStarted).to.be.true;
     });
 
-    Object.values(Assessment.states)
-      .filter((state) => state !== Assessment.states.STARTED)
+    Object.values(STATES)
+      .filter((state) => state !== STATES.STARTED)
       .forEach((state) => {
         it(`return false when state is ${state}`, async function () {
           const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
@@ -100,6 +101,28 @@ describe('Unit | Certification | Evaluation | Domain | Models | AssessmentSheet'
           });
 
           expect(assessmentSheet.isStarted).to.be.false;
+        });
+      });
+  });
+
+  context('#isEndedByInvigilator', function () {
+    it(`returns true when state is ${STATES.ENDED_BY_INVIGILATOR}`, function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        state: STATES.ENDED_BY_INVIGILATOR,
+      });
+
+      expect(assessmentSheet.isEndedByInvigilator()).to.be.true;
+    });
+
+    Object.values(STATES)
+      .filter((state) => state !== STATES.ENDED_BY_INVIGILATOR)
+      .forEach((state) => {
+        it(`return false when state is ${state}`, async function () {
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            state,
+          });
+
+          expect(assessmentSheet.isEndedByInvigilator()).to.be.false;
         });
       });
   });

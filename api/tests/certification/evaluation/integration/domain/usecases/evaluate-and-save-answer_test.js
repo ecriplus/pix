@@ -1,10 +1,16 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
-import { ForbiddenAccess, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import {
+  CertificationEndedByInvigilatorError,
+  ForbiddenAccess,
+  NotFoundError,
+} from '../../../../../../src/shared/domain/errors.js';
+import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 
 const { evaluateAndSaveAnswer } = usecases;
 
 describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate-and-save-answer', function () {
+  const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
+
   context('when certification does not exist', function () {
     it('throws a NotFound error', async function () {
       const err = await catchErr(evaluateAndSaveAnswer)({
@@ -40,18 +46,43 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
       beforeEach(function () {
         userId = databaseBuilder.factory.buildUser().id;
-        certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
-        databaseBuilder.factory.buildAssessment({ certificationCourseId, userId });
         return databaseBuilder.commit();
       });
 
-      it('returns coucou', async function () {
-        const evaluatedAnswer = await evaluateAndSaveAnswer({
-          certificationCourseId,
-          userId,
+      context('when certification test has been ended by the invigilator', function () {
+        it('throws a CertificationEndedByInvigilatorError error', async function () {
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          databaseBuilder.factory.buildAssessment({
+            certificationCourseId,
+            userId,
+            state: STATES.ENDED_BY_INVIGILATOR,
+          });
+          await databaseBuilder.commit();
+
+          const err = await catchErr(evaluateAndSaveAnswer)({
+            certificationCourseId,
+            userId,
+          });
+
+          expect(err).to.deepEqualInstance(new CertificationEndedByInvigilatorError());
+        });
+      });
+
+      context('when certification test is still ongoing', function () {
+        beforeEach(function () {
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          databaseBuilder.factory.buildAssessment({ certificationCourseId, userId, state: STATES.STARTED });
+          return databaseBuilder.commit();
         });
 
-        expect(evaluatedAnswer).to.equal('coucou');
+        it('returns coucou', async function () {
+          const evaluatedAnswer = await evaluateAndSaveAnswer({
+            certificationCourseId,
+            userId,
+          });
+
+          expect(evaluatedAnswer).to.equal('coucou');
+        });
       });
     });
   });

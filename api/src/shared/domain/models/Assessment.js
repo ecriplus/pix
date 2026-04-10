@@ -103,6 +103,7 @@ class Assessment {
     return this.state === Assessment.states.STARTED;
   }
 
+  // todo delete me
   isEndedByInvigilator() {
     return this.state === Assessment.states.ENDED_BY_INVIGILATOR;
   }

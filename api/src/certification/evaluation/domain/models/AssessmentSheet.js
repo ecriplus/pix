@@ -1,6 +1,7 @@
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
 import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js';
 
+export const STATES = Assessment.states;
 export class AssessmentSheet {
   constructor({
     certificationCourseId,
@@ -27,13 +28,17 @@ export class AssessmentSheet {
   }
 
   get isStarted() {
-    return this.state === Assessment.states.STARTED;
+    return this.state === STATES.STARTED;
   }
 
   complete() {
-    if (this.state === Assessment.states.STARTED) {
-      this.state = Assessment.states.COMPLETED;
+    if (this.state === STATES.STARTED) {
+      this.state = STATES.COMPLETED;
       this.updatedAt = new Date();
     }
+  }
+
+  isEndedByInvigilator() {
+    return this.state === STATES.ENDED_BY_INVIGILATOR;
   }
 }
