@@ -85,4 +85,10 @@ export class AssessmentSheet {
   hasLastQuestionBeenFocusedOut() {
     return this.lastQuestionState === STATES_OF_LAST_QUESTION.FOCUSEDOUT;
   }
+
+  refreshLastAnswerTimestamp() {
+    const now = new Date();
+    this.lastAnswerAt = now;
+    this.certificationCourseUpdatedAt = now;
+  }
 }

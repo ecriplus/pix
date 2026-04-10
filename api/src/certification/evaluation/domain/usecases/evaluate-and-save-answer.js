@@ -1,4 +1,5 @@
 import { EmptyAnswerError } from '../../../../evaluation/domain/errors.js';
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
@@ -50,9 +51,14 @@ export async function evaluateAndSaveAnswer({
     forceOKAnswer,
   });
 
-  const answerSaved = await answerRepository.save({ answer: correctedAnswer });
-  answerSaved.levelup = {};
-  return answerSaved;
+  return DomainTransaction.execute(async () => {
+    const answerSaved = await answerRepository.save({ answer: correctedAnswer });
+    assessmentSheet.refreshLastAnswerTimestamp();
+    await assessmentSheetRepository.update(assessmentSheet);
+
+    answerSaved.levelup = {};
+    return answerSaved;
+  });
 }
 
 function checkIfAnswerIsAdmissible({ assessmentSheet, answer, userId }) {

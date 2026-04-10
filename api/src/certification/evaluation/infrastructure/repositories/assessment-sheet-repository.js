@@ -41,5 +41,11 @@ export async function update(assessmentSheet) {
       updatedAt: assessmentSheet.assessmentUpdatedAt,
       state: assessmentSheet.state,
     })
-    .where('assessments.id', '=', assessmentSheet.assessmentId);
+    .where({ id: assessmentSheet.assessmentId });
+  await knexConn('certification-courses')
+    .update({
+      updatedAt: assessmentSheet.certificationCourseUpdatedAt,
+      lastAnswerAt: assessmentSheet.lastAnswerAt,
+    })
+    .where({ id: assessmentSheet.certificationCourseId });
 }

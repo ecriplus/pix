@@ -223,4 +223,63 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         });
       });
   });
+
+  context('#refreshLastAnswerTimestamp', function () {
+    let clock, assessmentSheetBaseData;
+    const now = new Date();
+
+    beforeEach(function () {
+      assessmentSheetBaseData = {
+        certificationCourseId: 123,
+        assessmentId: 456,
+        abortReason: 'candidate',
+        isRejectedForFraud: true,
+        answers: [domainBuilder.buildAnswer()],
+        assessmentUpdatedAt: new Date('2022-01-01'),
+      };
+      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    });
+
+    afterEach(async function () {
+      clock.restore();
+    });
+
+    it('should update lastAnswerAt and certificationCourseUpdatedAt ', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        ...assessmentSheetBaseData,
+        lastAnswerAt: new Date('2023-03-03'),
+        certificationCourseUpdatedAt: new Date('2024-04-04'),
+      });
+      assessmentSheet.refreshLastAnswerTimestamp();
+
+      expect(assessmentSheet).to.deepEqualInstance(
+        domainBuilder.certification.evaluation.buildAssessmentSheet({
+          ...assessmentSheetBaseData,
+          lastAnswerAt: now,
+          certificationCourseUpdatedAt: now,
+        }),
+      );
+    });
+
+    Object.values(STATES)
+      .filter((state) => state !== STATES.STARTED)
+      .forEach((state) => {
+        it(`should do nothing state is ${state}`, async function () {
+          const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+            ...assessmentSheetBaseData,
+            state,
+            assessmentUpdatedAt: new Date('2021-10-29'),
+          });
+          assessmentSheet.complete();
+
+          expect(assessmentSheet).to.deepEqualInstance(
+            domainBuilder.certification.evaluation.buildAssessmentSheet({
+              ...assessmentSheetBaseData,
+              state,
+              assessmentUpdatedAt: new Date('2021-10-29'),
+            }),
+          );
+        });
+      });
+  });
 });
