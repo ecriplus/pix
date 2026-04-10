@@ -695,10 +695,12 @@
               "type": "element",
               "element": {
                 "id": "527242b1-5ea3-47a5-aa34-d41ef32b6579",
-                "type": "custom-draft",
+                "type": "embed",
+                "isCompletionRequired": false,
                 "title": "Défi recupération de mot de passe",
-                "url": "https://1024pix.github.io/atelier-contenus/MCU/recupmdp3.html",
+                "url": " https://epreuves.pix.fr/fr/mdp-reinitialisation/example.html",
                 "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter.</p>",
+                "solution": "",
                 "height": 550
               }
             },
@@ -707,8 +709,17 @@
               "element": {
                 "id": "31145843-8bba-4fcc-b89d-a627ff59fefa",
                 "type": "expand",
-                "title": "🗝️ Indice",
-                "content": "<p>L’adresse email de Lola est&nbsp;: lolalastar@pixmail.fr</p>"
+                "title": "🗝️ Indice 1",
+                "content": "<p>Le nouveau mot de passe choisi par Lola est : L2osémcpqjg!</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "37044081-9fd8-4933-a7ee-473e909ecaaa",
+                "type": "expand",
+                "title": "🗝️ Indice 2",
+                "content": ""
               }
             },
             {
