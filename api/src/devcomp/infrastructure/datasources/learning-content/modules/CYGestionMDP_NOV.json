@@ -23,7 +23,7 @@
       "grains": [
         {
           "id": "990ebc2c-a73e-409d-bcd5-d854bd5c927a",
-          "type": "short-lesson",
+          "type": "discovery",
           "title": "Accroche",
           "components": [
             {
@@ -365,7 +365,6 @@
                 "title": "récupération de mot de passe #3",
                 "url": "https://epreuves.pix.fr/fr/mdp-oublie/modulix-gestionmdpnov.html",
                 "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte</p>",
-                "solution": "",
                 "height": 550
               }
             },
