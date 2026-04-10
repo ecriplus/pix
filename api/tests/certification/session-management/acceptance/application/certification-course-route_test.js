@@ -8,7 +8,6 @@ import {
   domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
 import { createSuccessfulCertificationCourse } from '../../../shared/fixtures/certification-course.js';
@@ -44,7 +43,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       beforeEach(async function () {
         server = await createServer();
-        await insertUserWithRoleSuperAdmin();
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
 
         databaseBuilder.factory.buildCertificationVersion({
           scope: 'CORE',
@@ -84,7 +83,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         });
 
         options = {
-          headers: generateAuthenticatedUserRequestHeaders(),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           method: 'PATCH',
           url: `/api/admin/certification-courses/${certificationCourseId}`,
           payload: {
@@ -151,7 +150,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     describe('when certification is V2', function () {
       it('should create a new rejected AssessmentResult', async function () {
         // given
-        const userId = (await insertUserWithRoleSuperAdmin()).id;
+        const userId = databaseBuilder.factory.buildUser.withRoleSuperAdmin().id;
 
         const session = databaseBuilder.factory.buildSession({
           finalizedAt: new Date('2018-12-01T01:02:03Z'),
@@ -203,7 +202,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     describe('when certification is V3', function () {
       it('should create a new rejected AssessmentResult', async function () {
         // given
-        const userId = (await insertUserWithRoleSuperAdmin()).id;
+        const userId = databaseBuilder.factory.buildUser.withRoleSuperAdmin().id;
 
         const session = databaseBuilder.factory.buildSession({
           finalizedAt: new Date('2018-12-01T01:02:03Z'),
@@ -266,7 +265,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
   describe('PATCH /api/admin/certification-courses/{certificationCourseId}/unreject', function () {
     it('should create a new unrejected AssessmentResult', async function () {
       // given
-      const userId = (await insertUserWithRoleSuperAdmin()).id;
+      const userId = databaseBuilder.factory.buildUser.withRoleSuperAdmin().id;
 
       const session = databaseBuilder.factory.buildSession({
         finalizedAt: new Date('2018-12-01T01:02:03Z'),
@@ -340,13 +339,15 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         certificationCourseId,
         lastAssessmentResultId: assessmentResultId,
       });
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+      await databaseBuilder.commit();
 
       server = await createServer();
 
       options = {
         method: 'POST',
         url: `/api/admin/certification-courses/${certificationCourseId}/assessment-results`,
-        headers: generateAuthenticatedUserRequestHeaders(),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             attributes: {
@@ -355,7 +356,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           },
         },
       };
-      return insertUserWithRoleSuperAdmin();
     });
 
     it('should respond with a 403 - forbidden access - if user has not role Super Admin', async function () {
@@ -401,16 +401,16 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         }),
       });
 
-      const user = await insertUserWithRoleSuperAdmin();
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
       const session = databaseBuilder.factory.buildSession();
       certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         version: 3,
         sessionId: session.id,
-        userId: user.id,
+        userId: superAdmin.id,
       });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
         sessionId: session.id,
-        userId: user.id,
+        userId: superAdmin.id,
         certificationCourse,
       }));
       await databaseBuilder.commit();
@@ -420,7 +420,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       options = {
         method: 'GET',
         url: `/api/admin/certification-courses-v3/${certificationCourse.id}/details`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
     });
 
@@ -509,6 +509,8 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         eduV3ExternalJuryResult: null,
         commentByJury: null,
       });
+
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
       await databaseBuilder.commit();
 
       server = await createServer();
@@ -516,7 +518,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
       options = {
         method: 'POST',
         url: `/api/admin/certification-courses/${certificationCourseFromDB.id}/edu-v3-external-jury-result`,
-        headers: generateAuthenticatedUserRequestHeaders(),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         payload: {
           data: {
             attributes: {
@@ -525,7 +527,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           },
         },
       };
-      return insertUserWithRoleSuperAdmin();
     });
 
     it('should save edu v3 external jury result in database and return the refreshed certification', async function () {

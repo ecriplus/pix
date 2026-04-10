@@ -7,7 +7,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../test-helper.js';
 import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
@@ -20,7 +19,9 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       // given
       server = await createServer();
 
-      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+      await databaseBuilder.commit();
+
       const payload = [
         {
           application: 'orga',
@@ -83,7 +84,9 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
       await createMockedTestOidcProviders([{ application: 'admin', applicationTld: '.fr' }]);
       server = await createServer();
 
-      const superAdmin = await insertUserWithRoleSuperAdmin();
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+      await databaseBuilder.commit();
+
       const options = {
         method: 'GET',
         url: '/api/admin/oidc/identity-providers',
@@ -133,7 +136,9 @@ describe('Acceptance | Identity Access Management | Route | Admin | oidc-provide
         ]);
         server = await createServer();
 
-        const superAdmin = await insertUserWithRoleSuperAdmin();
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+        await databaseBuilder.commit();
+
         const options = {
           method: 'GET',
           url: '/api/admin/oidc/identity-providers',

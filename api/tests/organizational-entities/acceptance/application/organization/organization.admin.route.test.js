@@ -11,7 +11,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   insertMultipleSendingFeatureForNewOrganization,
-  insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
 
@@ -23,7 +22,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
   let server;
 
   beforeEach(async function () {
-    superAdmin = await insertUserWithRoleSuperAdmin();
+    superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
     await insertMultipleSendingFeatureForNewOrganization();
     await databaseBuilder.commit();
 
@@ -414,7 +413,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'POST',
         url: '/api/admin/organizations',
         payload,
-        headers: generateAuthenticatedUserRequestHeaders(),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
     });
 
@@ -894,7 +893,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'PATCH',
         url: `/api/admin/organizations/${organization.id}`,
         payload,
-        headers: generateAuthenticatedUserRequestHeaders(),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       // when
@@ -1565,7 +1564,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const options = {
         method: 'GET',
         url: `/api/admin/organizations/${organizationId}/places-statistics`,
-        headers: generateAuthenticatedUserRequestHeaders({ superAdmin }),
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 
       // when
