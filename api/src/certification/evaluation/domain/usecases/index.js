@@ -34,6 +34,7 @@ import pickChallengeService from '../services/pick-challenge-service.js';
 import { completeCertificationAssessment } from './complete-certification-assessment.js';
 import { createCompanionAlert } from './create-companion-alert.js';
 import { deneutralizeChallenge } from './deneutralize-challenge.js';
+import { evaluateAndSaveAnswer } from './evaluate-and-save-answer.js';
 import { getCertificationCourse } from './get-certification-course.js';
 import { getNextChallenge } from './get-next-challenge.js';
 import { neutralizeChallenge } from './neutralize-challenge.js';
@@ -121,6 +122,7 @@ const usecasesWithoutInjectedDependencies = {
   saveCompetenceForScoringConfiguration,
   simulateCapacityFromScore,
   simulateScoreFromCapacity,
+  evaluateAndSaveAnswer,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 
