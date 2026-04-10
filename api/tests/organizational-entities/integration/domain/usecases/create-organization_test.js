@@ -2,7 +2,6 @@ import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
   OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { Organization } from '../../../../../src/organizational-entities/domain/models/Organization.js';
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
@@ -82,52 +81,6 @@ describe('Integration | UseCases | create-organization', function () {
 
           // then
           expect(error).to.deep.equal(new NotFoundError('Not found organization for ID 9999'));
-        });
-      });
-
-      describe('when parent organization is a child organization', function () {
-        it('throws UnableToAttachChildOrganizationToParentOrganizationError', async function () {
-          // given
-          const {
-            network,
-            structure: grandParentStructure,
-            organization: grandParentOrg,
-          } = databaseBuilder.factory.buildNetworkAndHeadOrganization();
-          const { organization: childOrg } = databaseBuilder.factory.buildOrganizationInNetwork({
-            networkId: network.id,
-            parentStructureId: grandParentStructure.id,
-            organizationData: { id: 2000, name: 'Parent Org', type: Organization.types.SCO1D },
-          });
-
-          const parentOrganizationId = grandParentOrg.id;
-          const childOrganizationId = childOrg.id;
-
-          await databaseBuilder.commit();
-
-          const organization = new OrganizationForAdmin({
-            name: 'ACME',
-            type: 'PRO',
-            documentationUrl: 'https://pix.fr',
-            createdBy: superAdminUserId,
-            administrationTeamId: 1234,
-            parentOrganizationId: childOrganizationId,
-            countryCode: 99100,
-          });
-
-          // when
-          const error = await catchErr(usecases.createOrganization)({ organization });
-
-          // then
-          expect(error).to.deep.equal(
-            new UnableToAttachChildOrganizationToParentOrganizationError({
-              code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-              message: 'Unable to attach child organization to parent organization which is also a child organization',
-              meta: {
-                grandParentOrganizationId: parentOrganizationId,
-                parentOrganizationId: childOrganizationId,
-              },
-            }),
-          );
         });
       });
     });
