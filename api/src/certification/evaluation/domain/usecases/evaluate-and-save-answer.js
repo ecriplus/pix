@@ -14,11 +14,30 @@ export async function evaluateAndSaveAnswer({
   certificationCourseId,
   forceOKAnswer,
   assessmentSheetRepository,
+  certificationChallengeLiveAlertRepository,
+  sharedChallengeRepository,
 }) {
   const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
   if (!assessmentSheet) {
     throw new NotFoundError(`No certification test found with id ${certificationCourseId}`);
   }
+  checkIfAnswerIsAdmissible({ assessmentSheet, answer, userId });
+
+  const challenge = await sharedChallengeRepository.get(answer.challengeId);
+  const ongoingOrValidatedCertificationChallengeLiveAlert =
+    await certificationChallengeLiveAlertRepository.getOngoingOrValidatedByChallengeIdAndAssessmentId({
+      challengeId: challenge.id,
+      assessmentId: assessmentSheet.assessmentId,
+    });
+
+  if (ongoingOrValidatedCertificationChallengeLiveAlert) {
+    throw new ForbiddenAccess('An alert has been set.');
+  }
+
+  return 'coucou';
+}
+
+function checkIfAnswerIsAdmissible({ assessmentSheet, answer, userId }) {
   if (assessmentSheet.userId !== userId) {
     throw new ForbiddenAccess('User is not allowed to add an answer for this certification test.');
   }
@@ -37,6 +56,4 @@ export async function evaluateAndSaveAnswer({
   if (!answer.hasValue && !answer.hasTimedOut) {
     throw new EmptyAnswerError();
   }
-
-  return 'coucou';
 }

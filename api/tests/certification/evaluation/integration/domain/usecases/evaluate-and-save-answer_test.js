@@ -1,4 +1,5 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { EmptyAnswerError } from '../../../../../../src/evaluation/domain/errors.js';
 import {
   CertificationEndedByFinalizationError,
@@ -14,6 +15,18 @@ const { evaluateAndSaveAnswer } = usecases;
 
 describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate-and-save-answer', function () {
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
+
+  beforeEach(function () {
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: 'someSkillId',
+    });
+    databaseBuilder.factory.learningContent.buildChallenge({
+      id: 'myFavoriteChallengeId',
+      solution: 'The answer is 42',
+      skillId: 'someSkillId',
+    });
+    return databaseBuilder.commit();
+  });
 
   context('when certification does not exist', function () {
     it('throws a NotFound error', async function () {
@@ -147,24 +160,49 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           });
         });
 
-        it('returns coucou', async function () {
-          databaseBuilder.factory.buildAnswer({
-            assessmentId,
-            challengeId: 'someOtherChallengeId',
-          });
-          await databaseBuilder.commit();
-          const currentAnswer = domainBuilder.buildAnswer({
-            challengeId: 'myFavoriteChallengeId',
-            value: 'The answer is 42',
+        context('when answer is admissible', function () {
+          let currentAnswer;
+
+          beforeEach(function () {
+            currentAnswer = domainBuilder.buildAnswer({
+              challengeId: 'myFavoriteChallengeId',
+              value: 'The answer is 42',
+            });
+            databaseBuilder.factory.buildAnswer({
+              assessmentId,
+              challengeId: 'someOtherChallengeId',
+            });
+            return databaseBuilder.commit();
           });
 
-          const evaluatedAnswer = await evaluateAndSaveAnswer({
-            certificationCourseId,
-            userId,
-            answer: currentAnswer,
+          context('when there is a live alert on the answered challenge', function () {
+            it('throws a ForbiddenAccess error', async function () {
+              databaseBuilder.factory.buildCertificationChallengeLiveAlert({
+                status: CertificationChallengeLiveAlertStatus.VALIDATED,
+                assessmentId,
+                challengeId: 'myFavoriteChallengeId',
+              });
+              await databaseBuilder.commit();
+
+              const err = await catchErr(evaluateAndSaveAnswer)({
+                certificationCourseId,
+                userId,
+                answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId' }),
+              });
+
+              expect(err).to.deepEqualInstance(new ForbiddenAccess('An alert has been set.'));
+            });
           });
 
-          expect(evaluatedAnswer).to.equal('coucou');
+          it('returns coucou', async function () {
+            const evaluatedAnswer = await evaluateAndSaveAnswer({
+              certificationCourseId,
+              userId,
+              answer: currentAnswer,
+            });
+
+            expect(evaluatedAnswer).to.equal('coucou');
+          });
         });
       });
     });
