@@ -698,7 +698,7 @@
                 "isCompletionRequired": false,
                 "title": "Défi recupération de mot de passe",
                 "url": " https://epreuves.pix.fr/fr/mdp-reinitialisation/example.html",
-                "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter.</p>",
+                "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter. <br>Son nouveau mot de passe sera : L2osémcpqjg!</p>",
                 "solution": "",
                 "height": 550
               }
@@ -708,8 +708,8 @@
               "element": {
                 "id": "31145843-8bba-4fcc-b89d-a627ff59fefa",
                 "type": "expand",
-                "title": "🗝️ Indice 1",
-                "content": "<p>Le nouveau mot de passe choisi par Lola est : L2osémcpqjg!</p>"
+                "title": "🗝️ Indice de l'étape 1/5",
+                "content": "Cliquez sur« Mot de passe oublié » pour commencer la réinitialisation."
               }
             },
             {
@@ -717,8 +717,35 @@
               "element": {
                 "id": "37044081-9fd8-4933-a7ee-473e909ecaaa",
                 "type": "expand",
-                "title": "🗝️ Indice 2",
-                "content": ""
+                "title": "🗝️ Indice de l'étape 2/5",
+                "content": "Pour réinitialiser un mot de passe, il est normal de recevoir un lien par mail."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2fef2c41-079d-4197-8e5c-e9f12d91bfd1",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 3/5",
+                "content": "Dans le mail, cherchez cette phrase : « Cliquez sur ce lien afin de réinitialiser votre mot de passe ». Le lien se trouve juste après."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c5635c0f-475f-4cdb-856a-0c286dc053c8",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 4/5",
+                "content": "<p>Le nouveau mot de passe choisi par Lola est : L2osémcpqjg!</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0f30f905-e748-407d-95eb-bbbf5574268d",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 5/5",
+                "content": "<p>Vous avez réinitialisé le mot de passe. Vous n'avez plus qu'à tester le fonctionnement du nouveau mot de passe choisi par Lola : L2osémcpqjg!</p>"
               }
             },
             {
