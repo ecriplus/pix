@@ -224,7 +224,7 @@ buildUser.anonymous = function buildUserAnonymous({
   });
 };
 
-buildUser.withRole = function buildUserWithRole({
+function buildUserWithRole({
   id = databaseBuffer.getNextId(),
   firstName = 'Billy',
   lastName = 'TheKid',
@@ -277,7 +277,10 @@ buildUser.withRole = function buildUserWithRole({
   buildPixAdminRole({ userId: user.id, role, disabledAt, createdAt, updatedAt });
 
   return user;
-};
+}
+
+buildUser.withRole = buildUserWithRole;
+buildUser.withRoleSuperAdmin = (args) => buildUserWithRole({ ...args, role: ROLES.SUPER_ADMIN });
 
 buildUser.withMembership = function buildUserWithMemberships({
   id = databaseBuffer.getNextId(),
