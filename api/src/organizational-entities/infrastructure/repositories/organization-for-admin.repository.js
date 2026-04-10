@@ -244,7 +244,6 @@ const save = async function ({ organization }) {
     'createdBy',
     'documentationUrl',
     'administrationTeamId',
-    'parentOrganizationId',
     'countryCode',
   ]);
 
@@ -258,10 +257,24 @@ const save = async function ({ organization }) {
 
   const [structure] = await knexConn('structures').returning('*').insert({});
 
-  await knexConn('fct_structures').insert({
-    structure_id: structure.id,
-    organization_id: savedOrganization.id,
-  });
+  if (organization.parentOrganizationId) {
+    const parentFctStructure = await knexConn('fct_structures')
+      .select('structure_id', 'network_id')
+      .where({ organization_id: organization.parentOrganizationId })
+      .first();
+
+    await knexConn('fct_structures').insert({
+      structure_id: structure.id,
+      organization_id: savedOrganization.id,
+      parent_structure_id: parentFctStructure.structure_id,
+      network_id: parentFctStructure.network_id,
+    });
+  } else {
+    await knexConn('fct_structures').insert({
+      structure_id: structure.id,
+      organization_id: savedOrganization.id,
+    });
+  }
 
   if (!_.isEmpty(savedOrganization.features)) {
     await _enableFeatures(knexConn, savedOrganization.features, savedOrganization.id);

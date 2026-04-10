@@ -1,4 +1,7 @@
-import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import {
+  ParentOrganizationNotInNetworkError,
+  UnableToAttachChildOrganizationToParentOrganizationError,
+} from '../errors.js';
 import { Organization } from '../models/Organization.js';
 
 const createOrganization = async function ({
@@ -14,13 +17,14 @@ const createOrganization = async function ({
   organizationVerificationService,
 }) {
   if (organization.parentOrganizationId) {
-    // TODO: Ne plus verifier que le parentOrganization n'est pas un childOrganization, mais vérifier que le parentOrganization appartient à un réseau (i.e. a une structure de niveau 1)
-    // et faire l'update de la structure de l'organisation créée pour l'attacher à la structure du parentOrganization
     const parentOrganization = await organizationForAdminRepository.get({
       organizationId: organization.parentOrganizationId,
     });
 
+    // TODO: Supprimer cette vérification quand on aura implémenté la possibilité d'avoir des organisations avec plusieurs niveaux de hiérarchie (ex: réseau → académie → département → école)
     _assertParentOrganizationIsNotChildOrganization(parentOrganization);
+
+    _assertParentOrganizationBelongsToNetwork(parentOrganization);
   }
 
   organizationCreationValidator.validate(organization);
@@ -58,6 +62,12 @@ const createOrganization = async function ({
 };
 
 export { createOrganization };
+
+function _assertParentOrganizationBelongsToNetwork(parentOrganization) {
+  if (!parentOrganization.network.id) {
+    throw new ParentOrganizationNotInNetworkError({ meta: { parentOrganizationId: parentOrganization.id } });
+  }
+}
 
 function _assertParentOrganizationIsNotChildOrganization(parentOrganization) {
   if (parentOrganization.parentOrganizationId) {
