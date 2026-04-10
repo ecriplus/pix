@@ -301,7 +301,7 @@
                     "id": "2",
                     "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh si ! </p><p>Toutes ces informations concernent des données personnelles, sensibles ou confidentielles. Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
+                      "diagnosis": "<p>Et pourtant... </p><p>Toutes ces informations concernent des données personnelles, sensibles ou confidentielles. Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
                     }
                   },
                   {
