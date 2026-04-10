@@ -226,20 +226,6 @@ function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
 }
 
-async function insertUserWithRoleSuperAdmin() {
-  const user = databaseBuilder.factory.buildUser.withRole({
-    id: 1234,
-    firstName: 'Super',
-    lastName: 'Papa',
-    email: 'super.papa@example.net',
-    password: 'Password123',
-  });
-
-  await databaseBuilder.commit();
-
-  return user;
-}
-
 async function insertUserWithRoleCertif() {
   const user = databaseBuilder.factory.buildUser.withRole({
     id: 1234,
@@ -459,7 +445,6 @@ export {
   insertOrganizationUserWithRoleAdmin,
   insertPixJuniorFeatureForNewOrganization,
   insertUserWithRoleCertif,
-  insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
   mockAttestationStorage,
