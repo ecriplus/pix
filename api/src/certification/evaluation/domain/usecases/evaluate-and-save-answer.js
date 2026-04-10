@@ -1,3 +1,4 @@
+import { EmptyAnswerError } from '../../../../evaluation/domain/errors.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
@@ -32,6 +33,9 @@ export async function evaluateAndSaveAnswer({
   }
   if (assessmentSheet.hasAnsweredChallenge(answer.challengeId)) {
     throw new ChallengeAlreadyAnsweredError();
+  }
+  if (!answer.hasValue && !answer.hasTimedOut) {
+    throw new EmptyAnswerError();
   }
 
   return 'coucou';

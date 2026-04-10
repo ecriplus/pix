@@ -1,4 +1,5 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
+import { EmptyAnswerError } from '../../../../../../src/evaluation/domain/errors.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
@@ -134,6 +135,18 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           });
         });
 
+        context('when answer has no value and is not a timeout', function () {
+          it('throws a EmptyAnswerError error', async function () {
+            const err = await catchErr(evaluateAndSaveAnswer)({
+              certificationCourseId,
+              userId,
+              answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId', value: null, timeout: null }),
+            });
+
+            expect(err).to.deepEqualInstance(new EmptyAnswerError());
+          });
+        });
+
         it('returns coucou', async function () {
           databaseBuilder.factory.buildAnswer({
             assessmentId,
@@ -142,6 +155,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           await databaseBuilder.commit();
           const currentAnswer = domainBuilder.buildAnswer({
             challengeId: 'myFavoriteChallengeId',
+            value: 'The answer is 42',
           });
 
           const evaluatedAnswer = await evaluateAndSaveAnswer({
