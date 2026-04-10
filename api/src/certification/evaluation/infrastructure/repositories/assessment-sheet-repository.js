@@ -9,6 +9,7 @@ export async function findByCertificationCourseId(certificationCourseId) {
       certificationCourseId: 'certification-courses.id',
       userId: 'certification-courses.userId',
       assessmentId: 'assessments.id',
+      lastChallengeId: 'assessments.lastChallengeId',
       abortReason: 'certification-courses.abortReason',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       state: 'assessments.state',

@@ -148,4 +148,56 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         });
       });
   });
+
+  context('#hasAnsweredChallenge', function () {
+    it('returns false when no answers yet', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        answers: [],
+      });
+
+      expect(assessmentSheet.hasAnsweredChallenge('myFavoriteChallengeId')).to.be.false;
+    });
+
+    it('returns false when no answers on the provided challenge exist', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        answers: [domainBuilder.buildAnswer({ challengeId: 'someOtherChallengeId' })],
+      });
+
+      expect(assessmentSheet.hasAnsweredChallenge('myFavoriteChallengeId')).to.be.false;
+    });
+
+    it('returns true when an answer has been submitted with provided challenge', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        answers: [domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId' })],
+      });
+
+      expect(assessmentSheet.hasAnsweredChallenge('myFavoriteChallengeId')).to.be.true;
+    });
+  });
+
+  context('#isChallengeExpectedToBeAnsweredNext', function () {
+    it('returns true when no lastChallengeId in assessment sheet', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        lastChallengeId: null,
+      });
+
+      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.true;
+    });
+
+    it('returns true when submitted challengeId is the one expected to be answered next', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        lastChallengeId: 'myFavoriteChallengeId',
+      });
+
+      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.true;
+    });
+
+    it('returns false when submitted challengeId is not the one expected to be answered next', function () {
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        lastChallengeId: 'someOtherChallengeId',
+      });
+
+      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.false;
+    });
+  });
 });

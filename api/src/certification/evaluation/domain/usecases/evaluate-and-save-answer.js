@@ -1,6 +1,8 @@
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
+  ChallengeAlreadyAnsweredError,
+  ChallengeNotAskedError,
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../shared/domain/errors.js';
@@ -24,6 +26,12 @@ export async function evaluateAndSaveAnswer({
   }
   if (assessmentSheet.hasBeenEndedDueToFinalization()) {
     throw new CertificationEndedByFinalizationError();
+  }
+  if (!assessmentSheet.isChallengeExpectedToBeAnsweredNext(answer.challengeId)) {
+    throw new ChallengeNotAskedError();
+  }
+  if (assessmentSheet.hasAnsweredChallenge(answer.challengeId)) {
+    throw new ChallengeAlreadyAnsweredError();
   }
 
   return 'coucou';

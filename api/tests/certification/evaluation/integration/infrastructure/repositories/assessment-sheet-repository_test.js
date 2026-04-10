@@ -18,6 +18,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       state: Assessment.states.COMPLETED,
       updatedAt: new Date('2023-10-05'),
       userId,
+      lastChallengeId: 'nextChallengeIdToAnswer',
     }).id;
     answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
     await databaseBuilder.commit();
@@ -39,6 +40,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             state: Assessment.states.COMPLETED,
             updatedAt: new Date('2023-10-05'),
             answers: [domainBuilder.buildAnswer(answerData)],
+            lastChallengeId: 'nextChallengeIdToAnswer',
           }),
         );
       });
@@ -83,6 +85,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           state: Assessment.states.STARTED,
           updatedAt: new Date('2024-05-11'),
           answers: [domainBuilder.buildAnswer(answerData)],
+          lastChallengeId: 'nextChallengeIdToAnswer',
         }),
       );
     });

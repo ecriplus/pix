@@ -7,6 +7,7 @@ export class AssessmentSheet {
     certificationCourseId,
     userId,
     assessmentId,
+    lastChallengeId,
     abortReason,
     isRejectedForFraud,
     state,
@@ -16,6 +17,7 @@ export class AssessmentSheet {
     this.certificationCourseId = certificationCourseId;
     this.userId = userId;
     this.assessmentId = assessmentId;
+    this.lastChallengeId = lastChallengeId;
     this.abortReason = abortReason;
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
@@ -44,5 +46,13 @@ export class AssessmentSheet {
 
   hasBeenEndedDueToFinalization() {
     return this.state === STATES.ENDED_DUE_TO_FINALIZATION;
+  }
+
+  hasAnsweredChallenge(challengeId) {
+    return this.answers.some((answer) => answer.challengeId === challengeId);
+  }
+
+  isChallengeExpectedToBeAnsweredNext(challengeId) {
+    return Boolean(!this.lastChallengeId || this.lastChallengeId === challengeId);
   }
 }

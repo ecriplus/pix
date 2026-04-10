@@ -2,6 +2,8 @@ import { usecases } from '../../../../../../src/certification/evaluation/domain/
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
+  ChallengeAlreadyAnsweredError,
+  ChallengeNotAskedError,
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../../../src/shared/domain/errors.js';
@@ -89,16 +91,63 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
       });
 
       context('when certification test is still ongoing', function () {
+        let assessmentId;
+
         beforeEach(function () {
           certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
-          databaseBuilder.factory.buildAssessment({ certificationCourseId, userId, state: STATES.STARTED });
+          assessmentId = databaseBuilder.factory.buildAssessment({
+            certificationCourseId,
+            userId,
+            state: STATES.STARTED,
+            lastChallengeId: 'myFavoriteChallengeId',
+          }).id;
           return databaseBuilder.commit();
         });
 
+        context('when answered challenge was not the one expected to be answered', function () {
+          it('throws a ChallengeNotAskedError error', async function () {
+            const err = await catchErr(evaluateAndSaveAnswer)({
+              certificationCourseId,
+              userId,
+              answer: domainBuilder.buildAnswer({ challengeId: 'someOtherChallengeId' }),
+            });
+
+            expect(err).to.deepEqualInstance(new ChallengeNotAskedError());
+          });
+        });
+
+        context('when answered challenge has already been answered', function () {
+          it('throws a ChallengeAlreadyAnsweredError error', async function () {
+            databaseBuilder.factory.buildAnswer({
+              assessmentId,
+              challengeId: 'myFavoriteChallengeId',
+            });
+            await databaseBuilder.commit();
+
+            const err = await catchErr(evaluateAndSaveAnswer)({
+              certificationCourseId,
+              userId,
+              answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId' }),
+            });
+
+            expect(err).to.deepEqualInstance(new ChallengeAlreadyAnsweredError());
+          });
+        });
+
         it('returns coucou', async function () {
+          databaseBuilder.factory.buildAnswer({
+            assessmentId,
+            challengeId: 'someOtherChallengeId',
+          });
+          await databaseBuilder.commit();
+          const currentAnswer = domainBuilder.buildAnswer({
+            challengeId: 'myFavoriteChallengeId',
+          });
+
           const evaluatedAnswer = await evaluateAndSaveAnswer({
             certificationCourseId,
             userId,
+            answer: currentAnswer,
           });
 
           expect(evaluatedAnswer).to.equal('coucou');
