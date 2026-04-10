@@ -40,7 +40,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             abortReason: 'candidate',
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
-            updatedAt: new Date('2023-10-05'),
+            assessmentUpdatedAt: new Date('2023-10-05'),
             answers: [domainBuilder.buildAnswer(answerData)],
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
@@ -70,7 +70,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         abortReason: 'technical',
         isRejectedForFraud: false,
         state: Assessment.states.STARTED,
-        updatedAt: new Date('2024-05-11'),
+        assessmentUpdatedAt: new Date('2024-05-11'),
         answers: [],
       });
 
@@ -87,7 +87,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           abortReason: 'candidate',
           isRejectedForFraud: true,
           state: Assessment.states.STARTED,
-          updatedAt: new Date('2024-05-11'),
+          assessmentUpdatedAt: new Date('2024-05-11'),
           answers: [domainBuilder.buildAnswer(answerData)],
           lastChallengeId: 'nextChallengeIdToAnswer',
           lastQuestionDate: new Date('2024-11-07'),

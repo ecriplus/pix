@@ -16,7 +16,7 @@ export class AssessmentSheet {
    * @param {ABORT_REASONS} params.abortReason
    * @param {boolean} params.isRejectedForFraud
    * @param {Assessment.states} params.state
-   * @param {Date} params.updatedAt
+   * @param {Date} params.assessmentUpdatedAt
    * @param {Answer[]} params.answers
    */
   constructor({
@@ -29,7 +29,7 @@ export class AssessmentSheet {
     abortReason,
     isRejectedForFraud,
     state,
-    updatedAt,
+    assessmentUpdatedAt,
     answers,
   }) {
     this.certificationCourseId = certificationCourseId;
@@ -41,7 +41,7 @@ export class AssessmentSheet {
     this.abortReason = abortReason;
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
-    this.updatedAt = updatedAt;
+    this.assessmentUpdatedAt = assessmentUpdatedAt;
     this.answers = answers;
   }
 
@@ -56,7 +56,7 @@ export class AssessmentSheet {
   complete() {
     if (this.state === STATES.STARTED) {
       this.state = STATES.COMPLETED;
-      this.updatedAt = new Date();
+      this.assessmentUpdatedAt = new Date();
     }
   }
 

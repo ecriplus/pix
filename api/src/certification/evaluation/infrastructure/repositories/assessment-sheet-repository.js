@@ -15,7 +15,7 @@ export async function findByCertificationCourseId(certificationCourseId) {
       abortReason: 'certification-courses.abortReason',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       state: 'assessments.state',
-      updatedAt: 'assessments.updatedAt',
+      assessmentUpdatedAt: 'assessments.updatedAt',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -36,7 +36,7 @@ export async function update(assessmentSheet) {
   const knexConn = DomainTransaction.getConnection();
   await knexConn('assessments')
     .update({
-      updatedAt: assessmentSheet.updatedAt,
+      updatedAt: assessmentSheet.assessmentUpdatedAt,
       state: assessmentSheet.state,
     })
     .where('assessments.id', '=', assessmentSheet.assessmentId);

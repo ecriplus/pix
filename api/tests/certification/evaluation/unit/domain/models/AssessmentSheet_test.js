@@ -45,11 +45,11 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
       clock.restore();
     });
 
-    it(`should update state and updatedAt when assessment sheet is in state ${STATES.STARTED}`, function () {
+    it(`should update state and assessmentUpdatedAt when assessment sheet is in state ${STATES.STARTED}`, function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         ...assessmentSheetBaseData,
         state: STATES.STARTED,
-        updatedAt: new Date('2021-10-29'),
+        assessmentUpdatedAt: new Date('2021-10-29'),
       });
       assessmentSheet.complete();
 
@@ -57,7 +57,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         domainBuilder.certification.evaluation.buildAssessmentSheet({
           ...assessmentSheetBaseData,
           state: STATES.COMPLETED,
-          updatedAt: now,
+          assessmentUpdatedAt: now,
         }),
       );
     });
@@ -69,7 +69,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
           const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
             ...assessmentSheetBaseData,
             state,
-            updatedAt: new Date('2021-10-29'),
+            assessmentUpdatedAt: new Date('2021-10-29'),
           });
           assessmentSheet.complete();
 
@@ -77,7 +77,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
             domainBuilder.certification.evaluation.buildAssessmentSheet({
               ...assessmentSheetBaseData,
               state,
-              updatedAt: new Date('2021-10-29'),
+              assessmentUpdatedAt: new Date('2021-10-29'),
             }),
           );
         });
