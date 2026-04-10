@@ -281,6 +281,7 @@ function buildUserWithRole({
 
 buildUser.withRole = buildUserWithRole;
 buildUser.withRoleSuperAdmin = (args) => buildUserWithRole({ ...args, role: ROLES.SUPER_ADMIN });
+buildUser.withRoleCertif = (args) => buildUserWithRole({ ...args, role: ROLES.CERTIF });
 
 buildUser.withMembership = function buildUserWithMemberships({
   id = databaseBuffer.getNextId(),

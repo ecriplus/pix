@@ -5,7 +5,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleCertif,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Organizational Entities | Application | Route | Admin | Tag', function () {
@@ -185,15 +184,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | T
           _buildOrganizationTags(organization.id, tagIds);
         }
 
+        const adminCertif = databaseBuilder.factory.buildUser.withRoleCertif();
         await databaseBuilder.commit();
-
-        const userId = (await insertUserWithRoleCertif()).id;
 
         // when
         const { statusCode } = await server.inject({
           method: 'GET',
           url: `/api/admin/tags/${basedTag.id}/recently-used`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: adminCertif.id }),
         });
 
         // then

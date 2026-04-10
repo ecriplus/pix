@@ -24,7 +24,6 @@ import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
 import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
-import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
@@ -224,21 +223,6 @@ function generateValidRequestAuthorizationHeaderForApplication(clientId = 'clien
 
 function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
-}
-
-async function insertUserWithRoleCertif() {
-  const user = databaseBuilder.factory.buildUser.withRole({
-    id: 1234,
-    firstName: 'Certif',
-    lastName: 'Power',
-    email: 'certif.power@example.net',
-    password: 'Pix123',
-    role: PIX_ADMIN.ROLES.CERTIF,
-  });
-
-  await databaseBuilder.commit();
-
-  return user;
 }
 
 async function insertOrganizationUserWithRoleAdmin() {
@@ -444,7 +428,6 @@ export {
   insertMultipleSendingFeatureForNewOrganization,
   insertOrganizationUserWithRoleAdmin,
   insertPixJuniorFeatureForNewOrganization,
-  insertUserWithRoleCertif,
   knex,
   learningContentBuilder,
   mockAttestationStorage,
