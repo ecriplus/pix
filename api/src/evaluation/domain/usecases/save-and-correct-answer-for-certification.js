@@ -54,7 +54,8 @@ export async function saveAndCorrectAnswerForCertification({
   const correctedAnswer = correctionService.evaluateAnswer({
     challenge,
     answer,
-    assessment,
+    hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
+    isCertificationEvaluation: assessment.isCertification(),
     accessibilityAdjustmentNeeded: certificationCandidate.accessibilityAdjustmentNeeded,
     forceOKAnswer,
   });

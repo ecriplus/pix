@@ -23,6 +23,8 @@ export async function saveAndCorrectAnswerForDemoAndPreview({
   const correctedAnswer = correctionService.evaluateAnswer({
     challenge,
     answer,
+    hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
+    isCertificationEvaluation: assessment.isCertification(),
     assessment,
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,

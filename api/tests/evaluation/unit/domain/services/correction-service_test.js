@@ -9,11 +9,18 @@ describe('Unit | Domain | Service | correction-service', function () {
         // given
         const challenge = domainBuilder.buildChallenge();
         const answer = domainBuilder.buildAnswer();
-        const assessment = domainBuilder.buildAssessment();
+        const hasChallengeBeenFocusedOut = false;
+        const isCertificationEvaluation = true;
         const accessibilityAdjustmentNeeded = false;
 
         // when
-        const a = evaluateAnswer({ challenge, answer, assessment, accessibilityAdjustmentNeeded });
+        const a = evaluateAnswer({
+          challenge,
+          answer,
+          hasChallengeBeenFocusedOut,
+          isCertificationEvaluation,
+          accessibilityAdjustmentNeeded,
+        });
 
         // then
         expect(a).to.be.an.instanceOf(Answer);
@@ -27,14 +34,16 @@ describe('Unit | Domain | Service | correction-service', function () {
         const answer = domainBuilder.buildAnswer({
           value: 'Some random value',
         });
-        const assessment = domainBuilder.buildAssessment();
+        const hasChallengeBeenFocusedOut = false;
+        const isCertificationEvaluation = true;
         const accessibilityAdjustmentNeeded = false;
 
         // when
         const correctedAnswer = evaluateAnswer({
           challenge,
           answer,
-          assessment,
+          hasChallengeBeenFocusedOut,
+          isCertificationEvaluation,
           accessibilityAdjustmentNeeded,
           forceOKAnswer: true,
         });

@@ -42,7 +42,8 @@ export async function saveAndCorrectAnswerForCampaign({
   const correctedAnswer = correctionService.evaluateAnswer({
     challenge,
     answer,
-    assessment,
+    hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
+    isCertificationEvaluation: assessment.isCertification(),
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });

@@ -5,7 +5,8 @@ import { ValidatorAlwaysOK } from '../models/ValidatorAlwaysOK.js';
 export function evaluateAnswer({
   challenge,
   answer,
-  assessment,
+  hasChallengeBeenFocusedOut,
+  isCertificationEvaluation,
   accessibilityAdjustmentNeeded,
   forceOKAnswer = false,
 }) {
@@ -22,8 +23,8 @@ export function evaluateAnswer({
       answer,
       challengeFormat: challenge.format,
       isFocusedChallenge: challenge.focused,
-      hasLastQuestionBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
-      isCertificationEvaluation: assessment.isCertification(),
+      hasLastQuestionBeenFocusedOut: hasChallengeBeenFocusedOut,
+      isCertificationEvaluation,
       accessibilityAdjustmentNeeded,
     });
   } catch {

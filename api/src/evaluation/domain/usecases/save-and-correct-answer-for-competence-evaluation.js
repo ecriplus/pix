@@ -39,7 +39,8 @@ export async function saveAndCorrectAnswerForCompetenceEvaluation({
   const correctedAnswer = correctionService.evaluateAnswer({
     challenge,
     answer,
-    assessment,
+    hasChallengeBeenFocusedOut: assessment.hasLastQuestionBeenFocusedOut,
+    isCertificationEvaluation: assessment.isCertification(),
     accessibilityAdjustmentNeeded: false,
     forceOKAnswer,
   });
