@@ -37,6 +37,7 @@ class Campaign {
     deletedAt = null,
     deletedBy = null,
     participationCount,
+    recommendationEngine = false,
   } = {}) {
     this.id = id;
     this.isForAbsoluteNovice = isForAbsoluteNovice;
@@ -65,6 +66,7 @@ class Campaign {
     this.deletedAt = deletedAt;
     this.deletedBy = deletedBy;
     this.hasParticipation = participationCount > 0;
+    this.recommendationEngine = recommendationEngine;
   }
 
   get isAssessment() {
