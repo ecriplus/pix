@@ -126,7 +126,7 @@
                     "id": "1",
                     "content": "<p>Les prompts servent à améliorer l’IA et des extraits peuvent être vérifiés par des humains.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement !</p><p>Pour améliorer son fonctionnement, le fabricant de l’IA peut <strong>consulter certaines conversations</strong> pour <strong>améliorer le fonctionnement</strong> de l’IA générative. Il peut aussi vérifier que les utilisateurs<strong> respectent les règles de sécurité </strong>et la <strong>politique d’utilisation</strong>.</p>"
+                      "diagnosis": "<p>Effectivement !</p><p>Le fabricant de l’IA peut <strong>consulter certaines conversations</strong> pour <strong>améliorer le fonctionnement</strong> de l’IA générative. Il peut aussi vérifier que les utilisateurs<strong> respectent les règles de sécurité </strong>et la <strong>politique d’utilisation</strong>.</p>"
                     }
                   },
                   {
@@ -301,14 +301,14 @@
                     "id": "2",
                     "content": "<p>Non.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Dommage ! </p><p>Toutes ces informations concernent des données personnelles, sensibles ou confidentielles. Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
+                      "diagnosis": "<p>Eh si ! </p><p>Toutes ces informations concernent des données personnelles, sensibles ou confidentielles. Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne sais pas.&nbsp;</p>",
                     "feedback": {
-                      "diagnosis": "<p>En effet, toutes ces informations concernent des données personnelles, sensibles ou confidentielles.</p><p>Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
+                      "diagnosis": "<p>Toutes ces informations concernent des données personnelles, sensibles ou confidentielles.</p><p>Il s’agit par exemple d’un nom, d’une adresse, d’un numéro de téléphone, d’un mot de passe ou d’informations de santé.</p>"
                     }
                   }
                 ],
@@ -328,7 +328,7 @@
                 "id": "62678d2b-0f9a-4e61-ace9-32d264ac516e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ces exemples montrent qu’un prompt peut <strong>contenir des informations personnelles</strong> sans qu’on s’en rende compte. </p><p>Pour éviter ce problème, il faut se rappeler la règle suivante&nbsp;: un prompt doit rester précis tout en <strong>évitant d’inclure des informations personnelles, sensibles ou confidentielles</strong>.</p>"
+                "content": "<p>Ces exemples montrent qu’un prompt peut <strong>contenir des informations confidentielles</strong> sans qu’on s’en rende compte. </p><p>Pour éviter ce problème, il faut se rappeler la règle suivante&nbsp;: un prompt doit rester précis tout en <strong>évitant d’inclure des informations personnelles, sensibles ou confidentielles</strong>.</p>"
               }
             }
           ]
@@ -660,7 +660,7 @@
                   },
                   {
                     "id": "7c0cc776-3d01-4c0a-b31d-a560cc96472c",
-                    "text": "\"Tu peux me donner une idée de cadeau pour ma sœur de 38 ans qui aime les livres policiers ?\"",
+                    "text": "\"Tu peux me donner une idée de cadeau pour un ami qui aime les livres policiers ?\"",
                     "image": {
                       "url": "",
                       "altText": ""
