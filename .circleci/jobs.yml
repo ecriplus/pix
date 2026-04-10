@@ -563,7 +563,7 @@ jobs:
 
   api_unit_test:
     executor:
-      name: node-redis-postgres-s3-docker
+      name: node-docker
     working_directory: ~/pix/api
     steps:
       - run:
@@ -579,10 +579,6 @@ jobs:
           command: npm run test:api:unit
           environment:
             NODE_ENV: test
-            TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci
-            TEST_REDIS_URL: redis://localhost:6379
-            TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
-            TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
             MOCHA_FILE: /home/circleci/test-results/test-results.[hash].xml
             MOCHA_REPORTER: mocha-junit-reporter
           when: always
