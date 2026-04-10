@@ -4,17 +4,20 @@ import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Certification | Evaluation | Infrastructure | Repositories | AssessmentSheetRepository', function () {
-  let certificationCourseId, assessmentId, answerData;
+  let certificationCourseId, assessmentId, userId, answerData;
   beforeEach(async function () {
+    userId = databaseBuilder.factory.buildUser().id;
     certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       abortReason: 'candidate',
       maxReachableLevelOnCertificationDate: 6,
       isRejectedForFraud: true,
+      userId,
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
       state: Assessment.states.COMPLETED,
       updatedAt: new Date('2023-10-05'),
+      userId,
     }).id;
     answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
     await databaseBuilder.commit();
@@ -30,6 +33,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           domainBuilder.certification.evaluation.buildAssessmentSheet({
             certificationCourseId,
             assessmentId,
+            userId,
             abortReason: 'candidate',
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
@@ -73,6 +77,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         domainBuilder.certification.evaluation.buildAssessmentSheet({
           certificationCourseId,
           assessmentId,
+          userId,
           abortReason: 'candidate',
           isRejectedForFraud: true,
           state: Assessment.states.STARTED,

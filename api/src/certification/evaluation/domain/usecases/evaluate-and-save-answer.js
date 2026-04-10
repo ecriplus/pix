@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { ForbiddenAccess, NotFoundError } from '../../../../shared/domain/errors.js';
 
 export async function evaluateAndSaveAnswer({
   answer,
@@ -10,6 +10,9 @@ export async function evaluateAndSaveAnswer({
   const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
   if (!assessmentSheet) {
     throw new NotFoundError(`No certification test found with id ${certificationCourseId}`);
+  }
+  if (assessmentSheet.userId !== userId) {
+    throw new ForbiddenAccess('User is not allowed to add an answer for this certification test.');
   }
 
   return 'coucou';

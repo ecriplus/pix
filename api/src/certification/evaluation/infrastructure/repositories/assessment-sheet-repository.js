@@ -7,6 +7,7 @@ export async function findByCertificationCourseId(certificationCourseId) {
   const data = await knexConn
     .select({
       certificationCourseId: 'certification-courses.id',
+      userId: 'certification-courses.userId',
       assessmentId: 'assessments.id',
       abortReason: 'certification-courses.abortReason',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',

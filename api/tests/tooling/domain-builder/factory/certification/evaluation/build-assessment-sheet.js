@@ -4,6 +4,7 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 export const buildAssessmentSheet = function ({
   certificationCourseId = 1,
   assessmentId = 2,
+  userId = 3,
   abortReason = null,
   isRejectedForFraud = false,
   state = Assessment.states.COMPLETED,
@@ -13,6 +14,7 @@ export const buildAssessmentSheet = function ({
   return new AssessmentSheet({
     certificationCourseId,
     assessmentId,
+    userId,
     abortReason,
     isRejectedForFraud,
     state,
