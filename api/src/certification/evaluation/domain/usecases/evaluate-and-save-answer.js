@@ -53,7 +53,7 @@ export async function evaluateAndSaveAnswer({
 
   return DomainTransaction.execute(async () => {
     const answerSaved = await answerRepository.save({ answer: correctedAnswer });
-    assessmentSheet.refreshLastAnswerTimestamp();
+    assessmentSheet.refreshLastAnswerTimestamp(answerSaved.createdAt);
     await assessmentSheetRepository.update(assessmentSheet);
 
     answerSaved.levelup = {};

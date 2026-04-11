@@ -86,9 +86,8 @@ export class AssessmentSheet {
     return this.lastQuestionState === STATES_OF_LAST_QUESTION.FOCUSEDOUT;
   }
 
-  refreshLastAnswerTimestamp() {
-    const now = new Date();
-    this.lastAnswerAt = now;
-    this.certificationCourseUpdatedAt = now;
+  refreshLastAnswerTimestamp(refreshDate) {
+    this.lastAnswerAt = refreshDate;
+    this.certificationCourseUpdatedAt = refreshDate;
   }
 }

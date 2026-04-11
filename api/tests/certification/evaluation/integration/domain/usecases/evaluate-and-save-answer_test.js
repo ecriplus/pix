@@ -9,7 +9,7 @@ import {
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const { evaluateAndSaveAnswer } = usecases;
 
@@ -17,11 +17,8 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
   const STATES_OF_LAST_QUESTION = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES_OF_LAST_QUESTION;
   const challengeIdToAnswer = 'expectedChallengeToBeAnswered';
-  const now = new Date();
-  let clock;
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
     databaseBuilder.factory.learningContent.buildSkill({
       id: 'someSkillId',
     });
@@ -31,10 +28,6 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
       skillId: 'someSkillId',
     });
     return databaseBuilder.commit();
-  });
-
-  afterEach(async function () {
-    clock.restore();
   });
 
   context('when certification does not exist', function () {
@@ -229,17 +222,18 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
               expect(keInDB).to.have.length(0);
             });
 
-            it('updates the lastAnswerAt date', async function () {
-              await evaluateAndSaveAnswer({
+            it('updates the lastAnswerAt date to answer creation date', async function () {
+              const evaluatedAnswer = await evaluateAndSaveAnswer({
                 certificationCourseId,
                 userId,
                 answer: currentAnswer,
               });
 
+              const [answerCreatedAt] = await knex('answers').pluck('createdAt').where({ id: evaluatedAnswer.id });
               const [lastAnswerAt] = await knex('certification-courses')
                 .pluck('lastAnswerAt')
                 .where({ id: certificationCourseId });
-              expect(lastAnswerAt).to.deep.equal(now);
+              expect(lastAnswerAt).to.deep.equal(answerCreatedAt);
             });
           });
         });
