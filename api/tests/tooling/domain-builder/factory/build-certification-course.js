@@ -35,6 +35,7 @@ function buildCertificationCourse({
   isAdjustedForAccessibility = false,
   lang,
   framework = Frameworks.CORE,
+  versionId = 20,
 } = {}) {
   const certificationIssueReports = [];
   if (examinerComment && examinerComment !== '') {
@@ -81,6 +82,7 @@ function buildCertificationCourse({
     isAdjustedForAccessibility,
     lang,
     framework,
+    versionId,
   });
 }
 
