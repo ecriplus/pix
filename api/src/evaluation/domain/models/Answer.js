@@ -5,6 +5,7 @@ import { AnswerStatus } from '../../../shared/domain/models/AnswerStatus.js';
 class Answer {
   constructor({
     id,
+    createdAt,
     result,
     resultDetails,
     timeout,
@@ -16,6 +17,7 @@ class Answer {
     timeSpent,
   } = {}) {
     this.id = id;
+    this.createdAt = createdAt;
     // XXX result property should not be auto-created from result to an AnswerStatus Object
     this.result = AnswerStatus.from(result);
     this.resultDetails = resultDetails;
