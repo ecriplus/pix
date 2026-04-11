@@ -4,9 +4,10 @@ import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Certification | Evaluation | Infrastructure | Repositories | AssessmentSheetRepository', function () {
-  let certificationCourseId, assessmentId, userId, answerData;
+  let certificationCourseId, assessmentId, userId, versionId, answerData;
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser().id;
+    versionId = databaseBuilder.factory.buildCertificationVersion().id;
     certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       abortReason: 'candidate',
       maxReachableLevelOnCertificationDate: 6,
@@ -14,6 +15,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       userId,
       updatedAt: new Date('2022-02-22'),
       lastAnswerAt: new Date('2022-01-11'),
+      versionId,
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
@@ -50,6 +52,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
             certificationCourseUpdatedAt: new Date('2022-02-22'),
             lastAnswerAt: new Date('2022-01-11'),
+            versionId,
           }),
         );
       });
@@ -82,6 +85,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
         certificationCourseUpdatedAt: new Date('2044-02-22'),
         lastAnswerAt: new Date('2044-01-11'),
+        versionId: 'somethingElse',
       });
 
       // when
@@ -104,6 +108,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
           certificationCourseUpdatedAt: new Date('2044-02-22'), // updated
           lastAnswerAt: new Date('2044-01-11'), // updated
+          versionId,
         }),
       );
     });

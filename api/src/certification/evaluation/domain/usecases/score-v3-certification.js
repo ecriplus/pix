@@ -62,10 +62,7 @@ export async function scoreV3Certification({
     assessmentId: assessmentSheet.assessmentId,
   });
 
-  const version = await sharedVersionRepository.getByScopeAndReconciliationDate({
-    scope: candidate.subscriptionScope,
-    reconciliationDate: candidate.reconciledAt,
-  });
+  const version = await sharedVersionRepository.getById(assessmentSheet.versionId);
 
   await _verifyCertificationIsScorable({
     certificationCourseId: assessmentSheet.certificationCourseId,

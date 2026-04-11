@@ -151,10 +151,10 @@ function stubCertificationCandidateRepository() {
 
 function stubSharedVersionRepository() {
   const sharedVersionRepository = {
-    getByScopeAndReconciliationDate: sinon.stub(),
+    getById: sinon.stub(),
   };
   const version = domainBuilder.certification.shared.buildVersion();
-  sharedVersionRepository.getByScopeAndReconciliationDate.resolves(version);
+  sharedVersionRepository.getById.resolves(version);
 
   return sharedVersionRepository;
 }
