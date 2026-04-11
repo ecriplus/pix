@@ -2,8 +2,6 @@ export const getV3CertificationCourseDetailsForAdministration = async ({
   certificationCourseId,
   competenceRepository,
   v3CertificationCourseDetailsForAdministrationRepository,
-  certificationCandidateRepository,
-  sharedCertificationCourseRepository,
   evaluationVersionRepository,
 }) => {
   const competences = await competenceRepository.list();
@@ -13,14 +11,7 @@ export const getV3CertificationCourseDetailsForAdministration = async ({
       certificationCourseId,
     });
 
-  const candidate = await certificationCandidateRepository.getByCertificationCourseId({ certificationCourseId });
-
-  const scope = await sharedCertificationCourseRepository.getCertificationScope({ courseId: certificationCourseId });
-
-  const version = await evaluationVersionRepository.getByScopeAndReconciliationDate({
-    scope,
-    reconciliationDate: candidate.reconciledAt,
-  });
+  const version = await evaluationVersionRepository.getById(courseDetails.versionId);
 
   courseDetails.numberOfChallenges = version.challengesConfiguration.maximumAssessmentLength;
 

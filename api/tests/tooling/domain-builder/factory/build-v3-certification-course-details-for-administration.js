@@ -14,6 +14,7 @@ export const buildV3CertificationCourseDetailsForAdministration = ({
   eduV3ExternalJuryResult,
   numberOfChallenges,
   certificationFramework,
+  versionId,
 }) => {
   return new V3CertificationCourseDetailsForAdministration({
     certificationCourseId,
@@ -29,5 +30,6 @@ export const buildV3CertificationCourseDetailsForAdministration = ({
     certificationChallengesForAdministration,
     numberOfChallenges,
     certificationFramework,
+    versionId,
   });
 };
