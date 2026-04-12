@@ -17,8 +17,6 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
-import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
-import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as assessmentSheetRepository from '../../infrastructure/repositories/assessment-sheet-repository.js';
 import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
@@ -51,7 +49,6 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {certificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {assessmentSheetRepository} AssessmentSheetRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
@@ -68,7 +65,6 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
- * @typedef {versionRepository} VersionRepository
  * @typedef {correctionApi} CorrectionApi
  * @typedef {versionApi} VersionApi
  * @typedef {certificationCompletedJobRepository} CertificationCompletedJobRepository
@@ -77,7 +73,6 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
 const dependencies = {
   complementaryCertificationCourseResultRepository,
   certificationAssessmentHistoryRepository,
-  sharedVersionRepository,
   scoringConfigurationRepository,
   assessmentSheetRepository,
   evaluationSessionRepository,
@@ -104,7 +99,6 @@ const dependencies = {
   complementaryCertificationScoringCriteriaRepository,
   certificationChallengeLiveAlertRepository,
   pixPlusCertificationCourseRepository,
-  versionRepository,
   correctionApi,
   versionApi,
   certificationCompletedJobRepository,
