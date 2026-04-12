@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
+import { FlashAssessmentAlgorithmConfiguration } from './FlashAssessmentAlgorithmConfiguration.js';
 import { SCOPES } from './Scopes.js';
 
 export class Version {

@@ -72,26 +72,3 @@ export const getLatestByVersion = async ({ version }) => {
     versionId: version.id,
   });
 };
-
-export const saveCompetenceForScoringConfiguration = async ({ configuration }) => {
-  const knexConn = DomainTransaction.getConnection();
-  return knexConn('certification_versions')
-    .where({
-      expirationDate: null,
-    })
-    .update({
-      competencesScoringConfiguration: JSON.stringify(configuration),
-    });
-};
-
-export const saveCertificationScoringConfiguration = async ({ configuration }) => {
-  const knexConn = DomainTransaction.getConnection();
-
-  return knexConn('certification_versions')
-    .where({
-      expirationDate: null,
-    })
-    .update({
-      globalScoringConfiguration: JSON.stringify(configuration),
-    });
-};
