@@ -9,6 +9,28 @@ import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/mo
 import { Version } from '../../domain/models/Version.js';
 
 /**
+ * @returns {Promise<Version[]>}
+ */
+export async function findAll() {
+  const knexConn = DomainTransaction.getConnection();
+
+  const versionsData = await knexConn('certification_versions')
+    .select(
+      'id',
+      'scope',
+      'startDate',
+      'expirationDate',
+      'assessmentDuration',
+      'globalScoringConfiguration',
+      'competencesScoringConfiguration',
+      'challengesConfiguration',
+    )
+    .orderBy('id');
+
+  return versionsData.map(_toDomain);
+}
+
+/**
  * @param {object} params
  * @param {number} params.id
  * @returns {Promise<Version>}
