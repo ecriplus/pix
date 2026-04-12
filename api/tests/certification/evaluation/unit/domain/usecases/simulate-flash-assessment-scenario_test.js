@@ -21,7 +21,7 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
 
       const calibratedChallengeRepository = { findActiveFlashCompatible: sinon.stub() };
 
-      const versionRepositoryStub = {
+      const versionApiStub = {
         getById: sinon.stub().resolves(version),
       };
 
@@ -31,7 +31,7 @@ describe('Unit | Domain | Usecases | simulate-flash-assessment-scenario', functi
         accessibilityAdjustmentNeeded,
         complementaryCertificationKey: undefined,
         calibratedChallengeRepository,
-        versionRepository: versionRepositoryStub,
+        versionApi: versionApiStub,
       });
 
       // then
