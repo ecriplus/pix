@@ -7,7 +7,7 @@ describe('Unit | UseCase | get-certification-course', function () {
   let version;
 
   let certificationCourseRepository;
-  let versionRepository;
+  let versionApi;
 
   beforeEach(function () {
     certificationCourse = domainBuilder.buildCertificationCourse({
@@ -22,7 +22,7 @@ describe('Unit | UseCase | get-certification-course', function () {
       get: sinon.stub(),
     };
 
-    versionRepository = {
+    versionApi = {
       getById: sinon.stub(),
     };
 
@@ -34,18 +34,18 @@ describe('Unit | UseCase | get-certification-course', function () {
 
   it('should get the certificationCourse with numberOfChallenges from version', async function () {
     certificationCourseRepository.get.withArgs({ id: certificationCourse.getId() }).resolves(certificationCourse);
-    versionRepository.getById.resolves(version);
+    versionApi.getById.resolves(version);
 
     const actualCertificationCourse = await getCertificationCourse({
       certificationCourseId: certificationCourse.getId(),
       certificationCourseRepository,
-      versionRepository,
+      versionApi,
     });
 
     expect(certificationCourseRepository.get).to.have.been.calledOnceWithExactly({
       id: certificationCourse.getId(),
     });
-    expect(versionRepository.getById).to.have.been.calledOnceWithExactly(123);
+    expect(versionApi.getById).to.have.been.calledOnceWithExactly({ id: 123 });
     expect(actualCertificationCourse.getNumberOfChallenges()).to.equal(42);
     expect(actualCertificationCourse.getId()).to.equal(certificationCourse.getId());
   });

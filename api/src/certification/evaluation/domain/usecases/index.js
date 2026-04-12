@@ -6,6 +6,7 @@ import * as assessmentRepository from '../../../../shared/infrastructure/reposit
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
+import * as versionApi from '../../../configuration/application/api/version-api.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
@@ -69,6 +70,7 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {versionRepository} VersionRepository
  * @typedef {correctionApi} CorrectionApi
+ * @typedef {versionApi} VersionApi
  * @typedef {certificationCompletedJobRepository} CertificationCompletedJobRepository
  * @typedef {services} Services
  */
@@ -104,6 +106,7 @@ const dependencies = {
   pixPlusCertificationCourseRepository,
   versionRepository,
   correctionApi,
+  versionApi,
   certificationCompletedJobRepository,
   services,
 };
