@@ -23,7 +23,7 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
       list: sinon.stub(),
     };
 
-    const evaluationVersionRepository = {
+    const versionApi = {
       getById: sinon.stub(),
     };
 
@@ -62,14 +62,14 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
 
     competenceRepository.list.resolves(competences);
 
-    evaluationVersionRepository.getById.withArgs(123).resolves(version);
+    versionApi.getById.withArgs({ id: 123 }).resolves(version);
 
     // when
     const details = await getV3CertificationCourseDetailsForAdministration({
       certificationCourseId,
       v3CertificationCourseDetailsForAdministrationRepository,
       competenceRepository,
-      evaluationVersionRepository,
+      versionApi,
     });
 
     // then
