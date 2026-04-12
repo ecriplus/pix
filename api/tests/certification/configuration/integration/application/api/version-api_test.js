@@ -60,12 +60,12 @@ describe('Certification | Configuration | Integration | Application | Api | vers
       defaultProbabilityToPickChallenge: 3,
     },
   };
-  describe('#getByFrameworkAndReconciliationDate', function () {
-    beforeEach(function () {
-      [dataDroit2025, dataDroitCurrent, dataCoreCurrent].forEach(databaseBuilder.factory.buildCertificationVersion);
-      return databaseBuilder.commit();
-    });
+  beforeEach(function () {
+    [dataDroit2025, dataDroitCurrent, dataCoreCurrent].forEach(databaseBuilder.factory.buildCertificationVersion);
+    return databaseBuilder.commit();
+  });
 
+  describe('#getByFrameworkAndReconciliationDate', function () {
     context('when framework is not recognized', function () {
       it('returns null', async function () {
         const res = await versionApi.getByFrameworkAndReconciliationDate({
@@ -107,6 +107,28 @@ describe('Certification | Configuration | Integration | Application | Api | vers
         });
 
         expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataDroit2025));
+      });
+    });
+  });
+
+  describe('#getById', function () {
+    context('when version for given id does not exist', function () {
+      it('returns null', async function () {
+        const res = await versionApi.getById({
+          id: 11111,
+        });
+
+        expect(res).to.be.null;
+      });
+    });
+
+    context('when version for given id exists', function () {
+      it('returns the version', async function () {
+        const res = await versionApi.getById({
+          id: dataDroitCurrent.id,
+        });
+
+        expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataDroitCurrent));
       });
     });
   });

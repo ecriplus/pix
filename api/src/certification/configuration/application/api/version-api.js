@@ -1,3 +1,4 @@
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import * as versionRepository from '../../infrastructure/repositories/version-repository.js';
 import { Version } from './models/Version.js';
@@ -25,4 +26,23 @@ export async function getByFrameworkAndReconciliationDate({ framework, reconcili
   });
 
   return foundVersion ? new Version(foundVersion) : null;
+}
+
+/**
+ * @param {object} params
+ * @param {number} params.id
+ * @returns {Promise<Version|null>}
+ */
+export async function getById({ id }) {
+  let foundVersion;
+  try {
+    foundVersion = await versionRepository.getById({ id });
+  } catch (err) {
+    if (err instanceof NotFoundError) {
+      return null;
+    }
+    throw err;
+  }
+
+  return new Version(foundVersion);
 }
