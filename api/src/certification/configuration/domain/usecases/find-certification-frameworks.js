@@ -2,15 +2,15 @@ import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 /**
  * @param {object} params
- * @param {VersionsRepository} params.versionsRepository
+ * @param {VersionRepository} params.versionRepository
  * @returns {Promise<Array<{id: string, name: string, versionStartDate: Date|null}>>}
  */
-const findCertificationFrameworks = async function ({ versionsRepository }) {
+const findCertificationFrameworks = async function ({ versionRepository }) {
   const frameworkNames = Object.values(Frameworks);
 
   const frameworksWithVersions = await Promise.all(
     frameworkNames.map(async (name) => {
-      const activeVersion = await versionsRepository.findActiveByScope({ scope: name });
+      const activeVersion = await versionRepository.findActiveByScope({ scope: name });
 
       return {
         id: name,

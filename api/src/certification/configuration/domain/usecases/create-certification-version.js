@@ -3,7 +3,7 @@
  * @typedef {import ('./index.js').TubeRepository} TubeRepository
  * @typedef {import ('./index.js').SkillRepository} SkillRepository
  * @typedef {import ('./index.js').ChallengeRepository} ChallengeRepository
- * @typedef {import ('./index.js').VersionsRepository} VersionsRepository
+ * @typedef {import ('./index.js').VersionRepository} VersionRepository
  */
 
 import dayjs from 'dayjs';
@@ -25,22 +25,22 @@ export const createCertificationVersion = withTransaction(
    * @param {TubeRepository} params.tubeRepository
    * @param {SkillRepository} params.skillRepository
    * @param {ChallengeRepository} params.challengeRepository
-   * @param {VersionsRepository} params.versionsRepository
+   * @param {VersionRepository} params.versionRepository
    */
-  async ({ scope, tubeIds, tubeRepository, skillRepository, challengeRepository, versionsRepository }) => {
-    const version = await _buildNewVersion({ scope, versionsRepository });
+  async ({ scope, tubeIds, tubeRepository, skillRepository, challengeRepository, versionRepository }) => {
+    const version = await _buildNewVersion({ scope, versionRepository });
     const challenges = await _getChallengesForTubes({ tubeIds, tubeRepository, skillRepository, challengeRepository });
-    return versionsRepository.create({ version, challenges });
+    return versionRepository.create({ version, challenges });
   },
 );
 
 /**
  * @param {object} params
  * @param {SCOPES} params.scope
- * @param {VersionsRepository} params.versionsRepository
+ * @param {VersionRepository} params.versionRepository
  */
-const _buildNewVersion = async ({ scope, versionsRepository }) => {
-  const currentVersion = await versionsRepository.findActiveByScope({ scope });
+const _buildNewVersion = async ({ scope, versionRepository }) => {
+  const currentVersion = await versionRepository.findActiveByScope({ scope });
 
   if (!currentVersion) {
     return new Version({
@@ -66,7 +66,7 @@ const _buildNewVersion = async ({ scope, versionsRepository }) => {
     ...currentVersion,
     expirationDate: transitionDate,
   });
-  await versionsRepository.update({ version: expiredVersion });
+  await versionRepository.update({ version: expiredVersion });
 
   return new Version({
     scope,

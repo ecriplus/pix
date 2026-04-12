@@ -1,7 +1,7 @@
 /**
  * @typedef {import ('./index.js').ActiveCalibratedChallengeRepository} ActiveCalibratedChallengeRepository
  * @typedef {import ('./index.js').FrameworkChallengesRepository} FrameworkChallengesRepository
- * @typedef {import ('./index.js').VersionsRepository} VersionsRepository
+ * @typedef {import ('./index.js').VersionRepository} VersionRepository
  * @typedef {import ('../models/CertificationFrameworksChallenge.js').CertificationFrameworksChallenge} CertificationFrameworksChallenge
  * @typedef {import ('../read-models/ActiveCalibratedChallenge.js').ActiveCalibratedChallenge} ActiveCalibratedChallenge
  */
@@ -16,7 +16,7 @@ export const calibrateFrameworkVersion = withTransaction(
    * @param {number} params.calibrationId
    * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository
    * @param {ActiveCalibratedChallengeRepository} params.activeCalibratedChallengeRepository
-   * @param {VersionsRepository} params.versionsRepository
+   * @param {VersionRepository} params.versionRepository
    * @returns {Promise<void>}
    */
   async ({
@@ -24,9 +24,9 @@ export const calibrateFrameworkVersion = withTransaction(
     calibrationId,
     frameworkChallengesRepository,
     activeCalibratedChallengeRepository,
-    versionsRepository,
+    versionRepository,
   }) => {
-    const version = await versionsRepository.getById({ id: versionId });
+    const version = await versionRepository.getById({ id: versionId });
     const challenges = await frameworkChallengesRepository.getByVersionId({ versionId });
 
     const activeCalibratedChallenges = await activeCalibratedChallengeRepository.getByScopeAndCalibrationId({

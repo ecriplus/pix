@@ -14,7 +14,7 @@ import * as frameworkChallengesRepository from '../../infrastructure/repositorie
 import * as learningContentRepository from '../../infrastructure/repositories/learning-content-repository.js';
 import * as organizationRepository from '../../infrastructure/repositories/organization-repository.js';
 import * as ScoBlockedAccessDatesRepository from '../../infrastructure/repositories/sco-blocked-access-dates-repository.js';
-import * as versionsRepository from '../../infrastructure/repositories/versions-repository.js';
+import * as versionRepository from '../../infrastructure/repositories/version-repository.js';
 
 /**
  *
@@ -36,7 +36,7 @@ import * as versionsRepository from '../../infrastructure/repositories/versions-
  * @typedef {skillRepository} SkillRepository
  * @typedef {tubeRepository} TubeRepository
  * @typedef {ScoBlockedAccessDatesRepository} ScoBlockedAccessDatesRepository
- * @typedef {versionsRepository} VersionsRepository
+ * @typedef {versionRepository} VersionRepository
  **/
 const dependencies = {
   activeCalibratedChallengeRepository,
@@ -54,7 +54,7 @@ const dependencies = {
   skillRepository,
   targetProfileHistoryRepository,
   tubeRepository,
-  versionsRepository,
+  versionRepository,
 };
 
 import { attachBadges } from './attach-badges.js';
