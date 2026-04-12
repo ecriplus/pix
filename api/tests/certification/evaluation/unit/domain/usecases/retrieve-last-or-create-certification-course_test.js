@@ -66,7 +66,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     placementProfileService.getPlacementProfile = sinon.stub();
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
-    versionApi.getByFrameworkAndReconciliationDate = sinon.stub();
+    versionApi.getByFrameworkAndDate = sinon.stub();
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
@@ -148,7 +148,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .resolves(candidateNotAuthorizedToStart);
 
             const version = domainBuilder.certification.shared.buildVersion();
-            versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -189,7 +189,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .resolves(existingCertificationCourse);
 
             const version = domainBuilder.certification.shared.buildVersion();
-            versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -279,7 +279,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             const version = domainBuilder.certification.shared.buildVersion({
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
-            versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -339,7 +339,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             const version = domainBuilder.certification.shared.buildVersion({
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
-            versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -402,7 +402,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 .resolves(certificationCourseCreatedMeanwhile);
 
               const version = domainBuilder.certification.shared.buildVersion();
-              versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+              versionApi.getByFrameworkAndDate.resolves(version);
 
               // when
               const result = await retrieveLastOrCreateCertificationCourse({
@@ -434,7 +434,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               version = domainBuilder.certification.shared.buildVersion({
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
-              versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+              versionApi.getByFrameworkAndDate.resolves(version);
             });
 
             it('should return it with flag created marked as true with related resources', async function () {

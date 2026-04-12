@@ -27,7 +27,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
     beforeEach(function () {
       versionApi = {
-        getByFrameworkAndReconciliationDate: sinon.stub(),
+        getByFrameworkAndDate: sinon.stub(),
       };
       answerRepository = {
         findByAssessment: sinon.stub(),
@@ -85,7 +85,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
           });
 
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
 
         answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
@@ -181,7 +181,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           const assessment = domainBuilder.buildAssessment();
           const locale = 'fr-FR';
 
-          versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+          versionApi.getByFrameworkAndDate.resolves(version);
 
           answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
@@ -326,7 +326,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const outdatedChallenge = domainBuilder.buildChallenge({ id: 'outdatedChallenge', status: 'périmé' });
         const locale = 'fr-FR';
 
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
 
         const answerStillValid = domainBuilder.buildAnswer({ challengeId: alreadyAnsweredChallenge.id });
         const answerWithOutdatedChallenge = domainBuilder.buildAnswer({ challengeId: outdatedChallenge.id });
@@ -431,7 +431,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           id: nonAnsweredCertificationChallenge.challengeId,
         });
 
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
 
         answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
 
@@ -537,7 +537,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           skill: firstSkill,
         });
 
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
 
         answerRepository.findByAssessment.withArgs(assessment.id).resolves([]);
         calibratedChallengeRepository.findActiveFlashCompatible
@@ -621,7 +621,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         version = domainBuilder.certification.shared.buildVersion({
           challengesConfiguration: { maximumAssessmentLength: 1 },
         });
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
 
         answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
@@ -689,7 +689,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
             version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration: flashConfiguration });
-            versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();
             const locale = 'fr-FR';
@@ -769,7 +769,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       it('should call findActiveFlashCompatible with the version', async function () {
         // given
         versionApi = {
-          getByFrameworkAndReconciliationDate: sinon.stub(),
+          getByFrameworkAndDate: sinon.stub(),
         };
         const v3CertificationCourse = domainBuilder.buildCertificationCourse({
           version: AlgorithmEngineVersion.V3,
@@ -797,10 +797,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .resolves(candidate);
 
         version = domainBuilder.certification.shared.buildVersion({ scope: SCOPES.PIX_PLUS_EDU_CPE });
-        versionApi.getByFrameworkAndReconciliationDate
+        versionApi.getByFrameworkAndDate
           .withArgs({
             framework: SCOPES.PIX_PLUS_EDU_CPE,
-            reconciliationDate: candidate.reconciledAt,
+            date: candidate.reconciledAt,
           })
           .resolves(version);
 
@@ -850,7 +850,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId
           .withArgs(assessment.certificationCourseId, [])
           .resolves(null);
-        versionApi.getByFrameworkAndReconciliationDate.resolves(version);
+        versionApi.getByFrameworkAndDate.resolves(version);
         sharedChallengeRepository.get.resolves();
 
         const candidate = domainBuilder.certification.evaluation.buildCandidate({

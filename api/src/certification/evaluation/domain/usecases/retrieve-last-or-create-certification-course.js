@@ -70,9 +70,9 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
     ? certificationCandidate.complementaryCertification.key
     : SCOPES.CORE;
 
-  const certificationVersion = await versionApi.getByFrameworkAndReconciliationDate({
+  const certificationVersion = await versionApi.getByFrameworkAndDate({
     framework: certificationScope,
-    reconciliationDate: certificationCandidate.reconciledAt,
+    date: certificationCandidate.reconciledAt,
   });
 
   const existingCertificationCourse =

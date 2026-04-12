@@ -65,12 +65,12 @@ describe('Certification | Configuration | Integration | Application | Api | vers
     return databaseBuilder.commit();
   });
 
-  describe('#getByFrameworkAndReconciliationDate', function () {
+  describe('#getByFrameworkAndDate', function () {
     context('when framework is not recognized', function () {
       it('returns null', async function () {
-        const res = await versionApi.getByFrameworkAndReconciliationDate({
+        const res = await versionApi.getByFrameworkAndDate({
           framework: 'CHOUBIDOUBIDOU',
-          reconciliationDate: new Date('2026-05-05'),
+          date: new Date('2026-05-05'),
         });
 
         expect(res).to.be.null;
@@ -79,9 +79,9 @@ describe('Certification | Configuration | Integration | Application | Api | vers
 
     context('when framework is CLEA', function () {
       it('returns the corresponding CORE version', async function () {
-        const res = await versionApi.getByFrameworkAndReconciliationDate({
+        const res = await versionApi.getByFrameworkAndDate({
           framework: Frameworks.CLEA,
-          reconciliationDate: new Date('2026-05-05'),
+          date: new Date('2026-05-05'),
         });
 
         expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataCoreCurrent));
@@ -90,9 +90,9 @@ describe('Certification | Configuration | Integration | Application | Api | vers
 
     context('when no version found for given reconciliationDate', function () {
       it('returns null', async function () {
-        const res = await versionApi.getByFrameworkAndReconciliationDate({
+        const res = await versionApi.getByFrameworkAndDate({
           framework: Frameworks.CORE,
-          reconciliationDate: new Date('2024-01-01'),
+          date: new Date('2024-01-01'),
         });
 
         expect(res).to.be.null;
@@ -101,9 +101,9 @@ describe('Certification | Configuration | Integration | Application | Api | vers
 
     context('when version found for given reconciliationDate', function () {
       it('returns the corresponding version', async function () {
-        const res = await versionApi.getByFrameworkAndReconciliationDate({
+        const res = await versionApi.getByFrameworkAndDate({
           framework: Frameworks.DROIT,
-          reconciliationDate: new Date('2025-06-06'),
+          date: new Date('2025-06-06'),
         });
 
         expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataDroit2025));

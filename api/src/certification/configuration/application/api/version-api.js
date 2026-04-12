@@ -6,10 +6,10 @@ import { Version } from './models/Version.js';
 /**
  * @param {object} params
  * @param {Frameworks} params.framework
- * @param {Date} params.reconciliationDate
+ * @param {Date} params.date
  * @returns {Promise<Version|null>}
  */
-export async function getByFrameworkAndReconciliationDate({ framework, reconciliationDate }) {
+export async function getByFrameworkAndDate({ framework, date }) {
   const correctedFramework = framework === Frameworks.CLEA ? Frameworks.CORE : framework;
   if (!Object.values(Frameworks).includes(correctedFramework)) {
     return null;
@@ -19,8 +19,8 @@ export async function getByFrameworkAndReconciliationDate({ framework, reconcili
   const foundVersion = versions.find((version) => {
     if (version.scope !== correctedFramework) return false;
 
-    const isAfterStart = version.startDate <= reconciliationDate;
-    const isBeforeExpiration = !version.expirationDate || version.expirationDate > reconciliationDate;
+    const isAfterStart = version.startDate <= date;
+    const isBeforeExpiration = !version.expirationDate || version.expirationDate > date;
 
     return isAfterStart && isBeforeExpiration;
   });

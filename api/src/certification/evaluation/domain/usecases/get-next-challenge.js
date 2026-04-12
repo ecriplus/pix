@@ -67,9 +67,9 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  const version = await versionApi.getByFrameworkAndReconciliationDate({
+  const version = await versionApi.getByFrameworkAndDate({
     framework: candidate.subscriptionScope,
-    reconciliationDate: candidate.reconciledAt,
+    date: candidate.reconciledAt,
   });
 
   const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
