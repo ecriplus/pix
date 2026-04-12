@@ -14,18 +14,7 @@ import { Version } from '../../domain/models/Version.js';
 export async function findAll() {
   const knexConn = DomainTransaction.getConnection();
 
-  const versionsData = await knexConn('certification_versions')
-    .select(
-      'id',
-      'scope',
-      'startDate',
-      'expirationDate',
-      'assessmentDuration',
-      'globalScoringConfiguration',
-      'competencesScoringConfiguration',
-      'challengesConfiguration',
-    )
-    .orderBy('id');
+  const versionsData = await knexConn('certification_versions').select('*').orderBy('id');
 
   return versionsData.map(_toDomain);
 }
@@ -39,19 +28,7 @@ export async function findAll() {
 export async function getById({ id }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const versionData = await knexConn('certification_versions')
-    .select(
-      'id',
-      'scope',
-      'startDate',
-      'expirationDate',
-      'assessmentDuration',
-      'globalScoringConfiguration',
-      'competencesScoringConfiguration',
-      'challengesConfiguration',
-    )
-    .where({ id })
-    .first();
+  const versionData = await knexConn('certification_versions').select('*').where({ id }).first();
 
   if (!versionData) {
     throw new NotFoundError(`Version with id ${id} not found`);
@@ -69,16 +46,7 @@ export async function findActiveByScope({ scope }) {
   const knexConn = DomainTransaction.getConnection();
 
   const versionData = await knexConn('certification_versions')
-    .select(
-      'id',
-      'scope',
-      'startDate',
-      'expirationDate',
-      'assessmentDuration',
-      'globalScoringConfiguration',
-      'competencesScoringConfiguration',
-      'challengesConfiguration',
-    )
+    .select('*')
     .where({ scope })
     .whereNull('expirationDate')
     .first();
@@ -161,6 +129,7 @@ const _toDomain = ({
   startDate,
   expirationDate,
   assessmentDuration,
+  minimumAnswersRequiredToValidateACertification,
   globalScoringConfiguration,
   competencesScoringConfiguration,
   challengesConfiguration,
@@ -170,6 +139,7 @@ const _toDomain = ({
     scope,
     startDate,
     expirationDate,
+    minimumAnswersRequiredToValidateACertification,
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,

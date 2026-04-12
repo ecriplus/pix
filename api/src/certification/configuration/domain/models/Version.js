@@ -13,6 +13,7 @@ export class Version {
     startDate: Joi.date().required(),
     expirationDate: Joi.date().allow(null).optional(),
     assessmentDuration: Joi.number().required(),
+    minimumAnswersRequiredToValidateACertification: Joi.number().required(),
     globalScoringConfiguration: Joi.array().allow(null).optional(),
     competencesScoringConfiguration: Joi.array().allow(null).optional(),
     challengesConfiguration: Joi.object().instance(FlashAssessmentAlgorithmConfiguration).required(),
@@ -25,6 +26,7 @@ export class Version {
    * @param {Date} params.startDate - When this version becomes active
    * @param {Date|null} [params.expirationDate] - When this version expires (null if current)
    * @param {number} params.assessmentDuration - Assessment duration in minutes
+   * @param {number} params.minimumAnswersRequiredToValidateACertification
    * @param {Array<object>} [params.globalScoringConfiguration] - Global scoring configuration
    * @param {Array<object>} [params.competencesScoringConfiguration] - Competences scoring configuration
    * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
@@ -35,6 +37,7 @@ export class Version {
     startDate,
     expirationDate,
     assessmentDuration,
+    minimumAnswersRequiredToValidateACertification,
     globalScoringConfiguration,
     competencesScoringConfiguration,
     challengesConfiguration,
@@ -44,6 +47,7 @@ export class Version {
     this.startDate = startDate;
     this.expirationDate = expirationDate;
     this.assessmentDuration = assessmentDuration;
+    this.minimumAnswersRequiredToValidateACertification = minimumAnswersRequiredToValidateACertification;
     this.globalScoringConfiguration = globalScoringConfiguration;
     this.competencesScoringConfiguration = competencesScoringConfiguration;
     this.challengesConfiguration = challengesConfiguration;
