@@ -697,7 +697,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Défi recupération de mot de passe",
-                "url": " https://epreuves.pix.fr/fr/mdp-reinitialisation/example.html",
+                "url": "https://epreuves.pix.fr/fr/mdp-reinitialisation/example.html",
                 "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter. <br>Son nouveau mot de passe sera : L2osémcpqjg!</p>",
                 "solution": "",
                 "height": 550
