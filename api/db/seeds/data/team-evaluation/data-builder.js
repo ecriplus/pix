@@ -123,6 +123,27 @@ async function createCoreTargetProfile(databaseBuilder) {
     isAlwaysVisible: true,
     configBadge,
   });
+  await tooling.targetProfile.createBadge({
+    databaseBuilder,
+    targetProfileId,
+    cappedTubesDTO,
+    badgeId: 702,
+    altMessage: '1 RT certifiable, acquis',
+    imageUrl: 'https://assets.pix.org/badges/Pix_plus_Edu-2-Confirme-certif.svg',
+    message: '1 RT certifiable, acquis',
+    title: '1 RT certifiable, acquis',
+    key: 'SOME_KEY_FOR_RT_702',
+    isCertifiable: true,
+    isAlwaysVisible: true,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 0,
+        },
+      ],
+    },
+  });
   await tooling.targetProfile.createStages({
     databaseBuilder,
     targetProfileId,
@@ -160,5 +181,6 @@ async function createAssessmentCampaign(databaseBuilder) {
     configCampaign: {
       participantCount: 30,
     },
+    recommendationEngine: true,
   });
 }
