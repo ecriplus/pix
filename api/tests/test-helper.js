@@ -3,7 +3,6 @@ import 'dayjs/locale/fr.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import querystring from 'node:querystring';
-import { Readable } from 'node:stream';
 import * as url from 'node:url';
 
 import { expect, use as chaiUse } from 'chai';
@@ -11,7 +10,6 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import iconv from 'iconv-lite';
 import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
@@ -125,15 +123,6 @@ after(async function () {
 });
 
 /* eslint-enable mocha/no-top-level-hooks */
-
-function toStream(data, encoding = 'utf8') {
-  return new Readable({
-    read() {
-      this.push(iconv.encode(data, encoding));
-      this.push(null);
-    },
-  });
-}
 
 /**
  * For acceptance tests. To be used as `const options = generateInjectOptions; await server.inject(options);`
@@ -393,7 +382,6 @@ export {
   removeTempFile,
   sinon,
   streamToPromise,
-  toStream,
   wait,
   waitForStreamFinalizationToBeDone,
 };
