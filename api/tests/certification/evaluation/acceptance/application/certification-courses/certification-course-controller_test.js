@@ -41,15 +41,16 @@ describe('Acceptance | API | Certification Course', function () {
 
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateId });
 
-      databaseBuilder.factory.buildCertificationVersion({
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
         startDate: new Date('2024-01-01'),
         expirationDate: null,
-      });
+      }).id;
 
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         sessionId: session.id,
         userId,
         version: AlgorithmEngineVersion.V3,
+        versionId,
       });
 
       databaseBuilder.factory.buildCertificationIssueReport({

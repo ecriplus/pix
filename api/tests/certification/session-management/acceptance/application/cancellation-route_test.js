@@ -158,6 +158,30 @@ describe('Certification | Session-management | Acceptance | Application | Routes
     context('when certification is v3', function () {
       it('should create a new cancelled assessment-result', async function () {
         // given
+        const versionId = databaseBuilder.factory.buildCertificationVersion({
+          startDate: new Date('2024-01-14'),
+          competencesScoringConfiguration: [
+            {
+              competence: 'index Compétence A',
+              values: [
+                {
+                  bounds: {
+                    max: 0,
+                    min: -5,
+                  },
+                  competenceLevel: 0,
+                },
+                {
+                  bounds: {
+                    max: 5,
+                    min: 0,
+                  },
+                  competenceLevel: 1,
+                },
+              ],
+            },
+          ],
+        }).id;
         const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
         const session = databaseBuilder.factory.buildSession({
           version: AlgorithmEngineVersion.V3,
@@ -178,6 +202,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           createdAt: new Date('2024-01-15'),
           abortReason: 'technical',
           candidateId,
+          versionId,
         });
         const assessment = databaseBuilder.factory.buildAssessment({
           id: 456,
@@ -220,31 +245,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           earnedPix: 16,
         });
 
-        databaseBuilder.factory.buildCertificationVersion({
-          startDate: new Date('2024-01-14'),
-          competencesScoringConfiguration: [
-            {
-              competence: 'index Compétence A',
-              values: [
-                {
-                  bounds: {
-                    max: 0,
-                    min: -5,
-                  },
-                  competenceLevel: 0,
-                },
-                {
-                  bounds: {
-                    max: 5,
-                    min: 0,
-                  },
-                  competenceLevel: 1,
-                },
-              ],
-            },
-          ],
-        });
-
         const options = {
           method: 'PATCH',
           url: '/api/admin/certification-courses/123/cancel',
@@ -283,6 +283,30 @@ describe('Certification | Session-management | Acceptance | Application | Routes
   describe('PATCH /api/admin/certification-courses/{certificationCourseId}/uncancel', function () {
     it('should uncancel the certification with a new assessment-result', async function () {
       // given
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
+        startDate: new Date('2024-01-14'),
+        competencesScoringConfiguration: [
+          {
+            competence: 'index Compétence A',
+            values: [
+              {
+                bounds: {
+                  max: 0,
+                  min: -5,
+                },
+                competenceLevel: 0,
+              },
+              {
+                bounds: {
+                  max: 5,
+                  min: 0,
+                },
+                competenceLevel: 1,
+              },
+            ],
+          },
+        ],
+      }).id;
       const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
       const session = databaseBuilder.factory.buildSession({
         version: AlgorithmEngineVersion.V3,
@@ -303,6 +327,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         createdAt: new Date('2024-01-15'),
         abortReason: 'candidate',
         candidateId,
+        versionId,
       });
       const assessment = databaseBuilder.factory.buildAssessment({
         id: 456,
@@ -344,31 +369,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         competenceId: 'index Compétence A',
         userId: certificationCourse.userId,
         earnedPix: 16,
-      });
-
-      databaseBuilder.factory.buildCertificationVersion({
-        startDate: new Date('2024-01-14'),
-        competencesScoringConfiguration: [
-          {
-            competence: 'index Compétence A',
-            values: [
-              {
-                bounds: {
-                  max: 0,
-                  min: -5,
-                },
-                competenceLevel: 0,
-              },
-              {
-                bounds: {
-                  max: 5,
-                  min: 0,
-                },
-                competenceLevel: 1,
-              },
-            ],
-          },
-        ],
       });
 
       const options = {

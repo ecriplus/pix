@@ -433,6 +433,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             completedAt: new Date(),
             version: AlgorithmEngineVersion.V3,
+            versionId: certificationVersionId,
           }).id;
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
@@ -528,6 +529,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             completedAt: null,
             version: AlgorithmEngineVersion.V3,
             candidateId,
+            versionId: certificationVersionId,
           }).id;
           databaseBuilder.factory.buildCertificationCenterMembership({
             userId,
@@ -646,6 +648,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
               completedAt: new Date(),
               version: AlgorithmEngineVersion.V3,
               candidateId,
+              versionId: certificationVersionId,
             }).id;
 
             const complementaryCertificationCourseId = databaseBuilder.factory.buildComplementaryCertificationCourse({
@@ -948,9 +951,9 @@ const _createSessionWithoutChallenge = async () => {
   const userId = databaseBuilder.factory.buildUser().id;
   const candidateUserId = databaseBuilder.factory.buildUser().id;
   const session = databaseBuilder.factory.buildSession({ version });
-  databaseBuilder.factory.buildCertificationVersion({
+  const versionId = databaseBuilder.factory.buildCertificationVersion({
     startDate: new Date('2024-01-01'),
-  });
+  }).id;
   databaseBuilder.factory.buildCertificationCenterMembership({
     userId,
     certificationCenterId: session.certificationCenterId,
@@ -968,6 +971,7 @@ const _createSessionWithoutChallenge = async () => {
     userId: candidateUserId,
     createdAt: new Date('2025-01-01'),
     candidateId,
+    versionId,
   }).id;
   const assessmentId = databaseBuilder.factory.buildAssessment({
     certificationCourseId,
