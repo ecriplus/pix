@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.385.0](https://github.com/1024pix/pix/compare/v5.384.0...v5.385.0) (2026-04-13)
+
+### :rocket: Amélioration
+
+- [#15775](https://github.com/1024pix/pix/pull/15775) Ajouter la feature "recommendation-engine" pour les campagnes (PIX-22148)(PIX-22219) 
+- [#15817](https://github.com/1024pix/pix/pull/15817) IA-droit-auteur-nouvelles-activites 
+- [#15805](https://github.com/1024pix/pix/pull/15805) Permettre à l'équipe métier de re-scorer une certification tant qu'elle n'est ni publiée ni dans une session non finalisée (PIX-22292) 
+- [#15725](https://github.com/1024pix/pix/pull/15725) Pouvoir donner une valeur au résultat du volet Externe pour les certifications Pix+ EDU (PIX-21820) 
+- [#15804](https://github.com/1024pix/pix/pull/15804) Relier les structures à la création d'organisation fille (PIX-22316) 
+- [#15810](https://github.com/1024pix/pix/pull/15810) Supprimer "points clés" des tags d'un text-element (pix-22247) 
+
+### :building_construction: Tech
+
+- [#15814](https://github.com/1024pix/pix/pull/15814) Ajoute une API interne pour corriger une réponse apportée par un utilisateur 
+- [#15811](https://github.com/1024pix/pix/pull/15811) Ajouter la colonne lastAnswerAt à la table certification-courses (PIX-22323). 
+- [#15809](https://github.com/1024pix/pix/pull/15809) Extraire les chai-custom-helpers de test-helper 
+- [#15819](https://github.com/1024pix/pix/pull/15819) Remplacer des test-helpers par des database-builder 
+
+### :arrow_up: Montée de version
+
+- [#15797](https://github.com/1024pix/pix/pull/15797) Update dependency @1024pix/pix-ui to ^60.3.0 (junior) 
+- [#15815](https://github.com/1024pix/pix/pull/15815) Update dependency @1024pix/pix-ui to ^60.3.0 (mon-pix) 
+- [#15818](https://github.com/1024pix/pix/pull/15818) Update dependency @1024pix/pix-ui to ^60.4.0 (admin)
+
 # [5.384.0](https://github.com/1024pix/pix/compare/v5.383.0...v5.384.0) (2026-04-10)
 
 ### :rocket: Amélioration
