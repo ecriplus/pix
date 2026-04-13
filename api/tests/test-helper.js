@@ -1,9 +1,6 @@
 import 'dayjs/locale/fr.js';
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import querystring from 'node:querystring';
-import * as url from 'node:url';
 
 import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -40,13 +37,12 @@ import * as thematicRepository from '../src/shared/infrastructure/repositories/t
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
+import { AttestationTemplateFixture } from './tooling/fixtures/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -307,7 +303,7 @@ async function mockLearningContent(learningContent) {
 }
 
 function mockAttestationStorage(attestation) {
-  const template = fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
+  const template = AttestationTemplateFixture.getStream();
 
   nock('http://attestations.fake.endpoint.example.net:80')
     .get(`/attestations.bucket/${attestation.templateName}.pdf?x-id=GetObject`)
@@ -321,10 +317,6 @@ function mockAttestationStorageUpload({ attestation, isFailed = false }) {
     .put(`/attestations.bucket/${attestation.templateName}.pdf?x-id=PutObject`)
     .reply(isFailed ? 500 : 200)
     .persist();
-}
-
-function getFakeAttestationTemplate() {
-  return fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
 }
 
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
@@ -367,7 +359,6 @@ export {
   generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
-  getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
   knex,
