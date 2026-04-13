@@ -20,6 +20,7 @@ module('Unit | Route | authenticated/organization-participants/list', function (
   const divisionSortSymbol = Symbol('divisionSort');
   const pageNumberSymbol = Symbol('pageNumber');
   const pageSizeSymbol = Symbol('pageSize');
+  const learnerFiltersOptionsSymbol = Symbol('learnerFiltersOptions');
 
   const params = {
     fullName: fullNameSymbol,
@@ -38,7 +39,12 @@ module('Unit | Route | authenticated/organization-participants/list', function (
   hooks.beforeEach(function () {
     route = this.owner.lookup('route:authenticated/organization-participants/list');
     store = this.owner.lookup('service:store');
-    route.currentUser = { organization: { id: Symbol('organization-id') } };
+    route.currentUser = {
+      organization: {
+        id: Symbol('organization-id'),
+        learnerFiltersOptions: Promise.resolve(learnerFiltersOptionsSymbol),
+      },
+    };
     sinon
       .stub(extraFilterSerializer, 'decodeExtraFilters')
       .withArgs(extraFiltersSymbol)
@@ -70,10 +76,10 @@ module('Unit | Route | authenticated/organization-participants/list', function (
 
   test('should return participant model', async function (assert) {
     // when
-    const participants = await route.model(params);
-
+    const { participantList, customFiltersOptions } = await route.model(params);
     // then
-    assert.strictEqual(participants, organizationParticipantSymbol);
+    assert.strictEqual(participantList, organizationParticipantSymbol);
+    assert.strictEqual(customFiltersOptions, learnerFiltersOptionsSymbol);
   });
 
   test('should resetController on exiting', function (assert) {
