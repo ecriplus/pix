@@ -97,7 +97,7 @@ module('Integration | Component | organizations/header-information', function (h
         const screen = await render(<template><HeadInformation @organization={{organization}} /></template>);
 
         // then
-        assert.dom(screen.getByText(t('components.organizations.head-information.child-organization'))).exists();
+        assert.dom(screen.getByText(t('components.organizations.head-information.parent-organization-tag'))).exists();
         assert.dom(screen.getByRole('link', { name: 'Shibusen' })).exists();
       });
     });

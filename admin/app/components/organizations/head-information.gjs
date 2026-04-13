@@ -114,7 +114,7 @@ export default class HeadInformation extends Component {
               {{#if @organization.parentOrganizationId}}
                 <li>
                   <PixTag class="organization__child-tag" @color="success">
-                    {{t "components.organizations.head-information.child-organization"}}
+                    {{t "components.organizations.head-information.parent-organization-tag"}}
                     <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
                       {{@organization.parentOrganizationName}}
                     </LinkTo>
