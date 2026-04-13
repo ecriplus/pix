@@ -1,0 +1,254 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
+import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixStars from '@1024pix/pix-ui/components/pix-stars';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import dayjs from 'dayjs';
+import CustomParseFormat from 'dayjs/plugin/customParseFormat';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import { t } from 'ember-intl';
+import or from 'ember-truth-helpers/helpers/or';
+import AcquiredBadges from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/acquired-badges';
+import AttestationResult
+  from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/attestation-result';
+import CustomOrganizationBlock
+  from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/custom-organization-block';
+import RetryOrResetBlock
+  from 'mon-pix/components/campaigns/assessment/results/evaluation-results-hero/retry-or-reset-block';
+import ENV from 'mon-pix/config/environment';
+
+import MarkdownToHtml from '../../../../markdown-to-html';
+
+dayjs.extend(LocalizedFormat);
+dayjs.extend(CustomParseFormat);
+
+export default class EvaluationResultsHeroRecommendationEngine extends Component {
+  @service currentUser;
+
+  @service pixMetrics;
+  @service router;
+  @service store;
+  @service tabManager;
+  @service featureToggles;
+
+  @tracked hasGlobalError = false;
+  @tracked isButtonLoading = false;
+
+  get masteryRatePercentage() {
+    return Math.round(this.args.campaignParticipationResult.masteryRate * 100);
+  }
+
+  get hasStagesStars() {
+    return (
+      this.args.campaignParticipationResult.hasReachedStage &&
+      this.args.campaignParticipationResult.reachedStage.totalStage > 1
+    );
+  }
+
+  get reachedStage() {
+    return {
+      acquired: this.args.campaignParticipationResult.reachedStage.reachedStage - 1,
+      total: this.args.campaignParticipationResult.reachedStage.totalStage - 1,
+    };
+  }
+
+  get isCampaignAutonomousCourse() {
+    return this.args.campaign.organizationId === ENV.APP.AUTONOMOUS_COURSES_ORGANIZATION_ID;
+  }
+
+  get showCustomOrganizationBlock() {
+    return this.args.campaign.customResultPageText || this.args.campaign.hasCustomResultPageButton;
+  }
+
+  get displayQuestResult() {
+    return (
+      this.featureToggles.featureToggles?.isQuestEnabled && !this.currentUser.user.isAnonymous && this.hasQuestResults
+    );
+  }
+
+  get isUserAnonymous() {
+    return this.currentUser?.user?.isAnonymous;
+  }
+
+  get hasQuestResults() {
+    return this.args.questResults && this.args.questResults.length > 0;
+  }
+
+  get sharedAtDate() {
+    return dayjs(this.args.campaignParticipationResult.sharedAt).format('LL');
+  }
+
+  get sharedAtTime() {
+    return dayjs(this.args.campaignParticipationResult.sharedAt).format('LT');
+  }
+
+  @action handleSeeTrainingsClick() {
+    this.args.showTrainings();
+  }
+
+  @action setGlobalError(value) {
+    this.hasGlobalError = value;
+  }
+
+  @action handleBackToHomepageDisplay() {
+    this.pixMetrics.trackEvent("Affichage du bouton 'Revenir à la page d'accueil'", {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: 'Sortie de parcours',
+    });
+  }
+
+  @action handleBackToHomepageClick() {
+    this.pixMetrics.trackEvent("Clic sur le bouton 'Revenir à la page d'accueil'", {
+      disabled: true,
+      category: 'Fin de parcours',
+      action: 'Sortie de parcours',
+    });
+  }
+
+  @action handleSignUpClick() {
+    this.pixMetrics.trackEvent('CampaignResultSignUpFromAnonymousUserClick');
+  }
+
+  <template>
+    <div class="evaluation-results-hero-recommendation-engine">
+      <div class="evaluation-results-hero-recommendation-engine__results">
+        <p class="evaluation-results-hero-recommendation-engine-results__percent">
+          ENGINE
+          <strong>{{this.masteryRatePercentage}}<span>%</span></strong>
+          <span>{{t "pages.skill-review.hero.mastery-rate"}}</span>
+        </p>
+        <!-- affichage des paliers sur la maquette, donc on garde-->
+        {{#if this.hasStagesStars}}
+          <PixStars
+            class="evaluation-results-hero-recommendation-engine-results__stars"
+            @count={{this.reachedStage.acquired}}
+            @total={{this.reachedStage.total}}
+            @alt={{t
+              "pages.skill-review.stage.starsAcquired"
+              acquired=this.reachedStage.acquired
+              total=this.reachedStage.total
+            }}
+            @color="yellow"
+          />
+
+          <div class="evaluation-results-hero-recommendation-engine-results__stars-text" role="presentation">
+            {{t
+              "pages.skill-review.stage.starsAcquired"
+              acquired=this.reachedStage.acquired
+              total=this.reachedStage.total
+            }}
+          </div>
+        {{/if}}
+
+        <!-- Pas sur les maquettes, on peut commenter-->
+        {{!--        {{#if this.displayQuestResult}}
+        <AttestationResult @results={{@questResults}} @onError={{fn this.setGlobalError true}} />
+        {{/if}}
+        --}}
+
+      </div>
+      <div class="evaluation-results-hero-recommendation-engine__details">
+        <!-- On garde, Merci Elodie ... au lieu de Bonjour Elodie -->
+        <h2 class="evaluation-results-hero-recommendation-engine-details__title">
+          {{t "pages.skill-review.hero.thanks" name=this.currentUser.user.firstName}}
+        </h2>
+
+        {{#if @campaignParticipationResult.hasReachedStage}}
+          <!-- ???? dans la maquette, on ne sait pas ce qui correspond à cela -->
+          <div class="evaluation-results-hero-recommendation-engine-details__stage-message">
+            <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.title}} />
+            <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
+          </div>
+        {{/if}}
+
+        {{#unless (or @campaign.isForAbsoluteNovice this.isCampaignAutonomousCourse)}}
+          <!-- On ne garde pas pour le mvp -->
+          <PixNotificationAlert
+            class="evaluation-results-hero-recommendation-engine-results__shared-message"
+            @type="success"
+            @withIcon={{true}}
+          >
+            {{t "pages.skill-review.hero.shared-message" date=this.sharedAtDate time=this.sharedAtTime}}
+          </PixNotificationAlert>
+
+          {{#if @hasTrainings}}
+            <!-- On ne garde pas pour le mvp -->
+            <p class="evaluation-results-hero-recommendation-engine-details__explanations">
+              {{t "pages.skill-review.hero.explanations.trainings"}}
+            </p>
+          {{/if}}
+        {{/unless}}
+
+        <div class="evaluation-results-hero-recommendation-engine-details__actions">
+          <!-- A priori les utilisateurs sont forcément connectés, donc ça ne rentre PAS dans le MVP -->
+          {{#if (or @campaign.isForAbsoluteNovice this.isCampaignAutonomousCourse)}}
+            {{#unless @campaign.hasCustomResultPageButton}}
+              {{#if this.isUserAnonymous}}
+                <p>{{t "pages.signup.save-progress-message"}}</p>
+                <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
+                  {{t "pages.signup.actions.sign-up-on-pix"}}
+                </PixButtonLink>
+              {{else}}
+                {{this.handleBackToHomepageDisplay}}
+                <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
+                  {{t "navigation.back-to-homepage"}}
+                </PixButtonLink>
+              {{/if}}
+            {{/unless}}
+          {{else}}
+
+            {{#if this.isUserAnonymous}}
+              <p>{{t "pages.signup.save-progress-message"}}</p>
+              <PixButtonLink @route="inscription" @size="large" onclick={{this.handleSignUpClick}}>
+                {{t "pages.signup.actions.sign-up-on-pix"}}
+              </PixButtonLink>
+            {{/if}}
+            {{#if @hasTrainings}}
+              <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="large">
+                {{t "pages.skill-review.hero.see-trainings"}}
+              </PixButton>
+            {{else}}
+              {{#unless (or @campaign.hasCustomResultPageButton this.isUserAnonymous)}}
+                {{this.handleBackToHomepageDisplay}}
+                <PixButtonLink @route="authentication.login" @size="large" onclick={{this.handleBackToHomepageClick}}>
+                  {{t "navigation.back-to-homepage"}}
+                </PixButtonLink>
+              {{/unless}}
+            {{/if}}
+          {{/if}}
+
+          {{#if this.hasGlobalError}}
+            <!-- Demander à Elodie le rendu quand on affiche une erreur -->
+            <div class="evaluation-results-hero-recommendation-engine-results__actions-error">
+              <PixNotificationAlert @type="error" @withIcon={{true}}>
+                {{t "pages.skill-review.error"}}
+              </PixNotificationAlert>
+            </div>
+          {{/if}}
+        </div>
+
+        {{#if @campaignParticipationResult.acquiredBadges.length}}
+          <!-- On garde en changeant le rendu -->
+          <AcquiredBadges @acquiredBadges={{@campaignParticipationResult.acquiredBadges}} />
+        {{/if}}
+
+        {{#if this.showCustomOrganizationBlock}}
+          <!-- On enlève pour le mvp -->
+          <CustomOrganizationBlock
+            @campaign={{@campaign}}
+            @campaignParticipationResult={{@campaignParticipationResult}}
+          />
+        {{/if}}
+      </div>
+
+      <!-- Ne semble PAS dans le MVP -->
+      {{#if (or @campaignParticipationResult.canRetry @campaignParticipationResult.canReset)}}
+        <RetryOrResetBlock @campaign={{@campaign}} @campaignParticipationResult={{@campaignParticipationResult}} />
+      {{/if}}
+    </div>
+  </template>
+}
