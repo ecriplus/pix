@@ -122,12 +122,15 @@ export class OidcAuthenticationService {
   async initializeClientConfig() {
     if (this.#openidClientConfig) return;
 
+    let startDate;
+
     try {
       const metadata = {
         client_secret: this.clientSecret,
         ...this.openidClientExtraMetadata,
       };
 
+      startDate = new Date();
       this.#openidClientConfig = await this.#openidClient.discovery(
         new URL(this.openidConfigurationUrl),
         this.clientId,
@@ -138,11 +141,14 @@ export class OidcAuthenticationService {
         data: { organizationName: this.organizationName },
         error,
         event: 'initialize-client-config',
+        startDate,
       });
     }
   }
 
   getAuthorizationUrl() {
+    let startDate;
+
     try {
       const state = randomUUID();
       const nonce = randomUUID();
@@ -154,6 +160,7 @@ export class OidcAuthenticationService {
         ...this.extraAuthorizationUrlParameters,
       };
 
+      startDate = new Date();
       const redirectTarget = this.#openidClient.buildAuthorizationUrl(this.#openidClientConfig, parameters);
 
       return { redirectTarget, state, nonce };
@@ -162,12 +169,15 @@ export class OidcAuthenticationService {
         data: { organizationName: this.organizationName },
         error,
         event: 'generate-authorization-url',
+        startDate,
       });
       throw new OidcError({ message: error.message });
     }
   }
 
   async exchangeCodeForTokens({ code, state, iss, nonce, sessionState }) {
+    let startDate;
+
     try {
       const currentUrl = new URL(this.redirectUri);
       if (code) currentUrl.searchParams.append('code', code);
@@ -177,6 +187,7 @@ export class OidcAuthenticationService {
 
       const checks = { expectedNonce: nonce, expectedState: sessionState };
 
+      startDate = new Date();
       const tokenResponse = await this.#openidClient.authorizationCodeGrant(
         this.#openidClientConfig,
         currentUrl,
@@ -194,6 +205,7 @@ export class OidcAuthenticationService {
         data: { code, nonce, organizationName: this.organizationName, sessionState, state, iss },
         error,
         event: 'exchange-code-for-tokens',
+        startDate,
       });
       throw new OidcError({ message: error.message });
     }
@@ -275,7 +287,10 @@ export class OidcAuthenticationService {
       parameters.post_logout_redirect_uri = this.postLogoutRedirectUri;
     }
 
+    let startDate;
+
     try {
+      startDate = new Date();
       const endSessionUrl = this.#openidClient.buildEndSessionUrl(this.#openidClientConfig, parameters);
 
       await this.sessionTemporaryStorage.delete(key);
@@ -286,6 +301,7 @@ export class OidcAuthenticationService {
         data: { organizationName: this.organizationName },
         error,
         event: 'get-redirect-logout-url',
+        startDate,
       });
       throw new OidcError({ message: error.message });
     }
@@ -293,14 +309,17 @@ export class OidcAuthenticationService {
 
   async _getUserInfoFromEndpoint({ accessToken, expectedSubject }) {
     let userInfo;
+    let startDate;
 
     try {
+      startDate = new Date();
       userInfo = await this.#openidClient.fetchUserInfo(this.#openidClientConfig, accessToken, expectedSubject);
     } catch (error) {
       _monitorOidcError(error.message, {
         data: { organizationName: this.organizationName },
         error,
         event: 'get-user-info-from-endpoint',
+        startDate,
       });
       throw new OidcError({ message: error.message });
     }
@@ -328,7 +347,7 @@ export class OidcAuthenticationService {
   }
 }
 
-function _monitorOidcError(message, { data, error, event }) {
+function _monitorOidcError(message, { data, error, event, startDate }) {
   const monitoringData = {
     message,
     context: 'oidc',
@@ -345,6 +364,10 @@ function _monitorOidcError(message, { data, error, event }) {
       ...(error.error_uri && { errorUri: error.error_uri }),
       ...(error.response && { response: error.response }),
     };
+  }
+
+  if (startDate) {
+    monitoringData.duration = new Date() - startDate;
   }
 
   logger.error(monitoringData);

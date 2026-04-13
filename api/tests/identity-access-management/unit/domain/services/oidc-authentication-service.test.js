@@ -19,10 +19,17 @@ const MOCK_OIDC_PROVIDER_CONFIG = Symbol('config');
 
 describe('Unit | Domain | Services | oidc-authentication-service', function () {
   let openidClient;
+  let clock;
 
   beforeEach(function () {
-    openidClient = createOpenIdClientMock(MOCK_OIDC_PROVIDER_CONFIG);
+    clock = sinon.useFakeTimers({ toFake: ['Date'] });
     sinon.stub(logger, 'error');
+
+    openidClient = createOpenIdClientMock(MOCK_OIDC_PROVIDER_CONFIG);
+  });
+
+  afterEach(function () {
+    clock.restore();
   });
 
   describe('constructor', function () {
@@ -252,8 +259,12 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           get: sinon.stub().resolves(idToken),
           delete: sinon.stub().resolves(),
         };
+
         const errorThrown = new Error('Fails to generate endSessionUrl');
-        openidClient.buildEndSessionUrl.throws(errorThrown);
+        openidClient.buildEndSessionUrl.callsFake(() => {
+          clock.tick(2000);
+          throw errorThrown;
+        });
 
         const oidcAuthenticationService = new OidcAuthenticationService(settings.oidcExampleNet, {
           sessionTemporaryStorage,
@@ -281,6 +292,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           event: 'get-redirect-logout-url',
           message: errorThrown.message,
           team: 'acces',
+          duration: sinon.match.number.and(
+            sinon.match((val) => {
+              return val >= 2000;
+            }),
+          ),
         });
       });
     });
@@ -346,12 +362,14 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const iss = 'https://issuer.url';
         const sessionState = 'sessionState';
         const state = 'state';
-        const errorThrown = new Error('Fails to get tokens');
 
+        const errorThrown = new Error('Fails to get tokens');
         errorThrown.error_uri = '/oauth2/token';
         errorThrown.response = 'api call response here';
-
-        openidClient.authorizationCodeGrant.rejects(errorThrown);
+        openidClient.authorizationCodeGrant.callsFake(() => {
+          clock.tick(2000);
+          throw errorThrown;
+        });
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -395,6 +413,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           event: 'exchange-code-for-tokens',
           message: errorThrown.message,
           team: 'acces',
+          duration: sinon.match.number.and(
+            sinon.match((val) => {
+              return val >= 2000;
+            }),
+          ),
         });
       });
     });
@@ -448,9 +471,12 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const identityProvider = 'identityProvider';
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
-        const errorThrown = new Error('Fails to generate authorization url');
 
-        openidClient.buildAuthorizationUrl.throws(errorThrown);
+        const errorThrown = new Error('Fails to generate authorization url');
+        openidClient.buildAuthorizationUrl.callsFake(() => {
+          clock.tick(2000);
+          throw errorThrown;
+        });
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -482,6 +508,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           event: 'generate-authorization-url',
           message: errorThrown.message,
           team: 'acces',
+          duration: sinon.match.number.and(
+            sinon.match((val) => {
+              return val >= 2000;
+            }),
+          ),
         });
       });
     });
@@ -742,9 +773,12 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const identityProvider = 'identityProvider';
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
-        const errorThrown = new Error('Fails to get user info');
 
-        openidClient.fetchUserInfo.rejects(errorThrown);
+        const errorThrown = new Error('Fails to get user info');
+        openidClient.fetchUserInfo.callsFake(() => {
+          clock.tick(2000);
+          throw errorThrown;
+        });
 
         const oidcAuthenticationService = new OidcAuthenticationService(
           {
@@ -776,6 +810,11 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           },
           event: 'get-user-info-from-endpoint',
           team: 'acces',
+          duration: sinon.match.number.and(
+            sinon.match((val) => {
+              return val >= 2000;
+            }),
+          ),
         });
       });
     });
