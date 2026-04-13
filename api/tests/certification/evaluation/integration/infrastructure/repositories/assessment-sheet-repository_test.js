@@ -12,6 +12,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       maxReachableLevelOnCertificationDate: 6,
       isRejectedForFraud: true,
       userId,
+      updatedAt: new Date('2022-02-22'),
+      lastAnswerAt: new Date('2022-01-11'),
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
@@ -25,6 +27,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
     answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
     await databaseBuilder.commit();
   });
+
   describe('#findByCertificationCourseId', function () {
     context('when the certification course exists', function () {
       it('should return the assessment sheet', async function () {
@@ -40,11 +43,13 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             abortReason: 'candidate',
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
-            updatedAt: new Date('2023-10-05'),
+            assessmentUpdatedAt: new Date('2023-10-05'),
             answers: [domainBuilder.buildAnswer(answerData)],
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
+            certificationCourseUpdatedAt: new Date('2022-02-22'),
+            lastAnswerAt: new Date('2022-01-11'),
           }),
         );
       });
@@ -62,7 +67,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
   });
 
   describe('#update', function () {
-    it('should update only the state and the updatedAt date of the assessment the assessment sheet', async function () {
+    it('should update only allowed fields of the assessment the assessment sheet', async function () {
       // given
       const assessmentSheetToUpdate = domainBuilder.certification.evaluation.buildAssessmentSheet({
         certificationCourseId,
@@ -70,8 +75,13 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         abortReason: 'technical',
         isRejectedForFraud: false,
         state: Assessment.states.STARTED,
-        updatedAt: new Date('2024-05-11'),
+        assessmentUpdatedAt: new Date('2024-05-11'),
         answers: [],
+        lastChallengeId: 'somethingElse',
+        lastQuestionDate: new Date('2033-10-07'),
+        lastQuestionState: Assessment.statesOfLastQuestion.ASKED,
+        certificationCourseUpdatedAt: new Date('2044-02-22'),
+        lastAnswerAt: new Date('2044-01-11'),
       });
 
       // when
@@ -86,12 +96,14 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           userId,
           abortReason: 'candidate',
           isRejectedForFraud: true,
-          state: Assessment.states.STARTED,
-          updatedAt: new Date('2024-05-11'),
+          state: Assessment.states.STARTED, // updated
+          assessmentUpdatedAt: new Date('2024-05-11'), // updated
           answers: [domainBuilder.buildAnswer(answerData)],
           lastChallengeId: 'nextChallengeIdToAnswer',
           lastQuestionDate: new Date('2024-11-07'),
           lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
+          certificationCourseUpdatedAt: new Date('2044-02-22'), // updated
+          lastAnswerAt: new Date('2044-01-11'), // updated
         }),
       );
     });

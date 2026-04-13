@@ -221,6 +221,20 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
               const keInDB = await knex('knowledge-elements').pluck('id');
               expect(keInDB).to.have.length(0);
             });
+
+            it('updates the lastAnswerAt date to answer creation date', async function () {
+              const evaluatedAnswer = await evaluateAndSaveAnswer({
+                certificationCourseId,
+                userId,
+                answer: currentAnswer,
+              });
+
+              const [answerCreatedAt] = await knex('answers').pluck('createdAt').where({ id: evaluatedAnswer.id });
+              const [lastAnswerAt] = await knex('certification-courses')
+                .pluck('lastAnswerAt')
+                .where({ id: certificationCourseId });
+              expect(lastAnswerAt).to.deep.equal(answerCreatedAt);
+            });
           });
         });
       });

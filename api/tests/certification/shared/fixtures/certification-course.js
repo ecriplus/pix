@@ -96,6 +96,7 @@ const buildCertificationChallengesFromChallenges = ({ challenges, certificationC
 const buildOkAnswersFromChallenges = ({ challenges, assessment }) => {
   return challenges.map((challenge) => {
     const answer = domainBuilder.buildAnswer({
+      createdAt: new Date('2020-01-01'),
       assessmentId: assessment.id,
       challengeId: challenge.id,
       result: AnswerStatus.OK,

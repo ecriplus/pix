@@ -13,7 +13,9 @@ export const buildAssessmentSheet = function ({
   isRejectedForFraud = false,
   state = STATES.COMPLETED,
   lastQuestionState = STATES_OF_LAST_QUESTION.ASKED,
-  updatedAt = new Date(),
+  assessmentUpdatedAt = new Date(),
+  certificationCourseUpdatedAt = new Date(),
+  lastAnswerAt = new Date(),
   lastQuestionDate = new Date(),
   answers = [],
 } = {}) {
@@ -26,7 +28,9 @@ export const buildAssessmentSheet = function ({
     isRejectedForFraud,
     state,
     lastQuestionState,
-    updatedAt,
+    assessmentUpdatedAt,
+    certificationCourseUpdatedAt,
+    lastAnswerAt,
     lastQuestionDate,
     answers,
   });

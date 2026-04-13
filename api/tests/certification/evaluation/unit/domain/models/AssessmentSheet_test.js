@@ -45,11 +45,11 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
       clock.restore();
     });
 
-    it(`should update state and updatedAt when assessment sheet is in state ${STATES.STARTED}`, function () {
+    it(`should update state and assessmentUpdatedAt when assessment sheet is in state ${STATES.STARTED}`, function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         ...assessmentSheetBaseData,
         state: STATES.STARTED,
-        updatedAt: new Date('2021-10-29'),
+        assessmentUpdatedAt: new Date('2021-10-29'),
       });
       assessmentSheet.complete();
 
@@ -57,7 +57,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         domainBuilder.certification.evaluation.buildAssessmentSheet({
           ...assessmentSheetBaseData,
           state: STATES.COMPLETED,
-          updatedAt: now,
+          assessmentUpdatedAt: now,
         }),
       );
     });
@@ -69,7 +69,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
           const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
             ...assessmentSheetBaseData,
             state,
-            updatedAt: new Date('2021-10-29'),
+            assessmentUpdatedAt: new Date('2021-10-29'),
           });
           assessmentSheet.complete();
 
@@ -77,7 +77,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
             domainBuilder.certification.evaluation.buildAssessmentSheet({
               ...assessmentSheetBaseData,
               state,
-              updatedAt: new Date('2021-10-29'),
+              assessmentUpdatedAt: new Date('2021-10-29'),
             }),
           );
         });
@@ -222,5 +222,38 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
           expect(assessmentSheet.hasLastQuestionBeenFocusedOut()).to.be.false;
         });
       });
+  });
+
+  context('#refreshLastAnswerTimestamp', function () {
+    let assessmentSheetBaseData;
+
+    beforeEach(function () {
+      assessmentSheetBaseData = {
+        certificationCourseId: 123,
+        assessmentId: 456,
+        abortReason: 'candidate',
+        isRejectedForFraud: true,
+        answers: [domainBuilder.buildAnswer()],
+        assessmentUpdatedAt: new Date('2022-01-01'),
+      };
+    });
+
+    it('should update lastAnswerAt and certificationCourseUpdatedAt to provided date', function () {
+      const someDate = new Date('2044-05-05');
+      const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+        ...assessmentSheetBaseData,
+        lastAnswerAt: new Date('2023-03-03'),
+        certificationCourseUpdatedAt: new Date('2024-04-04'),
+      });
+      assessmentSheet.refreshLastAnswerTimestamp(someDate);
+
+      expect(assessmentSheet).to.deepEqualInstance(
+        domainBuilder.certification.evaluation.buildAssessmentSheet({
+          ...assessmentSheetBaseData,
+          lastAnswerAt: someDate,
+          certificationCourseUpdatedAt: someDate,
+        }),
+      );
+    });
   });
 });
