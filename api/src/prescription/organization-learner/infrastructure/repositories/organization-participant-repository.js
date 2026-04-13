@@ -166,7 +166,13 @@ function _filterByAttributes(queryBuilder, filters = {}) {
   if (!keys.length) return;
 
   keys.forEach((key) => {
-    queryBuilder.whereRaw(`?? LIKE ?`, [key, '%' + filters[key] + '%']);
+    const searchValue = filters[key];
+
+    if (Array.isArray(searchValue)) {
+      queryBuilder.whereIn(key, filters[key]);
+    } else {
+      queryBuilder.whereRaw(`?? LIKE ?`, [key, '%' + filters[key] + '%']);
+    }
   });
 }
 
