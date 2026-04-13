@@ -70,6 +70,7 @@ const serialize = function (prescriber) {
           'schoolCode',
           'combinedCourses',
           'sessionExpirationDate',
+          'learnerFiltersOptions',
         ],
         memberships: {
           ref: 'id',
@@ -151,6 +152,16 @@ const serialize = function (prescriber) {
           relationshipLinks: {
             related: function (record, current, parent) {
               return `/api/organizations/${parent.id}/combined-courses`;
+            },
+          },
+        },
+        learnerFiltersOptions: {
+          ref: 'id',
+          ignoreRelationshipData: true,
+          nullIfMissing: true,
+          relationshipLinks: {
+            related: function (record, current, parent) {
+              return `/api/organizations/${parent.id}/organization-learners/filters`;
             },
           },
         },
