@@ -401,6 +401,7 @@ export default class List extends Component {
 
         <Filters
           @destinationId={{filtersId}}
+          @customFiltersOptions={{@customFiltersOptions}}
           @learnersCount={{@participants.meta.rowCount}}
           @fullName={{@fullName}}
           @customFilters={{this.customFilters}}
@@ -456,6 +457,7 @@ const Filters = <template>
   <InElement @destinationId={{@destinationId}}>
     <LearnerFilters
       @learnersCount={{@learnersCount}}
+      @customFiltersOptions={{@customFiltersOptions}}
       @fullName={{@fullName}}
       @customFilters={{@customFilters}}
       @customFiltersValues={{@customFiltersValues}}

@@ -455,58 +455,105 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           }
           this.owner.register('service:current-user', CurrentUserStub);
           participants.meta = {
-            customFilters: ['classe'],
+            customFilters: ['COMMON_DIVISION'],
             headingCustomColumns: [],
           };
         });
 
-        test('it should display custom filters', async function (assert) {
-          // given
+        module('input text filter', function () {
+          test('it should trigger filtering with custom filters', async function (assert) {
+            // given
+            const triggerFiltering = sinon.stub();
 
-          const customFiltersValues = { classe: 'Troisième' };
-          // when
-          const screen = await render(
-            <template>
-              <List
-                @participants={{participants}}
-                @triggerFiltering={{noop}}
-                @onClickLearner={{noop}}
-                @fullName={{fullNameFilter}}
-                @customFiltersValues={{customFiltersValues}}
-                @certificabilityFilter={{certificabilityFilter}}
-              />
-            </template>,
-          );
+            const customFiltersValues = { COMMON_DIVISION: '' };
 
-          // then
-          assert.ok(screen.getByLabelText(t('classe')));
+            await render(
+              <template>
+                <List
+                  @participants={{participants}}
+                  @triggerFiltering={{triggerFiltering}}
+                  @onClickLearner={{noop}}
+                  @fullName={{fullNameFilter}}
+                  @customFiltersValues={{customFiltersValues}}
+                  @certificabilityFilter={{certificabilityFilter}}
+                />
+              </template>,
+            );
+
+            // when
+            await fillByLabel(t('common.import.field.division'), 'CP');
+
+            // then
+            assert.ok(triggerFiltering.calledWith('extraFilters.COMMON_DIVISION', 'CP'));
+          });
         });
-        test('it should trigger filtering with custom filters', async function (assert) {
-          // given
-          const triggerFiltering = sinon.stub();
 
-          const customFiltersValues = { classe: '' };
+        module('multi select filter', function () {
+          test('it should trigger filtering with custom filters', async function (assert) {
+            // given
+            const triggerFiltering = sinon.stub();
 
-          await render(
-            <template>
-              <List
-                @participants={{participants}}
-                @triggerFiltering={{triggerFiltering}}
-                @onClickLearner={{noop}}
-                @fullName={{fullNameFilter}}
-                @customFiltersValues={{customFiltersValues}}
-                @certificabilityFilter={{certificabilityFilter}}
-              />
-            </template>,
-          );
+            const customFiltersValues = { COMMON_DIVISION: '' };
+            const customFiltersOptions = [{ attributeName: 'COMMON_DIVISION', values: ['Troisième', 'Quatrième'] }];
 
-          // when
-          await fillByLabel(t('classe'), 'CP');
+            const screen = await render(
+              <template>
+                <List
+                  @participants={{participants}}
+                  @triggerFiltering={{triggerFiltering}}
+                  @onClickLearner={{noop}}
+                  @fullName={{fullNameFilter}}
+                  @customFiltersValues={{customFiltersValues}}
+                  @customFiltersOptions={{customFiltersOptions}}
+                  @certificabilityFilter={{certificabilityFilter}}
+                />
+              </template>,
+            );
 
-          // then
-          assert.ok(triggerFiltering.calledWith('extraFilters.classe', 'CP'));
+            // when
+            await click(screen.getByRole('button', { name: t('common.import.field.division') }));
+
+            await screen.findByRole('menu');
+
+            await click(screen.getByRole('checkbox', { name: 'Troisième' }));
+
+            // then
+            assert.ok(triggerFiltering.calledWith('extraFilters.COMMON_DIVISION', ['Troisième']));
+          });
+
+          test('it should prefill data on custom filters', async function (assert) {
+            // given
+            const triggerFiltering = sinon.stub();
+
+            const customFiltersValues = { COMMON_DIVISION: 'Quatrième' };
+            const customFiltersOptions = [{ attributeName: 'COMMON_DIVISION', values: ['Troisième', 'Quatrième'] }];
+
+            const screen = await render(
+              <template>
+                <List
+                  @participants={{participants}}
+                  @triggerFiltering={{triggerFiltering}}
+                  @onClickLearner={{noop}}
+                  @fullName={{fullNameFilter}}
+                  @customFiltersValues={{customFiltersValues}}
+                  @customFiltersOptions={{customFiltersOptions}}
+                  @certificabilityFilter={{certificabilityFilter}}
+                />
+              </template>,
+            );
+
+            // when
+            await click(screen.getByRole('button', { name: t('common.import.field.division') }));
+
+            await screen.findByRole('menu');
+
+            // then
+            assert.dom(screen.getByRole('checkbox', { name: 'Quatrième' })).isChecked();
+            assert.dom(screen.getByRole('checkbox', { name: 'Troisième' })).isNotChecked();
+          });
         });
       });
+
       module('when import feature is disabled', function (hooks) {
         const participants = [];
         hooks.beforeEach(function () {
@@ -515,14 +562,14 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           }
           this.owner.register('service:current-user', CurrentUserStub);
           participants.meta = {
-            customFilters: ['classe'],
+            customFilters: ['COMMON_DIVISION'],
           };
         });
 
         test('it should not display custom filters', async function (assert) {
           // given
 
-          const customFiltersValues = { classe: 'Troisième' };
+          const customFiltersValues = { COMMON_DIVISION: 'Troisième' };
           // when
           const screen = await render(
             <template>
@@ -538,7 +585,7 @@ module('Integration | Component | OrganizationParticipant | List', function (hoo
           );
 
           // then
-          assert.notOk(screen.queryByLabelText(t('classe')));
+          assert.notOk(screen.queryByLabelText(t('common.import.field.division')));
         });
       });
     });

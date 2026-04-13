@@ -1,6 +1,7 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
 import { get } from '@ember/helper';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -44,6 +45,18 @@ export default class LearnerFilters extends Component {
       : this.intl.t('pages.organization-participants.filters.participations-count', { count: this.args.learnersCount });
   }
 
+  @action
+  hasFilterOptions(columnName) {
+    return this.args?.customFiltersOptions?.find(({ attributeName }) => attributeName === columnName) ?? false;
+  }
+
+  @action
+  customFilterOptions(columnName) {
+    return this.args.customFiltersOptions
+      .find(({ attributeName }) => attributeName === columnName)
+      .values.map((option) => ({ label: option, value: option }));
+  }
+
   <template>
     <PixFilterBanner
       @title={{t "common.filters.title"}}
@@ -78,16 +91,28 @@ export default class LearnerFilters extends Component {
       {{#each @customFilters as |customFilter|}}
         {{#let (t (getColumnName customFilter)) as |columnName|}}
 
-          <PixSearchInput
-            @id="extraFilters.{{customFilter}}"
-            value={{get @customFiltersValues customFilter}}
-            @screenReaderOnly={{true}}
-            @placeholder={{columnName}}
-            @debounceTimeInMs={{debounceTime}}
-            @triggerFiltering={{@onTriggerFiltering}}
-          >
-            <:label>{{columnName}}</:label>
-          </PixSearchInput>
+          {{#if (this.hasFilterOptions customFilter)}}
+            <UiMultiSelectFilter
+              @field="extraFilters.{{customFilter}}"
+              @label={{columnName}}
+              @placeholder={{columnName}}
+              @onSelect={{@onTriggerFiltering}}
+              @selectedOption={{get @customFiltersValues customFilter}}
+              @options={{this.customFilterOptions customFilter}}
+              @emptyMessage=""
+            />
+          {{else}}
+            <PixSearchInput
+              @id="extraFilters.{{customFilter}}"
+              value={{get @customFiltersValues customFilter}}
+              @screenReaderOnly={{true}}
+              @placeholder={{columnName}}
+              @debounceTimeInMs={{debounceTime}}
+              @triggerFiltering={{@onTriggerFiltering}}
+            >
+              <:label>{{columnName}}</:label>
+            </PixSearchInput>
+          {{/if}}
         {{/let}}
       {{/each}}
     </PixFilterBanner>
