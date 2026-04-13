@@ -12,7 +12,7 @@ module('Integration | Component | user-account | email-verification-code', funct
   setupIntlRenderingTest(hooks);
 
   module('resend code message', function () {
-    test('should not display resend code message at the beginning', async function (assert) {
+    test('does not display resend code message at the beginning', async function (assert) {
       // given
       this.set('email', 'toto@example.net');
       this.set('action', 'update-email');
@@ -27,7 +27,7 @@ module('Integration | Component | user-account | email-verification-code', funct
       assert.dom(resendCodeMessage).doesNotHaveClass('visible');
     });
 
-    test(`should display a resend code message after ${ENV.APP.MILLISECONDS_BEFORE_MAIL_RESEND} milliseconds`, async function (assert) {
+    test(`displays a resend code message after ${ENV.APP.MILLISECONDS_BEFORE_MAIL_RESEND} milliseconds`, async function (assert) {
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
@@ -50,7 +50,7 @@ module('Integration | Component | user-account | email-verification-code', funct
       );
     });
 
-    test('should prevent multiple requests to resend verification code', async function (assert) {
+    test('prevents multiple requests to resend verification code', async function (assert) {
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
@@ -85,7 +85,7 @@ module('Integration | Component | user-account | email-verification-code', funct
       );
     });
 
-    test('should show confirmation message when resending code message', async function (assert) {
+    test('shows confirmation message when resending code message', async function (assert) {
       // given
       const email = 'toto@example.net';
       const password = 'pix123';
