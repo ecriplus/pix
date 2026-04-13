@@ -13,12 +13,15 @@ export class ParticipantActivityFilters {
   #groups;
   /** @type string[] */
   #divisions;
+  /** @type string */
+  #participantExternalId;
 
-  constructor({ status = null, search = null, groups = [], divisions = [] }) {
+  constructor({ status = null, search = null, groups = [], divisions = [], participantExternalId = null }) {
     this.#status = status;
     this.search = search;
     this.#groups = groups;
     this.#divisions = divisions;
+    this.#participantExternalId = participantExternalId;
   }
 
   get participationStatus() {
@@ -39,6 +42,10 @@ export class ParticipantActivityFilters {
 
   get showNotStarted() {
     return this.#status === 'NOT_STARTED';
+  }
+
+  get participantExternalId() {
+    return this.#participantExternalId;
   }
 }
 
@@ -107,7 +114,8 @@ function filterParticipations(queryBuilder, filters, knexConn) {
     .modify(filterByDivisions, filters, knexConn)
     .modify(filterByStatus, filters)
     .modify(filterByGroup, filters, knexConn)
-    .modify(filterBySearch, filters);
+    .modify(filterBySearch, filters)
+    .modify(filterByParticipantExternalId, filters);
 }
 
 function filterBySearch(queryBuilder, filters) {
@@ -138,6 +146,15 @@ function filterByStatus(queryBuilder, filters) {
 function filterByGroup(queryBuilder, filters, knexConn) {
   if (filters.groups) {
     queryBuilder.whereIn(knexConn.raw('LOWER("view-active-organization-learners"."group")'), filters.groups);
+  }
+}
+
+function filterByParticipantExternalId(queryBuilder, filters) {
+  if (filters.participantExternalId) {
+    queryBuilder.whereRaw('LOWER(??) LIKE ?', [
+      'campaign-participations.participantExternalId',
+      `%${filters.participantExternalId.trim().toLowerCase()}%`,
+    ]);
   }
 }
 

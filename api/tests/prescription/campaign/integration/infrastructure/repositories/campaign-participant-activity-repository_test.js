@@ -704,6 +704,115 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
     });
 
+    context('when there is a filter on the participantExternalId', function () {
+      let campaign;
+
+      beforeEach(async function () {
+        // given
+        campaign = databaseBuilder.factory.buildCampaign();
+
+        const featureId = databaseBuilder.factory.buildFeature({
+          key: CAMPAIGN_FEATURES.EXTERNAL_ID.key,
+          description: CAMPAIGN_FEATURES.EXTERNAL_ID.description,
+        }).id;
+
+        databaseBuilder.factory.buildCampaignFeature({
+          campaignId: campaign.id,
+          featureId,
+        });
+
+        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          {
+            organizationId: campaign.organizationId,
+          },
+          { campaignId: campaign.id, participantExternalId: 'Choupette' },
+        );
+
+        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          {
+            organizationId: campaign.organizationId,
+          },
+          { campaignId: campaign.id, participantExternalId: 'Salto' },
+        );
+
+        await databaseBuilder.commit();
+      });
+
+      it('returns all participants if the filter is empty', async function () {
+        // when
+        const { pagination } = await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+          campaignId: campaign.id,
+          filters: { participantExternalId: '' },
+        });
+
+        // then
+        expect(pagination.rowCount).to.equal(2);
+      });
+
+      it('return Choupette participant when we search the beginning of its participantExternalId', async function () {
+        // when
+        const { campaignParticipantsActivities, pagination } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+            filters: { participantExternalId: 'Chou' },
+          });
+
+        // then
+        expect(pagination.rowCount).to.equal(1);
+        expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Choupette');
+      });
+
+      it('return Choupette participant when the participantExternalId search contains a space before', async function () {
+        // when
+        const { campaignParticipantsActivities, pagination } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+            filters: { participantExternalId: ' Cho' },
+          });
+
+        // then
+        expect(pagination.rowCount).to.equal(1);
+        expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Choupette');
+      });
+
+      it('return Choupette participant when the participantExternalId search contains a space after', async function () {
+        // when
+        const { campaignParticipantsActivities, pagination } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+            filters: { participantExternalId: 'Cho ' },
+          });
+
+        // then
+        expect(pagination.rowCount).to.equal(1);
+        expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Choupette');
+      });
+
+      it('return all participants when we search similar part of participantExternalId', async function () {
+        // given
+        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          {
+            organizationId: campaign.organizationId,
+          },
+          { campaignId: campaign.id, participantExternalId: 'Choupi' },
+        );
+
+        await databaseBuilder.commit();
+
+        // when
+        const { campaignParticipantsActivities, pagination } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+            filters: { participantExternalId: 'Chou' },
+          });
+
+        // then
+        expect(pagination.rowCount).to.equal(2);
+        expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Choupette');
+        expect(campaignParticipantsActivities[1].participantExternalId).to.equal('Choupi');
+      });
+    });
+
     context('pagination', function () {
       let campaign;
 
