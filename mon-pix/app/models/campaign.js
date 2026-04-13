@@ -26,6 +26,7 @@ export default class Campaign extends Model {
   @attr('string') customResultPageButtonText;
   @attr('string') customResultPageButtonUrl;
   @attr('boolean') multipleSendings;
+  @attr('boolean') recommendationEngine;
 
   @attr('boolean') isReconciliationRequired;
   @attr() reconciliationFields;
