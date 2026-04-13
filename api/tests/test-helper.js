@@ -254,19 +254,6 @@ const hFake = {
   continue: Symbol('continue'),
 };
 
-function streamToPromise(stream) {
-  return new Promise((resolve, reject) => {
-    let totalData = '';
-    stream.on('data', (data) => {
-      totalData += data;
-    });
-    stream.on('end', () => {
-      resolve(totalData);
-    });
-    stream.on('error', reject);
-  });
-}
-
 function parseJsonStream(response) {
   return response.result
     .split('\n')
@@ -372,7 +359,6 @@ export {
   preventStubsToBeCalledUnexpectedly,
   removeTempFile,
   sinon,
-  streamToPromise,
   wait,
   waitForStreamFinalizationToBeDone,
 };
