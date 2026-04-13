@@ -42,8 +42,7 @@ import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
-import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
-import { isSameBinary } from './tooling/test-utils/file.js';
+import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
 
 // Init Dayjs configuration
