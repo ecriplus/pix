@@ -1,3 +1,4 @@
+import { CAMPAIGN_FEATURES } from '../../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { filterByFullName } from '../../../../shared/infrastructure/utils/filter-utils.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
@@ -46,6 +47,15 @@ const campaignParticipantActivityRepository = {
     const knexConn = DomainTransaction.getConnection();
     const activityFilters = new ParticipantActivityFilters(filters);
 
+    const externalIdFeature = await knexConn('campaign-features')
+      .select('campaign-features.id')
+      .join('features', 'features.id', 'featureId')
+      .where({
+        campaignId,
+        'features.key': CAMPAIGN_FEATURES.EXTERNAL_ID.key,
+      })
+      .first();
+
     const query = knexConn('view-active-organization-learners')
       .select(
         'view-active-organization-learners.id AS organizationLearnerId',
@@ -77,7 +87,13 @@ const campaignParticipantActivityRepository = {
 
     const { results, pagination } = await fetchPage({ queryBuilder: query, paginationParams: page });
 
-    const campaignParticipantsActivities = results.map((result) => new CampaignParticipantActivity(result));
+    const campaignParticipantsActivities = results.map(
+      (result) =>
+        new CampaignParticipantActivity({
+          ...result,
+          participantExternalId: externalIdFeature ? result.participantExternalId : undefined,
+        }),
+    );
 
     return {
       campaignParticipantsActivities,

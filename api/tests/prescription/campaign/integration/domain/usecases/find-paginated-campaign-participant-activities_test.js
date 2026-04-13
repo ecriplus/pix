@@ -18,7 +18,7 @@ describe('Integration | UseCase | find-paginated-campaign-participant-activities
     await databaseBuilder.commit();
   });
 
-  context('when requesting user is not allowed to access campaign informations', function () {
+  context('when requesting user is not allowed to access campaign information', function () {
     it('should throw a UserNotAuthorizedToAccessEntityError error', async function () {
       // when
       const error = await catchErr(usecases.findPaginatedCampaignParticipantActivities)({
@@ -36,7 +36,7 @@ describe('Integration | UseCase | find-paginated-campaign-participant-activities
     beforeEach(async function () {
       databaseBuilder.factory.buildMembership({ organizationId, userId });
       databaseBuilder.factory.buildCampaignParticipation({
-        participantExternalId: 'Ashitaka',
+        id: 1,
         campaignId,
         organizationLearnerId: organizationLearner.id,
         userId: organizationLearner.userId,
@@ -52,7 +52,7 @@ describe('Integration | UseCase | find-paginated-campaign-participant-activities
         page,
       });
       expect(campaignParticipantsActivities).lengthOf(1);
-      expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Ashitaka');
+      expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(1);
     });
   });
 
@@ -73,12 +73,12 @@ describe('Integration | UseCase | find-paginated-campaign-participant-activities
         organizationId,
       });
       databaseBuilder.factory.buildCampaignParticipation({
-        participantExternalId: 'Yubaba',
+        id: 1,
         campaignId,
         organizationLearnerId: organizationLearner1.id,
       });
       databaseBuilder.factory.buildCampaignParticipation({
-        participantExternalId: 'Meï',
+        id: 2,
         campaignId,
         organizationLearnerId: organizationLearner2.id,
       });
@@ -93,7 +93,7 @@ describe('Integration | UseCase | find-paginated-campaign-participant-activities
         filters: { divisions: ['6eme'] },
       });
 
-      expect(campaignParticipantsActivities[0].participantExternalId).to.equal('Yubaba');
+      expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(1);
     });
 
     it('returns the campaignParticipantsActivities filtered by the search', async function () {

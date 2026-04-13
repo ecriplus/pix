@@ -1,17 +1,18 @@
 import { campaignParticipantActivityRepository } from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-participant-activity-repository.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED, SHARED } = CampaignParticipationStatuses;
 
 describe('Integration | Repository | Campaign Participant activity', function () {
   describe('#findPaginatedByCampaignId', function () {
-    context('When there is participations for another campaign', function () {
+    context('When there is participation for another campaign', function () {
       it('Returns a participation activity for each participant of the given campaign', async function () {
         const campaign = databaseBuilder.factory.buildCampaign();
         const otherCampaign = databaseBuilder.factory.buildCampaign();
 
-        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+        const organizationLearnerId1 = databaseBuilder.factory.buildOrganizationLearner({
           organizationId: campaign.organizationId,
         }).id;
         const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
@@ -19,18 +20,18 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         }).id;
 
         databaseBuilder.factory.buildCampaignParticipation({
-          organizationLearnerId,
-          participantExternalId: 'The good',
+          id: 1,
+          organizationLearnerId: organizationLearnerId1,
           campaignId: campaign.id,
         });
         databaseBuilder.factory.buildCampaignParticipation({
-          organizationLearnerId,
-          participantExternalId: 'The bad',
+          id: 2,
+          organizationLearnerId: organizationLearnerId1,
           campaignId: otherCampaign.id,
         });
         databaseBuilder.factory.buildCampaignParticipation({
+          id: 3,
           organizationLearnerId: organizationLearnerId2,
-          participantExternalId: 'The ugly',
           campaignId: campaign.id,
         });
 
@@ -40,9 +41,11 @@ describe('Integration | Repository | Campaign Participant activity', function ()
           await campaignParticipantActivityRepository.findPaginatedByCampaignId({
             campaignId: campaign.id,
           });
-        const participantExternalIds = campaignParticipantsActivities.map((activity) => activity.participantExternalId);
+        const lastCampaignParticipationIds = campaignParticipantsActivities.map(
+          (activity) => activity.lastCampaignParticipationId,
+        );
 
-        expect(participantExternalIds).to.exactlyContain(['The good', 'The ugly']);
+        expect(lastCampaignParticipationIds).to.exactlyContain([1, 3]);
       });
     });
 
@@ -74,7 +77,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
       });
     });
 
-    context('When there are several participations for the same participant', function () {
+    context('When there are several participation for the same participant', function () {
       it('Returns one CampaignParticipantActivity with the most recent participation (isImproved = false)', async function () {
         // given
         const campaign = databaseBuilder.factory.buildCampaign();
@@ -85,7 +88,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         });
 
         databaseBuilder.factory.buildCampaignParticipation({
-          participantExternalId: 'The bad',
+          id: 1,
           organizationLearnerId: learner.id,
           campaignId: campaign.id,
           status: SHARED,
@@ -94,7 +97,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         });
 
         databaseBuilder.factory.buildCampaignParticipation({
-          participantExternalId: 'The good',
+          id: 2,
           campaignId: campaign.id,
           status: STARTED,
           userId: user.id,
@@ -112,7 +115,7 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         //then
         expect(campaignParticipantsActivities).to.have.lengthOf(1);
-        expect(campaignParticipantsActivities[0].participantExternalId).to.equal('The good');
+        expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(2);
         expect(campaignParticipantsActivities[0].participationCount).to.equal(2);
       });
 
@@ -183,6 +186,84 @@ describe('Integration | Repository | Campaign Participant activity', function ()
           });
         //then
         expect(campaignParticipantsActivities[0].lastCampaignParticipationId).to.equal(lastParticipation.id);
+      });
+    });
+
+    context('when the campaign has the EXTERNAL_ID campaign feature', function () {
+      it('should return the participantExternalIdentifier', async function () {
+        const campaign = databaseBuilder.factory.buildCampaign();
+
+        const featureId = databaseBuilder.factory.buildFeature({
+          key: CAMPAIGN_FEATURES.EXTERNAL_ID.key,
+          description: CAMPAIGN_FEATURES.EXTERNAL_ID.description,
+        }).id;
+
+        databaseBuilder.factory.buildCampaignFeature({
+          campaignId: campaign.id,
+          featureId,
+        });
+
+        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+        const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          participantExternalId: 'The good',
+          campaignId: campaign.id,
+        });
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId: organizationLearnerId2,
+          participantExternalId: 'The ugly',
+          campaignId: campaign.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const { campaignParticipantsActivities } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
+        const participantExternalIds = campaignParticipantsActivities.map((activity) => activity.participantExternalId);
+
+        expect(participantExternalIds).to.exactlyContain(['The good', 'The ugly']);
+      });
+    });
+
+    context('when the campaign does not have the EXTERNAL_ID campaign feature', function () {
+      it('should not return the participantExternalIdentifier', async function () {
+        const campaign = databaseBuilder.factory.buildCampaign();
+
+        const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+        const organizationLearnerId2 = databaseBuilder.factory.buildOrganizationLearner({
+          organizationId: campaign.organizationId,
+        }).id;
+
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId,
+          participantExternalId: 'The good',
+          campaignId: campaign.id,
+        });
+        databaseBuilder.factory.buildCampaignParticipation({
+          organizationLearnerId: organizationLearnerId2,
+          participantExternalId: 'The ugly',
+          campaignId: campaign.id,
+        });
+
+        await databaseBuilder.commit();
+
+        const { campaignParticipantsActivities } =
+          await campaignParticipantActivityRepository.findPaginatedByCampaignId({
+            campaignId: campaign.id,
+          });
+
+        expect(campaignParticipantsActivities.some(({ participantExternalId }) => participantExternalId !== undefined))
+          .to.be.false;
       });
     });
 
@@ -375,17 +456,17 @@ describe('Integration | Repository | Campaign Participant activity', function ()
         const campaign = databaseBuilder.factory.buildCampaign();
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, division: 'Good Guys Team' },
-          { participantExternalId: 'The good', campaignId: campaign.id },
+          { id: 1, campaignId: campaign.id },
         );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, division: 'Bad Guys Team' },
-          { participantExternalId: 'The bad', campaignId: campaign.id },
+          { id: 2, campaignId: campaign.id },
         );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, division: 'Ugly Guys Team' },
-          { participantExternalId: 'The ugly', campaignId: campaign.id },
+          { id: 3, campaignId: campaign.id },
         );
 
         await databaseBuilder.commit();
@@ -398,10 +479,12 @@ describe('Integration | Repository | Campaign Participant activity', function ()
             filters: { divisions: ['Good Guys Team', 'Ugly Guys Team'] },
           });
 
-        const participantExternalIds = campaignParticipantsActivities.map((result) => result.participantExternalId);
+        const lastCampaignParticipationIds = campaignParticipantsActivities.map(
+          (result) => result.lastCampaignParticipationId,
+        );
 
         // then
-        expect(participantExternalIds).to.exactlyContain(['The good', 'The ugly']);
+        expect(lastCampaignParticipationIds).to.exactlyContain([1, 3]);
         expect(pagination.rowCount).to.equal(2);
       });
     });
@@ -413,12 +496,12 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId },
-          { participantExternalId: 'The good', campaignId: campaign.id, status: STARTED },
+          { id: 1, campaignId: campaign.id, status: STARTED },
         );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId },
-          { participantExternalId: 'The bad', campaignId: campaign.id, status: SHARED },
+          { id: 2, campaignId: campaign.id, status: SHARED },
         );
 
         await databaseBuilder.commit();
@@ -430,11 +513,13 @@ describe('Integration | Repository | Campaign Participant activity', function ()
             filters: { status: [STARTED] },
           });
 
-        const participantExternalIds = campaignParticipantsActivities.map((result) => result.participantExternalId);
+        const lastCampaignParticipationId = campaignParticipantsActivities.map(
+          (result) => result.lastCampaignParticipationId,
+        );
 
         // then
         expect(pagination.rowCount).to.equal(1);
-        expect(participantExternalIds).to.exactlyContain(['The good']);
+        expect(lastCampaignParticipationId).to.exactlyContain([1]);
       });
     });
 
@@ -587,17 +672,17 @@ describe('Integration | Repository | Campaign Participant activity', function ()
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, group: 'L1' },
-          { participantExternalId: 'The good', campaignId: campaign.id },
+          { id: 1, campaignId: campaign.id },
         );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, group: 'T1' },
-          { participantExternalId: 'The bad', campaignId: campaign.id, status: 'STARTED' },
+          { id: 2, campaignId: campaign.id, status: 'STARTED' },
         );
 
         databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
           { organizationId: campaign.organizationId, group: 'T2' },
-          { participantExternalId: 'The ugly', campaignId: campaign.id, status: 'STARTED' },
+          { id: 3, campaignId: campaign.id, status: 'STARTED' },
         );
 
         await databaseBuilder.commit();
@@ -609,10 +694,12 @@ describe('Integration | Repository | Campaign Participant activity', function ()
             filters: { groups: ['L1', 'T2'] },
           });
 
-        const participantExternalIds = campaignParticipantsActivities.map((result) => result.participantExternalId);
+        const lastCampaignParticipationIds = campaignParticipantsActivities.map(
+          (result) => result.lastCampaignParticipationId,
+        );
 
         // then
-        expect(participantExternalIds).to.exactlyContain(['The good', 'The ugly']);
+        expect(lastCampaignParticipationIds).to.exactlyContain([1, 3]);
         expect(pagination.rowCount).to.equal(2);
       });
     });
