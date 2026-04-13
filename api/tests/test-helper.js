@@ -43,6 +43,7 @@ import { buildLearningContent as learningContentBuilder } from './tooling/learni
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
+import { parseNDJSON } from './tooling/test-utils/json.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -254,13 +255,6 @@ const hFake = {
   continue: Symbol('continue'),
 };
 
-function parseJsonStream(response) {
-  return response.result
-    .split('\n')
-    .filter((row) => row !== '')
-    .map((r) => JSON.parse(r));
-}
-
 function catchErr(promiseFn, ctx) {
   return async (...args) => {
     try {
@@ -342,7 +336,6 @@ export {
   EMPTY_BLANK_AND_NULL,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  generateForwardedHeaders,
   generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
@@ -355,7 +348,7 @@ export {
   MockDate,
   mockLearningContent,
   nock,
-  parseJsonStream,
+  parseNDJSON,
   preventStubsToBeCalledUnexpectedly,
   removeTempFile,
   sinon,
