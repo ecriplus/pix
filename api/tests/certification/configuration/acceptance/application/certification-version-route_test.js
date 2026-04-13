@@ -6,21 +6,21 @@ import {
   domainBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleSuperAdmin,
   knex,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Certification | Configuration | API | certification-version-route', function () {
   let server;
+  let superAdmin;
 
   beforeEach(async function () {
     server = await createServer();
+    superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+    await databaseBuilder.commit();
   });
 
   describe('GET /api/admin/certification-versions/{scope}/active', function () {
     it('should get the active certification version for a given scope and return 200', async function () {
-      const superAdmin = await insertUserWithRoleSuperAdmin();
-
       const challengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 20,
         limitToOneQuestionPerTube: false,
@@ -57,10 +57,6 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     });
 
     it('should return 404 when no active version exists for the scope', async function () {
-      const superAdmin = await insertUserWithRoleSuperAdmin();
-
-      await databaseBuilder.commit();
-
       const options = {
         method: 'GET',
         url: `/api/admin/certification-versions/${SCOPES.CORE}/active`,
@@ -75,8 +71,6 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
 
   describe('PATCH /api/admin/certification-versions/{certificationVersionId}', function () {
     it('should update a certification version and return 204', async function () {
-      const superAdmin = await insertUserWithRoleSuperAdmin();
-
       const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 20,
         challengesBetweenSameCompetence: 0,

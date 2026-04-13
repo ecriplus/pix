@@ -24,14 +24,11 @@ import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
 import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
-import { PIX_ADMIN } from '../src/authorization/domain/constants.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
 import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
-import { ORGANIZATION_FEATURE } from '../src/shared/domain/constants.js';
-import { Membership } from '../src/shared/domain/models/Membership.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
 import { clearMutex, quitMutex } from '../src/shared/infrastructure/mutex/RedisMutex.js';
@@ -226,76 +223,6 @@ function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
 }
 
-async function insertUserWithRoleSuperAdmin() {
-  const user = databaseBuilder.factory.buildUser.withRole({
-    id: 1234,
-    firstName: 'Super',
-    lastName: 'Papa',
-    email: 'super.papa@example.net',
-    password: 'Password123',
-  });
-
-  await databaseBuilder.commit();
-
-  return user;
-}
-
-async function insertUserWithRoleCertif() {
-  const user = databaseBuilder.factory.buildUser.withRole({
-    id: 1234,
-    firstName: 'Certif',
-    lastName: 'Power',
-    email: 'certif.power@example.net',
-    password: 'Pix123',
-    role: PIX_ADMIN.ROLES.CERTIF,
-  });
-
-  await databaseBuilder.commit();
-
-  return user;
-}
-
-async function insertOrganizationUserWithRoleAdmin() {
-  const adminUser = databaseBuilder.factory.buildUser();
-  const organization = databaseBuilder.factory.buildOrganization();
-  databaseBuilder.factory.buildMembership({
-    userId: adminUser.id,
-    organizationId: organization.id,
-    organizationRole: Membership.roles.ADMIN,
-  });
-
-  await databaseBuilder.commit();
-
-  return { adminUser, organization };
-}
-
-// We insert a multiple sending feature by default for each new organization created.
-// It is under feature for now because we want to be able to deactivate it when asked.
-async function insertMultipleSendingFeatureForNewOrganization() {
-  const feature = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
-  await databaseBuilder.commit();
-  return feature.id;
-}
-
-async function insertLearnerImportFeatureForNewOrganization() {
-  const featureId = databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT).id;
-  databaseBuilder.factory.buildOrganizationLearnerImportFormat({
-    name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
-  });
-  await databaseBuilder.commit();
-  return featureId;
-}
-
-async function insertPixJuniorFeatureForNewOrganization() {
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.LEARNER_IMPORT);
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MISSIONS_MANAGEMENT);
-  databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.ORALIZATION_MANAGED_BY_PRESCRIBER);
-  databaseBuilder.factory.buildOrganizationLearnerImportFormat({
-    name: ORGANIZATION_FEATURE.LEARNER_IMPORT.FORMAT.ONDE,
-  });
-  await databaseBuilder.commit();
-}
-
 // Hapi
 const hFake = {
   response(source) {
@@ -454,12 +381,6 @@ export {
   getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
-  insertLearnerImportFeatureForNewOrganization,
-  insertMultipleSendingFeatureForNewOrganization,
-  insertOrganizationUserWithRoleAdmin,
-  insertPixJuniorFeatureForNewOrganization,
-  insertUserWithRoleCertif,
-  insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
   mockAttestationStorage,

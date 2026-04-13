@@ -5,7 +5,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleSuperAdmin,
 } from '../../../test-helper.js';
 
 describe('Quest | Acceptance | Application | Combined course blueprint Route ', function () {
@@ -19,8 +18,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should return the list of combined course blueprints', async function () {
         // given
-        const adminUser = await insertUserWithRoleSuperAdmin();
-
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         databaseBuilder.factory.buildCombinedCourseBlueprint();
         databaseBuilder.factory.buildCombinedCourseBlueprint();
         await databaseBuilder.commit();
@@ -28,7 +26,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const options = {
           method: 'GET',
           url: `/api/admin/combined-course-blueprints`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         // when
@@ -46,8 +44,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
       it('should create a combined course blueprint', async function () {
         // given
         databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.SIXTH_GRADE });
-        const adminUser = await insertUserWithRoleSuperAdmin();
-
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         await databaseBuilder.commit();
 
         const payload = {
@@ -66,7 +63,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const options = {
           method: 'POST',
           url: `/api/admin/combined-course-blueprints`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           payload,
         };
 
@@ -84,15 +81,14 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should return combined course blueprint for given id', async function () {
         // given
-        const adminUser = await insertUserWithRoleSuperAdmin();
-
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint();
         await databaseBuilder.commit();
 
         const options = {
           method: 'GET',
           url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprint.id}`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         // when
@@ -110,8 +106,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should detach a combined course blueprint from organization', async function () {
         // given
-        const adminUser = await insertUserWithRoleSuperAdmin();
-
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         const { combinedCourseBlueprintId, organizationId } =
           databaseBuilder.factory.buildCombinedCourseBlueprintShare();
         await databaseBuilder.commit();
@@ -119,7 +114,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const options = {
           method: 'DELETE',
           url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprintId}/organizations/${organizationId}`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
         };
 
         // when
@@ -135,8 +130,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should attach a combined course blueprint to one or several organizations', async function () {
         // given
-        const adminUser = await insertUserWithRoleSuperAdmin();
-
+        const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         const combinedCourseBlueprintId = databaseBuilder.factory.buildCombinedCourseBlueprint().id;
         const alreadyAttachedOrganization = databaseBuilder.factory.buildOrganization();
 
@@ -161,7 +155,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
         const options = {
           method: 'POST',
           url: `/api/admin/combined-course-blueprints/${combinedCourseBlueprintId}/organizations`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId: adminUser.id }),
+          headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
           payload,
         };
 

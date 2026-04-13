@@ -8,14 +8,9 @@ import { Organization } from '../../../../../src/organizational-entities/domain/
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
+import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { EntityValidationError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  insertMultipleSendingFeatureForNewOrganization,
-  insertPixJuniorFeatureForNewOrganization,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-organization', function () {
   let superAdminUserId;
@@ -30,7 +25,7 @@ describe('Integration | UseCases | create-organization', function () {
       originalName: 'France',
     });
 
-    await insertMultipleSendingFeatureForNewOrganization();
+    databaseBuilder.factory.buildFeature(ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT);
     await databaseBuilder.commit();
   });
 
@@ -243,7 +238,8 @@ describe('Integration | UseCases | create-organization', function () {
   describe('junior organization', function () {
     it('returns newly created organization', async function () {
       // given
-      await insertPixJuniorFeatureForNewOrganization();
+      databaseBuilder.factory.buildFeature.pixJuniorFeatures();
+      await databaseBuilder.commit();
 
       const organization = new OrganizationForAdmin({
         name: 'ACME',

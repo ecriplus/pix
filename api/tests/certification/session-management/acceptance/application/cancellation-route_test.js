@@ -8,7 +8,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  insertUserWithRoleSuperAdmin,
   knex,
   learningContentBuilder,
   mockLearningContent,
@@ -124,7 +123,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           url: '/api/admin/certification-courses/123/cancel',
           headers: generateAuthenticatedUserRequestHeaders({ userId: juryMember.id }),
         };
-        await insertUserWithRoleSuperAdmin();
         await databaseBuilder.commit();
 
         // when
@@ -246,7 +244,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
           url: '/api/admin/certification-courses/123/cancel',
           headers: generateAuthenticatedUserRequestHeaders({ userId: juryMember.id }),
         };
-        await insertUserWithRoleSuperAdmin();
         await databaseBuilder.commit();
 
         // when
@@ -370,7 +367,6 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         url: '/api/admin/certification-courses/123/uncancel',
         headers: generateAuthenticatedUserRequestHeaders({ userId: juryMember.id }),
       };
-      await insertUserWithRoleSuperAdmin();
       await databaseBuilder.commit();
 
       // when
