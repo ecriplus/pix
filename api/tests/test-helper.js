@@ -43,6 +43,7 @@ import { buildLearningContent as learningContentBuilder } from './tooling/learni
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
+import { isSameBinary } from './tooling/test-utils/file.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
 
 // Init Dayjs configuration
@@ -321,6 +322,7 @@ function wait(ms) {
 function waitForStreamFinalizationToBeDone() {
   return wait(300);
 }
+
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
@@ -341,6 +343,7 @@ export {
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
+  isSameBinary,
   knex,
   learningContentBuilder,
   mockAttestationStorage,
