@@ -909,6 +909,7 @@
       "head-information": {
         "child-organization": "Parent:",
         "copy-id": "Copy ID",
+        "head-organization-tag": "Head of network",
         "network": "Network:",
         "notifications": {
           "logo-update-success": "The organization logo has been updated successfully."

@@ -917,6 +917,7 @@
       "head-information": {
         "child-organization": "Parent :",
         "copy-id": "Copier l'ID",
+        "head-organization-tag": "Tête de réseau",
         "network": "Réseau :",
         "notifications": {
           "logo-update-success": "Le logo de l'organisation a bien été mis à jour."

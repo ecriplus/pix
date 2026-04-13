@@ -103,13 +103,6 @@ export default class HeadInformation extends Component {
         </div>
 
         <ul class="organization-tags-list">
-          {{#if this.hasChildren}}
-            <li>
-              <PixTag @color="success">
-                {{t "components.organizations.head-information.parent-organization"}}
-              </PixTag>
-            </li>
-          {{/if}}
           {{#if this.belongsToNetwork}}
             {{#if this.currentUser.adminMember.isSuperAdmin}}
               <PixTag class="organization__child-tag" @color="success">
@@ -118,18 +111,26 @@ export default class HeadInformation extends Component {
                   {{@organization.network.name}}
                 </LinkTo>
               </PixTag>
+              {{#if @organization.parentOrganizationId}}
+                <li>
+                  <PixTag class="organization__child-tag" @color="success">
+                    {{t "components.organizations.head-information.child-organization"}}
+                    <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
+                      {{@organization.parentOrganizationName}}
+                    </LinkTo>
+                  </PixTag>
+                </li>
+              {{else}}
+                <li>
+                  <PixTag class="organization__child-tag" @color="success">
+                    {{t "components.organizations.head-information.head-organization-tag"}}
+
+                  </PixTag>
+                </li>
+              {{/if}}
             {{/if}}
           {{/if}}
-          {{#if @organization.parentOrganizationId}}
-            <li>
-              <PixTag class="organization__child-tag" @color="success">
-                {{t "components.organizations.head-information.child-organization"}}
-                <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
-                  {{@organization.parentOrganizationName}}
-                </LinkTo>
-              </PixTag>
-            </li>
-          {{/if}}
+
           {{#if this.hasTags}}
             {{#each @organization.tags as |tag|}}
               <li>
