@@ -3,30 +3,45 @@ import { ABORT_REASONS } from '../../../shared/domain/constants/abort-reasons.js
 
 export const STATES = Assessment.states;
 export const STATES_OF_LAST_QUESTION = Assessment.statesOfLastQuestion;
+
 export class AssessmentSheet {
+  /**
+   * @param {object} params
+   * @param {number} params.certificationCourseId
+   * @param {number} params.userId
+   * @param {number} params.assessmentId
+   * @param {string} params.lastChallengeId
+   * @param {Assessment.statesOfLastQuestion} params.lastQuestionState
+   * @param {Date} params.lastQuestionDate
+   * @param {ABORT_REASONS} params.abortReason
+   * @param {boolean} params.isRejectedForFraud
+   * @param {Assessment.states} params.state
+   * @param {Date} params.updatedAt
+   * @param {Answer[]} params.answers
+   */
   constructor({
     certificationCourseId,
     userId,
     assessmentId,
     lastChallengeId,
+    lastQuestionState,
+    lastQuestionDate,
     abortReason,
     isRejectedForFraud,
     state,
-    lastQuestionState,
     updatedAt,
-    lastQuestionDate,
     answers,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.userId = userId;
     this.assessmentId = assessmentId;
     this.lastChallengeId = lastChallengeId;
+    this.lastQuestionState = lastQuestionState;
+    this.lastQuestionDate = lastQuestionDate;
     this.abortReason = abortReason;
     this.isRejectedForFraud = isRejectedForFraud;
     this.state = state;
-    this.lastQuestionState = lastQuestionState;
     this.updatedAt = updatedAt;
-    this.lastQuestionDate = lastQuestionDate;
     this.answers = answers;
   }
 
@@ -57,7 +72,7 @@ export class AssessmentSheet {
     return this.answers.some((answer) => answer.challengeId === challengeId);
   }
 
-  isChallengeExpectedToBeAnsweredNext(challengeId) {
+  isChallengeExpectedToBeAnswered(challengeId) {
     return Boolean(!this.lastChallengeId || this.lastChallengeId === challengeId);
   }
 

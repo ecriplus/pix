@@ -65,7 +65,7 @@ function checkIfAnswerIsAdmissible({ assessmentSheet, answer, userId }) {
   if (assessmentSheet.hasBeenEndedDueToFinalization()) {
     throw new CertificationEndedByFinalizationError();
   }
-  if (!assessmentSheet.isChallengeExpectedToBeAnsweredNext(answer.challengeId)) {
+  if (!assessmentSheet.isChallengeExpectedToBeAnswered(answer.challengeId)) {
     throw new ChallengeNotAskedError();
   }
   if (assessmentSheet.hasAnsweredChallenge(answer.challengeId)) {

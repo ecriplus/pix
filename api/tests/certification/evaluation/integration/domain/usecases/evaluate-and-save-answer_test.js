@@ -16,13 +16,14 @@ const { evaluateAndSaveAnswer } = usecases;
 describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate-and-save-answer', function () {
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;
   const STATES_OF_LAST_QUESTION = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES_OF_LAST_QUESTION;
+  const challengeIdToAnswer = 'expectedChallengeToBeAnswered';
 
   beforeEach(function () {
     databaseBuilder.factory.learningContent.buildSkill({
       id: 'someSkillId',
     });
     databaseBuilder.factory.learningContent.buildChallenge({
-      id: 'myFavoriteChallengeId',
+      id: challengeIdToAnswer,
       solution: 'The answer is 42',
       skillId: 'someSkillId',
     });
@@ -40,17 +41,18 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
   });
 
   context('when certification does exist', function () {
-    let certificationCourseId;
+    let certificationCourseId, userId;
 
     context('when user submitting the answer is not the owner of the certification test', function () {
       it('throws a ForbiddenAccess error', async function () {
-        certificationCourseId = databaseBuilder.factory.buildCertificationCourse().id;
-        databaseBuilder.factory.buildAssessment({ certificationCourseId });
+        userId = databaseBuilder.factory.buildUser().id;
+        certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+        databaseBuilder.factory.buildAssessment({ certificationCourseId, userId });
         await databaseBuilder.commit();
 
         const err = await catchErr(evaluateAndSaveAnswer)({
           certificationCourseId,
-          userId: 1111111111,
+          userId: userId + 1,
         });
 
         expect(err).to.deepEqualInstance(
@@ -60,8 +62,6 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
     });
 
     context('when user submitting the answer is the owner of the certification test', function () {
-      let userId;
-
       beforeEach(function () {
         userId = databaseBuilder.factory.buildUser().id;
         return databaseBuilder.commit();
@@ -110,15 +110,19 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
         beforeEach(function () {
           const sessionId = databaseBuilder.factory.buildSession().id;
-          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId, sessionId }).id;
+          const candidateId = databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId }).id;
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
+            candidateId,
+            sessionId,
+          }).id;
           assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId,
             userId,
             state: STATES.STARTED,
-            lastChallengeId: 'myFavoriteChallengeId',
+            lastChallengeId: challengeIdToAnswer,
             lastQuestionState: STATES_OF_LAST_QUESTION.ASKED,
           }).id;
-          databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId });
           return databaseBuilder.commit();
         });
 
@@ -138,14 +142,14 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           it('throws a ChallengeAlreadyAnsweredError error', async function () {
             databaseBuilder.factory.buildAnswer({
               assessmentId,
-              challengeId: 'myFavoriteChallengeId',
+              challengeId: challengeIdToAnswer,
             });
             await databaseBuilder.commit();
 
             const err = await catchErr(evaluateAndSaveAnswer)({
               certificationCourseId,
               userId,
-              answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId' }),
+              answer: domainBuilder.buildAnswer({ challengeId: challengeIdToAnswer }),
             });
 
             expect(err).to.deepEqualInstance(new ChallengeAlreadyAnsweredError());
@@ -157,7 +161,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
             const err = await catchErr(evaluateAndSaveAnswer)({
               certificationCourseId,
               userId,
-              answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId', value: null, timeout: null }),
+              answer: domainBuilder.buildAnswer({ challengeId: challengeIdToAnswer, value: null, timeout: null }),
             });
 
             expect(err).to.deepEqualInstance(new EmptyAnswerError());
@@ -169,7 +173,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
           beforeEach(function () {
             currentAnswer = domainBuilder.buildAnswer({
-              challengeId: 'myFavoriteChallengeId',
+              challengeId: challengeIdToAnswer,
               value: 'The answer is 42',
               assessmentId,
             });
@@ -185,14 +189,14 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
               databaseBuilder.factory.buildCertificationChallengeLiveAlert({
                 status: CertificationChallengeLiveAlertStatus.VALIDATED,
                 assessmentId,
-                challengeId: 'myFavoriteChallengeId',
+                challengeId: challengeIdToAnswer,
               });
               await databaseBuilder.commit();
 
               const err = await catchErr(evaluateAndSaveAnswer)({
                 certificationCourseId,
                 userId,
-                answer: domainBuilder.buildAnswer({ challengeId: 'myFavoriteChallengeId' }),
+                answer: domainBuilder.buildAnswer({ challengeId: challengeIdToAnswer }),
               });
 
               expect(err).to.deepEqualInstance(new ForbiddenAccess('An alert has been set.'));
@@ -208,7 +212,7 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
               });
 
               expect(evaluatedAnswer.assessmentId).to.equal(assessmentId);
-              expect(evaluatedAnswer.challengeId).to.equal('myFavoriteChallengeId');
+              expect(evaluatedAnswer.challengeId).to.equal(challengeIdToAnswer);
               expect(evaluatedAnswer.isFocusedOut).to.be.false;
               expect(evaluatedAnswer.levelup).to.deep.equal({});
               expect(evaluatedAnswer.isOk()).to.be.true;

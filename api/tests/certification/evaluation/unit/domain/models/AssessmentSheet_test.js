@@ -176,13 +176,13 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
     });
   });
 
-  context('#isChallengeExpectedToBeAnsweredNext', function () {
+  context('#isChallengeExpectedToBeAnswered', function () {
     it('returns true when no lastChallengeId in assessment sheet', function () {
       const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
         lastChallengeId: null,
       });
 
-      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.true;
+      expect(assessmentSheet.isChallengeExpectedToBeAnswered('myFavoriteChallengeId')).to.be.true;
     });
 
     it('returns true when submitted challengeId is the one expected to be answered next', function () {
@@ -190,7 +190,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         lastChallengeId: 'myFavoriteChallengeId',
       });
 
-      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.true;
+      expect(assessmentSheet.isChallengeExpectedToBeAnswered('myFavoriteChallengeId')).to.be.true;
     });
 
     it('returns false when submitted challengeId is not the one expected to be answered next', function () {
@@ -198,7 +198,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         lastChallengeId: 'someOtherChallengeId',
       });
 
-      expect(assessmentSheet.isChallengeExpectedToBeAnsweredNext('myFavoriteChallengeId')).to.be.false;
+      expect(assessmentSheet.isChallengeExpectedToBeAnswered('myFavoriteChallengeId')).to.be.false;
     });
   });
 
