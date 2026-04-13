@@ -65,18 +65,15 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           INSEECode: '01091',
           isActualName: true,
         });
+        const candidate = databaseBuilder.factory.buildCertificationCandidate();
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           verificationCode: 'ABCD123',
           createdAt: new Date('2019-12-21T15:44:38Z'),
           completedAt: new Date('2017-12-21T15:48:38Z'),
           sex: 'F',
+          candidate: candidate.id,
         });
         certificationCourseId = certificationCourse.id;
-
-        const candidate = databaseBuilder.factory.buildCertificationCandidate({
-          userId: certificationCourse.userId,
-          sessionId: certificationCourse.sessionId,
-        });
 
         databaseBuilder.factory.buildCoreSubscription({
           certificationCandidateId: candidate.id,
@@ -156,13 +153,20 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           finalizedAt: new Date('2018-12-01T01:02:03Z'),
         });
 
+        const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+          sessionId: session.id,
+          userId,
+          reconciledAt: new Date('2020-01-01'),
+        }).id;
+
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
           userId,
+          candidateId,
         });
 
         const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
-          sessionId: session.id,
+          candidateId,
           userId,
           certificationCourse,
         });
@@ -213,18 +217,20 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           startDate: new Date('2018-12-01T01:02:03Z'),
         });
 
+        const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+          sessionId: session.id,
+          userId,
+          reconciledAt: new Date('2020-01-01'),
+        }).id;
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           sessionId: session.id,
           userId,
           version: 3,
-        });
-
-        databaseBuilder.factory.buildCertificationCandidate({
-          userId: userId,
-          sessionId: certificationCourse.sessionId,
+          candidateId,
         });
 
         const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
+          candidateId,
           userId,
           certificationCourse,
         });
@@ -272,17 +278,23 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         version: AlgorithmEngineVersion.V3,
       });
 
+      const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId: session.id,
+        userId,
+        reconciledAt: new Date('2020-01-01'),
+      }).id;
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         sessionId: session.id,
         userId,
         isRejectedForFraud: true,
         version: AlgorithmEngineVersion.V3,
+        candidateId,
       });
 
       databaseBuilder.factory.buildCertificationVersion({ minimumAnswersRequiredToValidateACertification: 1 });
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
-        sessionId: session.id,
+        candidateId,
         userId,
         certificationCourse,
       });
@@ -403,13 +415,19 @@ describe('Certification | Session Management | Acceptance | Application | Routes
 
       const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
       const session = databaseBuilder.factory.buildSession();
+      const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId: session.id,
+        userId: superAdmin.id,
+        reconciledAt: new Date('2020-01-01'),
+      }).id;
       certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         version: 3,
         sessionId: session.id,
         userId: superAdmin.id,
+        candidateId,
       });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
-        sessionId: session.id,
+        candidateId,
         userId: superAdmin.id,
         certificationCourse,
       }));
