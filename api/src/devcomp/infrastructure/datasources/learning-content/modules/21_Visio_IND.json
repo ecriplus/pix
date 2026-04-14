@@ -927,7 +927,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse&nbsp;!</p>",
-                    "diagnosis": "<p>Katie a son micro ouvert et est en train de parler. Stéphane a écrit un message dans le chat. Il n’y a personne qui a la main levée.</p>"
+                    "diagnosis": "<p>Katie a son micro ouvert et est en train de parler. Steven a écrit un message dans le chat. Il n’y a personne qui a la main levée.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse&nbsp;!</p>",
