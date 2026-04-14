@@ -38,6 +38,7 @@ const getParticipantsResultList = (campaignId, filters) => {
     .modify(filterByAcquiredBadges, filters)
     .modify(filterByUnacquiredBadges, filters)
     .modify(filterByStage, filters)
+    .modify(filterByParticipantExternalId, filters)
     .orderByRaw('LOWER(??) ASC, LOWER(??) ASC', ['lastName', 'firstName']);
 };
 
@@ -97,6 +98,15 @@ const filterByDivisions = (queryBuilder, filters) => {
     queryBuilder.whereRaw('LOWER("view-active-organization-learners"."division") = ANY(:divisionsLowerCase)', {
       divisionsLowerCase,
     });
+  }
+};
+
+const filterByParticipantExternalId = (queryBuilder, filters) => {
+  if (filters.participantExternalId) {
+    queryBuilder.whereRaw('LOWER(??) LIKE ?', [
+      'campaign_participation_summaries.participantExternalId',
+      `%${filters.participantExternalId.trim().toLowerCase()}%`,
+    ]);
   }
 };
 
