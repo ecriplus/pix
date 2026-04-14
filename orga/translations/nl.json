@@ -235,6 +235,9 @@
         "label": "Zoeken op groepen",
         "placeholder": "Groepen"
       },
+      "participantExternalId": {
+        "label": "Zoeken op extern identificatienummer"
+      },
       "loading": "Laden...",
       "placeholder": "-- Selecteer --",
       "title": "Filters"

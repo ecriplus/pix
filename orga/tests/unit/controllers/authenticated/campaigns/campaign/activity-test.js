@@ -51,6 +51,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
       controller.status = 'SHARED';
       controller.groups = ['L3'];
       controller.search = 'Jean';
+      controller.participantExternalId = 'Jean';
 
       // when
       controller.resetFiltering();
@@ -61,6 +62,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/activity', function
       assert.strictEqual(controller.status, null);
       assert.deepEqual(controller.groups, []);
       assert.strictEqual(controller.search, null);
+      assert.strictEqual(controller.participantExternalId, null);
     });
   });
 

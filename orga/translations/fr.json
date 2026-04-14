@@ -234,6 +234,9 @@
         "label": "Rechercher par groupes",
         "placeholder": "Groupes"
       },
+      "participantExternalId": {
+        "label": "Recherche sur l'identifiant externe"
+      },
       "loading": "Chargement...",
       "placeholder": "-- Sélectionner --",
       "title": "Filtres"
