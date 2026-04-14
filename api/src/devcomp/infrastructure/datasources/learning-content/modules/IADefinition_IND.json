@@ -2,12 +2,12 @@
   "id": "bc6d164f-26bd-4f58-9925-8cf5365e2ca6",
   "shortId": "43e420e6",
   "slug": "ia-def-ind",
-  "title": "Une IA botaniste : un cas d’apprentissage supervisé.",
+  "title": "Une IA botaniste : un cas d’apprentissage supervisé",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/IAGenDef_IND/picto_moduleIA_img.svg",
-    "description": "<p>L’intelligence artificielle a de multiples applications : génération de texte, recommandation de contenus… Dans ce module, vous découvrirez l’une des techniques d’intelligence artificielle qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>À travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage , de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
+    "description": "<p>L’intelligence artificielle (IA) a de multiples applications : génération de texte, recommandation de contenus, etc. Dans ce module, vous découvrirez l’une des techniques d’IA qui rend tout cela possible : l’apprentissage automatique supervisé.</p><p>À travers l’exemple de la reconnaissance d’image, vous allez voir les coulisses de cet apprentissage , de l’entraînement sur des données étiquetées jusqu’à des prédictions efficaces.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -32,7 +32,7 @@
                 "id": "6e186654-fd70-4d4c-af3e-530b7664b193",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Arthur a entendu parler de l’ail des ours, une plante qui se mange, et il voudrait goûter. 😋 </p><p>Mais il a peur de se tromper pendant sa cueillette, alors il demande à son amie, Lila. 🧺<br><br></p>"
+                "content": "<p>Arthur a entendu parler de l’ail des ours, une plante qui se mange et il voudrait y goûter. 😋 </p><p>Mais il a peur de se tromper pendant sa cueillette, alors il demande conseil à son amie, Lila. 🧺<br><br></p>"
               }
             },
             {
@@ -63,7 +63,7 @@
                       "userName": "Lila",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mais tu tombes bien, justement, je viens de créer un logiciel d’IA qui reconnait différentes plantes pour nous aider à les distinguer !"
+                      "content": "Mais tu tombes bien, justement, je viens de créer un logiciel d’IA qui reconnaît différentes plantes pour nous aider à les distinguer !"
                     },
                     {
                       "userName": "Arthur",
@@ -112,7 +112,7 @@
                 "id": "c8956a41-9bef-469b-ab67-e58f974a4e30",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Mettez-vous un instant à la place du logiciel de Lila. 🤖</p><p>Vous allez observer des photographies d’ail des ours et de muguets. </p><p>Vous devrez ensuite les reconnaître.👀 Vous êtes prêt ?</p>"
+                "content": "<p>Mettez-vous un instant à la place du logiciel d’intelligence artificielle (IA) de Lila. 🤖</p>\n<p>Vous allez observer des photographies d’ail des ours et de muguet. </p>\n<p>Vous devrez ensuite les reconnaître.👀 Vous êtes prêt ?</p>"
               }
             },
             {
@@ -125,7 +125,7 @@
                       "id": "514a883c-0533-4006-ad57-46539a338cfc",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Voici des photographies d’ail des ours.</p>"
+                      "content": "<p>Les photographies suivantes montrent de l’ail des ours.</p>"
                     },
                     {
                       "id": "fa51f717-e730-4296-ad83-ed91814c29ff",
@@ -144,7 +144,7 @@
                       "id": "3ae25cff-f570-4f63-9b81-05cff2fba4d5",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Voici des photographies de muguet.<br></p>"
+                      "content": "<p>Les photographies suivantes montrent du muguet.</p>"
                     },
                     {
                       "id": "39681dab-c586-4194-bdf2-fe570b088714",
@@ -171,19 +171,19 @@
                     {
                       "id": "d057728c-18fd-4891-a53c-9f6413917bd9",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?<br></p>",
+                      "instruction": "<p>Selon vous, sur la photo, est-ce de l’ail des ours ou du muguet ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Ail des ours",
+                          "content": "ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Muguet",
+                          "content": "muguet",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Vous aurez peut-être plus de chance avec la prochaine !</p>"
                           }
@@ -207,19 +207,19 @@
                     {
                       "id": "bec3bcf1-0a25-49a7-a5f0-c322ccb271b3",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "instruction": "<p>Selon vous, sur la photo, est-ce de l’ail des ours ou du muguet ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Ail des ours",
+                          "content": "ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non, plus de chance avec la prochaine ?</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Muguet",
+                          "content": "muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p>"
                           }
@@ -243,19 +243,19 @@
                     {
                       "id": "8c43b33f-c031-4349-ab87-a15c9ffb15ca",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "instruction": "<p>Selon vous, sur la photo, est-ce de l’ail des ours ou du muguet ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Ail des ours",
+                          "content": "ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Muguet",
+                          "content": "muguet",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p>"
                           }
@@ -279,19 +279,19 @@
                     {
                       "id": "706832ba-14ae-4a7d-886a-39e562e66557",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Selon vous, est-ce de l’ail des ours ou du muguet ?</p>",
+                      "instruction": "<p>Selon vous, sur la photo, est-ce de l’ail des ours ou du muguet ?</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "Ail des ours",
+                          "content": "ail des ours",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Muguet",
+                          "content": "muguet",
                           "feedback": {
                             "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
@@ -850,7 +850,7 @@
               "element": {
                 "id": "191e100f-8a78-4ad9-b6d0-65533eba3ad8",
                 "type": "qrocm",
-                "instruction": "<p>Dans ce cas&nbsp, quel est l'exemple de donnée d’entrée ? Et l’exemple d’étiquette associée ?</p>",
+                "instruction": "<p>Dans ce cas&nbsp;, quel est l'exemple de donnée d’entrée ? Et l’exemple d’étiquette associée ?</p>",
                 "proposals": [
                   {
                     "type": "text",
