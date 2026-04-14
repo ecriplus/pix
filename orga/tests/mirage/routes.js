@@ -1,13 +1,12 @@
-import { applyEmberDataSerializers, discoverEmberDataModels } from 'ember-cli-mirage';
-import { createServer, Response } from 'miragejs';
+import { Response } from 'miragejs';
 
-import { findFilteredPaginatedOrganizationParticipants } from './handlers/find-filtered-paginated-organization-participants';
-import { findFilteredPaginatedScoOrganizationParticipants } from './handlers/find-filtered-paginated-sco-organization-participants';
-import { findFilteredPaginatedSupOrganizationParticipants } from './handlers/find-filtered-paginated-sup-organization-participants';
-import { findPaginatedAssessmentResults } from './handlers/find-paginated-assessment-results';
-import { findPaginatedCampaignProfilesCollectionParticipationSummaries } from './handlers/find-paginated-campaign-participation-summaries';
-import { findPaginatedMissionLearners } from './handlers/find-paginated-mission-learners';
-import { findPaginatedOrganizationMemberships } from './handlers/find-paginated-organization-memberships';
+import { findFilteredPaginatedOrganizationParticipants } from './handlers/find-filtered-paginated-organization-participants.js';
+import { findFilteredPaginatedScoOrganizationParticipants } from './handlers/find-filtered-paginated-sco-organization-participants.js';
+import { findFilteredPaginatedSupOrganizationParticipants } from './handlers/find-filtered-paginated-sup-organization-participants.js';
+import { findPaginatedAssessmentResults } from './handlers/find-paginated-assessment-results.js';
+import { findPaginatedCampaignProfilesCollectionParticipationSummaries } from './handlers/find-paginated-campaign-participation-summaries.js';
+import { findPaginatedMissionLearners } from './handlers/find-paginated-mission-learners.js';
+import { findPaginatedOrganizationMemberships } from './handlers/find-paginated-organization-memberships.js';
 import { applyPagination, getPaginationFromQueryParams } from './handlers/pagination-utils.js';
 
 const emptyData = {
@@ -25,24 +24,8 @@ function parseQueryString(queryString) {
   return result;
 }
 
-export default function makeServer(config) {
-  const finalConfig = {
-    ...config,
-    models: { ...discoverEmberDataModels(config.store), ...config.models },
-    serializers: applyEmberDataSerializers(config.serializers),
-    routes,
-    logging: true,
-    urlPrefix: 'http://localhost:3000',
-  };
-
-  const server = createServer(finalConfig);
-  server.create('information-banner', 'withoutBanners');
-
-  return server;
-}
-
 /* eslint ember/no-get: off */
-function routes() {
+export default function routes() {
   this.namespace = 'api';
   this.timing = 0;
 
