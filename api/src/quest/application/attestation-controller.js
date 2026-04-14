@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream';
 
+import * as attestationSerializer from '../../profile/infrastructure/serializers/jsonapi/attestation-serializer.js';
 import { BadRequestError } from '../../shared/application/http-errors.js';
 import { usecases } from '../domain/usecases/index.js';
 
@@ -16,10 +17,17 @@ const save = async (request, h) => {
     templateFile,
     templateKey: attestation.templateKey,
     templateName: attestation.templateName,
+    label: attestation.label,
   });
   return h.response().code(204);
 };
 
-const attestationController = { save };
+const findAllByOrganizationId = async (request, _, dependencies = { attestationSerializer }) => {
+  const organizationId = request.params['organizationId'];
+  const attestations = await usecases.findOrganizationAttestations({ organizationId });
+  return dependencies.attestationSerializer.serialize(attestations);
+};
+
+const attestationController = { save, findAllByOrganizationId };
 
 export { attestationController };
