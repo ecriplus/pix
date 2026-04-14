@@ -235,6 +235,7 @@ describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet'
         isRejectedForFraud: true,
         answers: [domainBuilder.buildAnswer()],
         assessmentUpdatedAt: new Date('2022-01-01'),
+        lastQuestionDate: new Date('2021-09-09'),
       };
     });
 
