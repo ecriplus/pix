@@ -67,7 +67,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
       certificationCandidateRepository.findByAssessmentId.withArgs({ assessmentId: assessment.id }).resolves(candidate);
 
-      version = domainBuilder.certification.shared.buildVersion();
+      version = domainBuilder.certification.configuration.buildVersion();
     });
 
     context('when there are challenges left to answer', function () {
@@ -618,7 +618,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           getCapacityAndErrorRate: sinon.stub(),
         };
 
-        version = domainBuilder.certification.shared.buildVersion({
+        version = domainBuilder.certification.configuration.buildVersion({
           challengesConfiguration: { maximumAssessmentLength: 1 },
         });
         versionApi.getByFrameworkAndDate.resolves(version);
@@ -688,7 +688,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge();
             const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
-            version = domainBuilder.certification.shared.buildVersion({ challengesConfiguration: flashConfiguration });
+            version = domainBuilder.certification.configuration.buildVersion({ challengesConfiguration: flashConfiguration });
             versionApi.getByFrameworkAndDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();
@@ -796,7 +796,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           .withArgs({ assessmentId: assessment.id })
           .resolves(candidate);
 
-        version = domainBuilder.certification.shared.buildVersion({ scope: SCOPES.PIX_PLUS_EDU_CPE });
+        version = domainBuilder.certification.configuration.buildVersion({ scope: SCOPES.PIX_PLUS_EDU_CPE });
         versionApi.getByFrameworkAndDate
           .withArgs({
             framework: SCOPES.PIX_PLUS_EDU_CPE,

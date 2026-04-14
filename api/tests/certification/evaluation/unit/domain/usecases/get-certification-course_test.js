@@ -26,7 +26,7 @@ describe('Unit | UseCase | get-certification-course', function () {
       getById: sinon.stub(),
     };
 
-    version = domainBuilder.certification.shared.buildVersion({
+    version = domainBuilder.certification.configuration.buildVersion({
       id: 123,
       challengesConfiguration: { maximumAssessmentLength: 42 },
     });

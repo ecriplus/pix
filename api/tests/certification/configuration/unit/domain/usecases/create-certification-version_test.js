@@ -1,6 +1,9 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { createCertificationVersion } from '../../../../../../src/certification/configuration/domain/usecases/create-certification-version.js';
-import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
+import {
+  DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
+  DEFAULT_SESSION_DURATION_MINUTES,
+} from '../../../../../../src/certification/shared/domain/constants.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
@@ -105,6 +108,7 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
           startDate: new Date('2025-10-21T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: currentVersion.assessmentDuration,
+          minimumAnswersRequiredToValidateACertification: currentVersion.minimumAnswersRequiredToValidateACertification,
           globalScoringConfiguration: undefined,
           competencesScoringConfiguration: undefined,
           challengesConfiguration: currentVersion.challengesConfiguration,
@@ -170,6 +174,7 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
           startDate: new Date('2025-10-20T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+          minimumAnswersRequiredToValidateACertification: DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
           challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
             challengesBetweenSameCompetence: 0,
             maximumAssessmentLength: 32,

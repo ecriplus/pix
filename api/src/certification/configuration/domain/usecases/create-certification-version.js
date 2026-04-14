@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../shared/domain/services/locale-service.js';
 import {
+  DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
   DEFAULT_PROBABILITY_TO_PICK_CHALLENGE,
   DEFAULT_SESSION_DURATION_MINUTES,
 } from '../../../shared/domain/constants.js';
@@ -48,6 +49,7 @@ const _buildNewVersion = async ({ scope, versionRepository }) => {
       startDate: dayjs().toDate(),
       expirationDate: null,
       assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+      minimumAnswersRequiredToValidateACertification: DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
       challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
         challengesBetweenSameCompetence: 0,
         maximumAssessmentLength: 32,
@@ -73,6 +75,7 @@ const _buildNewVersion = async ({ scope, versionRepository }) => {
     startDate: transitionDate,
     expirationDate: null,
     assessmentDuration: currentVersion.assessmentDuration,
+    minimumAnswersRequiredToValidateACertification: currentVersion.minimumAnswersRequiredToValidateACertification,
     challengesConfiguration: currentVersion.challengesConfiguration,
   });
 };
