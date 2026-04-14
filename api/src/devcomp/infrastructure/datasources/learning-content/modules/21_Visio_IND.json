@@ -227,44 +227,37 @@
               }
             },
             {
-              "type": "stepper",
-              "instruction": "",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "69ce7f6f-184c-4ec1-9141-643b97747da7",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Quel est le nom du foodtruck tenu par le cousin de Gaby&nbsp;?</p>",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "0",
-                          "content": "Cuisine Caravan",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
-                          }
-                        },
-                        {
-                          "id": "1",
-                          "content": "GastronoVan",
-                          "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Bistro Mobile",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
-                          }
-                        }
-                      ],
-                      "solution": "1"
+              "type": "element",
+              "elements": {
+                "id": "69ce7f6f-184c-4ec1-9141-643b97747da7",
+                "type": "qcu-discovery",
+                "instruction": "<p>Quel est le nom du foodtruck tenu par le cousin de Gaby&nbsp;?</p>",
+                "hasShortProposals": true,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "Cuisine Caravan",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
                     }
-                  ]
-                }
-              ]
+                  },
+                  {
+                    "id": "1",
+                    "content": "GastronoVan",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Bistro Mobile",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non&nbsp;! Pour lire les questions ou remarques des autres participants pendant une visioconférence, vous pouvez ouvrir et <strong>lire les messages publiés dans le chat</strong> (l’outil de dialogue en ligne).</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
+              }
             }
           ]
         },
