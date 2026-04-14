@@ -57,10 +57,10 @@
       "bad-request-error": "The data entered was not in the correct format.",
       "gateway-timeout-error": "The service is being slow. Please try again later.",
       "internal-server-error": "An error occurred, our teams are working on finding a solution. Please try again later.",
-      "login-unauthorized-error": "There was an error in the email address or username/password entered.",
+      "login-unauthorized-error": "The email address or username and/or password you entered are incorrect.",
       "login-unauthorized-remaining-attempts-error": "Warning: you have {remainingAttempts, plural, =0 {0 attempts} =1 {1 attempt} other {# attempts}} left before your Pix account is permanently blocked.",
       "login-unauthorized-remaining-attempts-with-user-name-error": "Warning: you have {remainingAttempts, plural, =0 {0 attempts} =1 {1 attempt} other {# attempts}} left before your Pix account is permanently blocked.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
-      "login-unauthorized-with-user-name-error": "There was an error in the email address or username/password entered.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
+      "login-unauthorized-with-user-name-error": "The email address or username and/or password you entered are incorrect.'<br>'If you forget your password, '<strong>'contact your teacher'</strong>' to reset your password and/or recover your login.",
       "login-unexpected-error": "Unable to connect. Please try again in a few moments. If the problem persists, '<'a href=\"{supportHomeUrl}\" target=\"blank\"'>'please contact us via the help center'</a>'.",
       "login-user-blocked-error": "Your account has reached the maximum number of failed login attempts and has been blocked. Please '<'a href=\"{url}\"'>'contact us'</a>' to unblock it.",
       "login-user-blocked-with-username-error": "Your account has been locked because you have made too many login attempts. To unlock it, please  '<strong>'contact your teacher'</strong>'; if they are unavailable, '<'a href=\"{url}\"'>'please contact us'</a>'.",
@@ -1870,7 +1870,7 @@
         "error-message": "Please agree to the terms and conditions of use.",
         "expired-authentication-key": "Your authentication demand has expired.",
         "invalid-email": "Your email address is invalid.",
-        "login-unauthorized-error": "There was an error in the email address or password entered.",
+        "login-unauthorized-error": "The email address and/or password you entered are incorrect.",
         "password-reset-token-invalid-or-expired": "Too much time has elapsed to validate your new password. Return to the login page to re-enter your username and temporary password."
       },
       "login-form": {
