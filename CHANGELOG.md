@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.386.0](https://github.com/1024pix/pix/compare/v5.385.0...v5.386.0) (2026-04-14)
+
+### :rocket: Amélioration
+
+- [#15806](https://github.com/1024pix/pix/pull/15806) Améliorer la sécurité de la gestion des OIDC Providers (PIX-22322) 
+- [#15813](https://github.com/1024pix/pix/pull/15813) Autoriser la création d'une organisation fille à partir d'une organisation fille (PIX-22047) 
+- [#15800](https://github.com/1024pix/pix/pull/15800) Créer un script pour activer la feature pour une liste de campagnes (PIX-22217) 
+- [#15752](https://github.com/1024pix/pix/pull/15752) Modif module Antivirus suite relecture exp 
+- [#15721](https://github.com/1024pix/pix/pull/15721) Module RangerFichier_NOV modifs relectures Eval et team modulix 
+- [#15801](https://github.com/1024pix/pix/pull/15801) Permettre un fallback au niveau des épreuves  (PIX-22277). 
+- [#15822](https://github.com/1024pix/pix/pull/15822) Remplir la colonne "lastAnswerAt" de la table "certification-courses" à chaque réponse apportée par le candidat 
+- [#15793](https://github.com/1024pix/pix/pull/15793) Rendre le contenu de l'e-mail de vérification de changement d’e-mail générique (PIX-21991) 
+
+### :bug: Correction
+
+- [#15770](https://github.com/1024pix/pix/pull/15770) Corriger les décalages entre les blocages effectifs de comptes et les informations affichées aux utilisateurs (PIX-18309) 
+
+### :building_construction: Tech
+
+- [#15821](https://github.com/1024pix/pix/pull/15821) Déplacer le code spécifique au fait d'apporter une réponse à une épreuve de certification dans le bounded context "certification/evaluation" 
+- [#15823](https://github.com/1024pix/pix/pull/15823) Extraire la lecture de fichiers utilisés dans les tests de test-helper.js 
+- [#15839](https://github.com/1024pix/pix/pull/15839) Modifier le lien de la documentation de certification sur la banner warning (PIX-22349). 
+- [#15831](https://github.com/1024pix/pix/pull/15831) Supprimer ember-cli-clipboard de pix-orga (PIX-22352). 
+
+### :arrow_up: Montée de version
+
+- [#15820](https://github.com/1024pix/pix/pull/15820) Update dependency @1024pix/pix-ui to ^60.4.0 (certif) 
+- [#15825](https://github.com/1024pix/pix/pull/15825) Update dependency @1024pix/pix-ui to ^60.4.0 (junior) 
+- [#15827](https://github.com/1024pix/pix/pull/15827) Update dependency @1024pix/pix-ui to ^60.4.0 (mon-pix) 
+- [#15757](https://github.com/1024pix/pix/pull/15757) Update dependency @glimmer/component to v2 (certif)
+
 # [5.385.0](https://github.com/1024pix/pix/compare/v5.384.0...v5.385.0) (2026-04-13)
 
 ### :rocket: Amélioration
