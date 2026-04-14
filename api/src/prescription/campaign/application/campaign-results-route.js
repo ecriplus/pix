@@ -28,6 +28,7 @@ const register = async function (server) {
               groups: Joi.array().items(Joi.string()),
               badges: Joi.array().items(Joi.number().integer()),
               unacquiredBadges: Joi.array().items(Joi.number().integer()),
+              participantExternalId: Joi.string().empty(''),
               stages: Joi.array().items(Joi.number().integer()),
               search: Joi.string().empty(''),
             }).default({}),
