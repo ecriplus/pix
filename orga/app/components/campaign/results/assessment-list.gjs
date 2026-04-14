@@ -28,6 +28,7 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
       @isHiddenStatus={{true}}
       @onResetFilter={{@onResetFilter}}
       @onFilter={{@onFilter}}
+      @participantExternalIdLabel={{@campaign.externalIdLabel}}
     />
 
     <PixTable

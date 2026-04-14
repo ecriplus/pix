@@ -31,6 +31,9 @@ export default class AssessmentResultsRoute extends Route {
     search: {
       refreshModel: true,
     },
+    participantExternalId: {
+      refreshModel: true,
+    },
   };
 
   beforeModel(transition) {
@@ -72,6 +75,7 @@ export default class AssessmentResultsRoute extends Route {
         unacquiredBadges: params.unacquiredBadges,
         stages: params.stages,
         search: params.search,
+        participantExternalId: params.participantExternalId,
       },
       campaignId: params.campaignId,
     });
@@ -86,6 +90,7 @@ export default class AssessmentResultsRoute extends Route {
       controller.badges = [];
       controller.stages = [];
       controller.unacquiredBadges = [];
+      controller.participantExternalId = null;
       controller.search = null;
     }
   }

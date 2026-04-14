@@ -13,6 +13,7 @@ export default class AssessmentResultsController extends Controller {
   @tracked groups = [];
   @tracked badges = [];
   @tracked unacquiredBadges = [];
+  @tracked participantExternalId = null;
   @tracked stages = [];
   @tracked search = null;
 
@@ -47,5 +48,6 @@ export default class AssessmentResultsController extends Controller {
 
     this.stages = [];
     this.search = null;
+    this.participantExternalId = null;
   }
 }
