@@ -37,6 +37,7 @@ describe('Integration | Repository | Campaign Participation', function () {
           campaignId,
           status: STARTED,
           sharedAt: null,
+          participantExternalId: 'participantExternalId',
         });
 
         ke = databaseBuilder.factory.buildKnowledgeElement({
@@ -147,6 +148,7 @@ describe('Integration | Repository | Campaign Participation', function () {
           userId,
           status: STARTED,
           sharedAt: null,
+          participantExternalId: 'participantExternalId',
         });
         const knowledgeElement1 = domainBuilder.buildKnowledgeElement({
           userId,
