@@ -7,12 +7,14 @@ const buildAttestation = function ({
   createdAt = new Date(),
   templateName = '6eme-pdf',
   key = ATTESTATIONS.SIXTH_GRADE,
+  label = '6ème',
 } = {}) {
   const values = {
     id,
     createdAt,
     templateName,
     key,
+    label,
   };
 
   return databaseBuffer.pushInsertable({
