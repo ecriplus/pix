@@ -936,7 +936,7 @@
             "active-campaigns": "Les campagnes actives vont être archivées",
             "active-members": "Les membres actifs vont être désactivés",
             "linking": "Le rattachement et l'invitation de nouvelles personnes seront bloqués",
-            "pending-invitations": "Les invitations en attente vont être annulées",
+            "pending-invitations": "Toutes les invitations (peu importe le statut) seront supprimées",
             "undone": "Cette action est irréversible."
           }
         },

@@ -928,7 +928,7 @@
             "active-campaigns": "Ongoing campaigns will be archived",
             "active-members": "Active members will be deactivated",
             "linking": "You are no longer allowed to attach new members or send invitations",
-            "pending-invitations": "Pending invitations will be cancelled",
+            "pending-invitations": "All invitations (regardless of status) will be cancelled",
             "undone": "This action cannot be undone."
           }
         },
