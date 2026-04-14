@@ -56,9 +56,7 @@ export default class OrganizationFeaturesSection extends Component {
   get attestationOptions() {
     return this.attestations.map((attestation) => ({
       value: attestation.key,
-      label: this.intl.t(
-        `components.organizations.information-section-view.features.attestation-list.${attestation.key}`,
-      ),
+      label: attestation.label,
     }));
   }
 

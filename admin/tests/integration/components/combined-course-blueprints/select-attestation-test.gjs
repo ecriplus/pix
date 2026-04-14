@@ -10,20 +10,27 @@ module('Integration | Component | CombinedCourseBlueprints::SelectAttestation', 
   setupIntlRenderingTest(hooks);
 
   test('it should display every attestation available in select options', async function (assert) {
-    const attestations = [{ key: 'KEY_1' }, { key: 'KEY_2' }];
+    const attestations = [
+      { key: 'KEY_1', label: 'Attestation 1' },
+      { key: 'KEY_2', label: 'Attestation 2' },
+    ];
+
     const screen = await render(<template><SelectAttestation @attestations={{attestations}} /></template>);
     await click(
       screen.getByRole('button', { name: t('components.combined-course-blueprints.attestation.select-label') }),
     );
     await screen.findByRole('listbox');
 
-    assert.ok(screen.getByRole('option', { name: 'KEY_1' }));
-    assert.ok(screen.getByRole('option', { name: 'KEY_2' }));
+    assert.ok(screen.getByRole('option', { name: 'Attestation 1' }));
+    assert.ok(screen.getByRole('option', { name: 'Attestation 2' }));
   });
 
   test('it should select an attestation', async function (assert) {
     const onChangeStub = sinon.stub();
-    const attestations = [{ key: 'KEY_1' }, { key: 'KEY_2' }];
+    const attestations = [
+      { key: 'KEY_1', label: 'Attestation 1' },
+      { key: 'KEY_2', label: 'Attestation 2' },
+    ];
     const screen = await render(
       <template><SelectAttestation @attestations={{attestations}} @onChange={{onChangeStub}} /></template>,
     );
@@ -32,7 +39,7 @@ module('Integration | Component | CombinedCourseBlueprints::SelectAttestation', 
     );
     await screen.findByRole('listbox');
 
-    await click(screen.getByRole('option', { name: 'KEY_1' }));
+    await click(screen.getByRole('option', { name: 'Attestation 1' }));
 
     assert.ok(onChangeStub.calledWithExactly('KEY_1'));
   });

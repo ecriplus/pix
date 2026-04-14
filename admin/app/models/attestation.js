@@ -4,4 +4,5 @@ export default class Attestation extends Model {
   @attr('string') templateName;
   @attr('string') key;
   @attr() file;
+  @attr('string') label;
 }

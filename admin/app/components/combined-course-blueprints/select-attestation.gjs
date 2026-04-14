@@ -4,7 +4,7 @@ import { t } from 'ember-intl';
 
 export default class SelectAttestation extends Component {
   get attestationsOptions() {
-    return this.args.attestations?.map((attestation) => ({ value: attestation.key, label: attestation.key })) ?? [];
+    return this.args.attestations?.map((attestation) => ({ value: attestation.key, label: attestation.label })) ?? [];
   }
 
   <template>
