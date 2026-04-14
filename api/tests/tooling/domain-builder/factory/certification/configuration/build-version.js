@@ -10,9 +10,9 @@ export const buildVersion = ({
   expirationDate,
   assessmentDuration = 105,
   minimumAnswersRequiredToValidateACertification = 20,
-  globalScoringConfiguration,
-  competencesScoringConfiguration,
-  challengesConfiguration,
+  globalScoringConfiguration = [],
+  competencesScoringConfiguration = [],
+  challengesConfiguration = {},
 } = {}) => {
   return new Version({
     id,

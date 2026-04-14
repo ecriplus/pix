@@ -3,6 +3,7 @@ import {
   getLatestByDateAndLocale,
   getLatestByVersion,
 } from '../../../../../../src/certification/evaluation/infrastructure/repositories/scoring-configuration-repository.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
@@ -107,18 +108,16 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
       buildFramework({ competenceIndex, origin: 'external' });
       buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
-      const version = domainBuilder.certification.shared.buildVersion({
+      const version = domainBuilder.certification.configuration.buildVersion({
         id: 1,
+        competencesScoringConfiguration: [
+          {
+            values: [{ bounds: { max: -1, min: -4 }, competenceLevel: 0 }],
+            competence: competenceIndex,
+          },
+        ],
+        scope: Frameworks.CORE,
       });
-
-      databaseBuilder.factory.buildCertificationVersion({
-        id: 1,
-      });
-
-      databaseBuilder.factory.buildCertificationVersion({
-        id: 2,
-      });
-
       await databaseBuilder.commit();
 
       // when
@@ -127,8 +126,8 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
       expect(result.versionId).to.equal(1);
-      expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
-      expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
+      expect(result._competencesForScoring[0].competenceId).to.equal(`${PIX_ORIGIN}Competence`);
+      expect(result._competencesForScoring[0].intervals.length).to.equal(1);
     });
   });
 });

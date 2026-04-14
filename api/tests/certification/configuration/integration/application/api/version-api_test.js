@@ -41,15 +41,15 @@ describe('Certification | Configuration | Integration | Application | Api | vers
       defaultProbabilityToPickChallenge: 2,
     },
   };
-  const dataCoreCurrent = {
+  const dataCore2024 = {
     id: 3,
     scope: Frameworks.CORE,
-    startDate: new Date('2026-01-01'),
-    expirationDate: null,
+    startDate: new Date('2024-02-02'),
+    expirationDate: new Date('2024-12-01'),
     assessmentDuration: 3,
     minimumAnswersRequiredToValidateACertification: 3,
-    globalScoringConfiguration: [{ config: 'coreCurrent' }],
-    competencesScoringConfiguration: [{ config: 'coreCurrent' }],
+    globalScoringConfiguration: [{ config: 'core2024' }],
+    competencesScoringConfiguration: [{ config: 'core2024' }],
     challengesConfiguration: {
       maximumAssessmentLength: 3,
       challengesBetweenSameCompetence: 3,
@@ -60,8 +60,29 @@ describe('Certification | Configuration | Integration | Application | Api | vers
       defaultProbabilityToPickChallenge: 3,
     },
   };
+  const dataCore2025 = {
+    id: 4,
+    scope: Frameworks.CORE,
+    startDate: new Date('2025-02-02'),
+    expirationDate: new Date('2025-12-01'),
+    assessmentDuration: 4,
+    minimumAnswersRequiredToValidateACertification: 4,
+    globalScoringConfiguration: [{ config: 'core2025' }],
+    competencesScoringConfiguration: [{ config: 'core2025' }],
+    challengesConfiguration: {
+      maximumAssessmentLength: 4,
+      challengesBetweenSameCompetence: 4,
+      limitToOneQuestionPerTube: false,
+      enablePassageByAllCompetences: true,
+      variationPercent: 0.4,
+      defaultCandidateCapacity: 4,
+      defaultProbabilityToPickChallenge: 4,
+    },
+  };
   beforeEach(function () {
-    [dataDroit2025, dataDroitCurrent, dataCoreCurrent].forEach(databaseBuilder.factory.buildCertificationVersion);
+    [dataDroit2025, dataDroitCurrent, dataCore2024, dataCore2025].forEach(
+      databaseBuilder.factory.buildCertificationVersion,
+    );
     return databaseBuilder.commit();
   });
 
@@ -81,10 +102,10 @@ describe('Certification | Configuration | Integration | Application | Api | vers
       it('returns the corresponding CORE version', async function () {
         const res = await versionApi.getByFrameworkAndDate({
           framework: Frameworks.CLEA,
-          date: new Date('2026-05-05'),
+          date: new Date('2025-05-05'),
         });
 
-        expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataCoreCurrent));
+        expect(res).to.deepEqualInstance(domainBuilder.certification.configuration.buildVersion.api(dataCore2025));
       });
     });
 
@@ -92,7 +113,7 @@ describe('Certification | Configuration | Integration | Application | Api | vers
       it('returns null', async function () {
         const res = await versionApi.getByFrameworkAndDate({
           framework: Frameworks.CORE,
-          date: new Date('2024-01-01'),
+          date: new Date('2023-01-01'),
         });
 
         expect(res).to.be.null;
