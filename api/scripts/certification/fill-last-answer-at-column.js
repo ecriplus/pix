@@ -40,6 +40,7 @@ export class FillLastAnswerAtColumn extends Script {
     const { dryRun, chunkSize, throttleDelay, startId } = options;
     logger.info(`Script execution started with options ${JSON.stringify(options)}`);
     let cntTotalCertificationsHandled = 0;
+    let cntTotalCertificationsUpdated = 0;
     let currentStartId = startId;
     const [{ max }] = await knex('certification-courses').max('id');
     let certificationDataToProcess = await findNextCertificationsToProcess(currentStartId, chunkSize);
@@ -54,6 +55,9 @@ export class FillLastAnswerAtColumn extends Script {
               rows: certificationDataToProcess,
               chunkSize,
             });
+            cntTotalCertificationsUpdated += certificationDataToProcess.filter((data) =>
+              Boolean(data.lastAnswerAt),
+            ).length;
             if (dryRun) {
               throw new Error('DRYRUN');
             }
@@ -74,7 +78,9 @@ export class FillLastAnswerAtColumn extends Script {
       certificationDataToProcess = await findNextCertificationsToProcess(currentStartId, chunkSize);
       await setTimeout(throttleDelay);
     }
-    logger.info(`Script finished. Number of certifications processed : ${cntTotalCertificationsHandled}, youpi`);
+    logger.info(
+      `Script finished. Number of certifications processed : ${cntTotalCertificationsHandled}, number of certifications updated with a lastAnswer date : ${cntTotalCertificationsUpdated}, youpi`,
+    );
   }
 }
 
