@@ -21,7 +21,6 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
       const organization1 = databaseBuilder.factory.buildOrganization();
       databaseBuilder.factory.buildOrganizationInvitation({
         organizationId: organization1.id,
-        status: OrganizationInvitation.StatusType.PENDING,
       });
       databaseBuilder.factory.buildCampaign({
         organizationId: organization1.id,
@@ -35,7 +34,6 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
       const organization2 = databaseBuilder.factory.buildOrganization();
       databaseBuilder.factory.buildOrganizationInvitation({
         organizationId: organization2.id,
-        status: OrganizationInvitation.StatusType.PENDING,
       });
       databaseBuilder.factory.buildCampaign({
         organizationId: organization2.id,
@@ -60,17 +58,15 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
 
       // then
       await _assertOrganizationIsArchived({ archivedOrganizationId: organization1.id, user, archivedAt: now });
-      await _assertPendingInvitationsAreCanceled({
+      await _assertInvitationsAreDeleted({
         archivedOrganizationId: organization1.id,
-        updatedAt: now,
       });
       await _assertCampaignAreDeleted({ organizationId: organization1.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization1.id, disabledAt: now });
 
       await _assertOrganizationIsArchived({ archivedOrganizationId: organization2.id, user, archivedAt: now });
-      await _assertPendingInvitationsAreCanceled({
+      await _assertInvitationsAreDeleted({
         archivedOrganizationId: organization2.id,
-        updatedAt: now,
       });
       await _assertCampaignAreDeleted({ organizationId: organization2.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization2.id, disabledAt: now });
@@ -116,9 +112,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-org
         }),
       );
       await _assertOrganizationIsArchived({ archivedOrganizationId: organization1.id, user, archivedAt: now });
-      await _assertPendingInvitationsAreCanceled({
+      await _assertInvitationsAreDeleted({
         archivedOrganizationId: organization1.id,
-        updatedAt: now,
       });
       await _assertCampaignAreDeleted({ organizationId: organization1.id, archivedAt: now });
       await _assertMembershipAreDisabled({ organizationId: organization1.id, disabledAt: now });
@@ -137,13 +132,12 @@ async function _assertCampaignAreDeleted({ organizationId, archivedAt }) {
   expect(archivedCampaign1.deletedAt).to.deep.equal(archivedAt);
 }
 
-async function _assertPendingInvitationsAreCanceled({ archivedOrganizationId, updatedAt }) {
-  const archivedPendingOrganizationInvitation = await knex('organization-invitations')
-    .where({ organizationId: archivedOrganizationId })
-    .first();
+async function _assertInvitationsAreDeleted({ archivedOrganizationId }) {
+  const archivedOrganizationInvitations = await knex('organization-invitations').where({
+    organizationId: archivedOrganizationId,
+  });
 
-  expect(archivedPendingOrganizationInvitation.status).to.deep.equal(OrganizationInvitation.StatusType.CANCELLED);
-  expect(archivedPendingOrganizationInvitation.updatedAt).to.deep.equal(updatedAt);
+  expect(archivedOrganizationInvitations).to.be.empty;
 }
 
 async function _assertOrganizationIsArchived({ archivedOrganizationId, user, archivedAt }) {
