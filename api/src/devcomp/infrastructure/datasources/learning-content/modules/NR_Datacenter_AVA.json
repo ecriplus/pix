@@ -6,7 +6,7 @@
   "isBeta": true,
   "visibility": "public",
   "details": {
-    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "image": "https://assets.pix.org/modules/NR_Datacenter_Ava/picto_nr_datacenter_ava.svg",
     "description": "<p>Tous les usages numériques mobilisent des centres de données, de plus en plus nombreux, qui sont très énergivores, consommateurs de ressources et générateurs de pollution.&nbsp;</p><p> Découvrez dans ce module, quelles sont les pistes pour réduire ces impacts à l’échelle des entreprises.<br><br></p>",
     "duration": 10,
     "level": "advanced",
@@ -115,9 +115,9 @@
               "element": {
                 "id": "7ef3df37-d12b-4d80-bfba-fdf3bf1f10b1",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenterconsequencesprimaires.png",
-                "alt": "",
-                "alternativeText": "",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_1.png",
+                "alt": "Un schéma des conséquences d'un centre de données",
+                "alternativeText": "<p>Un schéma des conséquences d'un centre de données :</p><ul><li> la consommation d'eau</li><li>la consommation d'énergie</li><li>l'artificialisation des sols</li><li>l'extraction de métaux et de terres rares</li><li>la production de déchets toxiques.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -138,9 +138,9 @@
                     {
                       "id": "441b12dd-254c-4cd3-87dd-5c4318fcc104",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-extraction-meteaux.png",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_2.png",
                       "alt": "Schéma des conséquences d’un centre de données",
-                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur l’extraction des métaux.",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données :</p><ul><li>la consommation d'eau,</li><li>la consommation d'énergie,</li><li>l'artificialisation des sols,</li><li> l'extraction de métaux et de terres rares,</li><li> la production de déchets toxiques.</li></ul><p>Le focus est mis sur l'extraction de métaux et de terres rares.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -177,7 +177,12 @@
                           "diagnosis": "<p>Toutes les propositions sont des impacts de l’extraction de métaux pour la construction de centres de données.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 },
@@ -186,9 +191,9 @@
                     {
                       "id": "6d1f048a-c1a5-4021-bce9-0799d7754fbf",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-consomation-eau.png",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_3.png",
                       "alt": "Schéma des conséquences d’un centre de données.",
-                      "alternativeText": "Schéma des conséquences d’un centre de données - focus sur la consommation d’eau.",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données : </p><p>- la consommation d'eau </p><p> - la consommation d'énergie </p><p> - l'artificialisation des sols </p><p> - l'extraction de métaux et de terres rares </p><p> - la production de déchets toxiques. <br> </p><p>Le focus est mis sur  la consommation d’eau.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -225,7 +230,10 @@
                           "diagnosis": "<p>La consommation d’eau pour faire fonctionner les systèmes de refroidissement participe à la pénurie de l’eau et la détourne d’autres usages (agriculture, population, irrigation naturelle, etc).</p>"
                         }
                       },
-                      "solutions": ["1", "3"]
+                      "solutions": [
+                        "1",
+                        "3"
+                      ]
                     }
                   ]
                 },
@@ -240,9 +248,9 @@
                     {
                       "id": "74d11d84-eee4-4347-a4b4-baa07086af27",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacenter-etape3.png",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_4.png",
                       "alt": "Schéma des conséquences d’un centre de données",
-                      "alternativeText": "Schéma des conséquences d’un centre de données avec les conséquences secondaires.",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données : </p><ul><li> la consommation d'eau<ul><li>qui peut entraîner une pénurie d'eau potable</li><li>et un manque d'eau pour l'agriculture</li></ul></li><li>  la consommation d'énergie </li><li>  l'artificialisation des sols </li><li> l'extraction de métaux et de terres rares </li><li>  la production de déchets toxiques.</li></ul><p>Cela entraîne également la génération de CO².</p><p><br></p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -279,7 +287,12 @@
                           "diagnosis": "Toutes ces propositions font partie des impacts  du fonctionnement des centres de données, sur l’environnement et la santé humaine."
                         }
                       },
-                      "solutions": ["1", "2", "3", "4"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
                     }
                   ]
                 }
@@ -306,11 +319,11 @@
               "element": {
                 "id": "150b2305-2988-4789-a01f-9bf7171c1666",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/schema-impacts-datacenter.png",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_5.png",
                 "alt": "Schéma des impacts environnementaux des centres de données",
-                "alternativeText": "<p>Schéma des impacts environnementaux des centres de données&nbsp;: </p><p>Conséquences primaires&nbsp;:</p><p>-&nbsp; consommation d’eau, consommation d’énergie / électricité</p><p>- extractions des métaux et terres rares</p><p>- artificialisation des sols</p><p>Conséquences secondaires&nbsp;:&nbsp;</p><p>- pénurie d’eau potable</p><p>- manque d’eau pour l’agriculture</p><p>- raréfaction des ressources</p><p>- génération de CO2</p><p>- production de déchets toxiques</p><p>Conséquences systémiques&nbsp;:&nbsp;&nbsp;</p><p>- santé et bien-être des populations humaines</p><p>- dérèglement climatique</p><p>- dégradations de la biodiversité et des écosystèmes</p>",
+                "alternativeText": "<p>Schéma des impacts environnementaux des centres de données&nbsp;: </p><p>Conséquences primaires&nbsp;:</p><ul><li>consommation d’eau,</li><li> consommation d’énergie / électricité</li><li>extractions des métaux et terres rares</li><li>artificialisation des sols</li><li>production de déchets toxiques</li></ul><p>Conséquences secondaires&nbsp;:&nbsp;</p><ul><li>pénurie d’eau potable</li><li>manque d’eau pour l’agriculture</li><li>raréfaction des ressources</li><li>génération de CO²</li></ul><p>Conséquences systémiques&nbsp;:&nbsp;&nbsp;</p><ul><li>dégradatio de la santé et bien-être des populations </li><li>déstruction des habitats</li><li>dérèglement climatique</li><li>dégradations de la biodiversité </li></ul>",
                 "legend": "Schéma des impacts environnementaux des centres de données",
-                "licence": "image provisoire"
+                "licence": ""
               }
             }
           ]
@@ -360,7 +373,9 @@
                     {
                       "id": "7fb2c32e-586d-4a88-ad50-368a2292ae97",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -386,9 +401,7 @@
                             }
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 },
@@ -403,7 +416,9 @@
                     {
                       "id": "f19dfdcb-c777-4448-ab61-29b0a212e489",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -429,9 +444,7 @@
                             }
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 },
@@ -446,7 +459,9 @@
                     {
                       "id": "3e486e8b-cca0-45c5-b022-b40574eeb8bc",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -472,9 +487,7 @@
                             }
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 },
@@ -489,7 +502,9 @@
                     {
                       "id": "14580542-77e4-454a-9dea-991225bf4c73",
                       "type": "custom",
+                      "title": "",
                       "instruction": "Comment évolue la sollicitation des serveurs ?",
+                      "functionalInstruction": "",
                       "tagName": "pix-cursor",
                       "props": {
                         "options": [
@@ -515,9 +530,7 @@
                             }
                           }
                         ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      }
                     }
                   ]
                 }
@@ -605,38 +618,13 @@
                 {
                   "elements": [
                     {
-                      "id": "6f22447e-a97e-4580-a161-8851edbdb611",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "message-conversation",
-                      "props": {
-                        "conversationTitle": "Dona & Boubacar",
-                        "messages": [
-                          {
-                            "userName": "Dona",
-                            "direction": "incoming",
-                            "type": "Texte",
-                            "content": "Bonjour à tous ! J’espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?"
-                          },
-                          {
-                            "userName": "Boubacar",
-                            "direction": "outgoing",
-                            "type": "Texte",
-                            "content": "Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produite par des éoliennes ou par des panneaux solaires ? ☀️"
-                          },
-                          {
-                            "userName": "Boubacar",
-                            "direction": "outgoing",
-                            "type": "Image seule",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/panneau_solaire.jpg",
-                              "alt": "Des panneaux solaires sur le toit d’un centre de données"
-                            }
-                          }
-                        ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      "id": "fd8a0b60-def8-45d9-aad6-e62070210252",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_1.png",
+                      "alt": "Un échange en réunion entre Dona et Boubacar",
+                      "alternativeText": "<p>Dona :&nbsp;Bonjour à tous ! J’espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?</p><p>Boubacar :&nbsp;Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produite par des éoliennes ou par des panneaux solaires ? ☀️</p>",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "9b8689af-c414-4cfc-a19d-1bb8991b7330",
@@ -680,38 +668,13 @@
                 {
                   "elements": [
                     {
-                      "id": "deb1f3b1-9c19-44a1-8049-d91568682049",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "message-conversation",
-                      "props": {
-                        "conversationTitle": "Dona & Amira",
-                        "messages": [
-                          {
-                            "userName": "Dona",
-                            "direction": "incoming",
-                            "type": "Texte",
-                            "content": "C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !"
-                          },
-                          {
-                            "userName": "Amira",
-                            "direction": "outgoing",
-                            "type": "Texte",
-                            "content": "Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊"
-                          },
-                          {
-                            "userName": "Amira",
-                            "direction": "outgoing",
-                            "type": "Image seule",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/piscine-butte.jpg",
-                              "alt": "Image d’une piscine"
-                            }
-                          }
-                        ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      "id": "28485732-09c3-47b9-a6a8-7f894cc041e1",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_2.png",
+                      "alt": "Suite de la réunion : un échange entre Dona et Amira ",
+                      "alternativeText": "<p>Dona : C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !</p><p>Amira :&nbsp;Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊</p>",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "19d83e51-2310-4564-8037-44105f3b514f",
@@ -755,44 +718,13 @@
                 {
                   "elements": [
                     {
-                      "id": "58a69897-5b5a-472f-b92f-8e6a88c4a3ec",
-                      "type": "custom",
-                      "instruction": "",
-                      "tagName": "message-conversation",
-                      "props": {
-                        "conversationTitle": "Dona & Oscar",
-                        "messages": [
-                          {
-                            "userName": "Dona",
-                            "direction": "incoming",
-                            "type": "Texte",
-                            "content": "C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?"
-                          },
-                          {
-                            "userName": "Oscar",
-                            "direction": "outgoing",
-                            "type": "Texte",
-                            "content": "Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides : par exemple en Suède ?❄️"
-                          },
-                          {
-                            "userName": "Oscar",
-                            "direction": "outgoing",
-                            "type": "Image seule",
-                            "image": {
-                              "src": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/9-fortis-construction-meta-sweden-campus-1.jpg",
-                              "alt": "Photo du centre de données de Meta (Facebook) en Suède"
-                            }
-                          },
-                          {
-                            "userName": "Dona",
-                            "direction": "incoming",
-                            "type": "Texte",
-                            "content": "Bonne idée ! Il va falloir creuser... Merci à tous pour vos propositions."
-                          }
-                        ]
-                      },
-                      "title": "",
-                      "functionalInstruction": ""
+                      "id": "9a2592e3-6c24-42e4-be35-d1c1e5ec57ed",
+                      "type": "image",
+                      "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_3.png",
+                      "alt": "Suite et fin de la réunion : un échange entre Dona et Oscar",
+                      "alternativeText": "<p>Dona :&nbsp;C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?</p><p>Oscar :&nbsp;Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides&nbsp;: par exemple en Suède ?❄️</p>",
+                      "legend": "",
+                      "licence": ""
                     },
                     {
                       "id": "1f59df7b-6743-4ae9-99b8-2524b4305b1f",
@@ -957,8 +889,15 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["centre de données", "datacenter"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "centre de données",
+                            "datacenter"
+                          ]
                         },
                         {
                           "type": "text",
@@ -1006,8 +945,14 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["métaux"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "métaux"
+                          ]
                         },
                         {
                           "type": "text",
@@ -1021,8 +966,14 @@
                           "display": "inline",
                           "placeholder": "à compléter",
                           "ariaLabel": "à compléter",
-                          "tolerances": ["t1", "t2", "t3"],
-                          "solutions": ["terres"]
+                          "tolerances": [
+                            "t1",
+                            "t2",
+                            "t3"
+                          ],
+                          "solutions": [
+                            "terres"
+                          ]
                         },
                         {
                           "type": "text",
@@ -1056,7 +1007,9 @@
               "element": {
                 "id": "d041ad34-1d9a-444c-816f-c42313619932",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Faites défiler ces 4 exemples de sites web puis répondez à la question.<br></p>",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -1123,9 +1076,7 @@
                   "disableAnimation": false,
                   "enableLoop": false,
                   "imageTextDisplay": "1:2"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -1163,7 +1114,10 @@
                     "diagnosis": "<p>Essayer de vous demander quelles pratiques sollicitent le moins les serveurs.</p>"
                   }
                 },
-                "solutions": ["2", "3"]
+                "solutions": [
+                  "2",
+                  "3"
+                ]
               }
             }
           ]
@@ -1248,7 +1202,9 @@
               "element": {
                 "id": "4cf542a5-1027-4dd5-899b-e5fb4048ff1d",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Lisez l’article suivant puis répondez aux questions.</p>",
+                "functionalInstruction": "",
                 "tagName": "pix-article",
                 "props": {
                   "titleLevel": 0,
@@ -1261,9 +1217,7 @@
                   ],
                   "highlightedSentence": "centres de données",
                   "colorOfHighlightSentence": "#6B2518"
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -1350,7 +1304,11 @@
                           "diagnosis": "<p>Cherchez encore, c’est peut-être pire que ce que vous croyez...&nbsp;<br>Cet article illustre les pratiques de <strong>green-washing</strong>, c’est-à-dire communiquer pour <strong>faire croire qu’une entreprise a un impact positif</strong> sur l’environnement alors que son impact réel est négatif.</p>"
                         }
                       },
-                      "solutions": ["1", "2", "3"]
+                      "solutions": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
                     }
                   ]
                 }
