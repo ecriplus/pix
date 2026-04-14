@@ -443,9 +443,6 @@ export const userRoutes = [
         params: Joi.object({
           id: identifiersType.userId,
         }),
-        options: {
-          allowUnknown: true,
-        },
         payload: Joi.object({
           data: {
             type: Joi.string().valid('email-verification-codes').required(),

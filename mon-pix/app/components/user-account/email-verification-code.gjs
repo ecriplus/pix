@@ -65,7 +65,10 @@ export default class EmailVerificationCode extends Component {
     }
     const code = this.code;
     this.code = null;
-    const emailVerificationCode = this.store.createRecord('email-verification-code', { code });
+    const emailVerificationCode = this.store.createRecord('email-verification-code', {
+      code,
+      action: this.args.action,
+    });
     try {
       const email = await emailVerificationCode.verifyCode();
       if (email) {

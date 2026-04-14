@@ -17,13 +17,36 @@ export default class EmailVerificationCode extends Model {
     },
   });
 
-  verifyCode = memberAction({
+  verifyCode() {
+    if (this.action === 'add-email') {
+      return this._verifyCodeToAddEmail();
+    }
+    return this._verifyCodeToUpdateEmail();
+  }
+
+  _verifyCodeToUpdateEmail = memberAction({
     path: 'update-email',
     type: 'POST',
     before() {
       const payload = this.serialize();
       delete payload.data.attributes['new-email'];
       delete payload.data.attributes.password;
+      delete payload.data.attributes.action;
+      return payload;
+    },
+    after(response) {
+      return response?.data?.attributes?.email;
+    },
+  });
+
+  _verifyCodeToAddEmail = memberAction({
+    path: 'add-email-connection-method',
+    type: 'POST',
+    before() {
+      const payload = this.serialize();
+      delete payload.data.attributes['new-email'];
+      delete payload.data.attributes.password;
+      delete payload.data.attributes.action;
       return payload;
     },
     after(response) {
