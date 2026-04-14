@@ -72,9 +72,7 @@ describe('Certification | Scripts | fill lastAnswerAt column', function () {
       expect(logger.info).to.have.been.calledWith(
         `Script execution started with options {"dryRun":true,"throttleDelay":5,"chunkSize":2,"startId":${certificationCourseWithoutAssessmentId - 1}}`,
       );
-      expect(logger.info).to.have.been.calledWith(
-        'Script finished. Number of certifications processed : 4, number of certifications updated with a lastAnswer date : 2, youpi',
-      );
+      expect(logger.info).to.have.been.calledWith('Script finished. Number of certifications processed : 2, youpi');
       expect(logger.error).to.not.have.been.called;
     });
   });
@@ -110,9 +108,7 @@ describe('Certification | Scripts | fill lastAnswerAt column', function () {
         expect(logger.info).to.have.been.calledWith(
           `Script execution started with options {"dryRun":false,"throttleDelay":5,"chunkSize":2,"startId":${certificationCourseWithoutAssessmentId - 1}}`,
         );
-        expect(logger.info).to.have.been.calledWith(
-          'Script finished. Number of certifications processed : 4, number of certifications updated with a lastAnswer date : 2, youpi',
-        );
+        expect(logger.info).to.have.been.calledWith('Script finished. Number of certifications processed : 2, youpi');
         expect(logger.error).to.not.have.been.called;
       });
     });
@@ -120,7 +116,10 @@ describe('Certification | Scripts | fill lastAnswerAt column', function () {
     context('when an error occurs during the process', function () {
       it('persists only the batches before the error occurs', async function () {
         const sabotageHook = (queryData) => {
-          if (queryData.bindings?.[0] === certificationCourseWithoutAnswerId && queryData.bindings?.[1] === null) {
+          if (
+            queryData.bindings?.[0] === certificationCourseWithAnswers2Id &&
+            queryData.bindings?.[1] instanceof Date
+          ) {
             throw new Error('SABOTAGING_TO_TRIGGER_ROLLBACK');
           } else {
             knex.once('query', sabotageHook);
@@ -133,7 +132,7 @@ describe('Certification | Scripts | fill lastAnswerAt column', function () {
           options: {
             dryRun: false,
             throttleDelay: 5,
-            chunkSize: 2,
+            chunkSize: 1,
             startId: certificationCourseWithoutAssessmentId - 1,
           },
         });
@@ -155,10 +154,10 @@ describe('Certification | Scripts | fill lastAnswerAt column', function () {
         expect(lastAnswerAtValues[2]).to.be.null;
         expect(lastAnswerAtValues[3]).to.deep.equal(new Date('2022-12-25')); // old date not updated
         expect(logger.info).to.have.been.calledWith(
-          `Script execution started with options {"dryRun":false,"throttleDelay":5,"chunkSize":2,"startId":${certificationCourseWithoutAssessmentId - 1}}`,
+          `Script execution started with options {"dryRun":false,"throttleDelay":5,"chunkSize":1,"startId":${certificationCourseWithoutAssessmentId - 1}}`,
         );
         expect(logger.info).to.have.been.calledWith(
-          'Script interrupted. Number of certifications processed so far : 2',
+          'Script interrupted. Number of certifications processed so far : 1',
         );
         expect(logger.error).to.have.been.calledWithMatch('Error: SABOTAGING_TO_TRIGGER_ROLLBACK');
       });
