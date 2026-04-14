@@ -2364,12 +2364,14 @@
           "email-modification-demand-expired": "Este código ha caducado. Por favor, renueva la solicitud.",
           "incorrect-code": "El código introducido es incorrecto.",
           "new-email-already-exist": "Esta dirección de correo electrónico ya se está utilizando.",
+          "no-code": "Por favor, introduce el código de {numInputs} dígitos que has recibido por correo electrónico.",
           "unknown-error": "Se ha producido un error. Vuelve a intentarlo o ponte en contacto con el servicio de asistencia."
         },
         "send-back-the-code": "volver a enviarme el código",
         "time-code-validation": "El código recibido es válido durante 10 minutos",
         "title": "Comprobación de tu dirección de correo electrónico",
-        "update-successful": "Tu dirección de correo electrónico ha sido modificada."
+        "update-successful": "Tu dirección de correo electrónico ha sido modificada.",
+        "validate-new-email": "Validar nuevo correo electrónico"
       },
       "language": {
         "lang": "Idioma",

@@ -225,6 +225,11 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
       await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
         clipboardData: { getData: () => '123456' },
       });
+      await click(
+        screen.getByRole('button', {
+          name: t('pages.user-account.email-verification.validate-new-email'),
+        }),
+      );
       // eslint-disable-next-line ember/no-settled-after-test-helper
       await settled();
 

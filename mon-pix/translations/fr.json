@@ -2379,12 +2379,14 @@
           "email-modification-demand-expired": "Ce code a expiré. Veuillez renouveler la demande.",
           "incorrect-code": "Le code saisi est incorrect.",
           "new-email-already-exist": "Cette adresse e-mail est déjà utilisée.",
+          "no-code": "Veuillez saisir le code à {numInputs} chiffres reçu par e-mail.",
           "unknown-error": "Une erreur est survenue. Veuillez recommencer ou contacter le support."
         },
         "send-back-the-code": "me renvoyer le code",
         "time-code-validation": "Le code reçu est valide pendant 10 minutes",
         "title": "Vérification de votre adresse e-mail",
-        "update-successful": "Votre adresse e-mail a été changée !"
+        "update-successful": "Votre adresse e-mail a été changée !",
+        "validate-new-email": "Valider ma nouvelle adresse e-mail"
       },
       "language": {
         "lang": "Langue",
