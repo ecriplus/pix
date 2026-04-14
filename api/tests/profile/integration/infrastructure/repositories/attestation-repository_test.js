@@ -10,8 +10,8 @@ describe('Profile | Integration | Infrastructure | Repository | Attestation', fu
   describe('#findAll', function () {
     it('should return all attestations', async function () {
       // given
-      databaseBuilder.factory.buildAttestation({ key: 'PARENTHOOD' });
-      databaseBuilder.factory.buildAttestation({ key: 'SIXTH_GRADE' });
+      databaseBuilder.factory.buildAttestation({ key: 'PARENTHOOD', label: 'Parentalité' });
+      databaseBuilder.factory.buildAttestation({ key: 'SIXTH_GRADE', label: '6ème' });
       await databaseBuilder.commit();
 
       // when
@@ -21,6 +21,7 @@ describe('Profile | Integration | Infrastructure | Repository | Attestation', fu
       expect(result).to.have.lengthOf(2);
       expect(result[0]).to.be.an.instanceof(Attestation);
       expect(result.map((a) => a.key)).to.include.members(['PARENTHOOD', 'SIXTH_GRADE']);
+      expect(result.map((a) => a.label)).to.include.members(['Parentalité', '6ème']);
     });
 
     it('should return an empty array when there are no attestations', async function () {
@@ -45,7 +46,7 @@ describe('Profile | Integration | Infrastructure | Repository | Attestation', fu
       // then
 
       expect(result).to.be.an.instanceof(Attestation);
-      expect(result.templateName).to.equal(templateName);
+      expect(result).to.deep.equal(attestation);
     });
 
     it('should return null if no attestation exist for given key', async function () {
