@@ -1,17 +1,12 @@
 import 'dayjs/locale/fr.js';
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import querystring from 'node:querystring';
-import { Readable } from 'node:stream';
-import * as url from 'node:url';
 
 import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import iconv from 'iconv-lite';
 import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
@@ -42,13 +37,12 @@ import * as thematicRepository from '../src/shared/infrastructure/repositories/t
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
+import { AttestationTemplateFixture } from './tooling/fixtures/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, removeTempFile } from './tooling/temporary-file.js';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -125,15 +119,6 @@ after(async function () {
 });
 
 /* eslint-enable mocha/no-top-level-hooks */
-
-function toStream(data, encoding = 'utf8') {
-  return new Readable({
-    read() {
-      this.push(iconv.encode(data, encoding));
-      this.push(null);
-    },
-  });
-}
 
 /**
  * For acceptance tests. To be used as `const options = generateInjectOptions; await server.inject(options);`
@@ -269,19 +254,6 @@ const hFake = {
   continue: Symbol('continue'),
 };
 
-function streamToPromise(stream) {
-  return new Promise((resolve, reject) => {
-    let totalData = '';
-    stream.on('data', (data) => {
-      totalData += data;
-    });
-    stream.on('end', () => {
-      resolve(totalData);
-    });
-    stream.on('error', reject);
-  });
-}
-
 function parseJsonStream(response) {
   return response.result
     .split('\n')
@@ -318,7 +290,7 @@ async function mockLearningContent(learningContent) {
 }
 
 function mockAttestationStorage(attestation) {
-  const template = fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
+  const template = AttestationTemplateFixture.getStream();
 
   nock('http://attestations.fake.endpoint.example.net:80')
     .get(`/attestations.bucket/${attestation.templateName}.pdf?x-id=GetObject`)
@@ -332,10 +304,6 @@ function mockAttestationStorageUpload({ attestation, isFailed = false }) {
     .put(`/attestations.bucket/${attestation.templateName}.pdf?x-id=PutObject`)
     .reply(isFailed ? 500 : 200)
     .persist();
-}
-
-function getFakeAttestationTemplate() {
-  return fs.createReadStream(path.join(__dirname, 'attestation-template.pdf'));
 }
 
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
@@ -378,7 +346,6 @@ export {
   generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
-  getFakeAttestationTemplate,
   hFake,
   HttpTestServer,
   knex,
@@ -392,8 +359,6 @@ export {
   preventStubsToBeCalledUnexpectedly,
   removeTempFile,
   sinon,
-  streamToPromise,
-  toStream,
   wait,
   waitForStreamFinalizationToBeDone,
 };
