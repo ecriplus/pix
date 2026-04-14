@@ -6,6 +6,7 @@ export default {
   area: Model.extend({
     competences: hasMany('competence'),
   }),
+  attestation: Model.extend(),
   attestationParticipantStatus: Model.extend(),
   availableCampaignParticipation: Model.extend(),
   badge: Model.extend(),

@@ -598,6 +598,8 @@ export default function routes() {
         match = match && (learner.firstName.includes(search) || learner.lastName.includes(search));
       }
 
+      match = match && learner.attestationKey === request.params.attestationKey;
+
       return match;
     }).models;
 
@@ -619,6 +621,10 @@ export default function routes() {
 
   this.patch('/organizations/:organizationId/organization-learners/:learnerId', function () {
     return new Response(204);
+  });
+
+  this.get('/organizations/:organizationId/attestations', function (schema) {
+    return schema.attestations.all();
   });
 
   this.get('/organizations/:organizationId/place-statistics', function (schema, request) {

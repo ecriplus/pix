@@ -51,13 +51,16 @@ export default class AuthenticatedAttestationsRoute extends Route {
       },
     });
 
+    const availableAttestations = await this.store.findAll('attestation', { adapterOptions: { organizationId } });
+    const currentAttestation = availableAttestations.find((attestation) => attestationKey === attestation.key);
+
     if (this.currentUser.organization.isManagingStudents) {
       const divisions = await this.currentUser.organization.divisions;
       const options = divisions.map(({ name }) => ({ label: name, value: name }));
-      return { options, attestationParticipantStatuses, attestationKey };
+      return { options, attestationParticipantStatuses, currentAttestation, availableAttestations };
     }
 
-    return { attestationParticipantStatuses, attestationKey };
+    return { attestationParticipantStatuses, currentAttestation, availableAttestations };
   }
 
   resetController(controller, isExiting) {

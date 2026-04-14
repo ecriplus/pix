@@ -54,6 +54,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
+      const attestations = [{ label: 'attestation 1', key: 'MY_KEY' }];
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -68,12 +69,15 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
 
       const findRecordStub = sinon.stub();
       const queryStub = sinon.stub();
+      const findAllStub = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
         query = queryStub;
+        findAll = findAllStub;
       }
 
       queryStub.resolves(attestationParticipantStatuses);
+      findAllStub.resolves(attestations);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);
@@ -86,7 +90,8 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // then
       assert.deepEqual(actualOptions, {
         attestationParticipantStatuses,
-        attestationKey: 'MY_KEY',
+        availableAttestations: attestations,
+        currentAttestation: { key: 'MY_KEY', label: 'attestation 1' },
         options: [
           {
             label: '3èmeA',
@@ -104,6 +109,11 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
+      const attestations = [
+        { label: 'attestation 1', key: 'MY_KEY' },
+        { label: 'attestation 2', key: 'MY_OTHER_KEY' },
+      ];
+
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -118,12 +128,15 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
 
       const findRecordStub = sinon.stub();
       const queryRecord = sinon.stub();
+      const findAllStub = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
         query = queryRecord;
+        findAll = findAllStub;
       }
 
       queryRecord.resolves(attestationParticipantStatuses);
+      findAllStub.resolves(attestations);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);
@@ -134,13 +147,21 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       const actualOptions = await route.model({ statuses: [] });
 
       // then
-      assert.deepEqual(actualOptions, { attestationParticipantStatuses, attestationKey: 'MY_OTHER_KEY' });
+      assert.deepEqual(actualOptions, {
+        attestationParticipantStatuses,
+        availableAttestations: attestations,
+        currentAttestation: { key: 'MY_OTHER_KEY', label: 'attestation 2' },
+      });
     });
 
     test('it should call the store with the first available attestation key', async function (assert) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
+      const attestations = [
+        { label: 'attestation 1', key: 'MY_KEY' },
+        { label: 'attestation 2', key: 'MY_OTHER_KEY' },
+      ];
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -155,12 +176,15 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
 
       const findRecordStub = sinon.stub();
       const queryRecord = sinon.stub();
+      const findAllStub = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
         query = queryRecord;
+        findAll = findAllStub;
       }
 
       queryRecord.resolves(attestationParticipantStatuses);
+      findAllStub.resolves(attestations);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);
@@ -192,6 +216,10 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
+      const attestations = [
+        { label: 'attestation 1', key: 'MY_KEY' },
+        { label: 'attestation 2', key: 'MY_OTHER_KEY' },
+      ];
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
         organization = {
@@ -206,12 +234,15 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
 
       const findRecordStub = sinon.stub();
       const queryRecord = sinon.stub();
+      const findAllStub = sinon.stub();
       class StoreStub extends Service {
         findRecord = findRecordStub;
         query = queryRecord;
+        findAll = findAllStub;
       }
 
       queryRecord.resolves(attestationParticipantStatuses);
+      findAllStub.resolves(attestations);
 
       this.owner.register('service:current-user', CurrentUserStub);
       this.owner.register('service:store', StoreStub);

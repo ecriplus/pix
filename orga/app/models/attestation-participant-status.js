@@ -5,4 +5,5 @@ export default class AttestationParticipantStatus extends Model {
   @attr('string') lastName;
   @attr('string') division;
   @attr('date') obtainedAt;
+  @attr('string') attestationKey;
 }

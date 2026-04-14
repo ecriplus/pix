@@ -6,7 +6,7 @@ import Attestations from 'pix-orga/components/attestations';
 
   <div class="attestations-page">
     <Attestations
-      @attestationKey={{@model.attestationKey}}
+      @currentAttestation={{@model.currentAttestation}}
       @participantStatuses={{@model.attestationParticipantStatuses}}
       @divisions={{@model.options}}
       @onSubmit={{@controller.downloadAttestations}}
@@ -15,6 +15,7 @@ import Attestations from 'pix-orga/components/attestations';
       @searchFilter={{@controller.search}}
       @statusesFilter={{@controller.statuses}}
       @divisionsFilter={{@controller.divisions}}
+      @availableAttestations={{@model.availableAttestations}}
     />
   </div>
 </template>
