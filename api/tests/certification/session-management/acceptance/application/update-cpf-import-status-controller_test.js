@@ -37,10 +37,6 @@ describe('Acceptance | Controller | Session | update-cpf-import-status-controlle
       .reply(200);
   });
 
-  afterEach(async function () {
-    nock.cleanAll();
-  });
-
   describe('PUT /api/admin/cpf/receipts', function () {
     it('should return an OK (200) status', async function () {
       // given
