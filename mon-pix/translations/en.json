@@ -1686,7 +1686,6 @@
             "context": "Context",
             "did-you-know": "Did you know?",
             "further-information": "Further information",
-            "key-points": "Key points",
             "tip": "Tip"
           }
         }
@@ -1708,7 +1707,8 @@
       },
       "grain": {
         "tag": {
-          "activity": "Activity"
+          "activity": "Activity",
+          "key-points": "Key points"
         },
         "title": {
           "lesson": "Lesson",
