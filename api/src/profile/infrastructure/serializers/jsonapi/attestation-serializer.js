@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (attestations) {
   return new Serializer('attestation', {
-    attributes: ['key'],
+    attributes: ['key', 'label'],
   }).serialize(attestations);
 };
 
