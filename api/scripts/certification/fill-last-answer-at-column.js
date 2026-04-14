@@ -81,12 +81,20 @@ export class FillLastAnswerAtColumn extends Script {
 async function findNextCertificationsToProcess(startId, chunkSize) {
   const results = await knex.raw(
     `
-        SELECT DISTINCT ON ("cc"."id") "cc"."id", "ans"."createdAt" AS "lastAnswerAt"
-        FROM "certification-courses" AS "cc"
-        JOIN "assessments" AS "ass" ON "ass"."certificationCourseId" = "cc"."id"
-        JOIN "answers" AS "ans" ON "ans"."assessmentId" = "ass"."id"
-        WHERE "cc"."id" >= ? AND "cc"."id" < ?
-        ORDER BY "cc"."id" ASC, "ans"."createdAt" DESC
+      SELECT
+        cc.id,
+        latest_ans."lastAnswerAt"
+      FROM "certification-courses" AS cc
+      CROSS JOIN LATERAL (
+        SELECT ans."createdAt" AS "lastAnswerAt"
+        FROM "assessments" AS ass
+        JOIN "answers" AS ans ON ans."assessmentId" = ass.id
+        WHERE ass."certificationCourseId" = cc.id
+        ORDER BY ans."createdAt" DESC
+        LIMIT 1
+      ) AS latest_ans
+      WHERE cc.id >= ? AND cc.id < ?
+      ORDER BY cc.id ASC
     `,
     [startId, startId + chunkSize],
   );
