@@ -46,7 +46,8 @@
     "ember-dayjs": {
       "ember-source": "$ember-source"
     },
-    "handlebars": ">=4.7.9"
+    "handlebars": ">=4.7.9",
+    "flatted": ">=3.4.2"
   },
   "devDependencies": {
     "@1024pix/ember-cli-notifications": "^8.0.2",

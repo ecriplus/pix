@@ -57,5 +57,8 @@
   },
   "dependencies": {
     "csv-parse": "^6.2.1"
-  }
+  },
+  "overrides": {
+  "flatted": ">=3.4.2"
+}
 }
