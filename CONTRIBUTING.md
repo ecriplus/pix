@@ -31,7 +31,7 @@ Notamment, dans Autres, vous pouvez trouver :
 
 Nom | Usage
 --- | ---
-DOCS | PR relative à de la documentation
+DOC | PR relative à de la documentation
 POC | PR relative à des Proofs of concept, ne doit pas être mergé
 
 Le titre de la PR originel (et donc son tag) reste dans tous les cas affiché dans chaque ligne du CHANGELOG.
