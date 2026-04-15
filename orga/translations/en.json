@@ -255,6 +255,9 @@
     },
     "loading": "Loading",
     "no-content": "No content available",
+    "notification": {
+      "close": "Close the notification"
+    },
     "result": {
       "accessibility-description": "Results obtained = {percentage, number, ::percent},that is success rate {stage} of {totalStage}",
       "percentage": "{value, number, ::percent}",

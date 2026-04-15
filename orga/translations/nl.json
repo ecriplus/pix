@@ -256,6 +256,9 @@
     },
     "loading": "Bezig met laden",
     "no-content": "Geen inhoud",
+    "notification": {
+      "close": "Melding sluiten"
+    },
     "result": {
       "accessibility-description": "Verkregen resultaat = {percentage, number, ::percent}, ofwel de succesratio {stage} op {totalStage}",
       "percentage": "{value, number, ::percent}",

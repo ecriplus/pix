@@ -261,6 +261,9 @@
     },
     "loading": "Carga en curso",
     "no-content": "Sin contenido",
+    "notification": {
+      "close": "Cerrar la notificación"
+    },
     "result": {
       "accessibility-description": "Resultado obtenido = {percentage, number, ::percent}, es decir, el rodamiento {stage} sobre {totalStage}.",
       "percentage": "{value, number, ::percent}",
