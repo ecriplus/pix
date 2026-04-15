@@ -729,7 +729,7 @@
                 "title": "simulateur gestionnaire de fichiers",
                 "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=modulix_rangerfichiers_ind_decouverte4&lang=fr",
                 "instruction": "<p>Dans le gestionnaire de fichiers ci-dessous&nbsp;: </p><ol><li> Dans le dossier «&nbsp;Documents&nbsp;», créer 2 sous-dossiers&nbsp;:&nbsp; «&nbsp;Factures&nbsp;» et «&nbsp;Notes&nbsp;».</li><li>Ranger les fichiers du dossier «&nbsp;Documents&nbsp;» dans les bons sous-dossiers.</li><li>Déplacer le dossier «&nbsp;Playlist fêtes&nbsp;» dans le dossier «&nbsp;Musique&nbsp;».</li></ol>",
-                "solution": "",
+                "solution": "courgette",
                 "height": 500
               }
             },
@@ -840,25 +840,61 @@
                 "id": "13074d41-8e00-4339-9376-b22829ec706f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici le chemin du fichier «&nbsp;Baguette&nbsp;»&nbsp;: Mon ordinateur &gt; Documents &gt; Recettes &gt; Pains &gt; Baguette.</p><p><strong>Trouver le fichier dans l’interface de gestionnaire de fichiers ci-dessous, puis double cliquer dessus pour l’ouvrir&nbsp;:</strong><br></p>"
+                "content": "<p>Voici le chemin du fichier «&nbsp;Baguette&nbsp;»&nbsp;: Mon ordinateur &gt; Documents &gt; Recettes &gt; Pains &gt; Baguette.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "79d7564d-d775-4f56-855e-15f33eabed00",
-                "type": "expand",
-                "title": "[Simulateur interface de gestionnaire de fichiers avec autovalidation]",
-                "content": "<p><strong>Arborescence&nbsp;:&nbsp;</strong><br>pas besoin de lien avec les arbo précédentes</p><p><strong>Interface</strong> comme dans <a href=\"https://epreuves-viewer.pix.digital/production/?embed=filemanager&amp;mode=example&amp;locale=fr\" target=\"_blank\">filemanager-example</a></p><p><strong>Actions&nbsp;: </strong>Naviguer dans le gestionnaire puis double cliquer sur le fichier baguette -&gt; déclenchement de la validation.</p>"
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Simulateur interface de gestionnaire de fichiers sans validation",
+                "url": " https://epreuves.pix.fr/filemanager-visu/filemanager-visu.html?mode=modulix_rangerfichiers_ind_activite1&lang=fr",
+                "instruction": "<p>Dans l’interface suivante, suivez le chemin et regardez quel autre fichier est rangé au même endroit que « Baguette ».</p>",
+                "solution": "",
+                "height": 500
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "4ef0651e-e59c-4893-9fa2-d82d8944653a",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><strong>Feedback </strong>:&nbsp;Bravo ! Vous avez trouvé le fichier «&nbsp;Baguette&nbsp;». En suivant le chemin d’accès dossier par dossier (dans le gestionnaire de fichiers), il est possible de retrouver précisément un fichier.</p>"
+                "type": "qrocm",
+                "instruction": "<p>Quel est le nom de l'autre fichier est rangé au même endroit que « Baguette ».</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Nom du fichier&nbsp;:</p>"
+                  },
+                  {
+                    "input": "1",
+                    "type": "input",
+                    "inputType": "text",
+                    "size": 9,
+                    "display": "inline",
+                    "placeholder": "",
+                    "ariaLabel": "champ à compléter",
+                    "tolerances": [
+                      "t1",
+                      "t2"
+                    ],
+                    "solutions": [
+                      "Tradition",
+                      "tradition"
+                    ]
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse&nbsp;! 🎉&nbsp;</p>",
+                    "diagnosis": "<p>En suivant le chemin d’accès dossier par dossier (dans le gestionnaire de fichiers), il est possible de retrouver précisément un fichier.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Pour retrouver le fichier « Baguette », il faut suivre le chemin d’accès indiqué et ouvrir les dossiers dans l’ordre (dans le gestionnaire de fichiers). Quel est le nom de l'autre fichier rangé au même endroit ?</p>"
+                  }
+                }
               }
             }
           ]
@@ -949,7 +985,7 @@
                 "id": "3111d526-b1bb-4790-9611-7a805bcfbfad",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Shaïna a envoyé des photos à Victor. Il les a enregistrées sur son ordinateur, mais elles sont mélangées avec ses propres photos dans son dossier «&nbsp;Images&nbsp;».</p>"
+                "content": "<p>Victor a envoyé des photos à Shaïna. Elle les a enregistrées sur son ordinateur, mais elles sont mélangées avec ses propres photos dans son dossier «&nbsp;Images&nbsp;».</p>"
               }
             },
             {
@@ -960,8 +996,8 @@
                 "isCompletionRequired": true,
                 "title": "simulateur gestionnaire de fichiers",
                 "url": "https://epreuves.pix.fr/filemanager/filemanager.html?mode=modulix_rangerfichiers_ind_activite3&lang=fr",
-                "instruction": "<p>Suivez les instructions suivantes pour ranger les photos du dossier «&nbsp;Images&nbsp;»&nbsp;: </p><ul>    <li>Dans le dossier «&nbsp;Images&nbsp;», créez un dossier «&nbsp;Shaïna&nbsp;».</li>    <li>Rangez-y toutes les photos dont l’auteur est Shaïna.</li>    </ul>",
-                "solution": "",
+                "instruction": "<p>Suivez les instructions suivantes pour ranger les photos du dossier «&nbsp;Images&nbsp;»&nbsp;: </p>\n<ul>\n    <li>Dans le dossier «&nbsp;Images&nbsp;», créez un dossier «&nbsp;Victor&nbsp;».</li>\n    <li>Rangez-y toutes les photos dont l’auteur est Victor.</li>\n</ul>",
+                "solution": "courgette",
                 "height": 500
               }
             }
