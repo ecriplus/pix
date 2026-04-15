@@ -107,15 +107,15 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       assert.notOk(screen.queryByText(t('navigation.main.places')));
     });
 
-    test('should not display Support menu if canAccessMissionsPage is false', async function (assert) {
+    test('should display support menu for all org types', async function (assert) {
       class CurrentUserStub extends Service {
-        organization = Object.create({ id: 5 });
+        organization = Object.create({ id: 5, type: 'PRO' });
         canAccessMissionsPage = false;
       }
       this.owner.register('service:current-user', CurrentUserStub);
       const screen = await render(<template><Sidebar /></template>);
 
-      assert.dom(screen.queryByRole('link', { name: t('navigation.main.support') })).doesNotExist();
+      assert.dom(screen.getByRole('link', { name: t('navigation.main.support') })).exists();
     });
   });
 
@@ -134,9 +134,42 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       // then
       assert.dom(screen.getByText('Participants')).exists();
     });
+
+    test('should display support menu with PRO url', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: '1', type: 'PRO' });
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const urlService = this.owner.lookup('service:url');
+      urlService.currentDomain = { isFranceDomain: true };
+
+      const screen = await render(<template><Sidebar /></template>);
+
+      assert.strictEqual(
+        screen.getByRole('link', { name: t('navigation.main.support') }).href,
+        'https://contact.pix.org/fr/hc/1137130200',
+      );
+    });
   });
 
   module('When the user is from a SUP organization', function () {
+    test('should display support menu with SUP url', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: '1', type: 'SUP' });
+        isSUPManagingStudents = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const urlService = this.owner.lookup('service:url');
+      urlService.currentDomain = { isFranceDomain: true };
+
+      const screen = await render(<template><Sidebar /></template>);
+
+      assert.strictEqual(
+        screen.getByRole('link', { name: t('navigation.main.support') }).href,
+        'https://contact.pix.org/fr/hc/1137130200',
+      );
+    });
+
     test('it should display Étudiants menu for all organisation members when the organization is isSUPManagingStudents', async function (assert) {
       // given
       class CurrentUserStub extends Service {
@@ -171,6 +204,23 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
   });
 
   module('When the user is from a SCO organization', function () {
+    test('should display support menu with SCO url', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: '1', type: 'SCO' });
+        isSCOManagingStudents = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const urlService = this.owner.lookup('service:url');
+      urlService.currentDomain = { isFranceDomain: true };
+
+      const screen = await render(<template><Sidebar /></template>);
+
+      assert.strictEqual(
+        screen.getByRole('link', { name: t('navigation.main.support') }).href,
+        'https://pix.fr/support/enseignement-scolaire',
+      );
+    });
+
     test('it should display Élèves menu for all organisation members when the organization is isSCOManagingStudents', async function (assert) {
       // given
       class CurrentUserStub extends Service {
@@ -265,21 +315,6 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
       assert.dom(screen.getByText('Missions')).exists();
     });
 
-    test('should display Support menu', async function (assert) {
-      class CurrentUserStub extends Service {
-        organization = Object.create({ id: 5 });
-        canAccessMissionsPage = true;
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
-
-      const screen = await render(<template><Sidebar /></template>);
-
-      assert.strictEqual(
-        screen.getByRole('link', { name: t('navigation.main.support') }).href,
-        'https://pix.fr/support/enseignement-scolaire/1er-degre',
-      );
-    });
-
     test('should not display Campagne', async function (assert) {
       class CurrentUserStub extends Service {
         organization = Object.create({ id: 5 });
@@ -290,6 +325,25 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
 
       assert.dom(screen.queryByText('Campagnes')).doesNotExist();
       assert.dom(screen.queryByText('Étudiants')).doesNotExist();
+    });
+  });
+
+  module('When the user is from a SCO-1D organization', function () {
+    test('should display support menu with SCO-1D url', async function (assert) {
+      class CurrentUserStub extends Service {
+        organization = Object.create({ id: 5, type: 'SCO-1D' });
+        canAccessMissionsPage = true;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+      const urlService = this.owner.lookup('service:url');
+      urlService.currentDomain = { isFranceDomain: true };
+
+      const screen = await render(<template><Sidebar /></template>);
+
+      assert.strictEqual(
+        screen.getByRole('link', { name: t('navigation.main.support') }).href,
+        'https://pix.fr/support/enseignement-scolaire/1er-degre',
+      );
     });
   });
 
