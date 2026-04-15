@@ -7,13 +7,13 @@ import * as juryCertificationSummarySerializer from '../infrastructure/serialize
 import * as jurySessionSerializer from '../infrastructure/serializers/jury-session-serializer.js';
 import * as sessionSerializer from '../infrastructure/serializers/session-serializer.js';
 
-const get = async function (request, h, dependencies = { sessionSerializer }) {
+async function get (request, h, dependencies = { sessionSerializer }) {
   const sessionId = request.params.sessionId;
   const { session, hasSomeCleaAcquired } = await usecases.getSession({ sessionId });
   return dependencies.sessionSerializer.serialize({ session, hasSomeCleaAcquired });
 };
 
-const findPaginatedFilteredJurySessions = async function (
+async function findPaginatedFilteredJurySessions (
   request,
   h,
   dependencies = {
@@ -32,14 +32,14 @@ const findPaginatedFilteredJurySessions = async function (
   return dependencies.jurySessionSerializer.serializeForPaginatedList(jurySessionsForPaginatedList);
 };
 
-const getJurySession = async function (request, h, dependencies = { jurySessionSerializer }) {
+async function getJurySession (request, h, dependencies = { jurySessionSerializer }) {
   const sessionId = request.params.sessionId;
   const jurySession = await usecases.getJurySession({ sessionId });
 
   return dependencies.jurySessionSerializer.serialize(jurySession);
 };
 
-const getJuryCertificationSummaries = async function (
+async function getJuryCertificationSummaries (
   request,
   h,
   dependencies = {
