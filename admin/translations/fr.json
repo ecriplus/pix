@@ -54,11 +54,6 @@
           "BELOW_MINIMUM": "{pixScore} Pix",
           "NONE": "{pixScore} Pix"
         },
-        "DROIT": {
-          "0": "Obtenue",
-          "BELOW_MINIMUM": "Non obtenue",
-          "NONE": "{pixScore} Pix"
-        },
         "EDU_1ER_DEGRE": {
           "0": "Admissible",
           "ADVANCED": "Avancé",
@@ -80,9 +75,20 @@
           "EXPERT": "Expert",
           "NONE": "{pixScore} Pix"
         },
+        "DROIT": {
+          "0": "Indépendant",
+          "1": "Confirmé",
+          "2": "Avancé",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Non obtenu",
+          "NONE": "{pixScore} Pix"
+        },
         "PRO_SANTE": {
-          "0": "Obtenue",
-          "BELOW_MINIMUM": "Non obtenue",
+          "0": "Indépendant",
+          "1": "Confirmé",
+          "2": "Avancé",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Non obtenu",
           "NONE": "{pixScore} Pix"
         }
       }
