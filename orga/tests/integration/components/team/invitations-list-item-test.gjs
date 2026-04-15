@@ -18,7 +18,7 @@ module('Integration | Component | Team::InvitationsListItem', function (hooks) {
     // given
     const notifications = this.owner.lookup('service:notifications');
     this.owner.register('service:current-user', CurrentUserStub);
-    sinon.stub(notifications, 'success');
+    sinon.stub(notifications, 'sendSuccess');
 
     const saveStub = sinon.stub();
     const cancelInvitationStub = sinon.stub();
@@ -46,7 +46,7 @@ module('Integration | Component | Team::InvitationsListItem', function (hooks) {
       },
     });
     sinon.assert.calledWith(
-      notifications.success,
+      notifications.sendSuccess,
       t('pages.team-new.success.invitation', { email: 'fifi@example.net' }),
     );
     assert.ok(true);

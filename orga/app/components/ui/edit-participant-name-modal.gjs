@@ -57,7 +57,7 @@ export default class EditParticipantNameModal extends Component {
       return;
     }
     if (!this.hasChanges) {
-      this.notifications.success(this.intl.t('components.ui.edit-participant-name-modal.success-message'));
+      this.notifications.sendSuccess(this.intl.t('components.ui.edit-participant-name-modal.success-message'));
       return this.args.onClose();
     }
 
@@ -76,10 +76,10 @@ export default class EditParticipantNameModal extends Component {
       this.args.participant.firstName = this.firstName.trim();
       this.args.participant.lastName = this.lastName.trim();
 
-      this.notifications.success(this.intl.t('components.ui.edit-participant-name-modal.success-message'));
+      this.notifications.sendSuccess(this.intl.t('components.ui.edit-participant-name-modal.success-message'));
       this.args.onClose();
     } catch {
-      this.notifications.error(this.intl.t('api-error-messages.global'));
+      this.notifications.sendError(this.intl.t('api-error-messages.global'));
     } finally {
       this.isLoading = false;
     }

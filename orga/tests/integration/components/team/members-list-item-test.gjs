@@ -213,7 +213,7 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
       test('it should display success message when updating a member role', async function (assert) {
         // given
         const notifications = this.owner.lookup('service:notifications');
-        sinon.stub(notifications, 'success');
+        sinon.stub(notifications, 'sendSuccess');
         const membership = adminMembership;
 
         const screen = await render(
@@ -229,7 +229,7 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
 
         // then
         sinon.assert.calledWith(
-          notifications.success,
+          notifications.sendSuccess,
           t('pages.team-members.notifications.change-member-role.success'),
         );
         assert.ok(true);
@@ -240,7 +240,7 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         adminMembership.save.rejects();
         const membership = adminMembership;
         const notifications = this.owner.lookup('service:notifications');
-        sinon.stub(notifications, 'error');
+        sinon.stub(notifications, 'sendError');
 
         const screen = await render(
           <template><TeamMembersListItem @membership={{membership}} @displayManagingColumn={{true}} /></template>,
@@ -254,7 +254,10 @@ module('Integration | Component | Team::MembersListItem', function (hooks) {
         await clickByName(t('pages.team-members.actions.save'));
 
         // then
-        sinon.assert.calledWith(notifications.error, t('pages.team-members.notifications.change-member-role.error'));
+        sinon.assert.calledWith(
+          notifications.sendError,
+          t('pages.team-members.notifications.change-member-role.error'),
+        );
         assert.ok(true);
       });
     });
