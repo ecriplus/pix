@@ -104,7 +104,7 @@ export default class LocaleService extends Service {
     }
 
     // temporary before removing dayjs
-    return import(`dayjs/locale/${language}.js`).then(() => dayjs.locale(language));
+    return import(`../../node_modules/dayjs/esm/locale/${language}.js`).then(() => dayjs.locale(language));
   }
 
   setBestLocale({ queryParams }) {
