@@ -95,13 +95,6 @@ module.exports = function (environment) {
     fontawesome: {
       warnIfNoIconsIncluded: false,
     },
-
-    'ember-cli-notifications': {
-      autoClear: true,
-      clearDuration: 5000,
-      includeFontAwesome: true,
-    },
-
     pagination: {
       debounce: 500,
     },
@@ -150,10 +143,6 @@ module.exports = function (environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
 
-    ENV['ember-cli-notifications'] = {
-      autoClear: null,
-      clearDuration: null,
-    };
     ENV.pagination.debounce = 0;
   }
 

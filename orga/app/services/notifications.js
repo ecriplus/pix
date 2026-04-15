@@ -1,31 +1,23 @@
-import NotificationsService from '@1024pix/ember-cli-notifications/services/notifications';
-import config from 'pix-orga/config/environment';
+import Service, { service } from '@ember/service';
 
-const defaultAutoClear = config['ember-cli-notifications'].autoClear;
+export default class Notifications extends Service {
+  @service pixToast;
 
-export default class Notifications extends NotificationsService {
-  sendError(message, { onClick } = {}) {
-    return this.error(message, {
-      autoClear: false,
-      htmlContent: true,
-      cssClasses: 'notification notification--error',
-      onClick,
-    });
+  sendError(message) {
+    this.pixToast.sendErrorNotification({ message });
   }
 
   sendWarning(message) {
-    return this.warning(message, {
-      autoClear: false,
-      htmlContent: true,
-      cssClasses: 'notification notification--warning',
-    });
+    this.pixToast.sendWarningNotification({ message });
   }
 
   sendSuccess(message) {
-    return this.success(message, {
-      autoClear: defaultAutoClear,
-      htmlContent: true,
-      cssClasses: 'notification notification--success',
-    });
+    const toast = this.pixToast.sendSuccessNotification({ message });
+    setTimeout(() => {
+      this.pixToast.removeNotification(toast);
+    }, 5000);
+  }
+  clearAll() {
+    this.pixToast.removeAllNotifications();
   }
 }
