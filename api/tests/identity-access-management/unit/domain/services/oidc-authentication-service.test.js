@@ -11,7 +11,7 @@ import { OidcError, OidcMissingFieldsError } from '../../../../../src/shared/dom
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { catchErr, catchErrSync, expect, sinon } from '../../../../test-helper.js';
-import { createOpenIdClientMock } from '../../../../tooling/openid-client/openid-client-mocks.js';
+import { createOpenIdClientMock } from '../../../../tooling/mocks/openid-client.mock.js';
 
 const uuidV4Regex = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 

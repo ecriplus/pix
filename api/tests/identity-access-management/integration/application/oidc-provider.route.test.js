@@ -20,7 +20,7 @@ import {
   HttpTestServer,
   sinon,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

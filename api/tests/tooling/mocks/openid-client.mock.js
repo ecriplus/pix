@@ -1,6 +1,7 @@
+import sinon from 'sinon';
+
 import { OidcAuthenticationService } from '../../../src/identity-access-management/domain/services/oidc-authentication-service.js';
 import { oidcAuthenticationServiceRegistry } from '../../../src/identity-access-management/domain/usecases/index.js';
-import { sinon } from '../../test-helper.js';
 
 const clientId = 'client';
 const scope = 'openid profile';
@@ -40,7 +41,7 @@ const openIdConfigurationResponse = {
   ],
 };
 
-function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig')) {
+export function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig')) {
   return {
     discovery: sinon.stub().resolves(oidcProviderConfig),
     authorizationCodeGrant: sinon.stub(),
@@ -50,7 +51,7 @@ function createOpenIdClientMock(oidcProviderConfig = Symbol('oidcProviderConfig'
   };
 }
 
-async function createMockedTestOidcProviders(mockedProviders) {
+export async function createMockedTestOidcProviders(mockedProviders) {
   const openidClientMocks = [];
   const oidcAuthenticationServices = [];
 
@@ -106,5 +107,3 @@ async function createMockedTestOidcProviders(mockedProviders) {
 
   return openidClientMocks;
 }
-
-export { createMockedTestOidcProviders, createOpenIdClientMock };

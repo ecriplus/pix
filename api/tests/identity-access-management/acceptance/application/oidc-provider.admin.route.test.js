@@ -9,7 +9,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | oidc-provider', function () {
   let server;
