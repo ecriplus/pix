@@ -6,7 +6,7 @@ import { databaseBuffer } from '../database-buffer.js';
 import { buildSession } from './build-session.js';
 import { buildUser } from './build-user.js';
 
-const buildCertificationCourse = function ({
+export function buildCertificationCourse ({
   id = databaseBuffer.getNextId(),
   lastName = 'last-name',
   firstName = 'first-name',
@@ -72,4 +72,3 @@ const buildCertificationCourse = function ({
   });
 };
 
-export { buildCertificationCourse };

@@ -55,6 +55,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           lastName: 'AAA',
           framework: Frameworks.DROIT,
           version: AlgorithmEngineVersion.V2,
+          lastAnswerAt: new Date('2018-04-15')
         });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
@@ -115,6 +116,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
             ],
             certificationFramework: Frameworks.DROIT,
             eduV3ExternalJuryResult: 'COUCOU',
+            lastAnswerAt: manyAsrCertification.lastAnswerAt
           });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);
@@ -138,6 +140,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           expect(juryCertificationSummaries[0].createdAt).to.deep.equal(manyAsrCertification.createdAt);
           expect(juryCertificationSummaries[0].completedAt).to.deep.equal(manyAsrCertification.completedAt);
           expect(juryCertificationSummaries[0].isPublished).to.equal(manyAsrCertification.isPublished);
+          expect(juryCertificationSummaries[0].lastAnswerAt).to.deep.equal(manyAsrCertification.lastAnswerAt);
         });
       });
 
