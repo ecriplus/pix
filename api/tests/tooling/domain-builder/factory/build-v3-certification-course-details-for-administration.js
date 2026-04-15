@@ -15,6 +15,7 @@ export const buildV3CertificationCourseDetailsForAdministration = ({
   numberOfChallenges,
   certificationFramework,
   versionId,
+  lastAnswerAt,
 }) => {
   return new V3CertificationCourseDetailsForAdministration({
     certificationCourseId,
@@ -31,5 +32,6 @@ export const buildV3CertificationCourseDetailsForAdministration = ({
     numberOfChallenges,
     certificationFramework,
     versionId,
+    lastAnswerAt,
   });
 };

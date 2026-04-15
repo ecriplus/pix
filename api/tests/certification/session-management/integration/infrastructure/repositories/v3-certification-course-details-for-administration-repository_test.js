@@ -27,6 +27,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const pixScore = 60;
       const reachedMeshIndex = 1;
       const certificationFramework = Frameworks.DROIT;
+      const lastAnswerAt = new Date('2022-02-03');
 
       const userId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
@@ -42,6 +43,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         sessionId,
         framework: certificationFramework,
         versionId,
+        lastAnswerAt
       });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
@@ -115,7 +117,8 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         certificationFramework,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
         versionId,
-      });
+        lastAnswerAt,
+        });
 
       expect(certificationChallenges).to.deep.equal(expectedCertificationCourseDetails);
     });

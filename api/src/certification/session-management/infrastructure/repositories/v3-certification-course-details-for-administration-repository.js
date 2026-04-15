@@ -42,6 +42,7 @@ export async function getV3DetailsByCertificationCourseId({ certificationCourseI
       endedAt: 'certification-courses.endedAt',
       certificationFramework: 'certification-courses.framework',
       versionId: 'certification-courses.versionId',
+      lastAnswerAt: 'certification-courses.lastAnswerAt',
     })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
