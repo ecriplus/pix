@@ -36,8 +36,8 @@ import * as skillRepository from '../src/shared/infrastructure/repositories/skil
 import * as thematicRepository from '../src/shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
+import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
-import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
@@ -53,7 +53,7 @@ dayjs.extend(localizedFormat);
 chaiUse(chaiAsPromised);
 chaiUse(chaiSorted);
 chaiUse(sinonChai);
-chaiUse(jobChai());
+chaiUse(jobChai);
 Object.values(customChaiHelpers).forEach(chaiUse);
 
 // Init Database builders
