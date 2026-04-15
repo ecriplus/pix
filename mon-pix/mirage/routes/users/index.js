@@ -1,5 +1,6 @@
 import { Response } from 'miragejs';
 
+import addEmailConnectionMethod from './add-email-connection-method';
 import findPaginatedUserTrainings from './find-paginated-user-trainings';
 import getAnonymisedCampaignAssessments from './get-anonymised-campaign-assessments';
 import getAttestationDetails from './get-attestation-details';
@@ -37,6 +38,7 @@ export default function index(config) {
 
   config.post('/users/:id/competences/:competenceId/reset', resetScorecard);
   config.post('/users/:id/update-email', putUpdateEmail);
+  config.post('/users/:id/add-email-connection-method', addEmailConnectionMethod);
 
   config.patch('/users/:id/pix-terms-of-service-acceptance', patchTermsOfServiceAcceptance);
 
