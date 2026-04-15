@@ -392,11 +392,65 @@
               "type": "element",
               "element": {
                 "id": "deaeecaa-4090-4f0d-b2de-17bdbe407518",
-                "type": "custom-draft",
-                "title": "POI valeurs et usages",
-                "url": "https://1024pix.github.io/atelier-contenus/FRI/cyberVirusValeursUsages.html",
+                "type": "custom",
+                "title": "",
                 "instruction": "<p>Cochez les éléments qui correspondent à ce que vous avez sur votre appareil et à ce que vous faites en ligne.</p>",
-                "height": 500
+                "functionalInstruction": "",
+                "tagName": "usages-donnees",
+                "props": {
+                  "localeChoices": [
+                    {
+                      "label": "📄 Fichiers administratifs (carte d’identité…)",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "📷 Photos personnelles",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "🎥 Vidéos personnelles",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "🎶 Musiques téléchargées",
+                      "hasValue": false
+                    },
+                    {
+                      "label": "💼 Fichiers de travail (devoirs, projets…)",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "🔐 Identifiants et mots de passe enregistrés",
+                      "hasValue": true
+                    }
+                  ],
+                  "cloudChoices": [
+                    {
+                      "label": "✉️ Consulter ses mails",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "💳 Effectuer des achats",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "📰 Lire des actualités",
+                      "hasValue": false
+                    },
+                    {
+                      "label": "🌐 Publier sur les réseaux sociaux",
+                      "hasValue": true
+                    },
+                    {
+                      "label": "▶️ Regarder des vidéos",
+                      "hasValue": false
+                    },
+                    {
+                      "label": "🎮 Jouer",
+                      "hasValue": false
+                    }
+                  ]
+                }
               }
             }
           ]
