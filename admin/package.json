@@ -1,6 +1,6 @@
 {
   "name": "pix-admin",
-  "version": "5.386.0",
+  "version": "5.387.0",
   "private": false,
   "description": "Interface d'administration pour les membres de Pix.",
   "license": "AGPL-3.0",
@@ -113,13 +113,10 @@
     "xss": "^1.0.15"
   },
   "overrides": {
-    "handlebars": ">=4.7.9"
+    "flatted": ">=3.4.2"
   },
   "exports": {
     "./tests/*": "./tests/*",
     "./*": "./app/*"
-  },
-  "overrides": {
-    "flatted": ">=3.4.2"
   }
 }

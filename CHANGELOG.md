@@ -1,5 +1,45 @@
 # Pix Changelog
 
+# [5.387.0](https://github.com/1024pix/pix/compare/v5.386.0...v5.387.0) (2026-04-15)
+
+### :rocket: Amélioration
+
+- [#15798](https://github.com/1024pix/pix/pull/15798) Ajouter une route pour récupérer les données des filtres pour une organisations sur leur prescrits (PIX-22226). 
+- [#15745](https://github.com/1024pix/pix/pull/15745) Modifier la page de vérification du code reçu par e-mail (PIX-21986). 
+- [#15829](https://github.com/1024pix/pix/pull/15829) Modifs Visio_IND suite à faisabilité POI 
+
+### :bug: Correction
+
+- [#15864](https://github.com/1024pix/pix/pull/15864) Renommer la clé de la feature du moteur de reco (PIX-22363) 
+
+### :building_construction: Tech
+
+- [#15763](https://github.com/1024pix/pix/pull/15763) :package: :lock: Force la version de `flatted` pour des raisons de sécurité. 
+- [#15788](https://github.com/1024pix/pix/pull/15788) :recycle: Réduit l'utilisation de `lodash` 
+- [#15833](https://github.com/1024pix/pix/pull/15833) Ajouter un script pour rétroremplir la colonne "lastAnswerAt" de la table "certification-courses" (PIX-22325) 
+- [#15840](https://github.com/1024pix/pix/pull/15840) Éviter de faire des tests d'integ en unitaire sur PixCertif (PIX-22348). 
+- [#15844](https://github.com/1024pix/pix/pull/15844) Isoler et regrouper des helpers de test-helper.js 
+- [#15826](https://github.com/1024pix/pix/pull/15826) Refacto pour utiliser plus efficacement le "versionId" présent au niveau du "certification-course" dans le code du bounded context "certification/evaluation" 
+- [#15849](https://github.com/1024pix/pix/pull/15849) Remplir la colonne lastAnswerAt lors du seeding de la BDD (PIX-22362). 
+- [#15853](https://github.com/1024pix/pix/pull/15853) Supprimer des paquets inutilisé de PixCertif (PIX-22365). 
+
+### :arrow_up: Montée de version
+
+- [#15854](https://github.com/1024pix/pix/pull/15854) Update adobe/s3mock Docker tag to v4.12.3 (.circleci) 
+- [#15855](https://github.com/1024pix/pix/pull/15855) Update adobe/s3mock Docker tag to v4.12.3 (docker) 
+- [#15858](https://github.com/1024pix/pix/pull/15858) Update adobe/s3mock Docker tag to v4.12.4 (.circleci) 
+- [#15859](https://github.com/1024pix/pix/pull/15859) Update adobe/s3mock Docker tag to v4.12.4 (docker) 
+- [#15861](https://github.com/1024pix/pix/pull/15861) Update adobe/s3mock Docker tag to v4.12.4 (dossier racine) 
+- [#15830](https://github.com/1024pix/pix/pull/15830) Update dependency @1024pix/pix-ui to ^60.4.0 (orga) 
+- [#15846](https://github.com/1024pix/pix/pull/15846) Update dependency @1024pix/pix-ui to ^60.4.1 (admin) 
+- [#15862](https://github.com/1024pix/pix/pull/15862) Update dependency @1024pix/pix-ui to ^60.4.1 (certif) 
+- [#15863](https://github.com/1024pix/pix/pull/15863) Update dependency @1024pix/pix-ui to ^60.4.1 (junior) 
+- [#15865](https://github.com/1024pix/pix/pull/15865) Update dependency @1024pix/pix-ui to ^60.4.1 (mon-pix) 
+- [#15866](https://github.com/1024pix/pix/pull/15866) Update dependency @1024pix/pix-ui to ^60.4.1 (orga) 
+- [#15832](https://github.com/1024pix/pix/pull/15832) Update dependency ember-file-upload to v10 (certif) 
+- [#15871](https://github.com/1024pix/pix/pull/15871) Update dependency oxfmt to ^0.44.0 (api) 
+- [#15867](https://github.com/1024pix/pix/pull/15867) Update nginx Docker tag to v1.29.8
+
 # [5.386.0](https://github.com/1024pix/pix/compare/v5.385.0...v5.386.0) (2026-04-14)
 
 ### :rocket: Amélioration

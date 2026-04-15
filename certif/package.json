@@ -1,6 +1,6 @@
 {
   "name": "pix-certif",
-  "version": "5.386.0",
+  "version": "5.387.0",
   "private": false,
   "description": "Plateforme en ligne de gestion des sessions de certification",
   "license": "AGPL-3.0",
@@ -46,7 +46,7 @@
       "ember-source": "$ember-source"
     },
     "handlebars": ">=4.7.9",
-    "flatted":">=3.4.2"
+    "flatted": ">=3.4.2"
   },
   "devDependencies": {
     "@1024pix/ember-api-actions": "^1.1.0",
