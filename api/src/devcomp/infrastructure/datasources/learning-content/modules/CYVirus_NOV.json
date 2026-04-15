@@ -400,53 +400,53 @@
                 "props": {
                   "localeChoices": [
                     {
-                      "label": "Fichiers administratifs (carte d’identité…)",
+                      "label": "📄Fichiers administratifs (carte d’identité…)",
                       "hasValue": true
                     },
                     {
-                      "label": "Photos personnelles",
+                      "label": "📷Photos personnelles",
                       "hasValue": true
                     },
                     {
-                      "label": "Vidéos personnelles",
+                      "label": "🎥Vidéos personnelles",
                       "hasValue": true
                     },
                     {
-                      "label": "Musiques téléchargées",
+                      "label": "🎶Musiques téléchargées",
                       "hasValue": false
                     },
                     {
-                      "label": "Fichiers de travail (devoirs, projets…)",
+                      "label": "💼Fichiers de travail (devoirs, projets…)",
                       "hasValue": true
                     },
                     {
-                      "label": "Identifiants et mots de passe enregistrés",
+                      "label": "🔐Identifiants et mots de passe enregistrés",
                       "hasValue": true
                     }
                   ],
                   "cloudChoices": [
                     {
-                      "label": "Consulter ses mails",
+                      "label": "✉️Consulter ses mails",
                       "hasValue": true
                     },
                     {
-                      "label": "Effectuer des achats",
+                      "label": "💳Effectuer des achats",
                       "hasValue": true
                     },
                     {
-                      "label": "Lire des actualités",
+                      "label": "📰Lire des actualités",
                       "hasValue": false
                     },
                     {
-                      "label": "Publier sur les réseaux sociaux",
+                      "label": "🌐Publier sur les réseaux sociaux",
                       "hasValue": true
                     },
                     {
-                      "label": "Regarder des vidéos",
+                      "label": "▶️Regarder des vidéos",
                       "hasValue": false
                     },
                     {
-                      "label": "Jouer",
+                      "label": "🎮Jouer",
                       "hasValue": false
                     }
                   ]
