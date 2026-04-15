@@ -1,6 +1,5 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
 import sinon from 'sinon';
 
 module('Unit | Adapters | user-orga-setting', function (hooks) {
@@ -11,8 +10,12 @@ module('Unit | Adapters | user-orga-setting', function (hooks) {
 
   hooks.beforeEach(function () {
     adapter = this.owner.lookup('adapter:user-orga-setting');
-    const ajaxStub = () => resolve();
+    const ajaxStub = sinon.stub().resolves();
     adapter.set('ajax', ajaxStub);
+  });
+
+  hooks.afterEach(function () {
+    sinon.restore();
   });
 
   module('#urlForUpdateRecord', function () {
@@ -27,15 +30,7 @@ module('Unit | Adapters | user-orga-setting', function (hooks) {
   });
 
   module('#updateRecord', function () {
-    module('when userId adapterOption passed', function (hooks) {
-      hooks.beforeEach(function () {
-        sinon.stub(adapter, 'ajax');
-      });
-
-      hooks.afterEach(function () {
-        adapter.ajax.restore();
-      });
-
+    module('when userId adapterOption passed', function () {
       test('should send a put request to user-orga-settings endpoint', async function (assert) {
         // given
         adapter.ajax.resolves();
@@ -67,18 +62,9 @@ module('Unit | Adapters | user-orga-setting', function (hooks) {
   });
 
   module('#createRecord', function () {
-    module('when userId adapterOption passed', function (hooks) {
-      hooks.beforeEach(function () {
-        sinon.stub(adapter, 'ajax');
-      });
-
-      hooks.afterEach(function () {
-        adapter.ajax.restore();
-      });
-
+    module('when userId adapterOption passed', function () {
       test('should send a put request to /user-orga-settings to create', async function (assert) {
         // given
-        adapter.ajax.resolves();
         const snapshot = {
           id: 1,
           adapterOptions: { userId },

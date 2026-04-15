@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class AssessmentRoute extends Route {
   @service router;
@@ -29,11 +28,13 @@ export default class AssessmentRoute extends Route {
         organizationLearnerId: campaignAssessmentParticipation.organizationLearnerId,
       });
 
-      return await RSVP.hash({
-        campaign: this.store.findRecord('campaign', campaignId),
+      const campaign = await this.store.findRecord('campaign', campaignId);
+
+      return {
+        campaign,
         campaignAssessmentParticipation,
         availableCampaignParticipations,
-      });
+      };
     } catch (error) {
       this.send('error', error, this.router.replaceWith('not-found', params.campaign_id));
     }

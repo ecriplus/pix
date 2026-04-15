@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 import { t } from 'ember-intl/test-support';
 import ScoOrganizationParticipantManageAuthenticationMethodModal from 'pix-orga/components/sco-organization-participant/manage-authentication-method-modal';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -232,9 +232,7 @@ module('Integration | Component | ScoOrganizationParticipant::ManageAuthenticati
           createRecord() {
             generatedPassword = faker.internet.password();
             return EmberObject.create({
-              save() {
-                return resolve();
-              },
+              save: sinon.stub().resolves(),
               generatedPassword,
             });
           }

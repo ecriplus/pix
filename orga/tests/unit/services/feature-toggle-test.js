@@ -2,8 +2,7 @@ import Object from '@ember/object';
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
-
+import sinon from 'sinon';
 module('Unit | Service | feature toggles', function (hooks) {
   setupTest(hooks);
 
@@ -13,8 +12,9 @@ module('Unit | Service | feature toggles', function (hooks) {
       const featureToggles = Object.create({
         aFakeFeatureToggle: false,
       });
+      const queryRecordStub = sinon.stub().resolves(featureToggles);
       const storeStub = Service.create({
-        queryRecord: () => resolve(featureToggles),
+        queryRecord: queryRecordStub,
       });
       const featureToggleService = this.owner.lookup('service:featureToggles');
       featureToggleService.set('store', storeStub);

@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class MissionResultsRoute extends Route {
   @service currentUser;
@@ -29,10 +28,10 @@ export default class MissionResultsRoute extends Route {
     }
   }
 
-  model(params) {
+  async model(params) {
     const organization = this.currentUser.organization;
     const missionModel = this.modelFor('authenticated.missions.mission');
-    const missionLearners = this.store.query(
+    const missionLearners = await this.store.query(
       'mission-learner',
       {
         organizationId: organization.id,
@@ -49,6 +48,6 @@ export default class MissionResultsRoute extends Route {
       },
       { reload: true },
     );
-    return RSVP.hash({ missionLearners, mission: missionModel, organization });
+    return { missionLearners, mission: missionModel, organization };
   }
 }

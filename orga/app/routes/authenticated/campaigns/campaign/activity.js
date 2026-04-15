@@ -1,7 +1,6 @@
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class ActivityRoute extends Route {
   @service store;
@@ -27,12 +26,14 @@ export default class ActivityRoute extends Route {
     },
   };
 
-  model(params) {
+  async model(params) {
     const campaign = this.modelFor('authenticated.campaigns.campaign');
-    return RSVP.hash({
+    const participations = await this.fetchParticipantsActivity({ campaignId: campaign.id, ...params });
+
+    return {
       campaign,
-      participations: this.fetchParticipantsActivity({ campaignId: campaign.id, ...params }),
-    });
+      participations,
+    };
   }
 
   fetchParticipantsActivity(params) {

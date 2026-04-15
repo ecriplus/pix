@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { pick } from 'pix-orga/utils/collection';
-import RSVP from 'rsvp';
 
 export default class NewRoute extends Route {
   @service currentUser;
@@ -58,16 +57,16 @@ export default class NewRoute extends Route {
       }
     }
 
-    return RSVP.hash({
-      campaign: this.store.createRecord('campaign', {
-        organization,
-        ownerId: this.currentUser.prescriber.id,
-        ...(campaignAttributes ?? campaignAttributes),
-      }),
-      targetProfiles: organization.targetProfiles ?? undefined,
-      combinedCourseBlueprints: organization.combinedCourseBlueprints ?? undefined,
-      membersSortedByFullName,
+    const campaign = await this.store.createRecord('campaign', {
+      organization,
+      ownerId: this.currentUser.prescriber.id,
+      ...(campaignAttributes ?? campaignAttributes),
     });
+
+    const targetProfiles = (await organization.targetProfiles) ?? undefined;
+    const combinedCourseBlueprints = (await organization.combinedCourseBlueprints) ?? undefined;
+
+    return { campaign, membersSortedByFullName, targetProfiles, combinedCourseBlueprints };
   }
 
   resetController(controller, isExiting) {

@@ -2,7 +2,6 @@ import Object from '@ember/object';
 import Service from '@ember/service';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
 import sinon from 'sinon';
 
 module('Unit | Service | current-user', function (hooks) {
@@ -21,7 +20,7 @@ module('Unit | Service | current-user', function (hooks) {
         memberships: [{ organization: [] }],
       });
       storeStub = Service.create({
-        findRecord: () => resolve(connectedUser),
+        findRecord: sinon.stub().resolves(connectedUser),
       });
       sessionStub = Service.create({
         isAuthenticated: true,
@@ -581,7 +580,8 @@ module('Unit | Service | current-user', function (hooks) {
         const combinedCourse1 = Object.create({ id: 1 });
         const combinedCourse2 = Object.create({ id: 2 });
         const combinedCourses = [combinedCourse1, combinedCourse2];
-        currentUserService.organization = Object.create({ combinedCourses: resolve(combinedCourses) });
+
+        currentUserService.organization = Object.create({ combinedCourses });
 
         // when
         await currentUserService.loadCombinedCourses();
@@ -713,7 +713,7 @@ module('Unit | Service | current-user', function (hooks) {
       const sessionStub = Service.create({
         isAuthenticated: true,
         data: { authenticated: { user_id: 1 } },
-        invalidate: () => resolve('invalidate'),
+        invalidate: sinon.stub().resolves('invalidate'),
         routeAfterInvalidation: null,
       });
       const storeStub = Service.create({

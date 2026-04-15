@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class ProfileRoute extends Route {
   @service router;
@@ -18,11 +17,14 @@ export default class ProfileRoute extends Route {
   async model(params) {
     try {
       const { campaign_id: campaignId, campaign_participation_id: campaignParticipationId } = params;
-      return await RSVP.hash({
-        campaign: this.store.findRecord('campaign', campaignId),
-        campaignProfile: this.store.queryRecord('campaign-profile', { campaignId, campaignParticipationId }),
+      const campaign = await this.store.findRecord('campaign', campaignId);
+      const campaignProfile = await this.store.queryRecord('campaign-profile', { campaignId, campaignParticipationId });
+
+      return {
+        campaign,
+        campaignProfile,
         campaignParticipationId,
-      });
+      };
     } catch (error) {
       this.send('error', error, this.router.replaceWith('not-found', params.campaign_id));
     }
