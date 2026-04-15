@@ -447,8 +447,12 @@
         "organization": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg."
       },
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
-        "candidate": "Het aantal beantwoorde vragen tijdens je certificeringstoets is onvoldoende en staat ons niet toe om je een Pix-certificering te geven.",
-        "organization": "Het aantal vragen dat de kandidaat tijdens zijn certificeringstest beantwoordt, is onvoldoende en stelt ons niet in staat om hem of haar een Pix-certificering te geven."
+        "candidate": "Het aantal beantwoorde vragen tijdens je certificeringstoets is onvoldoende en staat ons niet toe om je een certificering te geven.",
+        "organization": "Het aantal vragen dat de kandidaat tijdens zijn certificeringstest beantwoordt, is onvoldoende en stelt ons niet in staat om hem of haar een certificering te geven."
+      },
+      "REJECTED_EDU_NOT_ELIGIBLE": {
+        "candidate": "Je resultaten maken je niet in aanmerking komend voor de Pix+ Édu-certificering. Je kunt op Pix verdere vooruitgang boeken en het opnieuw proberen tijdens een volgende sessie.",
+        "organization": "De kandidaat komt niet in aanmerking voor de Pix+ Édu-certificering."
       }
     }
   },
