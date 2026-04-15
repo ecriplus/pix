@@ -2136,6 +2136,7 @@
         "explanations": {
           "trainings": "Para ayudarle a progresar, eche un vistazo a nuestros cursos de formación recomendados y encuentre los que más le convienen."
         },
+        "hidden-badges": "{ count, plural, =1 {insignia adicional obtenida no mostrada} other {insignias adicionales obtenidas no mostradas} }",
         "mastery-rate": "de éxito en las preguntas",
         "retry": {
           "actions": {
@@ -2186,6 +2187,9 @@
       "stage": {
         "caption": "Detalles de tus resultados en porcentaje y estrellas según las competencias",
         "masteryPercentage": "{rate, number, ::percent} de éxito",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired} / {total, plural, =0 {estrella} =1 {# estrella} other {# estrellas}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {ninguna estrella obtenida} =1 {# estrella obtenida} other {# estrellas obtenidas}} de {total}",
         "title": "Detalles de las competencias"
       },

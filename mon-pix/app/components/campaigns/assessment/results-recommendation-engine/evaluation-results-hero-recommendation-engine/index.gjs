@@ -88,7 +88,7 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
             />
             <div class="evaluation-results-hero-recommendation-engine__stars-text" aria-hidden="true">
               {{t
-                "pages.skill-review.stage.starsAcquired"
+                "pages.skill-review.stage.recommendedEngine.starsAcquired"
                 acquired=this.reachedStage.acquired
                 total=this.reachedStage.total
               }}

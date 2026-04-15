@@ -2145,6 +2145,7 @@
         "explanations": {
           "trainings": "Om je verder te helpen, kun je onze aanbevolen opleidingen bekijken en de opleidingen vinden die het beste bij je passen."
         },
+        "hidden-badges": "{ count, plural, =1 {extra behaald badge niet weergegeven} other {extra behaalde badges niet weergegeven} }",
         "mastery-rate": "van succes in vragen",
         "retry": {
           "actions": {
@@ -2195,6 +2196,9 @@
       "stage": {
         "caption": "Details van je resultaten in de vorm van percentages en sterren volgens vaardigheden",
         "masteryPercentage": "{rate, number, ::percent} succes",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired} / {total, plural, =0 {ster} =1 {# ster} other {# sterren}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {geen sterren verworven} other {# ster verworven}} op {total}",
         "title": "Vaardigheden"
       },

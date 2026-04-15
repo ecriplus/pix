@@ -2154,6 +2154,7 @@
         "explanations": {
           "trainings": "Um sich weiterzuentwickeln, entdecken Sie unsere Bildungsempfehlungen und finden Sie heraus, welcher Kurs am besten zu Ihnen passt."
         },
+        "hidden-badges": "{ count, plural, =1 {weiteres erworbenes Badge nicht angezeigt} other {weitere erworbene Badges nicht angezeigt} }",
         "mastery-rate": "Erfolgsquote bei Fragen",
         "retry": {
           "actions": {
@@ -2204,6 +2205,9 @@
       "stage": {
         "caption": "Details zu Ihren Ergebnissen in Form von Prozenten und Sternen auf der Grundlage von Fähigkeiten",
         "masteryPercentage": "{rate, number, ::percent} des Erfolgs",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired} / {total, plural, =0 {Stern} =1 {# Stern} other {# Sterne}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {kein Stern erworben} =1 {# Stern erworben} other {# Sterne erworben}} auf {total}.",
         "title": "Details zu den Fähigkeiten"
       },
