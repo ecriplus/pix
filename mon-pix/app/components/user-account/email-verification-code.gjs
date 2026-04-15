@@ -71,11 +71,15 @@ export default class EmailVerificationCode extends Component {
     });
     try {
       const email = await emailVerificationCode.verifyCode();
-      if (email) {
-        this.currentUser.user.email = email;
+      if (this.args.action === 'add-email') {
+        await this._reloadAccountData();
+      } else {
+        if (email) {
+          this.currentUser.user.email = email;
+        }
+        this.args.displayEmailUpdateMessage();
       }
       this.args.disableEmailEditionMode();
-      this.args.displayEmailUpdateMessage();
     } catch (response) {
       const status = get(response, 'errors[0].status');
 
@@ -95,6 +99,12 @@ export default class EmailVerificationCode extends Component {
         this.errorMessage = this.intl.t('pages.user-account.email-verification.errors.unknown-error');
       }
     }
+  }
+
+  async _reloadAccountData() {
+    await this.currentUser.load();
+    await this.currentUser.user.belongsTo('accountInfo').reload();
+    await this.store.findAll('authentication-method', { reload: true });
   }
 
   <template>
