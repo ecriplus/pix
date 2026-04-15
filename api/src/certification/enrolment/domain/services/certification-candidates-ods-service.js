@@ -11,9 +11,7 @@ import * as readOdsUtils from '../../infrastructure/utils/ods/read-ods-utils.js'
 import { Candidate } from '../models/Candidate.js';
 import { Subscription } from '../models/Subscription.js';
 
-export { extractCertificationCandidatesFromCandidatesImportSheet };
-
-async function extractCertificationCandidatesFromCandidatesImportSheet({
+export async function extractCertificationCandidatesFromCandidatesImportSheet({
   i18n,
   session,
   isSco,

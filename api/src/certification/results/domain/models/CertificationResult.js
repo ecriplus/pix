@@ -64,8 +64,7 @@ export class CertificationResult {
   static from({ certificationResultDTO }) {
     const certificationStatus = certificationResultDTO?.assessmentResultStatus ?? CertificationResult.status.STARTED;
     const competenceMarkDTOs = certificationResultDTO.competenceMarks.filter(Boolean);
-    const competencesWithMark = _.map(
-      competenceMarkDTOs,
+    const competencesWithMark = competenceMarkDTOs.map(
       (competenceMarkDTO) =>
         new CompetenceMark({
           ...competenceMarkDTO,

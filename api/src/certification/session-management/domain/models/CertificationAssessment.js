@@ -143,7 +143,7 @@ export class CertificationAssessment {
 
   findAnswersAndChallengesForCertifiableBadgeKey(certifiableBadgeKey) {
     const certificationChallengesForBadge = _.filter(this.certificationChallenges, { certifiableBadgeKey });
-    const challengeIds = _.map(certificationChallengesForBadge, 'challengeId');
+    const challengeIds = certificationChallengesForBadge.map((ccfb) => ccfb.challengeId);
     const answersForBadge = this.certificationAnswersByDate.filter(({ challengeId }) =>
       _.includes(challengeIds, challengeId),
     );

@@ -180,7 +180,7 @@ function _getCandidatesImportTemplatePath() {
 }
 
 function _certificationCandidatesToCandidatesData({ enrolledCandidates, certificationCenterHabilitations, i18n }) {
-  return _.map(enrolledCandidates, (enrolledCandidate, index) => {
+  return enrolledCandidates.map((enrolledCandidate, index) => {
     return CandidateData.fromEnrolledCandidateAndCandidateNumber({
       enrolledCandidate,
       certificationCenterHabilitations,

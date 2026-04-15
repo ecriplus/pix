@@ -76,6 +76,7 @@ describe('Integration | Shared | Infrastructure | Utils | Ods | read-ods-utils',
         // when
         const result = await catchErr(extractTableDataFromOdsFile)({
           odsBuffer: alteredBuffer,
+          tableHeaderTargetPropertyMap: TRANSFORM_STRUCT,
         });
 
         // then

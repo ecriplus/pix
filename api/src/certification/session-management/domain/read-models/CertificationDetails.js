@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { AnswerCollectionForScoring } from '../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { ReproducibilityRate } from '../../../shared/domain/models/ReproducibilityRate.js';
 
-class CertificationDetails {
+export class CertificationDetails {
   constructor({
     id,
     userId,
@@ -71,7 +71,7 @@ function _buildCompetencesWithMark({ competenceMarks, placementProfile }) {
     return;
   }
 
-  return _.map(competenceMarks, (competenceMark) => {
+  return competenceMarks.map((competenceMark) => {
     const userCompetence = placementProfile.getUserCompetence(competenceMark.competenceId);
 
     return {
@@ -88,23 +88,20 @@ function _buildCompetencesWithMark({ competenceMarks, placementProfile }) {
 }
 
 function _buildListChallengesAndAnswers({ certificationAssessment, competencesWithMark }) {
-  const answeredChallengesAndAnswers = _.map(
-    certificationAssessment.certificationAnswersByDate,
-    (certificationAnswer) => {
-      const challengeForAnswer = certificationAssessment.getCertificationChallenge(certificationAnswer.challengeId);
-      const competenceIndex = _getCompetenceIndexForChallenge(challengeForAnswer, competencesWithMark);
+  const answeredChallengesAndAnswers = certificationAssessment.certificationAnswersByDate.map((certificationAnswer) => {
+    const challengeForAnswer = certificationAssessment.getCertificationChallenge(certificationAnswer.challengeId);
+    const competenceIndex = _getCompetenceIndexForChallenge(challengeForAnswer, competencesWithMark);
 
-      return {
-        challengeId: challengeForAnswer.challengeId,
-        competence: competenceIndex,
-        isNeutralized: challengeForAnswer.isNeutralized,
-        hasBeenSkippedAutomatically: false,
-        result: certificationAnswer.result.status,
-        skill: challengeForAnswer.associatedSkillName,
-        value: certificationAnswer.value,
-      };
-    },
-  );
+    return {
+      challengeId: challengeForAnswer.challengeId,
+      competence: competenceIndex,
+      isNeutralized: challengeForAnswer.isNeutralized,
+      hasBeenSkippedAutomatically: false,
+      result: certificationAnswer.result.status,
+      skill: challengeForAnswer.associatedSkillName,
+      value: certificationAnswer.value,
+    };
+  });
 
   const unansweredChallengesAndAnswers = _(certificationAssessment.certificationChallenges)
     .map((challenge) => {
@@ -136,5 +133,3 @@ function _getCompetenceIndexForChallenge(certificationChallenge, competencesWith
   const competenceWithMark = _.find(competencesWithMark, { id: certificationChallenge.competenceId });
   return competenceWithMark ? competenceWithMark.index : '';
 }
-
-export { CertificationDetails };
