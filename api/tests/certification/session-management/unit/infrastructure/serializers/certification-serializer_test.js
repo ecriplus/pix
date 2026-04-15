@@ -2,7 +2,8 @@ import * as serializer from '../../../../../../src/certification/session-managem
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { NO_EXAMINER_COMMENT } from '../../../../../../src/certification/shared/domain/models/CertificationReport.js';
 import { WrongDateFormatError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, EMPTY_BLANK_AND_NULL, expect } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { EMPTY_BLANK_AND_NULL } from '../../../../../tooling/test-utils/constants.js';
 
 describe('Unit | Serializer | JSONAPI | certification-serializer', function () {
   describe('#deserialize', function () {

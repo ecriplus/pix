@@ -2,7 +2,8 @@ import lodash from 'lodash';
 
 import { InvalidCertificationReportForFinalization } from '../../../../../../src/certification/shared/domain/errors.js';
 import { CertificationReport } from '../../../../../../src/certification/shared/domain/models/CertificationReport.js';
-import { catchErr, domainBuilder, EMPTY_BLANK_AND_NULL, expect } from '../../../../../test-helper.js';
+import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
+import { EMPTY_BLANK_AND_NULL } from '../../../../../tooling/test-utils/constants.js';
 const { keys } = lodash;
 
 describe('Unit | Domain | Models | CertificationReport', function () {

@@ -74,7 +74,6 @@ databaseBuilder.factory.learningContent.injectNock(nock);
 
 nock.disableNetConnect();
 nock.enableNetConnect('localhost:9090');
-const EMPTY_BLANK_AND_NULL = ['', '\t \n', null];
 
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
@@ -267,7 +266,6 @@ export {
   datamartKnex,
   datawarehouseKnex,
   domainBuilder,
-  EMPTY_BLANK_AND_NULL,
   expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
