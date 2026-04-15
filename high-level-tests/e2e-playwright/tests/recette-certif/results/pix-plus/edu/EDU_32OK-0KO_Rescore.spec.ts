@@ -123,8 +123,7 @@ test(
 
         await test.step('Rescore certification and check for scoring', async () => {
           await test.step('Alter candidate answers directly in BDD to have all answers wrong, to demonstrate re-scoring', async () => {
-            const wrongAnswersSequence = Array(32).fill(false);
-            await changeCandidateAnswers(parseInt(certificationNumber), wrongAnswersSequence);
+            await changeCandidateAnswers(parseInt(certificationNumber), [false]);
           });
 
           await test.step('Rescore certification', async () => {

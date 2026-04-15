@@ -4,6 +4,7 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
+  getTestRef,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
@@ -13,18 +14,17 @@ const testRef = 'PRO-SANTE_32OK-0KO_Rescore';
 const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
 
 test(
-  `${testRef} - User takes a certification test for a Pix+ Pro Santé subscription. 32 right answers`,
+  `${getTestRef(import.meta.url)}`,
   {
-    tag: ['@snapshot'],
+    tag: ['@snapshot', '@prosante', '@results'],
     annotation: [
       {
-        type: 'tag',
-        description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with UPDATE_SNAPSHOTS=true
-         Reasons why a snapshot could be re-generated :
-         - Reference Release has changed
-         - Next challenge algorithm has changed
-         - CSV results file layout has changed
-         - Scoring algorithm or configuration has changed`,
+        type: 'scenario',
+        description: `User takes a certification test for a PRO certification center, PROSANTÉ subscription. 32 right answers.
+         - Test reaches end screen
+         - Session finalized
+         - Results visible in all PixAdmin screens
+         - Rescoring certification by altering answers`,
       },
     ],
   },
@@ -67,7 +67,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -96,7 +96,7 @@ test(
           Statut: 'Validée',
           Résultats: 'Expert',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Pix+ Professionnels de Santé',
+          'Certification passée': 'Pix+ Pro Santé',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -117,17 +117,16 @@ test(
         });
 
         await test.step('Rescore certification and check for scoring', async () => {
-          await test.step('Alter candidate answers directly in BDD to have all answers wrong, to demonstrate re-scoring', async () => {
-            const wrongAnswersSequence = Array(32).fill(false);
-            await changeCandidateAnswers(parseInt(certificationNumber), wrongAnswersSequence);
+          await test.step('Alter candidate answers directly in BDD to only have 1/3 right answers', async () => {
+            await changeCandidateAnswers(parseInt(certificationNumber), [true, false, false]);
           });
 
           await test.step('Rescore certification', async () => {
             await certificationInformationPage.rescoreCertification();
             await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
               sessionNumber,
-              status: 'Rejetée',
-              result: 'Non obtenu',
+              status: 'Validée',
+              result: 'Confirmé',
             });
           });
         });

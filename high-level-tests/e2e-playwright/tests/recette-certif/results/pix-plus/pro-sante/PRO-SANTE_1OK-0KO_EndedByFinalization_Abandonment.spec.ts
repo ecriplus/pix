@@ -3,27 +3,23 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
+  getTestRef,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'PRO-SANTE_1OK-0KO_EndedByFinalization_Abandonment';
-const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
-
 test(
-  `${testRef} - User takes a certification test for a Pix+ Pro Santé subscription. One challenge only answered. Ended by finalization for abandonment`,
+  `${getTestRef(import.meta.url)}`,
   {
-    tag: ['@snapshot'],
+    tag: ['@snapshot', '@prosante', '@results'],
     annotation: [
       {
-        type: 'tag',
-        description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with UPDATE_SNAPSHOTS=true
-         Reasons why a snapshot could be re-generated :
-         - Reference Release has changed
-         - Next challenge algorithm has changed
-         - CSV results file layout has changed
-         - Scoring algorithm or configuration has changed`,
+        type: 'scenario',
+        description: `User takes a certification test for a PRO certification center, PROSANTÉ subscription. Only one right answer.
+         - Test ended by finalization
+         - Abort reason : abandonment
+         - Results visible in all PixAdmin screens`,
       },
     ],
   },
@@ -34,6 +30,8 @@ test(
     pixAdminRoleCertifPage,
     getCertifiableUserData,
     snapshotHandler,
+    testRef,
+    snapshotPath,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
@@ -61,7 +59,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -88,9 +86,9 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Rejetée',
-          Résultats: 'Non obtenu',
+          Résultats: 'Indépendant',
           'Signalements impactants non résolus': '',
-          'Certification passée': 'Pix+ Professionnels de Santé',
+          'Certification passée': 'Pix+ Pro Santé',
         });
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
@@ -98,7 +96,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Rejetée',
-          result: 'Non obtenu',
+          result: 'Indépendant',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           status: 'Rejetée',
@@ -109,7 +107,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
-          result: 'Non obtenu',
+          result: 'Indépendant',
         });
       });
     });

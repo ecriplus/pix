@@ -3,27 +3,23 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
+  getTestRef,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
 import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
-const testRef = 'DROIT_0OK-32KO';
-const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
-
 test(
-  `${testRef} - User takes a certification test for a Pix+ Droit subscription. 32 wrong answers`,
+  `${getTestRef(import.meta.url)}`,
   {
-    tag: ['@snapshot'],
+    tag: ['@snapshot', '@droit', '@results'],
     annotation: [
       {
-        type: 'tag',
-        description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with UPDATE_SNAPSHOTS=true
-         Reasons why a snapshot could be re-generated :
-         - Reference Release has changed
-         - Next challenge algorithm has changed
-         - CSV results file layout has changed
-         - Scoring algorithm or configuration has changed`,
+        type: 'scenario',
+        description: `User takes a certification test for a PRO certification center, DROIT subscription. 32 wrong answers.
+         - Test reaches end screen
+         - Session finalized
+         - Results visible in all PixAdmin screens`,
       },
     ],
   },
@@ -35,6 +31,8 @@ test(
     getCertifiableUserData,
     waitForScoringJobToBeCompleted,
     snapshotHandler,
+    testRef,
+    snapshotPath,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
@@ -66,7 +64,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {

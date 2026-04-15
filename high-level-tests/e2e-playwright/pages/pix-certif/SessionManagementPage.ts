@@ -6,7 +6,7 @@ import { SessionFinalizationPage } from './SessionFinalizationPage.ts';
 export type CertificationKeys = (typeof CERTIFICATIONS_DATA)[keyof typeof CERTIFICATIONS_DATA] | 'CORE';
 
 export class SessionManagementPage {
-  constructor(public readonly page: Page) { }
+  constructor(public readonly page: Page) {}
 
   async getSessionData() {
     await this.page.getByRole('link', { name: 'Détails' }).click();
@@ -106,7 +106,8 @@ export class SessionManagementPage {
         choice = 'Pix+ Droit';
         break;
       case CERTIFICATIONS_DATA.PRO_SANTE:
-        choice = 'Pix+ Professionnels de Santé'
+        choice = 'Pix+ Professionnels de santé';
+        break;
       default:
         choice = 'Certification Pix';
         break;

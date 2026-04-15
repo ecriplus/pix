@@ -14,7 +14,7 @@ export async function buildPixPlusProSanteData(knex: Knex) {
         { bounds: { max: 0, min: -8 }, meshLevel: 0 },
         { bounds: { max: 1, min: 0 }, meshLevel: 1 },
         { bounds: { max: 2, min: 1 }, meshLevel: 2 },
-        { bounds: { max: 8, min: 2 }, meshLevel: 3 }
+        { bounds: { max: 8, min: 2 }, meshLevel: 3 },
       ]),
       competencesScoringConfiguration: JSON.stringify([]),
       challengesConfiguration: JSON.stringify({

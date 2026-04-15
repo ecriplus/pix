@@ -126,8 +126,7 @@ test(
       });
       await test.step('Rescore certification and check for scoring', async () => {
         await test.step('Alter candidate answers directly in BDD to have half right, half wrong, to demonstrate re-scoring', async () => {
-          const alternateRightWrongSequence = Array.from(Array(32).fill(true), (_, i) => i % 2 === 0);
-          await changeCandidateAnswers(parseInt(certificationNumber), alternateRightWrongSequence);
+          await changeCandidateAnswers(parseInt(certificationNumber), [true, false]);
         });
 
         await test.step('Rescore certification', async () => {
