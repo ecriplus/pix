@@ -142,6 +142,7 @@ function scoreCertification({
     isAbortReasonTechnical: assessmentSheet.isAbortReasonTechnical,
     juryId: event?.juryId,
     minimumAnswersRequiredToValidateACertification,
+    certificationScope,
   });
   return assessmentResult;
 }

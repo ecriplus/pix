@@ -1,3 +1,4 @@
+import { isEduFramework } from '../../../../shared/domain/models/Frameworks.js';
 import { AssessmentResultFactory } from '../../models/factories/AssessmentResultFactory.js';
 
 export function createV3AssessmentResult({
@@ -14,6 +15,7 @@ export function createV3AssessmentResult({
   isAbortReasonTechnical,
   juryId,
   minimumAnswersRequiredToValidateACertification,
+  certificationScope,
 }) {
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
@@ -63,6 +65,17 @@ export function createV3AssessmentResult({
         versionId,
       });
     }
+  }
+
+  if (isEduFramework(certificationScope) && reachedMeshIndex === null) {
+    return AssessmentResultFactory.buildRejectedNotEligibleEduAssessmentResult({
+      assessmentId,
+      juryId,
+      capacity,
+      reachedMeshIndex,
+      versionId,
+      certificationFramework: certificationScope,
+    });
   }
 
   if (pixScore === 0 || reachedMeshIndex === null) {

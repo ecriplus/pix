@@ -1,5 +1,6 @@
 import { createV3AssessmentResult } from '../../../../../../../src/certification/evaluation/domain/services/scoring/create-v3-assessment-result.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
+import { SCOPES } from '../../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
@@ -142,6 +143,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
 
     context('when assessment has a sufficient number of answers', function () {
       let allChallenges, answeredChallenges, answers;
+
       beforeEach(function () {
         allChallenges = generateChallengeList({ length: minimumAnswersRequiredToValidateACertification + 1 });
         answeredChallenges = allChallenges.slice(0, -1);
@@ -167,6 +169,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
+              certificationScope: SCOPES.CORE,
             });
 
             //then
@@ -200,6 +203,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
+              certificationScope: SCOPES.CORE,
             });
 
             //then
@@ -210,6 +214,38 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               }),
             );
             expect(assessmentResult.pixScore).to.be.null;
+          });
+        });
+
+        context('when the certification framework is an EDU one', function () {
+          it('should return a rejected AssessmentResult with the REJECTED_EDU_NOT_ELIGIBLE auto-jury comment', function () {
+            //when
+            const assessmentResult = createV3AssessmentResult({
+              toBeCancelled: false,
+              allAnswers: answers,
+              assessmentId: 123,
+              pixScore: null,
+              capacity,
+              reachedMeshIndex: null,
+              versionId,
+              status: AssessmentResult.status.REJECTED,
+              competenceMarks,
+              isRejectedForFraud: false,
+              isAbortReasonTechnical: false,
+              juryId: 123,
+              minimumAnswersRequiredToValidateACertification,
+              certificationScope: 'EDU_1ER_DEGRE',
+            });
+
+            //then
+            const juryComment = domainBuilder.certification.shared.buildJuryComment.candidate({
+              commentByAutoJury: AutoJuryCommentKeys.REJECTED_EDU_NOT_ELIGIBLE,
+              translationParams: { scopeKey: 'EDU_1ER_DEGRE' },
+            });
+            expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
+            expect(assessmentResult.commentForCandidate).to.deep.equal(juryComment);
+            expect(assessmentResult.pixScore).to.be.null;
+            expect(assessmentResult.reachedMeshIndex).to.be.null;
           });
         });
       });
@@ -232,6 +268,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
+              certificationScope: SCOPES.CORE,
             });
 
             //then
@@ -263,6 +300,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
             isAbortReasonTechnical: false,
             juryId: 123,
             minimumAnswersRequiredToValidateACertification,
+            certificationScope: SCOPES.CORE,
           });
 
           //then

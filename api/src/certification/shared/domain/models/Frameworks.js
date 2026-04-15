@@ -14,3 +14,11 @@ const FRAMEWORKS = Object.freeze({
 });
 
 export const Frameworks = FRAMEWORKS;
+
+/**
+ * @param {string} [framework]
+ * @returns {boolean}
+ */
+export function isEduFramework(framework) {
+  return framework.startsWith('EDU_');
+}
