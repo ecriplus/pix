@@ -9,6 +9,7 @@ export const juryCertificationSummaryStatuses = [
 ];
 
 const statuses = [...certificationStatuses, ...juryCertificationSummaryStatuses];
+
 export default class JuryCertificationSummary extends Model {
   @service intl;
 
@@ -26,13 +27,14 @@ export default class JuryCertificationSummary extends Model {
   @attr() isFlaggedAborted;
   @attr('string') certificationFramework;
   @attr() numberOfCertificationIssueReportsWithRequiredAction;
+  @attr() lastAnswerAt;
 
   get creationDate() {
     return this.intl.formatDate(this.createdAt, { format: 'long' });
   }
 
   get completionDate() {
-    return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
+    return this.lastAnswerAt ? this.intl.formatDate(this.lastAnswerAt, { format: 'long' }) : null;
   }
 
   get numberOfCertificationIssueReportsWithRequiredActionLabel() {
