@@ -257,13 +257,15 @@ class ImportOrganizationLearnerSet {
     return this.#columnMapping
       .filter((header) => header.config?.displayable?.filterable?.type === 'list')
       .map((header) => {
-        const attributeName = header.config?.property ?? header.config?.mappingColumn ?? header.name;
+        const key = header.config?.property ?? header.config?.mappingColumn ?? header.name;
         const isProperty = Boolean(header.config?.property);
+
+        const attributeName = header.config.displayable.name;
 
         const values = [
           ...new Set(
             this.#learners
-              .map((learner) => (isProperty ? learner[attributeName] : learner.attributes?.[attributeName]))
+              .map((learner) => (isProperty ? learner[key] : learner.attributes?.[key]))
               .filter((value) => value != null),
           ),
         ];

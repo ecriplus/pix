@@ -981,7 +981,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
       ]);
 
       expect(learnerSet.filtersAvailableValues).to.deep.equal([
-        { organizationId: 123, attributeName: 'group', values: ['A', 'B'] },
+        { organizationId: 123, attributeName: 'division', values: ['A', 'B'] },
       ]);
     });
 
@@ -1009,8 +1009,8 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
       ]);
 
       expect(learnerSet.filtersAvailableValues).to.deep.equal([
-        { organizationId: 123, attributeName: 'group', values: ['A', 'B'] },
-        { organizationId: 123, attributeName: 'status', values: ['active', 'inactive'] },
+        { organizationId: 123, attributeName: 'division', values: ['A', 'B'] },
+        { organizationId: 123, attributeName: 'statut', values: ['active', 'inactive'] },
       ]);
     });
 
@@ -1029,7 +1029,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
       learnerSet.addLearners([{ ...learnerAttributes, CATEGORY: 'Solo' }]);
 
       expect(learnerSet.filtersAvailableValues).to.deep.equal([
-        { organizationId: 123, attributeName: 'catégorie', values: ['Solo'] },
+        { organizationId: 123, attributeName: 'division', values: ['Solo'] },
       ]);
     });
 
@@ -1051,7 +1051,7 @@ describe('Unit | Models | ImportOrganizationLearnerSet', function () {
       ]);
 
       expect(learnerSet.filtersAvailableValues).to.deep.equal([
-        { organizationId: 123, attributeName: 'firstName', values: ['Tomie', 'Mieto'] },
+        { organizationId: 123, attributeName: 'Prénom', values: ['Tomie', 'Mieto'] },
       ]);
     });
   });

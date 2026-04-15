@@ -18,6 +18,7 @@ export default class Organization extends Model {
   @hasMany('combined-course-blueprint', { async: true, inverse: null }) combinedCourseBlueprints;
   @hasMany('organization-invitation', { async: true, inverse: 'organization' }) organizationInvitations;
   @hasMany('group', { async: true, inverse: null }) groups;
+  @hasMany('organization-learner-filter', { async: true, inverse: null }) learnerFiltersOptions;
   @hasMany('division', { async: true, inverse: null }) divisions;
   @belongsTo('participation-statistic', { async: true, inverse: null }) participationStatistics;
 

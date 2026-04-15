@@ -106,6 +106,11 @@ describe('Acceptance | Team | Application | Controller | prescriber-informations
                 related: `/api/organizations/${organization.id}/target-profiles`,
               },
             },
+            'learner-filters-options': {
+              links: {
+                related: `/api/organizations/${organization.id}/organization-learners/filters`,
+              },
+            },
           },
         },
         {

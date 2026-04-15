@@ -23,7 +23,8 @@ export default class ListRoute extends Route {
   async model(params) {
     paramsValidator.validateCertificabilityParams(params);
 
-    return this.store.query('organization-participant', {
+    const customFiltersOptions = await this.currentUser.organization.learnerFiltersOptions;
+    const participantList = await this.store.query('organization-participant', {
       filter: {
         organizationId: this.currentUser.organization.id,
         fullName: params.fullName,
@@ -41,6 +42,8 @@ export default class ListRoute extends Route {
         size: params.pageSize,
       },
     });
+
+    return { participantList, customFiltersOptions };
   }
 
   resetController(controller, isExiting) {

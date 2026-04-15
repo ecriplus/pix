@@ -324,6 +324,11 @@ function createExpectedPrescriberSerializedWithOneMoreField({
               related: `/api/organizations/${organization.id}/combined-course-blueprints`,
             },
           },
+          'learner-filters-options': {
+            links: {
+              related: `/api/organizations/${organization.id}/organization-learners/filters`,
+            },
+          },
         },
       },
       {
@@ -446,6 +451,11 @@ function createExpectedPrescriberSerialized({ prescriber, membership, userOrgaSe
           'combined-course-blueprints': {
             links: {
               related: `/api/organizations/${organization.id}/combined-course-blueprints`,
+            },
+          },
+          'learner-filters-options': {
+            links: {
+              related: `/api/organizations/${organization.id}/organization-learners/filters`,
             },
           },
         },

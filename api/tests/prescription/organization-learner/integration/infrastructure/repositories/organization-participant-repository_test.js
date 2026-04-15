@@ -2466,31 +2466,62 @@ describe('Integration | Infrastructure | Repository | OrganizationParticipant', 
 
     context('when we are filtering', function () {
       context('extra filters', function () {
-        it('returns the participants which match by an attribute', async function () {
-          // given
-          databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-            organizationId,
-            attributes: { classe: '3ème' },
-          });
-          const { id: id2 } = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
-            organizationId,
-            attributes: { classe: '6ème' },
-          });
-
-          await databaseBuilder.commit();
-
-          // when
-          const { organizationParticipants } =
-            await organizationParticipantRepository.findPaginatedFilteredImportedParticipants({
+        context('string case', function () {
+          it('returns the participants which match by an attribute like', async function () {
+            // given
+            databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
               organizationId,
-              extraColumns: [{ key: 'classe', name: 'CLASSE' }],
-              extraFilters: { CLASSE: '6ème' },
+              attributes: { classe: '3ème' },
+            });
+            const { id: id2 } = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { classe: '6ème' },
             });
 
-          const ids = organizationParticipants.map(({ id }) => id);
+            await databaseBuilder.commit();
 
-          // then
-          expect(ids).to.exactlyContain([id2]);
+            // when
+            const { organizationParticipants } =
+              await organizationParticipantRepository.findPaginatedFilteredImportedParticipants({
+                organizationId,
+                extraColumns: [{ key: 'classe', name: 'CLASSE' }],
+                extraFilters: { CLASSE: '6è' },
+              });
+
+            const ids = organizationParticipants.map(({ id }) => id);
+
+            // then
+            expect(ids).to.exactlyContain([id2]);
+          });
+        });
+
+        context('array case', function () {
+          it('returns the participants which match by an attribute like', async function () {
+            // given
+            const { id: id1 } = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { classe: '3ème' },
+            });
+            databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+              organizationId,
+              attributes: { classe: '6ème' },
+            });
+
+            await databaseBuilder.commit();
+
+            // when
+            const { organizationParticipants } =
+              await organizationParticipantRepository.findPaginatedFilteredImportedParticipants({
+                organizationId,
+                extraColumns: [{ key: 'classe', name: 'CLASSE' }],
+                extraFilters: { CLASSE: ['3ème', '5ème'] },
+              });
+
+            const ids = organizationParticipants.map(({ id }) => id);
+
+            // then
+            expect(ids).to.exactlyContain([id1]);
+          });
         });
       });
 

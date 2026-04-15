@@ -7,14 +7,15 @@ import NoParticipantPanel from 'pix-orga/components/organization-participant/no-
   {{pageTitle (t "pages.organization-participants.page-title")}}
 
   <div class="organization-participant-list-page">
-    <Header @participantCount={{@model.meta.participantCount}} />
+    <Header @participantCount={{@model.participantList.meta.participantCount}} />
 
-    {{#if @model.meta.participantCount}}
+    {{#if @model.participantList.meta.participantCount}}
       <List
-        @participants={{@model}}
+        @participants={{@model.participantList}}
         @triggerFiltering={{@controller.triggerFiltering}}
         @onResetFilter={{@controller.resetFilters}}
         @customFiltersValues={{@controller.decodedExtraFilters}}
+        @customFiltersOptions={{@model.customFiltersOptions}}
         @fullName={{@controller.fullName}}
         @certificabilityFilter={{@controller.certificability}}
         @onClickLearner={{@controller.goToLearnerPage}}

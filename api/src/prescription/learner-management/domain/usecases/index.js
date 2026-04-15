@@ -84,6 +84,7 @@ import { findOrganizationLearnersBeforeImportFeature } from './find-organization
 import { getDeltaOrganizationLearnerIds } from './get-delta-organization-learner-ids.js';
 import { getOrganizationImport } from './get-organization-import.js';
 import { getOrganizationImportStatus } from './get-organization-import-status.js';
+import { getOrganizationLearnerFilters } from './get-organization-learner-filters.js';
 import { getOrganizationLearnersCsvTemplate } from './get-organization-learners-csv-template.js';
 import { handlePayloadTooLargeError } from './handle-payload-too-large-error.js';
 import { hasBeenLearner } from './has-been-learner.js';
@@ -114,6 +115,7 @@ const usecasesWithoutInjectedDependencies = {
   deleteOrganizationLearners,
   dissociateUserFromOrganizationLearner,
   findAllOrganizationLearnerImportFormats,
+  getOrganizationLearnerFilters,
   findOrganizationLearnersBeforeImportFeature,
   getDeltaOrganizationLearnerIds,
   getOrganizationImportStatus,
