@@ -37,10 +37,10 @@ import * as thematicRepository from '../src/shared/infrastructure/repositories/t
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
-import { AttestationTemplateFixture } from './tooling/fixtures/index.js';
 import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
+import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
@@ -281,23 +281,6 @@ async function mockLearningContent(learningContent) {
   const scope = databaseBuilder.factory.learningContent.build(learningContent);
   await databaseBuilder.commit();
   return scope;
-}
-
-function mockAttestationStorage(attestation) {
-  const template = AttestationTemplateFixture.getStream();
-
-  nock('http://attestations.fake.endpoint.example.net:80')
-    .get(`/attestations.bucket/${attestation.templateName}.pdf?x-id=GetObject`)
-    .reply(200, () => template);
-
-  return template;
-}
-
-function mockAttestationStorageUpload({ attestation, isFailed = false }) {
-  return nock('http://attestations.fake.endpoint.example.net:80')
-    .put(`/attestations.bucket/${attestation.templateName}.pdf?x-id=PutObject`)
-    .reply(isFailed ? 500 : 200)
-    .persist();
 }
 
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
