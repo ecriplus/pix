@@ -10,6 +10,7 @@ import AddOrUpdateEmailWithValidation from '../../../components/user-account/add
       <AddOrUpdateEmailWithValidation
         @disableEmailEditionMode={{@controller.disableEmailEditionMode}}
         @displayEmailUpdateMessage={{@controller.displayEmailUpdateMessage}}
+        @displayEmailAddedMessage={{@controller.displayEmailAddedMessage}}
         @canAddEmailConnectionMethod={{@controller.canAddEmailConnectionMethod}}
       />
     {{else}}
@@ -36,6 +37,12 @@ import AddOrUpdateEmailWithValidation from '../../../components/user-account/add
           {{#if @controller.showEmailUpdatedMessage}}
             <PixNotificationAlert @type="success" @withIcon={{true}} class="user-account-panel__success-message">
               {{t "pages.user-account.email-verification.update-successful"}}
+            </PixNotificationAlert>
+          {{/if}}
+
+          {{#if @controller.showEmailAddedMessage}}
+            <PixNotificationAlert @type="success" @withIcon={{true}} class="user-account-panel__success-message">
+              {{t "pages.user-account.email-verification.add-successful"}}
             </PixNotificationAlert>
           {{/if}}
 
