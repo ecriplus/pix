@@ -686,7 +686,9 @@
         "CORE": "Pix-certificaat",
         "EDU_1ER_DEGRE": "Pix+ Edu-certificaat 1e graad",
         "EDU_2ND_DEGRE": "Pix+ Edu-certificaat 2e graad",
-        "EDU_CPE": "Pix+ Edu CPE-certificaat"
+        "EDU_CPE": "Pix+ Edu CPE-certificaat",
+        "DROIT": "Pix+ Recht-certificaat",
+        "PRO_SANTE": "Pix+ Gezondheidsprofessionals-certificaat"
       },
       "frameworks": {
         "EDU": {
@@ -2402,6 +2404,20 @@
         "EDU_CPE": {
           "0": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
+        },
+        "DROIT": {
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Niet verkregen"
+        },
+        "PRO_SANTE": {
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Niet verkregen"
         }
       }
     },

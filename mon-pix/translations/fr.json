@@ -685,7 +685,9 @@
         "CORE": "Certificat Pix",
         "EDU_1ER_DEGRE": "Certificat Pix+ Édu 1er degré",
         "EDU_2ND_DEGRE": "Certificat Pix+ Édu 2nd degré",
-        "EDU_CPE": "Certificat Pix+ Édu CPE"
+        "EDU_CPE": "Certificat Pix+ Édu CPE",
+        "PRO_SANTE": "Certificat Pix+ Professionnels de Santé",
+        "DROIT": "Certificat Pix+ Droit"
       },
       "frameworks": {
         "EDU": {
@@ -2413,6 +2415,20 @@
         "EDU_CPE": {
           "0": "Admissible",
           "BELOW_MINIMUM": "Non admissible"
+        },
+        "DROIT": {
+          "0": "Indépendant",
+          "1": "Confirmé",
+          "2": "Avancé",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Non obtenu"
+        },
+        "PRO_SANTE": {
+          "0": "Indépendant",
+          "1": "Confirmé",
+          "2": "Avancé",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Non obtenu"
         }
       }
     },

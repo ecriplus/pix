@@ -682,9 +682,11 @@
       "framework-title": {
         "CLEA": "Pix-Zertifikat",
         "CORE": "Pix-Zertifikat",
-        "EDU_1ER_DEGRE": "Pix+ Edu Zertifikat 1. Stufe",
-        "EDU_2ND_DEGRE": "Pix+ Edu Zertifikat 2. Stufe",
-        "EDU_CPE": "Pix+ Edu CPE-Zertifikat"
+        "EDU_1ER_DEGRE": "Pix+ Edu-Zertifikat 1. Stufe",
+        "EDU_2ND_DEGRE": "Pix+ Edu-Zertifikat 2. Stufe",
+        "EDU_CPE": "Pix+ Edu CPE-Zertifikat",
+        "DROIT": "Pix+ Recht-Zertifikat",
+        "PRO_SANTE": "Pix+ Gesundheitsberufe-Zertifikat"
       },
       "frameworks": {
         "EDU": {
@@ -2411,6 +2413,20 @@
         "EDU_CPE": {
           "0": "Zulässig",
           "BELOW_MINIMUM": "Nicht zulässig"
+        },
+        "DROIT": {
+          "0": "Selbstständig",
+          "1": "Bestätigt",
+          "2": "Fortgeschrittene",
+          "3": "Experte",
+          "BELOW_MINIMUM": "Nicht erlangt"
+        },
+        "PRO_SANTE": {
+          "0": "Selbstständig",
+          "1": "Bestätigt",
+          "2": "Fortgeschrittene",
+          "3": "Experte",
+          "BELOW_MINIMUM": "Nicht erlangt"
         }
       }
     },
