@@ -106,10 +106,6 @@ module.exports = function (environment) {
       debounce: 500,
     },
 
-    'ember-cli-mirage': {
-      enabled: false,
-    },
-
     metricsAdapters: [
       {
         name: 'PlausibleAdapter',
@@ -159,11 +155,6 @@ module.exports = function (environment) {
       clearDuration: null,
     };
     ENV.pagination.debounce = 0;
-
-    ENV['ember-cli-mirage'] = {
-      enabled: true,
-      usingProxy: false,
-    };
   }
 
   if (environment === 'production') {

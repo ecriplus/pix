@@ -1,8 +1,8 @@
 import { visit as visitScreen } from '@1024pix/ember-testing-library';
 import { currentURL } from '@ember/test-helpers';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { setupMirage } from 'pix-orga/tests/test-support/setup-mirage';
 import { module, test } from 'qunit';
 
 import authenticateSession from '../helpers/authenticate-session';
