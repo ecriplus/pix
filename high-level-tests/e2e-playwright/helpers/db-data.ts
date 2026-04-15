@@ -53,6 +53,8 @@ export const PIX_ORGA_MEMBER_DATA = {
 export const CERTIFICATIONS_DATA = {
   CLEA: 'CLEA',
   EDU_1ER_DEGRE: 'EDU_1ER_DEGRE',
+  DROIT: 'DROIT',
+  PRO_SANTE: 'PRO_SANTE',
 };
 
 export const PIX_ADMIN_SUPPORT_DATA = {
@@ -74,7 +76,7 @@ export const PIX_CERTIF_PRO_DATA = {
     {
       type: 'PRO',
       externalId: 'CERTIFPRO',
-      habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE],
+      habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE, CERTIFICATIONS_DATA.DROIT, CERTIFICATIONS_DATA.PRO_SANTE],
       withOrganization: {
         isManagingStudents: false,
       },

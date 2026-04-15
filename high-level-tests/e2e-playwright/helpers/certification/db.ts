@@ -5,7 +5,9 @@ import {
   buildCoreVersion,
   buildCpfData,
   buildPixCertifUser,
+  buildPixPlusDroitData,
   buildPixPlusEduData,
+  buildPixPlusProSanteData,
 } from './builders/index.ts';
 
 export async function buildCertificationData() {
@@ -13,6 +15,8 @@ export async function buildCertificationData() {
   await buildCoreVersion(knex);
   await buildCleaData(knex);
   await buildPixPlusEduData(knex);
+  await buildPixPlusDroitData(knex);
+  await buildPixPlusProSanteData(knex);
   await buildPixCertifUser(knex, PIX_CERTIF_PRO_DATA);
 }
 
