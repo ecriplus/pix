@@ -23,13 +23,26 @@ export const createCertificationVersion = withTransaction(
    * @param {object} params
    * @param {SCOPES} params.scope
    * @param {Array<string>} params.tubeIds
+   * @param {number} [params.minimumAnswersRequiredToValidateACertification]
    * @param {TubeRepository} params.tubeRepository
    * @param {SkillRepository} params.skillRepository
    * @param {ChallengeRepository} params.challengeRepository
    * @param {VersionRepository} params.versionRepository
    */
-  async ({ scope, tubeIds, tubeRepository, skillRepository, challengeRepository, versionRepository }) => {
-    const version = await _buildNewVersion({ scope, versionRepository });
+  async ({
+    scope,
+    tubeIds,
+    minimumAnswersRequiredToValidateACertification,
+    tubeRepository,
+    skillRepository,
+    challengeRepository,
+    versionRepository,
+  }) => {
+    const version = await _buildNewVersion({
+      scope,
+      minimumAnswersRequiredToValidateACertification,
+      versionRepository,
+    });
     const challenges = await _getChallengesForTubes({ tubeIds, tubeRepository, skillRepository, challengeRepository });
     return versionRepository.create({ version, challenges });
   },
@@ -38,9 +51,10 @@ export const createCertificationVersion = withTransaction(
 /**
  * @param {object} params
  * @param {SCOPES} params.scope
+ * @param {number} [params.minimumAnswersRequiredToValidateACertification]
  * @param {VersionRepository} params.versionRepository
  */
-const _buildNewVersion = async ({ scope, versionRepository }) => {
+const _buildNewVersion = async ({ scope, minimumAnswersRequiredToValidateACertification, versionRepository }) => {
   const currentVersion = await versionRepository.findActiveByScope({ scope });
 
   if (!currentVersion) {
@@ -49,7 +63,8 @@ const _buildNewVersion = async ({ scope, versionRepository }) => {
       startDate: dayjs().toDate(),
       expirationDate: null,
       assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
-      minimumAnswersRequiredToValidateACertification: DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
+      minimumAnswersRequiredToValidateACertification:
+        minimumAnswersRequiredToValidateACertification ?? DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
       challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
         challengesBetweenSameCompetence: 0,
         maximumAssessmentLength: 32,
@@ -75,7 +90,8 @@ const _buildNewVersion = async ({ scope, versionRepository }) => {
     startDate: transitionDate,
     expirationDate: null,
     assessmentDuration: currentVersion.assessmentDuration,
-    minimumAnswersRequiredToValidateACertification: currentVersion.minimumAnswersRequiredToValidateACertification,
+    minimumAnswersRequiredToValidateACertification:
+      minimumAnswersRequiredToValidateACertification ?? currentVersion.minimumAnswersRequiredToValidateACertification,
     challengesConfiguration: currentVersion.challengesConfiguration,
   });
 };

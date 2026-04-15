@@ -73,6 +73,7 @@ export async function create({ version, challenges }) {
       startDate: version.startDate,
       expirationDate: version.expirationDate,
       assessmentDuration: version.assessmentDuration,
+      minimumAnswersRequiredToValidateACertification: version.minimumAnswersRequiredToValidateACertification,
       globalScoringConfiguration: version.globalScoringConfiguration
         ? JSON.stringify(version.globalScoringConfiguration)
         : null,
