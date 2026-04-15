@@ -276,13 +276,22 @@ export class CommonCertificationVersions {
   /**
    * @param {Object} params
    * @param {Knex} params.databaseBuilder
+   * @param {string} params.fromLcmsFrameworkName
+   * @param {SCOPES} params.toFrameworkScope
+   * @param {number} [params.minimumAnswersRequiredToValidateACertification]
    * @returns {Promise<number>}
    */
-  static async #createActiveFrameworkVersion({ databaseBuilder, fromLcmsFrameworkName, toFrameworkScope }) {
+  static async #createActiveFrameworkVersion({
+    databaseBuilder,
+    fromLcmsFrameworkName,
+    toFrameworkScope,
+    minimumAnswersRequiredToValidateACertification,
+  }) {
     const tubeIds = await this.#getTubeIdsByFramework({ frameworkName: fromLcmsFrameworkName });
     const currentVersionId = await configurationUsecases.createCertificationVersion({
       scope: toFrameworkScope,
       tubeIds,
+      minimumAnswersRequiredToValidateACertification,
     });
 
     await this.#forceConfigurations({
