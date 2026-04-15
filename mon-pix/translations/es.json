@@ -2355,6 +2355,7 @@
       },
       "email-confirmed": "Dirección de correo electrónico verificada.",
       "email-verification": {
+        "add-successful": "¡Tu dirección de correo electrónico ya está registrada!",
         "code-explanation-of-use": "Para pasar de un campo a otro, utiliza el tabulador o las flechas izquierda y derecha del teclado. Para rellenar un campo, introduce dígitos del 1 al 9 o utiliza las flechas arriba y abajo del teclado.",
         "code-label": "Campo",
         "code-legend": "Introducir el código de comprobación enviado por correo electrónico",
