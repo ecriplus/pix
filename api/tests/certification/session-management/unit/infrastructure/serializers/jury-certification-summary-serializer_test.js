@@ -32,6 +32,7 @@ describe('Unit | Serializer | JSONAPI | jury-certification-summary-serializer', 
         certificationIssueReports: [issueReport],
         isFlaggedAborted: false,
         certificationFramework: Frameworks.DROIT,
+        lastAnswerAt: new Date('2020-04-25T04:05:06Z')
       });
 
       expectedJsonApi = {
@@ -53,6 +54,7 @@ describe('Unit | Serializer | JSONAPI | jury-certification-summary-serializer', 
             'number-of-certification-issue-reports-with-required-action': 1,
             'is-flagged-aborted': false,
             'certification-framework': Frameworks.DROIT,
+            'last-answer-at': modelJuryCertifSummary.lastAnswerAt
           },
         },
         meta: {},
