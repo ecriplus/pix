@@ -16,10 +16,10 @@ test(
     annotation: [
       {
         type: 'scenario',
-        description: `Enrolling 3 candidates through ODS file.
+        description: `Enrolling 5 candidates through ODS file.
          - First import attempt fails : dupes in file
          - Second import attempt succeeds
-         - Enrolled frameworks : CORE, CLEA and EDU 1ER DEGRE
+         - Enrolled frameworks : CORE, CLEA, EDU 1ER DEGRE, DROIT and PRO SANTE
          - All candidates enter the test
          - All candidates are allowed to start the test
          - All answer one challenge only
@@ -41,6 +41,8 @@ test(
     const userDataCoreSubscription = await getCertifiableUserData(0);
     const userDataCleaSubscription = await getCertifiableUserData(1);
     const userDataEduSubscription = await getCertifiableUserData(2);
+    const userDataDroitSubscription = await getCertifiableUserData(3);
+    const userDataProSanteSubscription = await getCertifiableUserData(4);
     await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
     let sessionNumber = '',
@@ -86,7 +88,7 @@ test(
 
     await test.step('Check all enrolled candidates', async () => {
       const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
-      expect(enrolledCandidatesSoFar).toHaveLength(3);
+      expect(enrolledCandidatesSoFar).toHaveLength(5);
       const coreEnrolled = enrolledCandidatesSoFar.find(
         (enrolled) => enrolled['Prénom'] === userDataCoreSubscription.firstName,
       );
@@ -129,11 +131,41 @@ test(
           userDataEduSubscription.birthYear,
         'Certification sélectionnée': 'Pix+ Édu 1er degré',
       });
+      const droitEnrolled = enrolledCandidatesSoFar.find(
+        (enrolled) => enrolled['Prénom'] === userDataDroitSubscription.firstName,
+      );
+      expect(droitEnrolled).toMatchObject({
+        'Nom de naissance': userDataDroitSubscription.lastName,
+        Prénom: userDataDroitSubscription.firstName,
+        'Date de naissance':
+          userDataDroitSubscription.birthDay +
+          '/' +
+          userDataDroitSubscription.birthMonth +
+          '/' +
+          userDataDroitSubscription.birthYear,
+        'Certification sélectionnée': 'Pix+ Droit',
+      });
+      const proSanteEnrolled = enrolledCandidatesSoFar.find(
+        (enrolled) => enrolled['Prénom'] === userDataProSanteSubscription.firstName,
+      );
+      expect(proSanteEnrolled).toMatchObject({
+        'Nom de naissance': userDataProSanteSubscription.lastName,
+        Prénom: userDataProSanteSubscription.firstName,
+        'Date de naissance':
+          userDataProSanteSubscription.birthDay +
+          '/' +
+          userDataProSanteSubscription.birthMonth +
+          '/' +
+          userDataProSanteSubscription.birthYear,
+        'Certification sélectionnée': 'Pix+ Professionnels de santé',
+      });
     });
 
     const pixAppCorePage = await pixAppCertifiableUserPage(userDataCoreSubscription);
     const pixAppCleaPage = await pixAppCertifiableUserPage(userDataCleaSubscription);
     const pixAppEduPage = await pixAppCertifiableUserPage(userDataEduSubscription);
+    const pixAppDroitPage = await pixAppCertifiableUserPage(userDataDroitSubscription);
+    const pixAppProSantePage = await pixAppCertifiableUserPage(userDataProSanteSubscription);
     await test.step('all candidates pass the exam', async () => {
       await passManyCertificationExams({
         examsData: [
@@ -152,6 +184,16 @@ test(
             rightWrongAnswersSequence: [true],
             pixAppPage: pixAppEduPage,
           },
+          {
+            certifiableUserData: userDataDroitSubscription,
+            rightWrongAnswersSequence: [true],
+            pixAppPage: pixAppDroitPage,
+          },
+          {
+            certifiableUserData: userDataProSanteSubscription,
+            rightWrongAnswersSequence: [true],
+            pixAppPage: pixAppProSantePage,
+          },
         ],
         sessionNumber,
         accessCode,
@@ -168,6 +210,10 @@ test(
       await sessionFinalizationPage.markTechnicalIssueFor(userDataCleaSubscription.lastName);
       await expect(pixCertifProPage.getByText(userDataEduSubscription.firstName)).toBeVisible();
       await sessionFinalizationPage.markTechnicalIssueFor(userDataEduSubscription.lastName);
+      await expect(pixCertifProPage.getByText(userDataDroitSubscription.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(userDataDroitSubscription.lastName);
+      await expect(pixCertifProPage.getByText(userDataProSanteSubscription.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(userDataProSanteSubscription.lastName);
 
       await sessionFinalizationPage.finalizeSession();
     });
@@ -175,7 +221,7 @@ test(
     const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
     await test.step('Check candidates did pass what they enrolled for', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -196,7 +242,7 @@ test(
       await test.step('Check certification information', async () => {
         const certificationListPage = await sessionPage.goToCertificationListPage();
         const certificationData = await certificationListPage.getCertificationData();
-        expect(certificationData.length).toBe(3);
+        expect(certificationData.length).toBe(5);
         const coreData = certificationData.find((data) => data['Prénom'] === userDataCoreSubscription.firstName);
         expect(coreData).toMatchObject({
           Prénom: userDataCoreSubscription.firstName,
@@ -223,6 +269,26 @@ test(
           Résultats: 'Non admissible',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
+        });
+        const droitData = certificationData.find((data) => data['Prénom'] === userDataDroitSubscription.firstName);
+        expect(droitData).toMatchObject({
+          Prénom: userDataDroitSubscription.firstName,
+          Nom: userDataDroitSubscription.lastName,
+          Statut: 'Annulée',
+          Résultats: 'Indépendant',
+          'Signalements impactants non résolus': '',
+          'Certification passée': 'Pix+ Droit',
+        });
+        const proSanteData = certificationData.find(
+          (data) => data['Prénom'] === userDataProSanteSubscription.firstName,
+        );
+        expect(proSanteData).toMatchObject({
+          Prénom: userDataProSanteSubscription.firstName,
+          Nom: userDataProSanteSubscription.lastName,
+          Statut: 'Annulée',
+          Résultats: 'Indépendant',
+          'Signalements impactants non résolus': '',
+          'Certification passée': 'Pix+ Pro Santé',
         });
       });
     });
