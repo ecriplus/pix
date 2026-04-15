@@ -1,13 +1,13 @@
 /**
  * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
- * @typedef {import ('./index.js').VersionsRepository} VersionsRepository
+ * @typedef {import ('./index.js').VersionRepository} VersionRepository
  */
 
 /**
  * @param {object} params
  * @param {Scope} params.scope
- * @param {VersionsRepository} params.versionsRepository
+ * @param {VersionRepository} params.versionRepository
  */
-export const getFrameworkHistory = async ({ scope, versionsRepository }) => {
-  return versionsRepository.getFrameworkHistory({ scope });
+export const getFrameworkHistory = async ({ scope, versionRepository }) => {
+  return versionRepository.getFrameworkHistory({ scope });
 };

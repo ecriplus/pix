@@ -5,7 +5,7 @@
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionRepository} VersionRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionApi} VersionApi
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
  * @typedef {typeof import('../services/pick-challenge-service.js').default} PickChallengeService
  * @typedef {import('../models/CalibratedChallenge.js').CalibratedChallenge} CalibratedChallenge
@@ -25,7 +25,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
- * @param {VersionRepository} params.versionRepository
+ * @param {VersionApi} params.versionApi
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
  * @param {PickChallengeService} params.pickChallengeService
@@ -39,7 +39,7 @@ const getNextChallenge = async function ({
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
   calibratedChallengeRepository,
-  versionRepository,
+  versionApi,
   flashAlgorithmService,
   pickChallengeService,
 }) {
@@ -67,9 +67,9 @@ const getNextChallenge = async function ({
 
   const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
 
-  const version = await versionRepository.getByScopeAndReconciliationDate({
-    scope: candidate.subscriptionScope,
-    reconciliationDate: candidate.reconciledAt,
+  const version = await versionApi.getByFrameworkAndDate({
+    framework: candidate.subscriptionScope,
+    date: candidate.reconciledAt,
   });
 
   const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({

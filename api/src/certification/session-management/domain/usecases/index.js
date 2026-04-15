@@ -1,12 +1,12 @@
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as placementProfileService from '../../../../shared/domain/services/placement-profile-service.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
+import * as versionApi from '../../../configuration/application/api/version-api.js';
 import * as flashAlgorithmService from '../../../evaluation/domain/services/algorithm-methods/flash.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as sharedSessionRepository from '../../../shared/infrastructure/repositories/session-repository.js';
-import * as evaluationVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import {
   answerRepository,
   assessmentRepository,
@@ -133,7 +133,7 @@ const dependencies = {
   flashAlgorithmService,
   sessionPublicationService,
   sharedSessionRepository,
-  evaluationVersionRepository,
+  versionApi,
   userRepository,
 };
 

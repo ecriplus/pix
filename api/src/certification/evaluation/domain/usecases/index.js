@@ -6,6 +6,7 @@ import * as assessmentRepository from '../../../../shared/infrastructure/reposit
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import * as sharedChallengeRepository from '../../../../shared/infrastructure/repositories/challenge-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
+import * as versionApi from '../../../configuration/application/api/version-api.js';
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
@@ -16,8 +17,6 @@ import * as certificationCourseRepository from '../../../shared/infrastructure/r
 import * as sharedCompetenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
-import * as sharedVersionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
-import * as versionRepository from '../../../shared/infrastructure/repositories/version-repository.js';
 import * as assessmentSheetRepository from '../../infrastructure/repositories/assessment-sheet-repository.js';
 import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
@@ -41,8 +40,6 @@ import { getNextChallenge } from './get-next-challenge.js';
 import { neutralizeChallenge } from './neutralize-challenge.js';
 import { rescoreV2Certification } from './rescore-v2-certification.js';
 import { retrieveLastOrCreateCertificationCourse } from './retrieve-last-or-create-certification-course.js';
-import { saveCertificationScoringConfiguration } from './save-certification-scoring-configuration.js';
-import { saveCompetenceForScoringConfiguration } from './save-competence-for-scoring-configuration.js';
 import { scoreV3Certification } from './score-v3-certification.js';
 import { simulateCapacityFromScore } from './simulate-capacity-from-score.js';
 import { simulateFlashAssessmentScenario } from './simulate-flash-assessment-scenario.js';
@@ -52,7 +49,6 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {certificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
- * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {assessmentSheetRepository} AssessmentSheetRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
  * @typedef {evaluationSessionRepository} EvaluationSessionRepository
@@ -69,15 +65,14 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {sessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
- * @typedef {versionRepository} VersionRepository
  * @typedef {correctionApi} CorrectionApi
+ * @typedef {versionApi} VersionApi
  * @typedef {certificationCompletedJobRepository} CertificationCompletedJobRepository
  * @typedef {services} Services
  */
 const dependencies = {
   complementaryCertificationCourseResultRepository,
   certificationAssessmentHistoryRepository,
-  sharedVersionRepository,
   scoringConfigurationRepository,
   assessmentSheetRepository,
   evaluationSessionRepository,
@@ -104,8 +99,8 @@ const dependencies = {
   complementaryCertificationScoringCriteriaRepository,
   certificationChallengeLiveAlertRepository,
   pixPlusCertificationCourseRepository,
-  versionRepository,
   correctionApi,
+  versionApi,
   certificationCompletedJobRepository,
   services,
 };
@@ -121,8 +116,6 @@ const usecasesWithoutInjectedDependencies = {
   simulateFlashAssessmentScenario,
   scoreV3Certification,
   completeCertificationAssessment,
-  saveCertificationScoringConfiguration,
-  saveCompetenceForScoringConfiguration,
   simulateCapacityFromScore,
   simulateScoreFromCapacity,
   evaluateAndSaveAnswer,

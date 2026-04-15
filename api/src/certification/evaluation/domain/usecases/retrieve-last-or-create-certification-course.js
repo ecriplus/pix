@@ -5,7 +5,7 @@
  * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
  * @typedef {import('./index.js').UserRepository} UserRepository
- * @typedef {import('./index.js').VersionsRepository} VersionsRepository
+ * @typedef {import('./index.js').VersionApi} VersionApi
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
  * @typedef {import('../../../shared/domain/models/CertificationCandidate.js').CertificationCandidate} CertificationCandidate
@@ -36,7 +36,7 @@ import { SCOPES } from '../../../shared/domain/models/Scopes.js';
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
  * @param {UserRepository} params.userRepository
- * @param {VersionsRepository} params.versionRepository
+ * @param {VersionApi} params.versionApi
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
  */
@@ -50,7 +50,7 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   evaluationSessionRepository,
   certificationCenterRepository,
   userRepository,
-  versionRepository,
+  versionApi,
   certificationBadgesService,
   verifyCertificateCodeService,
 }) {
@@ -70,9 +70,9 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
     ? certificationCandidate.complementaryCertification.key
     : SCOPES.CORE;
 
-  const certificationVersion = await versionRepository.getByScopeAndReconciliationDate({
-    scope: certificationScope,
-    reconciliationDate: certificationCandidate.reconciledAt,
+  const certificationVersion = await versionApi.getByFrameworkAndDate({
+    framework: certificationScope,
+    date: certificationCandidate.reconciledAt,
   });
 
   const existingCertificationCourse =

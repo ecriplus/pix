@@ -4,10 +4,10 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | get-active-version-by-scope', function () {
-  let versionsRepository;
+  let versionRepository;
 
   beforeEach(function () {
-    versionsRepository = {
+    versionRepository = {
       findActiveByScope: sinon.stub(),
     };
   });
@@ -26,20 +26,20 @@ describe('Certification | Configuration | Unit | UseCase | get-active-version-by
       ],
     });
 
-    versionsRepository.findActiveByScope.resolves(expectedVersion);
+    versionRepository.findActiveByScope.resolves(expectedVersion);
 
-    const result = await getActiveVersionByScope({ scope, versionsRepository });
+    const result = await getActiveVersionByScope({ scope, versionRepository });
 
-    expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
+    expect(versionRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
     expect(result).to.equal(expectedVersion);
   });
 
   it('should throw NotFoundError when no active version exists for the scope', async function () {
     const scope = SCOPES.CORE;
 
-    versionsRepository.findActiveByScope.resolves(null);
+    versionRepository.findActiveByScope.resolves(null);
 
-    const error = await catchErr(getActiveVersionByScope)({ scope, versionsRepository });
+    const error = await catchErr(getActiveVersionByScope)({ scope, versionRepository });
 
     expect(error).to.be.instanceOf(NotFoundError);
     expect(error.message).to.equal('No active certification version found for scope: CORE');

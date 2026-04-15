@@ -1,6 +1,9 @@
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { createCertificationVersion } from '../../../../../../src/certification/configuration/domain/usecases/create-certification-version.js';
-import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
+import {
+  DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
+  DEFAULT_SESSION_DURATION_MINUTES,
+} from '../../../../../../src/certification/shared/domain/constants.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
@@ -8,7 +11,7 @@ import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../../../src/shared/domai
 import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | create-certification-version', function () {
-  let challengeRepository, versionsRepository, tubeRepository, skillRepository;
+  let challengeRepository, versionRepository, tubeRepository, skillRepository;
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -24,7 +27,7 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
     challengeRepository = {
       findValidatedBySkills: sinon.stub(),
     };
-    versionsRepository = {
+    versionRepository = {
       findActiveByScope: sinon.stub(),
       create: sinon.stub(),
       update: sinon.stub(),
@@ -65,11 +68,11 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
       ];
       const frFrChallenges = challenges.filter((challenge) => challenge.locales.includes(FRENCH_FRANCE));
 
-      versionsRepository.findActiveByScope.resolves(currentVersion);
+      versionRepository.findActiveByScope.resolves(currentVersion);
       tubeRepository.findActiveByRecordIds.resolves([tube1, tube2]);
       skillRepository.findActiveByRecordIds.resolves([...tube1.skills, ...tube2.skills]);
       challengeRepository.findValidatedBySkills.resolves(frFrChallenges);
-      versionsRepository.create.resolves();
+      versionRepository.create.resolves();
 
       // when
       await createCertificationVersion({
@@ -78,13 +81,13 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         tubeRepository,
         skillRepository,
         challengeRepository,
-        versionsRepository,
+        versionRepository,
       });
 
       // then
-      expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
-      expect(versionsRepository.update).to.have.been.calledOnce;
-      const expiredVersionArg = versionsRepository.update.firstCall.args[0].version;
+      expect(versionRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
+      expect(versionRepository.update).to.have.been.calledOnce;
+      const expiredVersionArg = versionRepository.update.firstCall.args[0].version;
       expect(expiredVersionArg).to.be.instanceOf(Version);
       expect(expiredVersionArg.id).to.equal(currentVersion.id);
       expect(expiredVersionArg.expirationDate).to.deep.equal(new Date('2025-10-21T10:00:00Z'));
@@ -97,14 +100,15 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         [...tube1.skills, ...tube2.skills],
         FRENCH_FRANCE,
       );
-      expect(versionsRepository.create).to.have.been.calledOnce;
-      const { version, challenges: versionFrameworkChallenges } = versionsRepository.create.firstCall.args[0];
+      expect(versionRepository.create).to.have.been.calledOnce;
+      const { version, challenges: versionFrameworkChallenges } = versionRepository.create.firstCall.args[0];
       expect(version).to.deepEqualInstance(
         new Version({
           scope,
           startDate: new Date('2025-10-21T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: currentVersion.assessmentDuration,
+          minimumAnswersRequiredToValidateACertification: currentVersion.minimumAnswersRequiredToValidateACertification,
           globalScoringConfiguration: undefined,
           competencesScoringConfiguration: undefined,
           challengesConfiguration: currentVersion.challengesConfiguration,
@@ -135,11 +139,11 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
       ];
       const frFrChallenges = challenges.filter((challenge) => challenge.locales.includes(FRENCH_FRANCE));
 
-      versionsRepository.findActiveByScope.resolves(null);
+      versionRepository.findActiveByScope.resolves(null);
       tubeRepository.findActiveByRecordIds.resolves([tube1, tube2]);
       skillRepository.findActiveByRecordIds.resolves([...tube1.skills, ...tube2.skills]);
       challengeRepository.findValidatedBySkills.resolves(frFrChallenges);
-      versionsRepository.create.resolves();
+      versionRepository.create.resolves();
 
       // when
       await createCertificationVersion({
@@ -148,11 +152,11 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         tubeRepository,
         skillRepository,
         challengeRepository,
-        versionsRepository,
+        versionRepository,
       });
 
       // then
-      expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
+      expect(versionRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
       expect(tubeRepository.findActiveByRecordIds).to.have.been.calledOnceWithExactly(tubeIds, FRENCH_SPOKEN);
       expect(skillRepository.findActiveByRecordIds).to.have.been.calledOnceWithExactly([
         ...tube1.skillIds,
@@ -162,14 +166,15 @@ describe('Certification | Configuration | Unit | UseCase | create-certification-
         [...tube1.skills, ...tube2.skills],
         FRENCH_FRANCE,
       );
-      expect(versionsRepository.create).to.have.been.calledOnce;
-      const { version, challenges: versionFrameworkChallenges } = versionsRepository.create.firstCall.args[0];
+      expect(versionRepository.create).to.have.been.calledOnce;
+      const { version, challenges: versionFrameworkChallenges } = versionRepository.create.firstCall.args[0];
       expect(version).to.deepEqualInstance(
         new Version({
           scope,
           startDate: new Date('2025-10-20T10:00:00Z'),
           expirationDate: null,
           assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+          minimumAnswersRequiredToValidateACertification: DEFAULT_MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
           challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
             challengesBetweenSameCompetence: 0,
             maximumAssessmentLength: 32,

@@ -1,11 +1,9 @@
-import { knex } from '../../../../../../db/knex-database-connection.js';
 import { V3CertificationScoring } from '../../../../../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
 import {
   getLatestByDateAndLocale,
   getLatestByVersion,
-  saveCertificationScoringConfiguration,
-  saveCompetenceForScoringConfiguration,
 } from '../../../../../../src/certification/evaluation/infrastructure/repositories/scoring-configuration-repository.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
@@ -110,18 +108,16 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
       buildFramework({ competenceIndex, origin: 'external' });
       buildFramework({ competenceIndex, origin: PIX_ORIGIN });
 
-      const version = domainBuilder.certification.shared.buildVersion({
+      const version = domainBuilder.certification.configuration.buildVersion({
         id: 1,
+        competencesScoringConfiguration: [
+          {
+            values: [{ bounds: { max: -1, min: -4 }, competenceLevel: 0 }],
+            competence: competenceIndex,
+          },
+        ],
+        scope: Frameworks.CORE,
       });
-
-      databaseBuilder.factory.buildCertificationVersion({
-        id: 1,
-      });
-
-      databaseBuilder.factory.buildCertificationVersion({
-        id: 2,
-      });
-
       await databaseBuilder.commit();
 
       // when
@@ -130,64 +126,8 @@ describe('Certification | Evaluation | Integration | Repositories | scoring-conf
       // then
       expect(result).to.be.instanceOf(V3CertificationScoring);
       expect(result.versionId).to.equal(1);
-      expect(result._competencesForScoring[0].competenceId).to.be.equal(`${PIX_ORIGIN}Competence`);
-      expect(result._competencesForScoring[0].intervals.length).not.to.be.equal(0);
-    });
-  });
-
-  describe('#saveCompetenceForScoringConfiguration', function () {
-    it('should update latest configuration with new competence scoring', async function () {
-      // given
-      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationVersion({
-        competencesScoringConfiguration: null,
-        expirationDate: null,
-      }).id;
-      const competencesConfigUntouched = { untouched: 'data' };
-      const configUntouchedId = databaseBuilder.factory.buildCertificationVersion({
-        competencesScoringConfiguration: competencesConfigUntouched,
-        expirationDate: new Date(),
-      }).id;
-      await databaseBuilder.commit();
-
-      const newCompetencesScoringConfig = { some: 'data' };
-
-      // when
-      await saveCompetenceForScoringConfiguration({ configuration: newCompetencesScoringConfig });
-
-      // then
-      const updatedConfiguration = await knex('certification_versions').where({ id: configToBeUpdatedId }).first();
-      expect(updatedConfiguration.competencesScoringConfiguration).to.deep.equal(newCompetencesScoringConfig);
-
-      const configurationUntouched = await knex('certification_versions').where({ id: configUntouchedId }).first();
-      expect(configurationUntouched.competencesScoringConfiguration).to.deep.equal(competencesConfigUntouched);
-    });
-  });
-
-  describe('#saveCertificationScoringConfiguration', function () {
-    it('should update latest configuration with new global scoring configuration', async function () {
-      // given
-      const configToBeUpdatedId = databaseBuilder.factory.buildCertificationVersion({
-        globalScoringConfiguration: null,
-        expirationDate: null,
-      }).id;
-      const globalScoringConfigUntouched = { untouched: 'data' };
-      const configUntouchedId = databaseBuilder.factory.buildCertificationVersion({
-        globalScoringConfiguration: globalScoringConfigUntouched,
-        expirationDate: new Date(),
-      }).id;
-      await databaseBuilder.commit();
-
-      const newGlobalScoringConfig = { some: 'data' };
-
-      // when
-      await saveCertificationScoringConfiguration({ configuration: newGlobalScoringConfig });
-
-      // then
-      const updatedConfiguration = await knex('certification_versions').where({ id: configToBeUpdatedId }).first();
-      expect(updatedConfiguration.globalScoringConfiguration).to.deep.equal(newGlobalScoringConfig);
-
-      const configurationUntouched = await knex('certification_versions').where({ id: configUntouchedId }).first();
-      expect(configurationUntouched.globalScoringConfiguration).to.deep.equal(globalScoringConfigUntouched);
+      expect(result._competencesForScoring[0].competenceId).to.equal(`${PIX_ORIGIN}Competence`);
+      expect(result._competencesForScoring[0].intervals.length).to.equal(1);
     });
   });
 });

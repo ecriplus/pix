@@ -4,10 +4,10 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | get-current-framework-version', function () {
-  let versionsRepository, frameworkChallengesRepository, learningContentRepository;
+  let versionRepository, frameworkChallengesRepository, learningContentRepository;
 
   beforeEach(function () {
-    versionsRepository = {
+    versionRepository = {
       findActiveByScope: sinon.stub(),
     };
 
@@ -36,7 +36,7 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
       }),
     ];
 
-    versionsRepository.findActiveByScope.withArgs({ scope }).resolves(version);
+    versionRepository.findActiveByScope.withArgs({ scope }).resolves(version);
 
     frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
@@ -46,13 +46,13 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
     // when
     const results = await getCurrentFrameworkVersion({
       scope,
-      versionsRepository,
+      versionRepository,
       frameworkChallengesRepository,
       learningContentRepository,
     });
 
     // then
-    expect(versionsRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
+    expect(versionRepository.findActiveByScope).to.have.been.calledOnceWithExactly({ scope });
 
     expect(frameworkChallengesRepository.getByVersionId).to.have.been.calledOnceWithExactly({ versionId });
 
@@ -69,12 +69,12 @@ describe('Certification | Configuration | Unit | UseCase | get-current-framework
     // given
     const scope = SCOPES.PIX_PLUS_DROIT;
 
-    versionsRepository.findActiveByScope.withArgs({ scope }).resolves(null);
+    versionRepository.findActiveByScope.withArgs({ scope }).resolves(null);
 
     // when
     const error = await catchErr(getCurrentFrameworkVersion)({
       scope,
-      versionsRepository,
+      versionRepository,
       frameworkChallengesRepository,
       learningContentRepository,
     });

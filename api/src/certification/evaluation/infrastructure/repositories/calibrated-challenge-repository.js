@@ -1,7 +1,3 @@
-/**
- * @typedef {import('../../../shared/domain/models/Version.js').Version} Version
- */
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { getInstance } from '../../../../shared/infrastructure/repositories/challenge-repository.js';

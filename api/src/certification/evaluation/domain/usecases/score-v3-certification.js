@@ -2,7 +2,7 @@
  * @typedef {import('./index.js').Services} Services
  * @typedef {import('./index.js').AssessmentSheetRepository} AssessmentSheetRepository
  * @typedef {import('./index.js').CertificationCandidateRepository} CertificationCandidateRepository
- * @typedef {import('./index.js').SharedVersionRepository} SharedVersionRepository
+ * @typedef {import('./index.js').VersionApi} VersionApi
  * @typedef {import('./index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('./index.js').sharedCompetenceMarkRepository} SharedCompetenceMarkRepository
  * @typedef {import('./index.js').CertificationAssessmentHistoryRepository} CertificationAssessmentHistoryRepository
@@ -28,7 +28,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {Services} params.services
  * @param {AssessmentSheetRepository} params.assessmentSheetRepository
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
- * @param {SharedVersionRepository} params.sharedVersionRepository
+ * @param {VersionApi} params.versionApi
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
  * @param {CertificationAssessmentHistoryRepository} params.certificationAssessmentHistoryRepository
@@ -44,7 +44,7 @@ export async function scoreV3Certification({
   services,
   assessmentSheetRepository,
   certificationCandidateRepository,
-  sharedVersionRepository,
+  versionApi,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
   certificationAssessmentHistoryRepository,
@@ -62,7 +62,7 @@ export async function scoreV3Certification({
     assessmentId: assessmentSheet.assessmentId,
   });
 
-  const version = await sharedVersionRepository.getById(assessmentSheet.versionId);
+  const version = await versionApi.getById({ id: assessmentSheet.versionId });
 
   await _verifyCertificationIsScorable({
     certificationCourseId: assessmentSheet.certificationCourseId,

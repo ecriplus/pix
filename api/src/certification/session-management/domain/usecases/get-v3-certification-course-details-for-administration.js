@@ -2,7 +2,7 @@ export const getV3CertificationCourseDetailsForAdministration = async ({
   certificationCourseId,
   competenceRepository,
   v3CertificationCourseDetailsForAdministrationRepository,
-  evaluationVersionRepository,
+  versionApi,
 }) => {
   const competences = await competenceRepository.list();
 
@@ -11,7 +11,7 @@ export const getV3CertificationCourseDetailsForAdministration = async ({
       certificationCourseId,
     });
 
-  const version = await evaluationVersionRepository.getById(courseDetails.versionId);
+  const version = await versionApi.getById({ id: courseDetails.versionId });
 
   courseDetails.numberOfChallenges = version.challengesConfiguration.maximumAssessmentLength;
 

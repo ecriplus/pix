@@ -149,14 +149,14 @@ function stubCertificationCandidateRepository() {
   return certificationCandidateRepository;
 }
 
-function stubSharedVersionRepository() {
-  const sharedVersionRepository = {
+function stubVersionApi() {
+  const versionApi = {
     getById: sinon.stub(),
   };
-  const version = domainBuilder.certification.shared.buildVersion();
-  sharedVersionRepository.getById.resolves(version);
+  const version = domainBuilder.certification.configuration.buildVersion();
+  versionApi.getById.resolves(version);
 
-  return sharedVersionRepository;
+  return versionApi;
 }
 function stubServices({ hasPixPlusSubscription = false } = {}) {
   const services = {
@@ -265,7 +265,7 @@ function createDependencies(overrides = {}) {
   return {
     assessmentSheetRepository: stubAssessmentSheetRepository(),
     certificationCandidateRepository: stubCertificationCandidateRepository(),
-    sharedVersionRepository: stubSharedVersionRepository(),
+    versionApi: stubVersionApi(),
     services: stubServices(),
     scoringConfigurationRepository: stubScoringConfigurationRepository(),
     certificationAssessmentHistoryRepository: stubCertificationAssessmentHistoryRepository(),

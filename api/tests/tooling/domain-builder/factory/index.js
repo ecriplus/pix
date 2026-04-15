@@ -218,7 +218,6 @@ import { buildCompetenceForScoring } from './certification/shared/build-competen
 import { buildComplementaryCertification as buildSharedComplementaryCertification } from './certification/shared/build-complementary-certification.js';
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
-import { buildVersion as buildSharedVersion } from './certification/shared/build-version.js';
 import { buildPassage } from './devcomp/build-passage.js';
 import {
   buildLtiPlatformRegistration,
@@ -301,7 +300,6 @@ const certification = {
     buildCertificationCompanionLiveAlert,
     buildJuryComment,
     buildComplementaryCertification: buildSharedComplementaryCertification,
-    buildVersion: buildSharedVersion,
   },
   results: {
     buildGlobalCertificationLevel,

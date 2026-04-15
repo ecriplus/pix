@@ -1,6 +1,6 @@
 /**
  * @typedef {import('./index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
- * @typedef {import('./index.js').VersionRepository} VersionRepository
+ * @typedef {import('./index.js').VersionApi} VersionApi
  */
 
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
@@ -12,7 +12,7 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {object} params
  * @param {number} params.stopAtChallenge - force scenario to stop at challenge before maximumAssessmentLength
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
- * @param {VersionRepository} params.versionRepository
+ * @param {VersionApi} params.versionApi
  */
 export async function simulateFlashAssessmentScenario({
   locale,
@@ -25,9 +25,9 @@ export async function simulateFlashAssessmentScenario({
   stopAtChallenge,
   versionId,
   calibratedChallengeRepository,
-  versionRepository,
+  versionApi,
 }) {
-  const version = await versionRepository.getById(versionId);
+  const version = await versionApi.getById({ id: versionId });
 
   return _simulateCertificationScenario({
     locale,

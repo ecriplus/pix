@@ -1,27 +1,21 @@
 /**
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
- * @typedef {import('./index.js').VersionRepository} VersionRepository
+ * @typedef {import('./index.js').VersionApi} VersionApi
  */
 
 /**
  * @param {object} params
  * @param {number} params.certificationCourseId
  * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {VersionRepository} params.versionRepository
+ * @param {VersionApi} params.versionApi
  */
-const getCertificationCourse = async function ({
-  certificationCourseId,
-  certificationCourseRepository,
-  versionRepository,
-}) {
+export async function getCertificationCourse({ certificationCourseId, certificationCourseRepository, versionApi }) {
   const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
 
   if (certificationCourse.isV3()) {
-    const version = await versionRepository.getById(certificationCourse.versionId);
+    const version = await versionApi.getById({ id: certificationCourse.versionId });
     certificationCourse.setNumberOfChallenges(version.challengesConfiguration.maximumAssessmentLength);
   }
 
   return certificationCourse;
-};
-
-export { getCertificationCourse };
+}

@@ -37,7 +37,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         const certificationCourseId = 1234;
         const assessmentId = 5678;
 
-        const version = domainBuilder.certification.shared.buildVersion({
+        const version = domainBuilder.certification.configuration.buildVersion({
           startDate: new Date('2025-06-22'),
         });
         calibratedChallengeRepository.getAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);
@@ -78,7 +78,7 @@ describe('Certification | Evaluation | Unit | Domain | Services | calibrated cha
         // given
         const certificationCourseId = 1234;
         const assessmentId = 5678;
-        const version = domainBuilder.certification.shared.buildVersion({
+        const version = domainBuilder.certification.configuration.buildVersion({
           startDate: new Date('2025-06-22'),
         });
         calibratedChallengeRepository.getAllCalibratedChallenges.withArgs({ version }).resolves(challengeList);

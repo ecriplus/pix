@@ -33,7 +33,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const placementProfileService = {};
   const verifyCertificateCodeService = {};
   const userRepository = {};
-  const versionRepository = {};
+  const versionApi = {};
 
   const injectables = {
     assessmentRepository,
@@ -46,7 +46,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     placementProfileService,
     verifyCertificateCodeService,
     userRepository,
-    versionRepository,
+    versionApi,
   };
 
   beforeEach(function () {
@@ -66,7 +66,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     placementProfileService.getPlacementProfile = sinon.stub();
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
-    versionRepository.getByScopeAndReconciliationDate = sinon.stub();
+    versionApi.getByFrameworkAndDate = sinon.stub();
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
@@ -147,8 +147,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .withArgs({ sessionId: 1, userId: 2 })
               .resolves(candidateNotAuthorizedToStart);
 
-            const version = domainBuilder.certification.shared.buildVersion();
-            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+            const version = domainBuilder.certification.configuration.buildVersion();
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -188,8 +188,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .withArgs({ userId: 2, sessionId: 1 })
               .resolves(existingCertificationCourse);
 
-            const version = domainBuilder.certification.shared.buildVersion();
-            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+            const version = domainBuilder.certification.configuration.buildVersion();
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const error = await catchErr(retrieveLastOrCreateCertificationCourse)({
@@ -276,10 +276,10 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .withArgs({ userId: 2, sessionId: 1 })
               .resolves(existingCertificationCourse);
 
-            const version = domainBuilder.certification.shared.buildVersion({
+            const version = domainBuilder.certification.configuration.buildVersion({
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
-            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -336,10 +336,10 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               .withArgs({ userId: 2, sessionId: 1 })
               .resolves(existingCertificationCourse);
 
-            const version = domainBuilder.certification.shared.buildVersion({
+            const version = domainBuilder.certification.configuration.buildVersion({
               challengesConfiguration: { maximumAssessmentLength: 25, defaultCandidateCapacity: -3 },
             });
-            versionRepository.getByScopeAndReconciliationDate.resolves(version);
+            versionApi.getByFrameworkAndDate.resolves(version);
 
             // when
             const result = await retrieveLastOrCreateCertificationCourse({
@@ -401,8 +401,8 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 .onCall(1)
                 .resolves(certificationCourseCreatedMeanwhile);
 
-              const version = domainBuilder.certification.shared.buildVersion();
-              versionRepository.getByScopeAndReconciliationDate.resolves(version);
+              const version = domainBuilder.certification.configuration.buildVersion();
+              versionApi.getByFrameworkAndDate.resolves(version);
 
               // when
               const result = await retrieveLastOrCreateCertificationCourse({
@@ -431,10 +431,10 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
               user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
               userRepository.get.withArgs({ id: user.id }).resolves(user);
 
-              version = domainBuilder.certification.shared.buildVersion({
+              version = domainBuilder.certification.configuration.buildVersion({
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
               });
-              versionRepository.getByScopeAndReconciliationDate.resolves(version);
+              versionApi.getByFrameworkAndDate.resolves(version);
             });
 
             it('should return it with flag created marked as true with related resources', async function () {
@@ -444,7 +444,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 accessCode: 'accessCode',
               });
               evaluationSessionRepository.get.withArgs({ id: foundSession.id }).resolves(foundSession);
-              const certificationVersion = domainBuilder.certification.shared.buildVersion();
+              const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
               const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                 userId: user.id,
@@ -574,7 +574,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   version: 3,
                 });
                 evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
-                const certificationVersion = domainBuilder.certification.shared.buildVersion();
+                const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId,
@@ -664,7 +664,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                   accessCode: 'accessCode',
                 });
                 evaluationSessionRepository.get.withArgs({ id: 1 }).resolves(foundSession);
-                const certificationVersion = domainBuilder.certification.shared.buildVersion();
+                const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
                 const foundCertificationCandidate = domainBuilder.buildCertificationCandidate({
                   userId: 2,
@@ -744,7 +744,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
                     },
                   );
-                  const certificationVersion = domainBuilder.certification.shared.buildVersion();
+                  const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
                   const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                     id: 1,
@@ -910,7 +910,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                     const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                       key: ComplementaryCertificationKeys.CLEA,
                     });
-                    const certificationVersion = domainBuilder.certification.shared.buildVersion();
+                    const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
                     const certifiableBadgeAcquisition = domainBuilder.buildCertifiableBadgeAcquisition({
                       badgeKey: 'CLEA_BADGE_1',
@@ -1019,7 +1019,7 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                       const cleaCertification = domainBuilder.certification.shared.buildComplementaryCertification({
                         key: ComplementaryCertificationKeys.CLEA,
                       });
-                      const certificationVersion = domainBuilder.certification.shared.buildVersion();
+                      const certificationVersion = domainBuilder.certification.configuration.buildVersion();
 
                       const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created(
                         {

@@ -5,7 +5,7 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | calibrate-framework-version', function () {
-  let frameworkChallengesRepository, activeCalibratedChallengeRepository, versionsRepository, version;
+  let frameworkChallengesRepository, activeCalibratedChallengeRepository, versionRepository, version;
 
   beforeEach(async function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((lambda) => lambda());
@@ -23,7 +23,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
       getByScopeAndCalibrationId: sinon.stub(),
     };
 
-    versionsRepository = {
+    versionRepository = {
       getById: sinon.stub(),
     };
   });
@@ -52,7 +52,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         }),
       ];
 
-      versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
+      versionRepository.getById.withArgs({ id: versionId }).resolves(version);
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
@@ -69,7 +69,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         calibrationId,
         frameworkChallengesRepository,
         activeCalibratedChallengeRepository,
-        versionsRepository,
+        versionRepository,
       });
 
       // then
@@ -107,7 +107,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         }),
       ];
 
-      versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
+      versionRepository.getById.withArgs({ id: versionId }).resolves(version);
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
@@ -124,7 +124,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         calibrationId,
         frameworkChallengesRepository,
         activeCalibratedChallengeRepository,
-        versionsRepository,
+        versionRepository,
       });
 
       // then
@@ -159,7 +159,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         }),
       ];
 
-      versionsRepository.getById.withArgs({ id: versionId }).resolves(version);
+      versionRepository.getById.withArgs({ id: versionId }).resolves(version);
 
       frameworkChallengesRepository.getByVersionId.withArgs({ versionId }).resolves(challenges);
 
@@ -176,7 +176,7 @@ describe('Certification | Configuration | Unit | UseCase | calibrate-framework-v
         calibrationId,
         frameworkChallengesRepository,
         activeCalibratedChallengeRepository,
-        versionsRepository,
+        versionRepository,
       });
 
       // then
