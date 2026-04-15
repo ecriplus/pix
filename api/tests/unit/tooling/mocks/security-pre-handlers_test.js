@@ -1,8 +1,8 @@
-import { securityPreHandlers } from '../../../src/shared/application/security-pre-handlers.js';
-import { catchErrSync, expect, hFake, sinon } from '../../test-helper.js';
-import { getAdminRoleStub } from '../../tooling/security-pre-handlers-helpers.js';
+import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
+import { catchErrSync, expect, hFake, sinon } from '../../../test-helper.js';
+import { getAdminRoleStub } from '../../../tooling/mocks/security-pre-handlers.mock.js';
 
-describe('Unit | Tooling | SecurityPreHandlersHelpers', function () {
+describe('Unit | Tooling | Mocks | SecurityPreHandlersHelpers', function () {
   describe('#getAdminRoleStub', function () {
     it('should throw if role does not exist', function () {
       const error = catchErrSync(getAdminRoleStub)('WRONG_ROLE');

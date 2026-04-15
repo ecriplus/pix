@@ -1,6 +1,6 @@
 import { catchErr, expect } from '../../../test-helper.js';
 
-describe('Error test utils', function () {
+describe('Unit | Tooling | Test utils | Error', function () {
   describe('#catchErr', function () {
     it('returns the error thrown in the tested function', async function () {
       // given
