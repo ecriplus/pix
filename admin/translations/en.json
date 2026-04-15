@@ -907,13 +907,13 @@
         "required-fields-error": "Please fill in all required fields."
       },
       "head-information": {
-        "child-organization": "Parent:",
         "copy-id": "Copy ID",
+        "head-organization-tag": "Head of network",
         "network": "Network:",
         "notifications": {
           "logo-update-success": "The organization logo has been updated successfully."
         },
-        "parent-organization": "Parent organization"
+        "parent-organization-tag": "Parent:"
       },
       "information-section-view": {
         "administration-team": "Administration team",
