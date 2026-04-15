@@ -41,6 +41,7 @@ import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
+import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
@@ -208,52 +209,6 @@ function generateValidRequestAuthorizationHeaderForApplication(clientId = 'clien
 function generateIdTokenForExternalUser(externalUser) {
   return UserReconciliationSamlIdToken.generate(externalUser);
 }
-
-// Hapi
-const hFake = {
-  response(source) {
-    return {
-      statusCode: 200,
-      source,
-      code(c) {
-        this.statusCode = c;
-        return this;
-      },
-      headers: {},
-      header(key, value) {
-        this.headers[key] = value;
-        return this;
-      },
-      type(type) {
-        this.contentType = type;
-        return this;
-      },
-      takeover() {
-        this.isTakeOver = true;
-        return this;
-      },
-      created() {
-        this.statusCode = 201;
-        return this;
-      },
-    };
-  },
-  authenticated(data) {
-    return {
-      authenticated: data,
-    };
-  },
-  redirect(location) {
-    return {
-      statusCode: 302,
-      headers: { location },
-    };
-  },
-  file(path, options) {
-    return this.response({ path, options });
-  },
-  continue: Symbol('continue'),
-};
 
 function catchErr(promiseFn, ctx) {
   return async (...args) => {
