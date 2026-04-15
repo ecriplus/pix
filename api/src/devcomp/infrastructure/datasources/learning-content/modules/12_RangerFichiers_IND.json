@@ -861,7 +861,7 @@
               "element": {
                 "id": "4ef0651e-e59c-4893-9fa2-d82d8944653a",
                 "type": "qrocm",
-                "instruction": "<p>Quel est le nom de l'autre fichier est rangé au même endroit que « Baguette ».</p>",
+                "instruction": "<p>Quel est le nom de l'autre fichier rangé au même endroit que « Baguette ».</p>",
                 "proposals": [
                   {
                     "type": "text",
