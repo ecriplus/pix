@@ -1,7 +1,5 @@
 import 'dayjs/locale/fr.js';
 
-import querystring from 'node:querystring';
-
 import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
@@ -20,8 +18,6 @@ import { disconnect, knex } from '../db/knex-database-connection.js';
 import { createServer } from '../server.js';
 import { createMaddoServer } from '../server.maddo.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
-import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
-import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
@@ -42,8 +38,15 @@ import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
+import { catchErr, catchErrSync, preventStubsToBeCalledUnexpectedly } from './tooling/test-utils/error.js';
 import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
+import {
+  generateAuthenticatedUserRequestHeaders,
+  generateInjectOptions,
+  generateValidRequestAuthorizationHeaderForApplication,
+} from './tooling/test-utils/http-server.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
+import { wait, waitForStreamFinalizationToBeDone } from './tooling/test-utils/wait.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -64,19 +67,19 @@ const databaseBuilder = await DatabaseBuilder.create({
     increaseCurrentTestTimeout(2000);
   },
 });
+// TEMPORARY WORKAROUND
+databaseBuilder.factory.learningContent.injectNock(nock);
 
+// Init Datamart builders
 const datamartBuilder = await DatamartBuilder.create({
   knex: datamartKnex,
 });
 
-// TEMPORARY WORKAROUND
-databaseBuilder.factory.learningContent.injectNock(nock);
-
-nock.disableNetConnect();
-nock.enableNetConnect('localhost:9090');
-
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
+  nock.disableNetConnect();
+  nock.enableNetConnect('localhost:9090'); // Unmock S3 storage
+
   try {
     await JobClient.instance.initialize();
   } catch {
@@ -117,141 +120,12 @@ after(async function () {
   }
   return await disconnect();
 });
-
 /* eslint-enable mocha/no-top-level-hooks */
-
-/**
- * For acceptance tests. To be used as `const options = generateInjectOptions; await server.inject(options);`
- *
- * @param {Object} params
- * @param {string} params.url
- * @param {string} params.method
- * @param {Object} [params.payload]
- * @param {string} [params.locale]
- * @param {string} [params.audience]
- * @param {Object} [params.authorizationData] - data to generate an AccessToken, for example: { userId: 1234 }
- * @param {boolean} [params.urlEncodePayload]
- * @returns {Object} options
- */
-function generateInjectOptions({ url, method, payload, locale, audience, authorizationData, urlEncodePayload }) {
-  const options = {
-    url,
-    method,
-    headers: {
-      // cf. cookies = req.headers.cookie in @hapi/hapi/lib/route.js +369
-      ...(locale && { cookie: `locale=${locale}` }),
-      ...(audience && generateForwardedHeaders(audience)),
-    },
-  };
-
-  if (payload) {
-    if (urlEncodePayload) {
-      options.payload = querystring.stringify(payload);
-      options.headers['content-type'] = 'application/x-www-form-urlencoded';
-    } else {
-      options.payload = payload;
-    }
-  }
-
-  if (authorizationData) {
-    if (!audience) {
-      throw new Error('You must provide an audience parameter when providing authorizationData.');
-    }
-
-    const accessToken = UserAccessToken.generateUserToken({ ...authorizationData, audience }).accessToken;
-    options.headers.authorization = `Bearer ${accessToken}`;
-  }
-
-  return options;
-}
-
-/**
- * @param {Object} params
- * @param {number} params.userId
- * @param {string} params.source
- * @param {string} params.audience - an origin URL, for example: https://app.pix.org
- * @returns {Object} headers
- */
-function generateAuthenticatedUserRequestHeaders({
-  userId = 1234,
-  source = 'pix',
-  audience = 'https://app.pix.org',
-} = {}) {
-  const accessToken = UserAccessToken.generateUserToken({ userId, source, audience }).accessToken;
-
-  return {
-    ...generateForwardedHeaders(audience),
-    authorization: `Bearer ${accessToken}`,
-  };
-}
-
-/**
- * Generates HTTP X-Forwarded-Proto (XFP) headers.
- *
- * @param {string} audience - an origin URL, for example: https://app.pix.org
- * @returns {Object} headers
- */
-function generateForwardedHeaders(audience) {
-  const url = new URL(audience);
-  const protoHeader = url.protocol.slice(0, -1);
-  const hostHeader = url.hostname;
-
-  return { 'x-forwarded-proto': protoHeader, 'x-forwarded-host': hostHeader };
-}
-
-function generateValidRequestAuthorizationHeaderForApplication(clientId = 'client-id-name', source, scope = '') {
-  const accessToken = ApplicationAccessToken.generate({ clientId, source, scope });
-  return `Bearer ${accessToken}`;
-}
-
-function catchErr(promiseFn, ctx) {
-  return async (...args) => {
-    try {
-      await promiseFn.call(ctx, ...args);
-    } catch (err) {
-      return err;
-    }
-    throw new Error('Expected an error, but none was thrown.');
-  };
-}
-
-function catchErrSync(fn, ctx) {
-  return (...args) => {
-    try {
-      fn.call(ctx, ...args);
-    } catch (err) {
-      return err;
-    }
-    throw new Error('Expected an error, but none was thrown.');
-  };
-}
 
 async function mockLearningContent(learningContent) {
   const scope = databaseBuilder.factory.learningContent.build(learningContent);
   await databaseBuilder.commit();
   return scope;
-}
-
-const preventStubsToBeCalledUnexpectedly = (stubs) => {
-  for (const stub of stubs) {
-    stub.rejects(
-      new Error(
-        `Unexpected call to stub "${stub.toString()}" (whether because it should not have been called OR called with wrong arguments)`,
-      ),
-    );
-  }
-};
-
-function wait(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
-}
-
-function waitForStreamFinalizationToBeDone() {
-  return wait(300);
 }
 
 // eslint-disable-next-line mocha/no-exports
