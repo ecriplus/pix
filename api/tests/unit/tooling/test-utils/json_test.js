@@ -1,7 +1,7 @@
 import { expect } from '../../../test-helper.js';
 import { parseNDJSON } from '../../../tooling/test-utils/json.js';
 
-describe('JSON test utils', function () {
+describe('Unit | Tooling | Test utils | JSON', function () {
   describe('parseNDJSON', function () {
     it('parses Newline Delimiter JSON data', function () {
       // given
