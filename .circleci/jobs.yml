@@ -92,7 +92,7 @@ executors:
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - initialBuckets=pix-import-test
+          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
     resource_class: small
   node-redis-postgres-s3-docker-medium:
     parameters:
@@ -109,7 +109,7 @@ executors:
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - initialBuckets=pix-import-test
+          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
     resource_class: medium
   node-redis-postgres-s3-docker-large:
     parameters:
@@ -126,7 +126,7 @@ executors:
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - initialBuckets=pix-import-test
+          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
     resource_class: large
   node-browsers-docker:
     parameters:
