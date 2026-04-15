@@ -1,7 +1,6 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
-
+import sinon from 'sinon';
 module('Unit | Adapters | AvailableCampaignParticipation', function (hooks) {
   setupTest(hooks);
 
@@ -9,7 +8,8 @@ module('Unit | Adapters | AvailableCampaignParticipation', function (hooks) {
 
   hooks.beforeEach(function () {
     adapter = this.owner.lookup('adapter:available-campaign-participation');
-    const ajaxStub = () => resolve();
+    const ajaxStub = sinon.stub().resolves();
+
     adapter.ajax = ajaxStub;
   });
 

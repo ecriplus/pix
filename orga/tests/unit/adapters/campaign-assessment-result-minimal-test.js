@@ -1,6 +1,6 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { resolve } from 'rsvp';
+import sinon from 'sinon';
 
 module('Unit | Adapters | CampaignAssessmentResultMinimal', function (hooks) {
   setupTest(hooks);
@@ -9,7 +9,7 @@ module('Unit | Adapters | CampaignAssessmentResultMinimal', function (hooks) {
 
   hooks.beforeEach(function () {
     adapter = this.owner.lookup('adapter:campaign-assessment-result-minimal');
-    const ajaxStub = () => resolve();
+    const ajaxStub = sinon.stub().resolves();
     adapter.ajax = ajaxStub;
   });
 
