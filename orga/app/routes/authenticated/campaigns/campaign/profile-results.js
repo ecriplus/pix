@@ -25,6 +25,7 @@ export default class ProfilesRoute extends Route {
     certificability: {
       refreshModel: true,
     },
+    participantExternalId: { refreshModel: true },
   };
 
   @action
@@ -45,27 +46,24 @@ export default class ProfilesRoute extends Route {
 
   async model(params) {
     const campaign = this.modelFor('authenticated.campaigns.campaign');
-    const profiles = await this.fetchProfileSummaries({ campaignId: campaign.id, ...params });
-    return {
-      campaign,
-      profiles,
-    };
-  }
-
-  fetchProfileSummaries(params) {
-    return this.store.query('campaign-profiles-collection-participation-summary', {
+    const profiles = await this.store.query('campaign-profiles-collection-participation-summary', {
       filter: {
-        campaignId: params.campaignId,
+        campaignId: campaign.id,
         divisions: params.divisions,
         groups: params.groups,
         search: params.search,
         certificability: params.certificability,
+        participantExternalId: params.participantExternalId,
       },
       page: {
         number: params.pageNumber,
         size: params.pageSize,
       },
     });
+    return {
+      campaign,
+      profiles,
+    };
   }
 
   resetController(controller, isExiting) {

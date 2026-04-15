@@ -10,6 +10,7 @@ export default class ProfilesController extends Controller {
   @tracked groups = [];
   @tracked search = null;
   @tracked certificability = null;
+  @tracked participantExternalId = null;
 
   @action
   goToProfilePage(campaignId, participation) {
@@ -29,5 +30,6 @@ export default class ProfilesController extends Controller {
     this.groups = [];
     this.search = null;
     this.certificability = null;
+    this.participantExternalId = null;
   }
 }
