@@ -43,6 +43,7 @@ const serialize = function (juryCertification, { translate }) {
       'certificationIssueReports',
       'version',
       'certificationFramework',
+      'lastAnswerAt',
     ],
 
     commonComplementaryCertificationCourseResult: {

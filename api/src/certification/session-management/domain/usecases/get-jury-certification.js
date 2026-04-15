@@ -1,5 +1,3 @@
-const getJuryCertification = async function ({ certificationCourseId, juryCertificationRepository }) {
+export async function getJuryCertification ({ certificationCourseId, juryCertificationRepository }) {
   return juryCertificationRepository.get({ certificationCourseId });
 };
-
-export { getJuryCertification };
