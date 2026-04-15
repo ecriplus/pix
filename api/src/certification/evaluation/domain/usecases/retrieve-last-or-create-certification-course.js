@@ -62,7 +62,7 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   const certificationCandidate = await sharedCertificationCandidateRepository.getBySessionIdAndUserId({
     userId,
     sessionId,
-  });
+  }); // normal candidate repo, voir où c'est utilisé
 
   _validateUserIsCertificationCandidate(certificationCandidate);
 

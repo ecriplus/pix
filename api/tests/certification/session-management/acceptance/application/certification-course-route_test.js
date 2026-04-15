@@ -45,7 +45,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         server = await createServer();
         const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
 
-        databaseBuilder.factory.buildCertificationVersion({
+        const versionId = databaseBuilder.factory.buildCertificationVersion({
           scope: 'CORE',
           startDate: new Date('2019-01-01'),
           expirationDate: null,
@@ -53,7 +53,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
             maximumAssessmentLength: 10,
             defaultCandidateCapacity: -3,
           },
-        });
+        }).id;
 
         databaseBuilder.factory.buildCertificationCpfCountry({
           code: '99100',
@@ -72,6 +72,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           completedAt: new Date('2017-12-21T15:48:38Z'),
           sex: 'F',
           candidate: candidate.id,
+          versionId,
         });
         certificationCourseId = certificationCourse.id;
 
@@ -213,9 +214,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           version: 3,
         });
 
-        databaseBuilder.factory.buildCertificationVersion({
+        const versionId = databaseBuilder.factory.buildCertificationVersion({
           startDate: new Date('2018-12-01T01:02:03Z'),
-        });
+        }).id;
 
         const candidateId = databaseBuilder.factory.buildCertificationCandidate({
           sessionId: session.id,
@@ -227,6 +228,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           userId,
           version: 3,
           candidateId,
+          versionId,
         });
 
         const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
@@ -272,7 +274,9 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     it('should create a new unrejected AssessmentResult', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser.withRoleSuperAdmin().id;
-
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
+        minimumAnswersRequiredToValidateACertification: 1,
+      }).id;
       const session = databaseBuilder.factory.buildSession({
         finalizedAt: new Date('2018-12-01T01:02:03Z'),
         version: AlgorithmEngineVersion.V3,
@@ -289,9 +293,8 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         isRejectedForFraud: true,
         version: AlgorithmEngineVersion.V3,
         candidateId,
+        versionId,
       });
-
-      databaseBuilder.factory.buildCertificationVersion({ minimumAnswersRequiredToValidateACertification: 1 });
 
       const { assessment, assessmentResult } = await createSuccessfulCertificationCourse({
         candidateId,
@@ -403,7 +406,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
     let server;
 
     beforeEach(async function () {
-      databaseBuilder.factory.buildCertificationVersion({
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
         scope: 'CORE',
         startDate: new Date('2020-01-01'),
         expirationDate: null,
@@ -411,7 +414,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           maximumAssessmentLength: 10,
           defaultCandidateCapacity: -3,
         }),
-      });
+      }).id;
 
       const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
       const session = databaseBuilder.factory.buildSession();
@@ -425,6 +428,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         sessionId: session.id,
         userId: superAdmin.id,
         candidateId,
+        versionId,
       });
       ({ certificationChallenges, assessmentResult } = await createSuccessfulCertificationCourse({
         candidateId,

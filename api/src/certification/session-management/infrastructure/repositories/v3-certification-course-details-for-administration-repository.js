@@ -5,7 +5,7 @@ import { V3CertificationChallengeForAdministration } from '../../domain/models/V
 import { V3CertificationChallengeLiveAlertForAdministration } from '../../domain/models/V3CertificationChallengeLiveAlertForAdministration.js';
 import { V3CertificationCourseDetailsForAdministration } from '../../domain/models/V3CertificationCourseDetailsForAdministration.js';
 
-const getV3DetailsByCertificationCourseId = async function ({ certificationCourseId }) {
+export async function getV3DetailsByCertificationCourseId({ certificationCourseId }) {
   const knexConn = DomainTransaction.getConnection();
   const liveAlertsDTO = await knexConn('certification-challenge-live-alerts')
     .select({
@@ -41,6 +41,7 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
       eduV3ExternalJuryResult: 'assessment-results.eduV3ExternalJuryResult',
       endedAt: 'certification-courses.endedAt',
       certificationFramework: 'certification-courses.framework',
+      versionId: 'certification-courses.versionId',
     })
     .from('certification-courses')
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
@@ -81,7 +82,7 @@ const getV3DetailsByCertificationCourseId = async function ({ certificationCours
     .orderBy('certification-challenges.createdAt', 'asc');
 
   return _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO });
-};
+}
 
 function _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certificationCourseDTO }) {
   const certificationChallengesForAdministration = certificationChallengesDetailsDTO.map(
@@ -104,8 +105,6 @@ function _toDomain({ certificationChallengesDetailsDTO, liveAlertsDTO, certifica
     certificationChallengesForAdministration,
   });
 }
-
-export { getV3DetailsByCertificationCourseId };
 
 function _certificationChallengeLiveAlertToDomain({ liveAlertsDTO, certificationChallengeDetailsDTO }) {
   const certificationChallengeLiveAlert = liveAlertsDTO.find(

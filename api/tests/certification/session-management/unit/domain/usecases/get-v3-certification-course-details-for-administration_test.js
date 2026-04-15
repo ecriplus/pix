@@ -13,8 +13,6 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
     const skillName = 'skillName';
     const competenceName = 'competenceName';
     const competenceIndex = '1.2';
-    const reconciledAt = new Date(2024, 1, 15);
-    const scope = 'scope';
     const numberOfChallenges = 64;
 
     const v3CertificationCourseDetailsForAdministrationRepository = {
@@ -25,16 +23,8 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
       list: sinon.stub(),
     };
 
-    const certificationCandidateRepository = {
-      getByCertificationCourseId: sinon.stub(),
-    };
-
-    const sharedCertificationCourseRepository = {
-      getCertificationScope: sinon.stub(),
-    };
-
     const evaluationVersionRepository = {
-      getByScopeAndReconciliationDate: sinon.stub(),
+      getById: sinon.stub(),
     };
 
     const competences = [
@@ -57,10 +47,7 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
       certificationCourseId,
       numberOfChallenges: null,
       certificationChallengesForAdministration: [challengeForAdministration],
-    });
-
-    const candidate = domainBuilder.buildCertificationCandidate({
-      reconciledAt,
+      versionId: 123,
     });
 
     const version = {
@@ -75,23 +62,13 @@ describe('Unit | UseCase | get-certification-course-details-for-administration',
 
     competenceRepository.list.resolves(competences);
 
-    certificationCandidateRepository.getByCertificationCourseId.withArgs({ certificationCourseId }).resolves(candidate);
-
-    sharedCertificationCourseRepository.getCertificationScope
-      .withArgs({ courseId: certificationCourseId })
-      .resolves(scope);
-
-    evaluationVersionRepository.getByScopeAndReconciliationDate
-      .withArgs({ scope, reconciliationDate: reconciledAt })
-      .resolves(version);
+    evaluationVersionRepository.getById.withArgs(123).resolves(version);
 
     // when
     const details = await getV3CertificationCourseDetailsForAdministration({
       certificationCourseId,
       v3CertificationCourseDetailsForAdministrationRepository,
       competenceRepository,
-      certificationCandidateRepository,
-      sharedCertificationCourseRepository,
       evaluationVersionRepository,
     });
 

@@ -17,6 +17,7 @@ export const buildAssessmentSheet = function ({
   certificationCourseUpdatedAt = new Date(),
   lastAnswerAt = new Date(),
   lastQuestionDate = new Date(),
+  versionId = 4,
   answers = [],
 } = {}) {
   return new AssessmentSheet({
@@ -32,6 +33,7 @@ export const buildAssessmentSheet = function ({
     certificationCourseUpdatedAt,
     lastAnswerAt,
     lastQuestionDate,
+    versionId,
     answers,
   });
 };

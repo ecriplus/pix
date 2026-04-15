@@ -169,6 +169,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         createdAt: limitDate,
         version: AlgorithmEngineVersion.V3,
         candidateId,
+        versionId: certificationVersionId,
       }).id;
 
       completedCertificationAssessmentId = databaseBuilder.factory.buildAssessment({
@@ -390,6 +391,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         createdAt: limitDate,
         version: AlgorithmEngineVersion.V3,
         candidateId,
+        versionId: certificationVersionId,
       }).id;
 
       complementaryCertificationCourseId = databaseBuilder.factory.buildComplementaryCertificationCourse({

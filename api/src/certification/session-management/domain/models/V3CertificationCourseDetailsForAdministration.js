@@ -14,6 +14,7 @@ export class V3CertificationCourseDetailsForAdministration {
     eduV3ExternalJuryResult,
     numberOfChallenges,
     certificationFramework,
+    versionId,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.isRejectedForFraud = isRejectedForFraud;
@@ -29,6 +30,7 @@ export class V3CertificationCourseDetailsForAdministration {
     this.numberOfChallenges = numberOfChallenges;
     this.endedAt = endedAt;
     this.certificationFramework = certificationFramework;
+    this.versionId = versionId;
   }
 
   get reachedResultKey() {

@@ -30,6 +30,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
 
       const userId = databaseBuilder.factory.buildUser().id;
       const sessionId = databaseBuilder.factory.buildSession().id;
+      const versionId = databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.PIX_PLUS_DROIT }).id;
 
       databaseBuilder.factory.buildCertificationCourse({
         id: certificationCourseId,
@@ -40,6 +41,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         userId,
         sessionId,
         framework: certificationFramework,
+        versionId,
       });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
@@ -58,8 +60,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         assessmentResultStatus,
         createdAt: new Date('2020-01-01'),
       });
-
-      const versionId = databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.PIX_PLUS_DROIT }).id;
 
       const lastAssessmentResultId = databaseBuilder.factory.buildAssessmentResult({
         pixScore,
@@ -114,6 +114,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         numberOfChallenges: null,
         certificationFramework,
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
+        versionId,
       });
 
       expect(certificationChallenges).to.deep.equal(expectedCertificationCourseDetails);
@@ -127,7 +128,8 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const thirdChallengeId = 'recCHAL123';
       const assessmentId = 78;
 
-      databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
+      const versionId = databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.PIX_PLUS_DROIT }).id;
+      databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId, versionId });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
         challengeId: firstChallengeId,
@@ -241,6 +243,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
           validatedLiveAlert: secondValidatedLiveAlert,
           competenceId: certificationChallenges.certificationChallengesForAdministration[1].competenceId,
           skillName: certificationChallenges.certificationChallengesForAdministration[1].skillName,
+          versionId,
         });
 
       const thirdCertificationChallengeForAdministration = domainBuilder.buildV3CertificationChallengeForAdministration(
@@ -249,6 +252,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
           validatedLiveAlert: thirdValidatedLiveAlert,
           competenceId: certificationChallenges.certificationChallengesForAdministration[2].competenceId,
           skillName: certificationChallenges.certificationChallengesForAdministration[2].skillName,
+          versionId,
         },
       );
 
@@ -268,7 +272,8 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         const certificationCourseId = 123;
         const assessmentId = 78;
 
-        databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId });
+        const versionId = databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.PIX_PLUS_DROIT }).id;
+        databaseBuilder.factory.buildCertificationCourse({ id: certificationCourseId, versionId });
         databaseBuilder.factory.buildAssessment({
           id: assessmentId,
           certificationCourseId,
