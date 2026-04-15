@@ -22,7 +22,6 @@ import { createMaddoServer } from '../server.maddo.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
-import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
@@ -206,10 +205,6 @@ function generateValidRequestAuthorizationHeaderForApplication(clientId = 'clien
   return `Bearer ${accessToken}`;
 }
 
-function generateIdTokenForExternalUser(externalUser) {
-  return UserReconciliationSamlIdToken.generate(externalUser);
-}
-
 function catchErr(promiseFn, ctx) {
   return async (...args) => {
     try {
@@ -275,7 +270,6 @@ export {
   EMPTY_BLANK_AND_NULL,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
