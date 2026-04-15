@@ -1,9 +1,8 @@
-import { glob, readFile, writeFile } from 'node:fs/promises';
+import { glob, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { expect, test as base } from '@playwright/test';
 import { parse } from 'csv-parse/sync';
-import * as fs from 'fs/promises';
 import { PDFParse } from 'pdf-parse';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
@@ -35,9 +34,10 @@ class SnapshotHandler {
     const resultDir = path.resolve(import.meta.dirname, '../snapshots');
     const resultFilePath = path.join(resultDir, fileName as string);
     if (this.shouldUpdateSnapshots) {
-      await fs.writeFile(resultFilePath, JSON.stringify(this.results));
+      await mkdir(path.dirname(resultFilePath), { recursive: true });
+      await writeFile(resultFilePath, JSON.stringify(this.results));
     } else {
-      const data = await fs.readFile(resultFilePath, { encoding: 'utf-8' });
+      const data = await readFile(resultFilePath, { encoding: 'utf-8' });
       const expectedResults = JSON.parse(data);
       expect(this.results.length).toBe(expectedResults.length);
       for (let i = 0; i < this.results.length; ++i) {
@@ -52,6 +52,7 @@ class SnapshotHandler {
     const currentPNGs = await this.#convertPDFIntoPNGs(pdfBuffer);
     if (this.shouldUpdateSnapshots) {
       for (const [index, currentPNG] of currentPNGs.entries()) {
+        await mkdir(path.dirname(resultFilePath), { recursive: true });
         await writeFile(resultFilePath + `_page${index}.png`, currentPNG);
       }
     } else {

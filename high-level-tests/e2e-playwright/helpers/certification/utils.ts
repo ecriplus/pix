@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import path from 'path';
 
 import { CertificationInformationPage, CertificationSessionPage } from '../../pages/pix-admin/index.ts';
 
@@ -75,4 +76,8 @@ export async function checkCertificationDetailsAndExpectSuccess(
   } else {
     expect(certificationDetails.abortReason).not.toBeDefined();
   }
+}
+
+export function getTestRef(filePath: string) {
+  return path.basename(filePath).split('.')[0];
 }

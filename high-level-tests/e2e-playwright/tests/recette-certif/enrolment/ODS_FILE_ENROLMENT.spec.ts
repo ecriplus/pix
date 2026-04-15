@@ -2,209 +2,229 @@ import path from 'node:path';
 import url from 'node:url';
 
 import { expect, test } from '../../../fixtures/certification/index.ts';
-import { checkSessionInformationAndExpectSuccess } from '../../../helpers/certification/utils.ts';
+import { checkSessionInformationAndExpectSuccess, getTestRef } from '../../../helpers/certification/utils.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
 import { SessionListPage, SessionManagementPage } from '../../../pages/pix-certif/index.ts';
-
-const testRef = 'ODS_FILE_ENROLMENT';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-test(`${testRef} - Enroll candidates through importing ODS file`, async ({
-  pixCertifProPage,
-  pixAdminRoleCertifPage,
-  getCertifiableUserData,
-  pixAppCertifiableUserPage,
-  passManyCertificationExams,
-}) => {
-  test.slow();
-  const userDataCoreSubscription = await getCertifiableUserData(0);
-  const userDataCleaSubscription = await getCertifiableUserData(1);
-  const userDataEduSubscription = await getCertifiableUserData(2);
-  await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
+test(
+  `${getTestRef(import.meta.url)}`,
+  {
+    tag: ['@enrolment'],
+    annotation: [
+      {
+        type: 'scenario',
+        description: `Enrolling 3 candidates through ODS file.
+         - First import attempt fails : dupes in file
+         - Second import attempt succeeds
+         - Enrolled frameworks : CORE, CLEA and EDU 1ER DEGRE
+         - All candidates enter the test
+         - All candidates are allowed to start the test
+         - All answer one challenge only
+         - All are ended by invigilator
+         - Session finalized
+         - Checking PixAdmin screens`,
+      },
+    ],
+  },
+  async ({
+    pixCertifProPage,
+    pixAdminRoleCertifPage,
+    getCertifiableUserData,
+    pixAppCertifiableUserPage,
+    passManyCertificationExams,
+    testRef,
+  }) => {
+    test.slow();
+    const userDataCoreSubscription = await getCertifiableUserData(0);
+    const userDataCleaSubscription = await getCertifiableUserData(1);
+    const userDataEduSubscription = await getCertifiableUserData(2);
+    await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
-  let sessionNumber = '',
-    accessCode = '',
-    invigilatorCode = '';
-  const sessionManagementPage = await test.step('Create session', async () => {
-    const sessionListPage = new SessionListPage(pixCertifProPage);
-    const sessionCreationPage = await sessionListPage.goToCreateSession();
-    const sessionManagementPage = await sessionCreationPage.createSession({
-      address: `address ${testRef}`,
-      room: `room ${testRef}`,
-      examiner: `examiner ${testRef}`,
-      hour: '09',
-      minute: '05',
-    });
-
-    const sessionData = await sessionManagementPage.getSessionData();
-    sessionNumber = sessionData.sessionNumber;
-    accessCode = sessionData.accessCode;
-    invigilatorCode = sessionData.invigilatorCode;
-    return sessionManagementPage;
-  });
-
-  await test.step('First import ODS file with duplicates', async () => {
-    await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_DUPES.ods`));
-    await pixCertifProPage
-      .getByText(
-        'Aucun candidat n’a été importé.\n' +
-          'Ligne 15 : Veuillez supprimer le(s) doublon(s) de candidats avant de réimporter.',
-      )
-      .waitFor({ state: 'visible' });
-    await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
-    await expect(pixCertifProPage.getByText('Liste des candidats (0)')).toBeVisible();
-  });
-
-  await test.step('Then import valid ODS file', async () => {
-    await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_OK.ods`));
-    await pixCertifProPage
-      .getByText('La liste des candidats a été importée avec succès.')
-      .waitFor({ state: 'visible' });
-    await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
-  });
-
-  await test.step('Check all enrolled candidates', async () => {
-    const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
-    expect(enrolledCandidatesSoFar).toHaveLength(3);
-    const coreEnrolled = enrolledCandidatesSoFar.find(
-      (enrolled) => enrolled['Prénom'] === userDataCoreSubscription.firstName,
-    );
-    expect(coreEnrolled).toMatchObject({
-      'Nom de naissance': userDataCoreSubscription.lastName,
-      Prénom: userDataCoreSubscription.firstName,
-      'Date de naissance':
-        userDataCoreSubscription.birthDay +
-        '/' +
-        userDataCoreSubscription.birthMonth +
-        '/' +
-        userDataCoreSubscription.birthYear,
-      'Certification sélectionnée': 'Certification Pix',
-    });
-    const cleaEnrolled = enrolledCandidatesSoFar.find(
-      (enrolled) => enrolled['Prénom'] === userDataCleaSubscription.firstName,
-    );
-    expect(cleaEnrolled).toMatchObject({
-      'Nom de naissance': userDataCleaSubscription.lastName,
-      Prénom: userDataCleaSubscription.firstName,
-      'Date de naissance':
-        userDataCleaSubscription.birthDay +
-        '/' +
-        userDataCleaSubscription.birthMonth +
-        '/' +
-        userDataCleaSubscription.birthYear,
-      'Certification sélectionnée': 'Double Certification Pix-CléA Numérique',
-    });
-    const eduEnrolled = enrolledCandidatesSoFar.find(
-      (enrolled) => enrolled['Prénom'] === userDataEduSubscription.firstName,
-    );
-    expect(eduEnrolled).toMatchObject({
-      'Nom de naissance': userDataEduSubscription.lastName,
-      Prénom: userDataEduSubscription.firstName,
-      'Date de naissance':
-        userDataEduSubscription.birthDay +
-        '/' +
-        userDataEduSubscription.birthMonth +
-        '/' +
-        userDataEduSubscription.birthYear,
-      'Certification sélectionnée': 'Pix+ Édu 1er degré',
-    });
-  });
-
-  const pixAppCorePage = await pixAppCertifiableUserPage(userDataCoreSubscription);
-  const pixAppCleaPage = await pixAppCertifiableUserPage(userDataCleaSubscription);
-  const pixAppEduPage = await pixAppCertifiableUserPage(userDataEduSubscription);
-  await test.step('all candidates pass the exam', async () => {
-    await passManyCertificationExams({
-      examsData: [
-        {
-          certifiableUserData: userDataCoreSubscription,
-          rightWrongAnswersSequence: [true],
-          pixAppPage: pixAppCorePage,
-        },
-        {
-          certifiableUserData: userDataCleaSubscription,
-          rightWrongAnswersSequence: [true],
-          pixAppPage: pixAppCleaPage,
-        },
-        {
-          certifiableUserData: userDataEduSubscription,
-          rightWrongAnswersSequence: [true],
-          pixAppPage: pixAppEduPage,
-        },
-      ],
-      sessionNumber,
-      accessCode,
-      invigilatorCode,
-    });
-  });
-
-  await test.step('Finalization by marking technical issues on all candidates', async () => {
-    const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
-    const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
-    await expect(pixCertifProPage.getByText(userDataCoreSubscription.firstName)).toBeVisible();
-    await sessionFinalizationPage.markTechnicalIssueFor(userDataCoreSubscription.lastName);
-    await expect(pixCertifProPage.getByText(userDataCleaSubscription.firstName)).toBeVisible();
-    await sessionFinalizationPage.markTechnicalIssueFor(userDataCleaSubscription.lastName);
-    await expect(pixCertifProPage.getByText(userDataEduSubscription.firstName)).toBeVisible();
-    await sessionFinalizationPage.markTechnicalIssueFor(userDataEduSubscription.lastName);
-
-    await sessionFinalizationPage.finalizeSession();
-  });
-
-  const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
-  await test.step('Check candidates did pass what they enrolled for', async () => {
-    const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-    const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
-
-    await test.step('Check session information', async () => {
-      await checkSessionInformationAndExpectSuccess(sessionPage, {
+    let sessionNumber = '',
+      accessCode = '',
+      invigilatorCode = '';
+    const sessionManagementPage = await test.step('Create session', async () => {
+      const sessionListPage = new SessionListPage(pixCertifProPage);
+      const sessionCreationPage = await sessionListPage.goToCreateSession();
+      const sessionManagementPage = await sessionCreationPage.createSession({
         address: `address ${testRef}`,
         room: `room ${testRef}`,
-        invigilatorName: `examiner ${testRef}`,
-        status: 'Finalisée',
-        nbStartedCertifications: 0,
-        nbIssueReportsUnsolved: 0,
-        nbIssueReports: 0,
-        nbCertificationsInError: 0,
+        examiner: `examiner ${testRef}`,
+        hour: '09',
+        minute: '05',
+      });
+
+      const sessionData = await sessionManagementPage.getSessionData();
+      sessionNumber = sessionData.sessionNumber;
+      accessCode = sessionData.accessCode;
+      invigilatorCode = sessionData.invigilatorCode;
+      return sessionManagementPage;
+    });
+
+    await test.step('First import ODS file with duplicates', async () => {
+      await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_DUPES.ods`));
+      await pixCertifProPage
+        .getByText(
+          'Aucun candidat n’a été importé.\n' +
+            'Ligne 15 : Veuillez supprimer le(s) doublon(s) de candidats avant de réimporter.',
+        )
+        .waitFor({ state: 'visible' });
+      await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
+      await expect(pixCertifProPage.getByText('Liste des candidats (0)')).toBeVisible();
+    });
+
+    await test.step('Then import valid ODS file', async () => {
+      await sessionManagementPage.importOdsFile(path.join(__dirname, `${testRef}_OK.ods`));
+      await pixCertifProPage
+        .getByText('La liste des candidats a été importée avec succès.')
+        .waitFor({ state: 'visible' });
+      await pixCertifProPage.getByRole('button', { name: 'Fermer la notification' }).click();
+    });
+
+    await test.step('Check all enrolled candidates', async () => {
+      const enrolledCandidatesSoFar = await sessionManagementPage.getEnrolledCandidatesData();
+      expect(enrolledCandidatesSoFar).toHaveLength(3);
+      const coreEnrolled = enrolledCandidatesSoFar.find(
+        (enrolled) => enrolled['Prénom'] === userDataCoreSubscription.firstName,
+      );
+      expect(coreEnrolled).toMatchObject({
+        'Nom de naissance': userDataCoreSubscription.lastName,
+        Prénom: userDataCoreSubscription.firstName,
+        'Date de naissance':
+          userDataCoreSubscription.birthDay +
+          '/' +
+          userDataCoreSubscription.birthMonth +
+          '/' +
+          userDataCoreSubscription.birthYear,
+        'Certification sélectionnée': 'Certification Pix',
+      });
+      const cleaEnrolled = enrolledCandidatesSoFar.find(
+        (enrolled) => enrolled['Prénom'] === userDataCleaSubscription.firstName,
+      );
+      expect(cleaEnrolled).toMatchObject({
+        'Nom de naissance': userDataCleaSubscription.lastName,
+        Prénom: userDataCleaSubscription.firstName,
+        'Date de naissance':
+          userDataCleaSubscription.birthDay +
+          '/' +
+          userDataCleaSubscription.birthMonth +
+          '/' +
+          userDataCleaSubscription.birthYear,
+        'Certification sélectionnée': 'Double Certification Pix-CléA Numérique',
+      });
+      const eduEnrolled = enrolledCandidatesSoFar.find(
+        (enrolled) => enrolled['Prénom'] === userDataEduSubscription.firstName,
+      );
+      expect(eduEnrolled).toMatchObject({
+        'Nom de naissance': userDataEduSubscription.lastName,
+        Prénom: userDataEduSubscription.firstName,
+        'Date de naissance':
+          userDataEduSubscription.birthDay +
+          '/' +
+          userDataEduSubscription.birthMonth +
+          '/' +
+          userDataEduSubscription.birthYear,
+        'Certification sélectionnée': 'Pix+ Édu 1er degré',
       });
     });
 
-    await pixAdminRoleCertifPage
-      .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
-      .click();
-    await test.step('Check certification information', async () => {
-      const certificationListPage = await sessionPage.goToCertificationListPage();
-      const certificationData = await certificationListPage.getCertificationData();
-      expect(certificationData.length).toBe(3);
-      const coreData = certificationData.find((data) => data['Prénom'] === userDataCoreSubscription.firstName);
-      expect(coreData).toMatchObject({
-        Prénom: userDataCoreSubscription.firstName,
-        Nom: userDataCoreSubscription.lastName,
-        Statut: 'Annulée',
-        Résultats: '55 Pix',
-        'Signalements impactants non résolus': '',
-        'Certification passée': 'Pix Cœur',
-      });
-      const cleaData = certificationData.find((data) => data['Prénom'] === userDataCleaSubscription.firstName);
-      expect(cleaData).toMatchObject({
-        Prénom: userDataCleaSubscription.firstName,
-        Nom: userDataCleaSubscription.lastName,
-        Statut: 'Annulée',
-        Résultats: '55 Pix',
-        'Signalements impactants non résolus': '',
-        'Certification passée': 'PIX / CléA Numérique',
-      });
-      const eduData = certificationData.find((data) => data['Prénom'] === userDataEduSubscription.firstName);
-      expect(eduData).toMatchObject({
-        Prénom: userDataEduSubscription.firstName,
-        Nom: userDataEduSubscription.lastName,
-        Statut: 'Annulée',
-        Résultats: 'Non admissible',
-        'Signalements impactants non résolus': '',
-        'Certification passée': 'Pix+ Édu 1er degré',
+    const pixAppCorePage = await pixAppCertifiableUserPage(userDataCoreSubscription);
+    const pixAppCleaPage = await pixAppCertifiableUserPage(userDataCleaSubscription);
+    const pixAppEduPage = await pixAppCertifiableUserPage(userDataEduSubscription);
+    await test.step('all candidates pass the exam', async () => {
+      await passManyCertificationExams({
+        examsData: [
+          {
+            certifiableUserData: userDataCoreSubscription,
+            rightWrongAnswersSequence: [true],
+            pixAppPage: pixAppCorePage,
+          },
+          {
+            certifiableUserData: userDataCleaSubscription,
+            rightWrongAnswersSequence: [true],
+            pixAppPage: pixAppCleaPage,
+          },
+          {
+            certifiableUserData: userDataEduSubscription,
+            rightWrongAnswersSequence: [true],
+            pixAppPage: pixAppEduPage,
+          },
+        ],
+        sessionNumber,
+        accessCode,
+        invigilatorCode,
       });
     });
-  });
-});
+
+    await test.step('Finalization by marking technical issues on all candidates', async () => {
+      const sessionManagementPage = new SessionManagementPage(pixCertifProPage);
+      const sessionFinalizationPage = await sessionManagementPage.goToFinalizeSession();
+      await expect(pixCertifProPage.getByText(userDataCoreSubscription.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(userDataCoreSubscription.lastName);
+      await expect(pixCertifProPage.getByText(userDataCleaSubscription.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(userDataCleaSubscription.lastName);
+      await expect(pixCertifProPage.getByText(userDataEduSubscription.firstName)).toBeVisible();
+      await sessionFinalizationPage.markTechnicalIssueFor(userDataEduSubscription.lastName);
+
+      await sessionFinalizationPage.finalizeSession();
+    });
+
+    const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
+    await test.step('Check candidates did pass what they enrolled for', async () => {
+      const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
+      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
+
+      await test.step('Check session information', async () => {
+        await checkSessionInformationAndExpectSuccess(sessionPage, {
+          address: `address ${testRef}`,
+          room: `room ${testRef}`,
+          invigilatorName: `examiner ${testRef}`,
+          status: 'Finalisée',
+          nbStartedCertifications: 0,
+          nbIssueReportsUnsolved: 0,
+          nbIssueReports: 0,
+          nbCertificationsInError: 0,
+        });
+      });
+
+      await pixAdminRoleCertifPage
+        .getByRole('link', { name: 'Liste des certifications de la session', exact: true })
+        .click();
+      await test.step('Check certification information', async () => {
+        const certificationListPage = await sessionPage.goToCertificationListPage();
+        const certificationData = await certificationListPage.getCertificationData();
+        expect(certificationData.length).toBe(3);
+        const coreData = certificationData.find((data) => data['Prénom'] === userDataCoreSubscription.firstName);
+        expect(coreData).toMatchObject({
+          Prénom: userDataCoreSubscription.firstName,
+          Nom: userDataCoreSubscription.lastName,
+          Statut: 'Annulée',
+          Résultats: '55 Pix',
+          'Signalements impactants non résolus': '',
+          'Certification passée': 'Pix Cœur',
+        });
+        const cleaData = certificationData.find((data) => data['Prénom'] === userDataCleaSubscription.firstName);
+        expect(cleaData).toMatchObject({
+          Prénom: userDataCleaSubscription.firstName,
+          Nom: userDataCleaSubscription.lastName,
+          Statut: 'Annulée',
+          Résultats: '55 Pix',
+          'Signalements impactants non résolus': '',
+          'Certification passée': 'PIX / CléA Numérique',
+        });
+        const eduData = certificationData.find((data) => data['Prénom'] === userDataEduSubscription.firstName);
+        expect(eduData).toMatchObject({
+          Prénom: userDataEduSubscription.firstName,
+          Nom: userDataEduSubscription.lastName,
+          Statut: 'Annulée',
+          Résultats: 'Non admissible',
+          'Signalements impactants non résolus': '',
+          'Certification passée': 'Pix+ Édu 1er degré',
+        });
+      });
+    });
+  },
+);
