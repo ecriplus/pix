@@ -217,6 +217,21 @@ export class AssessmentResultFactory {
     });
   }
 
+  static buildRejectedNotEligibleEduAssessmentResult({ assessmentId, juryId, capacity, reachedMeshIndex, versionId }) {
+    return this.#buildWithAutoJuryComment({
+      autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_EDU_NOT_ELIGIBLE,
+      status: AssessmentResult.status.REJECTED,
+      pixScore: null,
+      reproducibilityRate: null,
+      assessmentId,
+      juryId,
+      competenceMarks: [],
+      capacity,
+      reachedMeshIndex,
+      versionId,
+    });
+  }
+
   static buildRejectedDueToBelowMinimumMesh({
     pixScore,
     reproducibilityRate,
