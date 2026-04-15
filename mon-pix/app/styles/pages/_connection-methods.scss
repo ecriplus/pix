@@ -23,6 +23,10 @@
   }
 }
 
+.user-account-panel__success-message + .user-account-panel__success-message {
+  margin-top: var(--pix-spacing-2x);
+}
+
 .user-account-panel__success-message + .user-account-panel__item {
   margin-top: 20px;
 }
