@@ -32,6 +32,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
       const pixScore = 60;
       const reachedMeshIndex = 1;
       const certificationFramework = Frameworks.CORE;
+      const lastAnswerAt = new Date('2022-02-04');
 
       const certificationChallenge = new V3CertificationChallengeForAdministration({
         challengeId,
@@ -69,6 +70,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
             'reached-result-key': 'CORE.1',
             'number-of-challenges': 20,
             'certification-framework': certificationFramework,
+            'last-answer-at': lastAnswerAt,
           },
         },
         included: [
@@ -105,6 +107,7 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
         numberOfChallenges,
         certificationChallengesForAdministration: [certificationChallenge],
         certificationFramework,
+        lastAnswerAt,
       });
 
       // when

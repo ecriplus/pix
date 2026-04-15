@@ -39,7 +39,7 @@ const updateJuryComment = async function (request, h, dependencies = { juryComme
   return null;
 };
 
-const getCertificationV3Details = async function (
+async function getCertificationV3Details (
   request,
   h,
   dependencies = { v3CertificationDetailsForAdministrationSerializer },
