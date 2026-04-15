@@ -1,6 +1,5 @@
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import babelParser from '@babel/eslint-parser';
-import emberParser from 'ember-eslint-parser';
 import emberRecommendedConfig from 'eslint-plugin-ember/configs/recommended';
 import emberGjsRecommendedConfig from 'eslint-plugin-ember/configs/recommended-gjs';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
@@ -26,15 +25,10 @@ const nodeFiles = [
   'server/**/*.js',
 ];
 
-const emberPatchedParser = Object.assign(
-  {
-    meta: {
-      name: 'ember-eslint-parser',
-      version: '*',
-    },
-  },
-  emberParser,
-);
+// Reuse the same ember-eslint-parser instance that emberGjsRecommendedConfig uses internally,
+// so that the parser and the noop processor (which coordinate via a shared Set) stay in sync.
+const gjsParserConfig = emberGjsRecommendedConfig.find((c) => c.languageOptions?.parser);
+const emberParser = gjsParserConfig?.languageOptions?.parser;
 
 export default [
   ...pixRecommendedConfig,
@@ -71,8 +65,18 @@ export default [
   {
     files: ['**/*.gjs'],
     languageOptions: {
-      parser: emberPatchedParser,
+      parser: emberParser,
       sourceType: 'module',
+    },
+  },
+  {
+    files: ['tests/**/*.js', 'tests/**/*.gjs'],
+
+    languageOptions: {
+      globals: {
+        ...globals.embertest,
+        server: false,
+      },
     },
   },
   {
