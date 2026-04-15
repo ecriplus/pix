@@ -93,7 +93,19 @@ function convertString(joiStringDescribedSchema) {
     }
   }
 
-  return handleNonStandardStringProperties(joiStringDescribedSchema, jsonSchema);
+  const processedSchema = handleNonStandardStringProperties(joiStringDescribedSchema, jsonSchema);
+
+  const allowsEmptyString = joiStringDescribedSchema.allow?.includes('');
+  if (processedSchema.format === 'uri' && allowsEmptyString) {
+    const schemaWithoutFormat = { ...processedSchema };
+    Reflect.deleteProperty(schemaWithoutFormat, 'format');
+    return {
+      ...schemaWithoutFormat,
+      anyOf: [{ format: 'uri' }, { maxLength: 0 }],
+    };
+  }
+
+  return processedSchema;
 }
 
 function handleNonStandardStringProperties(joiStringDescribedSchema, jsonSchema) {
