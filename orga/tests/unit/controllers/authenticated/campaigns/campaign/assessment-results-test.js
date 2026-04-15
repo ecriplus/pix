@@ -46,6 +46,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/assessment-results'
       controller.set('badges', ['badge1']);
       controller.set('stages', ['stage1']);
       controller.set('search', 'dam');
+      controller.set('participantExternalId', 'external-id');
 
       //when
       controller.resetFiltering();
@@ -57,6 +58,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/assessment-results'
       assert.deepEqual(controller.groups, []);
       assert.deepEqual(controller.badges, []);
       assert.deepEqual(controller.stages, []);
+      assert.strictEqual(controller.participantExternalId, null);
     });
   });
 

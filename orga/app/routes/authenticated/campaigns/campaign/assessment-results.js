@@ -47,7 +47,23 @@ export default class AssessmentResultsRoute extends Route {
 
   async model(params) {
     const campaign = this.modelFor('authenticated.campaigns.campaign');
-    const participations = await this.fetchResultMinimalList({ campaignId: campaign.id, ...params });
+
+    const participations = await this.store.query('campaign-assessment-result-minimal', {
+      page: {
+        number: params.pageNumber,
+        size: params.pageSize,
+      },
+      filter: {
+        divisions: params.divisions,
+        groups: params.groups,
+        badges: params.badges,
+        unacquiredBadges: params.unacquiredBadges,
+        stages: params.stages,
+        search: params.search,
+        participantExternalId: params.participantExternalId,
+      },
+      campaignId: campaign.id,
+    });
 
     return {
       campaign,
@@ -62,36 +78,9 @@ export default class AssessmentResultsRoute extends Route {
     }
   }
 
-  fetchResultMinimalList(params) {
-    return this.store.query('campaign-assessment-result-minimal', {
-      page: {
-        number: params.pageNumber,
-        size: params.pageSize,
-      },
-      filter: {
-        divisions: params.divisions,
-        groups: params.groups,
-        badges: params.badges,
-        unacquiredBadges: params.unacquiredBadges,
-        stages: params.stages,
-        search: params.search,
-        participantExternalId: params.participantExternalId,
-      },
-      campaignId: params.campaignId,
-    });
-  }
-
   resetController(controller, isExiting) {
     if (isExiting) {
-      controller.pageNumber = 1;
-      controller.pageSize = 50;
-      controller.divisions = [];
-      controller.groups = [];
-      controller.badges = [];
-      controller.stages = [];
-      controller.unacquiredBadges = [];
-      controller.participantExternalId = null;
-      controller.search = null;
+      controller.resetFiltering();
     }
   }
 }
