@@ -1,26 +1,17 @@
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-import EvaluationResultsHeroRecommendationEngine
-  from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
 import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
+import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
 
 export default class EvaluationResultsRecommendationEngine extends Component {
   @service tabManager;
-  // eslint-disable-next-line ember/no-tracked-properties-from-args
-  @tracked showEvaluationResultsModal = this.args.model.showTrainings;
 
   get hasTrainings() {
     return Boolean(this.trainings.length);
-  }
-
-  get trainingsForModal() {
-    const MAX_TRAININGS_MODAL_DISPLAYED = 3;
-    return this.trainings.slice(0, MAX_TRAININGS_MODAL_DISPLAYED);
   }
 
   get trainings() {
@@ -42,19 +33,6 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     });
 
     this.tabManager.setActiveTab(2);
-  }
-
-  @action
-  shareResults() {
-    if (this.args.model.campaign.isPartOfCombinedCourse) {
-      return;
-    }
-    this.showEvaluationResultsModal = true;
-  }
-
-  @action
-  closeModal() {
-    this.showEvaluationResultsModal = false;
   }
 
   <template>
