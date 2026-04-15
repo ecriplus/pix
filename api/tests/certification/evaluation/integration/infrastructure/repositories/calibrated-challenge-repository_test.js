@@ -808,7 +808,9 @@ describe('Certification | Evaluation | Integration | Repository | calibrated-cha
             startDate: new Date('1977-10-19'),
             expirationDate: new Date('1977-10-20'),
           });
-          const archivedVersionWithNonCompatibleChallenge = domainBuilder.certification.configuration.buildVersion({ id });
+          const archivedVersionWithNonCompatibleChallenge = domainBuilder.certification.configuration.buildVersion({
+            id,
+          });
           databaseBuilder.factory.buildCertificationFrameworksChallenge({
             challengeId: challengesLC[0].id,
             versionId: archivedVersionWithNonCompatibleChallenge.id,

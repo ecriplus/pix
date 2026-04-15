@@ -688,7 +688,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             const nextCalibratedChallenge = domainBuilder.certification.evaluation.buildCalibratedChallenge();
             const challenge = domainBuilder.buildChallenge(nextCalibratedChallenge);
 
-            version = domainBuilder.certification.configuration.buildVersion({ challengesConfiguration: flashConfiguration });
+            version = domainBuilder.certification.configuration.buildVersion({
+              challengesConfiguration: flashConfiguration,
+            });
             versionApi.getByFrameworkAndDate.resolves(version);
 
             const assessment = domainBuilder.buildAssessment();
