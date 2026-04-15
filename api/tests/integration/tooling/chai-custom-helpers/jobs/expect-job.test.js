@@ -1,7 +1,7 @@
-import { EMPTY_CORRELATION_INFO } from '../../../../src/shared/infrastructure/execution-context-manager.js';
-import { JobClient } from '../../../../src/shared/infrastructure/jobs/JobClient.js';
-import { JobRepository } from '../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { catchErr, expect, knex } from '../../../test-helper.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
+import { JobClient } from '../../../../../src/shared/infrastructure/jobs/JobClient.js';
+import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
+import { catchErr, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Tooling | Expect Job', function () {
   describe('#withJobsCount', function () {

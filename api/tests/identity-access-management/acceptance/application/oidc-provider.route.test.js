@@ -12,7 +12,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
 } from '../../../test-helper.js';
-import { createMockedTestOidcProviders } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
 
 const UUID_PATTERN = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 

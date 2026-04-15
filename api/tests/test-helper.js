@@ -22,7 +22,6 @@ import { createMaddoServer } from '../server.maddo.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import { ApplicationAccessToken } from '../src/identity-access-management/domain/models/ApplicationAccessToken.js';
 import { UserAccessToken } from '../src/identity-access-management/domain/models/UserAccessToken.js';
-import { UserReconciliationSamlIdToken } from '../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
 import { JobClient } from '../src/shared/infrastructure/jobs/JobClient.js';
@@ -36,11 +35,12 @@ import * as skillRepository from '../src/shared/infrastructure/repositories/skil
 import * as thematicRepository from '../src/shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
+import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
-import { AttestationTemplateFixture } from './tooling/fixtures/index.js';
-import { jobChai } from './tooling/jobs/expect-job.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
+import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
+import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
 import { parseNDJSON } from './tooling/test-utils/json.js';
@@ -52,7 +52,7 @@ dayjs.extend(localizedFormat);
 chaiUse(chaiAsPromised);
 chaiUse(chaiSorted);
 chaiUse(sinonChai);
-chaiUse(jobChai());
+chaiUse(jobChai);
 Object.values(customChaiHelpers).forEach(chaiUse);
 
 // Init Database builders
@@ -74,7 +74,6 @@ databaseBuilder.factory.learningContent.injectNock(nock);
 
 nock.disableNetConnect();
 nock.enableNetConnect('localhost:9090');
-const EMPTY_BLANK_AND_NULL = ['', '\t \n', null];
 
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
@@ -205,56 +204,6 @@ function generateValidRequestAuthorizationHeaderForApplication(clientId = 'clien
   return `Bearer ${accessToken}`;
 }
 
-function generateIdTokenForExternalUser(externalUser) {
-  return UserReconciliationSamlIdToken.generate(externalUser);
-}
-
-// Hapi
-const hFake = {
-  response(source) {
-    return {
-      statusCode: 200,
-      source,
-      code(c) {
-        this.statusCode = c;
-        return this;
-      },
-      headers: {},
-      header(key, value) {
-        this.headers[key] = value;
-        return this;
-      },
-      type(type) {
-        this.contentType = type;
-        return this;
-      },
-      takeover() {
-        this.isTakeOver = true;
-        return this;
-      },
-      created() {
-        this.statusCode = 201;
-        return this;
-      },
-    };
-  },
-  authenticated(data) {
-    return {
-      authenticated: data,
-    };
-  },
-  redirect(location) {
-    return {
-      statusCode: 302,
-      headers: { location },
-    };
-  },
-  file(path, options) {
-    return this.response({ path, options });
-  },
-  continue: Symbol('continue'),
-};
-
 function catchErr(promiseFn, ctx) {
   return async (...args) => {
     try {
@@ -281,23 +230,6 @@ async function mockLearningContent(learningContent) {
   const scope = databaseBuilder.factory.learningContent.build(learningContent);
   await databaseBuilder.commit();
   return scope;
-}
-
-function mockAttestationStorage(attestation) {
-  const template = AttestationTemplateFixture.getStream();
-
-  nock('http://attestations.fake.endpoint.example.net:80')
-    .get(`/attestations.bucket/${attestation.templateName}.pdf?x-id=GetObject`)
-    .reply(200, () => template);
-
-  return template;
-}
-
-function mockAttestationStorageUpload({ attestation, isFailed = false }) {
-  return nock('http://attestations.fake.endpoint.example.net:80')
-    .put(`/attestations.bucket/${attestation.templateName}.pdf?x-id=PutObject`)
-    .reply(isFailed ? 500 : 200)
-    .persist();
 }
 
 const preventStubsToBeCalledUnexpectedly = (stubs) => {
@@ -334,10 +266,8 @@ export {
   datamartKnex,
   datawarehouseKnex,
   domainBuilder,
-  EMPTY_BLANK_AND_NULL,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  generateIdTokenForExternalUser,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,

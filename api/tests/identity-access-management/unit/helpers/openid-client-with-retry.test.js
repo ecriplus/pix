@@ -1,7 +1,7 @@
 import { OpenidClientWithRetry } from '../../../../src/identity-access-management/domain/helpers/openid-client-with-retry.js';
 import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
 import { expect, sinon } from '../../../test-helper.js';
-import { createOpenIdClientMock } from '../../../tooling/openid-client/openid-client-mocks.js';
+import { createOpenIdClientMock } from '../../../tooling/mocks/openid-client.mock.js';
 
 describe('Unit | Identity Access Management | Domain | Helper | openid-client-with-retry', function () {
   const durationInMs = 0;

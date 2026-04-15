@@ -1,11 +1,11 @@
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
+import { UserReconciliationSamlIdToken } from '../../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  generateIdTokenForExternalUser,
   knex,
 } from '../../../../test-helper.js';
 
@@ -50,7 +50,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
           firstName: organizationLearner.firstName,
           samlId: '123456789',
         };
-        const idTokenForExternalUser = generateIdTokenForExternalUser(externalUser);
+        const idTokenForExternalUser = UserReconciliationSamlIdToken.generate(externalUser);
 
         options.payload.data = {
           attributes: {
@@ -97,7 +97,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
             firstName: organizationLearner.firstName,
             samlId: '9876654321',
           };
-          const idTokenForExternalUser = generateIdTokenForExternalUser(externalUser);
+          const idTokenForExternalUser = UserReconciliationSamlIdToken.generate(externalUser);
 
           options.payload.data = {
             attributes: {
@@ -144,7 +144,7 @@ describe('Prescription | Organization Learner | Acceptance | Application | sco-o
             firstName: organizationLearner.firstName,
             samlId: '9876654321',
           };
-          const idTokenForExternalUser = generateIdTokenForExternalUser(externalUser);
+          const idTokenForExternalUser = UserReconciliationSamlIdToken.generate(externalUser);
 
           options.payload.data = {
             attributes: {

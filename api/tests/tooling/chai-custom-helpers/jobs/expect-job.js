@@ -1,9 +1,9 @@
 import { assert, Assertion } from 'chai';
 import sinon from 'sinon';
 
-import { JobClient } from '../../../src/shared/infrastructure/jobs/JobClient.js';
+import { JobClient } from '../../../../src/shared/infrastructure/jobs/JobClient.js';
 
-export const jobChai = () => (_chai, utils) => {
+export const jobChai = (_chai, utils) => {
   utils.addProperty(Assertion.prototype, 'performed', function () {
     return this;
   });
