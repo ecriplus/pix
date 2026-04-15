@@ -42,33 +42,18 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/nr_durabilite-nov/chat-gpt-image-nov-5-2025-03_51_38-pm.png",
                 "alt": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
-                "alternativeText": "",
+                "alternativeText": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "legend": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "licence": ""
               }
             },
             {
-              "id": "a125f592-862b-4e55-8769-38cd70339c39",
-              "type": "qcu-discovery",
-              "instruction": "<p>Un smartphone contient, entre autres, du cobalt.</p>",
-              "hasShortProposals": true,
-              "proposals": [
-                {
-                  "id": "1",
-                  "content": "<p>Vrai.</p>",
-                  "feedback": {
-                    "diagnosis": "<p>Eh oui ! Un smartphone contient bien du cobalt.</p>"
-                  }
-                },
-                {
-                  "id": "2",
-                  "content": "<p>Faux.</p>",
-                  "feedback": {
-                    "diagnosis": "<p>Eh non ! Un smartphone contient bien du cobalt.</p>"
-                  }
-                }
-              ],
-              "solution": "1"
+              "type": "element",
+              "element": {
+                "id": "b5743f50-dbfb-465c-8bdf-3dfbba19c3f2",
+                "type": "text",
+                "tag": " "
+              }
             }
           ]
         }
@@ -100,63 +85,145 @@
           "title": "Quels métaux y a-t-il dans mon smartphone ?",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "62b4e1dc-725f-4d09-b0b3-e78281fb1368",
-                "type": "flashcards",
-                "instruction": "<p>Voici quelques métaux que vous trouvez dans votre smartphone. Savez-vous les reconnaître ?</p>",
-                "title": "D’où viennent les métaux ?",
-                "introImage": {
-                  "url": ""
+              "type": "stepper",
+              "instruction": "<p>Voici quelques métaux qui se trouvent dans votre smartphone. Savez-vous les reconnaître ?</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "4fb251cd-751f-43da-b1ba-0b2b2320062f",
+                      "type": "qcu",
+                      "instruction": "<p>Je suis extrait principalement en République Démocratique du Congo, souvent dans de mauvaises conditions de travail, et parfois par des enfants. Quel métal suis-je ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Le fer",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Le lithium",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Le cobalt",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Il s'agit effectivement du <strong>cobalt</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "L'or",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
                 },
-                "cards": [
-                  {
-                    "id": "31a0ea74-14ac-4b62-8c42-5b0d77263714",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Je suis très présent dans les batteries, et mon extraction génère beaucoup de pollution locale. Qui suis-je ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "<p>Le lithium</p>"
+                {
+                  "elements": [
+                    {
+                      "id": "2dde8880-120d-4ba9-a6d2-1013874cfb4c",
+                      "type": "qcu",
+                      "instruction": "<p>Je suis très présent dans les batteries, et mon extraction génère beaucoup de pollution locale. Quel métal suis-je ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Le lithium",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Il s'agit effectivement du <strong>lithium</strong>.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "L'aluminium",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "L'or",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "L'argent",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
                     }
-                  },
-                  {
-                    "id": "596ac67b-4282-448b-a51b-6cb3a1f8c015",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Je suis extrait principalement en République Démocratique du Congo, souvent dans de mauvaises conditions de travail, et parfois par des enfants. Qui suis-je ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "<p>Le cobalt</p>"
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "45948196-92cf-4ffd-a2c8-a6a228b4cd34",
+                      "type": "qcu",
+                      "instruction": "<p>Je suis un métal précieux, utilisé pour mes capacités à conduire l'électricité. Quel métal suis-je ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Le cobalt",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "L'aluminium",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Le cobalt",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "L'or ou l'argent",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Il s'agit effectivement de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
-                  },
-                  {
-                    "id": "3725c8af-f3ff-4265-8ee3-5e1ce1ac2297",
-                    "recto": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "Je suis un métal précieux, utilisé dans les circuits éléctroniques pour mes capacités à conduire l'élécricité. Qui suis-je ?"
-                    },
-                    "verso": {
-                      "image": {
-                        "url": ""
-                      },
-                      "text": "<p>L’or ou l'argent</p>"
-                    }
-                  }
-                ]
-              }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -202,7 +269,9 @@
               "element": {
                 "id": "5fc90905-6385-40f4-880f-5c836fd721bb",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
                   "type": "image",
@@ -212,7 +281,7 @@
                       "description": "La première étape de fabrication d'un smartphone est la conception. Elle a généralement lieu aux États-Unis, en Chine ou en Europe.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_1.png",
                         "alt": ""
                       },
                       "license": {
@@ -226,7 +295,7 @@
                       "description": "L'extraction des matières premières a lieu sur plusieurs continents : l'Amérique du Sud, l'Afrique, l'Océanie et l'Asie.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_2.png",
                         "alt": ""
                       },
                       "license": {
@@ -240,7 +309,7 @@
                       "description": "La fabrication des composants du smartphone a lieu en Asie, notamment en Chine.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_3.png",
                         "alt": ""
                       },
                       "license": {
@@ -254,7 +323,7 @@
                       "description": "L'assemblage des composants a lieu en Asie du Sud-Est.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_4.png",
                         "alt": ""
                       },
                       "license": {
@@ -268,7 +337,7 @@
                       "description": "La distribution des smartphones a lieu en principalement en Occident, donc en Europe et en Amérique du Nord.",
                       "displayWidth": 0,
                       "image": {
-                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/toursdelaterre-cropped.jpg",
+                        "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_5.png",
                         "alt": ""
                       },
                       "license": {
@@ -281,21 +350,10 @@
                   "randomSlides": false,
                   "titleLevel": 0,
                   "disableAnimation": false,
-                  "disableStyleAroundImage": false,
+                  "disableStyleAroundImage": true,
                   "enableLoop": false,
                   "imageTextDisplay": ""
-                },
-                "title": "",
-                "functionalInstruction": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "e59c0a43-80c4-4cc2-b0d5-c8f4243b6e22",
-                "type": "text",
-                "tag": "",
-                "content": "<p>Entre la conception et la distribution, les éléments d'un smartphone ont donc parcouru de très longues distances.</p>"
+                }
               }
             },
             {
@@ -303,10 +361,19 @@
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
                 "type": "custom",
+                "title": "",
                 "instruction": "<p>Combien de tours du monde ont parcouru les éléments d'un smartphone entre sa conception et sa distribution ?</p>",
+                "functionalInstruction": "",
                 "tagName": "pix-cursor",
                 "props": {
                   "options": [
+                    {
+                      "label": "2",
+                      "feedback": {
+                        "type": "bad",
+                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
+                      }
+                    },
                     {
                       "label": "1",
                       "feedback": {
@@ -350,9 +417,7 @@
                       }
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             }
           ]
@@ -486,7 +551,7 @@
                 "id": "c08cdadc-1fbc-4e9e-bf46-ebef6e73a2d7",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (le protéger des chocs, protéger l'écran et la batterie&nbsp...).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
+                "content": "<p>La meilleure chose à faire est de <strong>garder son smartphone le plus longtemps possible</strong>. Comment y arriver ? </p><ul><li><strong>prendre soin</strong> (le protéger des chocs, protéger l'écran et la batterie&nbsp;...).</li><li><strong>résister aux effets de mode </strong>et aux nouvelles fonctionnalités qui donnent envie de changer de téléphone.</li><li>le <strong>réparer</strong> quand c’est possible et pas trop cher.</li></ul>"
               }
             }
           ]
@@ -620,7 +685,7 @@
                     {
                       "id": "ab421b9d-b6f1-4648-a481-26e05a5fe17f",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/weee_symbol_large.png",
+                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/weee_symbol_small-400.png",
                       "alt": "Logo des déchets éléctriques et électroniques",
                       "alternativeText": "",
                       "legend": "",
@@ -681,7 +746,7 @@
                 "id": "84230031-3337-4598-9a01-971e1b8c8c47",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent <strong>très polluante</strong> et réalisée dans de <strong>mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les  étapes de conception, fabrication et distribution d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strongetransports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li>n    <li>💡 Pour limiter l’impact environnemental d’un smartphone, le plus important est qu'isoit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte spécialisé</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
+                "content": "<ul>\n    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent <strong>très polluante</strong> et réalisée dans de <strong>mauvaises conditions de travail</strong>.</li>\n    <li>✈️ Les  étapes de conception, fabrication et distribution d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strongetransports< strong=\"\">, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</strongetransports<></li>n    <li>💡 Pour limiter l’impact environnemental d’un smartphone, le plus important est qu'isoit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :\n        <ul>\n            <li>en prendre soin, le protéger</li>\n            <li>le faire réparer s'il est cassé</li>\n            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>\n        </ul>\n    </li>\n    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte spécialisé</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li>\n</ul><br>"
               }
             }
           ]
@@ -698,126 +763,61 @@
           "title": "Identifier les impacts environnementaux de la fabrication des smartphones",
           "components": [
             {
-              "type": "stepper",
-              "instruction": "",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "17320f15-3749-4eda-ad6f-032c5a3c51a0",
-                      "type": "qcu",
-                      "instruction": "Un smartphone est constitué de plusieurs dizaines de matériaux différents.",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai.",
-                          "feedback": {
-                            "state": "Bonne réponse !",
-                            "diagnosis": "Un smartphone est constitué d'au moins 70 matériaux différents."
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux.",
-                          "feedback": {
-                            "state": "Mauvaise réponse !",
-                            "diagnosis": "Un smartphone est constitué d'au moins 70 matériaux différents."
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "780ebb72-53d6-4cc2-9323-2fce93ca29ba",
-                      "type": "qcu",
-                      "instruction": "Les smartphones sont produits localement, à proximité des lieux de vente.",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai.",
-                          "feedback": {
-                            "state": "Mauvaise réponse !",
-                            "diagnosis": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux.",
-                          "feedback": {
-                            "state": "Bonne réponse !",
-                            "diagnosis": "Les différentes étapes de fabrication ont lieu dans des pays et même des continents différents !"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "8f7388d7-3574-46b7-aa98-bba9be75a16b",
-                      "type": "qcu",
-                      "instruction": "Un smartphone contient des métaux précieux, comme l'or et l'argent.",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai.",
-                          "feedback": {
-                            "state": "Bonne réponse !",
-                            "diagnosis": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent."
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux.",
-                          "feedback": {
-                            "state": "Mauvaise réponse !",
-                            "diagnosis": "Un smartphone effectivement contient des métaux précieux, comme l'or ou l'argent."
-                          }
-                        }
-                      ],
-                      "solution": "1"
-                    }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "e5843ff0-84ad-49e2-9882-23590f57b700",
-                      "type": "qcu",
-                      "instruction": "Les personnes qui travaillent dans les mines pour extraire les métaux pour fabriquer les smartphones travaillent dans de bonnes conditions.",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "1",
-                          "content": "Vrai.",
-                          "feedback": {
-                            "state": "Mauvaise réponse !",
-                            "diagnosis": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants."
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Faux.",
-                          "feedback": {
-                            "state": "Bonne réponse !",
-                            "diagnosis": "Certaines de ces mines sont situées dans des pays où les travailleurs sont très peu protégés, et emploient parfois des enfants."
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
+              "type": "element",
+              "element": {
+                "id": "01e1b924-19ad-4264-a36e-40ac9e0e7fc9",
+                "type": "qab",
+                "instruction": "<p>Les affirmations suivantes sont-elles vraies ou fausses ?</p>",
+                "cards": [
+                  {
+                    "id": "3899e12e-e58c-43d8-84ed-7697c60a118d",
+                    "text": "Un smartphone est constitué de plusieurs dizaines de matériaux différents.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai.",
+                    "proposalB": "Faux.",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "6bc497a3-af2a-43d3-873d-1fd6adfc2f79",
+                    "text": "Les smartphones sont produits localement, à proximité des lieux de vente.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai.",
+                    "proposalB": "Faux.",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "90817524-09df-425c-954c-d8c7960446ba",
+                    "text": "Un smartphone contient des métaux précieux, comme l'or et l'argent.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai.",
+                    "proposalB": "Faux.",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "26d3ecb9-fa4d-4344-9c6b-8ca38e58bd81",
+                    "text": "Les personnes qui travaillent dans les mines pour extraire les métaux pour fabriquer les smartphones travaillent dans de bonnes conditions.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai.",
+                    "proposalB": "Faux.",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<ul><li>Un smartphone est constitué d'au moins <strong>70 matériaux différents</strong>.</li><li>Les différentes étapes de fabrication ont lieu dans des <strong>pays</strong> et même des <strong>continents différents</strong> !</li><li>Un smartphone <strong>contient plusieurs métaux précieux</strong>, comme l'or et l'argent.</li><li>Certaines de ces mines sont situées dans des pays où <strong>les travailleurs sont très peu protégés</strong>, et <strong>emploient parfois des enfants</strong>.</li></ul>"
                 }
-              ]
+              }
             }
           ]
         },
@@ -838,8 +838,8 @@
                     "content": "<p>Pour limiter l'impact environnemental des smartphones il faut </p>"
                   },
                   {
-                    "input": "input1",
                     "type": "select",
+                    "input": "input1",
                     "display": "inline",
                     "placeholder": "Sélectionner une option",
                     "ariaLabel": "Sélectionner une option",
@@ -855,7 +855,7 @@
                       }
                     ],
                     "solutions": [
-                       "1"
+                      "1"
                     ]
                   },
                   {
@@ -863,8 +863,8 @@
                     "content": "<p>Pour cela il faut les </p>"
                   },
                   {
-                    "input": "input2",
                     "type": "select",
+                    "input": "input2",
                     "display": "block",
                     "placeholder": "Sélectionner une option",
                     "ariaLabel": "Sélectionner une option",
@@ -888,8 +888,8 @@
                     "content": "<p>Et si on doit vraiment en changer, il vaut mieux </p>"
                   },
                   {
-                    "input": "input3",
                     "type": "select",
+                    "input": "input3",
                     "display": "inline",
                     "placeholder": "Sélectionner une option",
                     "ariaLabel": "Sélectionner une option",
@@ -913,8 +913,8 @@
                     "content": "<p>Et s'ils ne fonctionnent plus et ne sont pas réparables, alors il faut </p>"
                   },
                   {
-                    "input": "input4",
                     "type": "select",
+                    "input": "input4",
                     "display": "inline",
                     "placeholder": "Sélectionner une option",
                     "ariaLabel": "Sélectionner une option",
