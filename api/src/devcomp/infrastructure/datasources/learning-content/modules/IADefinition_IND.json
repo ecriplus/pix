@@ -185,7 +185,7 @@
                           "id": "2",
                           "content": "muguet",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Vous aurez peut-être plus de chance avec la prochaine !</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Vous aurez peut-être plus de chance avec la prochaine photo.</p>"
                           }
                         }
                       ],
@@ -214,7 +214,7 @@
                           "id": "1",
                           "content": "ail des ours",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, plus de chance avec la prochaine ?</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Voyons si vous reconnaissez la prochaine photo.</p>"
                           }
                         },
                         {
@@ -250,7 +250,7 @@
                           "id": "1",
                           "content": "ail des ours",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Passons à la photo suivante.</p>"
                           }
                         },
                         {
@@ -286,14 +286,14 @@
                           "id": "1",
                           "content": "ail des ours",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
+                            "diagnosis": "<p>Bien vu !&nbsp;</p><p>Vous vous êtes entraîné à reconnaître des photos.&nbsp;</p><p>Voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "muguet",
                           "feedback": {
-                            "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos, voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
+                            "diagnosis": "<p>Pas de chance !</p><p>Vous vous êtes entraîné à reconnaître des photos.&nbsp;</p><p>Voyons maintenant comment fait un logiciel d’IA. 🔍</p>"
                           }
                         }
                       ],
@@ -316,7 +316,7 @@
                 "id": "533a20ac-123a-4dc5-b13c-0a5601437e62",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Vous venez de tester une des méthodes de la reconnaissance d’images, comme le fait un logiciel d’IA. 🔍</p><h5>  Mais comment apprend-il à reconnaître ce qu’il voit ? </h5><p>  On lui montre de nombreux exemples d’images avec leur nom&nbsp;: ce sont des données étiquetées. 🏷️</p><p>  Cette méthode s’appelle l’apprentissage supervisé&nbsp;: les ingénieurs fournissent au logiciel d’IA un jeu d’exemples annotés, soigneusement préparés, qui guident et encadrent son apprentissage.👨🏽‍💻</p>"
+                "content": "<p>Vous venez de tester une des méthodes de la reconnaissance d’images, comme le fait un logiciel d’IA. 🔍</p><h5>  Mais comment un logiciel d’IA apprend-il à reconnaître ce qu’il voit ? </h5><p>De nombreux<strong> exemples d’images avec leur nom</strong> sont montrées au logiciel d'IA&nbsp;: ce sont des<strong> données étiquetées</strong>. 🏷️</p><p>  Cette méthode s’appelle l’apprentissage supervisé&nbsp;: les ingénieurs fournissent au logiciel d’IA un jeu d’exemples annotés, soigneusement préparés, qui guident et encadrent son apprentissage.👨🏽‍💻</p>"
               }
             }
           ]
@@ -418,7 +418,7 @@
                 "id": "8e0084cb-c38a-49db-8126-4d3bb0b3077f",
                 "type": "text",
                 "tag": " ",
-                "content": "<h5>Et que va faire le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombres représentant l’image, le logiciel d’IA va pouvoir faire des <strong>calculs</strong>. C'est ce qui va lui permettre de traiter cette image.</p>"
+                "content": "<h5>Et que fait le logiciel d’IA avec ces nombres ?</h5><p>À&nbsp;partir du tableau de nombres représentant l’image, le logiciel d’IA fait des <strong>calculs</strong>.&nbsp;C’est ce qui lui permet de traiter l’image.</p>"
               }
             }
           ]
@@ -434,7 +434,7 @@
                 "id": "bde3a389-1875-4e42-9c06-1cab0c51be96",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Maintenant, regardons de plus près : comment le logiciel fait le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
+                "content": "<p>Maintenant, regardons de plus près : comment le logiciel fait-il le lien entre la donnée d’entrée (la photo) et la donnée de sortie (son nom) ?</p>"
               }
             }
           ]
@@ -454,7 +454,7 @@
                       "id": "5e52b226-e3e9-4a24-8b85-1f57fa2435b1",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Voici le logiciel d'IA en plein entraînement. Une photo d'ail des ours est fourni au logiciel.&nbsp; </p><p>Le logiciel est en train de régler ses paramètres pour obtenir la prédiction \"Ail des ours\".</p>"
+                      "content": "<p>“Le logiciel d’IA suivant est en plein entraînement. Une photo d'ail des ours est fournie au logiciel.&nbsp; </p><p>Le logiciel est en train de régler ses paramètres pour obtenir la prédiction « Ail des ours&nbsp;».</p>"
                     },
                     {
                       "id": "cfd58370-5b02-4980-9a67-b2101d31692b",
