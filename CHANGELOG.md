@@ -1,5 +1,39 @@
 # Pix Changelog
 
+# [5.388.0](https://github.com/1024pix/pix/compare/v5.387.0...v5.388.0) (2026-04-16)
+
+### :rocket: Amélioration
+
+- [#15834](https://github.com/1024pix/pix/pull/15834) Ajouter un tag Tête de réseau sur la page de détail d'une organisation (PIX-22320) 
+- [#15848](https://github.com/1024pix/pix/pull/15848) integration POI decouverte 3 VIRUS_NOV 
+- [#15870](https://github.com/1024pix/pix/pull/15870) rangerfichiers ind ajout config+validation 
+- [#15845](https://github.com/1024pix/pix/pull/15845) Supprimer toutes les invitations d'une organisation à l'archivage (PIX-22086) 
+
+### :bug: Correction
+
+- [#15885](https://github.com/1024pix/pix/pull/15885) Corriger l'initialisation des buckets S3 dans l'image docker 
+
+### :building_construction: Tech
+
+- [#15851](https://github.com/1024pix/pix/pull/15851) Ajouter des logs de timing aux erreurs OIDC (PIX-22335) 
+- [#15879](https://github.com/1024pix/pix/pull/15879) Déplacer ou supprimer les derniers helpers de test-helper.js 
+- [#15869](https://github.com/1024pix/pix/pull/15869) Extraire et isoler les mocks de test-helpers.js 
+- [#15838](https://github.com/1024pix/pix/pull/15838) Mise à disposition d'une API interne dans le bounded context "certification/configuration" pour permettre la récupération des versions de référentiels de certification  
+- [#15884](https://github.com/1024pix/pix/pull/15884) Préparer une publication minimale de tous les Pix+ (PIX-22376) 
+- [#15860](https://github.com/1024pix/pix/pull/15860) remplace la dépendance ember-cli-mirage par miragejs (PIX-22369) 
+- [#15876](https://github.com/1024pix/pix/pull/15876) Répare la configuration eslint sur les fichiers gjs de Pix Orga. 
+- [#15882](https://github.com/1024pix/pix/pull/15882) Réparer les versions de certifs dans les seeds (PIX-22389). 
+- [#15874](https://github.com/1024pix/pix/pull/15874) S'assurer que les envois répétés de signaux de fermeture d'API ne déclenchent pas plusieurs fois les opérations d'extinction 
+- [#15785](https://github.com/1024pix/pix/pull/15785) Supprimer la colonne content de la table des schémas de parcours (PIX-22213) 
+- [#15852](https://github.com/1024pix/pix/pull/15852) Supprimer RSVP de PixOrga (PIX-22372). 
+
+### :arrow_up: Montée de version
+
+- [#15877](https://github.com/1024pix/pix/pull/15877) Update adobe/s3mock Docker tag to v5 (.circleci) 
+- [#15878](https://github.com/1024pix/pix/pull/15878) Update adobe/s3mock Docker tag to v5 (docker) 
+- [#15881](https://github.com/1024pix/pix/pull/15881) Update adobe/s3mock Docker tag to v5 (dossier racine) 
+- [#15886](https://github.com/1024pix/pix/pull/15886) Update dependency webpack to v5.106.0 (junior)
+
 # [5.387.0](https://github.com/1024pix/pix/compare/v5.386.0...v5.387.0) (2026-04-15)
 
 ### :rocket: Amélioration
