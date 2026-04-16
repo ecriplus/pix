@@ -255,6 +255,9 @@
     },
     "loading": "Chargement en cours",
     "no-content": "Aucun contenu",
+    "notification": {
+      "close": "Fermer la notification"
+    },
     "result": {
       "accessibility-description": "Résultat obtenu = {percentage, number, ::percent}, soit le palier {stage} sur {totalStage}",
       "percentage": "{value, number, ::percent}",

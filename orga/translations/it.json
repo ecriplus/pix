@@ -261,6 +261,9 @@
     },
     "loading": "Caricamento in corso",
     "no-content": "Nessun contenuto",
+    "notification": {
+      "close": "Chiudi la notifica"
+    },
     "result": {
       "accessibility-description": "Risultato ottenuto = {percentage, number, ::percent}, cioè il cuscinetto {stage} su {totalStage}.",
       "percentage": "{value, number, ::percent}",

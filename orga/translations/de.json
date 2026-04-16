@@ -260,6 +260,9 @@
     },
     "loading": "Ladevorgang läuft",
     "no-content": "Keine Inhalte",
+    "notification": {
+      "close": "Benachrichtigung schließen"
+    },
     "result": {
       "accessibility-description": "Ergebnis erhalten = {percentage, number, ::percent}, d. h. die Stufe {stage} auf {totalStage}.",
       "percentage": "{value, number, ::percent}",

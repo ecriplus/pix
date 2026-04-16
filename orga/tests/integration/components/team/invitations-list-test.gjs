@@ -67,7 +67,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
 
     const notifications = this.owner.lookup('service:notifications');
     this.owner.register('service:current-user', CurrentUserStub);
-    sinon.stub(notifications, 'success');
+    sinon.stub(notifications, 'sendSuccess');
 
     const invitations = [invitation];
 
@@ -77,7 +77,10 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     await clickByName(t('pages.team-invitations.cancel-invitation'));
 
     // then
-    sinon.assert.calledWith(notifications.success, t('pages.team-invitations.invitation-cancelled-succeed-message'));
+    sinon.assert.calledWith(
+      notifications.sendSuccess,
+      t('pages.team-invitations.invitation-cancelled-succeed-message'),
+    );
     assert.ok(true);
   });
 
@@ -96,7 +99,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     const notifications = this.owner.lookup('service:notifications');
     this.owner.register('service:current-user', CurrentUserStub);
     invitation.save.rejects();
-    sinon.stub(notifications, 'error');
+    sinon.stub(notifications, 'sendError');
 
     const invitations = [invitation];
 
@@ -105,7 +108,7 @@ module('Integration | Component | Team::InvitationsList', function (hooks) {
     await clickByName(t('pages.team-invitations.cancel-invitation'));
 
     // then
-    sinon.assert.calledWith(notifications.error, t('api-error-messages.global'));
+    sinon.assert.calledWith(notifications.sendError, t('api-error-messages.global'));
     assert.ok(true);
   });
 });

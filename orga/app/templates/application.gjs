@@ -1,6 +1,6 @@
-import NotificationContainer from '@1024pix/ember-cli-notifications/components/notification-container';
 import PixAppLayout from '@1024pix/pix-ui/components/pix-app-layout';
-import t from 'ember-intl/helpers/t';
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
+import { t } from 'ember-intl';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Communication from 'pix-orga/components/banner/communication';
 import InformationBanners from 'pix-orga/components/banner/information-banners';
@@ -35,5 +35,5 @@ import Sidebar from 'pix-orga/components/layout/sidebar';
       {{/if}}
     </:footer>
   </PixAppLayout>
-  <NotificationContainer @position="bottom-right" />
+  <PixToastContainer @closeButtonAriaLabel={{t "common.notification.close"}} />
 </template>

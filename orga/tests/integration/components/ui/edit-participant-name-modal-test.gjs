@@ -24,8 +24,8 @@ module('Integration | Component | Ui::EditParticipantNameModal', function (hooks
       updateParticipantName: sinon.stub(),
     };
 
-    sinon.stub(notificationsStub, 'success');
-    sinon.stub(notificationsStub, 'error');
+    sinon.stub(notificationsStub, 'sendSuccess');
+    sinon.stub(notificationsStub, 'sendError');
     sinon.stub(storeStub, 'adapterFor').returns(adapterStub);
 
     firstNameLabel = t('components.ui.edit-participant-name-modal.fields.first-name') + ' *';
@@ -142,7 +142,7 @@ module('Integration | Component | Ui::EditParticipantNameModal', function (hooks
       await clickByName(t('common.actions.save'));
 
       sinon.assert.notCalled(adapterStub.updateParticipantName);
-      sinon.assert.calledWith(notificationsStub.success, 'Nom mis à jour avec succès');
+      sinon.assert.calledWith(notificationsStub.sendSuccess, 'Nom mis à jour avec succès');
       sinon.assert.calledOnce(closeStub);
       assert.ok(true); // QUnit assertion for test completion
     });
@@ -191,7 +191,7 @@ module('Integration | Component | Ui::EditParticipantNameModal', function (hooks
 
       assert.strictEqual(participant.firstName, 'Pierre');
       assert.strictEqual(participant.lastName, 'Martin');
-      sinon.assert.calledWith(notificationsStub.success, 'Nom mis à jour avec succès');
+      sinon.assert.calledWith(notificationsStub.sendSuccess, 'Nom mis à jour avec succès');
       sinon.assert.calledOnce(closeStub);
     });
 
@@ -214,7 +214,7 @@ module('Integration | Component | Ui::EditParticipantNameModal', function (hooks
       await fillByLabel(firstNameLabel, 'Pierre');
       await clickByName(t('common.actions.save'));
 
-      sinon.assert.calledWith(notificationsStub.error, t('api-error-messages.global'));
+      sinon.assert.calledWith(notificationsStub.sendError, t('api-error-messages.global'));
       sinon.assert.notCalled(closeStub);
       assert.ok(true); // QUnit assertion for test completion
     });
@@ -236,7 +236,7 @@ module('Integration | Component | Ui::EditParticipantNameModal', function (hooks
       await clickByName(t('common.actions.save'));
 
       sinon.assert.notCalled(adapterStub.updateParticipantName);
-      sinon.assert.notCalled(notificationsStub.success);
+      sinon.assert.notCalled(notificationsStub.sendSuccess);
       sinon.assert.notCalled(closeStub);
       assert.ok(true); // QUnit assertion for test completion
     });
