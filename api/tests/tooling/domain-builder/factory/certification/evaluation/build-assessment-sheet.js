@@ -3,6 +3,7 @@ import {
   STATES,
   STATES_OF_LAST_QUESTION,
 } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSheet.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 
 export const buildAssessmentSheet = function ({
   certificationCourseId = 1,
@@ -18,6 +19,7 @@ export const buildAssessmentSheet = function ({
   lastAnswerAt = new Date(),
   lastQuestionDate = new Date(),
   versionId = 4,
+  certificationFramework = Frameworks.CORE,
   answers = [],
 } = {}) {
   return new AssessmentSheet({
@@ -34,6 +36,7 @@ export const buildAssessmentSheet = function ({
     lastAnswerAt,
     lastQuestionDate,
     versionId,
+    certificationFramework,
     answers,
   });
 };

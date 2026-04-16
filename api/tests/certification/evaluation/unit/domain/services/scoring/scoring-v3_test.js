@@ -4,7 +4,7 @@ import * as flashAlgorithmService from '../../../../../../../src/certification/e
 import { createV3AssessmentResult } from '../../../../../../../src/certification/evaluation/domain/services/scoring/create-v3-assessment-result.js';
 import { handleV3CertificationScoring } from '../../../../../../../src/certification/evaluation/domain/services/scoring/scoring-v3.js';
 import { CompetenceMark } from '../../../../../../../src/certification/shared/domain/models/CompetenceMark.js';
-import { SCOPES } from '../../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
@@ -48,14 +48,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const assessmentId = 1214;
         const certificationCourseId = 1234;
 
-        const candidate = domainBuilder.certification.evaluation.buildCandidate({
-          subscriptionScope: SCOPES.CORE,
-          hasCleaSubscription: false,
-          reconciledAt: new Date('2021-01-01'),
-        });
         const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
           assessmentId,
           certificationCourseId,
+          certificationFramework: Frameworks.CORE,
         });
 
         const event = new CertificationCompletedJob({
@@ -76,7 +72,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const score = handleV3CertificationScoring({
           event,
           assessmentSheet,
-          candidate,
           allChallenges: challenges,
           askedChallengesWithoutLiveAlerts: challenges,
           algorithm,
@@ -98,14 +93,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           const assessmentId = 1214;
           const certificationCourseId = 1234;
 
-          const candidate = domainBuilder.certification.evaluation.buildCandidate({
-            subscriptionScope: SCOPES.CORE,
-            hasCleaSubscription: false,
-            reconciledAt: new Date('2025-01-01'),
-          });
           const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
             assessmentId,
             certificationCourseId,
+            certificationFramework: Frameworks.CORE,
           });
 
           const event = new CertificationCompletedJob({
@@ -127,7 +118,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
           const score = handleV3CertificationScoring({
             event,
             assessmentSheet,
-            candidate,
             allChallenges: challenges,
             askedChallengesWithoutLiveAlerts: challenges,
             algorithm,
@@ -149,15 +139,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const certificationCourseId = 1234;
         const userId = 4567;
 
-        const candidate = domainBuilder.certification.evaluation.buildCandidate({
-          subscriptionScope: SCOPES.CORE,
-          hasCleaSubscription: true,
-          reconciledAt: new Date('2021-01-01'),
-        });
-
         const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
           assessmentId,
           certificationCourseId,
+          certificationFramework: Frameworks.CLEA,
         });
 
         const event = new CertificationCompletedJob({
@@ -179,7 +164,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const score = handleV3CertificationScoring({
           event,
           assessmentSheet,
-          candidate,
           allChallenges: challenges,
           askedChallengesWithoutLiveAlerts: challenges,
           algorithm,
@@ -201,14 +185,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const assessmentId = 1214;
         const certificationCourseId = 1234;
 
-        const candidate = domainBuilder.certification.evaluation.buildCandidate({
-          subscriptionScope: SCOPES.PIX_PLUS_PRO_SANTE,
-          hasCleaSubscription: false,
-          reconciledAt: new Date('2021-01-01'),
-        });
         const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
           assessmentId,
           certificationCourseId,
+          certificationFramework: Frameworks.PRO_SANTE,
         });
 
         const event = new CertificationCompletedJob({
@@ -227,7 +207,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const score = handleV3CertificationScoring({
           event,
           assessmentSheet,
-          candidate,
           allChallenges: challenges,
           askedChallengesWithoutLiveAlerts: challenges,
           algorithm,
@@ -248,14 +227,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const assessmentId = 1214;
         const certificationCourseId = 1234;
 
-        const candidate = domainBuilder.certification.evaluation.buildCandidate({
-          subscriptionScope: SCOPES.PIX_PLUS_EDU_1ER_DEGRE,
-          hasCleaSubscription: false,
-          reconciledAt: new Date('2021-01-01'),
-        });
         const assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
           assessmentId,
           certificationCourseId,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
         });
 
         const event = new CertificationCompletedJob({
@@ -279,7 +254,6 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         const score = handleV3CertificationScoring({
           event,
           assessmentSheet,
-          candidate,
           allChallenges: challenges,
           askedChallengesWithoutLiveAlerts: challenges,
           algorithm,

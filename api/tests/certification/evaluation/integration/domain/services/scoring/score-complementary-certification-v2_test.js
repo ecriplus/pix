@@ -329,6 +329,7 @@ function _buildComplementaryCertificationCourse({
   const { id: certificationCandidateId } = databaseBuilder.factory.buildCertificationCandidate({
     userId,
     sessionId,
+    subscription: complementaryCertificationKey,
   });
   databaseBuilder.factory.buildCertificationCourse({
     id: certificationCourseId,

@@ -447,8 +447,12 @@
         "organization": "El candidato respondió incorrectamente a más del 50% de las preguntas, lo que invalidó toda su certificación y le supuso una puntuación de 0 píxeles."
       },
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
-        "candidate": "El número de preguntas contestadas durante su prueba de certificación es insuficiente para que le expidamos la certificación Pix.",
-        "organization": "El número de preguntas contestadas por el candidato durante la prueba de certificación es insuficiente para que podamos expedir la certificación Pix."
+        "candidate": "El número de preguntas contestadas durante su prueba de certificación es insuficiente para que le expidamos la certificación.",
+        "organization": "El número de preguntas contestadas por el candidato durante la prueba de certificación es insuficiente para que podamos expedir la certificación."
+      },
+      "REJECTED_EDU_NOT_ELIGIBLE": {
+        "candidate": "Sus resultados no le permiten ser admisible a la certificación Pix+ Édu. Puede seguir progresando en Pix y volver a intentarlo en una próxima sesión.",
+        "organization": "El candidato no es admisible a la certificación Pix+ Édu."
       }
     }
   },

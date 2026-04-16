@@ -1,6 +1,7 @@
 import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
@@ -350,6 +351,77 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
     });
   });
 
+  context('when certification is a Pix+ Édu and the candidate does not reach the minimum mesh', function () {
+    let certifiableUserId, certificationCourseId, completedCertificationAssessmentId, eduCertificationVersion;
+
+    beforeEach(async function () {
+      const limitDate = new Date('2025-01-01T00:00:00Z');
+      certifiableUserId = databaseBuilder.factory.buildUser().id;
+
+      eduCertificationVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: Frameworks.EDU_1ER_DEGRE,
+        challengesConfiguration: { maximumAssessmentLength: 10 },
+        minimumAnswersRequiredToValidateACertification: 10,
+        globalScoringConfiguration: [{ meshLevel: 0, bounds: { min: 10, max: 20 } }],
+      });
+
+      const session = databaseBuilder.factory.buildSession({
+        version: AlgorithmEngineVersion.V3,
+      });
+
+      const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId: session.id,
+        userId: certifiableUserId,
+        subscription: eduCertificationVersion.scope,
+      }).id;
+
+      certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+        completedAt: null,
+        sessionId: session.id,
+        userId: certifiableUserId,
+        createdAt: limitDate,
+        version: AlgorithmEngineVersion.V3,
+        candidateId,
+        versionId: eduCertificationVersion.id,
+        framework: eduCertificationVersion.scope,
+      }).id;
+
+      completedCertificationAssessmentId = databaseBuilder.factory.buildAssessment({
+        certificationCourseId,
+        userId: certifiableUserId,
+        state: Assessment.states.COMPLETED,
+        type: Assessment.types.CERTIFICATION,
+        createdAt: limitDate,
+      }).id;
+
+      _buildInvalidAnswersAndCertificationChallenges({
+        assessmentId: completedCertificationAssessmentId,
+        certificationCourseId,
+        versionId: eduCertificationVersion.id,
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('should persist an auto-jury comment REJECTED_EDU_NOT_ELIGIBLE on the assessment result', async function () {
+      // given
+      const event = new CertificationCompletedJob({
+        certificationCourseId,
+        locale: FRENCH_SPOKEN,
+      });
+
+      // when
+      await usecases.scoreV3Certification({ certificationCourseId, event });
+
+      // then
+      const results = await knex('assessment-results').where({ assessmentId: completedCertificationAssessmentId });
+      expect(results).to.have.lengthOf(1);
+      expect(results[0].commentByAutoJury).to.equal('REJECTED_EDU_NOT_ELIGIBLE');
+      expect(results[0].reachedMeshIndex).to.be.null;
+      expect(results[0].status).to.equal('rejected');
+    });
+  });
+
   context('when certification is a Double Certification', function () {
     let certifiableUserId,
       certificationCourseId,
@@ -392,6 +464,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         version: AlgorithmEngineVersion.V3,
         candidateId,
         versionId: certificationVersionId,
+        framework: Frameworks.CLEA,
       }).id;
 
       complementaryCertificationCourseId = databaseBuilder.factory.buildComplementaryCertificationCourse({

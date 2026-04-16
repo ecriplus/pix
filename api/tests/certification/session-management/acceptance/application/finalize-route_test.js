@@ -3,6 +3,7 @@ import {
   CertificationIssueReportCategory,
   CertificationIssueReportSubcategories,
 } from '../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
@@ -641,6 +642,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             const candidateId = databaseBuilder.factory.buildCertificationCandidate({
               userId,
               sessionId: session.id,
+              subscription: Frameworks.CLEA,
             }).id;
             const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
               userId,
@@ -648,6 +650,7 @@ describe('Certification | Session Management | Acceptance | Application | Route 
               completedAt: new Date(),
               version: AlgorithmEngineVersion.V3,
               candidateId,
+              framework: Frameworks.CLEA,
               versionId: certificationVersionId,
             }).id;
 
@@ -932,8 +935,6 @@ const _createSession = async ({ version = 2 } = {}) => {
 };
 
 const _createSessionWithoutChallenge = async () => {
-  const version = 3;
-
   const learningContent = [
     {
       id: 'recArea0',
@@ -950,10 +951,10 @@ const _createSessionWithoutChallenge = async () => {
 
   const userId = databaseBuilder.factory.buildUser().id;
   const candidateUserId = databaseBuilder.factory.buildUser().id;
-  const session = databaseBuilder.factory.buildSession({ version });
-  const versionId = databaseBuilder.factory.buildCertificationVersion({
+  const session = databaseBuilder.factory.buildSession({ version: 3 });
+  const version = databaseBuilder.factory.buildCertificationVersion({
     startDate: new Date('2024-01-01'),
-  }).id;
+  });
   databaseBuilder.factory.buildCertificationCenterMembership({
     userId,
     certificationCenterId: session.certificationCenterId,
@@ -962,16 +963,17 @@ const _createSessionWithoutChallenge = async () => {
     sessionId: session.id,
     userId: candidateUserId,
     reconciledAt: new Date('2024-01-01'),
+    subscription: version.scope,
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     sessionId: session.id,
     completedAt: null,
-    version,
+    version: 3,
     abortReason: 'technical',
     userId: candidateUserId,
     createdAt: new Date('2025-01-01'),
     candidateId,
-    versionId,
+    versionId: version.id,
   }).id;
   const assessmentId = databaseBuilder.factory.buildAssessment({
     certificationCourseId,

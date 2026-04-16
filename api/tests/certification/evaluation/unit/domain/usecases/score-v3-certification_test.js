@@ -139,16 +139,6 @@ function stubAssessmentSheetRepository({ hasCandidateFinishedTest = true } = {})
   return assessmentSheetRepository;
 }
 
-function stubCertificationCandidateRepository() {
-  const certificationCandidateRepository = {
-    findByAssessmentId: sinon.stub(),
-  };
-  const candidate = domainBuilder.certification.evaluation.buildCandidate();
-  certificationCandidateRepository.findByAssessmentId.resolves(candidate);
-
-  return certificationCandidateRepository;
-}
-
 function stubVersionApi() {
   const versionApi = {
     getById: sinon.stub(),
@@ -264,7 +254,6 @@ function stubEvaluationSessionRepository({ isFinalized = false, isPublished = fa
 function createDependencies(overrides = {}) {
   return {
     assessmentSheetRepository: stubAssessmentSheetRepository(),
-    certificationCandidateRepository: stubCertificationCandidateRepository(),
     versionApi: stubVersionApi(),
     services: stubServices(),
     scoringConfigurationRepository: stubScoringConfigurationRepository(),

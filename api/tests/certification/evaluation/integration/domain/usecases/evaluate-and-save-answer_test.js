@@ -110,7 +110,10 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
         beforeEach(function () {
           const sessionId = databaseBuilder.factory.buildSession().id;
-          const candidateId = databaseBuilder.factory.buildCertificationCandidate({ userId, sessionId }).id;
+          const candidateId = databaseBuilder.factory.buildCertificationCandidate({
+            userId,
+            sessionId,
+          }).id;
           certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             candidateId,

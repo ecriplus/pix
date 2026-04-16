@@ -123,7 +123,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
   context('when sessions and candidates are valid', function () {
     it('return a sessions report', async function () {
       // given
-      const candidate1 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+      const candidate1 = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData1,
         id: null,
         createdAt: null,
@@ -132,7 +132,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
         billingMode: CertificationCandidate.BILLING_MODES.FREE,
       });
       const session1 = { ...firstSession, candidates: [candidateData1] };
-      const candidate2 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+      const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
         ...candidateData2,
         id: null,
         createdAt: null,
@@ -227,7 +227,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
     context('when there is only sessionId and candidate information', function () {
       it('should validate the candidates in the session', async function () {
         // given
-        const candidate1 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+        const candidate1 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData1,
           id: null,
           createdAt: null,
@@ -236,7 +236,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
         });
         const session1 = { ...firstSession, candidates: [candidateData1] };
-        const candidate2 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+        const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData2,
           id: null,
           createdAt: null,
@@ -245,7 +245,7 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
         });
         const candidateData3 = { ...candidateData2, lastName: 'Brun', firstName: 'Petit Ours' };
-        const candidate3 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+        const candidate3 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData3,
           id: null,
           createdAt: null,
@@ -434,14 +434,14 @@ describe('Unit | UseCase | sessions-mass-import | validate-sessions', function (
     context('when there is at least one duplicate candidate in a session', function () {
       it('should remove duplicate certification candidates from the session', async function () {
         // given
-        const candidate1 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+        const candidate1 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData1,
           id: null,
           createdAt: null,
           userId: null,
           billingMode: CertificationCandidate.BILLING_MODES.FREE,
         });
-        const candidate2 = domainBuilder.certification.enrolment.buildCandidate.withCoreSubscription({
+        const candidate2 = domainBuilder.certification.enrolment.buildCandidate({
           ...candidateData2,
           id: null,
           createdAt: null,

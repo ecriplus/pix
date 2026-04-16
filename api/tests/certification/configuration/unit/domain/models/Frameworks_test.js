@@ -1,4 +1,8 @@
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import {
+  Frameworks,
+  hasCoreScope,
+  isEduFramework,
+} from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Configuration | Domain | Models | Frameworks', function () {
@@ -13,5 +17,37 @@ describe('Unit | Certification | Configuration | Domain | Models | Frameworks', 
 
     const frameworkValues = Object.values(Frameworks);
     expect(frameworkValues).to.have.lengthOf(7);
+  });
+
+  context('#isEduFramework', function () {
+    [
+      { framework: Frameworks.EDU_1ER_DEGRE, result: true },
+      { framework: Frameworks.EDU_2ND_DEGRE, result: true },
+      { framework: Frameworks.EDU_CPE, result: true },
+      { framework: Frameworks.CORE, result: false },
+      { framework: Frameworks.CLEA, result: false },
+      { framework: Frameworks.DROIT, result: false },
+      { framework: Frameworks.PRO_SANTE, result: false },
+    ].forEach(({ framework, result }) => {
+      it(`should return ${result} when framework is ${framework}`, function () {
+        expect(isEduFramework(framework)).to.equal(result);
+      });
+    });
+  });
+
+  context('#hasCoreScope', function () {
+    [
+      { framework: Frameworks.CORE, result: true },
+      { framework: Frameworks.CLEA, result: true },
+      { framework: Frameworks.DROIT, result: false },
+      { framework: Frameworks.EDU_1ER_DEGRE, result: false },
+      { framework: Frameworks.EDU_2ND_DEGRE, result: false },
+      { framework: Frameworks.EDU_CPE, result: false },
+      { framework: Frameworks.PRO_SANTE, result: false },
+    ].forEach(({ framework, result }) => {
+      it(`should return ${result} when framework is ${framework}`, function () {
+        expect(hasCoreScope(framework)).to.equal(result);
+      });
+    });
   });
 });

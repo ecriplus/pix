@@ -451,12 +451,16 @@
         "organization": "Der Kandidat hat mehr als 50 % der gestellten Fragen falsch beantwortet. Dies machte die gesamte Zertifizierung ungültig und führte daher zu einer Punktzahl von 0 Pixeln."
       },
       "REJECTED_DUE_TO_LACK_OF_ANSWERS": {
-        "candidate": "Die Anzahl der während Ihres Zertifizierungstests beantworteten Fragen ist nicht ausreichend und erlaubt es uns nicht, Ihnen eine Pix-Zertifizierung auszustellen.",
-        "organization": "Die Anzahl der Fragen, die der Kandidat während seines Zertifizierungstests beantwortet hat, ist nicht ausreichend und erlaubt uns nicht, ihm eine Pix-Zertifizierung auszustellen."
+        "candidate": "Die Anzahl der während Ihres Zertifizierungstests beantworteten Fragen ist nicht ausreichend und erlaubt es uns nicht, Ihnen eine Zertifizierung auszustellen.",
+        "organization": "Die Anzahl der Fragen, die der Kandidat während seines Zertifizierungstests beantwortet hat, ist nicht ausreichend und erlaubt uns nicht, ihm eine Zertifizierung auszustellen."
       },
       "REJECTED_DUE_TO_ZERO_PIX_SCORE": {
         "candidate": "Die erzielten Ergebnisse reichen noch nicht für die Ausstellung der Pix-Zertifizierung aus. Sie müssen sich weiterentwickeln, um sich in Ihrer digitalen Umgebung wohler zu fühlen und Ihre Fähigkeiten aufwerten zu können.",
         "organization": "Die von diesem Kandidaten erzielten Ergebnisse reichen nicht aus, um die Pix-Zertifizierung auszustellen. Er muss sich weiterentwickeln, um sich in seiner digitalen Umgebung wohler zu fühlen und seine Fähigkeiten zur Geltung bringen zu können."
+      },
+      "REJECTED_EDU_NOT_ELIGIBLE": {
+        "candidate": "Ihre Ergebnisse machen Sie nicht zulassungsberechtigt für die Zertifizierung Pix+ Édu. Sie können auf Pix weiter Fortschritte machen und es bei einer nächsten Sitzung erneut versuchen.",
+        "organization": "Der Kandidat ist nicht zulassungsberechtigt für die Zertifizierung Pix+ Édu."
       }
     }
   },

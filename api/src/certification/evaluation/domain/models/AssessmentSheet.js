@@ -11,6 +11,7 @@ export class AssessmentSheet {
    * @param {number} params.userId
    * @param {number} params.assessmentId
    * @param {number} params.versionId
+   * @param {Frameworks} params.certificationFramework
    * @param {string} params.lastChallengeId
    * @param {Assessment.statesOfLastQuestion} params.lastQuestionState
    * @param {Date} params.lastQuestionDate
@@ -27,6 +28,7 @@ export class AssessmentSheet {
     userId,
     assessmentId,
     versionId,
+    certificationFramework,
     lastChallengeId,
     lastQuestionState,
     lastQuestionDate,
@@ -42,6 +44,7 @@ export class AssessmentSheet {
     this.userId = userId;
     this.assessmentId = assessmentId;
     this.versionId = versionId;
+    this.certificationFramework = certificationFramework;
     this.lastChallengeId = lastChallengeId;
     this.lastQuestionState = lastQuestionState;
     this.lastQuestionDate = lastQuestionDate;

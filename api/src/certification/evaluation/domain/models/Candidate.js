@@ -1,36 +1,29 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { SCOPES } from '../../../shared/domain/models/Scopes.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 export class Candidate {
   static #schema = Joi.object({
     accessibilityAdjustmentNeeded: Joi.boolean().optional(),
     reconciledAt: Joi.date().required(),
-    subscriptionScope: Joi.string()
-      .valid(...Object.values(SCOPES))
+    subscriptionFramework: Joi.string()
+      .valid(...Object.values(Frameworks))
       .required(),
-    hasCleaSubscription: Joi.boolean().required(),
   });
 
   /**
    * @param {object} params
    * @param {Date} params.reconciledAt
    * @param {boolean} [params.accessibilityAdjustmentNeeded]
-   * @param {SCOPES} params.subscriptionScope
-   * @param {boolean} params.hasCleaSubscription
+   * @param {Frameworks} params.subscriptionFramework
    */
-  constructor({ accessibilityAdjustmentNeeded, reconciledAt, subscriptionScope, hasCleaSubscription }) {
+  constructor({ accessibilityAdjustmentNeeded, reconciledAt, subscriptionFramework }) {
     this.accessibilityAdjustmentNeeded = !!accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
-    this.subscriptionScope = subscriptionScope;
-    this.hasCleaSubscription = hasCleaSubscription;
+    this.subscriptionFramework = subscriptionFramework;
 
     this.#validate();
-  }
-
-  get hasOnlyCoreSubscription() {
-    return this.subscriptionScope === SCOPES.CORE && !this.hasCleaSubscription;
   }
 
   #validate() {

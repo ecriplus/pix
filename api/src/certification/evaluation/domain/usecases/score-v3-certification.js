@@ -1,7 +1,6 @@
 /**
  * @typedef {import('./index.js').Services} Services
  * @typedef {import('./index.js').AssessmentSheetRepository} AssessmentSheetRepository
- * @typedef {import('./index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('./index.js').VersionApi} VersionApi
  * @typedef {import('./index.js').AssessmentResultRepository} AssessmentResultRepository
  * @typedef {import('./index.js').sharedCompetenceMarkRepository} SharedCompetenceMarkRepository
@@ -27,7 +26,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {Object} params.event
  * @param {Services} params.services
  * @param {AssessmentSheetRepository} params.assessmentSheetRepository
- * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {VersionApi} params.versionApi
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
@@ -43,7 +41,6 @@ export async function scoreV3Certification({
   certificationCourseId,
   services,
   assessmentSheetRepository,
-  certificationCandidateRepository,
   versionApi,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
@@ -57,10 +54,6 @@ export async function scoreV3Certification({
   const assessmentSheet = await assessmentSheetRepository.findByCertificationCourseId(certificationCourseId);
   if (!assessmentSheet)
     throw new NotFoundError('No AssessmentSheet found for certificationCourseId ' + certificationCourseId);
-
-  const candidate = await certificationCandidateRepository.findByAssessmentId({
-    assessmentId: assessmentSheet.assessmentId,
-  });
 
   const version = await versionApi.getById({ id: assessmentSheet.versionId });
 
@@ -93,7 +86,6 @@ export async function scoreV3Certification({
 
   const { coreAssessmentResult, doubleCertificationScoring } = services.handleV3CertificationScoring({
     event,
-    candidate,
     assessmentSheet,
     allChallenges,
     askedChallengesWithoutLiveAlerts,

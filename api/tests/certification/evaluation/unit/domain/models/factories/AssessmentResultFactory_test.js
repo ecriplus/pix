@@ -299,6 +299,41 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
     });
   });
 
+  describe('#buildRejectedNotEligibleEduAssessmentResult', function () {
+    it('should return a rejected AssessmentResult with an EDU-specific auto-jury comment carrying the framework as scopeKey', function () {
+      // when
+      const actualAssessmentResult = AssessmentResultFactory.buildRejectedNotEligibleEduAssessmentResult({
+        assessmentId: 123,
+        juryId: 456,
+        capacity: -3.94,
+        reachedMeshIndex: null,
+        versionId: 10,
+      });
+
+      // then
+      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+        status: AssessmentResult.status.REJECTED,
+        pixScore: null,
+        reproducibilityRate: null,
+        assessmentId: 123,
+        juryId: 456,
+        competenceMarks: [],
+        capacity: -3.94,
+        reachedMeshIndex: null,
+        versionId: 10,
+        commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_EDU_NOT_ELIGIBLE,
+        }),
+        commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_EDU_NOT_ELIGIBLE,
+        }),
+      });
+      expectedAssessmentResult.id = undefined;
+      expectedAssessmentResult.createdAt = undefined;
+      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+  });
+
   describe('#buildLackOfAnswersForTechnicalReason', function () {
     it('should return a cancelled AssessmentResult', function () {
       // given

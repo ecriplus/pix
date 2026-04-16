@@ -1,4 +1,5 @@
 import * as assessmentSheetRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/assessment-sheet-repository.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
@@ -16,6 +17,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       updatedAt: new Date('2022-02-22'),
       lastAnswerAt: new Date('2022-01-11'),
       versionId,
+      framework: Frameworks.EDU_1ER_DEGRE,
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
@@ -53,6 +55,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             certificationCourseUpdatedAt: new Date('2022-02-22'),
             lastAnswerAt: new Date('2022-01-11'),
             versionId,
+            certificationFramework: Frameworks.EDU_1ER_DEGRE,
           }),
         );
       });
@@ -109,6 +112,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           certificationCourseUpdatedAt: new Date('2044-02-22'), // updated
           lastAnswerAt: new Date('2044-01-11'), // updated
           versionId,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
         }),
       );
     });

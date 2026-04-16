@@ -2,6 +2,7 @@ import { DomainError } from '../../../../shared/domain/errors.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
+import { isEduFramework } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 
 export class JuryCertification {
@@ -184,7 +185,7 @@ export class JuryCertification {
       throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non V3');
     }
 
-    if (!this.certificationFramework.startsWith('EDU_')) {
+    if (!isEduFramework(this.certificationFramework)) {
       throw new DomainError('Impossible de définir le résultat du volet externe pour une certification non "EDU"');
     }
 
