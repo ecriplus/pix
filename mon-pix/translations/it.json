@@ -692,6 +692,11 @@
         "EDU": {
           "results-infos": "'<p>'La certificazione si svolge in due fasi:'</p><ol><li>'Prova Pix: appena completata.'</li><li>'Prova orale: organizzata al di fuori di Pix davanti a una giuria.'</li></ol><p>'Al termine dell'orale, verrà assegnato il livello di certificazione definitivo (Esperto, Avanzato, ecc.).'<br/>'Contattate il vostro centro di certificazione per organizzare la prova orale.'</p>'",
           "status": "Certificato valido",
+          "steps": {
+            "1": "Sezione Pix",
+            "2": "Sezione pratica'<br/>'professionale",
+            "3": "Risultato finale"
+          },
           "sub-title": "Il candidato è ammesso alla 2ª fase!"
         }
       },

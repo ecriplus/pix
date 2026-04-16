@@ -42,10 +42,15 @@
   }
 }
 
+.v3-pix-plus-certificate__stepper {
+  max-width: 30rem;
+  margin-top: var(--pix-spacing-8x);
+}
+
 .v3-pix-plus-certificate__details {
   @extend %pix-body-s;
 
-  margin-top: var(--pix-spacing-6x);
+  margin-top: var(--pix-spacing-8x);
 
   dl {
     margin-top: var(--pix-spacing-6x);
@@ -59,6 +64,32 @@
   dd::after {
     display: block;
     content: '';
+  }
+}
+
+.v3-pix-plus-certificate__score {
+  text-align: center;
+}
+
+.v3-pix-plus-certificate-score__hexagon {
+  position: relative;
+  width: 11rem;
+  height: 12rem;
+  margin-bottom: var(--pix-spacing-1x);
+  background-image: url('/images/certificate/pix-plus-hexagon-validated.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+
+  .dash {
+    @extend %pix-title-l;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    color: var(--pix-certif-500);
+    transform: translateY(-50%);
   }
 }
 

@@ -693,6 +693,11 @@
         "EDU": {
           "results-infos": "'<p>'De certificering verloopt in twee fasen:'</p><ol><li>'Pix-toets: zojuist afgelegd.'</li><li>'Mondeling examen: buiten Pix georganiseerd voor een jury.'</li></ol><p>'Na afloop van het mondeling wordt uw definitieve certificeringsniveau toegekend (Expert, Gevorderd, enz.).'<br/>'Neem contact op met uw certificeringscentrum om het mondeling examen te organiseren.'</p>'",
           "status": "Geldig certificaat",
+          "steps": {
+            "1": "Pix-onderdeel",
+            "2": "Beroepspraktijk'<br/>'onderdeel",
+            "3": "Eindresultaat"
+          },
           "sub-title": "De kandidaat is toegelaten tot de 2e fase!"
         }
       },
