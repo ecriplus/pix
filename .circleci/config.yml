@@ -54,6 +54,15 @@ workflows:
           base-revision: dev
           config-path: .circleci/jobs.yml
           mapping: |
+            .circleci/.*                        run-api               true
+            .circleci/.*                        run-mon-pix           true
+            .circleci/.*                        run-orga              true
+            .circleci/.*                        run-certif            true
+            .circleci/.*                        run-admin             true
+            .circleci/.*                        run-junior            true
+            .circleci/.*                        run-audit-logger      true
+            .circleci/.*                        run-e2e-playwright    true
+            .circleci/.*                        run-e2e-cypress       true
             api/.*                              run-api               true
             mon-pix/.*                          run-mon-pix           true
             orga/.*                             run-orga              true
