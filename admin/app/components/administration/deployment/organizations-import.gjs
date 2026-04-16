@@ -1,6 +1,7 @@
 import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
@@ -35,6 +36,19 @@ export default class OrganizationsImport extends Component {
           case 'MISSING_REQUIRED_FIELD_NAMES':
             this.pixToast.sendErrorNotification({ message: `${error.meta}` });
             break;
+          case 'PARENT_ORGANIZATION_NOT_IN_NETWORK': {
+            const message = [
+              `${this.intl.t('components.administration.organizations-import.notifications.errors.no-organization-created')}`,
+              `${this.intl.t('components.administration.organizations-import.notifications.errors.error-location', { errorLine: error.meta.currentLine, errorField: '"parentOrganizationId"' })}`,
+              this.intl.t(
+                'components.administration.organizations-import.notifications.errors.PARENT_ORGANIZATION_NOT_IN_NETWORK',
+                { parentOrganizationId: error.meta.parentOrganizationId },
+              ),
+            ];
+
+            this.pixToast.sendErrorNotification({ message: htmlSafe(message.join('<br>')) });
+            break;
+          }
           default:
             this.pixToast.sendErrorNotification({ message: error.detail });
         }
