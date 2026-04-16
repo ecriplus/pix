@@ -9,6 +9,7 @@ import { validateEnvironmentVariables } from './src/shared/infrastructure/valida
 validateEnvironmentVariables(configSchema);
 
 let server;
+let isShuttingDown = false;
 
 const start = async function () {
   server = await createMaddoServer();
@@ -16,6 +17,10 @@ const start = async function () {
 };
 
 async function _exitOnSignal(signal) {
+  if (isShuttingDown) {
+    return;
+  }
+  isShuttingDown = true;
   logger.info(`Received signal: ${signal}.`);
   logger.info('Stopping HAPI server...');
   await server.stop({ timeout: 30000 });
