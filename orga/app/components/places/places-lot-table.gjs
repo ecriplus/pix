@@ -5,7 +5,7 @@ import { formatDate, t } from 'ember-intl';
 import { eq, gt } from 'ember-truth-helpers';
 
 import { STATUSES } from '../../models/organization-places-lot';
-import EmptyState from '../ui/empty-state.js';
+import EmptyState from '../ui/empty-state';
 
 function emptyCell(value) {
   return value ? value : '-';
