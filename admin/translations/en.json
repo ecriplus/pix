@@ -277,6 +277,11 @@
       "organizations-import": {
         "description": "Existing organizations will not be changed.",
         "notifications": {
+          "errors": {
+            "PARENT_ORGANIZATION_NOT_IN_NETWORK": " Organization {parentOrganizationId} is not part of a network.",
+            "error-location": "Error on line {errorLine}, in the field {errorField}.",
+            "no-organization-created": "No organisation has been created."
+          },
           "success": "{ count, plural, one {One organization has been successfully created.} other {{ count } organizations have been successfully created.}}"
         },
         "title": "Mass creation of organizations",
