@@ -46,14 +46,6 @@
                 "legend": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
                 "licence": ""
               }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "b5743f50-dbfb-465c-8bdf-3dfbba19c3f2",
-                "type": "text",
-                "tag": " "
-              }
             }
           ]
         }
