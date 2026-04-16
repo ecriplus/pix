@@ -49,18 +49,6 @@ module('Integration | Component | Module | Text', function (hooks) {
       });
     });
 
-    test('should display a yellow tag for "key-points"', async function (assert) {
-      // given
-      const textElement = { content: 'content text', type: 'text', tag: 'key-points' };
-
-      // when
-      const screen = await render(<template><ModuleElementText @text={{textElement}} /></template>);
-
-      // then
-      assert.dom('.pix-tag--yellow').exists();
-      assert.ok(screen.getByText(t('pages.modulix.elements.text.tag.key-points')));
-    });
-
     test('should display a purple tag for "context"', async function (assert) {
       // given
       const textElement = { content: 'content text', type: 'text', tag: 'context' };

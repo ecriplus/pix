@@ -6,7 +6,6 @@ import htmlUnsafe from 'mon-pix/helpers/html-unsafe';
 import ModuleElement from './module-element';
 
 const TAG_COLORS = {
-  'key-points': 'yellow',
   context: 'purple',
   tip: 'blue-light',
   'further-information': 'blue-light',
