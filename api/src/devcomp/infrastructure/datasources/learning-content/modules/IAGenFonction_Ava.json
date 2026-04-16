@@ -97,7 +97,7 @@
                 "id": "540b867d-1e06-496c-a9e9-425c2012fef8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Yasmine aimerait chiner de nouveaux objets pour décorer une fois les travaux terminés.</p><p>Elle a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
+                "content": "<p>Yasmine aimerait trouver des objets en brocante pour décorer une fois les travaux terminés.</p><p>Elle a posé la même question à deux logiciels d’IA conversationnelle différents.</p><br><p>Observez la différence entre ces deux réponses.</p>"
               }
             },
             {
@@ -556,7 +556,7 @@
                       "id": "838dd2fd-5a2c-462c-b93a-b230dadc4e62",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p><p>L’outil pertinent identifié ici est un logiciel qui se connecte aux informations d’un service fiable de météo (Météo France, AEMET, National Weather Service, etc. )</p>"
+                      "content": "<p>Le logiciel d’IA analyse le prompt et identifie l’outil pertinent.</p><p>L’outil pertinent identifié ici est un logiciel qui se connecte aux informations d’un service externe de météo (Météo France, AEMET, National Weather Service, etc. )</p>"
                     },
                     {
                       "id": "d81c2f6a-7811-4ed5-8959-70fd4ed60bd2",
@@ -594,11 +594,11 @@
                         },
                         {
                           "type": "text",
-                          "content": "<br><p><code><br>{ \"tool\":</code></p>"
+                          "content": "<br><p><code><br>{ \"outil\":</code></p>"
                         },
                         {
                           "type": "select",
-                          "input": "tool",
+                          "input": "ouil",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
                           "ariaLabel": "- Sélectionnez -",
@@ -608,7 +608,7 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "\"weather\","
+                              "content": "\"météo\","
                             },
                             {
                               "id": "2",
@@ -625,11 +625,11 @@
                         },
                         {
                           "type": "text",
-                          "content": "<br><p><code>\"arguments\":<br>{ \"location\":</code></p>"
+                          "content": "<br><p><code>\"arguments\":<br>{ \"localisation\":</code></p>"
                         },
                         {
                           "type": "select",
-                          "input": "location",
+                          "input": "localisation",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
                           "ariaLabel": "- Sélectionnez -",
@@ -637,7 +637,7 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "\"weather\","
+                              "content": "\"météo\","
                             },
                             {
                               "id": "2",
@@ -666,7 +666,7 @@
                           "options": [
                             {
                               "id": "1",
-                              "content": "\"weather\""
+                              "content": "\"météo\""
                             },
                             {
                               "id": "2",
