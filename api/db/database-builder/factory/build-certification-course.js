@@ -6,7 +6,7 @@ import { databaseBuffer } from '../database-buffer.js';
 import { buildSession } from './build-session.js';
 import { buildUser } from './build-user.js';
 
-export function buildCertificationCourse ({
+export function buildCertificationCourse({
   id = databaseBuffer.getNextId(),
   lastName = 'last-name',
   firstName = 'first-name',
@@ -70,5 +70,4 @@ export function buildCertificationCourse ({
     tableName: 'certification-courses',
     values,
   });
-};
-
+}

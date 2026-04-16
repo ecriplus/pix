@@ -52,6 +52,7 @@ export default class Certification extends Model {
   @attr('boolean', { defaultValue: false }) isPublished;
   @attr('number') version;
   @attr('string') certificationFramework;
+  @attr() lastAnswerAt;
 
   @belongsTo('complementary-certification-course-result-with-external', { async: true, inverse: null })
   complementaryCertificationCourseResultWithExternal;
@@ -65,7 +66,7 @@ export default class Certification extends Model {
   }
 
   get completionDate() {
-    return this.completedAt ? this.intl.formatDate(this.completedAt, { format: 'long' }) : null;
+    return this.lastAnswerAt ? this.intl.formatDate(this.lastAnswerAt, { format: 'long' }) : null;
   }
 
   get certificationType() {

@@ -1,7 +1,7 @@
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 
-export function buildJuryCertificationSummary ({
+export function buildJuryCertificationSummary({
   id = 123,
   firstName = 'Jean',
   lastName = 'Bon',
@@ -37,4 +37,4 @@ export function buildJuryCertificationSummary ({
     certificationFramework,
     lastAnswerAt,
   });
-};
+}

@@ -14,7 +14,7 @@ import { CertificationDetails } from '../read-models/CertificationDetails.js';
  * @param {CertificationCandidateRepository} params.certificationCandidateRepository
  * @param {PlacementProfileService} params.placementProfileService
  */
-const getCertificationDetails = async function ({
+export async function getCertificationDetails({
   certificationCourseId,
   competenceMarkRepository,
   certificationAssessmentRepository,
@@ -42,6 +42,4 @@ const getCertificationDetails = async function ({
     certificationAssessment,
     placementProfile,
   });
-};
-
-export { getCertificationDetails };
+}

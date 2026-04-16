@@ -17,7 +17,7 @@ const serialize = function ({ certificationDetails }) {
     'reachedResultKey',
     'numberOfChallenges',
     'certificationFramework',
-    'lastAnswerAt'
+    'lastAnswerAt',
   ];
 
   return new Serializer('v3-certification-course-details-for-administration', {

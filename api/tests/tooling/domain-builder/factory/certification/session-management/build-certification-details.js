@@ -1,7 +1,7 @@
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 
-export function buildCertificationDetails ({
+export function buildCertificationDetails({
   id = 123,
   userId = 456,
   createdAt = new Date('2020-01-01'),
@@ -44,4 +44,4 @@ export function buildCertificationDetails ({
     competencesWithMark,
     listChallengesAndAnswers,
   });
-};
+}

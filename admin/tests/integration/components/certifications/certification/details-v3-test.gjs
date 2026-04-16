@@ -112,8 +112,8 @@ module('Integration | Component | Certifications | certification > details v3', 
           store,
           params: {
             certificationCourseId: 123456,
-            // eslint-disable-next-line no-restricted-syntax
-            createdAt: new Date('2023-01-13T08:00:00'),
+
+            createdAt: new Date('2023-01-13T08:00:00Z'),
             assessmentResultStatus: 'validated',
           },
         };
@@ -211,8 +211,8 @@ module('Integration | Component | Certifications | certification > details v3', 
             store,
             params: {
               certificationCourseId: 123456,
-              // eslint-disable-next-line no-restricted-syntax
-              createdAt: new Date('2023-01-13T08:00:00'),
+
+              createdAt: new Date('2023-01-13T08:00:00Z'),
               abortReason: 'candidate',
               assessmentResultStatus: 'rejected',
               assessmentState: 'endedDueToFinalization',
@@ -276,16 +276,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -302,16 +302,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -336,16 +336,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -362,16 +362,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -621,8 +621,9 @@ module('Integration | Component | Certifications | certification > details v3', 
 function createCertificationCourseDetailsRecord({ certificationChallengesForAdministration, store, params }) {
   return store.createRecord('v3-certification-course-details-for-administration', {
     assessmentState: 'completed',
-    // eslint-disable-next-line no-restricted-syntax
-    completedAt: new Date('2023-01-13T09:05:00'),
+
+    completedAt: new Date('2023-01-13T09:05:00Z'),
+    lastAnswerAt: new Date('2023-01-13T09:05:00Z'),
     assessmentResultStatus: 'validated',
     numberOfChallenges: 15,
     certificationFramework: 'CORE',

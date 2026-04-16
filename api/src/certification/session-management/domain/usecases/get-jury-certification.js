@@ -1,3 +1,3 @@
-export async function getJuryCertification ({ certificationCourseId, juryCertificationRepository }) {
+export async function getJuryCertification({ certificationCourseId, juryCertificationRepository }) {
   return juryCertificationRepository.get({ certificationCourseId });
-};
+}

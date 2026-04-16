@@ -43,7 +43,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         sessionId,
         framework: certificationFramework,
         versionId,
-        lastAnswerAt
+        lastAnswerAt,
       });
       databaseBuilder.factory.buildCertificationChallenge({
         courseId: certificationCourseId,
@@ -118,7 +118,7 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         certificationChallengesForAdministration: [certificationChallengeForAdministration],
         versionId,
         lastAnswerAt,
-        });
+      });
 
       expect(certificationChallenges).to.deep.equal(expectedCertificationCourseDetails);
     });

@@ -17,6 +17,7 @@ module('Integration | Component | Certifications | Certification | Information |
     // given
     const certification = store.createRecord('certification', {
       completedAt: new Date(),
+      lastAnswerAt: new Date(),
       status: 'rejected',
       isPublished: false,
       createdAt: new Date('2025-01-10'),

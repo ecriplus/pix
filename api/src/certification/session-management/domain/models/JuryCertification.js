@@ -100,7 +100,7 @@ export class JuryCertification {
     this.commonComplementaryCertificationCourseResult = commonComplementaryCertificationCourseResult;
     this.version = version;
     this.certificationFramework = certificationFramework;
-    this.lastAnswerAt = lastAnswerAt
+    this.lastAnswerAt = lastAnswerAt;
   }
 
   get reachedResultKey() {
@@ -174,8 +174,8 @@ export class JuryCertification {
       commonComplementaryCertificationCourseResult,
       version: juryCertificationDTO.version,
       certificationFramework: juryCertificationDTO.certificationFramework,
-      lastAnswerAt: juryCertificationDTO.lastAnswerAt
-      });
+      lastAnswerAt: juryCertificationDTO.lastAnswerAt,
+    });
   }
 
   updateEduV3ExternalJuryResult(eduV3ExternalJuryResult) {

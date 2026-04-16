@@ -38,6 +38,6 @@ export async function register(server) {
       },
     },
   ]);
-};
+}
 
 export const name = 'certification/session-management/sessions-api';

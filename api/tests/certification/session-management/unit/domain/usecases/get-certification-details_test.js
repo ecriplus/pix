@@ -100,6 +100,7 @@ describe('Certification | Session-management | Unit | Domain | UseCases | get-ce
         ],
         createdAt: certificationAssessment.createdAt,
         completedAt: certificationAssessment.completedAt,
+        lastAnswerAt: certificationAssessment.lastAnswerAt,
         id: certificationAssessment.certificationCourseId,
         listChallengesAndAnswers: [
           {

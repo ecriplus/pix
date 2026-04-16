@@ -55,7 +55,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           lastName: 'AAA',
           framework: Frameworks.DROIT,
           version: AlgorithmEngineVersion.V2,
-          lastAnswerAt: new Date('2018-04-15')
+          lastAnswerAt: new Date('2018-04-15'),
         });
 
         const manyAsrAssessmentId = dbf.buildAssessment({ certificationCourseId: manyAsrCertification.id }).id;
@@ -116,7 +116,7 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
             ],
             certificationFramework: Frameworks.DROIT,
             eduV3ExternalJuryResult: 'COUCOU',
-            lastAnswerAt: manyAsrCertification.lastAnswerAt
+            lastAnswerAt: manyAsrCertification.lastAnswerAt,
           });
         expect(juryCertificationSummaries).to.have.lengthOf(3);
         expect(juryCertificationSummaries[0]).to.deepEqualInstance(expectedJuryCertificationSummary);

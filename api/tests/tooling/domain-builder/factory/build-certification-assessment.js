@@ -1,7 +1,7 @@
 import { CertificationAssessment } from '../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { buildCertificationChallengeWithType } from './build-certification-challenge-with-type.js';
 
-export function buildCertificationAssessment ({
+export function buildCertificationAssessment({
   id = 123,
   userId = 123,
   certificationCourseId = 123,
@@ -27,5 +27,4 @@ export function buildCertificationAssessment ({
     certificationChallenges,
     certificationAnswersByDate,
   });
-};
-
+}

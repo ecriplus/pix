@@ -62,7 +62,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
             completedAt: new Date('2020-02-01'),
             isPublished: false,
             framework: Frameworks.CLEA,
-            lastAnswerAt: new Date('2020-02-01')
+            lastAnswerAt: new Date('2020-02-01'),
           });
 
           databaseBuilder.factory.buildComplementaryCertificationCourse({

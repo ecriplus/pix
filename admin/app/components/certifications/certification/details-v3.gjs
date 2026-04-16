@@ -161,7 +161,7 @@ export default class DetailsV3 extends Component {
   }
 
   get completionDate() {
-    return this.args.details.completedAt || this.args.details.endedAt;
+    return this.args.details.lastAnswerAt;
   }
 
   get completionDateTooltipContent() {
