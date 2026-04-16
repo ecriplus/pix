@@ -34,13 +34,6 @@ export default class AppNavigation extends Component {
       @closeLabel={{t "navigation.nav-bar.close"}}
     >
       <:brand>
-        {{#if this.currentDomain.isFranceDomain}}
-          <img
-            class="app-navigation__logo-republique-fr"
-            src="/images/logo/logo-de-la-republique-francaise-blanc.svg"
-            alt={{t "common.french-republic"}}
-          />
-        {{/if}}
         <PixLogo @color="white" />
       </:brand>
       <:navElements>

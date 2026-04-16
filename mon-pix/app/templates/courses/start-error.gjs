@@ -8,15 +8,6 @@ import t from 'ember-intl/helpers/t';
         <div class="course-error-page__pix-logo">
           <img class="course-error-page__image" src="/images/pix-logo.svg" alt="{{t 'navigation.pix'}}" />
         </div>
-        {{#if @controller.shouldShowTheMarianneLogo}}
-          <div class="course-error-page__marianne-logo">
-            <img
-              class="course-error-page__image"
-              src="/images/logo/logo-de-la-republique-francaise.svg"
-              alt="{{t 'common.french-republic'}}"
-            />
-          </div>
-        {{/if}}
       </div>
       <div class="course-error-page__error-text">
         <h1 class="course-error-page__error-text title">{{t "pages.course.errors.not-accessible"}}</h1>
