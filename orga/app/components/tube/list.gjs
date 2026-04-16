@@ -16,7 +16,6 @@ import Tube from './tube';
 
 export default class TubeList extends Component {
   @tracked selectedTubeIds = [];
-  @service dayjs;
   @service pixMetrics;
 
   @action
@@ -96,7 +95,7 @@ export default class TubeList extends Component {
   }
 
   get formattedCurrentDate() {
-    return this.dayjs.self().format('YYYY-MM-DD-HHmm');
+    return new Date().toISOString().replace('T', '-').replaceAll(':', '').substring(0, 15);
   }
 
   get downloadURL() {

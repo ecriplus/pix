@@ -3,6 +3,7 @@
 // and propagate the changes in the copies in all the fronts
 
 import Service from '@ember/service';
+import dayjs from 'dayjs';
 import { setupTest } from 'ember-qunit';
 import ENV from 'pix-orga/config/environment';
 import { module, test } from 'qunit';
@@ -18,7 +19,6 @@ module('Unit | Services | locale', function (hooks) {
   let localeService;
   let currentDomainService;
   let metricsService;
-  let dayjsService;
 
   hooks.beforeEach(function () {
     localeService = this.owner.lookup('service:locale');
@@ -33,11 +33,7 @@ module('Unit | Services | locale', function (hooks) {
     this.owner.register('service:metrics', metricsServiceStub);
     metricsService = this.owner.lookup('service:metrics');
 
-    class dayjsServiceStub extends Service {
-      setLocale = sinon.stub();
-    }
-    this.owner.register('service:dayjs', dayjsServiceStub);
-    dayjsService = this.owner.lookup('service:dayjs');
+    // sinon.stub(dayjs, 'locale');
   });
 
   module('currentLocale', function () {
@@ -116,23 +112,24 @@ module('Unit | Services | locale', function (hooks) {
   });
 
   module('setCurrentLocale', function () {
-    test('set app locale in the cookies', function (assert) {
+    test('set app locale in the cookies', async function (assert) {
       // given
       const intlService = this.owner.lookup('service:intl');
+      sinon.stub(dayjs, 'locale');
       sinon.stub(intlService, 'setLocale');
       const cookiesService = this.owner.lookup('service:cookies');
       sinon.stub(cookiesService, 'write');
       const locale = 'nl-BE';
 
       // when
-      localeService.setCurrentLocale(locale);
+      await localeService.setCurrentLocale(locale);
 
       // then
       const currentLocale = localeService.currentLocale;
       assert.strictEqual(currentLocale, 'nl-BE');
       sinon.assert.calledWith(cookiesService.write, 'locale', 'nl-BE');
       sinon.assert.calledWith(intlService.setLocale, ['nl-BE', 'nl', 'fr']);
-      sinon.assert.calledWith(dayjsService.setLocale, 'nl');
+      sinon.assert.calledWith(dayjs.locale, 'nl');
       assert.strictEqual(metricsService.context.locale, 'nl-BE');
     });
   });

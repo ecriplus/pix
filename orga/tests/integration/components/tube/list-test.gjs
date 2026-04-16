@@ -9,9 +9,9 @@ module('Integration | Component | tube:list', function (hooks) {
   setupIntlRenderingTest(hooks);
   let allFrameworks;
   const MOCK_TODAY = '2020-08-05-1152';
-  let dayjs;
 
   hooks.beforeEach(function () {
+    sinon.useFakeTimers({ now: new Date('2020-08-05T11:52:00Z') });
     const tubesPix = [
       {
         id: 'tubeId1Pix',
@@ -107,8 +107,6 @@ module('Integration | Component | tube:list', function (hooks) {
         },
       },
     ];
-    dayjs = this.owner.lookup('service:dayjs');
-    sinon.stub(dayjs.self.prototype, 'format').returns(MOCK_TODAY);
   });
 
   hooks.afterEach(function () {

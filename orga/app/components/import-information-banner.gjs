@@ -6,13 +6,12 @@ import dayjs from 'dayjs';
 
 export default class ImportBanner extends Component {
   @service intl;
-  @service dayjs;
 
   get displayBanner() {
     if (!this.args.importDetail) {
       return false;
     }
-    return this.dayjs.self().diff(this.args.importDetail.updatedAt, 'day') < 15;
+    return dayjs().diff(this.args.importDetail.updatedAt, 'day') < 15;
   }
 
   get bannerType() {

@@ -1,6 +1,7 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import dayjs from 'dayjs';
 import { formatDate, t } from 'ember-intl';
 import { maxBy, minBy } from 'pix-orga/utils/collection';
 
@@ -13,7 +14,6 @@ import ParticipantsByDayLoader from './participants-by-day-loader';
 export default class ParticipantsByDay extends Component {
   @service store;
   @service intl;
-  @service dayjs;
   @service locale;
 
   @tracked days = 0;
@@ -30,9 +30,10 @@ export default class ParticipantsByDay extends Component {
         response.data.attributes;
 
       if (startedParticipations.length > 0) {
-        this.days = this.dayjs
-          .self(startedParticipations[startedParticipations.length - 1].day)
-          .diff(this.dayjs.self(startedParticipations[0].day), 'days');
+        this.days = dayjs(startedParticipations[startedParticipations.length - 1].day).diff(
+          dayjs(startedParticipations[0].day),
+          'days',
+        );
       }
 
       const { startedDatasets, sharedDatasets } = this._normalizeDatasets(startedParticipations, sharedParticipations);
