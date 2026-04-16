@@ -25,6 +25,6 @@ export const getCombinedCourseBlueprintById = async ({
   return AdminCombinedCourseBlueprint.buildFromBlueprint({
     combinedCourseBlueprint,
     modulesById,
-    attestationKey: attestation.key,
+    attestationLabel: attestation.label,
   });
 };

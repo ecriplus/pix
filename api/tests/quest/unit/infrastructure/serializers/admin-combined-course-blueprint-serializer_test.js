@@ -18,7 +18,8 @@ describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-bl
         { moduleShortId: 'mon-module' },
         { targetProfileId: 123 },
       ]),
-      attestationKey: 'PARENTHOOD',
+      attestationKey: 'SIXTH_GRADE',
+      attestationLabel: '6ème',
       organizationIds: [],
     });
 
@@ -46,7 +47,7 @@ describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-bl
           ],
           'created-at': adminCombinedCourseBlueprint.createdAt,
           'updated-at': adminCombinedCourseBlueprint.updatedAt,
-          'attestation-key': 'PARENTHOOD',
+          'attestation-label': '6ème',
         },
         type: 'combined-course-blueprints',
         id: '1',
@@ -104,6 +105,7 @@ describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-bl
         },
       ],
       attestationKey: 'SIXTH_GRADE',
+      attestationLabel: undefined,
       organizationIds: [],
       createdAt: date,
       updatedAt: date,
