@@ -89,10 +89,11 @@ executors:
         environment:
           POSTGRES_USER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
+          COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: pix-import-test
     resource_class: small
   node-browsers-docker:
     parameters:
@@ -141,13 +142,13 @@ executors:
       - image: postgres:16.9-alpine
         environment:
           POSTGRES_USER: circleci
-          POSTGRES_HOST_AUTH_METHOD: trust # POSTGRES_INITDB_ARGS: "--nosync" Speed up DB init et en desspis tmpfs: - /var/lib/postgresql/data # Run DB in RAM
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
+          COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
     resource_class: medium
-
   playwright-executor-large:
     docker:
       - image: mcr.microsoft.com/playwright:v1.57.0-noble
@@ -158,10 +159,11 @@ executors:
         environment:
           POSTGRES_USER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
       - image: adobe/s3mock:5.0.0
         environment:
-          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
+          COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
     resource_class: large
 
 # ---------------------------------------------------------------------------
