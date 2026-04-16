@@ -15,6 +15,7 @@ export default class SidebarMenu extends Component {
   @service currentUser;
   @service url;
   @service router;
+  @service featureToggles;
 
   @tracked canShowCredit;
 
@@ -69,6 +70,10 @@ export default class SidebarMenu extends Component {
     return this.currentUser.canAccessStatisticsPage;
   }
 
+  get shouldDisplayCatalogEntry() {
+    return this.featureToggles.featureToggles?.displayCatalogue;
+  }
+
   get shouldDisplaySeparator() {
     return this.shouldDisplayMissionsEntry || this.shouldDisplayPlacesEntry || this.canShowCredit;
   }
@@ -116,6 +121,11 @@ export default class SidebarMenu extends Component {
       <:navElements>
         <PixNavigationButton @route="authenticated.index" @icon="home">
           {{t "navigation.main.home"}}</PixNavigationButton>
+
+        {{#if this.shouldDisplayCatalogEntry}}
+          <PixNavigationButton @route="authenticated.catalogue" @icon="bookAlt">
+            {{t "navigation.main.catalogue"}}</PixNavigationButton>
+        {{/if}}
 
         {{#if this.shouldDisplayCampaignsEntry}}
           <PixNavigationButton
