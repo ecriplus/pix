@@ -234,10 +234,10 @@
         "label": "Search by groups",
         "placeholder": "Groups"
       },
+      "loading": "Loading...",
       "participantExternalId": {
         "label": "Search by external id"
       },
-      "loading": "Loading...",
       "placeholder": "-- Select --",
       "title": "Filters"
     },

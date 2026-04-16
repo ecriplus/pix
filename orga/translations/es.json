@@ -240,10 +240,10 @@
         "label": "Búsqueda por grupo",
         "placeholder": "Grupos"
       },
+      "loading": "Cargando...",
       "participantExternalId": {
         "label": "Búsqueda por ID externo"
       },
-      "loading": "Cargando...",
       "placeholder": "-- Selecciona --",
       "title": "Filtros"
     },

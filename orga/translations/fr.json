@@ -234,10 +234,10 @@
         "label": "Rechercher par groupes",
         "placeholder": "Groupes"
       },
+      "loading": "Chargement...",
       "participantExternalId": {
         "label": "Recherche sur l'identifiant externe"
       },
-      "loading": "Chargement...",
       "placeholder": "-- Sélectionner --",
       "title": "Filtres"
     },
