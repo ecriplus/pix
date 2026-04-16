@@ -9,6 +9,7 @@ export class CertificationDetails {
     userId,
     createdAt,
     completedAt,
+    lastAnswerAt,
     status,
     totalScore,
     percentageCorrectAnswers,
@@ -19,6 +20,7 @@ export class CertificationDetails {
     this.userId = userId;
     this.createdAt = createdAt;
     this.completedAt = completedAt;
+    this.lastAnswerAt = lastAnswerAt;
     this.status = status;
     this.totalScore = totalScore;
     this.percentageCorrectAnswers = percentageCorrectAnswers;
@@ -43,6 +45,7 @@ export class CertificationDetails {
       userId: certificationAssessment.userId,
       createdAt: certificationAssessment.createdAt,
       completedAt: certificationAssessment.completedAt,
+      lastAnswerAt: certificationAssessment.lastAnswerAt,
       status: certificationAssessment.state,
       totalScore: _.sumBy(competenceMarks, 'score'),
       percentageCorrectAnswers: reproducibilityRate.value,
@@ -57,6 +60,7 @@ export class CertificationDetails {
       userId: this.userId,
       createdAt: this.createdAt,
       completedAt: this.completedAt,
+      lastAnswerAt: this.lastAnswerAt,
       status: this.status,
       totalScore: this.totalScore,
       percentageCorrectAnswers: this.percentageCorrectAnswers,

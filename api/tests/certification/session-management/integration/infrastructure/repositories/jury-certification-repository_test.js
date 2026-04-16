@@ -62,6 +62,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
             completedAt: new Date('2020-02-01'),
             isPublished: false,
             framework: Frameworks.CLEA,
+            lastAnswerAt: new Date('2020-02-01')
           });
 
           databaseBuilder.factory.buildComplementaryCertificationCourse({
@@ -132,6 +133,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
             status: 'validated',
             createdAt: new Date('2020-01-01'),
             completedAt: new Date('2020-02-01'),
+            lastAnswerAt: new Date('2020-02-01'),
             isPublished: false,
             isRejectedForFraud: false,
             juryId: 22,
@@ -405,6 +407,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           birthCountry: 'FRANCE',
           createdAt: new Date('2020-01-01'),
           completedAt: new Date('2020-02-01'),
+          lastAnswerAt: new Date('2020-02-01'),
           isPublished: false,
           framework: Frameworks.EDU_1ER_DEGRE,
           version: 3,
@@ -448,6 +451,7 @@ describe('Certification | Session-management | Integration | Infrastructure | Re
           status: 'validated',
           createdAt: certificationCourse.createdAt,
           completedAt: certificationCourse.completedAt,
+          lastAnswerAt: certificationCourse.lastAnswerAt,
           isPublished: certificationCourse.isPublished,
           isRejectedForFraud: false,
           juryId: juryUser.id,

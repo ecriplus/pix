@@ -4,7 +4,7 @@ import { identifiersType } from '../../../../src/shared/domain/types/identifiers
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { certificationDetailsController } from './certification-details-controller.js';
 
-const register = async function (server) {
+export async function register (server) {
   server.route([
     {
       method: 'GET',
@@ -39,5 +39,4 @@ const register = async function (server) {
   ]);
 };
 
-const name = 'certification/session-management/certification-details-api';
-export { name, register };
+export const name = 'certification/session-management/certification-details-api';

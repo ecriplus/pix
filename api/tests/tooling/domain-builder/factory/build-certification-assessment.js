@@ -1,12 +1,13 @@
 import { CertificationAssessment } from '../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { buildCertificationChallengeWithType } from './build-certification-challenge-with-type.js';
 
-const buildCertificationAssessment = function ({
+export function buildCertificationAssessment ({
   id = 123,
   userId = 123,
   certificationCourseId = 123,
   createdAt = new Date('2020-01-01'),
   completedAt = new Date('2020-01-01'),
+  lastAnswerAt = null,
   endedAt = null,
   state = CertificationAssessment.states.STARTED,
   version = 2,
@@ -19,6 +20,7 @@ const buildCertificationAssessment = function ({
     certificationCourseId,
     createdAt,
     completedAt,
+    lastAnswerAt,
     endedAt,
     state,
     version,
@@ -27,4 +29,3 @@ const buildCertificationAssessment = function ({
   });
 };
 
-export { buildCertificationAssessment };
