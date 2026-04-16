@@ -5,7 +5,8 @@ import path from 'node:path';
 
 import { expect, test } from '../../fixtures/index.ts';
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
-import { buildFreshPixOrgaUser, createGARUser } from '../../helpers/db.ts';
+import { buildExistingOrganizationLearner, buildFreshPixOrgaUser, createGARUser } from '../../helpers/db.ts';
+import { ChallengePage, HomePage } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 
 let UAJ: string;
@@ -14,17 +15,27 @@ let GARUserId: number;
 test.beforeEach(async () => {
   UAJ = randomUUID().slice(-8);
   GARUserId = await createGARUser(UAJ, 'stéphanie', 'chaire', true);
-  await buildFreshPixOrgaUser('Adi', 'Minh', `admin-${UAJ}@example.net`, 'pix123', 'ADMIN', {
+  const { organizationId } = await buildFreshPixOrgaUser('Adi', 'Minh', `admin-${UAJ}@example.net`, 'pix123', 'ADMIN', {
     type: 'SCO',
     externalId: `SCO_MANAGING-${UAJ}`,
     isManagingStudents: true,
+  });
+
+  await buildExistingOrganizationLearner({
+    firstName: 'Katie',
+    lastName: 'veuns',
+    email: `katie-${UAJ}@veuns.io`,
+    nationalStudentId: `${UAJ}-4`,
+    rawPassword: 'katieveuns-password',
+    isDisabled: true,
+    organizationId,
   });
 
   let file = (await readFile(path.join(import.meta.dirname, '..', '..', 'data', 'sco-ok.xml'))).toString();
   let count = 1;
   file = file
     .replace(/<UAJ>.*<\/UAJ>/, `<UAJ>SCO_MANAGING-${UAJ}</UAJ>`)
-    .replace(/<ID_NATIONAL>([\d]+)<\/ID_NATIONAL>/g, () => `/<ID_NATIONAL>${UAJ}-${count++}</ID_NATIONAL>`);
+    .replace(/<ID_NATIONAL>.*<\/ID_NATIONAL>/g, () => `/<ID_NATIONAL>${UAJ}-${count++}</ID_NATIONAL>`);
 
   await writeFile(path.join(os.tmpdir(), `sco-${UAJ}.xml`), file);
 });
@@ -33,6 +44,8 @@ test('Managing sco learners', async ({ page }) => {
   test.slow();
   let campaignCode: string;
   const orgaPage = new PixOrgaPage(page);
+  const challengePage = new ChallengePage(page);
+  const homePage = new HomePage(page);
 
   await test.step('Login to pixOrga', async () => {
     await page.goto(process.env.PIX_ORGA_URL as string);
@@ -68,6 +81,19 @@ test('Managing sco learners', async ({ page }) => {
     ).toBeVisible();
   });
 
+  await test.step('Can access campaign for re-enabled learner', async function () {
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
+    await page.getByRole('button', { name: 'Je commence' }).click();
+    await page.getByRole('button', { name: 'Se connecter' }).click();
+    await page.getByRole('textbox', { name: 'Adresse e-mail ou identifiant *' }).fill(`katie-${UAJ}@veuns.io`);
+    await page.getByRole('textbox', { name: 'Mot de passe *' }).fill(`katieveuns-password`);
+    await page.getByRole('button', { name: 'Se connecter' }).click();
+    await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
+    await page.getByRole('button', { name: 'Ignorer' }).click();
+    await challengePage.leave();
+    await homePage.logout();
+  });
+
   await test.step('Log in using the campaign code', async function () {
     await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
@@ -82,6 +108,9 @@ test('Managing sco learners', async ({ page }) => {
     await page.getByRole('button', { name: 'Afficher le mot de passe' }).click();
     await page.getByRole('button', { name: "Je m'inscris" }).click();
     await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
+    await page.getByRole('button', { name: 'Ignorer' }).click();
+    await challengePage.leave();
+    await homePage.logout();
   });
 
   await test.step('Log in using GAR', async function () {
@@ -100,7 +129,10 @@ test('Managing sco learners', async ({ page }) => {
     await page.getByRole('textbox', { name: 'année de naissance' }).fill('1994');
     await page.getByRole('button', { name: "C'est parti !" }).click();
     await page.getByRole('button', { name: 'Associer' }).click();
+    await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
     await page.getByRole('button', { name: 'Ignorer' }).click();
+    await challengePage.leave();
+    await homePage.logout();
   });
 
   await test.step('Show learners', async () => {
@@ -110,7 +142,7 @@ test('Managing sco learners', async ({ page }) => {
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
     ).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Élèves (3)' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Élèves (4)' })).toBeVisible();
   });
 
   await test.step('Generate learner password ', async () => {
