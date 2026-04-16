@@ -269,7 +269,7 @@
               "element": {
                 "id": "5fc90905-6385-40f4-880f-5c836fd721bb",
                 "type": "custom",
-                "title": "",
+                "title": "Carrousel voyage des matériaux",
                 "instruction": "",
                 "functionalInstruction": "",
                 "tagName": "pix-carousel",
@@ -361,7 +361,7 @@
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
                 "type": "custom",
-                "title": "",
+                "title": "Cursor voyage des matériaux",
                 "instruction": "<p>Combien de tours du monde ont parcouru les éléments d'un smartphone entre sa conception et sa distribution ?</p>",
                 "functionalInstruction": "",
                 "tagName": "pix-cursor",
@@ -642,7 +642,7 @@
         {
           "id": "dceb2521-43bc-4dff-9fd8-fc91c8298bb8",
           "type": "short-lesson",
-          "title": " Un ancien/vieux smartphone, une mine de ressources.",
+          "title": "Un ancien/vieux smartphone, une mine de ressources.",
           "components": [
             {
               "type": "stepper",
