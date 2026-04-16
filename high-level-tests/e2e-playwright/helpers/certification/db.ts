@@ -5,7 +5,9 @@ import {
   buildCoreVersion,
   buildCpfData,
   buildPixCertifUser,
+  buildPixPlusDroitData,
   buildPixPlusEduData,
+  buildPixPlusProSanteData,
 } from './builders/index.ts';
 
 export async function buildCertificationData() {
@@ -13,10 +15,12 @@ export async function buildCertificationData() {
   await buildCoreVersion(knex);
   await buildCleaData(knex);
   await buildPixPlusEduData(knex);
+  await buildPixPlusDroitData(knex);
+  await buildPixPlusProSanteData(knex);
   await buildPixCertifUser(knex, PIX_CERTIF_PRO_DATA);
 }
 
-export async function changeCandidateAnswers(certificationId: number, rightWrongAnswersSequence: boolean[]) {
+export async function changeCandidateAnswers(certificationId: number, rightWrongAnswersPattern: boolean[]) {
   const answerIds = await knex
     .from('assessments')
     .join('answers', 'answers.assessmentId', 'assessments.id')
@@ -25,7 +29,7 @@ export async function changeCandidateAnswers(certificationId: number, rightWrong
     .pluck('answers.id');
 
   for (const [i, answerId] of answerIds.entries()) {
-    const nextResult = rightWrongAnswersSequence[i] ? 'ok' : 'ko';
+    const nextResult = rightWrongAnswersPattern[i % rightWrongAnswersPattern.length] ? 'ok' : 'ko';
     await knex('answers').update('result', nextResult).where('answers.id', answerId);
   }
 }

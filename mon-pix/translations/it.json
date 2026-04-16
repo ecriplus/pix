@@ -683,9 +683,11 @@
       "framework-title": {
         "CLEA": "Certificato Pix",
         "CORE": "Certificato Pix",
+        "DROIT": "Certificato Pix+ Diritto",
         "EDU_1ER_DEGRE": "Certificato Pix+ Edu 1° livello",
         "EDU_2ND_DEGRE": "Certificato Pix+ Edu 2° livello",
-        "EDU_CPE": "Certificato Pix+ Edu CPE"
+        "EDU_CPE": "Certificato Pix+ Edu CPE",
+        "PRO_SANTE": "Certificato Pix+ Professionisti della salute"
       },
       "frameworks": {
         "EDU": {
@@ -753,7 +755,7 @@
     "certification-frameworks": {
       "CLEA": "CLéA Numérique",
       "CORE": "Pix certification",
-      "DROIT": "Pix+ Destra",
+      "DROIT": "Pix+ Diritto",
       "EDU_1ER_DEGRE": "Pix+ Édu 1° livello",
       "EDU_2ND_DEGRE": "Pix+ Édu 2° livello",
       "EDU_CPE": "Pix+ Édu CPE",
@@ -2325,7 +2327,7 @@
         "save-button": "Ricevere un codice di verifica",
         "title": {
           "add-email": "Aggiungi un indirizzo e-mail",
-          "update-email":"Modifica del tuo indirizzo e-mail"
+          "update-email": "Modifica del tuo indirizzo e-mail"
         }
       },
       "connexion-methods": {
@@ -2393,6 +2395,13 @@
     },
     "user-certifications": {
       "meshes": {
+        "DROIT": {
+          "0": "Indipendente",
+          "1": "Confirmado",
+          "2": "Avanzato",
+          "3": "Esperto",
+          "BELOW_MINIMUM": "Non ottenuto"
+        },
         "EDU_1ER_DEGRE": {
           "0": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
@@ -2404,6 +2413,13 @@
         "EDU_CPE": {
           "0": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
+        },
+        "PRO_SANTE": {
+          "0": "Indipendente",
+          "1": "Confermato",
+          "2": "Avanzato",
+          "3": "Esperto",
+          "BELOW_MINIMUM": "Non ottenuto"
         }
       }
     },

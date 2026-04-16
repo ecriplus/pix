@@ -3,29 +3,26 @@ import {
   checkCertificationDetailsAndExpectSuccess,
   checkCertificationGeneralInformationAndExpectSuccess,
   checkSessionInformationAndExpectSuccess,
+  getTestRef,
 } from '../../../../helpers/certification/utils.ts';
 import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
-const testRef = 'PRO_CORE_1OK-0KO_EndedByFinalization_Abandonment';
-const snapshotPath = `recette-certif/${testRef}/${testRef}.json`;
-const csvResultPath = `recette-certif/${testRef}/${testRef}_csvresult.json`;
-
 test(
-  `${testRef} - User takes a certification test for a PRO certification center, only CORE subscription. one challenge only answered. Ended by finalization for abandonment`,
+  `${getTestRef(import.meta.url)}`,
   {
-    tag: ['@snapshot'],
+    tag: ['@snapshot', '@core', '@results'],
     annotation: [
       {
-        type: 'tag',
-        description: `@snapshot - this test runs against a reference snapshot. Snapshot can be generated with UPDATE_SNAPSHOTS=true
-         Reasons why a snapshot could be re-generated :
-         - Reference Release has changed
-         - Next challenge algorithm has changed
-         - CSV results file layout has changed
-         - Scoring algorithm or configuration has changed`,
+        type: 'scenario',
+        description: `User takes a certification test for a PRO certification center, CORE subscription. Only one right answer.
+         - Test ended by finalization
+         - Abort reason : abandonment
+         - Results visible in all PixAdmin screens
+         - Certificate visible in PixApp
+         - Checks CSV results file`,
       },
     ],
   },
@@ -36,6 +33,9 @@ test(
     pixAdminRoleCertifPage,
     getCertifiableUserData,
     snapshotHandler,
+    testRef,
+    snapshotPath,
+    csvResultPath,
   }) => {
     const certifiableUserData = await getCertifiableUserData(0);
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);

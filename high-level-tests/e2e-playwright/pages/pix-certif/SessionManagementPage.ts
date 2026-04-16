@@ -102,6 +102,12 @@ export class SessionManagementPage {
       case CERTIFICATIONS_DATA.EDU_1ER_DEGRE:
         choice = 'Pix+ Édu 1er degré';
         break;
+      case CERTIFICATIONS_DATA.DROIT:
+        choice = 'Pix+ Droit';
+        break;
+      case CERTIFICATIONS_DATA.PRO_SANTE:
+        choice = 'Pix+ Professionnels de santé';
+        break;
       default:
         choice = 'Certification Pix';
         break;

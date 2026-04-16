@@ -684,9 +684,11 @@
       "framework-title": {
         "CLEA": "Pix-certificaat",
         "CORE": "Pix-certificaat",
+        "DROIT": "Pix+ Recht-certificaat",
         "EDU_1ER_DEGRE": "Pix+ Edu-certificaat 1e graad",
         "EDU_2ND_DEGRE": "Pix+ Edu-certificaat 2e graad",
-        "EDU_CPE": "Pix+ Edu CPE-certificaat"
+        "EDU_CPE": "Pix+ Edu CPE-certificaat",
+        "PRO_SANTE": "Pix+ Gezondheidsprofessionals-certificaat"
       },
       "frameworks": {
         "EDU": {
@@ -2391,6 +2393,13 @@
     },
     "user-certifications": {
       "meshes": {
+        "DROIT": {
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Niet verkregen"
+        },
         "EDU_1ER_DEGRE": {
           "0": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
@@ -2402,6 +2411,13 @@
         "EDU_CPE": {
           "0": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
+        },
+        "PRO_SANTE": {
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Niet verkregen"
         }
       }
     },

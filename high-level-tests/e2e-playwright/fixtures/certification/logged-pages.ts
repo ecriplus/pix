@@ -132,7 +132,12 @@ export const loggedPagesFixtures = sharedTest.extend<
           {
             type: 'PRO',
             externalId: `CERTIFPRO${nextUserId}`,
-            habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE],
+            habilitations: [
+              CERTIFICATIONS_DATA.CLEA,
+              CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+              CERTIFICATIONS_DATA.DROIT,
+              CERTIFICATIONS_DATA.PRO_SANTE,
+            ],
             withOrganization: {
               isManagingStudents: false,
             },
