@@ -2,12 +2,12 @@
   "id": "46fb1427-a140-4480-8660-10961f44d4d6",
   "shortId": "da72e67b",
   "slug": "echanger-mail-plusieurs",
-  "title": "Échanger par mail avec plusieurs interlocuteurs",
+  "title": "Échanger par mail avec plusieurs personnes",
   "isBeta": true,
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Dans la vie quotidienne ou professionnelle, il arrive souvent d’échanger des courriers électroniques (mails) avec plusieurs personnes à la fois.</p><p>Pour bien communiquer dans ces situations, il faut savoir répondre à un mail, transmettre et trouver une information dans un échange par mail, selon le contexte et les personnes impliquées.</p>",
+    "description": "<p>Dans la vie quotidienne ou professionnelle, il arrive souvent d’échanger des courriers électroniques (mails) avec plusieurs personnes à la fois.</p>\n<p>Pour bien communiquer dans ces situations, il faut savoir répondre à un mail, le transmettre selon le contexte et les personnes impliquées, et trouver une information dans un échange par mail.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -33,25 +33,78 @@
                 "id": "7c675fd0-0530-451a-88e9-9605cea958bf",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il souhaite refuser l’invitation.</p><p><strong>Dans la messagerie électronique&nbsp;ci-dessous, répondez à Alma avec le message suivant&nbsp;:</strong></p><p><strong><br></strong></p><blockquote><em>Bonjour Alma,</em><em><br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel</em></blockquote>"
+                "content": "<p>Gabriel a reçu un mail d’Alma qui l’invite à une conférence. Il refuse l’invitation.</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "446bf14b-d484-4fb2-ad31-ab61e37e4e78",
-                "type": "expand",
-                "title": "[🕹️ Simulateur Pixmail auto-validant pour effectuer l’action “Répondre”]",
-                "content": "<p><strong>Début</strong> : PixMail ouvert sur la boîte de réception avec 3 mails présents dont celui d'Alma.</p><p><em><br></em></p><p><em><code>De&nbsp;: Alma<br>Objet&nbsp;: Invitation - Conférence Climax<br>Date&nbsp;: 25 avril à 15h</code></em></p><p><em><code><br></code></em></p><p><em><code>Bonjour Gabriel,</code></em></p><p><em><code>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants ?\n</code></em></p><p><em><code>À bientôt,\n</code></em></p><p><em><code>Alma, chargée d’organisation des Conférences Climax</code></em></p><p><em><br></em></p>\n<p><strong>Actions attendues</strong></p>\n<ol>\n    <li>Ouvrir le mail d’Alma</li>\n    <li>Cliquer sur \"Répondre\"</li>\n    <li>Copier-coller la réponse (avec aide au besoin pour écrire le message ?)</li>\n    <li>Cliquer sur \"Envoyer\"</li>\n</ol>"
+                "id": "ba3ed76b-5bcb-42c8-98f8-b37ea0554bf6",
+                "type": "custom",
+                "title": "",
+                "instruction": "<p><br></p>",
+                "functionalInstruction": "<p><br></p>",
+                "tagName": "template-mail",
+                "props": {
+                  "titleLevel": 0,
+                  "subject": "RE: Invitation - Conférence Climax",
+                  "mailAddress": "gabriel@pixmail.org",
+                  "avatarColor": "",
+                  "expeditor": "Gabriel",
+                  "content": "Bonjour Alma,<br>Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date.<br>Est-ce qu’il y aura d’autres dates de conférences à venir&nbsp;?<br>Gabriel",
+                  "time": {
+                    "days": -10,
+                    "minutes": -633
+                  },
+                  "previousMail": {
+                    "name": "Alma",
+                    "content": "Bonjour Gabriel,<br>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai.<br>Peux-tu me dire si tu seras présent pour que je puisse anticiper le nombre de participants&nbsp;?<br>À bientôt,<br>Alma, chargée d’organisation des Conférences Climax",
+                    "time": {
+                      "days": -11,
+                      "minutes": -63
+                    }
+                  }
+                }
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "56f56984-7711-4a3a-bf34-8dd3b44e556c",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><strong>[Feedback autovalid]</strong></p><p>Bien joué ! Le mail a été envoyé à Alma. Pour répondre à un mail, il faut cliquer sur «&nbsp;Répondre&nbsp;». Le destinataire et l’objet du mail sont déjà remplis. Il vous reste à écrire votre message puis cliquer sur «&nbsp;Envoyer&nbsp;».</p>"
+                "id": "8862f649-5518-4e93-94e3-36cef1939663",
+                "type": "qcu-discovery",
+                "instruction": "<p>Lorsque Gabriel répond au mail d’Alma, que devient le mail d’Alma&nbsp;?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Il est remplacé par le mail de Gabriel.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Il reste visible sous le mail de Gabriel.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement&nbsp;! Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Il est déplacé dans un autre dossier.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "1"
               }
             }
           ]
@@ -67,7 +120,7 @@
                 "id": "be863ac5-151e-482e-bd83-1ae4b1535b82",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand vous répondez à un mail, les échanges ne disparaissent pas. 📧<br>Voyons ensemble comment ils s’organisent.</p>"
+                "content": "<p>Quand vous répondez à un mail, les échanges ne disparaissent pas. 📧<br>Voyons ensemble comment les échanges par mail s’organisent.</p>"
               }
             }
           ]
@@ -89,105 +142,60 @@
                 "id": "a44cacb3-d805-4f1f-8da9-8536bdc85ae8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Suite à l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez aux questions qui suivent.</strong></p>"
+                "content": "<p>Suite à l’invitation d’Alma, Gabriel et Alma ont échangé plusieurs mails. <br><strong>Dans la messagerie électronique ci-dessous,&nbsp;parcourez leurs échanges puis répondez à la question&nbsp;qui suit.</strong></p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "402d3db7-2e25-4a7b-a1fd-8dcd04a4b4a8",
-                "type": "expand",
-                "title": "[🕹️ Template-mail avec le fil de discussion visible contenant 4 échanges indentés]",
-                "content": "<p>Message Gabriel&nbsp;: Accepté pour un choix de date et a invité Mathis – 27 avril 09:23</p><p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations. </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 20:06</p><p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p><p>Alma, chargée d’organisation des Conférences Climax</p><hr><p> Message Gabriel&nbsp;: RE&nbsp;: Invitation - Conférence Climax – 26 avril 16:32</p><p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p><p>Gabriel</p><hr><p>Message Alma&nbsp;: Invitation - Conférence Climax – 25 avril 15:00</p><p>Bonjour Gabriel, La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p><p>À bientôt,<br></p><p>Alma, chargée d’organisation des Conférences Climax</p>"
+                "id": "ef0c86d2-dfb3-4065-97fa-1202417a4f10",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/21_RepondreMail_IND/template-mail-fil-alma-gabriel-d1.png",
+                "alt": "Mail échangés entre Alma et Gabriel",
+                "alternativeText": "<p>De : Gabriel</p>\n<p>À : Alma</p>\n<p>Objet : Invitation - Conférence Climax </p>\n<p>Date : 27 avril 09:23</p>\n<p><br></p>\n<p>Super, je pourrai venir à la conférence du 16 septembre à l’auditorium. <br>Merci encore pour ces informations !</p>\n<p>Gabriel</p>\n<hr>\n<p>De : Alma</p>\n<p>À : Gabriel</p>\n<p>Objet : RE :&nbsp;Invitation -&nbsp;Conférence Climax</p>\n<p>Date : 26 avril 20:05</p>\n<p><br></p>\n<p>Oui, deux autres conférences sont à venir. Le 8 juin à la salle des fêtes et le 16 septembre à l’auditorium à nouveau. Tu penses pouvoir venir à une de ses conférences ?</p>\n<p>Alma, chargée d’organisation des Conférences Climax</p>\n<hr>\n<p>De : Gabriel</p>\n<p>À : Alma</p>\n<p>Objet : Invitation - Conférence Climax </p>\n<p>Date : 26 avril 16:32</p>\n<p><br></p>\n<p>Bonjour Alma, Merci pour l’invitation, malheureusement je ne serai pas disponible à cette date. <br>Est-ce qu’il y aura d’autres dates de conférences à venir ? </p>\n<p>Gabriel</p>\n<hr>\n<p>De : Alma</p>\n<p>À : Gabriel</p>\n<p>Objet : Invitation -&nbsp;Conférence Climax</p>\n<p>Date : 25 avril 15:00</p>\n<p><br></p>\n<p>Bonjour Gabriel, </p>\n<p>La 3ème édition de notre conférence Climax aura lieu à l’auditorium le 23 mai. Peux-tu me dire si tu seras présent, pour que je puisse anticiper le nombre de participants ?</p>\n<p>À bientôt,<br></p>\n<p>Alma, chargée d’organisation des Conférences Climax</p>",
+                "legend": "Image provisoire (en attendant template-mail avec le fil de discussion visible contenant 4 échanges indentés)",
+                "licence": ""
               }
             },
             {
-              "type": "stepper",
-              "instruction": "",
-              "steps": [
-                {
-                  "elements": [
-                    {
-                      "id": "c375f801-02a0-4717-ba6a-7038cfccecc6",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Dans l’interface ci-dessus, lorsque Gabriel répond au mail d’Alma, que devient le mail d’Alma&nbsp;?</p>",
-                      "hasShortProposals": false,
-                      "proposals": [
-                        {
-                          "id": "0",
-                          "content": "<p>Il est remplacé par le mail de Gabriel.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
-                          }
-                        },
-                        {
-                          "id": "1",
-                          "content": "<p>Il reste visible sous le mail de Gabriel.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Il est déplacé dans un autre dossier.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non. Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Je ne sais pas.<br></p>      ",
-                          "feedback": {
-                            "diagnosis": "<p>Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p> "
-                          }
-                        }
-                      ],
-                      "solution": "1"
+              "type": "element",
+              "element": {
+                "id": "0b1aa279-78bd-4734-8041-651ff1fa35c8",
+                "type": "qcu-discovery",
+                "instruction": "<p>Dans cet échange, comment s’affichent les mails échangés entre Alma et Gabriel ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Les réponses successives sont visibles sous le dernier mail.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement&nbsp;! Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                     }
-                  ]
-                },
-                {
-                  "elements": [
-                    {
-                      "id": "5f3f1dd6-166e-4534-a06d-a2d50622379c",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Dans cet échange, comment s’affichent les mails échangés entre Alma et Gabriel ?</p>",
-                      "hasShortProposals": false,
-                      "proposals": [
-                        {
-                          "id": "0",
-                          "content": "<p>Les réponses successives sont visibles sous le dernier mail.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;! Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
-                          }
-                        },
-                        {
-                          "id": "1",
-                          "content": "<p>Les réponses apparaissent dans un ordre aléatoire.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "<p>Seule la dernière réponse est affichée.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
-                          }
-                        },
-                        {
-                          "id": "3",
-                          "content": "<p>Je ne sais pas.</p>",
-                          "feedback": {
-                            "diagnosis": "<p>Dans un échange de mails, <strong>un fil de discussion</strong> se construit de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "0"
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Les réponses apparaissent dans un ordre aléatoire.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
                     }
-                  ]
-                }
-              ]
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Seule la dernière réponse est affichée.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non. Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je ne sais pas.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Dans un échange de mails, <strong>un fil de discussion se construit</strong> de réponse en réponse. La dernière réponse envoyée est affichée la première et le mail le plus ancien se trouve tout en bas.</p>"
+                    }
+                  }
+                ],
+                "solution": "0"
+              }
             }
           ]
         },
@@ -249,10 +257,13 @@
             {
               "type": "element",
               "element": {
-                "id": "ebe2a5f6-df6f-46f2-a276-134869511b42",
-                "type": "expand",
-                "title": "[🕹️ Capture d'écran basée sur Pixmail avec 4 mails : objet + aperçu du mail]",
-                "content": "<ul><li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li><li>Laboratoire BioSanté (contact@biosante.fr) - Résultats d’analyse - Vos résultats d’analyse sanguine sont disponibles…</li><li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li><li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li></ul>"
+                "id": "f8fcbb6c-2c27-4520-a2bb-90e16bf8c592",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/21_RepondreMail_IND/boite-de-reception-d2.png",
+                "alt": "Boîte de réception avec 4 mails",
+                "alternativeText": "<ul>\n    <li>Scène Nationale (billeterie@scenenationale.org) - Le programme de théâtre de l’année - Découvrez les spectacles de la saison …</li>\n    <li>Laboratoire BioSanté (contact@biosante.fr) - Résultats d’analyse - Vos résultats d’analyse sanguine sont disponibles…</li>\n    <li>Phil Mourget (mourget.phil@pixmail.org) - Du nouveau sur le théâtre ? - Bonjour, nous avions discuté lundi de la pièce «&nbsp;Un regard sur l’océan&nbsp;» savez-vous quand et où elle sera programmée cette année ? ...</li>\n    <li>Rajesh (rajesh45@pixmail.org) -&nbsp;TR: Les résultats du championnat de Volley - Coucou, regarde moi ce palmarès, les indigos ont encore tout raflé ! …</li>\n</ul>",
+                "legend": "Image provisoire : Capture d'écran basée sur Pixmail avec 4 mails (objet + aperçu du mail)",
+                "licence": ""
               }
             },
             {
@@ -598,7 +609,7 @@
                 "id": "b7697e58-20ec-42b9-820d-eed068bc4024",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>🤔 Bon à savoir</strong></p><p>Certains mails d’information n’attendent pas de réponse (suivi de colis, newsletter, promotion, etc.).<br>Parfois, l’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient «&nbsp;no-reply&nbsp;» ou «&nbsp;ne-pas-répondre&nbsp;».</p>"
+                "content": "<p><strong>🤔 Bon à savoir</strong></p>\n<p>Certains mails d’information n’attendent pas de réponse&nbsp;: suivi de colis, lettre d’information (newsletter), promotion, etc.<br>Parfois, l’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient «&nbsp;no-reply&nbsp;» ou «&nbsp;ne-pas-répondre&nbsp;».</p>"
               }
             }
           ]
@@ -639,7 +650,7 @@
                 "id": "8f98cc06-05c2-42f7-8f05-221fc7cd2933",
                 "type": "expand",
                 "title": "[🕹️ TemplateMail avec un (long) fil de discussion : 5 personnes dont 4 ont envoyé des mails dans le fil]",
-                "content": "<p>De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 21:39</p><p>Hello, </p><p>Super tout ça !</p><p>J’apporterai quelques biscuits pour compléter et je pense qu’on est bon.<br></p><p>Hâte de vous voir ! 🙂</p><p>Douglas</p><hr> De : Ahmed<br>À : moi, Douglas, Sophie, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Mardi 4 juin – 17:17<p></p><p>Bonjour et merci pour l’invitation Douglas </p><p>Je peux apporter une salade pour ma part.<br></p><p>Et j’ai plein de cerises cette année : ça nous fera un bon dessert après le pâté ! 🍒</p><p>À samedi,<br></p><p>Ahmed</p><p></p><hr> De : Sophie<br>À : moi, Douglas, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 20:02<p></p><p>Salut à tous !</p><p>Du pâté en croûte : j’adore ça ! De mon côté, je m’occupe des boissons si ça vous va ?</p><p>À très vite,<br></p><p>Sophie</p><hr> De : moi<br>À : Douglas, Sophie, Ahmed, Laura<br>Objet : Re: Pique-nique samedi<br>Date : Lundi 3 juin – 19:27<p></p><p>Coucou,</p><p>Bonne idée ! On devrait avoir un beau soleil.<br>J’apporterai un pâté en croûte fait avec amour. ♥️</p><p>Bonne soirée,<br></p><p>Karim</p><hr>  De : Douglas<br>À : moi, Sophie, Ahmed, Laura<br>Objet : Pique-nique samedi<br>Date : Lundi 3 juin – 19:11  <p></p><p>Salut les amis !</p><p>Je vous propose un pique-nique dans le parc samedi prochain.<br>Qui peut apporter quelque chose ? (dessert, boisson, salade…)</p><p>Amicalement,</p><p>Douglas</p>"
+                "content": "<p> De : Ahmed</p><br>\n<p>À : moi, Douglas, Sophie, Laura</p><br>\n<p>Objet : Re: Pique-nique samedi</p><br>\n<p>Date : Mardi 4 juin – 17:17</p>\n<p><br></p>\n<p>Bonjour et merci pour l’invitation Douglas </p>\n<p>Je peux apporter une salade pour ma part.<br></p>\n<p>Et j’ai plein de cerises cette année : ça nous fera un bon dessert après le pâté ! 🍒</p>\n<p>Hâte de vous voir ! 🙂</p>\n<p>Ahmed</p>\n<p><br></p>\n<hr>\n<p> De : Sophie</p><br>\n<p>À : moi, Douglas, Ahmed, Laura</p><br>\n<p>Objet : Re: Pique-nique samedi</p><br>\n<p>Date : Lundi 3 juin – 20:02</p>\n<p><br></p>\n<p>Salut à tous !</p>\n<p>Du pâté en croûte : j’adore ça ! De mon côté, je m’occupe des boissons si ça vous va ?</p>\n<p>À très vite,<br></p>\n<p>Sophie</p>\n<hr>\n<p> De : moi</p><br>\n<p>À : Douglas, Sophie, Ahmed, Laura</p><br>\n<p>Objet : Re: Pique-nique samedi</p><br>\n<p>Date : Lundi 3 juin – 19:27</p>\n<p><br></p>\n<p>Coucou,</p>\n<p>Bonne idée ! On devrait avoir un beau soleil.<br>J’apporterai un pâté en croûte fait avec amour. ♥️</p>\n<p>Bonne soirée,<br></p>\n<p>Karim</p>\n<hr>\n<p> De : Douglas</p><br>\n<p>À : moi, Sophie, Ahmed, Laura</p><br>\n<p>Objet : Pique-nique samedi</p><br>\n<p>Date : Lundi 3 juin – 19:11 </p>\n<p><br></p>\n<p>Salut les amis !</p>\n<p>Je vous propose un pique-nique dans le parc samedi prochain.<br>Qui peut apporter quelque chose ? (dessert, boisson, salade…)</p>\n<p>Amicalement,</p>\n<p>Douglas</p>"
               }
             },
             {
@@ -1201,35 +1212,35 @@
                     "id": "0",
                     "content": "<p>Lire seulement le dernier mail du fil de discussion.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                      "diagnosis": "<p>Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l’échange.</p>\n<p>Pensez aussi à vérifier&nbsp;:</p>\n<ul>\n    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>\n    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li>\n</ul>"
                     }
                   },
                   {
                     "id": "1",
                     "content": "<p>Lire tout fil de discussion.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Lire tout le fil de discussion permet de comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Lire tout le fil de discussion permet de comprendre le contexte de l’échange.</p>\n<p>Pensez aussi à vérifier&nbsp;:</p>\n<ul>\n    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>\n    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li>\n</ul>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Répondre à tous immédiatement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>\n<p>Pensez aussi à vérifier qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>"
+                      "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l’échange.</p>\n<p>Pensez aussi à vérifier&nbsp;:</p>\n<ul>\n    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>\n    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li>\n</ul>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Vérifier qui est concerné par votre réponse.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Avant de répondre, il est utile de vérifier qui est concerné par votre réponse afin de choisir entre entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p><p>Il est aussi important de lire tout le fil de discussion pour comprendre le contexte de l'échange et de vérifier si une information n’a pas déjà été donnée dans les mails précédents.</p>"
+                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Avant de répondre, il est utile de vérifier qui est concerné par votre réponse afin de choisir entre entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p>\n<p>Pensez aussi à&nbsp;:</p>\n\n<ul>\n    <li>lire tout le fil de discussion pour comprendre le contexte de l'échange,</li>\n    <li>vérifier si une information n’a pas déjà été donnée dans les mails précédents.</li>\n</ul>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Rien de spécial.</p>",
                     "feedback": {
-                      "diagnosis": "<p>En réalité, quelques vérifications sont utiles pour envoyer une réponse adaptée&nbsp;:</p><ul><li>Lire tout le fil de discussion pour bien comprendre la situation et ne pas manquer une information.</li><li>Vérifier les destinataires pour envoyer une réponse adaptée aux personnes concernées.</li></ul>"
+                      "diagnosis": "<p>En réalité, quelques vérifications sont utiles pour envoyer une réponse adaptée&nbsp;:</p>\n<ul>\n    <li>lire tout le fil de discussion pour bien comprendre la situation et ne pas manquer une information,</li>\n    <li>vérifier les destinataires pour envoyer une réponse adaptée aux personnes concernées.</li>\n</ul>"
                     }
                   }
                 ],
