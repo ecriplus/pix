@@ -14,7 +14,7 @@ import * as codeGenerator from '../../../shared/domain/services/code-generator.j
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../shared/infrastructure/constants.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { PromiseUtils } from '../../../shared/infrastructure/utils/promise-utils.js';
-import { UnableToAttachChildOrganizationToParentOrganizationError } from '../errors.js';
+import { ParentOrganizationNotInNetworkError } from '../errors.js';
 import { Organization } from '../models/Organization.js';
 import { OrganizationForAdmin } from '../models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../models/OrganizationLearnerType.js';
@@ -102,7 +102,7 @@ async function _createOrganizations({
   organizationLearnerTypeRepository,
   organizationVerificationService,
 }) {
-  return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate) => {
+  return PromiseUtils.mapSeries(transformedOrganizationsData, async (organizationToCreate, index) => {
     const { administrationTeamId, parentOrganizationId, countryCode, organizationLearnerType } =
       organizationToCreate.organization;
 
@@ -112,13 +112,15 @@ async function _createOrganizations({
     );
 
     if (parentOrganizationId) {
-      const organization = await organizationForAdminRepository.get({
+      const parentOrganization = await organizationForAdminRepository.get({
         organizationId: parentOrganizationId,
       });
 
-      // TODO: _assertOrganizationIsNotChildOrganization doit vérifier via fct_structures (parent_structure_id)
-      // et non organizations.parentOrganizationId. Également mettre à jour fct_structures lors de la création.
-      _assertOrganizationIsNotChildOrganization(organization);
+      if (!parentOrganization.network?.id) {
+        throw new ParentOrganizationNotInNetworkError({
+          meta: { parentOrganizationId: parentOrganization.id, currentLine: index + 1 },
+        });
+      }
     }
 
     await organizationVerificationService.checkCountryExists(countryCode, countryRepository);
@@ -154,19 +156,6 @@ async function _createOrganizations({
       throw new DomainError(error.message);
     }
   });
-}
-
-function _assertOrganizationIsNotChildOrganization(organization) {
-  if (organization.parentOrganizationId) {
-    throw new UnableToAttachChildOrganizationToParentOrganizationError({
-      code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_ANOTHER_CHILD_ORGANIZATION',
-      message: 'Unable to attach child organization to parent organization which is also a child organization',
-      meta: {
-        grandParentOrganizationId: organization.parentOrganizationId,
-        parentOrganizationId: organization.id,
-      },
-    });
-  }
 }
 
 function _transformOrganizationsCsvData(organizationsCsvData) {

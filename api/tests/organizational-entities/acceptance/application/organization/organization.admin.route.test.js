@@ -44,11 +44,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
   });
 
   describe('POST /api/admin/organizations/import-csv', function () {
-    // TODO: ce test doit être mis à jour une fois que le use case createOrganizationsWithTagsAndTargetProfiles
-    // utilisera fct_structures pour créer le lien parent-enfant (via parent_structure_id et network_id)
-    // et non plus organizations.parentOrganizationId
-    // eslint-disable-next-line mocha/no-pending-tests
-    xit('create organizations for the given csv file', async function () {
+    it('create organizations for the given csv file', async function () {
       // given
       const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
       databaseBuilder.factory.buildTag({ name: 'GRAS' });
@@ -61,11 +57,14 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         commonName: 'France',
         originalName: 'France',
       });
-      const organizationId = databaseBuilder.factory.buildOrganization().id;
-      const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const { organization } = databaseBuilder.factory.buildOrganizationWithStructure();
+
+      const { network, organization: parentOrganization } = databaseBuilder.factory.buildNetworkAndHeadOrganization();
+      const parentOrganizationId = parentOrganization.id;
+
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       databaseBuilder.factory.buildTargetProfileShare({
-        organizationId,
+        organizationId: organization.id,
         targetProfileId,
       });
       const organizationLearnerTypeId = databaseBuilder.factory.buildOrganizationLearnerType().id;
@@ -104,7 +103,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         documentationUrl: 'url.com',
         identityProviderForCampaigns: null,
         isManagingStudents: true,
-        parentOrganizationId: null,
         countryCode: 99100,
         organizationLearnerTypeId,
       });
@@ -119,7 +117,6 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         createdBy: superAdminUserId,
         identityProviderForCampaigns: null,
         isManagingStudents: false,
-        parentOrganizationId,
         countryCode: 99100,
         organizationLearnerTypeId,
       });
@@ -142,6 +139,38 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         organizationId: firstOrganizationCreated.id,
       });
       expect(firstOrganizationTags).to.have.lengthOf(2);
+
+      const firstOrganizationNetworkAttachment = await knex
+        .select({
+          organizationId: 'fctChild.organization_id',
+          networkId: 'fctChild.network_id',
+          parentOrganizationId: 'fctParent.organization_id',
+        })
+        .from('fct_structures AS fctChild')
+        .leftJoin('fct_structures AS fctParent', 'fctParent.structure_id', 'fctChild.parent_structure_id')
+        .where({
+          'fctChild.organization_id': firstOrganizationCreated.id,
+        })
+        .first();
+
+      expect(firstOrganizationNetworkAttachment.parentOrganizationId).to.be.null;
+      expect(firstOrganizationNetworkAttachment.networkId).to.be.null;
+
+      const secondOrganizationNetworkAttachment = await knex
+        .select({
+          organizationId: 'fctChild.organization_id',
+          networkId: 'fctChild.network_id',
+          parentOrganizationId: 'fctParent.organization_id',
+        })
+        .from('fct_structures AS fctChild')
+        .leftJoin('fct_structures AS fctParent', 'fctParent.structure_id', 'fctChild.parent_structure_id')
+        .where({
+          'fctChild.organization_id': secondOrganizationCreated.id,
+        })
+        .first();
+
+      expect(secondOrganizationNetworkAttachment.parentOrganizationId).to.equal(parentOrganizationId);
+      expect(secondOrganizationNetworkAttachment.networkId).to.equal(network.id);
     });
   });
 

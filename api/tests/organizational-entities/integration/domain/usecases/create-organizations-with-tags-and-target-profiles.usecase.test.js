@@ -4,7 +4,7 @@ import {
   AdministrationTeamNotFound,
   CountryNotFoundError,
   OrganizationLearnerTypeNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
+  ParentOrganizationNotInNetworkError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
@@ -1105,14 +1105,16 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
   });
 
   describe('when parent organization id is provided', function () {
-    describe('when parent organization exists and is not already a child', function () {
-      // TODO: ce test doit être mis à jour une fois que le use case createOrganizationsWithTagsAndTargetProfiles
-      // utilisera fct_structures pour créer le lien parent-enfant (via parent_structure_id et network_id)
-      // et non plus organizations.parentOrganizationId
-      // eslint-disable-next-line mocha/no-pending-tests
-      xit('should add parent organization id to organization', async function () {
+    describe('when parent organization exists and is part of a network', function () {
+      it('should attach organization to parent and network', async function () {
         // given
-        const parentOrganizationId = databaseBuilder.factory.buildOrganization().id;
+        const {
+          network,
+          organization: parentOrganization,
+          structure: parentStructure,
+        } = databaseBuilder.factory.buildNetworkAndHeadOrganization({
+          name: 'Réseau SCO',
+        });
         await databaseBuilder.commit();
 
         const organizations = [
@@ -1123,7 +1125,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             locale: 'fr-fr',
             createdBy: userId,
             administrationTeamId,
-            parentOrganizationId,
+            parentOrganizationId: parentOrganization.id,
             countryCode,
             organizationLearnerTypeId,
           },
@@ -1134,8 +1136,15 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
           organizations,
         });
 
+        const createdOrganizationsIds = createdOrganizations.map((createdOrganization) => createdOrganization.id);
+
+        const createdOrganizationsInDB = await knex('organizations')
+          .join('fct_structures', 'organizations.id', 'fct_structures.organization_id')
+          .whereIn('id', createdOrganizationsIds);
+
         // then
-        expect(createdOrganizations[0].parentOrganizationId).to.deep.equal(parentOrganizationId);
+        expect(createdOrganizationsInDB[0].network_id).to.deep.equal(network.id);
+        expect(createdOrganizationsInDB[0].parent_structure_id).to.deep.equal(parentStructure.id);
       });
     });
 
@@ -1166,19 +1175,13 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
       });
     });
 
-    describe('when parent organization is already a child', function () {
-      // TODO: ce test doit être mis à jour une fois que le use case createOrganizationsWithTagsAndTargetProfiles
-      // vérifiera si le parentOrganization est déjà un enfant via fct_structures (parent_structure_id)
-      // et non plus via organizations.parentOrganizationId
-      // eslint-disable-next-line mocha/no-pending-tests
-      xit('should throw', async function () {
+    describe('when parent organization is not part of a network', function () {
+      it('should throw ParentOrganizationNotInNetworkError error', async function () {
         // given
-        const grandParentOrganizationId = databaseBuilder.factory.buildOrganization().id;
-        const parentOrganizationId = databaseBuilder.factory.buildOrganization({
-          parentOrganizationId: grandParentOrganizationId,
-        }).id;
+        const { organization: parentOrganization } = databaseBuilder.factory.buildOrganizationWithStructure();
 
         await databaseBuilder.commit();
+
         const organizations = [
           {
             type: 'SCO',
@@ -1187,7 +1190,7 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
             locale: 'fr-fr',
             createdBy: userId,
             administrationTeamId,
-            parentOrganizationId,
+            parentOrganizationId: parentOrganization.id,
             countryCode,
             organizationLearnerTypeId,
           },
@@ -1199,7 +1202,8 @@ describe('Integration | UseCases | create-organizations-with-tags-and-target-pro
         });
 
         // then
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
+        expect(error).to.be.instanceOf(ParentOrganizationNotInNetworkError);
+        expect(error.meta).to.deep.equal({ parentOrganizationId: parentOrganization.id, currentLine: 1 });
       });
     });
   });
