@@ -445,16 +445,18 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
 
   describe('#archive', function () {
     context('when the organization does exist', function () {
-      it('should cancel all pending invitations of a given organization', async function () {
+      it('should hard delete all invitations of a given organization regardless of status', async function () {
         // given
         const superAdminUserId = databaseBuilder.factory.buildUser.withRole().id;
+
         const pendingStatus = OrganizationInvitation.StatusType.PENDING;
         const cancelledStatus = OrganizationInvitation.StatusType.CANCELLED;
         const acceptedStatus = OrganizationInvitation.StatusType.ACCEPTED;
-        const organizationId = databaseBuilder.factory.buildOrganization().id;
 
-        databaseBuilder.factory.buildOrganizationInvitation({ id: 1, organizationId, status: pendingStatus });
-        databaseBuilder.factory.buildOrganizationInvitation({ id: 2, organizationId, status: pendingStatus });
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+        databaseBuilder.factory.buildOrganizationInvitation({ organizationId, status: pendingStatus });
         databaseBuilder.factory.buildOrganizationInvitation({
           organizationId,
           status: acceptedStatus,
@@ -462,6 +464,11 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         databaseBuilder.factory.buildOrganizationInvitation({
           organizationId,
           status: cancelledStatus,
+        });
+
+        databaseBuilder.factory.buildOrganizationInvitation({
+          organizationId: otherOrganizationId,
+          status: pendingStatus,
         });
 
         await databaseBuilder.commit();
@@ -473,30 +480,16 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
         });
 
         // then
-        const pendingInvitations = await knex('organization-invitations').where({
+        const organizationInvitations = await knex('organization-invitations').where({
           organizationId,
-          status: pendingStatus,
         });
-        expect(pendingInvitations).to.have.lengthOf(0);
 
-        const allCancelledInvitations = await knex('organization-invitations').where({
-          organizationId,
-          status: cancelledStatus,
+        const otherOrganizationInvitations = await knex('organization-invitations').where({
+          organizationId: otherOrganizationId,
         });
-        expect(allCancelledInvitations).to.have.lengthOf(3);
 
-        const newlyCancelledInvitations = await knex('organization-invitations').where({
-          organizationId,
-          status: cancelledStatus,
-          updatedAt: now,
-        });
-        expect(newlyCancelledInvitations).to.have.lengthOf(2);
-
-        const acceptedInvitations = await knex('organization-invitations').where({
-          organizationId,
-          status: acceptedStatus,
-        });
-        expect(acceptedInvitations).to.have.lengthOf(1);
+        expect(organizationInvitations).to.have.lengthOf(0);
+        expect(otherOrganizationInvitations).to.have.lengthOf(1);
       });
 
       it('should delete active campaigns of a given organization', async function () {

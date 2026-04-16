@@ -4,7 +4,6 @@ import { ORGANIZATION_FEATURE } from '../../../shared/domain/constants.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../shared/domain/errors.js';
 import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
-import { OrganizationInvitation } from '../../../team/domain/models/OrganizationInvitation.js';
 import { OrganizationForAdmin } from '../../domain/models/OrganizationForAdmin.js';
 import { OrganizationLearnerType } from '../../domain/models/OrganizationLearnerType.js';
 import { Tag } from '../../domain/models/Tag.js';
@@ -13,6 +12,7 @@ const DATA_PROTECTION_OFFICERS_TABLE_NAME = 'data-protection-officers';
 const ORGANIZATION_FEATURES_TABLE_NAME = 'organization-features';
 const ORGANIZATION_TAGS_TABLE_NAME = 'organization-tags';
 const ORGANIZATIONS_TABLE_NAME = 'organizations';
+const ORGANIZATION_INVITATIONS_TABLE_NAME = 'organization-invitations';
 
 /**
  * @type {function}
@@ -34,9 +34,7 @@ const archive = async function ({ id, archivedBy, campaignApi, learnerApi }) {
 
   const archiveDate = new Date();
 
-  await knexConnection('organization-invitations')
-    .where({ organizationId: id, status: OrganizationInvitation.StatusType.PENDING })
-    .update({ status: OrganizationInvitation.StatusType.CANCELLED, updatedAt: archiveDate });
+  await knexConnection(ORGANIZATION_INVITATIONS_TABLE_NAME).where({ organizationId: id }).delete();
 
   await learnerApi.deleteOrganizationLearnerBeforeImportFeature({
     userId: archivedBy,
