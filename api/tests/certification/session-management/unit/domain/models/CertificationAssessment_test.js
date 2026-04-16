@@ -771,12 +771,15 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         certificationAnswersByDate: [
           domainBuilder.buildAnswer({
             challengeId: 'rec123',
+            createdAt: new Date('2020-01-01'),
           }),
           domainBuilder.buildAnswer({
             challengeId: 'rec456',
+            createdAt: new Date('2020-02-02'),
           }),
           domainBuilder.buildAnswer({
             challengeId: 'rec789',
+            createdAt: new Date('2020-03-03'),
           }),
         ],
       });
@@ -788,6 +791,7 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
       expect(certificationAssessmentAnswer).to.deep.equal(
         domainBuilder.buildAnswer({
           challengeId: 'rec456',
+          createdAt: new Date('2020-02-02'),
         }),
       );
     });
