@@ -76,7 +76,12 @@ export const PIX_CERTIF_PRO_DATA = {
     {
       type: 'PRO',
       externalId: 'CERTIFPRO',
-      habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE, CERTIFICATIONS_DATA.DROIT, CERTIFICATIONS_DATA.PRO_SANTE],
+      habilitations: [
+        CERTIFICATIONS_DATA.CLEA,
+        CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+        CERTIFICATIONS_DATA.DROIT,
+        CERTIFICATIONS_DATA.PRO_SANTE,
+      ],
       withOrganization: {
         isManagingStudents: false,
       },

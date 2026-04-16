@@ -74,7 +74,7 @@ export const loggedPagesFixtures = sharedTest.extend<
   },
   nextId: [
     // eslint-disable-next-line no-empty-pattern
-    async ({ }, use, workerInfo) => {
+    async ({}, use, workerInfo) => {
       const shardOffset = (workerInfo.config.shard?.current ?? 0) * 100;
       const workerOffset = workerInfo.workerIndex + 1;
       const globalOffset = (shardOffset + workerOffset) * 1_000;
@@ -132,7 +132,12 @@ export const loggedPagesFixtures = sharedTest.extend<
           {
             type: 'PRO',
             externalId: `CERTIFPRO${nextUserId}`,
-            habilitations: [CERTIFICATIONS_DATA.CLEA, CERTIFICATIONS_DATA.EDU_1ER_DEGRE, CERTIFICATIONS_DATA.DROIT, CERTIFICATIONS_DATA.PRO_SANTE],
+            habilitations: [
+              CERTIFICATIONS_DATA.CLEA,
+              CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+              CERTIFICATIONS_DATA.DROIT,
+              CERTIFICATIONS_DATA.PRO_SANTE,
+            ],
             withOrganization: {
               isManagingStudents: false,
             },
@@ -315,9 +320,9 @@ async function setupContext(browser: Browser, credentials: Credentials) {
   const harFilePath = path.join(HAR_DIR, `${credentials.label}.har`);
   const recordHar = shouldRecordHAR
     ? {
-      path: harFilePath,
-      content: 'omit' as const,
-    }
+        path: harFilePath,
+        content: 'omit' as const,
+      }
     : undefined;
   return browser.newContext({
     storageState: authFilePath,

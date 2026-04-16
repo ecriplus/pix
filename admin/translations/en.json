@@ -54,6 +54,14 @@
           "BELOW_MINIMUM": "{pixScore} Pix",
           "NONE": "{pixScore} Pix"
         },
+        "DROIT": {
+          "0": "Independent",
+          "1": "Confirmed",
+          "2": "Advanced",
+          "3": "Expert",
+          "BELOW_MINIMUM": "Non obtained",
+          "NONE": "{pixScore} Pix"
+        },
         "EDU_1ER_DEGRE": {
           "0": "Admissible",
           "BELOW_MINIMUM": "Not admissible",
@@ -67,14 +75,6 @@
         "EDU_CPE": {
           "0": "Admissible",
           "BELOW_MINIMUM": "Not admissible",
-          "NONE": "{pixScore} Pix"
-        },
-        "DROIT": {
-          "0": "Independent",
-          "1": "Confirmed",
-          "2": "Advanced",
-          "3": "Expert",
-          "BELOW_MINIMUM": "Non obtained",
           "NONE": "{pixScore} Pix"
         },
         "PRO_SANTE": {

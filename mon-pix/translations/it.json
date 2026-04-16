@@ -683,10 +683,10 @@
       "framework-title": {
         "CLEA": "Certificato Pix",
         "CORE": "Certificato Pix",
+        "DROIT": "Certificato Pix+ Diritto",
         "EDU_1ER_DEGRE": "Certificato Pix+ Edu 1° livello",
         "EDU_2ND_DEGRE": "Certificato Pix+ Edu 2° livello",
         "EDU_CPE": "Certificato Pix+ Edu CPE",
-        "DROIT": "Certificato Pix+ Diritto",
         "PRO_SANTE": "Certificato Pix+ Professionisti della salute"
       },
       "frameworks": {
@@ -2395,6 +2395,13 @@
     },
     "user-certifications": {
       "meshes": {
+        "DROIT": {
+          "0": "Indipendente",
+          "1": "Confirmado",
+          "2": "Avanzato",
+          "3": "Esperto",
+          "BELOW_MINIMUM": "Non ottenuto"
+        },
         "EDU_1ER_DEGRE": {
           "0": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
@@ -2406,13 +2413,6 @@
         "EDU_CPE": {
           "0": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
-        },
-        "DROIT": {
-          "0": "Indipendente",
-          "1": "Confirmado",
-          "2": "Avanzato",
-          "3": "Esperto",
-          "BELOW_MINIMUM": "Non ottenuto"
         },
         "PRO_SANTE": {
           "0": "Indipendente",
