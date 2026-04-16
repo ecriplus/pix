@@ -30,9 +30,6 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       // given
       class CurrentUserStub extends Service {
         canAccessAttestationsPage = true;
-        prescriber = {
-          availableAttestations: [],
-        };
       }
 
       this.owner.register('service:current-user', CurrentUserStub);
@@ -61,9 +58,6 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           id: 12345,
           divisions,
           isManagingStudents: true,
-        };
-        prescriber = {
-          availableAttestations: ['MY_KEY'],
         };
       }
 
@@ -121,14 +115,11 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           divisions,
           isManagingStudents: false,
         };
-        prescriber = {
-          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
-        };
       }
 
       const findRecordStub = sinon.stub();
       const queryRecord = sinon.stub();
-      const findAllStub = sinon.stub();
+      const findAllStub = sinon.stub().resolves(attestations);
       class StoreStub extends Service {
         findRecord = findRecordStub;
         query = queryRecord;
@@ -150,7 +141,19 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       assert.deepEqual(actualOptions, {
         attestationParticipantStatuses,
         availableAttestations: attestations,
-        currentAttestation: { key: 'MY_OTHER_KEY', label: 'attestation 2' },
+        currentAttestation: { key: 'MY_KEY', label: 'attestation 1' },
+      });
+      assert.notPropContains(actualOptions, {
+        options: [
+          {
+            label: '3èmeA',
+            value: '3èmeA',
+          },
+          {
+            label: '2ndE',
+            value: '2ndE',
+          },
+        ],
       });
     });
 
@@ -168,9 +171,6 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           id: 12345,
           divisions,
           isManagingStudents: false,
-        };
-        prescriber = {
-          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
         };
       }
 
@@ -198,7 +198,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       assert.ok(
         queryRecord.calledOnceWithExactly('attestation-participant-status', {
           organizationId: 12345,
-          attestationKey: 'MY_OTHER_KEY',
+          attestationKey: 'MY_KEY',
           filter: {
             statuses: [],
             divisions: undefined,
@@ -212,7 +212,7 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
       );
     });
 
-    test('it should call the store with available params', async function (assert) {
+    test('it should call the attestation-participant-status store with model params in the correct format', async function (assert) {
       // given
       const divisions = [{ name: '3èmeA' }, { name: '2ndE' }];
       const attestationParticipantStatuses = Symbol('expected-attestations');
@@ -226,9 +226,6 @@ module('Unit | Route | authenticated/attestations', function (hooks) {
           id: 12345,
           divisions,
           isManagingStudents: false,
-        };
-        prescriber = {
-          availableAttestations: ['MY_OTHER_KEY', 'MY_KEY'],
         };
       }
 

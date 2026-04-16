@@ -301,48 +301,4 @@ module('Unit | Model | prescriber', function (hooks) {
       assert.false(hasCoverRateFeature);
     });
   });
-
-  module('#availableAttestations', function () {
-    test('it returns attestation keys when feature is enabled', function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const model = store.createRecord('prescriber', {
-        features: { ['ATTESTATIONS_MANAGEMENT']: { active: true, params: ['SIXTH_GRADE', 'PARENTHOOD'] } },
-      });
-
-      // when
-      const { availableAttestations } = model;
-
-      // then
-      assert.deepEqual(availableAttestations, ['SIXTH_GRADE', 'PARENTHOOD']);
-    });
-
-    test('it returns empty array when feature is disabled', function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const model = store.createRecord('prescriber', {
-        features: { ['ATTESTATIONS_MANAGEMENT']: { active: false, params: null } },
-      });
-
-      // when
-      const { availableAttestations } = model;
-
-      // then
-      assert.deepEqual(availableAttestations, []);
-    });
-
-    test('it returns empty array when feature is not present', function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const model = store.createRecord('prescriber', {
-        features: {},
-      });
-
-      // when
-      const { availableAttestations } = model;
-
-      // then
-      assert.deepEqual(availableAttestations, []);
-    });
-  });
 });

@@ -35,8 +35,12 @@ export default class AuthenticatedAttestationsRoute extends Route {
   }
 
   async model(params) {
-    const attestationKey = params.attestationKey ?? this.currentUser.prescriber.availableAttestations[0];
     const organizationId = this.currentUser.organization.id;
+
+    const availableAttestations = await this.store.findAll('attestation', { adapterOptions: { organizationId } });
+    const attestationKey = params.attestationKey ?? availableAttestations[0].key;
+    const currentAttestation = availableAttestations.find((attestation) => attestationKey === attestation.key);
+
     const attestationParticipantStatuses = await this.store.query('attestation-participant-status', {
       organizationId,
       attestationKey,
@@ -50,9 +54,6 @@ export default class AuthenticatedAttestationsRoute extends Route {
         size: params.pageSize,
       },
     });
-
-    const availableAttestations = await this.store.findAll('attestation', { adapterOptions: { organizationId } });
-    const currentAttestation = availableAttestations.find((attestation) => attestationKey === attestation.key);
 
     if (this.currentUser.organization.isManagingStudents) {
       const divisions = await this.currentUser.organization.divisions;
