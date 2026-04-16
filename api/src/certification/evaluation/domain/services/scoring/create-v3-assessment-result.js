@@ -15,7 +15,7 @@ export function createV3AssessmentResult({
   isAbortReasonTechnical,
   juryId,
   minimumAnswersRequiredToValidateACertification,
-  certificationScope,
+  certificationFramework,
 }) {
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
@@ -67,14 +67,14 @@ export function createV3AssessmentResult({
     }
   }
 
-  if (isEduFramework(certificationScope) && reachedMeshIndex === null) {
+  if (isEduFramework(certificationFramework) && reachedMeshIndex === null) {
     return AssessmentResultFactory.buildRejectedNotEligibleEduAssessmentResult({
       assessmentId,
       juryId,
       capacity,
       reachedMeshIndex,
       versionId,
-      certificationFramework: certificationScope,
+      certificationFramework,
     });
   }
 

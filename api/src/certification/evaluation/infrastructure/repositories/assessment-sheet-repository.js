@@ -19,6 +19,7 @@ export async function findByCertificationCourseId(certificationCourseId) {
       assessmentUpdatedAt: 'assessments.updatedAt',
       certificationCourseUpdatedAt: 'certification-courses.updatedAt',
       versionId: 'certification-courses.versionId',
+      certificationFramework: 'certification-courses.framework',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

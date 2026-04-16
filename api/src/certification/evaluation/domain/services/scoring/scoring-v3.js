@@ -19,7 +19,7 @@
 import CertificationCancelled from '../../../../../shared/domain/events/CertificationCancelled.js';
 import { status as CertificationStatus } from '../../../../../shared/domain/models/AssessmentResult.js';
 import { ABORT_REASONS } from '../../../../shared/domain/constants/abort-reasons.js';
-import { SCOPES } from '../../../../shared/domain/models/Scopes.js';
+import { Frameworks, hasCoreScope } from '../../../../shared/domain/models/Frameworks.js';
 import { DoubleCertificationScoring } from '../../models/DoubleCertificationScoring.js';
 import { ScoringV3Algorithm } from '../../models/ScoringV3Algorithm.js';
 import { createV3AssessmentResult } from './create-v3-assessment-result.js';
@@ -27,7 +27,6 @@ import { createV3AssessmentResult } from './create-v3-assessment-result.js';
 /**
  * @param {object} params
  * @param {CertificationScoringEvent} [params.event]
- * @param {Candidate} params.candidate
  * @param {AssessmentSheet} params.assessmentSheet
  * @param {FlashAssessmentAlgorithm} params.algorithm
  * @param {V3CertificationScoring} params.v3CertificationScoring
@@ -40,7 +39,6 @@ import { createV3AssessmentResult } from './create-v3-assessment-result.js';
  */
 export function handleV3CertificationScoring({
   event,
-  candidate,
   assessmentSheet,
   allChallenges,
   askedChallengesWithoutLiveAlerts,
@@ -67,11 +65,11 @@ export function handleV3CertificationScoring({
     minimumAnswersRequiredToValidateACertification:
       v3CertificationScoring.minimumAnswersRequiredToValidateACertification,
     versionId: v3CertificationScoring.versionId,
-    certificationScope: candidate.subscriptionScope,
+    certificationFramework: assessmentSheet.certificationFramework,
   });
 
   let doubleCertificationScoring = null;
-  if (candidate.hasCleaSubscription) {
+  if (assessmentSheet.certificationFramework === Frameworks.CLEA) {
     doubleCertificationScoring = _scoreDoubleCertification({
       assessmentSheet,
       assessmentResult,
@@ -103,7 +101,6 @@ function scoreCertification({
   maximumAssessmentLength,
   minimumAnswersRequiredToValidateACertification,
   versionId,
-  certificationScope,
 }) {
   const downgradeCapacity = shouldDowngradeCapacity({
     maximumAssessmentLength,
@@ -113,8 +110,9 @@ function scoreCertification({
   });
 
   const capacity = scoringV3Algorithm.computeCapacity({ shouldDowngradeCapacity: downgradeCapacity });
-  const pixScore =
-    certificationScope === SCOPES.CORE ? scoringV3Algorithm.computePixScoreFromCapacity({ capacity }) : null;
+  const pixScore = hasCoreScope(assessmentSheet.certificationFramework)
+    ? scoringV3Algorithm.computePixScoreFromCapacity({ capacity })
+    : null;
   const reachedMeshIndex = scoringV3Algorithm.computeReachedMeshIndex({ capacity });
   const competenceMarks = scoringV3Algorithm.computeCompetenceMarks({ capacity });
 
@@ -142,7 +140,7 @@ function scoreCertification({
     isAbortReasonTechnical: assessmentSheet.isAbortReasonTechnical,
     juryId: event?.juryId,
     minimumAnswersRequiredToValidateACertification,
-    certificationScope,
+    certificationFramework: assessmentSheet.certificationFramework,
   });
   return assessmentResult;
 }

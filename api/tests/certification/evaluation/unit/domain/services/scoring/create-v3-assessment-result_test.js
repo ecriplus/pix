@@ -1,6 +1,6 @@
 import { createV3AssessmentResult } from '../../../../../../../src/certification/evaluation/domain/services/scoring/create-v3-assessment-result.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../../src/certification/shared/domain/models/JuryComment.js';
-import { SCOPES } from '../../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
@@ -169,7 +169,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              certificationScope: SCOPES.CORE,
+              certificationFramework: Frameworks.CORE,
             });
 
             //then
@@ -203,7 +203,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              certificationScope: SCOPES.CORE,
+              certificationFramework: Frameworks.CORE,
             });
 
             //then
@@ -234,7 +234,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              certificationScope: 'EDU_1ER_DEGRE',
+              certificationFramework: Frameworks.EDU_1ER_DEGRE,
             });
 
             //then
@@ -268,7 +268,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
               isAbortReasonTechnical: false,
               juryId: 123,
               minimumAnswersRequiredToValidateACertification,
-              certificationScope: SCOPES.CORE,
+              certificationFramework: Frameworks.CORE,
             });
 
             //then
@@ -300,7 +300,7 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
             isAbortReasonTechnical: false,
             juryId: 123,
             minimumAnswersRequiredToValidateACertification,
-            certificationScope: SCOPES.CORE,
+            certificationFramework: Frameworks.CORE,
           });
 
           //then

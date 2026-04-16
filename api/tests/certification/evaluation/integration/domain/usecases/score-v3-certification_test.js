@@ -1,7 +1,7 @@
 import { CertificationCompletedJob } from '../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
-import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
@@ -359,7 +359,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       certifiableUserId = databaseBuilder.factory.buildUser().id;
 
       eduCertificationVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: SCOPES.PIX_PLUS_EDU_1ER_DEGRE,
+        scope: Frameworks.EDU_1ER_DEGRE,
         challengesConfiguration: { maximumAssessmentLength: 10 },
         minimumAnswersRequiredToValidateACertification: 10,
         globalScoringConfiguration: [{ meshLevel: 0, bounds: { min: 10, max: 20 } }],
@@ -464,6 +464,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         version: AlgorithmEngineVersion.V3,
         candidateId,
         versionId: certificationVersionId,
+        framework: Frameworks.CLEA,
       }).id;
 
       complementaryCertificationCourseId = databaseBuilder.factory.buildComplementaryCertificationCourse({

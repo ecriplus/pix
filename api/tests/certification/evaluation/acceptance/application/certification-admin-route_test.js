@@ -1,4 +1,5 @@
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -61,6 +62,7 @@ describe('Certification | Evaluation | Acceptance | Application | certification 
       const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
         sessionId,
         userId: candidate.id,
+        subscription: Frameworks.CORE,
       });
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
 
@@ -282,6 +284,7 @@ describe('Certification | Evaluation | Acceptance | Application | certification 
       const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
         sessionId,
         userId: candidate.id,
+        subscription: Frameworks.CORE,
       });
       databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
 

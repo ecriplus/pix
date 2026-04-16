@@ -49,7 +49,7 @@ export async function scoreComplementaryCertificationV2({
   });
 
   const complementaryCertificationKey =
-    candidate.subscriptionScope !== SCOPES.CORE ? candidate.subscriptionScope : undefined;
+    candidate.subscriptionFramework !== SCOPES.CORE ? candidate.subscriptionFramework : undefined;
 
   const complementaryCertificationScoring = await _buildComplementaryCertificationScoring({
     certificationAssessmentRepository,

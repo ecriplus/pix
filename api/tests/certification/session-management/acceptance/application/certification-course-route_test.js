@@ -158,6 +158,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           sessionId: session.id,
           userId,
           reconciledAt: new Date('2020-01-01'),
+          subscription: Frameworks.CORE,
         }).id;
 
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({

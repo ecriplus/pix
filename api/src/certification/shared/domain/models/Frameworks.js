@@ -22,3 +22,11 @@ export const Frameworks = FRAMEWORKS;
 export function isEduFramework(framework) {
   return framework.startsWith('EDU_');
 }
+
+/**
+ * @param {string} [framework]
+ * @returns {boolean}
+ */
+export function hasCoreScope(framework) {
+  return [Frameworks.CORE, Frameworks.CLEA].includes(framework);
+}

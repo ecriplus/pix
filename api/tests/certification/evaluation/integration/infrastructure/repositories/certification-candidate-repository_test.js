@@ -1,6 +1,5 @@
 import * as certificationCandidateRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/certification-candidate-repository.js';
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { CertificationCandidateNotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
@@ -8,8 +7,8 @@ import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../..
 describe('Integration | Repository | certification candidate', function () {
   describe('#findByAssessmentId', function () {
     describe('when certification candidate is found', function () {
-      context('when certification candidate has only subscribed to Pix Core', function () {
-        it('should return a candidate with a CORE subscription scope', async function () {
+      context('when certification candidate has subscribed to Pix Core', function () {
+        it('should return a candidate with a CORE subscription framework', async function () {
           // given
           const session = databaseBuilder.factory.buildSession();
           const user = databaseBuilder.factory.buildUser();
@@ -20,6 +19,7 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-17'),
             authorizedToStart: false,
+            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: candidate.id,
@@ -46,15 +46,14 @@ describe('Integration | Repository | certification candidate', function () {
           expect(result).to.deep.equal(
             domainBuilder.certification.evaluation.buildCandidate({
               ...candidate,
-              subscriptionScope: SCOPES.CORE,
-              hasCleaSubscription: false,
+              subscriptionFramework: Frameworks.CORE,
             }),
           );
         });
       });
 
-      context('when certification candidate has only a complementary subscription', function () {
-        it('should return a candidate with a complementary certification subscription scope', async function () {
+      context('when certification candidate has a CLEA subscription', function () {
+        it('should return a candidate with a CLEA subscription framework', async function () {
           // given
           const session = databaseBuilder.factory.buildSession();
           const user = databaseBuilder.factory.buildUser();
@@ -65,24 +64,13 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-17'),
             authorizedToStart: false,
-          });
-          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-            key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
-          });
-          databaseBuilder.factory.buildComplementaryCertificationSubscription({
-            certificationCandidateId: candidate.id,
-            complementaryCertificationId: complementaryCertification.id,
+            subscription: Frameworks.CLEA,
           });
           const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
             userId: user.id,
             sessionId: session.id,
             createdAt: new Date('2022-10-01T14:00:00Z'),
             candidateId: candidate.id,
-          });
-          databaseBuilder.factory.buildComplementaryCertificationCourse({
-            certificationCourseId: certificationCourse.id,
-            complementaryCertificationId: complementaryCertification.id,
-            complementaryCertificationKey: complementaryCertification.key,
           });
           const assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId: certificationCourse.id,
@@ -100,15 +88,14 @@ describe('Integration | Repository | certification candidate', function () {
           expect(result).to.deep.equal(
             domainBuilder.certification.evaluation.buildCandidate({
               ...candidate,
-              subscriptionScope: SCOPES.PIX_PLUS_DROIT,
-              hasCleaSubscription: false,
+              subscriptionFramework: Frameworks.CLEA,
             }),
           );
         });
       });
 
-      context('when certification candidate has a double certification subscription', function () {
-        it('should return a candidate with a CORE subscription scope', async function () {
+      context('when certification candidate has a Pix+ subscription', function () {
+        it('should return a candidate with the corresponding subscription framework', async function () {
           // given
           const session = databaseBuilder.factory.buildSession();
           const user = databaseBuilder.factory.buildUser();
@@ -119,28 +106,13 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-17'),
             authorizedToStart: false,
-          });
-
-          const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-            key: ComplementaryCertificationKeys.CLEA,
-          });
-          databaseBuilder.factory.buildComplementaryCertificationSubscription({
-            certificationCandidateId: candidate.id,
-            complementaryCertificationId: complementaryCertification.id,
-          });
-          databaseBuilder.factory.buildCoreSubscription({
-            certificationCandidateId: candidate.id,
+            subscription: Frameworks.DROIT,
           });
           const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
             userId: user.id,
             sessionId: session.id,
             createdAt: new Date('2022-10-01T14:00:00Z'),
             candidateId: candidate.id,
-          });
-          databaseBuilder.factory.buildComplementaryCertificationCourse({
-            certificationCourseId: certificationCourse.id,
-            complementaryCertificationId: complementaryCertification.id,
-            complementaryCertificationKey: complementaryCertification.key,
           });
           const assessmentId = databaseBuilder.factory.buildAssessment({
             certificationCourseId: certificationCourse.id,
@@ -158,8 +130,7 @@ describe('Integration | Repository | certification candidate', function () {
           expect(result).to.deep.equal(
             domainBuilder.certification.evaluation.buildCandidate({
               ...candidate,
-              subscriptionScope: SCOPES.CORE,
-              hasCleaSubscription: true,
+              subscriptionFramework: Frameworks.DROIT,
             }),
           );
         });
@@ -178,6 +149,7 @@ describe('Integration | Repository | certification candidate', function () {
           userId: user.id,
           reconciledAt: new Date('2024-10-10'),
           authorizedToStart: false,
+          subscription: Frameworks.CORE,
         });
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           userId: user.id,
@@ -214,6 +186,7 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-01'),
             authorizedToStart: false,
+            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: otherCandidate.id,
@@ -232,6 +205,7 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-18'),
             authorizedToStart: false,
+            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: candidate.id,
@@ -258,8 +232,7 @@ describe('Integration | Repository | certification candidate', function () {
           expect(result).to.deep.equal(
             domainBuilder.certification.evaluation.buildCandidate({
               ...candidate,
-              subscriptionScope: SCOPES.CORE,
-              hasCleaSubscription: false,
+              subscriptionFramework: Frameworks.CORE,
             }),
           );
         });
