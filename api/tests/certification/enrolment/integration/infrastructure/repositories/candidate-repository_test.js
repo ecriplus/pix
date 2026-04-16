@@ -422,7 +422,6 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
         accessibilityAdjustmentNeeded: true,
         sessionId,
         subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
-        subscription: Frameworks.CORE,
       });
       const candidateC = domainBuilder.certification.enrolment.buildCandidate({
         firstName: 'Loulou',

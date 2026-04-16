@@ -26,9 +26,9 @@ const buildCandidate = function ({
   billingMode = null,
   prepaymentCode = null,
   hasSeenCertificationInstructions = false,
-  subscriptions = [],
+  subscriptions = [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
   accessibilityAdjustmentNeeded,
-  subscription = null,
+  subscription = Frameworks.CORE,
 } = {}) {
   return new Candidate({
     id,
@@ -57,14 +57,6 @@ const buildCandidate = function ({
     subscriptions,
     accessibilityAdjustmentNeeded,
     subscription,
-  });
-};
-
-buildCandidate.withCoreSubscription = function (args) {
-  return buildCandidate({
-    ...args,
-    subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null })],
-    subscription: Frameworks.CORE,
   });
 };
 

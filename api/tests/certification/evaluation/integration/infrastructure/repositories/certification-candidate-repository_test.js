@@ -19,7 +19,6 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-17'),
             authorizedToStart: false,
-            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: candidate.id,
@@ -149,7 +148,6 @@ describe('Integration | Repository | certification candidate', function () {
           userId: user.id,
           reconciledAt: new Date('2024-10-10'),
           authorizedToStart: false,
-          subscription: Frameworks.CORE,
         });
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           userId: user.id,
@@ -186,7 +184,6 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-01'),
             authorizedToStart: false,
-            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: otherCandidate.id,
@@ -205,7 +202,6 @@ describe('Integration | Repository | certification candidate', function () {
             userId: user.id,
             reconciledAt: new Date('2024-10-18'),
             authorizedToStart: false,
-            subscription: Frameworks.CORE,
           });
           databaseBuilder.factory.buildCoreSubscription({
             certificationCandidateId: candidate.id,

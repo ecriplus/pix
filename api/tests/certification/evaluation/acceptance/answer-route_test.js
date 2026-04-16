@@ -1,4 +1,3 @@
-import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import {
   createServer,
   databaseBuilder,
@@ -69,7 +68,6 @@ async function _setupTestData(databaseBuilder, { competenceId, doesCandidateNeed
     sessionId: session.id,
     userId,
     accessibilityAdjustmentNeeded: doesCandidateNeedAccessibilityAdjustment,
-    subscription: Frameworks.CORE,
   });
   databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
 

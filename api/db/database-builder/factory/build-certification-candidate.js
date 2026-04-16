@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { Frameworks } from '../../../src/certification/shared/domain/models/Frameworks.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildSession } from './build-session.js';
 import { buildUser } from './build-user.js';
@@ -29,7 +30,7 @@ const buildCertificationCandidate = function ({
   hasSeenCertificationInstructions = false,
   accessibilityAdjustmentNeeded = false,
   reconciledAt = null,
-  subscription = null,
+  subscription = Frameworks.CORE,
 } = {}) {
   sessionId = _.isUndefined(sessionId) ? buildSession().id : sessionId;
   userId = _.isUndefined(userId) ? buildUser().id : userId;

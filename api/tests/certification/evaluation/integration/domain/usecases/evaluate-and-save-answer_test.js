@@ -113,7 +113,6 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
           const candidateId = databaseBuilder.factory.buildCertificationCandidate({
             userId,
             sessionId,
-            subscription: 'CORE',
           }).id;
           certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,

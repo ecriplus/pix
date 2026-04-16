@@ -100,7 +100,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             userId,
             reconciledAt: new Date('2020-01-01'),
-            subscription: Frameworks.CORE,
           });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
@@ -207,7 +206,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             userId,
             reconciledAt: new Date('2020-01-01'),
-            subscription: Frameworks.CORE,
           });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
@@ -296,7 +294,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             userId,
             reconciledAt: new Date('2020-01-01'),
-            subscription: Frameworks.CORE,
           });
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             sessionId: session.id,
@@ -526,7 +523,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             sessionId: session.id,
             userId,
             reconciledAt: new Date('2020-01-01'),
-            subscription: Frameworks.CORE,
           }).id;
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
@@ -823,7 +819,6 @@ const _createSession = async ({ version = 2 } = {}) => {
   const candidate = databaseBuilder.factory.buildCertificationCandidate({
     sessionId: session.id,
     userId,
-    subscription: Frameworks.CORE,
   });
   const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
     sessionId: session.id,

@@ -1,7 +1,6 @@
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
@@ -98,7 +97,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           userId: user.id,
           sessionId,
           reconciledAt: new Date('2020-01-15'),
-          subscription: Frameworks.CORE,
         });
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           isPublished: false,
@@ -250,7 +248,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           userId: user.id,
           sessionId,
           reconciledAt: new Date('2020-01-01'),
-          subscription: Frameworks.CORE,
         });
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           isPublished: false,
