@@ -138,7 +138,9 @@ test(
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
       expect(result).toBe('-');
-      expect(comment).toBe(null);
+      expect(comment).toBe(
+        "Commentaire : Les résultats obtenus ne permettent pas l'admissibilité au volet 2 de pratique professionnelle de la certification Pix+ Édu. Vous avez besoin de consolider vos acquis (en matière de numérique éducatif) pour valoriser vos compétences professionnelles.",
+      );
     });
 
     await test.step('Checking CSV result file content', async () => {
