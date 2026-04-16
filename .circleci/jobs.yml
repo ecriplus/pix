@@ -2,7 +2,7 @@
 #
 #
 # Caching notes:
-# - cache is immutable; increment `v7-` prefix to flush it
+# - cache is immutable; increment `v8-` prefix to flush it
 # - we cache `~/.npm` (not node_modules, which is erased by npm ci)
 # - cache key is based on concatenated package.json + package-lock.json checksum
 #
@@ -94,40 +94,6 @@ executors:
         environment:
           - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
     resource_class: small
-  node-redis-postgres-s3-docker-medium:
-    parameters:
-      node-version:
-        # renovate datasource=node-version depName=node
-        default: 24.14.1
-        type: string
-    docker:
-      - image: cimg/node:<<parameters.node-version>>
-      - image: postgres:16.9-alpine
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_HOST_AUTH_METHOD: trust
-      - image: redis:7.2.11-alpine
-      - image: adobe/s3mock:5.0.0
-        environment:
-          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
-    resource_class: medium
-  node-redis-postgres-s3-docker-large:
-    parameters:
-      node-version:
-        # renovate datasource=node-version depName=node
-        default: 24.14.1
-        type: string
-    docker:
-      - image: cimg/node:<<parameters.node-version>>
-      - image: postgres:16.9-alpine
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_HOST_AUTH_METHOD: trust
-      - image: redis:7.2.11-alpine
-      - image: adobe/s3mock:5.0.0
-        environment:
-          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
-    resource_class: large
   node-browsers-docker:
     parameters:
       node-version:
@@ -166,6 +132,37 @@ executors:
           POSTGRES_USER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
     resource_class: small
+  playwright-executor-medium:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.57.0-noble
+        environment:
+          PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust # POSTGRES_INITDB_ARGS: "--nosync" Speed up DB init et en desspis tmpfs: - /var/lib/postgresql/data # Run DB in RAM
+      - image: redis:7.2.11-alpine
+      - image: adobe/s3mock:5.0.0
+        environment:
+          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
+    resource_class: medium
+
+  playwright-executor-large:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.57.0-noble
+        environment:
+          PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - image: postgres:16.9-alpine
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: redis:7.2.11-alpine
+      - image: adobe/s3mock:5.0.0
+        environment:
+          - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=pix-import-test
+    resource_class: large
 
 # ---------------------------------------------------------------------------
 # Commands (reusable step sequences)
@@ -180,10 +177,10 @@ commands:
       - run: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+            - v8-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
       - run: npm ci
       - save_cache:
-          key: v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+          key: v8-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
           paths:
             - ~/.npm
 
@@ -195,11 +192,11 @@ commands:
       - run: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+            - v8-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
       - run: npm ci
       - run: npx cypress install
       - save_cache:
-          key: v7-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
+          key: v8-<<parameters.cache_key>>-npm-{{ checksum "cachekey" }}
           paths:
             - ~/.npm
 
@@ -986,7 +983,7 @@ jobs:
           command: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+            - v8-api-npm-{{ checksum "~/pix/api/cachekey" }}
       - run:
           name: Install Pix API
           working_directory: ~/pix/api
@@ -1066,7 +1063,7 @@ jobs:
           command: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
+            - v8-api-npm-{{ checksum "~/pix/api/cachekey" }}
       - run:
           name: Install Pix API
           working_directory: ~/pix/api
@@ -1117,7 +1114,7 @@ jobs:
 
   e2e_playwright_test:
     executor:
-      name: node-redis-postgres-s3-docker-medium
+      name: playwright-executor-medium
     working_directory: ~/pix/high-level-tests/e2e-playwright
     parallelism: 4
     steps:
@@ -1136,10 +1133,7 @@ jobs:
           command: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
-      - run:
-          name: Install Playwright Browser
-          command: npx playwright install --with-deps chromium
+            - v8-api-npm-{{ checksum "~/pix/api/cachekey" }}
       - run:
           name: Install Pix API
           working_directory: ~/pix/api
@@ -1227,7 +1221,7 @@ jobs:
 
   e2e_playwright_test_recette_certif:
     executor:
-      name: node-redis-postgres-s3-docker-large
+      name: playwright-executor-large
     working_directory: ~/pix/high-level-tests/e2e-playwright
     parallelism: 4
     steps:
@@ -1236,17 +1230,14 @@ jobs:
       - run: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-playwright-npm-{{ checksum "cachekey" }}
+            - v8-playwright-npm-{{ checksum "cachekey" }}
       - run: npm ci
       - run:
           working_directory: ~/pix/api
           command: cat package*.json > cachekey
       - restore_cache:
           keys:
-            - v7-api-npm-{{ checksum "~/pix/api/cachekey" }}
-      - run:
-          name: Install Playwright Browser
-          command: npx playwright install --with-deps chromium
+            - v8-api-npm-{{ checksum "~/pix/api/cachekey" }}
       - run:
           name: Install Pix API
           working_directory: ~/pix/api
