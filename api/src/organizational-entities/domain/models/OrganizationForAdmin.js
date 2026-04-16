@@ -202,8 +202,6 @@ class OrganizationForAdmin {
     if (organizationBatchUpdateDto.provinceCode) this.provinceCode = organizationBatchUpdateDto.provinceCode;
     if (organizationBatchUpdateDto.identityProviderForCampaigns)
       this.identityProviderForCampaigns = organizationBatchUpdateDto.identityProviderForCampaigns;
-    if (organizationBatchUpdateDto.parentOrganizationId)
-      this.parentOrganizationId = organizationBatchUpdateDto.parentOrganizationId;
 
     const dataProtectionOfficer = {
       firstName: this.dataProtectionOfficer.firstName,

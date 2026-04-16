@@ -14,7 +14,6 @@ import {
   OrganizationBatchUpdateError,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../errors.js';
 
 /**
@@ -38,22 +37,19 @@ export const updateOrganizationsInBatch = withTransaction(
     if (dtos.length === 0) return;
 
     const organizationIds = new Set();
-    const parentOrganizationIds = new Set();
     const administrationTeamIds = new Set();
     const countryCodes = new Set();
     const organizationLearnerTypeIds = new Set();
 
     for (const dto of dtos) {
       organizationIds.add(dto.id);
-      if (dto.parentOrganizationId) parentOrganizationIds.add(dto.parentOrganizationId);
       if (dto.administrationTeamId) administrationTeamIds.add(dto.administrationTeamId);
       if (dto.countryCode) countryCodes.add(dto.countryCode);
       if (dto.organizationLearnerTypeId) organizationLearnerTypeIds.add(dto.organizationLearnerTypeId);
     }
 
-    const existingOrganizationIds = await _toExistingSet(
-      Array.from(new Set([...organizationIds, ...parentOrganizationIds])),
-      (ids) => organizationForAdminRepository.findExistingIds({ ids }),
+    const existingOrganizationIds = await _toExistingSet(Array.from(new Set([...organizationIds])), (ids) =>
+      organizationForAdminRepository.findExistingIds({ ids }),
     );
 
     const existingAdministrationTeamIds = await _toExistingSet(Array.from(administrationTeamIds), (ids) =>
@@ -95,15 +91,6 @@ function _validateAllDtos(
     if (!existingOrganizationIds.has(String(dto.id))) {
       throw new OrganizationNotFound({
         meta: { organizationId: dto.id },
-      });
-    }
-
-    if (dto.parentOrganizationId && !existingOrganizationIds.has(String(dto.parentOrganizationId))) {
-      throw new UnableToAttachChildOrganizationToParentOrganizationError({
-        meta: {
-          organizationId: dto.id,
-          value: dto.parentOrganizationId,
-        },
       });
     }
 

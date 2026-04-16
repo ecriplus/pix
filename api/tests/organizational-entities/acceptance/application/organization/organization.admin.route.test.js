@@ -1394,8 +1394,8 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       it('responds with a 204 - no content', async function () {
         // given
         const input = `${ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';')}
-      ${firstOrganization.id};MSFT;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;99500;
-      ${otherOrganization.id};APPL;;;;;;;Cali;;1234;99500;`;
+      ${firstOrganization.id};MSFT;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;99500;
+      ${otherOrganization.id};APPL;;;;;;Cali;;1234;99500;`;
 
         const options = {
           method: 'POST',

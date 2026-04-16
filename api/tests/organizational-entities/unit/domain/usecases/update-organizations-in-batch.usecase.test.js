@@ -15,7 +15,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
     organizationLearnerTypeRepository;
 
   const csvHeaders =
-    'Organization ID;Organization Name;Organization External ID;Organization Parent ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code';
+    'Organization ID;Organization Name;Organization External ID;Organization Identity Provider Code;Organization Documentation URL;Organization Province Code;DPO Last Name;DPO First Name;DPO E-mail;Administration Team ID;Country Code';
 
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
@@ -76,13 +76,13 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
       it('throws an OrganizationBatchUpdateError', async function () {
         // given
         const fileData = `${csvHeaders}
-        1;;12;2;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
+        1;;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;
         `;
         filePath = await createTempFile('test.csv', fileData);
         organizationForAdminRepository.exist.resolves(true);
         organizationForAdminRepository.get.onCall(0).resolves(domainBuilder.buildOrganizationForAdmin({ id: 1 }));
         organizationForAdminRepository.update.rejects('Unexpected error');
-        organizationForAdminRepository.findExistingIds.resolves(['1', '2']);
+        organizationForAdminRepository.findExistingIds.resolves(['1']);
         administrationTeamRepository.findExistingIds.resolves(['1234']);
         countryRepository.findExistingCodes.resolves(['99100']);
         organizationLearnerTypeRepository.findExistingIds.resolves([]);

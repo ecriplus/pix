@@ -16,10 +16,6 @@ export const ORGANIZATIONS_UPDATE_HEADER = {
       property: 'externalId',
     }),
     new CsvColumn({
-      name: 'Organization Parent ID',
-      property: 'parentOrganizationId',
-    }),
-    new CsvColumn({
       name: 'Organization Identity Provider Code',
       property: 'identityProviderForCampaigns',
     }),
