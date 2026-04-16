@@ -18,4 +18,9 @@ export class HomePage {
 
     return new CertificateListPage(this.page);
   }
+
+  async logout() {
+    await this.page.getByRole('button', { name: /Consulter mes informations/i }).click();
+    await this.page.getByRole('link', { name: 'Se déconnecter' }).click();
+  }
 }
