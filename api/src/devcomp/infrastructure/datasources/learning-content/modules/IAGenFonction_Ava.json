@@ -598,7 +598,7 @@
                         },
                         {
                           "type": "select",
-                          "input": "ouil",
+                          "input": "outil",
                           "display": "inline",
                           "placeholder": "- Sélectionnez -",
                           "ariaLabel": "- Sélectionnez -",
