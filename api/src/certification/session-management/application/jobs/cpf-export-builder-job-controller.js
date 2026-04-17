@@ -68,5 +68,5 @@ export class CpfExportBuilderJobController extends JobController {
 }
 
 function _getTimeInSec(start) {
-  return Math.floor((new Date().getTime() - start) / 1024);
+  return Math.floor((new Date().getTime() - start) / 1000);
 }
