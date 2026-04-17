@@ -21,7 +21,7 @@ const register = async function (server) {
             },
           }),
           headers: Joi.object({
-            'accept-language': Joi.string(),
+            'accept-language': Joi.string(), // TODO: Remove 1 week after the fronts have been updated in production
           }),
           options: {
             allowUnknown: true,

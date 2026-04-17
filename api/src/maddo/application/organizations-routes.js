@@ -58,11 +58,6 @@ const register = async function (server) {
               })
               .description('Informations de pagination'),
           }),
-          headers: Joi.object({
-            'Accept-Language': Joi.string().description(
-              'Header de sélection de langue au format [RFC9110](https://httpwg.org/specs/rfc9110.html#field.accept-language)',
-            ),
-          }).unknown(),
         },
         pre: [organizationPreHandler, isOrganizationInJurisdictionPreHandler],
         handler: getOrganizationCampaigns,
