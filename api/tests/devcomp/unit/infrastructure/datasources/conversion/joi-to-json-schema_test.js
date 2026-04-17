@@ -55,6 +55,16 @@ describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema'
       expect(jsonSchema).to.deep.equal({ type: 'string', format: 'uri', options: null });
     });
 
+    it("should convert Joi.string.uri.allow('') to JSON Schema with anyOf allowing URI or empty string", function () {
+      const joiSchema = Joi.string().uri().allow('');
+      const jsonSchema = convertJoiToJsonSchema(joiSchema);
+      expect(jsonSchema).to.deep.equal({
+        type: 'string',
+        options: null,
+        anyOf: [{ format: 'uri' }, { maxLength: 0 }],
+      });
+    });
+
     it('should convert Joi.string.guid to JSON Schema with format uuid', function () {
       const joiSchema = Joi.string().guid({ version: 'uuidv4' });
       const jsonSchema = convertJoiToJsonSchema(joiSchema);
