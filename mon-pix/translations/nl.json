@@ -2359,6 +2359,7 @@
       },
       "email-confirmed": "Geverifieerd e-mailadres.",
       "email-verification": {
+        "add-successful": "Uw e-mailadres is toegevoegd!",
         "code-explanation-of-use": "Om van veld naar veld te gaan, gebruik je tab of de pijlen naar links en rechts op het toetsenbord. Om een veld in te vullen, voer je getallen in van 1 tot 9 of gebruik je de pijlen omhoog en omlaag op het toetsenbord.",
         "code-label": "Veld",
         "code-legend": "Voer de verificatiecode in die per e-mail is verzonden",

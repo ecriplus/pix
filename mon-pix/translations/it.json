@@ -2361,6 +2361,7 @@
       },
       "email-confirmed": "Indirizzo e-mail verificato.",
       "email-verification": {
+        "add-successful": "Il tuo indirizzo e-mail è stato aggiunto!",
         "code-explanation-of-use": "Per spostarsi da un campo all'altro, utilizzare la tabulazione o le frecce destra e sinistra della tastiera. Per compilare un campo, inserire i numeri da 1 a 9 o utilizzare le frecce su e giù della tastiera.",
         "code-label": "Campo",
         "code-legend": "Inserire il codice di verifica inviato per e-mail",

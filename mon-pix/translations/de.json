@@ -2368,6 +2368,7 @@
       },
       "email-confirmed": "Verifizierte E-Mail-Adresse.",
       "email-verification": {
+        "add-successful": "Ihre E-Mail-Adresse wurde hinzugefügt!",
         "code-explanation-of-use": "Um sich von Feld zu Feld zu bewegen, verwenden Sie entweder den Tabulator oder die Links- und Rechtspfeile der Tastatur. Um ein Feld auszufüllen, geben Sie Zahlen von 1 bis 9 ein oder verwenden Sie die Pfeile nach oben und unten auf der Tastatur.",
         "code-label": "Feld",
         "code-legend": "Geben Sie den per E-Mail zugesandten Verifizierungscode ein",

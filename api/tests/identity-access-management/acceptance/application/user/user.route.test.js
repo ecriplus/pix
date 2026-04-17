@@ -2,6 +2,7 @@ import lodash from 'lodash';
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
+import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
@@ -1016,6 +1017,59 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
 
       // then
       expect(response.statusCode).to.equal(200);
+    });
+  });
+
+  describe('POST /api/users/{id}/add-email-connection-method', function () {
+    it('returns 200 HTTP status code', async function () {
+      // given
+      const server = await createServer();
+
+      const code = '999999';
+      const newEmail = 'judy.new_email@example.net';
+      const user = databaseBuilder.factory.buildUser({ email: null });
+      databaseBuilder.factory.buildAuthenticationMethod.withOidcProviderAsIdentityProvider({
+        userId: user.id,
+        identityProvider: 'OIDC_PROVIDER_EXAMPLE',
+      });
+      await databaseBuilder.commit();
+
+      await userEmailRepository.saveEmailModificationDemand({
+        userId: user.id,
+        code,
+        newEmail,
+        action: 'add-email',
+        passwordHash: 'ABCDEF1234',
+      });
+
+      const payload = {
+        data: {
+          type: 'email-verification-codes',
+          attributes: {
+            code,
+          },
+        },
+      };
+
+      const options = {
+        method: 'POST',
+        url: `/api/users/${user.id}/add-email-connection-method`,
+        payload,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      const userFound = await userRepository.getByEmail(newEmail);
+      expect(userFound.id).to.deep.equal(user.id);
+      const pixAuthenticationMethod = await authenticationMethodRepository.findOneByUserIdAndIdentityProvider({
+        userId: user.id,
+        identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
+      });
+      expect(pixAuthenticationMethod.authenticationComplement.password).to.deep.equal('ABCDEF1234');
     });
   });
 

@@ -25,6 +25,7 @@ export default class AddOrUpdateEmailWithValidation extends Component {
         <EmailVerificationCode
           @disableEmailEditionMode={{@disableEmailEditionMode}}
           @displayEmailUpdateMessage={{@displayEmailUpdateMessage}}
+          @displayEmailAddedMessage={{@displayEmailAddedMessage}}
           @email={{this.newEmail}}
           @password={{this.password}}
           @action={{this.action}}

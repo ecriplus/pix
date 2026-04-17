@@ -37,7 +37,7 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
     await userEmailRepository.saveEmailModificationDemand({ userId: user.id, code, newEmail });
 
     // when
-    const result = await usecases.updateUserEmailWithValidation({ userId: user.id, code, newEmail });
+    const result = await usecases.updateUserEmailWithValidation({ userId: user.id, code });
 
     // then
     expect(result.email).to.equal(newEmail);
@@ -72,7 +72,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       const error = await catchErr(usecases.updateUserEmailWithValidation)({
         userId: user.id,
         code: invalidCode,
-        newEmail,
       });
 
       // then
@@ -84,7 +83,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
     it('throws an error', async function () {
       // given
       const code = 123;
-      const newEmail = 'new.email@example.net';
       const user = databaseBuilder.factory.buildUser({ email: 'email@example.net' });
       await databaseBuilder.commit();
 
@@ -92,7 +90,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       const error = await catchErr(usecases.updateUserEmailWithValidation)({
         userId: user.id,
         code,
-        newEmail,
       });
 
       // then
@@ -113,7 +110,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       const error = await catchErr(usecases.updateUserEmailWithValidation)({
         userId: user.id,
         code,
-        newEmail,
       });
 
       // then
@@ -135,7 +131,6 @@ describe('Integration | Identity Access Management | Domain | UseCase | updateUs
       const error = await catchErr(usecases.updateUserEmailWithValidation)({
         userId: user.id,
         code,
-        newEmail: alreadyExistEmail,
       });
 
       // then

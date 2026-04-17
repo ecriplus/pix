@@ -65,14 +65,22 @@ export default class EmailVerificationCode extends Component {
     }
     const code = this.code;
     this.code = null;
-    const emailVerificationCode = this.store.createRecord('email-verification-code', { code });
+    const emailVerificationCode = this.store.createRecord('email-verification-code', {
+      code,
+      action: this.args.action,
+    });
     try {
       const email = await emailVerificationCode.verifyCode();
-      if (email) {
-        this.currentUser.user.email = email;
+      if (this.args.action === 'add-email') {
+        await this._reloadAccountData();
+        this.args.displayEmailAddedMessage();
+      } else {
+        if (email) {
+          this.currentUser.user.email = email;
+        }
+        this.args.displayEmailUpdateMessage();
       }
       this.args.disableEmailEditionMode();
-      this.args.displayEmailUpdateMessage();
     } catch (response) {
       const status = get(response, 'errors[0].status');
 
@@ -92,6 +100,12 @@ export default class EmailVerificationCode extends Component {
         this.errorMessage = this.intl.t('pages.user-account.email-verification.errors.unknown-error');
       }
     }
+  }
+
+  async _reloadAccountData() {
+    await this.currentUser.load();
+    await this.currentUser.user.belongsTo('accountInfo').reload();
+    await this.store.findAll('authentication-method', { reload: true });
   }
 
   <template>

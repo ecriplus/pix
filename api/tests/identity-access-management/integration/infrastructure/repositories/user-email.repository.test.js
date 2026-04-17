@@ -46,15 +46,37 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
       const userId = databaseBuilder.factory.buildUser().id;
       const newEmail = 'user@example.net';
       const code = '999999';
+      const action = 'add-email';
+      const passwordHash = '12345ABC';
 
-      await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail });
+      await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail, action, passwordHash });
 
       // when
       const result = await userEmailRepository.getEmailModificationDemandByUserId(userId);
 
       // then
-      expect(result).to.deep.equal({ code, newEmail });
+      expect(result).to.deep.equal({ code, newEmail, action, password: passwordHash });
       expect(result).to.be.instanceOf(EmailModificationDemand);
+    });
+  });
+
+  describe('#deleteEmailModificationDemandByUserId', function () {
+    it('deletes the email modification demand if it exists', async function () {
+      // given
+      const userId = databaseBuilder.factory.buildUser().id;
+      const newEmail = 'user@example.net';
+      const code = '999999';
+      const action = 'add-email';
+      const passwordHash = '12345ABC';
+
+      await userEmailRepository.saveEmailModificationDemand({ userId, code, newEmail, action, passwordHash });
+
+      // when
+      await userEmailRepository.deleteEmailModificationDemandByUserId(userId);
+
+      // then
+      const result = await userEmailRepository.getEmailModificationDemandByUserId(userId);
+      expect(result).to.be.undefined;
     });
   });
 });

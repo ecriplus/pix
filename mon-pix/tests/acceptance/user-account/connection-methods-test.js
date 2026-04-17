@@ -241,7 +241,7 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
   });
 
   module('email adding', function () {
-    test('displays verification code component after submitting the add email form', async function (assert) {
+    test('is able to add the mail, enter the code received, and be successfully redirected to account page', async function (assert) {
       // given
       server.create('feature-toggle', { id: '0', addEmailConnectionMethodEnabled: true });
       const user = server.create('user', 'withCanAddEmailConnectionMethod');
@@ -266,9 +266,20 @@ module('Acceptance | user-account | connection-methods', function (hooks) {
       // eslint-disable-next-line ember/no-settled-after-test-helper
       await settled();
 
+      await triggerEvent(screen.getByRole('spinbutton', { name: 'Champ 1' }), 'paste', {
+        clipboardData: { getData: () => '123456' },
+      });
+      await click(
+        screen.getByRole('button', {
+          name: t('pages.user-account.email-verification.validate-new-email'),
+        }),
+      );
+      // eslint-disable-next-line ember/no-settled-after-test-helper
+      await settled();
+
       // then
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.title')));
-      assert.ok(screen.getByText(t('pages.user-account.email-verification.description')));
+      assert.ok(screen.getByText(t('pages.user-account.connexion-methods.email')));
+      assert.ok(screen.getByText(t('pages.user-account.email-verification.add-successful')));
       assert.ok(screen.getByText(newEmail));
     });
   });

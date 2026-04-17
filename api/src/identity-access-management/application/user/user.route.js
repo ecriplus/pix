@@ -429,6 +429,39 @@ export const userRoutes = [
     },
   },
   {
+    method: 'POST',
+    path: '/api/users/{id}/add-email-connection-method',
+    config: {
+      pre: [
+        {
+          method: securityPreHandlers.checkRequestedUserIsAuthenticatedUser,
+          assign: 'requestedUserIsAuthenticatedUser',
+        },
+      ],
+      handler: userController.addUserEmailWithValidation,
+      validate: {
+        params: Joi.object({
+          id: identifiersType.userId,
+        }),
+        payload: Joi.object({
+          data: {
+            type: Joi.string().valid('email-verification-codes').required(),
+            attributes: {
+              code: Joi.string()
+                .regex(/^[1-9]{6}$/)
+                .required(),
+            },
+          },
+        }),
+        failAction: (request, h, error) => {
+          return EntityValidationError.fromJoiErrors(error.details);
+        },
+      },
+      notes: ["- Ajoute une méthode de connexion par adresse email à la suite d'une demande de l'utilisateur"],
+      tags: ['api', 'user', 'add-email'],
+    },
+  },
+  {
     method: 'GET',
     path: '/api/certification-point-of-contacts/me',
     config: {
