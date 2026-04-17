@@ -30,6 +30,12 @@ export class JobClient {
   #usesFixtureJobs = false;
   #isInitialized = false;
 
+  constructor(token) {
+    if (token !== JobClient.#constructorToken) {
+      throw new Error('Use JobClient.instance instead of new JobClient()');
+    }
+  }
+
   get jobGlobPatterns() {
     const patterns = [
       `${workerDirPath}/src/**/application/**/*job-controller.js`,
