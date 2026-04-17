@@ -13,6 +13,7 @@ import { MonitoredJobHandler } from './MonitoredJobHandler.js';
 
 const workerDirPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const logger = child('worker', { event: 'worker' });
+const EXCLUDED_JOB_FILES = ['**/job-controller.js', '**/event-handler.js', '**/job-schedule-controller.js'];
 
 export class JobClient {
   /** @type JobClient */
@@ -23,6 +24,17 @@ export class JobClient {
   #isTestOnly = false;
   #usesFixtureJobs = false;
   #isInitialized = false;
+
+  get jobGlobPatterns() {
+    const patterns = [
+      `${workerDirPath}/src/**/application/**/*job-controller.js`,
+      `${workerDirPath}/src/**/application/**/*event-handler.js`,
+    ];
+    if (this.#usesFixtureJobs) {
+      patterns.push(`${workerDirPath}/tests/**/*job-controller.js`, `${workerDirPath}/tests/**/*event-handler.js`);
+    }
+    return patterns;
+  }
 
   static get instance() {
     if (!JobClient.#jobClient) {
@@ -94,25 +106,15 @@ export class JobClient {
   }
 
   async #registerJobs(jobGroups = []) {
-    const jobControllerPatterns = [`${workerDirPath}/src/**/application/**/*job-controller.js`];
-    const eventHandlerPatterns = [`${workerDirPath}/src/**/application/**/*event-handler.js`];
-    if (this.#usesFixtureJobs) {
-      jobControllerPatterns.push(`${workerDirPath}/tests/**/*job-controller.js`);
-      eventHandlerPatterns.push(`${workerDirPath}/tests/**/*event-handler.js`);
+    for (const globPattern of this.jobGlobPatterns) {
+      logger.info(`Register jobs for groups "${jobGroups}" from glob pattern "${globPattern}".`);
+      await this.#registerJobsFromGlobPattern(globPattern, jobGroups);
     }
-    const excludePattern = ['**/job-controller.js', '**/event-handler.js', '**/job-schedule-controller.js'];
+  }
 
-    logger.info(`Search for job handlers in ${jobControllerPatterns}`);
-    let jobControllerFiles = [];
-    for (const pattern of jobControllerPatterns) {
-      jobControllerFiles = jobControllerFiles.concat(await Array.fromAsync(glob(pattern, { exclude: excludePattern })));
-    }
-
-    logger.info(`Search for event handlers in ${eventHandlerPatterns}`);
-    let jobFiles = jobControllerFiles;
-    for (const pattern of eventHandlerPatterns) {
-      jobFiles = jobFiles.concat(await Array.fromAsync(glob(pattern, { exclude: excludePattern })));
-    }
+  async #registerJobsFromGlobPattern(globPattern, jobGroups) {
+    logger.info(`Search for job handlers in ${globPattern}`);
+    const jobFiles = await Array.fromAsync(glob(globPattern, { exclude: EXCLUDED_JOB_FILES }));
     logger.info(`${jobFiles.length} job handlers files found.`);
 
     let jobModules = {};
