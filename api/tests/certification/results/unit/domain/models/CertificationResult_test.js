@@ -358,11 +358,11 @@ describe('Unit | Domain | Models | CertificationResult', function () {
     it('should return an array of unique labels', function () {
       // given
       const complementaryCertificationCourseResults = [
-        domainBuilder.buildComplementaryCertificationCourseResult({ id: 28, label: 'Pix+ Edu 2nd degré' }),
-        domainBuilder.buildComplementaryCertificationCourseResult({ id: 1, label: 'CléA Numérique' }),
-        domainBuilder.buildComplementaryCertificationCourseResult({ id: 23, label: 'Pix+ Edu 1er degré' }),
-        domainBuilder.buildComplementaryCertificationCourseResult({ id: 2, label: 'CléA Numérique' }),
-        domainBuilder.buildComplementaryCertificationCourseResult({ id: 13, label: 'Pix+ Droit' }),
+        domainBuilder.buildComplementaryCertificationCourseResult({ label: 'CléA Numérique' }),
+        domainBuilder.buildComplementaryCertificationCourseResult({ label: 'Pix+ Droit' }),
+        domainBuilder.buildComplementaryCertificationCourseResult({ label: 'CléA Numérique' }),
+        domainBuilder.buildComplementaryCertificationCourseResult({ label: 'Pix+ Edu 1er degré' }),
+        domainBuilder.buildComplementaryCertificationCourseResult({ label: 'Pix+ Edu 2nd degré' }),
       ];
       const certificationResult = domainBuilder.buildCertificationResult({
         complementaryCertificationCourseResults,

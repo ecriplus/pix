@@ -54,11 +54,12 @@ export class SessionEnrolment {
   }
 
   #generateInvigilatorPassword() {
-    const newPassword = [];
-    for (let i = 0; i < INVIGILATOR_PASSWORD_LENGTH; i++) {
-      newPassword.push(INVIGILATOR_PASSWORD_CHARS[Math.floor(Math.random() * INVIGILATOR_PASSWORD_CHARS.length)]);
+    const chars = Array.from(INVIGILATOR_PASSWORD_CHARS);
+    for (let i = INVIGILATOR_PASSWORD_LENGTH; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (chars.length - 1));
+      [chars[i], chars[j]] = [chars[j], chars[i]];
     }
-    return newPassword.join('');
+    return chars.slice(0, INVIGILATOR_PASSWORD_LENGTH).join('');
   }
 
   isSessionScheduledInThePast() {

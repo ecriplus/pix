@@ -132,8 +132,11 @@ export class CertificationResult {
   }
 
   getUniqComplementaryCertificationCourseResultLabels() {
-    const sortedLabel = this.complementaryCertificationCourseResults.map(({ label }) => label);
-    return [...new Set(Object.values(sortedLabel).sort())];
+    const sortedComplementaryCertifCourseResults = this.complementaryCertificationCourseResults.sort((a, b) => {
+      return a['id'] > b['id'] ? 1 : b['id'] > a['id'] ? -1 : 0;
+    });
+    const sortedLabels = sortedComplementaryCertifCourseResults.map(({ label }) => label);
+    return [...new Set(Object.values(sortedLabels))];
   }
 
   get isV3() {
