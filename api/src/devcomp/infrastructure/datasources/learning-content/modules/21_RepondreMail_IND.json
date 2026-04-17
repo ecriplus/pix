@@ -275,7 +275,7 @@
                     {
                       "id": "d99a08d9-f203-4019-a929-643ff970bb73",
                       "type": "qrocm",
-                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "instruction": "<p>Complétez la phrase suivante avec l’action qui vous semble la plus adaptée.</p>",
                       "proposals": [
                         {
                           "type": "text",
@@ -325,7 +325,7 @@
                     {
                       "id": "12a11ea7-6dfb-4b12-8238-fbbff8f8ab34",
                       "type": "qrocm",
-                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "instruction": "<p>Complétez la phrase suivante avec l’action qui vous semble la plus adaptée.</p>",
                       "proposals": [
                         {
                           "type": "text",
@@ -375,7 +375,7 @@
                     {
                       "id": "7fd0f24e-31b9-4870-b270-baac904f6fb6",
                       "type": "qrocm",
-                      "instruction": "<p>Complétez la phrase suivante.</p>",
+                      "instruction": "<p>Complétez la phrase suivante avec l’action qui vous semble la plus adaptée.</p>",
                       "proposals": [
                         {
                           "type": "text",
