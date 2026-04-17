@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/NR_Frugalite_NOV/picto_nr_surequipement.svg",
-    "description": "<p>Une nouvelle télévision, un ordinateur plus puissant, un ancien téléphone oublié dans un tiroir… Nous accumulons au fil des années de plus en plus d’appareils numériques. </p><p>Dans ce module, vous comprendrez ce qu’est concrètement le suréquipement numérique. Vous allez découvrir comment vos appareils consomment même lorsqu’ils semblent « à l’arrêt » et comment certains gestes peuvent faire la différence.&nbsp;<br></p>",
+    "description": "<p>Une nouvelle télévision, un ordinateur plus puissant, un ancien téléphone oublié dans un tiroir… Nous accumulons au fil des années de plus en plus d’appareils numériques. </p><p>Dans ce module, vous comprendrez ce qu’est concrètement le suréquipement numérique. Vous allez découvrir comment vos appareils consomment même lorsqu’ils semblent «&nbsp;à l’arrêt&nbsp;» et comment certains gestes peuvent faire la différence.&nbsp;<br></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -104,12 +104,12 @@
                       "id": "de37f1db-372e-4860-9298-8c3a9e458c26",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Suivons Thelma dans son quotidien.<br>Elle vient de changer d’ordinateur portable. Son ancien ordinateur ne fonctionne plus du tout. </p>"
+                      "content": "<p>Suivons Thelma dans son quotidien.<br>Son ordinateur est cassé, il ne fonctionne plus du tout.</p>"
                     },
                     {
                       "id": "6018b056-66ef-4866-b6e4-282c6a696634",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Surequipement_NOV/thelma_image_reduit_x3.png",
+                      "url": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_dec1_ordinateur.svg",
                       "alt": "Thelma tenant un ordinateur cassé dans la main.",
                       "alternativeText": "",
                       "legend": "",
@@ -118,14 +118,14 @@
                     {
                       "id": "61649840-71c7-4a75-b3b7-27f30e069bd5",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Que doit-elle faire de son ancien ordinateur ?&nbsp;</p>",
+                      "instruction": "<p>Que doit-elle faire de son ordinateur ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
-                          "content": "<p>Pour ne pas se faire voler ses données, il vaut mieux qu’elle le garde dans un tiroir.</p>",
+                          "content": "<p>L’ordinateur ne se recycle pas, il vaut mieux le garder chez soi.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Rien ne sert de stocker un appareil numérique cassé, il existe des&nbsp;solutions pour s’en débarrasser en toute sécurité. Thelma pourrait déposer l’ordinateur en point de collecte pour le recycler.</p>"
+                            "diagnosis": "<p>Au contraire ! Il existe des bornes de collecte pour déposer ses appareils numériques cassés et pouvoir les recycler. </p>"
                           }
                         },
                         {
@@ -153,12 +153,12 @@
                       "id": "1f1a69cd-c0f2-4a53-a706-26b0e0f1a4a1",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Thelma écoute tous les jours de la musique avec ses écouteurs sans fil. Elle hésite à acheter de nouveaux écouteurs sans fil spécial course à pied.</p>"
+                      "content": "<p>Thelma écoute tous les jours de la musique avec ses écouteurs sans fil. Elle hésite à acheter de nouveaux écouteurs sans fil spécialement faits pour la course à pied.</p>"
                     },
                     {
                       "id": "84d0f8ea-2bbe-4ccd-a9cd-a369b73cba58",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Surequipement_NOV/thelma_ecouteurs_reduit.png",
+                      "url": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_dec1_ecouteurs.svg",
                       "alt": "Thelma doit choisir entre deux écouteurs",
                       "alternativeText": "",
                       "legend": "",
@@ -207,7 +207,7 @@
                     {
                       "id": "d5c70a0c-403a-4482-956f-bdb87a88be79",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/NR_Surequipement_NOV/thelma_smartphone_reduit.png",
+                      "url": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_dec1_telephone.svg",
                       "alt": "Thelma hésite à acheter du neuf",
                       "alternativeText": "",
                       "legend": "",
@@ -221,7 +221,7 @@
                       "proposals": [
                         {
                           "id": "2",
-                          "content": "<p>Se demander si cette fonctionnalité lui sera vraiment utile.&nbsp;</p>",
+                          "content": "<p>Se demander si cette fonctionnalité lui sera vraiment essentielle au quotidien.&nbsp;</p>",
                           "feedback": {
                             "diagnosis": "<p>En effet, le smartphone de Thelma est récent, fonctionne correctement et répond toujours à ses besoins. Elle risque donc de renouveler un appareil encore parfaitement opérationnel.<br></p>"
                           }
@@ -230,7 +230,7 @@
                           "id": "1",
                           "content": "<p>Changer de smartphone pour profiter de cette nouvelle fonctionnalité.&nbsp;</p>",
                           "feedback": {
-                            "diagnosis": "<p>Cette fonction est-elle vraiment utile pour Thelma ? Elle risque  de renouveler un appareil qui correspond encore à ses besoins.&nbsp;<br></p>"
+                            "diagnosis": "<p>Cette fonction est-elle vraiment utile pour Thelma ? Elle risque de renouveler un appareil qui correspond encore à ses besoins.&nbsp;<br></p>"
                           }
                         },
                         {
@@ -317,11 +317,13 @@
               "element": {
                 "id": "a28e5883-9cb2-460a-bddd-b89731033445",
                 "type": "custom",
+                "title": "",
                 "instruction": "",
+                "functionalInstruction": "",
                 "tagName": "clickable-image",
                 "props": {
                   "image": {
-                    "src": "https://assets.pix.org/draft/modules/NR_Surequipement_NOV/salon-connecte.png",
+                    "src": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_dec2_salon.png",
                     "alt": "image d’un salon",
                     "width": 0,
                     "height": 0
@@ -329,10 +331,10 @@
                   "areas": [
                     {
                       "coords": {
-                        "x1": 110,
-                        "y1": 440,
-                        "x2": 250,
-                        "y2": 580
+                        "x1": 600,
+                        "y1": 550,
+                        "x2": 570,
+                        "y2": 450
                       },
                       "spot": {
                         "x": 0,
@@ -343,10 +345,10 @@
                     },
                     {
                       "coords": {
-                        "x1": 360,
-                        "y1": 420,
-                        "x2": 520,
-                        "y2": 580
+                        "x1": 520,
+                        "y1": 140,
+                        "x2": 750,
+                        "y2": 450
                       },
                       "spot": {
                         "x": 0,
@@ -357,36 +359,36 @@
                     },
                     {
                       "coords": {
-                        "x1": 900,
+                        "x1": 890,
+                        "y1": 580,
+                        "x2": 1050,
+                        "y2": 620
+                      },
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "info": "En veille, un ordinateur consomme de l’électricité.",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 240,
                         "y1": 430,
-                        "x2": 1060,
-                        "y2": 590
+                        "x2": 360,
+                        "y2": 520
                       },
                       "spot": {
                         "x": 0,
                         "y": 0
                       },
-                      "info": "En veille, un ordinateur consomme de l’énergie.",
+                      "info": "Cette enceinte connectée reste allumée toute la journée. Elle consomme de l’électricité même si elle ne diffuse pas de musique.",
                       "tooltipPosition": "bottom"
                     },
                     {
                       "coords": {
-                        "x1": 1040,
-                        "y1": 220,
-                        "x2": 1180,
-                        "y2": 360
-                      },
-                      "spot": {
-                        "x": 0,
-                        "y": 0
-                      },
-                      "info": "Cette enceinte connectée reste allumée toute la journée, elle consomme de l’énergie même si elle ne diffuse pas de musique.",
-                      "tooltipPosition": "bottom"
-                    },
-                    {
-                      "coords": {
-                        "x1": 260,
-                        "y1": 720,
+                        "x1": 760,
+                        "y1": 650,
                         "x2": 400,
                         "y2": 860
                       },
@@ -398,9 +400,7 @@
                       "tooltipPosition": "bottom"
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -422,21 +422,21 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>2</p>",
+                    "content": "<p>1</p>",
                     "feedback": {
-                      "diagnosis": "Pas tout à fait. Ici, même si Corentin n’utilise pas ses appareils numériques, les six appareils consomment."
+                      "diagnosis": "<p>Pas tout à fait. Ici, même si Corentin n’utilise pas ses appareils numériques, les cinq&nbsp;appareils consomment.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "4",
+                    "content": "<p>3</p>",
                     "feedback": {
-                      "diagnosis": "Pas tout à fait. Ici, même si Corentin n’utilise pas ses appareils numériques, les six appareils consomment."
+                      "diagnosis": "<p>Pas tout à fait. Ici, même si Corentin n’utilise pas ses appareils numériques, les cinq appareils consomment.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>6</p>",
+                    "content": "<p>5</p>",
                     "feedback": {
                       "diagnosis": "Bien vu ! En effet, tous les appareils de Corentin consomment, même s’il ne les utilise pas !&nbsp;"
                     }
@@ -557,7 +557,7 @@
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Le meilleur réflexe est d’éteindre un appreil numérique quand on ne l’utilise pas.</p>"
+                            "diagnosis": "<p>Le meilleur réflexe est d’éteindre un appareil numérique quand on ne l’utilise pas.</p>"
                           }
                         }
                       ],
@@ -570,14 +570,14 @@
                     {
                       "id": "4ec51b96-64ee-4989-8caf-08d8e845a3cb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même si il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
+                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même s'il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "2",
                           "content": "<p>Laisser les chargeurs branchés&nbsp;: sans appareil connecté, ils ne consomment pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non, même si ces chargeurs ne chargent pas d’appareils, quand ils sont&nbsp; branchés, ils consomment.</p>"
+                            "diagnosis": "<p>Eh non, même si ces chargeurs ne chargent pas d’appareils, quand ils sont&nbsp;branchés, ils consomment.</p>"
                           }
                         },
                         {
@@ -650,10 +650,13 @@
             {
               "type": "element",
               "element": {
-                "id": "a60794da-ef3b-4850-b058-2717382e1a08",
-                "type": "text",
-                "tag": " ",
-                "content": "<ul><em>À noter à la relecture&nbsp;: sera (sûrement) transformé en infographie.<br></em><br><li>Aujourd’hui, le <strong>suréquipement</strong> est réel. De nombreux foyers achètent et stockent plus d’appareils numériques qu’ils n’en ont vraiment besoin.</li><li> Fabriquer et utiliser autant d’appareils numériques a un coût environnemental fort.&nbsp;🌍</li><li>Vos appareils consomment même quand vous ne les utilisez pas. La <strong>veille&nbsp;</strong>notamment crée une consommation électrique souvent&nbsp;<strong>sous-estimée</strong>. ⚡</li><li>Pour réduire cette consommation d’énergie, il est possible d’adopter de bons réflexes&nbsp;: limiter son équipement à son <strong>juste besoin</strong>, <strong>éteindre</strong> ou <strong>débrancher</strong> ses appareils inutilisés.&nbsp;🔌</li></ul>"
+                "id": "fd837dec-741e-4adb-8f0a-4ea3b7883d9a",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_recap.svg",
+                "alt": "",
+                "alternativeText": "<p>Aujourd'hui, le suréquipement est réel. De nombreux foyers achètent et stockent plus d'appareils qu'ils n'en ont vraiment besoin. Fabriquer et utiliser autant d'appareils numériques à un coût environnemental fort. Vos appareils consomment même quand vous ne les utilisez pas. La veille notamment crée une consommation électrique souvent sous-estimée. Pour réduire cette consommation d'énergie, il est possible d'adopter les bons réflexes : limiter son équipement à son juste besoin, éteindre ou débrancher ses appareils inutilisés.&nbsp;<br></p>",
+                "legend": "",
+                "licence": ""
               }
             }
           ]
@@ -729,8 +732,8 @@
                     "content": "Même quand on ne les utilise pas, certains appareils consomment de l’électricité. Cela arrive quand ils sont&nbsp;<br>"
                   },
                   {
-                    "input": "trou1",
                     "type": "select",
+                    "input": "trou1",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "sélectionnez",
@@ -758,8 +761,8 @@
                     "content": ". Ils peuvent aussi consommer quand ils restent&nbsp;"
                   },
                   {
-                    "input": "trou2",
                     "type": "select",
+                    "input": "trou2",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "sélectionnez",
@@ -787,8 +790,8 @@
                     "content": ". Cette consommation est souvent&nbsp;"
                   },
                   {
-                    "input": "trou3",
                     "type": "select",
+                    "input": "trou3",
                     "display": "inline",
                     "placeholder": "",
                     "ariaLabel": "sélectionnez",
