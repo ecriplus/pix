@@ -245,7 +245,7 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
     });
   });
 
-  module('#get completionDate', function () {
+  module('#get lastAnswerDate', function () {
     test('it should return null if lastAnswerAt is null', function (assert) {
       // given
       const juryCertificationSummary = store.createRecord('jury-certification-summary', {
@@ -254,7 +254,7 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
       });
 
       // then
-      assert.notOk(juryCertificationSummary.completionDate, null);
+      assert.notOk(juryCertificationSummary.lastAnswerDate, null);
     });
 
     test('it should a formatted date when completedAt is defined', function (assert) {
@@ -265,7 +265,7 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
 
       // then
       const expectedFormat = intl.formatDate(new Date(lastAnswerAt), { format: 'long' });
-      assert.strictEqual(juryCertificationSummary.completionDate, expectedFormat);
+      assert.strictEqual(juryCertificationSummary.lastAnswerDate, expectedFormat);
     });
   });
 });

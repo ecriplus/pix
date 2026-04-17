@@ -30,10 +30,10 @@ export default class JuryCertificationSummary extends Model {
   @attr() lastAnswerAt;
 
   get creationDate() {
-    return this.intl.formatDate(this.createdAt, { format: 'long' });
+    return this.createdAt ? this.intl.formatDate(this.createdAt, { format: 'long' }) : null;
   }
 
-  get completionDate() {
+  get lastAnswerDate() {
     return this.lastAnswerAt ? this.intl.formatDate(this.lastAnswerAt, { format: 'long' }) : null;
   }
 

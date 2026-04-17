@@ -160,16 +160,16 @@ export default class DetailsV3 extends Component {
     return abortReasonMap[this.args.details.abortReason];
   }
 
-  get completionDate() {
+  get lastAnswerDate() {
     return this.args.details.lastAnswerAt;
   }
 
-  get completionDateTooltipContent() {
+  get lastAnswerDateTooltipContent() {
     if (this.args.details.wasEndedByInvigilator) {
-      return 'pages.certifications.certification.details.v3.completion-date-tooltip.ended-by-invigilator';
+      return 'pages.certifications.certification.details.v3.last-answer-date-tooltip.ended-by-invigilator';
     }
     if (this.args.details.wasFinalized) {
-      return 'pages.certifications.certification.details.v3.completion-date-tooltip.ended-due-to-finalization';
+      return 'pages.certifications.certification.details.v3.last-answer-date-tooltip.ended-due-to-finalization';
     }
     return null;
   }
@@ -221,21 +221,21 @@ export default class DetailsV3 extends Component {
           <dd aria-labelledby="creation-date">
             {{formatDate @details.createdAt format="long"}}
           </dd>
-          {{#if this.completionDate}}
-            <dt id="completion-date">
+          {{#if this.lastAnswerDate}}
+            <dt id="last-answer-date">
               {{t "pages.certifications.certification.details.v3.general-informations.labels.ended-at"}}
               :
             </dt>
-            <dd aria-labelledby="completion-date">
+            <dd aria-labelledby="last-answer-date">
               <PixTooltip @isWide={{true}}>
                 <:triggerElement>
-                  <span tabindex="0" class="certification-details-v3-list__completion-date">
-                    {{formatDate this.completionDate format="long"}}
+                  <span tabindex="0" class="certification-details-v3-list__last-answer-date">
+                    {{formatDate this.lastAnswerDate format="long"}}
                   </span>
                 </:triggerElement>
                 <:tooltip>
-                  {{#if this.completionDateTooltipContent}}
-                    {{t this.completionDateTooltipContent}}
+                  {{#if this.lastAnswerDateTooltipContent}}
+                    {{t this.lastAnswerDateTooltipContent}}
                   {{/if}}
                 </:tooltip>
               </PixTooltip>

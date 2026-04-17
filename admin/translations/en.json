@@ -1392,10 +1392,6 @@
               "ended-by-invigilator": "The invigilator",
               "ended-due-to-finalization": "Session finalised"
             },
-            "completion-date-tooltip": {
-              "ended-by-invigilator": "Date et heure à laquelle le test de certification a été terminé par le surveillant.",
-              "ended-due-to-finalization": "Date et heure d'affichage de la dernière question proposée au candidat."
-            },
             "general-informations": {
               "labels": {
                 "abort-reason": "Reason for withdrawal",
@@ -1405,6 +1401,10 @@
                 "result": "Result"
               },
               "title": "Certification {type} N°{certificationCourseId}"
+            },
+            "last-answer-date-tooltip": {
+              "ended-by-invigilator": "Date et heure à laquelle le test de certification a été terminé par le surveillant.",
+              "ended-due-to-finalization": "Date et heure d'affichage de la dernière question proposée au candidat."
             },
             "live-alert-modal": {
               "title": {

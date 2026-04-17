@@ -13,8 +13,8 @@ import CertificationDetailsCompetence from '../details-competence';
             <div>Créé le :</div>
             <div>{{@details.creationDate}}</div>
 
-            <div>Terminée le :</div>
-            <div>{{@details.completionDate}}</div>
+            <div>Dernière réponse le :</div>
+            <div>{{@details.lastAnswerDate}}</div>
 
             <div>Score :</div>
             <div class="certificate">{{@details.totalScore}}</div>

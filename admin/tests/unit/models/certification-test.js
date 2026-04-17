@@ -156,7 +156,7 @@ module('Unit | Model | certification', function (hooks) {
     });
   });
 
-  module('#get completionDate', function () {
+  module('#get lastAnswerDate', function () {
     test('it should return null if lastAnswerAt is null', function (assert) {
       // given
       const juryCertificationSummary = store.createRecord('certification', {
@@ -165,7 +165,7 @@ module('Unit | Model | certification', function (hooks) {
       });
 
       // then
-      assert.strictEqual(juryCertificationSummary.completionDate, null);
+      assert.strictEqual(juryCertificationSummary.lastAnswerDate, null);
     });
 
     test('it should a formatted date when completedAt is defined', function (assert) {
@@ -176,7 +176,7 @@ module('Unit | Model | certification', function (hooks) {
 
       // then
       const expectedFormat = intl.formatDate(new Date(lastAnswerAt), { format: 'long' });
-      assert.strictEqual(juryCertificationSummary.completionDate, expectedFormat);
+      assert.strictEqual(juryCertificationSummary.lastAnswerDate, expectedFormat);
     });
   });
 

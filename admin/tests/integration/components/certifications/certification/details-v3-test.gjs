@@ -295,7 +295,7 @@ module('Integration | Component | Certifications | certification > details v3', 
             const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
             // then
-            assert.dom(screen.getByText('Terminée le :')).exists();
+            assert.dom(screen.getByText('Dernière réponse le :')).exists();
             assert.dom(screen.getByText('13/01/2023 08:05:00')).exists();
           });
           test('should display the session finalized tooltip', async function (assert) {
@@ -355,7 +355,7 @@ module('Integration | Component | Certifications | certification > details v3', 
             const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
             // then
-            assert.dom(screen.getByText('Terminée le :')).exists();
+            assert.dom(screen.getByText('Dernière réponse le :')).exists();
             assert.dom(screen.getByText('13/01/2023 08:05:00')).exists();
           });
           test('should display the ended by invigilator tooltip', async function (assert) {

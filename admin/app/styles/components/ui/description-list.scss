@@ -14,7 +14,7 @@
   border-bottom: 1px solid var(--pix-primary-100);
 
   dt, dd {
-    padding-block: var(--pix-spacing-3x);
+    padding-block: var(--pix-spacing-2x);
     border-top: 1px solid var(--pix-primary-100);
   }
 
@@ -35,8 +35,8 @@
   }
 }
 
-@container (max-width: 30rem)  {
-  .description-list {
+@container (max-width: 30rem) {
+    .description-list {
     display: block;
 
     dt {

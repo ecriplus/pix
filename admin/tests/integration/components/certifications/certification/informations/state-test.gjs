@@ -44,9 +44,9 @@ module('Integration | Component | Certifications | Certification | Information |
     assert.dom(createdAtInfo).exists();
     assert.dom(within(createdAtInfo.parentNode).getByText(certification.creationDate)).exists();
 
-    const completedAtInfo = screen.getByText('Terminée le');
+    const completedAtInfo = screen.getByText('Dernière réponse le');
     assert.dom(completedAtInfo).exists();
-    assert.dom(within(completedAtInfo.parentNode).getByText(certification.completionDate)).exists();
+    assert.dom(within(completedAtInfo.parentNode).getByText(certification.lastAnswerDate)).exists();
   });
 
   module('when the certification is published', function () {
