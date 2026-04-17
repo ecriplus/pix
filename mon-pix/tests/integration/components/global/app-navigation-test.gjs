@@ -3,7 +3,6 @@ import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import AppNavigation from 'mon-pix/components/global/app-navigation';
 import { module, test } from 'qunit';
-import sinon from 'sinon';
 
 import { stubCurrentUserService } from '../../../helpers/service-stubs';
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -11,33 +10,17 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Global | App Navigation', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('logos', function () {
-    module('when it is not the french domain', function () {
-      test('it should only display the Pix logo', async function (assert) {
-        // when
-        const screen = await render(<template><AppNavigation /></template>);
+  module('logo', function () {
+    test('it displays the Pix logo with a link to homepage', async function (assert) {
+      // when
+      const screen = await render(<template><AppNavigation /></template>);
 
-        // then
-        assert.strictEqual(screen.getAllByRole('img').length, 1);
+      // then
+      assert.strictEqual(screen.getAllByRole('img').length, 1);
 
-        const homepageLink = screen.getByRole('link', { name: t('navigation.homepage') });
-        const pixLogo = within(homepageLink).getByRole('img');
-        assert.dom(pixLogo).exists();
-      });
-    });
-
-    module('when it is the french domain', function () {
-      test('it should only display the Pix logo', async function (assert) {
-        // given
-        const domainService = this.owner.lookup('service:currentDomain');
-        sinon.stub(domainService, 'getExtension').returns('fr');
-
-        // when
-        const screen = await render(<template><AppNavigation /></template>);
-
-        // then
-        assert.strictEqual(screen.getAllByRole('img').length, 2);
-      });
+      const homepageLink = screen.getByRole('link', { name: t('navigation.homepage') });
+      const pixLogo = within(homepageLink).getByRole('img');
+      assert.dom(pixLogo).exists();
     });
   });
 
