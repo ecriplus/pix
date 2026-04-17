@@ -13,7 +13,12 @@ import { MonitoredJobHandler } from './MonitoredJobHandler.js';
 
 const workerDirPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const logger = child('worker', { event: 'worker' });
-const EXCLUDED_JOB_FILES = ['**/job-controller.js', '**/event-handler.js', '**/job-schedule-controller.js'];
+const EXCLUDED_JOB_FILES = [
+  '**/job-controller.js',
+  '**/job-controller.ts',
+  '**/event-handler.js',
+  '**/job-schedule-controller.js',
+];
 
 export class JobClient {
   /** @type JobClient */
