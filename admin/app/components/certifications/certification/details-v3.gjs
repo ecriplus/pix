@@ -223,7 +223,7 @@ export default class DetailsV3 extends Component {
           </dd>
           {{#if this.lastAnswerDate}}
             <dt id="last-answer-date">
-              {{t "pages.certifications.certification.details.v3.general-informations.labels.ended-at"}}
+              {{t "pages.certifications.certification.details.v3.general-informations.labels.last-answer-at"}}
               :
             </dt>
             <dd aria-labelledby="last-answer-date">

@@ -160,7 +160,7 @@ module('Integration | Component | Certifications | certification > details v3', 
           assert.true(assessmentResultStatusElement.classList.contains('pix-tag--success'));
         });
 
-        test('should display the date of completion', async function (assert) {
+        test('should display the date of last answer', async function (assert) {
           // given
           const model = createCertificationCourseDetailsRecord(certificationCourseDetailsRecord);
 
@@ -168,8 +168,10 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
-          assert.dom(screen.getByLabelText(`${endedAtLabel} :`)).containsText('13/01/2023 09:05:00');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
+          assert.dom(screen.getByLabelText(`${lastAnswerAtLabel} :`)).containsText('13/01/2023 09:05:00');
         });
 
         test('should display the certification duration', async function (assert) {
@@ -180,9 +182,11 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
 
-          assert.dom(screen.getByLabelText(`${endedAtLabel} :`)).containsText('1h05');
+          assert.dom(screen.getByLabelText(`${lastAnswerAtLabel} :`)).containsText('1h05');
         });
 
         test('should NOT display the ended by info or the abort reason', async function (assert) {
@@ -236,7 +240,7 @@ module('Integration | Component | Certifications | certification > details v3', 
           assert.true(assessmentResultStatusElement.classList.contains('pix-tag--error'));
         });
 
-        test('should display the date of completion', async function (assert) {
+        test('should display the date of last answer', async function (assert) {
           // given
           const model = createCertificationCourseDetailsRecord(certificationCourseDetailsRecord);
 
@@ -244,9 +248,11 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
 
-          assert.dom(screen.getByText(`${endedAtLabel} :`)).exists();
+          assert.dom(screen.getByText(`${lastAnswerAtLabel} :`)).exists();
         });
 
         test('should display the ended by info or the abort reason', async function (assert) {

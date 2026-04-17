@@ -1396,8 +1396,8 @@
               "labels": {
                 "abort-reason": "Reason for withdrawal",
                 "created-at": "Created on",
-                "ended-at": "Completed on",
                 "ended-by": "Certification completed by",
+                "last-answer-at": "Last answer on",
                 "result": "Result"
               },
               "title": "Certification {type} N°{certificationCourseId}"

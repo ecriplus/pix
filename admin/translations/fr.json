@@ -1405,8 +1405,8 @@
               "labels": {
                 "abort-reason": "Raison de l'abandon",
                 "created-at": "Créée le",
-                "ended-at": "Dernière réponse le",
                 "ended-by": "Certification terminée par",
+                "last-answer-at": "Dernière réponse le",
                 "result": "Résultat"
               },
               "title": "Certification {type} N°{certificationCourseId}"
