@@ -42,8 +42,8 @@
                 "id": "ba3ed76b-5bcb-42c8-98f8-b37ea0554bf6",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p><br></p>",
-                "functionalInstruction": "<p><br></p>",
+                "instruction": "<p>Observez ci-dessous l’échange par mail entre Gabriel et Alma puis répondez à la question qui suit.</p>",
+                "functionalInstruction": "",
                 "tagName": "template-mail",
                 "props": {
                   "titleLevel": 0,
@@ -100,7 +100,7 @@
                     "id": "3",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong>.</p>"
+                      "diagnosis": "<p>Quand vous répondez à un mail, le texte et les informations du précédent mail sont <strong>conservés</strong> en-dessous.</p>"
                     }
                   }
                 ],
