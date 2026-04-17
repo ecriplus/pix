@@ -10,8 +10,8 @@
     "description": "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
     "duration": 5,
     "level": "novice",
-    "tabletSupport": "inconvenient",
-    "objectives": ["Non régression fonctionnelle"]
+    "objectives": ["Non régression fonctionnelle"],
+    "tabletSupport": "inconvenient"
   },
   "sections": [
     {
@@ -96,6 +96,7 @@
                       "id": "71de6394-ff88-4de3-8834-a40057a50ff4",
                       "type": "qcu",
                       "instruction": "<p>Pix évalue 16 compétences numériques différentes.</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -114,8 +115,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 },
@@ -159,12 +159,12 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "Correct&#8239;!",
+                          "state": "Correct !",
                           "diagnosis": "<p> vous nous connaissez bien &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
                         },
                         "invalid": {
-                          "state": "Incorrect&#8239;!",
-                          "diagnosis": "<p> vous y arriverez la prochaine fois&#8239;!</p>"
+                          "state": "Incorrect !",
+                          "diagnosis": "<p> vous y arriverez la prochaine fois !</p>"
                         }
                       }
                     }
@@ -176,6 +176,7 @@
                       "id": "79dc17f9-142b-4e19-bcbe-bfde4e170d3f",
                       "type": "qcu-declarative",
                       "instruction": "<p>Pix est découpé en 6 domaines.</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -191,8 +192,7 @@
                             "diagnosis": "<p> Bien vu !</p>"
                           }
                         }
-                      ],
-                      "hasShortProposals": false
+                      ]
                     }
                   ]
                 },
@@ -201,7 +201,8 @@
                     {
                       "id": "ef18ed04-9551-4cee-9648-9f14a28aab1b",
                       "type": "qcm",
-                      "instruction": "<p>Quels sont les 3 piliers de Pix&#8239;?</p>",
+                      "instruction": "<p>Quels sont les 3 piliers de Pix ?</p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -226,16 +227,15 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "Correct&#8239;!",
+                          "state": "Correct !",
                           "diagnosis": "<p>Vous nous avez bien cernés&nbsp;:)</p>"
                         },
                         "invalid": {
-                          "state": "Et non&#8239;!",
+                          "state": "Et non !",
                           "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
                         }
                       },
-                      "solutions": ["1", "3", "4"],
-                      "hasShortProposals": false
+                      "solutions": ["1", "3", "4"]
                     }
                   ]
                 },
@@ -264,6 +264,7 @@
                       "id": "b1ef75c8-714b-4b2d-8e88-e279c5737095",
                       "type": "qcu-discovery",
                       "instruction": "<p>Selon vous, combien y'a t-il de chiens dans la photo ?<br></p>",
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
@@ -280,8 +281,7 @@
                           }
                         }
                       ],
-                      "solution": "1",
-                      "hasShortProposals": false
+                      "solution": "1"
                     }
                   ]
                 }
@@ -343,6 +343,38 @@
           ]
         },
         {
+          "id": "06f9478a-36c4-41a7-9165-b2da38f9c3b5",
+          "type": "short-lesson",
+          "title": "Exemple de short-lesson avec une transition après",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "b2363470-626f-4f59-9961-184e847687a4",
+                "type": "text",
+                "tag": " ",
+                "content": "Exemple de short-lesson avec une transition après, pour afficher le bouton continuer"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1122aced-5885-4a5d-afed-99c7a9dff009",
+          "type": "transition",
+          "title": "",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Section <strong>Réponses Courtes</strong> (QCM, QCU (+ découverte et déclaratif))</p>"
+              }
+            }
+          ]
+        },
+        {
           "id": "cef7d350-008b-410b-8a6a-39b56efdbe8d",
           "type": "discovery",
           "title": "test qcu-discovery",
@@ -353,6 +385,7 @@
                 "id": "0c397035-a940-441f-8936-050db7f997af",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quel est le dessert classique idéal lors d’un goûter&nbsp;?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -383,24 +416,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": false
-              }
-            }
-          ]
-        },
-        {
-          "id": "1122aced-5885-4a5d-afed-99c7a9dff009",
-          "type": "transition",
-          "title": "",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "488e3984-6ed6-4245-8c94-da188a2fd13c",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Section <strong>Réponses Courtes</strong> (QCM, QCU (+ découverte et déclaratif))</p>"
+                "solution": "1"
               }
             }
           ]
@@ -416,6 +432,7 @@
                 "id": "c3bc4466-2825-488e-ad5f-275ace4b19a8",
                 "type": "qcu-discovery",
                 "instruction": "<p>Quelle est la meilleure crêpe 🥞 ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -446,8 +463,7 @@
                     }
                   }
                 ],
-                "solution": "1",
-                "hasShortProposals": true
+                "solution": "1"
               }
             },
             {
@@ -456,6 +472,7 @@
                 "id": "81eaa0ab-6b2d-4748-94dc-9504732eabc5",
                 "type": "qcu-discovery",
                 "instruction": "<p>Combien de chiens/chats dans l'équipe ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -479,8 +496,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": true
+                "solution": "2"
               }
             }
           ]
@@ -496,6 +512,7 @@
                 "id": "dddddd7c-0bdd-447a-8958-84b50e0e2558",
                 "type": "qcu-declarative",
                 "instruction": "<p>Qui arrive en premier dans le bol : le lait ou les céréales ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -511,8 +528,7 @@
                       "diagnosis": "<p>Meilleure stratégie ! Ça fait plus de céréales dans le bol 🥣</p>"
                     }
                   }
-                ],
-                "hasShortProposals": true
+                ]
               }
             },
             {
@@ -521,6 +537,7 @@
                 "id": "82eaf7ce-02f7-44e8-8c51-3d07ba29e400",
                 "type": "qcu-declarative",
                 "instruction": "<p>Toto et Tata sont sur un bâton 🛶, qui tombe à l'eau?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -543,8 +560,7 @@
                       "diagnosis": "<p>Pas facile de tenir sur un bâton oui 😏</p>"
                     }
                   }
-                ],
-                "hasShortProposals": true
+                ]
               }
             }
           ]
@@ -560,6 +576,7 @@
                 "id": "19525c84-e8e7-4852-868b-e1857f21daae",
                 "type": "qcu",
                 "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on ne participe pas au mob ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -586,8 +603,7 @@
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": true
+                "solution": "3"
               }
             },
             {
@@ -596,6 +612,7 @@
                 "id": "b671a789-1aff-4941-b49b-ac8a1634e9eb",
                 "type": "qcu",
                 "instruction": "<p>Quel émoji utilise-t-on chez devcomp quand on commit une feature ?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -630,8 +647,7 @@
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": true
+                "solution": "2"
               }
             }
           ]
@@ -647,6 +663,7 @@
                 "id": "e48f8ce7-cd94-40d3-bb62-bbee4116951c",
                 "type": "qcm",
                 "instruction": "<p>Dans ces propositions, lesquels sont des palindromes?</p>",
+                "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "1",
@@ -667,16 +684,15 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Correct&#8239;!",
+                    "state": "Correct !",
                     "diagnosis": "<p>On trouve ici un palindrome classique par lecture des lettres, un palindrome de forme numérique et un palindrome syllabique.</p>"
                   },
                   "invalid": {
-                    "state": "Et non&#8239;!",
+                    "state": "Et non !",
                     "diagnosis": "<p>Essayez encore 🦀</p>"
                   }
                 },
-                "solutions": ["1", "3", "4"],
-                "hasShortProposals": true
+                "solutions": ["1", "3", "4"]
               }
             }
           ]
@@ -711,11 +727,11 @@
                 "cards": [
                   {
                     "id": "e222b060-7c18-4ee2-afe2-2ae27c28946a",
+                    "text": "Les boules de pétanques sont creuses ?",
                     "image": {
                       "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
                       "altText": ""
                     },
-                    "text": "Les boules de pétanques sont creuses ?",
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
                     "solution": "A"
@@ -736,11 +752,11 @@
                   },
                   {
                     "id": "1d1c33e3-e27d-4161-bfcc-529ea1aa573f",
+                    "text": "Les dauphins sont des poissons.",
                     "image": {
                       "url": "https://assets.pix.org/modules/bac-a-sable/boules-de-petanque.jpg",
                       "altText": ""
                     },
-                    "text": "Les dauphins sont des poissons.",
                     "proposalA": "Vrai",
                     "proposalB": "Faux",
                     "solution": "B"
@@ -778,6 +794,7 @@
                 "id": "6a6944be-a8a3-4138-b5dc-af664cf40b07",
                 "type": "qcu-declarative",
                 "instruction": "<p>Quand faut-il mouiller sa brosse à dents&nbsp;?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -800,8 +817,7 @@
                       "diagnosis": "<p>Digne des plus grands acrobates !</p>"
                     }
                   }
-                ],
-                "hasShortProposals": false
+                ]
               }
             }
           ]
@@ -840,6 +856,7 @@
                 "id": "31106aeb-8346-44a6-8ed4-ebaa2106a373",
                 "type": "qcu",
                 "instruction": "<p>Quelle type de recette souhaite obtenir l'utilisateur dans l'image&nbsp;?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -861,13 +878,12 @@
                     "id": "3",
                     "content": "Des recettes végétariennes",
                     "feedback": {
-                      "state": "Correct&#8239;!",
+                      "state": "Correct !",
                       "diagnosis": "<p>Bonne réponse ! Ce sont bien des recettes végétariennes</p>"
                     }
                   }
                 ],
-                "solution": "3",
-                "hasShortProposals": false
+                "solution": "3"
               }
             }
           ]
@@ -909,9 +925,9 @@
                 "type": "video",
                 "title": "Vidéo de présentation de Pix",
                 "url": "https://assets.pix.org/modules/bac-a-sable/presentation.mp4",
+                "poster": "https://assets.pix.org/modules/bac-a-sable/ordi-spatial.svg",
                 "subtitles": "",
-                "transcription": "<p>Le numérique évolue en permanence, vos compétences aussi, pour travailler, communiquer et s'informer, se déplacer, réaliser des démarches, un enjeu tout au long de la vie.</p><p>Sur <a href=\"https://pix.fr\" target=\"blank\">pix.fr</a>, testez-vous et cultivez vos compétences numériques.</p><p>Les tests Pix sont personnalisés, les questions s'adaptent à votre niveau, réponse après réponse.</p><p>Évaluez vos connaissances et savoir-faire sur 16 compétences, dans 5 domaines, sur 5 niveaux de débutants à confirmer, avec des mises en situation ludiques, recherches en ligne, manipulation de fichiers et de données, culture numérique...</p><p>Allez à votre rythme, vous pouvez arrêter et reprendre quand vous le voulez.</p><p>Toutes les 5 questions, découvrez vos résultats et progressez grâce aux astuces et aux tutos.</p><p>En relevant les défis Pix, vous apprendrez de nouvelles choses et aurez envie d'aller plus loin.</p><p>Vous pensez pouvoir faire mieux&#8239;?</p><p>Retentez les tests et améliorez votre score.</p><p>Faites reconnaître officiellement votre niveau en passant la certification Pix, reconnue par l'État et le monde professionnel.</p><p>Pix&nbsp;: le service public en ligne pour évaluer, développer et certifier ses compétences numériques.</p>",
-                "poster": "https://assets.pix.org/modules/bac-a-sable/ordi-spatial.svg"
+                "transcription": "<p>Le numérique évolue en permanence, vos compétences aussi, pour travailler, communiquer et s'informer, se déplacer, réaliser des démarches, un enjeu tout au long de la vie.</p><p>Sur <a href=\"https://pix.fr\" target=\"blank\">pix.fr</a>, testez-vous et cultivez vos compétences numériques.</p><p>Les tests Pix sont personnalisés, les questions s'adaptent à votre niveau, réponse après réponse.</p><p>Évaluez vos connaissances et savoir-faire sur 16 compétences, dans 5 domaines, sur 5 niveaux de débutants à confirmer, avec des mises en situation ludiques, recherches en ligne, manipulation de fichiers et de données, culture numérique...</p><p>Allez à votre rythme, vous pouvez arrêter et reprendre quand vous le voulez.</p><p>Toutes les 5 questions, découvrez vos résultats et progressez grâce aux astuces et aux tutos.</p><p>En relevant les défis Pix, vous apprendrez de nouvelles choses et aurez envie d'aller plus loin.</p><p>Vous pensez pouvoir faire mieux ?</p><p>Retentez les tests et améliorez votre score.</p><p>Faites reconnaître officiellement votre niveau en passant la certification Pix, reconnue par l'État et le monde professionnel.</p><p>Pix&nbsp;: le service public en ligne pour évaluer, développer et certifier ses compétences numériques.</p>"
               }
             }
           ]
@@ -943,7 +959,7 @@
                 "id": "41186193-1c38-4827-84b7-e70848367d42",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Vous l’aurez compris, on aime varier les plaisirs et proposer différents types d’activité, après le questionnaire à choix unique on vous laisse découvrir le QCM&#8239;!</p>"
+                "content": "<p>Vous l’aurez compris, on aime varier les plaisirs et proposer différents types d’activité, après le questionnaire à choix unique on vous laisse découvrir le QCM !</p>"
               }
             }
           ]
@@ -1110,7 +1126,7 @@
                 "id": "4cfd27d5-0947-47af-bfb6-52467143c38b",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Et là, voici une image&#8239;!</p>"
+                "content": "<p>Et là, voici une image !</p>"
               }
             },
             {
@@ -1146,7 +1162,9 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae39",
                 "type": "custom",
+                "title": "",
                 "instruction": "Extrait de conversation",
+                "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "Confessions nocturnes",
@@ -1206,9 +1224,7 @@
                       "content": "Mel, je le sens, je le sais, je le suis, il se fout de moi..."
                     }
                   ]
-                },
-                "title": "",
-                "functionalInstruction": ""
+                }
               }
             },
             {
@@ -1250,10 +1266,10 @@
               "element": {
                 "id": "cfec5a0e-2ed5-462f-8974-e5ca25faae38",
                 "type": "custom",
-                "tagName": "image-quiz",
                 "title": "✨ Images Quiz ✨",
                 "instruction": "Sélectionner l'image qui possède un dossier jaune.",
                 "functionalInstruction": "Cliquer sur l'image qui répond à la consigne.",
+                "tagName": "image-quiz",
                 "props": {
                   "name": "Liste d'applications",
                   "maxChoicesPerLine": 3,
@@ -1262,41 +1278,41 @@
                     {
                       "name": "Google",
                       "image": {
+                        "src": "https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg",
                         "width": 534,
                         "height": 544,
                         "loading": "lazy",
-                        "decoding": "async",
-                        "src": "https://epreuves.pix.fr/_astro/Google.B1bcY5Go_1BynY8.svg"
+                        "decoding": "async"
                       }
                     },
                     {
                       "name": "LibreOffice Writer",
                       "image": {
+                        "src": "https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp",
                         "width": 205,
                         "height": 246,
                         "loading": "lazy",
-                        "decoding": "async",
-                        "src": "https://epreuves.pix.fr/_astro/writer.3bR8N2DK_Z1iWuJ9.webp"
+                        "decoding": "async"
                       }
                     },
                     {
                       "name": "Explorateur",
                       "image": {
+                        "src": "https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp",
                         "width": 128,
                         "height": 128,
                         "loading": "lazy",
-                        "decoding": "async",
-                        "src": "https://epreuves.pix.fr/_astro/windows-file-explorer.CnF8MYwI_23driA.webp"
+                        "decoding": "async"
                       }
                     },
                     {
                       "name": "Geogebra",
                       "image": {
+                        "src": "https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp",
                         "width": 640,
                         "height": 640,
                         "loading": "lazy",
-                        "decoding": "async",
-                        "src": "https://epreuves.pix.fr/_astro/geogebra.CZH9VYqc_19v4nj.webp"
+                        "decoding": "async"
                       }
                     }
                   ]
@@ -1343,6 +1359,7 @@
                 "id": "30701e93-1b4d-4da4-b018-fa756c07d53f",
                 "type": "qcm",
                 "instruction": "<p>Quels sont les 3 piliers de Pix&#8239;?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
@@ -1375,8 +1392,7 @@
                     "diagnosis": "<p> Pix sert à évaluer, certifier et développer ses compétences numériques.</p>"
                   }
                 },
-                "solutions": ["1", "3", "4"],
-                "hasShortProposals": false
+                "solutions": ["1", "3", "4"]
               }
             }
           ]
@@ -1407,21 +1423,22 @@
               "element": {
                 "id": "0a5e77e8-1c8e-4cb6-a41d-cf6ad7935447",
                 "type": "qcu",
-                "instruction": "<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot&#8239;?</p>",
+                "instruction": "<p>Remontez la page pour trouver le premier mot de ce module.<br>Quel est ce mot ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "Bienvenue",
                     "feedback": {
                       "state": "Incorrect.",
-                      "diagnosis": "<p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                      "diagnosis": "<p> Remonter la page pour retrouver le premier mot !</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Bonjour",
                     "feedback": {
-                      "state": "Correct&#8239;!",
+                      "state": "Correct !",
                       "diagnosis": "<p> Vous avez bien remonté la page</p>"
                     }
                   },
@@ -1430,12 +1447,11 @@
                     "content": "Nous",
                     "feedback": {
                       "state": "Incorrect.",
-                      "diagnosis": "<p> Remonter la page pour retrouver le premier mot&#8239;!</p>"
+                      "diagnosis": "<p> Remonter la page pour retrouver le premier mot !</p>"
                     }
                   }
                 ],
-                "solution": "2",
-                "hasShortProposals": false
+                "solution": "2"
               }
             }
           ]
@@ -1485,12 +1501,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Correct&#8239;!",
+                    "state": "Correct !",
                     "diagnosis": "<p> vous nous connaissez bien &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
                   },
                   "invalid": {
-                    "state": "Incorrect&#8239;!",
-                    "diagnosis": "<p> vous y arriverez la prochaine fois&#8239;!</p>"
+                    "state": "Incorrect !",
+                    "diagnosis": "<p> vous y arriverez la prochaine fois !</p>"
                   }
                 }
               }
@@ -1523,7 +1539,7 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<span>Prénom de la personne qui est en train de parler&#8239;: </span>"
+                    "content": "<span>Prénom de la personne qui est en train de parler : </span>"
                   },
                   {
                     "input": "qui-parle",
@@ -1539,11 +1555,11 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Correct&#8239;!",
+                    "state": "Correct !",
                     "diagnosis": ""
                   },
                   "invalid": {
-                    "state": "Incorrect&#8239;!",
+                    "state": "Incorrect !",
                     "diagnosis": ""
                   }
                 }
@@ -1582,7 +1598,7 @@
                 "id": "72fee40a-7279-4372-acf5-aaf508b1c145",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Vous arrivez à la fin de ce module. Une dernière activité et vous serez prêt à explorer tous les modules que vous souhaitez&#8239;!<span aria-hidden=\"true\">🌟</span> </p>"
+                "content": "<p>Vous arrivez à la fin de ce module. Une dernière activité et vous serez prêt à explorer tous les modules que vous souhaitez !<span aria-hidden=\"true\">🌟</span> </p>"
               }
             }
           ]
@@ -1597,7 +1613,7 @@
               "element": {
                 "id": "98c51fa7-03b7-49b1-8c5e-49341d35909c",
                 "type": "qrocm",
-                "instruction": "<p>Quel est le nom de ce nouveau produit Pix&#8239;?</p>",
+                "instruction": "<p>Quel est le nom de ce nouveau produit Pix ?</p>",
                 "proposals": [
                   {
                     "input": "nom-produit",
@@ -1613,12 +1629,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "Correct&#8239;!",
+                    "state": "Correct !",
                     "diagnosis": "<p>Vous êtes prêt à explorer &nbsp; <span aria-hidden=\"true\">🎉</span></p>"
                   },
                   "invalid": {
-                    "state": "Incorrect&#8239;!",
-                    "diagnosis": "<p> Vous y arriverez la prochaine fois&#8239;!</p>"
+                    "state": "Incorrect !",
+                    "diagnosis": "<p> Vous y arriverez la prochaine fois !</p>"
                   }
                 }
               }

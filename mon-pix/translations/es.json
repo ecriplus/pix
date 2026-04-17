@@ -1682,7 +1682,6 @@
             "context": "Contexto",
             "did-you-know": "¿Lo sabías?",
             "further-information": "Más información",
-            "key-points": "Puntos clave",
             "tip": "Consejo"
           }
         }
@@ -1704,7 +1703,8 @@
       },
       "grain": {
         "tag": {
-          "activity": "Actividad"
+          "activity": "Actividad",
+          "key-points": "Puntos clave"
         },
         "title": {
           "lesson": "Lección",

@@ -100,6 +100,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
     @extend %pix-shadow-default;
 
     position: relative;
+    margin-bottom: var(--pix-spacing-2x);
     padding: var(--pix-spacing-6x);
   }
 }
@@ -123,7 +124,7 @@ $grain-card-border-radius: var(--pix-spacing-4x);
 }
 
 .grain-card-tag {
-  margin-bottom: var(--pix-spacing-1x);
+  margin-bottom: var(--pix-spacing-2x);
 }
 
 // stylelint-disable-next-line no-duplicate-selectors
