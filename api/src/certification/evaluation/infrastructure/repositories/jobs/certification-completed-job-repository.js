@@ -8,7 +8,7 @@ class CertificationCompletedJobRepository extends JobRepository {
   constructor() {
     super({
       name: CertificationCompletedJob.name,
-      retry: JobRetry.STANDARD_RETRY,
+      retry: JobRetry.FEW_RETRY,
       priority: JobPriority.HIGH,
     });
   }
