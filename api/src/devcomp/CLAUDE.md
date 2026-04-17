@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Purpose
 
 **Devcomp** (Développement de Compétences) manages interactive learning modules and trainings. It covers:
+
 - **Modules** — interactive learning content stored as JSON files, delivered through grains and elements
 - **Passages** — user sessions tracking progress through a module
 - **Trainings** — curated resources (modules, external links) tied to target profiles and recommendation triggers
@@ -14,6 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 From `api/`:
+
 ```bash
 # Run all devcomp tests
 npm run test:api:unit -- --grep devcomp
@@ -55,6 +57,7 @@ Elements are either **non-answerable** (Text, Video, Audio, Image, Separator, Ex
 ### Cross-context integration
 
 Devcomp imports external repositories by name (injected via DI) from:
+
 - `prescription` context — campaigns, target profiles
 - `shared` context — knowledge elements, skills, tubes
 - `identity-access-management` context — users
@@ -67,11 +70,11 @@ Defined in `domain/errors.js`: `ModuleDoesNotExistError`, `PassageDoesNotExistEr
 
 ## Key files
 
-| Concern | Path |
-|---|---|
-| Route registration | `routes.js` |
-| Usecase DI wiring | `domain/usecases/index.js` |
-| Repository exports | `infrastructure/repositories/index.js` |
-| Module datasource | `infrastructure/datasources/learning-content/module-datasource.js` |
-| Module factory | `infrastructure/factories/module-factory.js` |
-| Domain errors | `domain/errors.js` |
+| Concern            | Path                                                               |
+| ------------------ | ------------------------------------------------------------------ |
+| Route registration | `routes.js`                                                        |
+| Usecase DI wiring  | `domain/usecases/index.js`                                         |
+| Repository exports | `infrastructure/repositories/index.js`                             |
+| Module datasource  | `infrastructure/datasources/learning-content/module-datasource.js` |
+| Module factory     | `infrastructure/factories/module-factory.js`                       |
+| Domain errors      | `domain/errors.js`                                                 |
