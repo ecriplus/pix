@@ -24,6 +24,10 @@ export class JobClient {
   #isTestOnly = false;
   #isInitialized = false;
 
+  get jobGlobPatterns() {
+    return [`${workerDirPath}/src/**/application/**/*job-controller.js`];
+  }
+
   static get instance() {
     if (!JobClient.#jobClient) {
       JobClient.#jobClient = new JobClient();
@@ -85,7 +89,16 @@ export class JobClient {
   }
 
   async #registerJobs(jobGroups = []) {
-    const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
+
+    const globPatternList = await this.jobGlobPatterns;
+
+    for (const globPattern of globPatternList) {
+      logger.info(`Register jobs for groups "${jobGroups}" from glob pattern "${globPattern}".`);
+      await this.#registerJobsFromGlobPattern(globPattern, jobGroups);
+    }
+  }
+
+  async #registerJobsFromGlobPattern(globPattern, jobGroups) {
 
     logger.info(`Search for job handlers in ${globPattern}`);
     const jobFiles = await Array.fromAsync(glob(globPattern, { exclude: ['**/job-controller.js'] }));
