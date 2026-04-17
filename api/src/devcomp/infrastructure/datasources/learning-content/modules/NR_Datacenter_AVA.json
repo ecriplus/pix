@@ -33,7 +33,7 @@
                 "id": "6395f495-5219-445d-9976-53710245da39",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Entre 2010 et 2025, le nombre de centres de données est passé d'environ 4 500 à près 12 000, et avec lui l'électricité consommée par les centre de données a fortement augmentée.</p>"
+                "content": "<p>Entre 2010 et 2025, le nombre de centres de données est passé d’environ 4 500 à près 12 000, et avec lui l’électricité consommée par les centre de données a fortement augmentée.</p>"
               }
             },
             {
@@ -41,9 +41,9 @@
               "element": {
                 "id": "3c4c888c-acb8-4c70-b1d6-f67af2b0e5c3",
                 "type": "short-video",
-                "title": "",
+                "title": "L’évolution des centres de données dans le monde de 2010 à 2026",
                 "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_se_questionner.mp4",
-                "transcription": "<p>Entre 2010 et 2026, le nombre de centres de données est passé d'environ 4 500 à plus de 12 000. Sur un planisphère, on voit augmenter la représentation de la répartition de ces centres de données dans le monde. </p><p>La répartition mondiale des centres de données  montre une forte concentration en Amérique du Nord, en Europe occidentale et en Asie orientale, tandis que l’Afrique et l’Amérique du Sud restent minoritaires.</p>"
+                "transcription": "<p>Entre 2010 et 2026, le nombre de centres de données est passé d’environ 4 500 à plus de 12 000. Sur un planisphère, on voit augmenter la représentation de la répartition de ces centres de données dans le monde. </p><p>La répartition mondiale des centres de données  montre une forte concentration en Amérique du Nord, en Europe occidentale et en Asie orientale, tandis que l’Afrique et l’Amérique du Sud restent minoritaires.</p>"
               }
             },
             {
@@ -58,7 +58,7 @@
                     "id": "1",
                     "content": "<p>Leur consommation d’énergie va diminuer. ↘️</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! </p>\n<p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2024 et 2030.&nbsp;</strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie&nbsp;</strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour les vidéos, les objets connectés, les cryptomonnaies mais surtout à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
+                      "diagnosis": "<p>Eh non ! </p><p>Il est estimé que l’<strong>électricité consommée par les centres de données va doubler entre 2024 et 2030.&nbsp;</strong>Les <strong>calculs </strong>demandent beaucoup d’<strong>énergie&nbsp;</strong>et les nouvelles technologies sont très gourmandes en calcul.&nbsp;Par exemple pour les vidéos, les objets connectés, les cryptomonnaies mais surtout à l’essor de l’<strong>utilisation des intelligences artificielles</strong> génératives par le grand public.</p>"
                     }
                   },
                   {
@@ -114,8 +114,8 @@
                 "id": "7ef3df37-d12b-4d80-bfba-fdf3bf1f10b1",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_1.png",
-                "alt": "Un schéma des conséquences d'un centre de données",
-                "alternativeText": "<p>Un schéma des conséquences d'un centre de données :</p><ul><li> la consommation d'eau</li><li>la consommation d'énergie</li><li>l'artificialisation des sols</li><li>l'extraction de métaux et de terres rares</li><li>la production de déchets toxiques.</li></ul>",
+                "alt": "Un schéma des conséquences d’un centre de données",
+                "alternativeText": "<p>Un schéma des conséquences d’un centre de données&nbsp;:</p><ul><li> la consommation d’eau</li><li>la consommation d’énergie</li><li>l’artificialisation des sols</li><li>l’extraction de métaux et de terres rares</li><li>la production de déchets toxiques.</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -138,7 +138,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_2.png",
                       "alt": "Schéma des conséquences d’un centre de données",
-                      "alternativeText": "<p>Schéma des conséquences d’un centre de données :</p><ul><li>la consommation d'eau,</li><li>la consommation d'énergie,</li><li>l'artificialisation des sols,</li><li> l'extraction de métaux et de terres rares,</li><li> la production de déchets toxiques.</li></ul><p>Le focus est mis sur l'extraction de métaux et de terres rares.</p>",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données&nbsp;:</p><ul><li>la consommation d’eau,</li><li>la consommation d’énergie,</li><li>l’artificialisation des sols,</li><li> l’extraction de métaux et de terres rares,</li><li> la production de déchets toxiques.</li></ul><p>Le focus est mis sur l’extraction de métaux et de terres rares.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -191,7 +191,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_3.png",
                       "alt": "Schéma des conséquences d’un centre de données.",
-                      "alternativeText": "<p>Schéma des conséquences d’un centre de données : </p><p>- la consommation d'eau </p><p> - la consommation d'énergie </p><p> - l'artificialisation des sols </p><p> - l'extraction de métaux et de terres rares </p><p> - la production de déchets toxiques. <br> </p><p>Le focus est mis sur  la consommation d’eau.</p>",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données&nbsp;: </p><p>- la consommation d’eau </p><p> - la consommation d’énergie </p><p> - l’artificialisation des sols </p><p> - l’extraction de métaux et de terres rares </p><p> - la production de déchets toxiques. <br> </p><p>Le focus est mis sur  la consommation d’eau.</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -248,7 +248,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_impacts_envir_4.png",
                       "alt": "Schéma des conséquences d’un centre de données",
-                      "alternativeText": "<p>Schéma des conséquences d’un centre de données : </p><ul><li> la consommation d'eau<ul><li>qui peut entraîner une pénurie d'eau potable</li><li>et un manque d'eau pour l'agriculture</li></ul></li><li>  la consommation d'énergie </li><li>  l'artificialisation des sols </li><li> l'extraction de métaux et de terres rares </li><li>  la production de déchets toxiques.</li></ul><p>Cela entraîne également la génération de CO².</p><p><br></p>",
+                      "alternativeText": "<p>Schéma des conséquences d’un centre de données&nbsp;: </p><ul><li> la consommation d’eau<ul><li>qui peut entraîner une pénurie d’eau potable</li><li>et un manque d’eau pour l’agriculture</li></ul></li><li>  la consommation d’énergie </li><li>  l’artificialisation des sols </li><li> l’extraction de métaux et de terres rares </li><li>  la production de déchets toxiques.</li></ul><p>Cela entraîne également la génération de CO².</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -620,7 +620,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_1.png",
                       "alt": "Un échange en réunion entre Dona et Boubacar",
-                      "alternativeText": "<p>Dona :&nbsp;Bonjour à tous ! J’espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?</p><p>Boubacar :&nbsp;Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produite par des éoliennes ou par des panneaux solaires ? ☀️</p>",
+                      "alternativeText": "<p>Dona&nbsp;:&nbsp;Bonjour à tous ! J’espère que vous êtes en forme pour cette réunion. Alors, quelles solutions proposez-vous ?</p><p>Boubacar&nbsp;:&nbsp;Peut-être que l’on pourrait faire fonctionner le centre de données avec de l’énergie produite par des éoliennes ou par des panneaux solaires ? ☀️</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -669,15 +669,15 @@
                       "id": "28485732-09c3-47b9-a6a8-7f894cc041e1",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_2.png",
-                      "alt": "Suite de la réunion : un échange entre Dona et Amira ",
-                      "alternativeText": "<p>Dona : C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !</p><p>Amira :&nbsp;Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊</p>",
+                      "alt": "Suite de la réunion : un échange entre Dona et Amira ",
+                      "alternativeText": "<p>Dona&nbsp;: C’est vrai ! Mais même si on utilise des énergies renouvelables, nos serveurs vont produire de la chaleur !</p><p>Amira&nbsp;:&nbsp;Peut-être que l’on pourrait utiliser cette chaleur ? Par exemple pour le chauffage de bâtiments, des immeubles ou même des piscines ! 🏊</p>",
                       "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "19d83e51-2310-4564-8037-44105f3b514f",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Amira ? </p>",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Amira ? </p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -719,15 +719,15 @@
                       "id": "9a2592e3-6c24-42e4-be35-d1c1e5ec57ed",
                       "type": "image",
                       "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_reunion_3.png",
-                      "alt": "Suite et fin de la réunion : un échange entre Dona et Oscar",
-                      "alternativeText": "<p>Dona :&nbsp;C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?</p><p>Oscar :&nbsp;Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides&nbsp;: par exemple en Suède ?❄️</p>",
+                      "alt": "Suite et fin de la réunion : un échange entre Dona et Oscar",
+                      "alternativeText": "<p>Dona&nbsp;:&nbsp;C’est une bonne idée, mais cela ne réduit pas notre consommation d’électricité. D’autres idées ?</p><p>Oscar&nbsp;:&nbsp;Pour moins dépenser d’énergie dans la climatisation, on pourrait installer les centres de données dans des régions froides&nbsp;: par exemple en Suède ?❄️</p>",
                       "legend": "",
                       "licence": ""
                     },
                     {
                       "id": "1f59df7b-6743-4ae9-99b8-2524b4305b1f",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Oscar ? <br></p>",
+                      "instruction": "<p>À quelle catégorie appartient la solution proposée par Oscar ? <br></p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -845,7 +845,7 @@
                 "id": "39d231e6-08e4-4db5-8acc-601dc4a0c8e1",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voyons voir si vous avez retenu l’essentiel.</p><p><br></p>"
+                "content": "<p>Voyons voir si vous avez retenu l’essentiel.</p>"
               }
             }
           ]
@@ -922,7 +922,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/mine.png",
                       "alt": "Une photo de mine",
-                      "alternativeText": "<p><br></p>",
+                      "alternativeText": "",
                       "legend": "",
                       "licence": ""
                     },
@@ -1276,7 +1276,7 @@
                     {
                       "id": "623a15cf-4b46-4ee2-a068-4bd0b1555022",
                       "type": "qcm",
-                      "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Querétaro ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
+                      "instruction": "<p>Que peut-on dire concernant les centres de données implantés dans la région du Querétaro ?<br>Vous pouvez faire une recherche sur le web pour répondre.</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
