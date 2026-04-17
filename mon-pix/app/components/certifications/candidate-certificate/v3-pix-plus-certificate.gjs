@@ -1,5 +1,6 @@
 import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixStepper from '@1024pix/pix-ui/components/pix-stepper';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -9,12 +10,8 @@ import { t } from 'ember-intl';
 export default class PixPlusCertificate extends Component {
   @service intl;
 
-  get certificationFrameworkKey() {
-    if (this.args.certificate.certificationFramework.toLowerCase().includes('edu')) {
-      return 'EDU';
-    } else {
-      return this.args.certificate.certificationFramework.toUpperCase();
-    }
+  get isEduCertification() {
+    return this.args.certificate.certificationFramework.includes('EDU');
   }
 
   get certificationFrameworkLabel() {
@@ -26,11 +23,9 @@ export default class PixPlusCertificate extends Component {
   }
 
   get frameworkTranslations() {
-    const certificationFramework = this.args.certificate.certificationFramework;
-
-    const prefix = certificationFramework.includes('EDU')
+    const prefix = this.isEduCertification
       ? 'pages.certificate.frameworks.EDU'
-      : `pages.user-certifications.frameworks.${certificationFramework}`;
+      : `pages.user-certifications.frameworks.${this.args.certificate.certificationFramework}`;
 
     return {
       status: this.intl.t(`${prefix}.status`),
@@ -38,6 +33,14 @@ export default class PixPlusCertificate extends Component {
       resultsInfos: this.intl.t(`${prefix}.results-infos`, { htmlSafe: true }),
       resultsSubTitle: this.intl.t(`${prefix}.results-sub-title`, { htmlSafe: true }),
     };
+  }
+
+  get steps() {
+    return [
+      { title: this.intl.t('pages.certificate.frameworks.EDU.steps.1') },
+      { title: this.intl.t('pages.certificate.frameworks.EDU.steps.2', { htmlSafe: true }) },
+      { title: this.intl.t('pages.certificate.frameworks.EDU.steps.3') },
+    ];
   }
 
   <template>
@@ -52,6 +55,10 @@ export default class PixPlusCertificate extends Component {
           <strong>{{this.frameworkTranslations.status}}</strong>
           {{this.frameworkTranslations.subTitle}}
         </h2>
+
+        {{#if this.isEduCertification}}
+          <PixStepper class="v3-pix-plus-certificate__stepper" @steps={{this.steps}} @currentStep={{2}} />
+        {{/if}}
 
         <div class="v3-pix-plus-certificate__details">
           <p>
@@ -78,7 +85,10 @@ export default class PixPlusCertificate extends Component {
           </dl>
         </div>
       </div>
-      <div>
+      <div class="v3-pix-plus-certificate__score">
+        <div class="v3-pix-plus-certificate-score__hexagon">
+          <strong class="dash">-</strong>
+        </div>
         <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
       </div>
     </PixBlock>
