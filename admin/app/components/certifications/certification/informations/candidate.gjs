@@ -43,55 +43,39 @@ export default class CertificationInformationCandidate extends Component {
       <h2 class="certification-information__title">Candidat</h2>
 
       <DescriptionList>
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label="Prénom">
           {{@certification.firstName}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Nom de famille">
           {{@certification.lastName}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label="Date de naissance">
           {{if @certification.birthdate (formatDate @certification.birthdate) ""}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Sexe">
           {{@certification.sex}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label="Commune de naissance">
           {{@certification.birthplace}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Code postal de naissance">
           {{@certification.birthPostalCode}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label="Code INSEE de naissance">
           {{@certification.birthInseeCode}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Pays de naissance">
           {{@certification.birthCountry}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
       </DescriptionList>
 
       <PixButton

@@ -209,13 +209,9 @@ export default class TargetProfile extends Component {
 
           <DescriptionList>
 
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label={{t "pages.target-profiles.label.id"}}>
               {{@model.id}}
             </DescriptionList.Item>
-
-            <DescriptionList.Divider />
 
             <DescriptionList.Item @label={{t "pages.target-profiles.label.name"}}>
               {{@model.internalName}}
@@ -225,34 +221,23 @@ export default class TargetProfile extends Component {
               {{@model.name}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label={{t "pages.target-profiles.label.estimated-time"}}>
               {{this.estimatedTimeLabel}}
               {{t "pages.target-profiles.label.estimated-time-experimental"}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
-
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label={{t "pages.target-profiles.label.created-at"}}>
               {{formatDate @model.createdAt}}
             </DescriptionList.Item>
-
-            <DescriptionList.Divider />
 
             <DescriptionList.Item @label={{t "pages.target-profiles.label.outdated"}}>
               {{this.displayBooleanState this.isOutdated}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label={{t "pages.target-profiles.label.simplified-access"}}>
               {{this.displayBooleanState this.isSimplifiedAccess}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
             {{#if this.hasLinkedCampaign}}
               <DescriptionList.Item @label={{t "pages.target-profiles.label.link-campaign"}}>
                 {{t "common.words.yes"}}
@@ -268,20 +253,15 @@ export default class TargetProfile extends Component {
               </DescriptionList.Item>
             {{/if}}
 
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label={{t "pages.target-profiles.resettable-checkbox.label"}}>
               {{this.displayBooleanState this.areKnowledgeElementsResettable}}
             </DescriptionList.Item>
-
-            <DescriptionList.Divider />
 
             <DescriptionList.Item @label={{t "pages.target-profiles.tubes-count"}}>
               {{@model.tubesCount}}
             </DescriptionList.Item>
 
             {{#if @model.description}}
-              <DescriptionList.Divider />
 
               <DescriptionList.Item @label="Description">
                 <SafeMarkdownToHtml @markdown={{@model.description}} />
@@ -289,14 +269,11 @@ export default class TargetProfile extends Component {
             {{/if}}
 
             {{#if @model.comment}}
-              <DescriptionList.Divider />
 
               <DescriptionList.Item @label="Commentaire (usage interne)">
                 <SafeMarkdownToHtml @markdown={{@model.comment}} />
               </DescriptionList.Item>
             {{/if}}
-
-            <DescriptionList.Divider />
 
           </DescriptionList>
 

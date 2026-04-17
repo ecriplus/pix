@@ -15,7 +15,6 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
     </h2>
 
     <DescriptionList data-testid="pw-certification-state-description-list">
-      <DescriptionList.Divider />
 
       <DescriptionList.Item @label="Session">
         <LinkTo @route="authenticated.sessions.session" @model={{@session.id}}>
@@ -23,36 +22,25 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
         </LinkTo>
       </DescriptionList.Item>
 
-      <DescriptionList.Divider />
-
       <DescriptionList.Item @label="Certification">
         {{@certification.certificationType}}
       </DescriptionList.Item>
-
-      <DescriptionList.Divider />
 
       <DescriptionList.Item @label="Statut">
         {{@certification.statusLabelAndValue.label}}
       </DescriptionList.Item>
 
-      <DescriptionList.Divider />
-
       <DescriptionList.Item @label="Créée le">
         {{@certification.creationDate}}
       </DescriptionList.Item>
-
-      <DescriptionList.Divider />
 
       <DescriptionList.Item @label="Terminée le">
         {{@certification.completionDate}}
       </DescriptionList.Item>
 
-      <DescriptionList.Divider />
-
       <DescriptionList.Item @label="Résultat">
         {{@certification.result}}
       </DescriptionList.Item>
-      <DescriptionList.Divider />
     </DescriptionList>
   </PixBlock>
 </template>

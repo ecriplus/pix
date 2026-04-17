@@ -55,14 +55,11 @@ export default class ViewAutonomousCourse extends Component {
   <template>
     <DescriptionList>
 
-      <DescriptionList.Divider />
-
       {{#each this.displayedAttributes as |attribute|}}
         <DescriptionList.Item @label={{attribute.label}}>
           {{attribute.value}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
       {{/each}}
 
       <DescriptionList.Item @label={{t "components.autonomous-courses.view.labels.custom-landing-page"}}>
@@ -70,8 +67,6 @@ export default class ViewAutonomousCourse extends Component {
           <SafeMarkdownToHtml @markdown={{@autonomousCourse.customLandingPageText}} />
         </blockquote>
       </DescriptionList.Item>
-
-      <DescriptionList.Divider />
 
       <DescriptionList.Item
         @label={{t "components.autonomous-courses.view.link-title"}}
@@ -95,7 +90,6 @@ export default class ViewAutonomousCourse extends Component {
         </PixTooltip>
       </DescriptionList.Item>
 
-      <DescriptionList.Divider />
     </DescriptionList>
   </template>
 }

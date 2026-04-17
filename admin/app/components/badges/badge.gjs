@@ -202,31 +202,21 @@ export default class Badge extends Component {
             <div>
               <DescriptionList>
 
-                <DescriptionList.Divider />
-
                 <DescriptionList.Item @label="ID">
                   {{@badge.id}}
                 </DescriptionList.Item>
-
-                <DescriptionList.Divider />
 
                 <DescriptionList.Item @label="Clé">
                   {{@badge.key}}
                 </DescriptionList.Item>
 
-                <DescriptionList.Divider />
-
                 <DescriptionList.Item @label="Nom du badge">
                   {{@badge.title}}
                 </DescriptionList.Item>
 
-                <DescriptionList.Divider />
-
                 <DescriptionList.Item @label="Url de l'image">
                   {{@badge.imageUrl}}
                 </DescriptionList.Item>
-
-                <DescriptionList.Divider />
 
                 <DescriptionList.Item @label="Message">
                   <blockquote>
@@ -234,13 +224,9 @@ export default class Badge extends Component {
                   </blockquote>
                 </DescriptionList.Item>
 
-                <DescriptionList.Divider />
-
                 <DescriptionList.Item @label="Message alternatif">
                   {{@badge.altMessage}}
                 </DescriptionList.Item>
-
-                <DescriptionList.Divider />
 
               </DescriptionList>
 

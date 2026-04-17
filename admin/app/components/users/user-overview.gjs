@@ -295,7 +295,6 @@ export default class UserOverview extends Component {
           {{/if}}
 
           <DescriptionList aria-label="Informations utilisateur">
-            <DescriptionList.Divider />
 
             <DescriptionList.Item @label="Prénom">{{@user.firstName}}</DescriptionList.Item>
             <DescriptionList.Item @label="Nom">{{@user.lastName}}</DescriptionList.Item>
@@ -306,8 +305,6 @@ export default class UserOverview extends Component {
                 {{formatDate @user.createdAt}}
               {{/if}}
             </DescriptionList.Item>
-
-            <DescriptionList.Divider />
 
             <DescriptionList.Item @label="Adresse e-mail" @valueClass="user-overview-section__copy-item">
               {{@user.email}}
@@ -331,8 +328,6 @@ export default class UserOverview extends Component {
               {{#if this.hasSsoAuthentication}}{{t "common.words.yes"}}{{else}}{{t "common.words.no"}}{{/if}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
-
             <DescriptionList.Item @label="Tentatives de connexion en erreur">
               {{if @user.userLogin.failureCount @user.userLogin.failureCount 0}}
             </DescriptionList.Item>
@@ -354,7 +349,6 @@ export default class UserOverview extends Component {
               {{/if}}
             </DescriptionList.Item>
 
-            <DescriptionList.Divider />
           </DescriptionList>
 
           {{#if this.accessControl.hasAccessToUsersActionsScope}}
