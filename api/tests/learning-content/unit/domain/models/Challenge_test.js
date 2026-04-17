@@ -1,4 +1,6 @@
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from 'chai';
+
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('LearningContent | Unit | Domain | Models | Challenge', function () {
   const baseDto = {
