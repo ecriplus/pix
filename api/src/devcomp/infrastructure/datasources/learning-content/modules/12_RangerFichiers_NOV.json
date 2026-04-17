@@ -306,7 +306,7 @@
                 "id": "e00b9625-1180-468a-848d-e16bab080eb9",
                 "type": "embed",
                 "isCompletionRequired": false,
-                "title": "",
+                "title": "nouveaudossier",
                 "url": "https://epreuves-pr3082.review.pix.fr/ospix-clic-droit/ospix-clic-droit.html?mode=mdx-rangerfochier_nov_D2",
                 "instruction": "<p>Dans l’interface ci-dessous&nbsp;:&nbsp; </p><ul><li>Créez un nouveau dossier sur le bureau de Maëva.&nbsp;</li><li>Nommez-le «&nbsp;Photos&nbsp;».</li></ul>",
                 "solution": "",
@@ -454,7 +454,7 @@
               "element": {
                 "id": "3af37878-e41f-45d5-8041-ca8fa337662f",
                 "type": "video",
-                "title": "supprimer liste de cours",
+                "title": "supprimer liste de course",
                 "url": "https://assets.pix.org/draft/modules/12RangerFichiersNov/supprimer-liste-de-course.mp4",
                 "poster": "https://assets.pix.org/draft/modules/12RangerFichiersNov/vignette.jpg",
                 "subtitles": "",
