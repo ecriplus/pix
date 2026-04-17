@@ -40,6 +40,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         commentByAutoJury: null,
         version: 2,
         certificationFramework: Frameworks.CLEA,
+        lastAnswerAt: new Date('2020-02-20T10:45:00Z'),
       };
       competenceMarkDTOs = [
         {
@@ -113,6 +114,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,
         complementaryCertificationCourseResultWithExternal,
+        lastAnswerAt: new Date('2020-02-20T10:45:00Z'),
       });
       expect(juryCertification).to.deepEqualInstance(expectedJuryCertification);
     });
@@ -178,6 +180,7 @@ describe('Unit | Domain | Models | JuryCertification', function () {
         certificationIssueReports,
         commonComplementaryCertificationCourseResult,
         complementaryCertificationCourseResultWithExternal,
+        lastAnswerAt: new Date('2020-02-20T10:45:00Z'),
       });
       expect(juryCertification).to.deepEqualInstance(expectedJuryCertification);
     });

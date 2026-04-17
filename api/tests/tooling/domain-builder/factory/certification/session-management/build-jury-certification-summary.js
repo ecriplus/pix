@@ -1,7 +1,7 @@
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 
-const buildJuryCertificationSummary = function ({
+export function buildJuryCertificationSummary({
   id = 123,
   firstName = 'Jean',
   lastName = 'Bon',
@@ -17,6 +17,7 @@ const buildJuryCertificationSummary = function ({
   eduV3ExternalJuryResult = null,
   certificationIssueReports = [],
   certificationFramework = null,
+  lastAnswerAt = null,
 } = {}) {
   return new JuryCertificationSummary({
     id,
@@ -34,7 +35,6 @@ const buildJuryCertificationSummary = function ({
     eduV3ExternalJuryResult,
     certificationIssueReports,
     certificationFramework,
+    lastAnswerAt,
   });
-};
-
-export { buildJuryCertificationSummary };
+}

@@ -14,6 +14,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       const data = {
         certificationIssueReports: [notImpactfulIssueReport],
         completedAt: new Date('2020-01-01'),
+        lastAnswerAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
         lastName: 'Martigan',
@@ -35,6 +36,7 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
         completedAt: new Date('2020-01-01'),
+        lastAnswerAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
         lastName: 'Martigan',

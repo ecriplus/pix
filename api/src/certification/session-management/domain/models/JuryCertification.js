@@ -35,6 +35,7 @@ export class JuryCertification {
    * @param {object} props.complementaryCertificationCourseResultWithExternal
    * @param {object} props.commonComplementaryCertificationCourseResult
    * @param {string} props.version
+   * @param {Date} props.lastAnswerAt
    */
   constructor({
     certificationCourseId,
@@ -67,6 +68,7 @@ export class JuryCertification {
     commonComplementaryCertificationCourseResult,
     version,
     certificationFramework,
+    lastAnswerAt,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.sessionId = sessionId;
@@ -98,6 +100,7 @@ export class JuryCertification {
     this.commonComplementaryCertificationCourseResult = commonComplementaryCertificationCourseResult;
     this.version = version;
     this.certificationFramework = certificationFramework;
+    this.lastAnswerAt = lastAnswerAt;
   }
 
   get reachedResultKey() {
@@ -171,6 +174,7 @@ export class JuryCertification {
       commonComplementaryCertificationCourseResult,
       version: juryCertificationDTO.version,
       certificationFramework: juryCertificationDTO.certificationFramework,
+      lastAnswerAt: juryCertificationDTO.lastAnswerAt,
     });
   }
 

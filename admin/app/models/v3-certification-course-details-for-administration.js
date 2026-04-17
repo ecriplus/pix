@@ -17,6 +17,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('date') createdAt;
   @attr('date') completedAt;
   @attr('date') endedAt;
+  @attr('date') lastAnswerAt;
   @attr('string') assessmentResultStatus;
   @attr('string') assessmentState;
   @attr('string') abortReason;
@@ -70,7 +71,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
 
   get duration() {
     const start = new Date(this.createdAt);
-    const end = new Date(this.completedAt || this.endedAt);
+    const end = new Date(this.lastAnswerAt);
     return end - start;
   }
 

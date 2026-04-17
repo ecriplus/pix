@@ -15,6 +15,7 @@ export default class CertificationDetails extends Model {
   @attr() userId;
   @attr() status;
   @attr() completedAt;
+  @attr() lastAnswerAt;
   @attr() listChallengesAndAnswers;
   version = 2;
 
@@ -46,11 +47,11 @@ export default class CertificationDetails extends Model {
   }
 
   get creationDate() {
-    return this.intl.formatDate(this.createdAt, { format: 'long' });
+    return this.createdAt ? this.intl.formatDate(this.createdAt, { format: 'long' }) : null;
   }
 
-  get completionDate() {
-    return this.intl.formatDate(this.completedAt, { format: 'long' });
+  get lastAnswerDate() {
+    return this.lastAnswerAt ? this.intl.formatDate(this.lastAnswerAt, { format: 'long' }) : null;
   }
 
   #includePixPlusCompetences(answersByCompetence) {

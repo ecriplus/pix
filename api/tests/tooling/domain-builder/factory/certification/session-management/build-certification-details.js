@@ -1,11 +1,12 @@
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 
-const buildCertificationDetails = function ({
+export function buildCertificationDetails({
   id = 123,
   userId = 456,
   createdAt = new Date('2020-01-01'),
   completedAt = new Date('2020-03-03'),
+  lastAnswerAt = null,
   status = Assessment.states.COMPLETED,
   totalScore = 555,
   percentageCorrectAnswers = 75,
@@ -36,12 +37,11 @@ const buildCertificationDetails = function ({
     userId,
     createdAt,
     completedAt,
+    lastAnswerAt,
     status,
     totalScore,
     percentageCorrectAnswers,
     competencesWithMark,
     listChallengesAndAnswers,
   });
-};
-
-export { buildCertificationDetails };
+}

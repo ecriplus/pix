@@ -39,7 +39,7 @@ const updateJuryComment = async function (request, h, dependencies = { juryComme
   return null;
 };
 
-const getCertificationV3Details = async function (
+async function getCertificationV3Details(
   request,
   h,
   dependencies = { v3CertificationDetailsForAdministrationSerializer },
@@ -52,9 +52,9 @@ const getCertificationV3Details = async function (
   return h
     .response(dependencies.v3CertificationDetailsForAdministrationSerializer.serialize({ certificationDetails }))
     .code(200);
-};
+}
 
-const update = async function (request, h, dependencies = { certificationSerializer }) {
+async function update(request, h, dependencies = { certificationSerializer }) {
   const certificationCourseId = request.params.certificationCourseId;
   const userId = request.auth.credentials.userId;
   const command = await dependencies.certificationSerializer.deserializeCertificationCandidateModificationCommand(
@@ -66,9 +66,9 @@ const update = async function (request, h, dependencies = { certificationSeriali
   const updatedCertificationCourse = await usecases.correctCandidateIdentityInCertificationCourse({ command });
 
   return dependencies.certificationSerializer.serializeFromCertificationCourse(updatedCertificationCourse);
-};
+}
 
-const updateEduV3ExternalJuryResult = async function (request, h, dependencies = { juryCertificationSerializer }) {
+async function updateEduV3ExternalJuryResult(request, h, dependencies = { juryCertificationSerializer }) {
   const i18n = getI18nFromRequest(request);
 
   const eduV3ExternalJuryResult = request.payload.data.attributes['edu-v3-external-jury-result'];
@@ -82,7 +82,7 @@ const updateEduV3ExternalJuryResult = async function (request, h, dependencies =
   return h
     .response(dependencies.juryCertificationSerializer.serialize(juryCertification, { translate: i18n.__ }))
     .code(200);
-};
+}
 
 export const certificationCourseController = {
   reject,

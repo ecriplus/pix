@@ -112,8 +112,8 @@ module('Integration | Component | Certifications | certification > details v3', 
           store,
           params: {
             certificationCourseId: 123456,
-            // eslint-disable-next-line no-restricted-syntax
-            createdAt: new Date('2023-01-13T08:00:00'),
+
+            createdAt: new Date('2023-01-13T08:00:00Z'),
             assessmentResultStatus: 'validated',
           },
         };
@@ -160,7 +160,7 @@ module('Integration | Component | Certifications | certification > details v3', 
           assert.true(assessmentResultStatusElement.classList.contains('pix-tag--success'));
         });
 
-        test('should display the date of completion', async function (assert) {
+        test('should display the date of last answer', async function (assert) {
           // given
           const model = createCertificationCourseDetailsRecord(certificationCourseDetailsRecord);
 
@@ -168,8 +168,10 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
-          assert.dom(screen.getByLabelText(`${endedAtLabel} :`)).containsText('13/01/2023 09:05:00');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
+          assert.dom(screen.getByLabelText(`${lastAnswerAtLabel} :`)).containsText('13/01/2023 09:05:00');
         });
 
         test('should display the certification duration', async function (assert) {
@@ -180,9 +182,11 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
 
-          assert.dom(screen.getByLabelText(`${endedAtLabel} :`)).containsText('1h05');
+          assert.dom(screen.getByLabelText(`${lastAnswerAtLabel} :`)).containsText('1h05');
         });
 
         test('should NOT display the ended by info or the abort reason', async function (assert) {
@@ -211,8 +215,8 @@ module('Integration | Component | Certifications | certification > details v3', 
             store,
             params: {
               certificationCourseId: 123456,
-              // eslint-disable-next-line no-restricted-syntax
-              createdAt: new Date('2023-01-13T08:00:00'),
+
+              createdAt: new Date('2023-01-13T08:00:00Z'),
               abortReason: 'candidate',
               assessmentResultStatus: 'rejected',
               assessmentState: 'endedDueToFinalization',
@@ -236,7 +240,7 @@ module('Integration | Component | Certifications | certification > details v3', 
           assert.true(assessmentResultStatusElement.classList.contains('pix-tag--error'));
         });
 
-        test('should display the date of completion', async function (assert) {
+        test('should display the date of last answer', async function (assert) {
           // given
           const model = createCertificationCourseDetailsRecord(certificationCourseDetailsRecord);
 
@@ -244,9 +248,11 @@ module('Integration | Component | Certifications | certification > details v3', 
           const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
           // then
-          const endedAtLabel = t('pages.certifications.certification.details.v3.general-informations.labels.ended-at');
+          const lastAnswerAtLabel = t(
+            'pages.certifications.certification.details.v3.general-informations.labels.last-answer-at',
+          );
 
-          assert.dom(screen.getByText(`${endedAtLabel} :`)).exists();
+          assert.dom(screen.getByText(`${lastAnswerAtLabel} :`)).exists();
         });
 
         test('should display the ended by info or the abort reason', async function (assert) {
@@ -276,16 +282,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -295,23 +301,23 @@ module('Integration | Component | Certifications | certification > details v3', 
             const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
             // then
-            assert.dom(screen.getByText('Terminée le :')).exists();
+            assert.dom(screen.getByText('Dernière réponse le :')).exists();
             assert.dom(screen.getByText('13/01/2023 08:05:00')).exists();
           });
           test('should display the session finalized tooltip', async function (assert) {
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -336,16 +342,16 @@ module('Integration | Component | Certifications | certification > details v3', 
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -355,23 +361,23 @@ module('Integration | Component | Certifications | certification > details v3', 
             const screen = await render(<template><DetailsV3 @details={{model}} /></template>);
 
             // then
-            assert.dom(screen.getByText('Terminée le :')).exists();
+            assert.dom(screen.getByText('Dernière réponse le :')).exists();
             assert.dom(screen.getByText('13/01/2023 08:05:00')).exists();
           });
           test('should display the ended by invigilator tooltip', async function (assert) {
             // given
             const certificationChallenges = [
               store.createRecord('certification-challenges-for-administration', {
-                // eslint-disable-next-line no-restricted-syntax
-                createdAt: new Date('2023-01-13T08:05:00'),
+                createdAt: new Date('2023-01-13T08:05:00Z'),
               }),
             ];
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
               completedAt: null,
-              // eslint-disable-next-line no-restricted-syntax
-              endedAt: new Date('2023-01-13T08:05:00'),
+
+              endedAt: new Date('2023-01-13T08:05:00Z'),
+              lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
               assessmentResultStatus: 'rejected',
               numberOfChallenges: 1,
               certificationChallengesForAdministration: certificationChallenges,
@@ -621,8 +627,9 @@ module('Integration | Component | Certifications | certification > details v3', 
 function createCertificationCourseDetailsRecord({ certificationChallengesForAdministration, store, params }) {
   return store.createRecord('v3-certification-course-details-for-administration', {
     assessmentState: 'completed',
-    // eslint-disable-next-line no-restricted-syntax
-    completedAt: new Date('2023-01-13T09:05:00'),
+
+    completedAt: new Date('2023-01-13T09:05:00Z'),
+    lastAnswerAt: new Date('2023-01-13T09:05:00Z'),
     assessmentResultStatus: 'validated',
     numberOfChallenges: 15,
     certificationFramework: 'CORE',

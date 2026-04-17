@@ -6,7 +6,7 @@ import { securityPreHandlers } from '../../../shared/application/security-pre-ha
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { sessionController } from './session-controller.js';
 
-const register = async function (server) {
+export async function register(server) {
   server.route([
     {
       method: 'GET',
@@ -38,7 +38,6 @@ const register = async function (server) {
       },
     },
   ]);
-};
+}
 
-const name = 'certification/session-management/sessions-api';
-export { name, register };
+export const name = 'certification/session-management/sessions-api';

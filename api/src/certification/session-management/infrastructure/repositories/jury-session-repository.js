@@ -21,7 +21,7 @@ const ALIASED_COLUMNS = Object.freeze({
   juryCommentAuthorLastName: 'jury-comment-authors.lastName',
 });
 
-const get = async function ({ id }) {
+export async function get({ id }) {
   const knexConn = DomainTransaction.getConnection();
   const jurySessionDTO = await knexConn
     .select(COLUMNS)
@@ -39,9 +39,9 @@ const get = async function ({ id }) {
   const sessionCounters = await getCounters({ sessionId: id });
 
   return _toDomain(jurySessionDTO, sessionCounters);
-};
+}
 
-const findPaginatedFiltered = async function ({ filters, page }) {
+export async function findPaginatedFiltered({ filters, page }) {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn
     .select(COLUMNS)
@@ -62,9 +62,9 @@ const findPaginatedFiltered = async function ({ filters, page }) {
     jurySessions,
     pagination,
   };
-};
+}
 
-const getCounters = async function ({ sessionId }) {
+export async function getCounters({ sessionId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const { startedCertifications } = await knexConn
@@ -107,13 +107,13 @@ const getCounters = async function ({ sessionId }) {
     );
 
   return _toJurySessionCountersDomainModel({ startedCertifications, certificationsWithScoringError, issueReports });
-};
+}
 
 const _toJurySessionCountersDomainModel = ({ startedCertifications, certificationsWithScoringError, issueReports }) => {
   return new JurySessionCounters({ startedCertifications, certificationsWithScoringError, issueReports });
 };
 
-const assignCertificationOfficer = async function ({ id, assignedCertificationOfficerId }) {
+export async function assignCertificationOfficer({ id, assignedCertificationOfficerId }) {
   const knexConn = DomainTransaction.getConnection();
   try {
     const updatedLines = await knexConn('sessions').where({ id }).update({ assignedCertificationOfficerId });
@@ -129,9 +129,7 @@ const assignCertificationOfficer = async function ({ id, assignedCertificationOf
     }
     logger.error(error);
   }
-};
-
-export { assignCertificationOfficer, findPaginatedFiltered, get, getCounters };
+}
 
 function _toDomain(jurySessionFromDB, counters) {
   let assignedCertificationOfficer = null;

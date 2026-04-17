@@ -6,7 +6,7 @@ const { get } = lodash;
 
 import jsonapiSerializer from 'jsonapi-serializer';
 
-const serialize = function (juryCertificationSummary, meta, { translate }) {
+export function serialize(juryCertificationSummary, meta, { translate }) {
   return new Serializer('jury-certification-summary', {
     transform(juryCertificationSummary) {
       // eslint-disable-next-line no-unused-vars
@@ -30,6 +30,7 @@ const serialize = function (juryCertificationSummary, meta, { translate }) {
       'reachedResultKey',
       'createdAt',
       'completedAt',
+      'lastAnswerAt',
       'isPublished',
       'examinerComment',
       'numberOfCertificationIssueReports',
@@ -39,6 +40,4 @@ const serialize = function (juryCertificationSummary, meta, { translate }) {
     ],
     meta,
   }).serialize(juryCertificationSummary);
-};
-
-export { serialize };
+}

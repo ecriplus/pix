@@ -2,12 +2,13 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (certificationDetails) {
+export function serialize(certificationDetails) {
   return new Serializer('certification-details', {
     attributes: [
       'userId',
       'createdAt',
       'completedAt',
+      'lastAnswerAt',
       'status',
       'totalScore',
       'percentageCorrectAnswers',
@@ -15,6 +16,4 @@ const serialize = function (certificationDetails) {
       'listChallengesAndAnswers',
     ],
   }).serialize(certificationDetails);
-};
-
-export { serialize };
+}

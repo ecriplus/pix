@@ -38,7 +38,7 @@ module('Acceptance | authenticated/sessions/certification/details', function (ho
       // then
       assert.dom(screen.getByText('Statut :')).exists();
       assert.dom(screen.getByText('Créé le :')).exists();
-      assert.dom(screen.getByText('Terminée le :')).exists();
+      assert.dom(screen.getByText('Dernière réponse le :')).exists();
       assert.dom(screen.getByText('Score :')).exists();
       assert.dom(screen.getByText('Taux de reproductibilité :')).exists();
     });

@@ -34,8 +34,8 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
         {{@certification.creationDate}}
       </DescriptionList.Item>
 
-      <DescriptionList.Item @label="Terminée le">
-        {{@certification.completionDate}}
+      <DescriptionList.Item @label="Dernière réponse le">
+        {{@certification.lastAnswerDate}}
       </DescriptionList.Item>
 
       <DescriptionList.Item @label="Résultat">

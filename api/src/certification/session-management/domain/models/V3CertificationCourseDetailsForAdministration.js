@@ -15,6 +15,7 @@ export class V3CertificationCourseDetailsForAdministration {
     numberOfChallenges,
     certificationFramework,
     versionId,
+    lastAnswerAt,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.isRejectedForFraud = isRejectedForFraud;
@@ -31,6 +32,7 @@ export class V3CertificationCourseDetailsForAdministration {
     this.endedAt = endedAt;
     this.certificationFramework = certificationFramework;
     this.versionId = versionId;
+    this.lastAnswerAt = lastAnswerAt;
   }
 
   get reachedResultKey() {

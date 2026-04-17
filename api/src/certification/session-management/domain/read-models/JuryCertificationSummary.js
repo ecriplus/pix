@@ -22,6 +22,7 @@ export class JuryCertificationSummary {
     eduV3ExternalJuryResult,
     certificationFramework,
     certificationIssueReports,
+    lastAnswerAt,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -37,6 +38,7 @@ export class JuryCertificationSummary {
     this.completedAt = completedAt;
     this.isPublished = isPublished;
     this.certificationIssueReports = certificationIssueReports;
+    this.lastAnswerAt = lastAnswerAt;
   }
 
   get reachedResultKey() {

@@ -120,6 +120,7 @@ function _selectJuryCertifications(knexConn) {
       commentByJury: 'assessment-results.commentByJury',
       commentByAutoJury: 'assessment-results.commentByAutoJury',
       certificationFramework: 'certification-courses.framework',
+      lastAnswerAt: 'certification-courses.lastAnswerAt',
     })
     .from('certification-courses')
     .join('assessments', 'assessments.certificationCourseId', 'certification-courses.id')

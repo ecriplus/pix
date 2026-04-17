@@ -1,7 +1,7 @@
 import { assertNotNullOrUndefined } from '../../../../shared/domain/models/asserts.js';
 import { ModuleInstantiationError } from '../../errors.js';
 
-class Details {
+export class Details {
   constructor({ image, description, duration, level, tabletSupport, objectives }) {
     assertNotNullOrUndefined(image, 'The image is required for module details');
     assertNotNullOrUndefined(description, 'The description is required for module details');
@@ -32,5 +32,3 @@ class Details {
     }
   }
 }
-
-export { Details };
