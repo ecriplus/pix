@@ -256,7 +256,7 @@ commands:
       app_name:
         type: string
     steps:
-      - run: sudo rm -rf /var/lib/apt/lists/*
+      - run: sudo apt-get update -y
       - browser-tools/install-chrome
       - attach_workspace:
           at: ~/pix
@@ -969,7 +969,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
-      - run: sudo rm -rf /var/lib/apt/lists/*
+      - run: sudo apt-get update -y
       - browser-tools/install-chrome
       - run:
           name: Manual safety start of X11 server
@@ -1050,7 +1050,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
-      - run: sudo rm -rf /var/lib/apt/lists/*
+      - run: sudo apt-get update -y
       - browser-tools/install-chrome
       - run:
           name: Manual safety start of X11 server
