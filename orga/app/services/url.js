@@ -27,6 +27,22 @@ export default class Url extends UrlBaseService {
     return this.getPixWebsiteUrlFor('SUPPORT');
   }
 
+  get supportHelpCenterUrl() {
+    const locale = this.locale.currentLocale;
+    const orgType = this.currentUser.organization?.type ?? 'PRO';
+
+    switch (orgType) {
+      case 'SCO-1D':
+        return this.getPixWebsiteUrlFor('SUPPORT_SCO1D');
+      case 'SCO':
+        return this.getPixWebsiteUrlFor('SUPPORT_SCO');
+      default:
+        return locale === 'fr' || locale === 'fr-FR'
+          ? 'https://contact.pix.org/fr/hc/1137130200'
+          : this.getPixWebsiteUrlFor('SUPPORT');
+    }
+  }
+
   get campaignsRootUrl() {
     if (ENV.APP.CAMPAIGNS_ROOT_URL) return ENV.APP.CAMPAIGNS_ROOT_URL;
     return `${this.pixAppUrl}/campagnes/`;

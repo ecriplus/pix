@@ -41,6 +41,10 @@ export default class SidebarMenu extends Component {
     return this.currentUser.organization.documentationUrl;
   }
 
+  get supportHelpCenterUrl() {
+    return this.url.supportHelpCenterUrl;
+  }
+
   get shouldDisplayCertificationsEntry() {
     return this.currentUser.isAdminInOrganization && this.currentUser.isSCOManagingStudents;
   }
@@ -164,16 +168,10 @@ export default class SidebarMenu extends Component {
           </PixNavigationButton>
         {{/if}}
 
-        {{#if this.shouldDisplayMissionsEntry}}
-          <PixNavigationButton
-            href="https://pix.fr/support/enseignement-scolaire/1er-degre"
-            @target="_blank"
-            rel="noopener noreferrer"
-            @icon="help"
-          >
-            {{t "navigation.main.support"}}
-          </PixNavigationButton>
-        {{/if}}
+        <PixNavigationButton href={{this.supportHelpCenterUrl}} @target="_blank" rel="noopener noreferrer" @icon="help">
+          {{t "navigation.main.support"}}
+        </PixNavigationButton>
+
       </:navElements>
       <:footer>
         <OrganizationPlacesOrCreditInfo
