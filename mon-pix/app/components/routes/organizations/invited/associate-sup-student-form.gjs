@@ -90,7 +90,9 @@ export default class AssociateSupStudentForm extends Component {
         </label>
         <div class="join-restricted-campaign__birthdate">
           <PixInput
-            type="text"
+            type="number"
+            min="1"
+            max="31"
             @value={{this.dayOfBirth}}
             placeholder={{t "pages.join.fields.birthdate.day-format"}}
             @screenReaderOnly={{true}}
@@ -102,7 +104,9 @@ export default class AssociateSupStudentForm extends Component {
           </PixInput>
 
           <PixInput
-            type="text"
+            type="number"
+            min="1"
+            max="12"
             @value={{this.monthOfBirth}}
             placeholder={{t "pages.join.fields.birthdate.month-format"}}
             @screenReaderOnly={{true}}
@@ -114,7 +118,8 @@ export default class AssociateSupStudentForm extends Component {
           </PixInput>
 
           <PixInput
-            type="text"
+            type="number"
+            min="1900"
             @value={{this.yearOfBirth}}
             placeholder={{t "pages.join.fields.birthdate.year-format"}}
             @screenReaderOnly={{true}}

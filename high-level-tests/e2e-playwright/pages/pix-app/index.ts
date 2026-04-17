@@ -9,4 +9,6 @@ export * from './FinalCheckpointPage.ts';
 export * from './HomePage.ts';
 export * from './IntermediateCheckpointPage.ts';
 export * from './LoginPage.ts';
+export * from './ReconciliationLoginPage.ts';
+export * from './ReconciliationPage.ts';
 export * from './StartCampaignPage.ts';

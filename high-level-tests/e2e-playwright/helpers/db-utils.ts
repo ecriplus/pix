@@ -69,6 +69,7 @@ export async function createOrganizationLearnerInDB(
     firstName,
     lastName,
     userId,
+    birthdate,
     organizationId,
     nationalStudentId,
     isDisabled,
@@ -76,6 +77,7 @@ export async function createOrganizationLearnerInDB(
     firstName: string;
     lastName: string;
     userId?: number;
+    birthdate?: string;
     nationalStudentId: string;
     organizationId: number;
     isDisabled: boolean;
@@ -88,6 +90,7 @@ export async function createOrganizationLearnerInDB(
       firstName,
       lastName,
       userId: userId ?? null,
+      birthdate: birthdate ?? null,
       isDisabled,
       nationalStudentId,
       organizationId,

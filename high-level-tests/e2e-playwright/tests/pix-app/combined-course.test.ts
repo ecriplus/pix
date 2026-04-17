@@ -13,7 +13,7 @@ test('pass a combined course as sco user and see the final result', async ({ pag
   await reconciliationLoginPage.login('alain.terieur@example.net', 'pix123');
 
   const reconciliationPage = new ReconciliationPage(page);
-  await reconciliationPage.reconcile('Alain', 'Terieur', '10/07/2010');
+  await reconciliationPage.reconcile('Alain', 'Terieur', '10/07/2010', true);
 
   await test.step('Start combined course', async function () {
     await page.getByRole('button', { name: 'Commencer mon parcours' }).click();

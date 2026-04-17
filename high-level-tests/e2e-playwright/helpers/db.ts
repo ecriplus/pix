@@ -51,12 +51,14 @@ export async function buildExistingOrganizationLearner({
   lastName,
   nationalStudentId,
   email,
+  birthdate,
   isDisabled,
   rawPassword,
   organizationId,
 }: {
   firstName: string;
   lastName: string;
+  birthdate?: string;
   nationalStudentId: string;
   email: string;
   isDisabled: boolean;
@@ -81,6 +83,7 @@ export async function buildExistingOrganizationLearner({
       firstName,
       lastName,
       nationalStudentId,
+      birthdate,
       userId,
       isDisabled,
       organizationId,

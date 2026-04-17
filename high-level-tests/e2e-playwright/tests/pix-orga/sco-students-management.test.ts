@@ -5,8 +5,13 @@ import path from 'node:path';
 
 import { expect, test } from '../../fixtures/index.ts';
 import { getGarTokenForExistingUser } from '../../helpers/auth.ts';
-import { buildExistingOrganizationLearner, buildFreshPixOrgaUser, createGARUser } from '../../helpers/db.ts';
-import { ChallengePage, HomePage } from '../../pages/pix-app/index.ts';
+import {
+  buildExistingOrganizationLearner,
+  buildFreshPixOrgaUser,
+  createGARUser,
+  createOrganizationInDB,
+} from '../../helpers/db.ts';
+import { ChallengePage, HomePage, ReconciliationLoginPage, ReconciliationPage } from '../../pages/pix-app/index.ts';
 import { PixOrgaPage } from '../../pages/pix-orga/PixOrgaPage.ts';
 
 let UAJ: string;
@@ -19,6 +24,23 @@ test.beforeEach(async () => {
     type: 'SCO',
     externalId: `SCO_MANAGING-${UAJ}`,
     isManagingStudents: true,
+  });
+
+  const anotherSCOOrganizationId = await createOrganizationInDB({
+    type: 'SCO',
+    externalId: `OTHER_SCO_MANAGING-${UAJ}`,
+    isManagingStudents: true,
+  });
+
+  await buildExistingOrganizationLearner({
+    firstName: 'Alain',
+    lastName: 'Deloin',
+    email: `alain-${UAJ}@deloin.io`,
+    birthdate: '1994-12-01',
+    nationalStudentId: `${UAJ}-5`,
+    rawPassword: 'alain-deloin-password',
+    isDisabled: true,
+    organizationId: anotherSCOOrganizationId,
   });
 
   await buildExistingOrganizationLearner({
@@ -46,6 +68,8 @@ test('Managing sco learners', async ({ page }) => {
   const orgaPage = new PixOrgaPage(page);
   const challengePage = new ChallengePage(page);
   const homePage = new HomePage(page);
+  const reconciliationLoginPage = new ReconciliationLoginPage(page);
+  const reconciliationPage = new ReconciliationPage(page);
 
   await test.step('Login to pixOrga', async () => {
     await page.goto(process.env.PIX_ORGA_URL as string);
@@ -85,9 +109,18 @@ test('Managing sco learners', async ({ page }) => {
     await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Se connecter' }).click();
-    await page.getByRole('textbox', { name: 'Adresse e-mail ou identifiant *' }).fill(`katie-${UAJ}@veuns.io`);
-    await page.getByRole('textbox', { name: 'Mot de passe *' }).fill(`katieveuns-password`);
+    await reconciliationLoginPage.login(`katie-${UAJ}@veuns.io`, `katieveuns-password`);
+    await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
+    await page.getByRole('button', { name: 'Ignorer' }).click();
+    await challengePage.leave();
+    await homePage.logout();
+  });
+
+  await test.step('Can access campaign for auto-reconciled learner from another organization', async function () {
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
+    await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Se connecter' }).click();
+    await reconciliationLoginPage.login(`alain-${UAJ}@deloin.io`, `alain-deloin-password`);
     await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
     await page.getByRole('button', { name: 'Ignorer' }).click();
     await challengePage.leave();
@@ -97,12 +130,7 @@ test('Managing sco learners', async ({ page }) => {
   await test.step('Log in using the campaign code', async function () {
     await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
-    await page.getByRole('textbox', { name: 'Prénom *' }).fill('Jaqueline');
-    await page.getByRole('textbox', { name: 'Nom *', exact: true }).fill(`Colson`);
-    await page.getByRole('spinbutton', { name: 'Jour de naissance' }).fill('03');
-    await page.getByRole('spinbutton', { name: 'Mois de naissance' }).fill('09');
-    await page.getByRole('spinbutton', { name: 'Année de naissance' }).fill('1994');
-    await page.getByRole('button', { name: "Je m'inscris" }).click();
+    await reconciliationPage.reconcile('Jaqueline', 'Colson', '03/09/1994', false);
     await expect(page.getByText('Mon identifiant *')).toBeVisible();
     await page.getByRole('textbox', { name: 'Mot de passe * (8 caractères' }).fill('Pix12345');
     await page.getByRole('button', { name: 'Afficher le mot de passe' }).click();
@@ -122,17 +150,11 @@ test('Managing sco learners', async ({ page }) => {
     await page.getByRole('button', { name: 'Accéder au parcours' }).click();
     await page.getByRole('button', { name: 'Je commence' }).click();
     await expect(page.getByRole('heading', { name: "Rejoignez l'organisation Orga" })).toBeVisible();
-    await page.getByRole('textbox', { name: 'Prénom' }).fill('Stéphanie');
-    await page.getByRole('textbox', { name: 'Nom', exact: true }).fill('Chaire');
-    await page.getByRole('textbox', { name: 'jour de naissance' }).fill('03');
-    await page.getByRole('textbox', { name: 'mois de naissance' }).fill('10');
-    await page.getByRole('textbox', { name: 'année de naissance' }).fill('1994');
-    await page.getByRole('button', { name: "C'est parti !" }).click();
-    await page.getByRole('button', { name: 'Associer' }).click();
+    await reconciliationPage.reconcile('Stéphanie', 'Chaire', '03/10/1994', true);
     await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
     await page.getByRole('button', { name: 'Ignorer' }).click();
     await challengePage.leave();
-    await homePage.logout();
+    await homePage.logout(/nonconnecte/);
   });
 
   await test.step('Show learners', async () => {
@@ -142,7 +164,7 @@ test('Managing sco learners', async ({ page }) => {
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
     ).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Élèves (4)' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Élèves (5)' })).toBeVisible();
   });
 
   await test.step('Generate learner password ', async () => {
