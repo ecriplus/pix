@@ -26,7 +26,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   nock,
   sinon,
   waitForStreamFinalizationToBeDone,
@@ -404,7 +403,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
 
   beforeEach(async function () {
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
 
     server = await createServer();
 

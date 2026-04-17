@@ -1,6 +1,6 @@
 import { stageCollectionController } from '../../../../../src/evaluation/application/stage-collections/stage-collection-controller.js';
 import * as stageCollectionRepository from '../../../../../src/evaluation/infrastructure/repositories/stage-collection-repository.js';
-import { databaseBuilder, expect, hFake, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Integration | Application | stage-collection-controller', function () {
   context('update', function () {
@@ -11,7 +11,8 @@ describe('Integration | Application | stage-collection-controller', function () 
         thematics: [],
         tubes: [{ id: 'tubeId1' }],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     it('should modify stage collection according to the request', async function () {

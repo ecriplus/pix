@@ -1,5 +1,5 @@
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
-import { createServer, databaseBuilder, expect, mockLearningContent } from '../../../../test-helper.js';
+import { createServer, databaseBuilder, expect } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Acceptance | Controller | activity-answer-controller', function () {
@@ -66,7 +66,8 @@ describe('Acceptance | Controller | activity-answer-controller', function () {
           skills: [skill],
         };
 
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         const payload = {
           data: {
@@ -123,7 +124,7 @@ describe('Acceptance | Controller | activity-answer-controller', function () {
 });
 
 async function mockLearningContentForMission(missionId) {
-  await mockLearningContent({
+  databaseBuilder.factory.learningContent.build({
     skills: [
       learningContentBuilder.buildSkill({
         id: 'skill_id',
@@ -148,4 +149,5 @@ async function mockLearningContentForMission(missionId) {
       }),
     ],
   });
+  await databaseBuilder.commit();
 }

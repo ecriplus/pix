@@ -1,11 +1,5 @@
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
-import {
-  databaseBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
 
 describe('Integration | Application | send-started-participation-results-to-pole-emploi', function () {
   let campaignParticipationId, userId;
@@ -22,7 +16,7 @@ describe('Integration | Application | send-started-participation-results-to-pole
     campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ campaignId, userId }).id;
     databaseBuilder.factory.buildAssessment({ campaignParticipationId, userId });
     const learningContentObjects = learningContentBuilder.fromAreas([]);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
     return databaseBuilder.commit();
   });
 

@@ -3,7 +3,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | frameworks-controller', function () {
@@ -192,8 +191,8 @@ describe('Acceptance | Controller | frameworks-controller', function () {
 
       beforeEach(async function () {
         userId = databaseBuilder.factory.buildUser().id;
+        databaseBuilder.factory.learningContent.build(learningContent);
         await databaseBuilder.commit();
-        await mockLearningContent(learningContent);
       });
 
       it('should return response code 200', async function () {
@@ -269,7 +268,6 @@ describe('Acceptance | Controller | frameworks-controller', function () {
 
     beforeEach(function () {
       user = databaseBuilder.factory.buildUser.withRole();
-      return databaseBuilder.commit();
     });
 
     it('should return the areas in the framework', async function () {
@@ -440,7 +438,9 @@ describe('Acceptance | Controller | frameworks-controller', function () {
           },
         ],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
+
       const options = {
         method: 'GET',
         url: `/api/admin/frameworks/fmk1/areas`,

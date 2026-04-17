@@ -1,14 +1,7 @@
 import * as url from 'node:url';
 
 import { AddMultipleLevelStagesScript } from '../../../../src/evaluation/scripts/add-multiple-level-stages.js';
-import {
-  databaseBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-  sinon,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder, sinon } from '../../../test-helper.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -86,7 +79,7 @@ describe('Integration | Evaluation | Scripts | add-multiple-level-stages-script'
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       const targetProfile = databaseBuilder.factory.buildTargetProfile();
       databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'recTube0_0', targetProfileId: targetProfile.id });

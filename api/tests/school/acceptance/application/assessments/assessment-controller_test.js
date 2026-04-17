@@ -1,5 +1,5 @@
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { createServer, databaseBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Acceptance | Controller | assessment-controller', function () {
@@ -65,15 +65,9 @@ describe('Acceptance | Controller | assessment-controller', function () {
 
       it('should create a mission-assessment and return it', async function () {
         const learner = databaseBuilder.factory.buildOrganizationLearner();
-        await databaseBuilder.commit();
-
         const mission = learningContentBuilder.buildMission();
-
-        const learningContent = {
-          missions: [mission],
-        };
-
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build({ missions: [mission] });
+        await databaseBuilder.commit();
 
         const postAssessmentRequest = {
           method: 'POST',
@@ -111,12 +105,7 @@ describe('Acceptance | Controller | assessment-controller', function () {
     context('when there is an assessment in progress for given organization-learner and mission', function () {
       it('should retrieve the mission-assessment and return it', async function () {
         const mission = learningContentBuilder.buildMission();
-
-        const learningContent = {
-          missions: [mission],
-        };
-
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build({ missions: [mission] });
 
         const learner = databaseBuilder.factory.buildOrganizationLearner();
         const missionAssessment = databaseBuilder.factory.buildMissionAssessment({

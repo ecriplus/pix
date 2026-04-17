@@ -4,14 +4,7 @@ import { CampaignTypes } from '../../../../../src/prescription/shared/domain/con
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
 
 describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', function () {
   let userId, assessment, stages, campaignParticipationId, targetProfileId, listSkill, learningContent;
@@ -102,7 +95,8 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
           campaign: domainBuilder.buildCampaign(campaignDTO),
         });
 
-        await mockLearningContent(learningContentBuilder(learningContent));
+        databaseBuilder.factory.learningContent.build(learningContentBuilder(learningContent));
+        await databaseBuilder.commit();
       });
       context('When campaignParticipation is not available', function () {
         it('should not throw', async function () {
@@ -312,7 +306,8 @@ describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', functi
           campaign: domainBuilder.buildCampaign(campaignDTO),
         });
 
-        await mockLearningContent(learningContentBuilder(learningContent));
+        databaseBuilder.factory.learningContent.build(learningContentBuilder(learningContent));
+        await databaseBuilder.commit();
       });
 
       context('when some KEs are acquired', function () {

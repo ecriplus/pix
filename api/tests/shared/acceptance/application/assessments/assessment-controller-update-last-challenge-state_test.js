@@ -6,7 +6,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const competenceId = 'recCompetence';
@@ -57,7 +56,8 @@ describe('Acceptance | API | assessment-controller-update-last-challenge-state',
   beforeEach(async function () {
     server = await createServer();
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('PATCH /api/assessments/{id}/last-challenge-state/{state}', function () {

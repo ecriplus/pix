@@ -5,7 +5,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../test-helper.js';
 
 describe('Certification | Evaluation | Acceptance | scoring-and-capacity-simulator-route', function () {
@@ -451,7 +450,7 @@ describe('Certification | Evaluation | Acceptance | scoring-and-capacity-simulat
             },
           ];
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
 
           const superAdmin = databaseBuilder.factory.buildUser.withRole({
             role: PIX_ADMIN.ROLES.SUPER_ADMIN,

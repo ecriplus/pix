@@ -5,7 +5,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Acceptance | Application | Routes | subscription', function () {
@@ -15,7 +14,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | subscr
       const server = await createServer();
 
       const learningContent = _buildLearningContent();
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
 
       const userId = databaseBuilder.factory.buildUser().id;
 

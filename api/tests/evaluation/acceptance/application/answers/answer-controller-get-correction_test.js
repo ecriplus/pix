@@ -4,7 +4,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const buildOptions = (answerId, userId) => ({
@@ -182,8 +181,9 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
         userId,
         tutorialId: 'french-tutorial-id',
       });
+
+      databaseBuilder.factory.learningContent.build(learningContent);
       await databaseBuilder.commit();
-      await mockLearningContent(learningContent);
     });
 
     context('when Accept-Language header is specified', function () {

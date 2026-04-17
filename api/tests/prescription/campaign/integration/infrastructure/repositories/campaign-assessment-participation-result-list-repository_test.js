@@ -3,7 +3,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { databaseBuilder, expect, learningContentBuilder, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
 const { STARTED } = CampaignParticipationStatuses;
 const { buildCampaign, buildStage, buildStageAcquisition, buildCampaignParticipation } = databaseBuilder.factory;
 
@@ -36,8 +36,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           participantExternalId: 'The ugly',
         });
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -55,7 +53,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns the list of participations shared for the given campaign', async function () {
@@ -106,7 +105,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns the list of participations shared for the given campaign', async function () {
@@ -206,7 +206,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
             campaignId: campaign.id,
           },
         );
-        await databaseBuilder.commit();
 
         const learningContent = [
           {
@@ -225,7 +224,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns the name from the organization learner', async function () {
@@ -265,7 +265,7 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
 
         databaseBuilder.factory.buildBadgeAcquisition({ userId, badgeId: badge1Id, campaignParticipationId });
         databaseBuilder.factory.buildBadgeAcquisition({ userId, badgeId: badge2Id });
-        await databaseBuilder.commit();
+
         const learningContent = [
           {
             id: 'recArea1',
@@ -283,7 +283,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns acquired badges during the campaign', async function () {
@@ -312,7 +313,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           deletedAt: new Date('2022-03-31'),
           deletedBy: userId,
         });
-        await databaseBuilder.commit();
 
         const learningContent = [
           {
@@ -331,7 +331,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('does not return deleted participations', async function () {
@@ -359,7 +360,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           masteryRate: 0.33,
         });
 
-        await databaseBuilder.commit();
         const learningContent = [
           {
             id: 'recArea1',
@@ -377,7 +377,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('computes the mastery percentage', async function () {
@@ -578,8 +579,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           true,
         );
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -597,7 +596,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -621,8 +621,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         databaseBuilder.factory.buildAssessmentFromParticipation(participation);
         databaseBuilder.factory.buildAssessmentFromParticipation(participation);
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -640,7 +638,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('should return paginated campaign participations based on the given size and number', async function () {
@@ -736,8 +735,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           division: 'Ugly Guys Team',
         });
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -755,7 +752,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -1086,7 +1084,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('retrieves participants who have reached the specified stage', async function () {
@@ -1186,8 +1185,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           group: 'Adoptive Brother',
         });
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -1205,7 +1202,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
 
         // when
         const { participations } = await campaignAssessmentParticipationResultListRepository.findPaginatedByCampaignId({
@@ -1244,7 +1242,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns all participants if the filter is empty', async function () {
@@ -1514,8 +1513,6 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
         // given
         campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({}, [{ id: 'Skill1' }]);
 
-        await databaseBuilder.commit();
-
         const learningContent = [
           {
             id: 'recArea1',
@@ -1533,7 +1530,8 @@ describe('Integration | Repository | Campaign Assessment Participation Result Li
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
       });
 
       it('returns all participants if the filter is empty', async function () {

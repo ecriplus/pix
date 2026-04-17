@@ -19,7 +19,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Results | Acceptance | Application | Certification', function () {
@@ -212,7 +211,8 @@ describe('Certification | Results | Acceptance | Application | Certification', f
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('GET /api/certifications/{certificationCourseId}', function () {

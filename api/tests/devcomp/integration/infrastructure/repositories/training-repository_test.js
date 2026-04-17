@@ -9,14 +9,7 @@ import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as trainingRepository from '../../../../../src/devcomp/infrastructure/repositories/training-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | training-repository', function () {
   describe('#get', function () {
@@ -114,7 +107,8 @@ describe('Integration | Repository | training-repository', function () {
           },
         ],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     it('should throw an error when training does not exist', async function () {
@@ -409,7 +403,8 @@ describe('Integration | Repository | training-repository', function () {
           },
         ],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     it('should find trainings by campaignParticipationId and locale', async function () {

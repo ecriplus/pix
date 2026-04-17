@@ -5,7 +5,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | user-tutorial-controller', function () {
@@ -55,7 +54,8 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     describe('nominal case', function () {
@@ -274,7 +274,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
     describe('nominal case', function () {
       it('should respond with a 200 and return tutorials saved for user', async function () {
         // given
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         databaseBuilder.factory.buildUserSavedTutorial({
           id: 101,
@@ -329,7 +329,7 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
 
       it('should respond with a 200 and return tutorials recommended for user', async function () {
         // given
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         databaseBuilder.factory.buildKnowledgeElement({
           userId,
@@ -471,7 +471,8 @@ describe('Acceptance | Controller | user-tutorial-controller', function () {
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
       };
 
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     describe('nominal case', function () {

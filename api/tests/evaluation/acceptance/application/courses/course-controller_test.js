@@ -1,9 +1,9 @@
 import {
   createServer,
+  databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | Courses', function () {
@@ -56,7 +56,8 @@ describe('Acceptance | API | Courses', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     context('when the course exists', function () {

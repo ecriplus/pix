@@ -5,7 +5,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | assessment-controller-pause-assessment', function () {
@@ -56,7 +55,7 @@ describe('Acceptance | API | assessment-controller-pause-assessment', function (
         },
       };
 
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
       return databaseBuilder.commit();
     });
 

@@ -13,7 +13,6 @@ import {
   expect,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -103,7 +102,8 @@ describe('Integration | Repository | training-trigger-repository', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('#createOrUpdate', function () {

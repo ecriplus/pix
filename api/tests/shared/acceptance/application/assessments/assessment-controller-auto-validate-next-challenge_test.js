@@ -7,7 +7,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const lastChallengeAnswer = 'last challenge answer';
@@ -55,7 +54,8 @@ describe('Acceptance | API | assessment-controller-auto-validate-next-challenge'
 
     server = await createServer();
     const learningContentObjects = learningContentBuilder(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   afterEach(function () {

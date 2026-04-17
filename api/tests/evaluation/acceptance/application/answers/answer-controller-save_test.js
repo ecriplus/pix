@@ -12,7 +12,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
   knex,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | answer-controller-save', function () {
@@ -83,7 +82,8 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         postAnswersOptionsPayload = {
           data: {
@@ -382,7 +382,8 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         postAnswersOptions = {
           method: 'POST',
@@ -460,7 +461,8 @@ describe('Acceptance | Controller | answer-controller-save', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         postAnswersOptions = {
           method: 'POST',

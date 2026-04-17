@@ -6,7 +6,7 @@ import {
   main,
 } from '../../../../scripts/data-generation/generate-certif-cli.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { expect, knex, mockLearningContent } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 // FIXME Too hard to edit \o/
 describe('Integration | Scripts | generate-certif-cli.js', function () {
@@ -24,7 +24,8 @@ describe('Integration | Scripts | generate-certif-cli.js', function () {
       skills: [{ tubeId: 'xxx', skillId: 'yyy', status: 'actif' }],
       challenges: [],
     };
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
+    await databaseBuilder.commit();
   });
 
   afterEach(function () {

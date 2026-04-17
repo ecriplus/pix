@@ -1,15 +1,13 @@
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign-profile', function () {
   const locale = FRENCH_SPOKEN;
 
-  beforeEach(async function () {
-    await mockLearningContent({ competences: [], areas: [], skills: [] });
-  });
-
   it('should return the campaign profile', async function () {
+    databaseBuilder.factory.learningContent.build({ competences: [], areas: [], skills: [] });
+
     const organizationId = databaseBuilder.factory.buildOrganization().id;
     const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     const userId = databaseBuilder.factory.buildUser({ organizationId }).id;

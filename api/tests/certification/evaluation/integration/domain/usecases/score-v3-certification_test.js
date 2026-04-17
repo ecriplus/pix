@@ -5,14 +5,7 @@ import { Frameworks } from '../../../../../../src/certification/shared/domain/mo
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
 
 const challengeParams = {
   alpha: 1,
@@ -22,6 +15,7 @@ const challengeParams = {
 
 describe('Certification | Evaluation | Integration | Domain | Usecases | Score v3 certification', function () {
   let certificationVersionId;
+
   beforeEach(async function () {
     const learningContent = [
       {
@@ -138,7 +132,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
 
     certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
       challengesConfiguration: { maximumAssessmentLength: 10 },
@@ -150,6 +144,7 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
 
   context('when certification is a Pix Core', function () {
     let certifiableUserId, certificationCourseId, completedCertificationAssessmentId;
+
     beforeEach(async function () {
       const limitDate = new Date('2020-01-01T00:00:00Z');
       certifiableUserId = databaseBuilder.factory.buildUser().id;

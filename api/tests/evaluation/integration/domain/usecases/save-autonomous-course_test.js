@@ -10,7 +10,6 @@ import {
   domainBuilder,
   expect,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -18,15 +17,12 @@ describe('Integration | Usecases | Save autonomous course', function () {
   beforeEach(async function () {
     sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
 
-    databaseBuilder.factory.buildTargetProfile({
-      id: 1,
-    });
-
-    await databaseBuilder.commit();
+    databaseBuilder.factory.buildTargetProfile({ id: 1 });
 
     const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
     const learningContentObjects = learningContentBuilder([learningContent]);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   context('when target-profile does not exist', function () {

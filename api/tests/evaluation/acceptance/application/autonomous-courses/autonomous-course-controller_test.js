@@ -6,7 +6,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -42,7 +41,8 @@ describe('Acceptance | API | Autonomous Course', function () {
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('POST /api/autonomous-course', function () {

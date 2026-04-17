@@ -5,7 +5,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | training-controller', function () {
@@ -66,7 +65,8 @@ describe('Acceptance | Controller | training-controller', function () {
       ];
 
       const learningContentObjects = learningContentBuilder(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should get a training with the specific id', async function () {
@@ -440,7 +440,8 @@ describe('Acceptance | Controller | training-controller', function () {
       ];
 
       const learningContentObjects = learningContentBuilder(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should update training trigger', async function () {

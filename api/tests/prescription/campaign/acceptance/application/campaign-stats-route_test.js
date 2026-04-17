@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | Campaign Stats Route', function () {
@@ -42,7 +41,7 @@ describe('Acceptance | API | Campaign Stats Route', function () {
           ],
         },
       ]);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       const stage1 = databaseBuilder.factory.buildStage({

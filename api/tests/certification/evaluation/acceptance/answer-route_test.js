@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  mockLearningContent,
 } from '../../../test-helper.js';
 
 describe('Certification | Evaluation | Acceptance | answer-route', function () {
@@ -162,7 +161,8 @@ async function _buildLearningContent() {
       },
     ],
   };
-  await mockLearningContent(learningContent);
+  databaseBuilder.factory.learningContent.build(learningContent);
+  await databaseBuilder.commit();
 
   return {
     competenceId,

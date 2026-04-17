@@ -3,7 +3,7 @@ import { correctPreviewAnswer } from '../../../../../src/school/domain/usecases/
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { domainBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCases | correct-preview-answer', function () {
@@ -21,7 +21,8 @@ describe('Integration | UseCases | correct-preview-answer', function () {
       skills: [skill],
     };
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
+    await databaseBuilder.commit();
 
     const alwaysTrueExaminer = new Examiner({ validator: new ValidatorAlwaysOK() });
 

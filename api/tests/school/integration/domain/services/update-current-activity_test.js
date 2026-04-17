@@ -5,7 +5,7 @@ import * as activityRepository from '../../../../../src/school/infrastructure/re
 import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
 import * as missionRepository from '../../../../../src/school/infrastructure/repositories/mission-repository.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
-import { databaseBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCase | update current activity', function () {
@@ -13,9 +13,7 @@ describe('Integration | UseCase | update current activity', function () {
     context('when activity is not finished', function () {
       [
         { message: 'correctly answered', result: AnswerStatus.statuses.OK },
-
         { message: 'wrongly answered', result: AnswerStatus.statuses.KO },
-
         { message: 'skipped', result: AnswerStatus.statuses.SKIPPED },
       ].forEach(({ message, result }) =>
         it(`should not update current activity status when challenge is ${message}`, async function () {
@@ -32,9 +30,7 @@ describe('Integration | UseCase | update current activity', function () {
             result,
           });
 
-          await databaseBuilder.commit();
-
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -48,6 +44,7 @@ describe('Integration | UseCase | update current activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
@@ -94,9 +91,7 @@ describe('Integration | UseCase | update current activity', function () {
             createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
-          await databaseBuilder.commit();
-
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -110,6 +105,7 @@ describe('Integration | UseCase | update current activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
@@ -144,7 +140,7 @@ describe('Integration | UseCase | update current activity', function () {
           result: AnswerStatus.statuses.KO,
         });
 
-        await mockLearningContent({
+        databaseBuilder.factory.learningContent.build({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,
@@ -192,9 +188,7 @@ describe('Integration | UseCase | update current activity', function () {
             result: AnswerStatus.statuses.OK,
           });
 
-          await databaseBuilder.commit();
-
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -208,6 +202,7 @@ describe('Integration | UseCase | update current activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
@@ -245,9 +240,7 @@ describe('Integration | UseCase | update current activity', function () {
             result: AnswerStatus.statuses.OK,
           });
 
-          await databaseBuilder.commit();
-
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -261,6 +254,7 @@ describe('Integration | UseCase | update current activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
@@ -299,9 +293,7 @@ describe('Integration | UseCase | update current activity', function () {
             createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
-          await databaseBuilder.commit();
-
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -315,6 +307,7 @@ describe('Integration | UseCase | update current activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
@@ -346,9 +339,8 @@ describe('Integration | UseCase | update current activity', function () {
           challengeId: 'va_challenge_id',
           result: AnswerStatus.statuses.SKIPPED,
         });
-        await databaseBuilder.commit();
 
-        await mockLearningContent({
+        databaseBuilder.factory.learningContent.build({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,
@@ -362,6 +354,7 @@ describe('Integration | UseCase | update current activity', function () {
             }),
           ],
         });
+        await databaseBuilder.commit();
 
         const currentActivity = await updateCurrentActivity({
           assessmentId,

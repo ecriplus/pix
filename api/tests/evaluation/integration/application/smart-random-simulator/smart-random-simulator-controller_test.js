@@ -1,6 +1,6 @@
 import { smartRandomSimulatorController } from '../../../../../src/evaluation/application/smart-random-simulator/smart-random-simulator-controller.js';
 import { getSmartRandomLog } from '../../../../../src/evaluation/domain/services/smart-random-log-service.js';
-import { expect, hFake, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect, hFake } from '../../../../test-helper.js';
 
 const request = {
   payload: {
@@ -55,7 +55,8 @@ describe('Integration | Application | Smart Random Simulator', function () {
         thematics: [],
         tubes: [{ id: 'tubeId1' }],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     it('should empty smart random log after execution', async function () {

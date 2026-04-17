@@ -1,4 +1,4 @@
-import { createServer, expect, mockLearningContent } from '../../../test-helper.js';
+import { createServer, databaseBuilder, expect } from '../../../test-helper.js';
 import * as learningContentBuilder from '../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | Controller | challenge-controller', function () {
@@ -15,10 +15,11 @@ describe('Integration | Controller | challenge-controller', function () {
       });
       const skill = learningContentBuilder.buildSkill({ id: challenge.skillId });
 
-      await mockLearningContent({
+      databaseBuilder.factory.learningContent.build({
         challenges: [challenge],
         skills: [skill],
       });
+      await databaseBuilder.commit();
 
       const expectedResult = ['Jean-michel va à la \n', '\n plage pour manger un gateau'];
 

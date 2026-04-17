@@ -1,4 +1,4 @@
-import { createServer, expect, learningContentBuilder, mockLearningContent } from '../../../../test-helper.js';
+import { createServer, databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 describe('Acceptance | API | ChallengeController', function () {
   let server;
@@ -51,7 +51,8 @@ describe('Acceptance | API | ChallengeController', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     const options = {

@@ -6,7 +6,6 @@ import {
   generateInjectOptions,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../../test-helper.js';
 
 describe('Acceptance | Route | Certification Courses', function () {
@@ -221,12 +220,11 @@ describe('Acceptance | Route | Certification Courses', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
       });
 
       it('should create a certification course in database', async function () {
         // given
-
         databaseBuilder.factory.buildUser({ id: 1 });
         databaseBuilder.factory.buildSession({ id: 2, accessCode: 'FMKP39' });
         const candidate = databaseBuilder.factory.buildCertificationCandidate({

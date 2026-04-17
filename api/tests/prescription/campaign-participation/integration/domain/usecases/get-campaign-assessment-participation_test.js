@@ -7,7 +7,7 @@ import {
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, expect, mockLearningContent, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign-assessment-participation', function () {
   let campaignId, targetProfileId, organizationLearner, organizationId;
@@ -69,7 +69,7 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
       ],
     };
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
 
     organizationId = databaseBuilder.factory.buildOrganization().id;
     organizationLearner = databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({

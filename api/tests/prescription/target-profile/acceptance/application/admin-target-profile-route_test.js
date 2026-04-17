@@ -7,7 +7,6 @@ import {
   knex,
   learningContentBuilder,
   MockDate,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | TargetProfile | Application | Route | admin-target-profile', function () {
@@ -59,7 +58,8 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
     };
 
     beforeEach(async function () {
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
     });
 
     describe('when there is no tube to update', function () {
@@ -176,7 +176,8 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
     };
 
     beforeEach(async function () {
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
       user = databaseBuilder.factory.buildUser.withRole();
     });
 
@@ -378,7 +379,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
           ],
         },
       ]);
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
 
       targetProfileId = databaseBuilder.factory.buildTargetProfile({ name: 'Roxane est très jolie' }).id;
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2', level: 2 });

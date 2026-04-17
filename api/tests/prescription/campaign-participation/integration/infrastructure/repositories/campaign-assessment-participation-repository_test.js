@@ -4,7 +4,7 @@ import * as campaignAssessmentParticipationRepository from '../../../../../../sr
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;
 
@@ -27,7 +27,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
       beforeEach(async function () {
         const skill1 = { id: 'skill1' };
         const skill2 = { id: 'skill2' };
-        await mockLearningContent({ skills: [skill1, skill2] });
+        databaseBuilder.factory.learningContent.build({ skills: [skill1, skill2] });
         campaignId = databaseBuilder.factory.buildAssessmentCampaign({}).id;
 
         const assessment = databaseBuilder.factory.buildAssessmentFromParticipation(
@@ -87,7 +87,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
       beforeEach(async function () {
         skill1 = { id: 'skill1', status: 'actif' };
         const skill2 = { id: 'skill2', status: 'actif' };
-        await mockLearningContent({ skills: [skill1, skill2] });
+        databaseBuilder.factory.learningContent.build({ skills: [skill1, skill2] });
         campaignId = databaseBuilder.factory.buildAssessmentCampaign({}, [skill1, skill2]).id;
 
         campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({
@@ -123,7 +123,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
       beforeEach(async function () {
         const skill = { id: 'skill', status: 'actif' };
-        await mockLearningContent({ skills: [skill] });
+        databaseBuilder.factory.learningContent.build({ skills: [skill] });
         const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         campaignId = databaseBuilder.factory.buildAssessmentCampaignForSkills({ organizationId }, [skill]).id;
@@ -175,7 +175,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
     context('When something is wrong with a campaign participations', function () {
       it('throw a NotFoundError when campaign participation does not exist', async function () {
         const skill1 = { id: 'skill1', status: 'actif' };
-        await mockLearningContent({ skills: [skill1] });
+        databaseBuilder.factory.learningContent.build({ skills: [skill1] });
 
         campaignId = databaseBuilder.factory.buildAssessmentCampaign({}, [skill1]).id;
 
@@ -191,7 +191,7 @@ describe('Integration | Repository | Campaign Assessment Participation', functio
 
       it('throw a NotFoundError when campaign participation is deleted', async function () {
         const skill1 = { id: 'skill1', status: 'actif' };
-        await mockLearningContent({ skills: [skill1] });
+        databaseBuilder.factory.learningContent.build({ skills: [skill1] });
 
         campaignId = databaseBuilder.factory.buildAssessmentCampaign({}, [skill1]).id;
         campaignParticipationId = databaseBuilder.factory.buildAssessmentFromParticipation({

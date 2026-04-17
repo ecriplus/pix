@@ -6,7 +6,7 @@ import * as campaignAdministrationRepository from '../../../../../../src/prescri
 import { deleteExternalIdLabelFromCampaigns } from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignExternalIdTypes, CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
-import { catchErr, databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Campaign Administration', function () {
   describe('#findByIds', function () {
@@ -189,7 +189,7 @@ describe('Integration | Repository | Campaign Administration', function () {
               },
             ],
           };
-          await mockLearningContent(learningContent);
+          databaseBuilder.factory.learningContent.build(learningContent);
 
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2', level: 8 });
@@ -366,7 +366,7 @@ describe('Integration | Repository | Campaign Administration', function () {
               },
             ],
           };
-          await mockLearningContent(learningContent);
+          databaseBuilder.factory.learningContent.build(learningContent);
 
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
           databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2', level: 8 });

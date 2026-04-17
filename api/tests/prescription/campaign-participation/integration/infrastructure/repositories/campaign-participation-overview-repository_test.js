@@ -12,13 +12,7 @@ import {
 } from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-  sinon,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder, sinon } from '../../../../../test-helper.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
 
@@ -52,7 +46,7 @@ describe('Integration | Repository | Campaign Participation Overview', function 
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
     targetProfile = databaseBuilder.factory.buildTargetProfile();
     databaseBuilder.factory.buildStage({ targetProfileId: targetProfile.id });
     await databaseBuilder.commit();

@@ -7,7 +7,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  mockLearningContent,
   sinon,
 } from '../../../../test-helper.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
@@ -135,7 +134,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: SCOPES.CORE,

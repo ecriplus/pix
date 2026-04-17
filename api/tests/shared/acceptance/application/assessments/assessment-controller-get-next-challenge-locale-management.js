@@ -6,7 +6,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const competenceId = 'recCompetence';
@@ -69,7 +68,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-locale-man
       context('when there is one challenge in the accepted language (fr-fr)', function () {
         beforeEach(async function () {
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
 
           databaseBuilder.factory.buildUser({ id: userId });
           databaseBuilder.factory.buildAssessment({

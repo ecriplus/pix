@@ -11,14 +11,7 @@ import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCase | handle activity answer', function () {
@@ -51,7 +44,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           createdAt: new Date(),
           stepIndex: 0,
         });
-        await databaseBuilder.commit();
 
         await mockLearningContentForMission(missionId);
 
@@ -93,7 +85,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           stepIndex: 0,
           createdAt: new Date(),
         });
-        await databaseBuilder.commit();
 
         await mockLearningContentForMission(missionId);
 
@@ -135,8 +126,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           status: Activity.status.STARTED,
           stepIndex: 0,
         });
-
-        await databaseBuilder.commit();
 
         await mockLearningContentForMission(missionId);
 
@@ -183,8 +172,6 @@ describe('Integration | UseCase | handle activity answer', function () {
             activityId: activity.id,
           });
 
-          await databaseBuilder.commit();
-
           await mockLearningContentForMission(missionId);
 
           await handleActivityAnswer({
@@ -225,7 +212,6 @@ describe('Integration | UseCase | handle activity answer', function () {
             stepIndex: 0,
             createdAt: new Date(),
           });
-          await databaseBuilder.commit();
 
           await mockLearningContentForMission(missionId);
 
@@ -270,8 +256,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           createdAt: new Date(),
         });
 
-        await databaseBuilder.commit();
-
         await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
@@ -312,7 +296,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           stepIndex: 0,
           createdAt: new Date(),
         });
-        await databaseBuilder.commit();
 
         await mockLearningContentForMission(missionId);
 
@@ -361,8 +344,6 @@ describe('Integration | UseCase | handle activity answer', function () {
           stepIndex: 0,
         });
 
-        await databaseBuilder.commit();
-
         await mockLearningContentForMission(missionId);
 
         await handleActivityAnswer({
@@ -404,8 +385,7 @@ describe('Integration | UseCase | handle activity answer', function () {
       stepIndex: 0,
     });
 
-    await databaseBuilder.commit();
-    await mockLearningContent({
+    databaseBuilder.factory.learningContent.build({
       skills: [
         learningContentBuilder.buildSkill({
           id: 'skill_id',
@@ -418,6 +398,7 @@ describe('Integration | UseCase | handle activity answer', function () {
         }),
       ],
     });
+    await databaseBuilder.commit();
 
     await catchErr(handleActivityAnswer)({
       activityAnswer,
@@ -445,7 +426,7 @@ async function expectStatesAndLevel({ assessmentId, activityLevel, activityStatu
 }
 
 async function mockLearningContentForMission(missionId) {
-  await mockLearningContent({
+  databaseBuilder.factory.learningContent.build({
     skills: [
       learningContentBuilder.buildSkill({
         id: 'skill_id',
@@ -488,4 +469,5 @@ async function mockLearningContentForMission(missionId) {
       }),
     ],
   });
+  await databaseBuilder.commit();
 }

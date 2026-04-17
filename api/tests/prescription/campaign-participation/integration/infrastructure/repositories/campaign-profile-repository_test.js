@@ -2,7 +2,7 @@ import * as CampaignProfileRepository from '../../../../../../src/prescription/c
 import { PIX_COUNT_BY_LEVEL } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { ENGLISH_SPOKEN, FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | CampaignProfileRepository', function () {
   const locale = FRENCH_SPOKEN;
@@ -10,7 +10,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
   describe('#findProfile', function () {
     context('campaign participation infos', function () {
       beforeEach(async function () {
-        await mockLearningContent({ areas: [], competences: [], skills: [] });
+        databaseBuilder.factory.learningContent.build({ areas: [], competences: [], skills: [] });
+        await databaseBuilder.commit();
       });
 
       it('return the creation date, the sharing date and the participantExternalId', async function () {
@@ -77,11 +78,9 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('organization learner infos', function () {
-      beforeEach(async function () {
-        await mockLearningContent({ areas: [], competences: [], skills: [] });
-      });
-
       it('return the first name and last name of the organization learner', async function () {
+        databaseBuilder.factory.learningContent.build({ areas: [], competences: [], skills: [] });
+
         const organizationId = databaseBuilder.factory.buildOrganization().id;
         const campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
         const campaignParticipation = databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
@@ -156,7 +155,8 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
           ],
         };
 
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
       });
 
       it('return the number of competences', async function () {
@@ -262,11 +262,10 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when there is no campaign-participation with the given id', function () {
-      beforeEach(async function () {
-        await mockLearningContent({ areas: [], competences: [], skills: [] });
-      });
-
       it('throws an NotFoundError error', async function () {
+        databaseBuilder.factory.learningContent.build({ areas: [], competences: [], skills: [] });
+        await databaseBuilder.commit();
+
         const error = await catchErr(CampaignProfileRepository.findProfile)({
           campaignId: 1,
           campaignParticipationId: 2,
@@ -279,16 +278,12 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when there is no campaign-participation with the given id for the given campaign', function () {
-      beforeEach(async function () {
-        await mockLearningContent({ areas: [], competences: [], skills: [] });
-      });
-
       it('throws an NotFoundError error', async function () {
+        databaseBuilder.factory.learningContent.build({ areas: [], competences: [], skills: [] });
         const campaignId = databaseBuilder.factory.buildCampaign({ id: 1 }).id;
-
         const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({ id: 3, campaignId }).id;
-
         await databaseBuilder.commit();
+
         const error = await catchErr(CampaignProfileRepository.findProfile)({
           campaignId: 2,
           campaignParticipationId,
@@ -301,19 +296,15 @@ describe('Integration | Repository | CampaignProfileRepository', function () {
     });
 
     context('when the campaign-participation is deleted with the given id for the given campaign', function () {
-      beforeEach(async function () {
-        await mockLearningContent({ areas: [], competences: [], skills: [] });
-      });
-
       it('throws a NotFoundError error', async function () {
+        databaseBuilder.factory.learningContent.build({ areas: [], competences: [], skills: [] });
         const campaignId = databaseBuilder.factory.buildCampaign().id;
-
         const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
           campaignId,
           deletedAt: new Date('2022-01-01'),
         }).id;
-
         await databaseBuilder.commit();
+
         const error = await catchErr(CampaignProfileRepository.findProfile)({
           campaignId,
           campaignParticipationId,

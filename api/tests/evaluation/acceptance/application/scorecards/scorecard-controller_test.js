@@ -5,7 +5,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | scorecard-controller', function () {
@@ -100,8 +99,8 @@ describe('Acceptance | Controller | scorecard-controller', function () {
   beforeEach(async function () {
     server = await createServer();
     databaseBuilder.factory.buildUser({ id: userId });
+    databaseBuilder.factory.learningContent.build(learningContent);
     await databaseBuilder.commit();
-    await mockLearningContent(learningContent);
   });
 
   describe('GET /scorecards/{id}', function () {
