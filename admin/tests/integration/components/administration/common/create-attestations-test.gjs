@@ -34,6 +34,7 @@ module('Integration | Component | administration/create-attestations', function 
       });
 
       await triggerEvent(inputFile, 'change', { files: [file] });
+      await fillByLabel(t('components.administration.create-attestations.label'), 'label', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-key'), 'key', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-name'), 'name', { exact: false });
 
@@ -54,6 +55,7 @@ module('Integration | Component | administration/create-attestations', function 
       });
 
       await triggerEvent(inputFile, 'change', { files: [file] });
+      await fillByLabel(t('components.administration.create-attestations.label'), 'label', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-key'), 'key', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-name'), 'name', { exact: false });
 
@@ -72,13 +74,14 @@ module('Integration | Component | administration/create-attestations', function 
         name: t('components.administration.create-attestations.submit-button'),
       });
 
+      await fillByLabel(t('components.administration.create-attestations.label'), 'label', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-key'), 'key', { exact: false });
       await fillByLabel(t('components.administration.create-attestations.template-name'), 'name', { exact: false });
 
       assert.dom(submit).hasAttribute('aria-disabled');
     });
 
-    test('it should disable submit button if no key or name', async function (assert) {
+    test('it should disable submit button if no label, no key or no name', async function (assert) {
       const screen = await render(
         <template><CreateAttestations /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
       );
@@ -123,7 +126,7 @@ module('Integration | Component | administration/create-attestations', function 
     ].forEach(({ name, status, code, translationKey }) => {
       test(`it should display ${name} error`, async function (assert) {
         // given
-        requestManagerService.request.rejects({ status, code });
+        requestManagerService.request.rejects({ errors: [{ status, code }] });
 
         const screen = await render(
           <template><CreateAttestations /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
@@ -135,6 +138,7 @@ module('Integration | Component | administration/create-attestations', function 
         });
 
         await triggerEvent(inputFile, 'change', { files: [file] });
+        await fillByLabel(t('components.administration.create-attestations.label'), 'label', { exact: false });
         await fillByLabel(t('components.administration.create-attestations.template-key'), 'key', { exact: false });
         await fillByLabel(t('components.administration.create-attestations.template-name'), 'name', { exact: false });
 

@@ -219,6 +219,7 @@
       },
       "create-attestations": {
         "description": "Sollicitez un spécialiste des attestations",
+        "label": "Label",
         "notifications": {
           "error": {
             "duplicate-attestation-key": "Une attestation avec cette clé existe déjà.",

@@ -212,6 +212,7 @@
       },
       "create-attestations": {
         "description": "Ask for expert help if needed",
+        "label": "Label",
         "notifications": {
           "error": {
             "S3-upload-error": "File import error.",
