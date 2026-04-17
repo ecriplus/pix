@@ -29,6 +29,12 @@ export class JobClient {
   #isTestOnly = false;
   #isInitialized = false;
 
+  constructor(token) {
+    if (token !== JobClient.#constructorToken) {
+      throw new Error('Use JobClient.instance instead of new JobClient()');
+    }
+  }
+
   get jobGlobPatterns() {
     return [`${workerDirPath}/src/**/application/**/*job-controller.js`];
   }
@@ -269,4 +275,12 @@ export class JobClient {
     }
     return stats;
   }
+
+  static get instance() {
+    if (!JobClient.#jobClient) {
+      JobClient.#jobClient = new JobClient();
+    }
+    return JobClient.#jobClient;
+  }
+
 }
