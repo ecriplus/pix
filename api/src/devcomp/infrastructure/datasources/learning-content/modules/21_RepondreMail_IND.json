@@ -658,7 +658,7 @@
               "element": {
                 "id": "12d57a46-51d3-4376-a250-b897364c747f",
                 "type": "qrocm",
-                "instruction": "<p>Complétez le texte suivant.<br></p>",
+                "instruction": "<p>Complétez le texte suivant à partir des informations contenues dans le fil de discussion ci-dessus.</p>",
                 "proposals": [
                   {
                     "type": "text",
