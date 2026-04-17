@@ -37,13 +37,9 @@ export default class Details extends Component {
 
             <DescriptionList>
 
-              <DescriptionList.Divider />
-
               <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.itemId"}}>
                 {{@model.id}}
               </DescriptionList.Item>
-
-              <DescriptionList.Divider />
 
               <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.internal-name"}}>
                 {{@model.internalName}}
@@ -53,20 +49,15 @@ export default class Details extends Component {
                 {{@model.name}}
               </DescriptionList.Item>
 
-              <DescriptionList.Divider />
-
               <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.created-at"}}>
                 {{formatDate @model.createdAt}}
               </DescriptionList.Item>
-
-              <DescriptionList.Divider />
 
               <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.attestation"}}>
                 <SafeMarkdownToHtml @markdown={{@model.attestationLabel}} />
               </DescriptionList.Item>
 
               {{#if @model.description}}
-                <DescriptionList.Divider />
 
                 <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.description"}}>
                   <SafeMarkdownToHtml @markdown={{@model.description}} />
@@ -74,11 +65,9 @@ export default class Details extends Component {
               {{/if}}
 
               {{#if @model.illustration}}
-                <DescriptionList.Divider />
                 <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.illustration"}}>
                   <img src={{@model.illustration}} alt="" />
                 </DescriptionList.Item>
-                <DescriptionList.Divider />
               {{/if}}
 
             </DescriptionList>

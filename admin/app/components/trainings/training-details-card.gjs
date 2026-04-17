@@ -32,8 +32,6 @@ export default class TrainingDetailsCard extends Component {
     <div class="training-details-card__content">
       <DescriptionList>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label={{t "pages.trainings.training.details.title"}}>
           {{@training.title}}
         </DescriptionList.Item>
@@ -49,25 +47,17 @@ export default class TrainingDetailsCard extends Component {
           </a>
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label={{t "pages.trainings.training.details.contentType"}}>
           {{@training.type}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label={{t "pages.trainings.training.details.duration"}}>
           {{this.formattedDuration}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label={{t "pages.trainings.training.details.locales" count=@training.locales.length}}>
           {{this.formattedLocales}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label={{t "pages.trainings.training.details.editorName"}}>
           {{@training.editorName}}
@@ -84,8 +74,6 @@ export default class TrainingDetailsCard extends Component {
           </a>
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label={{t "pages.trainings.training.details.status"}}>
           {{if
             @training.isRecommendable
@@ -93,8 +81,6 @@ export default class TrainingDetailsCard extends Component {
             (t "pages.trainings.training.details.status-label.disabled")
           }}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
       </DescriptionList>
       <div class="training-details-card__editor-logo">

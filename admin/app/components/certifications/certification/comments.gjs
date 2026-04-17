@@ -39,25 +39,18 @@ export default class Comments extends Component {
     <PixBlock @variant="admin">
       <h2 class="certification-information__title">Commentaires jury</h2>
       <DescriptionList>
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label="Pour le candidat">
           {{@certification.commentForCandidate}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Pour l'organisation">
           {{@certification.commentForOrganization}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label="Identifiant jury">
           {{@certification.juryId}}
         </DescriptionList.Item>
-
-        <DescriptionList.Divider />
 
         {{#if this.isEditingJuryComment}}
           <DescriptionList.ItemWithHTMLElement>
@@ -78,7 +71,6 @@ export default class Comments extends Component {
           </DescriptionList.Item>
         {{/if}}
 
-        <DescriptionList.Divider />
       </DescriptionList>
 
       {{#if this.isEditingJuryComment}}

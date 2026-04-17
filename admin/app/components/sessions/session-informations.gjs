@@ -51,8 +51,6 @@ import JuryComment from './jury-comment';
           {{@sessionModel.accessCode}}
         </DescriptionList.Item>
 
-        <DescriptionList.Divider />
-
         <DescriptionList.Item @label={{t "pages.sessions.informations.labels.status"}}>
           {{@sessionModel.displayStatus}}
         </DescriptionList.Item>
@@ -78,8 +76,6 @@ import JuryComment from './jury-comment';
             {{formatDate @sessionModel.resultsSentToPrescriberAt}}
           </DescriptionList.Item>
         {{/if}}
-
-        <DescriptionList.Divider />
 
         <DescriptionList.Item @label={{t "pages.sessions.informations.labels.started-certifications"}}>
           {{@sessionModel.numberOfStartedCertifications}}
@@ -115,8 +111,6 @@ import JuryComment from './jury-comment';
             </DescriptionList.Item>
           {{/if}}
         {{/if}}
-
-        <DescriptionList.Divider />
 
       </DescriptionList>
 

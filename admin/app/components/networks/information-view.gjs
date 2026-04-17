@@ -9,8 +9,6 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
       {{@network.headOrganization.name}}
     </DescriptionList.Item>
 
-    <DescriptionList.Divider />
-
     <DescriptionList.Item
       @label={{t "components.networks.information-view.head-organization-id"}}
       @labelClass="network__information-view__head-organization-id__label"
@@ -27,6 +25,5 @@ import { DescriptionList } from 'pix-admin/components/ui/description-list';
       />
     </DescriptionList.Item>
 
-    <DescriptionList.Divider />
   </DescriptionList>
 </template>

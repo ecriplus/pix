@@ -76,19 +76,14 @@ export default class InformationView extends Component {
     {{/if}}
 
     <DescriptionList>
-      <DescriptionList.Divider />
 
       <DescriptionList.Item @label={{t "pages.certification-centers.information-view.list.type"}}>
         {{@certificationCenter.typeLabel}}
       </DescriptionList.Item>
 
-      <DescriptionList.Divider />
-
       <DescriptionList.Item @label={{t "pages.certification-centers.information-view.list.external-id"}}>
         {{@certificationCenter.externalId}}
       </DescriptionList.Item>
-
-      <DescriptionList.Divider />
 
       <DescriptionList.ItemWithHTMLElement>
         <:label>
@@ -113,8 +108,6 @@ export default class InformationView extends Component {
         </:value>
       </DescriptionList.ItemWithHTMLElement>
 
-      <DescriptionList.Divider />
-
       <DescriptionList.Item @label={{t "pages.certification-centers.information-view.habilitations.title"}}>
         <ul class="certification-center-information-display__habilitations-list">
           {{#each this.availableHabilitations as |habilitation|}}
@@ -126,8 +119,6 @@ export default class InformationView extends Component {
           {{/each}}
         </ul>
       </DescriptionList.Item>
-
-      <DescriptionList.Divider />
 
     </DescriptionList>
 
