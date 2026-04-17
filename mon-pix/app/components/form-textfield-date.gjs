@@ -36,7 +36,7 @@ export default class FormTextfieldDate extends Component {
         <PixInput
           min="1"
           max="31"
-          id={{@dayTextfieldName}}
+          @id={{@dayTextfieldName}}
           type="number"
           @value={{@dayValue}}
           name={{@dayTextfieldName}}
@@ -46,14 +46,16 @@ export default class FormTextfieldDate extends Component {
           @validationStatus={{@dayValidationStatus}}
           required={{@require}}
           disabled={{@disabled}}
-          aria-label={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.day.label"}}
+          @screenReaderOnly={{true}}
           placeholder={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.day.placeholder"}}
-        />
+        >
+          <:label>{{t "pages.sco-signup-or-login.signup-form.fields.birthdate.day.label"}}</:label>
+        </PixInput>
 
         <PixInput
           min="1"
           max="12"
-          id={{@monthTextfieldName}}
+          @id={{@monthTextfieldName}}
           type="number"
           @value={{@monthValue}}
           name={{@monthTextfieldName}}
@@ -63,13 +65,15 @@ export default class FormTextfieldDate extends Component {
           @validationStatus={{@monthValidationStatus}}
           required={{@require}}
           disabled={{@disabled}}
-          aria-label={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.month.label"}}
+          @screenReaderOnly={{true}}
           placeholder={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.month.placeholder"}}
-        />
+        >
+          <:label>{{t "pages.sco-signup-or-login.signup-form.fields.birthdate.month.label"}}</:label>
+        </PixInput>
 
         <PixInput
           min="1900"
-          id={{@yearTextfieldName}}
+          @id={{@yearTextfieldName}}
           type="number"
           @value={{@yearValue}}
           name={{@yearTextfieldName}}
@@ -79,9 +83,11 @@ export default class FormTextfieldDate extends Component {
           aria-describedby={{@aria-describedby}}
           required={{@require}}
           disabled={{@disabled}}
-          aria-label={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.year.label"}}
+          @screenReaderOnly={{true}}
           placeholder={{t "pages.sco-signup-or-login.signup-form.fields.birthdate.year.placeholder"}}
-        />
+        >
+          <:label>{{t "pages.sco-signup-or-login.signup-form.fields.birthdate.year.label"}}</:label>
+        </PixInput>
       </div>
 
       {{#if @dayValidationMessage}}

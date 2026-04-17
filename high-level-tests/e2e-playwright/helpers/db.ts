@@ -6,7 +6,12 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../api/src/identity-access-ma
 import { AuthenticationMethod } from '../../../api/src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { buildCertificationData } from './certification/db.ts';
 import { PIX_ADMIN_SUPPORT_DATA, PIX_APP_USER_DATA, PIX_ORGA_ADMIN_DATA, PIX_ORGA_MEMBER_DATA } from './db-data.js';
-import { createCertificationCenterInDB, createCertificationCenterMembershipInDB, createUserInDB } from './db-utils.ts';
+import {
+  createCertificationCenterInDB,
+  createCertificationCenterMembershipInDB,
+  createOrganizationLearnerInDB,
+  createUserInDB,
+} from './db-utils.ts';
 
 export const knex = Knex({ client: 'postgresql', connection: process.env.DATABASE_URL });
 
@@ -36,6 +41,52 @@ export async function buildFreshPixAppUser(
       pixCertifTermsOfServiceAccepted: false,
       mustValidateTermsOfService: mustRevalidateCgu,
       id: undefined,
+    },
+    knex,
+  );
+}
+
+export async function buildExistingOrganizationLearner({
+  firstName,
+  lastName,
+  nationalStudentId,
+  email,
+  birthdate,
+  isDisabled,
+  rawPassword,
+  organizationId,
+}: {
+  firstName: string;
+  lastName: string;
+  birthdate?: string;
+  nationalStudentId: string;
+  email: string;
+  isDisabled: boolean;
+  rawPassword: string;
+  organizationId: number;
+}) {
+  const userId = await createUserInDB(
+    {
+      firstName,
+      lastName,
+      email,
+      rawPassword,
+      cgu: true,
+      pixCertifTermsOfServiceAccepted: false,
+      mustValidateTermsOfService: false,
+    },
+    knex,
+  );
+
+  return await createOrganizationLearnerInDB(
+    {
+      firstName,
+      lastName,
+      nationalStudentId,
+      birthdate,
+      userId,
+      isDisabled,
+      organizationId,
     },
     knex,
   );
@@ -92,7 +143,7 @@ export async function buildFreshPixOrgaUser(
     organizationId,
   }));
   await knex('target-profile-shares').insert(targetProfileSharesToInsert);
-  return { userId, targetProfileId: targetProfileIds[0] };
+  return { userId, targetProfileId: targetProfileIds[0], organizationId };
 }
 
 export async function buildFreshPixOrgaUserWithGenericImport(

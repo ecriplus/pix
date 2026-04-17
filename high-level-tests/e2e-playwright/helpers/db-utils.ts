@@ -64,6 +64,42 @@ export async function createUserInDB(
   return userId;
 }
 
+export async function createOrganizationLearnerInDB(
+  {
+    firstName,
+    lastName,
+    userId,
+    birthdate,
+    organizationId,
+    nationalStudentId,
+    isDisabled,
+  }: {
+    firstName: string;
+    lastName: string;
+    userId?: number;
+    birthdate?: string;
+    nationalStudentId: string;
+    organizationId: number;
+    isDisabled: boolean;
+  },
+  knex: Knex,
+) {
+  const someDate = new Date();
+  return await knex('organization-learners')
+    .insert({
+      firstName,
+      lastName,
+      userId: userId ?? null,
+      birthdate: birthdate ?? null,
+      isDisabled,
+      nationalStudentId,
+      organizationId,
+      createdAt: someDate,
+      updatedAt: someDate,
+    })
+    .returning('*');
+}
+
 export async function createCertificationCenterInDB(
   {
     type,

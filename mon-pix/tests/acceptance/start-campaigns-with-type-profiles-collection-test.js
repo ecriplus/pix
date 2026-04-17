@@ -122,9 +122,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
                 campaignParticipant.firstName,
               );
               await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
-              await fillIn(screen.getByRole('textbox', { name: DAY_BIRTH_INPUT_LABEL }), '10');
-              await fillIn(screen.getByRole('textbox', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
-              await fillIn(screen.getByRole('textbox', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
+              await fillIn(screen.getByRole('spinbutton', { name: DAY_BIRTH_INPUT_LABEL }), '10');
+              await fillIn(screen.getByRole('spinbutton', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
+              await fillIn(screen.getByRole('spinbutton', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
               await click(screen.getByRole('button', { name: 'Associer' }));
 
@@ -211,9 +211,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), 'Robert');
             await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), 'Smith');
-            await fillIn(screen.getByRole('textbox', { name: DAY_BIRTH_INPUT_LABEL }), '10');
-            await fillIn(screen.getByRole('textbox', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
-            await fillIn(screen.getByRole('textbox', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: DAY_BIRTH_INPUT_LABEL }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Associer' }));
 
@@ -241,9 +241,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               // when
               await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), 'Robert');
               await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), 'Smith');
-              await fillIn(screen.getByRole('textbox', { name: DAY_BIRTH_INPUT_LABEL }), '10');
-              await fillIn(screen.getByRole('textbox', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
-              await fillIn(screen.getByRole('textbox', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
+              await fillIn(screen.getByRole('spinbutton', { name: DAY_BIRTH_INPUT_LABEL }), '10');
+              await fillIn(screen.getByRole('spinbutton', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
+              await fillIn(screen.getByRole('spinbutton', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
 
               //then
@@ -258,9 +258,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               // when
               await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), 'Robert');
               await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), 'Smith');
-              await fillIn(screen.getByRole('textbox', { name: DAY_BIRTH_INPUT_LABEL }), '10');
-              await fillIn(screen.getByRole('textbox', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
-              await fillIn(screen.getByRole('textbox', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
+              await fillIn(screen.getByRole('spinbutton', { name: DAY_BIRTH_INPUT_LABEL }), '10');
+              await fillIn(screen.getByRole('spinbutton', { name: MONTH_BIRTH_INPUT_LABEL }), '12');
+              await fillIn(screen.getByRole('spinbutton', { name: YEAR_BIRTH_INPUT_LABEL }), '2000');
               await click(screen.getByRole('button', { name: "C'est parti !" }));
               await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 

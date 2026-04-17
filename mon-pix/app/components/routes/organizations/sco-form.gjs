@@ -72,7 +72,9 @@ export default class ScoForm extends Component {
         <div class="join-restricted-campaign__birthdate">
           <PixInput
             @id="dayOfBirth"
-            type="text"
+            min="1"
+            max="31"
+            type="number"
             placeholder={{t "pages.join.fields.birthdate.day-format"}}
             @value={{this.dayOfBirth}}
             @validationStatus={{if this.validation.dayOfBirth "error" "default"}}
@@ -84,7 +86,9 @@ export default class ScoForm extends Component {
           </PixInput>
           <PixInput
             @id="monthOfBirth"
-            type="text"
+            type="number"
+            min="1"
+            max="12"
             placeholder={{t "pages.join.fields.birthdate.month-format"}}
             @value={{this.monthOfBirth}}
             @validationStatus={{if this.validation.monthOfBirth "error" "default"}}
@@ -95,8 +99,9 @@ export default class ScoForm extends Component {
             <:label>{{t "pages.join.fields.birthdate.month-label"}}</:label>
           </PixInput>
           <PixInput
+            min="1900"
             @id="yearOfBirth"
-            type="text"
+            type="number"
             placeholder={{t "pages.join.fields.birthdate.year-format"}}
             @value={{this.yearOfBirth}}
             @validationStatus={{if this.validation.yearOfBirth "error" "default"}}

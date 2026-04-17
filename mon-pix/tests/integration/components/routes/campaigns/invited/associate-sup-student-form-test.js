@@ -109,9 +109,9 @@ module('Integration | Component | routes/organizations/invited/associate-sup-stu
     await fillIn(screen.getByRole('textbox', { name: 'Numéro étudiant' }), 'F100');
     await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Jean');
     await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Bon');
-    await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '01');
-    await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '01');
-    await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+    await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '01');
+    await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '01');
+    await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
     await click(screen.getByRole('button', { name: "C'est parti !" }));
   }
 });

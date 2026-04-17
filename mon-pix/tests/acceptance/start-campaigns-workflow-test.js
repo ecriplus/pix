@@ -338,9 +338,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             // when
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Jane');
             await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Acme');
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Associer' }));
 
@@ -589,9 +589,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Robert');
             await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Smith');
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
 
             // when
             await click(screen.getByRole('button', { name: "C'est parti !" }));
@@ -678,9 +678,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           await fillIn(screen.getByRole('textbox', { name: 'Numéro étudiant' }), 'F100');
           await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Jean');
           await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Bon');
-          await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '01');
-          await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '01');
-          await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+          await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '01');
+          await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '01');
+          await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
           await click(screen.getByRole('button', { name: "C'est parti !" }));
 
           // then
@@ -922,9 +922,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
 
             //then
@@ -1057,9 +1057,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
@@ -1098,9 +1098,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 
@@ -1131,9 +1131,9 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: t('pages.fill-in-campaign-code.start') }));
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: "C'est parti !" }));
             await click(screen.getByRole('button', { name: 'Continuer avec mon compte Pix' }));
 

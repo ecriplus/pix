@@ -18,4 +18,13 @@ export class HomePage {
 
     return new CertificateListPage(this.page);
   }
+
+  async logout(baseUrl?: RegExp) {
+    await this.page.getByRole('button', { name: /Consulter mes informations/i }).click();
+    await this.page.getByRole('link', { name: 'Se déconnecter' }).click();
+
+    const waitForUrl = new RegExp(baseUrl ?? /\/?lang=fr/);
+
+    await this.page.waitForURL(waitForUrl);
+  }
 }

@@ -207,9 +207,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             await click(screen.getByRole('button', { name: 'Je commence' }));
             await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), 'Rober');
             await fillIn(screen.getByRole('textbox', { name: 'Nom' }), 'Smith');
-            await fillIn(screen.getByRole('textbox', { name: 'jour de naissance' }), '10');
-            await fillIn(screen.getByRole('textbox', { name: 'mois de naissance' }), '12');
-            await fillIn(screen.getByRole('textbox', { name: 'année de naissance' }), '2000');
+            await fillIn(screen.getByRole('spinbutton', { name: 'jour de naissance' }), '10');
+            await fillIn(screen.getByRole('spinbutton', { name: 'mois de naissance' }), '12');
+            await fillIn(screen.getByRole('spinbutton', { name: 'année de naissance' }), '2000');
             await click(screen.getByRole('button', { name: t('pages.join.button') }));
             await click(screen.getByRole('button', { name: t('pages.join.sco.associate') }));
             await fillIn(screen.getByRole('textbox', { name: /nom de naissance de maman/ }), 'truc');
