@@ -11,6 +11,7 @@ export class AdminCombinedCourseBlueprint {
     illustration,
     content,
     attestationKey,
+    attestationLabel,
     createdAt,
     updatedAt,
     organizationIds = [],
@@ -23,6 +24,7 @@ export class AdminCombinedCourseBlueprint {
     this.organizationIds = organizationIds;
     this.content = content;
     this.attestationKey = attestationKey;
+    this.attestationLabel = attestationLabel;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -36,7 +38,7 @@ export class AdminCombinedCourseBlueprint {
     return Joi.attempt(data, contentSchema);
   }
 
-  static buildFromBlueprint({ combinedCourseBlueprint, modulesById, attestationKey }) {
+  static buildFromBlueprint({ combinedCourseBlueprint, modulesById, attestationLabel }) {
     const items = combinedCourseBlueprint.quest.successRequirements.map((requirement) => {
       if (requirement.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
         return { targetProfileId: requirement.data.targetProfileId.data };
@@ -47,7 +49,7 @@ export class AdminCombinedCourseBlueprint {
     });
 
     const content = AdminCombinedCourseBlueprint.buildContentItems(items);
-    return new AdminCombinedCourseBlueprint({ ...combinedCourseBlueprint, content, attestationKey });
+    return new AdminCombinedCourseBlueprint({ ...combinedCourseBlueprint, content, attestationLabel });
   }
 }
 

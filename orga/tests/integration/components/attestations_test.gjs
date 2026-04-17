@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import Attestations, {
@@ -13,26 +12,29 @@ import setupIntlRenderingTest from '../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Attestations', function (hooks) {
   setupIntlRenderingTest(hooks);
-
-  hooks.beforeEach(function () {
-    class CurrentUserStub extends Service {
-      prescriber = { availableAttestations: [SIXTH_GRADE_ATTESTATION_KEY] };
-    }
-
-    this.owner.register('service:current-user', CurrentUserStub);
-  });
+  const availableAttestations = [{ key: SIXTH_GRADE_ATTESTATION_KEY, label: '6ème' }];
 
   module('when organization has divisions, SIXTH_GRADE attestation and another attestation', function () {
     test('it displays both way to download attestations', async function (assert) {
       // given
       const noop = sinon.stub();
-      const currentUser = this.owner.lookup('service:current-user');
-      currentUser.prescriber.availableAttestations = [SIXTH_GRADE_ATTESTATION_KEY, PARENTHOOD_ATTESTATION_KEY];
+      const availableAttestations2 = [
+        { key: SIXTH_GRADE_ATTESTATION_KEY, label: '6ème' },
+        { key: PARENTHOOD_ATTESTATION_KEY, label: 'Parentalité' },
+      ];
+
       const divisions = [];
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @divisions={{divisions}}
+            @onSubmit={{noop}}
+            @onFilter={{noop}}
+            @availableAttestations={{availableAttestations2}}
+          />
+        </template>,
       );
 
       // then
@@ -49,7 +51,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @divisions={{divisions}}
+            @onSubmit={{onSubmit}}
+            @onFilter={{noop}}
+            @availableAttestations={{availableAttestations}}
+          />
+        </template>,
       );
 
       // then
@@ -65,7 +74,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @divisions={{divisions}}
+            @onSubmit={{noop}}
+            @onFilter={{noop}}
+            @availableAttestations={{availableAttestations}}
+          />
+        </template>,
       );
 
       // then
@@ -84,7 +100,14 @@ module('Integration | Component | Attestations', function (hooks) {
 
       // when
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{onSubmit}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @divisions={{divisions}}
+            @onSubmit={{onSubmit}}
+            @onFilter={{noop}}
+            @availableAttestations={{availableAttestations}}
+          />
+        </template>,
       );
 
       const multiSelect = await screen.getByRole('button', { name: t('pages.attestations.select-divisions-label') });
@@ -114,7 +137,14 @@ module('Integration | Component | Attestations', function (hooks) {
       // when
 
       const screen = await render(
-        <template><Attestations @divisions={{divisions}} @onSubmit={{noop}} @onFilter={{noop}} /></template>,
+        <template>
+          <Attestations
+            @divisions={{divisions}}
+            @onSubmit={{noop}}
+            @onFilter={{noop}}
+            @availableAttestations={{availableAttestations}}
+          />
+        </template>,
       );
       // then
       assert.notOk(screen.queryByRole('button', { name: t('pages.attestations.select-divisions-label') }));
@@ -128,6 +158,7 @@ module('Integration | Component | Attestations', function (hooks) {
       // given
       const noop = sinon.stub();
       const onSubmit = sinon.stub();
+      const currentAttestation = { label: '6ème', key: SIXTH_GRADE_ATTESTATION_KEY };
 
       const divisions = undefined;
 
@@ -135,10 +166,11 @@ module('Integration | Component | Attestations', function (hooks) {
       const screen = await render(
         <template>
           <Attestations
-            @attestationKey={{SIXTH_GRADE_ATTESTATION_KEY}}
+            @currentAttestation={{currentAttestation}}
             @divisions={{divisions}}
             @onSubmit={{onSubmit}}
             @onFilter={{noop}}
+            @availableAttestations={{availableAttestations}}
           />
         </template>,
       );
@@ -150,9 +182,7 @@ module('Integration | Component | Attestations', function (hooks) {
       const select = await screen.getByLabelText(t('pages.attestations.select-label'));
       await click(select);
 
-      const firstOption = await screen.findByRole('option', {
-        name: t('pages.attestations.' + SIXTH_GRADE_ATTESTATION_KEY),
-      });
+      const firstOption = await screen.findByRole('option', { name: '6ème' });
       await click(firstOption);
 
       await click(downloadButton);

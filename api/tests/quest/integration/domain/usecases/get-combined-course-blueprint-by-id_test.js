@@ -21,7 +21,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
     //given
     const { id: targetProfileId } = await databaseBuilder.factory.buildTargetProfile({ name: 'Mon profil cible' });
 
-    const { id: rewardId, key: attestationKey } = await databaseBuilder.factory.buildAttestation();
+    const { id: rewardId, label: attestationLabel } = await databaseBuilder.factory.buildAttestation();
 
     const quest = databaseBuilder.factory.buildQuest({
       rewardType: REWARD_TYPES.ATTESTATION,
@@ -56,7 +56,7 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
       createdAt: now,
       updatedAt: now,
       organizationIds: [],
-      attestationKey,
+      attestationLabel,
     });
     expect(adminCombinedCourseBlueprint.content).to.deep.equal(
       AdminCombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { moduleShortId: 'e074af34' }]),

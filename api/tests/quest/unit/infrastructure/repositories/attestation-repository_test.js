@@ -10,14 +10,22 @@ describe('Quest | Unit | Infrastructure | Repositories | attestation-repository'
     rewardApiStub = {
       getByIdAndType: sinon
         .stub()
-        .resolves(new Attestation({ id: 1, templateName: 'templateName', key: 'KEY', createdAt: now })),
+        .resolves(
+          new Attestation({ id: 1, templateName: 'templateName', key: 'KEY', label: 'attestation', createdAt: now }),
+        ),
     };
   });
   describe('#getByRewardId', function () {
     it('should return an attestation key if reward id exists', async function () {
       const result = await attestationRepository.getByRewardId({ rewardId: 1, rewardApi: rewardApiStub });
       expect(result).to.be.instanceOf(Attestation);
-      expect(result).to.deep.equal({ id: 1, templateName: 'templateName', key: 'KEY', createdAt: now });
+      expect(result).to.deep.equal({
+        id: 1,
+        templateName: 'templateName',
+        key: 'KEY',
+        label: 'attestation',
+        createdAt: now,
+      });
     });
   });
 });

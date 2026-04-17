@@ -18,6 +18,7 @@ describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', funct
         illustration: 'illustration',
         content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: '123' }]),
         attestationKey: ATTESTATIONS.PARENTHOOD,
+        attestationLabel: 'Parentalité',
         createdAt: new Date(),
         updatedAt: new Date(),
         organizationIds: [],
@@ -71,7 +72,7 @@ describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', funct
       const readyToSerialize = AdminCombinedCourseBlueprint.buildFromBlueprint({
         combinedCourseBlueprint,
         modulesById: { 'completeId-az-123': [{ shortId: 'az-123' }] },
-        attestationKey: 'PARENTHOOD',
+        attestationLabel: 'Parentalité',
       });
 
       // then
@@ -79,7 +80,7 @@ describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', funct
         new AdminCombinedCourseBlueprint({
           ...combinedCourseBlueprint,
           content: expectedContent,
-          attestationKey: 'PARENTHOOD',
+          attestationLabel: 'Parentalité',
         }),
       );
     });

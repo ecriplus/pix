@@ -27,7 +27,10 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
     const findRecordStub = sinon.stub(store, 'findRecord');
-    const attestations = [{ key: 'PARENTHOOD' }, { key: 'SIXTH_GRADE' }];
+    const attestations = [
+      { key: 'PARENTHOOD', label: 'Parentalite' },
+      { key: 'SIXTH_GRADE', label: '6eme' },
+    ];
     findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
     findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
 
@@ -64,7 +67,7 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
 
     await screen.findByRole('listbox');
 
-    await click(screen.getByRole('option', { name: 'PARENTHOOD' }));
+    await click(screen.getByRole('option', { name: 'Parentalite' }));
 
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 

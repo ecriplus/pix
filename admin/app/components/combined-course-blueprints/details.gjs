@@ -62,7 +62,7 @@ export default class Details extends Component {
               <DescriptionList.Divider />
 
               <DescriptionList.Item @label={{t "components.combined-course-blueprints.labels.attestation"}}>
-                <SafeMarkdownToHtml @markdown={{@model.attestationKey}} />
+                <SafeMarkdownToHtml @markdown={{@model.attestationLabel}} />
               </DescriptionList.Item>
 
               {{#if @model.description}}

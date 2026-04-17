@@ -27,8 +27,8 @@ module('Integration | Component | organizations/features-section', function (hoo
     findAllStub
       .withArgs('attestation')
       .resolves([
-        store.createRecord('attestation', { id: '1', key: 'PARENTHOOD' }),
-        store.createRecord('attestation', { id: '2', key: 'SIXTH_GRADE' }),
+        store.createRecord('attestation', { id: '1', key: 'PARENTHOOD', label: 'Parentalité' }),
+        store.createRecord('attestation', { id: '2', key: 'SIXTH_GRADE', label: '6ème' }),
       ]);
 
     class AccessControlStub extends Service {
@@ -339,6 +339,31 @@ module('Integration | Component | organizations/features-section', function (hoo
           }),
         )
         .exists();
+    });
+
+    test('it displays attestation labels after clicking on PixMultiSelect', async function (assert) {
+      // given
+      const onSubmit = onSubmitStub;
+      const organization = EmberObject.create({
+        features: { ATTESTATIONS_MANAGEMENT: { active: true, params: ['PARENTHOOD'] } },
+      });
+
+      // when
+      const screen = await render(
+        <template><FeaturesSection @organization={{organization}} @onSubmit={{onSubmit}} /></template>,
+      );
+
+      await click(
+        screen.getByRole('button', {
+          name: new RegExp(t('components.organizations.editing.attestations.selector.label')),
+        }),
+      );
+
+      await screen.findAllByRole('menuitem');
+
+      //then
+      assert.ok(screen.getByRole('menuitem', { name: 'Parentalité' }));
+      assert.ok(screen.getByRole('menuitem', { name: '6ème' }));
     });
 
     test('it disables the PixMultiSelect when user has no access', async function (assert) {

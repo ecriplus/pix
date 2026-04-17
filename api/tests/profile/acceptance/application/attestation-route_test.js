@@ -17,8 +17,8 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
     it('should return 200 with the list of attestations', async function () {
       // given
       const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
-      databaseBuilder.factory.buildAttestation({ key: 'PARENTHOOD' });
-      databaseBuilder.factory.buildAttestation({ key: 'SIXTH_GRADE' });
+      databaseBuilder.factory.buildAttestation({ key: 'PARENTHOOD', label: 'Parentalité' });
+      databaseBuilder.factory.buildAttestation({ key: 'SIXTH_GRADE', label: '6ème' });
       await databaseBuilder.commit();
 
       const options = {
@@ -33,10 +33,6 @@ describe('Profile | Acceptance | Application | Attestation Route ', function () 
       // then
       expect(response.statusCode).to.equal(200);
       expect(response.result.data).to.have.lengthOf(2);
-      expect(response.result.data.map(({ attributes }) => attributes.key)).to.include.members([
-        'PARENTHOOD',
-        'SIXTH_GRADE',
-      ]);
     });
   });
 

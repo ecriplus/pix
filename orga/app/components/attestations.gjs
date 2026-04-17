@@ -21,23 +21,19 @@ export default class Attestations extends Component {
 
   get displaySixthGrade() {
     return (
-      this.currentUser.prescriber.availableAttestations.includes(SIXTH_GRADE_ATTESTATION_KEY) &&
+      this.args.availableAttestations.some((attestation) => attestation.key === SIXTH_GRADE_ATTESTATION_KEY) &&
       this.args.divisions != undefined
     );
   }
 
-  get attestationName() {
-    return this.intl.t('pages.attestations.' + this.args.attestationKey);
-  }
-
   get availableAttestations() {
     if (this.displaySixthGrade) {
-      const attestations = this.currentUser.prescriber.availableAttestations.filter(
-        (attestation) => attestation != SIXTH_GRADE_ATTESTATION_KEY,
+      const attestations = this.args.availableAttestations.filter(
+        (attestation) => attestation.key != SIXTH_GRADE_ATTESTATION_KEY,
       );
       return attestations;
     }
-    return this.currentUser.prescriber.availableAttestations;
+    return this.args.availableAttestations;
   }
 
   get displayAttestations() {
@@ -65,7 +61,7 @@ export default class Attestations extends Component {
       {{#if this.displayAttestations}}
         <OtherAttestations
           @attestations={{this.availableAttestations}}
-          @selectedAttestation={{@attestationKey}}
+          @selectedAttestation={{@currentAttestation.key}}
           @onFilter={{@onFilter}}
           @onSubmit={{@onSubmit}}
         />
@@ -74,7 +70,7 @@ export default class Attestations extends Component {
 
     <section class="attestation-page__list">
       <h2 class="attestations-page__section-title attestations-page__section-title--list">
-        {{t "pages.attestations.section.list" attestationName=this.attestationName}}
+        {{t "pages.attestations.section.list" attestationName=@currentAttestation.label}}
       </h2>
       <List
         @participantStatuses={{@participantStatuses}}
@@ -94,8 +90,8 @@ class OtherAttestations extends Component {
 
   get options() {
     return this.args.attestations.map((attestation) => ({
-      value: attestation,
-      label: this.intl.t('pages.attestations.' + attestation),
+      value: attestation.key,
+      label: attestation.label,
     }));
   }
 

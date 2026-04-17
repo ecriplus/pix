@@ -33,6 +33,7 @@ async function buildParenthoodQuest(databaseBuilder) {
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
     templateName: 'parenthood-attestation-template',
     key: ATTESTATIONS.PARENTHOOD,
+    label: 'Parentalité',
   });
 
   const cappedTubes = await knex('target-profile_tubes')
@@ -414,6 +415,7 @@ export const buildQuests = async (databaseBuilder) => {
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
     templateName: 'sixth-grade-attestation-template',
     key: ATTESTATIONS.SIXTH_GRADE,
+    label: '6ème',
   });
 
   // Create quests
@@ -464,21 +466,45 @@ export const buildQuests = async (databaseBuilder) => {
   });
 
   const attestationsData = [
-    { templateName: 'edu-incontournables-attestation-template', key: 'EDUINCONTOURNABLES' },
-    { templateName: 'edu-documents-attestation-template', key: 'EDUDOC' },
-    { templateName: 'edu-veille-attestation-template', key: 'EDUVEILLE' },
-    { templateName: 'edu-culture-numerique-attestation-template', key: 'EDUCULTURENUM' },
-    { templateName: 'edu-ressources-attestation-template', key: 'EDURESSOURCES' },
-    { templateName: 'edu-supports-attestation-template', key: 'EDUSUPPORT' },
-    { templateName: 'edu-securite-attestation-template', key: 'EDUSECU' },
-    { templateName: 'edu-collaborer-attestation-template', key: 'EDUCOLLAB' },
-    { templateName: 'edu-ia-attestation-template', key: 'EDUIA' },
-    { templateName: 'minarm-attestation-template', key: 'MINARM' },
-    { templateName: 'mdp-bureautique-attestation-template', key: 'MAIRIEBUREAU' },
+    {
+      templateName: 'edu-incontournables-attestation-template',
+      key: 'EDUINCONTOURNABLES',
+      label: 'Pix+Edu - Les incontournables',
+    },
+    { templateName: 'edu-documents-attestation-template', key: 'EDUDOC', label: 'Pix+Edu - Adapter les documents' },
+    { templateName: 'edu-veille-attestation-template', key: 'EDUVEILLE', label: 'Pix+Edu - Réaliser une veille' },
+    {
+      templateName: 'edu-culture-numerique-attestation-template',
+      key: 'EDUCULTURENUM',
+      label: 'Pix+Edu - Culture numérique',
+    },
+    {
+      templateName: 'edu-ressources-attestation-template',
+      key: 'EDURESSOURCES',
+      label: 'Pix+Edu - Gestion et partage de ressources',
+    },
+    {
+      templateName: 'edu-supports-attestation-template',
+      key: 'EDUSUPPORT',
+      label: 'Pix+Edu - Créer des supports pédagogiques',
+    },
+    { templateName: 'edu-securite-attestation-template', key: 'EDUSECU', label: 'Pix+Edu - Numérique et sécurité' },
+    {
+      templateName: 'edu-collaborer-attestation-template',
+      key: 'EDUCOLLAB',
+      label: 'Pix+Edu - Communiquer collaborer',
+    },
+    { templateName: 'edu-ia-attestation-template', key: 'EDUIA', label: 'Pix+Edu - Données, algorithmes et IA' },
+    { templateName: 'minarm-attestation-template', key: 'MINARM', label: 'Socle numérique' },
+    {
+      templateName: 'mdp-bureautique-attestation-template',
+      key: 'MAIRIEBUREAU',
+      label: 'Mairie de Paris - Fondamentaux bureautiques',
+    },
   ];
 
-  const educationAttestations = attestationsData.map(({ templateName, key }) =>
-    databaseBuilder.factory.buildAttestation({ templateName, key }),
+  const educationAttestations = attestationsData.map(({ templateName, key, label }) =>
+    databaseBuilder.factory.buildAttestation({ templateName, key, label }),
   );
 
   // Create user with all available attestations

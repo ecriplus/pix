@@ -10,6 +10,8 @@ import setupIntl from '../helpers/setup-intl';
 import { createPrescriberByUser, createUserManagingStudents } from '../helpers/test-init';
 
 module('Acceptance | Attestations', function (hooks) {
+  let prescriber;
+
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
@@ -34,27 +36,31 @@ module('Acceptance | Attestations', function (hooks) {
         name: '5eme',
       });
       server.create('member-identity', { id: user.id, firstName: user.firstName, lastName: user.lastName });
+      server.create('attestation', {
+        label: '6eme',
+        key: 'SIXTH_GRADE',
+      });
       server.create('attestation-participant-status', {
         firstName: 'Jean',
         lastName: 'LastName1',
         obtainedAt: null,
         division: '6eme',
+        attestationKey: 'SIXTH_GRADE',
       });
       server.create('attestation-participant-status', {
         firstName: 'Eude',
         lastName: 'LastName2',
         obtainedAt: '2024-01-01',
         division: '5eme',
+        attestationKey: 'SIXTH_GRADE',
       });
-      const prescriber = createPrescriberByUser({ user });
+      prescriber = createPrescriberByUser({ user });
       prescriber.features = {
         ...prescriber.features,
         ATTESTATIONS_MANAGEMENT: { active: true, params: ['SIXTH_GRADE'] },
       };
       await authenticateSession(user.id);
     });
-
-    hooks.afterEach(function () {});
 
     test('it should be accessible for an authenticated prescriber', async function (assert) {
       // when
@@ -135,6 +141,37 @@ module('Acceptance | Attestations', function (hooks) {
         // then
         assert.ok(screen.getByRole('cell', { name: 'Jean' }));
         assert.notOk(screen.queryByRole('cell', { name: 'Eude' }));
+      });
+
+      test('should be possible to filter by attestation name', async function (assert) {
+        // given
+        prescriber.features.ATTESTATIONS_MANAGEMENT = {
+          active: true,
+          params: ['SIXTH_GRADE', 'ATTESTATION_KEY_1'],
+        };
+        server.create('attestation', {
+          label: 'Label attestation',
+          key: 'ATTESTATION_KEY_1',
+        });
+        server.create('attestation-participant-status', {
+          firstName: 'Claude',
+          lastName: 'LastName2',
+          obtainedAt: '2024-01-01',
+          division: '5eme',
+          attestationKey: 'ATTESTATION_KEY_1',
+        });
+        const screen = await visit('/attestations');
+
+        // when
+        await click(screen.getByLabelText(t('pages.attestations.select-label')));
+
+        await screen.findByRole('listbox');
+
+        await click(screen.getByRole('option', { name: 'Label attestation' }));
+
+        // then
+        assert.notOk(screen.queryByRole('cell', { name: 'Jean' }));
+        assert.ok(screen.getByRole('cell', { name: 'Claude' }));
       });
 
       module('when prescriber click on reset filters', function () {
