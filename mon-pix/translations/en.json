@@ -691,6 +691,7 @@
       "frameworks": {
         "EDU": {
           "results-infos": "'<p>'The certification takes place in two stages:'</p><ol><li>'Pix assessment: just completed.'</li><li>'Oral assessment: organised outside of Pix before a panel.'</li></ol><p>'At the end of the oral, your final certification level will be awarded (Expert, Advanced, etc.).'<br/>'Contact your certification centre to organise the oral assessment.'</p>'",
+          "results-sub-title": "The candidate is eligible for the 2nd stage of the Pix+ Édu certification!",
           "status": "Valid certificate",
           "steps": {
             "1": "Pix component",

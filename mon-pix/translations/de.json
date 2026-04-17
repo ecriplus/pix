@@ -690,6 +690,7 @@
       "frameworks": {
         "EDU": {
           "results-infos": "'<p>'Die Zertifizierung erfolgt in zwei Stufen:'</p><ol><li>'Pix-Prüfung: gerade abgeschlossen.'</li><li>'Mündliche Prüfung: außerhalb von Pix vor einer Jury organisiert.'</li></ol><p>'Am Ende der mündlichen Prüfung wird Ihr endgültiges Zertifizierungsniveau vergeben (Experte, Fortgeschritten usw.).'<br/>'Wenden Sie sich an Ihr Zertifizierungszentrum, um die mündliche Prüfung zu organisieren.'</p>'",
+          "results-sub-title": "Der Kandidat ist für die 2. Stufe der Pix+ Édu-Zertifizierung zugelassen!",
           "status": "Gültiges Zertifikat",
           "steps": {
             "1": "Pix-Teil",

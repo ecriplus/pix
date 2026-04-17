@@ -688,6 +688,7 @@
       "frameworks": {
         "EDU": {
           "results-infos": "'<p>'La certificación se desarrolla en dos etapas:'</p><ol><li>'Prueba Pix: acaba de realizarla.'</li><li>'Prueba oral: organizada fuera de Pix ante un tribunal.'</li></ol><p>'Al finalizar la prueba oral, se le otorgará su nivel de certificación definitivo (Experto, Avanzado, etc.).'<br/>'Contacte con su centro de certificación para organizar la prueba oral.'</p>'",
+          "results-sub-title": "¡El candidato es admisible para la 2.ª etapa de la certificación Pix+ Édu!",
           "status": "Certificado válido",
           "sub-title": "¡El candidato es admisible para la 2.ª etapa!"
         }
