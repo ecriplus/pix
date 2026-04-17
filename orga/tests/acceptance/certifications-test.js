@@ -14,36 +14,34 @@ module('Acceptance | Certifications page', function (hooks) {
   hooks.beforeEach(async () => {
     const user = createUserManagingStudents('ADMIN');
     createPrescriberByUser({ user });
-
     await authenticateSession(user.id);
   });
 
+  hooks.afterEach(function () {
+    sinon.restore();
+  });
+
   module('When user arrives on certifications page', function (hooks) {
-    let dayjs;
     hooks.afterEach(function () {
       sinon.restore();
     });
 
     test('should display certification banner when it is time to', async function (assert) {
-      dayjs = this.owner.lookup('service:dayjs');
-      sinon.stub(dayjs.self.prototype, 'format').returns('04');
+      sinon.useFakeTimers({ now: new Date('2001-04-01T10:42:00Z'), shouldAdvanceTime: true });
 
       // given / when
       await visit('/certifications');
-
       // then
-      assert.ok('.pix-banner');
+      assert.ok('.pix-notification-alert');
     });
 
     test('should not show any banner outside certification period', async function (assert) {
-      dayjs = this.owner.lookup('service:dayjs');
-      sinon.stub(dayjs.self.prototype, 'format').returns('10');
-
+      sinon.useFakeTimers({ now: new Date('2001-10-01T10:42:00Z'), shouldAdvanceTime: true });
       // given / when
       await visit('/certifications');
 
       // then
-      assert.dom('.pix-banner').doesNotExist();
+      assert.dom('.pix-notification-alert ').doesNotExist();
     });
 
     module('When organizations has no students imported yet', function () {

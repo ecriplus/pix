@@ -7,16 +7,16 @@ import ENV from 'pix-orga/config/environment';
 export default class InformationBanner extends Component {
   @service currentUser;
   @service router;
-  @service dayjs;
+  @service intl;
 
   get displayCertificationBanner() {
     const timeToDisplay = ENV.APP.CERTIFICATION_BANNER_DISPLAY_DATES.split(' ');
-    const actualMonth = this.dayjs.self().format('MM');
+    const actualMonth = this.intl.formatDate(new Date(), { month: '2-digit' });
     return this.currentUser.isSCOManagingStudents && timeToDisplay.includes(actualMonth);
   }
 
   get year() {
-    return this.dayjs.self().format('YYYY');
+    return this.intl.formatDate(new Date(), { year: 'numeric' });
   }
 
   <template>

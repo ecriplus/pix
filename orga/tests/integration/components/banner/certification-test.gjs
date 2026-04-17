@@ -10,11 +10,8 @@ module('Integration | Component | Banner::Certification', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('When it is certification period', function (hooks) {
-    let dayjs;
-
     hooks.beforeEach(function () {
-      dayjs = this.owner.lookup('service:dayjs');
-      sinon.stub(dayjs.self.prototype, 'format').withArgs('MM').returns('04').withArgs('YYYY').returns('2001');
+      sinon.useFakeTimers({ now: new Date('2001-04-01T10:42:00Z') });
     });
 
     hooks.afterEach(function () {
