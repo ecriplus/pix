@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonUpload from '@1024pix/pix-ui/components/pix-button-upload';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -19,6 +20,7 @@ export default class CreateAttestations extends Component {
   @service requestManager;
 
   @tracked file;
+  @tracked label;
   @tracked templateKey;
   @tracked templateName;
 
@@ -34,13 +36,8 @@ export default class CreateAttestations extends Component {
   }
 
   @action
-  async onTemplateKeyChange(event) {
-    this.templateKey = event.target.value;
-  }
-
-  @action
-  async onTemplateNameChange(event) {
-    this.templateName = event.target.value;
+  async onInputChange(fieldName, event) {
+    this[fieldName] = event.target.value;
   }
 
   @action
@@ -49,6 +46,7 @@ export default class CreateAttestations extends Component {
     try {
       const formData = new FormData();
 
+      formData.append('label', this.label);
       formData.append('templateKey', this.templateKey);
       formData.append('templateName', this.templateName);
       formData.append('templateFile', this.file);
@@ -63,29 +61,31 @@ export default class CreateAttestations extends Component {
         message: this.intl.t('components.administration.create-attestations.notifications.success'),
       });
     } catch (error) {
-      if (error.status === 413) {
-        this.pixToast.sendErrorNotification({
-          message: this.intl.t('components.administration.create-attestations.notifications.error.payload-too-large'),
-        });
-      } else if (error.code === 'S3_UPLOAD_ERROR') {
-        this.pixToast.sendErrorNotification({
-          message: this.intl.t('components.administration.create-attestations.notifications.error.s3-upload-error'),
-        });
-      } else if (error.code === 'DUPLICATE_ATTESTATION_KEY') {
-        this.pixToast.sendErrorNotification({
-          message: this.intl.t(
-            'components.administration.create-attestations.notifications.error.duplicate-attestation-key',
-          ),
-        });
-      } else if (error.status === 400 && error.code === 'WRONG_FILE_FORMAT') {
-        this.pixToast.sendErrorNotification({
-          message: this.intl.t('components.administration.create-attestations.notifications.error.wrong-file-format'),
-        });
-      } else {
-        this.pixToast.sendErrorNotification({
-          message: this.intl.t('components.administration.create-attestations.notifications.error.generic-error'),
-        });
-      }
+      error.errors.forEach((error) => {
+        if (error.status === 413) {
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t('components.administration.create-attestations.notifications.error.payload-too-large'),
+          });
+        } else if (error.code === 'S3_UPLOAD_ERROR') {
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t('components.administration.create-attestations.notifications.error.s3-upload-error'),
+          });
+        } else if (error.code === 'DUPLICATE_ATTESTATION_KEY') {
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t(
+              'components.administration.create-attestations.notifications.error.duplicate-attestation-key',
+            ),
+          });
+        } else if (error.status === 400 && error.code === 'WRONG_FILE_FORMAT') {
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t('components.administration.create-attestations.notifications.error.wrong-file-format'),
+          });
+        } else {
+          this.pixToast.sendErrorNotification({
+            message: this.intl.t('common.notifications.generic-error'),
+          });
+        }
+      });
     }
   }
 
@@ -99,8 +99,16 @@ export default class CreateAttestations extends Component {
       >
         <PixInput
           required="true"
+          @value={{this.label}}
+          {{on "input" (fn this.onInputChange "label")}}
+          @requiredLabel="Champ obligatoire"
+        >
+          <:label>{{t "components.administration.create-attestations.label"}} </:label>
+        </PixInput>
+        <PixInput
+          required="true"
           @value={{this.templateKey}}
-          {{on "input" this.onTemplateKeyChange}}
+          {{on "input" (fn this.onInputChange "templateKey")}}
           @requiredLabel="Champ obligatoire"
         >
           <:label>{{t "components.administration.create-attestations.template-key"}} </:label>
@@ -108,7 +116,7 @@ export default class CreateAttestations extends Component {
         <PixInput
           required="true"
           @value={{this.templateName}}
-          {{on "input" this.onTemplateNameChange}}
+          {{on "input" (fn this.onInputChange "templateName")}}
           @requiredLabel="Champ obligatoire"
         >
           <:label>{{t "components.administration.create-attestations.template-name"}} </:label>
