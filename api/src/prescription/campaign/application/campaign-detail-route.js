@@ -189,6 +189,7 @@ const register = async function (server) {
                 .empty(''),
               groups: [Joi.string(), Joi.array().items(Joi.string())],
               search: Joi.string().empty(''),
+              participantExternalId: Joi.string().empty(''),
             }).default({}),
           }),
         },

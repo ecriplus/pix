@@ -318,10 +318,21 @@ describe('Acceptance | API | campaign-detail-route', function () {
     let organizationLearner1;
     let organizationLearner2;
     let organizationLearner3;
+    let campaignParticipation2;
 
     beforeEach(async function () {
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       campaign = databaseBuilder.factory.buildCampaign({ organizationId: organizationId });
+
+      const featureId = databaseBuilder.factory.buildFeature({
+        key: CAMPAIGN_FEATURES.EXTERNAL_ID.key,
+        description: CAMPAIGN_FEATURES.EXTERNAL_ID.description,
+      }).id;
+
+      databaseBuilder.factory.buildCampaignFeature({
+        campaignId: campaign.id,
+        featureId,
+      });
 
       userId = databaseBuilder.factory.buildUser().id;
       databaseBuilder.factory.buildMembership({ userId, organizationId: organizationId });
@@ -349,15 +360,18 @@ describe('Acceptance | API | campaign-detail-route', function () {
         sharedAt: new Date(2010, 1, 1),
         campaignId: campaign.id,
         organizationLearnerId: organizationLearner1.id,
+        participantExternalId: 'johnm',
       });
-      databaseBuilder.factory.buildCampaignParticipation({
+      campaignParticipation2 = databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         status: STARTED,
         organizationLearnerId: organizationLearner2.id,
+        participantExternalId: 'hollym',
       });
       databaseBuilder.factory.buildCampaignParticipation({
         campaignId: campaign.id,
         organizationLearnerId: organizationLearner3.id,
+        participantExternalId: 'marrym',
       });
 
       return databaseBuilder.commit();
@@ -448,6 +462,21 @@ describe('Acceptance | API | campaign-detail-route', function () {
       const participation = response.result.data[0].attributes;
       expect(response.result.data).to.have.lengthOf(1);
       expect(participation['first-name']).to.equal(organizationLearner3.firstName);
+    });
+
+    it('should return the campaign participant activity filtered by participantExternalId', async function () {
+      const options = {
+        method: 'GET',
+        url: `/api/campaigns/${campaign.id}/participants-activity?filter[participantExternalId]=hol`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId }),
+      };
+
+      const response = await server.inject(options);
+
+      expect(response.statusCode).to.equal(200);
+      const participation = response.result.data[0].attributes;
+      expect(response.result.data).to.have.lengthOf(1);
+      expect(participation['participant-external-id']).to.equal(campaignParticipation2.participantExternalId);
     });
 
     it('should return 400 when status is not valid', async function () {

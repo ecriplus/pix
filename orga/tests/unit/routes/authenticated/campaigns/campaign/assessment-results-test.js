@@ -13,12 +13,14 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
     store = this.owner.lookup('service:store');
   });
 
-  module('fetchResultMinimalList', function (hooks) {
+  module('model', function (hooks) {
     hooks.beforeEach(function () {
       sinon.stub(store, 'query');
+      sinon.stub(route, 'modelFor');
     });
 
-    test('if finds summaries from stores', function (assert) {
+    test('if finds campaign-assessment-result-minimal from stores', async function (assert) {
+      const campaign = { id: Symbol('campaignId') };
       const params = {
         pageNumber: 1,
         pageSize: 2,
@@ -28,14 +30,16 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
         unacquiredBadges: [],
         stages: [],
         search: null,
-        campaignId: 3,
+        participantExternalId: 123,
       };
+
       const expectedParticipations = [
         {
           id: 12,
         },
       ];
 
+      route.modelFor.withArgs('authenticated.campaigns.campaign').returns(campaign);
       store.query
         .withArgs('campaign-assessment-result-minimal', {
           page: {
@@ -49,103 +53,32 @@ module('Unit | Route | authenticated/campaigns/campaign/assessment-results', fun
             stages: params.stages,
             unacquiredBadges: params.unacquiredBadges,
             search: params.search,
+            participantExternalId: 123,
           },
-          campaignId: params.campaignId,
+          campaignId: campaign.id,
         })
-        .returns(expectedParticipations);
+        .resolves(expectedParticipations);
 
-      const participations = route.fetchResultMinimalList(params);
+      const data = await route.model(params);
 
-      assert.strictEqual(participations, expectedParticipations);
+      assert.deepEqual(data, { participations: expectedParticipations, campaign });
     });
   });
 
   module('resetController', function () {
     module('when isExiting is true', function () {
-      test('it reset pageNumber', function (assert) {
-        const controller = { pageNumber: 2 };
+      test('it call controller resetFiltering', function (assert) {
+        const controller = { resetFiltering: sinon.stub() };
         route.resetController(controller, true);
-        assert.strictEqual(controller.pageNumber, 1);
-      });
-
-      test('it reset pageSize', function (assert) {
-        const controller = { pageSize: 10 };
-        route.resetController(controller, true);
-        assert.strictEqual(controller.pageSize, 50);
-      });
-
-      test('it reset divisions', function (assert) {
-        const controller = { divisions: ['10'] };
-        route.resetController(controller, true);
-        assert.deepEqual(controller.divisions, []);
-      });
-
-      test('it reset groups', function (assert) {
-        const controller = { groups: ['10'] };
-        route.resetController(controller, true);
-        assert.deepEqual(controller.groups, []);
-      });
-
-      test('it reset badges', function (assert) {
-        const controller = { badges: ['10'] };
-        route.resetController(controller, true);
-        assert.deepEqual(controller.badges, []);
-      });
-
-      test('it reset stages', function (assert) {
-        const controller = { stages: ['10'] };
-        route.resetController(controller, true);
-        assert.deepEqual(controller.stages, []);
-      });
-
-      test('it reset search', function (assert) {
-        const controller = { search: 'Dalida' };
-        route.resetController(controller, true);
-        assert.deepEqual(controller.search, null);
+        assert.ok(controller.resetFiltering.calledOnce);
       });
     });
 
     module('when isExiting is false', function () {
-      test('it does not reset pageNumber', function (assert) {
-        const controller = { pageNumber: 2 };
+      test('it not call controller resetFiltering', function (assert) {
+        const controller = { resetFiltering: sinon.stub() };
         route.resetController(controller, false);
-        assert.strictEqual(controller.pageNumber, 2);
-      });
-
-      test('it does not reset pageSize', function (assert) {
-        const controller = { pageSize: 10 };
-        route.resetController(controller, false);
-        assert.strictEqual(controller.pageSize, 10);
-      });
-
-      test('it does not reset divisions', function (assert) {
-        const controller = { divisions: ['10'] };
-        route.resetController(controller, false);
-        assert.deepEqual(controller.divisions, ['10']);
-      });
-
-      test('it does not reset groups', function (assert) {
-        const controller = { groups: ['10'] };
-        route.resetController(controller, false);
-        assert.deepEqual(controller.groups, ['10']);
-      });
-
-      test('it does not reset badges', function (assert) {
-        const controller = { badges: ['10'] };
-        route.resetController(controller, false);
-        assert.deepEqual(controller.badges, ['10']);
-      });
-
-      test('it does not reset stages', function (assert) {
-        const controller = { stages: ['10'] };
-        route.resetController(controller, false);
-        assert.deepEqual(controller.stages, ['10']);
-      });
-
-      test('it does not reset search', function (assert) {
-        const controller = { search: 'Dalida' };
-        route.resetController(controller, false);
-        assert.deepEqual(controller.search, 'Dalida');
+        assert.ok(controller.resetFiltering.notCalled);
       });
     });
   });

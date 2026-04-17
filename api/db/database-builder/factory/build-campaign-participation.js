@@ -13,7 +13,7 @@ const buildCampaignParticipation = function ({
   sharedAt = new Date('2020-01-02'),
   userId,
   organizationLearnerId,
-  participantExternalId = 'participantExternalId',
+  participantExternalId,
   validatedSkillsCount,
   masteryRate,
   pixScore,
@@ -27,7 +27,7 @@ const buildCampaignParticipation = function ({
   organizationLearnerId =
     organizationLearnerId === undefined ? buildOrganizationLearner({ userId }).id : organizationLearnerId;
   campaignId = campaignId === undefined ? buildCampaign().id : campaignId;
-
+  participantExternalId = participantExternalId ?? `externalId-${id}`;
   const isShared = status === SHARED;
   sharedAt = isShared ? sharedAt : null;
 

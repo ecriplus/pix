@@ -24,21 +24,15 @@ export default class ActivityRoute extends Route {
     search: {
       refreshModel: true,
     },
+    participantExternalId: {
+      refreshModel: true,
+    },
   };
 
   async model(params) {
     const campaign = this.modelFor('authenticated.campaigns.campaign');
-    const participations = await this.fetchParticipantsActivity({ campaignId: campaign.id, ...params });
-
-    return {
-      campaign,
-      participations,
-    };
-  }
-
-  fetchParticipantsActivity(params) {
-    return this.store.query('campaign-participant-activity', {
-      campaignId: params.campaignId,
+    const participations = await this.store.query('campaign-participant-activity', {
+      campaignId: campaign.id,
       page: {
         number: params.pageNumber,
         size: params.pageSize,
@@ -48,8 +42,14 @@ export default class ActivityRoute extends Route {
         status: params.status,
         groups: params.groups,
         search: params.search,
+        participantExternalId: params.participantExternalId,
       },
     });
+
+    return {
+      campaign,
+      participations,
+    };
   }
 
   @action
@@ -62,12 +62,7 @@ export default class ActivityRoute extends Route {
 
   resetController(controller, isExiting) {
     if (isExiting) {
-      controller.pageNumber = 1;
-      controller.pageSize = 50;
-      controller.divisions = [];
-      controller.status = null;
-      controller.groups = [];
-      controller.search = null;
+      controller.resetFiltering();
     }
   }
 

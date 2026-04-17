@@ -30,6 +30,7 @@ import AssessmentList from 'pix-orga/components/campaign/results/assessment-list
       @selectedUnacquiredBadges={{@controller.unacquiredBadges}}
       @selectedStages={{@controller.stages}}
       @searchFilter={{@controller.search}}
+      @participantExternalIdFilter={{@controller.participantExternalId}}
       @onClickParticipant={{@controller.goToAssessmentPage}}
       @onFilter={{@controller.triggerFiltering}}
       @onResetFilter={{@controller.resetFiltering}}

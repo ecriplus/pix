@@ -59,7 +59,8 @@ export default class ParticipationFilters extends Component {
       (!this.displayStagesFilter || this.args.selectedStages.length === 0) &&
       (!this.displayBadgesFilter || this.args.selectedBadges.length === 0) &&
       (!this.displayBadgesFilter || this.args.selectedUnacquiredBadges.length === 0) &&
-      (!this.displayCertificabilityFilter || !this.args.selectedCertificability)
+      (!this.displayCertificabilityFilter || !this.args.selectedCertificability) &&
+      (!this.displayParticipantExternalIdFilter || !this.args.participantExternalIdFilter)
     );
   }
 
@@ -71,7 +72,8 @@ export default class ParticipationFilters extends Component {
       this.displayStatusFilter ||
       this.displayGroupsFilter ||
       this.displayCertificabilityFilter ||
-      this.displaySearchFilter
+      this.displaySearchFilter ||
+      this.displayParticipantExternalIdFilter
     );
   }
 
@@ -106,6 +108,10 @@ export default class ParticipationFilters extends Component {
 
   get displaySearchFilter() {
     return !this.args.isHiddenSearch;
+  }
+
+  get displayParticipantExternalIdFilter() {
+    return Boolean(this.args.participantExternalIdLabel);
   }
 
   get stageOptions() {
@@ -207,6 +213,18 @@ export default class ParticipationFilters extends Component {
             @triggerFiltering={{@onFilter}}
           >
             <:label>{{t "common.filters.fullname.label"}}</:label>
+          </PixSearchInput>
+        {{/if}}
+        {{#if this.displayParticipantExternalIdFilter}}
+          <PixSearchInput
+            @id="participantExternalId"
+            value={{@participantExternalIdFilter}}
+            @screenReaderOnly={{true}}
+            @placeholder={{@participantExternalIdLabel}}
+            @debounceTimeInMs={{debounceTime}}
+            @triggerFiltering={{@onFilter}}
+          >
+            <:label>{{t "common.filters.participantExternalId.label"}}</:label>
           </PixSearchInput>
         {{/if}}
         {{#if this.displayStagesFilter}}

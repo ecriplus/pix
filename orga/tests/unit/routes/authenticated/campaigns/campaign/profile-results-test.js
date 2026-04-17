@@ -13,24 +13,25 @@ module('Unit | Route | authenticated/campaigns/campaign/profile-results', functi
     store = this.owner.lookup('service:store');
   });
 
-  module('fetchProfileSummaries', function (hooks) {
+  module('model', function (hooks) {
     hooks.beforeEach(function () {
       sinon.stub(store, 'query');
     });
 
-    test('if finds profile summaries from stores', function (assert) {
+    test('if finds profile summaries from stores', async function (assert) {
       const params = {
         pageNumber: 1,
         pageSize: 2,
         divisions: ['4eme'],
-        campaignId: 3,
+        participantExternalId: 'id123',
       };
       const expectedSummaries = [
         {
           id: 12,
         },
       ];
-
+      const campaign = { id: Symbol('campaign') };
+      sinon.stub(route, 'modelFor').withArgs('authenticated.campaigns.campaign').returns(campaign);
       store.query
         .withArgs('campaign-profiles-collection-participation-summary', {
           page: {
@@ -38,18 +39,19 @@ module('Unit | Route | authenticated/campaigns/campaign/profile-results', functi
             size: params.pageSize,
           },
           filter: {
+            campaignId: campaign.id,
             divisions: params.divisions,
             groups: params.groups,
-            campaignId: params.campaignId,
             search: params.search,
             certificability: params.certificability,
+            participantExternalId: params.participantExternalId,
           },
         })
-        .returns(expectedSummaries);
+        .resolves(expectedSummaries);
 
-      const summaries = route.fetchProfileSummaries(params);
+      const data = await route.model(params);
 
-      assert.strictEqual(summaries, expectedSummaries);
+      assert.deepEqual(data, { campaign, profiles: expectedSummaries });
     });
   });
 

@@ -241,6 +241,9 @@
         "placeholder": "Grupos"
       },
       "loading": "Cargando...",
+      "participantExternalId": {
+        "label": "Búsqueda por ID externo"
+      },
       "placeholder": "-- Selecciona --",
       "title": "Filtros"
     },

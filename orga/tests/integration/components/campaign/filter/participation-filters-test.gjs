@@ -1000,6 +1000,90 @@ module('Integration | Component | Campaign::Filter::ParticipationFilters', funct
     });
   });
 
+  module('participantExternalId', function (hooks) {
+    hooks.beforeEach(function () {
+      class CurrentUserStub extends Service {
+        hasImportFeature = false;
+      }
+      this.owner.register('service:current-user', CurrentUserStub);
+    });
+    test('it should populate the participant external id input with correct value', async function (assert) {
+      const campaign = store.createRecord('campaign', {
+        id: '1',
+        name: 'campagne 1',
+      });
+      const filterValue = 'chichi';
+
+      const screen = await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @isHiddenStatus={{true}}
+            @isHiddenBadges={{true}}
+            @isHiddenDivisions={{true}}
+            @isHiddenGroups={{true}}
+            @onResetFilter={{noop}}
+            @onFilter={{noop}}
+            @participantExternalIdFilter={{filterValue}}
+            @participantExternalIdLabel="info externe"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom(screen.getByLabelText(t('common.filters.participantExternalId.label'))).hasValue('chichi');
+    });
+
+    test('it triggers the filter when a text is input', async function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        id: campaignId,
+        name: 'campagne 1',
+        type: 'ASSESSMENT',
+        targetProfileHasStage: false,
+        stages: [],
+      });
+
+      const triggerFiltering = sinon.stub();
+
+      // when
+      await render(
+        <template>
+          <ParticipationFilters
+            @campaign={{campaign}}
+            @onFilter={{triggerFiltering}}
+            @participantExternalIdFilter=""
+            @participantExternalIdLabel="info externe"
+          />
+        </template>,
+      );
+      await fillByLabel(t('common.filters.participantExternalId.label'), 'Sal');
+
+      // then
+      assert.ok(triggerFiltering.calledWith('participantExternalId', 'Sal'));
+    });
+    test('it hides participantExternalId filter when not provided', async function (assert) {
+      // given
+      const campaign = store.createRecord('campaign', {
+        id: campaignId,
+        name: 'campagne 1',
+        type: 'ASSESSMENT',
+        targetProfileHasStage: false,
+        stages: [],
+      });
+
+      const triggerFiltering = sinon.stub();
+
+      // when
+      const screen = await render(
+        <template><ParticipationFilters @campaign={{campaign}} @onFilter={{triggerFiltering}} /></template>,
+      );
+
+      // then
+      assert.notOk(screen.queryByLabelText(t('common.filters.participantExternalId.label')));
+    });
+  });
+
   module('certificability', function (hooks) {
     hooks.beforeEach(function () {
       class CurrentUserStub extends Service {

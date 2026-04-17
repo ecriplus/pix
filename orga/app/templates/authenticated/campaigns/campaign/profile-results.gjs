@@ -11,6 +11,7 @@ import ProfileList from 'pix-orga/components/campaign/results/profile-list';
       @campaign={{@model.campaign}}
       @profiles={{@model.profiles}}
       @searchFilter={{@controller.search}}
+      @participantExternalIdFilter={{@controller.participantExternalId}}
       @selectedDivisions={{@controller.divisions}}
       @selectedGroups={{@controller.groups}}
       @selectedCertificability={{@controller.certificability}}

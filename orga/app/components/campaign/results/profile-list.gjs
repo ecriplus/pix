@@ -23,6 +23,8 @@ import ParticipationEvolutionIcon from './participation-evolution-icon';
       @selectedCertificability={{@selectedCertificability}}
       @rowCount={{@profiles.meta.rowCount}}
       @searchFilter={{@searchFilter}}
+      @participantExternalIdFilter={{@participantExternalIdFilter}}
+      @participantExternalIdLabel={{@campaign.externalIdLabel}}
       @onFilter={{@onFilter}}
       @onResetFilter={{@onReset}}
       @isHiddenStatus={{true}}

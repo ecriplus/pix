@@ -45,6 +45,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/profile-results', f
       controller.set('divisions', ['3eme']);
       controller.set('groups', ['M2']);
       controller.set('search', 'fra');
+      controller.set('participantExternalId', 'id123');
 
       //when
       controller.resetFiltering();
@@ -54,6 +55,7 @@ module('Unit | Controller | authenticated/campaigns/campaign/profile-results', f
       assert.deepEqual(controller.groups, []);
       assert.deepEqual(controller.search, null);
       assert.deepEqual(controller.pageNumber, null);
+      assert.deepEqual(controller.participantExternalId, null);
     });
   });
 

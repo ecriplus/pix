@@ -28,6 +28,7 @@ const register = async function (server) {
               groups: Joi.array().items(Joi.string()),
               badges: Joi.array().items(Joi.number().integer()),
               unacquiredBadges: Joi.array().items(Joi.number().integer()),
+              participantExternalId: Joi.string().empty(''),
               stages: Joi.array().items(Joi.number().integer()),
               search: Joi.string().empty(''),
             }).default({}),
@@ -66,6 +67,7 @@ const register = async function (server) {
               divisions: Joi.array().items(Joi.string()),
               groups: Joi.array().items(Joi.string()),
               search: Joi.string().empty(''),
+              participantExternalId: Joi.string().empty(''),
               certificability: Joi.string().empty(''),
             }).default({}),
             page: {

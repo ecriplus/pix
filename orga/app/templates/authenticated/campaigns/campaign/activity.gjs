@@ -25,6 +25,7 @@ import EmptyState from 'pix-orga/components/campaign/empty-state';
       @selectedGroups={{@controller.groups}}
       @rowCount={{@model.participations.meta.rowCount}}
       @searchFilter={{@controller.search}}
+      @participantExternalIdFilter={{@controller.participantExternalId}}
       @onFilter={{@controller.triggerFiltering}}
       @onResetFilter={{@controller.resetFiltering}}
       @deleteCampaignParticipation={{@controller.deleteCampaignParticipation}}

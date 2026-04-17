@@ -156,6 +156,12 @@ function _filterQuery(queryBuilder, filters, knexConn) {
   if (isBoolean(filters.certificability)) {
     queryBuilder.where('campaign-participations.isCertifiable', filters.certificability);
   }
+  if (filters.participantExternalId) {
+    queryBuilder.whereRaw('LOWER(??) LIKE ?', [
+      'campaign-participations.participantExternalId',
+      `%${filters.participantExternalId.trim().toLowerCase()}%`,
+    ]);
+  }
 }
 
 export { findPaginatedByCampaignId };

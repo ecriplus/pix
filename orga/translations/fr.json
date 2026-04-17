@@ -235,6 +235,9 @@
         "placeholder": "Groupes"
       },
       "loading": "Chargement...",
+      "participantExternalId": {
+        "label": "Recherche sur l'identifiant externe"
+      },
       "placeholder": "-- Sélectionner --",
       "title": "Filtres"
     },

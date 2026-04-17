@@ -17,6 +17,7 @@ export default class ActivityController extends Controller {
   @tracked campaign;
   @tracked participations;
   @tracked search = null;
+  @tracked participantExternalId = null;
 
   get isGarAuthenticationMethod() {
     return this.currentUser.isGarAuthenticationMethod;
@@ -45,6 +46,7 @@ export default class ActivityController extends Controller {
     this.status = null;
     this.groups = [];
     this.search = null;
+    this.participantExternalId = null;
   }
 
   @action

@@ -235,6 +235,9 @@
         "placeholder": "Groups"
       },
       "loading": "Loading...",
+      "participantExternalId": {
+        "label": "Search by external id"
+      },
       "placeholder": "-- Select --",
       "title": "Filters"
     },

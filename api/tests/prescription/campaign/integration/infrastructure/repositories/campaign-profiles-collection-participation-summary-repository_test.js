@@ -1100,6 +1100,66 @@ describe('Integration | Repository | Campaign Profiles Collection Participation 
         expect(participantExternalIds).to.deep.equal(['Not certifiable']);
       });
     });
+
+    context('when there is a filter on the participant externalId', function () {
+      const emptyPagination = undefined;
+
+      beforeEach(async function () {
+        // given
+        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          { organizationId, firstName: 'Saphira', lastName: 'Eurasier' },
+          { participantExternalId: 'the Girl', campaignId, isCertifiable: true },
+        );
+
+        databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(
+          { organizationId, firstName: 'Choupette', lastName: 'Eurasier' },
+          { participantExternalId: 'the Boy', campaignId, isCertifiable: false },
+        );
+
+        await databaseBuilder.commit();
+      });
+
+      it('returns all participants if the filter is empty', async function () {
+        // when
+        const { data: participations } =
+          await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(
+            campaignId,
+            emptyPagination,
+            { participantExternalId: '' },
+          );
+
+        // then
+        expect(participations).to.have.lengthOf(2);
+      });
+
+      it('return Choupette participant when we search part of participant external Id', async function () {
+        // when
+        const { data: participations } =
+          await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(
+            campaignId,
+            emptyPagination,
+            { participantExternalId: 'boy' },
+          );
+
+        // then
+        expect(participations).to.have.lengthOf(1);
+        expect(participations[0].firstName).to.equal('Choupette');
+      });
+
+      it('return Choupette participant when search contains a space', async function () {
+        // when
+        const { data: participations } =
+          await campaignProfilesCollectionParticipationSummaryRepository.findPaginatedByCampaignId(
+            campaignId,
+            emptyPagination,
+            { participantExternalId: ' girl ' },
+          );
+
+        // then
+        expect(participations).to.have.lengthOf(1);
+        expect(participations[0].firstName).to.equal('Saphira');
+      });
+    });
   });
 });
 

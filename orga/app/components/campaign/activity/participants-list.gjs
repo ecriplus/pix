@@ -59,10 +59,12 @@ export default class ParticipantsList extends Component {
       @selectedStatus={{@selectedStatus}}
       @selectedGroups={{@selectedGroups}}
       @searchFilter={{@searchFilter}}
+      @participantExternalIdFilter={{@participantExternalIdFilter}}
       @rowCount={{@rowCount}}
       @isHiddenStages={{true}}
       @isHiddenBadges={{true}}
       @isHiddenCertificability={{true}}
+      @participantExternalIdLabel={{@campaign.externalIdLabel}}
       @onFilter={{@onFilter}}
       @onResetFilter={{@onResetFilter}}
     />

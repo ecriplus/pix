@@ -584,7 +584,7 @@ describe('Acceptance | Campaign Participation | Application | Route', function (
             'can-retry': false,
             'can-reset': false,
             'is-disabled': false,
-            'participant-external-id': 'participantExternalId',
+            'participant-external-id': campaignParticipation.participantExternalId,
             'remaining-seconds-before-retrying': 3600 * 24 * 3,
             'shared-at': recentDate,
           },
