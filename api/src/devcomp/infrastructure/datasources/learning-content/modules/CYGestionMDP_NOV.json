@@ -23,7 +23,7 @@
       "grains": [
         {
           "id": "990ebc2c-a73e-409d-bcd5-d854bd5c927a",
-          "type": "short-lesson",
+          "type": "discovery",
           "title": "Accroche",
           "components": [
             {
@@ -365,7 +365,6 @@
                 "title": "récupération de mot de passe #3",
                 "url": "https://epreuves.pix.fr/fr/mdp-oublie/modulix-gestionmdpnov.html",
                 "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte</p>",
-                "solution": "",
                 "height": 550
               }
             },
@@ -695,10 +694,12 @@
               "type": "element",
               "element": {
                 "id": "527242b1-5ea3-47a5-aa34-d41ef32b6579",
-                "type": "custom-draft",
+                "type": "embed",
+                "isCompletionRequired": false,
                 "title": "Défi recupération de mot de passe",
-                "url": "https://1024pix.github.io/atelier-contenus/MCU/recupmdp3.html",
-                "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter.</p>",
+                "url": "https://epreuves.pix.fr/fr/mdp-reinitialisation/mdx-gestionmdpnov-lolalastar.html",
+                "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter. <br>Son nouveau mot de passe sera : L2osémcpqjg!</p>",
+                "solution": "",
                 "height": 550
               }
             },
@@ -707,17 +708,44 @@
               "element": {
                 "id": "31145843-8bba-4fcc-b89d-a627ff59fefa",
                 "type": "expand",
-                "title": "🗝️ Indice",
-                "content": "<p>L’adresse email de Lola est&nbsp;: lolalastar@pixmail.fr</p>"
+                "title": "🗝️ Indice de l'étape 1/5",
+                "content": "Cliquez sur« Mot de passe oublié » pour commencer la réinitialisation."
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "1530c8fb-9d92-41b5-aec9-2c8aac6346d7",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Indices à intégrer dans POI<br></p><p><strong>&gt;Indice de l’étape 1&nbsp;:</strong> Cliquez sur “Mot de passe oublié pour commencer la réinitialisation.</p><p><strong>&gt;Indice de l’étape 3 </strong>: Regardez bien la barre des tâches en bas&nbsp;: une petite notification est apparue sur l’icône de messagerie.&nbsp;</p><p><strong>&gt;Indice de l’étape 4&nbsp;:</strong> Dans le message, cherchez cette phrase&nbsp;: «&nbsp;Cliquez sur ce lien afin de réinitialiser votre mdp&nbsp;». Le lien se trouve juste après.</p><p><strong>&gt;Indice de l’étape 5 </strong>: Il faut saisir le nouveau mot de passe fort choisi par Lola (sans oublier le point à la fin) puis cliquer sur le bouton “Réinitialiser son mdp” pour créer son nouveau mdp.</p><p><strong>&gt;Indice de l’étape 6&nbsp;:</strong> Pour se connecter, il faut la même adresse mail et le nouveau mdp créé dans l’étape 5&nbsp;:</p><p>- mail&nbsp;: lolalastar@pixmail.fr</p><p>- nouveau mdp&nbsp;: L2osémcpqjg!</p>"
+                "id": "37044081-9fd8-4933-a7ee-473e909ecaaa",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 2/5",
+                "content": "Pour réinitialiser un mot de passe, il est normal de recevoir un lien par mail."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2fef2c41-079d-4197-8e5c-e9f12d91bfd1",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 3/5",
+                "content": "Dans le mail, cherchez cette phrase : « Cliquez sur ce lien afin de réinitialiser votre mot de passe ». Le lien se trouve juste après."
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c5635c0f-475f-4cdb-856a-0c286dc053c8",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 4/5",
+                "content": "<p>Le nouveau mot de passe choisi par Lola est : L2osémcpqjg!</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0f30f905-e748-407d-95eb-bbbf5574268d",
+                "type": "expand",
+                "title": "🗝️ Indice de l'étape 5/5",
+                "content": "<p>Vous avez réinitialisé le mot de passe. Vous n'avez plus qu'à tester le fonctionnement du nouveau mot de passe choisi par Lola : L2osémcpqjg!</p>"
               }
             }
           ]
