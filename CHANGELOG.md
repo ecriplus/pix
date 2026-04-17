@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.389.0](https://github.com/1024pix/pix/compare/v5.388.0...v5.389.0) (2026-04-17)
+
+### :rocket: Amélioration
+
+- [#15808](https://github.com/1024pix/pix/pull/15808) Afficher les labels d'attestation dans les fronts de Pix Admin et Pix Orga (PIX-22281) 
+- [#15828](https://github.com/1024pix/pix/pull/15828) Ajouter le centre d'aide dans la sidebar de Pix Orga (PIX-22329) 
+- [#15868](https://github.com/1024pix/pix/pull/15868) Ajouter un com auto aux candidats non-admissibles à Pix+ Edu (PIX-22340). 
+- [#15841](https://github.com/1024pix/pix/pull/15841) Filtrer sur l'identifiant externe sur les participations d'une campagne dans PixOrga (PIX-20537). 
+- [#15909](https://github.com/1024pix/pix/pull/15909) Intégrer des retours suite aux relectures RepondreMail_IND 
+- [#15816](https://github.com/1024pix/pix/pull/15816) MDX-18 iagenethique_ind correction coquilles 
+- [#15896](https://github.com/1024pix/pix/pull/15896) Supprimer le logo République Française sur Pix App (PIX-22339) 
+
+### :bug: Correction
+
+- [#15904](https://github.com/1024pix/pix/pull/15904) Corriger le calcul de la durée en millisecondes du CpfExportBuilderJobController 
+
+### :building_construction: Tech
+
+- [#15897](https://github.com/1024pix/pix/pull/15897) Corrige les ralentissements de la CI en utilisant une image dispo sur le Dockerhub prête pour Playwright 
+- [#15891](https://github.com/1024pix/pix/pull/15891) supprimer le paquet ember-cli-notifications (PIX-22394) 
+- [#15901](https://github.com/1024pix/pix/pull/15901) Utilisation du hook `activate()` plutôt que d'utiliser le `constructor()` 
+
+### :arrow_up: Montée de version
+
+- [#15895](https://github.com/1024pix/pix/pull/15895) Update dependency @1024pix/pix-ui to ^60.5.0 (admin) 
+- [#15903](https://github.com/1024pix/pix/pull/15903) Update dependency @1024pix/pix-ui to ^60.5.0 (certif) 
+- [#15905](https://github.com/1024pix/pix/pull/15905) Update dependency @1024pix/pix-ui to ^60.5.0 (junior) 
+- [#15910](https://github.com/1024pix/pix/pull/15910) Update dependency @1024pix/pix-ui to ^60.5.0 (mon-pix) 
+- [#15911](https://github.com/1024pix/pix/pull/15911) Update dependency @1024pix/pix-ui to ^60.5.0 (orga) 
+- [#15889](https://github.com/1024pix/pix/pull/15889) Update dependency axios to v1.15.0 (api) 
+- [#15913](https://github.com/1024pix/pix/pull/15913) Update dependency ember-cli to ~6.12.0 (admin)
+
 # [5.388.0](https://github.com/1024pix/pix/compare/v5.387.0...v5.388.0) (2026-04-16)
 
 ### :rocket: Amélioration
