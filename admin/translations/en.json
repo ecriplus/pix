@@ -968,21 +968,6 @@
           "PLACES_MANAGEMENT": "Places management",
           "SHOW_NPS": "Net Promoter Score display",
           "SHOW_SKILLS": "Displaying skills in the results export",
-          "attestation-list": {
-            "EDUCOLLAB": "Pix+Edu - Communiquer collaborer",
-            "EDUCULTURENUM": "Pix+Edu - Culture numérique",
-            "EDUDOC": "Pix+Edu - Adapter les documents",
-            "EDUIA": "Pix+Edu - Données, algorithmes et IA",
-            "EDUINCONTOURNABLES": "Pix+Edu - Les incontournables",
-            "EDURESSOURCES": "Pix+Edu - Gestion et partage de ressources",
-            "EDUSECU": "Pix+Edu - Numérique et sécurité",
-            "EDUSUPPORT": "Pix+Edu - Créer des supports pédagogiques",
-            "EDUVEILLE": "Pix+Edu - Réaliser une veille",
-            "MAIRIEBUREAU": "Mairie de Paris - Office software fundamentals",
-            "MINARM": "Socle numérique",
-            "PARENTHOOD": "Parenthood",
-            "SIXTH_GRADE": "Sixth grade"
-          },
           "title": "Features"
         },
         "is-archived-warning": "Archived at {archivedAt} by {archivedBy}.",
