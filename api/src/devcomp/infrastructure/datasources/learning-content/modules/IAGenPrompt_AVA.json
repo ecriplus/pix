@@ -52,7 +52,7 @@
             {
               "type": "element",
               "element": {
-                "id": "369dc90d-d020-4dcd-971e-fa199786accf",
+                "id": "6e8eda22-1cd4-4e4c-ba9f-1c7c503d9e92",
                 "type": "qcm",
                 "instruction": "<p>Ce que vous venez d’obtenir ressemble à un plan… mais vous pouvez difficilement le mettre en oeuvre. </p><p>Dans le prompt que vous venez d’utiliser, quels éléments peuvent expliquer que l’IA produise une réponse insatisfaisante&nbsp;?</p>",
                 "hasShortProposals": false,
@@ -133,7 +133,7 @@
             {
               "type": "element",
               "element": {
-                "id": "18f9c582-d0fb-4ec8-858a-d512e7459668",
+                "id": "c3a632eb-020a-4e7a-bc3c-4035f5601f3d",
                 "type": "custom",
                 "title": "Simu 2",
                 "instruction": "<p>Dans le simulateur, sélectionnez les prompts pour découper votre tâche.</p>",
