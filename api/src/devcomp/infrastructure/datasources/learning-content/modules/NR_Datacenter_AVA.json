@@ -33,19 +33,17 @@
                 "id": "6395f495-5219-445d-9976-53710245da39",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ces dernières années, le nombre de centres de données n’a fait qu’augmenter, et avec lui l’électricité consommée.</p><p><em>[A venir GIF - l’apparition de points pour les centres de données dans le temps]</em></p>"
+                "content": "<p>Entre 2010 et 2025, le nombre de centres de données est passé d'environ 4 500 à près 12 000, et avec lui l'électricité consommée par les centre de données a fortement augmentée.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "3c4c888c-acb8-4c70-b1d6-f67af2b0e5c3",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Datacenter_Ava/datacentermap.png",
-                "alt": "Une carte des centres de données dans le monde.",
-                "alternativeText": "<p>Une carte des centres de données dans le monde.</p>",
-                "legend": "Évolution des centres de données dans le monde de 2000 à 2025.",
-                "licence": ""
+                "type": "short-video",
+                "title": "",
+                "url": "https://assets.pix.org/modules/NR_Datacenter_Ava/nr_datacenter_ava_se_questionner.mp4",
+                "transcription": "<p>Entre 2010 et 2026, le nombre de centres de données est passé d'environ 4 500 à plus de 12 000. Sur un planisphère, on voit augmenter la représentation de la répartition de ces centres de données dans le monde. </p><p>La répartition mondiale des centres de données  montre une forte concentration en Amérique du Nord, en Europe occidentale et en Asie orientale, tandis que l’Afrique et l’Amérique du Sud restent minoritaires.</p>"
               }
             },
             {
