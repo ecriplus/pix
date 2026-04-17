@@ -1063,7 +1063,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Si tu as eu des erreurs, n’hésite pas à remonter pour lire le récapitulatif. 👆</p>"
+                  "diagnosis": "<p>Si vous avez eu des erreurs, n’hésitez pas à remonter pour lire le récapitulatif. 👆</p>"
                 }
               }
             }
@@ -1080,7 +1080,7 @@
                 "id": "5c755500-52ba-4689-bb50-d1849909f856",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Observez ces différents jeux de données et répondez à la question ci-dessous.</p>"
+                "content": "<p>Observez les différents jeux de données suivants et répondez à la question ci-dessous.</p>"
               }
             },
             {
@@ -1119,7 +1119,7 @@
                       },
                       "license": {
                         "name": "",
-                        "attribution": "unsplash",
+                        "attribution": "",
                         "url": ""
                       }
                     },
@@ -1149,12 +1149,12 @@
               "element": {
                 "id": "a7fdff97-a6f7-47d7-8fb8-46be43e09530",
                 "type": "qcu",
-                "instruction": "<p>Parmi les jeux de données suivants, lequel est le plus efficace pour entraîner correctement un logiciel d’IA à différencier les tournesols et les tulipes ?</p>",
+                "instruction": "<p>Parmi les jeux de données, lequel est le plus efficace pour entraîner correctement un logiciel d’IA à différencier les tournesols et les tulipes ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Jeu de données n°1</p>",
+                    "content": "<p>le jeu de données n°1</p>",
                     "feedback": {
                       "state": "<p>Et non !</p>",
                       "diagnosis": "<p>Plusiers photographies de ce jeu de données sont mal étiquetées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés pour qu’il apprenne à les identifier correctement.</p>"
@@ -1162,7 +1162,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Jeu de données n°2</p>",
+                    "content": "<p>le jeu de données n°2</p>",
                     "feedback": {
                       "state": "<p>Et non !<br></p>",
                       "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut donner des exemples très variés afin qu’il aprenne à généraliser.</p>"
@@ -1170,7 +1170,7 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Jeu de données n°3</p>",
+                    "content": "<p>le jeu de données n°3</p>",
                     "feedback": {
                       "state": "<p>Bravo !<br></p>",
                       "diagnosis": "<p>Pour bien entraîner un logiciel de reconnaissance d’image, il faut lui donner des exemples bien étiquetés et variés, c’est-à-dire de bonne qualité. Ce jeu de données répond à l’ensemble des critères !</p>"
@@ -1203,30 +1203,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>J’ai très confiance car il y a une phase de test.</p>",
+                    "content": "<p>J’ai une grande confiance&nbsp;car l’application est d’abord testée.</p>",
                     "feedback": {
-                      "diagnosis": "<p> Gardez de la prudence, car la phase de test n’empêche pas les erreurs.</p>"
+                      "diagnosis": "<p> Il faut rester prudent car la phase de test n’empêche pas les erreurs.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>J’ai confiance car les logiciels d’intelligence artificielle sont entraînés sur beaucoup d’exemples.</p>",
+                    "content": "<p>J’ai confiance car les logiciels d’IA sont entraînés sur de nombreux exemples.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Gardez de la prudence, car le nombre d’exemples n’empêche pas les erreurs.</p>"
+                      "diagnosis": "<p>Il faut rester prudent car le nombre d’exemples n’empêche pas les erreurs.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je n’ai pas confiance car les logiciels d’intelligence artificielle peuvent toujours se tromper.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, une erreur peut être dangereuse !</p>"
+                      "diagnosis": "<p>C’est vrai ! Même si la réponse du logiciel&nbsp;d’IA sera souvent juste, une erreur peut être dangereuse !</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je n’ai pas du tout confiance car les logiciels d’IA ne peuvent pas goûter les champignons.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est vrai ! Même si la réponse de l’IA sera souvent juste, elle ne prend pas en compte certaines informations (odeur, goût…)</p>"
+                      "diagnosis": "<p>C’est vrai ! Même si la réponse du logiciel&nbsp;d’IA sera souvent juste, elle ne prend pas en compte certaines informations (odeur, goût, etc.).</p>"
                     }
                   }
                 ]
