@@ -4,7 +4,7 @@ import * as activityRepository from '../../../../../src/school/infrastructure/re
 import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
 import * as missionRepository from '../../../../../src/school/infrastructure/repositories/mission-repository.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | Usecase | init-mission-activity', function () {
@@ -44,11 +44,11 @@ describe('Integration | Usecase | init-mission-activity', function () {
             level: Activity.levels.CHALLENGE,
             status: Activity.status.SUCCEEDED,
           });
-          await databaseBuilder.commit();
 
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [learningContentBuilder.buildMission({ id: missionId })],
           });
+          await databaseBuilder.commit();
 
           const lastActivity = domainBuilder.buildActivity(dbActivity);
 
@@ -94,11 +94,10 @@ describe('Integration | Usecase | init-mission-activity', function () {
             status: Activity.status.SUCCEEDED,
             createdAt: new Date('2024-04-03'),
           });
-          await databaseBuilder.commit();
 
           const lastActivity = domainBuilder.buildActivity(tutorialActivity);
 
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -115,6 +114,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await initMissionActivity({
             lastActivity,
@@ -148,11 +148,10 @@ describe('Integration | Usecase | init-mission-activity', function () {
             status: Activity.status.SUCCEEDED,
             createdAt: new Date('2024-04-01'),
           });
-          await databaseBuilder.commit();
 
           const lastActivity = domainBuilder.buildActivity(firstStepValidationActivity);
 
-          await mockLearningContent({
+          databaseBuilder.factory.learningContent.build({
             missions: [
               learningContentBuilder.buildMission({
                 id: missionId,
@@ -169,6 +168,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
               }),
             ],
           });
+          await databaseBuilder.commit();
 
           const currentActivity = await initMissionActivity({
             lastActivity,
@@ -195,9 +195,8 @@ describe('Integration | Usecase | init-mission-activity', function () {
       it('should create activity', async function () {
         const missionId = 12;
         const { assessmentId } = databaseBuilder.factory.buildMissionAssessment({ missionId });
-        await databaseBuilder.commit();
 
-        await mockLearningContent({
+        databaseBuilder.factory.learningContent.build({
           missions: [
             learningContentBuilder.buildMission({
               id: missionId,
@@ -214,6 +213,7 @@ describe('Integration | Usecase | init-mission-activity', function () {
             }),
           ],
         });
+        await databaseBuilder.commit();
 
         const currentActivity = await initMissionActivity({
           lastActivity: undefined,

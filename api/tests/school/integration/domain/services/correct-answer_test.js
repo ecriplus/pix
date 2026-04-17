@@ -10,14 +10,7 @@ import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCases | correct-answer', function () {
@@ -41,7 +34,7 @@ describe('Integration | UseCases | correct-answer', function () {
           skills: [skill],
         };
 
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
 
         assessment = databaseBuilder.factory.buildAssessment({
           state: Assessment.states.STARTED,
@@ -203,7 +196,8 @@ describe('Integration | UseCases | correct-answer', function () {
         challenges: [challenge],
         skills: [skill],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
 
       const assessmentId = 10;
       const activityAnswer = domainBuilder.buildActivityAnswer({

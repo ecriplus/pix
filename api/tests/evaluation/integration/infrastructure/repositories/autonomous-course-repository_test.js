@@ -1,7 +1,7 @@
 import { AutonomousCourse } from '../../../../../src/evaluation/domain/models/AutonomousCourse.js';
 import { repositories } from '../../../../../src/evaluation/infrastructure/repositories/index.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | Repository | Autonomous Course', function () {
   describe('#save', function () {
@@ -95,7 +95,7 @@ describe('Integration | Repository | Autonomous Course', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
         sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
         const { id: organizationId } = databaseBuilder.factory.buildOrganization({
           id: constants.AUTONOMOUS_COURSES_ORGANIZATION_ID,

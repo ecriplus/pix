@@ -8,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;
@@ -76,8 +75,6 @@ describe('Acceptance | API | campaign-detail-route', function () {
       options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}`;
 
-      await databaseBuilder.commit();
-
       const learningContent = [
         {
           competences: [
@@ -96,7 +93,8 @@ describe('Acceptance | API | campaign-detail-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should return the campaign by id', async function () {
@@ -168,8 +166,6 @@ describe('Acceptance | API | campaign-detail-route', function () {
       options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}/csv-profiles-collection-results`;
 
-      await databaseBuilder.commit();
-
       const learningContent = [
         {
           id: 'recArea1',
@@ -200,7 +196,8 @@ describe('Acceptance | API | campaign-detail-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should return csv file with statusCode 200', async function () {
@@ -254,8 +251,6 @@ describe('Acceptance | API | campaign-detail-route', function () {
       options.headers = generateAuthenticatedUserRequestHeaders({ userId });
       options.url = `/api/campaigns/${campaign.id}/csv-assessment-results`;
 
-      await databaseBuilder.commit();
-
       const learningContent = [
         {
           id: 'recArea1',
@@ -286,7 +281,8 @@ describe('Acceptance | API | campaign-detail-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should return csv file with statusCode 200', async function () {

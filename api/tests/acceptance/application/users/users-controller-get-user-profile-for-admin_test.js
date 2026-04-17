@@ -4,7 +4,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | users-controller-get-user-profile-for-admin', function () {
@@ -95,11 +94,10 @@ describe('Acceptance | Controller | users-controller-get-user-profile-for-admin'
     describe('Success case', function () {
       beforeEach(async function () {
         const superAdminUser = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
-        await databaseBuilder.commit();
 
         options.headers = generateAuthenticatedUserRequestHeaders({ userId: superAdminUser.id });
 
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
 
         knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
           userId,

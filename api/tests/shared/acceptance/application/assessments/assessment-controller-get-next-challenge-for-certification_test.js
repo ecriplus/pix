@@ -10,7 +10,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../../test-helper.js';
 
@@ -74,7 +73,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
   beforeEach(async function () {
     server = await createServer();
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('GET /api/assessments/:assessment_id', function () {

@@ -5,7 +5,7 @@ import {
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { catchErr, databaseBuilder, expect, knex, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 
@@ -41,13 +41,9 @@ describe('Integration | UseCases | update-campaign-details', function () {
 
     campaignId = campaign.id;
 
+    const learningContent = { skills: [{ id: 'recSkill1' }] };
+    databaseBuilder.factory.learningContent.build(learningContent);
     await databaseBuilder.commit();
-
-    const learningContent = {
-      skills: [{ id: 'recSkill1' }],
-    };
-
-    await mockLearningContent(learningContent);
   });
 
   it('should update campaign', async function () {

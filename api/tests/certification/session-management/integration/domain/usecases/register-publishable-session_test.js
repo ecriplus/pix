@@ -7,7 +7,6 @@ import {
   expect,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../../test-helper.js';
 
 describe('Certification | Session Management | Integration | Domain | UseCase | register-publishable-session ', function () {
@@ -378,7 +377,7 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
 
     await databaseBuilder.commit();
   });

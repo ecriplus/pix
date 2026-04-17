@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | certification-details', function () {
@@ -51,7 +50,7 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         ];
 
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         const sessionId = databaseBuilder.factory.buildSession().id;
         const userId = databaseBuilder.factory.buildUser().id;

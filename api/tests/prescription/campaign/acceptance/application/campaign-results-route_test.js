@@ -6,7 +6,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | campaign-results-route', function () {
@@ -28,7 +27,6 @@ describe('Acceptance | API | campaign-results-route', function () {
     beforeEach(async function () {
       userId = databaseBuilder.factory.buildUser().id;
       const organization = databaseBuilder.factory.buildOrganization();
-
       databaseBuilder.factory.buildMembership({ userId, organizationId: organization.id });
 
       const skill = { id: 'Skill1', name: '@Acquis1', challenges: [] };
@@ -50,7 +48,7 @@ describe('Acceptance | API | campaign-results-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       campaign = databaseBuilder.factory.buildAssessmentCampaignForSkills({ organizationId: organization.id }, [skill]);
 
@@ -140,7 +138,8 @@ describe('Acceptance | API | campaign-results-route', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     context('Division filter', function () {
@@ -580,8 +579,6 @@ describe('Acceptance | API | campaign-results-route', function () {
         snapshot: new KnowledgeElementCollection([ke]).toSnapshot(),
       });
 
-      await databaseBuilder.commit();
-
       const learningContent = [
         {
           id: 'recArea1',
@@ -616,7 +613,8 @@ describe('Acceptance | API | campaign-results-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     it('should return campaign collective result with status code 200', async function () {

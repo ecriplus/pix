@@ -10,7 +10,7 @@ import {
   MissingBadgeCriterionError,
   NotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex, mockLearningContent, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-badge', function () {
   let targetProfileId;
@@ -24,7 +24,7 @@ describe('Integration | UseCases | create-badge', function () {
       skills: [{ id: 'recSkill1' }],
     };
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
 
     targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'monTubeA', level: 2, targetProfileId });

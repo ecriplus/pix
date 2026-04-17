@@ -14,7 +14,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 import { buildLearningContent } from '../../../../tooling/learning-content-builder/build-learning-content.js';
 
@@ -56,7 +55,8 @@ describe('Acceptance | Routes | Campaign Participations', function () {
         },
       ];
       const learningObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningObjects);
+      databaseBuilder.factory.learningContent.build(learningObjects);
+      await databaseBuilder.commit();
 
       options = {
         method: 'PATCH',
@@ -197,7 +197,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
       area.competences = [competence];
       framework.areas = [area];
       const learningContent = buildLearningContent([framework]);
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
 
       await databaseBuilder.commit();
     });
@@ -311,7 +311,7 @@ describe('Acceptance | Routes | Campaign Participations', function () {
     };
 
     beforeEach(async function () {
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
       userId = 100;
       databaseBuilder.factory.buildUser({ id: userId });
       const campaign = databaseBuilder.factory.buildCampaign();

@@ -1,5 +1,5 @@
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | find-campaign-profiles-collection-participation-summaries', function () {
   let organizationId;
@@ -15,7 +15,7 @@ describe('Integration | UseCase | find-campaign-profiles-collection-participatio
 
     databaseBuilder.factory.buildMembership({ organizationId, userId });
 
-    await mockLearningContent({ skills: [], tubes: [], competences: [], areas: [] });
+    databaseBuilder.factory.learningContent.build({ skills: [], tubes: [], competences: [], areas: [] });
 
     await databaseBuilder.commit();
   });

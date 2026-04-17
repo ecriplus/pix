@@ -122,12 +122,6 @@ after(async function () {
 });
 /* eslint-enable mocha/no-top-level-hooks */
 
-async function mockLearningContent(learningContent) {
-  const scope = databaseBuilder.factory.learningContent.build(learningContent);
-  await databaseBuilder.commit();
-  return scope;
-}
-
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
@@ -152,7 +146,6 @@ export {
   mockAttestationStorage,
   mockAttestationStorageUpload,
   MockDate,
-  mockLearningContent,
   nock,
   parseNDJSON,
   preventStubsToBeCalledUnexpectedly,

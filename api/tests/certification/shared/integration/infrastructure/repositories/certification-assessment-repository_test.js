@@ -7,7 +7,7 @@ import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { Challenge } from '../../../../../../src/shared/domain/models/Challenge.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Repositories | certification-assessment-repository', function () {
   beforeEach(async function () {
@@ -83,7 +83,8 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
         },
       ],
     };
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
+    await databaseBuilder.commit();
   });
 
   describe('#getByCertificationCourseId', function () {

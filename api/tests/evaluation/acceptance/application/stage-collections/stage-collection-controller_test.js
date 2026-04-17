@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | stage-collection', function () {
@@ -18,7 +17,8 @@ describe('Acceptance | Controller | stage-collection', function () {
     beforeEach(async function () {
       const learningContent = [{ id: 'recArea0', competences: [] }];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     context('when the target-profile is not linked to a campaign', function () {

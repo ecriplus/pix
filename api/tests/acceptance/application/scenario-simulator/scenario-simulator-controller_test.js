@@ -4,7 +4,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
   parseNDJSON,
 } from '../../../test-helper.js';
 
@@ -35,7 +34,6 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
     });
 
     adminAuthorizationHeaders = generateAuthenticatedUserRequestHeaders({ userId: adminId });
-    await databaseBuilder.commit();
 
     validPayload = {
       capacity: 4.5,
@@ -180,7 +178,8 @@ describe('Acceptance | Controller | scenario-simulator-controller', function () 
       versionId: version.id,
     });
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
+    await databaseBuilder.commit();
 
     server = await createServer();
   });

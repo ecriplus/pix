@@ -10,7 +10,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session-management | Acceptance | Application | Routes | cancellation', function () {
@@ -54,7 +53,8 @@ describe('Certification | Session-management | Acceptance | Application | Routes
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('PATCH /api/admin/certification-courses/{certificationCourseId}/cancel', function () {

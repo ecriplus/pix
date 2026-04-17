@@ -14,7 +14,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const examinerGlobalComment = 'It was a fine session my dear';
@@ -926,12 +925,10 @@ const _createSession = async ({ version = 2 } = {}) => {
     },
   ];
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-  await mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
+  await databaseBuilder.commit();
 
-  return {
-    session,
-    options,
-  };
+  return { session, options };
 };
 
 const _createSessionWithoutChallenge = async () => {
@@ -947,7 +944,7 @@ const _createSessionWithoutChallenge = async () => {
     },
   ];
   const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-  await mockLearningContent(learningContentObjects);
+  databaseBuilder.factory.learningContent.build(learningContentObjects);
 
   const userId = databaseBuilder.factory.buildUser().id;
   const candidateUserId = databaseBuilder.factory.buildUser().id;

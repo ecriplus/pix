@@ -13,7 +13,6 @@ import {
   expect,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../../../test-helper.js';
 
@@ -61,7 +60,7 @@ describe('Integration | Repository | Target-profile', function () {
           tubeId: 'recTube3',
           level: 8,
         });
-        await databaseBuilder.commit();
+
         const learningContent = {
           areas: [
             {
@@ -108,7 +107,8 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         // when
         const err = await catchErr(targetProfileAdministrationRepository.get)({ id: 1 });
@@ -202,7 +202,6 @@ describe('Integration | Repository | Target-profile', function () {
             { id: 'recTube3', level: 3 },
           ]),
         });
-        await databaseBuilder.commit();
 
         datamartBuilder.factory.buildTargetProfileCourseDuration({
           targetProfileId: targetProfileDB.id,
@@ -363,7 +362,8 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: targetProfileDB.id });
@@ -511,7 +511,7 @@ describe('Integration | Repository | Target-profile', function () {
           tubeId: 'recTube1',
           level: 4,
         });
-        await databaseBuilder.commit();
+
         const learningContent = {
           areas: [
             {
@@ -575,7 +575,8 @@ describe('Integration | Repository | Target-profile', function () {
             },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: 1, locale: 'en' });
@@ -656,7 +657,6 @@ describe('Integration | Repository | Target-profile', function () {
             tubeId: 'recTube1',
             level: 4,
           });
-          await databaseBuilder.commit();
 
           const learningContent = {
             areas: [
@@ -717,7 +717,8 @@ describe('Integration | Repository | Target-profile', function () {
               },
             ],
           };
-          await mockLearningContent(learningContent);
+          databaseBuilder.factory.learningContent.build(learningContent);
+          await databaseBuilder.commit();
 
           // when
           const actualTargetProfile = await targetProfileAdministrationRepository.get({ id: targetProfileDB.id });
@@ -734,11 +735,11 @@ describe('Integration | Repository | Target-profile', function () {
         // given
         const { id } = databaseBuilder.factory.buildTargetProfile();
         databaseBuilder.factory.buildCampaign({ targetProfileId: id });
-        await databaseBuilder.commit();
 
         const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
         const learningContentObjects = learningContentBuilder([learningContent]);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
+        await databaseBuilder.commit();
 
         // when
         const actualTargetProfile = await targetProfileAdministrationRepository.get({ id });
@@ -756,7 +757,7 @@ describe('Integration | Repository | Target-profile', function () {
 
           const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
           const learningContentObjects = learningContentBuilder([learningContent]);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
 
           const { id: organizationId } = databaseBuilder.factory.buildOrganization({
             id: constants.AUTONOMOUS_COURSES_ORGANIZATION_ID,
@@ -788,7 +789,7 @@ describe('Integration | Repository | Target-profile', function () {
 
           const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();
           const learningContentObjects = learningContentBuilder([learningContent]);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
 
           const { id: organizationId } = databaseBuilder.factory.buildOrganization({ id: 9999 });
 

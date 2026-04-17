@@ -8,7 +8,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 const { ROLES } = PIX_ADMIN;
@@ -33,8 +32,6 @@ describe('Acceptance | API | campaign-administration-route', function () {
         targetProfileId: targetProfile.id,
       });
 
-      await databaseBuilder.commit();
-
       const learningContent = [
         {
           id: 'recArea1',
@@ -57,7 +54,8 @@ describe('Acceptance | API | campaign-administration-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
 
       // when
       const payload = {
@@ -162,7 +160,6 @@ describe('Acceptance | API | campaign-administration-route', function () {
       });
 
       const anotherUserId = databaseBuilder.factory.buildUser().id;
-      await databaseBuilder.commit();
 
       const learningContent = [
         {
@@ -186,7 +183,8 @@ describe('Acceptance | API | campaign-administration-route', function () {
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
 
       // when
       const payload = {

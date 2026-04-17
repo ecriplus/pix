@@ -6,7 +6,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | assessment-controller-get', function () {
@@ -266,7 +265,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         const assessmentId = databaseBuilder.factory.buildAssessment({
           userId: null,
@@ -354,7 +353,7 @@ describe('Acceptance | API | assessment-controller-get', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         const userId = databaseBuilder.factory.buildUser().id;
         const assessmentId = databaseBuilder.factory.buildAssessment({

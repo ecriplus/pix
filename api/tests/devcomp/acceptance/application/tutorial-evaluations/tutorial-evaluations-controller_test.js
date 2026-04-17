@@ -4,7 +4,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | tutorial-evaluations-controller', function () {
@@ -33,9 +32,9 @@ describe('Acceptance | Controller | tutorial-evaluations-controller', function (
       email: 'classic.papa@example.net',
       password: 'abcd1234',
     });
-    await databaseBuilder.commit();
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
+    await databaseBuilder.commit();
   });
 
   describe('PUT /api/users/tutorials/{tutorialId}/evaluate', function () {

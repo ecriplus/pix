@@ -1,6 +1,6 @@
 import { config } from '../../../../src/shared/config.js';
 import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
-import { catchErr, expect, mockLearningContent, nock } from '../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, nock } from '../../../test-helper.js';
 
 describe('Integration | Infrastructure | LCMS Client', function () {
   describe('#getRelease', function () {
@@ -18,7 +18,8 @@ describe('Integration | Infrastructure | LCMS Client', function () {
       it('calls LCMS API to get learning content latest release', async function () {
         // given
         const learningContent = { models: [{ id: 'fromLatestRelease' }] };
-        const lcmsCall = await mockLearningContent(learningContent);
+        const lcmsCall = databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         // when
         const response = await lcmsClient.getRelease();

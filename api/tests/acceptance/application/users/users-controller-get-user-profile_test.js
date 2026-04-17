@@ -4,7 +4,6 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockLearningContent,
 } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | users-controller-get-user-profile', function () {
@@ -97,7 +96,7 @@ describe('Acceptance | Controller | users-controller-get-user-profile', function
       beforeEach(async function () {
         options.headers = generateAuthenticatedUserRequestHeaders({ userId });
 
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
 
         knowledgeElement = databaseBuilder.factory.buildKnowledgeElement({
           userId,

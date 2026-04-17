@@ -1,12 +1,6 @@
 import * as certificationBadgesService from '../../../../../../src/certification/shared/domain/services/certification-badges-service.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
 
 const listSkill = ['web1', 'web2', 'web3', 'web4'];
 const learningContent = [
@@ -98,7 +92,8 @@ describe('Integration | Service | Certification-Badges Service', function () {
       });
       await databaseBuilder.commit();
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
 
       // when
       const badgeAcquisitions = await DomainTransaction.execute(async () => {
@@ -160,7 +155,8 @@ describe('Integration | Service | Certification-Badges Service', function () {
           });
           await databaseBuilder.commit();
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
+          await databaseBuilder.commit();
 
           // when
           const badgeAcquisitions = await DomainTransaction.execute(async () => {
@@ -222,7 +218,8 @@ describe('Integration | Service | Certification-Badges Service', function () {
           });
           await databaseBuilder.commit();
           const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-          await mockLearningContent(learningContentObjects);
+          databaseBuilder.factory.learningContent.build(learningContentObjects);
+          await databaseBuilder.commit();
 
           // when
           const badgeAcquisitions = await DomainTransaction.execute(async () => {

@@ -1,5 +1,5 @@
 import * as stageCollectionRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/stage-collection-repository.js';
-import { databaseBuilder, expect, learningContentBuilder, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
 
 const competenceId = 'recCompetence';
 const learningContent = [
@@ -50,7 +50,7 @@ describe('Integration | Infrastructure | Repository | stage-collection-repositor
 
     beforeEach(async function () {
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
       targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       campaignId = databaseBuilder.factory.buildCampaign({ type: 'ASSESSMENT', targetProfileId }).id;
       databaseBuilder.factory.buildCampaignSkill({ skillId: 'skillWeb1', campaignId });

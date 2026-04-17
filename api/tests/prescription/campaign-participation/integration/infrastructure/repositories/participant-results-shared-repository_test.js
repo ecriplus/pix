@@ -1,7 +1,7 @@
 import { participantResultsSharedRepository } from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/participant-results-shared-repository.js';
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { MAX_REACHABLE_PIX_BY_COMPETENCE } from '../../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect, knex, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Campaign Participant Result Shared Repository', function () {
   describe('#save', function () {
@@ -95,13 +95,12 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           { skillId: 'skill_3', status: 'validated', earnedPix: 1 },
         ]);
 
-        await databaseBuilder.commit();
-
         const learningContent = {
           skills: [{ id: 'skill_1' }, { id: 'skill_2' }, { id: 'skill_3' }],
           competences: [],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -123,8 +122,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           { skillId: 'skill_5', competenceId: 'competence_5', status: 'invalidated', earnedPix: 0 },
         ]);
 
-        await databaseBuilder.commit();
-
         const learningContent = {
           skills: [
             { id: 'skill_1', competenceId: 'competence_1' },
@@ -141,7 +138,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -160,8 +158,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           { skillId: 'skill_5', competenceId: 'competence_5', status: 'validated', earnedPix: 12 },
         ]);
 
-        await databaseBuilder.commit();
-
         const learningContent = {
           skills: [
             { id: 'skill_1', competenceId: 'competence_1' },
@@ -178,7 +174,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -199,8 +196,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           { skillId: 'skill_3', status: 'validated', earnedPix: 1 },
         ]);
 
-        await databaseBuilder.commit();
-
         const learningContent = {
           skills: [
             { id: 'skill_1', status: 'actif' },
@@ -209,7 +204,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           ],
           competences: [],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -232,8 +228,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { skillId: 'skill_3', status: 'validated', earnedPix: 5 },
           ]);
 
-          await databaseBuilder.commit();
-
           const learningContent = {
             skills: [
               { id: 'skill_1', status: 'actif' },
@@ -242,7 +236,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             ],
             competences: [],
           };
-          await mockLearningContent(learningContent);
+          databaseBuilder.factory.learningContent.build(learningContent);
+          await databaseBuilder.commit();
 
           //when
           const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -265,8 +260,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { skillId: 'skill_3', status: 'invalidated', earnedPix: 0 },
           ]);
 
-          await databaseBuilder.commit();
-
           const learningContent = {
             skills: [
               { id: 'skill_1', status: 'actif' },
@@ -275,7 +268,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             ],
             competences: [],
           };
-          await mockLearningContent(learningContent);
+          databaseBuilder.factory.learningContent.build(learningContent);
+          await databaseBuilder.commit();
 
           //when
           const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -300,8 +294,6 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
           { skillId: 'skill_5', competenceId: 'competence_5', status: 'validated', earnedPix: 12 },
         ]);
 
-        await databaseBuilder.commit();
-
         const learningContent = {
           skills: [
             { id: 'skill_1', competenceId: 'competence_1', status: 'actif' },
@@ -318,7 +310,8 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
             { id: 'competence_5', origin: 'Pix' },
           ],
         };
-        await mockLearningContent(learningContent);
+        databaseBuilder.factory.learningContent.build(learningContent);
+        await databaseBuilder.commit();
 
         //when
         const participantResultsShared = await participantResultsSharedRepository.get(participation.id);
@@ -336,10 +329,9 @@ describe('Integration | Repository | Campaign Participant Result Shared Reposito
         { skillId: 'skill_1', status: 'validated', earnedPix: 1 },
       ]);
 
-      await databaseBuilder.commit();
-
       const learningContent = { skills: [{ id: 'skill_1', status: 'actif' }], competences: [] };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
+      await databaseBuilder.commit();
 
       //when
       const participantResultsShared = await participantResultsSharedRepository.get(participation.id);

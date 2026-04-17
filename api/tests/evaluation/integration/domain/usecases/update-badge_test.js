@@ -1,7 +1,7 @@
 import { Badge } from '../../../../../src/evaluation/domain/models/Badge.js';
 import { updateBadge } from '../../../../../src/evaluation/domain/usecases/update-badge.js';
 import * as badgeRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
-import { catchErr, databaseBuilder, expect, mockLearningContent } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | UseCases | create-badge', function () {
   let targetProfileId;
@@ -13,7 +13,7 @@ describe('Integration | UseCases | create-badge', function () {
       skills: [{ id: 'recSkill1' }],
     };
 
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
 
     targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     databaseBuilder.factory.buildTargetProfileTube({ tubeId: 'monTubeA', level: 2, targetProfileId });

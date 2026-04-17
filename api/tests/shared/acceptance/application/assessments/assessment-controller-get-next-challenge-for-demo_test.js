@@ -1,11 +1,5 @@
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { createServer, databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo', function () {
   let server;
@@ -48,7 +42,8 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-demo',
     ];
 
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
   });
 
   describe('(demo) GET /api/assessments/:assessment_id', function () {

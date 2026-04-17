@@ -10,7 +10,7 @@ import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import * as codeGenerator from '../../../../../../src/shared/domain/services/code-generator.js';
 import * as accessCodeRepository from '../../../../../../src/shared/infrastructure/repositories/access-code-repository.js';
-import { catchErr, databaseBuilder, expect, knex, mockLearningContent } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | UseCases | create-campaign', function () {
   let userId;
@@ -34,13 +34,9 @@ describe('Integration | UseCases | create-campaign', function () {
       userId,
     });
 
+    const learningContent = { skills: [{ id: 'recSkill1' }] };
+    databaseBuilder.factory.learningContent.build(learningContent);
     await databaseBuilder.commit();
-
-    const learningContent = {
-      skills: [{ id: 'recSkill1' }],
-    };
-
-    await mockLearningContent(learningContent);
   });
 
   it('should save a new campaign of type PROFILES_COLLECTION', async function () {
@@ -168,7 +164,7 @@ describe('Integration | UseCases | create-campaign', function () {
           },
         ],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
 
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
       await databaseBuilder.commit();
@@ -261,7 +257,7 @@ describe('Integration | UseCases | create-campaign', function () {
           },
         ],
       };
-      await mockLearningContent(learningContent);
+      databaseBuilder.factory.learningContent.build(learningContent);
 
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1', level: 2 });
       await databaseBuilder.commit();

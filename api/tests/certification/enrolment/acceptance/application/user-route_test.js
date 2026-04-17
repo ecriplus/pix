@@ -6,7 +6,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Acceptance | Routes | User', function () {
@@ -176,7 +175,7 @@ describe('Certification | Enrolment | Acceptance | Routes | User', function () {
         ],
       },
     ]);
-    await mockLearningContent(learningContent);
+    databaseBuilder.factory.learningContent.build(learningContent);
 
     learningContent.skills.forEach(({ id: skillId, competenceId }) => {
       databaseBuilder.factory.buildKnowledgeElement({ userId: user.id, earnedPix: 10, competenceId, skillId });

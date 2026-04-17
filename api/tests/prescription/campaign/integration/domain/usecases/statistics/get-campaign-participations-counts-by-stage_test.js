@@ -4,13 +4,7 @@ import {
   NoStagesForCampaign,
   UserNotAuthorizedToAccessEntityError,
 } from '../../../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, learningContentBuilder } from '../../../../../../test-helper.js';
 
 describe('Integration | UseCase | get-campaign-participations-counts-by-stage', function () {
   let organizationId;
@@ -46,7 +40,7 @@ describe('Integration | UseCase | get-campaign-participations-counts-by-stage', 
         ],
       },
     ]);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
 
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
 

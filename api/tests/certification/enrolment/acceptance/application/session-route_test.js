@@ -8,7 +8,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Acceptance | Routes | session-route', function () {
@@ -350,7 +349,8 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
         },
       ];
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     context('not SCO / isManagingStudents', function () {

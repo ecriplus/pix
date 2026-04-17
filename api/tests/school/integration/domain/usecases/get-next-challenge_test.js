@@ -8,7 +8,7 @@ import * as missionRepository from '../../../../../src/school/infrastructure/rep
 import { Challenge } from '../../../../../src/shared/domain/models/Challenge.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { databaseBuilder, expect, knex, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | School | Usecase | get-next-challenge', function () {
@@ -64,9 +64,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
           challengeId: 'first_va_challenge_on_step_1_id',
         });
 
-        await databaseBuilder.commit();
-
-        await mockLearningContent({
+        databaseBuilder.factory.learningContent.build({
           challenges: [
             learningContentBuilder.buildChallenge({ id: 'second_va_challenge_on_step_2_id', skillId: 'skill_id' }),
           ],
@@ -87,6 +85,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
             }),
           ],
         });
+        await databaseBuilder.commit();
 
         const challenge = await getNextChallenge({
           assessmentId,
@@ -126,9 +125,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
           challengeId: 'first_va_challenge_id',
         });
 
-        await databaseBuilder.commit();
-
-        await mockLearningContent({
+        databaseBuilder.factory.learningContent.build({
           challenges: [learningContentBuilder.buildChallenge({ id: 'second_va_challenge_id', skillId: 'skill_id' })],
           skills: [learningContentBuilder.buildSkill({ id: 'skill_id' })],
           missions: [
@@ -144,6 +141,7 @@ describe('Integration | School | Usecase | get-next-challenge', function () {
             }),
           ],
         });
+        await databaseBuilder.commit();
 
         const challenge = await getNextChallenge({
           assessmentId,

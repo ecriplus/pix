@@ -4,14 +4,7 @@ import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { Assessment } from '../../../../../src/school/domain/models/Assessment.js';
 import { usecases } from '../../../../../src/school/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  mockLearningContent,
-} from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCases | play-mission', function () {
@@ -20,9 +13,8 @@ describe('Integration | UseCases | play-mission', function () {
   context('when no assessment is started for learner and mission', function () {
     it('should save a new assessment for Pix1D', async function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      databaseBuilder.factory.learningContent.build({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -37,6 +29,7 @@ describe('Integration | UseCases | play-mission', function () {
           }),
         ],
       });
+      await databaseBuilder.commit();
 
       const result = await usecases.playMission({
         missionId,
@@ -55,9 +48,8 @@ describe('Integration | UseCases | play-mission', function () {
 
     it('should save a new mission assessment', async function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      databaseBuilder.factory.learningContent.build({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -72,6 +64,7 @@ describe('Integration | UseCases | play-mission', function () {
           }),
         ],
       });
+      await databaseBuilder.commit();
 
       const result = await usecases.playMission({
         missionId,
@@ -89,9 +82,8 @@ describe('Integration | UseCases | play-mission', function () {
 
     it('should save an activity', async function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      databaseBuilder.factory.learningContent.build({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -106,6 +98,7 @@ describe('Integration | UseCases | play-mission', function () {
           }),
         ],
       });
+      await databaseBuilder.commit();
 
       const result = await usecases.playMission({
         missionId,
@@ -123,9 +116,8 @@ describe('Integration | UseCases | play-mission', function () {
 
     it('should return the school assessment', async function () {
       const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      databaseBuilder.factory.learningContent.build({
         missions: [
           learningContentBuilder.buildMission({
             id: missionId,
@@ -140,6 +132,7 @@ describe('Integration | UseCases | play-mission', function () {
           }),
         ],
       });
+      await databaseBuilder.commit();
 
       const assessment = await usecases.playMission({
         missionId,

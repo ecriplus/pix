@@ -8,7 +8,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  mockLearningContent,
   sinon,
 } from '../../../test-helper.js';
 
@@ -50,7 +49,6 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
 
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser().id;
-    await databaseBuilder.commit();
 
     options = {
       method: 'POST',
@@ -100,7 +98,8 @@ describe('Acceptance | Controller | users-controller-reset-scorecard', function 
       },
     ];
     const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-    await mockLearningContent(learningContentObjects);
+    databaseBuilder.factory.learningContent.build(learningContentObjects);
+    await databaseBuilder.commit();
 
     server = await createServer();
   });

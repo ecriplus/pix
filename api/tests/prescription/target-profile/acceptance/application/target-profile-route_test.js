@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Route | target-profile', function () {
@@ -33,7 +32,7 @@ describe('Acceptance | Route | target-profile', function () {
           },
         ];
         const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-        await mockLearningContent(learningContentObjects);
+        databaseBuilder.factory.learningContent.build(learningContentObjects);
 
         user = databaseBuilder.factory.buildUser({});
         linkedOrganization = databaseBuilder.factory.buildOrganization({});
@@ -272,8 +271,8 @@ describe('Acceptance | Route | target-profile', function () {
         tubeId: 'tubeFrance1_1_1_1',
       });
 
+      databaseBuilder.factory.learningContent.build(learningContent);
       await databaseBuilder.commit();
-      await mockLearningContent(learningContent);
     });
 
     it('should return response code 200', async function () {

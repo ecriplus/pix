@@ -4,7 +4,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   learningContentBuilder,
-  mockLearningContent,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | Progressions', function () {
@@ -42,7 +41,7 @@ describe('Acceptance | API | Progressions', function () {
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
 
       userId = databaseBuilder.factory.buildUser({}).id;
       const campaignId = databaseBuilder.factory.buildCampaign({ name: 'Campaign' }).id;

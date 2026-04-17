@@ -1,5 +1,5 @@
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { databaseBuilder, expect, mockLearningContent } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | find-assessment-participation-result-list', function () {
   let organizationId;
@@ -28,7 +28,7 @@ describe('Integration | UseCase | find-assessment-participation-result-list', fu
     const participant2 = { firstName: 'Tonari', lastName: 'No Totoro' };
     databaseBuilder.factory.buildCampaignParticipationWithOrganizationLearner(participant2, participation2);
 
-    await mockLearningContent({
+    databaseBuilder.factory.learningContent.build({
       skills: [skill],
       tubes: [],
       thematics: [],

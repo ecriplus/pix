@@ -5,14 +5,7 @@ import { PoleEmploiSending } from '../../../../src/prescription/campaign-partici
 import { insertMissingPoleEmploiSendingFromDate } from '../../../../src/prescription/scripts/insert-missing-pole-emploi-sending-from-date.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import {
-  catchErr,
-  databaseBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  mockLearningContent,
-} from '../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex, learningContentBuilder } from '../../../test-helper.js';
 
 describe('Script | Prod | Delete Organization Learners From Organization', function () {
   describe('#insertMissingPoleEmploiSendingFromDate', function () {
@@ -41,7 +34,8 @@ describe('Script | Prod | Delete Organization Learners From Organization', funct
       ];
 
       const learningContentObjects = learningContentBuilder.fromAreas(learningContent);
-      await mockLearningContent(learningContentObjects);
+      databaseBuilder.factory.learningContent.build(learningContentObjects);
+      await databaseBuilder.commit();
     });
 
     context('validation', function () {
