@@ -44,7 +44,6 @@ import {
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
-import { parseNDJSON } from './tooling/test-utils/json.js';
 import { wait, waitForStreamFinalizationToBeDone } from './tooling/test-utils/wait.js';
 
 // Init Dayjs configuration
@@ -144,7 +143,6 @@ export {
   mockAttestationStorageUpload,
   MockDate,
   nock,
-  parseNDJSON,
   preventStubsToBeCalledUnexpectedly,
   sinon,
   wait,

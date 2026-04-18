@@ -4,8 +4,8 @@ import {
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  parseNDJSON,
 } from '../../../test-helper.js';
+import { parseNDJSON } from '../../../tooling/test-utils/json.js';
 
 const {
   ROLES: { SUPER_ADMIN },
