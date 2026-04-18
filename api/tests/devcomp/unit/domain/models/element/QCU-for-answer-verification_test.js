@@ -2,7 +2,8 @@ import { ModuleInstantiationError } from '../../../../../../src/devcomp/domain/e
 import { QCUForAnswerVerification } from '../../../../../../src/devcomp/domain/models/element/QCU-for-answer-verification.js';
 import { QcuCorrectionResponse } from '../../../../../../src/devcomp/domain/models/QcuCorrectionResponse.js';
 import { DomainError, EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | Models | Element | QcuForAnswerVerification', function () {
   describe('#constructor', function () {

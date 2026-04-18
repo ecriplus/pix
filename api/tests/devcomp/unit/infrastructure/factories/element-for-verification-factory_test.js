@@ -5,7 +5,8 @@ import { QCUForAnswerVerification } from '../../../../../src/devcomp/domain/mode
 import { QROCMForAnswerVerification } from '../../../../../src/devcomp/domain/models/element/QROCM-for-answer-verification.js';
 import { ElementForVerificationFactory } from '../../../../../src/devcomp/infrastructure/factories/element-for-verification-factory.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErrSync, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Infrastructure | Factories | ElementForVerification', function () {
   describe('#toDomain', function () {

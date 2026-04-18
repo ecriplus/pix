@@ -3,7 +3,8 @@ import dayjs from 'dayjs';
 import { CandidateTimeline } from '../../../../../../../src/certification/enrolment/domain/models/timeline/CandidateTimeline.js';
 import { TimelineEvent } from '../../../../../../../src/certification/enrolment/domain/models/timeline/TimelineEvent.js';
 import { EntityValidationError } from '../../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Certification | Enrolment | Domain | Models | CandidateTimeline', function () {
   it('should create a timeline', function () {

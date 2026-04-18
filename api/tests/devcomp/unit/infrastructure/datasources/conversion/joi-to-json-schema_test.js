@@ -1,7 +1,8 @@
 import Joi from 'joi';
 
 import { convertJoiToJsonSchema } from '../../../../../../src/devcomp/infrastructure/datasources/conversion/joi-to-json-schema.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Infrastructure | Datasources | Conversion | joi-to-json-schema', function () {
   it('should throw if not Joi', function () {

@@ -5,7 +5,8 @@ import { CertificationAssessment } from '../../../../../src/shared/domain/read-m
 import { CompetenceEvaluationAssessment } from '../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
 import { DemoAssessment } from '../../../../../src/shared/domain/read-models/DemoAssessment.js';
 import { PreviewAssessment } from '../../../../../src/shared/domain/read-models/PreviewAssessment.js';
-import { catchErrSync, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Models | Assessment', function () {
   describe('#constructor', function () {

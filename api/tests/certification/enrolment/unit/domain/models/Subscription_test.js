@@ -1,7 +1,8 @@
 import { Subscription } from '../../../../../../src/certification/enrolment/domain/models/Subscription.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Certification | Enrolment | Domain | Models | Subscription', function () {
   let certificationCandidate;

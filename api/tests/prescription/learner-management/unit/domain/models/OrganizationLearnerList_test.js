@@ -1,7 +1,8 @@
 import { CouldNotDeleteLearnersError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { OrganizationLearnerList } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerList.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErrSync, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Models | OrganizationLearnerListFormat', function () {
   describe('#constructor', function () {

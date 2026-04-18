@@ -38,7 +38,7 @@ import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
-import { catchErr, catchErrSync, preventStubsToBeCalledUnexpectedly } from './tooling/test-utils/error.js';
+import { catchErr } from './tooling/test-utils/error.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
@@ -122,7 +122,6 @@ after(async function () {
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
-  catchErrSync,
   createMaddoServer,
   createServer,
   databaseBuilder,
@@ -142,6 +141,5 @@ export {
   mockAttestationStorageUpload,
   MockDate,
   nock,
-  preventStubsToBeCalledUnexpectedly,
   sinon,
 };

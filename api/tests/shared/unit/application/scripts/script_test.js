@@ -1,5 +1,6 @@
 import { Script } from '../../../../../src/shared/application/scripts/script.js';
-import { catchErr, catchErrSync, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr, catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Shared | Unit | Application | Script', function () {
   it('must be implemented with meta information', function () {

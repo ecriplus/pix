@@ -1,6 +1,7 @@
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { catchErrSync, expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../test-helper.js';
 import { getAdminRoleStub } from '../../../tooling/mocks/security-pre-handlers.mock.js';
+import { catchErrSync } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | Tooling | Mocks | SecurityPreHandlersHelpers', function () {
   describe('#getAdminRoleStub', function () {

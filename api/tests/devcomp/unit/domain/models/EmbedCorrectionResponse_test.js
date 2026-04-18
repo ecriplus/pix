@@ -1,7 +1,8 @@
 import { EmbedCorrectionResponse } from '../../../../../src/devcomp/domain/models/EmbedCorrectionResponse.js';
 import { AnswerStatus } from '../../../../../src/devcomp/domain/models/validator/AnswerStatus.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | Models | EmbedCorrectionResponse', function () {
   describe('#constructor', function () {

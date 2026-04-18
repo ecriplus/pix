@@ -1,6 +1,7 @@
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { ActivityInfo } from '../../../../../src/school/domain/models/ActivityInfo.js';
-import { catchErrSync, domainBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | School', function () {
   describe('#getChallengeId', function () {
