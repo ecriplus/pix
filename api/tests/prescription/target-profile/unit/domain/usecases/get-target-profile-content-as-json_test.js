@@ -1,5 +1,5 @@
 import { getTargetProfileContentAsJson } from '../../../../../../src/prescription/target-profile/domain/usecases/get-target-profile-content-as-json.js';
-import { domainBuilder, expect, MockDate, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-target-profile-content-as-json', function () {
   let targetProfileAdministrationRepository;
@@ -9,13 +9,10 @@ describe('Unit | UseCase | get-target-profile-content-as-json', function () {
     learningContentConversionService = { findActiveSkillsForCappedTubes: sinon.stub() };
   });
 
-  afterEach(function () {
-    MockDate.reset();
-  });
-
   context('when the user has the authorization to get the content', function () {
     beforeEach(function () {
-      MockDate.set(new Date('2020-12-01'));
+      sinon.useFakeTimers({ now: new Date('2020-12-01'), toFake: ['Date'] });
+
       const area = domainBuilder.buildArea({ id: 'recArea', frameworkId: 'recFramework' });
       const targetProfileForAdmin = domainBuilder.buildTargetProfileForAdmin({
         name: 'Profil Rentrée scolaire',

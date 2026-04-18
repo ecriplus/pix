@@ -5,7 +5,6 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -136,7 +135,6 @@ export {
   HttpTestServer,
   knex,
   learningContentBuilder,
-  MockDate,
   nock,
   sinon,
 };

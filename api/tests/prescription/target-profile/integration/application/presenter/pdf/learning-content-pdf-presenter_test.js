@@ -4,7 +4,7 @@ import * as url from 'node:url';
 import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
 
 import * as learningContentPDFPresenter from '../../../../../../../src/prescription/target-profile/application/presenter/pdf/learning-content-pdf-presenter.js';
-import { domainBuilder, expect, MockDate, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../../tooling/test-utils/file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -16,11 +16,7 @@ describe('Integration | Application | Target-Profiles | Presenter | PDF | Learni
 
   beforeEach(function () {
     _makePdfLibPredictable();
-    MockDate.set(new Date('2020-12-01'));
-  });
-
-  afterEach(function () {
-    MockDate.reset();
+    sinon.useFakeTimers({ now: new Date('2020-12-01'), toFake: ['Date'] });
   });
 
   it('should generate full learning content PDF in french (non-regression test)', async function () {
