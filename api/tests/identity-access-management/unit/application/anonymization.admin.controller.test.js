@@ -3,7 +3,8 @@ import { GarAnonymizationParser } from '../../../../src/identity-access-manageme
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { anonymizeGarResultSerializer } from '../../../../src/identity-access-management/infrastructure/serializers/jsonapi/anonymize-gar-result.serializer.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { createTempFile, expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../test-helper.js';
+import { createTempFile } from '../../../tooling/test-utils/file.js';
 
 describe('Unit | Identity Access Management | Application | Controller | Admin | anonymization', function () {
   describe('anonymizeGarData', function () {

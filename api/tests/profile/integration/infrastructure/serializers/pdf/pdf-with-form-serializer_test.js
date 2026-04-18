@@ -5,7 +5,8 @@ import * as url from 'node:url';
 import { PDFDocument } from 'pdf-lib';
 
 import { serializeStream } from '../../../../../../src/profile/infrastructure/serializers/pdf/pdf-with-form-serializer.js';
-import { expect, isSameBinary } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { isSameBinary } from '../../../../../tooling/test-utils/file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 

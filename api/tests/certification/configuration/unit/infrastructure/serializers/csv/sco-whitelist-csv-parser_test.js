@@ -1,13 +1,14 @@
 import { extractExternalIds } from '../../../../../../../src/certification/configuration/infrastructure/serializers/csv/sco-whitelist-csv-parser.js';
 import { FileValidationError } from '../../../../../../../src/shared/domain/errors.js';
-import { catchErr, createTempFile, expect, removeTempFile } from '../../../../../../test-helper.js';
+import { catchErr, expect } from '../../../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../../../tooling/test-utils/file.js';
 
 describe('Integration | Serializer | CSV | Certification | Configuration | sco-whitelist-csv-parser', function () {
   describe('#extractExternalIds', function () {
     let file;
 
-    afterEach(function () {
-      removeTempFile(file);
+    afterEach(async function () {
+      await removeTempFile(file);
     });
 
     context('when the file is correctly parsed', function () {

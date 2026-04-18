@@ -9,13 +9,14 @@ import {
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { catchErr, createTempFile, databaseBuilder, expect, knex, removeTempFile } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {
   let filePath;
 
   afterEach(async function () {
-    if (filePath) await removeTempFile(filePath);
+    await removeTempFile(filePath);
   });
 
   context('when parsing a CSV file without organization', function () {

@@ -39,7 +39,6 @@ import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { catchErr, catchErrSync, preventStubsToBeCalledUnexpectedly } from './tooling/test-utils/error.js';
-import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
@@ -128,7 +127,6 @@ export {
   catchErrSync,
   createMaddoServer,
   createServer,
-  createTempFile,
   databaseBuilder,
   datamartBuilder,
   datamartKnex,
@@ -140,7 +138,6 @@ export {
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
-  isSameBinary,
   knex,
   learningContentBuilder,
   mockAttestationStorage,
@@ -149,7 +146,6 @@ export {
   nock,
   parseNDJSON,
   preventStubsToBeCalledUnexpectedly,
-  removeTempFile,
   sinon,
   wait,
   waitForStreamFinalizationToBeDone,

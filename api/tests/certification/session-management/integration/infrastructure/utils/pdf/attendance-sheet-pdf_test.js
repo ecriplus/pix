@@ -5,7 +5,9 @@ import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
 
 import { getAttendanceSheetPdfBuffer } from '../../../../../../../src/certification/enrolment/infrastructure/utils/pdf/attendance-sheet-pdf.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, isSameBinary, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { isSameBinary } from '../../../../../../tooling/test-utils/file.js';
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 describe('Integration | Infrastructure | Utils | Pdf | Attendance sheet Pdf', function () {

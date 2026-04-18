@@ -1,7 +1,8 @@
 import { organizationTagCsvParser } from '../../../../../../src/organizational-entities/infrastructure/parsers/csv/organization-tag-csv.parser.js';
 import { ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { CsvImportError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, createTempFile, expect, removeTempFile } from '../../../../../test-helper.js';
+import { catchErr, expect } from '../../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../../tooling/test-utils/file.js';
 
 const fileName = 'organizationTagCsvParser.test.csv';
 
@@ -9,9 +10,7 @@ describe('Unit | Organizational Entities | Domain | Service | organizationTagCsv
   let filePath;
 
   afterEach(async function () {
-    if (filePath) {
-      await removeTempFile(filePath);
-    }
+    await removeTempFile(filePath);
   });
 
   describe('when CSV file format is invalid: no header', function () {
