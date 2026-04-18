@@ -4,8 +4,9 @@ import { AttestationStorage } from '../../../../../src/quest/infrastructure/stor
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
 import { S3UploadError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex, mockAttestationStorageUpload } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../../tooling/fixtures/index.js';
+import { mockAttestationStorageUpload } from '../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Quest | Integration | Repository | attestation', function () {
   describe('#save', function () {

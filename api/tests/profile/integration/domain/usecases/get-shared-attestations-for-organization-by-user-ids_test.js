@@ -2,17 +2,15 @@ import { AttestationNotFoundError, NoProfileRewardsFoundError } from '../../../.
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { catchErr, databaseBuilder, expect, mockAttestationStorage, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { mockAttestationStorage } from '../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-for-organization-by-user-ids', function () {
   let clock;
   const now = new Date('2022-12-25');
 
   beforeEach(function () {
-    clock = sinon.useFakeTimers({
-      now,
-      toFake: ['Date'],
-    });
+    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
   });
 
   afterEach(async function () {

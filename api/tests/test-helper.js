@@ -35,7 +35,6 @@ import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
-import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
 import { catchErr } from './tooling/test-utils/error.js';
@@ -137,8 +136,6 @@ export {
   HttpTestServer,
   knex,
   learningContentBuilder,
-  mockAttestationStorage,
-  mockAttestationStorageUpload,
   MockDate,
   nock,
   sinon,

@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
-import { databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { mockAttestationStorage } from '../../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Integration | Prescription | Learner Management | Domain | UseCase | get-attestation-zip-for-divisions', function () {
   it('returns a pdf attestation', async function () {

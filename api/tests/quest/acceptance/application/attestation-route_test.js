@@ -8,9 +8,9 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  mockAttestationStorageUpload,
 } from '../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../tooling/fixtures/index.js';
+import { mockAttestationStorageUpload } from '../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Quest | Acceptance | Application | Attestation Route ', function () {
   let server;

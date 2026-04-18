@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { expect, knex, mockAttestationStorageUpload } from '../../../../test-helper.js';
+import { expect, knex } from '../../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../../tooling/fixtures/index.js';
+import { mockAttestationStorageUpload } from '../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Integration | Attestation | Domain | UseCases | create-attestation', function () {
   it('should create an attestation', async function () {
