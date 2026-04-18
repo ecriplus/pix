@@ -8,8 +8,8 @@ import {
   generateValidRequestAuthorizationHeaderForApplication,
   knex,
   nock,
-  waitForStreamFinalizationToBeDone,
 } from '../../../test-helper.js';
+import { waitForStreamFinalizationToBeDone } from '../../../tooling/test-utils/wait.js';
 
 describe('Acceptance | Route | llm-preview', function () {
   let server;

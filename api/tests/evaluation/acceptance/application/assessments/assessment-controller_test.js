@@ -28,8 +28,8 @@ import {
   learningContentBuilder,
   nock,
   sinon,
-  waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
+import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 
 describe('Acceptance | Controller | assessment-controller', function () {
   let options;

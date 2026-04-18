@@ -44,7 +44,6 @@ import {
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
-import { wait, waitForStreamFinalizationToBeDone } from './tooling/test-utils/wait.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -145,6 +144,4 @@ export {
   nock,
   preventStubsToBeCalledUnexpectedly,
   sinon,
-  wait,
-  waitForStreamFinalizationToBeDone,
 };
