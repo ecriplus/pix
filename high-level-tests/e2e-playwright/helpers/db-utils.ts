@@ -85,7 +85,7 @@ export async function createOrganizationLearnerInDB(
   knex: Knex,
 ) {
   const someDate = new Date();
-  return await knex('organization-learners')
+  const [{ id: organizationLearnerId }] = await knex('organization-learners')
     .insert({
       firstName,
       lastName,
@@ -98,6 +98,7 @@ export async function createOrganizationLearnerInDB(
       updatedAt: someDate,
     })
     .returning('*');
+  return organizationLearnerId;
 }
 
 export async function createCertificationCenterInDB(
