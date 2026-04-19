@@ -39,9 +39,6 @@ describe('Acceptance | Identity Access Management | Route | Admin | lti', functi
 
   describe('GET /api/lti/registration', function () {
     it('returns an html page acknowledging platform registration with an HTTP status code 200', async function () {
-      // Key generation with 4096 modulus takes time !
-      this.timeout(5000);
-
       //given
       const { clientId, platformOpenIdConfig, platformOpenIdConfigUrl, toolConfig } =
         domainBuilder.identityAccessManagement.buildLtiPlatformRegistrationWithPlatformConfig();

@@ -12,8 +12,6 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const REWRITE_REFERENCE_FILE = false;
 
 describe('Integration | Application | Target-Profiles | Presenter | PDF | LearningContentPdfPresenter', function () {
-  this.timeout(3000);
-
   beforeEach(function () {
     _makePdfLibPredictable();
     sinon.useFakeTimers({ now: new Date('2020-12-01'), toFake: ['Date'] });

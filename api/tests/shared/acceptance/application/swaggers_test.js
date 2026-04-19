@@ -2,9 +2,6 @@ import { config } from '../../../../src/shared/config.js';
 import { createMaddoServer, createServer, expect } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | Open Api', function () {
-  // Increase the test timeout because swagger.json endpoints can be long to generate/respond.
-  this.timeout(5000);
-
   let server;
 
   context('Internal API definitons', function () {

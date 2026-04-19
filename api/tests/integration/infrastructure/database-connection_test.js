@@ -10,9 +10,6 @@ import { databaseBuilder, expect } from '../../test-helper.js';
 describe('Integration | Infrastructure | database-connection', function () {
   describe('#emptyAllTables', function () {
     it('should empty all tables', async function () {
-      // Increase the test timeout because the table truncate can be long to respond sometimes.
-      this.timeout(5000);
-
       // given
       const { environment } = config;
       const databaseConnection = new DatabaseConnection(liveKnexConfigs[environment]);
