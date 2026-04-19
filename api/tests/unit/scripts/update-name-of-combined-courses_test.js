@@ -1,6 +1,7 @@
 import { UpdateCombinedCoursesNameScript } from '../../../scripts/prod/update-name-of-combined-courses.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, sinon } from '../../test-helper.js';
+import { expect, sinon } from '../../test-helper.js';
+import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('UpdateNameOfCombinedCoursesScript', function () {
   let usecasesStub, logger, domainTransactionStub;

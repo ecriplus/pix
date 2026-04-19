@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { CertificationContract } from '../../../../../../src/certification/evaluation/domain/services/CertificationContract.js';
-import { catchErr, domainBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Services | CertificationContract', function () {
   context('#assertThatWeHaveEnoughAnswers', function () {

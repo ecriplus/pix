@@ -4,7 +4,8 @@ import {
   OrganizationWithoutEmailError,
 } from '../../../../../src/shared/domain/errors.js';
 import { sendScoInvitation } from '../../../../../src/team/domain/usecases/send-sco-invitation.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Team | Domain | UseCase | send-sco-invitation', function () {
   let organizationRepository, organizationInvitationRepository, organizationInvitationService;

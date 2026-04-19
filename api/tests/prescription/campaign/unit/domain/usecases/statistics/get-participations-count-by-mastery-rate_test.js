@@ -1,6 +1,7 @@
 import { getParticipationsCountByMasteryRate } from '../../../../../../../src/prescription/campaign/domain/usecases/statistics/get-participations-count-by-mastery-rate.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | getParticipationsCountByMasteryRate', function () {
   context('when the user has access to the campaign', function () {

@@ -3,7 +3,8 @@ import {
   getAssetInfos,
   getValidHostname,
 } from '../../../../../src/shared/infrastructure/repositories/pix-assets-repository.js';
-import { catchErr, expect, nock } from '../../../../test-helper.js';
+import { expect, nock } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | PixAssets', function () {
   const fakeAnswerContent = {

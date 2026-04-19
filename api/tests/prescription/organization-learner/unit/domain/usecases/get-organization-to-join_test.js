@@ -1,6 +1,7 @@
 import { getOrganizationToJoin } from '../../../../../../src/prescription/organization-learner/domain/usecases/get-organization-to-join.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCases | get-organization-to-join', function () {
   let campaignRepository;

@@ -5,7 +5,8 @@ import {
 } from '../../../../../../src/prescription/learner-management/application/api/learners-api.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Prescription | learner management | Api | learners', function () {
   describe('#hasBeenLearner', function () {

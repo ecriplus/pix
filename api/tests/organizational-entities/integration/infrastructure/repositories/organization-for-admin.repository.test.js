@@ -6,7 +6,8 @@ import { repositories } from '../../../../../src/organizational-entities/infrast
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | organization-for-admin', function () {
   let clock, byDefaultFeatureId, administrationTeam, organizationLearnerType, domainOrganizationLearnerType;

@@ -4,14 +4,8 @@ import {
   NotFoundError,
   TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
 } from '../../../../../src/shared/domain/errors.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-  sinon,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Usecases | Save autonomous course', function () {
   beforeEach(async function () {

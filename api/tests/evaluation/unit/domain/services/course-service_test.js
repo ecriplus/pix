@@ -1,7 +1,8 @@
 import * as courseService from '../../../../../src/evaluation/domain/services/course-service.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Service | Course Service', function () {
   describe('#getCourse', function () {

@@ -3,8 +3,9 @@ import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/pr
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { CampaignReport } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignReport.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { preventStubsToBeCalledUnexpectedly } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | API | Campaigns', function () {

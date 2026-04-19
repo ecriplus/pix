@@ -1,7 +1,8 @@
 import { updateOrganizationLearnerDependentUserPassword } from '../../../../src/prescription/organization-learner/domain/usecases/update-organization-learner-dependent-user-password.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../test-helper.js';
+import { expect, sinon } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | update-organization-learner-dependent-user-password', function () {
   const userId = 1;

@@ -2,8 +2,9 @@ import { AttestationNotFoundError } from '../../../../../src/profile/domain/erro
 import { AttestationUserDetail } from '../../../../../src/profile/domain/models/AttestationUserDetail.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
 import { buildAttestationUserDetail } from '../../../../tooling/domain-builder/factory/index.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Profile | Integration | Domain | get-shared-attestations-user-detail-by-organization-id', function () {
   let clock;

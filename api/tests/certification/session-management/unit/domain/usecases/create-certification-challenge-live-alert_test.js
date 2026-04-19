@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { createCertificationChallengeLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/create-certification-challenge-live-alert.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | create-certification-challenge-live-alert', function () {
   let certificationChallengeLiveAlertRepository;

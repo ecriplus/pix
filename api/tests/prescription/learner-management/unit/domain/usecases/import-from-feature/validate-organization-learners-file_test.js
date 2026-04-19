@@ -3,7 +3,8 @@ import { ImportCommonOrganizationLearnersJob } from '../../../../../../../src/pr
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { validateOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/validate-organization-learners-file.js';
 import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
-import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
   let organizationImportRepositoryStub,

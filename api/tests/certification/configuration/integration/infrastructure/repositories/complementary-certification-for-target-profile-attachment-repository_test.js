@@ -1,6 +1,7 @@
 import * as complementaryCertificationForTargetProfileAttachmentRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-for-target-profile-attachment-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | complementary-certification-for-target-profile-attachment-repository', function () {
   describe('#getById', function () {

@@ -4,7 +4,8 @@ import { addTagsToOrganizations } from '../../../../../src/organizational-entiti
 import { organizationForAdminRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/organization-for-admin.repository.js';
 import * as organizationTagRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { tagRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | add-tags-to-organizations', function () {
   let firstTag;

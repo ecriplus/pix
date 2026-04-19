@@ -1,6 +1,7 @@
 import { DeleteAndAnonymizeOrganizationLearnerParticipationsScript } from '../../../src/prescription/scripts/delete-and-anonymize-organization-learner-participations-from-combined-courses.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, sinon } from '../../test-helper.js';
+import { expect, sinon } from '../../test-helper.js';
+import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('DeleteAndAnonymizeOrganizationLearnerParticipationsScript', function () {
   let script, logger;

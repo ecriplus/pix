@@ -1,7 +1,8 @@
 import { PassageDoesNotExistError, PassageTerminatedError } from '../../../../../src/devcomp/domain/errors.js';
 import { verifyAndSaveAnswer } from '../../../../../src/devcomp/domain/usecases/verify-and-save-answer.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | UseCases | verify-and-save-answer', function () {
   describe('#verifyAndSaveAnswer', function () {

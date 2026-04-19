@@ -5,7 +5,8 @@ import { Organization } from '../../../../src/organizational-entities/domain/mod
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import * as organizationRepository from '../../../../src/shared/infrastructure/repositories/organization-repository.js';
-import { catchErr, databaseBuilder, expect } from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Organization', function () {
   describe('#get', function () {

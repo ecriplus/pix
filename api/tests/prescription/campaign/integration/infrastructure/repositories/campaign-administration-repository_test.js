@@ -6,7 +6,8 @@ import * as campaignAdministrationRepository from '../../../../../../src/prescri
 import { deleteExternalIdLabelFromCampaigns } from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignExternalIdTypes, CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Campaign Administration', function () {
   describe('#findByIds', function () {

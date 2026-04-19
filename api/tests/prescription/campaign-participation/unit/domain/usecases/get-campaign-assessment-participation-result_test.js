@@ -1,6 +1,7 @@
 import { getCampaignAssessmentParticipationResult } from '../../../../../../src/prescription/campaign-participation/domain/usecases/get-campaign-assessment-participation-result.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | get-campaign-assessment-participation-result', function () {
   let campaignRepository, campaignAssessmentParticipationResultRepository, campaignParticipationRepository;

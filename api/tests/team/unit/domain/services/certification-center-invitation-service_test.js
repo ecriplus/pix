@@ -9,7 +9,8 @@ import {
   createOrUpdateCertificationCenterInvitation,
   resendCertificationCenterInvitation,
 } from '../../../../../src/team/domain/services/certification-center-invitation-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Team | Domain | Services | CertificationCenterInvitationService', function () {
   describe('#createOrUpdateCertificationCenterInvitation', function () {

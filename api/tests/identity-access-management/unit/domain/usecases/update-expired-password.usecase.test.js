@@ -4,7 +4,8 @@ import { PasswordExpirationToken } from '../../../../../src/identity-access-mana
 import { updateExpiredPassword } from '../../../../../src/identity-access-management/domain/usecases/update-expired-password.usecase.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-expired-password', function () {
   const passwordExpirationToken = 'PASSWORD_RESET_TOKEN';

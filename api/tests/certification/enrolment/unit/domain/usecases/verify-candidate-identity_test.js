@@ -8,7 +8,8 @@ import {
   UnexpectedUserAccountError,
   UserAlreadyLinkedToCandidateInSessionError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate-identity', function () {
   let candidateRepository, centerRepository, sessionRepository, userRepository;

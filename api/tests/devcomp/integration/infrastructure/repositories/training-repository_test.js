@@ -9,7 +9,8 @@ import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as trainingRepository from '../../../../../src/devcomp/infrastructure/repositories/training-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | training-repository', function () {
   describe('#get', function () {

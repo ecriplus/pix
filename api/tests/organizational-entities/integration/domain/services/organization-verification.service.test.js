@@ -8,7 +8,8 @@ import * as organizationVerificationService from '../../../../../src/organizatio
 import * as administrationTeamRepository from '../../../../../src/organizational-entities/infrastructure/repositories/administration-team-repository.js';
 import * as organizationLearnerTypeRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-learner-type-repository.js';
 import * as countryRepository from '../../../../../src/shared/infrastructure/repositories/country-repository.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | Services | organization-verification', function () {
   describe('#checkCountryExists', function () {

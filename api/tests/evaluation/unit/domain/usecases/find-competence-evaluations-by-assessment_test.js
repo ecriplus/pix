@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import { findCompetenceEvaluationsByAssessment } from '../../../../../src/evaluation/domain/usecases/find-competence-evaluations-by-assessment.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | find-competence-evaluations-by-assessment', function () {
   const userId = 1;

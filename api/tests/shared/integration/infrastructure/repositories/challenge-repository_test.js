@@ -2,7 +2,8 @@ import { ValidatorQCM } from '../../../../../src/evaluation/domain/models/Valida
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, nock } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, nock } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | challenge-repository', function () {
   const challengeData00_skill00_qcu_valide_flashCompatible_frnl_noEmbedJson = {

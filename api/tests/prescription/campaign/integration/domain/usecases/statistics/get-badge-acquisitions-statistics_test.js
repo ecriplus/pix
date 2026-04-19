@@ -1,7 +1,8 @@
 import BadgeAcquisitionParticipationStatistic from '../../../../../../../src/prescription/campaign/domain/read-models/BadgeAcquisitionParticipationStatistic.js';
 import { usecases } from '../../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCase | Statistics | get-badge-acquisitions-statistics', function () {
   context('when requesting user is not allowed to access campaign informations', function () {

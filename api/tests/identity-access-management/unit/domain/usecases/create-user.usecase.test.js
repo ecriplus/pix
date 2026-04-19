@@ -4,7 +4,8 @@ import { User } from '../../../../../src/identity-access-management/domain/model
 import { createUser } from '../../../../../src/identity-access-management/domain/usecases/create-user.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | create-user', function () {
   const userId = 123;

@@ -11,8 +11,9 @@ import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCase | handle activity answer', function () {
   const alwaysTrueExaminer = new Examiner({ validator: new ValidatorAlwaysOK() });

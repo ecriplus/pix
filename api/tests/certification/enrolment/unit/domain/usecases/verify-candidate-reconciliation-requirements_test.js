@@ -2,7 +2,8 @@ import { verifyCandidateReconciliationRequirements } from '../../../../../../src
 import { CenterHabilitationError } from '../../../../../../src/certification/shared/domain/errors.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { UserNotAuthorizedToCertifyError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCases | verify-candidate-reconciliation-requirements', function () {
   let placementProfileService, certificationCenterRepository;

@@ -1,7 +1,8 @@
 import { getCampaignProfile } from '../../../../../../src/prescription/campaign-participation/domain/usecases/get-campaign-profile.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | get-campaign-profile', function () {
   let campaignRepository, campaignProfileRepository;

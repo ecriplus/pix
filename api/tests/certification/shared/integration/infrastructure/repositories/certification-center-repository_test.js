@@ -1,7 +1,8 @@
 import * as certificationCenterRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-center-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { CertificationCenter } from '../../../../../../src/shared/domain/models/CertificationCenter.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Shared | Integration | Repository | Certification Center', function () {
   let clock, now;

@@ -36,7 +36,6 @@ import { buildLearningContent as learningContentBuilder } from './tooling/learni
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
-import { catchErr } from './tooling/test-utils/error.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
@@ -119,7 +118,6 @@ after(async function () {
 
 // eslint-disable-next-line mocha/no-exports
 export {
-  catchErr,
   createMaddoServer,
   createServer,
   databaseBuilder,

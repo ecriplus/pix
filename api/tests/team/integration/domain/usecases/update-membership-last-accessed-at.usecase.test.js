@@ -3,7 +3,8 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import * as membershipRepository from '../../../../../src/team/infrastructure/repositories/membership.repository.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | UseCases | update-membership-last-accessed-at', function () {
   let clock;

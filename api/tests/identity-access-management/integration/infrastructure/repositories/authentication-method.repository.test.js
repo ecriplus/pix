@@ -7,7 +7,8 @@ import {
   AlreadyExistingEntityError,
   AuthenticationMethodNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | AuthenticationMethod', function () {
   const hashedPassword = 'ABCDEF1234';

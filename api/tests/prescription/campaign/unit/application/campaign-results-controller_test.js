@@ -2,7 +2,8 @@ import { campaignResultsController } from '../../../../../src/prescription/campa
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Controller | Campaign Results', function () {
   describe('#getCollectiveResult', function () {

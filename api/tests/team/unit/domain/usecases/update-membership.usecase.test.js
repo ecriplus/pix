@@ -1,7 +1,8 @@
 import { InvalidMembershipOrganizationRoleError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const { updateMembership } = usecases;
 

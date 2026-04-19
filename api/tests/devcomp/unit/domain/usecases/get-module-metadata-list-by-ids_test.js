@@ -1,6 +1,7 @@
 import { getModuleMetadataListByIds } from '../../../../../src/devcomp/domain/usecases/get-module-metadata-list-by-ids.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | UseCases | get-module-metadata-list-by-ids', function () {
   it('should return a list of ModuleMetadata', async function () {

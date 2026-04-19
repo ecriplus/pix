@@ -13,7 +13,8 @@ import {
   CertificationCenterMembership,
 } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Infrastructure | Repository | Certification Center Membership', function () {
   describe('#countActiveMembersForCertificationCenter', function () {

@@ -1,6 +1,7 @@
 import { CantCalculateCampaignParticipationResultError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { saveComputedCampaignParticipationResult } from '../../../../../../src/prescription/campaign-participation/domain/usecases/save-computed-campaign-participation-result.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | UseCases | SaveComputedCompaignParticipationResult', function () {
   it('should throw an error if participation is not shared', async function () {

@@ -2,7 +2,8 @@ import { uncancel } from '../../../../../../src/certification/session-management
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import CertificationUncancelled from '../../../../../../src/shared/domain/events/CertificationUncancelled.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | uncancel', function () {
   describe('when certification is a V2', function () {

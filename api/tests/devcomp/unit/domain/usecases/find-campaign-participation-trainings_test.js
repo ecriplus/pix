@@ -1,6 +1,7 @@
 import { UserNotAuthorizedToFindTrainings } from '../../../../../src/devcomp/domain/errors.js';
 import { findCampaignParticipationTrainings } from '../../../../../src/devcomp/domain/usecases/find-campaign-participation-trainings.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | UseCases | find-campaign-participation-trainings', function () {
   let campaignParticipationRepository;

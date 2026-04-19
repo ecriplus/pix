@@ -10,7 +10,8 @@ import { constants } from '../../../../../src/shared/domain/constants.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Domain | UseCases | get-progression', function () {
   describe('when the assessment is link to a campaign participation', function () {

@@ -2,7 +2,8 @@ import { RecommendableModule } from '../../../../../src/devcomp/application/api/
 import { RecommendedModule } from '../../../../../src/devcomp/application/api/models/RecommendedModule.js';
 import * as recommendedModulesApi from '../../../../../src/devcomp/application/api/recommended-modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, nock } from '../../../../test-helper.js';
+import { databaseBuilder, expect, nock } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Devcomp | Application | Api | RecommendedModules', function () {
   describe('#findByCampaignParticipationIds', function () {

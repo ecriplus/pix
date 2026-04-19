@@ -2,7 +2,8 @@ import lodash from 'lodash';
 
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
 import { checkCsvHeader, parseCsvWithHeader } from '../../../../../src/shared/infrastructure/helpers/csv.js';
-import { catchErr, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const { isEmpty } = lodash;
 

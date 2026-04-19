@@ -5,7 +5,8 @@ import { RequestedApplication } from '../../../../../src/identity-access-managem
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { AdminMember } from '../../../../../src/team/domain/models/AdminMember.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | authenticate-oidc-user', function () {
   context('when identityProvider is generic', function () {

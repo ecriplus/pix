@@ -6,7 +6,8 @@ import {
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Evaluation | Integration | Repositories | scoring-configuration-repository', function () {
   describe('#getLatestByDateAndLocale', function () {

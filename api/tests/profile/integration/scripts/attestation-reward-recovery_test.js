@@ -5,7 +5,8 @@ import {
   AttestationRewardRecoveryScript,
   TARGET_PROFILE_IDS,
 } from '../../../../src/profile/scripts/attestation-reward-recovery.js';
-import { catchErr, databaseBuilder, expect } from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Integration | Profile | Scripts | attestation-reward-recovery', function () {
   describe('options', function () {

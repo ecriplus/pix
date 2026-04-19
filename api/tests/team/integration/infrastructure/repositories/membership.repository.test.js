@@ -9,7 +9,8 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import * as membershipRepository from '../../../../../src/team/infrastructure/repositories/membership.repository.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Infrastructure | Repository | membership-repository', function () {
   let clock;

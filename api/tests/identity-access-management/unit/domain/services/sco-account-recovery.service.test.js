@@ -9,7 +9,8 @@ import {
   UserHasAlreadyLeftSCO,
   UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 const { features } = config;
 
 describe('Unit | Identity Access Management | Domain | Service | sco-account-recovery', function () {

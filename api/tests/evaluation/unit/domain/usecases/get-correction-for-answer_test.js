@@ -3,7 +3,8 @@ import { getCorrectionForAnswer } from '../../../../../src/evaluation/domain/use
 import { AssessmentNotCompletedError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { LearningContentResourceNotFound } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 class OtherError extends Error {}
 

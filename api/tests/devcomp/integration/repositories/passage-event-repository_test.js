@@ -2,7 +2,8 @@ import { FlashcardsCardAutoAssessedEvent } from '../../../../src/devcomp/domain/
 import { PassageStartedEvent } from '../../../../src/devcomp/domain/models/passage-events/passage-events.js';
 import * as passageEventRepository from '../../../../src/devcomp/infrastructure/repositories/passage-event-repository.js';
 import { DomainError } from '../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Integration | DevComp | Repositories | PassageEventRepository', function () {
   describe('#record', function () {

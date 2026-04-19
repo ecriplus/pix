@@ -1,6 +1,7 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as frameworkRepository from '../../../../../src/shared/infrastructure/repositories/framework-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | framework-repository', function () {
   const frameworkData0 = {

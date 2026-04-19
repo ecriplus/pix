@@ -1,13 +1,7 @@
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session Management | Integration | Domain | UseCase | register-publishable-session ', function () {
   beforeEach(async function () {

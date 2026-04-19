@@ -3,7 +3,8 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { CERTIFICATION_CENTER_MEMBERSHIP_ROLES } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | UseCases | update-certification-center-membership-last-accessed-at', function () {
   context('when the certification center membership does not exist', function () {

@@ -5,7 +5,8 @@ import { usecases } from '../../../../../src/prescription/learner-management/dom
 import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Organizations | organization-controller', function () {
   describe('#importorganizationLearnersFromSIECLE', function () {

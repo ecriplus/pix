@@ -5,7 +5,8 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../src/shared/domain/errors.js';
 import * as userReconciliationService from '../../../../src/shared/domain/services/user-reconciliation-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | Service | user-reconciliation-service', function () {
   let organizationLearners;

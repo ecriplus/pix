@@ -1,7 +1,8 @@
 import { UserTeamsInfo } from '../../../../../src/team/application/api/models/user-teams-info.js';
 import { getUserTeamsInfo } from '../../../../../src/team/application/api/user-teams.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Team | Unit | Application | API | user-teams', function () {
   describe('#getUserTeamsInfo', function () {

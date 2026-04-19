@@ -16,7 +16,8 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const campaignParticipationDBAttributes = [
   'id',

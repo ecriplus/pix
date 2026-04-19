@@ -1,7 +1,8 @@
 import { ReconcileCommonOrganizationLearnerError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { CommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/CommonOrganizationLearner.js';
 import { reconcileCommonOrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/usecases/reconcile-common-organization-learner.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | reconcile-common-organization-learner', function () {
   let organizationId,

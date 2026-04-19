@@ -1,7 +1,8 @@
 import * as simulateFlashAssessmentScenarioModule from '../../../../../../src/certification/evaluation/domain/usecases/simulate-flash-assessment-scenario.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const { simulateFlashAssessmentScenario } = simulateFlashAssessmentScenarioModule;
 

@@ -2,7 +2,8 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-acce
 import { OrganizationLearnerPasswordResetDTO } from '../../../../../../src/prescription/organization-learner/domain/models/OrganizationLearnerPasswordResetDTO.js';
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | generate organization learners username and temporary password', function () {
   const hashedPassword = '21fedcba';

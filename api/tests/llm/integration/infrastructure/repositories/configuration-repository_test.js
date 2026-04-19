@@ -1,6 +1,7 @@
 import { ConfigurationNotFoundError, LLMApiError } from '../../../../../src/llm/domain/errors.js';
 import { get } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
-import { catchErr, expect, nock } from '../../../../test-helper.js';
+import { expect, nock } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | configuration', function () {
   describe('#get', function () {

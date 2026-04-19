@@ -5,7 +5,8 @@ import utc from 'dayjs/plugin/utc.js';
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
 import { ComputeOrganizationLearnerCertificabilityJobProvidedDateError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { catchErr, expect, knex, sinon } from '../../../../../test-helper.js';
+import { expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 

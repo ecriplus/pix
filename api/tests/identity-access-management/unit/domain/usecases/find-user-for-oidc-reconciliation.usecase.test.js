@@ -3,7 +3,8 @@ import {
   DifferentExternalIdentifierError,
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { findUserForOidcReconciliation } from '../../../../../src/identity-access-management/domain/usecases/find-user-for-oidc-reconciliation.usecase.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | find-user-for-oidc-reconciliation', function () {
   let authenticationMethodRepository, userRepository, pixAuthenticationService, authenticationSessionService;

@@ -3,8 +3,9 @@ import omit from 'lodash/omit.js';
 import { Badge } from '../../../../../src/evaluation/domain/models/Badge.js';
 import * as badgeRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
 import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Badge', function () {
   let targetProfileWithoutBadge;

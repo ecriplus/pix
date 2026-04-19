@@ -1,6 +1,7 @@
 import { CertificationCandidateNotFoundError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { candidateHasSeenCertificationInstructions } from '../../../../../../src/certification/enrolment/domain/usecases/candidate-has-seen-certification-instructions.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | candidate-has-seen-certification-instructions', function () {
   let candidateRepository;

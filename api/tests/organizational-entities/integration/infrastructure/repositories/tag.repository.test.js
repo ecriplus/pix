@@ -2,7 +2,8 @@ import { Tag } from '../../../../../src/organizational-entities/domain/models/Ta
 import { tagRepository } from '../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | Tag', function () {
   describe('#create', function () {

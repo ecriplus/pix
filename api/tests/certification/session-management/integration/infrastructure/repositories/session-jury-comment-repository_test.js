@@ -1,6 +1,7 @@
 import * as sessionJuryCommentRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-jury-comment-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | session-jury-comment-repository', function () {
   context('#get', function () {

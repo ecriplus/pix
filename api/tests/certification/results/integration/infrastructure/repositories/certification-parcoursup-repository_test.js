@@ -1,6 +1,7 @@
 import * as certificationRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-parcoursup-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Results | Infrastructure | Integration | Repositories | certification-parcoursup', function () {
   describe('#getByINE', function () {

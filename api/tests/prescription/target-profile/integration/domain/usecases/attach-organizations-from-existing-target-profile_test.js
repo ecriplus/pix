@@ -2,7 +2,8 @@ import { attachOrganizationsFromExistingTargetProfile } from '../../../../../../
 import * as organizationsToAttachToTargetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/organizations-to-attach-to-target-profile-repository.js';
 import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import { NoOrganizationToAttach, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCase | attach-organizations-from-existing-target-profile', function () {
   describe('#attachOrganizationsFromExistingTargetProfile', function () {

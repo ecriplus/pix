@@ -1,5 +1,6 @@
 import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-models/TrainingTriggerForAdmin.js';
-import { catchErr, domainBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Read-Models | TrainingTriggerForAdmin', function () {
   describe('#constructor', function () {

@@ -1,7 +1,8 @@
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/read-models/CertificationIssueReportCategory.js';
 import * as issueReportCategoryRepository from '../../../../../../src/certification/shared/infrastructure/repositories/issue-report-category-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Issue Report Categories', function () {
   describe('#get', function () {

@@ -2,7 +2,8 @@ import { FillEduV3NotEligibleAutoComment } from '../../../scripts/certification/
 import { AutoJuryCommentKeys } from '../../../src/certification/shared/domain/models/JuryComment.js';
 import { SCOPES } from '../../../src/certification/shared/domain/models/Scopes.js';
 import { AssessmentResult } from '../../../src/shared/domain/models/AssessmentResult.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../test-helper.js';
+import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('Certification | Scripts | fill edu v3 not eligible auto comment', function () {
   let assessmentResultToBeFilled, eduVersion, script;

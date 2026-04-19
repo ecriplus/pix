@@ -1,7 +1,8 @@
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationArchivedError } from '../../../../../src/team/domain/errors.js';
 import { createMembership } from '../../../../../src/team/domain/usecases/create-membership.usecase.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Team | Domain | UseCase | create-membership', function () {
   it('should insert a new membership with role ADMIN', async function () {

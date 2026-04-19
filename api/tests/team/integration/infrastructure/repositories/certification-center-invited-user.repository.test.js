@@ -4,7 +4,8 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { CertificationCenterInvitedUser } from '../../../../../src/team/domain/models/CertificationCenterInvitedUser.js';
 import { certificationCenterInvitedUserRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-invited-user.repository.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const { omit } = lodash;
 

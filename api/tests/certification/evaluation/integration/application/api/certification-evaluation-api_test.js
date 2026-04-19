@@ -6,7 +6,8 @@ import { AlgorithmEngineVersion } from '../../../../../../src/certification/shar
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Application | Certification | Evaluation | API', function () {
   describe('#selectNextCertificationChallenge', function () {

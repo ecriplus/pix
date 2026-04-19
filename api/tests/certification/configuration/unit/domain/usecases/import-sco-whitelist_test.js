@@ -1,7 +1,8 @@
 import { InvalidScoWhitelistError } from '../../../../../../src/certification/configuration/domain/errors.js';
 import { importScoWhitelist } from '../../../../../../src/certification/configuration/domain/usecases/import-sco-whitelist.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Unit | UseCase | import-sco-whitelist', function () {
   let centerRepository;

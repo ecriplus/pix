@@ -5,7 +5,8 @@ import {
   ApplicationScopeNotAllowedError,
   ApplicationWithInvalidCredentialsError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Usecase | authenticate-application', function () {
   context('when application is not found', function () {

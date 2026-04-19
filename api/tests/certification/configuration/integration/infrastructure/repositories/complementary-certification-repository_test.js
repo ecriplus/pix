@@ -1,6 +1,7 @@
 import * as complementaryCertificationRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Certification | Repository | complementary-certification-repository', function () {
   describe('#findAll', function () {

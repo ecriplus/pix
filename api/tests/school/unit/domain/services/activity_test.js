@@ -1,6 +1,7 @@
 import { ActivityNotFoundError } from '../../../../../src/school/domain/school-errors.js';
 import { getCurrentActivity } from '../../../../../src/school/domain/services/activity.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Service | Activity', function () {
   describe('#getCurrentActivity', function () {

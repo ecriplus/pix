@@ -1,6 +1,7 @@
 import { getJurySession } from '../../../../../../src/certification/session-management/domain/usecases/get-jury-session.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session Management | Unit | Domain | UseCase | get-jury-session', function () {
   let jurySessionRepository;

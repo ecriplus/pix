@@ -7,7 +7,6 @@ import * as trainingTriggerRepository from '../../../../../src/devcomp/infrastru
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import {
-  catchErr,
   databaseBuilder,
   domainBuilder,
   expect,
@@ -15,6 +14,7 @@ import {
   learningContentBuilder,
   sinon,
 } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | training-trigger-repository', function () {
   let learningContent;

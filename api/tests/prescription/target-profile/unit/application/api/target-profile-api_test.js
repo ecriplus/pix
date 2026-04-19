@@ -3,8 +3,9 @@ import { TargetProfile } from '../../../../../../src/prescription/target-profile
 import { TargetProfileSkill } from '../../../../../../src/prescription/target-profile/application/api/TargetProfileSkill.js';
 import { TargetProfileForSpecifier } from '../../../../../../src/prescription/target-profile/domain/read-models/TargetProfileForSpecifier.js';
 import { usecases } from '../../../../../../src/prescription/target-profile/domain/usecases/index.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect, sinon } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | API | TargetProfile', function () {
   describe('#getByIdForAdmin', function () {
