@@ -57,7 +57,8 @@ describe('Unit | Certification | Enrolment | Domain | Models | CandidateTimeline
       timeline.addEvent(eventMiddle);
 
       // then
-      expect(timeline.events).to.be.ascendingBy('when');
+      const eventCodes = timeline.events.map((event) => event.code);
+      expect(eventCodes).to.deep.equal(['last', 'middle', 'first']);
     });
   });
 });

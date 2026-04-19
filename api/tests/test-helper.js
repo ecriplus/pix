@@ -2,7 +2,6 @@ import 'dayjs/locale/fr.js';
 
 import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import nock from 'nock';
@@ -47,7 +46,6 @@ dayjs.extend(localizedFormat);
 
 // Extends Chai helpers
 chaiUse(chaiAsPromised);
-chaiUse(chaiSorted);
 chaiUse(sinonChai);
 chaiUse(jobChai);
 Object.values(customChaiHelpers).forEach(chaiUse);
