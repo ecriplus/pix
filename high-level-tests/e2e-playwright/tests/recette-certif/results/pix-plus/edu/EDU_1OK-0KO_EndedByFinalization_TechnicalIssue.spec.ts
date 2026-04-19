@@ -39,7 +39,7 @@ test(
     snapshotPath,
     csvResultPath,
   }) => {
-    const certifiableUserData = await getCertifiableUserData(0);
+    const certifiableUserData = await getCertifiableUserData('buffy.summers@example.net');
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
     const { sessionNumber, certificationCenterName, certificationNumber } = await enrollCandidateAndPassExam({
       testRef,
