@@ -1,7 +1,7 @@
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { COURSE_ITEM_TYPES, CourseItem } from '../../../../../src/quest/domain/models/CourseItem.js';
 import * as courseRepository from '../../../../../src/quest/infrastructure/repositories/course-repository.js';
-import { databaseBuilder, expect, mockLearningContent } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Integration | Repository | course-repository', function () {
   describe('#findByOrganizationId', function () {
@@ -53,9 +53,8 @@ describe('Quest | Integration | Repository | course-repository', function () {
         organizationId,
         combinedCourseBlueprintId: blueprint.id,
       });
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      const learningContent = {
         tubes: [
           { id: 'tube1', competenceId: 'recComp1' },
           { id: 'tube2', competenceId: 'recComp1' },
@@ -66,7 +65,10 @@ describe('Quest | Integration | Repository | course-repository', function () {
           { id: 'recComp2', areaId: 'recArea1', name_i18n: { fr: 'Comp2' }, index: '1.2', origin: 'Pix' },
         ],
         areas: [{ id: 'recArea1', title_i18n: { fr: 'Area1' }, competenceIds: ['recComp1', 'recComp2'] }],
-      });
+      };
+      databaseBuilder.factory.learningContent.build(learningContent);
+
+      await databaseBuilder.commit();
 
       // when
       const result = await courseRepository.findByOrganizationId({ organizationId });
@@ -111,16 +113,18 @@ describe('Quest | Integration | Repository | course-repository', function () {
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'tube1' });
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'tube2' });
       databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      const learningContent = {
         tubes: [
           { id: 'tube1', competenceId: 'recComp1' },
           { id: 'tube2', competenceId: 'recComp1' },
         ],
         competences: [{ id: 'recComp1', areaId: 'recArea1', name_i18n: { fr: 'Comp1' }, index: '1.1', origin: 'Pix' }],
         areas: [{ id: 'recArea1', title_i18n: { fr: 'Area1' }, competenceIds: ['recComp1'] }],
-      });
+      };
+      databaseBuilder.factory.learningContent.build(learningContent);
+
+      await databaseBuilder.commit();
 
       // when
       const result = await courseRepository.findByOrganizationId({ organizationId });
@@ -142,15 +146,17 @@ describe('Quest | Integration | Repository | course-repository', function () {
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1' });
       databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      const learningContent = {
         areas: [{ id: 'recAreaA', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] }],
         competences: [
           { id: 'recCompA', name_i18n: { fr: 'Mener une recherche' }, areaId: 'recAreaA', index: '1.1', origin: 'Pix' },
         ],
         tubes: [{ id: 'recTube1', competenceId: 'recCompA' }],
-      });
+      };
+      databaseBuilder.factory.learningContent.build(learningContent);
+
+      await databaseBuilder.commit();
 
       // when
       const result = await courseRepository.findByOrganizationId({ organizationId, locale: 'fr' });
@@ -178,9 +184,8 @@ describe('Quest | Integration | Repository | course-repository', function () {
         organizationId,
         combinedCourseBlueprintId: blueprint.id,
       });
-      await databaseBuilder.commit();
 
-      await mockLearningContent({
+      const learningContent = {
         areas: [
           { id: 'recAreaA', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] },
           { id: 'recAreaB', title_i18n: { fr: 'Communication et collaboration' }, competenceIds: ['recCompB'] },
@@ -193,7 +198,10 @@ describe('Quest | Integration | Repository | course-repository', function () {
           { id: 'recTube1', competenceId: 'recCompA' },
           { id: 'recTube2', competenceId: 'recCompB' },
         ],
-      });
+      };
+      databaseBuilder.factory.learningContent.build(learningContent);
+
+      await databaseBuilder.commit();
 
       // when
       const result = await courseRepository.findByOrganizationId({ organizationId, locale: 'fr' });

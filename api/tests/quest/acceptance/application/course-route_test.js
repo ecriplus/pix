@@ -1,11 +1,7 @@
+import { createServer } from '../../../../server.js';
 import { COURSE_ITEM_TYPES } from '../../../../src/quest/domain/models/CourseItem.js';
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Quest | Acceptance | Application | Course catalogue Route', function () {
   let server;
