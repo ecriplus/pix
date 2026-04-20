@@ -1,10 +1,12 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { AlreadyRatedAssessmentError } from '../../../../../src/evaluation/domain/errors.js';
 import { completeAssessment } from '../../../../../src/evaluation/domain/usecases/complete-assessment.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | complete-assessment', function () {
   let assessmentRepository;

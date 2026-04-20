@@ -1,6 +1,7 @@
 import * as frameworkChallengesRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/framework-challenges-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Integration | Repository | framework-challenges', function () {
   describe('#getByVersionId', function () {

@@ -4,7 +4,8 @@ import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certific
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Integration | Repository | Version', function () {
   describe('#create', function () {

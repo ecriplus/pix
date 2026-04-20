@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { findOrganizationPlacesLot } from '../../../../../../src/prescription/organization-place/domain/usecases/find-organization-places-lot.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | find-organization-places', function () {
   it('should get the organization places', async function () {

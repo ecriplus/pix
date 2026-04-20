@@ -1,7 +1,8 @@
 import { StructureNotFoundError } from '../../../../../src/organizational-entities/domain/errors.js';
 import * as networkRepository from '../../../../../src/organizational-entities/infrastructure/repositories/network.repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repositories | network', function () {
   describe('#findAll', function () {

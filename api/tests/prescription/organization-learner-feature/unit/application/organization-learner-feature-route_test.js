@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { organizationLearnerFeaturesController } from '../../../../../src/prescription/organization-learner-feature/application/organization-learner-features-controller.js';
 import * as organizationLearnerFeatureRoute from '../../../../../src/prescription/organization-learner-feature/application/organization-learner-features-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | organization-learner-feature-router', function () {
   let httpTestServer;

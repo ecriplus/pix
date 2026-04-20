@@ -1,4 +1,5 @@
 import lodash from 'lodash';
+import sinon from 'sinon';
 
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
@@ -9,7 +10,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
   knex,
-  sinon,
 } from '../../../../../tests/test-helper.js';
 
 const { omit: _omit } = lodash;

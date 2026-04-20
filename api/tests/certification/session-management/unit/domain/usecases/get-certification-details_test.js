@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { CertificationDetails } from '../../../../../../src/certification/session-management/domain/read-models/CertificationDetails.js';
 import { getCertificationDetails } from '../../../../../../src/certification/session-management/domain/usecases/get-certification-details.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | get-certification-details', function () {
   context('the certification assessment has been completed', function () {

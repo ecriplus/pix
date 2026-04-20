@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { usecases as devCompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
 import { Scorecard } from '../../../../../src/evaluation/domain/models/Scorecard.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | scorecard-controller', function () {
   const authenticatedUserId = '12';

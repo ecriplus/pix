@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Combined course | Domain | UseCases | attach-organizations-to-combined-course-blueprint', function () {
   it('should return duplicated ids and attached ids for a given combined course blueprint', async function () {

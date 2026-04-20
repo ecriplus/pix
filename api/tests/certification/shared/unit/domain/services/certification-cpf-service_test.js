@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../../../../src/certification/shared/domain/constants/certification-candidates-errors.js';
 import {
   CpfBirthInformationValidation,
   getBirthInformation,
 } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Service | Certification CPF service', function () {
   let certificationCpfCountryRepository;

@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { MembershipUpdateError } from '../../../../../src/shared/domain/errors.js';
 import { disableMembership } from '../../../../../src/team/domain/usecases/disable-membership.usecase.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Team | Domain | UseCase | disable-membership', function () {
   let membershipRepository;

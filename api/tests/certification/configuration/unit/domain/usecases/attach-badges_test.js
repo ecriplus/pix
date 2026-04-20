@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { InvalidBadgeLevelError } from '../../../../../../src/certification/configuration/domain/errors.js';
 import { attachBadges } from '../../../../../../src/certification/configuration/domain/usecases/attach-badges.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { MissingAttributesError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | attach-badges', function () {
   let complementaryCertificationForTargetProfileAttachmentRepository, complementaryCertificationBadgesRepository;

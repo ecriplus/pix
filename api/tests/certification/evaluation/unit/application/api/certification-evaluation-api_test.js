@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import * as certificationEvaluationApi from '../../../../../../src/certification/evaluation/application/api/certification-evaluation-api.js';
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Application | Certification | Evaluation | API', function () {
   describe('#selectNextCertificationChallenge', function () {

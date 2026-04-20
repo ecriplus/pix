@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getTargetProfileContentAsJson } from '../../../../../../src/prescription/target-profile/domain/usecases/get-target-profile-content-as-json.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-target-profile-content-as-json', function () {
   let targetProfileAdministrationRepository;

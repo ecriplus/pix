@@ -1,6 +1,7 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../../src/prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Campaign | Application | Usecases | checkCampaignBelongsToCombinedCourse', function () {
   let organizationId, campaignId;

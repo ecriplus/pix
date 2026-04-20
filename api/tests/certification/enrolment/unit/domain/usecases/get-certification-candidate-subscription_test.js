@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { getCertificationCandidateSubscription } from '../../../../../../src/certification/enrolment/domain/usecases/get-certification-candidate-subscription.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | get-certification-candidate-subscription', function () {
   let certificationBadgesService;

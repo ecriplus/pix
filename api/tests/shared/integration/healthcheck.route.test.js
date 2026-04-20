@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { databaseConnections } from '../../../db/database-connections.js';
-import { createServer, expect, sinon } from '../../test-helper.js';
+import { createServer, expect } from '../../test-helper.js';
 
 describe('Integration | Shared | Application | Route | healthcheck', function () {
   let server;

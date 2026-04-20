@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { membershipAdminController } from '../../../../../src/team/application/membership/membership.admin.controller.js';
 import { UserOrganizationForAdmin } from '../../../../../src/team/domain/read-models/UserOrganizationForAdmin.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | Membership Admin', function () {
   describe('#findUserOrganizationsForAdmin', function () {

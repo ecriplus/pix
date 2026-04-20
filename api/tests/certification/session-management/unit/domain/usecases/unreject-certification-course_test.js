@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { unrejectCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/unreject-certification-course.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CertificationCourseUnrejected } from '../../../../../../src/shared/domain/events/CertificationCourseUnrejected.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | unreject-certification-course', function () {
   describe('when certification is a V2', function () {

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { organizationAdminController } from '../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { organizationalEntitiesRoutes } from '../../../../src/organizational-entities/application/routes.js';
 import { logo3Mb } from '../../../integration/application/organizations-administration/_files/logo-3mb.js';
@@ -6,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Application | Route | Organization Administration', function () {

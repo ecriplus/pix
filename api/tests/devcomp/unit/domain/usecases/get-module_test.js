@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { getModule } from '../../../../../src/devcomp/domain/usecases/get-module.js';
 import { config } from '../../../../../src/shared/config.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | get-module', function () {
   describe('#getModule', function () {

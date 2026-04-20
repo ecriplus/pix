@@ -1,5 +1,7 @@
 import crypto from 'node:crypto';
 
+import sinon from 'sinon';
+
 import { CampaignParticipationForUserManagement } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipationForUserManagement.js';
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import {
@@ -7,7 +9,7 @@ import {
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | find-campaign-participations-for-user-management', function () {
   let userId;

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { POLE_EMPLOI } from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import {
   AuthenticationKeyExpired,
@@ -6,7 +8,8 @@ import {
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { reconcileOidcUser } from '../../../../../src/identity-access-management/domain/usecases/reconcile-oidc-user.usecase.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-user', function () {
   const audience = 'https://app.pix.fr';

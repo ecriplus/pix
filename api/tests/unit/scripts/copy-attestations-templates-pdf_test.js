@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { CopyAttestationsTemplatesPdfScript } from '../../../scripts/prod/copy-attestations-templates-pdf.js';
-import { expect, sinon } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
 
 describe('CopyAttestationsTemplatesPdfScript', function () {
   let fsStub, createReadStreamStub, logger, clientStub;

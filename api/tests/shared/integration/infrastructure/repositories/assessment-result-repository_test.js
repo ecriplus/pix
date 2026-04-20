@@ -3,7 +3,8 @@ import { MissingAssessmentId, NotFoundError } from '../../../../../src/shared/do
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import * as assessmentResultRepository from '../../../../../src/shared/infrastructure/repositories/assessment-result-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | AssessmentResult', function () {
   describe('#save', function () {

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import {
   ManyOrganizationsFoundError,
@@ -8,7 +10,7 @@ import { teamRoutes } from '../../../../../src/team/application/routes.js';
 import { OrganizationArchivedError } from '../../../../../src/team/domain/errors.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { serializer as scoOrganizationInvitationSerializer } from '../../../../../src/team/infrastructure/serializers/jsonapi/sco-organization-invitation.serializer.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 const routesUnderTest = teamRoutes[0];
 

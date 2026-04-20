@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getPrivateCertificate } from '../../../../../../src/certification/results/domain/usecases/get-private-certificate.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Domain | UseCases | getPrivateCertificate', function () {
   it('should get the private certificate', async function () {

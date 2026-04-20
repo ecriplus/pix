@@ -1,6 +1,7 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as courseRepository from '../../../../../src/shared/infrastructure/repositories/course-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | course-repository', function () {
   const courseData0 = {

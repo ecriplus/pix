@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { adminCampaignParticipationController } from '../../../../../src/prescription/campaign-participation/application/admin-campaign-participation-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign-participation/application/admin-campaign-participation-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | Admin Campaign Participation | Router', function () {
   describe('GET /api/admin/users/{userId}/participations', function () {

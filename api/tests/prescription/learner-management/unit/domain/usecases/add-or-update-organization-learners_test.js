@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { addOrUpdateOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/add-or-update-organization-learners.js';
 import { SiecleParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
 import { SiecleFileStreamer } from '../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | add-or-update-organization-learners', function () {
   const organizationImportId = 1234;

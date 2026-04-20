@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { StageWithLinkedCampaignError } from '../../../../../src/evaluation/domain/errors.js';
 import { isStageNotUpdatable, updateStage } from '../../../../../src/evaluation/domain/usecases/update-stage.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | update-stage', function () {
   describe('#isStageNotUpdatable', function () {

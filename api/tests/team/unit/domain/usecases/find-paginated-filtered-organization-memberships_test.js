@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { Membership as Memberships } from '../../../../../src/shared/domain/models/Membership.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Team | UseCase | find-paginated-filtered-organizations-memberships', function () {
   it('should result organizations with filtering and pagination', async function () {

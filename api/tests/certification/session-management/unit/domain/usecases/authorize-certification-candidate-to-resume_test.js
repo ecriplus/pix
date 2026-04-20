@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { authorizeCertificationCandidateToResume } from '../../../../../../src/certification/session-management/domain/usecases/authorize-certification-candidate-to-resume.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | authorize-certification-candidate-to-resume', function () {
   let certificationCandidateForSupervisingRepository;

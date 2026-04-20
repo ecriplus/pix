@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CLIENTS, PIX_ORGA } from '../../../../../../src/authorization/domain/constants.js';
 import { ANONYMIZATION_RULE } from '../../../../../../src/prescription/learner-management/domain/constants.js';
@@ -11,7 +13,7 @@ import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/consta
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const {
   buildMembership,

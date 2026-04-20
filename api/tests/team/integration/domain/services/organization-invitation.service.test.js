@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import {
   SendingEmailError,
@@ -12,7 +13,8 @@ import { EmailingAttempt } from '../../../../../src/shared/mail/domain/models/Em
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { organizationInvitationService } from '../../../../../src/team/domain/services/organization-invitation.service.js';
 import { organizationInvitationRepository } from '../../../../../src/team/infrastructure/repositories/organization-invitation.repository.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Domain | Service | organizationInvitationService', function () {
   describe('#createOrUpdateOrganizationInvitation', function () {

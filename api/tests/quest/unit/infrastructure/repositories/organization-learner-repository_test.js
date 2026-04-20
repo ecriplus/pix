@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as organizationLearnerRepository from '../../../../../src/quest/infrastructure/repositories/organization-learner-repository.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Repositories | organization-learner', function () {
   describe('#findByUserId', function () {

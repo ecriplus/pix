@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { courseController } from '../../../../../src/evaluation/application/courses/course-controller.js';
 import * as moduleUnderTest from '../../../../../src/evaluation/application/courses/course-route.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | course-router', function () {
   describe('GET /api/courses/{id}', function () {

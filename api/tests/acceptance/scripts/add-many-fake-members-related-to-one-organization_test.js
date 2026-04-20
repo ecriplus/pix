@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { addManyMembersToExistingOrganization } from '../../../scripts/data-generation/add-many-fake-members-related-to-one-organization.js';
 import { ForbiddenAccess } from '../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../test-helper.js';
+import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('Acceptance | Scripts | add-many-divisions-and-students-to-sco-organization', function () {
   it('should throw an error when env is production', async function () {

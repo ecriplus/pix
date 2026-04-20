@@ -1,5 +1,8 @@
+import sinon from 'sinon';
+
 import { FillLastAnswerAtColumn } from '../../../scripts/certification/fill-last-answer-at-column.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../test-helper.js';
+import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('Certification | Scripts | fill lastAnswerAt column', function () {
   let certificationCourseWithoutAssessmentId,

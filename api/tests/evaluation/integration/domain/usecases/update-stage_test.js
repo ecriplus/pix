@@ -1,7 +1,8 @@
 import { StageWithLinkedCampaignError } from '../../../../../src/evaluation/domain/errors.js';
 import { Stage } from '../../../../../src/evaluation/domain/models/Stage.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 function _buildLearningContent() {
   const learningContent = domainBuilder.buildCampaignLearningContent.withSimpleContent();

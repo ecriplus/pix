@@ -1,13 +1,9 @@
+import sinon from 'sinon';
+
 import { campaignAdministrationController } from '../../../../../src/prescription/campaign/application/campaign-administration-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignExternalIdTypes } from '../../../../../src/prescription/shared/domain/constants.js';
-import {
-  domainBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  hFake,
-  sinon,
-} from '../../../../test-helper.js';
+import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Application | Controller | Campaign administration', function () {
   describe('#save', function () {

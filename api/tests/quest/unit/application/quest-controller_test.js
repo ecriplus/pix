@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { questController } from '../../../../src/quest/application/quest-controller.js';
 import { usecases } from '../../../../src/quest/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Application | Controller | Quest', function () {
   describe('#checkUserQuest', function () {

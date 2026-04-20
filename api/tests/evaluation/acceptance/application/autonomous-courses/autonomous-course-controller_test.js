@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import {
   createServer,
@@ -6,7 +8,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | API | Autonomous Course', function () {

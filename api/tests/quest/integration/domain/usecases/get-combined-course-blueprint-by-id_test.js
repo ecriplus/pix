@@ -1,9 +1,12 @@
+import sinon from 'sinon';
+
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprint-by-id', function () {
   let clock;

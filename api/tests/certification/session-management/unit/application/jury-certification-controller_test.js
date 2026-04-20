@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { juryCertificationController } from '../../../../../src/certification/session-management/application/jury-certification-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Application | jury-certification-controller', function () {
   describe('#getJuryCertification', function () {

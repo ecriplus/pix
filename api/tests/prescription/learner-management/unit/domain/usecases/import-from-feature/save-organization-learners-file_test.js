@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { saveOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/save-organization-learners-file.js';
 import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
-import { catchErr, expect, sinon } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
   let organizationImportRepositoryStub,

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { UserReconciliationSamlIdToken } from '../../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { config } from '../../../../../src/shared/config.js';
 import { InvalidExternalUserTokenError } from '../../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | UserReconciliationSamlIdToken', function () {
   beforeEach(function () {

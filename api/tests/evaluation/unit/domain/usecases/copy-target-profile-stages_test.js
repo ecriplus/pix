@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { copyTargetProfileStages } from '../../../../../src/evaluation/domain/usecases/copy-target-profile-stages.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Evaluation | Unit | Domain | UseCase | copy-stages', function () {
   let stageRepositoryStub;

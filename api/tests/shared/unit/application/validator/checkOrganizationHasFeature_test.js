@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { OrganizationDoesNotHaveFeatureEnabledError } from '../../../../../src/prescription/learner-management/domain/errors.js';
 import * as checkOrganizationHasFeatureUseCase from '../../../../../src/shared/application/usecases/checkOrganizationHasFeature.js';
-import { catchErr, expect, sinon } from '../../../../../tests/test-helper.js';
+import { expect } from '../../../../../tests/test-helper.js';
+import { catchErr } from '../../../../../tests/tooling/test-utils/error.js';
 
 describe('Unit | Application | Validator | checkOrganizationHasFeature', function () {
   context('When organization has feature enabled', function () {

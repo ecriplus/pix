@@ -5,10 +5,6 @@ import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 describe('Integration | Tooling | DatabaseBuilder | database-builder', function () {
   describe('#create', function () {
     it('returns an initialised instance of DatabaseBuilder', async function () {
-      // given
-      // Internally DatabaseBuilder.create calls for a database TRUNCATE thats takes more than the default mocha timeout
-      this.timeout(5000);
-
       // when
       const databaseBuilder = await DatabaseBuilder.create({ knex });
 

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { supOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sup-organization-management-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/sup-organization-management-route.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | sup-organization-learners', function () {
   let httpTestServer;

@@ -1,7 +1,8 @@
 import * as activeCalibratedChallengeRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/active-calibrated-challenge-repository.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { datamartBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Integration | Repository | active-calibrated-challenge', function () {
   describe('#getByScopeAndCalibrationId', function () {

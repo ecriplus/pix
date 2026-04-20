@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { certificationCourseController } from '../../../../../src/certification/session-management/application/certification-course-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-course-route.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Certification Course', function () {
   describe('PATCH /api/admin/certification-courses/{certificationCourseId}', function () {

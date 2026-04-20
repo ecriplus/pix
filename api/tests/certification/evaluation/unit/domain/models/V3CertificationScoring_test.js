@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { V3CertificationScoring } from '../../../../../../src/certification/evaluation/domain/models/V3CertificationScoring.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Models | V3CertificationScoring', function () {
   describe('#getCompetencesScore', function () {

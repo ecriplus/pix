@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as usecase from '../../../../../src/shared/application/usecases/checkUserOwnsCertificationCourse.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkUserOwnsCertificationCourse', function () {
   context('When user is member of certification center session', function () {

@@ -1,8 +1,9 @@
+import nock from 'nock';
 import sinon from 'sinon';
 
 import { getElements, getElementsListAsCsv } from '../../../../scripts/modulix/get-elements-csv.js';
 import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
-import { expect, nock } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 import moduleContent from './test-module.json' with { type: 'json' };
 
 describe('Acceptance | Script | Get Elements as CSV', function () {

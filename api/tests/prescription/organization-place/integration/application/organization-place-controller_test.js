@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import * as moduleUnderTest from '../../../../../src/prescription/organization-place/application/organization-place-route.js';
 import { usecases } from '../../../../../src/prescription/organization-place/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
@@ -6,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | organization-place-controller', function () {

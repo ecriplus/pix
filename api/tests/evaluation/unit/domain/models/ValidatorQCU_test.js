@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { ValidatorQCU } from '../../../../../src/evaluation/domain/models/ValidatorQCU.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Validation } from '../../../../../src/shared/domain/models/Validation.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | ValidatorQCU', function () {
   let solutionServiceQCUStub;

@@ -26,7 +26,6 @@ const CHUNK_SIZE = 1000;
  * @property {Factory} factory
  */
 export class DatabaseBuilder {
-  #beforeEmptyDatabase;
   #emptyFirst;
   #databaseBuffer;
 
@@ -37,19 +36,18 @@ export class DatabaseBuilder {
   #deletePriority;
   #dirtyTables = new Set();
 
-  constructor({ knex, emptyFirst = true, databaseBuffer = defaultDatabaseBuffer, beforeEmptyDatabase }) {
+  constructor({ knex, emptyFirst = true, databaseBuffer = defaultDatabaseBuffer }) {
     this.knex = knex;
     /** @type {Factory} */
     this.factory = factory;
     this.#databaseBuffer = databaseBuffer;
     this.#emptyFirst = emptyFirst;
-    this.#beforeEmptyDatabase = beforeEmptyDatabase;
 
     this.#addListeners();
   }
 
-  static async create({ knex, emptyFirst = true, beforeEmptyDatabase }) {
-    const databaseBuilder = new DatabaseBuilder({ knex, emptyFirst, beforeEmptyDatabase });
+  static async create({ knex, emptyFirst = true }) {
+    const databaseBuilder = new DatabaseBuilder({ knex, emptyFirst });
 
     try {
       await databaseBuilder.#init();
@@ -162,8 +160,6 @@ export class DatabaseBuilder {
   }
 
   async emptyDatabase({ keepLearningContent = false } = {}) {
-    this.#beforeEmptyDatabase?.();
-
     const sortedTableNames = this.#tablesOrderedByDependency
       .map(sanitizeTableName)
       .filter((tableName) => {

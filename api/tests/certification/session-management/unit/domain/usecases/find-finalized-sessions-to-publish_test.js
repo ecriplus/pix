@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { findFinalizedSessionsToPublish } from '../../../../../../src/certification/session-management/domain/usecases/find-finalized-sessions-to-publish.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | find-finalized-sessions-to-publish', function () {
   let finalizedSessionRepository;

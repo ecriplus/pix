@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { StageModificationForbiddenForLinkedTargetProfileError } from '../../../../src/evaluation/domain/errors.js';
 import { createOrUpdateStageCollection } from '../../../../src/evaluation/domain/usecases/create-or-update-stage-collection.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | create or update stage collection', function () {
   context('when the target profile is not linked to a campaign', function () {

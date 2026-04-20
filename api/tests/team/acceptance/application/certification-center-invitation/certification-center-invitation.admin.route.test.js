@@ -1,10 +1,11 @@
+import sinon from 'sinon';
+
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Route | Admin | Certification Center Invitation', function () {

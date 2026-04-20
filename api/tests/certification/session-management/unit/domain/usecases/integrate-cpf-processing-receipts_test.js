@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { CpfImportStatus } from '../../../../../../src/certification/session-management/domain/models/CpfImportStatus.js';
 import { CpfInfos } from '../../../../../../src/certification/session-management/domain/models/CpfInfos.js';
 import { CpfReceipt } from '../../../../../../src/certification/session-management/domain/models/CpfReceipt.js';
 import { integrateCpfProccessingReceipts } from '../../../../../../src/certification/session-management/domain/usecases/integrate-cpf-processing-receipts.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | integrate-cpf-processing-receipts ', function () {
   context('#integrateCpfProccessingReceipts', function () {

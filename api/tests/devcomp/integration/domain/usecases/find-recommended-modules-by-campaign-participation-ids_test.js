@@ -1,6 +1,8 @@
+import nock from 'nock';
+
 import { RecommendedModule } from '../../../../../src/devcomp/domain/read-models/RecommendedModule.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
-import { databaseBuilder, expect, nock } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | DevComp | Domain | Usecases | findRecommendedModulesByCampaignParticipationIds', function () {
   it('it returns recommended modules for given participation ids', async function () {

@@ -4,7 +4,8 @@ import {
   OrganizationNotFound,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | create-network', function () {
   describe('when the organization does not belong to a network', function () {

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { teamRoutes } from '../../../../src/team/application/routes.js';
 import { usecases } from '../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Integration | Team | Application | Controller | prescriber-informations', function () {
   let sandbox;

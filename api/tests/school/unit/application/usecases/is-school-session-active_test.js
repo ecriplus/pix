@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { execute as isSchoolSessionActive } from '../../../../../src/school/application/usecases/is-school-session-active.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | is-session-active', function () {
   let clock;

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { processAutoJury } from '../../../../../../src/certification/session-management/domain/usecases/process-auto-jury.js';
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/constants/abort-reasons.js';
@@ -7,7 +9,7 @@ import {
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | process-auto-jury', function () {
   describe('when certification is V2', function () {

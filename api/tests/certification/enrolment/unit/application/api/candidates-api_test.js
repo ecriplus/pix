@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { hasBeenCandidate } from '../../../../../../src/certification/enrolment/application/api/candidates-api.js';
 import { usecases } from '../../../../../../src/certification/enrolment/domain/usecases/index.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Certification | Enrolment | API | candidates-api', function () {
   describe('hasBeenCandidate', function () {

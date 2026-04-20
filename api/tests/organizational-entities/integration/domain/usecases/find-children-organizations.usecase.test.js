@@ -2,7 +2,8 @@ import { OrganizationForAdmin } from '../../../../../src/organizational-entities
 import { OrganizationLearnerType } from '../../../../../src/organizational-entities/domain/models/OrganizationLearnerType.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | findChildrenOrganizations', function () {
   it('returns a list of children organizations', async function () {

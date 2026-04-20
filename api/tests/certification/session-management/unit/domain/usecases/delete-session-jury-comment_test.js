@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { deleteSessionJuryComment } from '../../../../../../src/certification/session-management/domain/usecases/delete-session-jury-comment.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | Certification | session-management  | delete-session-jury-comment', function () {
   it('should delete the session jury comment', async function () {

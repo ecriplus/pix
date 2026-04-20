@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { assessmentAuthorization } from '../../../../../src/evaluation/application/pre-handlers/assessment-authorization.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import * as moduleUnderTest from '../../../../../src/shared/application/assessments/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { config as settings } from '../../../../../src/shared/config.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | assessment-router', function () {
   describe('POST /api/assessments', function () {

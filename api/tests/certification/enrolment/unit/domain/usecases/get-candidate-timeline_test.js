@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CandidateCreatedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCreatedEvent.js';
 import { CandidateDoubleCertificationEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateDoubleCertificationEligibleEvent.js';
 import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
@@ -10,7 +12,7 @@ import { CertificationStartedEvent } from '../../../../../../src/certification/e
 import { UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 import { getCandidateTimeline } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate-timeline.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-timeline', function () {
   let candidateRepository,

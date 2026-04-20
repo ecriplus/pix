@@ -1,9 +1,12 @@
+import sinon from 'sinon';
+
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AlreadyExistingAdminMemberError } from '../../../../../src/team/domain/errors.js';
 import { AdminMember } from '../../../../../src/team/domain/models/AdminMember.js';
 import { saveAdminMember } from '../../../../../src/team/domain/usecases/save-admin-member.usecase.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const { ROLES } = PIX_ADMIN;
 

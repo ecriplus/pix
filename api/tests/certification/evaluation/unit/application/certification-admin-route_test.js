@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { certificationAdminController } from '../../../../../src/certification/evaluation/application/certification-admin-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/evaluation/application/certification-admin-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Application | Routes | certification ', function () {
   context('POST /api/admin/certification/neutralize-challenge', function () {

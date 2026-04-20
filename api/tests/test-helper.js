@@ -2,7 +2,6 @@ import 'dayjs/locale/fr.js';
 
 import { expect, use as chaiUse } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import nock from 'nock';
@@ -33,37 +32,28 @@ import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
-import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
-import { catchErr } from './tooling/test-utils/error.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
 
+const MOCHA_TIMEOUT = 5000;
+
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
 
 // Extends Chai helpers
 chaiUse(chaiAsPromised);
-chaiUse(chaiSorted);
 chaiUse(sinonChai);
 chaiUse(jobChai);
 Object.values(customChaiHelpers).forEach(chaiUse);
 
 // Init Database builders
-const databaseBuilder = await DatabaseBuilder.create({
-  knex,
-  beforeEmptyDatabase: () => {
-    // Sometimes, truncating tables may cause the first ran test to timeout, so
-    // we increase the timeout to ensure we don't have flaky tests
-    increaseCurrentTestTimeout(2000);
-  },
-});
-// TEMPORARY WORKAROUND
-databaseBuilder.factory.learningContent.injectNock(nock);
+const databaseBuilder = await DatabaseBuilder.create({ knex });
+databaseBuilder.factory.learningContent.injectNock(nock); // TEMPORARY WORKAROUND
 
 // Init Datamart builders
 const datamartBuilder = await DatamartBuilder.create({
@@ -80,6 +70,10 @@ before(async function () {
   } catch {
     // pgBoss is not available on unit tests
   }
+});
+
+beforeEach(function () {
+  this.timeout(MOCHA_TIMEOUT);
 });
 
 afterEach(async function () {
@@ -119,7 +113,6 @@ after(async function () {
 
 // eslint-disable-next-line mocha/no-exports
 export {
-  catchErr,
   createMaddoServer,
   createServer,
   databaseBuilder,
@@ -135,6 +128,4 @@ export {
   HttpTestServer,
   knex,
   learningContentBuilder,
-  nock,
-  sinon,
 };

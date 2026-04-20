@@ -10,7 +10,8 @@ import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import * as codeGenerator from '../../../../../../src/shared/domain/services/code-generator.js';
 import * as accessCodeRepository from '../../../../../../src/shared/infrastructure/repositories/access-code-repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | create-campaign', function () {
   let userId;

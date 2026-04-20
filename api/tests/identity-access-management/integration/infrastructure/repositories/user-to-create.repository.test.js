@@ -5,7 +5,8 @@ import {
   AlreadyRegisteredEmailError,
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | user-to-create', function () {
   describe('#create', function () {

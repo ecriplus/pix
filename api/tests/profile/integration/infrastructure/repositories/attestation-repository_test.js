@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { Attestation } from '../../../../../src/profile/domain/models/Attestation.js';
 import {
   findAll,
   getByKey,
   getDataByKey,
 } from '../../../../../src/profile/infrastructure/repositories/attestation-repository.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Profile | Integration | Infrastructure | Repository | Attestation', function () {
   describe('#findAll', function () {

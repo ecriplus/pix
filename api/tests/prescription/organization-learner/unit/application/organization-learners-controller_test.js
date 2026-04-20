@@ -1,7 +1,10 @@
+import sinon from 'sinon';
+
 import { organizationLearnersController } from '../../../../../src/prescription/organization-learner/application/organization-learners-controller.js';
 import { usecases } from '../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { NoProfileRewardsFoundError } from '../../../../../src/profile/domain/errors.js';
-import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Organization-Learner | organization-learners-controller', function () {
   describe('#getAttestationPdfFromFilters', function () {

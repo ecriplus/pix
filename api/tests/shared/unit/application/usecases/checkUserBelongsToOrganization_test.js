@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as useCase from '../../../../../src/shared/application/usecases/checkUserBelongsToOrganization.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkUserBelongsToOrganization', function () {
   let membershipRepositoryStub;

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { registerPublishableSession } from '../../../../../../src/certification/session-management/domain/usecases/register-publishable-session.js';
@@ -8,7 +10,7 @@ import {
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 const juryCertificationSummaryRepository = { findBySessionId: sinon.stub() };
 const finalizedSessionRepository = { save: sinon.stub() };

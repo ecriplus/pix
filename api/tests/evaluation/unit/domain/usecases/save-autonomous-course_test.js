@@ -1,10 +1,13 @@
+import sinon from 'sinon';
+
 import { saveAutonomousCourse } from '../../../../../src/evaluation/domain/usecases/save-autonomous-course.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import {
   AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
   NotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | save-autonomous-course', function () {
   let autonomousCourse;

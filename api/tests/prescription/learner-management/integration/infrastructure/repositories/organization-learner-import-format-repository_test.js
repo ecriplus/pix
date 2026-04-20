@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { OrganizationLearnerImportFormat } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerImportFormat.js';
 import * as organizationLearnerImportFormatRepository from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-learner-import-format-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Repository | Organization Learner Management | Organization Learner Import Format', function () {
   describe('#get', function () {

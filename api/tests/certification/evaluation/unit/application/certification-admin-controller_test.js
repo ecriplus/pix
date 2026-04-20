@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { certificationAdminController } from '../../../../../src/certification/evaluation/application/certification-admin-controller.js';
 import { ChallengeDeneutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
 import { ChallengeNeutralized } from '../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Application | Controller | certification', function () {
   beforeEach(async function () {

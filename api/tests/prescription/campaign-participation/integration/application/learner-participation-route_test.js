@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { learnerParticipationController } from '../../../../../src/prescription/campaign-participation/application/learner-participation-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign-participation/application/learner-participation-route.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | learnerParticipationRouter', function () {
   let httpTestServer;

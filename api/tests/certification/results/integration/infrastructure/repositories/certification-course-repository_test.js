@@ -2,7 +2,8 @@ import { CertificationCourseVersion } from '../../../../../../src/certification/
 import * as certificationCourseRepository from '../../../../../../src/certification/results/infrastructure/repositories/certification-course-repository.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Results | Integration | Repository | Certification Course', function () {
   describe('#getByVerificationCode', function () {

@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { InvalidMembershipOrganizationRoleError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Team | Application | Memberships | membership-controller', function () {
   let httpTestServer;

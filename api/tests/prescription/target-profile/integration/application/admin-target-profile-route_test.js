@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { targetProfileController } from '../../../../../src/prescription/target-profile/application/admin-target-profile-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/target-profile/application/admin-target-profile-route.js';
 import {
@@ -5,7 +7,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | target-profiles-management | Routes ', function () {

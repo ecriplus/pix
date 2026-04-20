@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { tutorialEvaluationsController } from '../../../../../src/devcomp/application/tutorial-evaluations/tutorial-evaluations-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/tutorial-evaluations/tutorial-evaluations-route.js';
 import { TutorialEvaluation } from '../../../../../src/devcomp/domain/models/TutorialEvaluation.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | tutorial-evaluations-router', function () {
   describe('PUT /api/users/tutorials/{tutorialId}/evaluate', function () {

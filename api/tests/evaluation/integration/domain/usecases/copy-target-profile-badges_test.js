@@ -3,7 +3,8 @@ import * as badgeCriteriaRepository from '../../../../../src/evaluation/infrastr
 import * as badgeRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
 import { withTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | copy-badges', function () {
   describe('when there are badges to copy for a target profile', function () {

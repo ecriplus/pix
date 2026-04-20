@@ -1,6 +1,7 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as skillRepository from '../../../../../src/shared/infrastructure/repositories/skill-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | skill-repository', function () {
   const skillData00_tubeAcompetenceA_actif = {

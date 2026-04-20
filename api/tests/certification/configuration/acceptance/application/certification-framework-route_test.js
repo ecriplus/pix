@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../src/certification/shared/domain/constants.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
@@ -7,7 +9,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  sinon,
 } from '../../../../test-helper.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 

@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import * as sessionRepository from '../../../../../../src/certification/shared/infrastructure/repositories/session-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Shared | Integration | Infrastructure | Repository | Session-repository', function () {
   describe('#getWithCertificationCandidates', function () {

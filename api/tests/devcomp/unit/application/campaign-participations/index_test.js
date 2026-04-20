@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { campaignParticipationController } from '../../../../../src/devcomp/application/campaign-participations/campaign-participation-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/campaign-participations/campaign-participation-route.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | campaign-participation-router ', function () {
   describe('GET /api/campaign-participations/{id}/trainings', function () {

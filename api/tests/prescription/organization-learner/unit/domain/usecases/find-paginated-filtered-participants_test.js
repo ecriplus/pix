@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { OrganizationParticipant } from '../../../../../../src/prescription/organization-learner/domain/read-models/OrganizationParticipant.js';
 import { findPaginatedFilteredParticipants } from '../../../../../../src/prescription/organization-learner/domain/usecases/find-paginated-filtered-participants.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCases | find-paginated-participants', function () {
   let organizationId,

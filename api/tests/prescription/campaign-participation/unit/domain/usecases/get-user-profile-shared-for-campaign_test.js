@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { Scorecard } from '../../../../../../src/evaluation/domain/models/Scorecard.js';
 import { getSharedCampaignParticipationProfile } from '../../../../../../src/prescription/campaign-participation/domain/usecases/get-shared-campaign-participation-profile.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { NoCampaignParticipationForUserAndCampaign } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | get-shared-campaign-participation-profile', function () {
   const sharedAt = new Date('2020-02-01');

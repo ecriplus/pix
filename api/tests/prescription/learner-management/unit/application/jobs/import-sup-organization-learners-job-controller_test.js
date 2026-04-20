@@ -1,9 +1,12 @@
+import sinon from 'sinon';
+
 import { ImportSupOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sup-organization-learners-job-controller.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { config } from '../../../../../../src/shared/config.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearnersJobController', function () {
   describe('#isJobEnabled', function () {

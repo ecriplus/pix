@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { ActivityInfo } from '../../../../../src/school/domain/models/ActivityInfo.js';
 import { challengeService } from '../../../../../src/school/domain/services/challenge.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Service | Challenge', function () {
   describe('#getAlternativeVersion', function () {

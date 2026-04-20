@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
 import { CompetenceEvaluation } from '../../../../../src/evaluation/domain/models/CompetenceEvaluation.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
@@ -8,7 +10,8 @@ import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Evaluation | Integration | Usecase | Save and correct answer for campaign', function () {
   const skillIds = ['monAcquisA_Id', 'monAcquisB_Id', 'monAcquisC_Id'];

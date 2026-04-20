@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
   it('#serialize', async function () {

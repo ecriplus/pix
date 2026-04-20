@@ -1,7 +1,8 @@
 import { CenterTypes } from '../../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
 import { usecases } from '../../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Certification | Enrolment | UseCase | get-mass-import-template-information ', function () {
   describe('#getMassImportTemplateInformation', function () {

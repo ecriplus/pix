@@ -1,11 +1,13 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { emptySession } from '../../../../../../src/certification/shared/infrastructure/utils/csv/sessions-import.js';
 import { FileValidationError } from '../../../../../../src/shared/domain/errors.js';
 import * as csvSerializer from '../../../../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Serializer | CSV | csv-serializer', function () {
   describe('#serializeLine', function () {

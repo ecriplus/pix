@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { learningContentController } from '../../../../src/learning-content/application/learning-content-controller.js';
 import { usecases } from '../../../../src/learning-content/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Learning Content | Unit | Controller | learning-content-controller', function () {
   describe('#createRelease', function () {

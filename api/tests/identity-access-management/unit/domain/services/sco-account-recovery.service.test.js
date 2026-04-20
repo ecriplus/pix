@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import { scoAccountRecoveryService } from '../../../../../src/identity-access-management/domain/services/sco-account-recovery.service.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -9,7 +10,8 @@ import {
   UserHasAlreadyLeftSCO,
   UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 const { features } = config;
 
 describe('Unit | Identity Access Management | Domain | Service | sco-account-recovery', function () {

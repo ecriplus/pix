@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { ABORT_REASONS } from '../../../../../../src/certification/shared/domain/constants/abort-reasons.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Models | AssessmentSheet', function () {
   const STATES = domainBuilder.certification.evaluation.buildAssessmentSheet.STATES;

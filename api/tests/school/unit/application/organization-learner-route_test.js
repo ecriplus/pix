@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { organizationLearnerController } from '../../../../src/school/application/organization-learner-controller.js';
 import * as moduleUnderTest from '../../../../src/school/application/organization-learner-route.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Router | organization-learner-router', function () {
   describe('GET /api/pix1d/organization-learners/:id', function () {

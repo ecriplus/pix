@@ -3,7 +3,8 @@ import {
   NotFoundError,
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | reconcile-sup-organization-learner', function () {
   let userId;

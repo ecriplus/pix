@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { UserDetailsForAdmin } from '../../../../../src/identity-access-management/domain/models/UserDetailsForAdmin.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -9,7 +11,8 @@ import {
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { roles } from '../../../../../src/shared/domain/models/Membership.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | updateUserDetailsByAdmin', function () {
   let userId;

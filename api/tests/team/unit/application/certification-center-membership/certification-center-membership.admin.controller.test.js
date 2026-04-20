@@ -1,12 +1,8 @@
+import sinon from 'sinon';
+
 import { certificationCenterMembershipAdminController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.admin.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import {
-  domainBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  hFake,
-  sinon,
-} from '../../../../test-helper.js';
+import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | CertificationCenterMembershipAdminController', function () {
   describe('#findCertificationCenterMembershipsByCertificationCenter', function () {

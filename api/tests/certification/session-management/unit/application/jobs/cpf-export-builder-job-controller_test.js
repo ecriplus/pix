@@ -5,10 +5,11 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 import lodash from 'lodash';
+import sinon from 'sinon';
 
 import { CpfExportBuilderJobController } from '../../../../../../src/certification/session-management/application/jobs/cpf-export-builder-job-controller.js';
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 const { PassThrough, Readable } = stream;
 

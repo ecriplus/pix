@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getTopic } from '../../../../src/shared/infrastructure/pubsub.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Shared | Unit | Infrastructure | PubSub', function () {
   describe('#getTopic', function () {

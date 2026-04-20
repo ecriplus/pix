@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
+import nock from 'nock';
+
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -10,7 +12,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  nock,
 } from '../../../../test-helper.js';
 import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 

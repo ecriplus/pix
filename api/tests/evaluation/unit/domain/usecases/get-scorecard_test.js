@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { Scorecard } from '../../../../../src/evaluation/domain/models/Scorecard.js';
 import { getScorecard } from '../../../../../src/evaluation/domain/usecases/get-scorecard.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-scorecard', function () {
   let scorecardService;

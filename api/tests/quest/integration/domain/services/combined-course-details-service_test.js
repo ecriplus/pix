@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
@@ -11,7 +13,8 @@ import { repositories } from '../../../../../src/quest/infrastructure/repositori
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
 import { injectDependencies } from '../../../../../src/shared/infrastructure/utils/dependency-injection.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const { combinedCourseDetailsService: CombinedCourseDetailsService } = injectDependencies(
   { combinedCourseDetailsService },

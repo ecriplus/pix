@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { removeAuthenticationMethod } from '../../../../../src/identity-access-management/domain/usecases/remove-authentication-method.usecase.js';
 import { UserNotAuthorizedToRemoveAuthenticationMethod } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | remove-authentication-method', function () {
   let userRepository;

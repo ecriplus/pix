@@ -1,7 +1,8 @@
 import { PIX_ORIGIN } from '../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import * as areaRepository from '../../../../src/shared/infrastructure/repositories/area-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | area-repository', function () {
   const areaData0 = {

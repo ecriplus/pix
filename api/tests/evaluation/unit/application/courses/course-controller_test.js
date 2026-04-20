@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { courseController } from '../../../../../src/evaluation/application/courses/course-controller.js';
 import { Course } from '../../../../../src/evaluation/domain/models/Course.js';
-import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | course-controller', function () {
   let courseServiceStub;

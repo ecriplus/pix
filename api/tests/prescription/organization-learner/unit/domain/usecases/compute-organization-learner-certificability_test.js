@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | compute-organization-learner-certificabilty', function () {
   let clock;

@@ -8,7 +8,8 @@ import {
   OrganizationLearnerAlreadyLinkedToUserError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../../../src/shared/domain/services/token-service.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | create-user-and-reconcile-to-organization-learner-from-external-user', function () {
   let audience, requestedApplication;

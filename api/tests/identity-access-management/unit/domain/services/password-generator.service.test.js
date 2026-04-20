@@ -1,7 +1,8 @@
 import randomString from 'randomstring';
+import sinon from 'sinon';
 
 import * as service from '../../../../../src/identity-access-management/domain/services/password-generator.service.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Service | password-generator', function () {
   let generatedPassword;

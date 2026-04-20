@@ -13,7 +13,8 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 import { UserOrgaSettings } from '../../../../../src/team/domain/models/UserOrgaSettings.js';
 import { Prescriber } from '../../../../../src/team/domain/read-models/Prescriber.js';
 import { repositories } from '../../../../../src/team/infrastructure/repositories/index.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const prescriberRepository = repositories.prescriberRepository;
 

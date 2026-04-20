@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { SessionEnrolment } from '../../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { createSession } from '../../../../../../src/certification/enrolment/domain/usecases/create-session.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-session', function () {
   let centerRepository;

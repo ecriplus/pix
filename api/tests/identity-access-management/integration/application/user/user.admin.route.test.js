@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { databaseBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
 
 const CODE_IDENTITY_PROVIDER_GAR = NON_OIDC_IDENTITY_PROVIDERS.GAR.code;
 const CODE_IDENTITY_PROVIDER_POLE_EMPLOI = OidcIdentityProviders.POLE_EMPLOI.code;

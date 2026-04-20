@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   ENGLISH_SPOKEN,
   FRENCH_FRANCE,
@@ -6,7 +8,7 @@ import {
 import * as mailService from '../../../../../src/shared/domain/services/mail-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { mailer } from '../../../../../src/shared/mail/infrastructure/services/mailer.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Service | MailService', function () {
   const senderEmailAddress = 'ne-pas-repondre@pix.fr';

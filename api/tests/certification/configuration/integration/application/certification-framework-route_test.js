@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { certificationFrameworkController } from '../../../../../src/certification/configuration/application/certification-framework-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/certification-framework-route.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Certification | Configuration | Application | Router | certification-framework-route', function () {
   describe('GET /api/admin/certification-frameworks/{scope}/active-consolidated-framework', function () {

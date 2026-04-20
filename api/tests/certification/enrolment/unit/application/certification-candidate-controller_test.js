@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { certificationCandidateController } from '../../../../../src/certification/enrolment/application/certification-candidate-controller.js';
 import { EditedCandidate } from '../../../../../src/certification/enrolment/domain/models/EditedCandidate.js';
 import { CandidateTimeline } from '../../../../../src/certification/enrolment/domain/models/timeline/CandidateTimeline.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | certification-candidate-controller', function () {
   describe('#addCandidate', function () {

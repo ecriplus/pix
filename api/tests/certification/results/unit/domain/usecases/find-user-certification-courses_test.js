@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { findUserCertificationCourses } from '../../../../../../src/certification/results/domain/usecases/find-user-certification-courses.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Results | UseCases | find-user-certification-courses', function () {
   it('should call findAllByUserId repository method', async function () {

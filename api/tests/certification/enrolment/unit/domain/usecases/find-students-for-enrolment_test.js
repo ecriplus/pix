@@ -1,9 +1,10 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { StudentForEnrolment } from '../../../../../../src/certification/enrolment/domain/read-models/StudentForEnrolment.js';
 import { findStudentsForEnrolment } from '../../../../../../src/certification/enrolment/domain/usecases/find-students-for-enrolment.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | find-students-for-enrolment', function () {
   const certificationCenterId = 1;

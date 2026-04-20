@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { MailpitProvider } from '../../../../../../src/shared/mail/infrastructure/providers/MailpitProvider.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Class | MailpitProvider', function () {
   describe('#sendEmail', function () {

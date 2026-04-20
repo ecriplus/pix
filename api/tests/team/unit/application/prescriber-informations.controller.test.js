@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { prescriberInformationsController } from '../../../../src/team/application/prescriber-informations.controller.js';
 import { usecases } from '../../../../src/team/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | prescriber-informations', function () {
   describe('#get', function () {

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import * as moduleUnderTest from '../../../../../src/organizational-entities/application/organization/organization.admin.route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | route | Admin | organization', function () {
   let httpTestServer;

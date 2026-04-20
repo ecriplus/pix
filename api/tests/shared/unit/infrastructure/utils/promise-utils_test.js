@@ -1,5 +1,8 @@
+import sinon from 'sinon';
+
 import { PromiseUtils } from '../../../../../src/shared/infrastructure/utils/promise-utils.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Promise utils', function () {
   describe('#map', function () {

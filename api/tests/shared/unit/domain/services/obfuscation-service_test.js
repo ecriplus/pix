@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import * as obfuscationService from '../../../../../src/shared/domain/services/obfuscation-service.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Service | user-authentication-method-obfuscation-service', function () {
   let authenticationMethodRepository;

@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getScoBlockedAccessDates } from '../../../../../../src/certification/configuration/domain/usecases/get-sco-blocked-access-dates.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | get-sco-blocked-access-dates', function () {
   let ScoBlockedAccessDatesRepository;

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { publishSessionsInBatch } from '../../../../../../src/certification/session-management/domain/usecases/publish-sessions-in-batch.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | publish-sessions-in-batch', function () {
   let sessionPublicationService;

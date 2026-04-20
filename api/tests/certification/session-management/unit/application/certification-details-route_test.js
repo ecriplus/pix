@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { certificationDetailsController } from '../../../../../src/certification/session-management/application/certification-details-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-details-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Certification Details', function () {
   describe('GET /api/admin/certifications/{certificationCourseId}/details', function () {

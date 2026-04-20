@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { PIX_ADMIN } from '../../../../../../src/authorization/domain/constants.js';
 import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
@@ -9,7 +11,8 @@ import { Assessment } from '../../../../../../src/shared/domain/models/Assessmen
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../src/shared/infrastructure/execution-context-manager.js';
-import { catchErr, databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const {
   buildAssessment,

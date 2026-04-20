@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
@@ -7,7 +9,8 @@ import {
   AlreadyExistingEntityError,
   AuthenticationMethodNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | AuthenticationMethod', function () {
   const hashedPassword = 'ABCDEF1234';

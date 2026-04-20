@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { UserRecommendedTraining } from '../../../../../src/devcomp/domain/read-models/UserRecommendedTraining.js';
 import * as userRecommendedTrainingRepository from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import { deleteCampaignParticipationIds } from '../../../../../src/devcomp/infrastructure/repositories/user-recommended-training-repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Repository | user-recommended-training-repository', function () {
   describe('#save', function () {

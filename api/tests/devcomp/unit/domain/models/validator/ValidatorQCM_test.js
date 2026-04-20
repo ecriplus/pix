@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { Validation } from '../../../../../../src/devcomp/domain/models/validator/Validation.js';
 import { ValidatorQCM } from '../../../../../../src/devcomp/domain/models/validator/ValidatorQCM.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import * as devcompDomainBuilder from '../../../../tooling/domain-builder/factory/index.js';
 
 describe('Unit | Devcomp | Domain | Models | Validator | ValidatorQCM', function () {

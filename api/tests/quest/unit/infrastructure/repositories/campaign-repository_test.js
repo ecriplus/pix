@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { Campaign } from '../../../../../src/quest/domain/models/Campaign.js';
 import * as campaignRepository from '../../../../../src/quest/infrastructure/repositories/campaign-repository.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Repositories | campaign', function () {
   let id;

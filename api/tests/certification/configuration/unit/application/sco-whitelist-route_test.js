@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { scoWhitelistController } from '../../../../../src/certification/configuration/application/sco-whitelist-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/sco-whitelist-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | Application | Router | sco-whitelist-route', function () {
   describe('POST /api/admin/sco-whitelist', function () {

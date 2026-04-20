@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/finalize-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Finalize', function () {
   describe('PUT /api/sessions/{sessionId}/finalization', function () {

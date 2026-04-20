@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { findOrganizationLearnersWithParticipations } from '../../../../../../src/prescription/organization-learner/domain/usecases/find-organization-learners-with-participations.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | find-organization-learners-with-participations', function () {
   context('#findOrganizationLearnersWithParticipations', function () {

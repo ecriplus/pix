@@ -1,7 +1,10 @@
+import sinon from 'sinon';
+
 import { saveJuryComplementaryCertificationCourseResult } from '../../../../../../src/certification/session-management/domain/usecases/save-jury-complementary-certification-course-result.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { InvalidJuryLevelError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | save-jury-complementary-certification-course-results', function () {
   describe('#saveJuryComplementaryCertificationCourseResult', function () {

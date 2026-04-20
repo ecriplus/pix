@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -6,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];

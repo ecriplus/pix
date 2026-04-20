@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { PlacesLot } from '../../../../../src/organizational-entities/domain/read-models/PlacesLot.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | ReadModels | PlacesLot', function () {
   let clock;

@@ -1,7 +1,8 @@
 import { CampaignManagement } from '../../../../../../src/prescription/campaign/domain/models/CampaignManagement.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../../src/shared/application/http-errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Prescription | Domain | usecase | Get Campaign Management', function () {
   it('should return campaign', async function () {

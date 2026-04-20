@@ -5,7 +5,8 @@ import {
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 

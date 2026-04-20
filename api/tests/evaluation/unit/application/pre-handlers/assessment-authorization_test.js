@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { assessmentAuthorization } from '../../../../../src/evaluation/application/pre-handlers/assessment-authorization.js';
-import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Pre-handler | Assessment Authorization', function () {
   let assessmentRepository;

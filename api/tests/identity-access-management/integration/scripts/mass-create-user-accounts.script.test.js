@@ -1,7 +1,9 @@
 import * as url from 'node:url';
 
+import sinon from 'sinon';
+
 import { MassCreateUserAccountsScript } from '../../../../src/identity-access-management/scripts/mass-create-user-accounts.js';
-import { expect, knex, sinon } from '../../../test-helper.js';
+import { expect, knex } from '../../../test-helper.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
 

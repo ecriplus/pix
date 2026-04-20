@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { services } from '../../../../../src/certification/enrolment/application/services/index.js';
 import { sessionController } from '../../../../../src/certification/enrolment/application/session-controller.js';
 import { SessionEnrolment } from '../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { normalize } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Application | Controller | session-controller', function () {
   describe('#createSession', function () {

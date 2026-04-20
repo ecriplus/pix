@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { organizationLearnersController } from '../../../../../src/prescription/learner-management/application/organization-learners-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/organization-learners-route.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
@@ -6,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | Organization Learners Management | Routes', function () {

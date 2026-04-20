@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { passageController } from '../../../../../src/devcomp/application/passages/passage-controller.js';
-import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passages | Controller', function () {
   describe('#create', function () {

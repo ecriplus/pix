@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CertificationComputeError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { ChallengeNeutralized } from '../../../../../../src/certification/evaluation/domain/events/ChallengeNeutralized.js';
 import { rescoreV2Certification } from '../../../../../../src/certification/evaluation/domain/usecases/rescore-v2-certification.js';
@@ -7,7 +9,8 @@ import { CertificationAssessment } from '../../../../../../src/certification/ses
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Certification | Evaluation | UseCases | rescore-v2-certification', function () {
   describe('session is not in a publishable state', function () {

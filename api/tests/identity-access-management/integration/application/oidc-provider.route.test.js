@@ -1,4 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken';
+import sinon from 'sinon';
 
 import { oidcProviderController } from '../../../../src/identity-access-management/application/oidc-provider/oidc-provider.controller.js';
 import { identityAccessManagementRoutes } from '../../../../src/identity-access-management/application/routes.js';
@@ -18,7 +19,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../test-helper.js';
 import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
 

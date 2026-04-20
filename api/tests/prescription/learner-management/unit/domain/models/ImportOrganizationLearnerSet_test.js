@@ -2,7 +2,8 @@ import { CommonOrganizationLearner } from '../../../../../../src/prescription/le
 import { ImportOrganizationLearnerSet } from '../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { VALIDATION_ERRORS } from '../../../../../../src/shared/domain/constants.js';
 import { CsvImportError, ImportLearnerConfigurationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Models | ImportOrganizationLearnerSet', function () {
   const organizationId = 123;

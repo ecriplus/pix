@@ -9,7 +9,8 @@ import {
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {

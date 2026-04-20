@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { ModuleIssueReport } from '../../../../../src/devcomp/domain/models/module/ModuleIssueReport.js';
 import { createModuleIssueReport } from '../../../../../src/devcomp/domain/usecases/create-module-issue-report.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | create-module-issue-report', function () {
   it('should call the repository with the right arguments', async function () {

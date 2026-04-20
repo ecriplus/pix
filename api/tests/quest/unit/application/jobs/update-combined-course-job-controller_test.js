@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { UpdateCombinedCourseJobController } from '../../../../../src/quest/application/jobs/update-combined-course-job-controller.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Quest | Application | Jobs | UpdateCombinedCourseJobController', function () {
   describe('#handle', function () {

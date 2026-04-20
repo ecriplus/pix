@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { usecases } from '../../../../../../src/prescription/target-profile/domain/usecases/index.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 const { outdateTargetProfile } = usecases;
 

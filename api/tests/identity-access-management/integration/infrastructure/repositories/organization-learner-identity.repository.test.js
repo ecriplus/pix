@@ -1,7 +1,8 @@
 import { OrganizationLearnerIdentityNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { OrganizationLearnerIdentity } from '../../../../../src/identity-access-management/domain/models/OrganizationLearnerIdentity.js';
 import { organizationLearnerIdentityRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/organization-learner-identity.repository.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repositories | OrganizationLearnerIdentity', function () {
   describe('#getByIds', function () {

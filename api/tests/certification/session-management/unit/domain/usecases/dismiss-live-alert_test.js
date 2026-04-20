@@ -1,7 +1,10 @@
+import sinon from 'sinon';
+
 import { dismissLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/dismiss-live-alert.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | dismiss-live-alert', function () {
   let certificationChallengeLiveAlertRepository;

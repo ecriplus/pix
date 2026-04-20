@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { missionController } from '../../../../src/school/application/mission-controller.js';
 import { Mission } from '../../../../src/school/domain/models/Mission.js';
 import { usecases } from '../../../../src/school/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Integration | Controller | mission-controller', function () {
   describe('#getById', function () {

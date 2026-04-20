@@ -2,7 +2,8 @@ import { CertificationCandidateForAttendanceSheet } from '../../../../../../src/
 import { SessionForAttendanceSheet } from '../../../../../../src/certification/enrolment/domain/read-models/SessionForAttendanceSheet.js';
 import * as sessionForAttendanceSheetRepository from '../../../../../../src/certification/enrolment/infrastructure/repositories/session-for-attendance-sheet-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Session-for-attendance-sheet', function () {
   describe('#getWithCertificationCandidates', function () {

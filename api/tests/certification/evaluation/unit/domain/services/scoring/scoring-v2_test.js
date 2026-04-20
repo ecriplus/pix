@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CertificationComputeError } from '../../../../../../../src/certification/evaluation/domain/errors.js';
 import { ChallengeDeneutralized } from '../../../../../../../src/certification/evaluation/domain/events/ChallengeDeneutralized.js';
@@ -15,7 +16,8 @@ import * as scoringService from '../../../../../../../src/evaluation/domain/serv
 import CertificationCancelled from '../../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { Assessment } from '../../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult, status } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 function _buildUserCompetence(competence, pixScore, estimatedLevel) {
   return domainBuilder.buildUserCompetence({ ...competence, estimatedLevel, pixScore });

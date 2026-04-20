@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { supOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sup-organization-management-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/sup-organization-management-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | sup-organization-management-route', function () {
   describe('POST /api/organizations/{id}/sup-organization-learners/import-csv', function () {

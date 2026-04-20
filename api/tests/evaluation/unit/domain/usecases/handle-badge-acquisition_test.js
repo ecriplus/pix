@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { handleBadgeAcquisition } from '../../../../../src/evaluation/domain/usecases/handle-badge-acquisition.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | handle-badge-acquisition', function () {
   let badgeForCalculationRepository, badgeAcquisitionRepository, knowledgeElementForParticipationService;

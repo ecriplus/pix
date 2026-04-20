@@ -8,7 +8,8 @@ import {
   InvalidVerificationCodeError,
 } from '../../../../../src/shared/domain/errors.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { catchErr, databaseBuilder, knex } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');
 

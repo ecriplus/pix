@@ -1,7 +1,8 @@
 import { InvigilatorSession } from '../../../../../../src/certification/session-management/domain/read-models/InvigilatorSession.js';
 import * as InvigilatorSessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/invigilator-session-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Certification | session | SessionManagement', function () {
   describe('#get', function () {

@@ -1,6 +1,8 @@
+import nock from 'nock';
+
 import { config } from '../../../../../src/shared/config.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { createServer, expect, nock } from '../../../../test-helper.js';
+import { createServer, expect } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | Modules | Route', function () {
   let server;

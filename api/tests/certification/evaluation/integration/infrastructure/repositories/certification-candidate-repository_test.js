@@ -2,7 +2,8 @@ import * as certificationCandidateRepository from '../../../../../../src/certifi
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { CertificationCandidateNotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | certification candidate', function () {
   describe('#findByAssessmentId', function () {

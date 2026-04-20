@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   candidateCertificationReferential,
   getNextChallenge,
@@ -6,7 +8,8 @@ import { AlgorithmEngineVersion } from '../../../../../../src/certification/shar
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AssessmentEndedError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {

@@ -1,3 +1,6 @@
+import nock from 'nock';
+import sinon from 'sinon';
+
 import { ModuleInstantiationError } from '../../../../../src/devcomp/domain/errors.js';
 import { ComponentStepper } from '../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { Step } from '../../../../../src/devcomp/domain/models/component/Step.js';
@@ -24,7 +27,8 @@ import { ModuleFactory } from '../../../../../src/devcomp/infrastructure/factori
 import { PixAssetImageInfos } from '../../../../../src/shared/domain/models/PixAssetImageInfos.js';
 import { getAssetInfos } from '../../../../../src/shared/infrastructure/repositories/pix-assets-repository.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, expect, nock, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 import { validateFlashcards } from '../../../shared/validateFlashcards.js';
 
 describe('Integration | Devcomp | Infrastructure | Factories | Module ', function () {

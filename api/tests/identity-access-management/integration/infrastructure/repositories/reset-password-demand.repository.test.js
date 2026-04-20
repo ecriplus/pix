@@ -1,7 +1,8 @@
 import { PasswordResetDemandNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { ResetPasswordDemand } from '../../../../../src/identity-access-management/domain/models/ResetPasswordDemand.js';
 import { resetPasswordDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/reset-password-demand.repository.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | reset-password-demand', function () {
   describe('#create', function () {

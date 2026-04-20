@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { livretScolaireController } from '../../../../../src/certification/results/application/livret-scolaire-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Application | certifications-controller', function () {
   describe('#getCertificationsByOrganizationUAI', function () {

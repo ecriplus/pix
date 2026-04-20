@@ -1,9 +1,10 @@
 import { Readable } from 'node:stream';
 
+import nock from 'nock';
+
 import { uploadCpfFiles } from '../../../../../../src/certification/session-management/domain/usecases/upload-cpf-files.js';
 import { cpfExportsStorage } from '../../../../../../src/certification/session-management/infrastructure/storage/cpf-exports-storage.js';
 import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
-import { nock } from '../../../../../test-helper.js';
 
 describe('Integration | UseCase | upload-cpf-files', function () {
   it('should upload a file', async function () {

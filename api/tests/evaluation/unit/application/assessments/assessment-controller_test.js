@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/evaluation/application/assessments/assessment-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
@@ -6,7 +8,7 @@ import { usecases as profileUsecases } from '../../../../../src/profile/domain/u
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller', function () {
   describe('#completeAssessment', function () {

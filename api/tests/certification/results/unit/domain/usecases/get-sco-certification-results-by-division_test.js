@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { NoCertificationResultForDivision } from '../../../../../../src/certification/results/domain/errors.js';
 import { getScoCertificationResultsByDivision } from '../../../../../../src/certification/results/domain/usecases/get-sco-certification-results-by-division.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Course | Unit | UseCase | get-sco-certification-results-by-division', function () {
   const scoCertificationCandidateRepository = { findIdsByOrganizationIdAndDivision: null };

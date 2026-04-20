@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { userVerification } from '../../../../../src/identity-access-management/application/user/user-existence-verification-pre-handler.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

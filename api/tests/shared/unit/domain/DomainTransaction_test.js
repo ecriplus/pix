@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import {
   asyncLocalStorage,
   DomainTransaction,
   withTransaction,
 } from '../../../../src/shared/domain/DomainTransaction.js';
-import { expect, knex, sinon } from '../../../../tests/test-helper.js';
+import { expect, knex } from '../../../../tests/test-helper.js';
 
 describe('Unit | Infrastructure | DomainTransaction', function () {
   describe('#getConnection', function () {

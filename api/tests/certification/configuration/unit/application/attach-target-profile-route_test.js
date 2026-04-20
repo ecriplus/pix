@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { attachTargetProfileController } from '../../../../../src/certification/configuration/application/attach-target-profile-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/attach-target-profile-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Certification | ComplementaryCertification | attach-target-profile-route', function () {
   describe('/api/admin/complementary-certifications/{complementaryCertificationId}/badges', function () {

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { progressionController } from '../../../../../src/evaluation/application/progressions/progression-controller.js';
 import { evaluationUsecases as usecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | progression-controller', function () {
   const userId = 60;

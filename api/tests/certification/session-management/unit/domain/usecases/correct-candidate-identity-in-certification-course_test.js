@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { correctCandidateIdentityInCertificationCourse } from '../../../../../../src/certification/session-management/domain/usecases/correct-candidate-identity-in-certification-course.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { CpfBirthInformationValidation } from '../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { CertificationCandidatesError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | correct-candidate-identity-in-certification-course', function () {
   let certificationCourseRepository;

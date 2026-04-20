@@ -1,9 +1,10 @@
 import querystring from 'node:querystring';
 
 import * as jose from 'jose';
+import nock from 'nock';
 
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
-import { createServer, databaseBuilder, domainBuilder, expect, knex, nock } from '../../../test-helper.js';
+import { createServer, databaseBuilder, domainBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | lti', function () {
   let server;
@@ -39,9 +40,6 @@ describe('Acceptance | Identity Access Management | Route | Admin | lti', functi
 
   describe('GET /api/lti/registration', function () {
     it('returns an html page acknowledging platform registration with an HTTP status code 200', async function () {
-      // Key generation with 4096 modulus takes time !
-      this.timeout(5000);
-
       //given
       const { clientId, platformOpenIdConfig, platformOpenIdConfigUrl, toolConfig } =
         domainBuilder.identityAccessManagement.buildLtiPlatformRegistrationWithPlatformConfig();

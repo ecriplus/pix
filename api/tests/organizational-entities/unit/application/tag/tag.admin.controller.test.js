@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { tagAdminController } from '../../../../../src/organizational-entities/application/tag/tag.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | Tags', function () {
   describe('#findAllTags', function () {

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { findTutorials } from '../../../../../src/devcomp/domain/usecases/find-tutorials.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | find-tutorials', function () {
   let userId;

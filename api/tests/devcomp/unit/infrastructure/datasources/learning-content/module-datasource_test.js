@@ -2,7 +2,8 @@ import { ModuleDoesNotExistError } from '../../../../../../src/devcomp/domain/er
 import moduleDatasource from '../../../../../../src/devcomp/infrastructure/datasources/learning-content/module-datasource.js';
 import { moduleSchema } from '../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/module-schema.js';
 import { LearningContentResourceNotFound } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { joiErrorParser } from './validation/joi-error-parser.js';
 
 const modules = await moduleDatasource.list();
@@ -152,8 +153,6 @@ describe('Unit | Infrastructure | Datasources | Learning Content | ModuleDatasou
     describe('modules content', function () {
       modules.forEach((module) => {
         it(`module "${module.slug}" should contain a valid structure`, async function () {
-          // We need to increase the timeout because the validation can be slow for large modules
-          this.timeout(5000);
           try {
             await moduleSchema.validateAsync(module, { abortEarly: false });
           } catch (joiError) {

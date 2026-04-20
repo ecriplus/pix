@@ -1,8 +1,10 @@
 import querystring from 'node:querystring';
 
+import sinon from 'sinon';
+
 import { identityAccessManagementRoutes } from '../../../../src/identity-access-management/application/routes.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

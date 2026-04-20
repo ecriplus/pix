@@ -1,6 +1,7 @@
 import { execute } from '../../../../../src/shared/application/usecases/checkOrganizationLearnerBelongsToOrganization.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Shared | Application | UseCase | checkOrganizationLearnerBelongsToOrganization', function () {
   describe('#execute', function () {

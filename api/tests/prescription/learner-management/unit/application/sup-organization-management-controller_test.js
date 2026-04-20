@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { supOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sup-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { catchErr, expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Controller | sup-organization-management-controller', function () {
   let organizationId;

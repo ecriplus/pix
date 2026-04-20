@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { Organization } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { DataOrganizationPlacesStatistics } from '../../../../../../src/prescription/organization-place/domain/read-models/DataOrganizationPlacesStatistics.js';
 import { PlacesLot } from '../../../../../../src/prescription/organization-place/domain/read-models/PlacesLot.js';
 import { PlaceStatistics } from '../../../../../../src/prescription/organization-place/domain/read-models/PlaceStatistics.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | ReadModels | DataOrganizationPlacesStatistics', function () {
   let clock;

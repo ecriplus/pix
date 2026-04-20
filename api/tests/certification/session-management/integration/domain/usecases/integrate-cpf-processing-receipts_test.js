@@ -2,11 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as url from 'node:url';
 
+import nock from 'nock';
+
 import { CpfImportStatus } from '../../../../../../src/certification/session-management/domain/models/CpfImportStatus.js';
 import { integrateCpfProccessingReceipts } from '../../../../../../src/certification/session-management/domain/usecases/integrate-cpf-processing-receipts.js';
 import * as cpfCertificationResultRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/cpf-certification-result-repository.js';
 import { cpfReceiptsStorage } from '../../../../../../src/certification/session-management/infrastructure/storage/cpf-receipts-storage.js';
-import { databaseBuilder, expect, knex, nock } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 

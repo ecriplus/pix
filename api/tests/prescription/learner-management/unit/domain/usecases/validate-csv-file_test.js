@@ -1,4 +1,5 @@
 import iconv from 'iconv-lite';
+import sinon from 'sinon';
 
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
@@ -9,7 +10,8 @@ import { validateCsvFile } from '../../../../../../src/prescription/learner-mana
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 

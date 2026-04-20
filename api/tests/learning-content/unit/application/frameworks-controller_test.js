@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { frameworksController } from '../../../../src/learning-content/application/frameworks-controller.js';
 import { usecases } from '../../../../src/learning-content/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Controller | frameworks-controller', function () {
   let frameworks;

@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Team | Domain | UseCase | find-certification-center-memberships-by-certification-center', function () {
   it('returns certification-center-memberships by certification center id', async function () {

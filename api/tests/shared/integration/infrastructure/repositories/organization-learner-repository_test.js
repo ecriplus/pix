@@ -1,12 +1,14 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { OrganizationLearner } from '../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import * as organizationLearnerRepository from '../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | organization-learner-repository', function () {
   describe('#findByIds', function () {

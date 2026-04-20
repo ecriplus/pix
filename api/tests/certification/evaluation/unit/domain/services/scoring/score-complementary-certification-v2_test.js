@@ -1,10 +1,11 @@
 import range from 'lodash/range.js';
+import sinon from 'sinon';
 
 import { scoreComplementaryCertificationV2 } from '../../../../../../../src/certification/evaluation/domain/services/scoring/score-complementary-certification-v2.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { status as assessmentResultStatuses } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Services | Scoring Complementary Certification V2', function () {
   const certificationAssessmentRepository = {};

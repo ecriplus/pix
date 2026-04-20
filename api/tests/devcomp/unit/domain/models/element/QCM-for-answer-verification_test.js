@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { QCMForAnswerVerification } from '../../../../../../src/devcomp/domain/models/element/QCM-for-answer-verification.js';
 import { Feedbacks } from '../../../../../../src/devcomp/domain/models/Feedbacks.js';
 import { QcmCorrectionResponse } from '../../../../../../src/devcomp/domain/models/QcmCorrectionResponse.js';
 import { ValidatorQCM } from '../../../../../../src/devcomp/domain/models/validator/ValidatorQCM.js';
 import { DomainError, EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | Models | Element | QcmForAnswerVerification', function () {

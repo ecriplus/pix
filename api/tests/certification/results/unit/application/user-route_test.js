@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { userController } from '../../../../../src/certification/results/application/user-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/results/application/user-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Router | user', function () {
   describe('GET /api/admin/users/{userId}/certification-courses', function () {

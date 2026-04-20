@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { frameworksController } from '../../../../src/learning-content/application/frameworks-controller.js';
 import * as moduleUnderTest from '../../../../src/learning-content/application/frameworks-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Application | Frameworks | Routes', function () {
   describe('GET /api/admin/frameworks', function () {

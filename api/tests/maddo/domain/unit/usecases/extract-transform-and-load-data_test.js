@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { extractTransformAndLoadData } from '../../../../../src/maddo/domain/usecases/extract-transform-and-load-data.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Maddo | Domain | Usecases | Unit | extract-transform-and-load-data', function () {
   let replicationRepository;

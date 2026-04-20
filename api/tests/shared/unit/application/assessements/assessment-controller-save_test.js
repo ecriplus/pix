@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { assessmentController as controller } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | assessment-controller-save', function () {
   describe('#save', function () {

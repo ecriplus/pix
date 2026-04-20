@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { knex as datamartKnex } from '../../../../../../datamart/knex-database-connection.js';
 import { TargetProfileForAdmin } from '../../../../../../src/prescription/target-profile/domain/models/TargetProfileForAdmin.js';
 import * as targetProfileAdministrationRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
@@ -6,15 +8,14 @@ import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTra
 import { NotFoundError, ObjectValidationError } from '../../../../../../src/shared/domain/errors.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import {
-  catchErr,
   databaseBuilder,
   datamartBuilder,
   domainBuilder,
   expect,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Target-profile', function () {
   describe('#get', function () {

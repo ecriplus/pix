@@ -2,12 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as url from 'node:url';
 
+import nock from 'nock';
+
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  nock,
 } from '../../../../test-helper.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));

@@ -4,7 +4,8 @@ import * as campaignAssessmentParticipationRepository from '../../../../../../sr
 import { CampaignParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const { STARTED } = CampaignParticipationStatuses;
 

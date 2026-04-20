@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { QUERY_TYPES } from '../../../../../src/identity-access-management/domain/constants/user-query.js';
 import {
@@ -6,7 +8,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Application | Route | Admin | User', function () {

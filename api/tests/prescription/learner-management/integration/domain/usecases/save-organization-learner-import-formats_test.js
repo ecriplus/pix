@@ -4,7 +4,8 @@ import * as url from 'node:url';
 
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { EntityValidationError, FileValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 // Get __dirname in ESM
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));

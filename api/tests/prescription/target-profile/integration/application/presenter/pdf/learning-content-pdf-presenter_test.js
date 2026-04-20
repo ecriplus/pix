@@ -2,9 +2,10 @@ import { writeFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
 import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
+import sinon from 'sinon';
 
 import * as learningContentPDFPresenter from '../../../../../../../src/prescription/target-profile/application/presenter/pdf/learning-content-pdf-presenter.js';
-import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../../tooling/test-utils/file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -12,8 +13,6 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const REWRITE_REFERENCE_FILE = false;
 
 describe('Integration | Application | Target-Profiles | Presenter | PDF | LearningContentPdfPresenter', function () {
-  this.timeout(3000);
-
   beforeEach(function () {
     _makePdfLibPredictable();
     sinon.useFakeTimers({ now: new Date('2020-12-01'), toFake: ['Date'] });

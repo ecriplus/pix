@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { archiveCampaigns } from '../../../../../../src/prescription/campaign/domain/usecases/archive-campaigns.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | archive-campaign', function () {
   let campaignAdministrationRepository;

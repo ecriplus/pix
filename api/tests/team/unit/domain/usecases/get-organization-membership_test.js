@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { MembershipNotFound } from '../../../../../src/team/domain/errors.js';
 import { getOrganizationMembership } from '../../../../../src/team/domain/usecases/get-organization-membership.js';
-import { catchErr, expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Team | Unit | Domain | Usecases | getOrganizationMembership', function () {
   describe('when the member does not exists', function () {

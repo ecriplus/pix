@@ -1,8 +1,12 @@
+import nock from 'nock';
+import sinon from 'sinon';
+
 import { Module } from '../../../../../src/devcomp/application/api/models/Module.js';
 import { ModuleStatus } from '../../../../../src/devcomp/application/api/models/ModuleStatus.js';
 import * as modulesApi from '../../../../../src/devcomp/application/api/modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, nock, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Devcomp | Application | Api | Modules', function () {
   let clock, now;

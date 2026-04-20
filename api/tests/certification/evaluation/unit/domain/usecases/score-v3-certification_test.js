@@ -1,7 +1,10 @@
+import sinon from 'sinon';
+
 import { scoreV3Certification } from '../../../../../../src/certification/evaluation/domain/usecases/score-v3-certification.js';
 import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../shared/fixtures/challenges.js';
 
 describe('Unit | Certification | Evaluation | Domain | UseCase | Score V3 Certification', function () {

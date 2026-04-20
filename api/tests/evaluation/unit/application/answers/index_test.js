@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { answerController } from '../../../../../src/evaluation/application/answers/answer-controller.js';
 import * as moduleUnderTest from '../../../../../src/evaluation/application/answers/index.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | answer-router', function () {
   describe('POST /api/answers', function () {

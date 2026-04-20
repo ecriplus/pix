@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   addCorrelationInfo,
   CORRELATION_METADATA,
@@ -9,7 +11,7 @@ import {
   getRequestId,
   setInContext,
 } from '../../../../src/shared/infrastructure/execution-context-manager.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Shared | Unit | Infrastructure | execution-context-manager', function () {
   describe('#getCorrelationContext', function () {

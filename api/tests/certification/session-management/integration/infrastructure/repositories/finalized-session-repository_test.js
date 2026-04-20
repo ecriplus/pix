@@ -2,7 +2,8 @@ import { FinalizedSession } from '../../../../../../src/certification/session-ma
 import * as finalizedSessionRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/finalized-session-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Finalized-session', function () {
   describe('#save', function () {

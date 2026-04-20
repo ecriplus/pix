@@ -3,7 +3,8 @@ import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/mo
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Combined course | Domain | UseCases | create-combined-course-blueprint', function () {
   it('should create a combined course blueprint with quest', async function () {

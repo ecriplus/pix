@@ -1,11 +1,12 @@
 import boom from '@hapi/boom';
+import sinon from 'sinon';
 
 import {
   isCampaignInJurisdictionPreHandler,
   isOrganizationInJurisdictionPreHandler,
   organizationPreHandler,
 } from '../../../../src/maddo/application/pre-handlers.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Maddo | Application | pre handlers', function () {
   describe('#organizationPreHandler', function () {

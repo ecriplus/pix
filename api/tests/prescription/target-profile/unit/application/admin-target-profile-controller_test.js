@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { targetProfileController } from '../../../../../src/prescription/target-profile/application/admin-target-profile-controller.js';
 import { usecases } from '../../../../../src/prescription/target-profile/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | admin-target-profile-controller', function () {
   let clock;

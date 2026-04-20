@@ -1,7 +1,8 @@
 import * as learningContentRepository from '../../../../../../src/prescription/shared/infrastructure/repositories/learning-content-repository.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
 import { NoSkillsInCampaignError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | learning-content', function () {
   let framework1Fr, framework1En, framework2Fr, framework2En;

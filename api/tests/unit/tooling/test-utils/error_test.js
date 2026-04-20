@@ -1,4 +1,5 @@
-import { catchErr, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | Tooling | Test utils | Error', function () {
   describe('#catchErr', function () {

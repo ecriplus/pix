@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
+import sinon from 'sinon';
+
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
@@ -11,7 +13,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  sinon,
 } from '../../../../test-helper.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));

@@ -1,5 +1,7 @@
 import { Readable } from 'node:stream';
 
+import nock from 'nock';
+
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
   createServer,
@@ -7,7 +9,6 @@ import {
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
   knex,
-  nock,
 } from '../../../test-helper.js';
 import { waitForStreamFinalizationToBeDone } from '../../../tooling/test-utils/wait.js';
 

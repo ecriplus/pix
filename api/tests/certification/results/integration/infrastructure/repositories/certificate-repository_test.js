@@ -5,13 +5,8 @@ import { Frameworks } from '../../../../../../src/certification/shared/domain/mo
 import { AutoJuryCommentKeys } from '../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import {
-  catchErr,
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  learningContentBuilder,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | Certification', function () {
   const minimalLearningContent = [

@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { AnswerJobRepository } from '../../../../../src/evaluation/infrastructure/repositories/answer-job-repository.js';
 import { config } from '../../../../../src/shared/config.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 

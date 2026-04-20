@@ -1,9 +1,12 @@
+import sinon from 'sinon';
+
 import { AttestationNotFoundError } from '../../../../../src/profile/domain/errors.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import { mockAttestationStorage } from '../../../../tooling/mocks/attestation-storage.mock.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Profile | Integration | Domain | get-attestation-data-for-users', function () {
   let clock;

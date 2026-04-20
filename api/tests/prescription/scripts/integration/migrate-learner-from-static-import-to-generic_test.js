@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import {
   findOrganizationLearnersToMigrate,
   MigrateLearnerFromStaticImportToGeneric,
 } from '../../../../src/prescription/scripts/migrate-learner-from-static-import-to-generic.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Script | Prod | Migrate learner from static import to generic', function () {
   describe('context AGRI', function () {

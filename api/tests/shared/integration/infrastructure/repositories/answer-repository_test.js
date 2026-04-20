@@ -1,7 +1,8 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import * as answerRepository from '../../../../../src/shared/infrastructure/repositories/answer-repository.js';
-import { catchErr, databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | answerRepository', function () {
   describe('#get', function () {

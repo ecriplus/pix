@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { ElementAnswer } from '../../../../src/devcomp/domain/models/ElementAnswer.js';
 import { AnswerStatus } from '../../../../src/devcomp/domain/models/validator/AnswerStatus.js';
 import * as elementAnswerRepository from '../../../../src/devcomp/infrastructure/repositories/element-answer-repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | DevComp | Repositories | ElementAnswerRepository', function () {
   describe('#save', function () {

@@ -2,7 +2,8 @@ import { SessionManagement } from '../../../../../../src/certification/session-m
 import * as sessionManagementRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-management-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | SessionManagement | Integration | Infrastructure | Repository | session-management', function () {
   describe('#get', function () {

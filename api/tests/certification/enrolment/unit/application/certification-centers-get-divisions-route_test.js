@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/certification-centers-get-divisions-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Router | certification-center-router', function () {
   describe('GET /api/certification-centers/{certificationCenterId}/divisions', function () {

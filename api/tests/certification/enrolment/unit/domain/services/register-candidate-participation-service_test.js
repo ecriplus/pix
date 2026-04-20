@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { registerCandidateParticipation } from '../../../../../../src/certification/enrolment/application/services/register-candidate-participation-service.js';
 import { WrongDomainExtensionForPixPlusError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { usecases } from '../../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Service | register-candidate-participation', function () {
   let normalizeStringFnc;

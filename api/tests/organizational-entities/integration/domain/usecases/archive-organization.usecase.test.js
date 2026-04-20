@@ -1,9 +1,11 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import { ArchiveOrganizationError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | archive-organization', function () {
   context('when the organization does exist', function () {

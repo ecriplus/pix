@@ -5,7 +5,8 @@ import { CertificationCourse } from '../../../../../../src/certification/shared/
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import * as certificationCourseRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-course-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Shared | Integration | Repository | Certification Course', function () {
   describe('#save', function () {

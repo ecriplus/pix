@@ -1,9 +1,12 @@
+import sinon from 'sinon';
+
 import {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
 } from '../../../../../src/identity-access-management/domain/errors.js';
 import { reconcileOidcUserForAdmin } from '../../../../../src/identity-access-management/domain/usecases/reconcile-oidc-user-for-admin.usecase.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-user-for-admin', function () {
   const identityProvider = 'genericOidcProviderCode';

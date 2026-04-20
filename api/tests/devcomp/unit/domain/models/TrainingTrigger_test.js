@@ -1,6 +1,9 @@
+import sinon from 'sinon';
+
 import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Models | TrainingTrigger', function () {
   describe('#constructor', function () {

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { certificationCenterController } from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | certifications-center-controller', function () {
   describe('#findPaginatedSessionSummaries', function () {

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { ShareAttestationsToEligibleOrganizationsScript } from '../../../../src/profile/scripts/share-attestations-to-eligible-organizations.js';
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
@@ -6,7 +8,7 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../src/quest/domain/models/Quest.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', function () {
   describe('options', function () {

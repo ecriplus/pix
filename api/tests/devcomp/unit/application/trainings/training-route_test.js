@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { trainingController } from '../../../../../src/devcomp/application/trainings/training-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/trainings/training-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Trainings | training-route', function () {
   describe('DELETE /api/admin/trainings/{trainingId}/triggers/{trainingTriggerId}', function () {

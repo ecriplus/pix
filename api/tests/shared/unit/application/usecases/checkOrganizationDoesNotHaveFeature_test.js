@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as checkOrganizationDoesNotHaveFeatureUseCase from '../../../../../src/shared/application/usecases/checkOrganizationDoesNotHaveFeature.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkOrganizationDoesNotHaveFeature', function () {
   context('When organization does not have the feature enabled', function () {

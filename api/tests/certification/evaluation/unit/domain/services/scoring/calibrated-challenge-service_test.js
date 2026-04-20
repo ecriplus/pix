@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import * as calibratedChallengeService from '../../../../../../../src/certification/evaluation/domain/services/scoring/calibrated-challenge-service.js';
 import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
 
 const minimumAnswersRequiredToValidateACertification = 20;
