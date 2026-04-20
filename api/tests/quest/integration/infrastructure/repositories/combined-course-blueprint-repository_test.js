@@ -303,8 +303,8 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
 
       //then
       expect(result.length).to.equal(2);
-      expect(result[0]).to.deep.equal({ ...expectedCombinedCourseBlueprint, quest: null });
-      expect(result[1]).to.deep.equal({ ...expectedCombinedCourseBlueprint2, quest: null });
+      expect(result[0]).to.deep.equal(expectedCombinedCourseBlueprint);
+      expect(result[1]).to.deep.equal(expectedCombinedCourseBlueprint2);
     });
 
     it('should return an empty array when the organization is not found', async function () {
