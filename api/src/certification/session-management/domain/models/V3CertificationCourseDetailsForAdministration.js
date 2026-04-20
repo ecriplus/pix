@@ -4,7 +4,6 @@ export class V3CertificationCourseDetailsForAdministration {
     certificationChallengesForAdministration = [],
     isRejectedForFraud,
     createdAt,
-    completedAt,
     endedAt = null,
     assessmentState,
     assessmentResultStatus,
@@ -21,7 +20,6 @@ export class V3CertificationCourseDetailsForAdministration {
     this.isRejectedForFraud = isRejectedForFraud;
     this.certificationChallengesForAdministration = certificationChallengesForAdministration;
     this.createdAt = createdAt;
-    this.completedAt = completedAt;
     this.assessmentState = assessmentState;
     this.assessmentResultStatus = assessmentResultStatus;
     this.abortReason = abortReason;

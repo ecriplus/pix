@@ -27,7 +27,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         sex: 'F',
         isPublished: true,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-02-01'),
         lastAnswerAt: new Date('2020-02-01'),
         framework: Frameworks.CLEA,
       });
@@ -145,7 +144,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'is-published': true,
           'is-rejected-for-fraud': false,
           'created-at': new Date('2020-01-01'),
-          'completed-at': new Date('2020-02-01'),
           'last-answer-at': new Date('2020-02-01'),
           'pix-score': 55,
           'reached-result-key': 'CLEA.NONE',

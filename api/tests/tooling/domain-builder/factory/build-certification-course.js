@@ -5,7 +5,7 @@ import { CertificationIssueReportCategory } from '../../../../src/certification/
 import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import { buildAssessment } from './build-assessment.js';
 
-function buildCertificationCourse({
+export function buildCertificationCourse({
   id = 123,
   firstName = 'Gandhi',
   lastName = 'Matmatah',
@@ -36,6 +36,7 @@ function buildCertificationCourse({
   lang,
   framework = Frameworks.CORE,
   versionId = 20,
+  lastAnswerAt = null,
 } = {}) {
   const certificationIssueReports = [];
   if (examinerComment && examinerComment !== '') {
@@ -83,6 +84,7 @@ function buildCertificationCourse({
     lang,
     framework,
     versionId,
+    lastAnswerAt,
   });
 }
 
@@ -114,6 +116,7 @@ buildCertificationCourse.unpersisted = function ({
   versionId = 123,
   candidateId = 456,
   framework = Frameworks.CORE,
+  lastAnswerAt = null,
 } = {}) {
   return new CertificationCourse({
     firstName,
@@ -144,7 +147,6 @@ buildCertificationCourse.unpersisted = function ({
     versionId,
     candidateId,
     framework,
+    lastAnswerAt,
   });
 };
-
-export { buildCertificationCourse };

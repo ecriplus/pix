@@ -19,7 +19,6 @@ export class JuryCertification {
    * @param {string} props.birthCountry
    * @param {string} props.birthPostalCode
    * @param {Date} props.createdAt
-   * @param {Date} props.completedAt
    * @param {string} props.status
    * @param {boolean} props.isPublished
    * @param {boolean} props.isRejectedForFraud
@@ -51,7 +50,6 @@ export class JuryCertification {
     birthCountry,
     birthPostalCode,
     createdAt,
-    completedAt,
     status,
     isPublished,
     isRejectedForFraud,
@@ -83,7 +81,6 @@ export class JuryCertification {
     this.birthCountry = birthCountry;
     this.birthPostalCode = birthPostalCode;
     this.createdAt = createdAt;
-    this.completedAt = completedAt;
     this.status = status;
     this.isPublished = isPublished;
     this.isRejectedForFraud = isRejectedForFraud;
@@ -157,7 +154,6 @@ export class JuryCertification {
       birthCountry: juryCertificationDTO.birthCountry,
       birthPostalCode: juryCertificationDTO.birthPostalCode,
       createdAt: juryCertificationDTO.createdAt,
-      completedAt: juryCertificationDTO.completedAt,
       status: juryCertificationDTO.assessmentResultStatus,
       isPublished: juryCertificationDTO.isPublished,
       isRejectedForFraud: juryCertificationDTO.isRejectedForFraud,

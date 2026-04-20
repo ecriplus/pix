@@ -161,14 +161,12 @@ const _verifyCertificationIsScorable = async ({
  * @param {number} params.certificationCourseId
  * @param {AssessmentResultRepository} params.assessmentResultRepository
  * @param {SharedCompetenceMarkRepository} params.sharedCompetenceMarkRepository
- * @param {CertificationCourseRepository} params.certificationCourseRepository
  */
 async function _saveV3Result({
   assessmentResult,
   certificationCourseId,
   assessmentResultRepository,
   sharedCompetenceMarkRepository,
-  certificationCourseRepository,
 }) {
   const newAssessmentResult = await assessmentResultRepository.save({
     certificationCourseId,
@@ -182,8 +180,4 @@ async function _saveV3Result({
   await sharedCompetenceMarkRepository.saveMany({
     competenceMarks: competenceMarksToSave,
   });
-
-  const certificationCourse = await certificationCourseRepository.get({ id: certificationCourseId });
-  certificationCourse.complete({ now: new Date() });
-  await certificationCourseRepository.update({ certificationCourse });
 }

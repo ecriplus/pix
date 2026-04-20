@@ -7,7 +7,6 @@ export function serialize(certificationDetails) {
     attributes: [
       'userId',
       'createdAt',
-      'completedAt',
       'lastAnswerAt',
       'status',
       'totalScore',

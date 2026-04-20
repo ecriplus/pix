@@ -35,7 +35,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         birthCountry: 'FRANCE',
         sex: 'F',
         externalId: 'OUIOUITOUTAFÉ',
-        completedAt: new Date(),
         isPublished: false,
         isRejectedForFraud: false,
         verificationCode: 'MONCODE',
@@ -119,7 +118,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
           // then
           const actualCertificationCourseDTO = actualCertificationCourse.toDTO();
           expect(actualCertificationCourseDTO.id).to.equal(expectedCertificationCourse.id);
-          expect(actualCertificationCourseDTO.completedAt).to.equal(expectedCertificationCourse.completedAt);
           expect(actualCertificationCourseDTO.firstName).to.equal(expectedCertificationCourse.firstName);
           expect(actualCertificationCourseDTO.lastName).to.equal(expectedCertificationCourse.lastName);
           expect(actualCertificationCourseDTO.birthdate).to.equal(expectedCertificationCourse.birthdate);
@@ -282,7 +280,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
         lastName: 'Compétan',
         birthdate: '2000-01-01',
         birthplace: 'Paris',
-        completedAt: new Date('1999-12-31'),
         birthINSEECode: '01091',
         birthPostalCode: '01200',
         birthCountry: 'Kazakhstan',
@@ -311,7 +308,6 @@ describe('Certification | Shared | Integration | Repository | Certification Cour
       );
       expect(updatedCertificationCourse.birthCountry).to.equal(unpersistedUpdatedCertificationCourseDTO.birthCountry);
       expect(updatedCertificationCourse.sex).to.equal(unpersistedUpdatedCertificationCourseDTO.sex);
-      expect(updatedCertificationCourse.completedAt).to.deep.equal(new Date('1999-12-31'));
       expect(updatedCertificationCourse.isRejectedForFraud).to.be.true;
       expect(updatedCertificationCourse.updatedAt).to.be.greaterThan(certificationCourseData.updatedAt);
     });
@@ -475,7 +471,6 @@ function _buildCertificationCourse({ createdAt, description, version = 2 }) {
   const expectedCertificationCourse = databaseBuilder.factory.buildCertificationCourse({
     userId,
     sessionId,
-    completedAt: null,
     createdAt,
     firstName: 'Timon',
     lastName: 'De La Havane',

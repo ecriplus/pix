@@ -8,7 +8,6 @@ export class CertificationDetails {
     id,
     userId,
     createdAt,
-    completedAt,
     lastAnswerAt,
     status,
     totalScore,
@@ -19,7 +18,6 @@ export class CertificationDetails {
     this.id = id;
     this.userId = userId;
     this.createdAt = createdAt;
-    this.completedAt = completedAt;
     this.lastAnswerAt = lastAnswerAt;
     this.status = status;
     this.totalScore = totalScore;
@@ -44,7 +42,6 @@ export class CertificationDetails {
       id: certificationAssessment.certificationCourseId,
       userId: certificationAssessment.userId,
       createdAt: certificationAssessment.createdAt,
-      completedAt: certificationAssessment.completedAt,
       lastAnswerAt: certificationAssessment.lastAnswerAt,
       status: certificationAssessment.state,
       totalScore: _.sumBy(competenceMarks, 'score'),
@@ -59,7 +56,6 @@ export class CertificationDetails {
       id: this.id,
       userId: this.userId,
       createdAt: this.createdAt,
-      completedAt: this.completedAt,
       lastAnswerAt: this.lastAnswerAt,
       status: this.status,
       totalScore: this.totalScore,

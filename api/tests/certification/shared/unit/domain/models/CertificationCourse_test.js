@@ -219,33 +219,6 @@ describe('Unit | Domain | Models | CertificationCourse', function () {
     });
   });
 
-  describe('#complete', function () {
-    it('completes the certification course', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        completedAt: null,
-      });
-
-      // when
-      certificationCourse.complete({ now: new Date('1999-12-31') });
-
-      // then
-      expect(certificationCourse.toDTO().completedAt).to.deep.equal(new Date('1999-12-31'));
-    });
-    it('should not modify existing completedAt date', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        completedAt: new Date('1999-12-31'),
-      });
-
-      // when
-      certificationCourse.complete({ now: new Date('2000-01-01') });
-
-      // then
-      expect(certificationCourse.toDTO().completedAt).to.deep.equal(new Date('1999-12-31'));
-    });
-  });
-
   describe('#getNumberOfChallenges', function () {
     describe('when certification course is version 3', function () {
       it('should return the number of challenges defined when created', function () {

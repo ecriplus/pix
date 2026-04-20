@@ -3,12 +3,12 @@ import sinon from 'sinon';
 import { CandidateCreatedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateCreatedEvent.js';
 import { CandidateDoubleCertificationEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateDoubleCertificationEligibleEvent.js';
 import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
-import { CandidateEndScreenEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotCertifiableEvent.js';
 import { CandidateNotEligibleEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateNotEligibleEvent.js';
 import { CandidateReconciledEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateReconciledEvent.js';
 import { CertificationEndedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationStartedEvent.js';
+import { LastAnswerEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/LastAnswerEvent.js';
 import { UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 import { getCandidateTimeline } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate-timeline.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
@@ -302,9 +302,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
     });
 
     context('certification ended', function () {
-      context('when user answers all questions', function () {
-        it('should add a end screen event', async function () {
-          // given
+      context('when candidate see end screen test', function () {
+        it('should add a lastAnswer event', async function () {
           const sessionId = 1234;
           const certificationCandidateId = 4567;
           candidateRepository.get.resolves(
@@ -314,33 +313,29 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
               subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             }),
           );
-          const certifCourse = domainBuilder.buildCertificationCourse({
-            completedAt: new Date(),
+          const certificationCourse = domainBuilder.buildCertificationCourse({
+            lastAnswerAt: new Date('2024-04-21T13:56:00Z'),
           });
-          const placementProfile = domainBuilder.buildPlacementProfile();
-          placementProfileService.getPlacementProfile.resolves(placementProfile);
-          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
-          certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+          certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certificationCourse);
           eligibilityService.getUserCertificationEligibility.resolves(
             domainBuilder.certification.enrolment.buildUserCertificationEligibility({
               isCertifiable: true,
             }),
           );
 
-          // when
           const candidateTimeline = await getCandidateTimeline({
             sessionId,
             certificationCandidateId,
             ...deps,
           });
 
-          // then
           expect(candidateTimeline.events).to.deep.includes(
-            new CandidateEndScreenEvent({ when: certifCourse._completedAt }),
+            new LastAnswerEvent({
+              when: certificationCourse.lastAnswerAt,
+            }),
           );
         });
       });
-
       context('when invigilator stops the test', function () {
         it('should add an ended by invigilator event', async function () {
           // given
@@ -353,7 +348,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
               subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             }),
           );
-          const certifCourse = domainBuilder.buildCertificationCourse({ completedAt: null });
+          const certifCourse = domainBuilder.buildCertificationCourse();
           const placementProfile = domainBuilder.buildPlacementProfile();
           placementProfileService.getPlacementProfile.resolves(placementProfile);
           certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);

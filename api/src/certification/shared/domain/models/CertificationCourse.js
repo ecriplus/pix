@@ -30,7 +30,6 @@ export class CertificationCourse {
    * @param {string} props.sex
    * @param {number} props.externalId
    * @param {Date} props.createdAt
-   * @param {Date} props.completedAt
    * @param {boolean} props.isPublished
    * @param {string} props.verificationCode
    * @param {Assessment} props.assessment
@@ -46,6 +45,7 @@ export class CertificationCourse {
    * @param {boolean} props.isRejectedForFraud
    * @param {boolean} props.isAdjustedForAccessibility
    * @param {string} props.lang
+   * @param {Date} props.lastAnswerAt
    */
   constructor({
     id,
@@ -59,7 +59,6 @@ export class CertificationCourse {
     sex,
     externalId,
     createdAt,
-    completedAt,
     isPublished = false,
     verificationCode,
     assessment,
@@ -78,6 +77,7 @@ export class CertificationCourse {
     versionId,
     candidateId,
     framework,
+    lastAnswerAt,
   } = {}) {
     this._id = id;
     this._firstName = firstName;
@@ -90,7 +90,6 @@ export class CertificationCourse {
     this._sex = sex;
     this._externalId = externalId;
     this._createdAt = createdAt;
-    this._completedAt = completedAt;
     this._isPublished = isPublished;
     this._version = version;
     this._verificationCode = verificationCode;
@@ -109,6 +108,7 @@ export class CertificationCourse {
     this.versionId = versionId;
     this.candidateId = candidateId;
     this.framework = framework;
+    this.lastAnswerAt = lastAnswerAt;
   }
 
   static from({
@@ -121,6 +121,7 @@ export class CertificationCourse {
     algorithmEngineVersion,
     lang,
     framework,
+    lastAnswerAt,
   }) {
     return new CertificationCourse({
       userId: certificationCandidate.userId,
@@ -144,6 +145,7 @@ export class CertificationCourse {
       versionId: certificationVersion.id,
       candidateId: certificationCandidate.id,
       framework,
+      lastAnswerAt,
     });
   }
 
@@ -156,12 +158,6 @@ export class CertificationCourse {
 
   reportIssue(issueReport) {
     this._certificationIssueReports.push(issueReport);
-  }
-
-  complete({ now }) {
-    if (!this._completedAt) {
-      this._completedAt = now;
-    }
   }
 
   rejectForFraud() {
@@ -254,10 +250,6 @@ export class CertificationCourse {
     this._birthdate = modifiedBirthdate;
   }
 
-  isCompleted() {
-    return Boolean(this._completedAt);
-  }
-
   isAbortReasonCandidateRelated() {
     return this._abortReason === ABORT_REASONS.CANDIDATE;
   }
@@ -344,7 +336,6 @@ export class CertificationCourse {
       sex: this._sex,
       externalId: this._externalId,
       createdAt: this._createdAt,
-      completedAt: this._completedAt,
       isPublished: this._isPublished,
       isRejectedForFraud: this._isRejectedForFraud,
       isAdjustedForAccessibility: this._isAdjustedForAccessibility,
@@ -363,6 +354,7 @@ export class CertificationCourse {
       candidateId: this.candidateId,
       versionId: this.versionId,
       framework: this.framework,
+      lastAnswerAt: this.lastAnswerAt,
     };
   }
 }

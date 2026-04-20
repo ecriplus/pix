@@ -20,7 +20,6 @@ const certificationAssessmentSchema = Joi.object({
   userId: Joi.number().integer().required(),
   certificationCourseId: Joi.number().integer().required(),
   createdAt: Joi.date().required(),
-  completedAt: Joi.date().allow(null),
   lastAnswerAt: Joi.date().allow(null),
   endedAt: Joi.date().allow(null),
   state: Joi.string()
@@ -52,7 +51,6 @@ export class CertificationAssessment {
     userId,
     certificationCourseId,
     createdAt,
-    completedAt,
     lastAnswerAt,
     state,
     version,
@@ -64,7 +62,6 @@ export class CertificationAssessment {
     this.userId = userId;
     this.certificationCourseId = certificationCourseId;
     this.createdAt = createdAt;
-    this.completedAt = completedAt;
     this.lastAnswerAt = lastAnswerAt;
     this.endedAt = endedAt;
     this.state = state;
