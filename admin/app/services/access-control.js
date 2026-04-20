@@ -83,4 +83,8 @@ export default class AccessControlService extends Service {
       this.currentUser.adminMember.isCertif
     );
   }
+
+  get hasAccessToNetworkFeature() {
+    return Boolean(this.currentUser.adminMember.isSuperAdmin || this.currentUser.adminMember.isMetier);
+  }
 }

@@ -328,4 +328,24 @@ module('Unit | Service | access-control', function (hooks) {
       });
     });
   });
+
+  module('#hasAccessToNetworkFeature', function () {
+    [
+      { role: 'isSuperAdmin', hasAccess: true },
+      { role: 'isMetier', hasAccess: true },
+      { role: 'isSupport', hasAccess: false },
+      { role: 'isCertif', hasAccess: false },
+    ].forEach(function ({ role, hasAccess }) {
+      test(`should be ${hasAccess} if current admin member is ${role}`, function (assert) {
+        // given
+        const currentUser = this.owner.lookup('service:currentUser');
+        currentUser.adminMember = { [role]: true };
+
+        const service = this.owner.lookup('service:access-control');
+
+        // when / then
+        assert.deepEqual(service.hasAccessToNetworkFeature, hasAccess);
+      });
+    });
+  });
 });
