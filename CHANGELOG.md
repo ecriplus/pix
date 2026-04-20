@@ -1,5 +1,15 @@
 # Pix Changelog
 
+## [5.390.1](https://github.com/1024pix/pix/compare/v5.390.0...v5.390.1) (2026-04-20)
+
+### :bug: Correction
+
+- [#15947](https://github.com/1024pix/pix/pull/15947) Initialise le JobClient dans un script qui utilise un job pgboss (PIX-22454) 
+
+### :arrow_up: Montée de version
+
+- [#15948](https://github.com/1024pix/pix/pull/15948) Update dependency @1024pix/pix-ui to ^60.7.0 (mon-pix)
+
 # [5.390.0](https://github.com/1024pix/pix/compare/v5.389.0...v5.390.0) (2026-04-20)
 
 ### :rocket: Amélioration
