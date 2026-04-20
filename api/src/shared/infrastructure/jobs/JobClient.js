@@ -23,6 +23,7 @@ const metrics = new DatadogMetrics({ config });
 export class JobClient {
   /** @type JobClient */
   static #jobClient;
+  static #constructorToken = Symbol();
 
   /** @type {PgBoss} */
   #pgBoss = null;

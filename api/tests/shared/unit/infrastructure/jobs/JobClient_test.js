@@ -1,3 +1,6 @@
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import sinon from 'sinon';
 
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
@@ -144,6 +147,10 @@ describe('Unit | JobClient', function () {
     });
 
     describe('jobGlobPatterns inheritance', function () {
+      beforeEach(function () {
+        JobClient._resetForTesting();
+      });
+
       it('should use overridden jobGlobPatterns from subclass', async function () {
         // given
         const pgBossStub = new FakePgBoss();
@@ -164,6 +171,34 @@ describe('Unit | JobClient', function () {
 
         // then
         expect(pgBossStub.work).to.not.have.been.called;
+      });
+
+      it('should register an existing job with overridden options and controller', async function () {
+        // given
+        const pgBossStub = new FakePgBoss();
+        sinon.stub(pgBossStub, 'work');
+
+        const fixturePath = resolve(
+          dirname(fileURLToPath(import.meta.url)),
+          'fixtures/custom-audit-logging-job-controller.js',
+        );
+
+        class CustomJobClient extends JobClient {
+          get jobGlobPatterns() {
+            return [fixturePath];
+          }
+        }
+
+        // when
+        const jobClient = CustomJobClient.instance;
+        await jobClient.initialize({ jobGroups: [JobGroup.DEFAULT], worker: true }, () => pgBossStub);
+
+        // then
+        expect(pgBossStub.work).to.have.been.calledWith(
+          AuditLoggingJob.name,
+          { teamSize: 5, teamConcurrency: 2 },
+          sinon.match.func,
+        );
       });
     });
 
