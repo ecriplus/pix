@@ -446,7 +446,7 @@
                 "id": "2145a637-adf8-4142-af2a-178021994a0d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Maëva a supprimé par erreur le fichier «&nbsp;Liste des courses » de son bureau</p>"
+                "content": "<p>Maëva a supprimé par erreur le fichier «&nbsp;Liste des courses » de son bureau.</p>"
               }
             },
             {
@@ -526,7 +526,7 @@
               "element": {
                 "id": "010cfae4-d3a2-4e3b-acb6-a1f6442b6533",
                 "type": "expand",
-                "title": "[ Simulateur d’interface de bureau d’ordinateur]",
+                "title": "[Warning relecteurs : le simulateur d’interface de bureau d’ordinateur ne valide pas encore l'action demandée]",
                 "content": "<ul><li> Actions&nbsp;: <ul><li>Ouvrir la corbeille → double clic sur l’icône de la corbeille</li><li>Récupérer&nbsp;: clic droit sur le fichier + clic sur restaurer ou remettre <br></li></ul></li></ul>"
               }
             },
@@ -536,7 +536,7 @@
                 "id": "a453471b-b9b3-4aed-970f-768caab74d70",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier «&nbsp;Lettre&nbsp;» est de nouveau stocké sur le bureau de Maëva.</p>"
+                "content": "<p><strong>Feedback&nbsp;</strong>: Quand un fichier est récupéré depuis la corbeille, il est renvoyé à son emplacement d’origine. Par exemple, le fichier «&nbsp;Liste de courses&nbsp;» est de nouveau stocké sur le bureau de Maëva.</p>"
               }
             }
           ]
@@ -768,7 +768,7 @@
                 "id": "8adbf28b-dd8c-4a6c-9725-2a8f5fa0bb6f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Cette fois, Maëva a supprimé le fichier « Liste de courses » de son bureau.</p>"
+                "content": "<p>Tiago a supprimé le fichier « Liste de courses » de son bureau.</p>"
               }
             },
             {
@@ -789,7 +789,7 @@
               "element": {
                 "id": "95be29bf-828d-4cb5-aa14-a6cbfbd90392",
                 "type": "qrocm",
-                "instruction": "<p>Quel est le seul objet qui est écrit sur la liste des courses de Maëva ?</p>",
+                "instruction": "<p>Quel est le seul objet qui est écrit sur la liste des courses de Tiago?</p>",
                 "proposals": [
                   {
                     "input": "nom du fichier",
