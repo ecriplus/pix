@@ -11,6 +11,7 @@ import { MAX_FILE_SIZE_UPLOAD } from '../../shared/domain/constants.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
 import { jwtOptionalUserAuthenticationStrategyName } from '../../shared/infrastructure/authentication-strategy-names.js';
 import { combinedCourseController } from './combined-course-controller.js';
+import { checkDisplayCatalogueIsEnabled } from './pre-handlers/display-catalogue.js';
 
 const register = async function (server) {
   server.route([
@@ -33,6 +34,26 @@ const register = async function (server) {
         },
         notes: ['- Récupération du parcours combiné dont le code est spécifié dans les filtres de la requête'],
         tags: ['api', 'quest'],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/api/organizations/{organizationId}/courses',
+      config: {
+        pre: [
+          { method: checkDisplayCatalogueIsEnabled },
+          { method: securityPreHandlers.checkUserBelongsToOrganization },
+        ],
+        handler: combinedCourseController.getCourseByOrganizationId,
+        validate: {
+          params: Joi.object({
+            organizationId: identifiersType.organizationId,
+          }),
+        },
+        notes: [
+          "- Récupération du catalogue de parcours liés à l'organisation (blueprints + profils cibles partagés avec l'organisation)",
+        ],
+        tags: ['api', 'quest', 'courses', 'target-profiles', 'catalogue', 'orga'],
       },
     },
     {
