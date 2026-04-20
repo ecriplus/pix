@@ -6,7 +6,8 @@ import { authorization } from '../../../../../src/certification/shared/applicati
 import { ABORT_REASONS } from '../../../../../src/certification/shared/domain/constants/abort-reasons.js';
 import { NotFoundError } from '../../../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Certification Report', function () {
   describe('POST /api/certification-reports/{certificationCourseId}/certification-issue-reports', function () {

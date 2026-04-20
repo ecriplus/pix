@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import * as moduleUnderTest from '../../../../../src/evaluation/application/progressions/index.js';
 import { progressionController } from '../../../../../src/evaluation/application/progressions/progression-controller.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | progression-router', function () {
   describe('GET /api/progressions/{id}', function () {

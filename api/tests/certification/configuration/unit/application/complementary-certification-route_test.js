@@ -4,7 +4,8 @@ import { complementaryCertificationController } from '../../../../../src/certifi
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/complementary-certification-route.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Configuration | Unit | Application | Router | complementary-certifications-route', function () {
   describe('GET /api/admin/complementary-certifications', function () {

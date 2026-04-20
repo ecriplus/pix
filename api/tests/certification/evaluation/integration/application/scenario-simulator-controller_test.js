@@ -5,7 +5,8 @@ import pickChallengeService from '../../../../../src/certification/evaluation/do
 import { usecases } from '../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { pickAnswerStatusService } from '../../../../../src/certification/shared/domain/services/pick-answer-status-service.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 import { parseNDJSON } from '../../../../tooling/test-utils/json.js';
 
 describe('Integration | Application | scenario-simulator-controller', function () {

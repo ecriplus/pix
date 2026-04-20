@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { juryCommentController } from '../../../../../src/certification/session-management/application/jury-comment-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/jury-comment-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Jury Comment', function () {
   describe('PUT /api/admin/sessions/{sessionId}/comment', function () {

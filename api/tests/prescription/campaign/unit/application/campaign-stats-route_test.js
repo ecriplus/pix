@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { campaignStatsController } from '../../../../../src/prescription/campaign/application/campaign-stats-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign/application/campaign-stats-route.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Application | Router | campaign-router ', function () {
   describe('GET /api/campaigns/{campaignId}/stats/participations-by-stage', function () {

@@ -6,7 +6,8 @@ import { InvalidMembershipOrganizationRoleError } from '../../../../../src/share
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Integration | Team | Application | Memberships | membership-controller', function () {
   let httpTestServer;

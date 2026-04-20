@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { superviseController } from '../../../../../src/certification/session-management/application/supervise-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/supervise-route.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Supervise', function () {
   describe('POST /api/sessions/{id}/supervise', function () {

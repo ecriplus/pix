@@ -4,7 +4,8 @@ import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js'
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { adminMemberController } from '../../../../../src/team/application/admin-member/admin-member.controller.js';
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
-import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 const { ROLES } = PIX_ADMIN;
 

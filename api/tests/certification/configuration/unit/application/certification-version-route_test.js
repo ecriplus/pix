@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { certificationVersionController } from '../../../../../src/certification/configuration/application/certification-version-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/certification-version-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Certification | Configuration | Application | Router | certification-version-route', function () {
   describe('GET /api/admin/certification-versions/{scope}/active', function () {

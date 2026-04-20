@@ -4,7 +4,8 @@ import { organizationLearnersController } from '../../../../../src/prescription/
 import * as moduleUnderTest from '../../../../../src/prescription/organization-learner/application/organization-learners-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Prescription | Unit | Router | organization-learner-router', function () {
   describe('GET /api/organizations/{organizationId}/organization-learners-level-by-tubes', function () {

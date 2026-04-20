@@ -14,8 +14,9 @@ import {
 } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { UserNotFoundError } from '../../../../src/shared/domain/errors.js';
 import * as serverSideCookieSession from '../../../../src/shared/infrastructure/plugins/yar.js';
-import { databaseBuilder, expect, HttpTestServer } from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
 import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];

@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import * as algorithmSimulatorRouter from '../../../../../src/evaluation/application/smart-random-simulator/index.js';
 import { smartRandomSimulatorController } from '../../../../../src/evaluation/application/smart-random-simulator/smart-random-simulator-controller.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | smart-random-simulator', function () {
   describe('POST /api/admin/smart-random-simulator/get-next-challenge', function () {

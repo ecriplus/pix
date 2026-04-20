@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { learnerActivityController } from '../../../../../src/prescription/organization-learner/application/learner-activity-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/organization-learner/application/learner-activity-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | organization-router', function () {
   describe('GET /api/organization-learners/{id}/activity', function () {
