@@ -18,12 +18,12 @@ module('Integration | Component | organizations/network/actions-section', functi
   module('create child organization button', function (hooks) {
     hooks.beforeEach(async function () {
       class AccessControlStub extends Service {
-        hasAccessToAttachChildOrganizationActionsScope = true;
+        hasAccessToNetworkFeature = true;
       }
       this.owner.register('service:access-control', AccessControlStub);
     });
 
-    test('it should display create child organization button when user is superAdmin', async function (assert) {
+    test('it should display create child organization button when user has access to network feature', async function (assert) {
       // given
       const organization = store.createRecord('organization', {
         id: '1',
@@ -44,10 +44,10 @@ module('Integration | Component | organizations/network/actions-section', functi
       );
     });
 
-    test('it should not display create child organization button when user is not superAdmin', async function (assert) {
+    test('it should not display create child organization button when user does not have access to network feature', async function (assert) {
       // given
       class AccessControlStub extends Service {
-        hasAccessToAttachChildOrganizationActionsScope = false;
+        hasAccessToNetworkFeature = false;
       }
       this.owner.register('service:access-control', AccessControlStub);
 
