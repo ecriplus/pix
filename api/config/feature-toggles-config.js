@@ -48,6 +48,13 @@ export default {
     defaultValue: false,
     tags: ['modulix', 'team-contenu', 'llm', 'embed', 'pix-app'],
   },
+  displayCatalogue: {
+    type: 'boolean',
+    description: 'Enable course catalogue page for organizations',
+    defaultValue: false,
+    devDefaultValues: { test: true, reviewApp: true },
+    tags: ['frontend', 'team-prescription', 'pix-orga'],
+  },
   isSurveyEnabledForCombinedCourses: {
     type: 'boolean',
     description: 'Enables survey button at the end of the combined courses',
