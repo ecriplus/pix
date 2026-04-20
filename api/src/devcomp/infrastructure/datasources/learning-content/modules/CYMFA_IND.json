@@ -41,7 +41,7 @@
               "element": {
                 "id": "69a1ce4b-e852-4fc1-a406-cc749c7d8591",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/superveto.png",
+                "url": "https://assets.pix.org/modules/CYMFA_IND/interface_code.svg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "",
@@ -213,7 +213,7 @@
                     {
                       "id": "cf7202ab-bb5d-4fe9-801b-f6c64832043b",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/solveig.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/mfa_schema.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -262,7 +262,7 @@
                     {
                       "id": "97af4dbc-08bd-4b79-8be2-deca187a834f",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/otis.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/mfa_tv.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -311,7 +311,7 @@
                     {
                       "id": "5b60aa73-5002-4965-94dd-0faf6536cb86",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/kathy.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/mfa_visage.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -414,7 +414,7 @@
                     {
                       "id": "8193967a-9428-4ca5-ae79-f56681457750",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-mdp.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/mdp.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -466,7 +466,7 @@
                     {
                       "id": "178a6210-9ccd-4469-b67e-ac0099ee9fa5",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-sms.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/sms.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -517,7 +517,7 @@
                     {
                       "id": "ca7faf8e-5e4f-4a27-b2a4-d4d8f5d517b4",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/cy_MFA_IND/qcu2-empreinte.png",
+                      "url": "https://assets.pix.org/modules/CYMFA_IND/empreinte.svg",
                       "alt": "",
                       "alternativeText": "",
                       "legend": "",
@@ -578,7 +578,7 @@
                 "id": "10d652ae-fb1f-4e20-8e2e-08686f539a7d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Chaque type de facteur a des avantages et des inconvénients.<strong> Ils ont tous des limites</strong> en matière de sécurité.</p><p><br>🤔<strong>Bon à savoir</strong> </p><p>Certaines méthodes d’authentification sont <strong>complexes et coûteuses à mettre en place</strong>. Par exemple, c’est pour ça que l’authentification par iris de l’œil n’est pas répandue.&nbsp;Elle coûte très cher. 💶</p><h5><br>Malgré ces limites, comment renforcer la sécurité des accès ?&nbsp; </h5><p>Pour éviter une <strong>usurpation d'identité</strong>, c'est-à-dire que quelqu’un vous vole vos accès et se fasse passer pour vous, les services en ligne demandent plusieurs facteurs d’authentification <strong>de natures différentes </strong>afin d’augmenter le niveau de sécurité globale.&nbsp;🔒&nbsp;🔒</p>"
+                "content": "<p>Chaque type de facteur a des avantages et des inconvénients.<strong> Ils ont tous des limites</strong> en matière de sécurité.</p><p><br>🤔<strong>Bon à savoir</strong> </p><p>Certaines méthodes d’authentification sont <strong>complexes et coûteuses à mettre en place</strong>. Par exemple, c’est pour ça que l’authentification par iris de l’œil n’est pas répandue.&nbsp;Elle coûte très cher. 💶</p><h5><br>Malgré ces limites, comment renforcer la sécurité des accès ?&nbsp; </h5><p>Pour éviter une <strong>usurpation d’identité</strong>, c’est-à-dire que quelqu’un vous vole vos accès et se fasse passer pour vous, les services en ligne demandent plusieurs facteurs d’authentification <strong>de natures différentes </strong>afin d’augmenter le niveau de sécurité globale.&nbsp;🔒&nbsp;🔒</p>"
               }
             }
           ]
@@ -702,7 +702,7 @@
                 "id": "c88354b1-ec04-4922-898c-15bbeba3cdd5",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>\n    <li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je connais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><li>L’authentification multifacteur, c’est quand un service vous demande <strong>au moins deux facteurs d’authentification</strong> à la suite pour prouver votre identité. 2️⃣</li><li>Une authentification multifacteur est <strong>plus sécurisée si les facteurs demandés sont de types différents</strong>, car leurs limites de sécurité sont différentes. 🔒🔒</li><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong> pour mieux vous protéger. ⚙️</li>\n</ul>"
+                "content": "<ul>    <li>Il y a trois types de facteurs d’authentification&nbsp;: <strong>ce que je connais</strong> (facteur de connaissance), <strong>ce que je possède </strong>(facteur de possession), et <strong>ce que je suis </strong>(facteur biométrique). 💬👜🙋</li><li>L’authentification multifacteur, c’est quand un service vous demande <strong>au moins deux facteurs d’authentification</strong> à la suite pour prouver votre identité. 2️⃣</li><li>Une authentification multifacteur est <strong>plus sécurisée si les facteurs demandés sont de types différents</strong>, car leurs limites de sécurité sont différentes. 🔒🔒</li><li>Beaucoup de services en ligne qui gèrent des données personnelles imposent l’<strong>authentification multifacteur par défaut</strong>. D’autres services en ligne vous proposent de <strong>l’activer manuellement</strong> pour mieux vous protéger. ⚙️</li></ul>"
               }
             }
           ]
@@ -773,11 +773,198 @@
               "type": "element",
               "element": {
                 "id": "63394140-acf8-402f-bf33-0c30f603521a",
-                "type": "custom-draft",
-                "title": "Classification",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/CY_MFA_IND-tableau-double-entreeV2.html",
-                "instruction": "<p>Classez les facteurs d’authentification ci-dessous selon leur catégorie&nbsp;:</p>",
-                "height": 550
+                "type": "qrocm",
+                "instruction": "<p>Pour chaque facteur d’authentification ci-dessous, sélectionnez s’il s’agit d’un facteur de connaissance, de possession ou biométrique.</p>",
+                "proposals": [
+                  {
+                    "type": "text",
+                    "content": "<p>Un <strong>mot de passe</strong> est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "0",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "1",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "2",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "0"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.&nbsp; </p><p> Une <strong>empreinte digitale</strong> est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "3",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "4",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "5",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "5"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><p>Un <strong>code à 6 chiffre reçu par sms</strong>&nbsp;est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "6",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "7",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "8",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "7"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><p>Un <strong>code PIN</strong>&nbsp;est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "9",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "10",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "11",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "9"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><p>Une <strong>détection de visage</strong>&nbsp;est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "12",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "13",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "14",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "14"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p><p>Un <strong>schéma de déverrouillage</strong> est un</p>"
+                  },
+                  {
+                    "type": "select",
+                    "input": "catégorie",
+                    "display": "inline",
+                    "placeholder": "- Sélectionnez - ",
+                    "ariaLabel": "catégorie",
+                    "tolerances": [],
+                    "options": [
+                      {
+                        "id": "15",
+                        "content": "Facteur de connaissance"
+                      },
+                      {
+                        "id": "16",
+                        "content": "Facteur de possession"
+                      },
+                      {
+                        "id": "17",
+                        "content": "Facteur biométrique"
+                      }
+                    ],
+                    "solutions": [
+                      "15"
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "content": "<p>.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": "<p>Vous avez correctement identifié les différences entre les 3 types de facteurs.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse.</p>",
+                    "diagnosis": "<p>Rappelez-vous&nbsp;: un facteur de connaissance, c’est «&nbsp;ce que je sais&nbsp;», un facteur de possession c’est «&nbsp;ce que je possède&nbsp;» et un facteur biométrique c’est «&nbsp;ce que je suis&nbsp;». Vous pouvez réessayer.</p>"
+                  }
+                }
               }
             }
           ]
