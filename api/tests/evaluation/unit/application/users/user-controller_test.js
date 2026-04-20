@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { userController } from '../../../../../src/evaluation/application/users/user-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | user-controller', function () {
   describe('#rememberUserHasSeenNewDashboardInfo', function () {

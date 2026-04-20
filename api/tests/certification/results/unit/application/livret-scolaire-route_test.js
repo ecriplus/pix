@@ -1,9 +1,6 @@
 import * as moduleUnderTest from '../../../../../src/certification/results/application/livret-scolaire-route.js';
-import {
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Results | Unit | Application | Livret Scolaire', function () {
   let headers, httpTestServer;

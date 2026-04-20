@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { competenceEvaluationController } from '../../../../../src/evaluation/application/competence-evaluations/competence-evaluation-controller.js';
 import { evaluationUsecases as usecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Application | Controller | Competence-Evaluation', function () {
   describe('#startOrResume', function () {

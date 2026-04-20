@@ -1,11 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Enrolment | Acceptance | Application | Routes | subscription', function () {
   describe('GET /api/certification-candidates/{certificationCandidateId}/subscriptions', function () {

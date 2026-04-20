@@ -4,12 +4,8 @@ import { scoOrganizationLearnerController } from '../../../../../src/prescriptio
 import * as moduleUnderTest from '../../../../../src/prescription/organization-learner/application/sco-organization-learner-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Application | Route | sco-organization-learners', function () {
   let httpTestServer;

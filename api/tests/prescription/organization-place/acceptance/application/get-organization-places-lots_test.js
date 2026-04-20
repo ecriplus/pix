@@ -1,7 +1,8 @@
 import { createServer } from '../../../../../server.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Route | Get Organizations Places Lots', function () {
   describe('GET /api/organizations/{id}/places-lots', function () {

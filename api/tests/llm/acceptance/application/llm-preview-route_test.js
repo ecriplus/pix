@@ -4,12 +4,8 @@ import nock from 'nock';
 
 import { createServer } from '../../../../server.js';
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
-import {
-  databaseBuilder,
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-  knex,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../tooling/test-utils/http-server.js';
 import { waitForStreamFinalizationToBeDone } from '../../../tooling/test-utils/wait.js';
 
 describe('Acceptance | Route | llm-preview', function () {

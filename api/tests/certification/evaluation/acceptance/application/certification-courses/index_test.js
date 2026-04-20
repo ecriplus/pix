@@ -1,12 +1,9 @@
 import { createServer } from '../../../../../../server.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-  learningContentBuilder,
-} from '../../../../../test-helper.js';
+} from '../../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Route | Certification Courses', function () {
   let server;

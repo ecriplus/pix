@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { cancellationController } from '../../../../../src/certification/session-management/application/cancellation-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Session-management | Unit | Application | Controller | cancellation', function () {
   describe('#cancel', function () {

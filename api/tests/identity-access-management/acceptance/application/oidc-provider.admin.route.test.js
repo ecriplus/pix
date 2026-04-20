@@ -3,8 +3,9 @@ import jsonwebtoken from 'jsonwebtoken';
 import { createServer } from '../../../../server.js';
 import { authenticationSessionService } from '../../../../src/identity-access-management/domain/services/authentication-session.service.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 import { createMockedTestOidcProviders } from '../../../tooling/mocks/openid-client.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | oidc-provider', function () {
   let server;

@@ -1,9 +1,6 @@
 import { createMaddoServer } from '../../../../../server.maddo.js';
-import {
-  datamartBuilder,
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../../test-helper.js';
+import { datamartBuilder, expect } from '../../../../test-helper.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Results | Acceptance | Application | parcoursup-route', function () {
   let server,

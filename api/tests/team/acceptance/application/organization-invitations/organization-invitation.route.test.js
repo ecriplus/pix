@@ -4,13 +4,11 @@ import sinon from 'sinon';
 import { createServer } from '../../../../../server.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
+import { databaseBuilder, expect, knex } from '../../../../../tests/test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-} from '../../../../../tests/test-helper.js';
+} from '../../../../tooling/test-utils/http-server.js';
 
 const { omit: _omit } = lodash;
 

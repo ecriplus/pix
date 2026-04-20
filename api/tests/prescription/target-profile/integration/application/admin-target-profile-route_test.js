@@ -2,12 +2,8 @@ import sinon from 'sinon';
 
 import { targetProfileController } from '../../../../../src/prescription/target-profile/application/admin-target-profile-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/target-profile/application/admin-target-profile-route.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Application | target-profiles-management | Routes ', function () {
   describe('DELETE /api/admin/target-profiles/{targetProfileId}/detach-organizations', function () {

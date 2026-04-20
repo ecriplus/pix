@@ -2,7 +2,8 @@ import querystring from 'node:querystring';
 
 import { createServer } from '../../../../server.js';
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import { databaseBuilder, expect, generateInjectOptions, knex } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { generateInjectOptions } from '../../../tooling/test-utils/http-server.js';
 
 const { ROLES } = PIX_ADMIN;
 import { UserAccessToken } from '../../../../src/identity-access-management/domain/models/UserAccessToken.js';

@@ -6,13 +6,11 @@ import {
 } from '../../../../../src/quest/domain/models/Quest.js';
 import { ENGLISH_SPOKEN, FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-} from '../../../../test-helper.js';
+} from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Controller | answer-controller-save', function () {
   let server;

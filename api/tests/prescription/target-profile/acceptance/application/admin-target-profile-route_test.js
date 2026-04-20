@@ -2,13 +2,8 @@ import sinon from 'sinon';
 
 import { createServer } from '../../../../../server.js';
 import * as TargetProfile from '../../../../../src/shared/domain/models/TargetProfile.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | TargetProfile | Application | Route | admin-target-profile', function () {
   let server;

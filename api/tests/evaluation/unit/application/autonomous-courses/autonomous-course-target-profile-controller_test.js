@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { autonomousCourseTargetProfileController } from '../../../../../src/evaluation/application/autonomous-courses/autonomous-course-target-profile-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | autonomous-course-target-profile-controller', function () {
   describe('#get', function () {

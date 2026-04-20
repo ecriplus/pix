@@ -1,13 +1,8 @@
 import { createServer } from '../../../../../server.js';
 import { config as settings } from '../../../../../src/shared/config.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const lastChallengeAnswer = 'last challenge answer';
 const lastChallengeId = 'lastChallengeId';

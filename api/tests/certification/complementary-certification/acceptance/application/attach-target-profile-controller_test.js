@@ -1,7 +1,8 @@
 import lodash from 'lodash';
 
 import { createServer } from '../../../../../server.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const { omit } = lodash;
 

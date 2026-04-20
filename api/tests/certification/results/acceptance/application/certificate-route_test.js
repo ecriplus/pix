@@ -14,12 +14,8 @@ import { Assessment } from '../../../../../src/shared/domain/models/Assessment.j
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import * as AssesmentResult from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Results | Acceptance | Application | Certification', function () {
   let server, options;

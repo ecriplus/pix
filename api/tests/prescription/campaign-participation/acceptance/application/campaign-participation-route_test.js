@@ -5,13 +5,8 @@ import { createServer } from '../../../../../server.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Campaign Participation | Application | Route', function () {
   let server, options, userId, organizationId, campaignId;

@@ -2,12 +2,8 @@ import sinon from 'sinon';
 
 import { targetProfileController } from '../../../../../src/prescription/target-profile/application/target-profile-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/target-profile/application/target-profile-route.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Application | target-profile-route', function () {
   describe('GET /organizations/{organizationId}/target-profiles', function () {

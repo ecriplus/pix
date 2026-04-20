@@ -5,8 +5,9 @@ import { Membership } from '../../../../../src/shared/domain/models/Membership.j
 import { organizationInvitationController } from '../../../../../src/team/application/organization-invitations/organization-invitation.controller.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../../tests/test-helper.js';
+import { domainBuilder, expect } from '../../../../../tests/test-helper.js';
 import { catchErr } from '../../../../../tests/tooling/test-utils/error.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Team | Application | Controller | organization-invitation', function () {
   describe('#acceptOrganizationInvitation', function () {

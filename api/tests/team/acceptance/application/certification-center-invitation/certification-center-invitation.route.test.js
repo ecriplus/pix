@@ -1,12 +1,10 @@
 import { createServer } from '../../../../../server.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-} from '../../../../test-helper.js';
+} from '../../../../tooling/test-utils/http-server.js';
 
 const CERTIFICATION_CENTER_INVITATIONS_TABLE_NAME = 'certification-center-invitations';
 

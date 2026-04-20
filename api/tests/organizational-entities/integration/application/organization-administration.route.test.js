@@ -3,12 +3,8 @@ import sinon from 'sinon';
 import { organizationAdminController } from '../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { organizationalEntitiesRoutes } from '../../../../src/organizational-entities/application/routes.js';
 import { logo3Mb } from '../../../integration/application/organizations-administration/_files/logo-3mb.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Organizational Entities | Application | Route | Organization Administration', function () {
   describe('PATCH /api/admin/organizations/{:id}', function () {

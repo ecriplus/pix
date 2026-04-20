@@ -2,13 +2,8 @@ import _ from 'lodash';
 
 import { createServer } from '../../../../../server.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import {
-  databaseBuilder,
-  datamartBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, datamartBuilder, expect, knex } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Configuration | Acceptance | API | complementary-certification-route', function () {
   let server;

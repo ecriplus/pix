@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { createServer } from '../../../../../server.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Team | Application | Route | Admin | Certification Center Invitation', function () {
   let server;

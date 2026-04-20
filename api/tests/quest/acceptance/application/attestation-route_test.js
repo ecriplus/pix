@@ -3,9 +3,10 @@ import FormData from 'form-data';
 import { createServer } from '../../../../server.js';
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../tooling/fixtures/index.js';
 import { mockAttestationStorageUpload } from '../../../tooling/mocks/attestation-storage.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Quest | Acceptance | Application | Attestation Route ', function () {
   let server;

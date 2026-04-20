@@ -6,7 +6,9 @@ import { usecases as questUsecases } from '../../../../../src/quest/domain/useca
 import { config } from '../../../../../src/shared/config.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Unit | Controller | answer-controller', function () {
   let answerSerializerStub, certificationEvaluationApiStub;

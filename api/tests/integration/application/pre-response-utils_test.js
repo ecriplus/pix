@@ -10,7 +10,8 @@ import {
   UnprocessableEntityError,
 } from '../../../src/shared/application/http-errors.js';
 import { handleDomainAndHttpErrors } from '../../../src/shared/application/pre-response-utils.js';
-import { expect, hFake } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
+import { hFake } from '../../tooling/mocks/hapi.mock.js';
 
 describe('Integration | Application | PreResponse-utils', function () {
   describe('#handleDomainAndHttpErrors', function () {

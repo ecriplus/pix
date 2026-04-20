@@ -1,11 +1,7 @@
 import { createServer } from '../../../../server.js';
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  learningContentBuilder,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Evaluation | Acceptance | scoring-and-capacity-simulator-route', function () {
   let server;

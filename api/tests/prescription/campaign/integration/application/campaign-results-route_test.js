@@ -2,12 +2,8 @@ import sinon from 'sinon';
 
 import { campaignResultsController } from '../../../../../src/prescription/campaign/application/campaign-results-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign/application/campaign-results-route.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Application | campaign-results-route', function () {
   describe('GET /api/campaigns/{campaignId}/assessment-results', function () {

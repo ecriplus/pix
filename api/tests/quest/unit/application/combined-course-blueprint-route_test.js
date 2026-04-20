@@ -5,7 +5,8 @@ import { combinedCourseBlueprintController } from '../../../../src/quest/applica
 import * as combinedCourseBlueprintRoute from '../../../../src/quest/application/combined-course-blueprint-route.js';
 import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Quest | Unit | Routes | combined-course-blueprint-route', function () {
   describe('GET /api/admin/combined-course-blueprints', function () {

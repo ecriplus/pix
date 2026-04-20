@@ -5,8 +5,9 @@ import { attestationController } from '../../../../src/quest/application/attesta
 import * as attestationRoute from '../../../../src/quest/application/attestation-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../tooling/fixtures/index.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Quest | Unit | Routes | Attestation Route', function () {
   describe('POST /api/admin/attestations', function () {

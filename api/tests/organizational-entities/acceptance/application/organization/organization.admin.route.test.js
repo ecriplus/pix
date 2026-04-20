@@ -6,7 +6,8 @@ import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js'
 import { ORGANIZATIONS_UPDATE_HEADER } from '../../../../../src/organizational-entities/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const { ROLES } = PIX_ADMIN;
 const { map: _map } = lodash;

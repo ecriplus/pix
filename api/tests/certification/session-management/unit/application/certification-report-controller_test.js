@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { certificationReportController } from '../../../../../src/certification/session-management/application/certification-report-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Certification Report', function () {
   describe('#saveCertificationIssueReport', function () {

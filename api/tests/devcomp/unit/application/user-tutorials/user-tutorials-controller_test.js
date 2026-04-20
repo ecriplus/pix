@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { userTutorialsController } from '../../../../../src/devcomp/application/user-tutorials/user-tutorials-controller.js';
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | User-tutorials', function () {
   describe('#add', function () {

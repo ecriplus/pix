@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { activityAnswerController } from '../../../../src/school/application/activity-answer-controller.js';
 import { usecases } from '../../../../src/school/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../test-helper.js';
+import { hFake } from '../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | activity-answer-controller', function () {
   describe('#save', function () {

@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { organizationLearnerTypesController } from '../../../../../src/organizational-entities/application/organization-learner-type/organization-learner-type.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | OrganizationLearnerType', function () {
   describe('#findAllOrganizationLearnerTypes', function () {

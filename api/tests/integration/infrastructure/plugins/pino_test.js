@@ -4,7 +4,8 @@ import pino from 'pino';
 
 import { incrementInContext } from '../../../../src/shared/infrastructure/execution-context-manager.js';
 import * as pinoPlugin from '../../../../src/shared/infrastructure/plugins/pino.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Integration | Infrastructure | plugins | pino', function () {
   let httpTestServer;

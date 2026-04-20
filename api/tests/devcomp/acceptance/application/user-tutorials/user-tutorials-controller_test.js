@@ -1,11 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Controller | user-tutorial-controller', function () {
   const userId = 4444;

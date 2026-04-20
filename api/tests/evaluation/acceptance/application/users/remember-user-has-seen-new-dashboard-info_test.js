@@ -1,5 +1,6 @@
 import { createServer } from '../../../../../server.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Controller | users-controller-has-seen-new-dashboard-info', function () {
   let server;

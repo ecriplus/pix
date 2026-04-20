@@ -5,7 +5,8 @@ import { SessionPublicationBatchResult } from '../../../../../src/certification/
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { SessionPublicationBatchError } from '../../../../../src/shared/application/http-errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session-management | Unit | Application | Controller | Session Publication', function () {

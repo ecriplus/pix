@@ -1,11 +1,7 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { identityAccessManagementRoutes } from '../../../../src/identity-access-management/application/routes.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, HttpTestServer } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

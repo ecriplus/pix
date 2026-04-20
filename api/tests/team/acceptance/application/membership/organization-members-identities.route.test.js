@@ -1,5 +1,6 @@
 import { createServer } from '../../../../../server.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../../tests/test-helper.js';
+import { databaseBuilder, expect } from '../../../../../tests/test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Team | Application | Route | organization-member-identities', function () {
   let server;

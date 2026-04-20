@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { feedbackController } from '../../../../../src/evaluation/application/feedbacks/feedback-controller.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | feedback-controller', function () {
   describe('#save', function () {
