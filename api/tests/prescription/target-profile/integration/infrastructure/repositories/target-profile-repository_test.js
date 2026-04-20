@@ -155,6 +155,84 @@ describe('Integration | Repository | Target-profile', function () {
     });
   });
 
+  describe('#findTubeIdsByTargetProfileIds', function () {
+    it('returns tube rows for all given target profile ids', async function () {
+      // given
+      const targetProfileId1 = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId: targetProfileId1, tubeId: 'tube1' });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId: targetProfileId1, tubeId: 'tube2' });
+
+      const targetProfileId2 = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId: targetProfileId2, tubeId: 'tube3' });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await targetProfileRepository.findTubeIdsByTargetProfileIds([targetProfileId1, targetProfileId2]);
+
+      // then
+      expect(result).to.deep.members([
+        { targetProfileId: targetProfileId1, tubeId: 'tube1' },
+        { targetProfileId: targetProfileId1, tubeId: 'tube2' },
+        { targetProfileId: targetProfileId2, tubeId: 'tube3' },
+      ]);
+    });
+
+    it('does not return tubes from other target profiles', async function () {
+      // given
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId: otherTargetProfileId, tubeId: 'tube1' });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await targetProfileRepository.findTubeIdsByTargetProfileIds([targetProfileId]);
+
+      // then
+      expect(result).to.deep.equal([]);
+    });
+  });
+
+  describe('#findSharedByOrganizationId', function () {
+    it('returns target profiles shared with the organization', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const targetProfile = databaseBuilder.factory.buildTargetProfile({
+        name: 'Mon profil',
+        category: 'SUBJECT',
+        isSimplifiedAccess: false,
+      });
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId: targetProfile.id, organizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await targetProfileRepository.findSharedByOrganizationId(organizationId);
+
+      // then
+      expect(result).to.have.lengthOf(1);
+      expect(result[0].id).to.equal(targetProfile.id);
+      expect(result[0].name).to.equal('Mon profil');
+      expect(result[0].category).to.equal('SUBJECT');
+      expect(result[0].isSimplifiedAccess).to.equal(false);
+      expect(result[0].createdAt).to.be.instanceOf(Date);
+    });
+
+    it('does not return target profiles not shared with the organization', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId: otherOrganizationId });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await targetProfileRepository.findSharedByOrganizationId(organizationId);
+
+      // then
+      expect(result).to.deep.equal([]);
+    });
+  });
+
   describe('#findSkillsByIds', function () {
     let firstTargetProfilId, secondTargetProfilId, thirdTargetProfilId;
 
