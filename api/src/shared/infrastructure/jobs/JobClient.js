@@ -23,6 +23,7 @@ const metrics = new Metrics({ config });
 export class JobClient {
   /** @type JobClient */
   static #jobClient;
+  static #constructorToken = Symbol();
 
   /** @type {PgBoss} */
   #pgBoss = null;
