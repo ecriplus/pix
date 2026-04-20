@@ -517,6 +517,9 @@ const configuration = (function () {
     temporaryStorageForEmailValidationDemands: {
       expirationDelaySeconds: ms(process.env.EMAIL_VALIDATION_DEMAND_TEMPORARY_STORAGE_LIFESPAN || '3d') / 1000,
     },
+    temporaryStorageForEmailValidationCode: {
+      expirationDelaySeconds: ms(process.env.EMAIL_VALIDATION_CODE_LIFESPAN || '1h') / 1000,
+    },
     temporaryStorageForAnonymousUserTokens: {
       expirationDelaySeconds: ms(process.env.ANONYMOUS_USER_TOKEN_TEMPORARY_STORAGE_LIFESPAN || '1d') / 1000,
     },

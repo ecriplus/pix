@@ -2382,7 +2382,7 @@
           "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza."
         },
         "send-back-the-code": "inviami il codice",
-        "time-code-validation": "Il codice ricevuto è valido per 10 minuti",
+        "time-code-validation": "Il codice ricevuto è valido per un'ora",
         "title": "Controllo dell'indirizzo e-mail",
         "update-successful": "Il tuo indirizzo e-mail è stato modificato!",
         "validate-new-email": "Conferma nuovo indirizzo e-mail"

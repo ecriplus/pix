@@ -3,7 +3,7 @@ import { temporaryStorage } from '../../../shared/infrastructure/key-value-stora
 import { EmailModificationDemand } from '../../domain/models/EmailModificationDemand.js';
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');
 
-const EXPIRATION_DELAY_SECONDS = config.temporaryStorage.expirationDelaySeconds;
+const EXPIRATION_DELAY_SECONDS = config.temporaryStorageForEmailValidationCode.expirationDelaySeconds;
 
 /**
  *

@@ -2389,7 +2389,7 @@
           "unknown-error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal oder wenden Sie sich an den Support."
         },
         "send-back-the-code": "mir den Code zurückschicken",
-        "time-code-validation": "Der empfangene Code ist 10 Minuten lang gültig",
+        "time-code-validation": "Der erhaltene Code ist eine Stunde lang gültig",
         "title": "Überprüfung Ihrer E-Mail-Adresse",
         "update-successful": "Ihre E-Mail-Adresse wurde geändert!",
         "validate-new-email": "Neue E-Mail bestätigen"
