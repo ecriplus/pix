@@ -1,10 +1,5 @@
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../test-helper.js';
+import { createServer } from '../../../../server.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../test-helper.js';
 
 describe('Certification | Evaluation | Acceptance | answer-route', function () {
   let server;

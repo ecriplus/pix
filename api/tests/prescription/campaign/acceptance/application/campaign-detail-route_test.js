@@ -1,9 +1,9 @@
+import { createServer } from '../../../../../server.js';
 import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

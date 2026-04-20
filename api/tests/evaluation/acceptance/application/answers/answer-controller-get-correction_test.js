@@ -1,10 +1,6 @@
+import { createServer } from '../../../../../server.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 const buildOptions = (answerId, userId) => ({
   method: 'GET',

@@ -1,12 +1,8 @@
+import { createServer } from '../../../../server.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | session-controller-get-jury-certification-summaries', function () {
   let server;

@@ -2,9 +2,9 @@ import { Readable } from 'node:stream';
 
 import nock from 'nock';
 
+import { createServer } from '../../../../server.js';
 import { featureToggles } from '../../../../src/shared/infrastructure/feature-toggles/index.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,

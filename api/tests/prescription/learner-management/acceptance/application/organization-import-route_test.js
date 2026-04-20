@@ -1,13 +1,9 @@
+import { createServer } from '../../../../../server.js';
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { CsvImportError } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Acceptance | Application | organization-import', function () {
   let server;

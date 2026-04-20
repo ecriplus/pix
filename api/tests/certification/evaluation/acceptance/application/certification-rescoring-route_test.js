@@ -1,8 +1,8 @@
+import { createServer } from '../../../../../server.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
-  createServer,
   databaseBuilder,
   datamartBuilder,
   domainBuilder,

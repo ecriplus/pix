@@ -1,4 +1,5 @@
-import { createServer, databaseBuilder, expect } from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Acceptance | Route | module-issue-report', function () {
   let server;

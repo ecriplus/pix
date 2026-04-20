@@ -1,4 +1,5 @@
-import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Acceptance | Controller | feedback-controller', function () {

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+import { createServer } from '../../../../../server.js';
 import { generateCertificateVerificationCode } from '../../../../../src/certification/evaluation/domain/services/verify-certificate-code-service.js';
 import {
   CERTIFICATE_STATUSES,
@@ -14,7 +15,6 @@ import { AssessmentResult } from '../../../../../src/shared/domain/models/Assess
 import * as AssesmentResult from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

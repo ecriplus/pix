@@ -1,10 +1,10 @@
 import lodash from 'lodash';
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

@@ -1,8 +1,8 @@
+import { createServer } from '../../../../../server.js';
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

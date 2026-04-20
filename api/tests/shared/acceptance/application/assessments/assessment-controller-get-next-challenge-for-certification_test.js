@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

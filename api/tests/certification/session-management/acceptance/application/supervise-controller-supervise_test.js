@@ -1,10 +1,5 @@
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | Certification | Session management | session-for-supervising-controller-supervise', function () {
   let server;

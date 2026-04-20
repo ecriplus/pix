@@ -1,3 +1,4 @@
+import { createServer } from '../../../../../server.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
   CertificationIssueReportCategory,
@@ -8,7 +9,6 @@ import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStat
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

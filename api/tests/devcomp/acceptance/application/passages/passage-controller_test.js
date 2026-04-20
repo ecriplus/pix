@@ -3,16 +3,11 @@ import { Readable } from 'node:stream';
 
 import nock from 'nock';
 
+import { createServer } from '../../../../../server.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
 import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 
 describe('Acceptance | Controller | passage-controller', function () {

@@ -1,6 +1,6 @@
+import { createMaddoServer } from '../../../../../server.maddo.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
-  createMaddoServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

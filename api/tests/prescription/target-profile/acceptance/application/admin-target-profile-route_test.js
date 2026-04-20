@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import * as TargetProfile from '../../../../../src/shared/domain/models/TargetProfile.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

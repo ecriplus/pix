@@ -1,8 +1,8 @@
+import { createServer } from '../../../../../server.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { CertificationCandidate } from '../../../../../src/certification/shared/domain/models/CertificationCandidate.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import {
-  createServer,
   databaseBuilder,
   domainBuilder,
   expect,

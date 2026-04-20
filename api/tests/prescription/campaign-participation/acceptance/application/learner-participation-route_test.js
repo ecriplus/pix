@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { createServer } from '../../../../../server.js';
 import { ParticipationResultCalculationJob } from '../../../../../src/prescription/campaign-participation/domain/models/ParticipationResultCalculationJob.js';
 import { ParticipationSharedJob } from '../../../../../src/prescription/campaign-participation/domain/models/ParticipationSharedJob.js';
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
@@ -7,7 +8,6 @@ import { MAX_REACHABLE_LEVEL, MAX_REACHABLE_PIX_SCORE } from '../../../../../src
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
-  createServer,
   databaseBuilder,
   domainBuilder,
   expect,

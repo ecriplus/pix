@@ -1,16 +1,12 @@
 import iconv from 'iconv-lite';
 
+import { createServer } from '../../../../server.js';
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 const ROLES = PIX_ADMIN.ROLES;
 

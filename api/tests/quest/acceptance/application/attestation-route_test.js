@@ -1,14 +1,9 @@
 import FormData from 'form-data';
 
+import { createServer } from '../../../../server.js';
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../test-helper.js';
 import { AttestationTemplateFixture } from '../../../tooling/fixtures/index.js';
 import { mockAttestationStorageUpload } from '../../../tooling/mocks/attestation-storage.mock.js';
 

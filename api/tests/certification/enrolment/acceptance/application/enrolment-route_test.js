@@ -3,17 +3,12 @@ import * as url from 'node:url';
 
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/domain/constants.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { clearResolveMx, setResolveMx } from '../../../../../src/shared/mail/infrastructure/services/mail-check.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 

@@ -1,5 +1,5 @@
+import { createMaddoServer } from '../../../../../server.maddo.js';
 import {
-  createMaddoServer,
   datamartBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,

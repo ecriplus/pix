@@ -1,11 +1,7 @@
+import { createServer } from '../../../../../server.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | scorecard-controller', function () {
   let options;

@@ -1,10 +1,10 @@
+import { createServer } from '../../../../../server.js';
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

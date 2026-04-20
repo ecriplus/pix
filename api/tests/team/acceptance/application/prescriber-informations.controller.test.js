@@ -1,12 +1,8 @@
 import _ from 'lodash';
 
+import { createServer } from '../../../../server.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | Team | Application | Controller | prescriber-informations', function () {
   let user;

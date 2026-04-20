@@ -1,10 +1,10 @@
+import { createMaddoServer } from '../../../../server.maddo.js';
 import { Campaign } from '../../../../src/maddo/domain/models/Campaign.js';
 import { Organization } from '../../../../src/maddo/domain/models/Organization.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
-  createMaddoServer,
   databaseBuilder,
   expect,
   generateValidRequestAuthorizationHeaderForApplication,

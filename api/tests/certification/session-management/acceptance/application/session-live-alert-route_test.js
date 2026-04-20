@@ -1,11 +1,6 @@
+import { createServer } from '../../../../../server.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
 
 describe('Certification | Session | Acceptance | Application | Routes | session-live-alert', function () {
   let server;

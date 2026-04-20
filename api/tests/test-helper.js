@@ -13,8 +13,6 @@ import { knex as datamartKnex } from '../datamart/knex-database-connection.js';
 import { knex as datawarehouseKnex } from '../datawarehouse/knex-database-connection.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
-import { createServer } from '../server.js';
-import { createMaddoServer } from '../server.maddo.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
@@ -113,8 +111,6 @@ after(async function () {
 
 // eslint-disable-next-line mocha/no-exports
 export {
-  createMaddoServer,
-  createServer,
   databaseBuilder,
   datamartBuilder,
   datamartKnex,

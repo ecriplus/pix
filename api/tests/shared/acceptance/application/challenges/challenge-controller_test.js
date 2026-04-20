@@ -1,4 +1,5 @@
-import { createServer, databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
 
 describe('Acceptance | API | ChallengeController', function () {
   let server;
