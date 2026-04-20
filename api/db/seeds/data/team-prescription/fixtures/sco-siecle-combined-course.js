@@ -8,22 +8,19 @@ import { CAMPAIGN_SCO_COMBINED_COURSE_ID, SIXTH_GRADE_REWARD_ID } from '../const
 
 export const SCO_SIECLE_COMBINED_COURSE = {
   organizationId: SCO_MANAGING_ORGANIZATION_ID,
-  quest: {
-    code: 'SCOMBINIX',
+  blueprint: {
     name: 'Parcours combine sco SIECLE',
+    internalName: 'Parcours combine sco SIECLE',
     rewardId: SIXTH_GRADE_REWARD_ID,
     rewardType: REWARD_TYPES.ATTESTATION,
-    combinedCourseContents: [
-      {
-        campaignId: CAMPAIGN_SCO_COMBINED_COURSE_ID,
-      },
-      {
-        moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-      },
-      {
-        moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
-      },
+    requirements: [
+      { type: 'evaluation' },
+      { type: 'module', moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
+      { type: 'module', moduleId: 'f32a2238-4f65-4698-b486-15d51935d335' },
     ],
+  },
+  combinedCourse: {
+    code: 'SCOMBINIX',
   },
   targetProfile: {
     description: 'Description',

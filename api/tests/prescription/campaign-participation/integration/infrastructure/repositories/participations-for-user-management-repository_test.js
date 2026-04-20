@@ -8,6 +8,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
@@ -85,11 +86,18 @@ describe('Integration | Repository | Participations-For-User-Management', functi
           userId,
         });
         const combinedCourseCampaign = databaseBuilder.factory.buildCampaign();
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          successRequirements: [
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+              campaignId: combinedCourseCampaign.id,
+            }).toDTO(),
+          ],
+        });
         databaseBuilder.factory.buildCombinedCourse({
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId: combinedCourseCampaign.organizationId,
-          combinedCourseContents: [{ campaignId: combinedCourseCampaign.id }],
+          questId,
         });
 
         const combinedCourseCampaignParticipation = databaseBuilder.factory.buildCampaignParticipation({

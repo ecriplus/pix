@@ -1,4 +1,5 @@
 import * as targetProfileSummaryForAdminRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
@@ -374,15 +375,16 @@ describe('Integration | Repository | Target-profile-summary-for-admin', function
         targetProfileId: targetProfile2.id,
       });
 
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaignIdInCombinedCourse }).toDTO(),
+        ],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId: organization.id,
-        combinedCourseContents: [
-          {
-            campaignId: campaignIdInCombinedCourse,
-          },
-        ],
+        questId,
       });
 
       await databaseBuilder.commit();

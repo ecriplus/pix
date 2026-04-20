@@ -1,13 +1,9 @@
-import isUndefined from 'lodash/isUndefined.js';
-
-import { CombinedCourseBlueprint } from '../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { databaseBuffer } from '../database-buffer.js';
 import { buildOrganization } from './build-organization.js';
 import { buildQuestForCombinedCourse } from './build-quest.js';
 
 const buildCombinedCourse = function ({
   id = databaseBuffer.getNextId(),
-  combinedCourseContents = [],
   code = 'COMBINIX1',
   name = 'Mon parcours combiné',
   organizationId,
@@ -16,22 +12,12 @@ const buildCombinedCourse = function ({
   createdAt = new Date(),
   updatedAt,
   combinedCourseBlueprintId,
-  rewardType = null,
-  rewardId = null,
+  questId,
   deletedAt = null,
   deletedBy = null,
 } = {}) {
-  organizationId = isUndefined(organizationId) ? buildOrganization().id : organizationId;
-
-  const successRequirementsFromContents = combinedCourseContents.map((content) =>
-    CombinedCourseBlueprint.buildRequirementForCombinedCourse(content).toDTO(),
-  );
-
-  const questId = buildQuestForCombinedCourse({
-    successRequirements: successRequirementsFromContents,
-    rewardType,
-    rewardId,
-  }).id;
+  organizationId = organizationId ?? buildOrganization().id;
+  questId = questId ?? buildQuestForCombinedCourse().id;
 
   const values = {
     id,

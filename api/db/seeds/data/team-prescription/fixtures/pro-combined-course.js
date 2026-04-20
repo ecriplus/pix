@@ -7,20 +7,17 @@ import { CAMPAIGN_PRO_COMBINED_COURSE_ID } from '../constants.js';
 
 export const PRO_COMBINED_COURSE = {
   organizationId: PRO_ORGANIZATION_ID,
-  quest: {
-    code: 'COMBINIX1',
+  blueprint: {
     name: 'Parcours apprenant complet',
-    combinedCourseContents: [
-      {
-        campaignId: CAMPAIGN_PRO_COMBINED_COURSE_ID,
-      },
-      {
-        moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
-      },
-      {
-        moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
-      },
+    internalName: 'Parcours apprenant complet',
+    requirements: [
+      { type: 'evaluation' },
+      { type: 'module', moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
+      { type: 'module', moduleId: 'f32a2238-4f65-4698-b486-15d51935d335' },
     ],
+  },
+  combinedCourse: {
+    code: 'COMBINIX1',
   },
   targetProfile: {
     description: 'Description parcours combinix 1',

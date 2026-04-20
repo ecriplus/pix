@@ -6,6 +6,7 @@ import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/pres
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
 import * as campaignAdministrationRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/campaign-administration-repository.js';
 import { CampaignParticipationLoggerContext } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AuditLoggingJob } from '../../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
@@ -80,11 +81,14 @@ describe('Integration | UseCases | delete-campaign', function () {
       buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
       const campaignId = buildCampaign({ organizationId }).id;
 
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
-        combinedCourseContents: [{ campaignId }],
+        questId,
       });
 
       buildCampaignParticipation({ campaignId });
@@ -532,11 +536,14 @@ describe('Integration | UseCases | delete-campaign', function () {
       buildMembership({ userId, organizationId, organizationRole: Membership.roles.ADMIN });
       const campaignId = buildCampaign({ organizationId }).id;
 
+      const { id: questIdForError } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
-        combinedCourseContents: [{ campaignId }],
+        questId: questIdForError,
       });
 
       buildCampaignParticipation({ campaignId });

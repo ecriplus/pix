@@ -8,6 +8,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { CAMPAIGN_FEATURES } from '../../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
@@ -1129,11 +1130,16 @@ describe('Integration | Repository | Campaign-Report', function () {
         // given
         const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
         const campaignNotInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          successRequirements: [
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaignInQuest.id }).toDTO(),
+          ],
+        });
         databaseBuilder.factory.buildCombinedCourse({
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId,
-          combinedCourseContents: [{ campaignId: campaignInQuest.id }],
+          questId,
         });
         await databaseBuilder.commit();
 
@@ -1151,11 +1157,16 @@ describe('Integration | Repository | Campaign-Report', function () {
       it('should return empty campaigns and hasCampaigns to false', async function () {
         // given
         const campaignInQuest = databaseBuilder.factory.buildCampaign({ organizationId });
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          successRequirements: [
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaignInQuest.id }).toDTO(),
+          ],
+        });
         databaseBuilder.factory.buildCombinedCourse({
           code: 'ABCDE1234',
           name: 'Mon parcours Combiné',
           organizationId,
-          combinedCourseContents: [{ campaignId: campaignInQuest.id }],
+          questId,
         });
         await databaseBuilder.commit();
 

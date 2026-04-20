@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -23,8 +24,14 @@ describe('Integration | Combined course | Domain | UseCases | delete-and-anonymi
     organization = databaseBuilder.factory.buildOrganization();
     campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
 
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO(),
+      ],
+    });
     combinedCourse = databaseBuilder.factory.buildCombinedCourse({
-      combinedCourseContents: [{ campaignId: campaign.id, moduleId }],
+      questId,
       code: 'RANDOM',
     });
 

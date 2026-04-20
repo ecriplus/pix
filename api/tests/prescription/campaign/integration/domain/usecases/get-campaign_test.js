@@ -3,6 +3,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 
@@ -25,11 +26,16 @@ describe('Integration | UseCase | get-campaign', function () {
 
     it('should return combinedCourse info when a combined course is associated with a campaign', async function () {
       // given
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+        ],
+      });
       const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
-        combinedCourseContents: [{ campaignId: campaign.id }],
+        questId,
       }).id;
       await databaseBuilder.commit();
 

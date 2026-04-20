@@ -1,5 +1,6 @@
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../../src/prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
 import { CampaignBelongsToCombinedCourseError } from '../../../../../../src/prescription/campaign/domain/errors.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
@@ -16,11 +17,14 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
 
   it('should throw if a campaign belongs to combined course', async function () {
     // given
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      combinedCourseContents: [{ campaignId }],
+      questId,
     });
     await databaseBuilder.commit();
 
@@ -34,11 +38,16 @@ describe('Integration | Campaign | Application | Usecases | checkCampaignBelongs
   it('should not throw if campaign does not belongs to combined course', async function () {
     const anotherCampaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
 
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: anotherCampaignId }).toDTO(),
+      ],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      combinedCourseContents: [{ campaignId: anotherCampaignId }],
+      questId,
     });
     await databaseBuilder.commit();
 

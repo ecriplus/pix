@@ -1,4 +1,5 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
@@ -14,35 +15,49 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
     const moduleId = 'module-abc';
 
     //CombinedCourse1 with module 1 and organization linked to organizationLearner1
+    const { id: questId1 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO()],
+    });
     const combinedCourse1 = databaseBuilder.factory.buildCombinedCourse({
       code: 'QWERTY123',
       name: 'name1',
       organizationId: organizationLearner.organizationId,
-      combinedCourseContents: [{ moduleId }],
+      questId: questId1,
     });
 
     //CombinedCourse2 with same module but organization linked to organizationLearner2
+    const { id: questId2 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO()],
+    });
     const combinedCourse2 = databaseBuilder.factory.buildCombinedCourse({
       code: 'AZERTY123',
       name: 'name2',
       organizationId: otherOrganizationLearner.organizationId,
-      combinedCourseContents: [{ moduleId }],
+      questId: questId2,
     });
 
     //CombinedCourse3 with same module but with an organization not linked to user
+    const { id: questId3 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO()],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'AZERTYABC',
       name: 'name2',
       organizationId: thirdOrganization.id,
-      combinedCourseContents: [{ moduleId }],
+      questId: questId3,
     });
 
     //CombinedCourse4 with other module but organization linked to user
+    const { id: questId4 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: 'module-cde' }).toDTO(),
+      ],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'QWERTYDBE',
       name: 'name1',
       organizationId: organizationLearner.organizationId,
-      combinedCourseContents: [{ moduleId: 'module-cde' }],
+      questId: questId4,
     });
 
     await databaseBuilder.commit();

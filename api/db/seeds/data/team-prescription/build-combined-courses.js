@@ -1,4 +1,5 @@
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { OrganizationLearnerParticipationTypes } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { buildCombinedCourseBlueprint } from '../../../database-builder/factory/build-combined-course-blueprint.js';
@@ -24,9 +25,11 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     buildCampaignParticipation,
     buildCampaignSkill,
     buildCombinedCourse,
+    buildCombinedCourseBlueprint,
     buildKnowledgeElementSnapshot,
     buildOrganizationLearner,
     buildOrganizationLearnerParticipation,
+    buildQuestForCombinedCourse,
     buildStage,
     buildStageAcquisition,
     buildTargetProfile,
@@ -38,21 +41,13 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     buildUser,
   } = databaseBuilder.factory;
 
-  // Build combined course quest
-  const { id: combinedCourseId } = buildCombinedCourse({
-    ...combinedCourseData.quest,
-    organizationId: combinedCourseData.organizationId,
-    deletedAt: combinedCourseData.deletedAt,
-    deletedBy: combinedCourseData.deletedBy,
-  });
-
-  // Build target profile if needed
+  // 1. Build target profile if needed (to get targetProfileId for blueprint)
+  let targetProfileId;
   if (combinedCourseData.targetProfile) {
-    // Build target profile
-    const { id: targetProfileId } = buildTargetProfile({
+    targetProfileId = buildTargetProfile({
       description: combinedCourseData.targetProfile.description,
       name: combinedCourseData.targetProfile.name,
-    });
+    }).id;
 
     // Build stages if any
     combinedCourseData.targetProfile.stages?.forEach((stage) => {
@@ -71,43 +66,65 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
         level,
       }),
     );
+  }
 
-    // Build campaign
-    buildCampaign({
+  // 2. Build blueprint quest with targetProfileId-based requirements (like production)
+  const blueprintSuccessRequirements = combinedCourseData.blueprint.requirements.map((req) => {
+    if (req.type === 'evaluation') {
+      return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId }).toDTO();
+    }
+    return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: req.moduleId }).toDTO();
+  });
+
+  const { id: blueprintQuestId } = buildQuestForCombinedCourse({
+    successRequirements: blueprintSuccessRequirements,
+    rewardType: combinedCourseData.blueprint.rewardType ?? null,
+    rewardId: combinedCourseData.blueprint.rewardId ?? null,
+  });
+
+  const { id: combinedCourseBlueprintId } = buildCombinedCourseBlueprint({
+    name: combinedCourseData.blueprint.name,
+    internalName: combinedCourseData.blueprint.internalName,
+    description: combinedCourseData.blueprint.description,
+    illustration: combinedCourseData.blueprint.illustration,
+    questId: blueprintQuestId,
+  });
+
+  // 3. Build campaign linked to target profile
+  let campaignId;
+  if (combinedCourseData.targetProfile) {
+    const campaignData = combinedCourseData.targetProfile.campaign;
+    campaignId = buildCampaign({
       targetProfileId,
       organizationId: combinedCourseData.organizationId,
-      id: combinedCourseData.targetProfile.campaign.id,
-      name: combinedCourseData.targetProfile.campaign.name,
-      code: combinedCourseData.targetProfile.campaign.code,
-      customResultPageButtonText: combinedCourseData.targetProfile.campaign.customResultPageButtonText,
-      customResultPageButtonUrl: combinedCourseData.targetProfile.campaign.customResultPageButtonUrl,
-    });
+      id: campaignData.id,
+      name: campaignData.name,
+      code: campaignData.code,
+      customResultPageButtonText: campaignData.customResultPageButtonText,
+      customResultPageButtonUrl: campaignData.customResultPageButtonUrl,
+    }).id;
 
     // Build campaign skills
-    combinedCourseData.targetProfile.campaign.skills.forEach((skillId) =>
+    campaignData.skills.forEach((skillId) =>
       buildCampaignSkill({
-        campaignId: combinedCourseData.targetProfile.campaign.id,
+        campaignId,
         skillId,
       }),
     );
 
     // Build trainings if any
     combinedCourseData.targetProfile.trainings?.map((training) => {
-      // Build training
       const { id: trainingId } = buildTraining(training);
-      // Build training trigger
       const { id: trainingTriggerId } = buildTrainingTrigger({
         trainingId,
         threshold: training.threshold ?? 0,
         type: 'prerequisite',
       });
 
-      // Build training trigger tubes
       combinedCourseData.targetProfile.tubes.forEach((tube) =>
         buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
       );
 
-      // Attach training to target profile
       buildTargetProfileTraining({
         targetProfileId,
         trainingId,
@@ -115,16 +132,39 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     });
   }
 
-  // Build participations if any
+  // 4. Build combined course quest resolving targetProfileId → campaignId (like toCombinedCourse)
+  const combinedCourseSuccessRequirements = combinedCourseData.blueprint.requirements.map((req) => {
+    if (req.type === 'evaluation') {
+      return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO();
+    }
+    return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: req.moduleId }).toDTO();
+  });
+
+  const { id: combinedCourseQuestId } = buildQuestForCombinedCourse({
+    successRequirements: combinedCourseSuccessRequirements,
+    rewardType: combinedCourseData.blueprint.rewardType ?? null,
+    rewardId: combinedCourseData.blueprint.rewardId ?? null,
+  });
+
+  // 5. Build combined course linked to blueprint
+  const { id: combinedCourseId } = buildCombinedCourse({
+    code: combinedCourseData.combinedCourse.code,
+    name: combinedCourseData.combinedCourse.name ?? combinedCourseData.blueprint.name,
+    organizationId: combinedCourseData.organizationId,
+    combinedCourseBlueprintId,
+    questId: combinedCourseQuestId,
+    deletedAt: combinedCourseData.deletedAt,
+    deletedBy: combinedCourseData.deletedBy,
+  });
+
+  // 6. Build participations
   combinedCourseData.participations.forEach((participation) => {
-    // Build user
     const { id: userId } = buildUser.withRawPassword({
       firstName: participation.firstName,
       lastName: participation.lastName,
       email: participation.email,
     });
 
-    // Build organization learner
     const { id: organizationLearnerId } = buildOrganizationLearner({
       firstName: participation.firstName,
       lastName: participation.lastName,
@@ -134,7 +174,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       organizationId: combinedCourseData.organizationId,
     });
 
-    // Build organization learner participation
     buildOrganizationLearnerParticipation({
       combinedCourseId,
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,
@@ -142,17 +181,14 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       status: participation.status,
     });
 
-    // Build campaign participation and assessment if target profile exists
     if (combinedCourseData.targetProfile) {
-      // Build campaign participation
       const { id: campaignParticipationId } = buildCampaignParticipation({
-        campaignId: combinedCourseData.targetProfile.campaign.id,
+        campaignId,
         userId,
         organizationLearnerId,
         status: participation.campaignStatus,
       });
 
-      // Build assessment
       buildAssessment({
         userId,
         courseId: null,
@@ -166,15 +202,12 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
         campaignParticipationId,
       });
 
-      // If the campaign participation is shared, build knowledge elements and stage acquisitions
       if (participation.campaignStatus === CampaignParticipationStatuses.SHARED) {
-        // Build knowledge element snapshot for this user
         buildKnowledgeElementSnapshot({
           campaignParticipationId,
           userId,
         });
 
-        // Build stage 0 acquisition if there are stages
         if (combinedCourseData.targetProfile.stages) {
           buildStageAcquisition({
             stageId: combinedCourseData.targetProfile.stages[0].id,
@@ -192,7 +225,7 @@ export const buildCombinedCourseBlueprints = () => {
     internalName: 'Mon schéma de parcours combiné 2',
     illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
     description:
-      "Un parcours pour découvrir l’essentiel sur l'intelligence artificielle : comprendre sa définition, ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
+      "Un parcours pour découvrir l'essentiel sur l'intelligence artificielle : comprendre sa définition, ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
   }).id;
 
   buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: PRO_ORGANIZATION_ID });

@@ -10,6 +10,7 @@ import {
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -1511,16 +1512,21 @@ describe('Integration | Repository | Campaign Participation', function () {
     it('should return true user linked to a combined course', async function () {
       const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId });
 
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            campaignId: campaignInCombinedCourse.id,
+          }).toDTO(),
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+          }).toDTO(),
+        ],
+      });
       const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
-        rewardType: null,
-        rewardId: null,
         code: 'COMBINIX1',
         organizationId,
-        combinedCourseContents: [
-          { campaignId: campaignInCombinedCourse.id },
-          { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
-        ],
+        questId,
       });
       databaseBuilder.factory.buildOrganizationLearnerParticipation({
         organizationLearnerId,
@@ -1548,9 +1554,16 @@ describe('Integration | Repository | Campaign Participation', function () {
         organizationLearnerId,
         userId,
       });
+      const { id: questId2 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            campaignId: campaignInCombinedCourse.id,
+          }).toDTO(),
+        ],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         organizationId,
-        combinedCourseContents: [{ campaignId: campaignInCombinedCourse.id }],
+        questId: questId2,
       });
 
       databaseBuilder.factory.buildAssessment({

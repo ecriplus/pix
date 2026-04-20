@@ -3,6 +3,7 @@ import sinon from 'sinon';
 
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -35,10 +36,16 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
 
       const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO(),
+        ],
+      });
       const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
         code,
         organizationId,
-        combinedCourseContents: [{ campaignId: campaign.id }, { moduleId }],
+        questId,
       });
 
       const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
@@ -91,12 +98,15 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
           organizationId,
         } = databaseBuilder.factory.buildOrganizationLearner();
         const reward = databaseBuilder.factory.buildAttestation();
+        const { id: rewardQuestId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO()],
+          rewardType: REWARD_TYPES.ATTESTATION,
+          rewardId: reward.id,
+        });
         const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
           code,
           organizationId,
-          combinedCourseContents: [{ moduleId }],
-          rewardType: REWARD_TYPES.ATTESTATION,
-          rewardId: reward.id,
+          questId: rewardQuestId,
         });
 
         // build terminated passages and started OrganizationLearnerParticipation Passages to validate right synchronization
@@ -158,15 +168,18 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
     databaseBuilder.factory.buildPassage({ userId, moduleId, terminatedAt: new Date() });
     databaseBuilder.factory.buildPassage({ userId, module2Id, terminatedAt: null });
 
+    const { id: questId3 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: module2Id }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: module3Id }).toDTO(),
+      ],
+    });
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      combinedCourseContents: [
-        { campaignId: campaign.id },
-        { moduleId },
-        { moduleId: module2Id },
-        { moduleId: module3Id },
-      ],
+      questId: questId3,
     });
     databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
       organizationLearnerId,
@@ -195,10 +208,15 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
     const targetProfile = databaseBuilder.factory.buildTargetProfile();
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
+    const { id: questId4 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+      ],
+    });
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      combinedCourseContents: [{ campaignId: campaign.id }],
+      questId: questId4,
     });
     const combinedCourseParticipation =
       databaseBuilder.factory.buildOrganizationLearnerParticipation.ofTypeCombinedCourse({
@@ -226,10 +244,15 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
     const targetProfile = databaseBuilder.factory.buildTargetProfile();
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
+    const { id: questId5 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+      ],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      combinedCourseContents: [{ campaignId: campaign.id }],
+      questId: questId5,
     });
     await databaseBuilder.commit();
 
@@ -246,10 +269,15 @@ describe('Integration | Quest | Domain | UseCases | update-combined-course-progr
     const targetProfile = databaseBuilder.factory.buildTargetProfile();
     const campaign = databaseBuilder.factory.buildCampaign({ targetProfileId: targetProfile.id, organizationId });
 
+    const { id: questId6 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+      ],
+    });
     const { id: combinedCourseId } = databaseBuilder.factory.buildCombinedCourse({
       code,
       organizationId,
-      combinedCourseContents: [{ campaignId: campaign.id }],
+      questId: questId6,
     });
     const combinedCourseParticipation = databaseBuilder.factory.buildOrganizationLearnerParticipation({
       type: OrganizationLearnerParticipationTypes.COMBINED_COURSE,

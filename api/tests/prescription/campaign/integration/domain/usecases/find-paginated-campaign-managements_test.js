@@ -1,5 +1,6 @@
 import { CampaignManagement } from '../../../../../../src/prescription/campaign/domain/models/CampaignManagement.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 
@@ -11,11 +12,16 @@ describe('Integration | UseCase | find-paginated-campaign-managements', function
     await databaseBuilder.factory.buildCampaign({ organizationId }).id;
     const campaignIdInCombinedCourse = await databaseBuilder.factory.buildCampaign({ organizationId }).id;
 
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaignIdInCombinedCourse }).toDTO(),
+      ],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: 'Mon parcours Combiné',
       organizationId,
-      combinedCourseContents: [{ campaignId: campaignIdInCombinedCourse }],
+      questId,
     });
     await databaseBuilder.commit();
 
