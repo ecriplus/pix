@@ -11,7 +11,8 @@ import {
   JobRepository,
   JobRetry,
 } from '../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repositories | Jobs | job-repository', function () {
   it('create one job db with given config', async function () {

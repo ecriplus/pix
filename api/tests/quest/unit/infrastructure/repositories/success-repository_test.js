@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
 import * as successRepository from '../../../../../src/quest/infrastructure/repositories/success-repository.js';
-import { expect, preventStubsToBeCalledUnexpectedly } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { preventStubsToBeCalledUnexpectedly } from '../../../../tooling/test-utils/error.js';
 
 describe('Quest | Unit | Infrastructure | repositories | success', function () {
   describe('#find', function () {

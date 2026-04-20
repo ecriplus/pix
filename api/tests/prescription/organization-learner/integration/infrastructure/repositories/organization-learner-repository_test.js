@@ -4,7 +4,8 @@ import { OrganizationLearner } from '../../../../../../src/prescription/organiza
 import { repositories } from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/index.js';
 import { User } from '../../../../../../src/profile/domain/models/User.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, databaseBuilder, expect, mockAttestationStorage } from '../../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect } from '../../../../../test-helper.js';
+import { mockAttestationStorage } from '../../../../../tooling/mocks/attestation-storage.mock.js';
 
 const { organizationLearnerRepository } = repositories;
 

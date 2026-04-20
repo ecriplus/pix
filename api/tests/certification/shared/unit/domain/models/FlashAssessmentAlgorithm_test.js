@@ -1,7 +1,8 @@
 import { FlashAssessmentAlgorithm } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithm.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { AssessmentLackOfChallengesError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 const baseFlashAssessmentAlgorithmConfig = {
   challengesBetweenSameCompetence: 2,

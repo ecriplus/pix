@@ -7,7 +7,8 @@ import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescr
 import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { catchErr, createTempFile, expect, removeTempFile, sinon } from '../../../../../test-helper.js';
+import { catchErr, expect, sinon } from '../../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../../tooling/test-utils/file.js';
 
 const i18n = getI18n();
 

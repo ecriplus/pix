@@ -1,7 +1,8 @@
 import { ModuleInstantiationError } from '../../../../../../src/devcomp/domain/errors.js';
 import { ComponentStepper } from '../../../../../../src/devcomp/domain/models/component/ComponentStepper.js';
 import { DomainError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | Models | Component | ComponentStepper', function () {
   describe('#constructor', function () {

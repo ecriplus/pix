@@ -15,6 +15,7 @@ export async function createTempFile(file, data) {
 }
 
 export async function removeTempFile(filePath) {
+  if (!filePath) return;
   return (
     fs
       .access(filePath)

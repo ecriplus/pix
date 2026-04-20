@@ -10,8 +10,9 @@ import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransa
 import { OidcError, OidcMissingFieldsError } from '../../../../../src/shared/domain/errors.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { catchErr, catchErrSync, expect, sinon } from '../../../../test-helper.js';
+import { expect, sinon } from '../../../../test-helper.js';
 import { createOpenIdClientMock } from '../../../../tooling/mocks/openid-client.mock.js';
+import { catchErr, catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 const uuidV4Regex = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 

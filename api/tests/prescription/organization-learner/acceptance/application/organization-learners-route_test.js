@@ -7,8 +7,8 @@ import {
   datamartBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  mockAttestationStorage,
 } from '../../../../test-helper.js';
+import { mockAttestationStorage } from '../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Prescription | Organization Learner | Acceptance | Application | OrganizationLearnerRoute', function () {
   let server;

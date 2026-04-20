@@ -1,7 +1,8 @@
 import { OrganizationBatchUpdateError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { updateOrganizationsInBatch } from '../../../../../src/organizational-entities/domain/usecases/update-organizations-in-batch.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { catchErr, createTempFile, domainBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
+import { catchErr, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | update-organizations-in-batch', function () {
   let filePath,
@@ -44,9 +45,7 @@ describe('Unit | Organizational Entities | Domain | UseCase | update-organizatio
   });
 
   afterEach(async function () {
-    if (filePath) {
-      await removeTempFile(filePath);
-    }
+    await removeTempFile(filePath);
   });
 
   context('when parsing a CSV file without organization', function () {

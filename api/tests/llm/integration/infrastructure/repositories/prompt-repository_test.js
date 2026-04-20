@@ -3,7 +3,8 @@ import { Readable } from 'node:stream';
 import { LLMApiError } from '../../../../../src/llm/domain/errors.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { prompt } from '../../../../../src/llm/infrastructure/repositories/prompt-repository.js';
-import { catchErr, expect, nock, waitForStreamFinalizationToBeDone } from '../../../../test-helper.js';
+import { catchErr, expect, nock } from '../../../../test-helper.js';
+import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | prompt-repository', function () {
   context('#prompt', function () {

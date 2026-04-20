@@ -5,7 +5,6 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiSorted from 'chai-sorted';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat.js';
-import MockDate from 'mockdate';
 import nock from 'nock';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -35,18 +34,14 @@ import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 import { increaseCurrentTestTimeout } from './tooling/mocha-tools.js';
-import { mockAttestationStorage, mockAttestationStorageUpload } from './tooling/mocks/attestation-storage.mock.js';
 import { hFake } from './tooling/mocks/hapi.mock.js';
 import { HttpTestServer } from './tooling/server/http-test-server.js';
-import { catchErr, catchErrSync, preventStubsToBeCalledUnexpectedly } from './tooling/test-utils/error.js';
-import { createTempFile, isSameBinary, removeTempFile } from './tooling/test-utils/file.js';
+import { catchErr } from './tooling/test-utils/error.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
-import { parseNDJSON } from './tooling/test-utils/json.js';
-import { wait, waitForStreamFinalizationToBeDone } from './tooling/test-utils/wait.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -125,10 +120,8 @@ after(async function () {
 // eslint-disable-next-line mocha/no-exports
 export {
   catchErr,
-  catchErrSync,
   createMaddoServer,
   createServer,
-  createTempFile,
   databaseBuilder,
   datamartBuilder,
   datamartKnex,
@@ -140,17 +133,8 @@ export {
   generateValidRequestAuthorizationHeaderForApplication,
   hFake,
   HttpTestServer,
-  isSameBinary,
   knex,
   learningContentBuilder,
-  mockAttestationStorage,
-  mockAttestationStorageUpload,
-  MockDate,
   nock,
-  parseNDJSON,
-  preventStubsToBeCalledUnexpectedly,
-  removeTempFile,
   sinon,
-  wait,
-  waitForStreamFinalizationToBeDone,
 };

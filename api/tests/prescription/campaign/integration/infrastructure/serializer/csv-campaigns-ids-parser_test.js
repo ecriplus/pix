@@ -1,13 +1,14 @@
 import * as csvCampaignIdsParser from '../../../../../../src/prescription/campaign/infrastructure/serializers/csv/csv-campaigns-ids-parser.js';
 import { CsvImportError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErr, createTempFile, expect, removeTempFile } from '../../../../../test-helper.js';
+import { catchErr, expect } from '../../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../../tooling/test-utils/file.js';
 
 describe('Integration | Serializer | CSV | campaigns-administration | csv-campaigns-ids-parser', function () {
   describe('#extractCampaignsIds', function () {
     let file;
 
-    afterEach(function () {
-      removeTempFile(file);
+    afterEach(async function () {
+      await removeTempFile(file);
     });
 
     context('when the file is correctly parsed', function () {

@@ -11,8 +11,8 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   nock,
-  waitForStreamFinalizationToBeDone,
 } from '../../../../test-helper.js';
+import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 
 describe('Acceptance | Controller | passage-controller', function () {
   let server;

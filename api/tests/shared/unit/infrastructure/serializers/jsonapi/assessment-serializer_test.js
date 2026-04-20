@@ -5,7 +5,8 @@ import { CampaignAssessment } from '../../../../../../src/shared/domain/read-mod
 import { CertificationAssessment } from '../../../../../../src/shared/domain/read-models/CertificationAssessment.js';
 import { CompetenceEvaluationAssessment } from '../../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
 import * as serializer from '../../../../../../src/shared/infrastructure/serializers/jsonapi/assessment-serializer.js';
-import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Serializer | JSONAPI | assessment-serializer', function () {
   describe('#serialize', function () {

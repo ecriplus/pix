@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { createTempFile, databaseBuilder, expect, knex, removeTempFile, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | add-organization-feature-in-batch', function () {
   let learnerImportFeature,

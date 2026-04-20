@@ -2,7 +2,8 @@ import { AttestationNotFoundError } from '../../../../../src/profile/domain/erro
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { normalizeAndRemoveAccents } from '../../../../../src/shared/infrastructure/utils/string-utils.js';
-import { catchErr, databaseBuilder, expect, mockAttestationStorage, sinon } from '../../../../test-helper.js';
+import { catchErr, databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { mockAttestationStorage } from '../../../../tooling/mocks/attestation-storage.mock.js';
 
 describe('Profile | Integration | Domain | get-attestation-data-for-users', function () {
   let clock;

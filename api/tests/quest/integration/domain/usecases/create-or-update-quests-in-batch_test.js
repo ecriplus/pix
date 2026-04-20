@@ -1,7 +1,8 @@
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
-import { createTempFile, databaseBuilder, expect, removeTempFile, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Integration | Quest | Domain | UseCases | create-or-update-quests-in-batch', function () {
   let filePath;

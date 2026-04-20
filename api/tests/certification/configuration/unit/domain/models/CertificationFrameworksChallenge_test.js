@@ -1,7 +1,8 @@
 import { CertificationFrameworksChallenge } from '../../../../../../src/certification/configuration/domain/models/CertificationFrameworksChallenge.js';
 import { ActiveCalibratedChallenge } from '../../../../../../src/certification/configuration/domain/read-models/ActiveCalibratedChallenge.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, domainBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Unit | Domain | Models | CertificationFrameworksChallenge', function () {
   describe('#calibrate', function () {

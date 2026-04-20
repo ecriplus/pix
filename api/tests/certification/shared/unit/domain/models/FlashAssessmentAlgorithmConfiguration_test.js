@@ -1,6 +1,7 @@
 import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/certification/shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { catchErrSync, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { catchErrSync } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Models | FlashAssessmentAlgorithmConfiguration', function () {
   context('class invariants', function () {

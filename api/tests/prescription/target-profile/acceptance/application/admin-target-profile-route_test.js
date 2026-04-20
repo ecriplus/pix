@@ -6,7 +6,7 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  MockDate,
+  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | TargetProfile | Application | Route | admin-target-profile', function () {
@@ -274,7 +274,7 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
     let targetProfileId;
 
     beforeEach(async function () {
-      MockDate.set(new Date('2020-11-01'));
+      sinon.useFakeTimers({ now: new Date('2020-11-01'), toFake: ['Date'] });
 
       const learningContent = learningContentBuilder([
         {
@@ -385,10 +385,6 @@ describe('Acceptance | TargetProfile | Application | Route | admin-target-profil
       databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2', level: 2 });
       user = databaseBuilder.factory.buildUser.withRole();
       return databaseBuilder.commit();
-    });
-
-    afterEach(function () {
-      MockDate.reset();
     });
 
     describe('GET /api/admin/target-profiles/{id}/content-json', function () {
