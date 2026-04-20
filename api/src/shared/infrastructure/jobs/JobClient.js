@@ -23,6 +23,7 @@ const EXCLUDED_JOB_FILES = [
 export class JobClient {
   /** @type JobClient */
   static #jobClient;
+  static #constructorToken = Symbol();
 
   /** @type {PgBoss} */
   #pgBoss = null;
