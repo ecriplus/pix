@@ -11,9 +11,9 @@ import CopyButton from 'pix-admin/components/ui/copy-button';
 import ENV from 'pix-admin/config/environment';
 
 export default class HeadInformation extends Component {
-  @service currentUser;
   @service intl;
   @service pixToast;
+  @service accessControl;
 
   @action
   onLogoUpload(event) {
@@ -104,7 +104,7 @@ export default class HeadInformation extends Component {
 
         <ul class="organization-tags-list">
           {{#if this.belongsToNetwork}}
-            {{#if this.currentUser.adminMember.isSuperAdmin}}
+            {{#if this.accessControl.hasAccessToNetworkFeature}}
               <PixTag class="organization__child-tag" @color="success">
                 {{t "components.organizations.head-information.network"}}
                 <LinkTo @route="authenticated.networks.get" @model={{@organization.network.id}}>
