@@ -38,8 +38,6 @@ import {
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
 
-const MOCHA_TIMEOUT = 5000;
-
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
 
@@ -68,10 +66,6 @@ before(async function () {
   } catch {
     // pgBoss is not available on unit tests
   }
-});
-
-beforeEach(function () {
-  this.timeout(MOCHA_TIMEOUT);
 });
 
 afterEach(async function () {
