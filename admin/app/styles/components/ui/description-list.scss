@@ -19,9 +19,7 @@
   }
 
   dt {
-    @extend %pix-title-xxs;
-
-    padding-right: var(--pix-spacing-4x);
+    padding-right: var(--pix-spacing-6x);
     font-weight: var(--pix-font-bold);
     /* stylelint-disable custom-property-pattern */
     font-family: var(--_pix-font-family-title);
@@ -36,7 +34,7 @@
 }
 
 @container (max-width: 30rem) {
-    .description-list {
+  .description-list {
     display: block;
 
     dt {
