@@ -57,15 +57,6 @@ export const CERTIFICATIONS_DATA = {
   PRO_SANTE: 'PRO_SANTE',
 };
 
-export const PIX_ADMIN_SUPPORT_DATA = {
-  id: 1_000_008,
-  firstName: 'PixAdmin',
-  lastName: 'RoleSupport',
-  email: 'pix-admin_rolesupport@example.net',
-  rawPassword: 'pix123',
-  role: 'SUPPORT',
-};
-
 export const PIX_CERTIF_PRO_DATA = {
   id: 1_000_005,
   firstName: 'PixCertif',
@@ -87,4 +78,13 @@ export const PIX_CERTIF_PRO_DATA = {
       },
     },
   ],
+};
+
+export const PIX_ADMIN_SUPPORT_DATA = {
+  id: 1_000_008,
+  firstName: 'PixAdmin',
+  lastName: 'RoleSupport',
+  email: 'pix-admin_rolesupport@example.net',
+  rawPassword: 'pix123',
+  role: 'SUPPORT',
 };

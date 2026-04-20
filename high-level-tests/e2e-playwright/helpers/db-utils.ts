@@ -70,6 +70,9 @@ export async function createOrganizationLearnerInDB(
     lastName,
     userId,
     birthdate,
+    birthCountryCode = '100',
+    birthCity = 'Perpignan',
+    sex = 'F',
     organizationId,
     nationalStudentId,
     isDisabled,
@@ -78,6 +81,9 @@ export async function createOrganizationLearnerInDB(
     lastName: string;
     userId?: number;
     birthdate?: string;
+    birthCountryCode?: string;
+    birthCity?: string;
+    sex?: string;
     nationalStudentId: string;
     organizationId: number;
     isDisabled: boolean;
@@ -85,12 +91,15 @@ export async function createOrganizationLearnerInDB(
   knex: Knex,
 ) {
   const someDate = new Date();
-  return await knex('organization-learners')
+  const [{ id: organizationLearnerId }] = await knex('organization-learners')
     .insert({
       firstName,
       lastName,
       userId: userId ?? null,
       birthdate: birthdate ?? null,
+      birthCountryCode,
+      birthCity,
+      sex,
       isDisabled,
       nationalStudentId,
       organizationId,
@@ -98,6 +107,7 @@ export async function createOrganizationLearnerInDB(
       updatedAt: someDate,
     })
     .returning('*');
+  return organizationLearnerId;
 }
 
 export async function createCertificationCenterInDB(

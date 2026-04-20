@@ -1,7 +1,10 @@
+import { CERTIFICATIONS_DATA } from '../db-data.ts';
+
 export const pixCertifiableUserData = [
   {
     firstName: 'Buffy',
     lastName: 'Summers',
+    email: 'buffy.summers@example.net',
     rawPassword: 'pix123',
     sex: 'F',
     birthdate: '1981-01-19',
@@ -15,6 +18,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'Rupert',
     lastName: 'Giles',
+    email: 'rupert.giles@example.net',
     rawPassword: 'pix123',
     sex: 'M',
     birthdate: '1955-02-22',
@@ -28,6 +32,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'Cordelia',
     lastName: 'Chase',
+    email: 'cordelia.chase@example.net',
     rawPassword: 'pix123',
     sex: 'F',
     birthdate: '1981-08-05',
@@ -41,6 +46,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'Willow',
     lastName: 'Rosenberg',
+    email: 'willow.rosenberg@example.net',
     rawPassword: 'pix123',
     sex: 'F',
     birthdate: '1983-12-15',
@@ -54,6 +60,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'Riley',
     lastName: 'Finn',
+    email: 'riley.finn@example.net',
     rawPassword: 'pix123',
     sex: 'M',
     birthdate: '1981-09-29',
@@ -67,6 +74,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'Xander',
     lastName: 'Harris',
+    email: 'xander.harris@example.net',
     rawPassword: 'pix123',
     sex: 'M',
     birthdate: '1981-01-08',
@@ -80,6 +88,7 @@ export const pixCertifiableUserData = [
   {
     firstName: 'William',
     lastName: 'Pratt',
+    email: 'william.pratt@example.net',
     rawPassword: 'pix123',
     sex: 'M',
     birthdate: '1853-05-10',
@@ -91,3 +100,50 @@ export const pixCertifiableUserData = [
     postalCode: '66000',
   },
 ];
+
+export const PIX_ADMIN_CERTIF_DATA = {
+  firstName: 'pixAdminRoleCertif',
+  lastName: `pixAdminRoleCertif`,
+  email: `pix-admin-role-certif@example.net`,
+  rawPassword: 'pix123',
+  role: 'CERTIF',
+};
+
+export const PIX_CERTIF_PRO_DATA = {
+  firstName: 'PixCertif',
+  lastName: 'CentrePRO',
+  email: 'pix-certif_pro@example.net',
+  rawPassword: 'pix123',
+  certificationCenters: [
+    {
+      type: 'PRO',
+      externalId: 'CERTIFPRO',
+      habilitations: [
+        CERTIFICATIONS_DATA.CLEA,
+        CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+        CERTIFICATIONS_DATA.DROIT,
+        CERTIFICATIONS_DATA.PRO_SANTE,
+      ],
+      withOrganization: {
+        isManagingStudents: false,
+      },
+    },
+  ],
+};
+
+export const PIX_CERTIF_SCO_DATA = {
+  firstName: 'PixCertif',
+  lastName: 'CentreSCO',
+  email: 'pix-certif_sco@example.net',
+  rawPassword: 'pix123',
+  certificationCenters: [
+    {
+      type: 'SCO',
+      externalId: 'CERTIFSCO',
+      habilitations: [],
+      withOrganization: {
+        isManagingStudents: true,
+      },
+    },
+  ],
+};

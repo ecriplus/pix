@@ -3,43 +3,38 @@ import path from 'node:path';
 import { Browser, type BrowserContext, Page } from '@playwright/test';
 
 import { AUTH_DIR, Credentials, HAR_DIR, saveStorageState, shouldRecordHAR } from '../../helpers/auth.ts';
-import { buildPixAdminUser, buildPixCertifUser } from '../../helpers/certification/builders/index.ts';
+import { buildCandidate, buildPixAdminUser, buildPixCertifUser } from '../../helpers/certification/builders/index.ts';
 import { pixCertifiableUserData } from '../../helpers/certification/data.ts';
+import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA, PIX_CERTIF_SCO_DATA } from '../../helpers/certification/data.ts';
+import { getCleaTargetProfileId, getOrganizationIdForScoUser } from '../../helpers/certification/db.ts';
 import { PixAdminUserData, PixCertifiableUserData, PixCertifUserData } from '../../helpers/certification/types.ts';
 import { knex } from '../../helpers/db.ts';
-import { CERTIFICATIONS_DATA } from '../../helpers/db-data.ts';
-import { createUserInDB } from '../../helpers/db-utils.ts';
-import {
-  ChallengePage,
-  FinalCheckpointPage,
-  IntermediateCheckpointPage,
-  StartCampaignPage,
-} from '../../pages/pix-app/index.ts';
-import { PixOrgaPage } from '../../pages/pix-orga/index.ts';
-import { expect, test as sharedTest } from '../index.ts';
+import { test as sharedTest } from '../index.ts';
 
 const pixAppBrowserContextsPerUser = new Map<number, BrowserContext>();
 const pixAppPages: Page[] = [];
 
 export const loggedPagesFixtures = sharedTest.extend<
+  // test scoped fixtures
   {
     pixAdminRoleCertifPage: Page;
     pixCertifProPage: Page;
+    pixCertifScoPage: Page;
     pixCertifInvigilatorPage: Page;
-    pixOrgaProPage: Page;
-    getCertifiableUserData: (i: number) => Promise<PixCertifiableUserData>;
+    getCertifiableUserData: (firstName: string) => Promise<PixCertifiableUserData>;
   },
+  // worker scoped fixtures (run max once per worker)
   {
     nextId: () => number;
-    certifiableUserDatas: PixCertifiableUserData[];
+    userDataMap: Map<string, object>;
     pixCertifProUserData: PixCertifUserData;
+    pixCertifScoUserData: PixCertifUserData;
     pixAdminRoleCertifUserData: PixAdminUserData;
     pixAdminRoleCertifWorkerContext: BrowserContext;
     pixCertifProWorkerContext: BrowserContext;
-    pixOrgaProWorkerContext: BrowserContext;
+    pixCertifScoWorkerContext: BrowserContext;
     pixAppCertifiableUserContext: (p: PixCertifiableUserData) => Promise<BrowserContext>;
     pixAppCertifiableUserPage: (p: PixCertifiableUserData) => Promise<Page>;
-    makeUserCertifiableAndReadyForClea: (p: Page) => Promise<void>;
   }
 >({
   pixAdminRoleCertifPage: async ({ pixAdminRoleCertifWorkerContext }, use) => {
@@ -48,14 +43,14 @@ export const loggedPagesFixtures = sharedTest.extend<
     await use(page);
     await page.close();
   },
-  pixOrgaProPage: async ({ pixOrgaProWorkerContext }, use) => {
-    const page = await pixOrgaProWorkerContext.newPage();
-    await page.goto(process.env.PIX_ORGA_URL!);
+  pixCertifProPage: async ({ pixCertifProWorkerContext }, use) => {
+    const page = await pixCertifProWorkerContext.newPage();
+    await page.goto(process.env.PIX_CERTIF_URL!);
     await use(page);
     await page.close();
   },
-  pixCertifProPage: async ({ pixCertifProWorkerContext }, use) => {
-    const page = await pixCertifProWorkerContext.newPage();
+  pixCertifScoPage: async ({ pixCertifScoWorkerContext }, use) => {
+    const page = await pixCertifScoWorkerContext.newPage();
     await page.goto(process.env.PIX_CERTIF_URL!);
     await use(page);
     await page.close();
@@ -66,11 +61,11 @@ export const loggedPagesFixtures = sharedTest.extend<
     await use(page);
     await page.close();
   },
-  getCertifiableUserData: async ({ certifiableUserDatas }, use) => {
-    const getByIndex = async (index: number) => {
-      return certifiableUserDatas[index];
+  getCertifiableUserData: async ({ userDataMap }, use) => {
+    const getByFirstName = async (searchedEmail: string) => {
+      return userDataMap.get(searchedEmail) as PixCertifiableUserData;
     };
-    await use(getByIndex);
+    await use(getByFirstName);
   },
   nextId: [
     // eslint-disable-next-line no-empty-pattern
@@ -93,75 +88,75 @@ export const loggedPagesFixtures = sharedTest.extend<
     },
     { scope: 'worker' },
   ],
-  certifiableUserDatas: [
+  userDataMap: [
     async ({ nextId }, use) => {
-      const userDatas = [];
-      let nextUserId = nextId();
-      for (const userData of pixCertifiableUserData) {
-        const finalUserData = {
-          ...userData,
-          id: nextUserId,
-          email: `pix-app-user-${nextUserId}-0@example.net`,
-        };
-        userDatas.push(finalUserData);
-        await createUserInDB(
-          {
-            ...finalUserData,
-            cgu: true,
-            pixCertifTermsOfServiceAccepted: true,
-            mustValidateTermsOfService: false,
-          },
-          knex,
-        );
-        nextUserId = nextId();
+      const userDataMap = new Map();
+      const cleaTargetProfileId = await getCleaTargetProfileId();
+      // admin
+      let id = nextId();
+      let email = buildUniqueEmailFromId(id, PIX_ADMIN_CERTIF_DATA.email);
+      let userData: unknown = {
+        ...PIX_ADMIN_CERTIF_DATA,
+        id,
+        email,
+      } as PixAdminUserData;
+      await buildPixAdminUser(knex, userData as PixAdminUserData);
+      userDataMap.set(PIX_ADMIN_CERTIF_DATA.email, userData);
+
+      // pix certif pro
+      id = nextId();
+      email = buildUniqueEmailFromId(id, PIX_CERTIF_PRO_DATA.email);
+      userData = {
+        ...PIX_CERTIF_PRO_DATA,
+        id,
+        email,
+      } as PixCertifUserData;
+      await buildPixCertifUser(knex, userData as PixCertifUserData, cleaTargetProfileId);
+      userDataMap.set(PIX_CERTIF_PRO_DATA.email, userData);
+
+      // pix certif sco
+      id = nextId();
+      email = buildUniqueEmailFromId(id, PIX_CERTIF_SCO_DATA.email);
+      userData = {
+        ...PIX_CERTIF_SCO_DATA,
+        id,
+        email,
+      } as PixCertifUserData;
+      await buildPixCertifUser(knex, userData as PixCertifUserData, cleaTargetProfileId);
+      userDataMap.set(PIX_CERTIF_SCO_DATA.email, userData);
+
+      // certifiable users
+      const organizationScoId = await getOrganizationIdForScoUser(id);
+      for (const certifiableUserData of pixCertifiableUserData) {
+        id = nextId();
+        email = buildUniqueEmailFromId(id, certifiableUserData.email);
+        userData = {
+          ...certifiableUserData,
+          id,
+          email,
+        } as PixCertifiableUserData;
+        await buildCandidate(knex, userData as PixCertifiableUserData, organizationScoId);
+        userDataMap.set(certifiableUserData.email, userData);
       }
-      await use(userDatas);
+      await use(userDataMap);
     },
     { scope: 'worker' },
   ],
   pixCertifProUserData: [
-    async ({ nextId }, use) => {
-      const nextUserId = nextId();
-      const certifProUserData: PixCertifUserData = {
-        id: nextUserId,
-        firstName: 'pixCertifPro',
-        lastName: `pixCertifPro${nextUserId}`,
-        email: `pix-certif-pro-${nextUserId}@example.net`,
-        rawPassword: 'pix123',
-        certificationCenters: [
-          {
-            type: 'PRO',
-            externalId: `CERTIFPRO${nextUserId}`,
-            habilitations: [
-              CERTIFICATIONS_DATA.CLEA,
-              CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
-              CERTIFICATIONS_DATA.DROIT,
-              CERTIFICATIONS_DATA.PRO_SANTE,
-            ],
-            withOrganization: {
-              isManagingStudents: false,
-            },
-          },
-        ],
-      };
-      await buildPixCertifUser(knex, certifProUserData);
-      await use(certifProUserData);
+    async ({ userDataMap }, use) => {
+      await use(userDataMap.get(PIX_CERTIF_PRO_DATA.email) as PixCertifUserData);
+    },
+    { scope: 'worker' },
+  ],
+  pixCertifScoUserData: [
+    async ({ userDataMap }, use) => {
+      await use(userDataMap.get(PIX_CERTIF_SCO_DATA.email) as PixCertifUserData);
     },
     { scope: 'worker' },
   ],
   pixAdminRoleCertifUserData: [
-    async ({ nextId }, use) => {
-      const nextUserId = nextId();
-      const adminUserData: PixAdminUserData = {
-        id: nextUserId,
-        firstName: 'pixAdminRoleCertif',
-        lastName: `pixAdminRoleCertif${nextUserId}`,
-        email: `pix-admin-role-certif-${nextUserId}@example.net`,
-        rawPassword: 'pix123',
-        role: 'CERTIF',
-      };
-      await buildPixAdminUser(knex, adminUserData);
-      await use(adminUserData);
+    async ({ userDataMap }, use) => {
+      await use(userDataMap.get(PIX_ADMIN_CERTIF_DATA.email) as PixAdminUserData);
     },
     { scope: 'worker' },
   ],
@@ -199,16 +194,16 @@ export const loggedPagesFixtures = sharedTest.extend<
     },
     { scope: 'worker' },
   ],
-  pixOrgaProWorkerContext: [
-    async ({ browser, pixCertifProUserData }, use) => {
+  pixCertifScoWorkerContext: [
+    async ({ browser, pixCertifScoUserData }, use) => {
       const credentials = {
-        id: pixCertifProUserData.id,
-        label: `pix-orga-pro-${pixCertifProUserData.id}`,
-        firstName: pixCertifProUserData.firstName,
-        lastName: pixCertifProUserData.lastName,
-        email: pixCertifProUserData.email,
-        rawPassword: pixCertifProUserData.rawPassword,
-        appUrl: process.env.PIX_ORGA_URL!,
+        id: pixCertifScoUserData.id,
+        label: `pix-certif-sco-${pixCertifScoUserData.id}`,
+        firstName: pixCertifScoUserData.firstName,
+        lastName: pixCertifScoUserData.lastName,
+        email: pixCertifScoUserData.email,
+        rawPassword: pixCertifScoUserData.rawPassword,
+        appUrl: process.env.PIX_CERTIF_URL!,
       };
       const context = await setupContext(browser, credentials);
       await use(context);
@@ -217,7 +212,7 @@ export const loggedPagesFixtures = sharedTest.extend<
     { scope: 'worker' },
   ],
   pixAppCertifiableUserContext: [
-    async ({ browser, makeUserCertifiableAndReadyForClea }, use) => {
+    async ({ browser }, use) => {
       const createContextForUser = async (certifiableUserData: PixCertifiableUserData) => {
         if (pixAppBrowserContextsPerUser.has(certifiableUserData.id)) {
           return pixAppBrowserContextsPerUser.get(certifiableUserData.id)!;
@@ -233,9 +228,6 @@ export const loggedPagesFixtures = sharedTest.extend<
         };
         const context = await setupContext(browser, credentials);
         pixAppBrowserContextsPerUser.set(certifiableUserData.id, context);
-        const page = await context.newPage();
-        await makeUserCertifiableAndReadyForClea(page);
-        await page.close();
         return context;
       };
       await use(createContextForUser);
@@ -269,48 +261,6 @@ export const loggedPagesFixtures = sharedTest.extend<
     },
     { scope: 'worker' },
   ],
-  makeUserCertifiableAndReadyForClea: [
-    async ({ pixOrgaProWorkerContext }, use) => {
-      const prepareUser = async (pixApp: Page) => {
-        const pixOrgaProPage = await pixOrgaProWorkerContext.newPage();
-        await pixOrgaProPage.goto(process.env.PIX_ORGA_URL!);
-        const pixOrgaPage = new PixOrgaPage(pixOrgaProPage);
-        let campaignCode: string | null;
-        await sharedTest.step('creates the CLEA campaign', async () => {
-          await pixOrgaProPage.getByRole('link', { name: 'Campagnes', exact: true }).click();
-          await pixOrgaProPage.getByRole('link', { name: 'Créer une campagne' }).click();
-          await pixOrgaPage.createEvaluationCampaign({
-            campaignName: 'CLEA campagne',
-            targetProfileName: 'Parcours complet CléA numérique',
-          });
-          campaignCode = await pixOrgaProPage.locator('dd.campaign-header-title__campaign-code > span').textContent();
-        });
-
-        await sharedTest.step('user enters campaign and answers correctly all the way to the end', async () => {
-          await pixApp.goto(process.env.PIX_APP_URL!);
-          await pixApp.getByRole('link', { name: "J'ai un code" }).click();
-          const startCampaignPage = new StartCampaignPage(pixApp);
-          await startCampaignPage.goToFirstChallenge(campaignCode as string);
-          while (!pixApp.url().includes('finalCheckpoint=true')) {
-            const challengePage = new ChallengePage(pixApp);
-            await challengePage.setRightOrWrongAnswer(true);
-            await challengePage.validateAnswer();
-            if (pixApp.url().includes('/checkpoint') && !pixApp.url().includes('finalCheckpoint=true')) {
-              const checkpointPage = new IntermediateCheckpointPage(pixApp);
-              await checkpointPage.goNext();
-            }
-          }
-          const finalCheckpointPage = new FinalCheckpointPage(pixApp);
-          await finalCheckpointPage.goToResults();
-          await expect(
-            pixApp.getByRole('paragraph').filter({ hasText: 'Vos résultats ont été envoyés' }),
-          ).toBeVisible();
-        });
-      };
-      await use(prepareUser);
-    },
-    { scope: 'worker' },
-  ],
 });
 
 async function setupContext(browser: Browser, credentials: Credentials) {
@@ -329,4 +279,9 @@ async function setupContext(browser: Browser, credentials: Credentials) {
     recordHar,
     permissions: ['clipboard-read', 'clipboard-write'],
   });
+}
+
+function buildUniqueEmailFromId(id: number, email: string) {
+  const [username, domain] = email.split('@');
+  return `${username}${id}@${domain}`;
 }

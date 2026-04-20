@@ -1,3 +1,4 @@
+export { buildCandidate } from './build-candidate.ts';
 export { buildCleaData } from './build-clea-data.ts';
 export { buildCoreVersion } from './build-core-version.ts';
 export { buildCpfData } from './build-cpf-data.ts';
