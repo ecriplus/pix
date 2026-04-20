@@ -47,7 +47,8 @@ export class SessionCertificationResultsCsvBuilder {
       }),
     );
 
-    headersGenerator.next({ headerKey: 'RESULT' });
+    headersGenerator.next({ headerKey: 'REACHED_LEVEL' });
+    headersGenerator.next({ headerKey: 'SCORE' });
 
     if (this.showCompetencesColumns()) {
       CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
@@ -90,7 +91,8 @@ export class SessionCertificationResultsCsvBuilder {
         }),
       );
 
-      rowGenerator.next({ value: this.formatResult(certificationResult) });
+      rowGenerator.next({ value: this.#csvValues.formatReachedLevel(certificationResult) });
+      rowGenerator.next({ value: this.#csvValues.formatScore(certificationResult) });
 
       if (this.showCompetencesColumns()) {
         CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
@@ -123,24 +125,5 @@ export class SessionCertificationResultsCsvBuilder {
       fileHeaders: this.#buildFileHeaders(),
       data: this.#buildData(),
     };
-  }
-
-  formatResult(certificationResult) {
-    if (certificationResult.isCancelled() || certificationResult.isInError()) {
-      return '-';
-    }
-    if (certificationResult.isV3) {
-      const meshKey = certificationResult.isRejected() ? 'BELOW_MINIMUM' : certificationResult.reachedMeshIndex;
-      const pixScore = certificationResult.isRejected() ? 0 : certificationResult.pixScore;
-
-      return this.translate(`certification.meshLevels.${certificationResult.framework}.${meshKey}`, {
-        pixScore,
-      });
-    }
-
-    if (certificationResult.isRejected()) {
-      return 0;
-    }
-    return certificationResult.pixScore;
   }
 }

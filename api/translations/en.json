@@ -311,8 +311,9 @@
       "FIRSTNAME": "First name",
       "JURY_COMMENT_FOR_ORGANIZATION": "Examining body’s comment for the organisation",
       "LASTNAME": "Last name",
-      "PIX_SCORE": "Number of pix",
+      "REACHED_LEVEL": "Level",
       "REGISTRATION_STATUS": "Status at registration",
+      "SCORE": "Pix score",
       "SESSION_ID": "Session",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Status"
@@ -328,7 +329,46 @@
       "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "Not taken",
       "COMPLEMENTARY_CERTIFICATION_REJECTED": "Rejected",
       "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Validated",
-      "REJECTED_AUTOMATICALLY_COMMENT": "The candidate did not answer correctly to more than 50% of the questions asked, this invalidated his entire certification, and therefore resulted in a score of 0 pix"
+      "REJECTED_AUTOMATICALLY_COMMENT": "The candidate did not answer correctly to more than 50% of the questions asked, this invalidated his entire certification, and therefore resulted in a score of 0 pix",
+      "meshLevels": {
+        "CLEA": {
+          "0": "-",
+          "1": "Novice 1",
+          "2": "Novice 2",
+          "3": "Independent 1",
+          "4": "Independent 2",
+          "5": "Advanced 1",
+          "6": "Advanced 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "CORE": {
+          "0": "-",
+          "1": "Novice 1",
+          "2": "Novice 2",
+          "3": "Independent 1",
+          "4": "Independent 2",
+          "5": "Advanced 1",
+          "6": "Advanced 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "DROIT": {
+          "0": "Obtained"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Eligible"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Eligible"
+        },
+        "EDU_CPE": {
+          "0": "Eligible"
+        },
+        "PRO_SANTE": {
+          "0": "Obtained"
+        }
+      }
     }
   },
   "common": {

@@ -1,5 +1,7 @@
 import { CertificationResult } from '../../../../../../../../src/certification/results/domain/models/CertificationResult.js';
 import { CertificationResultsCsvValues } from '../../../../../../../../src/certification/results/infrastructure/utils/csv/certification-results/CertificationResultsCsvValues.js';
+import { AlgorithmEngineVersion } from '../../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
+import { Frameworks } from '../../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { AutoJuryCommentKeys } from '../../../../../../../../src/certification/shared/domain/models/JuryComment.js';
 import { getI18n } from '../../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../../test-helper.js';
@@ -283,6 +285,126 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
 
       // then
       expect(result).to.be.undefined;
+    });
+  });
+
+  describe('#formatReachedLevel', function () {
+    it('returns the translated mesh level when certification is V3 and validated', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        version: AlgorithmEngineVersion.V3,
+        status: CertificationResult.status.VALIDATED,
+        framework: Frameworks.CORE,
+        reachedMeshIndex: 5,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
+
+      // Then
+      expect(result).to.equal('Avancé 1');
+    });
+
+    it('returns "-" when certification is V3 and rejected', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        version: AlgorithmEngineVersion.V3,
+        status: CertificationResult.status.REJECTED,
+        framework: Frameworks.DROIT,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
+
+      // Then
+      expect(result).to.equal('-');
+    });
+
+    it('returns "-" when certification is not V3', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        version: 2,
+        status: CertificationResult.status.VALIDATED,
+        framework: Frameworks.CORE,
+        reachedMeshIndex: 5,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
+
+      // Then
+      expect(result).to.equal('-');
+    });
+
+    it('returns "-" when certification is V3 but cancelled', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        version: AlgorithmEngineVersion.V3,
+        status: CertificationResult.status.CANCELLED,
+        framework: Frameworks.CORE,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
+
+      // Then
+      expect(result).to.equal('-');
+    });
+  });
+
+  describe('#formatScore', function () {
+    it('returns the pix score when certification is validated', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        status: CertificationResult.status.VALIDATED,
+        pixScore: 512,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatScore(certificationResult);
+
+      // Then
+      expect(result).to.equal(512);
+    });
+
+    it('returns 0 when certification is rejected', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        status: CertificationResult.status.REJECTED,
+        pixScore: 100,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatScore(certificationResult);
+
+      // Then
+      expect(result).to.equal(0);
+    });
+
+    it('returns "-" when certification is cancelled', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        status: CertificationResult.status.CANCELLED,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatScore(certificationResult);
+
+      // Then
+      expect(result).to.equal('-');
+    });
+
+    it('returns "-" when certification is in error', function () {
+      // Given
+      const certificationResult = new CertificationResult({
+        status: CertificationResult.status.ERROR,
+      });
+
+      // When
+      const result = new CertificationResultsCsvValues(i18n).formatScore(certificationResult);
+
+      // Then
+      expect(result).to.equal('-');
     });
   });
 

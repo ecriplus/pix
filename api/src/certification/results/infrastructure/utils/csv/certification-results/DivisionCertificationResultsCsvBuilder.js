@@ -26,8 +26,10 @@ export class DivisionCertificationResultsCsvBuilder {
       'EXTERNAL_ID',
       'TYPE',
       'STATUS',
-      'RESULT',
     ].forEach((headerKey) => headersGenerator.next({ headerKey }));
+
+    headersGenerator.next({ headerKey: 'REACHED_LEVEL' });
+    headersGenerator.next({ headerKey: 'SCORE' });
 
     CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
       headersGenerator.next({
@@ -56,7 +58,8 @@ export class DivisionCertificationResultsCsvBuilder {
       rowGenerator.next({ value: certificationResult.externalId });
       rowGenerator.next({ value: this.translate(`certification.labels.${certificationResult.framework}`) });
       rowGenerator.next({ value: this.#csvValues.formatStatus(certificationResult) });
-      rowGenerator.next({ value: this.formatResult(certificationResult) });
+      rowGenerator.next({ value: this.#csvValues.formatReachedLevel(certificationResult) });
+      rowGenerator.next({ value: this.#csvValues.formatScore(certificationResult) });
       CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
         rowGenerator.next({
           value: this.#csvValues.getCompetenceLevel({
@@ -78,15 +81,5 @@ export class DivisionCertificationResultsCsvBuilder {
       fileHeaders: this.#buildFileHeaders(),
       data: this.#buildData(),
     };
-  }
-
-  formatResult(certificationResult) {
-    if (certificationResult.isCancelled() || certificationResult.isInError()) {
-      return '-';
-    }
-    if (certificationResult.isRejected()) {
-      return 0;
-    }
-    return certificationResult.pixScore;
   }
 }
