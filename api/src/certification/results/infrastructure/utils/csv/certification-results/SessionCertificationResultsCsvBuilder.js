@@ -48,9 +48,10 @@ export class SessionCertificationResultsCsvBuilder {
     );
 
     headersGenerator.next({ headerKey: 'REACHED_LEVEL' });
-    headersGenerator.next({ headerKey: 'SCORE' });
 
-    if (this.showCompetencesColumns()) {
+    if (this.hasCoreOrCleaCertifications()) {
+      headersGenerator.next({ headerKey: 'SCORE' });
+
       CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
         headersGenerator.next({
           headerKey: 'SKILL_LABEL',
@@ -92,9 +93,10 @@ export class SessionCertificationResultsCsvBuilder {
       );
 
       rowGenerator.next({ value: this.#csvValues.formatReachedLevel(certificationResult) });
-      rowGenerator.next({ value: this.#csvValues.formatScore(certificationResult) });
 
-      if (this.showCompetencesColumns()) {
+      if (this.hasCoreOrCleaCertifications()) {
+        rowGenerator.next({ value: this.#csvValues.formatScore(certificationResult) });
+
         CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
           rowGenerator.next({
             value: this.#csvValues.getCompetenceLevel({
@@ -114,7 +116,7 @@ export class SessionCertificationResultsCsvBuilder {
     });
   }
 
-  showCompetencesColumns() {
+  hasCoreOrCleaCertifications() {
     return this.#certificationResults.some(
       (certificationResult) => certificationResult.isCoreFramework() || certificationResult.isCleaFramework(),
     );
