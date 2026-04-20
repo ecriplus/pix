@@ -43,3 +43,8 @@ export async function getCleaTargetProfileId() {
   const [id] = await knex('badges').pluck('targetProfileId').where({ key: CERTIFICATIONS_DATA.CLEA });
   return id;
 }
+
+export async function getOrganizationIdForScoUser(pixCertifUserId: number) {
+  const [id] = await knex('memberships').pluck('organizationId').where({ userId: pixCertifUserId });
+  return id;
+}

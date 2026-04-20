@@ -16,7 +16,7 @@ import {
   createCertificationCenterInDB,
   createCertificationCenterMembershipInDB,
   createOrganizationLearnerInDB,
-  createUserInDB
+  createUserInDB,
 } from './db-utils.ts';
 
 export const knex = Knex({ client: 'postgresql', connection: process.env.DATABASE_URL });

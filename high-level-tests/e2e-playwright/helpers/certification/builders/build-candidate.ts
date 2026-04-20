@@ -1,10 +1,14 @@
 import { Knex } from 'knex';
 
 import { CERTIFICATIONS_DATA } from '../../db-data.ts';
-import { createOrganizationLearnerInDb, createUserInDB } from '../../db-utils.ts';
+import { createOrganizationLearnerInDB, createUserInDB } from '../../db-utils.ts';
 import { PixCertifiableUserData } from '../types.ts';
 
-export async function buildCandidate(knex: Knex, userData: PixCertifiableUserData): Promise<void> {
+export async function buildCandidate(
+  knex: Knex,
+  userData: PixCertifiableUserData,
+  organizationScoId: number,
+): Promise<void> {
   const finalUserData = {
     ...userData,
     cgu: true,
@@ -13,24 +17,21 @@ export async function buildCandidate(knex: Knex, userData: PixCertifiableUserDat
   };
   await createUserInDB(finalUserData, knex);
 
-  const organizationIds = await knex('organizations').pluck('id');
-  for (const organizationId of organizationIds) {
-    const organizationLearnerId = await createOrganizationLearnerInDb(
-      {
-        organizationId,
-        userId: userData.id,
-        firstName: finalUserData.firstName,
-        lastName: finalUserData.lastName,
-        birthdate: finalUserData.birthdate,
-        birthCountryCode: '100',
-        birthCity: finalUserData.birthCity,
-        sex: finalUserData.sex,
-      },
-      knex,
-    );
+  const organizationLearnerId = await createOrganizationLearnerInDB(
+    {
+      organizationId: organizationScoId,
+      userId: userData.id,
+      firstName: finalUserData.firstName,
+      lastName: finalUserData.lastName,
+      birthdate: finalUserData.birthdate,
+      birthCountryCode: '100',
+      isDisabled: false,
+      nationalStudentId: `${finalUserData.firstName}${userData.id}`,
+    },
+    knex,
+  );
 
-    await makeUserReadyForCleaAndCertifiable(knex, organizationId, userData.id, organizationLearnerId);
-  }
+  await makeUserReadyForCleaAndCertifiable(knex, organizationScoId, userData.id, organizationLearnerId);
 }
 
 async function makeUserReadyForCleaAndCertifiable(

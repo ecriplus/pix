@@ -6,7 +6,7 @@ import { AUTH_DIR, Credentials, HAR_DIR, saveStorageState, shouldRecordHAR } fro
 import { buildCandidate, buildPixAdminUser, buildPixCertifUser } from '../../helpers/certification/builders/index.ts';
 import { pixCertifiableUserData } from '../../helpers/certification/data.ts';
 import { PIX_ADMIN_CERTIF_DATA, PIX_CERTIF_PRO_DATA, PIX_CERTIF_SCO_DATA } from '../../helpers/certification/data.ts';
-import { getCleaTargetProfileId } from '../../helpers/certification/db.ts';
+import { getCleaTargetProfileId, getOrganizationIdForScoUser } from '../../helpers/certification/db.ts';
 import { PixAdminUserData, PixCertifiableUserData, PixCertifUserData } from '../../helpers/certification/types.ts';
 import { knex } from '../../helpers/db.ts';
 import { test as sharedTest } from '../index.ts';
@@ -126,6 +126,7 @@ export const loggedPagesFixtures = sharedTest.extend<
       userDataMap.set(PIX_CERTIF_SCO_DATA.email, userData);
 
       // certifiable users
+      const organizationScoId = await getOrganizationIdForScoUser(id);
       for (const certifiableUserData of pixCertifiableUserData) {
         id = nextId();
         email = buildUniqueEmailFromId(id, certifiableUserData.email);
@@ -134,7 +135,7 @@ export const loggedPagesFixtures = sharedTest.extend<
           id,
           email,
         } as PixCertifiableUserData;
-        await buildCandidate(knex, userData as PixCertifiableUserData);
+        await buildCandidate(knex, userData as PixCertifiableUserData, organizationScoId);
         userDataMap.set(certifiableUserData.email, userData);
       }
       await use(userDataMap);
