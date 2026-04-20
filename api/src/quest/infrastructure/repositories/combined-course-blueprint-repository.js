@@ -3,6 +3,7 @@ import difference from 'lodash/difference.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CombinedCourseBlueprint } from '../../domain/models/CombinedCourseBlueprint.js';
+import { Quest } from '../../domain/models/Quest.js';
 import * as questRepository from './quest-repository.js';
 
 /**
@@ -105,17 +106,38 @@ export async function findById({ id }) {
 
 export async function findByOrganizationId({ organizationId }) {
   const knexConn = DomainTransaction.getConnection();
-  const results = await knexConn('combined_course_blueprints')
-    .select(_buildSelectFields(knexConn))
+  const combinedCoursesWithQuests = await knexConn('combined_course_blueprints')
+    .select({
+      ..._buildSelectFields(knexConn),
+      questRewardId: 'quests.rewardId',
+      questRewardType: 'quests.rewardType',
+      questEligibilityRequirements: 'quests.eligibilityRequirements',
+      questSuccessRequirements: 'quests.successRequirements',
+      questCreatedAt: 'quests.createdAt',
+      questUpdatedAt: 'quests.updatedAt',
+    })
     .join(
       'combined_course_blueprint_shares',
       'combined_course_blueprints.id',
       'combined_course_blueprint_shares.combinedCourseBlueprintId',
     )
+    .join('quests', 'quests.id', 'combined_course_blueprints.questId')
     .where({ organizationId })
-    .groupBy('combined_course_blueprints.id')
+    .groupBy('combined_course_blueprints.id', 'quests.id')
     .orderBy('combined_course_blueprints.id');
-  return results.map((result) => _toDomain(result));
+
+  return combinedCoursesWithQuests.map((result) => {
+    const quest = new Quest({
+      id: result.questId,
+      rewardId: result.questRewardId,
+      rewardType: result.questRewardType,
+      eligibilityRequirements: result.questEligibilityRequirements,
+      successRequirements: result.questSuccessRequirements,
+      createdAt: result.questCreatedAt,
+      updatedAt: result.questUpdatedAt,
+    });
+    return _toDomain(result, quest);
+  });
 }
 
 function _toDomain(rawData, quest) {

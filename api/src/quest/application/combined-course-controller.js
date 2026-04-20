@@ -1,7 +1,10 @@
 import { createReadStream } from 'node:fs';
 
 import { getDataBuffer } from '../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
-import { extractUserIdFromRequest } from '../../shared/infrastructure/utils/request-response-utils.js';
+import {
+  extractUserIdFromRequest,
+  getChallengeLocale,
+} from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignTypeCombinedCourseSerializer from '../infrastructure/serializers/campaign-type-combined-course-serializer.js';
 import * as combinedCourseDetailsSerializer from '../infrastructure/serializers/combined-course-details-serializer.js';
@@ -10,6 +13,7 @@ import * as combinedCourseParticipationDetailSerializer from '../infrastructure/
 import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
 import * as combinedCourseSerializer from '../infrastructure/serializers/combined-course-serializer.js';
 import * as combinedCourseStatisticsSerializer from '../infrastructure/serializers/combined-course-statistics-serializer.js';
+import * as courseSerializer from '../infrastructure/serializers/course-serializer.js';
 
 const getByCode = async function (request, _, dependencies = { combinedCourseSerializer }) {
   const { code } = request.query.filter;
@@ -124,6 +128,14 @@ const createCombinedCourse = async function (request, h, dependencies = { campai
     .created();
 };
 
+const getCourseByOrganizationId = async (request, _, dependencies = { courseSerializer }) => {
+  const { organizationId } = request.params;
+  const locale = getChallengeLocale(request);
+  const courseItems = await usecases.getCourseByOrganizationId({ organizationId, locale });
+
+  return dependencies.courseSerializer.serialize(courseItems);
+};
+
 const combinedCourseController = {
   getByCode,
   getById,
@@ -135,6 +147,7 @@ const combinedCourseController = {
   reassessStatus,
   createCombinedCourses,
   createCombinedCourse,
+  getCourseByOrganizationId,
 };
 
 export { combinedCourseController };

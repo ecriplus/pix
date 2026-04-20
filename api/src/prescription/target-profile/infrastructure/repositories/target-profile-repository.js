@@ -1,7 +1,6 @@
 import { Badge } from '../../../../evaluation/domain/models/Badge.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { ObjectValidationError } from '../../../../shared/domain/errors.js';
+import { NotFoundError, ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { TargetProfile } from '../../../../shared/domain/models/TargetProfile.js';
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 
@@ -64,6 +63,25 @@ const hasTubesWithLevels = async function ({ targetProfileId, tubesWithLevels })
   }
 };
 
+const findTubeIdsByTargetProfileIds = async (targetProfileIds) => {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('target-profile_tubes')
+    .select('targetProfileId', 'tubeId')
+    .whereIn('targetProfileId', targetProfileIds);
+};
+
+const findSharedByOrganizationId = async (organizationId) =>
+  DomainTransaction.getConnection()('target-profiles')
+    .join('target-profile-shares', 'target-profiles.id', 'target-profile-shares.targetProfileId')
+    .where('target-profile-shares.organizationId', organizationId)
+    .select(
+      'target-profiles.id',
+      'target-profiles.name',
+      'target-profiles.category',
+      'target-profiles.isSimplifiedAccess',
+      'target-profiles.createdAt',
+    );
+
 const findSkillsByIds = async function ({ targetProfileIds, dependencies = { skillRepository } }) {
   const knexConn = DomainTransaction.getConnection();
 
@@ -83,4 +101,12 @@ const findSkillsByIds = async function ({ targetProfileIds, dependencies = { ski
   return skillData;
 };
 
-export { findByIds, findOrganizationIds, findSkillsByIds, get, hasTubesWithLevels };
+export {
+  findByIds,
+  findOrganizationIds,
+  findSharedByOrganizationId,
+  findSkillsByIds,
+  findTubeIdsByTargetProfileIds,
+  get,
+  hasTubesWithLevels,
+};

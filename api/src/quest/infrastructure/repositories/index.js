@@ -21,6 +21,7 @@ import * as combinedCourseDetailsRepository from './combined-course-details-repo
 import * as combinedCourseParticipantRepository from './combined-course-participant-repository.js';
 import * as combinedCourseParticipationRepository from './combined-course-participation-repository.js';
 import * as combinedCourseRepository from './combined-course-repository.js';
+import * as courseRepository from './course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
 import * as organizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
@@ -43,6 +44,7 @@ const repositoriesWithoutInjectedDependencies = {
   questRepository,
   campaignRepository,
   combinedCourseRepository,
+  courseRepository,
   combinedCourseDetailsRepository,
   combinedCourseParticipantRepository,
   combinedCourseParticipationRepository,

@@ -40,6 +40,7 @@ const dependencies = {
   organizationLearnerRepository,
   organizationLearnerPrescriptionRepository,
   combinedCourseBlueprintRepository,
+  courseRepository: repositories.courseRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
   codeGenerator,
   logger,
@@ -67,6 +68,7 @@ import getCombinedCourseById from './get-combined-course-by-id.js';
 import { getCombinedCourseParticipationById } from './get-combined-course-participation-by-id.js';
 import { getCombinedCourseStatistics } from './get-combined-course-statistics.js';
 import getCombinedCoursesByOrganizationId from './get-combined-courses-by-organization-id.js';
+import { getCourseByOrganizationId } from './get-course-by-organization-id.js';
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
 import { getVerifiedCode } from './get-verified-code.js';
 import { rewardUser } from './reward-user.js';
@@ -103,6 +105,7 @@ const usecasesWithoutInjectedDependencies = {
   deleteAndAnonymizeParticipationsForALearnerId,
   updateCombinedCourses,
   findOrganizationAttestations,
+  getCourseByOrganizationId,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
