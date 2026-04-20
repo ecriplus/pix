@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import { CampaignParticipationOverview } from '../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
 import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 const { SHARED, STARTED } = CampaignParticipationStatuses;
 

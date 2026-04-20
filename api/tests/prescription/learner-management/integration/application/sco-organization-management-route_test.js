@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/sco-organization-management-route.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | sco-organization-learners', function () {
   let httpTestServer;

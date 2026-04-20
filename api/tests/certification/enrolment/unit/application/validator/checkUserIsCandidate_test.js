@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as checkUserIsCandidateUseCase from '../../../../../../src/certification/enrolment/application/usecases/check-user-is-candidate.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Application | Validator | checkUserIsCandidateUseCase', function () {
   context('When user is the candidate', function () {

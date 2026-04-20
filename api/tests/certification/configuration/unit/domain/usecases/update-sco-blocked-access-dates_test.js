@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { updateScoBlockedAccessDate } from '../../../../../../src/certification/configuration/domain/usecases/update-sco-blocked-access-date.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | update-sco-blocked-access-date', function () {
   let ScoBlockedAccessDatesRepositoryStub;

@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { certificationDetailsController } from '../../../../../src/certification/session-management/application/certification-details-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Certification Details', function () {
   let certificationDetailsSerializer;

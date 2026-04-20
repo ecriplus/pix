@@ -1,8 +1,9 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 
 describe('Integration | Team | Domain | Usecases | resend-organization-invitation', function () {
   describe('#UpdateOrganizationInvitation', function () {

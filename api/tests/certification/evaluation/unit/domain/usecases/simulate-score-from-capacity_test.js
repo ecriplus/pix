@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { simulateScoreFromCapacity } from '../../../../../../src/certification/evaluation/domain/usecases/simulate-score-from-capacity.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Evaluation | Unit | Domain | Usecase | simulate-score-from-capacity', function () {
   let scoringConfigurationRepository;

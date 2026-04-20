@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { AutonomousCourseTargetProfile } from '../../../../../src/evaluation/domain/models/AutonomousCourseTargetProfile.js';
 import { repositories } from '../../../../../src/evaluation/infrastructure/repositories/index.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Autonomous Course Target Profile', function () {

@@ -1,4 +1,5 @@
 import pick from 'lodash/pick.js';
+import sinon from 'sinon';
 
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import { CampaignParticipant } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipant.js';
@@ -16,7 +17,7 @@ import {
   OrganizationLearnersCouldNotBeSavedError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const campaignParticipationDBAttributes = [

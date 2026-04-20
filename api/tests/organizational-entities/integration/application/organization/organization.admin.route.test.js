@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import * as organizationAdminRoutes from '../../../../../src/organizational-entities/application/organization/organization.admin.route.js';
 import {
@@ -12,7 +14,7 @@ import {
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { CsvImportError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { identifiersType } from '../../../../../src/shared/domain/types/identifiers-type.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Application | Route | Admin | Organization', function () {
   let httpTestServer;

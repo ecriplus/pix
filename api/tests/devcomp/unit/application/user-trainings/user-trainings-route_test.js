@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { userTrainingsController } from '../../../../../src/devcomp/application/user-trainings/user-trainings-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/user-trainings/user-trainings-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | user-router', function () {
   describe('GET /api/users/{id}/trainings', function () {

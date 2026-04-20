@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { PasswordResetTokenInvalidOrExpired } from '../../../../../src/identity-access-management/domain/errors.js';
 import { PasswordExpirationToken } from '../../../../../src/identity-access-management/domain/models/PasswordExpirationToken.js';
 import { updateExpiredPassword } from '../../../../../src/identity-access-management/domain/usecases/update-expired-password.usecase.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-expired-password', function () {

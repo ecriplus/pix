@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { CertificationResultsLinkToken } from '../../../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkToken.js';
 import { config } from '../../../../../../../src/shared/config.js';
 import { InvalidSessionResultTokenError } from '../../../../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../../../../src/shared/domain/services/token-service.js';
-import { expect, sinon } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Certification | Results | Domain | Model | CertificationResultsLinkToken', function () {
   beforeEach(function () {

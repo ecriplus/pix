@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   SessionAlreadyFinalizedError,
   SessionWithoutStartedCertificationError,
@@ -5,7 +7,7 @@ import {
 import * as LLMDomainErrors from '../../../../src/llm/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Integration | API | Controller Error', function () {
   let server, routeHandler;

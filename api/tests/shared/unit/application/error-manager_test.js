@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { AdminMemberError } from '../../../../src/authorization/domain/errors.js';
 import { CertificateGenerationError } from '../../../../src/certification/results/domain/errors.js';
 import { CsvWithNoSessionDataError } from '../../../../src/certification/session-management/domain/errors.js';
@@ -39,7 +41,7 @@ import {
   UserNotAuthorizedToAccessEntityError,
   UserShouldNotBeReconciledOnAnotherAccountError,
 } from '../../../../src/shared/domain/errors.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Shared | Unit | Application | ErrorManager', function () {
   describe('#handle', function () {

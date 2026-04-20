@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { userController } from '../../../../../src/identity-access-management/application/user/user.controller.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import * as localeService from '../../../../../src/shared/domain/services/locale-service.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | Controller | User', function () {
   let userSerializer;

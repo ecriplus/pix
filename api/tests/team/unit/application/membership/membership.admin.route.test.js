@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { membershipController } from '../../../../../src/team/application/membership/membership.controller.js';
 import { teamRoutes } from '../../../../../src/team/application/routes.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Admin | Route | Membership', function () {
   describe('POST /api/admin/memberships', function () {

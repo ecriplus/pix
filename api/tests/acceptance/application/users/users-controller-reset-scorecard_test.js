@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import {
@@ -8,7 +9,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../test-helper.js';
 
 const { STARTED } = CampaignParticipationStatuses;

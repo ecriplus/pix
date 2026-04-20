@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { Tag } from '../../../../../src/organizational-entities/domain/models/Tag.js';
 import { createTag } from '../../../../../src/organizational-entities/domain/usecases/create-tag.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Organizational Entities | UseCase | create-tag', function () {
   it('creates and returns the created tag', async function () {

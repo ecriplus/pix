@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { updateAutonomousCourse } from '../../../../../src/evaluation/domain/usecases/update-autonomous-course.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Use Cases | update-autonomous-course', function () {
   describe('#updateAutonomousCourse', function () {

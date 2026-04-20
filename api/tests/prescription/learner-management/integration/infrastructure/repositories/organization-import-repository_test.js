@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import * as organizationImportRepository from '../../../../../../src/prescription/learner-management/infrastructure/repositories/organization-import-repository.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Organization Learner Management | Organization Import', function () {

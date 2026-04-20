@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { RecommendedModule } from '../../../../../src/quest/domain/models/RecommendedModule.js';
 import * as recommendedModuleRepository from '../../../../../src/quest/infrastructure/repositories/recommended-module-repository.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Repositories | Recommended Module Repository', function () {
   describe('#findIdsByTargetProfileIds', function () {

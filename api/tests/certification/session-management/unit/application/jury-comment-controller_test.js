@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { juryCommentController } from '../../../../../src/certification/session-management/application/jury-comment-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Jury Comment', function () {
   describe('#commentAsJury', function () {

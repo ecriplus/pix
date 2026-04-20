@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { createTargetProfile } from '../../../../../../src/prescription/target-profile/domain/usecases/create-target-profile.js';
 import { categories } from '../../../../../../src/shared/domain/models/TargetProfile.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | create-target-profile', function () {
   let targetProfileAdministrationRepositoryStub;

@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import * as campaignApi from '../../../../../../src/prescription/campaign/application/api/campaigns-api.js';
 import { UserNotAuthorizedToCreateCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { CampaignReport } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignReport.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { preventStubsToBeCalledUnexpectedly } from '../../../../../tooling/test-utils/error.js';

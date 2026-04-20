@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { scoBlockedAccessDatesController } from '../../../../../src/certification/configuration/application/sco-blocked-access-dates-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/sco-blocked-access-dates-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | Application | Router | sco-blocked-access-dates-route', function () {
   describe('PATCH /api/admin/sco-blocked-access-dates', function () {

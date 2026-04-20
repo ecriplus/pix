@@ -1,10 +1,12 @@
 import { Readable } from 'node:stream';
 
+import sinon from 'sinon';
+
 import { ImportSupOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sup-organization-learners-job-controller.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
 import { importStorage } from '../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJobController', function () {
   let organizationId, user, organizationImport, i18n;

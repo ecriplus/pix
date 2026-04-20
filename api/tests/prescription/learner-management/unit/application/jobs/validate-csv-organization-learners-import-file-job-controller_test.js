@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { ValidateCsvOrganizationLearnersImportFileJobController } from '../../../../../../src/prescription/learner-management/application/jobs/validate-csv-organization-learners-import-file-job-controller.js';
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { OrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
@@ -5,7 +7,7 @@ import { SupOrganizationLearnerParser } from '../../../../../../src/prescription
 import { S3FileDoesNotExistError } from '../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
 import { config } from '../../../../../../src/shared/config.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Prescription | Application | Jobs | validateCsvOrganizationLearnersImportFileJobController', function () {

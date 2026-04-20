@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { Badge } from '../../../../../src/evaluation/domain/models/Badge.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Badge', function () {
   const now = new Date();

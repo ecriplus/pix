@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { updateAdminMember } from '../../../../../src/team/domain/usecases/update-admin-member.usecase.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 const { ROLES } = PIX_ADMIN;
 

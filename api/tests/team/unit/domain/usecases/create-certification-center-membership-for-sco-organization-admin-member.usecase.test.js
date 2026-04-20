@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import {
   CERTIFICATION_CENTER_MEMBERSHIP_ROLES,
   CertificationCenterMembership,
 } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { createCertificationCenterMembershipForScoOrganizationAdminMember } from '../../../../../src/team/domain/usecases/create-certification-center-membership-for-sco-organization-admin-member.usecase.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Team | Domain | UseCase | create-certification-center-membership-for-sco-organization-member', function () {
   let now;

@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { InvitationNotFoundError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { OrganizationInvitedUser } from '../../../../../src/team/domain/models/OrganizationInvitedUser.js';
 import { organizationInvitedUserRepository } from '../../../../../src/team/infrastructure/repositories/organization-invited-user.repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Infrastructure | Repository | OrganizationInvitedUserRepository', function () {

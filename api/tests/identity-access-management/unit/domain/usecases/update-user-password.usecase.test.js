@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { PasswordResetDemandNotFoundError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { updateUserPassword } from '../../../../../src/identity-access-management/domain/usecases/update-user-password.usecase.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | update-user-password', function () {

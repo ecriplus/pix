@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { combinedCourseBlueprintController } from '../../../../src/quest/application/combined-course-blueprint-controller.js';
 import * as combinedCourseBlueprintRoute from '../../../../src/quest/application/combined-course-blueprint-route.js';
 import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
 
 describe('Quest | Unit | Routes | combined-course-blueprint-route', function () {
   describe('GET /api/admin/combined-course-blueprints', function () {

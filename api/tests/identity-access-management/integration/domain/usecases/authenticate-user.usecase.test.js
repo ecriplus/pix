@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import {
   MissingOrInvalidCredentialsError,
@@ -8,7 +10,7 @@ import { usecases } from '../../../../../src/identity-access-management/domain/u
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../../../../src/shared/config.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | authenticate-user', function () {
   beforeEach(function () {

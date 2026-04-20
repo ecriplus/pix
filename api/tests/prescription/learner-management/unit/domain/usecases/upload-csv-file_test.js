@@ -1,4 +1,5 @@
 import iconv from 'iconv-lite';
+import sinon from 'sinon';
 
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { ValidateCsvOrganizationImportFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateCsvOrganizationImportFileJob.js';
@@ -7,7 +8,7 @@ import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescr
 import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { createTempFile, removeTempFile } from '../../../../../tooling/test-utils/file.js';
 

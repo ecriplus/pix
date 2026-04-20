@@ -1,5 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import ms from 'ms';
+import sinon from 'sinon';
 
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { UserToCreate } from '../../../../../src/identity-access-management/domain/models/UserToCreate.js';
@@ -10,7 +11,7 @@ import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransa
 import { OidcError, OidcMissingFieldsError } from '../../../../../src/shared/domain/errors.js';
 import { AuthenticationSessionContent } from '../../../../../src/shared/domain/models/AuthenticationSessionContent.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { createOpenIdClientMock } from '../../../../tooling/mocks/openid-client.mock.js';
 import { catchErr, catchErrSync } from '../../../../tooling/test-utils/error.js';
 

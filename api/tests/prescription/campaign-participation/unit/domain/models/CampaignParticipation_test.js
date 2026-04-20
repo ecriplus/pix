@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { ArchivedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
@@ -11,7 +13,7 @@ import {
   AssessmentNotCompletedError,
 } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const { SHARED } = CampaignParticipationStatuses;

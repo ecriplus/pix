@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CampaignParticipationOverview } from '../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
 import * as campaignParticipationOverviewRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
@@ -12,7 +13,7 @@ import {
 } from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, learningContentBuilder, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
 

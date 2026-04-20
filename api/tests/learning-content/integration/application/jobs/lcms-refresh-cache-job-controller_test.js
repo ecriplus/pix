@@ -1,5 +1,7 @@
+import nock from 'nock';
+
 import { LcmsRefreshCacheJobController } from '../../../../../src/learning-content/application/jobs/lcms-refresh-cache-job-controller.js';
-import { databaseBuilder, expect, knex, nock } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Learning Content | Integration | Application | Jobs | Refresh cache', function () {

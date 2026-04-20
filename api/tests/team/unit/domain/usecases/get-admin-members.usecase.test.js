@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getAdminMembers } from '../../../../../src/team/domain/usecases/get-admin-members.usecase.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Team | Domain | UseCase | get-admin-members', function () {
   it('returns all admin members', async function () {

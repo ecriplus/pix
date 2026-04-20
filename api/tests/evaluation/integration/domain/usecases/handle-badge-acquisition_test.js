@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
@@ -5,7 +7,7 @@ import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.j
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {
   context('when campaign is of type ASSESSMENT', function () {

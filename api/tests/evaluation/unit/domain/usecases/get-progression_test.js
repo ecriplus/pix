@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { getProgression } from '../../../../../src/evaluation/domain/usecases/get-progression.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Use Cases | get-progression', function () {

@@ -1,9 +1,10 @@
 import FormData from 'form-data';
+import sinon from 'sinon';
 
 import { sessionMassImportController } from '../../../../../src/certification/enrolment/application/session-mass-import-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/session-mass-import-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | session-mass-import-route', function () {
   describe('POST /api/certification-centers/{certificationCenterId}/sessions/validate-for-mass-import', function () {

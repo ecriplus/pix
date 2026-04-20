@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { organizationPlaceController } from '../../../../../src/prescription/organization-place/application/organization-place-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/organization-place/application/organization-place-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Application | organization-place-route', function () {
   describe('GET /api/admin/organizations/:id/places', function () {

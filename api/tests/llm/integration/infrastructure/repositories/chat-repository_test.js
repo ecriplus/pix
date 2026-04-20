@@ -1,9 +1,11 @@
 import { randomUUID } from 'node:crypto';
 
+import sinon from 'sinon';
+
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { get, save } from '../../../../../src/llm/infrastructure/repositories/chat-repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | chat', function () {
   describe('#save', function () {

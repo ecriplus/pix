@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import {
   anonymizeByUserId,
   hasBeenLearner,
 } from '../../../../../src/privacy/infrastructure/repositories/learners-api.repository.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Privacy | Infrastructure | Repositories | learners-api', function () {
   describe('#hasBeenLearner', function () {

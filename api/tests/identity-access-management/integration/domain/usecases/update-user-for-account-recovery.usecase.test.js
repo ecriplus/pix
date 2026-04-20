@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | update-user-for-account-recovery', function () {

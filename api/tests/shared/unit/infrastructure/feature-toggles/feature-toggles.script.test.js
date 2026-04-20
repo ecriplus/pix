@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { FeatureToggleScript } from '../../../../../src/shared/infrastructure/feature-toggles/feature-toggles-script.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Scripts | FeatureToggleScript', function () {
   let script;

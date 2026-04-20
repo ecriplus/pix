@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
 import { validateLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/validate-live-alert.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
@@ -6,7 +8,7 @@ import {
   CertificationIssueReportSubcategories,
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | validate-live-alert', function () {

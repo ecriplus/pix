@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { attestationController } from '../../../../src/profile/application/attestation-controller.js';
 import * as moduleUnderTest from '../../../../src/profile/application/attestation-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Router | user-router', function () {
   describe('GET /api/admin/attestations', function () {

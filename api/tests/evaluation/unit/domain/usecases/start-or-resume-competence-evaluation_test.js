@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CompetenceEvaluation } from '../../../../../src/evaluation/domain/models/CompetenceEvaluation.js';
 import { evaluationUsecases as usecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | start-or-resume-competence-evaluation', function () {

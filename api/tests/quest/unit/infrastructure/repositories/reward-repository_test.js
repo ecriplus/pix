@@ -1,10 +1,12 @@
+import sinon from 'sinon';
+
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { QuestResult } from '../../../../../src/quest/domain/models/QuestResult.js';
 import {
   getByAttestationKey,
   getByQuestAndUserId,
 } from '../../../../../src/quest/infrastructure/repositories/reward-repository.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Repositories | Reward', function () {
   describe('#getByQuestAndUserId', function () {

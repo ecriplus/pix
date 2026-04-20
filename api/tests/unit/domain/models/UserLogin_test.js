@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { UserLogin } from '../../../../src/identity-access-management/domain/models/UserLogin.js';
 import { config } from '../../../../src/shared/config.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Models | UserLogin', function () {
   let clock;

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { campaignResultsController } from '../../../../../src/prescription/campaign/application/campaign-results-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign/application/campaign-results-route.js';
 import {
@@ -5,7 +7,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | campaign-results-route', function () {

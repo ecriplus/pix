@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -11,7 +12,7 @@ import {
 import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { databaseBuilder, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');

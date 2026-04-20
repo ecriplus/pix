@@ -2,6 +2,8 @@ import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
 import _ from 'lodash';
+import nock from 'nock';
+import sinon from 'sinon';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
@@ -26,8 +28,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  nock,
-  sinon,
 } from '../../../../test-helper.js';
 import { waitForStreamFinalizationToBeDone } from '../../../../tooling/test-utils/wait.js';
 

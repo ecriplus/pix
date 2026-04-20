@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getRewardByIdAndType } from '../../../../../src/profile/domain/usecases/get-reward-by-id-and-type.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Profile | Unit | UseCase | get-reward-by-id-and-type', function () {
   it('should return reward depending on the type provided', async function () {

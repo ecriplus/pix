@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { VALIDATION_ERRORS } from '../../../../src/shared/domain/constants.js';
 import * as errors from '../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Unit | Shared | Domain | Errors', function () {
   describe('#DomainError', function () {

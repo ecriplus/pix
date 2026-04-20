@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { knex } from '../../../../../db/knex-database-connection.js';
 import { ArchiveCertificationCentersInBatchError } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | archive-certification-centers-in-batch', function () {

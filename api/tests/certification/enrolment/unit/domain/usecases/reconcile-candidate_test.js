@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { reconcileCandidate } from '../../../../../../src/certification/enrolment/domain/usecases/reconcile-candidate.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | reconcile-candidate', function () {
   let candidateRepository;

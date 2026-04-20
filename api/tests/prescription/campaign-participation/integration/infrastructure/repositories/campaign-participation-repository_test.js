@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { CampaignParticipationInfo } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
@@ -17,7 +18,7 @@ import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { DomainTransaction, withTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const { STARTED, SHARED } = CampaignParticipationStatuses;

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { missionLearnerController } from '../../../../src/school/application/mission-learner-controller.js';
 import * as moduleUnderTest from '../../../../src/school/application/mission-learner-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Route | mission-learner-route', function () {
   describe('GET /api/organizations/{id}/missions/{missionId}/learners', function () {

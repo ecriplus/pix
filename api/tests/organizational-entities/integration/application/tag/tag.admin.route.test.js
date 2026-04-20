@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { tagAdminController } from '../../../../../src/organizational-entities/application/tag/tag.admin.controller.js';
 import * as tagAdminRoutes from '../../../../../src/organizational-entities/application/tag/tag.admin.route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Route | Admin | Tag', function () {
   describe('GET /api/admin/tags', function () {

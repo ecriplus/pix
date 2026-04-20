@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getCertificationCourseByVerificationCode } from '../../../../../../src/certification/results/domain/usecases/get-certification-course-by-verification-code.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | Certification | Results | Domain | Usecases | get-certification-course-by-verification-code', function () {
   context('when there is a certification course associated with the verification code', function () {

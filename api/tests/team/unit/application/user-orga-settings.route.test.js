@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { teamRoutes } from '../../../../src/team/application/routes.js';
 import { userOrgaSettingsController } from '../../../../src/team/application/user-orga-settings.controller.js';
-import { expect, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Router | user-orga-settings-router', function () {
   describe('PUT /api/user-orga-settings/{id}', function () {

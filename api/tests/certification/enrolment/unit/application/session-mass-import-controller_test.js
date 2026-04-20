@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { sessionMassImportController } from '../../../../../src/certification/enrolment/application/session-mass-import-controller.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | mass-import-controller', function () {
   describe('#validateSessions', function () {

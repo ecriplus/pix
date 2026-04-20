@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as useCase from '../../../../../src/shared/application/usecases/checkOrganizationIsScoAndManagingStudent.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkOrganizationIsScoAndManagingStudent', function () {
   context('When organization is SCO managing students', function () {

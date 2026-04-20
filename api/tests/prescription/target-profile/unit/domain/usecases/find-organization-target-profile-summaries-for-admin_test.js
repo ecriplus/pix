@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { findOrganizationTargetProfileSummariesForAdmin } from '../../../../../../src/prescription/target-profile/domain/usecases/find-organization-target-profile-summaries-for-admin.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | find-organization-target-profile-summaries-for-admin', function () {
   it('should return the result of the repository call', async function () {

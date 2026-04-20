@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { organizationLearnersController } from '../../../../../src/prescription/learner-management/application/organization-learners-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/organization-learners-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | learner management | Application | Router | organization-learner-router', function () {
   describe('GET /api/organizations/{organizationId}/organization-learners/filters', function () {

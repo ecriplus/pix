@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { scoOrganizationLearnerController } from '../../../../src/identity-access-management/application/organization-learner-account-recovery/organization-learner-account-recovery.controller.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Application | Controller | sco-organization-learner', function () {
   describe('#checkScoAccountRecovery', function () {

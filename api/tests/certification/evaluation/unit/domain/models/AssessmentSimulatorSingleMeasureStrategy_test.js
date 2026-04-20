@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { AssessmentSimulatorSingleMeasureStrategy } from '../../../../../../src/certification/evaluation/domain/models/AssessmentSimulatorSingleMeasureStrategy.js';
 import { Answer } from '../../../../../../src/evaluation/domain/models/Answer.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | AssessmentSimulatorSingleMeasureStrategy', function () {
   describe('#run', function () {

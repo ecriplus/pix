@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { status } from '../../../../../src/shared/domain/models/AssessmentResult.js';
 import {
   createServer,
@@ -5,7 +7,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   knex,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Certification | Session-Management | Acceptance | Application | Routes | session-publication', function () {

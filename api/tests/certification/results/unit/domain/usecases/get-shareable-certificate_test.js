@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getShareableCertificate } from '../../../../../../src/certification/results/domain/usecases/get-shareable-certificate.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Domain | UseCases | get-shareable-certificate', function () {
   const certificateRepository = {

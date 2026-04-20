@@ -2,10 +2,11 @@ import { writeFile } from 'node:fs/promises';
 import * as url from 'node:url';
 
 import pdfLibUtils from 'pdf-lib/cjs/utils/index.js';
+import sinon from 'sinon';
 
 import { getInvigilatorKitPdfBuffer } from '../../../../../../../src/certification/session-management/infrastructure/utils/pdf/invigilator-kit-pdf.js';
 import { ENGLISH_SPOKEN, FRENCH_SPOKEN } from '../../../../../../../src/shared/domain/services/locale-service.js';
-import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { isSameBinary } from '../../../../../../tooling/test-utils/file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));

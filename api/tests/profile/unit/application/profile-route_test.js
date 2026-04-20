@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { profileController } from '../../../../src/profile/application/profile-controller.js';
 import * as moduleUnderTest from '../../../../src/profile/application/profile-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { HttpTestServer, sinon } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../test-helper.js';
 
 describe('Unit | Router | user-router', function () {
   describe('GET /api/users/{userId}/profile', function () {

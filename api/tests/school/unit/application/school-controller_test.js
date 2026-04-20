@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { schoolController } from '../../../../src/school/application/school-controller.js';
 import { Division } from '../../../../src/school/domain/models/Division.js';
 import { OrganizationLearner } from '../../../../src/school/domain/models/OrganizationLearner.js';
 import { School } from '../../../../src/school/domain/models/School.js';
 import { usecases } from '../../../../src/school/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 
 describe('Unit | Controller | school-controller', function () {
   describe('#getSchool', function () {

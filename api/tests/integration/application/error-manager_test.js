@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
@@ -16,7 +18,7 @@ import {
   UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 } from '../../../src/team/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../test-helper.js';
+import { expect, HttpTestServer } from '../../test-helper.js';
 
 describe('Integration | API | Controller Error', function () {
   let server;

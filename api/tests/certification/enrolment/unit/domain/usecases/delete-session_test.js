@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { SessionStartedDeletionError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { deleteSession } from '../../../../../../src/certification/enrolment/domain/usecases/delete-session.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | delete-session', function () {

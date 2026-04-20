@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { ModuleDoesNotExistError } from '../../../../../src/devcomp/domain/errors.js';
 import { Module } from '../../../../../src/devcomp/domain/models/module/Module.js';
 import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
@@ -5,7 +7,7 @@ import { createPassage } from '../../../../../src/devcomp/domain/usecases/create
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | UseCases | create-passage', function () {

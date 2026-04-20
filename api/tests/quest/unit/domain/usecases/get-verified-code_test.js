@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getVerifiedCode } from '../../../../../src/quest/domain/usecases/get-verified-code.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Quest | Unit | Domain | Usecases | getVerifiedCode', function () {

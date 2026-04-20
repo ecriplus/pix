@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { CertificationJuryDone } from '../../../../../../src/certification/session-management/domain/events/CertificationJuryDone.js';
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 import { preventStubsToBeCalledUnexpectedly } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session Management | Integration | Domain | UseCase | process-auto-jury_test ', function () {

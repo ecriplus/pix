@@ -1,6 +1,8 @@
+import nock from 'nock';
+
 import { config } from '../../../../src/shared/config.js';
 import { lcmsClient } from '../../../../src/shared/infrastructure/lcms-client.js';
-import { databaseBuilder, expect, nock } from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | LCMS Client', function () {

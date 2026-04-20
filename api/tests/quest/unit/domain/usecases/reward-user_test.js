@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { rewardUser } from '../../../../../src/quest/domain/usecases/reward-user.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Usecases | RewardUser', function () {
   let userId;

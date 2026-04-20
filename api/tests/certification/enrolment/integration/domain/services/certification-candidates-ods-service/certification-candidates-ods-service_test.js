@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import * as url from 'node:url';
 
+import sinon from 'sinon';
+
 import * as certificationCandidatesOdsService from '../../../../../../../src/certification/enrolment/domain/services/certification-candidates-ods-service.js';
 import * as centerRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationCpfCityRepository from '../../../../../../../src/certification/enrolment/infrastructure/repositories/certification-cpf-city-repository.js';
@@ -12,7 +14,7 @@ import { Frameworks } from '../../../../../../../src/certification/shared/domain
 import * as certificationCpfService from '../../../../../../../src/certification/shared/domain/services/certification-cpf-service.js';
 import { CertificationCandidatesError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const { promises } = fs;

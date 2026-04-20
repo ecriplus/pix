@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import {
@@ -7,7 +9,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../test-helper.js';
 
 const competenceId = 'recCompetence';

@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/jury-certification-summaries-route.js';
 import { sessionController } from '../../../../../src/certification/session-management/application/session-controller.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { NotFoundError } from '../../../../../src/shared/application/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Sessions | Routes', function () {
   describe('For admin', function () {

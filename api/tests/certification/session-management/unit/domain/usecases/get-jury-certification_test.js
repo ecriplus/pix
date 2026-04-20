@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getJuryCertification } from '../../../../../../src/certification/session-management/domain/usecases/get-jury-certification.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Unit | Domain | Usecases | get-jury-certification', function () {
   it('should return the jury certification', async function () {

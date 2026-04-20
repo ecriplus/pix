@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
@@ -5,7 +7,7 @@ import { UserAccessToken } from '../../../../../src/identity-access-management/d
 import { UserReconciliationSamlIdToken } from '../../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { getSamlAuthenticationRedirectionUrl } from '../../../../../src/identity-access-management/domain/usecases/get-saml-authentication-redirection-url.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | get-external-authentication-redirection-url', function () {
   let userRepository;

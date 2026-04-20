@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { getCampaignParticipationsForOrganizationLearner } from '../../../../../../src/prescription/campaign-participation/domain/usecases/get-campaign-participations-for-organization-learner.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-organization-learner-campaign-participations', function () {
   let campaignParticipationRepository,

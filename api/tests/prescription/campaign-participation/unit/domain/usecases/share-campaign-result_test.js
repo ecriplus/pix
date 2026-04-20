@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { ParticipationResultCalculationJob } from '../../../../../../src/prescription/campaign-participation/domain/models/ParticipationResultCalculationJob.js';
 import { ParticipationSharedJob } from '../../../../../../src/prescription/campaign-participation/domain/models/ParticipationSharedJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | share-campaign-result', function () {

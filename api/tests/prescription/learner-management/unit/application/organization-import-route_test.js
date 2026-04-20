@@ -1,10 +1,11 @@
 import jsonapiSerializer from 'jsonapi-serializer';
+import sinon from 'sinon';
 
 import { organizationImportController } from '../../../../../src/prescription/learner-management/application/organization-import-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/learner-management/application/organization-import-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | organization-import-router', function () {
   describe('GET /api/organizations/{organizationId}/import-information', function () {

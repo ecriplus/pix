@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { parcoursupController } from '../../../../../src/certification/results/application/parcoursup-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/results/application/parcoursup-route.js';
 import { MoreThanOneMatchingCertificationError } from '../../../../../src/certification/results/domain/errors.js';
@@ -5,7 +7,6 @@ import {
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Application | Routes | Parcoursup', function () {

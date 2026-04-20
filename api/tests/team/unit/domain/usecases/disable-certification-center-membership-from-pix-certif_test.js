@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { disableCertificationCenterMembershipFromPixCertif } from '../../../../../src/team/domain/usecases/disable-certification-center-membership-from-pix-certif.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | disable-certification-center-membership', function () {

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { certificationCenterInvitationAdminController } from '../../../../../src/team/application/certification-center-invitation/certification-center-invitation.admin.controller.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | Admin | Certification Center Invitation', function () {
   describe('#cancelCertificationCenterInvitation', function () {

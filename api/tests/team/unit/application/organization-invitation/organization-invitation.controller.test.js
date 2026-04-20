@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { MissingQueryParamError } from '../../../../../src/shared/application/http-errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { organizationInvitationController } from '../../../../../src/team/application/organization-invitations/organization-invitation.controller.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../../tests/test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../../tests/test-helper.js';
 import { catchErr } from '../../../../../tests/tooling/test-utils/error.js';
 
 describe('Unit | Team | Application | Controller | organization-invitation', function () {

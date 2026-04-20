@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   CampaignParticipationStatuses,
   CombinedCourseParticipationStatuses,
@@ -14,7 +16,7 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
   describe('CombinedCourseDetails', function () {

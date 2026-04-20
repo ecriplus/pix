@@ -1,4 +1,5 @@
 import lodash from 'lodash';
+import sinon from 'sinon';
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
@@ -17,7 +18,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
   knex,
-  sinon,
 } from '../../../../test-helper.js';
 
 const { pick } = lodash;

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { CLIENTS, PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { organizationLearnersController } from '../../../../../src/prescription/learner-management/application/organization-learners-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Prescription | Learner Management | Application | organization-learner-controller', function () {
   describe('#importOrganizationLearnerFromFeature', function () {

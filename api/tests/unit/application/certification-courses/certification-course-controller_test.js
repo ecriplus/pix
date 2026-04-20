@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { certificationCourseController } from '../../../../src/certification/evaluation/application/certification-course-controller.js';
 import { usecases } from '../../../../src/certification/evaluation/domain/usecases/index.js';
 import { CertificationCourse } from '../../../../src/certification/shared/domain/models/CertificationCourse.js';
-import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../test-helper.js';
 
 describe('Unit | Controller | certification-course-controller', function () {
   let certificationCourseSerializer;

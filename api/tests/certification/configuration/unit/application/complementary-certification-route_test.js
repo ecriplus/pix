@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { complementaryCertificationController } from '../../../../../src/certification/configuration/application/complementary-certification-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/configuration/application/complementary-certification-route.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | Application | Router | complementary-certifications-route', function () {
   describe('GET /api/admin/complementary-certifications', function () {

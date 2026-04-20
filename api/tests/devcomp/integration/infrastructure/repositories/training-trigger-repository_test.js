@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
 import { TrainingTriggerTube } from '../../../../../src/devcomp/domain/models/TrainingTriggerTube.js';
@@ -6,14 +7,7 @@ import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-
 import * as trainingTriggerRepository from '../../../../../src/devcomp/infrastructure/repositories/training-trigger-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-  sinon,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | training-trigger-repository', function () {

@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { usecases } from '../../../../../src/legal-documents/domain/usecases/index.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 const { PIX_ORGA } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;

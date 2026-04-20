@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { verifyCandidateIdentity } from '../../../../../../src/certification/enrolment/domain/usecases/verify-candidate-identity.js';
 import { types } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import {
@@ -8,7 +10,7 @@ import {
   UnexpectedUserAccountError,
   UserAlreadyLinkedToCandidateInSessionError,
 } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Enrolment | Unit | Domain | UseCase | verify-candidate-identity', function () {

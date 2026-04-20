@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   getCorrection,
   getCorrectionDetails,
@@ -5,7 +7,7 @@ import {
 } from '../../../../../../src/evaluation/domain/services/solution/solution-service-qrocm-dep.js';
 import { YamlParsingError } from '../../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const ANSWER_OK = AnswerStatus.OK;

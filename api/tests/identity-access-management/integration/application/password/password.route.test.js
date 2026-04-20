@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { passwordController } from '../../../../../src/identity-access-management/application/password/password.controller.js';
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

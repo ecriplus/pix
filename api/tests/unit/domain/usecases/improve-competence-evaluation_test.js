@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { ImproveCompetenceEvaluationForbiddenError } from '../../../../src/evaluation/domain/errors.js';
 import { improveCompetenceEvaluation } from '../../../../src/evaluation/domain/usecases/improve-competence-evaluation.js';
 import { MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../test-helper.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | Improve Competence Evaluation', function () {

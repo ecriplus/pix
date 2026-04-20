@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { updateStudentNumber } from '../../../../../../src/prescription/learner-management/domain/usecases/update-student-number.js';
 import { AlreadyExistingEntityError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | update-student-number', function () {

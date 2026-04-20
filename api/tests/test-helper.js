@@ -128,6 +128,4 @@ export {
   HttpTestServer,
   knex,
   learningContentBuilder,
-  nock,
-  sinon,
 };

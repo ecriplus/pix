@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { CampaignBelongsToCombinedCourseError } from '../../../../src/prescription/campaign/domain/errors.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../test-helper.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Shared | Unit | Application | SecurityPreHandlers', function () {

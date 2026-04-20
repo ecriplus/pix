@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { updateSession } from '../../../../../../src/certification/enrolment/domain/usecases/update-session.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | update-session', function () {
   let originalSession;

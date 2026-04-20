@@ -1,9 +1,11 @@
+import nock from 'nock';
+
 import { PixAssetImageInfos } from '../../../../../src/shared/domain/models/PixAssetImageInfos.js';
 import {
   getAssetInfos,
   getValidHostname,
 } from '../../../../../src/shared/infrastructure/repositories/pix-assets-repository.js';
-import { expect, nock } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | PixAssets', function () {

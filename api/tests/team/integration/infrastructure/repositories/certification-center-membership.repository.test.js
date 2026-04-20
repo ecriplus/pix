@@ -1,6 +1,8 @@
 import lodash from 'lodash';
 const { omit, pick } = lodash;
 
+import sinon from 'sinon';
+
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import {
   AlreadyExistingMembershipError,
@@ -13,7 +15,7 @@ import {
   CertificationCenterMembership,
 } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Infrastructure | Repository | Certification Center Membership', function () {

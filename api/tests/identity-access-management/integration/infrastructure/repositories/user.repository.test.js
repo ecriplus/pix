@@ -1,5 +1,7 @@
 import lodash from 'lodash';
 const { each, map, times, pick } = lodash;
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
@@ -20,7 +22,7 @@ import {
   UserNotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const expectedUserDetailsForAdminAttributes = [

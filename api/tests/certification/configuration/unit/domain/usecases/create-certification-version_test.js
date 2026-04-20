@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
 import { createCertificationVersion } from '../../../../../../src/certification/configuration/domain/usecases/create-certification-version.js';
 import {
@@ -8,7 +10,7 @@ import { FlashAssessmentAlgorithmConfiguration } from '../../../../../../src/cer
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { FRENCH_FRANCE, FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Configuration | Unit | UseCase | create-certification-version', function () {
   let challengeRepository, versionRepository, tubeRepository, skillRepository;

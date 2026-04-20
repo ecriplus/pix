@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { CreateStructureForEveryOrganizationScript } from '../../../../src/organizational-entities/scripts/create-structure-for-every-organization.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Scripts | Create structure for every organization', function () {
   let logger, script;

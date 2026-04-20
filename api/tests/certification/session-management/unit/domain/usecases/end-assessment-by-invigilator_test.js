@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { endAssessmentByInvigilator } from '../../../../../../src/certification/session-management/domain/usecases/end-assessment-by-invigilator.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | end-assessment-by-invigilator', function () {
   let certificationAssessmentRepository;

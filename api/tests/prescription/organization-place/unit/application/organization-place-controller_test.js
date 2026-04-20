@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { organizationPlaceController } from '../../../../../src/prescription/organization-place/application/organization-place-controller.js';
 import { usecases } from '../../../../../src/prescription/organization-place/domain/usecases/index.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Application | organization-place-controller', function () {
   describe('#findOrganizationPlacesLot', function () {

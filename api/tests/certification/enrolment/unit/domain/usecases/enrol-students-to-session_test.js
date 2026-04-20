@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { UnknownCountryForStudentEnrolmentError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { SCOCertificationCandidate } from '../../../../../../src/certification/enrolment/domain/models/SCOCertificationCandidate.js';
 import { enrolStudentsToSession } from '../../../../../../src/certification/enrolment/domain/usecases/enrol-students-to-session.js';
 import { ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Enrolment | Unit | UseCase | enrol-students-to-session', function () {

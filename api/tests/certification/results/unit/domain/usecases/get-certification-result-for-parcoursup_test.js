@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { MoreThanOneMatchingCertificationError } from '../../../../../../src/certification/results/domain/errors.js';
 import { getCertificationResultForParcoursup } from '../../../../../../src/certification/results/domain/usecases/get-certification-result-for-parcoursup.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Results | Unit | Domain | UseCase | getCertificationResultForParcoursup', function () {

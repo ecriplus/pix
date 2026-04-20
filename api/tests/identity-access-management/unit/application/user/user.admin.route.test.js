@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { identityAccessManagementRoutes } from '../../../../../src/identity-access-management/application/routes.js';
 import { userAdminController } from '../../../../../src/identity-access-management/application/user/user.admin.controller.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import * as OidcIdentityProviders from '../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 const routesUnderTest = identityAccessManagementRoutes[0];
 

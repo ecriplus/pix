@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import * as certificationRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/certification-repository.js';
 import { AssessmentResult, status } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
 
 describe('Certification | Session-management | Integration | Infrastructure | Repositories | Certification', function () {
   describe('#getStatusesBySessionId', function () {

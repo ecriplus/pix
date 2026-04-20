@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { competenceEvaluationController } from '../../../../../src/evaluation/application/competence-evaluations/competence-evaluation-controller.js';
 import * as competenceEvaluationsRouter from '../../../../../src/evaluation/application/competence-evaluations/index.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | competence-evaluations', function () {
   let httpTestServer;

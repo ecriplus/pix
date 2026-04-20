@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { cancel } from '../../../../../../src/certification/session-management/domain/usecases/cancel.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import {
@@ -7,7 +9,7 @@ import {
 } from '../../../../../../src/shared/domain/errors.js';
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | cancel', function () {

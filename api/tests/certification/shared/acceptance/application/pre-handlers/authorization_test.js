@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import {
   verifyCertificationSessionAuthorization,
   verifySessionAuthorization,
 } from '../../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { NotFoundError } from '../../../../../../src/shared/application/http-errors.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Pre-handler | Authorization', function () {

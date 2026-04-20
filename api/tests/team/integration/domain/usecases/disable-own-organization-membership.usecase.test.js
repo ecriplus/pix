@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import * as membershipRepository from '../../../../../src/team/infrastructure/repositories/membership.repository.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Team | Domain | UseCase | disable-own-membership', function () {
   let clock;

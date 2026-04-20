@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import * as moduleUnderTest from '../../../../../src/evaluation/application/scorecards/index.js';
 import { scorecardController } from '../../../../../src/evaluation/application/scorecards/scorecard-controller.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | scorecard-router', function () {
   describe('GET /api/scorecards/{id}', function () {

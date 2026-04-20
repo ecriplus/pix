@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { knex as datamartKnex } from '../../../../../../datamart/knex-database-connection.js';
 import { TargetProfileForAdmin } from '../../../../../../src/prescription/target-profile/domain/models/TargetProfileForAdmin.js';
 import * as targetProfileAdministrationRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-administration-repository.js';
@@ -12,7 +14,6 @@ import {
   expect,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 

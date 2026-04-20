@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { anonymizationAdminController } from '../../../../src/identity-access-management/application/anonymization/anonymization.admin.controller.js';
 import { GarAnonymizationParser } from '../../../../src/identity-access-management/domain/services/GarAnonymizationParser.js';
 import { usecases } from '../../../../src/identity-access-management/domain/usecases/index.js';
 import { anonymizeGarResultSerializer } from '../../../../src/identity-access-management/infrastructure/serializers/jsonapi/anonymize-gar-result.serializer.js';
 import { DomainTransaction } from '../../../../src/shared/domain/DomainTransaction.js';
-import { expect, hFake, sinon } from '../../../test-helper.js';
+import { expect, hFake } from '../../../test-helper.js';
 import { createTempFile } from '../../../tooling/test-utils/file.js';
 
 describe('Unit | Identity Access Management | Application | Controller | Admin | anonymization', function () {

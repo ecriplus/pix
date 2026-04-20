@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { combinedCourseController } from '../../../../src/quest/application/combined-course-controller.js';
 import * as combinedCourseRoute from '../../../../src/quest/application/combined-course-route.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
 
 describe('Quest | Unit | Routes | combined-course-route', function () {
   describe('GET /api/combined-courses/{combinedCourseId}', function () {

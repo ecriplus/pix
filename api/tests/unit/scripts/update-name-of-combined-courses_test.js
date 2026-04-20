@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { UpdateCombinedCoursesNameScript } from '../../../scripts/prod/update-name-of-combined-courses.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
 import { catchErr } from '../../tooling/test-utils/error.js';
 
 describe('UpdateNameOfCombinedCoursesScript', function () {

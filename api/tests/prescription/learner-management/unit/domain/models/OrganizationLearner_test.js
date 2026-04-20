@@ -1,11 +1,12 @@
 import range from 'lodash/range.js';
+import sinon from 'sinon';
 
 import { ANONYMIZATION_RULE } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import { OrganizationLearnerImportFormat } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearnerImportFormat.js';
 import { MINIMUM_CERTIFIABLE_COMPETENCES_FOR_CERTIFIABILITY } from '../../../../../../src/shared/domain/constants.js';
 import { PlacementProfile } from '../../../../../../src/shared/domain/models/PlacementProfile.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | Domain | Models | OrganizationLearner', function () {
   describe('#updateCertificability', function () {

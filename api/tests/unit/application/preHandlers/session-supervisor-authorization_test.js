@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { assessmentInvigilatorAuthorization as sessionInvigilatorAuthorization } from '../../../../src/certification/shared/application/pre-handlers/session-invigilator-authorization.js';
-import { expect, generateAuthenticatedUserRequestHeaders, hFake, sinon } from '../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../test-helper.js';
 
 describe('Unit | Pre-handler | Invigilator Authorization', function () {
   let invigilatorAccessRepository;

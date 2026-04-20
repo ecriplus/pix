@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { attendanceSheetController } from '../../../../../src/certification/enrolment/application/attendance-sheet-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/attendance-sheet-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Router | attendance-sheet-route', function () {
   describe('GET /api/sessions/{id}/attendance-sheet', function () {

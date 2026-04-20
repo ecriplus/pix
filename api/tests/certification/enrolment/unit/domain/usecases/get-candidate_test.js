@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import { getCandidate } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | UseCase | get-candidate', function () {
   let candidate;

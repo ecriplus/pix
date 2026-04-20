@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CampaignParticipation } from '../../../../../src/quest/domain/models/CampaignParticipation.js';
 import {
   OrganizationLearnerParticipationStatuses,
@@ -5,7 +7,7 @@ import {
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | delete-and-anonymise-participations-for-a-learner-id', function () {
   let campaign,

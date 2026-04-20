@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { detachOrganizationsFromTargetProfile } from '../../../../../../src/prescription/target-profile/domain/usecases/detach-organizations-from-target-profile.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | Target Profile Management | Detach Organizations From Target Profile', function () {
   let targetProfileBondRepository;

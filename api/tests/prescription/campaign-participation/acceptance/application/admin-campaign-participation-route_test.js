@@ -1,12 +1,13 @@
 import crypto from 'node:crypto';
 
+import sinon from 'sinon';
+
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import {
   createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations', function () {

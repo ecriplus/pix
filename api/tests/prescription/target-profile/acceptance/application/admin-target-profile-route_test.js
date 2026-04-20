@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import * as TargetProfile from '../../../../../src/shared/domain/models/TargetProfile.js';
 import {
   createServer,
@@ -6,7 +8,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | TargetProfile | Application | Route | admin-target-profile', function () {

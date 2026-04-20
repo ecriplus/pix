@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { certificationCandidateController } from '../../../../../src/certification/enrolment/application/certification-candidate-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/certification-candidate-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
@@ -5,7 +7,7 @@ import { SUBSCRIPTION_TYPES } from '../../../../../src/certification/shared/doma
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Sessions | Routes', function () {
   describe('POST /api/sessions/{sessionId}/certification-candidates', function () {

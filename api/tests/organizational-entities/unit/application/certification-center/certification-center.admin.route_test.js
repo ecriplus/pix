@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { certificationCenterAdminController } from '../../../../../src/organizational-entities/application/certification-center/certification-center.admin.controller.js';
 import * as moduleUnderTest from '../../../../../src/organizational-entities/application/certification-center/certification-center.admin.route.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Certification Center | Application | Route | Admin', function () {
   describe('when the authenticated user has one of the accepted roles', function () {

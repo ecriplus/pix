@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { CenterForAdmin } from '../../../../../src/organizational-entities/domain/models/CenterForAdmin.js';
 import * as certificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repository | certification-center-for-admin', function () {
   let clock;

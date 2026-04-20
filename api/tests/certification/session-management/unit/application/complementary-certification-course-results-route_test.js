@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { complementaryCertificationCourseResultsController } from '../../../../../src/certification/session-management/application/complementary-certification-course-results-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/complementary-certification-course-results-route.js';
 import { juryOptions } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Routes | Complementary Certification Course Results', function () {
   let httpTestServer;

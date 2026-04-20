@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { saveFeedback } from '../../../../../src/evaluation/domain/usecases/save-feedback.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | UseCase | save-feedback', function () {
   describe('when there is a feedback to save', function () {

@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { handleTrainingRecommendation } from '../../../../../src/devcomp/domain/usecases/handle-training-recommendation.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | handle-training-recommendation', function () {
   let trainingRepository;

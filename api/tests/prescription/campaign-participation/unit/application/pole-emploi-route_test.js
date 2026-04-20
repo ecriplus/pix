@@ -1,10 +1,11 @@
+import sinon from 'sinon';
+
 import { poleEmploiController } from '../../../../../src/prescription/campaign-participation/application/pole-emploi-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign-participation/application/pole-emploi-route.js';
 import {
   expect,
   generateValidRequestAuthorizationHeaderForApplication,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Unit | Router | pole-emploi-router', function () {

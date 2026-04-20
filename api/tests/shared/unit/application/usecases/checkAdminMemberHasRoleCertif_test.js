@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import * as useCase from '../../../../../src/shared/application/usecases/checkAdminMemberHasRoleCertif.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Application | Use Case | checkAdminMemberHasRoleCertifUseCase', function () {
   const userId = '1234';

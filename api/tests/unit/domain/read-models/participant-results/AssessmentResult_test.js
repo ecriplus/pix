@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import {
   CampaignParticipationStatuses,
@@ -7,7 +8,7 @@ import {
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { AssessmentResult } from '../../../../../src/shared/domain/read-models/participant-results/AssessmentResult.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Read-Models | ParticipantResult | AssessmentResult', function () {
   describe('#constructor', function () {

@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { Passage } from '../../../../../src/devcomp/domain/models/Passage.js';
 import { FlashcardsVersoSeenEvent } from '../../../../../src/devcomp/domain/models/passage-events/flashcard-events.js';
 import { recordPassageEvents } from '../../../../../src/devcomp/domain/usecases/record-passage-events.js';
 import { DomainError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Devcomp | Domain | UseCases | record-passage-events', function () {

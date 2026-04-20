@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import * as moduleUnderTest from '../../../../../src/prescription/organization-learner/application/sco-organization-learner-route.js';
 import { usecases } from '../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError, UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
 import { UserNotAuthorizedToGenerateUsernamePasswordError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Application | Controller | sco-organization-learners', function () {
   let sandbox;

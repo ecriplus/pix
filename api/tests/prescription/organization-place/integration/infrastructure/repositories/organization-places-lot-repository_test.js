@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import { knex } from '../../../../../../db/knex-database-connection.js';
 import * as categories from '../../../../../../src/prescription/organization-place/domain/constants/organization-places-categories.js';
@@ -7,7 +8,7 @@ import { OrganizationPlacesLotManagement } from '../../../../../../src/prescript
 import { PlacesLot } from '../../../../../../src/prescription/organization-place/domain/read-models/PlacesLot.js';
 import * as organizationPlacesLotRepository from '../../../../../../src/prescription/organization-place/infrastructure/repositories/organization-places-lot-repository.js';
 import { DeletedError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Organization Places Lot', function () {

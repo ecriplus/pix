@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { targetProfileController } from '../../../../../src/prescription/target-profile/application/admin-target-profile-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/target-profile/application/admin-target-profile-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { categories } from '../../../../../src/shared/domain/models/TargetProfile.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Admin Target Profiles | Routes', function () {
   beforeEach(function () {

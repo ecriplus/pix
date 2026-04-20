@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { passageEventsController } from '../../../../../src/devcomp/application/passage-events/passage-event-controller.js';
 import { BadRequestError } from '../../../../../src/shared/application/http-errors.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { expect, generateAuthenticatedUserRequestHeaders, sinon } from '../../../../test-helper.js';
+import { expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Application | Passage-Events | Controller', function () {
   describe('#create', function () {

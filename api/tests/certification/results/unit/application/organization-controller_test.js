@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { organizationController } from '../../../../../src/certification/results/application/organization-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Course | Unit | Application | Organizations | organization-controller', function () {
   describe('#downloadCertificationResults', function () {

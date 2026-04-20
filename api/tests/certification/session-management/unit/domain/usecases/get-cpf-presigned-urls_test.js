@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { CpfImportStatus } from '../../../../../../src/certification/session-management/domain/models/CpfImportStatus.js';
 import { getPreSignedUrls } from '../../../../../../src/certification/session-management/domain/usecases/get-cpf-presigned-urls.js';
 import { cpfExportsStorage } from '../../../../../../src/certification/session-management/infrastructure/storage/cpf-exports-storage.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | get-cpf-presigned-urls ', function () {
   context('#getPreSignedUrls', function () {

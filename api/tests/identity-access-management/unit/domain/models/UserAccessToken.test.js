@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { UserAccessToken } from '../../../../../src/identity-access-management/domain/models/UserAccessToken.js';
 import { config } from '../../../../../src/shared/config.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | RefreshToken', function () {
   beforeEach(function () {

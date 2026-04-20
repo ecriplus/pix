@@ -1,4 +1,5 @@
 import times from 'lodash/times.js';
+import sinon from 'sinon';
 
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
@@ -10,7 +11,6 @@ import {
   generateAuthenticatedUserRequestHeaders,
   knex,
   learningContentBuilder,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Acceptance | Campaign Participation | Application | Route', function () {

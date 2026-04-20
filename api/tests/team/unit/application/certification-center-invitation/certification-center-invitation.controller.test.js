@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { certificationCenterInvitationController } from '../../../../../src/team/application/certification-center-invitation/certification-center-invitation.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
 import { certificationCenterInvitationSerializer } from '../../../../../src/team/infrastructure/serializers/jsonapi/certification-center-invitation-serializer.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Team | Application | Controller | Certification-center-invitation', function () {
   describe('#acceptCertificationCenterInvitation', function () {

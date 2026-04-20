@@ -1,6 +1,8 @@
+import nock from 'nock';
+
 import { ConfigurationNotFoundError, LLMApiError } from '../../../../../src/llm/domain/errors.js';
 import { get } from '../../../../../src/llm/infrastructure/repositories/configuration-repository.js';
-import { expect, nock } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | configuration', function () {

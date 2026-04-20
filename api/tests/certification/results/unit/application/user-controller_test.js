@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { userController } from '../../../../../src/certification/results/application/user-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Results | Unit | Application | Controller | user-controller', function () {
   describe('#findAllCertificationCourses', function () {

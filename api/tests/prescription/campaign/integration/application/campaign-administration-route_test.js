@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { campaignAdministrationController } from '../../../../../src/prescription/campaign/application/campaign-administration-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign/application/campaign-administration-route.js';
 import { DeletedCampaignError } from '../../../../../src/prescription/campaign/domain/errors.js';
@@ -9,7 +11,6 @@ import {
   expect,
   generateAuthenticatedUserRequestHeaders,
   HttpTestServer,
-  sinon,
 } from '../../../../test-helper.js';
 
 describe('Integration | Application | Route | campaign administration router', function () {

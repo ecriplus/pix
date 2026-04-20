@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { healthcheckController } from '../../../../../src/shared/application/healthcheck/healthcheck-controller.js';
 import { redisMonitor } from '../../../../../src/shared/infrastructure/utils/redis-monitor.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Controller | healthcheckController', function () {
   describe('#get', function () {

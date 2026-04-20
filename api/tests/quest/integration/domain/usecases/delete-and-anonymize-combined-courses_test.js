@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import {
   OrganizationLearnerParticipationStatuses,
@@ -6,7 +7,7 @@ import {
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../test-helper.js';
 
 describe('Integration | Combined course | Domain | UseCases | delete-and-anonymize-combined-courses', function () {
   let campaign, organization, combinedCourse, otherCombinedCourse, campaignsApiStub;

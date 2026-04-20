@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { AttestationNotFoundError } from '../../../../../src/profile/domain/errors.js';
 import { AttestationUserDetail } from '../../../../../src/profile/domain/models/AttestationUserDetail.js';
 import { User } from '../../../../../src/profile/domain/models/User.js';
 import { usecases } from '../../../../../src/profile/domain/usecases/index.js';
-import { databaseBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import { buildAttestationUserDetail } from '../../../../tooling/domain-builder/factory/index.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 

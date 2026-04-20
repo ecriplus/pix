@@ -1,10 +1,11 @@
 import FormData from 'form-data';
+import sinon from 'sinon';
 
 import { enrolmentController } from '../../../../../src/certification/enrolment/application/enrolment-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/enrolment-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Certification | Enrolment | Unit | Application | Routes', function () {
   describe('PUT /api/session/{sessionId}/enrol-students-to-session', function () {

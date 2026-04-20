@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+
 import { CampaignParticipant } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipant.js';
 import { ParticipationStartedJob } from '../../../../../../src/prescription/campaign-participation/domain/models/ParticipationStartedJob.js';
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | start-campaign-participation', function () {
   const userId = 19837482;

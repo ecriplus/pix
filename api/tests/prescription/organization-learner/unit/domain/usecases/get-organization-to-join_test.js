@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { getOrganizationToJoin } from '../../../../../../src/prescription/organization-learner/domain/usecases/get-organization-to-join.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCases | get-organization-to-join', function () {

@@ -1,5 +1,7 @@
 import { Readable } from 'node:stream';
 
+import sinon from 'sinon';
+
 import * as llmApi from '../../../../../src/llm/application/api/llm-api.js';
 import { LLMChatDTO } from '../../../../../src/llm/application/api/models/LLMChatDTO.js';
 import { ChatNotFoundError, NoUserIdProvidedError } from '../../../../../src/llm/domain/errors.js';
@@ -7,7 +9,7 @@ import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { usecases } from '../../../../../src/llm/domain/usecases/index.js';
 import { LLMResponseHandler } from '../../../../../src/llm/infrastructure/streaming/llm-response-handler.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('LLM | Unit | Application | API | llm', function () {

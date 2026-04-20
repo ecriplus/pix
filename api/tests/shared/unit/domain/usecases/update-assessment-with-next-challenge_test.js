@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CampaignParticipationDeletedError } from '../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import {
@@ -7,7 +9,7 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { updateAssessmentWithNextChallenge } from '../../../../../src/shared/domain/usecases/update-assessment-with-next-challenge.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 import { preventStubsToBeCalledUnexpectedly } from '../../../../tooling/test-utils/error.js';
 

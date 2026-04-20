@@ -1,6 +1,8 @@
+import nock from 'nock';
+
 import { getModulesListAsCsv } from '../../../../scripts/modulix/get-modules-csv.js';
 import { ModuleFactory } from '../../../../src/devcomp/infrastructure/factories/module-factory.js';
-import { expect, nock } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 import moduleContent from './test-module.json' with { type: 'json' };
 
 describe('Acceptance | Script | Get Modules as CSV', function () {

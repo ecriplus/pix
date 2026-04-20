@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { passageController } from '../../../../../src/devcomp/application/passages/passage-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/passages/passage-route.js';
 import {
@@ -6,7 +8,7 @@ import {
   PassageTerminatedError,
 } from '../../../../../src/devcomp/domain/errors.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Integration | Devcomp | Application | Passage | Router | passage-router', function () {
   describe('POST /api/passages/', function () {

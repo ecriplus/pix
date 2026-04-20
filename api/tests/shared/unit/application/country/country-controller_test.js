@@ -1,12 +1,8 @@
+import sinon from 'sinon';
+
 import { countryController } from '../../../../../src/shared/application/country/country-controller.js';
 import { sharedUsecases } from '../../../../../src/shared/domain/usecases/index.js';
-import {
-  domainBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  hFake,
-  sinon,
-} from '../../../../test-helper.js';
+import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Application | Controller | country-controller', function () {
   describe('#findCountries', function () {

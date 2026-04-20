@@ -1,4 +1,6 @@
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import sinon from 'sinon';
+
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Domain | Model | LtiPlatformRegistration', function () {
   describe('#fetchPlatformOpenIdConfig', function () {

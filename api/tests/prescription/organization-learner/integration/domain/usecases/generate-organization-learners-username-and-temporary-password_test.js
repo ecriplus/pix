@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { OrganizationLearnerPasswordResetDTO } from '../../../../../../src/prescription/organization-learner/domain/models/OrganizationLearnerPasswordResetDTO.js';
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { UserNotAuthorizedToUpdatePasswordError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect, knex, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | generate organization learners username and temporary password', function () {

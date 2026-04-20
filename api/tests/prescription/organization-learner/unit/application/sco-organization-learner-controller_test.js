@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { scoOrganizationLearnerController } from '../../../../../src/prescription/organization-learner/application/sco-organization-learner-controller.js';
 import { usecases } from '../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, hFake, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Prescription | Unit | Application | Controller | sco-organization-learner', function () {

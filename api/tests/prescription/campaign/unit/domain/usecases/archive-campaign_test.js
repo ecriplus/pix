@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { Campaign } from '../../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { archiveCampaign } from '../../../../../../src/prescription/campaign/domain/usecases/archive-campaign.js';
-import { expect, sinon } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
 
 describe('Unit | UseCase | archive-campaign', function () {
   let clock;

@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import { CertificationCompletedJob } from '../../../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { DoubleCertificationScoring } from '../../../../../../../src/certification/evaluation/domain/models/DoubleCertificationScoring.js';
 import * as flashAlgorithmService from '../../../../../../../src/certification/evaluation/domain/services/algorithm-methods/flash.js';
@@ -7,7 +9,7 @@ import { CompetenceMark } from '../../../../../../../src/certification/shared/do
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
 import { AssessmentResult } from '../../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { domainBuilder, expect, sinon } from '../../../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../../../test-helper.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../../shared/fixtures/challenges.js';
 
 const maximumAssessmentLength = 32;

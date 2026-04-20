@@ -1,7 +1,8 @@
 import randomString from 'randomstring';
+import sinon from 'sinon';
 
 import * as codeGenerator from '../../../../src/shared/domain/services/code-generator.js';
-import { expect, sinon } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Unit | Domain | Services | code generator', function () {
   describe('#createCode', function () {

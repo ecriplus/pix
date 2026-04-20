@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { campaignController } from '../../../../../src/prescription/campaign/application/campaign-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign/application/campaign-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer, sinon } from '../../../../test-helper.js';
+import { expect, HttpTestServer } from '../../../../test-helper.js';
 
 describe('Unit | Application | Router | campaign-router ', function () {
   describe('GET /api/campaigns/{campaignId}/divisions', function () {

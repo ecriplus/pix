@@ -1,5 +1,7 @@
+import sinon from 'sinon';
+
 import { Training } from '../../../../../src/devcomp/domain/models/Training.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | Models | Training', function () {
   describe('#constructor', function () {

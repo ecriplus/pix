@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect, knex, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { createTempFile, removeTempFile } from '../../../../tooling/test-utils/file.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | add-organization-feature-in-batch', function () {

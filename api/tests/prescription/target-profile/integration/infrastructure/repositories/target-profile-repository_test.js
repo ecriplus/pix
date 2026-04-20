@@ -1,9 +1,10 @@
 import _ from 'lodash';
+import sinon from 'sinon';
 
 import * as targetProfileRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
-import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Target-profile', function () {

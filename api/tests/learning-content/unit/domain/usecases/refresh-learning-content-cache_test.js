@@ -1,6 +1,8 @@
+import sinon from 'sinon';
+
 import { refreshLearningContentCache } from '../../../../../src/learning-content/domain/usecases/refresh-learning-content-cache.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, sinon } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Learning Content | Unit | Domain | Usecase | Refresh learning content cache', function () {
   beforeEach(function () {

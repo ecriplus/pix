@@ -1,3 +1,6 @@
+import nock from 'nock';
+import sinon from 'sinon';
+
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import {
@@ -6,7 +9,7 @@ import {
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
-import { databaseBuilder, expect, knex, nock, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Integration | Quest | Domain | UseCases | update-combined-course-progress', function () {
   let clock;

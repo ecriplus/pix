@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { Answer } from '../../../../../src/evaluation/domain/models/Answer.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Domain | Models | Examiner', function () {
   const challengeFormat = 'nombre';

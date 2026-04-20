@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { finalizeController } from '../../../../../src/certification/session-management/application/finalize-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Unit | Application | Controller | Finalize', function () {
   describe('#finalize', function () {

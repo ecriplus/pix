@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { TrainingTriggerForAdmin } from '../../../../../src/devcomp/domain/read-models/TrainingTriggerForAdmin.js';
 import { duplicateTraining } from '../../../../../src/devcomp/domain/usecases/duplicate-training.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
 
 describe('Unit | Devcomp | Domain | UseCases | duplicate-training', function () {
   it('should duplicate provided training with same training-triggers', async function () {

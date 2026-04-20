@@ -1,7 +1,9 @@
+import sinon from 'sinon';
+
 import { poleEmploiController } from '../../../../../src/prescription/campaign-participation/application/pole-emploi-controller.js';
 import { usecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { UnprocessableEntityError } from '../../../../../src/shared/application/http-errors.js';
-import { expect, hFake, sinon } from '../../../../test-helper.js';
+import { expect, hFake } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Controller | pole-emploi-controller', function () {

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import sinon from 'sinon';
 
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import {
@@ -10,7 +11,7 @@ import { constants } from '../../../../../src/shared/domain/constants.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder, expect, sinon } from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Domain | UseCases | get-progression', function () {
