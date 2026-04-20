@@ -774,7 +774,7 @@
               "element": {
                 "id": "63394140-acf8-402f-bf33-0c30f603521a",
                 "type": "qrocm",
-                "instruction": "<p>Pour chaque facteur d’authentification ci-dessous,&nbsp; sélectionnez s’il s’agit d’un facteur de connaissance, de possession ou biométrique.</p>",
+                "instruction": "<p>Pour chaque facteur d’authentification ci-dessous, sélectionnez s’il s’agit d’un facteur de connaissance, de possession ou biométrique.</p>",
                 "proposals": [
                   {
                     "type": "text",
