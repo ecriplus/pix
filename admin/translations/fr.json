@@ -864,7 +864,7 @@
             "placeholder": "Sélectionner un public prescrit"
           }
         },
-        "parent-organization-name": "Organisation mère : {parentOrganizationName}",
+        "parent-organization-name": "Organisation parente : {parentOrganizationName}",
         "province-code": "Département (en 3 chiffres)",
         "type": {
           "label": "Type de l'organisation",
