@@ -3,7 +3,6 @@ import sinon from 'sinon';
 
 import { DeleteAndAnonymiseCombinedCoursesScript } from '../../../scripts/prod/delete-and-anonymise-combined-courses.js';
 import { DomainTransaction } from '../../../src/shared/domain/DomainTransaction.js';
-import { catchErr } from '../../test-helper.js';
 
 describe('DeleteAndAnonymiseCombinedCoursesScript', function () {
   let script, logger;
@@ -21,13 +20,21 @@ describe('DeleteAndAnonymiseCombinedCoursesScript', function () {
   });
 
   describe('Handle', function () {
-    let usecasesStub, domainTransactionStub;
+    let usecasesStub, domainTransactionStub, jobClientStub;
     const combinedCourseId = Symbol('1');
     const ENGINEERING_USER_ID = 99999;
 
     beforeEach(async function () {
       script = new DeleteAndAnonymiseCombinedCoursesScript();
       logger = { info: sinon.spy(), error: sinon.spy() };
+      jobClientStub = {
+        initialize: () => {
+          return;
+        },
+        stop: () => {
+          return;
+        },
+      };
       sinon.stub(process, 'env').value({ ENGINEERING_USER_ID });
 
       usecasesStub = {
@@ -40,7 +47,11 @@ describe('DeleteAndAnonymiseCombinedCoursesScript', function () {
 
     it('should call usecase with correct arguments and log accordingly if usecase resolves', async function () {
       //given&when
-      await script.handle({ options: { combinedCourseIds: [combinedCourseId] }, logger, dependencies: usecasesStub });
+      await script.handle({
+        options: { combinedCourseIds: [combinedCourseId] },
+        logger,
+        dependencies: { usecases: usecasesStub, jobClient: jobClientStub },
+      });
 
       //then
       expect(usecasesStub.deleteAndAnonymizeCombinedCourses).to.be.calledWithExactly({
@@ -62,14 +73,13 @@ describe('DeleteAndAnonymiseCombinedCoursesScript', function () {
         })
         .rejects();
 
-      await catchErr(script.handle)({
-        options: { combinedCourseIds: [combinedCourseId] },
-        logger,
-        dependencies: usecasesStub,
-      });
-
-      //then
-      expect(logger.error).to.have.been.called;
+      await expect(
+        script.handle({
+          options: { combinedCourseIds: [combinedCourseId] },
+          logger,
+          dependencies: { usecases: usecasesStub, jobClient: jobClientStub },
+        }),
+      ).to.be.rejected;
     });
   });
 });

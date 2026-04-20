@@ -1,8 +1,10 @@
 import { usecases } from '../../src/quest/domain/usecases/index.js';
+import { JobGroup } from '../../src/shared/application/jobs/job-controller.js';
 import { commaSeparatedNumberParser } from '../../src/shared/application/scripts/parsers.js';
 import { Script } from '../../src/shared/application/scripts/script.js';
 import { ScriptRunner } from '../../src/shared/application/scripts/script-runner.js';
 import { DomainTransaction } from '../../src/shared/domain/DomainTransaction.js';
+import { JobClient } from '../../src/shared/infrastructure/jobs/JobClient.js';
 
 // Définition du script
 export class DeleteAndAnonymiseCombinedCoursesScript extends Script {
@@ -25,18 +27,25 @@ export class DeleteAndAnonymiseCombinedCoursesScript extends Script {
     });
   }
 
-  async handle({ options, logger, dependencies = usecases }) {
+  async handle({ options, logger, dependencies = { usecases, jobClient: JobClient.instance } }) {
     logger.info(
       { event: 'DeleteAndAnonymizeCombinedCoursesScript' },
       `Deletes ${options.combinedCourseIds.length} combined courses and anonymize possible existing participations`,
     );
+    await dependencies.jobClient.initialize({
+      jobGroups: [JobGroup.DEFAULT, JobGroup.FAST],
+    });
+
+    this.onFinished = async () => {
+      await dependencies.jobClient.stop();
+    };
     await DomainTransaction.execute(async () => {
       const knexConn = DomainTransaction.getConnection();
 
       const engineeringUserId = process.env.ENGINEERING_USER_ID;
 
       try {
-        await dependencies.deleteAndAnonymizeCombinedCourses({
+        await dependencies.usecases.deleteAndAnonymizeCombinedCourses({
           combinedCourseIds: options.combinedCourseIds,
           userId: engineeringUserId,
         });
