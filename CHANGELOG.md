@@ -1,5 +1,55 @@
 # Pix Changelog
 
+# [5.390.0](https://github.com/1024pix/pix/compare/v5.389.0...v5.390.0) (2026-04-20)
+
+### :rocket: Amélioration
+
+- [#15339](https://github.com/1024pix/pix/pull/15339) Add github action to upload SBOMs to Deptrack 
+- [#15924](https://github.com/1024pix/pix/pull/15924) Ajout du label au formulaire de création d'attestation (PIX-22301) 
+- [#15847](https://github.com/1024pix/pix/pull/15847) Ajouter le tag "Points clés" au début de tous les grains short lesson (PIX-22250) 
+- [#15908](https://github.com/1024pix/pix/pull/15908) Ajouter les étapes EDU et l'hexagone dans le certificat Pix plus (PIX-22137). 
+- [#15786](https://github.com/1024pix/pix/pull/15786) Ajouter une méthode de connexion par email après avoir validé le code soumis par l'utilisateur 
+- [#15873](https://github.com/1024pix/pix/pull/15873) Changer la durée de validité du code de vérification d'e-mail (PIX-22065). 
+- [#15872](https://github.com/1024pix/pix/pull/15872) expose la date de dernière réponse à l'application front `PixAdmin` (pix-22326) 
+- [#15930](https://github.com/1024pix/pix/pull/15930) MDX-138 IAGenPrompt_AVA retours relecture 
+- [#15880](https://github.com/1024pix/pix/pull/15880) Modifs config pixwriter 
+- [#15812](https://github.com/1024pix/pix/pull/15812) Module GestionMDP_NOV integration embed 
+- [#15929](https://github.com/1024pix/pix/pull/15929) Rendre obligatoire le questId sur combined-course-blueprints (PIX-21724) 
+- [#15729](https://github.com/1024pix/pix/pull/15729) surequipement-ajout-image 
+- [#15856](https://github.com/1024pix/pix/pull/15856) Update IADefinition_IND.json - Relecture JRO 
+- [#15894](https://github.com/1024pix/pix/pull/15894) Update IAGenFonction_Ava.json - relecture Marine 
+- [#15842](https://github.com/1024pix/pix/pull/15842) Update NR_Datacenter_AVA.json Ajout illustrations 
+
+### :bug: Correction
+
+- [#15932](https://github.com/1024pix/pix/pull/15932) Ajoute des traductions manquantes des Pix + EDU sur la page vérificateur 
+- [#15906](https://github.com/1024pix/pix/pull/15906) Corriger la validation des éléments Text 
+
+### :building_construction: Tech
+
+- [#15918](https://github.com/1024pix/pix/pull/15918) Ajouter un script pour rattraper pour ajouter le commentaire aux certifications scorées Pix+Edu non admissibles (PIX-22377). 
+- [#15899](https://github.com/1024pix/pix/pull/15899) Ajouter un test end to end sur la réactivation d'un prescrit après un import (PIX-22409). 
+- [#15887](https://github.com/1024pix/pix/pull/15887) Autoriser une chaîne vide sur un champ uri (PIX-22390)  
+- [#15921](https://github.com/1024pix/pix/pull/15921) Baisser le nombre de tentatives de réexécution du job de scoring en cas d'échec 
+- [#15920](https://github.com/1024pix/pix/pull/15920) Mettre à jour les infos des dépôts Ubuntu avant d'installer les navigateurs pour les tests fronts 
+- [#15937](https://github.com/1024pix/pix/pull/15937) Ne plus importer certains utilitaires depuis test-helper.js 
+- [#15931](https://github.com/1024pix/pix/pull/15931) Rendre la colonne label de la table attestations non nullable (PIX-22297) 
+- [#15934](https://github.com/1024pix/pix/pull/15934) Revoir le composant DescriptionList de PixAdmin (PIX-22455). 
+- [#15912](https://github.com/1024pix/pix/pull/15912) Supprimer ember-dayjs (PIX-22432) 
+- [#15928](https://github.com/1024pix/pix/pull/15928) Supprimer les traductions inutilisées sur PixOrga et sur PixAdmin (PIX-22282) 
+- [#15933](https://github.com/1024pix/pix/pull/15933) Utiliser le databaseBuilder au lieu du mockLearningContent 
+
+### :arrow_up: Montée de version
+
+- [#15944](https://github.com/1024pix/pix/pull/15944) Update dependency @1024pix/pix-ui to ^60.6.0 (admin) 
+- [#15946](https://github.com/1024pix/pix/pull/15946) Update dependency @1024pix/pix-ui to ^60.6.0 (mon-pix) 
+- [#15938](https://github.com/1024pix/pix/pull/15938) Update dependency @ember/render-modifiers to v4 (junior) 
+- [#15919](https://github.com/1024pix/pix/pull/15919) Update dependency webpack to v5.106.1 (junior) 
+
+### :coffee: Autre
+
+- [#15850](https://github.com/1024pix/pix/pull/15850) Créer le fichier CLAUDE.md du bounded context DevComp (PIX-22364)
+
 # [5.389.0](https://github.com/1024pix/pix/compare/v5.388.0...v5.389.0) (2026-04-17)
 
 ### :rocket: Amélioration
