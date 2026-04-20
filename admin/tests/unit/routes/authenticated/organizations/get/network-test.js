@@ -21,7 +21,7 @@ module('Unit | Route | authenticated/organizations/get/network', function (hooks
   });
 
   module('#beforeModel', function () {
-    test('it should check if current user is super admin', function (assert) {
+    test('it should check if current user is super admin or metier', function (assert) {
       // given
       const organization = EmberObject.create({ network: { id: 123, name: 'My Network' } });
       sinon.stub(route, 'modelFor').returns(organization);
@@ -30,7 +30,9 @@ module('Unit | Route | authenticated/organizations/get/network', function (hooks
       route.beforeModel();
 
       // then
-      assert.ok(restrictAccessToStub.calledWith(['isSuperAdmin'], 'authenticated.organizations.get.details'));
+      assert.ok(
+        restrictAccessToStub.calledWith(['isSuperAdmin', 'isMetier'], 'authenticated.organizations.get.details'),
+      );
     });
 
     test('it should transition to details route when organization does not belong to a network', async function (assert) {

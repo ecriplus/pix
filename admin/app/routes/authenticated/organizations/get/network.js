@@ -6,7 +6,7 @@ export default class Network extends Route {
   @service router;
 
   beforeModel() {
-    this.accessControl.restrictAccessTo(['isSuperAdmin'], 'authenticated.organizations.get.details');
+    this.accessControl.restrictAccessTo(['isSuperAdmin', 'isMetier'], 'authenticated.organizations.get.details');
 
     const organization = this.modelFor('authenticated.organizations.get');
 

@@ -473,12 +473,14 @@ module('Acceptance | Organizations | Get', function (hooks) {
     });
   });
 
-  module('Network tab Access control (temporary tests, to be deleted at the end of epix PIX-21277)', function (hooks) {
+  module('Network tab Access control', function (hooks) {
     hooks.beforeEach(() => {
+      const network = server.create('network', { id: '42', name: 'Réseau Île-de-France' });
       server.create('organization', {
         id: 99,
         name: 'My Organization',
         features: { PLACES_MANAGEMENT: { active: true } },
+        network,
       });
     });
     test('should not be visible for Certif member', async function (assert) {
@@ -513,7 +515,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
       );
     });
 
-    test('should not be visible for Metier member', async function (assert) {
+    test('should be visible for Metier member', async function (assert) {
       // given
       await authenticateAdminMemberWithRole({ isMetier: true })(server);
 
@@ -522,7 +524,7 @@ module('Acceptance | Organizations | Get', function (hooks) {
 
       // then
       const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-      assert.notOk(
+      assert.ok(
         within(navigationTabs).queryByRole('link', {
           name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
         }),
