@@ -2,11 +2,12 @@ import _ from 'lodash';
 import samlify from 'samlify';
 import sinon from 'sinon';
 
+import { createServer } from '../../../../server.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { UserReconciliationSamlIdToken } from '../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { config as settings } from '../../../../src/shared/config.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { createServer, databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
 
 const testCertificate = `MIICCzCCAXQCCQD2MlHh/QmGmjANBgkqhkiG9w0BAQsFADBKMQswCQYDVQQGEwJG
 UjEPMA0GA1UECAwGRlJBTkNFMQ4wDAYDVQQHDAVQQVJJUzEMMAoGA1UECgwDUElY

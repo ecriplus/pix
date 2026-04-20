@@ -1,5 +1,5 @@
+import { createServer } from '../../../../../server.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

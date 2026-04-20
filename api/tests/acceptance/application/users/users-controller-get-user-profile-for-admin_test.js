@@ -1,10 +1,6 @@
+import { createServer } from '../../../../server.js';
 import { constants } from '../../../../src/shared/domain/constants.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | users-controller-get-user-profile-for-admin', function () {
   let options;

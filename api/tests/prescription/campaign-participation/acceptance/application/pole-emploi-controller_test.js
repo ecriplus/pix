@@ -1,9 +1,6 @@
+import { createServer } from '../../../../../server.js';
 import { generateCursor } from '../../../../../src/prescription/campaign-participation/domain/services/pole-emploi-service.js';
-import {
-  createServer,
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../../test-helper.js';
+import { expect, generateValidRequestAuthorizationHeaderForApplication } from '../../../../test-helper.js';
 
 describe('Acceptance | Application | Pole Emploi Controller', function () {
   let server;

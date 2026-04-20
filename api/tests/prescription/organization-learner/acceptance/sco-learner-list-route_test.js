@@ -1,10 +1,6 @@
+import { createServer } from '../../../../server.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Acceptance | Application | sco-leaner-list-route', function () {
   let server;

@@ -1,13 +1,8 @@
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { status } from '../../../../../src/shared/domain/models/AssessmentResult.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../../test-helper.js';
 
 describe('Certification | Session-Management | Acceptance | Application | Routes | session-publication', function () {
   describe('PATCH /api/admin/sessions/:id/publish', function () {

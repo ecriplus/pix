@@ -1,7 +1,7 @@
+import { createServer } from '../../../../../server.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../src/certification/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import {
-  createServer,
   databaseBuilder,
   domainBuilder,
   expect,

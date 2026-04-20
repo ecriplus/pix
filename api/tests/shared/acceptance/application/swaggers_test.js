@@ -1,5 +1,7 @@
+import { createServer } from '../../../../server.js';
+import { createMaddoServer } from '../../../../server.maddo.js';
 import { config } from '../../../../src/shared/config.js';
-import { createMaddoServer, createServer, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Acceptance | Controller | Open Api', function () {
   let server;

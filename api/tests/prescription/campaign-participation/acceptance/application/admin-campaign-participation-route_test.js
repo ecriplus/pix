@@ -2,13 +2,9 @@ import crypto from 'node:crypto';
 
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | GET /api/admin/users/{userId}/participations', function () {
   let server, randomUUIDStub;

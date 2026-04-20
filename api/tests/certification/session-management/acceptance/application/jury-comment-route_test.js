@@ -1,9 +1,5 @@
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes| jury-comment', function () {
   describe('PUT /api/admin/sessions/{sessionId}/comment', function () {

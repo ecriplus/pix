@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import sinon from 'sinon';
 
+import { createServer } from '../../../../server.js';
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

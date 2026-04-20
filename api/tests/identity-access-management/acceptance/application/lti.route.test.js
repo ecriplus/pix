@@ -3,8 +3,9 @@ import querystring from 'node:querystring';
 import * as jose from 'jose';
 import nock from 'nock';
 
+import { createServer } from '../../../../server.js';
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
-import { createServer, databaseBuilder, domainBuilder, expect, knex } from '../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | lti', function () {
   let server;

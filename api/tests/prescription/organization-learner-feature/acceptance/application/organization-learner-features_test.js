@@ -1,11 +1,7 @@
+import { createServer } from '../../../../../server.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Acceptance | Organization learner features', function () {
   describe('POST /api/organizations/{organizationId}/organization-learners/{organizationLearnerId}/features/{featureKey}', function () {

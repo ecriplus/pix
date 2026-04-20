@@ -6,6 +6,7 @@ import nock from 'nock';
 import sinon from 'sinon';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
+import { createServer } from '../../../../../server.js';
 import { CertificationCompletedJob } from '../../../../../src/certification/evaluation/domain/events/CertificationCompleted.js';
 import { TrainingTrigger } from '../../../../../src/devcomp/domain/models/TrainingTrigger.js';
 import * as badgeAcquisitionRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-acquisition-repository.js';
@@ -22,7 +23,6 @@ import { CORRELATION_METADATA } from '../../../../../src/shared/infrastructure/e
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { SCOPES } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,

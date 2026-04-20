@@ -1,5 +1,6 @@
+import { createServer } from '../../../../server.js';
 import { informationBannersStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { createServer, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
 
 let server;
 

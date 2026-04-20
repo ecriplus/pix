@@ -13,8 +13,6 @@ import { knex as datamartKnex } from '../datamart/knex-database-connection.js';
 import { knex as datawarehouseKnex } from '../datawarehouse/knex-database-connection.js';
 import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
 import { disconnect, knex } from '../db/knex-database-connection.js';
-import { createServer } from '../server.js';
-import { createMaddoServer } from '../server.maddo.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
@@ -39,8 +37,6 @@ import {
   generateInjectOptions,
   generateValidRequestAuthorizationHeaderForApplication,
 } from './tooling/test-utils/http-server.js';
-
-const MOCHA_TIMEOUT = 5000;
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -70,10 +66,6 @@ before(async function () {
   } catch {
     // pgBoss is not available on unit tests
   }
-});
-
-beforeEach(function () {
-  this.timeout(MOCHA_TIMEOUT);
 });
 
 afterEach(async function () {
@@ -113,8 +105,6 @@ after(async function () {
 
 // eslint-disable-next-line mocha/no-exports
 export {
-  createMaddoServer,
-  createServer,
   databaseBuilder,
   datamartBuilder,
   datamartKnex,

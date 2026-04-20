@@ -1,4 +1,5 @@
-import { createServer, expect } from '../../../test-helper.js';
+import { createServer } from '../../../../server.js';
+import { expect } from '../../../test-helper.js';
 
 describe('Acceptance | Shared | Application | Route | healthcheck', function () {
   let server;

@@ -1,10 +1,6 @@
+import { createServer } from '../../../../../server.js';
 import { ComplementaryCertificationCourseResult } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Certification | Session-management | Acceptance | complementary-certification-course-results-controller', function () {
   describe('POST /api/admin/complementary-certification-course-results', function () {

@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { mailService } from '../../../../../src/shared/domain/services/mail-service.js';
-import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Acceptance | Identity Access Management | Application | Route | account-recovery', function () {
   let server;

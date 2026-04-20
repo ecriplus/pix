@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
+import { createServer } from '../../../../../server.js';
 import { ComplementaryCertificationKeys } from '../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import {
-  createServer,
   databaseBuilder,
   datamartBuilder,
   expect,

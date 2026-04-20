@@ -2,8 +2,9 @@ import querystring from 'node:querystring';
 
 import sinon from 'sinon';
 
+import { createServer } from '../../../server.js';
 import { tokenController } from '../../../src/identity-access-management/application/token/token.controller.js';
-import { createServer, expect } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
 
 describe('Integration | Identity Access Management | Application | Router', function () {
   let headers;

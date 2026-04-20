@@ -1,11 +1,7 @@
+import { createServer } from '../../../../server.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
 
 describe('Quest | Acceptance | Application | Combined course blueprint Route ', function () {
   let server;

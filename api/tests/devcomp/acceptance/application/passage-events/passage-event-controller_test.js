@@ -1,4 +1,5 @@
-import { createServer, databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 
 describe('Acceptance | Controller | passage-event-controller', function () {
   let server;

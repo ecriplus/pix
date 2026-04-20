@@ -1,10 +1,6 @@
+import { createServer } from '../../../../../server.js';
 import * as organizationPlacesLotCategories from '../../../../../src/prescription/organization-place/domain/constants/organization-places-categories.js';
-import {
-  createServer,
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
 
 describe('Acceptance | Route | Find Organization Places', function () {
   describe('GET /api/admin/organizations/{id}/places', function () {

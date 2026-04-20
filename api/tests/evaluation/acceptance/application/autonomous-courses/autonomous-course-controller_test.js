@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 
+import { createServer } from '../../../../../server.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import {
-  createServer,
   databaseBuilder,
   expect,
   generateAuthenticatedUserRequestHeaders,
