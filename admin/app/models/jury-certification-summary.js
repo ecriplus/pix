@@ -56,9 +56,7 @@ export default class JuryCertificationSummary extends Model {
   }
 
   get canPublish() {
-    return (
-      this.status !== assessmentResultStatus.ERROR && !['PRO_SANTE', 'DROIT'].includes(this.certificationFramework)
-    );
+    return this.status !== assessmentResultStatus.ERROR;
   }
 
   get certificationObtained() {
