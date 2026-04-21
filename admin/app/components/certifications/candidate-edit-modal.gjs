@@ -80,7 +80,6 @@ export default class CandidateEditModal extends Component {
   }
 
   get selectedCountryOption() {
-    if (this.birthCountry === 'FRANCE') return FRANCE_INSEE_CODE;
     return this.selectedCountryInseeCode;
   }
 
