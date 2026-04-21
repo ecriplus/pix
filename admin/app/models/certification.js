@@ -121,7 +121,7 @@ export default class Certification extends Model {
   }
 
   wasBornInFrance() {
-    return this.birthCountry === 'FRANCE';
+    return this.birthCountry?.toUpperCase() === 'FRANCE';
   }
 
   getInformation() {

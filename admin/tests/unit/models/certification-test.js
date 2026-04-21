@@ -304,9 +304,31 @@ module('Unit | Model | certification', function (hooks) {
       assert.true(wasBornInFrance);
     });
 
+    test('it should return true when birthCountry has a different casing', function (assert) {
+      // given
+      const certification = store.createRecord('certification', { birthCountry: 'France' });
+
+      // when
+      const wasBornInFrance = certification.wasBornInFrance();
+
+      // then
+      assert.true(wasBornInFrance);
+    });
+
     test('it should return false when candidate was not born in France', function (assert) {
       // given
       const certification = store.createRecord('certification', { birthCountry: 'OTHER_COUNTRY' });
+
+      // when
+      const wasBornInFrance = certification.wasBornInFrance();
+
+      // then
+      assert.false(wasBornInFrance);
+    });
+
+    test('it should return false when birthCountry is null', function (assert) {
+      // given
+      const certification = store.createRecord('certification', { birthCountry: null });
 
       // when
       const wasBornInFrance = certification.wasBornInFrance();
