@@ -4,7 +4,8 @@ import * as candidateRepository from '../../../../../../src/certification/enrolm
 import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { _ } from '../../../../../../src/shared/infrastructure/utils/lodash-utils.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Certification | Enrolment | Repository | Candidate', function () {

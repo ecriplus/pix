@@ -1,7 +1,8 @@
 import { createServer } from '../../../../../server.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../src/certification/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Certification | Configuration | API | certification-version-route', function () {

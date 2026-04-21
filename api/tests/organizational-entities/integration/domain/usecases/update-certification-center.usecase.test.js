@@ -4,7 +4,8 @@ import { updateCertificationCenter } from '../../../../../src/organizational-ent
 import * as certificationCenterForAdminRepository from '../../../../../src/organizational-entities/infrastructure/repositories/certification-center-for-admin.repository.js';
 import * as complementaryCertificationHabilitationRepository from '../../../../../src/organizational-entities/infrastructure/repositories/complementary-certification-habilitation.repository.js';
 import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Organizational Entities | Domain | UseCases | update-certification-center', function () {
   it('updates certification center and its data protection officer information', async function () {

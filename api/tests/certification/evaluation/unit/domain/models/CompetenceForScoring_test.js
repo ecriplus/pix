@@ -1,5 +1,6 @@
 import { CompetenceForScoring } from '../../../../../../src/certification/evaluation/domain/models/CompetenceForScoring.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Evaluation | Unit | Domain | Models | CompetenceForScoring', function () {
   describe('#getCompetenceMark', function () {

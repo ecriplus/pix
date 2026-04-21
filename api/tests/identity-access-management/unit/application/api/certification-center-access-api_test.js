@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { getCertificationCenterAccess } from '../../../../../src/identity-access-management/application/api/certification-center-access-api.js';
 import { AllowedCertificationCenterAccessDTO } from '../../../../../src/identity-access-management/application/api/models/AllowedCertificationCenterAccessDTO.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Application | API | Certification Center Access', function () {
   describe('#getCertificationCenterAccess', function () {

@@ -1,6 +1,8 @@
 import * as certificationBadgesService from '../../../../../../src/certification/shared/domain/services/certification-badges-service.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../../tooling/learning-content-builder/index.js';
 
 const listSkill = ['web1', 'web2', 'web3', 'web4'];
 const learningContent = [

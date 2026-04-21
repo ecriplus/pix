@@ -1,7 +1,8 @@
 import * as knowledgeElementSnapshotRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | KnowledgeElementSnapshotRepository', function () {
   describe('#save', function () {

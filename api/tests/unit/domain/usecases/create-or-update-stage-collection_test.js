@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { StageModificationForbiddenForLinkedTargetProfileError } from '../../../../src/evaluation/domain/errors.js';
 import { createOrUpdateStageCollection } from '../../../../src/evaluation/domain/usecases/create-or-update-stage-collection.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | create or update stage collection', function () {

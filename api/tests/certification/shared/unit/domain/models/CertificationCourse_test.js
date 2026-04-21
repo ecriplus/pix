@@ -1,7 +1,8 @@
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { generateChallengeList } from '../../../fixtures/challenges.js';
 
 describe('Unit | Domain | Models | CertificationCourse', function () {

@@ -1,6 +1,7 @@
 import * as pixPlusCertificationCourseRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/pix-plus-certification-course-repository.js';
 import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Session Management | Integration | Infrastructure | Repositories | Pix Plus Certification', function () {
   describe('#getByCertificationCourseId', function () {

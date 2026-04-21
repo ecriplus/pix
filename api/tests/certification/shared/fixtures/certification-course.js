@@ -1,7 +1,8 @@
 import { AnswerStatus } from '../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder } from '../../../test-helper.js';
+import { databaseBuilder } from '../../../test-helper.js';
+import * as domainBuilder from '../../../tooling/domain-builder/factory/index.js';
 import {
   buildArea,
   buildChallenge,

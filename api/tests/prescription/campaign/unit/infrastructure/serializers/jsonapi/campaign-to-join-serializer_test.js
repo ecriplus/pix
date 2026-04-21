@@ -1,6 +1,7 @@
 import * as campaignToJoinSerializer from '../../../../../../../src/prescription/campaign/infrastructure/serializers/jsonapi/campaign-to-join-serializer.js';
 import { CampaignExternalIdTypes } from '../../../../../../../src/prescription/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | JSONAPI | campaign-to-join-serializer', function () {
   describe('#serialize()', function () {

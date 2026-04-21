@@ -1,5 +1,6 @@
 import { CertificationCompanionLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | CertificationCompanionLiveAlert', function () {
   describe('#clear', function () {

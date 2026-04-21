@@ -3,7 +3,8 @@ import lodash from 'lodash';
 import * as organizationTagRepository from '../../../../../src/organizational-entities/infrastructure/repositories/organization-tag.repository.js';
 import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationTag } from '../../../../../src/shared/domain/models/OrganizationTag.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 const { omit } = lodash;
 

@@ -1,6 +1,7 @@
 import { PoleEmploiPayload } from '../../../../../../../src/prescription/campaign-participation/infrastructure/externals/pole-emploi/PoleEmploiPayload.js';
 import { getPixAppUrl } from '../../../../../../../src/shared/domain/services/url-service.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Infrastructure | Externals | Pole-Emploi | PoleEmploiPayload', function () {
   let user;

@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { organizationPlaceController } from '../../../../../src/prescription/organization-place/application/organization-place-controller.js';
 import { usecases } from '../../../../../src/prescription/organization-place/domain/usecases/index.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Application | organization-place-controller', function () {

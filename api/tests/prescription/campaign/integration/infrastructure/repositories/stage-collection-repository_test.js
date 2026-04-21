@@ -1,5 +1,6 @@
 import * as stageCollectionRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/stage-collection-repository.js';
-import { databaseBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../../tooling/learning-content-builder/index.js';
 
 const competenceId = 'recCompetence';
 const learningContent = [

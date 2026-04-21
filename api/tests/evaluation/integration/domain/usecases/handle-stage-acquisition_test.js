@@ -4,7 +4,9 @@ import { CampaignTypes } from '../../../../../src/prescription/shared/domain/con
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Evaluation | Integration | Usecase | Handle Stage Acquisition', function () {
   let userId, assessment, stages, campaignParticipationId, targetProfileId, listSkill, learningContent;

@@ -3,7 +3,8 @@ import { correctPreviewAnswer } from '../../../../../src/school/domain/usecases/
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Examiner } from '../../../../../src/shared/domain/models/Examiner.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | UseCases | correct-preview-answer', function () {

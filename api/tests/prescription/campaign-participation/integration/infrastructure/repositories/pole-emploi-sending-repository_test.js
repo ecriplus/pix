@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import * as poleEmploiSendingRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/pole-emploi-sending-repository.js';
 import { config as settings } from '../../../../../../src/shared/config.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 const poleEmploiSendingFactory = databaseBuilder.factory.poleEmploiSendingFactory;
 
 describe('Integration | Repository | PoleEmploiSending', function () {

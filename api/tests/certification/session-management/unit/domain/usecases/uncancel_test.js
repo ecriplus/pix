@@ -4,7 +4,8 @@ import { uncancel } from '../../../../../../src/certification/session-management
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { NotFinalizedSessionError } from '../../../../../../src/shared/domain/errors.js';
 import CertificationUncancelled from '../../../../../../src/shared/domain/events/CertificationUncancelled.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | uncancel', function () {

@@ -1,5 +1,6 @@
 import * as certificationPointOfContactSerializer from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/certification-point-of-contact.serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Serializer | JSONAPI | certification-point-of-contact-serializer', function () {
   describe('#serialize()', function () {

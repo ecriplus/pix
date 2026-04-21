@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { handleStageAcquisition } from '../../../../../src/evaluation/domain/usecases/handle-stage-acquisition.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Evaluation | Unit | UseCase | handleStageAcquisition', function () {
   // Repositories

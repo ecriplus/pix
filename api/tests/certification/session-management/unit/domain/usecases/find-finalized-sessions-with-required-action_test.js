@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { findFinalizedSessionsWithRequiredAction } from '../../../../../../src/certification/session-management/domain/usecases/find-finalized-sessions-with-required-action.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Session-management | Unit | Domain | UseCases | findFinalizedSessionsWithRequiredAction', function () {
   context('when there are finalized sessions with required actions', function () {

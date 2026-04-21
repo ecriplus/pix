@@ -7,7 +7,8 @@ import {
 } from '../../../../../src/shared/domain/errors.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';
 import { getOrganizationInvitation } from '../../../../../src/team/domain/usecases/get-organization-invitation.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Team | Domain | UseCase | get-organization-invitation', function () {

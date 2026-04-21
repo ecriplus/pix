@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { addPixAuthenticationMethod } from '../../../../../src/identity-access-management/domain/usecases/add-pix-authentication-method.usecase.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | add-pix-authentication-method', function () {
   let userRepository, authenticationMethodRepository;

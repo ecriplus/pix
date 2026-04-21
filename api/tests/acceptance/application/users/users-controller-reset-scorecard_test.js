@@ -3,7 +3,8 @@ import sinon from 'sinon';
 
 import { createServer } from '../../../../server.js';
 import { CampaignParticipationStatuses } from '../../../../src/prescription/shared/domain/constants.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../tooling/learning-content-builder/index.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const { STARTED } = CampaignParticipationStatuses;

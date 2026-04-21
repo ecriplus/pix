@@ -3,7 +3,8 @@ import * as url from 'node:url';
 import sinon from 'sinon';
 
 import { AddMultipleLevelStagesScript } from '../../../../src/evaluation/scripts/add-multiple-level-stages.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../tooling/learning-content-builder/index.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
 

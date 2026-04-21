@@ -1,11 +1,13 @@
 import lodash from 'lodash';
+
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 const { omit } = lodash;
 
 import sinon from 'sinon';
 
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import * as userService from '../../../../../src/shared/domain/services/user-service.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Shared | Domain | Service | user-service', function () {
   const hashedPassword = 'ABCD1234';

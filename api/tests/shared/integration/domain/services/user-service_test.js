@@ -1,4 +1,6 @@
 import lodash from 'lodash';
+
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 const { pick } = lodash;
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
@@ -9,7 +11,7 @@ import { getLearnerInfo } from '../../../../../src/prescription/learner-manageme
 import * as organizationLearnerRepository from '../../../../../src/prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearnerNotFound } from '../../../../../src/shared/domain/errors.js';
 import * as userService from '../../../../../src/shared/domain/services/user-service.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Domain | Services | user-service', function () {

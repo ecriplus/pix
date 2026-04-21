@@ -5,7 +5,8 @@ import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { CandidateAlreadyLinkedToUserError } from '../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();

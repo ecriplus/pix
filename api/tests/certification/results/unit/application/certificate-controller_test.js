@@ -6,7 +6,8 @@ import { CertificationCourseVersion } from '../../../../../src/certification/res
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Results | Unit | Application | certificate-controller', function () {

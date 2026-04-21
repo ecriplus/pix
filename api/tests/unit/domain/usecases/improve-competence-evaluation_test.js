@@ -4,7 +4,8 @@ import { ImproveCompetenceEvaluationForbiddenError } from '../../../../src/evalu
 import { improveCompetenceEvaluation } from '../../../../src/evaluation/domain/usecases/improve-competence-evaluation.js';
 import { MAX_REACHABLE_LEVEL } from '../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | Improve Competence Evaluation', function () {

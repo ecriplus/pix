@@ -6,7 +6,8 @@ import sinon from 'sinon';
 
 import { getInvigilatorKitPdfBuffer } from '../../../../../../../src/certification/session-management/infrastructure/utils/pdf/invigilator-kit-pdf.js';
 import { ENGLISH_SPOKEN, FRENCH_SPOKEN } from '../../../../../../../src/shared/domain/services/locale-service.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 import { isSameBinary } from '../../../../../../tooling/test-utils/file.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));

@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { UserDTO } from '../../../../../src/identity-access-management/application/api/models/UserDTO.js';
 import { getActiveByUserIds } from '../../../../../src/identity-access-management/application/api/users-api.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Application | API | Users', function () {
   it('should return users', async function () {

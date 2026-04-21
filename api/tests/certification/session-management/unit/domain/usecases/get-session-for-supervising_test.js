@@ -3,7 +3,8 @@ import sinon from 'sinon';
 
 import { getSessionForSupervising } from '../../../../../../src/certification/session-management/domain/usecases/get-session-for-supervising.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 const START_DATETIME_STUB = new Date('2022-10-01T13:00:00Z');
 const COMPLEMENTARY_EXTRATIME_STUB = 45;

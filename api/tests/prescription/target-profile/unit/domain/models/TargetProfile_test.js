@@ -1,5 +1,6 @@
 import { TargetProfile } from '../../../../../../src/prescription/target-profile/domain/models/TargetProfile.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | TargetProfile', function () {
   describe('#detach', function () {

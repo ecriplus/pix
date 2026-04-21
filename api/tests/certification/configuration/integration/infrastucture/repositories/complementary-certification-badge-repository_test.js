@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 const { omit } = lodash;
 import * as complementaryCertificationBadgeRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/complementary-certification-badge-repository.js';

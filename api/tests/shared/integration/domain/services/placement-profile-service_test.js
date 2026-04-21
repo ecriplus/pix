@@ -3,7 +3,8 @@ import { KnowledgeElementCollection } from '../../../../../src/prescription/shar
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { ENGLISH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
 import * as placementProfileService from '../../../../../src/shared/domain/services/placement-profile-service.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Shared | Integration | Domain | Services | Placement Profile Service', function () {
   let userId, assessmentId, campaignParticipation;

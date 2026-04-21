@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | UseCases | find-all-administration-teams', function () {
   context('when there are administration teams', function () {

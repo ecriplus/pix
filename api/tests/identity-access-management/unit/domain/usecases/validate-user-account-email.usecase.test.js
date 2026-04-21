@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { validateUserAccountEmail } from '../../../../../src/identity-access-management/domain/usecases/validate-user-account-email.usecase.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Domain | UseCase | validate-user-account-email', function () {
   let emailValidationDemandRepository, userRepository;

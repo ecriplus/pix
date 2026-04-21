@@ -4,7 +4,8 @@ import { findFilteredMostRecentByUser } from '../../../../../src/evaluation/appl
 import { KnowledgeElementDTO } from '../../../../../src/evaluation/application/api/models/KnowledgeElementDTO.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Evaluation | Unit | Application | API | knowledge-elements-api', function () {
   describe('#findFilteredMostRecentByUser', function () {

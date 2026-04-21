@@ -7,7 +7,8 @@ import * as organizationLearnerRepository from '../../../../../src/prescription/
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { OrganizationLearnerNotFound, UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repository | organization-learner-repository', function () {

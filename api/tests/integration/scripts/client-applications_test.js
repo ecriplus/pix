@@ -3,7 +3,8 @@ import sinon from 'sinon';
 
 import { ClientApplicationsScript } from '../../../scripts/identity-access-management/client-applications.js';
 import { cryptoService } from '../../../src/shared/domain/services/crypto-service.js';
-import { databaseBuilder, domainBuilder, knex } from '../../test-helper.js';
+import { databaseBuilder, knex } from '../../test-helper.js';
+import { domainBuilder } from '../../tooling/domain-builder/domain-builder.js';
 
 describe('ClientApplicationsScript', function () {
   describe('Options', function () {

@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { findAllTags } from '../../../../../src/organizational-entities/domain/usecases/find-all-tags.usecase.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | find-all-tags', function () {
   let tagRepository;

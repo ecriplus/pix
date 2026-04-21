@@ -8,7 +8,8 @@ import {
   DeprecatedCertificationIssueReportSubcategoryError,
   InvalidCertificationIssueReportForSaving,
 } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 const MISSING_VALUE = null;
 const EMPTY_VALUE = '';

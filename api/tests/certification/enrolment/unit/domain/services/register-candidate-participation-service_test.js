@@ -4,7 +4,8 @@ import { registerCandidateParticipation } from '../../../../../../src/certificat
 import { WrongDomainExtensionForPixPlusError } from '../../../../../../src/certification/enrolment/domain/errors.js';
 import { usecases } from '../../../../../../src/certification/enrolment/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Service | register-candidate-participation', function () {

@@ -1,6 +1,7 @@
 import { CenterTypes } from '../../../../../../../src/certification/configuration/domain/models/CenterTypes.js';
 import { serialize } from '../../../../../../../src/certification/configuration/infrastructure/serializers/csv/sco-whitelist-csv-serializer.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Serializer | CSV | Certification | Configuration | sco-whitelist-csv-serializer', function () {
   it('returns all external ids as a string', async function () {

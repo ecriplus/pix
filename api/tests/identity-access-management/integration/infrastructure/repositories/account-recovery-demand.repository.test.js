@@ -4,7 +4,8 @@ import { AccountRecoveryDemand } from '../../../../../src/identity-access-manage
 import { accountRecoveryDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/account-recovery-demand.repository.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 const { omit } = lodash;
 

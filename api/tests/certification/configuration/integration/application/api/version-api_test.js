@@ -1,6 +1,7 @@
 import * as versionApi from '../../../../../../src/certification/configuration/application/api/version-api.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Configuration | Integration | Application | Api | version', function () {
   const dataDroit2025 = {

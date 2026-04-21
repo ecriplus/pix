@@ -1,6 +1,8 @@
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import * as badgeForCalculationRepository from '../../../../../src/shared/infrastructure/repositories/badge-for-calculation-repository.js';
-import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | Repository | BadgeForCalculation', function () {
   const campaignSkillsId = [

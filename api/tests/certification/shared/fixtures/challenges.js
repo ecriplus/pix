@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { domainBuilder } from '../../../test-helper.js';
+import * as domainBuilder from '../../../tooling/domain-builder/factory/index.js';
 
 export const generateChallengeList = ({ length }) =>
   _.range(0, length).map((index) =>

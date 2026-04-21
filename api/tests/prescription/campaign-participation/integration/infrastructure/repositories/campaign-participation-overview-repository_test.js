@@ -13,7 +13,8 @@ import {
 } from '../../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, learningContentBuilder } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../../tooling/learning-content-builder/index.js';
 
 const { campaignParticipationOverviewFactory } = databaseBuilder.factory;
 

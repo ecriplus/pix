@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { SessionEnrolment } from '../../../../../../src/certification/enrolment/domain/models/SessionEnrolment.js';
 import { createSession } from '../../../../../../src/certification/enrolment/domain/usecases/create-session.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | create-session', function () {
   let centerRepository;

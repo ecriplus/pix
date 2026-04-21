@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { findDivisionsByCertificationCenter } from '../../../../../../src/certification/enrolment/domain/usecases/find-divisions-by-certification-center.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | find-divisions-by-certification-center', function () {
   let organization;

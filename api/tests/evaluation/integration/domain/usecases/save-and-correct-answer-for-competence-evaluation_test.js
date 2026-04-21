@@ -7,7 +7,8 @@ import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.j
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Evaluation | Integration | Usecase | Save and correct answer for competence evaluation', function () {
   const skillIds = ['monAcquisA_Id', 'monAcquisB_Id', 'monAcquisC_Id'];

@@ -1,5 +1,6 @@
 import { TrainingTriggerTube } from '../../../../../src/devcomp/domain/models/TrainingTriggerTube.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Devcomp | Domain | Models | TrainingTriggerTube', function () {
   describe('#constructor', function () {

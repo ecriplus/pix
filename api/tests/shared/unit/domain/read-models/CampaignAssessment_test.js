@@ -1,7 +1,8 @@
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { CampaignAssessment } from '../../../../../src/shared/domain/read-models/CampaignAssessment.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Read-Models | CampaignAssessment', function () {
   describe('#constructor', function () {

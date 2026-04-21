@@ -1,7 +1,8 @@
 import { TubeResultForKnowledgeElementSnapshots } from '../../../../../../src/prescription/campaign/domain/models/TubeResultForKnowledgeElementSnapshots.js';
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | TubeResultForKnowledgeElementSnapshots', function () {
   let competence, tube, knowledgeElementSnapshots;
