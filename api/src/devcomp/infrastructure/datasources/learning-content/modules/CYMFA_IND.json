@@ -836,7 +836,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br>Un <strong>code à 6 chiffre reçu par sms</strong>&nbsp;est un</p>"
+                    "content": "<p><br>Un <strong>code à 6 chiffres reçu par sms</strong>&nbsp;est un</p>"
                   },
                   {
                     "type": "select",
