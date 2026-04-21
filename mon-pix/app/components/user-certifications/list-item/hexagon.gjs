@@ -14,11 +14,11 @@ export default class Hexagon extends Component {
   get classNames() {
     const classes = ['certification-item__hexagon'];
 
-    if (this.isPixPlusV3 && this.args.reachedMeshIndex != null) {
+    if (this.isPixPlusV3 && this.args.reachedMeshLevel != null) {
       classes.push('certification-item__hexagon--pix-plus-validated');
     }
 
-    if (this.isPixPlusV3 && this.args.reachedMeshIndex === null) {
+    if (this.isPixPlusV3 && this.args.reachedMeshLevel === null) {
       classes.push('certification-item__hexagon--pix-plus-not-validated');
     }
 
