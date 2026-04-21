@@ -12,25 +12,13 @@ module('Integration | Component | Certifications | start', function (hooks) {
 
   test('it displays certification starter page when extension is enabled', async function (assert) {
     // given
-    const startCheckingExtensionIsEnabledStub = sinon.stub();
-    const stopCheckingExtensionIsEnabledStub = sinon.stub();
-
-    class PixCompanionStub extends Service {
-      startCheckingExtensionIsEnabled = startCheckingExtensionIsEnabledStub;
-      stopCheckingExtensionIsEnabled = stopCheckingExtensionIsEnabledStub;
-      isExtensionEnabled = true;
-    }
-
-    this.owner.register('service:pix-companion', PixCompanionStub);
-
-    const certificationCandidateSubscription = {};
+    const model = {
+      certificationCandidateSubscription: {},
+      certificationCandidate: {},
+    };
 
     // when
-    const screen = await render(
-      <template>
-        <CertificationsStart @certificationCandidateSubscription={{certificationCandidateSubscription}} />
-      </template>,
-    );
+    const screen = await render(<template><CertificationsStart @model={{model}} /></template>);
 
     // then
     assert.dom(screen.queryByRole('heading', { level: 1, name: t('pages.certification-start.first-title') })).exists();
@@ -49,14 +37,13 @@ module('Integration | Component | Certifications | start', function (hooks) {
 
     this.owner.register('service:pix-companion', PixCompanionStub);
 
-    const certificationCandidateSubscription = {};
+    const model = {
+      certificationCandidateSubscription: {},
+      certificationCandidate: {},
+    };
 
     // when
-    const screen = await render(
-      <template>
-        <CertificationsStart @certificationCandidateSubscription={{certificationCandidateSubscription}} />
-      </template>,
-    );
+    const screen = await render(<template><CertificationsStart @model={{model}} /></template>);
 
     // then
     assert

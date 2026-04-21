@@ -1,8 +1,10 @@
 import PixButton from '@1024pix/pix-ui/components/pix-button';
+import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixCode from '@1024pix/pix-ui/components/pix-code';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixLabel from '@1024pix/pix-ui/components/pix-label';
 import PixNotificationAlert from '@1024pix/pix-ui/components/pix-notification-alert';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -10,9 +12,18 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 
+const CODE_LENGTH = 6;
+
+const VALID_CERTIFICATION_LOCALES = {
+  FRENCH_FRANCE: 'fr-fr',
+  FRENCH: 'fr',
+  ENGLISH: 'en',
+};
+
 export default class CertificationStarter extends Component {
   @service store;
   @service router;
+  @service currentDomain;
   @service currentUser;
   @service intl;
   @service focusedCertificationChallengeWarningManager;
@@ -26,17 +37,66 @@ export default class CertificationStarter extends Component {
   @tracked certificationCourse = null;
   @tracked validationStatus = 'default';
   @tracked isFormLoading = false;
+  @tracked selectedLanguage = this._isOrgDomain
+    ? VALID_CERTIFICATION_LOCALES.FRENCH
+    : VALID_CERTIFICATION_LOCALES.FRENCH_FRANCE;
+  @tracked hasCandidateConfirmedLanguage = !this._isOrgDomain;
 
   get accessCode() {
     return this.inputAccessCode.toUpperCase();
   }
 
+  get isAccessCodeFullyFilled() {
+    return this.accessCode.length === CODE_LENGTH;
+  }
+
+  get shouldDisplayLanguageSelector() {
+    return this._isOrgDomain && !this.args.model.certificationCandidate.hasStartedTest;
+  }
+
+  get isSubmitButtonDisabled() {
+    return (
+      (!this.args.model.certificationCandidate.hasStartedTest &&
+        (!this.isAccessCodeFullyFilled || !this.hasCandidateConfirmedLanguage)) ||
+      (!this.isAccessCodeFullyFilled && this.args.model.certificationCandidate.hasStartedTest)
+    );
+  }
+
+  get _isOrgDomain() {
+    return !this.currentDomain.isFranceDomain;
+  }
+
+  get languageOptions() {
+    return [
+      {
+        value: VALID_CERTIFICATION_LOCALES.FRENCH,
+        label: this.intl.t('pages.certification-start.language-selector.options.french'),
+      },
+      {
+        value: VALID_CERTIFICATION_LOCALES.ENGLISH,
+        label: this.intl.t('pages.certification-start.language-selector.options.english'),
+      },
+    ];
+  }
+
   get complementarySubscriptionLabel() {
-    return this.args.certificationCandidateSubscription.enrolledDoubleCertificationLabel;
+    return this.args.model.certificationCandidateSubscription.enrolledDoubleCertificationLabel;
   }
 
   get eligibilityState() {
-    return this.args.certificationCandidateSubscription.isEligibleToDoubleCertification ? 'eligible' : 'non-eligible';
+    return this.args.model.certificationCandidateSubscription.isEligibleToDoubleCertification
+      ? 'eligible'
+      : 'non-eligible';
+  }
+
+  @action
+  setLanguage(value) {
+    this.selectedLanguage = value;
+  }
+
+  @action
+  onFormCheckToggle(event) {
+    this.hasCandidateConfirmedLanguage = event.target.checked;
   }
 
   @action
@@ -70,7 +130,8 @@ export default class CertificationStarter extends Component {
 
     const newCertificationCourse = this.store.createRecord('certification-course', {
       accessCode: this.accessCode,
-      sessionId: this.args.certificationCandidateSubscription.sessionId,
+      sessionId: this.args.model.certificationCandidateSubscription.sessionId,
+      locale: this.selectedLanguage,
     });
     try {
       await newCertificationCourse.save();
@@ -116,7 +177,7 @@ export default class CertificationStarter extends Component {
     <section class="certification-starter">
       <h1 class="certification-start-page__title">{{t "pages.certification-start.first-title"}}</h1>
 
-      {{#if @certificationCandidateSubscription.displaySubscriptionInformation}}
+      {{#if @model.certificationCandidateSubscription.displaySubscriptionInformation}}
         <div class="certification-starter-subscriptions">
           <div class="certification-starter-subscriptions-container">
             <p class="certification-starter-subscriptions-container-title">
@@ -132,7 +193,7 @@ export default class CertificationStarter extends Component {
               {{this.complementarySubscriptionLabel}}
             </span>
           </div>
-          {{#unless @certificationCandidateSubscription.isEligibleToDoubleCertification}}
+          {{#unless @model.certificationCandidateSubscription.isEligibleToDoubleCertification}}
             <PixNotificationAlert @type="warning" @withIcon={{true}}>
               {{t
                 "pages.certification-start.non-eligible-subscription"
@@ -143,23 +204,51 @@ export default class CertificationStarter extends Component {
         </div>
       {{/if}}
 
-      <form class="certification-start-page__form" onSubmit={{this.submit}} autocomplete="off">
-        <PixLabel for="certificationStarterSessionCode" @requiredLabel={{t "common.form.mandatory"}}>
-          {{t "pages.certification-start.access-code"}}
-        </PixLabel>
-        <PixCode
-          @id="certificationStarterSessionCode"
-          @length="6"
-          @requiredLabel={{true}}
-          @value={{this.inputAccessCode}}
-          @validationStatus={{this.validationStatus}}
-          @errorMessage={{this.validationErrorMessage}}
-          {{on "keyup" this.clearErrorMessage}}
-          {{on "input" this.handleAccessCodeInput}}
-        />
+      <form class="certification-start__form" onSubmit={{this.submit}} autocomplete="off">
+        {{#if this.shouldDisplayLanguageSelector}}
+          <PixSelect
+            @onChange={{this.setLanguage}}
+            @value={{this.selectedLanguage}}
+            @options={{this.languageOptions}}
+            @hideDefaultOption={{true}}
+            @iconName="language"
+          >
+            <:label>{{t "pages.certification-start.language-selector.label"}}</:label>
+            <:default as |language|>{{language.label}}</:default>
+          </PixSelect>
+
+          <PixCheckbox
+            @class="certification-start-form__lang-confirm-checkbox"
+            @type="checkbox"
+            @variant="modulix"
+            @checked={{this.hasCandidateConfirmedLanguage}}
+            {{on "change" this.onFormCheckToggle}}
+          >
+            <:label>
+              {{t "pages.certification-start.language-selector.confirmation-label" htmlSafe=true}}
+            </:label>
+          </PixCheckbox>
+        {{/if}}
+
+        <div class="certification-start-form__code">
+          <PixLabel class="label" for="certificationStarterSessionCode" @requiredLabel={{t "common.form.mandatory"}}>
+            {{t "pages.certification-start.access-code"}}
+          </PixLabel>
+
+          <PixCode
+            class="input"
+            @id="certificationStarterSessionCode"
+            @length={{CODE_LENGTH}}
+            @value={{this.inputAccessCode}}
+            @validationStatus={{this.validationStatus}}
+            @errorMessage={{this.validationErrorMessage}}
+            {{on "keyup" this.clearErrorMessage}}
+            {{on "input" this.handleAccessCodeInput}}
+          />
+        </div>
 
         {{#if this.apiErrorMessage}}
-          <PixNotificationAlert @type="error" class="certification-start-page__error-message">
+          <PixNotificationAlert @type="error" class="certification-start-form__error-message">
             {{this.apiErrorMessage}}
           </PixNotificationAlert>
         {{/if}}
@@ -170,7 +259,12 @@ export default class CertificationStarter extends Component {
           </details>
         {{/if}}
 
-        <PixButton @type="submit" @isLoading={{this.isFormLoading}} class="certification-start-page__field-button">
+        <PixButton
+          @type="submit"
+          @isLoading={{this.isFormLoading}}
+          class="certification-start-form__submit-button"
+          @isDisabled={{this.isSubmitButtonDisabled}}
+        >
           {{t "pages.certification-start.actions.submit"}}
         </PixButton>
       </form>

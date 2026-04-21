@@ -4,5 +4,5 @@ import Start from 'mon-pix/components/certifications/start';
 <template>
   {{pageTitle (t "pages.certification-start.title")}}
 
-  <Start @certificationCandidateSubscription={{@model}} />
+  <Start @model={{@model}} />
 </template>

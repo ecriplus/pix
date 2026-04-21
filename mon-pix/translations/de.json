@@ -954,6 +954,14 @@
         }
       },
       "first-title": "Sie beginnen Ihren Zertifizierungstest",
+      "language-selector": {
+        "confirmation-label": "Ich bestätige, dass ich mit der ausgewählten Sprache für die Beantwortung der Fragen vertraut bin.'<br>'Die Sprachauswahl ist '<strong>'endgültig'</strong>'.",
+        "label": "Zertifizierungssprache",
+        "options": {
+          "english": "Englisch - EN",
+          "french": "Französisch - FR"
+        }
+      },
       "link-to-user-certification": "Meine Zertifizierungen ansehen",
       "non-eligible-subscription": "Sie sind nicht für {complementarySubscriptionLabel} qualifiziert. Sie können dennoch Ihre Pix-Zertifizierung ablegen.",
       "title": "An einer Zertifizierungssitzung teilnehmen"

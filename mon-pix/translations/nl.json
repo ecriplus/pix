@@ -954,6 +954,14 @@
         }
       },
       "first-title": "Je staat op het punt om aan je certificeringstest te beginnen",
+      "language-selector": {
+        "confirmation-label": "Ik bevestig dat ik me op mijn gemak voel in de geselecteerde taal om de vragen te beantwoorden.'<br>'De taalkeuze is '<strong>'definitief'</strong>'.",
+        "label": "Certificeringstaal",
+        "options": {
+          "english": "Engels - EN",
+          "french": "Frans - FR"
+        }
+      },
       "link-to-user-certification": "Bekijk mijn certificaten",
       "non-eligible-subscription": "Je komt niet in aanmerking voor {complementarySubscriptionLabel}. Je kunt echter wel je Pix-certificering behalen.",
       "title": "Doe mee aan een certificeringssessie"
