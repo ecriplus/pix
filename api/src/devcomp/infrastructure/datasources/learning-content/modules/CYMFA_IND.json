@@ -807,7 +807,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.&nbsp; </p><p> Une <strong>empreinte digitale</strong> est un</p>"
+                    "content": "<p>.</p><p><br>Une <strong>empreinte digitale</strong> est un</p>"
                   },
                   {
                     "type": "select",
@@ -836,7 +836,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p>Un <strong>code à 6 chiffre reçu par sms</strong>&nbsp;est un</p>"
+                    "content": "<p>.</p><p><br>Un <strong>code à 6 chiffre reçu par sms</strong>&nbsp;est un</p>"
                   },
                   {
                     "type": "select",
@@ -865,7 +865,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p>Un <strong>code PIN</strong>&nbsp;est un</p>"
+                    "content": "<p>.</p><p><br>Un <strong>code PIN</strong>&nbsp;est un</p>"
                   },
                   {
                     "type": "select",
@@ -894,7 +894,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p>Une <strong>détection de visage</strong>&nbsp;est un</p>"
+                    "content": "<p>.</p><p><br>Une <strong>détection de visage</strong>&nbsp;est un</p>"
                   },
                   {
                     "type": "select",
@@ -923,7 +923,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>.</p><p>Un <strong>schéma de déverrouillage</strong> est un</p>"
+                    "content": "<p>.</p><p><br>Un <strong>schéma de déverrouillage</strong> est un</p>"
                   },
                   {
                     "type": "select",
