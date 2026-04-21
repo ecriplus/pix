@@ -312,35 +312,35 @@
                     "id": "1",
                     "content": "<p>En comparant les caractéristiques des fichiers et programmes à celles de logiciels malveillants déjà identifiés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! Comme tout fichier, chaque logiciel malveillant possède des caractéristiques qui lui sont propres. On appelle cela&nbsp;: la <strong>signature</strong> du logiciel malveillant.<br><br>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
+                      "diagnosis": "<p>Effectivement ! Comme tout fichier, chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres. On appelle cela&nbsp;: la <strong>signature</strong> du logiciel malveillant.<br><br>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>En analysant uniquement les noms des fichiers et programmes ainsi que leurs extensions.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>En supprimant tous les fichiers et programmes qu’il ne reconnaît pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>En vérifiant si le fichier ou le programme est utilisé par beaucoup d’autres personnes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   }
                 ],
@@ -457,21 +457,21 @@
                           "id": "1",
                           "content": "<p>Fermer la notification.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser tant qu’elle contient des éléments dangereux.</p>"
+                            "diagnosis": "<p>Ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Débrancher la clé et ne plus l’utiliser.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser tant qu’elle contient des éléments dangereux.</p>"
+                            "diagnosis": "<p>Effectivement, ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser tant qu’elle contient des éléments dangereux.</p>"
+                            "diagnosis": "<p>Ici la notification transmet une information importante à Philippe&nbsp;: il&nbsp; ya un problème avec la clé USB. Mieux vaut ne plus l’utiliser.</p>"
                           }
                         }
                       ],
