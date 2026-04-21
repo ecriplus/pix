@@ -1,5 +1,6 @@
 import * as combinedCourseDetailsSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-details-serializer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course-details', function () {
   it('#serialize', async function () {

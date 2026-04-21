@@ -1,6 +1,7 @@
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Domain | UseCases | get-campaign-parameters-for-simulator', function () {
   describe('when the campaign does not exist', function () {

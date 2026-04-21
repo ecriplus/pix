@@ -1,5 +1,6 @@
 import { Area } from '../../../../../src/shared/domain/models/Area.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Shared | Unit | domain | models | Area ', function () {
   it('sorts given competences by Index', function () {

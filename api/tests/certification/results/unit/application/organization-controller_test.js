@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { organizationController } from '../../../../../src/certification/results/application/organization-controller.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Course | Unit | Application | Organizations | organization-controller', function () {

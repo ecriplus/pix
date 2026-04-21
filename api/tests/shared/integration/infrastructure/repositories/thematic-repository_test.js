@@ -1,5 +1,6 @@
 import * as thematicRepository from '../../../../../src/shared/infrastructure/repositories/thematic-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | thematic-repository', function () {
   const thematicData0 = {

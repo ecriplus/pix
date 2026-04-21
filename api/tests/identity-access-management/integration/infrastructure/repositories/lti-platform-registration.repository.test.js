@@ -1,6 +1,7 @@
 import { ltiPlatformRegistrationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/lti-platform-registration.repository.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | lti-platform-registration', function () {
   describe('#findByClientId', function () {

@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { getNextChallengeForDemo } from '../../../../../src/evaluation/domain/usecases/get-next-challenge-for-demo.js';
 import { AssessmentEndedError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo', function () {
   describe('#get-next-challenge-for-demo', function () {

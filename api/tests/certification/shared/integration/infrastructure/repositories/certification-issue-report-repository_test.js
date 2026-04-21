@@ -7,7 +7,8 @@ import {
 } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import * as certificationIssueReportRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Certification Issue Report', function () {

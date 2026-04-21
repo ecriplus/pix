@@ -6,7 +6,8 @@ import { CertificationChallengeLiveAlertStatus } from '../../../../../src/certif
 import { CertificationCompanionLiveAlertStatus } from '../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const competenceId = 'recCompetence';

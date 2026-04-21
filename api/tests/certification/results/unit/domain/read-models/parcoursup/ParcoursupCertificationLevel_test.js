@@ -1,5 +1,6 @@
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Read-models | Parcoursup | ParcoursupCertificationLevel', function () {
   let translate;

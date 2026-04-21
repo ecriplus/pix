@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { BadgeToAttach } from '../../../../../../src/certification/configuration/domain/models/BadgeToAttach.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | BadgeToAttach', function () {
   let clock;

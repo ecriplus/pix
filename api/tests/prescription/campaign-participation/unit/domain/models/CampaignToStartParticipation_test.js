@@ -1,5 +1,6 @@
 import { CampaignTypes } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | CampaignToStartParticipation', function () {
   describe('getters', function () {

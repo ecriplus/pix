@@ -1,6 +1,7 @@
 import * as centerRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/center-repository.js';
 import { CenterTypes } from '../../../../../../src/certification/enrolment/domain/models/CenterTypes.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Configuration | Integration | Repository | center-repository', function () {
   describe('#addToWhitelistByExternalIds', function () {

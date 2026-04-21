@@ -1,5 +1,6 @@
 import { organizationInvitationSerializer } from '../../../../../../src/team/infrastructure/serializers/jsonapi/organization-invitation.serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | JSONAPI | organization-invitation-serializer', function () {
   describe('#serialize', function () {

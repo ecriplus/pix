@@ -1,5 +1,6 @@
 import { FlashAssessmentAlgorithmChallengesBetweenCompetencesRule } from '../../../../../../src/certification/evaluation/domain/models/FlashAssessmentAlgorithmChallengesBetweenCompetencesRule.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | FlashAssessmentAlgorithm | FlashAssessmentAlgorithmChallengesBetweenCompetencesRule', function () {
   describe('#isApplicable', function () {

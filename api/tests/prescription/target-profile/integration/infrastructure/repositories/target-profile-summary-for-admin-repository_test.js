@@ -1,6 +1,7 @@
 import * as targetProfileSummaryForAdminRepository from '../../../../../../src/prescription/target-profile/infrastructure/repositories/target-profile-summary-for-admin-repository.js';
 import { TargetProfile } from '../../../../../../src/shared/domain/models/TargetProfile.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | Target-profile-summary-for-admin', function () {
   describe('#findPaginatedFiltered', function () {

@@ -1,7 +1,8 @@
 import Joi from 'joi';
 
 import { clientApplicationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/client-application.repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Identity Access Management | Infrastructure | Repository | client-application', function () {

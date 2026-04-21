@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { DataProtectionOfficer } from '../../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
 import { createCertificationCenter } from '../../../../../src/organizational-entities/domain/usecases/create-certification-center.usecase.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Organizational Entities | Domain | UseCase | create-certification-center', function () {
   describe('#createCertificationCenter', function () {

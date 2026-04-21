@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { generateUsernameWithTemporaryPassword } from '../../../../../../src/prescription/organization-learner/domain/usecases/generate-username-with-temporary-password.js';
 import { UserNotAuthorizedToGenerateUsernamePasswordError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | generate-username-with-temporary-password', function () {

@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { updateCertificationCenterReferer } from '../../../../../src/team/domain/usecases/update-certification-center-referer.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | update-certification-center-referer', function () {
   context('when there is already a referer', function () {

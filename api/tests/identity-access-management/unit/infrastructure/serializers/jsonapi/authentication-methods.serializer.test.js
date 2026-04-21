@@ -1,6 +1,7 @@
 import * as OidcIdentityProviders from '../../../../../../src/identity-access-management/domain/constants/oidc-identity-providers.js';
 import { authenticationMethodsSerializer } from '../../../../../../src/identity-access-management/infrastructure/serializers/jsonapi/authentication-methods.serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Identity Access Management | Infrastructure | Serializer | JSONAPI | authentication-methods', function () {
   describe('#serialize()', function () {

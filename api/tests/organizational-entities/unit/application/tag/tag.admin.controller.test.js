@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { tagAdminController } from '../../../../../src/organizational-entities/application/tag/tag.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | Tags', function () {

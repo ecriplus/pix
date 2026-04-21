@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { scoreV3Certification } from '../../../../../../src/certification/evaluation/domain/usecases/score-v3-certification.js';
 import { SessionAlreadyPublishedError } from '../../../../../../src/certification/session-management/domain/errors.js';
 import { NotFinalizedSessionError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 import { generateAnswersForChallenges, generateChallengeList } from '../../../../shared/fixtures/challenges.js';
 

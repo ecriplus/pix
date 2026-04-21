@@ -4,7 +4,8 @@ import { ChallengeNeutralized } from '../../../../../../src/certification/evalua
 import { neutralizeChallenge } from '../../../../../../src/certification/evaluation/domain/usecases/neutralize-challenge.js';
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Evaluation | Unit | UseCase | neutralize-challenge', function () {
   it('neutralizes a challenge by its recId', async function () {

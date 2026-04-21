@@ -2,7 +2,8 @@ import { LegalDocument } from '../../../../../src/legal-documents/domain/models/
 import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
 import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import * as legalDocumentRepository from '../../../../../src/legal-documents/infrastructure/repositories/legal-document.repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 const { PIX_ORGA, PIX_APP } = LegalDocumentService.VALUES;
 const { TOS } = LegalDocumentType.VALUES;

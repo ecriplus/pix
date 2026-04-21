@@ -1,6 +1,7 @@
 import * as serializer from '../../../../../../src/profile/infrastructure/serializers/jsonapi/profile-serializer.js';
 import { MAX_REACHABLE_LEVEL } from '../../../../../../src/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | JSONAPI | profile', function () {
   describe('#serialize()', function () {

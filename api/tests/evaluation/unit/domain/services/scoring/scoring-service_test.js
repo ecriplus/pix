@@ -4,7 +4,8 @@ import {
   MAX_REACHABLE_PIX_BY_COMPETENCE,
   PIX_COUNT_BY_LEVEL,
 } from '../../../../../../src/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Service | Scoring Service', function () {
   describe('#calculateScoringInformationForCompetence', function () {

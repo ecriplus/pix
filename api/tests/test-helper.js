@@ -28,8 +28,6 @@ import * as thematicRepository from '../src/shared/infrastructure/repositories/t
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
-import * as domainBuilder from './tooling/domain-builder/factory/index.js';
-import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -97,13 +95,4 @@ after(async function () {
 /* eslint-enable mocha/no-top-level-hooks */
 
 // eslint-disable-next-line mocha/no-exports
-export {
-  databaseBuilder,
-  datamartBuilder,
-  datamartKnex,
-  datawarehouseKnex,
-  domainBuilder,
-  expect,
-  knex,
-  learningContentBuilder,
-};
+export { databaseBuilder, datamartBuilder, datamartKnex, datawarehouseKnex, expect, knex };

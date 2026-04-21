@@ -1,4 +1,6 @@
 import lodash from 'lodash';
+
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 const { omit, pick } = lodash;
 
 import sinon from 'sinon';
@@ -15,7 +17,7 @@ import {
   CertificationCenterMembership,
 } from '../../../../../src/team/domain/models/CertificationCenterMembership.js';
 import { certificationCenterMembershipRepository } from '../../../../../src/team/infrastructure/repositories/certification-center-membership.repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Team | Infrastructure | Repository | Certification Center Membership', function () {

@@ -4,7 +4,8 @@ import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/d
 import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
   it('#serialize', async function () {

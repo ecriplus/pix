@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { findCertificatesForDivision } from '../../../../../../src/certification/results/domain/usecases/find-certificates-for-division.js';
 import { NoCertificateForDivisionError } from '../../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | find-certification-attestations-for-division', function () {

@@ -1,5 +1,6 @@
 import * as organizationLearnerTypeSerializer from '../../../../../../src/organizational-entities/infrastructure/serializers/jsonapi/organization-learner-type/organization-learner-type-serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | organization-learner-type-serializer', function () {
   describe('#serialize', function () {

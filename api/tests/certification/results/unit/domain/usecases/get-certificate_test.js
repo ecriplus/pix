@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { getCertificate } from '../../../../../../src/certification/results/domain/usecases/get-certificate.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | get-certificate', function () {
   it('should return the certificate enhanced with result competence tree', async function () {

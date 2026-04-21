@@ -1,5 +1,6 @@
 import * as administrationTeamRepository from '../../../../../src/organizational-entities/infrastructure/repositories/administration-team-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | administration-team-repository', function () {
   describe('#findAll', function () {

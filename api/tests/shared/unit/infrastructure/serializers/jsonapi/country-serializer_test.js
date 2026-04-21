@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/shared/infrastructure/serializers/jsonapi/country-serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Shared | Serializers | country-serializer', function () {
   describe('#serialize', function () {

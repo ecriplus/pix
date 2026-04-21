@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import { ComplementaryCertificationCourseResult } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationCourseResult.js';
 import * as complementaryCertificationCourseResultRepository from '../../../../../../src/certification/shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Shared | Integration | Repositories | complementary-certification-courses-result-repository', function () {
   describe('#getPixSourceResultByComplementaryCertificationCourseId', function () {

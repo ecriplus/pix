@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../../src/prescription/campaign/infrastructure/serializers/jsonapi/campaign-assessment-result-minimal-serializer.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | JSONAPI | campaign-assessment-result-minimal-serializer', function () {
   describe('#serialize campaign-assessment-result-minimal list', function () {

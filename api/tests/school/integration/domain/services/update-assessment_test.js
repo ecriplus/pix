@@ -4,7 +4,8 @@ import { updateAssessment } from '../../../../../src/school/domain/services/upda
 import * as activityRepository from '../../../../../src/school/infrastructure/repositories/activity-repository.js';
 import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Usecase | update-assessment', function () {
   describe('#updateAssessment', function () {

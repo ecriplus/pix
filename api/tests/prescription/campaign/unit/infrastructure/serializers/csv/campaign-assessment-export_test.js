@@ -1,11 +1,13 @@
 import stream from 'node:stream';
 import { text } from 'node:stream/consumers';
 
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
+
 const { PassThrough } = stream;
 
 import { CampaignAssessmentExport } from '../../../../../../../src/prescription/campaign/infrastructure/serializers/csv/campaign-assessment-export.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
 
 describe('Unit | Serializer | CSV | campaign-assessment-export', function () {
   describe('#export', function () {

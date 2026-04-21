@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { getV3CertificationCourseDetailsForAdministration } from '../../../../../../src/certification/session-management/domain/usecases/get-v3-certification-course-details-for-administration.js';
 import { AnswerStatus } from '../../../../../../src/shared/domain/models/AnswerStatus.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | get-certification-course-details-for-administration', function () {
   it('should return the details with the associated competence name and number of challenges', async function () {

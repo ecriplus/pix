@@ -5,7 +5,8 @@ import { PoleEmploiSending } from '../../../../src/prescription/campaign-partici
 import { insertMissingPoleEmploiSendingFromDate } from '../../../../src/prescription/scripts/insert-missing-pole-emploi-sending-from-date.js';
 import { CampaignParticipationStatuses, CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../tooling/learning-content-builder/index.js';
 import { catchErr } from '../../../tooling/test-utils/error.js';
 
 describe('Script | Prod | Delete Organization Learners From Organization', function () {

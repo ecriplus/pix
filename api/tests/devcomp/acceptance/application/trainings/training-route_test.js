@@ -1,5 +1,6 @@
 import { createServer } from '../../../../../server.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Controller | training-controller', function () {

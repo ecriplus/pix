@@ -4,7 +4,8 @@ import {
   AdminCombinedCourseBlueprint,
 } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', function () {
   describe('#constructor', function () {

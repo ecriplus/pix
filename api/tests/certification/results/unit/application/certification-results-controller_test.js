@@ -5,7 +5,8 @@ import { CertificationResultsLinkByEmailToken } from '../../../../../src/certifi
 import { CertificationResultsLinkToken } from '../../../../../src/certification/results/domain/models/tokens/CertificationResultsLinkToken.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Results | Unit | Controller | certification results', function () {

@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { createServer } from '../../../../../server.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,

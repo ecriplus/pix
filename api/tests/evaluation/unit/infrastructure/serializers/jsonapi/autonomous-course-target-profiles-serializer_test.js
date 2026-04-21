@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/evaluation/infrastructure/serializers/jsonapi/autonomous-course-target-profiles-serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Serializer | JSONAPI | autonomous-course-target-profile-serializer', function () {
   describe('#serialize', function () {

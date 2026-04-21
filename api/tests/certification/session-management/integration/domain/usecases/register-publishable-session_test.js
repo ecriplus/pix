@@ -1,6 +1,8 @@
 import { usecases } from '../../../../../../src/certification/session-management/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../../tooling/learning-content-builder/index.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Session Management | Integration | Domain | UseCase | register-publishable-session ', function () {

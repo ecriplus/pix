@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { InvalidLtiPlatformRegistrationError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { ltiPlatformRegistrationRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/lti-platform-registration.repository.js';
-import { domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Identity Access Management | Domain | Usecases | register-lti-platform', function () {
   it('discovers platform’s open ID configuration and register Pix configuration on the platform', async function () {

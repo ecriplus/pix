@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationChallenge } from '../../../../../../src/certification/shared/domain/models/CertificationChallenge.js';
 import * as certificationChallengeRepository from '../../../../../../src/certification/shared/infrastructure/repositories/certification-challenge-repository.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | Certification Challenge', function () {
   describe('#save', function () {

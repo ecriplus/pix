@@ -1,6 +1,7 @@
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import * as supOrganizationLearnerRepository from '../../../../../../src/prescription/learner-management/infrastructure/repositories/sup-organization-learner-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Infrastructure | Repository | sup-organization-learner-repository', function () {
   describe('#findOneByStudentNumber', function () {

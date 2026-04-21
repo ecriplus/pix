@@ -1,5 +1,6 @@
 import { getCleaCertifiedCandidateCsv } from '../../../../../../../../src/certification/results/infrastructure/utils/csv/certification-results/get-clea-certified-candidate-csv.js';
-import { domainBuilder, expect } from '../../../../../../../test-helper.js';
+import { expect } from '../../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Application | UseCases | certification-results | get-clea-certified-candidate-csv', function () {
   context('#getCleaCertifiedCandidateCsv', function () {

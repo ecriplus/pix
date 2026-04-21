@@ -7,7 +7,8 @@ import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.j
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {
   context('when campaign is of type ASSESSMENT', function () {

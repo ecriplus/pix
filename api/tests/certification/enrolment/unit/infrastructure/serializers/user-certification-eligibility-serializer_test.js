@@ -1,5 +1,6 @@
 import * as serializer from '../../../../../../src/certification/enrolment/infrastructure/serializers/user-certification-eligibility-serializer.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Enrolment | Unit | Serializer | user-certification-eligibility-serializer', function () {
   describe('#serialize()', function () {

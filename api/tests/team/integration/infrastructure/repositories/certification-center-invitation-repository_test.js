@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import * as certificationCenterInvitationRepository from '../../../../../src/team/infrastructure/repositories/certification-center-invitation-repository.js';
-import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Team | Infrastructure | Repositories | CertificationCenterInvitationRepository', function () {
   let clock, now;

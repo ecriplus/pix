@@ -1,7 +1,8 @@
 import { JurySession } from '../../../../../../src/certification/session-management/domain/models/JurySession.js';
 import { SESSION_STATUSES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { CERTIFICATION_CENTER_TYPES } from '../../../../../../src/shared/domain/constants.js';
-import { domainBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Certification | Session-Management | Domain | Models | JurySession', function () {
   it('should return a jury session', function () {

@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { certificationCenterMembershipController } from '../../../../../src/team/application/certification-center-membership/certification-center-membership.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Team | Application | Admin | Controller | CertificationCenterMembership', function () {

@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import * as usecase from '../../../../../src/shared/application/usecases/checkOrganizationIsNotManagingStudents.js';
-import { domainBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Application | Use Case | checkOrganizationIsNotManagingStudents', function () {
   context('When organization is not managing students', function () {

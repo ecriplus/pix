@@ -2,7 +2,8 @@ import { knex } from '../../../../../../db/knex-database-connection.js';
 import * as calibratedChallengeRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/calibrated-challenge-repository.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect } from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Evaluation | Integration | Repository | calibrated-challenge-repository', function () {

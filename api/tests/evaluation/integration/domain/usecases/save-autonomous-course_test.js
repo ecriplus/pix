@@ -6,7 +6,9 @@ import {
   NotFoundError,
   TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
 } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, domainBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Usecases | Save autonomous course', function () {
