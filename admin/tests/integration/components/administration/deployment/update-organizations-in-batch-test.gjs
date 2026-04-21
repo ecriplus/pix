@@ -80,42 +80,6 @@ module('Integration | Component |  administration/update-organizations-in-batch'
       );
     });
 
-    test('it displays an error when parent organization not found', async function (assert) {
-      // given
-      window.fetch.resolves(
-        fetchResponse({
-          body: {
-            errors: [
-              {
-                code: 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_PARENT_ORGANIZATION',
-                meta: { organizationId: '123' },
-              },
-            ],
-          },
-          status: 409,
-        }),
-      );
-
-      // when
-      const screen = await render(
-        <template><UpdateOrganizationsInBatch /><PixToastContainer @closeButtonAriaLabel="Close" /></template>,
-      );
-      const input = await screen.findByLabelText(
-        t('components.administration.update-organizations-in-batch.upload-button'),
-      );
-      await triggerEvent(input, 'change', { files: [file] });
-
-      // then
-      assert.ok(
-        await screen.findByText(
-          t(
-            'components.administration.update-organizations-in-batch.notifications.errors.parent-organization-not-found',
-            { organizationId: '123' },
-          ),
-        ),
-      );
-    });
-
     test('it displays an error when DPO email invalid', async function (assert) {
       // given
       window.fetch.resolves(

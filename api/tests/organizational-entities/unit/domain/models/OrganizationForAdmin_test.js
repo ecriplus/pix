@@ -1064,22 +1064,6 @@ describe('Unit | Organizational Entities | Domain | Model | OrganizationForAdmin
       expect(organizationToUpdate).to.deep.equal(expectedOrganization);
     });
 
-    it('updates the organization parent identifier', function () {
-      // given
-      const parentOrganizationId = '1024';
-      const organizationToUpdate = domainBuilder.buildOrganizationForAdmin();
-
-      // when
-      organizationToUpdate.updateFromOrganizationBatchUpdateDto(
-        new OrganizationBatchUpdateDTO({ id: '1', parentOrganizationId }),
-      );
-
-      // then
-      const expectedOrganization = domainBuilder.buildOrganizationForAdmin({ parentOrganizationId });
-      expect(organizationToUpdate.parentOrganizationId).to.equal(parentOrganizationId);
-      expect(organizationToUpdate).to.deep.equal(expectedOrganization);
-    });
-
     it('updates the organization data protection officer first name', function () {
       // given
       const dataProtectionOfficerFirstName = 'Adam';

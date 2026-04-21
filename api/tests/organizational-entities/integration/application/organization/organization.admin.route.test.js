@@ -9,7 +9,6 @@ import {
   OrganizationBatchUpdateError,
   OrganizationNotFound,
   TagNotFoundError,
-  UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { CsvImportError, NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -201,21 +200,6 @@ describe('Integration | Organizational Entities | Application | Route | Admin | 
 
           // then
           expect(response.statusCode).to.equal(404);
-        });
-      });
-
-      context('when it is not able to link to the parent organization', function () {
-        it('returns a 409 HTTP status code', async function () {
-          // given
-          organizationAdminController.updateOrganizationsInBatch.rejects(
-            new UnableToAttachChildOrganizationToParentOrganizationError(),
-          );
-
-          // when
-          const response = await httpTestServer.request(method, url, payload);
-
-          // then
-          expect(response.statusCode).to.equal(409);
         });
       });
 

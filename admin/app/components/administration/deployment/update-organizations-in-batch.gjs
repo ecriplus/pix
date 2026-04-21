@@ -47,13 +47,6 @@ export default class UpdateOrganizationsInBatch extends Component {
               error.meta,
             ),
           });
-        } else if (error.code === 'UNABLE_TO_ATTACH_CHILD_ORGANIZATION_TO_PARENT_ORGANIZATION') {
-          return this.pixToast.sendErrorNotification({
-            message: this.intl.t(
-              'components.administration.update-organizations-in-batch.notifications.errors.parent-organization-not-found',
-              error.meta,
-            ),
-          });
         } else if (error.code === 'DPO_EMAIL_INVALID') {
           return this.pixToast.sendErrorNotification({
             message: this.intl.t(

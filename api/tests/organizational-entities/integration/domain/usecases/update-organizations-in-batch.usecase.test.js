@@ -5,7 +5,6 @@ import {
   DpoEmailInvalid,
   OrganizationLearnerTypeNotFound,
   OrganizationNotFound,
-  UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../../../src/organizational-entities/domain/errors.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
@@ -80,8 +79,8 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       // given
       const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
       const fileData = `${headers}
-      ${organization1.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234;99100;12
-      ${organization2.id};New Name;;;;;;;Cali;;5678;99100;34`;
+      ${organization1.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;1234;99100;12
+      ${organization2.id};New Name;;;;;;Cali;;5678;99100;34`;
       filePath = await createTempFile('test.csv', fileData);
 
       // when
@@ -120,7 +119,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       // given
       const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
       const fileData = `${headers}
-      999999;;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;;`;
+      999999;;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;;`;
       filePath = await createTempFile('test.csv', fileData);
 
       // when
@@ -138,7 +137,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
       const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
       const fileData = `${headers}
-      ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;;`;
+      ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;;`;
       filePath = await createTempFile('test.csv', fileData);
 
       // when
@@ -156,7 +155,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
       const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
       const fileData = `${headers}
-      ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;99999;`;
+      ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;99999;`;
       filePath = await createTempFile('test.csv', fileData);
 
       // when
@@ -175,7 +174,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
         const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
         const fileData = `${headers}
-        ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;;`;
+        ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;;`;
         filePath = await createTempFile('test.csv', fileData);
 
         // when
@@ -195,7 +194,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
         const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
         const fileData = `${headers}
-        ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;;;`;
+        ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo@email.com;;;`;
         filePath = await createTempFile('test.csv', fileData);
 
         // when
@@ -209,26 +208,6 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
       });
     });
 
-    context('when parent organization does not exist', function () {
-      it('throws an UnableToAttachChildOrganizationToParentOrganizationError', async function () {
-        // given
-        const organization = databaseBuilder.factory.buildOrganization({ externalId: 999 });
-        await databaseBuilder.commit();
-
-        const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
-        const fileData = `${headers}
-        ${organization.id};;12;999999;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;1234;;`;
-        filePath = await createTempFile('test.csv', fileData);
-
-        // when
-        const error = await catchErr(usecases.updateOrganizationsInBatch)({ filePath });
-
-        // then
-        expect(error).to.be.instanceOf(UnableToAttachChildOrganizationToParentOrganizationError);
-        expect(error.meta.organizationId).to.equal(`${organization.id}`);
-      });
-    });
-
     context('when DPO email is not valid', function () {
       it('throws a DpoEmailInvalid', async function () {
         // given
@@ -237,7 +216,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
         const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
         const fileData = `${headers}
-        ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo;;;`;
+        ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;foo;;;`;
         filePath = await createTempFile('test.csv', fileData);
 
         // when
@@ -260,7 +239,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | update-orga
 
       const headers = ORGANIZATIONS_UPDATE_HEADER.columns.map(({ name }) => name).join(';');
       const fileData = `${headers}
-      ${organization.id};;12;;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;;5678`;
+      ${organization.id};;12;OIDC_EXAMPLE_NET;https://doc.url;;Troisjour;Adam;;;;5678`;
       filePath = await createTempFile('test.csv', fileData);
 
       // when

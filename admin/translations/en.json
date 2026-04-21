@@ -321,8 +321,7 @@
           "errors": {
             "data-protection-email-invalid": "DPO email format invalid \"{value}\" for the organization \"{organizationId}\".",
             "organization-batch-update-error": "An error occurred for organization \"{organizationId}\".",
-            "organization-not-found": "Organization id not found: \"{organizationId}\".",
-            "parent-organization-not-found": "Parent organization for \"{organizationId}\" not found."
+            "organization-not-found": "Organization id not found: \"{organizationId}\"."
           },
           "success": "The organisations have been modified."
         },
