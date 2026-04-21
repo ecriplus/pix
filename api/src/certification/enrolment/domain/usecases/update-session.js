@@ -23,7 +23,10 @@ const updateSession = async function ({ session, sessionRepository, sessionValid
     excludeSessionId: session.id,
   });
   if (sessionAlreadyExists) {
-    throw new AlreadyExistingEntityError('Une session avec les mêmes informations existe déjà.');
+    throw new AlreadyExistingEntityError(
+      'Une session avec les mêmes informations existe déjà.',
+      'SESSION_ALREADY_EXISTS',
+    );
   }
 
   const sessionToUpdate = await sessionRepository.get({ id: session.id });
