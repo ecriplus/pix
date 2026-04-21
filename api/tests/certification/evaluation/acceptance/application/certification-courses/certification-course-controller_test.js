@@ -2,14 +2,11 @@ import { createServer } from '../../../../../../server.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../../test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-  learningContentBuilder,
-} from '../../../../../test-helper.js';
+} from '../../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | API | Certification Course', function () {
   let server;

@@ -5,7 +5,8 @@ import * as moduleUnderTest from '../../../../src/school/application/school-rout
 import { Division } from '../../../../src/school/domain/models/Division.js';
 import { usecases } from '../../../../src/school/domain/usecases/index.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | school-router', function () {
   describe('GET /api/pix1d/schools/:code', function () {

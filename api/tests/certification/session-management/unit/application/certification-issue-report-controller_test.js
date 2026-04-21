@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { certificationIssueReportController } from '../../../../../src/certification/session-management/application/certification-issue-report-controller.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | certification-issue-report-controller', function () {
   describe('#deleteCertificationIssueReport', function () {

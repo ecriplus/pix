@@ -1,5 +1,6 @@
 import { createServer } from '../../../../server.js';
-import { expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | API | countries-controller', function () {
   let server;

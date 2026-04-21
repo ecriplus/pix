@@ -1,11 +1,6 @@
 import { createMaddoServer } from '../../../../../server.maddo.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import {
   buildOrganization,
   buildOrganizationLearner,
@@ -13,6 +8,10 @@ import {
   buildValidatedPublishedCertificationData,
   mockLearningContentCompetences,
 } from '../../../../tooling/domain-builder/factory/build-certifications-results-for-livret-scolaire.js';
+import {
+  generateAuthenticatedUserRequestHeaders,
+  generateValidRequestAuthorizationHeaderForApplication,
+} from '../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Results | Acceptance | Application | Livret Scolaire', function () {
   let server, options;

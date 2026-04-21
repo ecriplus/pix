@@ -2,11 +2,9 @@ import sinon from 'sinon';
 
 import { poleEmploiController } from '../../../../../src/prescription/campaign-participation/application/pole-emploi-controller.js';
 import * as moduleUnderTest from '../../../../../src/prescription/campaign-participation/application/pole-emploi-route.js';
-import {
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-  HttpTestServer,
-} from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Unit | Router | pole-emploi-router', function () {
   describe('GET /api/pole-emploi/envois', function () {

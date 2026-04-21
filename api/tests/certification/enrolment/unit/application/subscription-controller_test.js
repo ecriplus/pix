@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { subscriptionController } from '../../../../../src/certification/enrolment/application/subscription-controller.js';
 import { usecases } from '../../../../../src/certification/enrolment/domain/usecases/index.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Certification | Enrolment | Unit | Application | Controller | subscription', function () {
   describe('#getSubscription', function () {

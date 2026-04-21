@@ -6,7 +6,8 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const ROLES = PIX_ADMIN.ROLES;
 

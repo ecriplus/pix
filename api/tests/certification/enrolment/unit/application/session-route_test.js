@@ -4,7 +4,8 @@ import { sessionController } from '../../../../../src/certification/enrolment/ap
 import * as moduleUnderTest from '../../../../../src/certification/enrolment/application/session-route.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Enrolment | Unit | Application | Routes | session-route', function () {
   describe('POST /api/certification-centers/{certificationCenterId}/session', function () {

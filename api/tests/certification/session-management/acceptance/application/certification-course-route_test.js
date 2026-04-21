@@ -3,13 +3,8 @@ import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../src/certification/s
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 import { createSuccessfulCertificationCourse } from '../../../shared/fixtures/certification-course.js';
 
 describe('Certification | Session Management | Acceptance | Application | Routes | Certification Course', function () {

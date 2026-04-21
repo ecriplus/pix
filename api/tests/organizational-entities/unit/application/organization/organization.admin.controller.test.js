@@ -2,7 +2,9 @@ import sinon from 'sinon';
 
 import { organizationAdminController } from '../../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Unit | Organizational Entities | Application | Controller | Admin | organization', function () {
   describe('#addOrganizationFeatureInBatch', function () {

@@ -7,15 +7,9 @@ import { CampaignParticipationStatuses } from '../../../../../src/prescription/s
 import { MAX_REACHABLE_LEVEL, MAX_REACHABLE_PIX_SCORE } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, domainBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
 import { buildLearningContent } from '../../../../tooling/learning-content-builder/build-learning-content.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const { SHARED, STARTED } = CampaignParticipationStatuses;
 

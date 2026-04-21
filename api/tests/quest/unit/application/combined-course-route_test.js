@@ -4,7 +4,9 @@ import { combinedCourseController } from '../../../../src/quest/application/comb
 import * as combinedCourseRoute from '../../../../src/quest/application/combined-course-route.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, generateAuthenticatedUserRequestHeaders, HttpTestServer } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 describe('Quest | Unit | Routes | combined-course-route', function () {
   describe('GET /api/combined-courses/{combinedCourseId}', function () {

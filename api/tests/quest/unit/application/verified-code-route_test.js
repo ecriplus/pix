@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import * as moduleUnderTest from '../../../../src/quest/application/verified-code-route.js';
 import { usecases } from '../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
 describe('Quest | Unit | Application | verified-code-route', function () {
   describe('GET /api/verified-codes/{code}', function () {

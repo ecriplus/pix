@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { certificationCenterController } from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-controller.js';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-route.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Certification | Session-management | Unit | Application | Routes | session-summaries', function () {
   describe('GET /api/certification-centers/{certificationCenterId}/session-summaries', function () {

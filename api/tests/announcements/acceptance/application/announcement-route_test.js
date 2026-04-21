@@ -1,6 +1,7 @@
 import { createServer } from '../../../../server.js';
 import { announcementsStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders, knex } from '../../../test-helper.js';
+import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const CONTENT = { fr: 'Contenu en français', en: 'Content in English' };
 

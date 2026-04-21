@@ -1,10 +1,9 @@
 import { createServer } from '../../../../../server.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
 import {
-  databaseBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../../test-helper.js';
+} from '../../../../tooling/test-utils/http-server.js';
 
 const poleEmploiSendingFactory = databaseBuilder.factory.poleEmploiSendingFactory;
 

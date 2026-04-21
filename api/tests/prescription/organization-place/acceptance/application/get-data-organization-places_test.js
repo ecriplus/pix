@@ -1,5 +1,6 @@
 import { createServer } from '../../../../../server.js';
-import { expect, generateValidRequestAuthorizationHeaderForApplication } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Route | Get Data Organization Places', function () {
   describe('GET /api/data/organization-places', function () {

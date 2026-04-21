@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { assessmentController } from '../../../../src/school/application/assessment-controller.js';
 import { Assessment } from '../../../../src/school/domain/models/Assessment.js';
 import { usecases } from '../../../../src/school/domain/usecases/index.js';
-import { expect, hFake } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { hFake } from '../../../tooling/mocks/hapi.mock.js';
 
 describe('Integration | Controller | assessment-controller', function () {
   describe('#getById', function () {

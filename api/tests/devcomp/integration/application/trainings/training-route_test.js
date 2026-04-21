@@ -4,8 +4,9 @@ import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js'
 import { trainingController } from '../../../../../src/devcomp/application/trainings/training-controller.js';
 import * as moduleUnderTest from '../../../../../src/devcomp/application/trainings/training-route.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
 import { getAdminRoleStub } from '../../../../tooling/mocks/security-pre-handlers.mock.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Integration | Devcomp | Application | Trainings | Router | training-router', function () {
   describe('GET /api/admin/trainings/${trainingId}', function () {

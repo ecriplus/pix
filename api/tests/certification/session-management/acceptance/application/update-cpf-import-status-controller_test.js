@@ -5,7 +5,8 @@ import * as url from 'node:url';
 import nock from 'nock';
 
 import { createServer } from '../../../../../server.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 

@@ -3,13 +3,8 @@ import sinon from 'sinon';
 import { createServer } from '../../../../../server.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const competenceId = 'recCompetence';
 const skillWeb1Id = 'recAcquisWeb1';

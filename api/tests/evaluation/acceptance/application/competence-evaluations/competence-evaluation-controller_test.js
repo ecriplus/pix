@@ -1,12 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { MAX_REACHABLE_PIX_BY_COMPETENCE } from '../../../../../src/shared/domain/constants.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | API | Competence Evaluations', function () {
   let server;

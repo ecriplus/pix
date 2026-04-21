@@ -8,7 +8,8 @@ import {
   PassageTerminatedError,
 } from '../../../../../src/devcomp/domain/errors.js';
 import { UserNotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Integration | Devcomp | Application | Passage | Router | passage-router', function () {
   describe('POST /api/passages/', function () {

@@ -2,13 +2,8 @@ import { createServer } from '../../../../../server.js';
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { CAMPAIGN_FEATURES, ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  knex,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, knex, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const { ROLES } = PIX_ADMIN;
 

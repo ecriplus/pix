@@ -6,7 +6,8 @@ import {
   isOrganizationInJurisdictionPreHandler,
   organizationPreHandler,
 } from '../../../../src/maddo/application/pre-handlers.js';
-import { expect, hFake } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { hFake } from '../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Maddo | Application | pre handlers', function () {
   describe('#organizationPreHandler', function () {

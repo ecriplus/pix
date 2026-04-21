@@ -5,7 +5,8 @@ import { usecases } from '../../../../../src/prescription/organization-learner/d
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { NotFoundError, UserNotAuthorizedToUpdatePasswordError } from '../../../../../src/shared/domain/errors.js';
 import { UserNotAuthorizedToGenerateUsernamePasswordError } from '../../../../../src/shared/domain/errors.js';
-import { domainBuilder, expect, HttpTestServer } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Integration | Application | Controller | sco-organization-learners', function () {
   let sandbox;

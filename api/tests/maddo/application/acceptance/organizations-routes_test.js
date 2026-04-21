@@ -4,11 +4,8 @@ import { Organization } from '../../../../src/maddo/domain/models/Organization.j
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { KnowledgeElement } from '../../../../src/shared/domain/models/KnowledgeElement.js';
-import {
-  databaseBuilder,
-  expect,
-  generateValidRequestAuthorizationHeaderForApplication,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
+import { generateValidRequestAuthorizationHeaderForApplication } from '../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Maddo | Route | Organizations', function () {
   let server;

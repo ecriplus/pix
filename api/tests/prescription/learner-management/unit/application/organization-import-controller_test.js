@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { organizationImportController } from '../../../../../src/prescription/learner-management/application/organization-import-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Application | Learner Management | organization-import-controller', function () {
   let dependencies, serializeStub, usecaseResultSymbol;

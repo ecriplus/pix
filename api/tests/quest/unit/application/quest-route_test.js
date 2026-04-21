@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { questController } from '../../../../src/quest/application/quest-controller.js';
 import * as moduleUnderTest from '../../../../src/quest/application/quest-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
 describe('Quest | Unit | Router | quest-router', function () {
   describe('GET /api/campaign-participations/{campaignParticipationId}/quest-results', function () {

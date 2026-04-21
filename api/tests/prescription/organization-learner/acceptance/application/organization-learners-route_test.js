@@ -2,13 +2,9 @@ import { createServer } from '../../../../../server.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
-import {
-  databaseBuilder,
-  datamartBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-} from '../../../../test-helper.js';
+import { databaseBuilder, datamartBuilder, expect } from '../../../../test-helper.js';
 import { mockAttestationStorage } from '../../../../tooling/mocks/attestation-storage.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Prescription | Organization Learner | Acceptance | Application | OrganizationLearnerRoute', function () {
   let server;

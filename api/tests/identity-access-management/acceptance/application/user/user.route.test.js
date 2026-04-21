@@ -11,14 +11,11 @@ import { userEmailRepository } from '../../../../../src/identity-access-manageme
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
+import { databaseBuilder, domainBuilder, expect, knex } from '../../../../test-helper.js';
 import {
-  databaseBuilder,
-  domainBuilder,
-  expect,
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,
-  knex,
-} from '../../../../test-helper.js';
+} from '../../../../tooling/test-utils/http-server.js';
 
 const { pick } = lodash;
 

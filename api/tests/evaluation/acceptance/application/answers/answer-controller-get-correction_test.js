@@ -1,6 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
-import { databaseBuilder, expect, generateAuthenticatedUserRequestHeaders } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const buildOptions = (answerId, userId) => ({
   method: 'GET',

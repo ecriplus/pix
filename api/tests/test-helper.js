@@ -30,13 +30,6 @@ import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
 import * as domainBuilder from './tooling/domain-builder/factory/index.js';
 import { buildLearningContent as learningContentBuilder } from './tooling/learning-content-builder/index.js';
-import { hFake } from './tooling/mocks/hapi.mock.js';
-import { HttpTestServer } from './tooling/server/http-test-server.js';
-import {
-  generateAuthenticatedUserRequestHeaders,
-  generateInjectOptions,
-  generateValidRequestAuthorizationHeaderForApplication,
-} from './tooling/test-utils/http-server.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -111,11 +104,6 @@ export {
   datawarehouseKnex,
   domainBuilder,
   expect,
-  generateAuthenticatedUserRequestHeaders,
-  generateInjectOptions,
-  generateValidRequestAuthorizationHeaderForApplication,
-  hFake,
-  HttpTestServer,
   knex,
   learningContentBuilder,
 };

@@ -3,7 +3,9 @@ import sinon from 'sinon';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { membershipController } from '../../../../../src/team/application/membership/membership.controller.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, generateAuthenticatedUserRequestHeaders, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Unit | Team | Application | Controller | Membership', function () {
   describe('#create', function () {

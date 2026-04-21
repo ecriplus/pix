@@ -3,12 +3,8 @@ import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  learningContentBuilder,
-} from '../../../../test-helper.js';
+import { databaseBuilder, expect, learningContentBuilder } from '../../../../test-helper.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 const { STARTED } = CampaignParticipationStatuses;
 import { CAMPAIGN_FEATURES } from '../../../../../src/shared/domain/constants.js';

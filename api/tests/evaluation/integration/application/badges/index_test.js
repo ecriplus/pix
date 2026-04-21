@@ -4,7 +4,8 @@ import sinon from 'sinon';
 import { badgesController } from '../../../../../src/evaluation/application/badges/badges-controller.js';
 import * as badgesRouter from '../../../../../src/evaluation/application/badges/index.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Integration | Application | Badges | Routes', function () {
   describe('POST /api/admin/target-profiles/{id}/badges', function () {

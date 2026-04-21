@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { missionController } from '../../../../src/school/application/mission-controller.js';
 import * as moduleUnderTest from '../../../../src/school/application/mission-route.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
-import { expect, HttpTestServer } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
 describe('Unit | Router | mission-route', function () {
   describe('GET /api/pix1d/missions/{missionId}', function () {

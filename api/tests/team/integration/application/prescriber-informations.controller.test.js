@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { teamRoutes } from '../../../../src/team/application/routes.js';
 import { usecases } from '../../../../src/team/domain/usecases/index.js';
-import { domainBuilder, expect, HttpTestServer } from '../../../test-helper.js';
+import { domainBuilder, expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
 describe('Integration | Team | Application | Controller | prescriber-informations', function () {
   let sandbox;

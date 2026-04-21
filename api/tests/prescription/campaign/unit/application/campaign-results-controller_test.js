@@ -4,7 +4,8 @@ import { campaignResultsController } from '../../../../../src/prescription/campa
 import { usecases } from '../../../../../src/prescription/campaign/domain/usecases/index.js';
 import { UserNotAuthorizedToAccessEntityError } from '../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../src/shared/domain/services/locale-service.js';
-import { expect, hFake } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Application | Controller | Campaign Results', function () {

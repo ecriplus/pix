@@ -1,6 +1,7 @@
 import { smartRandomSimulatorController } from '../../../../../src/evaluation/application/smart-random-simulator/smart-random-simulator-controller.js';
 import { getSmartRandomLog } from '../../../../../src/evaluation/domain/services/smart-random-log-service.js';
-import { databaseBuilder, expect, hFake } from '../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 const request = {
   payload: {

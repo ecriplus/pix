@@ -1,10 +1,7 @@
 import { authorization } from '../../../../../../src/certification/session-management/application/pre-handlers/authorization.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { HttpTestServer } from '../../../../../tooling/server/http-test-server.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../../../tooling/test-utils/http-server.js';
 
 describe('Certification | Session-Management | Integration | Application | Pre-Handlers | Authorization', function () {
   describe('#checkUserHaveCertificationCenterMembershipForSession', function () {

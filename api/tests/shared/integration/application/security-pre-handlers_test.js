@@ -1,12 +1,9 @@
 import { PIX_ADMIN } from '../../../../src/authorization/domain/constants.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
-import {
-  databaseBuilder,
-  expect,
-  generateAuthenticatedUserRequestHeaders,
-  HttpTestServer,
-} from '../../../test-helper.js';
+import { databaseBuilder, expect } from '../../../test-helper.js';
+import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
+import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const { ROLES } = PIX_ADMIN;
 

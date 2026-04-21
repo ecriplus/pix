@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { learnerListController } from '../../../../../src/prescription/organization-learner/application/learner-list-controller.js';
 import { usecases } from '../../../../../src/prescription/organization-learner/domain/usecases/index.js';
-import { domainBuilder, expect, hFake } from '../../../../test-helper.js';
+import { domainBuilder, expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Application | learner-list-controller', function () {
   describe('#getDivisions', function () {
