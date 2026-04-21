@@ -726,11 +726,13 @@
       "jury-title": "Observations du jury",
       "learn-about-certification-results": "Comment interpréter les résultats ?",
       "professionalizing-warning": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 pix",
+      "obtained-certification": "Le candidat a obtenu la certification {frameworkLabel}",
       "results": {
         "sub-title": "Le/la candidat(e) est admissible à la certification {framework}.",
         "title": "Lecture du résultat :"
       },
       "title": "Certificat Pix",
+      "valid-status": "Certificat valide",
       "verification-code": {
         "alt": "Copier",
         "copied": "Code copié !",
@@ -2414,29 +2416,29 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Indépendant",
-          "1": "Confirmé",
-          "2": "Avancé",
-          "3": "Expert",
+          "INDEPENDENT": "Indépendant",
+          "CONFIRMED": "Confirmé",
+          "ADVANCED": "Avancé",
+          "EXPERT": "Expert",
           "BELOW_MINIMUM": "Non obtenu"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Admissible",
+          "ADMISSIBLE": "Admissible",
           "BELOW_MINIMUM": "Non admissible"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Admissible",
+          "ADMISSIBLE": "Admissible",
           "BELOW_MINIMUM": "Non admissible"
         },
         "EDU_CPE": {
-          "0": "Admissible",
+          "ADMISSIBLE": "Admissible",
           "BELOW_MINIMUM": "Non admissible"
         },
         "PRO_SANTE": {
-          "0": "Indépendant",
-          "1": "Confirmé",
-          "2": "Avancé",
-          "3": "Expert",
+          "INDEPENDENT": "Indépendant",
+          "CONFIRMED": "Confirmé",
+          "ADVANCED": "Avancé",
+          "EXPERT": "Expert",
           "BELOW_MINIMUM": "Non obtenu"
         }
       }
