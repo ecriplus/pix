@@ -11,7 +11,6 @@ export const COMPARISONS = {
 
 export const TYPES = {
   COMPOSE: 'compose',
-  SKILL_PROFILE: 'skillProfile',
   CAPPED_TUBES: 'cappedTubes',
   OBJECT: {
     ORGANIZATION_LEARNER: 'organizationLearner',
@@ -199,52 +198,6 @@ export class ObjectRequirement extends BaseRequirement {
   }
 }
 
-export class SkillProfileRequirement extends BaseRequirement {
-  #skillIds;
-  #threshold;
-
-  constructor({ data }) {
-    super({ requirement_type: TYPES.SKILL_PROFILE, comparison: null });
-    this.#skillIds = data.skillIds;
-    this.#threshold = data.threshold;
-  }
-
-  /**
-   * @returns {Object}
-   */
-  get data() {
-    return {
-      skillIds: Object.freeze(this.#skillIds),
-      threshold: this.#threshold,
-    };
-  }
-
-  /**
-   * @param {Eligibility|Success} dataInput
-   * @returns {Boolean}
-   */
-  isFulfilled(dataInput) {
-    const masteryPercentage = dataInput.getMasteryPercentageForSkills(this.#skillIds);
-
-    const isFulfilled = masteryPercentage >= this.#threshold;
-    logger.debug({ name: SkillProfileRequirement.name, masteryPercentage, threshold: this.#threshold, isFulfilled });
-    return isFulfilled;
-    // la comparaison ici pourrait être celle du requirement ? pour pouvoir avoir de la flexi sur =<>=
-  }
-
-  /**
-   * @returns {Object}
-   */
-  toDTO() {
-    const superDto = super.toDTO();
-    delete superDto.comparison;
-    return {
-      ...superDto,
-      data: this.data,
-    };
-  }
-}
-
 const cappedTubesRequirementSchema = Joi.object({
   requirement_type: TYPES.CAPPED_TUBES,
   data: Joi.object({
@@ -323,8 +276,6 @@ export function buildRequirement({ requirement_type, data, comparison }) {
     return new ComposedRequirement({ data, comparison });
   } else if (objectTypes.includes(requirement_type)) {
     return new ObjectRequirement({ requirement_type, data, comparison });
-  } else if (requirement_type === TYPES.SKILL_PROFILE) {
-    return new SkillProfileRequirement({ data });
   } else if (requirement_type === TYPES.CAPPED_TUBES) {
     return new CappedTubesRequirement({ data });
   }

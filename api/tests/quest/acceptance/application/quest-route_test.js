@@ -121,7 +121,7 @@ describe('Quest | Acceptance | Application | Quest Route ', function () {
       await databaseBuilder.commit();
       // TODO j'ai l'impression qu'en séparateur en ; il capte pas les différents headers
       const input = `Quest ID,Json configuration for quest
-,"{""rewardType"":""attestations"",""rewardId"":1,""eligibilityRequirements"":[{""requirement_type"":""organization"",""data"":{""type"":{""data"":""SCO"",""comparison"":""equal""}}, ""comparison"": ""all""}],""successRequirements"":[{""requirement_type"":""skillProfile"",""data"":{""skillIds"":[""skillA"",""skillB""],""threshold"":66}}]}"`;
+,"{""rewardType"":""attestations"",""rewardId"":1,""eligibilityRequirements"":[{""requirement_type"":""organization"",""data"":{""type"":{""data"":""SCO"",""comparison"":""equal""}}, ""comparison"": ""all""}],""successRequirements"":[{""requirement_type"":""cappedTubes"",""data"":{""cappedTubes"":[{""tubeId"":""tubeA"",""level"":3}],""threshold"":66}}]}"`;
 
       const options = {
         method: 'POST',

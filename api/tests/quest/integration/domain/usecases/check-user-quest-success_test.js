@@ -71,6 +71,14 @@ describe('Integration | Quest | Domain | UseCases | check-user-quest-success', f
       campaignId: firstCampaign.id,
       userId,
     });
+    databaseBuilder.factory.learningContent.buildTube({ id: 'tubeId1' });
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: 'skillId1',
+      tubeId: 'tubeId1',
+      status: 'actif',
+      level: 1,
+    });
+    databaseBuilder.factory.buildCampaignSkill({ campaignId: firstCampaign.id, skillId: 'skillId1' });
     const userKnowledgeElements = [
       {
         userId,
@@ -95,9 +103,9 @@ describe('Integration | Quest | Domain | UseCases | check-user-quest-success', f
       ],
       successRequirements: [
         {
-          requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+          requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
           data: {
-            skillIds: ['skillId1'],
+            cappedTubes: [{ tubeId: 'tubeId1', level: 1 }],
             threshold: 50,
           },
         },
@@ -127,6 +135,14 @@ describe('Integration | Quest | Domain | UseCases | check-user-quest-success', f
       campaignId: firstCampaign.id,
       userId,
     });
+    databaseBuilder.factory.learningContent.buildTube({ id: 'tubeId1' });
+    databaseBuilder.factory.learningContent.buildSkill({
+      id: 'skillId1',
+      tubeId: 'tubeId1',
+      status: 'actif',
+      level: 1,
+    });
+    databaseBuilder.factory.buildCampaignSkill({ campaignId: firstCampaign.id, skillId: 'skillId1' });
     const userKnowledgeElements = [
       {
         userId,
@@ -151,9 +167,9 @@ describe('Integration | Quest | Domain | UseCases | check-user-quest-success', f
       ],
       successRequirements: [
         {
-          requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+          requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
           data: {
-            skillIds: ['skillId1'],
+            cappedTubes: [{ tubeId: 'tubeId1', level: 1 }],
             threshold: 50,
           },
         },
@@ -198,9 +214,9 @@ describe('Integration | Quest | Domain | UseCases | check-user-quest-success', f
       ],
       successRequirements: [
         {
-          requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+          requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
           data: {
-            skillIds: ['skillId1'],
+            cappedTubes: [{ tubeId: 'tubeId1', level: 1 }],
             threshold: 50,
           },
         },

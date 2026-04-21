@@ -6,7 +6,6 @@ import {
   COMPARISONS,
   ComposedRequirement,
   ObjectRequirement,
-  SkillProfileRequirement,
   TYPES,
 } from '../../../../../src/quest/domain/models/Requirement.js';
 import { Success } from '../../../../../src/quest/domain/models/Success.js';
@@ -97,23 +96,6 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
 
         // then
         expect(requirement instanceof ObjectRequirement).to.be.true;
-      });
-    });
-
-    context('when requirement_type is "skillProfile"', function () {
-      it('should build an SkillProfileRequirement', function () {
-        // given
-        const buildData = {
-          requirement_type: TYPES.SKILL_PROFILE,
-          comparison: 'irrelevant',
-          data: {},
-        };
-
-        // when
-        const requirement = buildRequirement(buildData);
-
-        // then
-        expect(requirement instanceof SkillProfileRequirement).to.be.true;
       });
     });
 
@@ -622,115 +604,6 @@ describe('Quest | Unit | Domain | Models | Requirement ', function () {
             },
           },
           comparison: COMPARISONS.ALL,
-        });
-      });
-    });
-  });
-
-  describe('SkillProfileRequirement', function () {
-    describe('isFulfilled', function () {
-      context("when dataInput's masteryPercentage is below threshold", function () {
-        it('should return false', function () {
-          const requirement = new SkillProfileRequirement({
-            data: {
-              skillIds: ['skillB', 'skillA', 'skillC', 'skillE'],
-              threshold: 51,
-            },
-          });
-          const successWith50MasteryPercentage = new Success({
-            knowledgeElements: [
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
-            ],
-            skills: [
-              { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
-            ],
-          });
-
-          expect(requirement.isFulfilled(successWith50MasteryPercentage)).to.be.false;
-        });
-      });
-
-      context("when dataInput's masteryPercentage is equal to threshold", function () {
-        it('should return true', function () {
-          const requirement = new SkillProfileRequirement({
-            data: {
-              skillIds: ['skillB', 'skillA', 'skillC', 'skillE'],
-              threshold: 50,
-            },
-          });
-          const successWith50MasteryPercentage = new Success({
-            knowledgeElements: [
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
-            ],
-            skills: [
-              { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
-            ],
-          });
-
-          expect(requirement.isFulfilled(successWith50MasteryPercentage)).to.be.true;
-        });
-      });
-
-      context("when dataInput's masteryPercentage is above threshold", function () {
-        it('should return true', function () {
-          const requirement = new SkillProfileRequirement({
-            data: {
-              skillIds: ['skillB', 'skillA', 'skillC', 'skillE'],
-              threshold: 49,
-            },
-          });
-          const successWith50MasteryPercentage = new Success({
-            knowledgeElements: [
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
-              { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
-              { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
-            ],
-            skills: [
-              { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-              { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
-            ],
-          });
-
-          expect(requirement.isFulfilled(successWith50MasteryPercentage)).to.be.true;
-        });
-      });
-    });
-
-    describe('toDTO', function () {
-      it('should transform into a DTO', function () {
-        // given
-        const requirement = new SkillProfileRequirement({
-          data: {
-            skillIds: ['id1', 'id2'],
-            threshold: 70,
-          },
-        });
-
-        // when
-        const DTO = requirement.toDTO();
-
-        // then
-        expect(DTO).to.deep.equal({
-          requirement_type: TYPES.SKILL_PROFILE,
-          data: {
-            skillIds: ['id1', 'id2'],
-            threshold: 70,
-          },
         });
       });
     });
