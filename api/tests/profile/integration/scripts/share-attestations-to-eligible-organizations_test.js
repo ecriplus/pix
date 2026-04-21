@@ -8,7 +8,8 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../src/quest/domain/models/Quest.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('Integration | Profile | Scripts | sixth-grade-organization-share  ', function () {
   describe('options', function () {

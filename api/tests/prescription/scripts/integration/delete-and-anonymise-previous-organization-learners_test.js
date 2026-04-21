@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { DeleteAndAnonymisePreviousOrganizationLearnersScript } from '../../../../src/prescription/scripts/delete-and-anonymise-previous-organization-learners.js';
-import { databaseBuilder, knex } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('DeleteAndAnonymisePreviousOrganizationLearnersScript', function () {
   describe('Options', function () {

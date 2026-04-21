@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Devcomp | Domain | UseCases | deleteTrainingTrigger', function () {

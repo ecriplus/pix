@@ -1,5 +1,6 @@
 import * as accessCodeRepository from '../../../../../src/shared/infrastructure/repositories/access-code-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('#isCodeAvailable', function () {
   it('should return true if code does not already exist for campaign or combinedCourse', async function () {

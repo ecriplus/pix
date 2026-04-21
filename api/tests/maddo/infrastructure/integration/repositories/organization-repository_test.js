@@ -5,7 +5,8 @@ import {
   findIdentityProviderForCampaignsByCampaignId,
   findIdsByTagNames,
 } from '../../../../../src/maddo/infrastructure/repositories/organization-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Maddo | Infrastructure | Repositories | Integration | organization', function () {
   describe('#findIdsByTagNames', function () {

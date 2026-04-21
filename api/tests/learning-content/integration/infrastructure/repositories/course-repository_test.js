@@ -1,5 +1,6 @@
 import { courseRepository } from '../../../../../src/learning-content/infrastructure/repositories/course-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Learning Content | Integration | Repositories | Course', function () {
   afterEach(async function () {

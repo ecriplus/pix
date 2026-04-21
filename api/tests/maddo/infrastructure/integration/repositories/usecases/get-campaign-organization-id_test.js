@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/maddo/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | Maddo | Domain | Usecase | Get campaign organization id', function () {
   it('returns the organization id for a given campaign', async function () {

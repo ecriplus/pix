@@ -3,7 +3,8 @@ import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
 } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Application | Usecases | checkParticipationBelongsToCombinedCourse', function () {
   it('should return true when participation is in combined course', async function () {

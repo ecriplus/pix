@@ -1,6 +1,7 @@
 import { OrganizationLearner } from '../../../../../../src/prescription/organization-learner/application/api/models/OrganizationLearner.js';
 import * as organizationLearnersApi from '../../../../../../src/prescription/organization-learner/application/api/organization-learners-api.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | API | Organization Learner', function () {
   describe('#find', function () {

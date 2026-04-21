@@ -3,7 +3,8 @@ import { OrganizationToJoin } from '../../../../../../src/prescription/organizat
 import { getOrganizationToJoin } from '../../../../../../src/prescription/organization-learner/domain/usecases/get-organization-to-join.js';
 import { repositories } from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/index.js';
 import * as combinedCourseRepository from '../../../../../../src/quest/infrastructure/repositories/combined-course-repository.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | UseCases | get-organization-to-join', function () {
   it('should return organizationToJoin given campaign code', async function () {

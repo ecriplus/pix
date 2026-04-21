@@ -1,5 +1,6 @@
 import * as divisionRepository from '../../../../../../src/prescription/campaign/infrastructure/repositories/division-repository.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | Repository | Division', function () {
   describe('#findByCampaignId', function () {

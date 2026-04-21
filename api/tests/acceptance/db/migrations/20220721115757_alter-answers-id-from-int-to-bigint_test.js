@@ -1,4 +1,5 @@
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('#changeAnswerIdTypeToBigint', function () {
   it('should insert answer with an id bigger than the maximum integer type value', async function () {

@@ -1,6 +1,7 @@
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
 import * as organizationFeatureRepository from '../../../../../src/shared/infrastructure/repositories/organization-feature-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Infrastructure | Repository | organization-feature', function () {
   describe('#getByOrganizationIdAndFeatureKey', function () {

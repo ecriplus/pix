@@ -1,6 +1,7 @@
 import { getLatestParticipationSharedForOneLearner } from '../../../../../../../src/prescription/campaign/infrastructure/repositories/helpers/get-latest-participation-shared-for-one-learner.js';
 import { CampaignParticipationStatuses } from '../../../../../../../src/prescription/shared/domain/constants.js';
-import { databaseBuilder, expect, knex } from '../../../../../../test-helper.js';
+import { expect } from '../../../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../../../tooling/databases.js';
 
 describe('Integration | Infrastructure | Repository | Helpers | get-latest-participation-shared-for-one-learner', function () {
   describe('#getLatestParticipationSharedForOneLearner', function () {

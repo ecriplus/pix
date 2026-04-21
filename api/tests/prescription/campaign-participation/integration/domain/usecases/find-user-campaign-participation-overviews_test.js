@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
 import { constants } from '../../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | UseCase | find-user-campaign-participation-overviews_test', function () {
   describe('when there are several campaigns for several target profiles', function () {

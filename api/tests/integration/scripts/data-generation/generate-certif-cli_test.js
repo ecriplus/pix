@@ -6,7 +6,8 @@ import {
   main,
 } from '../../../../scripts/data-generation/generate-certif-cli.js';
 import { CampaignTypes } from '../../../../src/prescription/shared/domain/constants.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 // FIXME Too hard to edit \o/
 describe('Integration | Scripts | generate-certif-cli.js', function () {

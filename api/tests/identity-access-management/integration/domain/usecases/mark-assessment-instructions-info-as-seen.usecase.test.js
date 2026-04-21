@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | markAssessmentInstructionsInfoAsSeen', function () {
   it('should update hasSeenAssessmentInstructions property as true for the user', async function () {

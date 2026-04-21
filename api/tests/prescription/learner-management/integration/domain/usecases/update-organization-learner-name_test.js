@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
 
 describe('Integration | UseCase | update-organization-learner-name', function () {
   describe('#updateOrganizationLearnerName', function () {

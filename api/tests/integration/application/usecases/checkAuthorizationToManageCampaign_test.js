@@ -1,5 +1,6 @@
 import * as checkAuthorizationToManageCampaign from '../../../../src/shared/application/usecases/checkAuthorizationToManageCampaign.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder } from '../../../tooling/databases.js';
 
 describe('Integration | API | checkAuthorizationToManageCampaign', function () {
   describe('when the user is member in organization and owner of the campaign', function () {

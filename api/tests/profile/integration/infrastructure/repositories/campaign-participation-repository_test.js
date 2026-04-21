@@ -1,6 +1,7 @@
 import { Campaign } from '../../../../../src/profile/domain/models/Campaign.js';
 import { getCampaignByParticipationId } from '../../../../../src/profile/infrastructure/repositories/campaign-participation-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Profile | Integration | Infrastructure | Repository | campaign-participation-repository', function () {
   describe('#getCampaignByParticipationId', function () {

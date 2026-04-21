@@ -7,7 +7,8 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-man
 import { UserReconciliationSamlIdToken } from '../../../../src/identity-access-management/domain/models/UserReconciliationSamlIdToken.js';
 import { config as settings } from '../../../../src/shared/config.js';
 import { tokenService } from '../../../../src/shared/domain/services/token-service.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 const testCertificate = `MIICCzCCAXQCCQD2MlHh/QmGmjANBgkqhkiG9w0BAQsFADBKMQswCQYDVQQGEwJG
 UjEPMA0GA1UECAwGRlJBTkNFMQ4wDAYDVQQHDAVQQVJJUzEMMAoGA1UECgwDUElY

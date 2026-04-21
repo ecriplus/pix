@@ -1,7 +1,8 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Integration | Combined course | Domain | UseCases | create-combined-course', function () {
   it('should create combined course for given payload', async function () {

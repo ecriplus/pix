@@ -5,7 +5,8 @@ import {
   removeInBatch,
   save,
 } from '../../../../../src/profile/infrastructure/repositories/organizations-profile-reward-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Profile | Integration | Infrastructure | Repository | organizations-profile-rewards-repository', function () {
   describe('#save', function () {

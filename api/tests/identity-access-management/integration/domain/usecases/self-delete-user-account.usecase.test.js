@@ -1,7 +1,8 @@
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | self-delete-user-account', function () {
   context('when user can self delete their account', function () {

@@ -1,6 +1,7 @@
 import { CampaignManagement } from '../../../../../../src/prescription/campaign/domain/models/CampaignManagement.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | UseCase | find-paginated-campaign-managements', function () {
   it('should return an instance of Campaign Management with a correct isPartOfCombinedCourse attribute', async function () {

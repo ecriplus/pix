@@ -6,7 +6,8 @@ import { createServer } from '../../../../../server.js';
 import { OrganizationLearnerImportHeader } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-import-header.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 EventEmitter.defaultMaxListeners = 60;

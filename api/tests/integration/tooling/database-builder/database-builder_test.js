@@ -1,6 +1,7 @@
 import { DatabaseBuilder } from '../../../../db/database-builder/database-builder.js';
 import { createOrganization } from '../../../../db/seeds/data/common/tooling/organization-tooling.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('Integration | Tooling | DatabaseBuilder | database-builder', function () {
   describe('#create', function () {

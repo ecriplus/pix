@@ -1,6 +1,7 @@
 import { DataProtectionOfficer } from '../../../../../src/organizational-entities/domain/models/DataProtectionOfficer.js';
 import * as dataProtectionOfficerRepository from '../../../../../src/organizational-entities/infrastructure/repositories/data-protection-officer.repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Integration | Organizational Entities | Repository | data-protection-officer', function () {
   const now = new Date('2022-09-27T16:30:00Z');

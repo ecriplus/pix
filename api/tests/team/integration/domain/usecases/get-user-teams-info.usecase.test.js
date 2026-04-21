@@ -1,6 +1,7 @@
 import { PIX_ADMIN } from '../../../../../src/authorization/domain/constants.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Team | Domain | Usecases | getUserTeamsInfo', function () {
   context('when user is a Pix agent, organization member, and certification center member', function () {
