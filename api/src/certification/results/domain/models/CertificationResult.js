@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { CompetenceMark } from '../../../shared/domain/models/CompetenceMark.js';
 import { ComplementaryCertificationCourseResult } from '../../../shared/domain/models/ComplementaryCertificationCourseResult.js';
@@ -134,14 +132,11 @@ export class CertificationResult {
   }
 
   getUniqComplementaryCertificationCourseResultLabels() {
-    return [
-      ...new Set(
-        _(this.complementaryCertificationCourseResults)
-          .orderBy('id')
-          .map(({ label }) => label)
-          .value(),
-      ),
-    ];
+    const sortedComplementaryCertifCourseResults = this.complementaryCertificationCourseResults.sort((a, b) => {
+      return a['id'] > b['id'] ? 1 : b['id'] > a['id'] ? -1 : 0;
+    });
+    const sortedLabels = sortedComplementaryCertifCourseResults.map(({ label }) => label);
+    return [...new Set(Object.values(sortedLabels))];
   }
 
   get isV3() {

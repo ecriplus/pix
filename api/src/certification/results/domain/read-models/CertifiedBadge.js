@@ -1,6 +1,4 @@
-import _ from 'lodash';
-
-class CertifiedBadge {
+export class CertifiedBadge {
   constructor({ label, imageUrl, stickerUrl, isTemporaryBadge, message }) {
     this.label = label;
     this.imageUrl = imageUrl;
@@ -44,7 +42,11 @@ function _getLowestByLevel(complementaryCertificationCourseResults) {
   if (!complementaryCertificationCourseResults.every(({ acquired }) => acquired)) {
     return { acquired: false };
   }
-  return _(complementaryCertificationCourseResults).sortBy('level').head();
+  // eslint-disable-next-line no-unused-vars
+  const [lowestByLevel, ...tail] = complementaryCertificationCourseResults.sort((a, b) => {
+    return a['level'] > b['level'] ? 1 : b['level'] > a['level'] ? -1 : 0;
+  });
+  return lowestByLevel;
 }
 
 function _getAcquiredCertifiedBadgesDTOWithExternalJury(complementaryCertificationCourseResults) {
@@ -78,5 +80,3 @@ function _getAcquiredCertifiedBadgesDTOWithExternalJury(complementaryCertificati
     });
   }
 }
-
-export { CertifiedBadge };

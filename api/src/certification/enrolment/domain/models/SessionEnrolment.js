@@ -1,8 +1,6 @@
 /**
  * @typedef {import('./Candidate.js').Candidate} Candidate
  */
-import _ from 'lodash';
-
 import { CERTIFICATION_CENTER_TYPES } from '../../../../shared/domain/constants.js';
 import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
@@ -10,7 +8,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
 const INVIGILATOR_PASSWORD_LENGTH = 6;
 const INVIGILATOR_PASSWORD_CHARS = '23456789bcdfghjkmpqrstvwxyBCDFGHJKMPQRSTVWXY!*?'.split('');
 
-class SessionEnrolment {
+export class SessionEnrolment {
   constructor({
     id,
     accessCode,
@@ -56,7 +54,12 @@ class SessionEnrolment {
   }
 
   #generateInvigilatorPassword() {
-    return _.sampleSize(INVIGILATOR_PASSWORD_CHARS, INVIGILATOR_PASSWORD_LENGTH).join('');
+    const chars = Array.from(INVIGILATOR_PASSWORD_CHARS);
+    for (let i = INVIGILATOR_PASSWORD_LENGTH; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (chars.length - 1));
+      [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+    return chars.slice(0, INVIGILATOR_PASSWORD_LENGTH).join('');
   }
 
   isSessionScheduledInThePast() {
@@ -65,8 +68,7 @@ class SessionEnrolment {
   }
 
   isCandidateAlreadyEnrolled({ candidates, candidatePersonalInfo, normalizeStringFnc }) {
-    const matchingCandidates = findMatchingCandidates({ candidates, candidatePersonalInfo, normalizeStringFnc });
-    return matchingCandidates.length > 0;
+    return this.findCandidatesByPersonalInfo({ candidates, candidatePersonalInfo, normalizeStringFnc }).length > 0;
   }
 
   /**
@@ -96,29 +98,25 @@ class SessionEnrolment {
     this.description = sessionData.description;
   }
 
-  findCandidatesByPersonalInfo({ candidates, candidatePersonalInfo, normalizeStringFnc }) {
-    return findMatchingCandidates({ candidates, candidatePersonalInfo, normalizeStringFnc });
+  findCandidatesByPersonalInfo({
+    candidates,
+    candidatePersonalInfo: { firstName, lastName, birthdate },
+    normalizeStringFnc,
+  }) {
+    const normalizedInputNames = {
+      lastName: normalizeStringFnc(lastName),
+      firstName: normalizeStringFnc(firstName),
+    };
+    return candidates.filter((enrolledCandidate) => {
+      const enrolledCandidatesNormalizedNames = {
+        lastName: normalizeStringFnc(enrolledCandidate.lastName),
+        firstName: normalizeStringFnc(enrolledCandidate.firstName),
+      };
+      return (
+        normalizedInputNames.lastName === enrolledCandidatesNormalizedNames.lastName &&
+        normalizedInputNames.firstName === enrolledCandidatesNormalizedNames.firstName &&
+        birthdate === enrolledCandidate.birthdate
+      );
+    });
   }
 }
-
-function findMatchingCandidates({
-  candidates,
-  candidatePersonalInfo: { firstName, lastName, birthdate },
-  normalizeStringFnc,
-}) {
-  const normalizedInputNames = {
-    lastName: normalizeStringFnc(lastName),
-    firstName: normalizeStringFnc(firstName),
-  };
-  return candidates.filter((enrolledCandidate) => {
-    const enrolledCandidatesNormalizedNames = {
-      lastName: normalizeStringFnc(enrolledCandidate.lastName),
-      firstName: normalizeStringFnc(enrolledCandidate.firstName),
-    };
-    return (
-      _.isEqual(normalizedInputNames, enrolledCandidatesNormalizedNames) && birthdate === enrolledCandidate.birthdate
-    );
-  });
-}
-
-export { SessionEnrolment };

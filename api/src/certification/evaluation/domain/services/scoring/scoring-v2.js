@@ -9,8 +9,6 @@
  * @typedef {import('../../../../session-management/domain/models/CertificationAssessment.js').CertificationAssessment} CertificationAssessment
  */
 
-import _ from 'lodash';
-
 import CertificationCancelled from '../../../../../../src/shared/domain/events/CertificationCancelled.js';
 import { AlgorithmEngineVersion } from '../../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { AnswerCollectionForScoring } from '../../../../shared/domain/models/AnswerCollectionForScoring.js';
@@ -124,22 +122,33 @@ export const calculateCertificationAssessmentScore = async function ({
  */
 async function _getTestedCompetences({ userId, limitDate, version, placementProfileService }) {
   const placementProfile = await placementProfileService.getPlacementProfile({ userId, limitDate, version });
-  return _(placementProfile.userCompetences)
-    .filter((uc) => uc.isCertifiable())
-    .map((uc) => _.pick(uc, ['id', 'index', 'areaId', 'name', 'estimatedLevel', 'pixScore']))
-    .value();
+  const certifiableUserCompetences = placementProfile.userCompetences.filter((uc) => uc.isCertifiable());
+  return certifiableUserCompetences.map((cuc) => {
+    return {
+      id: cuc.id,
+      index: cuc.index,
+      areaId: cuc.areaId,
+      name: cuc.name,
+      estimatedLevel: cuc.estimatedLevel,
+      pixScore: cuc.pixScore,
+    };
+  });
 }
 
 function _selectAnswersMatchingCertificationChallenges(answers, certificationChallenges) {
-  return answers.filter(({ challengeId }) => _.some(certificationChallenges, { challengeId }));
+  return answers.filter(({ challengeId }) => certificationChallenges.some((cc) => cc.challengeId === challengeId));
 }
 
 function _selectChallengesMatchingCompetences(certificationChallenges, testedCompetences) {
-  return certificationChallenges.filter(({ competenceId }) => _.some(testedCompetences, { id: competenceId }));
+  return certificationChallenges.filter(({ competenceId }) => testedCompetences.some((e) => e.id === competenceId));
 }
 
 function _getSumScoreFromCertifiedCompetences(listCompetences) {
-  return _(listCompetences).map('obtainedScore').sum();
+  return listCompetences
+    .map((lc) => lc.obtainedScore)
+    .reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
 }
 
 /**
@@ -155,7 +164,7 @@ function _getCompetenceMarksWithCertifiedLevelAndScore(
   scoringService,
 ) {
   return listCompetences.map((competence) => {
-    const challengesForCompetence = _.filter(certificationChallenges, { competenceId: competence.id });
+    const challengesForCompetence = certificationChallenges.filter((cc) => cc.competenceId === competence.id);
     const answersForCompetence = _selectAnswersMatchingCertificationChallenges(answers, challengesForCompetence);
 
     CertificationContract.assertThatCompetenceHasAtLeastOneChallenge(challengesForCompetence, competence.index);

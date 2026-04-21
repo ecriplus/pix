@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import _ from 'lodash';
 
 import { InvalidCertificationReportForFinalization } from '../errors.js';
 
@@ -33,7 +32,7 @@ class CertificationReport {
     this.certificationCourseId = certificationCourseId;
     this.isCompleted = isCompleted;
     this.examinerComment = examinerComment;
-    if (_.isEmpty(_.trim(this.examinerComment))) {
+    if (!this.examinerComment?.trim()) {
       this.examinerComment = NO_EXAMINER_COMMENT;
     }
     this.abortReason = abortReason;

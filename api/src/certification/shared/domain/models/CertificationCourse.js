@@ -7,7 +7,6 @@
  */
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
-import _ from 'lodash';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { ABORT_REASONS } from '../constants/abort-reasons.js';
@@ -198,7 +197,7 @@ export class CertificationCourse {
 
   correctFirstName(modifiedFirstName) {
     const sanitizedString = _sanitizedString(modifiedFirstName);
-    if (_.isEmpty(sanitizedString)) {
+    if (_isEmpty(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'firstName', message: "Candidate's first name must not be blank or empty" }],
       });
@@ -208,7 +207,7 @@ export class CertificationCourse {
 
   correctLastName(modifiedLastName) {
     const sanitizedString = _sanitizedString(modifiedLastName);
-    if (_.isEmpty(sanitizedString)) {
+    if (_isEmpty(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'lastName', message: "Candidate's last name must not be blank or empty" }],
       });
@@ -218,14 +217,14 @@ export class CertificationCourse {
 
   correctBirthplace(modifiedBirthplace) {
     const sanitizedString = _sanitizedString(modifiedBirthplace);
-    if (!_.isEmpty(sanitizedString?.trim())) {
+    if (!_isEmpty(sanitizedString?.trim())) {
       this._birthplace = sanitizedString;
     }
   }
 
   correctSex(modifiedSex) {
     const sanitizedString = _sanitizedString(modifiedSex);
-    if (!_.isEmpty(sanitizedString) && !['M', 'F'].includes(sanitizedString)) {
+    if (!_isEmpty(sanitizedString) && !['M', 'F'].includes(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'sex', message: "Candidate's sex must be M or F" }],
       });
@@ -374,4 +373,8 @@ function _sanitizedString(string) {
   const withUnifiedWithSpaces = trimmedString?.replace(multipleWhiteSpacesInARow, ' ');
 
   return withUnifiedWithSpaces;
+}
+
+function _isEmpty(obj) {
+  return [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
 }
