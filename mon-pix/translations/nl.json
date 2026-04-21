@@ -2406,11 +2406,11 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "INDEPENDENT": "Onafhankelijk",
-          "CONFIRMED": "Bevestigd",
           "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet verkregen",
+          "CONFIRMED": "Bevestigd",
           "EXPERT": "Expert",
-          "BELOW_MINIMUM": "Niet verkregen"
+          "INDEPENDENT": "Onafhankelijk"
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Toelaatbaar",
@@ -2425,11 +2425,11 @@
           "BELOW_MINIMUM": "Niet toelaatbaar"
         },
         "PRO_SANTE": {
-          "INDEPENDENT": "Onafhankelijk",
-          "CONFIRMED": "Bevestigd",
           "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet verkregen",
+          "CONFIRMED": "Bevestigd",
           "EXPERT": "Expert",
-          "BELOW_MINIMUM": "Niet verkregen"
+          "INDEPENDENT": "Onafhankelijk"
         }
       }
     },

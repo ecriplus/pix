@@ -34,6 +34,7 @@ function certificationResponse({ version }) {
         'algorithm-engine-version': version,
         'certification-date': '2020-01-31T00:00:00.000Z',
         'global-level-label': 'Intermédiaire 1',
+        'certification-framework': 'CORE',
       },
       relationships: {
         'result-competence-tree': {

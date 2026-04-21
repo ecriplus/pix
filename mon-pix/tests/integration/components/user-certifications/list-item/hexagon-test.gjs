@@ -123,7 +123,12 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
       // when
       await render(
         <template>
-          <Hexagon @isValidated={{true}} @framework="DROIT" @reachedMeshLevel="LEVEL_INDEPENDENT" @certificateType="CERTIFICATE" />
+          <Hexagon
+            @isValidated={{true}}
+            @framework="DROIT"
+            @reachedMeshLevel="LEVEL_INDEPENDENT"
+            @certificateType="CERTIFICATE"
+          />
         </template>,
       );
 

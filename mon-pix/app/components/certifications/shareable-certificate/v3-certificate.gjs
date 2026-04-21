@@ -2,11 +2,11 @@ import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
-import PixPlusCertificate from '../candidate-certificate/v3-pix-plus-certificate';
 import CandidateGlobalLevel from '../certificate-information/candidate-global-level';
 import CandidateInformation from '../certificate-information/candidate-information';
 import CleaCertification from '../certificate-information/clea-certification';
 import CompetencesDetails from '../certificate-information/competences-details';
+import PixPlusCertificate from './v3-pix-plus-certificate';
 
 export default class v3Certificate extends Component {
   @service intl;
@@ -24,7 +24,7 @@ export default class v3Certificate extends Component {
   }
 
   get isPixPlusFramework() {
-    return this.args.certificate.certificationFramework?.toLowerCase().startsWith('edu') ?? false;
+    return !['CORE', 'CLEA'].includes(this.args.certificate.certificationFramework);
   }
 
   <template>

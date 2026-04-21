@@ -2397,11 +2397,11 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "INDEPENDENT": "Independiente",
-          "CONFIRMED": "Confirmado",
           "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No obtenido",
+          "CONFIRMED": "Confirmado",
           "EXPERT": "Experto",
-          "BELOW_MINIMUM": "No obtenido"
+          "INDEPENDENT": "Independiente"
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Admisible",
@@ -2416,11 +2416,11 @@
           "BELOW_MINIMUM": "No admisible"
         },
         "PRO_SANTE": {
-          "INDEPENDENT": "Independiente",
-          "CONFIRMED": "Confirmado",
           "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No obtenido",
+          "CONFIRMED": "Confirmado",
           "EXPERT": "Experto",
-          "BELOW_MINIMUM": "No obtenido"
+          "INDEPENDENT": "Independiente"
         }
       }
     },

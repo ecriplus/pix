@@ -22,6 +22,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         certificationCenter: 'Université de Lyon',
         pixScore: 31,
         maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
+        certificationFramework: 'CORE',
       });
       this.set('certification', certification);
 
@@ -63,6 +64,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         resultCompetenceTree: store.createRecord('result-competence-tree'),
         maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
         globalLevelLabel: 'Expert 1',
+        certificationFramework: 'CORE',
       });
       this.set('certification', certification);
 
@@ -130,6 +132,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         pixScore: 31,
         maxReachableLevelOnCertificationDate: new Date('2018-02-15T15:15:52Z'),
         acquiredComplementaryCertification: 'http://example.com/clea.svg',
+        certificationFramework: 'CORE',
       });
       this.set('certification', certification);
 

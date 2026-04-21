@@ -725,8 +725,8 @@
       "jury-info": "Notes from the examining body are not displayed on the verification page of your certificate.",
       "jury-title": "Notes from the examining body",
       "learn-about-certification-results": "How to interpret the results?",
-      "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
       "obtained-certification": "The candidate has obtained the {frameworkLabel} certification",
+      "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
       "results": {
         "sub-title": "The candidate is eligible for {framework} certification.",
         "title": "Reading the result:"
@@ -2415,11 +2415,11 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "INDEPENDENT": "Independent",
-          "CONFIRMED": "Confirmed",
           "ADVANCED": "Advanced",
+          "BELOW_MINIMUM": "Not obtained",
+          "CONFIRMED": "Confirmed",
           "EXPERT": "Expert",
-          "BELOW_MINIMUM": "Not obtained"
+          "INDEPENDENT": "Independent"
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Eligible",
@@ -2434,11 +2434,11 @@
           "BELOW_MINIMUM": "Not eligible"
         },
         "PRO_SANTE": {
-          "INDEPENDENT": "Independent",
-          "CONFIRMED": "Confirmed",
           "ADVANCED": "Advanced",
+          "BELOW_MINIMUM": "Not obtained",
+          "CONFIRMED": "Confirmed",
           "EXPERT": "Expert",
-          "BELOW_MINIMUM": "Not obtained"
+          "INDEPENDENT": "Independent"
         }
       }
     },
