@@ -6,7 +6,9 @@ import {
   getTestRef,
 } from '../../../../../helpers/certification/utils.ts';
 import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
+import { getNowAsDDMMYYYY } from '../../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
+import { HomePage } from '../../../../../pages/pix-app/index.ts';
 import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
 
 test(
@@ -19,7 +21,10 @@ test(
         description: `User takes a certification test for a PRO certification center, DROIT subscription. Only one right answer.
          - Test ended by invigilator
          - Abort reason : abandonment
-         - Results visible in all PixAdmin screens`,
+         - Results visible in all PixAdmin screens
+         - Session published
+         - Certificate visible in PixApp
+         - Checks CSV results file`,
       },
     ],
   },
@@ -32,16 +37,18 @@ test(
     snapshotHandler,
     testRef,
     snapshotPath,
+    csvResultPath,
   }) => {
     const certifiableUserData = await getCertifiableUserData('buffy.summers@example.net');
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, invigilatorOverviewPage } = await enrollCandidateAndPassExam({
-      testRef,
-      certificationKey: CERTIFICATIONS_DATA.DROIT,
-      rightWrongAnswersSequence: [true],
-      pixAppPage: pixAppCertifiablePage,
-      certifiableUserData,
-    });
+    const { sessionNumber, invigilatorOverviewPage, certificationNumber, certificationCenterName } =
+      await enrollCandidateAndPassExam({
+        testRef,
+        certificationKey: CERTIFICATIONS_DATA.DROIT,
+        rightWrongAnswersSequence: [true],
+        pixAppPage: pixAppCertifiablePage,
+        certifiableUserData,
+      });
 
     await test.step('user stops at second challenge', async () => {
       await expect(pixAppCertifiablePage.getByLabel('Votre progression')).toContainText('2 / 32');
@@ -63,7 +70,7 @@ test(
 
     await test.step('Check all session data', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -114,6 +121,40 @@ test(
           result: 'Indépendant',
         });
       });
+    });
+
+    await test.step('Publish session', async () => {
+      const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
+      await sessionsMainPage.publishSession(sessionNumber);
+    });
+
+    await test.step('User checks their certification result', async () => {
+      await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
+      const homePage = new HomePage(pixAppCertifiablePage);
+      const certificateListPage = await homePage.goToMyCertificates();
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+        await certificateListPage.getCertificateData(certificationNumber);
+      expect(mainStatus).toBe('Pix+ Droit : Non obtenu');
+      expect(extraStatus).toBe(null);
+      expect(detailsFramework).toBe(null);
+      expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
+      expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
+      expect(result).toBe('-');
+      expect(comment).toBe(
+        'Commentaire : Le nombre de questions répondues pendant votre test de certification est insuffisant et ne nous permet pas de vous délivrer une certification.',
+      );
+    });
+
+    await test.step('Checking CSV result file content', async () => {
+      const sessionPage = await adminHomepage.goToSession(sessionNumber);
+      const csvBuffer = await sessionPage.downloadCsvResultFile();
+
+      await snapshotHandler.compareCsvOrRecord(csvBuffer, csvResultPath, [
+        'Date de passage de la certification',
+        'Session',
+        'Numéro de certification',
+        'Centre de certification',
+      ]);
     });
 
     await snapshotHandler.expectOrRecord(snapshotPath);
