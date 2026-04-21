@@ -50,31 +50,90 @@ module('Integration | Component |  administration/organizations-import', functio
   });
 
   module('when import fails', function () {
-    test('it displays an error notification', async function (assert) {
-      // given
-      this.server.post(
-        '/admin/organizations/import-csv',
-        () =>
-          new Response(
-            412,
-            {},
-            { errors: [{ status: '412', title: "Un soucis avec l'import", code: '412', detail: 'Erreur d’import' }] },
+    module('when response error contains no errors property', function () {
+      test('it displays a generic error notification', async function (assert) {
+        // given
+        const file = new Blob(['foo'], { type: `valid-file` });
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
+
+        saveAdapterStub.withArgs([file]).rejects();
+
+        // when
+        const screen = await render(<template><OrganizationsImport /></template>);
+        const input = await screen.findByLabelText(t('components.administration.organizations-import.upload-button'));
+        await triggerEvent(input, 'change', { files: [file] });
+
+        // then
+        assert.ok(notificationErrorStub.calledWithExactly({ message: t('common.notifications.generic-error') }));
+      });
+    });
+
+    module('when error code is "PARENT_ORGANIZATION_NOT_IN_NETWORK"', function () {
+      test('it displays a correct error notification', async function (assert) {
+        // given
+        const file = new Blob(['foo'], { type: `valid-file` });
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
+
+        saveAdapterStub.withArgs([file]).rejects({
+          errors: [
+            { code: 'PARENT_ORGANIZATION_NOT_IN_NETWORK', meta: { parentOrganizationId: 1234, currentLine: 2 } },
+          ],
+        });
+
+        // when
+        const screen = await render(<template><OrganizationsImport /></template>);
+        const input = await screen.findByLabelText(t('components.administration.organizations-import.upload-button'));
+        await triggerEvent(input, 'change', { files: [file] });
+
+        // then
+        assert.ok(notificationErrorStub.calledOnce);
+        const [{ message }] = notificationErrorStub.firstCall.args;
+        const errorMessage = message.toString();
+
+        assert.true(
+          errorMessage.includes(
+            t('components.administration.organizations-import.notifications.errors.no-organization-created'),
           ),
-        412,
-      );
-      const file = new Blob(['foo'], { type: `valid-file` });
-      class NotificationsStub extends Service {
-        sendErrorNotification = notificationErrorStub;
-      }
-      this.owner.register('service:pixToast', NotificationsStub);
+        );
+        assert.true(errorMessage.includes('parentOrganizationId'));
+        assert.true(errorMessage.includes('1234'));
+        assert.true(errorMessage.includes('2'));
+      });
+    });
 
-      // when
-      const screen = await render(<template><OrganizationsImport /></template>);
-      const input = await screen.findByLabelText(t('components.administration.organizations-import.upload-button'));
-      await triggerEvent(input, 'change', { files: [file] });
+    module('when error code is "MISSING_REQUIRED_FIELD_NAMES"', function () {
+      test('it displays the correct error notification', async function (assert) {
+        // given
+        const file = new Blob(['foo'], { type: `valid-file` });
+        class NotificationsStub extends Service {
+          sendErrorNotification = notificationErrorStub;
+        }
+        this.owner.register('service:pixToast', NotificationsStub);
 
-      // then
-      assert.ok(notificationErrorStub.called);
+        const error = { code: 'MISSING_REQUIRED_FIELD_NAMES', meta: "Erreur lors de l'import." };
+
+        saveAdapterStub.withArgs([file]).rejects({
+          errors: [error],
+        });
+
+        // when
+        const screen = await render(<template><OrganizationsImport /></template>);
+        const input = await screen.findByLabelText(t('components.administration.organizations-import.upload-button'));
+        await triggerEvent(input, 'change', { files: [file] });
+
+        // then
+        assert.ok(notificationErrorStub.calledOnce);
+        const [{ message }] = notificationErrorStub.firstCall.args;
+        const errorMessage = message.toString();
+
+        assert.true(errorMessage.includes(error.meta.toString()));
+      });
     });
   });
 });
