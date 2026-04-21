@@ -61,11 +61,23 @@ export async function get({ id }) {
  * @param {Date} params.date
  * @param {Date} params.time
  * @param {number} params.certificationCenterId
+ * @param {number} [params.excludeSessionId]
  * @returns {Promise<boolean>}
  */
-export async function isSessionExistingByCertificationCenterId({ address, room, date, time, certificationCenterId }) {
+export async function isSessionExistingByCertificationCenterId({
+  address,
+  room,
+  date,
+  time,
+  certificationCenterId,
+  excludeSessionId,
+}) {
   const knexConn = DomainTransaction.getConnection();
-  const sessions = await knexConn('sessions').where({ address, room, date, time }).andWhere({ certificationCenterId });
+  const query = knexConn('sessions').where({ address, room, date, time }).andWhere({ certificationCenterId });
+  if (excludeSessionId) {
+    query.andWhereNot({ id: excludeSessionId });
+  }
+  const sessions = await query;
   return sessions.length > 0;
 }
 

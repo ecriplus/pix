@@ -5,6 +5,7 @@
  * @typedef {import ("./index.js").SessionCodeService} SessionCodeService
  */
 
+import { AlreadyExistingEntityError } from '../../../../shared/domain/errors.js';
 import { SessionEnrolment } from '../models/SessionEnrolment.js';
 
 /**
@@ -25,6 +26,20 @@ const createSession = async function ({
   sessionValidator.validate(session);
 
   const certificationCenterId = session.certificationCenterId;
+
+  const sessionAlreadyExists = await sessionRepository.isSessionExistingByCertificationCenterId({
+    address: session.address,
+    room: session.room,
+    date: session.date,
+    time: session.time,
+    certificationCenterId,
+  });
+  if (sessionAlreadyExists) {
+    throw new AlreadyExistingEntityError(
+      'Une session avec les mêmes informations existe déjà.',
+      'SESSION_ALREADY_EXISTS',
+    );
+  }
 
   const accessCode = sessionCodeService.getNewSessionCode();
   const { name: certificationCenterName } = await centerRepository.getById({
