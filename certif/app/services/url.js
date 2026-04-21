@@ -65,9 +65,9 @@ export default class Url extends UrlBaseService {
 
   get fraudReportUrl() {
     if (this.locale.currentLanguage === 'fr') {
-      return 'https://cloud.pix.fr/s/AgDytb8yHxrmjFk/download';
+      return 'https://cloud.pix.fr/s/H3QdaLzdaap4zr8/download';
     }
-    return 'https://cloud.pix.fr/s/zka5JJqpbgWZLPr';
+    return 'https://cloud.pix.fr/s/iagftYbDFC8Wb4e/download';
   }
 
   get invigilatorDocumentationUrl() {
