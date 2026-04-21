@@ -94,7 +94,7 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
               status: CERTIFICATE_STATUSES.VALIDATED,
               verificationCode: certificationCourse.verificationCode,
               certificateType: CERTIFICATE_TYPES.ATTESTATION,
-              reachedMeshIndex: null,
+              reachedMeshLevel: null,
             }),
           ]);
         });
@@ -161,7 +161,7 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
                 status: CERTIFICATE_STATUSES.VALIDATED,
                 verificationCode: certificationCourse.verificationCode,
                 certificateType: CERTIFICATE_TYPES.ATTESTATION,
-                reachedMeshIndex: null,
+                reachedMeshLevel: null,
               }),
             ]);
           });
@@ -213,7 +213,7 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
               status: CERTIFICATE_STATUSES.VALIDATED,
               verificationCode: certificationCourse.verificationCode,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
-              reachedMeshIndex: 1,
+              reachedMeshLevel: 'LEVEL_BEGINNER_1',
             }),
           ]);
         });
@@ -262,7 +262,7 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
               status: CERTIFICATE_STATUSES.VALIDATED,
               verificationCode: certificationCourse.verificationCode,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
-              reachedMeshIndex: 3,
+              reachedMeshLevel: 'LEVEL_EXPERT',
             }),
           ]);
         });
@@ -328,7 +328,7 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
               status: CERTIFICATE_STATUSES.VALIDATED,
               verificationCode: certificationCourse.verificationCode,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
-              reachedMeshIndex: null,
+              reachedMeshLevel: null,
             }),
           ]);
         });

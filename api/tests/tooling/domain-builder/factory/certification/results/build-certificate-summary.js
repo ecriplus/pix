@@ -18,7 +18,7 @@ export function buildCertificateSummary({
   status = CERTIFICATE_STATUSES.VALIDATED,
   extraCertificationStatus = EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
   certificateType = CERTIFICATE_TYPES.CERTIFICATE,
-  reachedMeshIndex = 0,
+  reachedMeshLevel = 'LEVEL_INDEPENDENT',
 } = {}) {
   return new CertificateSummary({
     id,
@@ -31,6 +31,6 @@ export function buildCertificateSummary({
     status,
     extraCertificationStatus,
     certificateType,
-    reachedMeshIndex,
+    reachedMeshLevel,
   });
 }

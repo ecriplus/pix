@@ -27,7 +27,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
       isExtraCertificationAcquired: true,
       status: CERTIFICATE_STATUSES.REJECTED,
       certificateType: CERTIFICATE_TYPES.CERTIFICATE,
-      reachedMeshIndex: 1,
+      reachedMeshLevel: 'LEVEL_CONFIRMED',
     };
   });
 
@@ -62,7 +62,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment:
               "Les conditions de passation du test de certification n'ayant pas été respectées et ayant fait l'objet d'un signalement pour fraude, votre certification a été invalidée en conséquence.",
-            'reached-mesh-index': 1,
+            'reached-mesh-level': 'CONFIRMED',
           },
         },
       });
@@ -81,7 +81,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment:
               'The Pix certification exam conditions have not been respected. Your certification exam has been reported for fraud and has consequently been invalidated.',
-            'reached-mesh-index': 1,
+            'reached-mesh-level': 'CONFIRMED',
           },
         },
       });
@@ -116,7 +116,7 @@ describe('Certification | Results | Unit | Infrastructure | Serializers | certif
             status: CERTIFICATE_STATUSES.REJECTED,
             'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             comment: 'Message à tous les habitants de la galaxie, because it is la fiesta',
-            'reached-mesh-index': 1,
+            'reached-mesh-level': 'CONFIRMED',
           },
         },
       });

@@ -1,6 +1,7 @@
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
+import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
 
 export const CERTIFICATE_STATUSES = {
   WAITING_FOR_RESULTS: 'WAITING_FOR_RESULTS',
@@ -33,7 +34,7 @@ export class CertificateSummary {
     status,
     extraCertificationStatus,
     certificateType,
-    reachedMeshIndex,
+    reachedMeshLevel,
   }) {
     this.id = id;
     this.verificationCode = verificationCode;
@@ -45,7 +46,7 @@ export class CertificateSummary {
     this.status = status;
     this.extraCertificationStatus = extraCertificationStatus;
     this.certificateType = certificateType;
-    this.reachedMeshIndex = reachedMeshIndex;
+    this.reachedMeshLevel = reachedMeshLevel;
   }
 
   static buildFrom({
@@ -112,7 +113,9 @@ export class CertificateSummary {
       status,
       extraCertificationStatus,
       certificateType,
-      reachedMeshIndex: isRejectedV3 ? null : reachedMeshIndex,
+      reachedMeshLevel: isRejectedV3
+        ? null
+        : new GlobalCertificationLevel({ reachedMeshIndex, certificationFramework }).meshLevel,
     });
   }
 }
