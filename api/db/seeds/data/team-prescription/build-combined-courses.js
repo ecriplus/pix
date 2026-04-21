@@ -41,7 +41,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     buildUser,
   } = databaseBuilder.factory;
 
-  // 1. Build target profile if needed (to get targetProfileId for blueprint)
   let targetProfileId;
   if (combinedCourseData.targetProfile) {
     targetProfileId = buildTargetProfile({
@@ -49,7 +48,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       name: combinedCourseData.targetProfile.name,
     }).id;
 
-    // Build stages if any
     combinedCourseData.targetProfile.stages?.forEach((stage) => {
       buildStage({
         title: stage.title,
@@ -58,7 +56,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       });
     });
 
-    // Build target profile tubes
     combinedCourseData.targetProfile.tubes.forEach(({ id, level }) =>
       buildTargetProfileTube({
         targetProfileId,
@@ -68,7 +65,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     );
   }
 
-  // 2. Build blueprint quest with targetProfileId-based requirements (like production)
   const blueprintSuccessRequirements = combinedCourseData.blueprint.requirements.map((req) => {
     if (req.type === 'evaluation') {
       return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId }).toDTO();
@@ -90,7 +86,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     questId: blueprintQuestId,
   });
 
-  // 3. Build campaign linked to target profile
   let campaignId;
   if (combinedCourseData.targetProfile) {
     const campaignData = combinedCourseData.targetProfile.campaign;
@@ -104,7 +99,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       customResultPageButtonUrl: campaignData.customResultPageButtonUrl,
     }).id;
 
-    // Build campaign skills
     campaignData.skills.forEach((skillId) =>
       buildCampaignSkill({
         campaignId,
@@ -112,7 +106,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       }),
     );
 
-    // Build trainings if any
     combinedCourseData.targetProfile.trainings?.map((training) => {
       const { id: trainingId } = buildTraining(training);
       const { id: trainingTriggerId } = buildTrainingTrigger({
@@ -132,7 +125,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     });
   }
 
-  // 4. Build combined course quest resolving targetProfileId → campaignId (like toCombinedCourse)
   const combinedCourseSuccessRequirements = combinedCourseData.blueprint.requirements.map((req) => {
     if (req.type === 'evaluation') {
       return CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO();
@@ -146,7 +138,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     rewardId: combinedCourseData.blueprint.rewardId ?? null,
   });
 
-  // 5. Build combined course linked to blueprint
   const { id: combinedCourseId } = buildCombinedCourse({
     code: combinedCourseData.combinedCourse.code,
     name: combinedCourseData.combinedCourse.name ?? combinedCourseData.blueprint.name,
@@ -157,7 +148,6 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     deletedBy: combinedCourseData.deletedBy,
   });
 
-  // 6. Build participations
   combinedCourseData.participations.forEach((participation) => {
     const { id: userId } = buildUser.withRawPassword({
       firstName: participation.firstName,
