@@ -53,6 +53,42 @@ describe('Integration | Certification | Enrolment | Repository | Candidate', fun
       });
     });
 
+    context('when the candidate has an associated certification course', function () {
+      it('should return the candidate with information on whether he/she started the test', async function () {
+        // given
+        const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate();
+
+        databaseBuilder.factory.buildCoreSubscription({
+          certificationCandidateId: certificationCandidate.id,
+        });
+
+        databaseBuilder.factory.buildCertificationCourse({
+          userId: certificationCandidate.userId,
+          candidateId: certificationCandidate.id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await candidateRepository.get({
+          certificationCandidateId: certificationCandidate.id,
+        });
+
+        // then
+        expect(result).to.deepEqualInstance(
+          new Candidate({
+            ...certificationCandidate,
+            subscriptions: [
+              domainBuilder.certification.enrolment.buildCoreSubscription({
+                certificationCandidateId: certificationCandidate.id,
+              }),
+            ],
+            hasStartedTest: true,
+          }),
+        );
+      });
+    });
+
     context('when the candidate does not exist', function () {
       it('return null', async function () {
         // given

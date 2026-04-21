@@ -37,6 +37,7 @@ export class EnrolledCandidate {
     prepaymentCode,
     accessibilityAdjustmentNeeded = false,
     hasSeenCertificationInstructions,
+    hasStartedTest,
   } = {}) {
     this.id = id;
     this.createdAt = createdAt;
@@ -62,6 +63,7 @@ export class EnrolledCandidate {
     this.hasSeenCertificationInstructions = hasSeenCertificationInstructions;
     this.subscriptions = subscriptions;
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
+    this.hasStartedTest = hasStartedTest;
   }
 
   findComplementarySubscriptionInfo() {

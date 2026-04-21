@@ -59,6 +59,7 @@ function toDomain(candidateData) {
   const subscriptions = candidateData.subscriptions.map((subscription) => new Subscription(subscription));
   return new EnrolledCandidate({
     ...candidateData,
+    hasStartedTest: Boolean(candidateData.certificationCourseId),
     subscriptions,
   });
 }
@@ -69,7 +70,7 @@ function toDomain(candidateData) {
  */
 function buildBaseReadQuery(knexConn) {
   return knexConn
-    .select('certification-candidates.*')
+    .select('certification-candidates.*', 'certification-courses.id as certificationCourseId')
     .select({
       subscriptions: knexConn.raw(
         `json_agg(
@@ -83,6 +84,7 @@ function buildBaseReadQuery(knexConn) {
       ),
     })
     .from('certification-candidates')
+    .leftJoin('certification-courses', 'certification-courses.candidateId', 'certification-candidates.id')
     .join(
       'certification-subscriptions',
       'certification-subscriptions.certificationCandidateId',
@@ -93,5 +95,5 @@ function buildBaseReadQuery(knexConn) {
       'certification-subscriptions.complementaryCertificationId',
       'complementary-certifications.id',
     )
-    .groupBy('certification-candidates.id');
+    .groupBy('certification-candidates.id', 'certification-courses.id');
 }
