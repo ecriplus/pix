@@ -294,6 +294,33 @@ describe('Integration | Repository | certification | enrolment | SessionEnrolmen
       // then
       expect(result).to.equal(false);
     });
+
+    it('should return false if the only matching session is the excluded one', async function () {
+      // given
+      const session = {
+        address: 'rue de Bercy',
+        room: 'Salle A',
+        examiner: 'madame examinatrice',
+        date: '2018-02-23',
+        time: '12:00:00',
+      };
+      const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const existingSession = databaseBuilder.factory.buildSession({
+        ...session,
+        certificationCenterId,
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const result = await sessionRepository.isSessionExistingByCertificationCenterId({
+        ...session,
+        certificationCenterId,
+        excludeSessionId: existingSession.id,
+      });
+
+      // then
+      expect(result).to.equal(false);
+    });
   });
 
   describe('#isSessionExistingBySessionAndCertificationCenterIds', function () {
