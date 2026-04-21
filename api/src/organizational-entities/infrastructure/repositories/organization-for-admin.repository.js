@@ -382,7 +382,7 @@ async function _addOrUpdateDataProtectionOfficer(knexConn, dataProtectionOfficer
   await knexConn(DATA_PROTECTION_OFFICERS_TABLE_NAME)
     .insert(dataProtectionOfficer)
     .onConflict('organizationId')
-    .merge();
+    .merge(['firstName', 'lastName', 'email', 'updatedAt']);
 }
 
 async function _addTags(knexConn, organizationTags) {

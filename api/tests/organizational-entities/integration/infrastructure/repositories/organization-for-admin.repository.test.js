@@ -1747,19 +1747,21 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(dataProtectionOfficerCreated.email).to.equal('iron@man.fr');
     });
 
-    it('should update data protection officer', async function () {
+    it('should update data protection officer but not the createdAt', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser({ firstName: 'Spider', lastName: 'Man' }).id;
       const organization = databaseBuilder.factory.buildOrganization({
         name: 'super orga',
         createdBy: userId,
       });
-
+      const date = new Date('1992-07-07');
       databaseBuilder.factory.buildDataProtectionOfficer.withOrganizationId({
         organizationId: organization.id,
         firstName: 'Tony',
         lastName: 'Stark',
         email: 'tony@stark.com',
+        createdAt: date,
+        updatedAt: date,
       });
 
       await databaseBuilder.commit();
@@ -1784,6 +1786,8 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       expect(dataProtectionOfficerUpdated.firstName).to.equal('Iron');
       expect(dataProtectionOfficerUpdated.lastName).to.equal('Man');
       expect(dataProtectionOfficerUpdated.email).to.equal('iron@man.fr');
+      expect(dataProtectionOfficerUpdated.createdAt).to.deep.equal(date);
+      expect(dataProtectionOfficerUpdated.updatedAt).to.not.deep.equal(date);
     });
 
     it('should add tags', async function () {
