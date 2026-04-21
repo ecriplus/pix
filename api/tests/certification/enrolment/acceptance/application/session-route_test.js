@@ -103,6 +103,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             time: '14:30',
             description: 'ahah',
             accessCode: 'ABCD12',
+            'certification-center-id': certificationCenter.id,
           },
         },
       };
