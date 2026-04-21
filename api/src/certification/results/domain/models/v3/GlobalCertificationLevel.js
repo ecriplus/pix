@@ -22,6 +22,13 @@ export const EDU_LEVELS = {
   0: 'LEVEL_ADMISSIBLE',
 };
 
+export const STANDARD_PIX_PLUS_LEVELS = {
+  0: 'LEVEL_INDEPENDENT',
+  1: 'LEVEL_CONFIRMED',
+  2: 'LEVEL_ADVANCED',
+  3: 'LEVEL_EXPERT',
+};
+
 export class GlobalCertificationLevel {
   static #schema = Joi.object({
     meshLevel: Joi.string().allow(null),
@@ -50,17 +57,22 @@ export class GlobalCertificationLevel {
   }
 
   #getLevelKey({ reachedMeshIndex, certificationFramework }) {
+    if (reachedMeshIndex === null) return null;
+
     switch (certificationFramework) {
       case Frameworks.CORE:
       case Frameworks.CLEA:
+        if (reachedMeshIndex === null) {
+          return null;
+        }
         return CORE_LEVELS[reachedMeshIndex];
       case Frameworks.EDU_1ER_DEGRE:
       case Frameworks.EDU_2ND_DEGRE:
       case Frameworks.EDU_CPE:
-        if (reachedMeshIndex === null) {
-          return null;
-        }
         return EDU_LEVELS[0];
+      case Frameworks.DROIT:
+      case Frameworks.PRO_SANTE:
+        return STANDARD_PIX_PLUS_LEVELS[reachedMeshIndex];
     }
   }
 

@@ -221,6 +221,10 @@
     },
     "global": {
       "meshlevel": {
+        "LEVEL_ADVANCED": {
+          "label": "Avanzato",
+          "summary": "Il candidato ha raggiunto il livello Avanzato."
+        },
         "LEVEL_ADVANCED_5": {
           "description": "Siete in grado di utilizzare strumenti specialistici per cercare informazioni in modo affidabile, gestire i social network e modificare immagini e video. Siete in grado di produrre analisi dei dati e rappresentazioni grafiche adeguate. Sapete come impostare un ambiente digitale (installazione e configurazione). Conoscete le problematiche legate al tracciamento e alla raccolta dei dati. Comprendete l'impatto ambientale e sociale dell'uso del digitale e sapete come adattare le vostre pratiche.",
           "label": "Avanzato 1",
@@ -241,6 +245,14 @@
           "label": "Novizio 2",
           "summary": "Avete a disposizione pratiche digitali semplici, con un aiuto quando il gioco si fa duro."
         },
+        "LEVEL_CONFIRMED": {
+          "label": "Confermato",
+          "summary": "Il candidato ha raggiunto il livello Confermato."
+        },
+        "LEVEL_EXPERT": {
+          "label": "Esperto",
+          "summary": "Il candidato ha raggiunto il livello Esperto."
+        },
         "LEVEL_EXPERT_7": {
           "description": "Sarete in grado di analizzare un'esigenza, di consultare la documentazione, anche tecnica, e di valutare le soluzioni digitali per implementare la soluzione più ottimale, o addirittura di sviluppare voi stessi degli strumenti. Comprenderete le questioni economiche, sociali ed etiche associate alle tecnologie digitali e sarete in grado di riflettere criticamente sulle vostre pratiche digitali. Sarete in grado di formarvi su nuove tecniche e di avere una buona conoscenza dei più recenti progressi tecnologici, come quelli resi possibili dall'intelligenza artificiale.",
           "label": "Esperto 1",
@@ -249,6 +261,10 @@
         "LEVEL_EXPERT_8": {
           "label": "Esperto 2",
           "summary": "Siete in grado di documentare le vostre soluzioni a problemi nuovi e specifici in modo da poterle condividere."
+        },
+        "LEVEL_INDEPENDENT": {
+          "label": "Indipendente",
+          "summary": "Il candidato ha raggiunto il livello Indipendente."
         },
         "LEVEL_INDEPENDENT_3": {
           "description": "Sapete navigare in rete per effettuare ricerche approfondite utilizzando informazioni pertinenti. Sapete partecipare ad attività collaborative (e-mail, agenda condivisa, videoritrovi, documenti condivisi). Sapete utilizzare le funzioni più comuni dei software standard (elaborazione testi e fogli di calcolo). Siete consapevoli dei rischi associati alle vostre pratiche digitali e della necessità di proteggerle, nonché dell'impatto ambientale dei vostri usi digitali. Sapete come risolvere i problemi più comuni (password, connessione).",

@@ -140,6 +140,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
               extraCertificationStatus: null,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshLevel: 'LEVEL_BEGINNER_1',
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -180,6 +181,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.VALIDATED,
               extraCertificationStatus,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshLevel: 'LEVEL_BEGINNER_1',
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -275,6 +277,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
             status: CERTIFICATE_STATUSES.VALIDATED,
             extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             certificateType,
+            reachedMeshLevel: 'LEVEL_BEGINNER_1',
           });
 
           expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
