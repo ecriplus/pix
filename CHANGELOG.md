@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.391.0](https://github.com/1024pix/pix/compare/v5.390.1...v5.391.0) (2026-04-21)
+
+### :rocket: Amélioration
+
+- [#15907](https://github.com/1024pix/pix/pull/15907) Ajouter la route qui récupère les informations du catalogue sur PixOrga (PIX-22207). 
+- [#15942](https://github.com/1024pix/pix/pull/15942) Modifier la formulation d'organisation parente (PIX-22430) 
+- [#15888](https://github.com/1024pix/pix/pull/15888) Module MFA_IND changement exos et images definitives 
+- [#15915](https://github.com/1024pix/pix/pull/15915) Supprimer la colonne parentOrganizationId du CSV de modification d'organisations en masse (PIX-22386) 
+- [#15902](https://github.com/1024pix/pix/pull/15902) Utiliser le système des réseaux dans la création d'organisations en masse (PIX-22116) 
+
+### :bug: Correction
+
+- [#15914](https://github.com/1024pix/pix/pull/15914) Ne pas mettre à jour le createdAt lors de la mise à jour des DPO (PIX-22393) 
+- [#15954](https://github.com/1024pix/pix/pull/15954) Réparer du style dans le composant DescriptionList de PixAdmin  
+
+### :building_construction: Tech
+
+- [#15923](https://github.com/1024pix/pix/pull/15923) Ajout d'un test E2E pour l'inscription SCO en certif (PIX-22370). 
+- [#15940](https://github.com/1024pix/pix/pull/15940) Ne plus importer certains utilitaires depuis test-helper.js (part 2) 
+- [#15950](https://github.com/1024pix/pix/pull/15950) Ne plus importer certains utilitaires depuis test-helper.js (part 3) 
+- [#15952](https://github.com/1024pix/pix/pull/15952) Ne plus importer certains utilitaires depuis test-helper.js (part 4) 
+
+### :arrow_up: Montée de version
+
+- [#15945](https://github.com/1024pix/pix/pull/15945) Update dependency @1024pix/pix-ui to ^60.6.0 (certif) 
+- [#15951](https://github.com/1024pix/pix/pull/15951) Update dependency @1024pix/pix-ui to ^60.7.0 (admin) 
+- [#15955](https://github.com/1024pix/pix/pull/15955) Update dependency @1024pix/pix-ui to ^60.7.0 (certif) 
+- [#15956](https://github.com/1024pix/pix/pull/15956) Update dependency @1024pix/pix-ui to ^60.7.0 (junior) 
+- [#15957](https://github.com/1024pix/pix/pull/15957) Update dependency @1024pix/pix-ui to ^60.7.0 (orga) 
+- [#15958](https://github.com/1024pix/pix/pull/15958) Update dependency oxfmt to ^0.45.0 (api)
+
 ## [5.390.1](https://github.com/1024pix/pix/compare/v5.390.0...v5.390.1) (2026-04-20)
 
 ### :bug: Correction
