@@ -73,6 +73,7 @@ export default class EmailVerificationCode extends Component {
       const email = await emailVerificationCode.verifyCode();
       if (this.args.action === 'add-email') {
         await this._reloadAccountData();
+
         this.args.displayEmailAddedMessage();
       } else {
         if (email) {
@@ -146,11 +147,11 @@ export default class EmailVerificationCode extends Component {
         </div>
       {{/if}}
       <div class="email-verification-code__actions">
-        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
-          {{t "common.actions.cancel"}}
-        </PixButton>
         <PixButton @triggerAction={{this.onSubmitCode}} @variant="primary">
           {{t "pages.user-account.email-verification.validate-new-email"}}
+        </PixButton>
+        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
+          {{t "common.actions.cancel"}}
         </PixButton>
       </div>
     </div>
