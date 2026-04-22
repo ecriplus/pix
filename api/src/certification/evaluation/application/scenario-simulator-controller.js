@@ -1,7 +1,5 @@
 import { Readable } from 'node:stream';
 
-import _ from 'lodash';
-
 import { random } from '../../../shared/infrastructure/utils/random.js';
 import { DEFAULT_PROBABILITY_TO_PICK_CHALLENGE } from '../../shared/domain/constants.js';
 import { pickAnswerStatusService } from '../../shared/domain/services/pick-answer-status-service.js';
@@ -34,24 +32,20 @@ async function simulateFlashAssessmentScenario(
   const pickAnswerStatus = dependencies.pickAnswerStatusService.pickAnswerStatusForCapacity(capacity);
 
   async function* generate() {
-    const iterations = _.range(0, numberOfIterations);
-
-    for (const index of iterations) {
+    for (let index = 0; index < numberOfIterations; index++) {
       const pickChallenge = dependencies.pickChallengeService.getChallengePicker(challengePickProbability);
 
-      const usecaseParams = _.omitBy(
-        {
-          pickAnswerStatus,
-          pickChallenge,
-          locale,
-          initialCapacity,
-          variationPercent,
-          accessibilityAdjustmentNeeded,
-          stopAtChallenge,
-          versionId,
-        },
-        _.isUndefined,
-      );
+      const usecaseParams = {
+        pickAnswerStatus,
+        pickChallenge,
+        locale,
+        initialCapacity,
+        variationPercent,
+        accessibilityAdjustmentNeeded,
+        stopAtChallenge,
+        versionId,
+      };
+      Object.keys(usecaseParams).forEach((key) => usecaseParams[key] === undefined && delete usecaseParams[key]);
 
       const simulationReport = await usecases.simulateFlashAssessmentScenario(usecaseParams);
 

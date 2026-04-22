@@ -1,4 +1,3 @@
-import _ from 'lodash';
 const qrocmDepChallenge = 'QROCM-dep';
 
 class AnswerCollectionForScoring {
@@ -46,7 +45,7 @@ class AnswerCollectionForScoring {
     const challengesForCompetence = this.challengesWithAnswers.filter(
       (challengeWithAnswer) => challengeWithAnswer.competenceId() === competenceId,
     );
-    const numberOfChallenges = _(challengesForCompetence)
+    const numberOfChallenges = challengesForCompetence
       .map((challenge) => {
         if (challengesForCompetence.length < 3 && challenge.isQROCMdep()) {
           return 2;
@@ -54,7 +53,7 @@ class AnswerCollectionForScoring {
           return 1;
         }
       })
-      .sum();
+      .reduce((challengeCount, challengeForCompetenceCount) => challengeCount + challengeForCompetenceCount, 0);
     return numberOfChallenges;
   }
 
@@ -73,14 +72,14 @@ class AnswerCollectionForScoring {
       }
     });
 
-    return _.min([nbOfCorrectAnswers, 3]);
+    return Math.min(nbOfCorrectAnswers, 3);
   }
 
   numberOfNeutralizedChallengesForCompetence(competenceId) {
     const answersForCompetence = this.challengesWithAnswers.filter(
       (challengeWithAnswer) => challengeWithAnswer.competenceId() === competenceId,
     );
-    return _(answersForCompetence)
+    return answersForCompetence
       .map((answer) => {
         if (answer.isNeutralized()) {
           if (answersForCompetence.length < 3 && answer.isQROCMdep()) {
@@ -92,7 +91,7 @@ class AnswerCollectionForScoring {
           return 0;
         }
       })
-      .sum();
+      .reduce((answerCount, answerForCompetenceCount) => answerCount + answerForCompetenceCount, 0);
   }
 }
 

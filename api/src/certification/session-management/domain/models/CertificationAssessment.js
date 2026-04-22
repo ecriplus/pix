@@ -5,7 +5,6 @@
 import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
-import _ from 'lodash';
 
 import { AnswerStatus } from '../../../../shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -73,7 +72,7 @@ export class CertificationAssessment {
   }
 
   getCertificationChallenge(challengeId) {
-    return _.find(this.certificationChallenges, { challengeId }) || null;
+    return this.certificationChallenges.find((challenge) => challenge.challengeId === challengeId) || null;
   }
 
   getAnswerByQuestionNumber(questionNumber) {
@@ -81,7 +80,7 @@ export class CertificationAssessment {
   }
 
   neutralizeChallengeByRecId(recId) {
-    const challengeToBeNeutralized = _.find(this.certificationChallenges, { challengeId: recId });
+    const challengeToBeNeutralized = this.certificationChallenges.find((challenge) => challenge.challengeId === recId);
     if (challengeToBeNeutralized) {
       challengeToBeNeutralized.neutralize();
     } else {
@@ -92,7 +91,7 @@ export class CertificationAssessment {
   endDueToFinalization() {
     if (this.state === Assessment.states.STARTED) {
       this.state = Assessment.states.ENDED_DUE_TO_FINALIZATION;
-      this.endedAt = this._getLastChallenge()?.createdAt || this.createdAt;
+      this.endedAt = this._getLastChallengeCreatedAt();
     }
   }
 
@@ -108,8 +107,8 @@ export class CertificationAssessment {
     }
 
     if (_isAnswerKoOrSkipped(toBeNeutralizedChallengeAnswer.result.status)) {
-      const challengeToBeNeutralized = _.find(this.certificationChallenges, {
-        challengeId: toBeNeutralizedChallengeAnswer.challengeId,
+      const challengeToBeNeutralized = this.certificationChallenges.find((certificationChallenge) => {
+        return certificationChallenge.challengeId === toBeNeutralizedChallengeAnswer.challengeId;
       });
       challengeToBeNeutralized.neutralize();
       return NeutralizationAttempt.neutralized(questionNumber);
@@ -119,7 +118,9 @@ export class CertificationAssessment {
   }
 
   deneutralizeChallengeByRecId(recId) {
-    const challengeToBeDeneutralized = _.find(this.certificationChallenges, { challengeId: recId });
+    const challengeToBeDeneutralized = this.certificationChallenges.find(
+      (certificationChallenge) => certificationChallenge.challengeId === recId,
+    );
     if (challengeToBeDeneutralized) {
       challengeToBeDeneutralized.deneutralize();
     } else {
@@ -142,10 +143,12 @@ export class CertificationAssessment {
   }
 
   findAnswersAndChallengesForCertifiableBadgeKey(certifiableBadgeKey) {
-    const certificationChallengesForBadge = _.filter(this.certificationChallenges, { certifiableBadgeKey });
+    const certificationChallengesForBadge = this.certificationChallenges.filter(
+      (certificationChallenge) => certificationChallenge.certifiableBadgeKey === certifiableBadgeKey,
+    );
     const challengeIds = certificationChallengesForBadge.map((ccfb) => ccfb.challengeId);
     const answersForBadge = this.certificationAnswersByDate.filter(({ challengeId }) =>
-      _.includes(challengeIds, challengeId),
+      challengeIds.includes(challengeId),
     );
     return {
       certificationChallenges: certificationChallengesForBadge,
@@ -193,8 +196,16 @@ export class CertificationAssessment {
     ];
   }
 
-  _getLastChallenge() {
-    return _.orderBy(this.certificationChallenges, 'createdAt', 'desc')[0];
+  _getLastChallengeCreatedAt() {
+    if (this.certificationChallenges.length === 0) {
+      return this.createdAt;
+    }
+    return new Date(
+      this.certificationChallenges
+        .map((cc) => cc.createdAt.getTime())
+        .sort()
+        .at(-1),
+    );
   }
 }
 

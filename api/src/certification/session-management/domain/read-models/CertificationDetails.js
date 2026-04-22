@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { AnswerCollectionForScoring } from '../../../shared/domain/models/AnswerCollectionForScoring.js';
 import { ReproducibilityRate } from '../../../shared/domain/models/ReproducibilityRate.js';
 
@@ -38,13 +36,15 @@ export class CertificationDetails {
     const competencesWithMark = _buildCompetencesWithMark({ competenceMarks, placementProfile });
     const listChallengesAndAnswers = _buildListChallengesAndAnswers({ certificationAssessment, competencesWithMark });
 
+    const totalScore = competenceMarks.reduce((score, competenceMark) => score + competenceMark.score, 0);
+
     return new CertificationDetails({
       id: certificationAssessment.certificationCourseId,
       userId: certificationAssessment.userId,
       createdAt: certificationAssessment.createdAt,
       lastAnswerAt: certificationAssessment.lastAnswerAt,
       status: certificationAssessment.state,
-      totalScore: _.sumBy(competenceMarks, 'score'),
+      totalScore,
       percentageCorrectAnswers: reproducibilityRate.value,
       competencesWithMark,
       listChallengesAndAnswers,
@@ -103,7 +103,7 @@ function _buildListChallengesAndAnswers({ certificationAssessment, competencesWi
     };
   });
 
-  const unansweredChallengesAndAnswers = _(certificationAssessment.certificationChallenges)
+  const unansweredChallengesAndAnswers = certificationAssessment.certificationChallenges
     .map((challenge) => {
       const answer = certificationAssessment.certificationAnswersByDate.find(
         (answer) => answer.challengeId === challenge.challengeId,
@@ -122,14 +122,15 @@ function _buildListChallengesAndAnswers({ certificationAssessment, competencesWi
         value: undefined,
       };
     })
-    .compact()
-    .sortBy('competence')
-    .value();
+    .filter(Boolean)
+    .sort((a, b) => (a['competence'] > b['competence'] ? 1 : a['competence'] < b['competence'] ? -1 : 0));
 
-  return answeredChallengesAndAnswers.concat(unansweredChallengesAndAnswers);
+  return answeredChallengesAndAnswers.concat(Object.values(unansweredChallengesAndAnswers));
 }
 
 function _getCompetenceIndexForChallenge(certificationChallenge, competencesWithMark) {
-  const competenceWithMark = _.find(competencesWithMark, { id: certificationChallenge.competenceId });
+  const competenceWithMark = competencesWithMark?.find(
+    (competenceWithMark) => competenceWithMark.id === certificationChallenge.competenceId,
+  );
   return competenceWithMark ? competenceWithMark.index : '';
 }
