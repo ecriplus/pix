@@ -15,7 +15,6 @@ export default class CertificationDetails extends ApplicationSerializer {
           createdAt: payload.createdAt,
           userId: payload.userId,
           status: payload.status,
-          completedAt: payload.completedAt,
           listChallengesAndAnswers: payload.listChallengesAndAnswers,
         },
         type: 'certificationDetails',

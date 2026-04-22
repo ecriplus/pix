@@ -250,18 +250,16 @@ module('Unit | Model | jury-certification-summary', function (hooks) {
       // given
       const juryCertificationSummary = store.createRecord('jury-certification-summary', {
         lastAnswerAt: null,
-        completedAt: new Date('2023-12-24'),
       });
 
       // then
       assert.notOk(juryCertificationSummary.lastAnswerDate, null);
     });
 
-    test('it should a formatted date when completedAt is defined', function (assert) {
+    test('it should a formatted date when lastAnswerAt is defined', function (assert) {
       // given
-      const completedAt = '2021-06-30 15:10:45';
       const lastAnswerAt = '2021-06-30 15:10:45';
-      const juryCertificationSummary = store.createRecord('jury-certification-summary', { completedAt, lastAnswerAt });
+      const juryCertificationSummary = store.createRecord('jury-certification-summary', { lastAnswerAt });
 
       // then
       const expectedFormat = intl.formatDate(new Date(lastAnswerAt), { format: 'long' });

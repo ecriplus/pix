@@ -16,7 +16,6 @@ module('Integration | Component | Certifications | Certification | Information |
   test('should display certification state informations', async function (assert) {
     // given
     const certification = store.createRecord('certification', {
-      completedAt: new Date(),
       lastAnswerAt: new Date(),
       status: 'rejected',
       isPublished: false,
@@ -44,9 +43,9 @@ module('Integration | Component | Certifications | Certification | Information |
     assert.dom(createdAtInfo).exists();
     assert.dom(within(createdAtInfo.parentNode).getByText(certification.creationDate)).exists();
 
-    const completedAtInfo = screen.getByText('Dernière réponse le');
-    assert.dom(completedAtInfo).exists();
-    assert.dom(within(completedAtInfo.parentNode).getByText(certification.lastAnswerDate)).exists();
+    const lastAnswerAtInfo = screen.getByText('Dernière réponse le');
+    assert.dom(lastAnswerAtInfo).exists();
+    assert.dom(within(lastAnswerAtInfo.parentNode).getByText(certification.lastAnswerDate)).exists();
   });
 
   module('when the certification is published', function () {

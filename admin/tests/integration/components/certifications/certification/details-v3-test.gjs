@@ -288,7 +288,6 @@ module('Integration | Component | Certifications | certification > details v3', 
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
-              completedAt: null,
 
               endedAt: new Date('2023-01-13T08:05:00Z'),
               lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
@@ -314,7 +313,6 @@ module('Integration | Component | Certifications | certification > details v3', 
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedDueToFinalization',
-              completedAt: null,
 
               endedAt: new Date('2023-01-13T08:05:00Z'),
               lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
@@ -348,7 +346,6 @@ module('Integration | Component | Certifications | certification > details v3', 
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
-              completedAt: null,
 
               endedAt: new Date('2023-01-13T08:05:00Z'),
               lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
@@ -374,7 +371,6 @@ module('Integration | Component | Certifications | certification > details v3', 
 
             const model = await store.createRecord('v3-certification-course-details-for-administration', {
               assessmentState: 'endedByInvigilator',
-              completedAt: null,
 
               endedAt: new Date('2023-01-13T08:05:00Z'),
               lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
@@ -627,8 +623,6 @@ module('Integration | Component | Certifications | certification > details v3', 
 function createCertificationCourseDetailsRecord({ certificationChallengesForAdministration, store, params }) {
   return store.createRecord('v3-certification-course-details-for-administration', {
     assessmentState: 'completed',
-
-    completedAt: new Date('2023-01-13T09:05:00Z'),
     lastAnswerAt: new Date('2023-01-13T09:05:00Z'),
     assessmentResultStatus: 'validated',
     numberOfChallenges: 15,
