@@ -153,7 +153,7 @@ import { endAssessmentByInvigilator } from './end-assessment-by-invigilator.js';
 import { finalizeSession } from './finalize-session.js';
 import { findFinalizedSessionsToPublish } from './find-finalized-sessions-to-publish.js';
 import { findFinalizedSessionsWithRequiredAction } from './find-finalized-sessions-with-required-action.js';
-import { findPaginatedCertificationCenterSessionSummaries } from './find-paginated-certification-center-session-summaries.js';
+import { findPaginatedFilteredCertificationCenterSessionSummaries } from './find-paginated-filtered-certification-center-session-summaries.js';
 import { getCertificationDetails } from './get-certification-details.js';
 import { getPreSignedUrls } from './get-cpf-presigned-urls.js';
 import { getInvigilatorKitSessionInfo } from './get-invigilator-kit-session-info.js';
@@ -198,7 +198,7 @@ const usecasesWithoutInjectedDependencies = {
   finalizeSession,
   findFinalizedSessionsToPublish,
   findFinalizedSessionsWithRequiredAction,
-  findPaginatedCertificationCenterSessionSummaries,
+  findPaginatedFilteredCertificationCenterSessionSummaries,
   getCertificationDetails,
   getPreSignedUrls,
   getInvigilatorKitSessionInfo,

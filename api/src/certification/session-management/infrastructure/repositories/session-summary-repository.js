@@ -1,8 +1,9 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
+import { SESSION_STATUSES } from '../../../shared/domain/constants.js';
 import { SessionSummary } from '../../domain/read-models/SessionSummary.js';
 
-const findPaginatedByCertificationCenterId = async function ({ certificationCenterId, page }) {
+export async function findPaginatedFilteredByCertificationCenterId({ certificationCenterId, filters = {}, page }) {
   const knexConn = DomainTransaction.getConnection();
   const query = knexConn('sessions')
     .select({
@@ -28,22 +29,43 @@ const findPaginatedByCertificationCenterId = async function ({ certificationCent
       );
     })
     .where({ certificationCenterId })
+    .modify(_setupFilters, filters)
     .groupBy('sessions.id')
     .orderBy('sessions.date', 'DESC')
     .orderBy('sessions.time', 'DESC')
     .orderBy('sessions.id', 'ASC');
 
-  const countQuery = knexConn('sessions').count('*', { as: 'row_count' }).where({ certificationCenterId });
-
   const { results, pagination } = await fetchPage({
     queryBuilder: query,
     paginationParams: page,
-    countQueryBuilder: countQuery,
   });
-  const hasSessions = Boolean(pagination.rowCount);
+
+  const { row_count } = await knexConn('sessions')
+    .where({ certificationCenterId })
+    .count('*', { as: 'row_count' })
+    .first();
+  const hasSessions = Boolean(row_count);
 
   const sessionSummaries = results.map((result) => SessionSummary.from(result));
   return { models: sessionSummaries, meta: { ...pagination, hasSessions } };
-};
+}
 
-export { findPaginatedByCertificationCenterId };
+function _setupFilters(query, filters) {
+  const { sessionId, status } = filters;
+
+  if (sessionId) {
+    query.where('sessions.id', sessionId);
+  }
+
+  if (status === SESSION_STATUSES.CREATED) {
+    query.whereNull('finalizedAt');
+    query.whereNull('publishedAt');
+  }
+  if (status === SESSION_STATUSES.FINALIZED) {
+    query.whereNotNull('finalizedAt');
+    query.whereNull('publishedAt');
+  }
+  if (status === SESSION_STATUSES.PROCESSED) {
+    query.whereNotNull('publishedAt');
+  }
+}

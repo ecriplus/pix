@@ -1,8 +1,9 @@
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 
-const findPaginatedCertificationCenterSessionSummaries = async function ({
+const findPaginatedFilteredCertificationCenterSessionSummaries = async function ({
   userId,
   certificationCenterId,
+  filters,
   page,
   sessionSummaryRepository,
   userRepository,
@@ -12,7 +13,11 @@ const findPaginatedCertificationCenterSessionSummaries = async function ({
     throw new ForbiddenAccess(`User ${userId} is not a member of certification center ${certificationCenterId}`);
   }
 
-  return sessionSummaryRepository.findPaginatedByCertificationCenterId({ certificationCenterId, page });
+  return sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+    certificationCenterId,
+    filters,
+    page,
+  });
 };
 
-export { findPaginatedCertificationCenterSessionSummaries };
+export { findPaginatedFilteredCertificationCenterSessionSummaries };

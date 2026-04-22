@@ -2,14 +2,15 @@ import sinon from 'sinon';
 
 import { certificationCenterController } from '../../../../../src/certification/session-management/application/certification-centers-session-summaries-controller.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
+import { SESSION_STATUSES } from '../../../../../src/certification/shared/domain/constants.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Controller | certifications-center-controller', function () {
-  describe('#findPaginatedSessionSummaries', function () {
+  describe('#findPaginatedFilteredSessionSummaries', function () {
     beforeEach(function () {
-      sinon.stub(usecases, 'findPaginatedCertificationCenterSessionSummaries');
+      sinon.stub(usecases, 'findPaginatedFilteredCertificationCenterSessionSummaries');
     });
 
     it('should return a list of JSON API session summaries with pagination information', async function () {
@@ -18,6 +19,10 @@ describe('Unit | Controller | certifications-center-controller', function () {
         params: { id: 456 },
         auth: { credentials: { userId: 123 } },
         query: {
+          filter: {
+            sessionId: 1,
+            status: SESSION_STATUSES.PROCESSED,
+          },
           page: {
             number: 1,
             size: 10,
@@ -34,10 +39,11 @@ describe('Unit | Controller | certifications-center-controller', function () {
         enrolledCandidatesCount: 5,
         effectiveCandidatesCount: 4,
       });
-      usecases.findPaginatedCertificationCenterSessionSummaries
+      usecases.findPaginatedFilteredCertificationCenterSessionSummaries
         .withArgs({
           userId: 123,
           certificationCenterId: 456,
+          filters: { sessionId: 1, status: SESSION_STATUSES.PROCESSED },
           page: { number: 1, size: 10 },
         })
         .resolves({
@@ -46,7 +52,7 @@ describe('Unit | Controller | certifications-center-controller', function () {
         });
 
       // when
-      const serializedSessionSummaries = await certificationCenterController.findPaginatedSessionSummaries(
+      const serializedSessionSummaries = await certificationCenterController.findPaginatedFilteredSessionSummaries(
         request,
         hFake,
       );
