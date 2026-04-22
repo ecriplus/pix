@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.392.0](https://github.com/1024pix/pix/compare/v5.391.0...v5.392.0) (2026-04-22)
+
+### :rocket: Amélioration
+
+- [#15953](https://github.com/1024pix/pix/pull/15953) Autoriser le rôle métier à accéder à l'onglet Réseau d'une organisation (PIX-22118) 
+- [#15978](https://github.com/1024pix/pix/pull/15978) datacenter-modif-QCU 
+- [#15967](https://github.com/1024pix/pix/pull/15967) Empêcher la création de session en doublon (PIX-12384). 
+- [#15977](https://github.com/1024pix/pix/pull/15977) improve Dutch translations 
+- [#15971](https://github.com/1024pix/pix/pull/15971) Modifier les URLs des fichiers de rapport de fraude (PIX-22291). 
+- [#15972](https://github.com/1024pix/pix/pull/15972) modifs relecture marine + alt text repondremail_nov 
+- [#15970](https://github.com/1024pix/pix/pull/15970) modifs relectures finales Module Antivirus 
+
+### :bug: Correction
+
+- [#15962](https://github.com/1024pix/pix/pull/15962) Préserver le sélecteur de pays de naissance lors de l'édition d'un candidat de certif (PIX-22469). 
+- [#15979](https://github.com/1024pix/pix/pull/15979) S'assurer de terminer le stream LLM une seule fois 
+
+### :building_construction: Tech
+
+- [#15936](https://github.com/1024pix/pix/pull/15936) :recycle: Réduit l'utilisation de `lodash` dans le contexte de la certification 
+- [#15965](https://github.com/1024pix/pix/pull/15965) Ne plus importer certains utilitaires depuis test-helper.js (part 5) 
+- [#15973](https://github.com/1024pix/pix/pull/15973) Ne plus importer certains utilitaires depuis test-helper.js (part 6) 
+
+### :arrow_up: Montée de version
+
+- [#15976](https://github.com/1024pix/pix/pull/15976) Update nginx Docker tag to v1.30.0 
+- [#15975](https://github.com/1024pix/pix/pull/15975) Update Node.js to v24.15.0
+
 # [5.391.0](https://github.com/1024pix/pix/compare/v5.390.1...v5.391.0) (2026-04-21)
 
 ### :rocket: Amélioration
