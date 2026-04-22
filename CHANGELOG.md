@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.392.1](https://github.com/1024pix/pix/compare/v5.392.0...v5.392.1) (2026-04-22)
+
+### :building_construction: Tech
+
+- [#15900](https://github.com/1024pix/pix/pull/15900) Mettre en place une redirection pour des campagnes France Travail (PIX-22413)
+
 # [5.392.0](https://github.com/1024pix/pix/compare/v5.391.0...v5.392.0) (2026-04-22)
 
 ### :rocket: Amélioration
